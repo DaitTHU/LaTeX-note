@@ -1,0 +1,197 @@
+% 手动排版，尽量杜绝使用
+
+\newcommand{\bs}[1]{\hspace{-#1 pt}}		% 手动减间距	backspace
+\newcommand{\bv}[1]{\vspace{-#1 pt}}		% 手动缩行距	backvspace
+\def\directlisteqn{\vspace{-1ex}}
+\iffalse									% 尽量避免孤行
+	\widowpenalty=4000
+	\clubpenalty=4000
+\fi
+
+% 杂项符号
+\def\avg{\overline}
+\newcommand*{\rqed}{\tag*{$\square$}}								% 靠右 QED
+\newcommand*{\halfqed}{\tag*{$\boxdot$}}
+\newcommand*{\thus}{\quad\Rightarrow\quad}							% =>
+\newcommand*{\ifnf}{\quad\Leftrightarrow\quad}						% <=>	if and only if
+\newcommand*{\turnto}{\quad\to\quad}
+\newcommand*{\normalize}{\quad\overset{\mathrm{normalize}}{-\!\!\!-\!\!\!-\!-\!\!\!\longrightarrow}\quad}
+\newcommand*{\vthus}{\\$\Downarrow$\\}
+\newcommand*{\viff}{\\$\Updownarrow$\\}
+\newcommand*{\vs}{~\text{-}~}
+\newcommand{\eg}[1][]{\subparagraph*{例#1：}}
+\newcommand*{\prf}{\noindent\textbf{证明：}\quad}
+\newcommand{\dpfr}[2]{\displaystyle\frac{#1}{#2}}					% 大分数
+\newcommand{\frdp}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\spark}[1]{\;\textcolor{red}{#1}}
+
+% 简化更常用的希腊字母
+\newcommand*{\vf}{\varphi}
+\newcommand*{\vF}{\varPhi}
+\newcommand*{\vp}{\varPsi}
+\newcommand*{\ve}{\varepsilon}
+\newcommand*{\vC}{\varTheta}
+\newcommand*{\ct}{\theta}			% 还是建议用 @ + Tab 快捷键
+
+% 正体符号
+\newcommand*{\cns}{\mathrm{const}}
+\newcommand*{\plusc}{{\color{lightgray}\,+\,\cns}}
+\newcommand*{\e}{\mathop{}\!\mathrm{e}^}	% e
+\let\accenti\i
+\renewcommand*{\i}{\mathrm{i}}
+\newcommand*{\D}{\Delta}
+\newcommand*{\p}{\partial}
+
+\usepackage{bm}											% 粗体 \bm
+\newcommand{\hbm}[1][r]{\hat{\bm #1}}	% 应该不会有两个字母的
+\newcommand{\ibm}[1]{\,\bm #1}
+
+% Using EnglischeSchT script font style
+\newfontfamily{\calti}{EnglischeSchT}
+\newcommand{\mathcalti}[1]{\mbox{\calti{#1}}}
+\newcommand{\mathcaltibf}[1]{\mbox{\bf\calti{#1}}}
+
+\usepackage{mathrsfs}									% 花体 \mathscr
+% \usepackage{boondox-cal}								% 小写花体 \mathcal
+\newcommand*{\RR}{\mathbb R}
+\newcommand*{\CC}{\mathbb C}
+\newcommand*{\ZZ}{\mathbb Z}
+\newcommand*{\sC}{\mathscr C}			% n 阶连续可导函数
+\newcommand*{\sR}{\mathscr R}			% 黎曼可积
+% 算符用 \mathcal
+\newcommand*{\cL}{\mathcal L}			% 表示一般算子
+\newcommand{\cl}[1]{\mathcal L\fkh{#1}}
+\newcommand{\cli}[1]{\mathcal L^{-1}\!\fkh{#1}}
+\newcommand{\cf}[2][\!\,]{\mathcal F_\mathrm{#1}\fkh{#2}}
+\newcommand{\cfi}[2][\!\,]{\mathcal F_\mathrm{#1}^{-1}\!\fkh{#2}}
+% \newcommand{\cl}[2][0]{\mathcal L\ikh[#1]{#2}}
+% \newcommand{\cli}[2][0]{\mathcal L^{-1}\ikh[#1]{#2}}
+% \newcommand{\cf}[2][0]{\mathcal F\ikh[#1]{#2}}
+% \newcommand{\cfi}[2][0]{\mathcal F^{-1}\ikh[#1]{#2}}
+
+\usepackage{cancel}										% 删除线
+
+\usepackage{xfrac}
+
+% \usepackage{emoji}	需要 LuaTeX
+
+% 导数等
+\let\divides\div
+\renewcommand*{\div}{\nabla\cdot}
+\newcommand*{\curl}{\nabla\times}
+\newcommand*{\lap}{\Delta}
+\let\accentd\d
+\renewcommand*{\d}{\mathop{}\!\mathrm{d}}
+\newcommand*{\nd}{\mathrm{d}}
+\newcommand*{\vd}{\mathop{}\!\delta}											% δ
+\newcommand{\dd}[2][\;\!\!]{\frac{\nd^{#1}}{\nd #2^{#1}}}						% d/dx			我知道 \,\! 很愚蠢，但是 {} 无法在 Math Preview 上预览
+\newcommand{\dn}[2]{\frac{\nd^{#1}}{\nd #2^{#1}}}								% d^n/dx^n		\dn2x≡\dd[2]x
+\newcommand{\dv}[3][\;\!\!]{\frac{\nd^{#1}#2}{\nd #3^{#1}}}						% df/dx
+\newcommand{\du}[3]{\frac{\nd^{#1}#2}{\nd #3^{#1}}}								% d^nf/dx^n		\du2fx≡\dv[2]fx
+\newcommand{\pp}[2][\;\!\!]{\frac{\p^{#1}}{\p #2^{#1}}}							% ∂/∂x
+\newcommand{\pn}[2]{\frac{\p^{#1}}{\p #2^{#1}}}									% ∂^n/∂x^n		\pn2x≡\pp[2]x
+\newcommand{\pv}[3][\;\!\!]{\frac{\p^{#1}#2}{\p #3^{#1}}}						% ∂f/∂x
+\newcommand{\pu}[3]{\frac{\p^{#1}#2}{\p #3^{#1}}}								% ∂^nf/∂x^n		\pu2x≡\pv[2]x
+\newcommand{\pw}[3]{\frac{\p^2 #1}{\p #2\p #3}}									% ∂^2f/∂x∂y
+\newcommand{\pvv}[6]{															% ∂^(m+n)f/∂x^m∂y^n
+	\ifnum#4=1
+		\ifnum#6=1
+			\frac{\p^{#1}#2}{\p #3\p #5}
+		\else
+			\frac{\p^{#1}#2}{\p #3\p #5^{#6}}
+		\fi
+	\else
+		\ifnum#6=1
+			\frac{\p^{#1}#2}{\p #3^{#4}\p #5}
+		\else
+			\frac{\p^{#1}#2}{\p #3^{#4}\p #5^{#6}}
+		\fi
+	\fi}
+\newcommand{\dvd}[2]{\left.#1\middle\slash #2\right.}							% 斜除
+
+% 积分
+\newcommand*{\intt}{\bs2\int\bs8\int}											% ∫∫
+\newcommand*{\inttt}{\int\bs8\int\bs8\int}										% ∫∫∫
+\newcommand*{\intdt}{\int\bs3\cdot\bs2\cdot\bs2\cdot\bs4\int}					% ∫...∫
+\newcommand*{\zti}{_0^{+\infty}}												% _0^+∞
+\newcommand*{\iti}{_{-\infty}^{+\infty}}										% _-∞^+∞
+\newcommand{\fmto}[3][\infty]{_{#2=#3}^{#1}}
+
+% 括号
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}									% |x| 绝对值
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}								% ||x|| 模
+\newcommand{\edg}[1]{\left.#1\right\rvert}										% f|  竖线
+\newcommand{\kh}[1]{\left(#1\right)}											% (x) 括号
+\newcommand{\fkh}[1]{\left[#1\right]}											% [x] 方括号
+\newcommand{\hkh}[1]{\left\{#1\right\}}											% {x} 花括号
+\newcommand{\zkh}[1]{\lfloor\bs{4.7}\lceil #1\rceil\bs{4.7}\rfloor}				% [x] 中括号
+\newcommand{\ikh}[2][0]{\ifnum#1=0 \zkh{#2}\else \fkh{#2}\fi}					% [x] 可调大小的中括号
+\newcommand{\set}[2]{\left\{#1\,\middle\vert\,#2\right\}}						% {x|x1,x2,...} 集合
+\newcommand{\ave}[1]{\left\langle #1\right\rangle}								% <x> 平均值
+\newcommand{\bra}[1]{\left\langle #1\right\vert}								% <ψ| 左矢
+\newcommand{\ket}[1]{\left\vert #1\right\rangle}								% |ψ> 右矢
+\newcommand{\brkt}[2]{\left\langle #1\middle\vert #2\right\rangle}				% <φ|ψ> 内积
+\newcommand{\ktbr}[2]{\left\vert#1\right\rangle \bs3\left\langle #2\right\vert}	% |ψ><φ|
+\newcommand{\inp}[2]{\left\langle #1,#2\right\rangle}							% <f,g> 内积
+
+% 数学运算符
+\let\Real\Re
+\let\Imagin\Im
+\let\Re\relax
+\let\Im\relax
+\DeclareMathOperator{\Re}{Re}					% 
+\DeclareMathOperator{\Im}{Im}					% 
+\DeclareMathOperator{\sech}{sech}				% 
+\DeclareMathOperator{\csch}{csch}				% 
+\DeclareMathOperator{\arcsec}{arcsec}			% 
+\DeclareMathOperator{\arccot}{arccot}			% 
+\DeclareMathOperator{\arccsc}{arccsc}			% 
+\DeclareMathOperator{\arsinh}{arsinh}			% 
+\DeclareMathOperator{\arcosh}{arcosh}			% 
+\DeclareMathOperator{\artanh}{artanh}			% 
+\DeclareMathOperator{\sgn}{sgn}					% 符号函数
+\DeclareMathOperator{\Li}{Li}					% 
+\DeclareMathOperator{\Si}{Si}
+\DeclareMathOperator{\Ci}{Ci}
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\Heaviside}{H}
+\DeclareMathOperator{\arr}{A}					% 排列数
+\DeclareMathOperator{\com}{C}					% 组合数
+\DeclareMathOperator{\Res}{Res}					% 留数
+\DeclareMathOperator{\supp}{supp}
+\newcommand*{\bigo}{\mathcal O}
+
+% 线性代数
+\newif\ifLinearAlgebra\LinearAlgebratrue
+\ifLinearAlgebra
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\id}{id}
+\newcommand*{\tp}{^{\mathrm T}}				% AT 转置
+\newcommand*{\cj}{^\ast}					% A* 共轭
+\newcommand*{\dg}{^\dagger}					% A† 共轭转置
+\newcommand*{\iv}{^{-1}}					% A-1
+\fi
+
+% 物理学家
+\newcommand*{\Schr}{Schrödinger}
+\newcommand*{\Legd}{Legendre}
+\newcommand*{\deB}{de Broglie}
+\newcommand*{\Rayl}{Rayleigh}
+\newcommand*{\Lande}{Landé}
+
+% 粒子
+\newcommand*{\elc}{\mathrm e}
+\newcommand*{\pton}{\mathrm p}
+\newcommand*{\mol}{\mathrm m}
+
+% 物理常数
+\newcommand*{\NA}{N_{\bs1\mathrm A}}						% Avogadro 常数
+\newcommand*{\kB}{k_{\mathrm B}}							% Boltzmann 常数
+\newcommand*{\muB}{\mu_\mathrm B}							% Bohr 磁矩
+
+% 
+\newcommand*{\Ek}{E_{\mathrm k}}							% 动能
+\newcommand*{\eff}{_\mathrm{eff}}							% 有效下标
+\newcommand*{\tot}{_\mathrm{tot}}
+\newcommand*{\lSI}{\tag{SI}}
+\newcommand*{\CGS}{\tag{CGS}}								% cm, g, s 制
