@@ -1,0 +1,598 @@
+\def\coursename{微积分}
+\def\coursefullname{多元微积分与级数}
+\def\courseEnglishname{Multivariate Calculus and Series}
+\def\beginday{2021/3/31}
+\def\Def{\paragraph*{定义}}
+\def\The{\paragraph*{定理}}
+
+\input{../hair.tex}
+\input{../head.tex}
+
+\begin{document}
+\firstandforemost
+
+\section{多元函数微分}
+\begin{definition}{向量和多元函数}{}
+	$x_1,x_2,\ldots,x_n\in\RR$向量
+	\[X:=\zkh{x_1,x_2,\ldots,x_n}\tp,\]
+	定义在$\Omega\subset\RR^n$上的$n$元函数$f:\Omega\to\RR.$
+\end{definition}
+$f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=\zkh{f_1,f_2,\ldots,f_m}\tp.$
+\subsection{偏导数}
+\begin{definition}{}{}
+	$\hat e_1,\hat e_2,\ldots,\hat e_n$ 是$\RR^n$的基底，则$f$在$X_0$点关于$x_i$的偏导数
+	\[\pv f{x_i}(X_0):=\lim_{t\to 0}\frac{f(X_0+t\hat e_i)-f(X_0)}t,\]
+	$f$的全微分
+	\begin{align}
+		\d f(X_0)=\sum_{i=1}^n\pv f{x_i}(X_0)\d x_i.
+	\end{align}
+\end{definition}
+有时用$\partial_if$比$\p f/\p x_i$更好.
+\begin{theorem}{可微性判定}{}
+	对二元函数$f(x,y)$
+	\begin{center}
+		$\pv fx$在$X_0$连续，$\pv fy(X_0)$存在
+		\vthus
+		$f$在$X_0$可微性
+		\viff
+		$f(X)-\fkh{f(X_0)+\pv fx(X_0)\Delta x+\pv fy(X_0)\Delta y}=o\kh{\norm{\Delta X}}$
+	\end{center}
+	其中$\D X\equiv\zkh{\D x,\D y}\tp.$
+\end{theorem}
+\subsection{方向导数和梯度}
+\begin{definition}{}{}
+	$f$可微，其沿单位向量$\hat \ell=\zkh{\cos\alpha_1,\cos\alpha_2,\ldots,\cos\alpha_n}$方向的方向导数 % \vec \ell=\zkh{x_1,x_2,\ldots,x_n}, \vec \ell/|\ell|=
+	\[\pv f{\vec \ell}(X_0):=\lim_{t\to 0}\frac{f(X_0+t\hat \ell)-f(X_0)}t;\]
+	梯度
+	\[\nabla f:=\left[\pv f{x_1},\pv f{x_2},\ldots,\pv f{x_n}\right]\tp.\]
+\end{definition}
+因此方向导数也可以看做
+\begin{align}
+	\pv f{\vec \ell}(X_0)=\sum_{i=1}^n\pv f{x_i}(X_0)\cos\alpha_i=\nabla f(X_0)\cdot\hat \ell.
+\end{align}
+\subsection{高阶偏导数}
+\begin{definition}{}{}
+	若$\dvd f{x_i}$对$x_j$的偏导存在，则记二阶偏导数
+	\[\pw f{x_j}{x_i}:=\pp{x_j}\pv f{x_j};\quad \pu2 f{x_i}\equiv\pw f{x_i}{x_i}\]
+	也可记作$\partial_{ji}f.$
+\end{definition}
+\begin{theorem}{二阶偏导的存在性判定}{}
+	\begin{center}
+		$\pw f{x_i}{x_j}$和$\pw f{x_j}{x_i}$中一个在$X_0$连续
+		\vthus
+		$\pw f{x_i}{x_j}=\pw f{x_j}{x_i}$
+	\end{center}
+\end{theorem}
+\subsection{向量值函数微分}
+\begin{definition}{Jacobi矩阵}{}
+	向量值函数$F:\RR^m\to\RR^n$%，于是$\vec f:\Omega\to\RR^m$
+	\begin{gather*}
+		\begin{bmatrix}
+			\text df_1 \\
+			\vdots     \\
+			\text df_m
+		\end{bmatrix}=
+		%\begin{bmatrix}
+		%    \frac{\p f_1}{\p x_1}\d x_1+\cdots+\frac{\p f_1}{\p x_n}\d x_n \\
+		%    \vdots                                                         \\
+		%    \frac{\p f_m}{\p x_1}\d x_1+\cdots+\frac{\p f_m}{\p x_n}\d x_n
+		%\end{bmatrix}=
+		\begin{bmatrix}
+			\pv{f_1}{x_1} & \cdots & \pv{f_1}{x_n} \\
+			\vdots                & \ddots & \vdots                \\
+			\pv{f_m}{x_1} & \cdots & \pv{f_m}{x_n}
+		\end{bmatrix}
+		\begin{bmatrix}
+			\d x_1 \\
+			\vdots \\
+			\d x_n
+		\end{bmatrix};\\
+		\d F=J_F\d X.
+	\end{gather*}
+	式中的矩阵称为Jacobi矩阵
+	\[J_F\equiv\frac{\p(f_1,\ldots,f_m)}{\p(x_1,\ldots,x_n)}.\]
+	$m=n$时，对应有Jacobi行列式
+	\[\frac{D(f_1,\ldots,f_n)}{D(x_1,\ldots,x_n)}:=\det J_F\]
+\end{definition}
+\subsection{复合函数微分}
+\begin{theorem}{}{}
+	$G:\RR^n\to \RR^m,F:\RR^m\to \RR^k$, $Y_0=G(X_0)$，则下面三个结论是等价的
+	\begin{compactenum}[(1)]
+		\item $\d(F\circ G)(X_0)=\d F(Y_0)\d G(X_0);$
+		\item $J_{F\circ G}(X_0)=J_F(Y_0)J_G(X_0);$
+		\item $\frac{\p(f_1,\ldots,f_k)}{\p(x_1,\ldots,x_n)}(X_0)=\frac{\p(f_1,\ldots,f_k)}{\p(y_1,\ldots,y_m)}(Y_0)\frac{\p(g_1,\ldots,g_m)}{\p(x_1,\ldots,x_n)}(X_0).$
+	\end{compactenum}
+\end{theorem}
+特别的，当$k=1$即$F=f$为单值函数时
+\begin{align}
+	\pv{f\circ G}{x_i}(X_0)=\sum_{j=1}^m\pv f{y_j}(Y_0)\pv{g_j}{x_i}(X_0).
+\end{align}
+$\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
+\subsection{隐函数}
+\begin{theorem}{二元隐函数}{}
+	给定$f(x,y)\in\sC(\RR^2)$\footnote{表示$f$在$\RR^2$上连续．}与点$P(x_0,y_0)$,
+	\begin{center}
+		$f(P)=0$且$\pv fy(P)\neq 0$
+		\vthus\bv6
+		$y=y(x)$存在，且$\dv yx=-\frdp{\pv fx(x,y)}{\pv fy(x,y)}.$
+	\end{center}
+\end{theorem}
+证明：$\d f=\pv fx\d x+\pv fy\d y=0.$
+\begin{theorem}{多元隐函数}{}
+	给定$f(X,y)\in\sC(\RR^{n+1})$与点$P(X_0,y_0)$,
+	\begin{center}
+		$f(P)=0$且$\pv fy(P)\neq 0$
+		\vthus\bv6
+		$y=y(X)$存在，且$\dv y{x_i}=-\frdp{\pv f{x_i}(X,y)}{\pv fy(X,y)}.$
+	\end{center}
+\end{theorem}
+\begin{theorem}{向量值隐函数}{}
+	给定$f_i(X,Y)\in\sC(\RR^{n+m}),(i=1,2,\ldots,m)$与点$P(X_0,Y_0)$,
+	\begin{center}
+		$F(P)=\vec 0$且$\frac{D(f_1,\ldots,f_m)}{D(y_1,\ldots,y_m)}(P)\neq 0$
+		\vthus
+		$Y=Y(X)$存在，且$\frac{\p(y_1,\ldots,y_m)}{\p(x_1,\ldots,x_n)}=-\left(\frac{\p(f_1,\ldots,f_m)}{\p(y_1,\ldots,y_m)}\right)^{-1}\frac{\p(f_1,\ldots,f_m)}{\p(x_1,\ldots,x_n)}.$
+	\end{center}
+\end{theorem}
+\begin{theorem}{反函数}{}
+	给定$Y=F(X)$，则反函数$X=F^{-1}(Y)$满足
+	\[J_{F^{-1}}(X)=\left(J_F(X)\right)^{-1}.\]
+\end{theorem}
+\begin{example}{二阶偏导数举例}{}
+	给定$f(x,y,z)=0$,求$\pw zyx．$
+	\begin{align*}
+		\pw zyx & =-\pp y\kh{\dvd{\pv fx}{\pv fz}}                                  \\
+				 & =-\dvd{\kh{\pp y\pv fx\cdot\pv fy-\pv fx\cdot\pp y\pv fz}}{\kh{\pv fz}^2}
+	\end{align*}
+	其中
+	\begin{align*}
+		\pv{}y\pv fx & =\pw fyx+\pw fzx\pv zy,\quad \pv zy=-\dvd{\pv fy}{\pv fz}; \\
+		\pv{}y\pv fz & =\pw fyz+\pu2 fz\pv zy.
+	\end{align*}
+	故
+	{\scriptsize\begin{align*}
+		\pw zyx=-\dvd{\left[\kh{\pv fz}^2\pw fyx-\pv fy\pv fz\pw fzx-\pv fx\pv fz\pw fyz+\pv fx\pv fy\pu2 fz\right]}{\kh{\pv fz}^3}.
+	\end{align*}}
+\end{example}
+\subsection{法与切}
+给定向量$\vec v=\zkh{a,b,c}\tp$与点$P_0(x_0,y_0,z_0)$，可以确定
+\begin{align*}
+	\text{线}:   & \qquad \frac{x-x_0}a=\frac{y-y_0}b=\frac{z-z_0}c \\
+	\text{平面}: & \qquad a(x-x_0)+b(y-y_0)+c(z-z_0)=0
+\end{align*}
+参数方程可以得到显函数表达式
+\begin{gather*}
+	\text{线}:~
+	\begin{cases}
+		x=x_0+at \\[-1ex]
+		y=y_0+bt \\[-1ex]
+		z=z_0+ct
+	\end{cases}
+	\quad
+	\text{平面}:~
+	\begin{cases}
+		x=x_0+a_1u+b_1v \\[-1ex]
+		y=y_0+a_2u+b_2v \\[-1ex]
+		z=z_0+a_3u+b_3v
+	\end{cases}
+	\\
+	a=
+	\begin{vmatrix}
+		a_2 & b_2 \\
+		a_3 & b_3
+	\end{vmatrix}\quad b=
+	\begin{vmatrix}
+		a_3 & b_3 \\
+		a_1 & b_1
+	\end{vmatrix}\quad c=
+	\begin{vmatrix}
+		a_1 & b_1 \\
+		a_2 & b_2
+	\end{vmatrix}.
+\end{gather*}
+\paragraph{曲面的法线和切平面}
+\subparagraph{显函数}
+\[z=f(x,y)\thus\vec v=\left[\pv fx,\pv fy,-1\right]_{(x_0,y_0)}.\]
+\subparagraph{参数方程}
+\begin{align*}
+	\begin{cases}
+		x=f_1(u,v) \\
+		y=f_2(u,v) \\
+		z=f_3(u,v)
+	\end{cases}
+	\thus\vec v=\left[\frac{D(f_2,f_3)}{D(u,v)},\frac{D(f_3,f_1)}{D(u,v)},\frac{D(f_1,f_2)}{D(u,v)}\right]_{(u_0,v_0)}.
+\end{align*}
+\subparagraph{隐函数}
+\[f(x,y,z)=0\thus\vec v=\fkh{\pv fx,\pv fy,\pv fz}_{P_0}=\nabla f(P_0).\]
+\paragraph{曲线的法平面和切线}
+\subparagraph{参数}
+\begin{align*}
+	\begin{cases}
+		x=x(t) \\[-1ex]
+		y=y(t) \\[-1ex]
+		z=z(t)
+	\end{cases}
+	\thus\vec v=\fkh{x'(t),y'(t),z'(t)}.
+\end{align*}
+\subparagraph{隐函数}
+\begin{align*}
+	\begin{cases}
+		F_1(x,y,z)=0 \\
+		F_2(x,y,z)=0
+	\end{cases}
+	\thus\vec v=\left[\frac{D(F_1,F_2)}{D(y,z)},\frac{D(F_1,F_2)}{D(z,x)},\frac{D(F_1,F_2)}{D(x,y)}
+		\right]_{P_0}
+\end{align*}
+\newpage
+\subsection{Talyor公式}
+\begin{definition}{Hesse矩阵}{}
+	$f:\Omega\to\RR$的Jacobi矩阵(行向量)为
+	\begin{align*}
+		J_f=
+		\begin{bmatrix}
+			\pv f{x_1} & \pv f{x_2} & \cdots & \pv f{x_n}
+		\end{bmatrix}.
+	\end{align*}
+	定义Hesse矩阵
+	\begin{align*}
+		H_f:=
+		\begin{bmatrix}
+			\frac{\p^2f}{\p x_1^2}     & \cdots & \frac{\p^2f}{\p x_1\p x_n} \\
+			\vdots                     & \ddots & \vdots                     \\
+			\frac{\p^2f}{\p x_n\p x_1} & \cdots & \frac{\p^2f}{\p x_n^2}
+		\end{bmatrix}.
+	\end{align*}
+\end{definition}
+\paragraph{带Lagrange余项的1阶Talyor公式}
+$\exists\theta\in(0,1),X_\theta:=X_0+\theta\Delta X$
+\begin{align}
+	f(X)=f(X_0)+J_f(X_0)\Delta X+\frac12\Delta X\tp H_f(X_\theta)\Delta X.
+\end{align}
+\paragraph{带Peano余项的2阶Talyor公式}
+\begin{align}
+	f(X)=f(X_0)+J_f(X_0)\Delta X+\frac12\Delta X\tp H_f(X_0)\Delta X+\alpha(\Delta X).
+\end{align}
+此处$\alpha(\Delta X)=\frac12\Delta X\tp\tilde{H_f}(X_0+\theta\Delta X)\Delta X=o(\norm{\Delta X}^2),\quad\Delta X\to0$
+\paragraph{$m$阶Talyor公式} % $\Delta X=[\Delta x_1,\Delta x_2,\ldots,\Delta x_n]\tp,$
+\begin{align*}
+	f(X) & =\sum_{k=0}^{m}\frac1{k!}\left(\sum_{i=1}^{n}\Delta x_i\pp{x_i}\right)^kf(X_0)+\frac1{(m+1)!}\left(\sum_{i=1}^{n}\Delta x_i\pp{x_i}\right)^{m+1}f(X_\theta) \\
+		 & =\sum_{k=0}^{m}\frac1{k!}\left(\sum_{i=1}^{n}\Delta x_i\pp{x_i}\right)^kf(X_0)+o(\norm{\Delta X}^m)
+\end{align*}
+$\color{gray}\text{例：}f(x,y)=$
+\begin{align*}
+	\color{gray}f(x_0,y_0)+\pv fx\Delta x+\pv fy\Delta y+\frac12\left(\frac{\p^2f}{\p x^2}\Delta x^2+2\pw fxy\Delta x\Delta y+\pv[2]fy\Delta y^2\right) \\
+	\color{gray}+\frac16\left(\pv[3]fx\Delta x^3+3\frac{\p^3f}{\p x^2\p y}\Delta x^2\Delta y+3\frac{\p^3f}{\p x\p y^2}\Delta x\Delta y^2+\pv[3]fy\Delta y^3\right)+\cdots.
+\end{align*}
+$\color{gray}\text{最后换回来：}\Delta x=x-x_0,\Delta y=y-y_0$
+\subsection{极值与条件极值}
+\begin{theorem}{Fermat定理}{}
+	\begin{center}
+		$f$在$X_0$可微，且$X_0$是$f$极值点
+		\vthus
+		$X_0$是$f$驻点，即$\pv f{x_i}(X_0)=0,\quad i=1,2,\ldots,n.$
+	\end{center}
+\end{theorem}
+\begin{theorem}{极值点的充分条件}{}
+	$f$在$X_0$二阶连续可微，且$X_0$是$f$驻点
+	\begin{compactenum}[(1)]
+		\item $H_f(X_0)$正定$\thus$极小;
+		\item $H_f(X_0)$负定$\thus$极大;
+		\item $H_f(X_0)$不定$\thus$不是极值点.
+	\end{compactenum}
+	判断正负定方法：(1)左上行列式; (2)特征值．
+\end{theorem}
+\begin{theorem}{Lagrange乘数法}{}
+	给定$k$维曲面
+	\[S=\set X{\varphi_i(X)=0,i=1,2,\ldots,n-k}.\]
+	定义Lagrange函数
+	\begin{align}
+		L(X,\varLambda):=f(X)+\sum_{i=1}^{n-k}\lambda_i\varphi_i(X).
+	\end{align}
+	若$X_0\in S$为$f$在$S$上的条件极值点，则存在$\varLambda$使得$(X_0,\Lambda)$为$L$的驻点．
+\end{theorem}
+\paragraph{计算有界闭曲面上的最值}
+\begin{compactenum}[(1)]
+	\item 算出$f$在$\RR^2$上的驻点（求Hesse矩阵判定正负定得出是否为极值点）
+	\item 选取在曲面内的驻点并求值
+	\item 固定曲面边界
+\end{compactenum}
+\newpage
+\section{含参积分及广义含参积分}
+\begin{definition}{含参积分}{}
+	含参积分
+	\[I(y)=\int_a^b\bs3f(x,y)\d x,\quad y\in\zkh{c,d}.\]
+	广义含参积分包括无穷积分和瑕积分，有统一形式
+	\[I(y)=\int_a^\omega\bs3f(x,y)\d x\equiv\lim_{A\to\omega^-}\int_a^A\bs3f(x,y)\d x.\]
+	无穷积分$\omega=+\infty$；瑕积分$\omega\in\RR$但$f$在$\omega$邻域内无界(奇点)．
+\end{definition}
+\begin{definition}{一致连续}{}
+	$\forall\varepsilon>0,\exists\delta>0$ 使 $\forall X,Y$ 满足 $\vert X-Y\vert<\delta$，有 $|f(X)-f(Y)|<\varepsilon.$
+	\tcblower
+	\paragraph*{否定形式：}存在两点列$\{X_k\}\{Y_k\}$使得$\forall k\geqslant 1,|f(X_k)-f(Y_k)|\geqslant\varepsilon_0>0.$
+\end{definition}
+\begin{theorem}{一致连续的判定}{}
+	函数$f\in\sC(\Omega)$在有界闭集$\Omega$上连续$\thus$一致连续．
+\end{theorem}
+\begin{definition}{一致收敛}{}
+	$\forall\varepsilon>0,\exists N>a$ 使 $\forall A>N,\forall y\in[c,d]$，有 $\left|\int_a^A\bs3f(x,y)\d x-I(y)\right|<\varepsilon.$
+\end{definition}
+\begin{theorem}{一致收敛的Weierstrass判别法}{}
+	\begin{center}
+		$|f(x,y)|\leqslant F(x),\int_a^\omega\bs3F(x)\d x$收敛．
+		\vthus
+		$\int_a^\omega\bs3f(x,y)\d x$对$y$一致收敛．
+	\end{center}
+\end{theorem}
+\begin{theorem}{一致收敛的Dirichlet判别法}{}
+	\begin{center}
+		$\int_a^A\bs3f(x,y)\d x$有界；\\
+		$g(x,y)$关于$x$单调且$\lim_{x\to\omega^-}g(x,y)=0$
+		\vthus
+		$\int_a^\omega\bs3f(x,y)g(x,y)\d x$对$y$一致收敛．
+	\end{center}
+\end{theorem}
+\begin{theorem}{一致收敛的Abel判别法}{}
+	\begin{center}
+		$\int_a^\omega\bs3f(x,y)\d x$对$y$一致收敛；\\
+		$g(x,y)$关于$x$单调且有界
+		\vthus
+		$\int_a^\omega\bs3f(x,y)g(x,y)\d x$对$y$一致收敛．
+	\end{center}
+\end{theorem}
+\subsection{积分号的可交换性}
+\begin{theorem}{连续性}{}
+	$f(x,y)$连续$\thus I(y)$连续，即
+	\[\lim_{y\to y_0}\int_a^bf(x,y)\d x=\int_a^b\lim_{y\to y_0}f(x,y)\d x.\]
+	\tcblower
+	$f(x,y)$连续且$\int_a^\omega f(x,y)\d x$关于$y$一致收敛．$\thus I(y)$连续，即
+	\[\lim_{y\to y_0}\int_a^\omega f(x,y)\d x=\int_a^\omega\lim_{y\to y_0}f(x,y)\d x.\]
+\end{theorem}
+\begin{theorem}{可微性}{}
+	$f(x,y),\pv fy(x,y)$连续$\thus I(y)$可微，且
+				\[I'(y)=\frac{\d}{\d y}\int_a^b\bs3f(x,y)\d x=\int_a^b\bs3\pp yf(x,y)\d x.\]
+				\tcblower
+			$f(x,y),\pv{f}{y}(x,y)$连续且$\int_a^\omega\pv{f}{y}(x,y)\d x$关于$y$一致收敛$\thus I(y)$可微，且
+	\[I'(y)=\frac{\d}{\d y}\int_a^\omega\bs3f(x,y)\d x=\int_a^\omega\bs3\pp yf(x,y)\d x.\]
+\end{theorem}
+公式
+\[\dv{}y\int_{\alpha(y)}^{\beta(y)}\bs3f(x,y)\d x=\int_{\alpha(y)}^{\beta(y)}\pv fy(x,y)\d x+f(\beta(y),y)\beta'(y)-f(\alpha(y),y)\alpha'(y).\]
+\begin{theorem}{积分性}{}
+	$f(x,y)$连续$\thus I(y)$可积，且
+	\[\int_c^d\bs3I(y)\d y=\int_c^d\bs5\int_a^b f(x,y)\d x\d y=\int_a^b\bs5\int_c^d f(x,y)\d y\d x.\]
+	\tcblower
+	$f(x,y)$连续且$\int_a^\omega f(x,y)\d x$关于$y$一致收敛$\thus I(y)$可积，且
+	\[\int_c^d\bs3I(y)\d y=\int_c^d\bs5\int_a^\omega f(x,y)\d x\d y=\int_c^\omega\bs5\int_a^b f(x,y)\d x\d y\]
+\end{theorem}
+*对于含两个广义积分的交换条件更严格
+\begin{compactenum}
+	\item $f(x,y)$连续
+	\item $\int_a^{+\infty}\bs{10}f(x,y)\d x,\int_c^{+\infty}\bs{10}f(x,y)\d y$分别关于$y\in[c,C],x\in[a,A]$一致收敛
+	\item $\int_c^{+\infty}\bs7\int_a^{+\infty}\bs{10}|f(x,y)|\d x\d y,\int_a^{+\infty}\bs7\int_c^{+\infty}\bs{10}|f(x,y)|\d y\d x$至少一个存在
+\end{compactenum}
+则
+\[\int_c^{+\infty}\bs7\int_a^{+\infty}\bs{10}f(x,y)\d x\d y=\int_a^{+\infty}\bs7\int_c^{+\infty}\bs{10}f(x,y)\d y\d x\]
+\clearpage
+\begin{example}{Gamma函数}{}
+	\begin{center}
+		$\Gamma(x):=\int\zti\bs5t^{x-1}\e{-t}\d t.$
+	\end{center}
+	递推公式
+	\begin{align*}
+		\Gamma(1)   & =\int\zti\bs5\e{-t}\d t=1.                                              \\
+		\Gamma(x+1) & =\int\zti\bs5 t^x\cdot\e{-t}\d t                                        \\
+					& =\edg{-t^x\e{-t}}\zti+\int\zti\bs5\e{-t}\cdot xt^{x-1}\d t=x\Gamma(x).
+	\end{align*}
+	对于$n\in\mathbb N,\Gamma(n)=(n-1)!.$
+	% $\Gamma(x+1)=x\Gamma(x),\Gamma(1)=1$，对正整数$n$,
+	% \[\Gamma(n)=\int_0^{+\infty}\bs5t^{n-1}\e{-t}\d t=(n-1)!\]
+
+	\textbf{余元公式}
+	\[\Gamma(x)\Gamma(1-x)=\frac{\pi}{\sin\pi x},\quad x\in(0,1).\]
+	证明略，有$\Gamma(1/2)=\sqrt\pi$
+\end{example}
+\begin{example}{Beta函数}{}
+	\begin{center}
+		$\text B(p,q):=\int_0^1t^{p-1}(1-t)^{q-1}\d t.$ % =2\int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\d\theta.$
+	\end{center}
+	与Gamma函数的关系为$\text B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}.$
+\end{example}
+\begin{example}{Possion积分}{}
+	\begin{center}
+		$\int\zti\bs5\e{-t^2}\d t=\frac{\sqrt\pi}2.$
+	\end{center}
+	\textbf{证明：}考虑积分的平方
+	\begin{align*}
+		\int\zti\bs5\e{-x^2}\d x\int\zti\bs5\e{-y^2}\d y=\int\zti\bs7\int\zti\e{-x^2-y^2}\d x\nd y \\
+		=\int_0^{\pi/2}\bs5\int\zti\e{-r^2}\cdot r\d r\nd\theta=\frac\pi{2}\cdot\frac12\int\zti\e{-s}\d s=\frac\pi{4}.
+	\end{align*}
+	\iffalse
+		由$\ex>0,\forall x\in\RR$
+		\[\intt_A\e{-x^2-y^2}\d x\nd y\leqslant\intt_B\e{-x^2-y^2}\d x\nd y\leqslant\intt_C\e{-x^2-y^2}\d x\nd y\]
+		其中
+		\begin{align*}
+			B & =\{(x,y)~|~0\leqslant x\leqslant R,0\leqslant y\leqslant R\}, \\
+			A & =\{(x,y)~|~x^2+y^2\leqslant R^2,x\geqslant 0,y\geqslant 0\},  \\
+			C & =\{(x,y)~|~x^2+y^2\leqslant 2R^2,x\geqslant 0,y\geqslant 0\}.
+		\end{align*}
+		又
+		\begin{align*}
+			\intt_A\e{-x^2-y^2}\d x\nd y & =\int_0^{\pi/2}\bs7\int_0^R\e{-\rho^2}\rho\d\rho\d\varphi=\frac{\pi}4\left(1-\e{-R^2}\right), \\
+			\intt_B\e{-x^2-y^2}\d x\nd y & =\int_0^R\bs7\int_0^R\e{-x^2}\e{-y^2}\d x\nd y=\left(\int_0^R\e{-t^2}\d t\right)^2,          \\
+			\intt_C\e{-x^2-y^2}\d x\nd y & =\frac{\pi}4\left(1-\e{-2R^2}\right).
+		\end{align*}
+		当$R\to+\infty$，即得$\int\zti\bs5\e{-t^2}\d t=\frac{\sqrt\pi}2$.
+	\fi
+\end{example}
+\begin{example}{Dirichlet积分}{}
+	\begin{center}
+		$\int\zti\bs3\frac{\sin x}x\d x=\frac{\pi}2.$
+	\end{center}
+	\textbf{证明：}令
+	\[F(y)=\int\zti\bs3\frac{\sin x}x\e{-xy}\d x,\quad y\geqslant 0.\]
+	由$\frac{\sin x}x\e{-xy}$可被延拓为$\RR_{\geqslant 0}^2$上的连续函数，故$F(y)$在$\RR_{\geqslant 0}$上连续．
+
+	注意到，积分
+	\[\int\zti\bs3\frac{\sin x}x\d x\]
+	收敛；$\forall x,y\geqslant 0,|\e{-xy}|\leqslant 1$且$\e{-xy}$关于$x$递减，由Abel判别准则可知$F(y)$关于$y\in[0,+\infty)$一致收敛．
+
+	任取$a>0,\forall x\geqslant 0,y\geqslant a,$可知$\left|-\sin x\e{-xy}\right|\leqslant \e{-xy}\leqslant \e{-ax}$有界，由Weierstrass判别准则知，积分
+	\[\int\zti\bs5\pv {}y\frac{\sin x}x\e{-xy}\d x=-\int\zti\bs7\sin x\e{-xy}\d x\]
+	一致收敛，因此$F(y)$在$[a,+\infty)$上可导
+	\begin{align*}
+		F'(y) & =-\int\zti\bs7\sin x\e{-xy}\d x=\int\zti\bs7\Im\e{-xy-\i x}\d x                                                \\
+			  & =-\Im\left.\frac{\e{-(y+\i)x}}{y+\i}\right|\zti\bs7=-\left.\frac{\e{-yx}}{y^2+1}\Im(y-\i)\e{-\i x}\right|\zti \\
+			  & =\left.\frac{\e{-yx}}{y^2+1}\left(y\sin x+\cos x\right)\right|\zti=-\frac1{1+y^2}.
+	\end{align*}
+	因为$a>0$任意，故$\forall y>0,$
+	\[F'(y)=-\frac1{1+y^2},\quad F(y)=-\arctan y+C.\]
+	又$y\to+\infty,$
+	\[|F(y)|\leqslant\int\zti\bs3\frac{|\sin x|}x\e{-xy}\d x\leqslant\int\zti\bs8\e{-xy}\d x=\frac1y\to0.\]
+	故$\lim_{y\to+\infty}\bs3F(y)=C-\frac{\pi}2=0$，即$C=\frac{\pi}2.$
+
+	又$F(y)$在$[0,+\infty)$上连续，故$\forall y\geqslant 0,F(y)=\frac{\pi}2-\arctan y.$特别的
+	\[F(0)=\int\zti\bs3\frac{\sin x}x\d x=\frac{\pi}2.\]
+\end{example}
+\newpage
+\section{重积分}
+\subsection{二重积分}
+\begin{theorem}{累次积分法}{}
+	$D=\{(x,y)~|~\alpha(x)\leqslant y\leqslant\beta(x),a\leqslant x\leqslant b\}$，$\alpha(x),\beta(x)$在$[a,b]$上连续，则$f\in\mathscr R(D)$，且
+	\[\intt_Df(x,y)\d x\nd y=\int_a^b\bs5\int_{\alpha(x)}^{\beta(x)}\bs5f(x,y)\d y\d x.\]
+\end{theorem}
+\begin{theorem}{变量代换法}{}
+	以$x,y$为变量的区域$D$经过变量代换及其逆变换
+	\begin{align*}
+		\begin{cases}
+			u=u(x,y), \\
+			v=v(x,y).
+		\end{cases}
+		\quad\left(\frac{D(x,y)}{D(u,v)}\neq 0\right).
+	\end{align*}
+	就会变为以$u,v$为变量的区域$D'$，积分也会变换为
+	\[\intt_Df(x,y)\d x\nd y=\intt_{D'}\bs2f(x(u,v),y(u,v))\left|\frac{D(x,y)}{D(u,v)}\right|\d u\nd v.\]
+\end{theorem}
+\paragraph{例：极坐标}$x=\rho\cos\theta,y=\rho\sin\theta.$
+\[\intt_Df(x,y)\d x\nd y=\intt_{D'}\bs2f(\rho\cos\theta,\rho\sin\theta)\rho\d\rho\nd\theta.\]
+\paragraph{例：旋转}$x=u\cos\theta-v\sin\theta,y=u\sin\theta+v\cos\theta.$
+\[\intt_Df(x,y)\d x\nd y=\intt_{D'}\bs2f(u\cos\theta-v\sin\theta,u\sin\theta+v\cos\theta)\d u\nd v.\]
+\subsubsection*{曲面面积问题}
+空间$O-xyz$中曲面的方程为
+\begin{align*}
+	\begin{cases}
+		x=x(u,v), \\
+		y=y(u,v), \\
+		z=z(u,v).
+	\end{cases}
+	\quad\left(\pv{(x,y,z)}{(u,v)}\text{列满秩}\right).
+\end{align*}
+转化为$O-uv$曲面中的二重积分问题，其中两条曲线切向量
+\[\vec u=\left[\pv xu,\pv yu,\pv zu\right]\tp,\qquad\vec v=\left[\pv xv,\pv yv,\pv zv\right]\tp\]
+则
+\[S=\intt_D\norm{\vec u\times\vec v}\d u\nd v\]
+若设
+\begin{align}
+	A=\frac{D(y,z)}{D(u,v)},\qquad B=\frac{D(z,x)}{D(u,v)},\qquad C=\frac{D(x,y)}{D(u,v)}.
+\end{align}
+则$\vec u\times\vec v=[A,B,C]\tp,$
+\begin{align}
+	S=\intt_D\sqrt{A^2+B^2+C^2}\d u\nd v
+\end{align}
+另一种方式是利用$(\vec u\times\vec v)^2=u^2v^2-(\vec u\cdot\vec v)^2,$
+\begin{align}
+	E & =\vec u\cdot\vec u=\left(\pv xu\right)^2+\left(\pv yu\right)^2+\left(\pv zu\right)^2, \\
+	G & =\vec v\cdot\vec v=\left(\pv xv\right)^2+\left(\pv yv\right)^2+\left(\pv zv\right)^2, \\
+	F & =\vec u\cdot\vec v=\pv xu\pv xv+\pv yu\pv yv+\pv zu\pv zv.
+\end{align}
+\[S=\intt_D\sqrt{EG-F^2}\d u\nd v\]
+特别的，当曲线是显式的，即$z=z(x,y)$
+\[S=\intt_D\sqrt{1+\left(\pv zx\right)^2+\left(\pv zy\right)^2}\d x\nd y.\]
+\subsection{三重积分}
+\begin{theorem}
+	{累次积分法}{}
+	$\Omega=\{(x,y,z)~|~\alpha(x,y)\leqslant z\leqslant\beta(x,y),(x,y)\in D\}$，则
+	\[\inttt_\Omega f(x,y,z)\d x\nd y\nd z=\intt_D\int_{\alpha(x,y)}^{\beta(x,y)}f(x,y,z)\d z\d x\nd y.\]
+\end{theorem}
+\begin{theorem}
+	{变量代换法}{}
+	同样的，对于变量替换
+	\begin{align*}
+		\begin{cases}
+			x=x(r,s,t), \\
+			y=y(r,s,t), \\
+			z=z(r,s,t).
+		\end{cases}
+		\quad\left(\frac{D(x,y,z)}{D(r,s,t)}\neq 0\right).
+	\end{align*}
+	有
+	\[\inttt_\Omega f(x,y,z)\d x\nd y\nd z=\inttt_{\Omega'}\tilde f(r,s,t)\abs{\frac{D(x,y,z)}{D(r,s,t)}}\d r\nd s\nd t.\]
+	其中$\tilde f(r,s,t)=f(x(r,s,t),y(r,s,t),z(r,s,t)).$
+\end{theorem}
+\paragraph{例：柱坐标}$x=\rho\cos\theta,y=\rho\sin\theta,z=z.$
+\[\inttt_\Omega f(x,y,z)\d x\nd y\nd z=\inttt_{\Omega'}f(\rho\cos\theta,\rho\sin\theta,z)\rho\d\rho\nd\theta\nd z.\]
+\paragraph{例：球坐标}$x=r\sin\theta\cos\phi,y=r\sin\theta\sin\phi,z=r\cos\theta.$
+\begin{align*}
+	\inttt_\Omega & f(x,y,z)\d x\nd y\nd z                                                                                   \\
+				  & =\inttt_{\Omega'}f(\sin\theta\cos\phi,r\sin\theta\sin\phi,r\cos\theta)r^2\sin\theta\d r\nd\theta\nd\phi.
+\end{align*}
+\begin{example}{$n$重积分}{}
+	定义$\RR^n$中单位球
+	\[\Omega_n=\set{(x_1,x_2,\ldots,x_n)}{\sum_{i=1}^nx_i^2\leqslant 1}\]
+	的体积
+	\[V_n=\int\bs3\cdot\bs2\cdot\bs2\cdot\bs4\int_{\Omega_n}\bs5\d x_1\bs3\cdot\bs2\cdot\bs2\cdot\bs1\d x_n=\int_{-1}^1\bs3\int\bs3\cdot\bs2\cdot\bs2\cdot\bs4\int_{D_{n-1}}\bs8\d x_1\bs3\cdot\bs2\cdot\bs2\cdot\bs1\d x_{n-1}\d x_n.\]
+	其中
+	\[D_{n-1}=\set{(x_1,\ldots,x_{n-1})}{\sum_{i=1}^{n-1}x_i^2\leqslant 1-x_n^2}.\]
+	作变换$x_i=\sqrt{1-x_n^2}\,u_i,(i=1,\ldots,n-1)$，则
+	\[\frac{D(x_1,\ldots,x_{n-1})}{D(u_1,\ldots,u_{n-1})}=\left(1-x_n^2\right)^{\kh{n-1}/2}.\]
+	可得
+	\begin{align*}
+		V_n & =\int_{-1}^1\bs3\int\bs3\cdot\bs2\cdot\bs2\cdot\bs4\int_{\Omega_{n-1}}\bs8\left(1-x_n^2\right)^{\kh{n-1}/2}\d u_1\bs3\cdot\bs2\cdot\bs2\cdot\bs1\d u_{n-1}\d x_n \\
+			& =\int_{-1}^1\left(1-x_n^2\right)^{\kh{n-1}/2}V_{n-1}\d x_n=2V_{n-1}\int_0^1\left(1-x^2\right)^{\kh{n-1}/2}\d x.
+	\end{align*}
+	令$x=\sqrt t$，则
+	\begin{align*}
+		V_n & =V_{n-1}\int_0^1(1-t)^{\kh{n-1}/2}t^{-1/2}\d t=V_{n-1}\text B\left(\frac12,\frac{n+1}2\right)                                                                  \\
+			& =V_{n-1}\cdot\frdp{\Gamma\kh{\frac12}\Gamma\kh{\frac{n+1}2}}{\Gamma\kh{\frac{n+2}2}}=V_{n-1}\cdot\frdp{\Gamma\kh{\frac{n+1}2}}{\Gamma\kh{\frac{n+2}2}}\sqrt\pi \\
+		%& =V_1\cdot\frdp{\Gamma\kh{\frac{n+1}2}}{\Gamma\kh{\frac{n+2}2}}\frdp{\Gamma\kh{\frac{n}2}}{\Gamma\kh{\frac{n+1}2}}\cdots\frdp{\Gamma\kh{\frac32}}{\Gamma\kh{\frac52}}\pi^{\kh{n-1}/2} \\
+			& =V_1\cdot\frdp{\Gamma\kh{\frac32}}{\Gamma\kh{\frac{n+2}2}}\pi^{\kh{n-1}/2}=\frdp{\pi^{n/2}}{\Gamma\kh{\frac n2+1}}.
+	\end{align*}
+	我们就得到了“体积”公式
+	\begin{align}
+		V_n=
+		\begin{cases}
+			\frac{\pi^k}{k!},        & n=2k,   \\[2ex]
+			\frac{2^k\pi^{k-1}}{n!}, & n=2k-1.
+		\end{cases}
+	\end{align}
+	例如$V_1=2,\quad V_2=\pi,\quad V_3=\frac 43\pi,\quad V_4=\frac 12\pi^2,\quad V_5=\frac 8{15}\pi^2,\ldots.$
+\end{example}
+\clearpage
+\section{曲线积分和曲面积分}
+\begin{definition}{第一类、第二类曲线积分和曲面积分}{}
+	第一类曲线积分
+	\[\int_Lf(X)\d\ell=\int_\alpha^\beta f(x(t),y(t))\sqrt{x'(t)^2+y'(t)^2}\d t.\]
+	第一类曲面积分
+	\[\int_Sf(X)\d\sigma=\int_Df(x(u,v),y(u,v),z(u,v))\norm{\vec u\times\vec v}\d u\nd v.\]
+	第二类曲线积分
+	\[\int_A^B\vec F\cdot\d\vec\ell=\int_A^B X(x,y)\d x+Y(x,y)\d y.\]
+	第二类曲面积分
+	\[\int_{S^+}\vec V\cdot\d\vec S=\int_{S^+}X\d y\wedge\d z+Y\d z\wedge\d x+Z\d x\wedge\d y.\]
+\end{definition}
+第二类曲面积分可以化为第一类曲面积分
+\[\int_{S^+}\vec V\cdot\d\vec S=\int_S\vec V\cdot\hat n\d\sigma.\]
+从计算方面来说
+\[\int_{S^+}X\d y\wedge\d z+Y\d z\wedge\d x+Z\d x\wedge\d y=\pm\intt_DXA+YB+ZC\d u\nd v.\]
+\subsection{Green, Gauss, Stokes公式}
+\begin{theorem}{Green公式}{}
+	$X(x,y),Y(x,y)$在有界单连通闭区域$D$上连续可微
+	\begin{align*}
+		\color{Green}\intt_D\pv Xx+\pv Yy\d x\nd y=\oint_{\p D}X\d y-Y\d x, \\
+		\color{Green}\intt_D\pv Yx-\pv Xy\d x\nd y=\oint_{\p D}X\d x+Y\d y.
+	\end{align*}
+\end{theorem}
+\begin{theorem}{Gauss公式}{}
+	$X(x,y),Y(x,y)$在有界单连通闭区域$D$上连续可微
+	\begin{align*}
+		\inttt_\Omega\nabla\cdot\vec V\d x\nd y\nd z=\intt_{\p\Omega}\vec V\cdot\d\vec S.
+	\end{align*}
+\end{theorem}
+\end{document}

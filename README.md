@@ -1,8 +1,12 @@
 # LaTeX-note
 用 LaTeX 记录的数理课笔记。对于期末复习有所帮助。
 
+为方便阅读（母语 + 字母符号在汉字中更易区分），语言采用为中文。
+
+使用 `UTF-8` 编码。
+
 ## hair.tex
-`hair.tex` 预设定了笔记的格式，在 `\input{hair.tex}` 之前，你还需要定义一些笔记性质相关的变量。
+`hair.tex` 预设定了统一的笔记格式，在 `\input{hair.tex}` 之前，你还需要定义一些笔记性质相关的变量。
 
 example:
 ```LaTeX
@@ -29,8 +33,8 @@ example:
     % \date{\beginday~-~\endday}
     % if same as \beginday, \dait{\beginday} only
 
-\input{/LaTeX/hair.tex}
-\input{/LaTeX/head.tex}
+\input{../hair.tex}
+\input{../head.tex}
 
 % options
 \showemail

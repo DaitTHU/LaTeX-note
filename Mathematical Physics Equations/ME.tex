@@ -1,0 +1,1470 @@
+\def\coursename{数理方程}
+\def\coursefullname{数理方程与特殊函数}
+\def\courseEnglishname{Mathematical Equations and Special Functions}
+\def\teachername{姚国武}
+\def\beginday{2022/2/24}
+\def\endday{2022/6/16}
+
+\input{../hair.tex}
+\input{../head.tex}
+
+\newcommand*{\Ct}{\varTheta}
+\newcommand*{\Dif}{\mathcal D}
+\newcommand*{\Par}{\mathcal P}
+\newcommand*{\even}{\mathrm e}
+\newcommand*{\odd}{\mathrm o}
+\newcommand*{\sine}{\mathrm s}
+\newcommand*{\cosi}{\mathrm c}
+\newcommand*{\Cooo}{\mathscr D}
+\newcommand*{\Schwsp}{\mathscr S}
+\DeclareMathOperator{\FS}{FS}
+
+\begin{document}
+\firstandforemost
+
+\section{偏微分方程的定解问题}
+我们先从$\bcancel{\text{三}}$两个具体问题出发推导典型方程．
+\paragraph*{弦振动}
+弦在自身张力作用下平衡位置在$x$轴，横向位移$u=u(x,t)$，取$\zkh{x_1,x_2}$段进行受力分析
+\begin{align*}
+	x~\text{轴：}\quad & T_2\cos\theta_2-T_1\cos\theta_2=0,                   \\
+	y~\text{轴：}\quad & T_2\sin\theta_2-T_1\sin\theta_2=\rho\vd x\pu 2ut.,
+\end{align*}
+其中$T$为弦内张力，$\rho$为弦的线密度．
+
+对于$\theta\ll 1$的情况，有$\cos\theta\doteq 1,\sin\theta\doteq\theta,$
+\[
+	T_1=T_2=:T,
+\]
+又$\theta=\p u/\p x,$
+\[
+	T(\theta_2-\theta_1)=T\vd\!\kh{\pv ux}=\rho\vd x\pu 2ut.
+\]
+设$a^2:=T/\rho$，得到波动方程\nomenclature{$u_t$}{The number of angels per unit area\nomrefeq}
+%$\rho$ - 线密度，$T$ - 张力，$g$ - 外力\\
+\begin{align}
+	\pv[2]ut=a^2\pv[2]ux.
+\end{align}
+\iffalse
+	\begin{example}{Maxwell方程组}{}
+		电动力学中
+		\begin{align*}
+			\nabla\cdot\bm D  & =\rho,              \\
+			\nabla\cdot\bm B  & =0,                 \\
+			\nabla\times\bm E & =-\pv{\bm B}t,      \\
+			\nabla\times\bm H & =\bm J+\pv{\bm D}t.
+		\end{align*}
+	\end{example}
+\fi
+\paragraph*{热传导问题}
+由Fourier热传导定律，一段时间内流入物体$\Omega$的热量为
+\[
+	Q=\int_{t_1}^{t_2}\bs5\oint_{\p\Omega}k\pv u{\bm n}\d S\d t=\int_{t_1}^{t_2}\bs5\int_\Omega k\lap u\d V\d t,
+\]
+其中$k$为介质的热传导系数，$u=u(x,y,z,t)$为各点温度．
+
+另一方面，从比热容$c$的角度看，
+\[
+	Q=\int_{t_1}^{t_2}\bs5\int_\Omega c\rho\pv ut\d V\d t.
+\]
+其中$\rho$为物体的体密度．
+
+因为上式对任意$\Omega\times\zkh{t_1,t_2}$均成立，设$a^2=k/c\rho$，得到热传导方程
+%$c$ - 比热，$\rho$ - 密度，$k$ - 热传导系数\\
+\begin{align}
+	\pv ut=a^2\pv[2]ux.
+\end{align}
+\subsection{定解问题及适定性}
+$V\subseteq\mathbb R^n$内$m$阶PDE
+\[
+	F\kh{x,u,\pv u{x_1},\pv u{x_2},\ldots,\pv u{x_n},\ldots,\frac{\p^mu}{\p x_1^{m_1}\cdots\p x_n^{m_n}}}=0,
+\]
+其中$m=m_1+m_2+\cdots+m_n,$有各阶偏导数连续的解$u=u(x_1,x_2,\ldots,x_n)$称为\textbf{古典解}．
+
+\textbf{通解}是$m$阶PDE有$m$个任意函数的解；\textbf{特解}是不包含任何任意函数或任意常数的解．
+
+\begin{definition}{定解条件}{Definite Condition}
+	确定解中函数的条件称为定解条件
+	\begin{compactenum}[I.]
+		\item $\edg u_{x=0}=f,\qquad\qquad\edg u_{\p V}=f$ (Dirichlet);
+		\item $\edg{u_t}_{x=0}=f,\qquad\qquad\edg{u_t}_{\p V}=f$ (Neumann);
+		\item $\kh{u_t+\sigma u}_{x=0}=f,\qquad\kh{\pv un+\sigma u}_{\p V}=f$ (Robin).
+	\end{compactenum}
+\end{definition}
+\textbf{适定解}：存在、唯一且稳定．
+\subsection{一阶线性方程的通解法}
+\subsubsection*{1.常数变易法}
+在微积分中已经学过
+\[
+	y'+P'y=Q.
+\]
+有解
+\begin{align}\label{Variation of Constant}
+	y=\e{-P}\fkh{\int Q\e{P}\d x+\cns}.
+\end{align}
+
+对于$u(x,y)$的方程
+\[
+	u_x+Ax=B.
+	\]
+\begin{align*}
+	\begin{cases}
+		\varphi=\exp\kh{-\int A\d x},  \\
+		\psi=\int B\varphi^{-1}\d x
+	\end{cases}
+	\thus u=\varphi\zkh{\psi+g(y)}.
+\end{align*}
+其中$g\in\sC$．
+\subsubsection*{2.变量代换}
+对$u=u(x,y)$的方程
+\[
+	au_x+bu_y+cu=f,
+	\]
+作变量代换
+\begin{align*}
+	\begin{cases}
+		\xi=\xi(x,y)  \\
+		\eta=\eta(x,y)
+	\end{cases}
+	\thus
+	\begin{cases}
+		u_x=u_\xi\xi_x+u_\eta\eta_x \\
+		u_y=u_\xi\xi_y+u_\eta\eta_y
+	\end{cases}
+\end{align*}
+变成$u=u(\xi,\eta)$的方程
+\[
+	\kh{a\xi_x+b\xi_y}u_\xi+\kh{a\eta_x+b\eta_y}u_\eta+cu=f.
+	\]
+使$a\xi_x+b\xi_y=0$，得到\textbf{特征方程}和\textbf{特征曲线}
+\begin{align}
+	\frac{\d x}a=\frac{\d y}b,\thus\xi(x,y)=\cns.
+\end{align}
+剩下
+\[
+	\kh{a\eta_x+b\eta_y}u_\eta+cu=f.
+	\]
+对$\eta$积分便可求出通解．注意：要$a\eta_x+b\eta_y\neq 0$，应有Jacobi行列式
+\begin{align*}
+	\det J(\xi,\eta)=\left\lvert\frac{\p(\xi,\eta)}{\p(x,y)}\right\rvert=
+	\begin{vmatrix}
+		\xi_x  & \xi_x  \\
+		\eta_x & \eta_y
+	\end{vmatrix}\neq 0.
+\end{align*}
+\subsection{波动方程的行波解和d'Alembert公式}
+一维波动方程
+\[
+	\pv[2]ut=a^2\pv[2]ux,\quad a>0.
+	\]
+可分解为
+\[
+	\kh{\pp t+a\pp x}\kh{\pp t-a\pp x}u=0.
+	\]
+等价于
+\begin{align*}
+	\begin{cases}
+		\pv vt+a\pv vx=0, \\[1ex]
+		\pv ut-a\pv ux=v.
+	\end{cases}
+	\thus
+	\begin{cases}
+		\xi=x-at, \\
+		\eta=x+at.
+	\end{cases}
+\end{align*}
+方程化为
+\[\pw u\eta\xi=0,\thus u=f(\xi)+g(\eta).\]
+即\textbf{行波解}
+\begin{align}
+	u(x,t)=f(x-at)+g(x+at),\quad f,g\in\sC^2.
+\end{align}
+\subsubsection*{d'Alembert公式}
+无限长弦自由振动
+\begin{align*}
+	\begin{cases}
+		u_{tt}=a^2u_{xx},&t>0,\;x\in\mathbb R. \\
+		u|_{t=0}=\varphi(x),\quad u_t|_{t=0}=\psi(x).
+	\end{cases}
+\end{align*}
+将初值问题带入通解
+\begin{align*}
+	u|_{t=0}   & =f(x)+g(x)=\varphi(x),   \\
+	u_t|_{t=0} & =-af'(x)+ag'(x)=\psi(x).
+\end{align*}
+因此
+\begin{align}
+	u(x,t)=\frac12\zkh{\varphi(x-at)+\varphi(x+at)}+\frac1{2a}\int_{x-at}^{x+at}\psi(\xi)\d\xi.
+\end{align}
+对于$\varphi\in\sC^2,\psi\in\sC,$解是适定的．
+
+非无限情况，可以延拓至无限．比如端点固定的半无限边界条件：
+\begin{align*}
+	 & u(0,t)=0,\quad x>0,\;t>0.                   \\
+	 & u(x,0)=\varphi(x),\quad u_t(x,0)=\psi(x).
+\end{align*}
+进行奇延拓
+\begin{align*}
+	\varphi_\odd(x)=
+	\begin{cases}
+		\varphi(x),   & x\geqslant 0, \\
+		-\varphi(-x), & x<0.
+	\end{cases}
+	\quad
+	\psi_\odd(x)=
+	\begin{cases}
+		\psi(x),   & x\geqslant 0, \\
+		-\psi(-x), & x<0.
+	\end{cases}
+\end{align*}
+问题便适用d'Alembert公式，解
+\begin{align*}
+	u(x,t) & =\frac12\zkh{\varphi_\odd(x-at)+\varphi_\odd(x+at)}+\frac1{2a}\int_{x-at}^{x+at}\psi_\odd(\xi)\d\xi \\
+	       & = 
+	\begin{cases}
+		\frac12\zkh{\varphi(x-at)+\varphi(x+at)}+\frac1{2a}\int_{x-at}^{x+at}\psi(\xi)\d\xi, & x\geqslant at, \\
+		\frac12\zkh{\varphi(x+at)-\varphi(at-x)}+\frac1{2a}\int_{at-x}^{x+at}\psi(\xi)\d\xi, & x<at.
+	\end{cases}
+\end{align*}
+端点自由半无限弦$u_t(0,t)=0$则采用偶延拓；对有界弦，则两端均延拓．
+
+中心对称的球面波$u=u(r)$，采用球坐标
+\[\lap=\frac1{r^2}\pp r\kh{r^2\pp r}+\frac1{r^2\sin\theta}\pp \theta\kh{\sin\theta\pp \theta}+\frac1{r^2\sin^2\theta}\pu 2{}\phi.\]
+波动方程变为
+\[u_{tt}=a^2\kh{u_{rr}+\frac2ru_r}=\frac{a^2}r(ru)_{rr}.\]
+设$v=ru,$则可解得
+\[u(r)=\frac1r\zkh{f(r-at)+g(r+at)}.\]
+掺入边界条件$\varphi(r),\psi(r)$后，作奇延拓即可．
+
+\eg 一般的三维波动方程
+\begin{align*}
+	\begin{cases}
+		u_{tt}=a^2(u_{xx}+u_{yy}+u_{zz}),                     \\
+		u|_{t=0}=\varphi(x,y,z),\quad u_t|_{t=0}=\psi(x,y,z).
+	\end{cases}
+\end{align*}
+采用球面平均法，定义球面平均
+\[\overline u(r,t;M)=\frac1{4\pi r}\oint_{S_r(M)}u(x,y,z,t)\d S,\]
+其中$S_r(M)$表示以$M$为球心，$r$为半径的球面。
+
+略去证明过程，问题转化为中心对称球面波问题
+\begin{align*}
+	\begin{cases}
+		\overline u_{tt}=\frac1r\kh{r\overline u}_{rr},                                \\
+		(r\overline u)_{r=0}=0,                                                        \\
+		\overline u(r,0)=\overline\varphi(r),\quad\overline u_t(r,0)=\overline\psi(r).
+	\end{cases}
+\end{align*}
+奇延拓解，注意：$(r\varphi)_\odd=r\varphi_\even,$
+\begin{align*}
+	r\overline u(r,t)= & \frac12\zkh{(r-at)\overline\varphi_\even(r-at)+(r+at)\overline\varphi_\even(r+at)}+\frac1{2a}\int_{r-at}^{r+at}\rho\overline\psi_\even(\rho)\d\rho.
+\end{align*}
+为得到$u(x,y,z,t),$取极限
+\begin{align*}
+	u(M,t)=\lim_{r\to 0^+}\overline u(r,t)
+	=\dd t\kh{t\overline\varphi(at)}+t\overline\psi(at),
+\end{align*}
+上式称为Possion公式．
+
+求解三维波动方程的关键在于计算球面平均
+\begin{align}\label{3D-Wave}
+	u(M,t) & =\pp t\kh{\frac1{4\pi a^2t}\oint_{S_{at}}\varphi\d S}+\frac1{4\pi a^2t}\oint_{S_{at}}\psi\d S\\\notag
+	& =\pp t\kh{\frac1{4\pi}\int_0^{2\pi}\bs5\int_0^\pi t\varphi\sin\theta\d\theta\nd\phi}+\frac1{4\pi}\int_0^{2\pi}\bs5\int_0^\pi t\psi\sin\theta\d\theta\nd\phi,
+\end{align}
+其中采用球坐标。
+\iffalse
+\begin{align*}
+	\varphi\begin{pmatrix}
+		\xi \\\eta\\\zeta
+	\end{pmatrix}=\varphi\begin{pmatrix}
+		x+at\sin\theta\cos\phi \\
+		y+at\sin\theta\sin\phi \\
+		z+at\cos\theta
+	\end{pmatrix}.
+\end{align*}
+\fi
+\eg 二维波动方程
+\begin{align*}
+	\begin{cases}
+		u_{tt}=a^2(u_{xx}+u_{yy}), \\
+		u|_{t=0}=\varphi(x,y),\quad u_t|_{t=0}=\psi(x,y).
+	\end{cases}
+\end{align*}
+采用升维法
+\begin{gather*}
+	U(x,y,z,t)=u(x,y,t),\quad\varPhi(x,y,z)=\varphi(x,y),\\
+	U(x,y,z,t)=\pp t\kh{\frac1{4\pi a^2t}\oint_{S_{at}}\varPhi\d S}+\frac1{4\pi a^2t}\oint_{S_{at}}\varPsi\d S
+\end{gather*}
+由于$U,\varPhi,\varPsi$取值与$z$无关，故积分区域可投影到$xy$平面上。
+记$D_r$是以$(x,y)$为圆心，$r$为半径的圆内区域，在$D_r$上
+\[\d S=\sqrt{1+\kh{\pv\zeta\xi}^2+\kh{\pv\zeta\eta}^2}\d A=\frac{r\d A}{\sqrt{r^2-(\xi-x)^2-(\eta-y)^2}}.\]
+故
+\begin{align}\label{2D-Wave}
+	\begin{aligned}
+		u(x,y,t)&= \frac1{2\pi a}\pp t\int_{D_{at}}\frac{\varphi(\xi,\eta)\d\xi\nd\eta}{\sqrt{a^2t^2-(\xi-x)^2-(\eta-y)^2}} \\
+		&\qquad +\frac1{2\pi a}\int_{D_{at}}\frac{\psi(\xi,\eta)\d\xi\nd\eta}{\sqrt{a^2t^2-(\xi-x)^2-(\eta-y)^2}}.
+	\end{aligned}
+\end{align}
+(\ref{3D-Wave})是在球面上积分，而(\ref{2D-Wave})是在圆域上积分。\footnote{这个差别在物理上产生了截然不同的效果：对三维情况，波的传播既有清晰的前阵面，也有清晰的后阵面，可用于传播信号，这称为Huygens原理；对二维情况，波的传播有清晰的前阵面，但没有后阵面，这称为波的弥漫，或说这种波具有后效现象，不适合于传播信号。}
+
+对一维弦振动方程，也可升二维，再将积分投影到$\zkh{x-at,x+at}$上。
+记$C_r$是以$(x,y)$为圆心，$r$为半径的圆，在$C_r$上
+\begin{gather*}
+	\d\ell=\sqrt{1+\kh{\dv\eta\xi}^2}\d\xi=\frac{r\d\xi}{\sqrt{r^2-(\xi-x)^2}}.
+\end{gather*}
+故
+\begin{align*}
+	&\quad\int_{D_{at}}\frac{\varPhi(\xi,\eta)\d\xi\nd\eta}{\sqrt{a^2t^2-(\xi-x)^2-(\eta-y)^2}}=\int_0^{at}\oint_{C_r}\frac{\varphi(\xi)}{\sqrt{a^2t^2-r^2}}\d\ell\d r\\
+	&=2\int_0^{at}\int_{x-r}^{x+r}\frac{\varphi(\xi)}{\sqrt{a^2t^2-r^2}}\frac{r\d\xi}{\sqrt{r^2-(\xi-x)^2}}\d r\tag{交换次序}\\
+	&=\kh{\int_x^{x+at}\bs5\int_{\xi-x}^{at}+\int_{x-at}^x\int_{x-\xi}^{at}}\frac{\varphi(\xi)}{\sqrt{a^2t^2-r^2}}\frac{2r\d r}{\sqrt{r^2-(\xi-x)^2}}\d\xi
+\end{align*}
+推出d'Alembert公式：
+\[u(x,t)=\pp t\kh{\frac1{2a}\int_{x-at}^{x+at}\varphi(\xi)\d\xi}+\frac1{2a}\int_{x-at}^{x+at}\psi(\xi)\d\xi.\]
+\subsection{二阶线性偏微分方程及标准型}
+两个自变量的二阶其次线性偏微分方程
+\[a_{11}u_{xx}+2a_{12}u_{xy}+a_{22}u_{yy}+b_1u_x+b_2u_y+cu=0.\]
+进行变量代换
+\begin{align*}
+	\begin{cases}
+		\xi=\xi(x,y) \\
+		\eta=\eta(x,y)
+	\end{cases}
+	\quad\text{其中}~
+	\det J(\xi,\eta)\neq 0.
+\end{align*}
+变成
+\[A_{11}u_{\xi\xi}+2A_{12}u_{\xi\eta}+A_{22}u_{\eta\eta}+B_1u_\xi+B_2u_\eta+cu=0.\]
+其中
+\begin{align*}
+	A_{11} & =a_{11}\xi_x^2+2a_{12}\xi_x\xi_y+a_{22}\xi_y^2,                          \\
+	A_{12} & =a_{11}\xi_x\eta_x+a_{12}\kh{\xi_x\eta_y+\xi_y\eta_x}+a_{22}\xi_y\eta_y, \\
+	A_{22} & =a_{11}\eta_x^2+2 a_{12}\eta_x\eta_y+a_{22}\eta_y^2;                     \\
+	B_1    & =a_{11}\xi_{xx}+2a_{12}\xi_{xy}+a_{22}\xi_{yy}+b_1\xi_x+b_2\xi_y,        \\
+	B_2    & =a_{11}\eta_{xx}+2a_{12}\eta_{xy}+a_{22}\eta_{yy}+b_1\eta_x+b_2\eta_y,
+\end{align*}
+用矩阵表达即
+\begin{align*}
+	\begin{bmatrix}
+		A_{11} & A_{12} \\
+		A_{12} & A_{22}
+	\end{bmatrix}=\begin{bmatrix}
+		\xi_x  & \xi_x  \\
+		\eta_x & \eta_y
+	\end{bmatrix}\begin{bmatrix}
+		a_{11} & a_{12} \\
+		a_{12} & a_{22}
+	\end{bmatrix}\begin{bmatrix}
+		\xi_x  & \xi_x  \\
+		\eta_x & \eta_y
+	\end{bmatrix}\tp.
+\end{align*}
+
+考虑使$A_{11}=0$或$A_{22}=0$则有
+\[a_{11}\kh{\dv yx}^2-2a_{12}\dv yx+a_{22}=0.\]
+其判别式
+\[\Delta=a_{12}^2-a_{11}a_{22}.\]
+\paragraph*{$\Delta>0$，双曲型}不妨设$a_{11}\neq 0$．
+\begin{align}
+	\dv yx=\frac{a_{12}\pm\sqrt\Delta}{a_{11}}\thus
+	\begin{cases}
+		\xi(x,y)=\cns \\
+		\eta(x,y)=\cns'
+	\end{cases}
+\end{align}
+继而$A_{11}=A_{22}=0,$
+\begin{gather}\notag
+	A_{12}=-\frac{2\Delta}{a_{11}}\xi_y\eta_y\neq 0,\\
+	u_{\xi\eta}+\frac1{2A_{12}}\kh{B_1u_\xi+B_2u_\eta+cu}=0.
+\end{gather}
+上式就是\textbf{双曲型方程的标准型}。
+
+若再作变量替换$p=(\xi+\eta)/2,\;q=(\xi-\eta)/2,$方程可化为
+\begin{align}
+	u_{pp}-u_{qq}+\frac1{A_{12}}\zkh{\kh{B_1+B_2}u_q+\kh{B_1-B_2}u_p+cu}=0.
+\end{align}
+\paragraph*{$\Delta=0$，抛物型}只有一个线性ODE，不妨设$a_{11}\neq 0$．
+\begin{align}
+	\dv yx=\frac{a_{12}}{a_{11}}\thus\xi(x,y)=\cns.
+\end{align}
+任取$\eta(x,y)$，可得$A_{11}=A_{12}=0$
+\begin{align}
+	u_{\eta\eta}+\frac1{A_{22}}\kh{B_1u_\xi+B_2u_\eta+cu}=0.
+\end{align}
+\paragraph*{$\Delta<0$，椭圆型}ODE解为复函数，不妨设$a_{11}\neq 0,$
+\begin{align}
+	\dv yx=\frac{a_{12}\pm\i\sqrt{-\Delta}}{a_{11}}\thus \xi(x,y)\pm\i\eta(x,y)=\cns.
+\end{align}
+其中$\xi,\eta$为实函数，$A_{12}=0,A_{11}=A_{22}\neq 0,$
+\begin{align}
+	u_{\xi\xi}+u_{\eta\eta}+\frac1{A_{11}}\kh{B_1u_\xi+B_2u_\eta+cu}=0.
+\end{align}
+\subsection{叠加原理和齐次化原理}
+定义算子为从函数类到函数类的映射$\mathcal T$。
+%一般的，二阶线性PDE中
+%\[\Par\equiv\sum_{i,j=1}^na_{ij}(X)\pw{}{x_i}{x_j}+\sum_{i=1}^nb_i(X)\pp{x_i}+c(X).\]
+%是$\sC^2\to\sC$的线性算子．
+\begin{theorem}{叠加原理}{Superposition Principle}
+	%所谓叠加原理，即
+	线性算子$\cL$可与$\textstyle\lim,\sum,\int$等运算符交换．% 在课程范围内，这是适当的．
+\end{theorem}
+
+齐次化原理也称冲量原理，源于求解有外力的弦振动方程
+\begin{align*}
+	\begin{cases}
+		u_{tt}=a^2u_{xx}+f(x,t),\\
+		u(x,0)=\varphi(x),\quad u_t(x,0)=\psi(x).
+	\end{cases}
+\end{align*}
+利用叠加原理，解$u=u_0+w$；其中$u_0$表示$f\equiv 0$的齐次化解；$w$表示$\varphi,\psi\equiv 0$的解，即纯受迫振动．
+
+考虑时间段$\zkh{\tau,\tau+\vd\tau}$内，位移分布$w(x,t)=:v(x,t;\tau)\vd\tau$，外力冲量$f(x,\tau)\vd\tau$，有
+\begin{align*}
+	%w(x,t)=\int_0^tv(x,t;\tau)\d\tau,\quad
+	\begin{cases}
+			v_{tt}=a^2v_{xx},\\
+			v|_{t=\tau}=0\quad v_t|_{t=\tau}=f(x,\tau).
+	\end{cases}\Rightarrow\quad v(x,t;\tau)=\frac1{2a}\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\xi,\tau)\d\xi.
+\end{align*}
+%因此
+%\[=\frac1{2a}\int_0^t\bs3\int_{x-a(t-\tau)}^{t+a(t-\tau)}f(\xi,\tau)\d\xi\nd\tau.\]
+叠加得
+\begin{align}
+	\begin{aligned}
+		u(x,t)= &\;\frac12\zkh{\varphi(x-at)+\varphi(x+at)}+\frac1{2a}\int_{x-at}^{x+at}\psi(\xi)\d\xi \\
+		        & +\frac1{2a}\int_0^t\bs3\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\xi,\tau)\d\xi\nd\tau.
+	\end{aligned}
+\end{align}
+\begin{theorem}{齐次化原理}{Homogeneity Principle}
+	定解问题
+	\begin{align*}
+		\begin{cases}
+			\frac{\p^mu}{\p t^m}=\Par u+f(\bm x,t),&\bm x\in\mathbb R^n,\\
+			\edg u_{t=0}=\edg{\pv ut}_{t=0}=\cdots=\edg{\frac{\p^{m-1}u}{\p t^{m-1}}}_{t=0}=0.
+		\end{cases}
+	\end{align*}
+	其中$\Par$为常系数线性偏微分算子，有解
+	\[u(\bm x,t)=\int_0^tv(\bm x,t;\tau)\d\tau,\]
+	$v$满足
+	\begin{align*}
+		\begin{cases}
+			\pu mvt=\Par v,&\bm x\in\mathbb R^n,\\
+			\edg v_{t=\tau}=\edg{\pv v{t}}_{t=\tau}=\cdots=\edg{\pu{m-2}vt}_{t=\tau}=0, \\
+			\edg{\pu{m-1}vt}_{t=\tau}=f(\bm x,\tau).
+		\end{cases}
+	\end{align*}
+
+	当$\bm x\in V\subsetneq\mathbb R^n$时，还应加上其次边界条件
+	\[\edg{\Par u}_{\p V}=0,\quad\edg{\Par v}_{\p V}=0.\]
+\end{theorem}
+\clearpage
+\section{分离变量法}
+回忆一些典型ODE方程的基本解法
+\paragraph{二阶常系数其次方程}
+\begin{align}
+	y''+ay'+by=0.
+\end{align}
+其特征方程$\lambda^2+a\lambda+b=0$的解$\lambda_{1,2}$
+\begin{compactenum}[I.]
+	\item $\Delta>0,$\quad$y=A\e{\lambda_1x}+B\e{\lambda_2x};$
+	\item $\Delta=0,$\quad$\lambda_{1,2}=\lambda,$\quad$y=(A+Bx)\e{\lambda x};$
+	\item $\Delta<0,$\quad$\lambda_{1,2}=\alpha\pm\i\beta$,\quad$y=(A\cos\beta x+B\sin\beta x)\e{\alpha x}$．
+\end{compactenum}
+\paragraph{二阶非其次方程}
+\begin{align}
+	y''+a(x)y'+b(x)y=f(x).
+\end{align}
+根据叠加定理，其解$y=y_0+y_\mathrm s;$其中$y_0$为$f(x)\equiv 0$时的其次通解，$y_\mathrm s$为特解．
+
+若$y_1,y_2$为对应的其次方程线性无关解，则可求出一特解
+\begin{align}\label{General to Particular Solution}
+	y_\mathrm s(x)=\int_{x_0}^x\frac{y_1(\xi)y_2(x)-y_1(x)y_2(\xi)}{y_1(\xi)y_2'(\xi)-y_1'(\xi)y_2(\xi)}f(\xi)\d \xi,\quad\forall x_0.
+\end{align}
+特解满足其次边界条件
+\[y_\mathrm s(x_0)=0,\quad y'_\mathrm s(x_0)=0.\]
+\paragraph{Euler方程}
+\begin{align}
+	x^2y''+axy'+by=f(x).
+\end{align}
+令$x=\e t,\;u(t)=y(\e t)=y(x)$方程变为
+\begin{align}
+	u''+(a-1)u'+bu=f(\e t).
+\end{align}
+\clearpage
+\subsection{特征值和特征函数}
+在讨论分离变量前，先引入Fourier级数的概念。
+\begin{definition}{Fourier级数}{Fourier Series}
+	$f(x)$周期为$2\ell$，则$f(x)$的Fourier级数
+	\begin{align}
+		\FS f(x)=\frac{a_0}2+\sum_{n=1}^\infty\kh{a_n\cos\frac{n\pi x}\ell+b_n\sin\frac{n\pi x}\ell}.
+	\end{align}
+	其中Fourier系数
+	\begin{align*}
+		a_n & =\frac1\ell\int_{-\ell}^\ell f(x)\cos\frac{n\pi x}\ell\d x; \\
+		b_n & =\frac1\ell\int_{-\ell}^\ell f(x)\sin\frac{n\pi x}\ell\d x.
+	\end{align*}
+\end{definition}
+\begin{theorem}{Parserval等式}{Parserval Equality}
+	若$f\in\mathscr L^2\zkh{-\ell,\ell}$即平方可积，则
+	\[\frac1\ell\int_{-\ell}^\ell f^2(x)\d x=\frac{a_0^2}2+\sum_{n=1}^\infty\kh{a_n^2+b_n^2}.\]
+\end{theorem}
+\begin{theorem}{Dirichlet收敛定理}{Dirichlet Convergence Theorem}
+	若
+	\begin{compactenum}
+		\item $f,f'$连续或分段连续，至多有有限个第一类间断点；%（可去或跳跃）
+		\item $f$至多有有限个极值点；
+	\end{compactenum}
+	则
+	\begin{align*}
+		\FS f(x)
+		=\begin{cases}
+			\kh{f(x^+)+f(x^-)}/2,        & x\in(-\ell,\ell) \\
+			\kh{f(-\ell^+)+f(\ell^-)}/2, & x=\pm\ell
+		\end{cases}
+	\end{align*}
+	在$f$连续点处，$\FS f=f$．
+\end{theorem}
+\eg[1] 有界弦问题
+\begin{align*}
+	\begin{cases}
+		u_{tt}=a^2u_{xx},&x\in\kh{0,L},\;t>0 \\
+		u(0,t)=u(L,t)=0,                 \\
+		u(x,0)=\varphi(x)\quad u_t(x,0)=\psi(x).
+	\end{cases}
+\end{align*}
+假设变量是可以分离的，即$u(x,t)=X(x)T(t),$则引入\textbf{特征值}$\lambda$
+\[\frac{X''}X=\frac{T''}{a^2T}=-\lambda.\]
+要使$X''+\lambda X=0$且$X(0)=X(L)=0$仅有
+\[\lambda_n=\kh{\frac{n\pi}L}^2,\quad X_n(x)=\sin\frac{n\pi x}L,\quad n=1,2,\ldots.\]
+进而$T''+a^2\lambda T=0$
+\[T_n(t)=C_n\cos\frac{n\pi at}L+D_n\sin\frac{n\pi at}L.\]
+因此原方程应有\textit{形式解}
+\begin{align}
+	u(x,t)=\sum_{n=1}^\infty\fkh{C_n\cos\frac{n\pi at}L+D_n\sin\frac{n\pi at}L}\sin\frac{n\pi x}L.
+\end{align}
+$C_n,D_n$由初始条件确定
+\begin{align*}
+	u(x,0)&=\sum_{n=1}^\infty C_n\sin\frac{n\pi x}L=\varphi(x),            \\
+	u_t(x,0)&=\sum_{n=1}^\infty D_n\frac{n\pi a}L\sin\frac{n\pi x}L=\psi(x).
+\end{align*}
+恰好对应Fourier正弦系数$\varphi^{\sine}_n,\psi^{\sine}_n$
+\begin{align*}
+	C_n & =\frac2L\int_0^L\varphi(x)\sin\frac{n\pi x}L\d x=:\varphi_n^{\sine},                  \\
+	D_n & =\frac2{n\pi a}\int_0^L\psi(x)\sin\frac{n\pi x}L\d x=:\frac{L}{n\pi a}\psi_n^{\sine}.
+\end{align*}
+
+至于形式解是否符合条件，不是考试涉及的范围．
+\eg[2] 圆域上的Laplace方程，采用极坐标
+\begin{align*}
+	\begin{cases}
+		\lap_2u=u_{rr}+\frac1ru_r+\frac1{r^2}u_{\theta\theta}=0,&r<r_0\\
+		u(r_0,\theta)=\varphi(\theta)
+	\end{cases}
+\end{align*}
+还应包括自然条件，即
+\[\limsup_{r\to0^+}\abs{u(r,\theta)}<\infty.\]
+和周期边界条件
+\[u(r,0)=u(r,2\pi),\quad u_\theta(r,0)=u_\theta(r,2\pi).\]
+
+分离变量$u(r,\theta)=R(r)\Ct(\theta)$
+\begin{align*}
+	\begin{cases}
+		r^2R''+rR'+\lambda R=0\\
+		\Ct''-\lambda\Ct=0.
+	\end{cases}
+\end{align*}
+由周期条件，特征值$\lambda=n^2,\;n=0,1,2,\ldots$
+\[\Ct_n(\theta)=a_n\cos n\theta+b_n\sin n\theta=:\begin{Bmatrix}
+	\cos n\theta\\
+	\sin n\theta
+\end{Bmatrix}\]
+再解$R$的Euler方程，可得
+\[R_n(r)=\begin{cases}
+	c_0+d_0\ln r,&n=0\\
+	c_nr^n+d_nr^{-n},&n\geqslant 1
+\end{cases}\]
+再由自然条件$\abs{R(0)}<\infty$，可知$d_i\equiv 0$，进而
+\[u(r,\theta)=\frac{a_0}2+\sum_{n=1}^\infty r^n(a_n\cos n\theta+b_b\sin n\theta),\]
+结合边界条件$u(r_0,\theta)=\varphi(\theta)$，求得系数
+\[a_n=\frac1{\pi r_0^n}\int_0^{2\pi}\varphi(\vartheta)\cos n\vartheta\d\vartheta,\quad b_n=\frac1{\pi r_0^n}\int_0^{2\pi}\varphi(\vartheta)\sin n\vartheta\d\vartheta.\]
+因此
+\begin{align*}
+	u(r,\theta)&=\frac1{2\pi}\int_0^{2\pi}\varphi(\vartheta)\d\vartheta+\\
+	&\qquad\frac1\pi\sum_{n=1}^\infty\kh{\frac r{r_0}}^n\int_0^{2\pi}\varphi(\vartheta)(\cos n\vartheta\cos n\theta+\sin n\vartheta\sin n\theta)\d\vartheta\\
+	&=\frac1{2\pi}\int_0^{2\pi}\varphi(\vartheta)\fkh{1+2\sum_{n=1}^\infty\kh{\frac r{r_0}}^n\cos n(\theta-\vartheta)}\d\vartheta
+\end{align*}
+又由Euler公式
+\begin{align*}
+\sum_{n=0}^\infty k^n\cos n\theta=\sum_{n=0}^\infty\Re k^n\e{\i n\theta}=\Re\frac1{1-k\e{\i\theta}}=\frac{1-k\cos\theta}{1+k^2-2k\cos\theta}.
+\end{align*}
+故得到圆域内的Poisson公式
+\begin{align}
+	u(r,\theta)&=\frac1{2\pi}\int_0^{2\pi}\frac{(r_0^2-r^2)\varphi(\vartheta)}{r_0^2+r^2-2r_0r\cos(\theta-\vartheta)}\d\vartheta
+\end{align}
+积分内式子称为Poisson核．
+
+\eg[3] 圆域上的Neumann问题
+\begin{align*}
+	\begin{cases}
+		\lap_2u=0,&r<R\\
+		\edg{\pv un}_{r=R}=\varphi(\theta)
+	\end{cases}
+\end{align*}
+由~\textcolor[rgb]{0,.8,0}{Green公式}
+	\begin{align*}
+		{\color[rgb]{0,.8,0}{\int_{D_R}\lap u\d x\nd y=\oint_{r=R}\pv un\d\ell}}=R\int_0^{2\pi}\varphi(\theta)\d\theta=0.
+	\end{align*}
+
+	剩下的证明留给读者
+\clearpage
+\subsection{Sturm-Liouville定理}
+\eg 有限杆热传导问题，设杆温度$u=u(x,t)$，则定解问题
+\begin{align*}
+	\begin{cases}
+		u_t=a^2u_{xx},&x\in\kh{0,L},\;t>0,\\
+		u(0,t)=0,\quad u_t(L,t)+hu(L,t)=0,\\
+		u(x,0)=\varphi(x).
+	\end{cases}
+\end{align*}
+其中热交换常数$h>0$．
+
+分离常数$u(x,t)=X(x)T(t),$
+\begin{align*}
+	\begin{cases}
+		X''+\beta^2X=0, \\
+		X(0)=0,\quad X'(L)+hX(L)=0.
+	\end{cases}\thus\beta+h\tan\beta L=0.
+\end{align*}
+$\Rightarrow\quad X_n(x)=\sin\beta_nx,\quad T_n(t)=C_n\e{-\beta_n^2a^2t}$．可以验证$X_n$是正交的，即
+\[\ave{X_m,X_n}=\int_0^LX_m(x)X_n(x)\d x=0,\quad m\neq n.\]
+形式解
+\[u_n(x,t)=\sum_{n=1}^\infty C_n\even^{-\beta_n^2a^2t}\sin\beta_nx.\]
+
+再根据初始条件
+\[u(x,0)=\sum_{n=1}^\infty C_n\sin\beta_nx=\varphi(x).\]
+在后面可以看到，这是广义Fourier级数，其系数
+\[C_n=\frac{\ave{\varphi,\sin\beta_nx}}{\ave{\sin\beta_nx,\sin\beta_nx}}=\frac{\int_0^L\varphi(x)\sin\beta_nx\d x}{\int_0^L\sin^2\beta_nx\d x}.\]
+\begin{definition}{加权内积}{Weight Inner Product}
+	定义在$\zkh{a,b}$上的实函数$f,g$的$\rho$\;-\;加权内积
+	\[\inp fg_\rho:=\int_a^bf(x)g(x)\rho(x)\d x.\]
+	其中权函数$\rho\geqslant 0$分段连续且零点孤立．
+	% 若$f,g$正交，则$\inp fg_\rho=0$．
+	%定义范数$\norm f_\rho:=\inp ff_\rho^{1/2}$．及
+
+	加权平方可积函数空间
+	\[\mathscr L_\rho^2\zkh{a,b}:=\set f{\norm f_\rho<\infty}.\]
+\end{definition}
+\begin{theorem}{广义Fourier级数}{Generalized Fourier Series}
+	若$f_1,f_2,\ldots$在$\mathscr L_\rho^2$中完备且加权正交，则$\forall f\in\mathscr L_\rho^2$有广义Fourier级数展开
+	\[f(x)\sim\sum_{i=1}^\infty a_if_i(x),\quad a_i=\frac{\inp f{f_i}_\rho}{\norm{f_i}^2_\rho}.\]
+	且有Parserval等式
+	\[\norm f_\rho^2=\sum_{i=1}^n\inp f{\frac{f_i}{\norm{f_i}_\rho}}_\rho^2.\]
+\end{theorem}
+\begin{definition}{Sturm-Liouville方程}{Sturm-Liouville Equation}
+	定义域$\zkh{a,b}$，常见一维特征值问题都可以化为
+	\[\kh{k(x)f'(x)}'-q(x)f(x)+\lambda\rho(x)f(x)=0.\]
+	其中$\lambda$为参数，$k,q,\rho$为实函数．
+
+	记
+	\[\cl f:=-\frac{\kh{kf'}'-qf}\rho.\]
+	则
+	\[\inp{\cl f}g_\rho-\inp f{\cl g}_\rho=\zkh{k(fg'-f'g)}_a^b.\]
+	好的边界条件可以使上式等于0．
+\end{definition}
+\paragraph*{正则Sturm-Liouville问题}
+\[\cl f(x)=\lambda f(x).\]
+
+正则条件：
+\[
+	k\in\sC^2\zkh{a,b},\;q,\rho\in\sC\zkh{a,b};\;k,\rho>0.
+\]
+保证了Sturm-Liouville方程在$\zkh{a,b}$上没有奇点．
+
+边界条件：
+\begin{center}
+	可分：$\begin{cases}
+			c_1f(a)+c_2f'(a)=0, \\
+			d_1f(b)+d_2f'(b)=0.
+		\end{cases}$\quad 或 \quad 周期：
+	$\begin{cases}
+			f(a)=f(b) \\
+			f'(a)=f'(b)
+		\end{cases}$
+\end{center}
+这些边界条件是好的，可使$\cL$是对称算子，即
+\[\inp{\cl f}g_\rho=\inp f{\cl g}_\rho.\]
+\begin{theorem}{Sturm-Liouville定理1}{Sturm-Liouville Theorem I}
+	正则Sturm-Liouville问题
+	\begin{compactenum}
+		\item 有可数多个实特征值
+		      \[\lambda_1<\lambda_2<\cdots<\lambda_n<\cdots,\quad\lim_{n\to\infty}\lambda_n=+\infty.\]
+		      % 对应特征函数
+		      % \[X_1(x),X_2(x),\ldots,X_n(x),\ldots\]
+		\item 特征函数加权$\rho$\;-\;正交；
+		\item 特征值的特征子空间至多2维，
+
+		      可分边界条件下，特征子空间为1维；
+		\item 特征函数构成$\mathscr L_\rho^2$上完备的正交基底．
+	\end{compactenum}
+\end{theorem}
+奇异Sturm-Liouville问题：不满足正则条件或区间无界；但若
+\begin{center}
+	$a$或$b$是$k(x)$的一级零点，是$q(x)$的至多一级极点， % 时，称$a$或$b$是方程的正则奇点．
+\end{center}
+定理结论依旧成立！
+\begin{theorem}{Sturm-Liouville定理2}{Sturm-Liouville Theorem II}
+	若正则Sturm-Liouville问题还满足$q\geqslant 0$；可分边界条件下还需满足$c_1c_2\leqslant 0,\;d_1d_2\geqslant 0$．
+	\begin{compactenum}
+		\item 所有特征值非负；
+
+		      特别的，存在0特征值（对应特征函数1）的充要条件是$q\equiv 0$且两端为第二类边界条件；
+		\item 若正则条件为周期条件，那么其对应于每一个非最小特征值$\lambda_0$
+		的特征值有两个相互正交的特征函数．
+	\end{compactenum}
+\end{theorem}
+\eg 扇形域上的Dirichlet问题
+\begin{align*}
+	\begin{cases}
+		\lap_2u=0,&r\in\kh{1,\mathrm e},\;\theta\in\kh{0,\frac\pi{2}}.\\
+		u(1,\theta)=u(\mathrm e,\theta)=0,\\
+		u(r,0)=0,\quad u\kh{r,\frac\pi{2}}=g(r).
+	\end{cases}
+\end{align*}
+化为Sturm-Liouville型
+\[\kh{rR'}'+\frac{\lambda}rR=0,\]
+对应\(k=r,\;q=0,\;\rho=\frac1r\)，因此\(\lambda>0\)，进而
+\begin{gather*}
+	\lambda_n=(n\pi)^2,\quad R_n(r)=\sin\kh{n\pi\ln r},\quad n=1,2,\ldots
+	\\
+	\Ct_n(\theta)=A_n\e{n\pi\theta}+B_n\e{-n\pi\theta}.
+\end{gather*}
+再结合$u$的边界条件即可解出．
+\subsection{非其次方程}
+对非齐次方程，有时可靠直觉找出特解$v$，但对一般的非齐次方程，需要借助齐次化原理转化为其次方程：
+\paragraph*{齐次化原理法}
+设$\Dif_t$中关于2阶导数的系数为1
+\begin{align*}
+	\begin{cases}
+		\Dif_xu+\Dif_tu=f(x,t),& x\in(a,b),\;t>0\\
+		\kh{\alpha_1u-\beta_1u_x}_{x=a}=0,\quad\kh{\alpha_2u+\beta_2u_x}_{x=b}=0,\\
+		\edg u_{t=0}=\edg{u_t}_{t=0}=0.
+	\end{cases}
+\end{align*}
+由 \pageref{thm:Homogeneity Principle} 页的定理 \ref{thm:Homogeneity Principle} 知，有解
+\[u(x,t)=\int_0^tv(x,t-\tau;\tau)\d\tau\]
+$v$满足
+\begin{align*}
+	\begin{cases}
+		\Dif_xv+\Dif_tv=0,&x\in(a,b),\;t>0\\
+		\kh{\alpha_1v-\beta_1v_x}_{x=a}=0,\quad\kh{\alpha_2v+\beta_2v_x}_{x=b}=0,\\
+		\edg v_{t=0}=0,\quad\edg{v_t}_{t=0}=f(x,\tau).
+	\end{cases}
+\end{align*}
+\paragraph*{广义Fourier展开法}对于 
+\begin{align*}
+	\begin{cases}
+		\Dif_xu+\Dif_tu=f(x,t),& x\in(a,b),\;t>0\\
+		\kh{\alpha_1u-\beta_1u_x}_{x=a}=0,\quad\kh{\alpha_2u+\beta_2u_x}_{x=b}=0,\\
+		\edg u_{t=0}=\varphi(x),\quad\edg{u_t}_{t=0}=\psi(x).
+	\end{cases}
+\end{align*}
+\begin{compactenum}
+	\item 首先分离变量，求出$f\equiv 0$对应的特征值问题
+	\[\Dif_xX=-\lambda X.\]
+	解出特征值$\{\lambda_n\}$和本征函数$\{X_n(x)\}$，注意$n$的取值是否含0。
+	\item 根据Sturm-Liouville定理判断$\{X_n\}$的完备性，展开
+	\begin{gather*}
+		u(x,t)=\sum T_n(t)X_n(x),\quad f(x)=\sum f_n(t)X_n(x),\\
+		\varphi(x)=\sum\varphi_nX_n(x),\quad \psi(x)=\sum\psi_nX_n(x).
+	\end{gather*}
+	求解 
+	\begin{align*}
+		\begin{cases}
+			\Dif_tT_n(t)-\lambda_nT_n(t)=f_n(t),\\
+			T_n(t)=\varphi_n,\quad T_n'(t)=\psi_n.
+		\end{cases}
+	\end{align*}
+	\item 解出$T_n(t)$，得$u(x,t)$
+\end{compactenum}
+\paragraph*{一般的非齐次问题}
+对于一般的非齐次问题
+\begin{align*}
+	\begin{cases}
+		\Dif_xu+\Dif_tu=f(x,t),&x\in(a,b),\;t>0\\
+		\kh{\alpha_1u-\beta_1u_x}_{x=a}=g_1(t),\quad\kh{\alpha_2u+\beta_2u_x}_{x=b}=g_2(t),\\
+		\edg u_{t=0}=\varphi(x),\quad\edg{u_t}_{t=0}=\psi(x).
+	\end{cases}
+\end{align*}
+首先将非齐次边界条件齐次化，寻找$v(x,t)$满足 
+\[
+	\kh{\alpha_1v-\beta_1v_x}_{x=a}=g_1(t),\quad\kh{\alpha_2v+\beta_2v_x}_{x=b}=g_2(t).
+\]
+
+显然$v$不唯一，若无法直觉看出，可设为$x$的线性函数
+\[
+	v(x,t)=A(t)x+B(t),
+\]
+整理得
+\[
+	\begin{cases}
+		(\alpha_1a-\beta_1)A(t)+\alpha_1B(t)=g_1(t),\\
+		(\alpha_2b+\beta_2)A(t)+\alpha_2B(t)=g_2(t).
+	\end{cases}
+\]
+便可解出$A,B$若无解还可设为$x$的二次函数。
+
+这样便可将$u$分解为$u=v+w$，而$w$的边界条件是齐次化的：
+\begin{align*}
+	\begin{cases}
+		\Dif_xw+\Dif_tw=f(x,t)-\Dif_xv-\Dif_tv,&x\in(a,b),\;t>0\\
+		\kh{\alpha_1w-\beta_1w_x}_{x=a}=0,\quad\kh{\alpha_2w+\beta_2w_x}_{x=b}=0,\\
+		\edg w_{t=0}=\varphi(x)-\edg v_{t=0},\quad\edg{w_t}_{t=0}=\psi(x)-\edg{v_t}_{t=0}.
+	\end{cases}
+\end{align*}
+这在前面已解决。
+\clearpage
+\section{积分变换法}
+\begin{definition}{积分变换}{Integral Transformation}
+	积分变换
+	\[\mathcal T\zkh{f}(\xi)=\int_a^bf(x)K(x,\xi)\d x.\]
+	其中$K$是核函数(kernel)．
+\end{definition}
+\subsection{Fourier变换}
+\setcounter{subsubsection}{1}
+\begin{definition}{Fourier变换}{Fourier Transformation}
+	定义Fourier变换
+	\[\hat f(\xi)\equiv\cf f(\xi):=\int\iti f(x)\e{-\i\xi x}\d x,\quad \xi\in\RR,\]
+	及其逆变换
+	\[f(x)=\mathcal F^{-1}\big[\hat f\big](x)=\frac1{2\pi}\int\iti\hat f(\xi)\e{\i\xi x}\d\xi.\]
+\end{definition}
+Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformation} 页的附录内容。
+\eg 无界长杆热传导
+\begin{align*}
+	\begin{cases}
+		u_t=a^2u_{xx}+f(x,t),\\
+		u(x,0)=\varphi(x).
+	\end{cases}\longrightarrow\quad\begin{cases}
+		\hat u_t=-a^2\xi^2\hat u+\hat f,\\
+		\hat u(\xi,0)=\hat\varphi(\varphi).
+	\end{cases}
+\end{align*}
+因此
+\begin{align*}
+	\hat u(\xi,t)&=\e{-a^2\xi^2t}\fkh{\int_0^t\hat f(\xi,\tau)\e{a^2\xi^2\tau}\d\tau+\hat\varphi(\xi)}.
+	% \\
+	% &=\int_0^t\hat f(\xi,\tau)\e{-a^2\xi^2(t-\tau)}\d\tau+\hat\varphi(\xi)\e{-a^2\xi^2t}.
+\end{align*}
+再用Fourier逆变换
+\begin{align*}
+	u(x,t)&=\cfi{\int_0^t\hat f(\xi,\tau)\e{-a^2\xi^2(t-\tau)}\d\tau}+\cfi{\hat\varphi(\xi)\e{-a^2\xi^2t}}\\
+	&=\int_0^t\cfi{\hat f(\xi,\tau)}\!\ast\cfi{\e{-a^2\xi^2(t-\tau)}}\d\tau+\cfi{\hat\varphi(\xi)}\ast\cfi{\e{-a^2\xi^2t}}\\
+	&=\int_0^tf(x,t)\ast\frac{\e{-x^2/4a^2(t-\tau)}}{2a\sqrt{\pi(t-\tau)}}\d\tau+\frac1{2a\sqrt{\pi t}}\int\iti\varphi(\eta)\e{-(x-\eta)^2/4a^2t}\d\eta\\
+	&=\int_0^t\frac1{2a\sqrt{\pi(t-\tau)}}\int\iti f(\eta,\tau)\e{-(x-\eta)^2/4a^2(t-\tau)}\d\eta\d\tau+\\
+	&\qquad\qquad\frac1{2a\sqrt{\pi t}}\int\iti\varphi(\eta)\e{-(x-\eta)^2/4a^2t}\d\eta.
+\end{align*}
+以上只是形式解．
+\subsubsection{Fourier正余弦变换}
+对于定义在$\RR_{\geqslant  0}$上的函数，可将其奇偶延拓至$\RR$后再作4ier变换
+\begin{definition}{Fourier正余弦变换}{Fourier Sine and Cosine Transformation}
+	正余弦变换分别为
+	\begin{align*}
+		\hat f_\sine(\xi)\equiv\cf[s]f(\xi):=\int\zti f(x)\sin\xi x\d x;\\
+		\hat f_\cosi(\xi)\equiv\cf[c]f(\xi):=\int\zti f(x)\cos\xi x\d x.
+	\end{align*}
+	其反变换
+	\begin{align*}
+		f(x)&=\frac2\pi\int\zti\hat f_\sine(\xi)\sin\xi x\d\xi=:\cfi[s]{\hat f_\sine(\xi)}\\
+		&=\frac2\pi\int\zti\hat f_\cosi(\xi)\cos\xi x\d\xi=:\cfi[c]{\hat f_\cosi(\xi)}
+	\end{align*}
+\end{definition}
+变换的性质见第 \pageref{The Property of Sine and Cosine Transformation} 页的附录内容。
+\eg 半无界杆热传导方程问题
+\begin{align*}
+	\begin{cases}
+		u_t=a^2u_{xx},&x>0,\;t>0\\
+		u(x,0)=0,\\
+		u_x(0,t)=\varphi(x)\\
+	\end{cases}
+\end{align*}
+自然边界条件
+\[\lim_{x\to\infty}u(x,t)=\lim_{x\to\infty}u_t(x,t)=0\]
+
+若用Fourier正弦变换，则会出现$u(0,t)$，此边界条件没有给出，因此只能用余弦变换，记$U(\xi,t)=\cf[c]{u(x,t)}$
+\begin{align*}
+	U_t(\xi,t)&=a^2\zkh{u_x(x,t)\cos\xi x-\xi u(x,t)\sin\xi x}\zti-a^2\xi^2U(\xi,t)\\
+	&=-a^2\varphi(t)-a^2\xi^2U(\xi,t).
+\end{align*}
+故
+\[U(\xi,t)=-a^2\int_0^t\varphi(\tau)\e{-a^2\xi^2(t-\tau)}\d\tau\]
+逆变换
+\begin{align*}
+	u(x,t)&=-\frac{2a^2}\pi\int\zti\fkh{\int_0^t\varphi(\tau)\e{-a^2\xi^2(t-\tau)}\d\tau}\cos\xi x\d\xi\\
+	&=-\frac{2a^2}\pi\int_0^t\varphi(\tau)\fkh{\int\zti\e{-a^2\xi^2(t-\tau)}\cos\xi x\d\xi}\d\tau\\
+	&=-a\int_0^t\varphi(\tau)\frac{\e{-x^2/4a^2(t-\tau)}}{\sqrt{\pi(t-\tau)}}\d\tau.
+\end{align*}
+
+\eg 半无界弦振动问题
+\begin{align*}
+	\begin{cases}
+		u_{tt}=a^2u_{xx},& x>0,\;t>0\\
+		u_x(0,t)=f(t),\\ % \quad u(0,t)=f(t),
+		u(x,0)=u_t(x,0)=0
+	\end{cases}
+\end{align*}
+自然边界条件$\lim_{x\to\infty}u(x,t)=\lim_{x\to\infty}u_t(x,t)=0$。
+\[U_{tt}(\xi,t)=-a^2f(t)-a^2\xi^2U(\xi,t).\]
+其次方程通解$\cos a\xi t,\;\sin a\xi t$，运用(\ref{General to Particular Solution})和边界条件$U(\xi,0)=U_t(\xi,0)=0$
+\begin{align*}
+	U(\xi,t)&=\int_0^t-a^2f(\tau)\frac{\cos a\xi\tau\sin a\xi t-\cos a\xi t\sin a\xi\tau}{\cos a\xi\tau\kh{\sin a\xi\tau}'-\kh{\cos a\xi\tau}'\sin a\xi\tau}\d\tau\\
+	&=-\frac a\xi\int_0^tf(\tau)\sin a\xi(t-\tau)\d\tau.
+\end{align*}
+逆变换
+\begin{align*}
+	u(x,t)&=-\frac{2}\pi\int\zti\fkh{\frac a\xi\int_0^tf(\tau)\sin a\xi(t-\tau)\d\tau}\cos \xi x\d\xi\\
+	&=-2a\int_0^tf(\tau)\cdot\frac1{2\pi}\int\iti\frac1\xi\sin a\xi(t-\tau)\e{\i\xi x}\d\xi\d\tau
+\end{align*}
+由
+\[\cfi{\frac{\sin a\xi}\xi}=\frac{\Heaviside(x+a)-\Heaviside(x+a)}2.\]
+其中$\Heaviside(x)$为Heaviside跳跃函数，故
+\begin{align*}
+	u(x,t) % &=-a\int_0^tf(\tau)\fkh{H(x+a(t-\tau))-H(x-a(t-\tau))}\d\tau\\
+	% =-a\int_0^{t-x/a}f(\tau)\Heaviside(x+a(t-\tau))\d\tau
+	=-a\int_0^{t-x/a}f(\tau)\d\tau.\quad x<at
+\end{align*}
+\subsubsection{Fourier变换与分离变量法}
+无界区域是否有相应的分离变量法？
+\eg 无界长杆热传导
+\begin{align*}
+	\begin{cases}
+		u_t=a^2u_{xx},& x\in\RR,\;t>0\\
+		u(x,0)=\varphi(x)
+	\end{cases}
+\end{align*}
+分离变量$u(x,t)=X(x)T(t)$特征值
+\[X''+\lambda X=0,\;T'+\lambda a^2T=0\]
+讨论知$\lambda=\xi^2\geqslant 0$
+\[X=\e{\i\xi x},\quad T=\e{-a^2\xi^2t}.\]
+故
+\[u(x,t)=\frac1{2\pi}\int\iti A(\xi)X(x,\xi)T(t,\xi)\d\xi=\frac1{2\pi}\int\iti A(\xi)\e{\i\xi x}\e{-a^2\xi^2t}\d\xi.\]
+边界条件
+\[u(x,0)=\frac1{2\pi}\int\iti A(\xi)\e{\i\xi x}\d\xi\equiv\cfi A=\varphi(x),\]
+故$\varphi(x)$是$A(\xi)$的Fourier变换。
+
+可见对无界区间上的问题，分离变量法依然适用，只是特征值是连续分布的。
+\subsection{Laplace变换}
+\begin{definition}{Laplace变换}{Laplace Transformation}
+	定义Laplace变换
+	\[\bar f(\xi)=\cl f(\xi):=\int\zti f(x)\e{-\xi x}\d x,\quad\Re\xi>\sigma_0.\]
+	
+	其逆变换
+	\[f(x)=\cli{\bar f(\xi)}=\frac1{2\pi\i}\int_{\sigma-\i\infty}^{\sigma+\i\infty}\bar f(\xi)\e{\xi x}\d\xi,\quad x\geqslant 0.\]
+\end{definition}
+注意Laplace变换存在条件需要$\exists M,\sigma_0$使得
+	\[\abs{f(x)}<M\e{\sigma_0x},\quad\forall x>0.\]
+	% $x$为$f$连续点处
+% 再看Laplace逆变换$\cli{\bar f(\xi)}\to f(x)$。
+% \begin{theorem}{Riemann-Mellin反演公式}{Riemann-Mellin Inversion Formula}
+其逆变换中$\sigma>\sigma_0$；注意，Laplace变换的积分中本身不包含$\RR_{<0}$的部分，一般认为$f(<0)\equiv 0$。
+\begin{theorem}{第一展开定理}{}
+	设$F(\xi)$在$\infty$邻域内有Laurent展开式
+	\[F(\xi)=\sum\fmto n1\frac{c_n}{\xi^n},\]
+	则
+	\[f(x)=\cli{F(\xi)}=\sum\fmto n1\frac{c_n}{(n-1)!}x^{n-1},\quad x\geqslant 0\]
+\end{theorem}
+\begin{theorem}{第二展开定理}{}
+	设$F(\xi)=A(\xi)/B(\xi)$是有理函数，$\deg A<\deg B$，$B(\xi)$只有单零点$\xi_1,\xi_2,\ldots,\xi_n$且是$F(\xi)$的单极点，则
+	\[f(x)=\cli{F(\xi)}=\sum\fmto[n]k1\frac{A(\xi_k)}{B'(\xi_k)}\e{\xi_kx}=\sum\fmto[n]k1\Res\fkh{F(\xi)\e{\xi x},\xi_k}.\]
+\tcblower
+	若$F(\xi)$满足
+	\begin{compactenum}
+		\item 在$\CC$上除了有限个奇点$\xi_1,\xi_2,\ldots,\xi_n$外解析；
+		\item 在半平面$\Re\xi>\sigma_0$上解析；
+		\item $\exists M>0,\;R>0$使得当$\abs\xi>R$时
+		\[\abs{F(\xi)}\leqslant\frac M{\abs\xi},\]
+	\end{compactenum}
+	则对于$x\geqslant 0$有
+	\[f(x)=\cli{F(\xi)}=\sum\fmto[n]k1\Res\fkh{F(\xi)\e{\xi x},\xi_k}.\]
+\end{theorem}
+\subsubsection{Laplace定理的应用}
+\eg[1] 有限杆热传导
+\begin{align*}
+	\begin{cases}
+		u_t=u_{xx},&x\in(0,L),\;t>0,     \\
+		u_x(0,t)=0,\quad u(L,t)=A, \\
+		u(x,0)=B.
+	\end{cases}
+\end{align*}
+关于$t$作Laplace变换，记$U(x,s)=\cl{u(x,t)}(s)$
+\[s U(x,s)-u(x,0)=U_{xx}(x,s),\]
+由$u(x,0)=B$，
+\[U(x,s)=c_1\cosh\sqrt s x+c_2\sinh\sqrt s x+\frac Bs.\]
+再由$U_x(0,s)=0,\;U(L,s)=A/s$
+\[U(x,s)=\frac{(A-B)\cosh\sqrt s x}{s\cosh\sqrt s L}+\frac Bs.\]
+逆变换
+\begin{align*}
+	u(x,t)&=\cli{\frac{(A-B)\cosh\sqrt s x}{s\cosh\sqrt s L}}(t)+\cli{\frac Bs}(t)\\
+	&=(A-B)\cli{\frac{\cosh\sqrt s x}{s\cosh\sqrt s L}}(t)+B.
+\end{align*}
+括号内函数的孤立奇点\footnote{注意，0不是此函数的孤立奇点，不能应用留数算出。逆变换结果中的1是围道积出来的。详情可见附录}应使得$\cosh\sqrt s L=0$
+\[s_n=-\fkh{\frac{(2n-1)\pi}{2L}}^2,\quad n=1,2,\ldots\]
+由
+\begin{align*}
+	u(x,t)&=B+(A-B)\hkh{1+\sum\fmto n1\Res\fkh{\frac{\cosh\sqrt s x}{s\cosh\sqrt s L}\e{s t},s_n}}\\
+	&=A+\frac{4(A-B)}\pi\sum\fmto n1\frac{(-1)^n}{2n-1}\cos\fkh{\frac{(2n-1)\pi}{2L}x}\exp\fkh{-\frac{(2n-1)^2\pi^2}{4L^2}t}.
+\end{align*}
+\eg[2] 有限长弦受迫振动
+\begin{align*}
+	\begin{cases}
+		u_{tt}=a^2u_{xx},&x\in(0,L),\;t>0\\
+		u(0,t)=0,\quad u_t(L,t)=A\sin\omega t\\
+		u(x,0)=u_t(x,0)=0
+	\end{cases}
+\end{align*}
+关于$t$作Laplace变换，记$U(x,s)=\cl{u(x,t)}(s)$
+\[s^2U(x,s)-s u(x,0)-u_t(x,0)=a^2U_{xx}(x,s).\]
+结合$U_x(L,s)=A\omega/(s^2+\omega^2)$
+\[U(x,s)=\frac{Aa\omega}{s(s^2+\omega^2)}\sinh\frac{xs}a\sech\frac{Ls}a.\]
+其所有的孤立奇点：可去奇点0；一级奇点$\pm\i\omega_k$，
+\[\omega_k:=\begin{cases}
+	\omega,&k=0\\
+	\frac{2k-1}{2L}\pi a,&k\geqslant 1
+\end{cases}\]
+故
+\begin{align*}
+	u(x,t)&=\sum\fmto k0\Res[U(x,s)\e{st},\i\omega_k]+\Res[U(x,s)\e{st},-\i\omega_k]\\
+	&=2\Re\sum\fmto k0\Res[U(x,s)\e{st},\i\omega_k]\\
+	&=2\Re\fkh{\frac{Aa\omega}{s(s+\i\omega)}\sinh\frac{xs}a\sech\frac{Ls}a\e{st}}_{\i\omega}+\\
+	&\qquad 2\Re\sum\fmto k1\fkh{\frac{Aa\omega}{s(s^2+\omega^2)}\sinh\frac{xs}a\cdot\frac aL\csch\frac{Ls}a\e{st}}_{\i\omega_k}\\
+	&=\frac{Aa}\omega\sinh\frac{\omega x}a\sec\frac{\omega L}a\sin\omega t+\\
+	&\qquad 16Aa\omega^2L\sum\fmto k1\frac{(-1)^{k-1}}{(2k-1)[4\omega^2L^2-(2k-1)^2\pi^2a^2]}\sin\frac{\omega_kx}a\sin\omega_kt.
+\end{align*}
+\clearpage
+\section{基本解方法}
+\subsection{广义函数}
+\paragraph*{$\delta$函数}
+源于物理中对集中分布物理量的数学描述。满足
+\[\int_a^bf(x)\delta(x)\d x=\begin{cases}
+    f(x),&0\in(a,b)\\
+    0,&0\notin(a,b)
+\end{cases}\]
+因此$f\ast\delta(\xi)=f(\xi)$。
+
+\begin{theorem}{$\delta$复合函数}{}
+	设$u(x)\in\sC(\RR)$且在实轴上只有单零点$x_1,x_2,\ldots,x_n$，则 
+	\begin{align}
+		\delta(u(x))=\sum\fmto[n]k1\frac{\vd(x-x_k)}{\abs{u'(x_k)}}.
+	\end{align}
+\end{theorem}
+比如$\delta(ax)=\delta(x)/a$。
+\paragraph*{广义函数}\hspace{4ex}
+\begin{definition}{线性泛函}{Linear Functional}
+	函数空间$\mathscr V$到数域$\mathbb F$的映射$\mathcal T$，若
+	\[\mathcal T(au+bv)=a\mathcal Tu+b\mathcal Tv\]
+	$\forall a,b\in\mathbb F,\;u,v\in\mathscr V$均成立，则$\mathcal T$是$\mathscr V$上的线性泛函，即广义函数。$\mathscr V$上所有线性泛函构成一个线性空间，称作$\mathscr V$的对偶空间$\mathscr V^*$。
+\end{definition}
+\eg 记实函数$f$的支撑集
+\begin{align}
+	\supp f:=\set x{f(x)\neq 0}.
+\end{align}
+并记
+\[\mathscr L_0(\RR):=\set f{\int\iti\abs{f(x)}\d x<\infty,\;\supp f\,\text{有界}}\]
+则$\forall f\in\mathscr L_0(\RR)$，$f$确定了$\sC(\RR)$上一个线性泛函：
+\begin{align}
+	\mathcal T_f\zkh{\varphi(x)}\equiv\inp f\varphi:=\int\iti f(x)\varphi(x)\d x\in\RR.
+\end{align}
+\paragraph*{广义函数的导数}定义函数空间
+\begin{align}
+	\Cooo(\RR)\equiv\sC_0^\infty(\RR):=\set f{f\in\sC^\infty(\RR),\;\supp f\,\text{有界}}
+\end{align}
+广义函数$f\in\Cooo^\ast(\RR)$，定义其$n$阶导数 
+\begin{align}
+	\inp{f^{(n)}}\varphi:=(-1)^n\inp f{\varphi^{(n)}},\quad\forall\varphi\in\Cooo(\RR).
+\end{align}
+特别的 
+\[\int\iti\delta^{(n)}(x)\varphi(x)\d x=(-1)^n\varphi^{(n)}(0).\]
+
+泛函意义下，任意一个广义函数都是无穷阶可导的。
+\paragraph*{广义函数的卷积}
+给定$f,g\in\Cooo^*(\RR)$的卷积$f\ast g(x)$也是广义函数
+\begin{align}
+	\inp {f\ast g}\varphi:=\Bigl\langle f(x),\bigl\langle g(y),\varphi(x+y)\bigr\rangle\Bigr\rangle.
+\end{align}
+一般的，对常系数微分算子$\Dif$
+\[\Dif(f\ast g)=\Dif f\ast g=f\ast\Dif g.\]
+\paragraph*{广义函数的Fourier变换}
+速降函数空间$\Schwsp(\RR)\subset\sC^\infty(\RR)$，%$\forall\varphi\in\Schwsp(\RR)$，有
+\begin{align}
+	\Schwsp(\RR):=\set\varphi{\lim_{x\to\infty}x^m\varphi^{(n)}(x)=0,\quad\forall m,n\in\ZZ^+}.
+\end{align}
+比如$\varphi(x)=p(x)\e{-ax^2}$，$p(x)$是多项式，$a>0$，则$\varphi(x)\in\Schwsp(\RR)$。
+
+给定广义函数$f\in\Schwsp^*$，$f$的Fourier变换及其逆变换也是广义函数，定义为
+\begin{align}
+	\begin{aligned}
+		\inp{\cf f}\varphi&=\inp f{\cf\varphi}\\
+		\inp{\cfi f}\varphi&=\inp f{\cfi\varphi}
+	\end{aligned},\quad\forall\varphi\in\Schwsp.
+\end{align}
+Fourier变换作用转移到基本函数上，它们保持着经典意义下的基本性质。
+\paragraph*{广义函数序列的收敛性}
+设广义函数列$\{f_i\}$及广义函数$f$，若对基本函数空间的$\varphi$都有
+\[\lim_{n\to\infty}\inp{f_n}\varphi=\inp f\varphi.\]
+则称$f_n$弱收敛到$f$，本笔记记作$\lim_{n\to\infty}f_n(x)\circeq f(x)$。
+
+\begin{theorem}{}{}
+	若基本函数空间为$\Schwsp$，则
+	\[\lim_{n\to\infty}f_n(x)\circeq f(x)\ifnf\lim_{n\to\infty}f_n'(x)\circeq f'(x).\]
+\end{theorem}
+\paragraph*{高维广义函数}与一维类似，函数空间
+\begin{gather*}
+	\Cooo(\RR^n)\equiv\sC_0^\infty(\RR^n):=\set f{f\in\sC^\infty(\RR^n),\;\supp f\,\text{有界}},\\
+	\Schwsp(\RR^n):=\set\varphi{\lim_{\abs X\to\infty}\abs X^m\frac{\p^k\varphi(X)}{\p x_1^{k_1}\cdots\p x_n^{k_n}}=0,\quad\forall m,k\in\ZZ^+}
+\end{gather*}
+对函数空间$\mathscr V$上的线性泛函$f$
+\[\inp f\varphi=\int_{\RR^n}f(X)\varphi(X)\d X,\quad\forall\varphi\in\mathscr V\]
+构成$\mathscr V^\ast$。
+
+广义函数$f\in\Cooo^\ast(\RR^n)$的偏导数定义为
+\[\inp{\frac{\p^kf}{\p x_1^{k_1}\cdots\p x_n^{k_n}}}\varphi:=(-1)^k\inp f{\frac{\p^k\varphi}{\p x_1^{k_1}\cdots\p x_n^{k_n}}}\]
+特别的，$f=\delta$时
+\[\inp{\frac{\p^k\delta}{\p x_1^{k_1}\cdots\p x_n^{k_n}}}\varphi=(-1)^k\frac{\p^k\varphi(\mathbf 0)}{\p x_1^{k_1}\cdots\p x_n^{k_n}}.\]
+\begin{example}{}{}
+	可以证明
+	\begin{align}
+		\delta(x_1,\ldots,x_n)=\begin{cases}
+			\frac1{2\pi}\lap_2\ln r,&n=2\\
+			-\frac1{(n-2)S_{n}}\lap_n\frac1{r^{n-2}},&n\geqslant 3
+		\end{cases}
+	\end{align}
+	其中$r=\abs{\bm x}$，$S_n$为$n$维单位球的表面积。特别的，$S_3=4\pi$。
+\end{example}
+
+广义函数的卷积
+\[\inp {f\ast g}\varphi:=\Bigl\langle f(X),\bigl\langle g(Y),\varphi(X+Y)\bigr\rangle\Bigr\rangle.\]
+
+\subsection{\textit{Pu} = 0型方程的基本解} % {$\$}
+讨论用基本解方法求解方程
+\[\Par u(M)=f(M),\quad M\in\RR^n,\]
+其中，$\Par$是常系数线性偏微分算子。
+
+视$f,u$为广义函数，它们在广义函数空间里可以自由地进行各种运算和交换。通过这种方式得到的解叫广义函数解，简称作\textbf{广义解}。如果解是一个正则广义函数，甚至还有足够的光滑性，那么这种解是经典解。
+\begin{definition}{$\Par u=0$型方程的基本解}{Basic Solution of Pu=0}
+	方程
+	\begin{align}
+		\Par U(M)=\vd(M)
+	\end{align}
+	的解$U(M)$称作$\Par u=0$型方程的基本解。
+\end{definition}
+对一般的函数$f$，其对应的解是一般的源所产生的物理场。故基本解也叫点源函数。
+
+若$\Par u=0$型方程有基本解$U(M)$，令
+\begin{align}
+	u(M):=U\ast f(M)=\int U(M-N)f(N)\d N.
+\end{align}
+由积分叠加原理
+\[\Par u(M)=\int\Par U(M-N)f(N)\d N=\int\delta(M-N)f(N)\d N=f(M).\]
+即$u$满足方程$\Par u=f$。
+\eg[1] 求方程
+\[y'+ay=f(x),\quad a>0\]
+的基本解。
+
+基本解$U$满足$U'+aU=\delta(x)$，即
+\[\dd x(U\e{ax})=\vd(x)\e{ax}=\delta(x),\thus U(x)=\Heaviside(x)\e{-ax}.\]
+因此原方程的解
+\[y(x)=U\ast f(x)=\int\iti\Heaviside(\xi)\e{-a\xi}f(x-\xi)\d\xi=\int_{-\infty}^xf(\xi)\e{-a(x-\xi)}\d\xi.\]
+\eg[2] 求3维Helmholtz方程
+\[\lap_3 u+cu=0\]
+的基本解。
+
+由于只有一个点源，方程具有对称性，可设方程有球对称基本解$U(r)$，
+当$r>0$时，$\delta(r)=0$，
+\[\frac1{r^2}\dd r\kh{r^2\dv Ur}+cU=\frac1r\fkh{\dd[2]r(rU)+crU}=0,\]
+
+当$c=0$时，化为Laplace方程
+\[(rU)''=0,\thus U(r)=\frac Ar+\cancel{B}.\]
+记$B_r$为半径为$r$的球内部分，则
+\[\int_{B_r}\lap U\d V=\int_{B_r}\delta(x,y,z)\d V=1.\]
+由Green公式
+\[\int_{B_r}\lap U\d V=\oint_{\p B_r}\pv Un\d S=-\frac A{r^2}\cdot 4\pi r^2=1,\thus U(r)=-\frac1{4\pi r}.\]
+
+当$c<0$时，记$k:=\sqrt{-c}$
+\[(rU)''-k^2rU=0,\thus U=A\frac{\e{-kr}}r+B\frac{\e{kr}}r.\]
+由积分条件
+\[\int_{B_r}\lap U-k^2U\d V=\oint_{\p B_r}\pv Un\d S-k^2\int_{B_r}U\d V=1,\]
+且
+\begin{align*}
+	&\quad\oint_{\p B_r}\kh{\pp\rho\frac{\e{k\rho}}\rho}_rr^2\sin\theta\d\theta\nd\phi-k^2\int_{B_r}\frac{\e{k\rho}}\rho\rho^2\sin\theta\d\rho\nd\theta\nd\phi\\
+	&=4\pi(kr-1)\e{kr}-4\pi\fkh{(k\rho-1)\e{k\rho}}_0^r=-4\pi.
+\end{align*}
+故$-4\pi(A+B)=1$，即
+\[U(r)=-\frac{\e{-kr}}{4\pi r},\;-\frac{\e{kr}}{4\pi r}.\]
+
+当$c>0$时，记$k:=\sqrt c$
+\[U=A\frac{\cos kr}r+B\cancel{\frac{\sin kr}r}.\]
+$\sin kr/r$在$\CC$上是整函数，无奇异性，不能作为基本解。
+积分$-4\pi A=1$
+\[U(r)=-\frac{\cos kr}{4\pi r}.\]
+\subsection{Possion方程Green函数法}
+首先引入Green公式。
+\begin{theorem}{Green公式}{Green Formula}
+	设非空有界开集$\Omega\subset\RR^n(n\geqslant 2)$满足边界$\p\Omega$光滑，则
+	
+	$\forall u,v\in\sC^2(\Omega)\cap\sC(\bar\Omega)$，有
+	\begin{gather}\label{Green's 1st formula}
+		\int_\Omega v\lap u\d V=\oint_{\p\Omega}v\pv u{\bm n}\d S-\int_\Omega\nabla v\cdot\nabla u\d V;\\\label{Green's 2nd formula}
+		\int_\Omega u\lap v-v\lap u\d V=\oint_{\p\Omega}u\pv v{\bm n}-v\pv u{\bm n}\d S.
+	\end{gather}
+	%其中$\p u/\p\bm n=\nabla u\cdot\bm n$。
+\end{theorem}
+\prf 由散度定理
+\begin{align}
+	\int_\Omega\nabla\cdot\bm A\d V=\oint_{\p\Omega}\bm A\cdot\bm n\d S,
+\end{align}
+取$\bm A=v\nabla u$，
+可得式(\ref{Green's 1st formula})：
+\[\oint_{\p\Omega}v\pv u{\bm n}\d S\equiv\oint_{\p\Omega}v\nabla u\cdot\bm n\d S=\int_\Omega\div(v\nabla u)\d V=\int_\Omega\nabla v\cdot\nabla u+v\nabla^2u\d V.\]
+将$u,v$互换位置并与原式相减，即得式(\ref{Green's 2nd formula})。\qed
+\paragraph*{Poisson方程第I边值问题}
+\begin{align}
+	\begin{cases}
+		\lap u=-f(M),&M\in V\subseteq\RR^3\\
+		\edg u_{\p V}=\varphi(M),
+	\end{cases}
+\end{align}
+物理上看，这是静电场的基本问题：空间区域$V$内有电荷体密度$\rho=-\varepsilon f$，边界上电位已知为$\varphi$，求$V$内电位$u$。
+
+由叠加原理，$u=v+w$，$v,w$分别满足
+\begin{align*}
+	\begin{cases}
+		\lap v=-f(M),\\
+		\edg v_{\p V}=0,
+	\end{cases}\quad
+	\begin{cases}
+		\lap w=0,\\
+		\edg w_{\p V}=\varphi(M),
+	\end{cases}
+\end{align*}
+其中$v$表示在边界接地条件下体内电荷产生的电场，$w$表示由边界约束引起的电场。
+\begin{definition}{Poisson第I边值问题的Green函数}{}
+	定解问题
+	\begin{align}
+		\begin{cases}
+			\lap G(M;N)=-\vd(M-N),\\
+			\edg G_{\p V}=0.
+		\end{cases}
+	\end{align}
+	的解$G(M;N)$称为Poisson第I边值问题的Green函数。
+\end{definition}
+物理上看，Green函数就是边界接地条件下，置于$V$内$N$点电荷为$+\varepsilon$的点源在$V$内$M$点产生的电场，仍然是一个基本解。
+\begin{align}
+	u(M)=\int_Vf(N)G(M;N)\d N-\oint_{\p V}\varphi(N)\pv Gn\d S.
+\end{align}
+\prf 
+\begin{align*}
+	u(M)&=\int_Vu(N)\vd(M-N)\d N=-\int_Vu(N)\,\D G(M;N)\d N\\
+	&=-\int_V u\,\D G\d N+\int_VG\,\D u\d N-\int_VG\,\underline{\D u}\d N\tag{Green-II}\\
+	&=\oint_{\p V}\cancel{G}\pv un-\underline{u}\pv Gn\d S+\int_VG f\d N\\
+	&=-\oint_{\p V}\psi\pv Gn\d S+\int_VGf\d N.\rqed
+\end{align*}
+Fourier方法是求Green函数的基本方法，但对于一些特殊的区域，可以采用一些特殊方法，如镜像法。
+
+\subparagraph*{镜像法}分解$G=U+g$，$U$满足$\lap U=-\vd(M-N)$，可取
+\begin{align*}
+	U=\begin{cases}
+		-\frac1{2\pi}\ln r,&n=2\\[1ex]
+		\frac1{4\pi r},&n= 3
+	\end{cases}
+\end{align*}
+%其中$r$是$M,N$间距离。
+而$g$满足 
+\[\begin{cases}
+	\lap g=0,\\
+	\edg g_{\p V}=-U,
+\end{cases}\]
+是$N$的点电荷在边界上的感应电荷产生的电场。
+
+区域外的点源在$V$内产生的电场满足Laplace方程，可以将边界感应电荷产生的电场$g$看作区域\accentd{外}某些虚设电荷产生的等效电场，这种来源于物理效应的方法叫镜像法。% 它的关键困难在于如何在区域外合适地虚设电荷，对应某些特殊的区域如半空间、球域等等，可以用较直观的方法找到。
+
+\eg[1] 求上半空间Poisson方程第I边值问题的Green函数
+
+$V$内$N(\xi,\eta,\zeta)$点的正电荷$\varepsilon$在空间$(x,y,z)$产生的电场为
+\[U_0=\frac1{4\pi r}=\frac1{4\pi\sqrt{(x-\xi)^2+(y-\eta)^2+(z-\zeta)^2}},\]
+可虚设电荷$-\varepsilon$于$N$关于$z=0$平面对称的点$M_1(\xi,\eta,-\zeta)$，产生的电场
+\[U_1=\frac{-1}{4\pi\sqrt{(x-\xi)^2+(y-\eta)^2+(z+\zeta)^2}},\]
+在边界上$\edg{U_0}_{z=0}=-\edg{U_1}_{z=0}$
+{\small\[G=\frac1{4\pi}\fkh{\frac1{\sqrt{(x-\xi)^2+(y-\eta)^2+(z-\zeta)^2}}-\frac1{\sqrt{(x-\xi)^2+(y-\eta)^2+(z+\zeta)^2}}}\]}
+边界方向导数
+\[\edg{\pv Gn}_{\zeta=0}=\edg{-\pv G\zeta}_{\zeta=0}=\frac{-z}{2\pi\fkh{(x-\xi)^2+(y-\eta)^2+z^2}^{3/2}}\]
+故对于上半空间Dirichlet问题
+\[\begin{cases}
+	\lap u=0,&z>0\\
+	\edg u_{z=0}=\varphi(x,y)
+\end{cases}\]
+解的Poisson公式
+\[u(x,y,z)=\frac z{2\pi}\int_{\RR^2}\frac{\varphi(\xi,\eta)\d\xi\nd\eta}{\fkh{(x-\xi)^2+(y-\eta)^2+z^2}^{3/2}}\]
+
+二维情况
+\[G=\frac1{4\pi}\ln\frac{(x-\xi)^2+(y+\eta)^2}{(x-\xi)^2+(y-\eta)^2},\quad u(x,y)=\frac y\pi\int\iti\frac{\varphi(\xi)\d\xi}{(x-\xi)^2+y^2}\]
+\eg[2] 求半径为$R$的球域内Poisson方程第I边值问题的Green函数
+\begin{gather*}
+	\begin{cases}
+		\lap_3G(M;N)=-\vd(M-N),&0\leqslant r<R\\
+		\edg G_{r=R}=0
+	\end{cases}\\
+	\thus \edg{\pv Gn}_{\rho=R}=\frac{R^2-r^2}{4\pi R(R^2+r^2-2Rr\cos\psi)^{3/2}}.
+\end{gather*}
+故球内Dirichlet问题，解的Poisson形式
+\begin{gather*}
+	\begin{cases}
+		\lap_3u=0,&0\leqslant r<R\\
+		\edg u_{r=R}=\varphi(\theta,\phi)
+	\end{cases}\\
+	\thus u(r,\theta,\phi)=\frac1{4\pi R}\oint_{S_R}\frac{(R^2-r^2)\varphi(\theta_0,\phi_0)\d S_0}{(R^2+r^2-2Rr\cos\psi)^{3/2}}.
+\end{gather*}
+\subparagraph*{Fourier法}
+Fourier法是求Green函数的基本方法，主要思想是按照特征函数作广义Fourier展开，包括分离变量与积分变换。
+\eg[1] 求矩形区域$\Omega=[0,L]\times[0,M]$上第I类边值Poisson方程的Green函数
+\begin{align*}
+	\begin{cases}
+		\lap_2G(x,y;\xi,\eta)=-\vd(x-\xi,y-\eta),&x,\xi\in[0,L];\;y,\eta\in[0,M]\\
+		G(0,y)=G(L,y)=G(x,0)=G(x,M)=0,
+	\end{cases}
+\end{align*}
+有特征值 
+\[G(x,y)=\sum_{m,n}C_{mn}\sin\frac{m\pi x}L\sin\frac{n\pi y}M.\]
+系数 
+{\small\begin{align*}
+	\fkh{\kh{\frac{m\pi}L}^2+\kh{\frac{n\pi}M}^2}C_{mn}&=\frac4{LM}\int_0^M\bs3\int_0^L\vd(x-\xi,y-\eta)\sin\frac{m\pi x}L\sin\frac{n\pi y}M\d x\nd y\\
+	&=\frac4{LM}\sin\frac{m\pi\xi}L\sin\frac{n\pi\eta}M.
+\end{align*}}
+后略。
+\eg[2] 求解 
+\begin{align*}
+	\begin{cases}
+		\lap_2u=0,& x>0,y\in[0,a]\\
+		u(x,0)=\varphi(x),\enspace u(x,a)=\psi(x),\\
+		u(0,y)=0,
+	\end{cases}
+\end{align*}
+有
+\begin{align*}
+	u(x,y)&=-\fkh{\int\zti\varphi(\xi)\edg{\pv Gn}_{\eta=0}\d\xi+\int\zti\psi(\xi)\edg{\pv Gn}_{\eta=a}\d\xi}\\
+	&=\int\zti\varphi(\xi)\edg{\pv G\eta}_{\eta=0}\d\xi-\int\zti\psi(\xi)\edg{\pv G\eta}_{\eta=a}\d\xi
+\end{align*}
+进而
+\begin{align*}
+	\pv G\eta&=\sum_{n=1}^\infty4n\int\zti\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2+a^2\omega^2}\d\omega\cdot\cos\frac{n\pi\eta}a\cos\frac{n\pi y}a;\\
+	u(x,y)&=\sum_{n=1}^\infty4n\int\zti\bs5\int\zti\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2+a^2\omega^2}\fkh{\varphi(\xi)-(-1)^n\psi(\xi)}\d\omega\nd\xi\cdot\cos\frac{n\pi y}a.
+\end{align*}
+\paragraph*{$^\ast$Poisson方程第II, III边值问题}
+\begin{align}
+	\begin{cases}
+		\lap u=-f(M),&M\in V\subseteq\RR^n\\
+		\kh{\alpha u+\beta\pv un}_{\p V}=\varphi(M),&\alpha,\beta\neq 0.
+	\end{cases}
+\end{align}
+相应的Green函数
+\begin{align*}
+	\begin{cases}
+		\lap G=-\vd(M-N),&M,N\in V\subseteq\RR^n\\
+		\kh{\alpha G+\beta\pv Gn}_{\p V}=0,&\alpha,\beta\neq 0.
+	\end{cases}
+\end{align*}
+原问题的解
+\begin{align}
+	u(M)&=\int_Vf(N)G(M;N)\d N+\frac1\beta\oint_{\p V}\varphi(N)G(M;N)\d S\\
+	&=\int_Vf(N)G(M;N)\d N-\frac1\alpha\oint_{\p V}\varphi(N)\pv Gn\d S
+\end{align}
+$\beta=0$即第I边值问题。$\alpha=0$即第II边值问题，但此时表示内部有热源而边界绝热的稳恒温度场，这是不可能的，因此需要修正为
+\begin{align*}
+	\begin{cases}
+		\lap G=-\vd(M-N)+\frac1v,\\
+		\edg{\pv Gn}_{\p V}=0,
+	\end{cases}\enspace\text{或}\quad
+	\begin{cases}
+		\lap G=-\vd(M-N),\\
+		\edg{\pv Gn}_{\p V}=-\frac1s,
+	\end{cases}
+\end{align*}
+其中$v,s$为$V$的体积和表面积。有解
+\begin{align}
+	u(M)=\int_Vf(N)G(M;N)\d N+\oint_{\p V}\varphi(N)G(M;N)\d S+\cns.
+\end{align}
+相容性条件
+\begin{align}
+	\int_Vf(M)\d M+\oint_{\p V}\varphi(M)\d S=0.
+\end{align}
+\subsection{初值问题的基本解方法}
+本节主要用基本解方法来求解发展方程，如$u_t=\Par u$型方程
+\begin{align}
+	\begin{cases}
+		u_t=\Par u+f(M,t),&M\in\RR^n,t>0\\
+		u(M,0)=\varphi(M).
+	\end{cases}
+\end{align}
+这里所涉及的$\Par$是关于空间变量$M$的常系数线性偏微分算子。
+
+\begin{definition}{$u_t=\Par u$型方程初值问题的基本解}{Basic Solution of ut=Pu}
+	基本解$U(M,t)$满足
+	\begin{align}
+		\begin{cases}
+			U_t=\Par U,&M\in\RR^n,t>0\\
+			U(M,0)=\vd(M).
+		\end{cases}
+	\end{align}
+\end{definition}
+有
+\begin{align}
+	u(M,t)=U(M,t)\ast\varphi(M)+\int_0^tU(M,t-\tau)\ast f(M,\tau)\d\tau.
+\end{align}
+证明过程略。
+
+以及$u_{tt}=\Par u$型方程
+\begin{align}
+	\begin{cases}
+		u_{tt}=\Par u+f(M,t),&M\in\RR^n,t>0\\
+		u(M,0)=\varphi(M),\enspace u_t(M,0)=\psi(M).
+	\end{cases}
+\end{align}
+\begin{definition}{$u_{tt}=\Par u$型方程初值问题的基本解}{Basic Solution of utt=Pu}
+	基本解$U(M,t)$满足
+	\begin{align}
+		\begin{cases}
+			U_{tt}=\Par U,&M\in\RR^n,t>0\\
+			U(M,0)=0,\enspace U_t(M,0)=\vd(M).
+		\end{cases}
+	\end{align}
+\end{definition}
+有
+\begin{align}
+	\begin{aligned}
+		u(M,t)=&\;U\ast\psi+\pp t(U\ast\varphi)+\int_0^tU(M,t-\tau)\ast f(M,\tau)\d\tau.
+	\end{aligned}
+\end{align}
+\paragraph*{*混合问题的Green函数}对于发展方程的混合问题通常用分离变量法或积分变换法求解，当然也可以用Green函数（点源函数）法。
+\eg 一维波动方程的混合问题
+\begin{align*}
+	\begin{cases}
+		u_{tt}=a^2u_{xx}+f(x,t),&x\in(0,L),\;t>0\\
+		u(0,t)=u(L,t)=0\\
+		u(x,0)=\varphi(x),\quad u_t(x,0)=\psi(x)
+	\end{cases}
+\end{align*}
+Green函数$G(x,t;\xi)$满足 
+\begin{align*}
+	\begin{cases}
+		G_{tt}=a^2G_{xx},&x,\xi\in(0,L),\;t>0\\
+		G(0,t)=G(L,t)=0\\
+		G(x,0)=0,\quad G_t(x,0)=\vd(x-\xi)
+	\end{cases}
+\end{align*}
+利用Fourier方法可得
+\[
+	G(x,t;\xi)=\sum\fmto n1\frac2{n\pi a}\sin\frac{n\pi\xi}L\sin\frac{n\pi x}L\sin\frac{n\pi at}L,
+\]
+进而解
+\begin{align}
+	u(x,t)=\int_0^L\psi(\xi)G\d\xi+\pp t\int_0^L\varphi(\xi)G\d\xi+\int_0^t\bs4\int_0^L f(\xi,\tau)G(x,t-\tau;\xi)\d\xi\nd\tau
+\end{align}
+
+\input{Append.tex}
+\end{document}
