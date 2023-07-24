@@ -1,0 +1,207 @@
+\iffalse
+\clearpage
+\appendiks
+\section{典型分布}
+\subsection{离散分布}
+\paragraph{二项分布}$\Bern(n,p)$：$n$次独立Bernuoll实验中的成功次数$X$
+\begin{align}
+	\P(X=k)={n\choose k}p^k(1-p)^{n-k},\quad k=0,\ldots,n
+\end{align}
+\paragraph{Pascal分布}$\mathrm{Pa}(r,p)$：独立Bernuoll实验成功$r$次所需要的次数$X$
+\begin{align}
+	\P(X=k)={k-1\choose r-1}p^r(1-p)^{k-r},\quad k=r,r+1,\ldots
+\end{align}
+\paragraph{负二项分布}$\mathrm{NB}(r,p)$：独立Bernuoll实验成功$r$次前失败的次数$X$\footnote{显然，Pascal分布和负二项分布只相差一个常数$r$。负二项分布名称中负的来源是\begin{align}
+	{k+r-1\choose r-1}=(-)^k{-r\choose k}.
+\end{align}}
+\begin{align}
+	\P(X=k)={k+r-1\choose r-1}p^r(1-p)^k,\quad k=0,1,\ldots
+\end{align}
+\paragraph{几何分布}$\mathrm{Ge}(p)=\mathrm{Pa}(1,p)$
+\begin{align}
+	\P(X=k)=p(1-p)^{k-1},\quad k=1,2,\ldots
+\end{align}
+\paragraph{超几何分布}$\mathrm H(n,N,M)$：$N$件产品中有$M$件不合格品,从中不放回地随机抽取$n$件，则其中含有$X$件不合格品
+\begin{align}
+	\P(X=k)=\frac{{M\choose k}{N-M\choose n-k}}{{N\choose n}},\quad k=0,1,\ldots,\min(M,n).
+\end{align}
+\paragraph{负超几何分布}$\mathrm{NH}(r,N,M)$：直到取到$k$个，所需抽样次数$X$
+\begin{align}
+	\P(X=k)=\frac{{k-1\choose r-1}{N-k\choose M-r}}{{N\choose M}},\quad k=r,\ldots,r+n-M.
+\end{align}
+\paragraph{Poisson分布}$\Pois(\lambda)$：$\Bern(n,\lambda/n)$当$n\to\infty$的极限
+\begin{align}
+	\P(X=k)=\frac{\lambda^k}{k!}\e{-\lambda},\quad k=0,1,2,\ldots
+\end{align}
+\subsubsection{期望、方差}
+\begin{center}
+	\begin{tabular}{c|c|c}
+		\toprule
+		Distribution&$\E(X)$&$\Var(X)$\\
+		\midrule
+		$\Bern(n,p)$&$np$&$np(1-p)$\\
+		\midrule
+		$\mathrm{Pa}(r,p)$&$\frac rp$&$\frac rp\kh{\frac1p-1}$\\
+		\midrule
+		$\mathrm{Ge}(p)$&$\frac1p$&$\frac1p\kh{\frac1p-1}$\\
+		\midrule
+		$\mathrm H(n,N,M)$&$\frac{nM}N$&$\frac{n(N-n)M(N-M)}{N^2(N-1)}$\\
+		\midrule
+		$\mathrm{NH}(r,N,M)$&$\frac{r(N+1)}{M+1}$&$\frac{r(N+1)(N-M)(M-r+1)}{(M+1)^2(M+2)}$\\
+		\midrule
+		$\Pois(\lambda)$&$\lambda$&$\lambda$\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+\paragraph{二项分布}众数
+\begin{gather*}
+	\frac{\P(X=k)}{\P(X=k-1)}=\frac{{n\choose k}p}{{n\choose k-1}(1-p)}=\frac{n-k+1}{k}\frac p{1-p}>1,\\
+	\thus k<(n+1)p.
+\end{gather*}
+故
+\begin{align*}
+	\text{Mode}=\begin{cases}
+		n,&p>\frac{n}{n+1}\\
+		(n+1)p-1\text{~or~}(n+1)p,&(n+1)p\in\NN\\
+		\floor{(n+1)p},&(n+1)p\notin\NN
+	\end{cases}
+\end{align*}
+
+期望 
+\begin{align*}
+	\E(X)&=\sum_{k=0}^nk{n\choose k}p^k(1-p)^{n-k}\\
+	&=\sum_{k=1}^{n}n{n-1\choose k-1}p^k(1-p)^{n-k}=np.
+\end{align*}
+\paragraph{负二项分布}众数
+\begin{gather*}
+	\frac{\P(X=k)}{\P(X=k-1)}=\frac{k-1}{k-r}(1-p)>1,\\
+	\thus k<\frac{r-1}{p}-1.
+\end{gather*}
+故
+\begin{align*}
+	\text{Mode}=\begin{cases}
+		r,&p>\frac{r-1}{r+1}\\
+		(n+1)p-1\text{~or~}(n+1)p,&(n+1)p\in\NN\\
+		\floor{(n+1)p},&(n+1)p\notin\NN
+	\end{cases}
+\end{align*}
+\paragraph{几何分布}
+\paragraph{超几何分布}
+\paragraph{Poisson分布}
+\subsubsection{PGF, MGF和CF}
+\begin{center}
+	\begin{tabular}{c|c|c}
+		\toprule
+		Distribution&$\MGF(X)$&$\CF(X)$\\
+		\midrule
+		$\Bern(n,p)$&$(q+p\e t)^n$&$(q+p\e{\i t})^n$\\
+		\midrule
+		$\mathrm{NB}(r,p)$&$\kh{\frac p{q+p\e{t}}}^r$&$\kh{\frac p{q+p\e{\i t}}}^r$\\
+		\midrule
+		$\mathrm{Ge}(p)$&-&-\\
+		\midrule
+		$\mathrm H(n,N,M)$&-&-\\
+		\midrule
+		$\Pois(\lambda)$&$\e{\lambda(\e t-1)}$&$\e{\lambda(\e{\i t}-1)}$\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+\clearpage
+\subsection{连续分布}
+\paragraph{均匀分布}$\Unif(a,b)$
+\begin{align}
+	f(x)=\frac1{b-a},\quad x\in(a,b).
+\end{align}
+\paragraph{正态分布}$\Norm(\mu,\sigma^2)$
+\begin{align}
+	f(x)=\frac1{\sqrt{2\pi}\sigma}\exp\fkh{-\frac{(x-\mu)^2}{2\sigma^2}},\quad x\in\RR.
+\end{align}
+\paragraph{指数分布}$\Expo(\lambda)$
+\begin{align}
+	f(x)=\lambda\e{-\lambda x},\quad x>0.
+\end{align}
+\paragraph{Gamma分布}$\mathrm{Ga}(\alpha,\lambda)$
+\begin{align}
+	f(x)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\e{-\lambda x},\quad x>0.
+\end{align}
+其中$\alpha,\lambda>0$，Gamma函数
+\[
+	\Gamma(\alpha)=\int\zti x^{\alpha-1}\e{-x}\d x,
+\]
+特别的，$\Gamma(x+1)=x\Gamma(x),\,\Gamma(1)=1,\,\Gamma(1/2)=\sqrt\pi,\,\Gamma(n)=(n-1)!$，且
+\begin{gather*}
+	\mathrm{Ga}(1,\lambda)=\Expo(\lambda),\,\mathrm{Ga}(n/2,1/2)=\chi^2(n)\\
+	f(x;\alpha,\lambda)\d x=f(\lambda x;\alpha,1)\d\lambda x
+\end{gather*}
+\paragraph{卡方分布}$\chi^2(n)$
+\begin{align}
+	f(x)=\frac{x^{n/2-1}}{2^{n/2}\Gamma(n/2)}\e{-x/2},\quad x>0.
+\end{align}
+其中$n\in\mathbb N_+$，特别的，$\chi^2(1)$
+\[
+	f(x)=\frac1{\sqrt{2\pi x}}\e{-x/2},\quad\lim_{x\to 0^+}f(x)=+\infty.
+\]
+\paragraph{Beta分布}$\mathrm{Be}(a,b)$
+\begin{align}
+	f(x)=\frac1{\mathrm B(a,b)}x^{a-1}(1-x)^{b-1},\quad x\in(0,1).
+\end{align}
+其中$a,b>0$，Beta函数
+\[
+	\mathrm B(a,b)=\int_0^1x^{a-1}(1-x)^{b-1}\d x\equiv\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)},
+\]
+\paragraph{Cauchy分布}
+\begin{align}
+	f(x)=\frac1\pi\frac1{1+x^2},\quad x\in\RR
+\end{align}
+\paragraph{Landau分布}略
+\subsubsection{众数、期望、方差}
+\begin{center}
+	\begin{tabular}{c|c|c|c}
+		\toprule
+		Distribution&Mode&$\E(X)$&$\Var(X)$\\
+		\midrule
+		$\Unif(a,b)$&-&$\frac{a+b}2$&$\frac{(b-a)^2}{12}$\\
+		\midrule
+		$\Norm(\mu,\sigma^2)$&$\mu$&$\mu$&$\sigma^2$\\
+		\midrule
+		$\Expo(\lambda)$&0&$\frac1\lambda$&$\frac1\lambda$\\
+		\midrule
+		$\mathrm{Ga}(\alpha,\lambda)$&-&&\\
+		\midrule
+		$\Unif(a,b)$&-&&\\
+		\midrule
+		$\Unif(a,b)$&-&&\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+\section{简单随机抽样}
+总体$Y_1,\ldots,Y_N$均值和方差为$\mu,\sigma^2$，简单随机样本为$X_1,\ldots,X_n$。
+
+$A:=$样本中含有$Y_j$
+\[
+	\P(X_i=Y_j)=\P(X_i=Y_j|A)\P(A)+0=\frac1n\cdot\frac{{N-1\choose n-1}}{{N\choose n}}=\frac1N.
+\]
+故
+\begin{align*}
+	\E(X_i)&=\sum_{j=1}^N\P(X_i=Y_j)Y_j=\frac1N\sum_{j=1}^NY_j=\mu;\\
+	\Var(X_i)&=\sum_{j=1}^N\P(X_i=Y_j)\bigkh{Y_j-\E(Y_j)}^2=\sigma^2.\\
+	\E(\avg X)&=\frac1n\sum_{i=1}^n\E(X_i)=\mu.
+\end{align*}
+$B:=$样本中同时含有$Y_k,Y_\ell(k\neq\ell)$
+\[
+	\P(X_i=Y_k,X_j=Y_\ell)=\frac1{n(n-1)}\cdot\frac{{N-2\choose n-2}}{{N\choose n}}=\frac1{N(N-1)}.
+\]
+故
+\begin{align*}
+	\E(X_iX_j)&=\frac1{N(N-1)}\sum_{k=1}^N\sum_{\ell\neq k}Y_kY_\ell=\frac1{N(N-1)}\sum_{k=1}^NY_k(N\mu-Y_k)\\
+	&=\frac{N^2\mu^2-N(\sigma^2+\mu^2)}{N(N-1)}=\mu^2-\frac{\sigma^2}{N-1}.\\
+	\Cov(X_i,X_j)&=\E(X_iX_j)-\E(X_i)\E(X_j)=-\frac{\sigma^2}{N-1}.
+\end{align*}
+故
+\begin{align*}
+	\Var(\avg X)&=\frac1{n^2}\kh{\sum_{i=1}^n\Var(X_i)+\sum_{i\neq j}\Cov(X_i,X_j)}\\
+	&=\frac1{n^2}\kh{n\sigma^2-n(n-1)\cdot\frac{\sigma^2}{N-1}}=\frac{\sigma^2}n\frac{N-n}{N-1}.\\
+	\E(S^2)&=\frac n{n-1}\kh{\frac1n\sum_{i=1}^n\E(X_i^2)-\E(\avg X^2)}\\
+	&=\frac n{n-1}\fkh{\sigma^2+\mu^2-\kh{\frac{\sigma^2}n\frac{N-n}{N-1}+\mu^2}}=\frac{N\sigma^2}{N-1}.
+\end{align*}
+\fi
