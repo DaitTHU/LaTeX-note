@@ -7,13 +7,13 @@
 
 已收录本人的（排名并不按照学期顺序）：
 
-- 微积分A (2) [Calculus 2](Calculus 2)
-- 概率论与数理统计 [Probability and Statistics](Probability and Statistics)
-- 数学物理方法 [Methods of Mathematics and Physics](Methods of Mathematics and Physics)
-- 量子力学 [Quantum Mechanics](Quantum Mechanics)
-- 统计力学 [Statistical Mechanics](Statistical Mechanics)
-- 电动力学 [Electrodynamics](Electrodynamics)
-- 核辐射物理及探测学 [Nuclear Radiation Physics and Detection](Nuclear Radiation Physics and Detection)
+- 微积分A (2) Calculus 2
+- 概率论与数理统计 Probability and Statistics
+- 数学物理方法 Methods of Mathematics and Physics
+- 量子力学 Quantum Mechanics
+- 统计力学 Statistical Mechanics
+- 电动力学 Electrodynamics
+- 核辐射物理及探测学 Nuclear Radiation Physics and Detection
 
 ## hair.tex
 `hair.tex` 预设定了统一的笔记格式，在 `\input{hair.tex}` 之前，你还需要定义一些笔记性质相关的变量。
