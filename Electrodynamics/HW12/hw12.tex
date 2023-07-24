@@ -1,0 +1,158 @@
+\def\coursename{电动力学习题}
+\def\beginday{2023/3/25}
+%\def\endday{2022/12/18}
+
+\input{../../hair.tex}
+\input{../../head.tex}
+\defaultauthorfalse
+
+\newcommand{\er}{\varepsilon_\text r}
+
+\begin{document}
+%\maketitle
+\setcounter{section}{1}
+\section*{4.8}
+\paragraph{(a)}
+二维极坐标下Laplace方程的解为
+\begin{equation}
+    \Phi(\rho,\phi)=c_0+d_0\ln\rho+\sum\fmto n1(a_n\cos n\phi+b_n\sin n\phi)(c_n\rho^n+d_n\rho^{-n}),
+\end{equation}
+由对称性，$\Phi(\rho,-\phi)=\Phi(\rho,\phi)$，故所有的正弦项系数$b_n\equiv 0$，
+
+$\rho<a$时， 
+\begin{equation}
+    \Phi_1(\rho,\phi)=a_0+\sum\fmto n1a_n\rho^n\cos n\phi,
+\end{equation}
+$a<\rho<b$时， 
+\begin{equation}
+    \Phi_2(\rho,\phi)=b_0+c_0\ln\rho+\sum\fmto n1(b_n\rho^n+c_n\rho^{-n})\cos n\phi,
+\end{equation}
+$\rho>b$时，由$\rho\to\infty$时，$\Phi=-E_0\rho\cos\phi$
+\begin{equation}
+    \Phi_3(\rho,\phi)=-E_0\rho\cos\phi+\sum\fmto n1d_n\rho^{-n}\cos n\phi,
+\end{equation}
+
+$\rho=a,b$时边界条件
+\begin{align}
+    &\begin{cases}
+        -\varepsilon\edg{\pv{\Phi_2}\rho}_{\rho=a}=-\varepsilon_0\edg{\pv{\Phi_1}\rho}_{\rho=a}\\[2ex]
+        -\frac1a\edg{\pv{\Phi_2}\phi}_{\rho=a}=-\frac1a\edg{\pv{\Phi_1}\phi}_{\rho=a}
+    \end{cases}\\
+    &\begin{cases}
+        -\varepsilon\edg{\pv{\Phi_2}\rho}_{\rho=b}=-\varepsilon_0\edg{\pv{\Phi_3}\rho}_{\rho=b}\\[2ex]
+        -\frac1b\edg{\pv{\Phi_2}\phi}_{\rho=b}=-\frac1b\edg{\pv{\Phi_3}\phi}_{\rho=b}
+    \end{cases}
+\end{align}
+即
+{\footnotesize\begin{align}
+    \begin{cases}
+        \frac{c_0}a+\sum\fmto n1n(b_na^{n-1}-c_na^{-n-1})\cos n\phi=\frac{\varepsilon_0}\varepsilon\sum\fmto n1 na_na^{n-1}\cos n\phi\\
+        -\sum\fmto n1n(b_na^n+c_na^{-n})\sin n\phi=-\sum\fmto n1na_na^n\sin n\phi\\
+        \frac{c_0}b+\sum\fmto n1n(b_nb^{n-1}-c_nb^{-n-1})\cos n\phi=\frac{\varepsilon_0}\varepsilon\biggkh{-E_0\cos\phi-\sum\fmto n1 nd_nb^{-n-1}\cos n\phi}\\
+        -\sum\fmto n1n(b_nb^n+c_nb^{-n})\sin n\phi=E_0b\sin\phi-\sum\fmto n1nd_nb^{-n}\sin n\phi
+    \end{cases}
+\end{align}}
+可得$c_0=0$，以及
+\begin{equation}
+    \begin{bmatrix}
+        a^{2n}&-\er a^{2n}&\er\\
+        a^{2n}&-a^{2n}&-1\\
+        &\er b^{2n}&-\er&1\\
+        &b^{2n}&1&-1
+    \end{bmatrix}
+    \begin{bmatrix}
+        a_n\\b_n\\c_n\\d_n
+    \end{bmatrix}=
+    \begin{bmatrix}
+        0\\0\\-E_0b^2\vd_{1n}\\-E_0b^2\vd_{1n}
+    \end{bmatrix}
+\end{equation}
+因此，$n>1$时，$a_n,b_n,c_n,d_n\equiv 0$；$n=1$时， 
+\begin{equation}
+    \begin{cases}
+        a_1=-\frac{4\er E_0b^2}{(\er+1)^2b^2-(\er-1)^2a^2}\\[2ex]
+        b_1=-\frac{2(\er+1)E_0b^2}{(\er+1)^2b^2-(\er-1)^2a^2}\\[2ex]
+        c_1=-\frac{(\er-1)E_0a^2b^2}{(\er+1)^2b^2-(\er-1)^2a^2}\\[2ex]
+        d_1=\frac{(\er^2-1)E_0(b^2-a^2)b^2}{(\er+1)^2b^2-(\er-1)^2a^2}
+    \end{cases}
+\end{equation}
+从而由边界处连续性知$a_0=b_0=0$，
+\begin{equation}
+    \Phi=\begin{cases}
+        -\frac{4\er E_0b^2\rho\cos\phi}{(\er+1)^2b^2-(\er-1)^2a^2},&\rho<a\\[2ex]
+        -\frac{E_0b^2\bigfkh{2(\er+1)\rho+(\er-1)a^2/\rho}\cos\phi}{(\er+1)^2b^2-(\er-1)^2a^2},&a<\rho<b\\[2ex]
+        E_0\biggfkh{-\rho+\frac{(\er^2-1)(b^2-a^2)}{(\er+1)^2b^2-(\er-1)^2a^2}\frac{b^2}\rho}\cos\phi,&\rho>b
+    \end{cases}
+\end{equation}
+特别的，在空心圆柱内部$(\rho<a)$是匀强电场，
+\begin{equation}
+    E_1=\frac{4\er b^2}{(\er+1)^2b^2-(\er-1)^2a^2}E_0
+\end{equation}
+\paragraph{(b)}
+特别的，当$b=2a$时，化简为
+\begin{equation}
+    \Phi=\begin{cases}
+        -\frac{16\er E_0\rho\cos\phi}{3\er^2+10\er+3},&\rho<a\\[2ex]
+        -\frac{4E_0\bigfkh{2(\er+1)\rho+(\er-1)a^2/\rho}\cos\phi}{3\er^2+10\er+3},&a<\rho<2a\\[2ex]
+        E_0\biggfkh{-\rho+\frac{12(\er^2-1)}{3\er^2+10\er+3}\frac{a^2}\rho}\cos\phi,&\rho>2a
+    \end{cases}
+\end{equation}
+由MATLAB画出电力线如图
+\begin{center}
+    \includegraphics[width=8cm]{E.png}
+\end{center}
+\paragraph{(c)}
+$a\to0$对应实心圆柱，
+\begin{equation}
+    \Phi=\begin{cases}
+        -\frac{2E_0}{\er+1}\rho\cos\phi,&\rho<b\\[2ex]
+        E_0\biggkh{-\rho+\frac{\er-1}{\er+1}\frac{b^2}\rho}\cos\phi,&\rho>b
+    \end{cases}
+\end{equation}
+$b\to\infty$对应圆柱腔
+\begin{equation}
+    \Phi=\begin{cases}
+        -\frac{4\er E_0}{(\er+1)^2}\rho\cos\phi,&\rho<a\\[2ex]
+        -\frac{E_0\bigfkh{2(\er+1)\rho+(\er-1)a^2/\rho}\cos\phi}{(\er+1)^2},&\rho>a
+    \end{cases}
+\end{equation}
+\setcounter{section}{2}
+\section*{4.10}
+\paragraph{(a)}
+分析知，假设电场沿径向分量可满足边界条件，由唯一性定理，真空电场$\bm E_1$与介质电场$\bm E_2$均沿径向，故由Gauss定律，
+\begin{equation}
+    (D_1+D_2)\cdot 2\pi r^2=Q,\quad D_1=\varepsilon_0E_1,\enspace D_2=\varepsilon E_2,
+\end{equation}
+又边界处切向电场连续，故
+\begin{equation}
+    E_1=E_2,
+\end{equation}
+因此$\bm E_1=\bm E_2=:\bm E$
+\begin{equation}
+    \bm E=\frac{Q}{2\pi(\varepsilon+\varepsilon_0)}\frac{\bm r}{r^3}.
+\end{equation}
+\paragraph{(b)}
+内球内部无电场，$\bm E=\bm P=\bm D=\bm 0$，由
+\begin{equation}
+    \bm D\cdot\uvec n=\sigma,
+\end{equation}
+知，真空-真空内边界上电荷密度
+\begin{equation}
+    \sigma_1=D_1=\varepsilon_0E_1=\frac{\varepsilon_0}{\varepsilon+\varepsilon_0}\frac Q{2\pi r^2};
+\end{equation}
+电介质-真空内边界上电荷密度 
+\begin{equation}
+    \sigma_2=D_2=\varepsilon E_2=\frac\varepsilon{\varepsilon+\varepsilon_0}\frac Q{2\pi r^2}.
+\end{equation}
+\paragraph{(c)}
+由
+\begin{equation}
+    \bm P\cdot\uvec n=-\sigma_\text{pol},
+\end{equation}
+真空-真空内边界上，$\bm P_1=\bm 0$，没有极化电荷；
+
+电介质-真空内边界上极化电荷密度
+\begin{equation}
+    \sigma_\text{pol}=-P_2=-(D_2-\varepsilon_0E_2)=-\frac{\varepsilon-\varepsilon_0}{\varepsilon+\varepsilon_0}\frac Q{2\pi r^2}.
+\end{equation}
+\end{document}
