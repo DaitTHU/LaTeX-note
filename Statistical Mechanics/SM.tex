@@ -31,39 +31,15 @@
 \begin{document}
 \firstandforemost
 
-热力学和统计力学研究大量微观粒子组成的体系的宏观性质。
+统计力学研究大量微观粒子组成的体系的宏观性质。
 \part{热力学}
 \input{TD.tex}
 
 \clearpage
 \part{统计物理}
-统计物理是将宏观性质看作是对应微观量的统计平均的微观理论。单粒子的力学规律是决定论的，如量子力学的Schrödinger方程、经典力学中的正则方程或Newton II；而宏观系统的统计规律是非决定论的，用宏观量指定的宏观状态对应大量不同的微观状态．
+统计物理是将宏观性质看作是对应微观量的统计平均的微观理论。单粒子的力学规律是决定论的，如量子力学的Schrödinger方程、经典力学中的正则方程或Newton II；而宏观系统的统计规律是非决定论的，用宏观量指定的宏观状态对应大量不同的微观状态。
 \section{近独立粒子系统的统计分布}
-概率基本知识：概念、互斥事件几率的加法定理、独立事件几率的乘法定理、条件概率、多个随机变量的联合概率分布、统计平均值和涨落等。
-\begin{definition}{二项分布}{Binominal Distribution}
-	$N$次独立重复实验中事件发生$n$次概率
-	\[
-		P_N(n)=\binom Nnp^nq^{N-n}=\frac{N!}{n!(N-n)!}p^nq^{N-n}.
-	\]
-	其中$p$为事件发生的概率，$q=1-p.$
-\end{definition}
-\begin{definition}{Possion分布}{Possion Distribution}
-	当二项分布的$N\gg 1,p\ll 1$时，可近似为Possion分布
-	\[
-	P(n)=\e{-\avg n}\frac{\avg n^n}{n!}.
-	\]
-	Possion分布的期望和标准差均为$\avg n.$
-\end{definition}
-\begin{definition}{Gauss分布}{Gauss Distribution}
-	当二项分布的$N\gg 1,p\doteq q$时，可约化为Gauss分布
-	\[
-		P(n)=\frac1{\sqrt{2\pi\sigma^2}}\e{-(n-\avg n)^2/2\sigma^2}.
-	\]
-	对应Gauss积分
-	\[
-	\int\iti\e{-x^2}\d x=\sqrt\pi.
-\]
-\end{definition}
+概率基本知识：概念、互斥事件几率的加法定理、独立事件几率的乘法定理、条件概率、二项分布、Poisson分布、Gauss分布、多个随机变量的联合概率分布、统计平均值和涨落等。
 \subsection{近独立粒子系统}
 所谓近独立粒子，就是在平均意义下
 \begin{center}
@@ -77,28 +53,33 @@
 \begin{example}{一维无穷深势阱}{1-D Infinte Square Potential Well}
 	一维无穷深势阱能量本征值和简并度
 	\[
-	\varepsilon_n=\frac{n^2h^2}{8mL^2},\quad\omega_n=1\quad n=1,2,\ldots.
-\]
-	能级间能量差
+		\varepsilon_n=\frac{n^2h^2}{8mL^2},\quad\omega_n=1\quad n=1,2,\ldots.
+	\]
+	能级间能量差$\ll$室温下热运动能量($\kB T$)：
 	\[
-	\D\varepsilon=\kh{2n+1}\frac{h^2}{8mL^2}\sim\SI{e-36}\joule.
-\]
-	远小于热运动能量($\kB T$)，因此能量准连续．
+		\D\varepsilon=\kh{2n+1}\frac{h^2}{8mL^2}\sim\SI{e-36}\joule\ll\SI{0.025}\electronvolt.
+	\]
+	因此能量准连续。
 \end{example}
-粒子按量子态的一个分配方式，称为系统的一个微观状态；粒子按能级的一个分布称为系统的一个宏观状态．
-分布与自旋有关，分布与微观状态不同，一组分布对应大量不同微观状态．
-记$\hkh{a_i}$表示$a_i$个粒子处于能级$\varepsilon_i.$
-\begin{definition}{Boltzmann系统}{Boltzmann System}
-	定域系统如：固体晶格．粒子可以分辨，量子态容纳粒子数不受限制．
+微观状态：
+粒子按量子态的一个分配方式；
+宏观状态：
+粒子按能级的一个分布，%分布与微观状态不同，
+一组分布对应大量不同微观状态。
+%分布与自旋有关。
 
-	$N$粒子全排除去各能级内全排；$a_i$可占据$\omega_i$中任一态
+记分布$\hkh{a_i}$表示$a_i$个粒子处于能级$\varepsilon_i$，包含的微观状态数为$\Om$。
+\begin{definition}{Boltzmann系统}{Boltzmann System}
+	粒子可以分辨，量子态容纳粒子数不受限制。
+
+	$N$个粒子全排，除去各能级内全排，且能级内可占据$\omega_i$中任一态
 	\begin{align}
 		\Om=\frac{N!}{\prod a_i!}\prod\omega_i^{a_i}=N!\prod\frac{\omega_i^{a_i}}{a_i!}.
 	\end{align}
 \end{definition}
-
+一些定域系统(如固体晶格)便是Boltzmann系统。
 \begin{definition}{Bose系统}{Bose System}
-	Bose子：自旋量子数整数．不可分辨，量子态容纳粒子数不受限制．
+	粒子不可分辨，量子态容纳粒子数不受限制。
 
 	从$a_i+\omega_i$个粒子和空位的间隔中插$a_i$个隔板
 	\begin{align}
@@ -106,73 +87,73 @@
 	\end{align}
 \end{definition}
 \begin{definition}{Fermi系统}{Fermi System}
-	Fermi子：自旋量子数半整数．不可分辨，量子态容纳最多一个粒子．(Pauli不相容原理)
+	粒子不可分辨，量子态容纳最多一个粒子。
 
 	从$\omega_i$中挑出$a_i$个粒子位
 	\begin{align}
 		\Om[F]=\prod\binom{\omega_i}{a_i}=\prod\frac{\omega_i!}{a_i!\kh{\omega_i-a_i}!}.
 	\end{align}
 \end{definition}
+在量子力学中，将自旋量子数为整数的粒子称为Bose子，半整数的粒子称为Fermi子。由Pauli不相容原理，两个Fermi子不可能处于同一量子态。 
 \begin{theorem}{统计物理平衡态假设}{Equilibrium Hypothesis}
 	\textbf{等几率假设}(Planck)：分布$\hkh{a_i}$的热力学几率$\propto\Omega_i\hkh{a_i}.$
 
-	\textbf{最可几分布}：将热力学几率最大的分布近似作为平衡态分布．
+	\textbf{最可几分布}：将热力学几率最大的分布近似作为平衡态分布。
 \end{theorem}
 % 孤立系统$N,V,E$确定
 \paragraph{Bose分布}
-$a_i\gg 1,\omega_i\gg 1$由Stirling公式
+$a_i\gg 1,\omega_i\gg 1$，由Stirling公式
 \[
-	\ln x!\doteq x\kh{\ln x-1}\,{\color{lightgray}+\ln\sqrt{2\pi x},}\quad x\gg 1.
+	\ln(x!)\simeq x\kh{\ln x-1}\,{\color{lightgray}+\ln\sqrt{2\pi x},}\quad x\gg 1.
 \]
 可约化Bose分布
 \begin{align*}
-	\ln\Om[B]\doteq\sum\fkh{a_i\ln\kh{1+\frac{\omega_i}{a_i}}+\omega_i\ln\kh{1+\frac{a_i}{\omega_i}}}.
+	\ln\Om[B]\simeq\sum\fkh{a_i\ln\kh{1+\frac{\omega_i}{a_i}}+\omega_i\ln\kh{1+\frac{a_i}{\omega_i}}}.
 \end{align*}
-
 再结合定解条件
 \[
 	N=\sum a_i,\quad E=\sum a_i\varepsilon_i.
 \]
-利用Lagrange待定乘子法
-\begin{gather*}
-	\pp{a_i}\ln\Om[B]+\alpha\cdot\pp{a_i}\kh{N-\sum a_i}+\beta\cdot\pp{a_i}\kh{E-\sum a_i\varepsilon_i}=0\\
-	\ln\kh{1+\frac{\omega_i}{a_i}}-\alpha-\beta\ve_i=0.
-\end{gather*}
+利用Lagrange乘数法
+\begin{align*}
+	L:={}&\ln\Om[B]+\alpha\Bigkh{N-\sum a_i}+\beta\Bigkh{E-\sum a_i\varepsilon_i},\\
+	\pv L{a_i}={}&\ln\kh{1+\frac{\omega_i}{a_i}}-\alpha-\beta\ve_i=0.
+\end{align*}
 解得
 \begin{align}
-	a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}-1}.
+	\spark{a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}-1}.}
 \end{align}
 % Bose-Einstein分布（简称Bose分布）
 
-检验该点为极大值点
+检验该点为极大值点：
 \[
 	\pp[2]{a_i}\Om[B]=-\frac{\omega_i/a_i}{\omega_i+a_i}<0.
 \]
 \paragraph{Fermi分布}
 $a_i\gg 1,\omega_i\gg a_i$，类似Bose分布
 \begin{gather}\notag
-	\ln\Om[F]\doteq\sum\fkh{a_i\ln\kh{\frac{\omega_i}{a_i}-1}-\omega_i\ln\kh{1-\frac{a_i}{\omega_i}}}.\\
+	\ln\Om[F]\simeq\sum\fkh{a_i\ln\kh{\frac{\omega_i}{a_i}-1}-\omega_i\ln\kh{1-\frac{a_i}{\omega_i}}}.\\
 	% Lagrange待定乘子法
-	a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}+1}.
+	\spark{a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}+1}.}
 \end{gather}
 
 % Fermi-Dirac分布（简称Fermi分布）
 
-检验该点为极大值点
+检验该点为极大值点：
 \[
 	\pp[2]{a_i}\Om[F]=-\frac{\omega_i/a_i}{\omega_i-a_i}<0.
 \]
 \paragraph*{半经典分布}
 % 若取基态能量为0，则$\varepsilon_i\geqslant 0$，
-当$\e\alpha\gg 1$，Bose分布和Fermi分布变为
+当$\e\alpha\gg 1$，Bose分布和Fermi分布变为半经典分布
 \begin{align}
-	a_i=\omega_i\e{-\alpha-\beta\varepsilon_i}.
+	\spark{a_i=\omega_i\e{-\alpha-\beta\varepsilon_i}.}
 \end{align}
-因此要求$a_i\ll\omega_i$（非简并）
+因此要求$a_i\ll\omega_i$ （非简并）
 \begin{align}
 	\Om[S]=\prod\frac{\omega_i^{a_i}}{a_i!}.
 \end{align}
-与Boltzmann分布相比，$N!$仅是系数差别，不影响求最可几分布．
+与Boltzmann分布相比仅是系数差别($N!$)，不影响求最可几分布。
 \paragraph*{最可几方法误差估计}
 在最可几分布$a_\mathrm m$处展开
 \begin{align*}
@@ -181,7 +162,7 @@ $a_i\gg 1,\omega_i\gg a_i$，类似Bose分布
 \end{align*}
 因此
 \[
-	\ln\frac\Om\Omm\doteq-\frac12\sum_i\frac{\delta a_i^2}{a_\mathrm m}.
+	\ln\frac\Om\Omm\simeq-\frac12\sum_i\frac{\delta a_i^2}{a_\mathrm m}.
 \]
 若$\dvd{\delta a_i}{a_\mathrm m}\sim 10^{-4},$
 \[
@@ -189,15 +170,15 @@ $a_i\gg 1,\omega_i\gg a_i$，类似Bose分布
 \]
 \subsection{宏观量的统计表达式}
 \begin{definition}{配分函数}{Partition Function}
-	定义配分函数
+	半经典分布中，定义配分函数
 	\begin{align}
 		Z(\beta,y):=\sum_i\omega_i\e{-\beta\varepsilon_i}.
 	\end{align}
-	其中$y$是外参量，单粒子能级$\varepsilon_i$是$y$的函数．
+	其中$y$是外参量，单粒子能级$\varepsilon_i$是$y$的函数。
 \end{definition}
-半经典分布中，分子数
+分子数
 \[
-	N=\sum_ia_i=\sum_i\omega_i\e{-\alpha-\beta\varepsilon_i}=Z\e{-\alpha},
+	N=\sum a_i=\sum\omega_i\e{-\alpha-\beta\varepsilon_i}=Z\e{-\alpha},
 \]
 用配分函数$Z$表示$\alpha$
 \begin{align}
@@ -205,7 +186,7 @@ $a_i\gg 1,\omega_i\gg a_i$，类似Bose分布
 \end{align}
 内能
 \[
-	E=\sum_ia_i\varepsilon_i=\sum_i\varepsilon_i\omega_i\e{-\alpha-\beta\varepsilon_i}=-\e{-\alpha}\pv Z\beta=-\frac NZ\pv Z\beta.
+	E=\sum a_i\varepsilon_i=\sum\varepsilon_i\omega_i\e{-\alpha-\beta\varepsilon_i}=-\e{-\alpha}\pv Z\beta=-\frac NZ\pv Z\beta.
 \]
 即
 \begin{align}
@@ -214,14 +195,13 @@ $a_i\gg 1,\omega_i\gg a_i$，类似Bose分布
 
 准静态过程中，
 \[
-	\d E\equiv\sum a_i\d\varepsilon_i+\varepsilon_i\d a_i=\delta W+\delta Q.
+	\d E=\sum a_i\d\varepsilon_i+\varepsilon_i\d a_i=\delta W+\delta Q.
 \]
-
 功
 \[
-	\delta W=\sum_iY_k\d y_k
+	\delta W=\sum_kY_k\d y_k
 \]
-其中$Y_k,y_k$分别是广义力和广义坐标（如$-p,V$）．
+其中$Y_k,y_k$分别是广义力和广义坐标（如$-p,V$）。
 \[
 	\sum_kY_k\d y_k=\sum_ia_i\d\varepsilon_i=\sum_i a_i\sum_k\pv{\varepsilon_i}{y_k}\d y_k,
 \]
@@ -262,19 +242,19 @@ $a_i\gg 1,\omega_i\gg a_i$，类似Bose分布
 	\begin{align}
 		S=\kB\ln\Om.
 	\end{align}
-	其中$\kB$为Boltzmann常数．
+	其中$\kB$为Boltzmann常数。
 \end{theorem}
 通过Boltzmann关系可以确定熵，粒子不可分辨的半经典分布中
 \begin{align}\notag
-	S & =\kB\sum\ln\zkh{a_i\ln\omega_i-a_i\kh{\ln a_i-1}}=\kB\sum\ln a_i\kh{\alpha+\beta\varepsilon_i+1} \\\notag
+	S & =\kB\sum\ln\bigfkh{a_i\ln\omega_i-a_i\kh{\ln a_i-1}}=\kB\sum\ln a_i\kh{\alpha+\beta\varepsilon_i+1} \\\notag
 	  & =\kB\kh{N\alpha+\beta E+N}=\kB\kh{N\ln\frac ZN-N\beta\pv{\ln Z}N+N}                              \\
 	  & =N\kB\kh{\ln Z-\beta\pv{\ln Z}\beta-\ln N+1}.
 \end{align}
 和之前的结果比较可以确定$S'$
 \[
-	S'=N\kB\kh{1-\ln N}\doteq-\kB\ln N!.
+	S'=N\kB\kh{1-\ln N}\simeq-\kB\ln N!.
 \]
-对应的，粒子可分辨的Boltzmann分布$S'=0.$
+Boltzmann分布中，$S'=0.$
 
 其他宏观量也可以表示，自由能
 \begin{align}
@@ -284,18 +264,18 @@ $a_i\gg 1,\omega_i\gg a_i$，类似Bose分布
 \[
 	\mu=\kh{\pv FN}_T=-\alpha\kB T.
 \]
-Boltzmann分布$\mu=-\kB T\ln Z$。
+Boltzmann分布中，$\mu=-\kB T\ln Z$。
 \subsection{单粒子态的半经典描述}
 定义系统的Hamilton量$H\equiv\varepsilon$，则广义坐标$q_i$与广义动量$p_i$有关系
 \[
 	\dot q_i=\pv H{p_i},\quad\dot p_i=-\pv H{q_i}.
 \]
 \begin{definition}{$\mu$空间}{Mu Space}
-	$\mu$空间是粒子的广义坐标$q_i$与广义动量$p_i$所张的空间．相体积元
+	$\mu$空间是粒子的广义坐标$q_i$与广义动量$p_i$所张的空间。相体积元
 	\begin{align}
 		\d\omega=\prod_{i=1}^\gamma\d q_i\nd p_i.
 	\end{align}
-	其中$\gamma$为粒子自由度．
+	其中$\gamma$为粒子自由度。
 \end{definition}
 单粒子能量看成$q,p$的连续函数；由不确定性关系$\D q\D p=h$
 \begin{theorem}{极限定理}{Limit Theorem}
@@ -311,7 +291,7 @@ Boltzmann分布$\mu=-\kB T\ln Z$。
 \]
 % 因此 % 😅 二次元能不能死一死
 % \[N=h^{-\gamma}\int\e{-\alpha-\beta\varepsilon}\d\omega=\e{-\alpha}Z.\]
-又$N=\e{-\alpha}Z$，故
+又$N=\e{-\alpha}Z$，故配分函数可以写成
 \begin{align}
 	Z(\beta,y)=h^{-\gamma}\int\e{-\beta\varepsilon}\d\omega.
 \end{align}
@@ -327,7 +307,6 @@ Boltzmann分布$\mu=-\kB T\ln Z$。
 \begin{align}
 	Z(\beta,y)=\int\zti g(\varepsilon)\e{-\beta\varepsilon}\d\varepsilon.
 \end{align}
-\newpage
 \subsection*{验证极限定理}
 \begin{example}{谐振子}{Harmonic Oscillator}
 	一维谐振子，Hamilton量
@@ -447,15 +426,14 @@ Boltzmann分布$\mu=-\kB T\ln Z$。
 \clearpage
 \section{Boltzmann分布}
 \subsection{理想气体}
-理想气体在常温常压下满足非简并条件
+理想气体在常温常压下满足非简并条件：
 \[
-	\e\alpha\gg 1.
+	\e\alpha\gg 1,
 \]
-符合半经典分布．分子运动可分为质心平动和内部运动，两种运动独立
-\[
-	\varepsilon\tot=\varepsilon_\tl+\varepsilon_\i,\quad\omega\tot=\omega_\tl\omega_\i.
-\]
-\subsubsection*{质心平动}
+符合半经典分布。%分子运动可分为质心平动和内部运动，两种运动独立
+%\varepsilon\tot=\varepsilon_\tl+\varepsilon_\i,\quad\omega\tot=\omega_\tl\omega_\i.
+分子运动可分为质心的平动(translation)、分子内部的振动(vibration)和转动(rotation)，三者是相互独立的。
+\paragraph{质心平动}
 $\varepsilon_\tl$准连续
 \[
 	\varepsilon_\tl=\frac1{2m}\kh{p_x^2+p_y^2+p_z^2}.
@@ -465,12 +443,11 @@ $\varepsilon_\tl$准连续
 	Z_\tl(\beta,V) & =\int\zti g(\varepsilon)\e{-\beta\varepsilon}\d\varepsilon                                                                      \\
 	               & =\frac{2\pi V}{h^3}\kh{2m}^{3/2}\int\zti\sqrt\varepsilon\e{-\beta\varepsilon}\d\varepsilon=V\kh{\frac{2\pi m}{h^2\beta}}^{3/2}.
 \end{align}
-
 单原子分子只有质心平动
 \[
 	N=\e{-\alpha}Z_\tl,\thus\e{\alpha}=\frac VN\kh{\frac{2\pi m\kB T}{h^2}}^{3/2}\gg 1.
 \]
-说明稀薄、高温、质量大的情况下和非简并条件符合得很好．
+说明稀薄、高温、质量大的情况下，满足非简并条件，
 \begin{gather}
 	E_\tl=-N\pv{\ln Z_\tl}\beta=\frac32N\kB T.\\
 	C_V^\tl=\kh{\pv ET}_V=\frac32N\kB.
@@ -484,17 +461,17 @@ $\varepsilon_\tl$准连续
 	S_\tl & =N\kB\kh{\ln Z_\tl-\beta\pv{\ln Z_\tl}\beta-\ln N+1}                 \\
 	      & =\frac52N\kB+N\kB\ln\fkh{\frac VN\kh{\frac{2\pi m\kB T}{h^2}}^{3/2}}
 \end{align}
-\subsubsection*{振动}
-考虑一维振动，取约化质量$\mu$，有
+\paragraph{振动}
+考虑一维振动，%取约化质量$\mu$，
+有
 \[
-	\varepsilon_\vb(n)=h\nu\kh{n+\frac12},\quad\omega_\vb(n)=1.
+	\varepsilon_\vb=h\nu\kh{n+\frac12},\quad\omega_\vb=1.
 \]
 能量间距
 \[
-	\D\varepsilon_\vb=h\nu\sim\SI{0.1}\electronvolt.
+	\D\varepsilon_\vb=h\nu\sim\SI{0.1}\electronvolt\gg\SI{0.025}\electronvolt.
 \]
-远大于室温下$\kB T\sim\SI{0.025}\electronvolt.$因此必须考虑能级的分立性．
-
+因此必须考虑能级的分立性。
 定义振动的特征温度
 \[
 	\theta_\vb:=\frac{\D\varepsilon_\vb}\kB=\frac{h\nu}\kB\sim\SI{e3}\K.
@@ -504,6 +481,7 @@ $\varepsilon_\tl$准连续
 \begin{align}
 	Z_\vb=\sum\fmto n0\e{-(n+1/2)\beta h\nu}=\frac{\e{-\theta_\vb/2T}}{1-\e{-\theta_\vb/T}}=\frac12\csch\kh{\frac{\theta_\vb}{2T}}.
 \end{align}
+
 振动内能
 \begin{align}
 	E_\vb=-N\pv{\ln Z_\vb}\beta=Nh\nu\fkh{\frac12+\underset{\text{激发能}}{\frac{\e{-\beta h\nu}}{1-\e{-\beta h\nu}}}}=:N\avg\varepsilon.
@@ -518,74 +496,75 @@ $\varepsilon_\tl$准连续
 \[
 	\Einst(x):=\frac{x^2\e x}{\kh{\e x-1}^2}.
 \]
-
-低温极限，由
-\[
-	x\gg 1,\quad\Einst(x)\doteq x^2\e{-x}\ll 1
-\]
-因此比热
-\begin{align}
-	C_V^\vb\doteq N\kB\kh{\frac{\theta_\vb}T}^2\e{-\theta_\vb/T}.
-\end{align}
-相对振动而言，常温属于低温范围，故振动自由度对$C_V$贡献很小。
-
-高温极限，能量准连续
-\begin{align*}
-	Z_\vb & =\int\zti g(\ve)\e{-\beta\ve}\d\ve=\frac{2\pi}{h\omega}\int\zti\e{-\beta\ve}\d\ve=\frac{2\pi}{\beta h\omega}=\frac T{\theta_\vb}.
-\end{align*}
-内能
-\[
-	E_\vb=N\kB T.
-\]
-
-或由低温算得的结果，使$\beta\to0$
-\[
-	E_\vb\doteq Nh\nu\kh{\frac12+\frac1{\beta h\nu}}\doteq N\kB T.
-\]
-这里比较有三个自由度$p_x,p_y,p_z$的平动能量$E_\tl=3\kB T/2$和有两个自由度的振动能量$E_\vb=\kB T$，可以总结这样一个规律：
+\begin{compactitem}
+	\item 
+	低温极限，由
+	\[
+		x\gg 1,\quad\Einst(x)\simeq x^2\e{-x}\ll 1
+	\]
+	因此比热
+	\begin{align}
+		C_V^\vb\simeq N\kB\kh{\frac{\theta_\vb}T}^2\e{-\theta_\vb/T}.
+	\end{align}
+	相对振动而言，常温属于低温范围，故振动自由度对$C_V$贡献很小。
+	\item
+	高温极限，能量准连续
+	\begin{align*}
+		Z_\vb & =\int\zti g(\ve)\e{-\beta\ve}\d\ve=\frac{2\pi}{h\omega}\int\zti\e{-\beta\ve}\d\ve=\frac{2\pi}{\beta h\omega}=\frac T{\theta_\vb}.
+	\end{align*}
+	内能
+	\[
+		E_\vb=N\kB T.
+	\]
+	
+	或由低温算得的结果，使$\beta\to0$
+	\[
+		E_\vb\simeq Nh\nu\kh{\frac12+\frac1{\beta h\nu}}\simeq N\kB T.
+	\]
+\end{compactitem}
+比较有三个自由度$p_x,p_y,p_z$的平动能量$E_\tl=3\kB T/2$和有两个自由度的振动能量$E_\vb=\kB T$，可以总结这样一个规律：
 \begin{theorem}{能量均分定理}{Equi-Partition Theorem}
 	高温下，能量准连续，能量的每个自由度对能量贡献为$\kB T/2$。
 \end{theorem}
-\subsubsection*{转动}
-以异核双原子分子为例，\footnote{同核需考虑全同性原理。比如正氢：两个氢核自旋平行，$\ell$为奇数；仲氢：两个氢核自旋反平行，$\ell$为偶数。}
+\paragraph{转动}
+以异核双原子分子\footnote{同核需考虑全同性原理。比如正氢(两个氢核自旋平行) $\ell$为奇数；仲氢(两个氢核自旋反平行) $\ell$为偶数。}为例，
 \[
-	\varepsilon_\rt(\ell)=\frac{\hbar^2}{2I}\ell(\ell+1),\quad\omega_\rt(\ell)=2\ell+1.
+	\varepsilon_\rt=\frac{\hbar^2}{2I}\ell(\ell+1),\quad\omega_\rt=2\ell+1.
 \]
-
 转动特征温度
 \[
 	\ct_\rt=\frac{\hbar^2}{2I\kB}\sim\SI{10}\K.
 \]
-配分函数
+配分函数并没有显式表达式：
 \[
 	Z_\rt=\sum\fmto{\ell}0(2\ell+1)\e{-\ell(\ell+1)\,\theta_\rt/T}.
 \]
-并没有显式表达式。
-
-高温极限下，能量准连续
-\[
-	Z_\rt=\int\zti g(\ve)\e{-\beta\ve}\d\ve=\frac{8\pi^2I}{h^2}\cdot\frac1\beta=\frac T{\theta_\rt}.
-\]
-或由$\ct_\rt/T\ll 1$
-\[
-	Z_\rt\doteq\int_0^{+\infty}\e{-\ell(\ell+1)\,\theta_\rt/T}\cdot(2\ell+1)\d\ell=\frac T{\ct_\rt}.
-\]
-能量和比热
-\begin{align}
-	E_\rt=N\kB T,\quad C_V^\rt=N\kB.
-\end{align}
-
-低温极限，$\ct_\rt/T\gg 1$，$Z_\rt$的项很快趋于0
-\[
-	Z_\rt=1+3\e{-2\ct_\rt/T},
-\]
-能量和比热
-\begin{align}
-	E_\rt&=6N\kB\ct_\rt\e{-2\ct_\rt/T},\\
-	C_V^\rt&=12N\kB\kh{\frac{\ct_\rt}T}^2\e{-2\ct_\rt/T}.
-\end{align}
-
-原子内部结构：电子、原子核等的自由度对宏观量（特别是$C_V$）无贡献。因为在稳定性、结合能、能级间距上，从分子、原子到原子核越来越稳定，特征温度越来越高，越来越难以被激发。即，结合的紧密的自由能被冻结了，通常不激发。
+\begin{compactitem}
+	\item
+	高温极限下，能量准连续
+	\[
+		Z_\rt=\int\zti g(\ve)\e{-\beta\ve}\d\ve=\frac{8\pi^2I}{h^2}\cdot\frac1\beta=\frac T{\theta_\rt}.
+	\]
+	或由$\ct_\rt/T\ll 1$
+	\[
+		Z_\rt\simeq\int_0^{+\infty}\e{-\ell(\ell+1)\,\theta_\rt/T}\cdot(2\ell+1)\d\ell=\frac T{\ct_\rt}.
+	\]
+	能量和比热
+	\begin{align}
+		E_\rt=N\kB T,\quad C_V^\rt=N\kB.
+	\end{align}
+	\item 
+	低温极限，$\ct_\rt/T\gg 1$，$Z_\rt$的项很快趋于0
+	\[
+		Z_\rt=1+3\e{-2\ct_\rt/T},
+	\]
+	能量和比热
+	\begin{align}
+		E_\rt&=6N\kB\ct_\rt\e{-2\ct_\rt/T},\\
+		C_V^\rt&=12N\kB\kh{\frac{\ct_\rt}T}^2\e{-2\ct_\rt/T}.
+	\end{align}
+\end{compactitem}
+原子内部结构(电子、原子核等)的自由度对宏观量（特别是$C_V$）无贡献。因为在稳定性、结合能、能级间距上，从分子、原子到原子核越来越稳定，特征温度越来越高，越来越难以被激发。即，结合的紧密的自由能被冻结了，通常不激发。
 \subsectionstar{Maxwell速度分布律}
 考虑气体分子质心平动
 \[
@@ -608,7 +587,7 @@ $\varepsilon_\tl$准连续
 \]
 将坐标$(v_x,v_y,v_z)$换为球坐标$(v,\theta,\phi)$，并对$\theta,\phi$直接积分，便得到速率的分布：
 \begin{align}
-	4\pi n\kh{\frac m{2\pi\kB T}}^{3/2}\e{-mv^2/2\kB T}v^2\d v.
+	f(v)\d v=4\pi n\kh{\frac m{2\pi\kB T}}^{3/2}\e{-mv^2/2\kB T}v^2\d v.
 \end{align}
 最概然速率$v_\mathrm m$
 \begin{gather}
@@ -672,11 +651,11 @@ $\varepsilon_\tl$准连续
 其中Einstein温度$\ct_{\Einst}\sim\SIrange{100}{300}\K$。
 高温极限
 \[
-	C_V\doteq 3N\kB;
+	C_V\simeq 3N\kB;
 \]
 低温极限
 \[
-	C_V\doteq 3N\kB\kh{\frac{\ct_E}T}^2\e{-\ct_E/T}\to 0.
+	C_V\simeq 3N\kB\kh{\frac{\ct_E}T}^2\e{-\ct_E/T}\to 0.
 \]
 与实验定性相符，定量不符。因为有低频模，低温时仍能被激发，从而对$C_V$有贡献(Debye)
 \subsection{顺磁物质的磁性}
@@ -743,16 +722,16 @@ $\varepsilon_\tl$准连续
 \[
 	\coth x=\frac1x+\frac x3+\cdots,\quad x\ll 1
 \]
-故$\Brill_j(a)\doteq\frac a3(j+1)$
+故$\Brill_j(a)\simeq\frac a3(j+1)$
 因此
 \[
 	m=\frac13n\mu_0\kh{\muB g}^2j(j+1)\beta H\propto\frac HT.
 \]
 即Curie定律~\ref{thm:Curie's Law}。
 
-低温强场极限$a\gg 1$，$\Brill_j(a)\doteq 1$
+低温强场极限$a\gg 1$，$\Brill_j(a)\simeq 1$
 \[
-	m\doteq n\muB gj.
+	m\simeq n\muB gj.
 \]
 能量和比热
 \begin{gather}
@@ -793,7 +772,7 @@ $S(H=0)$随温度变化小的物质Ce$_2$Mg$_3($NO$_3)_{12}\cdot($H$_2$O$)_{24}$
 \end{align*}
 熵
 \begin{align*}
-	S & =\kB\ln\frac{N!}{N_+!N_-!}\doteq\kB\kh{N\ln N-N_+\ln N_+-N_-\ln N_-}.
+	S & =\kB\ln\frac{N!}{N_+!N_-!}\simeq\kB\kh{N\ln N-N_+\ln N_+-N_-\ln N_-}.
 	  %\\& =N\kB\fkh{\ln 2-\frac12\kh{1+\frac E{N\ve}}\ln\kh{1+\frac E{N\ve}}-\frac12\kh{1-\frac E{N\ve}}\ln\kh{1-\frac E{N\ve}}}
 \end{align*}
 故温度的倒数
@@ -845,14 +824,14 @@ $\pm$号的($+$)对应Fermi分布，($-$)对应Bose分布。
 		\ln\Xi(\alpha,\beta,y):=\pm\sum\omega_i\ln\kh{1\pm\e{-\alpha-\beta\ve_i}},
 	\end{align}
 \end{definition}
-则
+可得
 \begin{gather}
-	\spark N=\sum a_i\spark{=-\pv{\ln\Xi}{\alpha};}\\ % =\sum\frac{\omega_i}{\e{\alpha+\beta\ve_i}\pm 1}
-	\spark E=\sum a_i\ve_i\spark{=-\pv{\ln\Xi}{\beta}.}
+	\spark{N=-\pv{\ln\Xi}{\alpha};}\\ % =\sum\frac{\omega_i}{\e{\alpha+\beta\ve_i}\pm 1}
+	\spark{E=-\pv{\ln\Xi}{\beta}.}
 \end{gather}
 物态方程
 \begin{align}
-	\spark{Y_k}=\sum a_i\pv{\ve_i}{y_k}\spark{=-\frac1\beta\pv{\ln\Xi}{y_k}.}
+	\spark{Y_k=-\frac1\beta\pv{\ln\Xi}{y_k}.}
 \end{align}
 
 再来确定熵，由
@@ -887,7 +866,7 @@ $\pm$号的($+$)对应Fermi分布，($-$)对应Bose分布。
 
 另一方面，由Boltzmann关系
 \begin{align*}
-	S & =\kB\ln\Om[F;B]\doteq\kB\sum\fkh{a_i\ln\kh{\frac{\omega_i}{a_i}\mp 1}\mp\omega_i\ln\kh{1\mp\frac{a_i}{\omega_i}}} \\
+	S & =\kB\ln\Om[F;B]\simeq\kB\sum\fkh{a_i\ln\kh{\frac{\omega_i}{a_i}\mp 1}\mp\omega_i\ln\kh{1\mp\frac{a_i}{\omega_i}}} \\
 	  & =\kB\sum\fkh{a_i\kh{\alpha_\beta\ve_i}\pm\omega_i\ln\kh{1\pm\e{-\alpha-\beta\ve_i}}}                             \\
 	  & =\kB\kh{\alpha N+\beta E+\ln\Xi}=\kB\kh{\ln\Xi-\alpha\pv{\ln\Xi}\alpha-\beta\pv{\ln\Xi}\beta}.
 \end{align*}
@@ -953,7 +932,7 @@ $\pm$号的($+$)对应Fermi分布，($-$)对应Bose分布。
 	S&=\kB\kh{\ln\Xi-\alpha\pv{\ln\Xi}\alpha-\beta\pv{\ln\Xi}\beta}=\kB\kh{\frac53\beta E+N\alpha}\\
 	&=N\kB\fkh{\kh{\frac52-\ln\xi}\pm 2^{-7/2}\xi+\cdots}.
 \end{align}
-\paragraph*{讨论}弱简并条件($n\lambda_T^3<1$)下$E,p,S$：Fermi $>$半经典$>$ Bose；$C_V$反之。而强简并条件下Bose气体和Fermi气体性质完全不同。
+\paragraph*{讨论}弱简并条件($n\lambda_T^3<1$)下，$E,p,S$：Fermi $>$半经典$>$ Bose；$C_V$反之。而强简并条件下，Bose气体和Fermi气体性质完全不同。
 \subsection{Bose-Einstein凝聚}
 Bose气体的化学势满足
 \[
@@ -1077,11 +1056,11 @@ $T=T_\crt$时，比热趋于无穷，$C_T\vs T$曲线形似$\lambda$，故称$\l
 
 低频高温下，$h\nu\ll\kB T$，变为经典的\Rayl-Jeans定律
 \[
-	u(\nu)\d\nu\doteq\frac{8\pi\nu^2}{c^3}\kB T\d\nu.
+	u(\nu)\d\nu\simeq\frac{8\pi\nu^2}{c^3}\kB T\d\nu.
 \]
 高频低温极限，变成Wein定律
 \[
-	u(\nu)\d\nu\doteq\frac{8\pi h\nu^3}{c^3}\e{-\beta h\nu}\d\nu.
+	u(\nu)\d\nu\simeq\frac{8\pi h\nu^3}{c^3}\e{-\beta h\nu}\d\nu.
 \]
 
 辐射场总能量
@@ -1190,7 +1169,7 @@ Einstein模型定量不符，因为忽略了低频振动，而低温下的热激
 	\Debye(y)=\frac3{y^3}\int_0^yx^2-\frac{x^3}2+\bigo(x^4)\d x=1-\frac38y+\bigo(y^2).
 \end{align*}
 \[
-	E\doteq E_0+3N\kB T,\quad C_V\doteq 3N\kB.
+	E\simeq E_0+3N\kB T,\quad C_V\simeq 3N\kB.
 \]
 低温极限$y\gg 1$，可认为
 \begin{gather}\notag
@@ -1275,11 +1254,11 @@ Einstein模型定量不符，因为忽略了低频振动，而低温下的热激
 \end{center}
 定性估计比热$C_V$：相对$T=0$时，能量增量
 \[
-	\D E\doteq N\frac{\kB T}{\varepsilon_\Fm}\D\varepsilon,\quad\D\varepsilon=\kB T.
+	\D E\simeq N\frac{\kB T}{\varepsilon_\Fm}\D\varepsilon,\quad\D\varepsilon=\kB T.
 \]
 比热
 \[
-	C_V\doteq 2\kB N\frac{\kB T}{\varepsilon_\Fm}\sim T.
+	C_V\simeq 2\kB N\frac{\kB T}{\varepsilon_\Fm}\sim T.
 \]
 
 单原子，能量准连续，需计算积分
@@ -1303,7 +1282,7 @@ Einstein模型定量不符，因为忽略了低频振动，而低温下的热激
 
 低温下，积分下限$-\beta\mu\to-\infty$
 \begin{align*}
-	Q_\ell&\doteq-\sum\fmto n0\frac{\upsilon^{(n)}(\mu)}{n!\beta^n}\int\iti\frac{\eta^n\e\eta}{(\e\eta+1)^2}\d\eta\\
+	Q_\ell&\simeq-\sum\fmto n0\frac{\upsilon^{(n)}(\mu)}{n!\beta^n}\int\iti\frac{\eta^n\e\eta}{(\e\eta+1)^2}\d\eta\\
 	&=-\fkh{\upsilon(\mu)+\frac{\upsilon''(\mu)}{2\beta^2}\frac{\pi^2}3+\cdots}.
 \end{align*}
 故
@@ -1357,7 +1336,7 @@ Einstein模型定量不符，因为忽略了低频振动，而低温下的热激
 \section{系综}
 前面讨论的是近独立粒子系统，忽略粒子间作用，用单粒子态分布描述系统状态；如果粒子间作用不能忽略，单粒子态无确切含义，就要以系统为整体研究，这就是\textbf{系综}。系综的平均值就是统计平均值。
 \subsection{系统微观状态的描述与统计系综}
-经典理论，粒子状态由广义坐标$q$与广义动量$p$描述，张成$\mu$空间。而系统的微观状态由$\varGamma$空间描述
+经典理论中，粒子状态由广义坐标$q$与广义动量$p$描述，张成$\mu$空间。而系统的微观状态由$\varGamma$空间描述
 \begin{definition}{$\varGamma$空间}{Gamma Space}
 	$\varGamma$空间是所有粒子广义坐标$q_i$与广义动量$p_i$所张的空间，相体积元
 	\begin{align}
@@ -1385,7 +1364,7 @@ Einstein模型定量不符，因为忽略了低频振动，而低温下的热激
 \subsection{正则分布}
 考虑系统$A$与热源$A_\rs$间的平衡，注意到$A+A_\rs$构成孤立系统，当二者相互作用可忽略时，总能量$E^{(0)}=E_\st+E_\rs$，且对很大的热源$E_\rs\gg E_\st$。记当$A$处于系统$E_\st$某一量子态，$A_\rs$处于系统$E_\rs$任一量子态，微观态数目为$\Omega_\rs(E_\rs)$
 \[
-	\ln\Omega_\rs(E_\rs)=\ln\Omega_\rs(E^{(0)}-E_\st)\doteq\ln\Omega_\rs(E^{(0)})-\beta E_\st
+	\ln\Omega_\rs(E_\rs)=\ln\Omega_\rs(E^{(0)}-E_\st)\simeq\ln\Omega_\rs(E^{(0)})-\beta E_\st
 \]
 故分布概率
 \[
@@ -1423,7 +1402,7 @@ Einstein模型定量不符，因为忽略了低频振动，而低温下的热激
 另一方面，由Boltzmann关系
 \begin{align*}
 	S&=\kB\ln\Omega\{M_\st\}=\kB\kh{\ln M!-\sum_\st\ln M_\st!}\\
-	&\doteq\kB\fkh{M(\ln M-1)-\sum_\st M_\st(\ln M_\st-1)}
+	&\simeq\kB\fkh{M(\ln M-1)-\sum_\st M_\st(\ln M_\st-1)}
 \end{align*}
 而
 \[
@@ -1525,7 +1504,7 @@ $N$个全同粒子，体积$V$，
 \]
 第三项后仅当多个分子都很接近时才显著，故只保留前两项
 \[
-	Q\doteq V^N+\frac12N(N-1)V^{N-2}\int f(r_{12})\d\bm r_1\nd\bm r_2.
+	Q\simeq V^N+\frac12N(N-1)V^{N-2}\int f(r_{12})\d\bm r_1\nd\bm r_2.
 \]
 引入质心坐标$\bm R=\frac{m_1\bm r_1+m_2\bm r_2}{m_1+m_2}$和相对位置$\bm r=\bm r_1-\bm r_2$，易证$\det J=1$
 \[
@@ -1537,15 +1516,15 @@ $N$个全同粒子，体积$V$，
 \end{align}
 故
 \[
-	Q\doteq V^N-N(N-1)V^{N-1}a_2(T)\doteq V^N\fkh{1-\frac{N^2}Va_2(T)}.
+	Q\simeq V^N-N(N-1)V^{N-1}a_2(T)\simeq V^N\fkh{1-\frac{N^2}Va_2(T)}.
 \]
 取对数\footnote{过程中一系列近似相当于
 \[
-	\ln\e{-x}=\ln\kh{1-x+\frac12x^2+\cdots}\doteq\ln(1-x)\doteq -x
+	\ln\e{-x}=\ln\kh{1-x+\frac12x^2+\cdots}\simeq\ln(1-x)\simeq -x
 \]
 即结果并不会不严格。}
 \begin{align}
-	\ln Q=N\ln V+\ln\fkh{1-\frac{N^2}Va_2(T)}\doteq N\ln V-\frac{N^2}Va_2(T).
+	\ln Q=N\ln V+\ln\fkh{1-\frac{N^2}Va_2(T)}\simeq N\ln V-\frac{N^2}Va_2(T).
 \end{align}
 物态方程
 \begin{align*}
@@ -1558,7 +1537,7 @@ $N$个全同粒子，体积$V$，
 \begin{example}{Van der Waals力}{Van der Waals Force}
 	1930年London证明瞬时电偶极矩之间力
 	\begin{center}
-		\(\phi(r)=\phi_0\fkh{\kh{\frac{r_0}r}^{12}-2\kh{\frac{r_0}r}^6}\doteq\begin{cases}
+		\(\phi(r)=\phi_0\fkh{\kh{\frac{r_0}r}^{12}-2\kh{\frac{r_0}r}^6}\simeq\begin{cases}
 			\infty,&r<r_0\\
 			-\phi_0\kh{\frac{r_0}r}^6,&r>r_0
 		\end{cases}\)
@@ -1577,12 +1556,12 @@ $N$个全同粒子，体积$V$，
 	故
 	{\begin{align*}
 		a_2(T)&=-2\pi\int_0^{r_0}-r^2\d r-2\pi\int_{r_0}^{+\infty}\fkh{\e{-\beta\phi(r)}-1}r^2\d r\\
-		&\doteq\frac{2\pi}3r_0^3+2\pi\int_{r_0}^{+\infty}\beta\phi(r)r^2\d r\tag{$\kB T\gg\phi_0$}\\
+		&\simeq\frac{2\pi}3r_0^3+2\pi\int_{r_0}^{+\infty}\beta\phi(r)r^2\d r\tag{$\kB T\gg\phi_0$}\\
 		&=\frac{2\pi}3r_0^3-\frac{2\pi}3\frac{\phi_0r_0^3}{\kB T}=:b-\frac a{\kB T}.
 	\end{align*}}
 	又$b=4v_0\ll v$
 	\[
-		\frac{pv}{\kB T}=1+\frac bv-\frac a{v\kB T}\doteq\frac1{1-b/v}-\frac a{v\kB T}.
+		\frac{pv}{\kB T}=1+\frac bv-\frac a{v\kB T}\simeq\frac1{1-b/v}-\frac a{v\kB T}.
 	\]
 	故Van der Waals方程
 	\begin{align}
@@ -1644,7 +1623,7 @@ Ising模型在平均场近似下的临界指数与Landau模型相同，详见作
 \]
 $N^{(0)}\gg N,E^{(0)}\gg E_\st$，故可在$(N^{(0)},E^{(0)})$处展开
 \[
-	\ln\Omega_\rs(N^{(0)}-N,E^{(0)}-E_\st)\doteq\ln\Omega_\rs(N^{(0)},E^{(0)})-\alpha N-\beta E_\st.
+	\ln\Omega_\rs(N^{(0)}-N,E^{(0)}-E_\st)\simeq\ln\Omega_\rs(N^{(0)},E^{(0)})-\alpha N-\beta E_\st.
 \]
 其中$\alpha=\alpha(T,\mu),\;\beta=\beta(T)$只与热源有关，故
 \begin{align}
@@ -1662,7 +1641,7 @@ $N^{(0)}\gg N,E^{(0)}\gg E_\st$，故可在$(N^{(0)},E^{(0)})$处展开
 \[
 	\Xi(\alpha,\beta,y)=\sum_{N=0}^\infty\sum_\st\e{-\alpha N-\beta E_\st}=\sum_Nq^NZ_N(\beta,y).
 \]
-其中易逸度(Fugacity) $q=\e{-\alpha}$
+其中易逸度(fugacity) $q=\e{-\alpha}$
 
 \paragraph*{巨正则分布的热力学公式}宏观量等于对应微观量的统计平均值
 \begin{align}
@@ -1793,7 +1772,7 @@ Fermi分布
 \end{align}
 以上采用了分子混沌假设，即分子速度分布是独立的：
 \[
-	f(\bm r,\bm v_1,\bm v_2,t)\doteq f_1(\bm r,\bm v_1,t)f_2(\bm r,\bm v_2,t).
+	f(\bm r,\bm v_1,\bm v_2,t)\simeq f_1(\bm r,\bm v_1,t)f_2(\bm r,\bm v_2,t).
 \]
 
 故单位时间内，平均一个分子1与分子2碰撞次数
@@ -1823,15 +1802,15 @@ Fermi分布
 解出$\lambda_1,\lambda_2$，
 \begin{align}
 	\begin{cases}
-		\bm v_1'=\bm v_1+\frac{2m_1}{m_1+m_2}\zkh{(\bm v_2-\bm v_1)\cdot\bm n}\bm n\\[1ex]
-		\bm v_2'=\bm v_2+\frac{2m_2}{m_1+m_2}\zkh{(\bm v_1-\bm v_2)\cdot\bm n}\bm n
+		\bm v_1'=\bm v_1+\frac{2m_1}{m_1+m_2}\bigfkh{(\bm v_2-\bm v_1)\cdot\bm n}\bm n\\[1ex]
+		\bm v_2'=\bm v_2+\frac{2m_2}{m_1+m_2}\bigfkh{(\bm v_1-\bm v_2)\cdot\bm n}\bm n
 	\end{cases}
 \end{align}
 对称性：
 \begin{compactenum}
 	\item 碰撞前后相对速度不变
 	\[
-		\bm v_1'-\bm v_2'=\bm v_1-\bm v_2-2\zkh{(\bm v_1-\bm v_2)\cdot\bm n}\bm n\thus g_{21}'=g_{21}.
+		\bm v_1'-\bm v_2'=\bm v_1-\bm v_2-2\bigfkh{(\bm v_1-\bm v_2)\cdot\bm n}\bm n\thus g_{21}'=g_{21}.
 	\]
 	\item 碰撞前后相对速度沿碰撞方向变号，垂直方向不变
 	\begin{align*}
@@ -1943,9 +1922,11 @@ Fermi分布
 		S=-\kB H+\cns.
 	\end{align}
 	因此，$H$趋于极小与$S$趋于极大一致，$H$定理与$S$增原理相当，但有不同之处：
-		\subitem $\bullet$ 对任意态可定义$H$，但热力学中$S$仅对平衡态有定义\footnote{可通过Boltzmann关系推广$S$定义。}；
-		\subitem $\bullet$ 熵增原理适用于任意孤立系，$H$定理前提：$f$满足Boltzmann输运方程，即分子混沌假设成立；
-		\subitem $\bullet$ $H$定理给出了系统趋向平衡态的速度，熵增原理不能。
+	\begin{compactitem}
+		\item 对任意态可定义$H$，但热力学中$S$仅对平衡态有定义\footnote{可通过Boltzmann关系推广$S$定义。}；
+		\item 熵增原理适用于任意孤立系，$H$定理前提：$f$满足Boltzmann输运方程，即分子混沌假设成立；
+		\item $H$定理给出了系统趋向平衡态的速度，熵增原理不能。
+	\end{compactitem}
 	\item $H$定理具有统计特征，对统计性的$f$再取了一次平均：
 	\[
 		\dv Ht=N\avg{\ln f}.
