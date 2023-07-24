@@ -1,11 +1,10 @@
 \def\coursename{量子力学}
 \def\courseEnglishname{Quantum Mechanics}
-\def\teachername{陈新、郭永}
+\def\teachername{陈新老师、郭永}
 \def\beginday{2022/3/25}
 
 \input{../hair.tex}
 \input{../head.tex}
-\lecturedeclaretrue
 
 \let\oldr\r
 \renewcommand*{\r}{\bm r}						% 坐标向量
@@ -24,32 +23,33 @@
 \firstandforemost
 
 \setcounter{section}{-1}
-\section{量子力学背景}
-1900年，Kelvin勋爵给英国皇家研究院做了一个广为人知的演讲，题为《覆盖热量和光线的动力学理论的十九世纪的乌云》\footnote{\textit{Nineteenth-Century Clouds over the Dynamical Theory of Heat and Light}. }。
+\section{绪论：量子力学背景}
+1900年，Kelvin勋爵给英国皇家研究院做了一个广为人知的演讲，题为《覆盖热和光的动力学理论的十九世纪的乌云》\footnote{\textit{Nineteenth-Century Clouds over the Dynamical Theory of Heat and Light}. }。
 \begin{quote}
-	\textit{The beauty and clearness of the dynamical theory, which asserts heat and light to be modes of motion, is at present obscured by two clouds.}
-	I. \textit{The first came into existence with the undulatory theory of light, and was dealt with by Fresnel and Dr. Thomas Young; it involved the question, How could the earth move through an elastic solid, such as essentially is the luminiferous ether?}
-	II. \textit{The second is the Maxwell-Boltzmann doctrine regarding the partition of energy.}
+	The beauty and clearness of the dynamical theory, which asserts heat and light to be modes of motion, is at present obscured by two clouds.
+	I. The first came into existence with the undulatory theory of light, and was dealt with by Fresnel and Dr. Thomas Young; it involved the question, How could the earth move through an elastic solid, such as essentially is the luminiferous ether?
+	II. The second is the Maxwell-Boltzmann doctrine regarding the partition of energy.
 \end{quote}
-他所说的“乌云”是指：物质如何穿过以太而运动（Michelson-Morley实验）的难题；以及统计力学中的能量均分原理可能会被打破的担忧。而在二十世纪，针对这两个问题，产生了两个主要的物理理论：针对前者产生了相对论；针对后者产生了量子力学。%阿尔伯特·爱因斯坦在1905年发表了所谓的"奇迹年论文"，其中一篇解释了光电效应（量子力学的前奏），另一篇则描述了狭义相对论。%\url{https://books.google.com.tw/books?id=YvoAAAAAYAAJ&pg=PA363&redir_esc=y#v=onepage&q&f=false}
+他所说的\textit{乌云}是指：物质如何穿过以太而运动\footnote{Michelson-Morley实验}；以及统计力学中的能量均分原理可能会被打破。而在二十世纪，针对这两个问题，产生了两个主要的物理理论：针对前者产生了狭义相对论；针对后者产生了量子力学。%\url{https://books.google.com.tw/books?id=YvoAAAAAYAAJ&pg=PA363&redir_esc=y#v=onepage&q&f=false}
 
 涉及统计力学的部分，包括热容、Einstein晶体模型等，详见本人的统计力学笔记内容，此处不多赘述。
 \subsection{黑体辐射问题}
 考虑边长为$L$的立方黑体，电磁波在其内满足驻波条件
-\begin{align}
+\[
 	k^2=\kh{\frac\pi{L}}^2\kh{n_x^2+n_y^2+n_z^2}.
-\end{align}
+\]
 因此$\{n_x,n_y,n_z\}$的解分布在半径为$kL/\pi$的球面上，则球的内解的个数
 \[
 	N(\nu)=2\cdot\frac18\cdot\frac43\pi\kh{\frac{2L\nu}c}^3=\frac{8\pi L^3}{3c^3}\nu^3,
 \]
 系数前乘2是因为有两种偏振态．
 
-解的密度
+解（状态）的密度
 \[
 	g(\nu)=\frac1{L^3}\dv{N(\nu)}\nu=\frac{8\pi}{c^3}\nu^2.
 \]
-根据Boltzmann分布，$P(\ve)\sim\e{\ve/\kB T}$，能量平均值
+根据Boltzmann分布，每个状态上的粒子数$\propto\e{-\varepsilon/\kB T}$。
+能量平均值
 \begin{align}
 	\avg E=\frac{\textstyle\int\zti\ve\e{-\ve/\kB T}\d\ve}{\textstyle\int\zti\e{-\ve/\kB T}\d\ve}=\kB T.
 \end{align}
@@ -58,21 +58,24 @@
 u(\nu,T)=\avg Eg(\nu)=\frac{8\pi\nu^2}{c^3}\kB T.
 \]
 对应的辐射率\footnote{指定方向上的单位立体角和垂直此方向的单位面积上的辐射通量．}
-\begin{align}\label{Rayleigh-Jeans Formula of frequency}
+\begin{align}
+	\label{eqn:Rayleigh-Jeans Formula of frequency}
 	I_\nu(\nu,T)=\frac c{4\pi}u(\nu,T)=\frac{2\nu^2}{c^2}\kB T.
 \end{align}
-特别注意，此处$I_\nu$的单位为$\si{\J\per\m\squared}$；如果以波长$\lambda$为变量，由于得到$g$的过程中有求导，因此
-\begin{align}\label{Rayleigh-Jeans Formula of wavelength}
-	I_\lambda(\lambda,T)=\frac{c}{\lambda^2}\cdot I_\nu\kh{\frac c\lambda,T}=\frac{2c\kB T}{\lambda^4}.
+$I_\nu$的单位为$\si{\J\per\m\squared}$；如果以波长$\lambda$为变量，%由于得到$g$的过程中有求导，因此
+\begin{align}
+	\label{eqn:Rayleigh-Jeans Formula of wavelength}
+	I_\lambda(\lambda,T)=\frac{c}{\lambda^2}\cdot I_\nu\biggkh{\frac c\lambda,T}=\frac{2c\kB T}{\lambda^4}.
 \end{align}
-此处$I_\lambda$的单位为$\si{\W\per\m\cubed}$．
+$I_\lambda$的单位为$\si{\W\per\m\cubed}$．
 
-(\ref{Rayleigh-Jeans Formula of frequency})和(\ref{Rayleigh-Jeans Formula of wavelength})式被称为Rayleigh-Jeans公式．可以看到，当$\lambda\to0$时，$I_\lambda(\lambda,T)\to\infty$这显然与事实不符，因此被称为\textit{紫外灾难}．\footnote{需要指出的时间顺序：Rayleigh于1900年推导公式，Jeans于1905年修正系数，紫外灾变是Ehrenfest于1911年提出，而Planck公式提出于1900年．}
-
+(\ref{eqn:Rayleigh-Jeans Formula of frequency})和(\ref{eqn:Rayleigh-Jeans Formula of wavelength})式被称为Rayleigh-Jeans公式．可以看到，当$\lambda\to0$时，$I_\lambda(\lambda,T)\to\infty$，这显然与事实不符，因此被称为\textit{紫外灾难}．\footnote{需要指出的时间顺序：Rayleigh于1900年推导公式，Jeans于1905年修正系数，紫外灾变是Ehrenfest于1911年提出，而Planck公式提出于1900年．}
+\paragraph{能量量子化}
 Planck的解决方法是将能量分布变为离散的，即$\ve=nh\nu$
 \begin{align}
 	\avg E=\frac{\textstyle\sum_{n=1}^\infty nh\nu\e{-nh\nu/\kB T}}{\textstyle\sum_{n=1}^\infty\e{-nh\nu/\kB T}}=\frac{h\nu}{\e{h\nu/\kB T}-1}.
 \end{align}
+由此得到的辐射率与实验符合的很好。
 \begin{theorem}{Planck黑体辐射定律}{Planck's Law}
 	黑体辐射的辐射率
 	\begin{align}
@@ -91,30 +94,30 @@ Planck的解决方法是将能量分布变为离散的，即$\ve=nh\nu$
 
 考虑$I_\lambda(\lambda,T)$最大时对应的波长$\lambda_{\mathrm m}$，做变换$\xi=\frac{hc}{\lambda\kB T}$，则
 \begin{align*}
-	\dv{I_\lambda}\lambda & =\dv{I_\lambda}\xi\cdot\dv\xi\lambda\propto\dv{}\xi\kh{\frac{\xi^5}{\e\xi-1}}
-	=\frac{\xi^4\fkh{5\kh{\e\xi-1}-\xi\e\xi}}{\kh{\e\xi-1}^2}=0.
+	\dv{I_\lambda}\lambda & =\dv{I_\lambda}\xi\cdot\dv\xi\lambda\propto\dd\xi\biggkh{\frac{\xi^5}{\e\xi-1}}
+	=\frac{\xi^4\bigfkh{5(\e\xi-1)-\xi\e\xi}}{(\e\xi-1)^2}=0.
 \end{align*}
 \iffalse
 	\[
-		\dv{I_\lambda}\lambda=\frac c4\cdot\frac{8\pi}{3c^3}\cdot\dv{}\lambda\kh{\frac{h\nu}{\e{h\nu/\kB T}-1}\cdot\dv{}\lambda\nu^3}.
-\]
+		\dv{I_\lambda}\lambda=\frac c4\cdot\frac{8\pi}{3c^3}\cdot\dd\lambda\kh{\frac{h\nu}{\e{h\nu/\kB T}-1}\cdot\dd\lambda\nu^3}.
+	\]
 	由
 	\[
-		\dv{}\lambda=\dv{}\nu\cdot\dv\nu\lambda=-\frac c{\lambda^2}\dv{}\nu=-\frac{\nu^2}c\dv{}\nu.
-\]
+		\dd\lambda=\dd\nu\cdot\dv\nu\lambda=-\frac c{\lambda^2}\dd\nu=-\frac{\nu^2}c\dd\nu.
+	\]
 	故
 	\begin{align*}
-		\dv r\lambda & =\frac{2h}{3c^2}\cdot\frac{\nu^2}{c}\cdot\dv{}\nu\kh{\frac{\nu}{\e{h\nu/\kB T}-1}\cdot\frac{\nu^2}c\cdot 3\nu^2} \\
-		             & =\frac{2h\nu^2}{c^4}\cdot\dv{}\nu\frac{\nu^5}{\e{h\nu/\kB T}-1},
+		\dv r\lambda&=\frac{2h}{3c^2}\cdot\frac{\nu^2}{c}\cdot\dd\nu\kh{\frac{\nu}{\e{h\nu/\kB T}-1}\cdot\frac{\nu^2}c\cdot 3\nu^2}\\
+		&=\frac{2h\nu^2}{c^4}\cdot\dd\nu\frac{\nu^5}{\e{h\nu/\kB T}-1},
 	\end{align*}
 	设$\xi:=h\nu/\kB T$，则导数等价于
 	\[
-		\dv{}\xi\frac{\xi^5}{\e\xi-1}=\frac{\xi^4}{\kh{\e\xi-1}^2}\fkh{5\kh{\e\xi-1}-\xi\e\xi}=0.
+		\dd\xi\frac{\xi^5}{\e\xi-1}=\frac{\xi^4}{\kh{\e\xi-1}^2}\fkh{5\kh{\e\xi-1}-\xi\e\xi}=0.
 \]
 \fi
 解方程
 \[
-	\xi=5\kh{1-\e{-\xi}}\thus\xi_0=\num{4.96511423}\ldots
+	\xi=5\bigkh{1-\e{-\xi}}\thus\xi_0=\num{4.96511423}\ldots
 \]
 \begin{theorem}{Wein位移定律}{Wien's Displacement Law}
 	黑体电磁辐射光谱辐射度的峰值波长与自身温度乘积为常数
@@ -152,13 +155,13 @@ Planck的解决方法是将能量分布变为离散的，即$\ve=nh\nu$
 	其中$\sigma:=\frac{2\pi^5k^4}{15h^3c^2}=\SI{5.6704e-8}{\W\per\m\squared\per\K\squared}.$
 \end{theorem}
 \subsection{光电效应和Compton效应}
-1897年，Hertz发现紫外线照射到金属电极上，可以帮助产生电火花。对于光电效应中经典理论所不能解释的现象，1905年\footnote{该年Einstein发布了四篇划时代的论文，分别涉及光电效应、布朗运动、狭义相对论和质能方程，也被称为Einstein奇迹年。}Einstein在他的论文《关于光的产生和转变的一个启发性观点》中主张光子也是量子化的，其能量$E=h\nu$，且光电效应方程
+1897年，Hertz发现紫外线照射到金属电极上，可以帮助产生电火花。对于光电效应中经典理论所不能解释的现象，1905年\footnote{该年Einstein发布了四篇划时代的论文，分别涉及光电效应、Brown运动、狭义相对论和质能方程，也被称为Einstein奇迹年。}Einstein在他的论文《关于光的产生和转变的一个启发性观点》中主张光子也是量子化的，其能量$E=h\nu$，且光电效应方程
 \begin{align}
 	\Ek=h\nu-W.
 \end{align}
 其中$\Ek$为光电子最大初动能，$W$为金属表面逸出功．
 
-1923年，Compton发现X射线跟物质相互作用时，散射光波长变长的现象。利用光子的动量$p=h/\lambda$，得出增加的波长
+1923年，Compton发现X射线跟物质相互作用时，散射光波长变长的现象。利用光子的动量$p=h/\lambda$，得出增加的波长与散射角的关系
 \begin{align}
 	\D\lambda=\frac h{m_\elc c}\kh{1-\cos\theta}.
 \end{align}
@@ -177,7 +180,7 @@ Planck的解决方法是将能量分布变为离散的，即$\ve=nh\nu$
 \begin{align}
 	L=m_\elc vr=n\hbar,\quad n=1,2,\ldots
 \end{align}
-再利用经典力学中，库仑力提供电子圆周运动的向心力
+再利用经典力学中，Coulomb力提供电子圆周运动的向心力
 \[
 	\frac1{4\pi\ve_0}\frac{e^2}{r^2}=m_\elc\frac{v^2}r.
 \]
@@ -635,9 +638,8 @@ Hermite多项式的内积
 	\]
 	\tcblower
 	\paragraph*{逆定理}任意态下平均值均为实数的算符是Hermite算符。
-
-	\qquad 因此实验上的可观测量对应的算符都是Hermite的。
 \end{theorem}
+因此实验上的可观测量对应的算符都是Hermite的。
 \begin{theorem}{Hermite算符的本征值}{Eigenvalue of Hermite Operator}
 	Hermite算符的本征值都是实数。
 
@@ -666,55 +668,52 @@ Hermite多项式的内积
 \]
 其中$\delta_{nm}$是Kronecker符号。
 
-若本征函数是非简并、连续的，则波函数可以$\delta$函数归一化或箱归一化
+若本征函数是非简并、连续的，则波函数可以$\delta$函数归一化：%或箱归一化
 \[
 	(\psi_{\lambda'},\psi_\lambda)=\delta(\lambda'-\lambda).
 \]
-\eg 一维动量本征函数的归一化
-\[
-	\hat p\psi=-\i\hbar\dv\psi{x}=p\psi.
-\]
-解得
-\[
-	\psi_p(x)=C\e{\i px/\hbar}.
-\]
-但该函数在$\RR$上平方不可积，应考虑
-\[
-	(\psi_{p'},\psi_p)=\abs C^2\int\iti\e{\i\kh{p-p'}x/\hbar}\d x=\abs C^2\cdot 2\pi\hbar\vd(p-p').
-\]
-将$\delta$函数归一化，有
-\[
-	\psi_p(x)=\frac1{\sqrt{2\pi\hbar}}\e{\i px/\hbar}.
-\]
-
-三维动量算符本征函数同理
-\[
-	\psi_{\bm p}(\r)=\frac1{\kh{2\pi\hbar}^{3/2}}\e{\i\bm p\cdot\r/\hbar}.
-\]
-或对其进行\textbf{箱归一化}，要求：粒子波函数在任意边长为$L$的正方体内正交归一化为1
-\[
-	\int_V\psi_{\bm p_1}\cj(\r)\psi_{\bm p_2}(\r)\d\r=\abs C^2\int_V\e{\i(\bm p_2-\bm p_1)\cdot\r/\hbar}\d\r
-\]
-$\bm p_1=\bm p_2$时
-\[
-	\abs C^2L^3=1,\thus C=L^{-3/2}.
-\]
-$\bm p_1\neq\bm p_2$时
-\[
-	\frac{(-\i\hbar)^3}{L^3\D p_x\D p_y\D p_z}\kh{\e{\i L\D p_x/\hbar}-1}\kh{\e{\i L\D p_y/\hbar}-1}\kh{\e{\i L\D p_z/\hbar}-1}=0.
-\]
-于是
-\[
-	\e{\i L\D p_x/\hbar}=\e{\i L\D p_y/\hbar}=\e{\i L\D p_z/\hbar}=1,\thus\D p=\frac{2\pi\hbar}Ln.
-\]
-因此
-\[
-	\psi_{\bm p}(\r)=\frac1{L^{3/2}}\e{2\pi\i(n_xx+n_yy+n_zz)/L}=\frac1{L^{3/2}}\e{2\pi\i\bm n\cdot\bm r/L}.
-\]
-系统的动量是分立的，但当$L\to\infty$时,又过渡到连续的动量谱。
-
-如果出现简并（即一个本征值有若干个线性独立的本征函数）的情形，则正交性定理不能保证同一本征值的不同本征函数是彼此正交的。
-但是经过对本征函数进行适当的重新组合，可以使它们仍然是正交的，比如线性代数里的Gram-Schmidt法则。
+\begin{example}{动量本征函数的归一化}{}
+	\[
+		\hat p\psi=-\i\hbar\dv\psi{x}=p\psi,\thus\psi_p(x)=C\e{\i px/\hbar}.
+	\]
+	但$\psi_p$在$\RR$上平方不可积，应考虑$\delta$函数归一化
+	\[
+		(\psi_{p'},\psi_p)=\abs C^2\int\iti\e{\i\kh{p-p'}x/\hbar}\d x=\abs C^2\cdot 2\pi\hbar\vd(p-p').
+	\]
+	$\delta$函数前系数应为一，有
+	\[
+		\psi_p(x)=\frac1{\sqrt{2\pi\hbar}}\e{\i px/\hbar}.
+	\]
+	
+	三维动量算符本征函数同理
+	\[
+		\psi_{\bm p}(\r)=\frac1{\kh{2\pi\hbar}^{3/2}}\e{\i\bm p\cdot\r/\hbar}.
+	\]
+	\tcblower
+	或对其进行\textbf{箱归一化}：粒子波函数在任意边长为$L$的正方体内是正交归一化的
+	\[
+		\int_V\psi_{\bm p_1}\cj(\r)\psi_{\bm p_2}(\r)\d\r=\abs C^2\int_V\e{\i(\bm p_2-\bm p_1)\cdot\r/\hbar}\d\r
+	\]
+	$\bm p_1=\bm p_2$时
+	\[
+		\abs C^2L^3=1,\thus C=L^{-3/2}.
+	\]
+	$\bm p_1\neq\bm p_2$时
+	\[
+		\frac{(-\i\hbar)^3}{L^3\D p_x\D p_y\D p_z}\kh{\e{\i L\D p_x/\hbar}-1}\kh{\e{\i L\D p_y/\hbar}-1}\kh{\e{\i L\D p_z/\hbar}-1}=0.
+	\]
+	于是
+	\[
+		\e{\i L\D p_x/\hbar}=\e{\i L\D p_y/\hbar}=\e{\i L\D p_z/\hbar}=1,\thus\D p=\frac{2\pi\hbar}Ln.
+	\]
+	因此
+	\[
+		\psi_{\bm p}(\r)=\frac1{L^{3/2}}\e{2\pi\i(n_xx+n_yy+n_zz)/L}=\frac1{L^{3/2}}\e{2\pi\i\bm n\cdot\bm r/L}.
+	\]
+	系统的动量是分立的，但当$L\to\infty$时,又过渡到连续的动量谱。
+\end{example}
+%如果出现简并（即一个本征值有若干个线性独立的本征函数）的情形，则正交性定理不能保证同一本征值的不同本征函数是彼此正交的。
+%但是经过对本征函数进行适当的重新组合，可以使它们仍然是正交的，比如线性代数里的Gram-Schmidt法则。
 \subsection{测量}
 \paragraph*{共同本征函数}
 若$\hat A$和$\hat B$有共同本征函数$\psi$，即
@@ -725,7 +724,7 @@ $\bm p_1\neq\bm p_2$时
 
 共同本征函数描写的就是几个力学量同时有确定值的状态。这样，如果算符$\hat A$的本征值有简并，我们就再引进另一算符$\hat B$并求出$\hat A$和$\hat B$的共同本征函数。去除所有的简并后，这样一组量子数$(a,b,\ldots)$就完全确定了一个量子态。
 
-这种情形多半出现在多自由度体系中。对这种体系，一组两两对易的、完全去除简并的算符集称为它的对易可观测量完全集(CSCO)。完备算符集中算符的数目就是体系的自由度数。如果这些量子数都是分立量子数，共同本征函数的正交归一关系就是
+这种情形多半出现在多自由度体系中。对这种体系，一组两两对易的、完全去除简并的算符集称为它的对易可观测量完全集(complete system of commuting observables, CSCO)。完备算符集中算符的数目就是体系的自由度数。如果这些量子数都是分立量子数，共同本征函数的正交归一关系就是
 \[
 	\kh{\psi_{n\ell m},\psi_{n'\ell'm'}}=\vd_{nn'}\vd_{\ell\ell'}\vd_{mm'}.
 \]
@@ -1077,41 +1076,43 @@ $\hat L^2$的本征值$\ell$下有$2\ell+1$个可能的$m$，简并度为$2\ell+
 		\psi(\r,t)=\hat U(t)\psi(\r,0).
 \]
 \end{definition}
-\eg[1] 一维自由粒子$\delta(x)$波函数随时间的演化
-\begin{align*}
-	\psi(x,t) & =\e{-\i\hat Ht/\hbar}\vd(x)=\frac1{2\pi}\int\iti\e{\i kx}\e{\i\hbar k^2t/2m}\d k      \\
-	          & =\sqrt{\frac m{2\pi\hbar t}}\exp\kh{\i\frac{mx^2}{2\hbar t}-\frac{\i\pi}4}\neq\vd(x).
-\end{align*}
-其中用到了
-\begin{align}
-	\int\iti\e{-\alpha x^2}\d x=\sqrt{\frac\pi\alpha}.\quad\alpha\neq 0,\Re\alpha\geqslant 0.
-\end{align}
-\eg[2]一维自由粒子Gauss波包的时间演化
-\[
-	\psi(x,0)=\frac1{\kh{2\pi\sigma^2}^{1/4}}\e{-x^2/4\sigma^2}\e{\i k_0x},
-\]
-Fourier变换得
-\[
-	\vf(k)=\sqrt[4]{\frac{2\sigma^2}{\pi}}\e{-\sigma^2(k-k_0)^2}.
-\]%\footnote{$\mathcal F(e^{-x^2/\sigma^2})=\frac\sigma{\sqrt2}e^{-\sigma^2k^2/4}$.}
-于是\footnote{Everyone should calculate it once in their lifetime. - Shuo Jiang.}
-\begin{align*}
-	\psi(x,t) & =\frac1{\sqrt{2\pi}}\int\iti\vf(k)\e{\i kx}\e{-\i\hbar k^2t/2m}\d k                                                                                                                            \\
-	          & =\frdp{\exp\kh{\i k_0x-\frac{\hbar k_0^2}{2m}t}}{\fkh{\sqrt{2\pi}\sigma\kh{1+\frac{\i\hbar t}{2m\sigma^2}}}^{1/2}}\exp\fkh{-\frdp{\kh{x-\frac{\hbar k_0}mt}^2}{4\sigma^2+\frac{2\i\hbar t}m}}.
-\end{align*}
-概率密度
-\begin{align*}
-	\abs{\psi(x,t)}^2=\fkh{2\pi\!\kh{\sigma^2+\frac{\i\hbar t}{2m\sigma^2}}}^{-1/2}\exp\fkh{-\frdp{\kh{x-\frac{\hbar k_0}mt}^2}{2\sigma^2+\frac{2\hbar^2 t^2}{m^2\sigma^2}}}.
-\end{align*}
-
-可见波包中心运动速度为
-\[
-	\frac xt=\frac{\hbar k_0}m,
-\]
-波包宽度是发散的
-\[
-	\sigma(t)=\sqrt{\sigma^2+\frac{\hbar^2t^2}{4m^2\sigma^2}}.
-\]
+\begin{example}
+	{一维自由粒子$\delta(x)$波函数随时间的演化}{}
+	\begin{equation*}
+		\begin{aligned}
+			\psi(x,t) & =\e{-\i\hat Ht/\hbar}\vd(x)=\frac1{2\pi}\int\iti\e{\i kx}\e{\i\hbar k^2t/2m}\d k      \\
+			          & =\sqrt{\frac m{2\pi\hbar t}}\exp\kh{\i\frac{mx^2}{2\hbar t}-\frac{\i\pi}4}\neq\vd(x).
+		\end{aligned}
+	\end{equation*}
+	其中用到了
+	\begin{align}
+		\int\iti\e{-\alpha x^2}\d x=\sqrt{\frac\pi\alpha}.\quad\alpha\neq 0,\Re\alpha\geqslant 0.
+	\end{align}
+\end{example}
+\begin{example}
+	{一维自由粒子Gauss波包的时间演化}{}
+	\[
+		\psi(x,0)=\frac1{\kh{2\pi\sigma^2}^{1/4}}\e{-x^2/4\sigma^2}\e{\i k_0x},
+	\]
+	Fourier变换得
+	\[
+		\vf(k)=\sqrt[4]{\frac{2\sigma^2}{\pi}}\e{-\sigma^2(k-k_0)^2}.
+	\]%\footnote{$\mathcal F(e^{-x^2/\sigma^2})=\frac\sigma{\sqrt2}e^{-\sigma^2k^2/4}$.}
+	于是\footnote{Everyone should calculate it once in their lifetime. - Shuo Jiang.}
+	\begin{align*}
+		\psi(x,t) & =\frac1{\sqrt{2\pi}}\int\iti\vf(k)\e{\i kx}\e{-\i\hbar k^2t/2m}\d k                                                                                                                            \\
+		          & =\frdp{\exp\kh{\i k_0x-\frac{\hbar k_0^2}{2m}t}}{\fkh{\sqrt{2\pi}\sigma\kh{1+\frac{\i\hbar t}{2m\sigma^2}}}^{1/2}}\exp\fkh{-\frdp{\kh{x-\frac{\hbar k_0}mt}^2}{4\sigma^2+\frac{2\i\hbar t}m}}.
+	\end{align*}
+	概率密度
+	\begin{align*}
+		\abs{\psi(x,t)}^2=\fkh{2\pi\!\kh{\sigma^2+\frac{\i\hbar t}{2m\sigma^2}}}^{-1/2}\exp\fkh{-\frdp{\kh{x-\frac{\hbar k_0}mt}^2}{2\sigma^2+\frac{2\hbar^2 t^2}{m^2\sigma^2}}}.
+	\end{align*}
+	
+	可见波包中心运动速度为$\hbar k_0/m$，而波包宽度是发散的
+	\[
+		\sigma(t)=\sqrt{\sigma^2+\frac{\hbar^2t^2}{4m^2\sigma^2}}.
+	\]
+\end{example}
 \subsection{守恒}
 先看力学量的平均值
 \[
@@ -1220,24 +1221,26 @@ Fourier变换得
 		\ave T=\frac12\ave{\sum_i\hat x_i\pv{\hat V}{x_i}}.
 	\end{align}
 \end{theorem}
-\eg[1]一维谐振子定态$V(x)=\frac12m\omega^2x^2$，
-\[
-	\ave T=\frac12\ave{x\dv Vx}=\frac12m\omega^2\ave{x^2}=\ave V,
-\]
-因此$\ave T=\ave V=E/2$，进而
-\begin{gather*}
-	\delta x=\sqrt{\ave{x^2}}=\sqrt{\frac{2\ave V}{m\omega^2}}=\sqrt{\frac E{m\omega^2}},\\
-	\delta p=\sqrt{\ave{p^2}}=\sqrt{2m\ave T}=\sqrt{mE}.
-\end{gather*}
-故
-\[
-	\delta x\,\delta p=\frac E\omega=\kh{n+\frac12}\hbar\geqslant\frac\hbar{2}.
-\]
-\eg[2]氢原子 $V(r)=-\frac1{4\pi\ve_0}\frac{e^2}r$，
-\[
-	\ave T=\frac12\ave{r\dv Vr}=-\frac12\ave V,
-\]
-故$\ave T=-E,\;\ave V=2E$与Bohr轨道模型结论一致。
+\begin{example}{一维谐振子定态的动能平均值}{}
+	\[
+		V(x)=\frac12m\omega^2x^2,\quad\ave T=\frac12\ave{x\dv Vx}=\frac12m\omega^2\ave{x^2}=\ave V,
+	\]
+	因此$\ave T=\ave V=E/2$，进而
+	\begin{gather*}
+		\delta x=\sqrt{\ave{x^2}}=\sqrt{\frac{2\ave V}{m\omega^2}}=\sqrt{\frac E{m\omega^2}},\\
+		\delta p=\sqrt{\ave{p^2}}=\sqrt{2m\ave T}=\sqrt{mE}.
+	\end{gather*}
+	故
+	\[
+		\delta x\,\delta p=\frac E\omega=\kh{n+\frac12}\hbar\geqslant\frac\hbar{2}.
+	\]
+\end{example}
+\begin{example}{氢原子动能}{}
+	\[
+		V(r)=-\frac1{4\pi\ve_0}\frac{e^2}r,\quad\ave T=\frac12\ave{r\dv Vr}=-\frac12\ave V,
+	\]
+	故$\ave T=-E,\;\ave V=2E$，与Bohr轨道模型结论一致。
+\end{example}
 \subsection{Ehrenfest定理}
 已经知道
 \[
@@ -1264,7 +1267,7 @@ Fourier变换得
 \]
 \eg $\alpha$粒子被原子散射来探测原子结构，就需要：
 \begin{compactenum}
-	\item 进入原子时$\alpha$粒子的波包的大小远小于原子的尺度(\SI1\angstrom)
+	\item 进入原子时$\alpha$粒子的波包的大小远小于原子的尺度(\si\angstrom)
 	\item 原子势场在波包大小的范围内变化不大，这样原子核对波包的作用力可以用原子核对波包中心的作用力代替
 	\item 由于波包会随着时间扩散变大，所以由要求散射过程所需时间极短，% 使得在散射过程中波包本身大小变化不大。
 	这就需要粒子的de Broglie波长也要远小于波包的尺度
