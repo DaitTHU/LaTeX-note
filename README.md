@@ -22,8 +22,8 @@ example:
     % default: Dait
 \def\authorEnglishname{Dait}
     % default: Dait
-\def\departmentname{DEP 00, THU}
-    % default: DEP 00, THU
+\def\departmentname{THU}
+    % default: THU
 \def\emailaddress{daiyj20@mails.tsinghua.edu.cn}
     % default: daiyj20@mails.tsinghua.edu.cn
 \def\beginday{2022/2/24}
