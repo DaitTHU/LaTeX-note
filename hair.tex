@@ -28,7 +28,6 @@
 \newif\ifcontent\contenttrue		% if 显示目录
 \newif\ifparskip\parskipfalse		% if 增加目录后的行距
 \newif\ifshowemail\showemailfalse	% if 显示 email
-\newif\iflecturedeclare\lecturedeclarefalse	% 创作声明
 \def\firstandforemost{
 	\maketitle
 	%\thispagestyle{empty}\clearpage
@@ -56,6 +55,7 @@
 	per-mode = symbol,
 	per-mode = reciprocal-positive-first,
 	range-units = single,
+	separate-uncertainty = true,
 	range-phrase = \ifmmode\text{\;-\;}\else\;-\;\fi
 }
 \DeclareSIUnit\angstrom{\text{Å}}
@@ -86,14 +86,10 @@
 	\def\endday{\number\year/\number\month/\number\day}
 \fi
 \ifx \titleannotation\undefined
-	\iflecturedeclare
-		\ifx \teachername\undefined
-			\title{\textbf{\coursefullname}\\\small\textit{(本文主要系作者原创)}}
-		\else
-			\title{\textbf{\coursefullname}\\\small\textit{(本文主要整理自\teachername 老师讲义)}}
-		\fi
-	\else
+	\ifx \teachername\undefined
 		\title{\textbf{\coursefullname}}
+	\else
+		\title{\textbf{\coursefullname}\\\small\textit{主要整理自\teachername 老师讲义}}
 	\fi
 \else
 	\title{\textbf{\coursefullname}\\\small\textit{(\titleannotation)}}
@@ -130,6 +126,7 @@
 \hyphenation{long-sen-ten-ce}				% 自定义拆分方式
 
 \usepackage{tikz}
+\usetikzlibrary{quotes, angles}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.17}								% TikZ
 \newcommand{\coor}[5][0]{
@@ -145,7 +142,7 @@
 \else
 	\numberwithin{equation}{\eqnrange}
 \fi
-\newcounter{tikzpic}
+
 \renewcommand{\thempfootnote}{\Roman{mpfootnote}}
 \renewcommand{\thefootnote}{\Roman{footnote}}		% 注释上标 I, II,...
 \newcommand{\sectionstar}[1]{
@@ -153,6 +150,9 @@
 }
 \newcommand{\subsectionstar}[1]{					% 带星号的 section 和 subsection
 	\subsection{\hspace{-1em}*\hspace{.5em}#1}
+}
+\newcommand{\subsubsectionstar}[1]{					% 带星号的 section 和 subsection
+	\subsubsection{\hspace{-1em}*\hspace{.5em}#1}
 }
 \newcommand*{\appendiks}{
 	\appendix
@@ -185,62 +185,77 @@
 	margin=20pt, format=hang,
 	justification=justified
 }
+\newcounter{tikzpic}
 \def\tikzchap{
 	\stepcounter{tikzpic}\\
 	\small 图~\thetikzpic\quad
 }
+\newcounter{linetable}
+\newcommand{\tablechap}[1]{
+	\stepcounter{linetable}
+	{\small 表~\thelinetable\quad #1}\\[1em]
+}
 
 \usepackage{tcolorbox}									% 盒子
 \tcbuselibrary{theorems, skins, breakable}
-\definecolor{matchagreen}{HTML}{73C088}		% 抹茶绿B7C6B3
+\definecolor{MatchaGreen}{HTML}{73C088}		% 抹茶绿B7C6B3
 \newtcbtheorem[number within = subsection]{example}{例}{
 	enhanced, breakable, sharp corners,
 	attach boxed title to top left = {yshifttext = -1mm},
 	before skip = 2ex,
-	colback = matchagreen!5,				% 文本框内的底色
-	colframe = matchagreen,					% 文本框框沿的颜色
+	colback = MatchaGreen!5,				% 文本框内的底色
+	colframe = MatchaGreen,					% 文本框框沿的颜色
 	fonttitle = \bfseries,					% 标题字体用粗体	coltitle 默认 white,
 	boxed title style = {
-			sharp corners, size = small, colback = matchagreen,
+			sharp corners, size = small, colback = MatchaGreen,
 		}
 }{exm}
-\definecolor{melancholyblue}{HTML}{9EAABA}	% melancholy: 沮丧
+\definecolor{MelancholyBlue}{HTML}{9EAABA}	% melancholy: 沮丧
 \newcounter{pslt}
 \setcounter{pslt}{-1}
 \newtcbtheorem[use counter = pslt]{posulate}{假设}{
 	enhanced, breakable, sharp corners,
 	attach boxed title to top left = {yshifttext = -1mm}, before skip = 2ex,
-	colback = melancholyblue!5, colframe = melancholyblue, fonttitle = \bfseries,
+	colback = MelancholyBlue!5, colframe = MelancholyBlue, fonttitle = \bfseries,
 	boxed title style = {
-			sharp corners, size = small, colback = melancholyblue,
+			sharp corners, size = small, colback = MelancholyBlue,
 		}
 }{psl}
+\definecolor{PureBlue}{HTML}{80A3D0}
 \newtcbtheorem[number within = subsection]{definition}{定义}{
 	enhanced, breakable, sharp corners,
 	attach boxed title to top left = {yshifttext = -1mm}, before skip = 2ex,
-	colback = pureblue!5, colframe = pureblue, fonttitle = \bfseries,
+	colback = PureBlue!5, colframe = PureBlue, fonttitle = \bfseries,
 	boxed title style = {
-			sharp corners, size = small, colback = pureblue,
+			sharp corners, size = small, colback = PureBlue,
 		}
 }{dfn}
-\definecolor{fadedgold}{HTML}{D9CBB0}		% 褪色金
+\definecolor{PeachRed}{HTML}{EA868F}
 \newtcbtheorem[number within = subsection]{theorem}{定理}{
 	enhanced, breakable, sharp corners,
 	attach boxed title to top left = {yshifttext = -1mm}, before skip = 2ex,
-	colback = peachred!5, colframe = peachred, fonttitle = \bfseries,
+	colback = PeachRed!5, colframe = PeachRed, fonttitle = \bfseries,
 	boxed title style = {
-			sharp corners, size = small, colback = peachred,
+			sharp corners, size = small, colback = PeachRed,
 		}
 }{thm}
+\definecolor{SchembriumYellow}{HTML}{fbd26a}	% 申博太阳城黄
+\newtcbtheorem[number within = section]{method}{方法}{
+	enhanced, breakable, sharp corners,
+	attach boxed title to top left = {yshifttext = -1mm}, before skip = 2ex,
+	colback = SchembriumYellow!5, colframe = SchembriumYellow, fonttitle = \bfseries,
+	boxed title style = {
+			sharp corners, size = small, colback = SchembriumYellow,
+		}
+}{mtd}
 % 保留颜色
+\definecolor{fadedgold}{HTML}{D9CBB0}		% 褪色金
 \definecolor{saturatedgold}{HTML}{F0E0C2}	% staurated: 饱和
 \definecolor{elegantblue}{HTML}{C4CCD7}		% elegant: 优雅
 \definecolor{ivory}{HTML}{F1ECE6}			% 象牙
-\definecolor{maidenpink}{HTML}{EDCED3}		% 少女粉
 \definecolor{gloomypruple}{HTML}{CCC1D2}	% 阴沉紫
 % \textcolor[HTML]{FFC23A}					% 石板灰
-\definecolor{peachred}{HTML}{EA868F}
-\definecolor{pureblue}{HTML}{80A3D0}
+
 \definecolor{Green}{rgb}{0,.8,0}
 
 \usepackage{imakeidx}								% 索引
@@ -253,3 +268,5 @@
 \renewcommand{\nomname}{术语表} 						% 修改术语表标题的名称。
 
 \usepackage{array}
+\usepackage{booktabs} % 三线表
+\usepackage{multirow}

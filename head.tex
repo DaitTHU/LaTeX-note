@@ -3,16 +3,22 @@
 \newcommand{\bs}[1]{\hspace{-#1 pt}}		% 手动减间距	backspace
 \newcommand{\bv}[1]{\vspace{-#1 pt}}		% 手动缩行距	backvspace
 \def\directlisteqn{\vspace{-1ex}}
+\newcommand*{\qqquad}{\qquad\quad}
+\newcommand*{\qqqquad}{\qquad\qquad}
 \iffalse									% 尽量避免孤行
 	\widowpenalty=4000
 	\clubpenalty=4000
 \fi
 
 % 杂项符号
+\let\geq\geqslant
 \def\avg{\overline}
+\let\ifaoif\iff
+\let\iff\relax
 \newcommand*{\rqed}{\tag*{$\square$}}								% 靠右 QED
 \newcommand*{\halfqed}{\tag*{$\boxdot$}}
 \newcommand*{\thus}{\quad\Rightarrow\quad}							% =>
+\newcommand*{\iff}{\enspace\Leftrightarrow\enspace}						% <=>	if and only if
 \newcommand*{\ifnf}{\quad\Leftrightarrow\quad}						% <=>	if and only if
 \newcommand*{\turnto}{\quad\to\quad}
 \newcommand*{\normalize}{\quad\overset{\mathrm{normalize}}{-\!\!\!-\!\!\!-\!-\!\!\!\longrightarrow}\quad}
@@ -24,6 +30,8 @@
 \newcommand{\dpfr}[2]{\displaystyle\frac{#1}{#2}}					% 大分数
 \newcommand{\frdp}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
 \newcommand{\spark}[1]{\;\textcolor{red}{#1}}
+\newcommand*{\verylongrightarrow}{ -\bs4-\bs4-\bs4-\bs4-\bs5\longrightarrow}
+\newcommand*{\semilongrightarrow}{-\bs4-\bs5\longrightarrow}
 
 % 简化更常用的希腊字母
 \newcommand*{\vf}{\varphi}
@@ -45,17 +53,19 @@
 \usepackage{bm}											% 粗体 \bm
 \newcommand{\hbm}[1][r]{\hat{\bm #1}}	% 应该不会有两个字母的
 \newcommand{\ibm}[1]{\,\bm #1}
+\newcommand{\uvec}[1]{\mathop{}\!\hat{\bm #1}}
 
 % Using EnglischeSchT script font style
-\newfontfamily{\calti}{EnglischeSchT}
-\newcommand{\mathcalti}[1]{\mbox{\calti{#1}}}
-\newcommand{\mathcaltibf}[1]{\mbox{\bf\calti{#1}}}
+%\newfontfamily{\calti}{EnglischeSchT}
+%\newcommand{\mathcalti}[1]{\mbox{\calti{#1}}}
+%\newcommand{\mathcaltibf}[1]{\mbox{\bf\calti{#1}}}
 
 \usepackage{mathrsfs}									% 花体 \mathscr
 % \usepackage{boondox-cal}								% 小写花体 \mathcal
 \newcommand*{\RR}{\mathbb R}
 \newcommand*{\CC}{\mathbb C}
 \newcommand*{\ZZ}{\mathbb Z}
+\newcommand*{\NN}{\mathbb N}
 \newcommand*{\sC}{\mathscr C}			% n 阶连续可导函数
 \newcommand*{\sR}{\mathscr R}			% 黎曼可积
 % 算符用 \mathcal
@@ -122,10 +132,17 @@
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}								% ||x|| 模
 \newcommand{\edg}[1]{\left.#1\right\rvert}										% f|  竖线
 \newcommand{\kh}[1]{\left(#1\right)}											% (x) 括号
+\newcommand{\bigkh}[1]{\bigl(#1\bigr)}
+\newcommand{\Bigkh}[1]{\Bigl(#1\Bigr)}
+\newcommand{\biggkh}[1]{\biggl(#1\biggr)}
 \newcommand{\fkh}[1]{\left[#1\right]}											% [x] 方括号
+\newcommand{\bigfkh}[1]{\bigl[#1\bigr]}
+\newcommand{\Bigfkh}[1]{\Bigl[#1\Bigr]}
+\newcommand{\biggfkh}[1]{\biggl[#1\biggr]}
 \newcommand{\hkh}[1]{\left\{#1\right\}}											% {x} 花括号
 \newcommand{\zkh}[1]{\lfloor\bs{4.7}\lceil #1\rceil\bs{4.7}\rfloor}				% [x] 中括号
-\newcommand{\ikh}[2][0]{\ifnum#1=0 \zkh{#2}\else \fkh{#2}\fi}					% [x] 可调大小的中括号
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
 \newcommand{\set}[2]{\left\{#1\,\middle\vert\,#2\right\}}						% {x|x1,x2,...} 集合
 \newcommand{\ave}[1]{\left\langle #1\right\rangle}								% <x> 平均值
 \newcommand{\bra}[1]{\left\langle #1\right\vert}								% <ψ| 左矢
@@ -136,7 +153,7 @@
 
 % 数学运算符
 \let\Real\Re
-\let\Imagin\Im
+\let\Imagine\Im
 \let\Re\relax
 \let\Im\relax
 \DeclareMathOperator{\Re}{Re}					% 
@@ -158,19 +175,22 @@
 \DeclareMathOperator{\arr}{A}					% 排列数
 \DeclareMathOperator{\com}{C}					% 组合数
 \DeclareMathOperator{\Res}{Res}					% 留数
-\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\supp}{supp}				% 支撑集
+\DeclareMathOperator{\Int}{Int}					% 内部
+\DeclareMathOperator{\Ext}{Ext}					% 外部
 \newcommand*{\bigo}{\mathcal O}
+\newcommand{\degree}{^\circ}
 
 % 线性代数
-\newif\ifLinearAlgebra\LinearAlgebratrue
-\ifLinearAlgebra
+% \newif\ifLinearAlgebra\LinearAlgebratrue
+% \ifLinearAlgebra
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\id}{id}
-\newcommand*{\tp}{^{\mathrm T}}				% AT 转置
+\newcommand*{\tp}{^\top}					% AT 转置
 \newcommand*{\cj}{^\ast}					% A* 共轭
 \newcommand*{\dg}{^\dagger}					% A† 共轭转置
 \newcommand*{\iv}{^{-1}}					% A-1
-\fi
+% \fi
 
 % 物理学家
 \newcommand*{\Schr}{Schrödinger}
@@ -182,6 +202,7 @@
 % 粒子
 \newcommand*{\elc}{\mathrm e}
 \newcommand*{\pton}{\mathrm p}
+\newcommand*{\nton}{\mathrm n}
 \newcommand*{\mol}{\mathrm m}
 
 % 物理常数
@@ -193,5 +214,11 @@
 \newcommand*{\Ek}{E_{\mathrm k}}							% 动能
 \newcommand*{\eff}{_\mathrm{eff}}							% 有效下标
 \newcommand*{\tot}{_\mathrm{tot}}
+\newcommand*{\maxi}{_\mathrm{max}}
+\newcommand*{\mini}{_\mathrm{min}}
 \newcommand*{\lSI}{\tag{SI}}
 \newcommand*{\CGS}{\tag{CGS}}								% cm, g, s 制
+\newcommand*{\FWHM}{\mathrm{FWHM}}
+
+
+\newenvironment{equationset}{\left\{\begin{aligned}}{\end{aligned}\right.}
