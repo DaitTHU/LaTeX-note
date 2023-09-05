@@ -8,6 +8,7 @@
 已收录本人的（排名并不按照学期顺序）：
 
 - 微积分A (2) Calculus 2
+- 线性代数 Linear Algebra
 - 概率论与数理统计 Probability and Statistics
 - 数学物理方法 Methods of Mathematics and Physics
 - 量子力学 Quantum Mechanics
