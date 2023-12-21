@@ -3931,7 +3931,7 @@ $-m_\elc\omega_0^2\bm x$是回复力(restoring force)，$-m_\elc\gamma\dot{\bm x
 \[
     \bm p=-e\bm x=\frac{e^2}{m_\elc(\omega_0^2-\omega^2-\i\omega\gamma)}\bm E.
 \]
-从微观到宏观，单位体积内有$N$个分子，每个分子由$Z$个电子；我们将分子中的电子分类，第$j$组有$f_j$个特性相同的电子，其结合频率为$\omega_j$，阻尼常数为$\gamma_j$。
+从微观到宏观，单位体积内有$N$个分子，每个分子有$Z$个电子；我们将分子中的电子分类，第$j$组有$f_j$个特性相同的电子，其结合频率为$\omega_j$，阻尼常数为$\gamma_j$。
 代入$\bm P=\varepsilon_0\chi_\elc\bm E$和$\varepsilon_\r=1+\chi_\elc$得到
 \begin{equation}
     \varepsilon_\r(\omega)=1+\frac{Ne^2}{\varepsilon_0m_\elc}\sum_j\frac{f_j}{\omega_j^2-\omega^2-\i\omega\gamma_j},
@@ -4071,7 +4071,7 @@ $A(k)$描述了不同波的线性叠加的性质，
     v_\text g=\frac c{\displaystyle n(\omega)+\omega\dv n\omega},
 \end{equation}
 \paragraph{群速度可以大于光速吗？}
-随着频率$\omega$的增大，经过一系列共振频率，折射率$n(\omega)$将在1附近出现上升和下降的变化，我们称上升段为正常色散，下降段为反常色散(anomalous dispersion)，由群速度$v_\text g$和$\d n/\d\omega$的关系(\ref{eqn:gruop v})，在反常色散中群速度是可以超越光速的，但这并不违反相对论，个人的解释是这种群速度是波包是速度，并不传递信息。\footnote{唐老师课上讲的词忘了。}
+随着频率$\omega$的增大，经过一系列共振频率，折射率$n(\omega)$将在1附近出现上升和下降的变化，我们称上升段为正常色散，下降段为反常色散(anomalous dispersion)，由群速度$v_\text g$和$\d n/\d\omega$的关系(\ref{eqn:gruop v})，在反常色散中群速度是可以超越光速的，但这并不违反相对论，个人的解释是这种群速度是波包的速度，并不传递信息。\footnote{唐老师课上讲的词忘了。}
 \paragraph{进一步讨论群速度的有效性}
 考虑频率对波数依赖的特定模型，并在不近似的情况下计算脉冲在该模型介质中的传播。$t=0$时标量波的初始值和初始变化率为$u(x,0),\dot u(x,0)$，则 
 \[
@@ -4185,6 +4185,7 @@ Kramers-Kronig关系具有非常普遍的有效性，这仅仅是根据极化和
     \Im[\varepsilon_\r(\omega)]&\simeq\frac{\pi K}{2\omega_0}\vd(\omega'-\omega_0)+\cdots\\
     \Re[\varepsilon_\r(\omega)]&\simeq\bar\varepsilon+\frac K{\omega_0^2-\omega^2},
 \end{align*}
+后略。
 \clearpage
 \section{波导}
 \label{sec:waveguide}
@@ -4265,12 +4266,12 @@ $\bm H_\parallel$是导体外表面的切向磁场，则导体内电场
     \bm E(x,y,z,t)=\bm E(x,y)\e{\i(\pm kz-\omega t)},
 \]
 由适当的线性组合可以给出沿$z$方向的行波或驻波，目前，波数$k$是一个未知参数，它可能是实数也可能是复数。假定了场对$z$有上述依赖关系后，波动方程就简化为二维形式：
-\[
+\begin{equation}
     (\lapla_\t+\mu\varepsilon\omega^2-k^2)\bm E=0,
-\]
+\end{equation}
 其中$\lapla_\t$表示Laplace算符的横向部分：
 \[
-    \lapla_\t:=\lapla-\pp[2]z,
+    \lapla=:\lapla_\t+\pp[2]z,
 \]
 再将场分解为平行和垂直于$z$轴两个分量$\bm E=\bm E_z+\bm E_\t$：
 \[
@@ -4301,7 +4302,7 @@ Maxwell方程组变为
 \[
     \bm B_\text{TEM}=\pm\sqrt{\mu\varepsilon}\uvec z\times\bm E_\text{TEM},
 \]
-电导率为无穷大的单个中空柱形导体内不可能存在TEM模。为了运载TEM模，必须有两个及以上的圆柱面(等势面)。TEM模的一个重要性质是不存在截止频率，即对任意$\omega$，$k$均是实数。
+电导率为无穷大的单个中空柱形导体内不可能存在TEM模。为了运载TEM模，必须有两个及以上的等势面(比如同轴线)。TEM模的一个重要性质是不存在截止频率，即任意$\omega$均可以传播（$k$均是实数）。
 \paragraph{TM波和TE波}
 在中空柱体内(以及高频时的传输线上)出现两类场的构型。考虑纵向分量$E_z$和$B_z$满足的波动方程以及边界条件，就可以看出这两类场的构型的存在。对于理想导电柱体，边界条件是
 \[
@@ -4317,15 +4318,15 @@ Maxwell方程组变为
 \end{equation}
 对于给定频率$\omega$来说，波数$k$只可以出现某些值(波导情况)；或对于给定波数$k$来说，只允许某些$\omega$值(谐振腔)。由于$E_z$和$B_z$边界条件不同，所以一般来说本征值是不同的，因此场自然分为两种类型：
 \begin{compactitem}
-	\item TE波：处处$B_z=0$，边界条件$E_z|_S=0;$
-	\item TM波：处处$E_z=0$，边界条件$\p B_z/\p n|_S=0.$
+	\item TM波：横向只有磁场，处处$B_z=0$，电场边界条件$E_z|_S=0$；
+	\item TE波：横向只有电场，处处$E_z=0$，磁场边界条件$\p B_z/\p n|_S=0.$
 \end{compactitem}
 \subsection{波导}
 当波在一个均匀截面的中空波导中传播时，可得TM波和TE波的横磁场和横电场的关系如下：
 \[
-    \bm H_\t=\pm\frac1Z\uvec z\times\bm E_\t,
+    \bm H_\t=\pm\uvec z\times\frac{\bm E_\t}Z,
 \]
-$Z$为波阻抗，
+$Z$为波阻抗：
 \[
     Z:=\begin{cases}
         \frac k{\varepsilon\omega}=\frac k{k_0}\sqrt{\frac\mu\varepsilon},&\text{TM}\\
@@ -4348,9 +4349,9 @@ $Z$为波阻抗，
 \]
 可以确定一系列本征值$\gamma_\lambda$和本征函数$\psi_\lambda$，这些不同的解称为波导的波模。对于给定的频率$\omega$，每个$\lambda$对应的波数
 \[
-    k_\lambda^2=\mu\varepsilon\frac{\omega^2}{c^2}-\gamma_\lambda^2.
+    k_\lambda^2=\mu\varepsilon\omega^2-\gamma_\lambda^2.
 \]
-定义截止频率(cutoff frequency)：
+由$k_\lambda^2=0$可定义截止频率(cutoff frequency)：
 \begin{equation}
     \label{eqn:cutoff omega}
     \omega_\lambda:=\frac{\gamma_\lambda}{\sqrt{\mu\varepsilon}},
@@ -4361,8 +4362,8 @@ $Z$为波阻抗，
 \]
 截止频率的意义为：
 \begin{compactitem}
-    \item 当$\omega>\omega_\lambda$时，$k_\lambda$是实数，$\lambda$模的波可以在波导中传播；
-    \item 当$\omega<\omega_\lambda$时，$k_\lambda$是虚数，$\lambda$模的波不能传播。
+    \item 当$\omega>\omega_\lambda$时，$k_\lambda^2>0$，$\lambda$模的波可以在波导中传播；
+    \item 当$\omega<\omega_\lambda$时，$k_\lambda^2<0$，$\lambda$模的波不能传播。
 \end{compactitem}
 因此给定频率上，只有有限个波模可以传播。选择波导的尺寸，使得在使用频率上只能出现最低波模的波，这往往是最方便的。
 
@@ -4371,17 +4372,16 @@ $Z$为波阻抗，
     v_\varphi=\frac\omega{k_\lambda}=\frac c{\sqrt{\mu\varepsilon}}\frac1{\sqrt{1-(\omega_\lambda/\omega)^2}}>\frac c{\sqrt{\mu\varepsilon}}.
 \]
 \subsubsection{矩形波导中的波模}
-我们考虑矩形波导中的TE波：$E_z=0,\,H_z=\psi$
 \begin{example}{矩形波导中的波模}{modes in a rectangular waveguide}
-    在内尺寸为$a,b$的矩形波导中，
+    在内尺寸为$a,b$的矩形波导中（不失一般性取$a>b$），
     \[
         \Bigkh{\pp[2]x+\pp[2]y+\gamma^2}\psi=0,
     \]
-    边界上$\p\psi/\p n=0$可得
+    考虑TE波：$E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
     \[
-        \psi_{mn}=H_0\cos\Bigkh{\frac{m\pi x}a}\cos\Bigkh{\frac{n\pi y}b},\quad\gamma_{mn}^2=\pi^2\Bigkh{\frac{m^2}{a^2}+\frac{n^2}{b^2}}.
+        \psi_{mn}=H_0\cos\Bigkh{\frac{m\pi x}a}\cos\Bigkh{\frac{n\pi y}b},\quad\gamma_{mn}=\pi\sqrt{\Bigkh{\frac ma}^2+\Bigkh{\frac nb}^2}.
     \]
-    不失一般性取$a>b$，则TE模的最低截止频率为$m=1,\,n=0$
+    则TE模的最低截止频率为$m=1,\,n=0$
     \[
         \omega_{10}=\frac\pi{\sqrt{\mu\varepsilon}a}.
     \]
@@ -4394,11 +4394,11 @@ $Z$为波阻抗，
     \end{align*}
     $\i$说明传播方向上$H_x,E_y$与$H_z$有$90\degree$的相位差。
     \tcblower
-    TM波：
+    TM波：$H_z=0,E_z=\psi,$
     \[
         E_z=E_0\sin\Bigkh{\frac{m\pi x}a}\sin\Bigkh{\frac{n\pi y}a},
     \]
-    最低波模为$m=n=1$。
+    $\gamma_{mn}$同TM模，但$m,n$均不能为0，最低波模为$m=n=1$。
 \end{example}
 \subsubsection{波导中的能流和衰减}
 我们扩大前面对任意截面形状的柱形波导所作的一般讨论，使它包括沿波导的能流以及波的衰减，后者是当电导率有限时由波导管壁中能量损耗所引起的。我们只限于讨论波导中只存在一种波模的情况；不过将简短提一下简并波模。能流用复Poynting矢量描写；
@@ -4457,8 +4457,58 @@ $Z$为波阻抗，
 略
 \subsection{谐振腔}
 一个谐振腔(resonant cavity)可以是任何形状的，具有一个封闭的导体表面。但通常我们将端面放置在一个长度的圆柱形波导上，以产生一个空腔。端面是垂直于圆柱体轴线的平面。
+
+由$z=0,d$的边界条件，应有驻波形式：
+\begin{align*}
+    \text{TM}&:&E_z=\psi(x,y)\cos\Bigkh{\frac{p\pi z}d},&&p&=0,1,2,\ldots,\\
+    \text{TE}&:&H_z=\psi(x,y)\sin\Bigkh{\frac{p\pi z}d},&&p&=1,2,3,\ldots,
+\end{align*}
+特征值频率
+\[
+    \omega_{\lambda_p}^2=\frac1{\mu\varepsilon}\Bigfkh{\gamma_\lambda^2+\Bigkh{\frac{p\pi}d}^2},
+\]
+
+对于TM模，$\psi=E_z$，
+\[
+    \psi(\rho,\phi)=E_0J_m(\gamma_{mn}\rho)\e{\pm\i m\phi},\quad\gamma_{mn}=\frac{x_{mn}}R,
+\]
+其中$x_{mn}$表示$J_m(x)$的第$n$个零点：
+\begin{equation}
+    \begin{matrix}
+        x_{mn}&n=1&n=2&n=3\\
+        m=0&2.405&5.520&8.654\\
+        m=1&3.832&7.016&10.173\\
+        m=2&5.136&8.417&11.620\\
+        m=3&6.380&9.761&13.015
+    \end{matrix}
+\end{equation}
+谐振频率为
+\begin{equation}
+    \omega_{mnp}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{\Bigkh{\frac{x_{mn}}R}^2+\Bigkh{\frac{p\pi}d}^2}.
+\end{equation}
+
+对于TE模，$\psi=H_z$，
+\[
+    \gamma_{mn}=\frac{x'_{mn}}R,
+\]
+其中$x'_{mn}$表示$J'_m(x)$的第$n$个零点：
+\begin{equation}
+    \begin{matrix}
+        x'_{mn}&n=1&n=2&n=3\\
+        m=0&3.832&7.016&10.176\\
+        m=1&1.841&5.331& 8.536\\
+        m=2&3.054&6.706& 9.970\\
+        m=3&4.201&8.015&11.346\\
+    \end{matrix}
+\end{equation}
+谐振频率为
+\begin{equation}
+    \omega_{mnp}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{\Bigkh{\frac{x'_{mn}}R}^2+\Bigkh{\frac{p\pi}d}^2}.
+\end{equation}
 \subsection{腔内的功率损失}
-品质因子(quality factor)
+对于理想导体，$|E(\omega)|$在各个$\omega_i$上是一个个$\delta$函数；而对于良导体，则会有一定的半高宽。
+
+定义品质因子(quality factor)
 \begin{equation}
     Q:=\omega_0\frac{\text{stored energy}}{\text{power loss}}.
 \end{equation}
@@ -4545,6 +4595,7 @@ $r\to\infty$时，
     \bm H&=\frac{ck^2}{4\pi}(\uvec n\times\bm p)\frac{\e{\i kr}}r,\\
     \bm E&=Z_0\bm H\times\uvec n,\quad Z_0:=\sqrt{\mu_0/\varepsilon_0}\simeq\SI{377}{\ohm}.
 \end{align*}
+$Z_0$是自由空间阻抗。
 由振荡偶极子辐射的时间平均功率
 \[
     \dv P\Omega=\frac12\Re\bigfkh{r^2(\bm E\times\bm H\cj)\cdot\uvec n}=\frac{c^2Z_0}{32\pi^2}k^4p^2\sin^2\theta,
@@ -4669,38 +4720,42 @@ $r\to\infty$时，
     u'=\dv{x'}{t'}=\frac{\gamma(\d x-v\d t)}{\gamma(\d t-v\d t/c^2)}=\frac{u-v}{1-vu/c^2}.
 \]
 \paragraph{时空结构}
-为讨论形式的统一，我们定义四矢量的各个分量
+为讨论形式的统一，我们定义四矢量(4-vector)的各个分量
 \[
-    x^0:=ct,\enspace x^1:=x,\enspace x^2:=y,\enspace x^3:=z.
+    x^\mu:=(x^0,x^1,x^2,x^3)\tp:=(ct,x,y,z).
 \]
-则Lorentz变换可以表示为\footnote{使用Einstein求和约定，比如下式表示$\nu$取$0,1,2,3$的和。}
-\[
-    \bar x^\mu=\Lambda^\mu{}_\nu x^\nu.
-\]
-我们可推广四矢量，定义逆变量(contravariant)
+四矢量是逆变量(contravariant)，形如
 \[
     a^\mu:=(a^0,a^1,a^2,a^3)\tp,
 \]
-和协变量(covariant)
+与之对应的是协变量(covariant)，形如
 \[
     a_\mu:=(a_0,a_1,a_2,a_3)\equiv(-a^0,a^1,a^2,a^3).
 \]
-四维标量积
+使用Einstein求和约定，定义四维标量积
 \[
     a_\mu b^\mu:=a_0b^0+a_1b^1+a_2b^2+a_3b^3\equiv a^\mu b_\mu.
 \]
-
-假设事件$A,B$发生在$(x_A^0,x_A^1,x_A^2,x_A^3)$和$(x_B^0,x_B^1,x_B^2,x_B^3)$，定义四矢量位移
+则Lorentz变换可以表示为
 \[
-    \D x^\mu:=x_A^\mu-x_B^\mu,
+    \bar x^\mu=\Lambda^\mu{}_\nu x^\nu,\quad\Lambda^\mu{}_\nu:=
+    \begin{bmatrix}
+		\gamma&\gamma\beta\\-\gamma\beta&\gamma\\ &&1\\ &&&1
+	\end{bmatrix}
 \]
+
+假设事件$A,B$发生在$(x_A^0,x_A^1,x_A^2,x_A^3)$和$(x_B^0,x_B^1,x_B^2,x_B^3)$，定义四矢量位移$\D x^\mu:=x_A^\mu-x_B^\mu$，则
 二者的间隔(interval)
 \[
-    I:=(\D x)_\mu(\D x)^\mu=-c^2t^2+x^2+y^2+z^2,
+    I:=(\D x)_\mu(\D x)^\mu=-c^2\D t^2+\D x^2+\D y^2+\D z^2,
 \]
-是不变的。
+是不变的：
+\footnote{
+不变(invariant)量表示在所有惯性系中均保持相同的值；守恒(conserved)量表示在某个过程前后保持相同的值。比如，质量是不变量，却不守恒；能量是守恒的，但不是不变量；电荷量既是不变量，又是守恒量；而速度既不是不变量，也不守恒。
+
+在每个封闭系统中，总的相对论能量和动量都是守恒的。}
 \[
-    \bar I=I.
+    \bar I=(\D\bar x)_\mu(\D\bar x)^\mu=I.
 \]
 若$I<0$，则是类时的(timelike)；若$I>0$，则是类空的(spacelike)；$I=0$，则是类光的(lightlike)。
 \paragraph{相对论运动学}
@@ -4709,15 +4764,11 @@ $r\to\infty$时，
 \[
     \d\tau=\gamma\d t.
 \]
-4矢量速度
+进而定义四矢量速度和四矢量动量
 \begin{equation}
-    \eta^\mu:=\dv{x^\mu}\tau,
+    \eta^\mu:=\dv{x^\mu}\tau,\quad p^\mu:=m\eta^\mu.
 \end{equation}
-4矢量动量 
-\[
-    p^\mu=m\eta^\mu.
-\]
-其中$m$为静止质量，其时间(temporal)分量是$p^0=\gamma mc$，对应相对论能量
+其中$m$为静止质量。$p^\mu$的时间(temporal)分量是$p^0=\gamma mc$，对应相对论能量
 \[
     E=\gamma mc^2,
 \]
@@ -4729,14 +4780,10 @@ $r\to\infty$时，
 \[
     \bm p=m\eta=\gamma m\bm v.
 \]
-有
+有关系
 \begin{equation}
     E^2=p^2c^2+m^2c^4.
 \end{equation}
-\paragraph{不变和守恒}
-不变(invariant)量表示在所有惯性系中均保持相同的值；守恒(conserved)量表示在某个过程前后保持相同的值。比如，质量是不变量，却不守恒；能量是守恒的，但不是不变量；电荷量既是不变量，又是守恒量；而速度既不是不变量，也不守恒。
-
-在每个封闭系统中，总的相对论能量和动量都是守恒的。
 \begin{example}{Compton散射}{Compton scattering}
     过程略，解得
     \[
@@ -4757,9 +4804,9 @@ $r\to\infty$时，
 \subsection{相对论电动力学}
 为什么会有磁场？利用静电学和相对论，我们可以计算出载电流线和运动电荷之间的磁力，而不需要援引磁力定律。
 \begin{example}{导线的磁场力}{}
-    $S$系中有一导线，其中正负电荷线密度为$\pm\lambda$，均在导线中以速度$v$运动，则$\lambda=\gamma\lambda_0$，电流为$I=2\lambda v$，导线外距离$r$处有一电荷$q$沿平行于导线的方向以速度$u<v$运动。
+    $S$系中有一导线，其中正负电荷线密度为$\pm\lambda$，在导线中反向运动，速度大小为$v$，则正负电荷的线密度大小均为$\lambda=\gamma\lambda_0$，电流为$I=2\lambda v$，导线外距离$r$处有一电荷$q$沿平行于导线的方向以速度$u<v$运动。
 
-    $S$系中导线没有净电荷，因此电荷$q$不受电场力。
+    %$S$系中导线没有净电荷，因此电荷$q$不受电场力。
 
     转换到粒子静止的参考系$S'$，则电荷$q$不受磁场力，仅受电场力。
     
@@ -4779,7 +4826,7 @@ $r\to\infty$时，
     \[
         F=\frac1{\gamma_u}F'=-\frac{vu\lambda}{c^2}\frac q{\pi\varepsilon_0r}=-qu\frac{\mu_0I}{2\pi}.
     \]
-    而$q$不受电场力，故此力只能是磁场力！
+    而$S$系中导线没有净电荷，$q$不受电场力，故此力只能是磁场力！
 \end{example}
 \paragraph{场的变换}
 假设：
