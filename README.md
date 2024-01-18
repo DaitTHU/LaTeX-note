@@ -1,9 +1,8 @@
 # LaTeX-note
+
 用 LaTeX 记录的数理课笔记。对于期末复习有所帮助。
 
-为方便阅读（母语 + 字母符号在汉字中更易区分），语言采用为中文。
-
-使用 `UTF-8` 编码。
+为方便阅读（母语 + 字母符号在汉字中更易区分），语言采用为中文。使用 `UTF-8` 编码。关于 LaTeX 编译的问题见后 [编译概要](#关于编译的注意事项关于编译的注意事项)。
 
 已收录本人的（排名并不按照学期顺序）：
 
@@ -122,13 +121,10 @@ vs.
 ```
 $$\left\langle A\right\rangle=\left\langle\psi\right\vert A\left\vert\psi\right\rangle=\int\left\langle\psi\right\vert A\left\vert x\right\rangle\hspace{-3pt}\left\langle x\middle\vert\psi\right\rangle\,\mathrm dx.$$
 
-About space
-```LaTeX
-\qquad      % 2em
-\quad       % 1em
-\enspace    % 0.5em
-\;          % 5/18em
-\:          % 4/18em
-\,          % 3/18em
-\!          % -3/18em
-```
+## 关于编译的注意事项
+
+使用 XeLaTeX 编译，因为这样中英字符之间自动空格。
+
+已知的可能导致编译报错的问题：
+
+- `hair.tex` 的 `\catcode` 指令 (line 6-11)。其本意是编译时自动将中文句号变为全角实心句号，中文括号变为英文括号。将其注释掉可能会解决编译报错问题。
