@@ -1,0 +1,82 @@
+\chapter{基本假设}
+
+\section{态矢量}
+
+在量子力学中，一个物理态(physical state)由复Hilbert空间(Hilbert space)中的态矢量(state vector)表示。
+
+\begin{definition}{Dirac符号}{Dirac notation}
+	态矢量可以用一个列向量$\ket\psi$表示，称之为右矢(ket)。
+	
+	左矢(bra)是右矢的共轭转置$\bra\psi\equiv\ket\psi^\dagger$。
+\end{definition}
+\begin{definition}{Hilbert空间}{Hilbert space}
+	Hilbert空间$H$是一个定义了内积(inner product)的向量空间。$\forall\ket a,\ket b\in H$，其内积$\brkt ab$满足以下性质：
+\end{definition}
+
+\begin{definition}{波函数}{Wave Function}
+	波函数$\psi(\r)$刻画粒子在空间的概率分布．约定内积记号
+	\[
+		(\psi,\varphi)\equiv\int\psi^*(\r)\varphi(\r)\d\r,
+	\]	
+	波函数应是归一化的，即$(\psi,\psi)=1.$
+\end{definition}
+由Fourier展开，粒子的动量分布
+\begin{align}
+	\psi(\r)       & =\frac1{(2\pi\hbar)^{3/2}}\int\varphi(\bm p)\e{\i\bm p\cdot\r/\hbar}\d\bm p; \\
+	\varphi(\bm p) & =\frac1{(2\pi\hbar)^{3/2}}\int\psi(\r)\e{-\i\bm p\cdot\r/\hbar}\d\bm r.
+\end{align}
+\begin{theorem}{不确定度关系}{Uncertainty Relation}
+	% Heisenberg提出\textbf{不确定度关系}：
+	不可能同时准确测量位移$\r$和动量$\bm p$，即
+	\begin{align}
+		\delta x\vd p\geqslant\hbar/2.
+	\end{align}
+	证明见第 \pageref{Proof of UR} 页。
+\end{theorem}
+由不确定度关系，不存在函数$\bm p(\r)$，需要以\textit{算符}表示$\bm p$和$\r$的关系，由动量的性质知动量算符的形式为
+\[
+	\qo p=-\i\hbar\nabla,
+\]
+\begin{definition}{平均值}{Mean Value}
+	力学量的平均值，比如势能$V(\r)$
+	\[
+		\avg V\equiv(\psi,V\psi)=\int\abs{\psi(\r)}^2V(\r)\d\bm r,
+	\]
+	动量的平均值
+	\[
+		\avg{\bm p}=(\psi,\qo p\psi)=\int\psi^*(\r)\qo p\psi(\r)\d\bm r.
+	\]
+	推导见第 \pageref{Derivation of Mean Value} 页。
+\end{definition}
+\begin{theorem}{Schrödinger方程}{Schrödinger Equation}
+	波函数随时间的演化满足
+	\begin{align}
+		\i\hbar\pv{\psi}t=\hat H\psi.
+	\end{align}
+	其中Hamilton算符
+	\[
+		\hat H=\frac{\hat p^2}{2m}+V.
+	\] % =-\frac{\hbar^2}{2m}\nabla^2+V.\]
+\end{theorem}
+\begin{definition}{概率密度和概率流密度}{Probility Density}
+	概率密度
+	\[
+		\rho(\r,t):=\psi^*(\r,t)\psi(\r,t),
+	\]
+	概率流密度
+	\[
+		\bm j(\r,t):=-\frac{\i\hbar}{2m}\kh{\psi^*\nabla\psi-\psi\nabla\psi^*}.
+	\]
+	由Schrödinger方程，二者有关系
+	\[
+		\pv\rho{t}=\psi^*\pv\psi{t}+\psi\pv{\psi^*}t=\nabla\cdot\bm j.
+	\]
+\end{definition}
+考虑$\hat H$的本征值$E_n$和本征函数$\psi_n(\r)$
+\begin{align}
+	\hat H\psi_n(\r)=E_n\psi_n(\r).
+\end{align}
+称为定态Schrödinger方程，代表能量有确定值，而方程的通解可以写成本征方程的线性组合
+\[
+	\psi(\r,t)=\sum c_n\psi_n(\r)\e{\i E_nt/\hbar}.
+\]

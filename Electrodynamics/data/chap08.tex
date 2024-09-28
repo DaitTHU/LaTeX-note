@@ -1,0 +1,141 @@
+\chapter{多极辐射}
+\label{chap:multipole radiation}
+在第七章和第八章里，讨论了电磁波的性质，以及电磁波在有界的和无界的区域内的传播情况。但是，很少谈到如何产生这些电磁波的问题。本章就转入这个问题，并讨论定域振荡电荷和电流密度系统辐射的电磁波，我们的论述是直截了当的，而不去精心推敲数学形式。%当然，这样做只限于比较简单的辐射系统，我们把求系统辐射的渐近法(用任意$l$的矢量多极场)推迟到第十六章里论述。本章只讨论电偶极子、磁偶极子和电器极子，以及导体上电流的一些简单位形。也论述波导中一个源的简单多极子展开和孔的有效多极矩。
+
+%本章后半部，用较大篇幅讨论散射和衍射。首先解释长波长情形下的散射，包括瑞利对蓝天的解释和有关的论题，然后讨论标量衍射理论和矢量衍射理论，并举了一些例子。最后讨论短波长情形下的散射和重要的光学定理。
+\section{局域振荡源}
+对于随时间变化的电荷和电流系统，我们都可以将随时间变化的量作Fourier分析，并分别处理各个Fourier分量。因此，不失一般性，我们只考虑随时间作正弦变化的局域电荷和电流系统所产生的势、场和辐射，设
+\begin{align*}
+    \rho(\bm x,t)&=\rho(\bm x)\e{-\i\omega t},\\
+    \bm J(\bm x,t)&=\bm J(\bm x)\e{-\i\omega t},
+\end{align*}
+矢量势
+\begin{align}
+    \notag
+    \bm A(\bm x,t)&=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm x',t')}{|\bm x-\bm x'|}\vd\Bigkh{t'-t+\frac{|\bm x-\bm x'|}c}\d t'\nd v'\\
+    \label{eqn:A-Jeiwt}
+    &=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm x')}{|\bm x-\bm x'|}\e{\i k|\bm x-\bm x'|}\d v'.
+\end{align}
+磁场和电场为
+\[
+    \bm H=\frac1{\mu_0}\curl\bm A,\quad\bm E=\i\frac Zk\curl\bm H.
+\]
+给定电流分布$\bm J(\bm x')$以后，至少在原则上可以通过计算\eqref{eqn:A-Jeiwt}的积分来定出场的分布。%9.4节将讨论一两个直接计算源积分的实例.
+但是，现在我们先确立在电流源被局限于小区域内(与波长相比，确实很小)的极限情形下，场所具有的某些简单而普遍的性质。如果源的线度为$d$，波长为$\lambda=2\pi c/\omega$，并且$d<\lambda$,则有三个令人感兴趣的空间区域：近区、中间区、远区。
+
+近区：$d\ll r\ll\lambda$，\eqref{eqn:A-Jeiwt}中的指数可以用1代替，并用球谐函数\eqref{eqn:1/|x-x'|=YY}展开，
+\[
+    \lim_{kr\to0}\bm A(\bm x)=\frac{\mu_0}{4\pi}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac{4\pi}{2\ell+1}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}\int\bm J(\bm x')r'^\ell Y\cj_{\ell m}(\theta',\phi')\d v'.
+\]
+上式表明，近场是准静态的，除了按$\e{-\i\omega t}$方式作简谐振荡外，其它性质都是静态的。
+
+远区，$d\ll\lambda\ll r$，
+\[
+    \bm A(\bm x,t)=\frac{\mu_0}{4\pi}\frac{\e{\i kr}}r\int\bm J(\bm x')\e{-\i\bm k\cdot\bm x'}\d v'.
+\]
+可以对$\e{-\i\bm k\cdot\bm x'}$展开，略。
+
+中间区，$d\ll r\sim\lambda$，近似失效，引入
+球Bessel函数和Hankel函数
+\begin{align}
+    j_\ell(x)&:=\sqrt{\frac\pi{2x}}J_{\ell+1/2}(x),\\
+    y_\ell(x)&:=\sqrt{\frac\pi{2x}}Y_{\ell+1/2}(x),\\
+    h^\pm_\ell(x)&:=j_\ell(x)\pm\i y_\ell(x).
+\end{align}
+则
+\[
+    \bm A(\bm x)=\i\mu_0k\sum_{\ell,m}h_\ell^+(kr)Y_{\ell m}(\theta,\phi)\int\bm J(\bm x')j_\ell(kr')Y\cj_{\ell m}(\theta',\phi')\d v',
+\]
+推导和后面的略。
+
+标量势与矢量势形式相同，我们考虑电单极的情况
+\[
+    \Phi(\bm x,t)=\frac1{4\pi\varepsilon_0r}q\Bigkh{t-\frac rc},
+\]
+式中$q(t)$是源的总电荷。因为电荷是守恒的，且根据定义，局域源是一个没有电荷流入或流出的源，所以总电荷$q$与时间无关。于是，一个定域源的势(和场)的电单极部分必然是静态的。%具有谐和时间依赖关系e-'(w≠0)的场没有单极子项。
+
+%现在讨论w≠0时最低阶多极场。因为这些场可以由矢势通过(9.4)和(9.5)算出，所以我们在下面的论述中不再明显提及标势。
+\section{电偶极辐射}
+下面我们求电偶极子
+\[
+    \bm p:=\int\bm x'\rho(\bm x')\d v',
+\]
+激发的电场和磁场。
+通过远区近似，
+\[
+    \bm A=-\i\frac{\mu_0\omega}{4\pi}\bm p\frac{\e{\i kr}}r.
+\]
+场
+\begin{align*}
+    \bm H&=\frac{ck^2}{4\pi}(\uvec n\times\bm p)\frac{\e{\i kr}}r\Bigkh{1+\i\frac1{kr}},\\
+    \bm E&=\frac1{4\pi\varepsilon_0}\biggfkh{k^2(\uvec n\times\bm p)\times\uvec n\frac{\e{\i kr}}r+\bigkh{3\uvec n(\uvec n\cdot\bm p)-\bm p}\Bigkh{\frac1{r^3}-\i\frac{k}{r^2}}\e{\i kr}}.
+\end{align*}
+$r\to 0$时,
+\begin{align*}
+    \bm H&=\i\frac{\omega}{4\pi}\frac{\uvec n\times\bm p}{r^2},\\
+    \bm E&=\frac1{4\pi\varepsilon_0}\frac{3\uvec n(\uvec n\cdot\bm p)-\bm p}{r^3};
+\end{align*}
+$r\to\infty$时，
+\begin{align*}
+    \bm H&=\frac{ck^2}{4\pi}(\uvec n\times\bm p)\frac{\e{\i kr}}r,\\
+    \bm E&=Z_0\bm H\times\uvec n,\quad Z_0:=\sqrt{\mu_0/\varepsilon_0}\simeq\SI{377}{\ohm}.
+\end{align*}
+$Z_0$是自由空间阻抗。
+由振荡偶极子辐射的时间平均功率
+\[
+    \dv P\Omega=\frac12\Re\bigfkh{r^2(\bm E\times\bm H\cj)\cdot\uvec n}=\frac{c^2Z_0}{32\pi^2}k^4p^2\sin^2\theta,
+\]
+故
+\begin{equation}
+    P=\frac{c^2Z_0^2k^4}{12\pi}p^2.
+\end{equation}
+为什么天空是蓝色的，特别是在垂直于太阳光线的天弧处？因为$\theta=90\degree$时太阳光线所激发的偶极辐射功率为0。
+\begin{example}{天线}{center-fed, linear antenna}
+    对于一个中间馈送(center-fed)的线性天线(antenna)，其电流
+    \[
+        I_0\Bigkh{1-\frac{2|z|}d}\e{-\i\omega t},
+    \]
+    则其电偶极矩为
+    \[
+        p=\i\frac{I_0d}{2\omega},
+    \]
+    辐射功率
+    \[
+        P=\frac{Z_0I_0^2}{48\pi}(kd)^2.
+    \]
+    由于天线向外辐射功率，因此它需要消耗能量，尽管天线是一个理想导体，但仍有辐射阻抗$R_\text{rad}$，由$Z_0\simeq 120\pi\,\si{\ohm}$
+    \[
+        R_\text{rad}=\frac{Z_0}{24\pi}(kd)^2\simeq 5(kd)^2.
+    \]
+\end{example}
+\section{磁偶极子和电四极子}
+\paragraph{磁偶极子}
+磁偶极矩对矢量势的贡献
+\[
+    \bm A=\frac{k\mu_0}{4\pi}(\uvec n\times\bm m)\frac{\e{\i kr}}r\Bigkh{\i-\frac1{kr}},
+\]
+得到磁场和电场
+\begin{align*}
+    \bm H&=\frac1{4\pi}\biggfkh{k^2(\uvec n\times\bm m)\times\uvec n\frac{\e{\i kr}}r+\bigkh{3\uvec n(\uvec n\cdot\bm m)-\bm m}\Bigkh{\frac1{r^3}-\i\frac{k}{r^2}}\e{\i kr}},\\
+    \bm E&=-\frac{Z_0}{4\pi}k^2(\uvec n\times\bm m)\frac{\e{\i kr}}r\Bigkh{1+\i\frac1{ kr}}.
+\end{align*}
+与电偶极子形式高度相似。
+\paragraph{电四极子}
+电四极子对矢量势的贡献
+\[
+    \bm A=-\frac{\mu_0ck^2}{8\pi}\frac{\e{\i kr}}r\Bigkh{1+\i\frac1{kr}}\int\bm x'(\uvec n\cdot\bm x)\rho(\bm x')\d v'.
+\]
+磁场
+\[
+    \bm H=-\i\frac{ck^3}{24\pi}\frac{\e{\i kr}}r\uvec n\times(\mathcal Q\cdot\uvec n).
+\]
+辐射功率 
+\[
+    \dv P\Omega=\frac{c^2Z_0}{1152\pi^2}k^6\abs{\bigfkh{\uvec n\times(\mathcal Q\cdot\uvec n)}\times\uvec n}^2
+\]
+从而 
+\[
+    P=\frac{c^2Z_0k^6}{1440\pi}\sum_{\alpha,\beta}|\mathcal Q_{\alpha\beta}|^2\sim\omega^6.
+\]
+
+

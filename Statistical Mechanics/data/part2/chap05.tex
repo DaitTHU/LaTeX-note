@@ -1,0 +1,187 @@
+\chapter{非平衡态统计理论初步}
+平衡态性质及其统计方法存在大量非平衡态和不可逆过程。本章主要讨论稀薄气体的非平衡性质分子运动论方法。
+\section{气体分子的碰撞频率}
+气体分子通过碰撞使气体达致平衡。
+单位时间内碰到单位面积器壁上的分子数$\Gamma$，定义分布函数$f(\bm r,\bm v,t)$，则
+\[
+	\Gamma(\bm r,t)=\int f(\bm r,\bm v,t)v_x\d\bm v.
+\]
+若为平衡态，则满足Maxwell分布$\Gamma=n\avg v/4$。
+
+采用弹性刚球模型（无摩擦，无形变，弹性碰撞）。对于稀薄气体，只考虑两体碰撞，对于两类不同分子间碰撞：单位时间内，平均一个分子1与分子2的碰撞次数$\theta_{12}$，称碰撞频率。
+
+指定速度的分子1的碰撞：
+单位时间内，一个速度$v_1$的分子1与任意速度的分子2碰撞次数$\theta_{12}(\bm r,\bm v_1,t)$。碰撞只与相对速度$\bm g_{21}=\bm v_2-\bm v_1$有关。发生碰撞的有效截面积$\pi\sigma^2_{12}$，其中$\sigma_{12}=(\sigma_1+\sigma_2)/2$为两分子直径平均值。易知，这个条件是各向同性的。
+\begin{align}
+	\theta_{12}(\bm r,\bm v_1,t)=\pi\sigma_{12}^2\Gamma=\pi\sigma_{12}^2\int f_2(\bm r,\bm v_2,t)g_{12}\d\bm v_2,
+\end{align}
+以上采用了分子混沌假设，即分子速度分布是独立的：
+\[
+	f(\bm r,\bm v_1,\bm v_2,t)\simeq f_1(\bm r,\bm v_1,t)f_2(\bm r,\bm v_2,t).
+\]
+
+故单位时间内，平均一个分子1与分子2碰撞次数
+\begin{align}
+	\theta_{12}(\bm r,t)=\frac1{n_1(\bm r_1,t)}\int f_1(\bm r,\bm v_1,t)\theta_{12}(\bm r,\bm v_1,t)\d\bm v_1.
+\end{align}
+\paragraph{两体碰撞运动学}
+弹性碰撞满足动量守恒和能量守恒
+\begin{align}
+	m_1\bm v_1+m_2\bm v_2&=m_1\bm v_1'+m_2\bm v_2'\\
+	\frac12m_1v_1^2+\frac12m_2v_2^2&=\frac12m_1{v'_1}^2+\frac12m_2{v'_2}^2.
+\end{align}
+4方程，6未知数，需指定碰撞方向$\bm n$ （或散射角$\theta,\phi$）才能完全决定末态速度。
+
+设速度改变方向$\bm n$，即
+\begin{gather*}
+	(m_1,\bm v_1)+(m_2,\bm v_2)\quad\overset{\bm n}{\longrightarrow}\quad(m_1,\bm v_1')+(m_2,\bm v_2').\\
+	\bm v_1'-\bm v_1=\lambda_1\bm n,\quad\bm v_2'-\bm v_2=\lambda_2\bm n.
+\end{gather*}
+带入守恒方程
+\begin{align*}
+	\begin{cases}
+		m_1\lambda_1+m_2\lambda_2=0,\\
+		m_1\lambda_1(\bm v_1+\bm v_1')\cdot\bm n+m_2\lambda_2(\bm v_2+\bm v_2')\cdot\bm n=0.
+	\end{cases}
+\end{align*}
+解出$\lambda_1,\lambda_2$，
+\begin{align}
+	\begin{cases}
+		\bm v_1'=\bm v_1+\frac{2m_1}{m_1+m_2}\bigfkh{(\bm v_2-\bm v_1)\cdot\bm n}\bm n\\[1ex]
+		\bm v_2'=\bm v_2+\frac{2m_2}{m_1+m_2}\bigfkh{(\bm v_1-\bm v_2)\cdot\bm n}\bm n
+	\end{cases}
+\end{align}
+对称性：
+\begin{compactenum}
+	\item 碰撞前后相对速度不变
+	\[
+		\bm v_1'-\bm v_2'=\bm v_1-\bm v_2-2\bigfkh{(\bm v_1-\bm v_2)\cdot\bm n}\bm n\implies g_{21}'=g_{21}.
+	\]
+	\item 碰撞前后相对速度沿碰撞方向变号，垂直方向不变
+	\begin{align*}
+		(\bm v_1'-\bm v_2')\cdot\bm n&=-(\bm v_1-\bm v_2)\cdot\bm n,\\
+		(\bm v_1'-\bm v_2')\times\bm n&=(\bm v_1-\bm v_2)\times\bm n.
+	\end{align*}
+	\item 原碰撞与逆碰撞等价。所谓逆碰撞：
+	\[
+		(m_1,\bm v_1')+(m_2,\bm v_2')\quad\overset{-\bm n}{\longrightarrow}\quad(m_1,\bm v_1)+(m_2,\bm v_2).
+	\]
+\end{compactenum}
+\section{Boltzmann输运方程}
+讨论分布函数如何随时间变化，记$t$时刻，$(\bm r,\bm v)$处体积元在$\mu$空间$\d\bm r\nd\bm v$中的分子数$f(\bm r,\bm v,t)\d\bm r\nd\bm v$。
+
+将分子作为经典粒子处理，故只适用于高温情形
+\[
+	\lambda_T=\kh{\frac{h^2}{2\pi m\kB T}}^{3/2}\ll\kh{\frac VN}^{1/3}.
+\]
+稀薄气体近似: 分子除碰撞短时间隔处是自由的。（高温低密度）
+
+因此$\p f/\p t$可看成两部分贡献：漂移项(drift)和碰撞项(collision)
+\begin{align}
+	\pv ft=\kh{\pv ft}_\df+\kh{\pv ft}_\cll.
+\end{align}
+漂移项代表运动使$\bm r$变化，外场使$\bm v$变化；碰撞项代表碰撞使$\bm v$变化。
+\paragraph{漂移项}首先考虑位置变化：$\d t$内，由$x$处垂直$x$轴的平面进入，和由$x+\d x$处垂直$x$轴的平面离开体积元的分子数所产生的净增加分子数
+\[
+	\fkh{f(x,y,\ldots)-f(x+\d x,y,\ldots)}\d y\nd z\nd\bm v\cdot v_x\d t=-v_x\pv fx\d\bm r\nd\bm v\d t.
+\]
+计所有分量
+\[
+	-\bm v\cdot\nabla_{\bm r}f(\bm r,\bm v,t)\d\bm r\nd\bm v\nd t.
+\]
+
+类似的，$x$方向速度变化所产生的净增加分子数
+\[
+	-\pp{v_x}(a_xf)\d\bm r\nd\bm v\nd t\implies-\nabla_{\bm v}(\bm af)\d\bm r\nd\bm v\nd t.
+\]
+假设作用力与速度$\bm v$无关，则$\bm a$项可提出来，继而
+\begin{align}
+	\kh{\pv ft}_\df=-\bm v\cdot\nabla_{\bm r}f-\bm a\cdot\nabla_{\bm v}f.
+\end{align}
+\paragraph{碰撞项}$\d\bm r\nd\bm v$中分子与别的分子碰撞后离开体积元，称原碰撞，别的分子碰后进入该体积元，称逆碰撞。
+
+原碰撞：$\d t$内，$\d\bm r\nd\bm v$中分子与速度$\bm v_1\to\bm v_1+\d\bm v_1$分子碰撞使分子数减少
+\[
+	f(\bm r,\bm v,t)\d\bm r\nd\bm v\cdot f(\bm r_1,\bm v_1,t)\d\bm v_1\sigma^2\d\Omega\cdot g\d t\cos\theta=f\!f_1\Lambda\d t\nd\Omega\nd\bm r\nd\bm v\nd\bm v_1.
+\]
+其中$\Lambda:=\abs{\bm v-\bm v_1}\sigma^2\cos\theta$，相应的逆碰撞
+\[
+	f'\!f_1'\Lambda\d t\nd\Omega\nd\bm r\nd\bm v\nd\bm v_1.
+\]
+积分之
+\begin{align}
+	\kh{\pv ft}_\cll=\iint(f'\!f_1'-f\!f_1)\Lambda\d\Omega\nd\bm v_1.\quad\theta\in\fkh{0,\frac\pi{2}}.
+\end{align}
+得到Boltzmann输运方程
+\begin{align}
+	\pv ft+(\bm v\cdot\nabla_{\bm r}+\bm a\cdot\nabla_{\bm v})f=\iint(f'\!f_1'-f\!f_1)\Lambda\d\Omega\nd\bm v_1.
+\end{align}
+方程左边的项即$\d f/\nd t$，这是一个非线性积分-微分方程，一般难求解。
+
+分子混沌假设对稀薄气体是精确的，但使得Boltzmann方程不封闭，为了求单粒子分布函数$f(\bm r,\bm v,t)$，需先求出两粒子关联函数$f(\bm r,\bm v,\bm v_1,t)$。为求$N-1$粒子关联函数，要先求出$N$粒子关联函数\footnote{BBGKY: Hierarchy, Bogoliubov-Born-Green-Kirkwood-Yvon.}，如何截断该方程见Huang \S 3.5。
+\section{Boltzmann \textit{H}定理}
+讨论系统趋向平衡态时，分布函数的性质。定义：$H$函数为分布函数$f(\bm r,\bm v,t)$的泛函
+\begin{align}
+	H(t)=\int f(\bm r,\bm v,t)\ln f(\bm r,\bm v,t)\d\bm r\nd\bm v.
+\end{align}
+\begin{theorem}{Boltzmann $H$定理}{Boltzmann H Theorem}
+	若$f(\bm r,\bm v,t)$满足Boltzmann输运方程，则
+	\begin{align}
+		\dv Ht\leqslant 0.
+	\end{align}
+	当且仅当$f\!f_1=f'\!f_1'$时取等号。
+\end{theorem}
+\begin{proof}
+	\begin{align*}
+		\dv Ht=\int(1+\ln f)\pv ft\d\bm r\nd\bm v
+	\end{align*}
+	漂移项贡献为0
+	\begin{align*}
+		&-\int(1+\ln f)(\bm v\cdot\nabla_{\bm r}f+\bm a\cdot\nabla_{\bm v}f)\d\bm r\nd\bm v\\
+		=&-\int\bm v\cdot\nabla_{\bm r}(f\ln f)+\nabla_{\bm v}\cdot(\bm af\ln f)\d\bm r\nd\bm v\tag{Gauss}\\
+		=&-\int\oint \bm v f\ln f\cdot\d\bm S\nd\bm v-\int\oint\bm af\ln f\cdot\d\bm S_{\bm v}\nd\bm r=0.
+	\end{align*}
+	碰撞项贡献
+	\begin{align*}
+		\int (1+\ln f)(f'\!f_1'-f\!f_1)\Lambda\d\Omega\nd\bm v_1\nd\bm r\nd\bm v
+	\end{align*}
+	交换$\bm v,\bm v_1$，得到的新式与原式相加除2
+	\[
+		=\frac12\int (2+\ln f\!f_1)(f'\!f_1'-f\!f_1)\Lambda\d\Omega\nd\bm v_1\nd\bm r\nd\bm v
+	\]
+	又原逆碰撞对称，交换$\bm v,\bm v'$和$\bm v_1,\bm v_1'$，得到
+	\[
+		=\frac12\int (2+\ln f'\!f_1')(f\!f_1-f'\!f_1')\Lambda\d\Omega\nd\bm v_1\nd\bm r\nd\bm v
+	\]
+	二者相加除2，得到
+	\begin{align}
+		\dv Ht=-\frac14\int (\ln f'\!f_1'-\ln f\!f_1)(f'\!f_1'-f\!f_1)\Lambda\d\Omega\nd\bm v_1\nd\bm r\nd\bm v\leqslant 0.
+	\end{align}
+	当且仅当$f\!f_1=f'\!f_1'$时取等号。
+\end{proof}
+
+\paragraph{讨论}
+\begin{compactenum}
+	\item 碰撞使$f$改变，从而使$H$不断减小，当$H$达到极小值时，达到平衡态。从统计理论上说明了趋向平衡的不可逆性（$H$单调减）。
+	\item 可以证明，熵与$H$函数的关系为
+	\begin{align}
+		S=-\kB H+\const.
+	\end{align}
+	因此，$H$趋于极小与$S$趋于极大一致，$H$定理与$S$增原理相当，但有不同之处：
+	\begin{compactitem}
+		\item 对任意态可定义$H$，但热力学中$S$仅对平衡态有定义\footnote{可通过Boltzmann关系推广$S$定义。}；
+		\item 熵增原理适用于任意孤立系，$H$定理前提：$f$满足Boltzmann输运方程，即分子混沌假设成立；
+		\item $H$定理给出了系统趋向平衡态的速度，熵增原理不能。
+	\end{compactitem}
+	\item $H$定理具有统计特征，对统计性的$f$再取了一次平均：
+	\[
+		\dv Ht=N\avg{\ln f}.
+	\]
+	$H$随时间改变也是统计性的，且不连续，因碰撞而迅速改变。因此$\d H/\nd t$实际上是$\D H/\D t$。
+	\item 微观可逆性与宏观不可逆性：当Hamiltion量是动量偶函数时，微观运动中是可逆的。但$H$函数由微观分布决定，却是时间的单调函数。\footnote{Boltzmann指出：$H$定理是统计性的，即平均来说，$H$减少的几率最大，但不排除增大的可能性，只是几率非常小而已，即宏观不可逆性是统计性的，$H$定理不是力学规律，而是统计性的。}	
+	\item 微观运动可复原性问题
+	
+	Poincare定理：有限能量，有限范围的系统，经过足够长时间后，总能回到与初始状态无限接近的状态，称Poincare循环。
+
+	Boltzmann提出：Poincare周期很长，远超出实际观测的时间，因此，在观测时间里，回到原状的几率很小。不同的理解：如Huang \S 4.1, \S 4.4, \S 4.5。
+\end{compactenum}

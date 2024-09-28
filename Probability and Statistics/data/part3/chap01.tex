@@ -1,0 +1,438 @@
+\chapter{随机过程}
+随机过程的研究对象是随时间演变的随机现象。
+
+不能用随机变量或多维随机变量来合理表达，而需要用一族 (无限多个) 随机变量来描述。
+\begin{definition}{随机过程}{stochastic process}
+	随机过程(stochastic process)是一族随机变量$\set{X(t)}{t\in T}$，其中$ t $是 参数，$T$称为参数集。
+\end{definition}
+对随机过程进行一次试验（即在$ T $上进行一次全程观测），其结果是$t$的函数，记作$\set{x(t)}{t\in T}$，称为随机过程的一个样本函数。
+
+可将随机过程写成
+\[
+	\set{X(\omega,t)}{\omega\in\Omega,t\in T}
+\]
+的形式，其中$\omega,\Omega$分别是随机试验的样本点和样本空间。
+\paragraph{统计学描述}~
+\begin{definition}{一维分布函数}{}
+	对随机过程$\set{X(t)}{t\in T}$，对每个固定的$t$
+	\begin{align}
+		\CDF_X(x,t):=\P\bigkh{X(t)\leqslant x},\enspace x\in\RR,
+	\end{align}
+	称为随机过程的一维分布函数，$\set{\CDF_X(x,t)}{t\in T}$称为一维分布函数族。
+\end{definition}
+类似地，可以推广定义$n$维分布函数（族）。有限维分布函数可以完全确定随机过程的统计特性。
+\begin{definition}{随机过程的数字特征}{}
+	均值函数$\mu_X(t):=\E\bigkh{X(t)}$，
+	均方值函数$\Psi^2_X(t):=\E\bigkh{X^2(t)}$
+
+	方差函数$\sigma_X^2(t):=\Var\bigkh{X(t)}$，
+	标准差函数$\sigma_X(t):=\sqrt{\sigma^2_X(t)}$
+
+	相关函数$R_X(s,t):=\E\bigkh{X(s)X(t)}$
+
+	协方差函数$C_X(s,t):=\Cov\bigkh{X(s),X(t)}$
+\end{definition}
+不难得到
+\begin{align*}
+	\sigma_X^2(t)&=R_X(t,t)-\mu_X^2(t),\\
+	C_X(s,t)&=R_X(s,t)-\mu_X(s)\mu_X(t).
+\end{align*}
+\section{独立增量过程}
+\begin{definition}{独立增量过程}{}
+	若$\forall t_1<\cdots<t_n(n\geqslant2, t_i\in T)$，诸增量
+	\[
+		X(t_2)-X(t_1),\ldots,X(t_n)-X(t_{n-1}),
+	\]
+	相互独立，则称$\set{X(t)}{t\in T}$是一个独立增量过程。
+\end{definition}
+\begin{theorem}{独立增量过程的性质}{}
+	若$\set{X(t)}{t\in T}$是一个独立增量过程，且$X(0)=0$，则：
+	\begin{compactitem}
+		\item $X(t)$的有限维分布函数族可以由增量$X(t_2)-X(t_1)(t_2\geqslant t_1\geqslant 0)$的分布所确定
+		\item 设$\sigma^2_X(t)$已知，则协方差函数
+		\begin{align}
+			C_X(s,t)=\sigma^2_X\bigkh{\min(s,t)}.
+		\end{align}
+	\end{compactitem}
+\end{theorem}
+\begin{definition}{Poisson过程}{}
+	计数过程$\set{N(t)}{t\geqslant 0}$称为强度$\lambda>0$的时齐Poisson过程(homogeneous Poisson process)，若满足：
+	\begin{compactenum}
+		\item $N(0)=0$
+		\item $\set{N(t)}{t\geqslant 0}$是时齐的独立增量过程
+		\item $\forall t>0,\D t>0$有
+		\begin{compactitem}
+			\item $\P\bigkh{N(t+\D t)-N(t)=1}=\lambda\D t+o(\D t)$
+			\item $\P\bigkh{N(t+\D t)-N(t)\geqslant 2}=o(\D t)$
+		\end{compactitem}
+	\end{compactenum}
+\end{definition}
+Poisson过程中任意长度为$ t $的区间中事件个数$\sim\Pois(\lambda t).$
+\begin{theorem}{Poisson过程的性质}{}
+	%若$\set{N(t)}{t\geqslant 0}$是一个强度为$\lambda$的Poisson过程，则
+	$N(t)\sim\Pois(\lambda t),\enspace\mu_N(t)=\lambda t,\enspace\sigma^2_N(t)=\lambda t,\enspace R_N(s,t)=\lambda\min(s,t).$%的一维分布是参数为$\lambda t$的Poisson分布。
+\end{theorem}
+\paragraph{二项分布视角}
+将区间$ [0, t] $分为$ k $份，
+当$k\to\infty$时，$N(t)\sim\Bern(k,p)$
+\[
+	\mu_N(t)=\lim_{k\to\infty}kp=\lim_{k\to\infty}k\biggfkh{\frac{\lambda t}k+o\biggkh{\frac tk}}=\lambda t+o(t).
+\]
+\paragraph{指数分布视角}
+将Poisson过程第$ n $个事件发生时刻记为$ T_n$。记$\D T_n=T_n-T_{n-1} $为第$ n $个事件的等待时间，特别地$\D T_1 = T_1$。
+\begin{theorem}{Poisson过程的指数间隔}{}
+	$\D T_1,\D T_2,\ldots$ iid $\sim\Expo(\lambda)$
+	\begin{align*}
+		\P(\D T_1>t)&=\P\bigkh{N(t)=0}=\e{-\lambda t};\\
+		\P(\D T_2>t|T_1=s)&=\P\bigkh{N(t+s)-N(t)=0\cancel{|T_1=s}}=\e{-\lambda t}.
+	\end{align*}
+	由全概率公式，$\P(\D T_2>t)=\E_{T_1}\bigfkh{\P(\D T_2>t|T_1)}=\e{-\lambda t}.$
+\end{theorem}
+\begin{theorem}{Poisson过程判定}{}
+	给定iid随机变量列$\{\D T_i\sim\Expo(\lambda)\}$。称第$ n $个事件在时间$T_n =\D T_1 + \cdots +\D T_n $发生，得到$\set{N(t)=\max(n)}{t\geqslant T_n}$
+	是强度为$\lambda$的时齐Poisson过程。
+\end{theorem}
+\begin{definition}{Wiener过程}{Wiener process}
+	满足一下条件的随机过程$\set{W(t)}{t\geqslant 0}$称为Wiener过程若
+	\begin{compactitem}
+		\item $W(0)=0$
+		\item $\set{W(t)}{t\geqslant 0}$是时齐的独立增量过程
+		\item 增量服从正态分布，即$\forall t\geqslant s\geqslant 0$
+		\[
+			W(t)-W(s)\sim\Norm\bigkh{0,(t-s)\sigma^2}.
+		\]
+		若$\sigma=1$，则称为 标准Wiener过程。
+	\end{compactitem}
+\end{definition}
+Brown运动是Wiener过程。
+\begin{theorem}{Wiener过程的性质}{}
+	$W(t)\sim\Norm(0,\sigma^2t),\enspace\mu_W(t)=0,\enspace\sigma^2_W(t)=\sigma^2t,\ldots$%,\enspace R_W(s,t)=\sigma^2\min(s,t)
+\end{theorem}
+任意Wiener过程$W(t)$，可令$W(t)/\sigma$转化为标准Wiener过程。
+
+对$t_1<\cdots<t_n$，标准Wiener过程的各个增量
+\begin{align*}
+	W(t_1)&=w_1\sim\Norm(0,t_1),\\
+	W(t_2)-W(t_1)&=w_2-w_1\sim\Norm(0,t_2-t_1),\\
+	\vdots\\
+	W(t_n)-W(t_{n-1})&=w_n-w_{n-1}\sim\Norm(0,t_n-t_{n-1}).
+\end{align*}
+独立，则$W(t_1),\ldots,W(t_n)$的联合PDF为 
+\begin{align*}
+	&f_W(w_1,\ldots,w_n;t_1,\ldots,t_n)\\
+	&=\frac{\exp\bigg\{{-\dfrac12\biggfkh{\dfrac{w_1^2}{t_1}+\dfrac{(w_2-w_1)^2}{t_2-t_1}+\cdots+\dfrac{(w_n-w_{n-1})^2}{t_n-t_{n-1}}}\bigg\}}}{\sqrt{2\pi t_1(t_2-t_1)\cdots(t_n-t_{n-1})}}.
+\end{align*}
+\begin{example}{白噪声}{}
+	设$\set{W(t)}{t\geqslant 0}$为标准Wiener过程，令$f$为区间$[a,b]$有连续导数的函数，定义随机积分
+	\[
+		\int_a^bf(t)\d W(t)=\lim_{n\to\infty}\sum_{i=1}^n f(t_{i-1})\bigkh{W(t_i)-W(t_{i-1})},
+	\]
+	其中$a=t_1<t_2<\cdots<t_n=b$是区间$[a,b]$的一个划分。%类似分部积分，
+	有
+	\[
+		\int_a^bf(t)\d W(t)=f(b)W(b)-f(a)W(a)-\int_a^bW(t)\d f(t).
+	\]
+	$\set{\d W(t)}{t\geqslant 0}$称为白噪声，即一个时变函数$f$在白噪声的介质中传播导致输出$\textstyle\int f(t)\d W(t).$
+\end{example}
+\section{Markov过程}
+\begin{definition}{Markov过程}{}
+	随机过程$\set{X(t)}{t\in T}$为Markov过程若%其状态空间为$I$，$\forall n\geqslant 3,t_1,t_2,\ldots,t_$
+	\begin{align*}
+		&\P\bigkh{X(t_n)\leqslant x_n|X(t_1)=x_1,\ldots,X(t_{n-1})=x_{n-1}}\\
+		={}&\P\bigkh{X(t_n)\leqslant x_n|X(t_{n-1})=x_{n-1}}
+	\end{align*}
+	时间和状态都离散Markov过程称为Markov链，记为：
+	\[
+		\set{X_n=X(n)}{n=0,1,2,\ldots}.
+	\]
+\end{definition}
+\begin{definition}{转移概率}{}
+	条件概率 
+	\[
+		\P(X_{t+n}=j|X_t=i)=:p_{ij}(t,t+n)
+	\]
+	称为Markov链在时间$t$处于状态$i$条件下，在时间$t+n$转移到状态$j$的转移概率。
+\end{definition}
+显然，
+\[
+	\sum_{j=1}^\infty p_{ij}(t,t+n)=1,\enspace\forall i.
+\]
+$n$步转移概率矩阵为
+\begin{align}
+	P(n)=\begin{bmatrix}
+		p_{11}(t,t+n)&p_{12}(t,t+n)&\cdots\\
+		p_{21}(t,t+n)&p_{22}(t,t+n)&\cdots\\
+		\vdots&\vdots&\ddots
+	\end{bmatrix}
+\end{align}
+每一行元素概率为1.
+\begin{definition}{时齐Markov链}{}
+	若Markov链是时齐的，即$p_{ij}(t,t+n)=p_{ij}(n)$与$t$无关，则概率转移矩阵为
+	\begin{align*}
+		P(n)=\begin{bmatrix}
+			p_{11}(n)&p_{12}(n)&\cdots\\
+			p_{21}(n)&p_{22}(n)&\cdots\\
+			\vdots&\vdots&\ddots
+		\end{bmatrix}
+	\end{align*}
+	一步转移概率矩阵$P(1)=:P.$
+\end{definition}
+\begin{theorem}{Chapman-Kolomogorov方程}{}
+	时齐Markov链，有
+	\begin{align*}
+		p_{ij}(m+n)=\sum_{k=1}^\infty p_{ik}(m)p_{kj}(n),\quad i,j=1,2,\ldots
+	\end{align*}
+\end{theorem}
+可以简写成矩阵形式
+\[
+	P(m+n)=P(m)P(n).
+\]
+自然，$P(n)=P^n$，时齐的Markov链的有限维分布由初始分布和一步转移概率完全确定。
+\begin{definition}{遍历性和极限分布}{}
+	若时齐Markov链的转移概率$p_{ij}(n)$存在极限
+	\[
+		\pi_j:=\lim_{n\to\infty}p_{ij}(n),
+	\]
+	则称该链具有遍历性，又若$\textstyle\sum_{j}\pi_j=1$，则称行向量
+	\[
+		\pi=[\pi_0,\pi_1,\ldots]
+	\]
+	为该链的极限分布。
+\end{definition}
+\begin{theorem}{遍历性的充分条件}{}
+	若存在正整数$m$使得$\forall i,j\in I$有$p_{ij}(m)>0$，则此链具有遍历性，且极限分布是矩阵方程
+	\begin{align}
+		\pi=\pi P
+	\end{align}
+	满足$\pi_j>0,\textstyle\sum_j\pi=1$的唯一解。
+\end{theorem}
+满足上述条件的Markov链的极限分布是该链的平稳分布，即若将$\pi$作为初始分布，那么每一时刻该链的分布都是$\pi$。
+\begin{example}{雨伞问题}{}
+	我有2把雨伞用于往返于家和办公室之间。若我从学校出发回家的时候正在下雨，我就会带一把雨伞去学校。从家去学校同理。假定我出发时下雨的概率是$ p$ （不依赖于过去）。
+
+	令$ X(t) $为我所在地雨伞的数量，状态空间为$\{0, 1, 2\}$。
+	
+	一步转移概率矩阵
+	\[
+		P=\begin{bmatrix}
+			0&0&1\\
+			0&1-p&p\\
+			1-p&p&0
+		\end{bmatrix}
+	\]
+	$P_{ij}(4)>0$，故具有遍历性。极限分布
+	\[
+		\biggfkh{\frac{1-p}{3-p},\frac1{3-p},\frac1{3-p}}
+	\]
+	我被淋湿这件事等价于“处于状态0并且下雨”，即
+	\[
+		p\cdot\frac{1-p}{3-p}
+	\]
+\end{example}
+\begin{example}{赌徒(续)}{gambler 2}
+	在\exmref{exm:gambler} 中，我们用全概率公式解决了赌徒问题，下面我们用Markov链解决，我们可以写出一步转移矩阵
+	\[
+		\begin{bmatrix}
+			1&0&\cdots\\
+			q&0&p&\cdots\\
+			&q&0&p&\cdots\\
+			&&q&0&\cdots\\
+			&&&\ddots&\ddots\\
+			&&&&\cdots&0&p\\
+			&&&&\cdots&0&1
+		\end{bmatrix}
+	\]
+	解得$P_i$，显然现实中$p$均$<1/2$，则当$N\to\infty$时，$P_i\equiv 0$，因此若不收手，终将破产。
+\end{example}
+\section{平稳随机过程}
+随机过程作为“随机的函数”太一般了，太难了。如果给它加一些限制，可以使它更有用。迄今有三类限制在随机过程的研究中取得了突破，加深了我们对随机过程的理解
+\begin{compactitem}
+	\item Markov过程
+	\item 鞅(martingales)
+	
+	未来给现有已知状态的增量期望为0。与stochastic calculus联系紧密，在博弈论和金融中使用。
+	\item 平稳随机过程（stationary stochastic process）
+	
+	变量一般指时间，当变量为空间时为homogeneous stochastic process。
+\end{compactitem}
+\begin{definition}{严平稳过程}{}
+	统计性质不随机时间变化的随机过程，即
+	\begin{align*}
+		\CDF_X(t_1,\ldots,t_n)=\CDF_X(t_1+\tau,\ldots,t_n+\tau)
+	\end{align*}
+	称为严平稳随机过程，简称严平稳过程。
+\end{definition}
+一个平稳的Gauss过程同时也是严平稳的，因为Gauss过程的有限分布函数由一二阶矩完全确定。
+\begin{definition}{平稳过程}{}
+	一二阶矩不随机时间变化的随机过程，即
+	\begin{align}
+		\mu_X(t)=\mu_X,\quad R_X(t,t+\tau)=R_X(\tau)
+	\end{align}
+	那么该随机过程称为宽平稳过程(weak stationary stochastic process)，广义平稳过程或平稳过程。
+\end{definition}
+独立增量过程与平稳过程无关，至少从二阶矩的角度，
+\[
+	R_X(t,t+\tau)=\sigma^2_X(t)+\mu_X(t)\mu_X(t+\tau)
+\]
+与$t$相关。易证，
+Poisson过程和Wiener过程都不是平稳过程。
+
+但是它们的均值与自方差函数对时间平移的导数都是常数，
+可以通过微分或差分转化成平稳随机过程，称为广义（差分）平稳随机过程。
+\paragraph{相关函数}
+平稳过程的均值函数为常数，因此相关函数$R_X(\tau)$包含了平稳过程的主要信息。但相关函数$R_X(\tau)$并不能完整刻画随机过程的所有统计学性质。
+\begin{theorem}{平稳随机过程的性质}{}
+	\begin{compactitem}
+		\item $R_X(\tau)$是偶函数，且在0处取最大值
+		\item 若$\exists\tau\neq 0,|R_X(\tau)|=R_X(0)$，则$X(t)$是周期的
+		\item 若$R_X(\tau)$在0处连续，则处处连续
+		\item $R_X(\tau)$非负定，即$\forall t_i\in T,g(t)$
+		\[
+			\sum_{i,j=1}^nR_X(t_i-t_j)g(t_i)g(t_j)\geqslant 0.
+		\]
+		任意连续的非负定函数都是某平稳过程的自相关函数。
+	\end{compactitem}
+\end{theorem}
+标准自协方差函数
+\[
+	\rho_X(\tau)=\frac{C_X(\tau)}{C_X(0)}.
+\]
+特别地，当$\mu_X(t)\equiv 0$时，
+\[
+	\rho_X(\tau)=\frac{R_X(\tau)}{R_X(0)}.
+\]
+\begin{example}{随机相位正弦波}{}
+	随机过程$X(t)=A\cos(\omega t+\theta)$
+\end{example}
+对于随机相位正弦波$\{X(t)\}$，$R_X(0)=\E\bigkh{X^2(t)}$具有功率的意义。
+\begin{compactitem}
+	\item 多个随机相位正弦波叠加的信号，总功率为各个分量功率之和。
+	\item 借助Fourier分解推广，可定义功率谱函数$S_X(\omega)$，其加和为$R_X(0)$，与$R_X(\tau)$互为Fourier变换。
+\end{compactitem}
+
+\paragraph{遍历性与估计}
+均值函数
+\[
+	\mu_X(t):=\E\bigkh{X(t)}
+\]
+定义为随机过程的期望，称为系综平均。
+\begin{compactitem}
+	\item 如果事件能在系综里假想发生，那么它就一定会在一次足够长的观测中发生。（Landau统计力学）
+	\item 系综平均$\mu_X(t)$指在假想的多个随机过程的样本轨迹下，$t $时刻观测值的平均。
+	\item 对于平稳过程，如果观测足够长时间，是否可以与多个样本轨迹等价？即平稳过程相距较大的观测值$ X(t) $与$ X(t + \tau) $之间，是否可看作不相关？
+\end{compactitem}
+\begin{definition}{时间均值}{}
+	记$x_1:=x(t_1)$，定义时间均值为
+	\[
+		\hat m_n:=\frac{x_1+\cdots+x_n}n\to m
+	\]
+\end{definition}
+若
+\[
+	\sum_{\tau=0}^\infty R_X(\tau)<\infty
+\]
+那么
+\[
+	\hat m_n\pto\mu_X.
+\]
+此时称过程$ X(t) $的均值具有各态历经
+性(ergodicity)或遍历性。
+\begin{compactitem}
+	\item $\hat m_n$是$\mu_X$的无偏相合估计量。
+	\item 估计量的方差\[
+		\lim_{n\to\infty}n\Var(\hat m_n)=\sum_{\tau=-\infty}^{+\infty}R_X(\tau)
+	\]
+\end{compactitem}
+区间估计：如果相关性较弱，适用CLT，可使用正态近似给出区间估计。
+
+自相关函数的估计
+\[
+	\hat R_n(\tau)=\frac1n\sum_{t=1}^{n-\tau}(x_t-\hat m)(x_{t+\tau}-\hat m).
+\]
+\section{时间序列}
+时间序列是离散平稳过程的特例，与滤波理论联系紧密。
+\begin{definition}{平稳时间序列}{}
+	若时间序列$\{X_t\}$是平稳过程，称之为平稳时间序列。
+	\[
+		\E(X_t)=\mu,\quad\E(X_tX_{t+\tau})=f(\tau).
+	\]
+	定义
+	\[
+		\gamma_k:=\E\bigfkh{(X_t-\mu)(X_{t+k}-\mu)}=f(\tau)-\mu^2
+	\]
+	是平稳过程的协方差函数$R_X(\tau)$的离散版本。
+\end{definition}
+与$R_X(\tau)$性质类似，$\gamma_k$偶函数、非负定、$\gamma_0$最大，定义自相关函数
+\[
+	\rho_k:=\frac{\gamma_k}{\gamma_0}.
+\]
+\begin{definition}{偏相关函数}{}
+	用$X_t$的前$ k $个时刻的值$X_{t-1},\ldots,X_{t-k}$对$ X_t $做最小二乘估计，即
+	\[
+		a_{k1},\ldots,a_{kk}=\arg\min\E\biggfkh{\biggkh{X_t-\sum_{i=1}^ka_{ki}X_{t-i}}^2}
+	\]
+	其中$a_{kk}$称作$X_t$的偏相关函数。
+\end{definition}
+$k\geqslant 3$，偏相关函数值变得不显著。
+\subsubsection{AR(\textit{p})模型}
+\begin{definition}{白噪声序列}{}
+	时间序列$\{\epsilon_t\}$是白噪声序列若
+	\[
+		\E(\epsilon_t)=0,\quad\E(\epsilon_s\epsilon_t)=\sigma^2\delta_{st}.
+	\]
+	$\gamma_k=\sigma^2\delta_k$
+\end{definition}
+一般还可以再假设$\epsilon_t\sim\Norm(0,\sigma^2)$为Gauss白噪声序列。
+\begin{definition}{AR($p$)过程}{}
+	平稳过程$\{X_t\}$被叫作p阶自回归(auto-regression)过程，简记为AR($p$)过程，如果
+	\begin{align}
+		X_t-\varphi_1X_{t-1}-\cdots-\varphi_pX_{t-p}=\epsilon_t.
+	\end{align}
+	白噪声$\epsilon_t$是AR过程的创新(innovation)。
+\end{definition}
+在Gauss过程中，创新也是Gauss的。取名innovation代表给随机过程带来新的熵。
+\begin{definition}{生成多项式}{}
+	记延迟算子$ B $为
+	\[
+		BX_t=X_{t-1}
+	\]
+	则AR($p$)过程的条件可记为$\Phi(B)X_t=\epsilon_t$，其中
+	\begin{align}
+		\Phi(B)=1-\varphi_1B-\cdots-\varphi_pB^p
+	\end{align}
+	称为AR($p$)过程的生成多项式。
+\end{definition}
+只有$X_t$与$\epsilon_t$相关，即
+\begin{align*}
+	\Cov(\epsilon_t,X_s)=\begin{cases}
+		0,&t>s\\[-1ex]
+		\sigma^2,&t=s\\[-1ex]
+		<\sigma^2,&t<s
+	\end{cases}
+\end{align*}
+\begin{theorem}{AR($p$)的性质}{}
+	\begin{compactitem}
+		\item 生成多项式为$\Phi(\cdot)$的AR($p$)过程的功率谱为
+		\[
+			S_X(\omega)=\frac{\sigma^2}{|\Phi(\e{-\i\omega})|^2}.
+		\]
+		因此它的自相关函数$\gamma_k$作为$ S_X(\omega) $的Fourier变换，有无穷多非零项，称为拖尾的。
+		\item 由AR($p$)的定义知，当$ k > p $时，它们偏相关函数$ a_{kk} = 0$，称为截尾的。
+	\end{compactitem}
+\end{theorem}
+由于$\epsilon_t$是白噪声，即作为误差独立同分布，可以使用多线性回归模型来估计生成多项式中的系数$\varphi_1,\ldots,\varphi_p$
+\[
+	X_t=\varphi_1X_{t-1}+\cdots+\varphi_pX_{t-p}+\epsilon_t,\enspace\epsilon_t\sim\Norm(0,\sigma^2).
+\]
+\subsubsection{ARMA(\textit{p, q})}
+\begin{definition}{ARMA($p,q$)}{}
+	随机过程
+	\[
+		X_t=\epsilon_t-\theta_1\epsilon_{t-1}-\cdots-\theta_q\epsilon_{t-q}
+	\]
+	是有创新$\{\epsilon_t\}$和生成多项式
+	\begin{align}
+		\Theta(B)=1-\theta_1B-\cdots-\theta_qB^q
+	\end{align}
+	的滑动平均(moving-average)过程MA($q$)。
+\end{definition}

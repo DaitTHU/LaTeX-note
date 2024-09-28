@@ -1,0 +1,226 @@
+% 引言：Monty Hall问题(三门问题)；% ——考虑最开始的选择：1/3选中汽车，则换门必得羊；2/3选中羊，因为另一羊已被排除，换门必得车——因此不换门得车的概率只有1/3，而换门得车的概率为2/3。
+% 你说你说分数怎么停留一直在停留谁让它停留的，为什么我女朋友场外加油你却还让我出糗。
+% 一种疾病，10000人中约有一人发病，患病者检测阳性的比例为99\%，未患病者检测阳性的比例为0.1\%。则阳性报告者患病率
+%\[
+%	\frac{0.99}{0.99+9.999}\doteq 9\%
+%\]
+%因此
+% 对阳性报告者进行二次检测是有必要的；	
+% 敏感问题调查：敏感问题+保护性问题。
+	
+\chapter{概率}
+\paragraph{概率的发展史}
+概率的发展经历了如下几个过程：
+\begin{compactitem}
+	\item de M\'er\'e问题
+	\item Pascal, Fermat首创概率的数学理论（初等数学方法）
+	\item Laplace创立分析概率论（微积分分析方法）
+	\item Kolmogorov发展现代理论（测度论方法）
+\end{compactitem}
+\section{试验与事件}
+\begin{definition}{试验与样本空间}{experiment and sample space}
+    概率论研究试验(experiment)，试验具有如下性质：
+    \begin{compactenum}
+    	\item 不能预先确知结果；
+    	\item 试验之前可预知所有可能结果，其集合构成样本空间(sample space) $\Omega$。
+    \end{compactenum}
+\end{definition}
+\begin{definition}{事件}{event}
+    事件(event)是样本空间的子集(well-defined select)。试验的单一结果称为基本事件。
+
+    特别地，$\Omega$是必然事件，$\varnothing$是不可能事件。
+\end{definition}
+
+\paragraph{事件的运算}借助集合语言以及Venn图
+\begin{compactitem}
+	\item 余 $A\c = \Omega\backslash A$，对立$A=B\c$
+	\item 和与差 $A+B, A-B$
+	\item 积 $AB = A\cap B$，互斥$AB=\varnothing$
+	\item de Morgan定律\footnote{此处省略了上下标$i=1$和$\infty$，后同。}
+	\[
+		\kh{\sum A_i}\c = \prod A_i\c,
+	\]
+\end{compactitem}
+
+\paragraph{概率的解释}古典解释，等可能性，Bertrand悖论；频率解释，主观解释。
+
+\section{公理化定义}
+定义样本空间$\Omega$的幂集$2^\Omega$为$\Omega$所有子集构成的集合，则
+\begin{definition}{事件集类}{event set}
+	事件集类$\cF\subset 2^\Omega$是$\Omega$的$\sigma$-代数，满足事件运算的封闭性：
+	\begin{compactenum}
+		\item $\Omega \in \cF;$
+		\item $\forall A \in \cF, A\c \in \cF;$
+		\item 特别地，若$\forall A_i \in \cF$，则
+		$
+			\sum A_i \in \cF.
+		$
+	\end{compactenum}
+\end{definition}
+\begin{example}{$\sigma$-代数}{sigma-Algebra}
+	若$\Omega=\{a,b,c,d\}$，则一个平凡的$\sigma$-代数
+	\[
+		\cF_1=\{\varnothing, \Omega\},
+	\]
+	另一个$\sigma$-代数可以为
+	\[
+		\cF_2=\{\varnothing, \{a\},\{b,c,d\},\Omega\}.
+	\]
+\end{example}
+\begin{definition}{概率}{probability}
+	定义概率(probability)~$\P:\cF\to\RR$，满足以下公理：
+	\begin{compactenum}
+		\item $\forall A\in\cF,\P(A)\geqslant 0;$
+		\item $\P (\Omega)=1;$
+		\item （\textbf{加法公理}）~$\forall A_i \in \cF,A_iA_j=\varnothing(i\neq j),$
+		\begin{align}
+			\P\kh{\sum A_i}=\sum\P(A_i).
+		\end{align}
+	\end{compactenum}
+	$(\Omega,\cF,\P)$构成了概率空间(probability space)。
+\end{definition}
+由定义，可推出以下命题：
+\begin{compactenum}
+	\item $\forall A\in\cF,\P(A)\leqslant 1;$
+	\item $\P(\varnothing)=0;$
+	\item $\forall A_i \in \cF,A_iA_j=\varnothing(i\neq j),$
+	\[
+		\P\kh{\sum_{i=1}^n A_i}=\sum_{i=1}^n\P(A_i)
+	\]
+	特别的，$\P(A)+\P(A\c)=1;$
+	\item $\forall A\subset B,\P(A)\leqslant\P(B);$
+	\item $\P(A+B)=\P(A)+\P(B)-\P(AB).$推广之，得到
+\end{compactenum}
+\begin{theorem}{容斥恒等式}{inclusion and exclusion identities}
+	容斥恒等式(inclusion and exclusion identities)
+	\begin{align}\notag
+		\P\kh{\sum_{i=1}^nA_i}&=\sum_{i=1}^n\P(A_i)-\sum_{i<j}^n\P(A_iA_j)+\cdots+\P\kh{\prod_{i=1}^nA_i}\\
+		&=\sum_{r=1}^n(-)^{r+1}\sum_{i_1<\cdots<i_r}\P\kh{\prod_{k=1}^rA_{i_k}}.
+	\end{align}
+\end{theorem}
+\begin{example}{乱序}{out of order}
+	$n$个人每人一个帽子，离开时随机取帽子，问无人拿到自己帽子的概率为多少？
+
+	记$A_i$表示第$i$个人拿到自己的帽子，则
+	\[
+		\P(A_i)=\frac1n\equiv\frac{(n-1)!}{n!}.
+	\]
+	至少一个人拿到自己的帽子：
+	\begin{align*}
+		\P\kh{\sum_{i=1}^nA_i}&=\sum_{r=1}^n(-)^{r+1}\sum_{i_1<\cdots<i_r}\P\kh{A_{i_1}\cdots A_{i_r}}\\
+		&=\sum_{r=1}^n(-)^{r+1}\binom nr\frac{(n-r)!}{n!}=\sum_{r=1}^n(-)^{r+1}\frac1{r!}\\
+		&=1-\frac1{2!}+\frac1{3!}+\cdots+(-)^{n+1}\frac1{n!}.
+	\end{align*}
+	故所求概率即
+	\[
+		\P(A_1\c\cdots A_n\c)=1-1+\frac1{2!}-\frac1{3!}+\cdots+(-)^n\frac1{n!}\to\frac1{\e{}}.
+	\]
+\end{example}
+\section{条件概率}
+\begin{definition}{条件概率}{conditional probability}
+	定义给定$B$事件发生的条件下，$A$事件发生的条件概率(conditional probability)为
+	\begin{align}
+		\P(A|B):=\frac{\P(AB)}{\P(B)}
+	\end{align}
+	其中$\P(B)>0.$
+\end{definition}
+条件概率可用于缩小样本空间。
+
+事实上，给定$B$且$\P(B)>0$，则$\P(\cdot|B):\cF\to\RR$是概率函数，$\bigkh{\Omega,\cF,\P(\cdot|B)}$仍为概率空间。
+\begin{theorem}{乘法法则}{Multiplication Rule}
+	由条件概率的定义可以直接导出：
+	\begin{align}
+		\P(AB)=\P(B)\P(A|B)=\P(A)\P(B|A).
+	\end{align}
+	一般推广：
+	\[
+		\P(A_1\cdots A_n)=\P(A_1)\P(A_2|A_1)\cdots\P(A_n|A_1\cdots A_{n-1}).
+	\]
+	加多限制条件以后，算概率可能会变简单。
+\end{theorem}
+称$\P(A)$为\textbf{先验概率}(priori probability)，$\P(A|B)$为\textbf{后验概率}(posterior probability)。
+
+已观测到$A$事件，等价于$\P(A|A)\equiv 1$，绝非$\P(A)=1$。
+
+\section{独立事件}
+\begin{definition}{独立事件}{independent event}
+	定义$A,B$相互独立(independent)当
+	\begin{align}
+		\P(AB)=\P(A)\P(B).
+	\end{align}
+\end{definition}
+即，$B$事件发生与否，不影响$A$事件发生的概率：
+\[
+	\P(A|B)=\P(A)\iff\frac{\P(AB)}{\P(B)}=\frac{\P(A\Omega)}{\P(\Omega)}.
+\]
+易证，若$A,B$独立，则$A\c,B$独立，$A,B\c$独立，$A\c,B\c$独立。
+\begin{definition}{三个事件的独立}{}
+	$A,B,C$相互独立等价于：
+	\begin{compactenum}
+		\item $A,B,C$两两独立；
+		\item $\P(ABC)=\P(A)\P(B)\P(C)$
+	\end{compactenum}
+\end{definition}
+需要注意，只知其一不可推出另一个条件。
+
+进而定义可数个事件$A_1,A_2,\ldots$相互独立：任取有限个事件$A_{i_1},\ldots,A_{i_n}$都有
+\[
+	\P(A_{i_1}\cdots A_{i_n})=\P(A_{i_1})\cdots\P(A_{i_n}).
+\]
+\begin{definition}{条件独立}{conditional independent}
+	若
+	\[
+		\P(AB|E)=\P(A|E)\P(B|E),
+	\]
+	则$A,B$关于事件$E$条件独立(conditional independent)。
+\end{definition}
+$A,B$关于$E$条件独立与$A,B$独立无关，二者之间既不充分也不必要。
+\section{Bayes公式}
+\begin{theorem}{全概率公式}{total probability formula}
+	定义$\Omega$的一个分割$\{B_i\}$，满足：
+	\begin{compactenum}
+		\item $\sum B_i=\Omega;$
+		\item $\forall i\neq j,\enspace B_iB_j=\varnothing;$
+		\item $\P(B_i)>0.$
+	\end{compactenum}
+	则$A$事件的概率
+	\begin{align}
+		\P(A)=\sum\P(B_i)\P(A|B_i)
+	\end{align}
+\end{theorem}
+\begin{example}{假阳性悖论}{false positive paradox}
+	$B=$患病，$A=$阳性，$\P(B)=10^{-4},\P(A|B)=0.99,\P(A|B\c)=10^{-3}$
+	\[
+		\P(B|A)=\frac{\P(AB)}{\P(A)}=\frac{\P(B)\P(A|B)}{\P(B)\P(A|B)+\P(B\c)\P(A|B\c)}\doteq 9\%.
+	\]
+\end{example}
+\begin{example}{赌徒}{gambler}
+	两个人赌博。假设甲的赌本为$i$元，乙的赌本为$n-i$。甲赢的概率为$p$。每赌一局输家给赢家1元，其中一人输光游戏结束。求甲成为最终赢家的概率$Q_i$。
+
+	$A=$甲最终赢，$B=$甲本局赢，由全概率公式
+	\[
+		\P(A)=\P(B)\P(A|B)+\P(B\c)\P(A|B\c).
+	\]
+	即
+	\[
+		Q_i=pQ_{i+1}+(1-p)Q_{i-1},%\implies p(Q_{i+1}-Q_i)=(1-p)(Q_i-Q_{i-1}).
+	\]
+	且有边界条件：$Q_0=0,Q_n=1$，
+	\[
+		Q_i=\begin{cases}
+			\frac in,&p=1/2\\[2ex]
+			\frac{1-\lambda^i}{1-\lambda^n},&p\neq 1/2,\enspace\lambda:=\frac{1-p}p.
+		\end{cases}
+	\]
+\end{example}
+\begin{theorem}{Beyas公式}{Beyas formula}
+	Beyas公式即
+	\begin{align}
+		\P(B_i|A)=\frac{\P(B_i)\P(A|B_i)}{\P(A)}=\frac{\P(B_i)\P(A|B_i)}{\sum_j\P(B_j)\P(A|B_j)}
+	\end{align}
+\end{theorem}
+这个公式的重要性不仅在数学意义上，还在于先验概率$\P(B_i)$ v.s.后验概率$\P(B_i|A)$
+
+\begin{remark}
+	计算正确的概率、正确计算概率、正确使用概率。
+\end{remark}

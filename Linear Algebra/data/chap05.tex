@@ -1,0 +1,319 @@
+\chapter{行列式}
+在\exmref{exm:inverse of 2x2 matrix}~中，2阶方阵的逆为
+\begin{align*}
+	\begin{bmatrix}
+		a&b\\c&d
+	\end{bmatrix}\iv=\frac1{ad-bc}
+	\begin{bmatrix}
+		d&-b\\
+		-c&a
+	\end{bmatrix}.
+\end{align*}
+定义2阶方阵的行列式(determinant)
+\begin{align}
+	\det (A)\equiv\abs A\equiv\begin{vmatrix}
+		a&b\\c&d
+	\end{vmatrix}:=ad-bc.
+\end{align}
+特别的，给出3阶方阵的行列式
+\begin{align}
+	\begin{vmatrix}
+		a_{11}&a_{12}&a_{13}\\
+		a_{21}&a_{22}&a_{23}\\
+		a_{31}&a_{32}&a_{33}
+	\end{vmatrix}={}&a_{11}
+	\begin{vmatrix}
+		a_{22}&a_{23}\\
+		a_{32}&a_{33}
+	\end{vmatrix}-a_{12}
+	\begin{vmatrix}
+		a_{21}&a_{23}\\
+		a_{31}&a_{33}
+	\end{vmatrix}+a_{13}
+	\begin{vmatrix}
+		a_{21}&a_{22}\\
+		a_{31}&a_{32}
+	\end{vmatrix}\\\notag
+	={}&a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}\\\notag
+	&-(a_{13}a_{22}a_{31}+a_{11}a_{23}a_{32}+a_{12}a_{21}a_{33}).
+\end{align}
+\section{行列式}
+下面我们用递归的方式给出行列式的定义。首先引入代数余子式。
+\begin{definition}{代数余子式}{cofactor}
+	对于$n$阶方阵$A$，记$A_{\neq ij}$为去掉第$i$行第$j$列得到的$(n-1)$阶方阵。则$A$的余子式(minor)定义为
+	\begin{align}
+		M_{ij}:=\det (A_{\neq ij});
+	\end{align}
+	代数余子式(cofactor)定义为
+	\begin{align}
+		C_{ij}:=(-)^{i+j}M_{ij}.
+	\end{align}
+\end{definition}
+代数余子式前的正负号与矩阵中元素所在位置的关系：
+\begin{align}
+	\begin{bmatrix}
+		+&-&+&\cdots\\
+		-&+&-&\cdots\\
+		+&-&+&\cdots\\
+		\vdots&\vdots&\vdots&\ddots\\
+	\end{bmatrix}
+\end{align}
+\begin{definition}{行列式}{determinant}
+	
+	$A$的行列式定义为：
+	\begin{compactenum}
+		\item $n=1$时，$\det (A)=a_{11};$
+		\item $n>1$时，行展开或列展开(Laplace展开)
+		\begin{align}
+			\det (A) = \sum_{i=1}^na_{ij}C_{ij} = \sum_{\ell=1}^na_{k\ell}C_{k\ell}.
+		\end{align}
+	\end{compactenum}
+\end{definition}
+易得，单位矩阵行列式$\det I=1$，对角矩阵行列式
+\begin{align}
+	\det(\diag(a_1,\ldots,a_n))=a_1\cdots a_n.
+\end{align}
+\begin{theorem}{三角矩阵的行列式}{determinant of triangular matrix}
+	三角矩阵的行列式等于对角元的乘积。
+\end{theorem}
+按行列式的定义进行计算即证。
+\section{行列式的性质}
+行列式可看做$n$个$n$维向量到数域$\FF$的映射：
+\[
+	\det (A)=T(a_1,\ldots,a_n),
+\]
+\begin{theorem}{行列式的性质}{}
+	由定义，行列式是线性的：
+	\begin{compactenum}
+		\item $T(a_1,\ldots,ka_i,\ldots,a_n)=kT(a_1,\ldots,a_i,\ldots,a_n);$
+		\item $T(\ldots,a_i+b_i,\ldots)=T(\ldots,a_i,\ldots)+T(\ldots,b_i,\ldots).$
+	\end{compactenum}
+	除了线性，行列式还满足初等变换相关的性质：
+	\begin{compactenum}
+		\item[3.] 交换$A$任意两行或两列得到$B$，则$\det(B)=-\det(A);$
+		\begin{corollary}
+			若$A$中有任意两行或两列相同，则$\det(A)=0.$
+		\end{corollary}
+		\item[4.] 将$A$的第$i$行乘一个常数加到第$j$行得到$B$，则$\det(A)=\det(B).$
+		\begin{corollary}
+			若$A$的行/列之间线性相关，或者说秩小于阶，则$\det (A)=0.$
+		\end{corollary}
+	\end{compactenum}
+\end{theorem}
+因此$A$可逆$\iff\det(A)\neq 0.$
+\begin{definition}{全反对称张量}{Levi-Civita symbol}
+	定义全反对称张量(Levi-Civita symbol)~$\epsilon_{i_1\cdots i_n}$，其中$i_1,\ldots,i_n$取值范围$1,\ldots,n$，满足
+	\begin{compactitem}
+		\item $\epsilon_{1\cdots n}=1;$
+		\item $\epsilon_{\cdots i_p\cdots i_q\cdots}=-\epsilon_{\cdots i_q\cdots i_p\cdots};$
+		\item 任两个指标相同则$\epsilon_{\cdots i_p\cdots i_p\cdots}=0.$
+	\end{compactitem}
+	如果$i_1,\ldots,i_n$是$1,\ldots,n$的一个全排列，其从$1,\ldots,n$变换而来需要两两交换的次数为$p$，则 
+	\[
+		\epsilon_{i_1\cdots i_n}=(-1)^p.
+	\]
+\end{definition}
+利用全反对称张量，行列式也可以定义为
+\begin{align}
+	\det(A)=\sum_{i_1,\ldots,i_n=1}^n\epsilon_{i_1\cdots i_n}a_{1i_i}\cdots a_{ni_n}.
+\end{align}
+或者进行一个抽象的定义：行列式$\det(A)=T(a_1,\ldots,a_n)$是$n$个$n$维向量到数域$\FF$的映射，且满足以下三个性质：
+\begin{compactenum}
+	\item $\det I=1;$
+	\item 任意交换两列，行列式反号；
+	\item 线性$\ldots$
+\end{compactenum}
+\section{行列式的运算}
+\paragraph{行列式与矩阵运算}
+行列式在矩阵转置下不变
+\[
+	\det(A\tp)=\det(A),
+\]
+\begin{theorem}{行列式与矩阵乘法}{determinant of multiplication}
+	\begin{equation}
+		\det(AB)=\det(A)\det(B).
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	若$A$不可逆，则$AB$不可逆，等式成立：
+	\[
+		\det(AB)=\det(A)\det(B)=0.
+	\]
+	若$A$可逆，则可表示为一系列初等矩阵的乘积$A=E_k\cdots E_1$，从而
+	\begin{align*}
+		&\det(AB)=\det(E_k\cdots E_1B)=\det(E_k)\det(E_{k-1}\cdots E_1B)\\
+		&=\det(E_k)\cdots\det(E_1)\det(B)=\det(E_k\cdots E_1)\det(B)=\det(A)\det(B).
+	\end{align*}
+	即证。
+\end{proof}
+\begin{corollary}
+	\begin{align}
+		\det(A\iv)=\det(A)\iv.
+	\end{align}
+\end{corollary}
+
+但是行列式与矩阵加法之间并无必然联系：
+\begin{align}
+	\det(A+B)\neq\det(A)+\det(B).
+\end{align}
+但是当$A,B$满足特殊的条件时，$\det(A+B)$可以化简，见后文的\thmref{thm:matrix determinant lemma}。
+\begin{theorem}{分块矩阵的行列式·一}{determinant of bolck matrix I}
+	若$A$是$m$阶方阵，$D$是$n$阶方阵，$B$是$m\times n$矩阵，则
+	\begin{align}
+		\begin{vmatrix}
+			A&B\\0&D
+		\end{vmatrix}=\abs A\abs D.
+	\end{align}
+\end{theorem}
+\begin{proof}
+	对$A,D$进行$LU$分解，$A=L_AU_A,D=L_DU_D$，则
+	\[
+		\begin{bmatrix}
+			A&B\\0&D
+		\end{bmatrix}=
+		\begin{bmatrix}
+			L_A\\ &L_D
+		\end{bmatrix}
+		\begin{bmatrix}
+			U_A&L_A\iv B\\ &U_D
+		\end{bmatrix}
+	\]
+	前者为下三角矩阵，后者为上三角矩阵，故
+	\[
+		\begin{vmatrix}
+			A&B\\0&D
+		\end{vmatrix}=\abs{L_A}\abs{L_D}\abs{U_A}\abs{U_D}=\abs A\abs D.
+	\]
+\end{proof}
+\begin{theorem}{分块矩阵的行列式·二}{determinant of bolck matrix II}
+	若$A$是$m$阶方阵，$D$是$n$阶方阵，且$A,D$至少一个可逆，$B$是$m\times n$矩阵，$C$是$n\times m$矩阵，则
+	\begin{align}
+		\begin{vmatrix}
+			A&B\\C&D
+		\end{vmatrix}=
+		\abs A\abs{D-CA\iv B}=
+		\abs D\abs{A-BD\iv C}
+	\end{align}
+\end{theorem}
+\begin{proof}
+	注意到
+	\begin{align*}
+		\begin{bmatrix}
+			I&0\\-CA\iv&I
+		\end{bmatrix}
+		\begin{bmatrix}
+			A&B\\C&D
+		\end{bmatrix}&=
+		\begin{bmatrix}
+			A&B\\0&-CA\iv B+D
+		\end{bmatrix};\\
+		\begin{bmatrix}
+			I&-BD\iv\\0&I
+		\end{bmatrix}
+		\begin{bmatrix}
+			A&B\\C&D
+		\end{bmatrix}&=
+		\begin{bmatrix}
+			A-BD\iv D&0\\C&D
+		\end{bmatrix}.
+	\end{align*}
+	对上式取行列式即证。
+\end{proof}
+\begin{theorem}{\href{https://en.wikipedia.org/wiki/Matrix_determinant_lemma}{矩阵行列式引理}}{matrix determinant lemma}
+	若$A$可逆且$u,v$均为$n$维列向量，则
+	\begin{align}
+		\det(A+uv\tp)=(1+v\tp A\iv u)\det(A).
+	\end{align}
+\end{theorem}
+\begin{proof}
+	先证明命题对于$A=I$成立，事实上
+	\begin{align*}
+		\begin{bmatrix}
+			I\\v\tp&1
+		\end{bmatrix}
+		\begin{bmatrix}
+			I+uv\tp&u\\ &1
+		\end{bmatrix}
+		\begin{bmatrix}
+			I\\-v\tp&1
+		\end{bmatrix}=
+		\begin{bmatrix}
+			I&u\\ &1+v\tp u
+		\end{bmatrix}.
+	\end{align*}
+	故
+	\begin{align}
+		\det(I+uv\tp)=1+v\tp u
+	\end{align}
+	进而 
+	\[
+		\det(A+uv\tp)=\det(A)\det(I+A\iv uv\tp)=(1+v\tp A\iv u)\det(A).
+	\]
+\end{proof}
+行列式的运算技巧不宜写得过多，因为这远非线性代数的精髓。
+\section{Cramer法则、伴随矩阵}
+\begin{theorem}{Cramer法则}{Cramer's rule}
+	考虑线性方程组
+	\[
+		Ax=b,
+	\]
+	$Ae_i$是$A$的第$i$列，定义矩阵$B_i$为把$A$中第$i$列换为$b$的矩阵 
+	\[
+		B_i:=A[e_1,\ldots,e_{i-1},x,e_{i+1},\ldots,e_n],
+	\]
+	左右取行列式，则
+	\begin{align}
+		x_i=\frac{\det(B_i)}{\det(A)}.
+	\end{align}
+\end{theorem}
+Cramer法则的应用之一是矩阵求逆，利用$AA\iv=I$，把$A\iv$的元素看做未知数，解线性方程组
+\[
+	(A\iv)_{ij}=\frac{C_{ji}}{\det(A)}.
+\]
+\begin{definition}{伴随矩阵}{adjoint matrix}
+	$n$阶方阵$A$的伴随矩阵(adjoint matrix)~$\adj(A)$
+	\begin{align}
+		(\adj(A))_{ij}:=C_{ji}.
+	\end{align}
+\end{definition}
+根据Cramer法则，
+\begin{align}
+	A\iv=\frac{\adj(A)}{\det(A)}.
+\end{align}
+\begin{remark}
+	即使$A$不可逆，$\adj A$依然存在。
+\end{remark}
+\begin{theorem}{伴随矩阵的性质}{characterist of adjoint}
+	伴随矩阵与原矩阵可交换，其乘积为
+	\begin{align}
+		A\adj(A)=\adj(A)A=\det(A)I.
+	\end{align}
+\end{theorem}
+\begin{proof}
+	根据Laplace展开
+	\begin{align*}
+		\bigfkh{A\adj(A)}_{ij}&=\sum_{k}A_{ik}\bigfkh{\adj(A)}_{kj}=\sum_{k}(-)^{j+k}A_{ik}M_{jk}=\vd_{ij}\det(A);\\
+		\bigfkh{\adj(A)A}_{ij}&=\sum_{k}\bigfkh{\adj(A)}_{ik}A_{kj}=\sum_{k}(-)^{i+k}M_{ki}A_{kj}=\vd_{ij}\det(A).%
+	\end{align*}
+	即证。
+\end{proof}
+\begin{corollary}
+	进而有
+	\[
+		\det(A)\det\bigkh{\adj(A)}=\det\bigkh{\det(A)I}=\bigkh{\det(A)}^n.
+	\]
+	故伴随矩阵的行列式
+	\begin{align}
+		\det\bigkh{\adj(A)}=\det(A)^{n-1}.
+	\end{align}
+	上面的性质并不要求$A$可逆。特别的，若$A$可逆，则伴随矩阵也可逆
+	\begin{align}
+		\adj(A)\iv=\bigkh{\det(A)A\iv}\iv=\frac{A}{\det(A)},
+	\end{align}
+	伴随矩阵的伴随矩阵
+	\begin{align}
+		\adj\bigkh{\adj(A)}=\bigkh{\adj(A)}\iv\det\bigkh{\adj(A)}=\bigkh{\det(A)}^{n-2}A.
+	\end{align}
+\end{corollary}
+
+最后评价一句Cramer法则：计算机运用Cramer法则解$n$元线性方程组的时间复杂度是$\bigo(n\cdot n!)$，且在数值上不稳定\footnote{Cramer, Gabriel (1750). "Introduction à l'Analyse des lignes Courbes algébriques" (in French). Geneva: Europeana. pp. 656-659. Retrieved 2012-05-18.}，这是不可接受的。与其在计算方面的作用相比，其理论价值更为重大，即：研究了方程组的系数与方程组解的存在性与唯一性关系。

@@ -1,0 +1,143 @@
+\chapter{重积分}
+\section{二重积分}
+\begin{theorem}{累次积分法}{}
+	$D=\{(x,y)~|~\alpha(x)\leqslant y\leqslant\beta(x),a\leqslant x\leqslant b\}$，$\alpha(x),\beta(x)$在$[a,b]$上连续，则$f\in\mathscr R(D)$，且
+	\[
+		\iint_Df(x,y)\d x\nd y=\int_a^b\int_{\alpha(x)}^{\beta(x)}f(x,y)\d y\d x.
+	\]
+\end{theorem}
+\begin{theorem}{变量代换法}{}
+	以$x,y$为变量的区域$D$经过变量代换及其逆变换
+	\begin{align*}
+		\begin{cases}
+			u=u(x,y), \\
+			v=v(x,y).
+		\end{cases}
+		\quad\left(\frac{D(x,y)}{D(u,v)}\neq 0\right).
+	\end{align*}
+	就会变为以$u,v$为变量的区域$D'$，积分也会变换为
+	\[
+		\iint_Df(x,y)\d x\nd y=\iint_{D'}f(x(u,v),y(u,v))\left|\frac{D(x,y)}{D(u,v)}\right|\d u\nd v.
+	\]
+\end{theorem}
+\paragraph{例：极坐标}$x=\rho\cos\theta,y=\rho\sin\theta.$
+\[
+	\iint_Df(x,y)\d x\nd y=\iint_{D'}f(\rho\cos\theta,\rho\sin\theta)\rho\d\rho\nd\theta.
+\]
+\paragraph{例：旋转}$x=u\cos\theta-v\sin\theta,y=u\sin\theta+v\cos\theta.$
+\[
+	\iint_Df(x,y)\d x\nd y=\iint_{D'}f(u\cos\theta-v\sin\theta,u\sin\theta+v\cos\theta)\d u\nd v.
+\]
+\subsection*{曲面面积问题}
+空间$O-xyz$中曲面的方程为
+\begin{align*}
+	\begin{cases}
+		x=x(u,v), \\
+		y=y(u,v), \\
+		z=z(u,v).
+	\end{cases}
+	\quad\left(\pv{(x,y,z)}{(u,v)}\text{列满秩}\right).
+\end{align*}
+转化为$O-uv$曲面中的二重积分问题，其中两条曲线切向量
+\[
+	\vec u=\left[\pv xu,\pv yu,\pv zu\right]\tp,\qquad\vec v=\left[\pv xv,\pv yv,\pv zv\right]\tp
+\]
+则
+\[
+	S=\iint_D\norm{\vec u\times\vec v}\d u\nd v
+\]
+若设
+\begin{align}
+	A=\frac{D(y,z)}{D(u,v)},\qquad B=\frac{D(z,x)}{D(u,v)},\qquad C=\frac{D(x,y)}{D(u,v)}.
+\end{align}
+则$\vec u\times\vec v=[A,B,C]\tp,$
+\begin{align}
+	S=\iint_D\sqrt{A^2+B^2+C^2}\d u\nd v
+\end{align}
+另一种方式是利用$(\vec u\times\vec v)^2=u^2v^2-(\vec u\cdot\vec v)^2,$
+\begin{align}
+	E & =\vec u\cdot\vec u=\left(\pv xu\right)^2+\left(\pv yu\right)^2+\left(\pv zu\right)^2, \\
+	G & =\vec v\cdot\vec v=\left(\pv xv\right)^2+\left(\pv yv\right)^2+\left(\pv zv\right)^2, \\
+	F & =\vec u\cdot\vec v=\pv xu\pv xv+\pv yu\pv yv+\pv zu\pv zv.
+\end{align}
+\[
+	S=\iint_D\sqrt{EG-F^2}\d u\nd v
+\]
+特别的，当曲线是显式的，即$z=z(x,y)$
+\[
+	S=\iint_D\sqrt{1+\left(\pv zx\right)^2+\left(\pv zy\right)^2}\d x\nd y.
+\]
+\section{三重积分}
+\begin{theorem}
+	{累次积分法}{}
+	$\Omega=\{(x,y,z)~|~\alpha(x,y)\leqslant z\leqslant\beta(x,y),(x,y)\in D\}$，则
+	\[
+		\iiint_\Omega f(x,y,z)\d x\nd y\nd z=\iint_D\int_{\alpha(x,y)}^{\beta(x,y)}f(x,y,z)\d z\d x\nd y.
+	\]
+\end{theorem}
+\begin{theorem}
+	{变量代换法}{}
+	同样的，对于变量替换
+	\begin{align*}
+		\begin{cases}
+			x=x(r,s,t), \\
+			y=y(r,s,t), \\
+			z=z(r,s,t).
+		\end{cases}
+		\quad\left(\frac{D(x,y,z)}{D(r,s,t)}\neq 0\right).
+	\end{align*}
+	有
+	\[
+		\iiint_\Omega f(x,y,z)\d x\nd y\nd z=\iiint_{\Omega'}\tilde f(r,s,t)\abs{\frac{D(x,y,z)}{D(r,s,t)}}\d r\nd s\nd t.
+	\]
+	其中$\tilde f(r,s,t)=f(x(r,s,t),y(r,s,t),z(r,s,t)).$
+\end{theorem}
+\paragraph{例：柱坐标}$x=\rho\cos\theta,y=\rho\sin\theta,z=z.$
+\[
+	\iiint_\Omega f(x,y,z)\d x\nd y\nd z=\iiint_{\Omega'}f(\rho\cos\theta,\rho\sin\theta,z)\rho\d\rho\nd\theta\nd z.
+\]
+\paragraph{例：球坐标}$x=r\sin\theta\cos\phi,y=r\sin\theta\sin\phi,z=r\cos\theta.$
+\begin{align*}
+	\iiint_\Omega & f(x,y,z)\d x\nd y\nd z                                                                                   \\
+				  & =\iiint_{\Omega'}f(\sin\theta\cos\phi,r\sin\theta\sin\phi,r\cos\theta)r^2\sin\theta\d r\nd\theta\nd\phi.
+\end{align*}
+\begin{example}{$n$重积分}{}
+	定义$\RR^n$中单位球
+	\[
+		\Omega_n=\set{(x_1,x_2,\ldots,x_n)}{\sum_{i=1}^nx_i^2\leqslant 1}
+	\]
+	的体积
+	\[
+		V_n=\int\cdot\cdot\cdot\int_{\Omega_n}\d x_1\cdot\cdot\cdot\d x_n=\int_{-1}^1\int\cdot\cdot\cdot\int_{D_{n-1}}\d x_1\cdot\cdot\cdot\d x_{n-1}\d x_n.
+	\]
+	其中
+	\[
+		D_{n-1}=\set{(x_1,\ldots,x_{n-1})}{\sum_{i=1}^{n-1}x_i^2\leqslant 1-x_n^2}.
+	\]
+	作变换$x_i=\sqrt{1-x_n^2}\,u_i,(i=1,\ldots,n-1)$，则
+	\[
+		\frac{D(x_1,\ldots,x_{n-1})}{D(u_1,\ldots,u_{n-1})}=\left(1-x_n^2\right)^{\kh{n-1}/2}.
+	\]
+	可得
+	\begin{align*}
+		V_n & =\int_{-1}^1\int\cdot\cdot\cdot\int_{\Omega_{n-1}}\left(1-x_n^2\right)^{\kh{n-1}/2}\d u_1\cdot\cdot\cdot\d u_{n-1}\d x_n \\
+			& =\int_{-1}^1\left(1-x_n^2\right)^{\kh{n-1}/2}V_{n-1}\d x_n=2V_{n-1}\int_0^1\left(1-x^2\right)^{\kh{n-1}/2}\d x.
+	\end{align*}
+	令$x=\sqrt t$，则
+	\begin{align*}
+		V_n & =V_{n-1}\int_0^1(1-t)^{\kh{n-1}/2}t^{-1/2}\d t=V_{n-1}\text B\left(\frac12,\frac{n+1}2\right)                                                                  \\
+			& =V_{n-1}\cdot\fracdisp{\Gamma\kh{\frac12}\Gamma\kh{\frac{n+1}2}}{\Gamma\kh{\frac{n+2}2}}=V_{n-1}\cdot\fracdisp{\Gamma\kh{\frac{n+1}2}}{\Gamma\kh{\frac{n+2}2}}\sqrt\pi \\
+		%& =V_1\cdot\frdp{\Gamma\kh{\frac{n+1}2}}{\Gamma\kh{\frac{n+2}2}}\frdp{\Gamma\kh{\frac{n}2}}{\Gamma\kh{\frac{n+1}2}}\cdots\frdp{\Gamma\kh{\frac32}}{\Gamma\kh{\frac52}}\pi^{\kh{n-1}/2} \\
+			& =V_1\cdot\fracdisp{\Gamma\kh{\frac32}}{\Gamma\kh{\frac{n+2}2}}\pi^{\kh{n-1}/2}=\fracdisp{\pi^{n/2}}{\Gamma\kh{\frac n2+1}}.
+	\end{align*}
+	我们就得到了“体积”公式
+	\begin{align}
+		V_n=
+		\begin{cases}
+			\frac{\pi^k}{k!},        & n=2k,   \\[
+		2ex]
+			\frac{2^k\pi^{k-1}}{n!}, & n=2k-1.
+		\end{cases}
+	\end{align}
+	例如$V_1=2,\quad V_2=\pi,\quad V_3=\frac 43\pi,\quad V_4=\frac 12\pi^2,\quad V_5=\frac 8{15}\pi^2,\ldots.$
+\end{example}

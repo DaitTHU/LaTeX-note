@@ -1,0 +1,147 @@
+\chapter{跃迁理论}
+若体系的Hamilton量$\hat H_0$不显含时间，能量本征值问题的解为
+\[
+	\hat H_0\ket n=E_n\ket n.
+\]
+若$\hat H(t)=\hat H_0+\hat H'(t)$显含时间，体系将有一定的概率离开初态$\ket{k}$而处于其它定态$\ket{k'}$，这就是\textbf{量子跃迁}。
+\section{量子态随时间的变化}
+状态随时间的演化由\Schr 方程决定
+\begin{align}
+	\begin{cases}
+		\i\hbar\pp t\ket{\psi(t)}=\hat H(t)\ket{\psi(t)},\\
+		\ket{\psi(0)}=\ket{k}.
+	\end{cases}
+\end{align}
+采用能量$\hat H_0$表象 
+\begin{align}
+	\ket{\psi(0)}=\sum_n C_{nk}(t)\ket n\e{-\i E_nt/\hbar},\quad C_{nk}(0)=\vd_{nk}.
+\end{align}
+体系$t$时刻跃迁到定态$\ket{k'}$的概率为$\abs{C_{k'k}(t)}^2$。
+
+为求出跃迁概率，将表象表达式带入\Schr 方程，假定$\hat H'$中不包括$\p/\p t$作用
+\begin{align}\notag
+	\i\hbar\sum_n\fkh{\dot C_{nk}(t)-\cancel{\frac{\i E_nC_{nk}(t)}\hbar}}\ket n\e{-\i E_nt/\hbar}&=\sum_nC_{nk}(t)\fkh{\cancel{E_n}+\hat H'(t)}\ket n\e{-\i E_nt/\hbar}.\\
+	\i\hbar\sum_n\dot C_{nk}(t)\ket n\e{-\i E_nt/\hbar}&=\sum_nC_{nk}(t)\hat H'(t)\ket n\e{-\i E_nt/\hbar}.
+\end{align}
+与$\ket{k'}$内积
+\begin{align}
+	\i\hbar\dot C_{k'k}(t)\e{-\i E_{k'}t/\hbar}=\sum_nC_{nk}(t)\bra{k'}\hat H'(t)\ket n\e{-\i E_nt/\hbar}
+\end{align}
+定义 
+\begin{align}
+	H_{k'n}'(t):=\bra{k'}\hat H'(t)\ket n,\quad\omega_{k'n}=\frac{E_{k'}-E_n}\hbar.
+\end{align}
+得到跃迁振幅$C_{k'k}(t)$满足 
+\begin{align}
+	\begin{cases}
+		\i\hbar\dd tC_{k'k}(t)=\sum_nH'_{k'n}(t)\e{\i\omega_{k'n}t}C_{nk}(t),\\
+		C_{k'k}(0)=\vd_{k'k}.
+	\end{cases}
+\end{align}
+两边对$t$积分
+\begin{align}
+	C_{k'k}(t)=C_{k'k}(0)+\frac1{\i\hbar}\int_0^t\sum_nH'_{k'n}(\tau)\e{\i\omega_{k'n}\tau}C_{nk}(\tau)\d\tau
+\end{align}
+这是一个积分方程，可采用迭代求解。
+
+迭代一次
+\begin{align*}
+	C_{k'k}(t)&=\vd_{k'k}+\frac1{\i\hbar}\int_0^t\sum_nH'_{k'n}(\tau)\e{\i\omega_{k'n}\tau}\cdot\\
+	&\quad\fkh{\vd_{nk}+\frac1{\i\hbar}\int_0^\tau\sum_nH'_{k'n}(\pi)\e{\i\omega_{k'n}\pi}C_{nk}(\pi)\d\pi}\d\tau\\
+	&=\vd_{k'k}+\frac1{\i\hbar}\int_0^tH'_{k'k}(\tau)\e{\i\omega_{k'k}\tau}\d\tau+\cdots
+\end{align*}
+零级近似
+\[
+C_{k'k}^{(0)}=\vd_{k'k};
+\]
+一级近似 
+\[
+C_{k'k}^{(1)}=\frac1{\i\hbar}\int_0^tH'_{k'k}(\tau)\e{\i\omega_{k'k}\tau}\d\tau,
+\]
+代表直接从初态$\ket k$跃迁到末态$\ket{k'}$，故跃迁概率
+\begin{align}
+	P_{k'k}(t)=\frac1{\hbar^2}\abs{\int_0^tH'_{k'k}(\tau)\e{\i\omega_{k'k}\tau}\d\tau}^2.
+\end{align}
+由$\hat H'$是Hermite的。故$P_{k'k}=P_{kk'}$，即从初态到末态的跃迁概率等于从末态到初态的跃迁概率。
+
+对于初态$\ket k$和末态$\ket{k'}$都有简并的情况，计算跃迁概率应对$\ket k$能级各简并态求平均，而对$\ket{k'}$能级各简并态求和，此时跃迁概率不一定相等。
+
+二级近似
+\[
+C_{k'k}^{(2)}=\frac1{(\i\hbar)^2}\sum_n\int_0^tH'_{k'n}(\tau)\e{\i\omega_{k'n}\tau}\int_0^\tau H'_{nk}(\pi)\e{\i\omega_{nk}\pi}\d\pi\d\tau,
+\]
+代表从初态$\ket k$经中间态$\ket n$跃迁到末态$\ket{k'}$。
+\sectionstar{周期微扰和常微扰}
+没讲
+\section{光的吸收与辐射}
+光与原子的相互作用包括受激吸收、受激辐射和自发辐射。其中自发辐射是前面的理论无法解释的，Einstein基于热力学和统计物理中的平衡概念给出过半唯象的理论，巧妙地导出了自发辐射系数。
+\paragraph{电偶极跃迁}若入射光为理想单色偏振光，
+\[
+	\bm E=\bm E_0\cos(\omega t-\bm k\cdot\bm r),\quad\bm B=\frac{\bm k}{\abs k}\times\bm E.\CGS
+\]
+对电子的作用 
+\[
+	\bm f=-e\kh{\bm E+\frac{\bm v}c\times\bm B},\CGS
+\]
+原子中电子的速度$v\ll c$，故可仅考虑电场的作用。
+
+对于可见光和紫外光\footnote{X光并不满足。}波长$\lambda\gg a$\,（Bohr半径），故在原子范围内电场可视为均匀场
+\[
+	\bm E\doteq\bm E_0\cos\omega t.
+\]
+光对原子的作用可近似表示成电子的电偶极矩与电场的相互作用
+\[
+	\hat H'(t)=-\bm D\cdot\bm E=W\cos\omega t.
+\]
+其中电子的电偶极矩$\bm D=-e\r$，电偶极矩与电场作用引起的跃迁称为电偶极跃迁。
+\begin{align*}
+	C_{k'k}^{(1)}(t)&=\frac1{\i\hbar}\int_0^tH_{k'k}'(\tau)\e{-\i\omega_{k'k}\tau}\d\tau=\frac{W_{k'k}}{\i\hbar}\int_0^t\cos\omega\tau\e{-i\omega_{k'k}\tau}\d\tau\\
+	&=-\frac{W_{k'k}}{2\hbar}\fkh{\frac{\e{\i(\omega_{k'k}+\omega)t}-1}{\omega_{k'k}+\omega}+\frac{\e{\i(\omega_{k'k}-\omega)t}-1}{\omega_{k'k}-\omega}}.
+\end{align*}
+下面讨论原子吸收光的跃迁，$E_{k'}>E_k$，只有当入射光$\omega\doteq\omega_{k'k}$时，才会引起$E_k\to E_{k'}$跃迁，此时
+\begin{align*}
+	C_{k'k}^{(1)}(t)=-\frac{W_{k'k}}{2\hbar}\frac{\e{\i(\omega_{k'k}-\omega)t}-1}{\omega_{k'k}-\omega}.
+\end{align*}
+从$k\to k'$的概率为
+\begin{align}
+	P_{k'k}(t)=\abs{C_{k'k}^{(1)}(t)}^2=\frac{\abs{W_{k'k}}^2}{4\hbar^2}\fkh{\frac{\sin(\omega_{k'k}-\omega)t/2}{(\omega_{k'k}-\omega)/2}}^2
+\end{align}
+$t\to\infty$时，有 
+\begin{align}
+	P_{k'k}(t)=\frac{\pi t}{2\hbar^2}\abs{W_{k'k}}^2\vd\kh{\omega_{k'k}-\omega};
+\end{align}
+跃迁速率
+\begin{align}
+	w_{k'k}&=\dd tP_{k'k}=\frac\pi{2\hbar^2}\abs{W_{k'k}}^2\vd\kh{\omega_{k'k}-\omega}\\
+	&=\frac\pi{2\hbar^2}\abs{\bm D_{k'k}}^2E_0^2\cos^2\theta\vd\kh{\omega_{k'k}-\omega},
+\end{align}
+$\theta$为电子的电偶极矩与电场的夹角。
+
+而对于非偏振光，应对$\cos^2\theta$取平均
+\[
+	\ave{\cos^2\theta}=\frac1{4\pi}\int_0^{2\pi}\int_0^\pi\cos^2\theta\sin\theta\d\theta\nd\phi=\frac13.
+\]
+跃迁速率 
+\begin{align}
+	w_{k'k}=\frac\pi{6\hbar^2}\abs{\bm D_{k'k}}^2E_0^2\vd\kh{\omega_{k'k}-\omega}.
+\end{align}
+
+对于非单色光，总跃迁速率是对各种频率求和
+\begin{align}
+	w\tot=\int\iti\omega_{k'k}\d\omega=\frac\pi{6\hbar^2}\abs{\bm D_{k'k}}^2E_0^2(\omega_{k'k}).
+\end{align}
+
+频率为$\omega$的电磁波能量密度的时间平均值
+\begin{align*}
+	\rho(\omega)=\frac1{8\pi}\ave{E^2+B^2}=\frac1{8\pi}E_0^2(\omega).\CGS
+\end{align*}
+故非偏振自然光引起的跃迁速率
+\begin{align}
+	w_{k'k}=\frac{4\pi^2}{3\hbar^2}\abs{\bm D_{k'k}}^2\rho(\omega_{k'k})=\frac{4\pi^2e^2}{3\hbar^2}\abs{\r_{k'k}}^2\rho(\omega_{k'k}).
+\end{align}
+由$\r$为奇宇称算符，只有$\ket k,\ket{k'}$宇称相反时，$\abs{\r_{k'k}}^2$才不为0。又
+\begin{align*}
+	\r=r[\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta],
+\end{align*}
+由第 \pageref{costhetaYlm} 页的球谐函数递推式知，跃迁态间需满足$\D\ell=\pm 1,\,\D m=0,\pm 1$。
+\paragraph{Einstein跃迁理论}

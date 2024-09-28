@@ -1,0 +1,234 @@
+\chapter[一维势场]{一维势场中的粒子}
+讨论一维定态方程
+\begin{align}
+	\dv[2]\psi{x}+\frac{2m}{\hbar^2}(E-V)\psi=0.
+\end{align}
+% \[-\frac{\hbar^2}{2m}\dv[2]{}x\psi(x)+V(x)\psi(x)=E\psi(x),\]
+其中势能$V(x)$是实数，解$\psi(x)$对应能量本征值$E.$
+\begin{theorem}{本征态和本征值}{Eigenstate and Eigenvalue}
+	\begin{compactenum}
+		\item $\psi^*(x)$也是解，且有同一能量本征值$E.$
+		\item 对于能量本征值$E$，可以找到一组完备的实解．
+		\item 若$V(-x)=V(x)$\footnote{即空间反射$x\to-x$不变性．}，则$\psi(-x)$也是解，且有同一$E.$
+
+		$\to$若方程$E$下的解无简并，则解必有确定的\textbf{宇称}．
+		\item 若$V(-x)=V(x)$，总可以找到具有宇称的一组解，其余解表示为其线性组合．
+		\item 有限势阶处$\psi(x)$和$\psi'(x)$连续．
+		\item 对同一$E$的两个解$\psi_1,\psi_2$，有Wronskian行列式
+		\renewcommand\arraystretch{1}
+		\begin{align*}
+			\begin{vmatrix}
+				\psi_1  & \psi_2  \\
+				\psi_1' & \psi_2'
+			\end{vmatrix}=\psi_1\psi_2'-\psi_1'\psi_2=\const.
+		\end{align*}
+		\renewcommand\arraystretch{.82}
+		特别的，对束缚态\footnote{$x\to\infty$时，$\psi\to 0.$}，$\psi_1\psi_2'=\psi_1'\psi_2.$
+		\item 粒子在规则势场\footnote{无奇点．}中若为束缚态，则必不简并．
+	\end{compactenum}
+\end{theorem}
+自由粒子，$V\equiv 0.$定义$p\equiv\sqrt{2mE}$
+\[
+	\pv[2]\psi{x}+\frac{p^2}{\hbar^2}\psi=0.
+\]
+通解
+\[
+	\psi(x,t)=c_1\e{\i(px-Et)/\hbar}+c_2\e{\i(px+Et)/\hbar}.
+\]
+能量是连续的，处于非束缚态，有简并．
+
+\section{方势}
+\subsubsection*{无限深方势阱}
+\begin{center}
+	$V(x)=\begin{cases}
+			~0,      & 0<x<a             \\
+			+\infty, & \text{elsewhere.}
+		\end{cases}$
+\end{center}
+阱外$\psi(x)\equiv 0.$阱内
+\[
+	-\frac{\hbar^2}{2m}\dv[2]{\psi}x=E\psi,\quad k\equiv\frac{\sqrt{2mE}}\hbar.
+\]
+类似自由粒子，$\psi(x)=A\sin kx+B\cos kx,$设再加上边界条件
+\begin{align*}
+	\begin{aligned}
+		\psi(0)&=B=0 \\
+		\psi(a)&=A\sin ka=0
+	\end{aligned}
+	\implies ka=n\pi.
+\end{align*}
+继而
+\begin{align}
+	\psi_n(x)=\sqrt{\frac2a}\sin\frac{n\pi x}a,\quad E_n=\frac{\pi^2\hbar^2n^2}{2ma^2},\quad n=1,2,\ldots
+\end{align}
+可以证明：波函数正交归一、完备、宇称奇偶相间．当$n$很大时，势阱内粒子概率分布趋于均匀，对应经典情况．
+
+\subsubsection*{有限深方势阱}
+\begin{center}
+	$V(x)=\begin{cases}
+			~0,  & -a<x<a,           \\
+			V_0, & \text{elsewhere.}
+		\end{cases}$
+\end{center}
+束缚态应有$0<E<V_0,$
+\begin{align*}
+	\begin{aligned}
+		k_1^2 & =\frac{2m(V_0-E)}{\hbar^2}, \\
+		k_2^2 & =-\frac{2mE}{\hbar^2},
+	\end{aligned}\quad
+	\psi(x)=\begin{cases}
+		A\e{k_1x},             & x<-a   \\
+		C\cos k_2x+D\sin k_2x, & -a<x<a \\
+		G\e{-k_1x},            & x>a
+	\end{cases}
+\end{align*}
+偶宇称解$\psi$, $D=0,G=A,$边界处$x=a$,
+\begin{align*}
+	\begin{aligned}
+		Ae^{-k_1a}    & =C\cos k_2a    \\
+		k_1Ae^{-k_1a} & =k_2C\sin k_2a
+	\end{aligned}
+	\implies
+	k_1=k_2\tan k_2a.
+\end{align*}
+奇宇称解$\psi$
+\[
+	k_1=-k_2\cot k_2a,
+\]
+可以用图解法．
+
+\subsubsection*{方势垒}
+\begin{center}
+	$V(x)=\begin{cases}
+			V_0, & 0<x<a,            \\
+			~0,  & \text{elsewhere.}
+		\end{cases}$
+\end{center}
+\subparagraph*{$E<V_0$}考虑粒子从左侧入射的情况
+\begin{align*}
+	\begin{aligned}
+		k^2      & =\frac{2mE}{\hbar^2},       \\
+		\kappa^2 & =\frac{2m(V_0-E)}{\hbar^2},
+	\end{aligned}\quad
+	\psi(x)=\begin{cases}
+		\e{\i kx}+R\e{-\i kx},        & x<0   \\
+		A\e{\kappa x}+B\e{-\kappa x}, & 0<x<a \\
+		S\e{-\i kx},                  & x>a
+	\end{cases}
+\end{align*}
+对于$\psi=A\e{\i kx}$的波，其概率流密度
+\[
+	j=-\frac{\i\hbar}{2m}\kh{\psi^*\pv\psi{x}-\psi\pv{\psi^*}x}=\abs{A}^2\frac{\hbar k}m.
+\]
+由边界条件解得
+\[
+	\frac{S\e{\i ka-\kappa a}-1}{S\e{\i ka+\kappa a}-1}=\kh{\frac{1-\i k/\kappa}{1+\i k/\kappa}}^2.
+\]
+因此透射系数
+\begin{align}\notag
+	T=\abs{S}^2 & =\fkh{1+\frac{\kh{k^2+\kappa^2}^2}{4k^2\kappa^2}\sinh^2\kappa a}^{-1} \\
+	            & =\fkh{1+\frac{\sinh^2\kappa a}{4\epsilon(1-\epsilon)}}^{-1}>0,
+\end{align}
+其中$\epsilon=E/V_0$，可以看出，即使$E<V_0$，依然有透射，称为\textbf{隧道效应}．
+\subparagraph*{$E>V_0$}平凡的，
+只需变换$\kappa\to\i k'$
+\[
+	T=\fkh{1+\frac{\sin^2k'a}{4\epsilon(\epsilon-1)}}^{-1}.
+\]
+
+对于方势阱，变换$V_0\to-V_0$
+\[
+	T=\fkh{1+\frac{\sin^2k'a}{4\epsilon(\epsilon+1)}}^{-1},
+\]
+当$k'a=n\pi$时，$T=1$，会发生\textbf{共振现象}。而一般情况下$T<1,R>0$说明粒子有概率被弹回。
+\subsubsection*{$\delta$势阱}
+\begin{center}
+	$\dv[2]\psi{x}=-\frac{2m}{\hbar^2}\fkh{E+\gamma\delta(x)}\psi.$
+\end{center}
+$x=0$是方程的奇点，因此$\psi'$在$x=0$处不连续。上式两边$\kh{0^-,0^+}$积分
+\[
+	\psi'(0^+)-\psi'(0^-)=-\frac{2m\gamma}{\hbar^2}\psi(0).
+\]
+束缚态偶宇称下，左边即$-2k$，因此
+\begin{align}
+	\frac{\sqrt{2mE}}\hbar=\frac{m\gamma}{\hbar^2},\implies E=-\frac{m\gamma^2}{2\hbar^2}.
+\end{align}
+束缚态只有一个
+\begin{align}
+	\psi(x)=\frac{\sqrt{m\gamma}}\hbar\e{-m\gamma\abs{x}/\hbar^2}.
+\end{align}
+\section{线性谐振子}
+势能
+\[
+	V(x)=\frac12m\omega^2x^2.
+\]
+其中$\omega$为谐振子固有圆频率．
+\[
+	\pv[2]\psi{x}+\kh{\frac{2mE}{\hbar^2}-\frac{m^2\omega^2}{\hbar^2}x^2}\psi=0.
+\]
+做变换$\xi=\sqrt{\frac{m\omega}\hbar}x,~\lambda=\frac{2E}{\hbar\omega}$
+\[
+	\dv[2]\psi\xi+(\lambda-\xi^2)\psi=0.
+\]
+当$x\to\infty,$方程近似为
+\[
+	\dv[2]\psi\xi-\xi^2\psi=0,\implies\psi\sim\e{\pm\xi^2/2}.
+\]
+由束缚态要求，解应有形式$\psi(\xi)=\e{-\xi^2/2}H(\xi),$
+\[
+	\dv[2] H\xi-2\xi\dv H\xi+(\lambda-1)H=0.
+\]
+此即Hermite方程，用级数解得系数
+\[
+	c_{k+2}=\frac{2k+1-\lambda}{(k+1)(k+2)}c_k,
+\]
+注意到$k\to\infty$
+\[
+	\frac{c_{k+2}}{c_k}\to\frac{2}k,\quad H(\xi)\sim\sum_{i=i_0}^\infty\frac{\xi^{2i}}{i!}=\e{\xi^2}.
+\]
+仍使$\psi(\xi)$发散．除非$H(\xi)$的项有限$\lambda=2k+1$且只能出现奇或偶次幂．
+
+故能量本征值
+\begin{align}
+	E_n=\kh{n+\frac12}\hbar\omega,\quad n=0,1,\ldots
+\end{align}
+基态能量不为0。
+
+对应Hermite方程
+\[
+	H_n''-2\xi H_n'+2nH_n=0.
+\]
+解称为Hermite多项式\index{Hermite Polynomial}
+\[
+	H_n(x)=(-1)^n\e{x^2}\dd[n]x\e{-x^2}.
+\]
+\begin{example}{Hermite多项式}{Hermite Polynomial}
+	前几项 %($\psi e^{\xi^2/2}$)
+	\begin{align*}
+		H_0 & =1,  & H_2 & =4x^2-2,   & H_4 & =16x^4-48x^2+12,    \\
+		H_1 & =2x, & H_3 & =8x^3-12x, & H_5 & =32x^5-160x^3+120x.
+	\end{align*}
+	\iffalse
+		\begin{align*}
+			\psi_0 & \propto e^{-\xi^2/2}            & \psi_3 & \propto\frac1{\sqrt3}(2\xi^3-3\xi),
+			\psi_1 & \propto\sqrt2\xi e^{-\xi^2/2}   & \psi_4 & \propto\frac1{2\sqrt6}(4\xi^4-12\xi^3+3),     \\
+			\psi_2 & \propto\frac1{\sqrt2}(2\xi^2-1) & \psi_6 & \propto\frac1{2\sqrt{30}}(4\xi^5-20\xi^3+15).
+		\end{align*}
+	\fi
+\end{example}
+Hermite多项式的内积
+\[
+	\int\iti H_nH_{n'}\e{-x^2}\d x=2^nn!\,\delta_{nn'}.
+\]
+因此本征态
+\begin{align}
+	\psi_n=\sqrt[4]{\frac{m\omega}{\pi\hbar}}\frac1{\sqrt{2^nn!}}H_n(\xi)\e{-\xi^2/2},\quad\xi=\sqrt{\frac{m\omega}\hbar}x.
+\end{align}
+宇称为$\kh{-1}^n.$
+\paragraph{递推关系}
+\begin{align}
+	x\ket n&=\frac1{\sqrt2\alpha}\fkh{\sqrt n\ket{n-1}+\sqrt{n+1}\ket{n+1}};\\
+	x^2\ket n&%=\frac1{\alpha^2}\fkh{\sqrt{\frac n2}\kh{\sqrt{\frac{n-1}2}\ket{n-2}+\sqrt{\frac n2}\ket n}+\sqrt{\frac{n+1}2}\kh{\sqrt{\frac{n+1}2}\ket n+\sqrt{\frac{n+2}2}\ket{n+2}}}\\
+	%&
+	=\frac1{2\alpha^2}\fkh{\sqrt{n(n-1)}\ket{n-2}+(2n+1)\ket n+\sqrt{(n+1)(n+2)}\ket{n+2}}.
+\end{align}

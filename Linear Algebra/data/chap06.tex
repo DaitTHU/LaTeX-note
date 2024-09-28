@@ -1,0 +1,438 @@
+
+\chapter{特征值和特征向量}
+\section{特征值和特征向量}
+\begin{definition}{特征值和特征向量}{eigenvalue and eigenvector}
+	方阵$A$的特征向量(eigenvector)~$x\neq 0$满足：
+	\[
+		Ax=\lambda x,\quad\lambda\in\FF.
+	\]
+	其中$\lambda$称为$A$的特征值(eigenvalue)。
+\end{definition}
+\begin{theorem}{特征值的性质}{}
+	\begin{compactenum}
+		\item $A$的特征向量$x$也是$A^n$的特征向量，特征值是$\lambda^n;$
+		\item 若$A$可逆，则$x$也是$A\iv$的特征向量，特征值是$\lambda^{-1};$
+		\item 三角矩阵的特征值就是对角元；
+		\item $A$可逆$\iff A$所有特征值非0。
+		
+		只需注意到$A$可逆时$Ax=0$只有零解即可。
+	\end{compactenum}
+\end{theorem}
+\begin{definition}{特征子空间}{eigen-subspace}
+	$A$的所有特征值为$\lambda$的特征向量再加上0构成$\RR^n$的一个线性子空间，这个子空间就是$\N(A-\lambda I).$
+\end{definition}
+\begin{theorem}{特征值}{eigenvalue}
+	假设$n$阶矩阵$A$有特征向量$x_1,\ldots,x_r$，对应特征值为$\lambda_1,\ldots,\lambda_r$，且这些特征值两两不等，则$x_1,\ldots,x_r$线性无关。
+\end{theorem}
+\begin{proof}
+	运用数学归纳法证明。$r=1$时，定理自动成立；
+	
+	假设$r=m-1$定理成立，若定理在$r=m$时不成立，则
+	\begin{equation}
+		\label{eqn:proof eigen 1}
+		x_m=c_1x_1+\cdots+c_{m-1}x_{m-1},\tag{$\ast$}
+	\end{equation}
+	两边同时左乘$A$得
+	\begin{equation}
+		\label{eqn:proof eigen 2}
+		\lambda_mx_m=c_1\lambda_1x_1+\cdots+c_{m-1}\lambda_{m-1}x_{m-1},\tag{$\ast\ast$}
+	\end{equation}
+	$\lambda_m$\eqref{eqn:proof eigen 1} $-$ \eqref{eqn:proof eigen 2}得，
+	\[
+		0=c_1(\lambda_m-\lambda_1)x_1+\cdots+c_{m-1}(\lambda_m-\lambda_{m-1})x_{m-1},
+	\]
+	由$x_1,\ldots,x_{m-1}$线性无关可得所有的$c_i=0$，矛盾！
+\end{proof}
+\section{特征多项式}
+求特征值$\lambda$需要解如下的特征方程(eigenfunction)
+\[
+	\det(\lambda I-A)=\lambda^n+a_1\lambda^{n-1}+\cdots+a_n=0,
+\]
+特别的，特征多项式(eigen-polynomial)的系数有如下性质：
+\begin{align}
+	a_1=-\tr(A),\quad a_n=(-)^n\det(A)
+\end{align}
+由Vieta定理，在考虑重根的情况下，
+\begin{align}
+	\tr(A)=\sum_{i=1}^n\lambda_i,\quad \det(A)=\prod_{i=1}^n\lambda_i.
+\end{align}
+更一般的，\href{https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem}{Cayley-Hamilton定理}给出了其他项的系数表达式，比如
+\[
+	a_2=\frac12\bigkh{\tr^2(A)-\tr(A^2)}.
+\]
+\begin{theorem}{相似变换的特征多项式}{}
+	$A$的相似变换$B\iv AB$和$A$有相同的特征多项式。
+\end{theorem}
+\begin{proof}
+	\[
+		\lambda I-B\iv AB=B\iv(\lambda I-A)B.
+	\]
+	对两边取行列式即证。
+\end{proof}
+\begin{corollary}
+	相似变换与原矩阵的迹相同
+	\begin{equation}
+		\tr(B\iv AB)=\tr(A).
+	\end{equation}
+\end{corollary}
+
+\section{矩阵对角化}
+\begin{theorem}{可对角化判定}{}
+	$n$阶矩阵$A$可对角化$\iff A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$，此时$A=X\Lambda X\iv$，且 
+	\begin{align}
+		X=(x_1,\ldots,x_n),\quad\Lambda=\diag(\lambda_1,\ldots,\lambda_n).
+	\end{align}
+\end{theorem}
+\begin{proof}
+	假设$A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$，
+	\[
+		AX=(Ax_1,\ldots,Ax_n)=(\lambda_1x_1,\ldots,\lambda_nx_n)=X\Lambda,
+	\]
+	故$A$可对角化；反过来说，若$A$可对角化为$X\Lambda X\iv$，则$AX=X\Lambda$，即
+	\[
+		(Ax_1,\ldots,Ax_n)=(\lambda_1x_1,\ldots,\lambda_nx_n),
+	\]
+	故$x_1,\ldots,x_n$是$A$的特征向量，又$X$可逆，故$x_1,\ldots,x_n$线性无关。
+\end{proof}
+\begin{corollary}
+	有$n$个互不相同特征值的$n$阶矩阵$A$可对角化。
+\end{corollary}
+当特征值重复时，引入两个概念
+\begin{definition}{几何重数和代数重数}{}
+	几何重数(geometric multiplicity, GM)：特征值$\lambda$对应的最大线性无关的特征向量的个数，即$\dim\bigkh{\N(\lambda I-A)}$。
+
+	代数重数(algebraic multiplicity, AM)：特征值$\lambda$作为特征方程$\det(\lambda I-A)=0$的根的重复次数。
+\end{definition}
+特征方程可以写成
+\[
+	\prod_{i=1}^r(\lambda-\lambda_i)^{m_i}=0,
+\]
+其中$\lambda_i$是互不相同的根，$m_i$是$\lambda_i$的代数重数。
+\begin{theorem}{}{GM <= AM}
+	GM $\leqslant$ AM.
+\end{theorem}
+\begin{proof}
+	考虑$n$阶矩阵$A$，假设特征值$\lambda_1$的GM $=\dim(\lambda_1I-A)=m$，
+	
+	取$\{x_1,\ldots,x_m\}$为$\C(\lambda_1I-A)$的一组正交归一基。
+	
+	取$\{b_1,\ldots,b_{n-m}\}$为$\N(\lambda_1I-A)^\perp$的一组正交归一基。
+	
+	设$n\times n$矩阵 
+	\[
+		P=(x_1,\ldots,x_m,b_1,\ldots,b_{n-m})=(X,B),
+	\]
+	$P$是可逆的且$P\iv=P\tp$，且$X\tp B=0$，则 
+	\[
+		P\iv AP=\begin{bmatrix}
+			\lambda_1I_m&X\tp AB\\0&B\tp AB
+		\end{bmatrix},
+	\]
+	分块三角矩阵
+	\[
+		\det(\lambda I-P\iv AP)=(\lambda-\lambda_1)^m\det(\lambda I-B\tp AB),
+	\]
+	$A$和$P\iv AP$有相同的特征方程，故$\lambda_1$必然是$A$的特征方程的根，且其AM $\geqslant$ GM。
+\end{proof}
+\begin{corollary}
+	$n$阶矩阵$A$的全部特征值为$\{\lambda_1,\ldots,\lambda_r\}$，$A$可对角化当且仅当
+	\[
+		\sum_{i=1}^r\dim(\lambda_iI-A)=n,
+	\]
+	即所有特征值的AM = GM。
+\end{corollary}
+\begin{theorem}{同时对角化}{}
+	若$A,B$可对角化，则他们可以同时对角化当且仅当$AB=BA$。
+\end{theorem}
+\begin{proof}
+	若$A,B$可以同时对角化，故
+	\[
+		A=X\Lambda_AX\iv,\quad B=X\Lambda_BX\iv,
+	\]
+	故
+	\[
+		AB-BA=X(\Lambda_A\Lambda_B-\Lambda_B\Lambda_A)X\iv=0;
+	\]
+	
+	若$AB=BA$，下证$A,B$可同时对角化。
+	
+	设$A$的特征值为$\{\lambda_1,\ldots,\lambda_s\}$，$\lambda_i$对应特征子空间为$V_i$，几何重数$m_i=\dim(V_i)$，%为方便，
+	记$n_i:=m_1+\cdots+m_{i-1}$，
+	取$\{v_{n_i+1},\ldots,v_{n_i+m_i}\}$表示$V_i$的一组基，记$X=(v_1,\ldots,v_n)$，则$X$可对角化$A$
+	\[
+		X\iv AX=\begin{bmatrix}
+			\lambda_1I_{m_1}\\ &\ddots\\ &&\lambda_sI_{m_s}
+		\end{bmatrix},
+	\]
+	$\forall x\in V_i$，
+	\[
+		(AB-BA)x=(A-\lambda_iI)Bx=0,
+	\]
+	故$Bx\in V_i$，从而$X\iv BX$和$X\iv AX$一样是分块对角的：
+	\[
+		X\iv BX=\begin{bmatrix}
+			B_1\\ &\ddots\\ &&B_s
+		\end{bmatrix},
+	\]
+	其中$B_i$是$m_i\times m_i$的。给定$B$的特征值$\xi_j$，其必是$B_1,\ldots,B_s$其中至少一个的特征值，不妨考虑$\xi_j$是$B_i$的特征值\footnote{无需考虑$\N(B_i)$}，若$\xi_j$的AM $>B_i$的GM，则$\xi_j$的AM $>B$的GM，$B$便不能被对角化，与前提矛盾！故$B_i$均可被特定的$Y_i$对角化，即$Y_i\iv B_iY_i=\Lambda_i$，构造
+	\[
+		Y=\begin{bmatrix}
+			Y_1\\ &\ddots\\ &&Y_s
+		\end{bmatrix}
+	\]
+	则$Y\iv X\iv BXY$是对角化的，同时$Y\iv X\iv AXY$也是对角化的，取$Z=XY$，便可同时对角化$A,B$。
+\end{proof}
+\sectionstar{Jordan标准型}
+不是所有方阵都可以对角化，如果$n$阶矩阵$A$有$r<n$个线性独立的特征向量，怎么把$A$变成最接近对角矩阵的形式？
+
+\begin{theorem}{Jordan标准型}{Jordan normal form}
+	$n$阶矩阵$A$有$r$个特征值，则存在$B$，使得
+	\[
+		B^{-1}AB=\begin{bmatrix}
+			J_1             \\
+			 & \ddots       \\
+			 &        & J_r
+		\end{bmatrix},\quad
+		J_i=\begin{bmatrix}
+			\lambda_i & 1                              \\
+			          & \lambda_i & \ddots             \\
+			          &           & \ddots & 1         \\
+			          &           &        & \lambda_i
+		\end{bmatrix}
+	\]
+	其中$J_i$称为Jordan块，$\lambda_i$是$A$的第$i$个特征值。
+\end{theorem}
+其证明是线性代数的核心。其中一些概念需要等到\chapref{chap:linear mapping}线性映射才会提及。先给出几个概念证明引理。
+\begin{definition}{广义特征向量}{general eigenvector}
+	线性映射$T:V\to V$的广义特征向量(general eigenvector) $v\in V$且$v\neq 0$，使得$(T-\lambda I)^kv=0$对某个正整数$k$成立。这里$I:V\to V$是恒等映射。
+
+	使得$(T-\lambda I)^dv=0$成立的最小正整数$d$称为$v$的幂指数(exponent)。
+\end{definition}
+\begin{theorem}{}{}
+	给定正整数$k$，广义特征方程$(T-\lambda I)^kv=0$有解当且仅当$\lambda$是$T$的特征值。
+\end{theorem}
+\begin{proof}
+	若$\lambda$是$T$的特征值，则$(T-\lambda I)v=0$，左乘$(T-\lambda I)^{k-1}$即可。
+	
+	若$(T-\lambda I)^kv=0$有解，则$w=(T-\lambda I)^{k-1}v$满足$(T-\lambda I)w=0$，$\lambda$是$T$的特征值。
+\end{proof}
+\begin{theorem}{}{}
+	令$u_i:=(T-\lambda I)^iv$，则$B=\{u_0,\ldots,u_{d-1}\}$是一组线性无关的向量。
+\end{theorem}
+\begin{proof}
+	设
+	\[
+		\sum_{i=0}^{d-1}a_iu_i=\sum_{i=0}^{d-1}a_i(T-\lambda I)^iv=0,
+	\]
+	左乘$(T-\lambda I)^{d-1}$，左边只剩$a_0(T-\lambda I)^{d-1}v$，故$a_0=0$；
+	
+	递推地左乘$(T-\lambda I)^{d-2},(T-\lambda I)^{d-3},\ldots$可得到所有系数为0，从而$u_0,\ldots,u_{d-1}$线性无关。
+\end{proof}
+\begin{theorem}{}{}
+	\[
+		Tu_j=\begin{cases}
+			\lambda u_j+u_{j+1},&1\leqslant j<d-1\\
+			\lambda u_j,&j=d-1\\
+			0,&j>d-1
+		\end{cases}
+	\]
+\end{theorem}
+\begin{proof}
+	$1\leqslant j<d-1$时，$(T-\lambda I)u_j=u_{j+1}$，即$Tu_j=\lambda u_j+u_{j+1}$。
+	
+	$j=d-1$时，$(T-\lambda I)u_j=0$，即$Tu_j=\lambda u_j$；
+	
+	$j>d-1$时，$u_j=0$。
+\end{proof}
+\begin{theorem}{}{}
+	$X=\spn(B)$是$T$的不变子空间，即$T(X)\subset X$
+\end{theorem}
+\begin{proof}
+	由上式，$\forall u=a_0u_0+\cdots+a_{d-1}u_{d-1}\in X$
+	\[
+		Tu=\sum_{i=0}^{d-2}a_i(\lambda u_i+u_{i+1})+a_{d-1}\lambda u_{d-1}\in X.
+	\]
+	因为$X$是$T$的不变子空间，我们可以把$T$看成是$X\to X$的线性映射。
+	取$B$作为$X$的一组基，则$T$在$B$下的表示矩阵为
+	\[
+		T=\begin{bmatrix}
+			\lambda\\ 1&\lambda\\ &\ddots&\ddots\\ &&1&\lambda
+		\end{bmatrix}
+	\]
+	这与Jordan块在\thmref{thm:Jordan normal form} 中的定义仅仅是转置的差别。
+\end{proof}
+
+接下来我们将证明$V$中存在一组基，$T$在这组基上的表示矩阵是分块对角的，而且每一块都是Jordan块的形式。
+\begin{theorem}{}{}
+	若$v_1,\ldots,v_r$是$T$的广义特征向量，且相应的幂指数是$d_i$，设 
+	\[
+		u_{ij}:=(T-\lambda_iI)^jv_i,\quad V_i:=\spn(u_{i0},\ldots,u_{id-1}).
+	\]
+	之前证明了$V_i$是$T$的不变子空间，且$T$在$V_i$上的表示矩阵是Jordan块。故
+	$T$在$V_1\oplus\cdots\oplus V_r$上的表示矩阵是分块对角的，且每一块都是Jordan块的形式。
+\end{theorem}
+%平凡的。
+所以我们只要证明存在这样一组广义特征向量$v_1,\ldots,v_r$使得$V=V_1\oplus\cdots\oplus V_r$就可以证明Jordan标准型的定理。
+
+假设$\lambda$是$T$的某个特征值。如果$T-\lambda I$可以写成Jordan块的形式，则$T$也可以写成Jordan块的形式。所以以下我们用$T-\lambda I$代替$T$，或者说，考虑有一个特征值是0的线性映射$T$。
+\begin{theorem}{}{}
+	设$K_i=\ker(T^i),\,U_i=\Im(T^i)$，则
+	\[
+		K_1\subset K_2\subset\cdots,\quad U_1\supset U_2\supset\cdots
+	\]
+\end{theorem}
+\begin{proof}
+	待补
+\end{proof} 
+
+\section{对称矩阵}
+\begin{theorem}{对称矩阵的性质·一}{characterist of sysmmetric matrix I}
+	若$S$是一个$n$阶实对称矩阵，则$S$至少有一个实特征值$\lambda$
+\end{theorem}
+\begin{proof}
+	由代数基本定理，对任何矩阵，$S$的特征方程至少会得到一个复特征值$\lambda$，其对应的特征向量为$z$ (一般也是复的)，则$\bar z\tp z>0$。
+	\[
+		Sz=\lambda z,\quad S\bar z=\bar S\bar z=\overline{Sz}=\bar\lambda\bar z,
+	\]
+	由$S$的对称的性质，注意到
+	\[
+		\bar z\tp Sz=\lambda\bar z\tp z=\lambda(\bar z\tp z)\tp=\lambda z\tp\bar z=(Sz)\tp\bar z=z\tp S\bar z=\bar\lambda z\tp\bar z.
+	\]
+	故$\lambda=\bar\lambda$.
+\end{proof}
+
+由代数基本定理的递归性，可推知$S$的所有特征值都是实数。
+\begin{theorem}{对称矩阵的性质·二}{characterist of sysmmetric matrix II}
+	$v$是$S$的特征向量，若$w\perp v$，则$Sw\perp v$。
+\end{theorem}
+\begin{proof}
+	
+	\[
+		(Sw)\tp v=w\tp S\tp v=w\tp Sv=\lambda w\tp v=0,
+	\]
+\end{proof}
+\begin{theorem}{对称矩阵的性质·三}{characterist of sysmmetric matrix III}
+	若$W$是$\RR^n$的一个线性子空间且在$S$的作用下稳定：
+	\[
+		\forall w\in W,\enspace Sw\in W,
+	\]
+	则$W^\perp$在$S$的作用下稳定：
+	\[
+		\forall u\in W^\perp,\enspace Su\in W^\perp.
+	\]
+\end{theorem}
+\begin{proof}
+	$\forall w\in W,u\in W^\perp$
+	\[
+		(Su)\tp w=u\tp S\tp w=u\tp(Sw)=0.
+	\]
+\end{proof}
+\begin{theorem}{谱定理}{spectral theorem}
+	对称矩阵$S$总可以被一个正交矩阵$Q$对角化。
+\end{theorem}
+\begin{proof}
+	由\thmref{thm:characterist of sysmmetric matrix I} 和推论可知$S$至少有一个实特征值$\lambda_1$和实特征向量$q_1$且$q_1\tp q_1=1$，$S$在$q_1$张成的一维线性空间上是稳定的。
+	
+	由\thmref{thm:characterist of sysmmetric matrix III} 可知$S$作用在$\C(q_1)^\perp$上也是稳定的，假设$\C(q_1)^\perp$上有一组正交归一基为$\{a_1,\ldots,a_{n-1}\}$，构造矩阵$X_1=[q_1,a_1,\ldots,a_{n-1}]$，且$X$是正交的$X_1\tp X_1=I$，
+	\[
+		X_1\tp SX_1=X_1\tp[\lambda q_1,Sa_1,\ldots,Sa_{n-1}]=\begin{bmatrix}
+			\lambda_1\\ &S_1
+		\end{bmatrix}.
+	\]
+	$S_1$是一个$(n-1)$阶方阵，且$(S_1)_{ij}=a_i\tp Sa_j$的，显然它也是对称的。
+	
+	重复上述步骤，直到用$S$的特征向量构造出$\RR^n$的一组正交归一基：
+	
+	对$S_1$可构造$(n-1)$阶的正交矩阵$X_2$，使得
+	\[
+		X_2\tp S_1X_2=\begin{bmatrix}
+			\lambda_2\\ &S_2
+		\end{bmatrix},
+	\]
+	其中$S_2$是一个$(n-2)$阶对称方阵。从而
+	\[
+		\begin{bmatrix}
+			1\\ &X_2\tp
+		\end{bmatrix}X_1\tp SX_1\begin{bmatrix}
+			1\\ &X_2
+		\end{bmatrix}=\begin{bmatrix}
+			\lambda_1\\ &\lambda_2\\ &&S_2
+		\end{bmatrix}.
+	\]
+	$Q_2:=X_1\diag(1, X_2)$也是正交的……最终有
+	\[
+		Q_n\tp SQ_n=\begin{bmatrix}
+			\lambda_1\\ &\ddots\\ &&\lambda_n
+		\end{bmatrix}.
+	\]
+	$Q_n$也是正交的。
+\end{proof}
+
+对角化对称矩阵$S$的正交矩阵$Q$可被构造：
+\begin{compactitem}
+	\item 若$S$的特征值互不相同，对应的归一特征向量$q_i$两两正交，可选$Q=[q_1,\ldots,q_n]$；
+	\item 若$S$的特征值有重复，取$\{q_i\}$为相应特征子空间的正交基。
+\end{compactitem}
+\section{正定矩阵}
+\begin{definition}{二次型}{quadratic form}
+	二次型(quadratic form)是形如$x\tp Sx$的二次多项式，其中$S$是实对称矩阵。
+\end{definition}
+\begin{definition}{正定矩阵}{positive definite matrix}
+	给定对称矩阵$S$，如果$\forall x\neq 0$，二次型$x\tp Sx>0$，则称$S$是正定的(positive definite)。
+\end{definition}
+\begin{theorem}{正定矩阵的判定}{determination of positive definite matrix}
+	对于对称矩阵$S$，下述命题是等价的：
+	\begin{compactenum}
+		\item $\forall x\neq 0$，二次型$x\tp Sx>0$；
+		\item $S$的所有$n$个特征值都是正的；
+		\item $S$可以只通过换行和倍加后得到$n$个正的主元；
+		\item $S$的所有左上行列式（前$i$行$i$列子矩阵的行列式）均$>0$；
+		\item 存在$A$列之间线性无关，使得$S=A\tp A$。
+	\end{compactenum}
+\end{theorem}
+\begin{proof}
+	$1\implies 2$：$S$对称，则$\Lambda=Q\tp SQ$
+	\[
+		\lambda_i=e_i\tp \Lambda e_i=e_i\tp Q\tp SQe_i=(Qe_i)\tp S(Qe_i)>0.
+	\]
+	$2\implies 1$：$S$的所有$n$个特征值都是正的，故
+	\[
+		x\tp Sx=x\tp Q\Lambda Q\tp x=\sum_{i=1}^n\lambda_i(Q\tp x)^2_i>0.
+	\]
+	$5\implies 1$：$A$列之间线性无关，故$\forall x\neq 0,\enspace Ax\neq 0$
+	\[
+		x\tp Sx=x\tp A\tp Ax=(Ax)\tp(Ax)>0.
+	\]
+	$1\implies 5$：$S$正定，故
+	\[
+		S=Q\Lambda Q\tp=Q\begin{bmatrix}
+			\sqrt{\lambda_1}\\ &\ddots\\ &&\sqrt{\lambda_n}
+		\end{bmatrix}\begin{bmatrix}
+			\sqrt{\lambda_1}\\ &\ddots\\ &&\sqrt{\lambda_n}
+		\end{bmatrix}Q\tp=:A\tp A.
+	\]
+	$3\implies 4$：行倍加不改变所有左上行列式，$S$做行倍加得到上三角矩阵$U$，其$i\times i$的左上行列式就是前$i$个主元的乘积，所以$>0$。\\
+	$4\implies 3$：$U$的左上行列式都$>0$，所以前$i$个主元乘积都$>0$，所以主元全正。\\
+	$3\implies 5$：$S=LDU$，由$S$对称且$LDU$分解唯一可知$L=U\tp$，又主元全正，故
+	\[
+		S=U\tp DU=U\tp\begin{bmatrix}
+			\sqrt{a_1}\\ &\ddots\\ &&\sqrt{a_n}
+		\end{bmatrix}\begin{bmatrix}
+			\sqrt{a_1}\\ &\ddots\\ &&\sqrt{a_n}
+		\end{bmatrix}U=:A\tp A.
+	\]
+	$5\implies 3$：$A$列之间线性无关，故$A=QR$
+	\[
+		A\tp A=R\tp Q\tp QR=R\tp R=LDU.
+	\]
+\end{proof}
+\begin{definition}{半正定矩阵}{positive semidefinite matrix}
+	如果$\forall x\neq 0$，二次型$x\tp Sx\geqslant 0$，则称$S$是半正定的(positive semidefinite)。
+\end{definition}
+\begin{theorem}{半正定但非正定矩阵的判定}{determination of positive semi-but-not definite matrix}
+	\begin{compactenum}
+		\item $S$的最小特征值是0；
+		\item 存在$A$列之间线性相关，使得$S=A\tp A$。
+	\end{compactenum}
+\end{theorem}
+半正定但非正定矩阵的行列式为0.

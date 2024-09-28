@@ -1,0 +1,337 @@
+\chapter{中心力场}
+\begin{definition}{中心力场}{Central Feild}
+	中心力场$V(r)$与$\theta,\varphi$无关，具有转动对称性．
+\end{definition}
+守恒量完全集\footnote{区分力学完全集和守恒量完全集．}一般选$\{\hat H,\hat L^2,\hat L_z\}$，用$\psi_{n\ell m}$表示共同本征态，本征值问题表示为
+\begin{align*}
+	\hat H\psi_{n\ell m}   & =E_{n\ell}\psi_{n\ell m},           \\
+	\hat L^2\psi_{n\ell m} & =\ell(\ell+1)\hbar^2\psi_{n\ell m}, \\
+	\hat L_z\psi_{n\ell m} & =m\hbar\psi_{n\ell m}.
+\end{align*}
+
+中心力场中粒子运动的Hamilton量
+\iffalse
+	\[
+		\hat H=\frac{\hat p^2}{2\mu}+V(r)=-\frac{\hbar^2}{2\mu}\nabla^2+V(r).
+\]
+	球坐标系中
+	\[
+		\nabla^2=\frac1{r^2}\pp r\kh{r^2\pp r}+\frac1{r^2}\Lambda.
+\]
+	% \[
+	\nabla^2=\frac1{r^2}\pp r\kh{r^2\pp r}+\frac1{r^2\sin\theta}\pp \theta\kh{\sin\theta\pp \theta}+\frac1{r^2\sin^2\theta}\pd[2]{}\phi.
+\]
+	又径向动能算符
+	\[
+		\frac{\hat p_r^2}{2\mu}=-\frac{\hbar^2}{2\mu}\kh{\pp r+\frac1r}^2,
+\]
+	径向动量算符
+	\[
+		\hat L^2=-\hbar^2\Lambda.
+\]
+	因此Hamilton量可以写为
+\fi
+\begin{align}
+	\hat H=\frac{\hat p_r^2}{2\mu}+\frac{\hat L^2}{2\mu r^2}+V(r).
+\end{align}
+可分离变量
+\[
+	\psi_{n\ell m}(r,\theta,\varphi)=R_{n\ell}(r)Y_{\ell m}(\theta,\varphi).
+\]
+得到径向方程
+\begin{align}
+	\fkh{\frac1{r^2}\dv[2]{}rr+\frac{2\mu}{\hbar^2}\kh{E-V(r)}-\frac{\ell(\ell+1)}{r^2}}R_\ell(r)=0.
+\end{align}
+令$\chi_\ell(r):=rR_\ell(r)$
+\begin{align}
+	\chi''_\ell(r)+\fkh{\frac{2\mu}{\hbar^2}\kh{E-V(r)}-\frac{\ell(\ell+1)}{r^2}}\chi_\ell(r)=0.
+\end{align}
+\paragraph{解的渐进行为}
+$r\to0$时，粒子出现在的半径$r$球体内的概率
+\[
+	\int_0^rR_\ell^2(r)r^2\d r\sim r^3R_\ell(r)
+\]
+也应趋于0，因此$r\to0$时
+\[
+R_\ell(r)\sim r^\lambda,\quad\lambda>-\frac32.
+\]
+
+一般$r\to0$时$V(r)$增长比$1/r^2$慢，即$r^2V(r)\to0$，则径向方程的渐近形式为\footnote{通常碰到的中心场均满足此条件，譬如：谐振子势、线性中心势、对数中心势、球方势、自由粒子、Coulomb势、Yukawa势等．} % →
+\[
+	\fkh{\frac1{r}\dd[2]rr-\frac{\ell(\ell+1)}{r^2}}R_\ell(r)=0.
+\]
+在$r=0$附近，$R_\ell(r)\sim r^\lambda$，代入
+\[
+	\lambda(\lambda+1)-\ell(\ell+1)=0\implies\lambda=\ell,\;\cancel{-(\ell+1)}.
+\]
+% 应有$R_\ell(r)\sim r^\ell.$
+虽然$\ell=0$时，取$\lambda=-(\ell+1)$也满足条件，但此时$\psi\sim 1/r$，因为
+\[
+	\nabla^2\frac1r=-4\pi\vd(r),
+\]
+故此解并不满足\Schr 方程。
+\paragraph{离心势能}
+$r$方向的有效势为
+\[
+V\eff=V(r)+\frac{\hat L^2}{2\mu r^2}=V(r)+\frac{\ell(\ell+1)\hbar^2}{2\mu r^2}.
+\]
+其中的离心势能
+\[
+U_\ell=\frac{\ell(\ell+1)\hbar^2}{2\mu r^2}\geqslant 0
+\] % ,\quad U_0(r)=0.\]
+在$r=0$附近构筑了很高的势垒，产生自中心向外的斥力，使粒子在$r=0$附近出现的概率明显下降．后面知，当$r\to0$时，$R(r)$将以$r^\ell\to0$，而且$\ell$越大这种现象越明显.
+\iffalse
+	\begin{table}[!ht]
+		\centering
+		\begin{tabular}{cccccc}
+			\bottomrule
+			\rowcolor[gray]{0.9}
+			$\ell$ & 0 & 1 & 2 & 3 & 4 \\
+			\hline
+			       & s & p & d & f & g \\
+			\toprule
+		\end{tabular}
+		\caption{角动量量子数用下面原子光谱学记号代表}
+	\end{table}
+\fi
+
+\paragraph{两体问题求解}质量为$m_1$和$m_2$两粒子体系的Schrödinger方程
+\[
+	-\i\hbar\pv\psi{t}=\fkh{-\frac{\hbar^2}{2m_1}\nabla_1^2-\frac{\hbar^2}{2m_2}\nabla_2^2+V(r)}\psi.
+\]
+% 其中相对坐标$\r=\r_1-\r_2$、质心质量$M=m_1+m_2$、约化质量和质心坐标\[\mu=\frac{m_1m_2}{m_1+m_2}\quad\bm R=\frac{m_1\r_1+m_2\r_2}{m_1+m_2}.\]
+运用质心质量和约化质量分离出相对运动，\Schr 方程变为
+\[
+	-\i\hbar\pv\psi{t}=\fkh{-\frac{\hbar^2}{2M}\nabla_M^2-\frac{\hbar^2}{2\mu}\nabla_\mu^2+V(r)}\psi.
+\]
+\section{三维各向同性谐振子}
+% 无论在理论上或应用上，谐振子的研究都很重要。三维各向同性谐振子
+势函数
+\[
+V(r)=-\mu\omega^2(x^2 +y^2 +z^2).
+\]
+% 在实际计算中，常用三维各向同性谐振子的本征函数系作基底．
+完全集取$\{\hat H_x,\hat H_y,\hat H_z\}$分离变量，利用前面已经提到一维谐振子
+\[
+	\left[-\frac{\hbar^{2}}{2 \mu}\dd[2]x+\frac{1}{2} \mu \omega^{2} x^{2}\right] \psi(x)=E \psi(x)
+\]
+的结论：能量本征值简并度为1
+\[
+E_{n}=\kh{n+\frac12}\hbar \omega, \quad n=0,1,2, \ldots
+\]
+本征函数
+\[
+	\psi_n(x)=\sqrt{\frac{\alpha}{2^nn!\sqrt\pi}}H_n(\alpha x)\e{-\alpha^2x^2/2},\quad\alpha=\sqrt{\frac{\mu\omega}\hbar}.
+\]
+因此三维各向同性谐振子的本征函数
+\[
+	\varPhi_{n_xn_yn_z}(x,y,z)=\psi_{n_x}(x)\psi_{n_y}(y)\psi_{n_z}(z)
+\]
+本征值
+\[
+E_N=\kh{N+\frac32}\hbar\omega,\quad N=n_x+n_y+n_z
+\]
+能级简并度
+\[
+f_N=\frac12(N+1)(N+2).
+\]
+或取$\{\hat H,\hat L^2,\hat L_z\}$，并分离变量$\varPsi(r,\theta,\varphi)=R_\ell(r)Y_{\ell m}(\theta,\varphi)$，则
+\[
+R_\ell''+\frac2rR_\ell'+\fkh{\frac{2\mu}{\hbar^2}\kh{E-\frac12\mu\omega^2r^2}-\frac{\ell(\ell+1)}{r^2}}R_\ell=0.
+\]
+采用级数解法\footnote{参见：教材 P103-104}，
+本征值
+\[
+E_N=\kh{N+\frac32}\hbar\omega,\quad N=2n_r+\ell,\quad n_r,\ell=0,1,2\ldots
+\]
+简并度
+\[
+f_N=\frac12(N+1)(N+2).
+\]
+基底间的变换
+\[
+	\varPsi_{n_r\ell m}=\sum_{n_xn_yn_z}\varPhi_{n_xn_yn_z}\int\varPhi_{n_xn_yn_z}\cj\varPsi_{n_r\ell m}\d\bm r.
+\]
+\section{氢原子}
+氢原子是由电子和原子核构成的两体体系，相互作用是Coulomb势 % (取无穷远为势能零点)
+\[
+	V(r)=\frac{e^2}r.\CGS
+\]
+注意这里使用的是Gauss单位制。
+\[
+	\fkh{-\frac{\hbar^2}{2m_\pton}\nabla_\pton^2-\frac{\hbar^2}{2m_\elc}\nabla_\elc^2+V(r)}\psi(\bm r_\pton,\bm r_\elc)=E\tot\psi(\bm r_\pton,\bm r_\elc),
+\]
+前面已经证明，可以分为质心$M$整体运动和内部约化质量$\mu$的运动
+\[
+	\fkh{-\frac{\hbar^2}{2M}\nabla_R^2-\frac{\hbar^2}{2\mu}\nabla_r^2+V(r)}\psi(\bm R,\bm r)=E\tot\psi(\bm R,\bm r).
+\]
+可分离变量$\psi(\bm R,\bm r)=\varPhi(\bm R)\varPsi(\bm r)$，分别满足
+\begin{gather*}
+	-\frac{\hbar^2}{2M}\nabla_R^2\varPhi(\bm R)=E_\mathrm{CM}\varPhi(\bm R)\\
+	\fkh{-\frac{\hbar^2}{2\mu}\nabla_r^2+V(r)}\varPsi(\bm r)=E\varPsi(\bm r).
+\end{gather*}
+相对运动方程通过能量本征值和相应的本征波函数描述了氢原子的结构. 相对运动能量$E$就是电子的能级。
+
+由Coulomb势可知, 本征能量包括$E>0$的非束缚态和$E<0$的束缚态。
+
+径向方程采用自然单位值$\hbar=e=\mu=1$无量纲化
+\[
+	\dv[2]{\chi_\ell}r+\fkh{2E+\frac2r-\frac{\ell(\ell+1)}{r^2}}\chi_\ell=0.
+\]
+实际上，相当于把长度和能量的单位分别定义为
+\begin{align}
+	a=\frac{\hbar^2}{\mu e^2}=\SI{5.29e-11}\m,\quad b=\frac{\mu e^4}{\hbar^2}=\SI{27.21}\eV.
+\end{align}
+
+在$r=0$邻域的渐进行为
+\[
+	\chi_\ell(r)=rR_\ell(r)\propto r^{\ell+1},\;\cancel{r^{-\ell}}.
+\]
+% 满足物理要求的解$\chi_\ell\propto r^{\ell+1}$。
+$r\to\infty$的渐进行为
+\[
+	\dv[2]{\chi_\ell}r+2E\chi_\ell=0,\implies\chi_\ell\propto\e{-\beta r},\;\cancel{\e{\beta r}},\quad \beta:=\sqrt{-2E}.
+\]
+故
+\[
+	\chi_\ell(r)=r^{\ell+1}\e{-\beta r}u(r).
+\]
+
+代入径向方程，得
+\[
+	ru''+[2(\ell+1)-2\beta r]u'-2[(\ell+1)\beta-1]u=0.
+\]
+化为合流超几何方程，解$u=F(\alpha,\gamma,\xi)$，但其若为无穷级数$\sim\e{\xi}$仍发散，故需要截断为有限多项式
+\begin{example}{$R_{n\ell}$表}{Table of Rnl}
+	约定$\xi=r/na$
+	\begin{align*}
+		R_{10} & =2a^{-3/2}\e{-\xi},&R_{32} & =\frac{a^{-3/2}}{\sqrt{30}}\xi^2\e{-\xi},\\
+		R_{20} & =\frac{a^{-3/2}}{\sqrt2}(1-\xi)\e{-\xi},&R_{40} & =\frac{a^{-3/2}}{12}(3-9\xi+6\xi^2-\xi^3)\e{-\xi},\\
+		R_{21} & =\frac{a^{-3/2}}{\sqrt6}\xi\e{-\xi},&R_{41} & =\frac{a^{-3/2}}{8\sqrt{15}}(5\xi-5\xi^2+\xi^3)\e{-\xi},\\
+		R_{30} & =\frac{2a^{-3/2}}{3\sqrt3}(2-6\xi+3\xi^2)\e{-\xi},&R_{42} & =\frac{a^{-3/2}}{12\sqrt5}(3\xi^2-\xi^3)\e{-\xi},\\
+		R_{31} & =\frac{a^{-3/2}}{3\sqrt6}(4\xi-3\xi^2)\e{-\xi},&R_{43} & =\frac{a^{-3/2}}{12\sqrt{35}}\xi^3\e{-\xi}.
+	\end{align*}
+\end{example}
+能量本征值
+\[
+	E_n=-\frac{e^2}{2a}\frac1{n^2}=-\frac{13.6}{n^2}\si\eV.
+\]
+本征波函数
+\[
+	\varPsi_{n\ell m}(r,\theta,\varphi)=R_{n\ell}(r)Y_{\ell m}(\theta,\varphi)
+\]
+主量子数$n=1,2,\ldots$，$\ell=0,1,\ldots,n-1;\enspace m=0,\pm 1,\ldots,\pm\ell$
+
+正交归一值
+
+能级简并度\footnote{考虑自旋后$\times 2$}$f_n=n^2$比一般中心力场中能级的简并度高，一般中心力场中，粒子能级依赖于两个量子数$n_r$和$\ell$，在
+Coulomb场中，能量只依赖于一个量子数$n=n_r+\ell+1$，这是Coulomb场具有比一般中心力场的几何对称性SO(3)更高的动力学对称性SO(4)的表现。
+
+概率密度
+\[
+	W_{n\ell m}\d\bm r=\abs{\varPsi_{n\ell m}}^2r^2\sin\theta\d r\nd\theta\nd\varphi,
+\]
+径向分布
+\[
+	W_{n\ell}\d r=R^2(r)r^2\d r.
+\]
+角向分布
+\[
+	W_{\ell m}\d\Omega=\abs{Y_{\ell m}}^2\d\Omega\propto\abs{P_\ell^m(\cos\theta)}^2\d\Omega.
+\]
+\paragraph{本征态轨道电流分布与磁矩}
+电流密度
+\[
+	\bm j_\elc=-e\bm j.
+\]
+其中概率流密度
+\[
+	\bm j=\frac1{2m}\kh{\psi\cj\qo p\psi-\psi\qo p\psi\cj}=-\frac{\i\hbar}{2\mu}\kh{\varPsi_{n\ell m}\cj\nabla\varPsi_{n\ell m}-\varPsi_{n\ell m}\nabla\varPsi_{n\ell m}\cj}
+\]
+注意到$R_{n\ell},P_\ell^m$均为实函数，故$j_r,j_\theta=0$
+\[
+	j_\varphi=-\frac{\i\hbar}{2\mu}\frac1{r\sin\theta}\kh{\varPsi_{n\ell m}\cj\pp\varphi\varPsi_{n\ell m}-\varPsi_{n\ell m}\pp\varphi\varPsi_{n\ell m}\cj}=\frac{m\hbar}{\mu r\sin\theta}\abs{\varPsi_{n\ell m}}^2.
+\]
+得到电流密度矢量
+\begin{align}
+	\bm j_\elc=-\frac{em\hbar}{\mu r\sin\theta}\abs{\varPsi_{n\ell m}}^2\uvec e_\varphi.
+\end{align}
+截面为$\d\sigma$的环形电流的磁矩
+\[
+	\d\mu_z=\frac1c\pi(r\sin\theta)^2j_\elc\d\sigma=\frac{r\sin\theta}{2c}j\d\bm r.
+\]
+因此，磁矩
+\begin{align}
+	\mu_z=-\frac{em\hbar}{2\mu c}\int\abs{\varPsi_{n\ell m}}^2\d\bm r=-\frac{e\hbar}{2\mu c}m\equiv-\muB m,
+\end{align}
+其中$\muB$为Bohr磁矩，轨道磁矩与量子数$m$有关，这就是把$m$称为磁量子数的理由。
+
+轨道磁矩算符
+\[
+	\qo{\mu_\ell}=-\frac{\muB}\hbar\qo L.
+\]
+轨道磁矩与外磁场作用能
+\[
+	\hat W=-\qo{\mu_\ell}\cdot\,\bm B=\frac{\muB}\hbar\qo L\cdot\,\bm B.
+\]
+\paragraph{类氢原子}电离到只剩一个电子的离子，例如He$^+$，径向方程变为
+\[
+	\chi''_\ell(r)+\fkh{\frac{2\mu}{\hbar^2}\kh{E+\frac{Ze^2}{r}}-\frac{\ell(\ell+1)}{r^2}}\chi_\ell(r)=0.
+\]
+将长度和能量的单位分别取为$a/Z,Z^2b$，故类氢原子的能级为
+\[
+	E_n=-\frac{e^2}{2a}\frac{Z^2}{n^2},
+\]
+且波函数的空间尺度为氢原子的$1/Z$。这就是Pickering线系的理论解释。
+\paragraph{重要修正}
+Kepler问题（电子在Coulomb场中的运动问题）是量子力学的试金石：
+量子力学的Coulomb场运动可以精确求解
+计算结果能以高度的精确性与光谱学精密实验作比较。
+\subparagraph*{精细结构}
+\begin{compactenum}
+	\item 对动能项的修正
+	\[
+		E=\sqrt{p^2c^2+m^2c^4}=mc^2\sqrt{1+\frac{p^2}{m^2c^2}}\doteq mc^2+\frac{p^2}{2m}-\frac{p^4}{8m^3c^2}+\cdots
+	\]
+	\item 自旋轨道耦合效应
+	\item Darwin振颤项
+
+	电子的波动性导致Coulomb场对它的作用有弥散效应，加在电子上的Coulomb场并非$V(\r)$，而是场。
+\end{compactenum}
+\subparagraph*{超精细结构}
+\begin{compactenum}
+	\item 核电荷分布有限体积的修正；
+	\item 核磁矩和电子磁矩(自旋和轨道两部分)相互作用的修正；
+	\item 对多电子原子，电子之间的电磁相互作用修正更是十分明显。
+\end{compactenum}
+\sectionstar{无限深球方势阱}
+考虑质量为$\mu$的粒子在半径为$a$的球形匣子中运动，相当于粒子在一个无限深球方势阱中运动
+\begin{align*}
+	V(r)=\begin{cases}
+		0, & r<a \\[
+	-1ex]\infty,&r>a
+	\end{cases}
+\end{align*}
+\paragraph{$\ell=0$态(s)}径向方程
+\[
+	\chi_0''+k^2\chi_0=0,\quad k^2:=\frac{2\mu E}{\hbar^2}.
+\]
+边界条件$\chi_0(0)=\chi_0(a)=0$，故 
+\[
+	\chi_{n0}(r)=\sqrt{\frac2a}\sin\frac{n\pi r}a,\quad n=1,2,\ldots
+\]
+\paragraph{$\ell\neq 0$态}径向方程 
+\[
+	R_\ell''+\frac2rR_\ell'+\fkh{k^2-\frac{\ell(\ell+1)}{r^2}}R_\ell=0.
+\]
+边界条件$R_\ell(a)=0$，引入无量纲变量$\rho=kr$，径向方程变为 
+\[
+	\dv[2]{R_\ell}\rho+\frac2\rho\dv{R_\ell}\rho+\fkh{1-\frac{\ell(\ell+1)}{r^2}}R_\ell=0,
+\]
+这是Bessel方程，两个特解为球Bessel函数$j_\ell(\rho)$与球Neumann函数$n_\ell(\rho)$。
+
+$\rho\to0$时的渐进方程
+\[
+	j_\ell\to\frac{\rho^\ell}{(2\ell+1)!!},\quad \cancel{n_\ell\to-\frac{(2\ell-1)!!}{\rho^{\ell+1}}}.
+\]
+因此球方势阱内的解为$R_\ell(r)\propto j_\ell(kr)$，令$j_r(x)=0$的根依次为$x_{n\ell}$

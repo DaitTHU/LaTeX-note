@@ -1,0 +1,395 @@
+\chapter{近独立粒子系统的统计分布}
+统计物理是将宏观性质看作是对应微观量的统计平均的微观理论。单粒子的力学规律是决定论的，如量子力学的Schrödinger方程、经典力学中的正则方程或Newton II；而宏观系统的统计规律是非决定论的，用宏观量指定的宏观状态对应大量不同的微观状态。
+
+概率基本知识：概念、互斥事件几率的加法定理、独立事件几率的乘法定理、条件概率、二项分布、Poisson分布、Gauss分布、多个随机变量的联合概率分布、统计平均值和涨落等。
+
+\section{近独立粒子系统}
+
+所谓近独立粒子，就是在平均意义下
+\begin{center}
+	$0<$粒子间作用能$\ll$单个粒子能量
+\end{center}
+对于单粒子状态可以通过\textbf{Schrödinger方程}
+\[
+	\hat H\ket n=\varepsilon_n\ket n.
+\]
+解得能量本征值$\varepsilon_n$，简并度$\omega_n$和量子态$\ket n$。
+\begin{example}{一维无穷深势阱}{1-D Infinte Square Potential Well}
+	一维无穷深势阱能量本征值和简并度
+	\[
+		\varepsilon_n=\frac{n^2h^2}{8mL^2},\quad\omega_n=1\quad n=1,2,\ldots.
+	\]
+	能级间能量差$\ll$室温下热运动能量($\kB T$)：
+	\[
+		\D\varepsilon=\kh{2n+1}\frac{h^2}{8mL^2}\sim\SI{e-36}\joule\ll\SI{0.025}\electronvolt.
+	\]
+	因此能量准连续。
+\end{example}
+微观状态：
+粒子按量子态的一个分配方式；
+宏观状态：
+粒子按能级的一个分布，%分布与微观状态不同，
+一组分布对应大量不同微观状态。
+%分布与自旋有关。
+
+记分布$\hkh{a_i}$表示$a_i$个粒子处于能级$\varepsilon_i$，包含的微观状态数为$\Om$。
+\begin{definition}{Boltzmann系统}{Boltzmann System}
+	粒子可以分辨，量子态容纳粒子数不受限制。
+
+	$N$个粒子全排，除去各能级内全排，且能级内可占据$\omega_i$中任一态
+	\begin{align}
+		\Om=\frac{N!}{\prod a_i!}\prod\omega_i^{a_i}=N!\prod\frac{\omega_i^{a_i}}{a_i!}.
+	\end{align}
+\end{definition}
+一些定域系统(如固体晶格)便是Boltzmann系统。
+\begin{definition}{Bose系统}{Bose System}
+	粒子不可分辨，量子态容纳粒子数不受限制。
+
+	从$a_i+\omega_i$个粒子和空位的间隔中插$a_i$个隔板
+	\begin{align}
+		\Om[B]=\prod\binom{a_i+\omega_i-1}{a_i}=\prod\frac{\kh{a_i+\omega_i-1}!}{a_i!\kh{\omega_i-1}!}.
+	\end{align}
+\end{definition}
+\begin{definition}{Fermi系统}{Fermi System}
+	粒子不可分辨，量子态容纳最多一个粒子。
+
+	从$\omega_i$中挑出$a_i$个粒子位
+	\begin{align}
+		\Om[F]=\prod\binom{\omega_i}{a_i}=\prod\frac{\omega_i!}{a_i!\kh{\omega_i-a_i}!}.
+	\end{align}
+\end{definition}
+在量子力学中，将自旋量子数为整数的粒子称为Bose子，半整数的粒子称为Fermi子。由Pauli不相容原理，两个Fermi子不可能处于同一量子态。 
+\begin{theorem}{统计物理平衡态假设}{Equilibrium Hypothesis}
+	\textbf{等几率假设}(Planck)：分布$\hkh{a_i}$的热力学几率$\propto\Omega_i\hkh{a_i}.$
+
+	\textbf{最可几分布}：将热力学几率最大的分布近似作为平衡态分布。
+\end{theorem}
+% 孤立系统$N,V,E$确定
+\paragraph{Bose分布}
+$a_i\gg 1,\omega_i\gg 1$，由Stirling公式
+\[
+	\ln(x!)\simeq x\kh{\ln x-1}\,{\color{lightgray}+\ln\sqrt{2\pi x},}\quad x\gg 1.
+\]
+可约化Bose分布
+\begin{align*}
+	\ln\Om[B]\simeq\sum\fkh{a_i\ln\kh{1+\frac{\omega_i}{a_i}}+\omega_i\ln\kh{1+\frac{a_i}{\omega_i}}}.
+\end{align*}
+再结合定解条件
+\[
+	N=\sum a_i,\quad E=\sum a_i\varepsilon_i.
+\]
+利用Lagrange乘数法
+\begin{align*}
+	L:={}&\ln\Om[B]+\alpha\Bigkh{N-\sum a_i}+\beta\Bigkh{E-\sum a_i\varepsilon_i},\\
+	\pv L{a_i}={}&\ln\kh{1+\frac{\omega_i}{a_i}}-\alpha-\beta\varepsilon_i=0.
+\end{align*}
+解得
+\begin{align}
+	a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}-1}.
+\end{align}
+% Bose-Einstein分布（简称Bose分布）
+
+检验该点为极大值点：
+\[
+	\pp[2]{a_i}\Om[B]=-\frac{\omega_i/a_i}{\omega_i+a_i}<0.
+\]
+\paragraph{Fermi分布}
+$a_i\gg 1,\omega_i\gg a_i$，类似Bose分布
+\begin{gather}\notag
+	\ln\Om[F]\simeq\sum\fkh{a_i\ln\kh{\frac{\omega_i}{a_i}-1}-\omega_i\ln\kh{1-\frac{a_i}{\omega_i}}}.\\
+	% Lagrange待定乘子法
+	a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}+1}.
+\end{gather}
+
+% Fermi-Dirac分布（简称Fermi分布）
+
+检验该点为极大值点：
+\[
+	\pp[2]{a_i}\Om[F]=-\frac{\omega_i/a_i}{\omega_i-a_i}<0.
+\]
+\paragraph{半经典分布}
+% 若取基态能量为0，则$\varepsilon_i\geqslant 0$，
+当$\e\alpha\gg 1$，Bose分布和Fermi分布变为半经典分布
+\begin{align}
+	a_i=\omega_i\e{-\alpha-\beta\varepsilon_i}.
+\end{align}
+因此要求$a_i\ll\omega_i$ （非简并）
+\begin{align}
+	\Om[S]=\prod\frac{\omega_i^{a_i}}{a_i!}.
+\end{align}
+与Boltzmann分布相比仅是系数差别($N!$)，不影响求最可几分布。
+\paragraph{最可几方法误差估计}
+在最可几分布$a_\mathrm m$处展开
+\begin{align*}
+	\ln\Om & =\ln\Omm+0+\frac12\sum_i\underline{\pp[2]{a_i}\Omm}\,\delta a_i^2+\cdots
+	% \ln\Omega\hkh{a_i} & =\ln\Omega\hkh{a_{i\mathrm m}}+\sum_i\pv{\Omega}{a_i}\hkh{a_{i\mathrm m}}(a_i-a_{i\mathrm m})+\frac12\sum_i\spd{\Omega}{a_i}\hkh{a_{i\mathrm m}}(a_i-a_{i\mathrm m})^2+\cdots
+\end{align*}
+因此
+\[
+	\ln\frac\Om\Omm\simeq-\frac12\sum_i\frac{\delta a_i^2}{a_\mathrm m}.
+\]
+若$\dvd{\delta a_i}{a_\mathrm m}\sim 10^{-4},$
+\[
+	\frac\Om\Omm\sim\e{-10^{23-8}}\lll 1.
+\]
+
+\section{宏观量的统计表达式}
+
+\begin{definition}{配分函数}{Partition Function}
+	半经典分布中，定义配分函数
+	\begin{align}
+		Z(\beta,y):=\sum_i\omega_i\e{-\beta\varepsilon_i}.
+	\end{align}
+	其中$y$是外参量，单粒子能级$\varepsilon_i$是$y$的函数。
+\end{definition}
+分子数
+\[
+	N=\sum a_i=\sum\omega_i\e{-\alpha-\beta\varepsilon_i}=Z\e{-\alpha},
+\]
+用配分函数$Z$表示$\alpha$
+\begin{align}
+	\alpha=\ln\frac ZN.
+\end{align}
+内能
+\[
+	E=\sum a_i\varepsilon_i=\sum\varepsilon_i\omega_i\e{-\alpha-\beta\varepsilon_i}=-\e{-\alpha}\pv Z\beta=-\frac NZ\pv Z\beta.
+\]
+即
+\begin{align}
+	E=-N\pv{\ln Z}\beta.
+\end{align}
+
+准静态过程中，
+\[
+	\d E=\sum a_i\d\varepsilon_i+\varepsilon_i\d a_i=\delta W+\delta Q.
+\]
+功
+\[
+	\delta W=\sum_kY_k\d y_k
+\]
+其中$Y_k,y_k$分别是广义力和广义坐标（如$-p,V$）。
+\[
+	\sum_kY_k\d y_k=\sum_ia_i\d\varepsilon_i=\sum_i a_i\sum_k\pv{\varepsilon_i}{y_k}\d y_k,
+\]
+故
+\[
+	Y_k=\sum_ia_i\pv{\varepsilon_i}{y_k}=\sum_i\omega_i\e{-\alpha-\beta\varepsilon_i}\pv{\varepsilon_i}{y_k}.
+\]
+物态方程
+\begin{align}
+	Y_k=-\frac N\beta\pv{\ln Z}{y_k}.
+\end{align}
+
+热
+\[
+	\delta Q=\d E-\sum_ia_i\d\varepsilon_i=-N\d\kh{\pv{\ln Z}\beta}+\frac N\beta\sum_k\pv{\ln Z}{y_k}\d y_k.
+\]
+又
+\[
+	\d\kh{\ln Z}=\pv{\ln Z}\beta\d\beta+\sum_k\pv{\ln Z}{y_k}\d y_k.
+\]
+故
+\begin{align*}
+	T\d S & =-N\d\kh{\pv{\ln Z}\beta}+\frac N\beta\kh{\d\kh{\ln Z}-\pv{\ln Z}\beta\d\beta} \\
+	      & =\frac N\beta\d\kh{\ln Z-\beta\pv{\ln Z}\beta}.
+\end{align*}
+% 因此
+% \[\d S=\frac N{\beta T}\d\kh{\ln Z-\beta\pv{\ln Z}\beta}.\]
+两边全微分，要求系数为常数，定义Boltzmann常数
+\[
+	\frac1{\beta T}=:\kB=\SI{1.380649e-23}{\J\per\K}.
+\]
+故
+\begin{align}
+	S-S'=N\kB\kh{\ln Z-\beta\pv{\ln Z}\beta}.
+\end{align}
+\begin{theorem}{Boltzmann关系}{Boltzmann Relation}
+	熵
+	\begin{align}
+		S=\kB\ln\Om.
+	\end{align}
+	其中$\kB$为Boltzmann常数。
+\end{theorem}
+通过Boltzmann关系可以确定熵，粒子不可分辨的半经典分布中
+\begin{align}\notag
+	S & =\kB\sum\ln\bigfkh{a_i\ln\omega_i-a_i\kh{\ln a_i-1}}=\kB\sum\ln a_i\kh{\alpha+\beta\varepsilon_i+1} \\\notag
+	  & =\kB\kh{N\alpha+\beta E+N}=\kB\kh{N\ln\frac ZN-N\beta\pv{\ln Z}N+N}                              \\
+	  & =N\kB\kh{\ln Z-\beta\pv{\ln Z}\beta-\ln N+1}.
+\end{align}
+和之前的结果比较可以确定$S'$
+\[
+	S'=N\kB\kh{1-\ln N}\simeq-\kB\ln N!.
+\]
+Boltzmann分布中，$S'=0.$
+
+其他宏观量也可以表示，自由能
+\begin{align}
+	F=E-TS=-N\kB T\ln Z-TS'.
+\end{align}
+化学势在半经典分布中
+\[
+	\mu=\kh{\pv FN}_T=-\alpha\kB T.
+\]
+Boltzmann分布中，$\mu=-\kB T\ln Z$。
+
+\section{单粒子态的半经典描述}
+
+定义系统的Hamilton量$H\equiv\varepsilon$，则广义坐标$q_i$与广义动量$p_i$有关系
+\[
+	\dot q_i=\pv H{p_i},\quad\dot p_i=-\pv H{q_i}.
+\]
+\begin{definition}{$\mu$空间}{Mu Space}
+	$\mu$空间是粒子的广义坐标$q_i$与广义动量$p_i$所张的空间。相体积元
+	\begin{align}
+		\d\omega=\prod_{i=1}^\gamma\d q_i\nd p_i.
+	\end{align}
+	其中$\gamma$为粒子自由度。
+\end{definition}
+单粒子能量看成$q,p$的连续函数；由不确定性关系$\D q\D p=h$
+\begin{theorem}{极限定理}{Limit Theorem}
+	大量子数的状态在$\mu$空间对应$h^\gamma$相体积。
+\end{theorem}
+每个状态上的粒子数
+\begin{align}
+	\frac{a_i}{\omega_i}=\e{-\alpha-\beta\varepsilon}.
+\end{align}
+因此$\d\omega$内所含的粒子数
+\[
+	h^{-\gamma}\d\omega\cdot\e{-\alpha-\beta\varepsilon}.
+\]
+% 因此 % 😅 二次元能不能死一死
+% \[N=h^{-\gamma}\int\e{-\alpha-\beta\varepsilon}\d\omega=\e{-\alpha}Z.\]
+又$N=\e{-\alpha}Z$，故配分函数可以写成
+\begin{align}
+	Z(\beta,y)=h^{-\gamma}\int\e{-\beta\varepsilon}\d\omega.
+\end{align}
+而能量在$\kh{\varepsilon,\varepsilon+\d\varepsilon}$上的粒子数
+\[
+	n(\varepsilon)\d\varepsilon=g(\varepsilon)\e{-\alpha-\beta\varepsilon}\d\varepsilon.
+\]
+比较可得态密度
+\[
+	g(\varepsilon)=h^{-\gamma}\dv{\Omega(\varepsilon)}\varepsilon.
+\]
+其中$\Omega(\varepsilon)$表示能量$\varepsilon$曲面所围相体积。这样
+\begin{align}
+	Z(\beta,y)=\int\zti g(\varepsilon)\e{-\beta\varepsilon}\d\varepsilon.
+\end{align}
+
+\section*{验证极限定理}
+
+\begin{example}{谐振子}{Harmonic Oscillator}
+	一维谐振子，Hamilton量
+	\[
+		\varepsilon=\frac{p^2}{2m}+\frac12m\omega^2x^2.
+	\]
+	因此
+	\[
+		\Omega(\varepsilon)=\pi\sqrt{2m\varepsilon}\sqrt{\frac{2\varepsilon}{m\omega^2}}=\frac{2\pi\varepsilon}\omega.
+	\]
+	\[
+		g(\varepsilon)=\frac1h\dv\Omega\varepsilon=\frac{2\pi}{h\omega}.
+	\]
+	另一方面
+	\[
+		\varepsilon_n=\kh{n+\frac12}\hbar\omega,\quad\omega_n=1.
+	\]
+	相体积为$h$
+	\[
+		\D\Omega(\varepsilon_n)=\frac{2\pi}\omega\hbar\omega=h.
+	\]
+	\tcblower
+	二维谐振子，Hamilton量
+	\[
+		\varepsilon=\frac{p_x^2+p_y^2}{2m}+\frac12m\omega^2\kh{x^2+y^2}.
+	\]
+	借助4维单位球体积公式
+	\[
+		\Omega(\varepsilon)=\frac{\pi^2}2\cdot2m\varepsilon\frac{2\varepsilon}{m\omega^2}=\frac{2\pi^2\varepsilon^2}{\omega^2}.
+	\]
+	\[
+		g(\varepsilon)=\frac1{h^2 }\dv\Omega\varepsilon=\frac{4\pi^2\varepsilon}{h^2\omega^2}.
+	\]
+	另一方面
+	\[
+		\varepsilon_n=\kh{n+1}\hbar\omega,\quad\omega_n=n+1.
+	\]
+	相体积为
+	\[
+		\frac{\D\Omega(\varepsilon_n)}{n+1}=\frac{2\pi^2\hbar^2\kh{2n+1}}{n+1}\to h^2.
+	\]
+\end{example}
+\begin{example}{转子}{Rotor}
+	系统的转动惯量$I$，则Hamilton量
+	\[
+		\varepsilon=\frac1{2I}\kh{p_\theta^2+\frac1{\sin^2\theta}p_\phi^2}.
+	\]
+	因此
+	\begin{gather}\notag
+		\Omega(\varepsilon)=\int\d\theta\nd\phi\int\d p_\theta\nd p_\phi=2\pi\int_0^\pi\pi\sqrt{2I\varepsilon}\sqrt{2I\varepsilon\sin^2\theta}\d\theta=8\pi^2I\varepsilon;\\
+		g(\varepsilon)=\frac1{h^2}\dv\Omega\varepsilon=\frac{8\pi^2I}{h^2}.
+	\end{gather}
+	另一方面
+	\[
+		\varepsilon_\ell=\frac{\hbar^2}{2I}\ell(\ell+1),\quad\omega_\ell=2\ell+1.
+	\]
+	相体积为
+	\[
+		\frac{\D\Omega(\varepsilon_n)}{2\ell+1}=\frac{8\pi^2\hbar^2\ell}{2\ell+1}\to h^2.
+	\]
+\end{example}
+\begin{example}{单原子分子}{Monatomic Molecule}
+	Hamilton量
+	\[
+		\varepsilon=\frac1{2m}\kh{p_x^2+p_y^2+p_z^2}.
+	\]
+	在体积为$V$的容器中，
+	\begin{gather}\notag
+		\Omega(\varepsilon)=V\int_0^{\sqrt{2m\varepsilon}}4\pi p^2\d p=\frac{4\pi V}3\kh{2m\varepsilon}^{3/2};\\
+		g(\varepsilon)=\frac1{h^3}\dv\Omega\varepsilon=\frac{2\pi V}{h^3}\kh{2m}^{3/2}\sqrt\varepsilon.
+	\end{gather}
+	若考虑自旋，还应乘自旋因子$g_s=2s+1$。
+
+	另一方面
+	\[
+		\varepsilon_n=\frac{h^2}{8mL^2}\kh{n_x^2+n_y^2+n_z^2},\quad n=\set{n_x,n_y,n_z}{n_i=1,2,\ldots}
+	\]
+	简并度$\omega_n$近似为
+	\[
+		G(\varepsilon)=\frac18\cdot\frac{4\pi}3\kh{\frac{8mL^2\varepsilon}{h^2}}^{3/2}=\frac{4\pi}{3}\kh{2\pi\varepsilon}^{3/2}Vh^{-3}.
+	\]
+	因此每个状态的相体积
+	\[
+		\frac{\Omega(\varepsilon)}{G(\varepsilon)}=h^3.
+	\]
+	\tcblower
+	极端相对论情形下
+	\[
+		\varepsilon=cp=c\sqrt{p_x^2+p_y^2+p_z^2}.
+	\]
+	故
+	\begin{align}
+		\Omega(\varepsilon)=V\cdot\frac{4\pi}3\kh{\frac\varepsilon{c}}^3,\quad g(\varepsilon)=\frac{4\pi V}{h^3c^3}\varepsilon^2.
+	\end{align}
+\end{example}
+由\exmref{exm:Monatomic Molecule} 可知，非相对论情形下
+\[
+	\varepsilon=\frac1{2m}\kh{\frac h{2L}}^2\kh{n_x^2+n_y^2+n_z^2}=\frac{h^2}{8m}\kh{n_x^2+n_y^2+n_z^2}V^{-2/3}.
+\]
+故
+\[
+	\pv\varepsilon V=\frac{h^2}{8m}\kh{n_x^2+n_y^2+n_z^2}\kh{-\frac23}V^{-5/3}=-\frac23\frac\varepsilon V.
+\]
+压强
+\begin{align}
+	p=-\sum a_i\pv{\varepsilon_i}V=\frac23\sum a_i\frac{\varepsilon_i}V=\frac23\frac UV.
+\end{align}
+
+而极端相对论情形下
+\[
+	\varepsilon=c\cdot\frac h{2V^{1/3}}\sqrt{n_x^2+n_y^2+n_z^2}.
+\]
+相似的
+\begin{align}
+	p=\frac13\frac UV.
+\end{align}

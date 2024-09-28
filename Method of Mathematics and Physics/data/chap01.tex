@@ -1,0 +1,473 @@
+\chapter{偏微分方程的定解问题}
+% 我们先从$\bcancel{\text{三}}$两个具体问题出发推导典型方程。
+\begin{example}{弦振动}{string vibration}
+	线密度为$\rho$的弦在自身张力$T$的作用下平衡位置在$x$轴，横向位移$u=u(x,t)$，取$(x_1,x_2)$段进行受力分析
+	\begin{align*}
+		T_2\cos\theta_2-T_1\cos\theta_2&=0,\\
+		T_2\sin\theta_2-T_1\sin\theta_2&=\rho\vd x\cdot\pv[2]ut.
+	\end{align*}
+	%其中$T$为弦内张力，为弦的线密度。
+	限定$\theta\ll 1$，有$\cos\theta\doteq 1,\,\sin\theta\doteq\theta,$
+	\begin{align*}
+		T_1&=T_2=:T,\\
+		T\vd\theta&=\rho\vd x\cdot\pv[2]ut.
+	\end{align*}
+	又$\theta=\p u/\p x$，得到波动方程
+	% \nomenclature{$u_t$}{The number of angels per unit area\nomrefeq}
+	%$\rho$ - 线密度，$T$ - 张力，$g$ - 外力\\
+	\begin{align}
+		\pv[2]ut=a^2\pv[2]ux,\quad a^2:=\frac T\rho.
+	\end{align}
+\end{example}
+\begin{example}{热传导}{heat conduction}
+	由Fourier热传导定律，一段时间内流入物体$\Omega$的热量为
+	\[
+		Q=\int_{t_1}^{t_2}\oint_{\p\Omega}k\pv u{\bm n}\d S\d t=\int_{t_1}^{t_2}\int_\Omega k\lap u\d V\d t,
+	\]
+	其中$k$为介质的热传导系数，$u=u(x,y,z,t)$为各点温度。
+	
+	另一方面，从比热容$c$的角度看，
+	\[
+		Q=\int_{t_1}^{t_2}\int_\Omega c\rho\pv ut\d V\d t.
+	\]
+	其中$\rho$为物体的体密度。
+	
+	因为上式对任意$\Omega\times(t_1,t_2)$均成立，得到热传导方程
+	%$c$ - 比热，$\rho$ - 密度，$k$ - 热传导系数\\
+	\begin{align}
+		\pv ut=a^2\lap u,\quad a^2:=\frac k{c\rho}.
+	\end{align}
+\end{example}
+\iffalse
+	\begin{example}{Maxwell方程组}{}
+		电动力学中
+		\begin{align*}
+			\nabla\cdot\bm D  & =\rho,              \\
+			\nabla\cdot\bm B  & =0,                 \\
+			\nabla\times\bm E & =-\pv{\bm B}t,      \\
+			\nabla\times\bm H & =\bm J+\pv{\bm D}t.
+		\end{align*}
+	\end{example}
+\fi
+\section{定解问题及适定性}
+$V\subseteq\mathbb R^n$内$m$阶PDE形如
+\[
+	F\kh{x,u,\pv u{x_1},\pv u{x_2},\ldots,\pv u{x_n},\ldots,\frac{\p^mu}{\p x_1^{m_1}\cdots\p x_n^{m_n}}}=0,
+\]
+其中$m=m_1+m_2+\cdots+m_n$。
+\begin{definition}{定解条件}{Definite Condition}
+	确定解中函数的条件称为定解条件，包括初始条件和边界条件
+	\begin{compactenum}[I.]
+		\item (Dirichlet)\quad$\edg u_{x=0}=f$,\qqqquad$\edg u_{\p V}=f$;
+		\item (Neumann)\enspace$\edg{u_t}_{x=0}=f$,\qqqquad\!$\edg{u_t}_{\p V}=f$;
+		\item (Robin)\qquad$\kh{u_t+\sigma u}_{x=0}=f$,\quad$\biggkh{\pv un+\sigma u}_{\p V}=f$.
+	\end{compactenum}
+\end{definition}
+\begin{definition}{解}{}
+	古典解：符合方程且各阶偏导数连续；
+
+	通解：$m$阶PDE有$m$个任意函数的解；
+
+	特解：不包含任何任意函数或任意常数的解；
+
+	适定解：存在、唯一且稳定。
+\end{definition}
+\section{一阶线性方程的通解法}
+\begin{method}{常数变易法}{constant variation method}
+	对于$u(x,y)$的方程
+	\[
+		u_x+Ax=B.
+	\]
+	有解
+	\begin{align*}
+		\begin{cases}
+			\varphi=\exp\biggkh{-\int A\d x},  \\
+			\psi=\int B\varphi^{-1}\d x
+		\end{cases}
+		\implies u=\varphi\bigkh{\psi+g(y)}.
+	\end{align*}
+	其中$g\in\sC$。
+\end{method}
+\begin{method}{变量代换}
+	对$u=u(x,y)$的方程
+	\[
+		au_x+bu_y+cu=f,
+	\]
+	作变量代换
+	\begin{align*}
+		\begin{cases}
+			\xi=\xi(x,y)  \\
+			\eta=\eta(x,y)
+		\end{cases}
+		\implies
+		\begin{cases}
+			u_x=u_\xi\xi_x+u_\eta\eta_x \\
+			u_y=u_\xi\xi_y+u_\eta\eta_y
+		\end{cases}
+	\end{align*}
+	变成$u=u(\xi,\eta)$的方程
+	\[
+		\kh{a\xi_x+b\xi_y}u_\xi+\kh{a\eta_x+b\eta_y}u_\eta+cu=f.
+	\]
+	使$a\xi_x+b\xi_y=0$，得到\textbf{特征方程}和\textbf{特征曲线}
+	\begin{align}
+		\frac{\d x}a=\frac{\d y}b,\implies\xi(x,y)=\const.
+	\end{align}
+	剩下
+	\[
+		\kh{a\eta_x+b\eta_y}u_\eta+cu=f.
+	\]
+	对$\eta$积分便可求出通解。注意：要$a\eta_x+b\eta_y\neq 0$，应有Jacobi行列式不为0
+	\begin{align*}
+		\det J(\xi,\eta)=\left\lvert\frac{\p(\xi,\eta)}{\p(x,y)}\right\rvert=
+		\begin{vmatrix}
+			\xi_x  & \xi_x  \\
+			\eta_x & \eta_y
+		\end{vmatrix}\neq 0.
+	\end{align*}
+\end{method}
+\section{波动方程的行波解和d'Alembert公式}
+一维波动方程
+\[
+	\pv[2]ut=a^2\pv[2]ux,\quad a>0.
+\]
+可分解为
+\[
+	\kh{\pp t+a\pp x}\kh{\pp t-a\pp x}u=0.
+\]
+等价于
+\begin{align*}
+	\begin{cases}
+		\pv vt+a\pv vx=0, \\[1ex]
+		\pv ut-a\pv ux=v.
+	\end{cases}
+	\implies
+	\begin{cases}
+		\xi=x-at, \\
+		\eta=x+at.
+	\end{cases}
+\end{align*}
+方程化为
+\[
+	\pw u\eta\xi=0,\implies u=f(\xi)+g(\eta).
+\]
+即\textbf{行波解}
+\begin{align}
+	u(x,t)=f(x-at)+g(x+at),\quad f,g\in\sC^2.
+\end{align}
+\begin{theorem}{d'Alembert公式}{d'Alembert formula}
+	无限长弦自由振动
+	\begin{align*}
+		\begin{cases}
+			u_{tt}=a^2u_{xx},&t>0,\;x\in\mathbb R. \\
+			u|_{t=0}=\varphi(x),\quad u_t|_{t=0}=\psi(x).
+		\end{cases}
+	\end{align*}
+	将初值问题带入通解
+	\begin{align*}
+		u|_{t=0}   & =f(x)+g(x)=\varphi(x),   \\
+		u_t|_{t=0} & =-af'(x)+ag'(x)=\psi(x).
+	\end{align*}
+	因此
+	\begin{align}
+		u(x,t)=\frac12\bigfkh{\varphi(x-at)+\varphi(x+at)}+\frac1{2a}\int_{x-at}^{x+at}\psi(\xi)\d\xi.
+	\end{align}
+	对于$\varphi\in\sC^2,\psi\in\sC,$解是适定的。
+\end{theorem}
+
+非无限情况，可以延拓至无限。
+\begin{example}{延拓}{}
+	端点固定的半无限边界条件：
+	\begin{align*}
+		\begin{cases}
+			u_{tt}=a^2u_{xx},\\
+			u(0,t)=0,\\
+			u(x,0)=\varphi(x),\quad u_t(x,0)=\psi(x).
+		\end{cases}
+	\end{align*}
+	进行奇延拓
+	\begin{align*}
+		\varphi_\odd(x)=
+		\begin{cases}
+			\varphi(x),   & x\geqslant 0, \\
+			-\varphi(-x), & x<0.
+		\end{cases}
+		\quad
+		\psi_\odd(x)=
+		\begin{cases}
+			\psi(x),   & x\geqslant 0, \\
+			-\psi(-x), & x<0.
+		\end{cases}
+	\end{align*}
+	问题便适用d'Alembert公式，解
+	\begin{align*}
+		u(x,t) & =\frac12\bigfkh{\varphi_\odd(x-at)+\varphi_\odd(x+at)}+\frac1{2a}\int_{x-at}^{x+at}\psi_\odd(\xi)\d\xi \\
+			   & = 
+		\begin{cases}
+			\frac12\bigfkh{\varphi(x-at)+\varphi(x+at)}+\frac1{2a}\int_{x-at}^{x+at}\psi(\xi)\d\xi, & x\geqslant at, \\
+			\frac12\bigfkh{\varphi(x+at)-\varphi(at-x)}+\frac1{2a}\int_{at-x}^{x+at}\psi(\xi)\d\xi, & x<at.
+		\end{cases}
+	\end{align*}
+	\tcblower
+	端点自由半无限弦($u_t(0,t)=0$)采用偶延拓；有界弦：两端均延拓。
+\end{example}
+\begin{example}{中心对称球面波}{}
+	中心对称的球面波$u=u(r)$，采用球坐标
+	\[
+		\lap=\frac1{r^2}\pp r\kh{r^2\pp r}+\frac1{r^2\sin\theta}\pp \theta\kh{\sin\theta\pp \theta}+\frac1{r^2\sin^2\theta}\pp[2]\phi.
+	\]
+	波动方程变为
+	\[
+		u_{tt}=a^2\biggkh{u_{rr}+\frac2ru_r}=\frac{a^2}r(ru)_{rr}.
+	\]
+	设$v=ru$，则可解得
+	\[
+		u(r)=\frac1r\bigfkh{f(r-at)+g(r+at)}.
+	\]
+	掺入边界条件$\varphi(r),\psi(r)$后，作奇延拓即可。
+\end{example}
+\begin{example}{三维波动方程与球面平均法}{}
+	一般的三维波动方程
+	\begin{align*}
+		\begin{cases}
+			u_{tt}=a^2(u_{xx}+u_{yy}+u_{zz}),                     \\
+			u|_{t=0}=\varphi(x,y,z),\quad u_t|_{t=0}=\psi(x,y,z).
+		\end{cases}
+	\end{align*}
+	采用球面平均法，定义$u$在以$M$为球心、$r$为半径的球面$S_r(M)$上的平均
+	\[
+		\overline u(r,t;M)=\frac1{4\pi r^2}\oint_{S_r(M)}u(x,y,z,t)\d S,
+	\]
+	
+	略去证明过程，问题转化为中心对称球面波问题
+	\begin{align*}
+		\begin{cases}
+			\overline u_{tt}=\frac1r\kh{r\overline u}_{rr},                                \\
+			(r\overline u)_{r=0}=0,                                                        \\
+			\overline u(r,0)=\overline\varphi(r),\quad\overline u_t(r,0)=\overline\psi(r).
+		\end{cases}
+	\end{align*}
+	奇延拓解，注意：$(r\varphi)_\odd=r\varphi_\even,$
+	\begin{align*}
+		r\overline u(r,t)= & \frac12\bigfkh{(r-at)\overline\varphi_\even(r-at)+(r+at)\overline\varphi_\even(r+at)}+\frac1{2a}\int_{r-at}^{r+at}\rho\overline\psi_\even(\rho)\d\rho.
+	\end{align*}
+	为得到$u(x,y,z,t),$取极限
+	\begin{align*}
+		u(M,t)=\lim_{r\to 0^+}\overline u(r,t)
+		=\dd t\kh{t\overline\varphi(at)}+t\overline\psi(at),
+	\end{align*}
+	上式称为Possion公式。
+	\tcblower
+	求解三维波动方程的关键在于计算球面平均
+	\begin{align}\label{3D-Wave}
+		&u(M,t)  =\pp t\kh{\frac1{4\pi a^2t}\oint_{S_{at}}\varphi\d S}+\frac1{4\pi a^2t}\oint_{S_{at}}\psi\d S\\\notag
+		& =\pp t\kh{\frac1{4\pi}\int_0^{2\pi}\int_0^\pi t\varphi\sin\theta\d\theta\nd\phi}+\frac1{4\pi}\int_0^{2\pi}\int_0^\pi t\psi\sin\theta\d\theta\nd\phi,
+	\end{align}
+	%其中采用球坐标。
+\end{example}
+
+\iffalse
+\begin{align*}
+	\varphi\begin{pmatrix}
+		\xi \\\eta\\\zeta
+	\end{pmatrix}=\varphi\begin{pmatrix}
+		x+at\sin\theta\cos\phi \\
+		y+at\sin\theta\sin\phi \\
+		z+at\cos\theta
+	\end{pmatrix}.
+\end{align*}
+\fi
+\begin{example}{二维波动方程与升维法}{}
+	二维波动方程
+	\begin{align*}
+		\begin{cases}
+			u_{tt}=a^2(u_{xx}+u_{yy}), \\
+			u|_{t=0}=\varphi(x,y),\quad u_t|_{t=0}=\psi(x,y).
+		\end{cases}
+	\end{align*}
+	采用升维法
+	\begin{gather*}
+		U(x,y,z,t)=u(x,y,t),\quad\varPhi(x,y,z)=\varphi(x,y),\\
+		U(x,y,z,t)=\pp t\kh{\frac1{4\pi a^2t}\oint_{S_{at}}\varPhi\d S}+\frac1{4\pi a^2t}\oint_{S_{at}}\varPsi\d S
+	\end{gather*}
+	由于$U,\varPhi,\varPsi$取值与$z$无关，故积分区域可投影到$xy$平面上。
+	记$D_r$是以$(x,y)$为圆心，$r$为半径的圆内区域，在$D_r$上
+	\[
+		\d S=\sqrt{1+\kh{\pv\zeta\xi}^2+\kh{\pv\zeta\eta}^2}\d A=\frac{r\d A}{\sqrt{r^2-(\xi-x)^2-(\eta-y)^2}}.
+	\]
+	故
+	\begin{align}\label{2D-Wave}
+		\begin{aligned}
+			u(x,y,t)&= \frac1{2\pi a}\pp t\int_{D_{at}}\frac{\varphi(\xi,\eta)\d\xi\nd\eta}{\sqrt{a^2t^2-(\xi-x)^2-(\eta-y)^2}} \\
+			&\qquad +\frac1{2\pi a}\int_{D_{at}}\frac{\psi(\xi,\eta)\d\xi\nd\eta}{\sqrt{a^2t^2-(\xi-x)^2-(\eta-y)^2}}.
+		\end{aligned}
+	\end{align}
+\end{example}
+\begin{remark}
+	\eqref{3D-Wave}是在球面上积分，而\eqref{2D-Wave}是在圆域上积分。这个差别在物理上产生了截然不同的效果：对三维情况，波的传播既有清晰的前阵面，也有清晰的后阵面，可用于传播信号，这称为Huygens原理；对二维情况，波的传播有清晰的前阵面，但没有后阵面，这称为波的弥漫，或说这种波具有后效现象，不适合于传播信号。
+\end{remark}
+\begin{example}{一维波动方程}{}
+	对一维弦振动方程，也可升二维，再将积分投影到$\bigfkh{x-at,x+at}$上。
+	记$C_r$是以$(x,y)$为圆心，$r$为半径的圆，在$C_r$上
+	\begin{gather*}
+		\d\ell=\sqrt{1+\kh{\dv\eta\xi}^2}\d\xi=\frac{r\d\xi}{\sqrt{r^2-(\xi-x)^2}}.
+	\end{gather*}
+	故
+	\begin{align*}
+		&\quad\int_{D_{at}}\frac{\varPhi(\xi,\eta)\d\xi\nd\eta}{\sqrt{a^2t^2-(\xi-x)^2-(\eta-y)^2}}=\int_0^{at}\oint_{C_r}\frac{\varphi(\xi)}{\sqrt{a^2t^2-r^2}}\d\ell\d r\\
+		&=2\int_0^{at}\int_{x-r}^{x+r}\frac{\varphi(\xi)}{\sqrt{a^2t^2-r^2}}\frac{r\d\xi}{\sqrt{r^2-(\xi-x)^2}}\d r\tag{交换次序}\\
+		&=\kh{\int_x^{x+at}\int_{\xi-x}^{at}+\int_{x-at}^x\int_{x-\xi}^{at}}\frac{\varphi(\xi)}{\sqrt{a^2t^2-r^2}}\frac{2r\d r}{\sqrt{r^2-(\xi-x)^2}}\d\xi
+	\end{align*}
+	推出d'Alembert公式：
+	\[
+		u(x,t)=\pp t\kh{\frac1{2a}\int_{x-at}^{x+at}\varphi(\xi)\d\xi}+\frac1{2a}\int_{x-at}^{x+at}\psi(\xi)\d\xi.
+	\]
+\end{example}
+\section{二阶线性偏微分方程及标准型}
+两个自变量的二阶其次线性偏微分方程
+\[
+	a_{11}u_{xx}+2a_{12}u_{xy}+a_{22}u_{yy}+b_1u_x+b_2u_y+cu=0.
+\]
+进行变量代换
+\begin{align*}
+	\begin{cases}
+		\xi=\xi(x,y) \\
+		\eta=\eta(x,y)
+	\end{cases}
+	\quad\text{其中}~
+	\det J(\xi,\eta)\neq 0.
+\end{align*}
+变成
+\[
+	A_{11}u_{\xi\xi}+2A_{12}u_{\xi\eta}+A_{22}u_{\eta\eta}+B_1u_\xi+B_2u_\eta+cu=0.
+\]
+其中
+\begin{align*}
+	A_{11} & =a_{11}\xi_x^2+2a_{12}\xi_x\xi_y+a_{22}\xi_y^2,                          \\
+	A_{12} & =a_{11}\xi_x\eta_x+a_{12}\kh{\xi_x\eta_y+\xi_y\eta_x}+a_{22}\xi_y\eta_y, \\
+	A_{22} & =a_{11}\eta_x^2+2 a_{12}\eta_x\eta_y+a_{22}\eta_y^2;                     \\
+	B_1    & =a_{11}\xi_{xx}+2a_{12}\xi_{xy}+a_{22}\xi_{yy}+b_1\xi_x+b_2\xi_y,        \\
+	B_2    & =a_{11}\eta_{xx}+2a_{12}\eta_{xy}+a_{22}\eta_{yy}+b_1\eta_x+b_2\eta_y,
+\end{align*}
+用矩阵表达即
+\begin{align*}
+	\begin{bmatrix}
+		A_{11} & A_{12} \\
+		A_{12} & A_{22}
+	\end{bmatrix}=\begin{bmatrix}
+		\xi_x  & \xi_x  \\
+		\eta_x & \eta_y
+	\end{bmatrix}\begin{bmatrix}
+		a_{11} & a_{12} \\
+		a_{12} & a_{22}
+	\end{bmatrix}\begin{bmatrix}
+		\xi_x  & \xi_x  \\
+		\eta_x & \eta_y
+	\end{bmatrix}\tp.
+\end{align*}
+
+考虑使$A_{11}=0$或$A_{22}=0$则有
+\[
+	a_{11}\kh{\dv yx}^2-2a_{12}\dv yx+a_{22}=0.
+\]
+其判别式
+\[
+	\Delta=a_{12}^2-a_{11}a_{22}.
+\]
+\paragraph{$\Delta>0$，双曲型}不妨设$a_{11}\neq 0$。
+\begin{align}
+	\dv yx=\frac{a_{12}\pm\sqrt\Delta}{a_{11}}\implies
+	\begin{cases}
+		\xi(x,y)=\const \\
+		\eta(x,y)=\const'
+	\end{cases}
+\end{align}
+继而$A_{11}=A_{22}=0,$
+\begin{gather}\notag
+	A_{12}=-\frac{2\Delta}{a_{11}}\xi_y\eta_y\neq 0,\\
+	u_{\xi\eta}+\frac1{2A_{12}}\kh{B_1u_\xi+B_2u_\eta+cu}=0.
+\end{gather}
+上式就是\textbf{双曲型方程的标准型}。
+
+若再作变量替换$p=(\xi+\eta)/2,\;q=(\xi-\eta)/2,$方程可化为
+\begin{align}
+	u_{pp}-u_{qq}+\frac1{A_{12}}\bigfkh{\kh{B_1+B_2}u_q+\kh{B_1-B_2}u_p+cu}=0.
+\end{align}
+\paragraph{$\Delta=0$，抛物型}只有一个线性ODE，不妨设$a_{11}\neq 0$。
+\begin{align}
+	\dv yx=\frac{a_{12}}{a_{11}}\implies\xi(x,y)=\const.
+\end{align}
+任取$\eta(x,y)$，可得$A_{11}=A_{12}=0$
+\begin{align}
+	u_{\eta\eta}+\frac1{A_{22}}\kh{B_1u_\xi+B_2u_\eta+cu}=0.
+\end{align}
+\paragraph{$\Delta<0$，椭圆型}ODE解为复函数，不妨设$a_{11}\neq 0,$
+\begin{align}
+	\dv yx=\frac{a_{12}\pm\i\sqrt{-\Delta}}{a_{11}}\implies \xi(x,y)\pm\i\eta(x,y)=\const.
+\end{align}
+其中$\xi,\eta$为实函数，$A_{12}=0,A_{11}=A_{22}\neq 0,$
+\begin{align}
+	u_{\xi\xi}+u_{\eta\eta}+\frac1{A_{11}}\kh{B_1u_\xi+B_2u_\eta+cu}=0.
+\end{align}
+\section{叠加原理和齐次化原理}
+定义算子为从函数类到函数类的映射$\mathcal T$。
+%一般的，二阶线性PDE中
+%\[\Par\equiv\sum_{i,j=1}^na_{ij}(X)\pw{}{x_i}{x_j}+\sum_{i=1}^nb_i(X)\pp{x_i}+c(X).\]
+%是$\sC^2\to\sC$的线性算子。
+\begin{theorem}{叠加原理}{Superposition Principle}
+	%所谓叠加原理，即
+	线性算子$\cL$可与$\textstyle\lim,\sum,\int$等运算符交换。% 在课程范围内，这是适当的。
+\end{theorem}
+
+齐次化原理也称冲量原理，源于求解有外力的弦振动方程
+\begin{align*}
+	\begin{cases}
+		u_{tt}=a^2u_{xx}+f(x,t),\\
+		u(x,0)=\varphi(x),\quad u_t(x,0)=\psi(x).
+	\end{cases}
+\end{align*}
+利用叠加原理，解$u=u_0+w$；其中$u_0$表示$f\equiv 0$的齐次化解；$w$表示$\varphi,\psi\equiv 0$的解，即纯受迫振动。
+
+考虑时间段$(\tau,\tau+\vd\tau)$内，位移分布$w(x,t)=:v(x,t;\tau)\vd\tau$，外力冲量$f(x,\tau)\vd\tau$，有
+\begin{align*}
+	%w(x,t)=\int_0^tv(x,t;\tau)\d\tau,\quad
+	\begin{cases}
+			v_{tt}=a^2v_{xx},\\
+			v|_{t=\tau}=0\quad v_t|_{t=\tau}=f(x,\tau).
+	\end{cases}\implies v(x,t;\tau)=\frac1{2a}\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\xi,\tau)\d\xi.
+\end{align*}
+%因此
+%\[=\frac1{2a}\int_0^t\bs3\int_{x-a(t-\tau)}^{t+a(t-\tau)}f(\xi,\tau)\d\xi\nd\tau.\]
+叠加得
+\begin{align}
+	\begin{aligned}
+		u(x,t)= {}&\frac12\bigfkh{\varphi(x-at)+\varphi(x+at)}+\frac1{2a}\int_{x-at}^{x+at}\psi(\xi)\d\xi+\frac1{2a}\int_0^t\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\xi,\tau)\d\xi\nd\tau.
+	\end{aligned}
+\end{align}
+\begin{theorem}{齐次化原理}{Homogeneity Principle}
+	定解问题
+	\begin{align*}
+		\begin{cases}
+			\frac{\p^mu}{\p t^m}=\Par u+f(\bm x,t),&\bm x\in\mathbb R^n,\\
+			\edg u_{t=0}=\edg{\pv ut}_{t=0}=\cdots=\edg{\frac{\p^{m-1}u}{\p t^{m-1}}}_{t=0}=0.
+		\end{cases}
+	\end{align*}
+	其中$\Par$为常系数线性偏微分算子，有解
+	\[
+		u(\bm x,t)=\int_0^tv(\bm x,t;\tau)\d\tau,
+	\]
+	$v$满足
+	\begin{align*}
+		\begin{cases}
+			\pv[m]vt=\Par v,&\bm x\in\mathbb R^n,\\
+			\edg v_{t=\tau}=\edg{\pv v{t}}_{t=\tau}=\cdots=\edg{\pv[m-2]vt}_{t=\tau}=0, \\
+			\edg{\pv[m-1]vt}_{t=\tau}=f(\bm x,\tau).
+		\end{cases}
+	\end{align*}
+
+	当$\bm x\in V\subsetneq\mathbb R^n$时，还应加上其次边界条件
+	\[
+		\edg{\Par u}_{\p V}=0,\quad\edg{\Par v}_{\p V}=0.
+	\]
+\end{theorem}
+

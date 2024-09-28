@@ -1,0 +1,271 @@
+\chapter{随机变量及其分布}
+
+\begin{definition}{（一维）随机变量}{random variable}
+	定义随机变量(random variable)~$X:\Omega\to\RR$是样本空间上的实值函数。有
+	\begin{compactitem}
+		\item 离散型(discrete)：至多可数个取值；
+		\item 连续型(continuous)：区间型取值（不严格）；
+		\item 其他
+	\end{compactitem}
+\end{definition}
+$\forall I\subset\RR$可测，记原像集$X\inv(I)\in\cF$，定义\footnote{好看的鱼 v.s.好吃的鱼}
+\[
+	\P_X(X\in I):=\P(X\inv(I)),\quad\forall I\subset\RR~\text{可测}
+\]
+一般记$\P_X$为$\P$。
+\begin{definition}{累计分布函数}{cumulative distribution function}
+	记$X$的累计分布函数(cumulative distribution function, CDF)\index{CDF, 累计分布函数}
+	\[
+		\CDF(x):=\P(X\leqslant x),\quad\forall x\in\RR
+	\]
+	则$\P(a<X\leqslant b)\equiv\CDF(b)-\CDF(a)$。
+\end{definition}
+
+\begin{theorem}{PDF的性质}{property of PDF}
+	\begin{compactenum}
+		\item $\CDF(x)$单调递增（不严格单调）；
+		\item $\lim_{x\to+\infty}\CDF(x)=1,\lim_{x\to-\infty}\CDF(x)=0;$
+		\item $\CDF(x)$右连续，不一定左连续。
+	\end{compactenum}
+\end{theorem}
+\begin{remark}~
+	\begin{compactenum}
+		\item 随机要素来自样本点$\omega$的随机选择；
+		\item $X,Y$同样本空间时，一般的，$aX+bY$等$g(X,Y)$也是随机变量；
+		\item 随机变量同分布$\iff$ CDF相同；但不代表变量相同。
+	\end{compactenum}
+\end{remark}
+
+\section{离散分布}
+
+\begin{definition}{离散分布}{discrete distribution}
+	离散分布可由分布列(probability distribution)表示概率在所有的可能发生的情况中的分布
+	\begin{center}
+		\begin{tabular}{ccccc}
+			\toprule
+			$X$&$x_1$&$x_2$&$\cdots$&$x_n$\\
+			\midrule
+			$p$&$p_1$&$p_2$&$\cdots$&$p_n$\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	概率质量函数(probability mass function, PMF)\index{PMF, 概率质量函数}
+	\[
+		f(x)=\P(X=x),\quad\forall x\in\RR
+	\]
+\end{definition}
+离散分布的CDF为阶梯函数。
+
+\begin{definition}{期望和方差}{expectation and variance}
+	期望(expectation)即均值
+	\begin{align}
+		\E(X):=\sum x_ip_i,
+	\end{align}
+	期望存在要求级数绝对收敛。
+
+	方差(variance)
+	\begin{align}
+		\Var(X):=\sum\bigkh{x_i-\E(X)}^2p_i\equiv\E(X^2)-\E(X)^2.
+	\end{align}
+\end{definition}
+\begin{example}{}{}
+	随机变量$X$的函数$g(X)$的期望
+	\[
+		\E(g(X))=\sum g(x_i)p_i.
+	\]
+\end{example}
+\begin{definition}{Bernoulli分布}{Bernoulli distribution}
+	Bernoulli分布也称0-1分布，$p$为成功概率，记作$X\sim\Bern(p)$，其分布列为
+	\begin{center}
+		\begin{tabular}{ccc}
+			\toprule
+			$X$&0&1\\
+			\midrule
+			$p$&$1-p$&$p$\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{definition}
+\begin{definition}{二项分布}{binominal distribution}
+	$n$次独立Bernoulli试验的成功次数$X$服从二项分布(binominal distribution)，记作$X\sim\Bern(n,p)$，其分布列为：
+	\[
+		\P(X=k)=\binom nk p^k(1-p)^{n-k},\quad k=0,\ldots,n
+	\]
+	$\E(X)=np,\quad\Var(X)=np(1-p).$
+\end{definition}
+\begin{definition}{Poisson分布}{Poisson distribution}
+	一段时间或一定空间内出现的小概率事件次数$X$服从Poisson分布，记作$X\sim\Pois(\lambda)$，其分布列为：
+	\[
+		\P(X=k)=\frac{\lambda^k}{k!}\e{-\lambda},\quad k=0,1,2,\ldots
+	\]
+	$\E(X)=\lambda,\quad\Var(X)=\lambda.$
+\end{definition}
+\begin{theorem}{二项分布趋于Poisson分布}{}
+	$n\to\infty$时，二项分布$\Bern(n,\lambda/n)$趋于Poisson分布$\Pois(\lambda)$
+	\begin{align*}
+		\binom nk p^k&(1-p)^{n-k}=\frac{n!}{k!(n-k)!}\kh{\frac\lambda{n}}^k\kh{1-\frac\lambda{n}}^{n-k}\\
+		&=\frac{\lambda^k}{k!}\kh{1-\frac\lambda{n}}^n\cancel{\frac{n!}{n^k(n-k)!}\kh{1-\frac\lambda{n}}^{-k}}\to\frac{\lambda^k}{k!}\e{-\lambda}.
+	\end{align*}
+	用$\Pois(np)$近似$\Bern(n,p)$的误差最多为$\min(p,np^2)$，证略。
+\end{theorem}
+
+若试验不独立，但满足弱相依条件下，Poisson分布仍为较好近似。
+\begin{example}{弱相依条件举例：配对问题}{weak dependence condition}
+	在\exmref{exm:out of order} 中，尽管$A_i$和$A_j$并不独立，但弱相依
+	\[
+		\P(A_i)=\frac1n\doteq\P(A_i|A_j)=\frac1{n-1}.
+	\]
+	记$X=$拿到自己帽子的人数，当$n\to\infty$时，$X\sim\Pois(1)$
+	\[
+		\P(X=k)=\frac{\e{-1}}{k!},\quad k=0,1,2,\ldots
+	\]
+	下面用常规做法检验。
+	\tcblower
+	$E=$指定的$k$个人拿到自己的帽子，
+	
+	$F=$余下$n-k$个人都未拿到自己的帽子
+	\[
+		\P(EF)=\P(E)\P(F|E)=\frac{(n-k)!}{n!}f(n-k),
+	\]
+	其中$f(n)$表示\exmref{exm:out of order} 中的结果，故
+	\[
+		\P(X=k)=\binom nk\P(EF)=\frac1{k!}f(n-k)\to\frac{\e{-1}}{k!}.
+	\]
+\end{example}
+\section{连续分布}
+\begin{definition}{连续分布}{continuous distribution}
+	若存在$f(x)\geqslant 0$，使得$\forall I\subset\RR$可测，都有
+	\[
+		\P(X\in I)=\int_If(x)\d x
+	\]
+	则称$X$为连续型随机变量，服从连续分布，$f(x)$为概率密度函数(probability density function, PDF)。\index{PDF, 概率密度函数}
+\end{definition}
+\begin{theorem}{连续分布性质}{property of continuous distribution}
+	\begin{itemize}
+		\item $\forall x\in\RR,\enspace\P(X=x)\equiv 0;$
+		\item 归一性：
+			\begin{align}
+				\int\iti f(x)\d x\equiv 1;
+			\end{align}
+		\item 期望和方差
+			\begin{align}
+				\E(X)&=\int\iti xf(x)\d x,\\
+				\Var(X)&=\int\iti(x-\E(X))^2f(x)\d x.
+			\end{align}
+			若期望存在，则要求上积分式\textbf{绝对收敛}。
+		\item 连续分布的CDF $\CDF(x)$连续且可导，且
+			\begin{align}
+				\CDF'(x)=f(x).
+			\end{align}
+			若$\CDF(x)$严格递增，则$\CDF^{-1}(y)$存在；但若其不严格递增，也可well define
+			\begin{align}
+				\CDF^{-1}(y):=\inf\set x{\CDF(x)\geqslant y}.
+			\end{align}
+	\end{itemize}
+\end{theorem}
+\iffalse
+\begin{example}{常见连续分布}{}
+	\begin{compactenum}
+		\item 均匀分布$f(x;a,b)=\frac1{b-a},a\leqslant x\leqslant b;$
+		\item 指数分布$f(x;\lambda)=\lambda\e{-\lambda x},x\geqslant 0;$
+		\item 正态分布$f(x;\mu,\sigma^2)=\frac1{\sqrt{2\pi}\sigma}\e{-(x-\mu)^2/2\sigma^2},-\infty<x<\infty;$
+		\item 伽玛分布$f(x;\alpha,\lambda)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\e{-\lambda x}.x\geqslant 0;$
+		\item 卡方分布$f(x;n)=\frac{x^{n/2-1}}{2^{n/2}\Gamma(n/2)}\e{-x/2},x\geqslant 0;$
+	\end{compactenum}
+\end{example}
+\fi
+\begin{definition}{均匀分布}{uniform distribution}
+	均匀分布(uniform distribution)记作$X\sim\Unif(a,b)$，%随机数$\Unif(0,1)$
+	\begin{align}
+		f(x)=\begin{cases}
+			\frac1{b-a},&x\in(a,b)\\
+			0,&\text{elsewhere}
+		\end{cases}
+	\end{align}
+	$\E(X)=\frac{a+b}2,\quad\Var(X)=\frac{(b-a)^2}{12}.$
+	%$\CDF(x)=\frac{x-a}{b-a},\quad\E(X)=\frac{a+b}2,\quad\Var(X)=\frac{(b-a)^2}{12};$
+\end{definition}
+\begin{definition}{正态分布}{normal distribution}
+	正态分布(normal distribution)记作$X\sim\Norm(\mu,\sigma^2)$，%标准正态$\Norm(0,1)$
+	\begin{align}
+		f(x)=\frac1{\sqrt{2\pi}\sigma}\exp\biggfkh{-\frac{(x-\mu)^2}{2\sigma^2}},\quad x\in\RR
+	\end{align}
+	$\CDF(x)=:\Phi(x),\quad\E(X)=\mu,\quad\Var(X)=\sigma^2;$
+\end{definition}
+\begin{definition}{指数分布}{exponential distribution}
+	指数分布(exponential distribution)通常刻画寿命、等待时间，记作$X\sim\Expo(\lambda)$，
+	\begin{align}
+		f(x)=\begin{cases}
+			\lambda\e{-\lambda x},&x>0\\
+			0,&x\leqslant 0
+		\end{cases}
+	\end{align}
+	定义平均寿命
+	\[
+		\beta:=\E(X)=\frac1\lambda,\quad\Var(X)=\beta^2.
+	\]
+	也有教材因此记作$\Expo(\beta)$。
+\end{definition}
+
+指数分布的尾概率
+\[
+	\P(X>x)=\e{-\lambda x},%\equiv 1-\CDF(x)
+\]
+与Poisson分布有关。
+
+\begin{example}{指数分布的导出}{}
+	失效率
+	\begin{align*}
+		\P(x<X<x+\d x|X>x)&=\frac{\P(x<X<x+\d x)}{\P(X>x)}\\
+		&=\frac{\CDF(x+\d x)-\CDF(x)}{1-\CDF(x)}\doteq\frac{\CDF'(x)}{1-\CDF(x)}\d x
+	\end{align*}
+	令失效率为$\lambda(x)\d x$
+	\[
+		\frac{\CDF'(x)}{1-\CDF(x)}=\lambda(x),\implies\CDF(x)=1-\exp\biggfkh{-\int_0^x\lambda(t)\d t}.
+	\]
+	若假设无老化：$\lambda(t)\equiv\lambda$，则分布为指数分布：
+	\begin{align}
+		\CDF(x)=1-\e{-\lambda x},\quad x>0,
+	\end{align}
+
+	这体现出指数分布的无记忆性：
+	\[
+		\P(X>t+\tau|X>\tau)=\frac{\e{-\lambda(t+\tau)}}{\e{-\lambda\tau}}=\e{-\lambda t}=\P(X>t)
+	\]
+	与$\tau$无关。
+
+	\tcblower
+	
+	改进$\lambda(x)=\alpha x^{\alpha+1}/\beta^\alpha$，得到Weibull分布
+	\begin{align*}
+		\CDF(x)=1-\e{-(x/\beta)^\alpha},\quad x>0.
+	\end{align*}
+\end{example}
+
+\section{随机变量的函数}
+
+设$Y=g(X)$，$X$离散可推出$Y$离散。
+
+\begin{theorem}{连续型随机变量的函数}{}
+	若$g$处处可导且严格单调，则$Y=g(X)$的PDF为
+	\begin{align}
+		f_Y(y)=f_X\bigkh{g^{-1}(y)}\abs{\fkh{g^{-1}(y)}'}.
+	\end{align}
+	其本质是
+	\begin{align}
+		\CDF_Y(y)=\CDF_X\bigkh{g^{-1}(y)}.
+	\end{align}
+\end{theorem}
+\begin{example}{生成随机变量}{}
+	服从CDF $\CDF(y)$的随机变量$Y$可由随机数$X\sim\Unif(0,1)$生成：
+	\begin{align}
+		Y=\CDF\inv(X).
+	\end{align}
+\end{example}
+\section*{Review}
+\begin{compactenum}
+	\item PMF/PDF, CDF
+	\item 期望$\mu$、标准差$\sigma$；标准化$\frac{X-\mu}\sigma$
+	\item 参数的意义：位置、尺度、形状
+	\item $Y=g(X)$
+\end{compactenum}

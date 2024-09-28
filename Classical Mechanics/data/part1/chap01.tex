@@ -1,0 +1,276 @@
+\chapter{运动学}
+
+本章主要讨论质点和质点系统的运动学(kinematics)。
+运动学描述系统（点、物体、点的系统等等）的运动，而不关心系统为什么会这么运动（这是动力学的内容）。
+
+\section{Galileo时空}
+
+\subsection{仿射空间}
+
+基于Galileo相对性原理，我们需要研究一个“去掉原点的线性空间”。
+\begin{definition}{仿射空间}{affine space}
+    一个仿射空间(affine space) $(A,V)$是一个集合$A$和一个与之相伴的线性空间$V$。且存在映射
+    \begin{equation}
+        f:A\times V\to A:(a,v)\mapsto a+v,
+    \end{equation}
+    满足：
+    \begin{itemize}
+        \item 右幺(right identity)：$V$中的零向量0满足$\forall a\in A$有$a+0=a$；
+        \item 结合律(associativity)：$\forall u,v\in V,\forall a\in A$有$(a+u)+v=a+(u+v)$；
+        \item 正则性：$\forall a\in A$，映射$V\to A:v\mapsto a+v$是一个双射。
+    \end{itemize}
+    % 仿射空间$(A,V)$的维数就是相伴线性空间$V$的维数$\dim(V)$。
+\end{definition}
+\begin{remark}~
+    \begin{itemize}
+        \item 仿射空间与线性空间的区别在于其没有原点，所以仿射空间没有定义加法；
+        \item 前两个性质定义了$V$作为加法群在$A$上的右作用，正则性等价于这个作用具有：
+        \begin{itemize}
+            \item 传递性(transitive)：$\forall a,b\in A,\exists v\in V$使得$b=a+v$；
+            \item 自由(free)：$u,v\in V$，如果存在$a\in A$使得$a+u=a+v$，则$u=v$；
+        \end{itemize}
+        \item $\forall v\in V$，$v$在$A$上的右作用可定义映射：
+        \[
+            g_v:A\to A:a\mapsto a+v
+        \]
+        $g_v$是一个双射，称为$A$上的一个平移(translation)，故$V$也叫$A$的平移空间；
+        \item 减法：$\forall a,b\in A$，存在唯一的$v\in V$使得$b=a+v$。记$v=b-a$。
+    \end{itemize}
+\end{remark}
+\begin{example}{}{}
+    $V$是一个线性空间，则$(V,V)$是一个仿射空间，其右作用就是线性空间的加法。
+
+    $V$是$\RR^n$中一个$m$维的线性子空间，$v\in\RR^n$，则$(V+v,V)$是一个仿射空间。
+\end{example}
+
+后面我们用$\AA^n$表示平移空间为$\RR^n$的$n$维仿射空间。
+
+\begin{definition}{仿射标架}{affine frame}
+    仿射空间$(A,V)$的仿射标架(affine frame)是集合$\{o;v_1,\ldots,v_n\}$，其中$o\in A$是原点(origin)，$(v_1,\ldots,v_n)$是$V$的一组基。由定义，$\forall a\in A$都可以被唯一地写成
+    \begin{equation}
+        a=o+\lambda^1v_1+\cdots+\lambda^nv_n,
+    \end{equation}
+    $(\lambda^1,\ldots,\lambda^n)$是$a$在仿射标架$\{o;v_1,\ldots,v_n\}$中的仿射坐标(affine coordinates)。
+\end{definition}
+仿射标架定义了一一映射$A\to\RR^n:a\mapsto(\lambda^1,\ldots,\lambda^n)$
+
+\subsection{Galileo时空}
+
+经典力学的时空模型是Galileo时空。
+
+\begin{definition}{Galileo时空}{Galilean spacetime}
+    Galileo时空(spacetime)是一个拥有Galileo结构(structure)的四维仿射空间$(\AA^4,\RR^4)$：
+    % $a\in\AA^4$称为事件(event)或世界点(world point)。
+    \begin{itemize}
+        \item 时间$T$是非零线性映射$T:\RR^4\to\RR$。
+        
+        $\forall a,b\in\AA^4$，事件$a$和事件$b$的时间间隔为$T(b-a)$；
+        \item 若$T(b-a)=0$，则$a$和$b$是同时的(simultaneous)。
+        
+        事件$a$的同时空间是$\AA_a=\{b\in\AA^4\,|\,T(b-a)=0\}$，同构于$\AA^3$；
+        \item $\forall a,b\in\AA_c$，同时事件$a,b$之间的距离定义为
+        \begin{equation}
+            d(a,b)\equiv|a-b|=\sqrt{(a-b,a-b)},
+        \end{equation}
+        其中$(\cdot,\cdot)$是$\RR^3$中的Euclid内积。即每个同时空间$\AA_c$相伴的平移空间是一个Euclid空间。
+    \end{itemize}
+\end{definition}
+\begin{example}{Galielo坐标时空}{Galilean coordinate spacetime}
+    考虑$\RR\times\RR^3$作为仿射空间，并在$\RR^3$的平移空间上赋予通常的Euclid度量，则$\RR\times\RR^3$是一个Galileo时空，也记为$\RR_t\times\RR^3$。时间$T$为投影映射
+    \begin{equation}
+        \pi_t:\RR_t\times\RR^3\to\RR_t:(t,\bm x)\mapsto t.
+    \end{equation}
+    这个仿射空间也叫Galielo坐标时空。
+\end{example}
+\begin{definition}{Galileo群}{Galilean group}
+    Galileo群$\Gal(3)$是$\AA^4$上所有保持Galileo结构的仿射变换构成的群。即$\forall g\in\Gal(3)$：
+    \begin{itemize}
+        \item $\forall a,b\in\AA^4,T(g(a)-g(b))=T(a-b)$；
+        \item $\forall a,b\in\AA_c,d(g(a),g(b))=d(a,b)$；
+    \end{itemize}
+\end{definition}
+\begin{theorem}{}{}
+    $\RR\times\RR^3$上的Galileo群$\Gal(3)$由以下三类变换的复合生成：
+    \begin{itemize}
+        \item 匀速运动$g_1:(t,\bm x)\mapsto(t,\bm x+\bm vt)$，其中速度$\bm v\in\RR^3$；
+        \item 平移$g_2:(t,\bm x)\mapsto(t+s,\bm x+\bm s)$，其中$(s,\bm s)\in\RR\times\RR^3$；
+        \item 转动$g_3:(t,\bm x)\mapsto(t,S\bm x)$，其中$S\in O(3)$
+    \end{itemize}
+    $\forall g\in\Gal(3)$都可以被唯一地写成$g=g_1\circ g_2\circ g_3$。
+\end{theorem}
+\begin{example}{}{}
+    映射$(t,\bm x)\mapsto(t,\bm x+\bm at^2/2)\notin\Gal(3)$，因为它不是仿射变换。
+\end{example}
+\begin{theorem}{}{}
+    所有Galileo时空都互相同构；特别地，也都同构于Galileo坐标时空$\RR\times\RR^3$。
+\end{theorem}
+因此如无额外说明，以后提到的Galileo时空都指$\RR\times\RR^3$。
+
+\subsection{Galileo时空中粒子的运动}
+当我们不关心对象的内部结构，只关心对象的位置的时候，我们可以用一个点来代表它，称之为粒子(particle)。
+\begin{definition}{世界线}{world line}
+    Galileo时空中，一个粒子的运动轨迹(trajectory)或世界线(world line)是$\RR_t\times\RR^3$的一个可微\footnote{此处指总是具有所需要的可微性质。}截面$\sigma:\RR_t\to\RR_t\times\RR^3$。
+
+    更一般的，我们可以用可微映射$q:I\to\RR^3$描述单个粒子的运动，其中$I$是$\RR_t$的一个区间。
+    % 它也定义了$\RR\times\RR^3$中的一个局部截面。这个轨迹也可以看成是完整轨迹的一部分。
+    映射$q$的陪域$\RR^3$也叫做位形空间（configuration space）。
+
+    当位形空间是$\RR^n$的时候，我们也将$q$记为$\bm x$或者$\bm x(t)$。
+\end{definition}
+伽利略时空中单粒子的位形空间即是$\RR^3$。
+\begin{definition}{速度}{velocity}
+    若某粒子在Galileo时空中的运动由$\bm x(t)$描述，则$\bm x(t)$的一阶导
+    \begin{equation}
+        \dotbm x=\dv{\bm x}t,
+    \end{equation}
+    是速度(velocity)矢量。
+\end{definition}
+\begin{example}{}{}
+    考虑匀速直线运动$\bm x(t)=\bm x_0+\bm vt$，$\dotbm x(t)=\bm v$是一个常映射。
+    匀速直线运动在Galileo变换下仍然是匀速直线运动。
+\end{example}
+
+\begin{definition}{多粒子运动}{}
+    Galileo时空中$N$个粒子的运动可以用$\RR_t\times\RR^3$中的$N$个截面$\sigma_1,\ldots,\sigma_N$描述。但是为了体现经典力学中的绝对时间，即不同粒子的运动共用一个时间轴$\RR_t$，我们应该用
+    \[
+        \underbrace{(\RR_t\times\RR^3)\times_{\RR_t}\cdots\times_{\RR_t}(\RR_t\times\RR^3)}_N
+    \]
+    中的一个截面来描述这$N$个粒子的运动轨迹。其中$\times_{\RR_t}$是$\RR_t$上的纤维积(fiber product)，其定义为
+    \begin{equation}
+        (\RR_t\times\RR^3)\times_{\RR_t}(\RR_t\times\RR^3)\equiv\{(t_1,\bm x_1,t_2,\bm x_2)\in(\RR_t\times\RR^3)\times(\RR_t\times\RR^3)\,|\,t_1=t_2\}
+    \end{equation}
+    等价地，Galileo时空中$N$个粒子的运动可以用映射$\bm x(t):\RR_t\to\RR^{3N}$或$\bm x(t):I\to\RR^{3N}$描述。此时位形空间为$\RR^{3N}$。
+\end{definition}
+
+\section{约束系统}
+
+\begin{definition}{约束}{constraints}
+    很多时候粒子的位置$\bm x(t)$需要满足额外的方程$f(\bm x)=0$，这些方程叫做对系统的约束(constraints)。
+\end{definition}
+\begin{example}{球面约束}{constraints, |x|=l}
+    考虑一个被限制在半径为$\ell$的球面上的粒子，其坐标$\bm x$满足约束
+    \[
+        \abs{\bm x}^2=\ell^2,
+    \]
+    这个约束在变换$(t,\bm x)\mapsto(t,\bm x+\bm vt)$下变成一个与时间$t$相关的约束，因此其与Galileo结构不相容。因为这个约束将球面的球心看作一个特殊的点。
+\end{example}
+\begin{example}{刚性杆约束}{constraints, |x1-x2|=l}
+    考虑被长为$\ell$的刚性杆连接的两个粒子，其坐标$(\bm x_1,\bm x_2)$满足约束
+    \[
+        \abs{\bm x_1-\bm x_2}^2=\ell^2,
+    \]
+    这个约束在Galileo变换下始终保持同样的形式，因此其与Galileo结构相容。
+\end{example}
+当有约束的时候，选取不同的坐标系可能会让约束简化。
+\begin{example}{球面约束·续}{constraints, |x|=l, II}
+    接\exmref{exm:constraints, |x|=l}，约束在直角坐标系下是关于$\bm x=(x,y,z)$三个分量的方程。但若选取球坐标$(r,\theta,\phi)$满足
+    \[
+        \bm x=(r\sin\theta\cos\phi,r\sin\sin\theta\phi,r\cos\theta)
+    \]
+    约束$\abs{\bm x}^2=\ell^2$在球坐标下变为
+    \[
+        \abs r^2=\ell^2,
+    \]
+    与$\theta,\phi$无关。此时粒子的位形空间为区域$0\leq\theta<\pi$和$0\leq\phi<2\pi$。
+\end{example}
+
+\subsection{微分流形}
+
+有约束的系统的位形空间是一个微分流形。
+
+\begin{definition}{拓扑}{}
+    集合$X$上的拓扑(topology) $\mathcal T$是$X$的子集族，其元素称为$X$的开集(open set)，满足：
+    \begin{itemize}
+        \item $\varnothing,X$是$X$的开集：$\varnothing\in\mathcal T,X\in\mathcal T$；
+        \item 有限个$X$的开集之交是$X$的开集：$\forall U_i\in\mathcal T,\cup_{i=1}^nU_i\in\mathcal T$；
+        \item 任意个$X$的开集之并是$X$的开集：$\forall U_i\in\mathcal T,\cap_{i=1}^\infty U_i\in\mathcal T$。
+    \end{itemize}
+    并称$(X,\mathcal T)$是拓扑空间(topological space)。
+\end{definition}
+在明确了拓扑$\mathcal T$后，可以只用$X$表示拓扑空间。
+\begin{definition}{同胚}{homeomorphic}
+    两个拓扑空间$(X,\mathcal T_X)$和$(Y,\mathcal T_Y)$之间的同胚映射(homeomorphism)
+    \begin{equation}
+        f:(X,\mathcal T_X)\to(Y,\mathcal T_Y)
+    \end{equation}
+    满足：$f$是一个双射，且$f$和$f^{-1}$是连续的。
+    
+    此时称$X,Y$是同胚的(homeomorphic)或拓扑同构的(topological isomorphic)，记作$X\cong Y$。
+\end{definition}
+\begin{theorem}{}{}
+    同胚是一种等价关系：
+    \begin{itemize}
+        \item 自反性：$X\cong X$，即任何拓扑空间都与其自身同胚；
+        \item 对称性：$X\cong Y\iff Y\cong X$；
+        \item 传递性：$X\cong Y,Y\cong Z\implies X\cong Z$。
+    \end{itemize}
+\end{theorem}
+\begin{example}{}{}
+    在Euclid度量空间$(\RR,\rho)$中，任何开区间都是同胚的，比如可以找到$(0,1)$与$(1,+\infty)$之间的同胚映射：
+    \[
+        f:(0,1)\to(1,+\infty):x\mapsto\frac1x.
+    \]
+    同时，任何闭区间都是同胚的。
+\end{example}
+\begin{definition}{坐标卡}{coordinate chart}
+    一个$n$维的坐标卡(coordinate chart)是拓扑空间$X$中的一个开集$U$到$\RR^n$的开集$V$的同胚映射
+    \begin{equation}
+        \phi:U\to V\subset\RR^n.
+    \end{equation}
+    其中$U$和$V$上各自赋予子空间拓扑。
+\end{definition}
+物理上的坐标系一般指某个坐标卡。我们也将坐标卡记为$(U,\phi)$。
+\begin{definition}{连接函数}{transition function}
+    若$\phi:U_1\to V_1$和$\psi:U_2\to V_2$是$X$上的两个坐标卡，且$U_1\cap U_2\neq\varnothing$，则$\phi,\psi$之间的连接函数(transition function)为
+    \begin{equation}
+        \psi\circ\phi^{-1}:\phi(U_1\cap U_2)\mapsto\psi(U_1\cap U_2).
+    \end{equation}
+    若$\psi\circ\phi^{-1}$可微，则$\phi,\psi$是相容或相关的(compatible)。若$U_1\cap U_2=\varnothing$，则默认相容。
+\end{definition}
+\begin{definition}{图册}{atlas}
+    对于拓扑空间$X$，若存在一族两两相容的坐标卡$\mathcal A=\{U_i\}_{i\in I}$使得$X=\cup_{i\in I}U_i$，则称$\mathcal A$是$X$的一个图册(atlas)。
+\end{definition}
+\begin{theorem}{图册的等价关系}{}
+    $X$上的两个图册$\mathcal A_1,\mathcal A_2$等价当且仅当其并$\mathcal A_1\cup\mathcal A_2$也是$X$上的一个图册。
+    % 这是$X$上所有图册的集合的一个等价关系。
+\end{theorem}
+\begin{definition}{微分流形}{differentiable manifold}
+    拓扑空间$X$上的一个微分结构$\mathcal D$是$X$上等价图册的类。$X$和其上微分结构$\mathcal D$构成一个微分流形(differentiable manifold) $M=(X,\mathcal D)$。
+\end{definition}
+微分结构$\mathcal D$中所有图册的并$\mathcal A_{\mathcal D}=\cup\set{\mathcal A}{\mathcal A\in\mathcal D}$叫做$\mathcal D$的最大图册。如果一个微分结构中图册的连接函数都是$C^r$函数（$r$阶导连续），则称相应的微分流形为$C^r$流形。特别的，如果连接函数都是$C^\infty$函数（光滑函数），我们得到$C^\infty$流形（光滑流形）。如果微分流形$M$是连通的，则它的一个图册中的每个坐标卡的维数都相同，此时这个维数也就是$M$的维数。我们考虑的位形空间基本上都是连通流形。
+\begin{example}{}{}
+    $(A,V)$是一个$n$维仿射空间。选取仿射标架$(o;v_1,\ldots,v_n)$后得到坐标卡
+    \[
+        \phi:A\to\RR^n:a\mapsto(\lambda^1,\ldots,\lambda^n),
+    \]
+    此时坐标卡本身构成一个图册。
+\end{example}
+\begin{example}{}{}
+    $\RR^3$中的单位球面$\mathbb S^2$
+    \begin{equation}
+        x^2+y^2+z^2=1
+    \end{equation}
+    上的一个开覆盖$U_N\cap U_S$，其中$U_N=\mathbb S^2\backslash\{S=(0,0,-1)\}$和$U_S=\mathbb S^2\backslash\{N=(0,0,1)\}$。可通过球极投影构造如下坐标卡
+    \begin{subequations}
+        \begin{align}
+            \phi_N:U_N\to\RR^2:(x,y,z)&\mapsto\kh{\frac{2x}{1+z},\frac{2y}{1+z},1};\\
+            \phi_S:U_S\to\RR^2:(x,y,z)&\mapsto\kh{\frac{2x}{1-z},\frac{2y}{1-z},-1}.
+        \end{align}
+    \end{subequations}
+    其连接函数
+    \begin{equation}
+        \phi_{NS}\equiv\phi_N\circ\phi_S^{-1}:\RR^2\backslash\{(0,0)\}\to\RR^2\backslash\{(0,0)\}:(X,Y)\mapsto\kh{\frac{2X}{X^2+Y^2},\frac{2Y}{X^2+Y^2}}
+    \end{equation}
+    是光滑的。这样我们就得到了$\mathbb S^2$上的一个图册，这个图册所属的等价类就是$\mathbb S^2$上的一个光滑结构。
+    \tcblower
+    我们还可以在$\mathbb S^2$上定义另一个图册，它也包含两个坐标卡
+    \begin{subequations}
+        \begin{align}
+            \phi_1^{-1}:(0,\pi)\times(0,2\pi)\to(\sin\theta\cos\phi,\sin\theta\sin\phi,\cos\theta);\\
+            \phi_2^{-1}:(0,\pi)\times(0,2\pi)\to(\sin\theta\sin\phi,\cos\theta,\sin\theta\cos\phi).
+        \end{align}
+    \end{subequations}
+    这两个坐标卡来源于直角坐标变换成球坐标。可以验证它和之前的图册是等价的。
+\end{example}
+
+

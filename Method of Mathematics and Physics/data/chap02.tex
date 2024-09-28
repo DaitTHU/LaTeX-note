@@ -1,0 +1,447 @@
+\chapter{分离变量法}
+回忆一些典型ODE方程的基本解法
+\begin{method}{二阶常系数其次方程}{}
+	形如
+	\begin{equation}
+		y''+ay'+by=0.
+	\end{equation}
+	其特征方程$\lambda^2+a\lambda+b=0$的解$\lambda_{1,2}$
+	\begin{compactenum}[I.]
+		\item $\Delta>0,$\quad$y=A\e{\lambda_1x}+B\e{\lambda_2x};$
+		\item $\Delta=0,$\quad$\lambda_{1,2}=\lambda,$\quad$y=(A+Bx)\e{\lambda x};$
+		\item $\Delta<0,$\quad$\lambda_{1,2}=\alpha\pm\i\beta$,\quad$y=(A\cos\beta x+B\sin\beta x)\e{\alpha x}$。
+	\end{compactenum}
+\end{method}
+\begin{method}{二阶非其次方程}{}
+	形如
+	\begin{equation}
+		y''+a(x)y'+b(x)y=f(x).
+	\end{equation}
+	二阶非其次方程
+	根据叠加定理，其解$y=y_0+y_\mathrm s;$其中$y_0$为$f(x)\equiv 0$时的其次通解，$y_\mathrm s$为特解。
+	
+	若$y_1,y_2$为对应的其次方程线性无关解，则可求出一特解
+	\begin{align}\label{General to Particular Solution}
+		y_\mathrm s(x)=\int_{x_0}^x\frac{y_1(\xi)y_2(x)-y_1(x)y_2(\xi)}{y_1(\xi)y_2'(\xi)-y_1'(\xi)y_2(\xi)}f(\xi)\d \xi,\quad\forall x_0.
+	\end{align}
+	特解满足其次边界条件
+	\[
+		y_\mathrm s(x_0)=0,\quad y'_\mathrm s(x_0)=0.
+	\]
+\end{method}
+\begin{method}{Euler方程}{}
+	形如
+	\begin{equation}
+		x^2y''+axy'+by=f(x).
+	\end{equation}
+	令$x=\e t,\;u(t)=y(\e t)=y(x)$方程变为
+	\begin{align}
+		u''+(a-1)u'+bu=f(\e t).
+	\end{align}
+\end{method}
+
+\section{特征值和特征函数}
+在讨论分离变量前，先引入Fourier级数的概念。
+\begin{definition}{Fourier级数}{Fourier Series}
+	$f(x)$周期为$2\ell$，则$f(x)$的Fourier级数
+	\begin{align}
+		\FS f(x)=\frac{a_0}2+\sum_{n=1}^\infty\kh{a_n\cos\frac{n\pi x}\ell+b_n\sin\frac{n\pi x}\ell}.
+	\end{align}
+	其中Fourier系数
+	\begin{align*}
+		a_n & =\frac1\ell\int_{-\ell}^\ell f(x)\cos\frac{n\pi x}\ell\d x; \\
+		b_n & =\frac1\ell\int_{-\ell}^\ell f(x)\sin\frac{n\pi x}\ell\d x.
+	\end{align*}
+\end{definition}
+\begin{theorem}{Parserval等式}{Parserval Equality}
+	若$f\in\mathscr L^2\bigfkh{-\ell,\ell}$即平方可积，则
+	\[
+		\frac1\ell\int_{-\ell}^\ell f^2(x)\d x=\frac{a_0^2}2+\sum_{n=1}^\infty\kh{a_n^2+b_n^2}.
+	\]
+\end{theorem}
+\begin{theorem}{Dirichlet收敛定理}{Dirichlet Convergence Theorem}
+	若
+	\begin{compactenum}
+		\item $f,f'$连续或分段连续，至多有有限个第一类间断点；%（可去或跳跃）
+		\item $f$至多有有限个极值点；
+	\end{compactenum}
+	则
+	\begin{align*}
+		\FS f(x)
+		=\begin{cases}
+			\kh{f(x^+)+f(x^-)}/2,        & x\in(-\ell,\ell) \\
+			\kh{f(-\ell^+)+f(\ell^-)}/2, & x=\pm\ell
+		\end{cases}
+	\end{align*}
+	在$f$连续点处，$\FS f=f$。
+\end{theorem}
+\begin{example}{有界弦问题}{}
+	有界弦
+	\begin{align*}
+		\begin{cases}
+			u_{tt}=a^2u_{xx},\quad x\in\kh{0,L},\;t>0 \\
+			u(0,t)=u(L,t)=0,                 \\
+			u(x,0)=\varphi(x)\quad u_t(x,0)=\psi(x).
+		\end{cases}
+	\end{align*}
+	假设变量是可以分离的，即$u(x,t)=X(x)T(t),$则引入\textbf{特征值}$\lambda$
+	\[
+		\frac{X''}X=\frac{T''}{a^2T}=-\lambda.
+	\]
+	要使$X''+\lambda X=0$且$X(0)=X(L)=0$仅有
+	\[
+		\lambda_n=\kh{\frac{n\pi}L}^2,\quad X_n(x)=\sin\frac{n\pi x}L,\quad n=1,2,\ldots.
+	\]
+	进而$T''+a^2\lambda T=0$
+	\[
+		T_n(t)=C_n\cos\frac{n\pi at}L+D_n\sin\frac{n\pi at}L.
+	\]
+	因此原方程应有\textit{形式解}
+	\begin{align}
+		u(x,t)=\sum_{n=1}^\infty\fkh{C_n\cos\frac{n\pi at}L+D_n\sin\frac{n\pi at}L}\sin\frac{n\pi x}L.
+	\end{align}
+	$C_n,D_n$由初始条件确定
+	\begin{align*}
+		u(x,0)&=\sum_{n=1}^\infty C_n\sin\frac{n\pi x}L=\varphi(x),            \\
+		u_t(x,0)&=\sum_{n=1}^\infty D_n\frac{n\pi a}L\sin\frac{n\pi x}L=\psi(x).
+	\end{align*}
+	恰好对应Fourier正弦系数$\varphi^{\sine}_n,\psi^{\sine}_n$
+	\begin{align*}
+		C_n & =\frac2L\int_0^L\varphi(x)\sin\frac{n\pi x}L\d x=:\varphi_n^{\sine},                  \\
+		D_n & =\frac2{n\pi a}\int_0^L\psi(x)\sin\frac{n\pi x}L\d x=:\frac{L}{n\pi a}\psi_n^{\sine}.
+	\end{align*}
+	
+	至于形式解是否符合条件，不是考试涉及的范围。
+\end{example}
+\begin{example}{圆域Laplace方程}{}
+	圆域上的Laplace方程，采用极坐标
+	\begin{align*}
+		\begin{cases}
+			\lap_2u=u_{rr}+\frac1ru_r+\frac1{r^2}u_{\theta\theta}=0,&r<r_0\\
+			u(r_0,\theta)=\varphi(\theta)
+		\end{cases}
+	\end{align*}
+	还应包括自然条件，即
+	\[
+		\limsup_{r\to0^+}\abs{u(r,\theta)}<\infty.
+	\]
+	和周期边界条件
+	\[
+		u(r,0)=u(r,2\pi),\quad u_\theta(r,0)=u_\theta(r,2\pi).
+	\]
+	
+	分离变量$u(r,\theta)=R(r)\varTheta(\theta)$
+	\begin{align*}
+		\begin{cases}
+			r^2R''+rR'-\lambda R=0\\
+			\varTheta''+\lambda\varTheta=0.
+		\end{cases}
+	\end{align*}
+	由周期条件，特征值$\lambda=n^2,\;n=0,1,2,\ldots$
+	\[
+		\varTheta_n(\theta)=a_n\cos n\theta+b_n\sin n\theta.
+	\]
+	再解$R$的Euler方程，可得
+	\[
+		R_n(r)=
+		\begin{cases}
+			c_0+d_0\ln r,&n=0\\
+			c_nr^n+d_nr^{-n},&n\geqslant 1
+		\end{cases}
+	\]
+	再由自然条件$\abs{R(0)}<\infty$，可知$d_i\equiv 0$，进而
+	\[
+		u(r,\theta)=\frac{a_0}2+\sum_{n=1}^\infty r^n(a_n\cos n\theta+b_b\sin n\theta),
+	\]
+	结合边界条件$u(r_0,\theta)=\varphi(\theta)$，求得系数
+	\[
+		a_n=\frac1{\pi r_0^n}\int_0^{2\pi}\varphi(\vartheta)\cos n\vartheta\d\vartheta,\quad b_n=\frac1{\pi r_0^n}\int_0^{2\pi}\varphi(\vartheta)\sin n\vartheta\d\vartheta.
+	\]
+	因此
+	\begin{align*}
+		u(r,\theta)&=\frac1{2\pi}\int_0^{2\pi}\varphi(\vartheta)\d\vartheta+\\
+		&\qquad\frac1\pi\sum_{n=1}^\infty\kh{\frac r{r_0}}^n\int_0^{2\pi}\varphi(\vartheta)(\cos n\vartheta\cos n\theta+\sin n\vartheta\sin n\theta)\d\vartheta\\
+		&=\frac1{2\pi}\int_0^{2\pi}\varphi(\vartheta)\fkh{1+2\sum_{n=1}^\infty\kh{\frac r{r_0}}^n\cos n(\theta-\vartheta)}\d\vartheta
+	\end{align*}
+	又由Euler公式
+	\begin{align*}
+	\sum_{n=0}^\infty k^n\cos n\theta=\sum_{n=0}^\infty\Re k^n\e{\i n\theta}=\Re\frac1{1-k\e{\i\theta}}=\frac{1-k\cos\theta}{1+k^2-2k\cos\theta}.
+	\end{align*}
+	故得到圆域内的Poisson公式
+	\begin{align}
+		u(r,\theta)&=\frac1{2\pi}\int_0^{2\pi}\frac{(r_0^2-r^2)\varphi(\vartheta)}{r_0^2+r^2-2r_0r\cos(\theta-\vartheta)}\d\vartheta
+	\end{align}
+	积分内式子称为Poisson核。
+\end{example}
+\begin{example}{圆域Neumann问题}{}
+	圆域上的Neumann问题
+	\begin{align*}
+		\begin{cases}
+			\lap_2u=0,\quad r<R\\
+			\edg{\pv un}_{r=R}=\varphi(\theta)
+		\end{cases}
+	\end{align*}
+	由~\textcolor[rgb]{0,.8,0}{Green公式}
+	\begin{align*}
+		{\color[rgb]{0,.8,0}{\int_{D_R}\lap u\d x\nd y=\oint_{r=R}\pv un\d\ell}}=R\int_0^{2\pi}\varphi(\theta)\d\theta=0.
+	\end{align*}
+	剩下的证明留给读者
+\end{example}
+
+\section{Sturm-Liouville定理}
+\begin{example}{有限杆热传导}{}
+	设杆温度$u=u(x,t)$，则定解问题
+	\begin{align*}
+		\begin{cases}
+			u_t=a^2u_{xx},\quad x\in\kh{0,L},\;t>0,\\
+			u(0,t)=0,\quad u_t(L,t)+hu(L,t)=0,\\
+			u(x,0)=\varphi(x).
+		\end{cases}
+	\end{align*}
+	其中热交换常数$h>0$。
+	
+	分离常数$u(x,t)=X(x)T(t),$
+	\begin{align*}
+		\begin{cases}
+			X''+\beta^2X=0, \\
+			X(0)=0,\quad X'(L)+hX(L)=0.
+		\end{cases}\implies\beta+h\tan\beta L=0.
+	\end{align*}
+	$\implies X_n(x)=\sin\beta_nx,\quad T_n(t)=C_n\e{-\beta_n^2a^2t}$。
+	
+	可以验证$X_n$是正交的，即
+	\[
+		\ave{X_m,X_n}=\int_0^LX_m(x)X_n(x)\d x=0,\quad m\neq n.
+	\]
+	形式解
+	\[
+		u_n(x,t)=\sum_{n=1}^\infty C_n\even^{-\beta_n^2a^2t}\sin\beta_nx.
+	\]
+	
+	再根据初始条件
+	\[
+		u(x,0)=\sum_{n=1}^\infty C_n\sin\beta_nx=\varphi(x).
+	\]
+	在后面可以看到，这是广义Fourier级数，其系数
+	\[
+		C_n=\frac{\ave{\varphi,\sin\beta_nx}}{\ave{\sin\beta_nx,\sin\beta_nx}}=\frac{\int_0^L\varphi(x)\sin\beta_nx\d x}{\int_0^L\sin^2\beta_nx\d x}.
+	\]
+\end{example}
+\begin{definition}{加权内积}{Weight Inner Product}
+	定义在$\bigfkh{a,b}$上的实函数$f,g$的$\rho$\;-\;加权内积
+	\[
+		\inp fg_\rho:=\int_a^bf(x)g(x)\rho(x)\d x.
+	\]
+	其中权函数$\rho\geqslant 0$分段连续且零点孤立。
+	% 若$f,g$正交，则$\inp fg_\rho=0$。
+	%定义范数$\norm f_\rho:=\inp ff_\rho^{1/2}$。及
+
+	加权平方可积函数空间
+	\[
+		\mathscr L_\rho^2\bigfkh{a,b}:=\set f{\norm f_\rho<\infty}.
+	\]
+\end{definition}
+\begin{theorem}{广义Fourier级数}{Generalized Fourier Series}
+	若$f_1,f_2,\ldots$在$\mathscr L_\rho^2$中完备且加权正交，则$\forall f\in\mathscr L_\rho^2$有广义Fourier级数展开
+	\[
+		f(x)\sim\sum_{i=1}^\infty a_if_i(x),\quad a_i=\frac{\inp f{f_i}_\rho}{\norm{f_i}^2_\rho}.
+	\]
+	且有Parserval等式
+	\[
+		\norm f_\rho^2=\sum_{i=1}^n\inp f{\frac{f_i}{\norm{f_i}_\rho}}_\rho^2.
+	\]
+\end{theorem}
+\begin{definition}{Sturm-Liouville方程}{Sturm-Liouville Equation}
+	定义域$\fkh{a,b}$，常见一维特征值问题都可以化为
+	\[
+		\kh{k(x)f'(x)}'-q(x)f(x)+\lambda\rho(x)f(x)=0.
+	\]
+	其中$\lambda$为参数，$k,q,\rho$为实函数。
+	记
+	\[
+		\cl f:=-\frac{\kh{kf'}'-qf}\rho.
+	\]
+	则
+	\[
+		\inp{\cl f}g_\rho-\inp f{\cl g}_\rho=\bigfkh{k(fg'-f'g)}_a^b.
+	\]
+	好的边界条件可以使上式等于0。
+\end{definition}
+\begin{definition}{正则Sturm-Liouville问题}{}
+    正则Sturm-Liouville问题
+    \[
+    	\cl f(x)=\lambda f(x).
+    \]
+    
+    正则条件：保证Sturm-Liouville方程在$\bigfkh{a,b}$上没有奇点。
+    \[
+    	k\in\sC^2\bigfkh{a,b},\;q,\rho\in\sC\bigfkh{a,b};\;k,\rho>0.
+    \]
+    
+    
+    好的边界条件：
+    \begin{center}
+    	可分：$\begin{cases}
+    			c_1f(a)+c_2f'(a)=0, \\
+    			d_1f(b)+d_2f'(b)=0.
+    		\end{cases}$\quad 或 \quad 周期：
+    	$\begin{cases}
+    			f(a)=f(b) \\
+    			f'(a)=f'(b)
+    		\end{cases}$
+    \end{center}
+    可使$\cL$是对称算子，即
+    \[
+    	\inp{\cl f}g_\rho=\inp f{\cl g}_\rho.
+    \]
+\end{definition}
+\begin{theorem}{Sturm-Liouville定理1}{Sturm-Liouville Theorem I}
+	正则Sturm-Liouville问题
+	\begin{compactenum}
+		\item 有可数多个实特征值
+		      \[
+				\lambda_1<\lambda_2<\cdots<\lambda_n<\cdots,\quad\lim_{n\to\infty}\lambda_n=+\infty.
+			  \]
+		      % 对应特征函数
+		      % \[X_1(x),X_2(x),\ldots,X_n(x),\ldots\]
+		\item 特征函数加权$\rho$\;-\;正交；
+		\item 特征值的特征子空间至多2维，
+
+		      可分边界条件下，特征子空间为1维；
+		\item 特征函数构成$\mathscr L_\rho^2$上完备的正交基底。
+	\end{compactenum}
+    \tcblower
+    奇异Sturm-Liouville问题：不满足正则条件或区间无界；但若
+    \begin{center}
+        $a$ (或$b$)是$k(x)$的一级零点，是$q(x)$的至多一级极点 
+    \end{center}
+    时，称$a$ (或$b$)是方程的正则奇点。定理结论依旧成立！
+\end{theorem}
+\begin{theorem}{Sturm-Liouville定理2}{Sturm-Liouville Theorem II}
+	若正则Sturm-Liouville问题还满足$q\geqslant 0$；可分边界条件下还需满足$c_1c_2\leqslant 0,\;d_1d_2\geqslant 0$。
+	\begin{compactenum}
+		\item 所有特征值非负；
+
+		      特别的，存在0特征值（对应特征函数1）的充要条件是$q\equiv 0$且两端为第二类边界条件；
+		\item 若正则条件为周期条件，那么其对应于每一个非最小特征值$\lambda_0$
+		的特征值有两个相互正交的特征函数。
+	\end{compactenum}
+\end{theorem}
+\begin{example}{扇形域Dirichlet问题}{}
+	扇形域上的Dirichlet问题
+	\begin{align*}
+		\begin{cases}
+			\lap_2u=0,\quad r\in\kh{1,\mathrm e},\;\theta\in\kh{0,\frac\pi{2}}.\\
+			u(1,\theta)=u(\mathrm e,\theta)=0,\\
+			u(r,0)=0,\quad u\kh{r,\frac\pi{2}}=g(r).
+		\end{cases}
+	\end{align*}
+	化为Sturm-Liouville型
+	\[
+		\kh{rR'}'+\frac{\lambda}rR=0,
+	\]
+	对应\(k=r,\;q=0,\;\rho=\frac1r\)，因此\(\lambda>0\)，进而
+	\begin{gather*}
+		\lambda_n=(n\pi)^2,\quad R_n(r)=\sin\kh{n\pi\ln r},\quad n=1,2,\ldots
+		\\
+		\varTheta_n(\theta)=A_n\e{n\pi\theta}+B_n\e{-n\pi\theta}.
+	\end{gather*}
+	再结合$u$的边界条件即可解出。
+\end{example}
+
+\section{非其次方程}
+
+对非齐次方程，有时可靠直觉找出特解$v$，但对一般的非齐次方程，需要借助齐次化原理转化为其次方程：
+
+\begin{method}{齐次化原理法}{}
+	设$\Dif_t$中关于2阶导数的系数为1
+	\begin{align*}
+		\begin{cases}
+			\Dif_xu+\Dif_tu=f(x,t),\quad x\in(a,b),\;t>0\\
+			\kh{\alpha_1u-\beta_1u_x}_{x=a}=0,\quad\kh{\alpha_2u+\beta_2u_x}_{x=b}=0,\\
+			\edg u_{t=0}=\edg{u_t}_{t=0}=0.
+		\end{cases}
+	\end{align*}
+	由 \pageref{thm:Homogeneity Principle} 页的\thmref{thm:Homogeneity Principle} 知，有解
+	\[
+		u(x,t)=\int_0^tv(x,t-\tau;\tau)\d\tau
+	\]
+	$v$满足
+	\begin{align*}
+		\begin{cases}
+			\Dif_xv+\Dif_tv=0,\quad x\in(a,b),\;t>0\\
+			\kh{\alpha_1v-\beta_1v_x}_{x=a}=0,\quad\kh{\alpha_2v+\beta_2v_x}_{x=b}=0,\\
+			\edg v_{t=0}=0,\quad\edg{v_t}_{t=0}=f(x,\tau).
+		\end{cases}
+	\end{align*}
+\end{method}
+
+\begin{method}{广义Fourier展开法}{}
+	对于 
+	\begin{align*}
+		\begin{cases}
+			\Dif_xu+\Dif_tu=f(x,t),\quad x\in(a,b),\;t>0\\
+			\kh{\alpha_1u-\beta_1u_x}_{x=a}=0,\quad\kh{\alpha_2u+\beta_2u_x}_{x=b}=0,\\
+			\edg u_{t=0}=\varphi(x),\quad\edg{u_t}_{t=0}=\psi(x).
+		\end{cases}
+	\end{align*}
+	\begin{compactenum}
+		\item 首先分离变量，求出$f\equiv 0$对应的特征值问题
+		\[
+			\Dif_xX=-\lambda X.
+		\]
+		解出特征值$\{\lambda_n\}$和本征函数$\{X_n(x)\}$，注意$n$的取值是否含0。
+		\item 根据Sturm-Liouville定理判断$\{X_n\}$的完备性，展开
+		\begin{gather*}
+			u(x,t)=\sum T_n(t)X_n(x),\quad f(x)=\sum f_n(t)X_n(x),\\
+			\varphi(x)=\sum\varphi_nX_n(x),\quad \psi(x)=\sum\psi_nX_n(x).
+		\end{gather*}
+		求解 
+		\begin{align*}
+			\begin{cases}
+				\Dif_tT_n(t)-\lambda_nT_n(t)=f_n(t),\\
+				T_n(t)=\varphi_n,\quad T_n'(t)=\psi_n.
+			\end{cases}
+		\end{align*}
+		\item 解出$T_n(t)$，得$u(x,t)$
+	\end{compactenum}
+\end{method}
+
+\begin{method}{一般的非齐次问题}{}
+	对于一般的非齐次问题
+	\begin{align*}
+		\begin{cases}
+			\Dif_xu+\Dif_tu=f(x,t),\quad x\in(a,b),\;t>0\\
+			\kh{\alpha_1u-\beta_1u_x}_{x=a}=g_1(t),\quad\kh{\alpha_2u+\beta_2u_x}_{x=b}=g_2(t),\\
+			\edg u_{t=0}=\varphi(x),\quad\edg{u_t}_{t=0}=\psi(x).
+		\end{cases}
+	\end{align*}
+	首先将非齐次边界条件齐次化，寻找$v(x,t)$满足 
+	\[
+		\kh{\alpha_1v-\beta_1v_x}_{x=a}=g_1(t),\quad\kh{\alpha_2v+\beta_2v_x}_{x=b}=g_2(t).
+	\]
+	
+	显然$v$不唯一，若无法直觉看出，可设为$x$的线性函数
+	\[
+		v(x,t)=A(t)x+B(t),
+	\]
+	整理得
+	\[
+		\begin{cases}
+			(\alpha_1a-\beta_1)A(t)+\alpha_1B(t)=g_1(t),\\
+			(\alpha_2b+\beta_2)A(t)+\alpha_2B(t)=g_2(t).
+		\end{cases}
+	\]
+	便可解出$A,B$若无解还可设为$x$的二次函数。
+	
+	这样便可将$u$分解为$u=v+w$，而$w$的边界条件是齐次化的：
+	\begin{align*}
+		\begin{cases}
+			\Dif_xw+\Dif_tw=f(x,t)-\Dif_xv-\Dif_tv,\quad x\in(a,b),\;t>0\\
+			\kh{\alpha_1w-\beta_1w_x}_{x=a}=0,\quad\kh{\alpha_2w+\beta_2w_x}_{x=b}=0,\\
+			\edg w_{t=0}=\varphi(x)-\edg v_{t=0},\quad\edg{w_t}_{t=0}=\psi(x)-\edg{v_t}_{t=0}.
+		\end{cases}
+	\end{align*}
+	这在前面已解决。
+\end{method}
+

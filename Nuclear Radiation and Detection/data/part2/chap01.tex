@@ -1,0 +1,204 @@
+\chapter{辐射测量过程中的统计学}
+辐射测量中涉及到的各种现象都包含了随机性，
+随机性是核辐射测量的本质属性。
+
+\begin{definition}{统计涨落}{fluctuation}
+	在同样的测量条件下，不同次测量结果之间存在的差异，称为统计涨落(fluctuation)。
+\end{definition}
+统计涨落是辐射测量过程无法消除的内在属性，它给出了辐射测量过程精度的极限。
+\begin{definition}{准确度和精密度}{accuracy and precision}
+	准确度(accuracy)：测量值与被测对象真值的一致程度。
+	由测量值的平均值与真值的差来描述。
+
+	精密度(precision)：测量的可重复性或可靠性。
+	由测量的均方偏差来描述。	
+\end{definition}
+所有的实验结果都有系统误差(systematic errors)和偶然误差(random errors)的问题。
+系统误差影响测量的准确度，
+偶然误差影响测量的精密度。
+
+在核辐射测量中，偶然误差是一项主要的误差，其来源有二：
+\begin{compactenum}
+	\item 核事件的随机性导致的统计涨落；统计涨落是由核事件的内在物理属性所决定的，无法消除；
+	\item 测量仪器在正常工作条件下的测量误差。
+\end{compactenum}
+\paragraph{常用概率分布}
+Bernoulli实验、二项分布、Poisson分布、正态分布。
+\paragraph{串级随机变量}
+辐射测量中经常会遇到级联、倍增过程的涨落问题。串级(级联)随机变量就是随机变量$N$个随机变量$X$的和构成的随机变量$Y$
+\[
+	Y=X_1+\cdots+X_N,
+\]
+$N$是第一级，$X$是第二级。Bernoulli串Bernoulli仍是Bernoulli；
+Poisson串Bernoulli得到Poisson。
+
+由概率论的知识，$Y$的期望和方差
+\[
+	E(Y)=E(N)E(X),\quad D(Y)=D(N)E^2(X)+E(N)D(X).
+\]
+相对方差
+\begin{align}
+	\nu_Y^2:=\frac{D(Y)}{E^2(Y)}=\nu_N^2+\frac1{E(N)}\nu_X^2.
+\end{align}
+因此，若第一级随机变量$N$的数学期望$E(N)$很大，则可忽略第二级随机变量$X$的相对方差$\nu_X$。%对串级随机变量的相对方差$\nu_Y$的贡献。
+
+推广到$N$级串级随机变量
+\begin{gather*}
+	E(\xi)=E(\xi_1)\cdots E(\xi_N),\\
+	\nu_\xi^2=\nu_{\xi_1}^2+\frac{\nu_{\xi_2}^2}{E(\xi_1)}+\cdots+\frac{\nu_{\xi_N}^2}{E(\xi_1)\cdots E(\xi_{N-1})}.
+\end{gather*}
+
+\section{核衰变数与探测器计数的涨落分布}
+
+\paragraph{核衰变数的涨落}
+放射性衰变是随机过程，衰变规律为：
+\[
+	N=N_0\e{-\lambda t}.
+\]
+每个放射性原子核在时间$t$内发生衰变是一个Bernoulli事件。放射源在某个时间段内发生的衰变数，\textbf{一定服从二项分布}。
+
+通常放射源中的待衰变原子核数目$N_0$是很大的。若观测时间$t\ll T_{1/2}$，则可认为$t$时间内每个原子核衰变的概率$P=\lambda t$，此时，我们可以认为核的衰变数服从Poisson分布。
+
+当总衰变数$ N $较大时，Poisson分布就会变成正态分布。
+\paragraph{放射性测量的统计误差}
+脉冲计数器的测量过程可以划分为三个基本过程
+\begin{compactitem}
+	\item 源的发射粒子数$N_1$，服从Poisson分布
+	\item 进入探测器的粒子数$N_2$，Poisson串Bernoulli，服从Poisson分布
+	\item 被探测器测到的粒子数$N_3$，Poisson串Bernoulli，服从Poisson分布
+\end{compactitem}
+$N_3$为一个三级串级型随机变量。
+\begin{align}\label{detector-expect}
+	E(N_3)=E(N_1)E(X_2)E(X_3)=N_0\lambda t\cdot\frac{\Omega}{4\pi}\cdot\varepsilon.
+\end{align}
+如果源非各向同性，$\Omega$改为$f(\Omega)$即可，上述结论仍然成立。%若$E(N_3)$较大，可用正态分布描述。
+
+$E(N)$较大时，其与有限次测量平均值$\avg N$或单次测量值$N$相差不大，标准偏差估计
+\[
+	\sigma=\sqrt{E(N)}\doteq\sqrt{\avg N}\doteq\sqrt N.
+\]
+此标准偏差仅由统计涨落引起，未考虑其它因素的贡献。
+
+样本方差$\sigma_S$是总体方差的无偏估计，%可以由样本的标准偏差来对其进行估计。
+$\sigma_S$不仅包括统计误差，也反映了测量过程中其它偶然因素的贡献，$\sigma_S\geqslant\sigma$，可用于数据检验。
+
+在测量过程中：$N$变大，$\sigma$也变大，以相对标准偏差来表示测量值的离散程度
+\begin{align}
+	\nu_N=\frac{\sigma_N}N\doteq\frac{\sqrt N}N=\frac1{\sqrt N}.
+\end{align}
+期望值和标准偏差都在增大，但相对标准偏差随着期望值的增大而减小。
+
+欲使探测器计数的测量值达到某个相对精度（即相对均方根误差），计数的测量值分别应该达到
+\[
+	\nu_N=\frac1{\sqrt N}\implies N=\frac1{\nu_N^2}.
+\]
+
+为了提高探测器计数的测量精度，由式(\ref{detector-expect})
+\[
+	\nu_{N_3}^2=\frac1{\avg N_3}=\frac{4\pi}{\Omega\varepsilon N_0\lambda t}.
+\]
+就应该：增大探测器立体角$\Omega$，增大探测器本征探测效率$\varepsilon$，增大源强$\lambda N_0$，延长测量时间$t$。
+
+\section{电离过程的涨落与Fano分布}
+
+带电粒子射入物质，$N$次碰撞形成的离子对\footnote{气体：电子-离子对；半导体：电子-空穴对}数目为$\avg n$，每次碰撞都是Bernoulli实验，服从二项分布。由于$N$可以很大，而$\avg n$是有限的，故二项分布可以近似为Poisson分布。
+
+但是上述分析并不准确，碰撞的过程并不是独立的：
+\begin{compactenum}
+	\item 能量小于电离能，仅仅激发，没有电离；
+	\item 电离，但电子不能继续电离；
+	\item 电离，且$\delta$电子可以继续电离。
+\end{compactenum}
+因此碰撞产生的总离子对数目不能用Poisson分布描述，而是用Fano分布描述，Fano因子
+\begin{align}
+	F:=\frac{\sigma^2}{\avg n},\quad\nu=\sqrt{\frac F{\avg n}}.
+\end{align}
+气体$F\sim 0.5$，半导体$F\sim 0.1$。
+
+\section{粒子束脉冲的总电离电荷量的涨落}
+
+探测器有三种主要的工作方式：
+\begin{compactitem}
+	\item 脉冲型工作方式（测量单个粒子）；
+	\item 累计型工作方式（测量稳定粒子束流）；
+	\item 累计型工作方式（测量粒子束脉冲）。
+\end{compactitem}
+\paragraph{粒子束脉冲（累计型）的总电离电荷量的涨落}
+射入探测器的X光子数目$n_0$服从Poisson分布，探测器对入射光子的本征探测效率$\varepsilon$，则
+被探测器测量的光子数目$n_1=n_0\varepsilon$服从Poisson分布，每个被探测到的光子在探测器内产生的离子对数目$n_2$服从Fano分布。粒子束脉冲在探测器内形成的离子对数目$N=n_1n_2$，其平均值和相对标准偏差
+\[
+	\avg N=\avg n_1\avg n_2,\quad\nu_N^2=\frac1{\avg n_1}\kh{1+\frac F{\avg n_2}}.
+\]
+为了让信噪比更好，首先考虑增大第一级$\avg n_1$。
+
+\section{辐射粒子与信号的时间分布}
+
+核辐射事件及探测器的计数服从Poisson分布，单位时间脉冲数$n$的期望为$\lambda$，相邻两个脉冲的时间间隔$T$是一连续型随机变量
+\[
+	P(t\leqslant T<t+\d t)=P_t(0)P_{\d t}(1)=\e{-\lambda t}\cdot \lambda\d t
+\]
+故$T$服从指数分布
+\[
+	f(t)=\lambda\e{-\lambda t},
+\]
+下一个脉冲出现在短时间内的概率（相对）较大。
+\begin{definition}{分辨时间}{resolving time}
+	分辨时间$\tau$是测量系统对入射粒子的响应时间，在这个时间内，系统无法再处理其它射线信号。
+\end{definition}
+若信号计数率为$n$，则测量计数率为$n\e{-n\tau}$
+\paragraph{相邻进位脉冲的时间间隔}
+在计数率较高时，需要使用具有进位系数$S$的定标器来计数。
+每接受来自探测器的$S$个信号，定标器产生一个进位信号脉冲。相邻进位脉冲时间间隔$T$服从Gamma分布
+\[
+	f_S(t)=\frac{(mt)^{S-1}}{(S-1)!}m\e{-mt}.
+\]
+最可能发生进位的时刻为
+\[
+	T=\frac{S-1}m.
+\]
+相对标准偏差
+\[
+	\avg T_S=\frac Sm,\quad\sigma_{T_S}^2=\frac S{m^2},\implies\nu_{T_S}=\frac1{\sqrt S}.
+\]
+因此当进位数很高的时候，就可以认为是一个周期信号了。
+
+\section{计数统计误差的传递}
+
+在一般的核测量中，常涉及函数的统计误差的计算，也就是误差传递(error propagation)。若$x_1,\ldots,x_n$是相互独立的随机变量，其标准偏差分别为$\sigma_{x_1},\ldots,\sigma_{x_n}$，由这些随机变量导出的$y=f(x_1,\ldots,x_n)$的标准偏差可以用下面公式求出
+\[
+	\sigma_y^2=\kh{\pv y{x_1}}^2\sigma_{x_1}^2+\cdots+\kh{\pv y{x_n}}^2\sigma_{x_n}^2.
+\]
+\paragraph{和差关系}存在本底时净计数误差的计算
+\[
+	\sigma_{x_1\pm x_2}^2=\sigma_{x_1}^2+\sigma_{x_2}^2,\implies\nu_{x_1\pm x_2}=\frac{\sqrt{\sigma_{x_1}^2+\sigma_{x_2}^2}}{x_1\pm x_2}.
+\]
+
+\paragraph{倍数关系}$y=x_1x_2$或$y=x_1/x_2$的相对误差
+\[
+	\nu_y^2=\nu_{x_1}^2+\nu_{x_2}^2.
+\]
+计数率的误差：设在$t$时间内记录了$N$个计数，则计数率为$n=N/t$的标准偏差和相对标准偏差为
+\[
+	\sigma_n=\sqrt{\frac nt},\quad\nu_n=\frac1{\sqrt N}.
+\]
+就统计误差而言，无论是一次测量还是多次测量，只要总的计数相同，多次测量平均计数率的相对误差和一次测量的计数率的相对误差是一致的。
+\paragraph{存在本底时净计数率误差的计算}辐射测量中，本底总是存在的——包括宇宙射线、环境中的天然放射性及仪器噪声等。为求得净计数，就需要进行两次测量：
+\begin{compactitem}
+	\item 在时间$t_\mathrm b$内测得本底(background)的计数为$N_\mathrm b=n_\mathrm bt_\mathrm b$；
+	\item 在时间$t_\mathrm s$内测得样品(sample，含本底)的计数为$N_\mathrm s=n_\mathrm st_\mathrm s$。
+\end{compactitem}
+净计数率$n_0=n_\mathrm s-n_\mathrm b$的相对标准偏差为：
+\[
+	\nu_{n_0}=\frac1{n_\mathrm s-n_\mathrm b}\sqrt{\frac{n_\mathrm s}{t_\mathrm s}+\frac{n_\mathrm b}{t_\mathrm b}}.
+\]
+有本底存在时，需 要合理分配样品测量时间$t_\mathrm s$和本底测量时间$t_\mathrm b$
+
+若总测量时间$T=t_\mathrm s+t_\mathrm b$恒定，要求$n_0$误差最小，应分配$t_\mathrm s$和$t_\mathrm b$
+\begin{align}
+	\frac{t_\mathrm s}{t_\mathrm b}=\sqrt{\frac{n_\mathrm s}{n_\mathrm b}}.
+\end{align}
+相对方差
+\begin{align}
+	\nu_{n_0}^2=\frac1{T\kh{\sqrt{n_\mathrm s}-\sqrt{n_\mathrm b}}^2}.
+\end{align}
+

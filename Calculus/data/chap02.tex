@@ -1,0 +1,194 @@
+\chapter{含参积分及广义含参积分}
+\begin{definition}{含参积分}{}
+	含参积分
+	\[
+		I(y)=\int_a^bf(x,y)\d x,\quad y\in\fkh{c,d}.
+	\]
+	广义含参积分包括无穷积分和瑕积分，有统一形式
+	\[
+		I(y)=\int_a^\omega f(x,y)\d x\equiv\lim_{A\to\omega^-}\int_a^Af(x,y)\d x.
+	\]
+	无穷积分$\omega=+\infty$；瑕积分$\omega\in\RR$但$f$在$\omega$邻域内无界(奇点)．
+\end{definition}
+\begin{definition}{一致连续}{}
+	$\forall\varepsilon>0,\exists\delta>0$ 使 $\forall X,Y$ 满足 $\vert X-Y\vert<\delta$，有 $|f(X)-f(Y)|<\varepsilon.$
+	\tcblower
+	\paragraph{否定形式：}存在两点列$\{X_k\}\{Y_k\}$使得$\forall k\geqslant 1,|f(X_k)-f(Y_k)|\geqslant\varepsilon_0>0.$
+\end{definition}
+\begin{theorem}{一致连续的判定}{}
+	函数$f\in C(\Omega)$在有界闭集$\Omega$上连续$\implies$一致连续．
+\end{theorem}
+\begin{definition}{一致收敛}{}
+	$\forall\varepsilon>0,\exists N>a$ 使 $\forall A>N,\forall y\in[c,d]$，有 $\left|\int_a^Af(x,y)\d x-I(y)\right|<\varepsilon.$
+\end{definition}
+\begin{theorem}{一致收敛的Weierstrass判别法}{}
+	\begin{center}
+		$|f(x,y)|\leqslant F(x),\int_a^\omega F(x)\d x$收敛．
+		\vthus
+		$\int_a^\omega f(x,y)\d x$对$y$一致收敛．
+	\end{center}
+\end{theorem}
+\begin{theorem}{一致收敛的Dirichlet判别法}{}
+	\begin{center}
+		$\int_a^Af(x,y)\d x$有界；\\
+		$g(x,y)$关于$x$单调且$\lim_{x\to\omega^-}g(x,y)=0$
+		\vthus
+		$\int_a^\omega f(x,y)g(x,y)\d x$对$y$一致收敛．
+	\end{center}
+\end{theorem}
+\begin{theorem}{一致收敛的Abel判别法}{}
+	\begin{center}
+		$\int_a^\omega f(x,y)\d x$对$y$一致收敛；\\
+		$g(x,y)$关于$x$单调且有界
+		\vthus
+		$\int_a^\omega f(x,y)g(x,y)\d x$对$y$一致收敛．
+	\end{center}
+\end{theorem}
+\section{积分号的可交换性}
+\begin{theorem}{连续性}{}
+	$f(x,y)$连续$\implies I(y)$连续，即
+	\[
+		\lim_{y\to y_0}\int_a^bf(x,y)\d x=\int_a^b\lim_{y\to y_0}f(x,y)\d x.
+	\]
+	\tcblower
+	$f(x,y)$连续且$\int_a^\omega f(x,y)\d x$关于$y$一致收敛．$\implies I(y)$连续，即
+	\[
+		\lim_{y\to y_0}\int_a^\omega f(x,y)\d x=\int_a^\omega\lim_{y\to y_0}f(x,y)\d x.
+	\]
+\end{theorem}
+\begin{theorem}{可微性}{}
+	$f(x,y),\pv fy(x,y)$连续$\implies I(y)$可微，且
+	\[
+		I'(y)=\frac{\d}{\d y}\int_a^bf(x,y)\d x=\int_a^b\pp yf(x,y)\d x.
+	\]
+	\tcblower
+	$f(x,y),\pv{f}{y}(x,y)$连续且$\int_a^\omega\pv{f}{y}(x,y)\d x$关于$y$一致收敛$\implies I(y)$可微，且
+	\[
+		I'(y)=\frac{\d}{\d y}\int_a^\omega f(x,y)\d x=\int_a^\omega\pp yf(x,y)\d x.
+	\]
+\end{theorem}
+公式
+\[
+	\dv{}y\int_{\alpha(y)}^{\beta(y)}f(x,y)\d x=\int_{\alpha(y)}^{\beta(y)}\pv fy(x,y)\d x+f(\beta(y),y)\beta'(y)-f(\alpha(y),y)\alpha'(y).
+\]
+\begin{theorem}{积分性}{}
+	$f(x,y)$连续$\implies I(y)$可积，且
+	\[
+		\int_c^dI(y)\d y=\int_c^d\int_a^b f(x,y)\d x\d y=\int_a^b\int_c^d f(x,y)\d y\d x.
+	\]
+	\tcblower
+	$f(x,y)$连续且$\int_a^\omega f(x,y)\d x$关于$y$一致收敛$\implies I(y)$可积，且
+	\[
+		\int_c^dI(y)\d y=\int_c^d\int_a^\omega f(x,y)\d x\d y=\int_c^\omega\int_a^b f(x,y)\d x\d y
+	\]
+\end{theorem}
+*对于含两个广义积分的交换条件更严格
+\begin{compactenum}
+	\item $f(x,y)$连续
+	\item $\int_a^{+\infty}f(x,y)\d x,\int_c^{+\infty}f(x,y)\d y$分别关于$y\in[c,C],x\in[a,A]$一致收敛
+	\item $\int_c^{+\infty}\int_a^{+\infty}|f(x,y)|\d x\d y,\int_a^{+\infty}\int_c^{+\infty}|f(x,y)|\d y\d x$至少一个存在
+\end{compactenum}
+则
+\[
+	\int_c^{+\infty}\int_a^{+\infty}f(x,y)\d x\d y=\int_a^{+\infty}\int_c^{+\infty}f(x,y)\d y\d x
+\]
+
+\begin{example}{Gamma函数}{}
+	\begin{center}
+		$\Gamma(x):=\int\zti t^{x-1}\e{-t}\d t.$
+	\end{center}
+	递推公式
+	\begin{align*}
+		\Gamma(1)   & =\int\zti\e{-t}\d t=1.                                              \\
+		\Gamma(x+1) & =\int\zti t^x\cdot\e{-t}\d t                                        \\
+					& =\edg{-t^x\e{-t}}\zti+\int\zti\e{-t}\cdot xt^{x-1}\d t=x\Gamma(x).
+	\end{align*}
+	对于$n\in\mathbb N,\Gamma(n)=(n-1)!.$
+	% $\Gamma(x+1)=x\Gamma(x),\Gamma(1)=1$，对正整数$n$,
+	% \[
+	% 	\Gamma(n)=\int_0^{+\infty}t^{n-1}\e{-t}\d t=(n-1)!
+	% \]
+
+	\textbf{余元公式}
+	\[
+		\Gamma(x)\Gamma(1-x)=\frac{\pi}{\sin\pi x},\quad x\in(0,1).
+	\]
+	证明略，有$\Gamma(1/2)=\sqrt\pi$
+\end{example}
+\begin{example}{Beta函数}{}
+	\begin{center}
+		$\text B(p,q):=\int_0^1t^{p-1}(1-t)^{q-1}\d t.$ % =2\int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\d\theta.$
+	\end{center}
+	与Gamma函数的关系为$\text B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}.$
+\end{example}
+\begin{example}{Possion积分}{}
+	\begin{center}
+		$\int\zti\e{-t^2}\d t=\frac{\sqrt\pi}2.$
+	\end{center}
+	\textbf{证明：}考虑积分的平方
+	\begin{align*}
+		\int\zti\e{-x^2}\d x\int\zti\e{-y^2}\d y=\int\zti\int\zti\e{-x^2-y^2}\d x\nd y \\
+		=\int_0^{\pi/2}\int\zti\e{-r^2}\cdot r\d r\nd\theta=\frac\pi{2}\cdot\frac12\int\zti\e{-s}\d s=\frac\pi{4}.
+	\end{align*}
+	\iffalse
+		由$\ex>0,\forall x\in\RR$
+		\[
+			\iint_A\e{-x^2-y^2}\d x\nd y\leqslant\iint_B\e{-x^2-y^2}\d x\nd y\leqslant\iint_C\e{-x^2-y^2}\d x\nd y
+		\]
+		其中
+		\begin{align*}
+			B & =\{(x,y)~|~0\leqslant x\leqslant R,0\leqslant y\leqslant R\}, \\
+			A & =\{(x,y)~|~x^2+y^2\leqslant R^2,x\geqslant 0,y\geqslant 0\},  \\
+			C & =\{(x,y)~|~x^2+y^2\leqslant 2R^2,x\geqslant 0,y\geqslant 0\}.
+		\end{align*}
+		又
+		\begin{align*}
+			\iint_A\e{-x^2-y^2}\d x\nd y & =\int_0^{\pi/2}\int_0^R\e{-\rho^2}\rho\d\rho\d\varphi=\frac{\pi}4\left(1-\e{-R^2}\right), \\
+			\iint_B\e{-x^2-y^2}\d x\nd y & =\int_0^R\int_0^R\e{-x^2}\e{-y^2}\d x\nd y=\left(\int_0^R\e{-t^2}\d t\right)^2,          \\
+			\iint_C\e{-x^2-y^2}\d x\nd y & =\frac{\pi}4\left(1-\e{-2R^2}\right).
+		\end{align*}
+		当$R\to+\infty$，即得$\int\zti\e{-t^2}\d t=\frac{\sqrt\pi}2$.
+	\fi
+\end{example}
+\begin{example}{Dirichlet积分}{}
+	\begin{center}
+		$\int\zti\frac{\sin x}x\d x=\frac{\pi}2.$
+	\end{center}
+	\textbf{证明：}令
+	\[
+		F(y)=\int\zti\frac{\sin x}x\e{-xy}\d x,\quad y\geqslant 0.
+	\]
+	由$\frac{\sin x}x\e{-xy}$可被延拓为$\RR_{\geqslant 0}^2$上的连续函数，故$F(y)$在$\RR_{\geqslant 0}$上连续．
+
+	注意到，积分
+	\[
+		\int\zti\frac{\sin x}x\d x
+	\]
+	收敛；$\forall x,y\geqslant 0,|\e{-xy}|\leqslant 1$且$\e{-xy}$关于$x$递减，由Abel判别准则可知$F(y)$关于$y\in[0,+\infty)$一致收敛．
+
+	任取$a>0,\forall x\geqslant 0,y\geqslant a,$可知$\left|-\sin x\e{-xy}\right|\leqslant \e{-xy}\leqslant \e{-ax}$有界，由Weierstrass判别准则知，积分
+	\[
+		\int\zti\pv {}y\frac{\sin x}x\e{-xy}\d x=-\int\zti\sin x\e{-xy}\d x
+	\]
+	一致收敛，因此$F(y)$在$[a,+\infty)$上可导
+	\begin{align*}
+		F'(y) & =-\int\zti\sin x\e{-xy}\d x=\int\zti\Im\e{-xy-\i x}\d x                                                \\
+			  & =-\Im\left.\frac{\e{-(y+\i)x}}{y+\i}\right|\zti=-\left.\frac{\e{-yx}}{y^2+1}\Im(y-\i)\e{-\i x}\right|\zti \\
+			  & =\left.\frac{\e{-yx}}{y^2+1}\left(y\sin x+\cos x\right)\right|\zti=-\frac1{1+y^2}.
+	\end{align*}
+	因为$a>0$任意，故$\forall y>0,$
+	\[
+		F'(y)=-\frac1{1+y^2},\quad F(y)=-\arctan y+C.
+	\]
+	又$y\to+\infty,$
+	\[
+		|F(y)|\leqslant\int\zti\frac{|\sin x|}x\e{-xy}\d x\leqslant\int\zti\e{-xy}\d x=\frac1y\to0.
+	\]
+	故$\lim_{y\to+\infty}F(y)=C-\frac{\pi}2=0$，即$C=\frac{\pi}2.$
+
+	又$F(y)$在$[0,+\infty)$上连续，故$\forall y\geqslant 0,F(y)=\frac{\pi}2-\arctan y.$特别的
+	\[
+		F(0)=\int\zti\frac{\sin x}x\d x=\frac{\pi}2.
+	\]
+\end{example}
+\newpage

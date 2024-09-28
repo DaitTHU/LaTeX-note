@@ -1,0 +1,283 @@
+\chapter{积分变换法}
+\begin{definition}{积分变换}{Integral Transformation}
+	积分变换
+	\[
+		\mathcal T\bigfkh{f}(\xi)=\int_a^bf(x)K(x,\xi)\d x.
+	\]
+	其中$K$是核函数(kernel)。
+\end{definition}
+\section{Fourier变换}
+\setcounter{subsubsection}{1}
+\begin{definition}{Fourier变换}{Fourier Transformation}
+	定义Fourier变换
+	\[
+		\hat f(\xi)\equiv\cf f(\xi):=\int\iti f(x)\e{-\i\xi x}\d x,\quad \xi\in\RR,
+	\]
+	及其逆变换
+	\[
+		f(x)=\mathcal F^{-1}\big[\hat f\big](x)=\frac1{2\pi}\int\iti\hat f(\xi)\e{\i\xi x}\d\xi.
+	\]
+\end{definition}
+Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformation} 页的附录内容。
+\begin{example}{无限长杆热传导}{}
+	无限长杆热传导
+	\begin{align*}
+		\begin{cases}
+			u_t=a^2u_{xx}+f(x,t),\\
+			u(x,0)=\varphi(x).
+		\end{cases}\longrightarrow\quad\begin{cases}
+			\hat u_t=-a^2\xi^2\hat u+\hat f,\\
+			\hat u(\xi,0)=\hat\varphi(\varphi).
+		\end{cases}
+	\end{align*}
+	因此
+	\begin{align*}
+		\hat u(\xi,t)&=\e{-a^2\xi^2t}\fkh{\int_0^t\hat f(\xi,\tau)\e{a^2\xi^2\tau}\d\tau+\hat\varphi(\xi)}.
+		% \\
+		% &=\int_0^t\hat f(\xi,\tau)\e{-a^2\xi^2(t-\tau)}\d\tau+\hat\varphi(\xi)\e{-a^2\xi^2t}.
+	\end{align*}
+	再用Fourier逆变换
+	\begin{align*}
+		u(x,t)&=\cfi{\int_0^t\hat f(\xi,\tau)\e{-a^2\xi^2(t-\tau)}\d\tau}+\cfi{\hat\varphi(\xi)\e{-a^2\xi^2t}}\\
+		&=\int_0^t\cfi{\hat f(\xi,\tau)}\!\ast\cfi{\e{-a^2\xi^2(t-\tau)}}\d\tau+\\
+		&\qqquad\cfi{\hat\varphi(\xi)}\ast\cfi{\e{-a^2\xi^2t}}\\
+		&=\int_0^tf(x,t)\ast\frac{\e{-x^2/4a^2(t-\tau)}}{2a\sqrt{\pi(t-\tau)}}\d\tau+\\
+		&\qqquad\frac1{2a\sqrt{\pi t}}\int\iti\varphi(\eta)\e{-(x-\eta)^2/4a^2t}\d\eta\\
+		&=\int_0^t\frac1{2a\sqrt{\pi(t-\tau)}}\int\iti f(\eta,\tau)\e{-(x-\eta)^2/4a^2(t-\tau)}\d\eta\d\tau+\\
+		&\qqquad\frac1{2a\sqrt{\pi t}}\int\iti\varphi(\eta)\e{-(x-\eta)^2/4a^2t}\d\eta.
+	\end{align*}
+	以上只是形式解。
+\end{example}
+\subsection{Fourier正余弦变换}
+对于定义在$\RR_{\geqslant  0}$上的函数，可将其奇偶延拓至$\RR$后再作4ier变换
+\begin{definition}{Fourier正余弦变换}{Fourier Sine and Cosine Transformation}
+	正余弦变换分别为
+	\begin{align*}
+		\hat f_\sine(\xi)\equiv\cf[s]f(\xi):=\int\zti f(x)\sin\xi x\d x;\\
+		\hat f_\cosi(\xi)\equiv\cf[c]f(\xi):=\int\zti f(x)\cos\xi x\d x.
+	\end{align*}
+	其反变换
+	\begin{align*}
+		f(x)&=\frac2\pi\int\zti\hat f_\sine(\xi)\sin\xi x\d\xi=:\cfi[s]{\hat f_\sine(\xi)}\\
+		&=\frac2\pi\int\zti\hat f_\cosi(\xi)\cos\xi x\d\xi=:\cfi[c]{\hat f_\cosi(\xi)}
+	\end{align*}
+\end{definition}
+变换的性质见第 \pageref{The Property of Sine and Cosine Transformation} 页的附录内容。
+\begin{example}{半无限长杆热传导}{}
+	半无限长杆热传导方程问题
+	\begin{align*}
+		\begin{cases}
+			u_t=a^2u_{xx},\quad x>0,\;t>0\\
+			u(x,0)=0,\\
+			u_x(0,t)=\varphi(x)\\
+		\end{cases}
+	\end{align*}
+	自然边界条件
+	\[
+		\lim_{x\to\infty}u(x,t)=\lim_{x\to\infty}u_t(x,t)=0
+	\]
+	
+	若用Fourier正弦变换，则会出现$u(0,t)$，此边界条件没有给出，因此只能用余弦变换，记$U(\xi,t)=\cf[c]{u(x,t)}$
+	\begin{align*}
+		U_t(\xi,t)&=a^2\bigfkh{u_x(x,t)\cos\xi x-\xi u(x,t)\sin\xi x}\zti-a^2\xi^2U(\xi,t)\\
+		&=-a^2\varphi(t)-a^2\xi^2U(\xi,t).
+	\end{align*}
+	故
+	\[
+		U(\xi,t)=-a^2\int_0^t\varphi(\tau)\e{-a^2\xi^2(t-\tau)}\d\tau
+	\]
+	逆变换
+	\begin{align*}
+		u(x,t)&=-\frac{2a^2}\pi\int\zti\fkh{\int_0^t\varphi(\tau)\e{-a^2\xi^2(t-\tau)}\d\tau}\cos\xi x\d\xi\\
+		&=-\frac{2a^2}\pi\int_0^t\varphi(\tau)\fkh{\int\zti\e{-a^2\xi^2(t-\tau)}\cos\xi x\d\xi}\d\tau\\
+		&=-a\int_0^t\varphi(\tau)\frac{\e{-x^2/4a^2(t-\tau)}}{\sqrt{\pi(t-\tau)}}\d\tau.
+	\end{align*}
+\end{example}
+\begin{example}{半无限长弦振动}{}
+	半无界弦振动问题
+	\begin{align*}
+		\begin{cases}
+			u_{tt}=a^2u_{xx},\quad x>0,\;t>0\\
+			u_x(0,t)=f(t),\\ % \quad u(0,t)=f(t),
+			u(x,0)=u_t(x,0)=0
+		\end{cases}
+	\end{align*}
+	自然边界条件$\lim_{x\to\infty}u(x,t)=\lim_{x\to\infty}u_t(x,t)=0$。
+	\[
+		U_{tt}(\xi,t)=-a^2f(t)-a^2\xi^2U(\xi,t).
+	\]
+	其次方程通解$\cos a\xi t,\;\sin a\xi t$，运用\eqref{General to Particular Solution}和边界条件$U(\xi,0)=U_t(\xi,0)=0$
+	\begin{align*}
+		U(\xi,t)&=\int_0^t-a^2f(\tau)\frac{\cos a\xi\tau\sin a\xi t-\cos a\xi t\sin a\xi\tau}{\cos a\xi\tau\kh{\sin a\xi\tau}'-\kh{\cos a\xi\tau}'\sin a\xi\tau}\d\tau\\
+		&=-\frac a\xi\int_0^tf(\tau)\sin a\xi(t-\tau)\d\tau.
+	\end{align*}
+	逆变换
+	\begin{align*}
+		u(x,t)&=-\frac{2}\pi\int\zti\fkh{\frac a\xi\int_0^tf(\tau)\sin a\xi(t-\tau)\d\tau}\cos \xi x\d\xi\\
+		&=-2a\int_0^tf(\tau)\cdot\frac1{2\pi}\int\iti\frac1\xi\sin a\xi(t-\tau)\e{\i\xi x}\d\xi\d\tau
+	\end{align*}
+	由
+	\[
+		\cfi{\frac{\sin a\xi}\xi}=\frac{\Heaviside(x+a)-\Heaviside(x+a)}2.
+	\]
+	其中$\Heaviside(x)$为Heaviside跳跃函数，故
+	\begin{align*}
+		u(x,t) % &=-a\int_0^tf(\tau)\fkh{H(x+a(t-\tau))-H(x-a(t-\tau))}\d\tau\\
+		% =-a\int_0^{t-x/a}f(\tau)\Heaviside(x+a(t-\tau))\d\tau
+		=-a\int_0^{t-x/a}f(\tau)\d\tau.\quad x<at
+	\end{align*}
+\end{example}
+\subsection{Fourier变换与分离变量法}
+无界区域是否有相应的分离变量法？
+\begin{example}{无界长杆热传导}{}
+	
+	无界长杆热传导
+	\begin{align*}
+		\begin{cases}
+			u_t=a^2u_{xx},\quad x\in\RR,\;t>0\\
+			u(x,0)=\varphi(x)
+		\end{cases}
+	\end{align*}
+	分离变量$u(x,t)=X(x)T(t)$特征值
+	\[
+		X''+\lambda X=0,\;T'+\lambda a^2T=0
+	\]
+	讨论知$\lambda=\xi^2\geqslant 0$
+	\[
+		X=\e{\i\xi x},\quad T=\e{-a^2\xi^2t}.
+	\]
+	故
+	\begin{align*}
+		u(x,t)&=\frac1{2\pi}\int\iti A(\xi)X(x,\xi)T(t,\xi)\d\xi\\
+		&=\frac1{2\pi}\int\iti A(\xi)\e{\i\xi x}\e{-a^2\xi^2t}\d\xi.
+	\end{align*}
+	边界条件
+	\[
+		u(x,0)=\frac1{2\pi}\int\iti A(\xi)\e{\i\xi x}\d\xi\equiv\cfi A=\varphi(x),
+	\]
+	故$\varphi(x)$是$A(\xi)$的Fourier变换。
+\end{example}
+可见对无界区间上的问题，分离变量法依然适用，只是特征值是连续分布的。
+\section{Laplace变换}
+\begin{definition}{Laplace变换}{Laplace Transformation}
+	定义Laplace变换
+	\[
+		\bar f(\xi)=\cl f(\xi):=\int\zti f(x)\e{-\xi x}\d x,\quad\Re\xi>\sigma_0.
+	\]
+	
+	其逆变换
+	\[
+		f(x)=\cli{\bar f(\xi)}=\frac1{2\pi\i}\int_{\sigma-\i\infty}^{\sigma+\i\infty}\bar f(\xi)\e{\xi x}\d\xi,\quad x\geqslant 0.
+	\]
+\end{definition}
+注意Laplace变换存在条件需要$\exists M,\sigma_0$使得
+	\[
+		\abs{f(x)}<M\e{\sigma_0x},\quad\forall x>0.
+	\]
+	% $x$为$f$连续点处
+% 再看Laplace逆变换$\cli{\bar f(\xi)}\to f(x)$。
+% \begin{theorem}{Riemann-Mellin反演公式}{Riemann-Mellin Inversion Formula}
+其逆变换中$\sigma>\sigma_0$；注意，Laplace变换的积分中本身不包含$\RR_{<0}$的部分，一般认为$f(<0)\equiv 0$。
+\begin{theorem}{第一展开定理}{}
+	设$F(\xi)$在$\infty$邻域内有Laurent展开式
+	\[
+		F(\xi)=\sum_{n=1}^\infty\frac{c_n}{\xi^n},
+	\]
+	则
+	\[
+		f(x)=\cli{F(\xi)}=\sum_{n=1}^\infty\frac{c_n}{(n-1)!}x^{n-1},\quad x\geqslant 0
+	\]
+\end{theorem}
+\begin{theorem}{第二展开定理}{}
+	设$F(\xi)=A(\xi)/B(\xi)$是有理函数，$\deg A<\deg B$，$B(\xi)$只有单零点$\xi_1,\xi_2,\ldots,\xi_n$且是$F(\xi)$的单极点，则
+	\[
+		f(x)=\cli{F(\xi)}=\sum_{k=1}^n\frac{A(\xi_k)}{B'(\xi_k)}\e{\xi_kx}=\sum_{k=1}^n\Res\bigfkh{F(\xi)\e{\xi x},\xi_k}.
+	\]
+\tcblower
+	若$F(\xi)$满足
+	\begin{compactenum}
+		\item 在$\CC$上除了有限个奇点$\xi_1,\xi_2,\ldots,\xi_n$外解析；
+		\item 在半平面$\Re\xi>\sigma_0$上解析；
+		\item $\exists M>0,\;R>0$使得当$\abs\xi>R$时
+		\[
+			\abs{F(\xi)}\leqslant\frac M{\abs\xi},
+		\]
+	\end{compactenum}
+	则对于$x\geqslant 0$有
+	\[
+		f(x)=\cli{F(\xi)}=\sum_{k=1}^n\Res\fkh{F(\xi)\e{\xi x},\xi_k}.
+	\]
+\end{theorem}
+% \subsection{Laplace定理的应用}
+\begin{example}{有限杆热传导}{}
+	有限杆热传导
+	\[
+		\begin{cases}
+			u_t=u_{xx},\quad x\in(0,L),\;t>0,     \\
+			u_x(0,t)=0,\quad u(L,t)=A, \\
+			u(x,0)=B.
+		\end{cases}
+	\]
+	关于$t$作Laplace变换，记$U(x,s)=\cl{u(x,t)}(s)$
+	\[
+		s U(x,s)-u(x,0)=U_{xx}(x,s),
+	\]
+	由$u(x,0)=B$，
+	\[
+		U(x,s)=c_1\cosh\sqrt s x+c_2\sinh\sqrt s x+\frac Bs.
+	\]
+	再由$U_x(0,s)=0,\;U(L,s)=A/s$
+	\[
+		U(x,s)=\frac{(A-B)\cosh\sqrt s x}{s\cosh\sqrt s L}+\frac Bs.
+	\]
+	逆变换
+	\begin{align*}
+		u(x,t)&=\cli{\frac{(A-B)\cosh\sqrt s x}{s\cosh\sqrt s L}}(t)+\cli{\frac Bs}(t)\\
+		&=(A-B)\cli{\frac{\cosh\sqrt s x}{s\cosh\sqrt s L}}(t)+B.
+	\end{align*}
+	括号内函数的孤立奇点\footnote{注意，0不是此函数的孤立奇点，不能用留数算出。逆变换结果中的1是围道积出来的。详情可见附录}应使得$\cosh\sqrt s L=0$
+	\[
+		s_n=-\biggfkh{\frac{(2n-1)\pi}{2L}}^2,\quad n=1,2,\ldots
+	\]
+	由
+	\begin{align*}
+		u(x,t)&=B+(A-B)\kh{1+\sum_{n=1}^\infty\Res\biggfkh{\frac{\cosh\sqrt s x}{s\cosh\sqrt s L}\e{s t},s_n}}\\
+		&=A+\frac{4(A-B)}\pi\sum_{n=1}^\infty\frac{(-1)^n}{2n-1}\cos\biggfkh{\frac{(2n-1)\pi}{2L}x}\exp\biggfkh{-\frac{(2n-1)^2\pi^2}{4L^2}t}.
+	\end{align*}
+\end{example}
+\begin{example}{有限长弦受迫振动}{}
+	有限长弦受迫振动
+	\begin{align*}
+		\begin{cases}
+			u_{tt}=a^2u_{xx},\quad x\in(0,L),\;t>0\\
+			u(0,t)=0,\quad u_t(L,t)=A\sin\omega t\\
+			u(x,0)=u_t(x,0)=0
+		\end{cases}
+	\end{align*}
+	关于$t$作Laplace变换，记$U(x,s)=\cl{u(x,t)}(s)$
+	\[
+		s^2U(x,s)-s u(x,0)-u_t(x,0)=a^2U_{xx}(x,s).
+	\]
+	结合$U_x(L,s)=A\omega/(s^2+\omega^2)$
+	\[
+		U(x,s)=\frac{Aa\omega}{s(s^2+\omega^2)}\sinh\frac{xs}a\sech\frac{Ls}a.
+	\]
+	其所有的孤立奇点：可去奇点0；一级奇点$\pm\i\omega_k$，
+	\[
+		\omega_k:=
+		\begin{cases}
+			\omega,&k=0\\
+			\frac{2k-1}{2L}\pi a,&k\geqslant 1
+		\end{cases}
+	\]
+	故
+	\begin{align*}
+		&u(x,t)=\sum_{k=0}^\infty\Res[U(x,s)\e{st},\i\omega_k]+\Res[U(x,s)\e{st},-\i\omega_k]\\
+		&=2\Re\sum_{k=0}^\infty\Res[U(x,s)\e{st},\i\omega_k]\\
+		&=2\Re\fkh{\frac{Aa\omega}{s(s+\i\omega)}\sinh\frac{xs}a\sech\frac{Ls}a\e{st}}_{\i\omega}+\\
+		&\qquad 2\Re\sum_{k=1}^\infty\fkh{\frac{Aa\omega}{s(s^2+\omega^2)}\sinh\frac{xs}a\cdot\frac aL\csch\frac{Ls}a\e{st}}_{\i\omega_k}\\
+		&=\frac{Aa}\omega\sinh\frac{\omega x}a\sec\frac{\omega L}a\sin\omega t+\\
+		&\qquad 16Aa\omega^2L\sum_{k=1}^\infty\frac{(-1)^{k-1}}{(2k-1)[4\omega^2L^2-(2k-1)^2\pi^2a^2]}\sin\frac{\omega_kx}a\sin\omega_kt.
+	\end{align*}
+\end{example}
+

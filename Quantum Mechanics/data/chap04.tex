@@ -1,0 +1,397 @@
+\chapter{时间演化与对称性}
+\paragraph{时间演化问题}
+定态\Schr 方程
+\[
+	\hat H\psi(\r)=E\psi(\r),
+\]
+有本征值$E_n$和本征函数$\phi_n$，则\Schr 方程的通解为
+\[
+	\psi(\r,t)=\sum a_n(t)\phi_n(\r).
+\]
+代回\Schr 方程
+\[
+	\i\hbar\dv{a_n}t=E_na_n,\implies a_n(t)=a_n\e{-\i E_nt/\hbar}.
+\]
+因此波函数的时间演化为
+\[
+	\psi(\r,0)=\sum_n a_n\phi_n(\r)\enspace\rightarrow\enspace\psi(\r,t)=\sum_n a_n\e{-\i E_nt/\hbar}\phi_n(\r).
+\]
+由于
+\[
+	\abs{a_n}^2=\abs{a_n\e{-\i E_nt/\hbar}}^2,
+\]
+即系统在任意时刻的能量几率分布都和初始时刻的能量几率分布相同。
+
+形式上，利用Taylor展开
+\begin{align*}
+	\psi(\r,t) & =\sum_na_n\e{-\i E_nt/\hbar}\phi_n(\r)=\sum_na_n\fkh{\sum_{k=0}^\infty\frac1{k!}\kh{-\frac{\i E_nt}\hbar}^k}\phi_n(\r)     \\
+	           & =\sum_na_n\fkh{\sum_{k=0}^\infty\frac1{k!}\kh{-\frac{\i\hat Ht}\hbar}^k}\phi_n(\r)=\sum_na_n\e{-\i\hat Ht/\hbar}\phi_n(\r) \\
+	           & =\e{-\i\hat Ht/\hbar}\psi(\r,0).
+\end{align*}
+\begin{definition}{时间演化算符}{Time Evolution Operator}
+	定义时间演化算符
+	\begin{align}
+		\hat U(t):=\e{-\i\hat Ht/\hbar},
+	\end{align}
+	则可从波函数的初值知道其时间演化
+	\[
+		\psi(\r,t)=\hat U(t)\psi(\r,0).
+\]
+\end{definition}
+\begin{example}
+	{一维自由粒子$\delta(x)$波函数随时间的演化}{}
+	\begin{equation*}
+		\begin{aligned}
+			\psi(x,t) & =\e{-\i\hat Ht/\hbar}\vd(x)=\frac1{2\pi}\int\iti\e{\i kx}\e{\i\hbar k^2t/2m}\d k      \\
+			          & =\sqrt{\frac m{2\pi\hbar t}}\exp\kh{\i\frac{mx^2}{2\hbar t}-\frac{\i\pi}4}\neq\vd(x).
+		\end{aligned}
+	\end{equation*}
+	其中用到了
+	\begin{align}
+		\int\iti\e{-\alpha x^2}\d x=\sqrt{\frac\pi\alpha}.\quad\alpha\neq 0,\Re\alpha\geqslant 0.
+	\end{align}
+\end{example}
+\begin{example}
+	{一维自由粒子Gauss波包的时间演化}{}
+	\[
+		\psi(x,0)=\frac1{\kh{2\pi\sigma^2}^{1/4}}\e{-x^2/4\sigma^2}\e{\i k_0x},
+	\]
+	Fourier变换得
+	\[
+		\varphi(k)=\sqrt[4]{\frac{2\sigma^2}{\pi}}\e{-\sigma^2(k-k_0)^2}.
+	\]%\footnote{$\mathcal F(e^{-x^2/\sigma^2})=\frac\sigma{\sqrt2}e^{-\sigma^2k^2/4}$.}
+	于是\footnote{Everyone should calculate it once in their lifetime. - Shuo Jiang.}
+	\begin{align*}
+		\psi(x,t) & =\frac1{\sqrt{2\pi}}\int\iti\varphi(k)\e{\i kx}\e{-\i\hbar k^2t/2m}\d k                                                                                                                            \\
+		          & =\fracdisp{\exp\kh{\i k_0x-\frac{\hbar k_0^2}{2m}t}}{\fkh{\sqrt{2\pi}\sigma\kh{1+\frac{\i\hbar t}{2m\sigma^2}}}^{1/2}}\exp\fkh{-\fracdisp{\kh{x-\frac{\hbar k_0}mt}^2}{4\sigma^2+\frac{2\i\hbar t}m}}.
+	\end{align*}
+	概率密度
+	\begin{align*}
+		\abs{\psi(x,t)}^2=\fkh{2\pi\!\kh{\sigma^2+\frac{\i\hbar t}{2m\sigma^2}}}^{-1/2}\exp\fkh{-\fracdisp{\kh{x-\frac{\hbar k_0}mt}^2}{2\sigma^2+\frac{2\hbar^2 t^2}{m^2\sigma^2}}}.
+	\end{align*}
+	
+	可见波包中心运动速度为$\hbar k_0/m$，而波包宽度是发散的
+	\[
+		\sigma(t)=\sqrt{\sigma^2+\frac{\hbar^2t^2}{4m^2\sigma^2}}.
+	\]
+\end{example}
+\section{守恒}
+先看力学量的平均值
+\[
+	\ave A=(\psi,\hat A\psi),
+\]
+随时间的变化
+\begin{align*}
+	\dd t{\ave A} & =\kh{\pv\psi{t},\hat A\psi}+\cancel{\kh{\psi,\pv{\!\hat A}t\psi}}+\kh{\psi,\hat A\pv{\psi}t}.
+\end{align*}
+一般力学量不显含时间$t$，由\Schr 方程
+\[
+	\i\hbar\pv\psi{t}=\hat H\psi.
+\]
+因此
+\begin{align*}
+	\dd t{\ave A} & =\kh{\frac{\hat H\psi}{\i\hbar},\hat A\psi}+\kh{\psi,\hat A\frac{\hat H\psi}{\i\hbar}}
+	% \\	&=-\frac1{\i\hbar}(\psi,\hat H\hat A\psi)+\ave{\pv{\!\hat A}t}+\frac1{\i\hbar}(\psi,\hat A\hat H\psi)
+	=\frac1{\i\hbar}\ave{\cmm AH}. % +\ave{\pv{\!\hat A}t}.
+\end{align*}
+\begin{theorem}{力学量平均值的时间演化}{Time Evolution of Mean Value}
+	若$\hat A$不显含时间$t$，则
+	\begin{align}
+		\dd t\ave A=\frac1{\i\hbar}\ave{\cmm AH}.
+	\end{align}
+\end{theorem}
+在量子力学系统随时间演化的过程中，如果一个力学量的平均值不随时间而改变，则
+\[
+	\cmm AH\equiv 0.
+\]
+\begin{theorem}{守恒量}{Conservation}
+	若$\hat A$不显含时间，且$\cmm AH=0$，则$\hat A$是守恒量，即测量值概率分布不随时间改变。
+\end{theorem}
+由于$\hat A$和$\hat H$对易,我们可以选取其共同本征函数系$\psi_n$来展开任一波函数$\psi$
+\[
+	\psi(t)=\sum a_n(t)\psi_n
+\]
+由于
+\[
+	\dv{a_n}t=\frac{E_n}{\i\hbar}a_n,
+\]
+故测得$A_n$的概率
+\begin{align*}
+	\dd t(a_n^*a_n) & =\dv{a_n\cj}ta_n+a_n\cj\dv{a_n}t                                    \\
+	                & =-\frac{E_n}{\i\hbar}a_n\cj a_n+\frac{E_n}{\i\hbar}a_na_n\cj a_n=0.
+\end{align*}
+也就是说，不论体系处于什么量子态下，如果$\hat A$与$\hat H$对易，则不仅$\hat A$的力学量平均值为常数，其可能测值的概率分布也不随时间变化。这一点与$\hat H$本身的概率分布守恒是一致的。
+
+\begin{theorem}{*简并}{*Degenerate}
+	如果系统有两个彼此不对易的守恒量，则系统能级一般简并。
+\end{theorem}
+设$\hat A$和$\hat B$是守恒量，则它们分别都和$\hat H$对易。如果$\psi$是$\hat H$的对应于能量$\hat E$的本征态，则$\hat A\psi$和$\hat B\psi$也都是对应于$\hat E$的本征态。设$\psi$是$\hat A$的本征态($\hat H$和$\hat A$可有共同本征态)：
+\[
+	\hat A\psi=A\psi
+\]
+则一般$\psi$不会是$\hat B$的本征态(不对易力学算符不能拥有\textit{共同完备本征函数集})，也就是说
+\[
+	\hat B\psi\neq B\psi\propto\hat A\psi
+\]
+或者说$\hat A\psi$和$\hat B\psi$是线性无关的，即能级$E$是简并的。
+
+例：$\hat L_x,\hat L_y,\hat L_z$都和$\hat H$对易，但彼此不对易，所以氢原子能级是简并的。
+\begin{theorem}{非简并}{Non-Degenerate}
+	如果体系有一个守恒量$\hat A$和一个非简并的能级$E$，则此能级对应的本征态也是$\hat A$的本征态。
+\end{theorem}
+\begin{proof}
+	设这一能级$E$对应的本征态为中，则因为守恒量$\hat A$和$\hat H$对易，所以$\hat A\psi$也是$E$对应的本征态。又因为能级$E$无简并所以$\psi$和$\hat A\psi$必线性相关，这就证明了$\psi$也是$\hat A$的本征态。
+\end{proof}
+例：一维线性谐振子能级无简并，宇称算符与$\hat H$对易，所以谐振子的本征态必有确定的宇称。
+\begin{theorem}{守恒量与定态}{Conserved Quantities and Stationary States}
+	守恒量是指平均值及其概率分布不随时间变化的力学量；定态是指系统处于某一特定的能量本征态。
+	\begin{compactenum}
+		\item $\hat A$守恒与系统处于定态与否无关，但守恒量不一定取确定值；
+		\item 如果系统处于定态，一切不显含时间的力学量都守恒；
+		\item 如果$\hat A$不守恒，则$\avg A$一般会随时间变化，反例：一维谐振子基态的动量平均值。
+	\end{compactenum}
+\end{theorem}
+\section{Virial定理}
+定态系统中
+\[
+	\ave H=\ave T+\ave V=E.
+\]
+设$\psi$为$\hat E$的本征函数
+\[
+	\sum\hat x_i\hat p_i(\hat T+\hat V-E)\psi=0,
+\]
+显然$\hat T,\hat p_i$对易，$\hat V,\hat x_i$对易，展开为
+\[
+	\sum \kh{\cmm{x_i}T\hat p_i+\hat T\hat x_i\hat p_i+\hat x_i\cmm{p_i}V+\hat V\hat x_i\hat p_i-E\hat x_i\hat p_i}\psi=0.
+\]
+由
+\[
+	\cmm{x_i}T=\i\hbar\pv{\hat T}{p_i}=\i\hbar\frac{\hat p_i}m,\quad \cmm{p_i}V=-\i\hbar\pv{\hat V}{x_i}.
+\]
+化为
+\begin{gather*}
+	\sum_i\fkh{\i\hbar\frac{\hat p_i^2}m-\i\hbar\hat x_i\pv{\hat V}{x_i}+(\hat T+\hat V-E)\hat x_i\hat p_i}\psi=0,\\
+	\kh{\frac{\hat p^2}m-\sum_i\hat x_i\pv{\hat V}{x_i}}\psi=\frac\i\hbar(\hat T+\hat V-E)\sum_i\hat x_i\hat p_i\psi.
+\end{gather*}
+左乘$\psi\cj$并全空间积分
+\[
+	\ave{\frac{\hat p^2}m-\sum_i\hat x_i\pv{\hat V}{x_i}}=\frac\i\hbar\kh{(\hat T+\hat V-E)\psi,\sum_i\hat x_i\hat p_i\psi}=0.
+\]
+左边即Virial定理。
+\begin{theorem}{Virial定理}{Virial Theorem}
+	若$\hat V$不含$\hat p$，则动能平均值
+	\begin{align}
+		\ave T=\frac12\ave{\sum_i\hat x_i\pv{\hat V}{x_i}}.
+	\end{align}
+\end{theorem}
+\begin{example}{一维谐振子定态的动能平均值}{}
+	\[
+		V(x)=\frac12m\omega^2x^2,\quad\ave T=\frac12\ave{x\dv Vx}=\frac12m\omega^2\ave{x^2}=\ave V,
+	\]
+	因此$\ave T=\ave V=E/2$，进而
+	\begin{gather*}
+		\delta x=\sqrt{\ave{x^2}}=\sqrt{\frac{2\ave V}{m\omega^2}}=\sqrt{\frac E{m\omega^2}},\\
+		\delta p=\sqrt{\ave{p^2}}=\sqrt{2m\ave T}=\sqrt{mE}.
+	\end{gather*}
+	故
+	\[
+		\delta x\,\delta p=\frac E\omega=\kh{n+\frac12}\hbar\geqslant\frac\hbar{2}.
+	\]
+\end{example}
+\begin{example}{氢原子动能}{}
+	\[
+		V(r)=-\frac1{4\pi\varepsilon_0}\frac{e^2}r,\quad\ave T=\frac12\ave{r\dv Vr}=-\frac12\ave V,
+	\]
+	故$\ave T=-E,\;\ave V=2E$，与Bohr轨道模型结论一致。
+\end{example}
+\section{Ehrenfest定理}
+已经知道
+\[
+	\hat H=\frac{\hat p^2}{2m}+\hat V.
+\]
+于是
+\[
+	\dd t\ave{\r}=\frac1{\i\hbar}\ave{\cmm{\r}H}=\frac1{\i\hbar}\frac1{2m}\ave{\cmm{\r}{p^2}}=\frac{\ave{\bm p}}m.
+\]
+和
+\[
+	\dd t\ave{\bm p}=\frac1{\i\hbar}\ave{\cmm{{\bm p}}H}=\frac1{\i\hbar}\ave{\cmm{{\bm p}}V}=-\ave{\nabla V}.
+\]
+定义$\bm F:=-\nabla V$
+\begin{theorem}{Ehrenfest定理}{Ehrenfest Theorem}
+	和经典Newton方程类似，在量子力学中
+	\begin{align}
+		m\dv[2]{\avg\r}t=\avg{\bm F}.
+	\end{align}
+\end{theorem}
+考虑一个波包的运动，若波包空间范围很窄，则可近似
+\[
+	\bm F(\avg\r)\doteq m\dv[2]{\avg\r}{t}.
+\]
+\begin{example}{}{}
+	$\alpha$粒子被原子散射来探测原子结构，就需要：
+	\begin{compactenum}
+		\item 进入原子时$\alpha$粒子的波包的大小远小于原子的尺度(\si\angstrom)
+		\item 原子势场在波包大小的范围内变化不大，这样原子核对波包的作用力可以用原子核对波包中心的作用力代替
+		\item 由于波包会随着时间扩散变大，所以由要求散射过程所需时间极短，% 使得在散射过程中波包本身大小变化不大。
+		这就需要粒子的de Broglie波长也要远小于波包的尺度
+	\end{compactenum}
+	上述条件都满足的情况下，$\alpha$粒子的散射就可以用经典力学的方法来处理(Rutherford~$\alpha$粒子散射实验)，或者说Ehrenfest定理适用，微观粒子波粒二象性中的粒子性性质占主导地位。
+\end{example}
+
+若$\alpha$粒子能量为~\SI5\MeV，则其\deB 波长
+\[
+	\lambda=\frac hp=\frac h{\sqrt{2m_\alpha E}}=\SI{1e-14}\m\ll a_0.
+\]
+所以原子对低能电子的散射就不能用经典的轨道动力学来计算，而必须计及电子的波动效应，用量子力学的方法来计算 %，其结果必然与经典结果有很大不同
+；要想探索更细微的物质组成结构，就必须适用能量更高的入射粒子束来照射样品。
+
+在粒子波包足够窄的情况下，% 如果使定理成立，还必须满足势场变化缓慢的条件
+\[
+F(x)=-\fkh{\pv{V(\avg x)}{\avg x}+\pv[2]{V(\avg x)}{\avg x}(x-\avg x)+\frac12\pv[3]{V(\avg x)}{\avg x}(x-\avg x)^2+\cdots}.
+\]
+若要满足$\avg F(x)=F(\avg x)$，必须还要有
+\begin{align}
+	\frac12\abs{\pv[3]{V(\avg x)}{\avg x}}\vd x^2\ll\abs{\pv{V(\avg x)}{\avg x}},
+\end{align}
+如果势能函数最多含坐标的2次幂(如线性势或谐振子势)，则这个条件自动满足。
+\section{幺正算符}
+\begin{definition}{幺正算符}{Unitary Operator}
+	若算符$\hat U$的逆算符存在，且
+	\[
+		(\psi,\varphi)=(\hat U\psi,\hat U\varphi).
+\]
+	则$\hat U$是幺正的。可以验证
+	$\hat U\dg\hat U=I.$
+\end{definition}
+$I$显然是一个trivial的幺正算符，若幺正算符$\hat U$与$\hat I$差距充分小，即
+\[
+	\hat U=I+\i\varepsilon\hat F,\quad\varepsilon\ll 1.
+\]
+略去$\varepsilon$的高阶项
+\[
+	\hat U\dg\hat U=(I-\i\varepsilon\hat F\dg)(I+\i\varepsilon\hat F)=I+\i\varepsilon(\hat F-\hat F\dg)=I.
+\]
+因此$\hat F$是Hermite的。称$\hat F$的幺正算符$\hat U$的生成元。
+
+如果$\hat U$和$\hat I$差距并不小，则可以通过充分多次充分小的幺正变换
+\begin{align}
+	\hat U=\lim_{n\to\infty}\kh{I+\i\,\frac an\hat F}^n\equiv\e{\i a\hat F}.
+\end{align}
+用幺正算符实现的波函数和算符的变换称为幺正变换
+\begin{align}
+	\begin{cases}
+		\psi\to\psi'=\hat U\psi\\
+		\hat A\to\hat A'=\hat U\hat A\hat U\dg
+	\end{cases}
+\end{align}
+与经典物理中的坐标变换相似，幺正变换不改变系统的物理规律(运动方程、对易关系、平均值及概率)：
+\[
+	\hat A\psi=\varphi\implies\hat A'\psi'=\varphi'.
+\]
+Fourier变换也是幺正变换：
+\begin{align}
+	\hat U(p)\psi(x)&=\frac1{\sqrt{2\pi\hbar}}\int\psi(x)\e{-\i px/\hbar}\d x=\varphi(p);\\
+	\hat U^{-1}(x)\varphi(p)&=\frac1{\sqrt{2\pi\hbar}}\int\varphi(p)\e{\i px/\hbar}\d x=\psi(x).
+\end{align}
+对Hamilton算符进行幺正变换
+\begin{align}
+	\hat U\hat H\hat U^{-1}=\frac{p^2}{2m}+V\kh{\i\hbar\pp p}
+\end{align}
+故动量表象下的\Schr 方程 
+\begin{align}
+	\fkh{\frac{p^2}{2m}+V\kh{\i\hbar\pp p}}\varphi(p)=E\varphi(p).
+\end{align}
+
+对波函数进行幺正变换而量子力学规律不变，
+\[
+	\hat H\psi=E\psi,\implies\hat H\hat U\psi=E\hat U\psi
+\]
+等效为对系统算符进行幺正变换而量子力学规律不变。
+\[
+	\hat H\psi=E\psi,\implies\hat U\dg\hat H\hat U\psi=E\psi
+\]
+
+如果Hamilton算符幺正变换不变，
+\[
+	\hat H=\hat U\hat H\hat U\dg\implies\cmm FH=0.
+\]
+则幺正变换对应的生成元是守恒量。
+\begin{theorem}{Noether定理}{Noether Theorem}
+	每当量子系统存在一种对称性(么正不变性)，就相应的存在一个守恒律和守恒量。
+\end{theorem}
+\paragraph{时间均匀性和能量守恒}时间平移
+\[
+	\psi(t-\tau)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\kh{\dd t}^n\psi(t)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\kh{\frac{\hat H}{\i\hbar}}^n\psi(t)=\e{\i\tau\hat H/\hbar}\psi(t).
+\]
+故时间平移算符
+\begin{align}
+	\hat U(\tau)=\e{\i\tau\hat H/\hbar}.
+\end{align}
+时间平移算符的生成元为$\hat H$，自然是与自身对易，故系统能量守恒。时间平移不变性对应系统能量守恒。
+\paragraph{空间均匀性与动量守恒}空间平移
+\[
+	\psi(\r-\bm a)=\sum_{n=0}^\infty\frac{1}{n!}\kh{-\bm a\cdot\nabla}^n\psi(\r)=\e{-\i\bm a\cdot\qo p/\hbar}\psi(\r).
+\]
+空间平移算符
+\begin{align}
+	\hat U(\bm a)=\e{-\i\bm a\cdot\qo p/\hbar}.
+\end{align}
+空间平移不变性对应动量守恒。
+\paragraph{空间各向同性与角动量守恒}绕$\bm e_n$旋转小角度$\alpha$
+\begin{align*}
+	\psi(\r-\bm\alpha\times\r)&=\sum_{n=0}^\infty\frac{1}{n!}\fkh{-(\bm\alpha\times\r)\cdot\nabla}^n\psi(\r),\qquad\bm\alpha:=\alpha\bm e_n.\\
+	&=\sum_{n=0}^\infty\frac{1}{n!}\fkh{-\bm\alpha\cdot(\r\times\nabla)}^n\psi(\r)=\e{-\i\bm\alpha\cdot\qo L/\hbar}\psi(\r).
+\end{align*}
+空间转动算符
+\begin{align}
+	\hat U(\bm\alpha)=\e{-\i\bm\alpha\cdot\qo L/\hbar}
+\end{align}
+故空间转动不变性对应角动量守恒。
+\paragraph{空间反射不变性}定义宇称(parity)算符
+\begin{align}
+	\hat P\psi(\r)=\psi(-\r).
+\end{align}
+显然$\hat P^2=I$，本征值为$\pm 1$，且$(\hat P\varphi,\hat P\psi)=(\varphi,\psi)$。
+根据本征函数完备性，任一波函数都可以展开为$\hat P$的本征函数的叠加(对称和反对称部分)\[
+	\psi(\r)=\psi_\mathrm S(\r)+\psi_\mathrm A(\r).
+\]
+由于宇称是内禀的，所以没有经典对应力学量。如果系统宇称守恒，且系统能级是非简并的，则系统能量本征态必有确定的宇称。
+
+推论：一维束缚态对称势能情况下系统本征态必有确定的宇称，宇称守恒的系统并不一定处于宇称的本征态。
+
+对于多粒子系统，系统的总宇称是各部分相乘的，而能量等力学量的本征值是相加的。
+\paragraph{全同粒子效应}顾名思义，全同粒子在量子力学里是不可区分的。
+\begin{theorem}{全同粒子原理}{Identical Particle Principle}
+	调换全同粒子不改变体系状态。
+\end{theorem}
+定义交换算符
+\begin{align}
+	\hat P_{ij}\psi(\ldots,q_i,\ldots,q_j,\ldots;t)=\psi(\ldots,q_j,\ldots,q_i,\ldots;t).
+\end{align}
+显然$\hat P_{ij}^2=I$。由全同粒子原理，应有$\hat P_{ij}\psi=\pm\psi$。自旋整数的Bose子取$+$，对应交换对称；半整数的Fermi子取$-$，对应交换反对称。
+
+无耦合情形，体系的总波函数可写为单个粒子波函数的乘积
+\[
+	\psi(q_1,\ldots,q_N)=\psi_1(q_1)\cdots\psi_N(q_N).
+\]
+比如二粒子体系，有对称化波函数
+\[
+	\psi_\mathrm S(q_1,q_2)=\frac1{\sqrt2}\fkh{\psi_1(q_1)\psi_2(q_2)+\psi_1(q_2)\psi_2(q_1)},
+\]
+和反对称化波函数
+\[
+	\psi_\mathrm A(q_1,q_2)=\frac1{\sqrt2}\fkh{\psi_1(q_1)\psi_2(q_2)-\psi_1(q_2)\psi_2(q_1)}.
+\]
+推广到$N$粒子体系，反对称化波函数可以写为
+\begin{align}
+	\psi_\mathrm A(q_1,\ldots,q_N)=\frac1{\sqrt{N!}}\begin{vmatrix}
+		\psi_1(q_1)&\cdots&\psi_1(q_N)\\
+		\vdots&\ddots&\vdots\\
+		\psi_N(q_1)&\cdots&\psi_N(q_N)
+	\end{vmatrix}
+\end{align}
+这称为Slater行列式。显然，当$\psi_1,\ldots,\psi_N$任两者相等时，上式为0，即
+\begin{theorem}{Pauli不相容原理}{Pauli Exclusive Principle}
+	两个Fermi子不能处于相同的量子态中。
+\end{theorem}

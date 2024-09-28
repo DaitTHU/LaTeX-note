@@ -1,0 +1,1589 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{bm}%矢量
+\usepackage{authblk}%作者介绍
+\usepackage{fancyhdr}%上三为设置页眉页脚
+\usepackage[most]{tcolorbox}
+\usepackage{imakeidx}
+%---------------------------
+\everymath{\displaystyle}
+\allowdisplaybreaks[4]%使用行间公式格式
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black}%超链接设置
+%---------------------------
+\fancyhf{}\pagestyle{fancy}
+\fancyhead[L]{QM Note   \rightmark}
+\fancyhead[R]{by Dait}
+\fancyfoot[C]{-~\thepage~-}%页码
+%---------------------------
+    \def\d{{\rm d}}
+    \def\id{\,\d}%用于积分中的\d
+    \def\u{\uparrow}\def\v{\downarrow}
+    \def\sA{\mathsf A}\def\sB{\mathsf B}\def\sC{\mathsf C}\def\sX{\mathsf X}\def\sP{\mathsf P}\def\sH{\mathsf H}\def\sK{\mathsf K}\def\sL{\mathsf L}\def\sS{\mathsf S}\def\sM{\mathsf M}\def\sT{\mathsf T}
+    \newcommand{\ko}[1]{\hspace{-#1 pt}}%空格
+    \newcommand{\su}[1]{\vspace{-#1 pt}}%行距
+    \newcommand{\ds}[2]{\frac{\d #1}{\d #2}}%导数
+    \newcommand{\sds}[2]{\frac{\d^2 #1}{\d #2^2}}
+    \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}%偏导
+    \newcommand{\spd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+    \newcommand{\tpd}[3]{\frac{\partial^2 #1}{\partial #2\partial #3}}
+    \newcommand{\ave}[1]{\left\langle #1\right\rangle}%平均值<x>
+    \newcommand{\bra}[1]{\left\langle #1\right\vert}
+    \newcommand{\ket}[1]{\left\vert #1\right\rangle}
+    \newcommand{\brkt}[2]{\left\langle #1\middle\vert#2\right\rangle}
+    \newcommand{\ktbr}[2]{\left\vert#1\right\rangle\ko3\left\langle#2\right\vert}
+    \newcommand{\kh}[1]{\left(#1\right)}
+    \newcommand{\fkh}[1]{\left[#1\right]}
+    \newcommand{\cmm}[1]{\lfloor\ko{4.45}\lceil #1\rceil\ko{4.45}\rfloor}%括号
+    \newcommand{\ubm}[1]{\hat{\bm #1}}%单位向量
+    \newcommand{\ibm}[1]{\,\hat{\bm #1}}%带空单位向量
+    \def\intt{\ko2\int\ko8\int}%双重积分
+    \newcommand{\spark}[1]{\textcolor{red}{#1}}
+%-----------------------------
+\renewcommand{\thempfootnote}{\Roman{mpfootnote}}
+\renewcommand{\thefootnote}{\Roman{footnote}}%注释上标I,II,III,...
+%-----------------------------
+\tcbuselibrary{theorems, skins, breakable}
+\definecolor{matchagreen}{HTML}{73C088}		% 抹茶绿B7C6B3
+\newtcbtheorem[number within = subsection]{example}{example}{
+	enhanced, breakable, sharp corners,
+	attach boxed title to top left = {yshifttext = -1mm},
+	before skip = 2ex,
+	colback = matchagreen!5,				% 文本框内的底色
+	colframe = matchagreen,					% 文本框框沿的颜色
+	fonttitle = \bfseries,					% 标题字体用粗体	coltitle 默认 white,
+	boxed title style = {
+			sharp corners, size = small, colback = matchagreen,
+		}
+}{exm}
+\definecolor{melancholyblue}{HTML}{9EAABA}	% melancholy: 沮丧
+\newcounter{pslt}
+\setcounter{pslt}{-1}
+\newtcbtheorem[use counter = pslt]{posulate}{posulate}{
+	enhanced, breakable, sharp corners,
+	attach boxed title to top left = {yshifttext = -1mm}, before skip = 2ex,
+	colback = melancholyblue!5, colframe = melancholyblue, fonttitle = \bfseries,
+	boxed title style = {
+			sharp corners, size = small, colback = melancholyblue,
+		}
+}{psl}
+\definecolor{pureblue}{HTML}{80A3D0}
+\newtcbtheorem[number within = subsection]{definition}{definition}{
+	enhanced, breakable, sharp corners,
+	attach boxed title to top left = {yshifttext = -1mm}, before skip = 2ex,
+	colback = pureblue!5, colframe = pureblue, fonttitle = \bfseries,
+	boxed title style = {
+			sharp corners, size = small, colback = pureblue,
+		}
+}{dfn}
+\definecolor{peachred}{HTML}{EA868F}
+\newtcbtheorem[number within = subsection]{theorem}{theorem}{
+	enhanced, breakable, sharp corners,
+	attach boxed title to top left = {yshifttext = -1mm}, before skip = 2ex,
+	colback = peachred!5, colframe = peachred, fonttitle = \bfseries,
+	boxed title style = {
+			sharp corners, size = small, colback = peachred,
+		}
+}{thm}
+\makeindex
+\title{\textbf{\underline{Quantum Mechanics Note}}}
+\author{Dait}
+\affil{\textit{Class 00, Department of Engineering Physics, Tsinghua University.\\daiyj20@mails.tsinghua.edu.cn}}
+\date{2021/5/18 - 6/21}
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\clearpage
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+\setcounter{page}{1}
+\section{Foundamental Posulates}
+\subsection{State Desription}
+Quantum state\index{quantum state} is a vector $\ket\psi$ in Hilbert space.
+\begin{definition}{Dirac Notation}{}
+	The \textbf{ket} $\ket\psi$ is the $n\times 1$ column vector, and the \textbf{bra} $\bra\psi=\ket\psi^\dagger$,
+	$$\ket\psi=\cmm{\psi_1~\cdots~\psi_n}^\top,\qquad
+		\bra\psi=\cmm{\psi_1^*~\cdots~\psi_n^*}.$$
+	The inner product\index{inner product} of two vectors $\ket a$ and $\ket b$ is
+	\begin{center}
+		$\brkt ab:=a_1^*b_1+\cdots+a_n^*b_n=\sum_{i=1}^na_i^*b_i$.\footnote[1]{I'll omit the upper and lower mark for simplicity.}
+	\end{center}
+	The quantum state should be \textbf{normalized}, i.e. $\brkt\psi\psi=1$.
+\end{definition}
+%Hilbert space is the complete inner product space, and 
+\begin{theorem}{Gram-Schmidt}{}
+	Given a linearly independent bases $\ket{v_1},\ldots,\ket{v_n}$, we can form linear combinations of the basis vectors to obtain an orthonormal basis.\\
+	Thus we could find a set of orthonormal bases $\ket{a_i}$, and
+	$$\brkt{a_i}{a_j}=\delta_{ij}\qquad\sum\ktbr{a_i}{a_i}=I.$$
+	In the $\ket{a_i}$ base, the representation of a vector is $\ket\psi=\sum\psi_i\ket{a_i}$.
+\end{theorem}
+$\brkt x\psi=\psi(x)$ is the wave function.\index{wave function}
+\iffalse
+	\begin{Example}{}{}
+		If we know $\psi(a_i),\brkt x{a_i}$ in a certain base $\ket{a_i}$, we can calculate
+		\begin{align*}
+			\ket\psi         & =\sum\ktbr{a_i}{a_i}\psi\rangle=\sum\psi(a_i)\ket{a_i},              \\
+			\psi(x)          & =\sum\brkt x{a_i}\ko3\brkt{a_i}\psi=\sum\brkt x{a_i}\psi(a_i),       \\
+			\brkt\varphi\psi & =\sum\brkt\varphi{a_i}\ko3\brkt{a_i}\psi=\sum\varphi^*(a_i)\psi(a_i)
+		\end{align*}
+	\end{Example}
+\fi
+\subsection{Measurable Physical Properties}
+Measurable physical properties can be represented by Hermite\index{Hermite} operator $\sA$.
+\begin{theorem}{Eigenvalues of Hermitian}{}
+	The eigenvalues\index{eigenvalue} of Hermite $\sA$ are \textbf{real}, because if $\sA\ket a=a\ket a$,
+	\begin{align*}
+		\bra a\sA\ket a^\dagger & =\bra a\sA\ket a,\footnotemark \\
+		a^*\brkt aa             & =a\brkt aa,
+	\end{align*}\footnotetext[1]{Here the dagger symbol acts on the whole bracket $\bra a\sA\ket a$.}
+	thus $a\in\mathbb R$.
+\end{theorem}
+\begin{theorem}{Eigenvectors of Hermitian}{}
+	The eigenvectors\index{eigenvector} corresponding to different eigenvalues are \textbf{orthogonal}, because if $\sA\ket{a_1}=a_1\ket{a_1},\sA\ket{a_2}=a_2\ket{a_2}$
+	\begin{align*}
+		\bra{a_2}\sA\ket{a_1}^\dagger & =\bra{a_1}\sA\ket{a_2} \\
+		a_1^*\brkt{a_1}{a_2}          & =a_2\brkt{a_1}{a_2},
+	\end{align*}
+	for $a_1^*=a_1\neq a_2$, $\brkt{a_1}{a_2}=0$.
+\end{theorem}
+\subsubsection{Position Operator \textsf{X}}
+Position operator $\sX$\index{position operator $\sX$} in $\ket x$ base\index{base} satisfies: every position $\ket x$ is an eigenvector with its position $x$ as the eigenvalue, thus
+$$\sX\ket x=x\ket x.$$
+The base $\ket x$ is continuous, where $x\in\mathbb R$, and is orthonormal
+$$\brkt{x'}x=\delta(x'-x),\qquad\int_{-\infty}^{+\infty}\ko2\ktbr xx\d x=I.$$
+$\sX\ket\psi$ is a new state, which could be represented as
+$$\bra x\sX\ket\psi=x\brkt x\psi=x\psi(x).$$
+\begin{example}{Verifying the Hermitian}{}
+	$\sX$ is Hermite because
+	\begin{align*}
+		\bra\varphi\sX\ket\psi & =\int\brkt\varphi{x}\ko3\bra x\sX\ket\psi\d x                               \\
+		                       & =\int\brkt x\varphi x\brkt x\psi\d x=\int x\varphi^*(x)\psi(x)\d x;         \\
+		\bra\psi\sX\ket\varphi & =\int x\psi^*(x)\varphi(x)\id x=\bra\varphi\sX\ket\psi^\dagger.\quad(x^*=x)
+	\end{align*}
+\end{example}
+\subsubsection{Momentum Operator \textsf{P}}
+Momentum operator $\sP$\index{momentum operator $\sP$} in $\ket p$ base, similarily
+$$\sP\ket p=p\ket p.$$
+%To derive the expression in $\ket x$ base,
+We consider the state $\ket\psi$ in $\ket x$, $\ket k$ base, that $\brkt x\psi=\psi(x)$, $\brkt k\psi=:\hat\psi(k)$. Then by the \textbf{Fourier Transfromation}\index{Fourier Transfromation}:
+$$\psi(x)=\mathcal F^{-1}\cmm{\hat\psi(k)}=\frac1{\sqrt{2\pi}}\int\hat\psi(k)\exp(ikx)\id k.$$
+According to the \textbf{de Broglie relation}\index{de Broglie relation}: $p=\hbar k$, thus $\brkt k\psi\propto\brkt p\psi=:\varphi(p)$,
+\begin{align*}
+	\psi(x)     & \propto\int\varphi(p)\exp\kh{i\frac p\hbar x}\d p, \\
+	\brkt x\psi & =\int\brkt xp\ko3\brkt p\psi\d p,
+\end{align*}
+the lower formula is the calculation of $\brkt x\psi$, comparing these two formulas, we could conclude that the eigenfunction\index{eigenfunction} $p(x)$ is
+$$p(x)=\brkt xp\propto\exp\kh{\frac{ip}\hbar x},$$
+which meets the equation
+$$\ds{\brkt xp}x=\frac{ip}\hbar\brkt xp,$$
+From the definition $\sP\ket p=p\ket p$, we have the eigenfunction $p(x)$ satisfies
+$$\bra x\sP\ket p=p\brkt xp=-i\hbar\ds{\brkt xp}x.$$
+Therefore, the momentum operator $\sP$ in $\ket x$ base is $\sP\to-i\hbar\,\d/\d x,$
+$$\bra x\sP\ket\psi=-i\hbar\ds{}x\brkt x\psi=-i\hbar\ds{\psi(x)}x.$$
+\begin{example}{Verifying the Hermitian}{}
+	$\sP$ is Hermite because
+	\begin{align*}
+		\bra\varphi\sP\ket\psi & =\int\brkt\varphi{x}\ko3\bra x\sP\ket\psi\d x=-i\hbar\int\varphi^*(x)\ds{\psi(x)}x\d x                       \\
+		                       & =-i\hbar\left[\cancel{\varphi^*(x)\psi(x)\Big|_{-\infty}^{+\infty}}-\int\psi(x)\ds{\varphi^*(x)}x\d x\right] \\
+		                       & =i\hbar\int\psi(x)\ds{\varphi^*(x)}x\d x=\bra\psi\sP\ket\varphi^\dagger.
+	\end{align*}
+	Note: $x\to\infty,\quad\psi(x),\varphi(x)\to0$
+\end{example}
+\begin{definition}{Commutator}{}
+	The commutator\index{commutator} of two operators is
+	$$\cmm{\sA,\sB}:=\sA\sB-\sB\sA.$$
+	And anti-commutator\index{anti-commutator} $\{\sA,\sB\}:=\sA\sB+\sB\sA$, which is also useful later.
+\end{definition}
+\begin{example}{$\cmm{\sX,\sP}$}{}\su{12}
+	\begin{align*}
+		\bra x\cmm{\sX,\sP} & \ket\psi=\bra x\sX\sP\ket\psi-\bra x\sP\sX\ket\psi
+		=x\bra x\sP\ket\psi-\bra x\sP\,\big(\,\sX\ket\psi\big)                                                                     \\
+		=                   & -i\hbar\left(x\ds{\brkt x\psi}x-\ds{\bra x\sX\ket\psi}x\right)
+		=-i\hbar\left(x\ds{\brkt x\psi}x-\ds{x\brkt x\psi}x\right)                                                                 \\
+		=                   & -i\hbar\left[\cancel{x\ds{\brkt x\psi}x}-\left(\cancel{x\ds{\brkt x\psi}x}+\brkt x\psi\right)\right]
+		=i\hbar\brkt x\psi,
+	\end{align*}
+	then we conclude that
+	$$\spark{\cmm{\sX,\sP}=i\hbar.}$$
+\end{example}
+\paragraph{3-D case}%$\ket{\bm r}=\ket x\hat{\bm i}+\ket y\hat{\bm j}+\ket z\hat{\bm k}$, 
+$\sP\to-i\hbar\nabla$,\index{nabla $\nabla$}
+$$\bra{\bm r}\sP\ket\psi=-i\hbar\nabla\psi(\bm r)=-i\hbar\kh{\pd\psi{x}\hat{\bm i}+\pd\psi{y}\hat{\bm j}+\pd\psi{z}\hat{\bm k}}.$$
+\subsubsection{Angular Momentum Operator \textsf{L}}
+The classical angular momentum is
+$$\bm L=\bm r\times\bm p.$$
+In the quantum, the momentum $\sP=-i\hbar\nabla$, and\index{angular momentum operator $\sL$}
+\begin{gather*}
+	\sL=-i\hbar\,\bm r\times\nabla\\
+	=-i\hbar\fkh{\,y\pd{}z\ko2-\ko2z\pd{}y\,,\,z\pd{}x\ko2-\ko2x\pd{}z\,,\,x\pd{}y\ko2-\ko2y\pd{}x\,}^\top,
+\end{gather*}
+$\sL_x,\sL_y,\sL_z$ are three portions of $\sL$, and the angular momentum squared is
+$$\sL^2=\sL_x^2+\sL_y^2+\sL_z^2.$$
+\iffalse
+	Because
+	\begin{align*}
+		\sL_x^2 & =-\hbar^2\kh{y\pd{}z-z\pd{}y}\kh{y\pd{}z-z\pd{}y}                                       \\
+		        & =-\hbar^2\kh{y^2\spd{}z-y\pd{}y-yz\tpd{}zy-z\pd{}z-yz\tpd{}yz+z^2\spd{}y}               \\
+		\sL^2   & =-\hbar^2\left(y^2\spd{}z+z^2\spd{}y+z^2\spd{}x+x^2\spd{}z+z^2\spd{}y+y^2\spd{}z\right. \\
+		        & \qquad\qquad-y\pd{}y-z\pd{}z-z\pd{}z-x\pd{}x-x\pd{}x-y\pd{}y                            \\
+		        & \qquad\qquad\left.-2yz\tpd{}yz-2zx\tpd{}zx-2xy\tpd{}xy\right)
+	\end{align*}
+\fi
+\begin{example}{$\cmm{\sL_x,\sL_y}~\&~\cmm{\sL^2,\sL_x}$}{}\su{10}
+	\begin{gather*}
+		\begin{aligned}
+			\sL_x\sL_y= & -\hbar^2\kh{y\pd{}x+\cancel{yz\tpd{}zx}-\cancel{xy\spd{}z}-\cancel{z^2\tpd{}yx}+\cancel{xz\tpd{}yz}}; \\
+			\sL_y\sL_x= & -\hbar^2\kh{\cancel{yz\tpd{}xz}-\cancel{z^2\tpd{}xy}-\cancel{xy\spd{}z}+x\pd{}y+\cancel{xz\tpd{}zy}}, %\footnotemark
+		\end{aligned}\\
+		\cmm{\sL_x,\sL_y}=-\hbar^2\kh{y\pd{}x-x\pd{}y}=i\hbar\,\sL_z.
+	\end{gather*}
+	%\footnotetext[1]{$$\partial^2/\partial x\partial y\equiv\tpd{}yx$$} 
+	Similarily,
+	$$\spark{\cmm{\sL_x,\sL_y}=i\hbar\,\sL_z\quad\cmm{\sL_y,\sL_z}=i\hbar\,\sL_x,\quad\cmm{\sL_z,\sL_x}=i\hbar\,\sL_y.}$$
+	Then calculate $\cmm{\sL^2,\sL_x}=\cmm{\sL_x^2,\sL_x}+\cmm{\sL^2_y,\sL_x}+\cmm{\sL^2_z,\sL_x}$,
+	\begin{align*}
+		\cmm{\sL_x^2,\sL_x} & =\sL_x^3-\sL_x^3=0,                                                     \\
+		\cmm{\sL^2_y,\sL_x} & =\sL_y\cmm{\sL_y,\sL_x}+\cmm{\sL_y,\sL_x}\sL_y                          \\
+		                    & =-i\hbar\,\sL_y\sL_z-i\hbar\,\sL_z\sL_y=-i\hbar\,\{\sL_y,\sL_z\},       \\
+		\cmm{\sL^2_z,\sL_x} & =\sL_z\cmm{\sL_z,\sL_x}+\cmm{\sL_z,\sL_x}\sL_z=i\hbar\,\{\sL_z,\sL_y\}.
+	\end{align*}
+	Thus
+	$$\cmm{\sL^2,\sL_x}=0-i\hbar\,\{\sL_y,\sL_z\}+i\hbar\,\{\sL_z,\sL_y\}=0.$$
+	Similarily,
+	$$\spark{\cmm{\sL^2,\sL_x}=\cmm{\sL^2,\sL_y}=\cmm{\sL^2,\sL_z}=0.}$$
+\end{example}
+\begin{definition}{Ladder Operator}{}
+	Define the useful ladder operator\index{ladder operator $\sL_\pm$} $\sL_\pm:=\sL_x\pm i\,\sL_y.$
+	\begin{example}{Denote $\sL^2$ by $\sL_\pm~\&~\sL_z$}{}
+		$\sL^2=\sL_\pm\sL_\mp+\sL_z^2\mp\hbar\,\sL_z$, because
+		\begin{align*}
+			\sL_\pm\sL_\mp & =(\sL_x\pm i\,\sL_y)(\sL_x\mp i\,\sL_y)                                      \\
+			               & =\sL_x^2+\sL_y^2\mp i\,(\sL_x\sL_y-\sL_y\sL_x)=\sL^2-\sL_z^2\pm\hbar\,\sL_z.
+		\end{align*}
+	\end{example}
+	From the definition, its commutator with $\sL_z,\sL^2$ is
+	\iffalse
+		\begin{align*}
+			[\sL_z,\sL_\pm] & =[\sL_z,\sL_x]\pm i[\sL_z,\sL_y]                              \\
+			                & =i\hbar\sL_y\pm i(-i\hbar\sL_x)=\pm\hbar\kh{\sL_x\pm i\sL_y}.
+		\end{align*}
+		Thus\fi
+	$$\spark{\cmm{\sL_z,\sL_\pm}=\pm\hbar\,\sL_\pm,\quad\cmm{\sL^2,\sL_\pm}=0.}$$
+	As $\cmm{\sL^2,\sL_z}=0$, $\sL_2,\sL_z$ have the same eigenfunction $\ket\psi$, i.e.
+	$$\sL^2\ket\psi=\lambda\ket\psi,\quad\sL_z\ket\psi=\mu\ket\psi.$$
+	Considering $\sL_\pm\ket\psi$,
+	$$\sL^2\sL_\pm\ket\psi=\sL_\pm\sL^2\ket\psi=\lambda\sL_\pm\ket\psi,$$
+	$\ket\psi$, $\sL_\pm\ket\psi$ share the \textbf{same} eigenvalue of $\sL^2$.
+	$$\sL_z\sL_\pm\ket\psi=(\sL_\pm\sL_z\pm\hbar\,\sL_\pm)\ket\psi=(\mu\pm\hbar)\sL_\pm\ket\psi.$$
+	We call $\sL_+$ the \textbf{rasing operator}, as it increases the eigenvalue of $\sL_z$ by $\hbar$, and $\sL_-$ the \textbf{lowering operator}.
+\end{definition}
+\noindent Simplify $\ket{\psi_n}:=\sL_+^n\ket\psi$, ($n\geqslant 0$)
+$$\ave{\sL^2}=\bra{\psi_n}\sL^2\ket{\psi_n}=\lambda.$$
+$$\ave{\sL_z^2}=\bra{\psi_n}\sL_z^2\ket{\psi_n}=(\mu+n\hbar)^2.$$
+While
+$$\ave{\sL^2}=\ave{\sL_x^2}+\ave{\sL_y^2}+\ave{\sL_z^2}\geqslant\ave{\sL_z^2}.$$
+Hence, the rising progress can't go on forever, there must exist a \textbf{top} $\ket{\psi_t}$:
+$$\sL_+\ket{\psi_t}=0,\qquad{\rm then}~\ket{\psi_n}\equiv 0,~\forall\,n>t.$$
+Let $\ell\hbar$ be the eigenvalue of $\sL_z$ at $\ket{\psi_t}$, i.e. $\sL_z\ket{\psi_t}=\ell\,\hbar\ket{\psi_t}$.
+\begin{align*}
+	\sL^2\ket{\psi_t} & =(\sL_-\sL_++\sL_z^2+\hbar\,\sL_z)\ket{\psi_t}                                \\
+	                  & =(0+\ell^2\hbar^2+\ell\,\hbar^2)\ket{\psi_t}=\ell(\ell+1)\hbar^2\ket{\psi_t}.
+\end{align*}
+Also, there exists a \textbf{bottom} $\ket{\psi_b}$ that $\sL_-\ket{\psi_b}=0$, $\sL_z\ket{\psi_b}=\jmath\,\hbar\ket{\psi_b}$
+\begin{align*}
+	\sL^2\ket{\psi_b} & =(\sL_+\sL_-+\sL_z^2-\hbar\sL_z)\ket{\psi_b}                                          \\
+	                  & =(0+\jmath^2\hbar^2-\jmath\,\hbar^2)\ket{\psi_b}=\jmath(\jmath-1)\hbar^2\ket{\psi_b}.
+\end{align*}
+Because $\forall\,n,\sL^2\ket{\psi_n}\equiv\lambda\ket{\psi_n}$,
+$$\lambda=\ell(\ell+1)\hbar^2=\jmath(\jmath-1)\hbar^2\quad\Rightarrow\quad\jmath=-\ell\text{~or~}\bcancel{\jmath=\ell+1}.$$
+%(bottom$\,>\,$top, absurd).
+While $\sL_z\ket\psi=m\hbar\ket\psi$, where $m=-\ell,\ldots,\ell$ in $N$ integer steps, hence, $2\ell\in\mathbb N$. $\ket\psi$ contains two numbers $\ell,m$, using the notation $\ket{\ell,m}:=\ket\psi$ is more clear for different $\ket\psi$,
+$$\spark{\sL^2\ket{\ell,m}=\ell(\ell+1)\hbar^2\ket{\ell,m},\quad\sL_z\ket{\ell,m}=m\hbar\ket{\ell,m}.}$$
+where $\ell=0,1/2,1,3/2,\ldots;m=-\ell,-\ell+1,\ldots,\ell$.
+\begin{example}{$\sL_\pm$ changes $m$}{}
+	$\sL_\pm$ changes the value of $m$, i.e.
+	$$\sL_+\ket{\ell,m}=\alpha\ket{\ell,m+1},\quad\sL_-\ket{\ell,m+1}=\beta\ket{\ell,m},$$
+	We set $\alpha,\beta\in\mathbb R_+$.
+	$$\kh{\sL_+\ket{\ell,m}}^\dagger=\bra{\ell,m}\sL_-=\alpha\bra{\ell,m+1},$$
+	right multiply $\ket{\ell,m+1}$,
+	\begin{align*}
+		\bra{\ell,m}\sL_-\ket{\ell,m+1}=\beta & \brkt{\ell,m}{\ell,m}=\alpha\brkt{\ell,m+1}{\ell,m+1}, \\
+		\Rightarrow                           & \quad\alpha=\beta.
+	\end{align*}
+	%Right multiply $\sL_\pm\sL_\mp=\sL^2-\sL_z^2\pm\hbar\,\sL_z$ by $\ket{\ell,m}$,
+	\begin{align*}
+		\sL_-\sL_+\ket{\ell,m} & =\kh{\sL^2-\sL_z^2-\hbar\,\sL_z}\ket{\ell,m}   \\
+		\alpha^2\ket{\ell,m}   & =\cmm{\ell(\ell+1)-m(m+1)}\hbar^2\ket{\ell,m}.
+	\end{align*}
+	$$\Rightarrow\quad\spark{\sL_\pm\ket{\ell,m}=\sqrt{\ell(\ell+1)-m(m\pm 1)}\hbar\ket{\ell,m\pm 1}}.$$
+\end{example}
+\paragraph{Spherical Expression}The nabla in spherical coordinate,\index{spherical coordinate}
+$$\nabla=\pd{}r\ibm r+\frac1r\pd{}\theta\ibm\theta+\frac1{r\sin\theta}\pd{}\phi\ibm\phi.$$
+Because $\bm r=r\ibm r$, and $\hat{\bm r}\times\hat{\bm r}=\bm 0,\hat{\bm r}\times\hat{\bm\theta}=\hat{\bm\phi},\hat{\bm r}\times\hat{\bm\phi}=-\hat{\bm\theta}$,
+$$\sL=-i\hbar\cdot r\ibm r\times\nabla=-i\hbar\kh{\pd{}\theta\ibm\phi-\frac1{\sin\theta}\pd{}\phi\ibm\theta},$$
+Back to Cartesian components,
+\begin{align*}
+	\ubm\theta & =\cos\theta\cos\phi\ibm i+\cos\theta\sin\phi\ibm j-\sin\theta\ibm k, \\
+	\ubm\phi   & =-\sin\phi\ibm i+cos\phi\ibm j.
+\end{align*}
+Evidently,
+\begin{align*}
+	\begin{aligned}
+		\sL_x & =+i\hbar\kh{\sin\phi\pd{}\theta+\cos\phi\cot\theta\pd{}\phi}, \\
+		\sL_y & =-i\hbar\kh{\cos\phi\pd{}\theta-\sin\phi\cot\theta\pd{}\phi},
+	\end{aligned}\quad
+	\spark{\sL_z=-i\hbar\pd{}\phi.}
+\end{align*}
+Then,
+\begin{gather*}
+	\sL_\pm=\sL_x\pm i\,\sL_y=\hbar\,e^{\pm i\phi}\kh{\pm\pd{}\theta+i\cot\phi\pd{}\phi}.\\
+	\sL_+\sL_-=-\hbar^2\kh{\spd{}\theta+\cot\theta\pd{}\theta+\cot^2\theta\spd{}\phi+i\pd{}\phi}.\\
+	\spark{\sL^2=\sL_+\sL_-+\sL_z^2-\hbar\,\sL_z=-\hbar^2\Lambda^2,}
+\end{gather*}
+where the Legendrian\index{Legendrian $\Lambda^2$}
+$$\Lambda^2:=\frac1{\sin\theta}\pd{}\theta\left(\sin\theta\pd{}\theta\right)+\frac1{\sin^2\theta}\spd{}\phi,$$
+the eigenfunction of $\sL^2$, i.e.
+$$\sL^2\psi=-\hbar^2\Lambda^2\psi=\lambda\psi,$$
+\setcounter{footnote}{0}
+is the Legendre function we'll solve in H-Atom.\footnote{Note, parenthetically, that eigenfunctions of $\sL^2$ have been known since the 19th century, long before quantum mechanics was born.}\clearpage
+\subsubsection{Function of Operator}
+Using the \textbf{Taylor Expansion}\index{Taylor Expansion}
+$$f(x)=\sum_{k=0}^\infty\frac{f^{(k)}(0)}{k!}x^k=f(0)+f'(0)x+\frac12f''(0)x^2+\cdots,$$
+just replace $x$ by $\sA$,
+$$f(\sA)=\sum_{k=0}^\infty\frac{f^{(k)}(0)}{k!}\sA^k=f(0)+f'(0)\sA+\frac12f''(0)\sA^2+\cdots.$$
+\begin{theorem}{About eigenvectors}{}
+	If $\sA\ket{a_i}=a_i\ket{a_i}$, then \su3
+	$$f(\sA)\ket{a_i}=f(a_i)\ket{a_i}.$$
+	Because $\sA^n\ket{a_i}=a_i^n\ket{a_i}$ and $f(\sA)=\sum c_n\sA^n$
+	$$f(\sA)\ket{a_i}=\sum c_n\sA^n\ket{a_i}=f(a_i)\ket{a_i}.$$
+	thus $f(\sA)=\sum f(\sA)\ktbr{a_i}{a_i}=\sum f(a_i)\ktbr{a_i}{a_i}$.
+\end{theorem}
+\begin{example}{$\sK~\&~V(\sX)$}{}
+	Kinetic energy\index{kinetic energy $\sK$} $\sK:=K(\sP)=\frac{\sP^2}{2m}$, and potential energy function\index{potential $V$} $V(\sX)$\su5
+	\begin{align*}
+		\bra x\sK\ket\psi
+		=                     & \frac1{2m}\bra x\sP^2\ket\psi
+		=\frac1{2m}\bra x\sP(\sP\ket\psi)                                                                   \\
+		=                     & \frac{\hbar}{2im}\ds{\bra x\sP\ket\psi}x=-\frac{\hbar^2}{2m}\sds{\psi(x)}x. \\
+		\bra xV(\sX)\ket\psi= & \int\bra xV(\sX)\ket{x'}\brkt{x'}\psi\d{x'}                                 \\
+		=                     & \int V(x')\brkt x{x'}\psi(x')\d{x'}=V(x)\psi(x).
+	\end{align*}
+	And the Hamiltonian\index{Hamiltonian $\sH$} $\sH=\sK+V(\sX)$.
+\end{example}
+\begin{theorem}{About Commutator}{}
+	Commutator is anti-Hermite, because
+	$$\cmm{\sA,\sB}^\dagger= \sB^\dagger\sA^\dagger-\sA^\dagger\sB^\dagger=\sB\sA-\sA\sB=-\cmm{\sA,\sB},$$
+	The first thing about commutator is that
+	$$\cmm{\sA,\sA^n}=0,\qquad\forall\,n\in\mathbb N.$$
+	Therefore, $$\cmm{\sA,f(\sA)}=0.$$\tcblower
+	Commutator is much like cross product for they both satisfy the \textbf{inverse exchange law}:\index{inverse exchange law}
+	$$\cmm{\sB,\sA}=-\cmm{\sA,\sB}\quad\leftrightarrow\quad\bm b\times\bm a=-\bm a\times\bm b.$$
+	In cross product, we have the Lagrange equation:
+	\begin{align*}
+		(\bm a\times\bm b)\times\bm c & =(\bm a\cdot\bm c)\,\bm b-\bm a\,(\bm b\cdot\bm c); \\
+		\bm a\times(\bm b\times\bm c) & =\bm b\,(\bm a\cdot\bm c)-(\bm a\cdot\bm b)\,\bm c.
+	\end{align*}
+	In the commutator, the relation is similar:
+	\begin{itemize}
+		\item $\cmm{\sA\sB,\sC}=\cmm{\sA,\sC}\sB+\sA\cmm{\sB,\sC}$
+		      \begin{align*}
+			      \cmm{\sA\sB,\sC} & =\sA\sB\sC-\sC\sA\sB                                                        \\
+			                       & =\sA\sB\sC-\sA\sC\sB+\sA\sC\sB-\sC\sA\sB=\cmm{\sA,\sC}\sB+\sA\cmm{\sB,\sC}.
+		      \end{align*}
+		\item $\cmm{\sA,\sB\sC}=\sB\cmm{\sA,\sC}+\cmm{\sA,\sB}\sC$
+		      \begin{align*}
+			      \cmm{\sA,\sB\sC} & =\sA\sB\sC-\sB\sC\sA                                                        \\
+			                       & =\sB\sA\sC-\sB\sC\sA+\sA\sB\sC-\sB\sA\sC=\sB\cmm{\sA,\sC}+\cmm{\sA,\sB}\sC.
+		      \end{align*}
+	\end{itemize}
+	Let $\sB=\sC$, then
+	$$\cmm{\sA,\sB^2}=\sB\cmm{\sA,\sB}+\cmm{\sA,\sB}\sB=\left\{\cmm{\sA,\sB},\sB\right\}.$$
+	Especially, when $\sB\cmm{\sA,\sB}=\cmm{\sA,\sB}\sB$,
+	\begin{align*}
+		\bullet~\cmm{\sA,\sB^n}= & \cmm{\sA,\sB^{n-1}}\sB+\cmm{\sA,\sB}\sB^{n-1}                                                                        \\
+		=                        & \cmm{\sA,\sB^{n-2}}\sB^2+2\cmm{\sA,\sB}\sB^{n-1}=\cdots=n\cmm{\sA,\sB}\sB^{n-1}                                      \\
+		\bullet~\cmm{\sA,f(\sB)} & =\sum_{n=0}^\infty\frac{f^{(n)}(0)}{n!}\cmm{\sA,\sB^n}=\sum_{n=1}^\infty\frac{f^{(n)}(0)}{n!}\cmm{\sA,\sB}n\sB^{n-1} \\
+		                         & =\sum_{n=1}^\infty\frac{f^{(n)}(0)}{(n-1)!}\sB^{n-1}\cmm{\sA,\sB}=f'(\sB)\cmm{\sA,\sB}.
+	\end{align*}
+\end{theorem}
+\subsection{Measurement}
+The system in a state $\ket\psi$ which is normalized, and $\sA$ is any operator observable,
+%$$\sA\ket{a_i}=a_i\ket{a_i}.$$
+then $\ket\psi$ can be represented as
+$$\ket\psi=\sum\ket{a_i}\ko3\brkt{a_i}\psi=\sum c_i\ket{a_i}$$
+where $c_i=\brkt{a_i}\psi$ is the probability amplitude\index{probability amplitude} of getting $\ket{a_i}$ if measuring $\sA$.
+\subsubsection{Probability and Expectation}
+The possibility of getting $a_i$ is
+$$P(a_i)=|c_i|^2=\left\lvert\brkt{a_i}\psi\right\rvert^2.$$
+The expectation\index{expectation} result when measuring $\sA$ is
+$$\ave\sA=\sum P(a_i)a_i=\sum|c_i|^2a_i.$$
+\begin{theorem}{}{}
+	\centering$\spark{\ave\sA=\bra\psi\sA\ket\psi.}$
+	\begin{flalign*}
+		\begin{split}
+			\text{Proof: }\bra\psi\sA\ket\psi&=\sum\bra\psi\sA\ket{a_i}\ko3\brkt{a_i}\psi=\sum\bra\psi a_i\ket{a_i}\ko3\brkt{a_i}\psi\\
+			&=\sum a_i\brkt\psi{a_i}\brkt{a_i}\psi=\sum|c_i|^2a_i,
+		\end{split}&
+	\end{flalign*}
+\end{theorem}
+For continuous case, the \textbf{probability density}\index{probability density} is
+\begin{gather*}
+	P(x)=\left\lvert\brkt x\psi\right\rvert^2=|\psi(x)|^2,\\
+	\brkt\psi\psi=\int\brkt\psi{x}\ko3\brkt x\psi\d x=\int|\psi(x)|^2\d x=\int P(x)\id x=1.
+\end{gather*}
+$P(x)\id x$ is the probability between $x$ and $x+\d x$.\\
+And the average
+$$\ave\sA=\bra\psi\sA\ket\psi=\int\bra\psi\sA\ket x\ko3\brkt x\psi\d x$$
+\begin{example}{}{}
+	The average of $x,p$ is
+	$$\ave\sX=\int x|\psi(x)|^2\d x,\quad\ave\sP=-i\hbar\int\psi'(x) \psi^*(x)\d x$$
+	Warning: $\xcancel{\ave\sP=\int p(x)|\psi(x)|^2\d x}$.
+\end{example}
+%The collapse of state due to Measurement lead to a phase different $e^{i\theta}$.
+\subsubsection{Uncertainty}
+If the measurements result in many values, then the deviation is $\Delta\sA=\sA-\ave\sA$
+\begin{align*}
+	\ave{\Delta\sA^2}= & \ave{\left(\sA-\ave\sA\right)^2}=\ave{\sA^2-2\sA\ave\sA+\ave\sA^2} \\
+	=                  & \ave{\sA^2}-2\ave\sA\ko3\ave\sA+\ave\sA^2=\ave{\sA^2}-\ave\sA^2.
+\end{align*}
+Define the uncertainty\index{uncertainty} $\sigma_\sA^2:=\ave{\Delta\sA^2}$.\footnote{Textbooks tend to confuse $\Delta\sA$ and $\sigma_\sA$, it's understandable because $\Delta\sA$'s original definition in a single experiment doesn't matter.}
+\begin{theorem}{Uncertainty Principle}{}
+	lemma Schwarz
+	\begin{equation}
+		\brkt\alpha\alpha\ko3\brkt\beta\beta\geqslant\left|\brkt\alpha\beta\right|^2.
+	\end{equation}
+		Proof: $\forall\lambda\in\mathbb R,$
+		\begin{align*}
+			  & \left|\ket\alpha+\lambda\ket\beta\right|^2=(\bra\alpha+\lambda\bra\beta)(\ket\alpha+\lambda\ket\beta)        \\
+			= & \brkt\alpha\alpha+\lambda\left(\brkt\alpha\beta+\brkt\beta\alpha\right)+\lambda^2\brkt\beta\beta\geqslant 0,
+		\end{align*}
+		for $\lambda$, it is a quadratic inequality, so
+		\begin{align*}
+			\Delta & =\left(2\,\text{Re}\ko2\brkt\alpha\beta\right)^2-4\brkt\alpha\alpha\ko3\brkt\beta\beta \\
+			       & =4\left|\brkt\alpha\beta\right|^2-4\brkt\alpha\alpha\ko3\brkt\beta\beta\leqslant 0,
+		\end{align*}
+		that is what we need to proof.
+	lemma
+		If $\sA^\dagger=\sA$ Hermitian, $\ave\sA\in\mathbb R$ for
+		$$\bra\psi\sA\ket\psi^\dagger=\bra\psi\sA^\dagger\ket\psi=\bra\psi\sA\ket\psi.$$
+		If $\sA^\dagger=-\sA$ anti-Hermitian, $\ave\sA\in i\,\mathbb R$ for
+		$$\bra\psi\sA\ket\psi^\dagger=\bra\psi\sA^\dagger\ket\psi=-\bra\psi\sA\ket\psi.$$
+	We take $\ket\alpha\rightarrow\Delta\sA\ket\psi,\ket\beta\rightarrow\Delta\sB\ket\psi$, from the Schwarz Lemma,\index{Schwarz Lemma}
+	$$\sigma_\sA^2\sigma_\sB^2=\ave{\Delta\sA^2}\ko3\ave{\Delta\sB^2}\geqslant\left|\ave{\Delta\sA\Delta\sB}\right|^2.$$
+	Noticing that
+	$$\ave{\Delta\sA\Delta\sB}=\ave{(\sA-\ave\sA)(\sB-\ave\sB)}\\
+		=\ave{\sA\sB}-\ave\sA\ko3\ave\sB.$$
+	Decompose $\sA\sB$,
+	$$\sA\sB=\textstyle\frac12\cmm{\sA,\sB}+\frac12\{\sA,\sB\},$$
+	$\cmm{\sA,\sB}=\sA\sB-\sB\sA$ is anti-Hermitian, and $\{\sA,\sB\}=\sA\sB+\sB\sA$ is Hermitian,
+	$$\ave{\Delta\sA\Delta\sB}=\ave{\sA\sB}+\ave\sA\ko3\ave\sB=\underset{\text{Im-part}}{\underline{\textstyle\frac12\ave{\cmm{\sA,\sB}}}}+\underset{\text{Re-part}}{\underline{\textstyle\frac12\ave{\{\sA,\sB\}}-\ave\sA\ko3\ave\sB}}.$$
+	Then
+	$$\sigma_\sA\sigma_\sB\geqslant\left|\ave{\Delta\sA\Delta\sB}\right|\geqslant\left|\text{Im}\ko2\ave{\Delta\sA\Delta\sB}\right|=\textstyle\frac12\left|\ave{\cmm{\sA,\sB}}\right|.$$
+	For $\cmm{\sX,\sP}=i\hbar$, we conduct the \textbf{Uncertainty Principle}\index{Uncertainty Principle}
+	$$\spark{\sigma_\sX\sigma_\sP\geqslant\frac{\hbar}2,}$$
+	which means we can't precisely measure $\sX$ and $\sP$ simultaneously.
+\end{theorem}
+\subsection{Schrödinger Equation}
+The Schrödinger Equation\index{Schrödinger Equation} is
+\spark{\begin{align}\label{vectdse}
+		i\hbar\ds{\ket\psi}t=\sH\ket\psi,
+	\end{align}}
+where Hamiltonian $\sH=\sK+V(\sX)$.
+\subsubsection{Time Dependent Schrödinger Equation}
+Left multiply Eqn.(\ref{vectdse}) by $\bra x$, we get\index{Time Dependent Schrödinger Equation}
+\begin{align}\label{tdse}
+	i\hbar\pd{\psi(x,t)}t=-\frac{\hbar^2}{2m}\spd{\psi(x,t)}x+V(x)\psi(x,t),
+\end{align}
+\begin{definition}{Probability Current}{}
+	Let's review the calculation of
+	$$P(a\leqslant x\leqslant b)=\int_a^b|\psi(x)|^2\d x.$$
+	From Sch-Eqn.(\ref{tdse}): $\pd\psi{t}=\frac{i\hbar}{2m}\spd\psi{x}+\frac1{i\hbar}V\psi$,
+	\begin{align*}
+		\begin{aligned}
+			\ds{P}t & =\ds{}t\int_a^b\psi^*\psi\d x=\int_a^b\kh{\pd{\psi^*}t\psi+\psi^*\pd\psi{t}}\d x                                                                                        \\
+			        & =\int_a^b\fkh{\kh{-\frac{i\hbar}{2m}\spd{\psi^*}x-\cancel{\ko1\frac1{i\hbar}V}\psi^*}\psi+\psi^*\kh{\frac{i\hbar}{2m}\spd\psi{x}+\ko1\cancel{\frac1{i\hbar}V}\psi}}\d x
+		\end{aligned} \\
+		\begin{aligned}
+			 & =\frac{i\hbar}{2m}\int_a^b\ko2\kh{\psi^*\spd\psi{x}-\psi\spd{\psi^*}x}\d x=\frac{i\hbar}{2m}\int_a^b\pd{}x\kh{\psi^*\pd\psi{x}-\psi\pd{\psi^*}x}\d x \\
+			 & =\frac{i\hbar}{2m}\fkh{\psi^*\pd\psi{x}-\psi\pd{\psi^*}x}_a^b=:j(a,t)-j(b,t),
+		\end{aligned}
+	\end{align*}
+	where $j:=\frac{i\hbar}{2m}\kh{\psi\pd{\psi^*}x-\psi^*\pd{\psi}x}$ is the \textbf{probability current}.\index{probability current}
+\end{definition}
+Directly solving Eqn.(\ref{tdse}) is difficult, we need the eigenfunctions.
+%in 3-D    $$i\hbar\pd{\psi}t=-\frac{\hbar^2}{2m}\nabla^2\psi+V\psi$$
+\subsubsection{Time Independent Schrödinger Equation}
+If we use $\ket E$ base\index{base}, which is the eigenvector of $\sH$, i.e.
+\begin{align}\label{vectise}
+	\sH\ket E=E\ket E,
+\end{align}\index{Time Independent Schrödinger Equation}
+and left multiply Eqn.(\ref{vectdse}) by $\bra E$,
+$$\bra E\sH\ket\psi=i\hbar\ds{\brkt E\psi}t=E\brkt E\psi.$$
+Define $\zeta(t):=\brkt E\psi$ as a function of $t$, then
+$$i\hbar\ds{\zeta(t)}t=E\zeta(t),$$
+which is easy to solve and the solution is
+$$\zeta(t)=\zeta(0)e^{E/i\hbar\,t}.$$
+Because $\ket\psi=\sum\ket{E_n}\ko3\brkt{E_n}\psi=\sum\zeta_n(t)\ket{E_n}$,
+$$\ket\psi=\sum\zeta_n(0)e^{-i\omega_nt}\ket{E_n},\quad\omega_n=\frac{E_n}\hbar,$$
+Define $\psi(x):=\brkt xE$, left multiply Eqn.(\ref{vectise}) by $\bra x$,
+\spark{\begin{align}\label{tise}
+		-\frac{\hbar^2}{2m}\sds{\psi(x)}x+V(x)\psi(x)=E\psi(x).
+	\end{align}}\su{20}
+\paragraph{Clarify}Here $\psi(x)$ is \textbf{different} from $\psi(x,t)$ in Eqn.(\ref{tdse}). $\psi(x,t)$ is the wave function; $\psi(x)$ is the eigenfunction of Eqn.(\ref{tise}), and it's independent of $t$.
+\paragraph{Link}Taking different $E_n$, we get a series of $\psi_n(x)$ by sloving Eqn.(\ref{tise}), $\ket{E_n}$ is the base in space so
+$$\psi(x,0)=\sum c_n\psi_n(x),$$
+then as $t$ evolves,
+$$\psi(x,t)=\sum c_ne^{-i\omega_nt}\psi_n(x),\quad\omega_n=\frac{E_n}\hbar.$$
+\newpage
+\subsubsection{Ehrenfest Theorem\index{Ehrenfest Theorem}}
+\begin{theorem}{Ehrenfest}{}
+	$$\spark{\ds{\ave\sA}t=\frac 1{i\hbar}\ave{\cmm{\sA,\sH}}.}$$
+	\begin{flalign*}
+		\begin{split}
+			\text{Proof: }\ds{\ave\sA}t=\ds{\bra\psi\sA\ket\psi}t=\ds{\bra\psi}t\sA\ket\psi+\bra\psi\sA\ds{\ket\psi}t.
+		\end{split}\footnotemark[1]&
+	\end{flalign*}\footnotetext[1]{Most operators are independent of time, i.e. $\partial\sA/\partial t\equiv 0.$}
+	From Sch-Eqn.(\ref{vectdse}): $\ds{\ket\psi}t=\frac1{i\hbar}\sH\ket\psi,\ds{\bra\psi}t=-\frac1{i\hbar}\bra\psi\sH$, hence,
+	%$$\ds{\bra\psi}t=\left(\ds{\ket\psi}t\right)^\dagger=\left(\frac1{i\hbar}\sH\ket\psi\right)^\dagger=-\frac1{i\hbar}\bra\psi\sH,$$
+	$$\ds{\ave\sA}t=\left(-\frac1{i\hbar}\bra\psi\sH\right)\sA\ket\psi+\bra\psi\sA\left(\frac1{i\hbar}\sH\ket\psi\right)=\frac 1{i\hbar}\ave{\cmm{\sA,\sH}}.$$
+	%$$=-\frac1{i\hbar}\bra\psi\sH\sA\ket\psi+\frac1{i\hbar}\bra\psi\sA\sH\ket\psi$$
+\end{theorem}
+\begin{example}{$\sA=\sX$}{}
+	$$\spark{\ds{\ave\sX}t=\frac1{i\hbar}\ave{\cmm{\sX,\sH}}=\frac{\ave\sP}m.}$$
+	For
+	$$\cmm{\sX,\sH}=\frac1{2m}\cmm{\sX,\sP^2}+\cmm{\sX,V(\sX)}=\frac{\sP}m\cmm{\sX,\sP}+0=\frac{i\hbar}m\sP.$$
+	This makes perfect sense because in classic
+	$$v=\ds xt=\frac pm.$$
+\end{example}
+\begin{example}{$\sA=\sP$}{}
+	$$\spark{\ds{\ave\sP}t=\frac1{i\hbar}\ave{\cmm{\sP,\sH}}=-\ave{V'(\sX)}.}$$
+	For\su5
+	$$\cmm{\sP,\sH}=\frac1{2m}\cmm{\sP,\sP^2}+\cmm{\sP,V(\sX)}=0+V'(\sX)\cmm{\sP,\sX}=-i\hbar V'(\sX).$$
+	This alse makes sense,
+	$$F=\ds pt=-\ds{V(x)}x.$$
+	In 3-D space,
+	$$\ds{\ave\sP}t=-\ave{\nabla V},$$
+	and for the angular momentum, like $\bm\tau=\ds{\bm L}t=\bm r\times\bm F,$
+	$$\ds{\ave\sL}t=\ave{-\bm r\times\nabla V(\bm r)}$$
+\end{example}
+\begin{theorem}{Time-Energy Uncertainty Principle}{}
+	Let's go back to the Uncertainty Principle\index{Uncertainty Principle}
+	$$\sigma_\sA\sigma_\sB\geqslant\frac12\left|\ave{\cmm{\sA,\sB}}\right|,$$
+	when $\sB\equiv\sH$, from Ehrenfest Theorem: $\ave{\cmm{\sA,\sH}}=i\hbar~\d\ko2\ave\sA\ko3/\d t$
+	$$\sigma_\sA\sigma_\sH\geqslant\frac12\left|\ave{\cmm{\sA,\sH}}\right|=\frac{\hbar}2\left|\ds{\ko2\ave\sA}t\right|,$$
+	when $\sA\equiv\sT$, which is the time operator
+	$$\sigma_\sT\sigma_\sH\geqslant\frac{\hbar}2.$$
+\end{theorem}
+\subsection{Conclusion}
+General strategy working on Quantum.
+\begin{itemize}
+	\item Predict measurement result.
+	      $$\sA\ket{a_i}=a_i\ket{a_i},\quad\ket\psi=\sum\brkt{a_i}\psi\ko3\ket{a_i}.$$
+	\item Transfromation between bases.
+	      \begin{align*}
+		      \sB\ket{b_j}   & =b_j\ket{b_j},\quad\ket\psi=\sum\brkt{b_j}\psi\ko3\ket{b_j}. \\
+		      \brkt{b_j}\psi & =\sum\brkt{b_j}{a_i}\ko3\brkt{a_i}\psi.
+	      \end{align*}
+	\item Time evolution - Expand as components of $\ket{\psi_{E_a}}$.
+\end{itemize}
+\clearpage
+\subsubsection{Example: Spin-1/2 System}
+There is another type of angular momentum, called \textbf{spin angular momentum},\index{spin angular momentum $\sS$} represented by the spin operator
+$$\sS =\sS_x\hat{\bm i}+\sS_y\hat{\bm j}+\sS_z\hat{\bm k},$$
+and the eigenvalue is just the same as the orbit angular momentum,\footnote{Spin is often depicted as a particle literally spinning around an axis, but this is only a metaphor: spin is an intrinsic property of a particle, unrelated to any sort of (yet experimentally observable) motion in space. All elementary particles have a characteristic spin, which is usually nonzero. For example, electrons always have spin-1/2 while photons always have spin-1.}
+$$\sS^2\ket{s,s_z}=s(s+1)\hbar^2\ket{s,s_z},\quad\sS_z\ket{s,s_z}=s_z\hbar\ket{s,s_z}.$$
+where $s=0,1/2,1,3/2,\ldots;s_z=-s,-s+1,\ldots,s$.
+\begin{example}{Stern–Gerlach Experiment}{}
+	In classic, the magnetic dipole $\bm\mu$ of an electron rotating in a circle is
+	$$\bm\mu:=I\bm S=\frac{ev}{2\pi r}\cdot\pi r^2\ibm n=\frac{evr}{2}\hat{\bm n}.$$
+	While the angular momentum of electron is $\bm L=-mvr\hat{\bm n}$,
+	$$\bm\mu=g_L\bm L,\qquad g_L=-\frac e{2m}.$$
+	In quantum,
+	$$\bm\mu=g_s\sS,\qquad g_s=g_0g_L,$$
+	interestingly, $g_0=2.00\cdots$ is not a integer.\\
+	When magnetic pole $\bm\mu$ interacts with magnetic feild $\bm B$, the torque
+	$$\bm\tau=\bm\mu\times\bm B.$$
+	Then the energy
+	$$U=\int\mu B\sin\theta\id\theta=-\mu B\cos\theta=-\bm\mu\cdot\bm B.$$
+	In the experiment, $\bm B=B_z\hat{\bm k}$, thus
+	$$\sH=-g_s\sS_zB_z.$$
+	Shoot electrons into a magnetic field $\bm B$ whose $z$-axis direction field strength $B_z$ is not a const, then the electrons will be deflected
+	$$F=-\pd{H_{\rm int}}z=g_zS_z\ds{B_z}z,$$
+	\begin{center}
+		\usetikzlibrary{arrows.meta}
+		\begin{tikzpicture}
+			\draw(0.6,2)--(0.8,1.5)--(1.8,1.5)--(2,2);
+			\node at(1.3,1.75){\textbf S};
+			\draw[ultra thin,->](-.2,-1.5)--(1,1.5);
+			\draw[ultra thin,->](.8,-1.5)--(1.2,1.5);
+			\draw[ultra thin,->](1.8,-1.5)--(1.4,1.5);
+			\draw[ultra thin,->](2.8,-1.5)--(1.6,1.5);
+			\draw(-.4,-2.3)--(-.4,-1.5)--(3,-1.5)--(3,-2.3);
+			\node at(1.3,-1.9){\textbf N};
+			\node at(-.3,-1){$\bm B$};
+			\draw[-Latex](0,1)--(0,2);
+			\node at(-.3,2){$z$};
+			\node at(-2.8,.06){$e^-$};
+			\draw[thick](0,0)--(-2.5,0);
+			\draw[thick](0,0)parabola bend(0,0)(4,1);
+			\draw[thick,-Latex](4,1)--(5,1.5);
+			\node at(4.1,1.5){$\ket{\u_z}$};
+			\draw[thick](0,0)parabola bend(0,0)(4,-1);
+			\draw[thick,-Latex](4,-1)--(5,-1.5);
+			\node at(4.1,-1.5){$\ket{\v_z}$};
+			\draw(5.1,2.5)--(5.1,-2.5);
+			\draw(5.2,1)..controls(5.2,1.4)..(6,1.5);
+			\draw(5.2,2)..controls(5.2,1.6)..(6,1.5);
+			\draw(5.2,-1)..controls(5.2,-1.4)..(6,-1.5);
+			\draw(5.2,-2)..controls(5.2,-1.6)..(6,-1.5);
+		\end{tikzpicture}
+		\small Stern–Gerlach Experiment Setup
+	\end{center}
+	Eventually there are two bands shown on the screen, indicating that there are only two values for the spin $\sS_z$ of the electron, i.e.
+	\begin{align*}
+		\begin{aligned}
+			s_z & =\pm\textstyle\frac12, \\
+			s   & =\textstyle\frac12,
+		\end{aligned}\quad
+		\begin{aligned}
+			\sS_z & \rightarrow\pm\textstyle\frac12\hbar,     \\
+			|\sS| & \rightarrow\textstyle\frac{\sqrt3}2\hbar,
+		\end{aligned}
+	\end{align*}
+	which is the \textbf{spin-1/2 system}.\index{spin-1/2 system}
+\end{example}
+\noindent Define the spin notation:
+$$\ket{\u_z}:=\ket{s=\textstyle\frac12,s_z=\frac12},\quad\ket{\v_z}:=\ket{s=\textstyle\frac12,s_z=-\frac12}.$$
+In the $\ket{\u_z},\ket{\v_z}$ base,
+\begin{align*}
+	\ket{\u_z}=\begin{bmatrix}1\\0\end{bmatrix},\quad
+	\ket{\v_z}=\begin{bmatrix}0\\1\end{bmatrix}.
+\end{align*}
+As
+$$\sS_z\ket{\u_z}=\frac{\hbar}2\ket{\u_z},\quad\sS_z\ket{\v_z}=-\frac{\hbar}2\ket{\v_z}.$$
+Thus
+\begin{align*}
+	\sS_z=\frac{\hbar}2\ktbr{\u_z}{\u_z}-\frac{\hbar}2\ktbr{\v_z}{\v_z}=\displaystyle\frac{\hbar}2\begin{bmatrix}1&0\\0&-1\end{bmatrix}.
+\end{align*}
+\paragraph{Transformation between bases} After the S-G experimental setup, $\ket{\u_z}$ and $\ket{\v_z}$ are separated, and the percent is 50\%-50\%, then shoot the $\ket{\u_z}$ part into another S-G setup, however, this time along $x$-axis, the outcome is that $\ket{\u_x}$ and $\ket{\v_x}$ are separated, and the percent is also 50\%-50\%, i.e.
+$$\left\vert\brkt{\u_x}{\u_z}\right\vert^2=\frac12,\quad\left\vert\brkt{\v_x}{\u_z}\right\vert^2=\frac12.$$
+Then we can let
+\begin{align*}
+	\ket{\u_x} & =\frac1{\sqrt2}\ket{\u_z}+\frac1{\sqrt2}e^{i\theta_+}\ket{\v_z}, \\
+	\ket{\v_x} & =\frac1{\sqrt2}\ket{\u_z}+\frac1{\sqrt2}e^{i\theta_-}\ket{\v_z},
+\end{align*}
+where $e^{i\theta_+},e^{i\theta_-}$ are just the phase difference,$$\left\vert\brkt{\v_x}{\u_x}\right\vert^2=\frac12+\frac12\cos(\theta_+-\theta_-)=0,$$
+thus $e^{i\theta_-}=-e^{i\theta_+}$. For $y$-axis, similarily,
+\begin{align*}
+	\begin{aligned}
+		\ket{\u_x} & =\frac1{\sqrt2}\ket{\u_z}+\frac1{\sqrt2}e^{i\theta_+}\ket{\v_z}, \\
+		\ket{\v_x} & =\frac1{\sqrt2}\ket{\u_z}-\frac1{\sqrt2}e^{i\theta_+}\ket{\v_z},
+	\end{aligned}\qquad
+	\begin{aligned}
+		\ket{\u_y} & =\frac1{\sqrt2}\ket{\u_z}+\frac1{\sqrt2}e^{i\theta_+'}\ket{\v_z}, \\
+		\ket{\v_y} & =\frac1{\sqrt2}\ket{\u_z}-\frac1{\sqrt2}e^{i\theta_+'}\ket{\v_z},
+	\end{aligned}
+\end{align*}
+while
+$$\left\vert\brkt{\u_x}{\u_y}\right\vert^2=\frac12+\frac12\cos(\theta_+'-\theta_+)=\frac12,$$
+the convention is to set $\theta_+=0,\theta_+'=\pi/2$, i.e.
+\begin{align*}
+	\begin{aligned}
+		\ket{\u_x} & =\frac1{\sqrt2}\ket{\u_z}+\frac1{\sqrt2}\ket{\v_z}, \\
+		\ket{\v_x} & =\frac1{\sqrt2}\ket{\u_z}-\frac1{\sqrt2}\ket{\v_z},
+	\end{aligned}\qquad
+	\begin{aligned}
+		\ket{\u_y} & =\frac1{\sqrt2}\ket{\u_z}+\frac{i}{\sqrt2}\ket{\v_z}, \\
+		\ket{\v_y} & =\frac1{\sqrt2}\ket{\u_z}-\frac{i}{\sqrt2}\ket{\v_z},
+	\end{aligned}
+\end{align*}
+thus,
+\begin{align*}
+	\sS_x=\frac{\hbar}2\begin{bmatrix}0&1\\1&0\end{bmatrix},\quad
+	\sS_y=\frac{\hbar}2\begin{bmatrix}0&-i\\i&0\end{bmatrix},
+\end{align*}
+$\sS_x,\sS_y,\sS_z$ contains the Pauli spin matrixes\index{Pauli spin matrixes}
+\begin{align*}
+	\sigma_x=\begin{bmatrix}0&1\\1&0\end{bmatrix},\quad
+	\sigma_y=\begin{bmatrix}0&-i\\i&0\end{bmatrix},\quad
+	\sigma_z=\begin{bmatrix}1&0\\0&-1\end{bmatrix}.
+\end{align*}
+For any a normalized vector
+$$\hat{\bm u}=\cmm{\sin\theta\cos\phi,\sin\theta\sin\phi,\cos\theta}^\top,$$
+the spin operator along this direction is
+\begin{align*}
+	\sS_u=\hat{\bm u}\cdot\sS & =\frac{\hbar}2\kh{\sin\theta\cos\phi~\sigma_x+\sin\theta\sin\phi~\sigma_y+\cos\theta\;\sigma_z} \\
+	                          & =\frac{\hbar}2\begin{bmatrix}\cos\theta&\sin\theta e^{-i\phi}\\\sin\theta e^{i\phi}&-\cos\theta\end{bmatrix}.
+\end{align*}
+The eigenvalues are still $\pm\hbar/2$ and the eigenvectors
+\begin{align*}
+	\sS_u      & \ket{\u_u}=\frac{\hbar}2\ket{\u_u},\quad\sS_u\ket{\v_u}=-\frac{\hbar}2\ket{\v_u},   \\
+	\ket{\u_u} & =+\cos\frac{\theta}2e^{-i\phi/2}\ket{\u_z}+\sin\frac{\theta}2e^{i\phi/2}\ket{\v_z}, \\
+	\ket{\v_u} & =-\sin\frac{\theta}2e^{-i\phi/2}\ket{\u_z}+\cos\frac{\theta}2e^{i\phi/2}\ket{\v_z},
+\end{align*}
+\paragraph{Predict the measurements}
+\begin{align*}
+	P(s_z=\textstyle\frac12) & =\left\vert\brkt{\u_z}{\u_u}\right\vert^2=\cos^2\frac\theta{2};                                                                       \\
+	P(s_x=\textstyle\frac12) & =\left\vert\brkt{\u_x}{\u_u}\right\vert^2=\frac12\left\vert\cos\frac{\theta}2e^{-i\phi/2}+\sin\frac{\theta}2e^{i\phi/2}\right\vert^2  \\
+	                         & =\frac12\kh{1+\sin\theta\cos\phi};                                                                                                    \\
+	P(s_y=\textstyle\frac12) & =\left\vert\brkt{\u_y}{\u_u}\right\vert^2=\frac12\left\vert\cos\frac{\theta}2e^{-i\phi/2}+i\sin\frac{\theta}2e^{i\phi/2}\right\vert^2 \\
+	                         & =\frac12\kh{1+\sin\theta\sin\phi}.
+\end{align*}
+\paragraph{Evolution in a const $\bm{B_0}$}
+$$\sH=-g_s\sS_zB_0=\Omega\,\sS_z,\quad\Omega:=-g_sB_0,$$
+then $\ket{\u_z},\ket{\v_z}$ are the eigenvectors of $\sH$
+$$\sH\ket{\u_z}=\frac{\hbar\Omega}2\ket{\u_z},\qquad\sH\ket{\v_z}=-\frac{\hbar\Omega}2\ket{\v_z},$$
+then time evolution for $\ket\psi=\ket{\u_u}$
+$$\ket{\psi(t)}=\cos\frac{\theta}2e^{-i(\phi+\Omega t)/2}\ket{\u_z}+\sin\frac{\theta}2e^{i(\phi+\Omega t)/2}\ket{\v_z}$$
+The probability evolving with time is
+\begin{align*}
+	P(s_z=\textstyle\frac12) & =\cos^2\frac\theta{2},                         \\
+	P(s_x=\textstyle\frac12) & =\frac12\cmm{1+\sin\theta\cos(\phi+\Omega t)}.
+\end{align*}
+$\sS_z$ is a well state because it commute with $\sH$
+$$\ave{\sS_z}=\cos^2\frac\theta{2}\cdot\frac\hbar{2}+\sin^2\frac\theta{2}\left(-\frac\hbar{2}\right)=\frac{\hbar\cos\theta}2,\qquad\ds{\ave{\sS_z}}t=0.$$
+\clearpage
+\section{Simple Systems}
+\subsection{Free Particle}
+Free means $V(x)\equiv 0$, then $\ket p$ is the eigenvector of $\sH$ because
+\begin{gather*}
+	\sH\ket p=\frac{\sP^2}{2m}\ket p=\frac{p^2}{2m}\ket p,\\
+	E=\frac{p^2}{2m}=\frac{\hbar^2k^2}{2m}\quad\Rightarrow\quad\omega=\frac E\hbar=\frac{\hbar k^2}{2m}.
+\end{gather*}
+Knowing $\psi(x,0)$, we could know $\hat\psi(k)$,
+$$\hat\psi(k)=\mathcal F\cmm{\psi(x,0)}=\frac1{\sqrt{2\pi}}\int_{-\infty}^{+\infty}\ko5\psi(x,0)e^{-ikx}\d x,$$
+then we will know
+$$\psi(x,t)=\frac1{\sqrt{2\pi}}\int_{-\infty}^{+\infty}\ko5\hat\psi(k)e^{ikx}e^{-i\frac{\hbar k^2}{2m}t}\d k$$
+\begin{example}{Trivial}{}
+	$\ket{\psi_0}=\ket{p_0},\psi(x,0)=\frac1{\sqrt{2\pi\hbar}}e^{ik_0x},\quad k_0:=\frac{p_0}\hbar$.
+	$$\psi(x,t)=\frac1{\sqrt{2\pi\hbar}}e^{i(k_0x-\omega t)},\quad\omega=\frac{\hbar k^2_0}{2m}.$$
+	Phase speed $v_\varphi=\frac\omega{k_0}=\frac{\hbar k_0}{2m}$; and group speed $v_g=\ds\omega{k}=\frac{\hbar k_0}m=\frac{p_0}m.$
+\end{example}
+\begin{example}{Gaussian Wavepacket}{}
+	The Gaussian wavepacket is \index{Gaussian wavepacket}
+	$$\psi(x,0)=Ae^{-x^2/\sigma^2}e^{ik_0x},$$
+	$A$ is the normalization coefficient
+	$$\int_{-\infty}^{+\infty}\ko2e^{-2x^2/\sigma^2}\d x=\sqrt{\frac{\pi}2}\sigma,\qquad A=\sqrt[4]{\frac2{\pi\sigma^2}}.$$%\footnote{$\int_{-\infty}^{+\infty}\ko5e^{-x^2/\sigma^2}\d x=\sqrt\pi\sigma$.}
+	Work out $\hat\psi(k)=\mathcal F\cmm{\psi(x,0)}$
+	$$\hat\psi(k)=\sqrt[4]{\frac{\sigma^2}{2\pi}}e^{-\sigma^2(k-k_0)^2/4}.$$%\footnote{$\mathcal F(e^{-x^2/\sigma^2})=\frac\sigma{\sqrt2}e^{-\sigma^2k^2/4}$.}
+	Then
+	\begin{align*}
+		\psi(x,t) & =\frac1{\sqrt{2\pi}}\sqrt[4]{\frac{\sigma^2}{2\pi}}\int_{-\infty}^{+\infty}\ko5e^{-\frac{\sigma^2(k-k_0)^2}4}e^{ikx}e^{-i\frac{\hbar k^2}{2m}t}\d k                                               \\
+		          & =\sqrt[4]{\frac{\sigma^2}{2\pi}}\frac{e^{i(k_0x-\varphi_0)}}{\sqrt[4]{\sigma^4+\frac{4\hbar^2t^2}{m^2}}}\exp\left[-\frac{\left(x-\frac{\hbar k_0}mt\right)^2}{\sigma^2+\frac{2i\hbar t}m}\right].
+	\end{align*}
+	where $\varphi_0=\frac12\arctan\frac{2\hbar t}{m\sigma^2}+\frac{\hbar k_0^2}{2m}t$.\footnote{Everyone should calculate it once in their lifetime. - Shuo Jiang.}
+	\begin{align*}
+		|\psi(x,t)|^2=\frac1{\sqrt{2\pi}}\frac1{\sqrt{\sigma^2+\frac{4\hbar^2t^2}{m^2\sigma^2}}}\exp\left[-\frac{2\left(x-\frac{\hbar k_0}mt\right)^2}{\sigma^2+\frac{4\hbar^2t^2}{m^2\sigma^2}}\right].
+	\end{align*}
+	%&=\frac{\sigma}{\sqrt{2\pi}}\frac1{\sqrt{\sigma^4+\frac{4\hbar^2t^2}{m^2}}}\exp\left[-\frac{2\sigma^2\left(x-\frac{\hbar k_0}mt\right)^2}{\sigma^4+\frac{4\hbar^2t^2}{m^2}}\right]\\&
+
+\end{example}
+\subsection{Infinite Potential Well}
+\begin{tikzpicture}
+	\draw[color=gray,-](-3,0)--(3,0);
+	\draw[latex-latex](-1.3,2.6)--(-1.3,0)--(1.3,0)--(1.3,2.6);
+	%\node at(-3.3,2.6){$\infty$};\node at(-1.6,0){$0$};
+	\node at(-1.3,-0.3){$0$};
+	\node at(1.3,-0.3){$a$};
+	\node at(-2.2,1.3){I};
+	\node at(0,1.3){II};
+	\node at(2.2,1.3){III};
+\end{tikzpicture}\su{50}
+\begin{flalign*}
+	&&V(x)=\left\{
+	\begin{aligned}
+		0~,~0\leqslant x\leqslant a \\
+		\infty,~{\rm elsewhere}
+	\end{aligned}
+	\right..\qquad
+\end{flalign*}
+$$$$
+In region I and III, $\psi\equiv 0$, in region II, use Eqn.(\ref{tise})
+$$-\frac{\hbar^2}{2m}\sds\psi{x}=E\psi,\qquad k^2:=\frac{2mE}{\hbar^2}$$
+then
+$$\psi=Ae^{ikx}+Be^{-ikx}=C\cos kx+D\sin kx.$$
+Boundary condition:
+\begin{align*}
+	\left\{
+	\begin{aligned}
+		\psi_{\rm I}(0)  & =\psi_{\rm II}(0),  \\
+		\psi_{\rm II}(a) & =\psi_{\rm III}(a),
+	\end{aligned}\quad\Rightarrow\quad\right\{
+	\begin{aligned}
+		 & C=0,        \\
+		 & D\sin ka=0,
+	\end{aligned}
+\end{align*}
+thus $ka=n\pi$, after normalized,
+$$\spark{\psi_n=\sqrt{\frac2a}\sin\left(\frac{n\pi}ax\right),\quad E_n=\frac{\hbar^2k^2}{2m}=\frac{n^2\pi^2\hbar^2}{2ma^2}.}$$
+If we shift the rigion II to the center $-a/2\leqslant x\leqslant a/2$, then
+\begin{align*}
+	\psi_n=\sqrt{\frac2a}\sin\left(\frac{n\pi}ax+\frac{n\pi}2\right)=\left\{
+	\begin{aligned}
+		 & (-1)^k\sqrt{\frac2a}\sin\kh{\frac{n\pi}ax},~n=2k+1, \\
+		 & (-1)^k\sqrt{\frac2a}\cos\kh{\frac{n\pi}ax},~n=2k.
+	\end{aligned}
+	\right.
+\end{align*}
+which is either odd or even.
+\begin{example}{Verifying the Uncertainty Principle}{}
+	$\psi_n^2$ is even, $x\psi_n^2$ and $\psi_n^*\psi_n'$ is always odd.
+	\begin{align*}
+		\ave\sX     & =\int_{-a/2}^{a/2}x\psi_n^2\d x=0.\qquad\ave\sP=-i\hbar\int_{-a/2}^{a/2}\psi_n^*\psi_n'\d x=0.                                       \\
+		\ave{\sX^2} & =\int_{-a/2}^{a/2}x^2\psi_n^2\d x=\frac2a\int_{-a/2}^{a/2}\frac{x^2}2\left[1-\cos\left(\frac{2n\pi}ax+n\pi\right)\right]\d x         \\
+		            & =\left(\frac1{12}-\frac1{2n^2\pi^2}\right)a^2.                                                                                       \\
+		\ave{\sP^2} & =-\hbar^2\int_{-a/2}^{a/2}\psi_n^*\psi_n''\d x=\frac{n^2\pi^2\hbar^2}{a^2}\int_{-a/2}^{a/2}\psi_n^2\d x=\frac{n^2\pi^2\hbar^2}{a^2}.
+	\end{align*}
+	Thus
+	$$\sigma_\sX\sigma_\sP=\frac{\hbar}2\sqrt{\frac{n^2\pi^2}3-2}\geqslant\frac{\hbar}2\sqrt{\frac{\pi^2}3-2}\doteq 1.1357\times\frac{\hbar}2>\frac{\hbar}2.$$
+\end{example}
+%For general case, $\psi(x,0)=\sum c_n\psi_n(x)$,
+%$$\spark{\psi(x,t)=\sum c_ne^{-i\omega_nt}\psi_n(x),\quad\omega_n=\frac{E_n}\hbar=\frac{n^2\pi^2\hbar}{2ma^2}.}$$
+\subsection{Potential Step}
+\begin{tikzpicture}
+	\draw[-](-3,0)--(0,0)--(0,2)--(3,2);
+	\node at(3.3,2){$V_0$};
+	\node at(-3.3,0){$0$};
+	\node at(0,-0.3){$0$};
+	\node at(-1.5,1){I};
+	\node at(1.5,1){II};
+\end{tikzpicture}\su{60}
+\begin{flalign*}
+	&&V(x)=\left\{
+	\begin{aligned}
+		0~  & ,x\leqslant 0 \\
+		V_0 & ,x>0
+	\end{aligned}
+	\right..\qquad\qquad
+\end{flalign*}$$$$
+\paragraph{1. $E>V_0$}
+\begin{align*}
+	{\rm I:}  & \quad\sds{\psi_{\rm I}}x+\frac{2mE}{\hbar^2}\psi_{\rm I}=0,         & k_1^2 & :=\frac{2mE}{\hbar^2},       \\
+	{\rm II:} & \quad\sds{\psi_{\rm II}}x+\frac{2m(E-V_0)}{\hbar^2}\psi_{\rm II}=0, & k_2^2 & :=\frac{2m(E-V_0)}{\hbar^2}.
+\end{align*}
+$$\Rightarrow\quad\psi_{\rm I}=Ae^{ik_1x}+Be^{-ik_1x},\quad\psi_{\rm II}=Ce^{ik_2x}+De^{-ik_2x}.$$
+Boundary condition at $x=0$:
+\begin{gather*}
+	\left\{
+	\begin{matrix}
+		\psi_{\rm I}(0)=\psi_{\rm II}(0) \\
+		\psi_{\rm I}'(0)=\psi_{\rm II}'(0)
+	\end{matrix}
+	\quad\Rightarrow\quad\right\{
+	\begin{matrix}
+		A+B=C+D \\
+		k_1A-k_1B=k_2C-k_2D
+	\end{matrix}\\
+	\Rightarrow\quad
+	\begin{bmatrix}1&1\\k_1&-k_1\end{bmatrix}
+	\begin{bmatrix}A\\B\end{bmatrix}=
+	\begin{bmatrix}1&1\\k_2&-k_2\end{bmatrix}
+	\begin{bmatrix}C\\D\end{bmatrix}.\quad\quad
+\end{gather*}
+We have the transfromation
+\begin{align*}
+	\begin{bmatrix}A\\B\end{bmatrix}=\sM\begin{bmatrix}C\\D\end{bmatrix},\quad
+	\begin{bmatrix}B\\C\end{bmatrix}=\sS\begin{bmatrix}A\\D\end{bmatrix},
+\end{align*}
+where $\sM$ is the transfer matrix, $\sS$ is the reflect matrix,
+\begin{align*}
+	\sM=\frac1{2k_2}\begin{bmatrix}k_1+k_2&k_2-k_1\\k_2-k_1&k_1+k_2\end{bmatrix},\quad
+	\sS=\frac1{k_1+k_2}\begin{bmatrix}k_2-k_1&2k_2\\2k_1&k_2-k_1\end{bmatrix}.
+\end{align*}
+\iffalse
+	transfromation between $\sS$ and $\sM$
+	\begin{align*}
+		\sS=\frac1{\sM_{22}}\begin{bmatrix}-\sM_{22}&1\\|\sM|&\sM_{12}\end{bmatrix},\qquad
+		\sM=\frac1{\sS_{12}}\begin{bmatrix}-|\sS|&\sS_{22}\\-\sS_{11}&1\end{bmatrix}.
+	\end{align*}
+\fi
+Suppose incident wave only from left ($D=0$):
+$$\frac BA=\sS_{11}=\frac{k_1-k_2}{k_1+k_2},\qquad\frac CA=\sS_{21}=\frac{2k_2}{k_1+k_2}.$$
+For a wave $\psi=Ae^{-ikx}$, its pribability current\index{pribability current}
+$$j=\frac{i\hbar}{2m}\kh{\psi\pd{\psi^*}x-\psi^*\pd{\psi}x}=|A|^2\frac{\hbar k}m,$$
+then the Reflection Probability $R$ and the Transmission Probability $T$ is
+\begin{align*}
+	R & =\frac{j_r}{j_i}=\left|\frac BA\right|^2\frac{k_1}{k_1}=\left(\frac{k_1-k_2}{k_1+k_2}\right)^2, \\
+	T & =\frac{j_t}{j_i}=\left|\frac CA\right|^2\frac{k_2}{k_1}=\frac{4k_1k_2}{(k_1+k_2)^2}.
+\end{align*}
+thus $R+T=1$.
+\paragraph{2. $0<E<V_0$ Evanescent Wave}\index{Evanescent wave}
+\begin{align*}
+	\begin{aligned}
+		k_1^2      & =\frac{2mE}{\hbar^2},       \\
+		\kappa_2^2 & =\frac{2m(V_0-E)}{\hbar^2},
+	\end{aligned}\qquad
+	\begin{aligned}
+		\psi_{\rm I}  & =Ae^{ik_1x}+Be^{-ik_1x},                          \\
+		\psi_{\rm II} & =Ce^{-\kappa_2x}.~(De^{\kappa_2x}~{\rm diverges})
+	\end{aligned}
+\end{align*}
+Then the boundary condition is
+\begin{gather*}
+	\left\{
+	\begin{matrix}
+		A+B=C \\ik_1A-ik_1B=\kappa_2C
+	\end{matrix}\right.
+	\Rightarrow\qquad
+	\frac BA=\frac{k_1-i\kappa_2}{k_1+i\kappa_2},\quad
+	\frac CA=\frac{2k_1}{k_1+i\kappa_2},
+\end{gather*}
+you'll notice that $R=1$, actually it makes sense because $\psi_{\rm II}$ contains no wave, it dosen't spread energy, thus $T=0$.
+
+\subsection{Potential Barrier}
+\begin{tikzpicture}
+	\draw[-](-3,0)--(-1.3,0)--(-1.3,2.6)--(1.3,2.6)--(1.3,0)--(3,0);
+	\node at(-3.3,0){$0$};
+	\node at(-1.6,2.6){$V_0$};
+	\node at(-1.3,-0.3){$0$};
+	\node at(1.3,-0.3){$a$};
+	\node at(-2.2,1.3){I};
+	\node at(0,1.3){II};
+	\node at(2.2,1.3){III};
+\end{tikzpicture}\su{60}
+\begin{flalign*}
+	&&V(x)=\left\{
+	\begin{aligned}
+		0~  & ,x\leqslant 0 \\
+		V_0 & ,0<x<a        \\
+		0~  & ,x\geqslant a
+	\end{aligned}
+	\right..\qquad
+\end{flalign*}
+\paragraph{1. $E>V_0$ Transmission}\index{transmission}
+\begin{align*}
+	\begin{aligned}
+		k_1^2 & =\frac{2mE}{\hbar^2},       \\
+		k_2^2 & =\frac{2m(E-V_0)}{\hbar^2},
+	\end{aligned}\qquad
+	\begin{aligned}
+		\psi_{\rm I}   & =Ae^{ik_1x}+Be^{-ik_1x}, \\
+		\psi_{\rm II}  & =Ce^{ik_2x}+De^{-ik_2x}, \\
+		\psi_{\rm III} & =Fe^{ik_1x}+Ge^{-ik_1x}.
+	\end{aligned}
+\end{align*}
+Boundary condition:
+\begin{align*}
+	A+B                          & =C+D                           \\
+	k_1A-k_1B                    & =k_2C-k_2D                     \\
+	Ce^{ik_2a}+De^{-ik_2a}       & =Fe^{ik_1a}+Ge^{-ik_2a}        \\
+	k_2Ce^{ik_2a}-k_2De^{-ik_2a} & =k_1Fe^{ik_1a}-k_1Ge^{-ik_2a}.
+\end{align*}
+Let $G=0$,
+\begin{align*}
+	\begin{bmatrix}C\\D\end{bmatrix}=\sM_{\rm I}
+	\begin{bmatrix}A\\B\end{bmatrix},\quad
+	\begin{bmatrix}F\\G\end{bmatrix}=\sM_{\rm II}
+	\begin{bmatrix}C\\D\end{bmatrix}=\sM
+	\begin{bmatrix}A\\B\end{bmatrix},\quad
+	\begin{bmatrix}B\\F\end{bmatrix}=\sS
+	\begin{bmatrix}A\\G\end{bmatrix}.
+\end{align*}
+The transmission probability is
+$$T=\left[1+\frac14\left(\frac{k_1^2-k_2^2}{k_1k_2}\right)^2\sin^2k_2a\right]^{-1}\ko{10}=\left[1+\frac{\sin^2k_2a}{4\varepsilon(\varepsilon-1)}\right]^{-1},\varepsilon:=\frac E{V_0}>1,$$
+when $k_2a=m\pi$, $T_{\max}=1$.
+\paragraph{2. $0<E<V_0$ Tunneling}\index{tunneling}
+\begin{align*}
+	T & =\left[1+\frac14\left(\frac{k_1^2+\kappa_2^2}{k_1\kappa_2}\right)^2\sinh^2\kappa_2a\right]^{-1}\ko{10}=\left[1+\frac{\sinh^2\kappa_2a}{4\varepsilon(1-\varepsilon)}\right]^{-1}\ko{10}\doteq 16\varepsilon(1-\varepsilon)e^{-2\kappa_2a},
+\end{align*}
+where $\kappa_2^2=\frac{2m(V_0-E)}{\hbar^2}$, thus there exists the poprability of tunneling the barrier.
+\clearpage
+\clearpage
+\subsection{Finite Potential Well}
+\begin{tikzpicture}
+	\draw[-](-3,2.6)--(-1.3,2.6)--(-1.3,0)--(1.3,0)--(1.3,2.6)--(3,2.6);
+	\node at(-3.3,2.6){$0$};
+	\node at(-1.8,0){$-V_0$};
+	\node at(-1.42,-0.3){$-a$};
+	\node at(1.3,-0.3){$a$};
+	\node at(-2.2,1.3){I};
+	\node at(0,1.3){II};
+	\node at(2.2,1.3){III};
+\end{tikzpicture}\su{60}
+\begin{flalign*}
+	&&V(x)=\left\{
+	\begin{aligned}
+		-V_0, & -a\leqslant x\leqslant a \\
+		0~,   & ~~{\rm elsewhere}
+	\end{aligned}
+	\right..\qquad
+\end{flalign*}$$$$
+\paragraph{1. $-V_0<E<0$}
+\begin{align*}
+	\begin{aligned}
+		k_1^2 & =-\frac{2mE}{\hbar^2},      \\
+		k_2^2 & =\frac{2m(E+V_0)}{\hbar^2},
+	\end{aligned}\qquad
+	\begin{aligned}
+		\psi_{\rm I}   & =Ae^{k_1x},~(Be^{-k_1x}~{\rm diverges}) \\
+		\psi_{\rm II}  & =C\cos{k_2x}+D\sin{k_2x},               \\
+		\psi_{\rm III} & =Ge^{-k_1x}.~(Fe^{k_1x}~{\rm diverges})
+	\end{aligned}
+\end{align*}
+\begin{theorem}{Even Potential}{}
+	If $V(x)$ is even, $\psi$ can have either even or odd solution.
+	%Proof: if $\psi_0(x)$ satisfies Eqn.(\ref{tise}), so does $\psi_0(-x)$, then $\psi_0(x)+\psi_0(-x)$ is even and $\psi_0(x)-\psi_0(-x)$ is odd. 
+\end{theorem}
+For even $\psi$, $D=0,G=A$. Boundary condition at $x=a$,
+\begin{align*}
+	\left\{
+	\begin{aligned}
+		Ae^{-k_1a}    & =C\cos k_2a    \\
+		k_1Ae^{-k_1a} & =k_2C\sin k_2a
+	\end{aligned}\right.
+	\quad\Rightarrow\quad
+	\tan k_2a=\frac{k_1}{k_2}=\sqrt{\frac{2mV_0}{\hbar^2k_2^2}-1}.
+\end{align*}
+%While $k_1^2+k_2^2=\frac{2mV_0}{\hbar^2}$, 
+%$$\tan k_2a=\frac{k_1}{k_2}=\sqrt{\frac{2mV_0}{\hbar^2k_2^2}-1}$$
+Define $z:=k_2a,z_0^2:=\frac{2mV_0a^2}{\hbar^2}$ ($z_0$ is the potnetial parameter),
+$$\tan z=\sqrt{\frac{z_0^2}{z^2}-1}.$$
+For odd $\psi$, the equation is
+$$-\cot z=\sqrt{\frac{z_0^2}{z^2}-1}.$$
+When $V_0\to\infty$, $z=\frac\pi{2},\pi,\frac{3\pi}2,\ldots,$ with is exactly the infinite well condition.\\
+The number of the bound state is fixed by $z_0$:
+$$\frac n2\pi<z_0<\frac{n+1}2\pi,\quad\rightarrow\quad(n+1)~\text{states.}$$
+\paragraph{2. $E>0$}The condition is the same as 2.4 Barrier $E>V_0$.
+\clearpage
+\subsection{Harmonic Oscillator}
+$V(x)=\frac12kx^2$, the Time Independent Schrödinger Equation is
+$$-\frac{\hbar^2}{2m}\sds\psi{x}+\frac12kx^2\psi=E\psi.$$
+$\omega^2:=\frac km,\xi:=\sqrt{\frac{m\omega}\hbar}x,K:=\frac{2E}{\hbar\omega},$ the equation becomes
+\begin{align}\label{hereqn}
+	\sds\psi\xi+(K-\xi^2)\psi=0,
+\end{align}
+which is Hermite Equation.\index{Hermite Equation}\\
+Considering the asymptote behavior: when $\xi\to\infty$, Eqn.(\ref{hereqn}) approach
+$$\sds\psi\xi-\xi^2\psi=0,$$
+thus when $\xi\to\infty$, $\psi\to Ae^{-\xi^2/2}$ ($Be^{\xi^2/2}$ diverges unless $B\equiv 0$).\\
+Guess $A=h(\xi)$, expand it
+\begin{center}
+	$h(\xi)=a_0+a_1\xi+a_2\xi^2+\cdots=\sum_{i=0}^\infty a_i\xi^i,$
+\end{center}
+because $V(x)$ is even, $h(\xi)$ can be either odd or even, i.e.
+\begin{center}
+	$h(\xi)=\sum_{m=0}^\infty a_j\xi^j,\quad j\equiv 2m~{\rm xor}~j\equiv 2m+1$.\footnote{The xor (exclusive or) means either one, but not both. Its symbol $\oplus$ is too ugly to use.}
+\end{center}
+Substitute into the original Eqn.(\ref{hereqn}),
+\begin{gather*}
+	\begin{aligned}
+		\ds\psi\xi  & =\kh{h'-\xi h}e^{-\xi^2/2},            \\
+		\sds\psi\xi & =[h''-2\xi h'+(\xi^2-1)h]e^{-\xi^2/2},
+	\end{aligned}\\
+	\sds\psi\xi+(K-\xi^2)\psi=[h''-2\xi h'+(K-1)h]e^{-\xi^2/2}.
+\end{gather*}
+Thus $h''-2\xi h'+(K-1)h=0$:
+\begin{gather*}
+	\sum_{m=0}^\infty j(j-1)a_j\xi^{j-2}-2\sum_{m=0}^\infty ja_j\xi^j+(K-1)\sum_{m=0}^\infty a_j\xi^j=0,\\
+	\Rightarrow\quad a_{j+2}=\frac{2j+1-K}{(j+2)(j+1)}a_j.
+\end{gather*}
+When $j\to\infty$,
+$$\frac{a_{j+2}\xi^{j+2}}{a_j\xi^j}\to\frac{\xi^2}m.$$
+While $e^{\xi^2}=\sum_{m=0}^\infty\frac{\xi^{2m}}{m!}$, i.e.\su{10}
+$$h(\xi)\to e^{\xi^2},\quad\psi\to e^{\xi^2/2}~{\rm(diverges)}.$$
+The only way out of the dilemma is $a_j=0$ when $j\geqslant n$, i.e. $K=2n+1,$
+$$\spark{E_n=\frac{\hbar\omega}2K=\left(n+\frac12\right)\hbar\omega,\quad n=0,1,2,\ldots.}$$
+For the certain $n$, $\psi_n=h_n(\xi)e^{-\xi^2/2}$, then work out the coefficients through the recursion
+$$a_{j-2}=\frac{j(j-1)}{2(j-n-2)}a_j,\quad j=n,n-2,\ldots,$$
+and the normalization $\brkt{\psi_n}{\psi_n}=1$.
+\begin{example}{$n=0$}{}
+	$h(\xi)=a_0$, $\psi_0=a_0e^{-\xi^2/2}$,
+	$$\int_{-\infty}^{+\infty}\ko5\psi_0^2\d x=a_0^2\int_{-\infty}^{+\infty}\ko5e^{-m\omega x^2/\hbar}\d x=a_0^2\sqrt{\frac{\pi\hbar}{m\omega}}=1.$$
+	Thus
+	$\psi_0=\sqrt[4]{\frac{m\omega}{\pi\hbar}}e^{-\xi^2/2}.$
+\end{example}
+The general wave function is
+$$\spark{\psi_n=\sqrt[4]{\frac{m\omega}{\pi\hbar}}\frac1{\sqrt{2^nn!}}H_n(\xi)e^{-\xi^2/2},\quad\xi=\sqrt{\frac{m\omega}\hbar}x.}$$
+where the Hermite Polynomial \index{Hermite Polynomial}
+$$H_n(x)=(-1)^ne^{x^2}\frac{\d^n}{\d x^n}e^{-x^2}.$$
+\begin{example}{Table of Hermite}{}
+	The first few items are %($\psi e^{\xi^2/2}$)
+	\begin{align*}
+		H_0 & =1,  & H_2 & =4x^2-2,   & H_4 & =16x^4-48x^2+12,    \\
+		H_1 & =2x, & H_3 & =8x^3-12x, & H_5 & =32x^5-160x^3+120x.
+	\end{align*}
+	\iffalse
+		\begin{align*}
+			\psi_0 & \propto e^{-\xi^2/2}            & \psi_3 & \propto\frac1{\sqrt3}(2\xi^3-3\xi),
+			\psi_1 & \propto\sqrt2\xi e^{-\xi^2/2}   & \psi_4 & \propto\frac1{2\sqrt6}(4\xi^4-12\xi^3+3),     \\
+			\psi_2 & \propto\frac1{\sqrt2}(2\xi^2-1) & \psi_6 & \propto\frac1{2\sqrt{30}}(4\xi^5-20\xi^3+15).
+		\end{align*}
+	\fi
+\end{example}
+\clearpage
+\subsection{Hydrogen Atom}
+For a system consists of a proton $p$ and a electron $e$, the distance between is $r$. The Hamiltonian in $\ket x$ base is
+$$\sH=-\frac{\hbar^2}{2m_p}\nabla^2_p-\frac{\hbar^2}{2m_e}\nabla^2_e+V(r),$$
+%where $\nabla^2_N$ only act on the $R_N$ part, and $V(r)=-\frac{e^2}{4\pi\varepsilon_0r}$\\
+Decompose $\sH$ into the free-particle motion of the total mass, and relative motion of reduced mass.\\
+For the center of mass part, $M=m_p+m_e$, $R_{CM}=\frac{m_pR_p+m_eR_e}{m_p+m_e}$; for the reduced mass part, $m=\frac{m_pm_e}{m_p+m_e}$, $r=R_p-R_e$.
+$$\sH_{CM}=-\frac{\hbar^2}{2M}\nabla_{CM}^2,\qquad\sH_m=-\frac{\hbar^2}{2m}\nabla_r^2+V(r).$$
+We know how to solve the free particle and here we shall only concentrate on the relative motion $\psi(r,\theta,\phi)$:
+\begin{align}\label{s-eqn}
+	-\frac{\hbar^2}{2m}\nabla^2\psi+V\psi=E\psi.
+\end{align}
+\paragraph{Separation of Variables}
+Since the potential $V(r)$ only depends on distance, not on direction. It has the spherical symmetry, %In Cartesian coordinate,$$\nabla^2=\spd{}x+\spd{}y+\spd{}z,$$
+in spherical coordinate
+$$\nabla^2=\frac1{r^2}\pd{}r\kh{r^2\pd{}r}+\frac1{r^2\sin\theta}\pd{}\theta\kh{\sin\theta\pd{}\theta}+\frac1{r^2\sin^2\theta}\spd{}\phi.$$
+Because the three variables $r,\theta,\phi$ are independent, the wave function can be decomposed, i.e.%\footnote[1]{I've gotten a fantastic proof, pityfully the space here is too small to write.} 
+$$\psi(r,\theta,\phi)=R(r)\varTheta(\theta)\varPhi(\phi),$$
+where the $R(r)$ is the radial part, and $Y(\theta,\phi)=\varTheta(\theta)\varPhi(\phi)$ is the angular part.
+Then substitute into the Eqn.(\ref{s-eqn}),
+\begin{gather*}
+	-\frac{\hbar^2}{2mr^2}\left[\ds{}r\ko2\left(r^2\ds Rr\right)\ko2+\ko2\frac1{\sin\theta}\pd{}\theta\ko1\left(\sin\theta\pd Y\theta\right)\ko2+\ko2\frac1{\sin^2\theta}\spd Y\phi\right]+(V-E)RY=0,\\
+	\frac1R\ds{}r\left(r^2\ds Rr\right)-\frac{2mr^2}{\hbar^2}(V-E)=-\frac1Y\Lambda^2Y,
+\end{gather*}
+Thus $LHS(r)=RHS(\theta,\phi)=J$ (constant).
+\paragraph{~}The Legendrian $\Lambda^2$\index{Legendrian $\Lambda^2$} have been mentioned in angular momentum, and $Y$ is the eigenfunction of $\sL^2$
+$$\sL^2Y=-\hbar^2\Lambda^2Y=J\hbar^2Y.$$
+\subsubsection{Solution of Legendrian}
+$Y(\theta,\phi)=\varTheta(\theta)\varPhi(\phi)$, separate variables,
+\begin{gather*}
+	-\frac1{\varTheta\varPhi}\left[\frac1{\sin\theta}\ds{}\theta\left(\sin\theta\ds\varTheta\theta\right)+\frac1{\sin^2\theta}\sds\varPhi\phi\right]=J,\\
+	\frac{\sin\theta}\varTheta\ds{}\theta\left(\sin\theta\ds\varTheta\theta\right)+J\sin^2\theta=-\frac1\varPhi\sds\varPhi\phi.
+\end{gather*}
+$\Rightarrow\quad LHS(\theta)=RHS(\phi)=m^2$ (constant).
+\paragraph{Solving $\varPhi$ in the RHS}
+$$\sds\varPhi\phi+m^2\varPhi=0,\quad\Rightarrow\quad\varPhi(\phi)=e^{im\phi}.$$
+As $\varPhi(\phi+2\pi)=\varPhi(\phi)$, $m=0,\pm1,\pm2,\ldots;\varPhi$ is the eigenfunction of $\sL_z$
+$$\sL_z\varPhi=-i\hbar\pd\varPhi\phi=m\hbar\,\varPhi.$$
+\paragraph{Solving $\varTheta$ in the LHS}\ko7\footnote{In the LHS, $m$'s sign dosen't really matter, thus we take $m$ positive.}
+$$\frac{\sin\theta}\varTheta\ds{}\theta\kh{\sin\theta\ds\varTheta\theta}+J\sin^2\theta=m^2.$$
+Let $x=\cos\theta,y=\varTheta(\theta)$, then
+$$\kh{1-x^2}\sds yx-2x\ds yx+\kh{J-\frac{m^2}{1-x^2}}y=0.$$
+Guess $y=\kh{1-x^2}^{m/2}v$,
+\begin{gather*}
+	\ds yx=\kh{1-x^2}^{m/2}\kh{v'-\frac{mx}{1-x^2}v},\\
+	\sds yx=\kh{1-x^2}^{m/2}\fkh{v''-\frac{2mx}{1-x^2}v'+\frac{m(m-1)x^2-m}{\kh{1-x^2}^2}v}.
+\end{gather*}
+Thus $\kh{1-x^2}v''-2(m+1)xv'+\fkh{J-m(m+1)}v=0.$
+\begin{gather*}
+	\sum t(t-1)c_tx^{t-2}-\sum t(t-1)c_tx^t\\
+	-2(m+1)\sum tc_tx^t+\fkh{J-m(m+1)}\sum c_tx^t=0,\\
+	\Rightarrow\quad c_{t+2}=\frac{(t+m+1)(t+m)-J}{t(t+1)}c_t.
+\end{gather*}
+To converge, $J=\ell(\ell+1)$, and $\ell=t_0+m=0,1,2,3,\ldots,$ (s, p, d, f, $\ldots$)
+$$\varTheta(\theta)=AP_\ell^m(\cos\theta),$$
+where Legendre Function $P_\ell^m(x)$\index{Legendre Function}
+$$P_\ell^m(x)=\frac{\kh{1-x^2}^{m/2}}{2^\ell\ell!}\frac{\d^{\ell+m}}{\d x^{\ell+m}}(x^2-1)^\ell,$$
+$$Y_\ell^m=\pm\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}}P_\ell^m(\cos\theta)e^{im\phi},$$
+where $-$ is taken only when $m=1,3,5,\ldots.$
+\begin{example}{Table of Legendre}{}
+	Legendre Polynomial $P_l$ and associated Legendre Function $P_l^m(\cos\theta)$%\setlength\abovedisplayskip{10pt}
+	\begin{align*}
+		P_0 & =1                        & P_0^0 & =1.                                                                                                       \\
+		P_1 & =x                        & P_1^0 & =\cos\theta                                     & P_1^1 & =\sin\theta.                                    \\
+		P_2 & =\frac12(3x^2-1)          & P_2^0 & =\frac12(3\cos^2\theta-1)                       & P_2^1 & =3\sin\theta\cos\theta                          \\
+		    &                           & P_2^2 & =3\sin^2\theta.                                                                                           \\
+		P_3 & =\frac12(5x^3\ko2-\ko13x) & P_3^0 & =\frac12(5\cos^3\ko2\theta\ko2-\ko23\cos\theta) & P_3^1 & =\frac32\sin\theta(5\cos^2\ko2\theta\ko1-\ko11) \\
+		    &                           & P_3^2 & =15\sin^2\theta\cos\theta                       & P_3^3 & =15\sin^3\theta.
+		%\\P_4&=\frac18(35x^4-30&x^2&+3),&P_5&=\frac18(63x^5-70x^3+15x).
+	\end{align*}
+\end{example}
+\begin{example}{Tbale of $Y_l^m$}{}
+	\su{12}
+	\begin{align*}
+		Y_0^0~\;    & =\frac1{2\sqrt\pi},                                           & Y_2^{\pm 2} & =\sqrt{\frac{15}{32\pi}}\sin^2\theta e^{\pm 2i\phi},                 \\
+		Y_1^0~\;    & =\sqrt{\frac3{4\pi}}\cos\theta,                               & Y_3^0~\;    & =\sqrt{\frac7{16\pi}}(5\cos^3\theta-3\cos\theta),                    \\
+		Y_1^{\pm 1} & =\mp\sqrt{\frac3{8\pi}}\sin\theta e^{\pm i\phi},              & Y_3^{\pm 1} & =\mp\sqrt{\frac{21}{64\pi}}\sin\theta(5\cos^2\theta-1)e^{\pm i\phi}, \\
+		Y_2^0~\;    & =\sqrt{\frac5{16\pi}}(3\cos^2\theta-1),                       & Y_3^{\pm 2} & =\sqrt{\frac{105}{32\pi}}\sin^2\theta\cos\theta e^{\pm 2i\phi},      \\
+		Y_2^{\pm 1} & =\mp\sqrt{\frac{15}{8\pi}}\sin\theta\cos\theta e^{\pm i\phi}, & Y_3^{\pm 3} & =\mp\sqrt{\frac{35}{64\pi}}\sin^3\theta e^{\pm 3i\phi}.
+	\end{align*}
+\end{example}
+\newpage
+\subsubsection{Solution of Radial Part}
+$$\frac1R\ds{}r\kh{r^2\ds Rr}-\frac{2mr^2}{\hbar^2}(V-E)=\ell(\ell+1),$$
+where $V=-\frac{e^2}{4\pi\varepsilon_0r}$.\\
+Noticing
+$$\ds{}r\kh{r^2\ds Rr}=2r\ds Rr+r^2\sds Rr=r\sds{rR}r.$$
+To simplify, define $u:=rR$, $k=\sqrt{-\frac{2mE}{\hbar^2}}$, $\xi:=kr$, $N=\frac{me^2}{2\pi\varepsilon_0\hbar^2k}$,
+\begin{align}\label{radeqn}
+	\sds u\xi=\left[1-\frac N\xi+\frac{\ell(\ell+1)}{\xi^2}\right]u.
+\end{align}
+Asymptote behavior
+\begin{align*}
+	\xi & \to+\infty, & \sds u\xi & =u                           & \Rightarrow\quad u & \to Ae^{-\xi},(Be^\xi{\rm~diverges})           \\
+	\xi & \to0,       & \sds u\xi & =\frac{\ell(\ell+1)}{\xi^2}u & \Rightarrow\quad u & \to C\xi^{\ell+1},(D\xi^{-\ell}{\rm~diverges})
+\end{align*}
+therefore, $u=v(\xi)\xi^{\ell+1}e^{-\xi}.$
+\begin{gather*}
+	\ds u\xi=\cmm{v'\xi+v(\ell+1)-v\xi}\xi^\ell e^{-\xi},\\
+	\sds u\xi=\cmm{v''\xi^2+2v'(\ell+1)\xi-2v'\xi^2+v(\ell+1)\ell-2v(\ell+1)\xi+v\xi^2}\xi^{\ell-1}e^{-\xi}\\
+	\left[1-\frac N\xi+\frac{\ell(\ell+1)}{\xi^2}\right]u=\cmm{\xi^2-N\xi+\ell(\ell+1)}v\xi^{\ell-1}e^{-\xi}.
+\end{gather*}
+Then $\xi v''+2(\ell+1-\xi)v'+\cmm{N-2(\ell+1)}v=0.$
+\begin{gather*}
+	\sum t(t-1)c_t\xi^{t-1}+2(\ell+1)\sum tc_t\xi^{t-1}\qquad\\
+	\qquad-2\sum tc_t\xi^t+\cmm{N-2(\ell+1)}\sum c_t\xi^t=0.\\
+	\Rightarrow\quad c_{t+1}=\frac{2(t+\ell+1)-N}{(t+1)(t+2\ell+2)}c_t.
+\end{gather*}
+To converge, $N=2n$, and $n=t_0+\ell+1$.
+\begin{gather*}
+	N=2n=\frac{me^2}{2\pi\varepsilon_0\hbar^2}\frac1k,\quad
+	k=\frac1n\frac{me^2}{4\pi\varepsilon_0\hbar^2},\\
+	E=-\frac{\hbar^2k^2}{2m}=-\frac1{n^2}\frac m{2\hbar^2}\left(\frac{e^2}{4\pi\varepsilon_0}\right)^2.
+\end{gather*}
+Define the reduced Bohr radius\footnote{The original Bohr radius uses $m_e$ in the mass part, the reduced mass $m$ (or $\mu$) $\doteq 0.999\,m_e$.}
+$$a=\frac{4\pi\varepsilon_0\hbar^2}{me^2}=0.53\times 10^{-10}\,{\rm m},$$
+and the ground energy at $n=1$,
+$$E_1=-\frac m{2\hbar^2}\left(\frac{e^2}{4\pi\varepsilon_0}\right)^2=-13.6{\rm~eV}.$$
+For the certain $n,\ell,k=\frac1{na}$, $\xi=kr$
+$$R=\frac ur=v(\xi)\xi^\ell e^{-\xi},~(k{\rm~in~the}~v)$$
+then work out the coefficients through the recursion
+$$c_{j+1}=\frac{2(j+\ell+1-n)}{(j+1)(j+2\ell+2)}c_j,\quad j=0,1,\ldots,n-\ell-2,$$
+and the normalization.
+\begin{example}{1s orbit}{}
+	$n=1,\ell=0,m=0,R=c_0e^{-\xi}=c_0e^{-r/a}$,
+	$$\int_0^{+\infty}R^2r^2\d r=c_0^2\int_0^{+\infty}r^2e^{-2r/a}d r=\frac{a^3c_0^2}4=1.$$
+	Thus
+	$$R_{10}=\frac2{\sqrt{a^3}}e^{-r/a},$$
+	While $Y_0^0=\frac1{2\sqrt\pi}$, $\psi_{100}=R_{10}Y_0^0=\frac1{\sqrt{\pi a^3}}e^{r/a}$.
+\end{example}
+Define $\rho=2\xi=\frac{2r}{na},p=2\ell+1,q=n-\ell-1$, then
+$$\rho v''+(p+1-\rho)v'+qv=0,\quad\Rightarrow\quad v\propto L_q^p(\rho).$$
+$$R_{n\ell}=\sqrt{\kh{\frac2{na}}^3\frac{(n-\ell-1)!}{2n(n+l)!}}\rho^\ell e^{-\rho/2}L_q^p(\rho),$$
+where the Laguerre Function $L_q^p(x)$\index{Laguerre Function}
+$$L_q^p(x)=(-1)^pL_{p+q}^{(p)}(x),$$
+and the Laguerre Polynomial $L_q(x)$\index{Laguerre Polynomial}
+$$L_q(x)=\frac{e^x}{q!}\frac{\d^q}{\d x^q}\frac{x^q}{e^x}.$$
+\begin{example}{Table of $R_{nl}$}{}\su{12}
+	\begin{align*}
+		R_{10} & =2a^{-3/2}e^{-\xi},                                      \\
+		R_{20} & =\frac{a^{-3/2}}{\sqrt2}(1-\xi)e^{-\xi},                 \\
+		R_{21} & =\frac{a^{-3/2}}{\sqrt6}\xi e^{-\xi},                    \\
+		R_{30} & =\frac{2a^{-3/2}}{3\sqrt3}(2-6\xi+3\xi^2)e^{-\xi},       \\
+		R_{31} & =\frac{a^{-3/2}}{3\sqrt6}(4\xi-3\xi^2)e^{-\xi},          \\
+		R_{32} & =\frac{a^{-3/2}}{\sqrt{30}}\xi^2e^{-\xi},                \\
+		R_{40} & =\frac{a^{-3/2}}{12}(3-9\xi+6\xi^2-\xi^3)e^{-\xi},       \\
+		R_{41} & =\frac{a^{-3/2}}{8\sqrt{15}}(5\xi-5\xi^2+\xi^3)e^{-\xi}, \\
+		R_{42} & =\frac{a^{-3/2}}{12\sqrt5}(3\xi^2-\xi^3)e^{-\xi},        \\
+		R_{43} & =\frac{a^{-3/2}}{12\sqrt{35}}\xi^3e^{-\xi}.
+	\end{align*}
+\end{example}
+$$\psi_{m\ell n}=R_{n\ell}(r)Y_\ell^m(\theta,\phi).$$
+\paragraph{The meaning of \textit{n,l,m}}
+\begin{itemize}
+	\item $n$ is the Principle Quantum Number: $\sH\ket\psi=E_1n^{-2}\ket\psi.$
+	\item $\ell$ is the Azzimuthal Quantum Number: $\sL^2\ket\psi=\ell(\ell+1)\hbar^2\ket\psi.$
+	\item $m$ is the Magnetic Quantum Number: $\sL_z\ket\psi=m\hbar\ket\psi.$
+\end{itemize}
+The values are quantized: $n=1,2,3,\ldots;\ell=0,1,\ldots,n-1;m=0,\pm 1,\ldots,\pm\ell$.
+\paragraph{More} $n,\ell,m$ is still not enough, the spin $\sS$ should also be taken into account, i.e.
+$$\ket\psi=\ket{n,\ell,m}\otimes\ket{s,s_z}.$$
+$\otimes$ is the tensor product, meaning the value of $s,s_z$ is independent of $n,\ell,m$.
+\section{Appendix}
+\subsection{Nabla}\index{nabla $\nabla$}
+\subsubsection{Definition}
+\paragraph{Introduction}We could use linear function to approximate a function near a certain point, that is
+\begin{align*}
+	f(x)\sim   & f(x_0)+f'(x_0)(x-x_0)                                                                \\
+	=          & f(x_0)+f'(x_0)\Delta x,                                                              \\
+	f(x,y)\sim & f(x_0,y_0)+f'_x(x_0,y_0)(x-x_0)+f'_y(x_0,y_0)(y-y_0)                                 \\
+	=          & f(x_0,y_0)+\left[\pd fx(x_0,y_0),\pd fy(x_0,y_0)\right]\cdot\cmm{\Delta x,\Delta y},
+\end{align*}
+then $f(x,y,z)$ at $P_0(x_0,y_0,z_0)$
+$$\nabla f(P_0):=\left[\pd fx(P_0),\pd fy(P_0),\pd fz(P_0)\right]=\left[\pd fx,\pd fy,\pd fz\right]_{P_0}$$
+$$f(P)\sim f(P_0)+\nabla f(P_0)\cdot\Delta P.$$
+\paragraph{Gradient} In Cartesian coordinates,\index{gradient}
+$$\nabla f=\pd fx\ibm i+\pd fy\ibm j+\pd fz\ibm k.$$
+We take the notation nabla $\nabla$
+$$\nabla=\pd{}x\ibm i+\pd{}y\ibm j+\pd{}z\ibm k,$$
+which is very useful later.
+\paragraph{Divergence} The flux $\Phi$ of $\bm F$ through a surface $S$.\index{divergence}
+$$\Phi=\int_S\bm F\cdot\d\bm S.$$
+If closed surface $S=\partial V$,
+$$\Phi=\oint_{\partial V}\ko5\bm F\cdot\d\bm S=\sum_{i=1}^N\frac1{V_i}\oint_{\partial V_i}\ko5\bm F\cdot\d\bm S\,V_i.$$
+Define divergence
+$$\text{div}\bm F:=\lim_{V\to0}\frac1V\oint_{\partial V}\ko5\bm F\cdot\d\bm S,$$
+then we conduct the Gauss's law
+$$\Phi=\oint_{\partial V}\ko5\bm F\cdot\d\bm S=\int_V\text{div}\bm F\,\d V.$$
+Take $V$ as a cube origin at $(x,y,z)$ with a delta $(\Delta x,\Delta y,\Delta z)$, thus
+$$\Delta V=\Delta x\,\Delta y\,\Delta z$$
+In the $z$ direction,
+\begin{align*}
+	\int F_z\,\d S_z & = F_z(x,y,z+\Delta z)\Delta x\Delta y- F_z(x,y,z)\Delta x\Delta y           \\
+	                 & =\frac{ F_z(x,y,z+\Delta z)- F_z(x,y,z)}{\Delta z}\Delta x\Delta y\Delta z.
+\end{align*}
+Therefore,
+$$\text{div}\bm F=\pd{ F_x}x+\pd{ F_y}y+\pd{ F_z}z.$$
+Noticing that this formally fit
+$$\nabla\cdot\bm F=\left[\pd{}x,\pd{}y,\pd{}z\right]\cdot\cmm{F_x, F_y, F_z}=\pd{}x F_x+\pd{}y F_y+\pd{}z F_z,$$
+we can use the notation:
+$$\nabla\cdot\bm F=\text{div}\bm F=\pd{ F_x}x+\pd{ F_y}y+\pd{ F_z}z.$$
+\paragraph{Curl} Path integral\index{curl}
+$$\oint_{\partial S}\ko5\bm F\cdot\d\bm\ell=\sum_{i=1}^N\frac1{S_i}\oint_{\partial S_i}\ko5\bm F\cdot\d\bm\ell\,S_i.$$
+Define curl, whose projection along the unit vector $\hat{\bm n}$ direction is
+$$\text{curl}\bm F\cdot\hat{\bm n}:=\lim_{S\to0}\frac1S\oint_{\partial S}\ko5\bm F\cdot\d\bm\ell,$$
+then we conduct the Stokes's law
+$$\oint_{\partial S}\ko5\bm F\cdot\d\bm\ell=\int_S\text{curl}\bm F\cdot\d\bm S.$$
+As $\hat{\bm n}=\hat{\bm k}$, take $S_k$ as a square origin at $(x,y,z)$ with a delta $(\Delta x,\Delta y,0)$, thus
+\begin{gather*}
+	\Delta S_k=\Delta x\Delta y.\\
+	%&\oint_{\partial S_k}\ko5\bm F\cdot\d\bm\ell\\=
+	F_x(x,y,z)\Delta x+F_y(x+\Delta x,y,z)\Delta y-F_x(x,y+\Delta y,z)\Delta x-F_y(x,y,z)\Delta y\\
+	=\fkh{\frac{F_x(x,y,z)-F_x(x,y+\Delta y,z)}{\Delta y}+\frac{F_y(x+\Delta x,y,z)-F_y(x,y,z)}{\Delta x}}\Delta x\Delta y.
+\end{gather*}
+Therefore,
+$$\kh{\text{curl}\bm F}_z=\pd{F_y}x-\pd{F_x}y.$$
+That is,
+$$\text{curl}\bm F=\fkh{\pd{F_z}y-\pd{F_y}z,\pd{F_x}z-\pd{F_z}x,\pd{F_y}x-\pd{F_x}y}.$$
+Noticing that this formally fit
+\begin{align*}
+	\nabla\times\bm F=
+	\begin{vmatrix}
+		\hat{\bm i}         & \hat{\bm j}         & \hat{\bm k}         \\
+		\partial/\partial x & \partial/\partial y & \partial/\partial z \\
+		F_x                 & F_y                 & F_z
+	\end{vmatrix}.
+\end{align*}
+we can use the notation:
+$$\nabla\times\bm F=\text{curl}\bm F.$$
+\paragraph{Laplacian}In the Possion equation\index{Laplacian}
+$$\sds{\varphi}x+\sds{\varphi}y+\sds{\varphi}z=\frac\rho{\varepsilon_0}.$$
+The Laplacian can be written as the divergence of the nabla:
+$$\nabla^2=\nabla\cdot\nabla=\sds{}x+\sds{}y+\sds{}z.$$
+\subsubsection{Nabla Notation in Coordinate Transformation}\index{coordinate transformation}
+In Cartesian coordinates, bases $\{\ubm i,\ubm j,\ubm k\}$,
+$$\bm r=x_1\ibm i+x_2\ibm j+x_3\ibm k.$$
+In another orthogonal normalized bases $\{\ubm e_1,\ubm e_2,\ubm e_3\}$,
+$$\bm r=\xi_1\ibm e_1+\xi_2\ibm e_2+\xi_3\ibm e_3,$$
+We have the mapping $\mathcal T$:
+$$\mathcal T:(\xi_1,\xi_2,\xi_3)\rightarrow(x_1,x_2,x_3),$$
+i.e. $x_i=x_i(\xi_1,\xi_2,\xi_3)$, and
+$$\d x_i=\pd{x_i}{\xi_1}\d\xi_1+\pd{x_i}{\xi_2}\d\xi_2+\pd{x_i}{\xi_3}\d\xi_3,$$
+compose as $\d\bm r=\d x_1\ibm i+\d x_2\ibm j+\d x_3\ibm k$,\footnote{Warning: $\partial\bm r/\partial\xi_i\neq\partial r/\partial\xi_i\ibm r$, i.e. $\partial\bm r/\partial\xi_i$ isn't along $\ubm r$.}   %\partial x_1/\partial\xi_i\ibm i+\partial x_2/\partial\xi_i\ibm j+\partial x_3/\partial\xi_i\ibm k
+$$\d\bm r=\pd{\bm r}{\xi_1}\d\xi_1+\pd{\bm r}{\xi_2}\d\xi_2+\pd{\bm r}{\xi_3}\d\xi_3.$$
+Decompose the small displacement $\d\bm r$ along $\ubm e_1,\ubm e_2,\ubm e_3$ directions:
+$$\d\bm r=\d\bm\ell_1+\d\bm\ell_2+\d\bm\ell_3.$$
+Noticing that $\d\ell_i\neq\d\xi_i$\footnote{If so, $\d\bm r=\d\xi_1\ibm e_1+\d\xi_2\ibm e_2+\d\xi_3\ibm e_3$, the new coordinate is just a rotated Cartesian, the form won't change.}, we use the Lame coefficient: $\d\bm\ell_i=H_i\id\xi_i\ibm e_i$.
+$$\d\bm r=H_1\d\xi_1\ibm e_1+H_2\d\xi_2\ibm e_2+H_3\d\xi_3\ibm e_3.$$
+Thus
+$$\pd{\bm r}{\xi_i}=\pd{x_1}{\xi_i}\ibm i+\pd{x_2}{\xi_i}\ibm j+\pd{x_3}{\xi_i}\ibm k=H_i\ibm e_i,$$
+we can calculate $H_i$
+$$H_i=\left\lvert\pd{\bm r}{\xi_i}\right\rvert=\sqrt{\left(\pd{x_1}{\xi_i}\right)^2+\left(\pd{x_2}{\xi_i}\right)^2+\left(\pd{x_3}{\xi_i}\right)^2}$$
+\begin{example}{Lame Coefficient in Spherical Coordinate}{}
+	\usetikzlibrary{arrows.meta}
+	\begin{tikzpicture}
+		\draw[-latex](0,0)--(3,0);
+		\node[right]at(3,0){$y$};
+		\draw[-latex](0,0)--(0,3);
+		\node at(0.2,3){$z$};
+		\draw[-latex](0,0)--(-2,-1.5);
+		\node at(-2.2,-1.6){$x$};
+		\node at(-0.3,0.1){$O$};
+		\draw[thick](0,0)--(1.8,2.5);
+		\node[right]at(1.8,2.5){$P$};
+		\draw[dashed](0,0)--(1.8,-1)--(1.8,2.5);
+		\draw[-](1.6,-.89)--(1.6,-.64)--(1.8,-.75);
+		\node at(0.9,1.5){$r$};
+		\node at(0,-0.3){$\phi$};
+		\node at(0.15,0.5){$\theta$};
+	\end{tikzpicture}\su{80}
+	\begin{flalign*}
+		&&\left\{
+		\begin{aligned}
+			x & =r\sin\theta\cos\phi, \\
+			y & =r\sin\theta\sin\phi, \\
+			z & =r\cos\theta.
+		\end{aligned}
+		\right.\qquad\qquad
+	\end{flalign*}
+	\begin{gather*}
+		H_r=1,\quad H_\theta=r,\quad H_\phi=r\sin\theta.\\
+		\d\bm r=\d r\ibm r+r\id\theta\ibm\theta+r\sin\theta\id\phi\ibm\phi.
+	\end{gather*}
+\end{example}
+\paragraph{Gradient} Follow the definition\index{gradient}
+$$\nabla f:=\sum_{i=1}^3\pd f{\bm\ell_i}=\sum_{i=1}^3\ubm e_i\frac{\partial f}{H_i\,\partial\xi_i}.$$
+We take the notation:
+$$\nabla\equiv\sum_{i=1}^3\ubm e_i\frac\partial{H_i\partial\xi_i}.$$
+\paragraph{Divergence} Follow the definition\index{devergence}
+$$\nabla\cdot\bm F:=\lim_{V\to0}\frac1{V}\oint_{\partial V}\ko5\bm F\cdot\d\bm S.$$
+Taking $V$ as a cube origin at $(\xi_1,\xi_2,\xi_3)$ with a delta $(\d\ell_1,\d\ell_2,\d\ell_3)$, thus
+\begin{gather*}
+	\d V=\d\ell_1\wedge\d\ell_2\wedge\d\ell_3=H_1H_2H_3\id\xi_1\d\xi_2\d\xi_3,\\
+	\d S_i=\d\ell_j\wedge\d\ell_k=H_jH_k\id\xi_j\d\xi_k,\quad(ijk)=(123)
+\end{gather*}
+In the $\bm e_k$ direction,
+\begin{gather*}
+	\int F_i\id S_i=\pd{F_iH_jH_k}{\ell_i}\d\ell_i\id\xi_j\d\xi_k,\\
+	\Rightarrow\quad\oint_{\partial V}\ko5\bm F\cdot\d\bm S=\sum_{ijk}\pd{F_iH_jH_k}{\xi_i}\d\xi_i\d\xi_j\d\xi_k.
+\end{gather*}
+Then,
+$$\nabla\cdot\bm F=\frac1{H_1H_2H_3}\sum_{ijk}\pd{}{\xi_i}F_iH_jH_k.$$
+\paragraph{Curl} Follow the definition\index{curl}
+$$(\nabla\times\bm F)\cdot\ubm n:=\lim_{S\to0}\frac1S\oint_{\partial S}\ko5\bm F\cdot\d\bm\ell.$$
+Take $\ubm n=\ubm e_i$, $S_i$ as square origin at $(\xi_j,\xi_k)$ with a delta $(\d\ell_j,\d\ell_k)$, thus
+\begin{gather*}
+	\d S_i=\d\ell_j\wedge\d\ell_k=H_jH_k\id\xi_j\d\xi_k.\\
+	\oint_{\partial S_i}\ko5\bm F\cdot\d\bm\ell=\pd{F_kH_k}{\ell_j}\d\ell_j\id\xi_k-\pd{F_jH_j}{\ell_k}\d\ell_k\id\xi_j.
+\end{gather*}
+By using antisymmetric tensor $\varepsilon_{ijk}$
+\begin{align*}
+	\varepsilon_{ijk}=\left\{
+	\begin{aligned}
+		1,  & \quad(ijk)=(123);     \\
+		-1, & \quad(ijk)=(321);     \\
+		0,  & \quad{\rm otherwise}.
+	\end{aligned}
+	\right.
+\end{align*}
+We can simplify the formula
+\begin{align*}
+	\nabla\times\bm F & =\sum_{ijk}\varepsilon_{ijk}\ibm e_i\frac{\partial}{H_jH_k\partial\xi_j}F_kH_k \\
+	                  & =\frac1{H_1H_2H_3}\begin{vmatrix}
+		H_1\bm e_1             & H_2\bm e_2             & H_3\bm e_3             \\
+		\partial/\partial\xi_1 & \partial/\partial\xi_2 & \partial/\partial\xi_3 \\
+		H_1F_1                 & H_2F_2                 & H_3F_3
+	\end{vmatrix}
+\end{align*}
+\paragraph{Laplacian} Follow the definition\index{Laplacian}
+\begin{align*}
+	\nabla^2:= & \nabla\cdot\nabla=\nabla\cdot\sum_{i=1}^3\bm e_i\frac\partial{H_i\partial\xi_i} \\
+	=          & \frac1{H_1H_2H_3}\sum_{ijk}\pd{}{\xi_i}H_jH_k\frac{\partial}{H_i\partial\xi_i}
+\end{align*}
+\begin{example}{Nabla in Spherical Coordinate\index{spherical coordinate}}{}
+	$H_r=1,~H_\theta=r,~H_\phi=r\sin\theta$,
+	\paragraph{Gradient}
+	$$\nabla=\fkh{\pd{}r,\frac1r\pd{}\theta,\frac1{r\sin\theta}\pd{}\phi};$$
+	\paragraph{Divergence}
+	\begin{align*}
+		\nabla\cdot\bm F & =\frac1{r^2\sin\theta}\fkh{\pd{}r\kh{r^2\sin\theta\,F_r}+\pd{}\theta\kh{r\sin\theta\,F_\theta}+\pd{}\phi\kh{rF_\phi}}      \\
+		                 & =\frac1{r^2}\pd{}r\kh{r^2F_r}+\frac1{r\sin\theta}\pd{}\theta\kh{\sin\theta\,F_\theta}+\frac1{r\sin\theta}\pd{}\phi F_\phi;
+	\end{align*}
+	Warning:
+	$$\xcancel{\nabla\cdot\bm F=\pd{F_r}r+\frac1r\pd{F_\theta}\theta+\frac1{r\sin\theta}\pd{F_\phi}\phi}.$$
+	actually,
+	$$\nabla\cdot\bm F=\underline{\frac2rF_r}+\pd{F_r}r+\underline{\frac{\cos\theta}{r\sin\theta}F_\theta}+\frac1r\pd{F_\theta}\theta+\frac1{r\sin\theta}\pd{F_\phi}\phi$$
+	\paragraph{Curl}
+	\begin{align*}
+		\nabla\times\bm F= & \frac1{r^2\sin\theta}
+		\begin{vmatrix}
+			\ubm r              & r\ibm\theta             & r\sin\theta\ibm\phi   \\
+			\partial/\partial r & \partial/\partial\theta & \partial/\partial\phi \\
+			F_r                 & rF_\theta               & r\sin\theta\,F_\phi
+		\end{vmatrix}                                                                                                                    \\
+		=                  & \left[\frac1{r\sin\theta}\kh{\pd{}\theta(F_\phi\sin\theta)-\pd{}\phi F_\theta},\right.                                    \\
+		                   & ~~\frac1r\kh{\frac1{\sin\theta}\pd{}\phi F_r-\pd{}r(rF_\phi)},\left.\frac1r\kh{\pd{}r(rF_\theta)-\pd{}\theta F_r}\right];
+	\end{align*}
+	\paragraph{Laplacian}
+	\begin{align*}
+		\nabla^2 & =\frac1{r^2}\pd{}r\kh{r^2\pd{}r}+\frac1{r^2\sin\theta}\pd{}\theta\kh{\sin\theta\pd{}\theta}+\frac1{r^2\sin^2\theta}\spd{}\phi                        \\
+		         & =\underline{\frac2r\pd{}r}+\spd{}r+\underline{\frac{\cos\theta}{r^2\sin\theta}\pd{}\theta}+\frac1{r^2}\spd{}\theta+\frac1{r^2\sin^2\theta}\spd{}\phi
+	\end{align*}
+\end{example}
+\subsection{Functions and Integrals}
+There are some important and useful functions to have a look.\footnote{Sorry, I haven't yet learned \textit{Mathematical Physics Equations and Special Functions}.}
+\setcounter{subsubsection}{-1}
+\subsubsection{Fourier Transformation\index{Fourier Transformation}}
+We shall define the \textbf{inner product}\index{inner product} in $\cmm{-\pi,\pi}$ of real functions $f(x)$ and $g(x)$:
+$$\brkt fg:=\int_{-\pi}^\pi f(x)g(x)\id x.$$
+Omit math proofs\footnote{In math, something may not be strictly valid, but they're indeed useful \textbf{in physics}.}, we take it for granted the definition is \textbf{complete} in physics.\\
+On the other hand:
+\begin{gather*}
+	\int_{-\pi}^\pi\sin nx\id x=\int_{-\pi}^\pi\cos nx\id x=0.\\
+	\begin{aligned}
+		\int_{-\pi}^\pi\sin nx\sin mx\id x & =\frac12\int_{-\pi}^\pi\cos(n-m)x-\cos(n+m)x\id x=\pi\delta_{nm}; \\
+		\int_{-\pi}^\pi\sin nx\cos mx\id x & =\frac12\int_{-\pi}^\pi\sin(n+m)x+\sin(n-m)x\id x=0;              \\
+		\int_{-\pi}^\pi\cos nx\cos mx\id x & =\frac12\int_{-\pi}^\pi\cos(n-m)x+\cos(n+m)x\id x=\pi\delta_{nm}.
+	\end{aligned}
+\end{gather*}
+Therefore, The set
+$$\{1,\sin nx,\cos nx\,|\,n\in\mathbb N_+\}=\{1,\sin x,\cos x,\sin2x,\ldots\}$$
+consists a set of bases in $\cmm{-\pi,\pi}$. Normalize it:
+$$\left\{\frac1{\sqrt{2\pi}},\frac{\sin x}{\sqrt\pi},\frac{\cos x}{\sqrt\pi},\frac{\sin2x}{\sqrt\pi},\ldots\right\}$$
+Then, for $f(x)$ with period $2\pi$ can be expand
+$$f(x)=\frac{a_0}2+\sum_{n=1}^\infty\kh{a_n\cos nx+b_n\sin nx},$$
+which is the \textbf{Fourier Expansion}\index{Fourier Expansion}, where
+\begin{align*}
+	a_n & =\frac1\pi\brkt f{\cos nx}=\frac1\pi\int_{-\pi}^\pi f(x)\cos nx\id x, \\
+	b_n & =\frac1\pi\brkt f{\sin nx}=\frac1\pi\int_{-\pi}^\pi f(x)\sin nx\id x.
+\end{align*}
+Use $e^{ix}=\cos x+i\sin x$, we can write
+$$f(x)=\sum_{n=-\infty}^{+\infty}c_ne^{inx},\quad c_n=\frac1{2\pi}\int_{-\pi}^\pi f(x)e^{-inx}\d x.$$
+For any period $T=\lambda, k_0=2\pi/\lambda$ function $f(x)$
+$$f(x)=\sum_{n=-\infty}^{+\infty}c_ne^{ink_0x},\quad c_n=\frac1\lambda\int_{-\lambda/2}^{\lambda/2} f(x)e^{-ink_0x}\d x.$$
+When $f(x)$ is non-period, Fourier Expansion can't be taken into use.\\
+However, we could take very LARGE $\lambda=2N,\Delta k=\frac{2\pi}\lambda,k:=n\Delta k$,
+$$f(x)=\sum_k\left[\frac{\Delta k}{2\pi}\int_{-N}^Nf(x)e^{-ikx}\d x\right]e^{ikx}.$$
+When $N\to\infty,\Delta k\to0$, define
+$$\hat f(k):=\int_{-\infty}^\infty f(x)e^{-ikx}\id x,$$
+then,
+$$f(x)=\frac1{2\pi}\int_{-\infty}^\infty\hat f(k)e^{ikx}\id k,$$
+which is the Fourier Transformation. In Shou's Note, for symmetrization,
+\begin{gather*}
+	\hat f(k)=\mathcal F\cmm{f(x)}=\frac1{\sqrt{2\pi}}\int_{-\infty}^\infty f(x)e^{-ikx}\id x,\\
+	f(x)=\mathcal F^{-1}\cmm{\hat f(k)}=\frac1{\sqrt{2\pi}}\int_{-\infty}^\infty \hat f(k)e^{ikx}\id k.
+\end{gather*}
+\subsubsection{Gaussian Function}
+The Gaussian is \index{Gaussian Function}
+$$f(x)=e^{-x^2/\sigma^2}.$$
+The integral is
+$$\int_{-\infty}^{+\infty}e^{-x^2/\sigma^2}\d x=\sqrt\pi\sigma.$$
+The Fourier Transformation is
+$$\mathcal F\kh{e^{-x^2/\sigma^2}}=\frac\sigma{\sqrt2}e^{-\sigma^2k^2/4}.$$
+\subsubsection{Hermite Polynomial}
+The conventional solution of
+$$\sds\psi\xi+(K-\xi^2)\psi=0,$$
+is $K=2n+1$, and
+$$\psi_n=AH_n(\xi)e^{-\xi^2/2},\quad n=0,1,2,\ldots, $$
+where the Hermite Polynomial\index{Hermite Polynomial}
+$$H_n(x)=(-1)^ne^{x^2}\frac{\d^n}{\d x^n}e^{-x^2},$$
+which is the solution of
+$$y''-2xy'+2ny=0.$$
+The integral is
+$$\int_{-\infty}^{+\infty}H_nH_{n'}e^{-x^2}\d x=2^nn!\sqrt\pi\delta_{nn'},$$
+%thus, $2^nn!\sqrt{\frac{\pi\hbar}{m\omega}}A^2=1$,
+\subsubsection{Legendre Function}
+The solution of
+$$\kh{1-x^2}\sds yx-2x\ds yx+\fkh{J-\frac{m^2}{1-x^2}}y=0,$$
+is $J=\ell(\ell+1)$ and $\ell=0,1,2,\ldots;m=0,\pm 1,\ldots,\pm\ell$,\footnote{In the calculation, we neglect $m$'s sign, i.e. in the formula, $m=|m|$.}
+$$y=AP_\ell^m(x),$$
+where the Legendre Function $P_n^m(x)$\index{Legendre Function}
+$$P_n^m(x)=P_n^{-m}(x)=(1-x^2)^{m/2}\frac{\d^m}{\d x^m}P_n(x),$$
+and the Legendre Polynomial $P_n(x)$\index{Legendre Polynomial}
+$$P_n(x)=\frac1{2^nn!}\frac{\d^n}{\d x^n}(x^2-1)^n.$$
+Which is the solution of
+$$(1-x^2)y''-2xy'+n(n+1)y=0.$$
+The integral
+\begin{gather*}
+	\int_{-1}^1P_nP_{n'}\d x=\frac2{2n+1}\delta_{nn'},\\
+	\int_{-1}^1P_n^mP_{n'}^{m'}\d x=\frac2{2n+1}\frac{(n+m)!}{(n-m)!}\delta_{nn'}\delta_{mm'}.
+\end{gather*}
+\subsubsection{Laguerre Function}
+The solution of
+$$\sds u\xi=\left[1-\frac N\xi+\frac{\ell(\ell+1)}{\xi^2}\right]u,$$
+is $N=2n$ and $n=1,2,\ldots;\ell=1,2,\ldots,n-1$,
+$$R=A\rho^\ell e^{-\rho/2}L_q^p(\rho),$$
+where the Laguerre Function $L_q^p(x)$\index{Laguerre Function}
+$$L_q^p(x)=(-1)^p\frac{\d^p}{\d x^p}L_{p+q}(x),$$
+and the Lagrange Polynomial $L_q(x)$\index{Lagrange Polynomial}
+$$L_q(x)=\frac{e^x}{q!}\frac{\d^q}{\d x^q}\frac{x^q}{e^x}.$$
+Which is the solution of
+$$xy''+(1-x)y'+qy=0.$$
+The integral
+\begin{gather*}
+	\int_0^{+\infty}L_qL_{q'}e^{-x}\d x=\delta_{qq'},\\
+	\int_0^{+\infty}L_q^pL_{q'}^{p'}x^pe^{-x}\d x=\frac{(p+q)!}{q!}\delta_{pp'}\delta_{qq'},\\
+	\int_0^{+\infty}L_q^pL_{q'}^{p'}x^{p+1}e^{-x}\d x=(2q+p+1)\frac{(p+q)!}{q!}\delta_{pp'}\delta_{qq'}.
+\end{gather*}
+\subsubsection{Bessel Function}
+$$x^2y''+xy'+(x^2-p^2)y=0.$$
+$$J_p(x)=\sum_{n=0}^\infty\frac{(-1)^n}{\Gamma(n+1)\Gamma(n+1+p)}\kh{\frac x2}^{2n+p}.$$
+\clearpage
+\subsection*{Postscript}
+\paragraph{About the Note} \textit{This is a biref note taken by me after finishing the General Physics II taught by Shuo Jiang. Shuo is a nice teacher and I strongly recommend you to have a listen. Much of the note is taken from what Shuo wrote on the blackboard and I simply copied them. Hope that this note is helpful for you.}
+\par\textit{If you find any mistakes in this note, please let me know. My WeChat is }Dait\underline{ }Pef.
+\hfill\textit{Dait}
+\printindex
+\end{document}

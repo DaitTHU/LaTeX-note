@@ -1,0 +1,159 @@
+\chapter{复线性空间}
+\label{chap:complex linear space}
+
+这一章我们将数域由实数域$\RR$扩展至复数域$\CC$，复数的定义和运算高中已经讲过，也可参见复变函数的笔记。在此略。
+
+复数构成的向量$z$的共轭即将其中所有元素取共轭，记作$\bar z$。共轭转置记作$z\dg:=\bar z\tp$。
+
+所有实线性空间的知识都可以推广到复线性空间，只需要把原来是实数的地方换成复数。
+\section{内积和内积空间}
+\begin{definition}{$\CC^n$标准内积}{standard inner product}
+	复向量$u,v$的内积
+	\[
+		u\dg v=\sum_{i=1}^n\bar u_iv_i=\bar u_1v_1+\cdots+\bar u_nv_n.
+	\]
+\end{definition}
+一般复线性空间$V$的内积$\inp\cdot\cdot:V\times V\to\CC$：
+\begin{compactitem}
+	\item 交换共轭：$\inp uv=\overline{\inp vu};$
+	\item 对第二个变量线性：$\inp u{cv}=c\inp uv,\enspace \inp u{v+w}=\inp uv+\inp vw;$
+	\item 正定：$\inp uu\geqslant 0$当且仅当$u=0$时取等号。
+\end{compactitem}
+\begin{remark}
+	对第一个变量不是简单的线性，而是多一个复共轭：
+	\[
+		\inp{cu}v=\bar c\inp uv,\quad \inp{u+v}w=\inp uv+\inp uw.
+	\]
+\end{remark}
+定义了内积的空间叫做内积空间(inner product space)。
+\begin{theorem}{}{}
+	只需要知道基之间的内积就可以算出任意向量之间的内积。
+\end{theorem}
+\begin{proof}
+	$v_1,\ldots,v_n$是$V$上的一组基，$g_{ij}:=\inp{v_i}{v_j}$，则$g_{ji}=\bar g_{ij}.$
+	
+	$\forall u,w\in V,\enspace u=u^1v_1+\cdots+u^nv_n,\enspace w=w^1v_1+\cdots+w^nv_n$
+	\[
+		\inp uw=\inp{u^1v_1+\cdots+u^nv_n}{w^1v_1+\cdots+w^nv_n}=\sum_{i,j}\bar u^iw^jg_{ij}.
+	\]
+\end{proof}
+\begin{example}{内积与对偶空间}{inner product and dual space}
+	$V$的对偶空间$V^\ast$是所有$V\to\CC$的线性函数的集合。通过内积可以建立$V,V^\ast$的一一映射
+	\[
+		\forall v\in V,g_v\in V^\ast,\enspace g_v(w):=\inp vw
+.	\]
+\end{example}
+\begin{example}{Legendre多项式}{Legendre polynomial}
+	所有不高于$n$的实系数多项式
+	\[
+		f(x)=a_0+a_1x+\cdots+a_nx^n,
+	\]
+	构成线性空间$\mathscr P^n(\RR)$，显然$\{1,x,x^2,\ldots,x^n\}$构成$\mathscr P^n(\RR)$的一组基。定义内积
+	\[
+		\inp fg:=\int_{-1}^1f(x)g(x)\d x,
+	\]
+	用Gram-Schmidt法则将$\{1,x,x^2,\ldots,x^n\}$变成一组正交基%$\{P_0,P_1,P_2,\ldots,P_n\}$
+	\begin{align*}
+		P_0&=1,\\
+		P_1&=x-\frac{\inp{P_0}x}{\inp{P_0}{P_0}}P_0=x,\\
+		P_2&=x^2-\frac{\inp{P_1}{x^2}}{\inp{P_1}{P_1}}P_1-\frac{\inp{P_0}{x^2}}{\inp{P_0}{P_0}}P_0=x^2-\frac23,\\
+		P_3&=x^3-\frac{\inp{P_2}{x^3}}{\inp{P_2}{P_2}}P_2-\frac{\inp{P_1}{x^3}}{\inp{P_1}{P_1}}P_1-\frac{\inp{P_0}{x^3}}{\inp{P_0}{P_0}}P_0=x^3-\frac35x,\\
+		&\cdots
+	\end{align*}
+	这与实际Legendre多项式的定义只是系数的差别。
+\end{example}
+\begin{example}{Hermite多项式}{Hermite polynomial}
+	在$\mathscr P^n(\RR)$内定义内积
+	\[
+		\inp fg:=\int\iti f(x)g(x)\e{-x^2/2}\d x,
+	\]
+	用Gram-Schmidt法则将$\{1,x,x^2,\ldots,x^n\}$变成一组正交基
+	\begin{align*}
+		H_0&=1,\\
+		H_1&=x-\frac{\inp{H_0}x}{\inp{H_0}{H_0}}H_0=x,\\
+		H_2&=x^2-\frac{\inp{H_1}{x^2}}{\inp{H_1}{H_1}}H_1-\frac{\inp{H_0}{x^2}}{\inp{H_0}{H_0}}H_0=x^2-1,\\
+		H_3&=x^3-\frac{\inp{H_2}{x^3}}{\inp{H_2}{H_2}}H_2-\frac{\inp{H_1}{x^3}}{\inp{H_1}{H_1}}H_1-\frac{\inp{H_0}{x^3}}{\inp{H_0}{H_0}}H_0=x^3-3x,\\
+		&\cdots
+	\end{align*}
+	这与实际Hermite多项式的定义也只是系数的差别。
+\end{example}
+\section{Hermite矩阵和幺正矩阵}
+% 所有实矩阵相关的内容可以复制到复矩阵。
+\begin{definition}{Hermite矩阵}{Hermite matrix}
+	方阵$H$是厄米(Hermite)矩阵若$H\dg=H.$
+\end{definition}
+Hermite矩阵其实是对称矩阵在复空间的推广。
+
+\begin{example}{Pauli矩阵}{Pauli matrix}
+	给出三个Pauli矩阵
+	\[
+		\sigma_1=
+		\begin{bmatrix}
+			0&1\\1&0
+		\end{bmatrix},\enspace
+		\sigma_2=
+		\begin{bmatrix}
+			0&-\i\\\i&0
+		\end{bmatrix},\enspace
+		\sigma_3=
+		\begin{bmatrix}
+			1&0\\0&-1
+		\end{bmatrix}.
+	\]
+	$\sigma_1,\sigma_2,\sigma_3$都是Hermite的，且
+	\[
+		\sigma_i\sigma_j=\i\sigma_k,\quad(ijk)=(123).
+	\]
+\end{example}
+
+\begin{theorem}{Hermite矩阵的二次型}{quadratic form of Hermite}
+	$\forall z\in\CC$，$z\dg Hz$是实数。
+\end{theorem}
+\begin{proof}
+	$(z\dg Hz)\dg=z\dg H\dg z=z\dg Hz.$
+\end{proof}
+\begin{theorem}{Hermite矩阵的特征值}{}
+	Hermite矩阵$H$的特征值都是实数。
+\end{theorem}
+\begin{proof}
+	$Hz=\lambda z$，左乘$z\dg$得$z\dg Hz=\lambda z\dg z$，由$z\dg Hz,z\dg z$均是实数知，$\lambda$也是实数。
+\end{proof}
+\begin{theorem}{Hermite矩阵的特征向量}{eigenvalue of Hermite}
+	Hermite矩阵$H$不同特征值对应的特征向量正交。
+\end{theorem}
+\begin{proof}
+	$Hz_1=\lambda_1z_1,\enspace Hz_2=\lambda_2z_2,\quad\lambda_1\neq\lambda_2$
+	\[
+		\lambda_1z_2\dg z_1=z_2\dg Hz_1=(z_1\dg Hz_2)\dg=(\lambda_2z_1\dg z_2)\dg=\lambda_2z_2\dg z_1.
+	\]
+	故$z_2\dg z_1=0.$
+\end{proof}
+\begin{theorem}{谱定理}{spectral theorem of Hermite}
+	Hermite矩阵的特征向量构构成$\CC^n$中的一组幺正基。
+	\[
+		H=Q\Lambda Q\dg.
+	\]
+\end{theorem}
+\begin{proof}
+	略。
+\end{proof}
+\begin{definition}{幺正矩阵}{unitary matrix}
+	矩阵$U$是幺正的(unitary)若$U\dg U=I.$
+\end{definition}
+幺正矩阵也是正交矩阵在复空间的推广。
+\begin{theorem}{幺正变换}{unitary transfomation}
+	幺正变换保持复向量的模不变。
+\end{theorem}
+\begin{proof}
+	\[
+		\norm{Uz}^2=z\dg U\dg Uz=z\dg z=\norm z^2.
+	\]
+\end{proof}
+\begin{theorem}{幺正矩阵的行列式}{determinant of unitary}
+	$|\det(U)|=1.$
+\end{theorem}
+\begin{proof}
+	\[
+		1=\det(U\dg U)=\det(U\dg)\det(U)=\overline{\det(U)}\det(U)=|\det(U)|^2.
+	\]
+\end{proof}

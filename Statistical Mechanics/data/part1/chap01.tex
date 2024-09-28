@@ -1,0 +1,121 @@
+% \setcounter{section}{-1}
+\chapter{热力学基本定律}
+%\section*{宏观}
+宏观物质可以用很少的量表征。这种特性源于\textit{宏观测量与原子时间尺度相比极其缓慢，与原子空间尺度相比十分粗糙。}宏观体系忽略了系统内部每个粒子的具体运动，正如Anderson所说：\textbf{\textit{More is different.}}
+而热力学便是\textit{唯象}地描述多粒子行为的宏观理论。
+\section{热力学第零定律}
+\begin{definition}{热力学系统}{thermal system}
+	热力学系统(thermal system)是大量微观粒子（分子、原子、电子等）组成的有限宏观体系。
+\end{definition}
+平衡态指宏观性质不随时间改变的状态。自由度：独立的宏观量数目。
+\begin{theorem}{热力学第零定律：热平衡定律}{thermal equilibrium}
+	若系统A和系统B平衡，和系统C也平衡，则B和C平衡。
+\end{theorem}
+因此互为平衡的体系有一共同的物理性质：温度$T$。
+\begin{definition}{物态方程}{state equation}
+	物态方程(state equation)是$T$与其它状态参量间的关系。如：
+	\begin{compactitem}
+		\item 理想气体：
+		\begin{equation}
+			pv=nRT.
+		\end{equation}
+		\item Van der Waals气体
+		\begin{equation}
+			\biggkh{p+a\frac{n^2}{V^2}}(V-nb)=nRT.
+		\end{equation}
+	\end{compactitem}
+\end{definition}
+\section{热力学第一定律}
+\begin{definition}{准静态过程}{quasistatic process}
+	准静态过程(quasistatic process)指每一瞬时，状态无限接近平衡态的过程。
+\end{definition}
+
+系统的能量包括内能$U$和整体运动能量。对于封闭系统，能量交换有功$W$和热量$Q$两种方式。准静态过程中，
+\begin{align}
+	\vd W=\sum Y_i\d y_i,
+\end{align}
+$(Y_i,y_i)$分别是广义力和广义坐标，如$(-p,V),(\mu_0H,M),(\sigma,A)$等。
+\begin{theorem}{热力学第一定律：能量守恒定律}{Energy Conservation Law}
+	一个热力学系统的内能增量$\d U$等于外界对它所做的功$\vd W$与外界向它传递的热量$\vd Q$的和：
+	\begin{align}
+		\d U=\vd W+\vd Q.
+	\end{align}
+\end{theorem}
+%关于能量的\textit{可测量性}。由能量守恒，
+\indent 如果系统是\textbf{绝热}（$\vd Q\equiv 0$）的，我们便可以用机械功$\vd W$测量内能的变化$\D U$，通过指定基准态的内能$U_0$就可以得出任意状态的内能$U$。进而我们可以测量导热系统的传热$\vd Q$。
+\begin{definition}{热容}{heat capacity}
+	定义热容(heat capacity)
+	\begin{equation}
+		C:=\lim_{\D T\to0}\frac{\D Q}{\D T}.
+	\end{equation}
+	比热容(specific heat capacity)是单位质量的热容。
+\end{definition}
+显然，热容与过程相关。等容热容和等压热容分别为
+\begin{align}
+	C_V=\kh{\pv UT}_V,\quad C_p=\kh{\pv HT}_p.
+\end{align}
+
+内能标准全微分式：将$U$全微分式中各变量微分前的系数用可测量表达出来。
+\begin{example}{静流体系统}{static fluid system}
+	以$T,V$为变量
+	\[
+		\d U=\underset{C_V}{\underline{\kh{\pv UT}_V}}\d T+\kh{\pv UV}_T\d V.
+	\]
+	已知 
+	\begin{align*}
+		C_p&=\kh{\frac{\vd Q}{\d T}}_p=\kh{\frac{\d U+p\d V}{\d T}}_p=\kh{\pv UT}_p+p\kh{\pv VT}_p\\
+		&=\underset{C_V}{\underline{\kh{\pv UT}_V}}+\underset{\text{target}}{\underline{\kh{\pv UV}_T}}\kh{\pv VT}_p+p\kh{\pv VT}_p.
+	\end{align*}
+	因此
+	\begin{align}
+		\d U=C_V\d T+\fkh{(C_p-C_V)\kh{\pv TV}_p-p}\d V.
+	\end{align}
+\end{example}
+\section{热力学第二定律}
+\begin{theorem}{热力学第二定律}{Second Law of Thermodynamics}
+	宏观的自发过程是不过逆的。
+	\begin{compactitem}
+		\item Clausius表述：不可能把热量从低温物体传到高温物体，而不引起其它变化。
+		\item Kelvin表述：不可能从单一热源吸热，使之完全变成有用功，而不引起其它变化。
+	\end{compactitem}
+\end{theorem}
+\begin{theorem}{Carnot定理}{Carnot's Theorem}
+	在相同高、低温热源之间工作的热机中，可逆机的效率最高：
+	\begin{align}
+		\eta=1-\frac{Q_2}{Q_1}=1-\frac{T_2}{T_1}.
+	\end{align}
+	可逆机效率只与热源温度有关，与工作物质无关。
+\end{theorem}
+\paragraph{热力学温标}借助Carnot机可实现绝对温标。
+\begin{theorem}{Clausius不等式}{Clausius inequality}
+	在热力学循环中，系统热的变化及温度之间的关系：
+	\begin{equation}
+		\oint\frac{\vd Q}T\leqslant 0.
+	\end{equation}
+	当且仅当为可逆热机时取等号，此过程定义为可逆过程。
+\end{theorem}
+进而定义可逆过程中的熵
+\begin{align}
+	\d S:=\frac{\vd Q}T.
+\end{align}
+热力学第二定律的熵表述：孤立系统的熵不减，熵是热运动混乱程度的量度。
+\begin{example}{熵的计算}{Calculating Entropy}
+	将质量相同而温度分别为$T_1$和$T_2$的两杯水在等压下绝热的混合，求熵变。
+
+	\textbf{解：}终态温度$T=(T_1+T_2)/2$，两杯水的熵变分别为
+	\[
+		\D S_1=\int_{T_1}^T\frac{C_p\d T}T=C_p\ln\frac{T_1+T_2}{2T_1},\quad\D S_2=C_p\ln\frac{T_1+T_2}{2T_2}.
+	\]
+	总熵增
+	\[
+		\D S=C_p\ln\frac{(T_1+T_2)^2}{4T_1T_2}\geqslant 0.
+	\]
+	取等号当且仅当$T_1=T_2$。
+\end{example}
+\section{热力学第三定律}
+\begin{theorem}{热力学第三定律}{Third Law of Thermodynamics}
+	% Nernst定理：
+	$T\to 0$时，等温过程的熵变$\D_TS\to 0$
+
+	Nernst原理：不可能使一个物体冷却到绝对温度的零度。
+\end{theorem}

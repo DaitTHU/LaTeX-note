@@ -1,0 +1,505 @@
+\chapter{算符}
+量子力学的算符表示对波函数的运算．描述可观测量的算符都是线性的
+\[
+	\hat A\kh{\alpha\psi_1+\beta\psi_2}=\alpha\hat A\psi_1+\beta\hat A\psi_2.
+\]
+算符的加法满足交换律和结合率，但乘法不一定满足分配率。
+\begin{definition}{对易子}{Commutator}
+	一般来说，算符不满足交换律，即对易子
+	\[
+		\cmm AB:=\hat A\hat B-\hat B\hat A
+	\]
+	一般不为0．相应的还有反对易子$\acmm AB:=\hat A\hat B+\hat B\hat A$。
+\end{definition}
+易于验证，对易子满足这些恒等式：
+\begin{compactenum}
+	\item $\cmm AB=-\cmm BA;$\qquad$[\hat A,\hat B+\hat C]=\cmm AB+\cmm AC;$
+	\item $[\hat A,\hat B\hat C]=\hat B\cmm AC+\cmm AB\hat C;$
+	\item $[\hat A\hat B,\hat C]=\hat A\cmm BC+\cmm AC\hat B.$
+\end{compactenum}
+
+考虑位移和动量的对易，一维中
+\begin{align*}
+	\hat x\hat p\psi & =-\i\hbar x\dv\psi{x}.                             \\
+	\hat p\hat x\psi & =-\i\hbar\dv{x\psi}x=-\i\hbar\kh{\psi+\dv\psi{x}}.
+\end{align*}
+因此对波函数来说
+\begin{align}
+	\cmm xp=-\i\hbar.
+\end{align}
+\begin{definition}{逆算符}{Inverse Operator}
+	记$\hat A$的逆算符为$\hat A\iv$，则以下等价
+	\[
+		\hat A\psi=\varphi\iff\hat A^{-1}\varphi=\psi.
+	\]
+	若$\hat A\iv$存在，则$\hat A^{-1}\hat A=\hat A\hat A^{-1}=I$
+\end{definition}
+显然，若$\hat A\iv,\;\hat B\iv$都存在，
+\[
+	(\hat A\hat B)^{-1}=\hat B^{-1}\hat A^{-1}.
+\]
+\iffalse
+	在直角坐标系下，nabla算符
+	\[
+		\nabla=\pp x\ibm i+\pp y\ibm j+\pp z\ibm k.
+	\]
+	Laplace算符
+	\[
+		\nabla^2=\pp[2]x+\pp[2]y+\pp[2]z.
+	\]
+
+	柱坐标系下
+	\[
+		\nabla=\pp\rho\ibm e_\rho+\frac1\rho\pp\varphi\ibm e_\varphi+\pp z\ibm e_z.
+	\]
+	Laplace算符
+	\[
+		\nabla^2=\frac1\rho\pp\rho\kh{\rho\pp\rho}+\frac1{\rho^2}\pp[2]\varphi+\pp[2]z.
+	\]
+\fi
+\begin{definition}{共轭算符}{Conjugate Operator}
+	记$\hat A$的共轭算符为$\hat A\cj$
+	\[
+		\hat A\cj\psi\equiv(\hat A\psi\cj)\cj.
+	\]
+	特别注意，取共轭的结果和表象有关。比如在坐标表象中，$\qo p\cj=-\qo p$，而在动量表象中$\qo p\cj=\qo p$。
+\end{definition}
+\begin{definition}{转置算符}{Tanspose Operator}
+	记$\hat A$的转置算符为
+	$\hat A\tp$
+	\[
+		(\psi,\hat A\tp\varphi)=(\varphi\cj,\hat A\psi\cj).
+	\]
+	% 易于验证$\qo p\tp=-\qo p$。
+\end{definition}
+易证
+\((\hat A\hat B)\tp=\hat B\tp\hat A\tp\)
+\begin{definition}{Hermite算符}{Hermite Operator}
+	记$\hat A$的Hermite变换为$\hat A\dg$
+	\[
+		(\psi,\hat A\dg\varphi)=(\hat A\psi,\varphi).
+	\]
+	易证
+	\[
+		\hat A\dg=(\hat A\cj)\tp=(\hat A\tp)\cj.
+	\]
+	特别的，若$\hat A\dg=\hat A$，则称$\hat A$为\textbf{Hermite算符}。
+\end{definition}
+显然$\qo x,\qo p$是Hermite算符。比如
+\begin{align*}
+	\int\iti & \psi\cj\hat p_x\varphi\d x=-\i\hbar\int\iti\psi\cj\dv\varphi{x}\d x                                                                     \\
+	         & =-\i\hbar\left[\cancel{\psi\cj\varphi{\Big\vert}\iti}-\int\iti\varphi\dv{\psi\cj}x\d x\right]=\int\iti\kh{\hat p_x\psi}\cj\varphi\d x.
+\end{align*}
+以上用到了束缚态条件，其实非束缚态下算符也是Hermite的。
+\section{Hermite算符}
+\begin{theorem}{Hermite算符的平均值}{Meanvalue of Hermite Operator}
+	Hermite算符的平均值是实数。
+	\begin{proof}
+		\[
+			\avg A=(\psi,\hat A\psi)=(\hat A\psi,\psi)=(\psi,\hat A\psi)\cj=\avg A\cj.\qedhere
+		\]
+	\end{proof}
+	\tcblower
+	\paragraph{逆定理}任意态下平均值均为实数的算符是Hermite算符。
+\end{theorem}
+因此实验上的可观测量对应的算符都是Hermite的。
+\begin{theorem}{Hermite算符的本征值}{Eigenvalue of Hermite Operator}
+	Hermite算符的本征值都是实数。
+	\begin{proof}
+		若$\hat A$本征值$\lambda$及对应本征函数$\psi$有
+		\(\hat A\psi=\lambda\psi\)，
+		则
+		\begin{gather*}
+			\lambda\cj(\psi,\psi)=(\hat A\psi,\psi)=(\psi,\hat A\psi)=\lambda(\psi,\psi)
+		\end{gather*}
+		故$\lambda=\lambda\cj$为实数。
+	\end{proof}
+\end{theorem}
+\begin{theorem}{Hermite算符的本征函数}{Eigenfunction of Hermite Operator}
+	Hermite算符对应不同特征值的本征函数彼此正交。
+	\begin{proof}
+		设$\hat A$的本征值$\lambda_1,\lambda_2$对应本征函数$\psi_1,\psi_2$
+		\begin{gather*}
+			\lambda_2(\psi_1,\psi_2)=(\psi_1,\hat A\psi_2)=(\hat A\psi_2,\psi_1)=\lambda_1(\psi_1,\psi_2).
+		\end{gather*}
+		由$\lambda_1\neq\lambda_2$，可知$(\psi_1,\psi_2)\equiv 0$。
+	\end{proof}
+\end{theorem}
+\paragraph{本征函数的归一化}若本征函数是非简并、离散的，则波函数平方可积，可以归一化
+\[
+	(\psi_n,\psi_m)=\delta_{nm}=\begin{cases}
+		1, & n=m \\0,&n\neq m
+	\end{cases}
+\]
+其中$\delta_{nm}$是Kronecker符号。
+
+若本征函数是非简并、连续的，则波函数可以$\delta$函数归一化：%或箱归一化
+\[
+	(\psi_{\lambda'},\psi_\lambda)=\delta(\lambda'-\lambda).
+\]
+\begin{example}{动量本征函数的归一化}{}
+	\[
+		\hat p\psi=-\i\hbar\dv\psi{x}=p\psi,\implies\psi_p(x)=C\e{\i px/\hbar}.
+	\]
+	但$\psi_p$在$\RR$上平方不可积，应考虑$\delta$函数归一化
+	\[
+		(\psi_{p'},\psi_p)=\abs C^2\int\iti\e{\i\kh{p-p'}x/\hbar}\d x=\abs C^2\cdot 2\pi\hbar\vd(p-p').
+	\]
+	$\delta$函数前系数应为一，有
+	\[
+		\psi_p(x)=\frac1{\sqrt{2\pi\hbar}}\e{\i px/\hbar}.
+	\]
+	
+	三维动量算符本征函数同理
+	\[
+		\psi_{\bm p}(\r)=\frac1{\kh{2\pi\hbar}^{3/2}}\e{\i\bm p\cdot\r/\hbar}.
+	\]
+	\tcblower
+	或对其进行\textbf{箱归一化}：粒子波函数在任意边长为$L$的正方体内是正交归一化的
+	\[
+		\int_V\psi_{\bm p_1}\cj(\r)\psi_{\bm p_2}(\r)\d\r=\abs C^2\int_V\e{\i(\bm p_2-\bm p_1)\cdot\r/\hbar}\d\r
+	\]
+	$\bm p_1=\bm p_2$时
+	\[
+		\abs C^2L^3=1,\implies C=L^{-3/2}.
+	\]
+	$\bm p_1\neq\bm p_2$时
+	\[
+		\frac{(-\i\hbar)^3}{L^3\D p_x\D p_y\D p_z}\kh{\e{\i L\D p_x/\hbar}-1}\kh{\e{\i L\D p_y/\hbar}-1}\kh{\e{\i L\D p_z/\hbar}-1}=0.
+	\]
+	于是
+	\[
+		\e{\i L\D p_x/\hbar}=\e{\i L\D p_y/\hbar}=\e{\i L\D p_z/\hbar}=1,\implies\D p=\frac{2\pi\hbar}Ln.
+	\]
+	因此
+	\[
+		\psi_{\bm p}(\r)=\frac1{L^{3/2}}\e{2\pi\i(n_xx+n_yy+n_zz)/L}=\frac1{L^{3/2}}\e{2\pi\i\bm n\cdot\bm r/L}.
+	\]
+	系统的动量是分立的，但当$L\to\infty$时,又过渡到连续的动量谱。
+\end{example}
+%如果出现简并（即一个本征值有若干个线性独立的本征函数）的情形，则正交性定理不能保证同一本征值的不同本征函数是彼此正交的。
+%但是经过对本征函数进行适当的重新组合，可以使它们仍然是正交的，比如线性代数里的Gram-Schmidt法则。
+\section{测量}
+\paragraph{共同本征函数}
+若$\hat A$和$\hat B$有共同本征函数$\psi$，即
+\[
+	\hat A\psi=a\psi,\quad\hat B\psi=b\psi,
+\]
+同时成立。
+
+共同本征函数描写的就是几个力学量同时有确定值的状态。这样，如果算符$\hat A$的本征值有简并，我们就再引进另一算符$\hat B$并求出$\hat A$和$\hat B$的共同本征函数。去除所有的简并后，这样一组量子数$(a,b,\ldots)$就完全确定了一个量子态。
+
+这种情形多半出现在多自由度体系中。对这种体系，一组两两对易的、完全去除简并的算符集称为它的对易可观测量完全集(complete system of commuting observables, CSCO)。完备算符集中算符的数目就是体系的自由度数。如果这些量子数都是分立量子数，共同本征函数的正交归一关系就是
+\[
+	\kh{\psi_{n\ell m},\psi_{n'\ell'm'}}=\vd_{nn'}\vd_{\ell\ell'}\vd_{mm'}.
+\]
+比如$\hkh{\hat p_x,\hat p_y,\hat p_z},\{\hat L^2,\hat L_z\}$等。
+
+\paragraph{量子力学的测量问题}在此引入量子力学的前四个基本公设
+\begin{theorem}{量子力学的基本公设}{Posulates of Quantum Mechanics}
+	\begin{compactenum}
+		\item 微观体系的状态由波函数描述，波函数单值、有限、连续；
+		\item 波函数的动力学演化满足Schrödinger方程；
+		\item 力学量用Hermite算符表示,且有组成完备集的本征函数系；
+		\item 任一波函数可以展开为力学量算符本征函数的线性叠加，测得力学量为本征值$\lambda_n$的几率（密度）为展开式中对应本征函数系数的模方$\abs{c_n}^2$。
+	\end{compactenum}
+\end{theorem}
+量子力学关于测量问题的基本假设是：算符$\hat A$的本征值集$\hkh\lambda$就是力学量$\hat A$的测量值集；$\hat A$的本征函数$\psi_\lambda$代表力学量$\hat A$有确定值$\lambda$的量子状态。且若一般的态
+\[
+	\psi=\sum c_\lambda\phi_\lambda,
+\]
+则处于$\phi_\lambda$的概率为$\abs{c_\lambda}^2$。
+
+对于正交归一的完备本征函数系$\hkh{\psi_n(x)}$叠加
+\[
+	\psi(x)=\sum c_n\phi_n(x)
+\]
+由基的正交归一性，其系数
+\[
+c_n=(\phi_n,\psi),
+\]
+代入
+\begin{align*}
+	\psi(x) & =\sum\kh{\int\phi_n(x')\psi(x')\d x'}\psi_n(x)  \\
+	        & =\int\kh{\sum\phi_n(x)\phi_n(x')}\psi(x')\d x'.
+\end{align*}
+因此完备性要求
+\begin{align}
+	\sum \phi_n(x)\phi_n(x')=\vd(x-x').
+\end{align}
+从物理上说，函数系的完备性尽管很重要，我们却经常不对它做严格的证明。这是因为有些函数系的完备性已经由数学家证明过，也是因为物理上的完备性通常只意味着取这些基本函数来展开我们要研究的波函数已经足够了。
+\paragraph{波包坍缩}测量会使系统由原来许多态的叠加坍缩为一个本征态
+\[
+	\sum c_n\phi_n\e{-\i E_nt/\hbar}\quad\rightarrow\quad\phi_i\e{-\i E_it/\hbar}.
+\]
+这一过程称为“波包坍缩”(Neumann, 1932)。比如，在对粒子做空间位置测量后的一刻，其波函数坍缩为$\vd(r-r_0)$。
+波包坍缩的动力学过程不服从\Schr 方程，至今仍在研究。% 量子力学关于测量的假定是理论的基本假定之一，是量子力学目前无法解释的。
+
+\paragraph{平均值}对离散谱
+\begin{align}\notag
+	\avg A & =\sum\abs{c_n}^2a_n=\sum\kh{\psi,\phi_n}\kh{\phi_n,\psi}a_n  \\
+	       & =\sum(\psi,\hat A \phi_n)\kh{\phi_n,\psi}=(\psi,\hat A\psi).\label{Derivation of Mean Value}
+\end{align}
+对于未归一化的情形
+\[
+	\avg A=\frac{(\psi,\hat A\psi)}{(\psi,\psi)}.
+\]
+连续谱的形式的相同的。
+
+\paragraph{对易和同时测量的关系}下面来看两个力学量可以被同时测量的条件。
+事实上，这与力学量的算符有关：
+\begin{theorem}{对易关系}{Commutate Relation}
+	\centering $\hat A,\hat B$对易$\iff$二者可被同时测量。
+\end{theorem}
+\begin{proof}
+	必要性。若$\hat A,\hat B$可以被同时测量，则二者有共同本征函数$\phi_{ab}$
+	\[
+		\hat A\phi=a\phi,\quad \hat B\phi=b\phi.
+	\]
+	则
+	\[
+		\cmm AB\phi=(ab-ba)\phi=0.
+	\]
+	故$\forall\psi,$
+	\[
+		\cmm AB\psi=\sum_{ab}c_{ab}\cmm AB\phi_{ab}=0.
+	\]
+	因此$\cmm AB\equiv 0$。
+	
+	充分性。若$\hat A,\hat B$对易，且其中有一个是非简并的，不妨设$\hat A$非简并，有一组本征函数集$\{\phi_a\}$
+	\[
+		\cmm AB\phi_a=\hat A\hat B\phi_a-a\hat B\phi_a=0.
+	\]
+	因此$\hat B\phi_a$也是$\hat A$的本征值为$a$的本征函数，因为$\hat A$非简并，有$\hat B\phi_a\propto\phi_a$，即$\phi_a$也是$\hat B$的本征函数。进而$\hat A,\hat B$可以被同时测量。
+\end{proof}
+
+若$\hat A,\hat B$对易，且皆简并，对$\hat A$的本征值$a$有$n$个本征函数$\phi_i$
+\[
+	\hat A\phi_i=a\phi_i,\quad i=1,2,\ldots,n.
+\]
+同理$\hat B\phi_i$是$\hat A$的本征值为$a$的本征函数，用$\phi_j$线性组合表示
+\begin{align*}
+	\hat B\begin{bmatrix}
+		\phi_1 \\\vdots\\\phi_n
+	\end{bmatrix}=\begin{bmatrix}
+		c_{11} & \cdots & c_{1n} \\
+		\vdots & \ddots & \vdots \\
+		c_{n1} & \cdots & c_{nn}
+	\end{bmatrix}\begin{bmatrix}
+		\phi_1 \\\vdots\\\phi_n
+	\end{bmatrix},
+\end{align*}
+将矩阵进行对角化变换，就得到了$\hat B$的本征值和本征函数。
+\paragraph{不确定度}定义偏差为测量值和平均值间的差\footnote{从此处开始，在平均值记号$\avg X$中的$X$过于复杂的时候，我会在这一段统一使用$\ave X$。}
+\[
+	\D\hat A:=\hat A-\ave A.
+\]
+定义\textit{涨落}
+\[
+	(\vd A)^2:=\langle\D\hat A^2\rangle=\langle\hat A^2\rangle-\ave A^2.
+\]
+
+由于Hermite算符的对易子是反Hermite的
+\[
+	\cmm AB\dg=\hat B\hat A-\hat A\hat B=\cmm BA,
+\]
+故若$\cmm AB=\i\hat C$，则$\hat C$也是Hermite的。
+
+考察以下积分不等式
+\[
+I(\xi):=\int\abs{\kh{\xi\,\D\hat A-\i\D\hat B}\psi}^2\d r\geqslant 0.
+\]
+拆开
+\[
+I(\xi)=(\vd A)^2\xi^2-\i\ave{\cmm AB}\xi+(\vd B)^2.
+\]
+因此
+\begin{align}
+	(\vd A)^2(\vd B)^2\geqslant\frac14\ave C^2.
+\end{align}
+因此若$\cmm AB\neq 0$，$\vd A,\vd B$不能同时为0。特别的$\cmm xp=-\i\hbar$，因此
+\begin{align}
+	\vd x\vd p\geqslant\frac{\hbar}2.\label{Proof of UR}
+\end{align}
+证明了第~\pageref{thm:Uncertainty Relation}~面的不确定性定理~\ref{thm:Uncertainty Relation}。
+
+可以证明，满足最小不确定性的波函数为Gauss函数形式。
+\section{角动量算符}
+顺承经典力学中的定义，角动量算符
+\[
+	\qo L:=\qo r\times\,\qo p.
+\]
+直角坐标表象下
+\begin{align*}
+	\qo L & =[\hat x,\hat y,\hat z]\tp\times[\hat p_x,\hat p_y,\hat p_z]\tp                             \\
+	      & =\fkh{\hat y\hat p_z-\hat z\hat p_y,\hat z\hat p_x-\hat x\hat p_z,\hat x\hat p_y-\hat y\hat p_x}\tp % \\ &
+	=:[\hat L_x,\hat L_y,\hat L_z]\tp.
+\end{align*}
+易证$\hat L_x,\hat L_y,\hat L_z$是Hermite的。对易子
+\[
+	\cmm{L_x}{L_y}=(\hat p_z\hat z-\hat z\hat p_z)(\hat y\hat p_x-\hat x\hat p_y)=\i\hbar\,\hat L_z.
+\]
+$\cmm{L_y}{L_z}$等同理，因此
+\begin{align}
+	\qo L\times\,\qo L=\i\hbar\qo L.
+\end{align}
+
+另一方面，角动量平方算符$\hat L^2\equiv\hat L_x^2+\hat L_y^2+\hat L_z^2$与$\hat L_z$等分量对易
+\begin{align}\notag
+	\cmm{L^2}{L_z}&=\cmm{L^2_x}{L_z}+\cmm{L^2_y}{L_z}+0\\\notag
+	&=\hat L_x\cmm{L_x}{L_z}+\cmm{L_x}{L_z}\hat L_x+\hat L_y\cmm{L_y}{L_z}+\cmm{L_y}{L_z}\hat L_y\\
+	&=-\i\hbar(\hat L_x\hat L_y+\hat L_y\hat L_x)+\i\hbar(\hat L_y\hat L_x+\hat L_x\hat L_y)=0.
+\end{align}
+
+联级Stern-Gerlach实验证明，在确定银原子的$\hat L_z$时，其$\hat L_x,\hat L_y$没有确定值，即$\hat L_x,\hat L_y,\hat L_z$不能同时有确定值。
+
+回顾\textit{球坐标系}下
+\[
+	\nabla=\fkh{\pp r,\frac1r\pp\theta,\frac1{r\sin\theta}\pp\varphi}\tp_\mathrm{Sp}.
+\]
+Laplace算符
+\[
+	\nabla^2=\frac1{r^2}\pp r\kh{r^2\pp r}+\frac1{r^2\sin\theta}\pp\theta\kh{\sin\theta\pp\theta}+\frac1{r^2\sin^2\theta}\pp[2]\varphi.
+\]
+定义$\qo L=-\i\hbar\,\qo\Lambda$
+\[
+	\qo\Lambda:=\qo r\times\,\nabla=\fkh{0,-\frac1{\sin\theta}\pp\varphi,\pp\theta}\tp_\mathrm{Sp}.
+\]
+特别的，代回直角坐标系后，有
+\iffalse
+	\begin{align*}
+		\hat L_x & =\i\hbar\kh{+\sin\varphi\pp\theta+\cot\theta\cos\varphi\pp\varphi} \\
+		\hat L_y & =\i\hbar\kh{-\cos\varphi\pp\theta+\cot\theta\sin\varphi\pp\varphi} \\
+		\hat L_z & =-\i\hbar\pp\varphi.
+	\end{align*}
+\fi
+\begin{gather}
+	\hat L_z=-\i\hbar\pp\varphi;\\
+	\hat L^2=-\hbar^2\fkh{\frac1{\sin\theta}\pp\theta\kh{\sin\theta\pp\theta}+\frac1{\sin^2\theta}\pp[2]\varphi}.
+\end{gather}
+由$\hat L_z,\hat L^2$对易，二者有共同本征函数。
+\paragraph{$\hat L_z$的本征态}设本征值为$m\hbar$，本征函数$\psi_m(\varphi)$
+\[
+	\hat L_z\psi_m=-\i\hbar\pv{\psi_m}\varphi=m\hbar\psi_m\implies\psi_m=C\e{\i m\varphi}.
+\]
+且本征态应具有周期性$\psi_m(\varphi+2\pi)=\psi_m(\varphi)$，故$m=0,\pm 1,\pm 2,\ldots$
+\[
+	(\psi_m,\psi_m)=\abs C^2\int_0^{2\pi}\d\varphi=1,\implies C=\frac1{\sqrt{2\pi}}.
+\]
+\paragraph{$\hat L^2$的本征态}设本征值为$\lambda\hbar^2$，本征函数$Y(\theta,\varphi)$
+\[
+	\hat\Lambda^2Y=\frac1{\sin\theta}\pp\theta\kh{\sin\theta\pv Y\theta}+\frac1{\sin^2\theta}\pv[2]Y\varphi=-\lambda Y.
+\]
+分离变量$Y(\theta,\varphi)=\varTheta(\theta)\varPhi(\varphi)$
+\[
+	\frac\varPhi{\sin\theta}\dd\theta\kh{\sin\theta\dv\varTheta\theta}+\frac\varTheta{\sin^2\theta}\dv[2]\varPhi\varphi=-\lambda\varTheta\varPhi.
+\]
+即
+\[
+	\frac{\sin\theta}\varTheta\dd\theta\kh{\sin\theta\dv\varTheta\theta}+\lambda\sin^2\theta=-\frac1\varPhi\pv[2]\varPhi\varphi=m^2.
+\]
+
+引入$w:=\cos\theta,\;P(w):=\varTheta(\arccos w)=\varTheta(\theta)$
+\begin{equation}
+	\dd w\fkh{\kh{1-w^2}\dv Pw}+\kh{\lambda-\frac{m^2}{1-w^2}}P=0.
+\end{equation}
+这是缔合Legendre方程，$\pm 1$是方程的奇点，只有
+\[
+	\lambda=\ell(\ell+1),\quad\ell=\abs m,\abs m+1,\ldots
+\]
+时，方程才有收敛解$P_\ell^m(w)$。
+
+特别的，当$m=0$时，
+\[
+	\dd w\fkh{\kh{1-w^2}\dv Pw}+\ell(\ell+1)P=0.
+\]
+便是Legendre方程，其解是Legendre多项式
+\[
+P_\ell(w)=\frac1{2^\ell\ell!}\dd[\ell]w\kh{w^2-1}^\ell.
+\]
+对应的，当$m>0$时，缔合\Legd 函数
+\[
+P_\ell^m(w)=\kh{1-w^2}^{m/2}\dd[m]wP_\ell(w).
+\]
+而对于$m<0$的情形，其实应当与$\abs m$相同；若对正负均沿用原定义，则
+\[
+P_\ell^{-m}=(-1)^m\frac{(\ell-m)!}{(\ell+m)!}P_\ell^m,\quad m>0.
+\]
+
+\Legd 多项式的奇偶性由$\ell$决定。
+\begin{example}{\Legd 函数表}{Table of Legendre}
+	$\ell=0,1,2,3$的Legendre多项式$P_\ell$和缔合Legendre函数$P_\ell^m(\cos\theta)$%\setlength\abovedisplayskip{10pt}
+	\begin{align*}
+		P_0 & =1, & P_0^0 & =1;\\
+		P_1 & =x, & P_1^0 & =\cos\theta, & P_1^1 & =\sin\theta;\\
+		P_2 & =\frac12(3x^2-1), & P_2^0 & =\frac12(3\cos^2\theta-1), & P_2^1 & =3\sin\theta\cos\theta,\\
+			&& P_2^2 &=3\sin^2\theta;\\
+		P_3 & =\frac12(5x^3-3x), & P_3^0 & =\frac12(5\cos^3\theta-3\cos\theta), & P_3^1 & =\frac32\sin\theta(5\cos^2\theta-1),\\
+			&& P_3^2 & =15\sin^2\theta\cos\theta, & P_3^3 & =15\sin^3\theta;
+		%\\P_4&=\frac18(35x^4-30&x^2&+3),&P_5&=\frac18(63x^5-70x^3+15x).
+	\end{align*}
+\end{example}
+轨道角动量本征函数最后为
+\[
+	Y_{\ell m}(\theta,\varphi)=N_{\ell m}P_\ell^m(\cos\theta)\e{\i m\varphi},
+\]
+%正交归一
+%\[\int\abs{Y_{\ell m}(\theta,\varphi)}^2\d\Omega=1,\quad\d\Omega=\sin\theta\d\theta\nd\varphi.\]
+由于
+\[
+	\int_{-1}^1P_\ell^m(x)P_{\ell'}^{m'}(x)\d x=\frac2{2\ell+1}\frac{(\ell+m)!}{(\ell-m)!}\vd_{\ell\ell'}\vd_{mm'}.
+\]
+得
+\[
+N_{\ell m}=(-1)^m\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}}
+\]
+称$Y_{\ell m(\theta,\varphi)}$为球谐函数，$\ell$为角量子数，$m$为磁量子数。原子物理中将$\ell=0,1,2,3,\ldots$的状态分别称为$\mathrm{s,p,d,f}$态。
+
+\begin{example}{球谐函数表}{Table of Spherical Harmonics}
+	$\ell=0,1,2,3$已归一化后的$Y_\ell^m$
+	\begin{align*}
+		Y_0^0~\;    & =\frac1{2\sqrt\pi},                                           & Y_2^{\pm 2} & =\sqrt{\frac{15}{32\pi}}\sin^2\theta\e{\pm 2\i\phi},                 \\
+		Y_1^0~\;    & =\sqrt{\frac3{4\pi}}\cos\theta,                               & Y_3^0~\;    & =\sqrt{\frac7{16\pi}}(5\cos^3\theta-3\cos\theta),                    \\
+		Y_1^{\pm 1} & =\mp\sqrt{\frac3{8\pi}}\sin\theta\e{\pm\i\phi},               & Y_3^{\pm 1} & =\mp\sqrt{\frac{21}{64\pi}}\sin\theta(5\cos^2\theta-1)\e{\pm\i\phi}, \\
+		Y_2^0~\;    & =\sqrt{\frac5{16\pi}}(3\cos^2\theta-1),                       & Y_3^{\pm 2} & =\sqrt{\frac{105}{32\pi}}\sin^2\theta\cos\theta\e{\pm 2\i\phi},      \\
+		Y_2^{\pm 1} & =\mp\sqrt{\frac{15}{8\pi}}\sin\theta\cos\theta\e{\pm \i\phi}, & Y_3^{\pm 3} & =\mp\sqrt{\frac{35}{64\pi}}\sin^3\theta\e{\pm 3\i\phi}.
+	\end{align*}
+\end{example}
+$\hat L^2$的本征值$\ell$下有$2\ell+1$个可能的$m$，简并度为$2\ell+1$。
+
+球谐函数是$\hat L^2$和$\hat L_z$的共同本征函数
+\begin{align*}
+	\begin{cases}
+		\hat L^2Y_{\ell m}=\ell(\ell+1)\hbar^2Y_{\ell m}, & \ell=0,1,2,\ldots           \\
+		\hat L_zY_{\ell m}=m\hbar Y_{\ell m},             & m=-\ell,-\ell+1,\ldots,\ell
+	\end{cases}
+\end{align*}
+\paragraph{宇称}作空间反射变换$\r\to-\r$，对应球坐标中$(r,\theta,\varphi)\to(r,\pi-\theta,\pi+\varphi)$
+\begin{gather*}
+	P_{\ell}^{m}\kh{\cos (\pi-\theta)}=P_{\ell}^{m}(-\cos \theta)=(-1)^{\ell-m} P_{\ell}^{m}(\cos \theta) \\
+	\e{\i m(\pi+\varphi)}=(-1)^{m}\e{\i m \varphi}                                                   \\
+	Y_{\ell m}(\pi-\theta, \pi+\varphi)=(-1)^{\ell} Y_{\ell m}(\theta, \varphi)
+\end{gather*}
+因此$Y_{\ell m}(\theta,\varphi)$的宇称为$(-1)^\ell$．
+\paragraph{递推关系}
+\begin{align}\label{costhetaYlm}
+	\cos\theta Y_\ell^m&=\sqrt{\frac{(\ell+1)^2-m^2}{(2\ell+1)(2\ell+3)}}Y_{\ell+1}^m+\sqrt{\frac{\ell^2-m^2}{(2\ell-1)(2\ell+1)}}Y_{\ell-1}^m.\\
+	\sin\theta\e{\pm\i\varphi}Y_\ell^m&=\pm\sqrt{\frac{(\ell\pm m+1)(\ell\pm m+2)}{(2\ell+1)(2\ell+3)}}Y_{\ell+1}^{m+1}+\sqrt{\frac{(\ell\mp m)(\ell\mp m+1)}{(2\ell-1)(2\ell+1)}}Y_{\ell-1}^{m\pm 1}.
+\end{align}
+记不住，记住也没用。
+\paragraph{径向动量算符}球坐标系不同于直角坐标，$\qo r\cdot\,\qo p$并不是Hermite的。因此要使算符是Hermite的，定义
+\[
+	\hat p_r=\frac12\kh{\qo{e_r}\cdot\,\qo p+\,\qo p\,\cdot\,\qo{e_r}}.
+\]
+计算得
+\begin{align}
+	\hat p_r=-\frac{\i\hbar}2\kh{\pp r+\pp r+\frac1r+\frac1{r\sin\theta}\cdot\sin\theta}=-\i\hbar\kh{\pp r+\frac1r}.
+\end{align}
+且
+\[
+	\hat p_r^2=-\hbar^2\kh{\pp[2]r+\frac2r\pp r}=-\hbar^2\frac1{r^2}\pp r\kh{r^2\pp r}.
+\]
+因此
+\begin{align}
+	\hat p^2=\hat p_r^2+\frac{\hat L^2}{r^2}.
+\end{align}

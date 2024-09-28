@@ -1,0 +1,195 @@
+\chapter{方差分析和回归分析}
+
+\section{方差分析}
+
+方差分析(Analysis of Variance, AoV or ANOVA)由著名英国统计学家R. A. Fisher在1923年提出，又称F检验，用于两个及两个以上样本均数差别的显著性检验。
+
+\begin{definition}{}{}
+	试验指标：要考察的指标；
+
+	因素：影响试验指标的条件；
+
+	因素的水平：因素所处的状态；
+	
+	单因素试验：在一项试验中只有一个因素在改变，
+
+	多因素试验：多于一个因素在改变。
+\end{definition}
+
+基本假设：
+\begin{compactenum}
+	\item 样本相互对立，来自正态总体
+	\item 各总体方差相等
+\end{compactenum}
+
+\paragraph{变差分解}
+
+组数$s$，总例数$N=\textstyle\sum_{j=1}^sn_j$
+
+\begin{definition}{总变差}{total sum of square}
+	总变差的大小可用总偏差平方和表示，这反映了所有观测值之间总的变差程度。
+	\begin{align}
+		S_T:={}&\sum_{j=1}^s\sum_{i=1}^{n_j}(X_{ij}-\avg X)^2\\\notag
+		={}&\sum_{i,j}X_{ij}^2-\frac1N\biggkh{\sum_{i,j}X_{ij}}^2,
+	\end{align}
+	总自由度$\nu_T=N-1$，总均方$MS_T=S_T/\nu_T.$
+\end{definition}
+
+变异程度除与偏差平方和$S$有关外，还与其自由度$\nu$有关，由于各部分自由度不相等，因此各部分偏差平方和不能直接比较，须将各部分偏差平方和除以相应自由度，其比值称为均方差 ，简称均方(mean square, MS)。
+
+\begin{definition}{组间变差}{error sum of square}
+	各处理组的样本均值大小不等, 这种变差称为组间变差%，其大小可用各组均值$X_{\cdot j}$与总均值$X$的离均差平方和表示。记作$S_A$
+	\begin{align}
+		S_A:={}&\sum_{j=1}^sn_j(\avg X_{\cdot j}-\avg X)^2\\\notag
+		={}&\sum_{j=1}^s\frac1{n_j}\biggkh{\sum_{i=1}^{n_j}X_{ij}}^2-\frac1N\biggkh{\sum_{i,j}X_{ij}}^2,
+	\end{align}
+	组间自由度$\nu_A=s-1$，组间均方$MS_A=S_A/\nu_A.$
+\end{definition}
+组间变差存在的原因
+\begin{compactitem}
+	\item 随机误差，包括个体变差和测量误差
+	\item 处理因素的不同水平可能对试验结果有影响。
+\end{compactitem}
+\begin{definition}{组内变异}{treatment sum of square}
+	在同一处理组内，虽然各受试对象接受的处理相同，但测量值之间仍不同，这种变异称为组内变异(误差)
+	\begin{align}
+		S_E:={}&\sum_{i,j}(X_{ij}-\avg X_{\cdot j})^2%\\\notag
+		%={}&\sum_{j=1}^s(n_j-1)S_i^2.
+	\end{align}
+	反映了随机误差的影响。
+
+	组内自由度$\nu_E=N-s$，组内均方$MS_E=S_E/\nu_E.$
+\end{definition}
+偏差平方和与自由度具有可加性
+\begin{align*}
+	S_T&=S_A+S_E,\\
+	\nu_T&=\nu_A+\nu_E.
+\end{align*}
+假设检验
+\[
+	H_0:\mu_1=\mu_2=\cdots,\quad H_1:\ldots
+\]
+检验统计量 
+\begin{align}
+	F:=\frac{S_A}{S_E}\sim\mathrm F(\nu_A,\nu_E).
+\end{align}
+当$F>F_\alpha(\nu_A,\nu_E)$时拒绝$H_0$。
+\paragraph{双因素检验}
+设有两个因素$A,B$作用于试验的指标。因素$ A $有$ r $个水平$ A_1, A_2,\ldots, A_r$，因素$ B $有$ s $个水平$ B_1, B_2,\ldots, B_s $。现对因素$ A, B $的所有组合$(A_i, B_j)$都作$t$次试验，称为等重复试验。
+
+设$X_{ijk}\sim\Norm(\mu_{ij},\sigma^2)$，$i, j, k $分别为因素$ A, B $和重复试验的下标。
+则
+总平均
+\[
+	\mu:=\frac1{rs}\sum_{i,j}\mu_{ij},
+\]
+$A_i,B_j$的效应分别为
+\[
+	\alpha_i=\mu_{i\cdot}-\mu,\quad\beta_j=\mu_{\cdot j}-\mu,
+\]
+交互效应
+\[
+	\gamma_{ij}=\mu_{ij}-\mu_{\cdot j}-\mu_{i\cdot}+\mu.
+\]
+可见
+\[
+	\sum_{i=1}^r\alpha_i=\sum_{i=1}^r\gamma_i,\quad\sum_{j=1}^s\beta_j=\sum_{j=1}^s\gamma_j.
+\]
+\begin{compactitem}
+	\item $S_T$为总变差，自由度$rst-1$
+	\item $S_E$误差平方和，自由度$rs(t-1)$
+	\item $S_A,S_B$为因素$ A, B $的效应平方和，自由度为$ r - 1, s - 1$
+	\item $S_{A\times B}$为$A,B$的交互效应平方和，自由度为 $(r - 1)(s - 1)$
+\end{compactitem}
+\begin{align}\notag
+	S_T={}& \sum_{i=1}^r \sum_{j=1}^s \sum_{k=1}^t(X_{i j k}-\avg{X})^2 \\\notag
+	={}& \sum_{i=1}^r \sum_{j=1}^s \sum_{k=1}^t[(X_{i j k}-\avg{X}_{i j \cdot})+(\avg{X}_{i\cdot\cdot}-\avg{X})+(\avg{X}_{\cdot j \cdot}-\avg{X})+\\\notag
+	&\quad(\avg{X}_{i j \cdot}-\avg{X}_{i \cdot\cdot}-\avg{X}_{\cdot j \cdot}+\avg{X})]^2 \\\notag
+	={}& \sum_{i=1}^r \sum_{j=1}^s \sum_{k=1}^t(X_{i j k}-\avg{X}_{i j \cdot})^2+s t \sum_{i=1}^r(\avg{X}_{i\cdot\cdot}-\avg{X})^2+ \\\notag
+	& r t \sum_{j=1}^s(\avg{X}_{\cdot j \cdot}-\avg{X})^2+t \sum_{i=1}^r \sum_{j=1}^s(\avg{X}_{i j \cdot}-\avg{X}_{i\cdot\cdot}-\avg{X}_{\cdot j \cdot}+\avg{X})^2\\
+	={}&S_E+S_A+S_B+S_{A\times B}.
+\end{align}
+比如，对A做假设检验
+\[
+	H_0:\alpha_1=\cdots=\alpha_r=0,\quad H_1:\ldots
+\]
+检验统计量 
+\[
+	F:=\dvd{\frac{S_A}{r-1}}{\frac{S_E}{rs(t-1)}}\sim\mathrm F\bigkh{r-1,rs(t-1)}.
+\]
+
+\section{回归分析}
+%如果变量$x$和$y$从相关图中可以看出它们之间大致形成一种直线关系，我们就可在相关图上求出一条与各点最相配合的直线。一元线性回归方程$y=a+bx$
+
+%设$(x_1,y_1),\ldots,(x_n,y_n) $是$ (x, y) $的一组观测值，对每个样本观测值$(x_i,y_i)$考虑与其回归值$a+bx_i$的离差为$y_i-a-bx_i$，离差平方和
+用$g(X)$估计$Y$，离差$Y-g(X)$，均方误差就是离差平方的期望
+\[
+	Q:=\E\bigfkh{(Y-g(X))^2}.
+\]
+最小二乘法所求的是均方误差意义下的最优线性预测
+\[
+	(\alpha,\beta)=\arg\min_{a,b}\E\bigfkh{(Y-(a+bX))^2}
+\]
+实际上就是求二元函数
+\begin{align*}
+	f(a,b):=&{}\E\bigfkh{(Y-(a+bX))^2}\\
+	=&{}\E(X^2)b^2+2\E(X)ab+a^2-2\E(XY)b-2\E(Y)a+\E(Y^2).
+\end{align*}
+的最小值点，则在最小值点处有
+\[
+	\pv fa=0,\enspace\pv fb=0.
+\]
+解得
+\begin{align}
+	\begin{cases}
+		\beta=\frac{\E(XY)-\E(X)\E(Y)}{\E(X^2)-\E^2(X)}\equiv\frac{\Cov(X,Y)}{\Var(X)},\\
+		\alpha=\E(Y)-\beta\E(X)
+	\end{cases}
+\end{align}
+误差的期望和方差
+\begin{align*}
+	\E[Y-(\alpha+\beta X)]&=\E(Y)-\alpha-\beta\E(X)=0;\\
+	\Var[Y-(\alpha+\beta X)]&=\Var(Y-\beta X)\\
+	&=\Var(Y)+\beta^2\Var(X)-2\beta\Cov(Y,X)\\
+	&=%\Var(Y)-\frac{\Cov^2(X,Y)}{\Var(X)}=
+	\bigfkh{1-\Corr^2(X,Y)}\Var(Y).
+\end{align*}
+\paragraph{相关性检验}
+对任意两个变量的一组观察值$ {(x_i, y_i)} $都可以用最小二乘法形式上求得$ y$对$ x $的回归方程，如果$ y $与$ x $没有线性相关关系, 这种形式的回归方程就没有意义。因此需要考察$ y $与$ x $间是否确有线性相关关系，这就是回归效果的检验问题。
+
+一元线性回归模型
+\[
+	y=a+bx+\epsilon,\enspace\epsilon\sim\Norm(0,\sigma^2).
+\]
+因随机因素引起的误差称为残差平方和
+\[
+	Q_e=\sum_{i=1}^n(y_i-\hat y_i)^2
+\]
+则
+\[
+	\frac{Q_e}{\sigma^2}\sim\chi^2(n-2),\implies\hat\sigma^2=\frac{Q_e}{n-2},
+\]
+检验假设 
+\[
+	H_0:b=0,\quad H_1:b\neq 0,
+\]
+$\hat b$满足 
+\[
+	\hat b\sim\Norm\biggkh{b,\frac{\sigma^2}{L_{xx}}},\quad L_{xx}:=\sum_{i=1}^n(x_i-\avg x)^2.
+\]
+如果原假设成立，
+\[
+	\frac{\hat b\sqrt{L_{xx}}}{\sigma}\sim\Norm(0,1),\quad\frac{Q_e}{\sigma^2}\sim\chi^2(n-2).
+\]
+检验统计量 
+\begin{align}
+	t:=\hat b\sqrt{\frac{(n-2)L_{xx}}{Q_e}}\sim\mathrm t(n-2).
+\end{align}
+拒绝域$\abs t\geqslant t_{\alpha/2}(n-2).$
+\paragraph{线性化回归}
+在许多实际问题中，两个变量之间并不一定是线性关系，而是某种曲线关系，应该用曲线来拟合。可以进行适当的变量代换，把它线性化，这样就把一个非线性回归问题化为线性回归问题而得以解决。
+\paragraph{多线性回归}
+随机变量$ Y $往往与多个变量$ x1, x2, \ldots , xp $有关。对自变量$ x1, x2, \ldots, xp $的一组确定的值，$Y $有它的分布
+\[
+	Y=b_0+\sum_{i=1}^pb_ix_i+\epsilon,\enspace\epsilon\sim\Norm(0,\sigma^2).
+\]

@@ -1,0 +1,308 @@
+\chapter{多元函数微分}
+\begin{definition}{向量和多元函数}{}
+	$x_1,x_2,\ldots,x_n\in\RR$向量
+	\[
+		X:=\fkh{x_1,x_2,\ldots,x_n}\tp,
+	\]
+	定义在$\Omega\subset\RR^n$上的$n$元函数$f:\Omega\to\RR.$
+\end{definition}
+$f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=\fkh{f_1,f_2,\ldots,f_m}\tp.$
+\section{偏导数}
+\begin{definition}{}{}
+	$\hat e_1,\hat e_2,\ldots,\hat e_n$ 是$\RR^n$的基底，则$f$在$X_0$点关于$x_i$的偏导数
+	\[
+		\pv f{x_i}(X_0):=\lim_{t\to 0}\frac{f(X_0+t\hat e_i)-f(X_0)}t,
+	\]
+	$f$的全微分
+	\begin{align}
+		\d f(X_0)=\sum_{i=1}^n\pv f{x_i}(X_0)\d x_i.
+	\end{align}
+\end{definition}
+有时用$\partial_if$比$\p f/\p x_i$更好.
+\begin{theorem}{可微性判定}{}
+	对二元函数$f(x,y)$
+	\begin{center}
+		$\pv fx$在$X_0$连续，$\pv fy(X_0)$存在
+		\vthus
+		$f$在$X_0$可微性
+		\viff
+		$f(X)-\fkh{f(X_0)+\pv fx(X_0)\Delta x+\pv fy(X_0)\Delta y}=o\kh{\norm{\Delta X}}$
+	\end{center}
+	其中$\D X\equiv\fkh{\D x,\D y}\tp.$
+\end{theorem}
+\section{方向导数和梯度}
+\begin{definition}{}{}
+	$f$可微，其沿单位向量$\hat \ell=\fkh{\cos\alpha_1,\cos\alpha_2,\ldots,\cos\alpha_n}$方向的方向导数 % \vec \ell=\fkh{x_1,x_2,\ldots,x_n}, \vec \ell/|\ell|=
+	\[
+		\pv f{\vec \ell}(X_0):=\lim_{t\to 0}\frac{f(X_0+t\hat \ell)-f(X_0)}t;
+	\]
+	梯度
+	\[
+		\nabla f:=\left[\pv f{x_1},\pv f{x_2},\ldots,\pv f{x_n}\right]\tp.
+	\]
+\end{definition}
+因此方向导数也可以看做
+\begin{align}
+	\pv f{\vec \ell}(X_0)=\sum_{i=1}^n\pv f{x_i}(X_0)\cos\alpha_i=\nabla f(X_0)\cdot\hat \ell.
+\end{align}
+\section{高阶偏导数}
+\begin{definition}{}{}
+	若$\dvd f{x_i}$对$x_j$的偏导存在，则记二阶偏导数
+	\[
+		\pw f{x_j}{x_i}:=\pp{x_j}\pv f{x_j};\quad \pv[2]f{x_i}\equiv\pw f{x_i}{x_i}
+	\]
+	也可记作$\partial_{ji}f.$
+\end{definition}
+\begin{theorem}{二阶偏导的存在性判定}{}
+	\begin{center}
+		$\pw f{x_i}{x_j}$和$\pw f{x_j}{x_i}$中一个在$X_0$连续
+		\vthus
+		$\pw f{x_i}{x_j}=\pw f{x_j}{x_i}$
+	\end{center}
+\end{theorem}
+\section{向量值函数微分}
+\begin{definition}{Jacobi矩阵}{}
+	向量值函数$F:\RR^m\to\RR^n$%，于是$\vec f:\Omega\to\RR^m$
+	\begin{gather*}
+		\begin{bmatrix}
+			\text df_1 \\
+			\vdots     \\
+			\text df_m
+		\end{bmatrix}=
+		%\begin{bmatrix}
+		%    \frac{\p f_1}{\p x_1}\d x_1+\cdots+\frac{\p f_1}{\p x_n}\d x_n \\
+		%    \vdots                                                         \\
+		%    \frac{\p f_m}{\p x_1}\d x_1+\cdots+\frac{\p f_m}{\p x_n}\d x_n
+		%\end{bmatrix}=
+		\begin{bmatrix}
+			\pv{f_1}{x_1} & \cdots & \pv{f_1}{x_n} \\
+			\vdots                & \ddots & \vdots                \\
+			\pv{f_m}{x_1} & \cdots & \pv{f_m}{x_n}
+		\end{bmatrix}
+		\begin{bmatrix}
+			\d x_1 \\
+			\vdots \\
+			\d x_n
+		\end{bmatrix};\\
+		\d F=J_F\d X.
+	\end{gather*}
+	式中的矩阵称为Jacobi矩阵
+	\[
+		J_F\equiv\frac{\p(f_1,\ldots,f_m)}{\p(x_1,\ldots,x_n)}.
+	\]
+	$m=n$时，对应有Jacobi行列式
+	\[
+		\frac{D(f_1,\ldots,f_n)}{D(x_1,\ldots,x_n)}:=\det J_F
+	\]
+\end{definition}
+\section{复合函数微分}
+\begin{theorem}{}{}
+	$G:\RR^n\to \RR^m,F:\RR^m\to \RR^k$, $Y_0=G(X_0)$，则下面三个结论是等价的
+	\begin{compactenum}[(1)]
+		\item $\d(F\circ G)(X_0)=\d F(Y_0)\d G(X_0);$
+		\item $J_{F\circ G}(X_0)=J_F(Y_0)J_G(X_0);$
+		\item $\frac{\p(f_1,\ldots,f_k)}{\p(x_1,\ldots,x_n)}(X_0)=\frac{\p(f_1,\ldots,f_k)}{\p(y_1,\ldots,y_m)}(Y_0)\frac{\p(g_1,\ldots,g_m)}{\p(x_1,\ldots,x_n)}(X_0).$
+	\end{compactenum}
+\end{theorem}
+特别的，当$k=1$即$F=f$为单值函数时
+\begin{align}
+	\pv{f\circ G}{x_i}(X_0)=\sum_{j=1}^m\pv f{y_j}(Y_0)\pv{g_j}{x_i}(X_0).
+\end{align}
+$\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
+\section{隐函数}
+\begin{theorem}{二元隐函数}{}
+	给定$f(x,y)\in C(\RR^2)$\footnote{表示$f$在$\RR^2$上连续．}与点$P(x_0,y_0)$,
+	\begin{center}
+		$f(P)=0$且$\pv fy(P)\neq 0$
+		\vthus
+		$y=y(x)$存在，且$\dv yx=-\fracdisp{\pv fx(x,y)}{\pv fy(x,y)}.$
+	\end{center}
+\end{theorem}
+证明：$\d f=\pv fx\d x+\pv fy\d y=0.$
+\begin{theorem}{多元隐函数}{}
+	给定$f(X,y)\in C(\RR^{n+1})$与点$P(X_0,y_0)$,
+	\begin{center}
+		$f(P)=0$且$\pv fy(P)\neq 0$
+		\vthus
+		$y=y(X)$存在，且$\dv y{x_i}=-\fracdisp{\pv f{x_i}(X,y)}{\pv fy(X,y)}.$
+	\end{center}
+\end{theorem}
+\begin{theorem}{向量值隐函数}{}
+	给定$f_i(X,Y)\in C(\RR^{n+m}),(i=1,2,\ldots,m)$与点$P(X_0,Y_0)$,
+	\begin{center}
+		$F(P)=\vec 0$且$\frac{D(f_1,\ldots,f_m)}{D(y_1,\ldots,y_m)}(P)\neq 0$
+		\vthus
+		$Y=Y(X)$存在，且$\frac{\p(y_1,\ldots,y_m)}{\p(x_1,\ldots,x_n)}=-\left(\frac{\p(f_1,\ldots,f_m)}{\p(y_1,\ldots,y_m)}\right)^{-1}\frac{\p(f_1,\ldots,f_m)}{\p(x_1,\ldots,x_n)}.$
+	\end{center}
+\end{theorem}
+\begin{theorem}{反函数}{}
+	给定$Y=F(X)$，则反函数$X=F^{-1}(Y)$满足
+	\[
+		J_{F^{-1}}(X)=\left(J_F(X)\right)^{-1}.
+	\]
+\end{theorem}
+\begin{example}{二阶偏导数举例}{}
+	给定$f(x,y,z)=0$,求$\pw zyx．$
+	\begin{align*}
+		\pw zyx & =-\pp y\kh{\dvd{\pv fx}{\pv fz}}                                  \\
+				 & =-\dvd{\kh{\pp y\pv fx\cdot\pv fy-\pv fx\cdot\pp y\pv fz}}{\kh{\pv fz}^2}
+	\end{align*}
+	其中
+	\begin{align*}
+		\pv{}y\pv fx & =\pw fyx+\pw fzx\pv zy,\quad \pv zy=-\dvd{\pv fy}{\pv fz}; \\
+		\pv{}y\pv fz & =\pw fyz+\pv[2]fz\pv zy.
+	\end{align*}
+	故
+	{\scriptsize\begin{align*}
+		\pw zyx=-\dvd{\left[\kh{\pv fz}^2\pw fyx-\pv fy\pv fz\pw fzx-\pv fx\pv fz\pw fyz+\pv fx\pv fy\pv[2]fz\right]}{\kh{\pv fz}^3}.
+	\end{align*}}
+\end{example}
+\section{法与切}
+给定向量$\vec v=\fkh{a,b,c}\tp$与点$P_0(x_0,y_0,z_0)$，可以确定
+\begin{align*}
+	\text{线}:   & \qquad \frac{x-x_0}a=\frac{y-y_0}b=\frac{z-z_0}c \\
+	\text{平面}: & \qquad a(x-x_0)+b(y-y_0)+c(z-z_0)=0
+\end{align*}
+参数方程可以得到显函数表达式
+\begin{gather*}
+	\text{线}:~
+	\begin{cases}
+		x=x_0+at \\[-1ex]
+		y=y_0+bt \\[-1ex]
+		z=z_0+ct
+	\end{cases}
+	\quad
+	\text{平面}:~
+	\begin{cases}
+		x=x_0+a_1u+b_1v \\[-1ex]
+		y=y_0+a_2u+b_2v \\[-1ex]
+		z=z_0+a_3u+b_3v
+	\end{cases}
+	\\
+	a=
+	\begin{vmatrix}
+		a_2 & b_2 \\
+		a_3 & b_3
+	\end{vmatrix}\quad b=
+	\begin{vmatrix}
+		a_3 & b_3 \\
+		a_1 & b_1
+	\end{vmatrix}\quad c=
+	\begin{vmatrix}
+		a_1 & b_1 \\
+		a_2 & b_2
+	\end{vmatrix}.
+\end{gather*}
+\paragraph{曲面的法线和切平面}
+\subparagraph{显函数}
+\[
+	z=f(x,y)\implies\vec v=\left[\pv fx,\pv fy,-1\right]_{(x_0,y_0)}.
+\]
+\subparagraph{参数方程}
+\begin{align*}
+	\begin{cases}
+		x=f_1(u,v) \\
+		y=f_2(u,v) \\
+		z=f_3(u,v)
+	\end{cases}
+	\implies\vec v=\left[\frac{D(f_2,f_3)}{D(u,v)},\frac{D(f_3,f_1)}{D(u,v)},\frac{D(f_1,f_2)}{D(u,v)}\right]_{(u_0,v_0)}.
+\end{align*}
+\subparagraph{隐函数}
+\[
+	f(x,y,z)=0\implies\vec v=\fkh{\pv fx,\pv fy,\pv fz}_{P_0}=\nabla f(P_0).
+\]
+\paragraph{曲线的法平面和切线}
+\subparagraph{参数}
+\begin{align*}
+	\begin{cases}
+		x=x(t) \\[-1ex]
+		y=y(t) \\[-1ex]
+		z=z(t)
+	\end{cases}
+	\implies\vec v=\fkh{x'(t),y'(t),z'(t)}.
+\end{align*}
+\subparagraph{隐函数}
+\begin{align*}
+	\begin{cases}
+		F_1(x,y,z)=0 \\
+		F_2(x,y,z)=0
+	\end{cases}
+	\implies\vec v=\left[\frac{D(F_1,F_2)}{D(y,z)},\frac{D(F_1,F_2)}{D(z,x)},\frac{D(F_1,F_2)}{D(x,y)}
+		\right]_{P_0}
+\end{align*}
+\newpage
+\section{Talyor公式}
+\begin{definition}{Hesse矩阵}{}
+	$f:\Omega\to\RR$的Jacobi矩阵(行向量)为
+	\begin{align*}
+		J_f=
+		\begin{bmatrix}
+			\pv f{x_1} & \pv f{x_2} & \cdots & \pv f{x_n}
+		\end{bmatrix}.
+	\end{align*}
+	定义Hesse矩阵
+	\begin{align*}
+		H_f:=
+		\begin{bmatrix}
+			\frac{\p^2f}{\p x_1^2}     & \cdots & \frac{\p^2f}{\p x_1\p x_n} \\
+			\vdots                     & \ddots & \vdots                     \\
+			\frac{\p^2f}{\p x_n\p x_1} & \cdots & \frac{\p^2f}{\p x_n^2}
+		\end{bmatrix}.
+	\end{align*}
+\end{definition}
+\paragraph{带Lagrange余项的1阶Talyor公式}
+$\exists\theta\in(0,1),X_\theta:=X_0+\theta\Delta X$
+\begin{align}
+	f(X)=f(X_0)+J_f(X_0)\Delta X+\frac12\Delta X\tp H_f(X_\theta)\Delta X.
+\end{align}
+\paragraph{带Peano余项的2阶Talyor公式}
+\begin{align}
+	f(X)=f(X_0)+J_f(X_0)\Delta X+\frac12\Delta X\tp H_f(X_0)\Delta X+\alpha(\Delta X).
+\end{align}
+此处$\alpha(\Delta X)=\frac12\Delta X\tp\tilde{H_f}(X_0+\theta\Delta X)\Delta X=o(\norm{\Delta X}^2),\quad\Delta X\to0$
+\paragraph{$m$阶Talyor公式} % $\Delta X=[\Delta x_1,\Delta x_2,\ldots,\Delta x_n]\tp,$
+\begin{align*}
+	f(X) & =\sum_{k=0}^{m}\frac1{k!}\left(\sum_{i=1}^{n}\Delta x_i\pp{x_i}\right)^kf(X_0)+\frac1{(m+1)!}\left(\sum_{i=1}^{n}\Delta x_i\pp{x_i}\right)^{m+1}f(X_\theta) \\
+		 & =\sum_{k=0}^{m}\frac1{k!}\left(\sum_{i=1}^{n}\Delta x_i\pp{x_i}\right)^kf(X_0)+o(\norm{\Delta X}^m)
+\end{align*}
+$\color{gray}\text{例：}f(x,y)=$
+\begin{align*}
+	\color{gray}f(x_0,y_0)+\pv fx\Delta x+\pv fy\Delta y+\frac12\left(\frac{\p^2f}{\p x^2}\Delta x^2+2\pw fxy\Delta x\Delta y+\pv[2]fy\Delta y^2\right) \\
+	\color{gray}+\frac16\left(\pv[3]fx\Delta x^3+3\frac{\p^3f}{\p x^2\p y}\Delta x^2\Delta y+3\frac{\p^3f}{\p x\p y^2}\Delta x\Delta y^2+\pv[3]fy\Delta y^3\right)+\cdots.
+\end{align*}
+$\color{gray}\text{最后换回来：}\Delta x=x-x_0,\Delta y=y-y_0$
+\section{极值与条件极值}
+\begin{theorem}{Fermat定理}{}
+	\begin{center}
+		$f$在$X_0$可微，且$X_0$是$f$极值点
+		\vthus
+		$X_0$是$f$驻点，即$\pv f{x_i}(X_0)=0,\quad i=1,2,\ldots,n.$
+	\end{center}
+\end{theorem}
+\begin{theorem}{极值点的充分条件}{}
+	$f$在$X_0$二阶连续可微，且$X_0$是$f$驻点
+	\begin{compactenum}[(1)]
+		\item $H_f(X_0)$正定$\implies$极小;
+		\item $H_f(X_0)$负定$\implies$极大;
+		\item $H_f(X_0)$不定$\implies$不是极值点.
+	\end{compactenum}
+	判断正负定方法：(1)左上行列式; (2)特征值．
+\end{theorem}
+\begin{theorem}{Lagrange乘数法}{}
+	给定$k$维曲面
+	\[
+		S=\set X{\varphi_i(X)=0,i=1,2,\ldots,n-k}.
+	\]
+	定义Lagrange函数
+	\begin{align}
+		L(X,\varLambda):=f(X)+\sum_{i=1}^{n-k}\lambda_i\varphi_i(X).
+	\end{align}
+	若$X_0\in S$为$f$在$S$上的条件极值点，则存在$\varLambda$使得$(X_0,\Lambda)$为$L$的驻点．
+\end{theorem}
+\paragraph{计算有界闭曲面上的最值}
+\begin{compactenum}[(1)]
+	\item 算出$f$在$\RR^2$上的驻点（求Hesse矩阵判定正负定得出是否为极值点）
+	\item 选取在曲面内的驻点并求值
+	\item 固定曲面边界
+\end{compactenum}
+\newpage

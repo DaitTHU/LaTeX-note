@@ -1,0 +1,300 @@
+\chapter{附录}
+\section{特征值问题}
+\begin{enumerate}
+	\item $\begin{cases}
+		X''+\lambda X=0\\
+		X(0)=X(L)=0
+	\end{cases}$
+	\[\lambda_n=\kh{\frac{n\pi}L}^2,\quad X_n=\sin\frac{n\pi x}L,\quad n=1,2,\ldots.\]
+	\item $\begin{cases}
+		X''+\lambda X=0\\
+		X'(0)=X'(L)=0
+	\end{cases}$
+	\[\lambda_n=\kh{\frac{n\pi}L}^2,\quad X_n=\cos\frac{n\pi x}L,\quad n={\color{red}0},1,\ldots.\]
+	\item $\begin{cases}
+		X''+\lambda X=0\\
+		X'(0)=X(L)=0
+	\end{cases}$
+	\[\lambda_n=\fkh{\kh{n+\frac12}\frac{\pi}L}^2,\quad X_n=\cos\kh{n+\frac12}\frac{\pi x}L,\quad n=0,1,\ldots.\]
+	\item $\begin{cases}
+		X''+\lambda X=0\\
+		X(0)=X'(L)=0
+	\end{cases}$
+	\[\lambda_n=\fkh{\kh{n+\frac12}\frac{\pi}L}^2,\quad X_n=\sin\kh{n+\frac12}\frac{\pi x}L,\quad n=0,1,\ldots.\]
+	\item $\begin{cases}
+		X''+\lambda X=0\\
+		X(0)=X'(L)+hX(L)=0
+	\end{cases}\implies \gamma=-hL\tan\gamma>0,$
+	\[\lambda_n=\kh{\frac{\gamma_n}L}^2,\quad X_n=\sin\frac{\gamma_n x}L,\quad n=1,2,\ldots.\]
+	\item $\begin{cases}
+		X''+\lambda X=0\\
+		X'(0)=X'(L)+hX(L)=0
+	\end{cases}\implies \gamma=-hL\cot\gamma>0,$
+	\[\lambda_n=\kh{\frac{\gamma_n}L}^2,\quad X_n=\cos\frac{\gamma_n x}L,\quad n=1,2,\ldots.\]
+	\item $\begin{cases}
+		X''+\lambda X=0\\
+		X(0)-h_1X'(0)=0\\
+		X(L)+h_2X'(L)=0
+	\end{cases}\implies\tan L\gamma=\frac{(h_1+h_2)\gamma}{h_1h_2\gamma^2-1},$
+	\[\lambda_n=\gamma_n^2,\quad X_n=\sin\gamma_n x+h_1\gamma_n\cos\gamma_nx,\quad n=1,2,\ldots.\]
+	\item $\begin{cases}
+		\varTheta''+\lambda\varTheta=0\\
+		\varTheta(\theta+2\pi)=\varTheta(\theta)
+	\end{cases}$
+	\[\lambda_n=n^2,\quad\varTheta_n=A\cos nx+B\sin nx,\quad n=0,1,\ldots.\]
+\end{enumerate}
+
+\section{Fourier和Laplace}
+
+\paragraph{Fourier级数}
+定义实函数$f,g$在区间$[-\pi,\pi]$上的内积
+\[\inp fg:=\int_{-\pi}^\pi f(x)g(x)\d x.\]
+注意到
+\begin{subequations}
+	\label{eqn:intsincos}
+	\begin{align}
+		\int_{-\pi}^\pi\sin nx\d x&=\int_{-\pi}^\pi\cos nx\d x=0.\\
+		\int_{-\pi}^\pi\cos nx\cos mx\d x & =\frac12\int_{-\pi}^\pi\cos(n-m)x+\cos(n+m)x\d x=\pi\delta_{nm};\\
+		\int_{-\pi}^\pi\sin nx\cos mx\d x & =\frac12\int_{-\pi}^\pi\sin(n+m)x+\sin(n-m)x\d x=0; \\             
+		\int_{-\pi}^\pi\sin nx\sin mx\d x & =\frac12\int_{-\pi}^\pi\cos(n-m)x-\cos(n+m)x\d x=\pi\delta_{nm} .
+	\end{align}
+\end{subequations}
+因此
+\[\hkh{1,\sin x,\cos x,\sin2x,\ldots}\]
+构成$[-\pi,\pi]$上一组完备的基底，归一化之
+\[\hkh{\frac1{\sqrt{2\pi}},\frac{\sin x}{\sqrt\pi},\frac{\cos x}{\sqrt\pi},\frac{\sin2x}{\sqrt\pi},\ldots}.\]
+
+用这一组基可将周期为$2\pi$的函数$f(x)$展开
+\[f(x)=\frac{a_0}2+\sum_{n=1}^\infty\kh{a_n\cos nx+b_n\sin nx},\]
+其中
+\begin{align*}
+	a_n & =\frac1\pi\inp f{\cos nx}=\frac1\pi\int_{-\pi}^\pi f(x)\cos nx\d x, \\
+	b_n & =\frac1\pi\inp f{\sin nx}=\frac1\pi\int_{-\pi}^\pi f(x)\sin nx\d x.
+\end{align*}
+
+\paragraph{Fourier变换}
+利用$\e{ix}=\cos x+\i\sin x$，可得到Fourier级数的复数形式：
+\[f(x)=\sum_{n=-\infty}^{+\infty}c_n\e{\i nx},\quad c_n=\frac1{2\pi}\int_{-\pi}^\pi f(x)\e{-\i nx}\d x.\]
+对于其他周期$T=\lambda,\;k=2\pi/\lambda$
+\[f(x)=\sum_{n=-\infty}^{+\infty}c_n\e{\i nkx},\quad c_n=\frac1\lambda\int_{-\lambda/2}^{\lambda/2} f(x)\e{-\i nkx}\d x.\]
+
+当$f(x)$不是周期函数时，就不能用Fourier级数展开。
+然而，若认为其周期$\lambda=2N$充分大，令$\xi=nk$，
+\[f(x)=\sum_\xi\left[\frac{k}{2\pi}\int_{-N}^Nf(x)\e{-\i\xi x}\d x\right]\e{\i\xi x}.\]
+再让$N\to\infty,\;k\to0$，定义
+\[\hat f(\xi):=\int_{-\infty}^\infty f(x)\e{-\i\xi x}\d x,\]
+以及
+\[f(x)=\frac1{2\pi}\int_{-\infty}^\infty\hat f(\xi)\e{\i\xi x}\d\xi,\]
+这就是Fourier变换。
+
+\subsection{Fourier系数}
+
+下面简要介绍不同函数的Fourier系数如何计算。
+
+\paragraph{多项式函数}
+只需要利用分部积分将$x^k$不断微分降幂，
+\begin{align*}
+	\int x\cos ax\d x&=\frac{x\sin ax}a+\frac{\cos ax}{a^2}\plusc.\\
+	\int x\sin ax\d x&=-\frac{x\cos ax}a+\frac{\sin ax}{a^2}\plusc.\\
+	\int x^2\cos ax\d x&=\frac{x^2\sin ax}a+\frac{2x\cos ax}{a^2}-\frac{2\sin ax}{a^3}\plusc.\\
+	\int x^2\sin ax\d x&=-\frac{x^2\cos ax}a+\frac{2x\sin ax}{a^2}+\frac{2\cos ax}{a^3}\plusc.\\
+	\int x^3\cos ax\d x&=\frac{x^3\sin ax}a+\frac{3x^2\cos ax}{a^2}-\frac{6x\sin ax}{a^3}-\frac{6\cos ax}{a^4}\plusc.\\
+	\int x^3\sin ax\d x&=-\frac{x^3\cos ax}a+\frac{3x^2\sin ax}{a^2}+\frac{6x\cos ax}{a^3}-\frac{6\sin ax}{a^4}\plusc.
+\end{align*}
+\begin{remark}可以证明，按照降幂顺序，系数的规律是：
+	\begin{itemize}
+		\item 正弦系数的符号$-,+,+,-$，余弦系数的符号$+,+,-,-$；
+		\item 共有$n+1$项，系数分别为
+		\[
+			\frac1a,\enspace\frac n{a^2},\enspace\frac{n(n-1)}{a^3},\enspace\ldots,\enspace\frac{n!}{a^{n+1}}.
+		\]
+		\item 正弦函数$\cos$打头，余弦$\sin$打头，然后正余弦交替。
+	\end{itemize}
+\end{remark}
+
+\paragraph{三角函数}
+积分结果已经在\eqref{eqn:intsincos}中给出。
+
+\paragraph{指数函数}
+对于指数函数的Fourier系数，只需记住
+\begin{align*}
+	\mathcal I:=\int\e{ax}\cos bx\d x=\e{ax}\cdot\frac{a\cos bx+b\sin bx}{a^2+b^2}\plusc;\\
+	\mathcal J:=\int\e{ax}\sin bx\d x=\e{ax}\cdot\frac{a\sin bx-b\cos bx}{a^2+b^2}\plusc.
+\end{align*}
+\begin{proof}
+	分部积分
+	\begin{align*}
+		\mathcal I&=\frac1b\int\e{ax}\d\sin bx=\frac1b\e{ax}\sin bx-\frac ab\mathcal J;\\
+		\mathcal J&=-\frac1b\int\e{ax}\d\cos bx=-\frac1b\e{ax}\cos bx+\frac ab\mathcal I.
+	\end{align*}
+	即可解得上式。
+\end{proof}
+
+\paragraph{双曲函数}
+有
+\begin{align*}
+	\int\cosh ax\cos bx\d x=\frac{a\sinh ax\cos bx+b\cosh ax\sin bx}{a^2+b^2}\plusc,\\
+	\int\cosh ax\sin bx\d x=\frac{a\sinh ax\sin bx-b\cosh ax\cos bx}{a^2+b^2}\plusc,\\
+	\int\sinh ax\cos bx\d x=\frac{a\cosh ax\cos bx+b\sinh ax\sin bx}{a^2+b^2}\plusc,\\
+	\int\sinh ax\sin bx\d x=\frac{a\cosh ax\sin bx-b\sinh ax\cos bx}{a^2+b^2}\plusc.
+\end{align*}
+
+\paragraph{对数函数}
+对数函数乘正弦函数分部积分后会出现$\Si x$。
+
+\paragraph{反三角函数}
+反三角函数更是没有积分结果。
+
+% 因此靠上面的公式可以解决绝大部分Fourier系数的习题。
+\subsection{Fourier变换}
+
+\paragraph{Fourier变换的性质}
+\label{The Property of Fourier Transformation}
+Fourier变换的定义见第~\pageref{dfn:Integral Transformation}~页\dfnref{dfn:Integral Transformation}。
+
+\begin{enumerate}
+	\item 线性
+		\[
+			\cf{\alpha f+\beta g}=\alpha\cf f+\beta\cf g;
+		\]
+	\item 微分
+		\[
+			\cf{f'}=\i\xi\hat f.
+		\]
+	\item 积分
+		\[
+			\cf{\int_{-\infty}^xf(\eta)\d\eta}=\frac1{\i\xi}\hat f.
+		\]
+		其中积分式的Fourier变换存在，且$\hat f(0)=0$．
+	\item $\hat f(\xi)$微分
+		\[\hat f'(\xi)=\cf{-\i xf}(\xi).\]
+	\item $\hat f(\xi)$积分
+			\begin{gather}
+				\int_{-\infty}^\xi\hat f(\zeta)\d\zeta=\mathcal F\fkh{\frac{f(x)}{-\i x}}(\xi)+C_1,\\
+				\int_\xi^{+\infty}\hat f(\zeta)\d\zeta=\mathcal F\fkh{\frac{f(x)}{\i x}}(\xi)+C_2.
+			\end{gather}
+	\item 位移性质
+			\begin{gather*}
+				\cf{f(x-a)}(\xi)=\hat f(\xi)\e{-\i a\xi},\\
+				\hat f(\xi-\alpha)=\cf{f(x)\e{\i\alpha x}}(\xi).
+			\end{gather*}
+	\item 相似
+			\[\cf{f(kx)}(\xi)=\frac1{\abs k}\hat f\kh{\frac\xi{k}}.\]
+	\item 卷积\footnote{$f,g$的卷积\[f\ast g(x)=\int\iti f(\eta)g(x-\eta)\d\eta.\]且有$f\ast g=g\ast f$．}
+			\[\cf{f\ast g}=\hat f\hat g.\]
+	\item 象函数卷积
+			\[\hat f\ast\hat g=2\pi\cf{fg}\]
+	\item 反射
+			\[\cf{\hat f(\xi)}(x)=2\pi f(-x).\]
+			因此Fourier逆变换
+			\[\cfi g(x)=\frac1{2\pi}\int\iti g(\xi)\e{\i\xi x}\d\xi.\]
+			在$f$连续点处$\cfi{\hat f(\xi)}(x)=f(x)$．
+\end{enumerate}
+高维下Fourier变换的性质是相似的．
+\paragraph{Fourier正余弦变换的性质}\label{The Property of Sine and Cosine Transformation}\footnote{定义见第~\pageref{dfn:Fourier Sine and Cosine Transformation}~页~\ref{dfn:Fourier Sine and Cosine Transformation}。}
+\begin{enumerate}
+	\item 微分
+	\begin{align*}
+		\cf[s]{f'}(\xi)&=f(x)\sin\xi x|_{x=0}^{+\infty}-\xi\cf[c]f(\xi);\\
+		\cf[c]{f'}(\xi)&=f(x)\cos\xi x|_{x=0}^{+\infty}+\xi\cf[s]f(\xi);\\
+		\cf[s]{f''}(\xi)&=\fkh{f'(x)\sin\xi x-\xi f(x)\cos\xi x}_{x=0}^{+\infty}-\xi^2\cf[s]f(\xi);\\
+		\cf[c]{f''}(\xi)&=\fkh{f'(x)\cos\xi x-\xi f(x)\sin\xi x}_{x=0}^{+\infty}-\xi^2\cf[c]f(\xi).
+	\end{align*}
+	\item 积分
+	\begin{align*}
+		\cf[s]{\int_0^xf(\eta)\d\eta}(\xi)&=\frac1\xi\cf[c]f(\xi);\\
+		\cf[c]{\int_0^xf(\eta)\d\eta}(\xi)&=-\frac1\xi\cf[s]f(\xi).
+	\end{align*}
+	其中$\int\zti f(x)\d x=0.$
+	\item 象函数微分
+	\begin{align*}
+		\hat f_\sine'&=-\cf[c]{xf}&\hat f_\sine''&=-\cf[s]{x^2f}\\
+		\hat f_\cosi'&=\cf[s]{xf}&\hat f_\cosi''&=-\cf[c]{x^2f}.
+	\end{align*}
+	\item 相似\begin{align*}
+		\cf[s]{f(kx)}(\xi)=\frac1k\hat f_\sine\kh{\frac\xi{\abs k}},\\
+		\cf[c]{f(kx)}(\xi)=\frac1{\abs k}\hat f_\cosi\kh{\frac\xi{\abs k}}
+	\end{align*}
+	\item 反射\begin{align*}
+		\cf[s]{\hat f_\sine(x)}(\xi)&=-\frac\pi{2}f(-\xi),\\
+		\cf[c]{\hat f_\cosi(x)}(\xi)&=\frac\pi{2}f(-\xi).
+	\end{align*}
+\end{enumerate}
+\paragraph{Fourier变换函数表}
+\begin{enumerate}
+	\item $\cf{\delta(x)}=1,$\qquad$\cf{\delta^{(n)}(x)}=(\i\xi)^n;$
+	\item $\cf 1=2\pi\vd(\xi),$\qquad$\cf{x^n}=2\pi\i^n\vd^{(n)}(\xi);$
+	\item $\cf{\e{\i ax}}=2\pi\vd(\xi-a);$
+	\item $\cf{\cos ax}=\pi\fkh{\delta(\xi-a)+\delta(\xi+a)};$
+	\item $\cf{\sin ax}=-\i\pi\fkh{\delta(\xi-a)-\delta(\xi+a)};$
+	\item $\cf{\cos ax^2}=\sqrt{\frac\pi{2a}}\kh{\cos\frac{\xi^2}{4a}+\sin\frac{\xi^2}{4a}};$
+	\item $\cf{\sin ax^2}=\sqrt{\frac\pi{2a}}\kh{\cos\frac{\xi^2}{4a}-\sin\frac{\xi^2}{4a}};$
+	\item $\cf{\e{-a\abs x}}=\frac{2a}{a^2+\xi^2};$
+	\item $\cf{\e{-ax^2}}=\sqrt{\frac\pi{a}}\e{-\xi^2/4a};$
+	\item $\cf{\e{-\i ax^2}}=\sqrt{\frac\pi{a}}\e{\i\kh{\xi^2/4a-\pi/4}};$
+	\item $\cf{\frac1x}=-\i\pi\sgn\xi;$
+	\item $\cf{\frac1{x^n}}=-\i\pi\frac{(-\i\xi)^{n-1}}{(n-1)!}\sgn\xi,$\qquad$\cf{\frac1{x^2}}=-\pi\xi\sgn\xi;$
+	\item $\cf{\abs x^\alpha}=-2\Gamma(\alpha+1)\sin\kh{\frac{\pi\alpha}2}\abs\xi^{-1-\alpha};$
+	\item $\cf{\Heaviside(x)}=\frac1{\i\xi}+\pi\vd(\xi);$
+	\item $\cf{\Lambda(x)}=\sinc\frac\xi{2};$（系数应该是错的）
+	\item $\cf{\sinc x}=\Pi\kh{\frac\xi{2}}$（系数应该是错的）
+\end{enumerate}
+Heaviside阶梯函数
+\[
+	\Heaviside(x):=\begin{cases}
+	1,&x>0\\
+	0,&x\leqslant 0
+	\end{cases}
+\]
+\subsection{Laplace变换}
+\paragraph{Laplace变换的性质}注：$x<0$函数值取0。
+\begin{enumerate}
+	\item 线性
+	\item 微分
+	\begin{align*}
+		\cl{f'}&=\xi\bar f-f(0);\\
+		\cl{f''}&=\xi^2\bar f-\xi f(0)-f'(0);\\
+		\cl{f^{(n)}}&=\xi^n\bar f-\kh{\xi^{n-1}f(0)+\xi^{n-2}f'(0)+\cdots+f^{(n-1)}(0)}.
+	\end{align*}
+	\item 积分 
+	\[
+		\cl{\int_0^xf(\eta)\d\eta}=\frac1\xi\bar f.
+		\]
+	\item 像函数微分
+	\[
+		\bar f'=\cl{-xf}.
+		\]
+	\item 像函数积分
+	\[
+		\int_\xi^{+\infty}\bar f(\xi)\d\xi=\cl{\frac fx}.
+		\]
+	积分路径$\Re\xi>\sigma_0$。
+	\item 复频移与时滞
+	\begin{align*}
+		\cl{f(x)\e{\alpha x}}&=\bar f(\xi-\alpha),\quad \alpha\in\CC\\
+		\cl{f(x-a)}&=\bar f\e{-a\xi},\qquad\; a\geqslant 0 % \Heaviside(x-a)
+	\end{align*}
+	\item 相似
+	\[
+		\cl{f(kx)}=\frac1k\bar f\kh{\frac\xi{k}},\quad k>0
+		\]
+	\item 卷积
+	\[
+		\cl{f\ast g}=\cl f\cl g
+		\]
+	\item 像函数卷积
+	\[
+		\cl{fg}(\xi)=\frac1{2\pi\i}\int_{\sigma-\i\infty}^{\sigma+\i\infty}\bar f(\zeta)\bar g(\xi-\zeta)\d\zeta,
+		\]
+	其中$\xi>\max(\sigma_f,\sigma_g)$
+\end{enumerate}
+\paragraph{Laplace变换函数表}
+\begin{enumerate}
+	\item $\cl{\vd(t)}=1,\quad\cl{\vd^{(n)}(t)}=s^n;$
+	\item $\cl{\sgn t}=\cl{\Heaviside(t)}=\frac1s,\quad \cl{t\Heaviside(t)}=\frac1{s^2};$
+	\item $\cl{\frac1{\sqrt{\pi t}}}=\frac1{\sqrt s};$%,\quad\cl{2\sqrt{\frac t\pi}}=\frac1{s\sqrt s};$
+	\item $\cl{\e{at}}=\frac1{s-a};$
+	\item $\cl{\sin at}=\frac a{s^2+a^2},\quad \cl{\sinh at}=\frac a{s^2-a^2};$
+	\item $\cl{\cos at}=\frac s{s^2+a^2},\quad \cl{\cosh at}=\frac s{s^2-a^2};$
+\end{enumerate}
+

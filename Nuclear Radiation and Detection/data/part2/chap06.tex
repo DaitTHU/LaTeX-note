@@ -1,0 +1,258 @@
+\chapter{辐射测量方法}
+\begin{compactitem}
+	\item 放射性活度测量：放射性活度、发射率
+	\item 辐射粒子能量测量：粒子能量、能谱
+	\item 粒子鉴别：鉴别未知粒子、区分不同粒子
+	\item 辐射场测量：空间分布、注量率
+	\begin{compactitem}
+		\item 位置测量：入射位置、其它物理量
+		\item 时间测量：入射时间、半衰期、飞行时间
+		\item 辐射剂量测量：辐射能量吸收
+	\end{compactitem}
+\end{compactitem}
+
+\section{放射性样品的活度测量}
+
+相对法测量：需要一个已知活度$A_0$的标准源，在同样条件下测量标准源和被测样品的计数率$n_0,n$， 根据计数率与活度成正比，可求出样品的活度：
+\[
+	A=A_0\frac n{n_0},
+\]
+相对法测量简便，但条件苛刻：必须有一个与被测样品相同的已知活度的标准源，且测量条件必须相同。
+
+绝对法测量：复杂，需要考虑很多影响测量的因素，但绝对测量法是活度测量的基本方法。
+
+\subsection{影响活度测量的几个因素}
+
+\paragraph{几何因素$f_g$}
+点源情况：源的线度$r\ll$源探距离$H$，几何因素
+\[
+	f_g=\frac\Omega{4\pi}=\frac12\biggkh{1-\frac H{\sqrt{R^2+H^2}}}.
+\]
+非点源情况：$r\sim H$或$r>H$，
+\[
+	f_g=\frac12\biggfkh{1-\frac1{(1+a^2)^{1/2}}-\frac{3ab}{8(1+a^2)^{5/2}}+\frac{5ab^2}{16(1+a^2)^{7/2}}-\frac{35a^2b^2}{64(1+a^2)^{9/2}}}.
+\]
+\paragraph{本征探测效率$\varepsilon_{\mathrm{int}}$}
+每个进入探测器灵敏体积的粒子被观察到的概率。
+
+本征探测效率和探测器的种类、
+%NaI(Tl) vs BGO
+大小、形状、窗、
+入射粒子的种类、能量、
+%100keV光子 vs 1MeV光子，α粒子
+入射束的形状、
+记录仪器的阈值等有关。
+\paragraph{吸收因素$f_a$}
+\paragraph{散射因素$f_b$}
+对于$\beta,\gamma$来说，散射问题很重要。
+对$\alpha$来说，除了在径迹末端，散射并不重要。
+\paragraph{分辨时间$f_\tau$}
+死时间校正因子
+\[
+	f_\tau=\frac nm=1-n\tau_D.
+\]
+分辨时间$\tau_D$与信号脉宽、阈值、信号幅度、计数率（G-M）等有关。
+\paragraph{本底计数率$n_b$}
+狭义的本底计数率：无样品时测量装置的计数率；
+干扰计数率：样品中其它射线的计数率。二者之和为总本底。
+
+\subsection{\textalpha 放射性样品活度的测量}
+
+\paragraph{小立体角法测量薄$\alpha$放射性样品}
+\begin{compactitem}
+	\item 探测器：塑料闪烁体，ZnS(Ag)，CsI(Tl)，金硅面垒探测器，薄窗正比管
+	\item 源发射$\alpha$：各向同性
+	\item 点源：要求源探距离远，管子长度$\sim\SI{10}{cm}$
+	\item 避免吸收和散射：抽真空
+\end{compactitem}
+\[
+	A=\frac{n-n_\mathrm b}{f_\tau f_g}.
+\]
+\paragraph{厚样品$\alpha$活度的相对测量法}
+实际情况（如铀矿砂中$\alpha$放射性测量）中，$\alpha$的自吸收不可避免！
+
+\subsection{低水平活度样品测量问题}
+
+在低水平放射性测量（如环境监测、辐射防护、考古、地质学及有关生命科学的研究）中，样品的活度可能很低；相比之下，本底的活度较高，对样品的活度测量构成了干扰。
+
+$n_0\ll n_\mathrm b$，则$n_\mathrm s\doteq n_b$探测源装置的优质因子
+\begin{align}
+	Q=\frac1T=\frac{\nu_{n_0}^2n_0^2}{4n_\mathrm b}.
+\end{align}
+由于样品的活度$\ll$本底活度，放置样品和不放置样品的测量时间应选为一样$t_\mathrm s=t_\mathrm b$。
+\[
+	N_0=N_\mathrm s-N_\mathrm b,
+\]
+如果样品没有放射性，$N_0\sim\mathrm N(0,\sqrt{2N_\mathrm b})$，为将误认为有放射性的概率控制在5\%
+\[
+	L_\mathrm C=1.645\sqrt{2 N_\mathrm b}
+\]
+如果样品有放射性，$N_0\sim\mathrm N(N_\mathrm D,\sqrt{2N_\mathrm b+N_\mathrm D})$，为将误认为没有放射性的概率控制在5\%
+\[
+	N_\mathrm D=L_\mathrm C+1.645\sqrt{2N_\mathrm b+N_\mathrm D}\doteq 4.653\sqrt{N_\mathrm b}+2.706,
+\]
+即源最小计数(minimum detectable amount, MDA)。
+
+减小本底放射性的方法：方向准直、能量分辨率、脉冲形状甄别、磁场光子极化方向选择、时间关系、符合。
+
+\section{符合方法}
+
+\begin{definition}{符合}{coincidence}
+	符合(coincidence)事件是同时发生的两个（或多个）事件。
+
+	符合方法：用不同的探测器来判定（测量）两个事件的时间相关性的方法。
+
+	真符合：同时发生、完全相关。
+
+	偶然符合：同时发生但完全无关。（噪声、本底、不同核）
+
+	反符合：事件同时发生、完全相关，但某个探测器起否决作用。
+
+	延迟符合：完全相关，但不一定同时发生。
+\end{definition}
+粒子事件在探测器的信号有一个分辨时间$\tau_\mathrm s$，称为符合分辨时间。两个探测器在同一个$\tau_\mathrm s$内均发生的事件便可认为是符合事件。
+
+两个事件的偶然符合计数率
+\[
+	n_{\mathrm{rc}}=2\tau_\mathrm sn_1n_2,
+\]
+以此类推，$k$重符合时的偶然符合计数率$k\tau_\mathrm s^{k-1}n_1n_2\cdots n_{k}$。
+\paragraph{反符合}
+举例：记录入射$\gamma$射线在探测器中能量全吸收的事件；
+去除发生Compton散射且散射光子又发生逃逸的事件。
+\paragraph{延时符合}
+级联衰变行为，必然要求延时符合。
+\paragraph{符合曲线}
+信号间的时间延迟$t_\mathrm d$变化时，符合计数率$n(t_\mathrm d)$也将变化；此时得到的$n(t_\mathrm d)\vs t_\mathrm d$曲线被称为符合曲线。决定该曲线特性（形状）的因素有：
+\begin{compactitem}
+	\item 符合电路的工作特性（电子学分辨时间$\tau_\mathrm s$）
+	\item 信号形成过程的时间离散，反映了系统的时间分辨能力
+	\begin{compactitem}
+		\item 快符合($\tau_\mathrm s<\SI{10}{ns}$)：符合曲线宽度主要由“同步”信号的时间离散来决定；
+		\item 慢符合($\tau_\mathrm s>\SI{10}{ns}$)：符合曲线宽度主
+		要由电子学分辨时间决定
+	\end{compactitem}
+	\item 信号间的时间关系（$\beta,\gamma$的时间差）
+\end{compactitem}
+假设成形脉冲是理想的矩形波$\tau_\mathrm s$，$\FWHM=2\tau_\mathrm s$。
+\paragraph{真偶符合比}
+偶然符合总是存在的，而真符合却是未必存在的，它要在做了适当的延迟后才能出现。在符合测量中，我们希望看到较大的真偶符合比。
+
+比如，真符合计数率为
+\[
+	n_{\mathrm{co}}=A\cdot\Omega_\beta\varepsilon_\beta\cdot\Omega_\gamma\varepsilon_\gamma,
+\]
+偶然符合计数率为
+\[
+	n_{\mathrm{rc}}=2\tau_\mathrm s n_\beta n_\gamma=2\tau_\mathrm s\cdot A\Omega_\beta\varepsilon_\beta\cdot A\Omega_\gamma\varepsilon_\gamma,
+\]
+真偶符合比
+\[
+	\frac{n_{\mathrm{co}}}{n_{\mathrm{rc}}}=\frac1{2A\tau_\mathrm s}>1,
+\]
+便要求$A,\tau_\mathrm s$不能太大。
+
+\section{能量测量}
+
+\subsection{\textgamma 能谱分析}
+
+\paragraph{探测器的能量分辨率}见前文。
+\paragraph{$\gamma$射线在探测器中沉积能量}
+$\gamma\to$次级电子(光电子、Compton反冲电子、电子对效应后的正负电子) $\to$次级电子沉积能量，形成载流子。
+
+$\gamma$射线经一次反应后，产物有且仅有三种情况：
+\begin{compactitem}
+	\item 光电效应：光电子+电离原子（Auger电子/X射线）
+	\item Compton散射：反冲电子+散射光子
+	\item 电子对效应：电子+正电子（两个湮没光子）
+\end{compactitem}
+产生的X射线/散射光子/湮没光子会接着发生下一次反应，这一连串反应是无法被探测器区分的，会一起沉积。
+
+光电效应后，电离原子产生的X射线和Auger电子都有可能导致别的原子或自身电离，但并不值得担心，这会引发$Z$的减小，或空位更趋向产生于外层电子处，于是Auger电子的发射概率越来越大，即使同时有X射线产生，其能量较小，逃逸也将变得越来越难。通过多次X射线或者Auger电子，$\gamma$光子的能量就被全部沉积下来了。
+
+次级电子携带了$\gamma$/X光子的能量，将在探测器内发生如下的反应：
+\begin{compactitem}
+	\item 电离与激发（产生载流子）
+	\begin{compactitem}
+		\item 气体：电子-离子对
+		\item 闪烁体：电子-空穴对(激发的原子/分子) $\to$荧光光子%-（光电转换） 
+		$\to$ D1收集到的光电子
+		\item 半导体：电子-空穴对
+	\end{compactitem}
+	\item 轫致辐射（X射线）有可能被抓住，
+	光电效应最为可能；
+	\item 表面效应
+	\begin{compactitem}
+		\item X射线可能会从探测器中跑掉
+		\item 次级电子若是在探测器的表面产生，也可能会跑掉
+	\end{compactitem}
+\end{compactitem}
+\paragraph{$\gamma$射线探测效率}由$N,\sigma,D$共同决定。
+\begin{compactitem}
+	\item 高能$\gamma$射线：选择高$Z$材料，使$\sigma$变大，再辅以适当的$N$和$D$；
+	\item 低能$\gamma$射线，%不论对什么$Z$，
+	$\sigma$已经不小，%因此只要$N$和$D$也不是很小，则NσD就相当可观了，能够实现高的效率，此时
+	不必刻意选择高$Z$和大体积探测器。
+\end{compactitem}
+低能X/$\gamma$能谱特点：
+\begin{compactitem}
+	\item 减少窗吸收：用铍窗正比计数器、铍窗Si(Li)探测器。
+	\item 主要是光电效应。
+	\item 有明显的X射线逃逸峰（光电峰），由探测器介质决定：I/Ge/Si逃逸。
+	%I逃逸$\SI{28.6}{keV}$、Ge逃逸$\SI{9.89}{keV}$、Si逃逸$\SI{1.74}{keV}$。
+\end{compactitem}
+\paragraph{射线来源\& 堆积问题}
+\begin{center}
+	\captionof{table}{能量特征峰}
+	\begin{tabular}{ccc}
+		\toprule
+		峰&能量&来源\\
+		\midrule
+		和峰&最可几峰叠加&计数率、探测器分辨时间\\
+		\midrule
+		全能峰&$h\nu$&\multirow{5}*{源、探测器}\\
+		光电峰&$h\nu-\varepsilon_{\mathrm K}$\\%[1ex]
+		Compton边缘&$h\nu-E_{\gamma'}(180^\circ)$\\
+		单逃逸峰&$h\nu-m_\elc c^2$\\
+		双逃逸峰&$h\nu-2m_\elc c^2$\\
+		\midrule
+		湮没峰&$m_\elc c^2$&\multirow{3}*{源、环境}\\
+		反散射峰&$E_{\gamma'}(>\!150^\circ)$\\
+		特征X射线峰&$\varepsilon_{\mathrm{K,b}}$\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+\begin{remark}
+	$m_\elc c^2=\SI{511}{keV},\enspace E_{\gamma'}\sim\SI{200}{keV},\enspace\varepsilon_{\mathrm{K,I/Ge/Si}}\sim\SI{10}{keV}$，
+	\[
+		E_{\gamma'}(\theta)=h\nu'=\frac{h\nu}{1+\alpha(1-\cos\theta)},\quad\alpha:=\frac{h\nu}{m_\elc c^2}.
+	\]
+\end{remark}
+能量未全部沉积：
+\begin{compactitem}
+	\item 光电峰：光子与探测器（I/Ge/Si）发生光电效应后特征X射线跑了
+	\item (多次) Compton散射坪：Compton散射光子跑了
+	\item 单(双)逃逸峰：1(2)个$\SI{511}{keV}$光子跑了
+	\item 次级电子轫致辐射逃逸：电子减速时，辐射光子跑了
+	\item 边缘效应(次级电子逃逸)：电子能量没损失完就跑了
+\end{compactitem}
+周围介质(屏蔽材料等)影响：
+\begin{compactitem}
+	\item 正电子湮没辐射：（$>\SI{1.022}{MeV}$的）光子在探测器外的材料中发生电子对效应，正电子湮没后产生的$\SI{511}{keV}$光子
+	\item 轫致辐射
+	\item 散射光子 
+	\item 反散射峰：光子在探测器外发生Compton反散射，产生了$\sim\SI{200}{keV}$的光子
+	\item 特征X射线
+\end{compactitem}
+
+\subsection{\textgamma 能谱装置}
+
+\paragraph{单晶$\gamma$能谱仪}
+
+\paragraph{全吸收反Compton $\gamma$能谱仪}
+
+\paragraph{Compton谱仪（双晶谱仪）}
+全能峰+ Compton反冲电子能量
+\paragraph{电子对谱仪（三晶谱仪）}
+双逃逸峰
+

@@ -1,0 +1,260 @@
+% \setcounter{equation}{0}
+% \renewcommand{\theequation}{A.\arabic{equation}}
+
+\chapter{矢量分析}
+\label{chap:vector analysis}
+
+\section{矢量代数}
+
+\begin{compactitem}
+	\item 定义：标量和矢量。
+	\item 矢量的运算：加法、数乘、标量积、矢量积（平凡的）。
+	\item 标量三重积
+    \begin{align}
+        \bm A\cdot(\bm B\times\bm C)&=\bm C\cdot(\bm A\times\bm B)=(\bm A\times\bm B)\cdot\bm C\\\notag
+        &=\begin{vmatrix}
+            A_x&A_y&A_z\\
+            B_x&B_y&B_z\\
+            C_x&C_y&C_z
+        \end{vmatrix}.
+    \end{align}
+    \item 矢量三重积：back cab规则
+    \begin{align}
+        \label{eqn:bac-cab}
+        \bm A\times(\bm B\times\bm C)&=\bm B(\bm A\cdot\bm C)-\bm C(\bm A\cdot\bm B);\\
+        (\bm A\times\bm B)\times\bm C&=\bm B(\bm A\cdot\bm C)-\bm A(\bm B\cdot\bm C).
+    \end{align}
+    可以将多个矢量积简化，比如
+    \begin{align*}
+        (\bm A\times\bm B)\cdot(\bm C\times\bm D)&=(\bm A\cdot\bm C)(\bm B\cdot\bm D)-(\bm A\cdot\bm D)(\bm B\cdot\bm C).
+    \end{align*}
+    \item 位置向量和分离向量
+    \item 向量转换
+\end{compactitem}
+\section{微积分}
+\begin{compactitem}
+	\item 常微分
+    \[
+        \d f=\dv fx\d x.
+    \]
+	\item 标量场$f(x,y,z)$的微分
+    \begin{align}
+        \d f=\pv fx\d x+\pv fy\d y+\pv fz\d z=:\nabla f\cdot\d\bm\ell.
+    \end{align}
+    梯度(gradient)
+    \begin{align}
+        \nabla f:=\pv fx\uvec x+\pv fy\uvec y+\pv fz\uvec z.
+    \end{align}
+	\item Hamiltonian
+	\begin{align}
+        \nabla:=\pp x\uvec x+\pp y\uvec y+\pp z\uvec z.
+    \end{align}
+    \item 散度(divergence)
+    \begin{align}
+        \div\bm A=\pv{A_x}x+\pv{A_y}y+\pv{A_z}z.
+    \end{align}
+    \item 旋度(curl)
+    \begin{align}\notag
+        &\curl\bm A=\begin{vmatrix}
+            \uvec x&\uvec y&\uvec z\\
+            \pp x&\pp y&\pp z\\
+            A_x&A_y&A_z
+        \end{vmatrix}\\
+        &=\biggkh{\pv{A_z}y-\pv{A_y}z}\uvec x+\biggkh{\pv{A_x}z-\pv{A_z}x}\uvec y+\biggkh{\pv{A_y}x-\pv{A_x}y}\uvec z.
+    \end{align}
+\end{compactitem}
+\paragraph{乘法法则}
+\begin{compactitem}
+	\item 常微分乘法法则
+    \[
+        \d(fg)=(\d f)g+f\d g.
+    \]
+    \item 梯度、旋度、散度的简单乘法法则
+    \begin{align}
+        \nabla(fg)&=(\nabla f)g+f\nabla g;\\
+        \div(f\bm A)&=(\nabla f)\cdot\bm A+f(\div\bm A);\\
+        \curl(f\bm A)&=(\nabla f)\times\bm A+f(\curl\bm A).
+    \end{align}
+    \item 梯度、旋度、散度的复杂乘法法则
+    \begin{align}
+        \label{eqn:gradA.B}
+        \nabla(\bm A\cdot\bm B)&=\bm A\times(\curl\bm B)+\bm B\times(\curl\bm A)+(\bm A\cdot\nabla)\bm B+(\bm B\cdot\nabla)\bm A;\\
+        \label{eqn:divAxB}
+        \div(\bm A\times\bm B)&=(\curl\bm A)\cdot\bm B-(\curl\bm B)\cdot\bm A;\\
+        \label{eqn:curlAxB}
+        \curl(\bm A\times\bm B)&=(\bm B\cdot\nabla)\bm A-(\bm A\cdot\nabla)\bm B+\bm A(\div\bm B)-\bm B(\div\bm A).
+    \end{align}
+\end{compactitem}
+\paragraph{二重微分}
+\begin{compactitem}
+	\item 标量Laplacian
+    \begin{align}
+        \lapla f\equiv\div(\nabla f)=\pv[2]fx+\pv[2]fy+\pv[2]fz.
+    \end{align}
+	\item 矢量Laplacian
+	\begin{align}
+        \lapla\bm A\equiv(\nabla^2A_x)\uvec x+(\nabla^2A_y)\uvec y+(\nabla^2A_z)\uvec z.
+    \end{align}
+    \item 梯度的旋度恒为0，旋度和散度恒为0
+    \begin{align}
+        \label{eqn:curlgrad}
+        \curl(\nabla f)&\equiv \bm 0;\\
+        \label{eqn:divcurl}
+        \div(\curl\bm A)&\equiv 0.
+    \end{align}
+    \item 二重旋度
+    \begin{align}
+        \label{eqn:curlcurl}
+        \curl(\curl\bm A)=\nabla(\div\bm A)-\lapla\bm A.
+    \end{align}
+\end{compactitem}
+\paragraph{积分}
+\begin{compactitem}
+	\item 线积分、面积分和体积分
+	\item 微积分基本定理
+	\[
+        \int_a^b f'(x)\d x=f(b)-f(a).
+    \]
+    \item 梯度定理
+    \begin{align}
+        \int_A^B\nabla f\cdot\d\bm\ell=f(B)-f(A).
+    \end{align}
+    \item 散度(Gauss)定理
+    \begin{align}\label{eqn:div}
+        \int_V\div\bm A\d v=\oint_{\p V}\bm A\cdot\d\bm a.
+    \end{align}
+    \item 旋度(Stokes)定理
+    \begin{align}\label{eqn:curl}
+        \int_S(\curl\bm A)\cdot\d\bm a=\oint_{\p S}\bm A\cdot\d\bm\ell.
+    \end{align}
+    \item 分部积分
+    \begin{align}\notag
+        \int_a^bfg'\d x&=fg|_a^b-\int_a^bf'g\d x\\
+        \int_Vf(\div\bm A)\d v&=\oint_{\p V}f\bm A\cdot\d\bm a-\int_V\bm A\cdot\nabla f\d v.
+    \end{align}
+\end{compactitem}
+\section{曲线坐标}
+\paragraph{球坐标系}坐标变换
+\begin{align}
+    \begin{cases}
+        x=r\sin\theta\cos\phi\\
+        y=r\sin\theta\sin\phi\\
+        z=r\cos\theta
+    \end{cases}
+\end{align}
+基变换
+\begin{equation}
+    \begin{bmatrix}
+        \uvec r\\\uvec\theta\\\uvec\phi
+    \end{bmatrix}=
+    \begin{bmatrix}
+        \sin\theta\cos\phi&\sin\theta\sin\phi&\cos\theta\\
+        \cos\theta\cos\phi&\cos\theta\sin\phi&-\sin\theta\\
+        -\sin\phi&\cos\phi&0
+    \end{bmatrix}
+    \begin{bmatrix}
+        \uvec x\\\uvec y\\\uvec z
+    \end{bmatrix}
+\end{equation}
+微元
+\begin{align}
+    \d\bm\ell&=\d r\uvec r+r\d\theta\uvec\theta+r\sin\theta\d\phi\uvec\phi\\
+    \d v&=r^2\sin\theta\d r\nd\theta\nd\phi
+\end{align}
+矢量微分
+\begin{align}
+    %\nabla&=\pp r\uvec r+\frac1r\pp\theta\uvec\theta+\frac1{r\sin\theta}\pp\phi\uvec\phi.\\
+    \nabla f&=\pv fr\uvec r+\frac1r\pv f\theta\uvec\theta+\frac1{r\sin\theta}\pv f\phi\uvec\phi,\\
+    \div\bm A&=\frac1{r^2}\pp r(r^2A_r)+\frac1{r\sin\theta}\pp\theta(\sin\theta\,A_\theta)+\frac1{r\sin\theta}\pp\phi A_\phi,\\
+    \curl\bm A&=\frac1{r^2\sin\theta}
+    \begin{vmatrix}
+        \uvec r&r\uvec\theta&r\sin\theta\uvec\phi\\
+        \pp r&\pp\theta&\pp\phi\\
+        A_r&rA_\theta&r\sin\theta A_\phi
+    \end{vmatrix}.
+\end{align}
+\paragraph{柱坐标系}略
+\section{Dirac函数}
+\begin{example}{引入Dirac $\delta$函数}{introduce delta function}
+    计算
+    \[
+        \bm F(\bm r)=\frac{\uvec r}{r^2}.
+    \]
+    的散度
+    \[
+        \div\bm F=\frac1{r^2}\pp r\Bigkh{r^2\cdot\frac1{r^2}}=0,
+    \]
+    但
+    \[
+        \oint_{\p V}\bm F\cdot\d\bm a=\oint_{\p V}\frac1{r^2}r^2\sin\theta\d\theta\nd\phi=\int_0^{2\pi}\int_0^\pi\sin\theta\d\theta\nd\phi=4\pi.
+    \]
+    这与散度定理\eqref{eqn:div}矛盾！
+    原因在于：$\div\bm F$在除了原点以外的任意一点均为0，但其体积分为$4\pi$。
+\end{example}
+\begin{definition}{Dirac $\delta$函数}{Dirac delta function}
+    $\delta$函数是一个将任意函数$f$映射到$f(0)$的线性泛函(linear functional)，即
+    \[
+        \int\iti f(x)\vd(x)\d x=f(0).
+    \]
+    其特点为：$\forall x\neq 0,\,\delta(x)=0$，但
+    \[
+        \int\iti\delta(x)\d x=1,
+    \]
+    因此$\delta$函数并不是一个严格意义上的函数，而是一个广义函数(general function)或分布(distribution)。
+    %其只有出现在积分中才有实质意义。
+    在物理上，$\delta$函数可以代表质点(或点电荷)的密度。
+\end{definition}
+
+因此\exmref{exm:introduce delta function} 中的散度其实应为$4\pi\vd(\bm r)$，进而
+\begin{equation}
+    \lapla\biggkh{\frac1r}=-\div\biggkh{\frac{\bm r}{r^3}}=-4\pi\vd(\bm r).
+\end{equation}
+\section{向量场理论}
+给定$\div\bm F$和$\curl\bm F$，能否确定$\bm F$？
+\begin{theorem}{Helmholtz定理}{Helmholtz theorem}
+    给定
+    \[
+        \begin{cases}
+            \div\bm F=D(\bm r)\\
+            \curl\bm F=\bm C(\bm r)
+        \end{cases}
+    \]
+    若当$r\to\infty$时，$D(\bm r)$和$\bm C(\bm r)$均比$1/r^2$收敛得更快，且$\bm F(\bm r)$收敛到0，则$\bm F$可被唯一确定为
+    \begin{align}
+        \bm F=-\nabla V+\curl\bm A,
+    \end{align}
+    此处
+    \begin{align}
+        \begin{cases}
+            V(\bm r)=\frac1{4\pi}\int\frac{D(\bm r')}{|\bm r-\bm r'|}\d v'\\
+            \bm A(\bm r)=\frac1{4\pi}\int\frac{\bm C(\bm r')}{|\bm r-\bm r'|}\d v'
+        \end{cases}
+    \end{align}
+\end{theorem}
+\begin{theorem}{无旋场与标量势}{irrotational field and scalar potential}
+    对于无旋场$\bm F$，下列命题是等价的：
+    \begin{compactitem}
+        \item $\curl\bm F=\bm 0$;
+        \item $\bm F$可以被写为标量势(scalar potential)的梯度：$\bm F=-\nabla V$;
+        \item 给定起点终点，线积分与路径无关\[
+            \int_A^B\bm F\cdot\d\bm\ell=V(A)-V(B);
+        \]
+        \item 闭合线积分恒为0.
+    \end{compactitem}
+\end{theorem}
+与式\eqref{eqn:curlgrad}联系，注意$V$并不唯一。
+\begin{theorem}{无源场与矢量势}{solenoidal field and vector potential}
+    对于无源场$\bm F$，下列命题是等价的：
+    \begin{compactitem}
+        \item $\div\bm F=0$;
+        \item $\bm F$可以被写为矢量势(vector potential)的旋度：$\bm F=\curl\bm A$;
+        \item 给定边界，面积分与表面形状无关
+        \[
+            \int_S\bm F\cdot\d\bm a=\oint_{\p S}\bm A\cdot\d\bm\ell;
+        \]
+        \item 闭合面积分恒为0.
+    \end{compactitem}
+\end{theorem}
+与式\eqref{eqn:divcurl}联系，注意$\bm A$并不唯一 。
+
+% \sectionstar{并矢}

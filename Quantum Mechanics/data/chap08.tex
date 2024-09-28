@@ -1,0 +1,174 @@
+\chapter{微扰理论}
+可以精确求解的量子力学问题很少，在处理各种实际问题时，除了采用适当的模型以简化问题外，往往还需要采用合适的近似解法。
+\section{非简并定态微扰理论}
+当$\hat H$比较复杂时，定态\Schr 方程不能精确求解，若$\hat H$具有以下形式
+\[
+	\hat H=\hat H_0+\hat H'
+\]
+其中$\hat H_0$是可解的，$\hat H'\ll\hat H_0$是小的修正，可令
+\begin{align*}
+	E_n&=E_n^{(0)}+E_n^{(1)}+E_n^{(2)}+\cdots\\
+	\psi_n&=\psi_n^{(0)}+\psi_n^{(1)}+\psi_n^{(2)}+\cdots
+\end{align*}
+其中$E_n^{(k)}$和$\psi_n^{(k)}$与$\hat H'$的$k$次方成正比。代入原方程有
+\[
+	(\hat H_0+\hat H')(\psi_n^{(0)}+\psi_n^{(1)}+\cdots)=(E_n^{(0)}+E_n^{(1)}+\cdots)(\psi_n^{(0)}+\psi_n^{(1)}+\cdots)
+\]
+逐阶比较得到
+\begin{align}
+	&\text{零级方程：}&(\hat H_0-E_n^{(0)})\psi_n^{(0)}&=0;\\
+	&\text{一级方程：}&(\hat H_0-E_n^{(0)})\psi_n^{(1)}&=-(\hat H'-E_n^{(1)})\psi_n^{(0)};\\
+	&\text{二级方程：}&(\hat H_0-E_n^{(0)})\psi_n^{(2)}&=-(\hat H'-E_n^{(1)})\psi_n^{(1)}+E_n^{(2)}\psi_n^{(0)};\\\notag
+	&\text{……}
+\end{align}
+一般说来，越高次的项越小，所以可以只保留最低的几阶，便有足够的精度。
+
+以下约定：波函数的各级高级近似解与零级近似解都正交，即
+\[
+	\inp{\psi_n^{(0)}}{\psi_n^{(k)}}=0.
+\]
+对于非简并情形，即$\hat H_0$属于$E_n^{(0)}$的本征态只有一个
+\[
+	\psi_n^{(1)}=\sum_ma_{nm}^{(1)}\psi_m^{(0)}
+\]
+代入一级方程有
+\[
+	\sum_ma_{nm}^{(1)}(\hat H_0-E_n^{(0)})\psi_m^{(0)}=-(\hat H'-E_n^{(1)})\psi_n^{(0)}
+\]
+等式的两端与$\psi_k^{(0)}$内积
+\[
+a_{nk}^{(1)}(E_k^{(0)}-E_n^{(0)})=-\inp{\psi_k^{(0)}}{\hat H'\psi_n^{(0)}}+E_n^{(1)}\vd_{kn}
+\]
+取$k=n$得到一级微扰能
+\begin{align}
+	E_n^{(1)}=\inp{\psi_n^{(0)}}{\hat H'\psi_n^{(0)}}=:H_{nn}'
+\end{align}
+若取$k\neq n$，得到
+\begin{align}
+	a_{nk}^{(1)}=\frac{H_{kn}'}{E_k^{(0)}-E_n^{(0)}},\quad H_{kn}':=\inp{\psi_k^{(0)}}{\hat H'\psi_n^{(0)}}.
+\end{align}
+故一阶微扰波函数
+\begin{align}
+	\psi_n^{(1)}=\sum_{m\neq n}\frac{H_{mn}'}{E_m^{(0)}-E_n^{(0)}}\psi_m^{(0)}
+\end{align}
+微扰适用条件为
+\begin{align}
+	\abs{\frac{H_{mn}'}{E_m^{(0)}-E_n^{(0)}}}\ll 1.
+\end{align}
+\paragraph{二阶微扰能}二级微扰方程
+\[
+	(\hat H_0-E_n^{(0)})\psi_n^{(2)}=-(\hat H'-E_n^{(1)})\sum_{m\neq n}\frac{H_{kn}'}{E_k^{(0)}-E_n^{(0)}}\psi_m^{(0)}+E_n^{(2)}\psi_n^{(0)}
+\]
+两端与$\psi_n^{(0)}$内积，得到
+\begin{gather}\notag
+	0=-\sum_{m\neq n}\frac{H_{mn}'}{E_k^{(0)}-E_n^{(0)}}\inp{\psi_n^{(0)}}{\hat H'\psi_m^{(0)}}+0+E_n^{(2)},\\
+	\implies E_n^{(2)}=\sum_{m\neq n}\frac{\abs{H_{mn}'}^2}{E_n^{(0)}-E_m^{(0)}}.
+\end{gather}
+
+准确到二级近似下，能量的本征值为
+\begin{align}
+	E_n=E_n^{(0)}+H_{nn}'+\sum_{m\neq n}\frac{\abs{H_{mn}'}^2}{E_n^{(0)}-E_m^{(0)}}
+\end{align}
+上述理论成立需要$\hat H_0$为分离谱，无简并。
+\begin{example}{电介质的极化率}{}
+	各向同性的非极性分子电介质在外电场作用下极化，求感生电偶极矩。
+
+	考虑正离子运动，无外场时为简谐运动
+	\begin{gather*}
+		\hat H_0=-\frac{\hbar^2}{2\mu}\dd[2]x+\frac12\mu\omega^2x^2,\\
+		\hat H_n\ket n=E_n^{(0)}\ket n,\quad E_n^{(0)}=\kh{n+\frac12}\hbar\omega.
+	\end{gather*}
+	沿$x$向加恒定电场相当于施加微扰$\hat H'=-q\varepsilon x$
+	\begin{align*}
+		H_{nk}'&=\bra n\hat H'\ket k=-q\varepsilon\bra nx\ket k\\
+		&=-q\varepsilon\sqrt{\frac\hbar{\mu\omega}}\kh{\sqrt{\frac{k+1}2}\vd_{n,k+1}+\sqrt{\frac k2}\vd_{n,k-1}}
+	\end{align*}
+	一级能量修正$H_{kk}'=0$，二阶近似能量
+	\begin{align*}
+		E_k&=E_k^{(0)}+0+\sum_{n\neq k}\frac{\abs{H_{nk}'}^2}{E_k^{(0)}-E_n^{(0)}}=E_k^{(0)}-\frac{q^2\varepsilon^2}{2\mu\omega^2}.
+	\end{align*}
+	实际上，能量是有精确解的
+	\[
+V=\frac12\mu\omega^2x^2-q\varepsilon x=\frac12\mu\omega^2\kh{x-\frac{q\varepsilon}{\mu\omega^2}}^2-\frac{q^2\varepsilon^2}{2\mu\omega^2}.
+\]
+	它的第一项只不过是把原来的谐振子势能平移了一段距离，这个移动不会影响谐振子的能级，而它的第二项正是前面求出的常数项。
+
+	一级近似态
+	\begin{align*}
+		\ket{\psi_k}&=\ket k+\sum_{n\neq k}\frac{H_{nk}'}{E_k^{(0)}-E_n^{(0)}}\ket n\\
+		&=\ket k+\frac{q\varepsilon}{\sqrt{\hbar\mu\omega^3}}\kh{\sqrt{\frac{k+1}2}\ket{k+1}-\sqrt{\frac k2}\ket{k-1}},
+	\end{align*}
+	无外加场时，非极性分子正(负)离子的位置平均值$\bra kx\ket k=0$，即固有电偶极矩为零，而加外电场后正离子位移
+	\[
+		\bra{\psi_k}x\ket{\psi_k}=\frac{2q\varepsilon}{\sqrt{\hbar\mu\omega^3}}\kh{\sqrt{\frac{k+1}2}\brkt k{k+1}-\sqrt{\frac k2}\brkt k{k-1}}=\frac{q\varepsilon}{\mu\omega^2}.
+\]
+	故感生电偶极矩$D$和极化率$\kappa$
+	\[
+D=\abs q\frac{2\abs q\varepsilon}{\mu\omega^2}=\frac{2q^2\varepsilon}{\mu\omega^2},\quad \kappa=\frac D\varepsilon=\frac{2q^2}{\mu\omega^2}.
+\]
+\end{example}
+\begin{example}{氦原子}{}
+	氦原子在原子核外有两个电子，Hamilton量包括两个电子在原子核的Column引力场中的运动
+	\[
+		\hat H_0=\kh{-\frac12\nabla_1^2-\frac Z{r_1}}+\kh{-\frac12\nabla_1^2-\frac Z{r_2}};
+\]
+	以及两个电子之间的Column排斥能（微扰项）
+	\[
+		\hat H'=\frac1{r_{12}}.
+\]
+
+	它对于两个电子空间坐标的交换是对称的。由于电子是Fermi子，两个电子相应的自旋态只能反对称的自旋单态$\chi_{00}$
+	\[
+		\psi(\r_1,\r_2)=\psi_{100}(\r_1)\psi_{100}(\r_2)\chi_{00}(s_{1z},s_{2z}).
+\]
+	相应的本征值$E_1^0=-Z^2$，一级修正
+	\[
+		\ave{\frac1{r_{12}}}=\int\frac{\abs{\psi_{100}(\r_1)\psi_{100}(\r_2)}^2}{r_{12}}\d\r_1\nd\r_2.
+\]
+	由
+	\[
+		\psi_{100}(\r)=\frac{Z^{3/2}}{\sqrt\pi}\e{-Zr};\quad \int\frac{\e{-Z(r_1+r_2)}}{r_{12}}\d\r_1\nd\r_2=\frac{5\pi^2}{8Z^5}.
+\]
+	得
+	\[
+E=-Z^2+\frac58Z.
+\]
+\end{example}
+\section{简并定态微扰理论}
+实际问题中，特别是处理体系的激发态时，常常碰到简并态或近似简并态。此时，非简并态微扰论是不适用的。
+
+这里首先碰到的困难是：零级能量给定后，对应的零级波函数并未确定，这是简并态微扰论首先要解决的问题。
+
+体系能级的简并性与体系的对称性密切相关。当考虑微扰之后，如体系的某种对称性受到破坏，则能级可能分裂，简并将部分或全部解除。因而在简并态微扰中，充分考虑体系的对称性及其破缺是至关重要的。
+\paragraph{一级微扰能和零级波函数}$E_n^{(0)}$简并时，
+\[
+	\hat H^{(0)}\psi_{ni}^{(0)}=E_n^{(0)}\psi_{ni}^{(0)},\quad (i=1,2,\ldots,k).
+\]
+简并度$f_n=k$，引入微扰后假设
+\[
+	\psi_n^{(0)}=\sum_{i=1}^kc_i^{(0)}\psi_{ni}^{(0)}.
+\]
+代入一级微扰方程
+\[
+	(\hat H_0-E_n^{(0)})\psi_n^{(1)}=-(\hat H'-E_n^{(1)})\sum_{i=1}^kc_i^{(0)}\psi_{ni}^{(0)}.
+\]
+两端与$\psi_{nj}^{(0)}$内积
+\[
+0=-\sum_{k=1}^nc_i^{(0)}\fkh{\inp{\psi_{nj}^{(0)}}{\hat H'\psi_{ni}^{(0)}}-E_n^{(1)}\vd_{ij}}.
+\]
+记
+\begin{align}
+	H_{ji}':=\inp{\psi_{nj}^{(0)}}{\hat H'\psi_{ni}^{(0)}}
+\end{align}
+得到久期(secular)方程
+\begin{align}
+	\det(H'-E_n^{(1)}I)=\begin{vmatrix}
+		H_{11}'-E_n^{(1)}&H_{12}'&\cdots&H_{1k}'\\
+		H_{21}'&H_{22}'-E_n^{(1)}&\cdots&H_{2k}'\\
+		\vdots&\vdots&\ddots&\vdots\\
+		H_{k1}'&H_{k2}'&\cdots&H_{kk}'-E_n^{(1)}
+	\end{vmatrix}=0.
+\end{align}
+从中可以解出$E_n^{(1)}$以及它们对应的$c_i^{(0)}$，这就决定了一级微扰能和零级波函数。
+\paragraph{Stark效应}Stark效应就是原子或分子在外电场作用下能级和光谱发生分裂的现象。
+\sectionstar{变分法}没讲

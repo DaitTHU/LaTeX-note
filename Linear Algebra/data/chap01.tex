@@ -1,0 +1,341 @@
+\chapter{向量和矩阵}
+
+\section{向量}
+
+给定数域(number field)~$\FF$，事实上，直到\chapref{chap:complex linear space}复线性空间之前，均只考虑实数域$\RR$，即$\FF=\RR$。
+
+\begin{definition}{向量}{vector}
+	一个$n$维向量(vector)~$v$由$n$个标量(scalar)~$v_1,\ldots,v_n$组成：
+	\[
+		v=\begin{bmatrix}
+			v_1\\\vdots\\v_n
+		\end{bmatrix},\quad v_i\in\FF.
+	\]
+	组成向量的标量$v_1,\ldots,v_n$称为向量的分量(component)。
+	%向量的维度$\dim(v)=n$即分量的个数。
+\end{definition}
+如无特别说明，向量均默认为列向量，即$n$行1列。
+\begin{definition}{零向量、反向量}{zero vector}
+	零向量(zero vector)是所有分量均为0的向量，记作0；
+	
+	$v$的反向量(reverse vector)对应每个分量取相反数，记作$-v$。
+\end{definition}
+\begin{definition}{向量的加法}{vector addition}
+	向量的加法(addition)即对应分量相加，
+	\[
+		v+u=\begin{bmatrix}
+			v_1\\\vdots\\v_n
+		\end{bmatrix}+\begin{bmatrix}
+			u_1\\\vdots\\u_n
+		\end{bmatrix}=\begin{bmatrix}
+			v_1+u_1\\\vdots\\v_n+u_n
+		\end{bmatrix}.
+	\]
+	因此只有分量数相同的向量之间才可以相加。
+\end{definition}
+\begin{theorem}{向量加法的性质}{property of vector addition}
+    \begin{itemize}
+    	\item 交换律：$v+u=u+v;$
+    	\item 结合律：$v+(u+w)=(v+u)+w.$
+    	\item 零向量：$0+v=v+0=v.$
+    	\item 反向量：$v+(-v)=0.$
+    \end{itemize}
+\end{theorem}
+\begin{definition}{向量的数乘}{vector scalar product}
+	向量与标量的数乘(scalar product)即每个分量乘标量
+	\[
+		cv=c\begin{bmatrix}
+			v_1\\\vdots\\v_n
+		\end{bmatrix}=\begin{bmatrix}
+			cv_1\\\vdots\\cv_n
+		\end{bmatrix}.
+	\]
+\end{definition}
+\begin{theorem}{向量数乘的性质}{property of vector scalar product}
+    \begin{itemize}
+    	\item $1v=v,\;(-1)v=-v,\;0v=0.$
+    	\item 结合律：$c(dv)=(cd)v\equiv cdv;$
+    	\item 对标量的分配律：$(c+d)v=cv+dv;$
+    	\item 对向量的分配律：$c(v+u)=cv+cu.$
+    \end{itemize}
+\end{theorem}
+\begin{definition}{线性组合}{linear combination}
+	向量$v$和$u$的线性组合(linear combination)定义为
+	\[
+		cv+du,\quad\forall c,d\in\FF.
+	\]
+	以此类推，$n$个向量$v_1,v_2,\ldots,v_n$的线性组合形如
+	\[
+		c_1v_1+c_2v_2+\cdots+c_nv_n,\quad c_i\in\FF.
+	\]
+\end{definition}
+线性组合是线性代数中最重要的概念之一。
+\begin{definition}{向量的内积}{vector inner product}
+	向量$v$和$u$的内积(inner product)结果是一个标量，其值为
+	\begin{equation}
+		v\cdot u:=\sum_{i=1}^nv_iu_i=v_1u_1+v_2u_2+\cdots+v_nu_n.
+	\end{equation}
+	特别的，$v^2:=v\cdot v.$
+\end{definition}
+\begin{theorem}{向量内积的性质}{property of vector inner product}
+    \begin{itemize}
+    	\item 交换律：$v\cdot u=u\cdot v;$
+    	\item 与数乘的结合律：$(cv)\cdot u=c(v\cdot u)\equiv cv\cdot u;$
+    	\item 分配律：$(v+u)\cdot w=v\cdot w+u\cdot w;$
+    	\item 正定性：$v^2\geqslant 0$，取等号当且仅当$v=0.$
+    \end{itemize}
+\end{theorem}
+\begin{definition}{向量的长度}{vector norm}
+	通过内积我们可以定义向量的长度(norm)
+	\begin{equation}
+		\norm v:=\sqrt{v^2}=\kh{v_1^2+v_2^2+\cdots+v_n^2}^{1/2}.
+	\end{equation}
+	单位向量(unit vector)是长度为1的向量。和$v$同向的单位向量是
+    \begin{equation}
+        \hat v:=\frac{v}{\norm v},
+    \end{equation}
+\end{definition}
+
+% \begin{definition}{两向量间的夹角}{angle between two vectors}
+% 	定义向量的夹角$\theta\in[0,\pi]$满足
+% 	\[
+% 		\cos\theta=\frac{v\cdot u}{\norm v\norm u}.
+% 	\]
+% \end{definition}
+% %故$v\perp u\ifnf v\cdot u=0$。
+% \begin{theorem}{Cauchy不等式}{Cauchy Inequality}
+% 	因为$\abs{\cos\theta}\leqslant 1$，故 
+% 	\begin{equation}
+% 		\abs{v\cdot u}\leqslant\norm v\norm u.
+% 	\end{equation}
+% \end{theorem}
+
+\section{矩阵}
+\begin{definition}{矩阵}{matrix}
+    $m\times n$的矩阵(matrix)形如
+    \[
+        A=\begin{bmatrix}
+            A_{11}&\cdots&A_{1n}\\
+            \vdots&\ddots&\vdots\\
+            A_{m1}&\cdots&A_{mn}
+        \end{bmatrix},\quad A_{ij}\in\FF.
+    \]
+    $A_{ij}$是矩阵第$i$行第$j$列的元素。
+    
+    矩阵的行数和列数分别为$\row(A)=m$，$\col(A)=n$。特别地，当$m=n$时，矩阵是$n$阶方阵(square matrix)。
+\end{definition}
+
+矩阵的加法和数乘与向量的运算规律相同，是平凡的。
+\begin{definition}{矩阵和向量的乘法}{matrix vector product}
+	$m\times n$矩阵$A$左乘$n$维向量$x$，结果$b=Ax$是一个$m$维向量，其分量为：
+	\begin{equation}
+		b_i=\sum_{j=1}^nA_{ij}x_j,\quad i=1,\ldots,m.
+	\end{equation}
+\end{definition}
+因此$Ax$是看成$A$所有列的线性组合，或者说$A$的各行与$x$分别内积。这样线性方程组就可以等价地写成$Ax=b$的形式，即：
+\[
+	\begin{cases}
+        A_{11}x_1+\cdots+A_{1n}x_n=b_1,\\
+        \qquad\cdots\\
+        A_{m1}x_1+\cdots+A_{mn}x_n=b_m,
+    \end{cases}\iff
+    \begin{bmatrix}
+        A_{11}&\cdots&A_{1n}\\
+        \vdots&\ddots&\vdots\\
+        A_{m1}&\cdots&A_{mn}
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1\\\vdots\\x_n
+    \end{bmatrix}=
+    \begin{bmatrix}
+        b_1\\\vdots\\b_m
+    \end{bmatrix},
+\]
+这种思想有助于我们掌握线性代数的理念。
+\begin{definition}{矩阵的乘法}{matrix product}
+	$m\times n$矩阵$A$左乘$n\times p$矩阵$B$，结果是一个$m\times p$的矩阵$C=AB$，其分量为
+	\begin{align}
+		C_{ij}=\sum_{k=1}^nA_{ik}B_{kj}.
+	\end{align}
+	因此若$A,B$可以相乘，要求$\col(A)=\row(B).$
+\end{definition}
+\begin{theorem}{矩阵乘法的性质}{property of matrix product}
+    \begin{itemize}
+    	\item 一般不满足交换律，即$AB\neq BA$，比如
+    	\[
+    		\begin{bmatrix}
+    			0&1\\1&0
+    		\end{bmatrix}\begin{bmatrix}
+    			1&0\\0&-1
+    		\end{bmatrix}=\begin{bmatrix}
+    			0&-1\\1&0
+    		\end{bmatrix},\quad\begin{bmatrix}
+    			1&0\\0&-1
+    		\end{bmatrix}\begin{bmatrix}
+    			0&1\\1&0
+    		\end{bmatrix}=\begin{bmatrix}
+    			0&1\\-1&0
+    		\end{bmatrix}.
+    	\]
+        \item 结合律：$(AB)C=A(BC)\equiv ABC;$
+    	\item 左分配律：$(A+B)C=AC+BC;$
+    	\item 右分配律：$A(B+C)=AB+AC.$
+    \end{itemize}
+\end{theorem}
+下面给出矩阵乘法结合律的证明。
+\begin{proof}
+	对于$A_{m\times n},B_{n\times p},C_{p\times q}$
+	\begin{align*}
+		\bigfkh{A(BC)}_{ij}&=\sum_{k=1}^nA_{ik}(BC)_{kj}=\sum_{k=1}^nA_{ik}\sum_{\ell=1}^pB_{k\ell}C_{\ell j}\\
+		&=\sum_{\ell=1}^p\sum_{k=1}^nA_{ik}B_{k\ell}C_{\ell j}=\sum_{\ell=1}^p(AB)_{i\ell}C_{\ell j}=\bigfkh{(AB)C}_{ij}.
+	\end{align*}
+	对应元素均相等，即证。
+\end{proof}
+\begin{definition}{单位矩阵}{unit matrix}
+	$n$阶单位矩阵(unit matrix)是$n$阶方阵，对角项均为1，其余项均为0：
+	\[
+		I_n=\begin{bmatrix}
+		1&\\ &\ddots\\&&1
+		\end{bmatrix}.
+	\]
+\end{definition}
+易证，$\forall m\times n$的矩阵$A$，均有
+\[
+	I_mA=AI_n=A.
+\]
+\begin{theorem}{交换性}{commutable}
+	若方阵$A$与任意方阵可交换(commutable)，则$A=cI,\;c\in\FF$
+\end{theorem}
+\begin{proof}
+	取$B=e_{ij}$，表示仅$i$行$j$列为1，其余项均为0
+	\begin{align*}
+		(Ae_{ij})_{k\ell}=\sum_{p=1}^nA_{kp}(e_{ij})_{p\ell}=A_{ki}\delta_{j\ell};\\
+		(e_{ij}A)_{k\ell}=\sum_{p=1}^n(e_{ij})_{kp}A_{p\ell}=\delta_{ki}A_{j\ell},
+	\end{align*}
+	当$k\neq i=j=\ell$时，$A_{ki}=0$；当$k=i\neq j=\ell$时，$A_{ii}=A_{jj}$。
+\end{proof}
+\begin{definition}{分块矩阵}{block matrix}
+	可以将矩阵分块，每一块(block)是一个小矩阵，比如
+	\begin{align*}
+		\fkh{\begin{array}{cc|cc}
+			1&0&1&0\\
+			0&1&0&1\\
+			\hline
+			0&0&1&0\\
+			0&0&0&1	
+		\end{array}}\equiv\begin{bmatrix}
+			I&I\\0&I
+		\end{bmatrix}.
+	\end{align*}
+\end{definition}
+分块矩阵乘法：每个块当作矩阵的元素，块之间使用矩阵乘法。
+\section{矩阵的逆和转置}
+\begin{definition}{矩阵的逆}{inverse matrix}
+	方阵$A$的逆矩阵(inverse matrix)~$A\iv$满足
+	\[
+		AA\iv=A\iv A=I.
+	\]
+	奇异矩阵(singular matrix)是不可逆的矩阵。
+\end{definition}
+若$A,B$均可逆，则$(AB)\iv=B\iv A\iv$。但$A+B$不一定可逆。
+\begin{example}{二阶方阵的逆}{inverse of 2x2 matrix}
+	\begin{equation}
+		\begin{bmatrix}
+			a&b\\c&d
+		\end{bmatrix}\iv=\frac1{ad-bc}
+		\begin{bmatrix}
+			d&-b\\
+			-c&a
+		\end{bmatrix}.
+	\end{equation}
+\end{example}
+\begin{example}{对角矩阵的逆}{inverse of diagonal matrix}
+	非对角项均为0的方阵称为对角矩阵(diagonal matrix)，若对角项为$a_1,\ldots,a_n$，可记作
+	\[
+		\diag(a_1,\ldots,a_n).
+	\]
+	对角矩阵有很多简单的性质，比如对角矩阵的乘法很简单
+	\begin{align}
+		\diag(a_1,\ldots,a_n)\diag(b_1,\ldots,b_n)=\diag(a_1b_1,\ldots,a_nb_n).
+	\end{align}
+	%故
+	显然，对角矩阵的逆为
+	\begin{align}
+		\diag(a_1,\ldots,a_n)\iv=\diag(a_1^{-1},\ldots,a_n^{-1}).
+	\end{align}
+\end{example}
+% 若$A$可逆，则方程组$Ax=b$的解为 \[x=A\iv b.\]
+\begin{theorem}{左逆和右逆}{linverse and rinverse}
+	若左逆(left inverse)存在，则其也是右逆(right inverse)，反之也成立。
+\end{theorem}
+\begin{proof}
+	设$M_n$为全体$n$阶方阵的集合，$\forall A\in M_n$且存在左逆$B\in M_n$，即$BA=I$。构造映射$f,g: M_n\to M_n$，其中
+	\[
+		f:X\mapsto AXB,\quad g:X\mapsto BXA,
+	\]
+	而$g(f(X))=BAXBA=X$，故$g$是可逆的，又
+	\[
+		g(AB)=BABA=I=g(I),
+	\]
+	故$AB=I$。
+\end{proof}
+\begin{example}{幂零矩阵}{nilpotent matrix}
+	若$A$是幂零矩阵(nilpotent matrix)，即$\exists n\in\mathbb N$使$A^n=O$，
+	
+	则$I+A$可逆，且
+	\[
+		(I+A)\iv=I-A+A^2-\cdots+(-A)^{n-1}.
+	\]
+	因为
+	\[
+		I=I^n+A^n=(I+A)\bigfkh{I^{n-1}-I^{n-2}A+\cdots+(-A)^{n-1}}.
+	\]
+\end{example}
+%\section{矩阵的转置}
+\begin{definition}{矩阵的转置}{transpose matrix}
+	$m\times n$矩阵$A$的转置(transpose)~$A\tp$是$n\times m$矩阵，且 
+	\[
+		(A\tp)_{ij}=A_{ji}.
+	\]
+	特别的，若$S\tp=S$，则$S$是对称矩阵(sysmmetric matrix)。
+\end{definition}
+\begin{theorem}{矩阵转置的性质}{property of transpose}
+    \begin{itemize}
+    	\item $(A+B)\tp=A\tp+B\tp,\enspace (cA)\tp=cA\tp;$
+    	\item $(AB)\tp=B\tp A\tp;$
+    	\item $(A\iv)\tp=(A\tp)\iv.$
+    \end{itemize}
+\end{theorem}
+\section{矩阵的迹}
+\begin{definition}{矩阵的迹}{trace}
+	$n$阶方阵的迹(trace)是对角元的和
+	\begin{equation}
+		\tr(A):=\sum_{i=1}^nA_{ii}.
+	\end{equation}
+\end{definition}
+\begin{theorem}{矩阵迹的性质}{property of trace}
+    \begin{itemize}
+    	\item $\tr(A+B)=\tr(A)+\tr(B),\enspace \tr(cA)=c\tr(A);$
+    	\item $\tr(A\tp)=\tr(A);$
+    	\item 两个$n$维列向量$u,v$，有$\tr(uv\tp)=v\tp u$
+    	\[
+    		\tr(uv\tp)=\sum_{i=1}^nu_iv_i=u\tp v=v\tp u.
+    	\]
+    	\item $\tr(AB)\neq\tr(A)\tr(B).$
+    \end{itemize}
+\end{theorem}
+\begin{theorem}{交换矩阵乘法的迹}{trace of commute multiplication}
+	$\forall m\times n$的矩阵$A$和$n\times m$的矩阵$B$，都有
+	\begin{equation}
+		\tr(AB)=\tr(BA).
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	直接展开计算：
+	\begin{align*}
+		\tr(AB)&=\sum_{i=1}^m(AB)_{ii}=\sum_{i=1}^m\sum_{j=1}^nA_{ij}B_{ji}\\
+		&=\sum_{j=1}^n\sum_{i=1}^mB_{ji}A_{ij}=\sum_{j=1}^n(BA)_{jj}=\tr(BA).
+	\end{align*}
+	即证。
+\end{proof}
+除此之外，迹还有一些重要性质，将在后面讲。

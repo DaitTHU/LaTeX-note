@@ -1,0 +1,76 @@
+\chapter{测量不确定度}
+\begin{definition}{测量的术语}{terminology of measurement}
+	\begin{compactitem}
+		\item 误差(error) =测量值$-$参考值
+		\item 不确定度(uncertainty)：根据所用到的信息，表征赋予被测量量值分散性的非负参数。
+		\item 系统误差(systematic error)：在重复测量中保持不变或按可预见方式变化的测量误差的分量。
+		
+		参考值是(约定)真值，
+		\item 随机误差(random error)：在重复测量中按不可预见方式变化的测量误差的分量。
+		
+		系统误差=误差$-$随机误差
+		\item A类评定(type A evaluation)：对在规定测量条件下测得的量值用统计分析的方法进行测量不确定度分量的评定。
+		\item B类评定：用不同于测量不确定度 A 类评定的方法对测量不确定度分量的评定。
+		\item 合成标准不确定度：由在一个测量模型中各输入量的标准测量不确定度获得输出量的标准测量不确	定度。
+	\end{compactitem}
+\end{definition}
+\paragraph{不确定度的传递}
+一个被测量$ y $可能是通过对一些输入变量$x_1,\ldots,x_n$的测量而间接得到的。如果被测量$ y $和输入变量之间满足关系式
+\[
+	y=f(x_1,\ldots,x_n)
+\]
+则$ y $的标准不确定度$ u(y) $可以由输入变量的标准不确定度$u(x_1),\ldots,u(x_n)$通过下式计算得到：
+\begin{align}
+	u^2(y)=\sum_{i=1}^n\biggkh{\pv y{x_i}}^2u^2(x_i)
+\end{align}
+要求$x_i$之间互不相关。输入变量的标准不确定度可以是A类，也可以是B类。
+
+若具有相关性，$\rho(x_i,x_j)\neq 0$
+\begin{align}
+	u^2(y)=\sum_{i,j}\rho(x_i,x_j)\pv y{x_i}\pv y{x_j}u(x_i)u(x_j).
+\end{align}
+\paragraph{扩展不确定度}
+样本均值$\avg x$的置信区间
+\[
+	\biggkh{\mu\pm t_{\alpha}(\nu)\frac s{\sqrt n}}
+\]
+$\alpha$为置信度，$\nu$为自由度。$k=t_{\alpha}(\nu)$是置信因子。把一个估计值的标准差乘以$ k $便得到这个估计值在特定置信度下（一般95\%）的扩展不确定度。
+\paragraph{不确定度的不确定度}
+样本方差更一般的定义
+\[
+	s^2=\frac1\nu\sum_{i=1}^n\epsilon_i^2
+\]
+其中$\nu$为自由度，$\epsilon_i$为残差。
+
+$s^2$常用作不确定度的A类估计，它自身的不确定度由$\chi^2$分布估计
+\begin{align}\label{eqn:uncertainty of uncertainty}
+	\frac\nu{\sigma^2}s^2\sim\chi^2(\nu),\implies u^2(s^2)=\frac{2\sigma^4}\nu.\tag{$\ast$}
+\end{align}
+如果$ s $表示测量值的标准不确定度，那么$ s $自身的不确定度$ u(s) $为
+\[
+	u^2(s)=\frac1{(2s)^2}u^2(s^2),\implies u(s)=\frac1{\sqrt{2\nu}}\frac{\sigma^2}s\doteq\frac s{\sqrt{2\nu}}.
+\]
+自由度$\nu$等于测量值的个数$ n $减去用这些测量值所决定的特征量的
+个数。$s $的相对不确定度表示为
+\[
+	\frac{u(s)}s\sim\frac1{\sqrt{2\nu}}.
+\]
+如果$\nu<4$，那么$ s $的相对不确定度高达35\%；而如果$\nu>50$，那么$ s $的相对不确定度会降到$<10\%$。
+\begin{theorem}{Welch-Satterthwaite公式}{}
+	设两个互不相关的输入变量$x_1,x_2$，且输出变量$y=f(x_1,x_2)$，则有
+	\[
+		u^2(y)=c_1^2u^2(x_1)+c_2^2u^2(x_2),
+	\]
+	$y $对应的不确定度的不确定度为
+	\[
+		u^2\bigkh{u^2(y)}=c_1^4u^2\bigkh{u^2(x_1)}+c_2^4u^2\bigkh{u^2(x_2)},
+	\]
+	由$\chi^2$分布，利用“不确定度的不确定度”和自由度$\nu$的关系式\eqref{eqn:uncertainty of uncertainty}
+	\[
+		\frac{2u^4(y)}{\nu_{\mathrm{eff}}}=\frac{2c_1^4u^4(x_1)}{\nu_1}+\frac{2c_2^4u^4(x_2)}{\nu_2}.
+	\]
+	$\nu_{\mathrm{eff}}$为$ y $的等效自由度(不必为整数)，则
+	\[
+		\frac{[c_1^2u^2(x_1)+c_2^2u^2(x_2)]^2}{\nu_{\mathrm{eff}}}=\frac{c_1^4u^4(x_1)}{\nu_1}+\frac{c_2^4u^4(x_2)}{\nu_2}.
+	\]
+\end{theorem}

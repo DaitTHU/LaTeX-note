@@ -1,0 +1,362 @@
+\chapter{闪烁探测器}
+
+闪烁探测器(scintillation detectors)是利用辐射在某些物质中产生的闪光来探测电离辐射的探测器。
+闪烁探测器的优点：
+\begin{compactenum}
+	\item 密度、体积大，对中性射线($\gamma,\nton$)的探测效率高，易于沉积能量，因此能够测量能谱。
+	\item 时间特性好，有的探测器（如塑料闪烁体、BaF$_2$）可实现ns的时间分辨能力。
+\end{compactenum}
+
+\section{闪烁探测器的基本原理}
+
+闪烁探测器是利用辐射在闪烁体内闪光来探测电离辐射的探测器。
+由
+闪烁体、
+光电倍增管(photomultiplier tube, PMT)、
+高压电源、
+低压电源、
+分压器、
+前置放大器
+构成。
+其工作过程为：
+\begin{compactenum}
+	\item 射线沉积能量，电离能损产生带电粒子
+	%电离能损：γ射线制造三种次级电子，中子核反应后的带电粒子，或者带电粒子直接入射。
+	\item 带电粒子使闪烁体电离或激发，退激后发出大量荧光光子（可见光）；
+	\item 荧光光子被PMT的光阴极转换为光电子，并被第一打拿极收集；
+	\item 电子在PMT的打拿极间运动并倍增（\numrange{e7}{e10}）；
+	\item 流经外回路
+	%决定工作状态：电流脉冲型、电压脉冲型？
+\end{compactenum}
+
+\subsection{闪烁体}
+
+高探测效率（高$Z$、高密度、大尺寸）、
+高发光效率、
+能量线性好、
+自吸收小、
+发光时间短、
+可加工性好、
+易于耦合（合适的折射率）
+\paragraph{闪烁体的分类}
+\begin{compactitem}
+	\item 无机闪烁体：探测效率高、光输出产额高、线性好；但发光时间较长
+	\begin{compactitem}
+		\item 纯晶体：BGO, BaF$_2$
+		\item 无机盐晶体：NaI(Tl), ZnS(Ag)
+		\item 玻璃体：Li$_2$O$·$2SiO$_2$(Ce)
+	\end{compactitem}
+	\item 有机闪烁体：发光时间短；但光输出产额低、光电截面低
+	\begin{compactitem}
+		\item 有机晶体：蒽，萘，芪
+		\item 有机液体闪烁体
+		\item 塑料闪烁体
+	\end{compactitem}
+	\item 气体闪烁体：Ar, Xe
+\end{compactitem}
+\paragraph{无机闪烁体的发光机制}
+以NaI(Tl), CsI(Tl),CsI(Na)等为最典型，又称卤素碱金属晶体(Alkali Halide Scintillator)。
+
+入射带电粒子在闪烁体内电离，产生电子-空穴对或激子(exciton)；
+导带上电子和价带上空穴可以复合成激子，
+激子吸收热运动能量也可变成电子-空穴。
+退激可能发出光子，也可能使晶格振动而不发光。
+
+纯离子晶体退激发出的光子容易被晶体自吸收，传输出的光子少；禁带宽度大，退激发光在紫外范围，光阴极不响应。
+
+晶体掺杂$10^{-3}$量级的激活剂(activator)，形成特殊晶格点，在禁带中形成局部能级。
+电子-空穴迁移到杂质原子处，使杂质原子处于激发态，形成发光或复合中心(luminescence/ recombination centers)。杂质原子退激：
+\begin{compactitem}
+	\item 荧光(fluorescence)：1$\SIrange{10}{500}{ns}$。
+	\item 磷光(phosphorescence)：亚稳态，发光时间较长，是afterglow的主要部分。
+	\item 猝灭(quenching)：转换为晶格的热运动。
+\end{compactitem}
+\paragraph{有机闪烁体的发光机制}
+有机闪烁体都是苯环化合物，分子之间仅有松散的范德瓦尔斯力。其激发与发光是由分子自身的激发和跃迁产生
+的。荧光在ns级，磷光在ms级或更长。
+
+发射、吸收光谱的峰值是分开的，因此有机闪烁体对其所发射的荧光是透明的。
+在溶剂中加入高效闪烁物质，可提高闪烁效率，构成二元有机闪烁体。
+发射谱的短波部分与吸收谱的长波部分有重叠，可在有的有机闪烁体中加入移波剂，以减少自吸收。
+
+\subsection{闪烁体的物理特性}
+
+\paragraph{发光光谱}
+闪烁体发射光子数与光子波长(能量)的关系曲线，与闪烁体、激活剂（移波剂）、温度有关。
+\paragraph{发光效率}
+希望发光效率较高，且对不同能量保持常数。
+\begin{compactenum}
+	\item 光能产额(光输出，光产额)
+	\[
+		Y_{\mathrm{ph}}:=\frac{\avg n_{\mathrm{ph}}}{E\dep}.
+	\]
+	NaI(Tl)晶体$Y_{\mathrm{ph}}=\SI{4.3e4}{/MeV}$，每荧光光子$\SI{23}{eV}$。
+	\item 闪烁效率(发光效率，能量转换效率)
+	\[
+		C_{\mathrm{np}}:=\frac{E_{\mathrm{ph}}}{E\dep}=\frac{h\avg\nu}{E\dep}.
+	\]
+	\item 相对闪烁效率（相对发光效率）
+\end{compactenum}
+\paragraph{闪烁发光时间}
+由上升时间与衰减时间决定
+
+可能有快、慢成分。
+\paragraph{其它特性}
+探测效率等
+
+\subsection{光的收集与光导}
+
+闪烁光的收集需要：
+\begin{compactitem}
+	\item 光学反射层：让光向光阴极的方向传播。
+	反射方式
+	\begin{compactitem}
+		\item 镜面(specular)反射：铝箔、镀铝塑料薄膜
+		\item 漫反射(diffuse)：MgO、TiO$_2$、聚四氟乙烯塑料带等
+	\end{compactitem}
+	\item 光学耦合剂：让光可以射出闪烁体。
+	
+	光子由光密物质射向光疏物质时，存在发生全反射的临界角，在闪烁体与PMT间填充光学耦合剂，可以让更多角度的光射出闪烁体。
+	\item 光导：连接闪烁体与光电转换器件。
+	
+	利用大折射系数材料的全反射。
+\end{compactitem}
+
+\section{光电倍增管}
+
+\paragraph{光电倍增管的类型}略
+\paragraph{光电倍增管的结构与工作原理}
+光电倍增管结构：
+\begin{compactenum}
+	\item 光学窗：光阴极所附着的结构
+	\item 光阴极(photocathode)：通过光电效应将荧光光子转换为光电子。%所有光阴极都有截止波长，因此并非所有光子都会被转换为电子。
+	\item 打拿极(dynode)：电子倍增
+	\item 阳极(anode)：收集电子
+\end{compactenum}
+
+打拿极要求：
+次级电子产额大；
+热电子与光电子发射小；
+大电流工作时性能稳定；
+快速响应。
+
+打拿极的次级电子产额$\delta$
+\[
+	\delta:=\frac{\text{发射的次级电子数}}{\text{入射的初级电子数}}.
+\]
+
+\paragraph{光电倍增管的供电回路}
+\begin{compactenum}
+	\item K-D$_1$电压较高（几倍于其它打拿极间的电压），可有效收集光电子，减少电子飞行时间的离散；
+	\item 中间各打拿极均匀分压；
+	\item 最后几个打拿极间高电压、大电流，需要电容稳压；
+	\item 最后打拿极与阳极间电压较小。
+\end{compactenum}
+分压电路：提供静态工作点，直流电流应显著大于脉冲电流。
+
+分压器所用电阻的温度系数应当小，稳定性高。
+总功率不要太大，以免PMT因为温度升高而漂移
+
+正高压供电方式阴极接地即可；但
+需要隔直电容：
+不适合于累计状态、
+易受高压纹波的影响。
+
+负高压供电方式无需隔直电容，适合高计数率、定时特性好、适合累计状态；但阴极处于高压，需防止与周围接地材料之间的高压漏电信号、场致发光（玻璃）。
+\paragraph{光电倍增管的主要性能}
+\begin{compactitem}
+	\item 光阴极的光谱响应：光阴极发射光电子的几率与光子波长的关系，定义量子效率
+	\begin{align}
+		Q_\mathrm k(\lambda):=\frac{\text{发射电子数}}{\text{入射光子数}}.
+	\end{align}
+	NaI(Tl)：若$Q=25$ - 30\%，则$\SIrange{100}{120}{eV/\text{光电子}}$
+	\item 光阴极、阳极的光照灵敏度：
+	\[
+		S_\mathrm k=\frac{i_\mathrm k}F,\quad S_\mathrm a=\frac{i_\mathrm a}F.
+	\]
+	$i_\mathrm k,i_\mathrm a$是阴极电流和阳极电流(A)，$F$是入射到光阴极的光通量(lm)
+	\item 第一打拿极(D1)的电子收集系数
+	\[
+		g_\mathrm c:=\frac{\text{第一打拿极收集到的光电子数}}{\text{光阴极发出的光电子数}}.
+	\]
+	$g_\mathrm c$对PMT的幅度分辨率影响较大，在有聚焦极的光电倍增管中，$g_\mathrm c>95\%$
+	\item 光电倍增管的电流放大倍数
+	\[
+		M=\frac{\text{阳极收集到的电子数}}{\text{第一打拿极收集到的光电子数}}=(g\delta)^n.
+	\]
+	$g$为电子传输效率，$\delta$为各级电子倍增系数，$n$为倍增级数。
+\end{compactitem}
+则%荧光光子数目$\avg n_{\mathrm{ph}}=E\dep Y_{\mathrm{ph}}$，
+光电转换因子
+\[
+	\avg T:=F_{\mathrm{ph}}\avg Q_\mathrm kg_\mathrm c,
+\]
+$F_{\mathrm{ph}}$为光子传输系数，则D1光电子数$n_\elc=Tn_{\mathrm{ph}}$。
+
+PMT输出脉冲中的电荷量
+%Q=E\dep Y_{\mathrm{ph}}F_{\mathrm{ph}}\avg Q_\mathrm kg_\mathrm c\avg Me,
+\begin{align}
+	Q=\avg n_{\mathrm{ph}}\avg T\,\avg Me.
+\end{align}
+\begin{compactitem}
+	\item PMT的时间特性：
+	\begin{compactitem}
+		\item 渡越时间$t_\elc\sim\SIrange{20}{80}{ns}$：从光电子离开光阴极算起各电子到达阳极的时间。影响时滞。
+		\item 渡越时间离散$\D t_\elc\sim\si{ns}$：到达阳极的每个电子都经历了不同的倍增过程和飞行距离，导致了飞行时间的涨落。
+		
+		影响系统的时间分辨能力；对于有机闪烁体，也影响探测器的分辨时间。
+	\end{compactitem}
+\end{compactitem}
+
+\section{闪烁探测器的输出信号}
+
+\paragraph{闪烁探测器输出信号的物理过程}
+倍增电子向后级漂移，
+感应电流从外回路流过。
+\paragraph{闪烁探测器的输出回路}
+信号可从回路取，也可从前级打拿极(D$_{n-1}$)取信号。
+
+\subsection{电流脉冲信号}
+
+光电倍增管的单电子响应函数$p(t)$：
+\begin{compactitem}
+	\item 对于大部分无机闪烁体，$p(t)$可以近似看做一个延迟的$\delta$函数；
+	\item 对于有机闪烁体，$p(t)$的展宽和发光时间相当，不能看做$\delta$函数。
+\end{compactitem}
+无机闪烁体，一次闪烁光引起的输出电流
+\[
+	I(t)=\frac{n_{\mathrm{ph}}TMe}{\tau_0}\e{-(t-t_\elc)/\tau_0},\quad t\geqslant t_\elc.
+\]
+$\tau_0\sim\SI{250}{ns}$为发光衰减时间。
+
+\subsection{电压脉冲信号}
+
+输出电压信号的一般形式
+\[
+	V(t)=\frac1{C_0}\e{-t/R_0C_0}\int_0^tI(\tau)\e{\tau/R_0C_0}\d\tau,
+\]
+代入上式得
+\[
+	V(t)=\frac Q{C_0}\frac{R_0C_0}{R_0C_0-\tau_0}\kh{\e{-t/R_0C_0}-\e{-t/\tau_0}},
+\]
+\begin{compactitem}
+	\item $R_0C_0\gg\tau_0$，
+	\begin{align*}
+		V(t)&\doteq\frac Q{C_0}\kh{\e{-t/R_0C_0}-\e{-t/\tau_0}}\\
+		&=\begin{cases}
+			\frac Q{C_0}\kh{1-\e{-t/\tau_0}},&t\ll\tau_0\\
+			\frac Q{C_0},&\tau_0\ll t\ll R_0C_0\\
+			\frac Q{C_0}\e{-t/R_0C_0},&t>R_0C_0
+		\end{cases}
+	\end{align*}
+	\item $R_0C_0\ll\tau_0$，
+	\begin{align*}
+		V(t)&\doteq\frac{R_0Q}{\tau_0}\kh{\e{-t/R_0C_0}-\e{-t/\tau_0}}\\
+		&=\begin{cases}
+			\frac{R_0Q}{\tau_0}\kh{1-\e{-t/R_0C_0}},&t\ll\tau_0\\
+			\frac {R_0Q}{\tau_0},&R_0C_0\ll t\ll \tau_0\\
+			\frac {R_0Q}{\tau_0}\e{-t/\tau_0},&t>\tau_0
+		\end{cases}
+	\end{align*}
+	\item $R_0C_0=\tau_0$，
+	\[
+		V(t)=\frac{Q}{C_0}\frac{t}{R_0C_0}\e{-t/R_0C_0},
+	\]
+	
+	\item $C_0$不变，随着$R_0$的增大，幅度、脉宽都增大；
+	\item $R_0$不变，随着$C_0$的增大，幅度降低、脉宽增大。
+\end{compactitem}
+
+闪烁探测器电流信号的形状总是确定的\footnote{本课程仅二例是电流形状确定的：正比计数器、闪烁体探测器。}，因此弹道亏损的程度是确定的。无论$R_0C_0$怎样改变，$V\maxi\propto Q\propto E\dep$的关系总存在，可以测量射线的沉积能量。
+
+实际中常选取$R_0C_0=\tau_0$，幅度足够大，脉宽足够窄。同时，$C_0$应尽可能小，以获得大的脉冲幅度。
+\paragraph{电压脉冲型 vs 电流脉冲型工作状态}
+所谓电压型脉冲信号和电流型脉冲信号，说的都是电流信号流经外回路后的电压信号。$R_0C_0$和$\tau_0$之间的大小关系，决定了是哪种脉冲信号。
+\begin{compactitem}
+	\item 电压型脉冲信号($R_0C_0\gg\tau_0$)的重点在于（通过脉冲幅度）分析电流信号的面积，希望电压信号的幅度够大，能抵抗后续电路的噪声，获得好的能量分辨率。
+	\item 电流型脉冲信号($R_0C_0\ll\tau_0$)的重点则在于如实地反映电流信号的形状。这在PSD （Pulse Shape Discrimination）技术识别粒子种类的应用中非常重要（例如$\nton/\gamma$识别）。
+\end{compactitem}
+
+\subsection{输出信号的涨落}
+
+光电倍增管输出电荷数$n_a$是个串级型随机变量：
+\begin{compactitem}
+	\item 闪烁体发出的光子数$n_{\mathrm{ph}}$，近似服从Poisson分布；
+	\item 光子能否转换为第一打拿极收集到的光电子，是Bernoulli事件，期望值为$T$；
+	\item 第一打拿极收集到的光电子数$n_\elc$为泊松分布；
+	\item PMT的电子倍增系数$M$。
+	\[
+		\avg M=\avg\delta_1\avg\delta^{n-1},\implies\nu_M^2=\frac1{\avg\delta_1}\cdot\frac{\avg\delta}{\avg\delta-1},
+	\]
+\end{compactitem}
+由$\avg n_a=\avg n_{\mathrm{ph}}\avg T\,\avg M$，可得 
+\begin{align}
+	\nu_{n_a}^2=\frac1{\avg n_{\mathrm{ph}}\avg T}\biggkh{1+\frac1{\avg\delta_1}\cdot\frac{\avg\delta}{\avg\delta-1}},
+\end{align}
+第一打拿极的倍增系数$\delta_1$大些为好，比如负电子亲和（NEA）材料。
+
+\section{闪烁探测器的主要性能}
+
+\paragraph{$\gamma$闪烁谱仪的组成与工作原理}
+探测次级电子能谱：光电效应、Compton效应、电子对效应。
+
+\subsection{单能\textgamma 射线的次级电子能谱}
+
+\begin{compactitem}
+	\item 小尺寸闪烁体：仅吸收次级电子的能量
+	\item 大尺寸闪烁体：吸收全部次级电子、次级电磁辐射能量
+	\item 中等尺寸闪烁体（实际情况）：吸收次级电子能量，以一定几率吸收次级电磁辐射能量。
+\end{compactitem}
+还要考虑“不速之客”：来自环境的“散射”。
+
+\textbf{务必看讲义里的图}。
+
+\subsection{\textgamma 射线的输出脉冲幅度谱}
+
+以上只考虑了沉积能量，尚未考虑电离过程的随机性及噪声因素：
+\begin{compactitem}
+	\item 沉积能量$\to$荧光光子$\to$光电子$\to$电子倍增$\to$电子学噪声，输出幅度涨落使峰宽度、边界展宽。
+	\item PMT噪声与暗电流形成小幅度连续谱
+\end{compactitem}
+
+\subsection{NaI(Tl)单晶闪烁谱仪的性能}
+
+\paragraph{能量分辨率}
+\[
+	\eta=2.355\sqrt{\frac1{EY_{\mathrm{ph}}T}\biggkh{1+\frac1{\avg\delta_1}\cdot\frac{\avg\delta}{\avg\delta-1}}},
+\]
+改善分辨率：
+\begin{compactenum}
+	\item 射线沉积的能量$E$增多（但此时半高宽是越大的）
+	\item 选择发光效率高($Y_{\mathrm{ph}}$)的闪烁体，提升$n_{\mathrm{ph}}$；
+	\item 改善光电转换效率$T$，提升$n_{\mathrm{ph}}$；
+	\item 提升$\delta_1$。
+\end{compactenum}
+此外，高压稳定性和多道的道宽也会有所影响。
+\paragraph{能量线性}单位能量输出幅度与入射粒子能量的关系
+\[
+	E=G\cdot Ch+E_0,
+\]
+理想情况：发光效率$C_{\mathrm{np}}$与入射粒子的能量无关，这样全能峰的幅度就与入射$\gamma$光子的能量成正比。
+
+实际上：
+\begin{compactitem}
+	\item 由于发光效率与入射粒子种类和能量有关，因此并非线性。
+	\item $\gamma$能谱只涉及电子引起的闪光，因此$\gamma$谱仪的非线性是由发光效率随电子能量不同而产生的（对NaI(Tl)，在$\SIrange{0.1}{1}{MeV}$变化约15\% ）。
+\end{compactitem}
+\paragraph{探测效率、峰总比、峰康比}平行$\gamma$束
+\[
+	\varepsilon=1-\e{-N\sigma D}=1-\exp\biggkh{-\NA\frac\rho{A}\sigma_\gamma D},
+\]
+提升探测器的探测效率：高密度($\rho$)、大($D$)、原子序数高($\sigma_\gamma/A$)。
+
+提高本征峰效率，略
+\paragraph{时间特性}
+\begin{compactitem}
+	\item 分辨时间：取决于输出电压脉冲信号的宽度，电压$R_0C_0$，电流$\tau_0$
+	\item 时滞：主要取决于光电倍增管的渡越时间$\avg t_\elc$
+	\item 时间分辨本领：主要取决于渡越时间的离散$\D\avg t_\elc$，为获得好的时间	分辨本领，须选用快速光电倍增管。
+\end{compactitem}
+
+
+

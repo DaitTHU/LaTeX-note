@@ -1,0 +1,211 @@
+\chapter{电磁场}
+\paragraph{经典力学电磁场}考虑质量$\mu$电荷量$q$的粒子在电磁场中的运动，经典力学的Hamilton量\footnote{注意这里采用Gauss单位制；国际单位制下正则动量$mv+qA$。}
+\[
+	H=\frac1{2\mu}\kh{\bm p-\frac qc\bm A}^2+q\varphi.\CGS
+\]
+其中$\bm A$是电磁矢势，$\varphi$是标势，$\bm p$是正则动量。
+\begin{align*}
+	\bm E & =-\frac1c\pv{\bm A}t-\nabla\varphi \\
+	\bm B & =\nabla\times\bm A.
+\end{align*}
+
+粒子的机械动量可由Hamilton量正则方程得出
+\[
+	\mu\dot x=\mu\pv H{p_x}=p_x-\frac qcA_x.
+\]
+可见，带电粒子的正则动量$\bm p$和机械动量$\bm P$的关系为
+\[
+	\bm p=\mu\bm v+\frac qc\bm A\neq\bm P=\mu\bm v.
+\]
+
+另一方面
+\begin{align*}
+	\mu\ddot x & =\dot p_x-\frac qc\dot A_x=-\pv Hx-\frac qc\dot A_x                                                        \\
+	           & =\frac1\mu\sum_{i=1}^3\kh{p_i-\frac qcA_i}\frac qc\pv{A_i}x-q\pv\varphi{x}-\frac qc\dot A_x                    \\
+	           & =\frac qc\sum_{i=1}^3\dot r_i\pv{A_i}x-q\pv\varphi{x}-\frac qc\kh{\pv{A_x}t+\sum_{i=1}^3\dot r_i\pv{A_x}{r_i}} \\
+	           & =-q\kh{\pv\varphi{x}+\frac1c\pv{A_x}t}+\frac qc\fkh{\bm v\times\kh{\nabla\times\bm A}}_x.
+\end{align*}
+因此
+\[
+	\mu\ddot{\bm r}=q\kh{\bm E+\frac{\bm v}c\times\bm B}.\CGS
+\]
+\section{电磁场中的Hamilton算符}
+在\Schr 方程的一次量子化中，使用了以下对应关系
+\begin{align}
+	\begin{cases}
+		E\to\i\hbar\pp t \\
+		\bm p\to-\i\hbar\nabla
+	\end{cases}
+\end{align}
+有电磁场时，电磁势表示为
+\[
+A_\mu=\kh{\bm A,\i\varphi}
+\]
+按照经典的最小电磁耦合原理，对电荷$q$的粒子，其$H-q\varphi$和$\bm p-\frac qc\bm A$之间的关系如同无电磁场时$H$和$\bm p$的关系一样。
+
+由经典的最小电磁耦合原理和正则量子化规则\footnote{将$x$和$p$其正则动量量子化为满足对易子$\i\hbar$的算符。}，有电磁场时，量子化规则应当变为
+\begin{align}
+	\begin{cases}
+		E\to\i\hbar\pp t-q\varphi \\
+		\bm p\to-\i\hbar\nabla-\frac qc\bm A
+	\end{cases}
+\end{align}
+因而引入电磁场中带电粒子的Hamilton算符为
+\begin{align}
+	\hat H=\frac1{2\mu}\kh{\qo p-\frac qc\bm A}^2+q\varphi+V.
+\end{align}
+其中$\qo p=-\i\hbar\nabla$为正则动量算符，而机械动量算符$\qo P=\qo p-\frac qc\bm A$。
+电磁场中的\Schr 方程依然满足连续性方程
+\[
+	\pv\rho{t}+\div\bm j=0
+\]
+\paragraph{规范不变性}作下列变换
+\begin{align}
+	\begin{cases}
+		\bm A\to\bm A+\nabla f\\
+		\varphi\to\varphi-\frac1c\pv ft
+	\end{cases}
+\end{align}
+其中$f(\r,t)$为任意可微函数，具有磁通的量纲，则$\bm E$和$\bm B$均不改变，这就是电磁场的规范不变性。
+而对波函数作相应变换
+\begin{align}
+	\psi\to\psi\e{\i qf/\hbar c}.
+\end{align}
+则$\psi'$满足的\Schr 方程，形式上与$\psi$相同。上式相因子依赖于空间坐标，所以称作电磁场下\Schr 方程的定域规范变换不变性。相应的$\rho,\bm j,\avg{\bm p}$也规范不变。
+\paragraph{时间反演}在时间反演下，
+$\qo p\to-\qo p$，相应的需要$\bm A\to-\bm A$，方程才不变。
+\newpage
+\section{Landau能级}
+考虑质量为$M$电荷为$-e$的电子在磁场$\bm B=B\bm e_z$中运动。磁矢势取
+\[
+	\bm A=\frac12\bm B\times\r=\frac12(-By,Bx,0).
+\]
+电子的Hamilton算符
+\begin{align*}
+	\hat H\tot & =\frac1{2M}\fkh{\kh{\hat p_x-\frac{eB}{2c}\hat y}^2+\kh{\hat p_y+\frac{eB}{2c}\hat x}^2+\hat p_z^2}\CGS\\
+	           & =\frac1{2M}\kh{\hat p_x^2+\hat p_y^2+\hat p_z^2}+\frac{e^2B^2}{8Mc^2}\kh{\hat x^2+\hat y^2}+\frac{eB}{2Mc}\kh{\hat x\hat p_y-\hat y\hat p_x}.
+\end{align*}
+将运动分解为$z$方向的自由运动和$xy$平面中的运动
+\begin{gather*}
+	\hat H\tot=\hat H+\omega_\Larmor\hat L_z+\frac{\hat p_z^2}{2M},\\
+	\hat H=\frac1{2M}\kh{\hat p_x^2+\hat p_y^2}+\frac12M\omega_\Larmor^2\kh{\hat x^2+\hat y^2}
+\end{gather*}
+其中Larmor频率
+\[
+	\omega_\Larmor:=\frac{eB}{2Mc}.
+\]
+$B$的线性项：表示电子的轨道磁矩与外磁场的相互作用；
+$B^2$的线性项：表示反磁项，对于自由电子，该项必须考虑。
+
+取守恒量完全集$\{\hat H,\hat L_z\}$的共同本征态 % ,\hat p_z
+\[
+	\psi(\rho,\varphi)=R(\rho)\e{\i m\varphi},\quad m=0,\pm 1,\ldots
+\]
+代入$\hat H\psi=E\psi$
+\[
+	\fkh{-\frac{\hbar^2}{2M}\kh{\dd[2]\rho+\frac1\rho\dd\rho}+\frac12M\omega_\Larmor^2\rho^2}R=(E-M\hbar\omega_\Larmor)R.
+\]
+本征函数涉及合流超几何函数
+\[
+R_{n_\rho\abs m}(\rho)\propto\rho^{\abs m}F(-n_\rho,\abs m+1,\alpha^2\rho^2)\e{-\alpha^2\rho^2/2},\quad \alpha:=\sqrt{\frac{M\omega_\Larmor}\hbar}=\sqrt{\frac{eB}{2\hbar  c}}.
+\]
+Landau能级
+\begin{gather*}
+	E_N=(N+1)\hbar\omega_\Larmor,\quad N=(2n_\rho+\abs m+m)=0,2,4,\ldots\\
+	n_\rho=0,1,2,\ldots,\quad m=0,\pm 1,\pm 2,\ldots
+\end{gather*}
+
+自由带电粒子在垂直于磁场的平面内($xy$平面)能谱是分立的，呈现为谐振子能谱，称为Landau能级。这是粒子在磁场中回旋运动时自身干涉而呈现的量子化现象，而沿磁场方向仍为自由运动，并未受到影响。
+
+磁场中的自由带电粒子的磁附加能为正值，具有反磁性。
+\paragraph{Landau规范}给定磁场的磁矢势具有一定的规范自由度。当$\bm A$被添加一个标量场的梯度时，波函数的整体相位也会随着标量场产生一定的变化，但由于哈密顿算符具有规范不变性，系统的物理性质并不受选定的规范影响。在Landau规范中，磁矢势取为
+\[
+	\bm A=(-By,0,0)
+\]
+Hamilton量
+\[
+	\hat H=\frac1{2M}\fkh{\kh{\hat p_x-\frac{eB}c\hat y}^2+\hat p_y^2}.
+\]
+不显含$\hat x$和$\hat y$故$\hat p_x,\hat p_z$守恒，取守恒量完全集$\{\hat H,\hat p_x\}$的共同本征态
+\[
+	\phi(x,y)=\e{\i p_xx}\phi(y),\quad-\infty<p_x<+\infty
+\]
+进而
+\[
+	\frac1{2M}\fkh{\kh{p_x-\frac{eB}cy}^2-\hbar^2\dd[2]y}\phi(y)=E\phi(y).
+\]
+令$y_0=cp_x/eB$
+\[
+	-\frac{\hbar^2}{2M}\phi''+\frac12M\omega_\cyc^2(y-y_0)^2\phi=E\phi.
+\]
+回旋(cyclotron)角频率
+\[
+	\omega_\cyc=\frac{eB}{Mc}=2\omega_\Larmor
+\]
+上述描述的是一个一维谐振子，平衡点在$y_0$点，比前面的合流超几何函数要简单很多。
+
+能量本征值
+\[
+E_n=\kh{n+\frac12}\hbar\omega_\cyc,\quad n=0,1,2,\ldots
+\]
+与$E_N\equiv(2n+1)\hbar\omega_\Larmor$正对应，相应的能量本征函数
+\[
+	\phi_{y_0n}\propto H_n(\alpha(y-y_0))\e{-\alpha^2(y-y_0)^2/2},\quad\alpha=\sqrt{\frac{M\omega_\cyc}\hbar}.
+\]
+能级简并度$f_N=\infty$，能级依赖于$n$不依赖$y_0$；本征函数依赖于$n$和$y_0=cp_x/eB\in(-\infty,+\infty)$。
+
+从上面看，在均匀磁场中运动的电子，可以出现在无穷远处($y_0\to\pm\infty$)，即为非束缚态($x$方向为平面波，也是非束缚态)，但电子的能级却是离散的。而通常一个二维非束缚态粒子的能量则是连续的。
+\paragraph{Landau能级讨论}
+\begin{compactenum}
+	\item 能级间距
+		\[
+			\D E=\frac{\hbar eB}{\mu c},\CGS
+		\]
+		只和磁场强度有关，和粒子运动能量无关。此间距是将电子局限在磁力线直径
+		\[
+			2\rho_B=2\sqrt{\frac{\hbar c}{eB}}\CGS
+		\]
+		范围内，按不确定关系所得电子最小动能的8倍。
+	\item 磁场中自由电子谐振子运动的固有频率是
+		\[
+			\omega=\frac{eB}{\mu c}.\CGS
+		\]
+		此频率不含$\hbar$，有经典图像，是Lorentz力在$\rho_B$半径上产生回旋运动的频率。
+	\item 由于能级简并度为$f_n=\infty$；Landau能级的简并度与规范选择无关。
+
+		由于$N=2n_\rho+\abs m+n$，所有$m\leqslant 0$的态所对应的能量都相同.
+\end{compactenum}
+\section{量子Hall效应}
+在导体(半导体)片上通电流，并在垂直方向加上磁场，这样载流子受到磁场偏转力为$q\bm v\times\bm B$，会使载流子产生垂直于电流方向的运动，并在样品两侧堆积形成横向电场抵消掉磁场的偏转力，形成Hall电压
+\[
+U=\frac1{\rho q}\frac{IB}d.
+\]
+其中$\rho$为载流子密度。Hall电阻
+\[
+R_\Hall=\frac UI=\frac B{\rho qd}.
+\]
+\paragraph{整数Hall效应}
+1980年K.von Klitzing 在测量Si-SiO$_2$界面二维电子气在强磁场下的Hall效应时发现(随后在GaAs/AlGaAs调制掺杂异质结界面也观测到)。\footnote{1980, Klaus von Klitzing, 德国；1985年Nobel物理学奖。}
+
+低温下二维电子气在强磁场中出现的Hall电阻(电导)率的量子化现象，即在磁场固定的条件下，$\rho_{xy}$和界面电子密度(正比于栅压)的关系在反比的规律上出现了一系列的台阶，台阶处所对应的Hall电阻严格地符合
+\[
+	\rho_{xy}=\frac h{ne^2},\quad n=1,2,3,\ldots
+\]
+平台处的霍尔电阻只和最基本的物理常数$h$和$e$有关.所测得的霍尔电阻值精确度极高，在$\num{e-7}$以内，在低温强磁场下出现的这一量子化现象，与二维电子气的朗道能级有关。
+
+意义：在计量学上的意义很大
+\begin{compactenum}
+	\item 用它能比较简单地测量出物理学中的基本常数，并且精度极高；
+	\item 可以作为电阻高精确度标准。
+\end{compactenum}
+% \paragraph{分数Hall效应\footnote{1981年, Robert B. Laughlin, Horst L. Stormer, Daniel C.Tsui, 美国；1998年Nobel物理学奖}}
+% 发现当填充因子$p/q$~(定义为二维电子浓度$N_\mathrm{2D}$除以自旋极化朗道能级简并度$eB/hc$，$q$总是奇数)时，Hall电阻出现与磁场无关的平台,在出现平台的磁场范围内,纵向电阻出现极小.除了\sfrac13, \sfrac23,还观察\sfrac43, \sfrac53, \sfrac15, \sfrac25等等，这被称为分数量子Hall效应。
+\paragraph{量子反常Hall效应}
+量子反常霍尔效应不同于量子霍尔效应，它不依赖于强磁场而由材料本身的自发磁化产生。在零磁场中就可以实现量子霍尔态，更容易应用到人们日常所需的电子器件中。
+
+自1988年开始，就不断有理论物理学家提出各种方案，然而在实验上没有取得任何进展。
+
+2013年，由清华大学物理系实验团队和中科院物理研究所组成的实验团队从实验上首次观测到量子反常霍尔效应。美国Science杂志于2013年3月14日在线发表这一研究成果。
+% \paragraph{自旋Hall效应\footnote{理论预言：1971年, Mikhail Dyakonov and Vladimir Perel, the Ioffe Physico-Technical Institute in Leninggrad}}
+% J. E. Hirsch在1999年的论文中首次提出了自旋Hall效应的概念，提出自旋流可由杂质对自旋的不对称散射产生。
+2004年得到实验验证。
