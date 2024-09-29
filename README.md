@@ -15,6 +15,7 @@
 - 统计力学 Statistical Mechanics
 - 电动力学 Electrodynamics
 - 核辐射物理及探测学 Nuclear Radiation Physics and Detection
+- 高等数值分析（上课中） Advanced Numerical Analysis (in study)
 
 同时提供了 `.tex` 源文件和 `.pdf` 文件。
 
