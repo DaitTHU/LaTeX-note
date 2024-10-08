@@ -78,7 +78,9 @@
 
 \section{矩阵对角化}
 \begin{theorem}{可对角化判定}{}
-	$n$阶矩阵$A$可对角化$\iff A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$，此时$A=X\Lambda X\iv$，且 
+	$n$阶矩阵$A$可对角化$\iff A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$，
+	
+	此时$A=X\Lambda X\iv$，且 
 	\begin{align}
 		X=(x_1,\ldots,x_n),\quad\Lambda=\diag(\lambda_1,\ldots,\lambda_n).
 	\end{align}
@@ -301,22 +303,26 @@
 	故$\lambda=\bar\lambda$.
 \end{proof}
 
-由代数基本定理的递归性，可推知$S$的所有特征值都是实数。
+\begin{corollary}
+	由代数基本定理的递归性，可推知$S$的所有特征值都是实数。
+\end{corollary}
+
 \begin{theorem}{对称矩阵的性质·二}{characterist of sysmmetric matrix II}
 	$v$是$S$的特征向量，若$w\perp v$，则$Sw\perp v$。
 \end{theorem}
 \begin{proof}
 	
 	\[
-		(Sw)\tp v=w\tp S\tp v=w\tp Sv=\lambda w\tp v=0,
+		(Sw)\tp v=w\tp S\tp v=w\tp Sv=\lambda w\tp v=0.
+		\qedhere
 	\]
 \end{proof}
 \begin{theorem}{对称矩阵的性质·三}{characterist of sysmmetric matrix III}
-	若$W$是$\RR^n$的一个线性子空间且在$S$的作用下稳定：
+	若$W$是$\RR^n$的一个线性子空间，且在$S$的作用下稳定，即：
 	\[
 		\forall w\in W,\enspace Sw\in W,
 	\]
-	则$W^\perp$在$S$的作用下稳定：
+	则$W^\perp$也在$S$的作用下稳定：
 	\[
 		\forall u\in W^\perp,\enspace Su\in W^\perp.
 	\]
@@ -325,6 +331,7 @@
 	$\forall w\in W,u\in W^\perp$
 	\[
 		(Su)\tp w=u\tp S\tp w=u\tp(Sw)=0.
+		\qedhere
 	\]
 \end{proof}
 \begin{theorem}{谱定理}{spectral theorem}
@@ -333,7 +340,7 @@
 \begin{proof}
 	由\thmref{thm:characterist of sysmmetric matrix I} 和推论可知$S$至少有一个实特征值$\lambda_1$和实特征向量$q_1$且$q_1\tp q_1=1$，$S$在$q_1$张成的一维线性空间上是稳定的。
 	
-	由\thmref{thm:characterist of sysmmetric matrix III} 可知$S$作用在$\C(q_1)^\perp$上也是稳定的，假设$\C(q_1)^\perp$上有一组正交归一基为$\{a_1,\ldots,a_{n-1}\}$，构造矩阵$X_1=[q_1,a_1,\ldots,a_{n-1}]$，且$X$是正交的$X_1\tp X_1=I$，
+	由\thmref{thm:characterist of sysmmetric matrix III} 可知$S$作用在$\C(q_1)^\perp$上也是稳定的，假设$\C(q_1)^\perp$上有一组正交归一基为$\{a_1,\ldots,a_{n-1}\}$，构造矩阵$X_1=[q_1,a_1,\ldots,a_{n-1}]$，且$X_1$是正交的$X_1\tp X_1=I$，
 	\[
 		X_1\tp SX_1=X_1\tp[\lambda q_1,Sa_1,\ldots,Sa_{n-1}]=\begin{bmatrix}
 			\lambda_1\\ &S_1
@@ -343,6 +350,7 @@
 	
 	重复上述步骤，直到用$S$的特征向量构造出$\RR^n$的一组正交归一基：
 	
+	\noindent
 	对$S_1$可构造$(n-1)$阶的正交矩阵$X_2$，使得
 	\[
 		X_2\tp S_1X_2=\begin{bmatrix}
@@ -424,6 +432,7 @@
 	$5\implies 3$：$A$列之间线性无关，故$A=QR$
 	\[
 		A\tp A=R\tp Q\tp QR=R\tp R=LDU.
+		\qedhere
 	\]
 \end{proof}
 \begin{definition}{半正定矩阵}{positive semidefinite matrix}

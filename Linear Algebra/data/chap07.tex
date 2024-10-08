@@ -1,6 +1,7 @@
-f\chapter{奇异值分解}
+\chapter{奇异值分解}
 特征值和特征向量只适用于方阵，对于一般的$m\times n$矩阵$A$，有没有类似的操作？
 
+\noindent
 考虑$A\tp A$和$AA\tp$，他们都是半正定的，因为$\forall x$
 \[
 	x\tp A\tp Ax=\norm{Ax}^2\geqslant 0,
@@ -67,8 +68,8 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	设矩阵$U=(u_1,\ldots,u_m),\enspace V=(v_1,\ldots,v_n)$，$U$和$V$都是正交矩阵，且
 	\[
 		AV=(Av_1,\ldots,Av_n)=(\sigma_1u_1,\cdots,\sigma_ru_r,0,\ldots,0)=U\Sigma.
+		\qedhere
 	\]
-	即证。
 \end{proof}
 \begin{theorem}{}{ATA, AAT's singular value are same}
 	$A\tp A$和$AA\tp$的非零特征值相同。
@@ -100,7 +101,9 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 \begin{example}{数据压缩}{}
 	假设$\rank(A)<\min(m,n)$，则 
 	\[
-		A=[U_r,U_{m-r}]\begin{bmatrix}
+		A=\begin{bmatrix}
+			U_r&U_{m-r}
+		\end{bmatrix}\begin{bmatrix}
 			D&0\\0&0
 		\end{bmatrix}\begin{bmatrix}
 			V_r\tp\\V_{n-r}\tp
@@ -192,24 +195,26 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 		\end{bmatrix},\quad D\iv=\diag(\sigma_1\iv,\ldots,\sigma_r\iv).
 	\]
 \end{definition}
-伪逆与原矩阵的乘积并不是单位矩阵：
-\[
-	A^+A=V\begin{bmatrix}
-		I_r&0\\0&0
-	\end{bmatrix}V\tp,
-\]
-是投影到$\C(A\tp)$的矩阵；
-\[
-	AA^+=U\begin{bmatrix}
-		I_r&0\\0&0
-	\end{bmatrix}U\tp,
-\]
-是投影到$\C(A)$的矩阵。
-
-但额外的满足：
-\[
-	AA^+A=A,\quad A^+AA^+=A^+.
-\]
+\begin{remark}
+	伪逆与原矩阵的乘积并不是单位矩阵：
+	\[
+		A^+A=V\begin{bmatrix}
+			I_r&0\\0&0
+		\end{bmatrix}V\tp,
+	\]
+	是投影到$\C(A\tp)$的矩阵；
+	\[
+		AA^+=U\begin{bmatrix}
+			I_r&0\\0&0
+		\end{bmatrix}U\tp,
+	\]
+	是投影到$\C(A)$的矩阵。
+	
+	但额外的满足：
+	\[
+		AA^+A=A,\quad A^+AA^+=A^+.
+	\]
+\end{remark}
 \begin{theorem}{伪逆与最小二乘法}{}
 	最小二乘法
 	\[
@@ -218,9 +223,9 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	的解为$x^+=A^+b$。
 \end{theorem}
 \begin{proof}
-	
 	\[
 		A\tp Ax^+=V\Sigma\tp U\tp U\Sigma V\tp V\Sigma^+U\tp b=V\Sigma\tp U\tp b=A\tp b.
+		\qedhere
 	\]
 \end{proof}
 \section{主成分分析}
@@ -249,8 +254,8 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 \]
 是对角的，故$B$之间协方差为0。
 
-这种变换总方差是不变的：
+总方差在这种变换下是不变的：
 \[
 	\tr\biggkh{\frac{BB\tp}{n-1}}=\frac{\tr(U\tp AA\tp U)}{n-1}=\frac{\tr(UU\tp AA\tp)}{n-1}=\tr\biggkh{\frac{AA\tp}{n-1}}.
 \]
-所有数据点分布在$\{u_1,\ldots,u_r\}$张成的$\C(A)$上，$u_1$是所有数据变化最大的方向（方差最大）、$u_2$次之……$\{u_1,\ldots,u_r\}$称作主成分(principal component)。
+所有数据点分布在$\{u_1,\ldots,u_r\}$张成的$\C(A)$上，$u_1$是所有数据变化最大的方向（方差最大）、$u_2$次之……因此$\{u_1,\ldots,u_r\}$称作主成分(principal component)。
