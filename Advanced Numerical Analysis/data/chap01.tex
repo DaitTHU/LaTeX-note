@@ -191,6 +191,7 @@
             \norm f_2&=\kh{\int_a^b\abs{f(x)}^2\d x}^{1/2},
         \end{align}
     \end{subequations}
+    $C[a,b]$中，$\norm\cdot_\infty$是完备的，而$\norm\cdot_1$不是。
 \end{example}
 
 \begin{definition}
@@ -207,7 +208,6 @@
     有限维线性空间中，任意两个范数都是等价的。
 \end{theorem}
 
-$C[a,b]$中，$\norm\cdot_\infty$是完备的，而$\norm\cdot_1$不是。
 
 \section{内积}
 \label{sec:inner product}
@@ -469,17 +469,21 @@ $C[a,b]$中，$\norm\cdot_\infty$是完备的，而$\norm\cdot_1$不是。
         \end{align}
     \end{subequations}
     \begin{proof}
-        先证明\eqref{eqn:op 1-norm}，记$A=(A_1,\ldots,A_n)$，即$A_j$为$A$的第$j$列列向量，令$k=\arg\max_j\norm{A_j}_1$，则$\forall x\in\CC^n$且$\norm x_1=1$，有
+        先证明\eqref{eqn:op 1-norm}，将$A$写作列向量的形式$(A_1,\ldots,A_n)$，令$k=\arg\max_j\norm{A_j}_1$，则$\forall x\in\CC^n$且$\norm x_1=\sum_{j=1}^n\abs{x_j}=1$，有
         \[
-            \norm{Ax}_1=\norm{\sum_{j=1}^nA_jx_j}_1\leq\sum_{j=1}^n\abs{x_j}\norm{A_j}_1\leq\norm{A_k}_1\sum_{j=1}^n\abs{x_j}=\norm{A_k}_1,
+            \norm{Ax}_1=\norm{\sum_{j=1}^nA_jx_j}_1\leq\sum_{j=1}^n\abs{x_j}\norm{A_j}_1\leq\norm{A_k}_1\sum_{j=1}^n\abs{x_j}=\norm{A_k}_1\norm x_1=\norm{A_k}_1,
         \]
-        特别的，取$x=e_k$有$\norm{Ae_k}_1=\norm{a_k}_1$，故
+        特别的，取$x=e_k$可使等号成立，故
         \[
             \norm A_1=\sup_{\norm x_1=1}\norm{Ax}_1=\norm{A_k}_1=\max_{j}\sum_{i=1}^n\abs{A_{ij}};
         \]
-        然后证明\eqref{eqn:op inf-norm}，记$k'=\arg\max_i\sum_{j=1}^n\abs{A_{ij}}$，则$\forall x\in\CC^n$且$\norm x_\infty=1$，有
+        然后证明\eqref{eqn:op inf-norm}，令$k=\arg\max_i\sum_{j=1}^n\abs{A_{ij}}$，$\forall x\in\CC^n$且$\norm x_\infty=\max_j\abs{x_j}=1$，有
         \[
-            \norm{Ax}_\infty=\max_i\abs{\sum_{j=1}^nA_{ij}x_j}=
+            \norm{Ax}_\infty=\max_i\abs{\sum_{j=1}^nA_{ij}x_j}\leq\max_i\sum_{j=1}^n\abs{A_{ij}}\abs{x_j}\leq\max_i\sum_{j=1}^n\abs{A_{ij}}\max_j\abs{x_j}=\sum_{j=1}^n\abs{A_{kj}}.
+        \]
+        特别的，取$x_j=\sgn(A_{kj})$可使等号成立，故 
+        \[
+            \norm A_\infty=\sup_{\norm x_\infty=1}\norm{Ax}_\infty=\max_i\sum_{j=1}^n\abs{A_{ij}};
         \]
         最后证明\eqref{eqn:op 2-norm}，由2 - 范数的性质：
         \[
