@@ -85,9 +85,9 @@ $\bm E_0,\bm B_0$是常矢量，$\bm k:=k\uvec n$为波矢(wave vector)。
     \]
 \end{compactitem}
 \section{偏振}
-前文指出：平面波的电场沿$\uvec\epsilon_1$方向，磁场沿$\uvec\epsilon_2$方向；但显然，一旦确定极化矢量$\uvec\epsilon_1,\uvec\epsilon_2$，电场当然也可以沿其他方向，一般的
+前文指出：平面波的电场沿$\uvec\epsilon_1$方向，磁场沿$\uvec\epsilon_2$方向；但显然，一旦确定极化矢量$\uvec\epsilon_1,\uvec\epsilon_2$，电场当然也可以沿其他方向，一般地，
 %也可以有一种平面波的电场$\uvec\epsilon_2$方向，
-%我们分别称其为偏振矢量为$\uvec\epsilon_{1,2}$的线偏振波，这两种偏振波是不同的。一般的
+%我们分别称其为偏振矢量为$\uvec\epsilon_{1,2}$的线偏振波，这两种偏振波是不同的。一般地，
 \[
     \bm E=(E_1\uvec\epsilon_1+E_2\uvec\epsilon_2)\e{\i(\bm k\cdot\bm x-\omega t)},
 \]
@@ -192,32 +192,35 @@ Stokes参数仅依赖于$a_1,a_2,\vd_1-\vd_2$三个参数，因此并不独立�
 \[
     s_0^2=s_1^2+s_2^2+s_3^2.
 \]
-特别的，下面给出了一些Stokes参数的例子：
-\begin{compactitem}
-	\item 线偏振：
+
+\begin{example}{Stokes参数的例子}{}
     \begin{compactitem}
-        \item 水平(horizontal)和垂直(vertical)：$[1\enspace\pm 1\enspace0\enspace0];$
-        \item $\pm 45\degree$：$[1\enspace0\enspace\pm 1\enspace0];$
+    	\item 线偏振：
+        \begin{compactitem}
+            \item 水平(horizontal)和垂直(vertical)：$[1\enspace\pm 1\enspace0\enspace0];$
+            \item $\pm 45\degree$：$[1\enspace0\enspace\pm 1\enspace0];$
+        \end{compactitem}
+    	\item 圆偏振：右旋和左旋
+    	\[
+            [1\enspace0\enspace0\enspace\pm 1];
+        \]
+    	\item 无偏振(unpolarized)光或自然光(natural light)：$\bm E$由无数个无规则取向的偏振光叠加，各方向振幅相同，因此$s_1,s_2,s_3$均为零
+        \[
+            [1\enspace0\enspace0\enspace0].
+        \]
+        现实中即使是%目前应用的
+        单色性(monochromatic)很好的辐射波束也是由有限波列(finite wave trains)叠加成的，因而根据Fourier定理，它包含一个频率范围，即不完全是单色的。%一种看法认为$a_i,\vd_i$随时间变化缓慢，
+        这时可观测的Stokes参数就是在一个较长时间尺度上的平均，比如：
+        \[
+            s_2=2\ave{a_1a_2\cos(\vd_2-\vd_1)},
+        \]
+        求平均的结果是：准单色波束的Stokes参数满足不等式：
+        \[
+            s_0^2\geqslant s_1^2+s_2^2+s_3^2,
+        \]
     \end{compactitem}
-	\item 圆偏振：右旋和左旋
-	\[
-        [1\enspace0\enspace0\enspace\pm 1];
-    \]
-	\item 无偏振(unpolarized)光或自然光(natural light)：$\bm E$由无数个无规则取向的偏振光叠加，各方向振幅相同，因此$s_1,s_2,s_3$均为零
-    \[
-        [1\enspace0\enspace0\enspace0].
-    \]
-    现实中即使是%目前应用的
-    单色性(monochromatic)很好的辐射波束也是由有限波列(finite wave trains)叠加成的，因而根据Fourier定理，它包含一个频率范围，即不完全是单色的。%一种看法认为$a_i,\vd_i$随时间变化缓慢，
-    这时可观测的Stokes参数就是在一个较长时间尺度上的平均，比如：
-    \[
-        s_2=2\ave{a_1a_2\cos(\vd_2-\vd_1)},
-    \]
-    求平均的结果是：准单色波束的Stokes参数满足不等式：
-    \[
-        s_0^2\geqslant s_1^2+s_2^2+s_3^2,
-    \]
-\end{compactitem}
+\end{example}
+
 \begin{definition}{偏振度}{}
     定义偏振度
     \[
@@ -323,20 +326,20 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
 \paragraph{Fresnel公式}
 由边界上：$\bm D$和$\bm B$法向分量连续，$\bm E$和$\bm H$切向分量连续。在应用这些边界条件时，可以考虑线偏振的两种独立情况：
 \begin{compactenum}
-	\item $\bm E_\i$与入射面垂直(即$\bm E_\i$垂直纸面向外)%\footnote{在讨论Fresnel公式之前，我们必须指定$\bm E_\i$的方向。}
+	\item 垂直极化波：$\bm E_\i$与入射面垂直(即$\bm E_\i$垂直纸面向外)%\footnote{在讨论Fresnel公式之前，我们必须指定$\bm E_\i$的方向。}
 	\begin{align*}
         E_\i+E_\r&=E_\t,\\
         H_\i\cos\theta_\i-H_\r\cos\theta_\r&=H_\t\cos\theta_\t,
     \end{align*}
-    通常我们处理的是$\mu_\i=\mu_\r\approx\mu_\t\approx\mu_0$的电介质，因此
+    电介质通常满足$\mu_\i=\mu_\r\approx\mu_\t\approx\mu_0$，因此$E_\i,E_\r,E_\t$的关系为：
     \begin{align}
         \label{eqn:Fresnel rperp}
         r_\perp:=\frac{E_\r}{E_\i}=\frac{n_\i\cos\theta_\i-n_\t\cos\theta_\t}{n_\i\cos\theta_\i+n_\t\cos\theta_\t},\\
         \label{eqn:Fresnel tperp}
         t_\perp:=\frac{E_\t}{E_\i}=\frac{2n_\i\cos\theta_\i}{n_\i\cos\theta_\i+n_\t\cos\theta_\t};
     \end{align}
-    $r,t$称为振幅反射系数和透射系数；
-	\item $\bm E_\i$与入射面平行(或者说$\bm H_\i$垂直纸面向外)
+    $r$称为振幅的反射系数(reflection coefficient)，$t$为透射系数(transmission coefficient)；
+	\item 平行极化波：$\bm E_\i$与入射面平行(或者说$\bm H_\i$垂直纸面向外)
 	\begin{align*}
         E_\i\cos\theta_\i-E_\r\cos\theta_\r&=E_\t\cos\theta_\t,\\
         H_\i+H_\r&=H_\t,
@@ -351,7 +354,7 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
 \end{compactenum}
 利用Snell定律\eqref{eqn:Snell}，$r,t$便完全由$n_\i,n_\t,\theta_\i$决定。
 \paragraph{Brewster角}
-对于平行于入射面的偏振光，存在一个入射角$i_\text B$使得$r_\parallel=0$，%依\eqref{eqn:Fresnel rpara}
+对于平行极化波，存在一个特殊的入射角$\theta_\i$使得$r_\parallel=0$：%依\eqref{eqn:Fresnel rpara}
 \[
     n_\t\cos\theta_\i-n_\i\cos\theta_\t=0,\quad n_\i\sin\theta_\i=n_\t\sin\theta_\t.
     %n_\t^2\cos i_\text B=n_\i\sqrt{n_\t^2-n_\i^2\sin^2 i_\text B},
