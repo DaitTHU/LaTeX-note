@@ -6,16 +6,21 @@
 
 \begin{definition}
     {线性空间}{linear space}
-    设$V$是一个集合，$\FF$是一个数域，定义加法$+:V\times V\to V$和数乘$\cdot:\FF\times V\to V$满足：
+    给定一个数域$\FF$ (本笔记只涉及实数域$\RR$和复数域$\CC$)和一个集合$V$，
+    
+    定义加法$+:V\times V\to V$满足：
     \begin{itemize}
-        \item 加法结合律：$(a+b)+c=a+(b+c)$
-        \item 加法零元：$a+0=a$
-        \item 加法逆元：$a+(-a)=0$
-        \item 加法交换律：$a+b=b+a$
-        \item 数乘单位元：$1a=a$
-        \item 数乘结合律：$(\lambda\mu)a=\lambda(\mu a)$
-        \item 数乘分配率1：$(\lambda+\mu)a=\lambda a+\mu a$
-        \item 数乘分配率2：$\lambda(a+b)=\lambda a+\lambda b$
+        \item 结合律：$(a+b)+c=a+(b+c),$
+        \item 零元：$a+0=a,$
+        \item 逆元：$a+(-a)=0,$
+        \item 交换律：$a+b=b+a;$
+    \end{itemize}
+    数乘$\cdot:\FF\times V\to V$满足：
+    \begin{itemize}
+        \item 单位元：$1a=a,$
+        \item 结合律：$(\lambda\mu)a=\lambda(\mu a),$
+        \item 分配率1：$(\lambda+\mu)a=\lambda a+\mu a,$
+        \item 分配率2：$\lambda(a+b)=\lambda a+\lambda b.$
     \end{itemize}
     则称$V$在$\FF$上构成一个线性空间(linear space)。
 \end{definition}
@@ -23,12 +28,13 @@
 \begin{example}
     {线性空间的例子}{}
     \begin{itemize}
-        \item 全体在有界闭区间$[a,b]$上连续的函数构成的集合$C[a,b]$是一个线性空间。
-        \item 多项式函数空间
-        \[
-            P_n=\set{a_0+a_1x+\cdots+a_nx^n}{a_i\in\FF}
-        \]
-        构成一个线性空间，其加法为多项式加法。
+        \item $\cont^n[a,b]$：全体在$[a,b]$上$n$次导数连续(continuous)的函数构成的集合。
+        \item $\diff^n[a,b]$：全体在$[a,b]$上$n$次可导(differentiable)的函数构成的集合。
+        \item $\poly_n$：$n$次多项式函数空间。
+        % \[
+        %     \poly_n=\set{a_0+a_1x+\cdots+a_nx^n}{a_i\in\FF}
+        % \]
+        % 构成一个线性空间，其加法为多项式加法。
         \item 正实数$\RR_{>0}$构成一个线性空间，其加法为实数乘法，数乘为幂次。
     \end{itemize}
 \end{example}
@@ -45,7 +51,7 @@
 \begin{example}
     {线性无关的例子}{}
     \begin{itemize}
-        \item $P_n$中$\{1,x,\ldots,x^n\}$是线性无关的；
+        \item $\poly_n$中$\{1,x,\ldots,x^n\}$是线性无关的；
         \item 所有$[-\pi,\pi]$上的周期函数构成的函数空间是线性空间，其中
         \[
             \{1,\cos x,\sin x,\ldots,\cos nx,\sin nx\} 
@@ -60,7 +66,7 @@
     \begin{equation}
         x=a_1x_1+\cdots+a_nx_n,
     \end{equation}
-    则称$\{x_1,\ldots,x_n\}$构成一组基(base)，且$V$的维度$\dim V=n$。
+    则称$\{x_1,\ldots,x_n\}$构成一组基(base)，且$V$的维度$\dim(V)=n$。
 \end{definition}
 
 \begin{theorem}
@@ -71,8 +77,8 @@
 \begin{example}
     {典型线性空间的维度}{}
     \begin{itemize}
-        \item $\dim P_n=n;$
-        \item $\dim C[a,b]=+\infty.$
+        \item $\dim(\poly_n)=n;$
+        \item $\dim(\cont[a,b])=+\infty.$
     \end{itemize}
 \end{example}
 
@@ -153,7 +159,7 @@
 
 \begin{example}
     {$\RR^n$的范数}{}
-    $x=(x_1,\ldots,x_n)\tp\in\RR^n$的$p$ - 范数为
+    $x=(x_1,\ldots,x_n)\tp\in\FF^n$的$p$ - 范数为
     \[
         \norm x_p=\kh{\sum_{i=1}^n\abs{x_i}^p}^{1/p}.
     \]
@@ -179,7 +185,7 @@
 
 \begin{example}
     {$C[a,b]$的范数}{}
-    $f(x)\in C[a,b]$的$p$ - 范数为
+    $f(x)\in\cont[a,b]$的$p$ - 范数为
     \[
         \norm f_p=\kh{\int_a^b\abs{f(x)}^p\d x}^{1/p}.
     \]
@@ -242,7 +248,7 @@
     \[
         \inp xy=\sum_{i=1}^nx_iy_i,
     \]
-    $C[a,b]$的内积为 
+    $\cont[a,b]$的内积为 
     \[
         \inp fg=\int_a^bf(x)\overline g(x)\d x.
     \]
@@ -266,7 +272,7 @@
     \[
         (aG_n)_k=a_1\inp{x_1}{x_k}+\cdots+a_n\inp{x_n}{x_k}=\inp{a_1x_1+\cdots,a_nx_n}{x_k}=0,
     \]
-    特别的，
+    特别地，
     \[
         \inp{a_1x_1+\cdots+a_nx_n}{a_1x_1+\cdots+a_nx_n}=0,\iff a_1x_1+\cdots,a_nx_n=0,
     \]
@@ -304,7 +310,7 @@
 
 \begin{definition}
     {带权内积}{}
-    设$\rho\in C(a,b)$是一个几乎处处为正\footnote{即$\{x|\rho(x)\leq 0\}$的Lebesgue测度为0。}的函数，且
+    设$\rho\in\cont(a,b)$是一个几乎处处为正\footnote{即$\{x|\rho(x)\leq 0\}$的Lebesgue测度为0。}的函数，且
     \[
         \int_a^b\rho(x)\d x<+\infty,
     \]
@@ -316,7 +322,7 @@
 
 \begin{definition}
     {正交多项式}{}
-    已知$\{1,x,\ldots,x^n\}$是线性无关的。考虑$C[a,b]$上的带权内积，Schmidt正交化得到一组多项式函数
+    已知$\{1,x,\ldots,x^n\}$是线性无关的。考虑$\cont[a,b]$上的带权内积，Schmidt正交化得到一组多项式函数
     \[
         \psi_0(x),\psi_1(x),\ldots,\psi_n(x),
     \]
@@ -377,7 +383,7 @@
 
 \begin{definition}
     {矩阵范数}{}
-    矩阵空间$\CC^{n\times n}$上的范数$\norm\cdot$若满足
+    矩阵空间$\FF^{n\times n}$上的范数$\norm\cdot$若满足
     \begin{equation}
         \norm{AB}\leq\norm A\norm B,
     \end{equation}
@@ -393,7 +399,7 @@
     \begin{equation}
         \Forb A:=\sqrt{\sum_{i=1}^n\sum_{j=1}^n\abs{A_{ij}}^2}.
     \end{equation}
-    是一个矩阵范数。注意$\Forb I=\sqrt n.$
+    是一个矩阵范数。
     \begin{proof}
         由Cauchy-Schwarz不等式
         \begin{align*}
@@ -402,6 +408,15 @@
             \qedhere
         \end{align*}
     \end{proof}
+    \tcblower
+    注意到
+    \[
+        \tr(A\dg A)=\sum_{i=1}^n(A\dg A)_{ii}=\sum_{i=1}^n\sum_{j=1}^nA\dg_{ij}A_{ji}=\sum_{i=1}^n\sum_{j=1}^n\abs{A_{ji}}^2.
+    \]
+    故
+    \begin{equation}
+        \Forb A=\sqrt{\tr(A\dg A)}=\sqrt{\tr(AA\dg)}.
+    \end{equation}
 \end{example}
 
 \begin{definition}
@@ -428,7 +443,7 @@
     {算子范数}{operate norm}
     定义矩阵的算子范数(operate norm)
     \begin{equation}
-        N:\CC^{n\times n}\to\CC,\enspace A\mapsto\sup_{x\neq 0}\frac{\norm{Ax}}{\norm x}.
+        N:\FF^{n\times n}\to\RR,\enspace A\mapsto\sup_{x\neq 0}\frac{\norm{Ax}}{\norm x}.
     \end{equation}
     称算子范数是该向量范数诱导出来的矩阵范数。
 \end{definition}
@@ -456,7 +471,7 @@
 
 \begin{example}
     {}{}
-    设$A\in\CC^{n\times n}$，则$p$ - 向量范数诱导出来的矩阵范数为：
+    设$A\in\FF^{n\times n}$，则$p$ - 向量范数诱导出来的矩阵范数为：
     \begin{subequations}
         \label{eqn:op norm}
         \begin{align}
@@ -469,19 +484,19 @@
         \end{align}
     \end{subequations}
     \begin{proof}
-        先证明\eqref{eqn:op 1-norm}，将$A$写作列向量的形式$(A_1,\ldots,A_n)$，令$k=\arg\max_j\norm{A_j}_1$，则$\forall x\in\CC^n$且$\norm x_1=\sum_{j=1}^n\abs{x_j}=1$，有
+        先证明\eqref{eqn:op 1-norm}，将$A$写作列向量的形式$(A_1,\ldots,A_n)$，令$k=\arg\max_j\norm{A_j}_1$，则$\forall x\in\FF^n$且$\norm x_1=\sum_{j=1}^n\abs{x_j}=1$，有
         \[
             \norm{Ax}_1=\norm{\sum_{j=1}^nA_jx_j}_1\leq\sum_{j=1}^n\abs{x_j}\norm{A_j}_1\leq\norm{A_k}_1\sum_{j=1}^n\abs{x_j}=\norm{A_k}_1\norm x_1=\norm{A_k}_1,
         \]
-        特别的，取$x=e_k$可使等号成立，故
+        特别地，取$x=e_k$可使等号成立，故
         \[
             \norm A_1=\sup_{\norm x_1=1}\norm{Ax}_1=\norm{A_k}_1=\max_{j}\sum_{i=1}^n\abs{A_{ij}};
         \]
-        然后证明\eqref{eqn:op inf-norm}，令$k=\arg\max_i\sum_{j=1}^n\abs{A_{ij}}$，$\forall x\in\CC^n$且$\norm x_\infty=\max_j\abs{x_j}=1$，有
+        然后证明\eqref{eqn:op inf-norm}，令$k=\arg\max_i\sum_{j=1}^n\abs{A_{ij}}$，$\forall x\in\FF^n$且$\norm x_\infty=\max_j\abs{x_j}=1$，有
         \[
             \norm{Ax}_\infty=\max_i\abs{\sum_{j=1}^nA_{ij}x_j}\leq\max_i\sum_{j=1}^n\abs{A_{ij}}\abs{x_j}\leq\max_i\sum_{j=1}^n\abs{A_{ij}}\max_j\abs{x_j}=\sum_{j=1}^n\abs{A_{kj}}.
         \]
-        特别的，取$x_j=\sgn(A_{kj})$可使等号成立，故 
+        特别地，取$x_j=\sgn(A_{kj})$可使等号成立，故 
         \[
             \norm A_\infty=\sup_{\norm x_\infty=1}\norm{Ax}_\infty=\max_i\sum_{j=1}^n\abs{A_{ij}};
         \]
@@ -511,14 +526,14 @@
 
 \begin{theorem}
     {}{}
-    $\forall A\in\CC^{n\times n},\epsilon>0$，存在算子范数$\norm\cdot$满足：
+    $\forall A\in\FF^{n\times n},\epsilon>0$，存在算子范数$\norm\cdot$满足：
     \begin{equation}
         \norm A\leq\rho(A)+\epsilon.
     \end{equation}
 \end{theorem}
 
 \begin{lemma}
-    若$\norm\cdot_\alpha$是$\CC^n$中的向量范数，$P\in\CC^{n\times n}$非奇异，则
+    若$\norm\cdot_\alpha$是$\FF^n$中的向量范数，$P\in\FF^{n\times n}$非奇异，则
     \[
         \norm\cdot_{P,\alpha}:x\mapsto\norm{Px}_\alpha,
     \]
@@ -561,19 +576,21 @@
     \]
 \end{remark}
 
-任意给定一个矩阵，其为奇异矩阵的概率是很低的。那如何度量矩阵的奇异性？%用逆的大小。
+\paragraph{奇异性与扰动}
+一个矩阵不可逆的概率是很低的，\footnote{因为多了一个$\det(A)=0$的限制条件。}那如何度量矩阵的奇异性？%用逆的大小。
 
 \begin{theorem}
     {扰动定理}{}
-    给定扰动$B$，若$\norm B<1$，则$I+B$非奇异且
+    给定扰动$B$，若$\norm B<1$，则$I+B$可逆且
     \begin{equation}
         \nnorm{(I+B)\iv}\leq\frac1{1-\norm B}.
     \end{equation}
 \end{theorem}
 
 \begin{proof}
-    若$I+B$是奇异的，则$\rho(B)\geq 1>\norm B$矛盾。
-    记$D=(I+B)\iv$，则 
+    若$I+B$不可逆，则$\rho(B)\geq 1>\norm B$矛盾。
+
+    记$D:=(I+B)\iv$，则 
     \[
         (I+B)D=I,\iff D=I-BD,\implies \norm D\leq 1+\norm B\norm D.
         \qedhere
@@ -591,6 +608,10 @@
         \norm{C\iv}\leq\frac{1}{\nnorm{A\iv}\iv-\norm{C-A}}.
     \end{equation}
 \end{theorem}
+
+\begin{proof}
+    令$B=I-A\iv C$即可。
+\end{proof}
 
 
 

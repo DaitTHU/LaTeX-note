@@ -1,0 +1,59 @@
+\chapter{函数逼近}
+\label{chap:optimal approximation}
+
+\begin{definition}
+    {函数逼近}{optimal approximation}
+    给定函数$f\in\cont[a,b]$和子集$\Phi\subset\cont[a,b]$ (如多项式函数)，寻找最佳逼近：
+    \begin{equation}
+        \varphi^*=\arg\min_{\varphi\in\Phi}\norm{f-\varphi}.
+    \end{equation}
+\end{definition}
+
+\begin{remark}
+    ~
+    \begin{itemize}
+        \item $\Phi$一般是简单函数集合，如多项式函数。但$\Phi$未必是线性空间。
+        \item $f\notin\Phi$，且关于$f$的信息可能有误差；
+        \item 近似程度的度量：平方逼近$\norm\cdot_2$和一致逼近$\norm\cdot_\infty$。
+    \end{itemize}
+\end{remark}
+
+\section{最佳平方逼近}
+\label{sec:optimal squares approximation}
+
+最佳平方逼近中，$\norm\cdot_2$是由$\cont[a,b]$的某个内积$\inp\cdot\cdot$诱导出的范数。
+设$\varphi_0,\ldots,\varphi_n$构成$\Phi$的一组基，则
+\[
+    \varphi=\sum_{i=0}^na_i\varphi_i,
+\]
+实函数情况，简单计算得到
+\[
+    \norm{f-\varphi}_2^2=\sum_{i,j}\inp{\varphi_i}{\varphi_j}a_ia_j-2\sum_{i=1}^n\inp{\varphi_i}fa_i+\inp ff.
+\]
+是一个关于$a_0,\ldots,a_n$的二次函数，故Hess矩阵
+\begin{equation}
+    \nabla^2\norm{f-\varphi}_2^2=2\begin{bmatrix}
+        \inp{\varphi_0}{\varphi_0}&\cdots&\inp{\varphi_0}{\varphi_n}\\
+        \vdots&\ddots&\vdots\\
+        \inp{\varphi_n}{\varphi_0}&\cdots&\inp{\varphi_n}{\varphi_n}
+    \end{bmatrix}
+\end{equation}
+为对称正定矩阵，因而$\norm{f-\varphi}_2^2$有最小值。由
+\begin{equation*}
+    \pp{a_i}\norm{f-\varphi}_2^2=2\fkh{\sum_{j=1}^n\inp{\varphi_i}{\varphi_j}a_j-\inp{\varphi_i}f}=0,
+\end{equation*}
+得到
+\begin{theorem}
+    {法方程}{}
+    \begin{equation}
+        \sum_{j=1}^n\inp{\varphi_i}{\varphi_j}a_j=\inp{\varphi_i}f.
+    \end{equation}
+\end{theorem}
+
+\begin{remark}
+    最佳平方逼近$\varphi^*$满足$f-\varphi^*\perp\Phi$，有
+    \begin{equation}
+        \norm f_2^2=\norm{\varphi^*}_2^2+\norm{f-\varphi^*}_2^2.
+    \end{equation}
+\end{remark}
+
