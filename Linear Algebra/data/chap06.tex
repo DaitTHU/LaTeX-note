@@ -48,7 +48,7 @@
 \[
 	\det(\lambda I-A)=\lambda^n+a_1\lambda^{n-1}+\cdots+a_n=0,
 \]
-特别的，特征多项式(eigen-polynomial)的系数有如下性质：
+特别地，特征多项式(eigen-polynomial)的系数有如下性质：
 \begin{align}
 	a_1=-\tr(A),\quad a_n=(-)^n\det(A)
 \end{align}
@@ -56,10 +56,13 @@
 \begin{align}
 	\tr(A)=\sum_{i=1}^n\lambda_i,\quad \det(A)=\prod_{i=1}^n\lambda_i.
 \end{align}
-更一般的，\href{https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem}{Cayley-Hamilton定理}给出了其他项的系数表达式，比如
-\[
-	a_2=\frac12\bigkh{\tr^2(A)-\tr(A^2)}.
-\]
+更一般地，\href{https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem}{Cayley-Hamilton定理}给出了其他项的系数表达式，比如
+\begin{subequations}
+	\begin{align}
+		a_2&=\frac12\bigkh{\tr(A)^2-\tr(A^2)},\\
+		a_3&=\frac16\bigkh{\tr(A)^3-3\tr(A)\tr(A^2)+2\tr(A^3)},
+	\end{align}
+\end{subequations}
 \begin{theorem}{相似变换的特征多项式}{}
 	$A$的相似变换$B\iv AB$和$A$有相同的特征多项式。
 \end{theorem}
@@ -288,7 +291,12 @@
 \end{proof} 
 
 \section{对称矩阵}
-\begin{theorem}{对称矩阵的性质·一}{characterist of sysmmetric matrix I}
+
+\begin{definition}
+	{对称矩阵}{symmetric matrix}
+	若$S\tp=S$，则称$S$是对称矩阵(symmetric matrix)；若$S\tp=-S$，则称$S$是反对称矩阵(anti-symmetric matrix)。
+\end{definition}
+\begin{theorem}{对称矩阵的性质·一}{characterist of symmetric matrix I}
 	若$S$是一个$n$阶实对称矩阵，则$S$至少有一个实特征值$\lambda$
 \end{theorem}
 \begin{proof}
@@ -307,7 +315,7 @@
 	由代数基本定理的递归性，可推知$S$的所有特征值都是实数。
 \end{corollary}
 
-\begin{theorem}{对称矩阵的性质·二}{characterist of sysmmetric matrix II}
+\begin{theorem}{对称矩阵的性质·二}{characterist of symmetric matrix II}
 	$v$是$S$的特征向量，若$w\perp v$，则$Sw\perp v$。
 \end{theorem}
 \begin{proof}
@@ -317,7 +325,7 @@
 		\qedhere
 	\]
 \end{proof}
-\begin{theorem}{对称矩阵的性质·三}{characterist of sysmmetric matrix III}
+\begin{theorem}{对称矩阵的性质·三}{characterist of symmetric matrix III}
 	若$W$是$\RR^n$的一个线性子空间，且在$S$的作用下稳定，即：
 	\[
 		\forall w\in W,\enspace Sw\in W,
@@ -338,9 +346,9 @@
 	对称矩阵$S$总可以被一个正交矩阵$Q$对角化。
 \end{theorem}
 \begin{proof}
-	由\thmref{thm:characterist of sysmmetric matrix I} 和推论可知$S$至少有一个实特征值$\lambda_1$和实特征向量$q_1$且$q_1\tp q_1=1$，$S$在$q_1$张成的一维线性空间上是稳定的。
+	由\thmref{thm:characterist of symmetric matrix I} 和推论可知$S$至少有一个实特征值$\lambda_1$和实特征向量$q_1$且$q_1\tp q_1=1$，$S$在$q_1$张成的一维线性空间上是稳定的。
 	
-	由\thmref{thm:characterist of sysmmetric matrix III} 可知$S$作用在$\C(q_1)^\perp$上也是稳定的，假设$\C(q_1)^\perp$上有一组正交归一基为$\{a_1,\ldots,a_{n-1}\}$，构造矩阵$X_1=[q_1,a_1,\ldots,a_{n-1}]$，且$X_1$是正交的$X_1\tp X_1=I$，
+	由\thmref{thm:characterist of symmetric matrix III} 可知$S$作用在$\C(q_1)^\perp$上也是稳定的，假设$\C(q_1)^\perp$上有一组正交归一基为$\{a_1,\ldots,a_{n-1}\}$，构造矩阵$X_1=[q_1,a_1,\ldots,a_{n-1}]$，且$X_1$是正交的$X_1\tp X_1=I$，
 	\[
 		X_1\tp SX_1=X_1\tp[\lambda q_1,Sa_1,\ldots,Sa_{n-1}]=\begin{bmatrix}
 			\lambda_1\\ &S_1

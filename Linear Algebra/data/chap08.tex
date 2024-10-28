@@ -2,67 +2,95 @@
 \label{chap:linear mapping}
 
 \begin{definition}{映射}{mapping}
-	$S,S'$是两个集合，如果$\forall x\in S$，均有一个$f(x)=x'\in S'$与之对应，这种对应关系$f:S\to S'$便叫映射(mapping)。
-
-	$S$为定义域(domain of definition)，$S'$为陪域(codomain)。$f(x)$叫做$x$在映射$f$下的像(image)，$f(S)$为值域(domain of function)。
+	给定两个集合$S,S'$，如果$\forall x\in S$，均有一个对应的$f(x)\in S'$，这种对应关系$f$便称为映射(mapping)，记作
+	\begin{equation}
+		f:S\to S',\enspace x\mapsto f(x).
+	\end{equation}
+	其中$S$称为定义域(domain)，$S'$称为陪域(codomain)。$f(x)$称为$x$的像(image)，所有像的集合$f(S)=\nset{f(x)}{x\in S}$称为值域(image of $S$)，有$f(S)\subset S'$。
+	\tcblower
+	给定$y\in S'$，所有满足$f(x)=y$的$x$的集合称为$y$的原像(preimage)，记作
+	\begin{equation}
+		f\iv(y):=\nset{x\in S}{f(x)=y}.
+	\end{equation}
 \end{definition}
+
+\begin{remark}
+	符号$f(\cdot)$便代表映射$x\mapsto f(x)$。
+\end{remark}
+
 \begin{definition}{映射的复合}{mapping composition}
-	$f:U\to V,g:V\to W$的复合(composition)构成一个新的映射$g\circ f:U\to W$，
+	映射 $f:U\to V,\enspace g:V\to W$的复合(composition)构成一个新的映射：
 	\[
-		g\circ f(x)=g\bigkh{f(x)}.
+		g\circ f:U\to W,\enspace x\mapsto g(f(x)).
 	\]
 \end{definition}
-映射的复合满足结合律
-\[
-	(h\circ g)\circ f=h\circ (g\circ f)\equiv h\circ g\circ f.
-\]
-\begin{definition}{映射有关的概念}{mapping related concepts}
-	映射$f:S\to S'$，$y$的原像(preimage)
+\begin{corollary}
+	映射的复合满足结合律
 	\[
-		f\iv(y)=\set{x\in S}{f(x)=y}.
+		(h\circ g)\circ f=h\circ (g\circ f)\equiv h\circ g\circ f.
 	\]
-	单射(injection)：$\forall x,y\in S$，$x\neq y$均有$f(x)\neq f(y)$。
+\end{corollary}
+\begin{definition}{单射、满射和双射}{injection, surjection and bijection}
+	\begin{itemize}
+		\item 单射(injection)：$\forall x,y\in S$且$x\neq y$，均有$f(x)\neq f(y)$。
+		\item 满射(surjection)：$f(S)=S'$。
+		\item 双射(bijection)：既是单射又是满射。
+	\end{itemize}
+\end{definition}
 
-	满射(surjection)：$f(S)=S'$。
+\begin{definition}
+	{恒等映射}{identity mapping}
+	定义$S$上的恒等映射(identity)为
+	\begin{equation}
+		\id_S:S\to S,\enspace x\mapsto x.
+	\end{equation}
+\end{definition}
 
-	双射(bijection)：既是单射又是满射
+\begin{corollary}
+	$\forall f:S\to S'$，有$f\circ\id_S=\id_{S'}\circ f=f$。
+\end{corollary}
 
-	恒等映射(identity map)：$\id:S\to S$，$\forall x\in S,\enspace\id(x)=x.$
-
-	逆映射(inverse map)：若存在$g:S'\to S$使得
+\begin{definition}
+	{逆映射}{inverse mapping}
+	给定映射$f:S\to S'$，若存在$g:S'\to S$使得
 	\[
 		g\circ f=\id_S,\quad f\circ g=\id_{S'},
 	\]
-	则称映射$f:S\to S'$可逆，$g=f\iv$为$f$的逆。
+	则称映射$f:S\to S'$可逆，$g=f\iv$为$f$的逆映射(inverse)。
 \end{definition}
-\begin{theorem}{可逆映射}{inverse}
-	\begin{center}
-		映射$f:S\to S'$可逆$\iff f$是双射。
-	\end{center}
+\begin{theorem}{有关映射的等价描述}{}
+	\begin{enumerate}
+		\item 映射$f$为单射$\iff$存在映射$g$使得$g\circ f=\id$；
+		\item 映射$f$为满射$\iff$存在映射$g$使得$f\circ g=\id$；
+		\item 映射$f$为双射$\iff f$可逆。
+	\end{enumerate}
 \end{theorem}
 \begin{proof}
-	若$f$可逆，$g:S'\to S$为$f$的逆。若$x,y\in S$，满足$f(x)=f(y)$，则 
-	\[
-		x=g\bigkh{f(x)}=g\bigkh{f(y)}=y.
-	\]
-	故$f$为单射；又$\forall z\in S'$，取$x=g(z)\in S$，可得$f(x)=f\bigkh{g(z)}=z$，故$f$为满射。
+	显然$(1),(2)\implies(3)$，故只需证明$(1),(2)$。
+	证明留作习题。
+	\qedhere
+	% 若$f$可逆，$g:S'\to S$为$f$的逆。若$x,y\in S$，满足$f(x)=f(y)$，则 
+	% \[
+	% 	x=g\bigkh{f(x)}=g\bigkh{f(y)}=y.
+	% \]
+	% 故$f$为单射；又$\forall z\in S'$，取$x=g(z)\in S$，可得$f(x)=f\bigkh{g(z)}=z$，故$f$为满射。
 	
-	若$f$为双射，因为$f$为满射，$\forall z\in S'$，有$x\in S$使得$f(x)=z$，又因$f$为单射，因此$x$是唯一的，我们可以定义$g(z)=x$，故$g$是$f$的逆映射。
+	% 若$f$为双射，因为$f$为满射，$\forall z\in S'$，有$x\in S$使得$f(x)=z$，又因$f$为单射，因此$x$是唯一的，我们可以定义$g(z)=x$，故$g$是$f$的逆映射。
 \end{proof}
 \section{线性映射和矩阵}
 \begin{definition}{线性映射}{linear mapping}
-	$V,W$是两个线性空间，映射$T:V\to W$是线性映射(linear mapping)若$T$满足：
+	给定两个线性空间$V,W$，若映射$T:V\to W$满足：
 	\begin{compactenum}
 		\item $\forall u,v\in V,\enspace T(u+v)=T(u)+T(v);$
 		\item $\forall c\in\FF,\enspace T(cu)=cT(u).$
 	\end{compactenum}
-	线性映射也被称为线性变换；特别的，$V\to\RR$的称为线性函数。
+	则称映射$T$是线性映射(或线性变换，linear mapping)。特别地，$V\to\FF$的称为线性函数。
 \end{definition}
 \begin{corollary}
 	$T(0)=0.$
 \end{corollary}
 \begin{theorem}{线性映射与基}{linear mapping and base}
-	$V,W$是线性空间，$\{v_1,\ldots,v_n\}$是$V$中的一组基，$\{w_1,\ldots,w_n\}$是$W$中任意$n$个元素，则存在唯一的线性映射$T:V\to W$使得
+	给定两个线性空间$V,W$，$\{v_1,\ldots,v_n\}$是$V$中的一组基，$\{w_1,\ldots,w_n\}$是$W$中任意$n$个元素，则存在唯一的线性映射$T:V\to W$使得
 	\[
 		T(v_1)=w_1,\enspace\ldots,\enspace T(v_n)=w_n.
 	\]
@@ -88,22 +116,26 @@
 	\]
 	综上，存在唯一的线性映射。
 \end{proof}
-因此只要知道线性映射在基上的值，就唯一决定了这个线性映射。
+
+\begin{remark}
+	只要知道线性映射在基上的值，就唯一决定了这个线性映射。
+\end{remark}
+
 \begin{example}{矩阵定义线性映射}{linear mapping defined by matrix}
 	$m\times n$的矩阵$A$可定义一个线性映射：
 	\begin{equation}
-		L_A:\RR^n\to\RR^m,x\mapsto Ax.
+		L_A:\FF^n\to\FF^m,\enspace x\mapsto Ax.
 	\end{equation}
 \end{example}
 \begin{theorem}{线性映射和矩阵}{linear mapping and matrix}
-	设$L:\RR^n\to\RR^m$是线性映射，则存在唯一的矩阵$A$使得$L=L_A$。
+	设$L:\FF^n\to\FF^m$是线性映射，则存在唯一的矩阵$A$使得$L=L_A$。
 \end{theorem}
 \begin{proof}
-	设$\{e_1,\ldots,e_n\}$是$\RR^n$的标准基，$\{f_1,\ldots,f_m\}$是$\RR^m$的标准基，$\forall x\in\RR^n$，有$x=x_1e_1+\cdots+x_ne_n$，则
+	设$\{e_1,\ldots,e_n\}$是$\FF^n$的标准基，$\{f_1,\ldots,f_m\}$是$\FF^m$的标准基，$\forall x\in\FF^n$，有$x=x_1e_1+\cdots+x_ne_n$，则
 	\[
 		L(x)=x_1L(e_1)+\cdots+x_nL(e_n).
 	\]
-	$L(e_i)\in\RR^m$，故可写成基的线性组合
+	$L(e_i)\in\FF^m$，故可写成基的线性组合
 	\[
 		L(e_i)=a_{1i}f_1+\cdots+a_{mi}f_m.
 	\]
@@ -125,7 +157,10 @@
 	便唯一确定了一个矩阵$A$。
 \end{proof}
 
-线性映射给出了矩阵和向量乘法的自然定义。
+\begin{remark}
+	线性映射给出了矩阵和向量乘法的自然定义。
+\end{remark}
+
 \section{线性映射的性质}
 利用线性映射和矩阵的对应，线性映射的加法和数乘等价于矩阵的加法和数乘，零映射对应零矩阵，这些都是平凡的。
 
@@ -136,7 +171,9 @@
 		\ker(F)\equiv\set{v\in V}{F(v)=0}.
 	\]
 \end{definition}
-$\ker(F)$是$V$的线性子空间。$\ker (L_A)=\N(A)$。
+\begin{corollary}
+	$\ker(F)$是$V$的线性子空间。$\ker (L_A)=\N(A)$。
+\end{corollary}
 \begin{theorem}{核和单射}{kernel and injection}
 	\begin{center}
 		$\ker(F)=\{0\}\iff F$是单射。
@@ -165,7 +202,9 @@ $\ker(F)$是$V$的线性子空间。$\ker (L_A)=\N(A)$。
 		\im(F)\equiv\set{F(v)\in W}{\forall v\in V}.
 	\]
 \end{definition}
-$\im(F)$是$W$的线性子空间。$\im(L_A)=\C(A)$。
+\begin{corollary}
+	$\im(F)$是$W$的线性子空间。$\im(L_A)=\C(A)$。
+\end{corollary}
 \begin{theorem}{核和像的关系}{kernel and image}
 	$V$是线性空间，$L:V\to W$是线性映射 
 	\begin{equation}
@@ -196,7 +235,7 @@ $\im(F)$是$W$的线性子空间。$\im(L_A)=\C(A)$。
 			x_1\\\vdots\\x_n
 		\end{bmatrix}.
 	\]
-	显然$x_B:V\to\RR^n$是线性映射，且是一个双射。
+	显然$x_B:V\to\FF^n$是线性映射，且是一个双射。
 \end{definition}
 我们可以选取$V$上的另一组基$B'=\{u_1,\ldots,u_n\}$，基变换矩阵：
 \[
@@ -238,7 +277,7 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 
 $M_{B'}^B(L)$是所有线性变换$L:V\to W$到$\dim(W)\times\dim(V)$矩阵的线性映射，并且是一个双射。
 
-特别的，当$L\equiv\id:V\to V$时， 
+特别地，当$L\equiv\id:V\to V$时， 
 \[
 	x_{B'}(v)=M_{B'}^B(\id)x_B(v).
 \]
@@ -389,9 +428,8 @@ $M_{B'}^B(L)$是所有线性变换$L:V\to W$到$\dim(W)\times\dim(V)$矩阵的�
 		\item 数乘：$(cL)(u,v)=cL(u,v);$
 		\item 零元：$O(u,v)\equiv 0.$
 	\end{compactitem}
-	因此所有多重线性函数$L:V\times V\to\RR$的集合构成一个线性空间，我们把这个空间叫做张量空间(tensor space) $V^\ast\otimes V^\ast$。
-
-	$V^\ast\otimes V^\ast$中的每一个元素$L$是二阶协变张量(covariant tensor)，即$(0,2)$张量。
+	因此这个集合构成一个线性空间，称作张量空间(tensor space) $V^\ast\otimes V^\ast$。
+	其中的每一个元素$L$是二阶协变张量(covariant tensor)，记作$(0,2)$张量。
 \end{definition}
 若$V$的一组基为$\{v_1,\ldots,v_n\}$，则$\forall L\in V^\ast\otimes V^\ast$ 
 \[
@@ -400,7 +438,7 @@ $M_{B'}^B(L)$是所有线性变换$L:V\to W$到$\dim(W)\times\dim(V)$矩阵的�
 $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 
 \begin{example}{$V^\ast\otimes V^\ast$的基}{}
-	对偶空间$V^\ast$的基$\{v^{\ast 1},\ldots,v^{\ast n}\}$满足$v^{\ast i}(v_j)=\delta^i{}_j$。继而定义张量(tensor) $v^{\ast i}\otimes v^{\ast j}$满足
+	给定对偶空间$V^\ast$的一组基$\{v^{\ast 1},\ldots,v^{\ast n}\}$满足$v^{\ast i}(v_j)=\delta^i{}_j$。继而定义张量$v^{\ast i}\otimes v^{\ast j}\in V^\ast\otimes V^\ast$满足
 	\[
 		v^{\ast i}\otimes v^{\ast j}(u,v)=v^{\ast i}(u)v^{\ast j}(v).
 	\]
@@ -450,11 +488,12 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	但并不是所有$U\otimes V$的元素都能写成$u\otimes v$的形式。
 \end{example}
 \begin{example}{张量空间$V\otimes V$}{}
-	$V\otimes V$是所有$V^\ast\times V^\ast\to\RR$的双线性函数构成的线性空间，但我们也可以用张量积定义。$V\otimes V$中的元素
+	$V\otimes V$是所有$V^\ast\times V^\ast\to\RR$的双线性函数构成的线性空间，%但我们也可以用张量积定义。
+	$\forall v\in V\otimes V$都可以写为
 	\[
 		v=\sum_{i,j}v^{ij}v_i\otimes v_j.
 	\]
-	称作二阶逆变张量(contravariant tensor)，即$(2,0)$张量。
+	称作二阶逆变张量(contravariant tensor)，记作$(2,0)$张量。
 	\tcblower
 	换基时，
 	\[
@@ -463,7 +502,7 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	逆变(contravariant)的含义：换基时分量每个指标对应的变换矩阵是基的变换矩阵的逆矩阵。
 \end{example}
 \begin{example}{混合张量$V\otimes V^\ast$}{}
-	$V\otimes V^\ast$中的元素是$(1,1)$张量
+	$(1,1)$张量$v\in V\otimes V^\ast$可以写成
 	\[
 		v=\sum_{i,j}v^i{}_jv_i\otimes v^{\ast j}.
 	\]

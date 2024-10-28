@@ -13,21 +13,36 @@
 		\item 数乘对标量的分配律\quad$(c_1+c_2)x=c_1x+c_2x.$
 	\end{compactenum}
 \end{definition}
-比如$\RR^n$和$\CC^n$都是线性空间。
-\begin{definition}{子空间}{subspace}
-	线性空间$V$的子空间(subspace)~$V_s\subset V$，且对于加法和数乘封闭：$\forall v,w\in V_s,\forall c\in\FF$
-	\[
-		v+w\in V_s,\quad cv\in V_s,
-	\]
-	即子空间中元素的线性组合都在同一个子空间。
-\end{definition}
-子空间必然包含零向量。因为若$v\in\FF$，则$v+(-v)=0\in\FF.$
 
-一般来说，线性空间$V$的子集$S$不是子空间，但我们可以从$S$中构造出子空间。
+\begin{example}
+	{}{}
+	$\RR^n$和$\CC^n$都是线性空间。
+\end{example}
+
+\begin{definition}{子空间}{subspace}
+	给定线性空间$V$的子集$V_\mathrm s\subset V$，若其对于加法和数乘封闭：$\forall v,w\in V_\mathrm s,\forall c\in\FF$
+	\[
+		v+w\in V_\mathrm s,\quad cv\in V_\mathrm s,
+	\]
+	则$V_\mathrm s$为$V$的子空间(subspace)。子空间中元素的线性组合都在同一个子空间，
+\end{definition}
+
+\begin{corollary}
+	子空间必然包含零向量。因为若$v\in V_\mathrm s$，则$v+(-v)=0\in V_\mathrm s$。
+\end{corollary}
+
+\begin{remark}
+	线性空间$V$的一个子集一般不是子空间，但我们可以通过其构造出子空间。
+\end{remark}
 
 \begin{definition}{线性扩张}{linear span}
-	$S$的线性扩张(linear span)~$\spn(S)$是$S$中向量的所有线性组合的集合。$\spn(S)$是$V$的子空间。
+	$S$的线性扩张(linear span)是$S$中向量的所有线性组合的集合，记作$\spn(S)$。
 \end{definition}
+
+\begin{corollary}
+	$V$的子集的线性扩展是$V$的子空间。
+\end{corollary}
+
 \section{线性独立、基和维度}
 \begin{definition}{线性独立}{linear independent}
 	$n$个向量$\{v_i\}$是线性独立的(linear independent)，当且仅当
@@ -38,20 +53,24 @@
 	
 	等价描述：集合中每一个向量都不能写成其它向量的线性组合。
 \end{definition}
-向量是否线性独立同数域的选择密切相关。
+\begin{remark}
+	向量是否线性独立同数域的选择有关。
+\end{remark}
 \begin{definition}{线性空间的基}{base}
 	线性空间$V$的基(base)是一组线性无关的向量$\{v_i\}$，并且他们张成整个线性空间$V$。
 \end{definition}
-$\{e_i\}$构成$\RR^n$的一组基。
+\begin{example}
+	{}{}
+	$\{e_i\}$构成$\RR^n$的一组基。
+\end{example}
 \begin{definition}{线性空间的维度}{dimension}
-	线性空间的维度(dimension)~$\dim(V)$等于任一组基中向量的个数。
+	线性空间的维度(dimension)是一组基中向量的个数，记作$\dim(V)$。
 \end{definition}
 \begin{theorem}{维度的确定性}{certainty of dimension}
 	线性空间的维度和基的选取无关。
 \end{theorem}
 \begin{proof}
 	若线性空间$V$存在两组基$\{v_1,\ldots,v_m\},\{w_1,\ldots,w_n\}$元素个数不等，不妨设$n>m$。
-	
 	因为$\{w_i\}$是基，$\{v_i\}$可以被表示为其线性组合
 	\[
 		v_i=\sum_{j=1}^nw_ja_{ji},\quad\forall i.
@@ -64,49 +83,66 @@ $\{e_i\}$构成$\RR^n$的一组基。
 	\[
 		\sum_{i=1}^ma_{ji}x_i=0,\quad\forall j,
 	\]
-	但是其未知数的个数$m>$方程的个数$n$，系数矩阵一定有自由列，所以有非零解。这与$\{v_i\}$线性无关矛盾！故$m=n.$
+	但是其未知数的个数$m>$方程的个数$n$，系数矩阵$A$一定有自由列，所以$x$有非零解。这与$\{v_i\}$线性无关矛盾！故$m=n.$
 \end{proof}
 
 \begin{theorem}{}{}
 	若$\forall v\in V_1$可以写成$V_2$中向量的线性组合，则$\dim(V_1)\leqslant\dim(V_2)$。
 \end{theorem}
-这个定理是trivial的，证明留给读者。
+
+\begin{proof}
+	这个定理是trivial的，证明留给读者。
+\end{proof}
 
 \begin{definition}{变换矩阵}{transfomation matrix}
 	不同基之间的变换相应的矩阵称为变换矩阵(transfomation matrix)。
 \end{definition}
 
 \section{矩阵\textit{A}的四个子空间}
-对于$m\times n$矩阵$A$，可以由其得到四个子空间：列空间$\C(A)$、行空间$\C(A\tp)$、零空间$\N(A)$和左零空间$\N(A\tp)$。
-\begin{definition}{列空间}{column space}
-	矩阵$A$的列空间(column space)~$\C(A)$是$A$的所有列的线性组合的集合。
-	\tcblower
-	类似的，行空间(row space)是所有行的线性组合的集合，%由于转置并不影响性质，行空间
-	可以用$\C(A\tp)$表示。
-\end{definition}
-不难验证，$\C(A)$是$\RR^n$的子空间，$\C(A\tp)$是$\RR^m$的子空间。
 
-线性方程组$Ax=b$有解等价于$b\in\C(A)$。
-\begin{definition}{零空间}{null space}
-	矩阵$A$的零空间(null space)~$\N(A)$是$Ax=0$所有解$x$构成的线性空间。
+给定矩阵$A\in\FF^{m\times n}$，可由其得到四个子空间：列空间、行空间、零空间和左零空间。
+\begin{definition}{列空间和行空间}{column space}
+	矩阵$A$的列空间(column space)是$A$的所有列的线性组合的集合，记作$\C(A)$。
 	\tcblower
-	类似的，左零空间(left null space)是$x\tp A=0$所有解$x$构成的线性空间，可用$\N(A\tp)$表示。
+	矩阵$A$的行空间(row space)是$A$的所有行的线性组合的集合，%由于转置并不影响性质，行空间
+	可用$\C(A\tp)$表示。
 \end{definition}
-$\N(A)$是$\RR^m$的子空间，$\N(A\tp)$是$\RR^n$的子空间。
-\begin{example}{子空间的基}{}
-	显然$\N(A)=\N\bigkh{\rrem(A)}$，而$\N\bigkh{\rrem(A)}$中的基可以这样给出：
-	\begin{compactitem}
-		\item 每个自由列给出一个向量，因此$\dim\bigkh{\N(A)}=\rrem(A)$中自由列的数量；
-		\item 自由列$j$对应向量$x$中，$x_j=1$，$x$对应其他自由列分量为0，对应主列$i$分量$x_i=-\rrem(A)_{ij}$
-	\end{compactitem}
+
+\begin{corollary}
+	$\C(A)$是$\FF^m$的子空间，$\C(A\tp)$是$\FF^n$的子空间。
+\end{corollary}
+
+\begin{remark}
+	线性方程组$Ax=b$有解$\iff b\in\C(A)$。
+\end{remark}
+
+\begin{definition}{零空间和左零空间}{null space}
+	矩阵$A$的零空间(null space)是所有满足$Ax=0$的$x$的集合，记作$\N(A)$。
 	\tcblower
-	$\rrem(A)$所有主列构成$\C(A)$一组基。
+	矩阵$A$的左零空间(left null space)是所有满足$x\tp A=0$的$x$的集合，可用$\N(A\tp)$表示。
+\end{definition}
+
+\begin{corollary}
+	$\N(A)$是$\FF^n$的子空间，$\N(A\tp)$是$\FF^m$的子空间。
+\end{corollary}
+
+\begin{example}{子空间的基}{}
+	$\N(A)$的基：显然$\N(A)=\N(\rref(A))$，而$\rref(A)$的每个自由列各给出一个$\N(\rref(A))$的基。若第$j$列为自由列，则其对应的向量$x$的分量为：
+	\[
+		x_i=\begin{cases}
+			\delta_{ij},&\text{第$i$列为自由列}\\
+			-\rref(A)_{ij},&\text{第$i$列为主列}
+		\end{cases}
+	\]
+	%$\dim(\rref(A))=\rref(A)$中自由列的数量；
+	\tcblower
+	$\C(A)$的基：$\rref(A)$的所有主列构成$\C(A)$的一组基。
 \end{example}
 \section{矩阵的秩、线性代数基本定理}
 \begin{definition}{矩阵的秩}{rank}
-	矩阵$A$的秩(rank)~$\rank(A)$定义为行空间或列空间的维数%\footnote{后面很快会证明行空间列空间维数相等。}：
+	矩阵$A$的秩(rank)定义为行空间的维数：%\footnote{后面很快会证明行空间列空间维数相等。}：
 	\[
-		\rank(A):=\dim\bigkh{\C(A)}=\dim\bigkh{\C(A\tp)}.
+		\rank(A):=\dim(\C(A)).
 	\]
 	进而可定义行满秩矩阵(full row rank matrix)满足
 	\[
@@ -114,15 +150,28 @@ $\N(A)$是$\RR^m$的子空间，$\N(A\tp)$是$\RR^n$的子空间。
 	\]
 	列满秩矩阵(full column rank matrix)定义类似。
 \end{definition}
-\paragraph{线性方程组$Ax=0$的完整解}考虑线性方程组$Ax=b$，通解
-\[
-	x=x_{\mathrm p}+x_{\mathrm n},
-\]
-其中$x_{\mathrm n}\in\N(A)$，特解$x_{\mathrm p}$可以从约化的增广矩阵$[\rrem(A),b']$中选取：自由列$i$对应$x_{{\mathrm p}i}=0$，若主元列$i$中的1在第$j$行，则$x_{{\mathrm p}i}=b'_j.$
-\begin{itemize}
-	\item 若$A$列满秩，$\rrem(A)$没有自由列，$\N(A)=\{0\}$，有唯一解（$b\in\C(A)$）或无解；
-	\item 若$A$行满秩，$\rrem(A)$没有零行，$\C(A)=\RR^m$，$\forall b$都有解，有唯一解或无穷多解。
-\end{itemize}
+\begin{theorem}
+	{线性方程组$Ax=0$的完整解}{}
+	线性方程组$Ax=b$的通解可以分解为特解$x_{\mathrm p}$和零解$x_{\mathrm n}$ (即满足$Ax_{\mathrm n}=0$)的和：
+	\[
+		x=x_{\mathrm p}+x_{\mathrm n},
+	\]
+	%其中$x_{\mathrm n}\in\N(A)$，
+	特解$x_{\mathrm p}$的各个分量可以由约化的增广矩阵$[\rref(A)\enspace b']$中得到
+	\[
+		x_{{\mathrm p}i}=\begin{cases}
+			0,&\text{第$i$列为自由列}\\
+			b'_j,&\text{第$i$列为主列，其主元1在第$j$行}
+		\end{cases}
+	\]
+\end{theorem}
+\begin{corollary}
+	~
+	\begin{itemize}
+		\item 若$A$列满秩，则$\rref(A)$没有自由列，$\N(A)=\{0\}$。当$b\in\C(A)$时有唯一解，否则无解；
+		\item 若$A$行满秩，则$\rref(A)$没有零行，$\C(A)=\RR^m$，$\forall b$都有解，有唯一解或无穷多解。
+	\end{itemize}
+\end{corollary}
 \paragraph{四个子空间的维度}已经知道，初等行变换就是用初等矩阵$E$左乘$A$，相应的，列变换就是$E$右乘$A$。
 \begin{theorem}{初等变换和子空间}{}
 	\begin{compactitem}
@@ -130,7 +179,7 @@ $\N(A)$是$\RR^m$的子空间，$\N(A\tp)$是$\RR^n$的子空间。
 		\[
 			Ax=0\iff EAx=0.
 		\]
-		\item $\dim\bigkh{\C(A)}=\dim\bigkh{\C(EA)}$，因为
+		\item $\dim(\C(A))=\dim(\C(EA))$，因为
 		\[
 			\{v_i\}\text{~是~}\C(A)\text{~一组基}\iff\{Ev_i\}\text{~是~}\C(EA)\text{~一组基}.
 		\]
@@ -138,35 +187,32 @@ $\N(A)$是$\RR^m$的子空间，$\N(A\tp)$是$\RR^n$的子空间。
 		\[
 			AE\text{~的每一列}\in\C(A)\text{~且~}A=(AE)E\iv\text{~的每一列}\in\C(AE)
 		\]
-		\item $\dim\bigkh{\N(A)}=\dim\bigkh{\N(AE)}$，因为可由
-		\[
-			Ax=0\iff AE(E\iv x)=0,
-		\]
-		推出
+		\item $\dim(\N(A))=\dim(\N(AE))$，因为可由$Ax=0\iff AE(E\iv x)=0$推出
 		\[
 			\{v_i\}\text{~是~}\N(A)\text{~一组基}\iff\{E\iv v_i\}\text{~是~}\N(AE)\text{~一组基}
 		\]
 	\end{compactitem}
 \end{theorem}
-即，矩阵$A$在初等变换下，$\dim\bigkh{\C(A)}$和$\dim\bigkh{\N(A)}$均不变，而行变换下$\N(A)$不变，列变换下$\C(A)$不变。
-
-因此，可以将$A$先由行变换为$\rrem(A)$，再列变换为
-\[
-	\tilde I=\begin{bmatrix}
-		I_r&0\\0&0
-	\end{bmatrix}.
-\]
-显然，$\tilde I$的行秩$\dim\bigkh{\C(\tilde I\tp)}=$列秩$\dim\bigkh{\C(\tilde I)}=r$，且
-\begin{align*}
-	\dim\bigkh{\C(\tilde I\tp)}+\dim\bigkh{\N(\tilde I)}&=n;\\
-	\dim\bigkh{\C(\tilde I)}+\dim\bigkh{\N(\tilde I\tp)}&=m.
-\end{align*}
-以上的这些量在初等变化下都不变，故
+\begin{corollary}
+	矩阵$A$在初等变换下，$\dim(\C(A))$和$\dim(\N(A))$均不变，而行变换下$\N(A)$不变，列变换下$\C(A)$不变。
+	因此，可以将$A$先由行变换为$\rref(A)$，再列变换为
+	\[
+		\tilde I=\begin{bmatrix}
+			I_r&0\\0&0
+		\end{bmatrix}\in\FF^{m\times n}.
+	\]
+	显然，$\tilde I$的行秩$\dim(\C(\tilde I\tp))=$列秩$\dim(\C(\tilde I))=r$，且
+	\begin{align*}
+		\dim(\C(\tilde I\tp))+\dim(\N(\tilde I))&=n;\\
+		\dim(\C(\tilde I))+\dim(\N(\tilde I\tp))&=m.
+	\end{align*}
+\end{corollary}
+% 以上的这些量在初等变化下都不变，故
 \begin{theorem}{线性代数基本定理·一}{fundamental theorems of linear algebra I}
 	\begin{compactenum}
-		\item 行秩=列秩：$\dim\bigkh{\C(A)}=\dim\bigkh{\C(A\tp)};$
-		\item $\dim\bigkh{\C(A\tp)}+\dim\bigkh{\N(A)}=n;$
-		\item $\dim\bigkh{\C(A)}+\dim\bigkh{\N(A\tp)}=m.$
+		\item 行秩=列秩：$\rank(A)=\dim(\C(A))=\dim(\C(A\tp));$
+		\item $\dim(\C(A\tp))+\dim(\N(A))=n;$
+		\item $\dim(\C(A))+\dim(\N(A\tp))=m.$
 	\end{compactenum}
 \end{theorem}
 \begin{corollary}

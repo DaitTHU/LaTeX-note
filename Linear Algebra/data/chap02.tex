@@ -4,9 +4,12 @@
 \[
 	\sum_{j=1}^nA_{ij}x_j=b_i.\quad i=1,2,\ldots,m.
 \]
-可以把系数写成系数矩阵$A$，即$Ax=b.$
+可以把系数写成系数矩阵$A$，即$Ax=b$。
+
 \section{消元法}
-\begin{definition}{消元法}{elimination}
+\label{sec:elimination}
+
+\begin{definition}{Gauss消元法}{Gaussian elimination}
 	消元法(elimination)就是通过对方程之间倍加消元，得到一个上三角方程组，比如
 	\[
 		\begin{equationset}
@@ -16,53 +19,63 @@
 			x-2y&=1\\8y&=8
 		\end{equationset}
 	\]
-	而主元(pivot element)就是每个方程第一个非0系数。
+	而主元(pivot element)就是每个方程的第一个非0系数。
 \end{definition}
 
-当主元数目$<$未知数时，消元法失效，若最终结果：
-\begin{compactitem}
-	\item 得到$0\neq 0$，无解；
-	\item 得到$0=0$，无穷多解。
-\end{compactitem}
-因此消元法要求方程个数与未知数个数相同。
+\begin{remark}
+	当主元数目$<$未知数时，消元法失效，若最终结果：
+	\begin{compactitem}
+		\item 得到$0\neq 0$，则方程组无解；
+		\item 得到$0=0$，则方程组有无穷多解。
+	\end{compactitem}
+	因此消元法要求：方程个数与未知数个数相同。
+\end{remark}
 
 \begin{method}{消元法算法}{elimination algorithm}
 	\begin{compactenum}
-		\item 找到第1个$x_1$系数不为0的方程并移到最上面。%$x_1$的系数就是第一个主元。
-		\item 从第2个到第$n$个方程中消去$x_1$ （方程$i-\ell_{i1}\times$\!\,方程1）。
-		\item 得到第2个到第$n$个方程构成$(n-1)$元的线性方程组，重复步骤1。
-		\item 最后结果要么是一个上三角方程组，要么失效。
-		\item 上三角的情况，从最后一个方程开始解出全部未知数。
+		\item 找到第1个$x_1$系数不为0的方程并移到最上面；%$x_1$的系数就是第一个主元。
+		\item 通过将方程1倍加，从第2个到第$n$个方程中消去$x_1$ ；
+		\item 得到的第2个到第$n$个方程构成$(n-1)$元的线性方程组，重复步骤1。
+		\item 最后结果如果是一个上三角方程组，便可从最后一个方程开始解出全部未知数。否则消元法失效。
 	\end{compactenum}
 \end{method}
 
-利用消元法，可以求矩阵的逆。
-\begin{method}{Gauss-Jordan消元法}{Gauss-Jordan elimination}
-	对增广矩阵(augmented matrix)\;$[A,I]$做消元操作：
-	\[
-		[A,I]\enspace\to\enspace[I,A\iv].
-	\]
-	就可以得到$A$的逆$A\iv$。
-\end{method}
+
+
 \section{矩阵的行变换}
-方程中，置换、倍加、倍乘同时作用在系数矩阵$A$和$b$上，因此可以写成增广矩阵$[A,b]$并对其消元。类似的，可以考虑对一般矩阵进行置换、倍加、倍乘的操作。
+方程中，置换、倍加、倍乘同时作用在系数矩阵$A$和$b$上，因此可以写成增广矩阵(augmented matrix) $[A\enspace b]$并对其消元得到$[I\enspace b']$。类似的，可以考虑对一般矩阵进行置换、倍加、倍乘的操作。
 \begin{definition}{矩阵的初等行变换}{}
 	\begin{compactitem}
-		\item 对换：交换两行
-		\item 倍加：一行乘系数加到另一行
-		\item 倍乘：一行乘以一个非零系数
+		\item 倍加(row addition)：一行乘系数加到另一行
+		\item 对换(row switching)：交换两行
+		\item 倍乘(row multiplication)：一行乘以一个非零系数
 	\end{compactitem}
 \end{definition}
-如果一个矩阵可以行变换成另一个矩阵，则它们行等价(equivalence)。
+
+\begin{remark}
+	利用Gauss-Jordan消元法%Gauss-Jordan elimination
+	对增广矩阵$[A\enspace I]$做消元操作：
+	\[
+		[A\enspace I]\enspace\to\enspace[I\enspace A\iv].
+	\]
+	就可以得到$A$的逆$A\iv$。
+\end{remark}
+
+\begin{definition}{行等价}{row-equivalent}
+	如果一个矩阵可以经过行变换得到另一个矩阵，则它们行等价(row-equivalent)。
+\end{definition}
 
 \begin{definition}{行阶梯矩阵}{row echelon matrix}
-	行阶梯矩阵(row echelon matrix)~$M$满足以下性质
+	矩阵$M$若其满足以下性质：
 	\begin{compactitem}
 		\item 如果$M$的第$i$行是0行，则下面的所有行的都是0行；
-		\item 如果$M$的第$i$行不全是0，则从左数第一个非0元素叫做主元。每个主元都在它上面行的主元的右边的列；
+		\item 如果$M$的第$i$行不全是0，则从左数第一个非0元素叫做主元。每个主元所在的列都在其上一行的主元的所在列的右边；
 		\item 同一列中在主元下面的元素都是0。
 	\end{compactitem}
-	比如，形如($\ast$表示非0项，$\cdot$任意)
+	则称矩阵$M$为行阶梯型(row echelon form)。
+	% 所有与$A$行等价的行阶梯型矩阵的集合记作$ref(A)$。
+	\tcblower
+	比如，形如(其中主元$\ast$非0，$\cdot$任意)
 	\[
 		\begin{bmatrix}
 			0&\ast&\cdot&\cdot&\cdot&\cdot&\cdot\\
@@ -73,13 +86,20 @@
 	\]
 	就是一个行阶梯矩阵，其中$\ast$是主元。
 \end{definition}
-若$A$与行阶梯矩阵$U$行等价，记作$U\in\rem(A)$。消元法就是把增广矩阵变成行阶梯矩阵的过程。显然，行阶梯矩阵并不唯一，还可以进一步化简。
+\begin{remark}
+	消元法就是把增广矩阵变成行阶梯矩阵的过程。
+\end{remark}
+
+显然，行阶梯矩阵并不唯一，还可以进一步化简。
+
 \begin{definition}{约化行阶梯矩阵}{reduced row echelon matrix}
-	约化行阶梯矩阵(reduced row echelon matrix)还满足以下额外性质
+	约化行阶梯型(reduced row echelon form)矩阵还满足以下额外性质：
 	\begin{compactitem}
 		\item 每个主元都是1；
 		\item 主元所在列只有主元非0，称为主列，其他列称为自由列。
 	\end{compactitem}
+	若$A$与约化行阶梯矩阵$U$行等价，记作$U=\rref(A)$。
+	\tcblower
 	按上面的例子，其约化行阶梯矩阵为
 	\[
 		\begin{bmatrix}
@@ -91,44 +111,58 @@
 	\]
 	第2,4,5列为主列，其余为自由列。
 \end{definition}
-若$A$与约化行阶梯矩阵$U$行等价，记作$U=\rrem(A)$。可以证明，约化行阶梯矩阵是唯一的。唯一性证明见Lay书的附录A。
-借助约化行阶梯矩阵的概念，我们可归纳出解方程组$Ax=b$的方法：
-\begin{compactitem}
-	\item 将增广矩阵$[A,b]$约化为$[\rrem(A),b']$；
-	\item 解的存在性：若$\rrem(A)$有0行，但$b'$对应行元素非0，则无解；反之有解；
-	\item 解的唯一性：若$\rrem(A)$没有自由列，则解唯一。
-\end{compactitem}
-\begin{definition}{初等矩阵}{Elementary Matrix}
-	对$m\times n$的矩阵$A$行变换，等价于用$m\times m$初等矩阵(ementary matrix)左乘$A$，初等矩阵有以下三种类型：
+\begin{theorem}
+	{}{}
+	一个矩阵的约化行阶梯矩阵是唯一的。
+\end{theorem}
+
+\begin{proof}
+	唯一性证明见Lay书的附录A。
+\end{proof}
+
+\begin{remark}
+	借助约化行阶梯矩阵的概念，我们可归纳出解方程组$Ax=b$的方法：
 	\begin{compactitem}
-		\item 倍加(row addition)：$A$的第$i$行乘一个非0常数$a$再加到第$j$行 
+		\item 将增广矩阵$[A\enspace b]$约化为$[\rref(A)\enspace b']$；
+		\item 解的存在性：若$\rref(A)$有0行，且$b'$对应行元素非0，则无解；反之有解；
+		\item 解的唯一性：若$\rref(A)$没有自由列，则解唯一。
+	\end{compactitem}
+\end{remark}
+
+\begin{definition}{初等矩阵}{Elementary Matrix}
+	对$m\times n$矩阵$A$行变换$\iff$用$m\times m$初等矩阵(elementary matrix)左乘$A$。
+	
+	初等矩阵有以下三种类型：
+	\begin{compactitem}
+		\item 倍加：$A$的第$i$行的$a$倍加到第$j$行($r_j'=ar_i+r_j$)
 		\[
-			aR_i+R_j\to R_j:\quad
+			E_{ij}(a):=
 			\begin{bmatrix}
 				\ddots&&a\\ &\ddots\\ &&\ddots
 			\end{bmatrix}=I+ae_{ij},
 		\]
-		逆：$E=I+ae_{ij}$，$E\iv=I-ae_{ij};$
-		\item 置换(row switching)：置换$A$的第$i$行和第$j$行 
+		逆：$E_{ij}(a)\iv=E_{ij}(-a)$；
+		\item 置换：置换$A$的第$i$行和第$j$行($r_i\rightleftarrows r_j$)
 		\[
-			R_i\leftrightarrow R_j:\quad
+			E_{ij}:=
 			\begin{bmatrix}
 				\ddots\\ &0&&1\\ &&\ddots\\ &1&&0\\ &&&&\ddots
 			\end{bmatrix}=I+e_{ij}+e_{ji}-e_{ii}-e_{jj},
 		\]
-		置换矩阵(permutation matrix)与自己互逆；
-		\item 倍乘(row multiplication)：$A$的第$i$行乘一个非0常数$c$
+		逆：$E_{ij}\iv=E_{ij}$；
+		%置换矩阵(permutation matrix)与自己互逆；
+		\item 倍乘：$A$的第$i$行乘一个非0常数$c$ ($r_i'=cr_i$)
 		\[
-			cR_i\to R_i:\quad
+			E_i(c):=
 			\begin{bmatrix}
 				\ddots\\ &c\\ &&\ddots
 			\end{bmatrix}=I+(c-1)e_{ii}.
 		\]
-		逆：$E=I+(c-1)e_{ii}$，$E\iv=I+(c\iv-1)e_{ii}.$
+		逆：$E_i(c)\iv=E_i(c\iv).$
 	\end{compactitem}
 \end{definition}
-消元法：用一系列初等矩阵$\{E_i\}$左乘$A$，把$A$化简成行阶梯矩阵。
-\section{\texorpdfstring{$LU$}{LU}分解}
+消元法：用一系列初等矩阵$E_1,\ldots,E_k$左乘$A$，把$A$化简成行阶梯矩阵。
+\section{LU分解}
 \begin{definition}{上/下三角矩阵}{upper/lower triangular matrix}
 	上三角矩阵(upper triangular matrix)~$U$是主对角线以下元素都是0的方阵
 	\[
@@ -136,14 +170,14 @@
 	\]
 	同理可定义下三角矩阵(lower ...)~$L$满足$L_{ij}=0,\enspace\forall i<j.$
 \end{definition}
-不难注意到，倍加矩阵和逆矩阵都同时是上/下三角矩阵。这是$LU$分解的基础。
-\begin{theorem}{$LU$分解}{LU decomposition}
-	对于方阵$A$来说，$A$的$LU$分解(lower-upper decomposition)是将$A$分解成一个下三角矩阵$L$和一个上三角矩阵$U$的乘积：
+不难注意到，倍加矩阵和逆矩阵都同时是上/下三角矩阵。这是LU分解的基础。
+\begin{theorem}{LU分解}{LU decomposition}
+	对于方阵$A$来说，$A$的LU分解(lower-upper decomposition/factorization)是将$A$分解成一个下三角矩阵$L$和一个上三角矩阵$U$的乘积：
 	\begin{equation}
 		A=LU,
 	\end{equation}
-	有时需要再乘上一个置换矩阵$PA=LU$。
-	% 如果$A$化成行阶梯矩阵$U$的过程中没有置换，则$A$有一个$LU$分解；反之，则存在一个置换矩阵$P$，使得$PA$有一个$LU$分解。
+	有时需要再乘上一个置换矩阵$PA=LU$，称为LUP分解(LU factorization with partial pivoting)。
+	% 如果$A$化成行阶梯矩阵$U$的过程中没有置换，则$A$有一个LU分解；反之，则存在一个置换矩阵$P$，使得$PA$有一个LU分解。
 \end{theorem}
 \begin{proof}
 	$U$是和$A$等价的行阶梯矩阵，$U$是上三角的。
@@ -158,6 +192,20 @@
 	也是下三角的，%进而$A=LU$；
 	$A=LU$；反之，则存在一个置换矩阵$P$，使得$PA=LU$。
 \end{proof}
-$LU$分解可以被视为Gauss消元法的矩阵形式。在数值计算上，$LU$分解经常被用来解线性方程组，且在求逆矩阵和计算行列式中都是一个关键的步骤。
+
+\begin{remark}
+	LU分解可以被视为Gauss消元法的矩阵形式。在数值计算上，LU分解经常被用来解线性方程组，且在求逆矩阵和计算行列式中都是一个关键的步骤。
+\end{remark}
+
+\begin{theorem}
+	{LDU分解}{LDU decomposition}
+	LDU分解(lower-diagonal-upper decomposition)是将矩阵写成
+	\[
+		A=LDU,
+	\]
+	其中$D$是对角矩阵，$L,U$是单位下/上三角的(unitriangular)，即其对角元均为1。
+\end{theorem}
+
+
 
 
