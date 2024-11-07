@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{thunote}[2020/09/08 Tsinghua University Note Template]
+\ProvidesClass{../thunote}[2020/09/08 Tsinghua University Note Template]
 
 \newcommand\thu@error[1]{
   \ClassError{thuthesis}{#1}{}
