@@ -1,0 +1,432 @@
+\chapter{数值积分}
+\label{chap:numerical integration}
+
+给定函数$f\in\cont[a,b]$和权函数$\rho(x)$，计算积分
+\begin{equation}
+    I(f)\equiv\int_a^bf(x)\rho(x)\d x,
+\end{equation}
+但很多情况下，我们只知道关于$f$的部分信息，不能用Newton-Leibniz公式。因此我们希望构造一种不依赖于$f$具体表达式的近似积分方法。
+
+\begin{definition}
+    {数值积分}{numerical integration}
+    给定系列积分节点$x_0,\ldots,x_n$，数值积分$\tilde I(f)$一般具有如下形式：
+    \begin{equation}
+        \tilde I(f)=\sum_{k=0}^nA_kf(x_k).
+    \end{equation}
+    其中$A_k$称为求积系数。积分方法$\tilde I$的误差为
+    \begin{equation}
+        E(f):=I(f)-\tilde I(f).
+    \end{equation}
+\end{definition}
+
+给定一种积分方法$\tilde I$，如何评价其优劣？
+
+\begin{definition}
+    {代数精确度}{}
+    给定积分法$\tilde I$，若$\forall f\in\poly_n$均有$E(f)=0$；但$\exists f\in\poly_{n+1}$使得$E(f)\neq 0$，则$\tilde I$的代数精确度为$n$。
+\end{definition}
+
+\begin{definition}
+    {插值型求积公式}{interpolation integration}
+    给定系列插值节点%(不一定全在$[a,b]$内)
+    $x_0<x_1<\cdots<x_n$，
+    由式\eqref{eqn:Lagrange polynomial}，函数$f$的$n$次插值多项式为
+    \[
+        p_n(x)=\sum_{i=0}^nf(x_i)\ell_i(x)\approx f(x),
+    \]
+    选定
+    \begin{equation}
+        I_n(f)\equiv I(p_n)=\sum_{i=0}^nI(\ell_i)f(x_i)\equiv\sum_{i=0}^nA_i^{(n)}f(x_i),
+    \end{equation}
+    其中$A_k^{(n)}$与$f$无关，称为求积系数。
+\end{definition}
+
+\section{Newton-Cotes公式}
+\label{sec:Newton-Cotes formula}
+
+考虑$\rho\equiv 1$的情形。
+
+\subsection{闭型Newton-Cotes公式}
+
+\begin{theorem}
+    {(闭型) Newton-Cotes公式}{Newton-Cotes formula}
+    取等距节点$a=x_0<x_1<\cdots<x_n=b$，节点间距$h:=(b-a)/n$，有
+    \begin{equation}
+        I_n(f)=(b-a)\sum_{k=0}^nC_k^{(n)}f(x_k),
+    \end{equation}
+    其中$C_k^{(n)}$称为求积Cotes系数，由式\eqref{eqn:Lagrange base}
+    \begin{equation}
+        C_k^{(n)}=\frac{(-1)^{n-k}}{k!(n-k)!}\frac1n\int_0^n\prod_{j\neq k}(t-j)\d t.
+    \end{equation}
+\end{theorem}
+
+\begin{remark}
+    Cotes系数不但与$f$无关，也与积分区间$[a,b]$无关。且$C_k^{(n)}=C_{n-k}^{(n)}$。
+\end{remark}
+
+\begin{example}
+    {前几个Cotes系数}{}
+    \begin{center}
+        \begin{tabular}{cccc}
+            \toprule
+            $n$&$C_k^{(n)}$\\%\quad k=0,1,\ldots,n
+            \midrule
+            1&1\quad1&/&2\\[2ex]
+            2&1\quad4\quad1&/&6\\[2ex]
+            3&1\quad3\quad3\quad1&/&8\\[2ex]
+            4&7\quad32\quad12\quad12\quad7&/&90\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+\end{example}
+
+\begin{example}
+    {$n=1$：梯形公式}{trapezoidal integration}
+    $n=1$时，只有$a,b$两个求积节点，得到梯形公式(trapezoidal)
+    \begin{equation}
+        \label{eqn:trapezoidal integration}
+        I_1(f)=\frac{b-a}2[f(a)+f(b)].
+    \end{equation}
+    % 余项$R_1(x)=f[a,b,x](x-a)(x-b)$。
+    若$f\in\cont^2[a,b]$，则$\exists\xi\in[a,b]$，积分误差
+    \begin{equation}
+        \label{eqn:trapezoidal error}
+        E_1(f)=-\frac{h^3}{12}f''(\xi).
+    \end{equation}
+    梯形公式的代数精确度为1。
+\end{example}
+
+\begin{example}
+    {$n=2$：Simpson公式}{Simpson integration}
+    $n=2$时，有$a,x_1=(a+b)/2,b$三个求积节点，得到Simpson公式：
+    \begin{equation}
+        \label{eqn:Simpson integration}
+        I_2(f)=\frac{b-a}6\biggfkh{f(a)+4f\biggkh{\frac{a+b}2}+f(b)}.
+    \end{equation}
+    % 余项$R_2(x)=f[a,x_1,b,x](x-a)(x-x_1)(x-b)$。
+    若$f\in\cont^4[a,b]$，则$\exists\xi\in[a,b]$，积分误差
+    \begin{equation}
+        \label{eqn:Simpson error}
+        E_2(f)=-\frac{h^5}{90}f^{(4)}(\xi).
+    \end{equation}
+    Simpson公式的代数精确度为3。
+\end{example}
+
+\begin{remark}
+    $n=3$时称为Simpson 3/8公式
+    \[
+        E_3(f)=-\frac{3h^5}{80}f^{(4)}(\xi),
+    \]
+    $n=4$时称为Boole公式或Cotes公式
+    \[
+        E_4(f)=-\frac{8h^7}{945}f^{(6)}(\xi).
+    \]
+\end{remark}
+
+\begin{theorem}
+    {Newton-Cotes公式的代数精确度}{}
+    当$n$为奇数时，代数精确度为$n+1$；当$n$为偶数时，代数精确度为$n$。
+\end{theorem}
+
+\subsection{开型Newton-Cotes公式}
+
+\begin{theorem}
+    {开型Newton-Cotes公式}{}
+    取等距节点$a=x_{-1}<x_0<\ldots<x_n<x_{n+1}=b$，以$x_0,\ldots,x_n$为插值节点。
+\end{theorem}
+
+\begin{example}
+    {$n=0$：中点公式}{midpoint integration}
+    $n=0$的开型Newton-Cotes公式称为中点公式：
+    \begin{equation}
+        \label{eqn:midpoint integration}
+        I_0=(b-a)f\biggkh{\frac{a+b}2}.
+    \end{equation}
+    若$f\in\cont^2[a,b]$，则$\exists\xi\in[a,b]$，积分误差
+    \begin{equation}
+        \label{eqn:midpoint error}
+        E_0(f)=\frac{h^3}3f''(\xi).
+    \end{equation}
+\end{example}
+
+\begin{remark}
+    一般来说，闭型Newton-Cotes公式的结果比相应的开型Newton-Cotes公式的结果要好。
+\end{remark}
+
+\subsection{积分法的一致稳定性}
+
+由于积分节点$f(x_i)$可能存在误差，需要考虑随着渐进参数$n$的增大，积分法的稳定性。
+
+\begin{definition}
+    {一致稳定}{}
+    对于线性积分方法$\tilde I_n$，若$\forall n\in\NN$，$\exists M>0$使得
+    \begin{equation}
+        \sum_{k=0}^n\abs{A_k^{(n)}}<M,
+    \end{equation}
+    则称$\tilde I_n$是一致稳定的。
+\end{definition}
+
+\begin{corollary}
+    若$\norm{f-g}_\infty\leq\delta$，且$\tilde I_n$一致稳定，则
+    \[
+        \abs{\tilde I_n(f)-\tilde I_n(g)}=\abs{\tilde I_n(f-g)}\leq\sum_{k=0}^n\abs{A_k^{(n)}}\norm{f-g}_\infty\leq M\delta.
+    \]
+\end{corollary}
+
+\begin{theorem}
+    {一致稳定的判定}{}
+    若$\forall n,k$均有$A_k^{(n)}>0$且$\tilde I_n$的代数精确度至少为0，则$\tilde I_n$一致稳定。
+\end{theorem}
+
+\begin{remark}
+    $n\geq 8$时，Newton-Catos积分法存在$A_k^{(n)}<0$，故不是一致稳定的。
+\end{remark}
+
+\section{复合求积公式}
+\label{sec:composite quadrature rule}
+
+对于一些函数$f$来说，低阶Newton-Catos公式很不准确，而高阶又存在数值不稳定问题。为此需要新的求积方法，一种思路是利用积分运算关于测度的可加性，将积分区间分成若干小的区间进行分片求积。
+
+\begin{definition}
+    {复合求积公式}{}
+    将积分区间$[a,b]$划分成若干子区间，再在每个子区间上采用低阶Newton-Catos公式。
+\end{definition}
+
+\begin{example}
+    {复合梯形公式}{composite trapezoidal formula}
+    取节点$a=x_0<x_1<\ldots<x_n=b$，子区间为$[x_k,x_{k+1}]$，区间间隔$h_k=x_{k+1}-x_k$，对每个子区间套用梯形积分公式\eqref{eqn:trapezoidal integration}，得到复合梯形公式为：
+    \begin{equation}
+        \label{eqn:composite trapezoidal integration}
+        \begin{aligned}
+            T_n(f)&=\sum_{k=0}^{n-1}\frac{h_k}2[f(x_k)+f(x_{k+1})]\\
+            &=\frac{h_0}2f(x_0)+\frac{h_0+h_1}2f(x_1)+\cdots+\frac{h_{n-2}+h_{n-1}}2f(x_{n-1})+\frac{h_{n-1}}2f(x_n).
+        \end{aligned}
+    \end{equation}
+    % 是一致稳定的。
+    由式\eqref{eqn:trapezoidal error}和中值定理知，$\exists\xi_k\in[x_k,x_{k+1}],\eta\in[a,b]$使得
+    \begin{equation}
+        E_n(f)=-\frac1{12}\sum_{k=0}^{n-1}h_k^3f''(\xi_k)=-\frac1{12}\sum_{k=0}^{n-1}h_k^3f''(\eta),
+    \end{equation}
+    当等距均分时，$h_0=h_1=\cdots=h_{n-1}=h=(b-a)/n$，有
+    \begin{equation}
+        E_n(f)=-\frac{b-a}{12}h^2f''(\eta).
+    \end{equation}
+\end{example}
+
+\begin{example}
+    {复合中点公式}{composite midpoint formula}
+    对每个子区间套用中点积分公式\eqref{eqn:midpoint integration}，得到复合中点公式为：
+    \begin{equation}
+        H_n(f)=\sum_{k=0}^{n-1}h_kf(x_{k+1/2}),\quad x_{k+1/2}:=\frac{x_k+x_{k+1}}2.
+    \end{equation}
+\end{example}
+
+\begin{corollary}
+    考虑每个子区间上增加一个节点$x_{k+1/2}$，得到递推公式：
+    \begin{equation}
+        T_{2n}(f)=\frac{T_n(f)+H_n(f)}2.
+    \end{equation}
+\end{corollary}
+
+\begin{example}
+    {复合Simpson公式}{composite Simpson formula}
+    对每个子区间套用Simpson积分公式\eqref{eqn:Simpson integration}，得到复合Simpson公式为：
+    \begin{equation}
+        S_{2n}(f)=\sum_{k=0}^{n-1}\frac{h_k}6[f(x_k)+4f(x_{k+1/2})+f(x_{k+1})].
+    \end{equation}
+    若最大区间长度$h:=\max_kh_k$，则$\exists\eta\in[a,b]$使得
+    \begin{equation}
+        \abs{E_{2n}(f)}\leq\frac{b-a}{2880}h^4f^{(4)}(\eta).
+    \end{equation}
+\end{example}
+
+\begin{remark}
+    复合梯形公式、复合中点公式、复合Simpson公式都是一致稳定的。
+\end{remark}
+
+\begin{corollary}
+    递推关系：
+    \begin{equation}
+        S_{2n}(f)=\frac{T_n(f)+2H_n(f)}3=\frac{4T_{2n}(f)-T_n(f)}3.
+    \end{equation}
+\end{corollary}
+
+\section{Romberg求积方法}
+\label{sec:Romberg's method}
+
+\subsection{Euler-Maclaurin求积公式}
+
+\begin{definition}
+    {Bernuoulli多项式}{}
+    Bernoulli多项式递归定义：$B_0(x)=1$，
+    \begin{equation}
+        B_k(x)=k\int_0^xB_{k-1}(t)\d t-k\int_0^1\int_0^xB_{k-1}(t)\d t\nd x
+    \end{equation}
+    Bernoulli数$B_k:=B_k(0)$。
+\end{definition}
+
+\begin{example}
+    {前几个Bernoulli多项式}{}
+    \begin{equation*}
+        \begin{aligned}
+            B_1(x)&=x-\frac12,&B_2(x)&=x^2-x+\frac16,\\
+            B_3(x)&=x^3-\frac32x^2+\frac12x,&B_4(x)&=x^4-2x^3+x^2-\frac1{30},\\
+            B_5(x)&=x^5-\frac52x^4+\frac53x^3-\frac16x,&B_6(x)&=x^6-3x^5+\frac52x^4-\frac12x^2+\frac1{42}.
+        \end{aligned}
+    \end{equation*}
+\end{example}
+
+\begin{theorem}
+    {Euler-Maclaurin求积公式}{Euler-Maclaurin integration}
+    若$f\in\cont^{2m+2}[a,b]$，则有
+    \begin{equation}
+        I(f)=T_n(f)+\sum_{\ell=1}^m\frac{B_{2\ell}}{(2\ell)!}[f^{(2\ell-1)}(a)-f^{(2\ell-1)}(b)]h^{2\ell}+r_{m+1},
+    \end{equation}
+    其中$T_n$是复合梯形公式，
+    \begin{equation}
+        r_{m+1}=-\frac{B_{2m+2}}{(2m+2)!}(b-a)f^{(2m+2)}(\eta)h^{2m+2},\quad\exists\eta\in(a,b).
+    \end{equation}
+\end{theorem}
+
+\subsection{Richardson外推方法}
+
+% \paragraph{如何缩小数值积分的误差}
+
+由Euler-Maclaurin求积公式，考虑复合梯形公式关于$h<1$的渐进级数
+\[
+    T_n(f)=I(f)+\tau_1h^2+\tau_2h^4+\cdots+\tau_mh^{2m}+\bigo(h^{2m+2}).
+\]
+当区间无限小时，$h\to0$，$T_n(f)\to I(f)$是准确积分。
+为了得到$I(f)$的一个近似，考虑
+\[
+    h_i=\frac{b-a}{n_i},\quad i=0,1,\ldots
+\]
+且$n_0<n_1<\cdots<n_m<\cdots$，记关于$h^2$的插值多项式$p_{i,j}\in\poly^{j-i}$满足插值条件：
+\[
+    p_{i,j}(h_i)=T_{n_i}(f),\enspace
+    p_{i,j}(h_{i+1})=T_{n_{i+1}}(f),\enspace
+    \ldots,\enspace
+    p_{i,j}(h_j)=T_{n_j}(f),
+\]
+由Neville算法\eqref{eqn:Neville}，有递推关系：$p_{i,i}(h)=T_{n_i}(f)$，
+\[
+    p_{i,j}(h)=\frac{(h^2-h_i^2)p_{i+1,j}(h)+(h_j^2-h^2)p_{i,j-1}(x)}{h_j^2-h_i^2},
+\]
+
+\begin{theorem}
+    {Richardson外推方法}{}
+    将外推值$p_{0,i}(0)$作为$I(f)$的一个近似，记$T_{i,j}:=p_{i,j}(0)$，有递推关系
+    \begin{equation}
+        \label{eqn:Richardson}
+        T_{i,j}=T_{i+1,j}+\frac{T_{i+1,j}-T_{i,j-1}}{n_j^2/n_i^2-1}.
+    \end{equation}
+\end{theorem}
+
+\subsection{Romberg求积方法}
+
+\begin{theorem}
+    {Romberg求积方法}{}
+    % 记$T_j^k:=T_{j-k,j}$，令$n_k=2^k$，即子区间长度$h/2^k$，式\eqref{eqn:Richardson}变为
+    % \begin{equation}
+    %     \label{eqn:Romberg}
+    %     T_i^k=T_i^{k-1}+\frac{T_i^{k-1}-T_{i-1}^{k-1}}{4^k-1}.
+    % \end{equation}
+    对区间$[a,b]$进行$n_k=2^k$等分($k=0,1,\ldots$)，利用复合梯形公式计算$T_1^k$，再递推
+    \begin{equation}
+        T_{i+1}^k=\frac{4^iT_i^{k+1}-T_i^k}{4^i-1}.
+    \end{equation}
+    直到$T_{i+1}^0$满足精度要求。
+\end{theorem}
+
+特别地，$T_1^0$为梯形公式，$T_2^k$为复合Simpson公式。
+
+% \begin{example}
+%     {$j=i+1$时的Romberg方法}{}
+%     当$j=i+1$时，有
+%     \[
+%         T_{i,i+1}=\frac{4T_{i+1,i+1}-T_{i,i}}3,
+%     \]
+%     得到Simpson公式。
+% \end{example}
+
+% \begin{theorem}
+%     {一般外推方法}{}
+
+% \end{theorem}
+
+\section{Gauss求积公式}
+\label{sec:Gauss-type quadrature rules}
+
+考虑一般的带权积分$\rho\not\equiv 1$。
+
+\begin{theorem}
+    {}{}
+    给定插值节点$x_0,\ldots,x_n$，$\ell_0,\ldots,\ell_n$是插值基函数，则当且仅当
+    \[
+        A_k^{(n)}=I(\ell_k)=\int_a^b\ell_k(x)\rho(x)\d x
+    \]
+    时$I_n(\cdot)$的代数精确度至少为$n$。
+\end{theorem}
+
+\begin{proof}
+    充分性：$\forall f\in\poly_n$，有 
+    \[
+        f(x)=\sum_{k=0}^nf(x_k)\ell_k(x),
+    \]
+    于是
+    \[
+        I(f)=\sum_{k=0}^nf(x_k)I(\ell_k)=\sum_{k=0}^nA_k^{(n)}f(x_k)=I_n(f);
+    \]
+    必要性：若$\forall f\in\poly_n$均有$I(f)=I_n(f)$，则
+    \[
+        I(f)-I_n(f)=\sum_{k=0}^n[I(\ell_k)-A_k^{(n)}]f(x_k)=0,
+    \]
+    特别地，取$f(x)=1,x,\ldots,x^n$，得到一个Vandermonde矩阵，从而$A_k^{(n)}=I(\ell_k)$。
+\end{proof}
+
+\begin{theorem}
+    {}{}
+    $n+1$个求积节点的求积公式$I_n(\cdot)$代数精确度不超过$2n+1$。
+\end{theorem}
+
+\begin{proof}
+    给定节点$x_0,\ldots,x_n$定义
+    \[
+        \omega_{n+1}(x):=\prod_{k=0}^n(x-x_k),
+    \]
+    则$I(\omega_{n+1}^2)>0=I_n(\omega_{n+1}^2)$，说明代数精确度$<2n+2$。
+\end{proof}
+
+\paragraph{如何达到最大可能代数精确度}
+
+由\eqref{eqn:Lagrange remainder}，余项
+\[
+    R_n(x)=\frac{f^{(n+1)}(\xi(x))}{(n+1)!}\omega_{n+1}(x).
+\]
+故积分误差为
+\[
+    E_n(f)=\frac1{(n+1)!}I\bigkh{f^{(n+1)}(\xi(x))\omega_{n+1}(x)}.
+\]
+若$I_n$具有$2n+1$次代数精确度，即$\forall f\in\poly_{2n+1}$均有$E_n(f)=0$，由于$f^{(n+1)}\in\poly_n$，故
+\begin{equation}
+    \omega_{n+1}\perp\poly_n.
+\end{equation}
+即$\omega_{n+1}$为$[a,b]$上权$\rho$的$n+1$次正交多项式，这可以通过选取节点得到。
+
+\begin{theorem}
+    {Gauss求积公式}{Gauss quadrature rule}
+    取$[a,b]$上权$\rho$的$n+1$次正交多项式的根$x_0,\ldots,x_n$作为求积节点，则
+    \[
+        I_n(f)=\sum_{k=0}^nI(\ell_k)f(x_k),
+    \]
+    具有$2n+1$阶代数精确度，称为Gauss公式，节点称为Gauss点。
+\end{theorem}
+
+\begin{theorem}
+    {}{}
+    Gauss求积公式是一致稳定的。
+\end{theorem}
+
+\begin{proof}
+    略
+\end{proof}
