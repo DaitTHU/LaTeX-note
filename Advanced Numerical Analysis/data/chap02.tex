@@ -6,11 +6,11 @@
 
 \begin{definition}
     {重构}{}
-    若$\{\phi_\alpha\}_{\alpha\in I}$是函数空间$X$上的一组线性无关泛函，给定某$f\in X$且$\phi_\alpha(f)$已知，希望确定$f^*\in Y\subset X$满足：
+    给定函数空间$X$上的一组线性无关泛函$\phi_1,\ldots,\phi_n$，$f\in X$且$\phi_i(f)$已知，希望确定$f^*\in Y\subset X$满足：
     \begin{equation}
-        \phi_\alpha(f^*)=\phi_\alpha(f),\quad\forall\alpha\in I.
+        \phi_i(f^*)=\phi_i(f),\quad i=1,\ldots,n.
     \end{equation}
-    $Y$称为插值空间或重构空间，$\{\phi_\alpha\}_{\alpha\in I}$为信息泛函。
+    $Y$称为插值空间或重构空间，$\{\phi_i\}$为信息泛函。
 \end{definition}
 
 % \begin{remark}
@@ -29,7 +29,7 @@
         \[
             \poly_n=\{a_0+a_1x+\cdots+a_nx^n\},
         \]
-        \item 样条函数空间
+        \item 样条函数(spline)空间：分段多项式函数；
         \item 三角多项式函数空间
         \[
             \mathcal Y_n=\{a_0+a_1\cos x+b_1\sin x+\cdots+a_n\cos nx+b_n\sin nx\}.
@@ -56,59 +56,135 @@
 
 \begin{theorem}
     {多项式插值定理}{}
-    给定$n+1$个插值点$x_0,\ldots,x_n$，存在唯一的多项式函数$P_n\in\poly_n$满足插值条件。
+    给定$n+1$个不同插值点$x_0,\ldots,x_n$，存在唯一的多项式函数$p_n\in\poly_n$满足插值条件。
 \end{theorem}
 \begin{proof}
+    存在性：
     采取直接构造的方法。
-    定义插值基函数
+    定义插值基函数$\ell_i\in\poly_n$：
     \begin{equation}
+        \label{eqn:Lagrange base}
         \ell_i(x):=\prod_{j\neq i}\frac{x-x_j}{x_i-x_j}.
     \end{equation}
-    满足：
+    易验证，$\ell_i$满足：
     \begin{equation}
         \ell_i(x_j)=\delta_{ij}.
     \end{equation}
-    则插值多项式为
+    故插值多项式为
     \begin{equation}
-        P_n(x)=\sum_{i=0}^nf(x_i)\ell_i(x).
-        \qedhere
+        \label{eqn:Lagrange polynomial}
+        p_n(x)=\sum_{i=0}^nf(x_i)\ell_i(x).
     \end{equation}
+    唯一性：
+    若还存在$q_n\in\poly_n$满足插值条件，则$p_n-q_n\in\poly_n$且有$x_0,\ldots,x_n$共$n+1$个零点，故$p_n-q_n\equiv 0$。
 \end{proof}
 
 \begin{definition}
-    {余项}{}
-    定义插值函数$P_n(x)$与原函数$f(x)$之间的差为余项
+    {余项}{remainder}
+    定义插值函数$p_n(x)$与被插值函数$f(x)$之间的差为余项(remainder)
     \begin{equation}
-        R_n(x):=f(x)-P_n(x).
+        R_n(x):=f(x)-p_n(x).
     \end{equation}
 \end{definition}
 
 \begin{theorem}
-    {}{}
-    若$f\in\cont^{n+1}[a,b]$，则$\forall x\in[a,b],\exists\xi\in(a,b)$使得
+    {中值定理与余项}{mean value theorem of remainder}
+    若$f\in\cont^{n+1}[a,b]$，则$\forall x\in[a,b],\exists\xi(x)\in(a,b)$使得
     \begin{equation}
-        R_n(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}\prod_{i=0}^n(x-x_i).
+        \label{eqn:Lagrange remainder}
+        R_n(x)=\frac{f^{(n+1)}(\xi(x))}{(n+1)!}\prod_{i=0}^n(x-x_i).
     \end{equation}
 \end{theorem}
 
+\begin{proof}
+    当$x=x_i$时，$R_n(x_i)=0$显然成立；
+    给定$x\in[a,b]$且$x\neq x_i$，定义
+    \[
+        g(t):=R_n(t)-\frac{\prod_{i=0}^n(t-x_i)}{\prod_{i=0}^n(x-x_i)}R_n(x),
+    \]
+    则$g\in\cont^{n+1}[a,b]$且在$[a,b]$上有$x_0,\ldots,x_n,x$共$n+2$个零点，在其划分的$n+1$个区间中应用Rolle定理：对应存在$\xi_1^{(1)},\ldots,\xi_{n+1}^{(1)}$使得
+    \[
+        g'(\xi_i^{(1)})=0,\quad i=0,1,\ldots,n+1,
+    \]
+    继续对$\xi_0^{(1)},\ldots,\xi_{n+1}^{(1)}$划分的$n$个区间上应用Rolle定理，直到$g^{(n+1)}(\xi^{(n+1)}_0)=0$：
+    \[
+        g^{(n+1)}(\xi^{(n+1)}_0)=f^{(n+1)}(\xi^{(n+1)}_0)-\frac{(n+1)!}{\prod_{i=0}^n(x-x_i)}R_n(x)=0.
+    \]
+    取$\xi=\xi_0^{(n+1)}$即证。
+\end{proof}
+
 \begin{corollary}
-    若$f\in\cont^{n+1}[a,b]$，则
+    若$f\in\cont^{n+1}[a,b]$，$h=\max(x_{i+1}-x_i)$则
     \begin{equation}
-        \norm{R_n}_\infty\leq\frac{\norm{f^{(n+1)}}_\infty}{4(n+1)}\max_{i,j}\abs{x_i-x_j}.
+        \norm{R_n}_\infty\leq\frac{h^{n+1}}{4(n+1)}\norm{f^{(n+1)}}_\infty.
     \end{equation}
 \end{corollary}
+
+\subsection{Lagrange插值的收敛性}
+
+当什么条件下，$n\to\infty$，误差$\norm{R_n}_\infty\to 0$？
+
+\begin{theorem}
+    {Lagrange插值收敛性的一个充分条件}{}
+    若被插值函数的任意阶导数一致有界，则误差收敛到0。
+\end{theorem}
+
+\begin{example}
+    {}{}
+    给定$f(x)=\sin x,\enspace x\in[0,\pi]$，由于$\forall x\in[0,\pi]$
+    \[
+        \abs{f^{(n+1)}(x)}\leq 1,\quad\abs{\prod_{i=0}^n(x-x_i)}\leq\pi^{n+1},
+    \]
+    故
+    \[
+        \abs{R_n(x)}\leq\frac{\pi^{n+1}}{(n+1)!}\to0,
+    \]
+    说明Lagrange插值多项式$p_n$在$[0,\pi]$上一致收敛到$f$。
+\end{example}
+
+% \begin{theorem}
+%     {误差收敛性的一个充分条件}{}
+%     记$\delta:=\abs{I(x_0,\ldots,x_n)}$，$\tilde x$为$I$的中心。如果$f$在$B(\tilde x,2\delta)$上复解析，则插值法在$I$上是收敛的。
+% \end{theorem}
+
+% \begin{proof}
+%     设$M$为$f$在$\Omega=B(\tilde x,1.9\delta)$上的上界，则
+%     \begin{equation}
+%         \frac{f^{n+1}(\xi)}{(n+1)!}=\frac1{2\pi\i}\oint_{\p\Omega}\frac{f(z)}{(z-\xi)^{n+2}}\d z,
+%     \end{equation}
+%     于是
+%     \begin{equation*}
+%         \abs{R_n(x)}\leq C\delta\frac{\delta^{n+1}}{(1.4\delta)^{n+2}}\to 0.
+%         \qedhere
+%     \end{equation*}
+% \end{proof}
+
+\begin{example}
+    {Runge现象}{Runge's phenomenon}
+    Runge函数$f(x)=\frac1{1+25x^2}$在$[-1,1]$上等距插值。
+    \begin{center}
+        \includegraphics[width=0.9\linewidth]{graphs/Runge.pdf}
+        \captionof{figure}{等距插值Runge现象}
+    \end{center}
+    显然$f(x)$在$\RR$上是解析的，但在$\CC$上存在奇点$\pm\i/5$。
+    \tcblower
+    改用$n+1$阶Chebyshev多项式零点
+    \[
+        \cos\biggkh{\frac{\pi}{2(n+1)}},\enspace
+        \cos\biggkh{\frac{3\pi}{2(n+1)}},\enspace
+        \ldots,\enspace
+        \cos\biggkh{\frac{2n+1}{2(n+1)}\pi},
+    \]
+    作为插值节点，可以消去Runge现象。
+    \begin{center}
+        \includegraphics[width=0.9\linewidth]{graphs/Rungeless.pdf}
+        \captionof{figure}{Chebyshev多项式零点插值}
+    \end{center}
+\end{example}
 
 \subsection{Newton插值公式}
 
 \iffalse
-\begin{theorem}
-    {Neville算法}{Neville algorithm}
-    给定插值数据$(x_i,f_i),\enspace i\in I$，设$J\subset I$，定义$P_J$为满足$J$中节点指标的插值条件的多项式插值函数，则$P_i(x)=f_i$，
-    \begin{equation}
-        P_{i_0i_1\cdots i_k}=\frac{(x-x_{i_0})P_{i_1\cdots i_k}(x)+(x_{i_k}-x)P_{i_0\cdots i_{k-1}}(x)}{x_{i_k}-x_{i_0}},
-    \end{equation}
-\end{theorem}
-
 \begin{table}[h]
     \centering
     \begin{tabular}{cccc}
@@ -130,35 +206,92 @@
 \fi
 
 \begin{definition}
-    {均差}{}
-    定义$f$在$x_i$上的零阶均差$f[x_i]:=f(x_i)$，在节点集$i_0,i_1,\ldots,i_k$上的$k$ - 阶均差：
+    {均差}{divided differences}
+    定义$f$在节点集$i_0,i_1,\ldots,i_k$上的$k$阶均差(divided differences)递归地定义为：
     \begin{equation}
         f[x_{i_0},\ldots,x_{i_k}]:=\frac{f[x_{i_1},\ldots,x_{i_k}]-f[x_{i_0},\ldots,x_{i_{k-1}}]}{x_{i_k}-x_{i_0}}.
     \end{equation}
+    特别地，$f$在$x_i$上的零阶均差$f[x_i]:=f(x_i)$。
 \end{definition}
+
+\begin{corollary}
+    $k$阶均差$f[x_0,\ldots,x_k]$是$f(x_0),\ldots,f(x_k)$的线性组合：
+    \begin{equation}
+        f[x_0,\ldots,x_k]=\sum_{i=0}^k\frac{f(x_i)}{\prod_{j\neq i}(x_i-x_j)}.
+    \end{equation}
+    因此，均差对于节点是对称的，即任意改变节点的顺序，均差的值不变。
+\end{corollary}
+
+% 如果$f$足够光滑，则
+% \begin{equation}
+%     \lim_{\epsilon_i\to0}f[x_0^{\epsilon_0},\ldots,x_n^{\epsilon_n}]=f[x_0,\ldots,x_n],
+% \end{equation}
 
 \begin{theorem}
     {Newton插值公式}{}
-    利用均差迭代得到    
+    利用均差迭代得到$n$次Newton插值多项式：
     \begin{equation}
-        \begin{aligned}
-            P_{i_0\cdots i_k}(x)&=P_{i_0\cdots i_{k-1}}(x)+f[x_{i_0},\ldots,x_{i_k}](x-x_{i_0})\cdots(x-x_{i_{k-1}})\\
-            &=f[x_{i_0}]+f[x_{i_0},x_{i_1}](x-x_{i_0})+\cdots\\
-            &\qqquad~+f[x_{i_0},\ldots,x_{i_k}](x-x_{i_0})\cdots(x-x_{i_{k-1}}).
-        \end{aligned}
+        p_n(x)=f(x_0)+f[x_0,x_1](x-x_0)+\cdots+f[x_0,\ldots,x_n](x-x_0)\cdots(x-x_{n-1}).
+    \end{equation}
+    其余项为
+    \begin{equation}
+        R_n(x)=f[x,x_0,\ldots,x_n](x-x_0)\cdots(x-x_n).
+    \end{equation}
+    % \begin{equation}
+    %     \begin{aligned}
+    %         P_{i_0\cdots i_k}(x)&=P_{i_0\cdots i_{k-1}}(x)+f[x_{i_0},\ldots,x_{i_k}](x-x_{i_0})\cdots(x-x_{i_{k-1}})\\
+    %         &=f[x_{i_0}]+f[x_{i_0},x_{i_1}](x-x_{i_0})+\cdots\\
+    %         &\qqquad~+f[x_{i_0},\ldots,x_{i_k}](x-x_{i_0})\cdots(x-x_{i_{k-1}}).
+    %     \end{aligned}
+    % \end{equation}
+\end{theorem}
+
+对均差形式的余项应用\thmref{thm:mean value theorem of remainder} 得到：
+
+\begin{theorem}
+    {中值定理与均差}{mean value theorem of divided differences}
+    如果$f\in\cont[a,b],\enspace x_0,\ldots,x_n\in[a,b]$，则$\exists\xi\in I(x_0,\ldots,x_n)$，
+    \begin{equation}
+        f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!}.
     \end{equation}
 \end{theorem}
 
+\begin{corollary}
+    特别地，$n$阶均差：
+    \begin{equation}
+        f[\underbrace{x,\ldots,x}_{n+1}]=\frac{f^{(n)}(x)}{n!}
+    \end{equation}
+\end{corollary}
+\begin{corollary}
+    均差的导数：
+    \begin{equation}
+        \dd xf[x_0,\ldots,x_n,x]=f[x_0,\ldots,x_n,x,x].
+    \end{equation}
+\end{corollary}
+
+\begin{theorem}
+    {Neville算法}{Neville's algorithm}
+    给定插值节点$x_0,\ldots,x_n$，定义$p_{i,j}\in\poly^{j-i}$为满足节点$x_i,\ldots,x_j$插值条件的多项式插值函数，则递归地，有$p_{i,i}(x)\equiv f(x_i)$，
+    \begin{equation}
+        \label{eqn:Neville}
+        p_{i,j}(x)=\frac{(x-x_i)p_{i+1,j}(x)+(x_j-x)p_{i,j-1}(x)}{x_j-x_i},
+    \end{equation}
+\end{theorem}
+
+\subsection{Hermite插值}
+
+现推广Lagrange插值的概念：除了要求插值函数在节点上相等外，还要求在节点上的导数值相等。
+
 \begin{definition}
     {Hermite插值问题}{}
-    给定$(\xi_i,f_i^{(k)}),\enspace i=0,1,\ldots,m,\enspace k=0,1,\ldots,n_i-1$，且
+    给定插值节点$x_0<x_1<\cdots<x_m$及插值条件
     \[
-        \xi_0<\xi_1<\cdots<\xi_m,
+        (x_i,f^{(k)}(x_i)),\enspace i=0,1,\ldots,m,\enspace k=0,1,\ldots,n_i-1
     \]
-    确定次数为$n=\sum_{i=0}^mn_i-1$的多项式函数$P$满足插值条件
-    \begin{equation}
-        P^{(k)}(\xi_i)=f_i^{(k)},\quad i=0,1,\ldots,m,\enspace k=0,1,\ldots,n_i-1.
-    \end{equation}
+    确定次数为$n=\sum_{i=0}^mn_i-1$的多项式函数$p\in\poly_n$满足插值条件。
+    % \begin{equation}
+    %     P^{(k)}(\xi_i)=f_i^{(k)},\quad i=0,1,\ldots,m,\enspace k=0,1,\ldots,n_i-1.
+    % \end{equation}
 \end{definition}
 
 \begin{theorem}
@@ -180,33 +313,15 @@
     \end{equation}
     即证。
 \end{proof}
-\begin{theorem}
-    {性质}{}
-    如果$f$足够光滑，则
-    \begin{equation}
-        \lim_{\epsilon_i\to0}f[x_0^{\epsilon_0},\ldots,x_n^{\epsilon_n}]=f[x_0,\ldots,x_n],
-    \end{equation}
-    如果$f\in\cont[a,b],\enspace x_0,\ldots,x_n\in[a,b]$，则$f[x_0,\ldots,x_n]$可以写成
-    \begin{equation}
-        f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!},\quad\xi\in I(x_0,\ldots,x_n),
-    \end{equation}
-    特别地，$n$ - 阶均差：
-    \begin{equation}
-        f[\underbrace{x,\ldots,x}_{n+1}]=\frac{f^{(n)}(x)}{n!}
-    \end{equation}
-    如果$x\neq y_0$，则
-    \begin{equation}
-        f[x,y_0,\ldots,y_n]=\frac{f[x,y_1,\ldots,y_n]-f[y_0,\ldots,y_n]}{x-y_0},
-    \end{equation}
-    导数：
-    \begin{equation}
-        \dd xf[x_0,\ldots,x_n,x]=f[x_0,\ldots,x_n,x,x].
-    \end{equation}
-\end{theorem}
+
 
 \begin{example}
-    {}{}
-    计算$f[a,a,b,b]$：
+    {均差表}{divided difference table}
+    给定$f(a),f'(a),f(b),f'(b)$，则插值函数
+    \[
+        p_3(x)=f(a)+f[a,a](x-a)+f[a,a,b](x-a)^2+f[a,a,b,b](x-a)^2(x-b).
+    \]
+    计算到$f[a,a,b,b]$，给出均差表：
     \begin{center}
         \begin{tabular}{cccc}
             \toprule
@@ -216,92 +331,51 @@
                 $f(a)$\\$f(a)$\\$f(b)$\\$f(b)$
             \end{tabular} & 
             \begin{tabular}[c]{@{}l@{}}
-                $f[a,a]=f'(a)$\\$f[a,b]=\frac{f(a)-f(b)}{a-b}$\\$f[b,b]=f'(b)$
+                $f[a,a]=f'(a)$\\[.5ex]$f[a,b]=\frac{f(b)-f(a)}{b-a}$\\$f[b,b]=f'(b)$
             \end{tabular} & 
             \begin{tabular}[c]{@{}c@{}}
-                $f[a,a,b]=\frac{f[a,a]-f[a,b]}{a-b}$\\$f[a,b,b]=\frac{f[a,b]-f[b,b]}{a-b}$
+                $f[a,a,b]=\frac{f[a,b]-f[a,a]}{b-a}$\\[1ex]
+                $f[a,b,b]=\frac{f[b,b]-f[a,b]}{b-a}$
             \end{tabular} & $f[a,a,b,b]=\cdots$ \\
             \bottomrule
         \end{tabular}
     \end{center}
 \end{example}
 
-\begin{theorem}
-    {Hermite插值问题的Newton公式}{}
-    插值多项式为
-    \begin{equation}
-        P(x)=f[x_0]+f[x_0,x_1](x-x_0)+\cdots+f[x_0,\ldots,x_n](x-x_0)\cdots(x-x_{n-1}).
-    \end{equation}
-    其中$x_0,\ldots,x_n$是以下序列的任意置换
-    \[
-        \underbrace{\xi_0,\ldots,\xi_0}_{n_0},\ldots,\underbrace{\xi_m,\ldots,\xi_m}_{n_m}.
-    \]
-\end{theorem}
+% \begin{theorem}
+%     {Hermite插值问题的Newton公式}{}
+%     插值多项式为
+%     \begin{equation}
+%         P(x)=f[x_0]+f[x_0,x_1](x-x_0)+\cdots+f[x_0,\ldots,x_n](x-x_0)\cdots(x-x_{n-1}).
+%     \end{equation}
+%     其中$x_0,\ldots,x_n$是以下序列的任意置换
+%     \[
+%         \underbrace{\xi_0,\ldots,\xi_0}_{n_0},\ldots,\underbrace{\xi_m,\ldots,\xi_m}_{n_m}.
+%     \]
+% \end{theorem}
 
-\begin{theorem}
-    {误差函数}{}
-    如果$f\in\diff^{n+1}$，则对每个$\bar x$，$\exists\xi\in I[x_0,\ldots,x_n,\bar x]$使得
-    \begin{equation}
-        R(\bar x)=f(\bar x)-P_{0\cdots n}(\bar x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)\cdots(x-x_n).
-    \end{equation}
-\end{theorem}
 
-\begin{proof}
-    设$Q(t)$是$x_0,\ldots,x_n,\bar x$的插值多项式，则
-    \[
-        Q(t)-P_{0\cdots n}(t)=f[x_0,\ldots,x_n,\bar x](t-x_0)\cdots(t-x_n),
-    \]
-    令$t=\bar x$即得。
-\end{proof}
 
-当什么条件下，$n\to\infty$，误差$R\to 0$？
-\begin{theorem}
-    {误差收敛性的一个充分条件}{}
-    记$\delta:=\abs{I(x_0,\ldots,x_n)}$，$\tilde x$为$I$的中心。如果$f$在$B(\tilde x,2\delta)$上复解析，则插值法在$I$上是收敛的。
-\end{theorem}
-
-\begin{proof}
-    设$M$为$f$在$\Omega=B(\tilde x,1.9\delta)$上的上界，则
-    \begin{equation}
-        \frac{f^{n+1}(\xi)}{(n+1)!}=\frac1{2\pi\i}\oint_{\p\Omega}\frac{f(z)}{(z-\xi)^{n+2}}\d z,
-    \end{equation}
-    于是
-    \begin{equation*}
-        \abs{R(\bar x)}\leq C\delta\frac{\delta^{n+1}}{(1.4\delta)^{n+2}}\to 0.
-        \qedhere
-    \end{equation*}
-\end{proof}
-
-\begin{example}
-    {Runge现象}{}
-    $f(x)=\frac1{1+25x^2}$在$[-1,1]$上等距插值。
-    \begin{center}
-        \includegraphics[width=0.8\linewidth]{graphs/Runge.pdf}
-    \end{center}
-    显然$f(x)$在$\RR$上是解析的，但在$\CC$上存在奇点$\pm\i/5$。
-\end{example}
 
 \section{分段插值}
 \label{sec:piecewise interpolation}
 
+\subsection{分段线性插值}
+
 \begin{definition}
     {分段线性插值}{}
-    设
-    \[
-        a=x_0<x_1<\cdots<x_n=b,
-    \]
-    给定$f(x_i)$，找插值函数$\varphi$满足：
+    给定节点$a=x_0<x_1<\cdots<x_n=b$及$f(x_i)$，求插值函数$\varphi$满足：
     \begin{itemize}
-        \item $\varphi\in\cont[a,b];$
-        \item $\varphi$在$[x_i,x_{i+1}]$上是线性函数。
-        \item $\varphi(x_i)=f(x_i);$
+        \item $\varphi\in\cont[a,b]$是连续函数；
+        \item $[x_i,x_{i+1}]$上$\varphi\in\poly_1$是线性函数；
+        \item $\varphi(x_i)=f(x_i)$。
     \end{itemize}
     满足前两个性质的函数组成插值空间$\Phi$，且$\dim(\Phi)=n+1$。
 \end{definition}
 
 \begin{theorem}
     {}{}
-    插值函数是存在且唯一的。
+    分段线性插值函数是存在且唯一的。
 \end{theorem}
 
 \begin{proof}
@@ -321,19 +395,48 @@
 \end{proof}
 
 \begin{theorem}
-    {收敛性}{}
+    {误差收敛性}{}
     定义$h:=\max_i(x_i-x_{i-1})$，
     \begin{itemize}
-        \item 如果$f\in\cont[a,b]$，则$\lim_{h\to0}\norm{f-\varphi}_\infty=0;$
-        \item 如果$f\in\cont^1[a,b]$，则$\norm{f-\varphi}_\infty\leq 2\norm{f'}_\infty h;$
-        \item 如果$f\in\cont^2[a,b]$，则$\norm{f-\varphi}_\infty\leq \norm{f''}_\infty h^2/8;$
+        \item 如果$f\in\cont[a,b]$，则$\lim_{h\to0}\norm{f-\varphi}_\infty=0$；
+        \item 如果$f\in\cont^1[a,b]$，则$\norm{f-\varphi}_\infty\leq 2h\norm{f'}_\infty$；
+        \item 如果$f\in\cont^2[a,b]$，则$\norm{f-\varphi}_\infty\leq h^2/8\cdot\norm{f''}_\infty$。
     \end{itemize}
 \end{theorem}
 
-\begin{definition}
-    {分片三次Hermite插值}{}
+\subsection{分段三次Hermite插值}
 
+\begin{definition}
+    {分段三次Hermite插值}{}
+    给定节点$a=x_0<x_1<\cdots<x_n=b$及$f(x_i),f'(x_i)$，求插值函数$\varphi$满足：
+    \begin{itemize}
+        \item $\varphi\in\cont^1[a,b]$连续可导(即$\varphi'$也连续)；
+        \item $[x_i,x_{i+1}]$上$\varphi\in\poly_3$是三次多项式函数；
+        \item $\varphi(x_i)=f(x_i),\enspace\varphi'(x_i)=f'(x_i)$。
+    \end{itemize}
+    满足前两个性质的函数组成插值空间$\Phi$，且$\dim(\Phi)=2n+2$。
 \end{definition}
+
+定义插值基函数，在$[x_i,x_{i+1}]$上
+\begin{subequations}
+    \begin{align}
+        \alpha_i(x)&=\biggkh{1+2\frac{x-x_i}{x_{i+1}-x_i}}\biggkh{\frac{x-x_{i+1}}{x_i-x_{i+1}}}^2,\\
+        \alpha_{i+1}(x)&=\biggkh{1+2\frac{x-x_{i+1}}{x_i-x_{i+1}}}\biggkh{\frac{x-x_i}{x_{i+1}-x_i}}^2,\\
+        \beta_i(x)&=(x-x_i)\biggkh{\frac{x-x_{i+1}}{x_i-x_{i+1}}}^2,\\
+        \beta_{i+1}(x)&=(x-x_{i+1})\biggkh{\frac{x-x_i}{x_{i+1}-x_i}}^2,
+    \end{align}
+\end{subequations}
+满足
+\begin{subequations}
+    \begin{alignat}{2}
+        \alpha_i(x_j)&=\delta_{ij},\quad&\alpha_i'(x_j)&=0,\\
+        \beta_i(x_j)&=0,&\beta_i'(x_j)&=\delta_{ij}.
+    \end{alignat}
+\end{subequations}
+则
+\begin{equation}
+    \varphi(x)=\sum_{i=1}^nf(x_i)\alpha_i(x)+f'(x)\beta_i(x).
+\end{equation}
 
 \section{Fourier插值}
 \label{sec:Fourier interpolation}
@@ -369,9 +472,10 @@
 \end{definition}
 
 \begin{theorem}
-    {}{}
+    {Fourier插值}{Fourier interpolation}
     存在唯一的相多项式满足Lagrange插值条件且
     \begin{equation}
+        \label{eqn:Fourier betaj}
         \beta_j=\frac1N\sum_{k=1}^{N-1}f(x_k)\omega^{-kj},\quad\omega=\e{2\pi\i/N}.
     \end{equation}
     对应三角多项式为
@@ -382,6 +486,20 @@
         \end{align}
     \end{subequations}
 \end{theorem}
+
+\begin{definition}
+    {离散Fourier变换}{discrete Fourier transform}
+    式\eqref{eqn:Fourier betaj}中定义了一个线性变换，变换矩阵为
+    \begin{eqnarray}
+        \begin{bmatrix}
+            1&1&1&\cdots&1\\
+            1&\omega&\omega^2&\cdots&\omega^{N-1}\\
+            1&\omega^2&(\omega^2)^2&\cdots&(\omega^2)^{N-1}\\
+            \vdots&\vdots&\vdots&\ddots&\vdots&\\
+            1&\omega^{N-1}&(\omega^{N-1})^2&\cdots&(\omega^{N-1})^{N-1}
+        \end{bmatrix}
+    \end{eqnarray}
+\end{definition}
 
 
 

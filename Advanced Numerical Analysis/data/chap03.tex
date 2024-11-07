@@ -14,21 +14,26 @@
     \begin{itemize}
         \item $\Phi$一般是简单函数集合，如多项式函数。但$\Phi$未必是线性空间。
         \item $f\notin\Phi$，且关于$f$的信息可能有误差；
-        \item 近似程度的度量：平方逼近$\norm\cdot_2$和一致逼近$\norm\cdot_\infty$。
+        \item 近似程度的度量：平方(squares)逼近$\norm\cdot_2$和一致(uniform)逼近$\norm\cdot_\infty$。
     \end{itemize}
 \end{remark}
 
 \section{最佳平方逼近}
 \label{sec:optimal squares approximation}
 
-最佳平方逼近中，$\norm\cdot_2$是由$\cont[a,b]$的某个内积$\inp\cdot\cdot$诱导出的范数。
-设$\varphi_0,\ldots,\varphi_n$构成$\Phi$的一组基，则
+\subsection{法方程}
+
+最佳平方逼近中，$\norm\cdot_2$是由$\cont[a,b]$的某个内积$\inp\cdot\cdot$诱导出的范数：
+\[
+    \norm f_2:=\sqrt{\inp ff}.
+\]
+给定$\Phi$的一组基$\varphi_0,\ldots,\varphi_n$，则
 \[
     \varphi=\sum_{i=0}^na_i\varphi_i,
 \]
 实函数情况，简单计算得到
 \[
-    \norm{f-\varphi}_2^2=\sum_{i,j}\inp{\varphi_i}{\varphi_j}a_ia_j-2\sum_{i=1}^n\inp{\varphi_i}fa_i+\inp ff.
+    \norm{f-\varphi}_2^2=\sum_{i,j=0}^n\inp{\varphi_i}{\varphi_j}a_ia_j-2\sum_{i=0}^n\inp{\varphi_i}fa_i+\inp ff.
 \]
 是一个关于$a_0,\ldots,a_n$的二次函数，故Hess矩阵
 \begin{equation}
@@ -40,13 +45,21 @@
 \end{equation}
 为对称正定矩阵，因而$\norm{f-\varphi}_2^2$有最小值。由
 \begin{equation*}
-    \pp{a_i}\norm{f-\varphi}_2^2=2\fkh{\sum_{j=1}^n\inp{\varphi_i}{\varphi_j}a_j-\inp{\varphi_i}f}=0,
+    \pp{a_i}\norm{f-\varphi}_2^2=2\fkh{\sum_{j=0}^n\inp{\varphi_i}{\varphi_j}a_j-\inp{\varphi_i}f}=0,
 \end{equation*}
 得到
 \begin{theorem}
     {法方程}{}
     \begin{equation}
-        \sum_{j=1}^n\inp{\varphi_i}{\varphi_j}a_j=\inp{\varphi_i}f.
+        \begin{bmatrix}
+            \inp{\varphi_0}{\varphi_0}&\cdots&\inp{\varphi_0}{\varphi_n}\\
+            \vdots&\ddots&\vdots\\
+            \inp{\varphi_n}{\varphi_0}&\cdots&\inp{\varphi_n}{\varphi_n}
+        \end{bmatrix}\begin{bmatrix}
+            a_0\\\vdots\\a_n
+        \end{bmatrix}=\begin{bmatrix}
+            \inp{\varphi_0}f\\\vdots\\\inp{\varphi_n}f
+        \end{bmatrix}.
     \end{equation}
 \end{theorem}
 
@@ -57,3 +70,217 @@
     \end{equation}
 \end{remark}
 
+\begin{example}
+    {}{}
+    给定$\Phi=\spn(1,x^2)$，求$f=x$在$[0,1]$上的最佳平方逼近。
+    \[
+        \begin{bmatrix}
+            \inp11&\inp1{x^2}\\
+            \inp{x^2}1&\inp{x^2}{x^2}
+        \end{bmatrix}\begin{bmatrix}
+            a\\b
+        \end{bmatrix}=\begin{bmatrix}
+            \inp1x\\\inp{x^2}x
+        \end{bmatrix}
+    \]
+    解得$\varphi^*(x)=a+bx^2$的系数
+    \[
+        \begin{bmatrix}
+            a\\b
+        \end{bmatrix}=\begin{bmatrix}
+            1&1/3\\1/3&1/5
+        \end{bmatrix}\iv\begin{bmatrix}
+            1/2\\1/4
+        \end{bmatrix}=\begin{bmatrix}
+            3/16\\15/16
+        \end{bmatrix}.
+    \]
+\end{example}
+
+\subsection{正交多项式}
+
+\begin{definition}
+    {Hilbert矩阵}{Hilbert matrix}
+    考虑$f\in\cont[0,1]$在$\poly_n$上的最佳平方逼近，$1,x,\ldots,x^n$作为基，法方程的系数矩阵为Hilbert矩阵
+    \begin{equation}
+        H_n:=\begin{bmatrix}
+            1&1/2&\cdots&1/(n+1)\\
+            1/2&1/3&\cdots&1/(n+2)\\
+            \vdots&\vdots&\ddots&\vdots\\
+            1/(n+1)&1/(n+2)&\cdots&1/(2n+1)
+        \end{bmatrix}
+    \end{equation}
+    这个矩阵是严重病态的。
+\end{definition}
+
+\begin{remark}
+    解决方法：将$\poly_n$的基改进为正交基$\varphi_0,\ldots,\varphi_n$，即
+    \[
+        \inp{\varphi_i}{\varphi_j}=\norm{\varphi_i}_2^2\delta_{ij},
+    \]
+    则系数矩阵是对角的，
+    \begin{equation}
+        \varphi^*=\sum_{i=0}^n\frac{\inp f{\varphi_i}}{\norm{\varphi_i}_2^2}\varphi_i.
+    \end{equation}
+\end{remark}
+
+\begin{definition}
+    {广义Fourier级数}{}
+    给定$\cont[a,b]$上的一组正交归一函数$\varphi_0,\varphi_1,\ldots$，$f$在$\Phi_n:=\spn(\varphi_0,\ldots,\varphi_n)$中的最佳平方逼近为
+    \[
+        f_n=\sum_{i=0}^na_i\varphi_i,\quad a_i:=\inp f{\varphi_i},
+    \]
+    由于
+    \[
+        \sum_{i=0}^n\abs{a_i}^2=\norm{f_n}_2^2\leq\norm f_2^2,\implies\sum_{i=0}^\infty\abs{a_i}^2<\infty,
+    \]
+    故$f_\infty$收敛且$f_\infty\in\overline{\inp{\cont[a,b]}{\norm\cdot_2}}$，称为广义Fourier级数。
+\end{definition}
+
+\begin{remark}
+    若$\norm\cdot_2$是权系数$\rho$的内积$\inp\cdot\cdot_\rho$诱导的范数，则
+    \begin{equation}
+        \overline{\inp{\cont[a,b]}{\norm\cdot_2}}=\mathcal L_\rho^2[a,b]
+    \end{equation}
+\end{remark}
+
+\begin{theorem}
+    {}{}
+    给定有界闭区间$[a,b]$，若$f\in\cont[a,b]$在$\poly_n$上的最佳平方逼近为$f_n$，则
+    \begin{equation}
+        \lim_{n\to\infty}\norm{f-f_n}_2=0.
+    \end{equation}
+    这说明多项式函数是完备的。
+\end{theorem}
+
+% \begin{proof}
+%     由
+%     \[
+%         \norm{f-f_n}_2^2=\norm f_2^2-\norm{f_n}_2^2=\norm f_2^2-\sum_{i=0}^n\abs{a_i}^2
+%     \]
+% \end{proof}
+
+\begin{theorem}
+    {Legendre多项式作最佳平方逼近}{}
+    若内积为$[-1,1]$上的$\rho\equiv 1$内积，若$f\in\cont^2[-1,1]$，则$\forall\epsilon>0$，$\exists N>0$使得$\forall n\geq N$
+    \begin{equation}
+        \norm{f-f_n}_\infty\leq\frac{\epsilon}{\sqrt n}.
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}
+    {零平方误差最小}{}
+    在所有首项系数为1的$n$次多项式中，Legendre多项式$P_n(x)$在$[-1,1]$与0的平方误差最小。
+\end{theorem}
+
+\begin{proof}
+    $\forall f\in\poly_n$且首项系数为1，有
+    \[
+        f=P_n+a_{n-1}P_{n-1}+\cdots+a_0P_0,
+    \]
+    则
+    \[
+        \norm f_2^2=\norm{P_n}_2^2+\abs{a_{n-1}}^2\norm{P_{n-1}}_2^2+\cdots+\abs{a_0}^2\norm{P_0}_2^2\geq\norm{P_n}_2^2.
+        \qedhere
+    \]
+\end{proof}
+
+\section{最小二乘法}
+\label{sec:least squares algorithm}
+
+给定$\Phi=\spn\{\varphi_0,\ldots,\varphi_n\}$
+
+\begin{definition}
+    {Haar条件}{Haar condition}
+    $\forall \varphi_i\in\Phi$且$\varphi_i\neq 0$在$x_0,\ldots,x_m$上不同时为0，则称$\Phi$满足Haar条件。
+\end{definition}
+
+\begin{example}
+    {}{}
+    若$m\geq n$，则$\poly_n$在$x_0,\ldots,x_m$上满足Haar条件。
+\end{example}
+
+\section{最佳一致逼近}
+\label{sec:optimal uniform approximation}
+
+考虑用多项式函数进行最佳一致逼近：
+\begin{equation}
+    \varphi^*=\arg\inf_{\varphi\in\poly_n}\norm{f-\varphi}_\infty.
+\end{equation}
+
+\begin{definition}
+    {}{}
+    称$\norm{f-p_n}_\infty$为$p_n$关于$f$的偏差。
+    若$\exists x$使得
+    \begin{equation}
+        f(x)-p_n(x)=\pm\norm{f-p_n}_\infty.
+    \end{equation}
+    则称$x$为$p_n$关于$f$的正(负)偏差点。
+\end{definition}
+
+\begin{theorem}
+    {最佳一致逼近的存在性}{}
+    $\poly_n$关于$f\in\cont[a,b]$的最小偏差可以达到。
+\end{theorem}
+
+\begin{proof}
+    记$\varphi(f,p_n)=\norm{f-p_n}_\infty$，则$\varphi(f,\cdot)$是关于$p_n$系数$a_0,\ldots,a_n$的连续函数，且$\varphi(0;p_n)$在单位球面$a_0^2+\cdots+a_n^2=1$上达到正最小值$\mu$。
+    \[
+        \norm{f-p_n}_\infty\geq\norm{p_n}_\infty-\norm f_\infty\geq\mu\sqrt{\sum_{i=0}^na_i^2}-\norm f_\infty.
+    \]
+    当
+    \[
+        \sum_{i=0}^na_i^2\geq\frac4{\mu^2}\norm f_\infty^2
+    \]
+    时，$\norm{f-p_n}_\infty\geq\norm f_\infty$，故最佳一致逼近存在。
+\end{proof}
+
+\begin{lemma}
+    最佳一致逼近多项式$p_n^*$关于$f$的正负偏差点同时存在。
+\end{lemma}
+
+\begin{definition}
+    {Chebyshev交错点}{}
+    若$x_1,\ldots,x_m$是$p_n$关于$f$的偏差点且轮流为正负，则称其为一组Chebyshev交错点。
+\end{definition}
+
+\begin{theorem}
+    {}{}
+    $p_n^*$是$f$的最佳一致逼近多项式$\iff$存在$n+2$个Chebyshev交错点。
+\end{theorem}
+
+\begin{corollary}
+    最佳一致逼近多项式是一个Lagrange插值多项式，其插值点在$(a,b)$内。
+\end{corollary}
+
+\begin{theorem}
+    {最佳一致逼近的唯一性}{}
+    最佳一致逼近多项式是唯一的。
+\end{theorem}
+
+\begin{theorem}
+    {零偏差最小}{}
+    在所有首项系数为1的$n$次多项式中，Chebyshev多项式$T_n(x)$在$[-1,1]$与0的偏差最小。
+\end{theorem}
+
+\begin{example}
+    {最佳一次一致逼近多项式的求法}{}
+    给定$f\in\cont^2[a,b]$且$f''(x)\neq 0$，求$f$的最佳一次一致逼近多项式$g=a_0+a_1x$。
+
+    由$f''$恒正或恒负可知$f-g$在$(a,b)$上的极值点是唯一的，记作$x^*$，
+    \[
+        f'(x^*)-g'(x^*)=0,
+    \]
+    且$\{a,x^*,b\}$是一组Chebyshev交错点，故
+    \[
+        f(a)-g(a)=-[f(x^*)-g(x^*)]=f(b)-g(b)
+    \]
+    可确定$a_1,x^*,a_0$：
+    \[
+        \begin{cases}
+            a_1=\frac{f(b)-f(a)}{b-a},\\
+            x^*={f'}\iv(a_0),\\
+            a_0=\frac12[f(a)+f(x^*)-a_1(a+x^*)]
+        \end{cases}
+    \]
+\end{example}

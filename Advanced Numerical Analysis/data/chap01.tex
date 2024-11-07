@@ -4,6 +4,8 @@
 \section{线性空间}
 \label{sec:linear space}
 
+\subsection{线性空间}
+
 \begin{definition}
     {线性空间}{linear space}
     给定一个数域$\FF$ (本笔记只涉及实数域$\RR$和复数域$\CC$)和一个集合$V$，
@@ -29,23 +31,21 @@
     {线性空间的例子}{}
     \begin{itemize}
         \item $\cont^n[a,b]$：全体在$[a,b]$上$n$次导数连续(continuous)的函数构成的集合。
-        \item $\diff^n[a,b]$：全体在$[a,b]$上$n$次可导(differentiable)的函数构成的集合。
-        \item $\poly_n$：$n$次多项式函数空间。
-        % \[
-        %     \poly_n=\set{a_0+a_1x+\cdots+a_nx^n}{a_i\in\FF}
-        % \]
-        % 构成一个线性空间，其加法为多项式加法。
-        \item 正实数$\RR_{>0}$构成一个线性空间，其加法为实数乘法，数乘为幂次。
+        % \item $\diff^n[a,b]$：全体在$[a,b]$上$n$次可导(differentiable)的函数构成的集合。
+        \item $\poly_n=\set{a_0+a_1x+\cdots+a_nx^n}{a_i\in\FF}$：$n$次多项式函数空间。
+        % \item 正实数$\RR_{>0}$构成一个线性空间，其加法为实数乘法，数乘为幂次。
     \end{itemize}
 \end{example}
 
+\subsection{线性空间的基和维度}
+
 \begin{definition}
     {线性无关}{linear independent}
-    设$V$是线性空间，其中$n$个元素$x_1,\ldots,x_n\in V$，若%其线性组合(linear combination)
+    设$V$是线性空间，给定其中$n$个元素$x_1,\ldots,x_n\in V$，若%其线性组合(linear combination)
     \begin{equation}
-        a_1x_1+\cdots+a_nx_n=0,
+        a_1x_1+\cdots+a_nx_n=0,\iff a_1=\cdots=a_n=0,
     \end{equation}
-    只有零解，则称$x_1,\ldots,x_n$线性无关(linear independent)。反之，称为线性相关。
+    则称$x_1,\ldots,x_n$线性无关(linear independent)。反之，称为线性相关。
 \end{definition}
 
 \begin{example}
@@ -61,7 +61,7 @@
 \end{example}
 
 \begin{definition}
-    {维度和基}{dimension, base}
+    {线性空间的基和维度}{dimension, base}
     给定线性空间$V$中的一组元素$\{x_1,\ldots,x_n\}$，若$\forall x\in V$都可以被唯一表示为其线性组合
     \begin{equation}
         x=a_1x_1+\cdots+a_nx_n,
@@ -85,34 +85,40 @@
 \section{范数}
 \label{sec:norm}
 
+\subsection{度量空间}
+
 \begin{definition}
     {度量空间}{metric space}
-    设$M$是一个集合，设映射$d:M\times M\to\RR$满足：
+    给定集合$M$，若映射$d:M\times M\to\RR$满足：
     \begin{itemize}
-        \item $d(x,y)\geq 0$，且$d(x,y)=0\iff x=y$；
-        \item $d(x,y)=d(y,x)$；
+        \item 正定性：$d(x,y)\geq 0$，且$d(x,y)=0\iff x=y$；
+        \item 交换性：$d(x,y)=d(y,x)$；
         \item 三角不等式：$d(x,y)+d(y,z)\geq d(x,z)$。
     \end{itemize}
-    则称$(M,d)$构成一个度量空间(metric space)或距离空间，$d$为度量函数或距离函数。
+    则称$M$是一个度量空间(metric space)或距离空间，$d$为度量函数或距离函数。
 \end{definition}
 
 \begin{definition}
-    {Cauchy序列}{}
+    {Cauchy序列}{Cauchy sequence}
     对于序列$\{x_n\}$，若$\forall\varepsilon>0,\exists N\in\NN$满足：
     \begin{equation}
-        d(x_n,x_{n+p})<\varepsilon,\quad\forall p\in\NN,\forall n>N,
+        d(x_m,x_n)<\varepsilon,\quad\forall m,n>N,
     \end{equation}
-    则称$\{x_n\}$为Cauchy序列。
+    则称$\{x_n\}$为Cauchy序列(Cauchy sequence)。
 \end{definition}
 
 \begin{definition}
-    {度量空间的完备性}{}
-    若对任意$M$中的Cauchy序列$\{x_n\}$，$\exists x\in M$满足：
+    {度量空间的完备性}{completeness}
+    若$\forall$ Cauchy序列$\{x_n\}\subset M$，$\exists x\in M$满足：
     \[
-        \lim_{n\to\infty}d(x_n,x)=0,
+        \lim_{n\to\infty}d(x_n,x)=0,\iff\lim_{n\to\infty}x_n=x,
     \]
-    则称度量空间$M$是完备的。
+    则称度量空间$M$是完备的(complete)。
 \end{definition}
+
+\begin{remark}
+    不严谨地说，完备性要求：所有收敛的序列都会收敛到$M$中。%即$M$中没有“缺失点”。
+\end{remark}
 
 \begin{example}
     {实数公理}{}
@@ -125,37 +131,43 @@
 \end{theorem}
 
 \begin{proof}
-    构造性证明，令$\tilde M$是$M$中所有Cauchy序列$x=\{x_n\}$的集合。在$\tilde M$中定义等价关系$\sim$：
+    构造性证明，令$\tilde M$是$M$中所有Cauchy序列$\tilde x=\{x_n\}$的集合。在$\tilde M$中定义等价关系$\sim$：
     \[
-        x\sim y\iff\lim_{n\toinf}d(x_n,y_n)=0.
+        \tilde x\sim\tilde y\iff\lim_{n\toinf}d(x_n,y_n)=0.
     \]
-    令$[x]=\nset{y}{x\sim y}$表示$x$的等价类，$\hat M=\nset{[x]}{x\in\tilde M}$是$\tilde M$中所有元素的等价类构成的集合。定义$\hat M$上的度量为
+    令$[\tilde x]=\nset{\tilde y}{\tilde x\sim\tilde y}$表示$\tilde x$的等价类，$\hat M=\nset{[\tilde x]}{\tilde x\in\tilde M}$是$M$中所有Cauchy序列的等价类构成的集合。定义$\hat M$上的度量为
     \[
-        \hat d([x],[y])=\lim_{n\toinf}d(x_n,y_n),
+        \hat d([\tilde x],[\tilde y]):=\lim_{n\toinf}d(x_n,y_n),
     \]
     可证$(\hat M,\hat d)$是完备的度量空间。且存在等距嵌入
     \[
         i:M\to\hat M,\enspace x\mapsto[\{x,x,\ldots\}].
     \]
-    即映射到对应常数序列的等价类。
+    即$i$是映射到对应常数序列的等价类。
 \end{proof}
 
+\subsection{赋范空间与范数}
+
 \begin{definition}
-    {赋范空间}{normed space}
+    {赋范空间与范数}{normed space}
     若映射$\norm\cdot:S\to\RR$满足：
     \begin{itemize}
-        \item $\norm f\geq 0$，且$\norm f=0\iff f=0$；
-        \item $\norm{\lambda f}=\abs\lambda\norm f$；
-        \item $\norm{f+g}\leq\norm f+\norm g$。
+        \item 正定性：$\norm f\geq 0$，且$\norm f=0\iff f=0$；
+        \item 齐次性：$\norm{\lambda f}=\abs\lambda\norm f$；
+        \item 三角不等式：$\norm{f+g}\leq\norm f+\norm g$。
     \end{itemize}
-    则称$(S,\norm\cdot)$构成一个赋范空间(normed space)。
+    则称$(S,\norm\cdot)$构成一个赋范空间(normed space)，$\norm\cdot$是$S$的范数(norm)。
 \end{definition}
 
-显然，赋范空间也是度量空间，只需定义
-\[
-    d(f,g)=\norm{f-g},
-\]
-完备的赋范空间称为Banach空间。
+\begin{corollary}
+    显然，赋范空间也是度量空间，只需定义
+    \[
+        d(f,g)=\norm{f-g},
+    \]
+\end{corollary}
+\begin{remark}
+    完备的赋范空间称为Banach空间。
+\end{remark}
 
 \begin{example}
     {$\RR^n$的范数}{}
@@ -200,13 +212,15 @@
     $C[a,b]$中，$\norm\cdot_\infty$是完备的，而$\norm\cdot_1$不是。
 \end{example}
 
+\subsection{范数的等价性}
+
 \begin{definition}
     {范数的等价性}{}
     给定线性空间$S$上的两个范数$\norm\cdot_\alpha,\norm\cdot_\beta$，若$\exists C_1,C_2>0$满足：
     \[
         C_1\norm x_\alpha\leq\norm x_\beta\leq C_2\norm x_\alpha,
     \]
-    则称$\norm\cdot_\alpha,\norm\cdot_\beta$等价。
+    则称$\norm\cdot_\alpha,\norm\cdot_\beta$等价(equivalent)。
 \end{definition}
 
 \begin{theorem}
@@ -223,24 +237,20 @@
 
 \begin{definition}
     {内积}{inner product}
-    给定线性空间$S$，内积(inner product)是一个映射
-    \begin{equation}
-        \inp\cdot\cdot:S\times S\to\FF,
-    \end{equation}
+    给定线性空间$S$，内积(inner product)是一个映射$\inp\cdot\cdot:S\times S\to\FF$，
     满足：
     \begin{itemize}
-        \item $\inp xx\geq 0$，且$\inp xx=0\iff x=0;$
-        \item $\inp xy=\overline{\inp yx};$
-        \item $\inp{ax+by}z=a\inp xz+b\inp yz.$
+        \item 正定性：$\inp xx\geq 0$，且$\inp xx=0\iff x=0;$
+        \item 交换共轭：$\inp xy=\overline{\inp yx};$
+        \item 对第一个变量线性：$\inp{ax+by}z=a\inp xz+b\inp yz.$
     \end{itemize}
     若$\inp xy=0$，则称$x,y$是正交的(orthogonal)。
 \end{definition}
 
 内积诱导的范数：
 \begin{equation}
-    \norm x:=\sqrt{\inp xx},
+    \norm x_2:=\sqrt{\inp xx},
 \end{equation}
-% 则$(S,\norm\cdot)$是一个赋范空间，称该范数是。
 
 \begin{example}
     {内积实例}{}
@@ -264,7 +274,7 @@
             \inp{x_n}{x_1}&\cdots&\inp{x_n}{x_n}
         \end{bmatrix},
     \end{equation}
-    即$\det G_n\neq 0.$
+    即$\det(G_n)\neq 0.$
 \end{theorem}
 
 \begin{proof}
@@ -276,7 +286,7 @@
     \[
         \inp{a_1x_1+\cdots+a_nx_n}{a_1x_1+\cdots+a_nx_n}=0,\iff a_1x_1+\cdots,a_nx_n=0,
     \]
-    则$\det G_n\neq 0\iff \mathrm N(G_n\tp)=\{0\}\iff a$只有零解。
+    则$\det(G_n)\neq 0\iff \mathrm N(G_n\tp)=\{0\}\iff a$只有零解。
 \end{proof}
 
 \begin{example}
@@ -291,7 +301,7 @@
     \]
     即
     \[
-        (\inp x{x_1},\ldots,\inp x{x_n})=(a_1,\ldots,a_n)G_n,
+        [\inp x{x_1}\enspace\cdots\enspace\inp x{x_n}]=[a_1\enspace\cdots\enspace a_n]G_n,
     \]
     若基是正交的，即$\forall i\neq j,\enspace\inp{x_i}{x_j}=0$，则 
     \[
@@ -326,7 +336,7 @@
     \[
         \psi_0(x),\psi_1(x),\ldots,\psi_n(x),
     \]
-    显然，$\deg\psi_i=i.$
+    显然，$\deg(\psi_i)=i.$
 \end{definition}
 
 \begin{example}
@@ -360,7 +370,10 @@
     \begin{itemize}
         \item 内积 
         \begin{equation}
-            \inp{T_0}{T_0}=\pi;\quad\inp{T_n}{T_n}=\pi/2,\enspace n\geq 1;
+            \inp{T_n}{T_n}=\begin{cases}
+                \pi,&n=0\\
+                \pi/2,&n\geq 1
+            \end{cases}
         \end{equation}
         \item 递推关系
         \begin{equation}
@@ -381,13 +394,15 @@
 \section{矩阵空间}
 \label{sec:matrix space}
 
+\subsection{矩阵范数}
+
 \begin{definition}
-    {矩阵范数}{}
-    矩阵空间$\FF^{n\times n}$上的范数$\norm\cdot$若满足
+    {矩阵范数}{matrix norm}
+    矩阵空间上的范数$\norm\cdot:\FF^{n\times n}\to\RR$若满足
     \begin{equation}
         \norm{AB}\leq\norm A\norm B,
     \end{equation}
-    则称该范数为矩阵范数。
+    则$\norm\cdot$称为矩阵范数(matrix norm)。
 \end{definition}
 
 \newcommand{\Forb}[1]{\norm{#1}_{\mathrm F}}
@@ -428,16 +443,19 @@
     则称他们是相容的。在不引起混淆的情况下，可以略去下标。
 \end{definition}
 
-\begin{example}
+\begin{theorem}
     {}{}
     Frobenius范数与向量2 - 范数相容。
-    \begin{proof}
-        \[
-            \norm{Ax}_2=\sqrt{\sum_{i=1}^n\abs{\sum_{j=1}^n A_{ij}x_j}^2}\leq\sqrt{\sum_{i=1}^n\kh{\sum_{j=1}^n\abs{A_{ij}}^2\sum_{j=1}^n\abs{x_j}^2}}=\Forb A\norm x_2.
-            \qedhere
-        \]
-    \end{proof}
-\end{example}
+\end{theorem}
+
+\begin{proof}
+    \[
+        \norm{Ax}_2=\sqrt{\sum_{i=1}^n\abs{\sum_{j=1}^n A_{ij}x_j}^2}\leq\sqrt{\sum_{i=1}^n\kh{\sum_{j=1}^n\abs{A_{ij}}^2\sum_{j=1}^n\abs{x_j}^2}}=\Forb A\norm x_2.
+        \qedhere
+    \]
+\end{proof}
+
+\subsection{算子范数}
 
 \begin{definition}
     {算子范数}{operate norm}
@@ -448,7 +466,9 @@
     称算子范数是该向量范数诱导出来的矩阵范数。
 \end{definition}
 
-注意$N(I)=1$。故Frobenius范数不是算子范数。
+\begin{remark}
+    注意$N(I)=1$。故Frobenius范数不是算子范数。
+\end{remark}
 
 \begin{theorem}
     {}{}
@@ -526,7 +546,7 @@
 
 \begin{theorem}
     {}{}
-    $\forall A\in\FF^{n\times n},\epsilon>0$，存在算子范数$\norm\cdot$满足：
+    给定$A\in\FF^{n\times n},\epsilon>0$，存在算子范数$\norm\cdot$满足：
     \begin{equation}
         \norm A\leq\rho(A)+\epsilon.
     \end{equation}
@@ -576,7 +596,8 @@
     \]
 \end{remark}
 
-\paragraph{奇异性与扰动}
+\subsection{扰动定理}
+
 一个矩阵不可逆的概率是很低的，\footnote{因为多了一个$\det(A)=0$的限制条件。}那如何度量矩阵的奇异性？%用逆的大小。
 
 \begin{theorem}
@@ -589,7 +610,6 @@
 
 \begin{proof}
     若$I+B$不可逆，则$\rho(B)\geq 1>\norm B$矛盾。
-
     记$D:=(I+B)\iv$，则 
     \[
         (I+B)D=I,\iff D=I-BD,\implies \norm D\leq 1+\norm B\norm D.
