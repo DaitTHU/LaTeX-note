@@ -310,61 +310,86 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
 \end{equation}
 而入射波与反射波在同一介质中，当然有$k_\i=k_\r$，可得反射定律
 \begin{theorem}{反射定律}{}
-    入射角和反射角相等：
+    入射角$\theta_\i$和反射角$\theta_\r$相等：
     \begin{equation}
         \theta_\i=\theta_\r;
     \end{equation}
 \end{theorem}
 入射波与折射波在不同介质中，但二者频率相同，同乘$c/\omega$得到Snell定律
 \begin{theorem}{Snell定律}{Snell's law}
-    入射角和折射角的正弦与折射率成反比：
+    入射角$\theta_\i$和折射角$\theta_\t$的正弦与折射率成反比：
     \begin{equation}
         \label{eqn:Snell}
         n_\i\sin\theta_\i=n_\t\sin\theta_\t.
     \end{equation}
 \end{theorem}
-\paragraph{Fresnel公式}
+
 由边界上：$\bm D$和$\bm B$法向分量连续，$\bm E$和$\bm H$切向分量连续。在应用这些边界条件时，可以考虑线偏振的两种独立情况：
 \begin{compactenum}
-	\item 垂直极化波：$\bm E_\i$与入射面垂直(即$\bm E_\i$垂直纸面向外)%\footnote{在讨论Fresnel公式之前，我们必须指定$\bm E_\i$的方向。}
+	\item 垂直极化波(senkrecht polarized)：$\bm E_\i$与入射面(入射光线与法线确定的平面)垂直(即$\bm E_\i$垂直纸面向外)%\footnote{在讨论Fresnel公式之前，我们必须指定$\bm E_\i$的方向。}
 	\begin{align*}
         E_\i+E_\r&=E_\t,\\
         H_\i\cos\theta_\i-H_\r\cos\theta_\r&=H_\t\cos\theta_\t,
     \end{align*}
-    电介质通常满足$\mu_\i=\mu_\r\approx\mu_\t\approx\mu_0$，因此$E_\i,E_\r,E_\t$的关系为：
-    \begin{align}
-        \label{eqn:Fresnel rperp}
-        r_\perp:=\frac{E_\r}{E_\i}=\frac{n_\i\cos\theta_\i-n_\t\cos\theta_\t}{n_\i\cos\theta_\i+n_\t\cos\theta_\t},\\
-        \label{eqn:Fresnel tperp}
-        t_\perp:=\frac{E_\t}{E_\i}=\frac{2n_\i\cos\theta_\i}{n_\i\cos\theta_\i+n_\t\cos\theta_\t};
-    \end{align}
-    $r$称为振幅的反射系数(reflection coefficient)，$t$为透射系数(transmission coefficient)；
-	\item 平行极化波：$\bm E_\i$与入射面平行(或者说$\bm H_\i$垂直纸面向外)
-	\begin{align*}
+    \item 平行极化波(parallel polarized)：$\bm E_\i$与入射面平行(或者说$\bm H_\i$垂直纸面向外)
+    \begin{align*}
         E_\i\cos\theta_\i-E_\r\cos\theta_\r&=E_\t\cos\theta_\t,\\
         H_\i+H_\r&=H_\t,
     \end{align*}
-    得到 
-    \begin{align}
-        \label{eqn:Fresnel rpara}
-        r_\parallel&=\frac{n_\t\cos\theta_\i-n_\i\cos\theta_\t}{n_\t\cos\theta_\i+n_\i\cos\theta_\t},\\
-        \label{eqn:Fresnel tpara}
-        t_\parallel&=\frac{2n_\i\cos\theta_\i}{n_\t\cos\theta_\i+n_\i\cos\theta_\t}.
-    \end{align}
 \end{compactenum}
-利用Snell定律\eqref{eqn:Snell}，$r,t$便完全由$n_\i,n_\t,\theta_\i$决定。
-\paragraph{Brewster角}
-对于平行极化波，存在一个特殊的入射角$\theta_\i$使得$r_\parallel=0$：%依\eqref{eqn:Fresnel rpara}
+定义振幅的反射系数(reflection coefficient)和透射系数(transmission coefficient)：
 \[
-    n_\t\cos\theta_\i-n_\i\cos\theta_\t=0,\quad n_\i\sin\theta_\i=n_\t\sin\theta_\t.
-    %n_\t^2\cos i_\text B=n_\i\sqrt{n_\t^2-n_\i^2\sin^2 i_\text B},
+    r:=\frac{E_\r}{E_\i},\enspace t:=\frac{E_\t}{E_\i}.
 \]
-我们称为Brewster角
-\begin{equation}
-    \label{eqn:Brewster}
-    \theta_\text B=\arctan\Bigkh{\frac{n_\t}{n_\i}}.
-\end{equation}
-玻璃相对于空气的$n_\t/n_\i=1.5$，得到$\theta_\text B=56.3\degree$。
+电介质通常满足$\mu_\i=\mu_\r\approx\mu_\t\approx\mu_0$，因此$r,t$的表达式为：
+\begin{theorem}
+    {Fresnel公式}{Fresnel formula}
+    对于垂直极化波，$1+r_\perp=t_\perp$：
+    \begin{subequations}
+        \begin{align}
+            \label{eqn:Fresnel rperp}
+            r_\perp&=\frac{n_\i\cos\theta_\i-n_\t\cos\theta_\t}{n_\i\cos\theta_\i+n_\t\cos\theta_\t},\\%=-\frac{\sin(\theta_\i-\theta_\t)}{\sin(\theta_\i+\theta_\t)},\\
+            \label{eqn:Fresnel tperp}
+            t_\perp&=\frac{2n_\i\cos\theta_\i}{n_\i\cos\theta_\i+n_\t\cos\theta_\t};%=\frac{2\sin\theta_\i\sin\theta_\t}{\sin(\theta_\i+\theta_\t)};
+        \end{align}
+    \end{subequations}
+    对于平行极化波，$1+r_\parallel=t_\parallel\cdot n_\t/n_\i$：
+    \begin{subequations}
+        \begin{align}
+            \label{eqn:Fresnel rpara}
+            r_\parallel&=\frac{n_\t\cos\theta_\i-n_\i\cos\theta_\t}{n_\t\cos\theta_\i+n_\i\cos\theta_\t},\\
+            \label{eqn:Fresnel tpara}
+            t_\parallel&=\frac{2n_\i\cos\theta_\i}{n_\t\cos\theta_\i+n_\i\cos\theta_\t}.
+        \end{align}
+    \end{subequations}
+\end{theorem}
+    
+利用Snell定律\eqref{eqn:Snell}，$r,t$便完全由$n_\i,n_\t,\theta_\i$决定。
+
+\begin{theorem}
+    {Stokes倒逆关系}{Stokes relation}
+    由光路可逆
+    \begin{subequations}
+        \begin{gather}
+            r_{21}=-r_{12}\\
+            r_{12}^2+t_{12}t_{21}=1.
+        \end{gather}
+    \end{subequations}
+\end{theorem}
+\begin{example}
+    {Brewster角}{Brewster angle}
+    对于平行极化波，存在一个特殊的入射角$\theta_\i$使得$r_\parallel=0$：%依\eqref{eqn:Fresnel rpara}
+    \[
+        n_\t\cos\theta_\i-n_\i\cos\theta_\t=0,\quad n_\i\sin\theta_\i=n_\t\sin\theta_\t.
+        %n_\t^2\cos i_\text B=n_\i\sqrt{n_\t^2-n_\i^2\sin^2 i_\text B},
+    \]
+    我们称为Brewster角
+    \begin{equation}
+        \label{eqn:Brewster}
+        \theta_\text B=\arctan\Bigkh{\frac{n_\t}{n_\i}}.
+    \end{equation}
+    玻璃相对于空气的$n_\t/n_\i=1.5$，得到$\theta_\text B=56.3\degree$。
+\end{example}
 \paragraph{全反射}
 前面的讨论在绝大程度上只限于外反射($n_\i<n_\t$)的情形，即光疏介质入射光密介质。相反的情况是内反射($n_\i>n_\t$)，这时$\theta_\i<\theta_\t$。
 考虑$\theta_\t\geqslant90\degree$，即光疏介质没有折射光，我们称之为全反射(total internal reflection)，由Snell定律，全反射的临界角
