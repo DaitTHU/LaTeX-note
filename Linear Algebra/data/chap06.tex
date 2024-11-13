@@ -2,32 +2,34 @@
 \chapter{特征值和特征向量}
 \section{特征值和特征向量}
 \begin{definition}{特征值和特征向量}{eigenvalue and eigenvector}
-	方阵$A$的特征向量(eigenvector)~$x\neq 0$满足：
+	给定方阵$A$，若存在$x\neq 0$和$\lambda\in\FF$满足：
 	\[
-		Ax=\lambda x,\quad\lambda\in\FF.
+		Ax=\lambda x,
 	\]
-	其中$\lambda$称为$A$的特征值(eigenvalue)。
+	则称$x$是$A$的特征向量(eigenvector)，$\lambda$是对应的特征值(eigenvalue)。
+	矩阵$A$所有特征值构成的集合称为$A$的谱(spectrum)。
 \end{definition}
-\begin{theorem}{特征值的性质}{}
+
+\begin{corollary}
+	特征值的性质：
 	\begin{compactenum}
 		\item $A$的特征向量$x$也是$A^n$的特征向量，特征值是$\lambda^n;$
 		\item 若$A$可逆，则$x$也是$A\iv$的特征向量，特征值是$\lambda^{-1};$
 		\item 三角矩阵的特征值就是对角元；
 		\item $A$可逆$\iff A$所有特征值非0。
 		
-		只需注意到$A$可逆时$Ax=0$只有零解即可。
+		% 只需注意到$A$可逆时$Ax=0$只有零解即可。
 	\end{compactenum}
-\end{theorem}
-\begin{definition}{特征子空间}{eigen-subspace}
-	$A$的所有特征值为$\lambda$的特征向量再加上0构成$\RR^n$的一个线性子空间，这个子空间就是$\N(A-\lambda I).$
-\end{definition}
-\begin{theorem}{特征值}{eigenvalue}
-	假设$n$阶矩阵$A$有特征向量$x_1,\ldots,x_r$，对应特征值为$\lambda_1,\ldots,\lambda_r$，且这些特征值两两不等，则$x_1,\ldots,x_r$线性无关。
+\end{corollary}
+
+\begin{theorem}{不同特征值对应特征向量线性无关}{eigenvalue}
+	给定$A$的一组特征向量$x_1,\ldots,x_r$，对应特征值为$\lambda_1,\ldots,\lambda_r$。
+	若$\lambda_1,\ldots,\lambda_r$两两不等，则$x_1,\ldots,x_r$线性无关。
 \end{theorem}
 \begin{proof}
-	运用数学归纳法证明。$r=1$时，定理自动成立；
+	运用数学归纳法证明。$r=1$时，$x_1\neq 0$自然线性无关；
 	
-	假设$r=m-1$定理成立，若定理在$r=m$时不成立，则
+	假设$r=m-1$时，$x_1,\ldots,x_{m-1}$线性无关；当$r=m$时，考虑
 	\begin{equation}
 		\label{eqn:proof eigen 1}
 		x_m=c_1x_1+\cdots+c_{m-1}x_{m-1},\tag{$\ast$}
@@ -41,49 +43,184 @@
 	\[
 		0=c_1(\lambda_m-\lambda_1)x_1+\cdots+c_{m-1}(\lambda_m-\lambda_{m-1})x_{m-1},
 	\]
-	由$x_1,\ldots,x_{m-1}$线性无关可得所有的$c_i=0$，矛盾！
+	由$x_1,\ldots,x_{m-1}$线性无关可得所有的$c_i=0$，故$x_1,\ldots,x_m$线性无关。
+
+	综上，定理对所有可能的$r$均成立。
 \end{proof}
+
 \section{特征多项式}
-求特征值$\lambda$需要解如下的特征方程(eigenfunction)
-\[
-	\det(\lambda I-A)=\lambda^n+a_1\lambda^{n-1}+\cdots+a_n=0,
-\]
-特别地，特征多项式(eigen-polynomial)的系数有如下性质：
-\begin{align}
-	a_1=-\tr(A),\quad a_n=(-)^n\det(A)
-\end{align}
-由Vieta定理，在考虑重根的情况下，
-\begin{align}
-	\tr(A)=\sum_{i=1}^n\lambda_i,\quad \det(A)=\prod_{i=1}^n\lambda_i.
-\end{align}
-更一般地，\href{https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem}{Cayley-Hamilton定理}给出了其他项的系数表达式，比如
-\begin{subequations}
-	\begin{align}
-		a_2&=\frac12\bigkh{\tr(A)^2-\tr(A^2)},\\
-		a_3&=\frac16\bigkh{\tr(A)^3-3\tr(A)\tr(A^2)+2\tr(A^3)},
-	\end{align}
-\end{subequations}
-\begin{theorem}{相似变换的特征多项式}{}
-	$A$的相似变换$B\iv AB$和$A$有相同的特征多项式。
-\end{theorem}
-\begin{proof}
+
+\begin{definition}{特征子空间}{eigen-subspace}
+	$A$的所有特征值为$\lambda$的特征向量张成$\RR^n$的一个线性子空间：$\N(A-\lambda I).$
+\end{definition}
+
+% \begin{corollary}
+% 	如果$\lambda$是$A$的特征值，则$(A-\lambda I)$必然不可逆。
+% \end{corollary}
+
+\begin{definition}
+	{特征方程和特征多项式}{eigenfunction and eigen-polynomial}
+	求特征值$\lambda$需要解特征方程(eigenfunction)：
 	\[
-		\lambda I-B\iv AB=B\iv(\lambda I-A)B.
+		\det(\lambda I-A)=\lambda^n+a_1\lambda^{n-1}+\cdots+a_n=0,
 	\]
-	对两边取行列式即证。
-\end{proof}
+	而$p_A(\lambda):=\det(\lambda I-A)$称为特征多项式(eigen-polynomial)。
+\end{definition}
+
 \begin{corollary}
-	相似变换与原矩阵的迹相同
+	特别地，$p_A(0)=a_n=\det(-A)$，由Vieta定理：在考虑重根的情况下，
 	\begin{equation}
-		\tr(B\iv AB)=\tr(A).
+		\label{eqn:det lambda}
+		\det(A)=\prod_{i=1}^n\lambda_i.
+	\end{equation}
+	另一方面，通过对行列式进行Laplace展开，可得$a_1=-\tr(A)$，由Vieta定理：
+	\begin{equation}
+		\label{eqn:trace lambda}
+		\tr(A)=\sum_{i=1}^n\lambda_i,
 	\end{equation}
 \end{corollary}
 
+\subsectionstar{Cayley-Hamilton定理}
+
+\begin{theorem}
+	{Cayley-Hamilton定理}{Cayley-Hamilton theorem}
+	给定特征多项式$p_A$的系数$1,a_1,\ldots,a_n$，可定义矩阵多项式
+	\begin{equation}
+		p_A^*(X)=X^n+a_1X^{n-1}+\cdots+a_{n-1}X+a_nI,
+	\end{equation}
+	则$p_A^*(A)=O$。
+\end{theorem}
+
+\noindent
+\textit{完全错误的证明.}
+将特征多项式$p_A(\lambda)=\det(\lambda I-A)$中的$\lambda$替换为$A$，自然得到$p_A(A)=\det(AI-A)=0$。
+
+% \begin{proof}
+% 	仅证明$A$的特征向量$x_1,\ldots,x_n$构成$\FF^n$的一组基的情形(即$A$可对角化)，
+% 	\begin{align*}
+% 		p_A(A)x_i&=A^nx_i+c_{n-1}A^{n-1}x_i+\cdots+c_0x_i\\
+% 		&=\lambda_i^2x_i+c_{n-1}\lambda_i^{n-1}x_i+\cdots+c_0x_i=p_A(\lambda)x_i=0,
+% 	\end{align*}
+% 	故$\forall x\in\FF^n$，都有$p_A(A)x=0$，取$x=e_1,\ldots,e_n$可得$p_A(A)=O$。
+% \end{proof}
+
+% \begin{remark}
+% 	特征多项式$p_A:\FF\to\FF$与矩阵多项式$p_A^*$是完全不同的两个映射。
+% \end{remark}
+
+\begin{proof}
+	考察伴随矩阵$\adj(\lambda I-A)$，可以写成如下形式：
+	\[
+		\adj(\lambda I-A)=B_1\lambda^{n-1}+\cdots+B_{n-1}\lambda+B_n,
+	\]
+	其中$B_1,\ldots,B_n$完全由$A$决定。
+	由伴随矩阵的性质：
+	\[
+		(\lambda I-A)\adj(\lambda I-A)=\det(\lambda I-A)I=p_A(\lambda)I,
+	\]
+	两边展开可得
+	\[
+		B_1\lambda^n+(B_2-AB_1)\lambda^{n-1}+\cdots+(B_n-AB_{n-1})\lambda-AB_n=I\lambda^n+a_1I\lambda^{n-1}+\cdots+a_{n-1}\lambda+a_nI,
+	\]
+	作为系数的矩阵均由$A$确定，与$\lambda$无关。由于上式$\forall\lambda$均成立，故对应系数相同：
+	\[
+		B_1=I,\quad
+		B_{i+1}-AB_i=a_iI,\quad
+		-AB_n=a_nI.
+	\]
+	因而$p_A^*(A)$可以化为裂项和(telescoping sum)
+	\[
+		p_A^*(A)=A^nB_1+A^{n-1}(B_2-AB_1)+\cdots+A(B_n-AB_{n-1})-AB_n=O.
+		\qedhere
+	\]
+\end{proof}
+
+\begin{theorem}
+	{Faddeev-LeVerrier算法}{Faddeev-LeVerrier algorithm}
+	特征多项式$p_A(\lambda)$的第$k$个系数$a_k$可以递归地求出：
+	\begin{equation}
+		a_k=-\frac1k\bigfkh{\tr(A^k)+a_1\tr(A^{k-1})+\cdots+a_{k-1}\tr(A)}.
+		% a_m=-\frac1m\sum_{k=1}^ma_{m-k}\tr(A^k).
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	沿用\thmref{thm:Cayley-Hamilton theorem} 证明中的定义，
+	% 并额外定义$B_0=O,\enspace c_0=1$。
+	% 两边取迹得
+	% \[
+	% 	(n-i)a_i=\tr(AB_i)+na_i
+	% \]
+	由Jacobi公式\eqref{eqn:Jacobi det'}，有 
+	\[
+		p_A'(\lambda)=\tr(\adj(\lambda I-A)I)=\tr(B_1\lambda^{n-1}+\cdots+B_n)
+	\]
+	展开
+	\[
+		n\lambda^{n-1}+(n-1)a_1\lambda^{n-2}+\cdots+a_{n-1}=\tr(B_1)\lambda^{n-1}+\tr(B_2)\lambda^{n-2}+\cdots+\tr(B_n).
+	\]
+	由于上式$\forall\lambda$均成立，故对应系数相同：
+	\[
+		(n-k)a_k=\tr(B_{k+1}),
+	\]
+	又$B_k$满足递推关系$B_{k+1}=AB_k+a_kI$，两边取迹可得
+	\[
+		(n-k)a_k=\tr(AB_k)+na_k,\implies a_k=-\frac1k\tr(AB_k),
+	\]
+	再展开$B_k$即证：
+	\[
+		B_k=AB_{k-1}+a_{k-1}I=\cdots=A^{k-1}+a_1A^{k-2}+\cdots+a_{k-1}I.
+		\qedhere
+	\]
+\end{proof}
+
+\begin{corollary}
+	取$\lambda=0$可得伴随矩阵：
+	\begin{equation}
+		\adj(-A)=B_n=A^{n-1}+a_1A^{n-2}+\cdots+a_{n-1}I.
+	\end{equation}
+	易证这满足$\adj(-A)(-A)=(-A)\adj(-A)=\det(-A)I=c_0I$。
+\end{corollary}
+
+\begin{example}
+	{特征多项式的前几项}{}
+	\begin{subequations}
+		\begin{align}
+			a_2&=\frac12\bigkh{\tr(A)^2-\tr(A^2)},\\
+			a_3&=\frac16\bigkh{\tr(A)^3-3\tr(A)\tr(A^2)+2\tr(A^3)},
+		\end{align}
+	\end{subequations}
+	更一般地，$a_k$的显性表达式由一个$k$阶行列式给出：
+	\begin{equation}
+		a_k=\frac{(-)^k}{k!}\begin{vmatrix}
+			\tr(A)&k-1\\
+			\tr(A^2)&\tr(A)&k-2\\
+			\vdots&\vdots&\ddots&\ddots\\
+			\vdots&\vdots&\vdots&\ddots&1\\
+			\tr(A^k)&\tr(A^{k-1})&\tr(A^{k-2})&\cdots&\tr(A)
+		\end{vmatrix}.
+	\end{equation}
+\end{example}
+
 \section{矩阵对角化}
+
+由于对角矩阵有很多简单的性质，考虑相似变换$\Lambda=X\iv AX$，其中$\Lambda$为对角矩阵。
+
+\begin{theorem}{相似变换与特征多项式}{}
+	$A$的相似变换$B\iv AB$和$A$有相同的特征多项式。
+\end{theorem}
+\begin{proof} 
+	对下式两边取行列式即证。
+	\[
+		\lambda I-B\iv AB=\lambda B\iv IB-B\iv AB=B\iv(\lambda I-A)B.
+		\qedhere
+	\]
+\end{proof}
+
 \begin{theorem}{可对角化判定}{}
-	$n$阶矩阵$A$可对角化$\iff A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$，
-	
-	此时$A=X\Lambda X\iv$，且 
+	$n$阶矩阵$A$可对角化$\iff A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$。
+	\tcblower
+	此时$A=X\Lambda X\iv$，$X$由特征向量给出，对角矩阵$\Lambda$由对应特征值$\lambda_1,\ldots,\lambda_n$ (可能相同)给出：
 	\begin{align}
 		X=(x_1,\ldots,x_n),\quad\Lambda=\diag(\lambda_1,\ldots,\lambda_n).
 	\end{align}
@@ -102,6 +239,9 @@
 \begin{corollary}
 	有$n$个互不相同特征值的$n$阶矩阵$A$可对角化。
 \end{corollary}
+
+\paragraph{特征值的重数}
+
 当特征值重复时，引入两个概念
 \begin{definition}{几何重数和代数重数}{}
 	几何重数(geometric multiplicity, GM)：特征值$\lambda$对应的最大线性无关的特征向量的个数，即$\dim\bigkh{\N(\lambda I-A)}$。
@@ -250,7 +390,7 @@
 	$j>d-1$时，$u_j=0$。
 \end{proof}
 \begin{theorem}{}{}
-	$X=\spn(B)$是$T$的不变子空间，即$T(X)\subset X$
+	$X=\lspan(B)$是$T$的不变子空间，即$T(X)\subset X$
 \end{theorem}
 \begin{proof}
 	由上式，$\forall u=a_0u_0+\cdots+a_{d-1}u_{d-1}\in X$
@@ -271,7 +411,7 @@
 \begin{theorem}{}{}
 	若$v_1,\ldots,v_r$是$T$的广义特征向量，且相应的幂指数是$d_i$，设 
 	\[
-		u_{ij}:=(T-\lambda_iI)^jv_i,\quad V_i:=\spn(u_{i0},\ldots,u_{id-1}).
+		u_{ij}:=(T-\lambda_iI)^jv_i,\quad V_i:=\lspan(u_{i0},\ldots,u_{id-1}).
 	\]
 	之前证明了$V_i$是$T$的不变子空间，且$T$在$V_i$上的表示矩阵是Jordan块。故
 	$T$在$V_1\oplus\cdots\oplus V_r$上的表示矩阵是分块对角的，且每一块都是Jordan块的形式。
@@ -386,12 +526,16 @@
 	$Q_n$也是正交的。
 \end{proof}
 
-对角化对称矩阵$S$的正交矩阵$Q$可被构造：
-\begin{compactitem}
-	\item 若$S$的特征值互不相同，对应的归一特征向量$q_i$两两正交，可选$Q=[q_1,\ldots,q_n]$；
-	\item 若$S$的特征值有重复，取$\{q_i\}$为相应特征子空间的正交基。
-\end{compactitem}
+\begin{remark}
+	对角化对称矩阵$S$的正交矩阵$Q$可被构造：
+	\begin{compactitem}
+		\item 若$S$的特征值互不相同，对应的归一特征向量$q_i$两两正交，可选$Q=[q_1,\ldots,q_n]$；
+		\item 若$S$的特征值有重复，取$\{q_i\}$为相应特征子空间的正交基。
+	\end{compactitem}
+\end{remark}
+
 \section{正定矩阵}
+
 \begin{definition}{二次型}{quadratic form}
 	二次型(quadratic form)是形如$x\tp Sx$的二次多项式，其中$S$是实对称矩阵。
 \end{definition}
@@ -445,8 +589,8 @@
 		\qedhere
 	\]
 \end{proof}
-\begin{definition}{半正定矩阵}{positive semidefinite matrix}
-	如果$\forall x\neq 0$，二次型$x\tp Sx\geqslant 0$，则称$S$是半正定的(positive semidefinite)。
+\begin{definition}{半正定矩阵}{positive semi-definite matrix}
+	如果$\forall x\neq 0$，二次型$x\tp Sx\geqslant 0$，则称$S$是半正定的(positive semi-definite)。
 \end{definition}
 \begin{theorem}{半正定但非正定矩阵的判定}{determination of positive semi-but-not definite matrix}
 	\begin{compactenum}
@@ -454,4 +598,17 @@
 		\item 存在$A$列之间线性相关，使得$S=A\tp A$。
 	\end{compactenum}
 \end{theorem}
-半正定但非正定矩阵的行列式为0.
+\begin{corollary}
+	半正定但非正定矩阵的行列式为0。
+\end{corollary}
+
+\begin{theorem}
+	{Cholesky分解}{Cholesky decomposition}
+	正定矩阵$A$可以分解为
+	\begin{equation}
+		A=LL\tp,
+	\end{equation}
+	其中$L$是对角元为正的下三角矩阵，这称为Cholesky分解。
+\end{theorem}
+
+
