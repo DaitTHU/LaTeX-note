@@ -85,21 +85,32 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	\]
 	又$x_i\tp A\tp Ax_i=\lambda_i x_i\tp x_i>0$，所以$Ax_i\neq 0$，所以$Ax_i$是$AA\tp$的特征值为$\lambda_i$的特征向量。
 	
-	同理，如果$x_i$是$AA\tp$的特征值为$\lambda_i\neq 0$的特征向量，$A\tp x_i$是$A\tp A$的特征值为$\lambda_i$的特征向量。
+	同理，如果$x_i$是$AA\tp$的特征值为$\lambda_i\neq 0$的特征向量，则$A\tp x_i$是$A\tp A$的特征值为$\lambda_i$的特征向量。
 	
 	从而$A\tp A$和$AA\tp$非零特征值对应的特征向量一一对应。
 \end{proof}
-\begin{example}{四个子空间的正交归一基}{}
-	$\{v_1,\ldots,v_r\}$是$\C(A\tp)$的正交归一基，$V_r=(v_1,\ldots,v_r)$
 
-	$\{v_{r+1},\ldots,v_n\}$是$\N(A)$的正交归一基，$V_{n-r}=(v_{r+1},\ldots,v_n)$
+\begin{corollary}
+	四个子空间的正交归一基：
+	\begin{itemize}
+		\item $\{v_1,\ldots,v_r\}$是$\C(A\tp)$的正交归一基，$V_r=(v_1,\ldots,v_r)$；
+		\item $\{v_{r+1},\ldots,v_n\}$是$\N(A)$的正交归一基，$V_{n-r}=(v_{r+1},\ldots,v_n)$；
+		\item $\{u_1,\ldots,u_r\}$是$\C(A)$的正交归一基，$U_r=(u_1,\ldots,u_r)$；
+		\item $\{v_{r+1},\ldots,v_n\}$是$\N(A\tp)$的正交归一基，$U_{n-r}=(u_{r+1},\ldots,v_m)$。
+	\end{itemize}
+\end{corollary}
 
-	$\{u_1,\ldots,u_r\}$是$\C(A)$的正交归一基，$U_r=(u_1,\ldots,u_r)$
+\begin{definition}
+	{秩一矩阵}{rank-one matrix}
+	若矩阵$A$的秩$\rank(A)=1$，则称为秩一矩阵。
+\end{definition}
 
-	$\{v_{r+1},\ldots,v_n\}$是$\N(A\tp)$的正交归一基，$U_{n-r}=(u_{r+1},\ldots,v_m)$
-\end{example}
+\begin{remark}
+	秩一矩阵$A\in\FF^{m\times n}$总可以表示成$A=vu\tp$，其中$u\in\FF^m,v\in\FF^n$。
+\end{remark}
+
 \begin{example}{数据压缩}{}
-	若$r=\rank(A)<\min(m,n)$，则 
+	通过奇异值分解，$A$可以表示成$r$个秩一矩阵的和：
 	\[
 		A=\begin{bmatrix}
 			U_r&U_{m-r}
@@ -109,17 +120,23 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 			V_r\tp\\V_{n-r}\tp
 		\end{bmatrix}=U_rDV_r\tp=\sum_{i=1}^r\sigma_iu_iv_i\tp.
 	\]
-	可以用$U_r,D,V_r$这三个矩阵的$r(m+1+n)$个分量完全决定$A$原来的$mn$个分量。(无损)
+	若$r<\min(m,n)$，则可以用$U_r,D,V_r$这三个矩阵的$r(m+1+n)$个分量完全确定$A$原来的$mn$个分量。
+	由此实现了数据的压缩(无损)。
 	\tcblower
-	甚至可以把很小的奇异值当成0，进一步压缩图片。(有损)由此带来的误差
+	甚至可以把很小的奇异值当成0，只取前$k$项，进一步压缩图片(有损)。误差
 	\[
-		\vd A=\sum_{\ell=k+1}^r\sigma_\ell u_\ell v_\ell\tp.
+		\D A=\sum_{\ell=k+1}^r\sigma_\ell u_\ell v_\ell\tp.
 	\]
 	误差分量的绝对值
 	\[
-		|\vd A_{ij}|=\abs{\sum_{\ell=k+1}^r\sigma_\ell (u_\ell)_i (v_\ell)_j}\leqslant\sum_{\ell=k+1}^r\sigma_\ell.
+		|\D A_{ij}|=\abs{\sum_{\ell=k+1}^r\sigma_\ell (u_\ell)_i (v_\ell)_j}\leqslant\sum_{\ell=k+1}^r\sigma_\ell.
 	\]
-	因此误差由忽略的奇异值控制，忽略的越少误差越小
+	因此误差由忽略的奇异值控制，忽略的越少误差越小。
+
+	\begin{center}
+        \includegraphics[width=0.8\linewidth]{graphs/svcompress.pdf}
+        \captionof{figure}{基于奇异值分解的doge meme灰度图的压缩}
+    \end{center}
 \end{example}
 
 \section{矩阵的模}
@@ -128,6 +145,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 \[
 	\norm x:=\sqrt{\inp xx}.
 \]
+下面我们用向量的范数诱导矩阵的范数。
 \begin{theorem}{}{max Ax/x}
 	\begin{equation}
 		\norm{Ax}\leqslant\sigma_1\norm x.
@@ -137,7 +155,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	
 	\begin{align*}
 		\norm{Ax}^2&=x\tp A\tp Ax=x\tp V\Sigma\tp\Sigma V\tp x\\
-		&=\sum_{k=1}^rx\tp v_k\sigma_k^2v_k\tp x\leqslant\sigma_1^2\sum_{k=1}^nx\tp v_kv_k\tp x\\
+		&=\sum_{k=1}^nx\tp v_k\sigma_k^2v_k\tp x\leqslant\sigma_1^2\sum_{k=1}^nx\tp v_kv_k\tp x\\
 		&=\sigma_1^2x\tp VV\tp x=\sigma_1^2x\tp x,
 	\end{align*}
 	等号可在$x=cv_1$时成立。
@@ -148,25 +166,33 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 		\norm A:=\max_{x\neq 0}\frac{\norm{Ax}}{\norm x}=\sigma_1.
 	\end{equation}
 \end{definition}
-由矩阵模的定义可直接导出$\forall x\neq 0$，
-\[
-	\norm{Ax}\leqslant\norm A\norm x.
-\]
+\begin{corollary}
+	由矩阵模的定义可直接导出$\forall x\neq 0$，
+	\[
+		\norm{Ax}\leqslant\norm A\norm x.
+	\]
+\end{corollary}
 \begin{theorem}{三角不等式}{triangle inequality}
 	\begin{equation}
 		\norm{A+B}\leqslant\norm A+\norm B.
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	
+	$\forall x\neq 0$，
 	\[
 		\norm{(A+B)x}=\norm{Ax+Bx}\leqslant\norm{Ax}+\norm{Bx}\leqslant\norm A\norm x+\norm B\norm x.
 	\]
 	故
 	\[
-		\norm{A+B}=\max_{x\neq 0}\frac{\norm{(A+B)x}}{\norm x}\leqslant\norm A+\norm B.
+		\norm{A+B}\leq\frac{\norm{(A+B)x}}{\norm x}\leqslant\norm A+\norm B.
 	\]
 \end{proof}
+
+给定矩阵$A$，限定矩阵$B$的秩$\rank(B)=k<\rank(A)$，如何使得$B$最接近$A$？即
+\[
+	B^\star=\arg\min_B\norm{A-B}.
+\]
+
 \begin{theorem}{Eckart-Young-Mirsky定理}{Eckart-Young-Mirsky theorem}
 	同矩阵$A$最接近的秩为$k$的矩阵为
 	\begin{equation}
@@ -182,9 +208,12 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	\begin{align*}
 		\norm{A-B}^2&\geqslant\norm{(A-B)w}^2=\norm{Aw}^2\\
 		&=\sigma_1^2c_1^2+\cdots+\sigma_{k+1}^2c_{k+1}^2\geqslant\sigma_{k+1}^2(c_1^2+\cdots+c_{k+1}^2)=\sigma_{k+1}^2.
+		\qedhere
 	\end{align*}
 \end{proof}
+
 \section{伪逆}
+
 \begin{definition}{伪逆}{pseudoinverse}
 	$m\times n$矩阵$A=U\Sigma V\tp$，定义伪逆(pseudoinverse)是一个$n\times m$的矩阵
 	\begin{equation}
@@ -197,6 +226,16 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 		\end{bmatrix},\quad D\iv=\diag(\sigma_1\iv,\ldots,\sigma_r\iv).
 	\]
 \end{definition}
+
+\begin{corollary}
+	\begin{subequations}
+		\begin{align}
+			AA^+A&=A,\\
+			A^+AA^+&=A^+.
+		\end{align}
+	\end{subequations}
+\end{corollary}
+
 \begin{remark}
 	伪逆与原矩阵的乘积并不是单位矩阵：
 	\[
@@ -211,11 +250,6 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 		\end{bmatrix}U\tp,
 	\]
 	是投影到$\C(A)$的矩阵。
-	
-	但额外的满足：
-	\[
-		AA^+A=A,\quad A^+AA^+=A^+.
-	\]
 \end{remark}
 \begin{theorem}{伪逆与最小二乘法}{}
 	最小二乘法
