@@ -16,7 +16,7 @@
 
 \begin{example}
 	{}{}
-	$\RR^n$和$\CC^n$都是线性空间。
+	$\FF^n$和$\FF^{m\times n}$都是线性空间。
 \end{example}
 
 \begin{definition}{子空间}{subspace}
@@ -36,7 +36,7 @@
 \end{remark}
 
 \begin{definition}{线性扩张}{linear span}
-	$S$的线性扩张(linear span)是$S$中向量的所有线性组合的集合，记作$\spn(S)$。
+	$S$的线性扩张(linear span)是$S$中向量的所有线性组合的集合，记作$\lspan(S)$。
 \end{definition}
 
 \begin{corollary}
@@ -61,7 +61,7 @@
 \end{definition}
 \begin{example}
 	{}{}
-	$\{e_i\}$构成$\RR^n$的一组基。
+	$\{e_1,\ldots,e_n\}$构成$\RR^n$的一组基。
 \end{example}
 \begin{definition}{线性空间的维度}{dimension}
 	线性空间的维度(dimension)是一组基中向量的个数，记作$\dim(V)$。
@@ -102,7 +102,10 @@
 
 给定矩阵$A\in\FF^{m\times n}$，可由其得到四个子空间：列空间、行空间、零空间和左零空间。
 \begin{definition}{列空间和行空间}{column space}
-	矩阵$A$的列空间(column space)是$A$的所有列的线性组合的集合，记作$\C(A)$。
+	矩阵$A$的列空间(column space)是$A$的所有列的线性组合的集合，记作$\C(A)$：
+	\begin{equation}
+		\C(A)\equiv\set{Ax}{x\in\FF^n}.
+	\end{equation}
 	\tcblower
 	矩阵$A$的行空间(row space)是$A$的所有行的线性组合的集合，%由于转置并不影响性质，行空间
 	可用$\C(A\tp)$表示。
@@ -117,7 +120,10 @@
 \end{remark}
 
 \begin{definition}{零空间和左零空间}{null space}
-	矩阵$A$的零空间(null space)是所有满足$Ax=0$的$x$的集合，记作$\N(A)$。
+	矩阵$A$的零空间(null space)是所有满足$Ax=0$的$x$的集合，记作$\N(A)$：
+	\begin{equation}
+		\N(A)\equiv\set x{Ax=0}.
+	\end{equation}
 	\tcblower
 	矩阵$A$的左零空间(left null space)是所有满足$x\tp A=0$的$x$的集合，可用$\N(A\tp)$表示。
 \end{definition}
@@ -127,7 +133,7 @@
 \end{corollary}
 
 \begin{example}{子空间的基}{}
-	$\N(A)$的基：显然$\N(A)=\N(\rref(A))$，而$\rref(A)$的每个自由列各给出一个$\N(\rref(A))$的基。若第$j$列为自由列，则其对应的向量$x$的分量为：
+	$\N(A)$的基：显然$\N(A)=\N(\rref(A))$，而$\rref(A)$的每个自由列各给出一个$\N(\rref(A))$的基。若第$j$列为自由列，则其对应的基$x$的分量为：
 	\[
 		x_i=\begin{cases}
 			\delta_{ij},&\text{第$i$列为自由列}\\
@@ -140,36 +146,34 @@
 \end{example}
 \section{矩阵的秩、线性代数基本定理}
 \begin{definition}{矩阵的秩}{rank}
-	矩阵$A$的秩(rank)定义为行空间的维数：%\footnote{后面很快会证明行空间列空间维数相等。}：
+	矩阵$A$的秩(rank)定义为列空间的维数：%\footnote{后面很快会证明行空间列空间维数相等。}：
 	\[
 		\rank(A):=\dim(\C(A)).
 	\]
-	进而可定义行满秩矩阵(full row rank matrix)满足
-	\[
-		\rank(A)=\row(A).
-	\]
-	列满秩矩阵(full column rank matrix)定义类似。
+	若矩阵的秩等于行数，则称其行满秩(full row rank)；
+	若秩等于列数，则称其列满秩(full column rank)。
 \end{definition}
 \begin{theorem}
 	{线性方程组$Ax=0$的完整解}{}
-	线性方程组$Ax=b$的通解可以分解为特解$x_{\mathrm p}$和零解$x_{\mathrm n}$ (即满足$Ax_{\mathrm n}=0$)的和：
+	线性方程组$Ax=b$的通解可以分解为特解$x_{\mathrm p}$和零解$x_{\mathrm n}$的和：
 	\[
 		x=x_{\mathrm p}+x_{\mathrm n},
 	\]
 	%其中$x_{\mathrm n}\in\N(A)$，
-	特解$x_{\mathrm p}$的各个分量可以由约化的增广矩阵$[\rref(A)\enspace b']$中得到
+	特解满足$Ax_{\mathrm p}=b$，其各个分量可以由约化的增广矩阵$[\rref(A)\enspace b']$得到：
 	\[
-		x_{{\mathrm p}i}=\begin{cases}
+		(x_{\mathrm p})_i=\begin{cases}
 			0,&\text{第$i$列为自由列}\\
 			b'_j,&\text{第$i$列为主列，其主元1在第$j$行}
 		\end{cases}
 	\]
+	而零解满足$Ax_{\mathrm n}=0$，可以写成零空间的基的线性组合。
 \end{theorem}
 \begin{corollary}
 	~
 	\begin{itemize}
 		\item 若$A$列满秩，则$\rref(A)$没有自由列，$\N(A)=\{0\}$。当$b\in\C(A)$时有唯一解，否则无解；
-		\item 若$A$行满秩，则$\rref(A)$没有零行，$\C(A)=\RR^m$，$\forall b$都有解，有唯一解或无穷多解。
+		\item 若$A$行满秩，则$\rref(A)$没有零行，$\C(A)=\FF^m$，$\forall b$都有解，有唯一解或无穷多解。
 	\end{itemize}
 \end{corollary}
 \paragraph{四个子空间的维度}已经知道，初等行变换就是用初等矩阵$E$左乘$A$，相应的，列变换就是$E$右乘$A$。
@@ -232,7 +236,11 @@
     \end{tikzpicture}
     \captionof{figure}{$A$的四个子空间}
 \end{center}
-\paragraph{矩阵的秩的不等式}参考：\url{https://zhuanlan.zhihu.com/p/55206421}
+
+\subsectionstar{矩阵的秩的不等式}
+
+% 参考：\url{https://zhuanlan.zhihu.com/p/55206421}
+
 \begin{theorem}{}{}
 	对于矩阵$A,B$有
 	\begin{equation}

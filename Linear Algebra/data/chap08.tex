@@ -84,7 +84,10 @@
 		\item $\forall u,v\in V,\enspace T(u+v)=T(u)+T(v);$
 		\item $\forall c\in\FF,\enspace T(cu)=cT(u).$
 	\end{compactenum}
-	则称映射$T$是线性映射(或线性变换，linear mapping)。特别地，$V\to\FF$的称为线性函数。
+	则称映射$T$是线性映射(或线性变换，linear mapping)。
+	% 特别地，$V\to\FF$的称为线性函数。
+	所有$V\to W$的线性映射的集合记作$\hom(V,W)$。
+	% ，hom是homomorphism的缩写。
 \end{definition}
 \begin{corollary}
 	$T(0)=0.$
@@ -314,7 +317,7 @@ $M_{B'}^B(L)$是所有线性变换$L:V\to W$到$\dim(W)\times\dim(V)$矩阵的�
 
 如何从已知的线性空间构造新的线性空间？
 \begin{definition}{对偶空间}{dual space}
-	线性空间$V$的对偶空间(dual space) $V^\ast$是所有线性映射$L:V\to\RR$构成的线性空间。
+	线性空间$V$的对偶空间(dual space) $V^\ast$是所有线性映射$L:V\to\FF$构成的线性空间。
 \end{definition}
 \begin{theorem}{对偶空间的基}{dual space base}
 	通过$V$的一组基$\{v_1,\ldots,v_n\}$可构造$V^\ast$的基$\{v^{\ast 1},\ldots,v^{\ast n}\}$，满足
@@ -395,7 +398,7 @@ $M_{B'}^B(L)$是所有线性变换$L:V\to W$到$\dim(W)\times\dim(V)$矩阵的�
 	$U$是一个有限维线性空间，$V$是$U$的子空间，则存在$U$的子空间$W$使得$U=V\oplus W.$
 \end{theorem}
 \begin{proof}
-	取$V$的一组基$\{v_1,\ldots,v_r\}$，可将其扩张成$U$的一组基$\{v_1,\ldots,v_r,$\ $w_1,\ldots,w_m\}$，取$W=\spn(w_1,\ldots,w_m)$即可。
+	取$V$的一组基$\{v_1,\ldots,v_r\}$，可将其扩张成$U$的一组基$\{v_1,\ldots,v_r,$\ $w_1,\ldots,w_m\}$，取$W=\lspan(w_1,\ldots,w_m)$即可。
 \end{proof}
 \begin{corollary}
 	\begin{equation}
@@ -422,7 +425,7 @@ $M_{B'}^B(L)$是所有线性变换$L:V\to W$到$\dim(W)\times\dim(V)$矩阵的�
 	\]
 \end{definition}
 \begin{definition}{张量空间$V^\ast\otimes V^\ast$}{tensor space V*oxV*}
-	考虑所有多重线性函数$L:V\times V\to\RR$的集合，我们可以在这个集合上定义加法和数乘：
+	考虑所有二重线性函数$L:V\times V\to\RR$的集合，我们可以在这个集合上定义加法和数乘：
 	\begin{compactitem}
 		\item 加法：$(L_1+L_2)(u,v)=L_1(u,v)+L_2(u,v);$
 		\item 数乘：$(cL)(u,v)=cL(u,v);$
@@ -476,7 +479,10 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	张量积并不满足交换律，即$u\otimes v\neq v\otimes u$是两个不同的张量。
 \end{remark}
 \begin{definition}{线性空间的张量积}{linear space tensor product}
-	若$U,V$是两个线性空间，各自有一组基$\{u_1,\ldots,u_m\},\{v_1,\ldots,v_n\}$，定义基的张量积$\set{u_i\otimes v_j}{1\leqslant i\leqslant m,1\leqslant j\leqslant n}$张成的线性空间为$U,V$的张量积，记为$U\otimes V$。
+	给定两个线性空间$U,V$和各自的一组基$\{u_1,\ldots,u_m\},\{v_1,\ldots,v_n\}$，定义$U,V$的张量积是基的张量积张成的线性空间：
+	\begin{equation}
+		U\otimes V=\lspan\set{u_i\otimes v_j}{1\leqslant i\leqslant m,1\leqslant j\leqslant n}
+	\end{equation}
 \end{definition}
 \begin{corollary}
 	由定义 
@@ -512,7 +518,11 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	\]
 \end{example}
 \begin{example}{$V\otimes\cdots\otimes V\otimes V^\ast\otimes\cdots\otimes V^\ast=V^{\otimes k}\otimes V^{\ast\otimes\ell}$}{}
-	$V\otimes\cdots\otimes V\otimes V^\ast\otimes\cdots\otimes V^\ast=V^{\otimes k}\otimes V^{\ast\otimes\ell}$的基 
+	考虑
+	\[
+		V^{\otimes k}\otimes V^{\ast\otimes\ell}:=\underbrace{V\otimes\cdots\otimes V}_k\otimes\underbrace{V^\ast\otimes\cdots\otimes V^\ast}_\ell,
+	\]
+	的基： 
 	\[
 		\set{v_{i_1}\otimes\cdots\otimes v_{i_k}\otimes v^{\ast j_1}\otimes\cdots\otimes v^{\ast j_\ell}}{1\leqslant i_1,\ldots,i_k,j_1,\ldots,j_\ell\leqslant n}
 	\]
