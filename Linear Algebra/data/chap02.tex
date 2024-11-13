@@ -2,48 +2,68 @@
 
 线性方程(linear equation)是未知数最高次数为1的方程。考虑$m$个$n$元线性方程构成的线性方程组(linear equation set)
 \[
-	\sum_{j=1}^nA_{ij}x_j=b_i.\quad i=1,2,\ldots,m.
+	\lhkh{\begin{aligned}
+		A_{11}x_1+\cdots+A_{1n}x_n&=b_1,\\
+		\cdots&\\
+		A_{m1}x_1+\cdots+A_{mn}x_n&=b_m,
+	\end{aligned}}
 \]
-可以把系数写成系数矩阵$A$，即$Ax=b$。
+可以把系数写成系数矩阵$A$，未知数和常数写成向量$x,b$，即$Ax=b$。
 
 \section{消元法}
 \label{sec:elimination}
 
-\begin{definition}{Gauss消元法}{Gaussian elimination}
-	消元法(elimination)就是通过对方程之间倍加消元，得到一个上三角方程组，比如
+如何解线性方程组，得到$x$？如果$A$是可逆的，将$Ax=b$左乘逆$A\iv$，当然可以得到$x=A\iv b$。但一般我们不知道逆$A\iv$，甚至$A$本身可能都不可逆，此时如何求解？
+
+\begin{theorem}{Gauss消元法}{Gaussian elimination}
+	消元法(elimination)就是通过对方程之间倍加消元，得到一个等价的上三角方程组。
 	\[
-		\begin{equationset}
-			x-2y&=1\\3x+2y&=11
-		\end{equationset}\implies
-		\begin{equationset}
-			x-2y&=1\\8y&=8
-		\end{equationset}
+		\text{e.g. }\lhkh{\begin{aligned}
+			x_1-2x_2&=1\\3x_1+2x_2&=11
+		\end{aligned}}\iff
+		\lhkh{\begin{aligned}
+			x_1-2x_2&=1\\8x_2&=8
+		\end{aligned}}\iff
+		\lhkh{\begin{aligned}
+			x_1\phantom{-2x_2}&=3\\x_2&=1
+		\end{aligned}}
 	\]
-	而主元(pivot element)就是每个方程的第一个非0系数。
-\end{definition}
+	具体算法为：
+	\begin{compactenum}
+		\item 找到第1个$x_1$系数不为0的方程作为方程(1)；%$x_1$的系数就是第一个主元。
+		\item 通过将方程(1)倍加，从方程(2)到方程$(m)$中消去$x_1$ ；
+		\item 得到的方程(2)到方程$(m)$构成$(n-1)$元的线性方程组，重复步骤1。
+		\item 最后结果如果是一个上三角方程组，便可从最后一个方程开始解出全部未知数。
+		否则消元法失效，此时：
+		\begin{itemize}
+			\item 若得到$0\neq 0$，则方程组无解；
+			\item 若得到$0=0$，则方程组有无穷多解。
+		\end{itemize}
+	\end{compactenum}
+	上三角方程组中每个方程的第一个非0系数称为主元(pivot element)。
+\end{theorem}
 
 \begin{remark}
-	当主元数目$<$未知数时，消元法失效，若最终结果：
-	\begin{compactitem}
-		\item 得到$0\neq 0$，则方程组无解；
-		\item 得到$0=0$，则方程组有无穷多解。
-	\end{compactitem}
-	因此消元法要求：方程个数与未知数个数相同。
+	当主元数目$<$未知数时，消元法失效。因此有唯一解要求：独立方程个数与未知数个数相同。
 \end{remark}
 
-\begin{method}{消元法算法}{elimination algorithm}
-	\begin{compactenum}
-		\item 找到第1个$x_1$系数不为0的方程并移到最上面；%$x_1$的系数就是第一个主元。
-		\item 通过将方程1倍加，从第2个到第$n$个方程中消去$x_1$ ；
-		\item 得到的第2个到第$n$个方程构成$(n-1)$元的线性方程组，重复步骤1。
-		\item 最后结果如果是一个上三角方程组，便可从最后一个方程开始解出全部未知数。否则消元法失效。
-	\end{compactenum}
-\end{method}
-
-
-
 \section{矩阵的行变换}
-方程中，置换、倍加、倍乘同时作用在系数矩阵$A$和$b$上，因此可以写成增广矩阵(augmented matrix) $[A\enspace b]$并对其消元得到$[I\enspace b']$。类似的，可以考虑对一般矩阵进行置换、倍加、倍乘的操作。
+
+由于消元法对方程的倍加操作同时作用在系数矩阵$A$和常数项$b$上，因此可以写成分块矩阵的形式：$[A\enspace b]$，称为增广矩阵(augmented matrix)，对其消元得到$[I\enspace x]$：
+\[
+	\fkh{\begin{array}{cc|c}
+		1&-2&1\\3&2&11
+	\end{array}}
+	\enspace\sim\enspace
+	\fkh{\begin{array}{cc|c}
+		1&-2&1\\ &8&8
+	\end{array}}
+	\enspace\sim\enspace
+	\fkh{\begin{array}{cc|c}
+		1&&3\\ &1&1
+	\end{array}}.
+\]
+类似的，可以考虑对一般矩阵进行置换、倍加、倍乘的操作。
 \begin{definition}{矩阵的初等行变换}{}
 	\begin{compactitem}
 		\item 倍加(row addition)：一行乘系数加到另一行
@@ -52,37 +72,34 @@
 	\end{compactitem}
 \end{definition}
 
-\begin{remark}
-	利用Gauss-Jordan消元法%Gauss-Jordan elimination
-	对增广矩阵$[A\enspace I]$做消元操作：
-	\[
-		[A\enspace I]\enspace\to\enspace[I\enspace A\iv].
-	\]
-	就可以得到$A$的逆$A\iv$。
-\end{remark}
-
 \begin{definition}{行等价}{row-equivalent}
-	如果一个矩阵可以经过行变换得到另一个矩阵，则它们行等价(row-equivalent)。
+	如果一个矩阵可以经过行变换得到另一个矩阵，则它们行等价(row equivalent)。
 \end{definition}
+
+\begin{remark}
+	行等价是一种等价关系，满足自反性、对称性和传递性。见\dfnref{dfn:equivalence relation}。
+\end{remark}
 
 \begin{definition}{行阶梯矩阵}{row echelon matrix}
 	矩阵$M$若其满足以下性质：
 	\begin{compactitem}
 		\item 如果$M$的第$i$行是0行，则下面的所有行的都是0行；
-		\item 如果$M$的第$i$行不全是0，则从左数第一个非0元素叫做主元。每个主元所在的列都在其上一行的主元的所在列的右边；
-		\item 同一列中在主元下面的元素都是0。
+		\item 如果$M$的第$i$行不全是0，则从左数第一个非0元素是主元。
+		\item 记第$i$行的主元所在列为第$\ell_i$列，若第$i,j$行都不是0行且$i<j$，则$\ell_i<\ell_j$。
+		% 每个主元所在的列都在其上一行的主元的所在列的右边；
+		% \item 主元下面的元素都是0。
 	\end{compactitem}
 	则称矩阵$M$为行阶梯型(row echelon form)。
 	% 所有与$A$行等价的行阶梯型矩阵的集合记作$ref(A)$。
 	\tcblower
-	比如，形如(其中主元$\ast$非0，$\cdot$任意)
+	比如，形如($\ast$表示任意非0数，不同位置的$\ast$不一定相等，而$\cdot$可以是任意数)
 	\[
 		\begin{bmatrix}
 			0&\ast&\cdot&\cdot&\cdot&\cdot&\cdot\\
 			0&0&0&\ast&\cdot&\cdot&\cdot\\
 			0&0&0&0&\ast&\cdot&\cdot\\
 			0&0&0&0&0&0&0
-		\end{bmatrix},
+		\end{bmatrix}
 	\]
 	就是一个行阶梯矩阵，其中$\ast$是主元。
 \end{definition}
@@ -138,7 +155,7 @@
 		\[
 			E_{ij}(a):=
 			\begin{bmatrix}
-				\ddots&&a\\ &\ddots\\ &&\ddots
+				\ddots\\ &1&&a\\ &&\ddots\\ &&&1\\ &&&&\ddots
 			\end{bmatrix}=I+ae_{ij},
 		\]
 		逆：$E_{ij}(a)\iv=E_{ij}(-a)$；
@@ -155,14 +172,83 @@
 		\[
 			E_i(c):=
 			\begin{bmatrix}
-				\ddots\\ &c\\ &&\ddots
+				\ddots\\ &1\\ &&c\\ &&&1\\ &&&&\ddots
 			\end{bmatrix}=I+(c-1)e_{ii}.
 		\]
 		逆：$E_i(c)\iv=E_i(c\iv).$
 	\end{compactitem}
 \end{definition}
 消元法：用一系列初等矩阵$E_1,\ldots,E_k$左乘$A$，把$A$化简成行阶梯矩阵。
+
+\begin{theorem}
+	{可逆的等价命题}{}
+	若$A$是$n$阶方阵，则下列叙述等价：
+	\begin{enumerate}
+		\item $A$可逆；
+		\item $\forall b\in\FF^n$，$Ax=b$的解唯一；
+		\item 齐次线性方程组$Ax=0$只有零解；
+		\item $A$的行阶梯矩阵有$n$个主元；
+		\item $\rref(A)=I$；
+		\item $A$可以写成有限个初等矩阵的乘积。
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	采用轮转证法：
+
+	$(1)\implies(2)$：左乘$A\iv$可得$x=A\iv b$；
+
+	$(2)\implies(3)$：取$b=0$，又注意到$A0=0$，由解的唯一性得证；
+
+	$(3)\implies(4)$：方程组有唯一解等价于主元数$=$未知数个数$=n$；
+
+	$(4)\implies(5)$：显然；
+
+	$(5)\implies(6)$：在$A$化为$\rref(A)=I$的初等变换中，与每步初等变换过程等价的初等矩阵为$E_1,\ldots,E_k$，即$E_k\cdots E_1A=I$，因此$A=E_1\iv\cdots E_k\iv$，且$E_1\iv,\ldots,E_k\iv$也是初等矩阵；
+
+	$(6)\implies(1)$：初等矩阵均可逆，故其乘积$A$也可逆。
+\end{proof}
+
+\begin{remark}
+	可以证明：$n$阶可逆矩阵可以表示成不超过$n^2$个初等矩阵的乘积。
+\end{remark}
+
+\begin{corollary}
+	利用Gauss-Jordan消元法
+	对增广矩阵$[A\enspace I]$做消元操作，就可以得到$A$的逆$A\iv$：
+	\[
+		[A\enspace I]\enspace\sim\enspace[I\enspace A\iv].
+	\]
+\end{corollary}
+
+\begin{definition}
+	{对角占优矩阵}{diagonally dominant matrix}
+	给定方阵$A\in\FF^{n\times n}$，若每个对角元均在此行占优，即$\forall i=1,\ldots,n$
+	\begin{equation}
+		\abs{A_{ii}}>\sum_{j\neq i}\abs{A_{ij}},
+	\end{equation}
+	则称$A$是(严格)对角占优的(strict diagonally dominant)；若上式不等号仅为$\geq$，则称$A$是弱对角占优的(weak \textasciitilde)。
+\end{definition}
+
+\begin{theorem}
+	{对角占优矩阵可逆}{}
+	若方阵$A$严格对角占优，则$A$可逆。
+\end{theorem}
+
+\begin{proof}
+	若$A$不可逆，则$\exists x\neq 0$使得$Ax=0$。令$k=\arg\max_i\abs{x_i}$，即$\abs{x_k}=\max_i\abs{x_i}$。考虑$Ax$的第$k$行：
+	\[
+		\sum_{i=1}^nA_{ki}x_i=0,\iff A_{kk}x_k=-\sum_{i\neq k}A_{ki}x_i,
+	\]
+	由三角不等式
+	\[
+		\abs{A_{kk}}\abs{x_k}=\abs{\sum_{i\neq k}A_{ki}x_i}\leq\sum_{i\neq k}\abs{A_{ki}}\abs{x_i}\leq\sum_{i\neq k}\abs{A_{ki}}\abs{x_k},
+	\]
+	与$A$对角占优矛盾！故$A$可逆。
+\end{proof}
+
 \section{LU分解}
+
 \begin{definition}{上/下三角矩阵}{upper/lower triangular matrix}
 	上三角矩阵(upper triangular matrix)~$U$是主对角线以下元素都是0的方阵
 	\[
@@ -205,7 +291,4 @@
 	\]
 	其中$D$是对角矩阵，$L,U$是单位下/上三角的(unitriangular)，即其对角元均为1。
 \end{theorem}
-
-
-
 
