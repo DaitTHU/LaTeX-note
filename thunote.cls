@@ -64,11 +64,13 @@
 \newcommand{\dfnref}[1]{定义 \ref{#1}}
 \newcommand{\thmref}[1]{定理 \ref{#1}}
 \newcommand{\exmref}[1]{例 \ref{#1}}
+\newcommand{\figref}[1]{图 \ref{#1}}
 % \let\oldpageref\pageref
 % \renewcommand{\pageref}[1]{第 \oldpageref{#1} 页}
 
 \RequirePackage{graphicx}
 \RequirePackage[hypcap=false]{caption}
+\RequirePackage{subcaption}
 
 \RequirePackage{tikz}
 \usetikzlibrary{quotes, angles, patterns}
