@@ -6,48 +6,44 @@
 \paragraph{Michelson-Morley实验}
 人们最开始假设光和声音一样，都需要某种介质来支持它的传播。最初假想光是在一种叫作以太（ether）的媒介中传播的，光在相对于以太以不同状态运动时会有不同的速度。为了验证以太是否存在以及光速是否是常数，1887年Michelson和Morley设计了如下所示的光学干涉装置：
 \begin{center}
-	\begin{tikzpicture}
-		\draw[-latex](0, 0)--(1.1, 0);
-		\draw(1, 0)--(2, 0)node[below]{$O$};
-		\draw[thick](2-.5, -.5)--(2.5, .5)node[above]{BS};
-		\draw[-latex](2-.05, -.05)--(3.6, -.05)node[below]{$c+u$};
-		\draw(3.5, -.05)--(5, -.05);
-		\draw(2.05, .05)--(3.6, .05)node[above]{$c-u$};
-		\draw[latex-](3.5, .05)--(5, .05);
+	\begin{tikzpicture}[scale=1.2]
+		\draw[->-](0, 0)--(2, 0)node[shift={(.2, -.3)}]{$O$};
+		\draw[thick](2-.5, -.5)--(2.5, .5)node[above right]{BS};
+		\draw[->-](2, 0)--(5, 0)node[midway, below]{$c+u$};
+		\draw[-<-](2.1, .1)--(5, .1)node[midway, above]{$c-u$};
 		\fill[gray!50](5, .5)rectangle(5.2, -.5);
-		\node[right]at(5.2, 0){$M_1$};
-		\draw[thick](5, .5)--(5, -.5);
-		\draw[-latex](2-.05, -.05)--(2-.05, 1.6);
-		\draw(2-.05, 1.5)node[left]{$\sqrt{c^2-u^2}$}--(2-.05, 3);
-		\draw(2.05, .05)--(2.05, 1.6);
-		\draw[latex-](2.05, 1.5)--(2.05, 3);
+		\draw[thick](5, -.5)--(5, .5)node[above]{M$_1$};
+		\draw[->-](2, 0)--(2, 3)node[midway, left]{$\sqrt{c^2-u^2}$};
+		\draw[-<-](2.1, .1)--(2.1, 3);
 		\fill[gray!50](1.5, 3)rectangle(2.5, 3.2);
-		\node[right]at(2.5, 3.1){$M_2$};
-		\draw[thick](1.5, 3)--(2.5, 3);
-		\draw[latex-](3.5, 1.5)--(4.5, 1.5)node[midway, below]{$u$}node[midway, above]{ether wind};
+		\draw[thick](1.5, 3)--(2.5, 3)node[right]{M$_2$};
+		\draw[<-](3.5, 1.5)--(4.5, 1.5)node[midway, below]{$u$}node[midway, above]{ether wind};
 	\end{tikzpicture}
 	\captionof{figure}{Michelson-Morley光学干涉仪的实验装置图}
-	%\label{pic:Michelson-Morley}
+	\label{fig:Michelson-Morley}
 \end{center}
-图中最左侧相干光源发出的光在经过分束器(beam splitter, BS)中心$O$后，其中一半的光被透射后抵达镜子$M_1$然后被反射回$O$点，另一半的光被反射后抵达镜子$M_2$然后被反射回$O$点，并与从$M_1$反射回来的光发生干涉。假设整个装置在以太中以速度$u$向右运动，那么这等价于装置不动，而以太风以速度$u$向左吹来。%我们可以把“以太风”想象成是一条水流速度为$u$向左均匀流动的河流，把光想象成是一艘固有速度是$c$的船。那么
-容易得出光在水平方向从$O$到$M_1$再返回$O$的路径上所花费的时间是：
+图中最左侧相干光源发出的光在经过分束器(beam splitter, BS)中心$O$后，其中一半的光被透射后抵达镜子M$_1$然后被反射回$O$点，另一半的光被反射后抵达镜子M$_2$然后被反射回$O$点，并与从M$_1$反射回来的光发生干涉。假设整个装置在以太中以速度$u$向右运动，那么这等价于装置不动，而以太风以速度$u$向左吹来。%我们可以把“以太风”想象成是一条水流速度为$u$向左均匀流动的河流，把光想象成是一艘固有速度是$c$的船。那么
+容易得出光在水平方向从$O$到M$_1$再返回$O$的路径上所花费的时间是：
 \[
 	T_1=\frac L{c-u}+\frac L{c+u}=\frac{2L/c}{1-u^2/c^2}.
 \]
-同理，容易得出光在竖直方向上从$O$到$M_2$再返回$O$的路径上所花费的时间是：
+同理，容易得出光在竖直方向上从$O$到M$_2$再返回$O$的路径上所花费的时间是：
 \[
 	T_2=\frac{2L}{\sqrt{c^2-u^2}}=\frac{2L/c}{\sqrt{1-u^2/c^2}}.
 \]
-容易发现$T_1\neq T_2$。为了简化计算，假设装置在以太中的运动速度$u\ll c$，那么我们可以对小量做Taylor展开得出光沿着两条路径上传播的时间差是：
+容易发现$T_1\neq T_2$。由于装置在以太中的运动速度$u\ll c$，%对小量做Taylor展开得出光沿着两条路径上传播的时间差是：
 \[
 	T_1-T_2=\frac{2L}c\biggkh{1+\frac{u^2}{c^2}}-\frac{2L}c\biggkh{1+\frac{u^2}{2c^2}}+\bigo(u^4)=\frac{Lu^2}{c^3}+\bigo(u^4).
 \]
-由于光沿着两条路径传播存在着如上所示的时间差，即存在所谓光程差，所以我们自然预期在实验观测中会发现光学干涉条纹的偏移。然而，最终的实验结果发现光学干涉条纹并未发生任何改变，%也就是说上述的时间差结果是0！
-而且把光学桌旋转一定角度后发现干涉条纹依然没有发生任何改变！这也就从实验上证明了以太并不存在，光速恒为常数$c$！
+由于存在光程差，$O$点上应当观测到干涉条纹，且随着$u$的改变，干涉条纹也应当发生偏移。
+然而，Michelson-Morley的实验结果发现光学干涉条纹并未发生任何改变，%也就是说上述的时间差结果是0！
+% 而且把整个实验装置旋转一定角度后发现干涉条纹依然没有发生任何改变！
+这也就从实验上证明了以太并不存在，光速恒为常数$c$！
 \section{狭义相对论}
 此节仅介绍必要内容，而略去狭义相对论的大部分推导内容。%如尺缩效应、钟慢效应等。
-\paragraph{Lorentz变换}
-给定惯性系$S$和$S'$，$S'$系相当于$S$系有$x$方向的相对速度$v$，则同一事件(event)在$S,S'$系中的坐标有关系：
+\subsection{Lorentz变换}
+给定惯性系$S$和$S'$，$S'$系相对$S$系有$x$方向的相对速度$v$。
+同一事件(event)在$S,S'$系中的坐标分别为$(ct,x,y,z)$和$(ct',x',y',z')$，则Lorentz变换给出：
 %\footnote{为了之后计算方便，也为了更好地凸显出理论的对称性，我们把$c$这个常数定义成1，也就是把光速$c$定义成一个标准单位．这样处理后时间和空间的量纲也统一起来了}
 \begin{equation}
 	\begin{bmatrix}
@@ -60,7 +56,10 @@
 		ct\\x\\y\\z
 	\end{bmatrix}
 \end{equation}
-其中相对速度$\beta\equiv v/c$，Lorentz因子$\gamma\equiv 1/\sqrt{1-\beta^2}$。
+其中相对速度$\beta\equiv v/c$，Lorentz因子
+\[
+    \gamma\equiv\frac1{\sqrt{1-\beta^2}}.
+\]
 
 如果质点在$S$系中有$x$方向的速度$u=\d x/\d t$，则其在$S'$中的速度为
 \begin{equation}
@@ -110,7 +109,7 @@
 
 狭义相对论时空的具体几何结构由间隔(interval)确定
 \[
-    s^2(x_A,x_B)=-c^2(t_A-t_B)^2+(x_A-x_B)^2+(y_A-y_B)^2+(z_A-z_B)^2.
+    s^2=-c^2(t_A-t_B)^2+(x_A-x_B)^2+(y_A-y_B)^2+(z_A-z_B)^2.
 \]
 可以验证：间隔在Lorentz变换下是不变的：
 \footnote{
@@ -160,6 +159,8 @@
     x_0=-x^0,\enspace x_1=x^1,\enspace x_2=x^2,\enspace x_3=x^3.
 \]
 
+\subsection{相对论动力学}
+
 \paragraph{相对论运动学}
 
 由于钟慢效应(time dilation)，在静止系中的时间流速是最慢的，可定义
@@ -197,7 +198,7 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
     频率为$\nu$的光子与一个静止的电子发生Compton散射，散射后光子的频率变为$\nu'$，散射角为$\theta$，反冲电子动量大小为$p_\elc$，反冲角为$\phi$。
     \begin{center}
         \usetikzlibrary{decorations.pathmorphing}
-        \begin{tikzpicture}[>=latex]
+        \begin{tikzpicture}
             \coordinate (O) at (0, 0);
             \coordinate (x) at (3, 0);
             \coordinate (v) at (3, 2);
@@ -264,22 +265,28 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
 \section{相对论电动力学}
 为什么会有磁场？利用静电学和相对论，我们可以计算出载电流线和运动电荷之间的磁力，而不需要援引磁力定律。
 \begin{example}{导线的磁场力}{}
-    $S$系中有一导线，其中正负电荷线密度为$\pm\lambda$，在导线中反向运动，速度大小为$v$，则正负电荷的线密度大小均为$\lambda=\gamma\lambda_0$，电流为$I=2\lambda v$，导线外距离$r$处有一电荷$q$沿平行于导线的方向以速度$u<v$运动。
+    $S$系中有一导线，其中正负电荷静止时的线密度为$\pm\lambda_0$，通电正负电荷后在导线中反向运动，速度为$v_\pm=\pm v$，则正负电荷的线密度为$\lambda_\pm=\pm\gamma\lambda_0$，电流为$I=2\lambda v$，导线外距离$r$处有一电荷$q$沿平行于导线的方向以速度$u<v$运动。
 
     %$S$系中导线没有净电荷，因此电荷$q$不受电场力。
     \begin{center}
-        \begin{tikzpicture}[>=latex]
-            \draw[->, thick](2, 2.3)--(3, 2.3)node[right]{$\bm v$};
-            \draw[->, thick](3, 1.7)--(2, 1.7)node[left]{$-\bm v$};
-            \draw[thick](-3, 2)--(3, 2)node[near start, above]{$\lambda$};
+        \begin{tikzpicture}[xscale=.8]
+            \draw[->, thick](-3, 2.3)node[left]{$\lambda$}--(-2, 2.3)node[right]{$\bm v$};
+            \draw[->, thick](3, 1.7)node[right]{$-\lambda$}--(2, 1.7)node[left]{$-\bm v$};
+            \draw[thick](-3, 2)--(3, 2);
             \draw[dashed](0, 0)--(0, 2)node[midway, right]{$r$};
-            \draw[->, thick](0, 0)node[left]{$q$}--(.5, 0)node[above]{$\bm u$};
-            \fill[black](0, 0)circle(0.1);
+            \draw[->, thick](0, 0)--(.5, 0)node[above]{$\bm u$};
+            \fill[black](0, 0)circle(0.1)node[left]{$q$};
         \end{tikzpicture}
-        \captionof{figure}{$S$系中导线与电荷示意图}
+        \begin{tikzpicture}[xscale=.8]
+            \draw[->, thick](-3, 2.3)node[left]{$\lambda$}--(-2, 2.3)node[right]{$\bm v$};
+            \draw[->, thick](3, 1.7)node[right]{$-\lambda$}--(2, 1.7)node[left]{$-\bm v$};
+            \draw[thick](-3, 2)--(3, 2);
+            \draw[dashed](0, 0)--(0, 2)node[midway, right]{$r$};
+            \fill[black](0, 0)circle(0.1)node[left]{$q$};
+        \end{tikzpicture}
+        \captionof{figure}{$S$系和$S'$系中导线与电荷示意图}
     \end{center}
     转换到粒子静止的参考系$S'$，则电荷$q$不受磁场力，仅受电场力。
-    
     $S'$系中正负电荷的速度为
     \[
         v_\pm=\frac{v\mp u}{1\mp vu/c^2},
