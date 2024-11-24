@@ -12,36 +12,43 @@
 \end{alignat*}
 \fi
 
-考虑介质为无源无限介质，并假设场是随时间简谐的($\e{-\i\omega t}$)，Maxwell方程为
-\begin{alignat*}{2}
-    \div\bm D&=0,&\qquad\curl\bm E-\i\omega\bm B&=\bm 0,\\
-    \div\bm B&=0,&\curl\bm H+\i\omega\bm D&=\bm 0.    
-\end{alignat*}
+考虑无源介质($\rho=0,\;\bm J=\bm 0$)，并假设场是随时间简谐的($\e{-\i\omega t}$)，Maxwell方程为
+\begin{subequations}
+    \begin{align}
+        \div\bm D&=0,\\
+        \div\bm B&=0,\\
+        \curl\bm E&=\i\omega\bm B,\\
+        \curl\bm H&=-\i\omega\bm D. 
+    \end{align}
+\end{subequations}
 对于均匀各向同性的线性介质，
 \[
     \bm D=\varepsilon\bm E,\quad\bm B=\mu\bm H,
 \]
 %进一步假设没有色散，即$\varepsilon,\mu$是不随时间变化的正实数(无损耗)，可以得到
-则$\bm E,\bm H$均满足如下的Helmholtz波动方程：
+可以推出，$\bm E,\bm H$均满足如下的Helmholtz波动方程：
 \begin{equation}
-    (\lapla+\mu\varepsilon\omega^2)u=0,
+    (\lapla+k^2)\begin{Bmatrix}
+        \bm E\\\bm H
+    \end{Bmatrix}=0,
 \end{equation}
-一个解的例子是沿$x$方向传播的平面波$\e{\i(kx-\omega t)}$，其波数(wave number)为
-\[
+其波数(wave number)定义为
+\begin{equation}
     k=\sqrt{\mu\varepsilon}\omega,
-\]
+\end{equation}
+Helmholtz方程的一个解是沿$z$方向传播的平面波$\e{\i(kz-\omega t)}$，其
 相速度(phase velocity)为
 \begin{equation}
     v:=\frac{\omega}k=\frac1{\sqrt{\mu\varepsilon}},
 \end{equation}
-并将光速与其的比值称为折射率(index of refraction)
+并将光速与相速度的比值称为折射率(index of refraction)
 \begin{equation}
     n:=\frac cv\geqslant1,
 \end{equation}
-对于非色散介质，$\varepsilon,\mu$与频率无关，有通解
-\[
-    u(x,t)=f(x-vt)+g(x+vt).
-\]
+% 对于非色散介质，$\varepsilon,\mu$与频率无关，有通解
+% \[
+%     u(x,t)=f(x-vt)+g(x+vt).
+% \]
 \paragraph{平面电磁波}
 频率为$\omega$、波数为$k$、传播方向为$\uvec n$的平面电磁波一般具有如下形式：
 \begin{equation}
@@ -50,148 +57,211 @@
         \bm B=\bm B_0\e{\i(\bm k\cdot\bm x-\omega t)},
     \end{cases}
 \end{equation}
-$\bm E_0,\bm B_0$是常矢量，$\bm k:=k\uvec n$为波矢(wave vector)。
-\begin{example}{}{}
+其中$\bm E_0,\bm B_0$是常矢量，$\bm k:=k\uvec n$为波矢(wave vector)。
+\begin{theorem}{}{}
     无源Maxwell方程组与下列方程组等价
-    \begin{align*}
-        \lapla\bm E+k^2\bm E&=\bm 0,\\
-        \div\bm E&=0,\\
-        \curl\bm E&=\i\omega\bm B.
-    \end{align*}
-\end{example}
-由电磁波的方程易得：电磁波是横波(transverse wave)，即
-\begin{equation}
-    \label{eqn:transverse}
-    \bm k\cdot\bm E_0=0,\enspace\bm k\cdot\bm B_0=0,\quad\omega\bm B_0=\bm k\times\bm E_0.
-\end{equation}
-同时$\uvec n\cdot\uvec n=1$，注意不是$\abs{\uvec n}=1$，因为$\uvec n$可以是复矢量：
-\begin{compactitem}
-	\item 若$\uvec n$是实矢量，则$\bm E_0$和$\bm B_0$有相同的相位：
-    \begin{equation}
-        \bm E_0=E_0\uvec\epsilon_1,\quad \bm B_0=\sqrt{\mu\varepsilon}E_0\uvec\epsilon_2.
-    \end{equation}
-    $\uvec n,\uvec\epsilon_1,\uvec\epsilon_2$是两两正交的单位矢量。$\uvec n$为传播矢量(propagation vector)，$\uvec\epsilon_1,\uvec\epsilon_2$为极化矢量(polarization vector)。
-	\item 若$\uvec n$是复矢量，分成实部和虚部两部分：
-    \[
-        \uvec n=\Re(\uvec n)+\i\Im(\uvec n),
-    \]
-    则电磁波为非均匀平面波：该波在某个方向上呈指数增长或衰减
-    \[
-        \e{\i(\bm k\cdot\bm x-\omega t)}=\e{-k\Im(\uvec n)\cdot\bm x}\e{\i(k\Re(\uvec n)\cdot\bm x-\omega t)},
-    \]
-    等幅面和等相面仍然是平面，但它们不再平行；横波的关系\eqref{eqn:transverse}仍成立，并且由于$\uvec n\cdot\uvec n=1$，要求
-    \[
-        \abs{\Re(\uvec n)}^2-\abs{\Im(\uvec n)}^2=1,\quad \Re(\uvec n)\cdot\Im(\uvec n)=0.
-    \]
-\end{compactitem}
+    \begin{subequations}
+        \begin{align}
+            \lapla\bm E+k^2\bm E&=\bm 0,\\
+            \div\bm E&=0,\\
+            \curl\bm E&=\i\omega\bm B.
+        \end{align}
+    \end{subequations}
+\end{theorem}
+\begin{corollary}
+    电磁波是横波(transverse wave)，即
+    \begin{subequations}
+        \label{eqn:transverse}
+        \begin{align}
+            \bm k\cdot\bm E_0&=0,\\
+            \bm k\cdot\bm B_0&=0,\\
+            \bm k\times\bm E_0&=\omega\bm B_0.
+        \end{align}
+    \end{subequations}
+    同时$\uvec n\cdot\uvec n=1$，注意：$\uvec n$可以是复矢量，此时$\abs{\uvec n}^2=\uvec n\cdot\uvec n^*\neq 1$。
+\end{corollary}
+\paragraph{实波矢}
+若$\uvec n$是实矢量，则$\bm E_0$和$\bm B_0$有相同的相位：
+\begin{subequations}
+    \begin{align}
+        \bm E_0&=E_0\uvec\epsilon_1,\\
+        \bm B_0&=\sqrt{\mu\varepsilon}E_0\uvec\epsilon_2.
+    \end{align}
+\end{subequations}
+其中
+$\uvec n,\uvec\epsilon_1,\uvec\epsilon_2$是两两正交的单位矢量。$\uvec n$为传播矢量(propagation vector)，$\uvec\epsilon_1,\uvec\epsilon_2$为极化矢量(polarization vector)。
+\paragraph{复波矢}
+若$\uvec n$是复矢量，
+% 分成实部和虚部两部分：
+% \[
+%     \uvec n=\Re(\uvec n)+\i\Im(\uvec n),
+% \]
+则电磁波为非均匀平面波，在虚部方向$\Im(\uvec n)$上呈指数衰减(或增长)
+\[
+    \e{\i(\bm k\cdot\bm x-\omega t)}=\e{-k\Im(\uvec n)\cdot\bm x}\e{\i(k\Re(\uvec n)\cdot\bm x-\omega t)},
+\]
+等幅面和等相面仍然是平面，但它们不再平行；横波的关系\eqref{eqn:transverse}仍成立，并且由于$\uvec n\cdot\uvec n=1$，要求
+\begin{subequations}
+    \begin{align}
+        \abs{\Re(\uvec n)}^2-\abs{\Im(\uvec n)}^2&=1,\\
+        \Re(\uvec n)\cdot\Im(\uvec n)&=0.
+    \end{align}
+\end{subequations}
+
 \section{偏振}
-前文指出：平面波的电场沿$\uvec\epsilon_1$方向，磁场沿$\uvec\epsilon_2$方向；但显然，一旦确定极化矢量$\uvec\epsilon_1,\uvec\epsilon_2$，电场当然也可以沿其他方向，一般地，
+
+前文指出：均匀平面波的电场沿$\uvec\epsilon_1$方向，磁场沿$\uvec\epsilon_2$方向；但显然，一旦确定极化矢量$\uvec\epsilon_1,\uvec\epsilon_2$后，一个均匀平面波的电场当然也可以沿其他方向，一般地，
+可以将任意均匀平面波分解成两种偏振方向的波：
 %也可以有一种平面波的电场$\uvec\epsilon_2$方向，
 %我们分别称其为偏振矢量为$\uvec\epsilon_{1,2}$的线偏振波，这两种偏振波是不同的。一般地，
 \[
     \bm E=(E_1\uvec\epsilon_1+E_2\uvec\epsilon_2)\e{\i(\bm k\cdot\bm x-\omega t)},
 \]
-振幅$E_1,E_2$是复数，因为不同偏振波之间可以有相位差$\delta$。不妨设
-\[
-    E_1=a_1\e{\i\vd_1},\quad E_2=a_2\e{\i\vd_2}.
-\]
-若选定$(\uvec n,\uvec\epsilon_1,\uvec\epsilon_2)=(\uvec z,\uvec x,\uvec y)$，取实部得到
-\begin{align*}
-    E_x&=a_1\cos(kz-\omega t+\vd_1),\\
-    E_y&=a_2\cos(kz-\omega t+\vd_2).
-\end{align*}
+振幅$E_1,E_2$是复数，$E_2$相对$E_1$的相位差为$\delta$。
+% 因为$t$的起始点是任意的，不妨令$E_1$是实数，则$E_2=\abs{E_2}\e{\i\delta}$。
+% \[
+%     E_1=a_1\e{\i\vd_1},\quad E_2=a_2\e{\i\vd_2}.
+% \]
+% 若选定$(\uvec n,\uvec\epsilon_1,\uvec\epsilon_2)=(\uvec z,\uvec x,\uvec y)$，取实部得到
+% \begin{align*}
+%     E_x&=a_1\cos(kz-\omega t+\vd_1),\\
+%     E_y&=a_2\cos(kz-\omega t+\vd_2).
+% \end{align*}
 \paragraph{线偏振}
 若$E_1,E_2$同相($\vd=0,180\degree$)，则$\bm E$是线偏振的(linear polarized)。%$\bm E$与$\uvec\epsilon_1$的夹角是不变的，
 %在$\uvec\epsilon_1,\uvec\epsilon_2$坐标系中，
-$\bm E$的终点在一条直线上简谐运动。
+如\figref{fig:linear polarization}，
+$\bm E$的终点在一条直线(图中虚线)上简谐运动。
+细箭头表示$\bm E$终点运动方向，
 \begin{center}
 	\begin{tikzpicture}
-		\draw[thick, -latex](-3, 0)--(3, 0)node[below]{$x$};
-		\draw[thick, -latex](0, -2)--(0, 2)node[left]{$y$};
-		\node[above left]at(0, 0){$O$};
-		\draw[thick, latex-latex](-2, -1.5)--(2, 1.5);
+        \coordinate(O)at(0, 0);
+        \coordinate(x)at(3, 0);
+        \coordinate(y)at(0, 2); 
+        \coordinate(E)at(2, 1.5); 
+		\draw[->](-3, 0)--(x)node[below]{$\epsilon_1$};
+		\draw[->](0, -2)--(y)node[left]{$\epsilon_2$};
+		\node[below right]at(O){$O$};
+		\draw[dashed](-2, -1.5)--(E);
+		\draw[dotted](-2, 0)node[above]{$-\abs{E_1}$}--(-2, -1.5)--(0, -1.5)node[right]{$-\abs{E_2}$};
+		\draw[dotted](2, 0)node[below]{$\abs{E_1}$}--(E)--(0, 1.5)node[left]{$\abs{E_2}$};
+        \draw[very thick, ->, scale=0.7](O)--(2, 1.5)node[above]{$\bm E$};
+        \draw[<->, scale=0.3, shift={(-1.2, 0.9)}](-2, -1.5)--(2, 1.5);
+        \pic[draw, angle radius=15, angle eccentricity=1.5, "$\delta$"]{angle=x--O--E};
 	\end{tikzpicture}
-	\captionof{figure}{线偏振}
+	\captionof{figure}{线偏振($\delta=0$)}
+    \label{fig:linear polarization}
 \end{center}
+
 \paragraph{圆偏振}
-若$E_1,E_2$不同相，则$\bm E$是椭圆偏振的(elliptically polarized)。$\bm E$的终点在一个椭圆上旋转
+
+若$E_1,E_2$不同相，但幅值相同($\abs{E_1}=\abs{E_2}$)且相位差$\delta=\pm 90\degree$，则
+$\bm E$是圆偏振的(circular polarized)，可以写成
 \[
-    \Bigkh{\frac{E_x}{a_1}}^2+\Bigkh{\frac{E_y}{a_2}}^2-2\Bigkh{\frac{E_x}{a_1}}\Bigkh{\frac{E_y}{a_2}}\cos\delta=\sin^2\delta.
+    \bm E=E_1(\uvec\epsilon_1\pm\i\uvec\epsilon_2)\e{\i(\bm k\cdot\bm x-\omega t)},
 \]
-其半长轴与$x$轴的夹角$\psi$满足 
-\[
-    \tan2\psi=\frac{2a_1a_2}{a_1^2-a_2^2}\cos\delta.
-\]
-我们考虑$a_1=a_2$且$\delta=90\degree$的特殊情形，称为圆偏振(circular)：
-\[
-    \bm E=E_0(\uvec\epsilon_1\pm\i\uvec\epsilon_2)\e{\i(\bm k\cdot\bm x-\omega t)},
-\]
-%选定$(\uvec n,\uvec\epsilon_1,\uvec\epsilon_2)=(\uvec z,\uvec x,\uvec y)$，则
-%\begin{align*}
-%    E_x&=E_0\cos(kz-\omega t),\\
-%    E_y&=\mp E_0\sin(kz-\omega t),
-%\end{align*}
+如\figref{fig:circular polarization}，向$-\bm k$方向(即垂直纸面向内)看去，($+$)对应电场终点逆时针(counterclockwise)旋转，我们称为左旋(left circular)或正螺旋性(positive helicity)，因为其角动量是沿$+\bm k$的；相应的，($-$)对应顺时针旋转，称为右旋或负螺旋性。
 \begin{center}
 	\begin{tikzpicture}[scale=.8]
-		\draw[thick, -latex](-3, 0)--(3, 0)node[below]{$x$};
-		\draw[thick, -latex](0, -2.5)--(0, 2.5)node[left]{$y$};
-		\node[above left]at(0, 0){$O$};
-		%\draw[thick, latex-latex](-2, -1.5)--(2, 1.5);
-		\draw[thick, -latex](1.414, 1.414)arc(45-360:45:2);
+		\draw[->](-3, 0)--(3, 0)node[below]{$\epsilon_1$};
+		\draw[->](0, -2.5)--(0, 2.5)node[left]{$\epsilon_2$};
+		\draw[dashed](0, 0)node[above left]{$O$}circle(2);
+        \node[below]at(2, 0) {$\abs{E_1}$};
+        \draw[very thick, ->](0, 0)--(45:2)node[above]{$\bm E$};
+		%\draw[thick, <->](-2, -1.5)--(2, 1.5);
+		\draw[->](30:2.6)arc(30:60:2.6);
 	\end{tikzpicture}
-	\captionof{figure}{圆偏振}
+	\captionof{figure}{圆偏振($\delta=+90\degree$)}
+    \label{fig:circular polarization}
 \end{center}
-向$-z$方向看去，($+$)对应电场终点逆时针(counterclockwise)旋转，我们称为左旋(left circular)或正螺旋性(positive helicity)，因为其角动量是$+z$的；相应的($-$)对应顺时针旋转，称为右旋或负螺旋性。
-
-%线偏振和椭圆偏振还有另一种表示，
-%定义一对复矢量
 依此定义圆偏振基：
 \begin{equation}
     \uvec\epsilon_\pm:=\frac1{\sqrt2}(\uvec\epsilon_1\pm\i\uvec\epsilon_2),
 \end{equation}
-则$\uvec n,\uvec\epsilon_\pm$也是两两正交的单位矢量(复矢量内积)。在这一对坐标下
-\begin{gather*}
-    \bm E=(E_+\uvec\epsilon_++E_-\uvec\epsilon_-)\e{\i(\bm k\cdot\bm x-\omega t)},\\
-    E_+=a_+\e{\i\vd_+},\quad E_-=a_-\e{\i\vd_-}.
-\end{gather*}
-\paragraph{椭圆偏振}
-若$E_\pm$相位相同但幅值不同，则$\bm E$是椭圆偏振的，长短轴在$\uvec\epsilon_{1,2}$上，且长短轴之比由$E_\pm$之比给出：
+则$\uvec n,\uvec\epsilon_\pm$也是两两正交的单位矢量(复矢量内积)。在这一对坐标下，任意平面波都可以分解成左旋和右旋波：
 \[
-    \frac{1+r}{1-r},\quad r:=\frac{E_-}{E_+};
+    \bm E=(E_+\uvec\epsilon_++E_-\uvec\epsilon_-)\e{\i(\bm k\cdot\bm x-\omega t)},
 \]
-若$E_\pm$连相位也不同，则$E_-/E_+=r\e{\i\alpha}$，$\bm E$仍是椭圆偏振的，但长轴要旋转$\alpha/2$的角度。
-
 若$E_\pm$幅值相同，则$\bm E$是线偏振的；若$E_\pm$有一个为0，则$\bm E$是圆偏振的。
+
+\paragraph{椭圆偏振}
+
+若$E_\pm$幅值不同，则$\bm E$是椭圆偏振的(elliptically polarized)。$\bm E$的终点在一个椭圆上旋转，如\figref{fig:elliptical polarization} 所示。
+\begin{center}
+	\begin{tikzpicture}[scale=1.5]
+        \coordinate(O)at(0, 0);
+        \coordinate(x)at(2, 0);
+        \coordinate(a)at(31.68:2.5);
+		\draw[->](-2, 0)--(x)node[below]{$\epsilon_1$};
+		\draw[->](0, -1.5)--(0, 1.5)node[left]{$\epsilon_2$};
+        \node[above left]at(O){$O$};
+		\draw[dashed, rotate=31.68](O)ellipse[x radius=1.618, y radius=.618];
+        \draw[->, gray, rotate=31.68](-2.5, 0)--(2.5, 0);
+        \draw[->, gray, rotate=31.68](0, -1)--(0, 1);
+        \draw[dotted](1.414, .707)--(1.414, 0)node[below]{$\abs{\bm E_1}$};
+        \draw[dotted](-1.414, -.707)--(-1.414, 0)node[above]{$-\abs{\bm E_1}$};
+        \draw[dotted](1, 1)--(0, 1)node[left]{$\abs{\bm E_2}$};
+        \draw[dotted](-1, -1)--(0, -1)node[right]{$-\abs{\bm E_2}$};
+        \draw[very thick, ->](0, 0)--(1, 1)node[above]{$\bm E$};
+        \pic[draw, angle radius=20, angle eccentricity=1.5, "$\psi$"]{angle=x--O--a};
+	\end{tikzpicture}
+    \captionof{figure}{椭圆偏振}
+    \label{fig:elliptical polarization}
+\end{center}
+为了方便地描述这个椭圆的方程，记$\Re(\bm E)=E_{\epsilon_1}\uvec\epsilon_1+E_{\epsilon_2}\uvec\epsilon_2$，则
+\begin{align*}
+    E_{\epsilon_1}&=\abs{E_1}\cos(\bm k\cdot\bm x-\omega t),\\
+    E_{\epsilon_2}&=\abs{E_2}\cos(\bm k\cdot\bm x-\omega t+\delta),
+\end{align*}
+则
+\[
+    \Bigkh{\frac{E_{\epsilon_1}}{\abs{E_1}}}^2+\Bigkh{\frac{E_{\epsilon_2}}{\abs{E_2}}}^2-2\Bigkh{\frac{E_{\epsilon_1}}{\abs{E_1}}}\Bigkh{\frac{E_{\epsilon_2}}{\abs{E_2}}}\cos\delta=\sin^2\delta.
+\]
+若$E_-$相对$E_+$的相位差是$\alpha$，
+则椭圆半长轴与$\uvec\epsilon_1$轴的夹角为$\alpha/2$，且满足
+\[
+    \tan\alpha=\frac{2\abs{E_1}\abs{E_2}}{\abs{E_1}^2-\abs{E_2}^2}\cos\delta.
+\]
+椭圆长短轴之比由$E_\pm$幅值之比给出：
+\[
+    \frac{E_{\max}}{E_{\min}}=\frac{\abs{E_+}+\abs{E_-}}{\abs{E_+}-\abs{E_-}}.%\quad r:=\frac{\abs{E_-}}{\abs{E_+}};
+\]
+
 \paragraph{Stokes参数}
 我们如何从观察光束的细节来确定偏振的状态？对于一束光来说，
-\begin{equation}
+\[
     \uvec\epsilon_1\cdot\bm E,\quad\uvec\epsilon_2\cdot\bm E;\quad\uvec\epsilon_+\cj\cdot\bm E,\quad\uvec\epsilon_-\cj\cdot\bm E,
-\end{equation}
+\]
 分别是沿$\uvec\epsilon_{1,2}$方向线偏振的、左旋和右旋圆偏振的振幅。这些振幅的平方给出了各类偏振强度的一种测量。%为体现幅值和相位因素，记
 %我们给出相对于线偏振基和相对于圆偏振基的斯托克斯参数的定义，把这些参数用投影振幅(7.25)来表示，并且还直接用诸分量的幅值和相对位相来表示.为了达到后一目的，我们把(7.19)和(7.24)中的各标量系数定义为一
 
-在线偏振基$\uvec\epsilon_{1,2}$下，Stokes参数表示为
-\begin{equation}
-    \begin{cases}
-        s_0=|\uvec\epsilon_1\cdot\bm E|^2+|\uvec\epsilon_2\cdot\bm E|^2=a_1^2+a_2^2\\
-        s_1=|\uvec\epsilon_1\cdot\bm E|^2-|\uvec\epsilon_2\cdot\bm E|^2=a_1^2-a_2^2\\
-        s_2=2\Re\bigfkh{(\uvec\epsilon_1\cdot\bm E)\cj(\uvec\epsilon_2\cdot\bm E)}=2a_1a_2\cos(\vd_2-\vd_1)\\
-        s_3=2\Im\bigfkh{(\uvec\epsilon_1\cdot\bm E)\cj(\uvec\epsilon_2\cdot\bm E)}=2a_1a_2\sin(\vd_2-\vd_1)
-    \end{cases}
-\end{equation}
-在圆偏振基$\uvec\epsilon_\pm$下，Stokes参数表示为
-\begin{equation}
-    \begin{cases}
-        s_0=|\uvec\epsilon_+\cj\cdot\bm E|^2+|\uvec\epsilon_-\cj\cdot\bm E|^2=a_+^2+a_-^2\\
-        s_1=2\Re\bigfkh{(\uvec\epsilon_+\cj\cdot\bm E)\cj(\uvec\epsilon_-\cj\cdot\bm E)}=2a_+a_-\cos(\vd_--\vd_+)\\
-        s_2=2\Im\bigfkh{(\uvec\epsilon_+\cj\cdot\bm E)\cj(\uvec\epsilon_-\cj\cdot\bm E)}=2a_+a_-\sin(\vd_--\vd_+)\\
-        s_3=|\uvec\epsilon_+\cj\cdot\bm E|^2-|\uvec\epsilon_-\cj\cdot\bm E|^2=a_+^2-a_-^2
-    \end{cases}
-\end{equation}
-Stokes参数仅依赖于$a_1,a_2,\vd_1-\vd_2$三个参数，因此并不独立，有关系：
-\[
-    s_0^2=s_1^2+s_2^2+s_3^2.
-\]
+\begin{definition}
+    {Stokes参数}{Stokes parameter}
+    在线偏振基$\uvec\epsilon_{1,2}$下，Stokes参数表示为
+    \begin{subequations}
+        \begin{align}
+            s_0&=|\uvec\epsilon_1\cdot\bm E|^2+|\uvec\epsilon_2\cdot\bm E|^2=\abs{E_1}^2+\abs{E_2}^2\\
+            s_1&=|\uvec\epsilon_1\cdot\bm E|^2-|\uvec\epsilon_2\cdot\bm E|^2=\abs{E_1}^2-\abs{E_2}^2\\
+            s_2&=2\Re\bigfkh{(\uvec\epsilon_1\cdot\bm E)\cj(\uvec\epsilon_2\cdot\bm E)}=2\abs{E_1}\abs{E_2}\cos\delta\\
+            s_3&=2\Im\bigfkh{(\uvec\epsilon_1\cdot\bm E)\cj(\uvec\epsilon_2\cdot\bm E)}=2\abs{E_1}\abs{E_2}\sin\delta
+        \end{align}
+    \end{subequations}
+    在圆偏振基$\uvec\epsilon_\pm$下，Stokes参数表示为
+    \begin{subequations}
+        \begin{align}
+            s_0&=|\uvec\epsilon_+\cj\cdot\bm E|^2+|\uvec\epsilon_-\cj\cdot\bm E|^2=\abs{E_+}^2+\abs{E_-}^2\\
+            s_1&=2\Re\bigfkh{(\uvec\epsilon_+\cj\cdot\bm E)\cj(\uvec\epsilon_-\cj\cdot\bm E)}=2\abs{E_+}\abs{E_-}\cos\alpha\\
+            s_2&=2\Im\bigfkh{(\uvec\epsilon_+\cj\cdot\bm E)\cj(\uvec\epsilon_-\cj\cdot\bm E)}=2\abs{E_+}\abs{E_-}\sin\alpha\\
+            s_3&=|\uvec\epsilon_+\cj\cdot\bm E|^2-|\uvec\epsilon_-\cj\cdot\bm E|^2=\abs{E_+}^2-\abs{E_-}^2
+        \end{align}
+    \end{subequations}
+\end{definition}
+\begin{corollary}
+    Stokes参数仅依赖于$\abs{E_1},\abs{E_2},\delta$或$\abs{E_+},\abs{E_-},\alpha$三个参数，因此并不独立：
+    \[
+        s_0^2=s_1^2+s_2^2+s_3^2.
+    \]
+\end{corollary}
 
 \begin{example}{Stokes参数的例子}{}
     \begin{compactitem}
@@ -208,57 +278,66 @@ Stokes参数仅依赖于$a_1,a_2,\vd_1-\vd_2$三个参数，因此并不独立�
         \[
             [1\enspace0\enspace0\enspace0].
         \]
-        现实中即使是%目前应用的
-        单色性(monochromatic)很好的辐射波束也是由有限波列(finite wave trains)叠加成的，因而根据Fourier定理，它包含一个频率范围，即不完全是单色的。%一种看法认为$a_i,\vd_i$随时间变化缓慢，
-        这时可观测的Stokes参数就是在一个较长时间尺度上的平均，比如：
-        \[
-            s_2=2\ave{a_1a_2\cos(\vd_2-\vd_1)},
-        \]
-        求平均的结果是：准单色波束的Stokes参数满足不等式：
-        \[
-            s_0^2\geqslant s_1^2+s_2^2+s_3^2,
-        \]
     \end{compactitem}
 \end{example}
+\begin{remark}
+    现实中，即使是%目前应用的
+    单色性(monochromatic)很好的辐射波束也是由有限波列(finite wave trains)叠加成的，因而根据Fourier定理，它包含一个频率范围，即不完全是单色的。%一种看法认为$a_i,\vd_i$随时间变化缓慢，
+    这时可观测的Stokes参数就是在一个较长时间尺度上的平均，比如：
+    \[
+        s_2=2\ave{a_1a_2\cos(\vd_2-\vd_1)},
+    \]
+    求平均的结果是：准单色波束的Stokes参数满足不等式：
+    \[
+        s_0^2\geqslant s_1^2+s_2^2+s_3^2,
+    \]
+\end{remark}
 
 \begin{definition}{偏振度}{}
-    定义偏振度
+    定义偏振度是总光强$I\tot$中椭圆偏振的成分$I_\text{elp}$占比：
     \[
         P:=\frac{I_\text{elp}}{I\tot}=\frac{\sqrt{s_1^2+s_2^2+s_3^2}}{s_0},
     \]
     显然$0\leqslant P\leqslant 1$，
 \end{definition}
-\begin{compactitem}
-	\item $P=1$时对应完全偏振光；
-	\item $P=0$对应无偏振光；
-	\item $0<P<1$对应部分偏振光(partially polarized)，这时尽管$\bm E$含有各种振动方向的光矢量，但在某一方向更显著，不难表达为无偏振光和完全偏振光的叠加：
-    \[
-        \begin{bmatrix}
-            s_0\\s_1\\s_2\\s_3
-        \end{bmatrix}_\text{pp}=(1-P)
-        \begin{bmatrix}
-            s_0\\0\\0\\0
-        \end{bmatrix}_\text{unp}+P
-        \begin{bmatrix}
-            s_0\\s_1'\\s_2'\\s_3'
-        \end{bmatrix}_\text{elp}.
-    \]
-\end{compactitem}
+\begin{corollary}
+    依偏振度分类：
+    \begin{compactitem}
+    	\item $P=1$对应完全偏振光；
+    	\item $P=0$对应无偏振光；
+    	\item $0<P<1$对应部分偏振光(partially polarized)，这时尽管$\bm E$含有各种振动方向的光矢量，但在某一方向更显著，不难表达为无偏振光和完全偏振光的叠加：
+        \[
+            \begin{bmatrix}
+                s_0\\s_1\\s_2\\s_3
+            \end{bmatrix}_\text{pp}=(1-P)
+            \begin{bmatrix}
+                s_0\\0\\0\\0
+            \end{bmatrix}_\text{unp}+P
+            \begin{bmatrix}
+                s_0\\s_1'\\s_2'\\s_3'
+            \end{bmatrix}_\text{elp}.
+        \]
+    \end{compactitem}
+\end{corollary}
 \paragraph{Stokes参数的测量}
-Stokes参数在场强上是二次的，只能通过强度测量来确定，并结合线偏振器(linear polarizer)和四分之一波片(quarter waveplate)。线偏振器利用物质的材料特性让透射光只有沿着特定方向偏振的分量透过，而四分之一波片利用了晶体的双折射(birefringence)现象\footnote{一束光线进入某种晶体会产生两束折射光。改变入射角，其中一束光在晶体内的光速各向同性，称为o光(ordinary)；而另一束光的光速各向异性，称为e光(extraordinary)。}使得o光和e光产生相位差，控制波片厚度便可以使线偏振光变成圆偏振光。
-
-可以证明，如果线偏振器与偏振方向夹角为$\theta$，波片的相位差为$\phi$，则出射光的光强为
+Stokes参数在场强上是二次的，只能通过强度测量来确定，并结合：
+\begin{itemize}
+    \item 线偏振器(linear polarizer)：利用物质的材料特性让透射光只有沿着特定方向偏振的分量透过；
+    \item 1/4波片(quarter waveplate)：利用了晶体的双折射(birefringence)现象\footnote{一束光线进入某些晶体会产生两束折射光。改变入射角，其中一束光在晶体内的光速各向同性，称为o光(ordinary)；而另一束光的光速各向异性，称为e光(extraordinary)。}使得o光和e光产生相位差，控制波片厚度便可以使线偏振光变成圆偏振光。
+\end{itemize}
+如果线偏振器与入射光偏振方向夹角为$\theta$，波片的相位差为$\phi$，则出射光的光强为
 \[
     I(\theta,\phi)=\frac12(s_0+s_1\cos2\theta+s_2\sin2\theta\cos\phi-s_3\sin2\theta\sin\phi),
 \]
+由此可以利用线偏振器和1/4波片，通过测量4次出射光强来得到4个Stokes参数：
 \begin{compactitem}
-	\item 线偏振器$\theta=0,I(0,0)=(s_0+s_1)/2;$
-    \item 线偏振器$\theta=90\degree,I(90,0)=(s_0-s_1)/2;$
-    \item 线偏振器$\theta=45\degree,I(45,0)=(s_0+s_2)/2;$
-    \item 1/4波片+线偏振器$\theta=45\degree,I(45,45)=(s_0-s_3)/2.$
+	\item 线偏振器$\theta=0$：$I(0,0)=(s_0+s_1)/2;$
+    \item 线偏振器$\theta=90\degree$：$I(90,0)=(s_0-s_1)/2;$
+    \item 线偏振器$\theta=45\degree$：$I(45,0)=(s_0+s_2)/2;$
+    \item 线偏振器$\theta=45\degree+1/4$波片：$I(45,45)=(s_0-s_3)/2.$
 \end{compactitem}
 \section{反射与折射}
-光入射(incident)到不同媒质的分界面上会发生反射(reflect)和折射(refract)。
+平面电磁波入射(incident)到不同媒质的分界面上会发生反射(reflect)和折射(refract)\footnote{也有称折射为透射(transmit)。}。下面我们研究这种现象的规律。
 \begin{center}
 	\begin{tikzpicture}
 		\coordinate(O)at(0, 0);
@@ -267,21 +346,23 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
 		\coordinate(i)at(-2, 2);
 		\coordinate(r)at(2, 2);
 		\coordinate(t)at(1.2, -2);
-		\draw[thick](-3, 0)node[above right]{$n_\i$}node[below right]{$n_\t$}--(3, 0);
-		\draw[dashed](n)--(u);
-		\draw[thick, -latex](O)--(n)node[above]{$\uvec n$};
-		\draw[thick, -latex](O)--(1.1, 1.1)node[right]{$\bm k_\r$};
-		\draw[thick](1, 1)--(r);
-		\draw[thick, -latex](i)--(-.9, .9)node[left]{$\bm k_\i$};
-		\draw[thick, -latex](-1, 1)--(O)--(.6, -1)node[right]{$\bm k_\t$};
-		\draw[thick](O)--(t);
-		\pic["$\theta_\i$", draw, angle eccentricity=1.5, angle radius=20]{angle=n--O--i};
-		\pic["$\theta_\r$", draw, angle eccentricity=1.5, angle radius=20]{angle=r--O--n};
-		\pic["$\theta_\t$", draw, angle eccentricity=1.5, angle radius=20]{angle=u--O--t};
+        \fill[gray!8](-3, 0)rectangle(3, 2);
+        \fill[gray!50](-3, 0)rectangle(3, -2);
+		\draw(-3, 0)node[above right]{$n_\i$}node[below right]{$n_\t$}--(3, 0);
+		\draw[dashed](O)--(u);
+		\draw[->](O)--(n)node[above]{$\uvec n$};
+		\draw[thick, ->-](O)--(r)node[midway, right]{$\bm k_\r$};
+		\draw[thick, ->-](i)--(O)node[midway, left]{$\bm k_\i$};
+		\draw[thick, ->-](O)--(t)node[midway, right]{$\bm k_\t$};
+		\pic["$\theta_\i$", draw, angle radius=20, angle eccentricity=1.5]{angle=n--O--i};
+		\pic["$\theta_\r$", draw, angle radius=20, angle eccentricity=1.5]{angle=r--O--n};
+		\pic["$\theta_\t$", draw, angle radius=20, angle eccentricity=1.5]{angle=u--O--t};
 	\end{tikzpicture}
 	\captionof{figure}{入射波、反射波和折射波}
 \end{center}
-入射波、反射波和折射波(或透射波transmit)的波数分别为$k_\i,k_\r,k_\t$。由前文的结论，边界上电场的切向分量是连续的：
+
+\paragraph{反射定律和折射定律}
+入射波、反射波和折射波的波数分别为$k_\i,k_\r,k_\t$。由前文的结论，边界上电场的切向分量是连续的：
 \[
     (\bm E_\i+\bm E_\r-\bm E_\t)\times\uvec n=\bm 0.
 \]
@@ -292,19 +373,20 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
 \end{equation}
 式\eqref{eqn:omegai=omegar=omegat}说明，不论光怎样被散射，都具有相同的频率；
 
-又上式对分界面上的任意一点$\bm x$均成立，故
-\[
-    \bm k_\i\cdot\bm x=\bm k_\r\cdot\bm x+\delta_\r=\bm k_\t\cdot\bm x+\delta_\t.
-\]
-从前两项可以得到
-\[
-    (\bm k_\i-\bm k_\r)\cdot\bm x=\delta_\r,
-\]
-由内积的投影性质，$\bm x$的终点会扫过一个垂直于$(\bm k_\i-\bm k_\r)$的平面，而$\bm x$的终点正好在分界面上，因此$(\bm k_\i-\bm k_\r)$垂直于分界面：
-\[
-    (\bm k_\i-\bm k_\r)\times\uvec n=\bm 0,
-\]
-上述关系当然对第三项也适用，因此：$\bm k_\i,\bm k_\r,\bm k_\t$均与$\uvec n$共面，且三者的切向分量相等：
+又上式对于分界面上的任意一点$\bm x$均成立，故
+% \[
+%     \bm k_\i\cdot\bm x=\bm k_\r\cdot\bm x+\delta_\r=\bm k_\t\cdot\bm x+\delta_\t.
+% \]
+% 从前两项可以得到
+% \[
+%     (\bm k_\i-\bm k_\r)\cdot\bm x=\delta_\r,
+% \]
+% 由内积的投影性质，$\bm x$的终点会扫过一个垂直于$(\bm k_\i-\bm k_\r)$的平面，而$\bm x$的终点正好在分界面上，因此$(\bm k_\i-\bm k_\r)$垂直于分界面：
+% \[
+%     (\bm k_\i-\bm k_\r)\times\uvec n=\bm 0,
+% \]
+% 上述关系当然对第三项也适用，因此：
+$\bm k_\i,\bm k_\r,\bm k_\t$均与$\uvec n$共面，且三者的切向分量相等：
 \begin{equation}
     k_\i\sin\theta_\i=k_\r\sin\theta_\r=k_\t\sin\theta_\t,
 \end{equation}
@@ -324,9 +406,117 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
     \end{equation}
 \end{theorem}
 
-由边界上：$\bm D$和$\bm B$法向分量连续，$\bm E$和$\bm H$切向分量连续。在应用这些边界条件时，可以考虑线偏振的两种独立情况：
+\paragraph{电磁分量的变化}
+
+定义振幅的反射系数(reflection coefficient)和透射系数(transmission coefficient)：
+\[
+    r:=\frac{E_\r}{E_\i},\enspace t:=\frac{E_\t}{E_\i}.
+\]
+
+\begin{theorem}
+    {Stokes倒逆关系}{Stokes relation}
+    定义$r_{ij},t_{ij}$分别表示从介质$i$入射介质$j$的反射系数和透射系数，由光路可逆
+    \begin{center}
+        \begin{tikzpicture}
+            \fill[gray!8](-3, 0)rectangle(3, 2);
+            \fill[gray!50](-3, 0)rectangle(3, -2);
+            \draw(-3, 0)node[above right]{$n_1$}node[below right]{$n_2$}--(3, 0);
+            \draw[dashed](n)--(u);
+            \draw[thick, ->-](i)--(O)node[midway, below left]{$1$};
+            \draw[thick, ->-](O)--(r)node[midway, below right]{$r_{12}$};
+            \draw[thick, ->-](O)--(t)node[midway, above right]{$t_{12}$};
+            \draw(3.15, -.1)--(3.6, -.1);
+            \draw(3.15, 0)--(3.6, 0);
+            \draw(3.15, .1)--(3.6, .1);
+        \end{tikzpicture}
+        \begin{tikzpicture}
+            \coordinate(tr)at(-1.2, -2);
+            \fill[gray!8](-3, 0)rectangle(3, 2);
+            \fill[gray!50](-3, 0)rectangle(3, -2);
+            \draw(-3, 0)node[above right]{$n_1$}node[below right]{$n_2$}--(3, 0);
+            \draw[dashed](n)--(u);
+            \draw[thick, ->-, red](r)--(O)node[midway, below right]{$r_{12}$};
+		\draw[thick, ->-, red](O)--(i)node[midway, below left]{$r_{12}^2$};
+		\draw[thick, ->-, red](O)--(tr)node[midway, above left]{$r_{12}t_{12}$};
+		\draw[thick, ->-, blue, shift={(.1, 0)}](1.2, -2)--(0, 0)node[midway, above right]{$t_{12}$};
+		\draw[thick, ->-, blue, shift={(.1, 0)}](0, 0)--(-2, 2)node[midway, above right]{$t_{12}t_{21}$};
+		\draw[thick, ->-, blue, shift={(.1, 0)}](0, 0)--(-1.2, -2)node[midway, below right]{$t_{12}r_{21}$};
+        \end{tikzpicture}
+        \captionof{figure}{Stokes倒逆关系示意图}
+    \end{center}
+    可得
+    \begin{subequations}
+        \begin{gather}
+            r_{21}=-r_{12}\\
+            r_{12}^2+t_{12}t_{21}=1.
+        \end{gather}
+    \end{subequations}
+\end{theorem}
+
+由边界上：$\bm D$和$\bm B$法向分量连续，$\bm E$和$\bm H$切向分量连续。我们可以求出$r,t$的表达式。
+根据入射面(入射光线与法线确定的平面)与$\bm E_\i$的关系可以分成两种独立情形：
+\begin{figure}[!htp]
+    \centering
+    \subcaptionbox{垂直极化波}{
+    \begin{tikzpicture}
+        \coordinate(t)at(1.5, -2.5);
+		\coordinate(Ei)at(-1.2, 1.2);
+		\coordinate(Er)at(1, 1);
+		\coordinate(Et)at(.6, -1);
+        \fill[gray!8](-3, 0)rectangle(3, 2);
+        \fill[gray!50](-3, 0)rectangle(3, -2.5);
+		\draw(-3, 0)node[above right]{$n_\i$}node[below right]{$n_\t$}--(3, 0);
+		\draw[dashed](n)--(u);
+        \draw(O)--(r);
+        \draw(i)--(O);
+        \draw(O)--(t);
+        % incident
+        \draw[thick, ->](Ei)--(-.7, .7)node[shift={(30:.3)}]{$\bm k_\i$};
+        \draw[thick, ->](Ei)--(-1.7, .7)node[left]{$\bm H_\i$};
+        \draw[thick, fill=white](Ei)circle(.12)node[shift={(30:.4)}]{$\bm E_\i$};
+        \fill[black](Ei)circle(.06);
+        % reflect
+        \draw[thick, ->](Er)--(1.5, 1.5)node[shift={(150:.3)}]{$\bm k_\r$};
+        \draw[thick, ->](Er)--(1.5, .5)node[right]{$\bm H_\r$};
+        \draw[thick, fill=white](Er)circle(.12)node[shift={(150:.4)}]{$\bm E_\r$};
+        \fill[black](Er)circle(.06);
+        % transmit
+        \draw[thick, ->](Et)--(1.2, -2)node[right]{$\bm k_\t$};
+        \draw[thick, ->](Et)--(.1, -1.3)node[left]{$\bm H_\t\!$};
+        \draw[thick, fill=white](Et)circle(.12)node[right]{$\bm E_\t$};
+        \fill[black](Et)circle(.06);
+	\end{tikzpicture}}
+    \subcaptionbox{平行极化波}{
+    \begin{tikzpicture}
+        \fill[gray!8](-3, 0)rectangle(3, 2);
+        \fill[gray!50](-3, 0)rectangle(3, -2.5);
+		\draw(-3, 0)node[above right]{$n_\i$}node[below right]{$n_\t$}--(3, 0);
+		\draw[dashed](n)--(u);
+        \draw(O)--(r);
+        \draw(i)--(O);
+        \draw(O)--(t);
+        % incident
+        \draw[thick, ->](Ei)--(-.7, .7)node[shift={(30:.3)}]{$\bm k_\i$};
+        \draw[thick, ->](Ei)--(-.7, 1.7)node[right]{$\bm E_\i$};
+        \draw[thick, fill=white](Ei)circle(.12)node[shift={(210:.4)}]{$\bm H_\i$};
+        \fill[black](Ei)circle(.06);
+        % reflect
+        \draw[thick, ->](Er)--(1.5, 1.5)node[shift={(-30:.3)}]{$\bm k_\r$};
+        \draw[thick, ->](Er)--(.5, 1.5)node[shift={(150:.3)}]{$\bm E_\r$};
+        \draw[thick, fill=white](Er)circle(.12)node[shift={(-30:.4)}]{$\bm H_\r$};
+        \fill[black](Er)circle(.06);
+        % transmit
+        \draw[thick, ->](Et)--(1.2, -2)node[right]{$\bm k_\t$};
+        \draw[thick, ->](Et)--(1.1, -.7)node[right]{$\bm E_\t$};
+        \draw[thick, fill=white](Et)circle(.12)node[shift={(210:.4)}]{$\bm H_\t$};
+        \fill[black](Et)circle(.06);
+	\end{tikzpicture}}
+    \caption{垂直极化波和平行极化波}
+    \label{fig:senkrecht and parallel polarization}
+\end{figure}
+% 在应用这些边界条件时，可以考虑线偏振的两种独立情况：
 \begin{compactenum}
-	\item 垂直极化波(senkrecht polarized)：$\bm E_\i$与入射面(入射光线与法线确定的平面)垂直(即$\bm E_\i$垂直纸面向外)%\footnote{在讨论Fresnel公式之前，我们必须指定$\bm E_\i$的方向。}
+	\item 垂直极化波(senkrecht polarized)：$\bm E_\i$与入射面垂直(即$\bm E_\i$垂直纸面向外)%\footnote{在讨论Fresnel公式之前，我们必须指定$\bm E_\i$的方向。}
 	\begin{align*}
         E_\i+E_\r&=E_\t,\\
         H_\i\cos\theta_\i-H_\r\cos\theta_\r&=H_\t\cos\theta_\t,
@@ -337,10 +527,6 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
         H_\i+H_\r&=H_\t,
     \end{align*}
 \end{compactenum}
-定义振幅的反射系数(reflection coefficient)和透射系数(transmission coefficient)：
-\[
-    r:=\frac{E_\r}{E_\i},\enspace t:=\frac{E_\t}{E_\i}.
-\]
 电介质通常满足$\mu_\i=\mu_\r\approx\mu_\t\approx\mu_0$，因此$r,t$的表达式为：
 \begin{theorem}
     {Fresnel公式}{Fresnel formula}
@@ -364,40 +550,35 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
     \end{subequations}
 \end{theorem}
     
-利用Snell定律\eqref{eqn:Snell}，$r,t$便完全由$n_\i,n_\t,\theta_\i$决定。
+利用Snell定律\eqref{eqn:Snell}，$r,t$便完全由折射率之比$n_\i/n_\t$与入射角$\theta_\i$决定。
 
-\begin{theorem}
-    {Stokes倒逆关系}{Stokes relation}
-    由光路可逆
-    \begin{subequations}
-        \begin{gather}
-            r_{21}=-r_{12}\\
-            r_{12}^2+t_{12}t_{21}=1.
-        \end{gather}
-    \end{subequations}
-\end{theorem}
 \begin{example}
     {Brewster角}{Brewster angle}
-    对于平行极化波，存在一个特殊的入射角$\theta_\i$使得$r_\parallel=0$：%依\eqref{eqn:Fresnel rpara}
-    \[
-        n_\t\cos\theta_\i-n_\i\cos\theta_\t=0,\quad n_\i\sin\theta_\i=n_\t\sin\theta_\t.
-        %n_\t^2\cos i_\text B=n_\i\sqrt{n_\t^2-n_\i^2\sin^2 i_\text B},
-    \]
-    我们称为Brewster角
+    对于平行极化波，存在一个特殊的入射角$\theta_\i$使得$r_\parallel=0$，%依\eqref{eqn:Fresnel rpara}
+    % \[
+    %     n_\t\cos\theta_\i-n_\i\cos\theta_\t=0,\quad n_\i\sin\theta_\i=n_\t\sin\theta_\t.
+    %     %n_\t^2\cos i_\text B=n_\i\sqrt{n_\t^2-n_\i^2\sin^2 i_\text B},
+    % \]
+    称为Brewster角：
     \begin{equation}
         \label{eqn:Brewster}
         \theta_\text B=\arctan\Bigkh{\frac{n_\t}{n_\i}}.
     \end{equation}
-    玻璃相对于空气的$n_\t/n_\i=1.5$，得到$\theta_\text B=56.3\degree$。
+    在Brewster角下，平行极化波可以发生全透射，因此加了偏振镜的相机可以拍出更通透的照片：
+    \begin{itemize}
+        \item 空气折射率$n_\i=1$，玻璃的折射率$n_\t=1.5$，得到$\theta_\text B=56.31\degree$；
+        \item 水折射率$n_\t=4/3$，得到$\theta_\text B=53.13\degree$。
+    \end{itemize}
+    
 \end{example}
 \paragraph{全反射}
-前面的讨论在绝大程度上只限于外反射($n_\i<n_\t$)的情形，即光疏介质入射光密介质。相反的情况是内反射($n_\i>n_\t$)，这时$\theta_\i<\theta_\t$。
+前面的讨论在绝大程度上只限于外反射($n_\i<n_\t$)，即光疏介质入射光密介质。相反的情况是内反射($n_\i>n_\t$)，这时$\theta_\i<\theta_\t$。
 考虑$\theta_\t\geqslant90\degree$，即光疏介质没有折射光，我们称之为全反射(total internal reflection)，由Snell定律，全反射的临界角
 \begin{equation}
     \label{eqn:total reflect}
     \theta\c=\arcsin\Bigkh{\frac{n_\t}{n_\i}}.
 \end{equation}
-发生全反射时，折射角的正弦
+发生全反射时，$\theta_\i>\theta\c$，折射角的正弦
 \[
     \sin\theta_\t=\frac{n_\i}{n_\t}\sin\theta_\i=\frac{\sin\theta_\i}{\sin\theta\c}>1,
 \]
@@ -674,6 +855,8 @@ $\bm D(\bm x,t)$和$\bm E(\bm x,t)$有瞬时的联系；但如果$\varepsilon(\o
 $\tau<0$时$G(\tau)=0$。说明只有在$t$时间之前的电场$\bm E$进入以确定电位移$\bm D$，这符合我们在物理现象中的因果关系的基本思想。
 
 假设：空间局域、线性、因果关系，均匀各向同性介质。
+
+\newcommand{\PV}{\mathop{}\!\mathrm{P.V.}}
 \paragraph{Kramers-Kronig关系}
 由Cauchy定理
 \begin{align*}
@@ -682,24 +865,24 @@ $\tau<0$时$G(\tau)=0$。说明只有在$t$时间之前的电场$\bm E$进入以
 \end{align*}
 由Sokhotski-Plemelj定理
 \[
-    \lim_{\delta\to0^+}\frac1{x\pm\i\delta}=\mathrm{P.V.}\Bigkh{\frac1x}\mp\i\pi\vd(x),
+    \lim_{\delta\to0^+}\frac1{x\pm\i\delta}=\PV\Bigkh{\frac1x}\mp\i\pi\vd(x),
 \]
 故
 \[
-    \varepsilon_\r(\omega)=1+\frac1{\pi\i}\,\mathrm{P.V.}\int\iti\frac{\varepsilon_\r(\omega')-1}{\omega'-\omega}\d\omega'
+    \varepsilon_\r(\omega)=1+\frac1{\pi\i}\PV\int\iti\frac{\varepsilon_\r(\omega')-1}{\omega'-\omega}\d\omega'
 \]
 由$\Re[\varepsilon_\r(\omega)]$为偶，$\Im[\varepsilon_\r(\omega)]$为奇，得到Kramers-Kronig关系
 \begin{equation}
     \begin{aligned}
-        \Re[\varepsilon_\r(\omega)]&=1+\frac1\pi\,\mathrm{P.V.}\int\iti\frac{\Im[\varepsilon_\r(\omega)]}{\omega'-\omega}\d\omega'\\
-        \Im[\varepsilon_\r(\omega)]&=-\frac1\pi\,\mathrm{P.V.}\int\iti\frac{\Re[\varepsilon_\r(\omega)]-1}{\omega'-\omega}\d\omega'\\
+        \Re[\varepsilon_\r(\omega)]&=1+\frac1\pi\PV\int\iti\frac{\Im[\varepsilon_\r(\omega)]}{\omega'-\omega}\d\omega'\\
+        \Im[\varepsilon_\r(\omega)]&=-\frac1\pi\mathop{}\!\mathrm{P.V.}\int\iti\frac{\Re[\varepsilon_\r(\omega)]-1}{\omega'-\omega}\d\omega'\\
     \end{aligned}
 \end{equation}
 或
 \begin{equation}
     \begin{aligned}
-        \Re[\varepsilon_\r(\omega)]&=1+\frac2\pi\,\mathrm{P.V.}\int\zti\frac{\omega'\Im[\varepsilon_\r(\omega)]}{\omega'^2-\omega^2}\d\omega'\\
-        \Im[\varepsilon_\r(\omega)]&=-\frac{2\omega}\pi\,\mathrm{P.V.}\int\zti\frac{\Re[\varepsilon_\r(\omega)]-1}{\omega'^2-\omega^2}\d\omega'\\
+        \Re[\varepsilon_\r(\omega)]&=1+\frac2\pi\PV\int\zti\frac{\omega'\Im[\varepsilon_\r(\omega)]}{\omega'^2-\omega^2}\d\omega'\\
+        \Im[\varepsilon_\r(\omega)]&=-\frac{2\omega}\pi\PV\int\zti\frac{\Re[\varepsilon_\r(\omega)]-1}{\omega'^2-\omega^2}\d\omega'\\
     \end{aligned}
 \end{equation}
 Kramers-Kronig关系具有非常普遍的有效性，这仅仅是根据极化和电场之间的因果关系\eqref{eqn:D-E with omega}的假设而得出的。
