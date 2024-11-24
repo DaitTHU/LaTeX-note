@@ -91,6 +91,14 @@
 
 \RequirePackage{tikz}
 \usetikzlibrary{quotes, angles, patterns}
+\usetikzlibrary{decorations.markings}
+\tikzset{>=stealth}
+\tikzset{->-/.style={decoration={
+  markings,
+  mark=at position .5 with {\arrow{>}}},postaction={decorate}}}
+\tikzset{-<-/.style={decoration={
+  markings,
+  mark=at position .5 with {\arrow{<}}},postaction={decorate}}}
 
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=1.18}
