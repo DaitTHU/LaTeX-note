@@ -271,20 +271,24 @@ Green函数要求在点源处
 物理学家已经就一维、二维和三维情形下的有限时间的初值和终值问题进行过广泛研究。\footnote{Morse and Feshbach, Methods of Theoretical Physics, pp843-847.}
 \subsection{推迟势和推迟场}
 如果电荷密度和电流密度分布随时间变化，观测点的标量势和矢量势将会延迟：
-\begin{align}
-    \Phi(\bm x,t)&=\frac1{4\pi\varepsilon_0}\int\frac{\rho(\bm x',t')}{|\bm x-\bm x'|}\d v',\\
-    \bm A(\bm x,t)&=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm x',t')}{|\bm x-\bm x'|}\d v'.
-\end{align}
+\begin{subequations}
+    \begin{align}
+        \Phi(\bm x,t)&=\frac1{4\pi\varepsilon_0}\int\frac{\rho(\bm x',t')}{|\bm x-\bm x'|}\d v',\\
+        \bm A(\bm x,t)&=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm x',t')}{|\bm x-\bm x'|}\d v'.
+    \end{align}
+\end{subequations}
 由
 %但电场和磁场并不能简单的变换\eqref{eqn:E(x)}和\eqref{eqn:B(x)}中的$\rho,\bm J$，而需要从
 \[
     \bm E=-\nabla\Phi-\pv{\bm A}t,\quad\bm B=\curl\bm A
 \]
 得到
-\begin{align}
-    \bm E(\bm x,t)&=\frac1{4\pi\varepsilon_0}\int\biggfkh{-\nabla'\rho-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d v'}{|\bm x-\bm x'|},\\
-    \bm B(\bm x,t)&=\frac{\mu_0}{4\pi}\int\frac{\nabla'\times\bm J}{|\bm x-\bm x'|}\d v',
-\end{align}
+\begin{subequations}
+    \begin{align}
+        \bm E(\bm x,t)&=\frac1{4\pi\varepsilon_0}\int\biggfkh{-\nabla'\rho-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d v'}{|\bm x-\bm x'|},\\
+        \bm B(\bm x,t)&=\frac{\mu_0}{4\pi}\int\frac{\nabla'\times\bm J}{|\bm x-\bm x'|}\d v',
+    \end{align}
+\end{subequations}
 注意上式中$\nabla'\rho$和$\nabla'\times\bm J$是先求梯度和散度再令$t'=t-R/c$。
 
 Jackson中用$[\cdot]_\text{ret}$表示变量$t'=t-R/c$，这样的好处是可以有效区分$\nabla[f]_\text{ret}\neq[\nabla f]_\text{ret}$，因为前者的$t$与$\bm x'$有关，进一步的：
@@ -293,10 +297,12 @@ Jackson中用$[\cdot]_\text{ret}$表示变量$t'=t-R/c$，这样的好处是可�
     [\nabla'\times\bm J]_\text{ret}&=\nabla'\times[\bm J]_\text{ret}+\Bigfkh{\pv{\bm J}{t'}}_\text{ret}\times\nabla'(t-R/c).
 \end{align*}
 而$\nabla'R=-\uvec R$，故
-\begin{align}
-    \bm E(\bm x,t)&=\frac1{4\pi\varepsilon_0}\int\biggfkh{\biggkh{\frac{\rho(\bm x',t')}R+\frac1c\pv\rho{t'}}\uvec R-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d v'}R,\\
-    \bm B(\bm x,t)&=\frac{\mu_0}{4\pi}\int\biggfkh{\frac{\bm J(\bm x',t')}R+\frac1c\pv{\bm J}{t'}}\times\frac{\nvec R}R\d v'.
-\end{align}
+\begin{subequations}
+    \begin{align}
+        \bm E(\bm x,t)&=\frac1{4\pi\varepsilon_0}\int\biggfkh{\biggkh{\frac{\rho(\bm x',t')}R+\frac1c\pv\rho{t'}}\uvec R-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d v'}R,\\
+        \bm B(\bm x,t)&=\frac{\mu_0}{4\pi}\int\biggfkh{\frac{\bm J(\bm x',t')}R+\frac1c\pv{\bm J}{t'}}\times\frac{\nvec R}R\d v'.
+    \end{align}
+\end{subequations}
 上式称为Jefimenko对Coulomb定律和Biot-Savart定律的推广。
 若$\rho$和$\bm J$是与时间无关的，则可重新得到静电场和静磁场的表达式\eqref{eqn:E(x)}和\eqref{eqn:B(x)}。
 \begin{example}{电荷量变化的点电荷}{time-varying point charge}
