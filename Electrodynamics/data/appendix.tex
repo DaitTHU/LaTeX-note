@@ -5,37 +5,60 @@
 \label{chap:vector analysis}
 
 \section{矢量代数}
+\label{sec:vector algebra}
+
+\begin{definition}
+    {标量和矢量}{scalar & vector}
+    标量(scalar)是只有大小(magnitude)没有方向(direction)的量(quantity)；
+    矢量(vector)是既有方向又有大小的量。
+\end{definition}
 
 \begin{compactitem}
-	\item 定义：标量和矢量。
-	\item 矢量的运算：加法、数乘、标量积、矢量积（平凡的）。
+    \item 矢量加法：$\bm A+\bm B$；
+    \item 矢量数乘：$a\bm A$；
+    \item 标量积：$\bm A\cdot\bm B$；
+    \item 矢量积：$\bm A\times\bm B$。
+	\item 矢量的分量表示：直角坐标(Cartesian coordinate)中
+	\begin{equation}
+        \bm A=A_x\uvec x+A_y\uvec y+A_z\uvec z.
+    \end{equation}
+    位置向量(position vector)
+    \begin{equation}
+        \bm r=x\uvec x+y\uvec y+z\uvec z.
+    \end{equation}
 	\item 标量三重积
-    \begin{align}
-        \bm A\cdot(\bm B\times\bm C)&=\bm C\cdot(\bm A\times\bm B)=(\bm A\times\bm B)\cdot\bm C\\\notag
-        &=\begin{vmatrix}
+    \begin{equation}
+        \bm A\cdot(\bm B\times\bm C)=(\bm A\times\bm B)\cdot\bm C
+        =\begin{vmatrix}
             A_x&A_y&A_z\\
             B_x&B_y&B_z\\
             C_x&C_y&C_z
         \end{vmatrix}.
-    \end{align}
+    \end{equation}
     \item 矢量三重积：back cab规则
-    \begin{align}
-        \label{eqn:bac-cab}
-        \bm A\times(\bm B\times\bm C)&=\bm B(\bm A\cdot\bm C)-\bm C(\bm A\cdot\bm B);\\
-        (\bm A\times\bm B)\times\bm C&=\bm B(\bm A\cdot\bm C)-\bm A(\bm B\cdot\bm C).
-    \end{align}
+    \begin{subequations}
+        \begin{align}
+            \label{eqn:bac-cab}
+            \bm A\times(\bm B\times\bm C)&=\bm B(\bm A\cdot\bm C)-\bm C(\bm A\cdot\bm B);\\
+            (\bm A\times\bm B)\times\bm C&=\bm B(\bm A\cdot\bm C)-\bm A(\bm B\cdot\bm C).
+        \end{align}
+    \end{subequations}
     可以将多个矢量积简化，比如
     \begin{align*}
         (\bm A\times\bm B)\cdot(\bm C\times\bm D)&=(\bm A\cdot\bm C)(\bm B\cdot\bm D)-(\bm A\cdot\bm D)(\bm B\cdot\bm C).
     \end{align*}
-    \item 位置向量和分离向量
-    \item 向量转换
 \end{compactitem}
+
 \section{微积分}
+\label{sec:calculus}
+
+\subsection{微分}
+\label{ssec:differential calculus}
+
 \begin{compactitem}
-	\item 常微分
+	\item 函数$(x)$的微分
     \[
-        \d f=\dv fx\d x.
+        \d y=\dv yx\d x.
     \]
 	\item 标量场$f(x,y,z)$的微分
     \begin{align}
@@ -54,14 +77,13 @@
         \div\bm A=\pv{A_x}x+\pv{A_y}y+\pv{A_z}z.
     \end{align}
     \item 旋度(curl)
-    \begin{align}\notag
-        &\curl\bm A=\begin{vmatrix}
+    \begin{equation}
+        \curl\bm A=\begin{vmatrix}
             \uvec x&\uvec y&\uvec z\\
             \pp x&\pp y&\pp z\\
             A_x&A_y&A_z
-        \end{vmatrix}\\
-        &=\biggkh{\pv{A_z}y-\pv{A_y}z}\uvec x+\biggkh{\pv{A_x}z-\pv{A_z}x}\uvec y+\biggkh{\pv{A_y}x-\pv{A_x}y}\uvec z.
-    \end{align}
+        \end{vmatrix}=\biggkh{\pv{A_z}y-\pv{A_y}z}\uvec x+\biggkh{\pv{A_x}z-\pv{A_z}x}\uvec y+\biggkh{\pv{A_y}x-\pv{A_x}y}\uvec z.
+    \end{equation}
 \end{compactitem}
 \paragraph{乘法法则}
 \begin{compactitem}
@@ -89,11 +111,11 @@
 \begin{compactitem}
 	\item 标量Laplacian
     \begin{align}
-        \lapla f\equiv\div(\nabla f)=\pv[2]fx+\pv[2]fy+\pv[2]fz.
+        \lap f\equiv\div(\nabla f)=\pv[2]fx+\pv[2]fy+\pv[2]fz.
     \end{align}
 	\item 矢量Laplacian
 	\begin{align}
-        \lapla\bm A\equiv(\nabla^2A_x)\uvec x+(\nabla^2A_y)\uvec y+(\nabla^2A_z)\uvec z.
+        \lap\bm A\equiv(\nabla^2A_x)\uvec x+(\nabla^2A_y)\uvec y+(\nabla^2A_z)\uvec z.
     \end{align}
     \item 梯度的旋度恒为0，旋度和散度恒为0
     \begin{align}
@@ -105,10 +127,13 @@
     \item 二重旋度
     \begin{align}
         \label{eqn:curlcurl}
-        \curl(\curl\bm A)=\nabla(\div\bm A)-\lapla\bm A.
+        \curl(\curl\bm A)=\nabla(\div\bm A)-\lap\bm A.
     \end{align}
 \end{compactitem}
-\paragraph{积分}
+
+\subsection{积分}
+\label{ssec:integral calculus}
+
 \begin{compactitem}
 	\item 线积分、面积分和体积分
 	\item 微积分基本定理
@@ -119,11 +144,11 @@
     \begin{align}
         \int_A^B\nabla f\cdot\d\bm\ell=f(B)-f(A).
     \end{align}
-    \item 散度(Gauss)定理
+    \item 散度定理(Gauss定理)
     \begin{align}\label{eqn:div}
         \int_V\div\bm A\d v=\oint_{\p V}\bm A\cdot\d\bm a.
     \end{align}
-    \item 旋度(Stokes)定理
+    \item 旋度定理(Stokes定理)
     \begin{align}\label{eqn:curl}
         \int_S(\curl\bm A)\cdot\d\bm a=\oint_{\p S}\bm A\cdot\d\bm\ell.
     \end{align}
@@ -133,8 +158,104 @@
         \int_Vf(\div\bm A)\d v&=\oint_{\p V}f\bm A\cdot\d\bm a-\int_V\bm A\cdot\nabla f\d v.
     \end{align}
 \end{compactitem}
-\section{曲线坐标}
-\paragraph{球坐标系}坐标变换
+
+\section{曲线坐标系}
+\label{sec:curvilinear coordinates}
+
+\subsection{Lam\'e系数}
+
+给定曲线坐标系(curvilinear coordinate)的正交基$\nvec e_1,\nvec e_2,\nvec e_3$，点的坐标为$(q_1,q_2,q_3)$，则
+\[
+    \d\bm r=\pv{\bm r}{q_1}\d q_1+\pv{\bm r}{q_2}\d q_2+\pv{\bm r}{q_3}\d q_3,
+\]
+由正交性，$\p\bm r/\p q_i$应沿着$\nvec e_i$方向，其模值定义为Lam\'e系数
+\begin{equation}
+    H_i:=\abs{\pv{\bm r}{q_i}}=\sqrt{\biggkh{\pv x{q_i}}^2+\biggkh{\pv y{q_i}}^2+\biggkh{\pv z{q_i}}^2}.
+\end{equation}
+因此 
+\begin{equation}
+    \d\bm r=H_1\d q_1\uvec e_1+H_2\d q_2\uvec e_2+H_3\d q_3\uvec e_3.
+\end{equation}
+面积微元和体积微元为
+\begin{align}
+    \d a_i&=H_jH_k\d q_j\nd q_k,\enspace (ijk)=(123);\\
+    \d v&=H_1H_2H_3\d q_1\nd q_2\nd q_3.
+\end{align}
+
+\paragraph{梯度}
+在曲线坐标系下，梯度可以通过Lam\'e系数表示：
+\begin{equation}
+    \label{eqn:grad Lame}
+    \nabla f=\frac1{H_1}\pv f{q_1}\uvec e_1+\frac1{H_2}\pv f{q_2}\uvec e_2+\frac1{H_3}\pv f{q_3}\uvec e_3.
+\end{equation}
+
+\paragraph{散度}
+矢量$\bm A$在曲线坐标系下的分量：
+\[
+    \bm A=A_1\uvec e_1+A_2\uvec e_2+A_3\uvec e_3.
+\]
+根据面积微元和体积微元的表达式，散度为：
+\begin{equation}
+    \label{eqn:div Lame}
+    \div\bm A=\frac1{H_1H_2H_3}\biggfkh{\pv{(H_2H_3A_1)}{q_1}+\pv{(H_3H_1A_2)}{q_2}+\pv{(H_1H_2A_3)}{q_3}}.
+\end{equation}
+
+\paragraph{旋度}
+省去推导过程
+\begin{equation}
+    \label{eqn:curl Lame}
+    \curl\bm A=\frac1{H_1H_2H_3}\begin{vmatrix}
+        H_1\uvec e_1&H_2\uvec e_2&H_3\uvec e_3\\
+        \pp{q_1}&\pp{q_2}&\pp{q_3}\\
+        H_1A_1&H_2A_2&H_3A_3
+    \end{vmatrix}.
+\end{equation}
+
+\paragraph{Laplacian}
+结合式\eqref{eqn:grad Lame}和式\eqref{eqn:div Lame}，得到
+\begin{equation}
+    \label{eqn:Laplacian Lame}
+    \lap f=\frac1{H_1H_2H_3}\biggfkh{\pp{q_1}\biggkh{\frac{H_2H_3}{H_1}\pv f{q_1}}+\pp{q_2}\biggkh{\frac{H_3H_1}{H_2}\pv f{q_2}}+\pp{q_3}\biggkh{\frac{H_1H_2}{H_3}\pv f{q_3}}}.
+\end{equation}
+
+\subsection{球坐标系}
+
+在球坐标系中的坐标为$(r,\theta,\phi)$，$r$称为径向距离(radial distance)，$\theta$称为极角(polar angle)，$\phi$称为方位角(azimuthal angle)。如下图所示。
+
+\begin{center}
+    \begin{tikzpicture}
+        \coordinate[label=left:$O$] (O) at (0, 0);
+        \coordinate[label=left:$x$] (x) at (-1.5, -1.5);
+        \coordinate[label=right:$y$] (y) at (3, 0);
+        \coordinate[label=left:$z$] (z) at (0, 3);
+        \coordinate (P) at (1.8, 2.5);
+        \coordinate (Q) at (1.8, -1);
+		\draw[->](O)--(y);
+		\draw[->](O)--(z);
+		\draw[->](O)--(x);
+		\draw(O)--(P)node[midway, above]{$r$};
+		\draw[dashed](O)--(Q)--(P);
+		\pic[draw, angle radius=3mm]{right angle=P--Q--O};
+        \pic[draw, angle radius=5mm, angle eccentricity=1.5, <-, "$\theta$"]{angle=P--O--z};
+        \pic[draw, angle radius=3mm, angle eccentricity=1.8, ->, "$\phi$"]{angle=x--O--Q};
+	\end{tikzpicture}
+    \captionof{figure}{球坐标系}
+\end{center}
+% 基变换
+% \begin{equation}
+%     \begin{bmatrix}
+%         \uvec r\\\uvec\theta\\\uvec\phi
+%     \end{bmatrix}=
+%     \begin{bmatrix}
+%         \sin\theta\cos\phi&\sin\theta\sin\phi&\cos\theta\\
+%         \cos\theta\cos\phi&\cos\theta\sin\phi&-\sin\theta\\
+%         -\sin\phi&\cos\phi&0
+%     \end{bmatrix}
+%     \begin{bmatrix}
+%         \uvec x\\\uvec y\\\uvec z
+%     \end{bmatrix}
+% \end{equation}
+坐标变换
 \begin{align}
     \begin{cases}
         x=r\sin\theta\cos\phi\\
@@ -142,25 +263,19 @@
         z=r\cos\theta
     \end{cases}
 \end{align}
-基变换
-\begin{equation}
-    \begin{bmatrix}
-        \uvec r\\\uvec\theta\\\uvec\phi
-    \end{bmatrix}=
-    \begin{bmatrix}
-        \sin\theta\cos\phi&\sin\theta\sin\phi&\cos\theta\\
-        \cos\theta\cos\phi&\cos\theta\sin\phi&-\sin\theta\\
-        -\sin\phi&\cos\phi&0
-    \end{bmatrix}
-    \begin{bmatrix}
-        \uvec x\\\uvec y\\\uvec z
-    \end{bmatrix}
-\end{equation}
-微元
-\begin{align}
-    \d\bm\ell&=\d r\uvec r+r\d\theta\uvec\theta+r\sin\theta\d\phi\uvec\phi\\
-    \d v&=r^2\sin\theta\d r\nd\theta\nd\phi
-\end{align}
+Lam\'e系数：
+\begin{subequations}
+    \begin{align}
+        H_r&=\sqrt{\biggkh{\pv xr}^2+\biggkh{\pv yr}^2+\biggkh{\pv zr}^2}=1,\\
+        H_\theta&=\sqrt{\biggkh{\pv x\theta}^2+\biggkh{\pv y\theta}^2+\biggkh{\pv z\theta}^2}=r,\\
+        H_\phi&=\sqrt{\biggkh{\pv x\phi}^2+\biggkh{\pv y\phi}^2+\biggkh{\pv z\phi}^2}=r\sin\theta,
+    \end{align}
+\end{subequations}
+% 微元
+% \begin{align}
+%     \d\bm\ell&=\d r\uvec r+r\d\theta\uvec\theta+r\sin\theta\d\phi\uvec\phi\\
+%     \d v&=r^2\sin\theta\d r\nd\theta\nd\phi
+% \end{align}
 矢量微分
 \begin{align}
     %\nabla&=\pp r\uvec r+\frac1r\pp\theta\uvec\theta+\frac1{r\sin\theta}\pp\phi\uvec\phi.\\
@@ -171,20 +286,49 @@
         \uvec r&r\uvec\theta&r\sin\theta\uvec\phi\\
         \pp r&\pp\theta&\pp\phi\\
         A_r&rA_\theta&r\sin\theta A_\phi
-    \end{vmatrix}.
+    \end{vmatrix},\\
+    \lap f&=\frac1{r^2}\pp r\biggkh{r^2\pv fr}+\frac1{r^2\sin\theta}\pp\theta\biggkh{\sin\theta\pv f\theta}+\frac1{r^2\sin^2\theta}\pv[2]f\phi.
 \end{align}
-\paragraph{柱坐标系}略
+
+\subsection{柱坐标系}
+
+坐标变换
+\begin{align}
+    \begin{cases}
+        x=\rho\cos\phi\\
+        y=\rho\sin\phi\\
+        z=z
+    \end{cases}
+\end{align}
+Lam\'e系数：
+\begin{subequations}
+    \begin{align}
+        H_\rho&=\sqrt{\biggkh{\pv x\rho}^2+\biggkh{\pv y\rho}^2+\biggkh{\pv z\rho}^2}=1,\\
+        H_\phi&=\sqrt{\biggkh{\pv x\phi}^2+\biggkh{\pv y\phi}^2+\biggkh{\pv z\phi}^2}=\rho,\\
+        H_z&=\sqrt{\biggkh{\pv xz}^2+\biggkh{\pv yz}^2+\biggkh{\pv zz}^2}=1,
+    \end{align}
+\end{subequations}
+矢量微分
+\begin{align}
+    \nabla f&=\pv f\rho\uvec\rho+\frac1\rho\pv f\phi\uvec\theta+\pv fz\uvec z,\\
+    \div\bm A&=\frac1\rho\pp\rho(\rho A_\rho)+r\pv{A_\phi}\phi+\pv{A_z}z,\\
+    \curl\bm A&=\frac1\rho
+    \begin{vmatrix}
+        \uvec\rho&\rho\uvec\phi&\uvec z\\
+        \pp\rho&\pp\phi&\pp z\\
+        A_\rho&\rho A_\phi&A_z
+    \end{vmatrix},\\
+    \lap f&=\frac1\rho\pp\rho\biggkh{\rho\pv f\rho}+\frac1{\rho^2}\pv[2]f\theta+\pv[2]fz.
+\end{align}
+
 \section{Dirac函数}
+
 \begin{example}{引入Dirac $\delta$函数}{introduce delta function}
-    计算
+    计算$\bm F(\bm r)$的散度：
     \[
-        \bm F(\bm r)=\frac{\uvec r}{r^2}.
+        \bm F(\bm r)=\frac{\uvec r}{r^2},\implies\div\bm F=\frac1{r^2}\pp r\Bigkh{r^2\cdot\frac1{r^2}}=0,
     \]
-    的散度
-    \[
-        \div\bm F=\frac1{r^2}\pp r\Bigkh{r^2\cdot\frac1{r^2}}=0,
-    \]
-    但
+    但考虑其在半径为$r$球面上的面积分：
     \[
         \oint_{\p V}\bm F\cdot\d\bm a=\oint_{\p V}\frac1{r^2}r^2\sin\theta\d\theta\nd\phi=\int_0^{2\pi}\int_0^\pi\sin\theta\d\theta\nd\phi=4\pi.
     \]
@@ -207,7 +351,7 @@
 
 因此\exmref{exm:introduce delta function} 中的散度其实应为$4\pi\vd(\bm r)$，进而
 \begin{equation}
-    \lapla\biggkh{\frac1r}=-\div\biggkh{\frac{\bm r}{r^3}}=-4\pi\vd(\bm r).
+    \lap\biggkh{\frac1r}=-\div\biggkh{\frac{\bm r}{r^3}}=-4\pi\vd(\bm r).
 \end{equation}
 \section{向量场理论}
 给定$\div\bm F$和$\curl\bm F$，能否确定$\bm F$？
