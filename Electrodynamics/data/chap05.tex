@@ -2,12 +2,12 @@
 \label{chap:Maxwell}
 \section{Maxwell位移电流}
 在前面的讨论中，我们已经得到了关于电场和磁场的基本定律，分别是：
-\begin{align*}
-    \text{电场Gauss定律}&\,\eqref{eqn:divD}&\div\bm D&=\rho,\\
+\begin{alignat*}{3}
+    \text{电场Gauss定律}&\,\eqref{eqn:divD}&\qqquad\div\bm D&=\rho,\\
     \text{磁场Gauss定律}&\,\eqref{eqn:divB-macro}&\div\bm B&=0,\\
     \text{Ampère定律}&\,\eqref{eqn:curlH}&\curl\bm H&=\bm J,\\
     \text{Faraday电磁感应定律}&\,\eqref{eqn:curlE-B}&\curl\bm E&=-\pv{\bm B}t.
-\end{align*}
+\end{alignat*}
 %除了Faraday定律外，所有定律都是在稳恒态条件下得到的。
 但在\chapref{chap:magnetostatics}推导Ampère定律时，我们设定了稳恒电流条件$\div\bm J=0$，这在非稳恒态问题中便显然不适用了，而应该修正为连续性方程\eqref{eqn:continuity}：%与连续性方程不一致了。
 %Maxwell受Faraday观察结果的启发，发现了方程组中的矛盾。
@@ -48,21 +48,29 @@ Maxwell将附加项$\p\bm D/\p t$称为位移电流(displacement current)。
     \]
     利用式\eqref{eqn:curlcurl}，可得
     \begin{align*}
-        \lapla\bm E&%=\nabla(\div\bm E)-\curl(\curl\bm E)=0+\pp t(\curl\bm B)
-        =\mu_0\varepsilon_0\pv[2]{\bm E}t,\enspace
-        \lapla\bm B%&=\nabla(\div\bm B)-\curl(\curl\bm B)=0-\mu_0\varepsilon_0\pp t(\curl\bm B)
+        \lapla\bm E&=\nabla(\div\bm E)-\curl(\curl\bm E)=0+\pp t(\curl\bm B)
+        =\mu_0\varepsilon_0\pv[2]{\bm E}t,\\
+        \lapla\bm B&=\nabla(\div\bm B)-\curl(\curl\bm B)=0-\mu_0\varepsilon_0\pp t(\curl\bm B)
         =\mu_0\varepsilon_0\pv[2]{\bm B}t.
     \end{align*}
-    因此真空中电场和磁场服从波动方程(wave equation)，有平面波解，且波速为
-    \[
-        \frac1{\sqrt{\mu_0\varepsilon_0}}=\SI{299 792 458}{m/s},
-    \]
-    与真空中光速$c$相同！这意味着光就是电磁波(electromagnetic wave)。Maxwell方程组将电、磁和光作为同一现象的表现形式。
+    因此真空中电场和磁场的各个分量均服从波动方程(wave equation)：
+    \begin{equation}
+        \nabla^2u=\frac1{c^2}\pv[2]ut,
+    \end{equation}
+    对于自由空间$\RR^3$，有平面波解，且波速为
+    \begin{equation}
+        c=\frac1{\sqrt{\mu_0\varepsilon_0}}=\SI{299 792 458}{m/s},
+    \end{equation}
+    与真空中光速相同！这意味着光就是电磁波(electromagnetic wave)。Maxwell方程组将电、磁和光作为同一现象的表现形式。
 \end{example}
+
 \subsection{标量势和矢量势}
+
 Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁场的各个分量联系起来。在简单情况下这一方程组可以解出来，但是引入势往往更方便。
 
-利用没有磁荷这一事实\eqref{eqn:Maxwell divB}，我们引入矢量势$\bm A$满足 
+\paragraph{标量势和矢量势的引入}
+
+由式\eqref{eqn:Maxwell divB}和恒等式$\div(\curl\bm A)\equiv 0$，我们引入矢量势$\bm A$满足 
 \begin{equation}
     \label{eqn:curlA}
     \bm B=\curl\bm A,
@@ -71,27 +79,29 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
 \[
     \curl\bm E+\pv{\bm B}t=\curl\biggkh{\bm E+\pv{\bm A}t}=\bm 0,
 \]
-因此可以引入矢量势$\Phi$使得
+利用恒等式$\curl(\nabla\Phi)\equiv 0$，引入标量势$\Phi$：
 \begin{equation}
     \label{eqn:-nablaPhi-pApt}
     \bm E=-\nabla\Phi-\pv{\bm A}t.
 \end{equation}
-剩下的式\eqref{eqn:Maxwell divD}和\eqref{eqn:Maxwell curlH}可变形为(考虑微观情形而非宏观平均)
+剩下的式\eqref{eqn:Maxwell divD}和\eqref{eqn:Maxwell curlH}可变形为%(考虑微观情形而非宏观平均)
 \begin{subequations}
+    \label{eqn:Phi-A coupled}
     \begin{align}
+        \label{eqn:Phi-A coupled a}
         \lapla\Phi+\pp t(\div\bm A)&=-\frac\rho{\varepsilon_0},\\
+        \label{eqn:Phi-A coupled b}
         \lapla\bm A-\frac1{c^2}\pv[2]{\bm A}t-\nabla\biggkh{\div\bm A+\frac1{c^2}\pv\Phi t}&=-\mu_0\bm J.
     \end{align}
 \end{subequations}
 
 \paragraph{规范变换}
 
-为了解耦合(uncouple)标量势$\Phi$和矢量势$\bm A$，我们可以利用势的定义里隐含的任意性，即电场和磁场在下列变换中保持不变：
-\begin{align}
-    \bm A&\mapsto\bm A+\nabla\varLambda,\\
-    \Phi&\mapsto\Phi-\pv\varLambda t.
-\end{align}
-上式称为规范变换，场在规范变换下的不变性称为规范不变性(gauge invariance)。因此，我们总能将不满足某规范的$\Phi$和$\bm A$通过规范变换使得新的$\Phi'$和$\bm A'$满足此规范。
+为了解耦合(uncouple)式\eqref{eqn:Phi-A coupled}中的标量势$\Phi$和矢量势$\bm A$，我们可以利用势的定义里隐含的任意性，即电场和磁场在下列变换中保持不变：
+\begin{equation}
+    (\Phi,\bm A)\mapsto\Bigkh{\Phi-\pv\varLambda t,\bm A+\nabla\varLambda},
+\end{equation}
+上式称为规范变换，场在规范变换下的不变性称为规范不变性(gauge invariance)。因此，我们总能将任意$(\Phi,\bm A)$通过规范变换使得新的$(\Phi',\bm A')$满足特定规范。
 \paragraph{Lorenz规范}
 一种直接的想法是令梯度内的项为0
 \begin{equation}
@@ -130,7 +140,7 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
 式\eqref{eqn:Coulomb gauge Phi}是Poisson方程，可直接得到
 \[
     \Phi(\bm x,t)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm x',t)}{|\bm x-\bm x'|}\d v'
-\]
+ \]
 这说明：标量势$\Phi(\bm x,t)$是由电荷密度$\rho(\bm x',t)$产生的瞬时Coulomb势\footnote{这是其被称为Coulomb规范的原因。}，%二者在不同地方同时改变，
 在空间中的传播没有任何延迟。
 
@@ -139,10 +149,12 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
     \curl\bm J_\text l=\bm 0,\quad\div\bm J_\text t=0.
 \]
 从而将式\eqref{eqn:Coulomb gauge A}解耦合为(略去推导过程)
-\begin{align*}
-    \frac1{c^2}\pp t\nabla\Phi&=\mu_0\bm J_\text l;\\
-    \lapla\bm A-\frac1{c^2}\pv[2]{\bm A}t&=-\mu_0\bm J_\text t.
-\end{align*}
+\begin{subequations}
+    \begin{align}
+        \frac1{c^2}\pp t\nabla\Phi&=\mu_0\bm J_\text l;\\
+        \lapla\bm A-\frac1{c^2}\pv[2]{\bm A}t&=-\mu_0\bm J_\text t.
+    \end{align}
+\end{subequations}
 这说明：标量势方程的源可以用纵向电流$\bm J_\text l$表示；而矢量势满足波动方程，在空间中以光速$c$传播，其源可以用横向电流$\bm J_\text t$表示。在Coulomb规范下，横向辐射场仅由矢量势给出，而瞬时Coulomb势只对近场有贡献。
 
 \begin{example}{Coulomb规范下电磁波的表达}{em wave in Coulomb gauge}
@@ -314,7 +326,6 @@ Jackson中用$[\cdot]_\text{ret}$表示变量$t'=t-R/c$，这样的好处是可�
         \bm A(\bm x,t)=\frac{\mu_0}{4\pi}\uvec z\int\iti I\Bigkh{t-\frac Rc}\frac{\d z'}R,\quad R=\sqrt{\rho^2+(z-z')^2},
     \]
     $t\leqslant\rho/c$时，$\bm A=\bm 0$；
-    
     $t>\rho/c$时，仅$z'^2\leqslant(ct)^2-\rho^2$部分有贡献，则
     \[
         \bm A(\rho,t)=\frac{\mu_0I_0}{2\pi}\ln\biggfkh{\frac{ct+\sqrt{(ct)^2-\rho^2}}{\rho}}\uvec z.

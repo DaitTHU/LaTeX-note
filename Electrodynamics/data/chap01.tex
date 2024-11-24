@@ -46,31 +46,42 @@
     \end{align}
     % 在描述一个点上的电场时，要注意它是宏观上足够小、微观上足够大的一个点。
 \end{definition}
-但是，将带有单位电荷的小带电体放在特定位置所测量得到的力未必是电场强度，因为它的存在可能显著地改变了原场的分布。因此必须采取极限的方法，即测定当小带电体的电荷量越来越小时，作用在其上的力与其电荷量的比值。\footnote{电荷的分立性意味着这种数学极限在物理上不可能实现，这便是宏观电磁学中数学理想化的一个例子。}
+\begin{remark}
+    与定义不同，将带有单位电荷的小带电体放在特定位置所测量得到的力未必是电场强度，因为它的存在可能显著地改变了原场的分布。因此必须采取极限的方法，即测定当小带电体的电荷量越来越小时，作用在其上的力与其电荷量的比值。\footnote{由于电荷是分立的，这种数学极限在物理上不可能实现。这也是宏观电磁学中数学理想化的一个例子。}
+\end{remark}
 
-因此由Coulomb定律，点电荷$q_1$在空间中激发的电场为
+\begin{corollary}
+    由Coulomb定律，位于$\bm x_1$的点电荷$q_1$在$\bm x$处激发的电场$\bm E_1$为
+    \begin{equation}
+        \label{eqn:E of q}
+        \bm E_1=kq_1\frac{\bm x-\bm x_1}{|\bm x-\bm x_1|^3};
+    \end{equation}
+\end{corollary}
+\begin{theorem}
+    {线性叠加原理}{linear superposition principle}
+    实验得知，一系列离散(discrete)点电荷$q_1,\ldots,q_n$在空间中同一点$\bm x$处激发的电场可以线性叠加(linear superposition)
+    \begin{equation}
+        \label{eqn:E(x) sum}
+        \bm E=\sum_{i=1}^n\bm E_i=\frac1{4\pi\varepsilon_0}\sum_{i=1}^nq_i\frac{\bm x-\bm x_i}{|\bm x-\bm x_i|^3},
+    \end{equation}
+    如果电荷是连续(continuous)分布的，可以用电荷密度$\rho(\bm x)$描述，则求和变成积分：
+    \begin{equation}
+        \label{eqn:E(x)}
+        \bm E(\bm x)=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm x')\frac{\bm x-\bm x'}{|\bm x-\bm x'|^3}\d v'.
+    \end{equation}
+    式中$\d v'=\d x'\nd y'\nd z'$是在$\bm x'$处的一个三维体积元。
+\end{theorem}
 
-\begin{equation}
-    \label{eqn:E of q}
-    \bm E=kq_1\frac{\bm x-\bm x_1}{|\bm x-\bm x_1|^3};
-\end{equation}
+\begin{corollary}
+    利用Dirac $\delta$函数，电荷密度也可以用来描述分立的点电荷系统：
+    \[
+        \rho(\bm x')=\sum_{i=1}^nq_i\vd(\bm x'-\bm x_i).
+    \]
+\end{corollary}
 
-实验得知，一系列离散(discrete)点电荷$q_1,\ldots,q_n$在空间中同一点激发的电场可以线性叠加(linear superposition)
-\[
-    \bm E(\bm x)=\frac1{4\pi\varepsilon_0}\sum_{i=1}^nq_i\frac{\bm x-\bm x_i}{|\bm x-\bm x_i|^3},
-\]
-如果电荷是连续(continuous)分布的，可以用电荷密度$\rho(\bm x)$描述，则求和可以用积分代替：
-\begin{align}
-    \label{eqn:E(x)}
-    \bm E(\bm x)=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm x')\frac{\bm x-\bm x'}{|\bm x-\bm x'|^3}\d v'.
-\end{align}
-式中$\d v'=\d^3x'=\d x'\nd y'\nd z'$是在$\bm x'$处的一个三维体积元。
-
-而连续情形也可推出离散情形，只需用电荷密度描述分立的点电荷系统：
-\[
-    \rho(\bm x')=\sum_{i=1}^nq_i\vd(\bm x'-\bm x_i).
-\]
-尽管看似若已知$\rho(\bm x)$，我们可以根据积分\eqref{eqn:E(x)}求解任意静电场分布，但是这并不总是最适合的方法，下面我们介绍Gauss定律。
+\begin{remark}
+    若已知$\rho(\bm x)$，我们可以根据积分\eqref{eqn:E(x)}求解静电场分布，但是这并不总是最适合的方法，下面我们介绍Gauss定律。
+\end{remark}
 
 \subsection{Gauss定律}
 
@@ -100,15 +111,19 @@
     \end{equation}
 \end{theorem}
 
-Gauss定律依赖于：
-\begin{itemize}
-    \item 电荷间作用力满足平方反比定律；
-    \item 作用力是有心力；
-    \item 不同电荷效应可以线性叠加。
-\end{itemize}
-因此，对于Newton引力场来说，Gauss定律也成立。
+\begin{corollary}
+    根据推导过程，Gauss定律依赖于：
+    \begin{itemize}
+        \item 电荷间作用力满足平方反比定律；
+        \item 作用力是有心力；
+        \item 不同电荷效应可以线性叠加。
+    \end{itemize}
+    因此，对于Newton引力场来说，Gauss定律也成立。
+\end{corollary}
 
-尽管Gauss定律总是对的，但并不总是有用。为使电场的面积分易求，对称性条件很重要。%比如对于均匀带电的球(或球壳)外部激发的电场与同电荷在球心的点电荷相同。
+\begin{remark}
+    尽管Gauss定律总是对的，但并不总是有用。只有在满足一些对称性条件时，电场的面积分才比较容易求。%比如对于均匀带电的球(或球壳)外部激发的电场与同电荷在球心的点电荷相同。
+\end{remark}
 
 \begin{example}{无限大平板的静电场}{E of infinite plate}
     无限大带电平板有均匀面电荷密度$\sigma$，%求其电场。
@@ -126,7 +141,7 @@ Gauss定律依赖于：
     \]
 \end{example}
 
-\subsection{Gauss定律的微分形式}
+\paragraph{Gauss定律的微分形式}
 
 由散度定理\eqref{eqn:div}，
 \[
@@ -138,7 +153,6 @@ Gauss定律依赖于：
 \]
 该式对任意$V$均成立。由此被积分式为零。
 \begin{theorem}{Gauss定律的微分形式}{differential form of Gauss's law}
-    电场的散度与该点处电荷密度的关系如下：
     \begin{equation}
         \label{eqn:divE}
         \div\bm E=\frac\rho{\varepsilon_0}.
@@ -168,25 +182,28 @@ Gauss定律依赖于：
     \end{align}
 \end{definition}
 
-在电场$\bm E$下将试探电荷$q$从$A$点移动到$B$点时，克服电场力而对电荷所做的功
-\[
-    W=-\int_A^Bq\bm E\cdot\d\bm\ell=q(\Phi_B-\Phi_A).
-\]
-上式表明$q\Phi$可解释为试探电荷在电场中的势能。
+\begin{corollary}
+    在电场$\bm E$下将试探电荷$q$从$A$点移动到$B$点时，克服电场力而对电荷所做的功
+    \[
+        W=-\int_A^Bq\bm E\cdot\d\bm\ell=q(\Phi_B-\Phi_A).
+    \]
+    上式表明$q\Phi$可解释为试探电荷在电场中的势能。
+\end{corollary}
+
+\paragraph{静电场的旋度}
 
 由\eqref{eqn:curlgrad}梯度的旋度为0，可得除Gauss定律\eqref{eqn:Gauss law}外的另一个微分方程：
 \begin{theorem}{静电场无旋}{curlless E}
-    静电场的旋度为0：
-    \begin{align}
+    \begin{equation}
         \label{eqn:curlE}
         \curl\bm E=\bm 0.
-    \end{align}
+    \end{equation}
 \end{theorem}
 这也可从任意闭合路径的电场线积分为0得到。
 
 \paragraph{导体}
 导体(conductor)是易于传导电荷的物质，其内部存在大量%可以自由移动的
-自由电荷(free charge)。因此稳定时，导体内部不会存在静电场或静电电荷（因为自由电荷会在静电场下快速移动到导体表面达到平衡态），并且导体表面是等势的。
+自由电荷(free charge)。因此稳定时，导体内部不会存在静电场或静电电荷（因为自由电荷会在静电场下快速移动到导体表面达到平衡态），并且导体表面和内部都是等势的。
 \begin{example}{带电导体球的电势}{potential of conducting sphere}
 
     半径为$R$的均匀导体球携带电荷$q$，%易得这些电荷均匀地分布在导体球表面，
@@ -194,34 +211,36 @@ Gauss定律依赖于：
     \[
         \bm E(r)=
         \begin{cases}
-            \frac1{4\pi\varepsilon_0}\frac q{r^2}\uvec r,&r>R\\
-            \bm 0,&r<R
+            \bm 0,&r<R\\
+            \frac1{4\pi\varepsilon_0}\frac q{r^2}\uvec r,&r>R
         \end{cases}
     \]
     参考点设置为无穷远处，则电势
     \[
         \Phi(r)=-\int_{+\infty}^r\bm E\cdot\d\bm r=
         \begin{cases}
-            \frac1{4\pi\varepsilon_0}\frac qr,&r>R\\
-            \frac1{4\pi\varepsilon_0}\frac qR,&r<R
+            \frac1{4\pi\varepsilon_0}\frac qR,&r<R\\
+            \frac1{4\pi\varepsilon_0}\frac qr,&r>R
         \end{cases}.
     \]
 \end{example}
 
 \section{电荷的表面分布}
 
-给定面电荷密度为$\sigma$的表面$\p V$，表面法向单位矢量$\uvec n_{21}$从表面的一侧(1)指向另一侧(2)，根据Gauss定律，两侧电场的投影满足
+考察面电荷密度为$\sigma$的表面，表面法向单位矢量$\uvec n$从表面的一侧(1)指向另一侧(2)，根据Gauss定律，电场法向分量在表面两侧是不连续的：
 \begin{equation}
     \label{eqn:En2-En1}
-    (\bm E_2-\bm E_1)\cdot\uvec n_{21}=\frac\sigma{\varepsilon_0}.
+    (\bm E_2-\bm E_1)\cdot\uvec n=\frac\sigma{\varepsilon_0}.
 \end{equation}
-%-\pv{\Phi_2}{\uvec n}+\pv{\Phi_1}{\uvec n}=\frac\sigma{\varepsilon_0}.
-这说明，电场法向分量在内外表面上是不连续的；
 而电场切向分量是连续的：
 \begin{equation}
-    (\bm E_2-\bm E_1)\times\uvec n_{21}=\bm 0.
+    (\bm E_2-\bm E_1)\times\uvec n=\bm 0.
 \end{equation}
 
+再来看电位在表面上的分布，式\eqref{eqn:En2-En1}可以写成：
+\begin{equation}
+    -\pv{\Phi_2}{\uvec n}+\pv{\Phi_1}{\uvec n}=\frac\sigma{\varepsilon_0}.
+\end{equation}
 可以证明，在体电荷和面电荷分布上，电位分布是连续的。但是对于点电荷、线电荷或电偶层(dipole layers)，电位分布是不连续的！
 \begin{example}{电偶层}{dipole layers}
     两个面电荷密度为$\sigma$、间距为$d$的电偶层的电位 
@@ -264,7 +283,7 @@ Gauss定律依赖于：
 对于连续分布的电荷：
 \begin{align*}
     \label{eqn:W-qq}
-    W=\frac1{8\pi\varepsilon_0}\iint_V\frac{\rho(\bm x)\rho(\bm x')}{|\bm x_i-\bm x_j|}\d v\nd v'.
+    W=\frac1{8\pi\varepsilon_0}\iint_V\frac{\rho(\bm x)\rho(\bm x')}{|\bm x-\bm x'|}\d v\nd v'.
 \end{align*}
 注意上式没有要求$\bm x\neq\bm x'$，可代入式\eqref{eqn:Phi-rho}，
 \begin{align}
@@ -272,8 +291,7 @@ Gauss定律依赖于：
 \end{align}
 可对上式进行变形，由式\eqref{eqn:divE}和\eqref{eqn:gradPhi}，$\rho=\varepsilon_0\div\bm E=-\varepsilon_0\lapla\Phi$，
 \begin{align*}
-    W&=-\frac{\varepsilon_0}2\int_V\Phi\lapla\Phi\d v\\
-    &=-\frac{\varepsilon_0}2\biggfkh{\oint_{\p V}\Phi\nabla\Phi\cdot\d\bm a-\int_V|\nabla\Phi|^2\d v}
+    W=-\frac{\varepsilon_0}2\int_V\Phi\lapla\Phi\d v=-\frac{\varepsilon_0}2\biggfkh{\oint_{\p V}\Phi\nabla\Phi\cdot\d\bm a-\int_V|\nabla\Phi|^2\d v}
 \end{align*}
 %由分部积分，\int_Vf\div\bm A\d v=\oint_{\p V}f\bm A\cdot\d\bm a-\int_V\bm A\cdot\nabla f\d v
 %取$f=\Phi,\enspace\bm A=\nabla\Phi$，
@@ -288,7 +306,8 @@ Gauss定律依赖于：
     w=\frac{\varepsilon_0}2|\bm E|^2.
 \end{align}
 
-现在我们来审视式\eqref{eqn:W-qq}和式\eqref{eqn:W-E}，式\eqref{eqn:W-E}当然恒为正，但式\eqref{eqn:W-qq}却不一定。原因在于：式\eqref{eqn:W-qq}仅包含了互能(电荷间相互作用的静电势能)，而式\eqref{eqn:W-E}包含了互能和自能(构成点电荷自身所需要的能量)。
+% 现在我们来审视式\eqref{eqn:W-qq}和式\eqref{eqn:W-E}，
+观察表达式，式\eqref{eqn:W-E}当然恒为正，但式\eqref{eqn:W-qq}却不一定。一种解释认为：式\eqref{eqn:W-qq}仅包含了互能(电荷间相互作用的静电势能)，而式\eqref{eqn:W-E}包含了互能和自能(构成点电荷自身所需要的能量)。
 \begin{example}{导体的能量密度}{energy density of conductor}
     由式\eqref{eqn:Et2-Et1}，导体内的电场$\bm E_\text{in}=\bm 0$，故导体的法向电场
     \[
@@ -317,18 +336,19 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 
 \section{数学内容}
 
-\subsection{Poisson方程和Laplace方程}
-
-结合式\eqref{eqn:divE}和\eqref{eqn:gradPhi}，便会得到Poisson方程
-\begin{align}
-    \label{eqn:Poisson}
-    \lapla\Phi=-\frac\rho{\varepsilon_0}.
-\end{align}
-特别地，$\rho\equiv 0$时，变成Laplace方程
-\begin{align}
-    \label{eqn:Laplace}
-    \lapla\Phi=0.
-\end{align}
+\begin{definition}
+    {Poisson方程和Laplace方程}{}
+    结合式\eqref{eqn:divE}和\eqref{eqn:gradPhi}，便会得到Poisson方程
+    \begin{align}
+        \label{eqn:Poisson}
+        \lapla\Phi=-\frac\rho{\varepsilon_0}.
+    \end{align}
+    特别地，$\rho\equiv 0$时，变成Laplace方程
+    \begin{align}
+        \label{eqn:Laplace}
+        \lapla\Phi=0.
+    \end{align}
+\end{definition}
 %式\eqref{eqn:Phi-rho}可以是Poisson方程的一个解。
 求解电势$\Phi$分布就需要求解Poisson方程\eqref{eqn:Poisson}，但是只有$V$内的条件是不够的，边界$\p V$上的电位也会影响$V$内的电场和电势分布。
 
@@ -432,14 +452,6 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     \begin{align}
         \nabla'^2G(\bm x,\bm x')=-4\pi\vd(\bm x-\bm x').
     \end{align}
-    $G$可被拆解为
-    \[
-        G(\bm x,\bm x')=\frac1{|\bm x-\bm x'|}+F(\bm x,\bm x'),
-    \]
-    而$F$满足$V$内的Laplace方程
-    \[
-        \nabla'^2F(\bm x,\bm x')=0.
-    \]
 \end{definition}
 回到第二Green公式\eqref{eqn:Green 2}，这次令$\phi:=\Phi(\bm x'),\enspace\psi:=G(\bm x,\bm x')$，式\eqref{eqn:Phi-rho with boundary}变为
 \begin{align*}
@@ -477,27 +489,39 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \]
 上述方法不依赖于边界条件的具体形式，因此是普遍的。但通常很难找到一个满足\eqref{eqn:Dirichlet Green condition}或\eqref{eqn:Neumann Green condition}的$G(\bm x, \bm x')$，因为它依赖于$\p V$的形状。
 \begin{example}{Green函数举例}{}
-    在无边界空间中，可取
+    在无边界空间$V=\RR^3$中，可取
     \[
         G(\bm x,\bm x')=\frac1{|\bm x-\bm x'|}=\frac1{\sqrt{(x-x')^2+(y-y')^2+(z-z')^2}}.
     \]
-    在上半空间($z>0$)中，为了运用式\eqref{eqn:Dirichlet Green}，需要$G$在$z=0$处为0。可取$\bm x'$的对称点$\bm x''=(x',y',-z')$，并取
+    在上半空间$V=\set{(x,y,z)}{z>0}$中，为了运用式\eqref{eqn:Dirichlet Green}，需要$G$在$\p V=\{(x,y,0)\}$处为0。可取$\bm x'$的对称点$\bm x''=(x',y',-z')$，并取
     \begin{align*}
         G(\bm x,\bm x')&=\frac1{|\bm x-\bm x'|}-\frac1{|\bm x-\bm x''|}\\
         &=\frac1{\sqrt{(x-x')^2+(y-y')^2+(z-z')^2}}-\frac1{\sqrt{(x-x')^2+(y-y')^2+(z+z')^2}}.
     \end{align*}
 \end{example}
-对于Dirichlet边界条件，Green函数是对称的：
+\begin{theorem}
+    {Green函数的对称性}{}
+    对于Dirichlet边界条件，Green函数是对称的：
+    \[
+        G(\bm x,\bm x')=G(\bm x',\bm x);
+    \]
+    但对于Neumann边界条件，还需加上一项才是对称的：
+    \[
+        G(\bm x,\bm x')+\frac1S\oint_{\p V}G(\bm x,\bm x'')\d a''=G(\bm x',\bm x)+\frac1S\oint_{\p V}G(\bm x',\bm x'')\d a'',
+    \]
+    额外加的这一项并不影响电势$\Phi(\bm x)$。
+\end{theorem}
+Green函数可被拆解为
 \[
-    G(\bm x,\bm x')=G(\bm x',\bm x);
+    G(\bm x,\bm x')=\frac1{|\bm x-\bm x'|}+F(\bm x,\bm x'),
 \]
-但对于Neumann边界条件，还需加上一项才是对称的：
+而$F$满足$V$内的Laplace方程
 \[
-    G(\bm x,\bm x')+\frac1S\oint_{\p V}G(\bm x,\bm x'')\d a''=G(\bm x',\bm x)+\frac1S\oint_{\p V}G(\bm x',\bm x'')\d a'',
+    \nabla'^2F(\bm x,\bm x')=0.
 \]
-额外加的这一项并不影响电势$\Phi(\bm x)$。
-
-此外，我们应该知道$F(\bm x, \bm x')/4\pi\varepsilon_0$的物理意义。它表示$V$外的电荷系统的势。$F(\bm x, \bm x')$与电像法有关(后面会讨论)。
+$F(\bm x, \bm x')$与电像法有关(后面会讨论)。
+其物理意义为：
+$F(\bm x, \bm x')/4\pi\varepsilon_0$表示$V$外的电荷系统的势。
 
 \subsectionstar{变分法}
 
