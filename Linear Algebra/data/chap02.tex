@@ -63,12 +63,14 @@
 		1&&3\\ &1&1
 	\end{array}}.
 \]
-类似的，可以考虑对一般矩阵进行置换、倍加、倍乘的操作。
+类似的，可以考虑对一般矩阵进行这种操作。
+
 \begin{definition}{矩阵的初等行变换}{}
+	矩阵有三种非退化的初等行变换(elementary row operation)：
 	\begin{compactitem}
-		\item 倍加(row addition)：一行乘系数加到另一行
-		\item 对换(row switching)：交换两行
-		\item 倍乘(row multiplication)：一行乘以一个非零系数
+		\item 倍加(row addition)：一行乘系数加到另一行；
+		\item 对换(row switching)：交换两行；
+		\item 倍乘(row multiplication)：一行乘以一个非零系数。
 	\end{compactitem}
 \end{definition}
 
@@ -79,6 +81,10 @@
 \begin{remark}
 	行等价是一种等价关系，满足自反性、对称性和传递性。见\dfnref{dfn:equivalence relation}。
 \end{remark}
+
+\paragraph{行阶梯矩阵}
+
+Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯型矩阵。
 
 \begin{definition}{行阶梯矩阵}{row echelon matrix}
 	矩阵$M$若其满足以下性质：
@@ -146,28 +152,32 @@
 	\end{compactitem}
 \end{remark}
 
-\begin{definition}{初等矩阵}{Elementary Matrix}
-	对$m\times n$矩阵$A$行变换$\iff$用$m\times m$初等矩阵(elementary matrix)左乘$A$。
-	
-	初等矩阵有以下三种类型：
-	\begin{compactitem}
+\paragraph{初等矩阵}
+
+我们可以将矩阵的行变换等价地用矩阵乘法表示，即就结果而说：
+\begin{center}
+	对$m\times n$矩阵$A$进行初等行变换$\iff$用一个特定的$m\times m$矩阵左乘$A$
+\end{center}
+称为初等矩阵(elementary matrix)。
+
+\begin{definition}
+	{初等矩阵}{}
+	与初等行变换对应，初等矩阵有以下三种类型：
+	\begin{itemize}
 		\item 倍加：$A$的第$i$行的$a$倍加到第$j$行($r_j'=ar_i+r_j$)
 		\[
-			E_{ij}(a):=
+			E_{i\to j}(a):=
 			\begin{bmatrix}
 				\ddots\\ &1&&a\\ &&\ddots\\ &&&1\\ &&&&\ddots
 			\end{bmatrix}=I+ae_{ij},
 		\]
-		逆：$E_{ij}(a)\iv=E_{ij}(-a)$；
 		\item 置换：置换$A$的第$i$行和第$j$行($r_i\rightleftarrows r_j$)
 		\[
-			E_{ij}:=
+			E_{i\leftrightarrow j}:=
 			\begin{bmatrix}
 				\ddots\\ &0&&1\\ &&\ddots\\ &1&&0\\ &&&&\ddots
 			\end{bmatrix}=I+e_{ij}+e_{ji}-e_{ii}-e_{jj},
 		\]
-		逆：$E_{ij}\iv=E_{ij}$；
-		%置换矩阵(permutation matrix)与自己互逆；
 		\item 倍乘：$A$的第$i$行乘一个非0常数$c$ ($r_i'=cr_i$)
 		\[
 			E_i(c):=
@@ -175,10 +185,43 @@
 				\ddots\\ &1\\ &&c\\ &&&1\\ &&&&\ddots
 			\end{bmatrix}=I+(c-1)e_{ii}.
 		\]
-		逆：$E_i(c)\iv=E_i(c\iv).$
-	\end{compactitem}
+	\end{itemize}
+	其中$\ddots$所省略的对角项均为1，但阶数不一定相同。
 \end{definition}
-消元法：用一系列初等矩阵$E_1,\ldots,E_k$左乘$A$，把$A$化简成行阶梯矩阵。
+
+\begin{corollary}
+	初等矩阵的逆还是初等矩阵：
+	\begin{subequations}
+		\begin{align}
+			E_{i\to j}(a)\iv&=E_{i\to j}(-a),\\
+			E_{i\leftrightarrow j}\iv&=E_{i\leftrightarrow j},\\
+			E_i(c)\iv&=E_i(c\iv)
+		\end{align}
+	\end{subequations}
+\end{corollary}
+
+\begin{remark}
+	消元法：用一系列初等矩阵$E_1,\ldots,E_k$左乘$A$，把$A$化简成行阶梯矩阵。
+\end{remark}
+
+\begin{definition}
+	{初等矩阵的广义定义}{}
+	$\forall u,v\in\FF^m$，$\sigma\in\FF$，定义$I+\sigma uv\tp$为(广义的)初等矩阵。
+\end{definition}
+\begin{remark}
+	三种行变换对应的初等矩阵也可以写成$I+\sigma uv\tp$的形式：
+	\begin{subequations}
+		\begin{align}
+			E_{i\to j}(a)&=I+ae_ie_j\tp,\\
+			E_{i\leftrightarrow j}&=I-(e_i-e_j)(e_i-e_j)\tp,\\
+			E_i(c)&=I+(c-1)e_ie_i\tp.
+		\end{align}
+	\end{subequations}
+	由式\eqref{eqn:(I+uvT)-1}，初等矩阵都是可逆的，并且逆也是初等矩阵：
+	\begin{equation}
+		(I+\sigma uv\tp)\iv=I-\frac{\sigma}{1+\sigma vu\tp}uv\tp,
+	\end{equation}
+\end{remark}
 
 \begin{theorem}
 	{可逆的等价命题}{}
@@ -200,7 +243,7 @@
 
 	$(2)\implies(3)$：取$b=0$，又注意到$A0=0$，由解的唯一性得证；
 
-	$(3)\implies(4)$：方程组有唯一解等价于主元数$=$未知数个数$=n$；
+	$(3)\implies(4)$：方程组有唯一解$\iff$主元数$=$未知数个数$=n$；
 
 	$(4)\implies(5)$：显然；
 
