@@ -24,6 +24,20 @@
 \RequirePackage{anyfontsize}
 
 \renewcommand{\contentsname}{目　录}
+\renewcommand{\listfigurename}{插　图}
+\let\oldlistoffigures\listoffigures
+\let\oldnumberline\numberline
+\renewcommand{\listoffigures}{%
+  \renewcommand{\numberline}{\figurename~\oldnumberline}%
+  \oldlistoffigures%
+  \renewcommand{\numberline}{\oldnumberline}}
+\renewcommand{\listtablename}{表　格}
+\let\oldlistoftables\listoftables
+\renewcommand{\listoftables}{%
+  \renewcommand{\numberline}{\tablename~\oldnumberline}%
+  \oldlistoftables%
+  \renewcommand{\numberline}{\oldnumberline}}
+
 \newcommand{\preface}{\chapter{前　言}}
 
 \RequirePackage[title]{appendix}
@@ -61,16 +75,19 @@
 \renewcommand{\eqref}[1]{(\ref{#1})}
 \newcommand{\chapref}[1]{第\ref{#1}章}
 \newcommand{\secref}[1]{第 \ref{#1} 节}
+\newcommand{\appref}[1]{附录 \ref{#1}}
 \newcommand{\dfnref}[1]{定义 \ref{#1}}
 \newcommand{\thmref}[1]{定理 \ref{#1}}
 \newcommand{\exmref}[1]{例 \ref{#1}}
 \newcommand{\figref}[1]{图 \ref{#1}}
+\newcommand{\tabref}[1]{表 \ref{#1}}
 % \let\oldpageref\pageref
 % \renewcommand{\pageref}[1]{第 \oldpageref{#1} 页}
 
 \RequirePackage{graphicx}
 \RequirePackage[hypcap=false]{caption}
 \RequirePackage{subcaption}
+\RequirePackage{booktabs}
 
 \RequirePackage{tikz}
 \usetikzlibrary{quotes, angles, patterns}
