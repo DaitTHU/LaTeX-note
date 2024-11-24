@@ -82,7 +82,7 @@
 \begin{example}{无限长直导线的磁场}{B of straight line}
     $z$轴上的长直导线电流方向为$+z$，距离其$\rho$处的磁感应强度大小为
     \[
-        B_\phi(\rho)=\frac{\mu_0}{4\pi}\int\iti\frac{I\rho\d z}{(z^2+\rho^2)^{3/2}}=\frac{\mu_0}{2\pi}\frac I\rho.
+        B_\phi=\frac{\mu_0}{4\pi}\int\iti\frac{I\rho\d z}{(z^2+\rho^2)^{3/2}}=\frac{\mu_0}{2\pi}\frac I\rho.
     \]
     方向服从右手定则，即$\uvec\phi$方向。
 \end{example}
@@ -130,8 +130,7 @@
     \bm N=\bm x\times\bm F=\int_V\bm x\times(\bm J\times\bm B)\d v.
 \]
 
-\subsection{Ampère定律}
-\label{ssec:Ampere's law}
+\subsection{磁场的Gauss定律}
 
 利用电流密度，Biot-Savart定律\eqref{eqn:B-S law}可以写成旋度的形式
 \begin{align}
@@ -144,6 +143,10 @@
     \label{eqn:divB}
     \div\bm B=0,
 \end{equation}
+这是磁场的Gauss定律，这表明：静磁场无源。
+
+\subsection{Ampère定律}
+\label{ssec:Ampere's law}
 
 现在我们希望知道$\bm B$的散度，利用\eqref{eqn:curlcurl}
 \begin{align*}
@@ -201,7 +204,7 @@
 \end{definition}
 但满足上式的$\bm A$并不唯一。若对$\bm A$进行规范(gauge)变换：
 \[
-    \bm A\mapsto\bm A+\nabla\varLambda,
+    \bm A\mapsto\bm A'=\bm A+\nabla\varLambda,
 \]
 式\eqref{eqn:B=curlA}对于任意的$\varLambda$仍成立：
 \[
@@ -216,7 +219,7 @@
     \label{eqn:A-J}
     \bm A(\bm x):=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm x')}{|\bm x-\bm x'|}\d v',
 \end{equation}
-
+在Coulomb规范下，
 我们也可以得到$\bm A$三个分量的Laplace方程：
 \[
     \curl\bm B=\curl(\curl\bm A)=\nabla(\cancel{\div\bm A})-\lapla\bm A.
@@ -261,7 +264,8 @@
     因此对于$r\gg a$处的远场
     \begin{align*}
         B_r&=\frac1{r\sin\theta}\pp\theta(\sin\theta A_\phi)=\frac{\mu_0Ia^2}2\frac{\cos\theta}{r^3},\\
-        B_\theta&=-\frac1r\pp r(rA_\theta)=\frac{\mu_0Ia^2}4\frac{\sin\theta}{r^3},
+        B_\theta&=-\frac1r\pp r(rA_\phi)=\frac{\mu_0Ia^2}4\frac{\sin\theta}{r^3},\\
+        B_\phi&=0.
     \end{align*}
     与电偶极矩的电场\eqref{eqn:edipole-E}比较，可定义环形电流的磁偶极矩(magnetic dipole moment)大小
     \[
@@ -411,8 +415,20 @@ $U$并不是外磁场中磁矩的总能量，因为它不包含产生$\bm m$并�
 \[
     \bm B=\mu\bm H,
 \]
-$\mu$为磁导率(permeability)。对于顺磁性物质，$\mu\gtrapprox\mu_0$；抗磁性物质$\mu\lessapprox\mu_0$。铁磁性(ferromagnetic)物质的$\mu$与$\bm H$的关系较为复杂，存在磁滞现象(hysteresis)，但由于其$\mu\gg\mu_0$，有时可对边界条件作出简化假设。
+$\mu$为磁导率(permeability)。根据磁导率可以将物质分为以下磁性：
+\begin{itemize}
+    \item 顺磁性(paramagnetism)：$\mu\gtrapprox\mu_0$，如碱金属(Li, Na, Cs)、碱土金属(Mg, Ca)等；
+    \item 抗磁性(diamagnetism)：$\mu\lessapprox\mu_0$，如水、铜、石墨、铅等；
+    \item 铁磁性(ferromagnetism)：$\mu\gg\mu_0$，且$\mu$与$\bm H$的关系较为复杂，如\figref{fig:hysteresis}，称为磁滞现象(hysteresis)。如铁、钴、镍。%由于其，有时可对边界条件作出简化假设。
+\end{itemize}
+\begin{center}
+    \includegraphics[width=0.5\linewidth]{graphs/hysteresis.pdf}
+    \captionof{figure}{磁滞回线}
+    \label{fig:hysteresis}
+\end{center}
+
 \paragraph{表面分布}
+
 考虑介质界面上$\bm B$和$\bm H$的分布，我们可以得到：
 \begin{align}
     \label{eqn:Bn2-Bn1}
@@ -429,9 +445,9 @@ $\mu$为磁导率(permeability)。对于顺磁性物质，$\mu\gtrapprox\mu_0$�
 		\node at(2, 3){$\mu_2$};
 		\draw[thick](0, 0)--(0, 4);
 		\draw[dashed, <->](-.5, 2)--(-1.5, 2)--(-1.5, 1.5);
-		\draw[thick, -latex](-1.5, 2)--(-.5, 1.5)node[below]{$\bm H_1$};
+		\draw[thick, ->](-1.5, 2)--(-.5, 1.5)node[below]{$\bm H_1$};
 		\draw[dashed, <->](3.5, 2)--(.5, 2)--(.5, 1.5);
-		\draw[thick, -latex](.5, 2)--(3.5, 1.5)node[below]{$\bm H_2$};
+		\draw[thick, ->](.5, 2)--(3.5, 1.5)node[below]{$\bm H_2$};
 	\end{tikzpicture}
 	\captionof{figure}{极高磁导率材料表面的$\bm H$表现}
 \end{center}
@@ -451,6 +467,7 @@ $\mu$为磁导率(permeability)。对于顺磁性物质，$\mu\gtrapprox\mu_0$�
 \subsection{静磁学中的边界条件问题}
 \label{ssec:boundary-value problems in magnetostatics}
 
+\paragraph{磁势}
 %对于磁化材料外部的磁场问题，
 若材料是磁导率$\mu\gg\mu_0$的硬铁磁体（其磁矩密度$\bm M$与外场无关），则材料外表面上的$\bm B$垂直于界面，内表面上的$\bm B$平行于界面。如果其内没有电流($\bm J=\bm0$)，则可引入磁势$\Phi_\text M$并解其Laplace方程。
 \begin{equation}
@@ -471,6 +488,7 @@ $\mu$为磁导率(permeability)。对于顺磁性物质，$\mu\gtrapprox\mu_0$�
 \end{equation}
 若铁磁体是均匀磁化的，则$\div\bm M=0$，第一项为0。
 
+\paragraph{矢量势}
 我们接着求矢量势，由于$\bm J=\bm 0$，仅剩有效电流密度项
 \begin{equation}
     \lapla\bm A=-\mu_0(\bm 0+\curl\bm M),
