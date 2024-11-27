@@ -402,3 +402,28 @@ Lam\'e系数：
 与式\eqref{eqn:divcurl}联系，注意$\bm A$并不唯一 。
 
 % \sectionstar{并矢}
+
+\chapter{特殊函数}
+
+\section{Legendre多项式}
+
+证明递推式\eqref{eqn:Legendre recurrence 1}
+\[
+    P'_{\ell+1}-P'_{\ell-1}-(2\ell+1)P_\ell=0,
+\]
+\begin{proof}
+    由Rodrigues公式
+    \begin{equation}
+        P_\ell(x)=\frac1{2^\ell\ell!}\dd[\ell]x(x^2-1)^\ell.
+    \end{equation}
+    可得
+    \begin{align*}
+        P'_\ell&=\frac1{2^\ell\ell!}\dd[\ell+1]x(x^2-1)^\ell=\frac1{2^{\ell-1}(\ell-1)!}\dd[\ell]x\bigfkh{x(x^2-1)^{\ell-1}}\\
+        &=\frac1{2^{\ell-1}(\ell-1)!}\dd[\ell-1]x\bigfkh{\bigkh{(2\ell-1)x^2-1}(x^2-1)^{\ell-2}}.
+    \end{align*}
+    从而 
+    \begin{align*}
+        P_{\ell+1}'-P_{\ell-1}'&=\frac1{2^\ell\ell!}\dd[\ell]x\bigfkh{\bigkh{(2\ell+1)x^2-1}(x^2-1)^{\ell-1}}-\frac1{2^{\ell-1}(\ell-1)!}\dd[\ell]x(x^2-1)^{\ell-1}\\
+        &=\frac1{2^\ell\ell^2}\dd[\ell]x\bigfkh{(2\ell+1)(x^2-1)^\ell}=(2\ell+1)P_\ell.\qedhere
+    \end{align*}
+\end{proof}
