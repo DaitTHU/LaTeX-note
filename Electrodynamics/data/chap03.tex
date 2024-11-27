@@ -155,18 +155,27 @@
 在前一章中，我们没有考虑有质介质(ponderable media)的存在，所以我们没有区分微观场(microscopic)和宏观场(macroscopic)。
 但是静电学主要涉及有质介质中的电荷和场，因此%它们各自的电响应必须考虑在内：(1)分子电荷密度会被扭曲。(2)每个分子的多极矩都是不同的。
 我们必须在微观层面上考虑有质介质的极化效应(polarization effect)。为了得到适用于宏观现象的Maxwell方程，我们对宏观小、微观大的区域求平均：% 在第6章中，我们只会小心翼翼地做到这一点
+\[
+    \bm E:=\ave{\bm E_\text{micro}},
+\]
+则旋量方程\eqref{eqn:curlE}对求平均后的宏观电场$\bm E$适用：
 \begin{equation}
     \label{eqn:curlE-macro}
     \curl\bm E_\text{micro}=\bm 0\implies\curl\bm E=\bm 0.
 \end{equation}
-方程对求平均后的宏观电场$\bm E$适用。这意味着电场仍然可以从静电学中的电势推导出来。
+这意味着宏观电场$\bm E$同样可以表达成电势的梯度$\grad\Phi$。
 
+\paragraph{电极化}
 %如果电场作用于由大量原子(或分子)组成的介质，束缚在每个分子中的电荷将执行摄动运动(perturbed motions)，由此在介质中产生了电极化。
-在多极子与电场的作用中，偶极子占主导地位。定义电极化强度(electric polarization) $\bm P$为单位体积的偶极矩
-\begin{equation}
-    \bm P:=\sum_i N_i\ave{\bm p_i}.
-\end{equation}
-假设更高阶的宏观多极矩密度可忽略，则有质介质的电势为
+在电介质内的多极子被外电场极化的过程中，偶极子占主导地位。
+\begin{definition}
+    {电极化强度}{electric polarization}
+    定义电极化强度(electric polarization)为单位体积的偶极矩
+    \begin{equation}
+        \bm P:=\sum_i N_i\ave{\bm p_i}.
+    \end{equation}
+\end{definition}
+假设更高阶的宏观多极矩密度可忽略，则$\D V$体积内的有质介质的电势为
 \begin{align*}
     \D\Phi(\bm x,\bm x')&=\frac1{4\pi\varepsilon_0}\biggfkh{\frac{\rho(\bm x')}{|\bm x-\bm x'|}\D V+\frac{\bm P(\bm x')\cdot(\bm x-\bm x')}{|\bm x-\bm x'|^3}\D V}\\
     &=\frac1{4\pi\varepsilon_0}\biggfkh{\frac{\rho(\bm x')}{|\bm x-\bm x'|}+\bm P(\bm x')\cdot\nabla'\biggkh{\frac1{|\bm x-\bm x'|}}}\D V
@@ -175,7 +184,7 @@
 \begin{equation}
     \Phi(\bm x)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm x')-\div\bm P(\bm x')}{|\bm x-\bm x'|}\d v'.
 \end{equation}
-$\rho$是自由电荷(或过剩电荷)密度，
+其中$\rho$是自由电荷(或过剩电荷)密度，
 $\rho_\text{pol}:=-\div\bm P$是极化电荷密度。%上式是由电荷分布$(\rho-\div\bm P)$激发电势的习惯表达式。
 从而
 %由$\bm E=-\nabla\Phi$，第一个Maxwell方程为 
@@ -183,29 +192,48 @@ $\rho_\text{pol}:=-\div\bm P$是极化电荷密度。%上式是由电荷分布$(
     \label{eqn:divE-P}
     \div\bm E=-\lapla\Phi=\frac{\rho-\div\bm P}{\varepsilon_0}.
 \end{equation}
-若极化不均匀，任何小体积内的电荷都会有净增加或净减少，这就是为什么存在$\div\bm P$的原因。
-
-将式\eqref{eqn:divE-P}移项，可定义电位移矢量(electric displacement)
-\begin{equation}
-    \bm D:=\varepsilon_0\bm E+\bm P.
-\end{equation}
+若极化不均匀，则任何小体积内的电荷都会有净增加或净减少，这对应$\div\bm P$这一项。
+\begin{definition}
+    {电位移矢量}{electric displacement}
+    将式\eqref{eqn:divE-P}移项，可定义电位移矢量(electric displacement)
+    \begin{equation}
+        \bm D:=\varepsilon_0\bm E+\bm P.
+    \end{equation}
+\end{definition}
 从而式\eqref{eqn:divE-P}变为 
 \begin{equation}
     \label{eqn:divD}
     \div\bm D=\rho.
 \end{equation}
 式\eqref{eqn:curlE-macro}和\eqref{eqn:divD}是式\eqref{eqn:curlE}和\eqref{eqn:divE}的宏观对应。
+
 \paragraph{本构关系}
-为了解Maxwell方程组，我们需要找到$\bm D$和$\bm E$之间的本构关系(constitutive relation)。为了简化，我们假设介质是各向同性的(isotropic)，且系统对外加场的响应是线性的(linear)。因此
+
+为了解Maxwell方程组，我们需要找到$\bm D$和$\bm E$之间的本构关系(constitutive relation)。
+为了简化，我们假设介质是各向同性的(isotropic)，且系统对外加场的响应是线性的(linear)。因此
 \begin{equation}
     \bm P=\varepsilon_0\chi_\elc\bm E.
 \end{equation}
-其中$\chi_\elc$称为介质的电极化率(electric susceptibility)。由此得到 
+其中无量纲常数$\chi_\elc$称为介质的电极化率(electric susceptibility)。由此得到 
 \begin{equation}
-    \bm D=\varepsilon\bm E,\quad \varepsilon:=\varepsilon_0(1+\chi_\elc)=:\varepsilon_\r\varepsilon_0.
+    \bm D=\varepsilon\bm E,
 \end{equation}
-$\varepsilon_\r:=1+\chi_\elc$称为介电常数(dielectric constant)或相对介电常数(relative electric permittivity)。
+其中$\varepsilon:=\varepsilon_\r\varepsilon_0$称为电容率或介电常数(permittivity)，
+无量纲常数$\varepsilon_\r:=1+\chi_\elc$称为相对介电常数(relative permittivity)\footnote{在旧教材中也称dielectric constant，已废弃。}。
 
+% \begin{table}[!htp]
+%     \centering
+%     \caption{常见物质的相对介电常数}
+%     \begin{tabular}{cc}
+%         \toprule
+%         物质&$\varepsilon_\r$\\
+%         \midrule
+%         真空&1\\
+%         空气&1.0006\\
+%         Si&11.68\\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
 如果电介质不仅是各向同性的，而且是均匀的，则$\varepsilon$与位置无关。式\eqref{eqn:divE-P}可被写为 
 \begin{equation}
     \div\bm E=\frac\rho\varepsilon.
@@ -216,26 +244,26 @@ $\varepsilon_\r:=1+\chi_\elc$称为介电常数(dielectric constant)或相对介
     \bm E'=\frac{\varepsilon_0}\varepsilon\bm E,\quad C'=\frac\varepsilon{\varepsilon_0}C.
 \end{equation}
 \paragraph{表面分布}
-考虑介质界面上$\bm D$和$\bm E$的分布，我们可以得到：
-\begin{align}
-    \label{eqn:Dn2-Dn1}
-    (\bm D_2-\bm D_1)\cdot\uvec n_{21}&=\sigma,\\
-    \label{eqn:Et2-Et1}
-    (\bm E_2-\bm E_1)\times\uvec n_{21}&=\bm 0,
-\end{align}
-$\uvec n_{21}$是边界上从区域(1)指向区域(2)的法向量；$\sigma$是宏观表面电荷密度（不包含极化电荷）。
+考虑介质界面上$\bm D$和$\bm E$的分布，$\uvec n$是边界上从区域(1)指向区域(2)的法向量，我们可以得到：
+\begin{subequations}
+    \begin{align}
+        \label{eqn:Pn2-Pn1}
+        (\bm P_2-\bm P_1)\cdot\uvec n&=-\sigma_\text{pol},\\
+        \label{eqn:Dn2-Dn1}
+        (\bm D_2-\bm D_1)\cdot\uvec n&=\sigma,\\
+        \label{eqn:Et2-Et1}
+        (\bm E_2-\bm E_1)\times\uvec n&=\bm 0.
+    \end{align}
+\end{subequations}
+其中$\sigma_\text{pol}$是边界上表面极化电荷密度；
+$\sigma$是宏观表面电荷密度（不包含极化电荷$\sigma_\text{pol}$）。
 
-边界上表面极化电荷密度$\sigma_\text{pol}$的关系为
-\begin{equation}
-    \label{eqn:Pn2-Pn1}
-    -(\bm P_2-\bm P_1)\cdot\uvec n_{21}=\sigma_\text{pol}.
-\end{equation}
 对于非均匀介质，极化电荷在介质内部随处可见；对于均匀介质，极化电荷仅位于自由电荷附近和两种不同介质之间的界面处；极化电荷所在的界面不是理想的几何界面，实际上，它们的厚度包含了几层分子。
 
 \subsection{含电介质的边值问题}
 \label{ssec:boundary-value problem with dielectrics}
 
-我们可以推广之前介绍的方法来解决电介质的问题。
+我们可以推广之前介绍的方法来解决电介质的边界问题。
 \begin{example}{电介质中的镜像电荷}{method of images, dielectrics}
     半无限电介质$\varepsilon_1$与半无限电介质$\varepsilon_2$被隔开，
     考虑嵌入在$\varepsilon_1$中的点电荷$q$距离边界$d$，如图所示。
