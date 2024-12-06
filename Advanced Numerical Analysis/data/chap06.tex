@@ -1,0 +1,211 @@
+\chapter{线性方程组的迭代解法}
+
+\begin{definition}
+    {线性方程组的迭代解法}{iterative method}
+    构造一个向量序列，使其尽快收敛到线性方程组$Ax=b$的解。
+\end{definition}
+
+\section{向量序列和矩阵序列的极限}
+
+\begin{definition}
+    {向量序列的极限}{limit of vector array}
+    给定赋范空间$(\FF^n,\norm\cdot)$以及一组向量序列$x^{(1)},x^{(2)},\ldots$，若$\exists x\in\FF^n$使得
+    \begin{equation}
+        \lim_{i\to\infty}\norm{x^{(i)}-x}=0,\iff\lim_{i\to\infty}x^{(i)}=x.
+    \end{equation}
+    则称$x^{(i)}$收敛于$x$。
+\end{definition}
+
+\begin{remark}
+    由于有限维线性空间中所有范数都是等价的，向量序列的收敛性不依赖于范数的选择。
+\end{remark}
+
+\begin{theorem}
+    {向量序列的收敛性判定}{}
+    向量序列收敛等价于其各分量序列收敛：
+    \begin{equation}
+        \lim_{i\to\infty}x^{(i)}=x,\iff\lim_{i\to\infty}x^{(i)}_j=x_j,\enspace \forall j=1,\ldots,n.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    选取无穷范数：
+    \[
+        \lim_{i\to\infty}\norm{x^{(i)}-x}_\infty=0,\iff\lim_{i\to\infty}\max_j\abs{x^{(i)}_j-x_j}=0,\iff\lim_{i\to\infty}\abs{x^{(i)}_j-x_j}=0,\enspace\forall j.
+        \qedhere
+    \]
+\end{proof}
+
+\begin{remark}
+    类似地，我们可以定义矩阵序列的收敛性。
+\end{remark}
+
+\begin{theorem}
+    {收敛到零矩阵}{limit=O}
+    $\lim_{i\to\infty}A^{(i)}=O,\iff\forall x\in\FF^n$均有
+    \[
+        \lim_{i\to\infty}A^{(i)}x=0.
+    \]
+\end{theorem}
+
+\begin{proof}
+    必要性：对于任一矩阵的从属范数，
+    \[
+        \norm{A^{(i)}x}\leq\norm{A^{(i)}}\norm x\to0;
+    \]
+    充分性：其矩阵各分量
+    \[
+        \abs{a_{ij}^{(i)}}=\abs{e_i\tp A^{(i)}e_j}\leq\norm{A^{(i)}e_j}_\infty\to 0.
+        \qedhere
+    \]
+\end{proof}
+
+\begin{theorem}
+    {矩阵幂序列的收敛性}{matrix exponent convergence}
+    给定$B\in\FF^{n\times n}$，下面三个命题等价：
+    \begin{enumerate}
+        \item $\lim_{k\to\infty}B^k=O$；
+        \item $\rho(B)<1$；
+        \item 存在一种矩阵范数使得$\norm B<1$。
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    $(1)\implies(2)$：
+    采取反证法，若$\lambda$为$B$的特征值且$\abs\lambda\geq 1$其对应特征向量为$x$，则 
+    \[
+        \norm{B^kx}=\abs\lambda^k\norm x\not\to 0;
+    \]
+
+    $(2)\implies(3)$：
+    由$\rho(B)<1$，给定$\epsilon=\frac{1-\rho(B)}2>0$，
+    由\thmref{thm:norm<=rho+eps}，
+    存在一个矩阵范数使得$\norm B\leq\rho(B)+\epsilon<1$；
+
+    $(3)\implies(1)$：
+    由$\norm{B^k}\leq\norm B^k\to0$即得。
+\end{proof}
+
+\begin{theorem}
+    {矩阵幂的矩阵范数与谱半径}{k-root norm B^k=rho}
+    给定$B\in\FF^{n\times n}$和任一矩阵范数$\norm\cdot$，均有
+    \begin{equation}
+        \lim_{k\to\infty}\norm{B^k}^{1/k}=\rho(B).
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    采用夹逼定理。
+    一方面，由\thmref{thm:rho<=norm}，
+    \[
+        \rho(B)=\rho(B^k)^{1/k}\leq\norm{B^k}^{1/k};
+    \]
+    另一方面，$\forall\epsilon>0$，记 
+    \[
+        B_\epsilon=\frac{B}{\rho(B)+\epsilon},
+    \]
+    则$\rho(B_\epsilon)<1$，由\thmref{thm:matrix exponent convergence}，$\lim_{k\to\infty}B_\epsilon^k=O$，即$\exists N=N(\epsilon)>0$使得$\forall k>N$，
+    \[
+        \norm{B_\epsilon^k}=\frac{\norm{B^k}}{(\rho(B)+\epsilon)^k}<1,\iff\norm{B^k}^{1/k}<\rho(B)+\epsilon,\iff\lim_{k\to\infty}\norm{B^k}^{1/k}\leq\rho(B).
+    \]
+    综上，极限相等。    
+\end{proof}
+
+\section{迭代公式的构造}
+
+\begin{theorem}
+    {线性定常迭代}{linear stationary iterative method}
+    若线性方程$Ax=b$与方程$x=Bx+f$同解，则可以构造一个定常(stationary)的迭代公式：
+    \begin{equation}
+        x^{(k+1)}=Bx^{(k)}+f,
+    \end{equation}
+    其中$B$称为迭代矩阵。若$x^{(k)}$收敛，则收敛值$x^*$就是方程的解。
+\end{theorem}
+
+\begin{theorem}
+    {迭代法的收敛性分析}{convergence of iterative method}
+    迭代法$x^{(k+1)}=Bx^{(k)}+f$收敛与以下命题等价：
+    \begin{enumerate}
+        \item $\lim_{k\to\infty}B^k=O$；
+        \item $\rho(B)<1$；
+        \item 存在一种矩阵范数使得$\norm B<1$。
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    记误差向量$e^{(k)}:=x^{(k)}-x^*$，则$e^{(k+1)}=Be^{(k)}$。迭代法收敛意味着$\forall e^{(0)}\in\FF^n$均有
+    \[
+        \lim_{k\to\infty}e^{(k)}=\lim_{k\to\infty}B^ke^{(0)}=0,
+    \]
+    由\thmref{thm:limit=O}，$\lim_{k\to\infty}B^k=O$，由\thmref{thm:matrix exponent convergence} 知三个命题等价。
+\end{proof}
+
+\begin{theorem}
+    {迭代法的误差分析}{error of iterative method}
+    若迭代法收敛，其误差满足
+    \begin{equation}
+        \norm{e^{(k)}}\leq\frac{\norm B}{1-\norm B}\norm{e^{(k)}-e^{(k-1)}}\leq\frac{\norm B^k}{1-\norm B}\norm{e^{(1)}-e^{(0)}}.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    由$e^{(k)}=Be^{(k-1)}=B(e^{(k-1)}-e^{(k)})+Be^{(k)}$，故
+    \[
+        \norm{e^{(k)}}\leq\norm{B(e^{(k-1)}-e^{(k)})}+\norm{Be^{(k)}}\leq\norm B\Bigkh{\norm{e^{(k-1)}-e^{(k)}}+\norm{e^{(k)}}},
+    \]
+    移项即得第一个不等号；又$e^{(k)}-e^{(k-1)}=B(e^{(k-1)}-e^{(k-2)})$可得 
+    \[
+        \norm{e^{(k)}-e^{(k-1)}}\leq\norm B\norm{e^{(k-1)}-e^{(k-2)}},
+    \]
+    反复运用即得第二个不等号。
+\end{proof}
+
+\begin{theorem}
+    {迭代法的收敛速度}{converging speed of iterative method}
+    若给定$\epsilon>0$，希望
+    \[
+        \frac{\norm{e^{(k)}}}{\norm{e^{(0)}}}\leq\epsilon,
+    \]
+    则要求迭代次数
+    \begin{equation}
+        \label{eqn:k<-lneps/R}
+        k\geq\frac{-\ln\epsilon}{-\ln\norm{B^k}^{1/k}}.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    按矩阵从属范数的定义
+    \[
+        \norm{B^k}=\max_{e^{(0)}\neq 0}\frac{\norm{B^ke^{(0)}}}{\norm{e^{(0)}}}=\max_{e^{(0)}\neq 0}\frac{\norm{e^{(k)}}}{\norm{e^{(0)}}}.
+    \]
+    因此只需$\norm{B^k}\leq\epsilon$即可。
+\end{proof}
+
+\begin{remark}
+    式\eqref{eqn:k<-lneps/R}并不好处理，可以用近似：
+    \[
+        k\approx\frac{-\ln\epsilon}{-\ln\rho(B)}.
+    \]
+\end{remark}
+
+\begin{definition}
+    {平均收敛率}{average converging speed}
+    迭代法的平均收敛率为
+    \begin{equation}
+        R_k(B):=-\ln\norm{B^k}^{1/k}.
+    \end{equation}
+    其渐进收敛率$R(B):=R_\infty(B)=-\ln\rho(B)$。
+\end{definition}
+
+\section{具体迭代方法}
+
+\begin{example}
+    {Richardson迭代}{Richardson iterative method}
+    最简单的情形$x=(I-A)x+b$，称为Richardson迭代：
+    \begin{equation}
+        x^{(k+1)}=(I-A)x^{{k}}+b,
+    \end{equation}
+    收敛条件为$\rho(I-A)<1$。
+    定义残差$r^{(k)}:=b-Ax^{(k)}$，
+\end{example}
+
