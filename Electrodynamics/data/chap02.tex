@@ -10,11 +10,25 @@
 
 \paragraph{第一部分}
 
-本部分主要介绍其中的三个方法：\secref{sec:method of images}的电像法、\secref{sec:orthogonal functions and expansions}的正交函数展开法（分离变量法）、\secref{sec:finite element analysis}的有限元分析法。
+主要介绍三个方法：
+\begin{itemize}
+    \item \secref{sec:method of images}的电像法，重点介绍了球面边界的镜像电荷，并由此得到了球面边界的Green函数；
+    \item \secref{sec:orthogonal functions and expansions}的正交函数展开法（分离变量法）；
+    \item \secref{sec:finite element analysis}的有限元分析法。
+\end{itemize}
 限于篇幅，Jackson省略了复变函数方法。%后续如果有时间，
 % 保角变换法和积分变换法可参见本人复变函数笔记。
 
-\usetikzlibrary{circuits.ee.IEC}
+\paragraph{第二部分}
+主要内容分为四节：
+\begin{itemize}
+    \item \secref{sec:laplace equation in spherical coordinate}和\secref{sec:laplace equation in cylindrical coordinate}讲在球坐标和柱坐标中用分离变量法求解Laplace方程，并介绍了Legendre多项式、球谐函数、Bessel函数等特殊函数的性质；
+    \item \secref{sec:Green expansion solve Poisson}内容为在球坐标系和柱坐标系中应用Green函数展开法求解Poisson方程；
+    \item \secref{sec:mixed boundary condition}举例讨论了混合边界条件下的边值问题。
+\end{itemize}
+一些数学内容（如特殊函数的级数表达式、收敛问题，以及各种完备性的证明等）可见数学物理方法笔记，此处不作为重点讲述，故省略。
+
+%值得一提的是，本章内容大多和MMP（数学物理方法，Methods of Mathematical Physics）挂钩，所以一些数学计算的过程（如特殊函数的级数表达式、收敛问题，以及各种完备性的证明等……）被我省略掉了，具体内容可以参考：
 
 \section{电像法}
 \label{sec:method of images}
@@ -24,20 +38,8 @@
 \begin{example}{接地无限平面导体的镜像电荷}{method of images, infinite plane conductor}
     一个简单的例子是接地无限平面导体前的点电荷$q$，如下图所示。移除原边界并对称地放置一镜像电荷$q'=-q$后，即可满足原平面所在位置电势为0。
     \begin{center}
-        \begin{tikzpicture}[circuit ee IEC]
-            \fill[pattern=north east lines](-.3, 0)rectangle(0, 4);
-            \draw[thick](0, 0)--(0, 4)node[right]{$\Phi=0$};
-            \draw (0, 0.5) to (0.8, 0.5) to [ground={at end}] (0.8, 0.15);
-            \draw[dashed](0, 2)--(2, 2)node[below]{$d$};
-            \fill[black](2, 2)circle(.05)node[above]{$q$};
-        \end{tikzpicture}\qquad
-        \begin{tikzpicture}
-            \draw[dashed](0, 0)--(0, 4)node[right]{$\Phi=0$};
-            \draw[dashed](-2, 2)--(2, 2);
-            \fill[black](2, 2)circle(.05)node[above]{$q$};
-            \fill[black](-2, 2)circle(.05)node[above]{$q'$};
-        \end{tikzpicture}
-        \captionof{figure}{电像法}
+        \includegraphics[width=0.6\linewidth]{graphs/image_charge_plane.pdf}
+        \captionof{figure}{平面边界的电像法}
         \label{fig:image charge of plane}
     \end{center}
     因此电势分布为
@@ -46,35 +48,23 @@
     \end{equation}
 \end{example}
 
-\subsection{球导体的电像法}
+\subsection{球面边界的电像法}
 \label{ssec:method of images, sphere}
 
-对于球导体也可采用电像法，其背后的几何意义为Apollonius圆的定义：平面内到两定点距离的比值为定值的点轨迹构成一个圆。%\footnote{\url{https://en.wikipedia.org/wiki/Circles_of_Apollonius}}
+对于球面边界也可采用电像法，其背后的几何意义为Apollonius圆的定义：平面内到两定点距离的比值为定值的点轨迹构成一个圆。%\footnote{\url{https://en.wikipedia.org/wiki/Circles_of_Apollonius}}
 
 \begin{example}{接地导体球的镜像电荷}{method of images, grounded sphere conductor}
     一半径为$a$的导体球接地，球外有一电荷$q$，距球心$d>a$
     \begin{center}
-        \begin{tikzpicture}[circuit ee IEC]
-            \fill[even odd rule, pattern=north east lines](0, 0)circle(1.5)(0, 0)circle(1.3);
-            \draw[thick](0, 0)circle(1.5);
-            \draw (1.2, -.9) to (2, -.9) to [ground={at end}] (2, -1.5);
-            \draw[dashed](0, 0)node[left]{$O$}--(4, 0);
-            \fill[black](4, 0)circle(.05)node[below]{$d$}node[above]{$q$};
-        \end{tikzpicture}
+        \includegraphics[width=0.45\linewidth]{graphs/image_charge_sphere.pdf}
         \captionof{figure}{接地导体球和点电荷}
-        \label{fig:sphere conductor}
+        \label{fig:image charge of sphere}
+        % \label{fig:sphere conductor}
     \end{center}
     我们可以在球壳内放置一镜像电荷$q'$，由对称性，$q'$一定在$q$与球心的连线上：
-    \begin{center}
-        \begin{tikzpicture}
-            \draw[dashed](0, 0)circle(1.5);
-            \draw[dashed](0, 0)node[left]{$O$}--(4, 0);
-            \fill[black](4, 0)circle(.05)node[below]{$d$}node[above]{$q$};
-            \fill[black](.5625, 0)circle(.05)node[below]{$d'$}node[above]{$q'$};
-        \end{tikzpicture}
-        \captionof{figure}{镜像电荷}
-        \label{fig:image charge of sphere}
-    \end{center}
+    % \begin{center}
+    %     \captionof{figure}{镜像电荷}
+    % \end{center}
     不难验证，取
     \begin{equation}
         \label{eqn:image charge of sphere}
@@ -134,14 +124,7 @@
 \begin{example}{电像法处理匀强电场中的导体球问题}{method of images, sphere conductor in uniform E}
     考虑均匀电场$E_0$中半径为$a$的导体球。均匀场可以认为是在无穷远处由带适当电荷的正负电荷产生的，如下图所示
     \begin{center}
-        \begin{tikzpicture}
-            \draw[dash dot](-5, 0)--(5, 0);
-            \fill[black](4, 0)circle(.05)node[above]{$-Q$}node[below]{$+R$};
-            \fill[black](-4, 0)circle(.05)node[above]{$+Q$}node[below]{$-R$};
-            \draw[dashed](-4, 0)--(0, .8)--(4, 0);
-            %\draw[thick, <->](1, 1)--(0, .8)--(1, .6);
-            \draw[thick, ->](0, .8)--(2, .8)node[above]{$\bm E_0$};
-        \end{tikzpicture}
+        \includegraphics{graphs/uniform_E_approx.pdf}
         \captionof{figure}{正负电荷近似匀强电场}
         \label{fig:uniform E approx +-q}
     \end{center}
@@ -516,17 +499,6 @@
 
 % \par\noindent\rule{\textwidth}{0.5pt}
 \clearpage
-
-\paragraph{第二部分}
-这一部分继续讨论静电学中的边值问题，主要内容分为四节：
-\begin{itemize}
-    \item \secref{sec:laplace equation in spherical coordinate}和\secref{sec:laplace equation in cylindrical coordinate}讲在球坐标和柱坐标中用分离变量法求解Laplace方程，并介绍了Legendre多项式、球谐函数、Bessel函数等特殊函数的性质；
-    \item \secref{sec:Green expansion solve Poisson}内容为在球坐标系和柱坐标系中应用Green函数展开法求解Poisson方程；
-    \item \secref{sec:mixed boundary condition}举例讨论了混合边界条件下的边值问题。
-\end{itemize}
-一些数学内容（如特殊函数的级数表达式、收敛问题，以及各种完备性的证明等）可见数学物理方法笔记，此处不作为重点讲述，故省略。
-
-%值得一提的是，本章内容大多和MMP（数学物理方法，Methods of Mathematical Physics）挂钩，所以一些数学计算的过程（如特殊函数的级数表达式、收敛问题，以及各种完备性的证明等……）被我省略掉了，具体内容可以参考：
 
 \section{球坐标系中的正交函数}
 \label{sec:laplace equation in spherical coordinate}
