@@ -407,10 +407,9 @@ $\varrho_n$是第$n$个分子的电荷密度，分子质心坐标为$\bm x_n$，
     \ave{\varrho_n(\bm x,t)}=\sum_{j(n)}q_jf(\bm x-\bm x_n-\bm x_{nj}),
 \]
 因为$\bm x_{nj}$具有原子线度的数量级，适合在$(\bm x-\bm x_n)$处Taylor展开： 
-\begin{align*}
-    \ave{\varrho_n(\bm x,t)}={}&\sum_{j(n)}q_j\Big[f(\bm x-\bm x_n)-\bm x_{nj}\cdot\nabla f(\bm x-\bm x_n)\,+\\
-    &\qqquad\frac12\sum_{\alpha,\beta}(\bm x_{nj})_\alpha(\bm x_{nj})_\beta\pw f{x_\alpha}{x_\beta}(\bm x-\bm x_n)+\cdots\Big]
-\end{align*}
+\[
+    f(\bm x-\bm x_n-\bm x_{nj})=f(\bm x-\bm x_n)-\bm x_{nj}\cdot\nabla f(\bm x-\bm x_n)+\frac12\sum_{\alpha,\beta}(\bm x_{nj})_\alpha(\bm x_{nj})_\beta\pw f{x_\alpha}{x_\beta}(\bm x-\bm x_n)+\cdots,
+\]
 式中各项分别对应分子电荷、偶极矩、四极矩……
 \begin{align*}
     \ave{\varrho_n(\bm x,t)}={}&q_nf(\bm x-\bm x_n)-\bm p_n\cdot\nabla f(\bm x-\bm x_n)+\frac16\sum_{\alpha,\beta}(\mathcal Q_n)_{\alpha\beta}\pw f{x_\alpha}{x_\beta}(\bm x-\bm x_n)+\cdots
@@ -423,7 +422,7 @@ $\varrho_n$是第$n$个分子的电荷密度，分子质心坐标为$\bm x_n$，
 \[
     \ave{\varrho(\bm x,t)}=\rho(\bm x,t)-\div\bm P(\bm x,t)+\sum_{\alpha,\beta}\pw{}{x_\alpha}{x_\beta}\mathcal Q_{\alpha\beta}(\bm x,t)+\cdots
 \]
-$\rho,\bm P,\mathcal Q_{\alpha\beta}$分别是宏观电荷密度、宏观电极化强度、宏观电四极矩密度……
+其中$\rho,\bm P,\mathcal Q_{\alpha\beta}$分别是宏观电荷密度、宏观电极化强度、宏观电四极矩密度……
 因此式\eqref{eqn:average rho}可以写成 
 \[
     \div\bm D=\rho,
@@ -458,11 +457,14 @@ $\ave{\bm j}$的推导比$\ave{\varrho}$的处理复杂的多，在这里仅给�
     \int_V\bm J\cdot\bm E\d v,
 \]
 利用Maxwell方程组和式\eqref{eqn:divAxB}变形
-\begin{align*}
-    \bm J\cdot\bm E&=\Bigkh{\curl\bm H-\pv{\bm D}t}\cdot\bm E\\
-    %&=\bm H\cdot(\curl\bm E)-\div(\bm E\times\bm H)-\bm E\cdot\pv{\bm D}t\\
-    &=-\Bigfkh{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
-\end{align*}
+\[
+    \bm J\cdot\bm E=\Bigkh{\curl\bm H-\pv{\bm D}t}\cdot\bm E=-\Bigfkh{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
+\]
+% \begin{align*}
+%     \bm J\cdot\bm E&=\Bigkh{\curl\bm H-\pv{\bm D}t}\cdot\bm E\\
+%     &=\bm H\cdot(\curl\bm E)-\div(\bm E\times\bm H)-\bm E\cdot\pv{\bm D}t\\
+%     &=-\Bigfkh{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
+% \end{align*}
 假设：
 \begin{compactenum}
     \item 总电磁能量密度为(即使是在时变场中)：
@@ -532,8 +534,8 @@ $\bm S$定义为Poynting矢量
 \]
 消去源，得到
 \begin{align*}
-    &\rho\bm E+\bm J\times\bm B=\varepsilon_0(\div\bm E)\bm E+\biggkh{\frac1{\mu_0}\curl\bm B-\varepsilon_0\pv{\bm E}t}\times\bm B\\
-    ={}&\varepsilon_0\Bigfkh{\bm E(\div\bm E)-c^2\bm B\times(\curl\bm B)-\bm E\times(\curl\bm E)-\pp t(\bm E\times\bm B)},
+    \rho\bm E+\bm J\times\bm B&=\varepsilon_0(\div\bm E)\bm E+\biggkh{\frac1{\mu_0}\curl\bm B-\varepsilon_0\pv{\bm E}t}\times\bm B\\
+    &=\varepsilon_0\Bigfkh{\bm E(\div\bm E)-c^2\bm B\times(\curl\bm B)-\bm E\times(\curl\bm E)-\pp t(\bm E\times\bm B)},
 \end{align*}
 右边出现了%Poynting矢量对
 时间的导数，我们依此定义电磁场的动量
@@ -639,12 +641,17 @@ Poynting定律形式变为
 其中$\bm E(\bm x)$一般是复的，有相位的信息。
 %因此
 %\bm J\cdot\bm E=\frac12\Re\bigfkh{\bm J\cj(\bm x)\cdot\bm E(\bm x)+\bm J(\bm x)\cdot\bm E(\bm x)\e{-\i 2\omega t}},
-
 谐振场的Maxwell方程组可以写成
-\begin{alignat*}{2}
-    \div\bm D&=\rho,&\qquad\curl\bm E-\i\omega\bm B&=\bm 0,\\
-    \div\bm B&=0,&\curl\bm H+\i\omega\bm D&=\bm J.  
-\end{alignat*}
+\begin{subequations}
+    \begin{align}
+        \div\bm D&=\rho,\\
+        \div\bm B&=0,\\
+        \label{eqn:Maxwell curlE freq}
+        \curl\bm E&=\i\omega\bm B,\\
+        \label{eqn:Maxwell curlH freq}
+        \curl\bm H&=\bm J-\i\omega\bm D.
+    \end{align}
+\end{subequations}
 场在体积$V$上所做的时间平均工作量
 \begin{align*}
     \frac12\int_V\bm J\cj\cdot\bm E\d v&=\frac12\int_V(\curl\bm H\cj-\i\omega\bm D\cj)\cdot\bm E\d v\\
