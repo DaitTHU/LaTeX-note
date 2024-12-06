@@ -20,6 +20,7 @@
 \begin{subequations}
     \begin{align}
         \nvec n\cdot\bm D&=\varsigma,\\
+        \label{eqn:nxH=j}
         \nvec n\times\bm H&=\bm\jmath.
     \end{align}
 \end{subequations}
@@ -35,12 +36,12 @@
 
 \paragraph{良导体}
 
-对于非理想的良导体，导体内的场随趋肤深度
+非理想的良导体的电导率$\sigma$有限，其内部会存在电场，
+且振幅随趋肤深度(skin depth)指数衰减：
 \begin{equation}
     \delta:=\sqrt{\frac2{\mu\c\omega\sigma}}.
 \end{equation}
-指数衰减，且
-其电导率$\sigma$是一个有限量，而Ohm定律$\bm J=\sigma\bm E$说明表面没有电流$\bm\jmath$：
+而Ohm定律$\bm J=\sigma\bm E$说明表面没有电流$\bm\jmath$：
 % 边界条件应改为
 \[
     \uvec n\times(\bm H-\bm H\c)=\bm 0,
@@ -67,25 +68,39 @@ $\bm H_\parallel$是导体外表面的切向磁场，则导体内电场
 \begin{equation}
     \bm E\c\simeq\sqrt{\frac{\mu\c\omega}{2\sigma}}(1-\i)(\uvec n\times\bm H_\parallel)\e{-\xi/\delta}\e{\i\xi/\delta}.
 \end{equation}
-故导体内的$\bm H\c$和$\bm E\c$与表面平行，大小随指数迅速衰减，二者有相位差，且磁场比电场强得多。在表面外侧，除了法向的$\bm E$和切向的$\bm H$外，还有$\bm E$的一个微小的切向分量存在。这意味着有功率流入导体，每单位面积的吸收对时间平均的功率是
+故导体内的$\bm H\c$和$\bm E\c$与表面平行，大小随指数迅速衰减，二者有相位差，且磁场比电场强得多。
+在表面外侧，除了法向的$\bm E$和切向的$\bm H$外，还有$\bm E$的一个微小的切向分量存在。
+这意味着有功率流入导体，每单位面积吸收功率的时间平均为
 \begin{equation}
     \dv{P_\text{loss}}a=-\frac12\Re[\uvec n\cdot(\bm E\times\bm H\cj)]=\frac{\mu\c\omega\delta}4|\bm H_\parallel|^2.
 \end{equation}
-可把这个结果简单地解释为导体内的Ohm损失，由Ohm定律，导体表面附件有电流密度$\bm J=\sigma\bm E\c$，而
+可把这个结果简单地解释为导体内的Ohm损失。
+每单位体积内Ohm损失率的时间平均为
+% 由Ohm定律，导体表面附件有电流密度$\bm J=\sigma\bm E\c$，而
 \[
     \dv{P_\text{loss}}V=\frac12\bm J\cdot\bm E\cj=\frac\sigma 2|\bm J|^2.
 \]
-定义有效面电流密度
-\[
+由于电流密度$\bm J$局限于导体表面下的薄层内，
+其等效有效面电流密度为
+\begin{equation}
+    \label{eqn:jeff}
     \bm\jmath\eff:=\int\zti\bm J\d\xi=\uvec n\times\bm H_\parallel.
-\]
-则
-\[
+\end{equation}
+其形式与理想导体\eqref{eqn:nxH=j}相同，
+只是理想面电流密度$\bm\jmath$换成了等效面电流密度$\bm\jmath\eff$。
+功率损失可以用等效面电流密度表示：
+\begin{equation}
+    \label{eqn:dPloss/da}
     \dv{P_\text{loss}}a=\frac1{2\sigma\delta}|\bm\jmath\eff|^2.
-\]
-\section{柱形空腔和波导}
+\end{equation}
+可定义等效表面电阻$R_\text s=1/\sigma\delta$。
+% 这说明$1/2\sigma\delta$起着导体表面电阻的作用。
+因此，只要我们解出理想导体边界的场，就可以通过\eqref{eqn:jeff}和\eqref{eqn:dPloss/da}给出的$\bm\jmath\eff$近似地算出实际波导、谐振腔和传输线的电阻损失。
+
+\section{柱形波导和谐振腔}
+
 本章研究电磁波在中空金属柱体内的传播和激发。
-如果柱体具有端面，就叫做空腔(cavity)，否则就叫做波导(waveguide)。
+如果柱体具有端面，就叫做谐振腔(cavity)，否则就叫做波导(waveguide)。
 假定边界面是理想导体，在实际应用中发生的能量损失，可用上一节的方法来估计。
 
 假定柱形曲面$S$的截面形状和大小沿轴不变，且柱体内是介电常数$\varepsilon$、磁导率$\mu$的均匀非耗散介质。当柱体内的场具有谐振关系$\e{-\i\omega t}$时，Maxwell方程组可化为以下形式：
@@ -247,12 +262,26 @@ TM波和TE波的横磁场和横电场的关系如下：
 因此给定频率上，只有有限个模式可以传播。
 可以通过选择波导的尺寸，使得在使用频率上只能出现最低模式的波。
 
-波导中的波长$k_z$总是小于无限空间中的波长$k_0$，因此相速度$v_\varphi$大于无限空间中的光速：
+\paragraph{色散关系}
+
+均匀介质波导中的波数$k_z$总是小于无限空间中的波数$k_0$，因此相速度$v_\varphi$大于无限空间中的光速：
 \[
     v_\varphi=\frac\omega{k_z}=\frac1{\sqrt{\mu\varepsilon}}\frac1{\sqrt{1-(\omega\c/\omega)^2}}>\frac1{\sqrt{\mu\varepsilon}}.
 \]
+而群速度小于光速，并且在介质频率处为0：
+\[
+    v_\text g=\dv\omega{k_z}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{1-\Bigkh{\frac{\omega\c}\omega}^2}<\frac1{\sqrt{\mu\varepsilon}}.
+\]
+因此并不违反相对论，并且有关系
+\begin{equation}
+    v_\varphi v_\text g=\frac1{\mu\varepsilon}.
+\end{equation}
+$\omega\vs k_z$的关系称为色散曲线，曲线上的点的幅角是相速度，切线斜率是群速度。
+在均匀传输系统中是双曲线。
+
 \subsection{矩形波导}
 \label{ssec:rectangular waveguide}
+
 在内尺寸为$a,b$的矩形波导中（不失一般性取$a>b$），
 \begin{center}
     \begin{tikzpicture}[even odd rule]
@@ -323,6 +352,14 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
     \end{align}
 \end{subequations}
 
+\paragraph{传输特性}
+
+根据截止频率的表达式，TE$_{10}$模式具有最低的截止频率。一般波导内为真空，相应的截止波长$\lambda_{10}=2a$。其次为TE$_{20}$或TE$_{01}$。理论上当
+\[
+    \max(a,2b)<\lambda<2a
+\]
+时，波导内只存在TE$_{10}$模式，而其余频率均被截止。因此通常矩形波导会被设计成$a=2b$，且尺寸随着工作频率的增加而减小。
+
 \subsection{圆波导}
 
 在内径为$a$的圆形波导中，
@@ -365,7 +402,7 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
         H_\phi&=\i\frac{\omega\varepsilon k_z}{k\c}E_0J_m'(k\c\rho)\e{\i(k_zz-\omega t\pm m\phi)},\\
         H_z&=0,\\
         E_\rho&=\i\frac{k_z}{k\c}E_0J_m'(k\c\rho)\e{\i(k_zz-\omega t\pm m\phi)},\\
-        E_\phi&=\mp m\frac{k_z}{k\c^2}E_0J_m(k\c\rho)\e{\i(k_zz-\omega t\pm m\phi)},\\
+        E_\phi&=\mp m\frac{k_z}{k\c^2\rho}E_0J_m(k\c\rho)\e{\i(k_zz-\omega t\pm m\phi)},\\
         E_z&=E_0J_m(k\c\rho)\e{\i(k_zz-\omega t\pm m\phi)}.
     \end{align*}
 \end{subequations}
@@ -381,13 +418,14 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 \begin{subequations}
     \begin{align*}
         H_\rho&=\i\frac{k_z}{k\c}H_0J_m'(k\c\rho)\e{\i(k_zz-\omega t\pm m\phi)},\\
-        H_\rho&=\mp m\frac{k_z}{k\c^2}H_0J_m(k\c\rho)\e{\i(k_zz-\omega t\pm m\phi)},\\
+        H_\phi&=\mp m\frac{k_z}{k\c^2\rho}H_0J_m(k\c\rho)\e{\i(k_zz-\omega t\pm m\phi)},\\
         H_z&=H_0J_m(k\c\rho)\e{\i(k_zz-\omega t\pm m\phi)},\\
         E_\rho&=\pm m\frac{\omega\mu k_z}{k\c^2\rho}H_0J_m(k\c\rho)\e{\i(k_zz-\omega t\pm m\phi)},\\
         E_\phi&=\i\frac{\omega\mu k_z}{k\c}H_0J_m'(k\c\rho)\e{\i(k_zz-\omega t\pm m\phi)},\\
-        E_\rho&=0.
+        E_z&=0.
     \end{align*}
 \end{subequations}
+不难发现，圆波导的TE模式与TM模式场的表达式仅仅是将$E,H$和$\varepsilon,\mu$互换。
 
 \paragraph{前几个$x_{mn}$和$x_{mn}'$分布}
 如图
@@ -401,6 +439,7 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
     % \label{fig:Bessel function}
 \end{figure}
 
+\noindent
 查表知，TE和TM的最低模式分别为TM$_{01}$和TE$_{11}$。
 \begin{table}[!htp]
     \centering
@@ -429,6 +468,9 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
         \bottomrule
     \end{tabular}}
 \end{table}
+
+\noindent
+由于$J_0'(x)=-J_1(x)$，因此TM$_{1n}$和TE$_{0n}$的截止频率相同。
 
 \subsection{介质加载波导}
 
