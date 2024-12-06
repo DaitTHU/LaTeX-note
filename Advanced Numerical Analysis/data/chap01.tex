@@ -131,13 +131,13 @@
 \end{theorem}
 
 \begin{proof}
-    构造性证明，令$\tilde M$是$M$中所有Cauchy序列$\tilde x=\{x_n\}$的集合。在$\tilde M$中定义等价关系$\sim$：
+    构造性证明，令$\tilde M$是$M$中所有Cauchy序列$\{x_n\}$的集合。在$\tilde M$中定义等价关系$\sim$：
     \[
-        \tilde x\sim\tilde y\iff\lim_{n\to\infty}d(x_n,y_n)=0.
+        \{x_n\}\sim\{y_n\}\iff\lim_{n\to\infty}d(x_n,y_n)=0.
     \]
-    令$[\tilde x]=\nset{\tilde y}{\tilde x\sim\tilde y}$表示$\tilde x$的等价类，$\hat M=\nset{[\tilde x]}{\tilde x\in\tilde M}$是$M$中所有Cauchy序列的等价类构成的集合。定义$\hat M$上的度量为
+    令$[\{x_n\}]=\nset{\{y_n\}}{\{x_n\}\sim\{y_n\}}$表示$\{x_n\}$的等价类，$\hat M=\nset{[\{x_n\}]}{\{x_n\}\in\tilde M}$是$M$中所有Cauchy序列的等价类构成的集合。定义$\hat M$上的度量为
     \[
-        \hat d([\tilde x],[\tilde y]):=\lim_{n\to\infty}d(x_n,y_n),
+        \hat d([\{x_n\}],[\{y_n\}]):=\lim_{n\to\infty}d(x_n,y_n),
     \]
     可证$(\hat M,\hat d)$是完备的度量空间。且存在等距嵌入
     \[
@@ -166,50 +166,53 @@
     \]
 \end{corollary}
 \begin{remark}
-    完备的赋范空间称为Banach空间。
+    赋范空间不一定是完备的，完备的赋范空间也称为Banach空间。
 \end{remark}
 
 \begin{example}
-    {$\RR^n$的范数}{}
-    $x=(x_1,\ldots,x_n)\tp\in\FF^n$的$p$ - 范数为
-    \[
-        \norm x_p=\kh{\sum_{i=1}^n\abs{x_i}^p}^{1/p}.
-    \]
-    如
-    \begin{subequations}
-        \begin{align}
-            \label{eqn:Rn inf-norm}
-            \norm x_\infty&=\max_{i}\abs{x_i},\\
-            \label{eqn:Rn 1-norm}
-            \norm x_1&=\sum_{i=1}^n\abs{x_i},\\
-            \label{eqn:Rn 2-norm}
-            \norm x_2&=\kh{\sum_{i=1}^n\abs{x_i}^2}^{1/2},
-        \end{align}
-    \end{subequations}
+    {$\RR^n$的$p$ - 范数}{vector p-norm}
+    向量$x=(x_1,\ldots,x_n)\tp\in\FF^n$的$p$ - 范数为
+    \begin{equation}
+        \label{eqn:p-norm vector}
+        \norm x_p=\kh{\sum_{i=1}^n\abs{x_i}^p}^{1/p},
+        % =\begin{cases}
+        %     \max_{i}\abs{x_i},&p=\infty\\
+        %     \sum_{i=1}^n\abs{x_i},&p=1\\
+        %     \kh{\sum_{i=1}^n\abs{x_i}^2}^{1/2},&p=2
+        % \end{cases}
+    \end{equation}
+    特别地，$\norm x_\infty=\lim_{p\to\infty}\norm x_p=\max_i\abs{x_i}$。
     \begin{proof}
-        下面给出\eqref{eqn:Rn inf-norm}的证明。记$k=\arg\max_i\abs{x_i}$，$\forall p>0$
+        记$k=\arg\max_i\abs{x_i}$，$\forall p>0$
         \[
             \abs{x_k}^p\leq\sum_{i=1}^n\abs{x_i}^p\leq n\abs{x_k}^p,
         \]
         两边开$p$次方，并$p\to\infty$，即得$\norm x_\infty=\abs{x_k}.$
     \end{proof}
+    \tcblower
+    二维位置向量$r=(x,y)\in\RR^2$，方程$\norm r_p=1$在直角坐标中的图像为
+    \begin{center}
+        \includegraphics[width=0.6\linewidth]{graphs/Lpspace.pdf}
+        \captionof{figure}{不同的$p$ - 范数}
+        \label{fig:Lp space}
+    \end{center}
+    特别地，$p=2/3$的曲线叫星形线(astroid)。
 \end{example}
 
 \begin{example}
-    {$C[a,b]$的范数}{}
-    $f(x)\in\cont[a,b]$的$p$ - 范数为
-    \[
-        \norm f_p=\kh{\int_a^b\abs{f(x)}^p\d x}^{1/p}.
-    \]
-    如
-    \begin{subequations}
-        \begin{align}
-            \norm f_\infty&=\max_{a\leq x\leq b}\abs{f(x)},\\
-            \norm f_1&=\int_a^b\abs{f(x)}\d x,\\
-            \norm f_2&=\kh{\int_a^b\abs{f(x)}^2\d x}^{1/2},
-        \end{align}
-    \end{subequations}
-    $C[a,b]$中，$\norm\cdot_\infty$是完备的，而$\norm\cdot_1$不是。
+    {$C[a,b]$的$p$ - 范数}{function p-norm}
+    函数$f\in\cont[a,b]$的$p$ - 范数为
+    \begin{equation}
+        \label{eqn:p-norm function}
+        \norm f_p=\kh{\int_a^b\abs{f(x)}^p\d x}^{1/p},
+        % =\begin{cases}
+        %     \max_{a\leq x\leq b}\abs{f(x)},&p=\infty\\
+        %     \int_a^b\abs{f(x)}\d x,&p=1\\
+        %     \kh{\int_a^b\abs{f(x)}^2\d x}^{1/2},&p=2
+        % \end{cases}
+    \end{equation}
+    当$1<p<\infty$时，$\norm\cdot_p$是不完备的：连续函数Cauchy序列可以按范数收敛于一个不连续的函数。
+    但$\norm\cdot_\infty$是完备的。
 \end{example}
 
 \subsection{范数的等价性}
@@ -222,6 +225,13 @@
     \]
     则称$\norm\cdot_\alpha,\norm\cdot_\beta$等价(equivalent)。
 \end{definition}
+
+\begin{corollary}
+    向量的$p$ - 范数都是等价的，因为由H\"older不等式，$p<q$时
+    \begin{equation}
+        \norm x_q\leq\norm x_p\leq n^{1/p-1/q}\norm x_p.
+    \end{equation}
+\end{corollary}
 
 \begin{theorem}
     {}{}
@@ -244,46 +254,63 @@
     若$\inp xy=0$，则称$x,y$是正交的(orthogonal)。
 \end{definition}
 
-内积诱导的范数：
-\begin{equation}
-    \norm x_2:=\sqrt{\inp xx},
-\end{equation}
+\begin{remark}
+    对第二个变量不一定线性，会出现复共轭：
+    \[
+        \inp x{ay+bz}=\overline a\inp xy+\overline b\inp xz.
+    \]
+    除非内积的值域$\FF\subset\RR$，此时内积满足对称性：$\inp xy=\inp yx$。
+\end{remark}
+
+\begin{corollary}
+    根据内积可以自然定义出一个范数，称为内积诱导的范数：
+    \begin{equation}
+        \norm x:=\sqrt{\inp xx},
+    \end{equation}
+\end{corollary}
 
 \begin{example}
     {内积实例}{}
-    $\RR^n$的内积为
-    \[
-        \inp xy=\sum_{i=1}^nx_iy_i,
-    \]
-    $\cont[a,b]$的内积为 
-    \[
-        \inp fg=\int_a^bf(x)\overline g(x)\d x.
-    \]
+    \begin{itemize}
+        \item $\CC^n$中的标准内积为
+        \[
+            \inp xy=\sum_{i=1}^nx_i\overline y_i,
+        \]
+        标准内积诱导出来的范数就是2 - 范数。
+        \item $\cont[a,b]$的一个内积为 
+        \[
+            \inp fg=\int_a^bf(x)\overline g(x)\d x.
+        \]
+    \end{itemize}
 \end{example}
 
-\begin{theorem}
-    {内积空间线性无关的判定}{}
-    给定内积空间$S$，$x_1,\ldots,x_n\in S$是线性无关的$\iff$ Gramm矩阵满秩：
+\begin{definition}
+    {Gram矩阵}{Gram matrix}
+    给定一组向量$x_1,\ldots,x_n$，Gram矩阵的第$i,j$个元素由内积$\inp{x_i}{x_j}$给出：
     \begin{equation}
-        G_n=\begin{bmatrix}
+        G:=\begin{bmatrix}
             \inp{x_1}{x_1}&\cdots&\inp{x_1}{x_n}\\
             \vdots&\ddots&\vdots\\
             \inp{x_n}{x_1}&\cdots&\inp{x_n}{x_n}
-        \end{bmatrix},
+        \end{bmatrix}.
     \end{equation}
-    即$\det(G_n)\neq 0.$
+\end{definition}
+
+\begin{theorem}
+    {内积空间线性无关的判定}{}
+    给定内积空间$S$，$x_1,\ldots,x_n\in S$是线性无关的$\iff$ Gram矩阵可逆。
 \end{theorem}
 
 \begin{proof}
-    设$a=(a_1,\ldots,a_n)$满足$aG_n=0$，则$\forall k=1,\ldots,n$
+    设$a=(a_1,\ldots,a_n)$满足$aG=0$，则$\forall k=1,\ldots,n$
     \[
-        (aG_n)_k=a_1\inp{x_1}{x_k}+\cdots+a_n\inp{x_n}{x_k}=\inp{a_1x_1+\cdots,a_nx_n}{x_k}=0,
+        (aG)_k=a_1\inp{x_1}{x_k}+\cdots+a_n\inp{x_n}{x_k}=\inp{a_1x_1+\cdots,a_nx_n}{x_k}=0,
     \]
     特别地，
     \[
         \inp{a_1x_1+\cdots+a_nx_n}{a_1x_1+\cdots+a_nx_n}=0,\iff a_1x_1+\cdots,a_nx_n=0,
     \]
-    则$\det(G_n)\neq 0\iff \mathrm N(G_n\tp)=\{0\}\iff a$只有零解。
+    则$G$可逆$\iff \mathrm N(G\tp)=\{0\}\iff a$只有零解。
 \end{proof}
 
 \begin{example}
@@ -298,7 +325,7 @@
     \]
     即
     \[
-        [\inp x{x_1}\enspace\cdots\enspace\inp x{x_n}]=[a_1\enspace\cdots\enspace a_n]G_n,
+        [\inp x{x_1}\enspace\cdots\enspace\inp x{x_n}]=[a_1\enspace\cdots\enspace a_n]G,
     \]
     若基是正交的，即$\forall i\neq j,\enspace\inp{x_i}{x_j}=0$，则 
     \[
@@ -482,9 +509,13 @@
 \end{proof}
 
 \begin{definition}
-    {谱半径}{}
-    矩阵$A$全体特征值的集合称为$A$的谱，记作$\sigma(A)$，特征值模的最大值称为谱半径，记作$\rho(A)$。
+    {谱半径}{spectrum}
+    矩阵$A$全体特征值的集合称为$A$的谱(spectrum)，记作$\sigma(A)$，特征值模的最大值称为谱半径，记作$\rho(A)$。
 \end{definition}
+
+\begin{remark}
+    对于一般的矩阵$A\in\FF^{m\times n}$，有$\sigma(A\dg A)\cup\{0\}=\sigma(AA\dg)\cup\{0\}$，即非0特征值相同，其元素称为$A$的奇异值(sigular value)。
+\end{remark}
 
 \begin{example}
     {}{}
@@ -526,7 +557,7 @@
 \end{example}
 
 \begin{theorem}
-    {}{}
+    {谱半径小于矩阵范数}{rho<=norm}
     谱半径$\rho(A)$和矩阵范数的关系：
     \begin{equation}
         \rho(A)\leq\norm A.
@@ -542,7 +573,7 @@
 \end{proof}
 
 \begin{theorem}
-    {}{}
+    {}{norm<=rho+eps}
     给定$A\in\FF^{n\times n},\epsilon>0$，存在算子范数$\norm\cdot$满足：
     \begin{equation}
         \norm A\leq\rho(A)+\epsilon.
