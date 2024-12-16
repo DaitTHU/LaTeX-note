@@ -5,7 +5,9 @@
     构造一个向量序列，使其尽快收敛到线性方程组$Ax=b$的解。
 \end{definition}
 
-\section{向量序列和矩阵序列的极限}
+\section{迭代法基本概念}
+
+\subsection{向量序列和矩阵序列的极限}
 
 \begin{definition}
     {向量序列的极限}{limit of vector array}
@@ -42,20 +44,17 @@
 
 \begin{theorem}
     {收敛到零矩阵}{limit=O}
-    $\lim_{i\to\infty}A^{(i)}=O,\iff\forall x\in\FF^n$均有
-    \[
-        \lim_{i\to\infty}A^{(i)}x=0.
-    \]
+    $\lim_{k\to\infty}A^{(k)}=O\iff\forall x\in\FF^n$均有$\lim_{k\to\infty}A^{(k)}x=0$。
 \end{theorem}
 
 \begin{proof}
     必要性：对于任一矩阵的从属范数，
     \[
-        \norm{A^{(i)}x}\leq\norm{A^{(i)}}\norm x\to0;
+        \norm{A^{(k)}x}\leq\norm{A^{(k)}}\norm x\to0;
     \]
     充分性：其矩阵各分量
     \[
-        \abs{a_{ij}^{(i)}}=\abs{e_i\tp A^{(i)}e_j}\leq\norm{A^{(i)}e_j}_\infty\to 0.
+        \abs{a_{ij}^{(k)}}=\abs{e_i\tp A^{(k)}e_j}\leq\norm{A^{(k)}e_j}_\infty\to 0.
         \qedhere
     \]
 \end{proof}
@@ -66,7 +65,7 @@
     \begin{enumerate}
         \item $\lim_{k\to\infty}B^k=O$；
         \item $\rho(B)<1$；
-        \item 存在一种矩阵范数使得$\norm B<1$。
+        \item 存在一个矩阵范数$\norm\cdot$使得$\norm B<1$。
     \end{enumerate}
 \end{theorem}
 
@@ -111,7 +110,7 @@
     综上，极限相等。    
 \end{proof}
 
-\section{迭代公式的构造}
+\subsection{迭代公式的构造}
 
 \begin{theorem}
     {线性定常迭代}{linear stationary iterative method}
@@ -128,7 +127,7 @@
     \begin{enumerate}
         \item $\lim_{k\to\infty}B^k=O$；
         \item $\rho(B)<1$；
-        \item 存在一种矩阵范数使得$\norm B<1$。
+        \item 存在一种矩阵范数$\norm\cdot$使得$\norm B<1$。
     \end{enumerate}
 \end{theorem}
 
@@ -142,9 +141,9 @@
 
 \begin{theorem}
     {迭代法的误差分析}{error of iterative method}
-    若迭代法收敛，其误差满足
+    若迭代法收敛，第$k$次迭代的误差满足
     \begin{equation}
-        \norm{e^{(k)}}\leq\frac{\norm B}{1-\norm B}\norm{e^{(k)}-e^{(k-1)}}\leq\frac{\norm B^k}{1-\norm B}\norm{e^{(1)}-e^{(0)}}.
+        \norm{e^{(k)}}\leq\frac{\norm B}{1-\norm B}\norm{x^{(k)}-x^{(k-1)}}\leq\frac{\norm B^k}{1-\norm B}\norm{x^{(1)}-x^{(0)}}.
     \end{equation}
 \end{theorem}
 
@@ -157,7 +156,7 @@
     \[
         \norm{e^{(k)}-e^{(k-1)}}\leq\norm B\norm{e^{(k-1)}-e^{(k-2)}},
     \]
-    反复运用即得第二个不等号。
+    反复迭代即得第二个不等号。
 \end{proof}
 
 \begin{theorem}
@@ -197,15 +196,603 @@
     其渐进收敛率$R(B):=R_\infty(B)=-\ln\rho(B)$。
 \end{definition}
 
-\section{具体迭代方法}
+\section{(单步)定常线性迭代}
+
+\subsection{Richardson迭代法}
 
 \begin{example}
-    {Richardson迭代}{Richardson iterative method}
+    {Richardson迭代法}{Richardson iterative method}
     最简单的情形$x=(I-A)x+b$，称为Richardson迭代：
     \begin{equation}
-        x^{(k+1)}=(I-A)x^{{k}}+b,
+        x^{(k+1)}=(I-A)x^{(k)}+b,
     \end{equation}
     收敛条件为$\rho(I-A)<1$。
-    定义残差$r^{(k)}:=b-Ax^{(k)}$，
+    定义残差$r^{(k)}:=b-Ax^{(k)}$，则有递推关系：
+    \begin{align*}
+        r^{(k+1)}&=(I-A)r^{(k)},\\
+        x^{(k+1)}&=x^{(k)}+r^{(k)},
+    \end{align*}
+    继而
+    \[
+        x^{(k)}=x^{(0)}+r^{(0)}+\cdots+r^{(k-1)}=x_0+\sum_{i=0}^{k-1}(I-A)^ir^{(0)}.
+    \]
+    
 \end{example}
 
+\begin{definition}
+    {Krylov子空间}{Krylov subspace}
+    给定非零向量$v$和非零方阵$A$，定义
+    \[
+        \mathcal K_n(v):=\lspan(v,Av,\ldots,A^{n-1}v),
+    \]
+    称为Krylov子空间。
+\end{definition}
+
+\begin{corollary}
+    显然
+    \[
+        \mathcal K_1(v)\subset\mathcal K_2(v)\subset\cdots\subset\mathcal K_n(v)\subset\cdots
+    \]
+    最大维度$\sup_{n\to\infty}\dim\mathcal K_n(v)$称为$v$关于$A$的度。
+\end{corollary}
+
+\begin{definition}
+    {预处理矩阵}{preconditioning matrix}
+    若$M$可逆且$M\iv$是$A\iv$的一个较好的近似，对$M\iv Ax=M\iv b$使用Richardson迭代：
+    \begin{equation}
+        x^{(k+1)}=(I-M\iv A)x^{(k)}+M\iv b=x^{(k)}+M\iv r^{(k)},
+    \end{equation}
+    矩阵$M$称为预处理矩阵(preconditioning matrix)。
+\end{definition}
+
+\begin{remark}
+    预处理矩阵的选择依据：
+    方便计算、
+    好近似。
+\end{remark}
+
+\subsection{Jacobi迭代法和Gauss-Seidel迭代法}
+
+将$A$拆解为$A=D+L+U$的形式，其中$D$是对角部分，$L$是严格下三角部分，$U$是严格上三角部分。
+\footnote{本节对$L,U$的定义与教材上的定义相差一个负号。}
+
+\begin{example}
+    {Jacobi迭代法}{Jacobi iterative method}
+    预处理矩阵$M=D$，迭代矩阵$B_\text J=-D\iv(L+U)$，迭代的分量形式为：
+    \begin{equation}
+        x_{i+1}^{(k)}=\frac1{a_{kk}}\biggkh{b_k-\sum_{j\neq k}a_{kj}x_i^{(j)}}.
+    \end{equation}
+\end{example}
+
+\begin{example}
+    {Gauss-Seidel迭代法}{GS iterative method}
+    预处理矩阵$M=D+L$，迭代矩阵$B_\text G=-(D+L)\iv U$，迭代的分量形式为：
+    \begin{equation}
+        x_{i+1}^{(k)}=\frac1{a_{kk}}\biggkh{b_k-\sum_{j=1}^{k-1}a_{kj}x_{i+1}^{(j)}-\sum_{j=k+1}^na_{kj}x_i^{(j)}}.
+    \end{equation}
+\end{example}
+
+\begin{remark}
+    Jacobi法和G-S法收敛$\iff\rho(B_\text J)<1$和$\rho(B_\text G)<1$。
+    另外，有时容易验证矩阵$A$满足收敛的充分条件。
+\end{remark}
+
+\begin{theorem}
+    {Jacobi法和G-S法收敛的充分条件：对角占优}{}
+    若$A$严格对角占优或不可约弱对角占优，则Jacobi法和G-S法收敛。
+\end{theorem}
+
+\begin{proof}
+    对于Jacobi法，若$B_\text J$有特征值$\lambda$且$\abs\lambda\geq 1$，则 
+    \[
+        \det(\lambda I-B_\text J)=0,\implies\det(D+\lambda\iv(L+U))=0,
+    \]
+    若$A$严格对角占优(或不可约弱对角占优)，则$D+\lambda\iv(L+U)$也为严格对角占优(或不可约弱对角占优)，矛盾！故$\rho(B_\text J)<1$，Jacobi法收敛。
+
+    对于G-S法，设$B_\text G$有特征值$\lambda$且$\abs\lambda\geq 1$，则 
+    \[
+        \det(\lambda I-B_\text G)=0,\implies\det(D+L+\lambda\iv U)=0,
+    \]
+    若$A$严格对角占优(或不可约弱对角占优)，则$D+L+\lambda\iv U$也为严格对角占优(或不可约弱对角占优)，矛盾！故$\rho(B_\text G)<1$，G-S法收敛。
+\end{proof}
+
+\begin{theorem}
+    {对称矩阵的Jacobi法和G-S法收敛的充要条件}{}
+    若$A$对称且对角元均为正，则Jacobi法和G-S法收敛$\iff D\pm(L+U)$均正定。
+\end{theorem}
+
+\subsection{超松弛迭代法}
+
+\begin{example}
+    {逐次超松弛迭代}{successive overrelaxation iterative method}
+    预处理矩阵$M=D/\omega+L$，迭代矩阵$L_\omega=(D+\omega L)\iv[(1-\omega)D-\omega U]$，
+    \begin{equation}
+        x_{i+1}^{(k)}=(1-\omega)x_i^{(k)}+\frac\omega{a_{kk}}\biggkh{b_k-\sum_{j=1}^{k-1}a_{kj}x_{i+1}^{(j)}-\sum_{j=k+1}^na_{kj}x_i^{(j)}}.
+    \end{equation}
+    称为逐次超松弛迭代法(successive overrelaxation, SOR)，其中$\omega$称为松弛因子。
+\end{example}
+
+\begin{theorem}
+    {$\rho(L_\omega)$与$\omega$的关系}{}
+    若$A$可逆且对角元非0，则
+    \begin{equation}
+        \rho(L_\omega)\geq\abs{1-\omega}.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    设$L_\omega$的特征值是$\lambda_1,\ldots,\lambda_n$，由于$L_\omega=(D+\omega L)\iv[(1-\omega)D-\omega U]$可以写成下三角矩阵和上三角矩阵的乘积：
+    \[
+        \lambda_1\cdots\lambda_n=\det(L_\omega)=\det(D\iv)\det((1-\omega)D)=(1-\omega)^n,
+    \]
+    故
+    \[
+        \rho(L_\omega)=\max_i\abs{\lambda_i}\geq\abs{\lambda_1\cdots\lambda_n}^{1/n}=\abs{1-\omega}.
+        \qedhere
+    \]
+\end{proof}
+
+\begin{corollary}
+    SOR收敛的必要条件是$0<\omega<2$。
+\end{corollary}
+
+\begin{theorem}
+    {对称正定矩阵的SOR收敛的充要条件}{}
+    若$A$对称正定，则$0<\omega<2\iff$SOR收敛。
+\end{theorem}
+
+\begin{proof}
+    只需证明充分性。
+    设$\lambda$和$x$是$L_\omega$的任意一个特征值和对应的特征向量，则
+    \[
+        [(1-\omega)D-\omega U]x=\lambda(D+\omega L)x,
+    \]
+    上式两边与$x$内积得到
+    \[
+        % (1-\omega)\inp{Dx}x-\omega\inp{Ux}x=\lambda(\inp{Dx}x+\omega\inp{Lx}x),\implies
+        \lambda=\frac{(1-\omega)\inp{Dx}x-\omega\inp{Ux}x}{\inp{Dx}x+\omega\inp{Lx}x},
+    \]
+    由$A$正定，$D$也正定，记$\inp{Dx}x=:p>0$，$\inp{Lx}x=a+\i b$，由$A$对称，$L\tp=U$，
+    \[
+        \inp{Ux}x=\inp{L\tp x}x=\inp x{Lx}=\overline{\inp{Lx}x}=a-\i b,
+    \]
+    可将$\lambda$用$\omega,p,a,b$表示出来，继而
+    \[
+        \abs\lambda^2-1=\frac{[(1-\omega)p-\omega a]^2+\omega^2b^2}{(p+\omega a)^2+\omega^2b^2}-1=-\frac{p\omega(2-\omega)(p+2a)}{(p+\omega a)^2+\omega^2b^2}
+    \]
+    由$A$正定，
+    \[
+        \inp{Ax}x=\inp{Dx}x+\inp{Lx}x+\inp{Ux}x=p+2a>0,
+    \]
+    又$2-\omega>0$，故$\abs\lambda^2<1$，从而$\rho(L_\omega)<1$，SOR收敛。
+\end{proof}
+
+\paragraph{最佳松弛因子}
+
+希望选取最优的$\omega$使得迭代矩阵谱半径最小：
+\begin{equation}
+    \omega^*=\arg\min_{\omega}\rho(L_\omega).
+\end{equation}
+
+\begin{theorem}
+    {最佳松弛因子}{optimal overrelaxation}
+    若$A$为对称正定的(分块)三对角矩阵，则$\rho(B_\text G)=\rho(B_\text J)^2<1$且SOR的最佳松弛因子为
+    \begin{equation}
+        \omega^*=\frac2{1+\sqrt{1-\rho(B_\text G)}}.
+    \end{equation}
+    且$\rho(L_{\omega^*})=\omega^*-1$。
+\end{theorem}
+
+\begin{remark}
+    对于对称正定三对角矩阵，G-S法收敛速度是Jacobi法的两倍，SOR的收敛速度最快。
+\end{remark}
+
+\begin{example}
+    {Poisson方程的五点差分格式}{}
+    讨论二元函数$u=u(x,y)$满足 
+    \[
+        \pv[2]ux+\pv[2]uy=f(x,y),
+    \]
+    边界条件$u|_{\p\Omega}=0$。采用差分法，在均匀网格点$(x_i,y_i)$附近作Taylor展开：
+    \[
+        u_{i\pm 1,j}=u_{ij}\pm h\edg{\pv ux}_{ij}+\frac{h^2}2\edg{\pv[2]ux}_{ij}\pm\frac{h^3}6\edg{\pv[3]ux}_{ij}+\bigo(h^4).
+    \]
+    可得
+    \[
+        \edg{\pv[2]ux}_{ij}=\frac{u_{i+1,j}+u_{i-1,j}-2u_{ij}}{h^2}+\bigo(h^2)
+    \]
+    同理可得$\p^2u/\p^2y$。代入原Poisson方程得到
+    \begin{equation}
+        u_{i+1,j}+u_{i-1,j}+u_{i,j+1}+u_{i,j-1}-4u_{ij}=h^2f_{ij}.
+    \end{equation}
+    若网格是$m\times n$的，则可以写成线性方程组$Ax=b$的形式，其中        
+    \begin{alignat*}{3}
+        x&=\begin{bmatrix}
+            u_1\\\vdots\\ u_n
+        \end{bmatrix},\enspace u_i=\begin{bmatrix}
+            u_{1i}\\\vdots\\u_{mi}
+        \end{bmatrix};&
+        b&=-h^2\begin{bmatrix}
+            f_1\\\vdots\\f_n
+        \end{bmatrix},\enspace f_i=\begin{bmatrix}
+            f_{1i}\\\vdots\\f_{mi}
+        \end{bmatrix};\\
+        A&=\begin{bmatrix}
+            A_1&-I\\-I&A_2&\ddots\\ &\ddots&\ddots&-I\\ &&-I&A_n
+        \end{bmatrix},&\quad A_i&=\begin{bmatrix}
+            4&-1\\-1&4&\ddots\\ &\ddots&\ddots&-1\\ &&-1&4
+        \end{bmatrix}.
+    \end{alignat*}
+    其中$A$是$mn$阶方阵，$A_i$是$m$阶方阵。
+    故$A$是分块三对角正定矩阵，$B_\text J$的$mn$个特征值为
+    \[
+        \lambda_{ij}=\frac{\cos(i\pi h)+\cos(j\pi h)}2,\quad i=1,\ldots,m,\enspace j=1,\ldots,n.
+    \]
+    谱半径$\rho(B_\text J)=\cos(\pi h)$，则$\rho(B_\text G)=\cos^2(\pi h)$
+    \[
+        \omega^*=\frac2{1+\sin(\pi h)},
+    \]
+    因此，Jacobi法和SOR的收敛速度分别为
+    \begin{alignat*}{3}
+        R(B_\text J)&=-\ln(\cos(\pi h))=\frac{\pi^2}2h^2+\frac{\pi^4}{12}h^4+\bigo(h^6),\\
+        R(L_{\omega^*})&=-2\ln(\cos(\pi h))+2\ln(1+\sin(\pi h))=2\pi h+\frac{\pi^3}3h^3+\bigo(h^5).
+    \end{alignat*}
+    可见Jacobi法和SOR的收敛速度差了一个数量级。
+\end{example}
+
+\section{非线性迭代方法}
+
+
+\begin{definition}
+    {算子}{operator}
+    Hilbert空间$V$中的可逆对称算子$A:V\to V$满足：$\forall x,y\in V$，
+    \begin{itemize}
+        \item $\inp{Ax}y=\inp x{Ay}$；
+        \item $\inp{Ax}x\geq 0$且$\inp{Ax}x=0\iff x=0$。
+    \end{itemize}
+    可定义范数$\norm x_A:=\sqrt{\inp{Ax}x}$。
+\end{definition}
+
+\begin{example}
+    {}{}
+    $\RR^n$中的内积和$n$阶对称正定矩阵$M$一一对应：
+    \[
+        \inp xy_M=\inp{Mx}y.
+    \]
+\end{example}
+
+\begin{theorem}
+    {Ritz变分问题}{}
+    考虑算子方程
+    \begin{equation}
+        Ax=b,
+    \end{equation}
+    考虑$\varphi:V\to\RR$
+    \begin{equation}
+        \varphi(x):=\frac12\norm x_A^2-\inp bx.
+    \end{equation}
+    若算子$A$对称正定，则
+    \begin{equation}
+        Ax^*=b\iff x^*=\arg\min_{x\in V}\varphi(x).
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    由$b=Ax^*$，$\varphi(x^*)=-\norm{x^*}_A^2/2$。
+    $\forall x\in V$
+    \[
+        \varphi(x)-\varphi(x^*)=\frac12(\norm x_A^2-2\inp{Ax^*}x+\norm{x^*}_A^2)=\frac12\norm{x-x^*}^2_A.
+    \]
+    故$\varphi(x)\geq\varphi(x^*)$且$\varphi(x)=\varphi(x^*)\iff x=x^*$。
+\end{proof}
+
+因此，迭代法的选择策略为：给定$x^{(k)}$，确定$x^{(k+1)}$使得
+\[
+    \varphi(x^{(k+1)})<\varphi(x^{(k)}).
+\]
+
+\subsection{子空间方法}
+\label{ssec:subspace method}
+
+\begin{theorem}
+    {子空间搜索}{subspace search}
+    设$x+\Phi$是一个仿射(affine)平面，则
+    \[
+        y^*=\arg\min_{y\in\Phi}\varphi(x+y)\iff 
+        % \forall y\in\Phi,\enspace\inp{b-A(x+y^*)}y=0\iff
+        b-A(x+y^*)\perp\Phi.
+    \]
+\end{theorem}
+
+\begin{proof}
+    由于
+    \[
+        \varphi(x+y)-\varphi(x^*)=\frac12\norm{x+y-x^*}_A^2
+    \]
+    故对于$y^*$应有
+    \[
+        \forall y\in\Phi,\enspace\inp{x^*-(x+y^*)}y_A=0\iff
+        x^*-(x+y^*)\perp_A\Phi.
+        \qedhere
+    \]
+\end{proof}
+
+\begin{theorem}
+    {一维极小搜索方法}{1-D minimal search}
+    给定$x^{(k)}$和搜索方向$p^{(k)}\neq 0$，考虑一维极小值问题
+    \begin{equation}
+        \label{eqn:alphak}
+        \alpha_k=\arg\min_{\alpha\in\RR}\varphi(x^{(k)}+\alpha p^{(k)})=\frac{\inp{r^{(k)}}{p^{(k)}}}{\norm{p^{(k)}}_A^2}.
+    \end{equation}
+    并使
+    \begin{equation}
+        x^{(k+1)}=x^{(k)}+\alpha_kp^{(k)},
+    \end{equation}
+    若$\alpha_k\neq 0$，则$\varphi(x^{(k+1)})<\varphi(x^{(k)})$，且$r^{(k+1)}\perp p^{(k)}$。
+\end{theorem}
+
+\begin{proof}
+    残差$r^{(k)}=b-Ax^{(k)}$，则
+    \[
+        \dd\alpha\varphi(x^{(k)}+\alpha p^{(k)})=-\inp{r^{(k)}}{p^{(k)}}+\alpha\norm{p^{(k)}}_A^2=0.
+        \qedhere
+    \]
+\end{proof}
+
+\subsection{最速下降法}
+\label{ssec:steepest descent method}
+
+\begin{theorem}
+    {最速下降法}{steepest descent method}
+    搜索方向选择$\varphi$在$x^{(k)}$处下降最快的方向：$p^{(k)}=r^{(k)}$，称为最速下降法(steepest descent method)：
+    \begin{subequations}
+        \begin{align}
+            r^{(k)}&=b-Ax^{(k)},\\
+            \alpha_k&=\frac{\norm{r^{(k)}}^2}{\norm{r^{(k)}}_A^2},\\
+            x^{(k+1)}&=x^{(k)}+\alpha_kr^{(k)}.
+        \end{align}
+    \end{subequations}
+    则$\varphi(x^{(k)})$单调下降且有界$\varphi(x^*)$，极限$\lim_{k\to\infty}x^{(k)}=x^*$。
+\end{theorem}
+
+\begin{corollary}
+    相邻两次搜索方向是正交的：$\inp{r^{(k+1)}}{r^{(k)}}=0$，且
+    \[
+        r^{(k+1)}=(I-\alpha_k A)r^{(k)}.
+    \]
+\end{corollary}
+
+\begin{theorem}
+    {最速下降法的误差收敛性}{SDM error}
+    记误差$e^{(k)}:=x^{(k)}-x^*$，则误差的$A$ - 范数满足
+    \begin{equation}
+        \label{eqn:SDM e^k}
+        \norm{e^{(k)}}_A\leq\biggkh{\frac{\cond_2(A)-1}{\cond_2(A)+1}}^k\norm{e^{(0)}}_A.
+    \end{equation}
+\end{theorem}
+
+\begin{lemma}
+    $\forall x\neq 0$，
+    \begin{equation}
+        \frac{\norm x_A^2\norm x_{A\iv}^2}{\norm x^4}\leq\frac{(\cond_2(A)+1)^2}{4\cond_2(A)}.
+    \end{equation}
+\end{lemma}
+
+\begin{proof}
+    设$\lambda\maxi,\lambda\mini$分别是对称正定算子$A$的最大最小特征值。
+    则$\forall\lambda_i$为$A$的特征值，满足
+    \[
+        \frac1{\lambda_i}\leq\frac1{\lambda\mini}+\frac1{\lambda\maxi}-\frac{\lambda_i}{\lambda\mini\lambda\maxi}.
+    \]
+    则$\forall x$且$\norm x=1$，
+    \begin{align*}
+        \frac{\norm x_A^2\norm x_{A\iv}^2}{\norm x^4}&=\frac{\inp{Ax}x\inp{A\iv x}x}{\inp xx^2}=\sum_i\lambda_ix_i^2\sum_i\frac1{\lambda_i}x_i^2\\
+        &\leq\sum_i\lambda_ix_i^2\biggkh{\frac1{\lambda\mini}+\frac1{\lambda\maxi}-\frac1{\lambda\mini\lambda\maxi}\sum_i\lambda_ix_i^2}\leq\frac{(\lambda\maxi+\lambda\mini)^2}{4\lambda\maxi\lambda\mini}.
+    \end{align*}
+    由$A$对称，$\cond_2(A)=\abs{\lambda\maxi}/\abs{\lambda\mini}$，由$A$正定，$\lambda\mini>0$。
+\end{proof}
+
+\begin{proof}
+    由$Ae^{(k)}=-r^{(k)}$，有$\inp{e^{(k)}}{r^{(k)}}_A=-\norm{r^{(k)}}^2$，$\norm{e^{(k)}}_A=\norm{r^{(k)}}_{A\iv}$，故
+    \begin{align*}
+        \norm{e^{(k+1)}}_A^2&=\norm{e^{(k)}+\alpha_kr^{(k)}}_A^2
+        =\norm{e^{(k)}}_A^2+\alpha_k^2\norm{r^{(k)}}_A^2+2\alpha_k\inp{e^{(k)}}{r^{(k)}}_A\\
+        &=\norm{e^{(k)}}_A^2+\alpha_k^2\norm{r^{(k)}}_A^2-2\alpha_k\norm{r^{(k)}}^2=
+        \norm{e^{(k)}}_A^2-\frac{\norm{r^{(k)}}^4}{\norm{r^{(k)}}_A^2}\\
+        &=\norm{e^{(k)}}_A^2\biggkh{1-\frac{\norm{r^{(k)}}^4}{\norm{r^{(k)}}_A^2\norm{r^{(k)}}_{A\iv}^2}}\leq\norm{e^{(k)}}_A^2\biggkh{1-\frac{4\cond_2(A)}{(\cond_2(A)+1)^2}}\\
+        &=\norm{e^{(k)}}_A^2\biggkh{\frac{\cond_2(A)-1}{\cond_2(A)+1}}^2.
+    \end{align*}
+    迭代即可得到。
+\end{proof}
+
+\begin{remark}
+    虽然最速下降法总是收敛的，但当$A$病态时，$\cond_2(A)\gg 1$，收敛速度非常慢；当$\norm{r^{(k)}}$很小时，计算不稳定。
+\end{remark}
+
+\subsection{共轭梯度法}
+\label{ssec:conjugate gradient method}
+
+仍然考虑对称正定矩阵$A$和一维极小搜索，但不再沿着正交的$r^{(0)},r^{(1)},\ldots$，寻找另一组$p^{(0)},p^{(1)},\ldots$
+对于第$k$次搜索：
+\[
+    \alpha_k=\arg\min_\alpha\varphi(x^{(k)}+\alpha p^{(k)}),\implies
+    x^{(k+1)}=x^{(k)}+\alpha_kp^{(k)},
+\]
+由于
+\[
+    x^{(k+1)}=x^{(0)}+\alpha_0p^{(0)}+\cdots+\alpha_kp^{(k)}.
+\]
+我们希望$p^{(k)}$的选取能使得确定$\alpha_k$后，$x^{(k+1)}$是$x^{(0)}+\lspan(p^{(0)},\ldots,p^{(k)})$中最优的，
+即一维极小搜索的结果与$(k+1)$维搜索结果相同：
+\[
+    (\alpha_0,\ldots,\alpha_k)=\mathop{\arg\min}\limits_{(\alpha_0,\ldots,\alpha_k)}\varphi(x^{(0)}+\alpha_0p^{(0)}+\cdots+\alpha_kp^{(k)}).
+\]
+
+\begin{definition}
+    {$A$ - 正交向量组}{A-orthogonal}
+    若向量组$p_1,\ldots,p_n,\ldots$满足$\forall i\neq j$均有
+    \begin{equation}
+        \inp{p_i}{p_j}_A=0,\iff p_i\perp_A p_j.
+    \end{equation}
+    则称为$A$ - 正交向量组，也称$A$ - 共轭向量组。
+\end{definition}
+
+\begin{corollary}
+    给定一个线性无关的向量组，可按照Gram-Schmidt正交化得到对应的$A$ - 正交向量组。
+\end{corollary}
+
+\begin{theorem}
+    {多维子空间搜索问题}{}
+    记$y\in\lspan(p^{(0)},\ldots,p^{(k-1)})$，$x=x^{(0)}+y+\alpha p^{(k)}$，
+    \[
+        \varphi(x)=\varphi(x^{(0)}+y)+\alpha\inp{y}{p^{(k)}}_A-\alpha\inp{r^{(0)}}{p^{(k)}}+\frac{\alpha^2}2\norm{p^{(k)}}^2_A.
+    \]
+    上式出现了交叉项$\inp{y}{p^{(k)}}_A$，为了简化问题，自然可考虑使交叉项$\inp{y}{p^{(k)}}_A=0$，这要求$p^{(k)}$与$\lspan(p^{(0)},\ldots,p^{(k-1)})$是$A$ - 正交的。%(见\dfnref{dfn:A-orthogonal})
+
+    由此便分解成了两个极小问题：
+    \[
+        \min_x\varphi(x)=\min_y\varphi(x^{(0)}+y)+\min_\alpha\biggfkh{-\alpha\inp{r^{(0)}}{p^{(k)}}+\frac{\alpha^2}2\norm{p^{(k)}}^2_A}
+    \]
+    前者满足$x^{(0)}+y^*=x^{(k)}$，后者得到
+    \begin{equation}
+        \alpha_k=\frac{\inp{r^{(0)}}{p^{(k)}}}{\norm{p^{(k)}}_A^2}=\frac{\inp{r^{(k)}}{p^{(k)}}}{\norm{p^{(k)}}_A^2}.
+    \end{equation}
+    由于$\inp{r^{(0)}}{p^{(k)}}=\inp{r^{(k)}}{p^{(k)}}$，故形式其实与\eqref{eqn:alphak}相同。
+    并且有
+    \begin{equation}
+        \label{eqn:r^k+1=r^k-alpha_kAp^k}
+        r^{(k+1)}=r^{(k)}-\alpha_kAp^{(k)}.
+    \end{equation}
+\end{theorem}
+
+\begin{corollary}
+    由子空间搜索\thmref{thm:subspace search}，$r^{(k)}\perp\lspan(p^{(0)},\ldots,p^{(k-1)})$。
+\end{corollary}
+
+\begin{remark}
+    与$p^{(0)},\ldots,p^{(k-1)}$ $A$ - 正交的$p^{(k)}$取法并不唯一。
+\end{remark}
+
+\paragraph{共轭梯度法}
+
+当$r^{(k)}\neq 0$时，$p^{(0)},\ldots,p^{(k-1)},r^{(k)}$线性无关，可通过Gram-Schmidt正交化得到$p^{(k)}$：
+\begin{equation}
+    \label{eqn:Gram-Schmidt p^k}
+    p^{(k)}=r^{(k)}-\sum_{i=0}^{k-1}\frac{\inp{r^{(k)}}{p^{(i)}}_A}{\norm{p^{(i)}}_A^2}p^{(i)},
+    \tag{*}
+\end{equation}
+
+\begin{theorem}
+    {}{}
+    $r^{(k)}\perp_A\lspan(p^{(0)},\ldots,p^{(k-2)})$。
+\end{theorem}
+
+\begin{proof}
+    $r^{(k)}\perp\lspan(p^{(0)},\ldots,p^{(k-1)})=\lspan(r^{(0)},\ldots,r^{(k-1)})$，由式\eqref{eqn:r^k+1=r^k-alpha_kAp^k}
+    \[
+        Ap^{(i)}=\frac{r^{(i+1)}-r^{(i)}}{\alpha_i}\perp r^{(k)},\enspace i=0,\ldots,k-2.
+        \qedhere
+    \]
+\end{proof}
+
+\begin{corollary}
+    $p^{(k)}$为$r^{(k)}$和$p^{(k-1)}$的线性组合，式\eqref{eqn:Gram-Schmidt p^k}变为
+    \[
+        p^{(k)}=r^{(k)}-\frac{\inp{r^{(k)}}{p^{(k-1)}}_A}{\norm{p^{(k-1)}}_A^2}p^{(k-1)}=:r^{(k)}+\beta_{k-1}p^{(k-1)}.
+    \]
+    可以简化系数$\beta_k$的计算：
+    \[
+        \beta_k=-\frac{\inp{r^{(k+1)}}{p^{(k)}}_A}{\norm{p^{(k)}}_A^2}=\frac{\norm{r^{(k+1)}}^2}{\alpha_k\norm{p^{(k)}}_A^2}=\frac{\norm{r^{(k+1)}}^2}{\norm{r^{(k)}}^2}.
+    \]
+\end{corollary}
+
+\begin{theorem}
+    {共轭梯度法}{conjugate gradient method}
+    共轭梯度法(conjugate gradient method)：$p^{(0)}=r^{(0)}=b-Ax^{(0)}$，
+    \begin{subequations}
+        \begin{align}
+            % r^{(k)}&=b-Ax^{(k)},\\
+            \alpha_k&=\frac{\norm{r^{(k)}}^2}{\norm{p^{(k)}}_A^2},\\
+            x^{(k+1)}&=x^{(k)}+\alpha_kp^{(k)},\\
+            r^{(k+1)}&=r^{(k)}-\alpha_kAp^{(k)};\\
+            \beta_k&=\frac{\norm{r^{(k+1)}}^2}{\norm{r^{(k)}}^2},\\
+            p^{(k+1)}&=r^{(k+1)}+\beta_kp^{(k)}.
+        \end{align}
+    \end{subequations}
+    若$r^{(k)}=0$，则$x^{(k)}=x^*$，计算终止。
+\end{theorem}
+
+\begin{corollary}
+    由于$r^{(0)},\ldots,r^{(k)}$两两正交，理论上最多$n=\dim(V)$步便可以得到精确解。
+\end{corollary}
+
+\begin{theorem}
+    {梯度下降法的误差收敛性}{}
+    误差$e^{(k)}:=x^{(k)}-x^*$的$A$ - 范数满足
+    \begin{equation}
+        \label{eqn:CG e^k}
+        \norm{e^{(k)}}_A\leq 2\biggkh{\frac{\sqrt{\cond_2(A)}-1}{\sqrt{\cond_2(A)}+1}}^k\norm{e^{(0)}}_A.
+    \end{equation}
+    其中$\lambda\maxi,\lambda\mini$分别是对称正定算子$A$的最大最小特征值。
+\end{theorem}
+
+\begin{proof}
+    记$\alpha=\lambda\mini/\lambda\maxi$，取
+    \[
+        p_k^*(x)=\division{T_k\biggkh{\frac{2x-(1+\alpha)}{1-\alpha}}}{T_k\biggkh{-\frac{1+\alpha}{1-\alpha}}},
+    \]
+    其中$T_k$是Chebyshev多项式，由于$\abs t\geq 1$时，
+    \[
+        T_k(t)=\frac12\biggfkh{\Bigkh{t+\sqrt{t^2-1}}^k+\Bigkh{t-\sqrt{t^2-1}}^k}\gtrapprox \frac12\Bigkh{\abs t+\sqrt{t^2-1}}^k.
+    \]
+    则$\forall x\in(\alpha,1)$，
+    \[
+        \norm{p_k^*}_\infty=\division{1}{T_k\biggkh{-\frac{1+\alpha}{1-\alpha}}}\leq 2\biggkh{\frac{1+\alpha}{1-\alpha}-\sqrt{\Bigkh{\frac{1+\alpha}{1-\alpha}}^2-1}}^k=2\biggkh{\frac{1-\sqrt\alpha}{1+\sqrt\alpha}}^k.
+        \qedhere
+    \]
+\end{proof}
+
+\subsection{共轭梯度法的预处理}
+\label{ssec:preconditioning}
+
+从误差估计\eqref{eqn:CG e^k}可以看出，共轭梯度法的收敛速度强烈依赖于$A$的条件数，当$A$病态时收敛得很慢。为了改善收敛速度，可以先进行预处理(preconditioning)，降低矩阵的条件数。
+
+\begin{theorem}
+    {预处理的共轭梯度算法}{preconditioning conjugate gradient}
+    给定预处理矩阵$M$且对称正定，
+    \[
+        Ax=b\iff M\iv Ax=M\iv b,
+    \]
+    对预处理后的方程应用共轭梯度算法：$p^{(0)}=M\iv r^{(0)}$，
+    \begin{subequations}
+        \begin{align}
+            % r^{(k)}&=b-Ax^{(k)},\\
+            \alpha_k&=\frac{\norm{r^{(k)}}_{M\iv}^2}{\norm{p^{(k)}}_A^2},\\
+            x^{(k+1)}&=x^{(k)}+\alpha_kp^{(k)},\\
+            r^{(k+1)}&=r^{(k)}-\alpha_kAp^{(k)};\\
+            \beta_k&=\frac{\norm{r^{(k+1)}}_{M\iv}^2}{\norm{r^{(k)}}_{M\iv}^2},\\
+            p^{(k+1)}&=M\iv r^{(k+1)}+\beta_kp^{(k)}.
+        \end{align}
+    \end{subequations}
+    当$r^{(k)}=0$时计算终止。
+\end{theorem}
+
+\begin{corollary}
+    其误差仍满足式\eqref{eqn:CG e^k}，但条件数改善为$\cond_2(M\iv A)$。
+\end{corollary}
+
+\begin{remark}
+    预处理矩阵的选择依据：
+    方便计算、
+    好近似。
+    \begin{itemize}
+        \item 代数方法：分解$A=M+N$，其中$M=LL\tp$对称正定、$L$尽可能稀疏，而$N$尽可能小，称为$A$的不完全Cholesky分解。
+        
+        比如取为对角部分$M=D$，在$A$的对角元素相差较大时收敛速度会大大提高。
+        \item 分析方法：谱等价，$\forall x$
+        \[
+            c_1\norm x_A^2\leq\norm x_M^2\leq c_2\norm x_A^2,
+        \]
+        则$\rho(M\iv A)\in[c_2\iv,c_1\iv]$。
+    \end{itemize}
+\end{remark}
