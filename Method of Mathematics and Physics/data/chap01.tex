@@ -52,9 +52,9 @@
 \section{定解问题及适定性}
 $V\subseteq\mathbb R^n$内$m$阶PDE形如
 \[
-	F\kh{x,u,\pv u{x_1},\pv u{x_2},\ldots,\pv u{x_n},\ldots,\frac{\p^mu}{\p x_1^{m_1}\cdots\p x_n^{m_n}}}=0,
+	F\biggkh{x,u,\pv u{x_1},\ldots,\pv u{x_n},\ldots,\frac{\p^mu}{\p x_1^{m_1}\cdots\p x_n^{m_n}}}=0,
 \]
-其中$m=m_1+m_2+\cdots+m_n$。
+其中$m=m_1+m_2+\cdots+m_n$。在本笔记中，偏微分$\p u/\p x$可以简记为$u_x$。
 \begin{definition}{定解条件}{Definite Condition}
 	确定解中函数的条件称为定解条件，包括初始条件和边界条件
 	\begin{compactenum}[I.]
@@ -63,7 +63,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 		\item (Robin)\qquad$\kh{u_t+\sigma u}_{x=0}=f$,\quad$\biggkh{\pv un+\sigma u}_{\p V}=f$.
 	\end{compactenum}
 \end{definition}
-\begin{definition}{解}{}
+\begin{definition}{解相关的术语}{}
 	古典解：符合方程且各阶偏导数连续；
 
 	通解：$m$阶PDE有$m$个任意函数的解；
@@ -126,35 +126,35 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 		\end{vmatrix}\neq 0.
 	\end{align*}
 \end{method}
+
 \section{波动方程的行波解和d'Alembert公式}
-一维波动方程
-\[
-	\pv[2]ut=a^2\pv[2]ux,\quad a>0.
-\]
-可分解为
-\[
-	\kh{\pp t+a\pp x}\kh{\pp t-a\pp x}u=0.
-\]
-等价于
-\begin{align*}
-	\begin{cases}
-		\pv vt+a\pv vx=0, \\[1ex]
-		\pv ut-a\pv ux=v.
-	\end{cases}
-	\implies
-	\begin{cases}
-		\xi=x-at, \\
-		\eta=x+at.
-	\end{cases}
-\end{align*}
-方程化为
-\[
-	\pw u\eta\xi=0,\implies u=f(\xi)+g(\eta).
-\]
-即\textbf{行波解}
-\begin{align}
-	u(x,t)=f(x-at)+g(x+at),\quad f,g\in\sC^2.
-\end{align}
+
+\begin{example}
+	{行波解}{}
+	一维波动方程
+	\[
+		\pv[2]ut=a^2\pv[2]ux,\quad a>0.
+	\]
+	可分解为
+	\[
+		\kh{\pp t+a\pp x}\kh{\pp t-a\pp x}u=0.
+	\]
+	定义
+	\[
+		\begin{cases}
+			\xi=x-at, \\
+			\eta=x+at.
+		\end{cases}
+	\]
+	方程化为
+	\[
+		\pw u\eta\xi=0,\implies u=f(\xi)+g(\eta).
+	\]
+	即\textbf{行波解}
+	\begin{align}
+		u(x,t)=f(x-at)+g(x+at),\quad f,g\in\sC^2.
+	\end{align}
+\end{example}
 \begin{theorem}{d'Alembert公式}{d'Alembert formula}
 	无限长弦自由振动
 	\begin{align*}
@@ -185,19 +185,19 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 			u(x,0)=\varphi(x),\quad u_t(x,0)=\psi(x).
 		\end{cases}
 	\end{align*}
-	进行奇延拓
+	对$\varphi,\psi$进行奇延拓
 	\begin{align*}
 		\varphi_\odd(x)=
 		\begin{cases}
 			\varphi(x),   & x\geqslant 0, \\
 			-\varphi(-x), & x<0.
 		\end{cases}
-		\quad
-		\psi_\odd(x)=
-		\begin{cases}
-			\psi(x),   & x\geqslant 0, \\
-			-\psi(-x), & x<0.
-		\end{cases}
+		% \quad
+		% \psi_\odd(x)=
+		% \begin{cases}
+		% 	\psi(x),   & x\geqslant 0, \\
+		% 	-\psi(-x), & x<0.
+		% \end{cases}
 	\end{align*}
 	问题便适用d'Alembert公式，解
 	\begin{align*}
@@ -209,7 +209,9 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 		\end{cases}
 	\end{align*}
 	\tcblower
-	端点自由半无限弦($u_t(0,t)=0$)采用偶延拓；有界弦：两端均延拓。
+	端点自由半无限弦($u_t(0,t)=0$)采用偶延拓；
+	
+	有界弦：两端均延拓。
 \end{example}
 \begin{example}{中心对称球面波}{}
 	中心对称的球面波$u=u(r)$，采用球坐标
@@ -314,8 +316,8 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 	\end{gather*}
 	故
 	\begin{align*}
-		&\quad\int_{D_{at}}\frac{\varPhi(\xi,\eta)\d\xi\nd\eta}{\sqrt{a^2t^2-(\xi-x)^2-(\eta-y)^2}}=\int_0^{at}\oint_{C_r}\frac{\varphi(\xi)}{\sqrt{a^2t^2-r^2}}\d\ell\d r\\
-		&=2\int_0^{at}\int_{x-r}^{x+r}\frac{\varphi(\xi)}{\sqrt{a^2t^2-r^2}}\frac{r\d\xi}{\sqrt{r^2-(\xi-x)^2}}\d r\tag{交换次序}\\
+		\int_{D_{at}}&\frac{\varPhi(\xi,\eta)\d\xi\nd\eta}{\sqrt{a^2t^2-(\xi-x)^2-(\eta-y)^2}}=\int_0^{at}\oint_{C_r}\frac{\varphi(\xi)}{\sqrt{a^2t^2-r^2}}\d\ell\d r\\
+		&=2\int_0^{at}\int_{x-r}^{x+r}\frac{\varphi(\xi)}{\sqrt{a^2t^2-r^2}}\frac{r\d\xi}{\sqrt{r^2-(\xi-x)^2}}\d r\\%\tag{交换次序}
 		&=\kh{\int_x^{x+at}\int_{\xi-x}^{at}+\int_{x-at}^x\int_{x-\xi}^{at}}\frac{\varphi(\xi)}{\sqrt{a^2t^2-r^2}}\frac{2r\d r}{\sqrt{r^2-(\xi-x)^2}}\d\xi
 	\end{align*}
 	推出d'Alembert公式：
