@@ -9,29 +9,38 @@
 \end{quote}
 他所说的两朵\textit{乌云}是指：
 \begin{itemize}
-    \item 物质如何穿过以太而运动\footnote{Michelson-Morley实验}；
+    \item 物质如何穿过以太而运动；%\footnote{Michelson-Morley实验}；
     \item 统计力学中的能量均分原理可能会被打破。
 \end{itemize}
 而在二十世纪，针对这两个问题，产生了两个主要的物理理论：针对前者产生了狭义相对论；针对后者产生了量子力学。%\url{https://books.google.com.tw/books?id=YvoAAAAAYAAJ&pg=PA363&redir_esc=y#v=onepage&q&f=false}
 
 涉及统计力学的部分，包括热容、Einstein晶体模型等，详见本人的统计力学笔记内容，此处不多赘述。
+
 \section{黑体辐射问题}
-考虑边长为$L$的立方黑体，电磁波在其内满足驻波条件
+
+19世纪，人们希望研究物体热辐射的性质，比如通过烧热钢铁的颜色来判断其温度。
+为了避免外界辐射的因素，可以考虑一个可以完全吸收外界辐射的理想物体，由于这种物体不反射任何光线，因此称为\textbf{黑体}。
+因此，黑体的辐射便完全取决于其本身的性质，比如说温度。
+
+\iffalse
+考虑边长为$L$的立方黑体，电磁波在其内满足驻波条件：
 \[
-	k^2=\kh{\frac\pi{L}}^2\kh{n_x^2+n_y^2+n_z^2}.
+	k^2=k_x^2+k_y^2+k_z^2=\kh{\frac\pi{L}}^2\kh{n_x^2+n_y^2+n_z^2}.
 \]
-因此$\{n_x,n_y,n_z\}$的解分布在半径为$kL/\pi$的球面上，则球的内解的个数
+其中$k=2\pi/\lambda$为波数，对应频率$\nu=c/\lambda=ck/2\pi$，$n_x,n_y,n_z$是驻波在$x,y,z$方向上的半波长个数，应为不全为0的非负整数。
+由上式，解$(n_x,n_y,n_z)$分布在半径为$kL/\pi=2\nu L/c$的球面上，则球内解的个数为
 \[
 	N(\nu)=2\cdot\frac18\cdot\frac43\pi\kh{\frac{2L\nu}c}^3=\frac{8\pi L^3}{3c^3}\nu^3,
 \]
-系数前乘2是因为有两种偏振态．
+系数前乘2是因为光是横波，存在两种偏振态．
+\fi
 
-解（状态）的密度
+每个解$(n_x,n_y,n_z)$都对应一种驻波状态，其密度定义为：
 \[
 	g(\nu)=\frac1{L^3}\dv{N(\nu)}\nu=\frac{8\pi}{c^3}\nu^2.
 \]
 根据Boltzmann分布，每个状态上的粒子数$\propto\e{-\varepsilon/\kB T}$。
-能量平均值
+故能量平均值为
 \begin{align}
 	\avg E=\frac{\textstyle\int\zti\varepsilon\e{-\varepsilon/\kB T}\d\varepsilon}{\textstyle\int\zti\e{-\varepsilon/\kB T}\d\varepsilon}=\kB T.
 \end{align}
@@ -39,25 +48,44 @@
 \[
 u(\nu,T)=\avg Eg(\nu)=\frac{8\pi\nu^2}{c^3}\kB T.
 \]
-对应的辐射率\footnote{指定方向上的单位立体角和垂直此方向的单位面积上的辐射通量．}
+考虑黑体辐射在$4\pi$立体角内是各向同性的，
+辐射率\footnote{指定方向上的单位立体角和垂直此方向的单位面积上的辐射通量．}
+为
 \begin{align}
 	\label{eqn:Rayleigh-Jeans Formula of frequency}
 	I_\nu(\nu,T)=\frac c{4\pi}u(\nu,T)=\frac{2\nu^2}{c^2}\kB T.
 \end{align}
-$I_\nu$的单位为$\si{\J\per\m\squared}$；如果以波长$\lambda$为变量，%由于得到$g$的过程中有求导，因此
+如果以波长$\lambda$为变量，%由于得到$g$的过程中有求导，因此
 \begin{align}
 	\label{eqn:Rayleigh-Jeans Formula of wavelength}
 	I_\lambda(\lambda,T)=\frac{c}{\lambda^2}\cdot I_\nu\biggkh{\frac c\lambda,T}=\frac{2c\kB T}{\lambda^4}.
 \end{align}
-$I_\lambda$的单位为$\si{\W\per\m\cubed}$．
+注意
+$I_\nu$的单位为$\si{J/m^2}$，
+而$I_\lambda$的单位为$\si{W/m^3}$．
 
 \eqref{eqn:Rayleigh-Jeans Formula of frequency}和\eqref{eqn:Rayleigh-Jeans Formula of wavelength}式被称为Rayleigh-Jeans公式．可以看到，当$\lambda\to0$时，$I_\lambda(\lambda,T)\to\infty$，这显然与事实不符，因此被称为\textit{紫外灾难}．\footnote{需要指出的时间顺序：Rayleigh于1900年推导公式，Jeans于1905年修正系数，紫外灾变是Ehrenfest于1911年提出，而Planck公式提出于1900年．}
+
 \paragraph{能量量子化}
-Planck的解决方法是将能量分布变为离散的，即$\varepsilon=nh\nu$
+
+Wein通过对黑体辐射的实验数据进行拟合，提出了一个经验公式：
+\begin{equation}
+	I_\lambda=C_1\lambda^{-5}\e{-C_2/\lambda T},
+\end{equation}
+其在$\lambda$较小时符合得很好，但在$\lambda$较大时存在较大偏差。
+Planck为了
+Planck的解决方法是将能量分布变为离散的，即$\varepsilon_n=nh\nu$
 \begin{align}
-	\avg E=\frac{\textstyle\sum_{n=1}^\infty nh\nu\e{-nh\nu/\kB T}}{\textstyle\sum_{n=1}^\infty\e{-nh\nu/\kB T}}=\frac{h\nu}{\e{h\nu/\kB T}-1}.
+	\avg E=\frac{\textstyle\sum_{n=1}^\infty \varepsilon_n\e{-\varepsilon_n/\kB T}}{\textstyle\sum_{n=1}^\infty\e{-\varepsilon_n/\kB T}}=\frac{h\nu}{\e{h\nu/\kB T}-1}.
 \end{align}
 由此得到的辐射率与实验符合的很好。
+
+\begin{center}
+	\includegraphics[width=0.8\linewidth]{graphs/blackbody.pdf}
+	\captionof{figure}{黑体辐射}
+	\label{fig:blackbody radiation}
+\end{center}
+
 \begin{theorem}{Planck黑体辐射定律}{Planck's Law}
 	黑体辐射的辐射率
 	\begin{align}
