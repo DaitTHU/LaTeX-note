@@ -1,0 +1,235 @@
+\chapter{常微分方程初值问题的数值解法}
+\label{chap:ordinary differential equation}
+
+\section{常微分方程初值问题}
+
+\begin{definition}
+    {一阶非线性常微分方程初值问题}{first-order nonlinear ODE}
+    考虑函数$y:[x_0,b]\to\RR^d$满足
+    \begin{subequations}
+        \label{eqn:ode}
+        \begin{align}
+            \label{eqn:ode eq}
+            &y'(x)=f(x,y(x)),\\
+            &y(x_0)=y_0.
+        \end{align}
+    \end{subequations}
+    特别地，若$f(x,y)=f(y)$与$x$无关，则称为自治问题(autonomous problem)。
+\end{definition}
+
+\begin{example}
+    {Hamilton方程}{Hamiltonian equation}
+    给定相空间上的Hamilton量$H:\RR^d\times\RR^d\to\RR$，广义坐标$q\in\RR^d$和广义动量$p\in\RR^d$随时间的演化满足Hamilton方程(或正则方程, canonial equations)：
+    \begin{subequations}
+        \begin{align}
+            \dot q_i&=\pv H{p_i},\\
+            \dot p_i&=-\pv H{q_i}.
+        \end{align}
+    \end{subequations}
+    比如调和谐振子$H=kx^2/2+p^2/2m$，令角频率$\omega=\sqrt{k/m}$，则Hamilton方程解得
+    \[
+        \lhkh{\begin{aligned}
+            \dot x&=\frac pm,\\
+            \dot p&=-kx.
+        \end{aligned}}\implies
+        \lhkh{\begin{aligned}
+            x&=x_0\cos(\omega t)+\frac{p_0}m\frac{\sin(\omega t)}\omega,\\
+            p&=p_0\cos(\omega t)-kx_0\frac{\sin(\omega t)}\omega.
+        \end{aligned}}
+    \]
+\end{example}
+
+\begin{definition}
+    {半线性高阶常微分方程}{half-linear nth-order ODE}
+    考虑函数$y:[x_0,b]\to\RR^d$满足
+    \begin{subequations}
+        \begin{align}
+            &y^{(n)}=f(x,y,y',\dots,y^{(n-1)}),\\
+            &y(x_0)=y_0,\enspace y'(x_0)=y_1,\enspace\ldots,\enspace y^{(n-1)}(x_0)=y_{n-1}.
+        \end{align}
+    \end{subequations}
+    可转化为一阶常微分方程：
+    \begin{equation}
+        Y:=\begin{bmatrix}
+            y\\y'\\\vdots\\y^{(n-1)}
+        \end{bmatrix},\quad
+        Y'=\begin{bmatrix}
+            O&I\\ &\ddots&\ddots\\ &&\ddots&I\\ &&&O
+        \end{bmatrix}Y+\begin{bmatrix}
+            O\\\vdots\\O\\-f(x,Y)
+        \end{bmatrix}
+    \end{equation}
+\end{definition}
+
+\begin{theorem}
+    {Lipschitz条件}{Lipschitz condition}
+    若$f(x,y)$在$[a,b]\times\RR^d$上连续，且存在不依赖$x$的常数$L>0$使得$\forall y_1,y_2\in\RR^d$，
+    \begin{equation}
+        \norm{f(x,y_1)-f(x,y_2)}\leq L\norm{y_1-y_2},
+    \end{equation}
+    则$\forall y_0$，初值问题存在唯一解。
+\end{theorem}
+
+\begin{remark}
+    我们总是假设$f(x,y)$满足Lipschitz条件，以保证初值问题存在唯一解。
+\end{remark}
+
+\begin{definition}
+    {适定性}{well-posedness}
+    若初值问题\eqref{eqn:ode}存在唯一解$y$，
+    考虑其扰动
+    \begin{subequations}
+        \label{eqn:ode perturbed}
+        \begin{align}
+            &y'(x)=f(x,y(x))+\D f(x),\\
+            &y(x_0)=y_0+\D y_0,
+        \end{align}
+    \end{subequations}
+    若$\forall\epsilon>0$，$\exists\delta$使得当$\norm{\D f}<\delta,\;\norm{\D y_0}<\delta$时，扰动问题\eqref{eqn:ode perturbed}存在唯一解$\tilde y$且满足
+    \begin{equation}
+        \norm{\tilde y-y}<\epsilon,
+    \end{equation}
+    则称初值问题\eqref{eqn:ode}是适定的(well-posed)。
+\end{definition}
+
+\begin{remark}
+    % 零稳定是指扰动量$\delta\to0$时的渐进稳定性。
+    适定性说明初值问题\eqref{eqn:ode}的解存在唯一且连续依赖于$f$和初值$y_0$。
+\end{remark}
+
+\section{Euler方法}
+
+\begin{theorem}
+    {Euler方法}{Euler method}
+    考虑区间$[x_0,b]$的一个划分：
+    \[
+        a=x_0<x_1<\cdots<x_N=b
+    \]
+    其中$h_n:=x_n-x_{n-1}$称为步长。对于初值问题\eqref{eqn:ode}，若$h:=\max_n h_n$充分小，则可用差商近似代替导数：
+    \[
+        \frac{y(x_{n+1})-y(x_n)}{h_{n+1}}\approx y'(x_n)=f(x_n,y(x_n)).
+    \]
+    即
+    \begin{equation}
+        \label{eqn:Euler}
+        y_{n+1}=y_n+h_{n+1}f(x_n,y_n).
+    \end{equation}
+    这称为Euler方法，是一种一阶显式单步法。
+\end{theorem}
+
+\begin{remark}
+    必须关注的三个问题：
+    \begin{enumerate}
+        \item 收敛性：当$h\to0$时，$\sup_n\norm{y_n-y(x_n)}\to0$；
+        \item 收敛速度；
+        \item 稳定性：舍入误差的影响能否控制。
+    \end{enumerate}
+\end{remark}
+
+\begin{theorem}
+    {初值问题的等价积分形式}{}
+    考虑划分区间上的初值问题\eqref{eqn:ode}的等价积分形式
+    \[
+        y(x)=y_n+\int_{x_n}^xf(t,y(t))\d t.
+    \]
+    即可通过数值积分近似计算$y(x_{n+1})$作为$y_{n+1}$。
+\end{theorem}
+
+\begin{corollary}
+    用左矩形法则近似积分，即
+    \[
+        y(x_{n+1})=y(x_n)+h_{n+1}f(x_n,y(x_n))+R_{n+1},
+    \]
+    舍去积分余项$R_{n+1}$，即得Euler公式\eqref{eqn:Euler}。
+\end{corollary}
+
+\begin{example}
+    {隐式Euler方法}{implicit Euler method}
+    用右矩形法则近似积分，即
+    \[
+        y(x_{n+1})=y(x_n)+h_{n+1}f(x_{n+1},y(x_{n+1}))+R_{n+1},
+    \]
+    舍去积分余项$R_{n+1}$，即得隐式Euler公式
+    \begin{equation}
+        \label{eqn:implicit Euler}
+        y_{n+1}=y_n+h_{n+1}f(x_{n+1},y_{n+1}).
+    \end{equation}
+\end{example}
+
+\begin{example}
+    {梯形公式}{}
+    用梯形法则近似积分，即得梯形公式
+    \begin{equation}
+        \label{eqn:trapezoidal ode}
+        y_{n+1}=y_n+\frac{h_{n+1}}2[f(x_n,y_n)+f(x_{n+1},y_{n+1})].
+    \end{equation}
+\end{example}
+
+\begin{definition}
+    {单步法的一般形式}{}
+    结合\eqref{eqn:Euler}，\eqref{eqn:implicit Euler}和\eqref{eqn:trapezoidal ode}，初值问题\eqref{eqn:ode}的单步法一般形式为
+    \[
+        y_{n+1}=y_n+h_{n+1}\varphi(x_n,x_{n+1},y_n,y_{n+1}).
+    \]
+    % 增量函数$\varphi$与$f$有关。%且$\varphi(x_n,x_{n+1},y_n,y_{n+1})=f(x_n,y_n)$时即为Euler方法。
+    若$\varphi$显含$y_{n+1}$，则称为隐式方法；否则称为显式方法。
+    % $\varphi$应满足：
+    % \[
+    %     \norm{\varphi(x_n,x_{n+1},y_n,y_{n+1})-\varphi(x_n,x_{n+1},\tilde y_n,\tilde y_{n+1})}\leq L_f(\norm{y_n-\tilde y_n}+\norm{y_{n+1}-\tilde y_{n+1}}).
+    % \]
+    % 增量函数$\varphi$满足$\varphi(x_n,x_{n+1},y_n,y_{n+1};0)=0$且
+    % 称一步误差为：
+    % \[
+    %     R_{n+1}=y(x_{n+1})-y_{n+1}
+    % \]
+\end{definition}
+
+\begin{definition}
+    {局部截断误差}{local truncation error}
+    单步法在$x_{n+1}$处的局部截断误差定义为积分余项：
+    \[
+        R_{n+1}=y(x_{n+1})-y(x_n)-h_{n+1}\varphi(x_n,x_{n+1},y(x_n),y(x_{n+1})).
+    \]
+\end{definition}
+
+\begin{definition}
+    {相容性}{consistency}
+    若$\lim_{h\to0}R=0$，则称单步法是相容的。
+    \tcblower
+    若存在不依赖$x$的常数$M>0$和整数$p\geq 1$，使得
+    \begin{equation}
+        \norm{y(x+h)-y(x)-h\varphi(x,x+h,y(x),y(x+h))}\leq Mh^{p+1},
+    \end{equation}
+    则称单步法至少$p$阶相容的。若局部截断误差可以展开成
+    \[
+        R=\psi(x,y)h^{p+1}+\bigo(h^{p+2}),
+    \]
+    称$\psi(x,y)h^{p+1}$为局部截断误差的主项。
+\end{definition}
+
+\begin{example}
+    {Euler方法的局部截断误差}{}
+    对于Euler方法\eqref{eqn:Euler}，局部截断误差为
+    \begin{align*}
+        R_{n+1}&=y(x_{n+1})-y(x_n)-h_{n+1}f(x_n,y(x_n))\\
+        &=y(x_n)+h_{n+1}y'(x_n)+\frac{h_{n+1}^2}2y''(x_n)+\bigo(h_{n+1}^3)-y(x_n)-h_{n+1}y'(x_n)\\
+        &=\frac{h_{n+1}^2}2y''(x_n)+\bigo(h_{n+1}^3).
+    \end{align*}
+    因此Euler方法是一阶相容的，局部截断误差的主项为$h_{n+1}^2y''(x_n)/2$。
+\end{example}
+
+\begin{example}
+    {梯形方法的局部截断误差}{}
+    对于梯形方法\eqref{eqn:trapezoidal ode}，局部截断误差为
+    \begin{align*}
+        R_{n+1}&=y(x_{n+1})-y(x_n)-\frac{h_{n+1}}2[f(x_n,y(x_n))+f(x_{n+1},y(x_{n+1}))]\\
+        &=-\frac{h_{n+1}^3}{12}y'''(x_n)+\bigo(h_{n+1}^4).
+    \end{align*}
+    因此梯形方法是二阶相容的，局部截断误差的主项为$-h_{n+1}^3y'''(x_n)/12$。
+\end{example}
+
+\begin{theorem}
+    {单步法相容}{}
+    单步法相容$\iff f(x,y)=\varphi(x,x,y,y)$。
+\end{theorem}
+

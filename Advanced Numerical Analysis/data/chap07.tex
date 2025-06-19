@@ -138,11 +138,11 @@
     {Newton迭代法}{Newton's method}
     若$x_k$是$f(x)=0$根$x^*$的一个近似，由Taylor展开，
     \[
-        f(x^*)=f(x_k)+f'(x_k)(x^*-x_k)+\bigo\bigkh{(x^*-x_k)^2},
+        f(x^*)=f(x_k)+f'(x_k)(x^*-x_k)+\bigo(x^*-x_k)^2,
     \]
     若$f'(x_k)\neq 0$，由$f(x^*)=0$，可得 
     \[
-        x^*=x_k-\frac{f(x_k)}{f'(x_k)}+\bigo\bigkh{(x^*-x_k)^2},
+        x^*=x_k-\frac{f(x_k)}{f'(x_k)}+\bigo(x^*-x_k)^2,
     \]
     忽略二阶项，剩余项作为$x^*$新的近似$x_{k+1}$，可得Newton迭代法：
     \begin{equation}
@@ -211,14 +211,18 @@
 
 \begin{theorem}
     {Newton法的改进}{}
-    若$x^*$为$f$的$r$ - 重根，则依前文推论将式\eqref{eqn:Newton iter}改进为： 
+    若$x^*$为$f$的$r$ - 重根，则依前文推论将Newton法\eqref{eqn:Newton iter}改进为二阶收敛的： 
     \begin{equation}
         \label{eqn:Newton iter r-multiroot}
         x_{k+1}=x_k-r\frac{f(x_k)}{f'(x_k)},
     \end{equation}
-    可以验证这是平方收敛的；
     \tcblower
-    易于验证，$x^*$是$u(x)=f(x)/f'(x)$的单重根。故可对$u(x)$使用Newton法\eqref{eqn:Newton iter}。
+    对
+    \begin{equation}
+        u(x):=\frac{f(x)}{f'(x)},
+    \end{equation}
+    使用Newton法\eqref{eqn:Newton iter}，
+    易于验证，$x^*$是$u$的单重根。
 \end{theorem}
 
 \subsection{割线法}
@@ -226,12 +230,12 @@
 下面再介绍一种多步迭代方法。
 
 \begin{theorem}
-    {割线法}{secant line method}
-    以差商
+    {割线法}{secant method}
+    以$f$在$x_k,x_{k-1}$的割线斜率(差商)
     \[
         f[x_k,x_{k-1}]=\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}
     \]
-    代替Newton法中的导数$f'(x_k)$，即
+    代替Newton法\eqref{eqn:Newton iter}中的导数$f'(x_k)$，称为割线法(secant method)：
     \begin{equation}
         \label{eqn:secant line}
         x_{k+1}=x_k-\frac{x_k-x_{k-1}}{f(x_k)-f(x_{k-1})}f(x_k),
@@ -260,13 +264,13 @@
     \[
         \abs{e_{k+1}}\leq\abs{e_k}\abs{e_{k-1}}M\leq\abs{e_k}M\min(\delta,1/M)
     \]
-    由于$e_k$至少线性收敛，故$\forall\epsilon>0$，$\exists N>0$足够大使得$\forall k>N$，有
+    由于$e_k$至少线性收敛，故 % $\forall\epsilon>0$，$\exists N>0$足够大使得$\forall k>N$，有
     \[
-        \abs{e_{k+1}}\overset\epsilon\approx\abs{e_k}\abs{e_{k-1}}M^*,\quad M^*=\frac{\abs{f''(x^*)}}{2\abs{f'(x^*)}},
+        \abs{e_{k+1}}\approx\abs{e_k}\abs{e_{k-1}}M^*,\quad M^*=\frac{\abs{f''(x^*)}}{2\abs{f'(x^*)}},
     \]
-    其中$a\overset\epsilon\approx b$表示$\abs{a-b}<\epsilon$。对上式取对数得到
+    其中$a_n\approx b_n$表示$\lim_{n\to\infty}a_n-b_n=0$。对上式取对数得到
     \[
-        \ln(M^*\abs{e_{k+1}})\overset{\epsilon'}\approx\ln(M^*\abs{e_k})+\ln(M^*\abs{e_{k-1}}),
+        \ln(M^*\abs{e_{k+1}})\approx\ln(M^*\abs{e_k})+\ln(M^*\abs{e_{k-1}}),
     \]
     当$k\to\infty$时，上式变为等号，符合Fibonacci数列递推式，故阶数为$1+\phi=\frac{1+\sqrt5}2$。
 \end{proof}
@@ -288,21 +292,17 @@
 
 由\thmref{thm:iteration convergence order}，若$\abs{\varphi'(x^*)}\in(0,1)$，则迭代收敛速度为线性的。由于
 \[
-    x_{k+2}-x^*=\varphi'(\xi)(x_{k+1}-x^*)\overset\epsilon\approx\varphi'(x^*)(x_{k+1}-x^*),
+    x_{k+2}-x^*=\varphi'(\xi)(x_{k+1}-x^*)\approx\varphi'(x^*)(x_{k+1}-x^*),
 \]
-下一项$x_{k+1}-x^*\overset{\epsilon'}\approx\varphi'(x^*)(x_k-x^*)$，故可联立消掉$\varphi'(x^*)$，得到：
+下一项$x_{k+1}-x^*\approx\varphi'(x^*)(x_k-x^*)$，故可联立消掉$\varphi'(x^*)$，得到：
 \begin{equation}
-    x^*\overset{\epsilon''}\approx x_k-\frac{(x_{k+1}-x_k)^2}{x_{k+2}-2x_{k+1}+x_k}\equiv x_k-\frac{\D x_k^2}{\D^2 x_k}.
+    x^*\approx x_k-\frac{(x_{k+1}-x_k)^2}{x_{k+2}-2x_{k+1}+x_k}\equiv x_k-\frac{\D x_k^2}{\D^2 x_k}.
 \end{equation}
-其中差分$\D x_k=x_{k+1}-x_k$，而$\D^2x_k=\D x_{k+1}-\D x_k$。和微分记号约定一样，$\D x_k^2\equiv(\D x_k)^2$，而$\D(x_k^2)$需要加括号。
+其中差分$\D x_k=x_{k+1}-x_k$，二阶差分$\D^2x_k=\D x_{k+1}-\D x_k$。和微分记号一样，约定$\D x_k^2\equiv(\D x_k)^2$，而$\D(x_k^2)$需要加括号。
 
 \begin{theorem}
     {Aitken加速方法}{Aitken}
-    若$\exists\lambda$且$\abs\lambda<1$使
-    \[
-        x_{k+1}-x^*=(\lambda+\delta_k)(x_k-x^*),
-    \]
-    且$\delta_k\to0$，当$k$充分大时，可定义
+    若$x_k$至少线性收敛到$x^*$，则可定义
     \begin{equation}
         \label{eqn:Aitken}
         x_k':=x_k-\frac{\D x_k^2}{\D^2x_k},
@@ -314,12 +314,16 @@
 \end{theorem}
 
 \begin{proof}
-    记$e_k:=x_k-x^*$，则 
+    记$e_k:=x_k-x^*$，由$x_k$至少线性收敛，$\exists\lambda$且$\abs\lambda<1$使得 
+    \[
+        e_{k+1}=(\lambda+\delta_k)e_k,\quad\delta_k\to 0.
+    \]
+    则
     \begin{align*}
         \D x_k&=e_{k+1}-e_k=e_k[(\lambda-1)+\delta_k],\\
         \D^2x_k&=e_{k+2}-2e_{k+1}+e_k=e_k[(\lambda+\delta_{k+1})(\lambda+\delta_k)-2(\lambda+\delta_k)+1]=e_k[(\lambda-1)^2+\mu_k],
     \end{align*}
-    其中$\mu_k=\lambda(\delta_{k+1}+\delta_k)-2\delta_k+\delta_k\delta_{k+1}\to 0$。当$k$充分大时，$\D^2x_k\neq 0$，故可定义$x_k'$，且
+    其中$\mu_k=\lambda(\delta_{k+1}+\delta_k)-2\delta_k+\delta_k\delta_{k+1}\to 0$。当$k$充分大时，$\D^2x_k\neq 0$，可定义$x_k'$，且
     \[
         \lim_{k\to\infty}\frac{x_k'-x^*}{x_k-x^*}=\lim_{k\to\infty}1-\frac{[(\lambda-1)+\delta_k]^2}{(\lambda-1)^2+\mu_k}=0.
         \qedhere
@@ -336,27 +340,27 @@
     {Steffensen迭代法}{Steffensen}
     对Aitken加速公式\eqref{eqn:Aitken}利用$x_{k+1}=\varphi(x_k),\,x_{k+2}=\varphi(\varphi(x_k))$作为新的迭代公式：
     \[
-        x_{k+1}=x_k-\frac{(\varphi(x_k)-x_k)^2}{\varphi(\varphi(x_k))-2\varphi(x_k)+x_k}=\frac{x_k\varphi(\varphi(x_k))-\varphi(x_k)^2}{\varphi(\varphi(x_k))-2\varphi(x_k)+x_k}.
+        \hat x_{k+1}=\hat x_k-\frac{(\varphi(\hat x_k)-\hat x_k)^2}{\varphi(\varphi(\hat x_k))-2\varphi(\hat x_k)+\hat x_k}.
     \]
     这实际上根据$\varphi$定义了新的迭代函数
     \begin{equation}
-        \psi(x)=\frac{x\varphi(\varphi(x))-\varphi(x)^2}{\varphi(\varphi(x))-2\varphi(x)+x}.
+        \psi(x)=x-\frac{(\varphi(x)-x)^2}{\varphi(\varphi(x))-2\varphi(x)+x}=\frac{x\varphi(\varphi(x))-\varphi(x)^2}{\varphi(\varphi(x))-2\varphi(x)+x}.
     \end{equation}
     若$x^*$是$\psi$的不动点，则$x^*$也是$\varphi$的不动点；
 
-    若$x^*$是$\varphi\in\cont^1(U)$的不动点且$\varphi'(x^*)\neq 1$，则$x^*$是$\psi$的不动点。
+    若$x^*$是$\varphi$的不动点，$\varphi\in\cont^1(U)$且$\varphi'(x^*)\neq 1$，则$x^*$是$\psi$的不动点。
 \end{theorem}
 
 \begin{proof}
-    由$\psi$表达式可得
+    由$\psi$表达式可得，
+    % \[
+    %     (x-\psi(x))(\varphi(\varphi(x))-2\varphi(x)+x)=(\varphi(x)-x)^2,
+    % \]
+    $\psi(x^*)=x^*\implies\varphi(x^*)=x^*$；
+    而$\varphi(x^*)=x^*$时，$\psi(x^*)$出现0/0型，由L'H\^opital法则
     \[
-        (x-\psi(x))(\varphi(\varphi(x))-2\varphi(x)+x)=(\varphi(x)-x)^2,
-    \]
-    故$\psi(x^*)=x^*\implies\varphi(x^*)=x^*$；
-
-    相反，$\varphi(x^*)=x^*$时，$\psi(x^*)$分子分母均为0，L'H\^opital法则给出
-    \[
-        \psi(x^*)=\frac{\varphi(\varphi(x^*))+x^*\varphi'(\varphi(x^*))\varphi'(x^*)-2\varphi(x^*)\varphi'(x^*)}{\varphi'(\varphi(x^*))\varphi'(x^*)-2\varphi'(x^*)+1}=x^*.
+        \psi(x^*)=x^*-\lim_{x\to x^*}\frac{(\varphi(x)-x)^2}{\varphi(\varphi(x))-2\varphi(x)+x}=x^*-\frac{2(\varphi(x^*)-x^*)(\varphi'(x^*)-1)}{\varphi'(\varphi(x^*))\varphi'(x^*)-2\varphi'(x^*)+1}=x^*.
+        % \frac{\varphi(\varphi(x^*))+x^*\varphi'(\varphi(x^*))\varphi'(x^*)-2\varphi(x^*)\varphi'(x^*)}{\varphi'(\varphi(x^*))\varphi'(x^*)-2\varphi'(x^*)+1}=x^*.
         \qedhere
     \]
 \end{proof}
@@ -374,18 +378,29 @@
 \end{theorem}
 
 \begin{proof}
-    由下式可得：
-    \[
-        \psi(x)-x^*=\frac{(x-x^*)(\varphi(\varphi(x))-x^*)-(\varphi(x)-x^*)^2}{\varphi(\varphi(x))-x^*-2(\varphi(x)-x^*)+x-x^*}.
+    由$\varphi$是$p$阶收敛的：$\varphi(x)-x^*=\Theta(x-x^*)^p,\;\varphi(\varphi(x))-x^*=\Theta(x-x^*)^{2p}$，
+    \begin{align*}
+        \psi(x)-x^*&=\frac{(x-x^*)(\varphi(\varphi(x))-x^*)-(\varphi(x)-x^*)^2}{\varphi(\varphi(x))-x^*-2(\varphi(x)-x^*)+x-x^*}\\
+        &=\frac{\Theta(x-x^*)^{2p+1}-\Theta(x-x^*)^{2p}}{\Theta(x-x^*)^{2p}-\Theta(x-x^*)^p+x-x^*}=\Theta(x-x^*)^{2p-1}.
         \qedhere
-    \]
+    \end{align*}
 \end{proof}
 
 \begin{remark}
     若$\varphi\in\cont^2(U)$且$\varphi'(x^*)\neq 1$，则Steffensen法不但可以提高收敛速度(至少二阶收敛)，在$\abs{\varphi'(x^*)}>1$时还可以把不收敛的方法改进为二阶收敛的方法。
-
     但当$p>1$时，Steffensen法一般好处不大，故其多用于改进线性收敛的情形。
 \end{remark}
+
+\begin{example}
+    {}{}
+    特别地，$\varphi(x)=x+f(x)$，
+    % 则$\varphi(\varphi(x))=\varphi(x+f(x))=x+f(x)+f(x+f(x))$
+    可得
+    \begin{equation}
+        \psi(x)=x-\frac{f(x)^2}{f(x+f(x))-f(x)}.
+    \end{equation}
+    若$f(x^*)=0$，可得$\psi(x^*)=x^*,\;\psi'(x^*)=0$故$x_{k+1}=\psi(x_k)$至少二阶收敛。
+\end{example}
 
 \section{非线性方程组的不动点迭代法}
 
@@ -401,7 +416,7 @@
 
 \begin{definition}
     {向量值函数的连续性}{vector function continuous}
-    给定点$x_0\in D$，若$\forall\epsilon>1,\;\exists\delta>0$使得领域内$\forall x\in B(x_0,\delta)\subset D$均有
+    给定点$x_0\in D$，若$\forall\epsilon>0,\;\exists\delta>0$使得领域内$\forall x\in B(x_0,\delta)\subset D$均有
     \[
         \norm{F(x)-F(x_0)}<\epsilon,
     \]
@@ -441,9 +456,9 @@
 \begin{remark}
     压缩性依赖于范数的选择。如$\varphi(x)=Ax$，其中
     \[
-        A=\begin{bmatrix}
+        \varphi'(x)=A=\begin{bmatrix}
             0.1&0.9\\0&0.1
-        \end{bmatrix}
+        \end{bmatrix}.
     \]
     在2 - 范数下$\norm A_2<1$可压缩，但在无穷范数下$\norm A_\infty=1$不可压缩。
 \end{remark}
