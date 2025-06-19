@@ -1,59 +1,89 @@
 % \setcounter{section}{-1}
+
 \chapter{热力学基本定律}
+
 %\section*{宏观}
-宏观物质可以用很少的量表征。这种特性源于\textit{宏观测量与原子时间尺度相比极其缓慢，与原子空间尺度相比十分粗糙。}宏观体系忽略了系统内部每个粒子的具体运动，正如Anderson所说：\textbf{\textit{More is different.}}
+
+宏观物质可以用很少的量表征。这种特性源于：
+\textit{宏观测量与原子时间尺度相比极其缓慢，与原子空间尺度相比十分粗糙。}
+宏观体系忽略了系统内部每个粒子的具体运动，正如Anderson所说：\textbf{\textit{More is different.}}
 而热力学便是\textit{唯象}地描述多粒子行为的宏观理论。
+
 \section{热力学第零定律}
+
 \begin{definition}{热力学系统}{thermal system}
-	热力学系统(thermal system)是大量微观粒子（分子、原子、电子等）组成的有限宏观体系。
+	热力学系统(thermal system)是大量微观粒子组成的有限宏观体系。
 \end{definition}
-平衡态指宏观性质不随时间改变的状态。自由度：独立的宏观量数目。
+
+平衡态指宏观性质不随时间改变的状态。
+
 \begin{theorem}{热力学第零定律：热平衡定律}{thermal equilibrium}
-	若系统A和系统B平衡，和系统C也平衡，则B和C平衡。
+	若系统A和系统B热平衡，且系统A和系统C也热平衡，则B和C热平衡。
 \end{theorem}
-因此互为平衡的体系有一共同的物理性质：温度$T$。
+
+\begin{corollary}
+	互为热平衡的体系有一共同的物理性质，称为温度$T$。
+\end{corollary}
+
 \begin{definition}{物态方程}{state equation}
-	物态方程(state equation)是$T$与其它状态参量间的关系。如：
-	\begin{compactitem}
-		\item 理想气体：
-		\begin{equation}
-			pv=nRT.
-		\end{equation}
-		\item Van der Waals气体
-		\begin{equation}
-			\biggkh{p+a\frac{n^2}{V^2}}(V-nb)=nRT.
-		\end{equation}
-	\end{compactitem}
+	物态方程(state equation)是温度$T$与其它状态参量间的关系。
 \end{definition}
+
+\begin{example}
+	{理想气体物态方程}{}
+	理想气体(ideal gas)的压强$p$、体积$V$、温度$T$和物质的量$n$之间的关系为：
+	\begin{equation}
+		pV=nRT.
+	\end{equation}
+	其中$R=\SI{8.314}{J/K.mol}$是理想气体常数。
+\end{example}
+
+\begin{example}
+	{Van der Waals气体物态方程}{}
+	Van der Waals气体考虑了分子间的相互作用和分子体积：
+	\begin{equation}
+		\biggkh{p+a\frac{n^2}{V^2}}(V-nb)=nRT.
+	\end{equation}
+	其中$a$与分子间的相互作用有关，$b$与分子体积有关。
+\end{example}
+
 \section{热力学第一定律}
+
+热力学系统在外界影响下，会从一个平衡态过渡到另一个平衡态，在这个过程中的任一时刻，系统的状态都不是平衡态。
+但是如果这个过程中的变化速度足够慢，每一瞬时都可以无限接近平衡态，我们就可以当做平衡态去处理这个过程。
+
 \begin{definition}{准静态过程}{quasistatic process}
-	准静态过程(quasistatic process)指每一瞬时，状态无限接近平衡态的过程。
+	准静态过程(quasistatic process)指每一瞬时，系统状态都无限接近平衡态的过程。
 \end{definition}
 
 系统的能量包括内能$U$和整体运动能量。对于封闭系统，能量交换有功$W$和热量$Q$两种方式。准静态过程中，
 \begin{align}
-	\vd W=\sum Y_i\d y_i,
+	\vd W=\sum_iY_i\d y_i,
 \end{align}
-$(Y_i,y_i)$分别是广义力和广义坐标，如$(-p,V),(\mu_0H,M),(\sigma,A)$等。
+其中$(Y_i,y_i)$分别是广义力和广义坐标，如$(-p,V),(\mu_0H,M)$等。
+
 \begin{theorem}{热力学第一定律：能量守恒定律}{Energy Conservation Law}
 	一个热力学系统的内能增量$\d U$等于外界对它所做的功$\vd W$与外界向它传递的热量$\vd Q$的和：
 	\begin{align}
 		\d U=\vd W+\vd Q.
 	\end{align}
 \end{theorem}
-%关于能量的\textit{可测量性}。由能量守恒，
-\indent 如果系统是\textbf{绝热}（$\vd Q\equiv 0$）的，我们便可以用机械功$\vd W$测量内能的变化$\D U$，通过指定基准态的内能$U_0$就可以得出任意状态的内能$U$。进而我们可以测量导热系统的传热$\vd Q$。
+
+\begin{remark}
+	如果系统是\textbf{绝热}（$\vd Q\equiv 0$）的，我们便可以用机械功$\vd W$测量内能的变化$\D U$，通过指定基准态的内能$U_0$就可以得出任意状态的内能$U$。进而我们可以测量导热系统的传热$\vd Q$。
+\end{remark}
+
 \begin{definition}{热容}{heat capacity}
-	定义热容(heat capacity)
+	定义热容(heat capacity)是物质在单位温度变化下所吸收或放出的热量：
 	\begin{equation}
 		C:=\lim_{\D T\to0}\frac{\D Q}{\D T}.
 	\end{equation}
 	比热容(specific heat capacity)是单位质量的热容。
 \end{definition}
-显然，热容与过程相关。等容热容和等压热容分别为
-\begin{align}
-	C_V=\kh{\pv UT}_V,\quad C_p=\kh{\pv HT}_p.
-\end{align}
+
+\begin{remark}
+	显然，热容与过程相关，可定义等容热容$C_V$和等压热容$C_p$。
+\end{remark}
 
 内能标准全微分式：将$U$全微分式中各变量微分前的系数用可测量表达出来。
 \begin{example}{静流体系统}{static fluid system}
@@ -102,13 +132,14 @@ $(Y_i,y_i)$分别是广义力和广义坐标，如$(-p,V),(\mu_0H,M),(\sigma,A)$
 \begin{example}{熵的计算}{Calculating Entropy}
 	将质量相同而温度分别为$T_1$和$T_2$的两杯水在等压下绝热的混合，求熵变。
 
-	\textbf{解：}终态温度$T=(T_1+T_2)/2$，两杯水的熵变分别为
+	\textbf{解：}终态温度$T=(T_1+T_2)/2$，第一杯水的熵变为
 	\[
-		\D S_1=\int_{T_1}^T\frac{C_p\d T}T=C_p\ln\frac{T_1+T_2}{2T_1},\quad\D S_2=C_p\ln\frac{T_1+T_2}{2T_2}.
+		\D S_1=\int_{T_1}^T\frac{C_p\d T}T=C_p\ln\frac{T_1+T_2}{2T_1},
 	\]
+	第二杯水的熵变$\D S_2$同理可求，
 	总熵增
 	\[
-		\D S=C_p\ln\frac{(T_1+T_2)^2}{4T_1T_2}\geqslant 0.
+		\D S_1+\D S_2=C_p\ln\frac{(T_1+T_2)^2}{4T_1T_2}\geqslant 0.
 	\]
 	取等号当且仅当$T_1=T_2$。
 \end{example}
