@@ -40,26 +40,46 @@
 % 而且把整个实验装置旋转一定角度后发现干涉条纹依然没有发生任何改变！
 这也就从实验上证明了以太并不存在，光速恒为常数$c$！
 \section{狭义相对论}
+
+\paragraph{Einstein的两个假设}
+
 此节仅介绍必要内容，而略去狭义相对论的大部分推导内容。%如尺缩效应、钟慢效应等。
+
+\begin{theorem}
+    {相对性假设}{postulate of ralativity}
+    在一个给定的参照系中，一切自然规律和实验结果都与整个系统的平动(translational motion)无关。
+    更精确地说，存在无穷多个互相作匀速直线相对运动的三维等效Euclide参照系，称为惯性系
+    (inertial reference frame)。在惯性系中，一切物理现象都以等同方式发生，
+\end{theorem}
+
+\begin{theorem}
+    {光速不变假设}{postulate of the constancy of the speed of light}
+    光速有限且与光源的运动无关。
+\end{theorem}
+
 \subsection{Lorentz变换}
-给定惯性系$S$和$S'$，$S'$系相对$S$系有$x$方向的相对速度$v$。
-同一事件(event)在$S,S'$系中的坐标分别为$(ct,x,y,z)$和$(ct',x',y',z')$，则Lorentz变换给出：
-%\footnote{为了之后计算方便，也为了更好地凸显出理论的对称性，我们把$c$这个常数定义成1，也就是把光速$c$定义成一个标准单位．这样处理后时间和空间的量纲也统一起来了}
-\begin{equation}
-	\begin{bmatrix}
-		ct'\\x'\\y'\\z'
-	\end{bmatrix}=
-	\begin{bmatrix}
-		\gamma&\gamma\beta\\-\gamma\beta&\gamma\\ &&1\\ &&&1
-	\end{bmatrix}
-	\begin{bmatrix}
-		ct\\x\\y\\z
-	\end{bmatrix}
-\end{equation}
-其中相对速度$\beta\equiv v/c$，Lorentz因子
-\[
-    \gamma\equiv\frac1{\sqrt{1-\beta^2}}.
-\]
+
+\begin{theorem}
+    {Lorentz变换}{Lorentz transformation}
+    给定惯性系$S$和$S'$，$S'$系相对$S$系有$x$方向的相对速度$v$。
+    同一事件(event)在$S,S'$系中的坐标分别为$(ct,x,y,z)$和$(ct',x',y',z')$，则Lorentz变换给出：
+    %\footnote{为了之后计算方便，也为了更好地凸显出理论的对称性，我们把$c$这个常数定义成1，也就是把光速$c$定义成一个标准单位．这样处理后时间和空间的量纲也统一起来了}
+    \begin{equation}
+    	\begin{bmatrix}
+    		ct'\\x'\\y'\\z'
+    	\end{bmatrix}=
+    	\begin{bmatrix}
+    		\gamma&\gamma\beta\\-\gamma\beta&\gamma\\ &&1\\ &&&1
+    	\end{bmatrix}
+    	\begin{bmatrix}
+    		ct\\x\\y\\z
+    	\end{bmatrix}
+    \end{equation}
+    其中相对速度$\beta\equiv v/c$，Lorentz因子
+    \[
+        \gamma\equiv\frac1{\sqrt{1-\beta^2}}.
+    \]
+\end{theorem}
 
 如果质点在$S$系中有$x$方向的速度$u=\d x/\d t$，则其在$S'$中的速度为
 \begin{equation}
@@ -125,46 +145,52 @@
     \item 若$s^2>0$，则是类空的(spacelike)，因为这是同时不同地事件间隔的符号；
     \item 若$s^2=0$，则是类光的(lightlike)，因为这是当两个事件由一个以光速传播的信号连接时所保持的关系。
 \end{itemize}
-在微分形式上，无穷小间隔是
-\begin{equation}
-    \d s^2=g_{\mu\nu}\d x^\mu\nd x^\nu.
-\end{equation}
-式中$g_{\mu\nu}$是度规张量(metric tensor)。对于狭义相对论的平坦时空（广义相对论中为弯曲时空），采取Minkowski度规：
-\footnote{Minkowski度规有两种：
-\begin{itemize}
-    \item 东海岸度规$\eta_{\mu\nu}=\diag(-1,1,1,1)$，常用于弦论和宇宙学，其好处是空间分量上的度规分量和我们平时习惯的Euclide空间的度规相同，Griffiths采用此；
-    \item 西海岸度规$\eta_{\mu\nu}=\diag(1,-1,-1,-1)$，常用于粒子物理学，Jackson采用此；
-    \item 其实还有几乎没人喜欢的$\i ct$。
-\end{itemize}
-}
-\begin{equation}
-    g_{\mu\nu}\equiv
-    \begin{bmatrix}
-        -1\\ &1\\ &&1\\ &&&1
-    \end{bmatrix}.
-\end{equation}
-逆变度规张量$g^{\mu\nu}$应满足
-\begin{equation}
-    g_{\mu\nu}g^{\nu\rho}=\delta_\mu{}^\rho.
-\end{equation}
-% 为$g_{\mu\nu}$的归一化余子式。
-对平坦时空来说，二者相同$g_{\mu\nu}=g^{\mu\nu}$。
+\begin{definition}
+    {度规张量}{metric tensor}
+    在微分形式上，无穷小间隔是
+    \begin{equation}
+        \d s^2=g_{\mu\nu}\d x^\mu\nd x^\nu.
+    \end{equation}
+    式中$g_{\mu\nu}$是度规张量(metric tensor)。对于狭义相对论的平坦时空（广义相对论中为弯曲时空），采取Minkowski度规：
+    \begin{equation}
+        g_{\mu\nu}\equiv
+        \begin{bmatrix}
+            -1\\ &1\\ &&1\\ &&&1
+        \end{bmatrix}.
+    \end{equation}
+    逆变度规张量$g^{\mu\nu}$应满足
+    \begin{equation}
+        g_{\mu\nu}g^{\nu\rho}=\delta_\mu{}^\rho.
+    \end{equation}
+    % 为$g_{\mu\nu}$的归一化余子式。
+    对平坦时空来说，二者相同$g_{\mu\nu}=g^{\mu\nu}$。
+\end{definition}
+\begin{remark}
+    Minkowski度规有两种：
+    \begin{itemize}
+        \item 东海岸度规$\eta_{\mu\nu}=\diag(-1,1,1,1)$，常用于弦论和宇宙学，其好处是空间分量上的度规分量和我们平时习惯的Euclide空间的度规相同，Griffiths采用此；
+        \item 西海岸度规$\eta_{\mu\nu}=\diag(1,-1,-1,-1)$，常用于粒子物理学，Jackson采用此；
+        \item 其实还有几乎没人喜欢的$\i ct$。
+    \end{itemize}
+\end{remark}
 
-逆变坐标$x_\mu$可由协变坐标$x^\mu$和度规张量得到
-\begin{equation}
-    x_\mu=g_{\mu\nu}x^\nu.
-\end{equation}
-同样有$x^\mu=g^{\mu\nu}x_\nu$，写成分量形式就是
-\[
-    x_0=-x^0,\enspace x_1=x^1,\enspace x_2=x^2,\enspace x_3=x^3.
-\]
+\begin{corollary}
+    逆变坐标$x_\mu$可由协变坐标$x^\mu$和度规张量得到
+    \begin{equation}
+        x_\mu=g_{\mu\nu}x^\nu.
+    \end{equation}
+    同样有$x^\mu=g^{\mu\nu}x_\nu$，写成分量形式就是
+    \[
+        x_0=-x^0,\enspace x_1=x^1,\enspace x_2=x^2,\enspace x_3=x^3.
+    \]
+\end{corollary}
 
 \subsection{相对论动力学}
 
 \paragraph{相对论运动学}
 
 由于钟慢效应(time dilation)，在静止系中的时间流速是最慢的，可定义
-固有时间(proper time)
+固有时间(proper time)：
 \[
     \d\tau=\frac{\d t}{\sqrt{1-u^2/c^2}}\equiv\gamma_u\d t.
 \]
@@ -240,13 +266,9 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
 \[
     \bm F\equiv\dv{\bm p}t,
 \]
-满足
+因此功能关系仍然满足：
 \begin{equation}
-    \dv{\bm p}t\cdot\bm u=\dd t\frac{m\bm u}{\sqrt{1-u^2/c^2}}\cdot\bm u=\dv Et.
-\end{equation}
-因此功能关系：
-\begin{equation}
-    W\equiv\int\bm F\cdot\d\bm\ell=\int\dv{\bm p}t\cdot\bm u\d t=\D E.
+    W\equiv\int\bm F\cdot\d\bm\ell=\int\dv{\bm p}t\cdot\bm u\d t=\int\dd t\frac{m\bm u}{\sqrt{1-u^2/c^2}}\cdot\bm u\d t=\D E.
 \end{equation}
 而Newton第三定律在不同地的时候不再成立，因为在相对论中，同时性是相对的。
 
@@ -265,21 +287,21 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
 \section{相对论电动力学}
 为什么会有磁场？利用静电学和相对论，我们可以计算出载电流线和运动电荷之间的磁力，而不需要援引磁力定律。
 \begin{example}{导线的磁场力}{}
-    $S$系中有一导线，其中正负电荷静止时的线密度为$\pm\lambda_0$，通电正负电荷后在导线中反向运动，速度为$v_\pm=\pm v$，则正负电荷的线密度为$\lambda_\pm=\pm\gamma\lambda_0$，电流为$I=2\lambda v$，导线外距离$r$处有一电荷$q$沿平行于导线的方向以速度$u<v$运动。
+    $S$系中有一导线，其中正负电荷静止时的线密度为$\pm\lambda_0$，通电正负电荷后在导线中反向运动，速度$v_\pm=\pm v$，则正负电荷的线密度为$\lambda_\pm=\pm\gamma\lambda_0$，电流为$I=2\lambda_0v$，导线外距离$r$处有一电荷$q$沿平行于导线的方向以速度$u<v$运动。
 
     %$S$系中导线没有净电荷，因此电荷$q$不受电场力。
     \begin{center}
         \begin{tikzpicture}[xscale=.8]
-            \draw[->, thick](-3, 2.3)node[left]{$\lambda$}--(-2, 2.3)node[right]{$\bm v$};
-            \draw[->, thick](3, 1.7)node[right]{$-\lambda$}--(2, 1.7)node[left]{$-\bm v$};
+            \draw[->, thick](-3, 2.3)node[left]{$\lambda_+$}--(-2, 2.3)node[right]{$\bm v_+$};
+            \draw[->, thick](3, 1.7)node[right]{$\lambda_-$}--(2, 1.7)node[left]{$\bm v_-$};
             \draw[thick](-3, 2)--(3, 2);
             \draw[dashed](0, 0)--(0, 2)node[midway, right]{$r$};
             \draw[->, thick](0, 0)--(.5, 0)node[above]{$\bm u$};
             \fill[black](0, 0)circle(0.1)node[left]{$q$};
         \end{tikzpicture}
         \begin{tikzpicture}[xscale=.8]
-            \draw[->, thick](-3, 2.3)node[left]{$\lambda$}--(-2, 2.3)node[right]{$\bm v$};
-            \draw[->, thick](3, 1.7)node[right]{$-\lambda$}--(2, 1.7)node[left]{$-\bm v$};
+            \draw[->, thick](-3, 2.3)node[left]{$\lambda_+'$}--(-2.2, 2.3)node[right]{$\bm v_+'$};
+            \draw[->, thick](3, 1.7)node[right]{$\lambda_-'$}--(1.8, 1.7)node[left]{$\bm v_-'$};
             \draw[thick](-3, 2)--(3, 2);
             \draw[dashed](0, 0)--(0, 2)node[midway, right]{$r$};
             \fill[black](0, 0)circle(0.1)node[left]{$q$};
@@ -289,9 +311,9 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
     转换到粒子静止的参考系$S'$，则电荷$q$不受磁场力，仅受电场力。
     $S'$系中正负电荷的速度为
     \[
-        v_\pm=\frac{v\mp u}{1\mp vu/c^2},
+        v_\pm'=\frac{v_\pm-u}{1-v_\pm u/c^2}=\frac{\pm v-u}{1\mp vu/c^2},
     \]
-    正负电荷线密度变为$\lambda_\pm=\pm\gamma_{v_\pm}\lambda_0$，总电荷线密度和电场为
+    正负电荷线密度变为$\lambda_\pm'=\pm\gamma_{v_\pm'}\lambda_0$，总电荷线密度和电场为
     \[
         \lambda\tot=-\frac{2vu}{c^2}\gamma_u\lambda,\quad E=\frac{\lambda\tot}{2\pi\varepsilon_0r}.
     \]
