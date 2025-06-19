@@ -1,10 +1,12 @@
 \chapter{不等式与极限定理}
+
 \section{概率不等式}
 \begin{theorem}{Markov不等式}{Markov inequality}
 	若随机变量$X>0$，则$\forall\varepsilon>0$，有
-	\begin{align}
+	\begin{equation}
+		\label{eq:Markov ineq}
 		\P(X\geqslant\varepsilon)\leqslant\frac{\E(X)}\varepsilon.
-	\end{align}
+	\end{equation}
 \end{theorem}
 \begin{proof}
 	引入示性函数(characteristic function)
@@ -17,7 +19,7 @@
 	则$I(X\geqslant\varepsilon)\leqslant X/\varepsilon$，两边取期望，即证。
 \end{proof}
 \begin{theorem}{Chebyshev不等式}{Chebyshev inequality}
-	若随机变量$X$方差$\Var(X)$存在，则$\forall\varepsilon>0$
+	若随机变量$X$的方差$\Var(X)$存在，则$\forall\varepsilon>0$均有
 	\begin{align}
 		\P(|X-\E(X)|\geqslant\varepsilon)\leqslant\frac{\Var(X)}{\varepsilon^2}.
 	\end{align}
@@ -26,6 +28,7 @@
 	由Markov不等式
 	\begin{align*}
 		\P\bigfkh{\bigkh{X-\E(X)}^2\geqslant\varepsilon^2}\leqslant\frac{\E\bigfkh{\bigkh{X-\E(X)}^2}}{\varepsilon^2}\equiv\frac{\Var(X)}{\varepsilon^2}.
+		\qedhere
 	\end{align*}
 \end{proof}
 \begin{theorem}{Chernoff不等式}{Chernoff inequality}
@@ -52,6 +55,16 @@
 	\end{align*}
 	比较而言，Markov仅用到了均值的信息，Chebyshev用到了方差的信息，Chernoff用到了各阶矩的信息。而结果也是越来越好的。
 \end{example}
+
+\begin{theorem}
+	{Paley-Zygmund不等式}{Paley-Zygmund inequality}
+	若随机变量$X>0$，则$\forall\lambda\in(0,1)$，有
+	\begin{equation}
+		\label{eq:Paley-Zygmund ineq}
+		\P(X\geqslant\lambda\E(X))\geqslant(1-\lambda)^2\frac{\E(X)^2}{\E(X^2)}.
+	\end{equation}
+\end{theorem}
+
 \section{大数定律}
 为何能以某事件发生的频率作为该事件的概率的估计？
 \begin{definition}{依概率收敛}{converge in probability}
@@ -123,6 +136,7 @@ SLLN说明：概率的频率解释是合理的。也是Monte Carlo积分的原�
 	但$\lim_{n\to\infty}Y_n$不存在（总有破坏的区间），也就不存在以概率1收敛。
 \end{example}
 事实上以概率1收敛可以推出依概率收敛，但我就不证了。
+
 \section{中心极限定理}
 \begin{theorem}{Lindberg-Levi中心极限定理}{Lindberg-Levi central limit theorem}
 	随机变量序列$X_1, X_2,\ldots$ iid，且期望$\mu$和方差$\sigma^2$存在。$\avg X$的标准化变量为
@@ -213,4 +227,5 @@ SLLN说明：概率的频率解释是合理的。也是Monte Carlo积分的原�
 		\item CLT的应用：$\avg X\dotsim\Norm(\mu,\sigma^2/n),\enspace\sum X_i\dotsim\Norm(n\mu,n\sigma^2)$；
 		\item 三种收敛：$\asto,\pto,\dto$\,(依分布收敛)。
 	\end{compactenum}
+
 \end{remark}
