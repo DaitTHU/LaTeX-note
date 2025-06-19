@@ -84,6 +84,7 @@
 % \let\oldpageref\pageref
 % \renewcommand{\pageref}[1]{第 \oldpageref{#1} 页}
 
+\RequirePackage{float}
 \RequirePackage{graphicx}
 \RequirePackage[hypcap=false]{caption}
 \RequirePackage{subcaption}
