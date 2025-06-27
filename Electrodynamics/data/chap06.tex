@@ -211,23 +211,7 @@ $\bm E$是圆偏振的(circular polarized)，可以写成
 
 若$E_\pm$幅值不同，则$\bm E$是椭圆偏振的(elliptically polarized)。$\bm E$的终点在一个椭圆上旋转，如\figref{fig:elliptical polarization} 所示。
 \begin{center}
-	\begin{tikzpicture}[scale=1.5]
-        \coordinate(O)at(0, 0);
-        \coordinate(x)at(2, 0);
-        \coordinate(a)at(31.68:2.5);
-		\draw[->](-2, 0)--(x)node[below]{$\epsilon_1$};
-		\draw[->](0, -1.5)--(0, 1.5)node[left]{$\epsilon_2$};
-        \node[above left]at(O){$O$};
-		\draw[dashed, rotate=31.68](O)ellipse[x radius=1.618, y radius=.618];
-        \draw[->, gray, rotate=31.68](-2.1, 0)--(2.1, 0);
-        \draw[->, gray, rotate=31.68](0, -1)--(0, 1);
-        \draw[dotted](1.414, .707)--(1.414, 0)node[below]{$\abs{\bm E_1}$};
-        \draw[dotted](-1.414, -.707)--(-1.414, 0)node[above]{$-\abs{\bm E_1}$};
-        \draw[dotted](1, 1)--(0, 1)node[left]{$\abs{\bm E_2}$};
-        \draw[dotted](-1, -1)--(0, -1)node[right]{$-\abs{\bm E_2}$};
-        \draw[very thick, ->](0, 0)--(1, 1)node[above]{$\bm E$};
-        \pic[draw, angle radius=20, angle eccentricity=1.5, "$\psi$"]{angle=x--O--a};
-	\end{tikzpicture}
+	\includegraphics{figures/tikz/polarization_elli.pdf}
     \includegraphics[width=0.5\linewidth]{figures/polarization_elli.pdf}
     \captionof{figure}{椭圆偏振}
     \label{fig:elliptical polarization}
@@ -288,36 +272,35 @@ $\bm E$是圆偏振的(circular polarized)，可以写成
     \]
 \end{corollary}
 
-\begin{example}{Stokes参数的例子}{}
-    \begin{compactitem}
-    	\item 线偏振：
-        \begin{compactitem}
-            \item 水平(horizontal)和垂直(vertical)：$[1\enspace\pm 1\enspace0\enspace0];$
-            \item $\pm 45\degree$：$[1\enspace0\enspace\pm 1\enspace0];$
-        \end{compactitem}
-    	\item 圆偏振：右旋和左旋
-    	\[
-            [1\enspace0\enspace0\enspace\pm 1];
-        \]
-    	\item 无偏振(unpolarized)光或自然光(natural light)：$\bm E$由无数个无规则取向的偏振光叠加，各方向振幅相同，因此$s_1,s_2,s_3$均为零
-        \[
-            [1\enspace0\enspace0\enspace0].
-        \]
-    \end{compactitem}
-\end{example}
+\begin{table}[h]
+    \centering
+    \caption{典型偏振的Stokes参数}
+    \begin{tabular}{ccc}
+        \toprule
+        偏振 & 取向 & Stokes参数\\
+        \midrule
+        \multirow{2}{*}{线偏振} & 水平(horizontal)和垂直(vertical) & $[1\enspace\pm1\enspace0\enspace0]$ \\
+         & $\pm 45\degree$ & $[1\enspace0\enspace\pm1\enspace0]$ \\
+        圆偏振 & 右旋和左旋 & $[1\enspace0\enspace0\enspace\pm1]$ \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:Stokes parameters}
+\end{table}
 
-\begin{remark}
-    现实中，即使是%目前应用的
-    单色性(monochromatic)很好的辐射波束也是由有限波列(finite wave trains)叠加成的，因而根据Fourier定理，它包含一个频率范围，即不完全是单色的。%一种看法认为$a_i,\vd_i$随时间变化缓慢，
-    这时可观测的Stokes参数就是在一个较长时间尺度上的平均，比如：
-    \[
-        s_2=2\ave{a_1a_2\cos(\vd_2-\vd_1)},
-    \]
-    求平均的结果是：准单色波束的Stokes参数满足不等式：
-    \[
-        s_0^2\geqslant s_1^2+s_2^2+s_3^2,
-    \]
-\end{remark}
+现实中，即使是%目前应用的
+单色性(monochromatic)很好的辐射波束也是由有限波列(finite wave trains)叠加成的，因而根据Fourier定理，它包含一个频率范围，即不完全是单色的。%一种看法认为$a_i,\vd_i$随时间变化缓慢，
+这时可观测的Stokes参数就是在一个较长时间尺度上的平均，比如：
+\[
+    s_2=2\ave{a_1a_2\cos(\vd_2-\vd_1)},
+\]
+求平均的结果是：准单色波束的Stokes参数满足不等式：
+\[
+    s_0^2\geqslant s_1^2+s_2^2+s_3^2,
+\]
+无偏振(unpolarized)光或自然光(natural light)：$\bm E$由无数个无规则取向的偏振光叠加，各方向振幅相同，因此$s_1=s_2=s_3=0$，Stokes参数为
+\[
+    [1\enspace0\enspace0\enspace0].
+\]
 
 \begin{definition}{偏振度}{}
     定义偏振度是总光强$I\tot$中椭圆偏振的成分$I_\text{elp}$占比：
