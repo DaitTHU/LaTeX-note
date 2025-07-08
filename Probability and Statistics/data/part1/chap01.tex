@@ -31,171 +31,258 @@
     特别地，$\Omega$是必然事件，$\varnothing$是不可能事件。
 \end{definition}
 
-\paragraph{事件的运算}借助集合语言以及Venn图
-\begin{compactitem}
-	\item 余 $A\c = \Omega\backslash A$，对立$A=B\c$
-	\item 和与差 $A+B, A-B$
-	\item 积 $AB = A\cap B$，互斥$AB=\varnothing$
-	\item de Morgan定律\footnote{此处省略了上下标$i=1$和$\infty$，后同。}
+\begin{definition}
+	{事件的运算}{operations on events}
+	
+	借助集合语言以及Venn\figref{fig:venn}，
+	可定义事件的运算：
+	
+	\begin{compactitem}
+		\item 并(union) $A\cup B:=\set x{x\in A\lor x\in B}$；
+		\item 交(intersection) $A\cap B:=\set x{x\in A\land x\in B}$；
+			\subitem 若$AB=\varnothing$，则称$A,B$互斥(mutually exclusive)。
+		\item 差(difference) $A\setminus B:=\set x{x\in A\land x\notin B}$；
+		\subitem 特别地，余(complementary) $A\c:=\Omega\setminus A$，称$A$和$A\c$互为对立事件(complementary event)；
+	\end{compactitem}
+	
+	\begin{center}
+		\includegraphics{figures/tikz/venn.pdf}
+		\captionof{figure}{Venn图}
+		\label{fig:venn}
+	\end{center}
+\end{definition}
+
+\begin{theorem}
+	{de Morgan定律}{de Morgan's laws}
+	对于事件集$\{A_i\}_{i\in I}$，其中指标集$I$可以是有限集或无限集，有恒等式：
 	\[
-		\kh{\sum A_i}\c = \prod A_i\c,
+		\kh{\bigcup\nolimits_{i\in I} A_i}\c = \bigcap\nolimits_{i\in I} A_i\c.
 	\]
-\end{compactitem}
+\end{theorem}
 
 \paragraph{概率的解释}古典解释，等可能性，Bertrand悖论；频率解释，主观解释。
 
 \section{公理化定义}
-定义样本空间$\Omega$的幂集$2^\Omega$为$\Omega$所有子集构成的集合，则
-\begin{definition}{事件集类}{event set}
-	事件集类$\cF\subset 2^\Omega$是$\Omega$的$\sigma$-代数，满足事件运算的封闭性：
-	\begin{compactenum}
-		\item $\Omega \in \cF;$
-		\item $\forall A \in \cF, A\c \in \cF;$
-		\item 特别地，若$\forall A_i \in \cF$，则
-		$
-			\sum A_i \in \cF.
-		$
-	\end{compactenum}
+
+概率函数$\P$应给出事件(及其运算)的概率。因此，$\P$作为一个映射的定义域(称为事件空间$\cF$)除了应包括样本空间$\Omega$和其若干子集外，还应满足事件运算的封闭性。
+
+\begin{definition}
+	{幂集}{power set}
+	定义$\Omega$的幂集(power set)为$\Omega$所有子集构成的集合，记作$2^\Omega$。
 \end{definition}
-\begin{example}{$\sigma$-代数}{sigma-Algebra}
+
+\begin{definition}{$\sigma$-代数}{sigma-algebra}
+	幂集的子集$\Sigma\subset 2^\Omega$若满足事件运算的封闭性：
+	\begin{compactenum}
+		\item $\Omega \in \Sigma;$
+		\item $\forall A \in \Sigma, A\c \in \Sigma;$
+		\item 特别地，若$\forall A_i \in \Sigma$，则
+		$\bigcup\nolimits_{i\in I} A_i \in \Sigma.$
+	\end{compactenum}
+	则称$\Sigma$是$\Omega$的$\sigma$-代数($\sigma$-algebra)。
+\end{definition}
+
+借助测度论的语言，我们要求事件空间$\cF$必须是样本空间$\Omega$的一个$\sigma$-代数。
+
+\begin{example}{$\sigma$-代数}{sigma-algebra}
 	若$\Omega=\{a,b,c,d\}$，则一个平凡的$\sigma$-代数
 	\[
-		\cF_1=\{\varnothing, \Omega\},
+		\Sigma_1=\{\varnothing, \Omega\},
 	\]
 	另一个$\sigma$-代数可以为
 	\[
-		\cF_2=\{\varnothing, \{a\},\{b,c,d\},\Omega\}.
+		\Sigma_2=\{\varnothing,\{a\},\{b,c,d\},\{b\},\{a,c,d\},\{a,b\},\{c,d\},\Omega\}.
 	\]
 \end{example}
 \begin{definition}{概率}{probability}
-	定义概率(probability)~$\P:\cF\to\RR$，满足以下公理：
+	定义概率(probability)~$\P:\cF\to\RR$，满足：
 	\begin{compactenum}
 		\item $\forall A\in\cF,\P(A)\geqslant 0;$
 		\item $\P (\Omega)=1;$
 		\item （\textbf{加法公理}）~$\forall A_i \in \cF,A_iA_j=\varnothing(i\neq j),$
-		\begin{align}
-			\P\kh{\sum A_i}=\sum\P(A_i).
-		\end{align}
+		\begin{equation}
+			\P\kh{\bigcup\nolimits_{i\in I} A_i}=\sum\nolimits_{i\in I}\P(A_i).
+		\end{equation}
 	\end{compactenum}
-	$(\Omega,\cF,\P)$构成了概率空间(probability space)。
+	称$(\Omega,\cF,\P)$构成了概率空间(probability space)。
 \end{definition}
-由定义，可推出以下命题：
-\begin{compactenum}
-	\item $\forall A\in\cF,\P(A)\leqslant 1;$
-	\item $\P(\varnothing)=0;$
-	\item $\forall A_i \in \cF,A_iA_j=\varnothing(i\neq j),$
-	\[
-		\P\kh{\sum_{i=1}^n A_i}=\sum_{i=1}^n\P(A_i)
-	\]
-	特别地，$\P(A)+\P(A\c)=1;$
-	\item $\forall A\subset B,\P(A)\leqslant\P(B);$
-	\item $\P(A+B)=\P(A)+\P(B)-\P(AB).$推广之，得到
-\end{compactenum}
+\begin{corollary}
+	由定义，可推出：
+	\begin{compactenum}
+		\item $\forall A\in\cF,\P(A)\leqslant 1;$
+		\item $\P(\varnothing)=0;$
+		\item 
+		% 若$A_i$两两互斥，即$\forall A_i \in \cF,A_iA_j=\varnothing\,(i\neq j)$，则
+		% \[
+		% 	\P\kh{\bigcup_{i=1}^n A_i}=\sum_{i=1}^n\P(A_i)
+		% \]
+		特别地，$\P(A)+\P(A\c)=1;$
+		\item $\forall A\subset B,\P(A)\leqslant\P(B);$
+		\item $\P(A+B)=\P(A)+\P(B)-\P(AB).$推广之，得到
+	\end{compactenum}
+\end{corollary}
 \begin{theorem}{容斥恒等式}{inclusion and exclusion identities}
 	容斥恒等式(inclusion and exclusion identities)
 	\begin{align}\notag
-		\P\kh{\sum_{i=1}^nA_i}&=\sum_{i=1}^n\P(A_i)-\sum_{i<j}^n\P(A_iA_j)+\cdots+\P\kh{\prod_{i=1}^nA_i}\\
-		&=\sum_{r=1}^n(-)^{r+1}\sum_{i_1<\cdots<i_r}\P\kh{\prod_{k=1}^rA_{i_k}}.
+		\P\kh{\bigcup_{i=1}^nA_i}&=\sum_{i=1}^n\P(A_i)-\sum_{i<j}^n\P(A_i\cap A_j)+\cdots+\P\kh{\bigcap_{i=1}^nA_i}\\
+		&=\sum_{r=1}^n(-)^{r+1}\sum_{i_1<\cdots<i_r}\P\kh{\bigcap_{k=1}^rA_{i_k}}.
 	\end{align}
 \end{theorem}
-\begin{example}{乱序}{out of order}
-	$n$个人每人一个帽子，离开时随机取帽子，问无人拿到自己帽子的概率为多少？
+\begin{example}{乱序}{derangement}
+	$n$个人每人一个帽子，混在一起随机分配，求无人拿到自己帽子的概率。
 
-	记$A_i$表示第$i$个人拿到自己的帽子，则
+	记$A_i=$第$i$个人拿到自己的帽子，则
 	\[
 		\P(A_i)=\frac1n\equiv\frac{(n-1)!}{n!}.
 	\]
 	至少一个人拿到自己的帽子：
 	\begin{align*}
-		\P\kh{\sum_{i=1}^nA_i}&=\sum_{r=1}^n(-)^{r+1}\sum_{i_1<\cdots<i_r}\P\kh{A_{i_1}\cdots A_{i_r}}\\
+		\P\kh{\bigcup_{i=1}^nA_i}&=\sum_{r=1}^n(-)^{r+1}\sum_{i_1<\cdots<i_r}\P\kh{\bigcap_{k=1}^rA_{i_k}}\\
 		&=\sum_{r=1}^n(-)^{r+1}\binom nr\frac{(n-r)!}{n!}=\sum_{r=1}^n(-)^{r+1}\frac1{r!}\\
 		&=1-\frac1{2!}+\frac1{3!}+\cdots+(-)^{n+1}\frac1{n!}.
 	\end{align*}
 	故所求概率即
 	\[
-		\P(A_1\c\cdots A_n\c)=1-1+\frac1{2!}-\frac1{3!}+\cdots+(-)^n\frac1{n!}\to\frac1{\e{}}.
+		\P\kh{\bigcap_{i=1}^nA_i\c}=1-1+\frac1{2!}-\frac1{3!}+\cdots+(-)^n\frac1{n!}\to\frac1{\e{}}.
 	\]
+	\tcblower
+	这个问题称为乱序(derangement)问题，乱序数(subfactorial)记作
+	\begin{equation}
+		\label{eq:subfactorial}
+		!n=n!\biggkh{1-1+\frac1{2!}-\frac1{3!}+\cdots+(-)^n\frac1{n!}}=\biggfkh{\frac{n!}e}=\floor{\frac{n!}e+1/2}.
+	\end{equation}
+	其中$[x]$表示最接近$x$的整数，$\floor x$表示向下取整。前几个乱序数见 \href{https://oeis.org/A000166}{OEIS.A000166}
+	\[
+		!0=1,\quad !1=0,\quad !2=1,\quad !3=2,\quad !4=9,\quad !5=44,\quad !6=265.%\quad !7=1854,\quad !8=14833,\quad !9=133496.
+	\]	
 \end{example}
+
 \section{条件概率}
+
 \begin{definition}{条件概率}{conditional probability}
-	定义给定$B$事件发生的条件下，$A$事件发生的条件概率(conditional probability)为
-	\begin{align}
-		\P(A|B):=\frac{\P(AB)}{\P(B)}
-	\end{align}
+	给定$B$事件发生的条件下，$A$事件发生的条件概率(conditional probability)为
+	\begin{equation}
+		\P(A|B):=\frac{\P(A\cap B)}{\P(B)}
+	\end{equation}
 	其中$\P(B)>0.$
 \end{definition}
-条件概率可用于缩小样本空间。
 
-事实上，给定$B$且$\P(B)>0$，则$\P(\cdot|B):\cF\to\RR$是概率函数，$\bigkh{\Omega,\cF,\P(\cdot|B)}$仍为概率空间。
-\begin{theorem}{乘法法则}{Multiplication Rule}
+\begin{remark}
+	条件概率可用于缩小样本空间。
+\end{remark}
+
+\begin{corollary}
+	% 事实上，给定$B$且$\P(B)>0$，则
+	$\P(\cdot|B):\cF\to\RR$是概率函数，$\bigkh{\Omega,\cF,\P(\cdot|B)}$也是概率空间。
+\end{corollary}
+
+\begin{theorem}{乘法法则}{multiplication rule}
 	由条件概率的定义可以直接导出：
-	\begin{align}
-		\P(AB)=\P(B)\P(A|B)=\P(A)\P(B|A).
-	\end{align}
+	\begin{equation}
+		\P(A\cap B)=\P(B)\P(A|B)=\P(A)\P(B|A).
+	\end{equation}
 	一般推广：
 	\[
-		\P(A_1\cdots A_n)=\P(A_1)\P(A_2|A_1)\cdots\P(A_n|A_1\cdots A_{n-1}).
+		\P(A_1\cap\cdots\cap A_n)=\P(A_1)\P(A_2|A_1)\cdots\P(A_n|A_1\cap\cdots\cap A_{n-1}).
 	\]
-	加多限制条件以后，算概率可能会变简单。
 \end{theorem}
-称$\P(A)$为\textbf{先验概率}(priori probability)，$\P(A|B)$为\textbf{后验概率}(posterior probability)。
 
-已观测到$A$事件，等价于$\P(A|A)\equiv 1$，绝非$\P(A)=1$。
+\begin{remark}
+	加上限制条件以后，算概率可能会变简单。
+\end{remark}
+
+\begin{remark}
+	已观测到$A$事件$\iff\P(A|A)\equiv 1$，绝非$\P(A)=1$。
+\end{remark}
 
 \section{独立事件}
+
 \begin{definition}{独立事件}{independent event}
 	定义$A,B$相互独立(independent)当
-	\begin{align}
-		\P(AB)=\P(A)\P(B).
-	\end{align}
+	\begin{equation}
+		\P(A\cap B)=\P(A)\P(B).
+	\end{equation}
 \end{definition}
-即，$B$事件发生与否，不影响$A$事件发生的概率：
+
+$B$事件发生与否，不影响$A$事件发生的概率：
 \[
-	\P(A|B)=\P(A)\iff\frac{\P(AB)}{\P(B)}=\frac{\P(A\Omega)}{\P(\Omega)}.
+	\P(A|B)=\P(A)\iff\frac{\P(A\cap B)}{\P(B)}=\frac{\P(A\cap\Omega)}{\P(\Omega)}.
 \]
-易证，若$A,B$独立，则$A\c,B$独立，$A,B\c$独立，$A\c,B\c$独立。
-\begin{definition}{三个事件的独立}{}
+
+\begin{corollary}
+	$A,B$独立$\iff A\c,B$独立$\iff A,B\c$独立$\iff A\c,B\c$独立。
+\end{corollary}
+
+\begin{definition}{多个事件的独立}{}
 	$A,B,C$相互独立等价于：
 	\begin{compactenum}
 		\item $A,B,C$两两独立；
-		\item $\P(ABC)=\P(A)\P(B)\P(C)$
+		\item $\P(A\cap B\cap C)=\P(A)\P(B)\P(C)$
 	\end{compactenum}
+	进而定义可数个事件$A_1,A_2,\ldots$相互独立：任取有限个事件$A_{i_1},\ldots,A_{i_n}$都有
+	\[
+		\P(A_{i_1}\cap\cdots\cap A_{i_n})=\P(A_{i_1})\cdots\P(A_{i_n}).
+	\]
 \end{definition}
-需要注意，只知其一不可推出另一个条件。
 
-进而定义可数个事件$A_1,A_2,\ldots$相互独立：任取有限个事件$A_{i_1},\ldots,A_{i_n}$都有
-\[
-	\P(A_{i_1}\cdots A_{i_n})=\P(A_{i_1})\cdots\P(A_{i_n}).
-\]
+\begin{remark}
+	在三个事件相互独立的定义中，两个条件都是必要的，只知其一不可推出另一个条件。
+\end{remark}
+
+
 \begin{definition}{条件独立}{conditional independent}
 	若
 	\[
-		\P(AB|E)=\P(A|E)\P(B|E),
+		\P(A\cap B|E)=\P(A|E)\P(B|E),
 	\]
 	则$A,B$关于事件$E$条件独立(conditional independent)。
 \end{definition}
-$A,B$关于$E$条件独立与$A,B$独立无关，二者之间既不充分也不必要。
+
+\begin{remark}
+	$A,B$关于$E$条件独立$\xcancel{\iff}A,B$独立。(既不充分也不必要)
+\end{remark}
+
 \section{Bayes公式}
-\begin{theorem}{全概率公式}{total probability formula}
-	定义$\Omega$的一个分割$\{B_i\}$，满足：
+
+\begin{definition}
+	{分割}{partition}
+	事件空间的子集$\{B_i\}_{i\in I}\subset\cF$若满足：
 	\begin{compactenum}
-		\item $\sum B_i=\Omega;$
+		\item $\bigcap\nolimits_{i\in I} B_i=\Omega;$
 		\item $\forall i\neq j,\enspace B_iB_j=\varnothing;$
-		\item $\P(B_i)>0.$
+		\item $\forall i,\enspace\P(B_i)>0.$
 	\end{compactenum}
-	则$A$事件的概率
-	\begin{align}
-		\P(A)=\sum\P(B_i)\P(A|B_i)
-	\end{align}
+	则称$\{B_i\}_{i\in I}$是样本空间$\Omega$的一个分割。
+\end{definition}
+
+\begin{theorem}{全概率公式}{total probability formula}
+	给定样本空间$\Omega$的一个分割$\{B_i\}_{i\in I}$，则$A$事件的概率
+	\begin{equation}
+		\P(A)=\sum_{i\in I}\P(B_i)\P(A|B_i)
+	\end{equation}
 \end{theorem}
 \begin{example}{假阳性悖论}{false positive paradox}
-	$B=$患病，$A=$阳性，$\P(B)=10^{-4},\P(A|B)=0.99,\P(A|B\c)=10^{-3}$
+	假设有一种疾病，10000人中约有一人发病，患病者检测出阳性(真阳性)的概率为99\%，未患病者检测出阳性(假阳性)的概率为0.1\%。求检测出阳性的人患病的概率。
+
+	$B=$患病，$A=$阳性，题中对应的概率为
 	\[
-		\P(B|A)=\frac{\P(AB)}{\P(A)}=\frac{\P(B)\P(A|B)}{\P(B)\P(A|B)+\P(B\c)\P(A|B\c)}\doteq 9\%.
+		\P(B)=10^{-4},\enspace
+		\P(A|B)=0.99,\enspace
+		\P(A|B\c)=10^{-3},
 	\]
+	故检测出阳性的人患病的概率为
+	\[
+		\P(B|A)=\frac{\P(AB)}{\P(A)}=\frac{\P(B)\P(A|B)}{\P(B)\P(A|B)+\P(B\c)\P(A|B\c)}\doteq 9\%
+	\]
+	并不高。其原因在于：发病率$\P(B)<$假阳性的概率$\P(A|B\c)$。
+
+	如何避免假阳性悖论？可以进行二次检测，使得
+	$\P(B)>\P(AA|B\c)=10^{-6}$
+	
 \end{example}
 \begin{example}{赌徒}{gambler}
-	两个人赌博。假设甲的赌本为$i$元，乙的赌本为$n-i$。甲赢的概率为$p$。每赌一局输家给赢家1元，其中一人输光游戏结束。求甲成为最终赢家的概率$Q_i$。
+	两个人赌博。假设甲的本金为$i$元，乙的本金为$n-i$。甲赢的概率为$p$，乙赢的概率为$q=1-p$。
+	每赌一局输家给赢家1元，其中一人输光则游戏结束。求甲成为最终赢家的概率$Q_i$。
 
 	$A=$甲最终赢，$B=$甲本局赢，由全概率公式
 	\[
@@ -203,23 +290,33 @@ $A,B$关于$E$条件独立与$A,B$独立无关，二者之间既不充分也不�
 	\]
 	即
 	\[
-		Q_i=pQ_{i+1}+(1-p)Q_{i-1},%\implies p(Q_{i+1}-Q_i)=(1-p)(Q_i-Q_{i-1}).
+		Q_i=pQ_{i+1}+qQ_{i-1},%\implies p(Q_{i+1}-Q_i)=(1-p)(Q_i-Q_{i-1}).
 	\]
 	且有边界条件：$Q_0=0,Q_n=1$，
 	\[
 		Q_i=\begin{cases}
-			\frac in,&p=1/2\\[2ex]
-			\frac{1-\lambda^i}{1-\lambda^n},&p\neq 1/2,\enspace\lambda:=\frac{1-p}p.
+			\frac in,&p=q=1/2\\[2ex]
+			\frac{1-(q/p)^i}{1-(q/p)^n},&p\neq 1/2
 		\end{cases}
 	\]
+	取$n=6,i=1,2,\ldots,n-1$，绘制不同概率下的$Q_i$分布图：
+	\begin{center}
+		\includegraphics[width=0.7\linewidth]{figures/gamble.pdf}
+		\captionof{figure}{赌徒问题的概率分布图}
+	\end{center}
 \end{example}
+
 \begin{theorem}{Beyas公式}{Beyas formula}
 	Beyas公式即
-	\begin{align}
-		\P(B_i|A)=\frac{\P(B_i)\P(A|B_i)}{\P(A)}=\frac{\P(B_i)\P(A|B_i)}{\sum_j\P(B_j)\P(A|B_j)}
-	\end{align}
+	\begin{equation}
+		\P(B_i|A)=\frac{\P(B_i)\P(A|B_i)}{\P(A)}=\frac{\P(B_i)\P(A|B_i)}{\sum_{j\in I}\P(B_j)\P(A|B_j)}
+	\end{equation}
+	称$\P(B_i)$为\textbf{先验概率}(priori probability)，$\P(B_i|A)$为\textbf{后验概率}(posterior probability)。
 \end{theorem}
-这个公式的重要性不仅在数学意义上，还在于先验概率$\P(B_i)$ v.s.后验概率$\P(B_i|A)$
+
+% \begin{remark}
+% 	这个公式的重要性不仅在数学意义上，还在于先验概率$\P(B_i)$ v.s.后验概率$\P(B_i|A)$
+% \end{remark}
 
 \begin{remark}
 	计算正确的概率、正确计算概率、正确使用概率。

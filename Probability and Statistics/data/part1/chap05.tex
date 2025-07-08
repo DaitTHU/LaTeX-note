@@ -1,6 +1,7 @@
 \chapter{不等式与极限定理}
 
 \section{概率不等式}
+
 \begin{theorem}{Markov不等式}{Markov inequality}
 	若随机变量$X>0$，则$\forall\varepsilon>0$，有
 	\begin{equation}
@@ -8,51 +9,60 @@
 		\P(X\geqslant\varepsilon)\leqslant\frac{\E(X)}\varepsilon.
 	\end{equation}
 \end{theorem}
+
 \begin{proof}
 	引入示性函数(characteristic function)
-	\begin{align*}
-		I(X\geqslant\varepsilon):=\begin{cases}
-			1,&X\geqslant\varepsilon\\
-			0,&X<\varepsilon
+	\begin{equation}
+		1(X\in A):=\begin{cases}
+			1,&X\in A\\
+			0,&X\notin A
 		\end{cases}
-	\end{align*}
-	则$I(X\geqslant\varepsilon)\leqslant X/\varepsilon$，两边取期望，即证。
+	\end{equation}
+	则$1(X\geqslant\varepsilon)\leqslant X/\varepsilon$，两边取期望，即证。
 \end{proof}
+
 \begin{theorem}{Chebyshev不等式}{Chebyshev inequality}
 	若随机变量$X$的方差$\Var(X)$存在，则$\forall\varepsilon>0$均有
-	\begin{align}
+	\begin{equation}
 		\P(|X-\E(X)|\geqslant\varepsilon)\leqslant\frac{\Var(X)}{\varepsilon^2}.
-	\end{align}
+	\end{equation}
 \end{theorem}
+
 \begin{proof}
 	由Markov不等式
-	\begin{align*}
+	\[
 		\P\bigfkh{\bigkh{X-\E(X)}^2\geqslant\varepsilon^2}\leqslant\frac{\E\bigfkh{\bigkh{X-\E(X)}^2}}{\varepsilon^2}\equiv\frac{\Var(X)}{\varepsilon^2}.
 		\qedhere
-	\end{align*}
+	\]
 \end{proof}
+
 \begin{theorem}{Chernoff不等式}{Chernoff inequality}
-	对随机变量$X$，$\forall\varepsilon>0,\forall t>0$，有
-	\begin{align}
+	对随机变量$X$，$\forall\varepsilon>0,\forall t>0$使得$\E(\e{tX})$存在，有
+	\begin{equation}
 		\P(X\geqslant\varepsilon)\leqslant\frac{\E(\e{tX})}{\e{t\varepsilon}}.
-	\end{align}
-	即使$X$矩母函数不存在，不等式也成立。
+	\end{equation}
 \end{theorem}
+
 \begin{proof}
 	由Markov不等式，
-	\begin{align*}
+	\[
 		\P(X\geqslant\varepsilon)=\P(\e{tX}\geqslant\e{t\varepsilon})\leqslant\frac{\E(\e{tX})}{\e{t\varepsilon}}.
-	\end{align*}
+		\qedhere
+	\]
 \end{proof}
+\begin{remark}
+	即使$X$矩母函数不存在，不等式也成立。
+\end{remark}
+
 \begin{example}{正态分布的尾概率估计}{}
 	$X\sim\Norm(0,1)$，则三个不等式给出
-	\begin{align*}
+	\[
 		\P(|X|\geqslant 3)\leqslant\begin{cases}
-			\frac13\E(X)=\frac13\sqrt{\frac2\pi}\doteq 0.27,&\text{(Markov)}\\[2ex]
+			\frac13\E(\abs X)=\frac13\sqrt{\frac2\pi}\doteq 0.27,&\text{(Markov)}\\[2ex]
 			\frac19\Var(X)=\frac19\doteq 0.11,&\text{(Chebyshev)}\\[2ex]
 			\frac{2}{\e{3t}}\e{t^2/2}\leqslant 2\e{-9/2}\doteq 0.022.&\text{(Chernoff)}
 		\end{cases}
-	\end{align*}
+	\]
 	比较而言，Markov仅用到了均值的信息，Chebyshev用到了方差的信息，Chernoff用到了各阶矩的信息。而结果也是越来越好的。
 \end{example}
 
@@ -65,6 +75,15 @@
 	\end{equation}
 \end{theorem}
 
+\begin{proof}
+	利用示性函数$1\equiv 1(X\in A)+1(X\in A\c)$：
+	\begin{align*}
+		\E(X)&=\E\bigfkh{X1\bigkh{X\leqslant\lambda\E(X)}}+\E\bigfkh{X1\bigkh{X>\lambda\E(X)}}\\
+		&\leqslant\lambda\E(X)+\sqrt{\E(X^2)\P\bigkh{X>\lambda\E(X)}}
+	\end{align*}
+	前者是自然的，后者是Cauchy–Schwarz不等式。移项即得。
+\end{proof}
+
 \section{大数定律}
 为何能以某事件发生的频率作为该事件的概率的估计？
 \begin{definition}{依概率收敛}{converge in probability}
@@ -73,53 +92,61 @@
 		\lim_{n\to\infty}\P(|X_n-X|\geqslant\varepsilon)=0,
 	\]
 	则称序列$X_n$依概率收敛(converge in probability)于$X$，记作
-	\begin{align}
+	\begin{equation}
 		X_n\pto X.
-	\end{align}
+	\end{equation}
 \end{definition}
-\begin{theorem}{Khinchin弱大数定律}{Khinchin weak law of large numbers}
+\begin{theorem}{Khinchin弱大数定律}{Khinchin WLLN}
 	随机变量序列$X_1,X_2,\ldots$ iid，且$\E(X_i)=\mu$，则
-	\begin{align}
+	\begin{equation}
 		\avg X_n:=\frac1n\sum_{i=1}^nX_i\pto\mu
-	\end{align}
+	\end{equation}
 	这就是Khinchin弱大数定律(weak law of large numbers, WLLN).\index{LLN, 大数定律}
 \end{theorem}
-Khinchin LLN指出：数学期望可以由$n$个iid的随机变量的算术平均值近似。最初的大数定律应用于$X_i\sim\Bern(p)$中用频率$\avg X$估计$p$，这称为Bernoulli LLN。
+
+\begin{corollary}
+	% Khinchin LLN指出：
+	数学期望可以由$n$个iid的随机变量的算术平均值近似。
+\end{corollary}
+
+\begin{remark}
+	最初形式为\Bern\ LLN，应用于$X_i\sim\Bino(p)$中用频率$\avg X$估计$p$。
+\end{remark}
 
 \begin{example}{用Chebyshev不等式证明Khinchin大数定律}{}
 	若方差$\Var(X_i)=\sigma^2$存在\footnote{事实上Khinchin LLN并没有要求$\Var(X_i)$存在。}，则
-	\begin{align}
-		\E(\avg X_n)&=\frac1n\sum_{i=1}^n\E(X_i)=\mu,\\
-		\Var(\avg X_n)&=\frac1{n^2}\sum_{i=1}^n\Var(X_i)=\frac{\sigma^2}n.
-	\end{align}
+	\begin{subequations}
+		\begin{align}
+			\E(\avg X_n)&=\frac1n\sum_{i=1}^n\E(X_i)=\mu,\\
+			\Var(\avg X_n)&=\frac1{n^2}\sum_{i=1}^n\Var(X_i)=\frac{\sigma^2}n.
+		\end{align}
+	\end{subequations}
 	由Chebyshev不等式
 	\[
 		\P(|\avg X_n-\mu|\geqslant\varepsilon)\leqslant\frac{\sigma^2}{n\varepsilon^2}\to 0.
 	\]
 \end{example}
 
-可对Kinchin LLN进行推广：当条件为$X_i$两两不相关，$\Var(X_i)$一致有界时，是Chebyshev LLN；还有Markov LLN。
+\begin{remark}
+	Chebyshev LLN：$X_i$两两不相关，$\Var(X_i)$一致有界时，$\avg X_n$依概率收敛于$\mu$。
+\end{remark}
+
+% 可对Kinchin LLN进行推广：当条件为，是；还有Markov LLN。
+
 \begin{definition}{以概率1收敛}{converge almost surely}
 	若随机变量序列$X_1,X_2,\ldots$极限存在，且
-	\begin{align}
+	\begin{equation}
 		\P\kh{\lim_{n\to\infty}X_n=X}=1,
-	\end{align}
+	\end{equation}
 	则称序列$X_n$以概率1收敛(converge almost surely)于$X$，记作
-	\begin{align}
+	\begin{equation}
 		X_n\asto X.
-	\end{align}
+	\end{equation}
 \end{definition}
-可以证明，以概率1收敛是比依概率收敛更强的结论。
-\begin{theorem}{Kolmogorov强大数定律}{}
-	若$X_1,X_2,\ldots$ iid，$\E(X_i)=\mu$，则 
-	\begin{align}
-		\avg X_n\asto\mu.
-	\end{align}
-	芝士Kolmogorov强大数定律(\sout{powerful law of number}, strong law of large numbers, SLLN).
-\end{theorem}
-SLLN是包含Khinchin WLLN的，但是除了Khinchin，还有其他形式的WLLN。
 
-SLLN说明：概率的频率解释是合理的。也是Monte Carlo积分的原理。
+\begin{corollary}
+	以概率1收敛强于依概率收敛
+\end{corollary}
 
 \begin{example}{以概率1收敛强于依概率收敛}{}
 	$\Omega=[0,1]$上的均匀分布，从而有$(\Omega,\cF,\P)$，定义
@@ -135,19 +162,45 @@ SLLN说明：概率的频率解释是合理的。也是Monte Carlo积分的原�
 	\]
 	但$\lim_{n\to\infty}Y_n$不存在（总有破坏的区间），也就不存在以概率1收敛。
 \end{example}
-事实上以概率1收敛可以推出依概率收敛，但我就不证了。
+
+\begin{theorem}{Kolmogorov强大数定律}{Kolmogorov SLLN}
+	若$X_1,X_2,\ldots$ iid，$\E(X_i)=\mu$，则 
+	\begin{equation}
+		\avg X_n\asto\mu.
+	\end{equation}
+	即Kolmogorov强大数定律(\sout{powerful number law}, strong law of large numbers, SLLN).
+\end{theorem}
+
+\begin{remark}
+	可见Kolmogorov SLLN和Khinchin WLLN条件相同且SLLN给出了更强的结论。
+	但是这并不代表WLLN无用，在其他条件下，还会有其他形式的WLLN。
+\end{remark}
+
+\begin{corollary}
+	概率的频率解释是合理的。这也是Monte Carlo积分原理的基础。
+\end{corollary}
 
 \section{中心极限定理}
-\begin{theorem}{Lindberg-Levi中心极限定理}{Lindberg-Levi central limit theorem}
-	随机变量序列$X_1, X_2,\ldots$ iid，且期望$\mu$和方差$\sigma^2$存在。$\avg X$的标准化变量为
-	\begin{align}
-		Z_n:=\frac{\avg X-\mu}{\sigma/\!\sqrt n}\equiv\sum_{i=1}^n\frac{X_i-\mu}{\sqrt n\sigma}.
-	\end{align}
-	则$Z_n$的CDF $\CDF_n(z)$极限存在，且
-	\begin{align}
-		\lim_{n\to\infty}\CDF_n(z)=\Phi(z).\quad\forall z\in\RR
-	\end{align}
-	其中$\Phi(z)$是$\Norm(0,1)$的CDF，这就是Lindberg-Levi中心极限定理(central limit theorem, CLT)。\index{CLT, 中心极限定理}
+
+\begin{definition}
+	{依分布收敛}{converge in distribution}
+	若随机变量序列$X_1,X_2,\ldots$的分布函数$\CDF_n(x)=\P(X_n\leqslant x)$的极限存在，即存在一个随机变量$X$的分布函数$\CDF(x)$，使得$\forall x$
+	\[
+		\lim_{n\to\infty}\CDF_n(x)=\CDF(x),
+	\]
+	则称$X_n$依分布收敛于$X$，记作
+	\begin{equation}
+		X_n\dto X.
+	\end{equation}
+\end{definition}
+
+\begin{theorem}{Lindberg-Levi中心极限定理}{Lindberg-Levi CLT}
+	随机变量序列$X_1, X_2,\ldots$ iid，且期望$\mu$和方差$\sigma^2$存在。$\avg X$的标准化变量$Z_n$依分布收敛于标准正态分布$\Norm(0,1)$：
+	\begin{equation}
+		Z_n:=\frac{\avg X-\mu}{\sigma/\!\sqrt n}%\equiv\sum_{i=1}^n\frac{X_i-\mu}{\sqrt n\sigma}
+		\dto Z\sim\Norm(0,1).
+	\end{equation}
+	称为Lindberg-Levi中心极限定理(central limit theorem, CLT)。\index{CLT, 中心极限定理}
 \end{theorem}
 \begin{proof}
 	标准正态分布的CF $\psi(t)=\e{-t^2/2}$，%不失一般性(without loss of generality, WLOG)，
@@ -155,24 +208,32 @@ SLLN说明：概率的频率解释是合理的。也是Monte Carlo积分的原�
 		\psi_{Z_n}(t)&=\fkh{\psi_{X_i-\mu}\biggkh{\frac{t}{\sqrt n\sigma}}}^n\\
 		&=\fkh{1+0+\frac12\psi''_{X_i-\mu}(0)\cdot\biggkh{\frac{t}{\sqrt n\sigma}}^2+o\biggkh{\frac{t^2}n}}^n\\
 		&=\fkh{1-\frac{t^2}{2n}+o\biggkh{\frac{t^2}n}}^n\to\e{-t^2/2}.
+		\qedhere
 	\end{align*}
 \end{proof}
 
-由CLT，我们可以近似的认为$\avg X\dotsim\Norm(\mu,\sigma^2/n)$。
+\begin{corollary}
+	我们可以近似的认为$\avg X\dotsim\Norm(\mu,\sigma^2/n)$。
+\end{corollary}
 
-\begin{example}{DeMoivre-Laplace中心极限定理}{DeMoivre-Laplace central limit theorem}
-	特别地，当$X_i\sim\Bern(p)$时，$Y:=X_1+\cdots+X_n\sim\Bern(n,p)$二项分布近似于正态分布$\Norm\bigkh{np,np(1-p)}$
+\begin{example}{DeMoivre-Laplace中心极限定理}{DeMoivre-Laplace CLT}
+	特别地，当$X_i\sim\Bino(p)$时，二项分布$Y_n:=X_1+\cdots+X_n\sim\Bino(n,p)$依分布收敛于正态分布$\Norm\bigkh{np,np(1-p)}$
 	\[
 		\P\kh{Y\leqslant t}\doteq\Phi\kh{\frac{t-np}{\sqrt{np(1-p)}}}.
 	\]
-	因为正态分布是连续的，对上式进行连续型修正
+	\begin{center}
+		\includegraphics[width=0.9\linewidth]{figures/CLT_bin.pdf}
+		\captionof{figure}{二项分布的CLT近似}
+		\label{fig:CLT_bin}
+	\end{center}
+	因为正态分布是连续的，对上式进行连续性修正
 	\[
 		\P(t_1\leqslant Y\leqslant t_2)\doteq\Phi\kh{\frac{t_2-np+1/2}{\sqrt{np(1-p)}}}-\Phi\kh{\frac{t_1-np-1/2}{\sqrt{np(1-p)}}}.
 	\]
 	这称为DeMoivre-Laplace CLT。
 \end{example}
 \begin{example}{选举问题}{}
-	为统计选民支持度$p$ （未知），随机调查$n$个人，支持比例$P_n=\avg X$，$N\gg n$近似的，可视为有放回$X_i\sim\Bern(p)$，且
+	为统计选民支持度$p$ （未知），随机调查$n$个人，支持比例$P_n=\avg X$，$N\gg n$近似的，可视为有放回$X_i\sim\Bino(p)$，且
 	\[
 		\frac{P_n-p}{\sqrt{p(1-p)/n}}\sim\Norm(0,1)
 	\]
@@ -185,8 +246,9 @@ SLLN说明：概率的频率解释是合理的。也是Monte Carlo积分的原�
 		n_{\mathrm{min}}=\biggkh{\frac{z_{1-\alpha/2}}{2\varepsilon}}^2\doteq 1067.11.
 	\]%1.96
 	与$N$无关。
+	这说明只需要调查一千多人，就可以以95\%的置信度估计选民支持度$p$在$P_n\pm 0.03$的范围内。
 \end{example}
-\begin{theorem}{Lyapunov中心极限定理}{Lyapunov central limit theorem}
+\begin{theorem}{Lyapunov中心极限定理}{Lyapunov CLT}
 	随机变量序列$X_1,X_2,\ldots$是独立的随机变量序列，且具有期望和方差
 	\[
 		\E(X_k)=\mu_k,\quad\Var(X_k)=\sigma_k^2;\quad B_n^2:=\sum_{k=1}^n\sigma_k^2.
@@ -195,37 +257,35 @@ SLLN说明：概率的频率解释是合理的。也是Monte Carlo积分的原�
 	\[
 		\lim_{n\to\infty}\frac1{B_n^{2+\delta}}\sum_{k=1}^n\E\bigkh{|X_k-\mu_k|}=0.
 	\]
-	则随机变量之和的标准化变量
-	\[
-		\hat X_n:=\frac1{B_n}\sum_{k=1}^n(X_k-\mu_k)
-	\]
-	的CDF
-	\[
-		\lim_{n\to\infty}\CDF_n(x)=\Phi(x),\quad\forall x\in\RR.
-	\]
+	则随机变量之和的标准化变量依分布收敛于标准正态分布：
+	\begin{equation}
+		\label{eq:Lyapunov CLT}
+		Z_n:=\frac1{B_n}\sum_{k=1}^n(X_k-\mu_k)\dto Z\sim\Norm(0,1).
+	\end{equation}
 \end{theorem}
 这说明，当$N$很大时，
-\begin{align}
+\begin{equation}
 	\sum_{i=1}^nX_i\dotsim\Norm\kh{\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma^2_i}.
-\end{align}
+\end{equation}
 
-\begin{theorem}{Markov中心极限定理}{}
+\begin{theorem}{Markov中心极限定理}{Markov CLT}
 	随机变量序列$X_1,X_2,\ldots$不独立，但具有Markov性：
 	\[
 		\P(X_i|X_{i-1}X_{i-2}\cdots)=\P(X_i|X_{i-1}).
 	\]
 	加上可逆性和可达性的条件，则序列构成一个Markov链，则
-	\begin{align}
-		\avg X_n\pto Z\dotsim\Norm(\mu,\sigma^2/n)
-	\end{align}
+	\begin{equation}
+		\label{eq:Markov CLT}
+		Z_n:=\frac{\avg X_n-\mu}{\sigma/\!\sqrt n}\pto Z\sim\Norm(0,1).
+	\end{equation}
 \end{theorem}
 
-\begin{remark}~
+\begin{remark}
+	总结：
 	\begin{compactenum}
 		\item 尾部概率控制；
 		\item LLN, CLT；
-		\item CLT的应用：$\avg X\dotsim\Norm(\mu,\sigma^2/n),\enspace\sum X_i\dotsim\Norm(n\mu,n\sigma^2)$；
-		\item 三种收敛：$\asto,\pto,\dto$\,(依分布收敛)。
+		\item CLT的应用：$\avg X\dotsim\Norm(\mu,\sigma^2/n),\enspace\sum\nolimits_{i=1}^nX_i\dotsim\Norm(n\mu,n\sigma^2)$；
+		\item 三种收敛：$\asto,\pto,\dto$。
 	\end{compactenum}
-
 \end{remark}

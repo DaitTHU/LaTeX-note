@@ -28,10 +28,12 @@
 
 \begin{definition}{总变差}{total sum of square}
 	总变差的大小可用总偏差平方和表示，这反映了所有观测值之间总的变差程度。
-	\begin{align}
-		S_T:={}&\sum_{j=1}^s\sum_{i=1}^{n_j}(X_{ij}-\avg X)^2\\\notag
-		={}&\sum_{i,j}X_{ij}^2-\frac1N\biggkh{\sum_{i,j}X_{ij}}^2,
-	\end{align}
+	\begin{subequations}
+		\begin{align}
+			S_T:={}&\sum_{j=1}^s\sum_{i=1}^{n_j}(X_{ij}-\avg X)^2\\\notag
+			={}&\sum_{i,j}X_{ij}^2-\frac1N\biggkh{\sum_{i,j}X_{ij}}^2,
+		\end{align}
+	\end{subequations}
 	总自由度$\nu_T=N-1$，总均方$MS_T=S_T/\nu_T.$
 \end{definition}
 
@@ -39,10 +41,12 @@
 
 \begin{definition}{组间变差}{error sum of square}
 	各处理组的样本均值大小不等, 这种变差称为组间变差%，其大小可用各组均值$X_{\cdot j}$与总均值$X$的离均差平方和表示。记作$S_A$
-	\begin{align}
-		S_A:={}&\sum_{j=1}^sn_j(\avg X_{\cdot j}-\avg X)^2\\\notag
-		={}&\sum_{j=1}^s\frac1{n_j}\biggkh{\sum_{i=1}^{n_j}X_{ij}}^2-\frac1N\biggkh{\sum_{i,j}X_{ij}}^2,
-	\end{align}
+	\begin{subequations}
+		\begin{align}
+			S_A:={}&\sum_{j=1}^sn_j(\avg X_{\cdot j}-\avg X)^2\\\notag
+			={}&\sum_{j=1}^s\frac1{n_j}\biggkh{\sum_{i=1}^{n_j}X_{ij}}^2-\frac1N\biggkh{\sum_{i,j}X_{ij}}^2,
+		\end{align}
+	\end{subequations}
 	组间自由度$\nu_A=s-1$，组间均方$MS_A=S_A/\nu_A.$
 \end{definition}
 组间变差存在的原因
@@ -61,18 +65,20 @@
 	组内自由度$\nu_E=N-s$，组内均方$MS_E=S_E/\nu_E.$
 \end{definition}
 偏差平方和与自由度具有可加性
-\begin{align*}
-	S_T&=S_A+S_E,\\
-	\nu_T&=\nu_A+\nu_E.
-\end{align*}
+\begin{subequations}
+	\begin{align*}
+		S_T&=S_A+S_E,\\
+		\nu_T&=\nu_A+\nu_E.
+	\end{align*}
+\end{subequations}
 假设检验
 \[
 	H_0:\mu_1=\mu_2=\cdots,\quad H_1:\ldots
 \]
 检验统计量 
-\begin{align}
+\begin{equation}
 	F:=\frac{S_A}{S_E}\sim\mathrm F(\nu_A,\nu_E).
-\end{align}
+\end{equation}
 当$F>F_\alpha(\nu_A,\nu_E)$时拒绝$H_0$。
 \paragraph{双因素检验}
 设有两个因素$A,B$作用于试验的指标。因素$ A $有$ r $个水平$ A_1, A_2,\ldots, A_r$，因素$ B $有$ s $个水平$ B_1, B_2,\ldots, B_s $。现对因素$ A, B $的所有组合$(A_i, B_j)$都作$t$次试验，称为等重复试验。
@@ -101,11 +107,16 @@ $A_i,B_j$的效应分别为
 	\item $S_A,S_B$为因素$ A, B $的效应平方和，自由度为$ r - 1, s - 1$
 	\item $S_{A\times B}$为$A,B$的交互效应平方和，自由度为 $(r - 1)(s - 1)$
 \end{compactitem}
-\begin{align}\notag
-	S_T={}& \sum_{i=1}^r \sum_{j=1}^s \sum_{k=1}^t(X_{i j k}-\avg{X})^2 \\\notag
-	={}& \sum_{i=1}^r \sum_{j=1}^s \sum_{k=1}^t[(X_{i j k}-\avg{X}_{i j \cdot})+(\avg{X}_{i\cdot\cdot}-\avg{X})+(\avg{X}_{\cdot j \cdot}-\avg{X})+\\\notag
-	&\quad(\avg{X}_{i j \cdot}-\avg{X}_{i \cdot\cdot}-\avg{X}_{\cdot j \cdot}+\avg{X})]^2 \\\notag
-	={}& \sum_{i=1}^r \sum_{j=1}^s \sum_{k=1}^t(X_{i j k}-\avg{X}_{i j \cdot})^2+s t \sum_{i=1}^r(\avg{X}_{i\cdot\cdot}-\avg{X})^2+ \\\notag
+\begin{align}
+	\notag
+	S_T={}& \sum_{i=1}^r \sum_{j=1}^s \sum_{k=1}^t(X_{i j k}-\avg{X})^2 \\
+	\notag
+	={}& \sum_{i=1}^r \sum_{j=1}^s \sum_{k=1}^t[(X_{i j k}-\avg{X}_{i j \cdot})+(\avg{X}_{i\cdot\cdot}-\avg{X})+(\avg{X}_{\cdot j \cdot}-\avg{X})+\\
+	\notag
+	&\quad(\avg{X}_{i j \cdot}-\avg{X}_{i \cdot\cdot}-\avg{X}_{\cdot j \cdot}+\avg{X})]^2 \\
+	\notag
+	={}& \sum_{i=1}^r \sum_{j=1}^s \sum_{k=1}^t(X_{i j k}-\avg{X}_{i j \cdot})^2+s t \sum_{i=1}^r(\avg{X}_{i\cdot\cdot}-\avg{X})^2+ \\
+	\notag
 	& r t \sum_{j=1}^s(\avg{X}_{\cdot j \cdot}-\avg{X})^2+t \sum_{i=1}^r \sum_{j=1}^s(\avg{X}_{i j \cdot}-\avg{X}_{i\cdot\cdot}-\avg{X}_{\cdot j \cdot}+\avg{X})^2\\
 	={}&S_E+S_A+S_B+S_{A\times B}.
 \end{align}
@@ -140,12 +151,12 @@ $A_i,B_j$的效应分别为
 	\pv fa=0,\enspace\pv fb=0.
 \]
 解得
-\begin{align}
+\begin{equation}
 	\begin{cases}
 		\beta=\frac{\E(XY)-\E(X)\E(Y)}{\E(X^2)-\E^2(X)}\equiv\frac{\Cov(X,Y)}{\Var(X)},\\
 		\alpha=\E(Y)-\beta\E(X)
 	\end{cases}
-\end{align}
+\end{equation}
 误差的期望和方差
 \begin{align*}
 	\E[Y-(\alpha+\beta X)]&=\E(Y)-\alpha-\beta\E(X)=0;\\
@@ -182,9 +193,9 @@ $\hat b$满足
 	\frac{\hat b\sqrt{L_{xx}}}{\sigma}\sim\Norm(0,1),\quad\frac{Q_e}{\sigma^2}\sim\chi^2(n-2).
 \]
 检验统计量 
-\begin{align}
+\begin{equation}
 	t:=\hat b\sqrt{\frac{(n-2)L_{xx}}{Q_e}}\sim\mathrm t(n-2).
-\end{align}
+\end{equation}
 拒绝域$\abs t\geqslant t_{\alpha/2}(n-2).$
 \paragraph{线性化回归}
 在许多实际问题中，两个变量之间并不一定是线性关系，而是某种曲线关系，应该用曲线来拟合。可以进行适当的变量代换，把它线性化，这样就把一个非线性回归问题化为线性回归问题而得以解决。

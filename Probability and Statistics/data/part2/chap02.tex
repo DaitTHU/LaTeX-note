@@ -61,41 +61,28 @@ $H_0$往往是受保护的，无充分证据不能拒绝；$H_1$往往是真正�
 \begin{definition}{两类错误}{}
 	\begin{compactenum}[I]
 		\item 弃真错误：$H_0$为真时拒绝$H_0$，概率 
-		\begin{align}
+		\begin{equation}
 			\alpha(R):=\P_\theta\bigkh{(X_1,\ldots,X_n)\in R},\quad \theta\in\varTheta_0
-		\end{align}
+		\end{equation}
 		\item 取伪错误：$H_0$为假时接受$H_0$，概率
-		\begin{align}
+		\begin{equation}
 			\beta(R):=\P_\theta\bigkh{(X_1,\ldots,X_n)\notin R},\quad \theta\in\varTheta_1
-		\end{align}
+		\end{equation}
 	\end{compactenum}
 \end{definition}
 依据样本决策，错误不可避免。当$n$固定时，$\alpha,\beta$不能同时变小。
 \begin{center}
-	\begin{tikzpicture}[xscale=1.5, yscale=1.5]
-		\node at(-2, .5){$H_0$为真};
-		\node at(-2, -1){$H_0$为假};
-		\fill[gray](1, 0)--(1, .368)--(2, .02)node[midway, above]{$\alpha$}--(2, 0);
-		\fill[white, domain=1:2]plot(\x,{exp(-\x*\x)});
-		\fill[gray, shift={(1.75, -1.5)}](-.75, 0)--(-.75, .57)--(-2, .02)node[midway, above]{$\beta$}--(-2, 0);
-		\fill[white, domain=-2:-.75, shift={(1.75, -1.5)}]plot(\x,{exp(-\x*\x)});
-		\draw[dashed](1, 1)--(1, -1.5);
-		\draw[thick, -latex](-1.75, 0)--(3.5, 0)node[right]{$x$};
-		\draw(0, .05)--(0, 0)node[below]{$\mu_0$};
-		\draw[thick, domain=-1.5:2, samples=100]plot(\x,{exp(-\x*\x)});
-		\draw[thick, -latex](-1.75, -1.5)--(3.5, -1.5)node[right]{$x$};
-		\draw[thick, domain=-2:1.5, samples=100, shift={(1.75, -1.5)}]plot(\x,{exp(-\x*\x)});
-	\end{tikzpicture}
+	\includegraphics{figures/tikz/type-error.pdf}
 	\captionof{figure}{I类错误和II类错误示意图}
 \end{center}
 \begin{definition}{功效函数}{power function}
 	定义功效函数(power function)是样本落在$R$上的概率
-	\begin{align}
+	\begin{equation}
 		\P_\theta\bigkh{(X_1,\ldots,X_n)\in R}=\begin{cases}
 			\alpha(R),&\theta\in\varTheta_0\\
 			1-\beta(R),&\theta\in\varTheta_1
 		\end{cases}
-	\end{align}
+	\end{equation}
 	功效指在$H_1$成立时拒绝$H_0$的概率，即$1-\beta(R)$，越大越好。
 \end{definition}
 \begin{theorem}{Neyman-Pearson范式}{Neyman-Pearson normal form}
@@ -227,19 +214,9 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 		\P(|\avg X-10|\geqslant\abs{\avg x-10})=\P(\abs Z\geqslant 1.87)=0.0614.
 	\]
 	\begin{center}
-		\begin{tikzpicture}[xscale=2, yscale=3]
-			\fill[gray!50](-2.1, 0)--(-2.1, 0.11)--(-1.87, 0.174)--(-1.87,0);
-			\fill[gray!50](2.1, 0)--(2.1, 0.11)--(1.87, 0.174)--(1.87,0);
-			\draw[thick, -latex](-2.5, 0)--(2.5, 0);
-			\draw[thick, domain=-2.1:2.1, samples=100]plot(\x,{exp(-\x*\x/2)});
-			\node[above right]at(1, 0.6){$\Norm(0,1)$};
-			\draw[dashed](1.65, 0)node[below]{\footnotesize 1.65}--(1.65, 0.256);
-			\draw[dashed](1.87, 0)--(1.87, 0.174)node[above]{\footnotesize 1.87};
-			\draw[dashed](1.96, 0)node[below]{\footnotesize\quad 1.96}--(1.96, 0.146);
-			\draw[dashed](-1.65, 0)node[below]{\footnotesize\quad -1.65}--(-1.65, 0.256);
-			\draw[dashed](-1.87, 0)--(-1.87, 0.174)node[above]{\footnotesize -1.87};
-			\draw[dashed](-1.96, 0)node[below]{\footnotesize -1.96}--(-1.96, 0.146);
-		\end{tikzpicture}
+		\includegraphics{figures/tikz/Pvalue.pdf}
+		\captionof{figure}{$P$值检验}
+		\label{fig:P value}
 	\end{center}
 \end{example}
 \begin{definition}{检验$P$值}{}
@@ -312,9 +289,10 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 		H_0:p=0.5,\quad H_1:p=0.7,
 	\]
 	则
-	\begin{align}\label{Bayes test}
+	\begin{equation}
+		\label{eq:Bayes test}
 		\frac{\P(H_0|x)}{\P(H_1|x)}=\frac{\P(H_0)\P(x|H_0)}{\P(H_1)\P(x|H_1)}<1\enspace(\text{或}\ll 1)
-	\end{align}
+	\end{equation}
 	时拒绝$H_0$
 \end{example}
 若$H_0:\theta=\theta_0$，$\varTheta$连续，则$\P(H_0|x)=\P(\varTheta=\theta_0|x)\equiv 0$，此时需要技术性处理，可参考陈5.2.8
@@ -334,9 +312,9 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 	\end{align*}
 	将在$H_0$下$X$可能取值的全体$\Omega$分成互不相交的子集$A_1,\ldots,A_k$，$p_i:=\P(A_i)$。
 	观测到样本值$x_1,\ldots,x_n$落在$A_i$的频数为$f_i$，相应的期望频数为$np_i$，Pearson证明：
-	\begin{align}
+	\begin{equation}
 		\chi^2:=\sum_{i=1}^k\frac{(f_i-np_i)^2}{np_i}\dotsim\chi^2(k-1).
-	\end{align}
+	\end{equation}
 	拒绝域$\chi^2\geqslant\chi^2_\alpha(k-1).$
 \end{theorem}
 推导过程见 \href{https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test}{Pearson's chi-squared test}。应用中需要$n\geqslant 50,\enspace np_i\geqslant 5$，才能较好运用这个定理。
@@ -398,9 +376,9 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 		p_{ij}^\ast=p_{i\cdot}^\ast p_{\cdot j}^\ast=\frac{n_{i\cdot}}n\frac{n_{\cdot j}}n.
 	\]
 	卡方统计量
-	\begin{align}
+	\begin{equation}
 		\chi^2=\sum_{i=1}^a\sum_{j=1}^b\frac{(nn_{ij}-n_{i\cdot}n_{\cdot j})^2}{nn_{i\cdot}n_{\cdot j}}.
-	\end{align}
+	\end{equation}
 	自由度$=ab-1-(a-1+b-1)=(a-1)(b-1)$。
 	\tcblower
 	特别地，当$a=b=2$时，自由度为1
@@ -445,7 +423,7 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 \end{example}
 \section{似然比检验}
 \begin{example}{}{}
-	接\exmref{exm:Bayes test}，式\eqref{Bayes test}中，考虑
+	接\exmref{exm:Bayes test}，式\eqref{eq:Bayes test}中，考虑
 	\[
 		\underset{\text{后验比}}{\frac{\P(H_0|x)}{\P(H_1|x)}}=\underset{\text{先验比}}{\frac{\P(H_0)}{\P(H_1)}}\underset{\text{似然比}}{\frac{\P(x|H_0)}{\P(x|H_1)}}<1\enspace(\text{或}\ll 1)
 	\]
@@ -466,9 +444,9 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 	\Lambda^\ast:=\frac{\sup_{\theta\in\varTheta_0}L(\theta)}{\sup_{\theta\in\varTheta_1}L(\theta)}.
 \]
 基于技术原因，检验统计量为
-\begin{align}
+\begin{equation}
 	\Lambda:=\frac{\sup_{\theta\in\varTheta_0}L(\theta)}{\sup_{\theta\in\varTheta_0\cup\varTheta_1}L(\theta)}\equiv\frac{\sup_{\theta\in\varTheta_0}L(\theta)}{L(\theta^\ast)}.
-\end{align}
+\end{equation}
 易得，当$\theta^\ast\in\varTheta_0$时，$\Lambda=1>\Lambda^\ast$，当$\theta^\ast\in\varTheta_1-\varTheta_0$时，$\Lambda=\Lambda^\ast$，即
 \[
 	\Lambda%(X_1,\ldots,X_n)
@@ -481,9 +459,9 @@ $\Lambda$越小则样本越不支持$H_0$。
 \begin{theorem}{}{}
 	在一定光滑性的条件下，%当$n\to\infty$时，
 	在$H_0$为真的前提下，
-	\begin{align}
+	\begin{equation}
 		-2\ln\Lambda\dto\chi^2(d).
-	\end{align}
+	\end{equation}
 	其自由度$d=\dim(\varTheta_0\cup\varTheta_1)-\dim(\varTheta_0)$，$\dim$表示自由参数的个数。
 \end{theorem}
 \begin{example}{多项分布的似然比估计}{}
@@ -535,9 +513,9 @@ $\Lambda$越小则样本越不支持$H_0$。
 		\frac{(P_1-P_2)-(p_1-p_2)}{\hat{se}}\dotsim\Norm(0,1),
 	\]
 	在$H_0$为真的前提下，$p_1=p_2=:p$，
-	\begin{align*}
+	\[
 		p^\ast=\frac{k_1+k_2}{n_1+n_2},\enspace\hat{se}=\sqrt{p^\ast(1-p^\ast)\biggkh{\frac1{n_1}+\frac1{n_2}}}=0.00175
-	\end{align*}
+	\]
 	检验$P$值$=\P(Z\geqslant 5.20)\ll 10^{-3}$，拒绝$H_0$。
 \end{example}
 \begin{remark}

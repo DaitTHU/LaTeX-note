@@ -15,9 +15,9 @@
 \paragraph{统计学描述}~
 \begin{definition}{一维分布函数}{}
 	对随机过程$\set{X(t)}{t\in T}$，对每个固定的$t$
-	\begin{align}
+	\begin{equation}
 		\CDF_X(x,t):=\P\bigkh{X(t)\leqslant x},\enspace x\in\RR,
-	\end{align}
+	\end{equation}
 	称为随机过程的一维分布函数，$\set{\CDF_X(x,t)}{t\in T}$称为一维分布函数族。
 \end{definition}
 类似地，可以推广定义$n$维分布函数（族）。有限维分布函数可以完全确定随机过程的统计特性。
@@ -50,9 +50,9 @@
 	\begin{compactitem}
 		\item $X(t)$的有限维分布函数族可以由增量$X(t_2)-X(t_1)(t_2\geqslant t_1\geqslant 0)$的分布所确定
 		\item 设$\sigma^2_X(t)$已知，则协方差函数
-		\begin{align}
+		\begin{equation}
 			C_X(s,t)=\sigma^2_X\bigkh{\min(s,t)}.
-		\end{align}
+		\end{equation}
 	\end{compactitem}
 \end{theorem}
 \begin{definition}{Poisson过程}{}
@@ -74,7 +74,7 @@ Poisson过程中任意长度为$ t $的区间中事件个数$\sim\Pois(\lambda t
 \end{theorem}
 \paragraph{二项分布视角}
 将区间$ [0, t] $分为$ k $份，
-当$k\to\infty$时，$N(t)\sim\Bern(k,p)$
+当$k\to\infty$时，$N(t)\sim\Bino(k,p)$
 \[
 	\mu_N(t)=\lim_{k\to\infty}kp=\lim_{k\to\infty}k\biggfkh{\frac{\lambda t}k+o\biggkh{\frac tk}}=\lambda t+o(t).
 \]
@@ -158,13 +158,13 @@ Brown运动是Wiener过程。
 	\sum_{j=1}^\infty p_{ij}(t,t+n)=1,\enspace\forall i.
 \]
 $n$步转移概率矩阵为
-\begin{align}
+\begin{equation}
 	P(n)=\begin{bmatrix}
 		p_{11}(t,t+n)&p_{12}(t,t+n)&\cdots\\
 		p_{21}(t,t+n)&p_{22}(t,t+n)&\cdots\\
 		\vdots&\vdots&\ddots
 	\end{bmatrix}
-\end{align}
+\end{equation}
 每一行元素概率为1.
 \begin{definition}{时齐Markov链}{}
 	若Markov链是时齐的，即$p_{ij}(t,t+n)=p_{ij}(n)$与$t$无关，则概率转移矩阵为
@@ -179,9 +179,9 @@ $n$步转移概率矩阵为
 \end{definition}
 \begin{theorem}{Chapman-Kolomogorov方程}{}
 	时齐Markov链，有
-	\begin{align*}
+	\begin{equation*}
 		p_{ij}(m+n)=\sum_{k=1}^\infty p_{ik}(m)p_{kj}(n),\quad i,j=1,2,\ldots
-	\end{align*}
+	\end{equation*}
 \end{theorem}
 可以简写成矩阵形式
 \[
@@ -201,9 +201,9 @@ $n$步转移概率矩阵为
 \end{definition}
 \begin{theorem}{遍历性的充分条件}{}
 	若存在正整数$m$使得$\forall i,j\in I$有$p_{ij}(m)>0$，则此链具有遍历性，且极限分布是矩阵方程
-	\begin{align}
+	\begin{equation}
 		\pi=\pi P
-	\end{align}
+	\end{equation}
 	满足$\pi_j>0,\textstyle\sum_j\pi=1$的唯一解。
 \end{theorem}
 满足上述条件的Markov链的极限分布是该链的平稳分布，即若将$\pi$作为初始分布，那么每一时刻该链的分布都是$\pi$。
@@ -265,9 +265,9 @@ $n$步转移概率矩阵为
 一个平稳的Gauss过程同时也是严平稳的，因为Gauss过程的有限分布函数由一二阶矩完全确定。
 \begin{definition}{平稳过程}{}
 	一二阶矩不随机时间变化的随机过程，即
-	\begin{align}
+	\begin{equation}
 		\mu_X(t)=\mu_X,\quad R_X(t,t+\tau)=R_X(\tau)
-	\end{align}
+	\end{equation}
 	那么该随机过程称为宽平稳过程(weak stationary stochastic process)，广义平稳过程或平稳过程。
 \end{definition}
 独立增量过程与平稳过程无关，至少从二阶矩的角度，
@@ -385,9 +385,9 @@ $k\geqslant 3$，偏相关函数值变得不显著。
 一般还可以再假设$\epsilon_t\sim\Norm(0,\sigma^2)$为Gauss白噪声序列。
 \begin{definition}{AR($p$)过程}{}
 	平稳过程$\{X_t\}$被叫作p阶自回归(auto-regression)过程，简记为AR($p$)过程，如果
-	\begin{align}
+	\begin{equation}
 		X_t-\varphi_1X_{t-1}-\cdots-\varphi_pX_{t-p}=\epsilon_t.
-	\end{align}
+	\end{equation}
 	白噪声$\epsilon_t$是AR过程的创新(innovation)。
 \end{definition}
 在Gauss过程中，创新也是Gauss的。取名innovation代表给随机过程带来新的熵。
@@ -397,9 +397,9 @@ $k\geqslant 3$，偏相关函数值变得不显著。
 		BX_t=X_{t-1}
 	\]
 	则AR($p$)过程的条件可记为$\Phi(B)X_t=\epsilon_t$，其中
-	\begin{align}
+	\begin{equation}
 		\Phi(B)=1-\varphi_1B-\cdots-\varphi_pB^p
-	\end{align}
+	\end{equation}
 	称为AR($p$)过程的生成多项式。
 \end{definition}
 只有$X_t$与$\epsilon_t$相关，即
@@ -431,8 +431,8 @@ $k\geqslant 3$，偏相关函数值变得不显著。
 		X_t=\epsilon_t-\theta_1\epsilon_{t-1}-\cdots-\theta_q\epsilon_{t-q}
 	\]
 	是有创新$\{\epsilon_t\}$和生成多项式
-	\begin{align}
+	\begin{equation}
 		\Theta(B)=1-\theta_1B-\cdots-\theta_qB^q
-	\end{align}
+	\end{equation}
 	的滑动平均(moving-average)过程MA($q$)。
 \end{definition}
