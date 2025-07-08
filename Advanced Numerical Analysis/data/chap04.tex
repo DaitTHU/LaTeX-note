@@ -67,17 +67,22 @@
 \begin{example}
     {前几个Cotes系数}{}
     \begin{center}
-        \begin{tabular}{ccl}
+        \begin{tabular}{cccc}
             \toprule
             $n$&$C_k^{(n)}$\\%\quad k=0,1,\ldots,n
             \midrule
-            1&1\quad1&/2\\[2ex]
-            2&1\quad4\quad1&/6\\[2ex]
-            3&1\quad3\quad3\quad1&/8\\[2ex]
-            4&7\quad32\quad12\quad12\quad7&/90\\
+            1&1\quad1&/&2\\
+            2&1\quad4\quad1&/&6\\
+            3&1\quad3\quad3\quad1&/&8\\
+            4&7\quad32\quad12\quad12\quad7&/&90\\
+            5&19\quad75\quad50\quad50\quad75\quad19&/&288\\
+            6&41\quad216\quad27\quad572\quad27\quad216\quad41&/&840\\
+            7&751\quad3577\quad1323\quad2989\quad2989\quad1323\quad3577\quad751&/&17280\\
+            8&989\quad5888\quad$-928$\quad10496\quad$-4540$\quad10496\quad$-928$\quad5888\quad989&/&28350\\
             \bottomrule
         \end{tabular}
     \end{center}
+    每行斜线 / 的左边表示$C_0^{(n)},\ldots,C_n^{(n)}$的分子，右边表示他们共同的分母。
 \end{example}
 
 \begin{example}
@@ -179,7 +184,7 @@
 \end{theorem}
 
 \begin{remark}
-    $n\geq 8$时，Newton-Catos积分法存在$A_k^{(n)}<0$，故不是一致稳定的。
+    $n\geq 8$时，Newton-Catos积分法存在$A_k^{(n)}=(b-a)C_k^{(n)}<0$，故不是一致稳定的。
 \end{remark}
 
 \section{复合求积公式}
@@ -257,7 +262,7 @@
 \subsection{Euler-Maclaurin求积公式}
 
 \begin{definition}
-    {Bernuoulli多项式}{}
+    {Bernoulli多项式}{}
     Bernoulli多项式递归定义：$B_0(x)=1$，
     \begin{equation}
         B_k(x)=k\int_0^xB_{k-1}(t)\d t-k\int_0^1\int_0^xB_{k-1}(t)\d t\nd x

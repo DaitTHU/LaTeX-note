@@ -58,7 +58,7 @@
     \]
     对$A_{11}x,A_{22}x_2$递归处理。
     \begin{center}
-        \includegraphics{figures/Hierarchical.pdf}
+        \includegraphics{figures/tikz/Hierarchical.pdf}
         \captionof{figure}{Hierarchical算法示意图，白块表示稀疏部分}
         \label{fig:Hierarchical}
     \end{center}
@@ -141,8 +141,8 @@
     由此便将$N$个$X_n$求和($N^2$)转化成了$N/2$个$E_n,O_n$求和($N^2/2$)。
     采用分而治之的算法思想，可以将DFT的时间复杂度从矩阵向量乘法的$\bigo(N^2)$优化到$\bigo(N\log N)$，这称为快速Fourier变换(fast Fourier transform, FFT)。
     \begin{center}
-        \includegraphics[width=0.8\linewidth]{figures/FFT.pdf}
-        \captionof{figure}{FFT算法示意图($N=2^3=8$)}
+        \includegraphics[width=0.8\linewidth]{figures/tikz/FFT.pdf}
+        \captionof{figure}{FFT算法示意图($N=2^3=8$)，\href{https://tikz.net/fast-fourier-transform/}{作者：Alexandros Tsagkaropoulos}}
         \label{fig:FFT}
     \end{center}
     \tcblower
@@ -227,7 +227,7 @@ Cramer法则？时间复杂度$\bigo(n\cdot(n+1)!)$这是不可接受的。
     \end{equation*}
     便不难从下至上地解得：$x_n=b_n^{(n)}/a_{nn}^{(n)}$，
     \begin{equation}
-        x_i=\division{\biggkh{b_{i}^{(i)}-\sum_{j=i+1}^na_{ij}^{(i)}x_j}}{a_{ii}^{(i)}},\quad i=n-1,\ldots,2,1.
+        x_i=\frac{1}{a_{ii}^{(i)}}\biggkh{b_{i}^{(i)}-\sum_{j=i+1}^na_{ij}^{(i)}x_j},\quad i=n-1,\ldots,2,1.
     \end{equation}
     Gauss消元法的复杂度为$\bigo(n^3)$。
 \end{theorem}

@@ -118,7 +118,7 @@
 \end{definition}
 
 \begin{remark}
-    不严谨地说，完备性要求所有收敛的序列都会收敛到$M$中。%即$M$中没有“缺失点”。
+    不严谨地说，完备性要求：所有在$M$中收敛的序列都会收敛到$M$中。%即$M$中没有“缺失点”。
 \end{remark}
 
 \begin{example}
@@ -168,13 +168,10 @@
 \end{definition}
 
 \begin{corollary}
-    显然，赋范空间也是度量空间，只需定义
-    \[
-        d(a,b)=\norm{a-b},
-    \]
+    显然，赋范空间也是度量空间，只需定义$d(a,b):=\norm{a-b}$即可。
 \end{corollary}
 \begin{remark}
-    赋范空间不一定是完备的，完备的赋范空间也称为Banach空间。
+    赋范空间不一定是完备的，完备的赋范空间称为Banach空间。
 \end{remark}
 
 \begin{example}
@@ -183,6 +180,7 @@
     \begin{equation}
         \label{eqn:p-norm vector}
         \norm x_p=\kh{\sum_{i=1}^n\abs{x_i}^p}^{1/p},
+        \quad p>0.
         % =\begin{cases}
         %     \max_{i}\abs{x_i},&p=\infty\\
         %     \sum_{i=1}^n\abs{x_i},&p=1\\
@@ -191,16 +189,16 @@
     \end{equation}
     特别地，$\norm x_\infty=\lim_{p\to\infty}\norm x_p=\max_i\abs{x_i}$。
     \begin{proof}
-        记$k=\arg\max_i\abs{x_i}$，$\forall p>0$
+        记$k=\arg\max_i\abs{x_i}$，对下式两边开$p$次方并令$p\to\infty$即得
         \[
-            \abs{x_k}^p\leq\sum_{i=1}^n\abs{x_i}^p\leq n\abs{x_k}^p,
+            \abs{x_k}^p\leq\sum_{i=1}^n\abs{x_i}^p\leq n\abs{x_k}^p.
+            \qedhere
         \]
-        两边开$p$次方，并$p\to\infty$，即得$\norm x_\infty=\abs{x_k}.$
     \end{proof}
     \tcblower
     二维位置向量$r=(x,y)\in\RR^2$，方程$\norm r_p=1$在直角坐标中的图像为
     \begin{center}
-        \includegraphics[width=0.5\linewidth]{figures/Lpspace.pdf}
+        \includegraphics[width=0.7\linewidth]{figures/Lpspace.pdf}
         \captionof{figure}{不同的$p$ - 范数}
         \label{fig:Lp space}
     \end{center}
@@ -219,7 +217,7 @@
         %     \kh{\int_a^b\abs{f(x)}^2\d x}^{1/2},&p=2
         % \end{cases}
     \end{equation}
-    当$1<p<\infty$时，$\norm\cdot_p$是不完备的：连续函数Cauchy序列可以按范数收敛于一个不连续的函数。
+    当$1<p<\infty$时，$\norm\cdot_p$是不完备的：连续函数的Cauchy序列可以按$p$ - 范数收敛于一个不连续的函数。
     但$\norm\cdot_\infty$是完备的。
 \end{example}
 
@@ -379,6 +377,7 @@
     \begin{equation}
         P_n(x)=\frac1{2^nn!}\dd[n]x(x^2-1)^n.
     \end{equation}
+    性质：
     \begin{itemize}
         \item 内积 
         \begin{equation}
@@ -493,20 +492,21 @@
 
 \begin{definition}
     {算子范数}{operate norm}
-    定义矩阵的算子范数(operate norm)
+    给定向量范数$\norm\cdot$，定义矩阵的算子范数(operate norm)
     \begin{equation}
         N:\FF^{n\times n}\to\RR,\enspace A\mapsto\sup_{x\neq 0}\frac{\norm{Ax}}{\norm x}.
     \end{equation}
-    称算子范数是该向量范数诱导出来的矩阵范数。
+    称算子范数$N$是该向量范数$\norm\cdot$诱导出来的矩阵范数。
 \end{definition}
 
 \begin{remark}
-    注意$N(I)=1$。故Frobenius范数不是算子范数。
+    注意$N(I)\equiv 1$。故Frobenius范数不是算子范数。
+    \footnote{不考虑$n=1$的平凡情况。}
 \end{remark}
 
 \begin{theorem}
     {}{}
-    $N(\cdot)$是一个矩阵范数，并与向量范数相容。 
+    $N(\cdot)$是一个矩阵范数，并与向量范数$\norm\cdot$相容。 
 \end{theorem}
 
 \begin{proof}
@@ -524,7 +524,7 @@
 \end{definition}
 
 \begin{remark}
-    对于一般的矩阵$A\in\FF^{m\times n}$，有$\sigma(A\dg A)\cup\{0\}=\sigma(AA\dg)\cup\{0\}$，即非0特征值相同，其元素称为$A$的奇异值(sigular value)。
+    对于一般的矩阵$A\in\FF^{m\times n}$，有$\sigma(A\dg A)\setminus\{0\}=\sigma(AA\dg)\setminus\{0\}$，即非0特征值相同，称为$A$的奇异值(sigular value)。
 \end{remark}
 
 \begin{example}
