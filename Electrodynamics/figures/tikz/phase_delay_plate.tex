@@ -1,0 +1,221 @@
+% ref: https://tikz.net/phase-delay-plate-pdp/
+% author: Alexandros Tsagkaropoulos
+
+\documentclass[border=2pt]{standalone}
+
+% Drawing
+\usepackage{tikz}
+
+% Tikz Library
+\usetikzlibrary{3d, shapes.multipart, arrows.meta, angles, quotes, calc}
+
+% Styles
+\tikzset{every node/.style={align=center}}
+
+% New Commands
+%% Polarizer
+\newcommand{\polarizer}[1]{%
+	\begin{scope}[canvas is xz plane at y=1.2]
+		\draw[line join=round, thick, fill=black!40] (#1,-1.2) rectangle (#1+0.2,1.2);
+	\end{scope}
+	%
+	\begin{scope}[canvas is xy plane at z=1.2]
+		\draw[line join=round, thick, fill=black!25](#1,-1.2) rectangle (#1+0.2,1.2);
+	\end{scope}
+	%
+	\begin{scope}[canvas is yz plane at x=#1]
+		\draw[line join=round, thick, fill=black!10] (-1.2,-1.2) rectangle (1.2,1.2);
+		\draw[line join=round, thick, fill=white] (0,0) circle (0.8cm);
+		\draw[line join=round, thick] (0,-0.8) -- (0,0.8);
+	\end{scope}
+}
+%% Phase Delay Plate
+\newcommand{\pkf}[3]{%
+	\begin{scope}[canvas is xz plane at y=1.2]
+		\draw[line join=round, thick, fill=black!40] (#1,-1.2) rectangle (#1+0.4,1.2);
+	\end{scope}
+	%
+	\begin{scope}[canvas is xy plane at z=1.2]
+		\draw[line join=round, thick, fill=black!25](#1,-1.2) rectangle (#1+0.4,1.2);
+	\end{scope}
+	%
+	\begin{scope}[canvas is yz plane at x=#1]
+		\draw[line join=round, thick, fill=black!10] (-1.2,-1.2) rectangle (1.2,1.2);
+		\draw[line join=round, thick, fill=white] (0,0) coordinate (B) ellipse (0.8cm and 0.8cm);
+		\draw[line join=round, thick] (-{0.8*cos(#2)}, -{0.8*sin(#2)}) -- ({0.8*cos(#2)},{0.8*sin(#2)}) coordinate (C');
+		\draw[line join=round, thick] (-{0.8*cos(#3)}, -{0.8*sin(#3)}) coordinate (A') -- ({0.8*cos(#3)},{0.8*sin(#3)}) coordinate (A);
+		\draw[line join=round, dashed, thick] (0,-0.8) -- (0,0.8) coordinate (C);
+		\pic[line join=round, draw, thick, "$\theta$", angle radius=0.4cm, angle eccentricity=1.6] {angle = C--B--A};
+		\MarkRightAngle[size=5pt](A',B,C');
+	\end{scope}
+}
+%% Analyser
+\newcommand{\analyser}[2]{%
+	\begin{scope}[canvas is xz plane at y=1.2]
+		\draw[line join=round, thick, fill=black!40] (#1,-1.2) rectangle (#1+0.2,1.2);
+	\end{scope}
+	%
+	\begin{scope}[canvas is xy plane at z=1.2]
+		\draw[line join=round, thick, fill=black!25](#1,-1.2) rectangle (#1+0.2,1.2);
+	\end{scope}
+	%
+	\begin{scope}[canvas is yz plane at x=#1]
+		\draw[line join=round, thick, fill=black!10] (-1.2,-1.2) rectangle (1.2,1.2);
+		\draw[line join=round, thick, fill=white] (0,0) coordinate (B) ellipse (0.8cm and 0.8cm);
+		\draw[line join=round, dashed] (0,0) coordinate (B) ellipse (0.6cm and 0.8cm);
+		\draw[line join=round, thick] (-{0.8*cos(#2)}, -{0.8*sin(#2)}) -- ({0.8*cos(#2)},{0.8*sin(#2)}) coordinate (A);
+		\draw[line join=round, dashed, thick] (0,-0.8) -- (0,0.8) coordinate (C);
+		\MarkRightAngle[size=6pt](A,B,C);
+	\end{scope}
+}
+%% Draw Line in Polar Coordinates from (0,0) to (r,theta)
+\newcommand{\cdraw}[2]{\draw[very thick, -stealth, red] (0,0) -- ({#1*cos(#2)}, {#1*sin(#2)});}
+
+% Notation
+\usepackage{amsmath}
+
+\begin{document}
+
+%Layers
+\pgfdeclarelayer{layer1}
+\pgfdeclarelayer{layer2}
+\pgfdeclarelayer{layer3}
+\pgfdeclarelayer{layer4}
+\pgfdeclarelayer{layer5}
+\pgfdeclarelayer{layer6}
+\pgfdeclarelayer{layer7}
+%
+\pgfsetlayers{main, layer7, layer6, layer5, layer4, layer3, layer2, layer1}
+
+% Right Angle Mark
+\def\MarkRightAngle[size=#1](#2,#3,#4){\draw[thick, line join=round] ($(#3)!#1!(#2)$) -- ($($(#3)!#1!(#2)$)!#1!90:(#2)$) -- ($(#3)!#1!(#4)$)}
+	
+\begin{tikzpicture}[x={(1cm,0.4cm)}, y={(8mm, -3mm)}, z={(0cm,1cm)}, line cap=round, line join=round]
+
+%	% Main Axes
+%	\draw[->] (0,0,0) -- (12,0,0) node[right] {$x$};
+%	\draw[->] (0,0,0) -- (0,2,0) node[below left] {$y$};
+%	\draw[->] (0,0,0) -- (0,0,2) node[above] {$z$};
+	
+	% Big Axis 
+	\draw[line cap=round, -latex, very thick] (-0.5,0,0) -- (14.5,0,0);
+	
+	% Polarizers
+	\begin{pgfonlayer}{layer2}
+		\polarizer{2}
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{layer4}
+		\pkf{5.5}{40}{130}
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{layer6}
+		\analyser{10.5}{0}
+	\end{pgfonlayer}
+	
+	% Electric Field
+	%% Unpolarized
+	\begin{pgfonlayer}{layer1}
+		\begin{scope}[canvas is yz plane at x=0.5]
+			\foreach \i in {0,45,...,315}
+			{
+				\cdraw{0.8}{\i}
+			}		
+		\end{scope}
+	\end{pgfonlayer}
+	%% Polarized Linearly 1
+	\begin{pgfonlayer}{layer3}
+		\foreach \i in {3,3.5,...,5}
+			{
+				\begin{scope}[canvas is yz plane at x=\i]
+					\cdraw{0.8}{90}
+					\cdraw{0.8}{270}
+				\end{scope}
+			}
+	\end{pgfonlayer}
+	%% Polarized Elliptically
+	\begin{pgfonlayer}{layer5}
+		\draw[very thick, red, variable=\t, domain=5.5:10.5, samples=300] plot (\t, {0.6*sin(deg(\t*4+90))}, {0.8*cos(deg(\t*4+90))});
+	
+		\foreach \i [evaluate={\k = \i*4; \ii = \i;}] in {5.5,5.55,...,10.5}
+			{
+				\draw[-{Latex[length=1mm]}] (\ii,0,0) -- +(0, {0.6*sin(deg(\k+90))}, {0.8*cos(deg(\k+90))});
+			}
+	\end{pgfonlayer}
+	%% Polarized Linearly 2
+	\begin{pgfonlayer}{layer7}
+		\begin{scope}[canvas is yz plane at x=13]
+			\cdraw{0.6}{0}
+			\cdraw{0.6}{180}
+			\draw[dashed] (0,-0.8) -- (0,0.8);
+			\coordinate (A) at ({0.6*cos(0)},{0.6*sin(0)});
+			\coordinate (B) at (0,0);
+			\coordinate (C) at (0,0.6); 
+			\MarkRightAngle[size=6pt](A,B,C);
+		\end{scope}
+		
+		\foreach \i in {10,10.5,...,13.5}
+			{	
+				\begin{scope}[canvas is yz plane at x=\i]
+					\cdraw{0.6}{0}
+					\cdraw{0.6}{180}
+				\end{scope}
+			}
+	\end{pgfonlayer}
+	
+	% Nodes
+	%% Upper
+	\begin{scope}[canvas is yz plane at x=1.8]
+		\node[rotate=-20] at (0.7,2) {\small{Polarizer}};
+	\end{scope}
+	%
+	\begin{scope}[canvas is yz plane at x=5.5]
+		\node[rotate=-20] at (0.7,2) {\small{PDP $\lambda/4$}};
+	\end{scope}
+	%
+	\begin{scope}[canvas is yz plane at x=10.3]
+		\node[rotate=-20] at (0.7,2) {\small{Analyser}};
+	\end{scope}
+	%% Lower
+	\begin{pgfonlayer}{layer2}
+		\begin{scope}[canvas is xy plane at z=-0.2]
+			\draw[latex-] (2,0) to[out=160, in=275] (2,2.8) node[right, yshift=-3pt] {\small{Polarization Plate}\\[-0.5mm]\small{of Polarizer}};
+		\end{scope}
+	\end{pgfonlayer}
+	%
+	\begin{pgfonlayer}{layer4}
+		\begin{scope}[canvas is xy plane at z=-0.38]
+			\draw[latex-] (5.5,0.3) to[out=130, in=275] (6,2.5) node[right, yshift=-3pt] {\small{$\mathrm{T}$ Axis}};
+		\end{scope}
+		\begin{scope}[canvas is xy plane at z=0.38]
+			\draw[latex-] (5.5,0.47) to[out=130, in=275] (6,3) node[right, yshift=-3pt] {\small{$\mathrm{B}$ Axis}};
+		\end{scope}
+	\end{pgfonlayer}
+	%
+	\begin{pgfonlayer}{layer6}
+		\begin{scope}[canvas is xy plane at z=0]
+			\draw[latex-] (10.5,0.5) to[out=180, in=270] (10.5,2.8) node[right, yshift=-3pt] {\small{Polarization Plate}\\[-0.5mm]\small{of Analyser}};
+		\end{scope}
+	\end{pgfonlayer}	
+	%% Intensities of Light
+	\node at (0.5,0,1.2) {\small{$I_o$}};
+	\node at (3.8,0,1.2) {\small{$I_1$}};	
+	\node at (8,0,1.4) {\small{$I_2$}};
+	\node at (12,0,0.8) {\small{$I_3$}};
+	%% Propagation Direction
+	\node at (14,0.5,1) {\small{Propagation}\\[-0.5mm]\small{Direction}};
+	
+	% Refinements
+	\begin{pgfonlayer}{layer1}
+		\draw[line cap=round, thick] (2,0,-0.8) -- (2,0,0.8);
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{layer1}
+		\draw[line cap=round, very thick] (1,0,0) -- (1.99,0,0);
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{layer4}
+		\draw[line cap=round, very thick] (4.5,0,0) -- (5.5,0,0);
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{layer6}
+		\draw[line cap=round, very thick] (9.5,0,0) -- (10.49,0,0);
+	\end{pgfonlayer}
+\end{tikzpicture}
+	
+\end{document}

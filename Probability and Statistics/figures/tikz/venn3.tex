@@ -1,0 +1,142 @@
+% ref: https://tikz.net/venn-diagrams/
+% author: Jake
+
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\begin{document}
+\tikzstyle{reverseclip}=[insert path={(current page.north east) --
+  (current page.south east) --
+  (current page.south west) --
+  (current page.north west) --
+  (current page.north east)}
+]
+
+\tikzset{
+    venn0/.code={
+        \begin{scope}
+            \begin{pgfinterruptboundingbox}
+            \path  [clip] (-90:0.7cm) circle [radius=1cm] [reverseclip];
+            \path  [clip] (30:0.7cm) circle [radius=1cm] [reverseclip];
+            \path  [clip] (-210:0.7cm) circle [radius=1cm] [reverseclip];
+            \end{pgfinterruptboundingbox}
+            \fill [orange] (-2,-2) rectangle (2,2);
+        \end{scope}
+    },
+    venn1/.code={
+        \begin{scope}
+            \begin{pgfinterruptboundingbox}
+            \path  [clip] (-90:0.7cm) circle [radius=1cm];
+            \path  [clip] (30:0.7cm) circle [radius=1cm] [reverseclip];
+            \path  [clip] (-210:0.7cm) circle [radius=1cm] [reverseclip];
+            \end{pgfinterruptboundingbox}
+            \fill [orange] (-2,-2) rectangle (2,2);
+        \end{scope}
+    },
+    venn2/.code={
+        \begin{scope}
+            \begin{pgfinterruptboundingbox}
+            \path  [clip] (-90:0.7cm) circle [radius=1cm] [reverseclip];
+            \path  [clip] (30:0.7cm) circle [radius=1cm];
+            \path  [clip] (-210:0.7cm) circle [radius=1cm] [reverseclip];
+            \end{pgfinterruptboundingbox}
+            \fill [orange] (-2,-2) rectangle (2,2);
+        \end{scope}
+    },
+    venn3/.code={
+        \begin{scope}
+            \begin{pgfinterruptboundingbox}
+            \path  [clip] (-90:0.7cm) circle [radius=1cm] [reverseclip];
+            \path  [clip] (30:0.7cm) circle [radius=1cm] [reverseclip];
+            \path  [clip] (-210:0.7cm) circle [radius=1cm];
+            \end{pgfinterruptboundingbox}
+            \fill [orange] (-2,-2) rectangle (2,2);
+        \end{scope}
+    },
+    venn4/.code={
+        \begin{scope}
+            \begin{pgfinterruptboundingbox}
+            \path  [clip] (-90:0.7cm) circle [radius=1cm] [reverseclip];
+            \path  [clip] (30:0.7cm) circle [radius=1cm] ;
+            \path  [clip] (-210:0.7cm) circle [radius=1cm] ;
+            \end{pgfinterruptboundingbox}
+            \fill [orange] (-2,-2) rectangle (2,2);
+        \end{scope}
+    },
+    venn5/.code={
+        \begin{scope}
+            \begin{pgfinterruptboundingbox}
+            \path  [clip] (-90:0.7cm) circle [radius=1cm];
+            \path  [clip] (30:0.7cm) circle [radius=1cm] [reverseclip];
+            \path  [clip] (-210:0.7cm) circle [radius=1cm];
+            \end{pgfinterruptboundingbox}
+            \fill [orange] (-2,-2) rectangle (2,2);
+        \end{scope}
+    },
+    venn6/.code={
+        \begin{scope}
+            \begin{pgfinterruptboundingbox}
+            \path  [clip] (-90:0.7cm) circle [radius=1cm];
+            \path  [clip] (30:0.7cm) circle [radius=1cm] ;
+            \path  [clip] (-210:0.7cm) circle [radius=1cm] [reverseclip];
+            \end{pgfinterruptboundingbox}
+            \fill [orange] (-2,-2) rectangle (2,2);
+        \end{scope}
+    },
+    venn7/.code={
+        \begin{scope}
+            \begin{pgfinterruptboundingbox}
+            \path  [clip] (-90:0.7cm) circle [radius=1cm];
+            \path  [clip] (30:0.7cm) circle [radius=1cm] ;
+            \path  [clip] (-210:0.7cm) circle [radius=1cm];
+            \end{pgfinterruptboundingbox}
+            \fill [orange] (-2,-2) rectangle (2,2);
+        \end{scope}
+    },
+    vennoutlines/.code={
+        \draw (-90:0.7cm) circle [radius=1cm];
+        \draw (30:0.7cm) circle [radius=1cm];
+        \draw (-210:0.7cm) circle [radius=1cm];
+    }
+}
+
+\noindent%
+\foreach \a in {0,1}
+\foreach \b in {0,1}
+\foreach \c in {0,1}
+\foreach \d in {0,1}
+\foreach \e in {0,1}
+\foreach \f in {0,1}
+\foreach \g in {0,1}
+\foreach \h in {0,1}{%
+\begin{tikzpicture}[remember picture, scale=0.2]
+\ifnum\a=0
+    \tikzset{venn0}
+\fi
+\ifnum\b=0
+    \tikzset{venn1}
+\fi
+\ifnum\c=0
+    \tikzset{venn2}
+\fi
+\ifnum\d=0
+    \tikzset{venn3}
+\fi
+\ifnum\e=0
+    \tikzset{venn4}
+\fi
+\ifnum\f=0
+    \tikzset{venn5}
+\fi
+\ifnum\g=0
+    \tikzset{venn6}
+\fi
+\ifnum\h=0
+    \tikzset{venn7}
+\fi
+\tikzset{vennoutlines}
+\end{tikzpicture}
+}
+
+\end{document}
