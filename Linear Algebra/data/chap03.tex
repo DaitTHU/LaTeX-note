@@ -144,7 +144,82 @@
 	\tcblower
 	$\C(A)$的基：$\rref(A)$的所有主列构成$\C(A)$的一组基。
 \end{example}
+
+\begin{example}
+	{用矩阵配平化学方程式}{}
+	硫酸铜溶液可处理白磷中毒，其原理为：
+	\[
+		\mathrm{P_4+CuSO_4+H_2O\to Cu_3P+H_3PO_4+H_2SO_4}.
+	\]
+	由反应前后$\mathrm{H,O,P,S,Cu}$元素守恒可得系数矩阵的每行为：
+	\[
+		\begin{bmatrix}
+			&&2&&3&2\\
+			&4&1&&4&4\\
+			4&&&1&1\\
+			&1&&&&1\\
+			&1&&3
+		\end{bmatrix}
+		\begin{bmatrix}
+			\nu_\mathrm{P_4}\\\nu_\mathrm{CuSO_4}\\\nu_\mathrm{H_2O}\\\nu_\mathrm{Cu_3P}\\\nu_\mathrm{H_3PO_4}\\\nu_\mathrm{H_2SO_4}
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			0\\0\\0\\0\\0
+		\end{bmatrix}
+		\implies
+		\begin{bmatrix}
+			\nu_\mathrm{P_4}\\\nu_\mathrm{CuSO_4}\\\nu_\mathrm{H_2O}\\\nu_\mathrm{Cu_3P}\\\nu_\mathrm{H_3PO_4}\\\nu_\mathrm{H_2SO_4}
+		\end{bmatrix}
+		=k\begin{bmatrix}
+			11\\60\\96\\-20\\-24\\-60
+		\end{bmatrix}.
+	\]
+	这相当于求系数矩阵的零空间的基，得到配平的化学方程式为：
+	\[
+		\mathrm{11\,P_4+60\,CuSO_4+96\,H_2O=20\,Cu_3P+24\,H_3PO_4+60\,H_2SO_4}.
+	\]
+	\tcblower
+	但是这种方法也不是万能的，比如高锰酸钾与双氧水的反应：
+	\[
+		\mathrm{MnO_4^-+H_2O_2+H^+\to Mn^{2+}+H_2O+O_2\uparrow}.
+	\]
+	由反应前后$\mathrm{H,O,Mn}$元素守恒及电荷守恒可得：
+	\[
+		\begin{bmatrix}
+			&2&1&&2\\
+			4&2&&&1&2\\
+			1&&&1\\
+			-1&&1&2
+		\end{bmatrix}
+		\begin{bmatrix}
+			\nu_\mathrm{MnO_4^-}\\\nu_\mathrm{H_2O_2}\\\nu_\mathrm{H^+}\\\nu_\mathrm{Mn^{2+}}\\\nu_\mathrm{H_2O}\\\nu_\mathrm{O_2}
+		\end{bmatrix}=\begin{bmatrix}
+			0\\0\\0\\0
+		\end{bmatrix}
+		\implies
+		\begin{bmatrix}
+			\nu_\mathrm{MnO_4^-}\\\nu_\mathrm{H_2O_2}\\\nu_\mathrm{H^+}\\\nu_\mathrm{Mn^{2+}}\\\nu_\mathrm{H_2O}\\\nu_\mathrm{O_2}
+		\end{bmatrix}=k_1\begin{bmatrix}
+			2\\5\\6\\-2\\-8\\-5
+		\end{bmatrix}+k_2\begin{bmatrix}
+			0\\2\\0\\0\\-2\\-1
+		\end{bmatrix}.
+	\]
+	零空间有两个基，不能确定最简系数，这是因为该方程可以线性叠加双氧水分解反应($\mathrm{2\,H_2O_2=2\,H_2O+O_2\uparrow}$)。
+	后来通过同位素标记法确定了$\mathrm{O_2}$中的氧原子仅来自$\mathrm{H_2O_2}$而不是$\mathrm{MnO_4^-}$：
+	\[
+		\mathrm{Mn{}^{16}O_4^-+H_2{}^{18}O_2+H^+\to Mn^{2+}+H_2{}^{16}O+{}^{18}O_2\uparrow}.
+	\]	
+	才能以$\mathrm{{}^{16}O,{}^{18}O}$守恒确定$\nu_\mathrm{MnO_4^-}:\nu_\mathrm{H_2O_2}=2:5$。
+	\[
+		\mathrm{2\,MnO_4^-+5\,H_2O_2+6\,H^+=2\,Mn^{2+}+8\,H_2O+5\,O_2\uparrow}.
+	\]
+\end{example}
+
+\clearpage
 \section{矩阵的秩、线性代数基本定理}
+
 \begin{definition}{矩阵的秩}{rank}
 	矩阵$A$的秩(rank)定义为列空间的维数：%\footnote{后面很快会证明行空间列空间维数相等。}：
 	\[
