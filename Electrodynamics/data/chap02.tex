@@ -124,7 +124,7 @@
 \begin{example}{电像法处理匀强电场中的导体球问题}{method of images, sphere conductor in uniform E}
     考虑均匀电场$E_0$中半径为$a$的导体球。均匀场可以认为是在无穷远处由带适当电荷的正负电荷产生的，如下图所示
     \begin{center}
-        \includegraphics{figures/tikz/uniform_E_approx.pdf}
+        \includegraphics[page=9]{figures/tikz/layouts.pdf}
         \captionof{figure}{正负电荷近似匀强电场}
         \label{fig:uniform E approx +-q}
     \end{center}
@@ -192,13 +192,7 @@
 \begin{example}{两半球具有不同电势的导体球}{2 hemisphere conductor at different potentials}
     一个半径为$a$的导电球由两个电势分别为$\pm V$的半球壳组成，
     \begin{center}
-        \begin{tikzpicture}[scale=.6]
-            \draw[thick](0, 0)circle(2.5);
-            \draw[dashed](2.5, 0)arc(0:180:2.5 and 1);
-            \draw(-2.5, 0)arc(-180:0:2.5 and 1);
-            \node at(2.5, 2){$+V$};
-            \node at(2.5, -2){$-V$};
-        \end{tikzpicture}
+        \includegraphics[page=10]{figures/tikz/layouts.pdf}
         \captionof{figure}{两半球具有不同电势的导体球}
         \label{fig:2 hemisphere}
     \end{center}
@@ -327,14 +321,7 @@
 \begin{example}{长方体边界条件下的Laplace方程的解}{solution in cuboid Laplace}
     给定如\figref{fig:cuboid boundary} 所示边界条件，只有$z=c$的边界有电势$V(x,y)$外，其他面电势均为0，求长方体内部电位分布。
     \begin{center}
-        \begin{tikzpicture}
-            \draw[thick](0, 0)node[left]{$a$}rectangle(3, 2);
-            \draw[thick](0, 2)--(1, 3)node[left]{$c$}--(4, 3)--(3, 2);
-            \draw[thick](4, 3)--(4, 1)node[below]{$b$}--(3, 0);
-            \draw[<->](5, 1)node[right]{$y$}--(1, 1)node[left]{$O$}--(-.7, -.7)node[left]{$x$};
-            \draw[->](1, 1)--(1, 4)node[left]{$z$};
-            \draw[->](2, 3.3)node[above]{$V(x,y)$}--(2, 2.5);
-        \end{tikzpicture}
+        \includegraphics[page=11]{figures/tikz/layouts.pdf}
         \captionof{figure}{矩形区域边界条件}
         \label{fig:cuboid boundary}
     \end{center}
@@ -384,13 +371,7 @@
 \begin{example}{二维边界条件}{2D boundary condition}
     考虑$0<x<a,\;y>0$的边界，显然$\Phi$与$z$无关：
     \begin{center}
-        \begin{tikzpicture}[even odd rule]
-            \coordinate (O) at (0, 0);
-            \fill[pattern=north east lines](-.5, -.5)rectangle(2.5, 3)(O)rectangle(2, 3);
-            \draw[<->](3, 0)node[right]{$x$}--(O)node[left]{$O$}--(0, 3.5)node[left]{$y$};
-            \draw[thick](0, 3)--(O)--(2, 0)node[below]{$a$}--(2, 3);
-            \draw[<-](1, 0)--(1, 0.5)node[above]{$V(x)$};
-        \end{tikzpicture}
+        \includegraphics[page=12]{figures/tikz/layouts.pdf}
         \captionof{figure}{二维边界条件}
     \end{center}
     二维直角坐标Laplace方程为
@@ -456,18 +437,7 @@
 若区域包含原点，则要求$d_n\equiv 0$。
 \begin{example}{二维拐角内和沿棱边的电场与电荷密度}{field and charge density in 2D Corners and along edges}
     \begin{center}
-        \begin{tikzpicture}
-            \coordinate (o) at (0, 0);
-            \coordinate (p) at (4, 1);
-            \coordinate (a) at (5, 0);
-            \coordinate (b) at (3, 4);
-            \fill[pattern=north east lines](2.3, 4)--(b)--(o)--(a)--(5, -.4)--(-.8, -.4);
-            \draw[thick](b)--(o)node[left]{$O$}--(a);
-            \draw[dashed](o)--(p)node[right]{$P$}node[midway, above, sloped]{$\rho$};
-            \fill(p)circle(.05);
-            \pic[draw, angle radius=20, angle eccentricity=1.5, "$\beta$"]{angle=a--o--b};
-            \pic[draw, angle radius=40, angle eccentricity=1.25, "$\phi$"]{angle=a--o--p};
-        \end{tikzpicture}
+        \includegraphics[page=13]{figures/tikz/layouts.pdf}
         \captionof{figure}{极坐标}
     \end{center}
     由边界条件，在$\phi=0,\beta$时$\Phi=V$可得
@@ -661,20 +631,7 @@ $\alpha$是待定系数，从而
 \begin{example}{锥形孔内尖端附近的电场特性}{field near the tip of the conical hole}
     如图所示的锥形孔边界，求其尖端附近的电场特性。
     \begin{center}
-        \begin{tikzpicture}
-            \coordinate (o) at (0, 0);
-            \coordinate (z) at (0, 5);
-            \coordinate (a) at (3, 5);
-            \coordinate (b) at (-3, 5);
-            \coordinate (p) at (1, 4);
-            \fill[pattern=north east lines](b)--(o)--(a)--(3, 4.5)--(0, -.5)--(-3, 4.5);
-            \draw[thick](a)--(o)--(b);
-            \draw[dashed](z)--(o)--(p);
-            \draw[dashed](0, 3)ellipse(1.75 and .5);
-            \fill(p)circle(.05)node[right]{$P$};
-            \pic[draw, angle radius=30, angle eccentricity=1.25, "$\beta$"]{angle=z--o--b};
-            \pic[draw, angle radius=50, angle eccentricity=1.25, "$\theta$"]{angle=p--o--z};
-        \end{tikzpicture}
+        \includegraphics[page=14]{figures/tikz/layouts.pdf}
         \captionof{figure}{锥形孔}
     \end{center}
     在$\theta=0$附近展开，设$\xi:=(1-\cos\theta)/2$，则 
@@ -890,16 +847,7 @@ Bessel方程的另一对重要线性无关解是Hankel函数(第三类Bessel函�
 \begin{example}{圆柱体内电势分布}{potential inside cylinder}
     如下图，圆柱体除顶面外其余面电势均为0.
     \begin{center}
-        \begin{tikzpicture}[scale=.8]
-            \draw[<->](0, 5)node[left]{$z$}--(0, 0)node[left]{$O$}--(3, 0)node[right]{$y$};
-            \draw[->](0, 0)--(-1.5, -1)node[left]{$x$};
-            \draw[dashed](2, 0)arc(0:180:2 and .5);
-            \draw[thick](-2, 0)arc(-180:0:2 and .5);
-            \draw[thick](0, 4)ellipse(2 and .5);
-            \draw[thick](2, 0)node[below right]{$a$}--(2, 4);
-            \draw[thick](-2, 0)--(-2, 4)node[midway, left]{$L$};
-            \draw[<-](1, 4)--(2, 5)node[right]{$V(\rho,\phi)$};
-        \end{tikzpicture}
+        \includegraphics[page=15]{figures/tikz/layouts.pdf}
         \captionof{figure}{圆柱形边界条件}
     \end{center}
     由边界条件可知，
@@ -997,13 +945,7 @@ $g_\ell$满足
 \begin{example}{同心球边界条件}{concentric spheres boundary}
     边界面为半径为$a,b\,(a<b)$的同心球面，
     \begin{center}
-        \begin{tikzpicture}[even odd rule]
-            \coordinate[label=left:$O$](O)at(0, 0);
-            \fill[pattern=north east lines](O)circle(2.2)(O)circle(2)(O)circle(.8)(O)circle(.6);
-            \draw[thick](O)circle(.8)(O)circle(2);
-            \draw[->](O)--(30:.8)node[midway, sloped, above]{$a$};
-            \draw[->](O)--(-30:2)node[midway, sloped, above]{$b$};
-        \end{tikzpicture}
+        \includegraphics[page=16]{figures/tikz/layouts.pdf}
         \captionof{figure}{同心球边界条件}
     \end{center}
     由$g_\ell(a,r')=0,\;g_\ell(b,r')=0$可得
