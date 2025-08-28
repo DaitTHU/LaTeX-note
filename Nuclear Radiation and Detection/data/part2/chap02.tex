@@ -141,7 +141,7 @@ $\lambda_0$是离子在单位气压气体中的自由程，$\avg v$是乱运动�
 	\nu_\xi^2=\frac FN+\frac1N\nu_M^2>\frac FN.
 \]
 因此雪崩带来的$\nu_M$会增大$\nu_\xi$。若电场再增强，光电子和二次电子使$N$再增加，就会偏离正比关系。
-\newpage
+
 \begin{center}
 	\captionof{table}{气体探测器工作区}
 	\begin{tabular}{ccl}
@@ -179,16 +179,9 @@ $\lambda_0$是离子在单位气压气体中的自由程，$\avg v$是乱运动�
 但也可以是流气的。
 \paragraph{输出信号产生的物理过程}
 以气体探测器的简化结构入手，极板a上加高压$V_0$，极板a, b间电容量为$C_1$，则两极板的电荷量$Q_0=C_1V_0$
-\usetikzlibrary {circuits.ee.IEC}
+
 \begin{center}
-	\begin{tikzpicture}[circuit ee IEC]
-		\draw [thick] (-4, 2.5) node [left] {$+Q_0$} node [above right] {b} -- (-2, 2.5);
-		\draw [thick] (-4, .5) node [left] {$-Q_0$} node [below right] {a} -- (-2, .5);
-		\draw [latex-latex] (-2.2, .5) -- (-2.2, 2.5) node [midway, right] {$d$};
-		\draw [latex-latex] (-3.5, .5) -- (-3.5, 1.2) node [midway, right] {$x$} node [contact={info={$+e$}}] {};
-		\draw (-3, .5) to (-3, 0) to (0, 0) to [ground={at end}] (0, -.5);
-		\draw (-3, 2.5) to (-3, 3) to (0, 3) to [battery={info={$+V_0$}}] (0, 0) node [contact] {};
-	\end{tikzpicture}
+	\includegraphics[page=14]{figures/tikz/layouts.pdf}
 	\captionof{figure}{气体探测器简化结构}
 \end{center}
 在电离室内某点引入一单位正电荷$+e$，它将在两极板上分别感应出
@@ -209,17 +202,7 @@ $\lambda_0$是离子在单位气压气体中的自由程，$\avg v$是乱运动�
 \paragraph{电离室的输出回路}
 输出回路是信号电流流过的所有回路，包含探测器自身、负载电阻、测量仪器、连线。
 \begin{center}
-	\begin{tikzpicture}[circuit ee IEC]
-		\draw (6, 0) to (0, 0) to [ground={at end}] (0, -.5);
-		\draw (2, 3) to (0, 3) to [battery] (0, 0) node [contact] {};
-		\draw (2, 0) node [contact] {} to [resistor={info={$R_L$}}] (2, 1.5) to [capacitor={info={$C_1$}}] (2, 3);
-		\draw (3.5, 0) node [contact] {} to [capacitor={info={$C'$}}] (3.5, 1.5) node [contact] {};
-		\draw (5, 0) node [contact] {} to [resistor={info={$R_i$}}] (5, 1.5) node [contact] {};
-		\draw (6, 0) to [capacitor={info={$C_i$}}] (6, 1.5) to (2, 1.5) node [contact] {};
-		\draw [dashed] (4.2, -.2) rectangle (6.5, 1.7);
-		\node [above] at (5.25, 1.7) {测量仪器};
-		\node [right, align=left] at (7, 1.5) {\small$C_1$探测器电容\\$R_L$负载电阻\\$C'$电缆电容等\\$R_i$测量仪器输入电阻\\$C_i$测量仪器输入电容};
-	\end{tikzpicture}
+	\includegraphics[page=15]{figures/tikz/layouts.pdf}
 	\captionof{figure}{输出回路电路图}
 \end{center}
 总电阻$R_0=R_L\parallel R_i$，总电容$C_0=C_1+C'+C_i$。
@@ -258,13 +241,7 @@ $\lambda_0$是离子在单位气压气体中的自由程，$\avg v$是乱运动�
 平板电离室$V_0=Ed$，初始离子和电子的数为$N^+(0)=N^-(0)=N_0$。
 电子漂移速度和离子漂移速度比$u^-/u^+\sim 10^3$，故$I\vs t$曲线如图
 \begin{center}
-	\begin{tikzpicture}
-		\coor 54tI;
-		\draw[thick](0, 3)node[left]{$I_1$}--(.5, 3)node[midway, above]{\si{\micro s}}--(1, .5)--(3.7, .5)node[midway, above]{ms}--(4.2, 0)node[below]{$T^+$};
-		\draw[dashed](.5, 3)--(.5, 0)node[below]{$t_1$};
-		\draw[dashed](0, .5)node[left]{$I_2$}--(1, .5)--(1, 0)node[below]{$T^-$};
-		\draw[dashed](3.7, .5)--(3.7, 0)node[below]{$t_2$};
-	\end{tikzpicture}
+	\includegraphics[page=16]{figures/tikz/layouts.pdf}
 	\captionof{figure}{平板电离室的外回路电流}
 \end{center}
 \begin{compactenum}
@@ -291,37 +268,7 @@ $\lambda_0$是离子在单位气压气体中的自由程，$\avg v$是乱运动�
 
 把电离室看成理想电流源$I_0$和$C_1$并联等效。
 \begin{center}
-	\begin{tikzpicture}[circuit ee IEC]
-		\foreach \contact/\x in {1/1.5, 2/3, 3/4.5, 4/6, 5/7.5} {
-			\node [contact] (up \contact) at (\x, 2) {};
-			\node [contact] (dn \contact) at (\x, 0) {};
-		}
-		\draw (0, 0) to [current source={direction info={}, info={$I_0$}}] (0, 2) to (9, 2);
-		\draw (9, 0) to (0, 0) to [ground={at end}] (0, -.5);
-		\draw (dn 1) to [capacitor={info={$C_1$}}] (up 1);
-		\draw (dn 2) to [resistor={info={$R_L$}}] (up 2);
-		\draw (dn 3) to [capacitor={info={$C'$}}] (up 3);
-		\draw (dn 4) to [resistor={info={$R_i$}}] (up 4);
-		\draw (dn 5) to [capacitor={info={$C_i$}}] (up 5);
-		\draw[latex-latex](9, 0)--(9, 2)node[midway, fill=white]{$V$};
-		\draw[dashed](-.8, -.2)rectangle(1.9, 2.2);
-		\draw[dashed](2.1, -.2)rectangle(4.9, 2.2);
-		\draw[dashed](5.1, -.2)rectangle(7.9, 2.2);
-	\end{tikzpicture}
-	\\
-	$\Downarrow$
-	\\[3ex]
-	\begin{tikzpicture}[circuit ee IEC]
-		\foreach \contact/\x in {1/1.5, 2/3} {
-			\node [contact] (up \contact) at (\x, 2) {};
-			\node [contact] (dn \contact) at (\x, 0) {};
-		}
-		\draw (0, 0) to [current source={direction info={}, info={$I_0$}}] (0, 2) to (4.5, 2);
-		\draw (4.5, 0) to (0, 0) to [ground={at end}] (0, -.5);
-		\draw (dn 1) to [capacitor={info={$C_0$}}] (up 1);
-		\draw (dn 2) to [resistor={info={$R_0$}}] (up 2);
-		\draw[latex-latex](4.5, 0)--(4.5, 2)node[midway, fill=white]{$V$};
-	\end{tikzpicture}
+	\includegraphics[page=17]{figures/tikz/layouts.pdf}
 	\captionof{figure}{电离室等效电路图}
 \end{center}
 %电流，是载流子流动的产物。其大小由(1)载流子的数量，(2)载流子单位时间扫过的电位差占极板间压差的份额决定。
@@ -361,13 +308,7 @@ $\lambda_0$是离子在单位气压气体中的自由程，$\avg v$是乱运动�
 \subparagraph{离子脉冲电离室}
 当$R_0C_0\gg T^+$时，全部电子和正离子对输出信号都有贡献，此时为离子脉冲电离室状态。
 \begin{center}
-	\begin{tikzpicture}[yscale=.8]
-		\coor {5.5}{4.2}tV;
-		\draw[thick](0, 0)--(1, 2)--(4.2, 3.5);
-		\draw[thick, domain=4.2:5]plot(\x, {3.5^((7.2-\x)/3)});
-		\draw[dashed](0, 2)node[left]{$\frac{Q^-}{C_0}$}--(1, 2)--(1, 0)node[below]{$T^-$};
-		\draw[dashed](0, 3.5)node[left]{$\frac{N_0e}{C_0}$}--(4.2, 3.5)--(4.2, 0)node[below]{$T^+$};
-	\end{tikzpicture}
+	\includegraphics[page=18]{figures/tikz/layouts.pdf}
 	\captionof{figure}{离子脉冲电离室的电压信号}
 \end{center}
 $(0,T^-)$离子电流+电子电流，$(T^-,T^+)$离子电流，$T^+$之后电容放电。在$t=T^+$时，电压信号的幅度最大，且
@@ -382,12 +323,7 @@ $(0,T^-)$离子电流+电子电流，$(T^-,T^+)$离子电流，$T^+$之后电容
 \subparagraph{电子脉冲电离室}
 当$T^+\gg R_0C_0\gg T^-$时，正离子漂移的贡献可以忽略，仅有电子的贡献，此时为电子脉冲工作状态。
 \begin{center}
-	\begin{tikzpicture}
-		\coor 43tV;
-		\draw[thick](0, 0)--(1, 2);
-		\draw[thick, domain=1:3.5]plot(\x, {2^(2-\x)});
-		\draw[dashed](0, 2)node[left]{$\frac{Q^-}{C_0}$}--(1, 2)--(1, 0)node[below]{$T^-$};
-	\end{tikzpicture}
+	\includegraphics[page=19]{figures/tikz/layouts.pdf}
 	\captionof{figure}{电子脉冲电离室的电压信号}
 \end{center}
 输出电压脉冲幅度
@@ -411,15 +347,7 @@ $(0,T^-)$离子电流+电子电流，$(T^-,T^+)$离子电流，$T^+$之后电容
 \paragraph{屏栅电离室}
 正极A、负极B、栅极G\footnote{屏蔽作用，使b区的电子离子不会在阳极A上产生感应电荷。}、电源和负载电阻。
 \begin{center}
-	\begin{tikzpicture}[circuit ee IEC]
-		\draw [thick] (-4, 2.5) node [left] {Anode (A)} -- (-2, 2.5);
-		\draw [thick] (-4, .5) node [left] {Cathode (B)} -- (-2, .5);
-		\draw [dashed] (-4, 1.7) node [left] {Grid (G)} -- (-2, 1.7) node [above left] {a} node [below left] {b};
-		\draw (-2, 1.7) -- (0, 1.7);
-		\draw (-3, .5) to (-3, 0) to (0, 0) to [ground={at end}] (0, -.5);
-		\draw (-3, 2.5) to (-3, 3) to [resistor={info={$R_L$}}] (0, 3) to [battery] (0, 1.7) node [contact] {} to [battery] (0, 0) node [contact] {};
-		\draw [red] (-3.5, 1.5) -- (-2.5, .5) node [midway, above] {$R$};
-	\end{tikzpicture}
+	\includegraphics[page=20]{figures/tikz/layouts.pdf}
 	\captionof{figure}{屏栅电离室结构}
 \end{center}
 结构要求：入射粒子将全部能量损失在b区。
@@ -490,18 +418,7 @@ $A$为放大倍数，故$\nu_{h_A}^2=\nu_N^2+\nu_A^2$
 \paragraph{饱和特性曲线}
 脉冲幅度$h$与电离室工作电压$V_0$的关系曲线。
 \begin{center}
-	\begin{tikzpicture}
-		\coor64{V_0}h;
-		\draw[thick](2, 2)parabola(0, 0);
-		\draw[thick](2, 2)--(4, 2.1);
-		\draw[thick](4, 2.1)parabola(5, 3)node[above]{正比区};
-		\draw[dashed](0, 2)--(2, 2);
-		\draw[dashed](0, 1.8)node[left]{90\%}--(1.37, 1.8)--(1.37, 0)node[below]{$V_1$};
-		\draw[dashed](4, 2.1)--(4, 0)node[below]{$V_2$};
-		\draw[dashed](2.25, 2)--(2.25, 0)node[below]{$V_{\mathrm{work}}$};
-		\node[above right]at(0, 3){复合区};
-		\node[above]at(2.75, 3){饱和区};
-	\end{tikzpicture}
+	\includegraphics[page=21]{figures/tikz/layouts.pdf}
 	\captionof{figure}{饱和特性曲线}
 \end{center}
 对于脉冲探测器而言，希望工作在饱和区。
@@ -511,28 +428,7 @@ $A$为放大倍数，故$\nu_{h_A}^2=\nu_N^2+\nu_A^2$
 \paragraph{坪特性曲线}
 电离室的计数率$n$与工作电压$V_0$的关系曲线。
 \begin{center}
-	\begin{tikzpicture}
-		\coor64hn;
-		\draw[thick, domain=0:1.5]plot(\x, {3*exp(-4*\x*\x)});
-		\node[right]at(0, 3){电子学噪声};
-		\draw[dashed, domain=.25:1.75]plot(\x, {2*exp(-16*(\x-1)*(\x-1))});
-		\node[below]at(1, 0){复合区};
-		\draw[thick, domain=-1:1, shift={(3.6, 0)}]plot(\x, {1.2*exp(-6*\x*\x)});
-		\draw[thick, domain=-1:1, shift={(4, 0)}]plot(\x, {exp(-4*\x*\x)});
-		\draw[thick, domain=-1:1, shift={(4.4, 0)}]plot(\x, {.8*exp(-3*\x*\x)});
-		\draw[dashed](3.6, 0)node[below]{$h_1$}--(3.6, 1.5);
-		\draw[dashed](4, 0)node[below]{$h_2$}--(4, 1.5);
-		\draw[dashed](4.4, 0)node[below]{$h_3$}--(4.4, 1.5);
-		\node at(3, -1){(a)};
-	\end{tikzpicture}
-	\begin{tikzpicture}
-		\coor 44{V_0}n;
-		\draw[dashed](2, 0)node[below]{$V_1$}--(2, 3);
-		\draw[thick](3.5, 1)--(2, 1)node[midway, above]{$h_1$}parabola(1, 0);
-		\draw[thick](3.5, 1.75)--(2, 1.75)node[midway, above]{$h_2$}parabola(.75, 0);
-		\draw[thick](3.5, 2.5)--(2, 2.5)node[midway, above]{$h_3$}parabola(.5, 0);
-		\node at(2, -1){(b)};
-	\end{tikzpicture}
+	\includegraphics[page=22]{figures/tikz/layouts.pdf}
 	\captionof{figure}{(a) $n\vs h$曲线图；(b)坪特性曲线}
 \end{center}
 入射粒子束流强度和入射粒子的能量保持不变，当输出脉冲幅度饱和后，计数率不再随工作电压变化；甄别阈$h_\thres$改变时，坪曲线也会改变。
@@ -572,7 +468,7 @@ $A$为放大倍数，故$\nu_{h_A}^2=\nu_N^2+\nu_A^2$
 在时间间隔$\D\tau$内入射粒子产生的电子离子对数目$\D M=n\D\tau N$，推导得输出信号$S_t$的平均值和相对均方涨落为
 \begin{align*}
 	\avg S_t&=\avg n\avg N\int\zti f(\tau)\d\tau,\\
-	\nu_{S_t}^2&=\frac1{\avg n}\kh{1+\frac F{\avg N}}\dvd{\int\zti f^2(\tau)\d\tau}{\kh{\int\zti f(\tau)\d\tau}^2}.
+	\nu_{S_t}^2&=\frac1{\avg n}\kh{1+\frac F{\avg N}}\division{\int\zti f^2(\tau)\d\tau}{\kh{\int\zti f(\tau)\d\tau}^2}.
 \end{align*}
 可以看出，相对均方涨落$\nu_{S_t}^2$主要决定于入射粒子数$\D n$的涨落，离子对数$N$的涨落影响很小。
 \paragraph{电流信号}用宽度为$T$的矩形脉冲近似代表一对离子所产生的电流信号
@@ -693,7 +589,7 @@ $<r_0$处的初始电离很少。不同位置的初始电离都经受同样的�
 	\alpha:=\frac1n\dv nx.
 \]
 有关，$\alpha$是气体类型和约化场强的函数。
-\newpage
+
 均匀电场$A=\e{\alpha\D x}$与初始位置有关，而圆柱形电场
 \[
 	A=\exp\biggkh{-\int_{r_0}^a\alpha\d r}.
@@ -832,7 +728,7 @@ G-M管的自持放电过程可以分解为下列环节：
 	\item 正离子鞘向阴极漂移，形成离子电流，是形成输出脉冲的主要贡献。
 	\item $\sim\SI{100}{\micro s}$后正离子在阴极表面发生电荷中和，形成\textbf{离子反馈}：
 	\[
-		\nuc{Ar}^++\elc^-\to\nuc{Ar}^\ast\overset{\star}\semilongrightarrow\elc^-\overset{\text{加速}}\semilongrightarrow\nuc{Ar}^++\nuc{Ar}^\ast+\elc^-\overset{\text{加速}}\semilongrightarrow\cdots
+		\nuc{Ar}^++\elc^-\to\nuc{Ar}^\ast\xrightarrow{\star}\elc^-\xrightarrow{\text{加速}}\nuc{Ar}^++\nuc{Ar}^\ast+\elc^-\xrightarrow{\text{加速}}\cdots
 	\]
 	$\star$：Ar$^\ast$退激发射光子打到阴极或Ar$^\ast$直接到达阴极。
 
@@ -930,7 +826,7 @@ G-M管主要有：
 	\item 圆柱型：主要用于$\gamma$射线测量
 	\item 钟罩型：由于有入射窗，主要用于$\alpha,\beta$射线的测量
 \end{compactenum}
-\newpage
+
 \paragraph{气体探测器的问题？}气体探测器的能量分辨率
 \[
 	\eta=2.355\nu_h=2.355\sqrt{\frac{F+0.68}{\avg N}}
