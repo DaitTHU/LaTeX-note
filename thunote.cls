@@ -133,8 +133,7 @@
 }{exm}
 \definecolor{MelancholyBlue}{HTML}{9EAABA}
 \newcounter{pslt}
-\setcounter{pslt}{-1}
-\newtcbtheorem[use counter = pslt]{posulate}{假设}{
+\newtcbtheorem[use counter = pslt]{postulate}{假设}{
   enhanced, breakable, sharp corners,
   attach boxed title to top left = {yshifttext = -1mm}, 
 	before skip = 2ex,
