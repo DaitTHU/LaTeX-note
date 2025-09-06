@@ -7,6 +7,7 @@
 \input{phasedef.tex}
 
 \newcommand*{\const}{\mathrm{const}}
+\newcommand*{\kB}{k_{\mathrm{B}}}
 
 \begin{document}
 
@@ -42,7 +43,7 @@
 \end{tikzpicture}
 
 \begin{tikzpicture}
-    \xOy U4{S|_{V,n}}4;
+    \xOy U4{S|_{V, n}}4;
     \draw[thick, domain=.5:3.5]plot(\x, {ln(8*\x-1)});
     \draw[dashed](1, 0)--(1, 1.946)--(3, 3.1355);
     \draw[dashed](3, 0)--(3, 3.1355);
@@ -258,7 +259,7 @@
     %\draw(1.057, -1.515)--(-1, -1.515);
 \end{tikzpicture}
 
-\begin{tikzpicture}[>=latex, scale=2]
+\begin{tikzpicture}[scale=2]
     \xOy R{2.5}G{1.5};
     \draw[thick, domain=0:2.05]plot(\x, {2*(\x)^2-(\x)^3});
     \draw[dashed](4/3, 0)node[below]{$R_\crt$}--(4/3, 32/27);
@@ -300,6 +301,45 @@
     \node[above, rotate=13.5]at(.5, .626){$T<T_\crt$};
     \draw[dashed, domain=.001:.999, samples=50]plot(\x, {4*(-(\x-.53)^2+.7)+2*(\x*ln(\x)+(1-\x)*ln(1-\x))-1.2});
     \node[above, rotate=13]at(.5, .21){$T=T_\crt$};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+    \draw[thick, ->](0, 0)node[left]{$O$}--(4.5, 0)node[right]{$N_+$};
+    \draw[thick, ->](0, -2.5)--(0, 2.5)node[left]{$T$};
+    % \node[shift={(-135:9pt)}]at(0, 0){$O$};
+    \draw[thick, domain=.001:1.77]plot(\x, {.5/ln((4-\x)/\x)});
+    \draw[thick, domain=2.23:3.999]plot(\x, {.5/ln((4-\x)/\x)});
+    \draw[dashed](2, -2.5)--(2, 2.5);
+    \draw[thick](4, 0)node[above]{$N$}--(4, -.06);
+\end{tikzpicture}
+
+\begin{tikzpicture}[yscale=2]
+    \xOy T5{C_V/N\kB}{2.5};
+    \draw[dashed](0, 1.926)node[left]{1.926}--(1, 1.926)--(1, 0)node[below]{$T_\crt$};
+    \draw[dashed](0, 1.5)node[left]{1.5}--(5, 1.5);
+    \draw[thick, domain=0:1]plot(\x, {1.926 * \x^1.5});
+    \draw[thick, domain=1:5]plot(\x, {1.5 + (1.926-1.5)/(\x^1.5)});
+\end{tikzpicture}
+
+\begin{tikzpicture}[xscale=2, yscale=1.5]
+    \draw[thick, <->](4, 0)node[right]{$\mu$}--(0, 0)--(0, 2.5)node[left]{$f_i$};
+    \node[left]at(0, 2){1};
+    \draw[dashed](0, 1)node[left]{$1/2$}--(2, 1)--(2, 0)node[below]{$\mu$};
+    \draw[dashed](1, 2)--(1, 0)node[below]{$\mu-\kB T$};
+    \node[below]at(3, 0){$\mu+\kB T$};
+    \draw[thick, domain=0:3, samples=100]plot(\x, {2 / (1 + exp(6*\x-12))});
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=1.8]
+    \draw[gray](1, 1.8)--(1, -1);
+    \draw[gray, domain=1:2.2]plot(\x, {-\x^(-6)});
+    \draw[thick, ->](0, 0)node[left]{$O$}--(3, 0)node[right]{$r$};
+    \draw[thick, ->](0, -1.2)--(0, 1.8)node[left]{$\phi$};
+    \draw[dashed](1, -1)--(0, -1)node[left]{$-\phi_0$};
+    \node[above right]at(1, 0){$r_0$};
+    \draw[thick, domain=.85:2.8, samples=100]plot(\x, {\x^(-12)-2*\x^(-6)});
+    \draw[thick, shift={(2, 1.5)}](0, 0)--(.5, 0)node[right]{$\phi_0[(r/r_0)^{-12}-2(r/r_0)^{-6}]$};
+    \draw[gray, shift={(2, 1)}](0, 0)--(.5, 0)node[right]{$-\phi_0(r/r_0)^{-6},\quad r>r_0$};
 \end{tikzpicture}
 
 \end{document}
