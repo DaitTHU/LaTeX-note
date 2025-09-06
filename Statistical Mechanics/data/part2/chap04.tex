@@ -1,4 +1,9 @@
+\newcommand*{\Cr}{\mathrm C}
+\newcommand*{\rs}{\mathrm r}
+\newcommand*{\st}{\mathrm s}
+
 \chapter{系综}
+
 前面讨论的是近独立粒子系统，忽略粒子间作用，用单粒子态分布描述系统状态；如果粒子间作用不能忽略，单粒子态无确切含义，就要以系统为整体研究，这就是\textbf{系综}。系综的平均值就是统计平均值。
 \section{系统微观状态的描述与统计系综}
 经典理论中，粒子状态由广义坐标$q$与广义动量$p$描述，张成$\mu$空间。而系统的微观状态由$\varGamma$空间描述
@@ -49,7 +54,7 @@
 \begin{align}
 	E=\sum_\st\rho_\st E_\st=Z^{-1}\sum_\st E_\st\e{-\beta E_\st}=-\pv{\ln Z}\beta.
 \end{align}
-物态方程
+状态方程
 \begin{align}
 	Y_i=\sum_\st\rho_\st\pv{E_\st}{y_i}=-\frac1\beta\pv{\ln Z}{y_i}.
 \end{align}
@@ -113,7 +118,7 @@
 \begin{align}
 	Z=\frac1{N!}\frac1{h^f}\int\zti\Omega'(E)\e{-\beta E}\d E.
 \end{align}
-\begin{example}{用正则分布求单原子理想气体物态方程}{}
+\begin{example}{用正则分布求单原子理想气体状态方程}{}
 	$N$个单原子分子气体的Hamilton量
 	\[
 		H=\sum_{i=1}^{3N}\frac{p_i^2}{2m}.
@@ -133,12 +138,12 @@
 	\begin{align}
 		E=-\pv{\ln Z}\beta=\frac{3N}{2\beta}=\frac32N\kB T.
 	\end{align}
-	物态方程
+	状态方程
 	\begin{align}
 		p=\frac1\beta\pv{\ln Z}V=\frac N{\beta V}=\frac{N\kB T}V.
 	\end{align}
 \end{example}
-\section[实际气体的物态方程]{实际气体（非理想气体）的物态方程}
+\section[实际气体的状态方程]{实际气体（非理想气体）的状态方程}
 $N$个全同粒子，体积$V$，
 \[
 	E=E_\tl+\varPhi+E_\i.
@@ -191,7 +196,7 @@ $N$个全同粒子，体积$V$，
 \begin{align}
 	\ln Q=N\ln V+\ln\fkh{1-\frac{N^2}Va_2(T)}\simeq N\ln V-\frac{N^2}Va_2(T).
 \end{align}
-物态方程
+状态方程
 \begin{align*}
 	p=\frac1\beta\pv{\ln Q}V=\frac1\beta\fkh{\frac NV+\frac{N^2}{V^2}a_2(T)}.
 \end{align*}
@@ -201,22 +206,16 @@ $N$个全同粒子，体积$V$，
 \end{align}
 \begin{example}{Van der Waals力}{Van der Waals Force}
 	1930年London证明瞬时电偶极矩之间力
-	\begin{center}
-		\(\phi(r)=\phi_0\fkh{\kh{\frac{r_0}r}^{12}-2\kh{\frac{r_0}r}^6}\simeq\begin{cases}
+	\begin{equation}
+		\phi(r)=\phi_0\fkh{\kh{\frac{r_0}r}^{12}-2\kh{\frac{r_0}r}^6}\simeq\begin{cases}
 			\infty,&r<r_0\\
 			-\phi_0\kh{\frac{r_0}r}^6,&r>r_0
-		\end{cases}\)
-
-		\begin{tikzpicture}
-			\draw[thick,-latex](0,0)node[left]{$O$}--(3,0)node[right]{$r$};
-			\draw[thick,-latex](0,-1.2)--(0,1.8)node[left]{$\phi$};
-			\draw[thick,dashed](1,0)--(1,-1)--(0,-1)node[left]{$-\phi_0$};
-			\node[above]at(1.2,0){$r_0$};
-			\draw[thick,domain=.85:1]plot(\x,{\x^(-12)-2*\x^(-6)});
-			\draw[thick,domain=1:2]plot(\x,{\x^(-12)-2*\x^(-6)});
-			\draw[thick,domain=2:2.8]plot(\x,{\x^(-12)-2*\x^(-6)});
-		\end{tikzpicture}
+		\end{cases}
+	\end{equation}
+	\begin{center}
+		\includegraphics[page=25]{figures/tikz/coordinates.pdf}
 		\captionof{figure}{$\phi\vs r$图像}
+		\label{fig:phi(r)}
 	\end{center}
 	故
 	{\begin{align*}
@@ -316,7 +315,7 @@ $N^{(0)}\gg N,E^{(0)}\gg E_\st$，故可在$(N^{(0)},E^{(0)})$处展开
 \begin{align}
 	U=\avg E=\sum_N\sum_\st E_\st\rho_{N\st}=-\pv{\ln\Xi}\beta.
 \end{align}
-物态方程
+状态方程
 \begin{align}
 	\avg Y=\sum_N\sum_\st\pv{E_\st}y\rho_{N\st}=-\frac1\beta\pv{\ln\Xi}y.
 \end{align}
