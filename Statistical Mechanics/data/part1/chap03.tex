@@ -67,37 +67,6 @@
 	\end{equation}
 \end{example}
 
-\iffalse
-由Gibbs自由能给出Maxwell关系
-\begin{align*}
-	\pw GTN=\pw GNT & \implies\kh{\pv\mu{T}}_N=-\kh{\pv SN}_T=-s, \\
-	\pw GPN=\pw GNP & \implies\kh{\pv\mu{P}}_N=\kh{\pv VN}_P=v.
-\end{align*}
-
-\begin{example}
-	{理想气体的化学势}{}
-	前面已经给过，单原子理想气体的熵
-	\[
-		S=\kB\NA N\ln\fkh{\kh{\frac{4\pi m}{3h^2}}^{3/2}\kh{\frac e\NA}^{5/2}U^{3/2}VN^{-5/2}}.
-	\]
-	故
-	\begin{align*}
-		\mu=-T\pv SN
-		%&=-\kB\NA T\ln\fkh{\kh{\frac{4\pi mU}{3h^2}}^{3/2}\kh{\frac e{\NA N}}^{5/2}V}+\frac52\kB\NA T\\
-		%&=-\kB\NA T\ln\fkh{\kh{\frac{4\pi mU}{3h^2}}^{3/2}\kh{\frac 1{\NA N}}^{5/2}V}\\
-		=-\kB\NA T\ln\fkh{\kh{\frac{2\pi m\kB T}{h^2}}^{3/2}\kh{\frac V{\NA N}}}.
-	\end{align*}
-	注意到热运动的de Broglie波长
-	\[
-		\lambda=\frac h{\sqrt{2\pi m\kB T}}.
-	\]
-	且分子数密度$n:=\NA N/V$，因此
-	\begin{equation}
-		\mu=RT\ln(n\lambda^3).
-	\end{equation}
-\end{example}
-\fi
-
 \section{相变}
 \label{sec:phase transition}
 
@@ -140,7 +109,11 @@
 \subsection{相图}
 \label{ssec:phase graph}
 
+% 显然，不同温度$T$、压强$p$和体积$V$下，
 表示相平衡系统的组成与一些参数（如$p,T,V,\mu$）之间关系的图叫相图。
+% 同一温度$T$、压强不同相都有各自的化学势$\mu_{\mathrm{X}}$，但只有化学势最低的相可以稳定存在。
+% 可想而知，已知的各个相都对应着相图中的一块区域。
+
 \begin{center}
 	\includegraphics[page=8]{figures/tikz/coordinates.pdf}
 	\captionof{figure}{水的$p\vs T\vs V$相图(示意图)}
@@ -151,6 +124,7 @@
 \paragraph{$p\vs T$相图}
 
 将\figref{fig:H2O phase P-T-V} 投影到$p\vs T$坐标上，如\figref{fig:H2O phase P-T} 所示，
+% 对于单一组分而言，某一相的化学势$\mu(T,p)$只是温度$T$和压强$p$的函数，
 固液气三相分别占据了不同的区域，区域的边界线上两个相共存。
 相共存线的斜率，也就是熔点、沸点或升华点随压强的变化符合Clapeyron方程。
 
@@ -191,7 +165,7 @@
 这将在\secref{ssec:liquid-gas phase transition}讨论。
 水的临界点$T_\crt=\SI{647.1}{K},p_\crt=\SI{22.064}{MPa}$。
 
-三条相共存线会交于一点，该点代表固液气三相共存，称为三相点(triple point)。
+三个相所占区域的边界会，该点代表固液气三相共存，称为三相点(triple point)。
 在Kelvin温标下，水的三相点$T\tri=\SI{273.16}{K},p\tri=\SI{611.73}{Pa}$。
 
 \paragraph{$p\vs V$相图}
@@ -307,7 +281,7 @@
 需要进行修正：
 实际流体需要考虑分子间的\textit{相互作用}，流体中的一个分子的势能应具有如下形式
 \[
-	\phi(\tilde n)=-a\tilde n+b\tilde n^2+\bigo(\tilde n^3),\quad a\gg b>0.
+	\phi(\tilde n)=-a\tilde n+b\tilde n^2+\bigo(\tilde n^3),\quad a\gg b\tilde n>0.
 \]
 其基本性质：$\phi(0)=0$，在低密度时表现为吸引($-a\tilde n$占主导)，高密度时表现为排斥($b\tilde n^2$占主导)。
 近似以为每一个分子都处于其他分子的平均势中，称为\textit{平均场近似}。
@@ -377,12 +351,65 @@
 	$\eta$可以是复数（超导、超流），可以是二维和三维的，可以与空间的维数不同。
 \end{remark}
 
-% \begin{example}
-% 	{序参量}{}
+\begin{example}
+	{序参量}{}
+	\begin{center}
+		\captionof{table}{不同系统的相变序参量}
+		\begin{tabular}{cccc}
+			\toprule
+			系统 & 相变 & 序参量 & 物理意义 \\
+			\hline
+			液 - 气 & 气化/液化 & $\tilde n_\phl-\tilde n_\phg$ & 密度差 \\
+			% 固 - 液 & 熔化/凝固 & $\tilde n_\phs-\tilde n_\phl$ & 密度差 \\
+			\multirow{2}{*}{磁性} & 铁磁/顺磁 & $M$ & 磁化强度 \\
+			& 反铁磁/顺磁 & $M_{\mathrm{s}}$ & 子晶格磁化强度 \\
+			\multirow{2}{*}{量子液体} & 超导 & \multirow{2}{*}{$\psi$} & 超导电子对波函数 \\
+			& 超流 & & 超流原子波函数 \\
+			\bottomrule
+		\end{tabular}
+		\label{tab:order parameter}
+	\end{center}
+\end{example}
 
-% \end{example}
+\begin{definition}
+	{临界点与临界现象}{critical phenomenon}
+	临界点(critical point)是连续相变的相变点，临界温度$T_\crt$；
+	临界现象(critical phenomenon)是物质在临界点邻域的统计热力学行为。
 
-% 临界点：连续相变的相变点，临界温度$T_\crt$；临界现象：物质在连续相变临界点邻域的统计热力学行为。
+	以磁性系统的铁磁相变为例，
+	比热$C_H$、磁化强度$M$、磁化率$\chi$等物理量以及状态方程在临界点$T_\crt$附近常表现出幂律行为，这种幂律行为的指数称为临界指数(critical exponent)。
+	\begin{subequations}
+		\begin{align}
+			C&=\begin{cases}
+				A(T/T_\crt-1)^{-\alpha}, & T>T_\crt \\
+				A'(1-T/T_\crt)^{-\alpha'}, & T<T_\crt
+			\end{cases}\\
+			M&=\begin{cases}
+				0, & T>T_\crt \\
+				B(1-T/T_\crt)^{\beta},\phantom{\quad} & T<T_\crt
+			\end{cases}\\
+			\chi&=\begin{cases}
+				C(T/T_\crt-1)^{-\gamma}, & T>T_\crt \\
+				C'(1-T/T_\crt)^{-\gamma'}, & T<T_\crt
+			\end{cases}\\
+			M&=DH^{1/\delta},\qqqquad\qquad T=T_\crt
+		\end{align}
+	\end{subequations}
+	其中$\alpha,\alpha',\beta,\gamma,\gamma',\delta$为临界指数，$A,A',B,C,C',D$为临界幅度。
+\end{definition}
+
+\begin{theorem}
+	{缩放关系}{scaling relations}
+	6个临界指数中只有2个是独立的，满足4个缩放关系(scaling relations)：
+	\begin{subequations}
+		\begin{align}
+			\alpha+2\beta+\gamma&=2,\\
+			\alpha+\beta(1+\delta)&=2,\\
+			\gamma(1+\delta)&=(2-\alpha)(\delta-1),\\
+			\gamma&=\beta(\delta-1).
+		\end{align}
+	\end{subequations}
+\end{theorem}
 
 唯象的，Landau自由能在临界点
 \begin{align}
@@ -391,38 +418,42 @@
 由于系统对$\pm\eta$是对称的，展开中不含$\eta$的奇次幂。
 $\eta$应使$F$取极小值：
 \[
-	\pv F\eta=\eta(a+b\eta^2)=0,
-	\quad\pv[2]F\eta=a+3b\eta^2>0.
+	\pv F\eta=\eta(a+b\eta^2)=0
+	% \quad\pv[2]F\eta=a+3b\eta^2>0.
 	\implies\eta=0,\pm\sqrt{-\frac ab}.
 \]
 有三个解，$\eta=0$对应无序态($T>T_\crt$)；$\eta_\pm$对应有序态($T<T_\crt$)。当$T\to T_\crt^-$时，$\eta_\pm\to 0$，因此$a(T_\crt)=0$。
 由$\eta_\pm$是极小值点：
 \[
-	\pv[2]F\eta=a+3b\eta^2=-2a>0
+	\pv[2]F\eta=a+3b\eta_\pm^2=-2a>0
 	\implies a<0,\enspace (T<T_\crt).
 \]
 将$a,b$在$T_\crt$附近Taylor展开至一阶：
 \[
 	a(T)=a_0\biggkh{\frac T{T_\crt}-1},\quad b(T)=b_0.
 \]
-可得
+可得临界指数$\beta=1/2$：
 \begin{equation}
 	\eta=
 	\begin{cases}
 		0,&T\geqslant T_\crt\\
-		\pm\sqrt{\frac{a_0}{b_0}\kh{1-\frac T{T_\crt}}},&T<T_\crt
+		\pm\sqrt{\frac{a_0}{b_0}\biggkh{1-\frac T{T_\crt}}},&T<T_\crt
 	\end{cases}
 \end{equation}
-临界指数$\beta=1/2$。
-熵是连续的
+\begin{center}
+	\includegraphics[page=26]{figures/tikz/coordinates.pdf}
+	\captionof{figure}{Landau自由能}
+	\label{fig:Landau free energy}
+\end{center}
+熵是连续的：
 \begin{equation}
 	S=-\pv FT=S_0-\frac{a_0}{2T_\crt}\eta^2=
 	\begin{cases}
 		S_0,                             & T\geqslant T_\crt \\
-		S_0+\frac{a_0^2}{2b_0T_\crt}\kh{\frac T{T_\crt}-1}, & T<T_\crt
+		S_0+\frac{a_0^2}{2b_0T_\crt}\biggkh{\frac T{T_\crt}-1}, & T<T_\crt
 	\end{cases}
 \end{equation}
-比热却不连续了，
+比热却不连续了：
 \begin{equation}
 	C=T\pv ST=
 	\begin{cases}
@@ -430,92 +461,42 @@ $\eta$应使$F$取极小值：
 		C_0+\frac{a_0^2}{2b_0T_\crt^2}T, & T<T_\crt
 	\end{cases}
 \end{equation}
-因此是\textbf{二级相变}。有序相的比热大于无序相的比热，且$T=T_\crt$处比热的突变是有限的，$\alpha=\alpha'=1$。
+因此是\textbf{二级相变}。有序相的比热$>$无序相，且$T=T_\crt$处比热的突变是有限的，$\alpha=\alpha'=0$。
 
 \paragraph{外加场$B$}
-在外加弱磁场$B$下，序参量为磁化强度$m$，自由能
+在外加弱磁场$B$下，序参量为磁化强度$M$，自由能
 \[
-	G(m,B)=F_0+\frac12am^2+\frac14bm^2-Bm.
+	G(M,B)=F_0+\frac12aM^2+\frac14bM^2-BM.
 \]
 平衡时
 \[
-	\pv Gm=a\eta+bm^3-B=0.
+	\pv GM=a\eta+bM^3-B=0.
 \]
-$T=T_\crt$时，$a=0,\;B=bm^3$故$\delta=3$。
+$T=T_\crt$时，$a=0,\;B=bM^3$故$\delta=3$。
 磁化率
 \[
-	\chi=\mu_0\kh{\pv mB}_T=\frac{\mu_0}{a+3bm^3}=
+	\chi=\mu_0\pu[T]MB=\frac{\mu_0}{a+3bM^3}=
 	\begin{cases}
-		\frac{\mu_0}{a_0}\kh{\frac T{T_\crt}-1}^{-1},&T\geqslant T_\crt \\
-		\frac{\mu_0}{2a_0}\kh{\frac T{T_\crt}-1}^{-1}, & T<T_\crt
+		\frac{\mu_0}{a_0}\biggkh{\frac T{T_\crt}-1}^{-1},&T\geqslant T_\crt \\
+		\frac{\mu_0}{2a_0}\biggkh{\frac T{T_\crt}-1}^{-1}, & T<T_\crt
 	\end{cases}
 \]
 $\gamma'=\gamma=1$。
-临界指数$\alpha=1,\,\beta=1/2,\,\gamma=1,\,\delta=3$与实验结果有差异，原因是没考虑涨落。
-
-% \section*{二级相变}
-
-% 在超导、磁性等一大类相变中，Gibbs自由能可以写为
-% \begin{align}
-% 	G(T,P,\eta)=G_0(T,P)+a(T-T_\crt)\eta^2+b\eta^4.
-% \end{align}
-% 其中$\eta$是描述不同相的参量，$a,b>0$。
-%  当$T>T_\crt$时，最小值点$\eta=0$；当$T<T_\crt$时，最小值点$\eta\neq 0$：
-% \[\eta^2=\frac{a^2}{2b}(T-T_\crt).\]
-% 当$T$从$T>T_\crt$降低至$T<T_\crt$时，最小值点$\eta$从0变为非0.
-%  熵是连续的
-% \begin{align*}
-% 	S=-\pv GT=S_0-a\eta^2=\left\{
-% 	\begin{aligned}
-% 		 & S_0,                             & T\geqslant T_\crt \\
-% 		 & S_0+\frac{a^2}{2b}(T-T_\crt), & T<T_\crt
-% 	\end{aligned}
-% 	\right.\qedhere
-% \end{align*}
-% 比热却不连续了，因此是\textbf{二级相变}
-% \begin{align*}
-% 	C=T\pv ST=\left\{
-% 	\begin{aligned}
-% 		 & C_0,                 & T\geqslant T_\crt \\
-% 		 & C_0+\frac{a^2}{2b}T, & T<T_\crt
-% 	\end{aligned}
-% 	\right.\qedhere
-% \end{align*}
+Landau模型得到的
+临界指数与实验结果有差异，原因是没考虑涨落。
 
 \section{多组分系统}
 
 我们在前文只考虑了单组分系统的情况，而许多系统都是由多个组分组成的。
-
-\begin{example}
-	{多组分理想气体}{}
-	考虑$r$种气体组成的系统，熵$S(U,V,N_1,N_2,\ldots,N_r).$%便包含了不止一个\eqt N。
-	同一系统中，各气体温度相同，将熵以$T,V,N$表示更好\footnote{式中$\varsigma$代替与自变量无关的常数。}
-	$$S=N\varsigma+NR\ln\kh{\frac{U^cV}{N^{c+1}}}=N\varsigma'+NR\ln\kh{\frac{T^cV}N},$$
-	根据\textbf{Gibbs定理}：多组分理想气体的熵是各组分气体熵之和%\footnote{虽然陈曦老师课上用统计力学证明了这个定理，}但这不是基本假设之一吗？🤔输入emoji会编译错误
-	\begin{align}\notag%^\ominus
-	S & =\sum_{i=1}^r\fkh{N_i\varsigma_i+N_iR\ln\kh{\frac{T^cV}{N_i}}}                            \\\notag
-		& =\sum_{i=1}^r\fkh{N_i\varsigma_i+N_iR\ln\kh{\frac{T^cV_i}{N_i}}+N_iR\ln\kh{\frac V{V_i}}} \\
-		& =S_0+R\sum_{i=1}^rN_i\ln\kh{\frac N{N_i}}.
-	\end{align}
-	$S_0$是将$S$式中的$V$替换为了$V_i$，这代表各组分未混合（$T,p$相同）的熵；而多出来的一项便是混合增加的熵，称为混合熵$S^\ast$
-	\[S^*=-RN\sum x_i\ln x_i.\]
-	\begin{center}
-	\includegraphics[page=4]{figures/tikz/layouts.pdf}
-	\captionof{figure}{混合气体的过程熵会增加}
-	\end{center}
-	对于多组分理想气体
-	\begin{align*}
-		G & =U-TS+PV
-		%&=\sum_{i=1}^r\fkh{c_iN_iRT-T\kh{Ns\varsigma_i+N_iR\ln\kh{\frac{T^{c_i+1}}p}}+N_iRT}\\
-		=\sum_{i=1}^rN_iRT\fkh{\varsigma_i-\ln\kh{\frac{T^{c_i+1}}p}} \\
-		& =G_0-RT\sum_{i=1}^rN_i\ln\kh{\frac p{p_i}}=G_0-TS^*.
-	\end{align*}
-	式中包含了混合熵$S^*$。
-\end{example}
-
-当系统由多个组分组成时，各组分摩尔数分别为$n_1,\ldots,n_r$，各组分化学势定义为
+当系统由$r$个组分组成时，各组分摩尔数分别为$n_1,\ldots,n_r$，
+选取状态参量$T,p,n_1,\ldots,n_r$，则由Euler方程
 \begin{equation}
-	\mu_i=\pu[p,V,n_{\neq i}]G{n_i}.
+	U=\sum_{i=1}^r\pu[T,p,n_{\neq i}]U{n_i}n_i=:\sum_{i=1}^rn_iu_i.
+\end{equation}
+其中下标$n_{\neq i}$表示不包括组分$i$的其他组分的摩尔数，$u_i$表示在温度$T$、压强$p$和其他组分摩尔数$n_{\neq i}$不变时，组分$i$的偏摩尔内能。
+同理可以定义偏摩尔体积$v_i$、偏摩尔熵$s_i$和偏摩尔Gibbs自由能$g_i$，即组分$i$的化学势：
+\begin{equation}
+	\mu_i=\pu[T,p,n_{\neq i}]G{n_i}.
 \end{equation}
 内能的微分式、Euler方程和Gibbs-Duhem关系分别为
 \begin{subequations}
@@ -528,10 +509,7 @@ $\gamma'=\gamma=1$。
 
 \begin{theorem}
 	{Gibbs相律}{Gibbs phase rule}
-	有$r$个组分的系统在$t$个相共存时，系统有$T,p,\mu_1,\ldots,\mu_r$共$(r+2)$个强度量，每个相有一个Gibbs-Duhem关系
-	\[
-		S\d T-V\d p+\sum_{i=1}^rn_i\d\mu_i=0.
-	\]
+	有$r$个组分的系统在$t$个相共存时，系统有$T,p,\mu_1,\ldots,\mu_r$共$(r+2)$个强度量，每个相有一个Gibbs-Duhem关系，
 	因此自由度
 	\begin{equation}
 		f=r+2-t.
@@ -542,65 +520,117 @@ $\gamma'=\gamma=1$。
 	对于单一组分，$r=1$，两相共存时$f=1$，在$p\vs T$相图上是一条线；三相共存时$f=0$，在$p\vs T$相图上是一个点。
 \end{corollary}
 
+\begin{example}
+	{多组分理想气体}{}
+	考虑$r$种理想气体组成的系统，各组分温度相同，将熵以$T,V,n$表示更好
+	\[
+		s=R\ln(T^cv)+\varsigma\implies S=nR\ln\biggkh{\frac{T^cV}n}+n\varsigma.
+	\]
+	根据\textbf{Gibbs定理}：多组分理想气体的熵是各组分气体熵之和
+	% \footnote{虽然陈曦老师课上用统计力学证明了这个定理，但这不是基本假设之一吗？🤔}
+	% 输入emoji会编译错误
+	\[
+		S=\sum_{i=1}^rn_iR\ln\biggkh{\frac{T^cV}{n_i}}+n_i\varsigma_i.
+	\]
+	当气体混合时，所有气体的体积均为$V$，这相比混合前(保持$T,p$不变)的体积$V_i$增大了，由此导致了熵的增加，称为混合熵
+	\begin{equation}
+		\label{eq:mixing entropy}
+		S^*=-nR\sum_{i=1}^rx_i\ln x_i.
+	\end{equation}
+	\begin{center}
+		\includegraphics[page=4]{figures/tikz/layouts.pdf}
+		\captionof{figure}{混合气体的过程熵会增加}
+	\end{center}
+\end{example}
+
 \subsection{稀溶液}
 
-考虑溶剂中只有一种少量溶质B的稀溶液Gibbs自由能$G(T,P,N,n)$。$N$和$n$分别是溶剂和溶质B的摩尔数$(n\ll N)$。%
-溶质溶于溶液的混合熵
-\begin{align*}
-	S^* & =NR\ln\kh{\frac{N+n}N}+nR\ln\kh{\frac{N+n}n}          \\
-	    & \doteq NR\frac nN+nR\ln\frac Nn=nR\kh{1-\ln n+\ln N}.
-\end{align*}
+考虑溶剂(solvent)中只有一种溶质(solute) B的稀溶液(solution)，
+溶剂和溶质B的摩尔数分别为$N,n\,(n\ll N)$，
+溶质B的摩尔分数$x:=n/(N+n)\ll 1$，
+溶质B溶于溶液的混合熵
+\begin{equation}
+	S^*=-(N+n)R\Bigfkh{x\ln x+(1+x)\ln(1-x)}=-nR(1+\ln x)+\bigo(x^2).
+\end{equation}
 将$G$展开到$n$的一阶
-\[G(T,P,N,n)=N\mu_0(T,P)+n\psi(T,P)-TS^*.\]
+\[
+	G(T,p,N,n)=N\mu_0(T,p)+n\psi(T,p)-TS^*.
+\]
 $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
-  溶剂与溶质B的化学势%solvent,solute
-\begin{align}\label{solmu}
-	\mu         & \equiv\pv GN=\mu_0-xRT.    \\\notag
-	\mu_{\rm B} & \equiv\pv Gn=\psi+RT\ln x.
-\end{align}
-溶质的摩尔分数$x:=n/(N + n)\ll 1$.
-\subsection*{半透膜渗透压——van't Hoff关系}
-混合带来熵的变化，并改变化学势。但对于稀溶液，溶质与水的相互作用造成的化学势的变化远小于混合带来的熵变。这种化学势的变化导致渗透压。
-\begin{center}
-	\includegraphics[page=5]{figures/tikz/layouts.pdf}
-	\captionof{figure}{半透膜引起的渗透压}
-\end{center}
-平衡时两端水的化学势相同：
-\[\mu_0(T,P_0)=\mu(T,P_1).\]
-$\mu_0$是纯水的化学势，由(\ref{solmu})式
-\begin{align*}
-	\cancel{\mu_0(T,P_0)} & =\mu_0(T,P_1)-xRT.                            \\
-	                      & =\cancel{\mu_0(T,P_0)}+\pv{\mu_0}P\,\D P-xRT.
-\end{align*}
-得到\textbf{van't Hoff关系}
-\begin{align}
-	v\D P=xRT.
-\end{align}
-\subsection*{相变点随溶质的变化}
-没有溶质时气液共存$\mu^0_\phl(T,P)=\mu_\phg(T,P)$；加入溶质后，溶剂的化学势变为
-\[\mu^0_\phl(T,P)-xRT<\mu_\phg(T,P).\]
-如果溶质为不易挥发的物质（如盐），则气态的化学势形式不变，液相的化学势会低于气相，为了达到新的平衡需要改变温度。由$s_\phl<s_\phg$，且
-\[\pv\mu{T}=-s,\]
-气相化学势的下降要快于液相，故沸点会升高，再次平衡时
-\[\mu^0_\phl(T+\D T,P)-xR(T+\D T)=\mu_\phg(T+\D T,P).\]
-即
-\[\cancel{\mu^0_\phl(T,P)}-s_\phl\D T-xRT-xR\D T=\cancel{\mu_\phg(T,P)}-s_\phg\D T.\]
-由于$xR\ll s_\phg-s_\phl$
-\begin{align}
-	\D T=\frac{xRT}{s_\phg-s_\phl-\bcancel{xR}}\doteq\frac{xRT^2}\ell.
-\end{align}
-从液相到固相的情况正相反（因为只有液相才有溶质），熔点会降低。
+溶剂与溶质B的化学势
+\begin{subequations}
+	\begin{align}
+		\label{eq:mu solvent}
+		\mu         & \equiv\pv GN=\mu_0-xRT.    \\
+		\label{eq:mu solute}
+		\mu_{\rm B} & \equiv\pv Gn=\psi+RT\ln x.
+	\end{align}
+\end{subequations}
+对于稀溶液，溶质与溶剂的相互作用造成的化学势的变化$\psi\ll$混合带来的熵变。
+
+\begin{theorem}
+	{渗透压与van't Hoff关系}{van't Hoff relation}
+	溶液的压强$p_\phaq\neq$纯溶剂的压强$p_\phl$，将二者用只允许溶剂通过的半透膜隔开时，会在半透膜上产生压强，称为渗透压(osmotic pressure) $\pi$，满足
+	\begin{equation}
+		\label{eq:van't Hoff}
+		\pi v=xRT.
+	\end{equation}
+	\begin{center}
+		\includegraphics[page=5]{figures/tikz/layouts.pdf}
+		\captionof{figure}{半透膜引起的渗透压}
+	\end{center}
+\end{theorem}
+
+\begin{proof}
+	平衡时两端水的化学势相同$\mu_0(T,p_\phl)=\mu(T,p_\phaq)$，代入\eqref{eq:mu solvent}并对$p$展开：
+	\[
+		\mu(T,p_\phaq)=\mu_0(T,p_\phaq)-xRT=\mu_0(T,p_\phl)+\pv{\mu_0}p\pi-xRT,
+	\]
+	由Maxwell关系$\p\mu_0/\p p=v$，即证。
+\end{proof}
+
+\begin{example}
+	{溶液相变点随溶质的变化}{}
+	没有溶质时气液共存$\mu_{\phl,0}=\mu_\phg$；加入溶质后，溶剂的化学势变为
+	\[
+		\mu_\phl=\mu_{\phl,0}-xRT<\mu_\phg.
+	\]
+	如果溶质为不易挥发的物质（如盐），则气态的化学势形式不变，液相的化学势会低于气相，为了达到新的平衡需要改变温度。由$s_\phl<s_\phg$，且
+	\[
+		\pv\mu{T}=-s,
+	\]
+	故气相化学势$\mu_\phg$的下降要快于液相，故沸点会升高，再次平衡时
+	\[
+		\mu_{\phl,0}(T+\D T,p)-xR(T+\D T)=\mu_\phg(T+\D T,p).
+	\]
+	对$\D T$展开
+	\[
+		\cancel{\mu_{\phl,0}(T,p)}-s_\phl\D T-xRT-xR\D T=\cancel{\mu_\phg(T,p)}-s_\phg\D T.
+	\]
+	由于$xR\ll s_\phg-s_\phl$
+	\begin{equation}
+		\D T=\frac{xRT}{s_\phg-s_\phl-xR}\doteq\frac{xRT^2}\ell.
+	\end{equation}
+	从液相到固相的情况正相反（因为只有液相才有溶质），熔点会降低。
+\end{example}
 \begin{example}
 	{电化学电池}{}
-	化学势也与电势$\phi$有关
-	\[\mu=\mu_i+ze\NA\phi.\]
-	$\mu_i$是本征化学势，$ze$是每个粒子所带电荷。
-	%  流$J$的驱动力是化学势的梯度
-	%\[J\propto-\nabla\mu=-\nabla\mu_i+ze\NA E.\]
-	 平衡时，电极上离子化学势$\mu_{i,\phel}$与溶液中离子化学势$\mu_{i,\phaq}$相等
-	\[\mu_{i,\phel}=\mu_{i,\phaq}+RT\ln x+ze\NA\phi,\]
-	即
-	\[\phi=-\frac{RT}{ze\NA}\ln x+\const\kh{\D\mu}.\]
+	离子的化学势也与电势$\phi$有关
+	\[
+		\mu=\mu_\i+ze\NA\phi.
+	\]
+	$\mu_\i$是离子的本征化学势，$ze$是每个离子所带电荷。
+	电流的驱动力是化学势的梯度。
+	% \[J\propto-\nabla\mu=-\nabla\mu_i+ze\NA E.\]
+	
+	平衡时，电极上离子化学势$\mu_{\i,\phel}$与溶液中离子化学势相等
+	\[
+		\mu_{\i,\phel}=\mu_{\i,\phaq}+RT\ln x+ze\NA\phi,
+	\]
+	因此电势$\phi$与溶液浓度的关系为
+	\[
+		\phi=-\frac{RT}{ze\NA}\ln x+\const(\D\mu).
+	\]
 \end{example}
 
 \begin{example}
@@ -615,26 +645,22 @@ $\mu_0$是纯水的化学势，由(\ref{solmu})式
 		\d G=\sum_{i=1}^r\mu_i\d n_i=0\implies\sum_{i=1}^r\nu_i\mu_i=0.
 	\]
 	% 应当注意：$\mu_i$均来自于混合系统的Gibbs自由能。
-	考虑一个由理想气体参与的化学反应，理想气体的化学势
+	考虑一个由理想气体参与的化学反应，在多组分理想气体系统中，组分$i$的化学势为
 	\[
-		\mu_i=RT\ln p_i+\const(T).
+		\mu_i=RT\ln[{\rm A}_i]+\const(T).
 	\]
-	% 带入上式可得，有
-	% \[\sum_{i=1}^r\nu_iRT\ln P_i=\const(T).\]
-	%\[\prod P_i^{\nu_i}=-\exp\kh{\sum\nu_i\phi_i}\]
-	又$p=RT[{\rm A}_i]$，%当$T$恒定时
-	\begin{align}
+	其中$[{\rm A}_i]:=n_i/V$表示摩尔浓度，因此
+	\begin{equation}
 		\prod_{i=1}^r[{\rm A}_i]^{\nu_i}=:K(T).
-	\end{align}
-	%=(RT)^{-\sum\nu_i}\exp\kh{\sum\nu_i\phi_i}
-	$K$称为化学平衡常数，是$T$的函数。
+	\end{equation}
+	只与$T$有关，$K$称为化学平衡常数。
 \end{example}
 
 \subsectionstar{相分离}
 
 A和B两种组份混合后可能出现相分离，分成$\alpha$和$\beta$两相。每一相都有A和B两组份，但比例不同。%我们来看一下这是怎么发生的。假设两组份的摩尔数分别为$N_{\rm A}$和$N_{\rm B}$，总摩尔数$N=N_{\rm A}+N_{\rm B}$，
 设B的摩尔比$x:=N_{\rm B}/N$。假设如果没有相分离，即两组份互溶，单位摩尔的Gibbs自由能为$g(x)$。
-	在一定温度下，$\alpha$和$\beta$两相中B的摩尔比分别为$x_\alpha$和$x_\beta$，故两相的摩尔数$N_\alpha$和$N_\beta$%下面求如果有
+在一定温度下，$\alpha$和$\beta$两相中B的摩尔比分别为$x_\alpha$和$x_\beta$，故两相的摩尔数$N_\alpha$和$N_\beta$%下面求如果有
 \begin{align*}
 	\left\{
 	\begin{aligned}
@@ -655,24 +681,33 @@ A和B两种组份混合后可能出现相分离，分成$\alpha$和$\beta$两相
 	=\frac{g_\beta-g_\alpha}{x_\beta-x_\alpha}(x-x_\alpha)+g_\alpha.
 \]
 若$x_\alpha<x<x_\beta$时有$g^\star<g$，便会出现相分离。
+
 \begin{center}
 	\includegraphics[page=18]{figures/tikz/coordinates.pdf}
 	\captionof{figure}{相分离}
 	\label{fig:phase separation}
 \end{center}
-下面来看怎样才能产生\figref{fig:phase separation} 所示的自由能。
-\begin{center}
-	\includegraphics[page=19]{figures/tikz/coordinates.pdf}
-	\includegraphics[page=20]{figures/tikz/coordinates.pdf}
-	\captionof{figure}{混合物的内能和熵}
-	\label{fig:mixture-energy-entropy}
-\end{center}
-混合物的Gibbs自由能
-\[g=u-Ts.\]
-如\figref{fig:mixture-energy-entropy} 所示，混合后能量会升高，并且有混合熵
-\[s^*=-R\fkh{x\ln x+(1-x)\ln(1-x)}.\]
-因此，在低温时，能量占优，可能会出现相分离
-\begin{center}
-	\includegraphics[page=21]{figures/tikz/coordinates.pdf}
-	\captionof{figure}{低温时的相分离}
-\end{center}
+
+\begin{example}
+	{}{}
+	下面来看怎样才能产生\figref{fig:phase separation} 所示的自由能。
+	\begin{center}
+		\includegraphics[page=19]{figures/tikz/coordinates.pdf}
+		\includegraphics[page=20]{figures/tikz/coordinates.pdf}
+		\captionof{figure}{混合物的内能和熵}
+		\label{fig:mixture-energy-entropy}
+	\end{center}
+	混合物的Gibbs自由能
+	\[
+		g=u-Ts
+	\]
+	如\figref{fig:mixture-energy-entropy} 所示，混合后能量会升高，并且有混合熵
+	\[
+		s^*=-R\Bigfkh{x\ln x+(1-x)\ln(1-x)}.
+	\]
+	因此，在低温时，能量占优，可能会出现相分离
+	\begin{center}
+		\includegraphics[page=21]{figures/tikz/coordinates.pdf}
+		\captionof{figure}{低温时的相分离}
+	\end{center}
+\end{example}
