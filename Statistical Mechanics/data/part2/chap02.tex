@@ -5,107 +5,168 @@
 \chapter{Boltzmann统计}
 
 \section{理想气体}
-理想气体在常温常压下满足非简并条件：
+\label{sec:ideal gas}
+
+理想气体满足非简并条件($\e\alpha\gg 1$)，符合半经典Boltzmann分布。
+粒子的运动可分为质心的平动(translation)、粒子内部的振动(vibration)和粒子整体的转动(rotation)三个相互独立的运动。
+
+\subsection{平动}
+\label{ssec:translation}
+
+由\exmref{exm:monatomic molecule}，单个粒子的平动能量和态密度为
 \[
-	\e\alpha\gg 1,
+	\varepsilon_\tl=\frac1{2m}(p_x^2+p_y^2+p_z^2),\quad g(\varepsilon)=\frac{2\pi V}{h^3}(2m)^{3/2}\sqrt\varepsilon.
 \]
-符合半经典分布。%分子运动可分为质心平动和内部运动，两种运动独立
-%\varepsilon\tot=\varepsilon_\tl+\varepsilon_\i,\quad\omega\tot=\omega_\tl\omega_\i.
-分子运动可分为质心的平动(translation)、分子内部的振动(vibration)和转动(rotation)，三者是相互独立的。
-\paragraph{质心平动}
-$\varepsilon_\tl$准连续
+在能量准连续的条件下，配分函数
+\begin{equation}
+	Z_\tl=\int\zti g(\varepsilon)\e{-\beta\varepsilon}\d\varepsilon=\frac{2\pi V}{h^3}\int\zti\sqrt\varepsilon\e{-\beta\varepsilon}\d\varepsilon=V\biggkh{\frac{2\pi m}{h^2\beta}}^{3/2}.
+\end{equation}
+考虑只有平动的情况，如单原子分子，
+\footnote{统计力学部分，$n:=V/N$表示粒子数密度，而不再表示摩尔数。}
 \[
-	\varepsilon_\tl=\frac1{2m}\kh{p_x^2+p_y^2+p_z^2}.
+	\e{\alpha}=\frac{Z_\tl}N=\frac1n\biggkh{\frac{2\pi m\kB T}{h^2}}^{3/2},
 \]
-由\exmref{exm:Monatomic Molecule}，配分函数
-\begin{align}\notag
-	Z_\tl(\beta,V) & =\int\zti g(\varepsilon)\e{-\beta\varepsilon}\d\varepsilon                                                                      \\
-	               & =\frac{2\pi V}{h^3}\kh{2m}^{3/2}\int\zti\sqrt\varepsilon\e{-\beta\varepsilon}\d\varepsilon=V\kh{\frac{2\pi m}{h^2\beta}}^{3/2}.
-\end{align}
-单原子分子只有质心平动
-\[
-	N=\e{-\alpha}Z_\tl,\implies\e{\alpha}=\frac VN\kh{\frac{2\pi m\kB T}{h^2}}^{3/2}\gg 1.
-\]
-说明稀薄、高温、质量大的情况下，满足非简并条件，
-\begin{gather}
-	E_\tl=-N\pv{\ln Z_\tl}\beta=\frac32N\kB T.\\
-	C_V^\tl=\kh{\pv ET}_V=\frac32N\kB.
-\end{gather}
-物态方程
-\begin{align}
-	p=\frac N\beta\pv{\ln Z_\tl}V=\frac{N\kB T}V.
-\end{align}
-熵
-\begin{align}\notag
-	S_\tl & =N\kB\kh{\ln Z_\tl-\beta\pv{\ln Z_\tl}\beta-\ln N+1}                 \\
-	      & =\frac52N\kB+N\kB\ln\fkh{\frac VN\kh{\frac{2\pi m\kB T}{h^2}}^{3/2}}
-\end{align}
-\paragraph{振动}
+说明在稀薄、高温、大质量的情况下，$\e\alpha\gg 1$，满足非简并条件。
+另外，非简并条件也可以写成$\e{-\alpha}=n\lambda_T^3\ll 1$的形式，
+其中$\lambda_T$是能量为$\pi\kB T$时的de Broglie波长
+\begin{equation}
+	\label{eq:de Broglie wavelength}
+	\lambda_T=\frac{h}{\sqrt{2\pi m\kB T}}.
+\end{equation}
+基于配分函数，可得平动所贡献的内能、比热、压强和熵：
+\footnote{经典统计采用经典Boltzmann分布推导出来的熵甚至不是广延量，应修正为半经典Boltzmann分布。}
+\begin{subequations}
+	\begin{align}
+		U_\tl&=-N\pv{\ln Z_\tl}\beta=\frac32N\kB T,\\
+		C_{V,\tl}&=\pu[V]{U_\tl}T=\frac32N\kB,\\
+		p&=\frac N\beta\pv{\ln Z_\tl}V=\frac{N\kB T}V,\\
+		S_\tl
+		% &=N\kB\biggkh{\ln Z_\tl-\beta\pv{\ln Z_\tl}\beta-\ln N+1}\\
+		&=\frac52N\kB+N\kB\ln\biggfkh{\frac VN\biggkh{\frac{2\pi m\kB T}{h^2}}^{3/2}}.
+	\end{align}
+\end{subequations}
+将状态方程$pV=N\kB T$与实验得到的理想气体状态方程\eqref{eq:pV=nRT}对比，可得理想气体常数$R=\kB\NA$。
+由于国际单位制直接指定了$\kB$和$\NA$的值，因此$R$的数值也是精确的。
+
+\begin{theorem}
+	{Maxwell速度分布律}{Maxwell distribution of velocities}
+	速率在$(v,v+\d v)$范围内的粒子数密度为
+	\begin{equation}
+		f(v)\d v=4\pi n\biggkh{\frac m{2\pi\kB T}}^{3/2}\e{-mv^2/2\kB T}v^2\d v.
+	\end{equation}
+	\begin{center}
+		\includegraphics[width=0.8\linewidth]{figures/Maxwell_distribution.pdf}
+		\captionof{figure}{氧气分子$\mathrm{O_2}$的Maxwell速度分布}
+		\label{fig:Maxwell distribution}
+	\end{center}
+\end{theorem}
+
+\begin{proof}
+	动量在$\d p=\d p_x\nd p_y\nd p_z$范围内的粒子数密度为
+	\[
+		\e{-\alpha-\beta\varepsilon}\frac{\d p}{h^3}=\frac n{(2\pi m\kB T)^{3/2}}\e{-\beta(p_x^2+p_y^2+p_z^2)/2m}\d p_x\nd p_y\nd p_z,
+	\]
+	由$p_i=mv_i$，可得
+	\begin{equation}
+		f(v_x,v_y,v_z)\d v_x\nd v_y\nd v_z=n\biggkh{\frac m{2\pi\kB T}}^{3/2}\e{-m(v_x^2+v_y^2+v_z^2)/2\kB T}\d v_x\nd v_y\nd v_z.
+	\end{equation}
+	易证，$f(v_x,v_y,v_z)$是归一化的：
+	\[
+		\int\iti\int\iti\int\iti f(v_x,v_y,v_z)\d v_x\nd v_y\nd v_z=n.
+	\]
+	将坐标$(v_x,v_y,v_z)$换为球坐标$(v,\theta,\phi)$，并对$\theta,\phi$直接积分，便得到速率的分布。
+\end{proof}
+
+\begin{corollary}
+	最概然速率$v_\mathrm m$、平均速率$\avg v$和方均根速率$v_\mathrm s$为
+	\begin{subequations}
+		\begin{align}
+			v_\mathrm m&=\sqrt{\frac{2\kB T}m},\\
+			\avg v&=\sqrt{\frac{8\kB T}{\pi m}},\\
+			v_\mathrm s&=\sqrt{\frac{3\kB T}m}.
+		\end{align}
+	\end{subequations}
+	单位时间碰撞单位面积器壁上的粒子数
+	\begin{equation}
+		\Gamma=\int\iti\int\iti\int\zti f(v_x,v_y,x_z) v_x\d v_x\nd v_y\nd v_z=\frac14n\avg v.
+	\end{equation}
+\end{corollary}
+
+\subsection{振动}
+\label{ssec:vibration}
+
 考虑一维振动，%取约化质量$\mu$，
 有
 \[
-	\varepsilon_\vb=h\nu\kh{n+\frac12},\quad\omega_\vb=1.
+	\varepsilon_\vb=h\nu\biggkh{n+\frac12},\quad\omega_\vb=1.
 \]
-能量间距
-\[
-	\D\varepsilon_\vb=h\nu\sim\SI{0.1}\electronvolt\gg\SI{0.025}\electronvolt.
-\]
-因此必须考虑能级的分立性。
+能量间距$\D\varepsilon_\vb=h\nu\sim\SI{0.1}\electronvolt>\SI{0.025}\electronvolt$常温，因此必须考虑能级的分立性。
 定义振动的特征温度
 \[
 	\theta_\vb:=\frac{\D\varepsilon_\vb}\kB=\frac{h\nu}\kB\sim\SI{e3}\K.
 \]
 则配分函数
-% \[Z_\nu=\sum\omega_\nu(n)\e{-\beta\varepsilon_\nu(n)}.\]
-\begin{align}
-	Z_\vb=\sum_{n=0}^\infty\e{-(n+1/2)\beta h\nu}=\frac{\e{-\theta_\vb/2T}}{1-\e{-\theta_\vb/T}}=\frac12\csch\kh{\frac{\theta_\vb}{2T}}.
-\end{align}
-
-振动内能
-\begin{align}
-	E_\vb=-N\pv{\ln Z_\vb}\beta=Nh\nu\fkh{\frac12+\underset{\text{激发能}}{\frac{\e{-\beta h\nu}}{1-\e{-\beta h\nu}}}}=:N\avg\varepsilon.
-\end{align}
-其中$\avg\varepsilon$为单个原子的振动能。
-
-比热
-\begin{align}
-	C_V^\vb=\kh{\pv{E_\vb}T}_V=N\kB\Einst\!\kh{\frac{\theta_\vb}T},
-\end{align}
+\begin{equation}
+	Z_\vb=\sum_n\omega_\vb\e{-\beta\varepsilon_\vb}=\sum_{n=0}^\infty\e{-(n+1/2)\beta h\nu}=\frac{\e{-\beta h\nu/2}}{1-\e{-\beta h\nu}}.
+\end{equation}
+内能和比热
+\begin{subequations}
+	\begin{align}
+		U_\vb&=-N\pv{\ln Z_\vb}\beta=Nh\nu\biggkh{\frac12+\frac1{\e{\beta h\nu}-1}},\\
+		C_{V,\vb}&=\pu[V]{U_\vb}T=N\kB\Einst\biggkh{\frac{\theta_\vb}T}.
+	\end{align}
+\end{subequations}
 其中Einstein函数
 \[
-	\Einst(x):=\frac{x^2\e x}{\kh{\e x-1}^2}.
+	\Einst(x):=\frac{x^2\e x}{(\e x-1)^2}=
+	\begin{cases}
+		1-\frac{x^2}{12}+\bigo(x^4),&x\ll 1,\\
+		x^2\e{-x}+\bigo(x^2\e{-2x}),&x\gg 1.
+	\end{cases}
 \]
-\begin{compactitem}
-	\item 
-	低温极限，由
+分别对应高温和低温极限。高温极限下，能量准连续，$U_\vb=N\kB T$，比热$C_{V,\vb}=N\kB$；而在低温极限下，比热
+\begin{equation}
+	C_{V,\vb}\simeq N\kB\biggkh{\frac{\theta_\vb}T}^2\e{-\theta_\vb/T},\quad T\ll\theta_\vb.
+\end{equation}
+
+\begin{center}
+	\includegraphics[width=0.8\linewidth]{figures/C_Vvib.pdf}
+	\captionof{figure}{振动贡献热容$C_{V,\vb}\vs T$随温度的变化}
+	\label{fig:C_Vvib - T}
+\end{center}
+
+\begin{example}
+	{Einstein固体热容模型}{Einstein solid heat capacity model}
+
+	讨论固体晶格振动对$C_V$的贡献。
+	晶格间强耦合，当$T$不太高时，振幅小，晶格振动可约化为$3N$个独立、可区别的简谐振动。
+	Einstein假设振动频率$\nu_i=\nu$是一样的，
 	\[
-		x\gg 1,\quad\Einst(x)\simeq x^2\e{-x}\ll 1
+		\varepsilon_n=h\nu\biggkh{n+\frac12},\quad n=0,1,2,\ldots
 	\]
-	因此比热
-	\begin{align}
-		C_V^\vb\simeq N\kB\kh{\frac{\theta_\vb}T}^2\e{-\theta_\vb/T}.
-	\end{align}
-	相对振动而言，常温属于低温范围，故振动自由度对$C_V$贡献很小。
-	\item
-	高温极限，能量准连续
-	\begin{align*}
-		Z_\vb & =\int\zti g(\varepsilon)\e{-\beta\varepsilon}\d\varepsilon=\frac{2\pi}{h\omega}\int\zti\e{-\beta\varepsilon}\d\varepsilon=\frac{2\pi}{\beta h\omega}=\frac T{\theta_\vb}.
-	\end{align*}
-	内能
+	和前面理想气体的振动类似，可得热容
 	\[
-		E_\vb=N\kB T.
+		C_V=3N\kB\Einst\biggkh{\frac{\theta_{\Einst}}T},
 	\]
-	
-	或由低温算得的结果，使$\beta\to0$
-	\[
-		E_\vb\simeq Nh\nu\kh{\frac12+\frac1{\beta h\nu}}\simeq N\kB T.
-	\]
-\end{compactitem}
-比较有三个自由度$p_x,p_y,p_z$的平动能量$E_\tl=3\kB T/2$和有两个自由度的振动能量$E_\vb=\kB T$，可以总结这样一个规律：
-\begin{theorem}{能量均分定理}{Equi-Partition Theorem}
-	高温下，能量准连续，能量的每个自由度对能量贡献为$\kB T/2$。
+	其中Einstein温度$\theta_{\Einst}=h\nu/\kB\sim\SIrange{100}{300}\K$。
+	在低温下$C_V\propto T^{-2}\e{-\theta_{\Einst}/T}$与实验定性相符，定量不符。
+	因为有低频模式在低温时仍能被激发，从而对$C_V$有贡献。(见Debye模型)
+
+\end{example}
+
+比较有三个自由度$p_x,p_y,p_z$的平动能量$U_\tl=3N\kB T/2$和有两个自由度的振动能量$U_\vb=N\kB T$，可以总结这样一个规律：
+
+\begin{theorem}{能量均分定理}{energy equipartition}
+	高温下，能量准连续，能量的每个自由度对能量贡献为$N\kB T/2$。
 \end{theorem}
-\paragraph{转动}
+
+\begin{remark}
+	原子内部结构(电子、原子核等)的自由度对宏观量（特别是$C_V$）无贡献。因为在稳定性、结合能、能级间距上，从分子、原子到原子核越来越稳定，特征温度越来越高，越来越难以被激发。即，结合的紧密的自由能被冻结了，通常不激发。
+\end{remark}
+
+\subsection{转动}
+\label{ssec:rotation}
+
 以异核双原子分子\footnote{同核需考虑全同性原理。比如正氢(两个氢核自旋平行) $\ell$为奇数；仲氢(两个氢核自旋反平行) $\ell$为偶数。}为例，
 \[
 	\varepsilon_\rt=\frac{\hbar^2}{2I}\ell(\ell+1),\quad\omega_\rt=2\ell+1.
@@ -114,270 +175,168 @@ $\varepsilon_\tl$准连续
 \[
 	\theta_\rt=\frac{\hbar^2}{2I\kB}\sim\SI{10}\K.
 \]
-配分函数并没有显式表达式：
+高温下，能量准连续，可得内能$U_\rt=N\kB T$，比热$C_{V,\rt}=N\kB$符合能量均分定理；
+低温下，配分函数并没有显式表达式，
 \[
-	Z_\rt=\sum_{\ell=0}^\infty(2\ell+1)\e{-\ell(\ell+1)\,\theta_\rt/T}.
+	Z_\rt=\sum_{\ell=0}^\infty(2\ell+1)\e{-\ell(\ell+1)\theta_\rt/T}=1+3\e{-2\theta_\rt/T}+5\e{-6\theta_\rt/T}+\bigo(\e{-12\theta_\rt/T}).
 \]
-\begin{compactitem}
-	\item
-	高温极限下，能量准连续
-	\[
-		Z_\rt=\int\zti g(\varepsilon)\e{-\beta\varepsilon}\d\varepsilon=\frac{8\pi^2I}{h^2}\cdot\frac1\beta=\frac T{\theta_\rt}.
-	\]
-	或由$\theta_\rt/T\ll 1$
-	\[
-		Z_\rt\simeq\int_0^{+\infty}\e{-\ell(\ell+1)\,\theta_\rt/T}\cdot(2\ell+1)\d\ell=\frac T{\theta_\rt}.
-	\]
-	能量和比热
+只考虑$\ell=0,1$两项，可得
+\begin{subequations}
 	\begin{align}
-		E_\rt=N\kB T,\quad C_V^\rt=N\kB.
+		U_\rt&\simeq 6N\kB\theta_\rt\e{-2\theta_\rt/T},\\
+		C_{V,\rt}&\simeq 12N\kB\biggkh{\frac{\theta_\rt}T}^2\e{-2\theta_\rt/T}.
 	\end{align}
-	\item 
-	低温极限，$\theta_\rt/T\gg 1$，$Z_\rt$的项很快趋于0
-	\[
-		Z_\rt=1+3\e{-2\theta_\rt/T},
-	\]
-	能量和比热
-	\begin{align}
-		E_\rt&=6N\kB\theta_\rt\e{-2\theta_\rt/T},\\
-		C_V^\rt&=12N\kB\kh{\frac{\theta_\rt}T}^2\e{-2\theta_\rt/T}.
-	\end{align}
-\end{compactitem}
-原子内部结构(电子、原子核等)的自由度对宏观量（特别是$C_V$）无贡献。因为在稳定性、结合能、能级间距上，从分子、原子到原子核越来越稳定，特征温度越来越高，越来越难以被激发。即，结合的紧密的自由能被冻结了，通常不激发。
-\sectionstar{Maxwell速度分布律}
-考虑气体分子质心平动
-\[
-	\varepsilon=\frac1{2m}\kh{p_x^2+p_y^2+p_z^2},\quad \e{-\alpha}=\frac NV\kh{\frac{h^2}{2\pi m\kB T}}^{3/2}.
-\]
-在体积$V$内，动量在$\d p_x\nd p_y\nd p_z$范围内的分子数为
-\[
-	\frac V{h^3}\e{-\alpha-\beta\varepsilon}\d p_x\nd p_y\nd p_z=N\kh{\frac1{2\pi m\kB T}}^{3/2}\e{-\beta\kh{p_x^2+p_y^2+p_z^2}/2m}\d p_x\nd p_y\nd p_z.
-\]
-从而单位体积内，速度在$\d v_x\nd v_y\nd v_z$范围内的分子数为
-\begin{align}
-	\begin{aligned}
-		&f(v_x,v_y,x_z)\d v_x\nd v_y\nd v_z=n\kh{\frac m{2\pi\kB T}}^{3/2}\e{-m\kh{v_x^2+v_y^2+v_z^2}/2\kB T}\d v_x\nd v_y\nd v_z.
-	\end{aligned}
-\end{align}
-上式即\textbf{Maxwell速度分布率}，满足
-\[
-	\int\iti\int\iti\int\iti f(v_x,v_y,x_z)\d v_x\nd v_y\nd v_z=n.
-\]
-将坐标$(v_x,v_y,v_z)$换为球坐标$(v,\theta,\phi)$，并对$\theta,\phi$直接积分，便得到速率的分布：
-\begin{align}
-	f(v)\d v=4\pi n\kh{\frac m{2\pi\kB T}}^{3/2}\e{-mv^2/2\kB T}v^2\d v.
-\end{align}
-最概然速率$v_\mathrm m$
-\begin{gather}
-	\dd v\kh{\e{-mv^2/2\kB T}v^2}=0,\implies
-	v_\mathrm m=\sqrt{\frac{2\kB T}m}.
-\end{gather}
-平均速率$\avg v$
-\begin{align}
-	\avg v=\pi n\kh{\frac m{2\pi\kB T}}^{3/2}\int\zti v\e{-mv^2/2\kB T}v^2\d v=\sqrt{\frac{8\kB T}{\pi m}}.
-\end{align}
-方均根速率$v_\mathrm s$
-\begin{align}\notag
-	\avg{v^2}&=\pi n\kh{\frac m{2\pi\kB T}}^{3/2}\int\zti v^2\e{-mv^2/2\kB T}v^2\d v=\frac{3\kB T}m;\\
-	v_\mathrm s&=\sqrt{\avg{v^2}}=\sqrt{\frac{3\kB T}m}.
-\end{align}
+\end{subequations}
+如图\figref{fig:C_Vrot - T} 所示，$C_{V,\rt}$并不是单调的，而是会有一个bump。
 
-单位时间碰撞单位面积器壁上的分子数
-\begin{align}\notag
-	\Gamma&=\int\iti\int\iti\int\zti f(v_x,v_y,x_z) v_x\d v_x\nd v_y\nd v_z\\
-	&=n\kh{\frac m{2\pi\kB T}}^{1/2}\int\zti\e{-mv_x^2/2\kB T}v_x\d v_x=n\kh{\frac{\kB T}{2\pi m}}^{1/2}=\frac14n\avg v.
-\end{align}
-\section{Einstein模型}
-讨论固体晶格振动对$C_V$的贡献。
-\paragraph{简谐近似}
-晶格间强耦合，当$T$不太高时，振幅小，在平衡位置展开
-\iffalse
-	\[
-	\varPhi(x_1,x_2,\ldots,x_{3N})=\edg\phi_{x_i=0}+\sum\edg{\pv\phi{x_i}}_{x_i=0}x_i+\frac12\sum\edg{\pw\phi{x_i}{x_j}}_{x_j=0}x_ix_j+\cdots
-\]
-	保留至二次项
-	\[
-	H=\sum\frac12\dot x_i^2+\sum\frac12C_{ij}x_ix_j+\phi_0,\quad C_{ij}:=\edg{\pw\phi{x_i}{x_j}}_{x_j=0}.
-\]
-	使用正交变换使其对角化
-	\begin{align*}
-		xCx\tp=q\Lambda q\tp.
-	\end{align*}
-\fi
-\[
-	H=\sum_{i=1}^{3N}\kh{\frac{p_i^2}{2m}+2\pi^2m\nu_i^2q_i^2}+\phi_0,\quad p_i=m\dot q_i.
-\]
-晶格振动约化为$3N$个独立、可区别的简谐振动。
-\paragraph{Einstein模型}$\nu_i=\nu$且
-\[
-	\varepsilon_n=h\nu\kh{n+\frac12},\quad n=0,1,2,\ldots
-\]
-和前面理想气体的振动类似，配分函数
-\[
-	z(\beta)=\sum_{n=0}^\infty\e{-\beta\varepsilon_n}=\frac{\e{-\beta h\nu/2}}{1-\e{-\beta h\nu}}.
-\]
-能量，注意此处是$3N$
-\begin{align*}
-	E & =-3N\pv{\ln z(\beta)}\beta                          \\
-	  & =3Nh\nu\kh{\frac12+\frac1{\e{\beta h\nu}-1}}+\phi_0
-	=\frac{3Nh\nu}{\e{\beta h\nu}-1}+E_0.
-\end{align*}
-热容
-\[
-	C_V=3N\kB\Einst\!\kh{\frac{\theta_{\Einst}}T},
-\]
-其中Einstein温度$\theta_{\Einst}\sim\SIrange{100}{300}\K$。
-高温极限
-\[
-	C_V\simeq 3N\kB;
-\]
-低温极限
-\[
-	C_V\simeq 3N\kB\kh{\frac{\theta_E}T}^2\e{-\theta_E/T}\to 0.
-\]
-与实验定性相符，定量不符。因为有低频模，低温时仍能被激发，从而对$C_V$有贡献(Debye)
-\section{顺磁物质的磁性}
-磁化强度$M$和磁场强度$H$有唯象的关系
-\[
-	M=\chi H,
-\]
-其中$\chi$为磁化率。
+\begin{center}
+	\includegraphics[width=0.8\linewidth]{figures/C_Vrot.pdf}
+	\captionof{figure}{转动贡献热容$C_{V,\rt}\vs T$随温度的变化}
+	\label{fig:C_Vrot - T}
+\end{center}
 
-材料中磁感应强度
+总的内能和热容就是三种独立运动的和：
 \[
-	B=\mu_0(H+M)=\mu H,
+	C_V=C_{V,\tl}+C_{V,\rt}+C_{V,\vb}.
 \]
-其中$\mu_0$为真空中磁导率，$\mu=1+\chi$为磁导率。
-\begin{theorem}{Curie定律}{Curie's Law}
-	顺磁体$\chi>0$，且
-	\begin{align}
-		\chi\propto\frac CT.
-	\end{align}
-\end{theorem}
-顺磁物质的分子具有恒定的磁矩
+代入氧气$\mathrm{O_2}$的数据：$\theta_\rt=\SI{2.40}{K},\,\theta_\vb=\SI{2230}{K}$，可得理想气体模型下$\mathrm{O_2}$的总比热$C_V$随温度的变化如\figref{fig:C_V - T} 所示。
+可见比热在相当长的一段温度范围内都是常数，当温度达到特征温度的量级后，对应部分的比热会开始出现，并在高温下符合能量均分定理。
+
+\begin{center}
+	\includegraphics[width=0.8\linewidth]{figures/C_Vtot.pdf}
+	\captionof{figure}{总热容$C_V\vs T$随温度的变化}
+	\label{fig:C_V - T}
+\end{center}
+
+\section{顺磁性物质}
+
+由量子力学，顺磁物质的粒子磁矩$\bm\mu$与总角动量$\bm J=\bm L+\bm S$成正比：
 \[
-	\vec\mu=\muB g\vec J,\qquad\text{Bohr\;磁子\;}\muB:=\frac{e\hbar}{2m_\elc}
+	\bm\mu=g\muB\bm J,
 \]
-其中\Lande 因子\footnote{表达式证明可见本人量子力学笔记。}
+其中$\muB:=e\hbar/2m_\elc$为Bohr磁子，$g$为\Lande 因子。
 \[
 	g=1+\frac{j(j+1)+s(s+1)-\ell(\ell+1)}{2j(j+1)}.
 \]
-
-单个磁性粒子能级
+在外磁场$\bm B=\mu_0\bm H$下，单个粒子的能量为
 \[
-	\varepsilon_{m_i}=-\vec\mu\cdot\vec B=-\muB g\vec J\cdot\vec B=-\mu_0\muB gHm_i,
+	\varepsilon_m=-\bm\mu\cdot\bm B=-\mu_0\muB g\bm J\cdot\bm H=-\mu_0\muB gHm,
 \]
-其中$J$在$H$方向的投影$m_i=-j,-j+1,\ldots,j$。
-
-定义$a:=\beta\mu_0\muB gH$，配分函数
-\begin{align}\notag
-	Z(\beta,H) & =\sum_{m_i=-j}^j\e{-\beta\varepsilon_{m_i}}=\frac{\e{aj}-\e{-a(j+1)}}{1-\e{-a}} \\
-	           & =\division{\sinh\fkh{a\kh{j+\frac12}}}{\sinh\frac a2}
-\end{align}
-
-处于$m_i$态的粒子数
-\[
-	N(m_i)=\e{-\alpha-\beta\varepsilon_{m_i}}=\frac NZ\e{-\beta\varepsilon_{m_i}}.
-\]
-总粒子数
-\[
-	N=\sum N(m_i)=\e{-\alpha}Z(\beta,H).
-\]
-磁化强度
-\[
-	M=\sum N(m_i)\muB gm_i=\frac N\beta\pv{\ln Z}{\mu_0H}=N\muB gj\Brill_j(a).
-\]
+其中$m=-j,-j+1,\ldots,j$是$\bm J$在$\bm H$方向上的投影。
+配分函数
+\begin{equation}
+	Z=\sum_{m=-j}^j\e{-\beta\varepsilon_m}=\frac{\e{aj}-\e{-a(j+1)}}{1-\e{-a}}=\division{\sinh\biggfkh{\biggkh{j+\frac12}a}}{\sinh\frac a2}.
+\end{equation}
+其中$a:=\beta\mu_0\muB gH$。
+磁化强度、内能
+\begin{subequations}
+	\begin{align}
+		M&=\frac N\beta\pv{\ln Z}{\mu_0H}=N\muB gj\Brill_j(a),\\
+		U&=-N\pv{\ln Z}\beta=-\mu_0HM=-N\mu_0\muB gjH\Brill_j(a),
+	\end{align}
+\end{subequations}
 其中Brillouin函数
 \[
-	\Brill_j(a)=\frac1j\hkh{\kh{j+\frac12}\coth\fkh{a\kh{j+\frac12}}-\frac12\coth\frac a2}.
+	\Brill_j(a):=\frac1j\hkh{\biggkh{j+\frac12}\coth\biggfkh{\biggkh{j+\frac12}a}-\frac12\coth\frac a2}.
 \]
+\begin{center}
+	\includegraphics[width=0.8\linewidth]{figures/Brillouin.pdf}
+	\captionof{figure}{Brillouin函数$\Brill_j(a)$}
+	\label{fig:Brillouin function}
+\end{center}
 
-磁化强度密度
-\begin{align}
-	m=\frac MV=n\muB gj\Brill_j(a). % \equiv\frac n\beta\pv{\ln Z}{\mu_0H}.
-\end{align}
-高温弱场极限$a\ll 1$，由
+高温弱场极限下，$a\ll 1$，由$\coth$展开式可得
 \[
-	\coth x=\frac1x+\frac x3+\cdots,\quad x\ll 1
+	\Brill_j(a)=\frac{j+1}3a-\frac{(j+1)(2j^2+2j+1)}{90}a^3+\bigo(a^5).
+	% \Brill_j(a)=\frac{j+1}3a-\frac{(j+1)[j^2+(j+1)^2]}{90}a^3+\frac{(j+1)[3j^2+(j+1)^2][j^2+3(j+1)^2]}{7560}a^5+\bigo(a^5).
 \]
-故$\Brill_j(a)\simeq\frac a3(j+1)$
-因此
+仅保留一阶项，
+可得
 \[
-	m=\frac13n\mu_0\kh{\muB g}^2j(j+1)\beta H\propto\frac HT.
+	M\simeq\frac{N\mu_0\muB^2g^2j(j+1)}{3\kB T}H,
 \]
-即Curie定律~\ref{thm:Curie's Law}。
+\begin{theorem}
+	{Curie定律}{Curie's Law}
+	顺磁物体的磁化强度$M=\chi H$与外场强度$H$成正比，且磁化率$\chi$与温度成反比：
+	\begin{equation}
+		\chi=\frac{N\mu_0\muB^2g^2j(j+1)}{3\kB T}\propto\frac1T.
+	\end{equation}
+\end{theorem}
+低温强场极限下，$a\gg 1$，$\Brill_j(a)\simeq 1$
+\[
+	M\simeq N\muB gj.
+\]
+代表所有磁矩都与外场平行，达到饱和。
 
-低温强场极限$a\gg 1$，$\Brill_j(a)\simeq 1$
-\[
-	m\simeq n\muB gj.
-\]
-能量和比热
-\begin{gather}
-	E=-N\pv{\ln Z}\beta=-N\mu_0\muB gj\Brill_j(a)
-	C_B=\kh{\pv ET}_B.
-\end{gather}
+\paragraph{绝热退磁}
 
-\paragraph{绝热退磁}考虑Helmholtz自由能
-\begin{align}
-	F=-\frac N\beta\ln Z=:\frac1\beta\phi(\beta H).
-\end{align}
-熵
-\begin{align}
-	S=-\pv FT=\kB\Bigl[-\phi(\beta H)+\beta H\phi'(\beta H)\Bigr]
-\end{align}
-绝热情况，固定$S$，$\beta H=\const$，当$H$下降时，$T$下降
+考虑Helmholtz自由能和熵
+\begin{align*}
+	F&=-\frac N\beta\ln Z=:\frac1\beta\phi(\beta H),\\
+	S&=-\pv FT=\kB[-\phi(\beta H)+\beta H\phi'(\beta H)].
+\end{align*}
+绝热情况下，$S$不变，因此$\beta H=\const$。
+即当外场$H$下降时，温度$T$也会下降，并且满足
 \[
 	T_\mathrm f=T_\mathrm i\frac{H_\mathrm f}{H_\mathrm i}.
 \]
-$S(H=0)$随温度变化小的物质Ce$_2$Mg$_3($NO$_3)_{12}\cdot($H$_2$O$)_{24}$。
+为实现这一效果，可选取$S(H=0)$随温度变化小的物质，比如$\mathrm{Ce_2Mg_3(NO_3)_{12}\cdot(H_2O)_{24}}$。
+
 \section{负绝对温度}
-1951年，Pursell和Pound在很纯的LiF晶体的核自旋系统中实现了负绝对温度的状态。1956年，Ramsey提出了有关负绝对温度的热力学与统计理论。根据
+
+1956年，Ramsey提出了有关负绝对温度的热力学与统计理论。根据
 \[
-	\frac1T=\pv SE,
+	\frac1T=\pu[V,N]SU,
 \]
-一般情况下，内能越高，可能的微观状态数愈多。但也有例外，这使负绝对温度的实现成为可能。
-\paragraph{核自旋系统}孤立系统，以粒子数$N$能量$E$和外磁场$B$为参量。在外场中
+一般情况下，内能越高，可能的微观状态数越多，熵越大，温度为正。但也有例外，这使负绝对温度的实现成为可能。
+
+\paragraph{核自旋系统}
+
+在外磁场$B$下，核自旋可以有两种取向，能量分别为$\pm\varepsilon$，
+记两种取向的核磁矩数为$N_\pm$，
+由系统的粒子数和能量关系：
 \[
-	\D E=\pm\frac{e\hbar}{2M}B=:\pm\varepsilon.
-\]
-记能量为$\pm\varepsilon$的核磁矩数为$M_\pm$，则系统的粒子数和能量有
-\begin{align*}
 	\begin{cases}
 		N=N_++N_- \\
-		E=(N_+-N_-)\varepsilon
-	\end{cases}\implies
-	N_\pm=\frac N2\kh{1\pm\frac E{N\varepsilon}}.
-\end{align*}
+		U=(N_+-N_-)\varepsilon
+	\end{cases}
+	\implies
+	N_\pm=\frac N2\biggkh{1\pm\frac U{N\varepsilon}}.
+\]
+微观状态数$\Omega=N!/N_+!N_-!$，
 熵
 \begin{align*}
-	S & =\kB\ln\frac{N!}{N_+!N_-!}\simeq\kB\kh{N\ln N-N_+\ln N_+-N_-\ln N_-}.
-	  %\\& =N\kB\fkh{\ln 2-\frac12\kh{1+\frac E{N\varepsilon}}\ln\kh{1+\frac E{N\varepsilon}}-\frac12\kh{1-\frac E{N\varepsilon}}\ln\kh{1-\frac E{N\varepsilon}}}
+	S & =\kB\ln\biggkh{\frac{N!}{N_+!N_-!}}\simeq\kB(N\ln N-N_+\ln N_+-N_-\ln N_-).
+	  \\& =N\kB\biggfkh{\ln 2-\frac12\biggkh{1+\frac U{N\varepsilon}}\ln\biggkh{1+\frac U{N\varepsilon}}-\frac12\biggkh{1-\frac U{N\varepsilon}}\ln\biggkh{1-\frac U{N\varepsilon}}}
 \end{align*}
 故温度的倒数
-\begin{align}
-	\frac 1T=\pv SE=\frac{\kB}{2\varepsilon}\ln\frac{N\varepsilon-E}{N\varepsilon+E}.
-\end{align}
-因此当$E<0$时，$T>0$；$E>0$时$T<0$。当能量$E$从负转正的过程中，绝对温度的变化为
+\begin{equation}
+	\frac1T=\pu[V,N]SU=\frac\kB{2\varepsilon}\ln\biggkh{\frac{N\varepsilon-U}{N\varepsilon+U}}=\frac\kB{2\varepsilon}\ln\biggkh{\frac{N_-}{N_+}}
+	\begin{cases}
+		>0,&N_->N_+\\
+		<0,&N_-<N_+
+	\end{cases}
+\end{equation}
+当能量$U$从负转正的过程中，绝对温度的变化为
 \[
 	+T_0\enspace\longrightarrow\enspace+\infty\enspace\to\enspace -\infty\enspace\longrightarrow\enspace-T_0
 \]
-实现负绝对温度的条件相当苛刻：
-\begin{compactenum}
-	\item 系统的能量$E$有上界；
-	\item 系统内部实现平衡（系统能与环境隔绝一段时间）。即
-
-	      系统本身达到平衡的弛予时间$\ll$系统与环境达到平衡的弛予时间\footnote{对于LiF晶体，前者为$\SI{e-5}\s$，后者为$\SI{5}\min$。}
-\end{compactenum}
-只有满足以上条件，划分才有意义。
 \begin{center}
-	\begin{tikzpicture}
-		\draw[thick,-latex](0,0)node[left]{$O$}--(4.5,0)node[right]{$N_+$};
-		\draw[thick,-latex](0,-2.5)--(0,2.5)node[left]{$T$};
-		% \node[shift={(-135:9pt)}]at(0,0){$O$};
-		\draw[thick,domain=.001:1.77]plot(\x,{.5/ln((4-\x)/\x)});
-		\draw[thick,domain=2.23:3.999]plot(\x,{.5/ln((4-\x)/\x)});
-		\draw[thick,dashed](2,-2.5)--(2,2.5);
-		\draw[thick](4,0)node[above]{$N$}--(4,-.06);
-	\end{tikzpicture}
+	\includegraphics[page=22]{figures/tikz/coordinates.pdf}
 	\captionof{figure}{$T\vs N_+$图像}
 \end{center}
+
+\begin{remark}
+	实现负绝对温度的条件相当苛刻：
+	\begin{compactenum}
+		\item 系统的能量$U$有上界；
+		\item 系统内部实现平衡（系统能与环境隔绝一段时间）。即
+		\begin{center}
+			系统本身达到平衡的弛予时间$\ll$系统与环境达到平衡的弛予时间
+		\end{center}
+		对于LiF晶体，前者为$\SI{e-5}\s$，后者为$\SI{5}\min$。
+		1951年，Pursell和Pound在很纯的LiF晶体的核自旋系统中实现了负绝对温度的状态。
+	\end{compactenum}
+	只有满足以上条件，划分才有意义。
+\end{remark}
+
