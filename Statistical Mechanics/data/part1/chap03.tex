@@ -6,7 +6,10 @@
 \newcommand*{\phaq}{\mathrm{aq}}
 \newcommand*{\phel}{\mathrm{el}}
 
-\newcommand*{\crt}{\mathrm C}
+\newcommand*{\rmA}{\mathrm{A}}
+\newcommand*{\rmB}{\mathrm{B}}
+
+\newcommand*{\crt}{\mathrm{C}}
 \newcommand*{\tri}{_\mathrm{tr}}
 
 \chapter{相与相变}
@@ -563,7 +566,7 @@ $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
 		\label{eq:mu solvent}
 		\mu         & \equiv\pv GN=\mu_0-xRT.    \\
 		\label{eq:mu solute}
-		\mu_{\rm B} & \equiv\pv Gn=\psi+RT\ln x.
+		\mu_\rmB & \equiv\pv Gn=\psi+RT\ln x.
 	\end{align}
 \end{subequations}
 对于稀溶液，溶质与溶剂的相互作用造成的化学势的变化$\psi\ll$混合带来的熵变。
@@ -637,7 +640,7 @@ $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
 	{化学反应}{}
 	考虑化学反应
 	\[
-		0\rightleftharpoons\sum_{i=1}^r\nu_i{\rm A}_i.
+		0\rightleftharpoons\sum_{i=1}^r\nu_i\rmA_i.
 	\]
 	在恒温恒压的条件下，平衡时Gibbs自由能最小
 	% \footnote{在混合系统中，总化学势一般不是各组分简单相加。}
@@ -647,37 +650,34 @@ $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
 	% 应当注意：$\mu_i$均来自于混合系统的Gibbs自由能。
 	考虑一个由理想气体参与的化学反应，在多组分理想气体系统中，组分$i$的化学势为
 	\[
-		\mu_i=RT\ln[{\rm A}_i]+\const(T).
+		\mu_i=RT\ln[\rmA_i]+\const(T).
 	\]
-	其中$[{\rm A}_i]:=n_i/V$表示摩尔浓度，因此
+	其中$[\rmA_i]:=n_i/V$表示摩尔浓度，因此
 	\begin{equation}
-		\prod_{i=1}^r[{\rm A}_i]^{\nu_i}=:K(T).
+		\prod_{i=1}^r[\rmA_i]^{\nu_i}=:K(T).
 	\end{equation}
 	只与$T$有关，$K$称为化学平衡常数。
 \end{example}
 
 \subsectionstar{相分离}
 
-A和B两种组份混合后可能出现相分离，分成$\alpha$和$\beta$两相。每一相都有A和B两组份，但比例不同。%我们来看一下这是怎么发生的。假设两组份的摩尔数分别为$N_{\rm A}$和$N_{\rm B}$，总摩尔数$N=N_{\rm A}+N_{\rm B}$，
-设B的摩尔比$x:=N_{\rm B}/N$。假设如果没有相分离，即两组份互溶，单位摩尔的Gibbs自由能为$g(x)$。
-在一定温度下，$\alpha$和$\beta$两相中B的摩尔比分别为$x_\alpha$和$x_\beta$，故两相的摩尔数$N_\alpha$和$N_\beta$%下面求如果有
+A和B两种组份混合后可能出现相分离，分成$\alpha$和$\beta$两相。每一相都有A和B两组份，但比例不同。%我们来看一下这是怎么发生的。假设两组份的摩尔数分别为$n_\rmA$和$n_\rmB$，总摩尔数$n=n_\rmA+n_\rmB$，
+设B的摩尔比$x:=n_\rmB/n$。假设如果没有相分离，即两组份互溶，单位摩尔的Gibbs自由能为$g(x)$。
+在一定温度下，$\alpha$和$\beta$两相中B的摩尔比分别为$x_\alpha$和$x_\beta$，故两相的摩尔数$n_\alpha$和$n_\beta$%下面求如果有
 \begin{align*}
-	\left\{
-	\begin{aligned}
-		N_\alpha+N_\beta                  & =N  \\
-		x_\alpha N_\alpha+x_\beta N_\beta & =xN
-	\end{aligned}
-	\right.\implies
-	\left\{
-	\begin{aligned}
-		N_\alpha & =\frac{x_\beta-x}{x_\beta-x_\alpha}N  \\
-		N_\beta  & =\frac{x-x_\alpha}{x_\beta-x_\alpha}N
-	\end{aligned}
-	\right..
+	\begin{cases}
+		n_\alpha+n_\beta=n  \\
+		x_\alpha n_\alpha+x_\beta n_\beta=xn
+	\end{cases}
+	\implies
+	\begin{cases}
+		n_\alpha=\frac{x_\beta-x}{x_\beta-x_\alpha}n  \\
+		n_\beta =\frac{x-x_\alpha}{x_\beta-x_\alpha}n
+	\end{cases}
 \end{align*}
-两相的自由能$g_\alpha=g(x_\alpha),g_\beta=g(x_\beta)$。若有相分离，其自由能是一条直线
+两相的自由能$g_\alpha=g(x_\alpha),\,g_\beta=g(x_\beta)$。若有相分离，其自由能是一条直线
 \[
-	g^\star(x)=\frac{n_\alpha}ng_\alpha+\frac{n_\beta}ng_\beta
+	g^\star(x)=x_\alpha g_\alpha+x_\beta g_\beta
 	=\frac{g_\beta-g_\alpha}{x_\beta-x_\alpha}(x-x_\alpha)+g_\alpha.
 \]
 若$x_\alpha<x<x_\beta$时有$g^\star<g$，便会出现相分离。
