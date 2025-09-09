@@ -459,12 +459,12 @@
 		pv&=RT.
 	\end{align}
 \end{subequations}
-% 其中$c$与理想气体自由度有关，$R=\NA\kB=8.3144~{\rm J/mol\cdot K}$是普适的理想气体常数。
-% \footnote{最新的国际制基本单位\textit{定义}Avogadro常数$\NA\equiv 6.02214076\times 10^{23}~{\rm mol^{-1}}$；Boltzmann常数$\kB\equiv 1.380649\times 10^{-23}~{\rm J/K}$，因此理想气体常数也是精确的。}
+% 其中$c$与理想气体自由度有关，$R=\NA\kB=\SI{8.3144}{\joule\per\mole\kelvin}$是普适的理想气体常数。
+% \footnote{最新的国际制基本单位\textit{定义}Avogadro常数$\NA\equiv\SI{6.02214076e23}{\per\mole}$；Boltzmann常数$\kB\equiv\SI{1.380649e-23}{\joule\per\kelvin}$，因此理想气体常数也是精确的。}
 可以直接得到响应函数
 \begin{subequations}
 	\begin{align}
-		c_V&=\pu[V]uT=cR,\\
+		c_V&=\pu[V]uT=\frac uT=cR,\\
 		c_p&=\pu[p]uT+p\pu[p]vT=(c+1)R,\\
 		\alpha&=\frac1v\pu[p]vT=\frac1T,\\
 		\beta&=-\frac1p\pu[v]pT=-\frac1T,\\
@@ -517,29 +517,62 @@ van der Waals气体是对理想气体的一个比较好的修正：
 \begin{subequations}
 	\begin{align}
 		U&=\frac{4\sigma}cVT^4,\\
-		p&=\frac{4\sigma}{3c}T^4.
+		p&=\frac13\frac UV=\frac{4\sigma}{3c}T^4.
 	\end{align}
 \end{subequations}
 其中$\sigma$是Stefan-Boltzmann常数，$c$在这里是光速。
 
-\subsection{电介质与磁介质}
+可得相应函数(恒压过程同时也为恒温过程，$C_p,\alpha,\kappa_T$无意义)：
+\begin{subequations}
+	\begin{align}
+		C_V&=\pu[V]UT=4\frac UT=\frac{16\sigma}cVT^3,\\
+		\beta&=-\frac1p\pu[V]pT=-\frac4T.
+	\end{align}
+\end{subequations}
+熵的微分$\d S=(\d U+p\d V)/T$，积分可得熵
+\begin{equation}
+	S=\frac43\frac UT=\frac{16\sigma}{3c}VT^3.
+\end{equation}
+因此绝热过程满足$VT^3=\const$；
+Gibbs自由能
+\begin{equation}
+	G=U-TS+pV=0.
+\end{equation}
 
-磁偶极矩密度为$\bm M$的磁介质放入磁场$\bm B$中，应当加上
-\[\d U=T\d S-p\d V+\int\vec B\cdot\d\vec M\d V+\mu\d N.\]
-若材料均匀磁化，总磁矩$m=MV$，应有
-\[\d U=T\d S-p\d V+B\d m+\mu\d N.\]
-但应该注意的是，磁感应强度并不能作为平衡条件。
-	电介质在恒温恒压下的Gibbs自由能
-\[\d G=-S\d T+V\d p-p\d E\]
+\subsection{电介质和磁介质}
+
+\paragraph{电介质}
+
+电偶极矩为$\bm p_\elc$的电介质放入电场$\bm E$中，Gibbs自由能
+\[
+	\d G=-S\d T+V\d p-p_\elc\d E
+\]
 Maxwell关系
-\[\pw GEP=\pw GPE\implies\kh{\pv VE}_P=-\kh{\pv pP}_E\equiv-VE\kh{\pv{\chi_e}p}_E.\]
+\begin{equation}
+	\pw GEp=\pw GpE\implies
+	\pu[p]VE=-\pu[E]{p_\elc}p=-VE\pu[E]{\chi_\elc}p.
+\end{equation}
 说明在电介质的极化方向上施加电场，这些电介质也会发生变形，这就是\textbf{压电效应}。
 
+\paragraph{磁介质}
+
+磁偶极矩为$\bm m$的磁介质放入磁场$\bm B$中，应有
+\[
+	\d U=T\d S-p\d V+B\d m.
+\]
+% 但应该注意的是，磁感应强度并不能作为平衡条件。
 磁介质的Gibbs自由能
-\[\d G=-S\d T+V\d p-m\d B\]
+\[
+	\d G=-S\d T+V\d p-m\d B
+\]
 Maxwell关系
-\[\pw GBT=\pw GTB\implies\kh{\pv SB}_T=-\kh{\pv mT}_B.\]
-绝热条件下%去磁升温
-\[\kh{\pv TB}_S=-\kh{\pv TS}_B\kh{\pv SB}_T=-\frac T{C_B}\kh{\pv mT}_B\equiv-\frac{TVB}{\mu_0C_B}\kh{\pv{\chi_m}T}.\]
+\[
+	\pw GBT=\pw GTB\implies
+	\pu[T]SB=-\pu[B]mT.
+\]
+绝热条件下去磁升温
+\[
+	\pu[S]TB=-\pu[B]TS\pu[T]SB=-\frac T{C_B}\pu[B]mT=-\frac{TVB}{\mu_0C_B}\pu[B]{\chi_{\mathrm{m}}}T.
+\]
 这体现了在绝热条件下磁性与热的关系，即\textbf{磁热效应}。铁磁和顺磁材料的磁热效应特别大。
 
