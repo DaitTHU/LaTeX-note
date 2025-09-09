@@ -5,7 +5,9 @@
 \chapter{系综}
 
 前面讨论的是近独立粒子系统，忽略粒子间作用，用单粒子态分布描述系统状态；如果粒子间作用不能忽略，单粒子态无确切含义，就要以系统为整体研究，这就是\textbf{系综}。系综的平均值就是统计平均值。
+
 \section{系统微观状态的描述与统计系综}
+
 经典理论中，粒子状态由广义坐标$q$与广义动量$p$描述，张成$\mu$空间。而系统的微观状态由$\varGamma$空间描述
 \begin{definition}{$\varGamma$空间}{Gamma Space}
 	$\varGamma$空间是所有粒子广义坐标$q_i$与广义动量$p_i$所张的空间，相体积元
@@ -14,13 +16,44 @@
 	\end{align}
 	其中$f=N\gamma$为整个系统的自由度。
 \end{definition}
+
+用$\rho(q,p,t)$表示系统在时刻$t$处于相体积元$\d\Omega$的几率，$\rho(q,p,t)$称为分布函数，满足归一化条件
+\[
+	\int_\varGamma\rho(q,p,t)\d\Omega=1.
+\]
+宏观量是各微观态对应量$B(q,p)$的统计平均值
+\begin{equation}
+	\avg B(t)=\int_\varGamma B(q,p)\rho(q,p,t)\d\Omega.
+\end{equation}
+
+\begin{theorem}
+	{Liouville定理}{Liouville Theorem}
+	孤立系统在$\varGamma$空间中运动时，其分布函数$\rho(q,p,t)$满足Liouville方程
+	\begin{equation}
+		\dv\rho t=\pv\rho t+\sum_{i=1}^f\kh{\pv\rho{q_i}\pv H{p_i}-\pv\rho{p_i}\pv H{q_i}}=0.
+	\end{equation}
+\end{theorem}
+
+% \begin{proof}
+% 	$\rho$的微分为
+% 	\[
+% 		\d\rho=\pv\rho t\d t+\sum_{i=1}^f\biggkh{\pv\rho{q_i}\d q_i+\pv\rho{p_i}\d p_i},
+% 	\]
+% 	由Hamilton方程
+% 	\[
+% 		\dv{q_i}t=\pv H{p_i},\quad \dv{p_i}t=-\pv H{q_i},
+% 	\]
+% 	即证。
+% \end{proof}
+
 量子中，系统微观状态用力学量完全集的量子数描述，由不确定度关系，每个量子态在$\varGamma$空间占据相体积$h^f$。
-\begin{definition}{系综}{Ensemble}
+
+\begin{definition}{系综}{ensemble}
 	系综(ensemble)是大量微观结构、宏观条件相同的系统的集合。
 	\begin{compactitem}
-		\item 微正则系综(microcanonical)：孤立系统，$N,V,U$恒定；
-		\item 正则系综(canonical)：\qquad\quad\enspace 封闭系统，$N,V,T$恒定；
-		\item 巨正则系综(grand canonical)：开放系统，$\mu,V,T$恒定。
+		\item 微正则系综(micro canonical ensemble)：孤立系统，$N,V,U$恒定；
+		\item 正则系综(canonical ensemble)：封闭系统，$N,V,T$恒定；
+		\item 巨正则系综(grand canonical ensemble)：开放系统，$\mu,V,T$恒定。
 	\end{compactitem}
 \end{definition}
 后面会看到，在粒子数$N\to\infty$且$N/V$恒定时，三个系综等价。
