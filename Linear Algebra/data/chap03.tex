@@ -328,35 +328,58 @@
 \begin{theorem}{Sylvester不等式}{Sylvester inequality}
 	对$n$阶方阵$A,B$有
 	\begin{equation}
+		\label{eqn:Sylvester inequality}
 		\rank(AB)\geq\rank(A)+\rank(B)-n.
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	注意到
+	注意到行/列等价关系：
+	\[
+		\begin{bmatrix}
+			I_n\\ &AB
+		\end{bmatrix}\sim\begin{bmatrix}
+			I_n\\A&AB
+		\end{bmatrix}\sim\begin{bmatrix}
+			I_n&-B\\A
+		\end{bmatrix}.
+	\]
+	两边取秩即得
 	\[
 		\rank(AB)+n=\rank\biggkh{\begin{bmatrix}
-			I_n\\ &AB
-		\end{bmatrix}}=\rank\biggkh{\begin{bmatrix}
 			I_n&-B\\A
-		\end{bmatrix}}\geq\rank(A)+\rank(B).\qedhere
+		\end{bmatrix}}\geq\rank(A)+\rank(B).
+		\qedhere
 	\]
 \end{proof}
 
-\begin{theorem}{Frobenius秩不等式}{Frobenius rank inequality}
+\begin{theorem}{Frobenius不等式}{Frobenius inequality}
 	对于矩阵$A,B,C$，有
 	\begin{equation}
+		\label{eqn:Frobenius inequality}
 		\rank(ABC)\geq\rank(AB)+\rank(BC)-\rank(B).
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	注意到
-	\begin{align*}
-		\rank(ABC)+\rank(B)&=\rank\biggkh{\begin{bmatrix}
-			B\\ &ABC
-		\end{bmatrix}}\\
-		&=\rank\biggkh{\begin{bmatrix}
-			BC&B\\ &AB
-		\end{bmatrix}}\geq\rank(AB)+\rank(BC).\qedhere
-	\end{align*}
+	注意到行/列等价关系：
+	\[
+		\begin{bmatrix}
+			ABC\\ &B
+		\end{bmatrix}\sim\begin{bmatrix}
+			ABC&AB\\ &B
+		\end{bmatrix}\sim\begin{bmatrix}
+			&AB\\-BC&B
+		\end{bmatrix},
+	\]
+	两边取秩即得
+	\[
+		\rank(ABC)+\rank(B)=\rank\biggkh{\begin{bmatrix}
+			&AB\\-BC&B
+		\end{bmatrix}}\geq\rank(AB)+\rank(BC).
+		\qedhere
+	\]
 \end{proof}
+
+\begin{corollary}
+	对Frobenius不等式\eqref{eqn:Frobenius inequality}取$B=I_n$即可得到Sylvester不等式\eqref{eqn:Sylvester inequality}。
+\end{corollary}
 
