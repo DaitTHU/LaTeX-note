@@ -4,27 +4,50 @@
 
 \chapter{系综}
 
-前面讨论的是近独立粒子系统，忽略粒子间作用，用单粒子态分布描述系统状态；如果粒子间作用不能忽略，单粒子态无确切含义，就要以系统为整体研究，这就是\textbf{系综}。系综的平均值就是统计平均值。
+前面讨论的是近独立粒子系统，忽略粒子间作用，用单粒子态分布描述系统状态；如果粒子间作用不能忽略，单粒子态无确切含义，就要以系统为整体研究，这就是\textbf{系综}。
 
-\section{系统微观状态的描述与统计系综}
+\paragraph{系统微观状态的经典描述}
 
-经典理论中，粒子状态由广义坐标$q$与广义动量$p$描述，张成$\mu$空间。而系统的微观状态由$\varGamma$空间描述
-\begin{definition}{$\varGamma$空间}{Gamma Space}
-	$\varGamma$空间是所有粒子广义坐标$q_i$与广义动量$p_i$所张的空间，相体积元
-	\begin{align}
-		\d\Omega=\prod_{i=1}^f\d q_i\nd p_i,
-	\end{align}
+经典理论中，粒子状态由$\mu$空间中的广义坐标$q$与广义动量$p$描述。
+而系统的微观状态由$\varGamma$空间描述。
+
+\begin{definition}{$\varGamma$空间}{Gamma space}
+	$\varGamma$空间是系统中所有粒子的广义坐标$q_1,\ldots,q_f$与广义动量$p_1,\ldots,p_f$张成的空间。相体积元
+	\begin{equation}
+		\d\Omega=\prod_{i=1}^f\d q_i\nd p_i.
+	\end{equation}
 	其中$f=N\gamma$为整个系统的自由度。
 \end{definition}
 
-用$\rho(q,p,t)$表示系统在时刻$t$处于相体积元$\d\Omega$的几率，$\rho(q,p,t)$称为分布函数，满足归一化条件
-\[
-	\int_\varGamma\rho(q,p,t)\d\Omega=1.
-\]
-宏观量是各微观态对应量$B(q,p)$的统计平均值
-\begin{equation}
-	\avg B(t)=\int_\varGamma B(q,p)\rho(q,p,t)\d\Omega.
-\end{equation}
+\begin{theorem}
+	{Hamilton方程}{Hamilton equation}
+	系统的运动状态$(q,p)$随时间的演化遵从Hamilton正则方程
+	\begin{equation}
+		\dot q_i=\pv H{p_i},\quad \dot p_i=-\pv H{q_i}.
+	\end{equation}
+	其中$H$是系统的Hamilton量。
+\end{theorem}
+
+\begin{remark}
+	对于保守系统，Hamilton量就是系统的能量，包括粒子的动能、粒子相互作用的势能和粒子在保守外场中的势能。
+	% 它是$q,p$的函数，当存在外场时还是外场参量$y$的函数，但不是时间的显函数。
+\end{remark}
+
+\begin{corollary}
+	经过相空间任何一点的轨道唯一、连续且不相交。
+\end{corollary}
+
+\begin{definition}
+	{分布函数}{distribution function}
+	系统的运动状态$(q,p)$在时刻$t$处于相体积元$\d\Omega$中的几率记为$\rho(q,p,t)$，称为分布函数(distribution function)，满足归一化条件
+	\[
+		\int_\varGamma\rho(q,p,t)\d\Omega=1.
+	\]
+	宏观量$\avg B(t)$就是各微观态对应量$B(q,p)$的统计平均值
+	\begin{equation}
+		\avg B(t)=\int_\varGamma B(q,p)\rho(q,p,t)\d\Omega.
+	\end{equation}
+\end{definition}
 
 \begin{theorem}
 	{Liouville定理}{Liouville Theorem}
@@ -40,31 +63,52 @@
 % 		\d\rho=\pv\rho t\d t+\sum_{i=1}^f\biggkh{\pv\rho{q_i}\d q_i+\pv\rho{p_i}\d p_i},
 % 	\]
 % 	由Hamilton方程
-% 	\[
-% 		\dv{q_i}t=\pv H{p_i},\quad \dv{p_i}t=-\pv H{q_i},
-% 	\]
 % 	即证。
 % \end{proof}
 
-量子中，系统微观状态用力学量完全集的量子数描述，由不确定度关系，每个量子态在$\varGamma$空间占据相体积$h^f$。
+% 而在量子理论中，
+% 可测量物理量对应一个Hermite算符$\hat B$，其具有一系列本征值$B_s$和本征态$\ket s$：
+% \[
+% 	\hat B\ket s=B_s\ket s,\quad s=1,2,\ldots
+% \]
+% 系统所处的量子态为$\ket\psi$，经过一次测量，系统会坍缩到某一本征态$\ket s$上，分布函数就是系统坍缩到某一量子态的几率$\rho_s(t)\equiv\abs{\brkt s\psi}^2$，满足归一化条件
+% \[
+% 	\sum_s\rho_s(t)=\sum_s\brkt\psi s\brkt s\psi=\sum_s\brkt\psi\psi=1.
+% \]
+% 而测量的期望值为
+% \begin{equation}
+% 	\avg B(t)=\sum_s B_s\rho_s(t).
+% \end{equation}
+% 由不确定度关系，每个量子态在$\varGamma$空间中占据的相体积为$h^f$。
 
 \begin{definition}{系综}{ensemble}
 	系综(ensemble)是大量微观结构、宏观条件相同的系统的集合。
 	\begin{compactitem}
-		\item 微正则系综(micro canonical ensemble)：孤立系统，$N,V,U$恒定；
+		\item 微正则系综(microcanonical ensemble)：孤立系统，$N,V,U$恒定；
 		\item 正则系综(canonical ensemble)：封闭系统，$N,V,T$恒定；
 		\item 巨正则系综(grand canonical ensemble)：开放系统，$\mu,V,T$恒定。
 	\end{compactitem}
 \end{definition}
-后面会看到，在粒子数$N\to\infty$且$N/V$恒定时，三个系综等价。
-\section{微正则分布}
+% 后面会看到，在粒子数$N\to\infty$且$N/V$恒定时，三个系综等价。
+
+\section{微正则系综}
+\label{sec:microcanonical}
+
+
+
+\paragraph{微正则系综的分布函数}
+
+考虑处于平衡态的孤立系统的分布函数$\rho$，
+
 平衡的孤立系统服从的分布叫微正则分布。满足Boltzmann等几率假设：处平衡态的孤立系统，各可能微观状态出现的几率相等。
 
 微正则系综的特性函数就是熵
 \[
 	\rho_\st=\frac1\Omega,\quad S=-\sum_\st\rho_\st\ln\rho_\st.
 \]
-\section{正则分布}
+
+\section{正则系综}
+
 考虑系统$A$与热源$A_\rs$间的平衡，注意到$A+A_\rs$构成孤立系统，当二者相互作用可忽略时，总能量$E^{(0)}=E_\st+E_\rs$，且对很大的热源$E_\rs\gg E_\st$。记当$A$处于系统$E_\st$某一量子态，$A_\rs$处于系统$E_\rs$任一量子态，微观态数目为$\Omega_\rs(E_\rs)$
 \[
 	\ln\Omega_\rs(E_\rs)=\ln\Omega_\rs(E^{(0)}-E_\st)\simeq\ln\Omega_\rs(E^{(0)})-\beta E_\st
@@ -176,7 +220,9 @@
 		p=\frac1\beta\pv{\ln Z}V=\frac N{\beta V}=\frac{N\kB T}V.
 	\end{align}
 \end{example}
-\section[实际气体的状态方程]{实际气体（非理想气体）的状态方程}
+
+\subsection{实际气体的状态方程}
+
 $N$个全同粒子，体积$V$，
 \[
 	E=E_\tl+\varPhi+E_\i.
@@ -265,7 +311,9 @@ $N$个全同粒子，体积$V$，
 		\kh{p+\frac a{v^2}}(v-b)=\kB T.
 	\end{align}
 \end{example}
-\section{Ising模型}
+
+\subsection{Ising模型}
+
 对于Fe, Ni, Co等铁磁性物质，存在Curie温度$T_\Cr$，当$T<T_\Cr$时会有自发磁化现象，而$T>T_\Cr$时消磁。1920年Lenz为解释铁磁-顺磁相变提出一个模型，并由其学生Ising求解出一维的情形(一维模型无相变)。
 
 \paragraph{Ising模型}$N$个取值为$\pm 1$($\uparrow\downarrow$)的格点$S_i$，系统的能量包括邻对的相互作用和外磁场能
