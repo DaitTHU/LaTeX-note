@@ -217,25 +217,30 @@
 	\]
 \end{proof}
 
+显然，不是所有方阵都可以对角化。
+
 \begin{theorem}{可对角化判定}{}
 	$n$阶矩阵$A$可对角化$\iff A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$。
 	\tcblower
 	此时$A=X\Lambda X\iv$，$X$由特征向量给出，对角矩阵$\Lambda$由对应特征值$\lambda_1,\ldots,\lambda_n$ (可能相同)给出：
-	\begin{align}
-		X=(x_1,\ldots,x_n),\quad\Lambda=\diag(\lambda_1,\ldots,\lambda_n).
-	\end{align}
+	\begin{equation}
+		X=[x_1,\ldots,x_n]
+		\quad
+	\Lambda=\diag(\lambda_1,\ldots,\lambda_n).
+	\end{equation}
 \end{theorem}
 \begin{proof}
 	假设$A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$，
 	\[
-		AX=(Ax_1,\ldots,Ax_n)=(\lambda_1x_1,\ldots,\lambda_nx_n)=X\Lambda,
+		AX=[Ax_1,\ldots,Ax_n]=[\lambda_1x_1,\ldots,\lambda_nx_n]=X\Lambda,
 	\]
 	故$A$可对角化；反过来说，若$A$可对角化为$X\Lambda X\iv$，则$AX=X\Lambda$，即
 	\[
-		(Ax_1,\ldots,Ax_n)=(\lambda_1x_1,\ldots,\lambda_nx_n),
+		[Ax_1,\ldots,Ax_n]=[\lambda_1x_1,\ldots,\lambda_nx_n],
 	\]
 	故$x_1,\ldots,x_n$是$A$的特征向量，又$X$可逆，故$x_1,\ldots,x_n$线性无关。
 \end{proof}
+
 \begin{corollary}
 	有$n$个互不相同特征值的$n$阶矩阵$A$可对角化。
 \end{corollary}
@@ -243,54 +248,98 @@
 \paragraph{特征值的重数}
 
 当特征值重复时，引入两个概念
-\begin{definition}{几何重数和代数重数}{}
-	几何重数(geometric multiplicity, GM)：特征值$\lambda$对应的最大线性无关的特征向量的个数，即$\dim\bigkh{\N(\lambda I-A)}$。
 
-	代数重数(algebraic multiplicity, AM)：特征值$\lambda$作为特征方程$\det(\lambda I-A)=0$的根的重复次数。
+\newcommand*{\GM}{\mathrm{GM}}
+\newcommand*{\AM}{\mathrm{AM}}
+
+\begin{definition}{几何重数和代数重数}{}
+	几何重数(geometric multiplicity, GM)：特征值$\lambda_i$对应的线性无关特征向量的最大个数，即特征子空间的维数$\dim\N(\lambda_iI-A)$。
+
+	代数重数(algebraic multiplicity, AM)：特征值$\lambda_i$作为特征方程$\det(\lambda I-A)=0$的根$\lambda=\lambda_i$的重复次数。
+	\[
+		\det(\lambda I-A)=\prod_{i=1}^r(\lambda-\lambda_i)^{m_i}=0,
+	\]
+	其中$\lambda_i$是互不相同的根，$m_i$是$\lambda_i$的代数重数。
 \end{definition}
-特征方程可以写成
-\[
-	\prod_{i=1}^r(\lambda-\lambda_i)^{m_i}=0,
-\]
-其中$\lambda_i$是互不相同的根，$m_i$是$\lambda_i$的代数重数。
+
+\begin{corollary}
+	代数重数的和$\textstyle\sum_{i=1}^rm_i=n$矩阵的阶数。
+\end{corollary}
+
 \begin{theorem}{}{GM <= AM}
-	GM $\leqslant$ AM.
+	$\GM\leqslant\AM.$
 \end{theorem}
 \begin{proof}
-	考虑$n$阶矩阵$A$，假设特征值$\lambda_1$的GM $=\dim(\lambda_1I-A)=m$，
-	
-	取$\{x_1,\ldots,x_m\}$为$\C(\lambda_1I-A)$的一组正交归一基。
-	
-	取$\{b_1,\ldots,b_{n-m}\}$为$\N(\lambda_1I-A)^\perp$的一组正交归一基。
-	
-	设$n\times n$矩阵 
+	考虑$n$阶矩阵$A$，假设特征值$\lambda_1$的GM $=\dim\N(\lambda_1I-A)=m$，
+	\begin{itemize}
+		\item 取$\N(\lambda_1I-A)$的一组正交归一基$\{x_1,\ldots,x_m\}$；
+		\item 取$\N(\lambda_1I-A)^\perp=\C(\lambda_1I-A)\tp$的一组正交归一基$\{b_1,\ldots,b_{n-m}\}$。
+	\end{itemize}
+	则$\{x_1,\ldots,x_m,b_1,\ldots,b_{n-m}\}$构成$\RR^n$的一组正交归一基，可以此定义$n$阶正交矩阵$P$ 
 	\[
-		P=(x_1,\ldots,x_m,b_1,\ldots,b_{n-m})=(X,B),
+		P=[x_1,\ldots,x_m,b_1,\ldots,b_{n-m}]=:[X,B],
 	\]
-	$P$是可逆的且$P\iv=P\tp$，且$X\tp B=0$，则 
+	因为$x_i\tp b_j=0$，有$X\tp B=0$，则$P\iv AP$是分块三角的：
 	\[
 		P\iv AP=\begin{bmatrix}
+			X\tp\\B\tp
+		\end{bmatrix}A\begin{bmatrix}
+			X&B
+		\end{bmatrix}=\begin{bmatrix}
 			\lambda_1I_m&X\tp AB\\0&B\tp AB
 		\end{bmatrix},
 	\]
-	分块三角矩阵
+	其特征方程为
 	\[
 		\det(\lambda I-P\iv AP)=(\lambda-\lambda_1)^m\det(\lambda I-B\tp AB),
 	\]
-	$A$和$P\iv AP$有相同的特征方程，故$\lambda_1$必然是$A$的特征方程的根，且其AM $\geqslant$ GM。
+	显然，其$(\lambda-\lambda_1)$的次数$\geq m$。
+	而$A$和$P\iv AP$有相同的特征方程，故$\lambda_1$的$\AM\geqslant\GM$。
 \end{proof}
+
 \begin{corollary}
 	$n$阶矩阵$A$的全部特征值为$\{\lambda_1,\ldots,\lambda_r\}$，$A$可对角化当且仅当
 	\[
-		\sum_{i=1}^r\dim(\lambda_iI-A)=n,
+		\sum_{i=1}^r\dim\N(\lambda_iI-A)=n,
 	\]
-	即所有特征值的AM = GM。
+	即所有特征值的$\AM_i=\GM_i$。
 \end{corollary}
-\begin{theorem}{同时对角化}{}
-	若$A,B$可对角化，则他们可以同时对角化当且仅当$AB=BA$。
+
+\begin{theorem}
+	{分块对角矩阵的对角化}{}
+	分块对角矩阵可对角化$\iff$所有块矩阵均可对角化。
 \end{theorem}
+
 \begin{proof}
-	若$A,B$可以同时对角化，故
+	考虑只有2个分块对角矩阵$A=\diag(A_1,A_2)$，因为对于$k$块对角矩阵，可令$A_2$是$k-1$块的，通过数学归纳法证明即可。
+
+	一方面，若$A_1,A_2$可对角化，即
+	\[
+		X_1\iv A_1X_1=\Lambda_1,\quad X_2\iv A_2X_2=\Lambda_2,
+	\]
+	则令$X=\diag(X_1,X_2),\,\Lambda=\diag(\Lambda_1,\Lambda_2)$可将$A$对角化：
+	\[
+		X\iv AX=\Lambda;
+	\]
+	另一方面，若$A$可对角化，任取$A$的一个特征值$\lambda_i$，
+	考虑其关于$A,A_1,A_2$的代数重数$\AM,\AM_1,\AM_2$和几何重数$\GM,\GM_1,\GM_2$，由
+	\[
+		\det(\lambda I_n-A)=\det(\lambda I_{n_1}-A_1)\det(\lambda I_{n_2}-A_2)\implies\AM=\AM_1+\AM_2;
+	\]
+	又
+	\[
+		\rank(\lambda_iI_n-A)=\rank(\lambda_iI_{n_1}-A_1)+\rank(\lambda_iI_{n_2}-A_2)\implies\GM=\GM_1+\GM_2.
+	\]
+	由$A$可对角化知$\AM=\GM$，而$\AM_1\geq\GM_1,\,\AM_2\geq\GM_2$，
+	故$\AM_1=\GM_1,\,\AM_2=\GM_2$，即$A_1,A_2$均可对角化。
+\end{proof}
+
+\begin{theorem}{同时对角化}{}
+	若$A,B$可对角化，则$A,B$可以同时对角化$\iff A,B$可交换($AB=BA$)。
+\end{theorem}
+
+\begin{proof}
+	若$A,B$可以同时对角化，即存在可逆矩阵$X$和对角矩阵$\Lambda_A,\Lambda_B$，使得
 	\[
 		A=X\Lambda_AX\iv,\quad B=X\Lambda_BX\iv,
 	\]
@@ -298,37 +347,32 @@
 	\[
 		AB-BA=X(\Lambda_A\Lambda_B-\Lambda_B\Lambda_A)X\iv=0;
 	\]
-	
-	若$AB=BA$，下证$A,B$可同时对角化。
-	
-	设$A$的特征值为$\{\lambda_1,\ldots,\lambda_s\}$，$\lambda_i$对应特征子空间为$V_i$，几何重数$m_i=\dim(V_i)$，%为方便，
-	记$n_i:=m_1+\cdots+m_{i-1}$，
-	取$\{v_{n_i+1},\ldots,v_{n_i+m_i}\}$表示$V_i$的一组基，记$X=(v_1,\ldots,v_n)$，则$X$可对角化$A$
+	另一方面，若$AB=BA$，下证$A,B$可同时对角化。
+	由$A$可对角化，可知存在$X$使得
 	\[
 		X\iv AX=\begin{bmatrix}
-			\lambda_1I_{m_1}\\ &\ddots\\ &&\lambda_sI_{m_s}
+			\lambda_1I_{n_1}\\ &\ddots\\ &&\lambda_rI_{n_r}
 		\end{bmatrix},
 	\]
-	$\forall x\in V_i$，
+	又由$AB=BA$可得
 	\[
-		(AB-BA)x=(A-\lambda_iI)Bx=0,
+		(X\iv AX)(X\iv BX)=(X\iv BX)(X\iv AX),
 	\]
-	故$Bx\in V_i$，从而$X\iv BX$和$X\iv AX$一样是分块对角的：
+	即$X\iv BX$应是分块对角的：
 	\[
 		X\iv BX=\begin{bmatrix}
-			B_1\\ &\ddots\\ &&B_s
-		\end{bmatrix},
+			B_1\\ &\ddots\\ &&B_r
+		\end{bmatrix}.
 	\]
-	其中$B_i$是$m_i\times m_i$的。给定$B$的特征值$\xi_j$，其必是$B_1,\ldots,B_s$其中至少一个的特征值，不妨考虑$\xi_j$是$B_i$的特征值\footnote{无需考虑$\N(B_i)$}，若$\xi_j$的AM $>B_i$的GM，则$\xi_j$的AM $>B$的GM，$B$便不能被对角化，与前提矛盾！故$B_i$均可被特定的$Y_i$对角化，即$Y_i\iv B_iY_i=\Lambda_i$，构造
-	\[
-		Y=\begin{bmatrix}
-			Y_1\\ &\ddots\\ &&Y_s
-		\end{bmatrix}
-	\]
-	则$Y\iv X\iv BXY$是对角化的，同时$Y\iv X\iv AXY$也是对角化的，取$Z=XY$，便可同时对角化$A,B$。
+	由$B$可对角化知$B_i$可对角化，$Y_i\iv B_iY_i=\Lambda_i$。
+	令$Y=\diag(Y_1,\ldots,Y_r)$，$\Lambda_B=\diag(\Lambda_1,\ldots,\Lambda_r)$，则$Y\iv BY=\Lambda_B$。
+	由此$A,B$可以被$XY$同时对角化。
 \end{proof}
+
 \sectionstar{Jordan标准型}
+
 不是所有方阵都可以对角化，如果$n$阶矩阵$A$有$r<n$个线性独立的特征向量，怎么把$A$变成最接近对角矩阵的形式？
+其实，任何矩阵都可以通过相似变换变成一种特殊的分块对角矩阵，并且其与对角矩阵只相差了一个幂零矩阵。
 
 \begin{theorem}{Jordan标准型}{Jordan normal form}
 	$n$阶矩阵$A$有$r$个特征值，则存在$B$，使得
