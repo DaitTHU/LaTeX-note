@@ -204,7 +204,14 @@
 
 \section{矩阵对角化}
 
-由于对角矩阵有很多简单的性质，考虑相似变换$\Lambda=X\iv AX$，其中$\Lambda$为对角矩阵。
+\begin{definition}
+	{相似变换}{similar transformation}
+	给定$n$阶矩阵$A$和可逆矩阵$B$，称$B\iv AB$为$A$的相似变换(similar transformation)。
+\end{definition}
+
+\begin{corollary}
+	相似变换也是一种等价关系。
+\end{corollary}
 
 \begin{theorem}{相似变换与特征多项式}{}
 	$A$的相似变换$B\iv AB$和$A$有相同的特征多项式。
@@ -217,28 +224,31 @@
 	\]
 \end{proof}
 
+由于对角矩阵有很多简单的性质，考虑相似变换$\Lambda=X\iv AX$，其中$\Lambda$为对角矩阵。
+这称为对角化。
 显然，不是所有方阵都可以对角化。
 
 \begin{theorem}{可对角化判定}{}
 	$n$阶矩阵$A$可对角化$\iff A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$。
 	\tcblower
-	此时$A=X\Lambda X\iv$，$X$由特征向量给出，对角矩阵$\Lambda$由对应特征值$\lambda_1,\ldots,\lambda_n$ (可能相同)给出：
+	此时$A=X\Lambda X\iv$，$X$由特征向量给出，对角矩阵$\Lambda$由对应特征值$\lambda_1,\ldots,\lambda_n$给出：
 	\begin{equation}
 		X=[x_1,\ldots,x_n]
 		\quad
 	\Lambda=\diag(\lambda_1,\ldots,\lambda_n).
 	\end{equation}
 \end{theorem}
+
 \begin{proof}
-	假设$A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$，
+	假设$A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$，则$A$可对角化：
 	\[
 		AX=[Ax_1,\ldots,Ax_n]=[\lambda_1x_1,\ldots,\lambda_nx_n]=X\Lambda,
 	\]
-	故$A$可对角化；反过来说，若$A$可对角化为$X\Lambda X\iv$，则$AX=X\Lambda$，即
+	反过来说，若$A$可对角化为$X\Lambda X\iv$，则$AX=X\Lambda$，即
 	\[
 		[Ax_1,\ldots,Ax_n]=[\lambda_1x_1,\ldots,\lambda_nx_n],
 	\]
-	故$x_1,\ldots,x_n$是$A$的特征向量，又$X$可逆，故$x_1,\ldots,x_n$线性无关。
+	故$x_1,\ldots,x_n$是$A$的特征向量；又由$X$可逆，可得$x_1,\ldots,x_n$线性无关。
 \end{proof}
 
 \begin{corollary}
@@ -247,62 +257,67 @@
 
 \paragraph{特征值的重数}
 
-当特征值重复时，引入两个概念
+两个线性无关的特征向量的特征值可能相同，或者说，一个特征值可能对应多个线性无关的特征向量，这在量子力学中称为简并(degeneracy)，意味着无法通过单个矩阵的特征值区分两个线性无关的特征值。
+对于简并情形，需要引入特征值的重数(multiplicity)的概念。
 
 \newcommand*{\GM}{\mathrm{GM}}
 \newcommand*{\AM}{\mathrm{AM}}
 
 \begin{definition}{几何重数和代数重数}{}
-	几何重数(geometric multiplicity, GM)：特征值$\lambda_i$对应的线性无关特征向量的最大个数，即特征子空间的维数$\dim\N(\lambda_iI-A)$。
+	几何重数(geometric multiplicity, GM)：特征值$\lambda_i$对应的线性无关特征向量的最大个数，即特征子空间的维数$\dim\bigkh{\N(\lambda_iI-A)}$。
 
 	代数重数(algebraic multiplicity, AM)：特征值$\lambda_i$作为特征方程$\det(\lambda I-A)=0$的根$\lambda=\lambda_i$的重复次数。
 	\[
-		\det(\lambda I-A)=\prod_{i=1}^r(\lambda-\lambda_i)^{m_i}=0,
+		\det(\lambda I-A)=\prod_{i=1}^r(\lambda-\lambda_i)^{\AM_i}=0,
 	\]
-	其中$\lambda_i$是互不相同的根，$m_i$是$\lambda_i$的代数重数。
+	其中$\lambda_i$是互不相同的根，$\AM_i$是$\lambda_i$的代数重数。
 \end{definition}
 
 \begin{corollary}
-	代数重数的和$\textstyle\sum_{i=1}^rm_i=n$矩阵的阶数。
+	代数重数的和$\textstyle\sum_{i=1}^r\AM_i=n$矩阵的阶数。
 \end{corollary}
 
 \begin{theorem}{}{GM <= AM}
 	$\GM\leqslant\AM.$
 \end{theorem}
 \begin{proof}
-	考虑$n$阶矩阵$A$，假设特征值$\lambda_1$的GM $=\dim\N(\lambda_1I-A)=m$，
+	任取$n$阶矩阵$A$的一个特征值$\lambda_k$，其$\GM_k=\dim\bigkh{\N(\lambda_kI-A)}$，
 	\begin{itemize}
-		\item 取$\N(\lambda_1I-A)$的一组正交归一基$\{x_1,\ldots,x_m\}$；
-		\item 取$\N(\lambda_1I-A)^\perp=\C(\lambda_1I-A)\tp$的一组正交归一基$\{b_1,\ldots,b_{n-m}\}$。
+		\item 取$\N(\lambda_kI-A)$的一组正交归一基$\{x_1,\ldots,x_{\GM_k}\}$；
+		\item 取$\N(\lambda_kI-A)^\perp$的一组正交归一基$\{b_1,\ldots,b_{n-\GM_k}\}$。
 	\end{itemize}
-	则$\{x_1,\ldots,x_m,b_1,\ldots,b_{n-m}\}$构成$\RR^n$的一组正交归一基，可以此定义$n$阶正交矩阵$P$ 
+	则$\{x_1,\ldots,x_{\GM_k},b_1,\ldots,b_{n-\GM_k}\}$构成$\RR^n$的一组正交归一基，可以此定义$n$阶正交矩阵$P_k$ 
 	\[
-		P=[x_1,\ldots,x_m,b_1,\ldots,b_{n-m}]=:[X,B],
+		P_k=[x_1,\ldots,x_{\GM_k},b_1,\ldots,b_{n-\GM_k}]=:[X_k,B_k],
 	\]
-	因为$x_i\tp b_j=0$，有$X\tp B=0$，则$P\iv AP$是分块三角的：
+	则$AX_k=\lambda_kX_k$，$B_k\tp X_k=0$，故$P_k\iv AP_k$是分块三角的：
 	\[
-		P\iv AP=\begin{bmatrix}
-			X\tp\\B\tp
+		P_k\iv AP_k=\begin{bmatrix}
+			X_k\tp\\B_k\tp
 		\end{bmatrix}A\begin{bmatrix}
-			X&B
+			X_k&B_k
 		\end{bmatrix}=\begin{bmatrix}
-			\lambda_1I_m&X\tp AB\\0&B\tp AB
+			\lambda_kI_{\GM_k}&X_k\tp AB_k\\0&B_k\tp AB_k
 		\end{bmatrix},
 	\]
 	其特征方程为
 	\[
-		\det(\lambda I-P\iv AP)=(\lambda-\lambda_1)^m\det(\lambda I-B\tp AB),
+		\det(\lambda I-P_k\iv AP_k)=(\lambda-\lambda_k)^{\GM_k}\det(\lambda I-B_k\tp AB_k),
 	\]
-	显然，其$(\lambda-\lambda_1)$的次数$\geq m$。
-	而$A$和$P\iv AP$有相同的特征方程，故$\lambda_1$的$\AM\geqslant\GM$。
+	显然，其$(\lambda-\lambda_k)$的次数$\AM_k\geq\GM_k$。
+	(注意$A$和$P_k\iv AP_k$的特征方程相同)
 \end{proof}
 
 \begin{corollary}
 	$n$阶矩阵$A$的全部特征值为$\{\lambda_1,\ldots,\lambda_r\}$，$A$可对角化当且仅当
 	\[
-		\sum_{i=1}^r\dim\N(\lambda_iI-A)=n,
+		\sum_{i=1}^r\dim\bigkh{\N(\lambda_iI-A)}=n,
 	\]
 	即所有特征值的$\AM_i=\GM_i$。
+\end{corollary}
+
+\begin{corollary}
+	矩阵不可对角化的来源就在于$\det(\lambda_kI-B_k\tp AB_k)=0$，即行列式提供了新的$(\lambda-\lambda_k)$因子使得$\AM_k>\GM_k$。
 \end{corollary}
 
 \begin{theorem}
@@ -323,13 +338,10 @@
 	\]
 	另一方面，若$A$可对角化，任取$A$的一个特征值$\lambda_i$，
 	考虑其关于$A,A_1,A_2$的代数重数$\AM,\AM_1,\AM_2$和几何重数$\GM,\GM_1,\GM_2$，由
-	\[
-		\det(\lambda I_n-A)=\det(\lambda I_{n_1}-A_1)\det(\lambda I_{n_2}-A_2)\implies\AM=\AM_1+\AM_2;
-	\]
-	又
-	\[
-		\rank(\lambda_iI_n-A)=\rank(\lambda_iI_{n_1}-A_1)+\rank(\lambda_iI_{n_2}-A_2)\implies\GM=\GM_1+\GM_2.
-	\]
+	\begin{alignat*}{2}
+		\det(\lambda I_n-A)&=\det(\lambda I_{n_1}-A_1)\det(\lambda I_{n_2}-A_2)&\implies\AM&=\AM_1+\AM_2;\\
+		\rank(\lambda_iI_n-A)&=\rank(\lambda_iI_{n_1}-A_1)+\rank(\lambda_iI_{n_2}-A_2)&\implies\GM&=\GM_1+\GM_2.
+	\end{alignat*}
 	由$A$可对角化知$\AM=\GM$，而$\AM_1\geq\GM_1,\,\AM_2\geq\GM_2$，
 	故$\AM_1=\GM_1,\,\AM_2=\GM_2$，即$A_1,A_2$均可对角化。
 \end{proof}
@@ -358,14 +370,20 @@
 	\[
 		(X\iv AX)(X\iv BX)=(X\iv BX)(X\iv AX),
 	\]
-	即$X\iv BX$应是分块对角的：
+	将$X\iv BX$按$X\iv AX$的形状分块，由上式可知$X\iv BX$应是分块对角的：
 	\[
 		X\iv BX=\begin{bmatrix}
 			B_1\\ &\ddots\\ &&B_r
 		\end{bmatrix}.
 	\]
 	由$B$可对角化知$B_i$可对角化，$Y_i\iv B_iY_i=\Lambda_i$。
-	令$Y=\diag(Y_1,\ldots,Y_r)$，$\Lambda_B=\diag(\Lambda_1,\ldots,\Lambda_r)$，则$Y\iv BY=\Lambda_B$。
+	令
+	\[
+		Y=\diag(Y_1,\ldots,Y_r),
+		\quad
+		\Lambda_B=\diag(\Lambda_1,\ldots,\Lambda_r),
+	\]
+	则$Y\iv X\iv BXY=\Lambda_B$。
 	由此$A,B$可以被$XY$同时对角化。
 \end{proof}
 
@@ -375,9 +393,9 @@
 其实，任何矩阵都可以通过相似变换变成一种特殊的分块对角矩阵，并且其与对角矩阵只相差了一个幂零矩阵。
 
 \begin{theorem}{Jordan标准型}{Jordan normal form}
-	$n$阶矩阵$A$有$r$个特征值，则存在$B$，使得
+	$n$阶矩阵$A$有$r$个线性独立的特征向量$v_1,\ldots,v_r$，对应特征值$\lambda_1,\ldots,\lambda_r$，则存在$n$阶可逆矩阵$P$，使得
 	\[
-		B^{-1}AB=\begin{bmatrix}
+		P^{-1}AP=J=\begin{bmatrix}
 			J_1             \\
 			 & \ddots       \\
 			 &        & J_r
@@ -389,90 +407,162 @@
 			          &           &        & \lambda_i
 		\end{bmatrix}
 	\]
-	其中$J_i$称为Jordan块，$\lambda_i$是$A$的第$i$个特征值。
+	其中$J_i$称为Jordan块，其主对角线全为$\lambda_i$，主对角线上方的次对角线(若有)全为1，其余元素全为0。
+	$J=\diag(J_1,\ldots,J_r)$就是$A$的Jordan标准型(Jordan normal form)。
 \end{theorem}
-其证明是线性代数的核心。其中一些概念需要等到\chapref{chap:linear mapping}线性映射才会提及。先给出几个概念证明引理。
-\begin{definition}{广义特征向量}{general eigenvector}
-	线性映射$T:V\to V$的广义特征向量(general eigenvector) $v\in V$且$v\neq 0$，使得$(T-\lambda I)^kv=0$对某个正整数$k$成立。这里$I:V\to V$是恒等映射。
 
-	使得$(T-\lambda I)^dv=0$成立的最小正整数$d$称为$v$的幂指数(exponent)。
+其证明是线性代数的核心。其中一些概念需要等到\chapref{chap:linear mapping}线性映射才会提及。先给出几个概念证明引理。
+
+首先，矩阵$A$不可对角化的原因是存在一个特征值$\lambda_i$的$\AM_i>\GM_i=\dim\bigkh{\N(\lambda_iI-A)}$。
+也就是说，特征子空间$\N(\lambda_iI-A)$还是太小了，不能提供足够多线性无关的特征向量。
+为此我们需要引入广义特征向量的概念。
+
+\begin{definition}{广义特征向量}{generalized eigenvector}
+	给定线性映射$T:V\to V$，若存在$\lambda\in\FF$、正整数$d\in\NN$和$v\in V$且$v\neq 0$，使得
+	\[
+		(T-\lambda I)^dv=0,
+	\]
+	则称$v$为$T$的广义特征向量(generalized eigenvector)，使得上式成立的最小正整数$d$称为$v$的幂指数(exponent)。
 \end{definition}
+
 \begin{theorem}{}{}
-	给定正整数$k$，广义特征方程$(T-\lambda I)^kv=0$有解当且仅当$\lambda$是$T$的特征值。
+	给定正整数$k$，广义特征方程$(T-\lambda I)^kv=0$有解$\iff\lambda$是$T$的特征值。
 \end{theorem}
+
 \begin{proof}
 	若$\lambda$是$T$的特征值，则$(T-\lambda I)v=0$，左乘$(T-\lambda I)^{k-1}$即可。
 	
 	若$(T-\lambda I)^kv=0$有解，则$w=(T-\lambda I)^{k-1}v$满足$(T-\lambda I)w=0$，$\lambda$是$T$的特征值。
 \end{proof}
+
 \begin{theorem}{}{}
-	令$u_i:=(T-\lambda I)^iv$，则$B=\{u_0,\ldots,u_{d-1}\}$是一组线性无关的向量。
+	% 给定特征值$\lambda$和广义特征向量$v$，
+	令$u_i:=(T-\lambda I)^iv$，则$u_0,\ldots,u_{d-1}$线性无关。
 \end{theorem}
+
 \begin{proof}
-	设
+	考虑线性组合$a_0u_0+\cdots+a_{d-1}u_{d-1}=0$，左乘$(T-\lambda I)^{d-1}$可得
 	\[
-		\sum_{i=0}^{d-1}a_iu_i=\sum_{i=0}^{d-1}a_i(T-\lambda I)^iv=0,
+		a_0(T-\lambda I)^{d-1}v+0+\cdots+0=0\implies a_0=0.
 	\]
-	左乘$(T-\lambda I)^{d-1}$，左边只剩$a_0(T-\lambda I)^{d-1}v$，故$a_0=0$；
-	
-	递推地左乘$(T-\lambda I)^{d-2},(T-\lambda I)^{d-3},\ldots$可得到所有系数为0，从而$u_0,\ldots,u_{d-1}$线性无关。
+	左乘$(T-\lambda I)^{d-2},(T-\lambda I)^{d-3},\ldots$可得$a_1=\cdots=a_{d-1}=0$，从而$u_0,\ldots,u_{d-1}$线性无关。
 \end{proof}
-\begin{theorem}{}{}
+
+\begin{remark}
+	事实上，这一组向量的递推应该反过来：
+	首先给出$T$的特征向量$u_{d-1}$，从$u_{d-1}$出发，
+	根据$(T-\lambda I)u_j=u_{j+1}$从$u_{j+1}$逆推出$u_j$，
+	直到$(T-\lambda I)u_{-1}=u_0$对于$u_{-1}$无解。
+	由此得到的$u_{d-1},\ldots,u_0$称为Jordan链，满足
 	\[
-		Tu_j=\begin{cases}
-			\lambda u_j+u_{j+1},&1\leqslant j<d-1\\
-			\lambda u_j,&j=d-1\\
-			0,&j>d-1
-		\end{cases}
+		u_{d-1}\in\ker(T-\lambda I),\quad
+		u_{d-2}\in\ker\bigkh{(T-\lambda I)^2},\quad
+		\ldots,\quad
+		u_0\notin\ker\bigkh{(T-\lambda I)^d}.
 	\]
+	并且$u_{d-1},u_{d-2},\ldots,u_1\in\im(T-\lambda I)$，直到$u_0\notin\im(T-\lambda I)$。
+\end{remark}
+
+\begin{theorem}{}{}
+	$X=\lspan(u_0,\ldots,u_{d-1})$是$T$的不变子空间，即$T(X)\subset X$。
 \end{theorem}
+
 \begin{proof}
-	$1\leqslant j<d-1$时，$(T-\lambda I)u_j=u_{j+1}$，即$Tu_j=\lambda u_j+u_{j+1}$。
-	
-	$j=d-1$时，$(T-\lambda I)u_j=0$，即$Tu_j=\lambda u_j$；
-	
-	$j>d-1$时，$u_j=0$。
+	由线性无关，$B:=\{u_0,\ldots,u_{d-1}\}$是$X=\lspan(B)$的一组基，考虑$T$在基上的作用：
+	\begin{itemize}
+		\item $0\leq j< d-1$时，$(T-\lambda I)u_j=u_{j+1}\implies Tu_j=\lambda u_j+u_{j+1}$；
+		\item $j=d-1$时，$(T-\lambda I)u_j=0\implies Tu_j=\lambda u_j$；
+		\item $j>d-1$时，$u_j=0\implies Tu_j=0$。
+	\end{itemize}
+	故$\forall u=a_0u_0+\cdots+a_{d-1}u_{d-1}\in X$，有
+	\begin{align*}
+		Tu&=a_0(\lambda u_0+u_1)+\cdots+a_{d-2}(\lambda u_{d-2}+u_{d-1})+a_{d-1}\lambda u_{d-1}\\
+		&=\lambda a_0u_0+(a_0+\lambda a_1)u_1+\cdots+(a_{d-2}+\lambda a_{d-1})u_{d-1}\in X.
+		\qedhere
+	\end{align*}
 \end{proof}
-\begin{theorem}{}{}
-	$X=\lspan(B)$是$T$的不变子空间，即$T(X)\subset X$
-\end{theorem}
-\begin{proof}
-	由上式，$\forall u=a_0u_0+\cdots+a_{d-1}u_{d-1}\in X$
-	\[
-		Tu=\sum_{i=0}^{d-2}a_i(\lambda u_i+u_{i+1})+a_{d-1}\lambda u_{d-1}\in X.
-	\]
+
+\begin{corollary}
 	因为$X$是$T$的不变子空间，我们可以把$T$看成是$X\to X$的线性映射。
-	取$B$作为$X$的一组基，则$T$在$B$下的表示矩阵为
+	以Jordan链$u_{d-1},\ldots,u_0$作为$B$的基，$T$的表示矩阵为
 	\[
 		T=\begin{bmatrix}
-			\lambda\\ 1&\lambda\\ &\ddots&\ddots\\ &&1&\lambda
-		\end{bmatrix}
+			\lambda&1\\ &\lambda&\ddots\\ &&\ddots&1\\ &&&\lambda
+		\end{bmatrix},
 	\]
-	这与Jordan块在\thmref{thm:Jordan normal form} 中的定义仅仅是转置的差别。
+	这正是\thmref{thm:Jordan normal form} 中定义的Jordan块。
+\end{corollary}
+
+\begin{corollary}
+	若$v_1,\ldots,v_r$是$T$的广义特征向量，相应的特征值为$\lambda_i$，幂指数为$d_i$，定义
+	\[
+		u_{i,j}:=(T-\lambda_iI)^jv_i,\quad V_i:=\lspan(u_{i,0},\ldots,u_{i,d_i-1}),
+	\]
+	则$V_i$是$T$的不变子空间，且$T$在$V_i$上的表示矩阵是Jordan块。
+	故$T$在$V_1\oplus\cdots\oplus V_r$上的表示矩阵是分块对角的，且每一块都是Jordan块的形式。
+
+	所以我们只要证明存在这样一组广义特征向量$v_1,\ldots,v_r$使得$V=V_1\oplus\cdots\oplus V_r$就可以证明Jordan标准型的\thmref{thm:Jordan normal form}。
+\end{corollary}
+
+\begin{remark}
+	假设$\lambda$是$T$的某个特征值。如果$T-\lambda I$可以写成Jordan块的形式，则$T$也可以写成Jordan块的形式。所以以下我们用$T$代替$T-\lambda I$，或者说，考虑有一个特征值是0的线性映射$T$。
+\end{remark}
+
+\begin{theorem}{}{}
+	设$T^i$的核$K_i:=\ker(T^i)$和像$U_i:=\im(T^i)$，则
+	\begin{alignat*}{4}
+		K_1&\subset{}&K_2&\subset\cdots&\\
+		U_1&\supset{}&U_2&\supset\cdots&
+	\end{alignat*}
+\end{theorem}
+
+\begin{proof}
+	$\forall v\in K_i$，有 
+	\[
+		T^iv=0\implies T^{i+1}v=0\implies v\in K_{i+1};
+	\]
+	$\forall u\in U_i$，可表示为$u=T^iv$，则
+	\[
+		u=T^{i-1}Tv\implies u\in U_{i-1}.
+		\qedhere
+	\]
+\end{proof} 
+
+\begin{corollary}
+	若$K_i\neq K_{i+1}$，由$K_i\subset K_{i+1}$可知$\exists v\in K_{i+1}$不能被$K_i$张成，故$\dim(K_i)<\dim(K_{i+1})$；
+	又由$\dim(K_i)\leq \dim(V)$有限，故$K_1\subset K_2\subset\cdots$最后会稳定$K_m=K_{m+1}=\cdots$，将最后稳定的空间记为$K$，显然$K$是$T$的不变子空间。
+
+	类似地，$U_1\supset U_2\supset\cdots$最后也会稳定$U_{m'}=U_{m'+1}=\cdots=:U$，易证$U$也是$T$的不变子空间。
+\end{corollary}
+
+\begin{theorem}
+	{}{}
+	$V=K\oplus U$。
+\end{theorem}
+
+\begin{proof}
+	$\forall u\in K\cap U=K_m\cap U_{m'}$，则$T^mu=0$且存在$v$使得$u=T^{m'}v$，进而$v\in K_{m+m'}=K=K_m$，可得$T^mv=0$。
+	而$m,m'$的取值只有下界没有上界，
+	固定$m'$，总可以取到$m\leq m'$，则$u=T^{m'-m}T^mv=0$。
+	故$K\cap U=\{0\}$。
+
+	又由$\dim(V)=\dim(K_i)+\dim(U_i)=\dim(K)+\dim(U)$，可知$V=K\oplus U$。
 \end{proof}
 
-接下来我们将证明$V$中存在一组基，$T$在这组基上的表示矩阵是分块对角的，而且每一块都是Jordan块的形式。
-\begin{theorem}{}{}
-	若$v_1,\ldots,v_r$是$T$的广义特征向量，且相应的幂指数是$d_i$，设 
-	\[
-		u_{ij}:=(T-\lambda_iI)^jv_i,\quad V_i:=\lspan(u_{i0},\ldots,u_{id-1}).
-	\]
-	之前证明了$V_i$是$T$的不变子空间，且$T$在$V_i$上的表示矩阵是Jordan块。故
-	$T$在$V_1\oplus\cdots\oplus V_r$上的表示矩阵是分块对角的，且每一块都是Jordan块的形式。
-\end{theorem}
-%平凡的。
-所以我们只要证明存在这样一组广义特征向量$v_1,\ldots,v_r$使得$V=V_1\oplus\cdots\oplus V_r$就可以证明Jordan标准型的定理。
+\begin{corollary}
+	由$\dim(K)>0$知$\dim(U)<\dim(V)$，根据归纳假设，$T:U\to U$在$U$上可以分解成Jordan标准型。
+	下面我们证明$T:K\to K$在$K$上也可以分解成Jordan标准型。
+\end{corollary}
 
-假设$\lambda$是$T$的某个特征值。如果$T-\lambda I$可以写成Jordan块的形式，则$T$也可以写成Jordan块的形式。所以以下我们用$T-\lambda I$代替$T$，或者说，考虑有一个特征值是0的线性映射$T$。
-\begin{theorem}{}{}
-	设$K_i=\ker(T^i),\,U_i=\Im(T^i)$，则
-	\[
-		K_1\subset K_2\subset\cdots,\quad U_1\supset U_2\supset\cdots
-	\]
+\begin{theorem}
+	{}{}
+	考虑$T:K\to K$的核$K_1'=\ker(T)$和像$U_1'=\im(T)$，
+	待补。
 \end{theorem}
+
 \begin{proof}
-	待补
-\end{proof} 
+	$\forall v\in K=K_m$均有$T^mv=0$，故$T:K\to K$是幂零的。
+\end{proof}
 
 \section{对称矩阵}
 
