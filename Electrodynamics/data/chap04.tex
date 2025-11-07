@@ -41,7 +41,7 @@
 \]
 而体积元的变化率
 \[
-    \dv Vt=\oint_{\p V}\bm v\cdot\d\bm a=\int_V\div\bm v\d V=V\div\bm v.
+    \dv Vt=\oint_{\p V}\bm v\cdot\d\bm A=\int_V\div\bm v\d V=V\div\bm v.
 \]
 因此\eqref{eqn:d(rhoV)/dt=0}变为
 \[
@@ -61,10 +61,10 @@
 %尽管磁现象的发现有很悠久的历史，但直到建立了电流和磁场之间的联系，磁现象才得到定量描述。
 为了描述电流在激发磁场时的作用，我们引入电流元(current element)的概念：$\d\bm\ell$是通电流$I$的导线的长度元，指向电流方向，则电流元为$I\d\bm\ell$。
 \begin{theorem}{Biot-Savart定律}{Biot and Savart Law}
-    原点处电流元$I\d\bm\ell$在$\bm x$处激发的磁感应强度元$\d\bm B$为
+    原点处电流元$I\d\bm\ell$在$\bm r$处激发的磁感应强度元$\d\bm B$为
     \begin{equation}
         \label{eqn:B-S law}
-        \d\bm B=k\frac{I\d\bm\ell\times\bm x}{|\bm x|^3},\quad k=\frac{\mu_0}{4\pi},
+        \d\bm B=k\frac{I\d\bm\ell\times\bm r}{|\bm r|^3},\quad k=\frac{\mu_0}{4\pi},
     \end{equation}
     真空磁导率$\mu_0\simeq 4\pi\times{10^{-7}}\,\si{N/A^2}.$
 \end{theorem}
@@ -74,7 +74,7 @@
 因为电流元本身并不满足连续性方程\eqref{eqn:continuity}。
 \footnote{一种摆脱这个困难的办法是将电流元$I\d\bm\ell$换成运动电荷$q\bm v$
 \[
-    \bm B=k\frac{q\bm v\times\bm x}{|\bm x|^3}.
+    \bm B=k\frac{q\bm v\times\bm r}{|\bm r|^3}.
 \]
 但这个表达式与时间相关，并且只有当电荷速度$v\ll c$且加速度可忽略不计时才成立。
 而式\eqref{eqn:B-S law}则是精确的：
@@ -97,16 +97,16 @@
 \begin{example}{闭合回路之间的力}{F of 2 closed lines}
     由闭合电流回路2产生的磁场$\bm B$对闭合电流回路1的总力：
     \[
-        \bm F_{12}=\frac{\mu_0}{4\pi}I_1I_2\oint\oint\frac{\d\bm\ell_1\times(\d\bm\ell_2\times\bm x_{12})}{|\bm x_{12}|^3};
+        \bm F_{12}=\frac{\mu_0}{4\pi}I_1I_2\oint\oint\frac{\d\bm\ell_1\times(\d\bm\ell_2\times\bm r_{12})}{|\bm r_{12}|^3};
     \]
     利用\eqref{eqn:bac-cab}将双叉乘化为更对称的形式：
     %\bm A\times(\bm B\times\bm C)=\bm B(\bm A\cdot\bm C)-\bm C(\bm A\cdot\bm B)
     \[
-        \bm F_{12}=\frac{\mu_0}{4\pi}I_1I_2\biggfkh{\oint\cancel{\oint\frac{\bm x_{12}\cdot\d\bm\ell_1}{|\bm x_{12}|^3}}\d\bm\ell_2-\oint\oint\frac{\bm x_{12}}{|\bm x_{12}|^3}(\d\bm\ell_1\cdot\d\bm\ell_2)}.
+        \bm F_{12}=\frac{\mu_0}{4\pi}I_1I_2\biggfkh{\oint\cancel{\oint\frac{\bm r_{12}\cdot\d\bm\ell_1}{|\bm r_{12}|^3}}\d\bm\ell_2-\oint\oint\frac{\bm r_{12}}{|\bm r_{12}|^3}(\d\bm\ell_1\cdot\d\bm\ell_2)}.
     \]
     第一项的环路积分为0：
     \[
-        \oint\frac{\bm x_{12}\cdot\d\bm\ell_1}{|\bm x_{12}|^3}=\oint\frac{\d x_{12}}{x_{12}^2}=0.
+        \oint\frac{\bm r_{12}\cdot\d\bm\ell_1}{|\bm r_{12}|^3}=\oint\frac{\d x_{12}}{x_{12}^2}=0.
     \]
     第二项是对称的，因此满足Newton第三定律。
 \end{example}
@@ -117,17 +117,17 @@
     \end{equation}
     旧的SI单位制便由此式及$\mu_0$定义电流单位A。
 \end{example}
-电流元可以写成电流密度$\bm J$的形式\footnote{注意区分速度矢量$\bm v$和体积微元$\d v$。}
+电流元可以写成电流密度$\bm J$的形式
 \[
-    I\d\bm\ell=\d q\bm v=(\rho\d v)\bm v=\bm J\d v,
+    I\d\bm\ell=\d q\bm v=(\rho\d V)\bm v=\bm J\d V,
 \]
 因此磁场中电流受到的力可以写成：
 \[
-    \bm F=\int_V\d q(\bm v\times\bm B)=\int_V\rho(\bm v\times\bm B)\d v=\int_V\bm J\times\bm B\d v.
+    \bm F=\int_V\d q(\bm v\times\bm B)=\int_V\rho(\bm v\times\bm B)\d V=\int_V\bm J\times\bm B\d V.
 \]
 总力矩：
 \[
-    \bm N=\bm x\times\bm F=\int_V\bm x\times(\bm J\times\bm B)\d v.
+    \bm N=\bm r\times\bm F=\int_V\bm r\times(\bm J\times\bm B)\d V.
 \]
 
 \subsection{磁场的Gauss定律}
@@ -135,8 +135,8 @@
 利用电流密度，Biot-Savart定律\eqref{eqn:B-S law}可以写成旋度的形式
 \begin{align}
     \label{eqn:B(x)}
-    \bm B(\bm x)&=\frac{\mu_0}{4\pi}\int_V\bm J(\bm x')\times\frac{\bm x-\bm x'}{|\bm x-\bm x'|^3}\d v'\\
-    &=\frac{\mu_0}{4\pi}\curl\int_V\frac{\bm J(\bm x')}{|\bm x-\bm x'|}\d v'.
+    \bm B(\bm r)&=\frac{\mu_0}{4\pi}\int_V\bm J(\bm r')\times\frac{\bm r-\bm r'}{|\bm r-\bm r'|^3}\d V'\\
+    &=\frac{\mu_0}{4\pi}\curl\int_V\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\d V'.
 \end{align}
 由\eqref{eqn:divcurl}，可得$\bm B$的第一个微分方程：
 \begin{equation}
@@ -150,27 +150,27 @@
 
 现在我们希望知道$\bm B$的散度，利用\eqref{eqn:curlcurl}
 \begin{align*}
-    \curl\biggfkh{\curl\frac{\bm J(\bm x')}{|\bm x-\bm x'|}}&=\nabla\biggfkh{\div\frac{\bm J(\bm x')}{|\bm x-\bm x'|}}-\lapla\frac{\bm J(\bm x')}{|\bm x-\bm x'|}\\
-    &=\nabla\biggfkh{\frac{\cancel{\div\bm J(\bm x')}}{|\bm x-\bm x'|}+\bm J(\bm x')\cdot\nabla\frac1{|\bm x-\bm x'|}}-\bm J(\bm x')\lapla\frac1{|\bm x-\bm x'|}.
+    \curl\biggfkh{\curl\frac{\bm J(\bm r')}{|\bm r-\bm r'|}}&=\nabla\biggfkh{\div\frac{\bm J(\bm r')}{|\bm r-\bm r'|}}-\lapla\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\\
+    &=\nabla\biggfkh{\frac{\cancel{\div\bm J(\bm r')}}{|\bm r-\bm r'|}+\bm J(\bm r')\cdot\nabla\frac1{|\bm r-\bm r'|}}-\bm J(\bm r')\lapla\frac1{|\bm r-\bm r'|}.
 \end{align*}
 则
 \[
-    \curl\bm B=\frac{\mu_0}{4\pi}\biggfkh{-\nabla\int_V\bm J(\bm x')\cdot\nabla'\frac1{|\bm x-\bm x'|}\d v'+4\pi\bm J(\bm x)}
+    \curl\bm B=\frac{\mu_0}{4\pi}\biggfkh{-\nabla\int_V\bm J(\bm r')\cdot\nabla'\frac1{|\bm r-\bm r'|}\d V'+4\pi\bm J(\bm r)}
 \]
 对积分项进行分部积分：
 \[
-    \int_V\bm J(\bm x')\cdot\nabla'\frac1{|\bm x-\bm x'|}\d v'=\oint_{\p V}\frac{\cancel{\bm J(\bm x')\cdot\uvec n'}}{|\bm x-\bm x'|}\d a'-\int_V\frac{\cancel{\nabla'\cdot\bm J(\bm x')}}{|\bm x-\bm x'|}\d v'=0,
+    \int_V\bm J(\bm r')\cdot\nabla'\frac1{|\bm r-\bm r'|}\d V'=\oint_{\p V}\frac{\cancel{\bm J(\bm r')\cdot\uvec n'}}{|\bm r-\bm r'|}\d A'-\int_V\frac{\cancel{\nabla'\cdot\bm J(\bm r')}}{|\bm r-\bm r'|}\d V'=0,
 \]
 \iffalse
 \begin{align*}
-    \curl\bm B&=\frac{\mu_0}{4\pi}\curl\biggfkh{\curl\int_V\frac{\bm J(\bm x')}{|\bm x-\bm x'|}\d v'}\\
+    \curl\bm B&=\frac{\mu_0}{4\pi}\curl\biggfkh{\curl\int_V\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\d V'}\\
     &\qquad\textcolor{gray}{\curl(\curl\bm A)=\nabla(\div\bm A)-\lapla\bm A}\\
-    &=\frac{\mu_0}{4\pi}\biggfkh{\nabla\int_V\div\frac{\bm J(\bm x')}{|\bm x-\bm x'|}\d v'-\int_V\lapla\frac{\bm J(\bm x')}{|\bm x-\bm x'|}\d v'}\\
+    &=\frac{\mu_0}{4\pi}\biggfkh{\nabla\int_V\div\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\d V'-\int_V\lapla\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\d V'}\\
     &\qquad\textcolor{gray}{\div(\varphi\bm A)=A\cdot\nabla\varphi+\varphi\div\bm A}\\
-    &=\frac{\mu_0}{4\pi}\biggfkh{\nabla\int_V\biggkh{\bm J(\bm x')\cdot\nabla\frac1{|\bm x-\bm x'|}+0}\d v'-\int_V\bm J(\bm x')\lapla\frac1{|\bm x-\bm x'|}\d v'}\\
-    %=\frac{\mu_0}{4\pi}\biggfkh{-\nabla\int_V\bm J(\bm x')\cdot\nabla'\frac1{|\bm x-\bm x'|}\d v'+4\pi\bm J(\bm x)}\\
-    &\qquad\textcolor{gray}{\int_V\bm A\cdot\nabla f\d v=-\int_Vf\div\bm A\d v+\oint_{\p V}f\bm A\cdot\uvec n\d a}\\
-    &=\mu_0\bm J(\bm x)+\frac{\mu_0}{4\pi}\nabla\biggfkh{\int_V\frac{\cancel{\nabla'\cdot\bm J(\bm x')}}{|\bm x-\bm x'|}\d v'-\cancel{\oint_{\p V}\frac{\bm J(\bm x')\cdot\uvec n'}{|\bm x-\bm x'|}\cdot\d a'}};
+    &=\frac{\mu_0}{4\pi}\biggfkh{\nabla\int_V\biggkh{\bm J(\bm r')\cdot\nabla\frac1{|\bm r-\bm r'|}+0}\d V'-\int_V\bm J(\bm r')\lapla\frac1{|\bm r-\bm r'|}\d V'}\\
+    %=\frac{\mu_0}{4\pi}\biggfkh{-\nabla\int_V\bm J(\bm r')\cdot\nabla'\frac1{|\bm r-\bm r'|}\d V'+4\pi\bm J(\bm r)}\\
+    &\qquad\textcolor{gray}{\int_V\bm A\cdot\nabla f\d V=-\int_Vf\div\bm A\d V+\oint_{\p V}f\bm A\cdot\d\bm A}\\
+    &=\mu_0\bm J(\bm r)+\frac{\mu_0}{4\pi}\nabla\biggfkh{\int_V\frac{\cancel{\nabla'\cdot\bm J(\bm r')}}{|\bm r-\bm r'|}\d V'-\cancel{\oint_{\p V}\frac{\bm J(\bm r')\cdot\uvec n'}{|\bm r-\bm r'|}\cdot\d A'}};
 \end{align*}
 \fi
 由此得到第二个微分方程：
@@ -180,7 +180,7 @@
 \end{equation}
 两边取$S$的面积分
 \[
-    \int_S\curl(\bm B\cdot\uvec n)\d a=\mu_0\int_S\bm J\cdot\uvec n\d a.
+    \int_S\curl(\bm B\cdot\uvec n)\d A=\mu_0\int_S\bm J\cdot\d\bm A.
 \]
 右边积分项即穿过$S$的电流$I$，可得Ampère定律：
 \begin{theorem}{Ampère定律}{Ampere's law}
@@ -217,7 +217,7 @@
 从而$\lapla\varLambda=0$，在无边界条件时，$\varLambda=\const$，$\bm A$形式即最简洁的：
 \begin{equation}
     \label{eqn:A-J}
-    \bm A(\bm x):=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm x')}{|\bm x-\bm x'|}\d v',
+    \bm A(\bm r):=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\d V',
 \end{equation}
 在Coulomb规范下，
 我们也可以得到$\bm A$三个分量的Laplace方程：
@@ -239,7 +239,7 @@
     \]
     故矢量势$\bm A$也仅有$\phi$分量：
     \begin{align*}
-        A_\phi&=\frac{\mu_0}{4\pi}\int\frac{J_\phi}{|\bm x-\bm x'|}\d v'\\
+        A_\phi&=\frac{\mu_0}{4\pi}\int\frac{J_\phi}{|\bm r-\bm r'|}\d V'\\
         &=\frac{\mu_0I}{4\pi a}\int\zti\oint\frac{\sin\theta'\vd(\cos\theta')\vd(r'-a)r^2\d\Omega'\d r'}{\sqrt{r^2+r'^2-2rr'(\cos\theta\cos\theta'+\sin\theta\sin\theta'\cos\phi')}}\\
         &=\frac{\mu_0Ia}{4\pi}\int_0^{2\pi}\frac{\cos\phi'\d\phi'}{\sqrt{a^2+r^2-2ar\sin\theta\cos\phi'}}\\
         &=\frac{\mu_0I}\pi\frac{a}{\sqrt{a^2+r^2+2ar\sin\theta}}\biggfkh{\biggkh{\frac2{k^2}-1}K(k)-\frac2{k^2}E(k)}.%\frac{(2-k^2)K(k)-2E(k)}{k^2}.
@@ -282,18 +282,18 @@
 若$x\gg x'$，矢量势的分量可以被展开为：
 \begin{equation}
     \label{eqn:A approx}
-    A_\alpha(\bm x)=\frac{\mu_0}{4\pi}\biggfkh{\frac1{|\bm x|}\cancel{\int_V J_\alpha(\bm x')\d v'}+\frac{\bm x}{|\bm x|^3}\cdot\int_V J_\alpha(\bm x')\bm x'\d v+\cdots}
+    A_\alpha(\bm r)=\frac{\mu_0}{4\pi}\biggfkh{\frac1{|\bm r|}\cancel{\int_V J_\alpha(\bm r')\d V'}+\frac{\bm r}{|\bm r|^3}\cdot\int_V J_\alpha(\bm r')\bm r'\d V+\cdots}
     \tag{$\ast$}
 \end{equation}
 下面我们用一些数学上的小tricks：
 \[
-    \oint_{\p V}fg\bm J\cdot\uvec n'\d a'=\int_V(g\bm J\cdot\nabla'f+f\bm J\cdot\nabla'g+fg\cancel{\nabla'\cdot\bm J})\d v'=0.
+    \oint_{\p V}fg\bm J\cdot\uvec n'\d A'=\int_V(g\bm J\cdot\nabla'f+f\bm J\cdot\nabla'g+fg\cancel{\nabla'\cdot\bm J})\d V'=0.
 \]
 将$f,g$赋予特定的形式，可以得到
 \begin{alignat*}{2}
-    \int_V J_\alpha \d v'&=0,&\qquad (f=1,\enspace g=x_\alpha');\\
-    \int_V(x_\alpha'J_\beta+x_\beta'J_\alpha)\d v'&=0,&(f=x_\alpha',\enspace g=x_\beta')\\
-    \int_V x_\alpha'J_\alpha\d v'&=0,&(f=g=x_\alpha').
+    \int_V J_\alpha \d V'&=0,&\qquad (f=1,\enspace g=x_\alpha');\\
+    \int_V(x_\alpha'J_\beta+x_\beta'J_\alpha)\d V'&=0,&(f=x_\alpha',\enspace g=x_\beta')\\
+    \int_V x_\alpha'J_\alpha\d V'&=0,&(f=g=x_\alpha').
 \end{alignat*}
 \begin{definition}{全反对称张量}{Levi-Civita symbol}
     引入全反对称张量(Levi-Civita symbol)
@@ -312,41 +312,41 @@
 \end{equation}
 由此可得\eqref{eqn:A approx}中的积分项
 \[
-    \bm x'\cdot\int_V\bm x'J_\alpha\d v'=-\frac12\biggfkh{\bm x\times\int_V(\bm x'\times\bm J)\d v'}_\alpha.
+    \bm r'\cdot\int_V\bm r'J_\alpha\d V'=-\frac12\biggfkh{\bm r\times\int_V(\bm r'\times\bm J)\d V'}_\alpha.
 \]
 可定义磁矩密度(magnetic moment density)或磁化强度(magnetization)
 \begin{equation}
-    \bm M:=\frac12\bm x\times\bm J.
+    \bm M:=\frac12\bm r\times\bm J.
 \end{equation}
 其体积分为磁偶极矩(magnetic dipole moment)简称磁矩
 \begin{equation}
-    \bm m=\frac12\int_V\bm x'\times\bm J(\bm x')\d v'.
+    \bm m=\frac12\int_V\bm r'\times\bm J(\bm r')\d V'.
 \end{equation}
 因此式\eqref{eqn:A approx}中，矢量势的最低阶非零项
 \begin{equation}
-    \bm A(\bm x)=\frac{\mu_0}{4\pi}\frac{\bm m\times\bm x}{|\bm x|^3}.
+    \bm A(\bm r)=\frac{\mu_0}{4\pi}\frac{\bm m\times\bm r}{|\bm r|^3}.
 \end{equation}
 进而磁感应强度与电偶极矩电场\eqref{eqn:edipole-E with delta}形式相似：
 \begin{equation}
-    \bm B(\bm x)=\frac{\mu_0}{4\pi}\biggfkh{\frac{3\uvec n(\bm m\cdot\uvec n)-\bm m}{|\bm x|^3}+\frac{8\pi}3\bm m\vd(\bm x)}.
+    \bm B(\bm r)=\frac{\mu_0}{4\pi}\biggfkh{\frac{3\uvec n(\bm m\cdot\uvec n)-\bm m}{|\bm r|^3}+\frac{8\pi}3\bm m\vd(\bm r)}.
 \end{equation}
 因此，远离任何局域电流分布的磁场就是一个磁偶极子的磁场。
 \begin{example}{电流回路的磁矩}{m of I}
     平面$S$上的电流回路的磁矩
     \begin{align*}
-        \bm m=\frac12\oint_{\p S}\bm x\times I\d\bm\ell=IS\uvec n.
+        \bm m=\frac12\oint_{\p S}\bm r\times I\d\bm\ell=IS\uvec n.
     \end{align*}
     与\exmref{exm:B of loop current} 中的定义一致。
 \end{example}
 \begin{example}{带电粒子轨道角动量的磁矩}{m of L}
-    带电粒子的磁矩与其轨道角动量$\bm L=m\bm x\times\bm v$有关：
+    带电粒子的磁矩与其轨道角动量$\bm L=m\bm r\times\bm v$有关：
     \[
-        \bm m=\frac12q\bm x\times\bm v=\frac q{2m}\bm L.
+        \bm m=\frac12q\bm r\times\bm v=\frac q{2m}\bm L.
     \]
 \end{example}
 局部电流分布的磁场体积分
 \[
-    \int_{r<R}\bm B(\bm x)\d v=\begin{cases}
+    \int_{r<R}\bm B(\bm r)\d V=\begin{cases}
         \frac{2\mu_0}3\bm m,&\text{球内电流}\\[1ex]
         \frac{4\pi}3R^3\bm B(\bm 0),&\text{球外电流}
     \end{cases}.
@@ -355,9 +355,9 @@
 \subsection{磁矩的力、力矩和能量}
 \label{ssec:force, torque and energy of magnetic moment}
 
-外部磁感应强度$\bm B(\bm x)$中电流密度$\bm J(\bm x)$受到的总力
+外部磁感应强度$\bm B(\bm r)$中电流密度$\bm J(\bm r)$受到的总力
 \[
-    \bm F=\int_V\bm J(\bm x)\times\bm B(\bm x)\d v\simeq(\bm m\times\nabla)\times\bm B.
+    \bm F=\int_V\bm J(\bm r)\times\bm B(\bm r)\d V\simeq(\bm m\times\nabla)\times\bm B.
 \]
 化简为
 \[
@@ -365,7 +365,7 @@
 \]
 力矩与作用在磁偶极子上的力矩表达式相同：
 \[
-    \bm N=\int_V\bm x'\times(\bm J\times\bm B)\d v'\simeq\bm m\times\bm B(\bm 0),
+    \bm N=\int_V\bm r'\times(\bm J\times\bm B)\d V'\simeq\bm m\times\bm B(\bm 0),
 \]
 上式也可作为定义磁感应强度的一种方法。
 
@@ -383,17 +383,17 @@ $U$并不是外磁场中磁矩的总能量，因为它不包含产生$\bm m$并�
     \label{eqn:divB-macro}
     \div\bm B_\text{micro}=0\implies\div\bm B=0.
 \end{equation}
-在$\bm x'$由一个小体积的$\D V$产生的矢量势
+在$\bm r'$由一个小体积的$\D V$产生的矢量势
 \[
-    \D\bm A(\bm x)\simeq\frac{\mu_0}{4\pi}\biggfkh{\frac{\bm J(\bm x)'}{|\bm x-\bm x'|}+\frac{\bm M(\bm x')\times(\bm x-\bm x')}{|\bm x-\bm x'|^3}}\D V.
+    \D\bm A(\bm r)\simeq\frac{\mu_0}{4\pi}\biggfkh{\frac{\bm J(\bm r)'}{|\bm r-\bm r'|}+\frac{\bm M(\bm r')\times(\bm r-\bm r')}{|\bm r-\bm r'|^3}}\D V.
 \]
 其中宏观磁矩密度
 \[
-    \bm M(\bm x):=\sum_iN_i\ave{\bm m_i},
+    \bm M(\bm r):=\sum_iN_i\ave{\bm m_i},
 \]
 积分之
 \[
-    \bm A(\bm x)=\frac{\mu_0}{4\pi}\int_V\frac{\bm J(\bm x')+\nabla'\times\bm M(\bm x')}{|\bm x-\bm x'|}\d v'
+    \bm A(\bm r)=\frac{\mu_0}{4\pi}\int_V\frac{\bm J(\bm r')+\nabla'\times\bm M(\bm r')}{|\bm r-\bm r'|}\d V'
 \]
 因此 
 \[
@@ -465,16 +465,16 @@ $\mu$为磁导率(permeability)。根据磁导率可以将物质分为以下磁�
 \end{equation}
 若无边界条件，则有解
 \[
-    \Phi_\text M=-\frac1{4\pi}\int_V\frac{\nabla'\cdot\bm M(\bm x')}{|\bm x-\bm x'|}\d v',
+    \Phi_\text M=-\frac1{4\pi}\int_V\frac{\nabla'\cdot\bm M(\bm r')}{|\bm r-\bm r'|}\d V',
 \]
 若$\bm M$是局域的，则在$x\gg x'$的地方
 \[
-    \Phi_\text M\simeq\frac{\bm m\cdot\bm x}{4\pi r^3},\quad\bm m=\int_V\bm M\d v.
+    \Phi_\text M\simeq\frac{\bm m\cdot\bm r}{4\pi r^3},\quad\bm m=\int_V\bm M\d V.
 \]
 但是我们仍需面对有边界条件的情形，在边界$\p V$处$\bm M$瞬间变为0，运用静电学中的结论：
 \begin{equation}
     \label{eqn:PhiM with boundary}
-    \Phi_\text M=-\frac1{4\pi}\int_V\frac{\nabla'\cdot\bm M(\bm x')}{|\bm x-\bm x'|}\d v'+\frac1{4\pi}\oint_{\p V}\frac{\bm M(\bm x')\cdot\uvec n'}{|\bm x-\bm x'|}\d a',
+    \Phi_\text M=-\frac1{4\pi}\int_V\frac{\nabla'\cdot\bm M(\bm r')}{|\bm r-\bm r'|}\d V'+\frac1{4\pi}\oint_{\p V}\frac{\bm M(\bm r')\cdot\uvec n'}{|\bm r-\bm r'|}\d A',
 \end{equation}
 若铁磁体是均匀磁化的，则$\div\bm M=0$，第一项为0。
 
@@ -486,7 +486,7 @@ $\mu$为磁导率(permeability)。根据磁导率可以将物质分为以下磁�
 可得
 \begin{equation}
     \label{eqn:A with boundary}
-    \bm A=\frac1{4\pi}\int_V\frac{\nabla'\times\bm M(\bm x')}{|\bm x-\bm x'|}\d v'+\frac1{4\pi}\oint_{\p V}\frac{\bm M(\bm x')\times\uvec n'}{|\bm x-\bm x'|}\d a',
+    \bm A=\frac1{4\pi}\int_V\frac{\nabla'\times\bm M(\bm r')}{|\bm r-\bm r'|}\d V'+\frac1{4\pi}\oint_{\p V}\frac{\bm M(\bm r')\times\uvec n'}{|\bm r-\bm r'|}\d A',
 \end{equation}
 上式两项分别代表有效电流密度$\bm J_\text M$和有效面电流密度$\bm J_\text S$的贡献
 \begin{align}
@@ -496,9 +496,9 @@ $\mu$为磁导率(permeability)。根据磁导率可以将物质分为以下磁�
 \begin{example}{均匀磁化球}{uniform magnetized sphere}
     真空中半径为$a$的球，其具有均匀的永久磁化强度$\bm M=M_0\uvec z$。应用式\eqref{eqn:PhiM with boundary}
     \[
-        \Phi_\text M(r,\theta)=0+\frac1{4\pi}\oint_{r'=a}\frac{M_0\cos\theta'}{|\bm x-\bm x'|}\cdot a^2\d\Omega',
+        \Phi_\text M(r,\theta)=0+\frac1{4\pi}\oint_{r'=a}\frac{M_0\cos\theta'}{|\bm r-\bm r'|}\cdot a^2\d\Omega',
     \]
-    进行球谐函数展开，式\eqref{eqn:1/|x-x'|=YY}仅有$\ell=1,\enspace m=0$项保留，且
+    进行球谐函数展开，式\eqref{eqn:1/|r-r'|=YY}仅有$\ell=1,\enspace m=0$项保留，且
     \[
         \cos\theta'=\sqrt{\frac{4\pi}3}Y_{10}(\theta',\phi'),
     \]
@@ -514,7 +514,7 @@ $\mu$为磁导率(permeability)。根据磁导率可以将物质分为以下磁�
     \]
     球外，$r_<=a,\enspace r_>=r$，表现为磁偶极子(没有更高阶的项)：
     \[
-        \Phi_\text M=\frac{M_0a^3}3\frac{\cos\theta}{r^2}=\frac{\bm m\cdot\bm x}{4\pi r^3},\quad\bm m=\frac{4\pi}3a^3\bm M.
+        \Phi_\text M=\frac{M_0a^3}3\frac{\cos\theta}{r^2}=\frac{\bm m\cdot\bm r}{4\pi r^3},\quad\bm m=\frac{4\pi}3a^3\bm M.
     \]
     $\bm B$线是连续的闭合曲线，而$\bm H$线不是。
     \tcblower
@@ -587,7 +587,7 @@ Faraday在探究时变磁场中电流表现的实验表明：
 \end{compactenum}
 都会在电路中产生瞬态(transient)电流。Faraday把瞬态电流的产生解释为电路环绕磁通量(magnetic flux)%\footnote{本笔记中，$\Phi$已经被标量势占用了，$\phi$被方位角占用了，$\psi$和$\varphi$似乎还没人占用。}
 \begin{equation}
-    \varPhi:=\int_S\bm B\cdot\uvec n\d a
+    \varPhi:=\int_S\bm B\cdot\d\bm A
 \end{equation}
 的变化所引起的。变化的磁通量会再电路周围感感生(induce)一个电场驱动电路电荷运动形成电流，其电动势(electromotive force, emf)为
 \begin{equation}
@@ -608,7 +608,7 @@ $\bm E'$是在运动坐标系或介质中的电场。则Faraday的观测结果�
 
 在狭义相对论(special relativity)发现之前（或处理低速情况时），所有物理学家都公认（虽然不经常明确说出）物理定律在Galileo变换(Galilean transformation)：
 \begin{align*}
-    (t,\bm x)&\mapsto(t,\bm x+\bm vt),
+    (t,\bm r)&\mapsto(t,\bm r+\bm vt),
 \end{align*}
 下应该是不变的。$\bm v$是两个参考系之间的相对速度。也就是说，两个以恒定速度$\bm v$作相对运动的观察者看到的物理现象是一样的。%，只要这两组空间坐标和时间坐标的关系遵从Galileo变换：
 
@@ -621,11 +621,11 @@ Faraday从实验上证实电磁感应现象在Galileo变换下不变：无论是
 \end{align*}
 即，
 \begin{align*}
-    \dd t\int_S\bm B\cdot\uvec n\d a=\int_S\pv{\bm B}t\cdot\uvec n\d a+\oint_{\p S}(\bm B\times\bm v)\cdot\d\bm\ell,
+    \dd t\int_S\bm B\cdot\d\bm A=\int_S\pv{\bm B}t\cdot\d\bm A+\oint_{\p S}(\bm B\times\bm v)\cdot\d\bm\ell,
 \end{align*}
 因此 
 \[
-    \oint_{\p V}\bigkh{\bm E'-k\bm v\times\bm B}\d\bm\ell=-k\int_S\pv{\bm B}t\cdot\uvec n\d a.
+    \oint_{\p V}\bigkh{\bm E'-k\bm v\times\bm B}\d\bm\ell=-k\int_S\pv{\bm B}t\cdot\d\bm A.
 \]
 由Galileo变换下电场力和Lorentz力的形式，应有：
 \[
@@ -653,16 +653,16 @@ Faraday从实验上证实电磁感应现象在Galileo变换下不变：无论是
 
 保持电流恒定不变，
 \[
-    \vd W=\int_V\vd\bm A\cdot\bm J\d v=\int_V\bm H\cdot\vd\bm B\d v.
+    \vd W=\int_V\vd\bm A\cdot\bm J\d V=\int_V\bm H\cdot\vd\bm B\d V.
 \]
 对于顺磁性和抗磁性物质，$2\bm H\cdot\vd\bm B=\vd(\bm H\cdot\bm B)$
 \[
-    W=\frac12\int_V\bm A\cdot\bm J\d v=\frac12\int_V\bm H\cdot\bm B\d v.
+    W=\frac12\int_V\bm A\cdot\bm J\d V=\frac12\int_V\bm H\cdot\bm B\d V.
 \]
 
 将一个磁导率为$\mu$的物体放进电流源固定不动的磁场$\bm B$中，前后能量发生变化
 \[
-    \D W=\frac12\int_V\bm M\cdot\bm B_0\d v.
+    \D W=\frac12\int_V\bm M\cdot\bm B_0\d V.
 \]
 
 \subsectionstar{自感和互感}
@@ -679,7 +679,7 @@ $L_i$是线圈$i$的自感(self-inductance)，$M_{ij}$是线圈$i,j$之间的互
 
 自感和互感可由
 \[
-    W=\frac12\int_V\bm J\cdot\bm A\d v.
+    W=\frac12\int_V\bm J\cdot\bm A\d V.
 \]
 求出，用磁通量的形式即
 \[
@@ -687,7 +687,7 @@ $L_i$是线圈$i$的自感(self-inductance)，$M_{ij}$是线圈$i,j$之间的互
 \]
 若电路是导磁的，则$W$的表达式不适用了，需要换为
 \[
-    W=\frac12\int_V\bm H\cdot\bm B\d v.
+    W=\frac12\int_V\bm H\cdot\bm B\d V.
 \]
 后面还讨论了圆导线的自电感。
 

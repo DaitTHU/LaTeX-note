@@ -44,7 +44,7 @@
     \end{center}
     因此电势分布为
     \begin{equation}
-        \Phi(\bm x)=\frac q{4\pi\varepsilon_0}\biggkh{\frac1{\abs{\bm x-\bm d}}-\frac1{\abs{\bm x+\bm d}}}.
+        \Phi(\bm r)=\frac q{4\pi\varepsilon_0}\biggkh{\frac1{\abs{\bm r-\bm d}}-\frac1{\abs{\bm r+\bm d}}}.
     \end{equation}
 \end{example}
 
@@ -72,7 +72,7 @@
     \end{equation}
     便可使原球面上的电势均为0，因此球外电势分布为
     \begin{equation}
-        \Phi(\bm x)=\frac q{4\pi\varepsilon_0}\biggkh{\frac1{|\bm x-\bm d|}-\frac ad\frac1{|\bm x-\bm d'|}},\quad\bm d'=\Bigkh{\frac ad}^2\bm d.
+        \Phi(\bm r)=\frac q{4\pi\varepsilon_0}\biggkh{\frac1{|\bm r-\bm d|}-\frac ad\frac1{|\bm r-\bm d'|}},\quad\bm d'=\Bigkh{\frac ad}^2\bm d.
     \end{equation}
     \tcblower
     接地导体球外表面的面电荷密度为($\p V$上的法向量$n'$指向球内，即$-r$方向)
@@ -157,19 +157,19 @@
 \subsection{球边界的Green函数}
 \label{ssec:Green function, sphere}
 
-对于球形Dirichlet边界条件，为了使球面上的$G(\bm x,\bm x')=0$，可借助镜像电荷的思想，取
+对于球形Dirichlet边界条件，为了使球面上的$G(\bm r,\bm r')=0$，可借助镜像电荷的思想，取
 \begin{equation}
     \label{eqn:sphere Green function}
-    G(\bm x,\bm x')=\frac1{|\bm x-\bm x'|}-\frac a{x'}\frac1{|\bm x-\bm x''|},\quad\bm x''=\Bigkh{\frac{a}{x'}}^2\bm x'.
+    G(\bm r,\bm r')=\frac1{|\bm r-\bm r'|}-\frac a{r'}\frac1{|\bm r-\bm r''|},\quad\bm r''=\Bigkh{\frac{a}{r'}}^2\bm r'.
 \end{equation}
-令$\gamma$表示$\bm x,\bm x'$夹角，则
+令$\gamma$表示$\bm r,\bm r'$夹角，则
 \[
-    G(\bm x,\bm x')=\frac1{(x^2+x'^2-2xx'\cos\gamma)^{1/2}}-\frac a{(x^2x'^2+a^4-2a^2xx'\cos\gamma)^{1/2}},
+    G(\bm r,\bm r')=\frac1{(r^2+r'^2-2rr'\cos\gamma)^{1/2}}-\frac a{(r^2r'^2+a^4-2a^2rr'\cos\gamma)^{1/2}},
 \]
 式\eqref{eqn:Dirichlet Green}中还需要$\p G/\p n'$，若感兴趣的区域为球外，则$n'$指向球内，
 \begin{equation}
     \label{eqn:sphere dGreen function}
-    \edg{\pv G{n'}}_{x'=a}=-\edg{\pv G{x'}}_{x'=a}=-\frac{x^2-a^2}{a(x^2+a^2-2ax\cos\gamma)^{3/2}}.
+    \edg{\pv G{n'}}_{r'=a}=-\edg{\pv G{r'}}_{r'=a}=-\frac{r'^2-a^2}{a(r'^2+a^2-2ar'\cos\gamma)^{3/2}}.
 \end{equation}
 这正是式\eqref{eqn:grounded sphere conductor-point, sigma}的感应表面电荷密度。
 
@@ -198,7 +198,7 @@
     \end{center}
     使用式\eqref{eqn:sphere Laplace solution}，
     \begin{align*}
-        \Phi(\bm x)&=\frac V{4\pi}\int_0^{2\pi}\biggkh{\int_0^1-\int_{-1}^0}\frac{a(r^2-a^2)}{(r^2+a^2-2ar\cos\gamma)^{3/2}}\d(\cos\theta')\nd\phi'%\\
+        \Phi(\bm r)&=\frac V{4\pi}\int_0^{2\pi}\biggkh{\int_0^1-\int_{-1}^0}\frac{a(r^2-a^2)}{(r^2+a^2-2ar\cos\gamma)^{3/2}}\d(\cos\theta')\nd\phi'%\\
         % &=\frac{Va(r^2-a^2)}{4\pi}\int_0^{2\pi}\int_0^1\Bigl[(r^2+a^2-2ar\cos\gamma)^{-3/2}-\\
         % &\qqquad(r^2+a^2+2ar\cos\gamma)^{-3/2}\Bigr]\d(\cos\theta')\nd\phi'.
     \end{align*}
@@ -210,7 +210,7 @@
     \tcblower
     为了得到上面积分的表达式，提出$(r^2+a^2)$，
     \begin{align*}
-        \Phi(\bm x)&=\frac{Va(r^2-a^2)}{4\pi(r^2+a^2)^{3/2}}\int_0^{2\pi}\int_0^1\Bigl[(1-2\alpha\cos\gamma)^{-3/2}-(1+2\alpha\cos\gamma)^{-3/2}\Bigr]\d(\cos\theta')\nd\phi'
+        \Phi(\bm r)&=\frac{Va(r^2-a^2)}{4\pi(r^2+a^2)^{3/2}}\int_0^{2\pi}\int_0^1\Bigl[(1-2\alpha\cos\gamma)^{-3/2}-(1+2\alpha\cos\gamma)^{-3/2}\Bigr]\d(\cos\theta')\nd\phi'
     \end{align*}
     其中$\alpha:=ar/(a^2+r^2)$，进行Taylor展开：
     \[
@@ -218,7 +218,7 @@
     \]
     按项积分得到
     \[
-        \Phi(\bm x)=\frac{3Va^2}{2r^2}\frac{r^3(r^2-a^2)}{(r^2+a^2)^{5/2}}\cos\theta\biggfkh{1+\frac{35}{24}\frac{a^2r^2}{(r^2+a^2)^2}(3-\cos^2\theta)+\cdots}.
+        \Phi(\bm r)=\frac{3Va^2}{2r^2}\frac{r^3(r^2-a^2)}{(r^2+a^2)^{5/2}}\cos\theta\biggfkh{1+\frac{35}{24}\frac{a^2r^2}{(r^2+a^2)^2}(3-\cos^2\theta)+\cdots}.
     \]
     若$r\gg a$，则
     \begin{equation}
@@ -465,10 +465,8 @@
 \sectionstar{有限元分析法}
 \label{sec:finite element analysis}
 
-有限元分析法（finite element analysis, FEA）是一种数值计算方法。具体可见电磁场数值计算课程笔记。此处略。
-
-% \par\noindent\rule{\textwidth}{0.5pt}
-\clearpage
+有限元分析法（finite element analysis, FEA）是一种数值方法，用于求解复杂的工程和物理问题，特别是涉及偏微分方程的连续体力学问题，如结构力学、热传导、电磁场等。
+其基本思想是将一个复杂的连续体问题分解成许多简单的子问题，这些子问题在数学上更容易处理。每个子问题对应于一个“有限元”，它是一个小的、简单形状的区域（如三角形或四边形）。然后，在这些简单区域上，通过选择合适的数学近似（如多项式函数），将偏微分方程转化为代数方程。这些代数方程组成了所谓的有限元方程。
 
 \section{球坐标系中的正交函数}
 \label{sec:laplace equation in spherical coordinate}
@@ -618,12 +616,12 @@ $\alpha$是待定系数，从而
 % 下面是此方法的两个例子。
 
 \begin{example}{点电荷电势}{point charge potential}
-    $\bm x'$处的单位点电荷在$\bm x$的产生的电势为
+    $\bm r'$处的单位点电荷在$\bm r$的产生的电势为
     \begin{equation}
-        \label{eqn:1/|x-x'|}
-        \frac1{|\bm x-\bm x'|}=\frac1{r_>}\sum_{\ell=0}^\infty\biggkh{\frac{r_<}{r_>}}^\ell P_\ell(\cos\gamma).
+        \label{eqn:1/|r-r'|}
+        \frac1{|\bm r-\bm r'|}=\frac1{r_>}\sum_{\ell=0}^\infty\biggkh{\frac{r_<}{r_>}}^\ell P_\ell(\cos\gamma).
     \end{equation}
-    其中$r_<:=\min(x,x'),\enspace r_>:=\max(x,x')$，$\gamma$是$\bm x,\bm x'$夹角。
+    其中$r_<:=\min(x,x'),\enspace r_>:=\max(x,x')$，$\gamma$是$\bm r,\bm r'$夹角。
 \end{example}
 % \begin{example}{带电圆环的电势}{charged ring}
     
@@ -708,10 +706,10 @@ $\alpha$是待定系数，从而
 \begin{equation}
     \Phi(r,\theta,\phi)=\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\bigfkh{A_{\ell m}r^\ell+B_{\ell m}r^{-(\ell+1)}}Y_{\ell m}(\theta,\phi).
 \end{equation}
-由$P_\ell(\cos\gamma)$的球谐函数展开式及\eqref{eqn:1/|x-x'|}，点电荷之间电势的球谐函数展开
+由$P_\ell(\cos\gamma)$的球谐函数展开式及\eqref{eqn:1/|r-r'|}，点电荷之间电势的球谐函数展开
 \begin{equation}
-    \label{eqn:1/|x-x'|=YY}
-    \frac1{|\bm x-\bm x'|}=\frac{4\pi}{r_>}\sum_{\ell=0}^\infty\biggfkh{\frac1{2\ell+1}\biggkh{\frac{r_<}{r_>}}^\ell\cdot\sum_{m=-\ell}^\ell Y^\ast_{\ell m}(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
+    \label{eqn:1/|r-r'|=YY}
+    \frac1{|\bm r-\bm r'|}=\frac{4\pi}{r_>}\sum_{\ell=0}^\infty\biggfkh{\frac1{2\ell+1}\biggkh{\frac{r_<}{r_>}}^\ell\cdot\sum_{m=-\ell}^\ell Y^\ast_{\ell m}(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
 \end{equation}
 
 \section{柱坐标系中的正交函数}
@@ -877,27 +875,27 @@ Bessel方程的另一对重要线性无关解是Hankel函数(第三类Bessel函�
 
 由式\eqref{eqn:Dirichlet Green}，带Dirichlet边界条件的Poisson方程的形式解为：
 \[
-    \Phi(\bm x)=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm x')G(\bm x,\bm x')\d v'-\frac1{4\pi}\oint_{\p V}\Phi(\bm x')\pv G{n'}\d a';
+    \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm r')G(\bm r,\bm r')\d V'-\frac1{4\pi}\oint_{\p V}\Phi(\bm r')\pv G{n'}\d A';
 \]
-因此有必要确定满足边界条件的Green函数$G(\bm x,\bm x')$。
+因此有必要确定满足边界条件的Green函数$G(\bm r,\bm r')$。
 
 \subsection{球坐标系下Green函数的展开}
 \label{ssec:Green expansion in spherical coordinate}
 
 对于球面边界条件，我们通常选择球坐标。然后，将Green函数表示为与所讨论的坐标相适应的函数的一系列乘积就很方便了。
 
-事实上，根据我们所介绍的，我们可以简单地得到球坐标下Green函数的展开式。由式\eqref{eqn:1/|x-x'|=YY}，
+事实上，根据我们所介绍的，我们可以简单地得到球坐标下Green函数的展开式。由式\eqref{eqn:1/|r-r'|=YY}，
 \[
-    \frac1{|\bm x-\bm x'|}=4\pi\sum_{\ell=0}^\infty\biggfkh{\frac1{2\ell+1}\frac{r_<^\ell}{r_>^{\ell+1}}\cdot\sum_{m=-\ell}^\ell Y^\ast_{\ell m}(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
+    \frac1{|\bm r-\bm r'|}=4\pi\sum_{\ell=0}^\infty\biggfkh{\frac1{2\ell+1}\frac{r_<^\ell}{r_>^{\ell+1}}\cdot\sum_{m=-\ell}^\ell Y^\ast_{\ell m}(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
 \]
 我们希望得到适用于在$r = a$处具有球面边界的外部问题的Green函数的类似展开。由式\eqref{eqn:sphere Green function}易得：
 \[
-    G(\bm x,\bm x')=\frac1{|\bm x-\bm x'|}-\frac a{x'}\frac1{|\bm x-\bm x''|},\quad\bm x''=\Bigkh{\frac{a}{x'}}^2\bm x'.
+    G(\bm r,\bm r')=\frac1{|\bm r-\bm r'|}-\frac a{r'}\frac1{|\bm r-\bm r''|},\quad\bm r''=\Bigkh{\frac{a}{r'}}^2\bm r'.
 \]
-对式\eqref{eqn:sphere Green function}中的两项展开\eqref{eqn:1/|x-x'|=YY}，得到
+对式\eqref{eqn:sphere Green function}中的两项展开\eqref{eqn:1/|r-r'|=YY}，得到
 \begin{equation}
     \label{eqn:Green YY}
-    G(\bm x,\bm x')=4\pi\sum_{\ell=0}^\infty\biggfkh{\frac1{2\ell+1}\frac1{r_>^{\ell+1}}\biggkh{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\sum_{m=-\ell}^\ell Y_{\ell m}^\ast(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
+    G(\bm r,\bm r')=4\pi\sum_{\ell=0}^\infty\biggfkh{\frac1{2\ell+1}\frac1{r_>^{\ell+1}}\biggkh{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\sum_{m=-\ell}^\ell Y_{\ell m}^\ast(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
 \end{equation}
 其中$r_>=\max(r,r'),\enspace r_<=\min(r,r')$。%，展开可得
 \iffalse
@@ -913,17 +911,17 @@ Bessel方程的另一对重要线性无关解是Hankel函数(第三类Bessel函�
 \paragraph{一般展开式}
 现在我们从基本原理开始，来系统地构建这种展开。有%Dirichlet势问题的Green函数满足：
 \[
-    \lapla G(\bm x,\bm x')=-4\pi\vd(\bm x,\bm x').
+    \lapla G(\bm r,\bm r')=-4\pi\vd(\bm r,\bm r').
 \]
-且$G(\bm x,\bm x')|_{\p V}=0$。
+且$G(\bm r,\bm r')|_{\p V}=0$。
 对于球坐标，$\delta$函数可以写成
 \begin{align*}
-    \delta(\bm x,\bm x')&=\frac1{r^2}\vd(r-r')\vd(\phi-\phi')\vd(\cos\theta-\cos\theta')\\
+    \delta(\bm r,\bm r')&=\frac1{r^2}\vd(r-r')\vd(\phi-\phi')\vd(\cos\theta-\cos\theta')\\
     &=\frac1{r^2}\vd(r-r')\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell Y_{\ell m}^\ast(\theta',\phi')Y_{\ell m}(\theta,\phi).
 \end{align*}
-将Green函数看做$\bm x$的函数，可以被展开为
+将Green函数看做$\bm r$的函数，可以被展开为
 \[
-    G(\bm x,\bm x')=\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell A_{\ell m}(r|r',\theta',\phi')Y_{\ell m}(\theta,\phi).
+    G(\bm r,\bm r')=\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell A_{\ell m}(r|r',\theta',\phi')Y_{\ell m}(\theta,\phi).
 \]
 由上面三式，可得 
 \[
@@ -974,10 +972,10 @@ $g_\ell$满足
     \]
     故Green函数的展开
     \begin{equation}
-        G(\bm x,\bm x')=4\pi\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell \frac{Y_{\ell m}^\ast(\theta',\phi')Y_{\ell m}(\theta,\phi)}{(2\ell+1)\bigfkh{1-(a/b)^{2\ell+1}}}\biggkh{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\biggkh{\frac1{r_>^{\ell+1}}-\frac{r_>^\ell}{b^{2\ell+1}}}.
+        G(\bm r,\bm r')=4\pi\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell \frac{Y_{\ell m}^\ast(\theta',\phi')Y_{\ell m}(\theta,\phi)}{(2\ell+1)\bigfkh{1-(a/b)^{2\ell+1}}}\biggkh{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\biggkh{\frac1{r_>^{\ell+1}}-\frac{r_>^\ell}{b^{2\ell+1}}}.
     \end{equation}
     \tcblower
-    $a\to0,\,b\to\infty$时，变为式\eqref{eqn:1/|x-x'|=YY}
+    $a\to0,\,b\to\infty$时，变为式\eqref{eqn:1/|r-r'|=YY}
 
     $b\to\infty$时，变为式\eqref{eqn:Green YY}
 
@@ -1001,11 +999,11 @@ $g_\ell$满足
     \fi
     环的电荷密度可以写成
     \[
-        \rho(\bm x')=\frac Q{2\pi a^2}\vd(r'-a)\vd(\cos\theta').
+        \rho(\bm r')=\frac Q{2\pi a^2}\vd(r'-a)\vd(\cos\theta').
     \]
     由方位角的对称性，$m=0$，故
     \begin{align*}
-        \Phi(\bm x)&=\frac1{4\pi\varepsilon_0}\int\rho(\bm x')G(\bm x,\bm x')\d v'\\
+        \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\int\rho(\bm r')G(\bm r,\bm r')\d V'\\
         &=\frac Q{4\pi\varepsilon_0}\sum_{\ell=0}^\infty\biggkh{\frac{r_<^\ell}{r_>^{\ell+1}}-\frac{r^\ell a^\ell}{b^{2\ell+1}}}P_\ell(\cos\theta)P_\ell(0)\\
         &=\frac Q{4\pi\varepsilon_0}\sum_{n=0}^\infty\frac{(-)^n(2n-1)!!}{(2n)!!}\biggkh{\frac{r_<^{2n}}{r_>^{2n+1}}-\frac{r^{2n}a^{2n}}{b^{4n+1}}}P_{2n}(\cos\theta).
     \end{align*}
@@ -1016,11 +1014,11 @@ $g_\ell$满足
 
 柱坐标系下，
 \[
-    \lapla G(\bm x,\bm x')=-\frac{4\pi}\rho\vd(\rho-\rho')\vd(\phi-\phi')\vd(z-z').
+    \lapla G(\bm r,\bm r')=-\frac{4\pi}\rho\vd(\rho-\rho')\vd(\phi-\phi')\vd(z-z').
 \]
 Green函数可以写成
 \[
-    G(\bm x,\bm x')=\frac1{4\pi^2}\sum_{m=-\infty}^\infty\int\iti\e{\i m(\phi-\phi')}\e{\i k(z-z')}g_m(k,\rho,\rho')\d k.
+    G(\bm r,\bm r')=\frac1{4\pi^2}\sum_{m=-\infty}^\infty\int\iti\e{\i m(\phi-\phi')}\e{\i k(z-z')}g_m(k,\rho,\rho')\d k.
 \]
 径向Green函数$g_m(k,\rho,\rho')$
 \begin{equation}
@@ -1047,9 +1045,9 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 \[
     W[I_m(x),K_m(x)]=-\frac1x,
 \]
-故$A=4\pi$，我们得到了$1/|\bm x-\bm x'|$的展开 
+故$A=4\pi$，我们得到了$1/|\bm r-\bm r'|$的展开 
 \begin{equation}
-    \frac1{|\bm x-\bm x'|}=\frac1\pi\sum_{m=-\infty}^{+\infty}\int\iti\e{\i m(\phi-\phi')}\e{\i k(z-z')}I_m(k\rho_<)K_m(k\rho_>)\d k.
+    \frac1{|\bm r-\bm r'|}=\frac1\pi\sum_{m=-\infty}^{+\infty}\int\iti\e{\i m(\phi-\phi')}\e{\i k(z-z')}I_m(k\rho_<)K_m(k\rho_>)\d k.
 \end{equation}
 
 \subsection{Green函数的本征函数展开式}
@@ -1057,46 +1055,46 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 
 另一种获得Green函数展开式的技术是在一些相关问题上使用本征函数(eigenfunction)。作为说明，我们考虑一个椭圆微分方程的形式
 \begin{equation}
-    \lapla\psi(\bm x)+\bigfkh{f(\bm x)+\lambda}\psi(\bm x)=0.
+    \lapla\psi(\bm r)+\bigfkh{f(\bm r)+\lambda}\psi(\bm r)=0.
 \end{equation}
-为了使本征函数$\psi_n(\bm x)$满足边界条件，$\lambda$必须取一系列本征值$\lambda_n$。
+为了使本征函数$\psi_n(\bm r)$满足边界条件，$\lambda$必须取一系列本征值$\lambda_n$。
 %\lapla\psi_n(x)+\bigfkh{f(x)+\lambda_n}\psi_n(x)=0.
 
 本征函数是正交的：
 \[
-    \int_V\psi_m^\ast(\bm x)\psi_n(\bm x)\d v=\vd_{mn}.
+    \int_V\psi_m^\ast(\bm r)\psi_n(\bm r)\d V=\vd_{mn}.
 \]
 本征值$\lambda$的谱可以是离散集，也可以是连续集，或者两者兼而有之。我们假定所有本征函数构成一个完备集。
 
 现在我们希望找到Green函数的方程:
 \begin{equation}
-    \lapla G(\bm x,\bm x')+\bigfkh{f(\bm x)+\lambda}G(\bm x,\bm x')=-4\pi\vd(\bm x,\bm x'),
+    \lapla G(\bm r,\bm r')+\bigfkh{f(\bm r)+\lambda}G(\bm r,\bm r')=-4\pi\vd(\bm r,\bm r'),
 \end{equation}
-若Green函数与的本征函数$\psi_n(\bm x)$具有相同的边界条件，则可将Green函数展开为一系列本征函数的形式:
+若Green函数与的本征函数$\psi_n(\bm r)$具有相同的边界条件，则可将Green函数展开为一系列本征函数的形式:
 \[
-    G(\bm x,\bm x')=\sum_n a_n(\bm x')\psi_n(\bm x),
+    G(\bm r,\bm r')=\sum_n a_n(\bm r')\psi_n(\bm r),
 \]
 代入得
 \[
-    \sum_n a_n(\bm x')(\lambda-\lambda_n)\psi_n=-4\pi\vd(\bm x,\bm x'),
+    \sum_n a_n(\bm r')(\lambda-\lambda_n)\psi_n=-4\pi\vd(\bm r,\bm r'),
 \]
 因此系数为
 \[
-    a_n(\bm x')=\frac{4\pi}{\lambda_n-\lambda}\int_V\psi^\ast_n(\bm x)\vd(\bm x,\bm x')\d v=4\pi\frac{\psi_n^\ast(\bm x')}{\lambda_n-\lambda}.
+    a_n(\bm r')=\frac{4\pi}{\lambda_n-\lambda}\int_V\psi^\ast_n(\bm r)\vd(\bm r,\bm r')\d V=4\pi\frac{\psi_n^\ast(\bm r')}{\lambda_n-\lambda}.
 \]
 因此Green函数的本征函数展开式为
 \begin{equation}
-    G(\bm x,\bm x')=4\pi\sum_n \frac{\psi_n^\ast(\bm x')\psi_n(\bm x)}{\lambda_n-\lambda}
+    G(\bm r,\bm r')=4\pi\sum_n \frac{\psi_n^\ast(\bm r')\psi_n(\bm r)}{\lambda_n-\lambda}
 \end{equation}
 对于连续谱，求和用积分代替。
-\begin{example}{$1/|\bm x-\bm x'|$的三维Fourier积分表示}{1/|x-x'| Fourier}
-    自由边界下，$f(\bm x)\equiv 0$的特征方程
+\begin{example}{$1/|\bm r-\bm r'|$的三维Fourier积分表示}{1/|r-r'| Fourier}
+    自由边界下，$f(\bm r)\equiv 0$的特征方程
     \[
-        (\lapla+k^2)\psi_{\bm k}(\bm x)=0\implies\psi_{\bm k}(\bm x)=\frac{\e{\i\bm k\cdot\bm x}}{(2\pi)^{3/2}}.
+        (\lapla+k^2)\psi_{\bm k}(\bm r)=0\implies\psi_{\bm k}(\bm r)=\frac{\e{\i\bm k\cdot\bm r}}{(2\pi)^{3/2}}.
     \]
     则$\lambda=0$时的Green函数为
     \[
-        G(\bm x,\bm x')=4\pi\int\frac{\psi_{\bm k}^\ast(\bm x')\psi_{\bm k}(\bm x)}{k^2}\d v_k=\frac1{2\pi^2}\int\frac{\e{\i\bm k\cdot(\bm x'-\bm x)}}{k^2}\d v_k.
+        G(\bm r,\bm r')=4\pi\int\frac{\psi_{\bm k}^\ast(\bm r')\psi_{\bm k}(\bm r)}{k^2}\d V_k=\frac1{2\pi^2}\int\frac{\e{\i\bm k\cdot(\bm r'-\bm r)}}{k^2}\d V_k.
     \]
 \end{example}
 

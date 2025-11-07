@@ -56,8 +56,8 @@ Helmholtz方程的一个解是沿$z$方向传播的平面波$\e{\i(kz-\omega t)}
 频率为$\omega$、波数为$k$、传播方向为$\uvec n$的平面电磁波一般具有如下形式：
 \begin{equation}
     \begin{cases}
-        \bm E=\bm E_0\e{\i(\bm k\cdot\bm x-\omega t)},\\
-        \bm B=\bm B_0\e{\i(\bm k\cdot\bm x-\omega t)},
+        \bm E=\bm E_0\e{\i(\bm k\cdot\bm r-\omega t)},\\
+        \bm B=\bm B_0\e{\i(\bm k\cdot\bm r-\omega t)},
     \end{cases}
 \end{equation}
 其中$\bm E_0,\bm B_0$是常矢量，$\bm k:=k\uvec n$为波矢(wave vector)。
@@ -118,7 +118,7 @@ $\uvec\epsilon_1,\uvec\epsilon_2$称为极化矢量(polarization vector)。
 % \]
 则电磁波为非均匀平面波，在虚部方向$\Im(\uvec n)$上呈指数衰减(或增长)
 \[
-    \e{\i(\bm k\cdot\bm x-\omega t)}=\e{-k\Im(\uvec n)\cdot\bm x}\e{\i(k\Re(\uvec n)\cdot\bm x-\omega t)},
+    \e{\i(\bm k\cdot\bm r-\omega t)}=\e{-k\Im(\uvec n)\cdot\bm r}\e{\i(k\Re(\uvec n)\cdot\bm r-\omega t)},
 \]
 等幅面和等相面仍然是平面，但它们不再平行；横波的关系\eqref{eqn:transverse}仍成立，由$\uvec n\cdot\uvec n=1$：
 \begin{subequations}
@@ -135,7 +135,7 @@ $\uvec\epsilon_1,\uvec\epsilon_2$称为极化矢量(polarization vector)。
 %也可以有一种平面波的电场$\uvec\epsilon_2$方向，
 %我们分别称其为偏振矢量为$\uvec\epsilon_{1,2}$的线偏振波，这两种偏振波是不同的。一般地，
 \[
-    \bm E=(E_1\uvec\epsilon_1+E_2\uvec\epsilon_2)\e{\i(\bm k\cdot\bm x-\omega t)},
+    \bm E=(E_1\uvec\epsilon_1+E_2\uvec\epsilon_2)\e{\i(\bm k\cdot\bm r-\omega t)},
 \]
 振幅$E_1,E_2$是复数，$E_2$相对$E_1$的相位差为$\delta$。
 % 因为$t$的起始点是任意的，不妨令$E_1$是实数，则$E_2=\abs{E_2}\e{\i\delta}$。
@@ -167,7 +167,7 @@ $\bm E$的终点在一条直线(图中虚线)上简谐运动。
 若$E_1,E_2$不同相，但幅值相同($\abs{E_1}=\abs{E_2}$)且相位差$\delta=\pm 90\degree$，则
 $\bm E$是圆偏振的(circular polarized)，可以写成
 \[
-    \bm E=E_1(\uvec\epsilon_1\pm\i\uvec\epsilon_2)\e{\i(\bm k\cdot\bm x-\omega t)},
+    \bm E=E_1(\uvec\epsilon_1\pm\i\uvec\epsilon_2)\e{\i(\bm k\cdot\bm r-\omega t)},
 \]
 如\figref{fig:circular polarization}，向$-\bm k$方向(即垂直纸面向内)看去，($+$)对应电场终点逆时针(counterclockwise)旋转，我们称为左旋(left circular)或正螺旋性(positive helicity)，因为其角动量是沿$+\bm k$的；相应的，($-$)对应顺时针旋转，称为右旋或负螺旋性。
 \begin{center}
@@ -182,7 +182,7 @@ $\bm E$是圆偏振的(circular polarized)，可以写成
 \end{equation}
 则$\uvec n,\uvec\epsilon_\pm$也是两两正交的单位矢量(复矢量内积)。在这一对坐标下，任意平面波都可以分解成左旋和右旋波：
 \[
-    \bm E=(E_+\uvec\epsilon_++E_-\uvec\epsilon_-)\e{\i(\bm k\cdot\bm x-\omega t)},
+    \bm E=(E_+\uvec\epsilon_++E_-\uvec\epsilon_-)\e{\i(\bm k\cdot\bm r-\omega t)},
 \]
 若$E_\pm$幅值相同，则$\bm E$是线偏振的；若$E_\pm$有一个为0，则$\bm E$是圆偏振的。
 
@@ -197,8 +197,8 @@ $\bm E$是圆偏振的(circular polarized)，可以写成
 \end{center}
 为了方便地描述这个椭圆的方程，记$\Re(\bm E)=E_{\epsilon_1}\uvec\epsilon_1+E_{\epsilon_2}\uvec\epsilon_2$，则
 \begin{align*}
-    E_{\epsilon_1}&=\abs{E_1}\cos(\bm k\cdot\bm x-\omega t),\\
-    E_{\epsilon_2}&=\abs{E_2}\cos(\bm k\cdot\bm x-\omega t+\delta),
+    E_{\epsilon_1}&=\abs{E_1}\cos(\bm k\cdot\bm r-\omega t),\\
+    E_{\epsilon_2}&=\abs{E_2}\cos(\bm k\cdot\bm r-\omega t+\delta),
 \end{align*}
 则
 \[
@@ -359,13 +359,13 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
 % 式\eqref{eqn:omegai=omegar=omegat}说明，不论光怎样被散射，都具有相同的频率；
 又上式对于分界面上的任意一点均成立，故$\bm E_\i,\bm E_\r,\bm E_\t$在分界面上任意一点的相位差均相同，故
 % \[
-%     \bm k_\i\cdot\bm x=\bm k_\r\cdot\bm x+\delta_\r=\bm k_\t\cdot\bm x+\delta_\t.
+%     \bm k_\i\cdot\bm r=\bm k_\r\cdot\bm r+\delta_\r=\bm k_\t\cdot\bm r+\delta_\t.
 % \]
 % 从前两项可以得到
 % \[
-%     (\bm k_\i-\bm k_\r)\cdot\bm x=\delta_\r,
+%     (\bm k_\i-\bm k_\r)\cdot\bm r=\delta_\r,
 % \]
-% 由内积的投影性质，$\bm x$的终点会扫过一个垂直于$(\bm k_\i-\bm k_\r)$的平面，而$\bm x$的终点正好在分界面上，因此$(\bm k_\i-\bm k_\r)$垂直于分界面：
+% 由内积的投影性质，$\bm r$的终点会扫过一个垂直于$(\bm k_\i-\bm k_\r)$的平面，而$\bm r$的终点正好在分界面上，因此$(\bm k_\i-\bm k_\r)$垂直于分界面：
 % \[
 %     (\bm k_\i-\bm k_\r)\times\uvec n=\bm 0,
 % \]
@@ -506,7 +506,7 @@ $\bm k_\i,\bm k_\r,\bm k_\t$三线共面，且三者的切向分量相等：
 \]
 则$\cos\theta_\t$是纯虚的，
 \[
-    \e{\i\bm k'\cdot\bm x}=\e{\i k_\t(x\sin\theta_\t+z\cos\theta_\t)},
+    \e{\i\bm k'\cdot\bm r}=\e{\i k_\t(x\sin\theta_\t+z\cos\theta_\t)},
 \]
 此时折射波在光疏介质内仅平行于表面传播，并在垂直方向上呈指数衰减，Poynting矢量的法向分量在时间平均上为0：
 \[
@@ -553,13 +553,13 @@ $\bm k_\i,\bm k_\r,\bm k_\t$三线共面，且三者的切向分量相等：
 忽略磁场力，
 由谐波力束缚和由电场作用的电荷电子的运动方程为：
 \[
-    -m_\elc\omega_0^2\bm x-m_\elc\gamma\dot{\bm x}-e\bm E=m_\elc\ddot{\bm x}.
+    -m_\elc\omega_0^2\bm r-m_\elc\gamma\dot{\bm r}-e\bm E=m_\elc\ddot{\bm r}.
 \]
-$-m_\elc\omega_0^2\bm x$是回复力(restoring force)，$-m_\elc\gamma\dot{\bm x}$是唯象的阻尼力(damping force)。
+$-m_\elc\omega_0^2\bm r$是回复力(restoring force)，$-m_\elc\gamma\dot{\bm r}$是唯象的阻尼力(damping force)。
 如果振荡的振幅足够小，便可以计算电子平均位置的电场。场随频率$\omega$的简谐$\e{-\i\omega t}$变化。
 则由一个电子贡献的偶极矩为：
 \[
-    \bm p=-e\bm x=\frac{e^2}{m_\elc(\omega_0^2-\omega^2-\i\omega\gamma)}\bm E.
+    \bm p=-e\bm r=\frac{e^2}{m_\elc(\omega_0^2-\omega^2-\i\omega\gamma)}\bm E.
 \]
 从微观到宏观，单位体积内有$N$个分子，每个分子有$Z$个电子；我们将分子中的电子分类，第$j$组有$f_j$个特性相同的电子，其结合频率为$\omega_j$，阻尼常数为$\gamma_j$。
 代入$\bm P=\varepsilon_0\chi_\elc\bm E$和$\varepsilon_\r=1+\chi_\elc$得到
@@ -761,28 +761,28 @@ $A(k)$描述了不同波的线性叠加的性质，
 
 \paragraph{时间非局域性}
 
-在色散介质中，$\varepsilon(\omega)$对频率$\omega$的依赖会导致$\bm D(\bm x,t)$和$\bm E(\bm x,t)$的临时性非局域联系。对于$\omega$的单色成分，
+在色散介质中，$\varepsilon(\omega)$对频率$\omega$的依赖会导致$\bm D(\bm r,t)$和$\bm E(\bm r,t)$的临时性非局域联系。对于$\omega$的单色成分，
 \[
-    \hatbm D(\bm x,\omega)=\varepsilon(\omega)\hatbm E(\bm x,\omega),
+    \hatbm D(\bm r,\omega)=\varepsilon(\omega)\hatbm E(\bm r,\omega),
 \]
 Fourier变换得到
 \[
-    \bm D(\bm x,t)=\frac1{2\pi}\int\iti\varepsilon(\omega)\biggfkh{\int\iti\bm E(\bm x,t')\e{\i\omega t'}\d t'}\e{-\i\omega t}\d\omega,
+    \bm D(\bm r,t)=\frac1{2\pi}\int\iti\varepsilon(\omega)\biggfkh{\int\iti\bm E(\bm r,t')\e{\i\omega t'}\d t'}\e{-\i\omega t}\d\omega,
 \]
 假设积分的次序可以交换，可以得到
 \begin{equation}
     \label{eqn:D-E with omega}
-    \bm D(\bm x,t)=\varepsilon_0\biggfkh{\bm E(\bm x,t)+\int\iti\bm E(\bm x,t-\tau)G(\tau)\d\tau},
+    \bm D(\bm r,t)=\varepsilon_0\biggfkh{\bm E(\bm r,t)+\int\iti\bm E(\bm r,t-\tau)G(\tau)\d\tau},
 \end{equation}
 其中 
 \[
     G(\tau)=\frac1{2\pi}\int\iti\bigfkh{\varepsilon_\r(\omega)-1}\e{-\i\omega\tau}\d\omega,
 \]
-因此$t$时刻的$\bm D(\bm x,t)$依赖除$t$以外的电场$\bm E(\bm x,t-\tau)$。若$\varepsilon$是不依赖于$\omega$的，则 
+因此$t$时刻的$\bm D(\bm r,t)$依赖除$t$以外的电场$\bm E(\bm r,t-\tau)$。若$\varepsilon$是不依赖于$\omega$的，则 
 \[
-    G(\tau)=(\varepsilon_\r-1)\vd(\tau),\quad\bm D(\bm x,t)=\varepsilon\bm E(\bm x,t),
+    G(\tau)=(\varepsilon_\r-1)\vd(\tau),\quad\bm D(\bm r,t)=\varepsilon\bm E(\bm r,t),
 \]
-$\bm D(\bm x,t)$和$\bm E(\bm x,t)$有瞬时的联系；但如果$\varepsilon(\omega)$随$\omega$变化，则$G(\tau)$在$\tau\neq 0$的一些地方也不会消失。
+$\bm D(\bm r,t)$和$\bm E(\bm r,t)$有瞬时的联系；但如果$\varepsilon(\omega)$随$\omega$变化，则$G(\tau)$在$\tau\neq 0$的一些地方也不会消失。
 
 \paragraph{$G(\tau)$的简单模型}
 
@@ -802,7 +802,7 @@ $\bm D(\bm x,t)$和$\bm E(\bm x,t)$有瞬时的联系；但如果$\varepsilon(\o
 \[
     G(\tau)=\omega_\text p^2\frac{\sin\nu_0\tau}{\nu_0}\e{-\gamma\tau/2},\quad\tau>0.
 \]
-若没有上述假设，$G(\tau)$也仅仅是上式的线性组合。因此，$\bm D(\bm x,t)$和$\bm E(\bm x,t)$之间连接上的非局域性被限制在$\gamma\iv$的时间内。而$\gamma\iv$的典型值$\SI{e-9}s$。
+若没有上述假设，$G(\tau)$也仅仅是上式的线性组合。因此，$\bm D(\bm r,t)$和$\bm E(\bm r,t)$之间连接上的非局域性被限制在$\gamma\iv$的时间内。而$\gamma\iv$的典型值$\SI{e-9}s$。
 
 上面的方程在时间(而非空间)上是非局部的。
 

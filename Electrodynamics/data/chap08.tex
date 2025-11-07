@@ -6,34 +6,34 @@
 \section{局域振荡源}
 对于随时间变化的电荷和电流系统，我们都可以将随时间变化的量作Fourier分析，并分别处理各个Fourier分量。因此，不失一般性，我们只考虑随时间作正弦变化的局域电荷和电流系统所产生的势、场和辐射，设
 \begin{align*}
-    \rho(\bm x,t)&=\rho(\bm x)\e{-\i\omega t},\\
-    \bm J(\bm x,t)&=\bm J(\bm x)\e{-\i\omega t},
+    \rho(\bm r,t)&=\rho(\bm r)\e{-\i\omega t},\\
+    \bm J(\bm r,t)&=\bm J(\bm r)\e{-\i\omega t},
 \end{align*}
 矢量势
 \begin{align}
     \notag
-    \bm A(\bm x,t)&=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm x',t')}{|\bm x-\bm x'|}\vd\Bigkh{t'-t+\frac{|\bm x-\bm x'|}c}\d t'\nd v'\\
+    \bm A(\bm r,t)&=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r',t')}{|\bm r-\bm r'|}\vd\Bigkh{t'-t+\frac{|\bm r-\bm r'|}c}\d t'\nd v'\\
     \label{eqn:A-Jeiwt}
-    &=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm x')}{|\bm x-\bm x'|}\e{\i k|\bm x-\bm x'|}\d v'.
+    &=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\e{\i k|\bm r-\bm r'|}\d V'.
 \end{align}
 磁场和电场为
 \[
     \bm H=\frac1{\mu_0}\curl\bm A,\quad\bm E=\i\frac Zk\curl\bm H.
 \]
-给定电流分布$\bm J(\bm x')$以后，至少在原则上可以通过计算\eqref{eqn:A-Jeiwt}的积分来定出场的分布。%9.4节将讨论一两个直接计算源积分的实例.
+给定电流分布$\bm J(\bm r')$以后，至少在原则上可以通过计算\eqref{eqn:A-Jeiwt}的积分来定出场的分布。%9.4节将讨论一两个直接计算源积分的实例.
 但是，现在我们先确立在电流源被局限于小区域内(与波长相比，确实很小)的极限情形下，场所具有的某些简单而普遍的性质。如果源的线度为$d$，波长为$\lambda=2\pi c/\omega$，并且$d<\lambda$,则有三个令人感兴趣的空间区域：近区、中间区、远区。
 
-近区：$d\ll r\ll\lambda$，\eqref{eqn:A-Jeiwt}中的指数可以用1代替，并用球谐函数\eqref{eqn:1/|x-x'|=YY}展开，
+近区：$d\ll r\ll\lambda$，\eqref{eqn:A-Jeiwt}中的指数可以用1代替，并用球谐函数\eqref{eqn:1/|r-r'|=YY}展开，
 \[
-    \lim_{kr\to0}\bm A(\bm x)=\frac{\mu_0}{4\pi}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac{4\pi}{2\ell+1}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}\int\bm J(\bm x')r'^\ell Y\cj_{\ell m}(\theta',\phi')\d v'.
+    \lim_{kr\to0}\bm A(\bm r)=\frac{\mu_0}{4\pi}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac{4\pi}{2\ell+1}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}\int\bm J(\bm r')r'^\ell Y\cj_{\ell m}(\theta',\phi')\d V'.
 \]
 上式表明，近场是准静态的，除了按$\e{-\i\omega t}$方式作简谐振荡外，其它性质都是静态的。
 
 远区，$d\ll\lambda\ll r$，
 \[
-    \bm A(\bm x,t)=\frac{\mu_0}{4\pi}\frac{\e{\i kr}}r\int\bm J(\bm x')\e{-\i\bm k\cdot\bm x'}\d v'.
+    \bm A(\bm r,t)=\frac{\mu_0}{4\pi}\frac{\e{\i kr}}r\int\bm J(\bm r')\e{-\i\bm k\cdot\bm r'}\d V'.
 \]
-可以对$\e{-\i\bm k\cdot\bm x'}$展开，略。
+可以对$\e{-\i\bm k\cdot\bm r'}$展开，略。
 
 中间区，$d\ll r\sim\lambda$，近似失效，引入
 球Bessel函数和Hankel函数
@@ -44,13 +44,13 @@
 \end{align}
 则
 \[
-    \bm A(\bm x)=\i\mu_0k\sum_{\ell,m}h_\ell^+(kr)Y_{\ell m}(\theta,\phi)\int\bm J(\bm x')j_\ell(kr')Y\cj_{\ell m}(\theta',\phi')\d v',
+    \bm A(\bm r)=\i\mu_0k\sum_{\ell,m}h_\ell^+(kr)Y_{\ell m}(\theta,\phi)\int\bm J(\bm r')j_\ell(kr')Y\cj_{\ell m}(\theta',\phi')\d V',
 \]
 推导和后面的略。
 
 标量势与矢量势形式相同，我们考虑电单极的情况
 \[
-    \Phi(\bm x,t)=\frac1{4\pi\varepsilon_0r}q\Bigkh{t-\frac rc},
+    \Phi(\bm r,t)=\frac1{4\pi\varepsilon_0r}q\Bigkh{t-\frac rc},
 \]
 式中$q(t)$是源的总电荷。因为电荷是守恒的，且根据定义，局域源是一个没有电荷流入或流出的源，所以总电荷$q$与时间无关。于是，一个定域源的势(和场)的电单极部分必然是静态的。%具有谐和时间依赖关系e-'(w≠0)的场没有单极子项。
 
@@ -58,7 +58,7 @@
 \section{电偶极辐射}
 下面我们求电偶极子
 \[
-    \bm p:=\int\bm x'\rho(\bm x')\d v',
+    \bm p:=\int\bm r'\rho(\bm r')\d V',
 \]
 激发的电场和磁场。
 通过远区近似，
@@ -123,7 +123,7 @@ $r\to\infty$时，
 \paragraph{电四极子}
 电四极子对矢量势的贡献
 \[
-    \bm A=-\frac{\mu_0ck^2}{8\pi}\frac{\e{\i kr}}r\Bigkh{1+\i\frac1{kr}}\int\bm x'(\uvec n\cdot\bm x)\rho(\bm x')\d v'.
+    \bm A=-\frac{\mu_0ck^2}{8\pi}\frac{\e{\i kr}}r\Bigkh{1+\i\frac1{kr}}\int\bm r'(\uvec n\cdot\bm r)\rho(\bm r')\d V'.
 \]
 磁场
 \[

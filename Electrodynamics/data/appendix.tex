@@ -146,16 +146,16 @@
     \end{align}
     \item 散度定理(Gauss定理)
     \begin{align}\label{eqn:div}
-        \int_V\div\bm A\d v=\oint_{\p V}\bm A\cdot\d\bm a.
+        \int_V\div\bm F\d V=\oint_{\p V}\bm F\cdot\d\bm A.
     \end{align}
     \item 旋度定理(Stokes定理)
     \begin{align}\label{eqn:curl}
-        \int_S(\curl\bm A)\cdot\d\bm a=\oint_{\p S}\bm A\cdot\d\bm\ell.
+        \int_S(\curl\bm F)\cdot\d\bm A=\oint_{\p S}\bm F\cdot\d\bm\ell.
     \end{align}
     \item 分部积分
     \begin{align}\notag
         \int_a^bfg'\d x&=fg|_a^b-\int_a^bf'g\d x\\
-        \int_Vf(\div\bm A)\d v&=\oint_{\p V}f\bm A\cdot\d\bm a-\int_V\bm A\cdot\nabla f\d v.
+        \int_Vf(\div\bm F)\d V&=\oint_{\p V}f\bm F\cdot\d\bm A-\int_V\bm F\cdot\nabla f\d V.
     \end{align}
 \end{compactitem}
 
@@ -178,8 +178,8 @@
 \end{equation}
 面积微元和体积微元为
 \begin{align}
-    \d a_i&=H_jH_k\d q_j\nd q_k,\enspace (ijk)=(123);\\
-    \d v&=H_1H_2H_3\d q_1\nd q_2\nd q_3.
+    \d A_i&=H_jH_k\d q_j\nd q_k,\enspace (ijk)=(123);\\
+    \d V&=H_1H_2H_3\d q_1\nd q_2\nd q_3.
 \end{align}
 
 \paragraph{梯度}
@@ -274,7 +274,7 @@ Lam\'e系数：
 % 微元
 % \begin{align}
 %     \d\bm\ell&=\d r\uvec r+r\d\theta\uvec\theta+r\sin\theta\d\phi\uvec\phi\\
-%     \d v&=r^2\sin\theta\d r\nd\theta\nd\phi
+%     \d V&=r^2\sin\theta\d r\nd\theta\nd\phi
 % \end{align}
 矢量微分
 \begin{align}
@@ -330,7 +330,7 @@ Lam\'e系数：
     \]
     但考虑其在半径为$r$球面上的面积分：
     \[
-        \oint_{\p V}\bm F\cdot\d\bm a=\oint_{\p V}\frac1{r^2}r^2\sin\theta\d\theta\nd\phi=\int_0^{2\pi}\int_0^\pi\sin\theta\d\theta\nd\phi=4\pi.
+        \oint_{\p V}\bm F\cdot\d\bm A=\oint_{\p V}\frac1{r^2}r^2\sin\theta\d\theta\nd\phi=\int_0^{2\pi}\int_0^\pi\sin\theta\d\theta\nd\phi=4\pi.
     \]
     这与散度定理\eqref{eqn:div}矛盾！
     原因在于：$\div\bm F$在除了原点以外的任意一点均为0，但其体积分为$4\pi$。
@@ -356,22 +356,22 @@ Lam\'e系数：
 \section{向量场理论}
 给定$\div\bm F$和$\curl\bm F$，能否确定$\bm F$？
 \begin{theorem}{Helmholtz定理}{Helmholtz theorem}
-    给定
+    给定$\bm F$的散度和旋度：
     \[
         \begin{cases}
             \div\bm F=D(\bm r)\\
             \curl\bm F=\bm C(\bm r)
         \end{cases}
     \]
-    若当$r\to\infty$时，$D(\bm r)$和$\bm C(\bm r)$均比$1/r^2$收敛得更快，且$\bm F(\bm r)$收敛到0，则$\bm F$可被唯一确定为
+    若当$r\to\infty$时，$D(\bm r),\bm C(\bm r)=o(1/r^2)$收敛得更快，且$\bm F(\bm r)\to0$，则
     \begin{align}
         \bm F=-\nabla V+\curl\bm A,
     \end{align}
     此处
     \begin{align}
         \begin{cases}
-            V(\bm r)=\frac1{4\pi}\int\frac{D(\bm r')}{|\bm r-\bm r'|}\d v'\\
-            \bm A(\bm r)=\frac1{4\pi}\int\frac{\bm C(\bm r')}{|\bm r-\bm r'|}\d v'
+            V(\bm r)=\frac1{4\pi}\int\frac{D(\bm r')}{|\bm r-\bm r'|}\d V'\\
+            \bm A(\bm r)=\frac1{4\pi}\int\frac{\bm C(\bm r')}{|\bm r-\bm r'|}\d V'
         \end{cases}
     \end{align}
 \end{theorem}
@@ -394,7 +394,7 @@ Lam\'e系数：
         \item $\bm F$可以被写为矢量势(vector potential)的旋度：$\bm F=\curl\bm A$;
         \item 给定边界，面积分与表面形状无关
         \[
-            \int_S\bm F\cdot\d\bm a=\oint_{\p S}\bm A\cdot\d\bm\ell;
+            \int_S\bm F\cdot\d\bm A=\oint_{\p S}\bm A\cdot\d\bm\ell;
         \]
         \item 闭合面积分恒为0.
     \end{compactitem}

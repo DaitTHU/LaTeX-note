@@ -14,40 +14,40 @@
 \section{多极矩展开}
 \label{sec:multipole expansion}
 
-电荷的局域(localized)分布由电荷密度$\rho(\bm x')$描述，由式\eqref{eqn:Phi-rho}
+电荷的局域(localized)分布由电荷密度$\rho(\bm r')$描述，由式\eqref{eqn:Phi-rho}
 \[
-    \Phi(\bm x)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm x')}{|\bm x'-\bm x|}\d v'.
+    \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r')}{|\bm r'-\bm r|}\d V'.
 \]
-应用式\eqref{eqn:1/|x-x'|=YY}，因为我们对电荷分布之外的电势感兴趣，故$r_<=r',\,r_>=r$
+应用式\eqref{eqn:1/|r-r'|=YY}，因为我们对电荷分布之外的电势感兴趣，故$r_<=r',\,r_>=r$
 \begin{align}
     \notag
-    \Phi(\bm x)&=\frac1{\varepsilon_0}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac1{2\ell+1}\biggfkh{\int_V\rho(\bm x'){r'^\ell}Y^\ast_{\ell m}(\theta',\phi')\d v'}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}\\
+    \Phi(\bm r)&=\frac1{\varepsilon_0}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac1{2\ell+1}\biggfkh{\int_V\rho(\bm r'){r'^\ell}Y^\ast_{\ell m}(\theta',\phi')\d V'}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}\\
     \label{eqn:Phi multipole}
     &=:\frac1{\varepsilon_0}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac{q_{\ell m}}{2\ell+1}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}.
 \end{align}
 其中系数$q_{\ell m}$称为多极矩(multipole moment)
 \begin{equation}
-    q_{\ell m}:=\int_V\rho(\bm x'){r'^\ell}Y^\ast_{\ell m}(\theta',\phi')\d v'.
+    q_{\ell m}:=\int_V\rho(\bm r'){r'^\ell}Y^\ast_{\ell m}(\theta',\phi')\d V'.
 \end{equation}
-另一方面，也可应用式\eqref{eqn:1/|x-x'|}
+另一方面，也可应用式\eqref{eqn:1/|r-r'|}
 \begin{align}
     \notag
-    \Phi(\bm x)&=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm x')\sum_{\ell=0}^\infty\frac{r'^\ell}{r^{\ell+1}}P_\ell(\cos\gamma)\d v'\\
+    \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm r')\sum_{\ell=0}^\infty\frac{r'^\ell}{r^{\ell+1}}P_\ell(\cos\gamma)\d V'\\
     \label{eqn:legendre multipole}
-    &=\frac1{4\pi\varepsilon_0}\biggfkh{\frac1r\int_V\rho\d v'+\frac1{r^2}\int_V\rho r'\cos\gamma\d v'+\frac1{r^3}\int_V\rho r'^2P_2(\cos\gamma)\d v'+\cdots},\tag{$\ast$}
+    &=\frac1{4\pi\varepsilon_0}\biggfkh{\frac1r\int_V\rho\d V'+\frac1{r^2}\int_V\rho r'\cos\gamma\d V'+\frac1{r^3}\int_V\rho r'^2P_2(\cos\gamma)\d V'+\cdots},\tag{$\ast$}
 \end{align}
 前三个积分项分别对应总电荷$q$ (电单极矩，electric monopole moment)、电偶极矩$\bm p$ (dipole)、电四极矩$\mathcal Q_{\alpha\beta}$ (quadrupole)：
 \begin{align}
     \notag
-    q={}&\int_V\rho(\bm x')\d v',\\
-    \bm p:={}&\int_V\bm x'\rho(\bm x')\d v',\\
-    \mathcal Q_{\alpha\beta}:={}&\int_V(3x_\alpha'x_\beta'-r'^2\vd_{\alpha\beta})\rho(\bm x')\d v'.
+    q={}&\int_V\rho(\bm r')\d V',\\
+    \bm p:={}&\int_V\bm r'\rho(\bm r')\d V',\\
+    \mathcal Q_{\alpha\beta}:={}&\int_V(3x_\alpha'x_\beta'-r'^2\vd_{\alpha\beta})\rho(\bm r')\d V'.
 \end{align}
 则式\eqref{eqn:legendre multipole}可以写成 
 \begin{equation}
-    \Phi(\bm x)=\frac1{4\pi\varepsilon_0}\biggfkh{\frac qr+\frac{\bm p\cdot\bm r}{r^3}+\frac12\sum_{\alpha,\beta}\frac{\mathcal Q_{\alpha\beta}x_\alpha x_\beta}{r^5}+\cdots}.
+    \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\biggfkh{\frac qr+\frac{\bm p\cdot\bm r}{r^3}+\frac12\sum_{\alpha,\beta}\frac{\mathcal Q_{\alpha\beta}x_\alpha x_\beta}{r^5}+\cdots}.
 \end{equation}
-上式也可通过对$1/|\bm x-\bm x'|$在$\bm x'=0$处Taylor展开推导得到。
+上式也可通过对$1/|\bm r-\bm r'|$在$\bm r'=0$处Taylor展开推导得到。
 
 ~
 
@@ -55,9 +55,9 @@
     易得
     \begin{equation*}
         \begin{aligned}
-            q_{00}&=\frac1{\sqrt{4\pi}}\int_V\rho(\bm x')\d v'=\frac1{\sqrt{4\pi}}q;\\
-            q_{10}&=-\sqrt{\frac3{8\pi}}\int_V(x'-\i y')\rho(\bm x')\d v'=-\sqrt{\frac3{8\pi}}(p_x-\i p_y),\\
-            q_{11}&=-\sqrt{\frac3{4\pi}}\int_V z'\rho(\bm x')\d v'=-\sqrt{\frac3{4\pi}}p_z;
+            q_{00}&=\frac1{\sqrt{4\pi}}\int_V\rho(\bm r')\d V'=\frac1{\sqrt{4\pi}}q;\\
+            q_{10}&=-\sqrt{\frac3{8\pi}}\int_V(x'-\i y')\rho(\bm r')\d V'=-\sqrt{\frac3{8\pi}}(p_x-\i p_y),\\
+            q_{11}&=-\sqrt{\frac3{4\pi}}\int_V z'\rho(\bm r')\d V'=-\sqrt{\frac3{4\pi}}p_z;
         \end{aligned}
     \end{equation*}
     $q_{1-1}$可由$q_{\ell,-m}=(-)^mq_{\ell m}^\ast$推出，
@@ -90,16 +90,16 @@
         \bm E(r,\theta)&=\frac{p}{4\pi\varepsilon_0r^3}(2\cos\theta\uvec r+\sin\theta\uvec\theta).
     \end{align}
 \end{example}
-若电偶极子处于$\bm x_0$，电场为 
+若电偶极子处于$\bm r_0$，电场为 
 \begin{equation}
     \label{eqn:edipole-E without delta}
-    \bm E(\bm x)=-\nabla\Phi=\frac{3(\bm p\cdot\uvec n)\uvec n-\bm p}{4\pi\varepsilon_0|\bm x-\bm x_0|^3},\quad \uvec n:=\frac{\bm x-\bm x_0}{|\bm x-\bm x_0|}.
+    \bm E(\bm r)=-\nabla\Phi=\frac{3(\bm p\cdot\uvec n)\uvec n-\bm p}{4\pi\varepsilon_0|\bm r-\bm r_0|^3},\quad \uvec n:=\frac{\bm r-\bm r_0}{|\bm r-\bm r_0|}.
     \tag{$\star$}
 \end{equation}
-式\eqref{eqn:edipole-E without delta}并不严格，事实上在含$\bm x_0$处积分会产生额外的项，应进行修正：
+式\eqref{eqn:edipole-E without delta}并不严格，事实上在含$\bm r_0$处积分会产生额外的项，应进行修正：
 \begin{equation}
     \label{eqn:edipole-E with delta}
-    \bm E(\bm x)=\frac1{4\pi\varepsilon_0}\biggfkh{\frac{3(\bm p\cdot\uvec n)\uvec n-\bm p}{|\bm x-\bm x_0|^3}-\frac{4\pi}3\bm p\vd(\bm x-\bm x_0)}.
+    \bm E(\bm r)=\frac1{4\pi\varepsilon_0}\biggfkh{\frac{3(\bm p\cdot\uvec n)\uvec n-\bm p}{|\bm r-\bm r_0|^3}-\frac{4\pi}3\bm p\vd(\bm r-\bm r_0)}.
 \end{equation}
 
 \subsection{能量的多极矩展开}
@@ -107,11 +107,11 @@
 
 系统的静电能为
 \[
-    W=\int_V\rho(\bm x)\Phi(\bm x)\d v
+    W=\int_V\rho(\bm r)\Phi(\bm r)\d V
 \]
-对$\Phi(\bm x)$在原点处Taylor展开
+对$\Phi(\bm r)$在原点处Taylor展开
 \[
-    \Phi(\bm x)=\Phi(\bm 0)-\bm x\cdot\bm E(\bm 0)-\frac12\sum_{\alpha,\beta}x_\alpha x_\beta\pv{E_\beta}{x_\alpha}(\bm 0)+\cdots
+    \Phi(\bm r)=\Phi(\bm 0)-\bm r\cdot\bm E(\bm 0)-\frac12\sum_{\alpha,\beta}x_\alpha x_\beta\pv{E_\beta}{x_\alpha}(\bm 0)+\cdots
 \]
 得到 
 \begin{equation}
@@ -121,11 +121,11 @@
 
 两个电偶极子之间的互能
 \begin{equation}
-    W_{12}=\frac{\bm p_1\cdot\bm p_2-3(\uvec n\cdot\bm p_1)(\uvec n\cdot\bm p_2)}{4\pi\varepsilon_0|\bm x_1-\bm x_2|^3},\quad\uvec n:=\frac{\bm x_1-\bm x_2}{|\bm x_1-\bm x_2|}.
+    W_{12}=\frac{\bm p_1\cdot\bm p_2-3(\uvec n\cdot\bm p_1)(\uvec n\cdot\bm p_2)}{4\pi\varepsilon_0|\bm r_1-\bm r_2|^3},\quad\uvec n:=\frac{\bm r_1-\bm r_2}{|\bm r_1-\bm r_2|}.
 \end{equation}
 \paragraph{电偶极子的能量、力矩和力}对$\bm E$展开至一阶项，得到电偶极子在电场中受到的力为
 \begin{equation}
-    \bm F=\int_V\rho\bm E\d v\simeq(\bm p\cdot\nabla)\bm E,
+    \bm F=\int_V\rho\bm E\d V\simeq(\bm p\cdot\nabla)\bm E,
 \end{equation}
 一般地，$\bm p$不随坐标变化，上式也可写成$\nabla(\bm p\cdot\bm E)$： 
 \begin{align*}
@@ -177,12 +177,12 @@
 \end{definition}
 假设更高阶的宏观多极矩密度可忽略，则$\D V$体积内的有质介质的电势为
 \begin{align*}
-    \D\Phi(\bm x,\bm x')&=\frac1{4\pi\varepsilon_0}\biggfkh{\frac{\rho(\bm x')}{|\bm x-\bm x'|}\D V+\frac{\bm P(\bm x')\cdot(\bm x-\bm x')}{|\bm x-\bm x'|^3}\D V}\\
-    &=\frac1{4\pi\varepsilon_0}\biggfkh{\frac{\rho(\bm x')}{|\bm x-\bm x'|}+\bm P(\bm x')\cdot\nabla'\biggkh{\frac1{|\bm x-\bm x'|}}}\D V
+    \D\Phi(\bm r,\bm r')&=\frac1{4\pi\varepsilon_0}\biggfkh{\frac{\rho(\bm r')}{|\bm r-\bm r'|}\D V+\frac{\bm P(\bm r')\cdot(\bm r-\bm r')}{|\bm r-\bm r'|^3}\D V}\\
+    &=\frac1{4\pi\varepsilon_0}\biggfkh{\frac{\rho(\bm r')}{|\bm r-\bm r'|}+\bm P(\bm r')\cdot\nabla'\biggkh{\frac1{|\bm r-\bm r'|}}}\D V
 \end{align*}
 变成积分并应用分部积分得到
 \begin{equation}
-    \Phi(\bm x)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm x')-\div\bm P(\bm x')}{|\bm x-\bm x'|}\d v'.
+    \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r')-\div\bm P(\bm r')}{|\bm r-\bm r'|}\d V'.
 \end{equation}
 其中$\rho$是自由电荷(或过剩电荷)密度，
 $\rho_\text{pol}:=-\div\bm P$是极化电荷密度。%上式是由电荷分布$(\rho-\div\bm P)$激发电势的习惯表达式。
@@ -353,7 +353,7 @@ $\sigma$是宏观表面电荷密度（不包含极化电荷$\sigma_\text{pol}$�
 $\bm E_\text{near}$是给定分子附近分子的实际作用，$\bm E_p$是由极化$\bm P$描述的以平均连续介质近似处理的分子的贡献。
 对于包含很多分子的半径为$R$的球， 
 \[
-    \bm p=\frac{4\pi}3R^3\bm P,\quad \bm E_p=\frac3{4\pi R^3}\int_{r<R}\bm E\d v=-\frac{\bm P}{3\varepsilon_0}.
+    \bm p=\frac{4\pi}3R^3\bm P,\quad \bm E_p=\frac3{4\pi R^3}\int_{r<R}\bm E\d V=-\frac{\bm P}{3\varepsilon_0}.
 \]
 对于大多数材料，可有效近似$\bm E_\text{near}=\bm 0$，故$\bm E_\text{in}=\bm P/3\varepsilon_0$。
 
@@ -369,7 +369,7 @@ $\bm E_\text{near}$是给定分子附近分子的实际作用，$\bm E_p$是由�
 \paragraph{分子极化率的模型}
 由谐振子模型
 \[
-    m\omega_0^2\bm x=e\bm E\implies\bm p_\text{mol}=e\bm x=\frac{e^2\bm E}{m\omega_0^2}\implies\gamma_\text{mol}=\frac{e^2}{m\omega_0^2\varepsilon_0}.
+    m\omega_0^2\bm r=e\bm E\implies\bm p_\text{mol}=e\bm r=\frac{e^2\bm E}{m\omega_0^2}\implies\gamma_\text{mol}=\frac{e^2}{m\omega_0^2\varepsilon_0}.
 \]
 $\omega_0$为分子的固有频率。
 
@@ -386,20 +386,20 @@ $p_0$为分子固有偶极矩的大小。
 
 一般情况下，我们对电介质不作假设。可由微小功$\vd W$推出电介质中的静电能为
 \[
-    W=\iint_0^D\bm E\cdot\vd\bm D\d v.
+    W=\iint_0^D\bm E\cdot\vd\bm D\d V.
 \]
 若介质是线性的，则
 \begin{equation}
-    W=\frac12\int_V\bm E\cdot\bm D\d v=\frac12\int_V\rho(\bm x)\Phi(\bm x)\d v.
+    W=\frac12\int_V\bm E\cdot\bm D\d V=\frac12\int_V\rho(\bm r)\Phi(\bm r)\d V.
 \end{equation}
 上式仅当介质是线性时才在宏观上成立。
 \paragraph{电介质在极化过程中储存的能量}过程分电荷不变和电势不变；
 \subparagraph{电荷分布不变过程}
-若电介质放入前后源电荷分布$\rho(\bm x)$不变
+若电介质放入前后源电荷分布$\rho(\bm r)$不变
 \begin{align*}
-    \D W&=\frac12\int_V(\bm E\cdot\bm D-\bm E_0\cdot\bm D_0)\d v\\
-    &=\frac12\int_V(\bm E\cdot\bm D_0-\bm E_0\cdot\bm D)\d v+\frac12\int_V(\bm E+\bm E_0)\cdot\cancel{(\bm D-\bm D_0)}\d v\\
-    &=-\frac12(\varepsilon-\varepsilon_0)\int_V\bm E\cdot\bm E_0\d v=-\frac12\int_V\bm P\cdot\bm E_0\d v,
+    \D W&=\frac12\int_V(\bm E\cdot\bm D-\bm E_0\cdot\bm D_0)\d V\\
+    &=\frac12\int_V(\bm E\cdot\bm D_0-\bm E_0\cdot\bm D)\d V+\frac12\int_V(\bm E+\bm E_0)\cdot\cancel{(\bm D-\bm D_0)}\d V\\
+    &=-\frac12(\varepsilon-\varepsilon_0)\int_V\bm E\cdot\bm E_0\d V=-\frac12\int_V\bm P\cdot\bm E_0\d V,
 \end{align*}
 因此电介质的能量密度为
 \begin{equation}
@@ -409,23 +409,23 @@ $p_0$为分子固有偶极矩的大小。
 %F=-\biggkh{\frac{\vd W}{\vd x}}_Q,
 \subparagraph{电势不变过程}下面分析在电势分布不变情形下，电介质放入前后的能量变化(不能用$\vd W_V=-F\vd x$计算)。
 \[
-    \vd W=\int_V\Phi(\bm x)\vd\rho(\bm x)\d v
+    \vd W=\int_V\Phi(\bm r)\vd\rho(\bm r)\d V
 \]
 又对于线性介质，
 \[
-    \vd W=\frac12\int_V\bigfkh{\rho(\bm x)\vd\Phi(\bm x)+\Phi(\bm x)\vd\rho(\bm x)}\d v,
+    \vd W=\frac12\int_V\bigfkh{\rho(\bm r)\vd\Phi(\bm r)+\Phi(\bm r)\vd\rho(\bm r)}\d V,
 \]
-故$\rho(\bm x)\vd\Phi(\bm x)=\Phi(\bm x)\vd\rho(\bm x)$。
+故$\rho(\bm r)\vd\Phi(\bm r)=\Phi(\bm r)\vd\rho(\bm r)$。
 
 在电势分布不变情形下，电介质放入的过程可以分为两步：
 \begin{compactenum}
     \item 断开电极板和电源的接触，移动电介质，这一过程中电荷分布不变，
     \[
-        \vd W_1=\frac12\int_V\bigfkh{\rho(\bm x)\vd\Phi_1(\bm x)+0}\d v;
+        \vd W_1=\frac12\int_V\bigfkh{\rho(\bm r)\vd\Phi_1(\bm r)+0}\d V;
     \]
     \item 将极板与电源相连，电势恢复到初始值，$\vd\Phi_1+\vd\Phi_2=0$
     \[
-        \vd W_2=\frac12\int_V\bigfkh{\rho(\bm x)\vd\Phi_2(\bm x)+\Phi(\bm x)\vd\rho_2(\bm x)}\d v=-2\vd W_1.
+        \vd W_2=\frac12\int_V\bigfkh{\rho(\bm r)\vd\Phi_2(\bm r)+\Phi(\bm r)\vd\rho_2(\bm r)}\d V=-2\vd W_1.
     \]
 \end{compactenum}
 因此$\vd W=\vd W_1+\vd W_2=-\vd W_1$，从而
