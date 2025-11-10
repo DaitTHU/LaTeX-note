@@ -56,9 +56,27 @@
 \end{document}
 ```
 
-## 已知的可能导致编译报错的问题：
+## 已知的可能导致编译报错/警告的问题：
 
-- `thunote.cls` 的 `\catcode` 指令是编译时自动将中文句号变为全角实心句号，中文括号变为英文括号。其可能会导致编译报错问题，将其注释掉可能会解决编译报错问题。
+### 1
+
+`thunote.cls` 的 `\catcode` 指令是编译时自动将中文句号变为全角实心句号，中文括号变为英文括号。其可能会导致编译报错问题，将其注释掉可能会解决编译报错问题。
+
+### 2
+
+```
+Package xr: 
+No file figures/tikz/layouts.aux
+LABELS NOT IMPORTED.
+```
+由于 `.gitignore`，课程文件夹没有 `figures/tikz/*.aux` 文件，需要提前编译 `figures/tikz/*.tex` 以生成 `*.aux` 供内容部分的 `\externaldocument` 引用。
+
+### 3
+
+```
+Package tcolorbox: Discard zero height first box part due to break problems (possible loss of zero height content).
+```
+这是由于 `box` 跨页失败导致前一页有较大留白导致的。
 
 ## 写在最后
 

@@ -65,6 +65,7 @@
 	\subsubsection{\hspace{-1em}*\hspace{.5em}#1}
 }
 
+\RequirePackage{xr-hyper}
 \RequirePackage{hyperref}
 \hypersetup{
 	% pdftitle={\coursename},
@@ -83,6 +84,8 @@
 \newcommand{\tabref}[1]{表 \ref{#1}}
 % \let\oldpageref\pageref
 % \renewcommand{\pageref}[1]{第 \oldpageref{#1} 页}
+\RequirePackage{refcount}
+\newcommand{\pagenumref}[1]{\getpagerefnumber{#1}}
 
 \RequirePackage{float}
 \RequirePackage{graphicx}
