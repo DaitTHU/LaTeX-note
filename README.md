@@ -1,8 +1,8 @@
 # LaTeX-note
 
-用 LaTeX 编写的数理课笔记。适用于期末复习，可能不适用于预习。
+大学期间用 LaTeX 编写的数理课程笔记。
 
-笔记语言：中文。为方便阅读（母语 + 字母符号在汉字中更易区分）。
+笔记语言：中文。
 
 已收录（排名并不按照学期顺序）
 
@@ -12,19 +12,18 @@
 |线性代数|Linear Algebra|✅|
 |概率论与数理统计|Probability and Statistics|✅|
 |数学物理方法|Methods of Mathematics and Physics|✅|
-|高等数值分析|Advanced Numerical Analysis|✅|
+|数值分析|Numerical Analysis|✅|
 |经典力学|Classical Mechanics|to do|
 |量子力学|Quantum Mechanics|rewriting|
 |统计力学|Statistical Mechanics|✅|
 |电动力学|Electrodynamics|✅|
 |核辐射物理及探测学|Nuclear Radiation Physics and Detection|✅|
 
-同时提供了 `.tex` 源文件和 `.pdf` 文件。
-如果你图方便省事，可以直接使用 `.pdf` 文件；
-如果你希望添加个性化内容，可修改 `.tex` 文件并重新编译；
-如果你发现了内容错误，烦请向我反馈。
+同时提供了 `*.tex` 源文件和 *`*.pdf` 文件。
+- `*.pdf` 文件可以直接使用；
+- 如果你希望添加个性化内容，可修改 `*.tex` 文件并自行编译。
 
-## 如何处理 `.tex` 文件
+## 如何处理 `*.tex` 文件
 
 使用 XeLaTeX 编译，因为这样中英字符之间自动空格。
 
@@ -69,7 +68,7 @@ Package xr:
 No file figures/tikz/layouts.aux
 LABELS NOT IMPORTED.
 ```
-由于 `.gitignore`，课程文件夹没有 `figures/tikz/*.aux` 文件，需要提前编译 `figures/tikz/*.tex` 以生成 `*.aux` 供内容部分的 `\externaldocument` 引用。
+由于 `.gitignore`，课程文件夹没有 `figures/tikz/*.aux` 文件，需要提前编译 `figures/tikz/*.tex` 以生成 `*.aux` 供 `main.tex` 中的 `\externaldocument` 引用。
 
 ### 3
 
@@ -78,8 +77,10 @@ Package tcolorbox: Discard zero height first box part due to break problems (pos
 ```
 这是由于 `box` 跨页失败导致前一页有较大留白导致的。
 
-## 写在最后
+## 声明
 
-本项目由个人维护，自发开源分享。
-笔记中可能存在笔误甚至知识错误，实属个人能力和精力有限。
-欢迎建议，可在 issue 评论或发邮件至 dyj24@mails.tsinghua.edu.cn
+- 本项目由个人维护，自发开源分享。
+- 由于汉语作为母语 + 字母符号在文中更显眼，笔记使用中文。
+- 笔记不包含原创性内容，所有知识来自课上讲义及相关教材、资料。
+- 笔记中可能存在笔误甚至知识错误，实属个人能力和精力有限。
+- 欢迎建议，可在 issue 评论或发邮件至 dyj24@mails.tsinghua.edu.cn
