@@ -74,13 +74,13 @@ $\bm H_\parallel$是导体外表面的切向磁场，则导体内电场
 在表面外侧，除了法向的$\bm E$和切向的$\bm H$外，还有$\bm E$的一个微小的切向分量存在。
 这意味着有功率流入导体，每单位面积吸收功率的时间平均为
 \begin{equation}
-    \dv{P_\text{loss}}a=-\frac12\Re[\uvec n\cdot(\bm E\times\bm H\cj)]=\frac{\mu\c\omega\delta}4|\bm H_\parallel|^2.
+    \dv{P_\text{loss}}a=-\frac12\Re[\uvec n\cdot(\bm E\times\bm H\cj)]=\frac{\mu\c\omega\delta}4\abs{\bm H_\parallel}^2.
 \end{equation}
 可把这个结果简单地解释为导体内的Ohm损失。
 每单位体积内Ohm损失率的时间平均为
 % 由Ohm定律，导体表面附件有电流密度$\bm J=\sigma\bm E\c$，而
 \[
-    \dv{P_\text{loss}}V=\frac12\bm J\cdot\bm E\cj=\frac\sigma 2|\bm J|^2.
+    \dv{P_\text{loss}}V=\frac12\bm J\cdot\bm E\cj=\frac\sigma 2\abs{\bm J}^2.
 \]
 由于电流密度$\bm J$局限于导体表面下的薄层内，
 其等效有效面电流密度为
@@ -93,7 +93,7 @@ $\bm H_\parallel$是导体外表面的切向磁场，则导体内电场
 功率损失可以用等效面电流密度表示：
 \begin{equation}
     \label{eqn:dPloss/da}
-    \dv{P_\text{loss}}a=\frac1{2\sigma\delta}|\bm\jmath\eff|^2.
+    \dv{P_\text{loss}}a=\frac1{2\sigma\delta}\abs{\bm\jmath\eff}^2.
 \end{equation}
 可定义等效表面电阻$R_\text s=1/\sigma\delta$。
 % 这说明$1/2\sigma\delta$起着导体表面电阻的作用。
@@ -291,7 +291,7 @@ $\omega\vs k_z$的关系称为色散曲线，曲线上的点的幅角是相速�
 在内尺寸为$a,b$的矩形波导中（不失一般性取$a>b$），
 如\figref{fig:rectangle waveguide} 所示：
 \begin{center}
-    \includegraphics[page=27]{figures/tikz/layouts.pdf}
+    \includegraphics[page=\pagenumref{tikz:rectangular waveguide}]{figures/tikz/layouts.pdf}
     \captionof{figure}{矩形波导}
     \label{fig:rectangle waveguide}
 \end{center}
@@ -385,7 +385,7 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
 
 在内径为$a$的圆形波导中，
 \begin{center}
-    \includegraphics[page=28]{figures/tikz/layouts.pdf}
+    \includegraphics[page=\pagenumref{tikz:circle waveguide}]{figures/tikz/layouts.pdf}
     \captionof{figure}{圆波导}
     \label{fig:circle waveguide}
 \end{center}
@@ -490,7 +490,7 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 因此需要波导中的相速度小于等于光速，称为慢波结构。
 由于带电粒子在介质中的速度超过介质光速时，会产生Cherenkov辐射，故无法采用全部填充介质的波导。本小节考虑部分填充介质的波导。
 \begin{center}
-    \includegraphics[page=29]{figures/tikz/layouts.pdf}
+    \includegraphics[page=\pagenumref{tikz:dielectric waveguide}]{figures/tikz/layouts.pdf}
     \captionof{figure}{部分填充介质的矩形波导}
     \label{fig:rectangle waveguide part-filled}
 \end{center}
@@ -546,8 +546,8 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 \begin{equation}
     \bm S=\frac12\bm E\times\bm H\cj=\frac{\omega k}{2\gamma^4}
     \begin{cases}
-        \varepsilon\Bigkh{\uvec z|\nabla_\t\psi|^2+\i\frac{\gamma^2}k\psi\nabla_\t\psi\cj},&\text{TM}\\[1ex]
-        \mu\Bigkh{\uvec z|\nabla_\t\psi|^2-\i\frac{\gamma^2}k\psi\cj\nabla_\t\psi},&\text{TE}
+        \varepsilon\Bigkh{\uvec z\abs{\nabla_\t\psi}^2+\i\frac{\gamma^2}k\psi\nabla_\t\psi\cj},&\text{TM}\\[1ex]
+        \mu\Bigkh{\uvec z\abs{\nabla_\t\psi}^2-\i\frac{\gamma^2}k\psi\cj\nabla_\t\psi},&\text{TE}
     \end{cases}
 \end{equation}
 因为$\psi$一般是实数，\footnote{有可能这样激发一个波导，使得某给定模式或一些模式的线性组合具有复数$\psi$。这时候横向能流对时间的平均值将不为零，但因为它是一个环流，所以实际上只代表贮藏的能量，在实用上不大重要。}
@@ -632,7 +632,7 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 % \end{equation}
 
 \section{腔内的功率损失}
-对于理想导体，$|E(\omega)|$在各个$\omega_i$上是一个个$\delta$函数；而对于良导体，则会有一定的半高宽。
+对于理想导体，$\abs{E(\omega)}$在各个$\omega_i$上是一个个$\delta$函数；而对于良导体，则会有一定的半高宽。
 
 定义品质因子(quality factor)
 \begin{equation}

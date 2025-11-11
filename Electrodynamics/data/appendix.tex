@@ -223,38 +223,24 @@
 在球坐标系中的坐标为$(r,\theta,\phi)$，$r$称为径向距离(radial distance)，$\theta$称为极角(polar angle)，$\phi$称为方位角(azimuthal angle)。如下图所示。
 
 \begin{center}
-    \begin{tikzpicture}
-        \coordinate[label=left:$O$] (O) at (0, 0);
-        \coordinate[label=left:$x$] (x) at (-1.5, -1.5);
-        \coordinate[label=right:$y$] (y) at (3, 0);
-        \coordinate[label=left:$z$] (z) at (0, 3);
-        \coordinate (P) at (1.8, 2.5);
-        \coordinate (Q) at (1.8, -1);
-		\draw[->](O)--(y);
-		\draw[->](O)--(z);
-		\draw[->](O)--(x);
-		\draw(O)--(P)node[midway, above]{$r$};
-		\draw[dashed](O)--(Q)--(P);
-		\pic[draw, angle radius=3mm]{right angle=P--Q--O};
-        \pic[draw, angle radius=5mm, angle eccentricity=1.5, <-, "$\theta$"]{angle=P--O--z};
-        \pic[draw, angle radius=3mm, angle eccentricity=1.8, ->, "$\phi$"]{angle=x--O--Q};
-	\end{tikzpicture}
+    \includegraphics[page=\pagenumref{tikz:spherical coordinate}]{figures/tikz/layouts.pdf}
     \captionof{figure}{球坐标系}
+    \label{fig:spherical coordinate}
 \end{center}
-% 基变换
-% \begin{equation}
-%     \begin{bmatrix}
-%         \uvec r\\\uvec\theta\\\uvec\phi
-%     \end{bmatrix}=
-%     \begin{bmatrix}
-%         \sin\theta\cos\phi&\sin\theta\sin\phi&\cos\theta\\
-%         \cos\theta\cos\phi&\cos\theta\sin\phi&-\sin\theta\\
-%         -\sin\phi&\cos\phi&0
-%     \end{bmatrix}
-%     \begin{bmatrix}
-%         \uvec x\\\uvec y\\\uvec z
-%     \end{bmatrix}
-% \end{equation}
+基变换
+\begin{equation}
+    \begin{bmatrix}
+        \uvec r\\\uvec\theta\\\uvec\phi
+    \end{bmatrix}=
+    \begin{bmatrix}
+        \sin\theta\cos\phi&\sin\theta\sin\phi&\cos\theta\\
+        \cos\theta\cos\phi&\cos\theta\sin\phi&-\sin\theta\\
+        -\sin\phi&\cos\phi&0
+    \end{bmatrix}
+    \begin{bmatrix}
+        \uvec x\\\uvec y\\\uvec z
+    \end{bmatrix}
+\end{equation}
 坐标变换
 \begin{align}
     \begin{cases}
@@ -370,8 +356,8 @@ Lam\'e系数：
     此处
     \begin{align}
         \begin{cases}
-            V(\bm r)=\frac1{4\pi}\int\frac{D(\bm r')}{|\bm r-\bm r'|}\d V'\\
-            \bm A(\bm r)=\frac1{4\pi}\int\frac{\bm C(\bm r')}{|\bm r-\bm r'|}\d V'
+            V(\bm r)=\frac1{4\pi}\int\frac{D(\bm r')}{\abs{\bm r-\bm r'}}\d V'\\
+            \bm A(\bm r)=\frac1{4\pi}\int\frac{\bm C(\bm r')}{\abs{\bm r-\bm r'}}\d V'
         \end{cases}
     \end{align}
 \end{theorem}
@@ -406,11 +392,69 @@ Lam\'e系数：
 \chapter{特殊函数}
 
 \section{Legendre多项式}
+\label{sec:Legendre polynomial}
 
-证明递推式\eqref{eqn:Legendre recurrence 1}
+广义(generalized) Legendre方程：
+\begin{equation}
+    \dd x\biggfkh{(1-x^2)\dv Px}+\biggfkh{\ell(\ell+1)-\frac{m^2}{1-x^2}}P=0.
+\end{equation}
+考虑$m=0$的情形，得到Legendre方程：
+\begin{equation}
+    \dd x\biggfkh{(1-x)^2\dv Px}+\ell(\ell+1)P=0.
+\end{equation}
+采用级数解，设
 \[
-    P'_{\ell+1}-P'_{\ell-1}-(2\ell+1)P_\ell=0,
+    P(x)=x^\alpha\sum_{j=0}^\infty a_jx^j.
 \]
+$\alpha$是待定系数，从而 
+\[
+    \sum_{j=0}^\infty(\alpha+j)(\alpha+j-1)a_j x^{\alpha+j-2}-\sum_{j=0}^\infty\bigfkh{(\alpha+j)(\alpha+j+1)-\ell(\ell+1)}a_jx_{\alpha+j}=0.
+\]
+解得
+\[
+    \begin{cases}
+        a_0\alpha(\alpha-1)=0,&j=0\\
+        a_1\alpha(\alpha+1)=0,&j=1\\
+        a_{j+2}=\frac{(\alpha+j)(\alpha+j+1)-\ell(\ell+1)}{(\alpha+j+1)(\alpha+j+2)}a_j,&j\geqslant 0
+    \end{cases}
+\]
+对初始条件分情况讨论：
+\begin{compactitem}
+	\item $a_0=a_1=0$，解$P\equiv 0$是平凡的；
+	\item $a_0=0,\enspace a_1\neq 0$，展开式事实上与$a_0\neq 0,\enspace a_1=0$等价：
+	\[
+        P(x)=x^\alpha(a_1x+a_3x^3+\cdots)=x^{\alpha+1}(a_1+a_3x^2+\cdots);
+    \]
+	\item $a_0\neq 0,\enspace a_1\neq 0$，由递推关系知，级数会在$x=\pm 1$发散。
+\end{compactitem}
+综上，我们最终选取$a_0\neq 0,\enspace a_1=0$，从而$\alpha(\alpha-1)=0$，
+\[
+    P(x)=\begin{cases}
+        a_0+a_2x^2+a_4x^4+\cdots,&\alpha=0\\
+        a_0x+a_2x^3+a_4x^5+\cdots,&\alpha=1
+    \end{cases}
+\]
+这个级数在$\abs{x}<1$时当然收敛，但在$x=\pm 1$时会发散，除非级数在某一项截断(即此项之后的系数均为0)。考察递推关系：
+\[
+    a_{j+2}=\begin{cases}
+        \frac{j(j+1)-\ell(\ell+1)}{(j+1)(j+2)}a_j,&\alpha=0\\[2ex]
+        \frac{(j+1)(j+2)-\ell(\ell+1)}{(j+2)(j+3)}a_j,&\alpha=1
+    \end{cases}
+\]
+因此，收敛性要求$\ell=0,1,2,\ldots$
+\begin{theorem}{Legendre多项式的递推关系}{recurrence relation among Legendre polynomial}
+    可直接从Rodrigues公式和Legendre方程得到：
+    \begin{subequations}
+        \begin{align}
+            \label{eqn:Legendre recurrence 1}
+            (2\ell+1)P_\ell&=P'_{\ell+1}-P'_{\ell-1},\\
+            (\ell+1)P_{\ell+1}&=(2\ell+1)xP_\ell+\ell P_{\ell-1},\\
+            P'_{\ell+1}&=xP'_\ell+\ell(\ell+1)P_\ell,\\
+            (x^2-1)P'_\ell&=\ell xP_\ell-\ell P_{\ell-1}.
+        \end{align}
+    \end{subequations}
+\end{theorem}
+下面证明递推式\eqref{eqn:Legendre recurrence 1}。
 \begin{proof}
     由Rodrigues公式
     \begin{equation}
@@ -427,3 +471,87 @@ Lam\'e系数：
         &=\frac1{2^\ell\ell^2}\dd[\ell]x\bigfkh{(2\ell+1)(x^2-1)^\ell}=(2\ell+1)P_\ell.\qedhere
     \end{align*}
 \end{proof}
+
+
+\section{Bessel函数}
+\label{sec:Bessel function}
+
+Bessel方程
+\begin{equation}
+    \dv[2]Rx+\frac1x\dv Rx+\biggkh{1-\frac{\nu^2}{x^2}}R=0.
+\end{equation}
+采用级数解，设 
+\[
+    R(x)=x^\alpha\sum_{j=0}^\infty a_jx^j.
+\]
+解得
+\[
+    \begin{cases}
+        \alpha^2=\nu^2,&j=0\\
+        a_1\bigfkh{(\alpha+1)^2-\nu^2}=0,&j=1\\
+        a_{j-2}=\bigfkh{\nu^2-(j+\alpha)^2}a_j,&j\geqslant 2
+    \end{cases}
+\]
+故$\alpha=\pm\nu,\enspace a_1=0$，从而
+\[
+    a_{2j}=-\frac1{4j(j+\alpha)}a_{2j-2},\quad j=1,2,\ldots
+\]
+选取\footnote{$\nu$可以不是整数，此时阶乘$\nu!$推广为$\Gamma(\nu+1)$。}
+\[
+    \alpha=\nu,\enspace a_0=\frac1{2^\nu\nu!}.
+\]
+解得(第一类) Bessel函数
+\begin{equation}
+    J_\nu(x)=\sum_{j=0}^\infty\frac{(-)^j}{j!(j+\nu)!}\Bigkh{\frac x2}^{2j+\nu},
+\end{equation}
+当$\nu$不为整数时，$J_{-\nu}$和$J_\nu$是线性无关的，可作为Bessel方程的解系；但当$\nu$为整数时，二者线性相关：
+\[
+    J_{-\nu}(x)=(-)^\nu J_\nu(x),
+\]
+为了得到线性无关的另一解，定义Neumann函数(第二类Bessel函数)
+\begin{equation}
+    Y_\nu(x):=\frac{J_\nu(x)\cos(\nu\pi)-J_{-\nu}(x)}{\sin(\nu\pi)}.
+\end{equation}
+当$\nu$为整数时，$Y_\nu(x)$的值定义为上式$\nu$趋近于该整数的极限（即可去间断点）。可以证明，$J_\nu,Y_\nu$线性无关。
+
+Bessel方程的另一对重要线性无关解是Hankel函数(第三类Bessel函数)
+\begin{equation}
+    H_\nu^\pm(x)=J_\nu(x)\pm\i Y_\nu(x).
+\end{equation}
+三类Bessel函数均满足形如下面的递推公式
+\begin{align*}
+    \Omega_{\nu-1}+\Omega_{\nu+1}&=\frac{2\nu}x\Omega_\nu,\\
+    \Omega_{\nu-1}-\Omega_{\nu+1}&=2\Omega'_\nu.
+\end{align*}
+
+
+\begin{example}{Bessel函数的渐进性}{limit of Bessel function}
+    $x\to 0$时， 
+    \begin{align*}
+        J_\nu(x)&\simeq\frac1{\nu!}\Bigkh{\frac x2}^\nu,\quad\\
+        Y_\nu(x)&\simeq
+        \begin{cases}
+            \frac2\pi\Bigfkh{\ln\Bigkh{\frac x2}+\gamma},&\nu=0\\[1ex]
+            -\frac{(\nu-1)!}\pi\Bigkh{\frac x2}^{-\nu}+\frac{\cot(\nu\pi)}{\nu!}\Bigkh{\frac x2}^\nu,&\nu\neq 0
+        \end{cases}
+    \end{align*}
+    其中$\gamma$是Euler-Mascheroni常数
+    \[
+        \gamma:=\lim_{n\to\infty}\biggkh{-\ln n+\sum_{k=1}^n\frac1k}=\num{0.5772156649}\ldots.
+    \]
+    \tcblower
+    $x\to\infty$时， 
+    \begin{align*}
+        J_\nu(x)&\simeq\sqrt{\frac2{\pi x}}\cos\biggkh{x-\frac{\nu\pi}2-\frac\pi{4}},\\
+        Y_\nu(x)&\simeq\sqrt{\frac2{\pi x}}\sin\biggkh{x-\frac{\nu\pi}2-\frac\pi{4}}.
+    \end{align*}
+\end{example}
+若将$k$替换为$\i k$，便会得到修正(modified) Bessel方程
+\[
+    \dv[2]Rx+\frac1x\dv Rx-\biggkh{1+\frac{\nu^2}{x^2}}R=0.
+\]
+修正Bessel函数只是纯虚数参数的Bessel函数
+\[
+    I_\nu(x)=\i^{-\nu}J_\nu(\i x),\quad K_\nu(x)=\i^{\nu+1}\frac\pi 2H_\nu^+(\i x).
+\]
+

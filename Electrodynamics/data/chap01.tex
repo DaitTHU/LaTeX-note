@@ -20,7 +20,7 @@
 此外，从实验上还证明了，某一小带电体周围的若干个其他小带电体产生的、作用在该小带电体上的总力，是各两体Coulomb力的矢量和。
 
 \begin{theorem}{Coulomb定律}{Coulomb's law}
-    真空中两个静止点电荷$q_1,q_2$分别位于$\bm r_1,\bm r_2$，$q_1$相对$q_2$的位置为$\bm r:=\bm r_1-\bm r_2$，则$q_1$受到$q_2$的静电力为：
+    真空中的静止点电荷$q_1$相对$q_2$的位置为$\bm r$，则$q_1$受到$q_2$的静电力为：
     \begin{equation}
         \label{eqn:Coulomb law}
         \bm F=k_\elc\frac{q_1q_2}{r^2}\uvec r.
@@ -49,10 +49,10 @@
 \end{remark}
 
 \begin{corollary}
-    由Coulomb定律，位于$\bm r_1$的点电荷$q_1$在$\bm r$处激发的电场$\bm E_1$为
+    由Coulomb定律，原点处的点电荷$q$在$\bm r$处激发的电场$\bm E$为
     \begin{equation}
         \label{eqn:E of q}
-        \bm E_1=\frac{q_1}{4\pi\varepsilon_0}\frac{\bm r-\bm r_1}{|\bm r-\bm r_1|^3};
+        \bm E=\frac{q}{4\pi\varepsilon_0}\frac{\hatbm r}{r^2};
     \end{equation}
 \end{corollary}
 
@@ -61,12 +61,12 @@
     实验得知，一系列离散(discrete)点电荷$q_1,\ldots,q_n$在空间中同一点$\bm r$处激发的电场可以线性叠加(linear superposition)
     \begin{equation}
         \label{eqn:E(r) sum}
-        \bm E=\sum_{i=1}^n\bm E_i=\frac1{4\pi\varepsilon_0}\sum_{i=1}^nq_i\frac{\bm r-\bm r_i}{|\bm r-\bm r_i|^3},
+        \bm E(\bm r)=\sum_{i=1}^n\bm E_i(\bm r)=\frac1{4\pi\varepsilon_0}\sum_{i=1}^nq_i\frac{\bm r-\bm r_i}{\abs{\bm r-\bm r_i}^3},
     \end{equation}
     如果电荷是连续(continuous)分布的，可以用电荷密度$\rho(\bm r)$描述，则求和变成积分：
     \begin{equation}
         \label{eqn:E(r)}
-        \bm E(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm r')\frac{\bm r-\bm r'}{|\bm r-\bm r'|^3}\d V'.
+        \bm E(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm r')\frac{\bm r-\bm r'}{\abs{\bm r-\bm r'}^3}\d V'.
     \end{equation}
     式中$\d V'=\d x'\nd y'\nd z'$是在$\bm r'$处的一个三维体积元。
 \end{theorem}
@@ -79,7 +79,7 @@
 \end{corollary}
 
 \begin{remark}
-    若已知$\rho(\bm r)$，我们可以根据积分\eqref{eqn:E(r)}求解静电场分布，但是这并不总是最适合的方法，下面我们介绍Gauss定律。
+    若已知$\rho(\bm r)$，我们可以根据积分\eqref{eqn:E(r)}求解静电场分布，但是这并不总是最方便的方法，下面我们介绍Gauss定律。
 \end{remark}
 
 \begin{theorem}{Gauss定律}{Gauss's law}
@@ -95,12 +95,18 @@
 \end{theorem}
 
 \begin{proof}
+    如\figref{fig:solid angle} 所示，
     对于一个点电荷$q$，其场强在一个面元$\d A$上的通量
     \[
-        \bm E\cdot\d\bm A=\frac q{4\pi\varepsilon_0}\frac{\cos\theta}{r^2}\d A=\frac q{4\pi\varepsilon_0}\d\Omega,
+        \bm E\cdot\d\bm A=\frac{q}{4\pi\varepsilon_0}\frac{\uvec r}{r^2}\cdot\uvec n\d A=\frac q{4\pi\varepsilon_0}\frac{\cos\theta}{r^2}\d A=\frac q{4\pi\varepsilon_0}\d\Omega,
     \]
-    其中$\d\bm A=\uvec n\d A$，$\uvec n$是曲面上该点向外的单位法向矢量，$\d A$是面积元；$r$是该点电荷到曲面上一点的距离，$\theta$是$\bm E$与$\uvec n$的夹角，$\d\Omega$是$\d A$对点电荷所张的立体角(solid angle)元。
-    
+    其中$\d\bm A=\uvec n\d A$，$\uvec n$是曲面上的点$\bm r$向外的单位法向矢量；$\theta$是$\bm r$与$\uvec n$的夹角，$\d\Omega$是$\d A$对点电荷所张的立体角(solid angle)元，其大小等于$\d A$在单位球面上中心投影的面积。
+    \begin{center}
+        \includegraphics[page=\pagenumref{tikz:Gauss law}]{figures/tikz/layouts.pdf}
+        \captionof{figure}{立体角元}
+        \label{fig:solid angle}
+    \end{center}
+    当$q$在$V$内时，$\d\Omega$对于全空间的积分为$4\pi$；而$q$在$V$外时，$\d\Omega$会相互抵消，净积分为0。
     因此点电荷场强在一个封闭曲面$\p V$上的通量为
     \[
         \oint_{\p V}\bm E\cdot\d\bm A=\begin{cases}
@@ -119,6 +125,9 @@
         \item 不同电荷效应可以线性叠加。
     \end{itemize}
     因此，对于Newton引力场来说，Gauss定律也成立。
+    \[
+        \oint_{\p V}\bm g\cdot\d\bm A=-4\pi GM.
+    \]
 \end{corollary}
 
 \begin{remark}
@@ -134,7 +143,7 @@
     \]
     $\uvec n$为指向远离平面的单位法向量。
     \begin{center}
-        \includegraphics[page=1]{figures/tikz/layouts.pdf}
+        \includegraphics[page=\pagenumref{tikz:E of plane}]{figures/tikz/layouts.pdf}
         \captionof{figure}{无限大平板的静电场}
         \label{fig:infinite plate}
     \end{center}
@@ -145,14 +154,14 @@
         E\cdot 2\pi\rho L=\frac{\lambda L}{\varepsilon_0}\implies\bm E=\frac{\lambda}{2\pi\varepsilon_0\rho}\uvec\rho.
     \]
     \begin{center}
-        \includegraphics[page=2]{figures/tikz/layouts.pdf}
+        \includegraphics[page=\pagenumref{tikz:E of line}]{figures/tikz/layouts.pdf}
         \captionof{figure}{无限长直线的静电场}
         \label{fig:infinite line}
     \end{center}
     \tcblower
     可以证明，均匀带电半圆在圆心处的电场与距离为半径的无限长直线的电场相同，因为可以构造二者微元的一一映射，如\figref{fig:semicircle <=> line} 所示。
     \begin{center}
-        \includegraphics[page=3]{figures/tikz/layouts.pdf}
+        \includegraphics[page=\pagenumref{tikz:E of half circle}]{figures/tikz/layouts.pdf}
         \captionof{figure}{半圆与直线微元的一一映射}
         \label{fig:semicircle <=> line}
     \end{center}
@@ -178,11 +187,11 @@
 
 由恒等式\footnote{在同时存在多个变量时，需要用下标指定$\nabla$作用的变量。约定：$\nabla$不带下标时，默认作用在$\bm r$上；特别地，当作用在$\bm r'$上时，$\nabla_{\bm r'}$可简记为$\nabla'$。}
 \[
-    \nabla\biggkh{\frac1{|\bm r-\bm r'|}}=-\frac{\bm r-\bm r'}{|\bm r-\bm r'|^3}.
+    \nabla\biggkh{\frac1{\abs{\bm r-\bm r'}}}=-\frac{\bm r-\bm r'}{\abs{\bm r-\bm r'}^3}.
 \]
 可将电场\eqref{eqn:E(r)}写成梯度的形式：
 \[
-    \bm E(\bm r)=-\frac1{4\pi\varepsilon_0}\nabla\biggkh{\int_V\frac{\rho(\bm r')}{|\bm r'-\bm r|}\d V'}
+    \bm E(\bm r)=-\frac1{4\pi\varepsilon_0}\nabla\biggkh{\int_V\frac{\rho(\bm r')}{\abs{\bm r'-\bm r}}\d V'}
 \]
 \begin{definition}{标量势}{scalar potential}
     定义标量势(或电势、电位，potential)满足
@@ -193,7 +202,7 @@
     显然满足上式的$\Phi$并不唯一，但它们之间仅相差一个常量，因此在讨论电位时我们需要提前选定某一参考点(通常是无穷远处)电位为0。$\Phi$的最简单的形式是：
     \begin{equation}
         \label{eqn:Phi-rho}
-        \Phi(\bm r):=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r')}{|\bm r'-\bm r|}\d V'.
+        \Phi(\bm r):=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r')}{\abs{\bm r'-\bm r}}\d V'.
     \end{equation}
 \end{definition}
 
@@ -207,21 +216,30 @@
 
 \paragraph{静电场的旋度}
 
-由\eqref{eqn:curlgrad}梯度的旋度为0，可得除Gauss定律\eqref{eqn:Gauss law}外的另一个微分方程：
+由\eqref{eqn:curlgrad}梯度的旋度为$\bm0$，可得除Gauss定律\eqref{eqn:Gauss law}外的另一个微分方程：
 \begin{theorem}{静电场无旋}{curlless E}
     \begin{equation}
         \label{eqn:curlE}
         \curl\bm E=\bm 0.
     \end{equation}
 \end{theorem}
-这也可从任意闭合路径的电场线积分为0得到。
+也可从任意闭合路径的电场线积分为0得到。
+\[
+    \int_S\curl\bm E\d A=\oint_{\p S}\bm E\cdot\d\bm\ell\equiv 0.
+\]
 
-\paragraph{导体}
-导体(conductor)是易于传导电荷的物质，其内部存在大量%可以自由移动的
-自由电荷(free charge)。因此稳定时，导体内部不会存在静电场或静电电荷（因为自由电荷会在静电场下快速移动到导体表面达到平衡态），并且导体表面和内部都是等势的。
+\begin{definition}
+    {导体}{conductor}
+    导体(conductor)是易于传导电荷的物质，其内部存在大量%可以自由移动的
+    自由电荷(free charge)。
+\end{definition}
+
+\begin{corollary}
+    稳定时，导体内部不会存在静电场或静电电荷（因为自由电荷在电场下会快速移动到导体表面达到平衡态），并且导体表面和内部都是等势的。
+\end{corollary}
+
 \begin{example}{带电导体球的电势}{potential of conducting sphere}
-
-    半径为$R$的均匀导体球携带电荷$q$，%易得这些电荷均匀地分布在导体球表面，
+    半径为$R$的均匀导体球携带电荷$q$，易得这些电荷均匀地分布在导体球表面。
     由Gauss定律，电场分布
     \[
         \bm E(r)=
@@ -230,16 +248,17 @@
             \frac1{4\pi\varepsilon_0}\frac q{r^2}\uvec r,&r>R
         \end{cases}
     \]
+
     参考点设置为无穷远处，则电势
     \[
         \Phi(r)=-\int_{+\infty}^r\bm E\cdot\d\bm r=
         \begin{cases}
             \frac1{4\pi\varepsilon_0}\frac qR,&r<R\\[1ex]
             \frac1{4\pi\varepsilon_0}\frac qr,&r>R
-        \end{cases}.
+        \end{cases}
     \]
     \begin{center}
-        \includegraphics[page=4]{figures/tikz/layouts.pdf}
+        \includegraphics[page=\pagenumref{tikz:Phi of sphere conductor}]{figures/tikz/layouts.pdf}
         \captionof{figure}{带电导体球的电势}
         \label{fig:conducting sphere}
     \end{center}
@@ -256,38 +275,47 @@
 \begin{equation}
     (\bm E_2-\bm E_1)\times\uvec n=\bm 0.
 \end{equation}
-
+\begin{center}
+    \includegraphics[page=\pagenumref{tikz:E between surfaces}]{figures/tikz/layouts.pdf}
+    \captionof{figure}{表面电荷分布}
+    \label{fig:surface charge}
+\end{center}
 式\eqref{eqn:En2-En1}也可以写成电位在表面上的分布：由$\bm E\cdot\uvec n=-\nabla\Phi\cdot\uvec n=-\p\Phi/\p n$，
 \begin{equation}
     -\pv{\Phi_2}n+\pv{\Phi_1}n=\frac\sigma{\varepsilon_0}.
 \end{equation}
 可以证明，在体电荷和面电荷分布上，电位分布是连续的。但是对于点电荷、线电荷或电偶层(dipole layers)，电位分布是不连续的！
 \begin{example}{电偶层}{dipole layers}
-    两个面电荷密度为$\sigma$、间距为$d$的电偶层的电位
+    两个面电荷密度为$\sigma$、间距为$d$的电偶层，
+    \begin{center}
+        \includegraphics[page=\pagenumref{tikz:dipole layers}]{figures/tikz/layouts.pdf}
+        \captionof{figure}{电偶层}
+        \label{fig:dipole layers}
+    \end{center}
+    当$d\to0$时，电位
+    \begin{align*}
+        \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\int_S\frac{\sigma(\bm r')}{\abs{\bm r-\bm r'}}\d A'-\frac1{4\pi\varepsilon_0}\int_{S'}\frac{\sigma(\bm r')}{\abs{\bm r-\bm r'+d(\bm r')\uvec n}}\d A'\\
+        &\simeq\frac1{4\pi\varepsilon_0}\int_S\sigma(\bm r')d(\bm r')\uvec n\cdot\nabla'\biggkh{\frac1{\abs{\bm r-\bm r'}}}\d A'\\
+        &=-\frac1{4\pi\varepsilon_0}\int_S\sigma(\bm r')d(\bm r')\d\Omega,
+    \end{align*}
+    上式用到了三维Taylor展开(注意上式是对$\bm r'$求导)，
     \[
-        \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_S\frac{\sigma(\bm r')}{|\bm r-\bm r'|}\d A'-\frac1{4\pi\varepsilon_0}\int_{S'}\frac{\sigma(\bm r')}{|\bm r-\bm r'+d\uvec n|}\d A',
-    \]
-    由三维Taylor展开，
-    \[
-        \frac1{|\bm r+\bm a|}=\frac1r+\bm a\cdot\nabla\biggkh{\frac1r}+\cdots,\quad a\ll r.
-    \]
-    可得当$d\to0$时(注意此处是对$\bm r'$求导)，
-    \[
-        \Phi(\bm r)\simeq\frac1{4\pi\varepsilon_0}\int_S\sigma(\bm r')d\uvec n\cdot\nabla'\biggkh{\frac1{|\bm r-\bm r'|}}\d A',
-    \]
-    其中
-    \[
-        \uvec n\cdot\nabla'\biggkh{\frac1{|\bm r-\bm r'|}}\d A'=-\frac{\cos\theta}{|\bm r-\bm r'|^2}\d A'=-\d\Omega.
+        \frac1{\abs{\bm r+\bm a}}=\frac1r+\bm a\cdot\nabla\biggkh{\frac1r}+\cdots,\quad a\ll r.
     \]
     定义层矩(surface-dipole-moment density) 
-    \[
-        D(\bm r):=\lim_{d\to 0}\sigma(\bm r)d
-    \]
-    则
     \begin{equation}
-        \Phi(\bm r)=-\frac1{4\pi\varepsilon_0}\int_SD(\bm r')\d\Omega.
+        D(\bm r):=d(\bm r)\sigma(\bm r),
     \end{equation}
-    电位在电偶层两边会发生跳变
+    可得
+    \begin{equation}
+        \label{eqn:Phi of dipole layer}
+        \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_SD(\bm r')\d\Omega.
+    \end{equation}
+    % 其中
+    % \[
+    %     \uvec n\cdot\nabla'\biggkh{\frac1{\abs{\bm r-\bm r'}}}\d A'=-\frac{\cos\theta}{\abs{\bm r-\bm r'}^2}\d A'=-\d\Omega.
+    % \]
+    因此电位在电偶层两边会发生跳变
     \begin{equation}
         \Phi_2-\Phi_1=\frac D{\varepsilon_0}.
     \end{equation}
@@ -297,30 +325,31 @@
 
 取无穷远点为参考点，一系列点电荷$q_1,\ldots,q_n$所带的静电势能(electrostatic potential energy)可通过归纳法得出：
 \begin{equation}
-    W=\frac1{4\pi\varepsilon_0}\sum_{i=1}^n\sum_{j=1}^{i-1}\frac{q_iq_j}{|\bm r_i-\bm r_j|}=\frac1{8\pi\varepsilon_0}\sum_{i\neq j}\frac{q_iq_j}{|\bm r_i-\bm r_j|}.
+    W=\frac1{4\pi\varepsilon_0}\sum_{i=1}^n\sum_{j=1}^{i-1}\frac{q_iq_j}{\abs{\bm r_i-\bm r_j}}=\frac1{8\pi\varepsilon_0}\sum_{i\neq j}\frac{q_iq_j}{\abs{\bm r_i-\bm r_j}}.
 \end{equation}
 对于连续分布的电荷：
 \begin{equation*}
     \label{eqn:W-qq}
-    W=\frac1{8\pi\varepsilon_0}\iint_V\frac{\rho(\bm r)\rho(\bm r')}{|\bm r-\bm r'|}\d V\nd V'.
+    W=\frac1{8\pi\varepsilon_0}\iint_V\frac{\rho(\bm r)\rho(\bm r')}{\abs{\bm r-\bm r'}}\d V\nd V'.
 \end{equation*}
 注意上式没有要求$\bm r\neq\bm r'$，可代入式\eqref{eqn:Phi-rho}，
 \begin{equation}
+    \label{eqn:W-rhoPhi}
     W=\frac12\int_V\rho(\bm r)\Phi(\bm r)\d V.
 \end{equation}
 可对上式进行变形，由式\eqref{eqn:divE}和\eqref{eqn:gradPhi}，$\rho=\varepsilon_0\div\bm E=-\varepsilon_0\lapla\Phi$，
 \begin{equation*}
-    W=-\frac{\varepsilon_0}2\int_V\Phi\lapla\Phi\d V=-\frac{\varepsilon_0}2\biggfkh{\oint_{\p V}\Phi\nabla\Phi\cdot\d\bm A-\int_V|\nabla\Phi|^2\d V}
+    W=-\frac{\varepsilon_0}2\int_V\Phi\lapla\Phi\d V=-\frac{\varepsilon_0}2\biggfkh{\oint_{\p V}\Phi\nabla\Phi\cdot\d\bm A-\int_V\abs{\nabla\Phi}^2\d V}
 \end{equation*}
 由于$V$是整个空间，故边界(无穷远处)的$\Phi=0$，
 因此我们用场的形式表示静电势能
 \begin{equation}
     \label{eqn:W-E}
-    W=\frac{\varepsilon_0}2\int_V|\bm E|^2\d V
+    W=\frac{\varepsilon_0}2\int_V\abs{\bm E}^2\d V
 \end{equation}
 并可定义能量密度(energy density)
 \begin{equation}
-    w=\frac{\varepsilon_0}2|\bm E|^2.
+    w=\frac{\varepsilon_0}2\abs{\bm E}^2.
 \end{equation}
 
 % 现在我们来审视式\eqref{eqn:W-qq}和式\eqref{eqn:W-E}，
@@ -356,11 +385,22 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 
 \begin{example}
     {平板电容器}{parallel plate capacitor}
-    平板电容器的电荷$Q=S\sigma$，由\exmref{exm:E of infinite plate} 可得电压$V=Ed=\sigma d/\varepsilon_0$，故电容为
+    平板电容器的极板面积为$A$，间距为$d$。则电荷$Q=\sigma A$，由\exmref{exm:E of infinite plate} 可得电压$V=Ed=\sigma d/\varepsilon_0$，故电容为
     \begin{equation}
-        C=\varepsilon_0\frac{S}{d},
+        C=\varepsilon_0\frac Ad.
     \end{equation}
-    其中$S$为电容器的极板面积，$d$为极板间距。
+\end{example}
+
+\begin{example}
+    {球形电容器}{spherical capacitor}
+    内外半径分别为$r,R$的球形电容器，内球带电$Q$，电压
+    \[
+        V=\frac Q{4\pi\varepsilon_0}\biggkh{\frac1r-\frac1R},
+    \]
+    故电容为
+    \begin{equation}
+        C=4\pi\varepsilon_0\frac{Rr}{R-r}.
+    \end{equation}
 \end{example}
 
 \begin{example}
@@ -418,27 +458,29 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     便得到了Green第一公式；将$\phi,\psi$轮换后两式相减，便得到Green第二公式。
 \end{proof}
 
-利用Green第二公式\eqref{eqn:Green II}，我们令$\phi:=\Phi(\bm r'),\enspace\psi:=|\bm r-\bm r'|^{-1}$，则
+\paragraph{考虑边界条件的电势}
+
+利用Green第二公式\eqref{eqn:Green II}，我们令$\phi:=\Phi(\bm r'),\enspace\psi:=\abs{\bm r-\bm r'}^{-1}$，则
 \[
     \nabla'^2\phi=-\frac{\rho}{\varepsilon_0},\quad\nabla'^2\psi=-4\pi\vd(\bm r-\bm r'),
 \]
 我们选定$\bm r\in V$使得$\delta$函数的积分项得以保留，代入并移项得到
 \begin{equation}
     \label{eqn:Phi-rho with boundary}
-        \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r')}{|\bm r-\bm r'|}\d V'+\frac1{4\pi}\oint_{\p V}\biggfkh{\frac1{|\bm r-\bm r'|}\pv\Phi{n'}-\Phi(\bm r')\pp{n'}\biggkh{\frac1{|\bm r-\bm r'|}}}\d A',
+        \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r')}{\abs{\bm r-\bm r'}}\d V'+\frac1{4\pi}\oint_{\p V}\biggfkh{\frac1{\abs{\bm r-\bm r'}}\pv\Phi{n'}-\Phi(\bm r')\pp{n'}\biggkh{\frac1{\abs{\bm r-\bm r'}}}}\d A',
 \end{equation}
-与式\eqref{eqn:Phi-rho}对比，上式多了两项边界$\p V$上的积分，分别等价于面电荷的电势($\p\Phi/\p n'$不连续)
+与式\eqref{eqn:Phi-rho}对比，上式多了两项边界$\p V$上的积分，分别等价于面电荷的电势($\p\Phi/\p n$不连续)
 \begin{subequations}
     \begin{align}
-        \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\oint_{\p V}\frac{\sigma(\bm r')}{|\bm r-\bm r'|}\d A'\\
-        \sigma(\bm r')&=\varepsilon_0\pv\Phi{n'}.
+        \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\oint_{\p V}\frac{\sigma(\bm r')}{\abs{\bm r-\bm r'}}\d A'\\
+        \sigma(\bm r)&=\varepsilon_0\pv\Phi{n}.
     \end{align}
 \end{subequations}
 和电偶层的电势($\Phi$不连续)
 \begin{subequations}
     \begin{align}
-        \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\oint_{\p V}D(\bm r')\pp{n'}\biggkh{\frac1{|\bm r-\bm r'|}}\d A'\\
-        D(\bm r')&=-\varepsilon_0\Phi(\bm r').
+        \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\oint_{\p V}D(\bm r')\pp{n'}\biggkh{\frac1{\abs{\bm r-\bm r'}}}\d A'\\
+        D(\bm r)&=-\varepsilon_0\Phi(\bm r).
     \end{align}
 \end{subequations}
 因此，求解$V$内的电势$\Phi$分布问题，除了需要$V$内电荷密度$\rho$的分布，还需知道表面$\p V$上的电势条件($\Phi$或$\p\Phi/\p n$)，这称为边界条件(boundary condition)。
@@ -474,7 +516,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \]
 即
 \[
-    \int_V|\nabla U|^2\d V=0\implies|\nabla U|\equiv 0\implies U=\const.
+    \int_V\abs{\nabla U}^2\d V=0\implies\abs{\nabla U}\equiv 0\implies U=\const.
 \]
 这说明$\Phi_1$和$\Phi_2$仅相差一个常数。对电位来说，这仅是参考点的差别。%唯一性定理得证。
 \end{proof}
@@ -495,46 +537,57 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm r')G(\bm r,\bm r')\d V'+\frac1{4\pi}\oint_{\p V}\biggfkh{G(\bm r,\bm r')\pv\Phi{n'}-\Phi(\bm r')\pv G{n'}}\d A'.
 \end{equation*}
 
-\paragraph{对于Dirichlet边界条件}我们可设法找到一个$G$满足
-\begin{equation}
-    \label{eqn:Dirichlet Green condition}
-    G(\bm r,\bm r')|_{\p V}\equiv 0,\tag{$\ast$}
-\end{equation}
-上式变为：
-\begin{equation}
-    \label{eqn:Dirichlet Green}
-    \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm r')G(\bm r,\bm r')\d V'-\frac1{4\pi}\oint_{\p V}\Phi(\bm r')\pv G{n'}\d A';
-\end{equation}
+\begin{theorem}
+    {Dirichlet边界条件的Green函数}{Green function for Dirichlet boundary condition}
+    我们可设法找到一个$G$满足
+    \begin{equation}
+        \label{eqn:Dirichlet Green condition}
+        G(\bm r,\bm r')|_{\p V}\equiv 0,\tag{$\ast$}
+    \end{equation}
+    上式变为：
+    \begin{equation}
+        \label{eqn:Dirichlet Green}
+        \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm r')G(\bm r,\bm r')\d V'-\frac1{4\pi}\oint_{\p V}\Phi(\bm r')\pv G{n'}\d A';
+    \end{equation}
+\end{theorem}
 
-\paragraph{对于Neumann边界条件}由
-\[
-    \oint_{\p V}\pv G{n'}\d A'=\int_V\nabla'^2G(\bm r,\bm r')\d V=-4\pi,
-\]
-我们也可以设法找到一个$G$满足：
-\begin{equation}
-    \label{eqn:Neumann Green condition}
-    \edg{\pv G{n'}}_{\p V}\equiv-\frac{4\pi}S,\tag{$\ast\ast$}
-\end{equation}
-则
-\begin{equation}
-    \label{eqn:Neumann Green}
-    \Phi(\bm r)=\ave\Phi_{\p V}+\frac1{4\pi\varepsilon_0}\int_V\rho(\bm r')G(\bm r,\bm r')\d V'+\frac1{4\pi}\oint_{\p V}G(\bm r,\bm r')\pv\Phi{n'}\d A',
-\end{equation}
-其中$\ave\Phi_{\p V}$是边界上的平均电势
-\[
-    \ave\Phi_{\p V}:=\frac1S\oint_{\p V}\Phi(\bm r')\d A'.
-\]
-通常Neumann问题是在一个有限体积之外的，因此$\p V$除$V$的表面外还包括无穷远处，此时$\ave\Phi_{\p V}=0$。
+\begin{theorem}
+    {Neumann边界条件的Green函数}{Green function for Neumann boundary condition}
+    由
+    \[
+        \oint_{\p V}\pv G{n'}\d A'=\int_V\nabla'^2G(\bm r,\bm r')\d V'=-4\pi,
+    \]
+    我们也可以设法找到一个$G$满足：
+    \begin{equation}
+        \label{eqn:Neumann Green condition}
+        \edg{\pv G{n'}}_{\p V}\equiv-\frac{4\pi}S,
+        \tag{$\ast\ast$}
+    \end{equation}
+    其中$S$是边界$\p V$的面积，
+    则
+    \begin{equation}
+        \label{eqn:Neumann Green}
+        \Phi(\bm r)=\ave\Phi_{\p V}+\frac1{4\pi\varepsilon_0}\int_V\rho(\bm r')G(\bm r,\bm r')\d V'+\frac1{4\pi}\oint_{\p V}G(\bm r,\bm r')\pv\Phi{n'}\d A',
+    \end{equation}
+    其中$\ave\Phi_{\p V}$是边界上的平均电势
+    \[
+        \ave\Phi_{\p V}:=\frac1S\oint_{\p V}\Phi(\bm r')\d A'.
+    \]
+    如果Neumann问题的$V$包括无穷远处，则\eqref{eqn:Neumann Green condition}变为$\p G/\p n'|_{\p V}\equiv 0$，此时$\ave\Phi_{\p V}=0$。
+\end{theorem}
 
-上述方法不依赖于边界条件$\Phi$或$\p\Phi/\p n$的具体表达式，因此是普遍的。但通常很难找到一个满足\eqref{eqn:Dirichlet Green condition}或\eqref{eqn:Neumann Green condition}的$G(\bm r, \bm r')$，因为它依赖于$\p V$的形状。
+\begin{remark}
+    上述方法不依赖于边界条件$\Phi$或$\p\Phi/\p n$的具体表达式，因此是普遍的。但通常很难找到一个满足\eqref{eqn:Dirichlet Green condition}或\eqref{eqn:Neumann Green condition}的$G(\bm r, \bm r')$，因为它依赖于$\p V$的形状。
+\end{remark}
+
 \begin{example}{Green函数举例}{}
     在无边界空间$V=\RR^3$中，可取
     \[
-        G(\bm r,\bm r')=\frac1{|\bm r-\bm r'|}=\frac1{\sqrt{(x-x')^2+(y-y')^2+(z-z')^2}}.
+        G(\bm r,\bm r')=\frac1{\abs{\bm r-\bm r'}}=\frac1{\sqrt{(x-x')^2+(y-y')^2+(z-z')^2}}.
     \]
     在上半空间$V=\set{(x,y,z)}{z>0}$中，为了运用式\eqref{eqn:Dirichlet Green}，需要$G$在$\p V=\{(x,y,0)\}$处为0。可取$\bm r'$的对称点$\bm r''=(x',y',-z')$，并取
     \begin{align*}
-        G(\bm r,\bm r')&=\frac1{|\bm r-\bm r'|}-\frac1{|\bm r-\bm r''|}\\
+        G(\bm r,\bm r')&=\frac1{\abs{\bm r-\bm r'}}-\frac1{\abs{\bm r-\bm r''}}\\
         &=\frac1{\sqrt{(x-x')^2+(y-y')^2+(z-z')^2}}-\frac1{\sqrt{(x-x')^2+(y-y')^2+(z+z')^2}}.
     \end{align*}
 \end{example}
@@ -552,7 +605,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \end{theorem}
 Green函数可被拆解为
 \[
-    G(\bm r,\bm r')=\frac1{|\bm r-\bm r'|}+F(\bm r,\bm r'),
+    G(\bm r,\bm r')=\frac1{\abs{\bm r-\bm r'}}+F(\bm r,\bm r'),
 \]
 而$F$满足$V$内的Laplace方程
 \[
@@ -618,15 +671,21 @@ Neumann边界条件的泛函
     从而将微分方程转化为代数方程组求解。
 \end{definition}
 
-采用直角网格划分，格点$(i,j)$处的电位为$\Phi_{i,j}$，网格间距为$h$，则
+采用直角网格划分，格点$(i,j)$处的电位为$\Phi_{i,j}$，网格间距为$h$，
+\begin{center}
+    \includegraphics[page=\pagenumref{tikz:finite difference method}]{figures/tikz/layouts.pdf}
+    \captionof{figure}{有限差分法示意图}
+    \label{fig:finite difference method}
+\end{center}
+则
 \begin{equation}
-    \Phi_{i\pm 1,j}=\Phi_{i,j}\pm h\edg{\pv\Phi x}_{(i,j)}+\frac{h^2}2\edg{\pv[2]\Phi x}_{(i,j)}\pm\frac{h^3}6\edg{\pv[3]\Phi x}_{(i,j)}+\bigo(h^4),
+    \Phi_{i\pm 1,j}=\Phi_{i,j}\pm h\edg{\pv\Phi x}_{i,j}+\frac{h^2}2\edg{\pv[2]\Phi x}_{i,j}\pm\frac{h^3}6\edg{\pv[3]\Phi x}_{i,j}+\bigo(h^4),
 \end{equation}
 $\Phi_{i,j\pm 1}$同理，可得
 \begin{subequations}
     \begin{align}
-        \edg{\pv[2]\Phi x}_{(i,j)}&=\frac{\Phi_{i+1,j}+\Phi_{i-1,j}-2\Phi_{i,j}}{h^2}+\bigo(h^2),\\
-        \edg{\pv[2]\Phi y}_{(i,j)}&=\frac{\Phi_{i,j+1}+\Phi_{i,j-1}-2\Phi_{i,j}}{h^2}+\bigo(h^2),
+        \edg{\pv[2]\Phi x}_{i,j}&=\frac{\Phi_{i+1,j}+\Phi_{i-1,j}-2\Phi_{i,j}}{h^2}+\bigo(h^2),\\
+        \edg{\pv[2]\Phi y}_{i,j}&=\frac{\Phi_{i,j+1}+\Phi_{i,j-1}-2\Phi_{i,j}}{h^2}+\bigo(h^2),
     \end{align}
 \end{subequations}
 故二维Poisson方程

@@ -40,7 +40,7 @@
     \begin{center}
         \includegraphics[width=0.6\linewidth]{figures/image_charge_plane.pdf}
         \captionof{figure}{平面边界的电像法}
-        \label{fig:image charge of plane}
+        \label{fig:method of images, plane}
     \end{center}
     因此电势分布为
     \begin{equation}
@@ -58,8 +58,7 @@
     \begin{center}
         \includegraphics[width=0.45\linewidth]{figures/image_charge_sphere.pdf}
         \captionof{figure}{接地导体球和点电荷}
-        \label{fig:image charge of sphere}
-        % \label{fig:sphere conductor}
+        \label{fig:method of images, sphere conductor grounded}
     \end{center}
     我们可以在球壳内放置一镜像电荷$q'$，由对称性，$q'$一定在$q$与球心的连线上：
     % \begin{center}
@@ -72,10 +71,10 @@
     \end{equation}
     便可使原球面上的电势均为0，因此球外电势分布为
     \begin{equation}
-        \Phi(\bm r)=\frac q{4\pi\varepsilon_0}\biggkh{\frac1{|\bm r-\bm d|}-\frac ad\frac1{|\bm r-\bm d'|}},\quad\bm d'=\Bigkh{\frac ad}^2\bm d.
+        \Phi(\bm r)=\frac q{4\pi\varepsilon_0}\biggkh{\frac1{\abs{\bm r-\bm d}}-\frac ad\frac1{\abs{\bm r-\bm d'}}},\quad\bm d'=\Bigkh{\frac ad}^2\bm d.
     \end{equation}
     \tcblower
-    接地导体球外表面的面电荷密度为($\p V$上的法向量$n'$指向球内，即$-r$方向)
+    接地导体球外表面的面电荷密度为($\p V$上的法向量$\uvec n'$指向球内，即$-r$方向)
     \begin{equation}
         \label{eqn:grounded sphere conductor-point, sigma}
         \sigma=-\varepsilon_0\edg{\pv\Phi r}_{r=a}=-\frac q{4\pi a}\frac{d^2-a^2}{(d^2+a^2-2ad\cos\theta)^{3/2}}.
@@ -124,9 +123,9 @@
 \begin{example}{电像法处理匀强电场中的导体球问题}{method of images, sphere conductor in uniform E}
     考虑均匀电场$E_0$中半径为$a$的导体球。均匀场可以认为是在无穷远处由带适当电荷的正负电荷产生的，如下图所示
     \begin{center}
-        \includegraphics[page=9]{figures/tikz/layouts.pdf}
+        \includegraphics[page=\pagenumref{tikz:uniform E approx pm q}]{figures/tikz/layouts.pdf}
         \captionof{figure}{正负电荷近似匀强电场}
-        \label{fig:uniform E approx +-q}
+        \label{fig:uniform E approx pm q}
     \end{center}
     有两个电荷$\pm Q$，位于$\mp R$位置，在原点附近电场可以近似为均匀。
     \[
@@ -160,7 +159,7 @@
 对于球形Dirichlet边界条件，为了使球面上的$G(\bm r,\bm r')=0$，可借助镜像电荷的思想，取
 \begin{equation}
     \label{eqn:sphere Green function}
-    G(\bm r,\bm r')=\frac1{|\bm r-\bm r'|}-\frac a{r'}\frac1{|\bm r-\bm r''|},\quad\bm r''=\Bigkh{\frac{a}{r'}}^2\bm r'.
+    G(\bm r,\bm r')=\frac1{\abs{\bm r-\bm r'}}-\frac a{r'}\frac1{\abs{\bm r-\bm r''}},\quad\bm r''=\Bigkh{\frac{a}{r'}}^2\bm r'.
 \end{equation}
 令$\gamma$表示$\bm r,\bm r'$夹角，则
 \[
@@ -192,7 +191,7 @@
 \begin{example}{两半球具有不同电势的导体球}{2 hemisphere conductor at different potentials}
     一个半径为$a$的导电球由两个电势分别为$\pm V$的半球壳组成，
     \begin{center}
-        \includegraphics[page=10]{figures/tikz/layouts.pdf}
+        \includegraphics[page=\pagenumref{tikz:2 hemisphere}]{figures/tikz/layouts.pdf}
         \captionof{figure}{两半球具有不同电势的导体球}
         \label{fig:2 hemisphere}
     \end{center}
@@ -244,22 +243,31 @@
 \begin{definition}{正交函数}{orthogonal function}
     一组实(复)函数$U_i(\xi)$在区间$(a,b)$上平方可积，若两两正交(orthogonal)：
     \begin{equation}
-        \int_a^bU_m^\ast(\xi)U_n(\xi)\d\xi=\delta_{mn}.
+        \int_a^bU_m\cj(\xi)U_n(\xi)\d\xi=\delta_{mn}.
     \end{equation}
     则称为正交函数。其中$\delta_{mn}$为Kronecker符号。
 \end{definition}
-若有一组完备的正交函数集$\{U_i(\xi)\}$，则在区间$(a,b)$上任意平方可积的函数$f(\xi)$均可被展开成正交函数的线性组合
-\[
-    f(\xi)=\sum_{i=1}^\infty a_iU_i(\xi),\quad a_i:=\int_a^bU_i^\ast(\xi)f(\xi)\d\xi.
-\]
-即
-\[
-    f(\xi)=\int_a^b\biggfkh{\sum_{i=1}^\infty U_i^\ast(\xi')U_i(\xi)}f(\xi')\d\xi'.
-\]
-易得完备(闭合)关系
-\begin{equation}
-    \sum_{i=1}^\infty U_i^\ast(\xi')U_i(\xi)=\delta(\xi'-\xi).
-\end{equation}
+
+\begin{theorem}
+    {完备正交函数展开}{complete orthogonal function expansion}
+    若有一组完备的正交函数集$\{U_i(\xi)\}$，则在区间$(a,b)$上任意平方可积的函数$f(\xi)$均可被展开成正交函数的线性组合
+    \[
+        f(\xi)=\sum_{i=1}^\infty a_iU_i(\xi),\quad a_i:=\int_a^bU_i\cj(\xi)f(\xi)\d\xi.
+    \]
+    完备关系(completeness relation)为
+    \begin{equation}
+        \sum_{i=1}^\infty U_i\cj(\xi')U_i(\xi)=\delta(\xi'-\xi).
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    直接代入系数$a_i$
+    \[
+        f(\xi)=\int_a^b\biggfkh{\sum_{i=1}^\infty U_i\cj(\xi')U_i(\xi)}f(\xi')\d\xi'.
+        \qedhere
+    \]
+\end{proof}
+
 \begin{example}{Fourier级数}{Fourier series}
     易证，在区间$(-\pi,\pi)$内，函数集
     \[
@@ -285,15 +293,15 @@
 一般化至二维，对于任意矩形区域$(a,b)\times(c,d)$上平方可积的函数$f(\xi,\eta)$，若可在两个维度分别找到一组正交函数$U_i(\xi),V_j(\eta)$，则$f(\xi,\eta)$可被展开为
 \[
     f(\xi,\eta)=\sum_{i=1}^\infty\sum_{j=1}^\infty a_{ij}U_i(\xi)V_j(\eta),
-\]
-其中 
-\[
+    \quad
     a_{ij}=\int_a^b\int_c^dU_i(\xi)V_j(\eta)f(\xi,\eta)\d\eta\nd\xi
 \]
 \begin{example}{Fourier变换}{Fourier transformation}
     Fourier级数有复变函数的形式
     \[
-        f(x)=\frac1{\sqrt\ell}\sum_{n=-\infty}^{+\infty}c_n\e{\i2\pi nx/\ell},\quad c_n=\frac1{\sqrt\ell}\int_{-\ell/2}^{\ell/2}f(x')\e{-\i2\pi nx'/\ell}\d x'.
+        f(x)=\frac1{\sqrt\ell}\sum_{n=-\infty}^{+\infty}c_n\e{\i2\pi nx/\ell},
+        \quad
+        c_n=\frac1{\sqrt\ell}\int_{-\ell/2}^{\ell/2}f(x')\e{-\i2\pi nx'/\ell}\d x'.
     \]
     当$\ell\to\infty$时，
     \[
@@ -321,7 +329,7 @@
 \begin{example}{长方体边界条件下的Laplace方程的解}{solution in cuboid Laplace}
     给定如\figref{fig:cuboid boundary} 所示边界条件，只有$z=c$的边界有电势$V(x,y)$外，其他面电势均为0，求长方体内部电位分布。
     \begin{center}
-        \includegraphics[page=11]{figures/tikz/layouts.pdf}
+        \includegraphics[page=\pagenumref{tikz:3D rectangular box}]{figures/tikz/layouts.pdf}
         \captionof{figure}{矩形区域边界条件}
         \label{fig:cuboid boundary}
     \end{center}
@@ -337,7 +345,8 @@
     \[
         X''=-\alpha^2X,\quad Y''=-\beta^2Y,\quad Z''=\gamma^2Z.
     \]
-    其中$\gamma^2=\alpha^2+\beta^2$，因为$x=a,\,y=b$处$\Phi=0$，故解为驻波条件：
+    其中$\gamma^2=\alpha^2+\beta^2$。
+    因为$X(0)=X(a)=0,\,Y(0)=Y(b)=0$，故解为驻波条件：
     \begin{alignat*}{5}
         X_m(x)&=\sin(\alpha_mx),&\qquad\alpha_m&=\frac{m\pi}a,&m&=1,2,3,\ldots\\
         Y_n(y)&=\sin(\beta_ny),&\beta_n&=\frac{n\pi}b,&n&=1,2,3,\ldots\\
@@ -368,11 +377,12 @@
 
 其实就是三维Laplace方程其中一项偏微分为0。
 
-\begin{example}{二维边界条件}{2D boundary condition}
+\begin{example}{二维直角坐标边界条件}{2D boundary condition in Cartesian coordinates}
     考虑$0<x<a,\;y>0$的边界，显然$\Phi$与$z$无关：
     \begin{center}
-        \includegraphics[page=12]{figures/tikz/layouts.pdf}
-        \captionof{figure}{二维边界条件}
+        \includegraphics[page=\pagenumref{tikz:2D rectangular hole}]{figures/tikz/layouts.pdf}
+        \captionof{figure}{二维矩形井边界条件}
+        \label{fig:2D rectangular hole}
     \end{center}
     二维直角坐标Laplace方程为
     \[
@@ -435,10 +445,11 @@
     \Phi(\rho,\phi)=c_0+d_0\ln\rho+\sum_{n=1}^{\infty}(a_n\cos(n\phi)+b_n\sin(n\phi))(c_n\rho^n+d_n\rho^{-n}).
 \end{equation}
 若区域包含原点，则要求$d_n\equiv 0$。
-\begin{example}{二维拐角内和沿棱边的电场与电荷密度}{field and charge density in 2D Corners and along edges}
+\begin{example}{二维极坐标边界条件}{2D boundary condition in polar coordinates}
     \begin{center}
-        \includegraphics[page=13]{figures/tikz/layouts.pdf}
-        \captionof{figure}{极坐标}
+        \includegraphics[page=\pagenumref{tikz:2D angular boundary}]{figures/tikz/layouts.pdf}
+        \captionof{figure}{二维极坐标边界条件}
+        \label{fig:2D angular boundary}
     \end{center}
     由边界条件，在$\phi=0,\beta$时$\Phi=V$可得
     \begin{equation}
@@ -503,46 +514,13 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
     \label{eqn:Legendre}
     \dd x\biggfkh{(1-x)^2\dv Px}+\ell(\ell+1)P=0.
 \end{equation}
-采用级数解，设
-\[
-    P(x)=x^\alpha\sum_{j=0}^\infty a_jx^j.
-\]
-$\alpha$是待定系数，从而 
-\[
-    \sum_{j=0}^\infty(\alpha+j)(\alpha+j-1)a_j x^{\alpha+j-2}-\sum_{j=0}^\infty\bigfkh{(\alpha+j)(\alpha+j+1)-\ell(\ell+1)}a_jx_{\alpha+j}=0.
-\]
-解得
-\[
-    \begin{cases}
-        a_0\alpha(\alpha-1)=0,&j=0\\
-        a_1\alpha(\alpha+1)=0,&j=1\\
-        a_{j+2}=\frac{(\alpha+j)(\alpha+j+1)-\ell(\ell+1)}{(\alpha+j+1)(\alpha+j+2)}a_j,&j\geqslant 0
-    \end{cases}
-\]
-对初始条件分情况讨论：
-\begin{compactitem}
-	\item $a_0=a_1=0$，解$P\equiv 0$是平凡的；
-	\item $a_0=0,\enspace a_1\neq 0$，展开式事实上与$a_0\neq 0,\enspace a_1=0$等价：
-	\[
-        P(x)=x^\alpha(a_1x+a_3x^3+\cdots)=x^{\alpha+1}(a_1+a_3x^2+\cdots);
-    \]
-	\item $a_0\neq 0,\enspace a_1\neq 0$，由递推关系知，级数会在$x=\pm 1$发散。
-\end{compactitem}
-综上，我们最终选取$a_0\neq 0,\enspace a_1=0$，从而$\alpha(\alpha-1)=0$，
-\[
-    P(x)=\begin{cases}
-        a_0+a_2x^2+a_4x^4+\cdots,&\alpha=0\\
-        a_0x+a_2x^3+a_4x^5+\cdots,&\alpha=1
-    \end{cases}
-\]
-这个级数在$|x|<1$时当然收敛，但在$x=\pm 1$时会发散，除非级数在某一项截断(即此项之后的系数均为0)。考察递推关系：
-\[
-    a_{j+2}=\begin{cases}
-        \frac{j(j+1)-\ell(\ell+1)}{(j+1)(j+2)}a_j,&\alpha=0\\[2ex]
-        \frac{(j+1)(j+2)-\ell(\ell+1)}{(j+2)(j+3)}a_j,&\alpha=1
-    \end{cases}
-\]
-因此，收敛性要求$\ell=0,1,2,\ldots$
+其解为Legendre多项式$P_\ell(x)$，可以写成
+\begin{equation}
+    \label{eqn:Rodrigues}
+    P_\ell(x)=\frac1{2^\ell\ell!}\dd[\ell]x(x^2-1)^\ell.
+\end{equation}
+其中$\ell=0,1,2,\ldots$
+
 \begin{example}{前几个Legendre多项式}{Legendre polynomial}
     \begin{center}
         \includegraphics[width=0.7\linewidth]{figures/Legendre.pdf}
@@ -555,42 +533,30 @@ $\alpha$是待定系数，从而
         \end{aligned}
     \end{equation*}
 \end{example}
-\begin{theorem}{Rodrigues公式}{Rodrigues' formula}
-    Legendre多项式可被表示为
-    \begin{equation}
-        \label{eqn:Rodrigues}
-        P_\ell(x)=\frac1{2^\ell\ell!}\dd[\ell]x(x^2-1)^\ell.
-    \end{equation}
-\end{theorem}
 \begin{theorem}
-    {Legendre多项式的正交性}{}
-    Legendre多项式是正交的
-    \[
-        \int_{-1}^1P_\ell(x)P_{\ell'}(x)\d x=\frac2{2\ell+1}\vd_{\ell\ell'}.
-    \]
-    因此任意$[-1,1]$上的函数$f(x)$均可被展开为Legendre级数
-    \[
-        f(x)=\sum_{\ell=0}^\infty A_\ell P_\ell(x),\quad A_\ell=\frac{2\ell+1}2\int_{-1}^1f(x)P_\ell(x)\d x.
-    \]
-\end{theorem}
-\begin{theorem}{Legendre多项式的递推关系}{recurrence relation among Legendre polynomial}
-    可直接从Rodrigues公式和Legendre方程得到：
+    {Legendre多项式的正交性和完备性}{}
+    Legendre多项式是正交且完备的
     \begin{subequations}
         \begin{align}
-            \label{eqn:Legendre recurrence 1}
-            (2\ell+1)P_\ell&=P'_{\ell+1}-P'_{\ell-1},\\
-            (\ell+1)P_{\ell+1}&=(2\ell+1)xP_\ell+\ell P_{\ell-1},\\
-            P'_{\ell+1}&=xP'_\ell+\ell(\ell+1)P_\ell,\\
-            (x^2-1)P'_\ell&=\ell xP_\ell-\ell P_{\ell-1}.
+            \int_{-1}^1P_\ell(x)P_{\ell'}(x)\d x&=\frac2{2\ell+1}\vd_{\ell\ell'},\\
+            \sum_{\ell=0}^\infty P_\ell\cj(x')P_\ell^m(x)&=\delta(x-x').
         \end{align}
     \end{subequations}
+    因此任意$[-1,1]$上的函数$f(x)$均可被展开为Legendre级数
+    \begin{equation}
+        f(x)=\sum_{\ell=0}^\infty A_\ell P_\ell(x),\quad A_\ell=\frac{2\ell+1}2\int_{-1}^1f(x)P_\ell(x)\d x.
+    \end{equation}
 \end{theorem}
-综上，对于方位角$\phi$对称的Laplace方程\eqref{eqn:Laplace in spherical}，$m=0$，其解为
-\begin{equation}
-    \label{eqn:Phi(r, theta)}
-    \Phi(r,\theta)=\sum_{\ell=0}^\infty\bigfkh{A_\ell r^\ell+B_\ell r^{-(\ell+1)}}P_\ell(\cos\theta).
-\end{equation}
-若区域包含原点，则要求$B_\ell\equiv 0$。
+
+\begin{corollary}
+    对于方位角$\phi$对称的Laplace方程\eqref{eqn:Laplace in spherical}，$m=0$，其解为
+    \begin{equation}
+        \label{eqn:Phi(r, theta)}
+        \Phi(r,\theta)=\sum_{\ell=0}^\infty\bigfkh{A_\ell r^\ell+B_\ell r^{-(\ell+1)}}P_\ell(\cos\theta).
+    \end{equation}
+    若区域包含原点，则要求$B_\ell\equiv 0$。
+\end{corollary}
+
 \begin{example}{两半球具有不同电势的导体球(续)}{2 hemisphere conductor at different potentials II}
     接\exmref{exm:2 hemisphere conductor at different potentials}，边界条件为
     \[
@@ -619,9 +585,9 @@ $\alpha$是待定系数，从而
     $\bm r'$处的单位点电荷在$\bm r$的产生的电势为
     \begin{equation}
         \label{eqn:1/|r-r'|}
-        \frac1{|\bm r-\bm r'|}=\frac1{r_>}\sum_{\ell=0}^\infty\biggkh{\frac{r_<}{r_>}}^\ell P_\ell(\cos\gamma).
+        \frac1{\abs{\bm r-\bm r'}}=\frac1{r_>}\sum_{\ell=0}^\infty\biggkh{\frac{r_<}{r_>}}^\ell P_\ell(\cos\gamma).
     \end{equation}
-    其中$r_<:=\min(x,x'),\enspace r_>:=\max(x,x')$，$\gamma$是$\bm r,\bm r'$夹角。
+    其中$r_<:=\min(r,r'),\enspace r_>:=\max(r,r')$，$\gamma$是$\bm r,\bm r'$夹角。
 \end{example}
 % \begin{example}{带电圆环的电势}{charged ring}
     
@@ -629,8 +595,9 @@ $\alpha$是待定系数，从而
 \begin{example}{锥形孔内尖端附近的电场特性}{field near the tip of the conical hole}
     如图所示的锥形孔边界，求其尖端附近的电场特性。
     \begin{center}
-        \includegraphics[page=14]{figures/tikz/layouts.pdf}
+        \includegraphics[page=\pagenumref{tikz:2D conical boundary}]{figures/tikz/layouts.pdf}
         \captionof{figure}{锥形孔}
+        \label{fig:conical hole}
     \end{center}
     在$\theta=0$附近展开，设$\xi:=(1-\cos\theta)/2$，则 
     \[
@@ -668,48 +635,65 @@ $\alpha$是待定系数，从而
 \subsection{连带Legendre函数、球谐函数}
 \label{ssec:associated Legendre function and spherical harmonics}
 
-考虑式\eqref{eqn:general Legendre} $m\neq 0$的情形，
-% $\ell=0,1,2,\ldots$且$m=-\ell,-\ell+1,\ldots,\ell$，
-为了使解在$[-1,1]$收敛，略去推导过程，要求：
+考虑式\eqref{eqn:general Legendre} $m\neq 0$的一般情形，
 \[
-    \ell=0,1,2,\ldots,\quad m=-\ell,-\ell+1,\ldots,\ell.
+    \dd x\biggfkh{(1-x^2)\dv Px}+\biggfkh{\ell(\ell+1)-\frac{m^2}{1-x^2}}P=0.
 \]
+为了使解在$[-1,1]$收敛，推导过程见\secref{sec:Legendre polynomial}，要求：
+\begin{subequations}
+    \begin{align}
+        \ell&=0,1,2,\ldots,\\
+        m&=-\ell,-\ell+1,\ldots,\ell.
+    \end{align}
+\end{subequations}
 解是连带(associated) Legendre函数：
 \begin{equation}
     P_\ell^m(x)=(-)^m(1-x^2)^{m/2}\dd[m]xP_\ell(x),
 \end{equation}
 上式默认$m>0$，因为$P_\ell^{-m}$和$P_\ell^m$是线性相关的：
-\[
+\begin{equation}
     P_\ell^{-m}(x)=(-)^m\frac{(\ell-m)!}{(\ell+m)!}P_\ell^m(x).
-\]
-有正交关系：
-\begin{align*}
-    \int_{-1}^1P_\ell^m(x)P_{\ell'}^m(x)\d x&=\frac2{2\ell+1}\frac{(\ell-m)!}{(\ell+m)!}\vd_{\ell\ell'};\\
-    \int_{-1}^1P_\ell^m(x)P_\ell^{m'}(x)\frac{\d x}{1-x^2}&=\frac1m\frac{(\ell+m)!}{(\ell-m)!}\vd_{mm'}.
-\end{align*}
-由此得到球谐函数(spherical harmonics fucntion)：
+\end{equation}
+
+\begin{theorem}
+    {连带Legendre函数的正交性}{}
+    连带Legendre函数只对固定的$m$或固定的$\ell$正交：
+    \begin{subequations}
+        \begin{align}
+            \int_{-1}^1P_\ell^m(x)P_{\ell'}^m(x)\d x&=\frac2{2\ell+1}\frac{(\ell-m)!}{(\ell+m)!}\vd_{\ell\ell'};\\
+            \int_{-1}^1P_\ell^m(x)P_\ell^{m'}(x)\frac{\d x}{1-x^2}&=\frac1m\frac{(\ell+m)!}{(\ell-m)!}\vd_{mm'}.
+        \end{align}
+    \end{subequations}
+    但不能同时对$\ell$和$m$正交，比如$P_1^1$和$P_2^2$并不正交。
+\end{theorem}
+将角向部分的解$P(\theta)$和$Q(\phi)$合并，
+由此得到球谐函数(spherical harmonics)：
 \begin{equation}
     Y_{\ell m}(\theta,\phi)=\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}}P_\ell^m(\cos\theta)\e{\i m\phi}.
 \end{equation}
-满足方程
+满足Laplace方程的角向部分：
 \[
-    \frac1{\sin\theta}\pp\theta\biggkh{\sin\theta\pv Y\theta}+\frac1{\sin^2\theta}\pv[2]Y\phi+\ell(\ell+1)Y=0,
+    \frac1{\sin\theta}\pp\theta\biggkh{\sin\theta\pv Y\theta}+\frac1{\sin^2\theta}\pv[2]Y\phi+\ell(\ell+1)Y=0.
 \]
-球谐函数自然是正交函数：
-\[
-    \oint Y_{\ell m}^\ast Y_{\ell'm'}\d\Omega=\int_0^{2\pi}\int_0^\pi Y_{\ell m}^\ast(\theta,\phi) Y_{\ell'm'}(\theta,\phi)\sin\theta\d\theta\nd\phi=\delta_{\ell\ell'}\vd_{mm'}.
-\]
-\begin{equation}
-    \sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell Y_{\ell m}^*(\theta,\phi)Y_{\ell m}(\theta,\phi)=\delta(\phi-\phi')\delta(\cos\theta-\cos\theta').
-\end{equation}
-这样我们便得到了球坐标系下Laplace方程\eqref{eqn:Laplace in spherical}的通解
+\begin{theorem}
+    {球谐函数的正交性和完备性}{}
+    球谐函数是正交且完备的：
+    \[
+        \oint Y_{\ell m}\cj Y_{\ell'm'}\d\Omega=\int_0^{2\pi}\int_0^\pi Y_{\ell m}\cj(\theta,\phi) Y_{\ell'm'}(\theta,\phi)\sin\theta\d\theta\nd\phi=\delta_{\ell\ell'}\vd_{mm'}.
+    \]
+    \begin{equation}
+        \sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell Y_{\ell m}^*(\theta',\phi')Y_{\ell m}(\theta,\phi)=\delta(\phi-\phi')\delta(\cos\theta-\cos\theta').
+    \end{equation}
+\end{theorem}
+
+球坐标系下Laplace方程\eqref{eqn:Laplace in spherical}的通解
 \begin{equation}
     \Phi(r,\theta,\phi)=\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\bigfkh{A_{\ell m}r^\ell+B_{\ell m}r^{-(\ell+1)}}Y_{\ell m}(\theta,\phi).
 \end{equation}
 由$P_\ell(\cos\gamma)$的球谐函数展开式及\eqref{eqn:1/|r-r'|}，点电荷之间电势的球谐函数展开
 \begin{equation}
     \label{eqn:1/|r-r'|=YY}
-    \frac1{|\bm r-\bm r'|}=\frac{4\pi}{r_>}\sum_{\ell=0}^\infty\biggfkh{\frac1{2\ell+1}\biggkh{\frac{r_<}{r_>}}^\ell\cdot\sum_{m=-\ell}^\ell Y^\ast_{\ell m}(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
+    \frac1{\abs{\bm r-\bm r'}}=\frac{4\pi}{r_>}\sum_{\ell=0}^\infty\biggfkh{\frac1{2\ell+1}\biggkh{\frac{r_<}{r_>}}^\ell\cdot\sum_{m=-\ell}^\ell Y_{\ell m}\cj(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
 \end{equation}
 
 \section{柱坐标系中的正交函数}
@@ -742,39 +726,7 @@ $\alpha$是待定系数，从而
     \label{eqn:Bessel eqn}
     \dv[2]Rx+\frac1x\dv Rx+\biggkh{1-\frac{\nu^2}{x^2}}R=0.
 \end{equation}
-采用级数解，设 
-\[
-    R(x)=x^\alpha\sum_{j=0}^\infty a_jx^j.
-\]
-解得
-\[
-    \begin{cases}
-        \alpha^2=\nu^2,&j=0\\
-        a_1\bigfkh{(\alpha+1)^2-\nu^2}=0,&j=1\\
-        a_{j-2}=\bigfkh{\nu^2-(j+\alpha)^2}a_j,&j\geqslant 2
-    \end{cases}
-\]
-故$\alpha=\pm\nu,\enspace a_1=0$，从而
-\[
-    a_{2j}=-\frac1{4j(j+\alpha)}a_{2j-2},\quad j=1,2,\ldots
-\]
-选取\footnote{$\nu$可以不是整数，此时阶乘$\nu!$推广为$\Gamma(\nu+1)$。}
-\[
-    \alpha=\nu,\enspace a_0=\frac1{2^\nu\nu!}.
-\]
-解得(第一类) Bessel函数
-\begin{equation}
-    J_\nu(x)=\sum_{j=0}^\infty\frac{(-)^j}{j!(j+\nu)!}\Bigkh{\frac x2}^{2j+\nu},
-\end{equation}
-当$\nu$不为整数时，$J_{-\nu}$和$J_\nu$是线性无关的，可作为Bessel方程的解系；但当$\nu$为整数时，二者线性相关：
-\[
-    J_{-\nu}(x)=(-)^\nu J_\nu(x),
-\]
-为了得到线性无关的另一解，定义Neumann函数(第二类Bessel函数)
-\begin{equation}
-    Y_\nu(x):=\frac{J_\nu(x)\cos(\nu\pi)-J_{-\nu}(x)}{\sin(\nu\pi)}.
-\end{equation}
-当$\nu$为整数时，$Y_\nu(x)$的值定义为上式$\nu$趋近于该整数的极限（即可去间断点）。可以证明，$J_\nu,Y_\nu$线性无关。
+其解为Bessel函数$J_\nu(x)$和$Y_\nu(x)$。
 
 \begin{figure}[!htp]
     \centering
@@ -786,46 +738,6 @@ $\alpha$是待定系数，从而
     \label{fig:Bessel function}
 \end{figure}
 
-Bessel方程的另一对重要线性无关解是Hankel函数(第三类Bessel函数)
-\begin{equation}
-    H_\nu^\pm(x)=J_\nu(x)\pm\i Y_\nu(x).
-\end{equation}
-三类Bessel函数均满足形如下面的递推公式
-\begin{align*}
-    \Omega_{\nu-1}+\Omega_{\nu+1}&=\frac{2\nu}x\Omega_\nu,\\
-    \Omega_{\nu-1}-\Omega_{\nu+1}&=2\Omega'_\nu.
-\end{align*}
-
-
-\begin{example}{Bessel函数的渐进性}{limit of Bessel function}
-    $x\to 0$时， 
-    \begin{align*}
-        J_\nu(x)&\simeq\frac1{\nu!}\Bigkh{\frac x2}^\nu,\quad\\
-        Y_\nu(x)&\simeq
-        \begin{cases}
-            \frac2\pi\Bigfkh{\ln\Bigkh{\frac x2}+\gamma},&\nu=0\\[1ex]
-            -\frac{(\nu-1)!}\pi\Bigkh{\frac x2}^{-\nu}+\frac{\cot(\nu\pi)}{\nu!}\Bigkh{\frac x2}^\nu,&\nu\neq 0
-        \end{cases}
-    \end{align*}
-    其中$\gamma$是Euler-Mascheroni常数
-    \[
-        \gamma:=\lim_{n\to\infty}\biggkh{-\ln n+\sum_{k=1}^n\frac1k}=\num{0.5772156649}\ldots.
-    \]
-    \tcblower
-    $x\to\infty$时， 
-    \begin{align*}
-        J_\nu(x)&\simeq\sqrt{\frac2{\pi x}}\cos\biggkh{x-\frac{\nu\pi}2-\frac\pi{4}},\\
-        Y_\nu(x)&\simeq\sqrt{\frac2{\pi x}}\sin\biggkh{x-\frac{\nu\pi}2-\frac\pi{4}}.
-    \end{align*}
-\end{example}
-若将$k$替换为$\i k$，便会得到修正(modified) Bessel方程
-\[
-    \dv[2]Rx+\frac1x\dv Rx-\biggkh{1+\frac{\nu^2}{x^2}}R=0.
-\]
-修正Bessel函数只是纯虚数参数的Bessel函数
-\[
-    I_\nu(x)=\i^{-\nu}J_\nu(\i x),\quad K_\nu(x)=\i^{\nu+1}\frac\pi 2H_\nu^+(\i x).
-\]
 \begin{theorem}{Bessel函数的正交性}{}
     令$x_{\nu n}$是$J_\nu(x)$的第$n$个零点，则
     \begin{equation}
@@ -845,8 +757,9 @@ Bessel方程的另一对重要线性无关解是Hankel函数(第三类Bessel函�
 \begin{example}{圆柱体内电势分布}{potential inside cylinder}
     如下图，圆柱体除顶面外其余面电势均为0.
     \begin{center}
-        \includegraphics[page=15]{figures/tikz/layouts.pdf}
+        \includegraphics[page=\pagenumref{tikz:cylindrical boundary}]{figures/tikz/layouts.pdf}
         \captionof{figure}{圆柱形边界条件}
+        \label{fig:cylindrical boundary}
     \end{center}
     由边界条件可知，
     \iffalse ：
@@ -883,20 +796,13 @@ Bessel方程的另一对重要线性无关解是Hankel函数(第三类Bessel函�
 \label{ssec:Green expansion in spherical coordinate}
 
 对于球面边界条件，我们通常选择球坐标。然后，将Green函数表示为与所讨论的坐标相适应的函数的一系列乘积就很方便了。
-
-事实上，根据我们所介绍的，我们可以简单地得到球坐标下Green函数的展开式。由式\eqref{eqn:1/|r-r'|=YY}，
-\[
-    \frac1{|\bm r-\bm r'|}=4\pi\sum_{\ell=0}^\infty\biggfkh{\frac1{2\ell+1}\frac{r_<^\ell}{r_>^{\ell+1}}\cdot\sum_{m=-\ell}^\ell Y^\ast_{\ell m}(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
-\]
-我们希望得到适用于在$r = a$处具有球面边界的外部问题的Green函数的类似展开。由式\eqref{eqn:sphere Green function}易得：
-\[
-    G(\bm r,\bm r')=\frac1{|\bm r-\bm r'|}-\frac a{r'}\frac1{|\bm r-\bm r''|},\quad\bm r''=\Bigkh{\frac{a}{r'}}^2\bm r'.
-\]
-对式\eqref{eqn:sphere Green function}中的两项展开\eqref{eqn:1/|r-r'|=YY}，得到
-\begin{equation}
+我们希望得到适用于在$r = a$处具有球面边界的外部问题的Green函数的类似展开。对式\eqref{eqn:sphere Green function}中的两项展开\eqref{eqn:1/|r-r'|=YY}，得到
+\begin{align}
+    \notag
+    G(\bm r,\bm r')&=\frac1{\abs{\bm r-\bm r'}}-\frac a{r'}\frac1{\abs{\bm r-(a/r')^2\bm r'}}\\
     \label{eqn:Green YY}
-    G(\bm r,\bm r')=4\pi\sum_{\ell=0}^\infty\biggfkh{\frac1{2\ell+1}\frac1{r_>^{\ell+1}}\biggkh{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\sum_{m=-\ell}^\ell Y_{\ell m}^\ast(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
-\end{equation}
+    &=4\pi\sum_{\ell=0}^\infty\biggfkh{\frac1{2\ell+1}\frac1{r_>^{\ell+1}}\biggkh{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\sum_{m=-\ell}^\ell Y_{\ell m}\cj(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
+\end{align}
 其中$r_>=\max(r,r'),\enspace r_<=\min(r,r')$。%，展开可得
 \iffalse
 \[
@@ -909,15 +815,16 @@ Bessel方程的另一对重要线性无关解是Hankel函数(第三类Bessel函�
 \]
 \fi
 \paragraph{一般展开式}
+
 现在我们从基本原理开始，来系统地构建这种展开。有%Dirichlet势问题的Green函数满足：
 \[
-    \lapla G(\bm r,\bm r')=-4\pi\vd(\bm r,\bm r').
+    \lapla G(\bm r,\bm r')=-4\pi\vd(\bm r-\bm r').
 \]
-且$G(\bm r,\bm r')|_{\p V}=0$。
+且$G(\bm r,\bm r')|_{r=a}=0$。
 对于球坐标，$\delta$函数可以写成
 \begin{align*}
-    \delta(\bm r,\bm r')&=\frac1{r^2}\vd(r-r')\vd(\phi-\phi')\vd(\cos\theta-\cos\theta')\\
-    &=\frac1{r^2}\vd(r-r')\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell Y_{\ell m}^\ast(\theta',\phi')Y_{\ell m}(\theta,\phi).
+    \delta(\bm r-\bm r')&=\frac1{r^2}\vd(r-r')\vd(\phi-\phi')\vd(\cos\theta-\cos\theta')\\
+    &=\frac1{r^2}\vd(r-r')\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell Y_{\ell m}\cj(\theta',\phi')Y_{\ell m}(\theta,\phi).
 \end{align*}
 将Green函数看做$\bm r$的函数，可以被展开为
 \[
@@ -925,7 +832,7 @@ Bessel方程的另一对重要线性无关解是Hankel函数(第三类Bessel函�
 \]
 由上面三式，可得 
 \[
-    A_{\ell m}(r|r',\theta',\phi')=g_\ell(r,r')Y_{\ell m}^\ast(\theta',\phi')
+    A_{\ell m}(r|r',\theta',\phi')=g_\ell(r,r')Y_{\ell m}\cj(\theta',\phi')
 \]
 $g_\ell$满足
 \[
@@ -942,11 +849,16 @@ $g_\ell$满足
 下一步是确定各项的系数。
 \begin{example}{同心球边界条件}{concentric spheres boundary}
     边界面为半径为$a,b\,(a<b)$的同心球面，
+    其Green函数的边界条件为
+    \[
+        G(\bm r,\bm r')|_{r=a}=G(\bm r,\bm r')|_{r=b}=0,
+    \]
     \begin{center}
-        \includegraphics[page=16]{figures/tikz/layouts.pdf}
+        \includegraphics[page=\pagenumref{tikz:concentric spheres boundary}]{figures/tikz/layouts.pdf}
         \captionof{figure}{同心球边界条件}
+        \label{fig:concentric spheres boundary}
     \end{center}
-    由$g_\ell(a,r')=0,\;g_\ell(b,r')=0$可得
+    由$g_\ell(a,r')=g_\ell(b,r')=0$可得
     \[
         g_\ell(r,r')=
         \begin{cases}
@@ -972,13 +884,13 @@ $g_\ell$满足
     \]
     故Green函数的展开
     \begin{equation}
-        G(\bm r,\bm r')=4\pi\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell \frac{Y_{\ell m}^\ast(\theta',\phi')Y_{\ell m}(\theta,\phi)}{(2\ell+1)\bigfkh{1-(a/b)^{2\ell+1}}}\biggkh{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\biggkh{\frac1{r_>^{\ell+1}}-\frac{r_>^\ell}{b^{2\ell+1}}}.
+        G(\bm r,\bm r')=4\pi\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell \frac{Y_{\ell m}\cj(\theta',\phi')Y_{\ell m}(\theta,\phi)}{(2\ell+1)\bigfkh{1-(a/b)^{2\ell+1}}}\biggkh{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\biggkh{\frac1{r_>^{\ell+1}}-\frac{r_>^\ell}{b^{2\ell+1}}}.
     \end{equation}
     \tcblower
     $a\to0,\,b\to\infty$时，变为式\eqref{eqn:1/|r-r'|=YY}
 
     $b\to\infty$时，变为式\eqref{eqn:Green YY}
-
+    
     $a\to0$时，变为球内Green函数表达式。
 \end{example}
 \begin{example}{接地球内带电圆环}{charged ring inside grounded sphere}
@@ -1045,9 +957,9 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 \[
     W[I_m(x),K_m(x)]=-\frac1x,
 \]
-故$A=4\pi$，我们得到了$1/|\bm r-\bm r'|$的展开 
+故$A=4\pi$，我们得到了$1/\abs{\bm r-\bm r'}$的展开 
 \begin{equation}
-    \frac1{|\bm r-\bm r'|}=\frac1\pi\sum_{m=-\infty}^{+\infty}\int\iti\e{\i m(\phi-\phi')}\e{\i k(z-z')}I_m(k\rho_<)K_m(k\rho_>)\d k.
+    \frac1{\abs{\bm r-\bm r'}}=\frac1\pi\sum_{m=-\infty}^{+\infty}\int\iti\e{\i m(\phi-\phi')}\e{\i k(z-z')}I_m(k\rho_<)K_m(k\rho_>)\d k.
 \end{equation}
 
 \subsection{Green函数的本征函数展开式}
@@ -1062,7 +974,7 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 
 本征函数是正交的：
 \[
-    \int_V\psi_m^\ast(\bm r)\psi_n(\bm r)\d V=\vd_{mn}.
+    \int_V\psi_m\cj(\bm r)\psi_n(\bm r)\d V=\vd_{mn}.
 \]
 本征值$\lambda$的谱可以是离散集，也可以是连续集，或者两者兼而有之。我们假定所有本征函数构成一个完备集。
 
@@ -1080,21 +992,21 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 \]
 因此系数为
 \[
-    a_n(\bm r')=\frac{4\pi}{\lambda_n-\lambda}\int_V\psi^\ast_n(\bm r)\vd(\bm r,\bm r')\d V=4\pi\frac{\psi_n^\ast(\bm r')}{\lambda_n-\lambda}.
+    a_n(\bm r')=\frac{4\pi}{\lambda_n-\lambda}\int_V\psi_n\cj(\bm r)\vd(\bm r,\bm r')\d V=4\pi\frac{\psi_n\cj(\bm r')}{\lambda_n-\lambda}.
 \]
 因此Green函数的本征函数展开式为
 \begin{equation}
-    G(\bm r,\bm r')=4\pi\sum_n \frac{\psi_n^\ast(\bm r')\psi_n(\bm r)}{\lambda_n-\lambda}
+    G(\bm r,\bm r')=4\pi\sum_n \frac{\psi_n\cj(\bm r')\psi_n(\bm r)}{\lambda_n-\lambda}
 \end{equation}
 对于连续谱，求和用积分代替。
-\begin{example}{$1/|\bm r-\bm r'|$的三维Fourier积分表示}{1/|r-r'| Fourier}
+\begin{example}{$1/\abs{\bm r-\bm r'}$的三维Fourier积分表示}{1/|r-r'| Fourier}
     自由边界下，$f(\bm r)\equiv 0$的特征方程
     \[
         (\lapla+k^2)\psi_{\bm k}(\bm r)=0\implies\psi_{\bm k}(\bm r)=\frac{\e{\i\bm k\cdot\bm r}}{(2\pi)^{3/2}}.
     \]
     则$\lambda=0$时的Green函数为
     \[
-        G(\bm r,\bm r')=4\pi\int\frac{\psi_{\bm k}^\ast(\bm r')\psi_{\bm k}(\bm r)}{k^2}\d V_k=\frac1{2\pi^2}\int\frac{\e{\i\bm k\cdot(\bm r'-\bm r)}}{k^2}\d V_k.
+        G(\bm r,\bm r')=4\pi\int\frac{\psi_{\bm k}\cj(\bm r')\psi_{\bm k}(\bm r)}{k^2}\d V_k=\frac1{2\pi^2}\int\frac{\e{\i\bm k\cdot(\bm r'-\bm r)}}{k^2}\d V_k.
     \]
 \end{example}
 

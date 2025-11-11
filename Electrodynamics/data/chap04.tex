@@ -1,5 +1,9 @@
+\renewcommand{\mag}{\mathrm m}
+
 \chapter{静磁学、时变场}
+
 \label{chap:magnetostatics}
+
 本章主要介绍静磁学(magnetostatics)的内容，与前几章介绍的静电学在多处均有呼应。%当然，本文为节省篇幅省略了一些科学史的介绍及磁学的发展研究历程，感兴趣的读者可以自行查找相关资料了解。同时，对于一些过于基础性的概念也仅仅只做大致的描述。
 类似于静电学，我们建立了静磁学的基本方程组，通过几个边值问题阐述了静磁学问题的处理方法。%（如均匀带电圆环在全空间产生的磁场……）。
 %，……
@@ -11,48 +15,76 @@
 \label{sec:introduction to magnetostatics}
 
 %值得注意的是，
-磁场(magnetic field)的基本规律最早并不是直接根据人类对磁性材料的接触中得出的，原因在于静磁学和静电学存在一个根本上的差别：人们没有发现自由磁荷(free magnetic charge)的存在。在磁学中，基本单元是磁偶极子\footnote{就是高中物理里的小磁针模型。}(magnetic dipole)。磁场的磁感应强度\footnote{也称磁通密度(magnetic-flux density)}(magnetic induction) $\bm B$其方向被定义为处在该磁场中的磁偶极矩$\bm\mu$的方向，其大小可以由磁偶极矩$\bm\mu$所受力矩$\bm N$来衡量：
-\begin{equation}
-    \bm N=\bm\mu\times\bm B.
-\end{equation}
-另外通过Ørsted等人的实验，我们可以知道磁场是由电流(current)产生的。电流相当于运动电荷，用电流密度(current density)矢量$\bm J$描述：
-\begin{equation}
-    \bm J:=\rho\bm v,
-\end{equation}
-其大小为单位时间流过单位面积的电荷量，其方向为电荷运动的方向。
-\paragraph{连续性方程}
-由于电荷守恒(conservation of charge)，空间中固定一点的电荷量不会有源项，因此
-\begin{equation}
-    \label{eqn:continuity}
-    \pv\rho t+\div\bm J=0,
-\end{equation}
-上式称为连续性方程(continuity equation)。上式也可通过另一种方式推导：考虑空间一体积微元$V$，其内电荷量不随时间改变：
-\begin{equation*}
-    \label{eqn:d(rhoV)/dt=0}
-    \dv{(\rho V)}t=\dv\rho tV+\rho\dv Vt=0,\tag{$\ast$}
-\end{equation*}
-由于$\rho=\rho(x,y,z,t)$是时空的函数，其全微分为
-\[
-    \d\rho=\pv\rho t\d t+\pv\rho x\d x+\pv\rho y\d y+\pv\rho z\d z,
-\]
-两端除以$\d t$，得到其迁移导数(convective derivative)为
-\[
-    \dv\rho t=\pv\rho t+\pv\rho xv_x+\pv\rho yv_y+\pv\rho zv_z=\pv\rho t+\bm v\cdot\nabla\rho;
-\]
-而体积元的变化率
-\[
-    \dv Vt=\oint_{\p V}\bm v\cdot\d\bm A=\int_V\div\bm v\d V=V\div\bm v.
-\]
-因此\eqref{eqn:d(rhoV)/dt=0}变为
-\[
-    \dv\rho t+\rho\div\bm v=\pv\rho t+\bm v\cdot\nabla\rho+\rho\div\bm v=\pv\rho t+\div(\rho\bm v)=0,
-\]
-上式即\eqref{eqn:continuity}。
-\paragraph{稳恒电流}
-稳恒(steady-state)磁现象满足空间各处的$\rho$不变，于是%对于静磁学，
-\begin{equation}
-    \div\bm J=0.
-\end{equation}
+磁场(magnetic field)的基本规律最早并不是直接根据人类对磁性材料的接触中得出的，原因在于静磁学和静电学存在一个根本上的差别：人们没有发现自由磁荷(free magnetic charge)的存在。
+在磁学中，基本单元是磁偶极子(magnetic dipole)，用于测量磁场的磁偶极子一般是小磁针，对应电学中的试探电荷。
+\begin{definition}
+    {磁感应强度}{magnetic induction intensity}
+    磁场通常用磁感应强度(magnetic induction intensity) $\bm B$描述，其方向定义为磁偶极子平衡时磁矩$\bm\mu$的方向，大小可以由磁偶极子偏转时所受力矩$\bm N$来衡量：
+    \begin{equation}
+        \bm N=\bm\mu\times\bm B.
+    \end{equation}
+\end{definition}
+Ørsted等人的实验发现：通电导线可使小磁针偏转，也就是说磁场可以由电流产生。
+\begin{definition}
+    {电流密度}{current density}
+    电流(current)相当于运动电荷，其大小为单位时间通过某界面的电荷量：
+    \begin{equation}
+        I:=\dv qt,
+    \end{equation}
+    电流也可以用电流密度(current density)矢量$\bm J$描述：
+    \begin{equation}
+        \bm J:=\rho\bm v,
+    \end{equation}
+    其大小为单位时间流过单位面积的电荷量，其方向为电荷运动的方向。
+\end{definition}
+
+\begin{corollary}
+    对于离散情形，
+    \begin{equation}
+        \bm J=\sum_i q_i\bm v_i\vd(\bm r-\bm r_i).
+    \end{equation}
+\end{corollary}
+
+\begin{theorem}
+    {连续性方程}{continuity equation}
+    由于电荷守恒(conservation of charge)，电荷密度和电流密度满足连续性方程(continuity equation)
+    \begin{equation}
+        \label{eqn:continuity}
+        \pv\rho t+\div\bm J=0,
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    考虑空间一体积微元$\vd V$，其内电荷量不随时间改变：
+    \begin{equation*}
+        \label{eqn:d(rhoV)/dt=0}
+        \dv{(\rho\vd V)}t=\dv\rho t\vd V+\rho\dv{(\delta V)}t=0,\tag{$\ast$}
+    \end{equation*}
+    由于$\rho=\rho(x,y,z,t)$是时空的函数，其全微分为
+    \[
+        \d\rho=\pv\rho t\d t+\pv\rho x\d x+\pv\rho y\d y+\pv\rho z\d z,
+    \]
+    其迁移导数(convective derivative)为
+    \[
+        \dv\rho t=\pv\rho t+\pv\rho xv_x+\pv\rho yv_y+\pv\rho zv_z=\pv\rho t+\bm v\cdot\nabla\rho;
+    \]
+    而体积元的变化率
+    \[
+        \dv{(\delta V)}t=\oint_{\p(\delta V)}\bm v\cdot\d\bm A=\int_{\delta V}\div\bm v\d V=\vd V\div\bm v.
+    \]
+    因此\eqref{eqn:d(rhoV)/dt=0}变为
+    \[
+        \dv\rho t+\rho\div\bm v=\pv\rho t+\bm v\cdot\nabla\rho+\rho\div\bm v=\pv\rho t+\div(\rho\bm v)=0.
+        \qedhere
+    \]
+\end{proof}
+
+\begin{definition}
+    {稳恒电流}{steady current}
+    稳恒(steady-state)磁现象满足空间各处的$\rho$不变，于是连线性方程\eqref{eqn:continuity}变为
+    \begin{equation}
+        \div\bm J=0.
+    \end{equation}
+\end{definition}
 %我们从电流与磁感应强度之间的关系出发，建立静磁学基本定律。
 
 \section{Biot-Savart定律}
@@ -61,52 +93,55 @@
 %尽管磁现象的发现有很悠久的历史，但直到建立了电流和磁场之间的联系，磁现象才得到定量描述。
 为了描述电流在激发磁场时的作用，我们引入电流元(current element)的概念：$\d\bm\ell$是通电流$I$的导线的长度元，指向电流方向，则电流元为$I\d\bm\ell$。
 \begin{theorem}{Biot-Savart定律}{Biot and Savart Law}
-    原点处电流元$I\d\bm\ell$在$\bm r$处激发的磁感应强度元$\d\bm B$为
+    原点处电流元$I\d\bm\ell$在$\bm r$处激发的磁感应强度$\d\bm B$为
     \begin{equation}
         \label{eqn:B-S law}
-        \d\bm B=k\frac{I\d\bm\ell\times\bm r}{|\bm r|^3},\quad k=\frac{\mu_0}{4\pi},
+        \d\bm B=k_\mag\frac{I\d\bm\ell\times\uvec r}{r^2},
     \end{equation}
-    真空磁导率$\mu_0\simeq 4\pi\times{10^{-7}}\,\si{N/A^2}.$
+    其中$k_\mag$是比例系数，在SI单位制中，
+    \[
+        k_\mag=\frac{\mu_0}{4\pi}\approx\SI{1e-7}{N/A^2},
+    \]
+    其中真空磁导率$\mu_0\approx 4\pi\times{10^{-7}}\,\si{N/A^2}.$
 \end{theorem}
-尽管式\eqref{eqn:B-S law}与点电荷电场强度\eqref{eqn:E of q}有相似的形式，但%电流元$I\d\bm\ell$并不能视为点电荷$q$的磁场对应，
-%只有把电流元看做对连续集合(电流回路)求和中的一个元素时才有意义，
-式\eqref{eqn:B-S law}只有在积分中才有意义，
-因为电流元本身并不满足连续性方程\eqref{eqn:continuity}。
-\footnote{一种摆脱这个困难的办法是将电流元$I\d\bm\ell$换成运动电荷$q\bm v$
-\[
-    \bm B=k\frac{q\bm v\times\bm r}{|\bm r|^3}.
-\]
-但这个表达式与时间相关，并且只有当电荷速度$v\ll c$且加速度可忽略不计时才成立。
-而式\eqref{eqn:B-S law}则是精确的：
-对于一个电荷单元趋于0且电荷数目趋于无穷大的稳恒电流系统，相对论电磁场理论(包括加速度效应)将给出一个静磁场，并且形式上等于对式\eqref{eqn:B-S law}遍历电流积分所得的场。所以我们采用\eqref{eqn:B-S law}。}
+\begin{remark}
+    尽管电流元磁感应强度\eqref{eqn:B-S law}与点电荷电场强度\eqref{eqn:E of q}有相似的形式，但电流元只有在积分中才有意义，因为电流元本身并不满足连续性方程\eqref{eqn:continuity}。
+    \footnote{将电流元$I\d\bm\ell$换成运动电荷$q\bm v$可以满足连续性方程，但得到的表达式
+    \[
+        \bm B=k_\mag\frac{q\bm v\times\uvec r}{r^2}.
+    \]
+    与时间相关，并且只有当电荷速度$v\ll c$且加速度可忽略不计时才成立。
+    而式\eqref{eqn:B-S law}是精确的：
+    考虑相对论电磁场理论(包括加速度效应)，
+    在电荷单元$e\to0$极限下，稳恒电流系统会激发静磁场，并且形式上等于对式\eqref{eqn:B-S law}遍历电流积分所得的场。}
+\end{remark}
 \begin{example}{无限长直导线的磁场}{B of straight line}
-    $z$轴上的长直导线电流方向为$+z$，距离其$\rho$处的磁感应强度大小为
+    $z$轴上的长直导线电流方向为$+z$，距离其$\rho$处的磁感应强度方向服从右手定则，即$\uvec\phi$方向，
+    大小为
     \[
         B_\phi=\frac{\mu_0}{4\pi}\int\iti\frac{I\rho\d z}{(z^2+\rho^2)^{3/2}}=\frac{\mu_0}{2\pi}\frac I\rho.
     \]
-    方向服从右手定则，即$\uvec\phi$方向。
 \end{example}
-电流元$I\d\bm\ell$在磁感应强度$\bm B$中所受的力
-\[
-    \d\bm F=I\d\bm\ell\times\bm B.
-\]
-换成电荷得到磁场的Lorentz力
-\begin{equation}
-    \bm F=q\bm v\times\bm B.
-\end{equation}
-\begin{example}{闭合回路之间的力}{F of 2 closed lines}
+
+\begin{theorem}
+    {Ampère力}{Ampère force}
+    电流元$I\d\bm\ell$在磁感应强度$\bm B$中受Ampère力
+    \begin{equation}
+        \d\bm F=I\d\bm\ell\times\bm B;
+    \end{equation}
+\end{theorem}
+
+\begin{example}{闭合回路之间的力}{F of closed lines}
     由闭合电流回路2产生的磁场$\bm B$对闭合电流回路1的总力：
+    \begin{align*}
+        \bm F_{12}&=\frac{\mu_0}{4\pi}I_1I_2\oint\oint\frac{\d\bm\ell_1\times(\d\bm\ell_2\times\uvec r_{12})}{\bm r_{12}^2}\\
+        &=\frac{\mu_0}{4\pi}I_1I_2\oint\oint\frac{(\uvec r_{12}\cdot\d\bm\ell_1)\d\bm\ell_2-\uvec r_{12}(\d\bm\ell_1\cdot\d\bm\ell_2)}{\bm r_{12}^2}\\
+        % &=\frac{\mu_0}{4\pi}I_1I_2\biggfkh{\oint\cancel{\oint\frac{\uvec r_{12}\cdot\d\bm\ell_1}{\bm r_{12}^2}}\d\bm\ell_2-\oint\oint\frac{\bm r_{12}}{\abs{\bm r_{12}}^3}(\d\bm\ell_1\cdot\d\bm\ell_2)}\\
+        &=-\frac{\mu_0}{4\pi}\oint\oint\frac{I_1I_2}{r_{12}^2}\uvec r_{12}(\d\bm\ell_1\cdot\d\bm\ell_2).
+    \end{align*}
+    利用\eqref{eqn:bac-cab}将双叉乘化为更对称的形式，第一项的环路积分为0：
     \[
-        \bm F_{12}=\frac{\mu_0}{4\pi}I_1I_2\oint\oint\frac{\d\bm\ell_1\times(\d\bm\ell_2\times\bm r_{12})}{|\bm r_{12}|^3};
-    \]
-    利用\eqref{eqn:bac-cab}将双叉乘化为更对称的形式：
-    %\bm A\times(\bm B\times\bm C)=\bm B(\bm A\cdot\bm C)-\bm C(\bm A\cdot\bm B)
-    \[
-        \bm F_{12}=\frac{\mu_0}{4\pi}I_1I_2\biggfkh{\oint\cancel{\oint\frac{\bm r_{12}\cdot\d\bm\ell_1}{|\bm r_{12}|^3}}\d\bm\ell_2-\oint\oint\frac{\bm r_{12}}{|\bm r_{12}|^3}(\d\bm\ell_1\cdot\d\bm\ell_2)}.
-    \]
-    第一项的环路积分为0：
-    \[
-        \oint\frac{\bm r_{12}\cdot\d\bm\ell_1}{|\bm r_{12}|^3}=\oint\frac{\d x_{12}}{x_{12}^2}=0.
+        \oint\frac{\uvec r_{12}\cdot\d\bm\ell_1}{\bm r_{12}^2}=\oint\frac{\d r_{12}}{r_{12}^2}=0.
     \]
     第二项是对称的，因此满足Newton第三定律。
 \end{example}
@@ -117,6 +152,9 @@
     \end{equation}
     旧的SI单位制便由此式及$\mu_0$定义电流单位A。
 \end{example}
+
+\paragraph{电流密度表示}
+
 电流元可以写成电流密度$\bm J$的形式
 \[
     I\d\bm\ell=\d q\bm v=(\rho\d V)\bm v=\bm J\d V,
@@ -125,71 +163,100 @@
 \[
     \bm F=\int_V\d q(\bm v\times\bm B)=\int_V\rho(\bm v\times\bm B)\d V=\int_V\bm J\times\bm B\d V.
 \]
-总力矩：
-\[
-    \bm N=\bm r\times\bm F=\int_V\bm r\times(\bm J\times\bm B)\d V.
-\]
-
-\subsection{磁场的Gauss定律}
-
-利用电流密度，Biot-Savart定律\eqref{eqn:B-S law}可以写成旋度的形式
-\begin{align}
-    \label{eqn:B(x)}
-    \bm B(\bm r)&=\frac{\mu_0}{4\pi}\int_V\bm J(\bm r')\times\frac{\bm r-\bm r'}{|\bm r-\bm r'|^3}\d V'\\
-    &=\frac{\mu_0}{4\pi}\curl\int_V\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\d V'.
-\end{align}
-由\eqref{eqn:divcurl}，可得$\bm B$的第一个微分方程：
-\begin{equation}
-    \label{eqn:divB}
-    \div\bm B=0,
-\end{equation}
-这是磁场的Gauss定律，这表明：静磁场无源。
-
-\subsection{Ampère定律}
-\label{ssec:Ampere's law}
-
-现在我们希望知道$\bm B$的散度，利用\eqref{eqn:curlcurl}
-\begin{align*}
-    \curl\biggfkh{\curl\frac{\bm J(\bm r')}{|\bm r-\bm r'|}}&=\nabla\biggfkh{\div\frac{\bm J(\bm r')}{|\bm r-\bm r'|}}-\lapla\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\\
-    &=\nabla\biggfkh{\frac{\cancel{\div\bm J(\bm r')}}{|\bm r-\bm r'|}+\bm J(\bm r')\cdot\nabla\frac1{|\bm r-\bm r'|}}-\bm J(\bm r')\lapla\frac1{|\bm r-\bm r'|}.
-\end{align*}
-则
-\[
-    \curl\bm B=\frac{\mu_0}{4\pi}\biggfkh{-\nabla\int_V\bm J(\bm r')\cdot\nabla'\frac1{|\bm r-\bm r'|}\d V'+4\pi\bm J(\bm r)}
-\]
-对积分项进行分部积分：
-\[
-    \int_V\bm J(\bm r')\cdot\nabla'\frac1{|\bm r-\bm r'|}\d V'=\oint_{\p V}\frac{\cancel{\bm J(\bm r')\cdot\uvec n'}}{|\bm r-\bm r'|}\d A'-\int_V\frac{\cancel{\nabla'\cdot\bm J(\bm r')}}{|\bm r-\bm r'|}\d V'=0,
-\]
-\iffalse
-\begin{align*}
-    \curl\bm B&=\frac{\mu_0}{4\pi}\curl\biggfkh{\curl\int_V\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\d V'}\\
-    &\qquad\textcolor{gray}{\curl(\curl\bm A)=\nabla(\div\bm A)-\lapla\bm A}\\
-    &=\frac{\mu_0}{4\pi}\biggfkh{\nabla\int_V\div\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\d V'-\int_V\lapla\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\d V'}\\
-    &\qquad\textcolor{gray}{\div(\varphi\bm A)=A\cdot\nabla\varphi+\varphi\div\bm A}\\
-    &=\frac{\mu_0}{4\pi}\biggfkh{\nabla\int_V\biggkh{\bm J(\bm r')\cdot\nabla\frac1{|\bm r-\bm r'|}+0}\d V'-\int_V\bm J(\bm r')\lapla\frac1{|\bm r-\bm r'|}\d V'}\\
-    %=\frac{\mu_0}{4\pi}\biggfkh{-\nabla\int_V\bm J(\bm r')\cdot\nabla'\frac1{|\bm r-\bm r'|}\d V'+4\pi\bm J(\bm r)}\\
-    &\qquad\textcolor{gray}{\int_V\bm A\cdot\nabla f\d V=-\int_Vf\div\bm A\d V+\oint_{\p V}f\bm A\cdot\d\bm A}\\
-    &=\mu_0\bm J(\bm r)+\frac{\mu_0}{4\pi}\nabla\biggfkh{\int_V\frac{\cancel{\nabla'\cdot\bm J(\bm r')}}{|\bm r-\bm r'|}\d V'-\cancel{\oint_{\p V}\frac{\bm J(\bm r')\cdot\uvec n'}{|\bm r-\bm r'|}\cdot\d A'}};
-\end{align*}
-\fi
-由此得到第二个微分方程：
-\begin{equation}
-    \label{eqn:curlB}
-    \curl\bm B=\mu_0\bm J.
-\end{equation}
-两边取$S$的面积分
-\[
-    \int_S\curl(\bm B\cdot\uvec n)\d A=\mu_0\int_S\bm J\cdot\d\bm A.
-\]
-右边积分项即穿过$S$的电流$I$，可得Ampère定律：
-\begin{theorem}{Ampère定律}{Ampere's law}
+\begin{definition}
+    {Lorentz力}{Lorentz force}
+    单个电荷$q$在磁场中受到的Lorentz力为
     \begin{equation}
-        \label{eqn:Ampere}
-        \oint_{\p S}\bm B\cdot\d\bm\ell=\mu_0I.
+        \bm F=q\bm v\times\bm B.
+    \end{equation}
+\end{definition}
+
+\begin{corollary}
+    Lorentz力不做功。
+\end{corollary}
+
+% 总力矩：
+% \[
+%     \bm N=\bm r\times\bm F=\int_V\bm r\times(\bm J\times\bm B)\d V.
+% \]
+
+\begin{theorem}
+    {磁场的Gauss定律}{Gauss's law for magnetism}
+    静磁场无源
+    \begin{equation}
+        \label{eqn:divB}
+        \div\bm B=0,
     \end{equation}
 \end{theorem}
-在高度对称的条件下，可利用Ampère定律得到磁感应强度的大小。
+
+\begin{proof}
+    利用电流密度，Biot-Savart定律\eqref{eqn:B-S law}可以写成旋度的形式
+    \begin{equation}
+        \label{eqn:B(x)}
+        \bm B(\bm r)=\frac{\mu_0}{4\pi}\int_V\bm J(\bm r')\times\frac{\bm r-\bm r'}{\abs{\bm r-\bm r'}^3}\d V'
+        =\frac{\mu_0}{4\pi}\curl\int_V\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\d V'.
+    \end{equation}
+    由\eqref{eqn:divcurl}即得。
+\end{proof}
+
+\begin{theorem}
+    {Ampère定律的微观形式}{Ampère's law in microscopic form}
+    磁场的旋度
+    \begin{equation}
+        \label{eqn:curlB}
+        \curl\bm B=\mu_0\bm J.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    利用\eqref{eqn:curlcurl}
+    \begin{align*}
+        \curl\biggfkh{\curl\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}}&=\nabla\biggkh{\div\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}}-\lapla\biggkh{\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}}\\
+        &=\nabla\biggfkh{\frac{\cancel{\div\bm J(\bm r')}}{\abs{\bm r-\bm r'}}+\bm J(\bm r')\cdot\nabla\biggkh{\frac1{\abs{\bm r-\bm r'}}}}+4\pi\bm J(\bm r')\vd(\bm r-\bm r').
+    \end{align*}
+    则
+    \[
+        \curl\bm B=\frac{\mu_0}{4\pi}\biggfkh{-\nabla\int_V\bm J(\bm r')\cdot\nabla'\biggkh{\frac1{\abs{\bm r-\bm r'}}}\d V'+4\pi\bm J(\bm r)},
+    \]
+    对积分项进行分部积分：
+    \[
+        \int_V\bm J(\bm r')\cdot\nabla'\biggkh{\frac1{\abs{\bm r-\bm r'}}}\d V'=\cancel{\oint_{\p V}\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\cdot\d\bm A'}-\int_V\frac{\cancel{\nabla'\cdot\bm J(\bm r')}}{\abs{\bm r-\bm r'}}\d V'=0.
+    \]
+    注意积分区域$V$必须考虑所有的电流分布，因此边界(一般是无穷远处)项为0。
+\end{proof}
+\iffalse
+\begin{align*}
+    \curl\bm B&=\frac{\mu_0}{4\pi}\curl\biggfkh{\curl\int_V\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\d V'}\\
+    &\qquad\textcolor{gray}{\curl(\curl\bm A)=\nabla(\div\bm A)-\lapla\bm A}\\
+    &=\frac{\mu_0}{4\pi}\biggfkh{\nabla\int_V\div\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\d V'-\int_V\lapla\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\d V'}\\
+    &\qquad\textcolor{gray}{\div(\varphi\bm A)=A\cdot\nabla\varphi+\varphi\div\bm A}\\
+    &=\frac{\mu_0}{4\pi}\biggfkh{\nabla\int_V\biggkh{\bm J(\bm r')\cdot\nabla\frac1{\abs{\bm r-\bm r'}}+0}\d V'-\int_V\bm J(\bm r')\lapla\frac1{\abs{\bm r-\bm r'}}\d V'}\\
+    %=\frac{\mu_0}{4\pi}\biggfkh{-\nabla\int_V\bm J(\bm r')\cdot\nabla'\frac1{\abs{\bm r-\bm r'}}\d V'+4\pi\bm J(\bm r)}\\
+    &\qquad\textcolor{gray}{\int_V\bm A\cdot\nabla f\d V=-\int_Vf\div\bm A\d V+\oint_{\p V}f\bm A\cdot\d\bm A}\\
+    &=\mu_0\bm J(\bm r)+\frac{\mu_0}{4\pi}\nabla\biggfkh{\int_V\frac{\cancel{\nabla'\cdot\bm J(\bm r')}}{\abs{\bm r-\bm r'}}\d V'-\cancel{\oint_{\p V}\frac{\bm J(\bm r')\cdot\uvec n'}{\abs{\bm r-\bm r'}}\cdot\d A'}};
+\end{align*}
+\fi
+
+\begin{theorem}{Ampère定律}{Ampere's law}
+    磁感应强度沿闭合曲线$\p S$的环量与穿过$S$的电流$I_i$的关系为：
+    \begin{equation}
+        \label{eqn:Ampere}
+        \oint_{\p S}\bm B\cdot\d\bm\ell=\mu_0\sum_S I_i.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    对\eqref{eqn:curlB}两边取$S$的面积分
+    \[
+        \int_S(\curl\bm B)\cdot\d\bm A=\mu_0\int_S\bm J\cdot\d\bm A.
+    \]
+    右边积分项即穿过$S$的电流$I$。
+\end{proof}
+
+\begin{remark}
+    在高度对称的条件下，可利用Ampère定律得到磁感应强度的大小。
+    比如\exmref{exm:B of straight line} 可以直接得到$B\cdot 2\pi\rho=\mu_0I$。
+\end{remark}
 
 \section{矢量势}
 \label{sec:vector potential}
@@ -202,32 +269,51 @@
         \bm B=\curl\bm A.
     \end{equation}
 \end{definition}
-但满足上式的$\bm A$并不唯一。若对$\bm A$进行规范(gauge)变换：
-\[
-    \bm A\mapsto\bm A'=\bm A+\nabla\varLambda,
-\]
-式\eqref{eqn:B=curlA}对于任意的$\varLambda$仍成立：
-\[
-    \curl\bm A'=\curl(\bm A+\nabla\varLambda)=\curl\bm A+\bm 0=\bm B.
-\]
-因此有必要选定一个额外的限制条件，一个方便的选择是Coulomb规范：
-\begin{equation}
-    \div\bm A=0.
-\end{equation}
-从而$\lapla\varLambda=0$，在无边界条件时，$\varLambda=\const$，$\bm A$形式即最简洁的：
-\begin{equation}
-    \label{eqn:A-J}
-    \bm A(\bm r):=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{|\bm r-\bm r'|}\d V',
-\end{equation}
-在Coulomb规范下，
-我们也可以得到$\bm A$三个分量的Laplace方程：
-\[
-    \curl\bm B=\curl(\curl\bm A)=\nabla(\cancel{\div\bm A})-\lapla\bm A.
-\]
-即
-\begin{equation}
-    \lapla\bm A=-\mu_0\bm J.
-\end{equation}
+
+\begin{theorem}
+    {规范变换}{gauge transformation}
+    对$\bm A$进行规范(gauge)变换：
+    \[
+        \bm A\mapsto\bm A'=\bm A+\nabla\varLambda,
+    \]
+    其中$\varLambda$为任意标量场。磁场在规范变换下是不变的。
+\end{theorem}
+
+\begin{proof}
+    \[
+        \curl\bm A'=\curl(\bm A+\nabla\varLambda)=\curl\bm A+\bm 0=\bm B.
+        \qedhere    
+    \]
+\end{proof}
+
+\begin{corollary}
+    因此$\bm A$并不唯一，有必要选定一个额外的限制条件，称为规范条件(gauge condition)。
+\end{corollary}
+
+\begin{definition}
+    {Coulomb规范}{Coulomb gauge}
+    一个方便的选择是Coulomb规范：
+    \begin{equation}
+        \div\bm A=0.
+    \end{equation}
+    从而$\lapla\varLambda=0$，在无边界条件时，$\varLambda=\const$，$\bm A$形式即最简洁的：
+    \begin{equation}
+        \label{eqn:A-J}
+        \bm A(\bm r):=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\d V',
+    \end{equation}
+\end{definition}
+
+\begin{corollary}
+    在Coulomb规范下，
+    我们也可以得到$\bm A$三个分量的Poisson方程：
+    \[
+        \curl\bm B=\curl(\curl\bm A)=\nabla(\cancel{\div\bm A})-\lapla\bm A.
+    \]
+    即
+    \begin{equation}
+        \lapla\bm A=-\mu_0\bm J.
+    \end{equation}
+\end{corollary}
 
 \section{磁矩}
 \label{sec:magnetic moment}
@@ -237,9 +323,9 @@
     \[
         J_\phi=I\sin\theta'\vd(\cos\theta')\frac{\delta(r'-a)}a.
     \]
-    故矢量势$\bm A$也仅有$\phi$分量：
+    在Coulomb规范下，矢量势$\bm A$也仅有$\phi$分量：
     \begin{align*}
-        A_\phi&=\frac{\mu_0}{4\pi}\int\frac{J_\phi}{|\bm r-\bm r'|}\d V'\\
+        A_\phi&=\frac{\mu_0}{4\pi}\int\frac{J_\phi}{\abs{\bm r-\bm r'}}\d V'\\
         &=\frac{\mu_0I}{4\pi a}\int\zti\oint\frac{\sin\theta'\vd(\cos\theta')\vd(r'-a)r^2\d\Omega'\d r'}{\sqrt{r^2+r'^2-2rr'(\cos\theta\cos\theta'+\sin\theta\sin\theta'\cos\phi')}}\\
         &=\frac{\mu_0Ia}{4\pi}\int_0^{2\pi}\frac{\cos\phi'\d\phi'}{\sqrt{a^2+r^2-2ar\sin\theta\cos\phi'}}\\
         &=\frac{\mu_0I}\pi\frac{a}{\sqrt{a^2+r^2+2ar\sin\theta}}\biggfkh{\biggkh{\frac2{k^2}-1}K(k)-\frac2{k^2}E(k)}.%\frac{(2-k^2)K(k)-2E(k)}{k^2}.
@@ -250,11 +336,11 @@
     \]
     $K(k),E(k)$为第一、二类完全椭圆积分
     \begin{alignat*}{2}
-        K(k)&=\int_0^1\frac{\d x}{\sqrt{(1-x^2)(1-k^2x^2)}}&,\enspace|k|&<1\\
-        E(k)&=\int_0^1\sqrt{\frac{1-k^2x^2}{1-x^2}}\d x&|k|&<1.
+        K(k)&=\int_0^1\frac{\d x}{\sqrt{(1-x^2)(1-k^2x^2)}}&,\enspace\abs{k}&<1,\\
+        E(k)&=\int_0^1\sqrt{\frac{1-k^2x^2}{1-x^2}}\d x,&\abs{k}&<1.
     \end{alignat*}
     \begin{center}
-        \includegraphics[width=7cm]{figures/ellipseKE.pdf}
+        \includegraphics[width=0.8\linewidth]{figures/ellipseKE.pdf}
         \captionof{figure}{第一、二类完全椭圆积分}
     \end{center}
     当$r\gg a$或$r\ll a$或$\theta\to 0$时，
@@ -267,27 +353,50 @@
         B_\theta&=-\frac1r\pp r(rA_\phi)=\frac{\mu_0Ia^2}4\frac{\sin\theta}{r^3},\\
         B_\phi&=0.
     \end{align*}
-    与电偶极矩的电场\eqref{eqn:edipole-E}比较，可定义环形电流的磁偶极矩(magnetic dipole moment)大小
+    与电偶极矩的电场\eqref{eqn:E dipole}比较，可定义环形电流的磁偶极矩(magnetic dipole moment)大小
     \[
         m=I\cdot\pi a^2,
     \]
     沿$+z$方向，从而 
-    \begin{align}
-        \bm A&=\frac{\mu_0m\sin\theta}{4\pi r^2}\uvec\phi;\\
-        \bm B&=\frac{\mu_0m}{4\pi r^3}(2\cos\theta\uvec r+\sin\theta\uvec\theta).
-    \end{align}
+    \begin{subequations}
+        \begin{align}
+            \label{eqn:A dipole}
+            \bm A&=\frac{\mu_0m\sin\theta}{4\pi r^2}\uvec\phi;\\
+            \label{eqn:B dipole }
+            \bm B&=\frac{\mu_0m}{4\pi r^3}(2\cos\theta\uvec r+\sin\theta\uvec\theta).
+        \end{align}
+    \end{subequations}
+    同样，上式磁场的散度$\div\bm B$在原点处的积分不为0，应进行修正：
+    \begin{equation}
+        \label{eqn:B dipole with delta}
+        \bm B(\bm r)=\frac{\mu_0}{4\pi}\biggfkh{\frac{3(\bm m\cdot\uvec r)\uvec r-\bm m}{r^3}+\frac{8\pi}3\bm m\vd(\bm r)}.
+    \end{equation}
+    可得磁场的旋度$\curl\bm B=\mu_0\bm m\times\nabla\delta(\bm r)$，即磁偶极子的电流密度为
+    \begin{equation}
+        \bm J(\bm r)=\bm m\times\nabla\delta(\bm r).
+    \end{equation}
 \end{example}
-我们现在考虑一般的电流分布在一个小(相对于感兴趣区域的尺度)的空间区域中的性质。
-\footnote{这个问题可以用矢量球谐函数来做一个完整的处理，类似于静电多极展开。这些将在\chapref{chap:multipole radiation}多极辐射中介绍，我们在这里只满足于最低的近似阶。}
-若$x\gg x'$，矢量势的分量可以被展开为：
+
+\paragraph{多极矩展开}
+
+与\secref{sec:multipole expansion}静电多极展开类似，考虑一个局域分布的电流，我们也可以对矢量势做多极矩展开：
+\footnote{这个问题可以用矢量球谐函数来做一个完整的处理，将在\chapref{chap:multipole radiation}多极辐射中介绍，这里只满足于最低的近似阶。}
+\begin{align}
+    \notag
+    \bm A(\bm r)&=\frac{\mu_0}{4\pi}\int_V\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\d V'\\
+    \notag
+    &=\frac{\mu_0}{4\pi}\int_V\bm J(\bm r')\biggkh{\frac1r+\frac{\bm r'\cdot\uvec r}{r^2}+\cdots}\d V'\\
+    &=\bm 0+\frac{\mu_0}{4\pi}\frac{\bm m\times\uvec r}{r^2}+\cdots.
+\end{align}
+由于$\bm J$的体积分为$\bm 0$，磁单极矩(magnetic monopole moment)不存在，因此最低阶非零项为磁偶极矩(magnetic dipole moment) $\bm m$，简称磁矩。经过推导，可以得到磁矩的表达式：
 \begin{equation}
-    \label{eqn:A approx}
-    A_\alpha(\bm r)=\frac{\mu_0}{4\pi}\biggfkh{\frac1{|\bm r|}\cancel{\int_V J_\alpha(\bm r')\d V'}+\frac{\bm r}{|\bm r|^3}\cdot\int_V J_\alpha(\bm r')\bm r'\d V+\cdots}
-    \tag{$\ast$}
+    \bm m:=\frac12\int_V\bm r'\times\bm J(\bm r')\d V'.
 \end{equation}
+
+\iffalse
 下面我们用一些数学上的小tricks：
 \[
-    \oint_{\p V}fg\bm J\cdot\uvec n'\d A'=\int_V(g\bm J\cdot\nabla'f+f\bm J\cdot\nabla'g+fg\cancel{\nabla'\cdot\bm J})\d V'=0.
+    \oint_{\p V}fg\bm J\cdot\d\bm A'=\int_V(g\bm J\cdot\nabla'f+f\bm J\cdot\nabla'g+fg\cancel{\nabla'\cdot\bm J})\d V'=0.
 \]
 将$f,g$赋予特定的形式，可以得到
 \begin{alignat*}{2}
@@ -314,66 +423,74 @@
 \[
     \bm r'\cdot\int_V\bm r'J_\alpha\d V'=-\frac12\biggfkh{\bm r\times\int_V(\bm r'\times\bm J)\d V'}_\alpha.
 \]
-可定义磁矩密度(magnetic moment density)或磁化强度(magnetization)
-\begin{equation}
-    \bm M:=\frac12\bm r\times\bm J.
-\end{equation}
-其体积分为磁偶极矩(magnetic dipole moment)简称磁矩
-\begin{equation}
-    \bm m=\frac12\int_V\bm r'\times\bm J(\bm r')\d V'.
-\end{equation}
-因此式\eqref{eqn:A approx}中，矢量势的最低阶非零项
-\begin{equation}
-    \bm A(\bm r)=\frac{\mu_0}{4\pi}\frac{\bm m\times\bm r}{|\bm r|^3}.
-\end{equation}
-进而磁感应强度与电偶极矩电场\eqref{eqn:edipole-E with delta}形式相似：
-\begin{equation}
-    \bm B(\bm r)=\frac{\mu_0}{4\pi}\biggfkh{\frac{3\uvec n(\bm m\cdot\uvec n)-\bm m}{|\bm r|^3}+\frac{8\pi}3\bm m\vd(\bm r)}.
-\end{equation}
-因此，远离任何局域电流分布的磁场就是一个磁偶极子的磁场。
-\begin{example}{电流回路的磁矩}{m of I}
-    平面$S$上的电流回路的磁矩
+\fi
+
+\begin{example}
+    {电流回路的磁矩}{m of I}
+    平面$S$边缘上的电流回路的磁矩
     \begin{align*}
         \bm m=\frac12\oint_{\p S}\bm r\times I\d\bm\ell=IS\uvec n.
     \end{align*}
     与\exmref{exm:B of loop current} 中的定义一致。
 \end{example}
-\begin{example}{带电粒子轨道角动量的磁矩}{m of L}
+
+\begin{example}
+    {带电粒子轨道角动量的磁矩}{m of L}
     带电粒子的磁矩与其轨道角动量$\bm L=m\bm r\times\bm v$有关：
     \[
         \bm m=\frac12q\bm r\times\bm v=\frac q{2m}\bm L.
     \]
 \end{example}
-局部电流分布的磁场体积分
-\[
-    \int_{r<R}\bm B(\bm r)\d V=\begin{cases}
-        \frac{2\mu_0}3\bm m,&\text{球内电流}\\[1ex]
-        \frac{4\pi}3R^3\bm B(\bm 0),&\text{球外电流}
-    \end{cases}.
-\]
+
+\begin{example}
+    {磁场的体积分}{volume integral of B}
+    与\exmref{exm:volume integral of E} 类似，磁场在球内的体积分
+    \[
+        \int_{r<R}\bm B(\bm r)\d V=\frac{\mu_0R^2}3\int_V\frac{r_<}{r_>^2}\uvec r'\times\bm J(\bm r')\d V',
+    \]
+    其中$r_<:=\min(r',R),\,r_>:=\max(r',R)$。
+    \tcblower
+    考虑两种极端情形：电荷分布全在球内($r'<R$)和全在球外($r'>R$)，有
+    \begin{equation}
+        \label{eqn:int B dV}
+        \int_{r<R}\bm B(\bm r)\d V=\begin{cases}
+            \frac{2\mu_0}{3}\bm m,&\text{电流全在球内};\\[1ex]
+            -\frac{4\pi}{3}R^3\bm B(\bm 0),&\text{电流全在球外}.
+        \end{cases}
+    \end{equation}
+    这也对应于磁偶极子磁场\eqref{eqn:B dipole with delta}中的$2\mu_0\bm m\vd(\bm r)/3$项。
+\end{example}
 
 \subsection{磁矩的力、力矩和能量}
 \label{ssec:force, torque and energy of magnetic moment}
 
 外部磁感应强度$\bm B(\bm r)$中电流密度$\bm J(\bm r)$受到的总力
 \[
-    \bm F=\int_V\bm J(\bm r)\times\bm B(\bm r)\d V\simeq(\bm m\times\nabla)\times\bm B.
+    \bm F=\int_V\bm J(\bm r)\times\bm B(\bm r)\d V\simeq(\bm m\times\nabla)\times\bm B=\nabla(\bm m\cdot\bm B)-\bm m\cancel{(\div\bm B)},
 \]
-化简为
-\[
-    \bm F=\nabla(\bm m\cdot\bm B)-\bm m\cancel{(\div\bm B)}.
-\]
+即
+\footnote{此式包含了隐藏动量(hidden momentum) $\d(\bm E\times\bm m)/c^2\d t$的效应。}
+\begin{equation}
+    \label{eqn:F=nabla(m dot B)}
+    \bm F=\nabla(\bm m\cdot\bm B),
+\end{equation}
+% 注意其与$\bm F=(\bm p\cdot\nabla)\bm E$的区别。特别地，对于稳衡磁场，也可以写成$(\bm m\cdot\nabla)\bm B$，
+% \[
+%     \nabla(\bm m\cdot\bm B)=\bm m\times\cancel{(\curl\bm B)}+\bm B\times\cancel{(\curl\bm m)}+(\bm m\cdot\nabla)\bm B+(\bm B\cdot\cancel{\nabla)\bm m}.
+% \]
+此时，可由$\bm F=-\nabla U$定义永久磁矩$\bm m$的势能为
+\begin{equation}
+    U=-\bm m\cdot\bm B,
+\end{equation}
+\begin{remark}
+    $U$并不是外磁场$\bm B$中磁矩$\bm m$的总能量，因为它不包含产生磁矩$\bm m$并维持$\bm m$恒定所需的能量。
+\end{remark}
+可见，当磁矩$\bm m$和$\bm B$方向相同时，$U$最低，因此磁矩倾向于偏转自己平行于磁场。
 力矩与作用在磁偶极子上的力矩表达式相同：
-\[
-    \bm N=\int_V\bm r'\times(\bm J\times\bm B)\d V'\simeq\bm m\times\bm B(\bm 0),
-\]
+\begin{equation}
+    \bm N=\int_V\bm r'\times(\bm J\times\bm B)\d V'\simeq\bm m\times\bm B,
+\end{equation}
 上式也可作为定义磁感应强度的一种方法。
-
-由$\bm F=-\nabla U$，可定义磁矩的势能为
-\[
-    U=-\bm m\times\bm B,
-\]
-$U$并不是外磁场中磁矩的总能量，因为它不包含产生$\bm m$并维持$\bm m$恒定所需的能量。另外，当$\bm m$和$\bm B$方向相同时，$U$最低，因此磁矩倾向于偏转自己平行于磁场。
 
 \section{宏观介质静磁学}
 \label{sec:macroscopic magnetostatics}
@@ -383,23 +500,23 @@ $U$并不是外磁场中磁矩的总能量，因为它不包含产生$\bm m$并�
     \label{eqn:divB-macro}
     \div\bm B_\text{micro}=0\implies\div\bm B=0.
 \end{equation}
-在$\bm r'$由一个小体积的$\D V$产生的矢量势
-\[
-    \D\bm A(\bm r)\simeq\frac{\mu_0}{4\pi}\biggfkh{\frac{\bm J(\bm r)'}{|\bm r-\bm r'|}+\frac{\bm M(\bm r')\times(\bm r-\bm r')}{|\bm r-\bm r'|^3}}\D V.
-\]
-其中宏观磁矩密度
-\[
-    \bm M(\bm r):=\sum_iN_i\ave{\bm m_i},
-\]
-积分之
-\[
-    \bm A(\bm r)=\frac{\mu_0}{4\pi}\int_V\frac{\bm J(\bm r')+\nabla'\times\bm M(\bm r')}{|\bm r-\bm r'|}\d V'
-\]
+
+\begin{definition}
+    {磁化强度}{magnetization}
+    定义磁矩密度(magnetic moment density)或磁化强度(magnetization)为单位体积的磁矩：
+    \begin{equation}
+        \bm M:=\sum_iN_i\ave{\bm m_i}.
+    \end{equation}
+\end{definition}
+可得矢量势
+\begin{equation}
+    \bm A(\bm r)=\frac{\mu_0}{4\pi}\int_V\frac{\bm J(\bm r')+\nabla'\times\bm M(\bm r')}{\abs{\bm r-\bm r'}}\d V'.
+\end{equation}
 因此 
 \[
     \curl\bm B=\mu_0(\bm J+\curl\bm M),
 \]
-其中$\bm J_\text M:=\curl\bm M$是有效电流密度。
+其中$\bm J_\mag:=\curl\bm M$是有效电流密度。
 定义磁场强度(magnetic field)
 \begin{equation}
     \bm H:=\frac{\bm B}{\mu_0}-\bm M.
@@ -410,36 +527,53 @@ $U$并不是外磁场中磁矩的总能量，因为它不包含产生$\bm m$并�
     \curl\bm H=\bm J.
 \end{equation}
 式\eqref{eqn:divB-macro}和\eqref{eqn:curlH}考虑了有效原子电流的贡献，是\eqref{eqn:divB}和\eqref{eqn:curlB}的宏观对应。
-\paragraph{本构关系}
-下面我们介绍$\bm H$和$\bm B$的本构关系。对于各向同性抗磁性(diamagnetic)和顺磁性(paramagnetic)物质，有简单的线性关系：
-\[
-    \bm B=\mu\bm H,
-\]
-$\mu$为磁导率(permeability)。根据磁导率可以将物质分为以下磁性：
-\begin{itemize}
-    \item 顺磁性(paramagnetism)：$\mu\gtrapprox\mu_0$，如碱金属(Li, Na, Cs)、碱土金属(Mg, Ca)等；
-    \item 抗磁性(diamagnetism)：$\mu\lessapprox\mu_0$，如水、铜、石墨、铅等；
-    \item 铁磁性(ferromagnetism)：$\mu\gg\mu_0$，且$\mu$与$\bm H$的关系较为复杂，如\figref{fig:hysteresis}，称为磁滞现象(hysteresis)。如铁、钴、镍。%由于其，有时可对边界条件作出简化假设。
-\end{itemize}
-\begin{center}
-    \includegraphics[width=0.5\linewidth]{figures/hysteresis.pdf}
-    \captionof{figure}{磁滞回线}
-    \label{fig:hysteresis}
-\end{center}
+\begin{definition}
+    {磁导率}{permeability}
+    对于各向同性抗磁性(diamagnetic)和顺磁性(paramagnetic)物质，$\bm H$和$\bm B$有简单的线性关系：
+    \begin{equation}
+        \label{eqn:B=muH}
+        \bm B=\mu\bm H,
+    \end{equation}
+    其比例系数$\mu$称为磁导率(permeability)。
+    
+    根据磁导率可以将物质分为以下磁性：
+    \begin{itemize}
+        \item 顺磁性(paramagnetism)：$\mu\gtrapprox\mu_0$，如碱金属(Li, Na, Cs)、碱土金属(Mg, Ca)；
+        \item 抗磁性(diamagnetism)：$\mu\lessapprox\mu_0$，如H$_2$O、Cu、C (石墨)、Pb等；
+        \item 铁磁性(ferromagnetism)：$\mu\gg\mu_0$，且$\mu$与$\bm H$的关系较为复杂，如\figref{fig:hysteresis}，称为磁滞现象(hysteresis)。如Fe, Co, Ni。%由于其，有时可对边界条件作出简化假设。
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.7\linewidth]{figures/hysteresis.pdf}
+        \captionof{figure}{磁滞回线}
+        \label{fig:hysteresis}
+    \end{center}
+\end{definition}
 
 \paragraph{表面分布}
 
-考虑介质界面上$\bm B$和$\bm H$的分布，我们可以得到：
-\begin{align}
-    \label{eqn:Bn2-Bn1}
-    (\bm B_2-\bm B_1)\cdot\uvec n_{21}&=0,\\
-    \label{eqn:Ht2-Ht1}
-    (\bm H_2-\bm H_1)\times\uvec n_{21}&=\bm J_\text S,
-\end{align}
-当$\mu_1\gg\mu_2$时，$H_{2\text n}\gg H_{1\text n}$，磁场$\bm H_2$与边界面垂直。所以，极高磁导率材料表面上$\bm H$的边界条件与导体表面上$\bm E$的边界条件相同：
+考虑介质界面上$\bm B$和$\bm H$的分布，$\uvec n$是边界上从区域(1)指向区域(2)的法向量，我们可以得到：
+\begin{subequations}
+    \begin{align}
+        \label{eqn:Bn2-Bn1}
+        (\bm B_2-\bm B_1)\cdot\uvec n_{21}&=0,\\
+        \label{eqn:Ht2-Ht1}
+        (\bm H_2-\bm H_1)\times\uvec n_{21}&=-\bm K,
+    \end{align}
+\end{subequations}
+其中$\bm K$是理想化的表面电流密度(surface current density)。
+% 对于满足线性关系\eqref{eqn:B=muH}的各向同性介质，可以写成
+% \begin{subequations}
+%     \begin{align}
+%         \bm B_1\cdot\uvec n_{21}&=\bm B_2\cdot\uvec n_{21},\\
+%         \frac1{\mu_1}(\bm B_2\times\uvec n_{21})&=\frac1{\mu_2}(\bm B_1\times\uvec n_{21})+\bm K.
+%     \end{align}
+% \end{subequations}
+
+当$\mu_1\gg\mu_2$时，$H_{2,\perp}\gg H_{1,\perp}$，磁场$\bm H_2$与边界面垂直。所以，极高磁导率材料表面上$\bm H$的边界条件与导体表面上$\bm E$的边界条件相同：
 \begin{center}
-	\includegraphics[page=18]{figures/tikz/layouts.pdf}
+	\includegraphics[page=\pagenumref{tikz:H between magnetic surfaces}]{figures/tikz/layouts.pdf}
 	\captionof{figure}{极高磁导率材料表面的$\bm H$表现}
+    \label{fig:H between magnetic surfaces}
 \end{center}
 因此，我们可以把静电势理论用于磁场上，高磁导率材料的表面是近似的等势面。这种类比在许多磁铁设计问题中用到：先决定场的形式，然后把极面设计成等势面的形状。
 \begin{example}{}{}
@@ -459,24 +593,29 @@ $\mu$为磁导率(permeability)。根据磁导率可以将物质分为以下磁�
 
 \paragraph{磁势}
 %对于磁化材料外部的磁场问题，
-若材料是磁导率$\mu\gg\mu_0$的硬铁磁体（其磁矩密度$\bm M$与外场无关），则材料外表面上的$\bm B$垂直于界面，内表面上的$\bm B$平行于界面。如果其内没有电流($\bm J=\bm0$)，则可引入磁势$\Phi_\text M$并解其Laplace方程。
+若材料是磁导率$\mu\gg\mu_0$的硬铁磁体（其磁矩密度$\bm M$与外场无关），则材料外表面上的$\bm B$垂直于界面，内表面上的$\bm B$平行于界面。如果其内没有电流($\bm J=\bm0$)，则可引入磁势$\Phi_\mag$并解其Laplace方程。
 \begin{equation}
-    \bm H=-\nabla\bm\Phi_\text M,\quad\lapla\Phi_\text M=-\rho_\text M=\div\bm M.
+    \bm H=-\nabla\bm\Phi_\mag,\quad\lapla\Phi_\mag=-\rho_\mag=\div\bm M.
 \end{equation}
 若无边界条件，则有解
+\begin{equation}
+    \Phi_\mag(\bm r)=-\frac1{4\pi}\int_V\frac{\nabla'\cdot\bm M(\bm r')}{\abs{\bm r-\bm r'}}\d V',
+\end{equation}
+若$\bm M$是局域的，可通过分部积分得到
+\begin{equation}
+    \Phi_\mag(\bm r)=-\frac1{4\pi}\div\int_V\frac{\bm M(\bm r')}{\abs{\bm r-\bm r'}}\d V',
+\end{equation}
+在$r\gg r'$的地方
 \[
-    \Phi_\text M=-\frac1{4\pi}\int_V\frac{\nabla'\cdot\bm M(\bm r')}{|\bm r-\bm r'|}\d V',
+    \Phi_\mag(\bm r)\simeq\frac{\bm m\cdot\uvec r}{4\pi r^2},\quad\bm m=\int_V\bm M\d V.
 \]
-若$\bm M$是局域的，则在$x\gg x'$的地方
-\[
-    \Phi_\text M\simeq\frac{\bm m\cdot\bm r}{4\pi r^3},\quad\bm m=\int_V\bm M\d V.
-\]
-但是我们仍需面对有边界条件的情形，在边界$\p V$处$\bm M$瞬间变为0，运用静电学中的结论：
+对于有边界条件的情形，在边界$\p V$处$\bm M$瞬间变为0，运用静电学中的结论：
 \begin{equation}
     \label{eqn:PhiM with boundary}
-    \Phi_\text M=-\frac1{4\pi}\int_V\frac{\nabla'\cdot\bm M(\bm r')}{|\bm r-\bm r'|}\d V'+\frac1{4\pi}\oint_{\p V}\frac{\bm M(\bm r')\cdot\uvec n'}{|\bm r-\bm r'|}\d A',
+    \Phi_\mag(\bm r)=-\frac1{4\pi}\int_V\frac{\nabla'\cdot\bm M(\bm r')}{\abs{\bm r-\bm r'}}\d V'+\frac1{4\pi}\oint_{\p V}\frac{\bm M(\bm r')\cdot\uvec n'}{\abs{\bm r-\bm r'}}\d A',
 \end{equation}
-若铁磁体是均匀磁化的，则$\div\bm M=0$，第一项为0。
+若铁磁体是均匀磁化的，则$\div\bm M=0$，第一项为0；
+第二项为有效面磁荷密度$\sigma_\mag=\bm M\cdot\uvec n$的贡献。
 
 \paragraph{矢量势}
 我们接着求矢量势，由于$\bm J=\bm 0$，仅剩有效电流密度项
@@ -486,63 +625,65 @@ $\mu$为磁导率(permeability)。根据磁导率可以将物质分为以下磁�
 可得
 \begin{equation}
     \label{eqn:A with boundary}
-    \bm A=\frac1{4\pi}\int_V\frac{\nabla'\times\bm M(\bm r')}{|\bm r-\bm r'|}\d V'+\frac1{4\pi}\oint_{\p V}\frac{\bm M(\bm r')\times\uvec n'}{|\bm r-\bm r'|}\d A',
+    \bm A(\bm r)=\frac1{4\pi}\int_V\frac{\nabla'\times\bm M(\bm r')}{\abs{\bm r-\bm r'}}\d V'+\frac1{4\pi}\oint_{\p V}\frac{\bm M(\bm r')\times\uvec n'}{\abs{\bm r-\bm r'}}\d A',
 \end{equation}
-上式两项分别代表有效电流密度$\bm J_\text M$和有效面电流密度$\bm J_\text S$的贡献
-\begin{align}
-    \bm J_\text M&=\curl\bm M;\\
-    \bm J_\text S&=\bm M\times\uvec n.
-\end{align}
+上式两项分别对应有效电流密度$\bm J_\mag$和有效面电流密度$\bm K$的贡献
+\begin{subequations}
+    \begin{align}
+        \bm J_\mag&=\curl\bm M;\\
+        \bm K&=\bm M\times\uvec n.
+    \end{align}
+\end{subequations}
 \begin{example}{均匀磁化球}{uniform magnetized sphere}
-    真空中半径为$a$的球，其具有均匀的永久磁化强度$\bm M=M_0\uvec z$。应用式\eqref{eqn:PhiM with boundary}
+    真空中半径为$R$的永磁体球，其磁化强度$\bm M=M_0\uvec z$。应用式\eqref{eqn:PhiM with boundary}
     \[
-        \Phi_\text M(r,\theta)=0+\frac1{4\pi}\oint_{r'=a}\frac{M_0\cos\theta'}{|\bm r-\bm r'|}\cdot a^2\d\Omega',
+        \Phi_\mag(r,\theta)=0+\frac1{4\pi}\oint_{r'=R}\frac{M_0\cos\theta'}{\abs{\bm r-\bm r'}}R^2\d\Omega',
     \]
-    进行球谐函数展开，式\eqref{eqn:1/|r-r'|=YY}仅有$\ell=1,\enspace m=0$项保留，且
+    由于
     \[
         \cos\theta'=\sqrt{\frac{4\pi}3}Y_{10}(\theta',\phi'),
     \]
-    故
+    以及球谐函数的正交性，$1/\abs{\bm r-\bm r'}$的展开式\eqref{eqn:1/|r-r'|=YY}仅有$Y_{10}$项保留，故
     \[
-        \Phi_\text M(r,\theta)=\frac13M_0a^2\cdot\frac{r_<}{r_>}\cos\theta.
+        \Phi_\mag(r,\theta)=\frac13M_0R^2\cdot\frac{r_<}{r_>}\cos\theta.
     \]
-    %$r_<,r_>$是$r,a$中的较小/大者。
+    %$r_<,r_>$是$r,R$中的较小/大者。
 
-    球内，$r_<=r,\enspace r_>=a$，表现为匀强磁场：
+    球内，$r_<=r,\enspace r_>=R$，表现为匀强磁场：
     \[
-        \Phi_\text M=\frac13M_0r\cos\theta,\quad \bm H_\text{in}=-\frac13\bm M,\enspace\bm B_\text{in}=\frac{2\mu_0}3\bm M;
+        \Phi_\mag=\frac13M_0r\cos\theta,\quad \bm H_\internal=-\frac13\bm M,\enspace\bm B_\internal=\frac{2\mu_0}3\bm M;
     \]
-    球外，$r_<=a,\enspace r_>=r$，表现为磁偶极子(没有更高阶的项)：
+    球外，$r_<=R,\enspace r_>=r$，表现为磁偶极子(没有更高阶的项)：
     \[
-        \Phi_\text M=\frac{M_0a^3}3\frac{\cos\theta}{r^2}=\frac{\bm m\cdot\bm r}{4\pi r^3},\quad\bm m=\frac{4\pi}3a^3\bm M.
+        \Phi_\mag=\frac{M_0R^3}3\frac{\cos\theta}{r^2}=\frac{\bm m\cdot\uvec r}{4\pi r^2},\quad\bm m=\frac{4\pi}3R^3\bm M.
     \]
     $\bm B$线是连续的闭合曲线，而$\bm H$线不是。
     \tcblower
     也可通过矢量势的方法：
     \[
-        A_\phi(r,\theta)=\frac{\mu_0}3M_0a^2\cdot\frac{r_<}{r_>^2}\sin\theta.
+        A_\phi(r,\theta)=\frac{\mu_0}3M_0R^2\cdot\frac{r_<}{r_>^2}\sin\theta.
     \]
 \end{example}
 \begin{example}{外场下的磁化球}{magnetized sphere in external field}
     续\exmref{exm:uniform magnetized sphere}，在全空间叠加一匀强场$\bm B_0=\mu_0\bm H_0$，便成为外场下的磁化球问题，球内场强为
     \[
-        \bm H_\text{in}=\bm B_0+\frac{2\mu_0}3\bm M,\quad\bm H_\text{in}=\bm H_0-\frac13\bm M,
+        \bm B_\internal=\bm B_0+\frac{2\mu_0}3\bm M,\quad\bm H_\internal=\bm H_0-\frac13\bm M,
     \]
-    如果球是顺磁或抗磁的，那么$\bm M$便是由外场引起的，且$\bm B_\text{in}=\mu\bm H_\text{in}$，从而得到与电介质\eqref{eqn:P-E}很相似的结果：
+    如果球是顺磁或抗磁的，那么$\bm M$便是由外场引起的，且$\bm B_\internal=\mu\bm H_\internal$，从而得到与电介质\eqref{eqn:P-E}很相似的结果：
     \begin{equation}
         \label{eqn:M-B}
         \bm M=\frac3{\mu_0}\biggkh{\frac{\mu_\r-1}{\mu_\r+2}}\bm B_0.
     \end{equation}
-    如果球是铁磁的，那么便可以得到$\bm B_\text{in}$和$\bm H_\text{in}$的限制关系：
+    如果球是铁磁的，那么便可以得到$\bm B_\internal$和$\bm H_\internal$的限制关系：
     \[
-        \bm B_\text{in}+2\mu_0\bm H_\text{in}=3\bm B_0,
+        \bm B_\internal+2\mu_0\bm H_\internal=3\bm B_0,
     \]
     上式可以在磁滞图上画一条直线，并会产生交点。
 \end{example}
 \begin{example}{外场下的磁化球壳}{magnetized sphere shell in external field}
     内外半径为$a,b$的球壳磁导率为$\mu$，放置在匀强磁场$\bm B_0$中，由于没有电流可应用磁势求解
     \[
-        \lapla\Phi_\text M=0
+        \lapla\Phi_\mag=0
     \]
     由式\eqref{eqn:Phi(r, theta)}，再加上$r\to\infty$时$\bm H=\bm H_0$的条件，可写出磁势的形式解，再通过边界条件
     \[
@@ -562,7 +703,7 @@ $\mu$为磁导率(permeability)。根据磁导率可以将物质分为以下磁�
     \fi
     可得系数仅剩$\ell=1$项，壳内是一个匀强场：
     \[
-        \Phi_\text M(r,\theta)=
+        \Phi_\mag(r,\theta)=
         \begin{cases}
             a_1r\cos\theta,&r<a\\
             \ldots,&a<r<b\\
@@ -617,7 +758,7 @@ Faraday从实验上证实电磁感应现象在Galileo变换下不变：无论是
 现在讨论一个运动电路的法拉第定律，如果电路以恒定速度$\bm v$移动，则磁场的迁移导数为
 \begin{align*}
     \dv{\bm B}t&=\pv{\bm B}t+(\bm v\cdot\nabla)\bm B\\
-    &=\pv{\bm B}t+\curl(\bm B\times\bm v)+\cancel{(\bm B\cdot\nabla)\bm v}-\bm B(\cancel{\div\bm v})+\bm v(\cancel{\div\bm B}),
+    &=\pv{\bm B}t+\curl(\bm B\times\bm v)+(\bm B\cdot\cancel{\nabla)\bm v}-\bm B(\cancel{\div\bm v})+\bm v(\cancel{\div\bm B}),
 \end{align*}
 即，
 \begin{align*}
@@ -685,6 +826,13 @@ $L_i$是线圈$i$的自感(self-inductance)，$M_{ij}$是线圈$i,j$之间的互
 \[
     L_i=\frac{\varPhi_{ii}}{I_i},\quad M_{ij}=\frac{\varPhi_{ij}}{I_j}.
 \]
+\begin{example}
+    {同轴线缆的电感}{inductance of coaxial cable}
+    内外半径为$r,R$的同轴线缆单位长度的电感为
+    \begin{equation}
+        L=\frac{\mu_0}{2\pi}\ln\biggkh{\frac Rr}.
+    \end{equation}
+\end{example}
 若电路是导磁的，则$W$的表达式不适用了，需要换为
 \[
     W=\frac12\int_V\bm H\cdot\bm B\d V.

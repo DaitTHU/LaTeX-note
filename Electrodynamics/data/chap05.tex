@@ -68,41 +68,65 @@ Maxwell将附加项$\p\bm D/\p t$称为位移电流(displacement current)。
 
 Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁场的各个分量联系起来。在简单情况下这一方程组可以解出来，但是引入势往往更方便。
 
-\paragraph{标量势和矢量势的引入}
+\begin{definition}
+    {标量势和矢量势}{scalar potential and vector potential}
+    引入标量势$\Phi$和矢量势$\bm A$，使得电场和磁场可以表示为
+    \begin{subequations}
+        \begin{align}
+            \label{eqn:-nablaPhi-pApt}
+            \bm E&=-\nabla\Phi-\pv{\bm A}t,\\
+            \label{eqn:curlA}
+            \bm B&=\curl\bm A.
+        \end{align}
+    \end{subequations}
+\end{definition}
 
-由式\eqref{eqn:Maxwell divB}和恒等式$\div(\curl\bm A)\equiv 0$，我们引入矢量势$\bm A$满足 
-\begin{equation}
-    \label{eqn:curlA}
-    \bm B=\curl\bm A,
-\end{equation}
-继而式\eqref{eqn:Maxwell curlE}变为 
-\[
-    \curl\bm E+\pv{\bm B}t=\curl\biggkh{\bm E+\pv{\bm A}t}=\bm 0,
-\]
-利用恒等式$\curl(\nabla\Phi)\equiv 0$，引入标量势$\Phi$：
-\begin{equation}
-    \label{eqn:-nablaPhi-pApt}
-    \bm E=-\nabla\Phi-\pv{\bm A}t.
-\end{equation}
-剩下的式\eqref{eqn:Maxwell divD}和\eqref{eqn:Maxwell curlH}可变形为%(考虑微观情形而非宏观平均)
-\begin{subequations}
-    \label{eqn:Phi-A coupled}
-    \begin{align}
-        \label{eqn:Phi-A coupled a}
-        \lapla\Phi+\pp t(\div\bm A)&=-\frac\rho{\varepsilon_0},\\
-        \label{eqn:Phi-A coupled b}
-        \lapla\bm A-\frac1{c^2}\pv[2]{\bm A}t-\nabla\biggkh{\div\bm A+\frac1{c^2}\pv\Phi t}&=-\mu_0\bm J.
-    \end{align}
-\end{subequations}
+\begin{proof}
+    式\eqref{eqn:Maxwell divB}可以写成$\div(\curl\bm A)\equiv 0$的形式，
+    继而式\eqref{eqn:Maxwell curlE}变为 
+    \[
+        \curl\bm E+\pv{\bm B}t=\curl\biggkh{\bm E+\pv{\bm A}t}=\bm 0,
+    \]
+    也可以写成$\curl\nabla\Phi\equiv\bm 0$的形式。
+\end{proof}
 
-\paragraph{规范变换}
+\begin{corollary}
+    剩下的式\eqref{eqn:Maxwell divD}和\eqref{eqn:Maxwell curlH}可变形为%(考虑微观情形而非宏观平均)
+    \begin{subequations}
+        \label{eqn:Phi-A coupled}
+        \begin{align}
+            \label{eqn:Phi-A coupled a}
+            \lapla\Phi+\pp t(\div\bm A)&=-\frac\rho{\varepsilon_0},\\
+            \label{eqn:Phi-A coupled b}
+            \lapla\bm A-\frac1{c^2}\pv[2]{\bm A}t-\nabla\biggkh{\div\bm A+\frac1{c^2}\pv\Phi t}&=-\mu_0\bm J.
+        \end{align}
+    \end{subequations}
+    下一步是解耦合(decouple)式\eqref{eqn:Phi-A coupled}中的$\Phi$和$\bm A$。
+\end{corollary}
 
-为了解耦合(uncouple)式\eqref{eqn:Phi-A coupled}中的标量势$\Phi$和矢量势$\bm A$，我们可以利用势的定义里隐含的任意性，即电场和磁场在下列变换中保持不变：
-\begin{equation}
-    (\Phi,\bm A)\mapsto\Bigkh{\Phi-\pv\varLambda t,\bm A+\nabla\varLambda},
-\end{equation}
-上式称为规范变换，场在规范变换下的不变性称为规范不变性(gauge invariance)。因此，我们总能将任意$(\Phi,\bm A)$通过规范变换使得新的$(\Phi',\bm A')$满足特定规范。
+\begin{theorem}
+    {规范不变性}{gauge invariance}
+    电场和磁场在规范变换(gauge transformation)中保持不变：
+    \begin{equation}
+        (\Phi,\bm A)\mapsto\Bigkh{\Phi-\pv\varLambda t,\bm A+\nabla\varLambda}.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    规范变换后的$\Phi',\bm A'$得到的电场和磁场为
+    \begin{align*}
+        \bm E'&=-\nabla\biggkh{\Phi-\pv\varLambda t}-\pp t(\bm A+\nabla\varLambda)=-\nabla\Phi-\pv{\bm A}t=\bm E;\\
+        \bm B'&=\curl(\bm A+\nabla\varLambda)=\curl\bm A=\bm B.
+        \qedhere
+    \end{align*}
+\end{proof}
+
+\begin{corollary}
+    总能将任意$(\Phi,\bm A)$规范变换为满足特定约束条件的$(\Phi',\bm A')$。
+\end{corollary}
+
 \paragraph{Lorenz规范}
+
 一种直接的想法是令梯度内的项为0
 \begin{equation}
     \div\bm A+\frac1{c^2}\pv\Phi t=0,
@@ -139,7 +163,7 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
 
 式\eqref{eqn:Coulomb gauge Phi}是Poisson方程，可直接得到
 \[
-    \Phi(\bm r,t)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r',t)}{|\bm r-\bm r'|}\d V'
+    \Phi(\bm r,t)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r',t)}{\abs{\bm r-\bm r'}}\d V'
  \]
 这说明：标量势$\Phi(\bm r,t)$是由电荷密度$\rho(\bm r',t)$产生的瞬时Coulomb势\footnote{这是其被称为Coulomb规范的原因。}，%二者在不同地方同时改变，
 在空间中的传播没有任何延迟。
@@ -172,8 +196,8 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
 如果自由磁荷真的存在，Maxwell方程组就要改写
 \begin{align*}
     \div\bm D&=\rho_\elc,\\
-    \div\bm B&=\rho_\text m,\\
-    \curl\bm E&=-\bm J_\text m-\pv{\bm B}t,\\
+    \div\bm B&=\rho_\mag,\\
+    \curl\bm E&=-\bm J_\mag-\pv{\bm B}t,\\
     \curl\bm H&=\bm J_\elc+\pv{\bm D}t.
 \end{align*}
 我们需要新的理论，标量势和矢量势的形式也需要改写。
@@ -239,7 +263,7 @@ Green函数要求在点源处
 \]
 即
 \begin{equation}
-    G^\pm(\bm r,t;\bm r',t')=\frac1{|\bm r-\bm r'|}\vd\biggkh{t'-\Bigkh{t\mp\frac{|\bm r-\bm r'|}c}}.
+    G^\pm(\bm r,t;\bm r',t')=\frac1{\abs{\bm r-\bm r'}}\vd\biggkh{t'-\Bigkh{t\mp\frac{\abs{\bm r-\bm r'}}c}}.
 \end{equation}
 分别为推迟(retarded)和超前(advanced) Green函数。$\delta$函数的自变量表明：在$\bm r$点于时间$t$观测的效应是由距离为$\bm R$的源在%推迟(或超前)
 时间为$t'=t\mp R/c$时的作用引起的。\footnote{课上的理解是：无穷远处产生的源经过$\bm r$后仍需要$R/c$的时间去经过$\bm r'$。}
@@ -264,32 +288,35 @@ Green函数要求在点源处
 \end{compactenum}
 最常见的物理情景是$\Psi_\text{in}=0$%“超前”这个概念总是太科幻了，
 \begin{equation}
-    \Psi(\bm r,t)=\int\frac{f(\bm r',t')}{|\bm r-\bm r'|}\d V',\quad t'=t-\frac1c|\bm r-\bm r'|.
+    \Psi(\bm r,t)=\int\frac{f(\bm r',t')}{\abs{\bm r-\bm r'}}\d V',\quad t'=t-\frac{\abs{\bm r-\bm r'}}c.
 \end{equation}
 物理学家已经就一维、二维和三维情形下的有限时间的初值和终值问题进行过广泛研究。\footnote{Morse and Feshbach, Methods of Theoretical Physics, pp843-847.}
+
 \subsection{推迟势和推迟场}
+
+\newcommand{\ret}{\mathrm{ret}}
+
 如果电荷密度和电流密度分布随时间变化，观测点的标量势和矢量势将会延迟：
 \begin{subequations}
     \begin{align}
-        \Phi(\bm r,t)&=\frac1{4\pi\varepsilon_0}\int\frac{\rho(\bm r',t')}{|\bm r-\bm r'|}\d V',\\
-        \bm A(\bm r,t)&=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r',t')}{|\bm r-\bm r'|}\d V'.
+        \Phi(\bm r,t)&=\frac1{4\pi\varepsilon_0}\int\frac{\rho(\bm r',t')}{\abs{\bm r-\bm r'}}\d V',\\
+        \bm A(\bm r,t)&=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r',t')}{\abs{\bm r-\bm r'}}\d V'.
     \end{align}
 \end{subequations}
-由
-%但电场和磁场并不能简单的变换\eqref{eqn:E(x)}和\eqref{eqn:B(x)}中的$\rho,\bm J$，而需要从
-\[
-    \bm E=-\nabla\Phi-\pv{\bm A}t,\quad\bm B=\curl\bm A
-\]
+% 由
+% 但电场和磁场并不能简单的变换\eqref{eqn:E(x)}和\eqref{eqn:B(x)}中的$\rho,\bm J$，而需要从
+% \[
+%     \bm E=-\nabla\Phi-\pv{\bm A}t,\quad\bm B=\curl\bm A
+% \]
 得到
 \begin{subequations}
     \begin{align}
-        \bm E(\bm r,t)&=\frac1{4\pi\varepsilon_0}\int\biggfkh{-\nabla'\rho-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d V'}{|\bm r-\bm r'|},\\
-        \bm B(\bm r,t)&=\frac{\mu_0}{4\pi}\int\frac{\nabla'\times\bm J}{|\bm r-\bm r'|}\d V',
+        \bm E(\bm r,t)&=\frac1{4\pi\varepsilon_0}\int\biggfkh{-[\nabla'\rho]_\ret-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d V'}{\abs{\bm r-\bm r'}},\\
+        \bm B(\bm r,t)&=\frac{\mu_0}{4\pi}\int\frac{[\nabla'\times\bm J]_\ret}{\abs{\bm r-\bm r'}}\d V',
     \end{align}
 \end{subequations}
-注意上式中$\nabla'\rho$和$\nabla'\times\bm J$是先求梯度和散度再令$t'=t-R/c$。
-
-Jackson中用$[\cdot]_\text{ret}$表示变量$t'=t-R/c$，这样的好处是可以有效区分$\nabla[f]_\text{ret}\neq[\nabla f]_\text{ret}$，因为前者的$t$与$\bm r'$有关，进一步的：
+% 注意上式中$\nabla'\rho$和$\nabla'\times\bm J$是先求梯度和散度再令$t'=t-R/c$。
+Jackson用$[\cdot]_\text{ret}$表示赋值$t'=t-R/c$，这样的好处是可以有效区分$\nabla[f]_\text{ret}\neq[\nabla f]_\text{ret}$，因为前者的$t$与$\bm r'$有关，进一步的：
 \begin{align*}
     [\nabla'\rho]_\text{ret}&=\nabla'[\rho]_\text{ret}-\Bigfkh{\pv\rho{t'}}_\text{ret}\nabla'(t-R/c);\\
     [\nabla'\times\bm J]_\text{ret}&=\nabla'\times[\bm J]_\text{ret}+\Bigfkh{\pv{\bm J}{t'}}_\text{ret}\times\nabla'(t-R/c).
@@ -410,24 +437,24 @@ $\varrho_n$是第$n$个分子的电荷密度，分子质心坐标为$\bm r_n$，
 \]
 式中各项分别对应分子电荷、偶极矩、四极矩……
 \begin{align*}
-    \ave{\varrho_n(\bm r,t)}={}&q_nf(\bm r-\bm r_n)-\bm p_n\cdot\nabla f(\bm r-\bm r_n)+\frac16\sum_{\alpha,\beta}(\mathcal Q_n)_{\alpha\beta}\pw f{x_\alpha}{x_\beta}(\bm r-\bm r_n)+\cdots
+    \ave{\varrho_n(\bm r,t)}={}&q_nf(\bm r-\bm r_n)-\bm p_n\cdot\nabla f(\bm r-\bm r_n)+\frac16\sum_{\alpha,\beta}(Q_n)_{\alpha\beta}\pw f{x_\alpha}{x_\beta}(\bm r-\bm r_n)+\cdots
 \end{align*}
 将上式各项表示成空间平均的形式：
 \begin{align*}
-    \ave{\varrho_n(\bm r,t)}={}&\ave{q_n\vd(\bm r-\bm r_n)}-\div\ave{\bm p_n\vd(\bm r-\bm r_n)}+\frac16\sum_{\alpha,\beta}\pw{}{x_\alpha}{x_\beta}\ave{(\mathcal Q_n)_{\alpha\beta}\vd(\bm r-\bm r_n)}+\cdots
+    \ave{\varrho_n(\bm r,t)}={}&\ave{q_n\vd(\bm r-\bm r_n)}-\div\ave{\bm p_n\vd(\bm r-\bm r_n)}+\frac16\sum_{\alpha,\beta}\pw{}{x_\alpha}{x_\beta}\ave{(Q_n)_{\alpha\beta}\vd(\bm r-\bm r_n)}+\cdots
 \end{align*}
 就平均而言，可以把分子看作位于分子质心(也可选取其他固定点)上的点多极子的集合。对所有分子求和，得到
 \[
-    \ave{\varrho(\bm r,t)}=\rho(\bm r,t)-\div\bm P(\bm r,t)+\sum_{\alpha,\beta}\pw{}{x_\alpha}{x_\beta}\mathcal Q_{\alpha\beta}(\bm r,t)+\cdots
+    \ave{\varrho(\bm r,t)}=\rho(\bm r,t)-\div\bm P(\bm r,t)+\sum_{\alpha,\beta}\pw{}{x_\alpha}{x_\beta}Q_{\alpha\beta}(\bm r,t)+\cdots
 \]
-其中$\rho,\bm P,\mathcal Q_{\alpha\beta}$分别是宏观电荷密度、宏观电极化强度、宏观电四极矩密度……
+其中$\rho,\bm P,Q_{\alpha\beta}$分别是宏观电荷密度、宏观电极化强度、宏观电四极矩密度……
 因此式\eqref{eqn:average rho}可以写成 
 \[
     \div\bm D=\rho,
 \]
 宏观电位移矢量定义为
 \[
-    D_\alpha:=\varepsilon_0E_\alpha+P_\alpha-\sum_\beta\pv{\mathcal Q_{\alpha\beta}}{x_\beta}+\cdots
+    D_\alpha:=\varepsilon_0E_\alpha+P_\alpha-\sum_\beta\pv{Q_{\alpha\beta}}{x_\beta}+\cdots
 \]
 前两项是熟知的结果，更高阶项原则上是存在的，但几乎可以忽略不计。
 \paragraph{电流密度}
@@ -450,7 +477,10 @@ $\ave{\bm j}$的推导比$\ave{\varrho}$的处理复杂的多，在这里仅给�
 \] 
 
 \section{电磁场的能量、动量和角动量}
-对于单个电荷$q$，外部电磁场$E$和$B$对其做功的功率为$q\bm v\cdot\bm E$。则对于电荷和电流的连续分布，在有限体积$V$中，各场做功的总功率为
+
+\paragraph{能量守恒}
+
+则对于电荷和电流的连续分布，在有限体积$V$中，各场做功的总功率为
 \[
     \int_V\bm J\cdot\bm E\d V,
 \]
@@ -467,7 +497,7 @@ $\ave{\bm j}$的推导比$\ave{\varrho}$的处理复杂的多，在这里仅给�
 \begin{compactenum}
     \item 总电磁能量密度为(即使是在时变场中)：
     \[
-        u=w_\elc+w_\text m=\frac12(\bm E\cdot\bm D+\bm H\cdot\bm B);%\frac12\int_V\bm E\cdot\bm D\d V,\quad w_B=\frac12\int_V\bm H\cdot\bm B\d V.
+        u=w_\elc+w_\mag=\frac12(\bm E\cdot\bm D+\bm H\cdot\bm B);%\frac12\int_V\bm E\cdot\bm D\d V,\quad w_B=\frac12\int_V\bm H\cdot\bm B\d V.
     \]
 	\item 宏观介质的电磁性质是线性的，
     \[
@@ -494,7 +524,7 @@ $\bm S$定义为Poynting矢量
     电磁能量在一定体积内的变化率，加上单位时间内流出的能量，等于该体积内各源的场所做的总功的负值。
 \end{theorem}
 我们的重点一直是放在电磁场的能量上。场在单位时间和单位体积内所做的功$\bm J\cdot\bm E$代表电磁能转换为机械能或热能。因为物质归根到底是由带电粒子(电子和原子核)组成的，所以可把这能量转换率看作每单位体积带电粒子的能量增加率。这样一来，我们就可以把微观场($\bm E,\bm B$)的Poynting定理，解释为粒子和场的组合系统的能量守恒定律。%如果用Em表示体积V内诸粒子的总能量，就得到
-\paragraph{能量守恒}
+
 将空间$V$中的总能量$E$分成粒子的机械能(包含热能) $E_\text{m}$和场能$E_\text{f}$，并假定没有粒子移出体积外，总的能量随时间的变化
 \begin{align*}
     \dv{E_\text m}t+\dv{E_\text f}t&=\int_V\bm J\cdot\bm E\d V+\dd t\int_Vu\d V=-\oint_{\p V}\bm S\cdot\d\bm A.
@@ -553,12 +583,12 @@ $\bm S$定义为Poynting矢量
     [\bm E(\div\bm E)-\bm E\times(\curl\bm E)]_\alpha=\sum_\beta\pp{x_\beta}\Bigkh{E_\alpha E_\beta-\frac12E^2\vd_{\alpha\beta}};
 \]
 从而右边的体积分具有散度的形式，定义Maxwell应力张量(Maxwell stress tensor)
-\[
-    \mathcal T_{\alpha\beta}:=\varepsilon_0\Bigfkh{E_\alpha E_\beta+c^2B_\alpha B_\beta-\frac12(E^2+c^2B^2)\vd_{\alpha\beta}}.
-\]
+\begin{equation}
+    T_{\alpha\beta}:=\varepsilon_0\Bigfkh{E_\alpha E_\beta+c^2B_\alpha B_\beta-\frac12(E^2+c^2B^2)\vd_{\alpha\beta}}.
+\end{equation}
 则
 \[
-    \dd t({\bm P_\text m}+{\bm P_\text f})_\alpha=\oint_{\p V}\sum_\beta\mathcal  T_{\alpha\beta}\hat n_\beta\d A.
+    \dd t({\bm P_\text m}+{\bm P_\text f})_\alpha=\oint_{\p V}\sum_\beta T_{\alpha\beta}\hat n_\beta\d A.
 \]
 \paragraph{角动量守恒}
 角动量与动量有关：
@@ -656,18 +686,21 @@ Poynting定律形式变为
     &=\frac12\int_V\Bigfkh{-\div(\bm E\times\bm H\cj)-\i\omega(\bm E\cdot\bm D\cj-\bm B\cdot\bm H\cj)}\d V.
 \end{align*}
 复Poynting矢量
-\[
-    \bm S=\frac12\bm E\times\bm H\cj,
-\]
+\begin{equation}
+    \bm S=\frac12\bm E\times\bm H\cj.
+\end{equation}
 简谐电磁场能量密度
-\[
-    w_\elc=\frac14\bm E\cdot\bm D\cj,\quad w_\text m=\frac14\bm B\cdot\bm H\cj.
-\]
+\begin{subequations}
+    \begin{align}
+        w_\elc&=\frac14\bm E\cdot\bm D\cj,\\
+        w_\mag&=\frac14\bm B\cdot\bm H\cj.
+    \end{align}
+\end{subequations}
 故简谐场的Poynting定律为
-\[
-    \frac12\int_V\bm J\cj\cdot\bm E\d V+2\i\omega\int_V(w_\elc-w_\text m)\d V+\oint_{\p V}\bm S\cdot\d\bm A=0.
-\]
-实部给出了时间平均量的能量守恒；虚部与反应性(或储存的)能量及其交替流动有关。如果能量密度$w_\elc$和$w_\text m$体积分为实数，就像具有无损耗介质和完美导体的系统一样，实部将是：
+\begin{equation}
+    \frac12\int_V\bm J\cj\cdot\bm E\d V+2\i\omega\int_V(w_\elc-w_\mag)\d V+\oint_{\p V}\bm S\cdot\d\bm A=0.
+\end{equation}
+实部给出了时间平均量的能量守恒；虚部与反应性(或储存的)能量及其交替流动有关。如果能量密度$w_\elc$和$w_\mag$体积分为实数，就像具有无损耗介质和完美导体的系统一样，实部将是：
 \[
     \frac12\int_V\Re(\bm J\cj\cdot\bm E)\d V+\oint_{\p V}\Re(\bm S)\cdot\d\bm A=0.
 \]
