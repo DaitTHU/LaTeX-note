@@ -25,6 +25,35 @@
 
 \begin{document}
 
+\label{Gauss law}
+\begin{tikzpicture}
+    \fill(0,0) circle (2pt) node[below left]{$q$};
+    
+    \coordinate (P) at (2.5, 2);
+    \coordinate (n) at (2.7, 3.2);
+    \coordinate (r) at (3.5, 2.8);
+    
+    \draw[fill=gray!50, thick, shift={(P)}] 
+        (-0.25,-0.15) .. controls (-0.15,-0.2) and (0.15,-0.18) .. 
+        (0.25,-0.12) .. controls (0.3,0.05) and (0.2,0.2) .. 
+        (0.05,0.22) .. controls (-0.1,0.18) and (-0.22,0.08) .. 
+        (-0.25,-0.15) -- cycle;
+    \node at (P) [xshift=0.7cm] {$\d A$};
+    
+    \draw[->, very thick] (P) -- (r) node[right]{$\hat{\bm r}$};
+    \draw[->, very thick] (P) -- (n) node[above]{$\hat{\bm n}$};
+    
+    \pic["$\theta$", draw, angle radius=15, angle eccentricity=1.5]{angle=r--P--n};
+    
+    \draw[dashed, opacity=0.6] (0,0) -- ($(P)+(-0.25,-0.15)$);
+    \draw[dashed, opacity=0.6] (0,0) -- ($(P)+(0.25,-0.12)$);
+    % \draw[dashed, opacity=0.6] (0,0) -- ($(P)+(0.05,0.22)$);
+    \draw[dashed, opacity=0.6] (0,0) -- ($(P)+(-0.22,0.08)$);
+    
+    \node at (1, 1.5) {$\d\Omega$};
+\end{tikzpicture}
+
+
 \label{E of plane}
 \begin{tikzpicture}
     \draw[thick](0, 0)--(4, 0)--(6, 1)node[right]{$\sigma$}--(2, 1)--cycle;
@@ -79,6 +108,22 @@
     \draw[->, shift={(.75, 0)}](0, -.5)--(0, 0);
     \draw[->, shift={(.75, .3)}](0, .5)node[right]{$d$}--(0, 0);
     \draw[thick, ->, xshift=1.5cm](0, 0)--(.1, 1)node[right]{$\hat{\bm n}$};
+\end{tikzpicture}
+
+\label{finite difference method}
+\begin{tikzpicture}[scale=1.2]
+    \draw[gray!40, thin] (-2.5, -2.5) grid (2.5, 2.5);
+    \foreach \i in {-2, -1, 0, 1, 2} {
+        \foreach \j in {-2, -1, 0, 1, 2} {
+            \fill[gray!30] (\i,\j) circle (2pt);
+        }
+    }
+    \coordinate (O) at (0, 0) node [above] {$(i, j)$} circle (2.2pt) [fill=black];
+    \draw[thick] (O)--(-1, 0) node [above] {$(i-1,j)$} circle (2pt) [fill=black];
+    \draw[thick] (O)--(1, 0) node [above] {$(i+1,j)$} circle (2pt) [fill=black];
+    \draw[thick] (O)--(0, 1) node [above] {$(i,j+1)$} circle (2pt) [fill=black];
+    \draw[thick] (O)--(0, -1) node [above] {$(i,j-1)$} circle (2pt) [fill=black];
+    \draw[<->, thick, gray!60] (-2, -1.3) -- (-1, -1.3) node [midway, below] {$h$};
 \end{tikzpicture}
 
 \label{method of images, plane}
@@ -297,7 +342,7 @@
     \pic["$\theta_\t$", draw, angle radius=20, angle eccentricity=1.5]{angle=u--O--t};
 \end{tikzpicture}
 
-\label{Stokes relations}
+\label{Stokes relations I}
 \begin{tikzpicture}
     \fill[gray!8](-3, 0)rectangle(3, 2);
     \fill[gray!50](-3, 0)rectangle(3, -2);
@@ -308,6 +353,7 @@
     \draw[thick, ->-](O)--(t)node[midway, above right]{$t_{12}$};
 \end{tikzpicture}
 
+\label{Stokes relations II}
 \begin{tikzpicture}
     \coordinate(tr)at(-1.2, -2);
     \fill[gray!8](-3, 0)rectangle(3, 2);
@@ -322,7 +368,7 @@
     \draw[dashed, ->-, blue](O)--(tr)node[midway, below right]{$t_{12}r_{21}$};
 \end{tikzpicture}
 
-\label{perpendicular polarization}
+\label{senkrecht polarization}
 \begin{tikzpicture}
     \coordinate(t)at(1.5, -2.5);
     \coordinate(Ei)at(-1.2, 1.2);
@@ -459,6 +505,26 @@
     \draw[thick](-3, 2)--(3, 2);
     \draw[dashed](0, 0)--(0, 2)node[midway, right]{$r$};
     \fill[black](0, 0)circle(0.1)node[left]{$q$};
+\end{tikzpicture}
+
+\label{spherical coordinate}
+\begin{tikzpicture}
+    \coordinate[label=left:$O$] (O) at (0, 0);
+    \coordinate[label=left:$x$] (x) at (-1.5, -1.5);
+    \coordinate[label=right:$y$] (y) at (3.5, 0);
+    \coordinate[label=left:$z$] (z) at (0, 3);
+    \coordinate (P) at (1.8, 2.5);
+    \coordinate (Q) at (1.8, -1);
+    \draw[thick, ->](O)--(y);
+    \draw[thick, ->](O)--(z);
+    \draw[thick, ->](O)--(x);
+    \draw[dashed](O)--(P)node[midway, left]{$r$};
+    \draw[dashed](O)--(Q)--(P);
+    \fill[black](P)circle(0.05)node[right]{$P(r,\theta,\phi)$};
+    \draw[dashed](-1, -1)--(Q)--(2.8, 0);
+    \pic[draw, angle radius=3mm]{right angle=P--Q--O};
+    \pic[draw, angle radius=5mm, angle eccentricity=1.6, <-, "$\theta$"]{angle=P--O--z};
+    \pic[draw, angle radius=3mm, angle eccentricity=1.8, ->, "$\phi$"]{angle=x--O--Q};
 \end{tikzpicture}
 
 \end{document}
