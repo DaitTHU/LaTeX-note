@@ -7,12 +7,6 @@
 \section{矢量代数}
 \label{sec:vector algebra}
 
-\begin{definition}
-    {标量和矢量}{scalar & vector}
-    标量(scalar)是只有大小(magnitude)没有方向(direction)的量(quantity)；
-    矢量(vector)是既有方向又有大小的量。
-\end{definition}
-
 \begin{compactitem}
     \item 矢量加法：$\bm A+\bm B$；
     \item 矢量数乘：$a\bm A$；
@@ -56,48 +50,62 @@
 \label{ssec:differential calculus}
 
 \begin{compactitem}
-	\item 函数$(x)$的微分
+	\item 函数$y=y(x)$的微分
     \[
         \d y=\dv yx\d x.
     \]
-	\item 标量场$f(x,y,z)$的微分
-    \begin{align}
-        \d f=\pv fx\d x+\pv fy\d y+\pv fz\d z=:\nabla f\cdot\d\bm\ell.
-    \end{align}
-    梯度(gradient)
-    \begin{align}
-        \nabla f:=\pv fx\uvec x+\pv fy\uvec y+\pv fz\uvec z.
-    \end{align}
-	\item Hamiltonian
-	\begin{align}
+	\item 标量场$\psi(x,y,z)$的微分
+    \begin{equation}
+        \d\psi=\pv\psi x\d x+\pv\psi y\d y+\pv\psi z\d z.
+    \end{equation}
+\end{compactitem}
+
+\begin{definition}
+    {nabla算符}{nabla}
+    定义nabla算符(Hamilton算符)
+    \begin{equation}
         \nabla:=\pp x\uvec x+\pp y\uvec y+\pp z\uvec z.
-    \end{align}
-    \item 散度(divergence)
-    \begin{align}
+    \end{equation}
+    标量场$\psi$的梯度(gradient)为
+    \begin{equation}
+        \nabla\psi=\pv\psi x\uvec x+\pv\psi y\uvec y+\pv\psi z\uvec z.
+    \end{equation}
+    矢量场$\bm A$的散度(divergence)为
+    \begin{equation}
         \div\bm A=\pv{A_x}x+\pv{A_y}y+\pv{A_z}z.
-    \end{align}
-    \item 旋度(curl)
+    \end{equation}
+    矢量场$\bm A$的旋度(curl)为
     \begin{equation}
         \curl\bm A=\begin{vmatrix}
             \uvec x&\uvec y&\uvec z\\
             \pp x&\pp y&\pp z\\
             A_x&A_y&A_z
-        \end{vmatrix}=\biggkh{\pv{A_z}y-\pv{A_y}z}\uvec x+\biggkh{\pv{A_x}z-\pv{A_z}x}\uvec y+\biggkh{\pv{A_y}x-\pv{A_x}y}\uvec z.
+        \end{vmatrix}
+        =\biggkh{\pv{A_z}y-\pv{A_y}z}\uvec x+\biggkh{\pv{A_x}z-\pv{A_z}x}\uvec y+\biggkh{\pv{A_y}x-\pv{A_x}y}\uvec z.
     \end{equation}
-\end{compactitem}
-\paragraph{乘法法则}
-\begin{compactitem}
-	\item 常微分乘法法则
-    \[
-        \d(fg)=(\d f)g+f\d g.
-    \]
-    \item 梯度、旋度、散度的简单乘法法则
+    标量Laplacian
+    \begin{equation}
+        \lap\psi \equiv \div(\nabla\psi) = \pv[2]\psi x + \pv[2]\psi y + \pv[2]\psi z.
+    \end{equation}
+    矢量Laplacian
+    \begin{equation}
+        \lap\bm A\equiv\lap A_x\uvec x+\lap A_y\uvec y+\lap A_z\uvec z.
+    \end{equation}
+\end{definition}
+
+\begin{theorem}
+    {简单乘法法则}{simple product rules}
+    由Leibniz法则易得梯度、散度和旋度的简单乘法法则：
     \begin{align}
-        \nabla(fg)&=(\nabla f)g+f\nabla g;\\
-        \div(f\bm A)&=(\nabla f)\cdot\bm A+f(\div\bm A);\\
-        \curl(f\bm A)&=(\nabla f)\times\bm A+f(\curl\bm A).
+        \nabla(\psi\phi)&=(\nabla\psi)\phi+\psi\nabla\phi;\\
+        \div(\psi\bm A)&=(\nabla\psi)\cdot\bm A+\psi(\div\bm A);\\
+        \curl(\psi\bm A)&=(\nabla\psi)\times\bm A+\psi(\curl\bm A).
     \end{align}
-    \item 梯度、旋度、散度的复杂乘法法则
+\end{theorem}
+
+\begin{theorem}
+    {复杂乘法法则}{complex product rules}
+    梯度、散度和旋度的复杂乘法法则：
     \begin{align}
         \label{eqn:gradA.B}
         \nabla(\bm A\cdot\bm B)&=\bm A\times(\curl\bm B)+\bm B\times(\curl\bm A)+(\bm A\cdot\nabla)\bm B+(\bm B\cdot\nabla)\bm A;\\
@@ -106,65 +114,126 @@
         \label{eqn:curlAxB}
         \curl(\bm A\times\bm B)&=(\bm B\cdot\nabla)\bm A-(\bm A\cdot\nabla)\bm B+\bm A(\div\bm B)-\bm B(\div\bm A).
     \end{align}
-\end{compactitem}
-\paragraph{二重微分}
-\begin{compactitem}
-	\item 标量Laplacian
-    \begin{align}
-        \lap f\equiv\div(\nabla f)=\pv[2]fx+\pv[2]fy+\pv[2]fz.
-    \end{align}
-	\item 矢量Laplacian
-	\begin{align}
-        \lap\bm A\equiv(\nabla^2A_x)\uvec x+(\nabla^2A_y)\uvec y+(\nabla^2A_z)\uvec z.
-    \end{align}
-    \item 梯度的旋度恒为0，旋度和散度恒为0
+    其中
+    \begin{equation}
+        (\bm A\cdot\nabla)\bm B:=A_x\pv{B_x}x+A_y\pv{B_x}y+A_z\pv{B_x}z.
+    \end{equation}
+\end{theorem}
+
+\begin{corollary}
+    \begin{equation}
+        (\bm A\cdot\nabla)\bm B=\frac12[\nabla(\bm A\cdot\bm B)-\curl(\bm A\times\bm B)-\bm B\times(\curl\bm A)+\bm A(\div\bm B)+\bm B(\div\bm A)].
+    \end{equation}
+    特别地，$\bm B=\bm A$时，
+    \begin{equation}
+        (\bm A\cdot\nabla)\bm A=\frac12\nabla(A^2)-\bm A\times(\curl\bm A).
+    \end{equation}
+\end{corollary}
+
+\begin{theorem}
+    {梯度场无旋、旋度场无源}{curlgrad=divcurl=0}
+    梯度的旋度恒为$\bm0$，旋度和散度恒为0
     \begin{align}
         \label{eqn:curlgrad}
-        \curl(\nabla f)&\equiv \bm 0;\\
+        \curl(\nabla\psi)&\equiv \bm 0;\\
         \label{eqn:divcurl}
         \div(\curl\bm A)&\equiv 0.
     \end{align}
-    \item 二重旋度
-    \begin{align}
+\end{theorem}
+
+\begin{theorem}
+    {二重微分}{second order differential}
+    旋度的旋度
+    \begin{equation}
         \label{eqn:curlcurl}
         \curl(\curl\bm A)=\nabla(\div\bm A)-\lap\bm A.
+    \end{equation}
+    Laplacian的乘法法则
+    \begin{align}
+        \lap(\psi\phi)&=\psi\lap\phi+2\nabla\psi\cdot\nabla\phi+(\lap\psi)\phi,\\
+        \lap(\psi\bm A)&=\psi\lap\bm A+2(\nabla\psi\cdot\nabla)\bm A+(\lap\psi)\bm A,\\
+        \lap(\bm A\cdot\bm B)&=\bm A\cdot\lap\bm B-\bm B\cdot\lap\bm A+2\div[(\bm B\cdot\nabla)\bm A+\bm B\times(\curl\bm A)].
     \end{align}
-\end{compactitem}
+\end{theorem}
+
+\begin{theorem}
+    {三重微分}{third order differential}
+    散度、旋度、散度与Laplacian可交换：
+    \begin{align}
+        \lap(\nabla\psi)&=\nabla(\lap\psi),\\
+        \lap(\div\bm A)&=\div(\lap\bm A),\\
+        \lap(\curl\bm A)&=\curl(\lap\bm A).
+    \end{align}
+\end{theorem}
+
+\iffalse
+\begin{example}
+    {}{}
+    \begin{align}
+        \nabla r&=\uvec r,\\
+        \div\bm r&=3,\\
+        \curl\bm r&=\bm 0,\\
+        \div(f(r)\uvec r)&=\frac2rf(r)+\pv fr,\\
+        \curl(f(r)\uvec r)&=\bm 0,\\
+        (\bm a\cdot\nabla)f(r)\uvec r&=[\bm a-(\bm a\cdot\uvec r)\uvec r]\frac{f(r)}r+(\bm a\cdot\uvec r)\uvec r\,\pv fr,\\
+        \nabla(\bm a\cdot\bm r)&=\bm a+(\div\bm a)\bm r+\bm r\times(\curl\bm a).
+    \end{align}
+\end{example}
+\fi
 
 \subsection{积分}
 \label{ssec:integral calculus}
 
 \begin{compactitem}
-	\item 线积分、面积分和体积分
 	\item 微积分基本定理
-	\[
-        \int_a^b f'(x)\d x=f(b)-f(a).
-    \]
-    \item 梯度定理
-    \begin{align}
-        \int_A^B\nabla f\cdot\d\bm\ell=f(B)-f(A).
-    \end{align}
-    \item 散度定理(Gauss定理)
-    \begin{align}\label{eqn:div}
-        \int_V\div\bm F\d V=\oint_{\p V}\bm F\cdot\d\bm A.
-    \end{align}
-    \item 旋度定理(Stokes定理)
-    \begin{align}\label{eqn:curl}
-        \int_S(\curl\bm F)\cdot\d\bm A=\oint_{\p S}\bm F\cdot\d\bm\ell.
-    \end{align}
+	\begin{equation}
+        \int_a^b\psi'(x)\d x=\edg{\psi(x)}_a^b=\psi(b)-\psi(a).
+    \end{equation}
     \item 分部积分
-    \begin{align}\notag
-        \int_a^bfg'\d x&=fg|_a^b-\int_a^bf'g\d x\\
-        \int_Vf(\div\bm F)\d V&=\oint_{\p V}f\bm F\cdot\d\bm A-\int_V\bm F\cdot\nabla f\d V.
-    \end{align}
+    \begin{equation}
+        \int_a^b\psi(x)\phi'(x)\d x=[\psi(x)\phi(x)]_a^b-\int_a^b\psi'(x)\phi(x)\d x.
+    \end{equation}
+    其实就是Leibniz法则$+$微积分基本定理$+$移项
+    % \begin{equation}
+    %     \int_V\psi\div\bm F\d V=\oint_{\p V}\psi\bm F\cdot\d\bm A-\int_V\bm F\cdot\nabla\psi\d V.
+    % \end{equation}
 \end{compactitem}
+
+\begin{theorem}
+    {体积分}{volume integral}
+    区域$V$的体积分
+    \begin{align}
+        \int_V\nabla\psi\d V&=\oint_{\p V}\psi\d\bm A,\\
+        \label{eqn:div}
+        \int_V\div\bm F\d V&=\oint_{\p V}\bm F\cdot\d\bm A,\\
+        \int_V\curl\bm F\d V&=-\oint_{\p V}\bm F\times\d\bm A.
+    \end{align}
+    其中\eqref{eqn:div}称为散度定理，也称Gauss定理。
+\end{theorem}
+
+\begin{theorem}
+    {面积分}{surface integral}
+    曲面$S$的面积分
+    \begin{align}
+        \int_S\nabla\psi\times\d\bm A&=-\oint_{\p S}\psi\d\bm\ell,\\
+        \label{eqn:curl}
+        \int_S(\curl\bm F)\cdot\d\bm A&=\oint_{\p S}\bm F\cdot\d\bm\ell.
+    \end{align}
+    其中\eqref{eqn:curl}称为旋度定理，也称Stokes定理。
+\end{theorem}
+
+
 
 \section{曲线坐标系}
 \label{sec:curvilinear coordinates}
 
 \subsection{Lam\'e系数}
 
-给定曲线坐标系(curvilinear coordinate)的正交基$\nvec e_1,\nvec e_2,\nvec e_3$，点的坐标为$(q_1,q_2,q_3)$，则
+给定曲线坐标系(curvilinear coordinate)的正交基$\nvec e_1,\nvec e_2,\nvec e_3$，位置矢量
+\[
+    \bm r=q_1\uvec e_1+q_2\uvec e_2+q_3\uvec e_3,
+\]
+位置矢量$\bm r=\bm r(q_1,q_2,q_3)$的全微分
 \[
     \d\bm r=\pv{\bm r}{q_1}\d q_1+\pv{\bm r}{q_2}\d q_2+\pv{\bm r}{q_3}\d q_3,
 \]
@@ -172,7 +241,7 @@
 \begin{equation}
     H_i:=\abs{\pv{\bm r}{q_i}}=\sqrt{\biggkh{\pv x{q_i}}^2+\biggkh{\pv y{q_i}}^2+\biggkh{\pv z{q_i}}^2}.
 \end{equation}
-因此 
+因此$\p\bm r/\p q_i=H_i\uvec e_i$，从而
 \begin{equation}
     \d\bm r=H_1\d q_1\uvec e_1+H_2\d q_2\uvec e_2+H_3\d q_3\uvec e_3.
 \end{equation}
@@ -182,51 +251,42 @@
     \d V&=H_1H_2H_3\d q_1\nd q_2\nd q_3.
 \end{align}
 
-\paragraph{梯度}
-在曲线坐标系下，梯度可以通过Lam\'e系数表示：
-\begin{equation}
-    \label{eqn:grad Lame}
-    \nabla f=\frac1{H_1}\pv f{q_1}\uvec e_1+\frac1{H_2}\pv f{q_2}\uvec e_2+\frac1{H_3}\pv f{q_3}\uvec e_3.
-\end{equation}
-
-\paragraph{散度}
-矢量$\bm A$在曲线坐标系下的分量：
-\[
-    \bm A=A_1\uvec e_1+A_2\uvec e_2+A_3\uvec e_3.
-\]
-根据面积微元和体积微元的表达式，散度为：
-\begin{equation}
-    \label{eqn:div Lame}
-    \div\bm A=\frac1{H_1H_2H_3}\biggfkh{\pv{(H_2H_3A_1)}{q_1}+\pv{(H_3H_1A_2)}{q_2}+\pv{(H_1H_2A_3)}{q_3}}.
-\end{equation}
-
-\paragraph{旋度}
-省去推导过程
-\begin{equation}
-    \label{eqn:curl Lame}
-    \curl\bm A=\frac1{H_1H_2H_3}\begin{vmatrix}
-        H_1\uvec e_1&H_2\uvec e_2&H_3\uvec e_3\\
-        \pp{q_1}&\pp{q_2}&\pp{q_3}\\
-        H_1A_1&H_2A_2&H_3A_3
-    \end{vmatrix}.
-\end{equation}
-
-\paragraph{Laplacian}
-结合式\eqref{eqn:grad Lame}和式\eqref{eqn:div Lame}，得到
-\begin{equation}
-    \label{eqn:Laplacian Lame}
-    \lap f=\frac1{H_1H_2H_3}\biggfkh{\pp{q_1}\biggkh{\frac{H_2H_3}{H_1}\pv f{q_1}}+\pp{q_2}\biggkh{\frac{H_3H_1}{H_2}\pv f{q_2}}+\pp{q_3}\biggkh{\frac{H_1H_2}{H_3}\pv f{q_3}}}.
-\end{equation}
+\begin{theorem}
+    {曲线坐标系下的nabla算符}{nabla in curvilinear coordinates}
+    在曲线坐标系下，梯度、散度、旋度和Laplacian都可以用Lam\'e系数表示：
+    \begin{align}
+        \label{eqn:grad Lame}
+        \nabla\psi&=\frac1{H_1}\pv\psi{q_1}\uvec e_1+\frac1{H_2}\pv\psi{q_2}\uvec e_2+\frac1{H_3}\pv\psi{q_3}\uvec e_3;\\
+        \label{eqn:div Lame}
+        \div\bm F&=\frac1{H_1H_2H_3}\biggfkh{\pv{(H_2H_3F_1)}{q_1}+\pv{(H_3H_1F_2)}{q_2}+\pv{(H_1H_2F_3)}{q_3}};\\
+        \label{eqn:curl Lame}
+        \curl\bm F&=\frac1{H_1H_2H_3}\begin{vmatrix}
+            H_1\uvec e_1&H_2\uvec e_2&H_3\uvec e_3\\
+            \pp{q_1}&\pp{q_2}&\pp{q_3}\\
+            H_1F_1&H_2F_2&H_3F_3
+        \end{vmatrix};\\
+        \label{eqn:Laplacian Lame}
+        \lap\psi&=\frac1{H_1H_2H_3}\biggfkh{\pp{q_1}\biggkh{\frac{H_2H_3}{H_1}\pv\psi{q_1}}+\pp{q_2}\biggkh{\frac{H_3H_1}{H_2}\pv\psi{q_2}}+\pp{q_3}\biggkh{\frac{H_1H_2}{H_3}\pv\psi{q_3}}}.
+    \end{align}
+\end{theorem}
 
 \subsection{球坐标系}
+\label{ssec:spherical coordinate}
 
-在球坐标系中的坐标为$(r,\theta,\phi)$，$r$称为径向距离(radial distance)，$\theta$称为极角(polar angle)，$\phi$称为方位角(azimuthal angle)。如下图所示。
-
+球坐标(spherical coordinate)为$(r,\theta,\phi)$，其中$r$称为径向距离(radial distance)，$\theta$称为极角(polar angle)，$\phi$称为方位角(azimuthal angle)。如下图所示。
 \begin{center}
     \includegraphics[page=\pagenumref{tikz:spherical coordinate}]{figures/tikz/layouts.pdf}
     \captionof{figure}{球坐标系}
     \label{fig:spherical coordinate}
 \end{center}
+坐标变换
+\begin{subequations}
+    \begin{align}
+        x&=r\sin\theta\cos\phi,\\
+        y&=r\sin\theta\sin\phi,\\
+        z&=r\cos\theta.
+    \end{align}
+\end{subequations}
 基变换
 \begin{equation}
     \begin{bmatrix}
@@ -241,14 +301,6 @@
         \uvec x\\\uvec y\\\uvec z
     \end{bmatrix}
 \end{equation}
-坐标变换
-\begin{align}
-    \begin{cases}
-        x=r\sin\theta\cos\phi\\
-        y=r\sin\theta\sin\phi\\
-        z=r\cos\theta
-    \end{cases}
-\end{align}
 Lam\'e系数：
 \begin{subequations}
     \begin{align}
@@ -257,35 +309,36 @@ Lam\'e系数：
         H_\phi&=\sqrt{\biggkh{\pv x\phi}^2+\biggkh{\pv y\phi}^2+\biggkh{\pv z\phi}^2}=r\sin\theta,
     \end{align}
 \end{subequations}
-% 微元
-% \begin{align}
-%     \d\bm\ell&=\d r\uvec r+r\d\theta\uvec\theta+r\sin\theta\d\phi\uvec\phi\\
-%     \d V&=r^2\sin\theta\d r\nd\theta\nd\phi
-% \end{align}
 矢量微分
 \begin{align}
-    %\nabla&=\pp r\uvec r+\frac1r\pp\theta\uvec\theta+\frac1{r\sin\theta}\pp\phi\uvec\phi.\\
-    \nabla f&=\pv fr\uvec r+\frac1r\pv f\theta\uvec\theta+\frac1{r\sin\theta}\pv f\phi\uvec\phi,\\
-    \div\bm A&=\frac1{r^2}\pp r(r^2A_r)+\frac1{r\sin\theta}\pp\theta(\sin\theta\,A_\theta)+\frac1{r\sin\theta}\pp\phi A_\phi,\\
-    \curl\bm A&=\frac1{r^2\sin\theta}
+    \nabla\psi&=\pv\psi r\uvec r+\frac1r\pv\psi \theta\uvec\theta+\frac1{r\sin\theta}\pv\psi \phi\uvec\phi,\\
+    \div\bm F&=\frac1{r^2}\pp r(r^2F_r)+\frac1{r\sin\theta}\pp\theta(\sin\theta\,F_\theta)+\frac1{r\sin\theta}\pp\phi F_\phi,\\
+    \curl\bm F&=\frac1{r^2\sin\theta}
     \begin{vmatrix}
         \uvec r&r\uvec\theta&r\sin\theta\uvec\phi\\
         \pp r&\pp\theta&\pp\phi\\
-        A_r&rA_\theta&r\sin\theta A_\phi
+        F_r&rF_\theta&r\sin\theta F_\phi
     \end{vmatrix},\\
-    \lap f&=\frac1{r^2}\pp r\biggkh{r^2\pv fr}+\frac1{r^2\sin\theta}\pp\theta\biggkh{\sin\theta\pv f\theta}+\frac1{r^2\sin^2\theta}\pv[2]f\phi.
+    \lap\psi&=\frac1{r^2}\pp r\biggkh{r^2\pv\psi r}+\frac1{r^2\sin\theta}\pp\theta\biggkh{\sin\theta\pv\psi\theta}+\frac1{r^2\sin^2\theta}\pv[2]\psi\phi.
 \end{align}
 
 \subsection{柱坐标系}
+\label{ssec:cylindrical coordinate}
 
+柱坐标(cylindrical coordinate)为$(\rho,\phi,z)$，对应二维极坐标(polar coordinate) $(\rho,\phi)$，其中$\rho$称为极径(radial distance)，$\phi$称为极角(azimuth)，$z$为高度(height)。如下图所示。
+\begin{center}
+    \includegraphics[page=\pagenumref{tikz:cylindrical coordinate}]{figures/tikz/layouts.pdf}
+    \captionof{figure}{柱坐标系}
+    \label{fig:cylindrical coordinate}
+\end{center}
 坐标变换
-\begin{align}
-    \begin{cases}
-        x=\rho\cos\phi\\
-        y=\rho\sin\phi\\
-        z=z
-    \end{cases}
-\end{align}
+\begin{subequations}
+    \begin{align}
+        x&=\rho\cos\phi,\\
+        y&=\rho\sin\phi,\\
+        z&=z.
+    \end{align}
+\end{subequations}
 Lam\'e系数：
 \begin{subequations}
     \begin{align}
@@ -296,30 +349,31 @@ Lam\'e系数：
 \end{subequations}
 矢量微分
 \begin{align}
-    \nabla f&=\pv f\rho\uvec\rho+\frac1\rho\pv f\phi\uvec\theta+\pv fz\uvec z,\\
-    \div\bm A&=\frac1\rho\pp\rho(\rho A_\rho)+r\pv{A_\phi}\phi+\pv{A_z}z,\\
-    \curl\bm A&=\frac1\rho
+    \nabla\psi&=\pv\psi\rho\uvec\rho+\frac1\rho\pv\psi\phi\uvec\phi+\pv\psi z\uvec z,\\
+    \div\bm F&=\frac1\rho\pp\rho(\rho F_\rho)+\frac1\rho\pv{F_\phi}\phi+\pv{F_z}z,\\
+    \curl\bm F&=\frac1\rho
     \begin{vmatrix}
         \uvec\rho&\rho\uvec\phi&\uvec z\\
         \pp\rho&\pp\phi&\pp z\\
-        A_\rho&\rho A_\phi&A_z
+        F_\rho&\rho F_\phi&F_z
     \end{vmatrix},\\
-    \lap f&=\frac1\rho\pp\rho\biggkh{\rho\pv f\rho}+\frac1{\rho^2}\pv[2]f\theta+\pv[2]fz.
+    \lap\psi&=\frac1\rho\pp\rho\biggkh{\rho\pv\psi\rho}+\frac1{\rho^2}\pv[2]\psi\phi+\pv[2]\psi z.
 \end{align}
 
 \section{Dirac函数}
 
 \begin{example}{引入Dirac $\delta$函数}{introduce delta function}
-    计算$\bm F(\bm r)$的散度：
+    计算$\bm F(\bm r)=\uvec r/r^2$的散度(不包括原点)：
     \[
-        \bm F(\bm r)=\frac{\uvec r}{r^2},\implies\div\bm F=\frac1{r^2}\pp r\Bigkh{r^2\cdot\frac1{r^2}}=0,
+        \div\bm F=\frac1{r^2}\pp r\Bigkh{r^2\cdot\frac1{r^2}}=0,
     \]
     但考虑其在半径为$r$球面上的面积分：
     \[
         \oint_{\p V}\bm F\cdot\d\bm A=\oint_{\p V}\frac1{r^2}r^2\sin\theta\d\theta\nd\phi=\int_0^{2\pi}\int_0^\pi\sin\theta\d\theta\nd\phi=4\pi.
     \]
     这与散度定理\eqref{eqn:div}矛盾！
-    原因在于：$\div\bm F$在除了原点以外的任意一点均为0，但其体积分为$4\pi$。
+    原因在于原点处的散度是奇点(singularity)。
+    % 原因在于：$\div\bm F$在除了原点以外的任意一点均为0，但其体积分为$4\pi$。
 \end{example}
 \begin{definition}{Dirac $\delta$函数}{Dirac delta function}
     $\delta$函数是一个将任意函数$f$映射到$f(0)$的线性泛函(linear functional)，即
@@ -335,59 +389,157 @@ Lam\'e系数：
     在物理上，$\delta$函数可以代表质点(或点电荷)的密度。
 \end{definition}
 
-因此\exmref{exm:introduce delta function} 中的散度其实应为$4\pi\vd(\bm r)$，进而
-\begin{equation}
-    \lap\biggkh{\frac1r}=-\div\biggkh{\frac{\bm r}{r^3}}=-4\pi\vd(\bm r).
-\end{equation}
+\begin{corollary}
+    \exmref{exm:introduce delta function} 中的散度其实应为$4\pi\vd(\bm r)$，进而
+    \begin{equation}
+        \lap\biggkh{\frac1r}=-\div\biggkh{\frac{\uvec r}{r^2}}=-4\pi\vd(\bm r).
+    \end{equation}
+\end{corollary}
+
 \section{向量场理论}
-给定$\div\bm F$和$\curl\bm F$，能否确定$\bm F$？
-\begin{theorem}{Helmholtz定理}{Helmholtz theorem}
-    给定$\bm F$的散度和旋度：
-    \[
-        \begin{cases}
-            \div\bm F=D(\bm r)\\
-            \curl\bm F=\bm C(\bm r)
-        \end{cases}
-    \]
-    若当$r\to\infty$时，$D(\bm r),\bm C(\bm r)=o(1/r^2)$收敛得更快，且$\bm F(\bm r)\to0$，则
-    \begin{align}
-        \bm F=-\nabla V+\curl\bm A,
-    \end{align}
-    此处
-    \begin{align}
-        \begin{cases}
-            V(\bm r)=\frac1{4\pi}\int\frac{D(\bm r')}{\abs{\bm r-\bm r'}}\d V'\\
-            \bm A(\bm r)=\frac1{4\pi}\int\frac{\bm C(\bm r')}{\abs{\bm r-\bm r'}}\d V'
-        \end{cases}
-    \end{align}
-\end{theorem}
+
+我们只讨论性质足够好的(well-behaved)向量场$\bm F$，而不考虑分析学中的那些反例。具体来说，$\bm F$在区域$V$中二次连续可微。
+
 \begin{theorem}{无旋场与标量势}{irrotational field and scalar potential}
     对于无旋场$\bm F$，下列命题是等价的：
-    \begin{compactitem}
+    \begin{enumerate}
         \item $\curl\bm F=\bm 0$;
-        \item $\bm F$可以被写为标量势(scalar potential)的梯度：$\bm F=-\nabla V$;
-        \item 给定起点终点，线积分与路径无关\[
-            \int_A^B\bm F\cdot\d\bm\ell=V(A)-V(B);
-        \]
+        \item $\bm F$可以写成标量势(scalar potential)的梯度：$\bm F=-\nabla\Phi$;
+        \item 给定路径$C$的起点终点$A,B$，线积分与路径无关
+        \begin{equation}
+            \int_A^B\bm F\cdot\d\bm\ell=\Phi(A)-\Phi(B);
+        \end{equation}
         \item 闭合线积分恒为0.
-    \end{compactitem}
+    \end{enumerate}
 \end{theorem}
-与式\eqref{eqn:curlgrad}联系，注意$V$并不唯一。
+\begin{proof}
+    由式\eqref{eqn:curlgrad}可知$(2)\implies(1)$；易知$(3)\iff(4)$；由Stokes定理\eqref{eqn:curl}可知$(4)\iff(1)$；最后确定参考点$\Phi=0$后，可由$(3)\implies(2)$得到$\Phi$。
+\end{proof}
+\begin{remark}
+    $\Phi$并不唯一，$\Phi'=\Phi+\const$可以给出同一个$\bm F$，需要确定$\Phi=0$的参考点，最简单的参考点是无穷远处$\Phi(\infty)=0$。
+    \[
+        \Phi(\bm r)=\int_\infty^{\bm r}\bm F\cdot\d\bm\ell.
+    \]
+\end{remark}
+
 \begin{theorem}{无源场与矢量势}{solenoidal field and vector potential}
     对于无源场$\bm F$，下列命题是等价的：
-    \begin{compactitem}
+    \begin{enumerate}
         \item $\div\bm F=0$;
-        \item $\bm F$可以被写为矢量势(vector potential)的旋度：$\bm F=\curl\bm A$;
-        \item 给定边界，面积分与表面形状无关
-        \[
+        \item $\bm F$可以写成矢量势(vector potential)的旋度：$\bm F=\curl\bm A$;
+        \item 给定面$S$的边界$\p S$，面积分与表面形状无关
+        \begin{equation}
             \int_S\bm F\cdot\d\bm A=\oint_{\p S}\bm A\cdot\d\bm\ell;
-        \]
+        \end{equation}
         \item 闭合面积分恒为0.
-    \end{compactitem}
+    \end{enumerate}
 \end{theorem}
-与式\eqref{eqn:divcurl}联系，注意$\bm A$并不唯一 。
+\begin{proof}
+    由式\eqref{eqn:divcurl}可知$(2)\implies(1)$；易知$(3)\iff(4)$；由Gauss定理\eqref{eqn:div}可知$(4)\iff(1)$；最后可通过$(3)\implies(2)$构造$\bm A$。
+\end{proof}
 
-% \sectionstar{并矢}
+\begin{remark}
+    $\bm A$并不唯一，$\bm A'=\bm A+\nabla\varLambda$可以给出同一个$\bm F$。
+    可以通过确定一个规范(gauge)来唯一确定$\bm A$，比如最简单的Coulomb规范$\div\bm A=0$。
+\end{remark}
+
+\begin{theorem}{Helmholtz分解}{Helmholtz decomposition}
+    向量场$\bm F$可以被唯一地分解为无旋场和无源场的叠加：
+    \begin{equation}
+        \bm F=-\nabla\Phi+\curl\bm A,
+    \end{equation}
+    其中
+    \begin{subequations}
+        \begin{align}
+            \Phi(\bm r)&=\frac1{4\pi}\int_V\frac{\div[']\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V'-\frac1{4\pi}\oint_{\p V}\frac{\bm F(\bm r')}{\abs{\bm r-\bm r'}}\cdot\d\bm A,\\
+            \bm A(\bm r)&=\frac1{4\pi}\int_V\frac{\curl[']\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V'+\frac1{4\pi}\oint_{\p V}\frac{\bm F(\bm r')}{\abs{\bm r-\bm r'}}\times\d\bm A.
+        \end{align}
+    \end{subequations}
+\end{theorem}
+
+\begin{proof}
+    利用$\delta$函数
+    \[
+        \bm F(\bm r)=\int_V\bm F(\bm r')\vd(\bm r-\bm r')\d V'=-\frac1{4\pi}\int_V\bm F(\bm r')\lap\biggkh{\frac1{\abs{\bm r-\bm r'}}}\d V'.
+    \]
+    剩下的展开部分在推导$\Phi$和$\bm A$时有体现，此处不再赘述。    
+\end{proof}
+
+\begin{corollary}
+    若$V$无界且$\bm F=o(1/r)$，则
+    \begin{subequations}
+        \begin{align}
+            \Phi(\bm r)&=\frac1{4\pi}\int_V\frac{\div[']\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V',\\
+            \bm A(\bm r)&=\frac1{4\pi}\int_V\frac{\curl[']\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V'.
+        \end{align}
+    \end{subequations}
+\end{corollary}
+
+\sectionstar{并矢}
+
+对于形如$\bm A(\bm B\cdot\bm C)$的表达式，我们可以将其视为一个线性算符：
+\[
+    \bm C\mapsto\bm A(\bm B\cdot\bm C),
+\]
+
+\begin{definition}
+    {并矢}{dyadic}
+    矢量$\bm A,\bm B$的并矢(dyadic)是一个张量积(tensor product)，记为$\bm A\bm B$，满足
+    \begin{subequations}
+        \begin{align}
+            \bm A\bm B\cdot\bm C&=\bm A(\bm B\cdot\bm C),\\
+            \bm C\cdot\bm A\bm B&=(\bm C\cdot\bm A)\bm B.
+        \end{align}
+    \end{subequations}
+\end{definition}
+
+\begin{corollary}
+    在确定一组基$\uvec e_1,\uvec e_2,\uvec e_3$后，
+    \begin{align*}
+        \bm A&=A_1\uvec e_1+A_2\uvec e_2+A_3\uvec e_3,\\
+        \bm B&=B_1\uvec e_1+B_2\uvec e_2+B_3\uvec e_3,
+    \end{align*}
+    并矢
+    \[
+        \bm A\bm B=\sum_{i,j=1}^3 A_iB_j\uvec e_i\uvec e_j.
+    \]
+    其中$\uvec e_i\uvec e_j$是并矢的基，满足
+    \begin{subequations}
+        \begin{align}
+            \uvec e_i\uvec e_j\cdot\uvec e_k&=\uvec e_i(\uvec e_j\cdot\uvec e_k)=\delta_{jk}\uvec e_i,\\
+            \uvec e_i\cdot\uvec e_j\uvec e_k&=(\uvec e_i\cdot\uvec e_j)\uvec e_k=\delta_{ij}\uvec e_k.
+        \end{align}
+    \end{subequations}
+\end{corollary}
+
+\begin{definition}
+    {双重点积}{double dot product}
+    两个并矢$\bm A\bm B$和$\bm C\bm D$的双重点积(double dot product)定义为
+    \begin{equation}
+        \bm A\bm B:\bm C\bm D=(\bm A\cdot\bm D)(\bm B\cdot\bm C).
+    \end{equation}
+\end{definition}
+
+\begin{corollary}
+    对于基来说
+    \begin{equation}
+        (\uvec e_i\uvec e_j):(\uvec e_k\uvec e_\ell)=\delta_{i\ell}\delta_{jk}.
+    \end{equation}
+\end{corollary}
+
+\iffalse
+\begin{corollary}
+    引入Einstein求和约定，并矢可表示为
+    \begin{subequations}
+        \begin{align}
+            (\bm A\bm B)_{ij}&=A_iB_j,\\
+            (\bm A\bm B\cdot\bm C)_i&=A_iB_jC^j,\\
+            (\bm C\cdot\bm A\bm B)_j&=C^iA_iB_j,\\
+            (\bm A\bm B:\bm C\bm D)&=A_iB_jC^jD^i.
+        \end{align}
+    \end{subequations}
+\end{corollary}
+\fi
 
 \chapter{特殊函数}
 
