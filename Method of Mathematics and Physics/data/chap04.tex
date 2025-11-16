@@ -119,8 +119,8 @@
 \begin{example}{$\delta$函数与Laplace算子}{}
 	\begin{equation}
 		\delta(x_1,\ldots,x_n)=\begin{cases}
-			\frac1{2\pi}\lap_2\ln r,&n=2\\
-			-\frac1{(n-2)S_{n}}\lap_n\frac1{r^{n-2}},&n\geqslant 3
+			\frac1{2\pi}\lapla\ln r,&n=2\\
+			-\frac1{(n-2)S_{n}}\lapla\frac1{r^{n-2}},&n\geqslant 3
 		\end{cases}
 	\end{equation}
 	其中$r=\abs{\bm x}$，$S_n$为$n$维单位球的表面积。特别地，$S_3=4\pi$。
@@ -178,7 +178,7 @@
 \begin{example}{3维Helmholtz方程}{}
 	求3维Helmholtz方程的基本解：
 	\[
-		\lap_3 u+cu=0
+		\lapla u+cu=0
 	\]
 	
 	由于只有一个点源，方程具有对称性，可设方程有球对称基本解$U(r)$，
@@ -193,11 +193,11 @@
 	\]
 	记$B_r$为半径为$r$的球内部分，则
 	\[
-		\int_{B_r}\lap U\d V=\int_{B_r}\delta(x,y,z)\d V=1.
+		\int_{B_r}\lapla U\d V=\int_{B_r}\delta(x,y,z)\d V=1.
 	\]
 	由Green公式
 	\[
-		\int_{B_r}\lap U\d V=\oint_{\p B_r}\pv Un\d S=-\frac A{r^2}\cdot 4\pi r^2=1,\implies U(r)=-\frac1{4\pi r}.
+		\int_{B_r}\lapla U\d V=\oint_{\p B_r}\pv Un\d S=-\frac A{r^2}\cdot 4\pi r^2=1,\implies U(r)=-\frac1{4\pi r}.
 	\]
 	
 	当$c<0$时，记$k:=\sqrt{-c}$
@@ -206,7 +206,7 @@
 	\]
 	由积分条件
 	\[
-		\int_{B_r}\lap U-k^2U\d V=\oint_{\p B_r}\pv Un\d S-k^2\int_{B_r}U\d V=1,
+		\int_{B_r}\lapla U-k^2U\d V=\oint_{\p B_r}\pv Un\d S-k^2\int_{B_r}U\d V=1,
 	\]
 	且
 	\begin{align*}
@@ -236,9 +236,9 @@
 	$\forall u,v\in\sC^2(\Omega)\cap\sC(\bar\Omega)$，有
 	\begin{gather}
 		\label{Green's 1st formula}
-		\int_\Omega v\lap u\d V=\oint_{\p\Omega}v\pv u{\bm n}\d S-\int_\Omega\nabla v\cdot\nabla u\d V;\\
+		\int_\Omega v\lapla u\d V=\oint_{\p\Omega}v\pv u{\bm n}\d S-\int_\Omega\nabla v\cdot\nabla u\d V;\\
 		\label{Green's 2nd formula}
-		\int_\Omega(u\lap v-v\lap u)\d V=\oint_{\p\Omega}\biggkh{u\pv v{\bm n}-v\pv u{\bm n}}\d S.
+		\int_\Omega(u\lapla v-v\lapla u)\d V=\oint_{\p\Omega}\biggkh{u\pv v{\bm n}-v\pv u{\bm n}}\d S.
 	\end{gather}
 	%其中$\p u/\p\bm n=\nabla u\cdot\bm n$。
 \end{theorem}
@@ -257,7 +257,7 @@
 \paragraph{Poisson方程第I边值问题}
 \begin{align}
 	\begin{cases}
-		\lap u=-f(M),&M\in V\subseteq\RR^3\\
+		\lapla u=-f(M),&M\in V\subseteq\RR^3\\
 		\edg u_{\p V}=\varphi(M),
 	\end{cases}
 \end{align}
@@ -266,11 +266,11 @@
 由叠加原理，$u=v+w$，$v,w$分别满足
 \begin{align*}
 	\begin{cases}
-		\lap v=-f(M),\\
+		\lapla v=-f(M),\\
 		\edg v_{\p V}=0,
 	\end{cases}\quad
 	\begin{cases}
-		\lap w=0,\\
+		\lapla w=0,\\
 		\edg w_{\p V}=\varphi(M),
 	\end{cases}
 \end{align*}
@@ -279,7 +279,7 @@
 	定解问题
 	\begin{align}
 		\begin{cases}
-			\lap G(M;N)=-\vd(M-N),\\
+			\lapla G(M;N)=-\vd(M-N),\\
 			\edg G_{\p V}=0.
 		\end{cases}
 	\end{align}
@@ -299,7 +299,7 @@
 \end{proof}
 Fourier方法是求Green函数的基本方法，但对于一些特殊的区域，可以采用一些特殊方法，如镜像法。
 \begin{method}{镜像法}{}
-	分解$G=U+g$，$U$满足$\lap U=-\vd(M-N)$，可取
+	分解$G=U+g$，$U$满足$\lapla U=-\vd(M-N)$，可取
 	\begin{align*}
 		U=\begin{cases}
 			-\frac1{2\pi}\ln r,&n=2\\[1ex]
@@ -310,7 +310,7 @@ Fourier方法是求Green函数的基本方法，但对于一些特殊的区域�
 	而$g$满足 
 	\[
 		\begin{cases}
-			\lap g=0,\\
+			\lapla g=0,\\
 			\edg g_{\p V}=-U,
 		\end{cases}
 	\]
@@ -341,7 +341,7 @@ Fourier方法是求Green函数的基本方法，但对于一些特殊的区域�
 	故对于上半空间Dirichlet问题
 	\[
 		\begin{cases}
-		\lap u=0,&z>0\\
+		\lapla u=0,&z>0\\
 		\edg u_{z=0}=\varphi(x,y)
 	\end{cases}
 	\]
@@ -360,7 +360,7 @@ Fourier方法是求Green函数的基本方法，但对于一些特殊的区域�
 	求半径为$R$的球域内Poisson方程第I边值问题的Green函数
 	\begin{gather*}
 		\begin{cases}
-			\lap_3G(M;N)=-\vd(M-N),&0\leqslant r<R\\
+			\lapla G(M;N)=-\vd(M-N),&0\leqslant r<R\\
 			\edg G_{r=R}=0
 		\end{cases}\\
 		\implies \edg{\pv Gn}_{\rho=R}=\frac{R^2-r^2}{4\pi R(R^2+r^2-2Rr\cos\psi)^{3/2}}.
@@ -368,7 +368,7 @@ Fourier方法是求Green函数的基本方法，但对于一些特殊的区域�
 	故球内Dirichlet问题，解的Poisson形式
 	\begin{gather*}
 		\begin{cases}
-			\lap_3u=0,&0\leqslant r<R\\
+			\lapla u=0,&0\leqslant r<R\\
 			\edg u_{r=R}=\varphi(\theta,\phi)
 		\end{cases}\\
 		\implies u(r,\theta,\phi)=\frac1{4\pi R}\oint_{S_R}\frac{(R^2-r^2)\varphi(\theta_0,\phi_0)\d S_0}{(R^2+r^2-2Rr\cos\psi)^{3/2}}.
@@ -381,7 +381,7 @@ Fourier法是求Green函数的基本方法，主要思想是按照特征函数�
 	求矩形区域$\Omega=[0,L]\times[0,M]$上第I类边值Poisson方程的Green函数
 	\begin{align*}
 		\begin{cases}
-			\lap_2G(x,y;\xi,\eta)=-\vd(x-\xi,y-\eta),\quad x,\xi\in[0,L];\;y,\eta\in[0,M]\\
+			\lapla G(x,y;\xi,\eta)=-\vd(x-\xi,y-\eta),\quad x,\xi\in[0,L];\;y,\eta\in[0,M]\\
 			G(0,y)=G(L,y)=G(x,0)=G(x,M)=0,
 		\end{cases}
 	\end{align*}
@@ -400,7 +400,7 @@ Fourier法是求Green函数的基本方法，主要思想是按照特征函数�
 \begin{example}{Fourier法应用·有限高}{}
 	\begin{equation*}
 		\begin{cases}
-			\lap_2u=0,\quad x>0,y\in[0,a]\\
+			\lapla u=0,\quad x>0,y\in[0,a]\\
 			u(x,0)=\varphi(x),\enspace u(x,a)=\psi(x),\\
 			u(0,y)=0,
 		\end{cases}
@@ -419,14 +419,14 @@ Fourier法是求Green函数的基本方法，主要思想是按照特征函数�
 \paragraph{$^\ast$Poisson方程第II, III边值问题}
 \begin{align}
 	\begin{cases}
-		\lap u=-f(M),&M\in V\subseteq\RR^n\\
+		\lapla u=-f(M),&M\in V\subseteq\RR^n\\
 		\kh{\alpha u+\beta\pv un}_{\p V}=\varphi(M),&\alpha,\beta\neq 0.
 	\end{cases}
 \end{align}
 相应的Green函数
 \begin{align*}
 	\begin{cases}
-		\lap G=-\vd(M-N),&M,N\in V\subseteq\RR^n\\
+		\lapla G=-\vd(M-N),&M,N\in V\subseteq\RR^n\\
 		\kh{\alpha G+\beta\pv Gn}_{\p V}=0,&\alpha,\beta\neq 0.
 	\end{cases}
 \end{align*}
@@ -438,11 +438,11 @@ Fourier法是求Green函数的基本方法，主要思想是按照特征函数�
 $\beta=0$即第I边值问题。$\alpha=0$即第II边值问题，但此时表示内部有热源而边界绝热的稳恒温度场，这是不可能的，因此需要修正为
 \begin{align*}
 	\begin{cases}
-		\lap G=-\vd(M-N)+\frac1v,\\
+		\lapla G=-\vd(M-N)+\frac1v,\\
 		\edg{\pv Gn}_{\p V}=0,
 	\end{cases}\enspace\text{或}\quad
 	\begin{cases}
-		\lap G=-\vd(M-N),\\
+		\lapla G=-\vd(M-N),\\
 		\edg{\pv Gn}_{\p V}=-\frac1s,
 	\end{cases}
 \end{align*}
