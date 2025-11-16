@@ -486,15 +486,27 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 因此，求解$V$内的电势$\Phi$分布问题，除了需要$V$内电荷密度$\rho$的分布，还需知道表面$\p V$上的电势条件($\Phi$或$\p\Phi/\p n$)，这称为边界条件(boundary condition)。
 我们可以对不同的边界条件进行分类：
 \begin{definition}{边界条件}{boundary condition}
-    Dirichlet边界条件：给定表面上的电位
-    \[
-        \Phi|_{\p V}=f;
-    \]
-    Neumann边界条件：给定表面上电位的法向导数
-    \[
-        \edg{\pv\Phi n}_{\p V}=f;
-    \]
-    混合边界条件
+    \begin{itemize}
+        \item Dirichlet边界条件：给定表面上的电位
+        \[
+            \Phi|_{\p V}=f;
+        \]
+        \item Neumann边界条件：给定表面上电位的法向导数
+        \[
+            \edg{\pv\Phi n}_{\p V}=f;
+        \]
+        \item 混合边界条件：给定$\Gamma_{\text{D}}$上的电位和$\Gamma_{\text{N}}$上电位的法向导数
+        \[
+            \Phi|_{\Gamma_{\text{D}}}=f,\quad
+            \edg{\pv\Phi n}_{\Gamma_{\text{N}}}=f',
+        \]
+        其中$\Gamma_{\text{D}},\Gamma_{\text{N}}$是表面$\p V$的一个划分，满足$\Gamma_{\text{D}}\cup\Gamma_{\text{N}}=\p V$且$\Gamma_{\text{D}}\cap\Gamma_{\text{N}}=\varnothing$；
+        \item Robin边界条件：给定表面上电位与其法向导数的线性组合
+        \[
+            \edg{\alpha\Phi+\beta\pv\Phi n}_{\p V}=f,
+        \]
+        其中$\alpha,\beta$可以是函数。
+    \end{itemize}
 \end{definition}
 
 \subsection{唯一性定理}
@@ -512,7 +524,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \]
 由Green第一公式\eqref{eqn:Green I}，令式中$\phi=\psi=U$，则
 \[
-    \int_V(U\lapla U+\nabla U\cdot\nabla U)\d V=\oint_{\p V}U\pv Un\d A,
+    \int_V(U\cancel{\lapla U}+\nabla U\cdot\nabla U)\d V=\oint_{\p V}\cancel{U\pv Un}\d A,
 \]
 即
 \[
@@ -520,7 +532,20 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \]
 这说明$\Phi_1$和$\Phi_2$仅相差一个常数。对电位来说，这仅是参考点的差别。%唯一性定理得证。
 \end{proof}
-%对于Dirichlet边界条件，直接$U\equiv 0$，故解是唯一的；对于Neumann边界条件，
+
+\begin{remark}
+    对于Dirichlet边界条件(以及混合边界条件)，可以由边界确定$U\equiv 0$，故解是唯一的；
+    对于Neumann边界条件，$U\equiv\const$，对电场而言$-\nabla\Phi$也是唯一的。
+\end{remark}
+
+\begin{remark}
+    对于Robin边界条件，
+    \[
+        \edg{\alpha U+\beta\pv Un}_{\p V}=0\implies\int_V\abs{\nabla U}^2\d V=-\oint_{\p V}\alpha U^2/\beta\d A,
+    \]
+    当$\alpha,\beta$同号时，仍可得出$U\equiv 0$，解是唯一的。
+    但当$\alpha,\beta$异号时，无法保证解的唯一性。
+\end{remark}
 
 \subsection{Green函数法求解Poisson方程}
 \label{ssec:Green solve Poisson}
