@@ -41,7 +41,7 @@
 \begin{corollary}
     对于离散情形，
     \begin{equation}
-        \bm J=\sum_i q_i\bm v_i\vd(\bm r-\bm r_i).
+        \bm J(\bm r)=\sum_i q_i\bm v_i\vd(\bm r-\bm r_i).
     \end{equation}
 \end{corollary}
 
@@ -78,13 +78,12 @@
     \]
 \end{proof}
 
-\begin{definition}
-    {稳恒电流}{steady current}
+\begin{corollary}
     稳恒(steady-state)磁现象满足空间各处的$\rho$不变，于是连线性方程\eqref{eqn:continuity}变为
     \begin{equation}
         \div\bm J=0.
     \end{equation}
-\end{definition}
+\end{corollary}
 %我们从电流与磁感应强度之间的关系出发，建立静磁学基本定律。
 
 \section{Biot-Savart定律}
@@ -172,7 +171,7 @@
 \end{definition}
 
 \begin{corollary}
-    Lorentz力不做功。
+    Lorentz力的功率$\bm F\cdot\bm v=q(\bm v\times\bm B)\cdot\bm v=q(\bm v\times\bm v)\cdot\bm B=0$，即磁场不对电荷做功。
 \end{corollary}
 
 % 总力矩：
@@ -181,8 +180,8 @@
 % \]
 
 \begin{theorem}
-    {磁场的Gauss定律}{Gauss's law for magnetism}
-    静磁场无源
+    {磁场的散度}{divB}
+    磁场的Gauss定律(的微观形式)为
     \begin{equation}
         \label{eqn:divB}
         \div\bm B=0,
@@ -192,16 +191,16 @@
 \begin{proof}
     利用电流密度，Biot-Savart定律\eqref{eqn:B-S law}可以写成旋度的形式
     \begin{equation}
-        \label{eqn:B(x)}
+        \label{eqn:B(r)}
         \bm B(\bm r)=\frac{\mu_0}{4\pi}\int_V\bm J(\bm r')\times\frac{\bm r-\bm r'}{\abs{\bm r-\bm r'}^3}\d V'
         =\frac{\mu_0}{4\pi}\curl\int_V\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\d V'.
     \end{equation}
-    由\eqref{eqn:divcurl}即得。
+    由旋度的散度为零\eqref{eqn:divcurl}即得。
 \end{proof}
 
 \begin{theorem}
-    {Ampère定律的微观形式}{Ampère's law in microscopic form}
-    磁场的旋度
+    {磁场的旋度}{curlB}
+    也称Ampère定律的微观形式：
     \begin{equation}
         \label{eqn:curlB}
         \curl\bm B=\mu_0\bm J.
@@ -238,19 +237,19 @@
 \fi
 
 \begin{theorem}{Ampère定律}{Ampere's law}
-    磁感应强度沿闭合曲线$\p S$的环量与穿过$S$的电流$I_i$的关系为：
+    磁感应强度沿闭合曲线$\p S$的环量与穿过$S$的电流$I$的关系为：
     \begin{equation}
         \label{eqn:Ampere}
-        \oint_{\p S}\bm B\cdot\d\bm\ell=\mu_0\sum_S I_i.
+        \oint_{\p S}\bm B\cdot\d\bm\ell=\mu_0I.
     \end{equation}
 \end{theorem}
 
 \begin{proof}
-    对\eqref{eqn:curlB}两边取$S$的面积分
+    由磁场的旋度\eqref{eqn:curlB}
     \[
-        \int_S(\curl\bm B)\cdot\d\bm A=\mu_0\int_S\bm J\cdot\d\bm A.
+        \int_{\p S}\bm B\cdot\d\bm\ell=\int_S(\curl\bm B)\cdot\d\bm A=\mu_0\int_S\bm J\cdot\d\bm A=\mu_0I.
+        \qedhere
     \]
-    右边积分项即穿过$S$的电流$I$。
 \end{proof}
 
 \begin{remark}
@@ -296,11 +295,6 @@
     \begin{equation}
         \div\bm A=0.
     \end{equation}
-    从而$\lapla\varLambda=0$，在无边界条件时，$\varLambda=\const$，$\bm A$形式即最简洁的：
-    \begin{equation}
-        \label{eqn:A-J}
-        \bm A(\bm r):=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\d V',
-    \end{equation}
 \end{definition}
 
 \begin{corollary}
@@ -312,6 +306,11 @@
     即
     \begin{equation}
         \lapla\bm A=-\mu_0\bm J.
+    \end{equation}
+    在无边界条件时，
+    \begin{equation}
+        \label{eqn:A-J}
+        \bm A(\bm r):=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\d V',
     \end{equation}
 \end{corollary}
 

@@ -83,15 +83,12 @@
 \end{remark}
 
 \begin{theorem}{Gauss定律}{Gauss's law}
-    对于分立的点电荷系，电场$\bm E$在一个封闭曲面$\p V$上的通量(flux)为$V$内的所有电荷$q_i$求和：
-    \begin{equation}
-        \oint_{\p V}\bm E\cdot\d\bm A=\frac1{\varepsilon_0}\sum_{V}q_i,
-    \end{equation}
-    对于电荷密度为$\rho(\bm r)$的连续分布电荷来说，
+    电场$\bm E$在一个封闭曲面$\p V$上的通量(flux)为$V$内的所有电荷$q_i$求和：
     \begin{equation}
         \label{eqn:Gauss law}
-        \oint_{\p V}\bm E\cdot\d\bm A=\frac1{\varepsilon_0}\int_V\rho(\bm r)\d V,
+        \oint_{\p V}\bm E\cdot\d\bm A=\frac q{\varepsilon_0}=\frac1{\varepsilon_0}\int_V\rho(\bm r)\d V,
     \end{equation}
+    其中$q$是$V$内的总电荷量。
 \end{theorem}
 
 \begin{proof}
@@ -130,9 +127,9 @@
     \]
 \end{corollary}
 
-\begin{remark}
-    尽管Gauss定律总是对的，但并不总是有用。只有在满足一些对称性条件时，电场的通量才比较容易求。%比如对于均匀带电的球(或球壳)外部激发的电场与同电荷在球心的点电荷相同。
-\end{remark}
+% \begin{remark}
+%     尽管Gauss定律总是对的，但并不总是有用。只有在满足一些对称性条件时，电场的通量才比较容易求。%比如对于均匀带电的球(或球壳)外部激发的电场与同电荷在球心的点电荷相同。
+% \end{remark}
 
 \begin{example}{无限大平板的静电场}{E of infinite plate}
     无限大平板带有均匀面电荷密度$\sigma$，%求其电场。
@@ -167,7 +164,7 @@
     \end{center}
 \end{example}
 
-\begin{theorem}{Gauss定律的微分形式}{differential form of Gauss's law}
+\begin{theorem}{电场的散度}{divE}
     \begin{equation}
         \label{eqn:divE}
         \div\bm E=\frac\rho{\varepsilon_0}.
@@ -175,24 +172,45 @@
 \end{theorem}
 
 \begin{proof}
-    由散度定理\eqref{eqn:div}，$\bm E\cdot\uvec n$的面积分可以写成$\div\bm E$的体积分。
-    结合Gauss定律\eqref{eqn:Gauss law}，可得
+    由散度定理\eqref{eqn:div}以及Gauss定律\eqref{eqn:Gauss law}，可得
     \[
-        \int_V\biggkh{\div\bm E-\frac\rho{\varepsilon_0}}\d V\equiv 0
+        \oint_{\p V}\bm E\cdot\d\bm A=\int_V\div\bm E\d V=\frac1{\varepsilon_0}\int_V\rho(\bm r)\d V\implies
+        \int_V\biggkh{\div\bm E-\frac\rho{\varepsilon_0}}\d V=0.
     \]
     该式对任意$V$均成立。由此被积分式为零。
+    式\eqref{eqn:divE}也被称为Gauss定律的微分形式。
 \end{proof}
+
+\begin{theorem}
+    {电场的旋度}{curlE}
+    \begin{equation}
+        \label{eqn:curlE}
+        \curl\bm E=\bm 0.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    由恒等式\footnote{在同时存在多个变量时，需要用下标指定$\nabla$作用的变量。约定：$\nabla$不带下标时，默认作用在$\bm r$上；特别地，当作用在$\bm r'$上时，$\nabla_{\bm r'}$可简记为$\nabla'$。}
+    \[
+        \nabla\biggkh{\frac1{\abs{\bm r-\bm r'}}}=-\frac{\bm r-\bm r'}{\abs{\bm r-\bm r'}^3}.
+    \]
+    可将电场\eqref{eqn:E(r)}写成梯度的形式：
+    \begin{equation}
+        \label{eqn:E(r)=grad}
+        \bm E(\bm r)=-\frac1{4\pi\varepsilon_0}\nabla\biggkh{\int_V\frac{\rho(\bm r')}{\abs{\bm r'-\bm r}}\d V'}
+    \end{equation}
+    由式\eqref{eqn:curlgrad}梯度的旋度为$\bm0$即证。
+\end{proof}
+
+\begin{corollary}
+    由旋度定理\eqref{eqn:curl}，电场对任意闭合路径的环路积分为零：
+    \begin{equation}
+        \oint_{\p S}\bm E\cdot\d\bm\ell=\int_S(\curl\bm E)\cdot\d\bm A\equiv 0.
+    \end{equation}
+\end{corollary}
 
 \section{标量势}
 
-由恒等式\footnote{在同时存在多个变量时，需要用下标指定$\nabla$作用的变量。约定：$\nabla$不带下标时，默认作用在$\bm r$上；特别地，当作用在$\bm r'$上时，$\nabla_{\bm r'}$可简记为$\nabla'$。}
-\[
-    \nabla\biggkh{\frac1{\abs{\bm r-\bm r'}}}=-\frac{\bm r-\bm r'}{\abs{\bm r-\bm r'}^3}.
-\]
-可将电场\eqref{eqn:E(r)}写成梯度的形式：
-\[
-    \bm E(\bm r)=-\frac1{4\pi\varepsilon_0}\nabla\biggkh{\int_V\frac{\rho(\bm r')}{\abs{\bm r'-\bm r}}\d V'}
-\]
 \begin{definition}{标量势}{scalar potential}
     定义标量势(或电势、电位，potential)满足
     \begin{equation}
@@ -213,20 +231,6 @@
     \]
     上式表明$q\Phi$可解释为试探电荷在电场中的势能。
 \end{corollary}
-
-\paragraph{静电场的旋度}
-
-由\eqref{eqn:curlgrad}梯度的旋度为$\bm0$，可得除Gauss定律\eqref{eqn:Gauss law}外的另一个微分方程：
-\begin{theorem}{静电场无旋}{curlless E}
-    \begin{equation}
-        \label{eqn:curlE}
-        \curl\bm E=\bm 0.
-    \end{equation}
-\end{theorem}
-也可从任意闭合路径的电场线积分为0得到。
-\[
-    \int_S\curl\bm E\d A=\oint_{\p S}\bm E\cdot\d\bm\ell\equiv 0.
-\]
 
 \begin{definition}
     {导体}{conductor}
@@ -469,20 +473,23 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     \label{eqn:Phi-rho with boundary}
         \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r')}{\abs{\bm r-\bm r'}}\d V'+\frac1{4\pi}\oint_{\p V}\biggfkh{\frac1{\abs{\bm r-\bm r'}}\pv\Phi{n'}-\Phi(\bm r')\pp{n'}\biggkh{\frac1{\abs{\bm r-\bm r'}}}}\d A',
 \end{equation}
-与式\eqref{eqn:Phi-rho}对比，上式多了两项边界$\p V$上的积分，分别等价于面电荷的电势($\p\Phi/\p n$不连续)
-\begin{subequations}
-    \begin{align}
-        \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\oint_{\p V}\frac{\sigma(\bm r')}{\abs{\bm r-\bm r'}}\d A'\\
-        \sigma(\bm r)&=\varepsilon_0\pv\Phi{n}.
-    \end{align}
-\end{subequations}
-和电偶层的电势($\Phi$不连续)
-\begin{subequations}
-    \begin{align}
-        \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\oint_{\p V}D(\bm r')\pp{n'}\biggkh{\frac1{\abs{\bm r-\bm r'}}}\d A'\\
-        D(\bm r)&=-\varepsilon_0\Phi(\bm r).
-    \end{align}
-\end{subequations}
+与式\eqref{eqn:Phi-rho}对比，上式多了两项边界$\p V$上的积分，分别等价于：
+\begin{itemize}
+    \item 面电荷的电势($\p\Phi/\p n$不连续)
+    \begin{subequations}
+        \begin{align}
+            \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\oint_{\p V}\frac{\sigma(\bm r')}{\abs{\bm r-\bm r'}}\d A'\\
+            \sigma(\bm r)&=\varepsilon_0\pv\Phi{n}.
+        \end{align}
+    \end{subequations}
+    \item 电偶层的电势($\Phi$不连续)
+    \begin{subequations}
+        \begin{align}
+            \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\oint_{\p V}D(\bm r')\pp{n'}\biggkh{\frac1{\abs{\bm r-\bm r'}}}\d A'\\
+            D(\bm r)&=-\varepsilon_0\Phi(\bm r).
+        \end{align}
+    \end{subequations}
+\end{itemize}
 因此，求解$V$内的电势$\Phi$分布问题，除了需要$V$内电荷密度$\rho$的分布，还需知道表面$\p V$上的电势条件($\Phi$或$\p\Phi/\p n$)，这称为边界条件(boundary condition)。
 我们可以对不同的边界条件进行分类：
 \begin{definition}{边界条件}{boundary condition}
@@ -503,9 +510,9 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
         其中$\Gamma_{\text{D}},\Gamma_{\text{N}}$是表面$\p V$的一个划分，满足$\Gamma_{\text{D}}\cup\Gamma_{\text{N}}=\p V$且$\Gamma_{\text{D}}\cap\Gamma_{\text{N}}=\varnothing$；
         \item Robin边界条件：给定表面上电位与其法向导数的线性组合
         \[
-            \edg{\alpha\Phi+\beta\pv\Phi n}_{\p V}=f,
+            \edg{\alpha\Phi+\beta\pv\Phi n}_{\p V}=f.
         \]
-        其中$\alpha,\beta$可以是函数。
+        % 其中$\alpha,\beta$可以是函数。
     \end{itemize}
 \end{definition}
 
@@ -598,7 +605,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     \[
         \ave\Phi_{\p V}:=\frac1S\oint_{\p V}\Phi(\bm r')\d A'.
     \]
-    如果Neumann问题的$V$包括无穷远处，则\eqref{eqn:Neumann Green condition}变为$\p G/\p n'|_{\p V}\equiv 0$，此时$\ave\Phi_{\p V}=0$。
+    如果$V$包括无穷远处，则\eqref{eqn:Neumann Green condition}变为$\p G/\p n'|_{\p V}\equiv 0$，此时$\ave\Phi_{\p V}=0$。
 \end{theorem}
 
 \begin{remark}
@@ -610,7 +617,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     \[
         G(\bm r,\bm r')=\frac1{\abs{\bm r-\bm r'}}=\frac1{\sqrt{(x-x')^2+(y-y')^2+(z-z')^2}}.
     \]
-    在上半空间$V=\set{(x,y,z)}{z>0}$中，为了运用式\eqref{eqn:Dirichlet Green}，需要$G$在$\p V=\{(x,y,0)\}$处为0。可取$\bm r'$的对称点$\bm r''=(x',y',-z')$，并取
+    在上半空间$V=\set{(x,y,z)}{z>0}$中，对于Dirichlet边界条件，需要在边界处即$z=0$时$G(\bm r,\bm r')=0$。可取$\bm r'$的对称点$\bm r''=(x',y',-z')$，并取
     \begin{align*}
         G(\bm r,\bm r')&=\frac1{\abs{\bm r-\bm r'}}-\frac1{\abs{\bm r-\bm r''}}\\
         &=\frac1{\sqrt{(x-x')^2+(y-y')^2+(z-z')^2}}-\frac1{\sqrt{(x-x')^2+(y-y')^2+(z+z')^2}}.
