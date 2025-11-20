@@ -13,7 +13,7 @@
     {向量序列的极限}{limit of vector array}
     给定赋范空间$(\FF^n,\norm\cdot)$以及一组向量序列$x^{(1)},x^{(2)},\ldots$，若$\exists x\in\FF^n$使得
     \begin{equation}
-        \lim_{i\to\infty}\norm{x^{(i)}-x}=0,\iff\lim_{i\to\infty}x^{(i)}=x.
+        \lim_{i\to\infty}\norm{x^{(i)}-x}=0\iff\lim_{i\to\infty}x^{(i)}=x.
     \end{equation}
     则称$x^{(i)}$收敛于$x$。
 \end{definition}
@@ -26,14 +26,14 @@
     {向量序列的收敛性判定}{}
     向量序列收敛等价于其各分量序列收敛：
     \begin{equation}
-        \lim_{i\to\infty}x^{(i)}=x,\iff\lim_{i\to\infty}x^{(i)}_j=x_j,\enspace \forall j=1,\ldots,n.
+        \lim_{i\to\infty}x^{(i)}=x\iff\lim_{i\to\infty}x^{(i)}_j=x_j,\enspace \forall j=1,\ldots,n.
     \end{equation}
 \end{theorem}
 
 \begin{proof}
     选取无穷范数：
     \[
-        \lim_{i\to\infty}\norm{x^{(i)}-x}_\infty=0,\iff\lim_{i\to\infty}\max_j\abs{x^{(i)}_j-x_j}=0,\iff\lim_{i\to\infty}\abs{x^{(i)}_j-x_j}=0,\enspace\forall j.
+        \lim_{i\to\infty}\norm{x^{(i)}-x}_\infty=0\iff\lim_{i\to\infty}\max_j\abs{x^{(i)}_j-x_j}=0\iff\lim_{i\to\infty}\abs{x^{(i)}_j-x_j}=0,\enspace\forall j.
         \qedhere
     \]
 \end{proof}
@@ -105,7 +105,7 @@
     \]
     则$\rho(B_\epsilon)<1$，由\thmref{thm:matrix exponent convergence}，$\lim_{k\to\infty}B_\epsilon^k=O$，即$\exists N=N(\epsilon)>0$使得$\forall k>N$，
     \[
-        \norm{B_\epsilon^k}=\frac{\norm{B^k}}{(\rho(B)+\epsilon)^k}<1,\iff\norm{B^k}^{1/k}<\rho(B)+\epsilon,\iff\lim_{k\to\infty}\norm{B^k}^{1/k}\leq\rho(B).
+        \norm{B_\epsilon^k}=\frac{\norm{B^k}}{(\rho(B)+\epsilon)^k}<1\iff\norm{B^k}^{1/k}<\rho(B)+\epsilon\iff\lim_{k\to\infty}\norm{B^k}^{1/k}\leq\rho(B).
     \]
     综上，极限相等。    
 \end{proof}
@@ -285,13 +285,13 @@
 \begin{proof}
     对于Jacobi法，若$B_\text J$有特征值$\lambda$且$\abs\lambda\geq 1$，则 
     \[
-        \det(\lambda I-B_\text J)=0,\implies\det(D+\lambda\iv(L+U))=0,
+        \det(\lambda I-B_\text J)=0\implies\det(D+\lambda\iv(L+U))=0,
     \]
     若$A$严格对角占优(或不可约弱对角占优)，则$D+\lambda\iv(L+U)$也为严格对角占优(或不可约弱对角占优)，矛盾！故$\rho(B_\text J)<1$，Jacobi法收敛。
 
     对于G-S法，设$B_\text G$有特征值$\lambda$且$\abs\lambda\geq 1$，则 
     \[
-        \det(\lambda I-B_\text G)=0,\implies\det(D+L+\lambda\iv U)=0,
+        \det(\lambda I-B_\text G)=0\implies\det(D+L+\lambda\iv U)=0,
     \]
     若$A$严格对角占优(或不可约弱对角占优)，则$D+L+\lambda\iv U$也为严格对角占优(或不可约弱对角占优)，矛盾！故$\rho(B_\text G)<1$，G-S法收敛。
 \end{proof}
@@ -349,7 +349,7 @@
     \]
     上式两边与$x$内积得到
     \[
-        % (1-\omega)\inp{Dx}x-\omega\inp{Ux}x=\lambda(\inp{Dx}x+\omega\inp{Lx}x),\implies
+        % (1-\omega)\inp{Dx}x-\omega\inp{Ux}x=\lambda(\inp{Dx}x+\omega\inp{Lx}x)\implies
         \lambda=\frac{(1-\omega)\inp{Dx}x-\omega\inp{Ux}x}{\inp{Dx}x+\omega\inp{Lx}x},
     \]
     由$A$正定，$D$也正定，记$\inp{Dx}x=:p>0$，$\inp{Lx}x=a+\i b$，由$A$对称，$L\tp=U$，
@@ -615,7 +615,7 @@
 仍然考虑对称正定矩阵$A$和一维极小搜索，但不再沿着正交的$r^{(0)},r^{(1)},\ldots$，寻找另一组$p^{(0)},p^{(1)},\ldots$
 对于第$k$次搜索：
 \[
-    \alpha_k=\arg\min_\alpha\varphi(x^{(k)}+\alpha p^{(k)}),\implies
+    \alpha_k=\arg\min_\alpha\varphi(x^{(k)}+\alpha p^{(k)})\implies
     x^{(k+1)}=x^{(k)}+\alpha_kp^{(k)},
 \]
 由于
@@ -632,7 +632,7 @@
     {$A$ - 正交向量组}{A-orthogonal}
     若向量组$p_1,\ldots,p_n,\ldots$满足$\forall i\neq j$均有
     \begin{equation}
-        \inp{p_i}{p_j}_A=0,\iff p_i\perp_A p_j.
+        \inp{p_i}{p_j}_A=0\iff p_i\perp_A p_j.
     \end{equation}
     则称为$A$ - 正交向量组，也称$A$ - 共轭向量组。
 \end{definition}

@@ -30,9 +30,9 @@
 \begin{example}
     {线性空间的例子}{}
     \begin{itemize}
-        \item $\cont^n[a,b]$：全体在$[a,b]$上$n$次导数连续(continuous)的函数构成的集合。
-        % \item $\diff^n[a,b]$：全体在$[a,b]$上$n$次可导(differentiable)的函数构成的集合。
-        \item $\poly_n=\set{a_0+a_1x+\cdots+a_nx^n}{a_i\in\FF}$：$n$次多项式函数空间。
+        \item $\cont^n$：全体在$\RR$上$n$次导数连续(continuous)的函数构成的集合。
+        % \item $\diff^n$：全体在$\RR$上$n$次可导(differentiable)的函数构成的集合。
+        \item $\poly_n=\set{x\mapsto a_0+a_1x+\cdots+a_nx^n}{a_i\in\FF}$：$n$次多项式函数空间。
         % \item 正实数$\RR_{>0}$构成一个线性空间，其加法为实数乘法，数乘为幂次。
     \end{itemize}
 \end{example}
@@ -43,9 +43,9 @@
     {线性无关}{linear independent}
     设$V$是线性空间，给定其中$n$个元素$x_1,\ldots,x_n\in V$，若%其线性组合(linear combination)
     \begin{equation}
-        a_1x_1+\cdots+a_nx_n=0,\iff a_1=\cdots=a_n=0,
+        a_1x_1+\cdots+a_nx_n=0\iff a_1=\cdots=a_n=0,
     \end{equation}
-    则称$x_1,\ldots,x_n$线性无关(linear independent)。反之，称为线性相关。
+    则称$x_1,\ldots,x_n$线性无关(linear independent)，否则称为线性相关。
 \end{definition}
 
 \begin{example}
@@ -78,7 +78,7 @@
     {典型线性空间的维度}{}
     \begin{itemize}
         \item $\dim(\poly_n)=n;$
-        \item $\dim(\cont[a,b])=+\infty.$
+        \item $\dim(\cont)=+\infty.$
     \end{itemize}
 \end{example}
 
@@ -112,7 +112,7 @@
     {度量空间的完备性}{completeness}
     若$\forall$ Cauchy序列$\{x_n\}\subset M$，$\exists x\in M$满足：
     \[
-        \lim_{n\to\infty}d(x_n,x)=0,\iff\lim_{n\to\infty}x_n=x,
+        \lim_{n\to\infty}d(x_n,x)=0,\quad(\text{记作}\lim_{n\to\infty}x_n=x)
     \]
     则称度量空间$M$是完备的(complete)。
 \end{definition}
@@ -217,7 +217,8 @@
         %     \kh{\int_a^b\abs{f(x)}^2\d x}^{1/2},&p=2
         % \end{cases}
     \end{equation}
-    当$1<p<\infty$时，$\norm\cdot_p$是不完备的：连续函数的Cauchy序列可以按$p$ - 范数收敛于一个不连续的函数。
+    当$1<p<\infty$时，$\norm\cdot_p$是不完备的，
+    \footnote{连续函数的Cauchy序列可以按$p$ - 范数收敛于一个不连续的函数}
     但$\norm\cdot_\infty$是完备的。
 \end{example}
 
@@ -225,7 +226,7 @@
 
 \begin{definition}
     {范数的等价性}{}
-    给定线性空间$S$上的两个范数$\norm\cdot_\alpha,\norm\cdot_\beta$，若$\exists C_1,C_2>0$满足：
+    给定线性空间$V$上的两个范数$\norm\cdot_\alpha,\norm\cdot_\beta$，若$\exists C_1,C_2>0$满足：
     \[
         C_1\norm x_\alpha\leq\norm x_\beta\leq C_2\norm x_\alpha,
     \]
@@ -250,7 +251,7 @@
 
 \begin{definition}
     {内积}{inner product}
-    给定线性空间$S$，内积(inner product)是一个映射$\inp\cdot\cdot:S\times S\to\FF$，
+    给定线性空间$V$，内积(inner product)是一个映射$\inp\cdot\cdot:V\times V\to\FF$，
     满足：
     \begin{itemize}
         \item 正定性：$\inp xx\geq 0$，且$\inp xx=0\iff x=0;$
@@ -306,7 +307,7 @@
 
 \begin{theorem}
     {内积空间线性无关的判定}{}
-    给定内积空间$S$，$x_1,\ldots,x_n\in S$是线性无关的$\iff$ Gram矩阵可逆。
+    $x_1,\ldots,x_n$线性无关$\iff$ Gram矩阵可逆。
 \end{theorem}
 
 \begin{proof}
@@ -316,18 +317,18 @@
     \]
     特别地，
     \[
-        \inp{a_1x_1+\cdots+a_nx_n}{a_1x_1+\cdots+a_nx_n}=0,\iff a_1x_1+\cdots,a_nx_n=0,
+        \inp{a_1x_1+\cdots+a_nx_n}{a_1x_1+\cdots+a_nx_n}=0\iff a_1x_1+\cdots,a_nx_n=0,
     \]
     则$G$可逆$\iff \mathrm N(G\tp)=\{0\}\iff a$只有零解。
 \end{proof}
 
 \begin{example}
     {}{}
-    给定内积空间$S$的一组基$\{x_1,\ldots,x_n\}$，则$\forall x\in S$均可以写成
+    给定内积空间$V$的一组基$\{x_1,\ldots,x_n\}$，则$\forall x\in V$均可以写成
     \[
         x=a_1x_1+\cdots+a_nx_n,
     \]
-    下面计算$a_1,\ldots,a_n$。两边分别与$x_i$做内积：
+    下面求$a_1,\ldots,a_n$：两边分别与$x_i$做内积可得
     \[
         \inp x{x_i}=a_1\inp{x_1}{x_i}+\cdots+a_n\inp{x_n}{x_i},
     \]
@@ -416,10 +417,10 @@
         \begin{equation}
             T_n(-x)=(-1)^nT_n(x);
         \end{equation}
-        \item $T_n$的$n$个实单根为$\cos\biggkh{\frac{2k-1}{2n}\pi}$，$(n+1)$个极值点为$\cos\kh{\frac kn\pi}$
+        \item $T_n$的$n$个实单根为$\cos\bigfkh{(2k-1)\pi/2n}$，$(n+1)$个极值点为$\cos(k\pi/n)$
         \item 当$\abs x\geq 1$时，
         \begin{equation}
-            T_n(x)=\frac12\fkh{\kh{x+\sqrt{x^2-1}}^k+\kh{x-\sqrt{x^2-1}}^k}.
+            T_n(x)=\frac12\biggfkh{\Bigkh{x+\sqrt{x^2-1}}^k+\Bigkh{x-\sqrt{x^2-1}}^k}.
         \end{equation}
     \end{itemize}
 \end{example}
@@ -473,7 +474,7 @@
     \begin{equation}
         \norm{Ax}_V\leq\norm A_M\norm x_V,
     \end{equation}
-    则称他们是相容的。在不引起混淆的情况下，可以略去下标。
+    则称他们是相容的(compatible)。在不引起混淆的情况下，可以略去下标。
 \end{definition}
 
 \begin{theorem}
@@ -650,7 +651,7 @@
     若$I+B$不可逆，则$\rho(B)\geq 1>\norm B$矛盾。
     记$D:=(I+B)\iv$，则 
     \[
-        (I+B)D=I,\iff D=I-BD,\implies \norm D\leq 1+\norm B\norm D.
+        (I+B)D=I\iff D=I-BD\implies \norm D\leq 1+\norm B\norm D.
         \qedhere
     \]
 \end{proof}
