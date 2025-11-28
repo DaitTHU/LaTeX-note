@@ -1,11 +1,9 @@
-\chapter{线性方程组的迭代解法}
+% \chapter{线性方程组的迭代解法}
 
-\begin{definition}
-    {线性方程组的迭代解法}{iterative method}
-    构造一个向量序列，使其尽快收敛到线性方程组$Ax=b$的解。
-\end{definition}
+\section{迭代法}
 
-\section{迭代法基本概念}
+除了直接解法(如Gauss消元法)外，线性方程组还可以用迭代法(iterative method)求解。
+所谓迭代法，是指通过算法生成一个向量序列$x^{(1)},x^{(2)},\ldots$，使其尽快收敛到方程$Ax=b$的解$x^*$。
 
 \subsection{向量序列和矩阵序列的极限}
 
@@ -112,14 +110,11 @@
 
 \subsection{迭代公式的构造}
 
-\begin{theorem}
-    {线性定常迭代}{linear stationary iterative method}
-    若线性方程$Ax=b$与方程$x=Bx+f$同解，则可以构造一个定常(stationary)的迭代公式：
-    \begin{equation}
-        x^{(k+1)}=Bx^{(k)}+f,
-    \end{equation}
-    其中$B$称为迭代矩阵。若$x^{(k)}$收敛，则收敛值$x^*$就是方程的解。
-\end{theorem}
+若线性方程$Ax=b$与方程$x=Bx+f$同解，则可以构造迭代公式：
+\begin{equation}
+    x^{(k+1)}=Bx^{(k)}+f,
+\end{equation}
+其中$B$称为迭代矩阵。若$x^{(k)}$收敛，则收敛值$x^*$就是方程的解。
 
 \begin{theorem}
     {迭代法的收敛性分析}{convergence of iterative method}
@@ -196,7 +191,7 @@
     其渐进收敛率$R(B):=R_\infty(B)=-\ln\rho(B)$。
 \end{definition}
 
-\section{(单步)定常线性迭代}
+% \section{(单步)定常线性迭代}
 
 \subsection{Richardson迭代法}
 
@@ -216,9 +211,9 @@
     \[
         x^{(k)}=x^{(0)}+r^{(0)}+\cdots+r^{(k-1)}=x_0+\sum_{i=0}^{k-1}(I-A)^ir^{(0)}.
     \]
-    
 \end{example}
 
+\iffalse
 \begin{definition}
     {Krylov子空间}{Krylov subspace}
     给定非零向量$v$和非零方阵$A$，定义
@@ -235,6 +230,7 @@
     \]
     最大维度$\sup_{n\to\infty}\dim\mathcal K_n(v)$称为$v$关于$A$的度。
 \end{corollary}
+\fi
 
 \begin{definition}
     {预处理矩阵}{preconditioning matrix}
@@ -388,8 +384,8 @@
 \end{remark}
 
 \begin{example}
-    {Poisson方程的五点差分格式}{}
-    讨论二元函数$u=u(x,y)$满足 
+    {Poisson方程的五点差分格式}{five-point difference scheme}
+    讨论二元函数$u=u(x,y)$满足Poisson方程
     \[
         \pv[2]ux+\pv[2]uy=f(x,y),
     \]
@@ -401,7 +397,7 @@
     \[
         \edg{\pv[2]ux}_{ij}=\frac{u_{i+1,j}+u_{i-1,j}-2u_{ij}}{h^2}+\bigo(h^2)
     \]
-    同理可得$\p^2u/\p^2y$。代入原Poisson方程得到
+    同理可得$\p^2u/\p^2y$。代入原Poisson方程得到五点差分格式：
     \begin{equation}
         u_{i+1,j}+u_{i-1,j}+u_{i,j+1}+u_{i,j-1}-4u_{ij}=h^2f_{ij}.
     \end{equation}
@@ -440,26 +436,26 @@
     可见Jacobi法和SOR的收敛速度差了一个数量级。
 \end{example}
 
-\section{非线性迭代方法}
+\section{对称正定线性方程组的迭代法}
 
+本节主要介绍共轭梯度法，一种用于求解对称正定线性方程组的迭代法。
 
 \begin{definition}
-    {算子}{operator}
-    Hilbert空间$V$中的可逆对称算子$A:V\to V$满足：$\forall x,y\in V$，
+    {对称正定算子}{symmetric positive definite operator}
+    Hilbert空间$V$中的对称正定算子$A:V\to V$满足：$\forall x,y\in V$，
     \begin{itemize}
-        \item $\inp{Ax}y=\inp x{Ay}$；
+        \item $\inp{Ax}y=\inp x{Ay}\equiv\inp xy_A$；
         \item $\inp{Ax}x\geq 0$且$\inp{Ax}x=0\iff x=0$。
     \end{itemize}
     可定义范数$\norm x_A:=\sqrt{\inp{Ax}x}$。
 \end{definition}
 
-\begin{example}
-    {}{}
+\begin{corollary}
     $\RR^n$中的内积和$n$阶对称正定矩阵$M$一一对应：
     \[
         \inp xy_M=\inp{Mx}y.
     \]
-\end{example}
+\end{corollary}
 
 \begin{theorem}
     {Ritz变分问题}{}
@@ -486,10 +482,12 @@
     故$\varphi(x)\geq\varphi(x^*)$且$\varphi(x)=\varphi(x^*)\iff x=x^*$。
 \end{proof}
 
-因此，迭代法的选择策略为：给定$x^{(k)}$，确定$x^{(k+1)}$使得
-\[
-    \varphi(x^{(k+1)})<\varphi(x^{(k)}).
-\]
+\begin{corollary}
+    迭代法的选择策略为：给定$x^{(k)}$，确定$x^{(k+1)}$使得
+    \[
+        \varphi(x^{(k+1)})<\varphi(x^{(k)}).
+    \]
+\end{corollary}
 
 \subsection{子空间方法}
 \label{ssec:subspace method}
@@ -708,7 +706,11 @@
 
 \begin{theorem}
     {共轭梯度法}{conjugate gradient method}
-    共轭梯度法(conjugate gradient method)：$p^{(0)}=r^{(0)}=b-Ax^{(0)}$，
+    共轭梯度法(conjugate gradient method)初值
+    \begin{equation}
+        p^{(0)}=r^{(0)}=b-Ax^{(0)},
+    \end{equation}
+    迭代算法
     \begin{subequations}
         \begin{align}
             % r^{(k)}&=b-Ax^{(k)},\\
@@ -752,14 +754,14 @@
     \]
 \end{proof}
 
-\subsection{共轭梯度法的预处理}
-\label{ssec:preconditioning}
+\paragraph{共轭梯度法的预处理}
+% \label{ssec:preconditioning}
 
 从误差估计\eqref{eqn:CG e^k}可以看出，共轭梯度法的收敛速度强烈依赖于$A$的条件数，当$A$病态时收敛得很慢。为了改善收敛速度，可以先进行预处理(preconditioning)，降低矩阵的条件数。
 
 \begin{theorem}
     {预处理的共轭梯度算法}{preconditioning conjugate gradient}
-    给定预处理矩阵$M$且对称正定，
+    给定对称正定的预处理矩阵$M$，则
     \[
         Ax=b\iff M\iv Ax=M\iv b,
     \]

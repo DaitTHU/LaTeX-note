@@ -1,5 +1,9 @@
-\chapter{线性方程组的直接解法}
+\chapter{线性方程组}
 
+如何求解$n$元线性方程组？
+尽管Cramer法则给出了解的公式，但其算法的时间复杂度$\bigo(n\cdot(n+1)!)$是不可接受的。
+
+\iffalse
 求解线性代数方程组就相当于求解矩阵式$Ax=b$：
 \begin{equation}
     \begin{bmatrix}
@@ -183,6 +187,7 @@
         \end{bmatrix}
     \]
 \end{remark}
+\fi
 
 \section{Gauss消元法}
 \label{sec:Gauss elimination}
@@ -193,8 +198,7 @@
 
 \subsection{Gauss消元法}
 
-如何求解$n$元线性方程组？
-Cramer法则？时间复杂度$\bigo(n\cdot(n+1)!)$这是不可接受的。
+
 
 \begin{theorem}
     {Gauss消元法}{Gauss elimination}
@@ -229,14 +233,19 @@ Cramer法则？时间复杂度$\bigo(n\cdot(n+1)!)$这是不可接受的。
     \begin{equation}
         x_i=\frac{1}{a_{ii}^{(i)}}\biggkh{b_{i}^{(i)}-\sum_{j=i+1}^na_{ij}^{(i)}x_j},\quad i=n-1,\ldots,2,1.
     \end{equation}
-    Gauss消元法的复杂度为$\bigo(n^3)$。
 \end{theorem}
+
+\begin{corollary}
+    Gauss消元法的复杂度为$\bigo(n^3)$。
+\end{corollary}
 
 \begin{remark}
     从上面的算法过程中可见，
     一旦第$k$步$a_{kk}^{(k)}=0$，(顺序) Gauss消元法就不能继续进行下去。
     但是当第$k+1,\ldots,n$行中存在$a_{ik}^{k}\neq 0$，就可以交换$k,i$行，从而使算法继续。
+\end{remark}
 
+\begin{remark}
     此外，即使$a_{kk}^{(k)}\neq 0$但$\abs{a_{kk}^{(k)}}\ll 1$，也会出现大数除小数导致精度下降的问题。
 \end{remark}
 
@@ -252,6 +261,18 @@ Cramer法则？时间复杂度$\bigo(n\cdot(n+1)!)$这是不可接受的。
 \subsection{LU分解}
 
 下面我们从矩阵角度考察Gauss消元法。
+线性方程组等价于矩阵方程
+\begin{equation}
+    \begin{bmatrix}
+        a_{11}&\cdots&a_{1n}\\
+        \vdots&\ddots&\vdots\\
+        a_{n1}&\cdots&a_{nn}
+    \end{bmatrix}\begin{bmatrix}
+        x_1\\\vdots\\x_n
+    \end{bmatrix}=\begin{bmatrix}
+        b_1\\\vdots\\b_n
+    \end{bmatrix}.
+\end{equation}
 
 \begin{definition}
     {初等矩阵}{elementary matrix}
@@ -276,12 +297,12 @@ Cramer法则？时间复杂度$\bigo(n\cdot(n+1)!)$这是不可接受的。
         \[
             P_{ij}=I-(e_i-e_j)(e_i-e_j)\tp=I-e_{ii}-e_{jj}+e_{ij}+e_{ji}.
         \]
-        左乘初等排列矩阵即互换第$i,j$行，右乘即互换第$i,j$列；
+        左乘$P_{ij}$即互换第$i,j$行，右乘即互换第$i,j$列；
         \item 倍加矩阵：
         \[
             I+\alpha e_ie_j\tp=I+\alpha e_{ij},
         \]
-        左乘即将第$i$行的$\alpha$倍加到第$j$行上。
+        左乘$I+\alpha e_{ij}$即将第$i$行的$\alpha$倍加到第$j$行上。
     \end{itemize}
 \end{example}
 
@@ -411,11 +432,31 @@ Cramer法则？时间复杂度$\bigo(n\cdot(n+1)!)$这是不可接受的。
     \]
     由此可确定$u,\ell$，同时$A^{(k)}$的阶数减1.
 \end{theorem}
+
+\begin{theorem}
+    {Thomas方法}{Thomas technique}
+    对于三对角矩阵有如下LU分解：
+    \[
+        \begin{bmatrix}
+        b_1&c_1\\a_2&b_2&\ddots\\ &\ddots&\ddots&c_{n-1}\\ &&a_n&b_n
+        \end{bmatrix}=\begin{bmatrix}
+            1\\\ell_2&1\\&\ddots&\ddots\\ &&\ell_n&1
+        \end{bmatrix}\begin{bmatrix}
+            u_1&c_1\\ &u_2&\ddots\\ &&\ddots&c_{n-1}\\ &&&u_n
+        \end{bmatrix},
+    \]
+    可直接乘开得到
+    \begin{subequations}
+        \begin{align}
+            u_1&=b_1,\\
+            \ell_i&=\frac{a_i}{u_{i-1}},\\
+            u_i&=b_i-\ell_ic_{i-1}.
+        \end{align}
+    \end{subequations}
+\end{theorem}
     
-\begin{remark}
-    三角分解\thmref{thm:LU decomposition} 给出了LU分解的条件。
-    而对于一般的可逆矩阵，也可以通过换行实现LU分解。
-\end{remark}
+三角分解\thmref{thm:LU decomposition} 给出了LU分解的条件。
+而对于一般的可逆矩阵，也可以通过换行实现LU分解。
 
 \begin{theorem}
     {一般三角分解定理}{LUP decomposition}
@@ -488,40 +529,7 @@ Cramer法则？时间复杂度$\bigo(n\cdot(n+1)!)$这是不可接受的。
     这种算法特别适合稀疏矩阵。
 \end{remark}
 
-\subsection{Thomas方法}
-
-考虑线性方程组
-\[
-    \begin{cases}
-        b_1x_1+c_1x_2=d_1,\\
-        a_ix_{i-1}+b_ix_i+c_ix_{i+1}=d_i,&i=2,\ldots,n-1\\
-        a_nx_{n-1}+b_nx_n=d_n
-    \end{cases}
-\]
-系数矩阵为三对角矩阵：
-\[
-    \begin{bmatrix}
-        b_1&c_1\\a_2&b_2&\ddots\\ &\ddots&\ddots&c_{n-1}\\ &&a_n&b_b
-    \end{bmatrix}.
-\]
-\begin{theorem}
-    {Thomas方法}{Thomas technique}
-    容易验证有如下三角分解形式：
-    \[
-        A=LU=\begin{bmatrix}
-            1\\\ell_2&1\\&\ddots&\ddots\\ &&\ell_n&1
-        \end{bmatrix}\begin{bmatrix}
-            u_1&c_1\\ &u_2&\ddots\\ &&\ddots&c_{n-1}\\ &&&u_n
-        \end{bmatrix},
-    \]
-    可直接乘开得到$u_1=b_1$
-    \begin{equation}
-        \ell_i=\frac{a_i}{u_{i-1}},\quad u_i=b_i-\ell_ic_{i-1}.
-    \end{equation}
-\end{theorem}
-
-
-\section{稳定性分析}
+\subsection{稳定性分析}
 \label{sec:stability analysis}
 
 在用直接法求解$Ax=b$的过程中，由于舍入误差的存在，必然会导致结果产生误差。因而有必要对可能产生的误差作一估计。
@@ -619,9 +627,10 @@ Cramer法则？时间复杂度$\bigo(n\cdot(n+1)!)$这是不可接受的。
 \begin{theorem}
     {解的扰动定理}{}
     给定可逆矩阵$A$和微小扰动$\D A$，满足
-    \[
+    \begin{equation}
+        \label{eqn:perturbation condition}
         \frac{\norm{\D A}}{\norm A}<\frac1{\cond(A)},
-    \]
+    \end{equation}
     则$(A+\D A)$也可逆，考察线性方程组$Ax=b$及其扰动方程组
     \[
         (A+\D A)(x+\D x)=b+\D b,
@@ -633,7 +642,17 @@ Cramer法则？时间复杂度$\bigo(n\cdot(n+1)!)$这是不可接受的。
 \end{theorem}
 
 \begin{proof}
-    由扰动定理\thmref{thm:perturbation theorem II} 知$(A+\D A)$可逆且
+    \eqref{eqn:perturbation condition}即$\norm{A\iv}\norm{\D A}<1$。
+    若$(A+\D A)$不可逆，即存在$x\neq 0$使得
+    \[
+        (A+\D A)x=0\iff A\iv\D A x=-x,
+    \]
+    即$A\iv\D A$有一个特征值$-1$，谱半径$\rho(A\iv\D A)\geq 1>\norm{A\iv}\norm{\D A}\geq\norm{A\iv\D A}$与\eqref{eqn:rho<=norm}矛盾，故$(A+\D A)$可逆。令$B=(A+\D A)\iv$，则
+    \begin{align*}
+        (A+\D A)B=I\iff&B=A\iv-A\iv\D AB=A\iv(I-\D AB)\\
+        \implies&\norm B\leq\norm{A\iv}\norm{I-\D AB}\leq\norm{A\iv}\Bigkh{1+\norm{\D A}\norm B},
+    \end{align*}
+    移项即得
     \begin{equation}
         \norm{(A+\D A)\iv}\leq\frac{\norm{A\iv}}{1-\norm{A\iv}\norm{\D A}}.
     \end{equation}
@@ -721,7 +740,7 @@ Cramer法则？时间复杂度$\bigo(n\cdot(n+1)!)$这是不可接受的。
 
 \begin{example}
     {Hilbert矩阵}{Hilbert matrix}
-    Hilbert矩阵
+    Hilbert矩阵$H_{ij}:=1/(i+j-1)$
     \begin{equation*}
         H_n:=\begin{bmatrix}
             1&1/2&\cdots&1/(n+1)\\
