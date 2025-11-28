@@ -1,110 +1,101 @@
-\chapter{矩阵特征值问题的数值方法}
+\chapter{矩阵特征值}
+\label{chap:eigenvalue}
 
-% \section{矩阵特征值问题}
+\begin{definition}
+    {矩阵特征值问题}{}
+    给定$n\times n$矩阵$A$，寻找$\lambda\in\CC$和非零向量$x\in\CC^n$，使得
+    \begin{equation}
+        Ax=\lambda x,
+    \end{equation}
+    $\lambda$称为$A$的特征值(eigenvalue)，$x$称为对应的特征向量(eigenvector)。
+\end{definition}
 
-% \begin{definition}
-%     {矩阵特征值问题}{}
-%     给定$n\times n$矩阵$A$，寻找$\lambda\in\CC$和非零向量$x\in\CC^n$，使得
-%     \[Ax=\lambda x.\]
-%     $\lambda$称为$A$的特征值，$x$称为对应的特征向量。
-% \end{definition}
+\begin{corollary}
+    矩阵特征值满足特征多项式方程
+    \begin{equation}
+        \det(\lambda I-A)=0.
+    \end{equation}
+\end{corollary}
 
-% \begin{theorem}
-%     {特征值性质}{}
-%     \begin{enumerate}
-%         \item $A$的特征值$\lambda$满足$\det(A-\lambda I)=0$，其中$I$是单位矩阵。
-%         \item $A$的特征值的代数重数$\le n$。
-%         \item $A$的特征值的几何重数$\le$代数重数。
-%         \item $A$的特征值的代数重数等于其特征向量的个数。
-%     \end{enumerate}
-% \end{theorem}
+\paragraph{特征值的分布估计}
 
-% \begin{definition}
-%     {谱半径}{}
-%     $A$的谱半径$\rho(A)=\max\abs{\lambda}$，其中$\lambda$是$A$的特征值。
-% \end{definition}
+由式\eqref{eqn:rho<=norm} $\sigma(A)\leq\norm A$可知，在复平面上，$A$的特征值都位于以原点为中心、(某一)矩阵范数$\norm A$为半径的圆盘内。
+当然，这种对特征值界限的估计过于粗糙。
 
-% \section{幂法}
+\begin{theorem}
+    {Gershgorin圆盘定理·一}{Gershgorin circle theorem I}
+    定义$A$的第$i$行Gershgorin圆盘为
+    \begin{equation}
+        D_i:=\set{z\in\CC}{\abs{z-a_{ii}}\leq r_i},\quad r_i:=\sum_{j\neq i}\abs{a_{ij}}.
+    \end{equation}
+    则$A$的所有特征值都位于这些圆盘的并集中，即
+    \begin{equation}
+        \lambda\in\bigcup_{i=1}^nD_i.
+    \end{equation}
+\end{theorem}
 
-% \begin{definition}
-%     {幂法}{}
-%     给定$n\times n$矩阵$A$，初始向量$x^{(0)}$，迭代
-%     \[x^{(k+1)}=\frac{Ax^{(k)}}{\norm{Ax^{(k)}}},\]
-%     直到收敛。
-% \end{definition}
+\begin{proof}
+    设$\lambda$为$A$的特征值，$x$为对应的特征向量。
+    令$k=\arg\max_i\abs{x_i}$，则
+    \[
+        \abs{\lambda - a_{kk}}\abs{x_k}=\abs{\sum_{j\neq k}a_{kj}x_j}\leq\sum_{j\neq k}\abs{a_{kj}}\abs{x_j}\leq r_k\abs{x_k}.
+    \]
+    故$\abs{\lambda - a_{kk}}\leq r_k$，即$\lambda\in D_k$。
+\end{proof}
 
-% \begin{theorem}
-%     {幂法收敛}{}
-%     若$A$有特征值$\lambda_1>\lambda_2\ge\cdots\ge\lambda_n$，则幂法收敛到$\lambda_1$对应的特征向量。
-% \end{theorem}
+\begin{theorem}
+    {Gershgorin圆盘定理·二}{Gershgorin circle theorem II}
+    如果$k$个Gershgorin圆盘$D_{i_1},\ldots,D_{i_k}$与其他圆盘互不相交，则它们的并集中恰有$k$个特征值。
+\end{theorem}
 
-% \begin{example}
-%     {幂法}{}
-%     计算矩阵
-%     \[A=\begin{pmatrix}
-%         1&2&3\\
-%         4&5&6\\
-%         7&8&9
-%     \end{pmatrix}\]
-%     的最大特征值。
-% \end{example}
+\begin{proof}
+    将$A=L+D+U$分解为严格下三角矩阵$L$、对角矩阵$D$和严格上三角矩阵$U$之和。定义
+    \[
+        A(\theta):=D+\theta(L+U),\quad\theta\in[0,1].
+    \]
+    显然$A(1)=A,\,A(0)=D$。
+    易得$A(\theta)$的Gershgorin圆盘为
+    \[
+        D_i(\theta)=\set{z\in\CC}{\abs{z-a_{ii}}\leq \theta r_i},
+    \]
+    因此$D_i(\theta)\subseteq D_i(1)=D_i$。
+    由于$D_{i_1},\ldots,D_{i_k}$与其他圆盘互不相交，故$D_{i_1}(\theta),\ldots,D_{i_k}(\theta)$也与其他圆盘互不相交。
 
-% \section{反幂法}
+    易得$A(\theta)$的特征多项式关于$\theta$连续变化，故其特征值也关于$\theta$连续变化。
+    注意到$D_i(0)$退化为单点$\{a_{ii}\}$，每个$D_i(0)$中都恰有一个特征值。
+    考虑$\theta$从0变化到1的过程，由于$D_{i_1}(\theta),\ldots,D_{i_k}(\theta)$与其他圆盘互不相交，其并集中始终有$k$个特征值。
+\end{proof}
 
-% \begin{definition}
-%     {反幂法}{}
-%     给定$n\times n$矩阵$A$，初始向量$x^{(0)}$，迭代
-%     \[x^{(k+1)}=\frac{(A-\sigma I)^{-1}x^{(k)}}{\norm{(A-\sigma I)^{-1}x^{(k)}}},\]
-%     直到收敛。
-% \end{definition}
+\begin{center}
+    \includegraphics[page=\pagenumref{tikz:gershgorin disks}]{figures/tikz/layouts.pdf}
+    \captionof{figure}{Gershgorin圆盘定理}
+    \label{fig:Gershgorin circle theorem}
+\end{center}
 
-% \begin{theorem}
-%     {反幂法收敛}{}
-%     若$A$有特征值$\lambda_1>\lambda_2\ge\cdots\ge\lambda_n$，则反幂法收敛到$\lambda_1$对应的特征向量。
-% \end{theorem}
+\begin{corollary}
+    为了更好的估计，可以设法缩小一些Gershgorin圆盘的半径。
+    例如$A$与其相似变换$BAB\iv$有相同的特征值，若$B=\diag(b_1,\ldots,b_n)$，则Gershgorin圆盘的半径变为
+    \[
+        r_i'=\sum_{j\neq i}\abs{\frac{b_j}{b_i}a_{ij}}.
+    \]
+\end{corollary}
 
-% \begin{example}
-%     {反幂法}{}
-%     计算矩阵
-%     \[A=\begin{pmatrix}
-%         1&2&3\\
-%         4&5&6\\
-%         7&8&9
-%     \end{pmatrix}\]
-%     的最大特征值。
-% \end{example}
+\begin{example}
+    {}{}
+    考虑矩阵$A$及其相似变换$BAB\iv$
+    \[
+        A=\begin{bmatrix}
+            0.9&0.01&0.12\\
+            0.01&0.8&0.13\\
+            0.01&0.02&0.4
+        \end{bmatrix},\quad
+        BAB\iv=\begin{bmatrix}
+            0.9&0.01&0.012\\
+            0.01&0.8&0.013\\
+            0.1&0.2&0.4
+        \end{bmatrix},
+    \]
+    其中选取了$B=\diag(1,1,0.1)$，原先$A$的$D_1,D_2$有较大重叠而$D_3$半径较小且孤立，变换后$D_1',D_2'$半径大幅缩小，从而更好地分离了三个圆盘。
+\end{example}
 
-% \section{QR方法}
-
-% \begin{definition}
-%     {QR分解}{}
-%     给定$n\times n$矩阵$A$，QR分解为$A=QR$，其中$Q$是正交矩阵，$R$是上三角矩阵。
-% \end{definition}
-
-% \begin{theorem}
-%     {QR方法}{}
-%     给定$n\times n$矩阵$A$，QR分解为$A=QR$，迭代
-%     \[A^{(k+1)}=R^{(k)}Q^{(k)},\]
-%     直到收敛。
-% \end{theorem}
-
-% \begin{example}
-%     {QR方法}{}
-%     计算矩阵
-%     \[A=\begin{pmatrix}
-%         1&2&3\\
-%         4&5&6\\
-%         7&8&9
-%     \end{pmatrix}\]
-%     的特征值。
-% \end{example}
-
-% \section{广义幂法}
-
-% \begin{definition}
-%     {广义幂法}{}
-%     给定$n\times n$矩阵$A$和$m\times m$矩阵$B$，初始向量$x^{(0)}$，迭代
-%     \[x^{(k+1)}=\frac{B^{-1}Ax^{(k)}}{\norm{B^{-1}Ax^{(k)}}},\]
-%     直到收敛。
-% \end{definition}
 
