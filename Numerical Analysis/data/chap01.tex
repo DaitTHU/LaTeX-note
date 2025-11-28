@@ -285,16 +285,34 @@
             \inp xy=\sum_{i=1}^nx_i\overline y_i,
         \]
         标准内积诱导出来的范数就是2 - 范数。
-        \item $\cont[a,b]$的一个内积为 
+        \item $\cont[a,b]$的带权内积为 
         \[
-            \inp fg=\int_a^bf(x)\overline g(x)\d x.
+            \inp fg=\int_a^bf(x)\overline g(x)\rho(x)\d x.
         \]
+        其中$\rho\in\cont(a,b)$是一个几乎处处为正的函数，\footnote{即$\{x|\rho(x)\leq 0\}$的Lebesgue测度为0。}且在$[a,b]$上积分有限。
     \end{itemize}
 \end{example}
 
+\begin{theorem}
+    {Cauchy-Schwarz不等式}{Cauchy-Schwarz inequality}
+    设$V$是内积空间，则$\forall x,y\in V$，有
+    \begin{equation}
+        \abs{\inp xy}^2\leq\inp xx\inp yy,
+    \end{equation}
+    等号成立当且仅当$x,y$线性相关。
+\end{theorem}
+
+\begin{proof}
+    当$y=0$时显然成立，当$y\neq 0$时，考虑
+    \[
+        \norm{x-\frac{\inp xy}{\inp yy}y}^2=\inp xx-\frac{\abs{\inp xy}^2}{\inp yy}\geq 0.
+        \qedhere
+    \]
+\end{proof}
+
 \begin{definition}
     {Gram矩阵}{Gram matrix}
-    给定一组向量$x_1,\ldots,x_n$，Gram矩阵的第$i,j$个元素由内积$\inp{x_i}{x_j}$给出：
+    给定一组向量$x_1,\ldots,x_n$，Gram矩阵的元素由内积给出：$G_{ij}=\inp{x_i}{x_j}$
     \begin{equation}
         G:=\begin{bmatrix}
             \inp{x_1}{x_1}&\cdots&\inp{x_1}{x_n}\\
@@ -302,8 +320,11 @@
             \inp{x_n}{x_1}&\cdots&\inp{x_n}{x_n}
         \end{bmatrix}.
     \end{equation}
-    由于内积交换共轭$\inp{x_i}{x_j}=\overline{\inp{x_j}{x_i}}$，Gram矩阵是Hermite的：$G\dg=G$。
 \end{definition}
+
+\begin{corollary}
+    由于内积交换共轭$\inp{x_i}{x_j}=\overline{\inp{x_j}{x_i}}$，Gram矩阵是Hermite的：$G\dg=G$。
+\end{corollary}
 
 \begin{theorem}
     {内积空间线性无关的判定}{}
@@ -311,19 +332,19 @@
 \end{theorem}
 
 \begin{proof}
-    设$a=(a_1,\ldots,a_n)$满足$aG=0$，则$\forall k=1,\ldots,n$
+    考虑$aG=0$，则$\forall k=1,\ldots,n$
     \[
-        (aG)_k=a_1\inp{x_1}{x_k}+\cdots+a_n\inp{x_n}{x_k}=\inp{a_1x_1+\cdots,a_nx_n}{x_k}=0,
+        (aG)_k=a_1\inp{x_1}{x_k}+\cdots+a_n\inp{x_n}{x_k}=\inp{a_1x_1+\cdots+a_nx_n}{x_k}=0,
     \]
     特别地，
     \[
-        \inp{a_1x_1+\cdots+a_nx_n}{a_1x_1+\cdots+a_nx_n}=0\iff a_1x_1+\cdots,a_nx_n=0,
+        \inp{a_1x_1+\cdots+a_nx_n}{a_1x_1+\cdots+a_nx_n}=0\iff a_1x_1+\cdots+a_nx_n=0,
     \]
     则$G$可逆$\iff \mathrm N(G\tp)=\{0\}\iff a$只有零解。
 \end{proof}
 
 \begin{example}
-    {}{}
+    {正交基}{}
     给定内积空间$V$的一组基$\{x_1,\ldots,x_n\}$，则$\forall x\in V$均可以写成
     \[
         x=a_1x_1+\cdots+a_nx_n,
@@ -336,7 +357,7 @@
     \[
         [\inp x{x_1}\enspace\cdots\enspace\inp x{x_n}]=[a_1\enspace\cdots\enspace a_n]G,
     \]
-    若基是正交的，即$\forall i\neq j,\enspace\inp{x_i}{x_j}=0$，则 
+    若基是正交的，即$\forall i\neq j,\enspace\inp{x_i}{x_j}=0$，Gram矩阵是对角的，此时 
     \[
         a_i=\frac{\inp x{x_i}}{\inp{x_i}{x_i}}.
     \]
@@ -350,18 +371,6 @@
     \end{equation}
     则$y_1,\ldots,y_n$是正交的。
 \end{theorem}
-
-\begin{definition}
-    {带权内积}{}
-    设$\rho\in\cont(a,b)$是一个几乎处处为正\footnote{即$\{x|\rho(x)\leq 0\}$的Lebesgue测度为0。}的函数，且
-    \[
-        \int_a^b\rho(x)\d x<+\infty,
-    \]
-    定义内积
-    \begin{equation}
-        \inp fg=\int_a^bf(x)g(x)\rho(x)\d x.
-    \end{equation}
-\end{definition}
 
 \begin{definition}
     {正交多项式}{}
@@ -401,6 +410,7 @@
     \begin{equation}
         T_n(x)=\cos(n\arccos x).
     \end{equation}
+    性质：
     \begin{itemize}
         \item 内积 
         \begin{equation}
@@ -420,7 +430,7 @@
         \item $T_n$的$n$个实单根为$\cos\bigfkh{(2k-1)\pi/2n}$，$(n+1)$个极值点为$\cos(k\pi/n)$
         \item 当$\abs x\geq 1$时，
         \begin{equation}
-            T_n(x)=\frac12\biggfkh{\Bigkh{x+\sqrt{x^2-1}}^k+\Bigkh{x-\sqrt{x^2-1}}^k}.
+            T_n(x)=\frac12\biggfkh{\Bigkh{x+\sqrt{x^2-1}}^n+\Bigkh{x-\sqrt{x^2-1}}^n}.
         \end{equation}
     \end{itemize}
 \end{example}
@@ -502,7 +512,7 @@
 
 \begin{remark}
     注意$N(I)\equiv 1$。故Frobenius范数不是算子范数。
-    \footnote{不考虑$n=1$的平凡情况。}
+    \footnote{除非$n=1$的平凡情况。}
 \end{remark}
 
 \begin{theorem}
@@ -525,7 +535,7 @@
 \end{definition}
 
 \begin{remark}
-    对于一般的矩阵$A\in\FF^{m\times n}$，有$\sigma(A\dg A)\setminus\{0\}=\sigma(AA\dg)\setminus\{0\}$，即非0特征值相同，称为$A$的奇异值(sigular value)。
+    $A\dg A$和$AA\dg$的非0特征值相同，称为$A$的奇异值(sigular value)。
 \end{remark}
 
 \begin{example}
@@ -543,7 +553,7 @@
         \end{align}
     \end{subequations}
     \begin{proof}
-        先证明\eqref{eqn:op 1-norm}，将$A$写作列向量的形式$(A_1,\ldots,A_n)$，令$k=\arg\max_j\norm{A_j}_1$，则$\forall x\in\FF^n$且$\norm x_1=\sum_{j=1}^n\abs{x_j}=1$，有
+        先证明\eqref{eqn:op 1-norm}，将$A=[A_1\enspace\cdots\enspace A_n]$写作列向量的形式，令$k=\arg\max_j\norm{A_j}_1$，则$\forall x\in\FF^n$且$\norm x_1=\sum_{j=1}^n\abs{x_j}=1$，有
         \[
             \norm{Ax}_1=\norm{\sum_{j=1}^nA_jx_j}_1\leq\sum_{j=1}^n\abs{x_j}\norm{A_j}_1\leq\norm{A_k}_1\sum_{j=1}^n\abs{x_j}=\norm{A_k}_1\norm x_1=\norm{A_k}_1,
         \]
@@ -571,6 +581,7 @@
     {谱半径小于矩阵范数}{rho<=norm}
     谱半径$\rho(A)$和矩阵范数的关系：
     \begin{equation}
+        \label{eqn:rho<=norm}
         \rho(A)\leq\norm A.
     \end{equation}
 \end{theorem}
@@ -592,11 +603,11 @@
 \end{theorem}
 
 \begin{lemma}
-    若$\norm\cdot_\alpha$是$\FF^n$中的向量范数，$P\in\FF^{n\times n}$非奇异，则
+    若$\norm\cdot_\alpha$是$\FF^n$中的向量范数，给定$P\in\FF^{n\times n}$非奇异，可定义新的向量范数
     \[
-        \norm\cdot_{P,\alpha}:x\mapsto\norm{Px}_\alpha,
+        \norm x_{P,\alpha}:=\norm{Px}_\alpha,
     \]
-    构成另一个向量范数，诱导的算子范数为
+    其诱导的算子范数为
     \[
         \norm{A}_{P,\alpha}=\nnorm{PAP\iv}_\alpha.
     \]
@@ -635,9 +646,11 @@
     \]
 \end{remark}
 
-\subsection{扰动定理}
+\iffalse
 
-一个矩阵不可逆的概率是很低的，\footnote{因为多了一个$\det(A)=0$的限制条件。}那如何度量矩阵的奇异性？%用逆的大小。
+\paragraph{扰动定理}
+
+奇异矩阵在全体矩阵中的占比极低，\footnote{因为多了一个$\det(A)=0$的限制条件。}矩阵范数可以用来衡量矩阵距离奇异矩阵的距离。
 
 \begin{theorem}
     {扰动定理}{perturbation theorem I}
@@ -648,7 +661,7 @@
 \end{theorem}
 
 \begin{proof}
-    若$I+B$不可逆，则$\rho(B)\geq 1>\norm B$矛盾。
+    若$I+B$不可逆，即$\exists x\neq 0$使得$(I+B)x=0$，则$\rho(B)\geq 1>\norm B$矛盾。
     记$D:=(I+B)\iv$，则 
     \[
         (I+B)D=I\iff D=I-BD\implies \norm D\leq 1+\norm B\norm D.
@@ -672,5 +685,5 @@
     令$B=I-A\iv C$即可。
 \end{proof}
 
-
+\fi
 
