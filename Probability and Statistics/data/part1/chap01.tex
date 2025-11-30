@@ -9,15 +9,21 @@
 % 敏感问题调查：敏感问题+保护性问题。
 	
 \chapter{概率}
+
 \paragraph{概率的发展史}
+
 概率的发展经历了如下几个过程：
+
 \begin{compactitem}
 	\item de M\'er\'e问题
 	\item Pascal, Fermat首创概率的数学理论（初等数学方法）
 	\item Laplace创立分析概率论（微积分分析方法）
 	\item Kolmogorov发展现代理论（测度论方法）
 \end{compactitem}
+
 \section{试验与事件}
+\label{sec:experiment and event}
+
 \begin{definition}{试验与样本空间}{experiment and sample space}
     概率论研究试验(experiment)，试验具有如下性质：
     \begin{compactenum}
@@ -25,26 +31,34 @@
     	\item 试验之前可预知所有可能结果，其集合构成样本空间(sample space) $\Omega$。
     \end{compactenum}
 \end{definition}
+
 \begin{definition}{事件}{event}
     事件(event)是样本空间的子集(well-defined select)。试验的单一结果称为基本事件。
 
-    特别地，$\Omega$是必然事件，$\varnothing$是不可能事件。
+    特别地，$\Omega$是必然事件(certain event)，$\varnothing$是不可能事件(impossible event)。
 \end{definition}
 
 \begin{definition}
 	{事件的运算}{operations on events}
-	
 	借助集合语言以及Venn\figref{fig:venn}，
 	可定义事件的运算：
-	
+	\footnote{概率论教材习惯记$A+B\equiv A\cup B,\,AB\equiv A\cap B$。}
 	\begin{compactitem}
-		\item 并(union) $A\cup B:=\set x{x\in A\lor x\in B}$；
-		\item 交(intersection) $A\cap B:=\set x{x\in A\land x\in B}$；
-			\subitem 若$AB=\varnothing$，则称$A,B$互斥(mutually exclusive)。
-		\item 差(difference) $A\setminus B:=\set x{x\in A\land x\notin B}$；
-		\subitem 特别地，余(complementary) $A\c:=\Omega\setminus A$，称$A$和$A\c$互为对立事件(complementary event)；
+		\item 并(union)事件
+		\begin{equation}
+			A\cup B:=\set x{x\in A\lor x\in B};
+		\end{equation}
+		\item 交(intersection)事件
+		\begin{equation}
+			A\cap B:=\set x{x\in A\land x\in B};
+		\end{equation}
+		若$A\cap B=\varnothing$，则称$A,B$互斥(mutually exclusive)。
+		\item 差(difference)事件
+		\begin{equation}
+			A\setminus B:=\set x{x\in A\land x\notin B};
+		\end{equation}
+		特别地，补(complementary)事件 $A\c:=\Omega\setminus A$，称$A,A\c$对立。
 	\end{compactitem}
-	
 	\begin{center}
 		\includegraphics{figures/tikz/venn.pdf}
 		\captionof{figure}{Venn图}
@@ -54,7 +68,7 @@
 
 \begin{theorem}
 	{de Morgan定律}{de Morgan's laws}
-	对于事件集$\{A_i\}_{i\in I}$，其中指标集$I$可以是有限集或无限集，有恒等式：
+	对于事件集$\{A_i\}_{i\in I}$，其中指标集$I$可以有限或无限，有恒等式：
 	\[
 		\kh{\bigcup\nolimits_{i\in I} A_i}\c = \bigcap\nolimits_{i\in I} A_i\c.
 	\]
@@ -62,7 +76,8 @@
 
 \paragraph{概率的解释}古典解释，等可能性，Bertrand悖论；频率解释，主观解释。
 
-\section{公理化定义}
+\section{概率}
+\label{sec:probability}
 
 概率函数$\P$应给出事件(及其运算)的概率。因此，$\P$作为一个映射的定义域(称为事件空间$\cF$)除了应包括样本空间$\Omega$和其若干子集外，还应满足事件运算的封闭性。
 
@@ -76,7 +91,7 @@
 	\begin{compactenum}
 		\item $\Omega \in \Sigma;$
 		\item $\forall A \in \Sigma, A\c \in \Sigma;$
-		\item 特别地，若$\forall A_i \in \Sigma$，则
+		\item 特别地，若$\forall i\in I$均有$A_i \in \Sigma$，则
 		$\bigcup\nolimits_{i\in I} A_i \in \Sigma.$
 	\end{compactenum}
 	则称$\Sigma$是$\Omega$的$\sigma$-代数($\sigma$-algebra)。
@@ -95,16 +110,16 @@
 	\]
 \end{example}
 \begin{definition}{概率}{probability}
-	定义概率(probability)~$\P:\cF\to\RR$，满足：
+	若映射$\P:\cF\to\RR$满足：
 	\begin{compactenum}
 		\item $\forall A\in\cF,\P(A)\geqslant 0;$
 		\item $\P (\Omega)=1;$
-		\item （\textbf{加法公理}）~$\forall A_i \in \cF,A_iA_j=\varnothing(i\neq j),$
+		\item 加法公理：若$\forall i,j\in I\,(i\neq j)$均有$A_i,A_j\in\cF$且$A_i\cup A_j=\varnothing$，则
 		\begin{equation}
 			\P\kh{\bigcup\nolimits_{i\in I} A_i}=\sum\nolimits_{i\in I}\P(A_i).
 		\end{equation}
 	\end{compactenum}
-	称$(\Omega,\cF,\P)$构成了概率空间(probability space)。
+	则称$\P$是概率(probability)函数，$(\Omega,\cF,\P)$构成了概率空间(probability space)。
 \end{definition}
 \begin{corollary}
 	由定义，可推出：
@@ -118,7 +133,7 @@
 		% \]
 		特别地，$\P(A)+\P(A\c)=1;$
 		\item $\forall A\subset B,\P(A)\leqslant\P(B);$
-		\item $\P(A+B)=\P(A)+\P(B)-\P(AB).$推广之，得到
+		\item $\P(A\cup B)=\P(A)+\P(B)-\P(A\cap B).$推广之，得到
 	\end{compactenum}
 \end{corollary}
 \begin{theorem}{容斥恒等式}{inclusion and exclusion identities}
@@ -160,21 +175,24 @@
 \section{条件概率}
 
 \begin{definition}{条件概率}{conditional probability}
-	给定$B$事件发生的条件下，$A$事件发生的条件概率(conditional probability)为
+	给定事件$B$且$\P(B)>0$，定义映射$\P(\cdot|B):\cF\to\RR$
 	\begin{equation}
 		\P(A|B):=\frac{\P(A\cap B)}{\P(B)}
 	\end{equation}
-	其中$\P(B)>0.$
+	表示在事件$B$发生的条件下，事件$A$发生的条件概率(conditional probability)。
 \end{definition}
 
-\begin{remark}
-	条件概率可用于缩小样本空间。
-\end{remark}
+\begin{corollary}
+	$\P(\cdot|B)$是概率函数。
+\end{corollary}
 
 \begin{corollary}
-	% 事实上，给定$B$且$\P(B)>0$，则
-	$\P(\cdot|B):\cF\to\RR$是概率函数，$\bigkh{\Omega,\cF,\P(\cdot|B)}$也是概率空间。
+	已观测到事件$A\iff\P(A|A)\equiv 1$，绝非$\P(A)=1$。
 \end{corollary}
+
+\begin{remark}
+	不能将条件概率$\P(A|B)$中的$A|B$视为事件，$\P(\cdot)$和$\P(\cdot|B)$是两个不同的概率函数。
+\end{remark}
 
 \begin{theorem}{乘法法则}{multiplication rule}
 	由条件概率的定义可以直接导出：
@@ -182,20 +200,23 @@
 		\P(A\cap B)=\P(B)\P(A|B)=\P(A)\P(B|A).
 	\end{equation}
 	一般推广：
-	\[
+	\begin{equation}
 		\P(A_1\cap\cdots\cap A_n)=\P(A_1)\P(A_2|A_1)\cdots\P(A_n|A_1\cap\cdots\cap A_{n-1}).
-	\]
+	\end{equation}
 \end{theorem}
 
 \begin{remark}
+	条件概率可用于缩小样本空间。
 	加上限制条件以后，算概率可能会变简单。
 \end{remark}
 
-\begin{remark}
-	已观测到$A$事件$\iff\P(A|A)\equiv 1$，绝非$\P(A)=1$。
-\end{remark}
-
 \section{独立事件}
+
+下面讨论事件$A,B$独立的概念。
+按字面意义，$A,B$独立应代表事件$B$发生与否不影响事件$A$发生的概率，即
+\[
+	\P(A|B)=\P(A|B\c)=\P(A).
+\]
 
 \begin{definition}{独立事件}{independent event}
 	定义$A,B$相互独立(independent)当
@@ -203,11 +224,6 @@
 		\P(A\cap B)=\P(A)\P(B).
 	\end{equation}
 \end{definition}
-
-$B$事件发生与否，不影响$A$事件发生的概率：
-\[
-	\P(A|B)=\P(A)\iff\frac{\P(A\cap B)}{\P(B)}=\frac{\P(A\cap\Omega)}{\P(\Omega)}.
-\]
 
 \begin{corollary}
 	$A,B$独立$\iff A\c,B$独立$\iff A,B\c$独立$\iff A\c,B\c$独立。
@@ -248,9 +264,9 @@ $B$事件发生与否，不影响$A$事件发生的概率：
 	{分割}{partition}
 	事件空间的子集$\{B_i\}_{i\in I}\subset\cF$若满足：
 	\begin{compactenum}
-		\item $\bigcap\nolimits_{i\in I} B_i=\Omega;$
-		\item $\forall i\neq j,\enspace B_iB_j=\varnothing;$
-		\item $\forall i,\enspace\P(B_i)>0.$
+		\item $\bigcup\nolimits_{i\in I} B_i=\Omega;$
+		\item 两两互斥：$\forall i,j\in I\,(i\neq j)$均有$B_i\cap B_j=\varnothing;$
+		\item $\forall i\in I$均有$\P(B_i)>0.$
 	\end{compactenum}
 	则称$\{B_i\}_{i\in I}$是样本空间$\Omega$的一个分割。
 \end{definition}
@@ -261,25 +277,26 @@ $B$事件发生与否，不影响$A$事件发生的概率：
 		\P(A)=\sum_{i\in I}\P(B_i)\P(A|B_i)
 	\end{equation}
 \end{theorem}
-\begin{example}{假阳性悖论}{false positive paradox}
-	假设有一种疾病，10000人中约有一人发病，患病者检测出阳性(真阳性)的概率为99\%，未患病者检测出阳性(假阳性)的概率为0.1\%。求检测出阳性的人患病的概率。
 
-	$B=$患病，$A=$阳性，题中对应的概率为
+\begin{proof}
+	由分割的定义，有
 	\[
-		\P(B)=10^{-4},\enspace
-		\P(A|B)=0.99,\enspace
-		\P(A|B\c)=10^{-3},
+		A=A\cap\Omega=A\cap\bigcup_{i\in I}B_i=\bigcup_{i\in I}(A\cap B_i).
 	\]
-	故检测出阳性的人患病的概率为
+	且$\forall i,j\in I\,(i\neq j)$均有$(A\cap B_i)\cap(A\cap B_j)=A\cap B_i\cap B_j=\varnothing$，由加法公理
 	\[
-		\P(B|A)=\frac{\P(AB)}{\P(A)}=\frac{\P(B)\P(A|B)}{\P(B)\P(A|B)+\P(B\c)\P(A|B\c)}\doteq 9\%
+		\P(A)=\sum_{i\in I}\P(A\cap B_i)=\sum_{i\in I}\P(B_i)\P(A|B_i).
+		\qedhere
 	\]
-	并不高。其原因在于：发病率$\P(B)<$假阳性的概率$\P(A|B\c)$。
+\end{proof}
 
-	如何避免假阳性悖论？可以进行二次检测，使得
-	$\P(B)>\P(AA|B\c)=10^{-6}$
-	
-\end{example}
+\begin{corollary}
+	最简单的分割为$\{B,B\c\}$，则全概率公式化为
+	\[
+		\P(A)=\P(B)\P(A|B)+\P(B\c)\P(A|B\c).
+	\]
+\end{corollary}
+
 \begin{example}{赌徒}{gambler}
 	两个人赌博。假设甲的本金为$i$元，乙的本金为$n-i$。甲赢的概率为$p$，乙赢的概率为$q=1-p$。
 	每赌一局输家给赢家1元，其中一人输光则游戏结束。求甲成为最终赢家的概率$Q_i$。
@@ -299,7 +316,7 @@ $B$事件发生与否，不影响$A$事件发生的概率：
 			\frac{1-(q/p)^i}{1-(q/p)^n},&p\neq 1/2
 		\end{cases}
 	\]
-	取$n=6,i=1,2,\ldots,n-1$，绘制不同概率下的$Q_i$分布图：
+	取$n=6,\,i=1,2,\ldots,n-1$，绘制不同概率下的$Q_i$分布图：
 	\begin{center}
 		\includegraphics[width=0.7\linewidth]{figures/gamble.pdf}
 		\captionof{figure}{赌徒问题的概率分布图}
@@ -317,6 +334,26 @@ $B$事件发生与否，不影响$A$事件发生的概率：
 % \begin{remark}
 % 	这个公式的重要性不仅在数学意义上，还在于先验概率$\P(B_i)$ v.s.后验概率$\P(B_i|A)$
 % \end{remark}
+
+\begin{example}{假阳性悖论}{false positive paradox}
+	假设有一种疾病，10000人中约有一人发病，患病者检测出阳性(真阳性)的概率为99\%，未患病者检测出阳性(假阳性)的概率为0.1\%。求检测出阳性的人患病的概率。
+
+	$B=$患病，$A=$阳性，题中对应的概率为
+	\[
+		\P(B)=10^{-4},\enspace
+		\P(A|B)=0.99,\enspace
+		\P(A|B\c)=10^{-3},
+	\]
+	故检测出阳性的人患病的概率为
+	\[
+		\P(B|A)=\frac{\P(A\cap B)}{\P(A)}=\frac{\P(B)\P(A|B)}{\P(B)\P(A|B)+\P(B\c)\P(A|B\c)}\doteq 9\%
+	\]
+	并不高。其原因在于：发病率$\P(B)<$假阳性的概率$\P(A|B\c)$。
+
+	如何避免假阳性悖论？可以进行二次检测，使得
+	$\P(B)>\P(A_2\cap A_1|B\c)=10^{-6}$
+	
+\end{example}
 
 \begin{remark}
 	计算正确的概率、正确计算概率、正确使用概率。

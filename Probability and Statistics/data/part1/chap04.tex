@@ -4,9 +4,9 @@
 
 \begin{definition}
 	{期望}{expectation}
-	期望是集中趋势的一种刻画，定义 \ref{dfn:expectation and variance} 已经定义过
+	期望是集中趋势的一种刻画，可用Lebesque-Stieltjes积分给出一般形式
 	\begin{equation}
-		\E(X):=\begin{cases}
+		\E(X):=\int_0^1 x\d\CDF=\begin{cases}
 			\sum\nolimits_{i\in I} x_i\P(X=x_i),&\text{离散}\\[2ex]
 			\int\iti xf(x)\d x,&\text{连续}
 		\end{cases}
@@ -15,13 +15,6 @@
 
 \begin{remark}
 	期望存在要求\textbf{绝对收敛}。
-\end{remark}
-
-\begin{remark}
-	可用Lebesque-Stieltjes积分给出期望的一般定义：
-	\begin{equation}
-		\E(X)=\int_0^1 x\d\CDF.
-	\end{equation}
 \end{remark}
 
 \begin{corollary}
@@ -45,6 +38,28 @@
 		\end{equation}
 	\end{itemize}
 \end{corollary}
+
+\begin{theorem}
+	{Cauchy-Schwarz不等式}{Cauchy-Schwarz inequality}
+	若$\E(X^2),\E(Y^2)$存在，则
+	\begin{equation}
+		\E^2(XY)\leqslant\E(X^2)\E(Y^2).
+	\end{equation}
+	取等号当且仅当存在$a,b\in\RR$，使得
+	\begin{equation}
+		\P(aX+bY=0)=1,
+	\end{equation}
+	称为$aX+bY$以概率1 (almost surely, a.s.)等于0。
+	\index{a.s.,以概率1}
+\end{theorem}
+
+\begin{proof}
+	考虑$\forall t\in\RR$，
+	\[
+		\E\bigfkh{(X-tY)^2}=t^2\E(Y^2)-2t\E(XY)+\E(X^2)\geqslant 0.
+	\]
+	作为关于$t$的二次不等式，其判别式$\Delta=4\E^2(XY)-4\E(X^2)\E(Y^2)\leqslant 0$，即得证。
+\end{proof}
 
 \begin{definition}{分位数}{quantile}
 	给定$\alpha\in(0,1)$，若
@@ -74,9 +89,9 @@
 \end{definition}
 
 \begin{corollary}
-	若$X$期望为$\mu$，标准差为$\sigma$，标准化
+	标准化
 	\begin{equation}
-		\check X:=\frac{X-\mu}{\sigma},
+		\check X:=\frac{X-\E(X)}{\sqrt{\Var(X)}},
 	\end{equation}
 	可使$\E(\check X)=0,\Var(\check X)=1.$
 \end{corollary}
@@ -163,12 +178,12 @@
 \end{corollary}
 
 \begin{definition}{协方差矩阵}{covariance matrix}
-	定义$X=(X_1,\ldots,X_n),Y=(Y_1,\ldots,Y_n)$的协方差矩阵(covariance matrix)
+	定义$X=(X_1,\ldots,X_m),Y=(Y_1,\ldots,Y_n)$的协方差矩阵(covariance matrix)
 	\begin{equation}
 		\Cov(X,Y):=\begin{bmatrix}
 			\Cov(X_1,Y_1)&\cdots&\Cov(X_1,Y_n)\\
 			\vdots&\ddots&\vdots\\
-			\Cov(X_n,Y_1)&\cdots&\Cov(X_n,Y_n)
+			\Cov(X_m,Y_1)&\cdots&\Cov(X_m,Y_n)
 		\end{bmatrix},
 	\end{equation}
 	相应的，$\Cov(X,X)$就是向量$X$的方差矩阵。
@@ -243,32 +258,26 @@
 	\end{equation}
 \end{corollary}
 
-\begin{theorem}{相关系数的取值范围}{}
-	$\abs{\Corr(X,Y)}\leqslant 1$，取等号当且仅当
-	\[
-		\P(Y=aX+b)=1,\enspace(\text{almost~surely,~a.}\,\text{s.})
-	\]
-	只需考虑Cauchy-Schwarz不等式\index{a. s.,以概率1}
-	\begin{equation}
-		\E^2(UV)\leqslant\E(U)\E(V),
-	\end{equation}
-	这可以用$\forall t\in\RR,\E\bigfkh{(U-tV)^2}\geqslant 0$证明。
-\end{theorem}
+\begin{corollary}
+	由Cauchy-Schwarz不等式可知，相关系数的取值范围为$[-1,1]$。
+\end{corollary}
+
 \begin{example}{二元正态分布的相关系数}{correlation coefficient of 2-D normal distribution}
-	取$\xi:=\frac{x-\mu_1}{\sigma_1},\eta:=\frac{y-\mu_2}{\sigma_2}$，则
+	设$(X,Y)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，
+	取$\xi:=\frac{x-\mu_1}{\sigma_1},\,\eta:=\frac{y-\mu_2}{\sigma_2}$，则相关系数
 	\[
 		\Corr(X,Y)%&=\frac1{2\pi\sqrt{1-\rho^2}}\iint_{\RR^2}\xi\eta\exp\biggfkh{-\frac{\xi^2+\eta^2-2\rho\xi\eta}{2(1-\rho^2)}}\d\xi\nd\eta\\
-		=\frac1{2\pi\sqrt{1-\rho^2}}\iint_{\RR^2}\xi\eta\exp\biggfkh{-\frac{(\xi-\rho\eta)^2}{2(1-\rho^2)}-\frac{\eta^2}2}\d\xi\nd\eta
+		=\frac1{2\pi\sqrt{1-\rho^2}}\iint_{\RR^2}\xi\eta\exp\biggfkh{-\frac{(\xi-\rho\eta)^2}{2(1-\rho^2)}-\frac{\eta^2}2}\d\xi\nd\eta=\rho.
 	\]
-	由
-	\[
-		\int\iti x\e{-a(x-b)^2+c}\d x=\sqrt{\frac\pi{a}}b\e c.
-	\]
-	可得
-	\begin{align*}
-		\Corr(X,Y)&=\frac1{2\pi\sqrt{1-\rho^2}}\int\iti\eta\sqrt{2\pi(1-\rho^2)}\cdot\rho\eta\e{-\eta^2/2}\d\eta\\
-		&=\frac\rho{\sqrt{2\pi}}\int\iti\eta^2\e{-\eta^2/2}\d\eta=\rho.
-	\end{align*}
+	% 由
+	% \[
+	% 	\int\iti x\e{-a(x-b)^2+c}\d x=\sqrt{\frac\pi{a}}b\e c.
+	% \]
+	% 可得
+	% \begin{align*}
+	% 	\Corr(X,Y)&=\frac1{2\pi\sqrt{1-\rho^2}}\int\iti\eta\sqrt{2\pi(1-\rho^2)}\cdot\rho\eta\e{-\eta^2/2}\d\eta\\
+	% 	&=\frac\rho{\sqrt{2\pi}}\int\iti\eta^2\e{-\eta^2/2}\d\eta=\rho.
+	% \end{align*}
 \end{example}
 
 \section{矩}
@@ -434,9 +443,9 @@
 	$\E(Y|X)$是$X$的函数，是一个新的随机变量（$Y$对$X$的回归函数）。
 \end{remark}
 \begin{example}{二元正态分布的条件期望}{}
-	$(X,Y)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，由\exmref{exm:conditional PDF of 2-D normal distribution}
+	$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，由\exmref{exm:conditional PDF of 2-D normal distribution}
 	\[
-		\E(Y|X)=\mu_2+\rho\frac{\sigma_2}{\sigma_1}(X-\mu_1)^2.
+		\E(X_2|X_1)=\mu_2+\rho\frac{\sigma_2}{\sigma_1}(X_1-\mu_1)^2.
 	\]
 \end{example}
 \begin{theorem}{全期望公式}{}

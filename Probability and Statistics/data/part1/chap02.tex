@@ -3,11 +3,16 @@
 \begin{definition}{（一维）随机变量}{random variable}
 	定义随机变量(random variable)~$X:\Omega\to\RR$是样本空间上的实值函数。有
 	\begin{compactitem}
-		\item 离散型(discrete)：至多可数个取值；
-		\item 连续型(continuous)：区间型取值（不严格）；
+		\item 离散型(discrete)：值域为有限集或可数集(countable set)；
+		\item 连续型(continuous)：值域为不可数集(uncountable set)；
 		\item 其他
 	\end{compactitem}
 \end{definition}
+
+\begin{remark}
+	随机变量$X$的随机要素来自样本点$\omega\in\Omega$的随机选择。
+\end{remark}
+
 \begin{definition}
 	{随机变量的概率}{}
 	$\forall I\subset\RR$可测，记原像集$X\inv(I)\in\cF$，定义\footnote{这种定义属于好看的鱼(形式简洁)，而不属于好吃的鱼(实用)。}
@@ -16,29 +21,35 @@
 	\]
 	一般记$\P_X$为$\P$。
 \end{definition}
+
 \begin{definition}{累计分布函数}{cumulative distribution function}
 	记$X$的累计分布函数(cumulative distribution function, CDF)\index{CDF, 累计分布函数}
-	\[
-		\CDF(x):=\P(X\leqslant x),\quad\forall x\in\RR
-	\]
-	则$\P(a<X\leqslant b)\equiv\CDF(b)-\CDF(a)$。
+	$\CDF:\RR\to[0,1]$
+	\begin{equation}
+		\label{eqn:CDF}
+		\CDF(x):=\P(X\leqslant x).
+	\end{equation}
 \end{definition}
 
 \begin{corollary}
 	CDF的性质：
 	\begin{itemize}
-		\item $\CDF(x)$单调递增（不严格单调）；
-		\item $\lim_{x\to+\infty}\CDF(x)=1,\lim_{x\to-\infty}\CDF(x)=0;$
+		\item 区间的概率
+		\begin{equation}
+			\P(a<X\leqslant b)=\CDF(b)-\CDF(a).
+		\end{equation}
+		\item $\CDF(x)$单调递增（不严格单调），有界：
+		\begin{equation}
+			\lim_{x\to-\infty}\CDF(x)=0,\quad
+			\lim_{x\to+\infty}\CDF(x)=1.
+		\end{equation}
 		\item $\CDF(x)$右连续，不一定左连续。
 	\end{itemize}
 \end{corollary}
-\begin{remark}~
-	\begin{compactenum}
-		\item 随机要素来自样本点$\omega$的随机选择；
-		\item $X,Y$同样本空间时，一般地，$aX+bY$等$X,Y$的函数也是随机变量；
-		\item 随机变量同分布$\iff$ CDF相同；但不代表变量相同。
-	\end{compactenum}
-\end{remark}
+
+\begin{corollary}
+	随机变量同分布$\iff$ CDF相同。
+\end{corollary}
 
 \section{离散分布}
 
@@ -61,6 +72,7 @@
 
 \begin{corollary}
 	离散分布的CDF为阶梯函数。
+
 \end{corollary}
 
 \begin{definition}{期望和方差}{expectation and variance}
@@ -74,23 +86,12 @@
 	\end{equation}
 \end{definition}
 
-\begin{corollary}
-	随机变量$X$的函数$g(X)$的期望
-	\[
-		\E(g(X))=\sum\nolimits_{i\in I}g(x_i)p_i.
-	\]
-\end{corollary}
-
 \begin{remark}
 	期望存在要求级数绝对收敛。
 \end{remark}
 
-\paragraph{二项分布}
-
-~
-
 \begin{definition}{\Bern 分布}{Bernoulli distribution}
-	\Bern 分布也称0-1分布，$p$为成功概率，记作$X\sim\Bino(p)$，其分布列为
+	\Bern 分布也称0-1分布，其描述的是一次成功概率为$p$的\Bern 试验，$X=0,1$分别代表失败和成功，记作$X\sim\Bino(p)$，其分布列为
 	\begin{equation}
 		\P(X=k)=\begin{cases}
 			1-p,&k=0\\
@@ -110,8 +111,13 @@
 
 \begin{definition}{二项分布}{binominal distribution}
 	$n$次独立\Bern 试验的成功次数$X$服从二项分布(binominal distribution)，记作$X\sim\Bino(n,p)$，
+	可得
 	\begin{equation}
 		\P(X=k)=\binom nk p^k(1-p)^{n-k},\quad k=0,\ldots,n
+	\end{equation}
+	其中二项式系数
+	\begin{equation}
+		\binom nk:=\frac{n!}{k!(n-k)!}.
 	\end{equation}
 	\begin{center}
 		\includegraphics[width=.95\textwidth]{figures/pdf_bin.pdf}
@@ -129,8 +135,6 @@
 		\end{align}
 	\end{subequations}
 \end{corollary}
-
-\paragraph{Poisson分布}
 
 我们考虑一个时间段内的事件次数$X\sim\Bino(n,p)$，其中$n$是时间段的切片份数。
 保持其期望$\E(X)=np=:\lambda$不变，令$n\to\infty$，即事件可能发生在任一时刻，则
@@ -263,7 +267,7 @@
 	\begin{equation}
 		f(x)=\frac1{\sqrt{2\pi}\sigma}\exp\biggfkh{-\frac{(x-\mu)^2}{2\sigma^2}},\quad x\in\RR
 	\end{equation}
-	特别地，标准正态分布$\Norm(0,1)$的CDF记作$\Phi(x)$。
+	特别地，标准正态分布$Z\sim\Norm(0,1)$的CDF记作$\Phi(x)$。
 	\begin{center}
 		\includegraphics[width=.9\textwidth]{figures/pdf_normal.pdf}
 		\captionof{figure}{不同$\mu,\sigma$下的正态分布}
@@ -312,22 +316,22 @@
 \end{corollary}
 
 \begin{example}{指数分布的导出}{}
-	产品在$(x,x+\d x)$时间内的失效率为
+	产品在$(t,t+\d t)$时间内的失效率为
 	\[
-		\P(x<X<x+\d x|X>x)=\frac{\P(x<X<x+\d x)}{\P(X>x)}=\frac{\CDF(x+\d x)-\CDF(x)}{1-\CDF(x)}=\frac{\CDF'(x)}{1-\CDF(x)}\d x
+		\P(t<T<t+\d t|T>t)=\frac{\P(t<T<t+\d t)}{\P(T>t)}=\frac{\CDF(t+\d t)-\CDF(t)}{1-\CDF(t)}=\frac{\CDF'(t)}{1-\CDF(t)}\d t,
 	\]
-	令失效率为$\lambda(x)\d x$
+	令失效率为$\lambda(t)\d t$
 	\[
-		\frac{\CDF'(x)}{1-\CDF(x)}=\lambda(x)\implies\CDF(x)=1-\exp\biggfkh{-\int_0^x\lambda(t)\d t}.
+		\frac{\CDF'(t)}{1-\CDF(t)}=\lambda(t)\implies\CDF(t)=1-\exp\biggfkh{-\int_0^t\lambda(\tau)\d\tau}.
 	\]
 	若假设无老化：$\lambda(t)\equiv\lambda$，则分布为指数分布：
 	\begin{equation}
-		\CDF(x)=1-\e{-\lambda x},\quad x>0,
+		\CDF(t)=1-\e{-\lambda t},\quad t>0,
 	\end{equation}
 
-	这体现出指数分布的无记忆性：$\forall\tau>0$
+	这体现出指数分布的无记忆性：$\forall t_0>0$
 	\[
-		\P(X>t+\tau|X>\tau)=\frac{\e{-\lambda(t+\tau)}}{\e{-\lambda\tau}}=\e{-\lambda t}=\P(X>t)
+		\P(T>t+t_0|T>t_0)=\frac{\e{-\lambda(t+t_0)}}{\e{-\lambda t_0}}=\e{-\lambda t}=\P(T>t).
 	\]
 
 	\tcblower
@@ -340,6 +344,8 @@
 \end{example}
 
 \section{随机变量的函数}
+
+随机变量$X,Y$同样本空间时，一般地，$aX+bY$等$X,Y$的函数也是随机变量。
 
 \begin{theorem}
 	{离散型随机变量的函数}{}
