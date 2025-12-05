@@ -2,9 +2,15 @@
 
 大学期间用 LaTeX 编写的数理课程笔记。
 
+> LaTeX notes of mathematical and physical courses in Tsinghua.
+
 笔记语言：中文。
 
+> Language of notes: Chinese. (sorry for the inconvenience)
+
 已收录（排名并不按照学期顺序）
+
+> Contents:
 
 |课程名|Course Name|状态|
 |:-:|:-:|:-:|
@@ -20,8 +26,14 @@
 |核辐射物理及探测学|Nuclear Radiation Physics and Detection|✅|
 
 同时提供了 `*.tex` 源文件和 *`*.pdf` 文件。
+
+> both `*.tex` source files and `*.pdf` files are provided.
+
 - `*.pdf` 文件可以直接使用；
 - 如果你希望添加个性化内容，可修改 `*.tex` 文件并自行编译。
+
+> - `*.pdf` files can be used directly;
+> - you may modify the `*.tex` files and compile them by yourself if you want to add personalized contents.
 
 ## 如何处理 `*.tex` 文件
 
