@@ -488,22 +488,29 @@
     \lapla\Phi=\frac1{r^2}\pp r\biggkh{r^2\pv\Phi r}+\frac1{r^2\sin\theta}\pp\theta\biggkh{\sin\theta\pv\Phi\theta}+\frac1{r^2\sin^2\theta}\pv[2]\Phi\phi=0.
 \end{equation}
 分离变量$\Phi(r,\theta,\phi)=R(r)P(\theta)Q(\phi)$，得到 
-\[
-    \begin{cases}
-        \dd r\biggkh{r^2\dv Rr}-\ell(\ell+1)R=0,\\
-        \frac1{\sin\theta}\dd\theta\biggkh{\sin\theta\dv P\theta}+\biggfkh{\ell(\ell+1)-\frac{m^2}{\sin^2\theta}}P=0,\\
-        \frac1Q\dv[2]Q\phi=-m^2.
-    \end{cases}
-\]
-可直接解得$R,Q$
-\begin{align}
-    R_\ell(r)&=Ar^\ell+Br^{-(\ell+1)},\\
-    Q_m(\phi)&=\e{\pm\i m\phi},\quad m=0,\pm 1,\pm 2,\ldots
-\end{align}
+\begin{subequations}
+    \begin{align}
+        \label{eqn:Laplace in spherical r}
+        \dd r\biggkh{r^2\dv Rr}-\ell(\ell+1)R&=0,\\
+        \label{eqn:Laplace in spherical theta}
+        \frac1{\sin\theta}\dd\theta\biggkh{\sin\theta\dv P\theta}+\biggfkh{\ell(\ell+1)-\frac{m^2}{\sin^2\theta}}P&=0,\\
+        \label{eqn:Laplace in spherical phi}
+        \frac1Q\dv[2]Q\phi+m^2&=0.
+    \end{align}
+\end{subequations}
+其中\eqref{eqn:Laplace in spherical r}, \eqref{eqn:Laplace in spherical phi}可直接解得
+\begin{subequations}
+    \begin{align}
+        R_\ell(r)&=Ar^\ell+Br^{-(\ell+1)},\\
+        Q_m(\phi)&=\e{\pm\i m\phi},
+    \end{align}
+\end{subequations}
+周期条件$Q(\phi+2\pi)=Q(\phi)$要求$m=0,\pm 1,\pm 2,\ldots$为整数。
 
 \subsection{Legendre多项式}
 \label{ssec:Legendre polynomial}
 
+下面解\eqref{eqn:Laplace in spherical theta}。
 $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre方程：
 \begin{equation}
     \label{eqn:general Legendre}
@@ -705,14 +712,17 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
     \frac1\rho\pp\rho\biggkh{\rho\pv\Phi\rho}+\frac1{\rho^2}\pv[2]\Phi\phi+\pv[2]\Phi z=0.
 \end{equation}
 分离变量$\Phi(\rho,\phi,z)=R(\rho)Q(\phi)Z(z)$，得到 
-\[
-    \begin{cases}
-        \dv[2]R\rho+\frac1\rho\dv R\rho+\biggkh{k^2-\frac{\nu^2}{\rho^2}}R=0,\\[1ex]
-        \dv[2]Q\phi+\nu^2Q=0,\\[1ex]
-        \dv[2]Zz-k^2Z=0.
-    \end{cases}
-\]
-可直接解得$Q,Z$
+\begin{subequations}
+    \begin{align}
+        \label{eqn:Laplace in cylinder rho}
+        \dv[2]R\rho+\frac1\rho\dv R\rho+\biggkh{k^2-\frac{\nu^2}{\rho^2}}R&=0,\\
+        \label{eqn:Laplace in cylinder phi}
+        \dv[2]Q\phi+\nu^2Q&=0,\\
+        \label{eqn:Laplace in cylinder z}
+        \dv[2]Zz-k^2Z&=0.
+    \end{align}
+\end{subequations}
+其中\eqref{eqn:Laplace in cylinder phi}和\eqref{eqn:Laplace in cylinder z}可直接解得$Q,Z$
 \begin{alignat}{2}
     Q_\nu(\phi)&=\e{\pm\i\nu\phi},\quad&\nu&=0,\pm 1,\pm 2,\ldots\\
     Z_k(z)&=\e{\pm kz},&k&>0
@@ -721,6 +731,7 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
 \subsection{Bessel函数}
 \label{ssec:Bessel functions}
 
+对于\eqref{eqn:Laplace in cylinder rho}，
 设$x=k\rho$，得到Bessel方程
 \begin{equation}
     \label{eqn:Bessel eqn}
