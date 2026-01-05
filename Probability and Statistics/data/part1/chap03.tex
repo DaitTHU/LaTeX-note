@@ -41,7 +41,7 @@
 	{连续分布}{}
 	若存在$f\geqslant 0$且$\forall Q\subset\RR^n$可测，都有
 	\[
-		\P\bigkh{(X_1,\ldots,X_n)\in Q}=\int_Qf(x_1,\ldots,x_n)\d x_1\cdots\d x_n
+		\P\bigp{(X_1,\ldots,X_n)\in Q}=\int_Qf(x_1,\ldots,x_n)\d x_1\cdots\d x_n
 	\]
 	则称$(X_1,\ldots,X_n)$为连续型，且$f$为其PDF。
 \end{definition}
@@ -77,7 +77,7 @@
 	\begin{align}
 		\begin{aligned}
 			f(x_1,x_2)={}&\frac1{2\pi\sigma_1\sigma_2}\frac1{\sqrt{1-\rho^2}}\cdot\\
-			&\exp\hkh{-\frac1{2(1-\rho^2)}\biggfkh{\biggkh{\frac{x_1-\mu_1}{\sigma_1}}^2+\biggkh{\frac{x_2-\mu_2}{\sigma_2}}^2-2\rho\frac{x_1-\mu_1}{\sigma_1}\frac{x_2-\mu_2}{\sigma_2}}}.
+			&\exp\biggB{-\frac1{2(1-\rho^2)}\biggb{\biggp{\frac{x_1-\mu_1}{\sigma_1}}^2+\biggp{\frac{x_2-\mu_2}{\sigma_2}}^2-2\rho\frac{x_1-\mu_1}{\sigma_1}\frac{x_2-\mu_2}{\sigma_2}}}.
 		\end{aligned}
 	\end{align}
 	特别地，标准二元正态分布为$(X_1,X_2)\sim\Norm(0,0,1,1,0)$。
@@ -89,7 +89,7 @@
 	\tcblower
 	指数项部分构成了一个二次型：$-x\tp Wx/2$，其中
 	\[
-		x=\Bigfkh{\frac{x_1-\mu_1}{\sigma_1},\frac{x_2-\mu_2}{\sigma_2}}\tp,\quad W=\frac1{1-\rho^2}\begin{bmatrix}
+		x=\Bigb{\frac{x_1-\mu_1}{\sigma_1},\frac{x_2-\mu_2}{\sigma_2}}\tp,\quad W=\frac1{1-\rho^2}\begin{bmatrix}
 			1&-\rho\\-\rho&1
 		\end{bmatrix}.
 	\]
@@ -133,7 +133,7 @@
 \begin{example}{二元正态的边际}{marginal PDF of 2-D normal distribution}
 	二元正态分布$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$的边际密度
 	\[
-		f_{X_1}(x_1)=\int\iti f_{X_1,X_2}(x_1,x_2)\d x_2=\frac1{\sqrt{2\pi}\sigma_1}\exp\biggfkh{-\frac{(x_1-\mu_1)^2}{2\sigma_1^2}}.
+		f_{X_1}(x_1)=\int\iti f_{X_1,X_2}(x_1,x_2)\d x_2=\frac1{\sqrt{2\pi}\sigma_1}\exp\biggb{-\frac{(x_1-\mu_1)^2}{2\sigma_1^2}}.
 	\]
 	即$X_1\sim\Norm(\mu_1,\sigma_1^2)$，同理$X_2\sim\Norm(\mu_2,\sigma_2^2)$。
 \end{example}
@@ -143,14 +143,14 @@
 \begin{example}{Farlie-Gumbel-Morgenstern族}{Farlie-Gumbel-Morgenstern family}
 	随机变量$X,Y$的CDF分别为$\CDF_X(x),\CDF_Y(y)$，则$\forall\alpha\in[-1,1],$
 	\begin{equation}
-		\CDF_{X,Y}(x,y)=\CDF_X(x)\CDF_Y(y)\bigfkh{1+\alpha\bigkh{1-\CDF_X(x)}\bigkh{1-\CDF_Y(y)}}
+		\CDF_{X,Y}(x,y)=\CDF_X(x)\CDF_Y(y)\bigb{1+\alpha\bigp{1-\CDF_X(x)}\bigp{1-\CDF_Y(y)}}
 	\end{equation}
 	是$(X,Y)$的二元CDF。且$X,Y$的边际分布分别为$\CDF_X(x),\CDF_Y(y)$。
 \end{example}
 \begin{example}{连接函数}{Copula function}
 	我们称边际分布为$\Unif(0,1)$的联合CDF $C(u,v)$为连接(Copula)函数，则对于随机变量$X,Y$，可用连接函数构造二元分布
 	\begin{equation}
-		\CDF_{X,Y}(x,y)=C\bigkh{\CDF_X(x),\CDF_Y(y)}
+		\CDF_{X,Y}(x,y)=C\bigp{\CDF_X(x),\CDF_Y(y)}
 	\end{equation}
 	使其边际CDF为$\CDF_X(x),\CDF_Y(y)$。
 \end{example}
@@ -169,7 +169,7 @@
 	\end{equation}
 	
 	连续型PDF为$f(x,y)$，
-	%\P(X\leqslant x|y<Y\leqslant y+\d y)=\dvd{\int_{-\infty}^x\int_y^{y+\d y}f(\xi,\eta)\d\eta\nd\xi}{\int_y^{y+\d y}f(\xi,\eta)\d\eta}
+	%\P(X\leqslant x|y<Y\leqslant y+\d y)=\division{\int_{-\infty}^x\int_y^{y+\d y}f(\xi,\eta)\d\eta\nd\xi}{\int_y^{y+\d y}f(\xi,\eta)\d\eta}
 	可定义条件PDF
 	\footnote{唐宏岩老师记作$f_X(x|y)$，好处是下标仍然是随机变量($X|Y$不是随机变量)，但没有在下标中体现$Y$。}
 	\begin{equation}
@@ -199,9 +199,9 @@
 \begin{example}{二元正态的条件密度}{conditional PDF of 2-D normal distribution}
 	$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$
 	\begin{equation}
-		f_{X_2|X_1}(x_2|x_1)=\frac1{\sqrt{2\pi}\sigma_2}\frac1{\sqrt{1-\rho^2}}\exp\biggfkh{-\frac1{2(1-\rho^2)}\Bigkh{\frac{x_2-\mu_2}{\sigma_2}-\rho\frac{x_1-\mu_1}{\sigma_1}}^2},
+		f_{X_2|X_1}(x_2|x_1)=\frac1{\sqrt{2\pi}\sigma_2}\frac1{\sqrt{1-\rho^2}}\exp\biggb{-\frac1{2(1-\rho^2)}\Bigp{\frac{x_2-\mu_2}{\sigma_2}-\rho\frac{x_1-\mu_1}{\sigma_1}}^2},
 	\end{equation}
-	当$X_1=x_1$时，$X_2\sim\Norm\Bigkh{\mu_2+\rho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1),(1-\rho^2)\sigma_2^2}$
+	当$X_1=x_1$时，$X_2\sim\Norm\Bigp{\mu_2+\rho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1),(1-\rho^2)\sigma_2^2}$
 \end{example}
 
 \section{独立性}
@@ -250,7 +250,7 @@
 
 \begin{theorem}
 	{密度函数变换}{}
-	$(X,Y)$为二维连续型随机变量，其PDF为$f_{X,Y}(x,y)$。由此可导出随机变量$(U,V)=\bigkh{u(X,Y),v(X,Y)}$，求其PDF $f_{U,V}(u,v)$。
+	$(X,Y)$为二维连续型随机变量，其PDF为$f_{X,Y}(x,y)$。由此可导出随机变量$(U,V)=\bigp{u(X,Y),v(X,Y)}$，求其PDF $f_{U,V}(u,v)$。
 	
 	仅考虑$u,v$可微可逆：
 	\[
@@ -272,7 +272,7 @@
 	则$U,V$的联合分布PDF为
 	\begin{equation}
 		\label{UVXY}
-		f_{U,V}(u,v)=f_{X,Y}\bigfkh{x(u,v),y(u,v)}\abs{\det J}.
+		f_{U,V}(u,v)=f_{X,Y}\bigb{x(u,v),y(u,v)}\abs{\det J}.
 	\end{equation}
 \end{theorem}
 \begin{remark}
@@ -297,14 +297,14 @@
 	\begin{subequations}
 		\begin{align}
 			f_{Y/X}(z)&=\int\iti f_{X,Y}(x,xz)\abs x\d x\\
-			f_{XY}(z)&=\int\iti f_{X,Y}\biggkh{x,\frac zx}\frac1{\abs{x}}\d x
+			f_{XY}(z)&=\int\iti f_{X,Y}\biggp{x,\frac zx}\frac1{\abs{x}}\d x
 		\end{align}
 	\end{subequations}
 	特别地，当$X,Y$相互独立时，
 	\begin{subequations}
 		\begin{align}
 			f_{Y/X}(z)&=\int\iti f_X(x)f_Y(xz)\abs x\d x\\
-			f_{XY}(z)&=\int\iti f_X(x)f_Y\kh{\frac zx}\frac1{\abs x}\d x
+			f_{XY}(z)&=\int\iti f_X(x)f_Y\Bigp{\frac zx}\frac1{\abs x}\d x
 		\end{align}
 	\end{subequations}
 	第二个公式是$f_X,f_Y$的Mellin卷积。
@@ -347,14 +347,14 @@
 	$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，
 	\begin{align*}
 		f_{X_1+X_2}(y)&=\int\iti f_{X_1,X_2}(x,y-x)\d x\\
-		&=\frac1{\sqrt{2\pi}\sqrt{\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2}}\exp\biggfkh{-\frac{(y-(\mu_1+\mu_2))^2}{2(\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2)}}.
+		&=\frac1{\sqrt{2\pi}\sqrt{\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2}}\exp\biggb{-\frac{(y-(\mu_1+\mu_2))^2}{2(\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2)}}.
 	\end{align*}
 	故$X_1+X_2\sim\Norm(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2).$
 \end{example}
 \begin{example}{指数分布的最小值}{}
 	若$X_1\sim\Expo(\lambda_1),X_2\sim\Expo(\lambda_2)$，则 
 	\[
-		\CDF_{\min{}}(x)=1-\bigfkh{1-\CDF_{X_1}(x)}\bigfkh{1-\CDF_{X_2}(x)}=1-\e{-(\lambda_1+\lambda_2)x}.
+		\CDF_{\min{}}(x)=1-\bigb{1-\CDF_{X_1}(x)}\bigb{1-\CDF_{X_2}(x)}=1-\e{-(\lambda_1+\lambda_2)x}.
 	\]
 	故$\min(X_1,X_2)\sim\Expo(\lambda_1+\lambda_2).$
 \end{example}
@@ -364,13 +364,13 @@
 	求$Y:=\min(X_1,\ldots,X_n)$和$Z:=\max(X_1,\ldots,X_n)$的联合分布。
 	由
 	\[
-		\P(y<Y,Z\leqslant z)=\P(y<X_i\leqslant z)=\bigfkh{\CDF(z)-\CDF(y)}^n.
+		\P(y<Y,Z\leqslant z)=\P(y<X_i\leqslant z)=\bigb{\CDF(z)-\CDF(y)}^n.
 	\]
 	另一方面$\P(y<Y,Z\leqslant z)=\CDF_Z(z)-\CDF_{Y,Z}(y,z)$，
 	故
 	\begin{equation}
 		\label{eqn:min-max joint distribution}
-		f_{Y,Z}(y,z)=-\frac{\partial^2}{\partial y \partial z}\P(y<Y,Z\leqslant z)=n(n-1)f(y)f(z)\bigfkh{\CDF(z)-\CDF(y)}^{n-2}.
+		f_{Y,Z}(y,z)=-\frac{\partial^2}{\partial y \partial z}\P(y<Y,Z\leqslant z)=n(n-1)f(y)f(z)\bigb{\CDF(z)-\CDF(y)}^{n-2}.
 	\end{equation}
 \end{example}
 
@@ -414,7 +414,7 @@
 	\]
 	其PDF为
 	\begin{equation}
-		f(x)=\frac1{\sqrt n\mathrm B(n/2,1/2)}\biggkh{1+\frac{x^2}n}^{-(n+1)/2},\quad x\in\RR.
+		f(x)=\frac1{\sqrt n\mathrm B(n/2,1/2)}\biggp{1+\frac{x^2}n}^{-(n+1)/2},\quad x\in\RR.
 	\end{equation}
 	特别地，当$n=1$时，是Cauchy分布；$n\to\infty$时，趋于$\Norm(0,1)$。
 	事实上，由\figref{fig:pdf_t} 可见，$n=30$时二者已经非常接近。
@@ -443,7 +443,7 @@
 	\]
 	其PDF为
 	\begin{equation}
-		f(x)=\frac1{\mathrm B(n_1/2,n_2/2)}\Bigkh{\frac{n_1}{n_2}}^{n_1/2}x^{n_1/2-1}\Bigkh{1+\frac{n_1}{n_2}x}^{-(n_1+n_2)/2},\quad x>0.
+		f(x)=\frac1{\mathrm B(n_1/2,n_2/2)}\Bigp{\frac{n_1}{n_2}}^{n_1/2}x^{n_1/2-1}\Bigp{1+\frac{n_1}{n_2}x}^{-(n_1+n_2)/2},\quad x>0.
 	\end{equation}
 	\begin{center}
 		\includegraphics[width=0.8\linewidth]{figures/pdf_F.pdf}
@@ -503,7 +503,7 @@
 
 	$(X_1,\ldots,X_n)$的PDF为
 	\[
-		f(x_1,\ldots,x_n)=\frac1{(\sqrt{2\pi}\sigma)^n}\exp\biggfkh{-\frac1{2\sigma^2}\biggkh{\sum_{i=1}^nx_i^2-2\mu\sum_{i=1}^nx_i+n\mu^2}}.
+		f(x_1,\ldots,x_n)=\frac1{(\sqrt{2\pi}\sigma)^n}\exp\biggb{-\frac1{2\sigma^2}\biggp{\sum_{i=1}^nx_i^2-2\mu\sum_{i=1}^nx_i+n\mu^2}}.
 	\]
 	我们希望构造另一个独立随机向量$(Y_1,\ldots,Y_n)$，使$Y_1$与$Y_2^2+\cdots+Y_n^2$的关系类似$\avg X$与$S^2$。为满足独立性，可以要求变换
 	\[
@@ -520,7 +520,7 @@
 	\]
 	从而，$(Y_1,\ldots,Y_n)$的PDF
 	\begin{align*}
-		f(y_1,\ldots,y_n)&=\frac1{(\sqrt{2\pi}\sigma)^n}\exp\biggfkh{-\frac1{2\sigma^2}\biggkh{\sum_{i=1}^ny_i^2-2\mu\sqrt ny_1+n\mu^2}}\\
+		f(y_1,\ldots,y_n)&=\frac1{(\sqrt{2\pi}\sigma)^n}\exp\biggb{-\frac1{2\sigma^2}\biggp{\sum_{i=1}^ny_i^2-2\mu\sqrt ny_1+n\mu^2}}\\
 		&=\frac1{\sqrt{2\pi}\sigma}\e{-(y_1-\sqrt n\mu)^2/2\sigma^2}\cdot\frac1{\sqrt{2\pi}\sigma}\e{-y_2^2/2\sigma^2}\cdots\frac1{\sqrt{2\pi}\sigma}\e{-y_n^2/2\sigma^2}.
 	\end{align*}
 	故$Y_1,\ldots,Y_n$独立，且
@@ -535,8 +535,8 @@
 	从而
 	\[
 		\frac{(n-1)S^2}{\sigma^2}
-		=\frac1{\sigma^2}\biggkh{\sum_{i=1}^nX_i^2-n\avg X^2}
-		=\frac1{\sigma^2}\biggkh{\sum_{i=1}^nY_i^2-Y_1^2}
+		=\frac1{\sigma^2}\biggp{\sum_{i=1}^nX_i^2-n\avg X^2}
+		=\frac1{\sigma^2}\biggp{\sum_{i=1}^nY_i^2-Y_1^2}
 		=\frac1{\sigma^2}\sum_{i=2}^nY_i^2\sim\chi^2(n-1).
 		\qedhere
 	\]

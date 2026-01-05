@@ -31,7 +31,7 @@
 	\begin{subequations}
 		\begin{align}
 			S_T:={}&\sum_{j=1}^s\sum_{i=1}^{n_j}(X_{ij}-\avg X)^2\\\notag
-			={}&\sum_{i,j}X_{ij}^2-\frac1N\biggkh{\sum_{i,j}X_{ij}}^2,
+			={}&\sum_{i,j}X_{ij}^2-\frac1N\biggp{\sum_{i,j}X_{ij}}^2,
 		\end{align}
 	\end{subequations}
 	总自由度$\nu_T=N-1$，总均方$MS_T=S_T/\nu_T.$
@@ -44,7 +44,7 @@
 	\begin{subequations}
 		\begin{align}
 			S_A:={}&\sum_{j=1}^sn_j(\avg X_{\cdot j}-\avg X)^2\\\notag
-			={}&\sum_{j=1}^s\frac1{n_j}\biggkh{\sum_{i=1}^{n_j}X_{ij}}^2-\frac1N\biggkh{\sum_{i,j}X_{ij}}^2,
+			={}&\sum_{j=1}^s\frac1{n_j}\biggp{\sum_{i=1}^{n_j}X_{ij}}^2-\frac1N\biggp{\sum_{i,j}X_{ij}}^2,
 		\end{align}
 	\end{subequations}
 	组间自由度$\nu_A=s-1$，组间均方$MS_A=S_A/\nu_A.$
@@ -126,7 +126,7 @@ $A_i,B_j$的效应分别为
 \]
 检验统计量 
 \[
-	F:=\division{\frac{S_A}{r-1}}{\frac{S_E}{rs(t-1)}}\sim\mathrm F\bigkh{r-1,rs(t-1)}.
+	F:=\division{\frac{S_A}{r-1}}{\frac{S_E}{rs(t-1)}}\sim\mathrm F\bigp{r-1,rs(t-1)}.
 \]
 
 \section{回归分析}
@@ -135,15 +135,15 @@ $A_i,B_j$的效应分别为
 %设$(x_1,y_1),\ldots,(x_n,y_n) $是$ (x, y) $的一组观测值，对每个样本观测值$(x_i,y_i)$考虑与其回归值$a+bx_i$的离差为$y_i-a-bx_i$，离差平方和
 用$g(X)$估计$Y$，离差$Y-g(X)$，均方误差就是离差平方的期望
 \[
-	Q:=\E\bigfkh{(Y-g(X))^2}.
+	Q:=\E\bigb{(Y-g(X))^2}.
 \]
 最小二乘法所求的是均方误差意义下的最优线性预测
 \[
-	(\alpha,\beta)=\arg\min_{a,b}\E\bigfkh{(Y-(a+bX))^2}
+	(\alpha,\beta)=\arg\min_{a,b}\E\bigb{(Y-(a+bX))^2}
 \]
 实际上就是求二元函数
 \begin{align*}
-	f(a,b):=&{}\E\bigfkh{(Y-(a+bX))^2}\\
+	f(a,b):=&{}\E\bigb{(Y-(a+bX))^2}\\
 	=&{}\E(X^2)b^2+2\E(X)ab+a^2-2\E(XY)b-2\E(Y)a+\E(Y^2).
 \end{align*}
 的最小值点，则在最小值点处有
@@ -163,7 +163,7 @@ $A_i,B_j$的效应分别为
 	\Var[Y-(\alpha+\beta X)]&=\Var(Y-\beta X)\\
 	&=\Var(Y)+\beta^2\Var(X)-2\beta\Cov(Y,X)\\
 	&=%\Var(Y)-\frac{\Cov^2(X,Y)}{\Var(X)}=
-	\bigfkh{1-\Corr^2(X,Y)}\Var(Y).
+	\bigb{1-\Corr^2(X,Y)}\Var(Y).
 \end{align*}
 \paragraph{相关性检验}
 对任意两个变量的一组观察值$ {(x_i, y_i)} $都可以用最小二乘法形式上求得$ y$对$ x $的回归方程，如果$ y $与$ x $没有线性相关关系, 这种形式的回归方程就没有意义。因此需要考察$ y $与$ x $间是否确有线性相关关系，这就是回归效果的检验问题。
@@ -186,7 +186,7 @@ $A_i,B_j$的效应分别为
 \]
 $\hat b$满足 
 \[
-	\hat b\sim\Norm\biggkh{b,\frac{\sigma^2}{L_{xx}}},\quad L_{xx}:=\sum_{i=1}^n(x_i-\avg x)^2.
+	\hat b\sim\Norm\biggp{b,\frac{\sigma^2}{L_{xx}}},\quad L_{xx}:=\sum_{i=1}^n(x_i-\avg x)^2.
 \]
 如果原假设成立，
 \[

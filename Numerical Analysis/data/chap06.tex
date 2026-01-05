@@ -145,7 +145,7 @@
 \begin{proof}
     由$e^{(k)}=Be^{(k-1)}=B(e^{(k-1)}-e^{(k)})+Be^{(k)}$，故
     \[
-        \norm{e^{(k)}}\leq\norm{B(e^{(k-1)}-e^{(k)})}+\norm{Be^{(k)}}\leq\norm B\Bigkh{\norm{e^{(k-1)}-e^{(k)}}+\norm{e^{(k)}}},
+        \norm{e^{(k)}}\leq\norm{B(e^{(k-1)}-e^{(k)})}+\norm{Be^{(k)}}\leq\norm B\Bigp{\norm{e^{(k-1)}-e^{(k)}}+\norm{e^{(k)}}},
     \]
     移项即得第一个不等号；又$e^{(k)}-e^{(k-1)}=B(e^{(k-1)}-e^{(k-2)})$可得 
     \[
@@ -256,7 +256,7 @@
     {Jacobi迭代法}{Jacobi iterative method}
     预处理矩阵$M=D$，迭代矩阵$B_\text J=-D\iv(L+U)$，迭代的分量形式为：
     \begin{equation}
-        x_{i+1}^{(k)}=\frac1{a_{kk}}\biggkh{b_k-\sum_{j\neq k}a_{kj}x_i^{(j)}}.
+        x_{i+1}^{(k)}=\frac1{a_{kk}}\biggp{b_k-\sum_{j\neq k}a_{kj}x_i^{(j)}}.
     \end{equation}
 \end{example}
 
@@ -264,7 +264,7 @@
     {Gauss-Seidel迭代法}{GS iterative method}
     预处理矩阵$M=D+L$，迭代矩阵$B_\text G=-(D+L)\iv U$，迭代的分量形式为：
     \begin{equation}
-        x_{i+1}^{(k)}=\frac1{a_{kk}}\biggkh{b_k-\sum_{j=1}^{k-1}a_{kj}x_{i+1}^{(j)}-\sum_{j=k+1}^na_{kj}x_i^{(j)}}.
+        x_{i+1}^{(k)}=\frac1{a_{kk}}\biggp{b_k-\sum_{j=1}^{k-1}a_{kj}x_{i+1}^{(j)}-\sum_{j=k+1}^na_{kj}x_i^{(j)}}.
     \end{equation}
 \end{example}
 
@@ -303,7 +303,7 @@
     {逐次超松弛迭代}{successive overrelaxation iterative method}
     预处理矩阵$M=D/\omega+L$，迭代矩阵$L_\omega=(D+\omega L)\iv[(1-\omega)D-\omega U]$，
     \begin{equation}
-        x_{i+1}^{(k)}=(1-\omega)x_i^{(k)}+\frac\omega{a_{kk}}\biggkh{b_k-\sum_{j=1}^{k-1}a_{kj}x_{i+1}^{(j)}-\sum_{j=k+1}^na_{kj}x_i^{(j)}}.
+        x_{i+1}^{(k)}=(1-\omega)x_i^{(k)}+\frac\omega{a_{kk}}\biggp{b_k-\sum_{j=1}^{k-1}a_{kj}x_{i+1}^{(j)}-\sum_{j=k+1}^na_{kj}x_i^{(j)}}.
     \end{equation}
     称为逐次超松弛迭代法(successive overrelaxation, SOR)，其中$\omega$称为松弛因子。
 \end{example}
@@ -565,7 +565,7 @@
     记误差$e^{(k)}:=x^{(k)}-x^*$，则误差的$A$ - 范数满足
     \begin{equation}
         \label{eqn:SDM e^k}
-        \norm{e^{(k)}}_A\leq\biggkh{\frac{\cond_2(A)-1}{\cond_2(A)+1}}^k\norm{e^{(0)}}_A.
+        \norm{e^{(k)}}_A\leq\biggp{\frac{\cond_2(A)-1}{\cond_2(A)+1}}^k\norm{e^{(0)}}_A.
     \end{equation}
 \end{theorem}
 
@@ -585,7 +585,7 @@
     则$\forall x$且$\norm x=1$，
     \begin{align*}
         \frac{\norm x_A^2\norm x_{A\iv}^2}{\norm x^4}&=\frac{\inp{Ax}x\inp{A\iv x}x}{\inp xx^2}=\sum_i\lambda_ix_i^2\sum_i\frac1{\lambda_i}x_i^2\\
-        &\leq\sum_i\lambda_ix_i^2\biggkh{\frac1{\lambda\mini}+\frac1{\lambda\maxi}-\frac1{\lambda\mini\lambda\maxi}\sum_i\lambda_ix_i^2}\leq\frac{(\lambda\maxi+\lambda\mini)^2}{4\lambda\maxi\lambda\mini}.
+        &\leq\sum_i\lambda_ix_i^2\biggp{\frac1{\lambda\mini}+\frac1{\lambda\maxi}-\frac1{\lambda\mini\lambda\maxi}\sum_i\lambda_ix_i^2}\leq\frac{(\lambda\maxi+\lambda\mini)^2}{4\lambda\maxi\lambda\mini}.
     \end{align*}
     由$A$对称，$\cond_2(A)=\abs{\lambda\maxi}/\abs{\lambda\mini}$，由$A$正定，$\lambda\mini>0$。
 \end{proof}
@@ -597,8 +597,8 @@
         =\norm{e^{(k)}}_A^2+\alpha_k^2\norm{r^{(k)}}_A^2+2\alpha_k\inp{e^{(k)}}{r^{(k)}}_A\\
         &=\norm{e^{(k)}}_A^2+\alpha_k^2\norm{r^{(k)}}_A^2-2\alpha_k\norm{r^{(k)}}^2=
         \norm{e^{(k)}}_A^2-\frac{\norm{r^{(k)}}^4}{\norm{r^{(k)}}_A^2}\\
-        &=\norm{e^{(k)}}_A^2\biggkh{1-\frac{\norm{r^{(k)}}^4}{\norm{r^{(k)}}_A^2\norm{r^{(k)}}_{A\iv}^2}}\leq\norm{e^{(k)}}_A^2\biggkh{1-\frac{4\cond_2(A)}{(\cond_2(A)+1)^2}}\\
-        &=\norm{e^{(k)}}_A^2\biggkh{\frac{\cond_2(A)-1}{\cond_2(A)+1}}^2.
+        &=\norm{e^{(k)}}_A^2\biggp{1-\frac{\norm{r^{(k)}}^4}{\norm{r^{(k)}}_A^2\norm{r^{(k)}}_{A\iv}^2}}\leq\norm{e^{(k)}}_A^2\biggp{1-\frac{4\cond_2(A)}{(\cond_2(A)+1)^2}}\\
+        &=\norm{e^{(k)}}_A^2\biggp{\frac{\cond_2(A)-1}{\cond_2(A)+1}}^2.
     \end{align*}
     迭代即可得到。
 \end{proof}
@@ -649,7 +649,7 @@
 
     由此便分解成了两个极小问题：
     \[
-        \min_x\varphi(x)=\min_y\varphi(x^{(0)}+y)+\min_\alpha\biggfkh{-\alpha\inp{r^{(0)}}{p^{(k)}}+\frac{\alpha^2}2\norm{p^{(k)}}^2_A}
+        \min_x\varphi(x)=\min_y\varphi(x^{(0)}+y)+\min_\alpha\biggb{-\alpha\inp{r^{(0)}}{p^{(k)}}+\frac{\alpha^2}2\norm{p^{(k)}}^2_A}
     \]
     前者满足$x^{(0)}+y^*=x^{(k)}$，后者得到
     \begin{equation}
@@ -733,7 +733,7 @@
     误差$e^{(k)}:=x^{(k)}-x^*$的$A$ - 范数满足
     \begin{equation}
         \label{eqn:CG e^k}
-        \norm{e^{(k)}}_A\leq 2\biggkh{\frac{\sqrt{\cond_2(A)}-1}{\sqrt{\cond_2(A)}+1}}^k\norm{e^{(0)}}_A.
+        \norm{e^{(k)}}_A\leq 2\biggp{\frac{\sqrt{\cond_2(A)}-1}{\sqrt{\cond_2(A)}+1}}^k\norm{e^{(0)}}_A.
     \end{equation}
     其中$\lambda\maxi,\lambda\mini$分别是对称正定算子$A$的最大最小特征值。
 \end{theorem}
@@ -741,15 +741,15 @@
 \begin{proof}
     记$\alpha=\lambda\mini/\lambda\maxi$，取
     \[
-        p_k^*(x)=\division{T_k\biggkh{\frac{2x-(1+\alpha)}{1-\alpha}}}{T_k\biggkh{-\frac{1+\alpha}{1-\alpha}}},
+        p_k^*(x)=\division{T_k\biggp{\frac{2x-(1+\alpha)}{1-\alpha}}}{T_k\biggp{-\frac{1+\alpha}{1-\alpha}}},
     \]
     其中$T_k$是Chebyshev多项式，由于$\abs t\geq 1$时，
     \[
-        T_k(t)=\frac12\biggfkh{\Bigkh{t+\sqrt{t^2-1}}^k+\Bigkh{t-\sqrt{t^2-1}}^k}\gtrapprox \frac12\Bigkh{\abs t+\sqrt{t^2-1}}^k.
+        T_k(t)=\frac12\biggb{\Bigp{t+\sqrt{t^2-1}}^k+\Bigp{t-\sqrt{t^2-1}}^k}\gtrapprox \frac12\Bigp{\abs t+\sqrt{t^2-1}}^k.
     \]
     则$\forall x\in(\alpha,1)$，
     \[
-        \norm{p_k^*}_\infty=\division{1}{T_k\biggkh{-\frac{1+\alpha}{1-\alpha}}}\leq 2\biggkh{\frac{1+\alpha}{1-\alpha}-\sqrt{\Bigkh{\frac{1+\alpha}{1-\alpha}}^2-1}}^k=2\biggkh{\frac{1-\sqrt\alpha}{1+\sqrt\alpha}}^k.
+        \norm{p_k^*}_\infty=\division{1}{T_k\biggp{-\frac{1+\alpha}{1-\alpha}}}\leq 2\biggp{\frac{1+\alpha}{1-\alpha}-\sqrt{\Bigp{\frac{1+\alpha}{1-\alpha}}^2-1}}^k=2\biggp{\frac{1-\sqrt\alpha}{1+\sqrt\alpha}}^k.
         \qedhere
     \]
 \end{proof}

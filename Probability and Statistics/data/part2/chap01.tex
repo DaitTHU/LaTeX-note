@@ -38,7 +38,7 @@
 	\]
 	$k$阶中心矩
 	\[
-		m_k:=\frac1n\sum_{i=1}^n(X_i-\avg X)^k\pto\E\bigfkh{(X-\mu)^k},
+		m_k:=\frac1n\sum_{i=1}^n(X_i-\avg X)^k\pto\E\bigb{(X-\mu)^k},
 	\]
 \end{definition}
 矩估计就是认为总体矩$\doteq$样本矩，从而得到参数的估计。
@@ -91,7 +91,7 @@
 \begin{example}{正态分布的MLE}{MLE of Normal distribution}
 	iid $X_i\sim\Norm(\mu,\sigma^2)$，$\mu,\sigma^2$未知，则其似然函数为
 	\[
-		L(\mu,\sigma^2)=\prod_{i=1}^n\fkh{\frac1{\sqrt{2\pi}\sigma}\exp\kh{-\frac{(X_i-\mu)^2}{2\sigma^2}}}
+		L(\mu,\sigma^2)=\prod_{i=1}^n\biggb{\frac1{\sqrt{2\pi}\sigma}\exp\Bigp{-\frac{(X_i-\mu)^2}{2\sigma^2}}}
 	\]
 	要求$L$的最大值点，可对$L$求导，然而更方便的做法是求对数似然：
 	\[
@@ -113,7 +113,7 @@
 \begin{remark}
 	MLE具有不变性：
 	\begin{equation}
-		\bigkh{g(\theta)}^\ast=g(\theta^\ast).
+		\bigp{g(\theta)}^\ast=g(\theta^\ast).
 	\end{equation}
 \end{remark}
 \begin{example}{均匀分布的MLE}{MLE of Uniform distribution}
@@ -229,23 +229,23 @@ $\hat g(X_1,\ldots,X_n)$是$g(\theta)$的无偏估计当
 	\end{subequations}
 	样本方差
 	\[
-		S^2=\frac1{n-1}\sum_{i=1}^n(X_i-\avg X)^2=\frac1{n-1}\kh{\sum_{i=1}^nX_i^2-n\avg X^2}
+		S^2=\frac1{n-1}\sum_{i=1}^n(X_i-\avg X)^2=\frac1{n-1}\biggp{\sum_{i=1}^nX_i^2-n\avg X^2}
 	\]
 	的期望
 	\begin{equation}
 		\label{eqn:E(S2)}
-		\E(S^2)=\frac1{n-1}\fkh{\sum_{i=1}^n\E(X_i^2)-n\E(\avg X^2)}=\frac n{n-1}\fkh{\sigma^2+\mu^2-\kh{\frac{\sigma^2}n+\mu^2}}=\sigma^2.
+		\E(S^2)=\frac1{n-1}\biggb{\sum_{i=1}^n\E(X_i^2)-n\E(\avg X^2)}=\frac n{n-1}\biggb{\sigma^2+\mu^2-\Bigp{\frac{\sigma^2}n+\mu^2}}=\sigma^2.
 	\end{equation}
-	样本方差$S^2$的方差与样本分布的峰度系数$\nu_4=\E\bigfkh{(X_i-\mu)^4/\sigma^4}$有关，
+	样本方差$S^2$的方差与样本分布的峰度系数$\nu_4=\E\bigb{(X_i-\mu)^4/\sigma^4}$有关，
 	记$Y_i:=X_i-\mu$，
 	\begin{align*}
-		(n-1)^2\E(S^4)&=\E\biggfkh{\biggkh{\sum_{i=1}^nY_i^2}^2}-2n\sum_{i=1}^n\E(Y_i^2\avg Y^2)+n^2\E(\avg Y^4)\\
-		&=\biggfkh{n\nu_4+n(n-1)-2n\cdot\frac{\nu_4+(n-1)}n+n^2\cdot\frac{\nu_4+3(n-1)}{n^3}}\sigma^4.
+		(n-1)^2\E(S^4)&=\E\biggb{\biggp{\sum_{i=1}^nY_i^2}^2}-2n\sum_{i=1}^n\E(Y_i^2\avg Y^2)+n^2\E(\avg Y^4)\\
+		&=\biggb{n\nu_4+n(n-1)-2n\cdot\frac{\nu_4+(n-1)}n+n^2\cdot\frac{\nu_4+3(n-1)}{n^3}}\sigma^4.
 	\end{align*}
 	由此
 	\begin{equation}
 		\label{eqn:Var(S2)}
-		\Var(S^2)=\biggfkh{\frac{\nu_4}n-\frac{n-3}{n(n-1)}}\sigma^4.
+		\Var(S^2)=\biggb{\frac{\nu_4}n-\frac{n-3}{n(n-1)}}\sigma^4.
 	\end{equation}
 	比如正态分布的峰度系数$\nu_4=3$，$\Var(S^2)=2\sigma^4/(n-1)$。
 	% 特别地，正态分布的$\Var(S^2)$也可以通过$(n-1)S^2/\sigma^2\sim\chi^2(n-1)$来方便计算。
@@ -283,13 +283,13 @@ $\hat g(X_1,\ldots,X_n)$是$g(\theta)$的无偏估计当
 	令$Y:=\min(X_1,\ldots,X_n),\enspace Z=\max(X_1,\ldots,X_n)$，则由\eqref{eqn:min-max distribution}可得PDF
 	\begin{subequations}
 		\begin{align}
-			f_Y(y)&=\dd y\biggkh{1-\frac y\theta}^n=\frac n\theta\biggkh{1-\frac y\theta}^{n-1},\\
-			f_Z(z)&=\dd z\biggkh{\frac z\theta}^n=\frac n\theta\biggkh{\frac z\theta}^{n-1}.
+			f_Y(y)&=\dd y\biggp{1-\frac y\theta}^n=\frac n\theta\biggp{1-\frac y\theta}^{n-1},\\
+			f_Z(z)&=\dd z\biggp{\frac z\theta}^n=\frac n\theta\biggp{\frac z\theta}^{n-1}.
 		\end{align}
 	\end{subequations}
 	继而
 	\begin{align*}
-		\E(Y^2)&=\frac n\theta\int_0^\theta y^2\biggkh{1-\frac y\theta}^{n-1}\d y=\frac{2\theta^2}{(n+1)(n+2)},\\
+		\E(Y^2)&=\frac n\theta\int_0^\theta y^2\biggp{1-\frac y\theta}^{n-1}\d y=\frac{2\theta^2}{(n+1)(n+2)},\\
 		\E(Z^2)&=\frac n{\theta^n}\int_0^\theta y^{n+1}\d y=\frac{n\theta^2}{n+2}.
 	\end{align*}
 	可得 
@@ -299,7 +299,7 @@ $\hat g(X_1,\ldots,X_n)$是$g(\theta)$的无偏估计当
 	因此
 	\begin{align*}
 		\Var(\hat\theta_4)&=(n+1)^2\Var(Y)=\frac{n\theta^2}{n+2};\\
-		\Var(\hat\theta_1)&=\biggkh{\frac{n+1}n}^2\Var(Z)=\frac{\theta^2}{n(n+2)}.
+		\Var(\hat\theta_1)&=\biggp{\frac{n+1}n}^2\Var(Z)=\frac{\theta^2}{n(n+2)}.
 	\end{align*}
 	最后求$\Var(\hat\theta_2)=\Var(Y+Z)$，这需要知道$Y,Z$的联合分布，由\eqref{eqn:min-max joint distribution}，
 	\begin{equation}
@@ -307,7 +307,7 @@ $\hat g(X_1,\ldots,X_n)$是$g(\theta)$的无偏估计当
 	\end{equation}
 	则
 	\[
-		\E(YZ)=\int_0^\theta\int_y^\theta yzf_{Y,Z}(y,z)\d z\d y=\frac1{\theta^n}\int_0^\theta y\Bigfkh{\Bigkh{(n-1)z+y}(z-y)^{n-1}}_y^\theta\d y=\frac{\theta^2}{n+2}.
+		\E(YZ)=\int_0^\theta\int_y^\theta yzf_{Y,Z}(y,z)\d z\d y=\frac1{\theta^n}\int_0^\theta y\Bigb{\Bigp{(n-1)z+y}(z-y)^{n-1}}_y^\theta\d y=\frac{\theta^2}{n+2}.
 	\]
 	故
 	\begin{equation}
@@ -324,7 +324,7 @@ $\hat g(X_1,\ldots,X_n)$是$g(\theta)$的无偏估计当
 \begin{definition}{均方误差}{mean square error}
 	定义均方误差(mean square error, MSE)\index{MES, 均方误差}
 	\begin{equation}
-		\E\bigfkh{(\hat\theta-\theta)^2}=\Var(\hat\theta)+\E^2(\hat\theta-\theta).
+		\E\bigb{(\hat\theta-\theta)^2}=\Var(\hat\theta)+\E^2(\hat\theta-\theta).
 	\end{equation}
 	由两部分构成，$\Var(\hat\theta)$称为精确度(precision)，$\E^2(\hat\theta-\theta)$代表准确度(accuracy)。后者在无偏估计中为0。
 \end{definition}
@@ -349,29 +349,29 @@ $\hat g(X_1,\ldots,X_n)$是$g(\theta)$的无偏估计当
 	总体$X\sim\Norm(\mu,\sigma^2)$，样本方差$S^2$是无偏的，而样本二阶矩$m_2$是有偏的，
 	但MSE
 	\[
-		\E\bigfkh{(m_2-\sigma^2)^2}<\E\bigfkh{(S^2-\sigma^2)^2}.
+		\E\bigb{(m_2-\sigma^2)^2}<\E\bigb{(S^2-\sigma^2)^2}.
 	\]
 	由于正态分布的样本方差满足$(n-1)S^2/\sigma^2\sim\chi^2(n-1)$，故
 	\begin{equation}
-		\E\bigfkh{(S^2-\sigma^2)^2}=\Var(S^2)+0=\biggkh{\frac{\sigma^2}{n-1}}^2\cdot 2(n-1)=\frac{2}{n-1}\sigma^4.
+		\E\bigb{(S^2-\sigma^2)^2}=\Var(S^2)+0=\biggp{\frac{\sigma^2}{n-1}}^2\cdot 2(n-1)=\frac{2}{n-1}\sigma^4.
 	\end{equation}
 	可得
 	\[
-		\E\bigfkh{(m_2-\sigma^2)^2}=\biggkh{\frac{\sigma^2}{n}}^2\cdot 2(n-1)+\biggkh{\frac{n-1}n-1}^2\sigma^4=\frac{2n-1}{n^2}\sigma^4<\frac{2}{n-1}\sigma^4.
+		\E\bigb{(m_2-\sigma^2)^2}=\biggp{\frac{\sigma^2}{n}}^2\cdot 2(n-1)+\biggp{\frac{n-1}n-1}^2\sigma^4=\frac{2n-1}{n^2}\sigma^4<\frac{2}{n-1}\sigma^4.
 	\]
 	\tcblower
 	一般地，由\exmref{exm:unbiased estimation of Uniform distribution}，
 	\begin{align*}
-		\E\bigfkh{(S^2-\sigma^2)^2}&=\frac{(\nu_4-1)n+3-\nu_4}{n(n-1)}\sigma^4,\\
-		\E\bigfkh{(m_2-\sigma^2)^2}&=\frac{(\nu_4-1)n^2+(5-2\nu_4)n+\nu_4-3}{n^3}\sigma^4.
+		\E\bigb{(S^2-\sigma^2)^2}&=\frac{(\nu_4-1)n+3-\nu_4}{n(n-1)}\sigma^4,\\
+		\E\bigb{(m_2-\sigma^2)^2}&=\frac{(\nu_4-1)n^2+(5-2\nu_4)n+\nu_4-3}{n^3}\sigma^4.
 	\end{align*}
 	二者的差
 	\[
-		\E\bigfkh{(S^2-\sigma^2)^2}-\E\bigfkh{(m_2-\sigma^2)^2}
+		\E\bigb{(S^2-\sigma^2)^2}-\E\bigb{(m_2-\sigma^2)^2}
 		% =\frac{(3-2\nu_4)n^2+(3\nu_4-8)n+3-\nu_4}{n^3(n-1)}.
 		=\frac{(2n^2-3n+1)\nu_4-(3n^2-8n+3)}{n^3(n-1)}\sigma^4.
 	\]
-	可证当峰度系数$\nu_4\geqslant 3/2$时，均有$\E\bigfkh{(S^2-\sigma^2)^2}>\E\bigfkh{(m_2-\sigma^2)^2}$。
+	可证当峰度系数$\nu_4\geqslant 3/2$时，均有$\E\bigb{(S^2-\sigma^2)^2}>\E\bigb{(m_2-\sigma^2)^2}$。
 \end{example}
 
 \section{大样本性质}
@@ -453,7 +453,7 @@ Fisher信息量与样本容量有关：
 	\]
 	CLT说明，$\avg Y$是渐进正态的，故分子
 	\[
-		\frac1{\sqrt n}\ell'(\theta)=\sqrt n\,\avg Y\dto\Norm\bigkh{0,I(\theta)}.
+		\frac1{\sqrt n}\ell'(\theta)=\sqrt n\,\avg Y\dto\Norm\bigp{0,I(\theta)}.
 	\]
 	分母
 	\[
@@ -462,7 +462,7 @@ Fisher信息量与样本容量有关：
 
 	故$\theta^\ast-\theta$是渐进正态的：
 	\[
-		\sqrt n(\theta^\ast-\theta)\dto\Norm\kh{0,\frac1{I(\theta)}}.
+		\sqrt n(\theta^\ast-\theta)\dto\Norm\Bigp{0,\frac1{I(\theta)}}.
 	\]
 	式\eqref{MLE-dto-N01}中的 
 	\[
@@ -521,12 +521,12 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\]
 	取对称的上下限
 	\[
-		\P\kh{\abs Z\geqslant z_{\alpha/2}}=\alpha\implies\Phi(z_{\alpha/2})=1-\alpha/2
+		\P(\abs Z\geqslant z_{\alpha/2})=\alpha\implies\Phi(z_{\alpha/2})=1-\alpha/2
 	\]
 	其中$z_{\alpha/2}$是$\Norm(0,1)$的上$\alpha/2$分位数。
 	故$\mu$的$(1-\alpha)$置信区间为
 	\begin{equation}
-		\kh{\avg X\pm z_{\alpha/2}\frac\sigma{\sqrt n}}.
+		\Bigp{\avg X\pm z_{\alpha/2}\frac\sigma{\sqrt n}}.
 	\end{equation}
 	%若$\alpha=0.05$，则$z_{0.025}=1.96$
 	%若要求误差不超过$\varepsilon$，则
@@ -538,21 +538,21 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\]
 	卡方分布并不对称，我们选择等尾置信区间，即
 	\[
-		\P\bigkh{\chi^2<\chi_{\alpha/2}^2(n-1)}=\P\bigkh{\chi^2>\chi_{1-\alpha/2}^2(n-1)}=\frac\alpha{2},
+		\P\bigp{\chi^2<\chi_{\alpha/2}^2(n-1)}=\P\bigp{\chi^2>\chi_{1-\alpha/2}^2(n-1)}=\frac\alpha{2},
 	\]
 	$\sigma^2$的$(1-\alpha)$置信区间为
 	\begin{equation}
-		\kh{\frac{(n-1)S^2}{\chi_{\alpha/2}^2(n-1)},\frac{(n-1)S^2}{\chi_{1-\alpha/2}^2(n-1)}};
+		\biggp{\frac{(n-1)S^2}{\chi_{\alpha/2}^2(n-1)},\frac{(n-1)S^2}{\chi_{1-\alpha/2}^2(n-1)}};
 	\end{equation}
 
 	对$\mu$的估计，由式\eqref{sample-t}
 	\[
 		t:=\frac{\avg X-\mu}{S/\sqrt n}\sim\mathrm t(n-1).
 	\]
-	%\P\bigkh{\abs G\geqslant t_{\alpha/2}(n-1)}=\alpha.
+	%\P\bigp{\abs G\geqslant t_{\alpha/2}(n-1)}=\alpha.
 	可得$\mu$的$(1-\alpha)$置信区间为
 	\begin{equation}
-		\kh{\avg X\pm t_{\alpha/2}(n-1)\frac{S}{\sqrt n}}.
+		\biggp{\avg X\pm t_{\alpha/2}(n-1)\frac{S}{\sqrt n}}.
 	\end{equation}
 	\begin{center}
 		\captionof{table}{区间估计}
@@ -560,8 +560,8 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 			\toprule
 			条件&估计&枢轴量&置信区间\\
 			\midrule
-			$\sigma^2$已知&$\mu$&$\frac{\avg X-\mu}{\sigma/\sqrt n}$&$\kh{\avg X\pm z_{\alpha/2}\frac\sigma{\sqrt n}}$\\[2ex]
-			$\sigma^2$未知&$\mu$&$\frac{\avg X-\mu}{S/\sqrt n}$&$\kh{\avg X\pm t_{\alpha/2}(n-1)\frac S{\sqrt n}}$\\[2ex]
+			$\sigma^2$已知&$\mu$&$\frac{\avg X-\mu}{\sigma/\sqrt n}$&$\Bigp{\avg X\pm z_{\alpha/2}\frac\sigma{\sqrt n}}$\\[2ex]
+			$\sigma^2$未知&$\mu$&$\frac{\avg X-\mu}{S/\sqrt n}$&$\biggp{\avg X\pm t_{\alpha/2}(n-1)\frac S{\sqrt n}}$\\[2ex]
 			$\mu$未知&$\sigma^2$&$\frac{(n-1)S^2}{\sigma^2}$&$\biggl(\frac{(n-1)S^2}{\chi_{\alpha/2}^2(n-1)},\frac{(n-1)S^2}{\chi_{1-\alpha/2}^2(n-1)}\biggr)$\\
 			\bottomrule
 		\end{tabular}
@@ -574,7 +574,7 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 \begin{example}{两个正态总体}{}
 	$X\sim\Norm(\mu_1,\sigma^2),Y\sim\Norm(\mu_2,\sigma^2)$独立，$\mu_1,\mu_2,\sigma^2$未知，估计$\mu_1-\mu_2$
 	\begin{align*}
-		\avg X-\mu_1-(\avg Y-\mu_2)&\sim\Norm\Bigkh{0,\frac{\sigma^2}{n_1}+\frac{\sigma^2}{n_2}};\\
+		\avg X-\mu_1-(\avg Y-\mu_2)&\sim\Norm\Bigp{0,\frac{\sigma^2}{n_1}+\frac{\sigma^2}{n_2}};\\
 		\frac{(n_1-1)S_1^2}{\sigma^2}+\frac{(n_2-1)S_2^2}{\sigma^2}&\sim\chi^2(n_1+n_2-2).
 	\end{align*}
 	利用t分布的定义，构造枢轴变量：
@@ -587,7 +587,7 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\]
 	$\mu_1-\mu_2$的$(1-\alpha)$置信区间为
 	\[
-		\kh{\avg X-\avg Y\pm t_{\alpha/2}(n_1+n_2-2)S_w\sqrt{\frac1{n_1}+\frac1{n_2}}}
+		\biggp{\avg X-\avg Y\pm t_{\alpha/2}(n_1+n_2-2)S_w\sqrt{\frac1{n_1}+\frac1{n_2}}}
 	\]
 \end{example}
 \paragraph{大样本方法}
@@ -646,7 +646,7 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\]
 	Fisher信息量
 	\[
-		I(p)=\E\biggfkh{\biggkh{\frac{X_i-p}{p(1-p)}}^2}=\frac1{p(1-p)}.
+		I(p)=\E\biggb{\biggp{\frac{X_i-p}{p(1-p)}}^2}=\frac1{p(1-p)}.
 	\]
 	则
 	\[

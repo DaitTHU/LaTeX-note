@@ -31,7 +31,7 @@
 \begin{proof}
 	由Markov不等式
 	\[
-		\P\bigfkh{\bigkh{X-\E(X)}^2\geqslant\varepsilon^2}\leqslant\frac{\E\bigfkh{\bigkh{X-\E(X)}^2}}{\varepsilon^2}\equiv\frac{\Var(X)}{\varepsilon^2}.
+		\P\bigb{\bigp{X-\E(X)}^2\geqslant\varepsilon^2}\leqslant\frac{\E\bigb{\bigp{X-\E(X)}^2}}{\varepsilon^2}\equiv\frac{\Var(X)}{\varepsilon^2}.
 		\qedhere
 	\]
 \end{proof}
@@ -78,8 +78,8 @@
 \begin{proof}
 	利用示性函数$1\equiv 1(X\in A)+1(X\in A\c)$：
 	\begin{align*}
-		\E(X)&=\E\bigfkh{X1\bigkh{X\leqslant\lambda\E(X)}}+\E\bigfkh{X1\bigkh{X>\lambda\E(X)}}\\
-		&\leqslant\lambda\E(X)+\sqrt{\E(X^2)\P\bigkh{X>\lambda\E(X)}}
+		\E(X)&=\E\bigb{X1\bigp{X\leqslant\lambda\E(X)}}+\E\bigb{X1\bigp{X>\lambda\E(X)}}\\
+		&\leqslant\lambda\E(X)+\sqrt{\E(X^2)\P\bigp{X>\lambda\E(X)}}
 	\end{align*}
 	前者是自然的，后者是Cauchy–Schwarz不等式。移项即得。
 \end{proof}
@@ -136,7 +136,7 @@
 \begin{definition}{以概率1收敛}{converge almost surely}
 	若随机变量序列$X_1,X_2,\ldots$极限存在，且
 	\begin{equation}
-		\P\kh{\lim_{n\to\infty}X_n=X}=1,
+		\P\Bigp{\lim_{n\to\infty}X_n=X}=1,
 	\end{equation}
 	则称序列$X_n$以概率1收敛(converge almost surely)于$X$，记作
 	\begin{equation}
@@ -205,9 +205,9 @@
 \begin{proof}
 	标准正态分布的CF $\psi(t)=\e{-t^2/2}$，%不失一般性(without loss of generality, WLOG)，
 	\begin{align*}
-		\psi_{Z_n}(t)&=\fkh{\psi_{X_i-\mu}\biggkh{\frac{t}{\sqrt n\sigma}}}^n\\
-		&=\fkh{1+0+\frac12\psi''_{X_i-\mu}(0)\cdot\biggkh{\frac{t}{\sqrt n\sigma}}^2+o\biggkh{\frac{t^2}n}}^n\\
-		&=\fkh{1-\frac{t^2}{2n}+o\biggkh{\frac{t^2}n}}^n\to\e{-t^2/2}.
+		\psi_{Z_n}(t)&=\biggb{\psi_{X_i-\mu}\biggp{\frac{t}{\sqrt n\sigma}}}^n\\
+		&=\biggp{1+0+\frac12\psi''_{X_i-\mu}(0)\cdot\biggp{\frac{t}{\sqrt n\sigma}}^2+o\biggp{\frac{t^2}n}}^n\\
+		&=\biggp{1-\frac{t^2}{2n}+o\biggp{\frac{t^2}n}}^n\to\e{-t^2/2}.
 		\qedhere
 	\end{align*}
 \end{proof}
@@ -217,9 +217,9 @@
 \end{corollary}
 
 \begin{example}{DeMoivre-Laplace中心极限定理}{DeMoivre-Laplace CLT}
-	特别地，当$X_i\sim\Bino(p)$时，二项分布$Y_n:=X_1+\cdots+X_n\sim\Bino(n,p)$依分布收敛于正态分布$\Norm\bigkh{np,np(1-p)}$
+	特别地，当$X_i\sim\Bino(p)$时，二项分布$Y_n:=X_1+\cdots+X_n\sim\Bino(n,p)$依分布收敛于正态分布$\Norm\bigp{np,np(1-p)}$
 	\[
-		\P\kh{Y\leqslant t}\doteq\Phi\kh{\frac{t-np}{\sqrt{np(1-p)}}}.
+		\P(Y\leqslant t)\doteq\Phi\biggp{\frac{t-np}{\sqrt{np(1-p)}}}.
 	\]
 	\begin{center}
 		\includegraphics[width=0.9\linewidth]{figures/CLT_bin.pdf}
@@ -228,7 +228,7 @@
 	\end{center}
 	因为正态分布是连续的，对上式进行连续性修正
 	\[
-		\P(t_1\leqslant Y\leqslant t_2)\doteq\Phi\kh{\frac{t_2-np+1/2}{\sqrt{np(1-p)}}}-\Phi\kh{\frac{t_1-np-1/2}{\sqrt{np(1-p)}}}.
+		\P(t_1\leqslant Y\leqslant t_2)\doteq\Phi\biggp{\frac{t_2-np+1/2}{\sqrt{np(1-p)}}}-\Phi\biggp{\frac{t_1-np-1/2}{\sqrt{np(1-p)}}}.
 	\]
 	这称为DeMoivre-Laplace CLT。
 \end{example}
@@ -239,11 +239,11 @@
 	\]
 	要求精度$\varepsilon=0.03$，置信度为95\% ($\alpha=0.05$)，CLT给出
 	\[
-		\P(|P_n-p|\geqslant\varepsilon)\doteq 2\fkh{1-\Phi\kh{\frac\varepsilon{\sqrt{p(1-p)/n}}}}\leqslant\alpha
+		\P(|P_n-p|\geqslant\varepsilon)\doteq 2\biggb{1-\Phi\biggp{\frac\varepsilon{\sqrt{p(1-p)/n}}}}\leqslant\alpha
 	\]
 	当$p=1/2$时$n_{\mathrm{min}}$最大：
 	\[
-		n_{\mathrm{min}}=\biggkh{\frac{z_{1-\alpha/2}}{2\varepsilon}}^2\doteq 1067.11.
+		n_{\mathrm{min}}=\biggp{\frac{z_{1-\alpha/2}}{2\varepsilon}}^2\doteq 1067.11.
 	\]%1.96
 	与$N$无关。
 	这说明只需要调查一千多人，就可以以95\%的置信度估计选民支持度$p$在$P_n\pm 0.03$的范围内。
@@ -255,7 +255,7 @@
 	\]
 	若存在$\delta>0$满足Lyapunov条件：
 	\[
-		\lim_{n\to\infty}\frac1{B_n^{2+\delta}}\sum_{k=1}^n\E\bigkh{|X_k-\mu_k|}=0.
+		\lim_{n\to\infty}\frac1{B_n^{2+\delta}}\sum_{k=1}^n\E\bigp{|X_k-\mu_k|}=0.
 	\]
 	则随机变量之和的标准化变量依分布收敛于标准正态分布：
 	\begin{equation}
@@ -265,7 +265,7 @@
 \end{theorem}
 这说明，当$N$很大时，
 \begin{equation}
-	\sum_{i=1}^nX_i\dotsim\Norm\kh{\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma^2_i}.
+	\sum_{i=1}^nX_i\dotsim\Norm\biggp{\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2}.
 \end{equation}
 
 \begin{theorem}{Markov中心极限定理}{Markov CLT}

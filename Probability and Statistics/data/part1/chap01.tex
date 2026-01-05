@@ -70,7 +70,7 @@
 	{de Morgan定律}{de Morgan's laws}
 	对于事件集$\{A_i\}_{i\in I}$，其中指标集$I$可以有限或无限，有恒等式：
 	\[
-		\kh{\bigcup\nolimits_{i\in I} A_i}\c = \bigcap\nolimits_{i\in I} A_i\c.
+		\Bigp{\bigcup\nolimits_{i\in I} A_i}\c = \bigcap\nolimits_{i\in I} A_i\c.
 	\]
 \end{theorem}
 
@@ -116,7 +116,7 @@
 		\item $\P (\Omega)=1;$
 		\item 加法公理：若$\forall i,j\in I\,(i\neq j)$均有$A_i,A_j\in\cF$且$A_i\cup A_j=\varnothing$，则
 		\begin{equation}
-			\P\kh{\bigcup\nolimits_{i\in I} A_i}=\sum\nolimits_{i\in I}\P(A_i).
+			\P\Bigp{\bigcup\nolimits_{i\in I} A_i}=\sum\nolimits_{i\in I}\P(A_i).
 		\end{equation}
 	\end{compactenum}
 	则称$\P$是概率(probability)函数，$(\Omega,\cF,\P)$构成了概率空间(probability space)。
@@ -129,7 +129,7 @@
 		\item 
 		% 若$A_i$两两互斥，即$\forall A_i \in \cF,A_iA_j=\varnothing\,(i\neq j)$，则
 		% \[
-		% 	\P\kh{\bigcup_{i=1}^n A_i}=\sum_{i=1}^n\P(A_i)
+		% 	\P\Bigp{\bigcup_{i=1}^n A_i}=\sum_{i=1}^n\P(A_i)
 		% \]
 		特别地，$\P(A)+\P(A\c)=1;$
 		\item $\forall A\subset B,\P(A)\leqslant\P(B);$
@@ -139,8 +139,8 @@
 \begin{theorem}{容斥恒等式}{inclusion and exclusion identities}
 	容斥恒等式(inclusion and exclusion identities)
 	\begin{align}\notag
-		\P\kh{\bigcup_{i=1}^nA_i}&=\sum_{i=1}^n\P(A_i)-\sum_{i<j}^n\P(A_i\cap A_j)+\cdots+\P\kh{\bigcap_{i=1}^nA_i}\\
-		&=\sum_{r=1}^n(-)^{r+1}\sum_{i_1<\cdots<i_r}\P\kh{\bigcap_{k=1}^rA_{i_k}}.
+		\P\Bigp{\bigcup\nolimits_{i=1}^nA_i}&=\sum_{i=1}^n\P(A_i)-\sum_{i<j}^n\P(A_i\cap A_j)+\cdots+\P\Bigp{\bigcap\nolimits_{i=1}^nA_i}\\
+		&=\sum_{r=1}^n(-)^{r+1}\sum_{i_1<\cdots<i_r}\P\Bigp{\bigcap\nolimits_{k=1}^rA_{i_k}}.
 	\end{align}
 \end{theorem}
 \begin{example}{乱序}{derangement}
@@ -152,19 +152,19 @@
 	\]
 	至少一个人拿到自己的帽子：
 	\begin{align*}
-		\P\kh{\bigcup_{i=1}^nA_i}&=\sum_{r=1}^n(-)^{r+1}\sum_{i_1<\cdots<i_r}\P\kh{\bigcap_{k=1}^rA_{i_k}}\\
+		\P\Bigp{\bigcup\nolimits_{i=1}^nA_i}&=\sum_{r=1}^n(-)^{r+1}\sum_{i_1<\cdots<i_r}\P\Bigp{\bigcap\nolimits_{k=1}^rA_{i_k}}\\
 		&=\sum_{r=1}^n(-)^{r+1}\binom nr\frac{(n-r)!}{n!}=\sum_{r=1}^n(-)^{r+1}\frac1{r!}\\
 		&=1-\frac1{2!}+\frac1{3!}+\cdots+(-)^{n+1}\frac1{n!}.
 	\end{align*}
 	故所求概率即
 	\[
-		\P\kh{\bigcap_{i=1}^nA_i\c}=1-1+\frac1{2!}-\frac1{3!}+\cdots+(-)^n\frac1{n!}\to\frac1{\e{}}.
+		\P\Bigp{\bigcap\nolimits_{i=1}^nA_i\c}=1-1+\frac1{2!}-\frac1{3!}+\cdots+(-)^n\frac1{n!}\to\frac1{\e{}}.
 	\]
 	\tcblower
 	这个问题称为乱序(derangement)问题，乱序数(subfactorial)记作
 	\begin{equation}
 		\label{eqn:subfactorial}
-		!n=n!\biggkh{1-1+\frac1{2!}-\frac1{3!}+\cdots+(-)^n\frac1{n!}}=\biggfkh{\frac{n!}e}=\floor{\frac{n!}e+1/2}.
+		!n=n!\biggp{1-1+\frac1{2!}-\frac1{3!}+\cdots+(-)^n\frac1{n!}}=\biggb{\frac{n!}e}=\floor{\frac{n!}e+1/2}.
 	\end{equation}
 	其中$[x]$表示最接近$x$的整数，$\floor x$表示向下取整。前几个乱序数见 \href{https://oeis.org/A000166}{OEIS.A000166}
 	\[

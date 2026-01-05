@@ -63,8 +63,8 @@ $\Pois(\lambda)$：$\Bino(n,\lambda/n)$当$n\to\infty$的极限
 		Distribution&$\E(X)$&$\Var(X)$\\
 		\midrule
 		$\Bino(n,p)$&$np$&$np(1-p)$\\[1ex]
-		$\mathrm{Pa}(r,p)$&$\frac rp$&$\frac rp\kh{\frac1p-1}$\\[2ex]
-		% $\mathrm{Ge}(p)$&$\frac1p$&$\frac1p\kh{\frac1p-1}$\\
+		$\mathrm{Pa}(r,p)$&$\frac rp$&$\frac rp\Bigp{\frac1p-1}$\\[2ex]
+		% $\mathrm{Ge}(p)$&$\frac1p$&$\frac1p\Bigp{\frac1p-1}$\\
 		$\mathrm H(n,N,M)$&$\frac{nM}N$&$\frac{n(N-n)M(N-M)}{N^2(N-1)}$\\[2ex]
 		$\mathrm{NH}(r,N,M)$&$\frac{r(N+1)}{M+1}$&$\frac{r(N+1)(N-M)(M-r+1)}{(M+1)^2(M+2)}$\\
 		$\Pois(\lambda)$&$\lambda$&$\lambda$\\
@@ -126,7 +126,7 @@ $X\sim\Bino(n,p)$可以视作$X_1,\ldots,X_n$ iid $\sim\Bino(p)$的和：$X=X_1+
 		Distribution&$\MGF(X)$&$\CF(X)$\\
 		\midrule
 		$\Bino(n,p)$&$(q+p\e t)^n$&$(q+p\e{\i t})^n$\\
-		$\mathrm{NB}(r,p)$&$\kh{\frac p{q+p\e{t}}}^r$&$\kh{\frac p{q+p\e{\i t}}}^r$\\
+		$\mathrm{NB}(r,p)$&$\Bigp{\frac p{q+p\e{t}}}^r$&$\Bigp{\frac p{q+p\e{\i t}}}^r$\\
 		$\mathrm H(n,N,M)$&-&-\\
 		$\Pois(\lambda)$&$\e{\lambda(\e t-1)}$&$\e{\lambda(\e{\i t}-1)}$\\
 		\bottomrule
@@ -146,7 +146,7 @@ $\Unif(a,b)$
 
 $\Norm(\mu,\sigma^2)$
 \begin{equation}
-	f(x)=\frac1{\sqrt{2\pi}\sigma}\exp\fkh{-\frac{(x-\mu)^2}{2\sigma^2}},\quad x\in\RR.
+	f(x)=\frac1{\sqrt{2\pi}\sigma}\exp\biggb{-\frac{(x-\mu)^2}{2\sigma^2}},\quad x\in\RR.
 \end{equation}
 
 \paragraph{指数分布}
@@ -232,7 +232,7 @@ $A:=$样本中含有$Y_j$
 \begin{subequations}
 	\begin{align}
 		\E(X_i)&=\sum_{j=1}^N\P(X_i=Y_j)Y_j=\frac1N\sum_{j=1}^NY_j=\mu;\\
-		\Var(X_i)&=\sum_{j=1}^N\P(X_i=Y_j)\bigkh{Y_j-\E(Y_j)}^2=\sigma^2.\\
+		\Var(X_i)&=\sum_{j=1}^N\P(X_i=Y_j)\bigp{Y_j-\E(Y_j)}^2=\sigma^2.\\
 		\E(\avg X)&=\frac1n\sum_{i=1}^n\E(X_i)=\mu.
 	\end{align}
 \end{subequations}
@@ -248,8 +248,8 @@ $B:=$样本中同时含有$Y_k,Y_\ell(k\neq\ell)$
 \end{align*}
 故
 \begin{align*}
-	\Var(\avg X)&=\frac1{n^2}\kh{\sum_{i=1}^n\Var(X_i)+\sum_{i\neq j}\Cov(X_i,X_j)}\\
-	&=\frac1{n^2}\kh{n\sigma^2-n(n-1)\cdot\frac{\sigma^2}{N-1}}=\frac{\sigma^2}n\frac{N-n}{N-1}.\\
-	\E(S^2)&=\frac n{n-1}\kh{\frac1n\sum_{i=1}^n\E(X_i^2)-\E(\avg X^2)}\\
-	&=\frac n{n-1}\fkh{\sigma^2+\mu^2-\kh{\frac{\sigma^2}n\frac{N-n}{N-1}+\mu^2}}=\frac{N\sigma^2}{N-1}.
+	\Var(\avg X)&=\frac1{n^2}\biggp{\sum_{i=1}^n\Var(X_i)+\sum_{i\neq j}\Cov(X_i,X_j)}\\
+	&=\frac1{n^2}\Bigp{n\sigma^2-n(n-1)\cdot\frac{\sigma^2}{N-1}}=\frac{\sigma^2}n\frac{N-n}{N-1}.\\
+	\E(S^2)&=\frac n{n-1}\biggp{\frac1n\sum_{i=1}^n\E(X_i^2)-\E(\avg X^2)}\\
+	&=\frac n{n-1}\biggb{\sigma^2+\mu^2-\Bigp{\frac{\sigma^2}n\frac{N-n}{N-1}+\mu^2}}=\frac{N\sigma^2}{N-1}.
 \end{align*}

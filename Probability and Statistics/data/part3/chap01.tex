@@ -16,21 +16,21 @@
 \begin{definition}{一维分布函数}{}
 	对随机过程$\set{X(t)}{t\in T}$，对每个固定的$t$
 	\begin{equation}
-		\CDF_X(x,t):=\P\bigkh{X(t)\leqslant x},\enspace x\in\RR,
+		\CDF_X(x,t):=\P\bigp{X(t)\leqslant x},\enspace x\in\RR,
 	\end{equation}
 	称为随机过程的一维分布函数，$\set{\CDF_X(x,t)}{t\in T}$称为一维分布函数族。
 \end{definition}
 类似地，可以推广定义$n$维分布函数（族）。有限维分布函数可以完全确定随机过程的统计特性。
 \begin{definition}{随机过程的数字特征}{}
-	均值函数$\mu_X(t):=\E\bigkh{X(t)}$，
-	均方值函数$\Psi^2_X(t):=\E\bigkh{X^2(t)}$
+	均值函数$\mu_X(t):=\E\bigp{X(t)}$，
+	均方值函数$\Psi^2_X(t):=\E\bigp{X^2(t)}$
 
-	方差函数$\sigma_X^2(t):=\Var\bigkh{X(t)}$，
+	方差函数$\sigma_X^2(t):=\Var\bigp{X(t)}$，
 	标准差函数$\sigma_X(t):=\sqrt{\sigma^2_X(t)}$
 
-	相关函数$R_X(s,t):=\E\bigkh{X(s)X(t)}$
+	相关函数$R_X(s,t):=\E\bigp{X(s)X(t)}$
 
-	协方差函数$C_X(s,t):=\Cov\bigkh{X(s),X(t)}$
+	协方差函数$C_X(s,t):=\Cov\bigp{X(s),X(t)}$
 \end{definition}
 不难得到
 \begin{align*}
@@ -51,7 +51,7 @@
 		\item $X(t)$的有限维分布函数族可以由增量$X(t_2)-X(t_1)(t_2\geqslant t_1\geqslant 0)$的分布所确定
 		\item 设$\sigma^2_X(t)$已知，则协方差函数
 		\begin{equation}
-			C_X(s,t)=\sigma^2_X\bigkh{\min(s,t)}.
+			C_X(s,t)=\sigma^2_X\bigp{\min(s,t)}.
 		\end{equation}
 	\end{compactitem}
 \end{theorem}
@@ -62,8 +62,8 @@
 		\item $\set{N(t)}{t\geqslant 0}$是时齐的独立增量过程
 		\item $\forall t>0,\D t>0$有
 		\begin{compactitem}
-			\item $\P\bigkh{N(t+\D t)-N(t)=1}=\lambda\D t+o(\D t)$
-			\item $\P\bigkh{N(t+\D t)-N(t)\geqslant 2}=o(\D t)$
+			\item $\P\bigp{N(t+\D t)-N(t)=1}=\lambda\D t+o(\D t)$
+			\item $\P\bigp{N(t+\D t)-N(t)\geqslant 2}=o(\D t)$
 		\end{compactitem}
 	\end{compactenum}
 \end{definition}
@@ -76,17 +76,17 @@ Poisson过程中任意长度为$ t $的区间中事件个数$\sim\Pois(\lambda t
 将区间$ [0, t] $分为$ k $份，
 当$k\to\infty$时，$N(t)\sim\Bino(k,p)$
 \[
-	\mu_N(t)=\lim_{k\to\infty}kp=\lim_{k\to\infty}k\biggfkh{\frac{\lambda t}k+o\biggkh{\frac tk}}=\lambda t+o(t).
+	\mu_N(t)=\lim_{k\to\infty}kp=\lim_{k\to\infty}k\biggb{\frac{\lambda t}k+o\biggp{\frac tk}}=\lambda t+o(t).
 \]
 \paragraph{指数分布视角}
 将Poisson过程第$ n $个事件发生时刻记为$ T_n$。记$\D T_n=T_n-T_{n-1} $为第$ n $个事件的等待时间，特别地$\D T_1 = T_1$。
 \begin{theorem}{Poisson过程的指数间隔}{}
 	$\D T_1,\D T_2,\ldots$ iid $\sim\Expo(\lambda)$
 	\begin{align*}
-		\P(\D T_1>t)&=\P\bigkh{N(t)=0}=\e{-\lambda t};\\
-		\P(\D T_2>t|T_1=s)&=\P\bigkh{N(t+s)-N(t)=0\cancel{|T_1=s}}=\e{-\lambda t}.
+		\P(\D T_1>t)&=\P\bigp{N(t)=0}=\e{-\lambda t};\\
+		\P(\D T_2>t|T_1=s)&=\P\bigp{N(t+s)-N(t)=0\cancel{|T_1=s}}=\e{-\lambda t}.
 	\end{align*}
-	由全概率公式，$\P(\D T_2>t)=\E_{T_1}\bigfkh{\P(\D T_2>t|T_1)}=\e{-\lambda t}.$
+	由全概率公式，$\P(\D T_2>t)=\E_{T_1}\bigb{\P(\D T_2>t|T_1)}=\e{-\lambda t}.$
 \end{theorem}
 \begin{theorem}{Poisson过程判定}{}
 	给定iid随机变量列$\{\D T_i\sim\Expo(\lambda)\}$。称第$ n $个事件在时间$T_n =\D T_1 + \cdots +\D T_n $发生，得到$\set{N(t)=\max(n)}{t\geqslant T_n}$
@@ -99,7 +99,7 @@ Poisson过程中任意长度为$ t $的区间中事件个数$\sim\Pois(\lambda t
 		\item $\set{W(t)}{t\geqslant 0}$是时齐的独立增量过程
 		\item 增量服从正态分布，即$\forall t\geqslant s\geqslant 0$
 		\[
-			W(t)-W(s)\sim\Norm\bigkh{0,(t-s)\sigma^2}.
+			W(t)-W(s)\sim\Norm\bigp{0,(t-s)\sigma^2}.
 		\]
 		若$\sigma=1$，则称为 标准Wiener过程。
 	\end{compactitem}
@@ -120,12 +120,12 @@ Brown运动是Wiener过程。
 独立，则$W(t_1),\ldots,W(t_n)$的联合PDF为 
 \begin{align*}
 	&f_W(w_1,\ldots,w_n;t_1,\ldots,t_n)\\
-	&=\frac{\exp\bigg\{{-\dfrac12\biggfkh{\dfrac{w_1^2}{t_1}+\dfrac{(w_2-w_1)^2}{t_2-t_1}+\cdots+\dfrac{(w_n-w_{n-1})^2}{t_n-t_{n-1}}}\bigg\}}}{\sqrt{2\pi t_1(t_2-t_1)\cdots(t_n-t_{n-1})}}.
+	&=\frac{\exp\bigg\{{-\dfrac12\biggb{\dfrac{w_1^2}{t_1}+\dfrac{(w_2-w_1)^2}{t_2-t_1}+\cdots+\dfrac{(w_n-w_{n-1})^2}{t_n-t_{n-1}}}\bigg\}}}{\sqrt{2\pi t_1(t_2-t_1)\cdots(t_n-t_{n-1})}}.
 \end{align*}
 \begin{example}{白噪声}{}
 	设$\set{W(t)}{t\geqslant 0}$为标准Wiener过程，令$f$为区间$[a,b]$有连续导数的函数，定义随机积分
 	\[
-		\int_a^bf(t)\d W(t)=\lim_{n\to\infty}\sum_{i=1}^n f(t_{i-1})\bigkh{W(t_i)-W(t_{i-1})},
+		\int_a^bf(t)\d W(t)=\lim_{n\to\infty}\sum_{i=1}^n f(t_{i-1})\bigp{W(t_i)-W(t_{i-1})},
 	\]
 	其中$a=t_1<t_2<\cdots<t_n=b$是区间$[a,b]$的一个划分。%类似分部积分，
 	有
@@ -138,8 +138,8 @@ Brown运动是Wiener过程。
 \begin{definition}{Markov过程}{}
 	随机过程$\set{X(t)}{t\in T}$为Markov过程若%其状态空间为$I$，$\forall n\geqslant 3,t_1,t_2,\ldots,t_$
 	\begin{align*}
-		&\P\bigkh{X(t_n)\leqslant x_n|X(t_1)=x_1,\ldots,X(t_{n-1})=x_{n-1}}\\
-		={}&\P\bigkh{X(t_n)\leqslant x_n|X(t_{n-1})=x_{n-1}}
+		&\P\bigp{X(t_n)\leqslant x_n|X(t_1)=x_1,\ldots,X(t_{n-1})=x_{n-1}}\\
+		={}&\P\bigp{X(t_n)\leqslant x_n|X(t_{n-1})=x_{n-1}}
 	\end{align*}
 	时间和状态都离散Markov过程称为Markov链，记为：
 	\[
@@ -222,7 +222,7 @@ $n$步转移概率矩阵为
 	\]
 	$P_{ij}(4)>0$，故具有遍历性。极限分布
 	\[
-		\biggfkh{\frac{1-p}{3-p},\frac1{3-p},\frac1{3-p}}
+		\biggb{\frac{1-p}{3-p},\frac1{3-p},\frac1{3-p}}
 	\]
 	我被淋湿这件事等价于“处于状态0并且下雨”，即
 	\[
@@ -304,7 +304,7 @@ Poisson过程和Wiener过程都不是平稳过程。
 \begin{example}{随机相位正弦波}{}
 	随机过程$X(t)=A\cos(\omega t+\theta)$
 \end{example}
-对于随机相位正弦波$\{X(t)\}$，$R_X(0)=\E\bigkh{X^2(t)}$具有功率的意义。
+对于随机相位正弦波$\{X(t)\}$，$R_X(0)=\E\bigp{X^2(t)}$具有功率的意义。
 \begin{compactitem}
 	\item 多个随机相位正弦波叠加的信号，总功率为各个分量功率之和。
 	\item 借助Fourier分解推广，可定义功率谱函数$S_X(\omega)$，其加和为$R_X(0)$，与$R_X(\tau)$互为Fourier变换。
@@ -313,7 +313,7 @@ Poisson过程和Wiener过程都不是平稳过程。
 \paragraph{遍历性与估计}
 均值函数
 \[
-	\mu_X(t):=\E\bigkh{X(t)}
+	\mu_X(t):=\E\bigp{X(t)}
 \]
 定义为随机过程的期望，称为系综平均。
 \begin{compactitem}
@@ -358,7 +358,7 @@ Poisson过程和Wiener过程都不是平稳过程。
 	\]
 	定义
 	\[
-		\gamma_k:=\E\bigfkh{(X_t-\mu)(X_{t+k}-\mu)}=f(\tau)-\mu^2
+		\gamma_k:=\E\bigb{(X_t-\mu)(X_{t+k}-\mu)}=f(\tau)-\mu^2
 	\]
 	是平稳过程的协方差函数$R_X(\tau)$的离散版本。
 \end{definition}
@@ -369,7 +369,7 @@ Poisson过程和Wiener过程都不是平稳过程。
 \begin{definition}{偏相关函数}{}
 	用$X_t$的前$ k $个时刻的值$X_{t-1},\ldots,X_{t-k}$对$ X_t $做最小二乘估计，即
 	\[
-		a_{k1},\ldots,a_{kk}=\arg\min\E\biggfkh{\biggkh{X_t-\sum_{i=1}^ka_{ki}X_{t-i}}^2}
+		a_{k1},\ldots,a_{kk}=\arg\min\E\biggb{\biggp{X_t-\sum_{i=1}^ka_{ki}X_{t-i}}^2}
 	\]
 	其中$a_{kk}$称作$X_t$的偏相关函数。
 \end{definition}
