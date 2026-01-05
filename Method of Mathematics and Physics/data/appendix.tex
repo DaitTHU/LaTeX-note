@@ -5,32 +5,32 @@
 		X''+\lambda X=0\\
 		X(0)=X(L)=0
 	\end{cases}$
-	\[\lambda_n=\kh{\frac{n\pi}L}^2,\quad X_n=\sin\frac{n\pi x}L,\quad n=1,2,\ldots.\]
+	\[\lambda_n=\Bigp{\frac{n\pi}L}^2,\quad X_n=\sin\frac{n\pi x}L,\quad n=1,2,\ldots.\]
 	\item $\begin{cases}
 		X''+\lambda X=0\\
 		X'(0)=X'(L)=0
 	\end{cases}$
-	\[\lambda_n=\kh{\frac{n\pi}L}^2,\quad X_n=\cos\frac{n\pi x}L,\quad n={\color{red}0},1,\ldots.\]
+	\[\lambda_n=\Bigp{\frac{n\pi}L}^2,\quad X_n=\cos\frac{n\pi x}L,\quad n={\color{red}0},1,\ldots.\]
 	\item $\begin{cases}
 		X''+\lambda X=0\\
 		X'(0)=X(L)=0
 	\end{cases}$
-	\[\lambda_n=\fkh{\kh{n+\frac12}\frac{\pi}L}^2,\quad X_n=\cos\kh{n+\frac12}\frac{\pi x}L,\quad n=0,1,\ldots.\]
+	\[\lambda_n=\Bigb{\Bigp{n+\frac12}\frac{\pi}L}^2,\quad X_n=\cos\Bigp{n+\frac12}\frac{\pi x}L,\quad n=0,1,\ldots.\]
 	\item $\begin{cases}
 		X''+\lambda X=0\\
 		X(0)=X'(L)=0
 	\end{cases}$
-	\[\lambda_n=\fkh{\kh{n+\frac12}\frac{\pi}L}^2,\quad X_n=\sin\kh{n+\frac12}\frac{\pi x}L,\quad n=0,1,\ldots.\]
+	\[\lambda_n=\Bigb{\Bigp{n+\frac12}\frac{\pi}L}^2,\quad X_n=\sin\Bigp{n+\frac12}\frac{\pi x}L,\quad n=0,1,\ldots.\]
 	\item $\begin{cases}
 		X''+\lambda X=0\\
 		X(0)=X'(L)+hX(L)=0
 	\end{cases}\implies \gamma=-hL\tan\gamma>0,$
-	\[\lambda_n=\kh{\frac{\gamma_n}L}^2,\quad X_n=\sin\frac{\gamma_n x}L,\quad n=1,2,\ldots.\]
+	\[\lambda_n=\Bigp{\frac{\gamma_n}L}^2,\quad X_n=\sin\frac{\gamma_n x}L,\quad n=1,2,\ldots.\]
 	\item $\begin{cases}
 		X''+\lambda X=0\\
 		X'(0)=X'(L)+hX(L)=0
 	\end{cases}\implies \gamma=-hL\cot\gamma>0,$
-	\[\lambda_n=\kh{\frac{\gamma_n}L}^2,\quad X_n=\cos\frac{\gamma_n x}L,\quad n=1,2,\ldots.\]
+	\[\lambda_n=\Bigp{\frac{\gamma_n}L}^2,\quad X_n=\cos\frac{\gamma_n x}L,\quad n=1,2,\ldots.\]
 	\item $\begin{cases}
 		X''+\lambda X=0\\
 		X(0)-h_1X'(0)=0\\
@@ -60,12 +60,12 @@
 	\end{align}
 \end{subequations}
 因此
-\[\hkh{1,\sin x,\cos x,\sin2x,\ldots}\]
+\[\{1,\sin x,\cos x,\sin2x,\ldots\}\]
 构成$[-\pi,\pi]$上一组完备的基底，归一化之
-\[\hkh{\frac1{\sqrt{2\pi}},\frac{\sin x}{\sqrt\pi},\frac{\cos x}{\sqrt\pi},\frac{\sin2x}{\sqrt\pi},\ldots}.\]
+\[\biggB{\frac1{\sqrt{2\pi}},\frac{\sin x}{\sqrt\pi},\frac{\cos x}{\sqrt\pi},\frac{\sin2x}{\sqrt\pi},\ldots}.\]
 
 用这一组基可将周期为$2\pi$的函数$f(x)$展开
-\[f(x)=\frac{a_0}2+\sum_{n=1}^\infty\kh{a_n\cos nx+b_n\sin nx},\]
+\[f(x)=\frac{a_0}2+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx),\]
 其中
 \begin{align*}
 	a_n & =\frac1\pi\inp f{\cos nx}=\frac1\pi\int_{-\pi}^\pi f(x)\cos nx\d x, \\
@@ -155,89 +155,91 @@ Fourier变换的定义见第~\pageref{dfn:Integral Transformation}~页\dfnref{df
 \begin{enumerate}
 	\item 线性
 		\[
-			\cf{\alpha f+\beta g}=\alpha\cf f+\beta\cf g;
+			\FT[\alpha f+\beta g]=\alpha\FT[f]+\beta\FT[g];
 		\]
 	\item 微分
 		\[
-			\cf{f'}=\i\xi\hat f.
+			\FT[f']=\i\xi\hat f.
 		\]
 	\item 积分
 		\[
-			\cf{\int_{-\infty}^xf(\eta)\d\eta}=\frac1{\i\xi}\hat f.
+			\FT\biggb{\int_{-\infty}^xf(\eta)\d\eta}=\frac1{\i\xi}\hat f.
 		\]
 		其中积分式的Fourier变换存在，且$\hat f(0)=0$．
 	\item $\hat f(\xi)$微分
-		\[\hat f'(\xi)=\cf{-\i xf}(\xi).\]
+		\[
+			\hat f'(\xi)=\FT[-\i xf](\xi).
+		\]
 	\item $\hat f(\xi)$积分
 			\begin{gather}
-				\int_{-\infty}^\xi\hat f(\zeta)\d\zeta=\mathcal F\fkh{\frac{f(x)}{-\i x}}(\xi)+C_1,\\
-				\int_\xi^{+\infty}\hat f(\zeta)\d\zeta=\mathcal F\fkh{\frac{f(x)}{\i x}}(\xi)+C_2.
+				\int_{-\infty}^\xi\hat f(\zeta)\d\zeta=\mathcal F\Bigb{\frac{f(x)}{-\i x}}(\xi)+C_1,\\
+				\int_\xi^{+\infty}\hat f(\zeta)\d\zeta=\mathcal F\Bigb{\frac{f(x)}{\i x}}(\xi)+C_2.
 			\end{gather}
 	\item 位移性质
 			\begin{gather*}
-				\cf{f(x-a)}(\xi)=\hat f(\xi)\e{-\i a\xi},\\
-				\hat f(\xi-\alpha)=\cf{f(x)\e{\i\alpha x}}(\xi).
+				\FT[f(x-a)](\xi)=\hat f(\xi)\e{-\i a\xi},\\
+				\hat f(\xi-\alpha)=\FT[f(x)\e{\i\alpha x}](\xi).
 			\end{gather*}
 	\item 相似
-			\[\cf{f(kx)}(\xi)=\frac1{\abs k}\hat f\kh{\frac\xi{k}}.\]
+			\[\FT[f(kx)](\xi)=\frac1{\abs k}\hat f\Bigp{\frac\xi{k}}.\]
 	\item 卷积\footnote{$f,g$的卷积\[f\ast g(x)=\int\iti f(\eta)g(x-\eta)\d\eta.\]且有$f\ast g=g\ast f$．}
-			\[\cf{f\ast g}=\hat f\hat g.\]
+			\[\FT[f\ast g]=\hat f\hat g.\]
 	\item 象函数卷积
-			\[\hat f\ast\hat g=2\pi\cf{fg}\]
+			\[\hat f\ast\hat g=2\pi\FT[fg]\]
 	\item 反射
-			\[\cf{\hat f(\xi)}(x)=2\pi f(-x).\]
+			\[\FT[\hat f(\xi)](x)=2\pi f(-x).\]
 			因此Fourier逆变换
-			\[\cfi g(x)=\frac1{2\pi}\int\iti g(\xi)\e{\i\xi x}\d\xi.\]
-			在$f$连续点处$\cfi{\hat f(\xi)}(x)=f(x)$．
+			\[\FT^{-1}[g](x)=\frac1{2\pi}\int\iti g(\xi)\e{\i\xi x}\d\xi.\]
+			在$f$连续点处$\FT^{-1}[\hat f(\xi)](x)=f(x)$．
 \end{enumerate}
 高维下Fourier变换的性质是相似的．
 \paragraph{Fourier正余弦变换的性质}\label{The Property of Sine and Cosine Transformation}\footnote{定义见第~\pageref{dfn:Fourier Sine and Cosine Transformation}~页~\ref{dfn:Fourier Sine and Cosine Transformation}。}
 \begin{enumerate}
 	\item 微分
 	\begin{align*}
-		\cf[s]{f'}(\xi)&=f(x)\sin\xi x|_{x=0}^{+\infty}-\xi\cf[c]f(\xi);\\
-		\cf[c]{f'}(\xi)&=f(x)\cos\xi x|_{x=0}^{+\infty}+\xi\cf[s]f(\xi);\\
-		\cf[s]{f''}(\xi)&=\fkh{f'(x)\sin\xi x-\xi f(x)\cos\xi x}_{x=0}^{+\infty}-\xi^2\cf[s]f(\xi);\\
-		\cf[c]{f''}(\xi)&=\fkh{f'(x)\cos\xi x-\xi f(x)\sin\xi x}_{x=0}^{+\infty}-\xi^2\cf[c]f(\xi).
+		\FT_\sine[f'](\xi)&=f(x)\sin\xi x|_{x=0}^{+\infty}-\xi\FT_\cosi[f](\xi);\\
+		\FT_\cosi[f'](\xi)&=f(x)\cos\xi x|_{x=0}^{+\infty}+\xi\FT_\sine[f](\xi);\\
+		\FT_\sine[f''](\xi)&=\Bigp{f'(x)\sin\xi x-\xi f(x)\cos\xi x}_{x=0}^{+\infty}-\xi^2\FT_\sine[f](\xi);\\
+		\FT_\cosi[f''](\xi)&=\Bigp{f'(x)\cos\xi x-\xi f(x)\sin\xi x}_{x=0}^{+\infty}-\xi^2\FT_\cosi[f](\xi).
 	\end{align*}
 	\item 积分
 	\begin{align*}
-		\cf[s]{\int_0^xf(\eta)\d\eta}(\xi)&=\frac1\xi\cf[c]f(\xi);\\
-		\cf[c]{\int_0^xf(\eta)\d\eta}(\xi)&=-\frac1\xi\cf[s]f(\xi).
+		\FT_\sine\biggb{\int_0^xf(\eta)\d\eta}(\xi)&=\frac1\xi\FT_\cosi[f](\xi);\\
+		\FT_\cosi\biggb{\int_0^xf(\eta)\d\eta}(\xi)&=-\frac1\xi\FT_\sine[f](\xi).
 	\end{align*}
 	其中$\int\zti f(x)\d x=0.$
 	\item 象函数微分
 	\begin{align*}
-		\hat f_\sine'&=-\cf[c]{xf}&\hat f_\sine''&=-\cf[s]{x^2f}\\
-		\hat f_\cosi'&=\cf[s]{xf}&\hat f_\cosi''&=-\cf[c]{x^2f}.
+		\hat f_\sine'&=-\FT_\cosi[xf]&\hat f_\sine''&=-\FT_\sine[x^2f]\\
+		\hat f_\cosi'&=\FT_\sine[xf]&\hat f_\cosi''&=-\FT_\cosi[x^2f].
 	\end{align*}
 	\item 相似\begin{align*}
-		\cf[s]{f(kx)}(\xi)=\frac1k\hat f_\sine\kh{\frac\xi{\abs k}},\\
-		\cf[c]{f(kx)}(\xi)=\frac1{\abs k}\hat f_\cosi\kh{\frac\xi{\abs k}}
+		\FT_\sine[f(kx)](\xi)=\frac1k\hat f_\sine\Bigp{\frac\xi{\abs k}},\\
+		\FT_\cosi[f(kx)](\xi)=\frac1{\abs k}\hat f_\cosi\Bigp{\frac\xi{\abs k}}
 	\end{align*}
 	\item 反射\begin{align*}
-		\cf[s]{\hat f_\sine(x)}(\xi)&=-\frac\pi{2}f(-\xi),\\
-		\cf[c]{\hat f_\cosi(x)}(\xi)&=\frac\pi{2}f(-\xi).
+		\FT_\sine[\hat f_\sine(x)](\xi)&=-\frac\pi{2}f(-\xi),\\
+		\FT_\cosi[\hat f_\cosi(x)](\xi)&=\frac\pi{2}f(-\xi).
 	\end{align*}
 \end{enumerate}
 \paragraph{Fourier变换函数表}
 \begin{enumerate}
-	\item $\cf{\delta(x)}=1,$\qquad$\cf{\delta^{(n)}(x)}=(\i\xi)^n;$
-	\item $\cf 1=2\pi\vd(\xi),$\qquad$\cf{x^n}=2\pi\i^n\vd^{(n)}(\xi);$
-	\item $\cf{\e{\i ax}}=2\pi\vd(\xi-a);$
-	\item $\cf{\cos ax}=\pi\fkh{\delta(\xi-a)+\delta(\xi+a)};$
-	\item $\cf{\sin ax}=-\i\pi\fkh{\delta(\xi-a)-\delta(\xi+a)};$
-	\item $\cf{\cos ax^2}=\sqrt{\frac\pi{2a}}\kh{\cos\frac{\xi^2}{4a}+\sin\frac{\xi^2}{4a}};$
-	\item $\cf{\sin ax^2}=\sqrt{\frac\pi{2a}}\kh{\cos\frac{\xi^2}{4a}-\sin\frac{\xi^2}{4a}};$
-	\item $\cf{\e{-a\abs x}}=\frac{2a}{a^2+\xi^2};$
-	\item $\cf{\e{-ax^2}}=\sqrt{\frac\pi{a}}\e{-\xi^2/4a};$
-	\item $\cf{\e{-\i ax^2}}=\sqrt{\frac\pi{a}}\e{\i\kh{\xi^2/4a-\pi/4}};$
-	\item $\cf{\frac1x}=-\i\pi\sgn\xi;$
-	\item $\cf{\frac1{x^n}}=-\i\pi\frac{(-\i\xi)^{n-1}}{(n-1)!}\sgn\xi,$\qquad$\cf{\frac1{x^2}}=-\pi\xi\sgn\xi;$
-	\item $\cf{\abs x^\alpha}=-2\Gamma(\alpha+1)\sin\kh{\frac{\pi\alpha}2}\abs\xi^{-1-\alpha};$
-	\item $\cf{\Heaviside(x)}=\frac1{\i\xi}+\pi\vd(\xi);$
-	\item $\cf{\Lambda(x)}=\sinc\frac\xi{2};$（系数应该是错的）
-	\item $\cf{\sinc x}=\Pi\kh{\frac\xi{2}}$（系数应该是错的）
+	\item $\FT[\delta(x)]=1,$\qquad$\FT[\delta^{(n)}(x)]=(\i\xi)^n;$
+	\item $\FT[1]=2\pi\vd(\xi),$\qquad$\FT[x^n]=2\pi\i^n\vd^{(n)}(\xi);$
+	\item $\FT[\e{\i ax}]=2\pi\vd(\xi-a);$
+	\item $\FT[\cos ax]=\pi\Bigp{\delta(\xi-a)+\delta(\xi+a)};$
+	\item $\FT[\sin ax]=-\i\pi\Bigp{\delta(\xi-a)-\delta(\xi+a)};$
+	\item $\FT[\cos ax^2]=\sqrt{\frac\pi{2a}}\Bigp{\cos\frac{\xi^2}{4a}+\sin\frac{\xi^2}{4a}};$
+	\item $\FT[\sin ax^2]=\sqrt{\frac\pi{2a}}\Bigp{\cos\frac{\xi^2}{4a}-\sin\frac{\xi^2}{4a}};$
+	\item $\FT[\e{-a\abs x}]=\frac{2a}{a^2+\xi^2};$
+	\item $\FT[\e{-ax^2}]=\sqrt{\frac\pi{a}}\e{-\xi^2/4a};$
+	\item $\FT[\e{-\i ax^2}]=\sqrt{\frac\pi{a}}\e{\i(\xi^2/4a-\pi/4)};$
+	\item $\FT[\frac1x]=-\i\pi\sgn\xi;$
+	\item $\FT[\frac1{x^n}]=-\i\pi\frac{(-\i\xi)^{n-1}}{(n-1)!}\sgn\xi,$\qquad$\FT[\frac1{x^2}]=-\pi\xi\sgn\xi;$
+	\item $\FT[\abs x^\alpha]=-2\Gamma(\alpha+1)\sin\Bigp{\frac{\pi\alpha}2}\abs\xi^{-1-\alpha};$
+	\item $\FT[\Heaviside(x)]=\frac1{\i\xi}+\pi\vd(\xi);$
+	\item $\FT[\Lambda(x)]=\sinc\frac\xi{2};$（系数应该是错的）
+	\item $\FT[\sinc x]=\Pi\Bigp{\frac\xi{2}}$（系数应该是错的）
 \end{enumerate}
 Heaviside阶梯函数
 \[
@@ -252,49 +254,49 @@ Heaviside阶梯函数
 	\item 线性
 	\item 微分
 	\begin{align*}
-		\cl{f'}&=\xi\bar f-f(0);\\
-		\cl{f''}&=\xi^2\bar f-\xi f(0)-f'(0);\\
-		\cl{f^{(n)}}&=\xi^n\bar f-\kh{\xi^{n-1}f(0)+\xi^{n-2}f'(0)+\cdots+f^{(n-1)}(0)}.
+		\LT[f']&=\xi\bar f-f(0);\\
+		\LT[f'']&=\xi^2\bar f-\xi f(0)-f'(0);\\
+		\LT[f^{(n)}]&=\xi^n\bar f-\Bigp{\xi^{n-1}f(0)+\xi^{n-2}f'(0)+\cdots+f^{(n-1)}(0)}.
 	\end{align*}
 	\item 积分 
 	\[
-		\cl{\int_0^xf(\eta)\d\eta}=\frac1\xi\bar f.
-		\]
+		\LT\biggb{\int_0^xf(\eta)\d\eta}=\frac1\xi\bar f.
+	\]
 	\item 像函数微分
 	\[
-		\bar f'=\cl{-xf}.
-		\]
+		\bar f'=\LT[-xf].
+	\]
 	\item 像函数积分
 	\[
-		\int_\xi^{+\infty}\bar f(\xi)\d\xi=\cl{\frac fx}.
-		\]
+		\int_\xi^{+\infty}\bar f(\xi)\d\xi=\LT\Bigb{\frac fx}.
+	\]
 	积分路径$\Re\xi>\sigma_0$。
 	\item 复频移与时滞
 	\begin{align*}
-		\cl{f(x)\e{\alpha x}}&=\bar f(\xi-\alpha),\quad \alpha\in\CC\\
-		\cl{f(x-a)}&=\bar f\e{-a\xi},\qquad\; a\geqslant 0 % \Heaviside(x-a)
+		\LT[f(x)\e{\alpha x}]&=\bar f(\xi-\alpha),\quad \alpha\in\CC\\
+		\LT[f(x-a)]&=\bar f\e{-a\xi},\qquad\; a\geqslant 0 % \Heaviside(x-a)
 	\end{align*}
 	\item 相似
 	\[
-		\cl{f(kx)}=\frac1k\bar f\kh{\frac\xi{k}},\quad k>0
-		\]
+		\LT[f(kx)]=\frac1k\bar f\Bigp{\frac\xi{k}},\quad k>0
+	\]
 	\item 卷积
 	\[
-		\cl{f\ast g}=\cl f\cl g
+		\LT[f\ast g]=\LT f\LT g
 		\]
 	\item 像函数卷积
 	\[
-		\cl{fg}(\xi)=\frac1{2\pi\i}\int_{\sigma-\i\infty}^{\sigma+\i\infty}\bar f(\zeta)\bar g(\xi-\zeta)\d\zeta,
+		\LT[fg](\xi)=\frac1{2\pi\i}\int_{\sigma-\i\infty}^{\sigma+\i\infty}\bar f(\zeta)\bar g(\xi-\zeta)\d\zeta,
 		\]
 	其中$\xi>\max(\sigma_f,\sigma_g)$
 \end{enumerate}
 \paragraph{Laplace变换函数表}
 \begin{enumerate}
-	\item $\cl{\vd(t)}=1,\quad\cl{\vd^{(n)}(t)}=s^n;$
-	\item $\cl{\sgn t}=\cl{\Heaviside(t)}=\frac1s,\quad \cl{t\Heaviside(t)}=\frac1{s^2};$
-	\item $\cl{\frac1{\sqrt{\pi t}}}=\frac1{\sqrt s};$%,\quad\cl{2\sqrt{\frac t\pi}}=\frac1{s\sqrt s};$
-	\item $\cl{\e{at}}=\frac1{s-a};$
-	\item $\cl{\sin at}=\frac a{s^2+a^2},\quad \cl{\sinh at}=\frac a{s^2-a^2};$
-	\item $\cl{\cos at}=\frac s{s^2+a^2},\quad \cl{\cosh at}=\frac s{s^2-a^2};$
+	\item $\LT[\vd(t)] = 1,\quad \LT[\vd^{(n)}(t)] = s^n;$
+	\item $\LT[\sgn t]=\LT[\Heaviside(t)]=\frac1s,\quad \LT[t\Heaviside(t)]=\frac1{s^2};$
+	\item $\LT\Bigb{\frac1{\sqrt{\pi t}}}=\frac1{\sqrt s};$%,\quad\LT\Bigb{2\sqrt{\frac t\pi}}=\frac1{s\sqrt s};$
+	\item $\LT[\e{at}]=\frac1{s-a};$
+	\item $\LT[\sin at]=\frac a{s^2+a^2},\quad \LT[\sinh at]=\frac a{s^2-a^2};$
+	\item $\LT[\cos at]=\frac s{s^2+a^2},\quad \LT[\cosh at]=\frac s{s^2-a^2};$
 \end{enumerate}
 

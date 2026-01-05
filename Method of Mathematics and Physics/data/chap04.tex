@@ -12,19 +12,19 @@
 	因此$f\ast\delta(\xi)=f(\xi)$。
 \end{definition}
 \begin{theorem}{$\delta$复合函数}{}
-	设$u(x)\in\sC(\RR)$且在实轴上只有单零点$x_1,x_2,\ldots,x_n$，则 
+	设$u(x)\in\cont(\RR)$且在实轴上只有单零点$x_1,x_2,\ldots,x_n$，则 
 	\begin{align}
 		\delta(u(x))=\sum_{k=1}^n\frac{\vd(x-x_k)}{\abs{u'(x_k)}}.
 	\end{align}
 \end{theorem}
 比如$\delta(ax)=\delta(x)/a$。
-\paragraph{广义函数}\hspace{4ex}
+
 \begin{definition}{线性泛函}{Linear Functional}
-	函数空间$\mathscr V$到数域$\mathbb F$的映射$\mathcal T$，若
+	函数空间$\vect$到数域$\mathbb F$的映射$\mathcal T$，若$\forall a,b\in\mathbb F,\;u,v\in\vect$均有
 	\[
 		\mathcal T(au+bv)=a\mathcal Tu+b\mathcal Tv
 	\]
-	$\forall a,b\in\mathbb F,\;u,v\in\mathscr V$均成立，则$\mathcal T$是$\mathscr V$上的线性泛函，即广义函数。$\mathscr V$上所有线性泛函构成一个线性空间，称作$\mathscr V$的对偶空间$\mathscr V^*$。
+	则$\mathcal T$是$\vect$上的线性泛函，即广义函数。$\vect$上所有线性泛函构成一个线性空间，称作$\vect$的对偶空间$\vect^*$。
 \end{definition}
 \begin{example}{支撑集}{support set}
 	记实函数$f$的支撑集
@@ -35,19 +35,19 @@
 	\[
 		\mathscr L_0(\RR):=\set f{\int\iti\abs{f(x)}\d x<\infty,\;\supp f\,\text{有界}}
 	\]
-	则$\forall f\in\mathscr L_0(\RR)$，$f$确定了$\sC(\RR)$上一个线性泛函：
+	则$\forall f\in\mathscr L_0(\RR)$，$f$确定了$\cont(\RR)$上一个线性泛函：
 	\begin{align}
-		\mathcal T_f\bigfkh{\varphi(x)}\equiv\inp f\varphi:=\int\iti f(x)\varphi(x)\d x\in\RR.
+		\mathcal T_f\bigb{\varphi(x)}\equiv\inp f\varphi:=\int\iti f(x)\varphi(x)\d x\in\RR.
 	\end{align}
 \end{example}
 \begin{theorem}{广义函数的导数}{}
 	定义函数空间
 	\begin{align}
-		\Cooo(\RR)\equiv\sC_0^\infty(\RR):=\set f{f\in\sC^\infty(\RR),\;\supp f\,\text{有界}}
+		\Cinf(\RR)\equiv\cont_0^\infty(\RR):=\set f{f\in\cont^\infty(\RR),\;\supp f\,\text{有界}}
 	\end{align}
-	广义函数$f\in\Cooo^\ast(\RR)$，定义其$n$阶导数 
+	广义函数$f\in\Cinf^\ast(\RR)$，定义其$n$阶导数 
 	\begin{align}
-		\inp{f^{(n)}}\varphi:=(-1)^n\inp f{\varphi^{(n)}},\quad\forall\varphi\in\Cooo(\RR).
+		\inp{f^{(n)}}\varphi:=(-1)^n\inp f{\varphi^{(n)}},\quad\forall\varphi\in\Cinf(\RR).
 	\end{align}
 	特别地， 
 	\[
@@ -57,7 +57,7 @@
 	泛函意义下，任意一个广义函数都是无穷阶可导的。
 \end{theorem}
 \begin{theorem}{广义函数的卷积}{}
-	给定$f,g\in\Cooo^*(\RR)$的卷积$f\ast g(x)$也是广义函数
+	给定$f,g\in\Cinf^*(\RR)$的卷积$f\ast g(x)$也是广义函数
 	\begin{align}
 		\inp {f\ast g}\varphi:=\Bigl\langle f(x),\bigl\langle g(y),\varphi(x+y)\bigr\rangle\Bigr\rangle.
 	\end{align}
@@ -67,18 +67,18 @@
 	\]
 \end{theorem}
 \begin{theorem}{广义函数的Fourier变换}{}
-	速降函数空间$\Schwsp(\RR)\subset\sC^\infty(\RR)$，%$\forall\varphi\in\Schwsp(\RR)$，有
+	速降函数空间$\Schw(\RR)\subset\cont^\infty(\RR)$，%$\forall\varphi\in\Schw(\RR)$，有
 	\begin{align}
-		\Schwsp(\RR):=\set\varphi{\lim_{x\to\infty}x^m\varphi^{(n)}(x)=0,\quad\forall m,n\in\ZZ^+}.
+		\Schw(\RR):=\set\varphi{\lim_{x\to\infty}x^m\varphi^{(n)}(x)=0,\quad\forall m,n\in\ZZ^+}.
 	\end{align}
-	比如$\varphi(x)=p(x)\e{-ax^2}$，$p(x)$是多项式，$a>0$，则$\varphi(x)\in\Schwsp(\RR)$。
+	比如$\varphi(x)=p(x)\e{-ax^2}$，$p(x)$是多项式，$a>0$，则$\varphi(x)\in\Schw(\RR)$。
 	
-	给定广义函数$f\in\Schwsp^*$，$f$的Fourier变换及其逆变换也是广义函数，定义为
+	给定广义函数$f\in\Schw^*$，$f$的Fourier变换及其逆变换也是广义函数，定义为
 	\begin{align}
 		\begin{aligned}
-			\inp{\cf f}\varphi&=\inp f{\cf\varphi}\\
-			\inp{\cfi f}\varphi&=\inp f{\cfi\varphi}
-		\end{aligned},\quad\forall\varphi\in\Schwsp.
+			\inp{\FT[f]}\varphi&=\inp f{\FT[\varphi]}\\
+			\inp{\FT^{-1}[f]}\varphi&=\inp f{\FT^{-1}[\varphi]}
+		\end{aligned},\quad\forall\varphi\in\Schw.
 	\end{align}
 	Fourier变换作用转移到基本函数上，它们保持着经典意义下的基本性质。
 \end{theorem}
@@ -90,7 +90,7 @@
 	则称$f_n$弱收敛到$f$，本笔记记作$\lim_{n\to\infty}f_n(x)\circeq f(x)$。
 \end{theorem}
 \begin{theorem}{}{}
-	若基本函数空间为$\Schwsp$，则
+	若基本函数空间为$\Schw$，则
 	\[
 		\lim_{n\to\infty}f_n(x)\circeq f(x)\iff\lim_{n\to\infty}f_n'(x)\circeq f'(x).
 	\]
@@ -98,16 +98,16 @@
 \begin{theorem}{高维广义函数}{}
 	与一维类似，函数空间
 	\begin{gather*}
-		\Cooo(\RR^n)\equiv\sC_0^\infty(\RR^n):=\set f{f\in\sC^\infty(\RR^n),\;\supp f\,\text{有界}},\\
-		\Schwsp(\RR^n):=\set\varphi{\lim_{\abs X\to\infty}\abs X^m\frac{\p^k\varphi(X)}{\p x_1^{k_1}\cdots\p x_n^{k_n}}=0,\quad\forall m,k\in\ZZ^+}
+		\Cinf(\RR^n)\equiv\cont_0^\infty(\RR^n):=\set f{f\in\cont^\infty(\RR^n),\;\supp f\,\text{有界}},\\
+		\Schw(\RR^n):=\set\varphi{\lim_{\abs X\to\infty}\abs X^m\frac{\p^k\varphi(X)}{\p x_1^{k_1}\cdots\p x_n^{k_n}}=0,\quad\forall m,k\in\ZZ^+}
 	\end{gather*}
-	对函数空间$\mathscr V$上的线性泛函$f$
+	对函数空间$\vect$上的线性泛函$f$
 	\[
-		\inp f\varphi=\int_{\RR^n}f(X)\varphi(X)\d X,\quad\forall\varphi\in\mathscr V
+		\inp f\varphi=\int_{\RR^n}f(X)\varphi(X)\d X,\quad\forall\varphi\in\vect
 	\]
-	构成$\mathscr V^\ast$。
+	构成$\vect^\ast$。
 	
-	广义函数$f\in\Cooo^\ast(\RR^n)$的偏导数定义为
+	广义函数$f\in\Cinf^\ast(\RR^n)$的偏导数定义为
 	\[
 		\inp{\frac{\p^kf}{\p x_1^{k_1}\cdots\p x_n^{k_n}}}\varphi:=(-1)^k\inp f{\frac{\p^k\varphi}{\p x_1^{k_1}\cdots\p x_n^{k_n}}}
 	\]
@@ -130,7 +130,7 @@
 	\inp {f\ast g}\varphi:=\Bigl\langle f(X),\bigl\langle g(Y),\varphi(X+Y)\bigr\rangle\Bigr\rangle.
 \]
 
-\section{\textit{Pu} = 0型方程的基本解} % {$\$}
+\section{\texorpdfstring{$\Par u=0$}{Pu=0}型方程的基本解} % {$\$}
 讨论用基本解方法求解方程
 \[
 	\Par u(M)=f(M),\quad M\in\RR^n,
@@ -184,7 +184,7 @@
 	由于只有一个点源，方程具有对称性，可设方程有球对称基本解$U(r)$，
 	当$r>0$时，$\delta(r)=0$，
 	\[
-		\frac1{r^2}\dd r\kh{r^2\dv Ur}+cU=\frac1r\fkh{\dd[2]r(rU)+crU}=0,
+		\frac1{r^2}\dd r\Bigp{r^2\dv Ur}+cU=\frac1r\Bigb{\dd[2]r(rU)+crU}=0,
 	\]
 	
 	当$c=0$时，化为Laplace方程
@@ -210,8 +210,8 @@
 	\]
 	且
 	\begin{align*}
-		&\quad\oint_{\p B_r}\kh{\pp\rho\frac{\e{k\rho}}\rho}_rr^2\sin\theta\d\theta\nd\phi-k^2\int_{B_r}\frac{\e{k\rho}}\rho\rho^2\sin\theta\d\rho\nd\theta\nd\phi\\
-		&=4\pi(kr-1)\e{kr}-4\pi\fkh{(k\rho-1)\e{k\rho}}_0^r=-4\pi.
+		&\quad\oint_{\p B_r}\Bigp{\pp\rho\frac{\e{k\rho}}\rho}_rr^2\sin\theta\d\theta\nd\phi-k^2\int_{B_r}\frac{\e{k\rho}}\rho\rho^2\sin\theta\d\rho\nd\theta\nd\phi\\
+		&=4\pi(kr-1)\e{kr}-4\pi\bigb{(k\rho-1)\e{k\rho}}_0^r=-4\pi.
 	\end{align*}
 	故$-4\pi(A+B)=1$，即
 	\[
@@ -233,12 +233,12 @@
 \begin{theorem}{Green公式}{Green Formula}
 	设非空有界开集$\Omega\subset\RR^n(n\geqslant 2)$满足边界$\p\Omega$光滑，则
 	
-	$\forall u,v\in\sC^2(\Omega)\cap\sC(\bar\Omega)$，有
+	$\forall u,v\in\cont^2(\Omega)\cap\cont(\bar\Omega)$，有
 	\begin{gather}
 		\label{Green's 1st formula}
 		\int_\Omega v\lapla u\d V=\oint_{\p\Omega}v\pv u{\bm n}\d S-\int_\Omega\nabla v\cdot\nabla u\d V;\\
 		\label{Green's 2nd formula}
-		\int_\Omega(u\lapla v-v\lapla u)\d V=\oint_{\p\Omega}\biggkh{u\pv v{\bm n}-v\pv u{\bm n}}\d S.
+		\int_\Omega(u\lapla v-v\lapla u)\d V=\oint_{\p\Omega}\biggp{u\pv v{\bm n}-v\pv u{\bm n}}\d S.
 	\end{gather}
 	%其中$\p u/\p\bm n=\nabla u\cdot\bm n$。
 \end{theorem}
@@ -336,7 +336,7 @@ Fourier方法是求Green函数的基本方法，但对于一些特殊的区域�
     \end{align*}
 	边界方向导数
 	\[
-		\edg{\pv Gn}_{\zeta=0}=\edg{-\pv G\zeta}_{\zeta=0}=\frac{-z}{2\pi\fkh{(x-\xi)^2+(y-\eta)^2+z^2}^{3/2}}
+		\edg{\pv Gn}_{\zeta=0}=\edg{-\pv G\zeta}_{\zeta=0}=\frac{-z}{2\pi[(x-\xi)^2+(y-\eta)^2+z^2]^{3/2}}
 	\]
 	故对于上半空间Dirichlet问题
 	\[
@@ -347,7 +347,7 @@ Fourier方法是求Green函数的基本方法，但对于一些特殊的区域�
 	\]
 	解的Poisson公式
 	\[
-		u(x,y,z)=\frac z{2\pi}\int_{\RR^2}\frac{\varphi(\xi,\eta)\d\xi\nd\eta}{\fkh{(x-\xi)^2+(y-\eta)^2+z^2}^{3/2}}
+		u(x,y,z)=\frac z{2\pi}\int_{\RR^2}\frac{\varphi(\xi,\eta)\d\xi\nd\eta}{[(x-\xi)^2+(y-\eta)^2+z^2]^{3/2}}
 	\]
 	\tcblower
 	二维情况
@@ -392,7 +392,7 @@ Fourier法是求Green函数的基本方法，主要思想是按照特征函数�
 	系数 
 	{\footnotesize
 	\begin{align*}
-		\fkh{\kh{\frac{m\pi}L}^2+\kh{\frac{n\pi}M}^2}C_{mn}&=\frac4{LM}\int_0^M\int_0^L\vd(x-\xi,y-\eta)\sin\frac{m\pi x}L\sin\frac{n\pi y}M\d x\nd y\\
+		\Bigb{\Bigp{\frac{m\pi}L}^2+\Bigp{\frac{n\pi}M}^2}C_{mn}&=\frac4{LM}\int_0^M\int_0^L\vd(x-\xi,y-\eta)\sin\frac{m\pi x}L\sin\frac{n\pi y}M\d x\nd y\\
 		&=\frac4{LM}\sin\frac{m\pi\xi}L\sin\frac{n\pi\eta}M.
 	\end{align*}}
 	后略。
@@ -407,27 +407,27 @@ Fourier法是求Green函数的基本方法，主要思想是按照特征函数�
 	\end{equation*}
 	有
 	\begin{align*}
-		u(x,y)&=-\fkh{\int\zti\varphi(\xi)\edg{\pv Gn}_{\eta=0}\d\xi+\int\zti\psi(\xi)\edg{\pv Gn}_{\eta=a}\d\xi}\\
+		u(x,y)&=-\biggb{\int\zti\varphi(\xi)\edg{\pv Gn}_{\eta=0}\d\xi+\int\zti\psi(\xi)\edg{\pv Gn}_{\eta=a}\d\xi}\\
 		&=\int\zti\varphi(\xi)\edg{\pv G\eta}_{\eta=0}\d\xi-\int\zti\psi(\xi)\edg{\pv G\eta}_{\eta=a}\d\xi
 	\end{align*}
 	进而
 	\begin{align*}
 		\pv G\eta&=\sum_{n=1}^\infty4n\int\zti\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2+a^2\omega^2}\d\omega\cdot\cos\frac{n\pi\eta}a\cos\frac{n\pi y}a;\\
-		u(x,y)&=\sum_{n=1}^\infty4n\int\zti\int\zti\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2+a^2\omega^2}\fkh{\varphi(\xi)-(-1)^n\psi(\xi)}\d\omega\nd\xi\cdot\cos\frac{n\pi y}a.
+		u(x,y)&=\sum_{n=1}^\infty4n\int\zti\int\zti\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2+a^2\omega^2}[\varphi(\xi)-(-1)^n\psi(\xi)]\d\omega\nd\xi\cdot\cos\frac{n\pi y}a.
 	\end{align*}
 \end{example}
 \paragraph{$^\ast$Poisson方程第II, III边值问题}
 \begin{align}
 	\begin{cases}
 		\lapla u=-f(M),&M\in V\subseteq\RR^n\\
-		\kh{\alpha u+\beta\pv un}_{\p V}=\varphi(M),&\alpha,\beta\neq 0.
+		\Bigp{\alpha u+\beta\pv un}_{\p V}=\varphi(M),&\alpha,\beta\neq 0.
 	\end{cases}
 \end{align}
 相应的Green函数
 \begin{align*}
 	\begin{cases}
 		\lapla G=-\vd(M-N),&M,N\in V\subseteq\RR^n\\
-		\kh{\alpha G+\beta\pv Gn}_{\p V}=0,&\alpha,\beta\neq 0.
+		\Bigp{\alpha G+\beta\pv Gn}_{\p V}=0,&\alpha,\beta\neq 0.
 	\end{cases}
 \end{align*}
 原问题的解
