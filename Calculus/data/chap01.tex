@@ -38,7 +38,7 @@ $f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=[f_1,f_2,\ldots,f_m]\tp
 	\]
 	梯度
 	\[
-		\nabla f:=\left[\pv f{x_1},\pv f{x_2},\ldots,\pv f{x_n}\right]\tp.
+		\nabla f:=\Bigb{\pv f{x_1},\pv f{x_2},\ldots,\pv f{x_n}}\tp.
 	\]
 \end{definition}
 因此方向导数也可以看做
@@ -132,13 +132,13 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 	\begin{center}
 		$F(P)=\vec 0$且$\frac{D(f_1,\ldots,f_m)}{D(y_1,\ldots,y_m)}(P)\neq 0$
 		\vimplies
-		$Y=Y(X)$存在，且$\frac{\p(y_1,\ldots,y_m)}{\p(x_1,\ldots,x_n)}=-\left(\frac{\p(f_1,\ldots,f_m)}{\p(y_1,\ldots,y_m)}\right)^{-1}\frac{\p(f_1,\ldots,f_m)}{\p(x_1,\ldots,x_n)}.$
+		$Y=Y(X)$存在，且$\frac{\p(y_1,\ldots,y_m)}{\p(x_1,\ldots,x_n)}=-\biggp{\frac{\p(f_1,\ldots,f_m)}{\p(y_1,\ldots,y_m)}}^{-1}\frac{\p(f_1,\ldots,f_m)}{\p(x_1,\ldots,x_n)}.$
 	\end{center}
 \end{theorem}
 \begin{theorem}{反函数}{}
 	给定$Y=F(X)$，则反函数$X=F^{-1}(Y)$满足
 	\[
-		J_{F^{-1}}(X)=\left(J_F(X)\right)^{-1}.
+		J_{F^{-1}}(X)=J_F(X)^{-1}.
 	\]
 \end{theorem}
 \begin{example}{二阶偏导数举例}{}
@@ -154,7 +154,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 	\end{align*}
 	故
 	{\scriptsize\begin{align*}
-		\pw zyx=-\division{\left[\biggp{\pv fz}^2\pw fyx-\pv fy\pv fz\pw fzx-\pv fx\pv fz\pw fyz+\pv fx\pv fy\pv[2]fz\right]}{\biggp{\pv fz}^3}.
+		\pw zyx=-\division{\biggb{\biggp{\pv fz}^2\pw fyx-\pv fy\pv fz\pw fzx-\pv fx\pv fz\pw fyz+\pv fx\pv fy\pv[2]fz}}{\biggp{\pv fz}^3}.
 	\end{align*}}
 \end{example}
 \section{法与切}
@@ -196,7 +196,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 \paragraph{曲面的法线和切平面}
 \subparagraph{显函数}
 \[
-	z=f(x,y)\implies\vec v=\left[\pv fx,\pv fy,-1\right]_{(x_0,y_0)}.
+	z=f(x,y)\implies\vec v=\Bigb{\pv fx,\pv fy,-1}_{(x_0,y_0)}.
 \]
 \subparagraph{参数方程}
 \begin{align*}
@@ -205,7 +205,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 		y=f_2(u,v) \\
 		z=f_3(u,v)
 	\end{cases}
-	\implies\vec v=\left[\frac{D(f_2,f_3)}{D(u,v)},\frac{D(f_3,f_1)}{D(u,v)},\frac{D(f_1,f_2)}{D(u,v)}\right]_{(u_0,v_0)}.
+	\implies\vec v=\biggb{\frac{D(f_2,f_3)}{D(u,v)},\frac{D(f_3,f_1)}{D(u,v)},\frac{D(f_1,f_2)}{D(u,v)}}_{(u_0,v_0)}.
 \end{align*}
 \subparagraph{隐函数}
 \[
@@ -227,8 +227,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 		F_1(x,y,z)=0 \\
 		F_2(x,y,z)=0
 	\end{cases}
-	\implies\vec v=\left[\frac{D(F_1,F_2)}{D(y,z)},\frac{D(F_1,F_2)}{D(z,x)},\frac{D(F_1,F_2)}{D(x,y)}
-		\right]_{P_0}
+	\implies\vec v=\biggb{\frac{D(F_1,F_2)}{D(y,z)},\frac{D(F_1,F_2)}{D(z,x)},\frac{D(F_1,F_2)}{D(x,y)}}_{P_0}
 \end{align*}
 \newpage
 \section{Talyor公式}
@@ -262,13 +261,13 @@ $\exists\theta\in(0,1),X_\theta:=X_0+\theta\Delta X$
 此处$\alpha(\Delta X)=\frac12\Delta X\tp\tilde{H_f}(X_0+\theta\Delta X)\Delta X=o(\norm{\Delta X}^2),\quad\Delta X\to0$
 \paragraph{$m$阶Talyor公式} % $\Delta X=[\Delta x_1,\Delta x_2,\ldots,\Delta x_n]\tp,$
 \begin{align*}
-	f(X) & =\sum_{k=0}^{m}\frac1{k!}\left(\sum_{i=1}^{n}\Delta x_i\pp{x_i}\right)^kf(X_0)+\frac1{(m+1)!}\left(\sum_{i=1}^{n}\Delta x_i\pp{x_i}\right)^{m+1}f(X_\theta) \\
-		 & =\sum_{k=0}^{m}\frac1{k!}\left(\sum_{i=1}^{n}\Delta x_i\pp{x_i}\right)^kf(X_0)+o(\norm{\Delta X}^m)
+	f(X) & =\sum_{k=0}^{m}\frac1{k!}\biggp{\sum_{i=1}^{n}\Delta x_i\pp{x_i}}^kf(X_0)+\frac1{(m+1)!}\biggp{\sum_{i=1}^{n}\Delta x_i\pp{x_i}}^{m+1}f(X_\theta) \\
+		 & =\sum_{k=0}^{m}\frac1{k!}\biggp{\sum_{i=1}^{n}\Delta x_i\pp{x_i}}^kf(X_0)+o(\norm{\Delta X}^m)
 \end{align*}
 $\color{gray}\text{例：}f(x,y)=$
 \begin{align*}
-	\color{gray}f(x_0,y_0)+\pv fx\Delta x+\pv fy\Delta y+\frac12\left(\frac{\p^2f}{\p x^2}\Delta x^2+2\pw fxy\Delta x\Delta y+\pv[2]fy\Delta y^2\right) \\
-	\color{gray}+\frac16\left(\pv[3]fx\Delta x^3+3\frac{\p^3f}{\p x^2\p y}\Delta x^2\Delta y+3\frac{\p^3f}{\p x\p y^2}\Delta x\Delta y^2+\pv[3]fy\Delta y^3\right)+\cdots.
+	\color{gray}f(x_0,y_0)+\pv fx\Delta x+\pv fy\Delta y+\frac12\biggp{\frac{\p^2f}{\p x^2}\Delta x^2+2\pw fxy\Delta x\Delta y+\pv[2]fy\Delta y^2} \\
+	\color{gray}+\frac16\biggp{\pv[3]fx\Delta x^3+3\frac{\p^3f}{\p x^2\p y}\Delta x^2\Delta y+3\frac{\p^3f}{\p x\p y^2}\Delta x\Delta y^2+\pv[3]fy\Delta y^3}+\cdots.
 \end{align*}
 $\color{gray}\text{最后换回来：}\Delta x=x-x_0,\Delta y=y-y_0$
 \section{极值与条件极值}

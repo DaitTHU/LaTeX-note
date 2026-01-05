@@ -13,11 +13,11 @@
 			u=u(x,y), \\
 			v=v(x,y).
 		\end{cases}
-		\quad\left(\frac{D(x,y)}{D(u,v)}\neq 0\right).
+		\quad\frac{D(x,y)}{D(u,v)}\neq 0.
 	\end{align*}
 	就会变为以$u,v$为变量的区域$D'$，积分也会变换为
 	\[
-		\iint_Df(x,y)\d x\nd y=\iint_{D'}f(x(u,v),y(u,v))\left|\frac{D(x,y)}{D(u,v)}\right|\d u\nd v.
+		\iint_Df(x,y)\d x\nd y=\iint_{D'}f(x(u,v),y(u,v))\abs{\frac{D(x,y)}{D(u,v)}}\d u\nd v.
 	\]
 \end{theorem}
 \paragraph{例：极坐标}$x=\rho\cos\theta,y=\rho\sin\theta.$
@@ -36,11 +36,11 @@
 		y=y(u,v), \\
 		z=z(u,v).
 	\end{cases}
-	\quad\left(\pv{(x,y,z)}{(u,v)}\text{列满秩}\right).
+	\quad\pv{(x,y,z)}{(u,v)}\text{列满秩}.
 \end{align*}
 转化为$O-uv$曲面中的二重积分问题，其中两条曲线切向量
 \[
-	\vec u=\left[\pv xu,\pv yu,\pv zu\right]\tp,\qquad\vec v=\left[\pv xv,\pv yv,\pv zv\right]\tp
+	\vec u=\Bigb{\pv xu,\pv yu,\pv zu}\tp,\qquad\vec v=\Bigb{\pv xv,\pv yv,\pv zv}\tp
 \]
 则
 \[
@@ -56,8 +56,8 @@
 \end{align}
 另一种方式是利用$(\vec u\times\vec v)^2=u^2v^2-(\vec u\cdot\vec v)^2,$
 \begin{align}
-	E & =\vec u\cdot\vec u=\left(\pv xu\right)^2+\left(\pv yu\right)^2+\left(\pv zu\right)^2, \\
-	G & =\vec v\cdot\vec v=\left(\pv xv\right)^2+\left(\pv yv\right)^2+\left(\pv zv\right)^2, \\
+	E & =\vec u\cdot\vec u=\Bigp{\pv xu}^2+\Bigp{\pv yu}^2+\Bigp{\pv zu}^2, \\
+	G & =\vec v\cdot\vec v=\Bigp{\pv xv}^2+\Bigp{\pv yv}^2+\Bigp{\pv zv}^2, \\
 	F & =\vec u\cdot\vec v=\pv xu\pv xv+\pv yu\pv yv+\pv zu\pv zv.
 \end{align}
 \[
@@ -65,7 +65,7 @@
 \]
 特别地，当曲线是显式的，即$z=z(x,y)$
 \[
-	S=\iint_D\sqrt{1+\left(\pv zx\right)^2+\left(\pv zy\right)^2}\d x\nd y.
+	S=\iint_D\sqrt{1+\Bigp{\pv zx}^2+\Bigp{\pv zy}^2}\d x\nd y.
 \]
 \section{三重积分}
 \begin{theorem}
@@ -84,7 +84,7 @@
 			y=y(r,s,t), \\
 			z=z(r,s,t).
 		\end{cases}
-		\quad\left(\frac{D(x,y,z)}{D(r,s,t)}\neq 0\right).
+		\quad\frac{D(x,y,z)}{D(r,s,t)}\neq 0.
 	\end{align*}
 	有
 	\[
@@ -116,16 +116,16 @@
 	\]
 	作变换$x_i=\sqrt{1-x_n^2}\,u_i,(i=1,\ldots,n-1)$，则
 	\[
-		\frac{D(x_1,\ldots,x_{n-1})}{D(u_1,\ldots,u_{n-1})}=\left(1-x_n^2\right)^{(n-1)/2}.
+		\frac{D(x_1,\ldots,x_{n-1})}{D(u_1,\ldots,u_{n-1})}=(1-x_n^2)^{(n-1)/2}.
 	\]
 	可得
 	\begin{align*}
-		V_n & =\int_{-1}^1\int\cdot\cdot\cdot\int_{\Omega_{n-1}}\left(1-x_n^2\right)^{(n-1)/2}\d u_1\cdot\cdot\cdot\d u_{n-1}\d x_n \\
-			& =\int_{-1}^1\left(1-x_n^2\right)^{(n-1)/2}V_{n-1}\d x_n=2V_{n-1}\int_0^1\left(1-x^2\right)^{(n-1)/2}\d x.
+		V_n & =\int_{-1}^1\int\cdot\cdot\cdot\int_{\Omega_{n-1}}(1-x_n^2)^{(n-1)/2}\d u_1\cdot\cdot\cdot\d u_{n-1}\d x_n \\
+			& =\int_{-1}^1(1-x_n^2)^{(n-1)/2}V_{n-1}\d x_n=2V_{n-1}\int_0^1(1-x^2)^{(n-1)/2}\d x.
 	\end{align*}
 	令$x=\sqrt t$，则
 	\begin{align*}
-		V_n & =V_{n-1}\int_0^1(1-t)^{(n-1)/2}t^{-1/2}\d t=V_{n-1}\text B\left(\frac12,\frac{n+1}2\right)                                                                  \\
+		V_n & =V_{n-1}\int_0^1(1-t)^{(n-1)/2}t^{-1/2}\d t=V_{n-1}\text B\Bigp{\frac12,\frac{n+1}2}\\
 			& =V_{n-1}\cdot\fracdisp{\Gamma\Bigp{\frac12}\Gamma\Bigp{\frac{n+1}2}}{\Gamma\Bigp{\frac{n+2}2}}=V_{n-1}\cdot\fracdisp{\Gamma\Bigp{\frac{n+1}2}}{\Gamma\Bigp{\frac{n+2}2}}\sqrt\pi \\
 			& =V_1\cdot\fracdisp{\Gamma\Bigp{\frac32}}{\Gamma\Bigp{\frac{n+2}2}}\pi^{(n-1)/2}=\fracdisp{\pi^{n/2}}{\Gamma\Bigp{\frac n2+1}}.
 	\end{align*}

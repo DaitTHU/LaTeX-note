@@ -500,17 +500,17 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
         \]
         \item Neumann边界条件：给定表面上电位的法向导数
         \[
-            \edg{\pv\Phi n}_{\p V}=f;
+            \eval{\pv\Phi n}_{\p V}=f;
         \]
         \item 混合边界条件：给定$\Gamma_{\text{D}}$上的电位和$\Gamma_{\text{N}}$上电位的法向导数
         \[
             \Phi|_{\Gamma_{\text{D}}}=f,\quad
-            \edg{\pv\Phi n}_{\Gamma_{\text{N}}}=f',
+            \eval{\pv\Phi n}_{\Gamma_{\text{N}}}=f',
         \]
         其中$\Gamma_{\text{D}},\Gamma_{\text{N}}$是表面$\p V$的一个划分，满足$\Gamma_{\text{D}}\cup\Gamma_{\text{N}}=\p V$且$\Gamma_{\text{D}}\cap\Gamma_{\text{N}}=\varnothing$；
         \item Robin边界条件：给定表面上电位与其法向导数的线性组合
         \[
-            \edg{\alpha\Phi+\beta\pv\Phi n}_{\p V}=f.
+            \eval{\alpha\Phi+\beta\pv\Phi n}_{\p V}=f.
         \]
         % 其中$\alpha,\beta$可以是函数。
     \end{itemize}
@@ -526,7 +526,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \[
     \begin{cases}
         \nabla^2U=0,\\
-        U|_{\p V}=0\enspace\text{或}\enspace\edg{\pv Un}_{\p V}=0,
+        U|_{\p V}=0\enspace\text{或}\enspace\eval{\pv Un}_{\p V}=0,
     \end{cases}
 \]
 由Green第一公式\eqref{eqn:Green I}，令式中$\phi=\psi=U$，则
@@ -548,7 +548,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \begin{remark}
     对于Robin边界条件，
     \[
-        \edg{\alpha U+\beta\pv Un}_{\p V}=0\implies\int_V\abs{\nabla U}^2\d V=-\oint_{\p V}\alpha U^2/\beta\d A,
+        \eval{\alpha U+\beta\pv Un}_{\p V}=0\implies\int_V\abs{\nabla U}^2\d V=-\oint_{\p V}\alpha U^2/\beta\d A,
     \]
     当$\alpha,\beta$同号时，仍可得出$U\equiv 0$，解是唯一的。
     但当$\alpha,\beta$异号时，无法保证解的唯一性。
@@ -592,7 +592,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     我们也可以设法找到一个$G$满足：
     \begin{equation}
         \label{eqn:Neumann Green condition}
-        \edg{\pv G{n'}}_{\p V}\equiv-\frac{4\pi}S,
+        \eval{\pv G{n'}}_{\p V}\equiv-\frac{4\pi}S,
         \tag{$\ast\ast$}
     \end{equation}
     其中$S$是边界$\p V$的面积，
@@ -688,7 +688,7 @@ Neumann边界条件的泛函
 \begin{subequations}
     \begin{align}
         \lapla\psi&=-g,\\
-        \edg{\pv\psi n}_{\p V}&=f.
+        \eval{\pv\psi n}_{\p V}&=f.
     \end{align}
 \end{subequations}
 
@@ -711,13 +711,13 @@ Neumann边界条件的泛函
 \end{center}
 则
 \begin{equation}
-    \Phi_{i\pm 1,j}=\Phi_{i,j}\pm h\edg{\pv\Phi x}_{i,j}+\frac{h^2}2\edg{\pv[2]\Phi x}_{i,j}\pm\frac{h^3}6\edg{\pv[3]\Phi x}_{i,j}+\bigo(h^4),
+    \Phi_{i\pm 1,j}=\Phi_{i,j}\pm h\eval{\pv\Phi x}_{i,j}+\frac{h^2}2\eval{\pv[2]\Phi x}_{i,j}\pm\frac{h^3}6\eval{\pv[3]\Phi x}_{i,j}+\bigo(h^4),
 \end{equation}
 $\Phi_{i,j\pm 1}$同理，可得
 \begin{subequations}
     \begin{align}
-        \edg{\pv[2]\Phi x}_{i,j}&=\frac{\Phi_{i+1,j}+\Phi_{i-1,j}-2\Phi_{i,j}}{h^2}+\bigo(h^2),\\
-        \edg{\pv[2]\Phi y}_{i,j}&=\frac{\Phi_{i,j+1}+\Phi_{i,j-1}-2\Phi_{i,j}}{h^2}+\bigo(h^2),
+        \eval{\pv[2]\Phi x}_{i,j}&=\frac{\Phi_{i+1,j}+\Phi_{i-1,j}-2\Phi_{i,j}}{h^2}+\bigo(h^2),\\
+        \eval{\pv[2]\Phi y}_{i,j}&=\frac{\Phi_{i,j+1}+\Phi_{i,j-1}-2\Phi_{i,j}}{h^2}+\bigo(h^2),
     \end{align}
 \end{subequations}
 故二维Poisson方程

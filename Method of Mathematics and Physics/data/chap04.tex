@@ -258,7 +258,7 @@
 \begin{align}
 	\begin{cases}
 		\lapla u=-f(M),&M\in V\subseteq\RR^3\\
-		\edg u_{\p V}=\varphi(M),
+		\eval u_{\p V}=\varphi(M),
 	\end{cases}
 \end{align}
 物理上看，这是静电场的基本问题：空间区域$V$内有电荷体密度$\rho=-\varepsilon f$，边界上电位已知为$\varphi$，求$V$内电位$u$。
@@ -267,11 +267,11 @@
 \begin{align*}
 	\begin{cases}
 		\lapla v=-f(M),\\
-		\edg v_{\p V}=0,
+		\eval v_{\p V}=0,
 	\end{cases}\quad
 	\begin{cases}
 		\lapla w=0,\\
-		\edg w_{\p V}=\varphi(M),
+		\eval w_{\p V}=\varphi(M),
 	\end{cases}
 \end{align*}
 其中$v$表示在边界接地条件下体内电荷产生的电场，$w$表示由边界约束引起的电场。
@@ -280,7 +280,7 @@
 	\begin{align}
 		\begin{cases}
 			\lapla G(M;N)=-\vd(M-N),\\
-			\edg G_{\p V}=0.
+			\eval G_{\p V}=0.
 		\end{cases}
 	\end{align}
 	的解$G(M;N)$称为Poisson第I边值问题的Green函数。
@@ -311,7 +311,7 @@ Fourier方法是求Green函数的基本方法，但对于一些特殊的区域�
 	\[
 		\begin{cases}
 			\lapla g=0,\\
-			\edg g_{\p V}=-U,
+			\eval g_{\p V}=-U,
 		\end{cases}
 	\]
 	是$N$的点电荷在边界上的感应电荷产生的电场。
@@ -329,20 +329,20 @@ Fourier方法是求Green函数的基本方法，但对于一些特殊的区域�
 	\[
 		U_1=\frac{-1}{4\pi\sqrt{(x-\xi)^2+(y-\eta)^2+(z+\zeta)^2}},
 	\]
-	在边界上$\edg{U_0}_{z=0}=-\edg{U_1}_{z=0}$
+	在边界上$\eval{U_0}_{z=0}=-\eval{U_1}_{z=0}$
     \begin{align*}
         G=\frac1{4\pi}\bigg[&\frac1{\sqrt{(x-\xi)^2+(y-\eta)^2+(z-\zeta)^2}}-\\
         &\qquad\frac1{\sqrt{(x-\xi)^2+(y-\eta)^2+(z+\zeta)^2}}\bigg],
     \end{align*}
 	边界方向导数
 	\[
-		\edg{\pv Gn}_{\zeta=0}=\edg{-\pv G\zeta}_{\zeta=0}=\frac{-z}{2\pi[(x-\xi)^2+(y-\eta)^2+z^2]^{3/2}}
+		\eval{\pv Gn}_{\zeta=0}=\eval{-\pv G\zeta}_{\zeta=0}=\frac{-z}{2\pi[(x-\xi)^2+(y-\eta)^2+z^2]^{3/2}}
 	\]
 	故对于上半空间Dirichlet问题
 	\[
 		\begin{cases}
 		\lapla u=0,&z>0\\
-		\edg u_{z=0}=\varphi(x,y)
+		\eval u_{z=0}=\varphi(x,y)
 	\end{cases}
 	\]
 	解的Poisson公式
@@ -361,15 +361,15 @@ Fourier方法是求Green函数的基本方法，但对于一些特殊的区域�
 	\begin{gather*}
 		\begin{cases}
 			\lapla G(M;N)=-\vd(M-N),&0\leqslant r<R\\
-			\edg G_{r=R}=0
+			\eval G_{r=R}=0
 		\end{cases}\\
-		\implies \edg{\pv Gn}_{\rho=R}=\frac{R^2-r^2}{4\pi R(R^2+r^2-2Rr\cos\psi)^{3/2}}.
+		\implies \eval{\pv Gn}_{\rho=R}=\frac{R^2-r^2}{4\pi R(R^2+r^2-2Rr\cos\psi)^{3/2}}.
 	\end{gather*}
 	故球内Dirichlet问题，解的Poisson形式
 	\begin{gather*}
 		\begin{cases}
 			\lapla u=0,&0\leqslant r<R\\
-			\edg u_{r=R}=\varphi(\theta,\phi)
+			\eval u_{r=R}=\varphi(\theta,\phi)
 		\end{cases}\\
 		\implies u(r,\theta,\phi)=\frac1{4\pi R}\oint_{S_R}\frac{(R^2-r^2)\varphi(\theta_0,\phi_0)\d S_0}{(R^2+r^2-2Rr\cos\psi)^{3/2}}.
 	\end{gather*}
@@ -407,8 +407,8 @@ Fourier法是求Green函数的基本方法，主要思想是按照特征函数�
 	\end{equation*}
 	有
 	\begin{align*}
-		u(x,y)&=-\biggb{\int\zti\varphi(\xi)\edg{\pv Gn}_{\eta=0}\d\xi+\int\zti\psi(\xi)\edg{\pv Gn}_{\eta=a}\d\xi}\\
-		&=\int\zti\varphi(\xi)\edg{\pv G\eta}_{\eta=0}\d\xi-\int\zti\psi(\xi)\edg{\pv G\eta}_{\eta=a}\d\xi
+		u(x,y)&=-\biggb{\int\zti\varphi(\xi)\eval{\pv Gn}_{\eta=0}\d\xi+\int\zti\psi(\xi)\eval{\pv Gn}_{\eta=a}\d\xi}\\
+		&=\int\zti\varphi(\xi)\eval{\pv G\eta}_{\eta=0}\d\xi-\int\zti\psi(\xi)\eval{\pv G\eta}_{\eta=a}\d\xi
 	\end{align*}
 	进而
 	\begin{align*}
@@ -439,11 +439,11 @@ $\beta=0$即第I边值问题。$\alpha=0$即第II边值问题，但此时表示�
 \begin{align*}
 	\begin{cases}
 		\lapla G=-\vd(M-N)+\frac1v,\\
-		\edg{\pv Gn}_{\p V}=0,
+		\eval{\pv Gn}_{\p V}=0,
 	\end{cases}\enspace\text{或}\quad
 	\begin{cases}
 		\lapla G=-\vd(M-N),\\
-		\edg{\pv Gn}_{\p V}=-\frac1s,
+		\eval{\pv Gn}_{\p V}=-\frac1s,
 	\end{cases}
 \end{align*}
 其中$v,s$为$V$的体积和表面积。有解
