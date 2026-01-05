@@ -1,7 +1,7 @@
 \chapter{电磁场}
 \paragraph{经典力学电磁场}考虑质量$\mu$电荷量$q$的粒子在电磁场中的运动，经典力学的Hamilton量\footnote{注意这里采用Gauss单位制；国际单位制下正则动量$mv+qA$。}
 \[
-	H=\frac1{2\mu}\kh{\bm p-\frac qc\bm A}^2+q\varphi.\CGS
+	H=\frac1{2\mu}\Bigp{\bm p-\frac qc\bm A}^2+q\varphi.\CGS
 \]
 其中$\bm A$是电磁矢势，$\varphi$是标势，$\bm p$是正则动量。
 \begin{align*}
@@ -21,13 +21,13 @@
 另一方面
 \begin{align*}
 	\mu\ddot x & =\dot p_x-\frac qc\dot A_x=-\pv Hx-\frac qc\dot A_x                                                        \\
-	           & =\frac1\mu\sum_{i=1}^3\kh{p_i-\frac qcA_i}\frac qc\pv{A_i}x-q\pv\varphi{x}-\frac qc\dot A_x                    \\
-	           & =\frac qc\sum_{i=1}^3\dot r_i\pv{A_i}x-q\pv\varphi{x}-\frac qc\kh{\pv{A_x}t+\sum_{i=1}^3\dot r_i\pv{A_x}{r_i}} \\
-	           & =-q\kh{\pv\varphi{x}+\frac1c\pv{A_x}t}+\frac qc\fkh{\bm v\times\kh{\nabla\times\bm A}}_x.
+	           & =\frac1\mu\sum_{i=1}^3\Bigp{p_i-\frac qcA_i}\frac qc\pv{A_i}x-q\pv\varphi{x}-\frac qc\dot A_x                    \\
+	           & =\frac qc\sum_{i=1}^3\dot r_i\pv{A_i}x-q\pv\varphi{x}-\frac qc\biggp{\pv{A_x}t+\sum_{i=1}^3\dot r_i\pv{A_x}{r_i}} \\
+	           & =-q\biggp{\pv\varphi{x}+\frac1c\pv{A_x}t}+\frac qc[\bm v\times(\curl\bm A)]_x.
 \end{align*}
 因此
 \[
-	\mu\ddot{\bm r}=q\kh{\bm E+\frac{\bm v}c\times\bm B}.\CGS
+	\mu\ddot{\bm r}=q\Bigp{\bm E+\frac{\bm v}c\times\bm B}.\CGS
 \]
 \section{电磁场中的Hamilton算符}
 在\Schr 方程的一次量子化中，使用了以下对应关系
@@ -39,7 +39,7 @@
 \end{align}
 有电磁场时，电磁势表示为
 \[
-A_\mu=\kh{\bm A,\i\varphi}
+	A_\mu=(\bm A,\i\varphi)
 \]
 按照经典的最小电磁耦合原理，对电荷$q$的粒子，其$H-q\varphi$和$\bm p-\frac qc\bm A$之间的关系如同无电磁场时$H$和$\bm p$的关系一样。
 
@@ -52,7 +52,7 @@ A_\mu=\kh{\bm A,\i\varphi}
 \end{align}
 因而引入电磁场中带电粒子的Hamilton算符为
 \begin{align}
-	\hat H=\frac1{2\mu}\kh{\qo p-\frac qc\bm A}^2+q\varphi+V.
+	\hat H=\frac1{2\mu}\Bigp{\qo p-\frac qc\bm A}^2+q\varphi+V.
 \end{align}
 其中$\qo p=-\i\hbar\nabla$为正则动量算符，而机械动量算符$\qo P=\qo p-\frac qc\bm A$。
 电磁场中的\Schr 方程依然满足连续性方程
@@ -82,13 +82,13 @@ $\qo p\to-\qo p$，相应的需要$\bm A\to-\bm A$，方程才不变。
 \]
 电子的Hamilton算符
 \begin{align*}
-	\hat H\tot & =\frac1{2M}\fkh{\kh{\hat p_x-\frac{eB}{2c}\hat y}^2+\kh{\hat p_y+\frac{eB}{2c}\hat x}^2+\hat p_z^2}\CGS\\
-	           & =\frac1{2M}\kh{\hat p_x^2+\hat p_y^2+\hat p_z^2}+\frac{e^2B^2}{8Mc^2}\kh{\hat x^2+\hat y^2}+\frac{eB}{2Mc}\kh{\hat x\hat p_y-\hat y\hat p_x}.
+	\hat H\tot & =\frac1{2M}\Bigb{\Bigp{\hat p_x-\frac{eB}{2c}\hat y}^2+\Bigp{\hat p_y+\frac{eB}{2c}\hat x}^2+\hat p_z^2}\CGS\\
+	           & =\frac1{2M}(\hat p_x^2+\hat p_y^2+\hat p_z^2)+\frac{e^2B^2}{8Mc^2}(\hat x^2+\hat y^2)+\frac{eB}{2Mc}(\hat x\hat p_y-\hat y\hat p_x).
 \end{align*}
 将运动分解为$z$方向的自由运动和$xy$平面中的运动
 \begin{gather*}
 	\hat H\tot=\hat H+\omega_\Larmor\hat L_z+\frac{\hat p_z^2}{2M},\\
-	\hat H=\frac1{2M}\kh{\hat p_x^2+\hat p_y^2}+\frac12M\omega_\Larmor^2\kh{\hat x^2+\hat y^2}
+	\hat H=\frac1{2M}(\hat p_x^2+\hat p_y^2)+\frac12M\omega_\Larmor^2(\hat x^2+\hat y^2)
 \end{gather*}
 其中Larmor频率
 \[
@@ -103,7 +103,7 @@ $B^2$的线性项：表示反磁项，对于自由电子，该项必须考虑。
 \]
 代入$\hat H\psi=E\psi$
 \[
-	\fkh{-\frac{\hbar^2}{2M}\kh{\dd[2]\rho+\frac1\rho\dd\rho}+\frac12M\omega_\Larmor^2\rho^2}R=(E-M\hbar\omega_\Larmor)R.
+	\Bigb{-\frac{\hbar^2}{2M}\Bigp{\dd[2]\rho+\frac1\rho\dd\rho}+\frac12M\omega_\Larmor^2\rho^2}R=(E-M\hbar\omega_\Larmor)R.
 \]
 本征函数涉及合流超几何函数
 \[
@@ -124,7 +124,7 @@ Landau能级
 \]
 Hamilton量
 \[
-	\hat H=\frac1{2M}\fkh{\kh{\hat p_x-\frac{eB}c\hat y}^2+\hat p_y^2}.
+	\hat H=\frac1{2M}\Bigb{\Bigp{\hat p_x-\frac{eB}c\hat y}^2+\hat p_y^2}.
 \]
 不显含$\hat x$和$\hat y$故$\hat p_x,\hat p_z$守恒，取守恒量完全集$\{\hat H,\hat p_x\}$的共同本征态
 \[
@@ -132,7 +132,7 @@ Hamilton量
 \]
 进而
 \[
-	\frac1{2M}\fkh{\kh{p_x-\frac{eB}cy}^2-\hbar^2\dd[2]y}\phi(y)=E\phi(y).
+	\frac1{2M}\Bigb{\Bigp{p_x-\frac{eB}cy}^2-\hbar^2\dd[2]y}\phi(y)=E\phi(y).
 \]
 令$y_0=cp_x/eB$
 \[
@@ -146,7 +146,7 @@ Hamilton量
 
 能量本征值
 \[
-E_n=\kh{n+\frac12}\hbar\omega_\cyc,\quad n=0,1,2,\ldots
+	E_n=\Bigp{n+\frac12}\hbar\omega_\cyc,\quad n=0,1,2,\ldots
 \]
 与$E_N\equiv(2n+1)\hbar\omega_\Larmor$正对应，相应的能量本征函数
 \[

@@ -1,7 +1,7 @@
 \chapter{算符}
 量子力学的算符表示对波函数的运算．描述可观测量的算符都是线性的
 \[
-	\hat A\kh{\alpha\psi_1+\beta\psi_2}=\alpha\hat A\psi_1+\beta\hat A\psi_2.
+	\hat A(\alpha\psi_1+\beta\psi_2)=\alpha\hat A\psi_1+\beta\hat A\psi_2.
 \]
 算符的加法满足交换律和结合率，但乘法不一定满足分配率。
 \begin{definition}{对易子}{Commutator}
@@ -21,7 +21,7 @@
 考虑位移和动量的对易，一维中
 \begin{align*}
 	\hat x\hat p\psi & =-\i\hbar x\dv\psi{x}.                             \\
-	\hat p\hat x\psi & =-\i\hbar\dv{x\psi}x=-\i\hbar\kh{\psi+\dv\psi{x}}.
+	\hat p\hat x\psi & =-\i\hbar\dv{x\psi}x=-\i\hbar\Bigp{\psi+\dv\psi{x}}.
 \end{align*}
 因此对波函数来说
 \begin{align}
@@ -54,7 +54,7 @@
 	\]
 	Laplace算符
 	\[
-		\nabla^2=\frac1\rho\pp\rho\kh{\rho\pp\rho}+\frac1{\rho^2}\pp[2]\varphi+\pp[2]z.
+		\nabla^2=\frac1\rho\pp\rho\Bigp{\rho\pp\rho}+\frac1{\rho^2}\pp[2]\varphi+\pp[2]z.
 	\]
 \fi
 \begin{definition}{共轭算符}{Conjugate Operator}
@@ -88,7 +88,7 @@
 显然$\qo x,\qo p$是Hermite算符。比如
 \begin{align*}
 	\int\iti & \psi\cj\hat p_x\varphi\d x=-\i\hbar\int\iti\psi\cj\dv\varphi{x}\d x                                                                     \\
-	         & =-\i\hbar\left[\cancel{\psi\cj\varphi{\Big\vert}\iti}-\int\iti\varphi\dv{\psi\cj}x\d x\right]=\int\iti\kh{\hat p_x\psi}\cj\varphi\d x.
+	         & =-\i\hbar\left[\cancel{\psi\cj\varphi{\Big\vert}\iti}-\int\iti\varphi\dv{\psi\cj}x\d x\right]=\int\iti(\hat p_x\psi)\cj\varphi\d x.
 \end{align*}
 以上用到了束缚态条件，其实非束缚态下算符也是Hermite的。
 \section{Hermite算符}
@@ -143,7 +143,7 @@
 	\]
 	但$\psi_p$在$\RR$上平方不可积，应考虑$\delta$函数归一化
 	\[
-		(\psi_{p'},\psi_p)=\abs C^2\int\iti\e{\i\kh{p-p'}x/\hbar}\d x=\abs C^2\cdot 2\pi\hbar\vd(p-p').
+		(\psi_{p'},\psi_p)=\abs C^2\int\iti\e{\i(p-p')x/\hbar}\d x=\abs C^2\cdot 2\pi\hbar\vd(p-p').
 	\]
 	$\delta$函数前系数应为一，有
 	\[
@@ -152,7 +152,7 @@
 	
 	三维动量算符本征函数同理
 	\[
-		\psi_{\bm p}(\r)=\frac1{\kh{2\pi\hbar}^{3/2}}\e{\i\bm p\cdot\r/\hbar}.
+		\psi_{\bm p}(\r)=\frac1{(2\pi\hbar)^{3/2}}\e{\i\bm p\cdot\r/\hbar}.
 	\]
 	\tcblower
 	或对其进行\textbf{箱归一化}：粒子波函数在任意边长为$L$的正方体内是正交归一化的
@@ -165,7 +165,7 @@
 	\]
 	$\bm p_1\neq\bm p_2$时
 	\[
-		\frac{(-\i\hbar)^3}{L^3\D p_x\D p_y\D p_z}\kh{\e{\i L\D p_x/\hbar}-1}\kh{\e{\i L\D p_y/\hbar}-1}\kh{\e{\i L\D p_z/\hbar}-1}=0.
+		\frac{(-\i\hbar)^3}{L^3\D p_x\D p_y\D p_z}\bigp{\e{\i L\D p_x/\hbar}-1}\bigp{\e{\i L\D p_y/\hbar}-1}\bigp{\e{\i L\D p_z/\hbar}-1}=0.
 	\]
 	于是
 	\[
@@ -191,9 +191,9 @@
 
 这种情形多半出现在多自由度体系中。对这种体系，一组两两对易的、完全去除简并的算符集称为它的对易可观测量完全集(complete system of commuting observables, CSCO)。完备算符集中算符的数目就是体系的自由度数。如果这些量子数都是分立量子数，共同本征函数的正交归一关系就是
 \[
-	\kh{\psi_{n\ell m},\psi_{n'\ell'm'}}=\vd_{nn'}\vd_{\ell\ell'}\vd_{mm'}.
+	\inp{\psi_{n\ell m}}{\psi_{n'\ell'm'}}=\vd_{nn'}\vd_{\ell\ell'}\vd_{mm'}.
 \]
-比如$\hkh{\hat p_x,\hat p_y,\hat p_z},\{\hat L^2,\hat L_z\}$等。
+比如$\{\hat p_x,\hat p_y,\hat p_z\},\{\hat L^2,\hat L_z\}$等。
 
 \paragraph{量子力学的测量问题}在此引入量子力学的前四个基本公设
 \begin{theorem}{量子力学的基本公设}{Posulates of Quantum Mechanics}
@@ -204,13 +204,13 @@
 		\item 任一波函数可以展开为力学量算符本征函数的线性叠加，测得力学量为本征值$\lambda_n$的几率（密度）为展开式中对应本征函数系数的模方$\abs{c_n}^2$。
 	\end{compactenum}
 \end{theorem}
-量子力学关于测量问题的基本假设是：算符$\hat A$的本征值集$\hkh\lambda$就是力学量$\hat A$的测量值集；$\hat A$的本征函数$\psi_\lambda$代表力学量$\hat A$有确定值$\lambda$的量子状态。且若一般的态
+量子力学关于测量问题的基本假设是：算符$\hat A$的本征值集$\{\lambda\}$就是力学量$\hat A$的测量值集；$\hat A$的本征函数$\psi_\lambda$代表力学量$\hat A$有确定值$\lambda$的量子状态。且若一般的态
 \[
 	\psi=\sum c_\lambda\phi_\lambda,
 \]
 则处于$\phi_\lambda$的概率为$\abs{c_\lambda}^2$。
 
-对于正交归一的完备本征函数系$\hkh{\psi_n(x)}$叠加
+对于正交归一的完备本征函数系$\{\psi_n(x)\}$叠加
 \[
 	\psi(x)=\sum c_n\phi_n(x)
 \]
@@ -220,8 +220,8 @@ c_n=(\phi_n,\psi),
 \]
 代入
 \begin{align*}
-	\psi(x) & =\sum\kh{\int\phi_n(x')\psi(x')\d x'}\psi_n(x)  \\
-	        & =\int\kh{\sum\phi_n(x)\phi_n(x')}\psi(x')\d x'.
+	\psi(x) & =\sum\biggp{\int\phi_n(x')\psi(x')\d x'}\psi_n(x)  \\
+	        & =\int\biggp{\sum\phi_n(x)\phi_n(x')}\psi(x')\d x'.
 \end{align*}
 因此完备性要求
 \begin{align}
@@ -237,12 +237,12 @@ c_n=(\phi_n,\psi),
 
 \paragraph{平均值}对离散谱
 \begin{align}\notag
-	\avg A & =\sum\abs{c_n}^2a_n=\sum\kh{\psi,\phi_n}\kh{\phi_n,\psi}a_n  \\
-	       & =\sum(\psi,\hat A \phi_n)\kh{\phi_n,\psi}=(\psi,\hat A\psi).\label{Derivation of Mean Value}
+	\avg A & =\sum\abs{c_n}^2a_n=\sum\inp{\psi}{\phi_n}\inp{\phi_n}{\psi}a_n  \\
+	       & =\sum\inp{\psi}{\hat A \phi_n}\inp{\phi_n}{\psi}=\inp{\psi}{\hat A\psi}.\label{Derivation of Mean Value}
 \end{align}
 对于未归一化的情形
 \[
-	\avg A=\frac{(\psi,\hat A\psi)}{(\psi,\psi)}.
+	\avg A=\frac{\inp{\psi}{\hat A\psi}}{\inp{\psi}{\psi}}.
 \]
 连续谱的形式的相同的。
 
@@ -307,7 +307,7 @@ c_n=(\phi_n,\psi),
 
 考察以下积分不等式
 \[
-I(\xi):=\int\abs{\kh{\xi\,\D\hat A-\i\D\hat B}\psi}^2\d r\geqslant 0.
+I(\xi):=\int\abs{\bigp{\xi\,\D\hat A-\i\D\hat B}\psi}^2\d r\geqslant 0.
 \]
 拆开
 \[
@@ -332,7 +332,7 @@ I(\xi)=(\vd A)^2\xi^2-\i\ave{\cmm AB}\xi+(\vd B)^2.
 直角坐标表象下
 \begin{align*}
 	\qo L & =[\hat x,\hat y,\hat z]\tp\times[\hat p_x,\hat p_y,\hat p_z]\tp                             \\
-	      & =\fkh{\hat y\hat p_z-\hat z\hat p_y,\hat z\hat p_x-\hat x\hat p_z,\hat x\hat p_y-\hat y\hat p_x}\tp % \\ &
+	      & =[\hat y\hat p_z-\hat z\hat p_y,\hat z\hat p_x-\hat x\hat p_z,\hat x\hat p_y-\hat y\hat p_x]\tp % \\ &
 	=:[\hat L_x,\hat L_y,\hat L_z]\tp.
 \end{align*}
 易证$\hat L_x,\hat L_y,\hat L_z$是Hermite的。对易子
@@ -355,27 +355,27 @@ $\cmm{L_y}{L_z}$等同理，因此
 
 回顾\textit{球坐标系}下
 \[
-	\nabla=\fkh{\pp r,\frac1r\pp\theta,\frac1{r\sin\theta}\pp\varphi}\tp_\mathrm{Sp}.
+	\nabla=\Bigb{\pp r,\frac1r\pp\theta,\frac1{r\sin\theta}\pp\varphi}\tp_\mathrm{Sp}.
 \]
 Laplace算符
 \[
-	\nabla^2=\frac1{r^2}\pp r\kh{r^2\pp r}+\frac1{r^2\sin\theta}\pp\theta\kh{\sin\theta\pp\theta}+\frac1{r^2\sin^2\theta}\pp[2]\varphi.
+	\nabla^2=\frac1{r^2}\pp r\Bigp{r^2\pp r}+\frac1{r^2\sin\theta}\pp\theta\Bigp{\sin\theta\pp\theta}+\frac1{r^2\sin^2\theta}\pp[2]\varphi.
 \]
 定义$\qo L=-\i\hbar\,\qo\Lambda$
 \[
-	\qo\Lambda:=\qo r\times\,\nabla=\fkh{0,-\frac1{\sin\theta}\pp\varphi,\pp\theta}\tp_\mathrm{Sp}.
+	\qo\Lambda:=\qo r\times\,\nabla=\Bigb{0,-\frac1{\sin\theta}\pp\varphi,\pp\theta}\tp_\mathrm{Sp}.
 \]
 特别地，代回直角坐标系后，有
 \iffalse
 	\begin{align*}
-		\hat L_x & =\i\hbar\kh{+\sin\varphi\pp\theta+\cot\theta\cos\varphi\pp\varphi} \\
-		\hat L_y & =\i\hbar\kh{-\cos\varphi\pp\theta+\cot\theta\sin\varphi\pp\varphi} \\
+		\hat L_x & =\i\hbar\Bigp{+\sin\varphi\pp\theta+\cot\theta\cos\varphi\pp\varphi} \\
+		\hat L_y & =\i\hbar\Bigp{-\cos\varphi\pp\theta+\cot\theta\sin\varphi\pp\varphi} \\
 		\hat L_z & =-\i\hbar\pp\varphi.
 	\end{align*}
 \fi
 \begin{gather}
 	\hat L_z=-\i\hbar\pp\varphi;\\
-	\hat L^2=-\hbar^2\fkh{\frac1{\sin\theta}\pp\theta\kh{\sin\theta\pp\theta}+\frac1{\sin^2\theta}\pp[2]\varphi}.
+	\hat L^2=-\hbar^2\Bigb{\frac1{\sin\theta}\pp\theta\Bigp{\sin\theta\pp\theta}+\frac1{\sin^2\theta}\pp[2]\varphi}.
 \end{gather}
 由$\hat L_z,\hat L^2$对易，二者有共同本征函数。
 \paragraph{$\hat L_z$的本征态}设本征值为$m\hbar$，本征函数$\psi_m(\varphi)$
@@ -388,20 +388,20 @@ Laplace算符
 \]
 \paragraph{$\hat L^2$的本征态}设本征值为$\lambda\hbar^2$，本征函数$Y(\theta,\varphi)$
 \[
-	\hat\Lambda^2Y=\frac1{\sin\theta}\pp\theta\kh{\sin\theta\pv Y\theta}+\frac1{\sin^2\theta}\pv[2]Y\varphi=-\lambda Y.
+	\hat\Lambda^2Y=\frac1{\sin\theta}\pp\theta\Bigp{\sin\theta\pv Y\theta}+\frac1{\sin^2\theta}\pv[2]Y\varphi=-\lambda Y.
 \]
 分离变量$Y(\theta,\varphi)=\varTheta(\theta)\varPhi(\varphi)$
 \[
-	\frac\varPhi{\sin\theta}\dd\theta\kh{\sin\theta\dv\varTheta\theta}+\frac\varTheta{\sin^2\theta}\dv[2]\varPhi\varphi=-\lambda\varTheta\varPhi.
+	\frac\varPhi{\sin\theta}\dd\theta\Bigp{\sin\theta\dv\varTheta\theta}+\frac\varTheta{\sin^2\theta}\dv[2]\varPhi\varphi=-\lambda\varTheta\varPhi.
 \]
 即
 \[
-	\frac{\sin\theta}\varTheta\dd\theta\kh{\sin\theta\dv\varTheta\theta}+\lambda\sin^2\theta=-\frac1\varPhi\pv[2]\varPhi\varphi=m^2.
+	\frac{\sin\theta}\varTheta\dd\theta\Bigp{\sin\theta\dv\varTheta\theta}+\lambda\sin^2\theta=-\frac1\varPhi\pv[2]\varPhi\varphi=m^2.
 \]
 
 引入$w:=\cos\theta,\;P(w):=\varTheta(\arccos w)=\varTheta(\theta)$
 \begin{equation}
-	\dd w\fkh{\kh{1-w^2}\dv Pw}+\kh{\lambda-\frac{m^2}{1-w^2}}P=0.
+	\dd w\Bigb{(1-w^2)\dv Pw}+\Bigp{\lambda-\frac{m^2}{1-w^2}}P=0.
 \end{equation}
 这是缔合Legendre方程，$\pm 1$是方程的奇点，只有
 \[
@@ -411,19 +411,19 @@ Laplace算符
 
 特别地，当$m=0$时，
 \[
-	\dd w\fkh{\kh{1-w^2}\dv Pw}+\ell(\ell+1)P=0.
+	\dd w\Bigb{(1-w^2)\dv Pw}+\ell(\ell+1)P=0.
 \]
 便是Legendre方程，其解是Legendre多项式
 \[
-P_\ell(w)=\frac1{2^\ell\ell!}\dd[\ell]w\kh{w^2-1}^\ell.
+	P_\ell(w)=\frac1{2^\ell\ell!}\dd[\ell]w(w^2-1)^\ell.
 \]
 对应的，当$m>0$时，缔合\Legd 函数
 \[
-P_\ell^m(w)=\kh{1-w^2}^{m/2}\dd[m]wP_\ell(w).
+	P_\ell^m(w)=(1-w^2)^{m/2}\dd[m]wP_\ell(w).
 \]
 而对于$m<0$的情形，其实应当与$\abs m$相同；若对正负均沿用原定义，则
 \[
-P_\ell^{-m}=(-1)^m\frac{(\ell-m)!}{(\ell+m)!}P_\ell^m,\quad m>0.
+	P_\ell^{-m}=(-1)^m\frac{(\ell-m)!}{(\ell+m)!}P_\ell^m,\quad m>0.
 \]
 
 \Legd 多项式的奇偶性由$\ell$决定。
@@ -476,7 +476,7 @@ $\hat L^2$的本征值$\ell$下有$2\ell+1$个可能的$m$，简并度为$2\ell+
 \end{align*}
 \paragraph{宇称}作空间反射变换$\r\to-\r$，对应球坐标中$(r,\theta,\varphi)\to(r,\pi-\theta,\pi+\varphi)$
 \begin{gather*}
-	P_{\ell}^{m}\kh{\cos (\pi-\theta)}=P_{\ell}^{m}(-\cos \theta)=(-1)^{\ell-m} P_{\ell}^{m}(\cos \theta) \\
+	P_{\ell}^{m}\bigp{\cos (\pi-\theta)}=P_{\ell}^{m}(-\cos \theta)=(-1)^{\ell-m} P_{\ell}^{m}(\cos \theta) \\
 	\e{\i m(\pi+\varphi)}=(-1)^{m}\e{\i m \varphi}                                                   \\
 	Y_{\ell m}(\pi-\theta, \pi+\varphi)=(-1)^{\ell} Y_{\ell m}(\theta, \varphi)
 \end{gather*}
@@ -489,15 +489,15 @@ $\hat L^2$的本征值$\ell$下有$2\ell+1$个可能的$m$，简并度为$2\ell+
 记不住，记住也没用。
 \paragraph{径向动量算符}球坐标系不同于直角坐标，$\qo r\cdot\,\qo p$并不是Hermite的。因此要使算符是Hermite的，定义
 \[
-	\hat p_r=\frac12\kh{\qo{e_r}\cdot\,\qo p+\,\qo p\,\cdot\,\qo{e_r}}.
+	\hat p_r=\frac12(\qo{e_r}\cdot\,\qo p+\,\qo p\,\cdot\,\qo{e_r}).
 \]
 计算得
 \begin{align}
-	\hat p_r=-\frac{\i\hbar}2\kh{\pp r+\pp r+\frac1r+\frac1{r\sin\theta}\cdot\sin\theta}=-\i\hbar\kh{\pp r+\frac1r}.
+	\hat p_r=-\frac{\i\hbar}2\Bigp{\pp r+\pp r+\frac1r+\frac1{r\sin\theta}\cdot\sin\theta}=-\i\hbar\Bigp{\pp r+\frac1r}.
 \end{align}
 且
 \[
-	\hat p_r^2=-\hbar^2\kh{\pp[2]r+\frac2r\pp r}=-\hbar^2\frac1{r^2}\pp r\kh{r^2\pp r}.
+	\hat p_r^2=-\hbar^2\Bigp{\pp[2]r+\frac2r\pp r}=-\hbar^2\frac1{r^2}\pp r\Bigp{r^2\pp r}.
 \]
 因此
 \begin{align}

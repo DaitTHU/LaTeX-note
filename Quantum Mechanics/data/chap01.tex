@@ -1,17 +1,152 @@
 \chapter{基本假设}
 
-\section{态矢量}
+\section{数学基础}
 
-在量子力学中，一个物理态(physical state)由复Hilbert空间(Hilbert space)中的态矢量(state vector)表示。
+\begin{definition}
+    {线性空间}{linear space}
+    给定复数域$\CC$和集合$V$，若
+    
+    加法$+:V\times V\to V$满足：
+    \begin{itemize}
+        \item 结合律：$\forall\ket a,\ket b,\ket c\in V,$
+        \begin{equation}
+			(\ket a+\ket b)+\ket c=\ket a+(\ket b+\ket c),
+		\end{equation}
+        \item 零元$\ket 0\in V$：$\forall\ket a\in V,$
+        \begin{equation}
+			\ket a+\ket 0=\ket a,
+		\end{equation}
+        \item 逆元：$\forall\ket a\in V$，均存在$-\ket a\in V$
+		\begin{equation}
+			\ket a+(-\ket a)=\ket 0,
+		\end{equation}
+        \item 交换律：$\forall\ket a,\ket b\in V$
+		\begin{equation}
+			\ket a+\ket b=\ket b+\ket a;
+		\end{equation}
+    \end{itemize}
+    数乘$\cdot:\CC\times V\to V$满足：
+    \begin{itemize}
+        \item 单位元$1\in\CC$：$\forall\ket a\in V,$
+		\begin{equation}
+			1\ket a=\ket a,
+		\end{equation}
+        \item 结合律：$\forall\lambda,\mu\in\CC,\,\ket a\in V,$
+		\begin{equation}
+			(\lambda\mu)\ket a=\lambda(\mu \ket a),
+		\end{equation}
+        \item 分配率1：$\forall\lambda,\mu\in\CC,\,\ket a\in V,$
+		\begin{equation}
+			(\lambda+\mu)\ket a=\lambda \ket a+\mu \ket a,
+		\end{equation}
+        \item 分配率2：$\forall\lambda\in\CC,\,\ket a,\ket b\in V,$
+		\begin{equation}
+			\lambda(\ket a+\ket b)=\lambda \ket a+\lambda \ket b.
+		\end{equation}
+    \end{itemize}
+    则称$V$在$\CC$上构成一个线性空间(linear space)。
+\end{definition}
 
-\begin{definition}{Dirac符号}{Dirac notation}
-	态矢量可以用一个列向量$\ket\psi$表示，称之为右矢(ket)。
-	
-	左矢(bra)是右矢的共轭转置$\bra\psi\equiv\ket\psi^\dagger$。
+\begin{definition}
+	{内积}{inner product}
+	给定线性空间，若存在映射$\brkt{\cdot}{\cdot}:V\times V\to\CC$，使得$\forall\ket a,\ket b,\ket c\in V,\,\lambda\in\CC$满足：
+	\begin{itemize}
+		\item 共轭对称性：
+		\begin{equation}
+			\brkt ba=\brkt ab\cj,
+		\end{equation}
+		\item 线性：
+		\begin{subequations}
+			\begin{gather}
+				\bra a(\ket b+\ket c)=\brkt ab+\brkt ac, \\
+				(\bra a+\bra b)\ket c=\brkt ac+\brkt bc, \\
+				\bra a(\lambda\ket b)=\lambda\brkt ab.
+			\end{gather}
+		\end{subequations}
+		\item 正定性：
+		\begin{equation}
+			\brkt aa\geqslant0,
+		\end{equation}
+		且$\brkt aa=0\iff\ket a=\ket 0.$
+	\end{itemize}
+	则称$\brkt{\cdot}{\cdot}$为内积(inner product)，$V$构成内积空间(inner product space)。
 \end{definition}
-\begin{definition}{Hilbert空间}{Hilbert space}
-	Hilbert空间$H$是一个定义了内积(inner product)的向量空间。$\forall\ket a,\ket b\in H$，其内积$\brkt ab$满足以下性质：
+
+\begin{definition}
+	{对偶空间}{dual space}
+	可以将内积视为映射
+	\begin{equation}
+		\bra a:V\to\CC,\quad\ket b\mapsto\brkt ab.
+	\end{equation}
+	所有这样的映射$\bra a$构成$V$的对偶空间(dual space)，记作$V^*$。
 \end{definition}
+
+\begin{definition}
+	{Dirac符号}{Dirac notation}
+	给定线性空间$V$，$\ket a\in V$称为右矢(ket vector)，而$\bra a\in V^*$称为左矢(bra vector)。
+\end{definition}
+
+\begin{definition}
+	{范数}{norm}
+	给定内积空间，定义范数为映射$\norm{\cdot}:V\to\RR$，使得$\forall\ket a,\ket b\in V,\,\lambda\in\CC$满足：
+	\begin{itemize}
+		\item 正定性：
+		\begin{equation}
+			\norm{\ket a}\geqslant0,
+		\end{equation}
+		且$\norm{\ket a}=0\iff\ket a=\ket 0;$
+		\item 齐次性：
+		\begin{equation}
+			\norm{\lambda\ket a}=\abs\lambda\norm{\ket a};
+		\end{equation}
+		\item 三角不等式：
+		\begin{equation}
+			\norm{\ket a+\ket b}\leqslant\norm{\ket a}+\norm{\ket b}.
+		\end{equation}
+	\end{itemize}
+	则称$\norm{\cdot}$为范数(norm)，$V$构成赋范空间(normed space)。
+\end{definition}
+
+\begin{corollary}
+	根据内积可以定义范数：
+	\begin{equation}
+		\norm{\ket a}:=\sqrt{\brkt a a}.
+	\end{equation}
+	称为内积诱导的范数。
+	因此内积空间必然是赋范空间。
+\end{corollary}
+
+\begin{definition}
+	{赋范空间的完备性}{completeness of normed space}
+	赋范空间$V$若满足：对于任意Cauchy列$\{\ket{a_n}\}$，均存在$\ket a\in V$使得
+	\begin{equation}
+		\lim_{n\to\infty}\norm{\ket{a_n}-\ket a}=0,\quad
+		(\text{记作$\lim_{n\to\infty}\ket{a_n}=\ket a$})
+	\end{equation}
+	则称$V$是完备的(complete)。
+	完备的赋范空间称为Banach空间，
+	完备的内积空间称为Hilbert空间。
+\end{definition}
+
+在量子力学中，一个物理态(physical state)由复Hilbert空间中的态矢量(state vector) $\ket\psi$表示。
+且任意非零复数倍的态矢量表示同一物理态，为了方便，通常取归一化的态矢量，即$\brkt\psi\psi=1$。
+
+\begin{postulate}
+	{量子力学基本假设}{Basic Postulate of Quantum Mechanics}
+	\begin{itemize}
+		\item 物理系统的每一个态对应Hilbert空间中的一个态矢量$\ket\psi$，态矢量唯一确定物理态；
+		\item 可观测量对应Hermite算符，其本征值为可观测量可能的取值，本征态构成Hilbert空间的一组完备归一化基底；
+		\item 测量可观测量时，系统态$\ket\psi$坍缩到该可观测量的某个本征态$\ket{\psi_n}$，测得对应本征值的概率为$\abs{\brkt{\psi_n}\psi}^2$；
+		\item 态矢量随时间演化满足Schrödinger方程
+		\[
+			\i\hbar\p_t\ket\psi=\hat H\ket\psi,
+		\]
+		其中$\hat H$为系统的Hamilton算符。
+	\end{itemize}
+\end{postulate}
+
+
+
 
 \begin{definition}{波函数}{Wave Function}
 	波函数$\psi(\r)$刻画粒子在空间的概率分布．约定内积记号
@@ -65,7 +200,7 @@
 	\]
 	概率流密度
 	\[
-		\bm j(\r,t):=-\frac{\i\hbar}{2m}\kh{\psi^*\nabla\psi-\psi\nabla\psi^*}.
+		\bm j(\r,t):=-\frac{\i\hbar}{2m}(\psi^*\nabla\psi-\psi\nabla\psi^*).
 	\]
 	由Schrödinger方程，二者有关系
 	\[

@@ -24,8 +24,8 @@
 
 形式上，利用Taylor展开
 \begin{align*}
-	\psi(\r,t) & =\sum_na_n\e{-\i E_nt/\hbar}\phi_n(\r)=\sum_na_n\fkh{\sum_{k=0}^\infty\frac1{k!}\kh{-\frac{\i E_nt}\hbar}^k}\phi_n(\r)     \\
-	           & =\sum_na_n\fkh{\sum_{k=0}^\infty\frac1{k!}\kh{-\frac{\i\hat Ht}\hbar}^k}\phi_n(\r)=\sum_na_n\e{-\i\hat Ht/\hbar}\phi_n(\r) \\
+	\psi(\r,t) & =\sum_na_n\e{-\i E_nt/\hbar}\phi_n(\r)=\sum_na_n\biggb{\sum_{k=0}^\infty\frac1{k!}\biggp{-\frac{\i E_nt}\hbar}^k}\phi_n(\r)     \\
+	           & =\sum_na_n\biggb{\sum_{k=0}^\infty\frac1{k!}\biggp{-\frac{\i\hat Ht}\hbar}^k}\phi_n(\r)=\sum_na_n\e{-\i\hat Ht/\hbar}\phi_n(\r) \\
 	           & =\e{-\i\hat Ht/\hbar}\psi(\r,0).
 \end{align*}
 \begin{definition}{时间演化算符}{Time Evolution Operator}
@@ -43,7 +43,7 @@
 	\begin{equation*}
 		\begin{aligned}
 			\psi(x,t) & =\e{-\i\hat Ht/\hbar}\vd(x)=\frac1{2\pi}\int\iti\e{\i kx}\e{\i\hbar k^2t/2m}\d k      \\
-			          & =\sqrt{\frac m{2\pi\hbar t}}\exp\kh{\i\frac{mx^2}{2\hbar t}-\frac{\i\pi}4}\neq\vd(x).
+			          & =\sqrt{\frac m{2\pi\hbar t}}\exp\biggp{\i\frac{mx^2}{2\hbar t}-\frac{\i\pi}4}\neq\vd(x).
 		\end{aligned}
 	\end{equation*}
 	其中用到了
@@ -54,7 +54,7 @@
 \begin{example}
 	{一维自由粒子Gauss波包的时间演化}{}
 	\[
-		\psi(x,0)=\frac1{\kh{2\pi\sigma^2}^{1/4}}\e{-x^2/4\sigma^2}\e{\i k_0x},
+		\psi(x,0)=\frac1{(2\pi\sigma^2)^{1/4}}\e{-x^2/4\sigma^2}\e{\i k_0x},
 	\]
 	Fourier变换得
 	\[
@@ -63,11 +63,11 @@
 	于是\footnote{Everyone should calculate it once in their lifetime. - Shuo Jiang.}
 	\begin{align*}
 		\psi(x,t) & =\frac1{\sqrt{2\pi}}\int\iti\varphi(k)\e{\i kx}\e{-\i\hbar k^2t/2m}\d k                                                                                                                            \\
-		          & =\fracdisp{\exp\kh{\i k_0x-\frac{\hbar k_0^2}{2m}t}}{\fkh{\sqrt{2\pi}\sigma\kh{1+\frac{\i\hbar t}{2m\sigma^2}}}^{1/2}}\exp\fkh{-\fracdisp{\kh{x-\frac{\hbar k_0}mt}^2}{4\sigma^2+\frac{2\i\hbar t}m}}.
+		          & =\fracdisp{\exp\Bigp{\i k_0x-\frac{\hbar k_0^2}{2m}t}}{\biggb{\sqrt{2\pi}\sigma\Bigp{1+\frac{\i\hbar t}{2m\sigma^2}}}^{1/2}}\exp\Biggl[-\fracdisp{\Bigp{x-\frac{\hbar k_0}mt}^2}{4\sigma^2+\frac{2\i\hbar t}m}\Biggr].
 	\end{align*}
 	概率密度
 	\begin{align*}
-		\abs{\psi(x,t)}^2=\fkh{2\pi\!\kh{\sigma^2+\frac{\i\hbar t}{2m\sigma^2}}}^{-1/2}\exp\fkh{-\fracdisp{\kh{x-\frac{\hbar k_0}mt}^2}{2\sigma^2+\frac{2\hbar^2 t^2}{m^2\sigma^2}}}.
+		\abs{\psi(x,t)}^2=\biggb{2\pi\Bigp{\sigma^2+\frac{\i\hbar t}{2m\sigma^2}}}^{-1/2}\exp\Biggl[-\fracdisp{\Bigp{x-\frac{\hbar k_0}mt}^2}{2\sigma^2+\frac{2\hbar^2 t^2}{m^2\sigma^2}}\Biggr].
 	\end{align*}
 	
 	可见波包中心运动速度为$\hbar k_0/m$，而波包宽度是发散的
@@ -82,7 +82,7 @@
 \]
 随时间的变化
 \begin{align*}
-	\dd t{\ave A} & =\kh{\pv\psi{t},\hat A\psi}+\cancel{\kh{\psi,\pv{\!\hat A}t\psi}}+\kh{\psi,\hat A\pv{\psi}t}.
+	\dd t{\ave A} & =\inp{\pv\psi{t}}{\hat A\psi}+\cancel{\inp{\psi}{\pv{\hat A}t\psi}}+\inp{\psi}{\hat A\pv{\psi}t}.
 \end{align*}
 一般力学量不显含时间$t$，由\Schr 方程
 \[
@@ -90,7 +90,7 @@
 \]
 因此
 \begin{align*}
-	\dd t{\ave A} & =\kh{\frac{\hat H\psi}{\i\hbar},\hat A\psi}+\kh{\psi,\hat A\frac{\hat H\psi}{\i\hbar}}
+	\dd t{\ave A} & =\inp{\frac{\hat H\psi}{\i\hbar}}{\hat A\psi}+\inp{\psi}{\hat A\frac{\hat H\psi}{\i\hbar}}
 	% \\	&=-\frac1{\i\hbar}(\psi,\hat H\hat A\psi)+\ave{\pv{\!\hat A}t}+\frac1{\i\hbar}(\psi,\hat A\hat H\psi)
 	=\frac1{\i\hbar}\ave{\cmm AH}. % +\ave{\pv{\!\hat A}t}.
 \end{align*}
@@ -162,7 +162,7 @@
 \]
 显然$\hat T,\hat p_i$对易，$\hat V,\hat x_i$对易，展开为
 \[
-	\sum \kh{\cmm{x_i}T\hat p_i+\hat T\hat x_i\hat p_i+\hat x_i\cmm{p_i}V+\hat V\hat x_i\hat p_i-E\hat x_i\hat p_i}\psi=0.
+	\sum\Bigp{\cmm{x_i}T\hat p_i+\hat T\hat x_i\hat p_i+\hat x_i\cmm{p_i}V+\hat V\hat x_i\hat p_i-E\hat x_i\hat p_i}\psi=0.
 \]
 由
 \[
@@ -170,12 +170,12 @@
 \]
 化为
 \begin{gather*}
-	\sum_i\fkh{\i\hbar\frac{\hat p_i^2}m-\i\hbar\hat x_i\pv{\hat V}{x_i}+(\hat T+\hat V-E)\hat x_i\hat p_i}\psi=0,\\
-	\kh{\frac{\hat p^2}m-\sum_i\hat x_i\pv{\hat V}{x_i}}\psi=\frac\i\hbar(\hat T+\hat V-E)\sum_i\hat x_i\hat p_i\psi.
+	\sum_i\biggb{\i\hbar\frac{\hat p_i^2}m-\i\hbar\hat x_i\pv{\hat V}{x_i}+(\hat T+\hat V-E)\hat x_i\hat p_i}\psi=0,\\
+	\biggp{\frac{\hat p^2}m-\sum_i\hat x_i\pv{\hat V}{x_i}}\psi=\frac\i\hbar(\hat T+\hat V-E)\sum_i\hat x_i\hat p_i\psi.
 \end{gather*}
 左乘$\psi\cj$并全空间积分
 \[
-	\ave{\frac{\hat p^2}m-\sum_i\hat x_i\pv{\hat V}{x_i}}=\frac\i\hbar\kh{(\hat T+\hat V-E)\psi,\sum_i\hat x_i\hat p_i\psi}=0.
+	\ave{\frac{\hat p^2}m-\sum_i\hat x_i\pv{\hat V}{x_i}}=\frac\i\hbar\inp{(\hat T+\hat V-E)\psi}{\sum_i\hat x_i\hat p_i\psi}=0.
 \]
 左边即Virial定理。
 \begin{theorem}{Virial定理}{Virial Theorem}
@@ -195,7 +195,7 @@
 	\end{gather*}
 	故
 	\[
-		\delta x\,\delta p=\frac E\omega=\kh{n+\frac12}\hbar\geqslant\frac\hbar{2}.
+		\delta x\,\delta p=\frac E\omega=\Bigp{n+\frac12}\hbar\geqslant\frac\hbar{2}.
 	\]
 \end{example}
 \begin{example}{氢原子动能}{}
@@ -248,7 +248,7 @@
 
 在粒子波包足够窄的情况下，% 如果使定理成立，还必须满足势场变化缓慢的条件
 \[
-F(x)=-\fkh{\pv{V(\avg x)}{\avg x}+\pv[2]{V(\avg x)}{\avg x}(x-\avg x)+\frac12\pv[3]{V(\avg x)}{\avg x}(x-\avg x)^2+\cdots}.
+F(x)=-\biggb{\pv{V(\avg x)}{\avg x}+\pv[2]{V(\avg x)}{\avg x}(x-\avg x)+\frac12\pv[3]{V(\avg x)}{\avg x}(x-\avg x)^2+\cdots}.
 \]
 若要满足$\avg F(x)=F(\avg x)$，必须还要有
 \begin{align}
@@ -276,7 +276,7 @@ $I$显然是一个trivial的幺正算符，若幺正算符$\hat U$与$\hat I$差
 
 如果$\hat U$和$\hat I$差距并不小，则可以通过充分多次充分小的幺正变换
 \begin{align}
-	\hat U=\lim_{n\to\infty}\kh{I+\i\,\frac an\hat F}^n\equiv\e{\i a\hat F}.
+	\hat U=\lim_{n\to\infty}\Bigp{I+\i\,\frac an\hat F}^n\equiv\e{\i a\hat F}.
 \end{align}
 用幺正算符实现的波函数和算符的变换称为幺正变换
 \begin{align}
@@ -296,11 +296,11 @@ Fourier变换也是幺正变换：
 \end{align}
 对Hamilton算符进行幺正变换
 \begin{align}
-	\hat U\hat H\hat U^{-1}=\frac{p^2}{2m}+V\kh{\i\hbar\pp p}
+	\hat U\hat H\hat U^{-1}=\frac{p^2}{2m}+V\Bigp{\i\hbar\pp p}
 \end{align}
 故动量表象下的\Schr 方程 
 \begin{align}
-	\fkh{\frac{p^2}{2m}+V\kh{\i\hbar\pp p}}\varphi(p)=E\varphi(p).
+	\biggb{\frac{p^2}{2m}+V\Bigp{\i\hbar\pp p}}\varphi(p)=E\varphi(p).
 \end{align}
 
 对波函数进行幺正变换而量子力学规律不变，
@@ -322,7 +322,7 @@ Fourier变换也是幺正变换：
 \end{theorem}
 \paragraph{时间均匀性和能量守恒}时间平移
 \[
-	\psi(t-\tau)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\kh{\dd t}^n\psi(t)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\kh{\frac{\hat H}{\i\hbar}}^n\psi(t)=\e{\i\tau\hat H/\hbar}\psi(t).
+	\psi(t-\tau)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\Bigp{\dd t}^n\psi(t)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\Bigp{\frac{\hat H}{\i\hbar}}^n\psi(t)=\e{\i\tau\hat H/\hbar}\psi(t).
 \]
 故时间平移算符
 \begin{align}
@@ -331,7 +331,7 @@ Fourier变换也是幺正变换：
 时间平移算符的生成元为$\hat H$，自然是与自身对易，故系统能量守恒。时间平移不变性对应系统能量守恒。
 \paragraph{空间均匀性与动量守恒}空间平移
 \[
-	\psi(\r-\bm a)=\sum_{n=0}^\infty\frac{1}{n!}\kh{-\bm a\cdot\nabla}^n\psi(\r)=\e{-\i\bm a\cdot\qo p/\hbar}\psi(\r).
+	\psi(\r-\bm a)=\sum_{n=0}^\infty\frac{1}{n!}(-\bm a\cdot\nabla)^n\psi(\r)=\e{-\i\bm a\cdot\qo p/\hbar}\psi(\r).
 \]
 空间平移算符
 \begin{align}
@@ -340,8 +340,8 @@ Fourier变换也是幺正变换：
 空间平移不变性对应动量守恒。
 \paragraph{空间各向同性与角动量守恒}绕$\bm e_n$旋转小角度$\alpha$
 \begin{align*}
-	\psi(\r-\bm\alpha\times\r)&=\sum_{n=0}^\infty\frac{1}{n!}\fkh{-(\bm\alpha\times\r)\cdot\nabla}^n\psi(\r),\qquad\bm\alpha:=\alpha\bm e_n.\\
-	&=\sum_{n=0}^\infty\frac{1}{n!}\fkh{-\bm\alpha\cdot(\r\times\nabla)}^n\psi(\r)=\e{-\i\bm\alpha\cdot\qo L/\hbar}\psi(\r).
+	\psi(\r-\bm\alpha\times\r)&=\sum_{n=0}^\infty\frac{1}{n!}[-(\bm\alpha\times\r)\cdot\nabla]^n\psi(\r),\qquad\bm\alpha:=\alpha\bm e_n.\\
+	&=\sum_{n=0}^\infty\frac{1}{n!}[-\bm\alpha\cdot(\r\times\nabla)]^n\psi(\r)=\e{-\i\bm\alpha\cdot\qo L/\hbar}\psi(\r).
 \end{align*}
 空间转动算符
 \begin{align}
@@ -377,11 +377,11 @@ Fourier变换也是幺正变换：
 \]
 比如二粒子体系，有对称化波函数
 \[
-	\psi_\mathrm S(q_1,q_2)=\frac1{\sqrt2}\fkh{\psi_1(q_1)\psi_2(q_2)+\psi_1(q_2)\psi_2(q_1)},
+	\psi_\mathrm S(q_1,q_2)=\frac1{\sqrt2}[\psi_1(q_1)\psi_2(q_2)+\psi_1(q_2)\psi_2(q_1)],
 \]
 和反对称化波函数
 \[
-	\psi_\mathrm A(q_1,q_2)=\frac1{\sqrt2}\fkh{\psi_1(q_1)\psi_2(q_2)-\psi_1(q_2)\psi_2(q_1)}.
+	\psi_\mathrm A(q_1,q_2)=\frac1{\sqrt2}[\psi_1(q_1)\psi_2(q_2)-\psi_1(q_2)\psi_2(q_1)].
 \]
 推广到$N$粒子体系，反对称化波函数可以写为
 \begin{align}
