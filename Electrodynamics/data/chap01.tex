@@ -175,7 +175,7 @@
     由散度定理\eqref{eqn:div}以及Gauss定律\eqref{eqn:Gauss law}，可得
     \[
         \oint_{\p V}\bm E\cdot\d\bm A=\int_V\div\bm E\d V=\frac1{\varepsilon_0}\int_V\rho(\bm r)\d V\implies
-        \int_V\biggkh{\div\bm E-\frac\rho{\varepsilon_0}}\d V=0.
+        \int_V\biggp{\div\bm E-\frac\rho{\varepsilon_0}}\d V=0.
     \]
     该式对任意$V$均成立。由此被积分式为零。
     式\eqref{eqn:divE}也被称为Gauss定律的微分形式。
@@ -192,12 +192,12 @@
 \begin{proof}
     由恒等式\footnote{在同时存在多个变量时，需要用下标指定$\nabla$作用的变量。约定：$\nabla$不带下标时，默认作用在$\bm r$上；特别地，当作用在$\bm r'$上时，$\nabla_{\bm r'}$可简记为$\nabla'$。}
     \[
-        \nabla\biggkh{\frac1{\abs{\bm r-\bm r'}}}=-\frac{\bm r-\bm r'}{\abs{\bm r-\bm r'}^3}.
+        \nabla\biggp{\frac1{\abs{\bm r-\bm r'}}}=-\frac{\bm r-\bm r'}{\abs{\bm r-\bm r'}^3}.
     \]
     可将电场\eqref{eqn:E(r)}写成梯度的形式：
     \begin{equation}
         \label{eqn:E(r)=grad}
-        \bm E(\bm r)=-\frac1{4\pi\varepsilon_0}\nabla\biggkh{\int_V\frac{\rho(\bm r')}{\abs{\bm r'-\bm r}}\d V'}
+        \bm E(\bm r)=-\frac1{4\pi\varepsilon_0}\nabla\biggp{\int_V\frac{\rho(\bm r')}{\abs{\bm r'-\bm r}}\d V'}
     \end{equation}
     由式\eqref{eqn:curlgrad}梯度的旋度为$\bm0$即证。
 \end{proof}
@@ -299,12 +299,12 @@
     当$d\to0$时，电位
     \begin{align*}
         \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\int_S\frac{\sigma(\bm r')}{\abs{\bm r-\bm r'}}\d A'-\frac1{4\pi\varepsilon_0}\int_{S'}\frac{\sigma(\bm r')}{\abs{\bm r-\bm r'+d(\bm r')\uvec n}}\d A'\\
-        &\simeq\frac1{4\pi\varepsilon_0}\int_S\sigma(\bm r')d(\bm r')\uvec n\cdot\nabla'\biggkh{\frac1{\abs{\bm r-\bm r'}}}\d A'\\
+        &\simeq\frac1{4\pi\varepsilon_0}\int_S\sigma(\bm r')d(\bm r')\uvec n\cdot\nabla'\biggp{\frac1{\abs{\bm r-\bm r'}}}\d A'\\
         &=-\frac1{4\pi\varepsilon_0}\int_S\sigma(\bm r')d(\bm r')\d\Omega,
     \end{align*}
     上式用到了三维Taylor展开(注意上式是对$\bm r'$求导)，
     \[
-        \frac1{\abs{\bm r+\bm a}}=\frac1r+\bm a\cdot\nabla\biggkh{\frac1r}+\cdots,\quad a\ll r.
+        \frac1{\abs{\bm r+\bm a}}=\frac1r+\bm a\cdot\nabla\biggp{\frac1r}+\cdots,\quad a\ll r.
     \]
     定义层矩(surface-dipole-moment density) 
     \begin{equation}
@@ -317,7 +317,7 @@
     \end{equation}
     % 其中
     % \[
-    %     \uvec n\cdot\nabla'\biggkh{\frac1{\abs{\bm r-\bm r'}}}\d A'=-\frac{\cos\theta}{\abs{\bm r-\bm r'}^2}\d A'=-\d\Omega.
+    %     \uvec n\cdot\nabla'\biggp{\frac1{\abs{\bm r-\bm r'}}}\d A'=-\frac{\cos\theta}{\abs{\bm r-\bm r'}^2}\d A'=-\d\Omega.
     % \]
     因此电位在电偶层两边会发生跳变
     \begin{equation}
@@ -343,7 +343,7 @@
 \end{equation}
 可对上式进行变形，由式\eqref{eqn:divE}和\eqref{eqn:gradPhi}，$\rho=\varepsilon_0\div\bm E=-\varepsilon_0\lapla\Phi$，
 \begin{equation*}
-    W=-\frac{\varepsilon_0}2\int_V\Phi\lapla\Phi\d V=-\frac{\varepsilon_0}2\biggfkh{\oint_{\p V}\Phi\nabla\Phi\cdot\d\bm A-\int_V\abs{\nabla\Phi}^2\d V}
+    W=-\frac{\varepsilon_0}2\int_V\Phi\lapla\Phi\d V=-\frac{\varepsilon_0}2\biggb{\oint_{\p V}\Phi\nabla\Phi\cdot\d\bm A-\int_V\abs{\nabla\Phi}^2\d V}
 \end{equation*}
 由于$V$是整个空间，故边界(无穷远处)的$\Phi=0$，
 因此我们用场的形式表示静电势能
@@ -360,7 +360,7 @@
 观察表达式，式\eqref{eqn:W-E}当然恒为正，但式\eqref{eqn:W-qq}却不一定。原因在于：式\eqref{eqn:W-qq}仅包含了互能(电荷间相互作用的静电势能)，而式\eqref{eqn:W-E}包含了互能和自能(构成点电荷自身所需要的能量)。
 为了解释这一点，考虑两个点电荷$q_1,q_2$的能量密度
 \[
-    w=\frac1{32\pi^2\varepsilon_0}\biggfkh{\frac{q_1^2}{\abs{\bm r-\bm r_1}^4}+\frac{q_2^2}{\abs{\bm r-\bm r_2}^4}+2\frac{q_1q_2(\bm r-\bm r_1)\cdot(\bm r-\bm r_2)}{\abs{\bm r-\bm r_1}^3\abs{\bm r-\bm r_2}^3}}.
+    w=\frac1{32\pi^2\varepsilon_0}\biggb{\frac{q_1^2}{\abs{\bm r-\bm r_1}^4}+\frac{q_2^2}{\abs{\bm r-\bm r_2}^4}+2\frac{q_1q_2(\bm r-\bm r_1)\cdot(\bm r-\bm r_2)}{\abs{\bm r-\bm r_1}^3\abs{\bm r-\bm r_2}^3}}.
 \]
 前两项是自能项，在$\bm r=\bm r_1$或$\bm r=\bm r_2$处发散；
 最后一项是互能项，在全空间的积分正是静电势能的形式。
@@ -399,7 +399,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     {球形电容器}{spherical capacitor}
     内外半径分别为$r,R$的球形电容器，内球带电$Q$，电压
     \[
-        V=\frac Q{4\pi\varepsilon_0}\biggkh{\frac1r-\frac1R},
+        V=\frac Q{4\pi\varepsilon_0}\biggp{\frac1r-\frac1R},
     \]
     故电容为
     \begin{equation}
@@ -449,7 +449,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
             \label{eqn:Green I}
             \int_V(\nabla\phi\cdot\nabla\psi+\phi\lapla\psi)\d V=\oint_{\p V}\phi\pv\psi n\d A,\\
             \label{eqn:Green II}
-            \int_V(\phi\lapla\psi-\psi\lapla\phi)\d V=\oint_{\p V}\biggkh{\phi\pv\psi n-\psi\pv\phi n}\d A.
+            \int_V(\phi\lapla\psi-\psi\lapla\phi)\d V=\oint_{\p V}\biggp{\phi\pv\psi n-\psi\pv\phi n}\d A.
         \end{gather}
     \end{subequations}
 \end{theorem}
@@ -471,7 +471,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 我们选定$\bm r\in V$使得$\delta$函数的积分项得以保留，代入并移项得到
 \begin{equation}
     \label{eqn:Phi-rho with boundary}
-        \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r')}{\abs{\bm r-\bm r'}}\d V'+\frac1{4\pi}\oint_{\p V}\biggfkh{\frac1{\abs{\bm r-\bm r'}}\pv\Phi{n'}-\Phi(\bm r')\pp{n'}\biggkh{\frac1{\abs{\bm r-\bm r'}}}}\d A',
+        \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r')}{\abs{\bm r-\bm r'}}\d V'+\frac1{4\pi}\oint_{\p V}\biggb{\frac1{\abs{\bm r-\bm r'}}\pv\Phi{n'}-\Phi(\bm r')\pp{n'}\biggp{\frac1{\abs{\bm r-\bm r'}}}}\d A',
 \end{equation}
 与式\eqref{eqn:Phi-rho}对比，上式多了两项边界$\p V$上的积分，分别等价于：
 \begin{itemize}
@@ -485,7 +485,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     \item 电偶层的电势($\Phi$不连续)
     \begin{subequations}
         \begin{align}
-            \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\oint_{\p V}D(\bm r')\pp{n'}\biggkh{\frac1{\abs{\bm r-\bm r'}}}\d A'\\
+            \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\oint_{\p V}D(\bm r')\pp{n'}\biggp{\frac1{\abs{\bm r-\bm r'}}}\d A'\\
             D(\bm r)&=-\varepsilon_0\Phi(\bm r).
         \end{align}
     \end{subequations}
@@ -566,7 +566,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \end{definition}
 回到Green第二公式\eqref{eqn:Green II}，这次令$\phi:=\Phi(\bm r'),\enspace\psi:=G(\bm r,\bm r')$，式\eqref{eqn:Phi-rho with boundary}变为
 \begin{equation*}
-    \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm r')G(\bm r,\bm r')\d V'+\frac1{4\pi}\oint_{\p V}\biggfkh{G(\bm r,\bm r')\pv\Phi{n'}-\Phi(\bm r')\pv G{n'}}\d A'.
+    \Phi(\bm r)=\frac1{4\pi\varepsilon_0}\int_V\rho(\bm r')G(\bm r,\bm r')\d V'+\frac1{4\pi}\oint_{\p V}\biggb{G(\bm r,\bm r')\pv\Phi{n'}-\Phi(\bm r')\pv G{n'}}\d A'.
 \end{equation*}
 
 \begin{theorem}
@@ -654,7 +654,7 @@ $F(\bm r, \bm r')/4\pi\varepsilon_0$表示$V$外的电荷系统的势，
     {泛函}{functional}
     泛函(functional)是从函数空间到实数(或复数)的映射，通常表示为包含函数及其导数的定积分。
     \begin{equation}
-        I\bigfkh{y(x)}=\int_a^bf\bigkh{x,y(x),y'(x)}\d x
+        I\bigb{y(x)}=\int_a^bf\bigp{x,y(x),y'(x)}\d x
     \end{equation}
 \end{definition}
 
@@ -669,7 +669,7 @@ Dirichlet边界条件的泛函
 \end{equation}
 考虑一阶变分$\psi\to\psi+\vd\psi$，$\vd I:=I[\psi+\vd\psi]-I[\psi]$
 \[
-    \vd I=\int_V\bigfkh{\nabla\psi\cdot\nabla(\vd\psi)-g\vd\psi}\d V=-\int_V(\lapla\psi+g)\vd\psi\d V+\oint_{\p V}\pv\psi n\vd\psi\d A.
+    \vd I=\int_V\bigb{\nabla\psi\cdot\nabla(\vd\psi)-g\vd\psi}\d V=-\int_V(\lapla\psi+g)\vd\psi\d V+\oint_{\p V}\pv\psi n\vd\psi\d A.
 \]
 考虑$\vd\psi|_{\p V}\equiv 0$，则泛函取极值(即$\vd I=0$)当且仅当
 \begin{equation}
@@ -682,7 +682,7 @@ Neumann边界条件的泛函
 \end{equation}
 可得 
 \[
-    \vd I=-\int_V(\lapla\psi+g)\vd\psi\d V+\oint_{\p V}\biggkh{\pv\psi n-f}\vd\psi\d A,
+    \vd I=-\int_V(\lapla\psi+g)\vd\psi\d V+\oint_{\p V}\biggp{\pv\psi n-f}\vd\psi\d A,
 \]
 则$\vd I=0$当且仅当
 \begin{subequations}
@@ -730,7 +730,7 @@ $\Phi_{i,j\pm 1}$同理，可得
 \end{equation}
 对应的超松弛(successive over-relaxation, SOR)迭代格式为
 \begin{equation}
-    \Phi_{i,j}^{(n+1)}=(1-\omega)\Phi_{i,j}^{(n)}+\frac\omega4\biggfkh{\Phi_{i+1,j}^{(n)}+\Phi_{i-1,j}^{(n)}+\Phi_{i,j+1}^{(n)}+\Phi_{i,j-1}^{(n)}-h^2f_{i,j}},
+    \Phi_{i,j}^{(n+1)}=(1-\omega)\Phi_{i,j}^{(n)}+\frac\omega4\biggb{\Phi_{i+1,j}^{(n)}+\Phi_{i-1,j}^{(n)}+\Phi_{i,j+1}^{(n)}+\Phi_{i,j-1}^{(n)}-h^2f_{i,j}},
 \end{equation}
 可以证明，当$0<\omega<2$时，迭代是收敛的，最优松弛因子(最速收敛)约为
 \begin{equation}

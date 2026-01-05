@@ -84,7 +84,7 @@
 
 \begin{theorem}
 	{Cayley-Hamilton定理}{Cayley-Hamilton theorem}
-	给定特征多项式$p_A$的系数$1,a_1,\ldots,a_n$，可定义矩阵多项式
+	给定特征多项式$p_A:\FF\to\FF$的系数$1,a_1,\ldots,a_n$，可定义矩阵多项式$p_A^*:\FF^{n\times n}\to\FF^{n\times n}$
 	\begin{equation}
 		p_A^*(X)=X^n+a_1X^{n-1}+\cdots+a_{n-1}X+a_nI,
 	\end{equation}
@@ -119,15 +119,16 @@
 		(\lambda I-A)\adj(\lambda I-A)=\det(\lambda I-A)I=p_A(\lambda)I,
 	\]
 	两边展开可得
-	\[
-		B_1\lambda^n+(B_2-AB_1)\lambda^{n-1}+\cdots+(B_n-AB_{n-1})\lambda-AB_n=I\lambda^n+a_1I\lambda^{n-1}+\cdots+a_{n-1}\lambda+a_nI,
-	\]
+	\begin{alignat*}{2}
+		\LHS&=B_1\lambda^n+(B_2-AB_1)\lambda^{n-1}+\cdots+(B_n-AB_{n-1})\lambda-AB_n,\\
+		\RHS&=I\lambda^n+a_1I\lambda^{n-1}+\cdots+a_{n-1}\lambda+a_nI.
+	\end{alignat*}
 	作为系数的矩阵均由$A$确定，与$\lambda$无关。由于上式$\forall\lambda$均成立，故对应系数相同：
-	\[
-		B_1=I,\quad
-		B_{i+1}-AB_i=a_iI,\quad
-		-AB_n=a_nI.
-	\]
+	\begin{align*}
+		B_1&=I,\\
+		B_{i+1}-AB_i&=a_iI,\quad i=1,2,\ldots,n-1,\\
+		-AB_n&=a_nI.
+	\end{align*}
 	因而$p_A^*(A)$可以化为裂项和(telescoping sum)
 	\[
 		p_A^*(A)=A^nB_1+A^{n-1}(B_2-AB_1)+\cdots+A(B_n-AB_{n-1})-AB_n=O.
@@ -139,7 +140,7 @@
 	{Faddeev-LeVerrier算法}{Faddeev-LeVerrier algorithm}
 	特征多项式$p_A(\lambda)$的第$k$个系数$a_k$可以递归地求出：
 	\begin{equation}
-		a_k=-\frac1k\bigfkh{\tr(A^k)+a_1\tr(A^{k-1})+\cdots+a_{k-1}\tr(A)}.
+		a_k=-\frac1k\bigb{\tr(A^k)+a_1\tr(A^{k-1})+\cdots+a_{k-1}\tr(A)}.
 		% a_m=-\frac1m\sum_{k=1}^ma_{m-k}\tr(A^k).
 	\end{equation}
 \end{theorem}
@@ -179,15 +180,16 @@
 	\begin{equation}
 		\adj(-A)=B_n=A^{n-1}+a_1A^{n-2}+\cdots+a_{n-1}I.
 	\end{equation}
-	易证这满足$\adj(-A)(-A)=(-A)\adj(-A)=\det(-A)I=c_0I$。
+	易证这满足$\adj(-A)(-A)=(-A)\adj(-A)=\det(-A)I=a_nI$。
 \end{corollary}
 
 \begin{example}
 	{特征多项式的前几项}{}
+	继$a_1=-\tr(A)$之后，可得
 	\begin{subequations}
 		\begin{align}
-			a_2&=\frac12\bigkh{\tr(A)^2-\tr(A^2)},\\
-			a_3&=\frac16\bigkh{\tr(A)^3-3\tr(A)\tr(A^2)+2\tr(A^3)},
+			a_2&=\frac12\bigp{\tr(A)^2-\tr(A^2)},\\
+			a_3&=\frac16\bigp{\tr(A)^3-3\tr(A)\tr(A^2)+2\tr(A^3)},
 		\end{align}
 	\end{subequations}
 	更一般地，$a_k$的显性表达式由一个$k$阶行列式给出：
@@ -225,7 +227,7 @@
 \end{proof}
 
 由于对角矩阵有很多简单的性质，考虑相似变换$\Lambda=X\iv AX$，其中$\Lambda$为对角矩阵。
-这称为对角化。
+这称为对角化(diagonalization)。
 显然，不是所有方阵都可以对角化。
 
 \begin{theorem}{可对角化判定}{}
@@ -264,7 +266,7 @@
 \newcommand*{\AM}{\mathrm{AM}}
 
 \begin{definition}{几何重数和代数重数}{}
-	几何重数(geometric multiplicity, GM)：特征值$\lambda_i$对应的线性无关特征向量的最大个数，即特征子空间的维数$\dim\bigkh{\N(\lambda_iI-A)}$。
+	几何重数(geometric multiplicity, GM)：特征值$\lambda_i$对应的线性无关特征向量的最大个数，即特征子空间的维数$\dim\bigp{\N(\lambda_iI-A)}$。
 
 	代数重数(algebraic multiplicity, AM)：特征值$\lambda_i$作为特征方程$\det(\lambda I-A)=0$的根$\lambda=\lambda_i$的重复次数。
 	\[
@@ -281,7 +283,7 @@
 	$\GM\leqslant\AM.$
 \end{theorem}
 \begin{proof}
-	任取$n$阶矩阵$A$的一个特征值$\lambda_k$，其$\GM_k=\dim\bigkh{\N(\lambda_kI-A)}$，
+	任取$n$阶矩阵$A$的一个特征值$\lambda_k$，其$\GM_k=\dim\bigp{\N(\lambda_kI-A)}$，
 	\begin{itemize}
 		\item 取$\N(\lambda_kI-A)$的一组正交归一基$\{x_1,\ldots,x_{\GM_k}\}$；
 		\item 取$\N(\lambda_kI-A)^\perp$的一组正交归一基$\{b_1,\ldots,b_{n-\GM_k}\}$。
@@ -311,7 +313,7 @@
 \begin{corollary}
 	$n$阶矩阵$A$的全部特征值为$\{\lambda_1,\ldots,\lambda_r\}$，$A$可对角化当且仅当
 	\[
-		\sum_{i=1}^r\dim\bigkh{\N(\lambda_iI-A)}=n,
+		\sum_{i=1}^r\dim\bigp{\N(\lambda_iI-A)}=n,
 	\]
 	即所有特征值的$\AM_i=\GM_i$。
 \end{corollary}
@@ -413,7 +415,7 @@
 
 其证明是线性代数的核心。其中一些概念需要等到\chapref{chap:linear mapping}线性映射才会提及。先给出几个概念证明引理。
 
-首先，矩阵$A$不可对角化的原因是存在一个特征值$\lambda_i$的$\AM_i>\GM_i=\dim\bigkh{\N(\lambda_iI-A)}$。
+首先，矩阵$A$不可对角化的原因是存在一个特征值$\lambda_i$的$\AM_i>\GM_i=\dim\bigp{\N(\lambda_iI-A)}$。
 也就是说，特征子空间$\N(\lambda_iI-A)$还是太小了，不能提供足够多线性无关的特征向量。
 为此我们需要引入广义特征向量的概念。
 
@@ -456,9 +458,9 @@
 	由此得到的$u_{d-1},\ldots,u_0$称为Jordan链，满足
 	\[
 		u_{d-1}\in\ker(T-\lambda I),\quad
-		u_{d-2}\in\ker\bigkh{(T-\lambda I)^2},\quad
+		u_{d-2}\in\ker\bigp{(T-\lambda I)^2},\quad
 		\ldots,\quad
-		u_0\notin\ker\bigkh{(T-\lambda I)^d}.
+		u_0\notin\ker\bigp{(T-\lambda I)^d}.
 	\]
 	并且$u_{d-1},u_{d-2},\ldots,u_1\in\im(T-\lambda I)$，直到$u_0\notin\im(T-\lambda I)$。
 \end{remark}

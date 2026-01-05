@@ -222,7 +222,7 @@
 \begin{theorem}{分块矩阵的行列式·一}{determinant of bolck matrix I}
 	若$A$是$m$阶方阵，$D$是$n$阶方阵，$B$是$m\times n$矩阵，则
 	\begin{align}
-		\det\!\kh{\begin{bmatrix}
+		\det\biggp{\begin{bmatrix}
 			A&B\\ &D
 		\end{bmatrix}}=\det(A)\det(D).
 	\end{align}
@@ -242,7 +242,7 @@
 	\]
 	前者为下三角矩阵，后者为上三角矩阵，故
 	\[
-		\det\!\kh{\begin{bmatrix}
+		\det\biggp{\begin{bmatrix}
 			A&B\\ &D
 		\end{bmatrix}}=\det(L_A)\det(L_D)\det(U_A)\det(U_D)=\det(A)\det(D).
 		\qedhere
@@ -252,7 +252,7 @@
 	若$A$是$m$阶方阵，$D$是$n$阶方阵，且$A,D$至少一个可逆，%$B$是$m\times n$矩阵，$C$是$n\times m$矩阵，
 	则
 	\begin{equation}
-		\det\!\kh{\begin{bmatrix}
+		\det\biggp{\begin{bmatrix}
 			A&B\\C&D
 		\end{bmatrix}}
 		=\begin{cases}
@@ -327,7 +327,7 @@
 	\]
 	则原式$=\det(I_n+AB)$，而
 	\[
-		\det(I_n+AB)=\det(I_2+BA)=\biggkh{1+\sum_{i=1}^na_i}\biggkh{1+\sum_{i=1}^nb_i}-n\sum_{i=1}^na_ib_i.
+		\det(I_n+AB)=\det(I_2+BA)=\biggp{1+\sum_{i=1}^na_i}\biggp{1+\sum_{i=1}^nb_i}-n\sum_{i=1}^na_ib_i.
 	\]
 \end{example}
 
@@ -372,7 +372,7 @@
 \begin{theorem}{Cramer法则}{Cramer's rule}
 	考虑线性方程组$Ax=b$，记$A$的第$j$列为$a_j=Ae_j$，将$A$的第$j$列$a_j$替换为$b$得到矩阵$B_j$，即
 	\[
-		B_j:=[a_1\enspace\cdots\enspace a_{j-1}\enspace b\enspace a_{j+1}\enspace\cdots\enspace a_n]
+		B_j:=[a_1,\ldots,a_{j-1},b,a_{j+1},\ldots,a_n],
 	\]
 	Cramer法则给出：$x$的各分量为
 	\begin{align}
@@ -383,7 +383,7 @@
 \begin{proof}
 	注意到$a_j=Ae_j$，将$I$的第$j$列$e_j$替换为$x$得到矩阵$C_j$，即
 	\[
-		C_j:=[e_1\enspace\cdots\enspace e_{j-1}\enspace x\enspace e_{j+1}\enspace\cdots\enspace e_n],
+		C_j:=[e_1,\ldots,e_{j-1},x,e_{j+1},\ldots,e_n],
 	\]
 	则$B_j=AC_j$，等号左右取行列式，由$\det(C_j)=x_j$即证。
 \end{proof}
@@ -431,8 +431,8 @@
 \begin{proof}
 	根据Laplace展开，
 	\begin{align*}
-		\bigfkh{A\adj(A)}_{ij}&=\sum_{k}A_{ik}\adj(A)_{kj}=\sum_{k}(-)^{j+k}A_{ik}\det(A_{\neq jk})=\vd_{ij}\det(A);\\
-		\bigfkh{\adj(A)A}_{ij}&=\sum_{k}\adj(A)_{ik}A_{kj}=\sum_{k}(-)^{i+k}\det(A_{\neq ki})A_{kj}=\vd_{ij}\det(A).%
+		\bigb{A\adj(A)}_{ij}&=\sum_{k}A_{ik}\adj(A)_{kj}=\sum_{k}(-)^{j+k}A_{ik}\det(A_{\neq jk})=\vd_{ij}\det(A);\\
+		\bigb{\adj(A)A}_{ij}&=\sum_{k}\adj(A)_{ik}A_{kj}=\sum_{k}(-)^{i+k}\det(A_{\neq ki})A_{kj}=\vd_{ij}\det(A).%
 	\end{align*}
 	对应元素相等，即证。
 \end{proof}
@@ -496,13 +496,13 @@
 	给定矩阵函数$A:\FF\to\FF^{n\times n},\enspace t\mapsto A(t)$，则 
 	\begin{equation}
 		\label{eqn:Jacobi det'}
-		\dd t\det(A)=\tr\biggkh{\adj(A)\dv At}
+		\dd t\det(A)=\tr\biggp{\adj(A)\dv At}
 	\end{equation}
 \end{theorem}
 
 \begin{corollary}
 	\begin{equation}
-		\dd t\det(A)=\det(A)\tr\biggkh{A\iv\dv At}
+		\dd t\det(A)=\det(A)\tr\biggp{A\iv\dv At}
 	\end{equation}
 \end{corollary}
 
@@ -511,10 +511,10 @@
 
 	因此在解题中建议用增广矩阵和Gauss-Jordan消元法求解线性方程组$Ax=b$：
 	\[
-		[A\enspace b]\enspace\to\enspace[I\enspace A\iv b];
+		[A,b]\sim[I,A\iv b];
 	\]
 	同时，不推荐用伴随矩阵$\adj(A)$求逆，因为其与Cramer法则等价。仍建议用增广矩阵和Gauss-Jordan消元法求逆：
 	\[
-		[A\enspace I]\enspace\to\enspace[I\enspace A\iv].
+		[A,I]\sim[I,A\iv].
 	\]
 \end{remark}

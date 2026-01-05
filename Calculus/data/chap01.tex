@@ -2,11 +2,11 @@
 \begin{definition}{向量和多元函数}{}
 	$x_1,x_2,\ldots,x_n\in\RR$向量
 	\[
-		X:=\fkh{x_1,x_2,\ldots,x_n}\tp,
+		X:=[x_1,x_2,\ldots,x_n]\tp,
 	\]
 	定义在$\Omega\subset\RR^n$上的$n$元函数$f:\Omega\to\RR.$
 \end{definition}
-$f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=\fkh{f_1,f_2,\ldots,f_m}\tp.$
+$f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=[f_1,f_2,\ldots,f_m]\tp.$
 \section{偏导数}
 \begin{definition}{}{}
 	$\hat e_1,\hat e_2,\ldots,\hat e_n$ 是$\RR^n$的基底，则$f$在$X_0$点关于$x_i$的偏导数
@@ -23,16 +23,16 @@ $f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=\fkh{f_1,f_2,\ldots,f_m
 	对二元函数$f(x,y)$
 	\begin{center}
 		$\pv fx$在$X_0$连续，$\pv fy(X_0)$存在
-		\vthus
+		\vimplies
 		$f$在$X_0$可微性
 		\viff
-		$f(X)-\fkh{f(X_0)+\pv fx(X_0)\Delta x+\pv fy(X_0)\Delta y}=o\kh{\norm{\Delta X}}$
+		$f(X)-\Bigb{f(X_0)+\pv fx(X_0)\Delta x+\pv fy(X_0)\Delta y}=o(\norm{\Delta X})$
 	\end{center}
-	其中$\D X\equiv\fkh{\D x,\D y}\tp.$
+	其中$\D X\equiv[\D x,\D y]\tp.$
 \end{theorem}
 \section{方向导数和梯度}
 \begin{definition}{}{}
-	$f$可微，其沿单位向量$\hat \ell=\fkh{\cos\alpha_1,\cos\alpha_2,\ldots,\cos\alpha_n}$方向的方向导数 % \vec \ell=\fkh{x_1,x_2,\ldots,x_n}, \vec \ell/|\ell|=
+	$f$可微，其沿单位向量$\hat \ell=[\cos\alpha_1,\cos\alpha_2,\ldots,\cos\alpha_n]$方向的方向导数 % \vec \ell=[x_1,x_2,\ldots,x_n], \vec \ell/|\ell|=
 	\[
 		\pv f{\vec \ell}(X_0):=\lim_{t\to 0}\frac{f(X_0+t\hat \ell)-f(X_0)}t;
 	\]
@@ -47,7 +47,7 @@ $f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=\fkh{f_1,f_2,\ldots,f_m
 \end{align}
 \section{高阶偏导数}
 \begin{definition}{}{}
-	若$\dvd f{x_i}$对$x_j$的偏导存在，则记二阶偏导数
+	若$\division f{x_i}$对$x_j$的偏导存在，则记二阶偏导数
 	\[
 		\pw f{x_j}{x_i}:=\pp{x_j}\pv f{x_j};\quad \pv[2]f{x_i}\equiv\pw f{x_i}{x_i}
 	\]
@@ -56,7 +56,7 @@ $f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=\fkh{f_1,f_2,\ldots,f_m
 \begin{theorem}{二阶偏导的存在性判定}{}
 	\begin{center}
 		$\pw f{x_i}{x_j}$和$\pw f{x_j}{x_i}$中一个在$X_0$连续
-		\vthus
+		\vimplies
 		$\pw f{x_i}{x_j}=\pw f{x_j}{x_i}$
 	\end{center}
 \end{theorem}
@@ -114,7 +114,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 	给定$f(x,y)\in C(\RR^2)$\footnote{表示$f$在$\RR^2$上连续．}与点$P(x_0,y_0)$,
 	\begin{center}
 		$f(P)=0$且$\pv fy(P)\neq 0$
-		\vthus
+		\vimplies
 		$y=y(x)$存在，且$\dv yx=-\fracdisp{\pv fx(x,y)}{\pv fy(x,y)}.$
 	\end{center}
 \end{theorem}
@@ -123,7 +123,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 	给定$f(X,y)\in C(\RR^{n+1})$与点$P(X_0,y_0)$,
 	\begin{center}
 		$f(P)=0$且$\pv fy(P)\neq 0$
-		\vthus
+		\vimplies
 		$y=y(X)$存在，且$\dv y{x_i}=-\fracdisp{\pv f{x_i}(X,y)}{\pv fy(X,y)}.$
 	\end{center}
 \end{theorem}
@@ -131,7 +131,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 	给定$f_i(X,Y)\in C(\RR^{n+m}),(i=1,2,\ldots,m)$与点$P(X_0,Y_0)$,
 	\begin{center}
 		$F(P)=\vec 0$且$\frac{D(f_1,\ldots,f_m)}{D(y_1,\ldots,y_m)}(P)\neq 0$
-		\vthus
+		\vimplies
 		$Y=Y(X)$存在，且$\frac{\p(y_1,\ldots,y_m)}{\p(x_1,\ldots,x_n)}=-\left(\frac{\p(f_1,\ldots,f_m)}{\p(y_1,\ldots,y_m)}\right)^{-1}\frac{\p(f_1,\ldots,f_m)}{\p(x_1,\ldots,x_n)}.$
 	\end{center}
 \end{theorem}
@@ -142,23 +142,23 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 	\]
 \end{theorem}
 \begin{example}{二阶偏导数举例}{}
-	给定$f(x,y,z)=0$,求$\pw zyx．$
+	给定$f(x,y,z)=0$,求$\pw zyx$
 	\begin{align*}
-		\pw zyx & =-\pp y\kh{\dvd{\pv fx}{\pv fz}}                                  \\
-				 & =-\dvd{\kh{\pp y\pv fx\cdot\pv fy-\pv fx\cdot\pp y\pv fz}}{\kh{\pv fz}^2}
+		\pw zyx & =-\pp y\biggp{\division{\pv fx}{\pv fz}}                                  \\
+				 & =-\division{\biggp{\pp y\pv fx\cdot\pv fy-\pv fx\cdot\pp y\pv fz}}{\biggp{\pv fz}^2}
 	\end{align*}
 	其中
 	\begin{align*}
-		\pv{}y\pv fx & =\pw fyx+\pw fzx\pv zy,\quad \pv zy=-\dvd{\pv fy}{\pv fz}; \\
+		\pv{}y\pv fx & =\pw fyx+\pw fzx\pv zy,\quad \pv zy=-\division{\pv fy}{\pv fz}; \\
 		\pv{}y\pv fz & =\pw fyz+\pv[2]fz\pv zy.
 	\end{align*}
 	故
 	{\scriptsize\begin{align*}
-		\pw zyx=-\dvd{\left[\kh{\pv fz}^2\pw fyx-\pv fy\pv fz\pw fzx-\pv fx\pv fz\pw fyz+\pv fx\pv fy\pv[2]fz\right]}{\kh{\pv fz}^3}.
+		\pw zyx=-\division{\left[\biggp{\pv fz}^2\pw fyx-\pv fy\pv fz\pw fzx-\pv fx\pv fz\pw fyz+\pv fx\pv fy\pv[2]fz\right]}{\biggp{\pv fz}^3}.
 	\end{align*}}
 \end{example}
 \section{法与切}
-给定向量$\vec v=\fkh{a,b,c}\tp$与点$P_0(x_0,y_0,z_0)$，可以确定
+给定向量$\vec v=[a,b,c]\tp$与点$P_0(x_0,y_0,z_0)$，可以确定
 \begin{align*}
 	\text{线}:   & \qquad \frac{x-x_0}a=\frac{y-y_0}b=\frac{z-z_0}c \\
 	\text{平面}: & \qquad a(x-x_0)+b(y-y_0)+c(z-z_0)=0
@@ -209,7 +209,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 \end{align*}
 \subparagraph{隐函数}
 \[
-	f(x,y,z)=0\implies\vec v=\fkh{\pv fx,\pv fy,\pv fz}_{P_0}=\nabla f(P_0).
+	f(x,y,z)=0\implies\vec v=\Bigb{\pv fx,\pv fy,\pv fz}_{P_0}=\nabla f(P_0).
 \]
 \paragraph{曲线的法平面和切线}
 \subparagraph{参数}
@@ -219,7 +219,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 		y=y(t) \\[-1ex]
 		z=z(t)
 	\end{cases}
-	\implies\vec v=\fkh{x'(t),y'(t),z'(t)}.
+	\implies\vec v=[x'(t),y'(t),z'(t)].
 \end{align*}
 \subparagraph{隐函数}
 \begin{align*}
@@ -275,7 +275,7 @@ $\color{gray}\text{最后换回来：}\Delta x=x-x_0,\Delta y=y-y_0$
 \begin{theorem}{Fermat定理}{}
 	\begin{center}
 		$f$在$X_0$可微，且$X_0$是$f$极值点
-		\vthus
+		\vimplies
 		$X_0$是$f$驻点，即$\pv f{x_i}(X_0)=0,\quad i=1,2,\ldots,n.$
 	\end{center}
 \end{theorem}

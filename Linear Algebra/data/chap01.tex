@@ -138,7 +138,7 @@
 \begin{definition}{向量的长度}{vector norm}
 	向量的长度(或范数，norm)可通过内积定义：
 	\begin{equation}
-		\norm v:=\sqrt{\inp vv}=\kh{v_1^2+v_2^2+\cdots+v_n^2}^{1/2}.
+		\norm v:=\sqrt{\inp vv}=(v_1^2+v_2^2+\cdots+v_n^2)^{1/2}.
 	\end{equation}
 	长度为1的向量是单位向量(unit vector)。
 \end{definition}
@@ -247,8 +247,8 @@
 	仅给出矩阵乘法结合律的证明：
 	$\forall A\in\FF^{m\times n},B\in\FF^{n\times p},C\in\FF^{p\times q}$
 	\begin{align*}
-		\bigfkh{A(BC)}_{ij}&=\sum_{k=1}^nA_{ik}(BC)_{kj}=\sum_{k=1}^nA_{ik}\sum_{\ell=1}^pB_{k\ell}C_{\ell j}\\
-		&=\sum_{\ell=1}^p\sum_{k=1}^nA_{ik}B_{k\ell}C_{\ell j}=\sum_{\ell=1}^p(AB)_{i\ell}C_{\ell j}=\bigfkh{(AB)C}_{ij}.
+		\bigb{A(BC)}_{ij}&=\sum_{k=1}^nA_{ik}(BC)_{kj}=\sum_{k=1}^nA_{ik}\sum_{\ell=1}^pB_{k\ell}C_{\ell j}\\
+		&=\sum_{\ell=1}^p\sum_{k=1}^nA_{ik}B_{k\ell}C_{\ell j}=\sum_{\ell=1}^p(AB)_{i\ell}C_{\ell j}=\bigb{(AB)C}_{ij}.
 	\end{align*}
 	对应元素均相等，即证。
 \end{proof}
@@ -326,13 +326,17 @@
 \begin{definition}{分块矩阵}{block matrix}
 	可以将矩阵分块，每一块(block)是一个小矩阵，比如
 	\begin{align*}
-		\fkh{\begin{array}{cc|cc}
-			1&0&1&0\\
-			0&1&0&1\\
-			\hline
-			0&0&1&0\\
-			0&0&0&1	
-		\end{array}}\equiv\begin{bmatrix}
+		\begin{bmatrix}
+			\begin{array}{cc|cc}
+				1&0&1&0\\
+				0&1&0&1\\
+				\hline
+				0&0&1&0\\
+				0&0&0&1	
+			\end{array}
+		\end{bmatrix}
+		\equiv
+		\begin{bmatrix}
 			I&I\\O&I
 		\end{bmatrix}.
 	\end{align*}
@@ -475,7 +479,7 @@
 	\]
 	因为
 	\[
-		(I+A)\bigkh{I-A+\cdots+(-A)^{n-1}}=I+A^n=I.
+		(I+A)\bigp{I-A+\cdots+(-A)^{n-1}}=I+A^n=I.
 	\]
 \end{example}
 

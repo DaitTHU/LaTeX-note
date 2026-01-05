@@ -12,7 +12,7 @@
 但在\chapref{chap:magnetostatics}推导Ampère定律时，我们设定了稳恒电流条件$\div\bm J=0$，这在非稳恒态问题中便显然不适用了，而应该修正为连续性方程\eqref{eqn:continuity}：%与连续性方程不一致了。
 %Maxwell受Faraday观察结果的启发，发现了方程组中的矛盾。
 \[
-    \pv\rho t+\div\bm J=\div\biggkh{\pv{\bm D}t+\bm J}=0.
+    \pv\rho t+\div\bm J=\div\biggp{\pv{\bm D}t+\bm J}=0.
 \]
 上式利用了电场的Gauss定律，从而Ampère定律也被修正为
 \begin{equation}
@@ -85,7 +85,7 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
     式\eqref{eqn:Maxwell divB}可以写成$\div(\curl\bm A)\equiv 0$的形式，
     继而式\eqref{eqn:Maxwell curlE}变为 
     \[
-        \curl\bm E+\pv{\bm B}t=\curl\biggkh{\bm E+\pv{\bm A}t}=\bm 0,
+        \curl\bm E+\pv{\bm B}t=\curl\biggp{\bm E+\pv{\bm A}t}=\bm 0,
     \]
     也可以写成$\curl\nabla\Phi\equiv\bm 0$的形式。
 \end{proof}
@@ -98,7 +98,7 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
             \label{eqn:Phi-A coupled a}
             \lapla\Phi+\pp t(\div\bm A)&=-\frac\rho{\varepsilon_0},\\
             \label{eqn:Phi-A coupled b}
-            \lapla\bm A-\frac1{c^2}\pv[2]{\bm A}t-\nabla\biggkh{\div\bm A+\frac1{c^2}\pv\Phi t}&=-\mu_0\bm J.
+            \lapla\bm A-\frac1{c^2}\pv[2]{\bm A}t-\nabla\biggp{\div\bm A+\frac1{c^2}\pv\Phi t}&=-\mu_0\bm J.
         \end{align}
     \end{subequations}
     下一步是解耦合(decouple)式\eqref{eqn:Phi-A coupled}中的$\Phi$和$\bm A$。
@@ -108,14 +108,14 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
     {规范不变性}{gauge invariance}
     电场和磁场在规范变换(gauge transformation)中保持不变：
     \begin{equation}
-        (\Phi,\bm A)\mapsto\Bigkh{\Phi-\pv\varLambda t,\bm A+\nabla\varLambda}.
+        (\Phi,\bm A)\mapsto\Bigp{\Phi-\pv\varLambda t,\bm A+\nabla\varLambda}.
     \end{equation}
 \end{theorem}
 
 \begin{proof}
     规范变换后的$\Phi',\bm A'$得到的电场和磁场为
     \begin{align*}
-        \bm E'&=-\nabla\biggkh{\Phi-\pv\varLambda t}-\pp t(\bm A+\nabla\varLambda)=-\nabla\Phi-\pv{\bm A}t=\bm E;\\
+        \bm E'&=-\nabla\biggp{\Phi-\pv\varLambda t}-\pp t(\bm A+\nabla\varLambda)=-\nabla\Phi-\pv{\bm A}t=\bm E;\\
         \bm B'&=\curl(\bm A+\nabla\varLambda)=\curl\bm A=\bm B.
         \qedhere
     \end{align*}
@@ -211,7 +211,7 @@ Lorenz规范下，$\Phi$和$\bm A$均满足有源波动方程
     \lapla\Psi-\frac1{c^2}\pv[2]\Psi t=-4\pi f(\bm r,t).
 \end{equation}
 %其Green函数
-%\biggkh{\lapla-\frac1{c^2}\pp[2]t}G(\bm r,t;\bm r',t')=-4\pi\vd(\bm r-\bm r')\vd(t-t'),
+%\biggp{\lapla-\frac1{c^2}\pp[2]t}G(\bm r,t;\bm r',t')=-4\pi\vd(\bm r-\bm r')\vd(t-t'),
 %表示在$\bm r'$处的点源，且仅在$t'$时刻激发。
 对$t$进行Fourier变换，%频域里
 \[
@@ -243,7 +243,7 @@ Green函数要求在点源处
 \]
 回到时域下的Green函数，满足
 \[
-    \biggkh{\lapla-\frac1{c^2}\pp[2]t}G^\pm(\bm r,t;\bm r',t')=-4\pi\vd(\bm r-\bm r')\vd(t-t'),
+    \biggp{\lapla-\frac1{c^2}\pp[2]t}G^\pm(\bm r,t;\bm r',t')=-4\pi\vd(\bm r-\bm r')\vd(t-t'),
 \]
 对$t$进行Fourier变换， 
 \[
@@ -259,11 +259,11 @@ Green函数要求在点源处
 \]
 对于非色散(nondispersive)介质，$c$与频率无关，Green函数有通解
 \[
-    G^\pm(R,\tau)=\frac1R\vd\biggkh{\tau\mp\frac Rc}
+    G^\pm(R,\tau)=\frac1R\vd\biggp{\tau\mp\frac Rc}
 \]
 即
 \begin{equation}
-    G^\pm(\bm r,t;\bm r',t')=\frac1{\abs{\bm r-\bm r'}}\vd\biggkh{t'-\Bigkh{t\mp\frac{\abs{\bm r-\bm r'}}c}}.
+    G^\pm(\bm r,t;\bm r',t')=\frac1{\abs{\bm r-\bm r'}}\vd\biggp{t'-\Bigp{t\mp\frac{\abs{\bm r-\bm r'}}c}}.
 \end{equation}
 分别为推迟(retarded)和超前(advanced) Green函数。$\delta$函数的自变量表明：在$\bm r$点于时间$t$观测的效应是由距离为$\bm R$的源在%推迟(或超前)
 时间为$t'=t\mp R/c$时的作用引起的。\footnote{课上的理解是：无穷远处产生的源经过$\bm r$后仍需要$R/c$的时间去经过$\bm r'$。}
@@ -311,21 +311,21 @@ Green函数要求在点源处
 得到
 \begin{subequations}
     \begin{align}
-        \bm E(\bm r,t)&=\frac1{4\pi\varepsilon_0}\int\biggfkh{-[\nabla'\rho]_\ret-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d V'}{\abs{\bm r-\bm r'}},\\
+        \bm E(\bm r,t)&=\frac1{4\pi\varepsilon_0}\int\biggb{-[\nabla'\rho]_\ret-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d V'}{\abs{\bm r-\bm r'}},\\
         \bm B(\bm r,t)&=\frac{\mu_0}{4\pi}\int\frac{[\nabla'\times\bm J]_\ret}{\abs{\bm r-\bm r'}}\d V',
     \end{align}
 \end{subequations}
 % 注意上式中$\nabla'\rho$和$\nabla'\times\bm J$是先求梯度和散度再令$t'=t-R/c$。
 Jackson用$[\cdot]_\text{ret}$表示赋值$t'=t-R/c$，这样的好处是可以有效区分$\nabla[f]_\text{ret}\neq[\nabla f]_\text{ret}$，因为前者的$t$与$\bm r'$有关，进一步的：
 \begin{align*}
-    [\nabla'\rho]_\text{ret}&=\nabla'[\rho]_\text{ret}-\Bigfkh{\pv\rho{t'}}_\text{ret}\nabla'(t-R/c);\\
-    [\nabla'\times\bm J]_\text{ret}&=\nabla'\times[\bm J]_\text{ret}+\Bigfkh{\pv{\bm J}{t'}}_\text{ret}\times\nabla'(t-R/c).
+    [\nabla'\rho]_\text{ret}&=\nabla'[\rho]_\text{ret}-\Bigb{\pv\rho{t'}}_\text{ret}\nabla'(t-R/c);\\
+    [\nabla'\times\bm J]_\text{ret}&=\nabla'\times[\bm J]_\text{ret}+\Bigb{\pv{\bm J}{t'}}_\text{ret}\times\nabla'(t-R/c).
 \end{align*}
 而$\nabla'R=-\uvec R$，故
 \begin{subequations}
     \begin{align}
-        \bm E(\bm r,t)&=\frac1{4\pi\varepsilon_0}\int\biggfkh{\biggkh{\frac{\rho(\bm r',t')}R+\frac1c\pv\rho{t'}}\uvec R-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d V'}R,\\
-        \bm B(\bm r,t)&=\frac{\mu_0}{4\pi}\int\biggfkh{\frac{\bm J(\bm r',t')}R+\frac1c\pv{\bm J}{t'}}\times\frac{\uvec R}R\d V'.
+        \bm E(\bm r,t)&=\frac1{4\pi\varepsilon_0}\int\biggb{\biggp{\frac{\rho(\bm r',t')}R+\frac1c\pv\rho{t'}}\uvec R-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d V'}R,\\
+        \bm B(\bm r,t)&=\frac{\mu_0}{4\pi}\int\biggb{\frac{\bm J(\bm r',t')}R+\frac1c\pv{\bm J}{t'}}\times\frac{\uvec R}R\d V'.
     \end{align}
 \end{subequations}
 上式称为Jefimenko对Coulomb定律和Biot-Savart定律的推广。
@@ -337,7 +337,7 @@ Jackson用$[\cdot]_\text{ret}$表示赋值$t'=t-R/c$，这样的好处是可以�
     \]
     则
     \[
-        \Phi(r,t)=\frac1{4\pi\varepsilon_0r}Q\Bigkh{t-\frac rc}.
+        \Phi(r,t)=\frac1{4\pi\varepsilon_0r}Q\Bigp{t-\frac rc}.
     \]
 \end{example}
 \begin{example}{阶跃电流}{current}
@@ -354,12 +354,12 @@ Jackson用$[\cdot]_\text{ret}$表示赋值$t'=t-R/c$，这样的好处是可以�
     \]
     矢量势
     \[
-        \bm A(\bm r,t)=\frac{\mu_0}{4\pi}\uvec z\int\iti I\Bigkh{t-\frac Rc}\frac{\d z'}R,\quad R=\sqrt{\rho^2+(z-z')^2},
+        \bm A(\bm r,t)=\frac{\mu_0}{4\pi}\uvec z\int\iti I\Bigp{t-\frac Rc}\frac{\d z'}R,\quad R=\sqrt{\rho^2+(z-z')^2},
     \]
     $t\leqslant\rho/c$时，$\bm A=\bm 0$；
     $t>\rho/c$时，仅$z'^2\leqslant(ct)^2-\rho^2$部分有贡献，则
     \[
-        \bm A(\rho,t)=\frac{\mu_0I_0}{2\pi}\ln\biggfkh{\frac{ct+\sqrt{(ct)^2-\rho^2}}{\rho}}\uvec z.
+        \bm A(\rho,t)=\frac{\mu_0I_0}{2\pi}\ln\biggb{\frac{ct+\sqrt{(ct)^2-\rho^2}}{\rho}}\uvec z.
     \]
     由式\eqref{eqn:-nablaPhi-pApt}和\eqref{eqn:curlA}，电场和磁场分别为
     \begin{align*}
@@ -486,12 +486,12 @@ $\ave{\bm j}$的推导比$\ave{\varrho}$的处理复杂的多，在这里仅给�
 \]
 利用Maxwell方程组和式\eqref{eqn:divAxB}变形
 \[
-    \bm J\cdot\bm E=\Bigkh{\curl\bm H-\pv{\bm D}t}\cdot\bm E=-\Bigfkh{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
+    \bm J\cdot\bm E=\Bigp{\curl\bm H-\pv{\bm D}t}\cdot\bm E=-\Bigb{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
 \]
 % \begin{align*}
-%     \bm J\cdot\bm E&=\Bigkh{\curl\bm H-\pv{\bm D}t}\cdot\bm E\\
+%     \bm J\cdot\bm E&=\Bigp{\curl\bm H-\pv{\bm D}t}\cdot\bm E\\
 %     &=\bm H\cdot(\curl\bm E)-\div(\bm E\times\bm H)-\bm E\cdot\pv{\bm D}t\\
-%     &=-\Bigfkh{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
+%     &=-\Bigb{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
 % \end{align*}
 假设：
 \begin{compactenum}
@@ -510,7 +510,7 @@ $\ave{\bm j}$的推导比$\ave{\varrho}$的处理复杂的多，在这里仅给�
     \]
 \end{compactenum}
 因此 
-%-\int_V\bm J\cdot\bm E\d V=\int_V\Bigfkh{\pv ut+\div(\bm E\times\bm H)}\d V
+%-\int_V\bm J\cdot\bm E\d V=\int_V\Bigb{\pv ut+\div(\bm E\times\bm H)}\d V
 %因为上式$V$是任意的，故
 \begin{align}
     \pv ut+\div\bm S=-\bm J\cdot\bm E,
@@ -562,8 +562,8 @@ $\bm S$定义为Poynting矢量
 \]
 消去源，得到
 \begin{align*}
-    \rho\bm E+\bm J\times\bm B&=\varepsilon_0(\div\bm E)\bm E+\biggkh{\frac1{\mu_0}\curl\bm B-\varepsilon_0\pv{\bm E}t}\times\bm B\\
-    &=\varepsilon_0\Bigfkh{\bm E(\div\bm E)-c^2\bm B\times(\curl\bm B)-\bm E\times(\curl\bm E)-\pp t(\bm E\times\bm B)},
+    \rho\bm E+\bm J\times\bm B&=\varepsilon_0(\div\bm E)\bm E+\biggp{\frac1{\mu_0}\curl\bm B-\varepsilon_0\pv{\bm E}t}\times\bm B\\
+    &=\varepsilon_0\Bigb{\bm E(\div\bm E)-c^2\bm B\times(\curl\bm B)-\bm E\times(\curl\bm E)-\pp t(\bm E\times\bm B)},
 \end{align*}
 右边出现了%Poynting矢量对
 时间的导数，我们依此定义电磁场的动量
@@ -576,15 +576,15 @@ $\bm S$定义为Poynting矢量
 \]
 则
 \[
-    \dv{\bm P_\text m}t+\dv{\bm P_\text f}t=\varepsilon_0\int_V\Bigfkh{\bm E(\div\bm E)-\bm E\times(\curl\bm E)-c^2\bm B\times(\curl\bm B)}\d V.
+    \dv{\bm P_\text m}t+\dv{\bm P_\text f}t=\varepsilon_0\int_V\Bigb{\bm E(\div\bm E)-\bm E\times(\curl\bm E)-c^2\bm B\times(\curl\bm B)}\d V.
 \]
 右边的体积分完全可以加上$c^2\bm B(\div\bm B)\equiv 0$以更对称。并且注意到
 \[
-    [\bm E(\div\bm E)-\bm E\times(\curl\bm E)]_\alpha=\sum_\beta\pp{x_\beta}\Bigkh{E_\alpha E_\beta-\frac12E^2\vd_{\alpha\beta}};
+    [\bm E(\div\bm E)-\bm E\times(\curl\bm E)]_\alpha=\sum_\beta\pp{x_\beta}\Bigp{E_\alpha E_\beta-\frac12E^2\vd_{\alpha\beta}};
 \]
 从而右边的体积分具有散度的形式，定义Maxwell应力张量(Maxwell stress tensor)
 \begin{equation}
-    T_{\alpha\beta}:=\varepsilon_0\Bigfkh{E_\alpha E_\beta+c^2B_\alpha B_\beta-\frac12(E^2+c^2B^2)\vd_{\alpha\beta}}.
+    T_{\alpha\beta}:=\varepsilon_0\Bigb{E_\alpha E_\beta+c^2B_\alpha B_\beta-\frac12(E^2+c^2B^2)\vd_{\alpha\beta}}.
 \end{equation}
 则
 \[
@@ -607,7 +607,7 @@ $\bm S$定义为Poynting矢量
 \label{ssec:Poynting in dissipative media}
 在有色散介质中，$\varepsilon,\mu$与频率$\omega$有关，前面的假设不再成立，但仍有
 \[
-    \int_V\bm J\cdot\bm E\d V=-\int_V\Bigfkh{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
+    \int_V\bm J\cdot\bm E\d V=-\int_V\Bigb{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
 \]
 为了讨论色散，有必要利用Fourier变换将时域变到频域中：
 \begin{align*}
@@ -624,18 +624,18 @@ $\bm S$定义为Poynting矢量
 \]
 从而$\varepsilon(-\omega)=\varepsilon\cj(\omega)$，色散的性质表面：$\bm D(\bm r,t)$和$\bm E(\bm r,t)$在时间上的联系是非局域性的。因此$\bm E\cdot(\p\bm D/\p t)\neq\p(\bm E\cdot\bm D/2)/\p t$，我们先不考虑空间相关性，利用Fourier变换
 \begin{align*}
-    \bm E\cdot\pv{\bm D}t&=\int\iti\int\iti\hatbm E\cj(\omega')\cdot\bigfkh{-\i\omega\varepsilon(\omega)\hatbm E(\omega)}\e{-\i(\omega-\omega')t}\d\omega\nd\omega'\\
-    &=\frac12\int\iti\int\iti\bigfkh{-\i\omega\varepsilon(\omega)+\i\omega'\varepsilon\cj(\omega')}\hatbm E\cj(\omega')\cdot\hatbm E(\omega)\e{-\i(\omega-\omega')t}\d\omega\nd\omega'.
+    \bm E\cdot\pv{\bm D}t&=\int\iti\int\iti\hatbm E\cj(\omega')\cdot\bigb{-\i\omega\varepsilon(\omega)\hatbm E(\omega)}\e{-\i(\omega-\omega')t}\d\omega\nd\omega'\\
+    &=\frac12\int\iti\int\iti\bigb{-\i\omega\varepsilon(\omega)+\i\omega'\varepsilon\cj(\omega')}\hatbm E\cj(\omega')\cdot\hatbm E(\omega)\e{-\i(\omega-\omega')t}\d\omega\nd\omega'.
 \end{align*}
 我们现在假设电场在一个相对狭窄的范围内由频率分量主导，而在这个范围内$\varepsilon$有可观测的变化。然后我们可以%展开因子iω'e*(ω')在ω' = ω周围的方括号中得到
 将$\i\omega'\varepsilon\cj(\omega')$在$\omega$附近Taylor展开：
 \[
-    -\i\omega\varepsilon(\omega)+\i\omega'\varepsilon\cj(\omega')=2\omega\Im\bigfkh{\varepsilon(\omega)}-\i(\omega-\omega')\dd\omega\bigfkh{\omega\varepsilon\cj(\omega)}+\cdots
+    -\i\omega\varepsilon(\omega)+\i\omega'\varepsilon\cj(\omega')=2\omega\Im\bigb{\varepsilon(\omega)}-\i(\omega-\omega')\dd\omega\bigb{\omega\varepsilon\cj(\omega)}+\cdots
 \]
 因此 
 \begin{align*}
-    \bm E\cdot\pv{\bm D}t={}&\int\iti\int\iti\hatbm E\cj(\omega')\cdot\hatbm E(\omega)\,\omega\Im\bigfkh{\varepsilon(\omega)}\e{-\i(\omega-\omega')t}\d\omega\nd\omega'\,+\\
-    &\frac12\pp t\int\iti\int\iti\hatbm E\cj(\omega')\cdot\hatbm E(\omega)\,\dd\omega\bigfkh{\omega\varepsilon\cj(\omega)}\e{-\i(\omega-\omega')t}\d\omega\nd\omega'
+    \bm E\cdot\pv{\bm D}t={}&\int\iti\int\iti\hatbm E\cj(\omega')\cdot\hatbm E(\omega)\,\omega\Im\bigb{\varepsilon(\omega)}\e{-\i(\omega-\omega')t}\d\omega\nd\omega'\,+\\
+    &\frac12\pp t\int\iti\int\iti\hatbm E\cj(\omega')\cdot\hatbm E(\omega)\,\dd\omega\bigb{\omega\varepsilon\cj(\omega)}\e{-\i(\omega-\omega')t}\d\omega\nd\omega'
 \end{align*}
 第一项表示电场能量转化为热能(或更一般地转化为各种形式的辐射)；第二项表示有效能量密度。
 
@@ -647,28 +647,28 @@ $\bm H\cdot(\p\bm B/\p t)$的表达式是相似的，只需$\bm E,\varepsilon$�
 \]
 其中$\tilde{\bm E}(t),\tilde{\bm H}(t)$相对$1/\omega$缓慢变化。则
 \begin{align*}
-    \ave{\bm E\cdot\pv{\bm D}t+\bm H\cdot\pv{\bm B}t}={}&\omega_0\Im\bigfkh{\varepsilon(\omega_0)}\ave{E^2}+
-    \omega_0\Im\bigfkh{\mu(\omega_0)}\ave{H^2}+\pv{u\eff}t.
+    \ave{\bm E\cdot\pv{\bm D}t+\bm H\cdot\pv{\bm B}t}={}&\omega_0\Im\bigb{\varepsilon(\omega_0)}\ave{E^2}+
+    \omega_0\Im\bigb{\mu(\omega_0)}\ave{H^2}+\pv{u\eff}t.
 \end{align*}
 其中 
 \[
-    u\eff=\frac12\Re\biggfkh{\dv{(\omega\varepsilon)}\omega(\omega_0)}\ave{E^2}+\frac12\Re\biggfkh{\dv{(\omega\mu)}\omega(\omega_0)}\ave{H^2}.
+    u\eff=\frac12\Re\biggb{\dv{(\omega\varepsilon)}\omega(\omega_0)}\ave{E^2}+\frac12\Re\biggb{\dv{(\omega\mu)}\omega(\omega_0)}\ave{H^2}.
 \]
 Poynting定律形式变为
 \begin{align}
     \label{eqn:Poynting with loss}
-    \pv{u\eff}t+\div\bm S={}&-\bm J\cdot\bm E-\omega_0\Im\bigfkh{\varepsilon(\omega_0)}\ave{E^2}-\omega_0\Im\bigfkh{\mu(\omega_0)}\ave{H^2}
+    \pv{u\eff}t+\div\bm S={}&-\bm J\cdot\bm E-\omega_0\Im\bigb{\varepsilon(\omega_0)}\ave{E^2}-\omega_0\Im\bigb{\mu(\omega_0)}\ave{H^2}
 \end{align}
 右边第一项是Ohm热损耗，后面两项是在介质中的吸收耗散，不包括传导损耗。
 上述方程给出了现实情况下的电磁能局部守恒，在这种情况下，除了能量从局部流出外($\div\bm S\neq 0$)，介质的加热可能会造成损失($\Im\varepsilon\neq 0,\Im\mu\neq 0$)，从而导致(先前假设中提到的)场能量的缓慢衰减。
 \subsectionstar{谐振场的Poynting定律}
 我们假定所有的场和源都是随时间简谐的，即 
 \[
-    \bm E(\bm r,t)=\Re\bigfkh{\bm E(\bm r)\e{-\i\omega t}},
+    \bm E(\bm r,t)=\Re\bigb{\bm E(\bm r)\e{-\i\omega t}},
 \]
 其中$\bm E(\bm r)$一般是复的，有相位的信息。
 %因此
-%\bm J\cdot\bm E=\frac12\Re\bigfkh{\bm J\cj(\bm r)\cdot\bm E(\bm r)+\bm J(\bm r)\cdot\bm E(\bm r)\e{-\i 2\omega t}},
+%\bm J\cdot\bm E=\frac12\Re\bigb{\bm J\cj(\bm r)\cdot\bm E(\bm r)+\bm J(\bm r)\cdot\bm E(\bm r)\e{-\i 2\omega t}},
 谐振场的Maxwell方程组可以写成
 \begin{subequations}
     \begin{align}
@@ -683,7 +683,7 @@ Poynting定律形式变为
 场在体积$V$上所做的时间平均工作量
 \begin{align*}
     \frac12\int_V\bm J\cj\cdot\bm E\d V&=\frac12\int_V(\curl\bm H\cj-\i\omega\bm D\cj)\cdot\bm E\d V\\
-    &=\frac12\int_V\Bigfkh{-\div(\bm E\times\bm H\cj)-\i\omega(\bm E\cdot\bm D\cj-\bm B\cdot\bm H\cj)}\d V.
+    &=\frac12\int_V\Bigb{-\div(\bm E\times\bm H\cj)-\i\omega(\bm E\cdot\bm D\cj-\bm B\cdot\bm H\cj)}\d V.
 \end{align*}
 复Poynting矢量
 \begin{equation}
