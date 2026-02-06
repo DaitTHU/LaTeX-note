@@ -324,39 +324,35 @@
 	\]
 \end{example}
 \begin{example}{离散分布的和}{sum of discrete distribution}
-	$X_i\sim\Bino(n_i,p)$独立，和$X_1+X_2$
+	$X_i\sim\Bino(n_i,p)$独立，则$X_1+X_2\sim\Bino(n_1+n_2,p)$
 	\begin{align*}
 		\P(X_1+X_2=k)&=\sum_{k_1=0}^k\P(X_1=k_1,X_2=k-k_1)\\
 		&=\sum_{k_1=0}^k\binom{n_1}{k_1}\binom{n_2}{k-k_1}p^k(1-p)^{n_1+n_2-k}\\
 		&=\binom{n_1+n_2}{k}p^k(1-p)^{n_1+n_2-k}
 	\end{align*}
-	故$X_1+X_2\sim\Bino(n_1+n_2,p).$
 	\tcblower
-	$X_i\sim\Pois(\lambda_i)$独立，和$X_1+X_2$
+	$X_i\sim\Pois(\lambda_i)$独立，则$X_1+X_2\sim\Pois(\lambda_1+\lambda_2)$
 	\begin{align*}
 		\P(X_1+X_2=k)&=\sum_{k_1=0}^k\frac{\lambda_1^{k_1}}{k_1!}\e{-\lambda_1}\frac{\lambda_2^{k-k_1}}{(k-k_1)!}\e{-\lambda_2}\\
-		&=\frac{\e{-(\lambda_1+\lambda_2)}}{k!}\sum_{k_1=0}^k\binom{k}{k_1}\lambda_i^{k_1}\lambda_2^{k-k_1}\\
+		&=\frac{\e{-(\lambda_1+\lambda_2)}}{k!}\sum_{k_1=0}^k\binom{k}{k_1}\lambda_1^{k_1}\lambda_2^{k-k_1}\\
 		&=\frac{\e{-(\lambda_1+\lambda_2)}}{k!}(\lambda_1+\lambda_2)^k
 	\end{align*}
-	故$X_1+X_2\sim\Pois(\lambda_1+\lambda_2).$
 \end{example}
 \begin{remark}
 	在学习到矩母函数和特征函数后，由\thmref{thm:the distribution of the sum of the independent random variable}，这个结论就是显然的。
 \end{remark}
 \begin{example}{正态分布的和}{sum of continuous distribution}
-	$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，
+	$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，则$X_1+X_2\sim\Norm(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2).$
 	\begin{align*}
 		f_{X_1+X_2}(y)&=\int\iti f_{X_1,X_2}(x,y-x)\d x\\
 		&=\frac1{\sqrt{2\pi}\sqrt{\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2}}\exp\biggb{-\frac{(y-(\mu_1+\mu_2))^2}{2(\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2)}}.
 	\end{align*}
-	故$X_1+X_2\sim\Norm(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2).$
 \end{example}
 \begin{example}{指数分布的最小值}{}
-	若$X_1\sim\Expo(\lambda_1),X_2\sim\Expo(\lambda_2)$，则 
+	$X_i\sim\Expo(\lambda_i)$独立，则$\min(X_1,X_2)\sim\Expo(\lambda_1+\lambda_2).$
 	\[
 		\CDF_{\min{}}(x)=1-\bigb{1-\CDF_{X_1}(x)}\bigb{1-\CDF_{X_2}(x)}=1-\e{-(\lambda_1+\lambda_2)x}.
 	\]
-	故$\min(X_1,X_2)\sim\Expo(\lambda_1+\lambda_2).$
 \end{example}
 \begin{example}{max, min的联合分布}{min-max joint distribution}
 	$X_1,\ldots,X_n$独立同分布(independent identically distribution, iid\index{iid, 独立同分布})，其CDF为$\CDF(x)$。
@@ -400,7 +396,7 @@
 \end{corollary}
 
 \begin{corollary}
-	若$X_1\sim\chi^2(n_1),X_2\sim\chi^2(n_2)$独立，则$X_1+X_2\sim\chi^2(n_1+n_2);$
+	若$X_i\sim\chi^2(n_i)$独立，则$X_1+X_2\sim\chi^2(n_1+n_2);$
 \end{corollary}
 
 \begin{corollary}
