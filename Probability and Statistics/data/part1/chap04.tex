@@ -262,12 +262,29 @@
 	由Cauchy-Schwarz不等式可知，相关系数的取值范围为$[-1,1]$。
 \end{corollary}
 
+\begin{corollary}
+	对于事件$A,B$，定义示性函数
+	\begin{equation}
+		1(A):=\begin{cases}
+			1,&\text{事件$A$发生}\\
+			0,&\text{事件$A$不发生}
+		\end{cases}
+	\end{equation}
+	则
+	\begin{equation}
+		\Corr\bigp{1(A),1(B)}=\frac{\P(A\cap B)-\P(A)\P(B)}{\sqrt{\P(A)\bigp{1-\P(A)}\P(B)\bigp{1-\P(B)}}}.
+	\end{equation}
+	可得
+	\begin{equation}
+		\abs{\P(A\cap B)-\P(A)\P(B)}\leqslant\sqrt{\P(A)\bigp{1-\P(A)}\P(B)\bigp{1-\P(B)}}\leqslant\frac14.
+	\end{equation}
+\end{corollary}
+
 \begin{example}{二元正态分布的相关系数}{correlation coefficient of 2-D normal distribution}
-	设$(X,Y)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，
-	取$\xi:=\frac{x-\mu_1}{\sigma_1},\,\eta:=\frac{y-\mu_2}{\sigma_2}$，则相关系数
+	设$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，
+	取$\xi_1:=\frac{x_1-\mu_1}{\sigma_1},\,\xi_2:=\frac{x_2-\mu_2}{\sigma_2}$，则相关系数
 	\[
-		\Corr(X,Y)%&=\frac1{2\pi\sqrt{1-\rho^2}}\iint_{\RR^2}\xi\eta\exp\biggb{-\frac{\xi^2+\eta^2-2\rho\xi\eta}{2(1-\rho^2)}}\d\xi\nd\eta\\
-		=\frac1{2\pi\sqrt{1-\rho^2}}\iint_{\RR^2}\xi\eta\exp\biggb{-\frac{(\xi-\rho\eta)^2}{2(1-\rho^2)}-\frac{\eta^2}2}\d\xi\nd\eta=\rho.
+		\Corr(X_1,X_2)=\frac1{2\pi\sqrt{1-\rho^2}}\iint_{\RR^2}\xi_1\xi_2\exp\biggb{-\frac{(\xi_1-\rho\xi_2)^2}{2(1-\rho^2)}-\frac{\xi_2^2}2}\d\xi_1\nd\xi_2=\rho.
 	\]
 	% 由
 	% \[
