@@ -139,14 +139,14 @@
 我们考虑一个时间段内的事件次数$X\sim\Bino(n,p)$，其中$n$是时间段的切片份数。
 保持其期望$\E(X)=np=:\lambda$不变，令$n\to\infty$，即事件可能发生在任一时刻，则
 \[
-	\lim_{n\to\infty}\binom nk\biggp{\frac\lambda{n}}^k\biggp{1-\frac\lambda{n}}^{n-k}=\lim_{n\to\infty}\frac{\lambda^k}{k!}\biggp{1-\frac\lambda{n}}^n\cancel{\frac{n!}{n^k(n-k)!}}\cancel{\biggp{1-\frac\lambda{n}}^{-k}}=\frac{\lambda^k}{k!}\e{-\lambda}.
+	\lim_{n\to\infty}\binom nk\biggp{\frac\lambda{n}}^k\biggp{1-\frac\lambda{n}}^{n-k}=\lim_{n\to\infty}\frac{\lambda^k}{k!}\biggp{1-\frac\lambda{n}}^n\cancel{\frac{n!}{n^k(n-k)!}}\cancel{\biggp{1-\frac\lambda{n}}^{-k}}=\frac{\lambda^k}{k!}\e^{-\lambda}.
 \]
 % 我们便得到了一个新的分布，称为Poisson分布。
 
 \begin{definition}{Poisson分布}{Poisson distribution}
 	小概率事件在一段时间内发生的次数$X$服从Poisson分布，记作$X\sim\Pois(\lambda)$，
 	\[
-		\P(X=k)=\frac{\lambda^k}{k!}\e{-\lambda},\quad k=0,1,2,\ldots
+		\P(X=k)=\frac{\lambda^k}{k!}\e^{-\lambda},\quad k=0,1,2,\ldots
 	\]
 	\begin{center}
 		\includegraphics[width=.9\textwidth]{figures/pdf_poission.pdf}
@@ -178,7 +178,7 @@
 	\]
 	记$X=$拿到自己帽子的人数，当$n\to\infty$时，$X\sim\Pois(1)$
 	\[
-		\P(X=k)=\frac{\e{-1}}{k!},\quad k=0,1,2,\ldots
+		\P(X=k)=\frac{\e^{-1}}{k!},\quad k=0,1,2,\ldots
 	\]
 	\tcblower
 	下面用常规做法检验：指定$k$个人，记
@@ -192,7 +192,7 @@
 	\]
 	对于$\P(X=k)$来说，由于这$k$个人是任选的，故
 	\[
-		\P(X=k)=\binom nk\P(E\cap F)=\frac1{k!}\cdot\frac{!(n-k)}{(n-k)!}\to\frac{1}{k!}\cdot\frac1{\e{}}.
+		\P(X=k)=\binom nk\P(E\cap F)=\frac1{k!}\cdot\frac{!(n-k)}{(n-k)!}\to\frac{1}{k!}\cdot\frac1{\e}.
 	\]
 \end{example}
 
@@ -236,10 +236,10 @@
 \begin{example}{常见连续分布}{}
 	\begin{compactenum}
 		\item 均匀分布$f(x;a,b)=\frac1{b-a},a\leqslant x\leqslant b;$
-		\item 指数分布$f(x;\lambda)=\lambda\e{-\lambda x},x\geqslant 0;$
-		\item 正态分布$f(x;\mu,\sigma^2)=\frac1{\sqrt{2\pi}\sigma}\e{-(x-\mu)^2/2\sigma^2},-\infty<x<\infty;$
-		\item 伽玛分布$f(x;\alpha,\lambda)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\e{-\lambda x}.x\geqslant 0;$
-		\item 卡方分布$f(x;n)=\frac{x^{n/2-1}}{2^{n/2}\Gamma(n/2)}\e{-x/2},x\geqslant 0;$
+		\item 指数分布$f(x;\lambda)=\lambda\e^{-\lambda x},x\geqslant 0;$
+		\item 正态分布$f(x;\mu,\sigma^2)=\frac1{\sqrt{2\pi}\sigma}\e^{-(x-\mu)^2/2\sigma^2},-\infty<x<\infty;$
+		\item 伽玛分布$f(x;\alpha,\lambda)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\e^{-\lambda x}.x\geqslant 0;$
+		\item 卡方分布$f(x;n)=\frac{x^{n/2-1}}{2^{n/2}\Gamma(n/2)}\e^{-x/2},x\geqslant 0;$
 	\end{compactenum}
 \end{example}
 \fi
@@ -286,7 +286,7 @@
 	指数分布(exponential distribution)通常刻画寿命、等待时间，记作$X\sim\Expo(\lambda)$，
 	\begin{equation}
 		f(x)=\begin{cases}
-			\lambda\e{-\lambda x},&x>0\\
+			\lambda\e^{-\lambda x},&x>0\\
 			0,&x\leqslant 0
 		\end{cases}
 	\end{equation}
@@ -310,7 +310,7 @@
 \begin{corollary}
 	指数分布的尾概率与Poisson分布有关：
 	\[
-		\P_{\Expo(\lambda)}(T>\tau)=\e{-\lambda\tau}=\P_{\Pois(\lambda\tau)}(N=0).
+		\P_{\Expo(\lambda)}(T>\tau)=\e^{-\lambda\tau}=\P_{\Pois(\lambda\tau)}(N=0).
 	\]
 	这说明：如果时间$(0,\tau)$内事件的发生次数$N\sim\Pois(\lambda\tau)$，则相邻事件的时间间隔$\D T\sim\Expo(\lambda)$。
 \end{corollary}
@@ -326,12 +326,12 @@
 	\]
 	若假设无老化：$\lambda(t)\equiv\lambda$，则分布为指数分布：
 	\begin{equation}
-		\CDF(t)=1-\e{-\lambda t},\quad t>0,
+		\CDF(t)=1-\e^{-\lambda t},\quad t>0,
 	\end{equation}
 
 	这体现出指数分布的无记忆性：$\forall t_0>0$
 	\[
-		\P(T>t+t_0|T>t_0)=\frac{\e{-\lambda(t+t_0)}}{\e{-\lambda t_0}}=\e{-\lambda t}=\P(T>t).
+		\P(T>t+t_0|T>t_0)=\frac{\e^{-\lambda(t+t_0)}}{\e^{-\lambda t_0}}=\e^{-\lambda t}=\P(T>t).
 	\]
 
 	\tcblower
@@ -339,7 +339,7 @@
 	改进$\lambda(x)=\alpha x^{\alpha+1}/\beta^\alpha$，得到Weibull分布
 	\begin{equation}
 		\label{eqn:Weibull CDF}
-		\CDF(x)=1-\e{-(x/\beta)^\alpha},\quad x>0.
+		\CDF(x)=1-\e^{-(x/\beta)^\alpha},\quad x>0.
 	\end{equation}
 \end{example}
 

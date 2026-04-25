@@ -39,10 +39,10 @@
 \[
 	g(\nu)=\frac1{L^3}\dv{N(\nu)}\nu=\frac{8\pi}{c^3}\nu^2.
 \]
-根据Boltzmann分布，每个状态上的粒子数$\propto\e{-\varepsilon/\kB T}$。
+根据Boltzmann分布，每个状态上的粒子数$\propto\e^{-\varepsilon/\kB T}$。
 故能量平均值为
 \begin{align}
-	\avg E=\frac{\textstyle\int\zti\varepsilon\e{-\varepsilon/\kB T}\d\varepsilon}{\textstyle\int\zti\e{-\varepsilon/\kB T}\d\varepsilon}=\kB T.
+	\avg E=\frac{\textstyle\int\zti\varepsilon\e^{-\varepsilon/\kB T}\d\varepsilon}{\textstyle\int\zti\e^{-\varepsilon/\kB T}\d\varepsilon}=\kB T.
 \end{align}
 因此能量密度
 \[
@@ -70,13 +70,13 @@ $I_\nu$的单位为$\si{J/m^2}$，
 
 Wein通过对黑体辐射的实验数据进行拟合，提出了一个经验公式：
 \begin{equation}
-	I_\lambda=C_1\lambda^{-5}\e{-C_2/\lambda T},
+	I_\lambda=C_1\lambda^{-5}\e^{-C_2/\lambda T},
 \end{equation}
 其在$\lambda$较小时符合得很好，但在$\lambda$较大时存在较大偏差。
 Planck为了
 Planck的解决方法是将能量分布变为离散的，即$\varepsilon_n=nh\nu$
 \begin{align}
-	\avg E=\frac{\textstyle\sum_{n=1}^\infty \varepsilon_n\e{-\varepsilon_n/\kB T}}{\textstyle\sum_{n=1}^\infty\e{-\varepsilon_n/\kB T}}=\frac{h\nu}{\e{h\nu/\kB T}-1}.
+	\avg E=\frac{\textstyle\sum_{n=1}^\infty \varepsilon_n\e^{-\varepsilon_n/\kB T}}{\textstyle\sum_{n=1}^\infty\e^{-\varepsilon_n/\kB T}}=\frac{h\nu}{\e^{h\nu/\kB T}-1}.
 \end{align}
 由此得到的辐射率与实验符合的很好。
 
@@ -89,14 +89,14 @@ Planck的解决方法是将能量分布变为离散的，即$\varepsilon_n=nh\nu
 \begin{theorem}{Planck黑体辐射定律}{Planck's Law}
 	黑体辐射的辐射率
 	\begin{align}
-		I_\nu(\nu,T)=\frac{2h\nu^3}{c^2}\frac{1}{\e{h\nu/\kB T}-1}.
+		I_\nu(\nu,T)=\frac{2h\nu^3}{c^2}\frac{1}{\e^{h\nu/\kB T}-1}.
 	\end{align}
 	波长情况下
 	\begin{align}
-		I_\lambda(\lambda,T)=\frac{2hc^2}{\lambda^5}\frac{1}{\e{hc/\lambda\kB T}-1}
+		I_\lambda(\lambda,T)=\frac{2hc^2}{\lambda^5}\frac{1}{\e^{hc/\lambda\kB T}-1}
 	\end{align}
 \end{theorem}
-由$x\to0$时，$\e x-1\sim x$，有
+由$x\to0$时，$\e^x-1\sim x$，有
 \[
 	\lambda\gg\frac{hc}{\kB T},\quad I_\lambda\sim\frac{2c\kB T}{\lambda^4}.
 \]
@@ -104,12 +104,12 @@ Planck的解决方法是将能量分布变为离散的，即$\varepsilon_n=nh\nu
 
 考虑$I_\lambda(\lambda,T)$最大时对应的波长$\lambda_{\mathrm m}$，做变换$\xi=\frac{hc}{\lambda\kB T}$，则
 \begin{align*}
-	\dv{I_\lambda}\lambda & =\dv{I_\lambda}\xi\cdot\dv\xi\lambda\propto\dd\xi\biggp{\frac{\xi^5}{\e\xi-1}}
-	=\frac{\xi^4\bigb{5(\e\xi-1)-\xi\e\xi}}{(\e\xi-1)^2}=0.
+	\dv{I_\lambda}\lambda & =\dv{I_\lambda}\xi\cdot\dv\xi\lambda\propto\dd\xi\biggp{\frac{\xi^5}{\e^{\xi}-1}}
+	=\frac{\xi^4\bigb{5(\e^\xi-1)-\xi\e^\xi}}{(\e^\xi-1)^2}=0.
 \end{align*}
 \iffalse
 	\[
-		\dv{I_\lambda}\lambda=\frac c4\cdot\frac{8\pi}{3c^3}\cdot\dd\lambda\biggp{\frac{h\nu}{\e{h\nu/\kB T}-1}\cdot\dd\lambda\nu^3}.
+		\dv{I_\lambda}\lambda=\frac c4\cdot\frac{8\pi}{3c^3}\cdot\dd\lambda\biggp{\frac{h\nu}{\e^{h\nu/\kB T}-1}\cdot\dd\lambda\nu^3}.
 	\]
 	由
 	\[
@@ -117,17 +117,17 @@ Planck的解决方法是将能量分布变为离散的，即$\varepsilon_n=nh\nu
 	\]
 	故
 	\begin{align*}
-		\dv r\lambda&=\frac{2h}{3c^2}\cdot\frac{\nu^2}{c}\cdot\dd\nu\biggp{\frac{\nu}{\e{h\nu/\kB T}-1}\cdot\frac{\nu^2}c\cdot 3\nu^2}\\
-		&=\frac{2h\nu^2}{c^4}\cdot\dd\nu\frac{\nu^5}{\e{h\nu/\kB T}-1},
+		\dv r\lambda&=\frac{2h}{3c^2}\cdot\frac{\nu^2}{c}\cdot\dd\nu\biggp{\frac{\nu}{\e^{h\nu/\kB T}-1}\cdot\frac{\nu^2}c\cdot 3\nu^2}\\
+		&=\frac{2h\nu^2}{c^4}\cdot\dd\nu\frac{\nu^5}{\e^{h\nu/\kB T}-1},
 	\end{align*}
 	设$\xi:=h\nu/\kB T$，则导数等价于
 	\[
-		\dd\xi\frac{\xi^5}{\e\xi-1}=\frac{\xi^4}{(\e\xi-1)^2}\bigb{5(\e\xi-1)-\xi\e\xi}=0.
+		\dd\xi\frac{\xi^5}{\e^\xi-1}=\frac{\xi^4}{(\e^\xi-1)^2}\bigb{5(\e^\xi-1)-\xi\e^\xi}=0.
 \]
 \fi
 解方程
 \[
-	\xi=5\bigp{1-\e{-\xi}}\implies\xi_0=\num{4.96511423}\ldots
+	\xi=5\bigp{1-\e^{-\xi}}\implies\xi_0=\num{4.96511423}\ldots
 \]
 \begin{theorem}{Wein位移定律}{Wien's Displacement Law}
 	黑体电磁辐射光谱辐射度的峰值波长与自身温度乘积为常数
@@ -150,11 +150,11 @@ Planck的解决方法是将能量分布变为离散的，即$\varepsilon_n=nh\nu
 黑体辐射几何上严格符合Lambert余弦定律，因此
 \begin{align*}
 	j & =\int\zti\int_0^{2\pi}\int_0^{\pi/2}I_\nu(\nu,T)\cos\theta\sin\theta\d\theta\d\varphi\d\nu \\
-	  & =\pi\int\zti I_\nu(\nu,T)\d\nu=\frac{2\pi h}{c^2}\int\zti\frac{\nu^3}{\e{h\nu/\kB T}-1}\d\nu,
+	  & =\pi\int\zti I_\nu(\nu,T)\d\nu=\frac{2\pi h}{c^2}\int\zti\frac{\nu^3}{\e^{h\nu/\kB T}-1}\d\nu,
 \end{align*}
 又
 \[
-	\int\zti\frac{x^3\d x}{\e x-1}=\Gamma(4)\zeta(4)=3!\times\frac{\pi^4}{90}=\frac{\pi^4}{15},
+	\int\zti\frac{x^3\d x}{\e^x-1}=\Gamma(4)\zeta(4)=3!\times\frac{\pi^4}{90}=\frac{\pi^4}{15},
 \]
 得到
 \begin{theorem}{Stefan-Boltzmann定律}{Stefan-Boltzmann Law}

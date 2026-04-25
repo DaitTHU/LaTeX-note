@@ -6,15 +6,15 @@
 \section{局域振荡源}
 对于随时间变化的电荷和电流系统，我们都可以将随时间变化的量作Fourier分析，并分别处理各个Fourier分量。因此，不失一般性，我们只考虑随时间作正弦变化的局域电荷和电流系统所产生的势、场和辐射，设
 \begin{align*}
-    \rho(\bm r,t)&=\rho(\bm r)\e{-\i\omega t},\\
-    \bm J(\bm r,t)&=\bm J(\bm r)\e{-\i\omega t},
+    \rho(\bm r,t)&=\rho(\bm r)\e^{-\i\omega t},\\
+    \bm J(\bm r,t)&=\bm J(\bm r)\e^{-\i\omega t},
 \end{align*}
 矢量势
 \begin{align}
     \notag
     \bm A(\bm r,t)&=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r',t')}{\abs{\bm r-\bm r'}}\vd\Bigp{t'-t+\frac{\abs{\bm r-\bm r'}}c}\d t'\nd v'\\
     \label{eqn:A-Jeiwt}
-    &=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\e{\i k\abs{\bm r-\bm r'}}\d V'.
+    &=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\e^{\i k\abs{\bm r-\bm r'}}\d V'.
 \end{align}
 磁场和电场为
 \[
@@ -27,13 +27,13 @@
 \[
     \lim_{kr\to0}\bm A(\bm r)=\frac{\mu_0}{4\pi}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac{4\pi}{2\ell+1}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}\int\bm J(\bm r')r'^\ell Y\cj_{\ell m}(\theta',\phi')\d V'.
 \]
-上式表明，近场是准静态的，除了按$\e{-\i\omega t}$方式作简谐振荡外，其它性质都是静态的。
+上式表明，近场是准静态的，除了按$\e^{-\i\omega t}$方式作简谐振荡外，其它性质都是静态的。
 
 远区，$d\ll\lambda\ll r$，
 \[
-    \bm A(\bm r,t)=\frac{\mu_0}{4\pi}\frac{\e{\i kr}}r\int\bm J(\bm r')\e{-\i\bm k\cdot\bm r'}\d V'.
+    \bm A(\bm r,t)=\frac{\mu_0}{4\pi}\frac{\e^{\i kr}}r\int\bm J(\bm r')\e^{-\i\bm k\cdot\bm r'}\d V'.
 \]
-可以对$\e{-\i\bm k\cdot\bm r'}$展开，略。
+可以对$\e^{-\i\bm k\cdot\bm r'}$展开，略。
 
 中间区，$d\ll r\sim\lambda$，近似失效，引入
 球Bessel函数和Hankel函数
@@ -63,12 +63,12 @@
 激发的电场和磁场。
 通过远区近似，
 \[
-    \bm A=-\i\frac{\mu_0\omega}{4\pi}\bm p\frac{\e{\i kr}}r.
+    \bm A=-\i\frac{\mu_0\omega}{4\pi}\bm p\frac{\e^{\i kr}}r.
 \]
 场
 \begin{align*}
-    \bm H&=\frac{ck^2}{4\pi}(\uvec n\times\bm p)\frac{\e{\i kr}}r\Bigp{1+\i\frac1{kr}},\\
-    \bm E&=\frac1{4\pi\varepsilon_0}\biggb{k^2(\uvec n\times\bm p)\times\uvec n\frac{\e{\i kr}}r+\bigp{3\uvec n(\uvec n\cdot\bm p)-\bm p}\Bigp{\frac1{r^3}-\i\frac{k}{r^2}}\e{\i kr}}.
+    \bm H&=\frac{ck^2}{4\pi}(\uvec n\times\bm p)\frac{\e^{\i kr}}r\Bigp{1+\i\frac1{kr}},\\
+    \bm E&=\frac1{4\pi\varepsilon_0}\biggb{k^2(\uvec n\times\bm p)\times\uvec n\frac{\e^{\i kr}}r+\bigp{3\uvec n(\uvec n\cdot\bm p)-\bm p}\Bigp{\frac1{r^3}-\i\frac{k}{r^2}}\e^{\i kr}}.
 \end{align*}
 $r\to 0$时,
 \begin{align*}
@@ -77,7 +77,7 @@ $r\to 0$时,
 \end{align*}
 $r\to\infty$时，
 \begin{align*}
-    \bm H&=\frac{ck^2}{4\pi}(\uvec n\times\bm p)\frac{\e{\i kr}}r,\\
+    \bm H&=\frac{ck^2}{4\pi}(\uvec n\times\bm p)\frac{\e^{\i kr}}r,\\
     \bm E&=Z_0\bm H\times\uvec n,
 \end{align*}
 % $Z_0$是自由空间阻抗。
@@ -93,7 +93,7 @@ $r\to\infty$时，
 \begin{example}{天线}{center-fed, linear antenna}
     对于一个中间馈送(center-fed)的线性天线(antenna)，其电流
     \[
-        I_0\Bigp{1-\frac{2\abs{z}}d}\e{-\i\omega t},
+        I_0\Bigp{1-\frac{2\abs{z}}d}\e^{-\i\omega t},
     \]
     则其电偶极矩为
     \[
@@ -112,22 +112,22 @@ $r\to\infty$时，
 \paragraph{磁偶极子}
 磁偶极矩对矢量势的贡献
 \[
-    \bm A=\frac{k\mu_0}{4\pi}(\uvec n\times\bm m)\frac{\e{\i kr}}r\Bigp{\i-\frac1{kr}},
+    \bm A=\frac{k\mu_0}{4\pi}(\uvec n\times\bm m)\frac{\e^{\i kr}}r\Bigp{\i-\frac1{kr}},
 \]
 得到磁场和电场
 \begin{align*}
-    \bm H&=\frac1{4\pi}\biggb{k^2(\uvec n\times\bm m)\times\uvec n\frac{\e{\i kr}}r+\bigp{3\uvec n(\uvec n\cdot\bm m)-\bm m}\Bigp{\frac1{r^3}-\i\frac{k}{r^2}}\e{\i kr}},\\
-    \bm E&=-\frac{Z_0}{4\pi}k^2(\uvec n\times\bm m)\frac{\e{\i kr}}r\Bigp{1+\i\frac1{ kr}}.
+    \bm H&=\frac1{4\pi}\biggb{k^2(\uvec n\times\bm m)\times\uvec n\frac{\e^{\i kr}}r+\bigp{3\uvec n(\uvec n\cdot\bm m)-\bm m}\Bigp{\frac1{r^3}-\i\frac{k}{r^2}}\e^{\i kr}},\\
+    \bm E&=-\frac{Z_0}{4\pi}k^2(\uvec n\times\bm m)\frac{\e^{\i kr}}r\Bigp{1+\i\frac1{ kr}}.
 \end{align*}
 与电偶极子形式高度相似。
 \paragraph{电四极子}
 电四极子对矢量势的贡献
 \[
-    \bm A=-\frac{\mu_0ck^2}{8\pi}\frac{\e{\i kr}}r\Bigp{1+\i\frac1{kr}}\int\bm r'(\uvec n\cdot\bm r)\rho(\bm r')\d V'.
+    \bm A=-\frac{\mu_0ck^2}{8\pi}\frac{\e^{\i kr}}r\Bigp{1+\i\frac1{kr}}\int\bm r'(\uvec n\cdot\bm r)\rho(\bm r')\d V'.
 \]
 磁场
 \[
-    \bm H=-\i\frac{ck^3}{24\pi}\frac{\e{\i kr}}r\uvec n\times(Q\cdot\uvec n).
+    \bm H=-\i\frac{ck^3}{24\pi}\frac{\e^{\i kr}}r\uvec n\times(Q\cdot\uvec n).
 \]
 辐射功率 
 \[

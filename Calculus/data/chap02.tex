@@ -95,18 +95,18 @@
 
 \begin{example}{Gamma函数}{}
 	\begin{center}
-		$\Gamma(x):=\int\zti t^{x-1}\e{-t}\d t.$
+		$\Gamma(x):=\int\zti t^{x-1}\e^{-t}\d t.$
 	\end{center}
 	递推公式
 	\begin{align*}
-		\Gamma(1)   & =\int\zti\e{-t}\d t=1.                                              \\
-		\Gamma(x+1) & =\int\zti t^x\cdot\e{-t}\d t                                        \\
-					& =\eval{-t^x\e{-t}}\zti+\int\zti\e{-t}\cdot xt^{x-1}\d t=x\Gamma(x).
+		\Gamma(1)   & =\int\zti\e^{-t}\d t=1.                                              \\
+		\Gamma(x+1) & =\int\zti t^x\cdot\e^{-t}\d t                                        \\
+					& =\eval{-t^x\e^{-t}}\zti+\int\zti\e^{-t}\cdot xt^{x-1}\d t=x\Gamma(x).
 	\end{align*}
 	对于$n\in\mathbb N,\Gamma(n)=(n-1)!.$
 	% $\Gamma(x+1)=x\Gamma(x),\Gamma(1)=1$，对正整数$n$,
 	% \[
-	% 	\Gamma(n)=\int_0^{+\infty}t^{n-1}\e{-t}\d t=(n-1)!
+	% 	\Gamma(n)=\int_0^{+\infty}t^{n-1}\e^{-t}\d t=(n-1)!
 	% \]
 
 	\textbf{余元公式}
@@ -123,17 +123,17 @@
 \end{example}
 \begin{example}{Possion积分}{}
 	\begin{center}
-		$\int\zti\e{-t^2}\d t=\frac{\sqrt\pi}2.$
+		$\int\zti\e^{-t^2}\d t=\frac{\sqrt\pi}2.$
 	\end{center}
 	\textbf{证明：}考虑积分的平方
 	\begin{align*}
-		\int\zti\e{-x^2}\d x\int\zti\e{-y^2}\d y=\int\zti\int\zti\e{-x^2-y^2}\d x\nd y \\
-		=\int_0^{\pi/2}\int\zti\e{-r^2}\cdot r\d r\nd\theta=\frac\pi{2}\cdot\frac12\int\zti\e{-s}\d s=\frac\pi{4}.
+		\int\zti\e^{-x^2}\d x\int\zti\e^{-y^2}\d y=\int\zti\int\zti\e^{-x^2-y^2}\d x\nd y \\
+		=\int_0^{\pi/2}\int\zti\e^{-r^2}\cdot r\d r\nd\theta=\frac\pi{2}\cdot\frac12\int\zti\e^{-s}\d s=\frac\pi{4}.
 	\end{align*}
 	\iffalse
 		由$\ex>0,\forall x\in\RR$
 		\[
-			\iint_A\e{-x^2-y^2}\d x\nd y\leqslant\iint_B\e{-x^2-y^2}\d x\nd y\leqslant\iint_C\e{-x^2-y^2}\d x\nd y
+			\iint_A\e^{-x^2-y^2}\d x\nd y\leqslant\iint_B\e^{-x^2-y^2}\d x\nd y\leqslant\iint_C\e^{-x^2-y^2}\d x\nd y
 		\]
 		其中
 		\begin{align*}
@@ -143,11 +143,11 @@
 		\end{align*}
 		又
 		\begin{align*}
-			\iint_A\e{-x^2-y^2}\d x\nd y & =\int_0^{\pi/2}\int_0^R\e{-\rho^2}\rho\d\rho\d\varphi=\frac{\pi}4(1-\e{-R^2}), \\
-			\iint_B\e{-x^2-y^2}\d x\nd y & =\int_0^R\int_0^R\e{-x^2}\e{-y^2}\d x\nd y=\biggp{\int_0^R\e{-t^2}\d t}^2,          \\
-			\iint_C\e{-x^2-y^2}\d x\nd y & =\frac{\pi}4(1-\e{-2R^2}).
+			\iint_A\e^{-x^2-y^2}\d x\nd y & =\int_0^{\pi/2}\int_0^R\e^{-\rho^2}\rho\d\rho\d\varphi=\frac{\pi}4(1-\e^{-R^2}), \\
+			\iint_B\e^{-x^2-y^2}\d x\nd y & =\int_0^R\int_0^R\e^{-x^2}\e^{-y^2}\d x\nd y=\biggp{\int_0^R\e^{-t^2}\d t}^2,          \\
+			\iint_C\e^{-x^2-y^2}\d x\nd y & =\frac{\pi}4(1-\e^{-2R^2}).
 		\end{align*}
-		当$R\to+\infty$，即得$\int\zti\e{-t^2}\d t=\frac{\sqrt\pi}2$.
+		当$R\to+\infty$，即得$\int\zti\e^{-t^2}\d t=\frac{\sqrt\pi}2$.
 	\fi
 \end{example}
 \begin{example}{Dirichlet积分}{}
@@ -156,25 +156,25 @@
 	\end{center}
 	\textbf{证明：}令
 	\[
-		F(y)=\int\zti\frac{\sin x}x\e{-xy}\d x,\quad y\geqslant 0.
+		F(y)=\int\zti\frac{\sin x}x\e^{-xy}\d x,\quad y\geqslant 0.
 	\]
-	由$\frac{\sin x}x\e{-xy}$可被延拓为$\RR_{\geqslant 0}^2$上的连续函数，故$F(y)$在$\RR_{\geqslant 0}$上连续．
+	由$\frac{\sin x}x\e^{-xy}$可被延拓为$\RR_{\geqslant 0}^2$上的连续函数，故$F(y)$在$\RR_{\geqslant 0}$上连续．
 
 	注意到，积分
 	\[
 		\int\zti\frac{\sin x}x\d x
 	\]
-	收敛；$\forall x,y\geqslant 0,|\e{-xy}|\leqslant 1$且$\e{-xy}$关于$x$递减，由Abel判别准则可知$F(y)$关于$y\in[0,+\infty)$一致收敛．
+	收敛；$\forall x,y\geqslant 0,|\e^{-xy}|\leqslant 1$且$\e^{-xy}$关于$x$递减，由Abel判别准则可知$F(y)$关于$y\in[0,+\infty)$一致收敛．
 
-	任取$a>0,\forall x\geqslant 0,y\geqslant a,$可知$\abs{-\sin x\e{-xy}}\leqslant \e{-xy}\leqslant \e{-ax}$有界，由Weierstrass判别准则知，积分
+	任取$a>0,\forall x\geqslant 0,y\geqslant a,$可知$\abs{-\sin x\e^{-xy}}\leqslant \e^{-xy}\leqslant \e^{-ax}$有界，由Weierstrass判别准则知，积分
 	\[
-		\int\zti\pv {}y\frac{\sin x}x\e{-xy}\d x=-\int\zti\sin x\e{-xy}\d x
+		\int\zti\pv {}y\frac{\sin x}x\e^{-xy}\d x=-\int\zti\sin x\e^{-xy}\d x
 	\]
 	一致收敛，因此$F(y)$在$[a,+\infty)$上可导
 	\begin{align*}
-		F'(y) & =-\int\zti\sin x\e{-xy}\d x=\int\zti\Im\e{-xy-\i x}\d x                                                \\
-			  & =-\Im\eval{\frac{\e{-(y+\i)x}}{y+\i}}\zti=-\eval{\frac{\e{-yx}}{y^2+1}\Im(y-\i)\e{-\i x}}\zti \\
-			  & =\eval{\frac{\e{-yx}}{y^2+1}(y\sin x+\cos x)}\zti=-\frac1{1+y^2}.
+		F'(y) & =-\int\zti\sin x\e^{-xy}\d x=\int\zti\Im\e^{-xy-\i x}\d x                                                \\
+			  & =-\Im\eval{\frac{\e^{-(y+\i)x}}{y+\i}}\zti=-\eval{\frac{\e^{-yx}}{y^2+1}\Im(y-\i)\e^{-\i x}}\zti \\
+			  & =\eval{\frac{\e^{-yx}}{y^2+1}(y\sin x+\cos x)}\zti=-\frac1{1+y^2}.
 	\end{align*}
 	因为$a>0$任意，故$\forall y>0,$
 	\[
@@ -182,7 +182,7 @@
 	\]
 	又$y\to+\infty,$
 	\[
-		|F(y)|\leqslant\int\zti\frac{|\sin x|}x\e{-xy}\d x\leqslant\int\zti\e{-xy}\d x=\frac1y\to0.
+		|F(y)|\leqslant\int\zti\frac{|\sin x|}x\e^{-xy}\d x\leqslant\int\zti\e^{-xy}\d x=\frac1y\to0.
 	\]
 	故$\lim_{y\to+\infty}F(y)=C-\frac{\pi}2=0$，即$C=\frac{\pi}2.$
 

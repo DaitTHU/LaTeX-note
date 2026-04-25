@@ -73,18 +73,18 @@
 \end{align*}
 
 \paragraph{Fourier变换}
-利用$\e{ix}=\cos x+\i\sin x$，可得到Fourier级数的复数形式：
-\[f(x)=\sum_{n=-\infty}^{+\infty}c_n\e{\i nx},\quad c_n=\frac1{2\pi}\int_{-\pi}^\pi f(x)\e{-\i nx}\d x.\]
+利用$\e^{ix}=\cos x+\i\sin x$，可得到Fourier级数的复数形式：
+\[f(x)=\sum_{n=-\infty}^{+\infty}c_n\e^{\i nx},\quad c_n=\frac1{2\pi}\int_{-\pi}^\pi f(x)\e^{-\i nx}\d x.\]
 对于其他周期$T=\lambda,\;k=2\pi/\lambda$
-\[f(x)=\sum_{n=-\infty}^{+\infty}c_n\e{\i nkx},\quad c_n=\frac1\lambda\int_{-\lambda/2}^{\lambda/2} f(x)\e{-\i nkx}\d x.\]
+\[f(x)=\sum_{n=-\infty}^{+\infty}c_n\e^{\i nkx},\quad c_n=\frac1\lambda\int_{-\lambda/2}^{\lambda/2} f(x)\e^{-\i nkx}\d x.\]
 
 当$f(x)$不是周期函数时，就不能用Fourier级数展开。
 然而，若认为其周期$\lambda=2N$充分大，令$\xi=nk$，
-\[f(x)=\sum_\xi\biggb{\frac{k}{2\pi}\int_{-N}^Nf(x)\e{-\i\xi x}\d x}\e{\i\xi x}.\]
+\[f(x)=\sum_\xi\biggb{\frac{k}{2\pi}\int_{-N}^Nf(x)\e^{-\i\xi x}\d x}\e^{\i\xi x}.\]
 再让$N\to\infty,\;k\to0$，定义
-\[\hat f(\xi):=\int_{-\infty}^\infty f(x)\e{-\i\xi x}\d x,\]
+\[\hat f(\xi):=\int_{-\infty}^\infty f(x)\e^{-\i\xi x}\d x,\]
 以及
-\[f(x)=\frac1{2\pi}\int_{-\infty}^\infty\hat f(\xi)\e{\i\xi x}\d\xi,\]
+\[f(x)=\frac1{2\pi}\int_{-\infty}^\infty\hat f(\xi)\e^{\i\xi x}\d\xi,\]
 这就是Fourier变换。
 
 \subsection{Fourier系数}
@@ -118,14 +118,14 @@
 \paragraph{指数函数}
 对于指数函数的Fourier系数，只需记住
 \begin{align*}
-	\mathcal I:=\int\e{ax}\cos bx\d x=\e{ax}\cdot\frac{a\cos bx+b\sin bx}{a^2+b^2}\plusc;\\
-	\mathcal J:=\int\e{ax}\sin bx\d x=\e{ax}\cdot\frac{a\sin bx-b\cos bx}{a^2+b^2}\plusc.
+	\mathcal I:=\int\e^{ax}\cos bx\d x=\e^{ax}\cdot\frac{a\cos bx+b\sin bx}{a^2+b^2}\plusc;\\
+	\mathcal J:=\int\e^{ax}\sin bx\d x=\e^{ax}\cdot\frac{a\sin bx-b\cos bx}{a^2+b^2}\plusc.
 \end{align*}
 \begin{proof}
 	分部积分
 	\begin{align*}
-		\mathcal I&=\frac1b\int\e{ax}\d\sin bx=\frac1b\e{ax}\sin bx-\frac ab\mathcal J;\\
-		\mathcal J&=-\frac1b\int\e{ax}\d\cos bx=-\frac1b\e{ax}\cos bx+\frac ab\mathcal I.
+		\mathcal I&=\frac1b\int\e^{ax}\d\sin bx=\frac1b\e^{ax}\sin bx-\frac ab\mathcal J;\\
+		\mathcal J&=-\frac1b\int\e^{ax}\d\cos bx=-\frac1b\e^{ax}\cos bx+\frac ab\mathcal I.
 	\end{align*}
 	即可解得上式。
 \end{proof}
@@ -177,8 +177,8 @@ Fourier变换的定义见第~\pageref{dfn:Integral Transformation}~页\dfnref{df
 			\end{gather}
 	\item 位移性质
 			\begin{gather*}
-				\FT[f(x-a)](\xi)=\hat f(\xi)\e{-\i a\xi},\\
-				\hat f(\xi-\alpha)=\FT[f(x)\e{\i\alpha x}](\xi).
+				\FT[f(x-a)](\xi)=\hat f(\xi)\e^{-\i a\xi},\\
+				\hat f(\xi-\alpha)=\FT[f(x)\e^{\i\alpha x}](\xi).
 			\end{gather*}
 	\item 相似
 			\[\FT[f(kx)](\xi)=\frac1{\abs k}\hat f\Bigp{\frac\xi{k}}.\]
@@ -189,7 +189,7 @@ Fourier变换的定义见第~\pageref{dfn:Integral Transformation}~页\dfnref{df
 	\item 反射
 			\[\FT[\hat f(\xi)](x)=2\pi f(-x).\]
 			因此Fourier逆变换
-			\[\FT^{-1}[g](x)=\frac1{2\pi}\int\iti g(\xi)\e{\i\xi x}\d\xi.\]
+			\[\FT^{-1}[g](x)=\frac1{2\pi}\int\iti g(\xi)\e^{\i\xi x}\d\xi.\]
 			在$f$连续点处$\FT^{-1}[\hat f(\xi)](x)=f(x)$．
 \end{enumerate}
 高维下Fourier变换的性质是相似的．
@@ -226,14 +226,14 @@ Fourier变换的定义见第~\pageref{dfn:Integral Transformation}~页\dfnref{df
 \begin{enumerate}
 	\item $\FT[\delta(x)]=1,$\qquad$\FT[\delta^{(n)}(x)]=(\i\xi)^n;$
 	\item $\FT[1]=2\pi\vd(\xi),$\qquad$\FT[x^n]=2\pi\i^n\vd^{(n)}(\xi);$
-	\item $\FT[\e{\i ax}]=2\pi\vd(\xi-a);$
+	\item $\FT[\e^{\i ax}]=2\pi\vd(\xi-a);$
 	\item $\FT[\cos ax]=\pi\Bigp{\delta(\xi-a)+\delta(\xi+a)};$
 	\item $\FT[\sin ax]=-\i\pi\Bigp{\delta(\xi-a)-\delta(\xi+a)};$
 	\item $\FT[\cos ax^2]=\sqrt{\frac\pi{2a}}\Bigp{\cos\frac{\xi^2}{4a}+\sin\frac{\xi^2}{4a}};$
 	\item $\FT[\sin ax^2]=\sqrt{\frac\pi{2a}}\Bigp{\cos\frac{\xi^2}{4a}-\sin\frac{\xi^2}{4a}};$
-	\item $\FT[\e{-a\abs x}]=\frac{2a}{a^2+\xi^2};$
-	\item $\FT[\e{-ax^2}]=\sqrt{\frac\pi{a}}\e{-\xi^2/4a};$
-	\item $\FT[\e{-\i ax^2}]=\sqrt{\frac\pi{a}}\e{\i(\xi^2/4a-\pi/4)};$
+	\item $\FT[\e^{-a\abs x}]=\frac{2a}{a^2+\xi^2};$
+	\item $\FT[\e^{-ax^2}]=\sqrt{\frac\pi{a}}\e^{-\xi^2/4a};$
+	\item $\FT[\e^{-\i ax^2}]=\sqrt{\frac\pi{a}}\e^{\i(\xi^2/4a-\pi/4)};$
 	\item $\FT[\frac1x]=-\i\pi\sgn\xi;$
 	\item $\FT[\frac1{x^n}]=-\i\pi\frac{(-\i\xi)^{n-1}}{(n-1)!}\sgn\xi,$\qquad$\FT[\frac1{x^2}]=-\pi\xi\sgn\xi;$
 	\item $\FT[\abs x^\alpha]=-2\Gamma(\alpha+1)\sin\Bigp{\frac{\pi\alpha}2}\abs\xi^{-1-\alpha};$
@@ -273,8 +273,8 @@ Heaviside阶梯函数
 	积分路径$\Re\xi>\sigma_0$。
 	\item 复频移与时滞
 	\begin{align*}
-		\LT[f(x)\e{\alpha x}]&=\bar f(\xi-\alpha),\quad \alpha\in\CC\\
-		\LT[f(x-a)]&=\bar f\e{-a\xi},\qquad\; a\geqslant 0 % \Heaviside(x-a)
+		\LT[f(x)\e^{\alpha x}]&=\bar f(\xi-\alpha),\quad \alpha\in\CC\\
+		\LT[f(x-a)]&=\bar f\e^{-a\xi},\qquad\; a\geqslant 0 % \Heaviside(x-a)
 	\end{align*}
 	\item 相似
 	\[
@@ -295,7 +295,7 @@ Heaviside阶梯函数
 	\item $\LT[\vd(t)] = 1,\quad \LT[\vd^{(n)}(t)] = s^n;$
 	\item $\LT[\sgn t]=\LT[\Heaviside(t)]=\frac1s,\quad \LT[t\Heaviside(t)]=\frac1{s^2};$
 	\item $\LT\Bigb{\frac1{\sqrt{\pi t}}}=\frac1{\sqrt s};$%,\quad\LT\Bigb{2\sqrt{\frac t\pi}}=\frac1{s\sqrt s};$
-	\item $\LT[\e{at}]=\frac1{s-a};$
+	\item $\LT[\e^{at}]=\frac1{s-a};$
 	\item $\LT[\sin at]=\frac a{s^2+a^2},\quad \LT[\sinh at]=\frac a{s^2-a^2};$
 	\item $\LT[\cos at]=\frac s{s^2+a^2},\quad \LT[\cosh at]=\frac s{s^2-a^2};$
 \end{enumerate}

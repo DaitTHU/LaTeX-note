@@ -299,25 +299,25 @@
 \begin{example}{Fourier变换}{Fourier transformation}
     Fourier级数有复变函数的形式
     \[
-        f(x)=\frac1{\sqrt\ell}\sum_{n=-\infty}^{+\infty}c_n\e{\i2\pi nx/\ell},
+        f(x)=\frac1{\sqrt\ell}\sum_{n=-\infty}^{+\infty}c_n\e^{\i2\pi nx/\ell},
         \quad
-        c_n=\frac1{\sqrt\ell}\int_{-\ell/2}^{\ell/2}f(x')\e{-\i2\pi nx'/\ell}\d x'.
+        c_n=\frac1{\sqrt\ell}\int_{-\ell/2}^{\ell/2}f(x')\e^{-\i2\pi nx'/\ell}\d x'.
     \]
     当$\ell\to\infty$时，
     \[
-        f(x)=\frac1{2\pi}\int\iti\biggb{\int\iti f(x')\e{-\i kx'}\d x'}\e{\i kx}\d k.
+        f(x)=\frac1{2\pi}\int\iti\biggb{\int\iti f(x')\e^{-\i kx'}\d x'}\e^{\i kx}\d k.
     \]
     由此可得$f(x)$的Fourier变换为
     \begin{equation}
-        \hat f(k)=\frac1{\sqrt{2\pi}}\int\iti f(x)\e{-\i kx}\d x;
+        \hat f(k)=\frac1{\sqrt{2\pi}}\int\iti f(x)\e^{-\i kx}\d x;
     \end{equation}
     相应的Fourier反变换为
     \begin{equation}
-        f(x)=\frac1{\sqrt{2\pi}}\int\iti\hat f(k)\e{\i kx}\d k.
+        f(x)=\frac1{\sqrt{2\pi}}\int\iti\hat f(k)\e^{\i kx}\d k.
     \end{equation}
     其体现的正交性：
     \[
-        \frac1{2\pi}\int\iti\e{\i(k-k')x}\d x=\delta(k-k').
+        \frac1{2\pi}\int\iti\e^{\i(k-k')x}\d x=\delta(k-k').
     \]
 \end{example}
 
@@ -424,12 +424,12 @@
 \]
 可得$\Psi_n''/\Psi_n=n^2$，
 继而$R(\rho)$满足Euler方程，
-% 做变量替换$u(t)=R(\e t)$，
+% 做变量替换$u(t)=R(\e^t)$，
 % \[
 %     u''-n^2u=0\implies u=
 %     \begin{cases}
 %         c_0+d_0t,&n=0\\
-%         c_n\e{nt}+d_n\e{-nt},&n\geqslant 1
+%         c_n\e^{nt}+d_n\e^{-nt},&n\geqslant 1
 %     \end{cases}
 % \]
 可得
@@ -502,7 +502,7 @@
 \begin{subequations}
     \begin{align}
         R_\ell(r)&=Ar^\ell+Br^{-(\ell+1)},\\
-        Q_m(\phi)&=\e{\pm\i m\phi},
+        Q_m(\phi)&=\e^{\pm\i m\phi},
     \end{align}
 \end{subequations}
 周期条件$Q(\phi+2\pi)=Q(\phi)$要求$m=0,\pm 1,\pm 2,\ldots$为整数。
@@ -676,7 +676,7 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
 将角向部分的解$P(\theta)$和$Q(\phi)$合并，
 由此得到球谐函数(spherical harmonics)：
 \begin{equation}
-    Y_{\ell m}(\theta,\phi)=\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}}P_\ell^m(\cos\theta)\e{\i m\phi}.
+    Y_{\ell m}(\theta,\phi)=\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}}P_\ell^m(\cos\theta)\e^{\i m\phi}.
 \end{equation}
 满足Laplace方程的角向部分：
 \[
@@ -724,8 +724,8 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
 \end{subequations}
 其中\eqref{eqn:Laplace in cylinder phi}和\eqref{eqn:Laplace in cylinder z}可直接解得$Q,Z$
 \begin{alignat}{2}
-    Q_\nu(\phi)&=\e{\pm\i\nu\phi},\quad&\nu&=0,1,2,\ldots\\
-    Z_k(z)&=\e{\pm kz},&k&>0
+    Q_\nu(\phi)&=\e^{\pm\i\nu\phi},\quad&\nu&=0,1,2,\ldots\\
+    Z_k(z)&=\e^{\pm kz},&k&>0
 \end{alignat}
 也可以采用$Q_\nu(\phi)=\sin(\nu\phi),\cos(\nu\phi);\,Z_k(z)=\sinh(kz),\cosh(kz)$的形式。
 
@@ -979,7 +979,7 @@ $g_\ell$满足
 \]
 Green函数可以写成
 \[
-    G(\bm r,\bm r')=\frac1{4\pi^2}\sum_{m=-\infty}^\infty\int\iti\e{\i m(\phi-\phi')}\e{\i k(z-z')}g_m(k,\rho,\rho')\d k.
+    G(\bm r,\bm r')=\frac1{4\pi^2}\sum_{m=-\infty}^\infty\int\iti\e^{\i m(\phi-\phi')}\e^{\i k(z-z')}g_m(k,\rho,\rho')\d k.
 \]
 径向Green函数$g_m(k,\rho,\rho')$
 \begin{equation}
@@ -1008,7 +1008,7 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 \]
 故$A=4\pi$，我们得到了$1/\abs{\bm r-\bm r'}$的展开 
 \begin{equation}
-    \frac1{\abs{\bm r-\bm r'}}=\frac1\pi\sum_{m=-\infty}^{+\infty}\int\iti\e{\i m(\phi-\phi')}\e{\i k(z-z')}I_m(k\rho_<)K_m(k\rho_>)\d k.
+    \frac1{\abs{\bm r-\bm r'}}=\frac1\pi\sum_{m=-\infty}^{+\infty}\int\iti\e^{\i m(\phi-\phi')}\e^{\i k(z-z')}I_m(k\rho_<)K_m(k\rho_>)\d k.
 \end{equation}
 
 \subsection{Green函数的本征函数展开式}
@@ -1051,11 +1051,11 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 \begin{example}{$1/\abs{\bm r-\bm r'}$的三维Fourier积分表示}{1/|r-r'| Fourier}
     自由边界下，$f(\bm r)\equiv 0$的特征方程
     \[
-        (\lapla+k^2)\psi_{\bm k}(\bm r)=0\implies\psi_{\bm k}(\bm r)=\frac{\e{\i\bm k\cdot\bm r}}{(2\pi)^{3/2}}.
+        (\lapla+k^2)\psi_{\bm k}(\bm r)=0\implies\psi_{\bm k}(\bm r)=\frac{\e^{\i\bm k\cdot\bm r}}{(2\pi)^{3/2}}.
     \]
     则$\lambda=0$时的Green函数为
     \[
-        G(\bm r,\bm r')=4\pi\int\frac{\psi_{\bm k}\cj(\bm r')\psi_{\bm k}(\bm r)}{k^2}\d V_k=\frac1{2\pi^2}\int\frac{\e{\i\bm k\cdot(\bm r'-\bm r)}}{k^2}\d V_k.
+        G(\bm r,\bm r')=4\pi\int\frac{\psi_{\bm k}\cj(\bm r')\psi_{\bm k}(\bm r)}{k^2}\d V_k=\frac1{2\pi^2}\int\frac{\e^{\i\bm k\cdot(\bm r'-\bm r)}}{k^2}\d V_k.
     \]
 \end{example}
 

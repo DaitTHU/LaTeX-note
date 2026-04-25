@@ -288,12 +288,12 @@
 	\]
 	% 由
 	% \[
-	% 	\int\iti x\e{-a(x-b)^2+c}\d x=\sqrt{\frac\pi{a}}b\e c.
+	% 	\int\iti x\e^{-a(x-b)^2+c}\d x=\sqrt{\frac\pi{a}}b\e^c.
 	% \]
 	% 可得
 	% \begin{align*}
-	% 	\Corr(X,Y)&=\frac1{2\pi\sqrt{1-\rho^2}}\int\iti\eta\sqrt{2\pi(1-\rho^2)}\cdot\rho\eta\e{-\eta^2/2}\d\eta\\
-	% 	&=\frac\rho{\sqrt{2\pi}}\int\iti\eta^2\e{-\eta^2/2}\d\eta=\rho.
+	% 	\Corr(X,Y)&=\frac1{2\pi\sqrt{1-\rho^2}}\int\iti\eta\sqrt{2\pi(1-\rho^2)}\cdot\rho\eta\e^{-\eta^2/2}\d\eta\\
+	% 	&=\frac\rho{\sqrt{2\pi}}\int\iti\eta^2\e^{-\eta^2/2}\d\eta=\rho.
 	% \end{align*}
 \end{example}
 
@@ -330,7 +330,7 @@
 \begin{definition}{矩母函数}{moment generating funtion}
 	若下面期望在$t$的某含0邻域内存在，
 	\begin{equation}\label{MGF def}
-		\MGF_X(t):=\E(\e{tX})=\sum_{k=0}^\infty\frac{\E(X^k)}{k!}t^k
+		\MGF_X(t):=\E(\e^{tX})=\sum_{k=0}^\infty\frac{\E(X^k)}{k!}t^k
 	\end{equation}
 	则称$\MGF_X(t)$为$X$的矩母函数(moment generating function, MGF).\index{MGF, 矩母函数}
 \end{definition}
@@ -341,16 +341,16 @@
 \begin{example}{指数分布和正态分布的矩母函数}{MGF of Expo & Norm}
 	若$X\sim\Expo(\lambda)$，则 
 	\[
-		\MGF_X(t)=\int\zti\e{tx}\lambda\e{-\lambda x}\d x=\frac\lambda{\lambda-t},\quad t\in(-\lambda,\lambda).
+		\MGF_X(t)=\int\zti\e^{tx}\lambda\e^{-\lambda x}\d x=\frac\lambda{\lambda-t},\quad t\in(-\lambda,\lambda).
 	\]
 	\tcblower
 	若$X\sim\Norm(\mu,\sigma^2)$，则
 	\[
-		\MGF_X(t)=\frac1{\sqrt{2\pi}\sigma}\int\iti\e{tx}\e{-(x-\mu)^2/2\sigma^2}\d x=\exp\Bigp{\mu t+\frac12\sigma^2t^2}.
+		\MGF_X(t)=\frac1{\sqrt{2\pi}\sigma}\int\iti\e^{tx}\e^{-(x-\mu)^2/2\sigma^2}\d x=\exp\Bigp{\mu t+\frac12\sigma^2t^2}.
 	\]
 	特别地，若$X\sim\Norm(0,1)$，则 
 	\[
-		\MGF_X(t)=\e{-t^2/2}=\sum_{n=0}^\infty\frac{(2n)!}{2^nn!}\frac{t^{2n}}{(2n)!}.
+		\MGF_X(t)=\e^{-t^2/2}=\sum_{n=0}^\infty\frac{(2n)!}{2^nn!}\frac{t^{2n}}{(2n)!}.
 	\]
 	故$\E(X^{2k+1})=0,\enspace\E(X^{2k})=(2k-1)!!$
 \end{example}
@@ -367,7 +367,7 @@
 \begin{example}{离散分布的矩母函数}{}
 	从$X$的矩母函数可直接看出$X$的分布列，比如
 	\[
-		\MGF_X(t)=\frac14\e{-t}+\frac12+\frac18\e{4t}+\frac18\e{5t},
+		\MGF_X(t)=\frac14\e^{-t}+\frac12+\frac18\e^{4t}+\frac18\e^{5t},
 	\]
 	\iffalse
 	\begin{center}
@@ -384,7 +384,7 @@
 \begin{example}{同矩不一定同分布}{}
 	对数正态分布$\ln X_1\sim\Norm(0,1)$，则$X_1$的PDF
 	\[
-		f_1(x)=\frac1{\sqrt{2\pi}x}\e{-\ln^2x/2},\quad x>0
+		f_1(x)=\frac1{\sqrt{2\pi}x}\e^{-\ln^2x/2},\quad x>0
 	\]
 	构造$X_2$，其PDF
 	\[
@@ -405,7 +405,7 @@
 	\[
 		\MGF_{X+Y}(t)=\MGF_X(t)\MGF_Y(t).
 	\]
-	%\prf \MGF_{X+Y}(t)=\E(\e{tX}\e{tY})=\E(\e{tX})\E(\e{tY})=\MGF_X(t)\MGF_Y(t).\rqed
+	%\prf \MGF_{X+Y}(t)=\E(\e^{tX}\e^{tY})=\E(\e^{tX})\E(\e^{tY})=\MGF_X(t)\MGF_Y(t).\rqed
 \end{theorem}
 \begin{corollary}
 	$n$个独立的正态分布$X_i\sim\Norm(\mu_i,\sigma_i^2)$的和仍然服从正态分布，且
@@ -416,7 +416,7 @@
 \begin{definition}{联合分布的矩母函数}{}
 	联合分布的矩母函数定义为
 	\begin{equation}
-		\MGF_{X_1,\ldots,X_n}(t_1,\ldots,t_n):=\E\bigp{\e{t_1X_1+\cdots+t_nX_n}}.
+		\MGF_{X_1,\ldots,X_n}(t_1,\ldots,t_n):=\E\bigp{\e^{t_1X_1+\cdots+t_nX_n}}.
 	\end{equation}
 \end{definition}
 也可以通过矩母函数确定分布。
@@ -438,7 +438,7 @@
 \begin{definition}{特征函数}{characteristic function}
 	定义特征函数(characteristic function, CF)\index{CF, 特征函数}
 	\begin{equation}\label{CF-def}
-		\psi(t):=\E\bigp{\e{\i tX}}.
+		\psi(t):=\E\bigp{\e^{\i tX}}.
 	\end{equation}
 \end{definition}
 与矩母函数不同，特征函数总是存在的。

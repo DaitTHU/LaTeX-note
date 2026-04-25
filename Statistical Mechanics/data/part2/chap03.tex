@@ -5,9 +5,9 @@
 
 \chapter{Bose统计和Fermi统计}
 
-不同于理想气体，实际气体不满足非简并条件，$\e\alpha\not\gg 1$，服从Bose分布和Fermi分布：
+不同于理想气体，实际气体不满足非简并条件，$\e^\alpha\not\gg 1$，服从Bose分布和Fermi分布：
 \begin{equation}
-	a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}\pm 1},
+	a_i=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}\pm 1},
 \end{equation}
 约定
 $\pm$号的($+$)对应Fermi分布，($-$)对应Bose分布。
@@ -16,7 +16,7 @@ $\mp$号反之。
 \begin{definition}{巨配分函数}{grand partition function}
 	定义巨配分函数(grand partition function)的对数
 	\begin{equation}
-		\ln\Xi:=\pm\sum_i\omega_i\ln(1\pm\e{-\alpha-\beta\varepsilon_i}),
+		\ln\Xi:=\pm\sum_i\omega_i\ln(1\pm\e^{-\alpha-\beta\varepsilon_i}),
 	\end{equation}
 \end{definition}
 
@@ -36,15 +36,15 @@ $\mp$号反之。
 \begin{proof}
 	粒子数
 	\[
-		N=\sum_i a_i=\sum_i\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}\pm 1}=\mp\sum_i\omega_i\pp\alpha{\ln(1\pm\e{-\alpha-\beta\varepsilon_i})}=-\pv{\ln\Xi}\alpha,
+		N=\sum_i a_i=\sum_i\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}\pm 1}=\mp\sum_i\omega_i\pp\alpha{\ln(1\pm\e^{-\alpha-\beta\varepsilon_i})}=-\pv{\ln\Xi}\alpha,
 	\]
 	内能
 	\[
-		U=\sum_i a_i\varepsilon_i=\sum_i\frac{\omega_i\varepsilon_i}{\e{\alpha+\beta\varepsilon_i}\pm 1}=\mp\sum_i\omega_i\pp\beta{\ln(1\pm\e{-\alpha-\beta\varepsilon_i})}=-\pv{\ln\Xi}\beta,
+		U=\sum_i a_i\varepsilon_i=\sum_i\frac{\omega_i\varepsilon_i}{\e^{\alpha+\beta\varepsilon_i}\pm 1}=\mp\sum_i\omega_i\pp\beta{\ln(1\pm\e^{-\alpha-\beta\varepsilon_i})}=-\pv{\ln\Xi}\beta,
 	\]
 	状态方程
 	\[
-		Y_k=-\sum_i a_i\pv{\varepsilon_i}{y_k}=\mp\sum_i\omega_i\pp{y_k}{\ln(1\pm\e{-\alpha-\beta\varepsilon_i})}=-\frac1\beta\pv{\ln\Xi}{y_k},
+		Y_k=-\sum_i a_i\pv{\varepsilon_i}{y_k}=\mp\sum_i\omega_i\pp{y_k}{\ln(1\pm\e^{-\alpha-\beta\varepsilon_i})}=-\frac1\beta\pv{\ln\Xi}{y_k},
 	\]
 	考虑
 	\begin{align*}
@@ -53,7 +53,7 @@ $\mp$号反之。
 	\end{align*}
 	对于封闭系统，$\d N\equiv 0$，再对应经典极限下的半经典分布可得$1/\beta T=\kB$，且有$S_0=0$：
 	\begin{align*}
-		S&=S_0+\kB(\ln\Xi+\alpha N+\beta U)=S_0+\kB\sum_i\Bigb{\pm\omega_i\ln(1\pm\e{-\alpha-\beta\varepsilon_i})+a_i(\alpha +\beta\varepsilon_i)}\\
+		S&=S_0+\kB(\ln\Xi+\alpha N+\beta U)=S_0+\kB\sum_i\Bigb{\pm\omega_i\ln(1\pm\e^{-\alpha-\beta\varepsilon_i})+a_i(\alpha +\beta\varepsilon_i)}\\
 		% &=S_0+\kB\sum_i\biggb{\pm\omega_i\biggp{-\ln\biggp{\frac{\omega_i}{a_i}\mp 1}+\ln\biggp{\frac{\omega_i}{a_i}}}+a_i\ln\biggp{\frac{\omega_i}{a_i}\mp 1}}\\
 		&=S_0+\kB\sum_i\biggb{\mp\omega_i\ln\biggp{1\mp\frac{a_i}{\omega_i}}+a_i\ln\biggp{\frac{\omega_i}{a_i}\mp 1}}=S_0+\kB\ln\Om[F/B].
 	\end{align*}
@@ -64,9 +64,9 @@ $\mp$号反之。
 	$\ln\Xi$、粒子数$N$和内能$U$也可以写成态密度$g(\varepsilon)$的积分：
 	\begin{subequations}
 		\begin{align}
-			\ln\Xi&=\pm\int\zti g(\varepsilon)\ln(1\pm\e{-\alpha-\beta\varepsilon})\d\varepsilon,\\
-			N&=-\pv{\ln\Xi}\alpha=\pm\int\zti\frac{g(\varepsilon)}{\e{\alpha+\beta\varepsilon}\pm 1}\d\varepsilon,\\
-			U&=-\pv{\ln\Xi}\beta=\pm\int\zti\frac{g(\varepsilon)\varepsilon}{\e{\alpha+\beta\varepsilon}\pm 1}\d\varepsilon.
+			\ln\Xi&=\pm\int\zti g(\varepsilon)\ln(1\pm\e^{-\alpha-\beta\varepsilon})\d\varepsilon,\\
+			N&=-\pv{\ln\Xi}\alpha=\pm\int\zti\frac{g(\varepsilon)}{\e^{\alpha+\beta\varepsilon}\pm 1}\d\varepsilon,\\
+			U&=-\pv{\ln\Xi}\beta=\pm\int\zti\frac{g(\varepsilon)\varepsilon}{\e^{\alpha+\beta\varepsilon}\pm 1}\d\varepsilon.
 		\end{align}
 	\end{subequations}
 \end{corollary}
@@ -76,39 +76,39 @@ $\mp$号反之。
 
 \paragraph{弱简并条件}
 
-Bose/Fermi气体尽管不满足非简并条件，$\e{-\alpha}\not\ll 1$，但若仍满足$\e{-\alpha}<1$，称为弱简并条件(weak degeneracy condition)，宏观量可对$\e{-\alpha}$展开。
+Bose/Fermi气体尽管不满足非简并条件，$\e^{-\alpha}\not\ll 1$，但若仍满足$\e^{-\alpha}<1$，称为弱简并条件(weak degeneracy condition)，宏观量可对$\e^{-\alpha}$展开。
 \exmref{exm:monatomic molecule} 已给出单原子气体平动的态密度：
 \[
 	g(\varepsilon)=g_s\frac{2\pi V}{h^3}(2m)^{3/2}\sqrt\varepsilon,
 \]
 上式考虑了自旋因子$g_s$，因此巨配分函数的对数为
 \[
-	\ln\Xi=\pm 2\pi g_sV\biggp{\frac{2m}{h^2}}^{3/2}\int\zti\sqrt\varepsilon\ln(1\pm\e{-\alpha-\beta\varepsilon})\d\varepsilon.
+	\ln\Xi=\pm 2\pi g_sV\biggp{\frac{2m}{h^2}}^{3/2}\int\zti\sqrt\varepsilon\ln(1\pm\e^{-\alpha-\beta\varepsilon})\d\varepsilon.
 \]
-由于$\e{-\alpha-\beta\varepsilon}\leq\e{-\alpha}<1$，积分中的$\ln$项可写成级数形式：
+由于$\e^{-\alpha-\beta\varepsilon}\leq\e^{-\alpha}<1$，积分中的$\ln$项可写成级数形式：
 \[
 	\ln(1\pm x)=-\sum_{k=1}^\infty\frac{(\mp x)^k}k.
 \]
 交换积分和级数求和，可得
 \begin{align*}
 	\ln\Xi
-	&=\mp 2\pi g_sV\biggp{\frac{2m}{h^2}}^{3/2}\sum_{k=1}^\infty\frac{(\mp\e{-\alpha})^k}{k}\int\zti\sqrt\varepsilon\e{-k\beta\varepsilon}\d\varepsilon\\
-	&=\mp 2\pi g_sV\biggp{\frac{2m}{h^2}}^{3/2}\sum_{k=1}^\infty\frac{(\mp\e{-\alpha})^k}{k}\frac{\sqrt\pi}{2(k\beta)^{3/2}}
-	=\mp g_sV\biggp{\frac{2\pi m}{h^2\beta}}^{3/2}\Li_{5/2}(\mp\e{-\alpha}).
+	&=\mp 2\pi g_sV\biggp{\frac{2m}{h^2}}^{3/2}\sum_{k=1}^\infty\frac{(\mp\e^{-\alpha})^k}{k}\int\zti\sqrt\varepsilon\e^{-k\beta\varepsilon}\d\varepsilon\\
+	&=\mp 2\pi g_sV\biggp{\frac{2m}{h^2}}^{3/2}\sum_{k=1}^\infty\frac{(\mp\e^{-\alpha})^k}{k}\frac{\sqrt\pi}{2(k\beta)^{3/2}}
+	=\mp g_sV\biggp{\frac{2\pi m}{h^2\beta}}^{3/2}\Li_{5/2}(\mp\e^{-\alpha}).
 \end{align*}
 这里引入了多重对数函数(polylogarithm)
 \begin{equation}
 	\Li_n(z):=\sum_{k=1}^\infty\frac{z^k}{k^n}.
 \end{equation}
 % 特别地$\Li_{5/2}(1)=\zeta(5/2)\approx 1.3415,\,\Li_{5/2}(-1)=(1-2^{-3/2})\zeta(5/2)\approx 0.8672$。
-由$\d\Li_n(\e{-x})/\nd x=-\Li_{n-1}(\e{-x})$，可得粒子数
+由$\d\Li_n(\e^{-x})/\nd x=-\Li_{n-1}(\e^{-x})$，可得粒子数
 \[
-	N=-\pv{\ln\Xi}\alpha=\mp g_sV\biggp{\frac{2\pi m}{h^2\beta}}^{3/2}\Li_{3/2}(\mp\e{-\alpha}).
+	N=-\pv{\ln\Xi}\alpha=\mp g_sV\biggp{\frac{2\pi m}{h^2\beta}}^{3/2}\Li_{3/2}(\mp\e^{-\alpha}).
 	% \xi=\frac{nh^3}{g_s(2\pi m\kB T)^{3/2}}.
 \]
 即
 \[
-	\ln\Xi=N\frac{\Li_{5/2}(\mp\e{-\alpha})}{\Li_{3/2}(\mp\e{-\alpha})}.
+	\ln\Xi=N\frac{\Li_{5/2}(\mp\e^{-\alpha})}{\Li_{3/2}(\mp\e^{-\alpha})}.
 \]
 % 由
 % \[
@@ -117,45 +117,45 @@ Bose/Fermi气体尽管不满足非简并条件，$\e{-\alpha}\not\ll 1$，但若
 内能、压强和熵等宏观量为
 \begin{subequations}
 	\begin{align}
-		U&=-\pv{\ln\Xi}\beta=\frac32\frac{\ln\Xi}\beta=\frac32N\kB T\frac{\Li_{5/2}(\mp\e{-\alpha})}{\Li_{3/2}(\mp\e{-\alpha})},\\
-		C_V&=\pu[V]UT=\frac32N\kB\biggb{\frac{5}2\frac{\Li_{5/2}(\mp\e{-\alpha})}{\Li_{3/2}(\mp\e{-\alpha})}-\frac32\frac{\Li_{3/2}(\mp\e{-\alpha})}{\Li_{1/2}(\mp\e{-\alpha})}},\\
-		p&=\frac1\beta\pv{\ln\Xi}V=\frac23\frac UV=\frac{N\kB T}V\frac{\Li_{5/2}(\mp\e{-\alpha})}{\Li_{3/2}(\mp\e{-\alpha})},\\
-		S&=\kB(\ln\Xi+\alpha N+\beta U)=\alpha N\kB+\frac53\frac UT=N\kB\biggb{\alpha+\frac52\frac{\Li_{5/2}(\mp\e{-\alpha})}{\Li_{3/2}(\mp\e{-\alpha})}}.
+		U&=-\pv{\ln\Xi}\beta=\frac32\frac{\ln\Xi}\beta=\frac32N\kB T\frac{\Li_{5/2}(\mp\e^{-\alpha})}{\Li_{3/2}(\mp\e^{-\alpha})},\\
+		C_V&=\pu[V]UT=\frac32N\kB\biggb{\frac{5}2\frac{\Li_{5/2}(\mp\e^{-\alpha})}{\Li_{3/2}(\mp\e^{-\alpha})}-\frac32\frac{\Li_{3/2}(\mp\e^{-\alpha})}{\Li_{1/2}(\mp\e^{-\alpha})}},\\
+		p&=\frac1\beta\pv{\ln\Xi}V=\frac23\frac UV=\frac{N\kB T}V\frac{\Li_{5/2}(\mp\e^{-\alpha})}{\Li_{3/2}(\mp\e^{-\alpha})},\\
+		S&=\kB(\ln\Xi+\alpha N+\beta U)=\alpha N\kB+\frac53\frac UT=N\kB\biggb{\alpha+\frac52\frac{\Li_{5/2}(\mp\e^{-\alpha})}{\Li_{3/2}(\mp\e^{-\alpha})}}.
 	\end{align}
 \end{subequations}
 其中比热
 \[
-	C_V=\frac32N\kB\pp T\biggp{T\frac{\Li_{5/2}(\mp\e{-\alpha})}{\Li_{3/2}(\mp\e{-\alpha})}}=\frac32N\kB\biggb{\frac{\Li_{5/2}(\mp\e{-\alpha})}{\Li_{3/2}(\mp\e{-\alpha})}+T\pp T\frac{\Li_{5/2}(\mp\e{-\alpha})}{\Li_{3/2}(\mp\e{-\alpha})}}.
+	C_V=\frac32N\kB\pp T\biggp{T\frac{\Li_{5/2}(\mp\e^{-\alpha})}{\Li_{3/2}(\mp\e^{-\alpha})}}=\frac32N\kB\biggb{\frac{\Li_{5/2}(\mp\e^{-\alpha})}{\Li_{3/2}(\mp\e^{-\alpha})}+T\pp T\frac{\Li_{5/2}(\mp\e^{-\alpha})}{\Li_{3/2}(\mp\e^{-\alpha})}}.
 \]
 而
 \[
-	T=\frac{h^2}{2\pi m\kB}\biggp{\frac{n}{g_s\Li_{3/2}(\mp\e{-\alpha})}}^{2/3}
+	T=\frac{h^2}{2\pi m\kB}\biggp{\frac{n}{g_s\Li_{3/2}(\mp\e^{-\alpha})}}^{2/3}
 	\implies
-	T\pp T=T\pv\alpha T\pp\alpha=\frac32\frac{\Li_{3/2}(\mp\e{-\alpha})}{\Li_{1/2}(\mp\e{-\alpha})}\pp\alpha.
+	T\pp T=T\pv\alpha T\pp\alpha=\frac32\frac{\Li_{3/2}(\mp\e^{-\alpha})}{\Li_{1/2}(\mp\e^{-\alpha})}\pp\alpha.
 \]
 注意系数$3/2$来自指数$-2/3$而不是$\Li_{3/2}$的底数。
 再直接对$\alpha$求导即得$C_V$表达式。
 
-\paragraph{对$\e{-\alpha}$或$\xi$展开}
+\paragraph{对$\e^{-\alpha}$或$\xi$展开}
 
-定义$\xi:=n\lambda_T^3/g_s=\mp\Li_{3/2}(\mp\e{-\alpha})$，
+定义$\xi:=n\lambda_T^3/g_s=\mp\Li_{3/2}(\mp\e^{-\alpha})$，
 利用
 \[
 	\Li_n^{-1}(x)=x-2^{-n}x^2+(2^{1-2n}-3^{-n})x^3+\bigo(x^4),
 \]
-可得$\e{-\alpha}=\mp\Li_{3/2}^{-1}(\mp\xi)$，
+可得$\e^{-\alpha}=\mp\Li_{3/2}^{-1}(\mp\xi)$，
 进而$\ln\Xi=\mp N\Li_{5/2}(\mp\Li_{3/2}^{-1}(\mp\xi))/\xi$，
 由
 \[
 	\Li_n(\Li_{n-1}^{-1}(x))=x-2^{-n}x^2-(2\cdot 3^{-n}-4^{1-n})x^3+\bigo(x^4),
 \]
-将$\ln\Xi$和宏观量写成$\e{-\alpha}$或$\xi$的级数形式：
+将$\ln\Xi$和宏观量写成$\e^{-\alpha}$或$\xi$的级数形式：
 \begin{subequations}
 	\begin{align}
-		U&=\frac32N\kB T(1\pm 2^{-5/2}\e{-\alpha}+\cdots)=\frac32N\kB T(1\pm 2^{-5/2}\xi+\cdots),\\
-		C_V&=\frac23N\kB T(1\mp 2^{-7/2}\e{-\alpha}+\cdots)=\frac32N\kB(1\mp 2^{-7/2}\xi+\cdots),\\
-		p&=\frac{N\kB T}V(1\pm 2^{-5/2}\e{-\alpha}+\cdots)=\frac{N\kB T}V(1\pm 2^{-5/2}\xi+\cdots),\\
-		S&=N\kB\biggp{\alpha+\frac52\pm 5\cdot2^{-7/2}\e{-\alpha}+\cdots}=N\kB\biggp{\frac52-\ln\xi\pm 5\cdot 2^{-7/2}\xi+\cdots}.
+		U&=\frac32N\kB T(1\pm 2^{-5/2}\e^{-\alpha}+\cdots)=\frac32N\kB T(1\pm 2^{-5/2}\xi+\cdots),\\
+		C_V&=\frac23N\kB T(1\mp 2^{-7/2}\e^{-\alpha}+\cdots)=\frac32N\kB(1\mp 2^{-7/2}\xi+\cdots),\\
+		p&=\frac{N\kB T}V(1\pm 2^{-5/2}\e^{-\alpha}+\cdots)=\frac{N\kB T}V(1\pm 2^{-5/2}\xi+\cdots),\\
+		S&=N\kB\biggp{\alpha+\frac52\pm 5\cdot2^{-7/2}\e^{-\alpha}+\cdots}=N\kB\biggp{\frac52-\ln\xi\pm 5\cdot 2^{-7/2}\xi+\cdots}.
 	\end{align}
 \end{subequations}
 
@@ -177,23 +177,23 @@ Bose/Fermi气体尽管不满足非简并条件，$\e{-\alpha}\not\ll 1$，但若
 由$\mu=-\alpha/\beta$，
 Bose气体的化学势满足
 \[
-	a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}-1}=\frac{\omega_i}{\e{\beta(\varepsilon_i-\mu)}-1}\geq 0
+	a_i=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}-1}=\frac{\omega_i}{\e^{\beta(\varepsilon_i-\mu)}-1}\geq 0
 	\implies\mu\leq\varepsilon_i,
 \]
 取基态$\varepsilon_0=0$，则$\mu\leq\min_i\varepsilon_i=\varepsilon_0=0$；
 又由粒子数守恒
 \[
-	N=\sum_i\frac{\omega_i}{\e{\beta(\varepsilon_i-\mu)}-1}.
+	N=\sum_i\frac{\omega_i}{\e^{\beta(\varepsilon_i-\mu)}-1}.
 \]
 因此随着温度降低，化学势会增加。直到$T=T_\crt$，$\mu=0$，此时
 \[
-	N=\int\zti\frac{g(\varepsilon)\d\varepsilon}{\e{\beta_\crt\varepsilon}-1}
-	% =g_s\frac{2\pi V}{h^3}(2m)^{3/2}\int\zti\frac{\sqrt\varepsilon\d\varepsilon}{\e{\beta_\crt\varepsilon}-1}
+	N=\int\zti\frac{g(\varepsilon)\d\varepsilon}{\e^{\beta_\crt\varepsilon}-1}
+	% =g_s\frac{2\pi V}{h^3}(2m)^{3/2}\int\zti\frac{\sqrt\varepsilon\d\varepsilon}{\e^{\beta_\crt\varepsilon}-1}
 	=g_sV\biggp{\frac{2\pi m}{h^2\beta_\crt}}^{3/2}\cdot\zeta\biggp{\frac32}.
 \]
 % 利用积分
 % \[
-% 	\int\zti\frac{x^{n-1}}{\e x-1}\d x=\Gamma(n)\zeta(n),
+% 	\int\zti\frac{x^{n-1}}{\e^x-1}\d x=\Gamma(n)\zeta(n),
 % \]
 其中$\zeta(3/2)\approx 2.612$，可得相变点
 \begin{equation}
@@ -217,7 +217,7 @@ Bose气体的化学势满足
 % 这个凝聚可看做动量空间的凝聚。
 基态粒子不但能量、动量为0，熵也为0。巨配分函数由激发态粒子贡献：
 \begin{equation}
-	\ln\Xi=-\int\zti g(\varepsilon)\ln(1-\e{-\beta\varepsilon})\d\varepsilon=\zeta\biggp{\frac52}g_sV\biggp{\frac{2\pi m}{h^2\beta}}^{3/2}.
+	\ln\Xi=-\int\zti g(\varepsilon)\ln(1-\e^{-\beta\varepsilon})\d\varepsilon=\zeta\biggp{\frac52}g_sV\biggp{\frac{2\pi m}{h^2\beta}}^{3/2}.
 \end{equation}
 进而可得$T<T_\crt$时的内能、比热、压强和熵等物理量：
 \begin{subequations}
@@ -235,7 +235,7 @@ Bose气体的化学势满足
 $T<T_\crt$时，比热$C_V\propto T^{3/2}$；
 $T>T_\crt$时，由上一节的讨论
 \[
-	C_V=\frac32N\kB\biggb{\frac52\frac{\Li_{5/2}(\e{-\alpha})}{\Li_{3/2}(\e{-\alpha})}-\frac32\frac{\Li_{3/2}(\e{-\alpha})}{\Li_{1/2}(\e{-\alpha})}},
+	C_V=\frac32N\kB\biggb{\frac52\frac{\Li_{5/2}(\e^{-\alpha})}{\Li_{3/2}(\e^{-\alpha})}-\frac32\frac{\Li_{3/2}(\e^{-\alpha})}{\Li_{1/2}(\e^{-\alpha})}},
 \]
 $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/2$是$\zeta(s)$的奇点，故 
 \[
@@ -245,7 +245,7 @@ $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/
 % \[
 % 	\eval{\pv{C_V}T}_{T_\crt^-}-\eval{\pv{C_V}T}_{T_\crt^+}=\frac{27N\kB}{16\pi T_\crt}\zeta\biggp{\frac32}^2.
 % \]
-高温极限下，$\e{-\alpha}\to0$，
+高温极限下，$\e^{-\alpha}\to0$，
 \[
 	\lim_{T\to+\infty}C_V=\biggp{\frac{15}4-\frac94}N\kB=\frac32N\kB.
 \]
@@ -285,15 +285,15 @@ $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/
 光子间无相互作用，符合理想气体。%光子自旋$s=1$，简并度$g_s=2$；
 光子质量为0，因此$\lambda_T\to\infty$，且光子数不守恒，没有$\alpha$
 \[
-	a_i=\frac{\omega_i}{\e{\beta\varepsilon_i}-1}.
+	a_i=\frac{\omega_i}{\e^{\beta\varepsilon_i}-1}.
 \]
 \begin{theorem}
 	{Planck黑体辐射定律}{Planck blackbody radiation}
 	能完全吸收电磁波的物体，称为黑体。黑体辐射的能量谱为
 	\begin{subequations}
 		\begin{align}
-			u(\nu)\d\nu&=\frac{8\pi h\nu^3}{c^3}\frac1{\e{\beta h\nu}-1}\d\nu,\\
-			u(\lambda)\d\lambda&=\frac{8\pi hc}{\lambda^5}\frac1{\e{\beta hc/\lambda}-1}\d\lambda.
+			u(\nu)\d\nu&=\frac{8\pi h\nu^3}{c^3}\frac1{\e^{\beta h\nu}-1}\d\nu,\\
+			u(\lambda)\d\lambda&=\frac{8\pi hc}{\lambda^5}\frac1{\e^{\beta hc/\lambda}-1}\d\lambda.
 		\end{align}
 	\end{subequations}
 	\begin{center}
@@ -311,15 +311,15 @@ $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/
 	其中光子的自旋因子$g_s=2$，
 	光子数
 	\[
-		N(\nu)\d\nu=\frac{g(\nu)\d\nu}{\e{\beta h\nu}-1}.
+		N(\nu)\d\nu=\frac{g(\nu)\d\nu}{\e^{\beta h\nu}-1}.
 	\]
 	可得能量谱
 	\[
-		u(\nu)\d\nu=\frac{N(\nu)}Vh\nu\d\nu=\frac{h\nu}V\frac{g(\nu)\d\nu}{\e{\beta h\nu}-1}=\frac{8\pi\nu^2}{c^3}\frac{h\nu}{\e{\beta h\nu}-1}\d\nu.
+		u(\nu)\d\nu=\frac{N(\nu)}Vh\nu\d\nu=\frac{h\nu}V\frac{g(\nu)\d\nu}{\e^{\beta h\nu}-1}=\frac{8\pi\nu^2}{c^3}\frac{h\nu}{\e^{\beta h\nu}-1}\d\nu.
 	\]
 	改为波长
 	\[
-		u_\lambda(\lambda)\d\lambda=u_\nu\biggp{\frac c\lambda}\frac c{\lambda^2}\d\lambda=\frac{8\pi hc}{\lambda^5}\frac1{\e{\beta hc/\lambda}-1}\d\lambda.
+		u_\lambda(\lambda)\d\lambda=u_\nu\biggp{\frac c\lambda}\frac c{\lambda^2}\d\lambda=\frac{8\pi hc}{\lambda^5}\frac1{\e^{\beta hc/\lambda}-1}\d\lambda.
 		\qedhere
 	\]
 \end{proof}
@@ -330,7 +330,7 @@ $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/
 		u(\nu)\d\nu\simeq
 		\begin{cases}
 			\frac{8\pi\nu^2}{c^3}\kB T\d\nu,&h\nu\ll\kB T\\[1ex]
-			\frac{8\pi h\nu^3}{c^3}\e{-\beta h\nu}\d\nu,&h\nu\gg\kB T
+			\frac{8\pi h\nu^3}{c^3}\e^{-\beta h\nu}\d\nu,&h\nu\gg\kB T
 		\end{cases}
 	\]
 \end{corollary}
@@ -348,7 +348,7 @@ $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/
 \begin{proof}
 	% 由积分恒等式
 	% \begin{equation}
-	% 	\int\zti\frac{x^{n-1}\d x}{\e x-1}=\Gamma(n)\zeta(n),
+	% 	\int\zti\frac{x^{n-1}\d x}{\e^x-1}=\Gamma(n)\zeta(n),
 	% \end{equation}
 	辐射场的总内能密度
 	\[
@@ -383,13 +383,13 @@ $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/
 \begin{proof}
 	直接求导$\d u/\nd\nu=0$并令$x:=\beta h\nu$可得
 	\[
-		x=3(1-\e{-x})\implies x=3+W(-3\e{-3})\approx 2.821439372,
+		x=3(1-\e^{-x})\implies x=3+W(-3\e^{-3})\approx 2.821439372,
 	\]
-	其中Lambert $W$函数是$x\e x$的反函数。
+	其中Lambert $W$函数是$x\e^x$的反函数。
 	类似地，
 	$\d u/\nd\lambda=0$并令$x:=\beta hc/\lambda$可得
 	\[
-		x=5(1-\e{-x})\implies x=5+W(-5\e{-5})\approx 4.965114231.
+		x=5(1-\e^{-x})\implies x=5+W(-5\e^{-5})\approx 4.965114231.
 		\qedhere
 	\]
 \end{proof}
@@ -398,7 +398,7 @@ $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/
 
 巨配分函数
 \begin{equation}
-	\ln\Xi=-\int\zti g(\varepsilon)\ln(1-\e{-\beta\varepsilon})\d\varepsilon=\frac{8\pi^5V}{45h^3c^3\beta^3}.
+	\ln\Xi=-\int\zti g(\varepsilon)\ln(1-\e^{-\beta\varepsilon})\d\varepsilon=\frac{8\pi^5V}{45h^3c^3\beta^3}.
 \end{equation}
 内能、比热、压强和熵
 \begin{subequations}
@@ -421,7 +421,7 @@ $C_V\propto T^3$随温度上升而增加，$\mu=0$，与光子数不守恒对应
 % \]
 声子气体不可分，符合Bose分布，且声子数不守恒
 \[
-	a_i=\frac{\omega_i}{\e{\beta h\nu_i}-1}.
+	a_i=\frac{\omega_i}{\e^{\beta h\nu_i}-1}.
 \]
 声波分为横波(transverse)和纵波(longitudinal)，速度分别为$v_\tv$和$v_\lt$；横波有两种振动方式，纵波只有一种。
 纵波声子状态数
@@ -454,12 +454,12 @@ Einstein模型定量不符，因为忽略了低频振动，而低温下的热激
 \begin{subequations}
 	\begin{align}
 		U&=U_0+3N\kB T\Debye(y),\\
-		C_V&=3N\kB\biggp{4\Debye(y)-\frac{3y}{\e y-1}}.
+		C_V&=3N\kB\biggp{4\Debye(y)-\frac{3y}{\e^y-1}}.
 	\end{align}
 \end{subequations}
 其中$y:=\theta_\Db/T=\beta\hbar\omega_\Db$，$\Debye(y)$为Debye函数
 \[
-	\Debye(y):=\frac 3{y^3}\int_0^{y}\frac{x^3\d x}{\e x-1}.
+	\Debye(y):=\frac 3{y^3}\int_0^{y}\frac{x^3\d x}{\e^x-1}.
 \]
 高温极限$y\ll 1$，
 \[
@@ -474,7 +474,7 @@ Einstein模型定量不符，因为忽略了低频振动，而低温下的热激
 \end{subequations}
 低温极限$y\gg 1$，可认为
 \[
-	\Debye(y)\simeq\frac3{y^3}\int\zti\frac{x^3\d x}{\e x-1}=\frac{\pi^4}{5y^3},
+	\Debye(y)\simeq\frac3{y^3}\int\zti\frac{x^3\d x}{\e^x-1}=\frac{\pi^4}{5y^3},
 \]
 可得
 \begin{subequations}
@@ -512,7 +512,7 @@ $C_V\propto T^3$，
 % $n\lambda_T^3\geqslant 1$，相互作用弱。
 单个能级$\varepsilon_i$的量子态上的平均粒子数为
 \[
-	f_i:=\frac{a_i}{\omega_i}=\frac1{\e{\alpha+\beta\varepsilon_i}+1}=\frac1{\e{\beta(\varepsilon_i-\mu)}+1}.
+	f_i:=\frac{a_i}{\omega_i}=\frac1{\e^{\alpha+\beta\varepsilon_i}+1}=\frac1{\e^{\beta(\varepsilon_i-\mu)}+1}.
 \]
 
 \paragraph{完全Fermi气}
@@ -520,7 +520,7 @@ $C_V\propto T^3$，
 % 讨论$T\to0$时电子的分布，
 定义$T=0$时的化学势$\mu(0)=:\varepsilon_\Fm$称为Fermi能量，则
 \[
-	\lim_{T\to0}f_i=\lim_{T\to0}\frac1{\e{(\varepsilon_i-\mu)/\kB T}+1}=
+	\lim_{T\to0}f_i=\lim_{T\to0}\frac1{\e^{(\varepsilon_i-\mu)/\kB T}+1}=
 	\begin{cases}
 		1,&\varepsilon_i<\varepsilon_\Fm\\
 		0,&\varepsilon_i>\varepsilon_\Fm
@@ -578,13 +578,13 @@ Fermi温度
 下面我们给出更定量的结果：
 由\secref{sec:weak degeneracy} 的讨论
 \[
-	C_V=\frac32N\kB\biggb{\frac52\frac{\Li_{5/2}(-\e{-\alpha})}{\Li_{3/2}(-\e{-\alpha})}-\frac32\frac{\Li_{3/2}(-\e{-\alpha})}{\Li_{1/2}(-\e{-\alpha})}}.
+	C_V=\frac32N\kB\biggb{\frac52\frac{\Li_{5/2}(-\e^{-\alpha})}{\Li_{3/2}(-\e^{-\alpha})}-\frac32\frac{\Li_{3/2}(-\e^{-\alpha})}{\Li_{1/2}(-\e^{-\alpha})}}.
 \]
 注意不同于Bose气体，Fermi气体的$\alpha$可正可负。
 低温极限$T\ll T_\Fm$，$\alpha\to-\infty$，
 对$T/T_\Fm$展开，
 \[
-	\xi=\frac{n\lambda_T^3}{g_s}=\frac{n}{g_s}\biggp{\frac{h^2}{2\pi m\kB T}}^{3/2}=\frac4{3\sqrt\pi}\biggp{\frac{T_\Fm}T}^{3/2}=-\Li_{3/2}(-\e{-\alpha}),
+	\xi=\frac{n\lambda_T^3}{g_s}=\frac{n}{g_s}\biggp{\frac{h^2}{2\pi m\kB T}}^{3/2}=\frac4{3\sqrt\pi}\biggp{\frac{T_\Fm}T}^{3/2}=-\Li_{3/2}(-\e^{-\alpha}),
 	% =\frac4{3\sqrt\pi}\biggp{\frac\beta{\beta_\Fm}}^{3/2}.
 \]
 可得

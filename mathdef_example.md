@@ -1,17 +1,17 @@
 # example 1:
 
 ```LaTeX
-\int\iti\e{-x^2}\d x=\sqrt\pi.
+\int\iti\e^{-x^2}\d x=\sqrt\pi.
 % \iti = -infty to +infty
-% \e   = e^
+% \e   = e
 % \d   = d
 ```
 vs.
 ```LaTeX
-\int_{-\infty}^{+\infty}\mathrm e^{-x^2}\,\mathrm dx=\sqrt\pi.
+\int_{-\infty}^{+\infty}\mathrm{e}^{-x^2}\,\mathrm{d}x=\sqrt\pi.
 ```
 
-$$\int_{-\infty}^{+\infty}\mathrm e^{-x^2}\hspace{0.1em}\mathrm dx=\sqrt\pi.$$
+$$\int_{-\infty}^{+\infty}\mathrm{e}^{-x^2}\hspace{0.1em}\mathrm{d}x=\sqrt\pi.$$
 
 # example 2:
 

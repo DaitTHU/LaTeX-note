@@ -99,7 +99,7 @@
 			1&-\rho\\0&\pm\sqrt{1-\rho^2}
 		\end{bmatrix}
 	\]
-	进而就可将二次型转化为$\e{-(x_1^2+x_2^2)/2}$的标准形式。
+	进而就可将二次型转化为$\e^{-(x_1^2+x_2^2)/2}$的标准形式。
 \end{example}
 
 \section{边际分布}
@@ -333,9 +333,9 @@
 	\tcblower
 	$X_i\sim\Pois(\lambda_i)$独立，则$X_1+X_2\sim\Pois(\lambda_1+\lambda_2)$
 	\begin{align*}
-		\P(X_1+X_2=k)&=\sum_{k_1=0}^k\frac{\lambda_1^{k_1}}{k_1!}\e{-\lambda_1}\frac{\lambda_2^{k-k_1}}{(k-k_1)!}\e{-\lambda_2}\\
-		&=\frac{\e{-(\lambda_1+\lambda_2)}}{k!}\sum_{k_1=0}^k\binom{k}{k_1}\lambda_1^{k_1}\lambda_2^{k-k_1}\\
-		&=\frac{\e{-(\lambda_1+\lambda_2)}}{k!}(\lambda_1+\lambda_2)^k
+		\P(X_1+X_2=k)&=\sum_{k_1=0}^k\frac{\lambda_1^{k_1}}{k_1!}\e^{-\lambda_1}\frac{\lambda_2^{k-k_1}}{(k-k_1)!}\e^{-\lambda_2}\\
+		&=\frac{\e^{-(\lambda_1+\lambda_2)}}{k!}\sum_{k_1=0}^k\binom{k}{k_1}\lambda_1^{k_1}\lambda_2^{k-k_1}\\
+		&=\frac{\e^{-(\lambda_1+\lambda_2)}}{k!}(\lambda_1+\lambda_2)^k
 	\end{align*}
 \end{example}
 \begin{remark}
@@ -351,7 +351,7 @@
 \begin{example}{指数分布的最小值}{}
 	$X_i\sim\Expo(\lambda_i)$独立，则$\min(X_1,X_2)\sim\Expo(\lambda_1+\lambda_2).$
 	\[
-		\CDF_{\min{}}(x)=1-\bigb{1-\CDF_{X_1}(x)}\bigb{1-\CDF_{X_2}(x)}=1-\e{-(\lambda_1+\lambda_2)x}.
+		\CDF_{\min{}}(x)=1-\bigb{1-\CDF_{X_1}(x)}\bigb{1-\CDF_{X_2}(x)}=1-\e^{-(\lambda_1+\lambda_2)x}.
 	\]
 \end{example}
 \begin{example}{max, min的联合分布}{min-max joint distribution}
@@ -376,7 +376,7 @@
 \begin{definition}{$\chi^2$分布}{chi-square distribution}
 	若$X_1,\ldots,X_n$ iid $\sim\Norm(0,1)$ ，则$X:=X_1^2+\cdots+X_n^2$服从自由度为$n$的$\chi^2$分布，记作$X\sim\chi^2(n)$，由数学归纳法可知
 	\begin{equation}
-		f(x)=\frac1{\Gamma(n/2)2^{n/2}}x^{n/2-1}\e{-x/2},\quad x>0.
+		f(x)=\frac1{\Gamma(n/2)2^{n/2}}x^{n/2-1}\e^{-x/2},\quad x>0.
 	\end{equation}
 	\begin{center}
 		\includegraphics[width=0.8\linewidth]{figures/pdf_chi2.pdf}
@@ -517,7 +517,7 @@
 	从而，$(Y_1,\ldots,Y_n)$的PDF
 	\begin{align*}
 		f(y_1,\ldots,y_n)&=\frac1{(\sqrt{2\pi}\sigma)^n}\exp\biggb{-\frac1{2\sigma^2}\biggp{\sum_{i=1}^ny_i^2-2\mu\sqrt ny_1+n\mu^2}}\\
-		&=\frac1{\sqrt{2\pi}\sigma}\e{-(y_1-\sqrt n\mu)^2/2\sigma^2}\cdot\frac1{\sqrt{2\pi}\sigma}\e{-y_2^2/2\sigma^2}\cdots\frac1{\sqrt{2\pi}\sigma}\e{-y_n^2/2\sigma^2}.
+		&=\frac1{\sqrt{2\pi}\sigma}\e^{-(y_1-\sqrt n\mu)^2/2\sigma^2}\cdot\frac1{\sqrt{2\pi}\sigma}\e^{-y_2^2/2\sigma^2}\cdots\frac1{\sqrt{2\pi}\sigma}\e^{-y_n^2/2\sigma^2}.
 	\end{align*}
 	故$Y_1,\ldots,Y_n$独立，且
 	\[

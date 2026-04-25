@@ -10,28 +10,28 @@
 \]
 代回\Schr 方程
 \[
-	\i\hbar\dv{a_n}t=E_na_n\implies a_n(t)=a_n\e{-\i E_nt/\hbar}.
+	\i\hbar\dv{a_n}t=E_na_n\implies a_n(t)=a_n\e^{-\i E_nt/\hbar}.
 \]
 因此波函数的时间演化为
 \[
-	\psi(\r,0)=\sum_n a_n\phi_n(\r)\enspace\rightarrow\enspace\psi(\r,t)=\sum_n a_n\e{-\i E_nt/\hbar}\phi_n(\r).
+	\psi(\r,0)=\sum_n a_n\phi_n(\r)\enspace\rightarrow\enspace\psi(\r,t)=\sum_n a_n\e^{-\i E_nt/\hbar}\phi_n(\r).
 \]
 由于
 \[
-	\abs{a_n}^2=\abs{a_n\e{-\i E_nt/\hbar}}^2,
+	\abs{a_n}^2=\abs{a_n\e^{-\i E_nt/\hbar}}^2,
 \]
 即系统在任意时刻的能量几率分布都和初始时刻的能量几率分布相同。
 
 形式上，利用Taylor展开
 \begin{align*}
-	\psi(\r,t) & =\sum_na_n\e{-\i E_nt/\hbar}\phi_n(\r)=\sum_na_n\biggb{\sum_{k=0}^\infty\frac1{k!}\biggp{-\frac{\i E_nt}\hbar}^k}\phi_n(\r)     \\
-	           & =\sum_na_n\biggb{\sum_{k=0}^\infty\frac1{k!}\biggp{-\frac{\i\hat Ht}\hbar}^k}\phi_n(\r)=\sum_na_n\e{-\i\hat Ht/\hbar}\phi_n(\r) \\
-	           & =\e{-\i\hat Ht/\hbar}\psi(\r,0).
+	\psi(\r,t) & =\sum_na_n\e^{-\i E_nt/\hbar}\phi_n(\r)=\sum_na_n\biggb{\sum_{k=0}^\infty\frac1{k!}\biggp{-\frac{\i E_nt}\hbar}^k}\phi_n(\r)     \\
+	           & =\sum_na_n\biggb{\sum_{k=0}^\infty\frac1{k!}\biggp{-\frac{\i\hat Ht}\hbar}^k}\phi_n(\r)=\sum_na_n\e^{-\i\hat Ht/\hbar}\phi_n(\r) \\
+	           & =\e^{-\i\hat Ht/\hbar}\psi(\r,0).
 \end{align*}
 \begin{definition}{时间演化算符}{Time Evolution Operator}
 	定义时间演化算符
 	\begin{align}
-		\hat U(t):=\e{-\i\hat Ht/\hbar},
+		\hat U(t):=\e^{-\i\hat Ht/\hbar},
 	\end{align}
 	则可从波函数的初值知道其时间演化
 	\[
@@ -42,27 +42,27 @@
 	{一维自由粒子$\delta(x)$波函数随时间的演化}{}
 	\begin{equation*}
 		\begin{aligned}
-			\psi(x,t) & =\e{-\i\hat Ht/\hbar}\vd(x)=\frac1{2\pi}\int\iti\e{\i kx}\e{\i\hbar k^2t/2m}\d k      \\
+			\psi(x,t) & =\e^{-\i\hat Ht/\hbar}\vd(x)=\frac1{2\pi}\int\iti\e^{\i kx}\e^{\i\hbar k^2t/2m}\d k      \\
 			          & =\sqrt{\frac m{2\pi\hbar t}}\exp\biggp{\i\frac{mx^2}{2\hbar t}-\frac{\i\pi}4}\neq\vd(x).
 		\end{aligned}
 	\end{equation*}
 	其中用到了
 	\begin{align}
-		\int\iti\e{-\alpha x^2}\d x=\sqrt{\frac\pi\alpha}.\quad\alpha\neq 0,\Re\alpha\geqslant 0.
+		\int\iti\e^{-\alpha x^2}\d x=\sqrt{\frac\pi\alpha}.\quad\alpha\neq 0,\Re\alpha\geqslant 0.
 	\end{align}
 \end{example}
 \begin{example}
 	{一维自由粒子Gauss波包的时间演化}{}
 	\[
-		\psi(x,0)=\frac1{(2\pi\sigma^2)^{1/4}}\e{-x^2/4\sigma^2}\e{\i k_0x},
+		\psi(x,0)=\frac1{(2\pi\sigma^2)^{1/4}}\e^{-x^2/4\sigma^2}\e^{\i k_0x},
 	\]
 	Fourier变换得
 	\[
-		\varphi(k)=\sqrt[4]{\frac{2\sigma^2}{\pi}}\e{-\sigma^2(k-k_0)^2}.
+		\varphi(k)=\sqrt[4]{\frac{2\sigma^2}{\pi}}\e^{-\sigma^2(k-k_0)^2}.
 	\]%\footnote{$\mathcal F(e^{-x^2/\sigma^2})=\frac\sigma{\sqrt2}e^{-\sigma^2k^2/4}$.}
 	于是\footnote{Everyone should calculate it once in their lifetime. - Shuo Jiang.}
 	\begin{align*}
-		\psi(x,t) & =\frac1{\sqrt{2\pi}}\int\iti\varphi(k)\e{\i kx}\e{-\i\hbar k^2t/2m}\d k                                                                                                                            \\
+		\psi(x,t) & =\frac1{\sqrt{2\pi}}\int\iti\varphi(k)\e^{\i kx}\e^{-\i\hbar k^2t/2m}\d k                                                                                                                            \\
 		          & =\fracdisp{\exp\Bigp{\i k_0x-\frac{\hbar k_0^2}{2m}t}}{\biggb{\sqrt{2\pi}\sigma\Bigp{1+\frac{\i\hbar t}{2m\sigma^2}}}^{1/2}}\exp\Biggl[-\fracdisp{\Bigp{x-\frac{\hbar k_0}mt}^2}{4\sigma^2+\frac{2\i\hbar t}m}\Biggr].
 	\end{align*}
 	概率密度
@@ -276,7 +276,7 @@ $I$显然是一个trivial的幺正算符，若幺正算符$\hat U$与$\hat I$差
 
 如果$\hat U$和$\hat I$差距并不小，则可以通过充分多次充分小的幺正变换
 \begin{align}
-	\hat U=\lim_{n\to\infty}\Bigp{I+\i\,\frac an\hat F}^n\equiv\e{\i a\hat F}.
+	\hat U=\lim_{n\to\infty}\Bigp{I+\i\,\frac an\hat F}^n\equiv\e^{\i a\hat F}.
 \end{align}
 用幺正算符实现的波函数和算符的变换称为幺正变换
 \begin{align}
@@ -291,8 +291,8 @@ $I$显然是一个trivial的幺正算符，若幺正算符$\hat U$与$\hat I$差
 \]
 Fourier变换也是幺正变换：
 \begin{align}
-	\hat U(p)\psi(x)&=\frac1{\sqrt{2\pi\hbar}}\int\psi(x)\e{-\i px/\hbar}\d x=\varphi(p);\\
-	\hat U^{-1}(x)\varphi(p)&=\frac1{\sqrt{2\pi\hbar}}\int\varphi(p)\e{\i px/\hbar}\d x=\psi(x).
+	\hat U(p)\psi(x)&=\frac1{\sqrt{2\pi\hbar}}\int\psi(x)\e^{-\i px/\hbar}\d x=\varphi(p);\\
+	\hat U^{-1}(x)\varphi(p)&=\frac1{\sqrt{2\pi\hbar}}\int\varphi(p)\e^{\i px/\hbar}\d x=\psi(x).
 \end{align}
 对Hamilton算符进行幺正变换
 \begin{align}
@@ -322,30 +322,30 @@ Fourier变换也是幺正变换：
 \end{theorem}
 \paragraph{时间均匀性和能量守恒}时间平移
 \[
-	\psi(t-\tau)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\Bigp{\dd t}^n\psi(t)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\Bigp{\frac{\hat H}{\i\hbar}}^n\psi(t)=\e{\i\tau\hat H/\hbar}\psi(t).
+	\psi(t-\tau)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\Bigp{\dd t}^n\psi(t)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\Bigp{\frac{\hat H}{\i\hbar}}^n\psi(t)=\e^{\i\tau\hat H/\hbar}\psi(t).
 \]
 故时间平移算符
 \begin{align}
-	\hat U(\tau)=\e{\i\tau\hat H/\hbar}.
+	\hat U(\tau)=\e^{\i\tau\hat H/\hbar}.
 \end{align}
 时间平移算符的生成元为$\hat H$，自然是与自身对易，故系统能量守恒。时间平移不变性对应系统能量守恒。
 \paragraph{空间均匀性与动量守恒}空间平移
 \[
-	\psi(\r-\bm a)=\sum_{n=0}^\infty\frac{1}{n!}(-\bm a\cdot\nabla)^n\psi(\r)=\e{-\i\bm a\cdot\qo p/\hbar}\psi(\r).
+	\psi(\r-\bm a)=\sum_{n=0}^\infty\frac{1}{n!}(-\bm a\cdot\nabla)^n\psi(\r)=\e^{-\i\bm a\cdot\qo p/\hbar}\psi(\r).
 \]
 空间平移算符
 \begin{align}
-	\hat U(\bm a)=\e{-\i\bm a\cdot\qo p/\hbar}.
+	\hat U(\bm a)=\e^{-\i\bm a\cdot\qo p/\hbar}.
 \end{align}
 空间平移不变性对应动量守恒。
 \paragraph{空间各向同性与角动量守恒}绕$\bm e_n$旋转小角度$\alpha$
 \begin{align*}
 	\psi(\r-\bm\alpha\times\r)&=\sum_{n=0}^\infty\frac{1}{n!}[-(\bm\alpha\times\r)\cdot\nabla]^n\psi(\r),\qquad\bm\alpha:=\alpha\bm e_n.\\
-	&=\sum_{n=0}^\infty\frac{1}{n!}[-\bm\alpha\cdot(\r\times\nabla)]^n\psi(\r)=\e{-\i\bm\alpha\cdot\qo L/\hbar}\psi(\r).
+	&=\sum_{n=0}^\infty\frac{1}{n!}[-\bm\alpha\cdot(\r\times\nabla)]^n\psi(\r)=\e^{-\i\bm\alpha\cdot\qo L/\hbar}\psi(\r).
 \end{align*}
 空间转动算符
 \begin{align}
-	\hat U(\bm\alpha)=\e{-\i\bm\alpha\cdot\qo L/\hbar}
+	\hat U(\bm\alpha)=\e^{-\i\bm\alpha\cdot\qo L/\hbar}
 \end{align}
 故空间转动不变性对应角动量守恒。
 \paragraph{空间反射不变性}定义宇称(parity)算符

@@ -14,18 +14,18 @@
 \end{align}
 采用能量$\hat H_0$表象 
 \begin{align}
-	\ket{\psi(0)}=\sum_n C_{nk}(t)\ket n\e{-\i E_nt/\hbar},\quad C_{nk}(0)=\vd_{nk}.
+	\ket{\psi(0)}=\sum_n C_{nk}(t)\ket n\e^{-\i E_nt/\hbar},\quad C_{nk}(0)=\vd_{nk}.
 \end{align}
 体系$t$时刻跃迁到定态$\ket{k'}$的概率为$\abs{C_{k'k}(t)}^2$。
 
 为求出跃迁概率，将表象表达式带入\Schr 方程，假定$\hat H'$中不包括$\p/\p t$作用
 \begin{align}\notag
-	\i\hbar\sum_n\biggb{\dot C_{nk}(t)-\cancel{\frac{\i E_nC_{nk}(t)}\hbar}}\ket n\e{-\i E_nt/\hbar}&=\sum_nC_{nk}(t)\Bigb{\cancel{E_n}+\hat H'(t)}\ket n\e{-\i E_nt/\hbar}.\\
-	\i\hbar\sum_n\dot C_{nk}(t)\ket n\e{-\i E_nt/\hbar}&=\sum_nC_{nk}(t)\hat H'(t)\ket n\e{-\i E_nt/\hbar}.
+	\i\hbar\sum_n\biggb{\dot C_{nk}(t)-\cancel{\frac{\i E_nC_{nk}(t)}\hbar}}\ket n\e^{-\i E_nt/\hbar}&=\sum_nC_{nk}(t)\Bigb{\cancel{E_n}+\hat H'(t)}\ket n\e^{-\i E_nt/\hbar}.\\
+	\i\hbar\sum_n\dot C_{nk}(t)\ket n\e^{-\i E_nt/\hbar}&=\sum_nC_{nk}(t)\hat H'(t)\ket n\e^{-\i E_nt/\hbar}.
 \end{align}
 与$\ket{k'}$内积
 \begin{align}
-	\i\hbar\dot C_{k'k}(t)\e{-\i E_{k'}t/\hbar}=\sum_nC_{nk}(t)\bra{k'}\hat H'(t)\ket n\e{-\i E_nt/\hbar}
+	\i\hbar\dot C_{k'k}(t)\e^{-\i E_{k'}t/\hbar}=\sum_nC_{nk}(t)\bra{k'}\hat H'(t)\ket n\e^{-\i E_nt/\hbar}
 \end{align}
 定义 
 \begin{align}
@@ -34,20 +34,20 @@
 得到跃迁振幅$C_{k'k}(t)$满足 
 \begin{align}
 	\begin{cases}
-		\i\hbar\dd tC_{k'k}(t)=\sum_nH'_{k'n}(t)\e{\i\omega_{k'n}t}C_{nk}(t),\\
+		\i\hbar\dd tC_{k'k}(t)=\sum_nH'_{k'n}(t)\e^{\i\omega_{k'n}t}C_{nk}(t),\\
 		C_{k'k}(0)=\vd_{k'k}.
 	\end{cases}
 \end{align}
 两边对$t$积分
 \begin{align}
-	C_{k'k}(t)=C_{k'k}(0)+\frac1{\i\hbar}\int_0^t\sum_nH'_{k'n}(\tau)\e{\i\omega_{k'n}\tau}C_{nk}(\tau)\d\tau
+	C_{k'k}(t)=C_{k'k}(0)+\frac1{\i\hbar}\int_0^t\sum_nH'_{k'n}(\tau)\e^{\i\omega_{k'n}\tau}C_{nk}(\tau)\d\tau
 \end{align}
 这是一个积分方程，可采用迭代求解。
 
 迭代一次
 \begin{align*}
-	C_{k'k}(t)&=\vd_{k'k}+\frac1{\i\hbar}\int_0^t\sum_nH'_{k'n}(\tau)\e{\i\omega_{k'n}\tau}\biggb{\vd_{nk}+\frac1{\i\hbar}\int_0^\tau\sum_nH'_{k'n}(\pi)\e{\i\omega_{k'n}\pi}C_{nk}(\pi)\d\pi}\d\tau\\
-	&=\vd_{k'k}+\frac1{\i\hbar}\int_0^tH'_{k'k}(\tau)\e{\i\omega_{k'k}\tau}\d\tau+\cdots
+	C_{k'k}(t)&=\vd_{k'k}+\frac1{\i\hbar}\int_0^t\sum_nH'_{k'n}(\tau)\e^{\i\omega_{k'n}\tau}\biggb{\vd_{nk}+\frac1{\i\hbar}\int_0^\tau\sum_nH'_{k'n}(\pi)\e^{\i\omega_{k'n}\pi}C_{nk}(\pi)\d\pi}\d\tau\\
+	&=\vd_{k'k}+\frac1{\i\hbar}\int_0^tH'_{k'k}(\tau)\e^{\i\omega_{k'k}\tau}\d\tau+\cdots
 \end{align*}
 零级近似
 \[
@@ -55,11 +55,11 @@ C_{k'k}^{(0)}=\vd_{k'k};
 \]
 一级近似 
 \[
-C_{k'k}^{(1)}=\frac1{\i\hbar}\int_0^tH'_{k'k}(\tau)\e{\i\omega_{k'k}\tau}\d\tau,
+C_{k'k}^{(1)}=\frac1{\i\hbar}\int_0^tH'_{k'k}(\tau)\e^{\i\omega_{k'k}\tau}\d\tau,
 \]
 代表直接从初态$\ket k$跃迁到末态$\ket{k'}$，故跃迁概率
 \begin{align}
-	P_{k'k}(t)=\frac1{\hbar^2}\abs{\int_0^tH'_{k'k}(\tau)\e{\i\omega_{k'k}\tau}\d\tau}^2.
+	P_{k'k}(t)=\frac1{\hbar^2}\abs{\int_0^tH'_{k'k}(\tau)\e^{\i\omega_{k'k}\tau}\d\tau}^2.
 \end{align}
 由$\hat H'$是Hermite的。故$P_{k'k}=P_{kk'}$，即从初态到末态的跃迁概率等于从末态到初态的跃迁概率。
 
@@ -67,7 +67,7 @@ C_{k'k}^{(1)}=\frac1{\i\hbar}\int_0^tH'_{k'k}(\tau)\e{\i\omega_{k'k}\tau}\d\tau,
 
 二级近似
 \[
-C_{k'k}^{(2)}=\frac1{(\i\hbar)^2}\sum_n\int_0^tH'_{k'n}(\tau)\e{\i\omega_{k'n}\tau}\int_0^\tau H'_{nk}(\pi)\e{\i\omega_{nk}\pi}\d\pi\d\tau,
+C_{k'k}^{(2)}=\frac1{(\i\hbar)^2}\sum_n\int_0^tH'_{k'n}(\tau)\e^{\i\omega_{k'n}\tau}\int_0^\tau H'_{nk}(\pi)\e^{\i\omega_{nk}\pi}\d\pi\d\tau,
 \]
 代表从初态$\ket k$经中间态$\ket n$跃迁到末态$\ket{k'}$。
 \sectionstar{周期微扰和常微扰}
@@ -94,12 +94,12 @@ C_{k'k}^{(2)}=\frac1{(\i\hbar)^2}\sum_n\int_0^tH'_{k'n}(\tau)\e{\i\omega_{k'n}\t
 \]
 其中电子的电偶极矩$\bm D=-e\r$，电偶极矩与电场作用引起的跃迁称为电偶极跃迁。
 \begin{align*}
-	C_{k'k}^{(1)}(t)&=\frac1{\i\hbar}\int_0^tH_{k'k}'(\tau)\e{-\i\omega_{k'k}\tau}\d\tau=\frac{W_{k'k}}{\i\hbar}\int_0^t\cos\omega\tau\e{-i\omega_{k'k}\tau}\d\tau\\
-	&=-\frac{W_{k'k}}{2\hbar}\biggb{\frac{\e{\i(\omega_{k'k}+\omega)t}-1}{\omega_{k'k}+\omega}+\frac{\e{\i(\omega_{k'k}-\omega)t}-1}{\omega_{k'k}-\omega}}.
+	C_{k'k}^{(1)}(t)&=\frac1{\i\hbar}\int_0^tH_{k'k}'(\tau)\e^{-\i\omega_{k'k}\tau}\d\tau=\frac{W_{k'k}}{\i\hbar}\int_0^t\cos\omega\tau\e^{-i\omega_{k'k}\tau}\d\tau\\
+	&=-\frac{W_{k'k}}{2\hbar}\biggb{\frac{\e^{\i(\omega_{k'k}+\omega)t}-1}{\omega_{k'k}+\omega}+\frac{\e^{\i(\omega_{k'k}-\omega)t}-1}{\omega_{k'k}-\omega}}.
 \end{align*}
 下面讨论原子吸收光的跃迁，$E_{k'}>E_k$，只有当入射光$\omega\doteq\omega_{k'k}$时，才会引起$E_k\to E_{k'}$跃迁，此时
 \begin{align*}
-	C_{k'k}^{(1)}(t)=-\frac{W_{k'k}}{2\hbar}\frac{\e{\i(\omega_{k'k}-\omega)t}-1}{\omega_{k'k}-\omega}.
+	C_{k'k}^{(1)}(t)=-\frac{W_{k'k}}{2\hbar}\frac{\e^{\i(\omega_{k'k}-\omega)t}-1}{\omega_{k'k}-\omega}.
 \end{align*}
 从$k\to k'$的概率为
 \begin{align}

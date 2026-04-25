@@ -7,7 +7,7 @@
 \section{理想气体}
 \label{sec:ideal gas}
 
-理想气体满足非简并条件($\e\alpha\gg 1$)，符合半经典Boltzmann分布。
+理想气体满足非简并条件($\e^\alpha\gg 1$)，符合半经典Boltzmann分布。
 粒子的运动可分为质心的平动(translation)、粒子内部的振动(vibration)和粒子整体的转动(rotation)三个相互独立的运动。
 
 \subsection{平动}
@@ -19,15 +19,15 @@
 \]
 在能量准连续的条件下，配分函数
 \begin{equation}
-	Z_\tl=\int\zti g(\varepsilon)\e{-\beta\varepsilon}\d\varepsilon=\frac{2\pi V}{h^3}\int\zti\sqrt\varepsilon\e{-\beta\varepsilon}\d\varepsilon=V\biggp{\frac{2\pi m}{h^2\beta}}^{3/2}.
+	Z_\tl=\int\zti g(\varepsilon)\e^{-\beta\varepsilon}\d\varepsilon=\frac{2\pi V}{h^3}\int\zti\sqrt\varepsilon\e^{-\beta\varepsilon}\d\varepsilon=V\biggp{\frac{2\pi m}{h^2\beta}}^{3/2}.
 \end{equation}
 考虑只有平动的情况，如单原子分子，
 \footnote{统计力学部分，$n:=V/N$表示粒子数密度，而不再表示摩尔数。}
 \[
-	\e{\alpha}=\frac{Z_\tl}N=\frac1n\biggp{\frac{2\pi m\kB T}{h^2}}^{3/2},
+	\e^{\alpha}=\frac{Z_\tl}N=\frac1n\biggp{\frac{2\pi m\kB T}{h^2}}^{3/2},
 \]
-说明在稀薄、高温、大质量的情况下，$\e\alpha\gg 1$，满足非简并条件。
-另外，非简并条件也可以写成$\e{-\alpha}=n\lambda_T^3\ll 1$的形式，
+说明在稀薄、高温、大质量的情况下，$\e^\alpha\gg 1$，满足非简并条件。
+另外，非简并条件也可以写成$\e^{-\alpha}=n\lambda_T^3\ll 1$的形式，
 其中$\lambda_T$是能量为$\pi\kB T$时的de Broglie波长
 \begin{equation}
 	\label{eqn:de Broglie wavelength}
@@ -52,7 +52,7 @@
 	{Maxwell速度分布律}{Maxwell distribution of velocities}
 	速率在$(v,v+\d v)$范围内的粒子数密度为
 	\begin{equation}
-		f(v)\d v=4\pi n\biggp{\frac m{2\pi\kB T}}^{3/2}\e{-mv^2/2\kB T}v^2\d v.
+		f(v)\d v=4\pi n\biggp{\frac m{2\pi\kB T}}^{3/2}\e^{-mv^2/2\kB T}v^2\d v.
 	\end{equation}
 	\begin{center}
 		\includegraphics[width=0.8\linewidth]{figures/Maxwell_distribution.pdf}
@@ -64,11 +64,11 @@
 \begin{proof}
 	动量在$\d p=\d p_x\nd p_y\nd p_z$范围内的粒子数密度为
 	\[
-		\e{-\alpha-\beta\varepsilon}\frac{\d p}{h^3}=\frac n{(2\pi m\kB T)^{3/2}}\e{-\beta(p_x^2+p_y^2+p_z^2)/2m}\d p_x\nd p_y\nd p_z,
+		\e^{-\alpha-\beta\varepsilon}\frac{\d p}{h^3}=\frac n{(2\pi m\kB T)^{3/2}}\e^{-\beta(p_x^2+p_y^2+p_z^2)/2m}\d p_x\nd p_y\nd p_z,
 	\]
 	由$p_i=mv_i$，可得
 	\begin{equation}
-		f(v_x,v_y,v_z)\d v_x\nd v_y\nd v_z=n\biggp{\frac m{2\pi\kB T}}^{3/2}\e{-m(v_x^2+v_y^2+v_z^2)/2\kB T}\d v_x\nd v_y\nd v_z.
+		f(v_x,v_y,v_z)\d v_x\nd v_y\nd v_z=n\biggp{\frac m{2\pi\kB T}}^{3/2}\e^{-m(v_x^2+v_y^2+v_z^2)/2\kB T}\d v_x\nd v_y\nd v_z.
 	\end{equation}
 	易证，$f(v_x,v_y,v_z)$是归一化的：
 	\[
@@ -107,26 +107,26 @@
 \]
 则配分函数
 \begin{equation}
-	Z_\vb=\sum_n\omega_\vb\e{-\beta\varepsilon_\vb}=\sum_{n=0}^\infty\e{-(n+1/2)\beta h\nu}=\frac{\e{-\beta h\nu/2}}{1-\e{-\beta h\nu}}.
+	Z_\vb=\sum_n\omega_\vb\e^{-\beta\varepsilon_\vb}=\sum_{n=0}^\infty\e^{-(n+1/2)\beta h\nu}=\frac{\e^{-\beta h\nu/2}}{1-\e^{-\beta h\nu}}.
 \end{equation}
 内能和比热
 \begin{subequations}
 	\begin{align}
-		U_\vb&=-N\pv{\ln Z_\vb}\beta=Nh\nu\biggp{\frac12+\frac1{\e{\beta h\nu}-1}},\\
+		U_\vb&=-N\pv{\ln Z_\vb}\beta=Nh\nu\biggp{\frac12+\frac1{\e^{\beta h\nu}-1}},\\
 		C_{V,\vb}&=\pu[V]{U_\vb}T=N\kB\Einst\biggp{\frac{\theta_\vb}T}.
 	\end{align}
 \end{subequations}
 其中Einstein函数
 \[
-	\Einst(x):=\frac{x^2\e x}{(\e x-1)^2}=
+	\Einst(x):=\frac{x^2\e^x}{(\e^x-1)^2}=
 	\begin{cases}
 		1-\frac{x^2}{12}+\bigo(x^4),&x\ll 1,\\
-		x^2\e{-x}+\bigo(x^2\e{-2x}),&x\gg 1.
+		x^2\e^{-x}+\bigo(x^2\e^{-2x}),&x\gg 1.
 	\end{cases}
 \]
 分别对应高温和低温极限。高温极限下，能量准连续，$U_\vb=N\kB T$，比热$C_{V,\vb}=N\kB$；而在低温极限下，比热
 \begin{equation}
-	C_{V,\vb}\simeq N\kB\biggp{\frac{\theta_\vb}T}^2\e{-\theta_\vb/T},\quad T\ll\theta_\vb.
+	C_{V,\vb}\simeq N\kB\biggp{\frac{\theta_\vb}T}^2\e^{-\theta_\vb/T},\quad T\ll\theta_\vb.
 \end{equation}
 
 \begin{center}
@@ -149,7 +149,7 @@
 		C_V=3N\kB\Einst\biggp{\frac{\theta_{\Einst}}T},
 	\]
 	其中Einstein温度$\theta_{\Einst}=h\nu/\kB\sim\SIrange{100}{300}\K$。
-	在低温下$C_V\propto T^{-2}\e{-\theta_{\Einst}/T}$与实验定性相符，定量不符。
+	在低温下$C_V\propto T^{-2}\e^{-\theta_{\Einst}/T}$与实验定性相符，定量不符。
 	因为有低频模式在低温时仍能被激发，从而对$C_V$有贡献。(见Debye模型)
 
 \end{example}
@@ -178,13 +178,13 @@
 高温下，能量准连续，可得内能$U_\rt=N\kB T$，比热$C_{V,\rt}=N\kB$符合能量均分定理；
 低温下，配分函数并没有显式表达式，
 \[
-	Z_\rt=\sum_{\ell=0}^\infty(2\ell+1)\e{-\ell(\ell+1)\theta_\rt/T}=1+3\e{-2\theta_\rt/T}+5\e{-6\theta_\rt/T}+\bigo(\e{-12\theta_\rt/T}).
+	Z_\rt=\sum_{\ell=0}^\infty(2\ell+1)\e^{-\ell(\ell+1)\theta_\rt/T}=1+3\e^{-2\theta_\rt/T}+5\e^{-6\theta_\rt/T}+\bigo(\e^{-12\theta_\rt/T}).
 \]
 只考虑$\ell=0,1$两项，可得
 \begin{subequations}
 	\begin{align}
-		U_\rt&\simeq 6N\kB\theta_\rt\e{-2\theta_\rt/T},\\
-		C_{V,\rt}&\simeq 12N\kB\biggp{\frac{\theta_\rt}T}^2\e{-2\theta_\rt/T}.
+		U_\rt&\simeq 6N\kB\theta_\rt\e^{-2\theta_\rt/T},\\
+		C_{V,\rt}&\simeq 12N\kB\biggp{\frac{\theta_\rt}T}^2\e^{-2\theta_\rt/T}.
 	\end{align}
 \end{subequations}
 如图\figref{fig:C_Vrot - T} 所示，$C_{V,\rt}$并不是单调的，而是会有一个bump。
@@ -225,7 +225,7 @@
 其中$m=-j,-j+1,\ldots,j$是$\bm J$在$\bm H$方向上的投影。
 配分函数
 \begin{equation}
-	Z=\sum_{m=-j}^j\e{-\beta\varepsilon_m}=\frac{\e{aj}-\e{-a(j+1)}}{1-\e{-a}}=\division{\sinh\biggb{\biggp{j+\frac12}a}}{\sinh\frac a2}.
+	Z=\sum_{m=-j}^j\e^{-\beta\varepsilon_m}=\frac{\e^{aj}-\e^{-a(j+1)}}{1-\e^{-a}}=\division{\sinh\biggb{\biggp{j+\frac12}a}}{\sinh\frac a2}.
 \end{equation}
 其中$a:=\beta\mu_0\muB gH$。
 磁化强度、内能

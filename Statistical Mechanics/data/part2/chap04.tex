@@ -115,21 +115,21 @@
 \]
 故分布概率
 \[
-	\rho_\st\propto\e{-\beta E_\st}\xrightarrow{\text{normalize}}\rho_\st=Z^{-1}\e{-\beta E_\st}.
+	\rho_\st\propto\e^{-\beta E_\st}\xrightarrow{\text{normalize}}\rho_\st=Z^{-1}\e^{-\beta E_\st}.
 \]
 配分函数
 \[
-	Z=\sum_\st\e{-\beta E_\st}.
+	Z=\sum_\st\e^{-\beta E_\st}.
 \]
 由定义，$\beta$只与热源有关，不同系统达到平衡时温度相同，故$\beta=\beta(T)$。
 
 若能级有简并度$\varGamma_\st$，则 
 \begin{align}
-	Z=\sum_\st\varGamma_\st\e{-\beta E_\st}.
+	Z=\sum_\st\varGamma_\st\e^{-\beta E_\st}.
 \end{align}
 \paragraph{正则分布的热力学公式}内能
 \begin{align}
-	E=\sum_\st\rho_\st E_\st=Z^{-1}\sum_\st E_\st\e{-\beta E_\st}=-\pv{\ln Z}\beta.
+	E=\sum_\st\rho_\st E_\st=Z^{-1}\sum_\st E_\st\e^{-\beta E_\st}=-\pv{\ln Z}\beta.
 \end{align}
 状态方程
 \begin{align}
@@ -167,7 +167,7 @@
 \end{align}
 \paragraph{能量涨落}由
 \begin{align*}
-	\ave{E^2}&=\sum_\st\rho_\st E_\st^2=Z^{-1}\sum_\st E_\st^2\e{-\beta E_\st}\\
+	\ave{E^2}&=\sum_\st\rho_\st E_\st^2=Z^{-1}\sum_\st E_\st^2\e^{-\beta E_\st}\\
 	&=Z^{-1}\pv[2]Z\beta=\pv[2]{\ln Z}\beta+\biggp{\pv{\ln Z}\beta}^2\\
 	&=\kB T^2C_V+\ave E^2
 \end{align*}
@@ -185,7 +185,7 @@
 因而，$E$可看作是孤立系统的能量，用正则分布研究孤立系统。
 \paragraph{正则分布的连续形式}$\varGamma$空间中，若能量准连续
 \begin{align}
-	Z=\frac1{N!}\frac1{h^f}\int\e{-\beta E}\prod_{i=1}^N\d q_i\nd p_i
+	Z=\frac1{N!}\frac1{h^f}\int\e^{-\beta E}\prod_{i=1}^N\d q_i\nd p_i
 \end{align}
 能量曲面$H(p,q,y)=E$包围的相体积
 \begin{align}
@@ -193,7 +193,7 @@
 \end{align}
 故按能量分布
 \begin{align}
-	Z=\frac1{N!}\frac1{h^f}\int\zti\Omega'(E)\e{-\beta E}\d E.
+	Z=\frac1{N!}\frac1{h^f}\int\zti\Omega'(E)\e^{-\beta E}\d E.
 \end{align}
 \begin{example}{用正则分布求单原子理想气体状态方程}{}
 	$N$个单原子分子气体的Hamilton量
@@ -206,8 +206,8 @@
 	\]
 	故
 	\begin{align*}
-		Z&=\frac1{N!h^{3N}}\int\zti\Omega'(E)\e{-\beta E}\d E\\
-		&=\frac{V^N}{N!(3N/2)!}\Bigp{\frac{2\pi m}{h^2}}^{3N/2}\cdot\frac{3N}2\int\zti E^{3N/2-1}\e{-\beta E}\d E\\
+		Z&=\frac1{N!h^{3N}}\int\zti\Omega'(E)\e^{-\beta E}\d E\\
+		&=\frac{V^N}{N!(3N/2)!}\Bigp{\frac{2\pi m}{h^2}}^{3N/2}\cdot\frac{3N}2\int\zti E^{3N/2-1}\e^{-\beta E}\d E\\
 		&%=\frac{V^N}{N!(3N/2)!}\Bigp{\frac{2\pi m}{h^2}}^{3N/2}\cdot\frac{3N}2\beta^{-3N/2}\Gamma\Bigp{\frac{3N}2}
 		=\frac{V^N}{N!}\Bigp{\frac{2\pi m}{h^2\beta}}^{3N/2}=\frac{Z_\tl^N}{N!}.
 	\end{align*}
@@ -229,11 +229,11 @@ $N$个全同粒子，体积$V$，
 \]
 其中$E_\tl(p)$与质心平动有关，$\varPhi(q)$是分子间势能，$E_\i$是分子内部运动。故
 \[
-	Z=\frac1{N!h^{3N}}\int\e{-\beta E_\tl}\d p\int\e{-\beta\varPhi}\d q\cdot Z_\i.
+	Z=\frac1{N!h^{3N}}\int\e^{-\beta E_\tl}\d p\int\e^{-\beta\varPhi}\d q\cdot Z_\i.
 \]
 考虑分子间势能项
 \[
-	Q:=\int\e{-\beta\varPhi}\d q
+	Q:=\int\e^{-\beta\varPhi}\d q
 \]
 只考虑分子间两两相互作用，其作用势$\phi_{ij}\equiv\phi(r_{ij})$只与分子间距离有关，
 \[
@@ -241,7 +241,7 @@ $N$个全同粒子，体积$V$，
 \]
 引入
 \[
-	f_{ij}=\e{-\beta\phi_{ij}}-1=
+	f_{ij}=\e^{-\beta\phi_{ij}}-1=
 	\begin{cases}
 		0,&r_{ij}\to\infty\\
 		-1,&r_{ij}\to0
@@ -261,7 +261,7 @@ $N$个全同粒子，体积$V$，
 \]
 第二级Virial系数
 \begin{align}
-	a_2(T)=-\frac12\int f(r)\d\bm r=-2\pi\int\zti\bigp{\e{-\beta\phi(r)}-1}r^2\d r
+	a_2(T)=-\frac12\int f(r)\d\bm r=-2\pi\int\zti\bigp{\e^{-\beta\phi(r)}-1}r^2\d r
 \end{align}
 故
 \[
@@ -269,7 +269,7 @@ $N$个全同粒子，体积$V$，
 \]
 取对数\footnote{过程中一系列近似相当于
 \[
-	\ln\e{-x}=\ln\Bigp{1-x+\frac12x^2+\cdots}\simeq\ln(1-x)\simeq -x
+	\ln\e^{-x}=\ln\Bigp{1-x+\frac12x^2+\cdots}\simeq\ln(1-x)\simeq -x
 \]
 即结果并不会不严格。}
 \begin{align}
@@ -298,7 +298,7 @@ $N$个全同粒子，体积$V$，
 	\end{center}
 	故
 	{\begin{align*}
-		a_2(T)&=-2\pi\int_0^{r_0}-r^2\d r-2\pi\int_{r_0}^{+\infty}\bigp{\e{-\beta\phi(r)}-1}r^2\d r\\
+		a_2(T)&=-2\pi\int_0^{r_0}-r^2\d r-2\pi\int_{r_0}^{+\infty}\bigp{\e^{-\beta\phi(r)}-1}r^2\d r\\
 		&\simeq\frac{2\pi}3r_0^3+2\pi\int_{r_0}^{+\infty}\beta\phi(r)r^2\d r\tag{$\kB T\gg\phi_0$}\\
 		&=\frac{2\pi}3r_0^3-\frac{2\pi}3\frac{\phi_0r_0^3}{\kB T}=:b-\frac a{\kB T}.
 	\end{align*}}
@@ -326,7 +326,7 @@ $N$个全同粒子，体积$V$，
 \]
 配分函数
 \[
-	Z=\prod_{i=1}^N\sum_{S_i=\pm 1}\e{-\beta E\{S_i\}}.\]
+	Z=\prod_{i=1}^N\sum_{S_i=\pm 1}\e^{-\beta E\{S_i\}}.\]
 \paragraph{平均场近似}作用于$S_i$的力为 
 \[
 	-\pv E{S_i}=\sum_j\varepsilon_{ij}S_j+\mu_0\mu H.
@@ -343,7 +343,7 @@ $N$个全同粒子，体积$V$，
 
 用平均场$\avg H$代替外场$H$并忽略其涨落，这样相互作用自旋系统便化为近独立的自旋系统，配分函数
 \[
-	Z=\prod_{i=1}^N\sum_{S_i=\pm 1}\e{\beta\mu_0\mu\avg H S_i}=\bigp{\e{\beta\mu_0\mu\avg H}+\e{-\beta\mu_0\mu\avg H}}^N.
+	Z=\prod_{i=1}^N\sum_{S_i=\pm 1}\e^{\beta\mu_0\mu\avg H S_i}=\bigp{\e^{\beta\mu_0\mu\avg H}+\e^{-\beta\mu_0\mu\avg H}}^N.
 \]
 磁矩
 \begin{align}
@@ -372,21 +372,21 @@ $N^{(0)}\gg N,E^{(0)}\gg E_\st$，故可在$(N^{(0)},E^{(0)})$处展开
 \]
 其中$\alpha=\alpha(T,\mu),\;\beta=\beta(T)$只与热源有关，故
 \begin{align}
-	\rho_{N\st}=\Xi^{-1}\e{-\alpha N-\beta E_\st}.
+	\rho_{N\st}=\Xi^{-1}\e^{-\alpha N-\beta E_\st}.
 \end{align}
 其中巨配分函数
 \begin{align}
-	\Xi=\sum_{N=0}^\infty\sum_\st\e{-\alpha N-\beta E_\st}.
+	\Xi=\sum_{N=0}^\infty\sum_\st\e^{-\alpha N-\beta E_\st}.
 \end{align}
 \paragraph{连续形式}对不同粒子数$N$，需定义不同维数的$\Gamma$空间，设粒子自由度为$r$，则系统自由度为$f=Nr$：
 \begin{align}
-	\Xi=\sum_{N=0}^\infty\frac1{N!h^{Nr}}\e{-\alpha N}\int\e{-\beta E(q,p,y)}\prod_{i=1}^N\d q_i\nd p_i.
+	\Xi=\sum_{N=0}^\infty\frac1{N!h^{Nr}}\e^{-\alpha N}\int\e^{-\beta E(q,p,y)}\prod_{i=1}^N\d q_i\nd p_i.
 \end{align}
 \paragraph{巨配分函数与配分函数的关系}有时，如量子统计情形，$\Xi$比$Z$计算方便
 \[
-	\Xi(\alpha,\beta,y)=\sum_{N=0}^\infty\sum_\st\e{-\alpha N-\beta E_\st}=\sum_Nq^NZ_N(\beta,y).
+	\Xi(\alpha,\beta,y)=\sum_{N=0}^\infty\sum_\st\e^{-\alpha N-\beta E_\st}=\sum_Nq^NZ_N(\beta,y).
 \]
-其中易逸度(fugacity) $q=\e{-\alpha}$
+其中易逸度(fugacity) $q=\e^{-\alpha}$
 
 \paragraph{巨正则分布的热力学公式}宏观量等于对应微观量的统计平均值
 \begin{align}
@@ -436,7 +436,7 @@ $N^{(0)}\gg N,E^{(0)}\gg E_\st$，故可在$(N^{(0)},E^{(0)})$处展开
 \end{align}
 \paragraph{由巨正则分布导出近独立粒子系统的平衡分布}系统处粒子数$N$，能量$E_\st$的几率
 \[
-	\rho_{Na}=\Xi^{-1}\Omega_\st\e{-\alpha N-\beta E_\st}.
+	\rho_{Na}=\Xi^{-1}\Omega_\st\e^{-\alpha N-\beta E_\st}.
 \]
 其中$\Omega_\st$为$E_\st$的简并度。
 
@@ -452,19 +452,19 @@ $N^{(0)}\gg N,E^{(0)}\gg E_\st$，故可在$(N^{(0)},E^{(0)})$处展开
 
 系统具有分布$\{a_i\}$的几率：
 \[
-	\rho_{\{a_i\}}=\Xi^{-1}\Omega_{\{a_i\}}\e{-\alpha N_{\{a_i\}}-\beta E_{\{a_i\}}}=\Xi^{-1}\prod_i\Omega_{a_i}\e{-\alpha{a_i}-\beta{a_i\varepsilon_i}}.
+	\rho_{\{a_i\}}=\Xi^{-1}\Omega_{\{a_i\}}\e^{-\alpha N_{\{a_i\}}-\beta E_{\{a_i\}}}=\Xi^{-1}\prod_i\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}.
 \]
 总巨配分函数
 \[
-	\Xi=\sum_{\{a_i\}}\prod_i\Omega_{a_i}\e{-\alpha{a_i}-\beta{a_i\varepsilon_i}}=\prod_i\Xi_i.
+	\Xi=\sum_{\{a_i\}}\prod_i\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}=\prod_i\Xi_i.
 \]
 其中 
 \[
-	\Xi_i=\sum_{a_i}\Omega_{a_i}\e{-\alpha{a_i}-\beta{a_i\varepsilon_i}}.
+	\Xi_i=\sum_{a_i}\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}.
 \]
 则
 \begin{align*}
-	\avg{a_i}=\sum_{\{a_i\}}a_i\rho_{\{a_i\}}=\Xi_i^{-1}\sum_{a_i}a_i\Omega_{a_i}\e{-\alpha{a_i}-\beta{a_i\varepsilon_i}}=-\pv{\ln\Xi_i}\alpha.
+	\avg{a_i}=\sum_{\{a_i\}}a_i\rho_{\{a_i\}}=\Xi_i^{-1}\sum_{a_i}a_i\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}=-\pv{\ln\Xi_i}\alpha.
 \end{align*}
 
 Bose分布
@@ -473,8 +473,8 @@ Bose分布
 \end{align}
 则由$(1+x)^{-n}$的Taylor展开
 \begin{align}
-	\Xi_i&=\sum_{a_i=0}^\infty\frac{(a_i+\omega_i-1)!}{a_i!(\omega_i-1)!}\e{-\alpha a_i-\beta a_i\varepsilon_i}=\bigp{1-\e{-\alpha-\beta\varepsilon_i}}^{-\omega_i};\\
-	a_i&=-\pv{\ln\Xi_i}\alpha=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}-1}.
+	\Xi_i&=\sum_{a_i=0}^\infty\frac{(a_i+\omega_i-1)!}{a_i!(\omega_i-1)!}\e^{-\alpha a_i-\beta a_i\varepsilon_i}=\bigp{1-\e^{-\alpha-\beta\varepsilon_i}}^{-\omega_i};\\
+	a_i&=-\pv{\ln\Xi_i}\alpha=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}-1}.
 \end{align}
 
 Fermi分布
@@ -483,8 +483,8 @@ Fermi分布
 \end{align}
 由$(1+x)^n$的二项式展开
 \begin{align}
-	\Xi_i&=\sum_{a_i=0}^{\omega_i}\frac{\omega_i!}{a_i!(\omega_i-a_i)!}\e{-\alpha a_i-\beta a_i\varepsilon_i}=\bigp{1+\e{-\alpha-\beta\varepsilon_i}}^{-\omega_i};\\
-	a_i&=-\pv{\ln\Xi_i}\alpha=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}+1}.
+	\Xi_i&=\sum_{a_i=0}^{\omega_i}\frac{\omega_i!}{a_i!(\omega_i-a_i)!}\e^{-\alpha a_i-\beta a_i\varepsilon_i}=\bigp{1+\e^{-\alpha-\beta\varepsilon_i}}^{-\omega_i};\\
+	a_i&=-\pv{\ln\Xi_i}\alpha=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}+1}.
 \end{align}
 这也正是巨配分函数的由来。
 
@@ -492,8 +492,8 @@ Fermi分布
 \begin{align}
 	\Omega_{a_i}=\frac{\omega_i^{a_i}}{a_i!}.
 \end{align}
-由$\e{x}$的Taylor展开
+由$\e^{x}$的Taylor展开
 \begin{align}
-	\Xi_i&=\sum_{a_i=0}^\infty\frac{\omega_i^{a_i}}{a_i!}\e{-\alpha a_i-\beta a_i\varepsilon_i}=\e{\omega_i\e{-\alpha-\beta\varepsilon_i}};\\
-	a_i&=-\pv{\ln\Xi_i}\alpha=\omega_i\e{-\alpha-\beta\varepsilon_i}.
+	\Xi_i&=\sum_{a_i=0}^\infty\frac{\omega_i^{a_i}}{a_i!}\e^{-\alpha a_i-\beta a_i\varepsilon_i}=\e^{\omega_i\e^{-\alpha-\beta\varepsilon_i}};\\
+	a_i&=-\pv{\ln\Xi_i}\alpha=\omega_i\e^{-\alpha-\beta\varepsilon_i}.
 \end{align}

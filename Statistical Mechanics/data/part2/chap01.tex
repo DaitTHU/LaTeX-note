@@ -122,7 +122,7 @@
 	其最概然分布称为(经典) Maxwell-Boltzmann分布，满足
 	\begin{equation}
 		\label{eqn:Boltzmann distribution}
-		a_i=\omega_i\e{-\alpha-\beta\varepsilon_i}.
+		a_i=\omega_i\e^{-\alpha-\beta\varepsilon_i}.
 		\tag{\ref{eqn:Boltzmann system}b}
 	\end{equation}
 \end{definition}
@@ -154,7 +154,7 @@
 	\[
 		\pv L{a_i}=\ln\biggp{\frac{\omega_i}{a_i}}-\alpha-\beta\varepsilon_i=0
 		\implies
-		a_i=\omega_i\e{-\alpha-\beta\varepsilon_i}.
+		a_i=\omega_i\e^{-\alpha-\beta\varepsilon_i}.
 	\]
 	验证$\p^2L/\p a_i^2=-1/a_i<0$确为极大值点。
 \end{proof}
@@ -191,7 +191,7 @@
 	最概然分布称为Bose-Einstein分布，满足
 	\begin{equation}
 		\label{eqn:Bose distribution}
-		a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}-1}.
+		a_i=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}-1}.
 		\tag{\ref{eqn:Bose system}b}
 	\end{equation}
 \end{definition}
@@ -206,7 +206,7 @@
 	\[
 		\pv L{a_i}=\ln\biggp{1+\frac{\omega_i}{a_i}}-\alpha-\beta\varepsilon_i=0
 		\implies
-		a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}-1}.
+		a_i=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}-1}.
 	\]
 	验证$\p^2L/\p a_i^2=-\omega_i/a_i(a_i+\omega_i)<0$确为极大值点。
 \end{proof}
@@ -224,7 +224,7 @@
 	最概然分布称为Fermi-Dirac分布，满足
 	\begin{equation}
 		\label{eqn:Fermi distribution}
-		a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}+1}.
+		a_i=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}+1}.
 		\tag{\ref{eqn:Fermi system}b}
 	\end{equation}
 \end{definition}
@@ -239,7 +239,7 @@
 	\[
 		\pv L{a_i}=\ln\biggp{\frac{\omega_i}{a_i}-1}-\alpha-\beta\varepsilon_i=0
 		\implies
-		a_i=\frac{\omega_i}{\e{\alpha+\beta\varepsilon_i}+1}.
+		a_i=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}+1}.
 	\]
 	验证$\p^2L/\p a_i^2=-\omega_i/a_i(\omega_i-a_i)<0$确为极大值点。
 \end{proof}
@@ -247,14 +247,14 @@
 \begin{definition}
 	{半经典Boltzmann分布}{semi-classical distribution}
 
-	当$\e\alpha\gg 1$时，Bose分布和Fermi分布变为半经典的(semi-classical) Boltzmann分布
+	当$\e^\alpha\gg 1$时，Bose分布和Fermi分布变为半经典的(semi-classical) Boltzmann分布
 	\begin{subequations}
 		\begin{gather}
 			\Om[S]=\prod_i\frac{\omega_i^{a_i}}{a_i!},\\			
-			a_i=\omega_i\e{-\alpha-\beta\varepsilon_i}.
+			a_i=\omega_i\e^{-\alpha-\beta\varepsilon_i}.
 		\end{gather}
 	\end{subequations}
-	极限条件$\e\alpha\gg 1$称为经典极限条件(classical limit condition)，其等价条件为$a_i\ll\omega_i$，因此也可以称为非简并条件(non-degenerate condition)。
+	极限条件$\e^\alpha\gg 1$称为经典极限条件(classical limit condition)，其等价条件为$a_i\ll\omega_i$，因此也可以称为非简并条件(non-degenerate condition)。
 \end{definition}
 
 % \begin{proof}
@@ -286,7 +286,7 @@
 \end{align*}
 对于宏观系统，$N=\textstyle\sum_ia_i\sim 10^{23}$，因此即使分布的相对偏差$\vd a_i/a_{i,\m}\sim 10^{-4}$很小，微观状态数的相对偏差也会大得离谱：
 \[
-	\frac{\Omega\{a_i\}}{\Omega\{a_{i,\m}\}}\simeq\exp\biggp{-\frac12\sum_ia_{i,\m}\cdot\frac{\vd a_i^2}{a_{i,\m}^2}}\sim\e{-10^{23-8}}\lll 1.
+	\frac{\Omega\{a_i\}}{\Omega\{a_{i,\m}\}}\simeq\exp\biggp{-\frac12\sum_ia_{i,\m}\cdot\frac{\vd a_i^2}{a_{i,\m}^2}}\sim\e^{-10^{23-8}}\lll 1.
 \]
 
 \let\m\oldm
@@ -296,7 +296,7 @@
 \begin{definition}{配分函数}{partition function}
 	对于(半)经典Boltzmann分布，定义配分函数(partition function)
 	\begin{equation}
-		Z:=\sum_i\omega_i\e{-\beta\varepsilon_i}.
+		Z:=\sum_i\omega_i\e^{-\beta\varepsilon_i}.
 	\end{equation}
 	% 单粒子能级$\varepsilon_i$是外参量$y$的函数。
 \end{definition}
@@ -305,7 +305,7 @@
 	配分函数给出了(半)经典Boltzmann分布的所有信息：
 	\begin{subequations}
 		\begin{align}
-			N&=\e{-\alpha}Z,\\
+			N&=\e^{-\alpha}Z,\\
 			% \alpha&=\ln\frac ZN,\\
 			\label{eqn:U=-NplnZ}
 			U&=-N\pv{\ln Z}\beta,\\
@@ -318,12 +318,12 @@
 \begin{proof}
 	粒子数
 	\[
-		N=\sum_i a_i=\sum_i \omega_i\e{-\alpha-\beta\varepsilon_i}=\e{-\alpha}Z
-		\implies\e{-\alpha}=\frac NZ.
+		N=\sum_i a_i=\sum_i \omega_i\e^{-\alpha-\beta\varepsilon_i}=\e^{-\alpha}Z
+		\implies\e^{-\alpha}=\frac NZ.
 	\]
 	内能
 	\[
-		U=\sum_i a_i\varepsilon_i=\e{-\alpha}\sum_i \varepsilon_i\e{-\beta\varepsilon_i}=-\frac NZ\pv Z\beta=-N\pv{\ln Z}\beta.
+		U=\sum_i a_i\varepsilon_i=\e^{-\alpha}\sum_i \varepsilon_i\e^{-\beta\varepsilon_i}=-\frac NZ\pv Z\beta=-N\pv{\ln Z}\beta.
 	\]
 	内能的微分
 	\[
@@ -337,7 +337,7 @@
 	\]
 	可得
 	\[
-		Y_k=\sum_i a_i\pv{\varepsilon_i}{y_k}=\sum_i \omega_i\e{-\alpha-\beta\varepsilon_i}\pv{\varepsilon_i}{y_k}=-\frac N\beta\pv{\ln Z}{y_k}.
+		Y_k=\sum_i a_i\pv{\varepsilon_i}{y_k}=\sum_i \omega_i\e^{-\alpha-\beta\varepsilon_i}\pv{\varepsilon_i}{y_k}=-\frac N\beta\pv{\ln Z}{y_k}.
 		\qedhere
 	\]
 \end{proof}
@@ -419,7 +419,7 @@
 	将配分函数写成$\mu$空间中相体积元$\d\omega$的积分形式，
 	由极限定理，相体积元$\d\omega$中所含量子态的数量为$\d\omega/h^\gamma$，即
 	\[
-		Z=\sum_i \omega_i\e{-\beta\varepsilon_i}\to \int_\mu\frac{\nd\omega}{h^\gamma}\e{-\beta\varepsilon}.
+		Z=\sum_i \omega_i\e^{-\beta\varepsilon_i}\to \int_\mu\frac{\nd\omega}{h^\gamma}\e^{-\beta\varepsilon}.
 	\]
 	进一步地，一般情况下系统的能量分布是易求的，我们希望将上式写成能量的积分形式。
 	考虑在$(\varepsilon,\varepsilon+\d\varepsilon)$的能量范围内，量子态的数密度(简称态密度)为
@@ -430,9 +430,9 @@
 	由此可得配分函数$Z$、粒子数$N$和内能$U$的积分表达式
 	\begin{subequations}
 		\begin{align}
-			Z&=\int\zti g(\varepsilon)\e{-\beta\varepsilon}\d\varepsilon,\\
-			N&=\e{-\alpha}Z=\int\zti g(\varepsilon)\e{-\alpha-\beta\varepsilon}\d\varepsilon,\\
-			U&=-\e{-\alpha}\pv Z\beta=\int\zti g(\varepsilon)\varepsilon\e{-\alpha-\beta\varepsilon}\d\varepsilon.
+			Z&=\int\zti g(\varepsilon)\e^{-\beta\varepsilon}\d\varepsilon,\\
+			N&=\e^{-\alpha}Z=\int\zti g(\varepsilon)\e^{-\alpha-\beta\varepsilon}\d\varepsilon,\\
+			U&=-\e^{-\alpha}\pv Z\beta=\int\zti g(\varepsilon)\varepsilon\e^{-\alpha-\beta\varepsilon}\d\varepsilon.
 		\end{align}
 	\end{subequations}
 \end{corollary}

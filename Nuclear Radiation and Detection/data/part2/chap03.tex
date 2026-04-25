@@ -225,7 +225,7 @@ PMT输出脉冲中的电荷量
 \end{compactitem}
 无机闪烁体，一次闪烁光引起的输出电流
 \[
-	I(t)=\frac{n_{\mathrm{ph}}TMe}{\tau_0}\e{-(t-t_\elec)/\tau_0},\quad t\geqslant t_\elec.
+	I(t)=\frac{n_{\mathrm{ph}}TMe}{\tau_0}\e^{-(t-t_\elec)/\tau_0},\quad t\geqslant t_\elec.
 \]
 $\tau_0\sim\SI{250}{ns}$为发光衰减时间。
 
@@ -233,34 +233,34 @@ $\tau_0\sim\SI{250}{ns}$为发光衰减时间。
 
 输出电压信号的一般形式
 \[
-	V(t)=\frac1{C_0}\e{-t/R_0C_0}\int_0^tI(\tau)\e{\tau/R_0C_0}\d\tau,
+	V(t)=\frac1{C_0}\e^{-t/R_0C_0}\int_0^tI(\tau)\e^{\tau/R_0C_0}\d\tau,
 \]
 代入上式得
 \[
-	V(t)=\frac Q{C_0}\frac{R_0C_0}{R_0C_0-\tau_0}\bigp{\e{-t/R_0C_0}-\e{-t/\tau_0}},
+	V(t)=\frac Q{C_0}\frac{R_0C_0}{R_0C_0-\tau_0}\bigp{\e^{-t/R_0C_0}-\e^{-t/\tau_0}},
 \]
 \begin{compactitem}
 	\item $R_0C_0\gg\tau_0$，
 	\begin{align*}
-		V(t)&\doteq\frac Q{C_0}\bigp{\e{-t/R_0C_0}-\e{-t/\tau_0}}\\
+		V(t)&\doteq\frac Q{C_0}\bigp{\e^{-t/R_0C_0}-\e^{-t/\tau_0}}\\
 		&=\begin{cases}
-			\frac Q{C_0}\bigp{1-\e{-t/\tau_0}},&t\ll\tau_0\\
+			\frac Q{C_0}\bigp{1-\e^{-t/\tau_0}},&t\ll\tau_0\\
 			\frac Q{C_0},&\tau_0\ll t\ll R_0C_0\\
-			\frac Q{C_0}\e{-t/R_0C_0},&t>R_0C_0
+			\frac Q{C_0}\e^{-t/R_0C_0},&t>R_0C_0
 		\end{cases}
 	\end{align*}
 	\item $R_0C_0\ll\tau_0$，
 	\begin{align*}
-		V(t)&\doteq\frac{R_0Q}{\tau_0}\bigp{\e{-t/R_0C_0}-\e{-t/\tau_0}}\\
+		V(t)&\doteq\frac{R_0Q}{\tau_0}\bigp{\e^{-t/R_0C_0}-\e^{-t/\tau_0}}\\
 		&=\begin{cases}
-			\frac{R_0Q}{\tau_0}\bigp{1-\e{-t/R_0C_0}},&t\ll\tau_0\\
+			\frac{R_0Q}{\tau_0}\bigp{1-\e^{-t/R_0C_0}},&t\ll\tau_0\\
 			\frac {R_0Q}{\tau_0},&R_0C_0\ll t\ll \tau_0\\
-			\frac {R_0Q}{\tau_0}\e{-t/\tau_0},&t>\tau_0
+			\frac {R_0Q}{\tau_0}\e^{-t/\tau_0},&t>\tau_0
 		\end{cases}
 	\end{align*}
 	\item $R_0C_0=\tau_0$，
 	\[
-		V(t)=\frac{Q}{C_0}\frac{t}{R_0C_0}\e{-t/R_0C_0},
+		V(t)=\frac{Q}{C_0}\frac{t}{R_0C_0}\e^{-t/R_0C_0},
 	\]
 	
 	\item $C_0$不变，随着$R_0$的增大，幅度、脉宽都增大；
@@ -346,7 +346,7 @@ $\tau_0\sim\SI{250}{ns}$为发光衰减时间。
 \end{compactitem}
 \paragraph{探测效率、峰总比、峰康比}平行$\gamma$束
 \[
-	\varepsilon=1-\e{-N\sigma D}=1-\exp\biggp{-\NA\frac\rho{A}\sigma_\gamma D},
+	\varepsilon=1-\e^{-N\sigma D}=1-\exp\biggp{-\NA\frac\rho{A}\sigma_\gamma D},
 \]
 提升探测器的探测效率：高密度($\rho$)、大($D$)、原子序数高($\sigma_\gamma/A$)。
 
