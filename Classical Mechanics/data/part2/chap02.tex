@@ -1,0 +1,100 @@
+\chapter{耦合小振动与简正模}
+
+\section{为什么要同时对角化动能和势能}
+考虑无速度相关力的保守系统，采用不显含时间的完整约束坐标，动能为
+\[
+ T=\frac12\dot q\tp M(q)\dot q.
+\]
+在静止平衡$q_0$附近令$\bm\eta=q-q_0$。
+若质量矩阵光滑且正定，则保留位移和速度的二阶小量得到
+\begin{equation}
+ L_2=\frac12\dot{\bm\eta}\tp M\dot{\bm\eta}
+ -\frac12\bm\eta\tp K\bm\eta,
+ \qquad M=M\tp>0,\quad K=K\tp.
+\end{equation}
+$M$是在平衡点求值的质量矩阵，$K_{ij}=\p_i\p_jV(q_0)$。
+$M(q)$随位移的变化乘以两次速度，是三阶项，在线性化中丢弃。
+如果原问题有磁场、旋转导致的陀螺项或阻尼，就还会有速度耦合，不能直接套用本章的$M,K$模型。
+
+试探$\bm\eta=\bm a\e^{\i\omega t}$得到
+\begin{equation}
+ K\bm a=\omega^2M\bm a,\qquad \det(K-\omega^2M)=0.
+ \label{eq:cm-generalized-eig}
+\end{equation}
+这是广义特征值问题。由于$M$正定，可令$\bm y=M^{1/2}\bm\eta$，
+把方程化为实对称矩阵$M^{-1/2}KM^{-1/2}$的特征值问题。
+因此所有$\omega^2$都为实数，且可选一组满足
+\begin{equation}
+ \bm a_\alpha\tp M\bm a_\beta=\delta_{\alpha\beta},\qquad
+ \bm a_\alpha\tp K\bm a_\beta=\omega_\alpha^2\delta_{\alpha\beta}
+\end{equation}
+的模矢量。简并子空间内部可用$M$内积正交化。
+令$\bm\eta=\sum_\alpha\bm a_\alpha Q_\alpha$，则
+\begin{equation}
+ L_2=\frac12\sum_\alpha\left(\dot Q_\alpha^2-\omega_\alpha^2Q_\alpha^2\right),
+ \qquad Q_\alpha=\bm a_\alpha\tp M\bm\eta.
+\end{equation}
+每个简正坐标独立演化；当$\omega_\alpha^2>0$时为谐振动，初值决定其振幅和相位。
+
+$K>0$意味着所有$\omega_\alpha^2>0$，且严格势能极小给出保守系统的局部稳定性。
+出现$\omega^2<0$时有指数增长，是线性不稳定。
+$\omega^2=0$时线性方程有常数与线性漂移解，需区分对称性导致的自由运动与高阶势能控制的运动，
+不能只因没有负特征值就宣布所有扰动都稳定。
+
+\section{两个耦合振子：频率分裂与拍频}
+两个相同质量$m$分别用弹簧$k$连接固定墙，中间用弹簧$\kappa$相连。
+以平衡位置位移$x_1,x_2$为坐标，
+\begin{equation}
+ T=\frac m2(\dot x_1^2+\dot x_2^2),\qquad
+ V=\frac k2(x_1^2+x_2^2)+\frac\kappa2(x_1-x_2)^2.
+\end{equation}
+两个模是同相$(1,1)$和反相$(1,-1)$：
+\begin{equation}
+ \omega_+^2=\frac km,\qquad \omega_-^2=\frac{k+2\kappa}{m}.
+\end{equation}
+同相时中间弹簧不伸缩，所以它不改变该模的频率。
+若$x_1(0)=A,x_2(0)=0$且初速度为零，则
+\begin{align}
+ x_1(t)&=\frac A2(\cos\omega_+t+\cos\omega_-t),\\
+ x_2(t)&=\frac A2(\cos\omega_+t-\cos\omega_-t).
+\end{align}
+弱耦合$\kappa\ll k$时，两频率接近，快振荡振幅受慢包络调制，表现为能量来回交换。
+在一般时刻，中间弹簧还储存能量；把两振子的“各自能量”相加时必须说明怎样分配耦合势能。
+
+\section{双摆：质量矩阵并不总是对角的}
+两个等质量$m$的质点由两根无质量刚杆$l$依次悬挂，$\theta_1,\theta_2$均相对竖直向下测量。
+精确动能中的交叉项是$ml^2\dot\theta_1\dot\theta_2\cos(\theta_1-\theta_2)$。
+在向下平衡附近取小角度，
+\begin{equation}
+ M=ml^2\begin{pmatrix}2&1\\1&1\end{pmatrix},\qquad
+ K=mgl\begin{pmatrix}2&0\\0&1\end{pmatrix}.
+\end{equation}
+令$\lambda=\omega^2l/g$，特征方程为
+\begin{equation}
+ (2-2\lambda)(1-\lambda)-\lambda^2=0,
+ \qquad \omega_{\pm}^2=\frac gl(2\pm\sqrt2).
+\end{equation}
+低频模满足$\theta_2=\sqrt2\theta_1$，高频模满足$\theta_2=-\sqrt2\theta_1$。
+模矢量不是普通Euclid内积下正交，而是$M$内积下正交。
+只对势能矩阵$K$求本征值会完全漏掉这两个耦合模。
+
+\section{连续极限的一瞥：弦的波动方程}
+间距$a$、线密度$\rho$的质点链，每点质量$\rho a$，相邻点因恒定张力$\mathcal T$耦合。
+对横向小位移$y_j$，小斜率近似下
+\begin{equation}
+ L=\sum_j\frac12\rho a\dot y_j^2
+ -\sum_j\frac{\mathcal T}{2a}(y_{j+1}-y_j)^2.
+\end{equation}
+在波长远大于$a$的极限，$y_j(t)\to y(x,t)$，
+\begin{equation}
+ L=\int\left[\frac12\rho(\p_ty)^2-\frac12\mathcal T(\p_xy)^2\right]\d x,
+ \qquad \rho\p_t^2y=\mathcal T\p_x^2y.
+\end{equation}
+两端固定、长度为$d$时，模形为$\sin(n\pi x/d)$，
+$\omega_n=(n\pi/d)\sqrt{\mathcal T/\rho}$，$n=1,2,\ldots$。
+这里展示的是有限维简正模向连续场的过渡；大振幅弦、弯曲刚度和变张力不在这一近似内。
+
+\paragraph{复习与阅读}
+小振动不是只求势能的Hessian，还须保留动能给出的质量度量。
+先判断线性化是否含速度耦合，再选择正确的特征值问题。
+延伸阅读：Tong讲义第2章的小振动部分；Taylor的耦合振子。

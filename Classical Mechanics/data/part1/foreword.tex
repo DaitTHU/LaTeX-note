@@ -1,19 +1,44 @@
-Newton力学研究质点（组）在三维Euclid空间中的运动。
+\chapter*{如何使用这份笔记}
+\addcontentsline{toc}{chapter}{如何使用这份笔记}
 
-\section*{实验事实}
+力学首先要回答：一个物体怎样运动，为什么这样运动，以及哪些细节可以不解方程就知道？
+本笔记沿着这三个问题组织。先用受力、能量和角动量处理粒子运动，再用约束减少未知量，最后研究相空间结构。
+坐标只是描述工具；每一种新方法都应说明它解决了前一种方法的什么困难。
 
-经典力学的基础是一些实验事实。
+本稿适合作为学过普通物理后的理论力学复习笔记。默认熟悉微积分、向量和线性代数，
+只在使用时回顾极坐标、旋转基矢等必要工具。讨论以低速、宏观、非相对论的有限自由度系统为主；
+连续介质、相对论力学和约束Hamilton理论不在本稿范围内。
+写成$\bm F=m\ddot{\bm r}$时默认质量不变且参考系惯性；换参考系、变质量或采用耗散模型时会另行说明。
 
-\paragraph{空间与时间}
-我们所在的空间是三维Euclid空间，最简单的数学模型是$\RR^3$。
-时间是一个一维序列，并且两个事件之间的时间间隔可以任意小，最简单的数学模型是$\RR$。
+复习时可先读各节的物理问题和例子，再重做推导。尤其要检查三件事：
+所用守恒量是否真的守恒，近似所需的小参数是什么，以及结果的量纲和极限是否正确。
+附录给出方法选择表和短题核对，不以背诵公式代替建模。
 
-\paragraph{Galileo相对性原理}
-存在一些参考系(reference frame)称为惯性系(inertial frame)，其具有以下两个性质：
-\begin{itemize}
-    \item 在任何时刻，一切自然规律在所有惯性系中都相同；
-    \item 相对于一个惯性系做匀速直线运动的参考系也是惯性系。
-\end{itemize}
+\section*{参考书与进一步阅读}
+以下书目提供互补的学习路径。本稿的推导和例题重新组织书写，未逐章摘抄教材；
+节末的阅读提示用主题定位，避免不同印次页码变化造成混淆。
+\begin{description}
+  \item[Taylor]
+  John R. Taylor, \emph{Classical Mechanics}。
+  University Science Books，2005。
+  适合沿着粒子运动、振动、分析力学到刚体系统复习。
+  \href{https://uscibooks.aip.org/books/classical-mechanics/}{出版社书页}。
+  \item[Morin]
+  David Morin, \emph{Introduction to Classical Mechanics: With Problems and Solutions},
+  Cambridge University Press, 2008。
+  可配合受力分析、守恒律、非惯性系和Lagrange方法的习题使用；
+  作者还公开了Hamilton力学补充章节。
+  \href{https://davidmorin.physics.fas.harvard.edu/books/classical-mechanics}{作者书页及补充材料}。
+  \item[Tong]
+  David Tong, \emph{Classical Dynamics} 公开讲义。
+  重点对应Lagrange方法、小振动、刚体和Hamilton方法，适合核对推导。
+  \href{https://davidtong.org/teaching/classical-dynamics/}{讲义与习题}。
+  \item[Goldstein等]
+  Herbert Goldstein, Charles Poole and John Safko, \emph{Classical Mechanics}, 3rd ed.
+  适合进一步查阅正则变换、Hamilton--Jacobi理论等主题。
+\end{description}
 
-\paragraph{Newton决定性原理}
-一个力学系的初始状态（即各点在初始时刻的位置和速度）唯一地决定其运动。
+\section*{符号约定}
+矢量用黑体，点表示对时间求导。$L=T-V$表示Lagrangian，角动量用$\bm\ell$，
+Hamiltonian用$H$。$q_i,p_i$是正则坐标与动量；除明确写出的矩阵式外，求和通常显式标出。
+势能允许加任意常数。频率$\omega$均为角频率，周期为$2\pi/\omega$。

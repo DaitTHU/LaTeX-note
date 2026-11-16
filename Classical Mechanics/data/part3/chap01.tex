@@ -1,0 +1,122 @@
+\chapter{Hamilton方程与相空间}
+
+\section{为什么把速度换成动量}
+Lagrange方程以$(q,\dot q)$描述状态，通常是二阶方程。
+Hamilton方法改用$(q,p)$，得到一阶方程组，并把守恒律、正则变换和统计力学的相空间联系起来。
+这里$p_i$是广义动量，只有在特定坐标和相互作用下才等于$m\dot q_i$。
+
+设$L(q,\dot q,t)$足够光滑，且速度Hessian
+\begin{equation}
+ W_{ij}=\frac{\p^2L}{\p\dot q_i\p\dot q_j}
+\end{equation}
+可逆。由隐函数定理，$p_i=\p L/\p\dot q_i$可局部解出$\dot q_i(q,p,t)$。
+在这样的正则区域内定义Legendre变换
+\begin{equation}
+ H(q,p,t)=\sum_i p_i\dot q_i-L(q,\dot q,t).
+\end{equation}
+右边的速度最后必须用$q,p,t$表示，求偏导时把$q,p$视为独立变量。
+求全微分并使用Lagrange方程，
+\begin{equation}
+ \d H=\sum_i\dot q_i\d p_i-\sum_i\dot p_i\d q_i-\pv L t\d t,
+\end{equation}
+得到Hamilton方程
+\begin{equation}
+ \boxed{\dot q_i=\pv H{p_i},\qquad \dot p_i=-\pv H{q_i}},\qquad
+ \pv Ht=-\pv Lt.
+ \label{eq:cm-hamilton}
+\end{equation}
+这里$\p H/\p t$固定$q,p$，而$\p L/\p t$固定$q,\dot q$，再将速度代回。
+上述推导假定无另加的非保守广义力。速度Hessian奇异时，动量之间可能出现约束，
+不能直接求逆；需要另外的约束Hamilton方法。
+
+沿运动轨迹，$\dot H=\p H/\p t$，所以自治Hamiltonian守恒。
+但$H$是否等于实验室系机械能，仍需依据坐标选择和相互作用判断。
+时间相关的正则变换可以使新Hamiltonian与原能量相差一项。
+
+\begin{example}{电磁场中的正则动量}{cm-magnetic-hamilton}
+在SI制中，电荷$e$、质量$m$的非相对论粒子具有
+\begin{equation}
+ L=\frac12m\bm v^2+e\bm A(\bm r,t)\cdot\bm v-e\phi(\bm r,t).
+\end{equation}
+由分量求导可恢复$ m\dot{\bm v}=e(\bm E+\bm v\times\bm B)$，其中
+$\bm E=-\nabla\phi-\p_t\bm A$，$\bm B=\nabla\times\bm A$。
+正则动量与Hamiltonian是
+\begin{equation}
+ \bm p=m\bm v+e\bm A,\qquad
+ H=\frac{|\bm p-e\bm A|^2}{2m}+e\phi.
+\end{equation}
+因此机械动量$\bm\pi=m\bm v$一般不是正则动量。
+在规范变换$\bm A\mapsto\bm A+\nabla\chi$、$\phi\mapsto\phi-\p_t\chi$下，
+$L$增加$e\d\chi/\d t$，运动方程不变，$\bm p$则相应改变。
+\end{example}
+
+\section{Poisson括号组织运动方程}
+对相空间函数$f,g$，采用约定
+\begin{equation}
+ \{f,g\}=\sum_i\left(\pv f{q_i}\pv g{p_i}-\pv f{p_i}\pv g{q_i}\right).
+\end{equation}
+于是
+\begin{equation}
+ \dot f=\{f,H\}+\pv ft,\qquad
+ \{q_i,p_j\}=\delta_{ij},\quad \{q_i,q_j\}=\{p_i,p_j\}=0.
+\end{equation}
+不显含时间的$f$对该区域内所有轨道守恒，当且仅当$\{f,H\}=0$在该区域恒成立。
+括号满足反对称性、双线性、乘积规则和Jacobi恒等式；由Jacobi恒等式可证，
+两个不显含时间的守恒量的Poisson括号也是守恒量。
+
+在三维Cartesian正则坐标中，$\bm\ell=\bm r\times\bm p$满足
+\begin{equation}
+ \{\ell_i,\ell_j\}=\sum_k\epsilon_{ijk}\ell_k,\qquad
+ \{\ell^2,\ell_i\}=0.
+\end{equation}
+例如$\ell_z=xp_y-yp_x$生成绕$z$轴的无穷小主动旋转：
+$\delta x=\epsilon\{x,\ell_z\}=-\epsilon y$，$\delta y=\epsilon x$。
+机械角动量在带电粒子问题中不能未经检查就替代上述正则表达式。
+同样，由$\pi_i=p_i-eA_i$可得
+\begin{equation}
+ \{\pi_i,\pi_j\}=e\sum_k\epsilon_{ijk}B_k,
+\end{equation}
+说明磁场中机械动量分量并不相互Poisson对易。
+
+\section{Liouville定理：流动不压缩正则体积}
+令$\bm z=(q_1,\ldots,q_n,p_1,\ldots,p_n)$，Hamilton方程写成
+\begin{equation}
+ \dot{\bm z}=J\nabla H,\qquad
+ J=\begin{pmatrix}0&\mathbf 1\\-\mathbf 1&0\end{pmatrix}.
+\end{equation}
+对$C^2$的$H$，流场散度为
+\begin{equation}
+ \nabla_{\bm z}\cdot\dot{\bm z}
+ =\sum_i\left(\frac{\p^2H}{\p q_i\p p_i}
+ -\frac{\p^2H}{\p p_i\p q_i}\right)=0.
+\end{equation}
+因此随轨道流动的小体积$\prod_i\d q_i\d p_i$保持不变，即使$H$显含时间仍成立。
+若$\rho(q,p,t)$是粒子系综的概率密度，由连续性方程得
+\begin{equation}
+ \pv\rho t+\{\rho,H\}=0,
+\end{equation}
+即密度沿轨道不变。即使$q$是曲线坐标，只要$p$是其共轭动量，正则体积仍为$\prod_i\d q_i\d p_i$；
+换成一般非正则相空间变量时，需相应变换体积测度。
+
+对于阻尼谐振子，以$p=m\dot x$写$\dot x=p/m$、$\dot p=-kx-2\gamma p$，
+散度为$-2\gamma$，相面积收缩。它不是上述封闭Hamilton系统，
+不会构成Liouville定理的反例。
+相体积守恒也不表示每个形状保持不变，细长拉伸和折叠完全可能发生。
+
+\section{从解析结构到数值积分}
+对可分离Hamiltonian$H=p^2/(2m)+V(q)$，取固定步长$h>0$，速度Verlet方法为
+\begin{align}
+ p_{n+1/2}&=p_n-\frac h2V'(q_n),\\
+ q_{n+1}&=q_n+\frac hm p_{n+1/2},\\
+ p_{n+1}&=p_{n+1/2}-\frac h2V'(q_{n+1}).
+\end{align}
+它由势能与动能各自的精确Hamilton流组合而成，具有二阶精度、时间可逆性和辛结构。
+它一般不精确守恒原Hamiltonian，但在适当步长和光滑有界运动中常有较好的长期能量行为。
+对频率$\omega_0>0$的谐振子，线性稳定要求$0<h\omega_0<2$；边界$h\omega_0=2$一般已有线性增长。
+辛性不能挽救过大的时间步长；若直接把$h$改成依赖当前状态的自适应步长，通常也不再保持辛性。
+这提供了实用核对：数值轨道看似平滑仍不够，还应看能量误差、相空间形状及步长收敛。
+
+\paragraph{复习与阅读}
+首先检查Legendre变换能否求逆，再区分正则动量、机械动量和能量。
+Poisson括号给出演化与对称性，Liouville定理给出相流的体积性质。
+延伸阅读：Morin公开的Hamilton补充章；Tong讲义第4章。
