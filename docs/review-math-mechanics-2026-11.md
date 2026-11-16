@@ -84,6 +84,8 @@ python3 scripts/build_notes.py Calc LA CM
 
 提交前另以拟提交文件在临时目录中完成全部十卷的干净构建，不使用工作区的 `.aux`、`.log` 或 latexmk 缓存。十卷均通过，生成 PDF 的页数与工作区版本一致。
 
+首次 Linux CI 编译通过前七卷后，在统计力学发现 Fandol 缺少“㶲、㷻”，因此被缺字检查阻止。后续在 CI 中安装 `fonts-noto-cjk`，共享模板按需启用 Noto Serif CJK SC 回退，保留原有主字体与专业术语。此项平台兼容修正发生在前述三卷内容审阅之后。
+
 ## 数学核对资料
 
 - Rice：[逆函数与隐函数定理](https://math.rice.edu/~hardt/401F03/ift.pdf)；Keith Conrad：[积分号下求导](https://kconrad.math.uconn.edu/blurbs/analysis/diffunderint.pdf)。

@@ -7,6 +7,17 @@
 
 \LoadClass[a4paper, UTF8, openany, oneside]{ctexbook}
 
+% Fandol lacks some technical characters (e.g. exergy/anergy in thermodynamics).
+% Keep the platform's main fonts and use Noto only for missing CJK glyphs.
+\IfFontExistsTF{Noto Serif CJK SC}{%
+  \xeCJKsetup{AutoFallBack=true}
+  \setCJKfallbackfamilyfont{\CJKrmdefault}[
+    BoldFont={Noto Serif CJK SC Bold},
+    ItalicFont={Noto Serif CJK SC},
+    BoldItalicFont={Noto Serif CJK SC Bold}
+  ]{Noto Serif CJK SC}
+}{}
+
 \author{Dait}
 \date{}
 

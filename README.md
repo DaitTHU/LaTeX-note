@@ -23,7 +23,7 @@
 
 ## 本地编译
 
-需要 Python 3、XeLaTeX 和 latexmk。推荐安装完整的 TeX Live 或 MacTeX；精简安装至少应包含中文支持、`standalone`、`tikz`/`pgfplots`、`siunitx`、`tcolorbox` 等依赖。Ubuntu 的安装命令见 [构建工作流](.github/workflows/latex.yml)。
+需要 Python 3、XeLaTeX 和 latexmk。推荐安装完整的 TeX Live 或 MacTeX；精简安装至少应包含中文支持、`standalone`、`tikz`/`pgfplots`、`siunitx`、`tcolorbox` 等依赖。Linux 还应安装 `fonts-noto-cjk`：模板会用它补齐默认 Fandol 缺少的专业汉字，如“㶲、㷻”。Ubuntu 的安装命令见 [构建工作流](.github/workflows/latex.yml)。
 
 在仓库根目录运行：
 
