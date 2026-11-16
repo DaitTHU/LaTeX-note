@@ -1,0 +1,32 @@
+name: Compile notes
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-xetex texlive-lang-chinese texlive-science texlive-latex-extra
+      - name: Build all notes
+        run: python3 scripts/build_notes.py
+      - name: Upload compiled notes
+        uses: actions/upload-artifact@v4
+        with:
+          name: course-notes
+          path: '*/*.pdf'
+      - name: Upload diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-logs
+          path: '**/*.log'
