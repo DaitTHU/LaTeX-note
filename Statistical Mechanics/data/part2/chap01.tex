@@ -77,7 +77,7 @@
 		\Pr(X=k)=\frac{\Omega(X=k)}{\sum_{k=0}^N\Omega(X=k)}=\frac1{2^N}\binom Nk.
 	\]
 	随着$N$的增大，左边盒子中小球数量占比$x:=X/N$的概率密度$f(x)$越来越接近其最概然分布$1/2$，可以证明半高宽$\propto1/\sqrt N$。
-	对于宏观系统，粒子数$N$通常在$\NA\sim10^{23}$量级，在这一量级下，实际分布几乎一定是最概然分布。
+	对于宏观系统，粒子数$N$通常在$\NA\sim10^{23}$量级，在这一量级下，$X/N$以极高概率落在$1/2$的很小邻域内；这不意味着某个精确取值（例如$X=N/2$）的概率接近1。
 	\begin{center}
 		\includegraphics[width=0.6\linewidth]{figures/ML_distribution.pdf}
 		\captionof{figure}{分布的概率密度随$N$的变化}
@@ -136,7 +136,7 @@
 	\end{equation}
 	可得
 	\[
-		\ln\Om[M]\simeq N\ln N+\sum_i a_i\ln\biggp{\frac{\omega_i}{a_i}}.
+		\ln\Om[M]\simeq N\ln N-N+\sum_i a_i\biggb{\ln\biggp{\frac{\omega_i}{a_i}}+1}.
 	\]
 	结合粒子数和内能的条件：
 	\begin{subequations}
@@ -165,7 +165,7 @@
 
 \begin{theorem}
 	{量子粒子全同性原理}{}
-	量子粒子是全同的、不可分辨的，任意交换两个粒子的位置不会改变系统的微观状态。
+	同种量子粒子是全同的、不可分辨的，交换两个全同粒子的标签不会改变物理状态；不同种粒子则可以区分。
 \end{theorem}
 
 \begin{definition}
@@ -175,7 +175,7 @@
 
 \begin{theorem}
 	{Pauli不相容原理}{Pauli exclusion principle}
-	两个Fermi子不可能处于同一量子态。
+	两个全同Fermi子不可能占据同一单粒子量子态。
 \end{theorem}
 
 \begin{definition}{Bose系统}{Bose system}
@@ -208,7 +208,7 @@
 		\implies
 		a_i=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}-1}.
 	\]
-	验证$\p^2L/\p a_i^2=-\omega_i/a_i(a_i+\omega_i)<0$确为极大值点。
+	验证$\p^2L/\p a_i^2=-\omega_i/[a_i(a_i+\omega_i)]<0$确为极大值点。
 \end{proof}
 
 \begin{definition}{Fermi系统}{Fermi System}
@@ -230,7 +230,7 @@
 \end{definition}
 
 \begin{proof}
-	假设$\omega_i\gg a_i\gg 1$，
+	假设每个粗粒化能级组均有$a_i\gg1$且$\omega_i-a_i\gg1$，以便使用Stirling近似；不要求$a_i\ll\omega_i$，否则会预先排除强简并情形。
 	可得
 	\[
 		\ln\Om[F]\simeq\sum_i\biggb{a_i\ln\biggp{\frac{\omega_i}{a_i}-1}-\omega_i\ln\biggp{1-\frac{a_i}{\omega_i}}}.
@@ -241,7 +241,7 @@
 		\implies
 		a_i=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}+1}.
 	\]
-	验证$\p^2L/\p a_i^2=-\omega_i/a_i(\omega_i-a_i)<0$确为极大值点。
+	验证$\p^2L/\p a_i^2=-\omega_i/[a_i(\omega_i-a_i)]<0$确为极大值点。
 \end{proof}
 
 \begin{definition}
@@ -279,7 +279,7 @@
 \let\oldm\m
 \renewcommand{\m}{\mathrm{m}}
 
-在最概然分布$\{a_{i,\m}\}$附近$a_i=a_{i,\m}+\vd a_i$对$\ln\Omega$展开，得
+对Boltzmann统计，在满足$\sum_i\vd a_i=0$、$\sum_i\varepsilon_i\vd a_i=0$的涨落下，在最概然分布$\{a_{i,\m}\}$附近$a_i=a_{i,\m}+\vd a_i$对$\ln\Omega$展开，得
 \begin{align*}
 	\ln\Omega\{a_i\}&=\ln\Omega\{a_{i,\m}\}+\sum_i\pp{a_i}\ln\Omega\{a_{i,\m}\}\vd a_i+\frac12\sum_i\frac{\p^2}{\p a_i^2}\ln\Omega\{a_{i,\m}\}\vd a_i^2+\bigo(\vd a_i^3)\\
 	&\simeq\ln\Omega\{a_{i,\m}\}+0-\frac12\sum_i\frac{\vd a_i^2}{a_{i,\m}}+\bigo(\vd a_i^3).
@@ -323,7 +323,7 @@
 	\]
 	内能
 	\[
-		U=\sum_i a_i\varepsilon_i=\e^{-\alpha}\sum_i \varepsilon_i\e^{-\beta\varepsilon_i}=-\frac NZ\pv Z\beta=-N\pv{\ln Z}\beta.
+		U=\sum_i a_i\varepsilon_i=\e^{-\alpha}\sum_i \omega_i\varepsilon_i\e^{-\beta\varepsilon_i}=-\frac NZ\pv Z\beta=-N\pv{\ln Z}\beta.
 	\]
 	内能的微分
 	\[
@@ -357,7 +357,7 @@
 		&=-U\d\beta-\beta(\d U-T\d S)=-\d(\beta U)+\beta T\d S.
 	\end{align*}
 	可得$\d S=\d(N\ln Z+\beta U)/\beta T$，
-	两边均为全微分，要求系数$1/\beta T=\kB$为常数，可得
+	将理想气体的统计结果与热力学温标比较，可确定$\beta=1/(\kB T)$；这不能仅由两边均为全微分推出。于是可得
 	\begin{align*}
 		S&=S_0+\kB(N\ln N+\alpha N+\beta U)
 		=S_0+\kB\biggp{N\ln N+\sum_i a_i(\alpha+\beta\varepsilon_i)}\\
@@ -411,7 +411,7 @@
 \end{remark}
 
 \begin{theorem}{极限定理}{limit theorem}
-	在大粒子数极限下，一个量子态在$\mu$空间中对应$h^\gamma$的相体积。
+	在能谱可作连续近似的半经典极限下，每个平动或轨道量子态平均对应$h^\gamma$的相体积；自旋等内部简并度需另行计入。
 \end{theorem}
 
 \begin{corollary}

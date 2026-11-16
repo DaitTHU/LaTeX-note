@@ -1,5 +1,5 @@
 \chapter{正交性}
-将列向量看做矩阵，则实向量$v$和$w$的内积可以看做$\inp vw = v\tp w.$
+本章取$\FF=\RR$，讨论有限维实内积空间；对$\RR^n$使用标准内积$\inp vw=v\tp w$。下文涉及正交性的线性空间均已指定这一正定内积。
 \begin{definition}{向量的正交}{vector orthogonal}
 	若$\inp vw=0$，则称$v$和$w$正交(orthogonal)，记作$v\perp w$。
 \end{definition}
@@ -48,18 +48,15 @@
 其中$x_\mathrm r\in\C(A\tp),\enspace x_\mathrm n\in\N(A)$，且这种分解是唯一的。
 \end{theorem}
 \begin{proof}
-	由
+	由正交性，$\C(A\tp)\cap\N(A)=\{0\}$；又由线性代数基本定理，
 	\[
-		Ax=A(x_\mathrm r+x_\mathrm n)=Ax_\mathrm r\in\C(A\tp)
+		\dim\C(A\tp)+\dim\N(A)=\rank(A)+n-\rank(A)=n.
 	\]
-	知，只需证明：
-	$\forall b\in\C(A\tp)$，存在唯一的$x_\mathrm r\in\C(A\tp)$使得$Ax_\mathrm r=b.$
-	
-	若存在$x_\mathrm r,x_\mathrm r'\in\C(A\tp)$满足$Ax_\mathrm r=Ax_\mathrm r'$，则$x_\mathrm r-x_\mathrm r'$同时在$\C(A\tp)$和$N(A)$中，故$x_\mathrm r-x_\mathrm r'=0.$
+	因此这两个子空间的基合起来构成$\RR^n$的一组基，保证每个$x$都有上述分解。若存在两种分解，则两者的行空间分量之差也在零空间中，只能为零，故分解唯一。
 \end{proof}
 \begin{theorem}
 	{矩阵的可逆部分}{}
-	对于矩阵$A$，把$N(A)$和$\N(A\tp)$对应的行和列去掉之后总是一个$r$阶可逆矩阵。
+	设$\rank(A)=r$。限制映射$A:\C(A\tp)\to\C(A)$是双射；在这两个$r$维空间中分别选基，其表示矩阵为$r$阶可逆矩阵。这里需要先按这四个子空间选择坐标基，不能把零空间理解为原矩阵中可以直接删除的若干行或列。
 \end{theorem}
 \begin{center}
     \begin{tikzpicture}
@@ -87,7 +84,7 @@
 \section{投影}
 \begin{example}
 	{向量在向量上的投影}{}
-	考虑向量$b$在向量$a$上的投影(projection)~$p$，依内积的性质：
+	考虑向量$b$在非零向量$a$所张成的直线上的投影(projection)~$p$，依内积的性质：
 	\[
 		p=(\hat a\cdot b)\hat a=\frac{a\tp b}{a\tp a}a=\frac{aa\tp}{a\tp a}b.
 	\]
@@ -109,14 +106,14 @@
 若$A\tp A$可逆，则$x=(A\tp A)\iv A\tp b$，故$b$在$\C(A)$上的投影为$p=Ax=A(A\tp A)\iv A\tp b$。
 \begin{definition}
 	{投影矩阵}{projection matrix}
-	一个矩阵$A$的投影矩阵(projection matrix)为
+	对列满秩矩阵$A\in\RR^{m\times n}$，其列空间的正交投影矩阵(orthogonal projection matrix)为
 	\begin{align}
 		P=A(A\tp A)\iv A\tp.
 	\end{align}
 \end{definition}
 
 \begin{corollary}
-	$P^2=P$，这也是符合投影性质的。
+	$P^2=P$且$P\tp=P$。幂等性表示重复投影不改变结果；对称性保证投影方向与目标子空间正交。仅有$P^2=P$也可能是斜投影。
 \end{corollary}
 
 \begin{remark}
@@ -146,15 +143,19 @@
 \section{最小二乘法}
 
 \paragraph{问题背景}
-考虑线性方程组$Ax=b$。当$A$的行数$m>$列数$n$甚至$m\gg n$时，一般地$A$不可逆，$x$无解，即$\forall x\in\RR^n$均有$\norm{b-Ax}>0$。但可以找到一个解$x'$使得$\norm{b-Ax}$最小：
+考虑$A\in\RR^{m\times n}$和$b\in\RR^m$。当$m>n$时，方程组可能无精确解，但是否有解仍取决于$b\in\C(A)$，不能单靠矩阵形状判断。无论是否相容，都可寻找使$\norm{b-Ax}$最小的最小二乘解$x'$：
 \[
-	x'=\arg\min_x\norm{b-Ax},
+	x'\in\arg\min_x\norm{b-Ax},
 \]
-由投影的性质，$Ax'$是$b$在$\C(A)$上的投影，即
+由投影的性质，$Ax'$是$b$在$\C(A)$上的唯一正交投影，所有最小二乘解均满足正规方程
+\[
+ A\tp Ax'=A\tp b.
+\]
+当且仅当$A$列满秩时，系数向量$x'$唯一，此时
 \begin{equation}
 	x'=(A\tp A)\iv A\tp b.
 \end{equation}
-其一个典型应用就是最小二乘法。
+若$A$列不满秩，拟合向量$Ax'$仍唯一，但系数$x'$可加上任意$\N(A)$中的向量。以下拟合公式均须先检查列满秩条件。
 
 \begin{example}{直线拟合(最小二乘法)}{least square}
 	$m$组数据$(x_i,y_i)$，确定线性关系$y=a+bx$中的系数$a,b$，即 
@@ -170,7 +171,7 @@
 		\end{bmatrix}\iff Ax=b.
 	\]
 	\newcommand*{\sumi}[1]{\langle{#1}\rangle}
-	$A$列满秩$\rank(A)=2$，故$A\tp A$可逆，
+	若$m\geq2$且$x_i$不全相同，则$A$列满秩$\rank(A)=2$，从而$A\tp A$可逆；否则截距与斜率不能分别确定。满足满秩条件时，
 	\[
 		A\tp A=
 		\begin{bmatrix}
@@ -187,7 +188,7 @@
 	\begin{equation}
 		\begin{cases}
 			a=\frac{\sumi{x_i^2}\sumi{y_i}-\sumi{x_i}\sumi{x_iy_i}}{m\sumi{x_i^2}-\sumi{x_i}^2}\\[2ex]
-			b=\frac{-\sumi{x_i}\sumi{y_i}-m\sumi{x_iy_i}}{m\sumi{x_i^2}-\sumi{x_i}^2}
+			b=\frac{-\sumi{x_i}\sumi{y_i}+m\sumi{x_iy_i}}{m\sumi{x_i^2}-\sumi{x_i}^2}
 		\end{cases}
 	\end{equation}
 	\iffalse
@@ -210,7 +211,7 @@
 	\[
 		\begin{cases}
 			a=\frac{\textstyle\sum_{i=1}^n x_i^2\sum_{i=1}^n y_i-\sum_{i=1}^n x_i\sum_{i=1}^n x_iy_i}{\textstyle{n\sum_{i=1}^n x_i^2-\bigp{\sum_{i=1}^n x_i}^2}}\\[2ex]
-			b=\frac{\textstyle-\sum_{i=1}^n x_i\sum_{i=1}^n y_i-n\sum_{i=1}^n x_iy_i}{\textstyle{n\sum_{i=1}^n x_i^2-\bigp{\sum_{i=1}^n x_i}^2}}
+			b=\frac{\textstyle-\sum_{i=1}^n x_i\sum_{i=1}^n y_i+n\sum_{i=1}^n x_iy_i}{\textstyle{n\sum_{i=1}^n x_i^2-\bigp{\sum_{i=1}^n x_i}^2}}
 		\end{cases}
 	\]
 	\fi
@@ -232,7 +233,7 @@
 			y_1\\\vdots\\y_m
 		\end{bmatrix}\iff Ax=b.
 	\]
-	从而$x'=(A\tp A)\iv A\tp b.$
+	当采样点中至少有$n+1$个互不相同的$x_i$时，$A$列满秩，从而系数唯一且$x'=(A\tp A)\iv A\tp b$；若不满足此条件，则系数不唯一。
 	% \[
 	% 	A_{ij}=x_i^{j-1},\quad(A\tp A)_{ij}=\sum_{k=1}^nx_k^{i+j-2}.
 	% \]
@@ -256,7 +257,7 @@
 
 \begin{definition}
 	{正交矩阵}{orthogonal matrix}
-	将一组正交归一基$\{q_1,\ldots,q_n\}$按列排成矩阵
+	将$\RR^n$的一组正交归一基$\{q_1,\ldots,q_n\}$按列排成矩阵
 	\[
 		Q=[q_1\enspace\cdots\enspace q_n],
 	\]
@@ -307,7 +308,7 @@
 			b_i:=a_i-\sum_{j=1}^{i-1}\frac{\inp{b_j}{a_i}}{\inp{b_j}{b_j}}b_j.
 		\]
 	\end{compactenum}
-	得到一组正交基$\{b_1,\ldots,b_n\}$，再归一化$q_i=\hat b_i$，便得到一组正交归一基$\{q_1,\ldots,q_n\}$。
+	因为输入向量线性无关，每个$b_i$都非零。得到正交基$\{b_1,\ldots,b_n\}$后，再归一化$q_i=\hat b_i$，便得到正交归一基。若输入只是生成集而非基，则可能出现$b_i=0$；此时应跳过该向量，不能除以其范数。
 \end{method}
 
 \subsection{\texorpdfstring{$QR$}{QR}分解}
@@ -322,10 +323,11 @@
 			&&&q_n\tp a_n
 		\end{bmatrix}
 	\]
-	$R$是个上三角矩阵，故$A$可以写成正交矩阵和上三角矩阵的乘积：
+	$Q=[q_1\enspace\cdots\enspace q_n]\in\RR^{m\times n}$满足$Q\tp Q=I_n$，$R\in\RR^{n\times n}$是对角元非零的上三角矩阵，且$\C(Q)=\C(A)$，故
 	\begin{equation}
 		A=QR.
 	\end{equation}
+	这称为薄QR分解。当$m>n$时，$Q$不是正交方阵，$QQ\tp$是$\C(A)$上的投影；仅当$m=n$时才有$QQ\tp=I_m$及$Q\tp=Q\iv$。
 \end{theorem}
 
 \begin{remark}
@@ -333,5 +335,5 @@
 	\[
 		x=(A\tp A)\iv A\tp b=R\iv Q\tp b.
 	\]
-	效率更高。
+	计算时通过回代求解$Rx=Q\tp b$，不必显式形成$R\iv$或$A\tp A$。
 \end{remark}

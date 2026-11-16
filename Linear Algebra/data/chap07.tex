@@ -1,5 +1,5 @@
 \chapter{奇异值分解}
-特征值和特征向量只适用于方阵，对于一般的$m\times n$矩阵$A$，有没有类似的操作？
+特征值和特征向量只适用于方阵，对于一般的实$m\times n$矩阵$A$，有没有类似的操作？
 
 \noindent
 考虑$A\tp A$和$AA\tp$，他们都是半正定的，因为$\forall x$
@@ -10,7 +10,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 \begin{definition}{奇异值}{singular value}
 	$A\tp A$是半正定的，因此所有特征值$\lambda_i\geqslant 0$，矩阵$A$的奇异值(singular value)便定义为$A\tp A$特征值的平方根：$\sigma_i:=\sqrt{\lambda_i}$。
 
-	为了后续方便，我们将所有奇异值从大到小排列：
+	为了后续方便，本章按$A\tp A$的$n$个特征值排列；若$m<n$，这相当于在通常的$\min(m,n)$个奇异值后补零：
 	\[
 		\sigma_1\geqslant\sigma_2\geqslant\cdots\geqslant\sigma_n\geqslant 0.
 	\]
@@ -72,7 +72,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	\]
 \end{proof}
 \begin{theorem}{}{ATA, AAT's singular value are same}
-	$A\tp A$和$AA\tp$的非零特征值相同。
+	$A\tp A$和$AA\tp$的非零特征值相同，且对应的代数重数相同。
 \end{theorem}
 \begin{proof}
 	假设$x_i$是$A\tp A$的特征值为$\lambda_i\neq 0$的特征向量，
@@ -87,7 +87,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	
 	同理，如果$x_i$是$AA\tp$的特征值为$\lambda_i\neq 0$的特征向量，则$A\tp x_i$是$A\tp A$的特征值为$\lambda_i$的特征向量。
 	
-	从而$A\tp A$和$AA\tp$非零特征值对应的特征向量一一对应。
+	对于固定$\lambda_i>0$，映射$x\mapsto Ax$在两个特征子空间之间的逆映射是$y\mapsto A\tp y/\lambda_i$，故几何重数相同；两个矩阵均可对角化，代数重数也相同。
 \end{proof}
 
 \begin{corollary}
@@ -96,7 +96,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 		\item $\{v_1,\ldots,v_r\}$是$\C(A\tp)$的正交归一基，$V_r=(v_1,\ldots,v_r)$；
 		\item $\{v_{r+1},\ldots,v_n\}$是$\N(A)$的正交归一基，$V_{n-r}=(v_{r+1},\ldots,v_n)$；
 		\item $\{u_1,\ldots,u_r\}$是$\C(A)$的正交归一基，$U_r=(u_1,\ldots,u_r)$；
-		\item $\{v_{r+1},\ldots,v_n\}$是$\N(A\tp)$的正交归一基，$U_{n-r}=(u_{r+1},\ldots,v_m)$。
+		\item $\{u_{r+1},\ldots,u_m\}$是$\N(A\tp)$的正交归一基，$U_{m-r}=(u_{r+1},\ldots,u_m)$。
 	\end{itemize}
 \end{corollary}
 
@@ -106,7 +106,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 \end{definition}
 
 \begin{remark}
-	秩一矩阵$A\in\FF^{m\times n}$总可以表示成$A=vu\tp$，其中$u\in\FF^m,v\in\FF^n$。
+	秩一矩阵$A\in\FF^{m\times n}$总可以表示成$A=uv\tp$，其中非零向量$u\in\FF^m,v\in\FF^n$。
 \end{remark}
 
 \begin{example}{数据压缩}{}
@@ -120,8 +120,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 			V_r\tp\\V_{n-r}\tp
 		\end{bmatrix}=U_rDV_r\tp=\sum_{i=1}^r\sigma_iu_iv_i\tp.
 	\]
-	若$r<\min(m,n)$，则可以用$U_r,D,V_r$这三个矩阵的$r(m+1+n)$个分量完全确定$A$原来的$mn$个分量。
-	由此实现了数据的压缩(无损)。
+	可以用$U_r,D,V_r$中的$r(m+1+n)$个存储数完全确定$A$原来的$mn$个分量。只有$r(m+1+n)<mn$时，这种直接存储方式才节省空间；$r<\min(m,n)$本身并不足以保证压缩。这里的无损是指精确算术下的代数重构。
 	\tcblower
 	甚至可以把很小的奇异值当成0，只取前$k$项，进一步压缩图片(有损)。误差
 	\[
@@ -134,8 +133,11 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	因此误差由忽略的奇异值控制，忽略的越少误差越小。
 
 	\begin{center}
-        \includegraphics[width=0.8\linewidth]{figures/svcompress.pdf}
-        \captionof{figure}{基于奇异值分解的doge meme灰度图的压缩}
+        \begin{minipage}{\linewidth}
+            \centering
+            \includegraphics[width=0.7\linewidth]{figures/svcompress.pdf}
+            \captionof{figure}{基于奇异值分解的doge meme灰度图的压缩}
+        \end{minipage}
     \end{center}
 \end{example}
 
@@ -161,7 +163,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	等号可在$x=cv_1$时成立。
 \end{proof}
 \begin{definition}{矩阵的模}{norm of matrix}
-	矩阵的模(norm)定义为 
+	本章的矩阵范数特指Euclid向量范数诱导的算子2-范数（谱范数），定义为
 	\begin{equation}
 		\norm A:=\max_{x\neq 0}\frac{\norm{Ax}}{\norm x}=\sigma_1.
 	\end{equation}
@@ -184,7 +186,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	\]
 	故
 	\[
-		\norm{A+B}\leq\frac{\norm{(A+B)x}}{\norm x}\leqslant\norm A+\norm B.
+		\norm{A+B}=\max_{x\neq0}\frac{\norm{(A+B)x}}{\norm x}\leqslant\norm A+\norm B.
 	\]
 \end{proof}
 
@@ -194,7 +196,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 \]
 
 \begin{theorem}{Eckart-Young-Mirsky定理}{Eckart-Young-Mirsky theorem}
-	同矩阵$A$最接近的秩为$k$的矩阵为
+	在上述谱范数下，同矩阵$A$最接近的秩不超过$k<\rank A$的矩阵之一为
 	\begin{equation}
 		A_k=\sum_{i=1}^k\sigma_iu_iv_i\tp.
 	\end{equation}
@@ -204,7 +206,7 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	\[
 		\norm{A-B}\geqslant\norm{A-A_k}=\sigma_{k+1}.
 	\]
-	设$w=c_1v_1+\cdots+c_{k+1}v_{k+1}$，因为$\rank(B)=k$，故$Bv_1,\ldots,Bv_{k+1}$必然线性相关，继而存在非零的$c_1,\ldots,c_{k+1}$使得$Bw=0$，在此基础上再归一化$w$，从而
+	设$w=c_1v_1+\cdots+c_{k+1}v_{k+1}$，因为$\rank(B)=k$，故$Bv_1,\ldots,Bv_{k+1}$必然线性相关，继而存在不全为零的$c_1,\ldots,c_{k+1}$使得$Bw=0$，在此基础上再归一化$w$，从而
 	\begin{align*}
 		\norm{A-B}^2&\geqslant\norm{(A-B)w}^2=\norm{Aw}^2\\
 		&=\sigma_1^2c_1^2+\cdots+\sigma_{k+1}^2c_{k+1}^2\geqslant\sigma_{k+1}^2(c_1^2+\cdots+c_{k+1}^2)=\sigma_{k+1}^2.
@@ -231,13 +233,15 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	\begin{subequations}
 		\begin{align}
 			AA^+A&=A,\\
-			A^+AA^+&=A^+.
+			A^+AA^+&=A^+,\\
+			(AA^+)\tp&=AA^+,\\
+			(A^+A)\tp&=A^+A.
 		\end{align}
 	\end{subequations}
 \end{corollary}
 
 \begin{remark}
-	伪逆与原矩阵的乘积并不是单位矩阵：
+	伪逆与原矩阵的乘积一般不是单位矩阵：
 	\[
 		A^+A=V\begin{bmatrix}
 			I_r&0\\0&0
@@ -256,16 +260,20 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 	\[
 		A\tp Ax=A\tp b,
 	\]
-	的解为$x^+=A^+b$。
+	的全部解为
+	\[
+		x=A^+b+z,\qquad z\in\N(A).
+	\]
+	其中$x^+=A^+b$是唯一的最小Euclid范数解；仅当$A$列满秩时，最小二乘解本身才唯一。
 \end{theorem}
 \begin{proof}
 	\[
 		A\tp Ax^+=V\Sigma\tp U\tp U\Sigma V\tp V\Sigma^+U\tp b=V\Sigma\tp U\tp b=A\tp b.
-		\qedhere
 	\]
+	任意另一解$x$满足$A\tp A(x-x^+)=0$，故$A(x-x^+)=0$。又$x^+\in\C(A\tp)=\N(A)^\perp$，所以$\norm{x^++z}^2=\norm{x^+}^2+\norm z^2$，最小范数恰在$z=0$时达到。
 \end{proof}
 \section{主成分分析}
-一组数据$\mu=(\mu_1,\ldots,\mu_n)$来源于$n$个样本，其样本均值(mean)和样本方差(variance)分别为
+一组数据$\mu=(\mu_1,\ldots,\mu_n)$来源于$n\geq2$个样本，其样本均值(mean)和样本方差(variance)分别为
 \[
 	\bar\mu=\frac1n\sum_{i=1}^n\mu_i,\quad\sigma^2=\frac1{n-1}\sum_{i=1}^n(\mu_i-\bar\mu)^2.
 \]
@@ -284,14 +292,14 @@ $AA\tp$同理，因此$A\tp A$和$AA\tp$都可以对角化。
 \begin{method}{主成分分析}{principal component analysis}
 	主成分分析(principal component analysis, PCA)：找到原有数据的一系列线性组合作为新的数据，新数据之间的协方差为0.
 \end{method}
-利用$A=U\Sigma V\tp$，定义新的数据矩阵$B:=U\tp A=\Sigma V$，$B$的协方差矩阵
+利用$A=U\Sigma V\tp$，定义新的数据矩阵$B:=U\tp A=\Sigma V\tp$，$B$的协方差矩阵
 \[
 	\frac{BB\tp}{n-1}=\frac{\Sigma\Sigma\tp}{n-1}
 \]
-是对角的，故$B$之间协方差为0。
+是对角的，故$B$的不同行之间协方差为0；不相关并不一般等于统计独立。
 
 总方差在这种变换下是不变的：
 \[
 	\tr\biggp{\frac{BB\tp}{n-1}}=\frac{\tr(U\tp AA\tp U)}{n-1}=\frac{\tr(UU\tp AA\tp)}{n-1}=\tr\biggp{\frac{AA\tp}{n-1}}.
 \]
-所有数据点分布在$\{u_1,\ldots,u_r\}$张成的$\C(A)$上，$u_1$是所有数据变化最大的方向（方差最大）、$u_2$次之……因此$\{u_1,\ldots,u_r\}$称作主成分(principal component)。
+所有中心化后的数据点分布在$\{u_1,\ldots,u_r\}$张成的$\C(A)$上，原始数据点则位于行均值向量平移后的仿射子空间中。由于中心化后$A(1,\ldots,1)\tp=0$，有$r\leq\min(m,n-1)$。在单位方向中，$u_1$是所有数据变化最大的方向（方差最大）、$u_2$次之……因此$u_i$称为主成分方向，$B$的第$i$行是相应的主成分得分，其样本方差为$\sigma_i^2/(n-1)$。不同物理量的单位或尺度差异会影响这些方向，是否标准化需由问题决定。

@@ -29,9 +29,9 @@
 \]
 由于存在光程差，$O$点上应当观测到干涉条纹，且随着$u$的改变，干涉条纹也应当发生偏移。
 然而，Michelson-Morley的实验结果发现：不论装置的运动状态和方位如何，光学干涉条纹并未发生任何改变。
-这也就从实验上证明了以太并不存在，光速恒为常数$c$！
+实验未观察到经典静止以太模型所预言的条纹位移，在实验精度内排除了这一模型的预言；单一实验本身并不能证明所有可能的以太模型都不存在，也不能独立推出狭义相对论的全部假设。
 
-为了解释这个实验结果，Einstein提出了狭义相对论(special relativity)。
+狭义相对论(special relativity)以相对性原理和真空光速不变为基本假设，为此类实验与电磁学提供了统一描述。
 
 \section{狭义相对论}
 \label{sec:special relativity}
@@ -49,7 +49,7 @@
 
 \begin{theorem}
     {光速不变假设}{postulate of the constancy of the speed of light}
-    光速有限且与光源的运动无关。
+    真空中的光在所有惯性系中均以相同的有限速率$c$传播，与光源和观察者的运动无关。
 \end{theorem}
 
 \subsection{Lorentz变换}
@@ -64,7 +64,7 @@
     		ct'\\x'\\y'\\z'
     	\end{bmatrix}=
     	\begin{bmatrix}
-    		\gamma&\gamma\beta\\-\gamma\beta&\gamma\\ &&1\\ &&&1
+        \gamma&-\gamma\beta\\-\gamma\beta&\gamma\\ &&1\\ &&&1
     	\end{bmatrix}
     	\begin{bmatrix}
     		ct\\x\\y\\z
@@ -78,7 +78,7 @@
 
 如果质点在$S$系中有$x$方向的速度$u=\d x/\d t$，则其在$S'$中的速度为
 \begin{equation}
-    u'=\dv{x'}{t'}=\frac{\gamma(\d x-v\d t)}{\gamma(\d t-v\d t/c^2)}=\frac{u-v}{1-vu/c^2}.
+    u'=\dv{x'}{t'}=\frac{\gamma(\d x-v\d t)}{\gamma(\d t-v\d x/c^2)}=\frac{u-v}{1-vu/c^2}.
 \end{equation}
 
 \paragraph{四矢量}
@@ -86,7 +86,7 @@
 为讨论形式的统一，我们定义四矢量(4-vector)。
 
 \begin{definition}{四矢量}{4-vector}
-    定义逆变量(contravariant)形如
+    四矢量的逆变分量(contravariant components)不仅有四个分量，还必须按$a'{}^\mu=\Lambda^\mu{}_\nu a^\nu$变换，记为
     \begin{equation}
         a^\mu\equiv(a^0,a^1,a^2,a^3)\tp,
     \end{equation}
@@ -116,7 +116,7 @@
 \[
     \bar x^\mu=\Lambda^\mu{}_\nu x^\nu,\quad\Lambda^\mu{}_\nu\equiv
     \begin{bmatrix}
-		\gamma&\gamma\beta\\-\gamma\beta&\gamma\\ &&1\\ &&&1
+		\gamma&-\gamma\beta\\-\gamma\beta&\gamma\\ &&1\\ &&&1
 	\end{bmatrix}
 \]
 
@@ -170,7 +170,7 @@
 \end{remark}
 
 \begin{corollary}
-    逆变坐标$x_\mu$可由协变坐标$x^\mu$和度规张量得到
+    协变坐标$x_\mu$可由逆变坐标$x^\mu$和度规张量得到
     \begin{equation}
         x_\mu=g_{\mu\nu}x^\nu.
     \end{equation}
@@ -184,10 +184,9 @@
 
 \paragraph{相对论运动学}
 
-由于钟慢效应(time dilation)，在静止系中的时间流速是最慢的，可定义
-固有时间(proper time)：
+沿粒子的类时世界线，共动时钟测得的时间称为固有时间(proper time)。若粒子在惯性系中速度为$u$，则
 \[
-    \d\tau=\frac{\d t}{\sqrt{1-u^2/c^2}}\equiv\gamma_u\d t.
+    \d\tau=\sqrt{1-u^2/c^2}\,\d t\equiv\frac{\d t}{\gamma_u}.
 \]
 进而定义四矢量速度
 \begin{equation}
@@ -267,7 +266,7 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
 \section{相对论电动力学}
 为什么会有磁场？利用静电学和相对论，我们可以计算出载电流线和运动电荷之间的磁力，而不需要援引磁力定律。
 \begin{example}{导线的磁场力}{}
-    $S$系中有一导线，其中正负电荷静止时的线密度为$\pm\lambda_0$，通电正负电荷后在导线中反向运动，速度$v_\pm=\pm v$，则正负电荷的线密度为$\lambda_\pm=\pm\gamma\lambda_0$，电流为$I=2\lambda_0v$，导线外距离$r$处有一电荷$q$沿平行于导线的方向以速度$u<v$运动。
+    $S$系中有一导线，其中正负电荷静止时的线密度为$\pm\lambda_0$，通电正负电荷后在导线中反向运动，速度$v_\pm=\pm v$，则正负电荷的线密度为$\lambda_\pm=\pm\gamma\lambda_0$，记$\lambda=\gamma\lambda_0>0$，电流为$I=2\lambda v$，导线外距离$r$处有一电荷$q$沿平行于导线的方向以速度$u<v$运动。
 
     %$S$系中导线没有净电荷，因此电荷$q$不受电场力。
     \begin{center}
@@ -290,7 +289,7 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
     \]
     变回到$S$系中，
     \[
-        F=\frac1{\gamma_u}F'=-\frac{vu\lambda}{c^2}\frac q{\pi\varepsilon_0r}=-qu\frac{\mu_0I}{2\pi}.
+        F=\frac1{\gamma_u}F'=-\frac{vu\lambda}{c^2}\frac q{\pi\varepsilon_0r}=-qu\frac{\mu_0I}{2\pi r}.
     \]
     而$S$系中导线没有净电荷，$q$不受电场力，故此力只能是磁场力！
 \end{example}
@@ -422,9 +421,9 @@ $\mu=1,2,3$给出$x,y,z$分量
 \end{align*}
 展开，可见对称性：
 \begin{alignat*}{2}
-    E_x&=-\pv\Phi x-\pv{A_x}t,&\qquad B_x&=\pv{A_y}z-\pv{A_z}y,\\
-    E_y&=-\pv\Phi y-\pv{A_y}t,&B_y&=\pv{A_z}x-\pv{A_x}z,\\
-    E_z&=-\pv\Phi z-\pv{A_z}t,&B_z&=\pv{A_x}y-\pv{A_y}x,
+    E_x&=-\pv\Phi x-\pv{A_x}t,&\qquad B_x&=\pv{A_z}y-\pv{A_y}z,\\
+    E_y&=-\pv\Phi y-\pv{A_y}t,&B_y&=\pv{A_x}z-\pv{A_z}x,\\
+    E_z&=-\pv\Phi z-\pv{A_z}t,&B_z&=\pv{A_y}x-\pv{A_x}y,
 \end{alignat*}
 
 四矢量势
@@ -437,7 +436,7 @@ $\mu=1,2,3$给出$x,y,z$分量
 \end{equation}
 % 注意这里是协变量$x_\mu$，$x_0=-ct$有一个负号。
 \begin{example}{匀速运动电荷的场·续}{E, B of q with v, II}
-    续\exmref{exm:E, B of q with v}，我们用势的方法再做一遍。$S'$系中电荷静止 
+    续\exmref{exm:E, B of q with v}，我们用势的方法再做一遍。令两坐标系的原点在$t=t'=0$重合，$S'$系中电荷静止于原点
     \[
         \Phi'=\frac1{4\pi\varepsilon_0}\frac q{r'},\quad\bm A'=\bm 0,
     \]
@@ -447,11 +446,11 @@ $\mu=1,2,3$给出$x,y,z$分量
     \]
     其中 
     \[
-        r'=\sqrt{x'^2+y'^2+z'^2}=\sqrt{\gamma^2x^2+y^2+z^2}.
+        r'=\sqrt{x'^2+y'^2+z'^2}=\sqrt{\gamma^2(x-vt)^2+y^2+z^2}.
     \]
     则
     \[
-        \bm E=-\nabla\Phi-\pv{\bm A}t=\frac1{4\pi\varepsilon_0}\frac{\gamma q\bm r}{(\gamma^2x^2+y^2+z^2)^{3/2}}.
+        \bm E=-\nabla\Phi-\pv{\bm A}t=\frac1{4\pi\varepsilon_0}\frac{\gamma q\bm R}{\bigb{\gamma^2(x-vt)^2+y^2+z^2}^{3/2}},\quad\bm R=(x-vt,y,z).
     \]
 \end{example}
 利用四矢量势，Maxwell方程组变为

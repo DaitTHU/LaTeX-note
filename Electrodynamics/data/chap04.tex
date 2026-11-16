@@ -322,10 +322,10 @@
     \[
         J_\phi=I\sin\theta'\vd(\cos\theta')\frac{\delta(r'-a)}a.
     \]
-    在Coulomb规范下，矢量势$\bm A$也仅有$\phi$分量：
+    在Coulomb规范下，矢量势$\bm A$也仅有$\phi$分量。由轴对称性，可将观察点取在$\phi=0$的平面内；源点处的方位基矢投影到观察点的方位基矢上会产生$\cos\phi'$因子：
     \begin{align*}
-        A_\phi&=\frac{\mu_0}{4\pi}\int\frac{J_\phi}{\abs{\bm r-\bm r'}}\d V'\\
-        &=\frac{\mu_0I}{4\pi a}\int\zti\oint\frac{\sin\theta'\vd(\cos\theta')\vd(r'-a)r^2\d\Omega'\d r'}{\sqrt{r^2+r'^2-2rr'(\cos\theta\cos\theta'+\sin\theta\sin\theta'\cos\phi')}}\\
+        A_\phi&=\frac{\mu_0}{4\pi}\int\frac{J_\phi(\bm r')\cos\phi'}{\abs{\bm r-\bm r'}}\d V'\\
+        &=\frac{\mu_0I}{4\pi a}\int\zti\oint\frac{\sin\theta'\vd(\cos\theta')\vd(r'-a)\cos\phi'\,r'^2\d\Omega'\d r'}{\sqrt{r^2+r'^2-2rr'(\cos\theta\cos\theta'+\sin\theta\sin\theta'\cos\phi')}}\\
         &=\frac{\mu_0Ia}{4\pi}\int_0^{2\pi}\frac{\cos\phi'\d\phi'}{\sqrt{a^2+r^2-2ar\sin\theta\cos\phi'}}\\
         &=\frac{\mu_0I}\pi\frac{a}{\sqrt{a^2+r^2+2ar\sin\theta}}\biggb{\biggp{\frac2{k^2}-1}K(k)-\frac2{k^2}E(k)}.%\frac{(2-k^2)K(k)-2E(k)}{k^2}.
     \end{align*}
@@ -365,14 +365,14 @@
             \bm B&=\frac{\mu_0m}{4\pi r^3}(2\cos\theta\uvec r+\sin\theta\uvec\theta).
         \end{align}
     \end{subequations}
-    同样，上式磁场的散度$\div\bm B$在原点处的积分不为0，应进行修正：
+    同样，上式只适用于$r\neq0$。将$\bm B=\curl\bm A$作为分布导数计算，理想点磁偶极子的全空间磁场应包含原点处的接触项：
     \begin{equation}
         \label{eqn:B dipole with delta}
         \bm B(\bm r)=\frac{\mu_0}{4\pi}\biggb{\frac{3(\bm m\cdot\uvec r)\uvec r-\bm m}{r^3}+\frac{8\pi}3\bm m\vd(\bm r)}.
     \end{equation}
-    可得磁场的旋度$\curl\bm B=\mu_0\bm m\times\nabla\delta(\bm r)$，即磁偶极子的电流密度为
+    可得磁场的旋度$\curl\bm B=\mu_0\nabla\delta(\bm r)\times\bm m$，即磁偶极子的电流密度为
     \begin{equation}
-        \bm J(\bm r)=\bm m\times\nabla\delta(\bm r).
+        \bm J(\bm r)=\nabla\delta(\bm r)\times\bm m=\curl\bigb{\bm m\delta(\bm r)}.
     \end{equation}
 \end{example}
 
@@ -454,7 +454,7 @@
         \label{eqn:int B dV}
         \int_{r<R}\bm B(\bm r)\d V=\begin{cases}
             \frac{2\mu_0}{3}\bm m,&\text{电流全在球内};\\[1ex]
-            -\frac{4\pi}{3}R^3\bm B(\bm 0),&\text{电流全在球外}.
+            \frac{4\pi}{3}R^3\bm B(\bm 0),&\text{电流全在球外}.
         \end{cases}
     \end{equation}
     这也对应于磁偶极子磁场\eqref{eqn:B dipole with delta}中的$2\mu_0\bm m\vd(\bm r)/3$项。
@@ -644,7 +644,7 @@
     \]
     以及球谐函数的正交性，$1/\abs{\bm r-\bm r'}$的展开式\eqref{eqn:1/|r-r'|=YY}仅有$Y_{10}$项保留，故
     \[
-        \Phi_\mag(r,\theta)=\frac13M_0R^2\cdot\frac{r_<}{r_>}\cos\theta.
+        \Phi_\mag(r,\theta)=\frac13M_0R^2\cdot\frac{r_<}{r_>^2}\cos\theta.
     \]
     %$r_<,r_>$是$r,R$中的较小/大者。
 

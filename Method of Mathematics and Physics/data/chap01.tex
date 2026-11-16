@@ -3,8 +3,8 @@
 \begin{example}{弦振动}{string vibration}
 	线密度为$\rho$的弦在自身张力$T$的作用下平衡位置在$x$轴，横向位移$u=u(x,t)$，取$(x_1,x_2)$段进行受力分析
 	\begin{align*}
-		T_2\cos\theta_2-T_1\cos\theta_2&=0,\\
-		T_2\sin\theta_2-T_1\sin\theta_2&=\rho\vd x\cdot\pv[2]ut.
+		T_2\cos\theta_2-T_1\cos\theta_1&=0,\\
+		T_2\sin\theta_2-T_1\sin\theta_1&=\rho\vd x\cdot\pv[2]ut.
 	\end{align*}
 	%其中$T$为弦内张力，为弦的线密度。
 	限定$\theta\ll 1$，有$\cos\theta\doteq 1,\,\sin\theta\doteq\theta,$
@@ -12,7 +12,7 @@
 		T_1&=T_2=:T,\\
 		T\vd\theta&=\rho\vd x\cdot\pv[2]ut.
 	\end{align*}
-	又$\theta=\p u/\p x$，得到波动方程
+	又$\tan\theta=\p u/\p x\simeq\theta$，得到波动方程
 	% \nomenclature{$u_t$}{The number of angels per unit area\nomrefeq}
 	%$\rho$ - 线密度，$T$ - 张力，$g$ - 外力\\
 	\begin{align}
@@ -20,7 +20,7 @@
 	\end{align}
 \end{example}
 \begin{example}{热传导}{heat conduction}
-	由Fourier热传导定律，一段时间内流入物体$\Omega$的热量为
+	假设介质均匀、各向同性，$k,c,\rho$为常数，无体热源且无宏观流动。由Fourier热传导定律，一段时间内流入物体$\Omega$的热量为
 	\[
 		Q=\int_{t_1}^{t_2}\oint_{\p\Omega}k\pv u{\bm n}\d S\d t=\int_{t_1}^{t_2}\int_\Omega k\lapla u\d V\d t,
 	\]
@@ -56,27 +56,27 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 \]
 其中$m=m_1+m_2+\cdots+m_n$。在本笔记中，偏微分$\p u/\p x$可以简记为$u_x$。
 \begin{definition}{定解条件}{Definite Condition}
-	确定解中函数的条件称为定解条件，包括初始条件和边界条件
+	定解条件包括初始条件和边界条件。以下列出三类空间边界条件，其中$\bm n$为外法向；在半轴$x>0$的左端点有$\p_n=-\p_x$。
 	\begin{compactenum}[I.]
 		\item (Dirichlet)\quad$\eval u_{x=0}=f$,\qqqquad$\eval u_{\p V}=f$;
-		\item (Neumann)\enspace$\eval{u_t}_{x=0}=f$,\qqqquad\!$\eval{u_t}_{\p V}=f$;
-		\item (Robin)\qquad$(u_t+\sigma u)_{x=0}=f$,\quad$\biggp{\pv un+\sigma u}_{\p V}=f$.
+		\item (Neumann)\enspace$\eval{-u_x}_{x=0}=f$,\qqqquad\!$\eval{\pv un}_{\p V}=f$;
+		\item (Robin)\qquad$(-u_x+\sigma u)_{x=0}=f$,\quad$\biggp{\pv un+\sigma u}_{\p V}=f$.
 	\end{compactenum}
 \end{definition}
 \begin{definition}{解相关的术语}{}
 	古典解：符合方程且各阶偏导数连续；
 
-	通解：$m$阶PDE有$m$个任意函数的解；
+	通解：含任意函数或常数的一族解；一般PDE不能仅凭阶数断言其通解含多少个任意函数；
 
 	特解：不包含任何任意函数或任意常数的解；
 
-	适定解：存在、唯一且稳定。
+	适定问题：在明确的函数空间和范数下，解存在、唯一且连续依赖于初始与边界数据。
 \end{definition}
 \section{一阶线性方程的通解法}
 \begin{method}{常数变易法}{constant variation method}
 	对于$u(x,y)$的方程
 	\[
-		u_x+Ax=B.
+		u_x+Au=B.
 	\]
 	有解
 	\begin{align*}
@@ -121,7 +121,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 	\begin{align*}
 		\abs{\frac{\p(\xi,\eta)}{\p(x,y)}}=
 		\begin{vmatrix}
-			\xi_x  & \xi_x  \\
+			\xi_x  & \xi_y  \\
 			\eta_x & \eta_y
 		\end{vmatrix}\neq 0.
 	\end{align*}
@@ -172,7 +172,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 	\begin{align}
 		u(x,t)=\frac12\bigb{\varphi(x-at)+\varphi(x+at)}+\frac1{2a}\int_{x-at}^{x+at}\psi(\xi)\d\xi.
 	\end{align}
-	对于$\varphi\in\cont^2,\psi\in\cont,$解是适定的。
+	对于$\varphi\in\cont^2,\psi\in\cont^1$，上式给出古典解；由公式可直接核对初值及波动方程。
 \end{theorem}
 
 非无限情况，可以延拓至无限。
@@ -209,12 +209,12 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 		\end{cases}
 	\end{align*}
 	\tcblower
-	端点自由半无限弦($u_t(0,t)=0$)采用偶延拓；
+	端点自由半无限弦($u_x(0,t)=0$)采用偶延拓；
 	
 	有界弦：两端均延拓。
 \end{example}
 \begin{example}{中心对称球面波}{}
-	中心对称的球面波$u=u(r)$，采用球坐标
+	中心对称的球面波$u=u(r,t)$，采用球坐标
 	\[
 		\lapla=\frac1{r^2}\pp r\Bigp{r^2\pp r}+\frac1{r^2\sin\theta}\pp \theta\Bigp{\sin\theta\pp \theta}+\frac1{r^2\sin^2\theta}\pp[2]\phi.
 	\]
@@ -224,9 +224,9 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 	\]
 	设$v=ru$，则可解得
 	\[
-		u(r)=\frac1r\bigb{f(r-at)+g(r+at)}.
+		u(r,t)=\frac1r\bigb{f(r-at)+g(r+at)}.
 	\]
-	掺入边界条件$\varphi(r),\psi(r)$后，作奇延拓即可。
+	代入初始条件$u(r,0)=\varphi(r),u_t(r,0)=\psi(r)$后，对$r\varphi(r),r\psi(r)$作奇延拓，以满足原点正则性条件$v(0,t)=0$。
 \end{example}
 \begin{example}{三维波动方程与球面平均法}{}
 	一般的三维波动方程
@@ -244,7 +244,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 	略去证明过程，问题转化为中心对称球面波问题
 	\begin{align*}
 		\begin{cases}
-			\overline u_{tt}=\frac1r(r\overline u)_{rr},                                \\
+			\overline u_{tt}=\frac{a^2}r(r\overline u)_{rr},                                \\
 			(r\overline u)_{r=0}=0,                                                        \\
 			\overline u(r,0)=\overline\varphi(r),\quad\overline u_t(r,0)=\overline\psi(r).
 		\end{cases}
@@ -258,7 +258,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 		u(M,t)=\lim_{r\to 0^+}\overline u(r,t)
 		=\dd t\bigp{t\overline\varphi(at)}+t\overline\psi(at),
 	\end{align*}
-	上式称为Possion公式。
+	上式称为Poisson公式。
 	\tcblower
 	求解三维波动方程的关键在于计算球面平均
 	\begin{align}
@@ -307,7 +307,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 	\end{align}
 \end{example}
 \begin{remark}
-	\eqref{3D-Wave}是在球面上积分，而\eqref{2D-Wave}是在圆域上积分。这个差别在物理上产生了截然不同的效果：对三维情况，波的传播既有清晰的前阵面，也有清晰的后阵面，可用于传播信号，这称为Huygens原理；对二维情况，波的传播有清晰的前阵面，但没有后阵面，这称为波的弥漫，或说这种波具有后效现象，不适合于传播信号。
+	\eqref{3D-Wave}是在球面上积分，而\eqref{2D-Wave}是在圆域上积分。对这里的自由空间常系数波动方程，三维的扰动传播满足强Huygens原理：紧支撑初始扰动的波前通过后不留下尾波；二维解还依赖于波前内部的数据，因此可有尾波。这并不意味着二维波不能传播信号，而是脉冲响应和信号恢复方式不同。
 \end{remark}
 \begin{example}{一维波动方程}{}
 	对一维弦振动方程，也可升二维，再将积分投影到$\bigb{x-at,x+at}$上。
@@ -327,7 +327,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 	\]
 \end{example}
 \section{二阶线性偏微分方程及标准型}
-两个自变量的二阶其次线性偏微分方程
+两个自变量的二阶齐次线性偏微分方程
 \[
 	a_{11}u_{xx}+2a_{12}u_{xy}+a_{22}u_{yy}+b_1u_x+b_2u_y+cu=0.
 \]
@@ -358,13 +358,13 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 		A_{11} & A_{12} \\
 		A_{12} & A_{22}
 	\end{bmatrix}=\begin{bmatrix}
-		\xi_x  & \xi_x  \\
+		\xi_x  & \xi_y  \\
 		\eta_x & \eta_y
 	\end{bmatrix}\begin{bmatrix}
 		a_{11} & a_{12} \\
 		a_{12} & a_{22}
 	\end{bmatrix}\begin{bmatrix}
-		\xi_x  & \xi_x  \\
+		\xi_x  & \xi_y  \\
 		\eta_x & \eta_y
 	\end{bmatrix}\tp.
 \end{align*}

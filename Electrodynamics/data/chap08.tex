@@ -1,41 +1,39 @@
 \chapter{多极辐射}
 \label{chap:multipole radiation}
-在第七章和第八章里，讨论了电磁波的性质，以及电磁波在有界的和无界的区域内的传播情况。但是，很少谈到如何产生这些电磁波的问题。本章就转入这个问题，并讨论定域振荡电荷和电流密度系统辐射的电磁波，我们的论述是直截了当的，而不去精心推敲数学形式。%当然，这样做只限于比较简单的辐射系统，我们把求系统辐射的渐近法(用任意$l$的矢量多极场)推迟到第十六章里论述。本章只讨论电偶极子、磁偶极子和电器极子，以及导体上电流的一些简单位形。也论述波导中一个源的简单多极子展开和孔的有效多极矩。
+在\chapref{chap:plane wave}和\chapref{chap:waveguide}中，讨论了电磁波的性质，以及电磁波在有界的和无界的区域内的传播情况。但是，很少谈到如何产生这些电磁波的问题。本章就转入这个问题，并讨论定域振荡电荷和电流密度系统辐射的电磁波，我们的论述是直截了当的，而不去精心推敲数学形式。%当然，这样做只限于比较简单的辐射系统，我们把求系统辐射的渐近法(用任意$l$的矢量多极场)推迟到第十六章里论述。本章只讨论电偶极子、磁偶极子和电器极子，以及导体上电流的一些简单位形。也论述波导中一个源的简单多极子展开和孔的有效多极矩。
 
 %本章后半部，用较大篇幅讨论散射和衍射。首先解释长波长情形下的散射，包括瑞利对蓝天的解释和有关的论题，然后讨论标量衍射理论和矢量衍射理论，并举了一些例子。最后讨论短波长情形下的散射和重要的光学定理。
 \section{局域振荡源}
 对于随时间变化的电荷和电流系统，我们都可以将随时间变化的量作Fourier分析，并分别处理各个Fourier分量。因此，不失一般性，我们只考虑随时间作正弦变化的局域电荷和电流系统所产生的势、场和辐射，设
 \begin{align*}
-    \rho(\bm r,t)&=\rho(\bm r)\e^{-\i\omega t},\\
-    \bm J(\bm r,t)&=\bm J(\bm r)\e^{-\i\omega t},
+    \rho(\bm r,t)&=\Re\bigb{\rho(\bm r)\e^{-\i\omega t}},\\
+    \bm J(\bm r,t)&=\Re\bigb{\bm J(\bm r)\e^{-\i\omega t}},
 \end{align*}
-矢量势
-\begin{align}
-    \notag
-    \bm A(\bm r,t)&=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r',t')}{\abs{\bm r-\bm r'}}\vd\Bigp{t'-t+\frac{\abs{\bm r-\bm r'}}c}\d t'\nd v'\\
+下文不带时间自变量的量均为复振幅，物理场取其与$\e^{-\i\omega t}$乘积的实部。记$k=\omega/c$、$Z_0=\sqrt{\mu_0/\varepsilon_0}$、$\uvec n=\bm r/r$。矢量势的复振幅为
+\begin{equation}
     \label{eqn:A-Jeiwt}
-    &=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\e^{\i k\abs{\bm r-\bm r'}}\d V'.
-\end{align}
+    \bm A(\bm r)=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\e^{\i k\abs{\bm r-\bm r'}}\d V'.
+\end{equation}
 磁场和电场为
 \[
-    \bm H=\frac1{\mu_0}\curl\bm A,\quad\bm E=\i\frac Zk\curl\bm H.
+    \bm H=\frac1{\mu_0}\curl\bm A,\quad\bm E=\i\frac{Z_0}k\curl\bm H\quad(\text{源区之外}).
 \]
 给定电流分布$\bm J(\bm r')$以后，至少在原则上可以通过计算\eqref{eqn:A-Jeiwt}的积分来定出场的分布。%9.4节将讨论一两个直接计算源积分的实例.
-但是，现在我们先确立在电流源被局限于小区域内(与波长相比，确实很小)的极限情形下，场所具有的某些简单而普遍的性质。如果源的线度为$d$，波长为$\lambda=2\pi c/\omega$，并且$d<\lambda$,则有三个令人感兴趣的空间区域：近区、中间区、远区。
+但是，现在我们先确立在电流源被局限于小区域内(与波长相比，确实很小)的极限情形下，场所具有的某些简单而普遍的性质。如果源的线度为$d$，波长为$\lambda=2\pi c/\omega$，并且$kd\ll1$，则在源区之外有三个空间区域：近区、中间区、远区。
 
-近区：$d\ll r\ll\lambda$，\eqref{eqn:A-Jeiwt}中的指数可以用1代替，并用球谐函数\eqref{eqn:1/|r-r'|=YY}展开，
+近区：$d\ll r$且$kr\ll1$，\eqref{eqn:A-Jeiwt}中的指数可以用1代替，并用球谐函数\eqref{eqn:1/|r-r'|=YY}展开，
 \[
     \lim_{kr\to0}\bm A(\bm r)=\frac{\mu_0}{4\pi}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac{4\pi}{2\ell+1}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}\int\bm J(\bm r')r'^\ell Y\cj_{\ell m}(\theta',\phi')\d V'.
 \]
 上式表明，近场是准静态的，除了按$\e^{-\i\omega t}$方式作简谐振荡外，其它性质都是静态的。
 
-远区，$d\ll\lambda\ll r$，
+远区，$r\gg d$且$kr\gg1$，
 \[
-    \bm A(\bm r,t)=\frac{\mu_0}{4\pi}\frac{\e^{\i kr}}r\int\bm J(\bm r')\e^{-\i\bm k\cdot\bm r'}\d V'.
+    \bm A(\bm r)=\frac{\mu_0}{4\pi}\frac{\e^{\i kr}}r\int\bm J(\bm r')\e^{-\i\bm k\cdot\bm r'}\d V'.
 \]
 可以对$\e^{-\i\bm k\cdot\bm r'}$展开，略。
 
-中间区，$d\ll r\sim\lambda$，近似失效，引入
+中间区，$d\ll r$且$kr\sim1$，近似失效，引入
 球Bessel函数和Hankel函数
 \begin{align}
     j_\ell(x)&:=\sqrt{\frac\pi{2x}}J_{\ell+1/2}(x),\\
@@ -61,7 +59,7 @@
     \bm p:=\int\bm r'\rho(\bm r')\d V',
 \]
 激发的电场和磁场。
-通过远区近似，
+在$kd\ll1$、$r\gg d$条件下保留电偶极项（暂不要求$kr\gg1$），
 \[
     \bm A=-\i\frac{\mu_0\omega}{4\pi}\bm p\frac{\e^{\i kr}}r.
 \]
@@ -70,26 +68,26 @@
     \bm H&=\frac{ck^2}{4\pi}(\uvec n\times\bm p)\frac{\e^{\i kr}}r\Bigp{1+\i\frac1{kr}},\\
     \bm E&=\frac1{4\pi\varepsilon_0}\biggb{k^2(\uvec n\times\bm p)\times\uvec n\frac{\e^{\i kr}}r+\bigp{3\uvec n(\uvec n\cdot\bm p)-\bm p}\Bigp{\frac1{r^3}-\i\frac{k}{r^2}}\e^{\i kr}}.
 \end{align*}
-$r\to 0$时,
+在源区之外的近区$kr\ll1$时，
 \begin{align*}
     \bm H&=\i\frac{\omega}{4\pi}\frac{\uvec n\times\bm p}{r^2},\\
     \bm E&=\frac1{4\pi\varepsilon_0}\frac{3\uvec n(\uvec n\cdot\bm p)-\bm p}{r^3};
 \end{align*}
-$r\to\infty$时，
+在辐射远区$kr\gg1$时，
 \begin{align*}
     \bm H&=\frac{ck^2}{4\pi}(\uvec n\times\bm p)\frac{\e^{\i kr}}r,\\
     \bm E&=Z_0\bm H\times\uvec n,
 \end{align*}
 % $Z_0$是自由空间阻抗。
-由振荡偶极子辐射的时间平均功率
+对于沿固定方向振荡的偶极子，令$\bm p=p_0\uvec z$，$p_0$为复振幅，$\theta$为观察方向与偶极轴的夹角。辐射的时间平均角分布为
 \[
-    \dv P\Omega=\frac12\Re\bigb{r^2(\bm E\times\bm H\cj)\cdot\uvec n}=\frac{c^2Z_0}{32\pi^2}k^4p^2\sin^2\theta,
+    \dv P\Omega=\frac12\Re\bigb{r^2(\bm E\times\bm H\cj)\cdot\uvec n}=\frac{c^2Z_0}{32\pi^2}k^4\abs{p_0}^2\sin^2\theta,
 \]
 故
 \begin{equation}
-    P=\frac{c^2Z_0^2k^4}{12\pi}p^2.
+    P=\frac{c^2Z_0k^4}{12\pi}\abs{p_0}^2=\frac{\omega^4\abs{p_0}^2}{12\pi\varepsilon_0c^3}.
 \end{equation}
-为什么天空是蓝色的，特别是在垂直于太阳光线的天弧处？因为$\theta=90\degree$时太阳光线所激发的偶极辐射功率为0。
+这里$\sin^2\theta$在$\theta=90\degree$时最大，沿偶极轴时为零。天空的蓝色主要来自Rayleigh散射的频率依赖：在散射体远小于波长、远离共振且极化率变化较小时，散射功率正比于$\omega^4\propto\lambda^{-4}$，短波长光更易被散射。与太阳入射方向成$90\degree$的单次散射还会产生强线偏振；这是偏振选择效应，与天空颜色的频率依赖应分开讨论。
 \begin{example}{天线}{center-fed, linear antenna}
     对于一个中间馈送(center-fed)的线性天线(antenna)，其电流
     \[
@@ -123,7 +121,7 @@ $r\to\infty$时，
 \paragraph{电四极子}
 电四极子对矢量势的贡献
 \[
-    \bm A=-\frac{\mu_0ck^2}{8\pi}\frac{\e^{\i kr}}r\Bigp{1+\i\frac1{kr}}\int\bm r'(\uvec n\cdot\bm r)\rho(\bm r')\d V'.
+    \bm A=-\frac{\mu_0ck^2}{8\pi}\frac{\e^{\i kr}}r\Bigp{1+\i\frac1{kr}}\int\bm r'(\uvec n\cdot\bm r')\rho(\bm r')\d V'.
 \]
 磁场
 \[

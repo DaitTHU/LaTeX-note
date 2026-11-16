@@ -7,7 +7,7 @@
 首先引入代数余子式。
 
 \begin{definition}{代数余子式}{cofactor}
-	给定$n$阶方阵$A$，去掉$A_{ij}$所在的第$i$行和第$j$列得到的$(n-1)$阶方阵记作$A_{\neq ij}$，其行列式$\det(A_{\neq ij})$定义为$A_{ij}$的余子式(minor)；而
+	给定$n$阶方阵$A$（约定$0\times0$空矩阵的行列式为1），去掉$A_{ij}$所在的第$i$行和第$j$列得到的$(n-1)$阶方阵记作$A_{\neq ij}$，其行列式$\det(A_{\neq ij})$定义为$A_{ij}$的余子式(minor)；而
 	\begin{align}
 		\cof(A)_{ij}:=(-)^{i+j}\det(A_{\neq ij}).
 	\end{align}
@@ -28,9 +28,9 @@
 		\item $n=1$时，$\det(A)=A_{11};$
 		\item $n>1$时，任取第$i$行展开或第$j$列展开(Laplace展开)
 		\begin{align}
-			\det(A) = \sum_{i=1}^nA_{ij}\cof(A)_{ij} = \sum_{j=1}^nA_{ij}\cof(A)_{ij}.
+			\det(A)=\sum_{k=1}^nA_{ik}\cof(A)_{ik}=\sum_{k=1}^nA_{kj}\cof(A)_{kj}.
 		\end{align}
-		由于$\cof(A)$是$n-1$阶的行列式，故递归会随降阶停止。
+		每个代数余子式由一个$(n-1)$阶行列式给出，故递归会随降阶停止。可先固定第一行作递归定义，再证明任意行、列的Laplace展开都给出同一结果。
 	\end{compactenum}
 \end{definition}
 
@@ -99,10 +99,16 @@
 	可以证明，这个满足此定义的映射存在且唯一，并且与\dfnref{dfn:determinant}~是等价的。
 \end{definition}
 \begin{lemma}
-	初等矩阵的行列式……略
+	三种初等矩阵的行列式分别为
+	\[
+		\det E_{i\to j}(a)=1,\qquad
+		\det E_{i\leftrightarrow j}=-1,\qquad
+		\det E_i(c)=c.
+	\]
+	左乘这些矩阵分别使行列式不变、变号或乘以$c$。
 \end{lemma}
 \begin{proof}
-	思路在于通过将矩阵$A$表示为一系列初等矩阵$E_1,\ldots,E_n$和$\rref(A)$的乘积得到，过程略。
+	倍加时用多线性展开，附加项有两行相同而为零；换行由反对称性使行列式变号；一行乘$c$由多线性使行列式乘$c$。对单位矩阵应用这些结论即得三种初等矩阵的行列式。
 \end{proof}
 \begin{corollary}
 	~%在以上证明的推导过程中可以得到行列式的如下几个推论：
@@ -119,7 +125,7 @@
 \end{theorem}
 
 \begin{remark}
-	因此任意给定一个方阵，其不可逆的可能是很小的。因为不可逆($\det(A)=0$)是一个额外的约束。
+	若实矩阵的全部$n^2$个元素的联合分布具有概率密度，则奇异矩阵集合$\det(A)=0$的概率为零。但对离散分布或受结构约束的矩阵，不能据此断言奇异的概率很小；精确可逆也不保证数值求解良态。
 \end{remark}
 
 \begin{theorem}{行列式与矩阵乘法}{determinant of multiplication}
@@ -161,7 +167,7 @@
 	{排列}{permutation}
 	给定集合$S=\{1,\ldots,n\}$和$n$个数$i_1,\ldots,i_n\in S$，若映射$\sigma$：
 	\[
-		\sigma:S\to S,\enspace \sigma(k)\mapsto i_k,
+		\sigma:S\to S,\enspace k\mapsto i_k,
 	\]
 	是一个一一映射，则称$\sigma$是$S$的一个排列(permutation)。
 \end{definition}
@@ -228,29 +234,15 @@
 	\end{align}
 \end{theorem}
 \begin{proof}
-	对$A,D$进行$LU$分解，$A=L_AU_A,D=L_DU_D$，则
+	由行列式的排列展开，非零项中最后$n$行只能选取最后$n$列；它们恰好用完这些列，因此前$m$行只能选取前$m$列。排列的符号分解为两个对角块内部排列符号的乘积，故
 	\[
-		\begin{bmatrix}
-			A&B\\ &D
-		\end{bmatrix}=
-		\begin{bmatrix}
-			L_A\\ &L_D
-		\end{bmatrix}
-		\begin{bmatrix}
-			U_A&L_A\iv B\\ &U_D
-		\end{bmatrix}
+		\det\begin{bmatrix}A&B\\0&D\end{bmatrix}=\det(A)\det(D).
 	\]
-	前者为下三角矩阵，后者为上三角矩阵，故
-	\[
-		\det\biggp{\begin{bmatrix}
-			A&B\\ &D
-		\end{bmatrix}}=\det(L_A)\det(L_D)\det(U_A)\det(U_D)=\det(A)\det(D).
-		\qedhere
-	\]
+	这个证明不要求$A,D$可逆，也不要求它们具有不置换的LU分解。
 \end{proof}
 \begin{theorem}{分块矩阵的行列式·二}{determinant of bolck matrix II}
 	若$A$是$m$阶方阵，$D$是$n$阶方阵，且$A,D$至少一个可逆，%$B$是$m\times n$矩阵，$C$是$n\times m$矩阵，
-	则
+	其中$B\in\FF^{m\times n},C\in\FF^{n\times m}$，则
 	\begin{equation}
 		\det\biggp{\begin{bmatrix}
 			A&B\\C&D
@@ -263,26 +255,14 @@
 \end{theorem}
 
 \begin{proof}
-	对\thmref{thm:inverse of block matrix} 的证明中的矩阵取行列式即证：
-	\begin{align*}
-		\begin{bmatrix}
-			A&B\\C&D
-		\end{bmatrix}&=\begin{bmatrix}
-			I\\CA\iv&I
-		\end{bmatrix}\begin{bmatrix}
-			A\\ &D-CA\iv B
-		\end{bmatrix}\begin{bmatrix}
-			I&A\iv B\\ &I
-		\end{bmatrix}\\
-		&=\begin{bmatrix}
-			I&BD\iv\\ &I
-		\end{bmatrix}\begin{bmatrix}
-			A-BD\iv C\\ &D
-		\end{bmatrix}\begin{bmatrix}
-			I\\D\iv C&I
-		\end{bmatrix}.
-		\qedhere
-	\end{align*}
+	当$A$可逆时，对分块消元恒等式
+	\[
+		\begin{bmatrix}A&B\\C&D\end{bmatrix}
+		=\begin{bmatrix}I&0\\CA\iv&I\end{bmatrix}
+		\begin{bmatrix}A&0\\0&D-CA\iv B\end{bmatrix}
+		\begin{bmatrix}I&A\iv B\\0&I\end{bmatrix}
+	\]
+	取行列式即得第一式。$D$可逆时使用相应的另一种分块消元得到第二式；不要求两个对角块同时可逆。
 \end{proof}
 
 \begin{theorem}
@@ -370,7 +350,7 @@
 \end{remark}
 \section{Cramer法则、伴随矩阵}
 \begin{theorem}{Cramer法则}{Cramer's rule}
-	考虑线性方程组$Ax=b$，记$A$的第$j$列为$a_j=Ae_j$，将$A$的第$j$列$a_j$替换为$b$得到矩阵$B_j$，即
+	考虑可逆$n$阶方阵$A$的线性方程组$Ax=b$，记$A$的第$j$列为$a_j=Ae_j$，将$A$的第$j$列$a_j$替换为$b$得到矩阵$B_j$，即
 	\[
 		B_j:=[a_1,\ldots,a_{j-1},b,a_{j+1},\ldots,a_n],
 	\]
@@ -403,9 +383,9 @@
 \end{definition}
 
 \begin{corollary}
-	伴随矩阵的性质：
+	对$n\geq2$，伴随矩阵有以下性质；一阶情形另有$\adj([a])=[1]$，与$a$的值无关：
 	\begin{itemize}
-		\item $\adj(I)=I$；$\adj(O)=O$，除了$\adj([0])=[1]$；
+		\item $\adj(I)=I$；$\adj(O)=O$；
 		\item $\adj(cA)=c^{n-1}\adj(A)$；
 		\item $\adj(A\tp)=\adj(A)\tp$；
 		\item $\adj(AB)=\adj(B)\adj(A)$，故$\adj(A^k)=\adj(A)^k$。
@@ -414,7 +394,7 @@
 
 \begin{theorem}
 	{伴随矩阵与逆的关系}{}
-	根据Cramer法则，
+	当$\det(A)\neq0$时，根据Cramer法则，
 	\begin{align}
 		A\iv=\frac{\adj(A)}{\det(A)}.
 	\end{align}
@@ -431,13 +411,13 @@
 \begin{proof}
 	根据Laplace展开，
 	\begin{align*}
-		\bigb{A\adj(A)}_{ij}&=\sum_{k}A_{ik}\adj(A)_{kj}=\sum_{k}(-)^{j+k}A_{ik}\det(A_{\neq jk})=\vd_{ij}\det(A);\\
-		\bigb{\adj(A)A}_{ij}&=\sum_{k}\adj(A)_{ik}A_{kj}=\sum_{k}(-)^{i+k}\det(A_{\neq ki})A_{kj}=\vd_{ij}\det(A).%
+		\bigb{A\adj(A)}_{ij}&=\sum_{k}A_{ik}\adj(A)_{kj}=\sum_{k}(-)^{j+k}A_{ik}\det(A_{\neq jk})=\delta_{ij}\det(A);\\
+		\bigb{\adj(A)A}_{ij}&=\sum_{k}\adj(A)_{ik}A_{kj}=\sum_{k}(-)^{i+k}\det(A_{\neq ki})A_{kj}=\delta_{ij}\det(A).%
 	\end{align*}
 	对应元素相等，即证。
 \end{proof}
 \begin{corollary}
-	~
+	以下设$n\geq2$。
 	\begin{itemize}
 		\item %由
 		% \[
@@ -448,15 +428,17 @@
 		\begin{align}
 			\det(\adj(A))=\det(A)^{n-1};
 		\end{align}
-		\item 伴随矩阵的伴随矩阵：
+		\item 当$n\geq2$时，伴随矩阵的伴随矩阵满足：
 		\begin{align}
 			\adj(\adj(A))=\det(A)^{n-2}A.
 		\end{align}
-		由伴随矩阵$\adj(A)$反求矩阵$A$：
+		当$n=2$时，上式直接表示$\adj(\adj(A))=A$，对奇异矩阵也成立。
+		对可逆矩阵，若记$B=\adj(A)$、$d=\det(A)$，则反求关系为
 		\[
-			A=\det(\adj(A))^{-(n-2)/(n-1)}\adj(\adj(A)).
+			d^{n-1}=\det(B),\qquad A=dB\iv.
 		\]
-		\item $A$可逆$\iff\adj(A)$可逆
+		不能无条件取实数幂而丢弃$d$的符号。例如$n=3$时，$\adj(I)=\adj(-I)=I$，仅凭伴随矩阵不能唯一恢复原矩阵。
+		\item 当$n\geq2$时，$A$可逆$\iff\adj(A)$可逆；此时
 		\begin{align}
 			\adj(A)\iv=\adj(A\iv)=\frac{A}{\det(A)};
 		\end{align}
@@ -493,7 +475,7 @@
 
 \begin{theorem}
 	{Jacobi公式}{Jacobi's formula}
-	给定矩阵函数$A:\FF\to\FF^{n\times n},\enspace t\mapsto A(t)$，则 
+	设$t$为实参数，矩阵函数$A(t)$的各元素在所讨论区间内可微，则即使$A(t)$奇异也有
 	\begin{equation}
 		\label{eqn:Jacobi det'}
 		\dd t\det(A)=\tr\biggp{\adj(A)\dv At}
@@ -501,13 +483,14 @@
 \end{theorem}
 
 \begin{corollary}
+	在$A(t)$可逆的点，上式可写为
 	\begin{equation}
 		\dd t\det(A)=\det(A)\tr\biggp{A\iv\dv At}
 	\end{equation}
 \end{corollary}
 
 \begin{remark}
-	计算机运用Cramer法则解$n$元线性方程组的时间复杂度是$\bigo(n\cdot n!)$，且在数值上不稳定\footnote{Cramer, Gabriel (1750). "Introduction à l'Analyse des lignes Courbes algébriques" (in French). Geneva: Europeana. pp. 656-659. Retrieved 2012-05-18.}，这是不可接受的。与其在计算方面的作用相比，其理论价值更为重大，即：研究了方程组的系数与方程组解的存在性与唯一性关系。
+	Cramer法则的计算代价取决于行列式的算法：逐项展开会产生阶乘量级的工作量；若分别用消元计算$n+1$个行列式，通常需$\bigo(n^4)$次运算。实际求解一般用带选主元的LU分解或QR分解，避免重复计算行列式及其比值。Cramer法则的主要价值在于给出解对系数的显式依赖，不能把某种实现的复杂度或稳定性当作公式本身的普适属性。
 
 	因此在解题中建议用增广矩阵和Gauss-Jordan消元法求解线性方程组$Ax=b$：
 	\[

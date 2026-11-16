@@ -16,7 +16,7 @@
 如何解线性方程组，得到$x$？如果$A$是可逆的，将$Ax=b$左乘逆$A\iv$，当然可以得到$x=A\iv b$。但一般我们不知道逆$A\iv$，甚至$A$本身可能都不可逆，此时如何求解？
 
 \begin{theorem}{Gauss消元法}{Gaussian elimination}
-	消元法(elimination)就是通过对方程之间倍加消元，得到一个等价的上三角方程组。
+	消元法(elimination)通过交换方程和倍加消元，得到等价的行阶梯型方程组。
 	\[
 		\text{e.g. }
 		\eqnset{\begin{aligned}
@@ -31,26 +31,21 @@
 	\]
 	具体算法为：
 	\begin{compactenum}
-		\item 找到第1个$x_1$系数不为0的方程作为方程(1)；%$x_1$的系数就是第一个主元。
-		\item 通过将方程(1)倍加，从方程(2)到方程$(m)$中消去$x_1$ ；
-		\item 得到的方程(2)到方程$(m)$构成$(n-1)$元的线性方程组，重复步骤1。
-		\item 最后结果如果是一个上三角方程组，便可从最后一个方程开始解出全部未知数。
-		否则消元法失效，此时：
-		\begin{itemize}
-			\item 若得到$0\neq 0$，则方程组无解；
-			\item 若得到$0=0$，则方程组有无穷多解。
-		\end{itemize}
+		\item 从左到右扫描未知数的系数列，在尚未处理的行中寻找非零元素作为主元；若该列全为零，则跳过该列。
+		\item 必要时交换行，将主元移到当前行，再用倍加消去主元下方同列的元素。
+		\item 对剩余行和右侧列重复以上步骤，直到得到行阶梯型方程组。
+		\item 若出现左端全为零而右端非零的方程，则无解；否则从下向上回代。无主元的列对应自由变量，若没有自由变量则解唯一，否则可用自由变量表示通解。
 	\end{compactenum}
-	上三角方程组中每个方程的第一个非0系数称为主元(pivot element)。
+	行阶梯型方程组中，每个非零方程的第一个非0系数称为主元(pivot element)。
 \end{theorem}
 
 \begin{remark}
-	当主元数目$<$未知数时，消元法失效。因此有唯一解要求：独立方程个数与未知数个数相同。
+	消元法也适用于奇异或矩形系数矩阵。方程组有唯一解当且仅当它相容，且系数矩阵的每一列都有主元；出现$0=0$只表示某个方程冗余，并不单独决定解是否唯一。
 \end{remark}
 
 \section{矩阵的行变换}
 
-由于消元法对方程的倍加操作同时作用在系数矩阵$A$和常数项$b$上，因此可以写成分块矩阵的形式：$[A\enspace b]$，称为增广矩阵(augmented matrix)，对其消元得到$[I\enspace x]$：
+由于消元法对方程的倍加操作同时作用在系数矩阵$A$和常数项$b$上，因此可以写成分块矩阵的形式：$[A\enspace b]$，称为增广矩阵(augmented matrix)，在下面的可逆方阵例子中，进一步消元得到$[I\enspace x]$：
 \[
 	\begin{bmatrix}
 		\begin{array}{cc|c}
@@ -155,7 +150,7 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 	\begin{compactitem}
 		\item 将增广矩阵$[A\enspace b]$约化为$[\rref(A)\enspace b']$；
 		\item 解的存在性：若$\rref(A)$有0行，且$b'$对应行元素非0，则无解；反之有解；
-		\item 解的唯一性：若$\rref(A)$没有自由列，则解唯一。
+		\item 解的唯一性：在有解的前提下，若$\rref(A)$没有自由列，则解唯一；否则有无穷多解。
 	\end{compactitem}
 \end{remark}
 
@@ -175,8 +170,8 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 		\[
 			E_{i\to j}(a):=
 			\begin{bmatrix}
-				\ddots\\ &1&&a\\ &&\ddots\\ &&&1\\ &&&&\ddots
-			\end{bmatrix}=I+ae_{ij},
+				\ddots\\ &1\\ &&\ddots\\ &a&&1\\ &&&&\ddots
+			\end{bmatrix}=I+ae_{ji},\quad i\neq j,
 		\]
 		\item 置换：置换$A$的第$i$行和第$j$行($r_i\rightleftarrows r_j$)
 		\[
@@ -193,7 +188,7 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 			\end{bmatrix}=I+(c-1)e_{ii}.
 		\]
 	\end{itemize}
-	其中$\ddots$所省略的对角项均为1，但阶数不一定相同。
+	其中倍加和置换均取$i\neq j$，上图按$i<j$排列；$\ddots$所省略的对角项均为1，但阶数不一定相同。
 \end{definition}
 
 \begin{corollary}
@@ -213,20 +208,20 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 
 \begin{definition}
 	{初等矩阵的广义定义}{}
-	$\forall u,v\in\FF^m$，$\sigma\in\FF$，定义$I+\sigma uv\tp$为(广义的)初等矩阵。
+	$\forall u,v\in\FF^m$，$\sigma\in\FF$，当$1+\sigma v\tp u\neq0$时，称可逆的秩一更新$I+\sigma uv\tp$为这里的广义初等矩阵。
 \end{definition}
 \begin{remark}
 	三种行变换对应的初等矩阵也可以写成$I+\sigma uv\tp$的形式：
 	\begin{subequations}
 		\begin{align}
-			E_{i\to j}(a)&=I+ae_ie_j\tp,\\
+			E_{i\to j}(a)&=I+ae_je_i\tp,\\
 			E_{i\leftrightarrow j}&=I-(e_i-e_j)(e_i-e_j)\tp,\\
 			E_i(c)&=I+(c-1)e_ie_i\tp.
 		\end{align}
 	\end{subequations}
 	由式\eqref{eqn:(I+uvT)-1}，初等矩阵都是可逆的，并且逆也是初等矩阵：
 	\begin{equation}
-		(I+\sigma uv\tp)\iv=I-\frac{\sigma}{1+\sigma vu\tp}uv\tp,
+		(I+\sigma uv\tp)\iv=I-\frac{\sigma}{1+\sigma v\tp u}uv\tp,
 	\end{equation}
 \end{remark}
 
@@ -306,13 +301,13 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 	\]
 	同理可定义下三角矩阵(lower ...)~$L$满足$L_{ij}=0,\enspace\forall i<j.$
 \end{definition}
-不难注意到，倍加矩阵和逆矩阵都同时是上/下三角矩阵。这是LU分解的基础。
+消去主元下方元素的倍加矩阵及其逆都是单位下三角矩阵；消去上方元素时则为单位上三角矩阵。这是LU分解的基础。
 \begin{theorem}{LU分解}{LU decomposition}
-	对于方阵$A$来说，$A$的LU分解(lower-upper decomposition/factorization)是将$A$分解成一个下三角矩阵$L$和一个上三角矩阵$U$的乘积：
+	若方阵$A$可通过不交换行的Gauss消元化为上三角矩阵，则可将其分解为单位下三角矩阵$L$和上三角矩阵$U$的乘积：
 	\begin{equation}
 		A=LU,
 	\end{equation}
-	有时需要再乘上一个置换矩阵$PA=LU$，称为LUP分解(LU factorization with partial pivoting)。
+	一般方阵不一定存在这种不置换的分解，例如$\begin{bmatrix}0&1\\1&0\end{bmatrix}$。允许行置换后，总可写成$PA=LU$，其中$P$为置换矩阵；按部分选主元策略确定$P$时，称为带部分选主元的LU分解。
 	% 如果$A$化成行阶梯矩阵$U$的过程中没有置换，则$A$有一个LU分解；反之，则存在一个置换矩阵$P$，使得$PA$有一个LU分解。
 \end{theorem}
 \begin{proof}
@@ -335,10 +330,10 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 
 \begin{theorem}
 	{LDU分解}{LDU decomposition}
-	LDU分解(lower-diagonal-upper decomposition)是将矩阵写成
+	若上述不置换LU分解中的$U$具有非零对角元，可将这些对角元提取为对角矩阵$D$，得到LDU分解(lower-diagonal-upper decomposition)：
 	\[
 		A=LDU,
 	\]
-	其中$D$是对角矩阵，$L,U$是单位下/上三角的(unitriangular)，即其对角元均为1。
+	其中$D$可逆，$L,U$为单位下/上三角矩阵，即对角元均为1。对可逆$A$允许行置换可得$PA=LDU$；零主元不能这样归一化。
 \end{theorem}
 

@@ -78,7 +78,7 @@
 	\begin{equation}
 		\bra a:V\to\CC,\quad\ket b\mapsto\brkt ab.
 	\end{equation}
-	所有这样的映射$\bra a$构成$V$的对偶空间(dual space)，记作$V^*$。
+	连续线性泛函组成连续对偶空间$V^*$。有限维内积空间或完备的Hilbert空间中，Riesz表示定理保证每个连续线性泛函都可唯一地写成上述$\bra a$的形式。映射$\ket a\mapsto\bra a$是共轭线性的。
 \end{definition}
 
 \begin{definition}
@@ -128,15 +128,15 @@
 	完备的内积空间称为Hilbert空间。
 \end{definition}
 
-在量子力学中，一个物理态(physical state)由复Hilbert空间中的态矢量(state vector) $\ket\psi$表示。
+在本节的纯态描述中，一个物理态(physical state)由复Hilbert空间中的态矢量(state vector) $\ket\psi$表示。
 且任意非零复数倍的态矢量表示同一物理态，为了方便，通常取归一化的态矢量，即$\brkt\psi\psi=1$。
 
 \begin{postulate}
 	{量子力学基本假设}{Basic Postulate of Quantum Mechanics}
 	\begin{itemize}
-		\item 物理系统的每一个态对应Hilbert空间中的一个态矢量$\ket\psi$，态矢量唯一确定物理态；
-		\item 可观测量对应Hermite算符，其本征值为可观测量可能的取值，本征态构成Hilbert空间的一组完备归一化基底；
-		\item 测量可观测量时，系统态$\ket\psi$坍缩到该可观测量的某个本征态$\ket{\psi_n}$，测得对应本征值的概率为$\abs{\brkt{\psi_n}\psi}^2$；
+		\item 物理系统的每一个纯态对应Hilbert空间中的一条射线，即非零态矢量$\ket\psi$及其所有非零复数倍；混合态需用密度算符描述；
+		\item 可观测量对应自伴算符（有限维时即Hermite矩阵），测量值由其谱给出。对纯离散谱可选正交归一本征基；连续谱需用广义本征态和谱积分处理；
+		\item 对离散谱的理想投影测量，测得$a$的概率为$p_a=\bra\psi\hat P_a\ket\psi$，其中$\hat P_a$投影到对应本征子空间。若$p_a>0$，测后态为$\hat P_a\ket\psi/\sqrt{p_a}$；非简并时化为$\abs{\brkt{\psi_a}\psi}^2$；
 		\item 态矢量随时间演化满足Schrödinger方程
 		\[
 			\i\hbar\p_t\ket\psi=\hat H\ket\psi,
@@ -162,13 +162,13 @@
 \end{align}
 \begin{theorem}{不确定度关系}{Uncertainty Relation}
 	% Heisenberg提出\textbf{不确定度关系}：
-	不可能同时准确测量位移$\r$和动量$\bm p$，即
+	对同一归一化量子态，位置$x$与相应正则动量$p_x$的标准差满足
 	\begin{align}
-		\delta x\vd p\geqslant\hbar/2.
+		\delta x\,\delta p_x\geqslant\hbar/2.
 	\end{align}
 	证明见第 \pageref{Proof of UR} 页。
 \end{theorem}
-由不确定度关系，不存在函数$\bm p(\r)$，需要以\textit{算符}表示$\bm p$和$\r$的关系，由动量的性质知动量算符的形式为
+这里的不确定度指多次同样制备下测量结果的统计散布，不直接等同于测量仪器的误差。坐标表象中，由空间平移的生成元得到正则动量算符
 \[
 	\qo p=-\i\hbar\nabla,
 \]
@@ -188,7 +188,7 @@
 	\begin{align}
 		\i\hbar\pv{\psi}t=\hat H\psi.
 	\end{align}
-	其中Hamilton算符
+	对无自旋、非相对论粒子，在实标量势$V$中且无电磁矢势时，Hamilton算符
 	\[
 		\hat H=\frac{\hat p^2}{2m}+V.
 	\] % =-\frac{\hbar^2}{2m}\nabla^2+V.\]
@@ -204,14 +204,14 @@
 	\]
 	由Schrödinger方程，二者有关系
 	\[
-		\pv\rho{t}=\psi^*\pv\psi{t}+\psi\pv{\psi^*}t=\nabla\cdot\bm j.
+		\pv\rho{t}=\psi^*\pv\psi{t}+\psi\pv{\psi^*}t=-\nabla\cdot\bm j.
 	\]
 \end{definition}
-考虑$\hat H$的本征值$E_n$和本征函数$\psi_n(\r)$
+当$\hat H$不显含时间时，考虑其本征值$E_n$和本征函数$\psi_n(\r)$
 \begin{align}
 	\hat H\psi_n(\r)=E_n\psi_n(\r).
 \end{align}
-称为定态Schrödinger方程，代表能量有确定值，而方程的通解可以写成本征方程的线性组合
+称为定态Schrödinger方程，代表能量有确定值，而在纯离散谱情况下，含时方程的通解可以写成定态的线性组合（连续谱部分改用积分）
 \[
-	\psi(\r,t)=\sum c_n\psi_n(\r)\e^{\i E_nt/\hbar}.
+	\psi(\r,t)=\sum c_n\psi_n(\r)\e^{-\i E_nt/\hbar}.
 \]

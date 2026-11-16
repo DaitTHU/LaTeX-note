@@ -5,7 +5,7 @@
 
 \chapter{Bose统计和Fermi统计}
 
-不同于理想气体，实际气体不满足非简并条件，$\e^\alpha\not\gg 1$，服从Bose分布和Fermi分布：
+即使粒子间相互作用可以忽略，理想气体在低温或高密度下也可能不满足非简并条件。此时必须保留量子统计效应，分别采用Bose分布和Fermi分布：
 \begin{equation}
 	a_i=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}\pm 1},
 \end{equation}
@@ -44,7 +44,7 @@ $\mp$号反之。
 	\]
 	状态方程
 	\[
-		Y_k=-\sum_i a_i\pv{\varepsilon_i}{y_k}=\mp\sum_i\omega_i\pp{y_k}{\ln(1\pm\e^{-\alpha-\beta\varepsilon_i})}=-\frac1\beta\pv{\ln\Xi}{y_k},
+		Y_k=\sum_i a_i\pv{\varepsilon_i}{y_k}=\mp\frac1\beta\sum_i\omega_i\pp{y_k}{\ln(1\pm\e^{-\alpha-\beta\varepsilon_i})}=-\frac1\beta\pv{\ln\Xi}{y_k},
 	\]
 	考虑
 	\begin{align*}
@@ -65,8 +65,8 @@ $\mp$号反之。
 	\begin{subequations}
 		\begin{align}
 			\ln\Xi&=\pm\int\zti g(\varepsilon)\ln(1\pm\e^{-\alpha-\beta\varepsilon})\d\varepsilon,\\
-			N&=-\pv{\ln\Xi}\alpha=\pm\int\zti\frac{g(\varepsilon)}{\e^{\alpha+\beta\varepsilon}\pm 1}\d\varepsilon,\\
-			U&=-\pv{\ln\Xi}\beta=\pm\int\zti\frac{g(\varepsilon)\varepsilon}{\e^{\alpha+\beta\varepsilon}\pm 1}\d\varepsilon.
+			N&=-\pv{\ln\Xi}\alpha=\int\zti\frac{g(\varepsilon)}{\e^{\alpha+\beta\varepsilon}\pm 1}\d\varepsilon,\\
+			U&=-\pv{\ln\Xi}\beta=\int\zti\frac{g(\varepsilon)\varepsilon}{\e^{\alpha+\beta\varepsilon}\pm 1}\d\varepsilon.
 		\end{align}
 	\end{subequations}
 \end{corollary}
@@ -129,7 +129,7 @@ Bose/Fermi气体尽管不满足非简并条件，$\e^{-\alpha}\not\ll 1$，但�
 \]
 而
 \[
-	T=\frac{h^2}{2\pi m\kB}\biggp{\frac{n}{g_s\Li_{3/2}(\mp\e^{-\alpha})}}^{2/3}
+	T=\frac{h^2}{2\pi m\kB}\biggp{\frac{n}{\mp g_s\Li_{3/2}(\mp\e^{-\alpha})}}^{2/3}
 	\implies
 	T\pp T=T\pv\alpha T\pp\alpha=\frac32\frac{\Li_{3/2}(\mp\e^{-\alpha})}{\Li_{1/2}(\mp\e^{-\alpha})}\pp\alpha.
 \]
@@ -144,7 +144,7 @@ Bose/Fermi气体尽管不满足非简并条件，$\e^{-\alpha}\not\ll 1$，但�
 	\Li_n^{-1}(x)=x-2^{-n}x^2+(2^{1-2n}-3^{-n})x^3+\bigo(x^4),
 \]
 可得$\e^{-\alpha}=\mp\Li_{3/2}^{-1}(\mp\xi)$，
-进而$\ln\Xi=\mp N\Li_{5/2}(\mp\Li_{3/2}^{-1}(\mp\xi))/\xi$，
+进而$\ln\Xi=\mp N\Li_{5/2}(\Li_{3/2}^{-1}(\mp\xi))/\xi$，
 由
 \[
 	\Li_n(\Li_{n-1}^{-1}(x))=x-2^{-n}x^2-(2\cdot 3^{-n}-4^{1-n})x^3+\bigo(x^4),
@@ -153,9 +153,9 @@ Bose/Fermi气体尽管不满足非简并条件，$\e^{-\alpha}\not\ll 1$，但�
 \begin{subequations}
 	\begin{align}
 		U&=\frac32N\kB T(1\pm 2^{-5/2}\e^{-\alpha}+\cdots)=\frac32N\kB T(1\pm 2^{-5/2}\xi+\cdots),\\
-		C_V&=\frac23N\kB T(1\mp 2^{-7/2}\e^{-\alpha}+\cdots)=\frac32N\kB(1\mp 2^{-7/2}\xi+\cdots),\\
+		C_V&=\frac32N\kB(1\mp 2^{-7/2}\e^{-\alpha}+\cdots)=\frac32N\kB(1\mp 2^{-7/2}\xi+\cdots),\\
 		p&=\frac{N\kB T}V(1\pm 2^{-5/2}\e^{-\alpha}+\cdots)=\frac{N\kB T}V(1\pm 2^{-5/2}\xi+\cdots),\\
-		S&=N\kB\biggp{\alpha+\frac52\pm 5\cdot2^{-7/2}\e^{-\alpha}+\cdots}=N\kB\biggp{\frac52-\ln\xi\pm 5\cdot 2^{-7/2}\xi+\cdots}.
+		S&=N\kB\biggp{\alpha+\frac52\pm 5\cdot2^{-7/2}\e^{-\alpha}+\cdots}=N\kB\biggp{\frac52-\ln\xi\pm 2^{-7/2}\xi+\cdots}.
 	\end{align}
 \end{subequations}
 
@@ -260,7 +260,7 @@ $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/
 	% 由于历史条件，当时还不知道全同多粒子系存在（量子起源的）统计关联：对Bose子是有效吸引；而Fermi子是有效排斥。因此，即使没有动力学相互作用，仍可在一定条件下由于有效相互作用而发生凝聚现象。这是一种纯粹量子起源的相变。
 	
 	实现Bose-Einstein凝聚极其困难，原则上要使气体冷却至
-	$n\lambda_T/g_s\geq\zeta(3/2)\approx 2.612$，
+	$n\lambda_T^3/g_s\geq\zeta(3/2)\approx 2.612$，
 	但大多数情况下，在远高于BEC的$T_\crt$到达以前，已发生液化甚至固化的相变。为了实现原子气体的BEC，必须用极稀薄的气体，且要求
 	\begin{center}
 		二体弹性碰撞的弛豫时间$\ll$形成分子集团的非弹性碰撞的弛豫时间
@@ -283,7 +283,7 @@ $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/
 	\varepsilon=h\nu=cp.
 \end{align}
 光子间无相互作用，符合理想气体。%光子自旋$s=1$，简并度$g_s=2$；
-光子质量为0，因此$\lambda_T\to\infty$，且光子数不守恒，没有$\alpha$
+光子的色散关系为$\varepsilon=cp$，非相对论热波长公式不再适用。热平衡黑体辐射的光子数不守恒，因此$\mu=0$、$\alpha=0$
 \[
 	a_i=\frac{\omega_i}{\e^{\beta\varepsilon_i}-1}.
 \]
@@ -360,7 +360,7 @@ $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/
 		% =cu\cdot\frac12\int_0^{\pi/2}\cos\theta\sin\theta\d\theta
 		=\frac14cu=:\sigma T^4,
 		\quad
-		\sigma=\frac{2\pi^5\kB^4}{15h^3c^3}.
+		\sigma=\frac{2\pi^5\kB^4}{15h^3c^2}.
 		\qedhere
 	\]
 \end{proof}
@@ -403,10 +403,10 @@ $T\to T_\crt^+$时，$\alpha=-\beta\mu\to 0^-$，而$\Li_n(1)=\zeta(n)$，且$1/
 内能、比热、压强和熵
 \begin{subequations}
 	\begin{align}
-		U&=-\pv{\ln\Xi}\beta=3\frac{\ln\Xi}\beta=\frac{8\pi^5V}{15h^3c^3\beta^4}=4\sigma VT^4,\\
-		C_V&=\pu[V]UT=4\frac UT=16\sigma VT^3,\\
-		p&=\frac1\beta\pv{\ln\Xi}V=\frac13\frac UV=\frac43\sigma T^4,\\
-		S&=\kB(\ln\Xi+0+\beta U)=\frac43\frac UT=\frac{16}3\sigma VT^3,\\
+		U&=-\pv{\ln\Xi}\beta=3\frac{\ln\Xi}\beta=\frac{8\pi^5V}{15h^3c^3\beta^4}=\frac{4\sigma}c VT^4,\\
+		C_V&=\pu[V]UT=4\frac UT=\frac{16\sigma}c VT^3,\\
+		p&=\frac1\beta\pv{\ln\Xi}V=\frac13\frac UV=\frac{4\sigma}{3c}T^4,\\
+		S&=\kB(\ln\Xi+0+\beta U)=\frac43\frac UT=\frac{16\sigma}{3c}VT^3,\\
 		F&=U-TS=-\frac13U,\\
 		G&=F+pV=0\implies\mu=0.
 	\end{align}

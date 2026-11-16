@@ -32,7 +32,7 @@ Bernoulli实验、二项分布、Poisson分布、正态分布。
 $N$是第一级，$X$是第二级。Bernoulli串Bernoulli仍是Bernoulli；
 Poisson串Bernoulli得到Poisson。
 
-由概率论的知识，$Y$的期望和方差
+若$X_i$独立同分布，且与$N$独立，则$Y$的期望和方差
 \[
 	E(Y)=E(N)E(X),\quad D(Y)=D(N)E^2(X)+E(N)D(X).
 \]
@@ -55,11 +55,11 @@ Poisson串Bernoulli得到Poisson。
 \[
 	N=N_0\e^{-\lambda t}.
 \]
-每个放射性原子核在时间$t$内发生衰变是一个Bernoulli事件。放射源在某个时间段内发生的衰变数，\textbf{一定服从二项分布}。
+每个放射性原子核在时间$t$内发生衰变是一个Bernoulli事件。对初始核数$N_0$固定、同一核素且各核独立衰变的样品，时间$t$内的母核衰变数服从二项分布$\operatorname{Bin}(N_0,1-\e^{-\lambda t})$；衰变链中的关联事件不能直接套用此结论。
 
-通常放射源中的待衰变原子核数目$N_0$是很大的。若观测时间$t\ll T_{1/2}$，则可认为$t$时间内每个原子核衰变的概率$P=\lambda t$，此时，我们可以认为核的衰变数服从Poisson分布。
+通常放射源中的待衰变原子核数目$N_0$是很大的。若观测时间$t\ll T_{1/2}$，则可认为$t$时间内每个原子核衰变的概率$P=1-\e^{-\lambda t}\simeq\lambda t$，此时，我们可以认为核的衰变数服从Poisson分布。
 
-当总衰变数$ N $较大时，Poisson分布就会变成正态分布。
+当期望衰变数较大时，Poisson分布可用正态分布近似。
 \paragraph{放射性测量的统计误差}
 脉冲计数器的测量过程可以划分为三个基本过程
 \begin{compactitem}
@@ -67,7 +67,7 @@ Poisson串Bernoulli得到Poisson。
 	\item 进入探测器的粒子数$N_2$，Poisson串Bernoulli，服从Poisson分布
 	\item 被探测器测到的粒子数$N_3$，Poisson串Bernoulli，服从Poisson分布
 \end{compactitem}
-$N_3$为一个三级串级型随机变量。
+$N_3$为一个三级串级型随机变量。这里假设发射和探测概率稳定，各事件独立，且可忽略死时间和脉冲堆积。
 \begin{align}\label{detector-expect}
 	E(N_3)=E(N_1)E(X_2)E(X_3)=N_0\lambda t\cdot\frac{\Omega}{4\pi}\cdot\varepsilon.
 \end{align}
@@ -79,8 +79,7 @@ $E(N)$较大时，其与有限次测量平均值$\avg N$或单次测量值$N$相
 \]
 此标准偏差仅由统计涨落引起，未考虑其它因素的贡献。
 
-样本方差$\sigma_S$是总体方差的无偏估计，%可以由样本的标准偏差来对其进行估计。
-$\sigma_S$不仅包括统计误差，也反映了测量过程中其它偶然因素的贡献，$\sigma_S\geqslant\sigma$，可用于数据检验。
+对独立同分布的重复测量，以自由度$m-1$为分母的样本方差$s^2$是总体方差的无偏估计，样本标准差$s$本身通常不是无偏估计。额外的随机因素可能增大总体方差，但一次有限样本得到的$s$可能大于或小于Poisson预期值，不能要求$s\geq\sigma$必然成立。
 
 在测量过程中：$N$变大，$\sigma$也变大，以相对标准偏差来表示测量值的离散程度
 \begin{align}
@@ -109,7 +108,7 @@ $\sigma_S$不仅包括统计误差，也反映了测量过程中其它偶然因�
 	\item 电离，但电子不能继续电离；
 	\item 电离，且$\delta$电子可以继续电离。
 \end{compactenum}
-因此碰撞产生的总离子对数目不能用Poisson分布描述，而是用Fano分布描述，Fano因子
+因此碰撞产生的总离子对数目不能用Poisson分布描述，通常用Fano因子描述其相对Poisson分布的方差偏离；Fano因子本身并不唯一确定整个概率分布：
 \begin{align}
 	F:=\frac{\sigma^2}{\avg n},\quad\nu=\sqrt{\frac F{\avg n}}.
 \end{align}
@@ -125,7 +124,7 @@ $\sigma_S$不仅包括统计误差，也反映了测量过程中其它偶然因�
 \end{compactitem}
 \paragraph{粒子束脉冲（累计型）的总电离电荷量的涨落}
 射入探测器的X光子数目$n_0$服从Poisson分布，探测器对入射光子的本征探测效率$\varepsilon$，则
-被探测器测量的光子数目$n_1=n_0\varepsilon$服从Poisson分布，每个被探测到的光子在探测器内产生的离子对数目$n_2$服从Fano分布。粒子束脉冲在探测器内形成的离子对数目$N=n_1n_2$，其平均值和相对标准偏差
+独立探测时，给定$n_0$后的$n_1$服从二项分布$\operatorname{Bin}(n_0,\varepsilon)$；对Poisson入射流，$n_1$仍为Poisson变量，且$\avg n_1=\varepsilon\avg n_0$。设每个被探测光子产生的离子对数为独立同分布的$n_{2,j}$，均值$\avg n_2$、方差$F\avg n_2$。总离子对数为随机和$N=\sum_{j=1}^{n_1}n_{2,j}$，其平均值和相对方差
 \[
 	\avg N=\avg n_1\avg n_2,\quad\nu_N^2=\frac1{\avg n_1}\Bigp{1+\frac F{\avg n_2}}.
 \]
@@ -145,10 +144,17 @@ $\sigma_S$不仅包括统计误差，也反映了测量过程中其它偶然因�
 \begin{definition}{分辨时间}{resolving time}
 	分辨时间$\tau$是测量系统对入射粒子的响应时间，在这个时间内，系统无法再处理其它射线信号。
 \end{definition}
-若信号计数率为$n$，则测量计数率为$n\e^{-n\tau}$
+设真实入射率为$n$、记录率为$m$，入射事件构成稳定Poisson流。死时间损失取决于响应模型：
+\[
+	m=\begin{cases}
+		n\e^{-n\tau},&\text{可延长死时间：每次入射均重启死时间},\\
+		n/(1+n\tau),&\text{不可延长死时间：死时间内事件丢失而不延长}.
+	\end{cases}
+\]
+只有$n\tau\ll1$时，两者才在最低阶近似一致。
 \paragraph{相邻进位脉冲的时间间隔}
 在计数率较高时，需要使用具有进位系数$S$的定标器来计数。
-每接受来自探测器的$S$个信号，定标器产生一个进位信号脉冲。相邻进位脉冲时间间隔$T$服从Gamma分布
+每接受来自探测器的$S$个信号，定标器产生一个进位信号脉冲。若输入定标器的信号可近似为速率$m$的Poisson流（死时间可忽略），则相邻进位脉冲时间间隔$T$服从Gamma分布
 \[
 	f_S(t)=\frac{(mt)^{S-1}}{(S-1)!}m\e^{-mt}.
 \]
@@ -164,7 +170,7 @@ $\sigma_S$不仅包括统计误差，也反映了测量过程中其它偶然因�
 
 \section{计数统计误差的传递}
 
-在一般的核测量中，常涉及函数的统计误差的计算，也就是误差传递(error propagation)。若$x_1,\ldots,x_n$是相互独立的随机变量，其标准偏差分别为$\sigma_{x_1},\ldots,\sigma_{x_n}$，由这些随机变量导出的$y=f(x_1,\ldots,x_n)$的标准偏差可以用下面公式求出
+在一般的核测量中，常涉及函数的统计误差的计算，也就是误差传递(error propagation)。若$x_1,\ldots,x_n$是相互独立的随机变量，其标准偏差分别为$\sigma_{x_1},\ldots,\sigma_{x_n}$，由这些随机变量导出的$y=f(x_1,\ldots,x_n)$的方差在一阶Taylor展开近似下为
 \[
 	\sigma_y^2=\Bigp{\pv y{x_1}}^2\sigma_{x_1}^2+\cdots+\Bigp{\pv y{x_n}}^2\sigma_{x_n}^2.
 \]

@@ -9,8 +9,7 @@
 % 其次把地球-电离层系统当作谐振腔处理，接着简短地讨论电介质波导。我们还阐述波导中任意场的简正模展开，并应用到定域源产生的场。本章最后把简正模展开进一步应用到用变分法处理波导中障碍物问题。
 
 \section{导体表面和内部的场}
-理想导体(perfect conductor)和超导体(superconductor)的异同？
-最大的不同是不存在理想导体，但存在超导体。
+理想导体(perfect conductor)的零电阻条件给出内部$\bm E=0$，由Faraday定律只能推出$\p\bm B/\p t=0$，即初始磁场保持不变。超导体(superconductor)在Meissner态还会排斥体内磁场（表面穿透层除外），因此零电阻本身并不等价于Meissner效应。下面讨论非零频率的谐振场，或假定导体内部初始磁场为零。
 
 \paragraph{理想导体}
 
@@ -52,7 +51,7 @@
 \[
     \nabla\simeq-\uvec n\pp\xi.
 \]
-忽略导体内的位移电流，谐振场的Maxwell方程变为
+在$\sigma\gg\omega\varepsilon_\c$且$\delta$远小于表面曲率半径和切向变化尺度时，忽略导体内的位移电流，谐振场的Maxwell方程变为
 \begin{align*}
     \bm E_\c&\simeq\frac1\sigma\curl\bm H_\c\simeq-\frac1\sigma\uvec n\times\pv{\bm H_\c}\xi,\\
     \bm H_\c&=-\i\frac1{\mu_\c\omega}\curl\bm E_\c\simeq\i\frac1{\mu_\c\omega}\uvec n\times\pv{\bm E_\c}\xi.
@@ -80,7 +79,7 @@ $\bm H_\parallel$是导体外表面的切向磁场，则导体内电场
 每单位体积内Ohm损失率的时间平均为
 % 由Ohm定律，导体表面附件有电流密度$\bm J=\sigma\bm E_\c$，而
 \[
-    \dv{P_\text{loss}}V=\frac12\bm J\cdot\bm E\cj=\frac\sigma 2\abs{\bm J}^2.
+    \dv{P_\text{loss}}V=\frac12\Re(\bm J\cdot\bm E\cj)=\frac1{2\sigma}\abs{\bm J}^2=\frac\sigma2\abs{\bm E}^2.
 \]
 由于电流密度$\bm J$局限于导体表面下的薄层内，
 其等效有效面电流密度为
@@ -274,7 +273,7 @@ TM波和TE波的横磁场和横电场的关系如下：
 \[
     v_\varphi=\frac\omega{k_z}=\frac1{\sqrt{\mu\varepsilon}}\frac1{\sqrt{1-(\omega_\c/\omega)^2}}>\frac1{\sqrt{\mu\varepsilon}}.
 \]
-而群速度小于光速，并且在介质频率处为0：
+对于无色散填充介质，群速度小于介质中的光速，并在截止频率处趋于0：
 \[
     v_\text g=\dv\omega{k_z}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{1-\Bigp{\frac{\omega_\c}\omega}^2}<\frac1{\sqrt{\mu\varepsilon}}.
 \]

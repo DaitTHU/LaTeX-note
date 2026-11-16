@@ -35,11 +35,11 @@
 系数前乘2是因为光是横波，存在两种偏振态．
 \fi
 
-每个解$(n_x,n_y,n_z)$都对应一种驻波状态，其密度定义为：
+考虑体积$L^3$的立方空腔，计入电磁波的两种横向偏振，频率不超过$\nu$的模式数在大体积极限为$N(\nu)=8\pi L^3\nu^3/(3c^3)$。单位体积、单位频率间隔内的模式数为：
 \[
 	g(\nu)=\frac1{L^3}\dv{N(\nu)}\nu=\frac{8\pi}{c^3}\nu^2.
 \]
-根据Boltzmann分布，每个状态上的粒子数$\propto\e^{-\varepsilon/\kB T}$。
+在经典统计描述中，单个电磁模式的能量可连续变化，其能量概率密度正比于$\e^{-\varepsilon/\kB T}$。
 故能量平均值为
 \begin{align}
 	\avg E=\frac{\textstyle\int\zti\varepsilon\e^{-\varepsilon/\kB T}\d\varepsilon}{\textstyle\int\zti\e^{-\varepsilon/\kB T}\d\varepsilon}=\kB T.
@@ -61,22 +61,21 @@ u(\nu,T)=\avg Eg(\nu)=\frac{8\pi\nu^2}{c^3}\kB T.
 	I_\lambda(\lambda,T)=\frac{c}{\lambda^2}\cdot I_\nu\biggp{\frac c\lambda,T}=\frac{2c\kB T}{\lambda^4}.
 \end{align}
 注意
-$I_\nu$的单位为$\si{J/m^2}$，
-而$I_\lambda$的单位为$\si{W/m^3}$．
+$I_\nu$的单位为$\si{W.m^{-2}.sr^{-1}.Hz^{-1}}$，
+而$I_\lambda$的单位为$\si{W.m^{-3}.sr^{-1}}$．
 
 \eqref{eqn:Rayleigh-Jeans Formula of frequency}和\eqref{eqn:Rayleigh-Jeans Formula of wavelength}式被称为Rayleigh-Jeans公式．可以看到，当$\lambda\to0$时，$I_\lambda(\lambda,T)\to\infty$，这显然与事实不符，因此被称为\textit{紫外灾难}．\footnote{需要指出的时间顺序：Rayleigh于1900年推导公式，Jeans于1905年修正系数，紫外灾变是Ehrenfest于1911年提出，而Planck公式提出于1900年．}
 
 \paragraph{能量量子化}
 
-Wein通过对黑体辐射的实验数据进行拟合，提出了一个经验公式：
+Wien通过对黑体辐射的实验数据进行拟合，提出了一个经验公式：
 \begin{equation}
 	I_\lambda=C_1\lambda^{-5}\e^{-C_2/\lambda T},
 \end{equation}
 其在$\lambda$较小时符合得很好，但在$\lambda$较大时存在较大偏差。
-Planck为了
 Planck的解决方法是将能量分布变为离散的，即$\varepsilon_n=nh\nu$
 \begin{align}
-	\avg E=\frac{\textstyle\sum_{n=1}^\infty \varepsilon_n\e^{-\varepsilon_n/\kB T}}{\textstyle\sum_{n=1}^\infty\e^{-\varepsilon_n/\kB T}}=\frac{h\nu}{\e^{h\nu/\kB T}-1}.
+	\avg E=\frac{\textstyle\sum_{n=0}^\infty \varepsilon_n\e^{-\varepsilon_n/\kB T}}{\textstyle\sum_{n=0}^\infty\e^{-\varepsilon_n/\kB T}}=\frac{h\nu}{\e^{h\nu/\kB T}-1}.
 \end{align}
 由此得到的辐射率与实验符合的很好。
 
@@ -129,7 +128,7 @@ Planck的解决方法是将能量分布变为离散的，即$\varepsilon_n=nh\nu
 \[
 	\xi=5\bigp{1-\e^{-\xi}}\implies\xi_0=\num{4.96511423}\ldots
 \]
-\begin{theorem}{Wein位移定律}{Wien's Displacement Law}
+\begin{theorem}{Wien位移定律}{Wien's Displacement Law}
 	黑体电磁辐射光谱辐射度的峰值波长与自身温度乘积为常数
 	\begin{align}
 		\lambda_\mathrm m T=\frac{hc}{4.965\kB}=\SI{2.89777}{\mm\K}.
@@ -162,7 +161,7 @@ Planck的解决方法是将能量分布变为离散的，即$\varepsilon_n=nh\nu
 	\begin{align}
 		j=\sigma T^4.
 	\end{align}
-	其中$\sigma:=\frac{2\pi^5k^4}{15h^3c^2}=\SI{5.6704e-8}{\W\per\m\squared\per\K\squared}.$
+	其中$\sigma:=\frac{2\pi^5\kB^4}{15h^3c^2}=\SI{5.6704e-8}{W.m^{-2}.K^{-4}}.$
 \end{theorem}
 \section{光电效应和Compton效应}
 1897年，Hertz发现紫外线照射到金属电极上，可以帮助产生电火花。对于光电效应中经典理论所不能解释的现象，1905年\footnote{该年Einstein发布了四篇划时代的论文，分别涉及光电效应、Brown运动、狭义相对论和质能方程，也被称为Einstein奇迹年。}Einstein在他的论文《关于光的产生和转变的一个启发性观点》中主张光子也是量子化的，其能量$E=h\nu$，且光电效应方程

@@ -53,10 +53,10 @@
 		b_n & =\frac1\ell\int_{-\ell}^\ell f(x)\sin\frac{n\pi x}\ell\d x.
 	\end{align*}
 \end{definition}
-\begin{theorem}{Parserval等式}{Parserval Equality}
+\begin{theorem}{Parseval等式}{Parserval Equality}
 	若$f\in\mathscr L^2\bigb{-\ell,\ell}$即平方可积，则
 	\[
-		\frac1\ell\int_{-\ell}^\ell f^2(x)\d x=\frac{a_0^2}2+\sum_{n=1}^\infty(a_n^2+b_n^2).
+		\frac1\ell\int_{-\ell}^\ell \abs{f(x)}^2\d x=\frac{\abs{a_0}^2}2+\sum_{n=1}^\infty(\abs{a_n}^2+\abs{b_n}^2).
 	\]
 \end{theorem}
 \begin{theorem}{Dirichlet收敛定理}{Dirichlet Convergence Theorem}
@@ -111,7 +111,7 @@
 		D_n & =\frac2{n\pi a}\int_0^L\psi(x)\sin\Bigp{\frac{n\pi x}L}\d x=:\frac{L}{n\pi a}\psi_n^{\sine}.
 	\end{align*}
 	
-	至于形式解是否符合条件，不是考试涉及的范围。
+	将形式级数当作古典解时，还须检查逐项微分的收敛性及初边值相容性；仅有平方可积初值时，应在相应的弱解意义下理解展开。
 \end{example}
 \begin{example}{圆域Laplace方程}{}
 	圆域上的Laplace方程，采用极坐标
@@ -151,7 +151,7 @@
 	\]
 	再由自然条件$\abs{R(0)}<\infty$，可知$d_i\equiv 0$，进而
 	\[
-		u(r,\theta)=\frac{a_0}2+\sum_{n=1}^\infty r^n(a_n\cos n\theta+b_b\sin n\theta),
+		u(r,\theta)=\frac{a_0}2+\sum_{n=1}^\infty r^n(a_n\cos n\theta+b_n\sin n\theta),
 	\]
 	结合边界条件$u(r_0,\theta)=\varphi(\theta)$，求得系数
 	\[
@@ -194,11 +194,11 @@
 	\begin{align*}
 		\begin{cases}
 			u_t=a^2u_{xx},\quad x\in(0,L),\;t>0,\\
-			u(0,t)=0,\quad u_t(L,t)+hu(L,t)=0,\\
+			u(0,t)=0,\quad u_x(L,t)+hu(L,t)=0,\\
 			u(x,0)=\varphi(x).
 		\end{cases}
 	\end{align*}
-	其中热交换常数$h>0$。
+	其中$h>0$是表面换热系数与热导率之比，量纲为长度的倒数，环境温度取为零。
 	
 	分离常数$u(x,t)=X(x)T(t),$
 	\begin{align*}
@@ -215,7 +215,7 @@
 	\]
 	形式解
 	\[
-		u_n(x,t)=\sum_{n=1}^\infty C_n\even^{-\beta_n^2a^2t}\sin\beta_nx.
+		u(x,t)=\sum_{n=1}^\infty C_n\e^{-\beta_n^2a^2t}\sin\beta_nx.
 	\]
 	
 	再根据初始条件
@@ -246,9 +246,9 @@
 	\[
 		f(x)\sim\sum_{i=1}^\infty a_if_i(x),\quad a_i=\frac{\inp f{f_i}_\rho}{\norm{f_i}^2_\rho}.
 	\]
-	且有Parserval等式
+	且有Parseval等式
 	\[
-		\norm f_\rho^2=\sum_{i=1}^n\inp f{\frac{f_i}{\norm{f_i}_\rho}}_\rho^2.
+		\norm f_\rho^2=\sum_{i=1}^\infty\inp f{\frac{f_i}{\norm{f_i}_\rho}}_\rho^2.
 	\]
 \end{theorem}
 \begin{definition}{Sturm-Liouville方程}{Sturm-Liouville Equation}
@@ -287,10 +287,10 @@
     		\end{cases}$\quad 或 \quad 周期：
     	$\begin{cases}
     			f(a)=f(b) \\
-    			f'(a)=f'(b)
+			k(a)f'(a)=k(b)f'(b)
     		\end{cases}$
     \end{center}
-    可使$\LT$是对称算子，即
+    可分边界的实系数对$(c_1,c_2),(d_1,d_2)$均不同时为零。上述条件可使$\LT$是对称算子，即
     \[
     	\inp{\LT[f]}g_\rho=\inp f{\LT[g]}_\rho.
     \]
@@ -298,33 +298,28 @@
 \begin{theorem}{Sturm-Liouville定理1}{Sturm-Liouville Theorem I}
 	正则Sturm-Liouville问题
 	\begin{compactenum}
-		\item 有可数多个实特征值
+		\item 有可数多个实特征值（以下按互异特征值编号）
 		      \[
 				\lambda_1<\lambda_2<\cdots<\lambda_n<\cdots,\quad\lim_{n\to\infty}\lambda_n=+\infty.
 			  \]
 		      % 对应特征函数
 		      % \[X_1(x),X_2(x),\ldots,X_n(x),\ldots\]
-		\item 特征函数加权$\rho$\;-\;正交；
+		\item 不同特征值对应的特征函数加权$\rho$\;-\;正交；同一特征子空间内可选取正交基；
 		\item 特征值的特征子空间至多2维，
 
 		      可分边界条件下，特征子空间为1维；
 		\item 特征函数构成$\mathscr L_\rho^2$上完备的正交基底。
 	\end{compactenum}
     \tcblower
-    奇异Sturm-Liouville问题：不满足正则条件或区间无界；但若
-    \begin{center}
-        $a$ (或$b$)是$k(x)$的一级零点，是$q(x)$的至多一级极点 
-    \end{center}
-    时，称$a$ (或$b$)是方程的正则奇点。定理结论依旧成立！
+    奇异Sturm-Liouville问题不满足上述正则条件，例如端点处系数退化或区间无界。此时必须另外确定端点条件和算子的自伴定义域，谱可能含连续部分，不能直接套用上述离散谱结论。
 \end{theorem}
 \begin{theorem}{Sturm-Liouville定理2}{Sturm-Liouville Theorem II}
 	若正则Sturm-Liouville问题还满足$q\geqslant 0$；可分边界条件下还需满足$c_1c_2\leqslant 0,\;d_1d_2\geqslant 0$。
 	\begin{compactenum}
 		\item 所有特征值非负；
 
-		      特别地，存在0特征值（对应特征函数1）的充要条件是$q\equiv 0$且两端为第二类边界条件；
-		\item 若正则条件为周期条件，那么其对应于每一个非最小特征值$\lambda_0$
-		的特征值有两个相互正交的特征函数。
+		      特别地，在上述可分边界条件下，存在0特征值的充要条件是$q\equiv 0$且两端为Neumann条件，此时常函数为特征函数；周期边界下，$q\equiv 0$也给出常函数零模；
+		\item 周期边界下特征值可为单重或二重，不能断言所有非最低特征值均二重简并。例如常系数问题$-f''=\lambda f$在周期区间上具有正弦、余弦两种同频模式，但一般变系数问题不一定保留这一简并。
 	\end{compactenum}
 \end{theorem}
 \begin{example}{扇形域Dirichlet问题}{}

@@ -39,7 +39,7 @@
 
 \begin{definition}
 	{分布函数}{distribution function}
-	系统的运动状态$(q,p)$在时刻$t$处于相体积元$\d\Omega$中的几率记为$\rho(q,p,t)$，称为分布函数(distribution function)，满足归一化条件
+	系统的运动状态$(q,p)$在时刻$t$处于相体积元$\d\Omega$中的几率为$\rho(q,p,t)\d\Omega$，其中$\rho(q,p,t)$是概率密度，称为分布函数(distribution function)，满足归一化条件
 	\[
 		\int_\varGamma\rho(q,p,t)\d\Omega=1.
 	\]
@@ -104,7 +104,7 @@
 
 微正则系综的特性函数就是熵
 \[
-	\rho_\st=\frac1\Omega,\quad S=-\sum_\st\rho_\st\ln\rho_\st.
+	\rho_\st=\frac1\Omega,\quad S=-\kB\sum_\st\rho_\st\ln\rho_\st=\kB\ln\Omega.
 \]
 
 \section{正则系综}
@@ -141,7 +141,7 @@
 	&=-\d\biggp{\pv{\ln Z}\beta}+\frac1\beta\Bigb{\d(\ln Z)-\pv{\ln Z}\beta\d\beta}\\
 	&=\frac1\beta\d\biggp{\ln Z-\beta\pv{\ln Z}\beta}.
 \end{align*}
-两边全微分要求$\kB T=\beta$，且 
+由热库的$S_\rs=\kB\ln\Omega_\rs$及$(\p S_\rs/\p E_\rs)_{V,N}=1/T$可得$\beta=1/(\kB T)$，且
 \begin{align}
 	S-S'=\kB\biggp{\ln Z-\beta\pv{\ln Z}\beta}=\kB(\ln Z+\beta E).
 \end{align}
@@ -185,11 +185,11 @@
 因而，$E$可看作是孤立系统的能量，用正则分布研究孤立系统。
 \paragraph{正则分布的连续形式}$\varGamma$空间中，若能量准连续
 \begin{align}
-	Z=\frac1{N!}\frac1{h^f}\int\e^{-\beta E}\prod_{i=1}^N\d q_i\nd p_i
+	Z=\frac1{N!}\frac1{h^f}\int\e^{-\beta E}\prod_{i=1}^f\d q_i\nd p_i
 \end{align}
 能量曲面$H(p,q,y)=E$包围的相体积
 \begin{align}
-	\Omega(E)=\int_{H\leqslant E}\prod_{i=1}^N\d q_i\nd p_i.
+	\Omega(E)=\int_{H\leqslant E}\prod_{i=1}^f\d q_i\nd p_i.
 \end{align}
 故按能量分布
 \begin{align}
@@ -247,13 +247,13 @@ $N$个全同粒子，体积$V$，
 		-1,&r_{ij}\to0
 	\end{cases}
 \]
-分子作用力是短程的，故一般$\abs{f_{ij}}<1$，可展开
+对稳定的短程相互作用，可将乘积按Mayer函数展开。短程性并不保证$\abs{f_{ij}}<1$：吸引区的$f_{ij}$可以很大。形式上
 \[
 	Q=\int\prod_{i<j}(1+f_{ij})\d q=\int\Bigp{1+\sum_{i<j}f_{ij}+\frac12\overset{(i,j)\neq(k,\ell)}{\sum_{i<j}\sum_{k<\ell}}f_{ij}f_{k\ell}+\cdots}\d q.
 \]
-第三项后仅当多个分子都很接近时才显著，故只保留前两项
+先写出单个粒子对对构型积分的贡献：
 \[
-	Q\simeq V^N+\frac12N(N-1)V^{N-2}\int f(r_{12})\d\bm r_1\nd\bm r_2.
+	Q=V^N+\frac12N(N-1)V^{N-2}\int f(r_{12})\d\bm r_1\nd\bm r_2+\cdots.
 \]
 引入质心坐标$\bm R=\frac{m_1\bm r_1+m_2\bm r_2}{m_1+m_2}$和相对位置$\bm r=\bm r_1-\bm r_2$，易证$\det J=1$
 \[
@@ -263,18 +263,11 @@ $N$个全同粒子，体积$V$，
 \begin{align}
 	a_2(T)=-\frac12\int f(r)\d\bm r=-2\pi\int\zti\bigp{\e^{-\beta\phi(r)}-1}r^2\d r
 \end{align}
-故
-\[
-	Q\simeq V^N-N(N-1)V^{N-1}a_2(T)\simeq V^N\Bigp{1-\frac{N^2}Va_2(T)}.
-\]
-取对数\footnote{过程中一系列近似相当于
-\[
-	\ln\e^{-x}=\ln\Bigp{1-x+\frac12x^2+\cdots}\simeq\ln(1-x)\simeq -x
-\]
-即结果并不会不严格。}
+在热力学极限中，$N^2a_2/V$一般并不小，不能将$Q$截断后直接使用$\ln(1-x)\simeq-x$。应对$\ln Q$作连通集团展开：在低密度且高阶集团贡献可忽略时，保留二体项得到
 \begin{align}
-	\ln Q=N\ln V+\ln\Bigp{1-\frac{N^2}Va_2(T)}\simeq N\ln V-\frac{N^2}Va_2(T).
+	\ln Q=N\ln V-\frac{N(N-1)}Va_2(T)+\cdots\simeq N\ln V-\frac{N^2}Va_2(T).
 \end{align}
+这里的控制参数与密度$n=N/V$有关，例如$n\int\abs{f(r)}\d\bm r\ll1$可用于判断低密度近似；相变附近不应据此截断。
 状态方程
 \begin{align*}
 	p=\frac1\beta\pv{\ln Q}V=\frac1\beta\Bigp{\frac NV+\frac{N^2}{V^2}a_2(T)}.
@@ -318,16 +311,16 @@ $N$个全同粒子，体积$V$，
 
 \paragraph{Ising模型}$N$个取值为$\pm 1$($\uparrow\downarrow$)的格点$S_i$，系统的能量包括邻对的相互作用和外磁场能
 \begin{align}
-	E\{S_i\}=-\sum_{ij}\varepsilon_{ij}S_iS_j-\mu_0\mu H\sum_iS_i
+	E\{S_i\}=-\sum_{\langle ij\rangle}\varepsilon_{ij}S_iS_j-\mu_0\mu H\sum_iS_i
 \end{align}
-对于各向同性的物质$\varepsilon_{ij}=\varepsilon$
+其中$\langle ij\rangle$对每一无序最近邻对只计一次。对于均匀铁磁耦合$\varepsilon_{ij}=\varepsilon>0$
 \[
-	E\{S_i\}=-\varepsilon\sum_{ij}S_iS_j-\mu_0\mu H\sum_iS_i.
+	E\{S_i\}=-\varepsilon\sum_{\langle ij\rangle}S_iS_j-\mu_0\mu H\sum_iS_i.
 \]
 配分函数
 \[
 	Z=\prod_{i=1}^N\sum_{S_i=\pm 1}\e^{-\beta E\{S_i\}}.\]
-\paragraph{平均场近似}作用于$S_i$的力为 
+\paragraph{平均场近似}将其余自旋固定后，能量中$-S_i$的系数为局域有效场对应的能量：
 \[
 	-\pv E{S_i}=\sum_j\varepsilon_{ij}S_j+\mu_0\mu H.
 \]
@@ -341,24 +334,28 @@ $N$个全同粒子，体积$V$，
 \]
 其中$z$为任一给定格点的最近邻格点数，对于二维方阵，$z=4$。
 
-用平均场$\avg H$代替外场$H$并忽略其涨落，这样相互作用自旋系统便化为近独立的自旋系统，配分函数
+令$m=\avg S$，用$S_iS_j\simeq m(S_i+S_j)-m^2$忽略涨落的乘积，得到
 \[
-	Z=\prod_{i=1}^N\sum_{S_i=\pm 1}\e^{\beta\mu_0\mu\avg H S_i}=\bigp{\e^{\beta\mu_0\mu\avg H}+\e^{-\beta\mu_0\mu\avg H}}^N.
+	E_{\mathrm{MF}}=\frac12Nz\varepsilon m^2-\mu_0\mu\avg H\sum_iS_i,
 \]
-磁矩
+从而平均场配分函数为
+\[
+	Z_{\mathrm{MF}}=\e^{-\beta Nz\varepsilon m^2/2}\bigp{2\cosh(\beta\mu_0\mu\avg H)}^N.
+\]
+常数项避免重复计数相互作用能，计算自由能时不能省略。令$F_{\mathrm{MF}}=-\kB T\ln Z_{\mathrm{MF}}$对$m$取驻值，即得自洽方程。平衡处磁矩为
 \begin{align}
-	M=\frac1\beta\pv{\ln Z}{\mu_0 H}=N\mu\tanh\beta\mu_0\mu\avg H.
+	M=\frac1\beta\biggp{\pv{\ln Z_{\mathrm{MF}}}{\mu_0 H}}_m=N\mu\tanh(\beta\mu_0\mu\avg H).
 \end{align}
 
 不加外场时$H=0$，有
 \begin{align}
 	M=N\mu\avg S=N\mu\tanh\beta z\varepsilon\avg S.\implies\avg S=\tanh\beta z\varepsilon\avg S.
 \end{align}
-由$y=\tanh x$图像的性质，当$\beta z\varepsilon\leqslant 1$时，只有$\avg S=0$的解，自发磁化为0，顺磁态；而当$\beta z\varepsilon>1$时，有非零的自发磁化，铁磁态。相变的临界温度
+由$y=\tanh x$图像的性质，当$\beta z\varepsilon\leqslant 1$时，只有$\avg S=0$的解，自发磁化为0，顺磁态；而当$\beta z\varepsilon>1$时，有非零的自发磁化，铁磁态。平均场近似给出的临界温度为
 \begin{align}
 	T_\Cr=\frac{z\varepsilon}\kB.
 \end{align}
-Ising模型在平均场近似下的临界指数与Landau模型相同，详见作业。
+Ising模型在平均场近似下的临界指数与Landau模型相同。该结果并非任意维数的精确结论：一维短程Ising模型在零场、有限温度下没有相变。
 \section{巨正则分布}
 %巨正则分布是$V$恒定，并与恒温粒子源接触而达平衡系统服从的分布，平衡时，温度$T$和化学势$\mu$相同。
 
@@ -380,7 +377,7 @@ $N^{(0)}\gg N,E^{(0)}\gg E_\st$，故可在$(N^{(0)},E^{(0)})$处展开
 \end{align}
 \paragraph{连续形式}对不同粒子数$N$，需定义不同维数的$\Gamma$空间，设粒子自由度为$r$，则系统自由度为$f=Nr$：
 \begin{align}
-	\Xi=\sum_{N=0}^\infty\frac1{N!h^{Nr}}\e^{-\alpha N}\int\e^{-\beta E(q,p,y)}\prod_{i=1}^N\d q_i\nd p_i.
+	\Xi=\sum_{N=0}^\infty\frac1{N!h^{Nr}}\e^{-\alpha N}\int\e^{-\beta E(q,p,y)}\prod_{i=1}^{Nr}\d q_i\nd p_i.
 \end{align}
 \paragraph{巨配分函数与配分函数的关系}有时，如量子统计情形，$\Xi$比$Z$计算方便
 \[
@@ -483,7 +480,7 @@ Fermi分布
 \end{align}
 由$(1+x)^n$的二项式展开
 \begin{align}
-	\Xi_i&=\sum_{a_i=0}^{\omega_i}\frac{\omega_i!}{a_i!(\omega_i-a_i)!}\e^{-\alpha a_i-\beta a_i\varepsilon_i}=\bigp{1+\e^{-\alpha-\beta\varepsilon_i}}^{-\omega_i};\\
+	\Xi_i&=\sum_{a_i=0}^{\omega_i}\frac{\omega_i!}{a_i!(\omega_i-a_i)!}\e^{-\alpha a_i-\beta a_i\varepsilon_i}=\bigp{1+\e^{-\alpha-\beta\varepsilon_i}}^{\omega_i};\\
 	a_i&=-\pv{\ln\Xi_i}\alpha=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}+1}.
 \end{align}
 这也正是巨配分函数的由来。

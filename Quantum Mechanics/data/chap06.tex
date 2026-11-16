@@ -71,7 +71,10 @@
 \begin{align}
 	\psi\to\psi\e^{\i qf/\hbar c}.
 \end{align}
-则$\psi'$满足的\Schr 方程，形式上与$\psi$相同。上式相因子依赖于空间坐标，所以称作电磁场下\Schr 方程的定域规范变换不变性。相应的$\rho,\bm j,\avg{\bm p}$也规范不变。
+则$\psi'$满足的\Schr 方程，形式上与$\psi$相同。上式相因子依赖于空间坐标，所以称作电磁场下\Schr 方程的定域规范变换不变性。相应的$\rho,\bm j$和机械动量的平均值$\avg{\bm P}$规范不变；正则动量的平均值$\avg{\bm p}$一般会改变。此时概率流为
+\[
+\bm j=\frac{\hbar}{2\mu\i}(\psi^*\nabla\psi-\psi\nabla\psi^*)-\frac{q}{\mu c}\bm A\abs\psi^2.
+\]
 \paragraph{时间反演}在时间反演下，
 $\qo p\to-\qo p$，相应的需要$\bm A\to-\bm A$，方程才不变。
 \newpage
@@ -103,13 +106,13 @@ $B^2$的线性项：表示反磁项，对于自由电子，该项必须考虑。
 \]
 代入$\hat H\psi=E\psi$
 \[
-	\Bigb{-\frac{\hbar^2}{2M}\Bigp{\dd[2]\rho+\frac1\rho\dd\rho}+\frac12M\omega_\Larmor^2\rho^2}R=(E-M\hbar\omega_\Larmor)R.
+	\Bigb{-\frac{\hbar^2}{2M}\Bigp{\dd[2]\rho+\frac1\rho\dd\rho-\frac{m^2}{\rho^2}}+\frac12M\omega_\Larmor^2\rho^2}R=ER.
 \]
 本征函数涉及合流超几何函数
 \[
 R_{n_\rho\abs m}(\rho)\propto\rho^{\abs m}F(-n_\rho,\abs m+1,\alpha^2\rho^2)\e^{-\alpha^2\rho^2/2},\quad \alpha:=\sqrt{\frac{M\omega_\Larmor}\hbar}=\sqrt{\frac{eB}{2\hbar  c}}.
 \]
-Landau能级
+上述二维谐振子能量为$E=(2n_\rho+\abs m+1)\hbar\omega_\Larmor$。加上$\omega_\Larmor L_z$后，横向Landau能级为
 \begin{gather*}
 	E_N=(N+1)\hbar\omega_\Larmor,\quad N=(2n_\rho+\abs m+m)=0,2,4,\ldots\\
 	n_\rho=0,1,2,\ldots,\quad m=0,\pm 1,\pm 2,\ldots
@@ -118,7 +121,7 @@ Landau能级
 自由带电粒子在垂直于磁场的平面内($xy$平面)能谱是分立的，呈现为谐振子能谱，称为Landau能级。这是粒子在磁场中回旋运动时自身干涉而呈现的量子化现象，而沿磁场方向仍为自由运动，并未受到影响。
 
 磁场中的自由带电粒子的磁附加能为正值，具有反磁性。
-\paragraph{Landau规范}给定磁场的磁矢势具有一定的规范自由度。当$\bm A$被添加一个标量场的梯度时，波函数的整体相位也会随着标量场产生一定的变化，但由于哈密顿算符具有规范不变性，系统的物理性质并不受选定的规范影响。在Landau规范中，磁矢势取为
+\paragraph{Landau规范}给定磁场的磁矢势具有一定的规范自由度。当$\bm A$被添加一个标量场的梯度时，波函数的局部相位也会随之变化，Hamilton算符与波函数协同变换，系统的物理性质并不受选定的规范影响。在Landau规范中，磁矢势取为
 \[
 	\bm A=(-By,0,0)
 \]
@@ -126,9 +129,9 @@ Hamilton量
 \[
 	\hat H=\frac1{2M}\Bigb{\Bigp{\hat p_x-\frac{eB}c\hat y}^2+\hat p_y^2}.
 \]
-不显含$\hat x$和$\hat y$故$\hat p_x,\hat p_z$守恒，取守恒量完全集$\{\hat H,\hat p_x\}$的共同本征态
+横向Hamilton量不显含$x$，故$\hat p_x$守恒（完整三维问题还包括自由的$z$运动，$\hat p_z$也守恒），取守恒量完全集$\{\hat H,\hat p_x\}$的共同本征态
 \[
-	\phi(x,y)=\e^{\i p_xx}\phi(y),\quad-\infty<p_x<+\infty
+	\phi(x,y)=\e^{\i p_xx/\hbar}\phi(y),\quad-\infty<p_x<+\infty
 \]
 进而
 \[
@@ -173,9 +176,10 @@ Hamilton量
 		此频率不含$\hbar$，有经典图像，是Lorentz力在$\rho_B$半径上产生回旋运动的频率。
 	\item 由于能级简并度为$f_n=\infty$；Landau能级的简并度与规范选择无关。
 
-		由于$N=2n_\rho+\abs m+n$，所有$m\leqslant 0$的态所对应的能量都相同.
+		由于$N=2n_\rho+\abs m+m$，固定$n_\rho$时，所有$m\leqslant 0$的态所对应的能量都相同。无穷简并对应无限平面；有限面积$A$内，每个Landau能级每种自旋的体态数约为$eBA/(2\pi\hbar c)$（Gauss单位制），边界会改变边缘态。
 \end{compactenum}
 \section{量子Hall效应}
+本节Hall电压和电阻的公式采用SI单位制。
 在导体(半导体)片上通电流，并在垂直方向加上磁场，这样载流子受到磁场偏转力为$q\bm v\times\bm B$，会使载流子产生垂直于电流方向的运动，并在样品两侧堆积形成横向电场抵消掉磁场的偏转力，形成Hall电压
 \[
 U=\frac1{\rho q}\frac{IB}d.

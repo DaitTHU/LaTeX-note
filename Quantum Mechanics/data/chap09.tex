@@ -14,7 +14,7 @@
 \end{align}
 采用能量$\hat H_0$表象 
 \begin{align}
-	\ket{\psi(0)}=\sum_n C_{nk}(t)\ket n\e^{-\i E_nt/\hbar},\quad C_{nk}(0)=\vd_{nk}.
+	\ket{\psi(t)}=\sum_n C_{nk}(t)\ket n\e^{-\i E_nt/\hbar},\quad C_{nk}(0)=\vd_{nk}.
 \end{align}
 体系$t$时刻跃迁到定态$\ket{k'}$的概率为$\abs{C_{k'k}(t)}^2$。
 
@@ -46,7 +46,7 @@
 
 迭代一次
 \begin{align*}
-	C_{k'k}(t)&=\vd_{k'k}+\frac1{\i\hbar}\int_0^t\sum_nH'_{k'n}(\tau)\e^{\i\omega_{k'n}\tau}\biggb{\vd_{nk}+\frac1{\i\hbar}\int_0^\tau\sum_nH'_{k'n}(\pi)\e^{\i\omega_{k'n}\pi}C_{nk}(\pi)\d\pi}\d\tau\\
+	C_{k'k}(t)&=\vd_{k'k}+\frac1{\i\hbar}\int_0^t\sum_nH'_{k'n}(\tau)\e^{\i\omega_{k'n}\tau}\biggb{\vd_{nk}+\frac1{\i\hbar}\int_0^\tau\sum_mH'_{nm}(s)\e^{\i\omega_{nm}s}C_{mk}(s)\d s}\d\tau\\
 	&=\vd_{k'k}+\frac1{\i\hbar}\int_0^tH'_{k'k}(\tau)\e^{\i\omega_{k'k}\tau}\d\tau+\cdots
 \end{align*}
 零级近似
@@ -57,13 +57,13 @@ C_{k'k}^{(0)}=\vd_{k'k};
 \[
 C_{k'k}^{(1)}=\frac1{\i\hbar}\int_0^tH'_{k'k}(\tau)\e^{\i\omega_{k'k}\tau}\d\tau,
 \]
-代表直接从初态$\ket k$跃迁到末态$\ket{k'}$，故跃迁概率
+代表直接从初态$\ket k$跃迁到不同末态$\ket{k'}$（$k'\neq k$）。在总跃迁概率远小于1的一阶微扰适用范围内，跃迁概率为
 \begin{align}
 	P_{k'k}(t)=\frac1{\hbar^2}\abs{\int_0^tH'_{k'k}(\tau)\e^{\i\omega_{k'k}\tau}\d\tau}^2.
 \end{align}
-由$\hat H'$是Hermite的。故$P_{k'k}=P_{kk'}$，即从初态到末态的跃迁概率等于从末态到初态的跃迁概率。
+由$\hat H'(t)$是Hermite的，上述一阶跃迁振幅互为负共轭，故在这一阶近似下$P_{k'k}=P_{kk'}$；这不是任意时变驱动下精确跃迁概率的一般互易定理。
 
-对于初态$\ket k$和末态$\ket{k'}$都有简并的情况，计算跃迁概率应对$\ket k$能级各简并态求平均，而对$\ket{k'}$能级各简并态求和，此时跃迁概率不一定相等。
+对于初态$\ket k$和末态$\ket{k'}$都有简并的情况，若初态是各简并态等权的非相干混合，计算跃迁概率应对$\ket k$能级各简并态求平均，而对$\ket{k'}$能级各简并态求和，此时跃迁概率不一定相等。
 
 二级近似
 \[
@@ -94,7 +94,7 @@ C_{k'k}^{(2)}=\frac1{(\i\hbar)^2}\sum_n\int_0^tH'_{k'n}(\tau)\e^{\i\omega_{k'n}\
 \]
 其中电子的电偶极矩$\bm D=-e\r$，电偶极矩与电场作用引起的跃迁称为电偶极跃迁。
 \begin{align*}
-	C_{k'k}^{(1)}(t)&=\frac1{\i\hbar}\int_0^tH_{k'k}'(\tau)\e^{-\i\omega_{k'k}\tau}\d\tau=\frac{W_{k'k}}{\i\hbar}\int_0^t\cos\omega\tau\e^{-i\omega_{k'k}\tau}\d\tau\\
+	C_{k'k}^{(1)}(t)&=\frac1{\i\hbar}\int_0^tH_{k'k}'(\tau)\e^{\i\omega_{k'k}\tau}\d\tau=\frac{W_{k'k}}{\i\hbar}\int_0^t\cos\omega\tau\e^{\i\omega_{k'k}\tau}\d\tau\\
 	&=-\frac{W_{k'k}}{2\hbar}\biggb{\frac{\e^{\i(\omega_{k'k}+\omega)t}-1}{\omega_{k'k}+\omega}+\frac{\e^{\i(\omega_{k'k}-\omega)t}-1}{\omega_{k'k}-\omega}}.
 \end{align*}
 下面讨论原子吸收光的跃迁，$E_{k'}>E_k$，只有当入射光$\omega\doteq\omega_{k'k}$时，才会引起$E_k\to E_{k'}$跃迁，此时
@@ -109,14 +109,15 @@ $t\to\infty$时，有
 \begin{align}
 	P_{k'k}(t)=\frac{\pi t}{2\hbar^2}\abs{W_{k'k}}^2\vd(\omega_{k'k}-\omega);
 \end{align}
+这里的长时间极限按分布意义使用，适用于与连续谱或光谱积分结合的速率计算；对单个严格共振的离散末态，一阶概率随$t^2$增长，不能无限延长到微扰失效之后。
 跃迁速率
 \begin{align}
 	w_{k'k}&=\dd tP_{k'k}=\frac\pi{2\hbar^2}\abs{W_{k'k}}^2\vd(\omega_{k'k}-\omega)\\
 	&=\frac\pi{2\hbar^2}\abs{\bm D_{k'k}}^2E_0^2\cos^2\theta\vd(\omega_{k'k}-\omega),
 \end{align}
-$\theta$为电子的电偶极矩与电场的夹角。
+上式的夹角形式仅在跃迁偶极矩$\bm D_{k'k}$可取实矢量时适用；一般应将$\abs{\bm D_{k'k}}^2E_0^2\cos^2\theta$写为$\abs{\bm D_{k'k}\cdot\bm E_0}^2$。
 
-而对于非偏振光，应对$\cos^2\theta$取平均
+对各向同性、非偏振的辐射场，应对传播方向和偏振一同平均；仅有固定传播方向的非偏振光时，不能直接使用以下$1/3$因子。各向同性平均给出
 \[
 	\ave{\cos^2\theta}=\frac1{4\pi}\int_0^{2\pi}\int_0^\pi\cos^2\theta\sin\theta\d\theta\nd\phi=\frac13.
 \]
@@ -127,14 +128,14 @@ $\theta$为电子的电偶极矩与电场的夹角。
 
 对于非单色光，总跃迁速率是对各种频率求和
 \begin{align}
-	w\tot=\int\iti\omega_{k'k}\d\omega=\frac\pi{6\hbar^2}\abs{\bm D_{k'k}}^2E_0^2(\omega_{k'k}).
+	w\tot=\int_0^\infty w_{k'k}(\omega)\d\omega=\frac\pi{6\hbar^2}\abs{\bm D_{k'k}}^2E_0^2(\omega_{k'k}).
 \end{align}
 
-频率为$\omega$的电磁波能量密度的时间平均值
+此处$E_0^2(\omega)$表示按角频率定义的场强平方谱密度，$\rho(\omega)\d\omega$是在区间$[\omega,\omega+\d\omega]$内的能量密度；Gauss单位制下
 \begin{align*}
 	\rho(\omega)=\frac1{8\pi}\ave{E^2+B^2}=\frac1{8\pi}E_0^2(\omega).\CGS
 \end{align*}
-故非偏振自然光引起的跃迁速率
+故各向同性非偏振辐射引起的跃迁速率
 \begin{align}
 	w_{k'k}=\frac{4\pi^2}{3\hbar^2}\abs{\bm D_{k'k}}^2\rho(\omega_{k'k})=\frac{4\pi^2e^2}{3\hbar^2}\abs{\r_{k'k}}^2\rho(\omega_{k'k}).
 \end{align}

@@ -52,11 +52,11 @@
     \begin{subequations}
         \begin{align}
             q_{00}&=\frac1{\sqrt{4\pi}}\int_V\rho(\bm r')\d V'=\frac1{\sqrt{4\pi}}q;\\
-            q_{10}&=-\sqrt{\frac3{8\pi}}\int_V(x'-\i y')\rho(\bm r')\d V'=-\sqrt{\frac3{8\pi}}(p_x-\i p_y),\\
-            q_{11}&=-\sqrt{\frac3{4\pi}}\int_V z'\rho(\bm r')\d V'=-\sqrt{\frac3{4\pi}}p_z;\\
+            q_{11}&=-\sqrt{\frac3{8\pi}}\int_V(x'-\i y')\rho(\bm r')\d V'=-\sqrt{\frac3{8\pi}}(p_x-\i p_y),\\
+            q_{10}&=\sqrt{\frac3{4\pi}}\int_V z'\rho(\bm r')\d V'=\sqrt{\frac3{4\pi}}p_z;\\
             q_{20}&=\sqrt{\frac5{16\pi}}\int_V(3z'^2-r'^2)\rho(\bm r')\d V'=\sqrt{\frac5{16\pi}}Q_{zz},\\
-            q_{21}&=-\sqrt{\frac{15}{8\pi}}\int_V(x'-\i y')z'\rho(\bm r')\d V'=-\sqrt{\frac{15}{8\pi}}(Q_{xz}-\i Q_{yz}),\\
-            q_{22}&=\sqrt{\frac{15}{32\pi}}\int_V(x'-\i y')^2\rho(\bm r')\d V'=\sqrt{\frac{15}{32\pi}}(Q_{xx}-Q_{yy}-2\i Q_{xy}).
+            q_{21}&=-\sqrt{\frac{15}{8\pi}}\int_V(x'-\i y')z'\rho(\bm r')\d V'=-\sqrt{\frac5{24\pi}}(Q_{xz}-\i Q_{yz}),\\
+            q_{22}&=\sqrt{\frac{15}{32\pi}}\int_V(x'-\i y')^2\rho(\bm r')\d V'=\sqrt{\frac5{96\pi}}(Q_{xx}-Q_{yy}-2\i Q_{xy}).
         \end{align}
     \end{subequations}
     负$m$项可由$q_{\ell,-m}=(-)^mq_{\ell m}^\ast$推出，
@@ -87,12 +87,12 @@
             \bm E&=\frac p{4\pi\varepsilon_0r^3}(2\cos\theta\uvec r+\sin\theta\uvec\theta).
         \end{align}
     \end{subequations}
-    但上式电场的旋度$\curl\bm E$在原点处的积分不为$\bm 0$，应进行修正：
+    上式只适用于$r\neq0$。若要将理想点偶极子的电场作为全空间上的分布，应由$\bm E=-\nabla\Phi$求分布导数，补上原点处的接触项：
     \begin{equation}
         \label{eqn:E dipole with delta}
         \bm E(\bm r)=\frac1{4\pi\varepsilon_0}\biggb{\frac{3(\bm p\cdot\uvec r)\uvec r-\bm p}{r^3}-\frac{4\pi}3\bm p\vd(\bm r)}.
     \end{equation}
-    此时$\div\bm E=\bm p\cdot\nabla\delta(\bm r)/\varepsilon_0$，即电偶极子的电荷密度为
+    此时$\div\bm E=-\bm p\cdot\nabla\delta(\bm r)/\varepsilon_0$，即电偶极子的电荷密度为
     \begin{equation}
         \rho(\bm r)=-\bm p\cdot\nabla\delta(\bm r).
     \end{equation}
@@ -120,7 +120,7 @@
         \label{eqn:int E dV}
         \int_{r<R}\bm E(\bm r)\d V=\begin{cases}
             -\frac1{3\varepsilon_0}\bm p,&\text{电荷全在球内};\\[2ex]
-            -\frac{4\pi}{3}R^3\bm E(\bm 0),&\text{电荷全在球外}.
+            \frac{4\pi}{3}R^3\bm E(\bm 0),&\text{电荷全在球外}.
         \end{cases}
     \end{equation}
     这也对应于电偶极子电场\eqref{eqn:E dipole with delta}中的$-\bm p\vd(\bm r)/3\varepsilon_0$项。
@@ -129,12 +129,12 @@
 \subsection{能量的多极矩展开}
 \label{ssec:multipole expansion of energy}
 
-对$\Phi(\bm r)$在原点处Taylor展开
+这里的$\Phi,\bm E$均指外部电荷产生的场，假定在被考察电荷分布所占区域内光滑，且该区域没有外部源。对$\Phi(\bm r)$在原点处Taylor展开
 \[
     \Phi(\bm r)=\Phi(\bm 0)-\bm r\cdot\bm E(\bm 0)-\frac12\sum_{\alpha,\beta}x_\alpha x_\beta\pv{E_\beta}{x_\alpha}(\bm 0)+\cdots
 \]
 由于$\div\bm E=0$，上式可减去$r^2\div\bm E(\bm 0)/6$凑成$Q_{\alpha\beta}$的形式，
-进而由\eqref{eqn:W-rhoPhi}得到静电能
+由外场相互作用能$W=\int_V\rho\Phi\d V$得到（这里没有自能，故不含$1/2$因子）
 \begin{equation}
     W=q\Phi(\bm 0)-\bm p\cdot\bm E(\bm 0)-\frac16\sum_{\alpha,\beta}Q_{\alpha\beta}\pv{E_\beta}{x_\alpha}(\bm 0)+\cdots
 \end{equation}

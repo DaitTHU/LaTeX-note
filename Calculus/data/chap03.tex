@@ -1,13 +1,13 @@
 \chapter{重积分}
 \section{二重积分}
 \begin{theorem}{累次积分法}{}
-	$D=\{(x,y)~|~\alpha(x)\leqslant y\leqslant\beta(x),a\leqslant x\leqslant b\}$，$\alpha(x),\beta(x)$在$[a,b]$上连续，则$f\in\mathscr R(D)$，且
+	设$D=\{(x,y)~|~\alpha(x)\leqslant y\leqslant\beta(x),a\leqslant x\leqslant b\}$，$\alpha,\beta$在$[a,b]$上连续且$\alpha\leq\beta$。若$f$在$D$上连续，则$f$可积，并有
 	\[
 		\iint_Df(x,y)\d x\nd y=\int_a^b\int_{\alpha(x)}^{\beta(x)}f(x,y)\d y\d x.
 	\]
 \end{theorem}
 \begin{theorem}{变量代换法}{}
-	以$x,y$为变量的区域$D$经过变量代换及其逆变换
+	设$D,D'$为有界、边界分片光滑的区域，$f$在$\overline D$上连续。假设变量代换在两区域内部构成$C^1$一一映射，逆映射也为$C^1$，并连续延拓到边界。以下写出代换及其非退化条件
 	\begin{align*}
 		\begin{cases}
 			u=u(x,y), \\
@@ -15,12 +15,12 @@
 		\end{cases}
 		\quad\frac{D(x,y)}{D(u,v)}\neq 0.
 	\end{align*}
-	就会变为以$u,v$为变量的区域$D'$，积分也会变换为
+	则积分变换为
 	\[
 		\iint_Df(x,y)\d x\nd y=\iint_{D'}f(x(u,v),y(u,v))\abs{\frac{D(x,y)}{D(u,v)}}\d u\nd v.
 	\]
 \end{theorem}
-\paragraph{例：极坐标}$x=\rho\cos\theta,y=\rho\sin\theta.$
+\paragraph{例：极坐标}$x=\rho\cos\theta,y=\rho\sin\theta$，取$\rho\geq0$并选择不重复覆盖的角区间。原点与角度切缝可作为零面积的例外集处理。
 \[
 	\iint_Df(x,y)\d x\nd y=\iint_{D'}f(\rho\cos\theta,\rho\sin\theta)\rho\d\rho\nd\theta.
 \]
@@ -29,7 +29,7 @@
 	\iint_Df(x,y)\d x\nd y=\iint_{D'}f(u\cos\theta-v\sin\theta,u\sin\theta+v\cos\theta)\d u\nd v.
 \]
 \subsection*{曲面面积问题}
-空间$O-xyz$中曲面的方程为
+设曲面由$C^1$参数化在区域$D$上给出，除边界等零面积集合外不重复覆盖，且参数化正则：
 \begin{align*}
 	\begin{cases}
 		x=x(u,v), \\
@@ -38,7 +38,7 @@
 	\end{cases}
 	\quad\pv{(x,y,z)}{(u,v)}\text{列满秩}.
 \end{align*}
-转化为$O-uv$曲面中的二重积分问题，其中两条曲线切向量
+转化为参数平面$O-uv$中的二重积分问题，其中两条曲线切向量
 \[
 	\vec u=\Bigb{\pv xu,\pv yu,\pv zu}\tp,\qquad\vec v=\Bigb{\pv xv,\pv yv,\pv zv}\tp
 \]
@@ -54,7 +54,7 @@
 \begin{align}
 	S=\iint_D\sqrt{A^2+B^2+C^2}\d u\nd v
 \end{align}
-另一种方式是利用$(\vec u\times\vec v)^2=u^2v^2-(\vec u\cdot\vec v)^2,$
+另一种方式是利用$\norm{\vec u\times\vec v}^2=\norm{\vec u}^2\norm{\vec v}^2-(\vec u\cdot\vec v)^2$，
 \begin{align}
 	E & =\vec u\cdot\vec u=\Bigp{\pv xu}^2+\Bigp{\pv yu}^2+\Bigp{\pv zu}^2, \\
 	G & =\vec v\cdot\vec v=\Bigp{\pv xv}^2+\Bigp{\pv yv}^2+\Bigp{\pv zv}^2, \\
@@ -63,21 +63,21 @@
 \[
 	S=\iint_D\sqrt{EG-F^2}\d u\nd v
 \]
-特别地，当曲线是显式的，即$z=z(x,y)$
+特别地，当曲面是显式的，即$z=z(x,y)$
 \[
 	S=\iint_D\sqrt{1+\Bigp{\pv zx}^2+\Bigp{\pv zy}^2}\d x\nd y.
 \]
 \section{三重积分}
 \begin{theorem}
 	{累次积分法}{}
-	$\Omega=\{(x,y,z)~|~\alpha(x,y)\leqslant z\leqslant\beta(x,y),(x,y)\in D\}$，则
+	设$D$是有界、边界分片光滑的平面区域，$\alpha,\beta$在$\overline D$上连续且$\alpha\leq\beta$。令$\Omega=\{(x,y,z)~|~\alpha(x,y)\leq z\leq\beta(x,y),(x,y)\in D\}$。若$f$在$\overline\Omega$上连续，则
 	\[
 		\iiint_\Omega f(x,y,z)\d x\nd y\nd z=\iint_D\int_{\alpha(x,y)}^{\beta(x,y)}f(x,y,z)\d z\d x\nd y.
 	\]
 \end{theorem}
 \begin{theorem}
 	{变量代换法}{}
-	同样的，对于变量替换
+	同样，设$\Omega,\Omega'$为有界、边界分片光滑的区域，$f$连续。变量替换在内部应为$C^1$一一映射、具有$C^1$逆映射，并连续延拓到边界：
 	\begin{align*}
 		\begin{cases}
 			x=x(r,s,t), \\
@@ -96,10 +96,10 @@
 \[
 	\iiint_\Omega f(x,y,z)\d x\nd y\nd z=\iiint_{\Omega'}f(\rho\cos\theta,\rho\sin\theta,z)\rho\d\rho\nd\theta\nd z.
 \]
-\paragraph{例：球坐标}$x=r\sin\theta\cos\phi,y=r\sin\theta\sin\phi,z=r\cos\theta.$
+\paragraph{例：球坐标}$x=r\sin\theta\cos\phi,y=r\sin\theta\sin\phi,z=r\cos\theta$。这里$r\geq0$、$0\leq\theta\leq\pi$，$\phi$选取不重复覆盖的角区间；坐标奇点可作为零体积的例外集处理。
 \begin{align*}
 	\iiint_\Omega & f(x,y,z)\d x\nd y\nd z                                                                                   \\
-				  & =\iiint_{\Omega'}f(\sin\theta\cos\phi,r\sin\theta\sin\phi,r\cos\theta)r^2\sin\theta\d r\nd\theta\nd\phi.
+				  & =\iiint_{\Omega'}f(r\sin\theta\cos\phi,r\sin\theta\sin\phi,r\cos\theta)r^2\sin\theta\d r\nd\theta\nd\phi.
 \end{align*}
 \begin{example}{$n$重积分}{}
 	定义$\RR^n$中单位球
@@ -135,8 +135,8 @@
 		\begin{cases}
 			\frac{\pi^k}{k!},        & n=2k,   \\[
 		2ex]
-			\frac{2^k\pi^{k-1}}{n!}, & n=2k-1.
+			\frac{2^k\pi^{k-1}}{(2k-1)!!}, & n=2k-1.
 		\end{cases}
 	\end{align}
-	例如$V_1=2,\quad V_2=\pi,\quad V_3=\frac 43\pi,\quad V_4=\frac 12\pi^2,\quad V_5=\frac 8{15}\pi^2,\ldots.$
+	其中$(2k-1)!!=1\cdot3\cdots(2k-1)$，$k\geq1$。例如$V_1=2,\quad V_2=\pi,\quad V_3=\frac 43\pi,\quad V_4=\frac 12\pi^2,\quad V_5=\frac 8{15}\pi^2,\ldots.$
 \end{example}

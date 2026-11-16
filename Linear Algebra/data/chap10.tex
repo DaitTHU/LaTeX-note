@@ -17,7 +17,7 @@
 \begin{definition}{可逆}{inversible}
 	$a\in S$是可逆的(inversible)，若$\exists a\iv\in S,\enspace a\circ a\iv=a\iv\circ a=e.$
 \end{definition}
-特别地，简记
+在运算满足结合律并有单位元时，令$a^0=e$；对正整数$m$，简记
 \[
 	a^m\equiv a\circ\cdots\circ a,\quad a^{-m}\equiv a\iv\circ\cdots\circ a\iv.
 \]
@@ -75,7 +75,7 @@
 	逆$a\iv$的存在很关键，如果$G$上的运算只是结合的，则$(G,\circ)$是一个半群(semigroup)，有单位元的半群又叫幺半群(monoid)。
 \end{remark}
 \begin{definition}{置换群和对称群}{permutation group and symmetric group}
-	给定有限集合$T$，所有可逆映射$f:T\to T$构成一个群$\sym(T)$，运算是映射的复合，称做置换群(permutation group)
+	给定有限集合$T$，所有可逆映射$f:T\to T$构成一个群$\sym(T)$，运算是映射的复合，称为集合$T$的对称群；它的任意子群称为$T$上的置换群(permutation group)
 	\tcblower
 	当$T=\{1,2,\ldots,n\}$时，对应的置换群称为对称群(symmetric group) $S_n$。
 \end{definition}
@@ -116,7 +116,7 @@
 		\item 单位元：$e\in H$；
 		\item 逆元：$\forall a\in H,\enspace\exists a\iv\in H$。
 	\end{itemize}
-	$\{e\}$和$G$都是平凡的子群，其他子群称为真子群(proper subgroup)。
+	$\{e\}$称为平凡子群；任意不等于$G$的子群称为真子群(proper subgroup)，因此当$G\neq\{e\}$时，平凡子群也是真子群。
 \end{definition}
 
 \begin{example}{子群的例子}{}
@@ -127,14 +127,14 @@
 \end{example}
 
 \begin{definition}{循环群}{cyclic group}
-	循环群(cyclic group)是
+	由单个元素$x$生成的群$\langle x\rangle=\{x^k:k\in\ZZ\}$称为循环群(cyclic group)。若$x$的阶为$n$，即$n$是满足$x^n=1$的最小正整数，则该群有$n$个元素，可记为
 	\begin{equation}
 		Z_n\equiv\set{1,x,\ldots,x^{n-1}}{x^n=1},
 	\end{equation}
-	其生成元为$x$。
+	若不存在这样的正整数，则得到无限循环群，与整数加群$(\ZZ,+)$同构。
 \end{definition}
 \begin{example}{}{}
-	$S_3$有两个子群是循环群：$\set{x^k}{x^3=1}=Z_3$和$\set{y^k}{y^2=1}=Z_2$。
+	$S_3$的循环子群例如：$\set{x^k}{x^3=1}=Z_3$和$\set{y^k}{y^2=1}=Z_2$。
 \end{example}
 
 \section{群同态}
@@ -177,7 +177,8 @@
 	若$\phi:G\to G'$是群同态，则$\im\phi$是$G'$的子群，$\ker\phi$是$G$的子群。
 \end{theorem}
 \begin{proof}
-	考虑线性空间在$+$下构成的群，此时线性映射作为群同态的像与核同之前线性映射的像与核相同。
+    对像空间，$1'=\phi(1)\in\im\phi$；若$\phi(a),\phi(b)\in\im\phi$，则其积$\phi(ab)$和逆$\phi(a^{-1})$也在像中。
+    对核，$1\in\ker\phi$；若$a,b\in\ker\phi$，则$\phi(ab)=1'$且$\phi(a^{-1})=1'$，所以核对乘法与取逆封闭。两者均满足子群判据。这里省略乘法符号$\circ$。
 \end{proof}
 \begin{definition}{左陪集}{left coset}
 	$H$是$G$的子群，$a\in G$，则
@@ -226,11 +227,14 @@
 	群同态$\phi:G\to G'$是单射$\iff\ker\phi=\{1\}$。
 \end{corollary}
 \begin{definition}{正规子群}{normal subgroup}
-	$N\subset G$是$G$的正规子群(normal subgroup)若$\forall a\in N,\forall g\in G$，共轭$g\circ a\circ g\iv\in N$。
+	$N$首先是$G$的子群；若$\forall a\in N,\forall g\in G$，共轭$g\circ a\circ g\iv\in N$，则称$N$为正规子群(normal subgroup)，记作$N\trianglelefteq G$。
 \end{definition}
 \begin{theorem}{}{}
 	$\phi:G\to G'$是群同态，$\ker\phi$是$G$的正规子群。
 \end{theorem}
+\begin{proof}
+    若$a\in\ker\phi$且$g\in G$，则$\phi(gag^{-1})=\phi(g)1'\phi(g)^{-1}=1'$，故$gag^{-1}\in\ker\phi$。
+\end{proof}
 \begin{definition}{中心}{center of group}
 	群$G$的中心(center)是
 	\begin{equation}
@@ -240,9 +244,9 @@
 \end{definition}
 \begin{example}{}{}
 	\begin{itemize}
-		\item 行列式是GL的群同态：
+		\item 对实矩阵，行列式是GL的群同态：
 		\[
-			\det:\GL(n)\to(\RR\backslash\{0\},\times)
+			\det:\GL(n,\RR)\to(\RR\backslash\{0\},\times)
 		\]
 		核$\ker\det=\SL(n)$是$\GL(n)$的正规子群。
 		\item $Z_{\SL(2)}=\{I,-I\}$；
@@ -264,7 +268,7 @@
 		\[
 			\exp:(\RR,+)\to(\RR_{>0},\times),\enspace x\mapsto\e^x.
 		\]
-		\item $P$是投影矩阵：$P^2=P$
+		\item $P$是非零实投影矩阵：$P^2=P$。将$S_2$的单位元映为$I$、非单位元映为$I-2P$，由于$(I-2P)^2=I$且$I-2P\neq I$，得到同构
 		\[
 			S_2\to\{I,I-2P\}.
 		\]
@@ -280,7 +284,7 @@
 		\item 对称性(symmetry)：$a\sim b\iff b\sim a;$
 		\item 传递性(transitivity)：$a\sim b,b\sim c\implies a\sim c;$
 	\end{itemize}
-	具有等价关系的集合称为集合体(setiod)。
+	具有等价关系的集合称为集合体(setoid)。
 \end{definition}
 \begin{remark}~
 	\begin{itemize}
@@ -289,7 +293,6 @@
 		\[
 			a\sim b\iff f(a,b)=1.
 		\]
-		\item 未竟
 	\end{itemize}
 \end{remark}
 
@@ -302,3 +305,59 @@
 \end{definition}
 
 
+
+\begin{theorem}{等价类构成划分}{partition by equivalence classes}
+    等价关系的不同等价类互不相交，且其并为整个集合。
+\end{theorem}
+\begin{proof}
+    自反性保证$a\in[a]$，故等价类覆盖原集合。若$x\in[a]\cap[b]$，由对称性和传递性得$a\sim b$；再次应用传递性可得$[a]=[b]$。
+\end{proof}
+
+\section{商群与第一同构定理}
+\begin{definition}{商群}{quotient group}
+    设$N\trianglelefteq G$。左陪集的集合$G/N=\{gN:g\in G\}$在运算
+    \[
+        (aN)(bN):=(ab)N
+    \]
+    下构成群，称为商群。其单位元是$N$，$aN$的逆是$a^{-1}N$。
+\end{definition}
+这个定义必须检查代表元的选择不影响结果。若$a'=an_1,b'=bn_2$，其中$n_1,n_2\in N$，则
+\[
+    a'b'=an_1bn_2=ab(b^{-1}n_1b)n_2\in abN.
+\]
+这里用到了正规性；结合律由$G$继承。一般子群的陪集仍构成一个集合，但上述乘法未必良定义。
+
+\begin{theorem}{第一同构定理}{first isomorphism theorem}
+    群同态$\phi:G\to G'$诱导自然同构
+    \[
+        \widetilde\phi:G/\ker\phi\longrightarrow\im\phi,
+        \qquad g\ker\phi\longmapsto\phi(g).
+    \]
+\end{theorem}
+\begin{proof}
+    前文已经证明，两个元素的像相同当且仅当它们属于同一个核的陪集，因此$\widetilde\phi$良定义且为单射。按像的定义它是满射，又由$\phi(ab)=\phi(a)\phi(b)$知它保持乘法，故为同构。
+\end{proof}
+\begin{example}{两个商群}{}
+    整数对$n$取模的同态给出$\ZZ/n\ZZ\cong Z_n$。实矩阵的行列式同态是满射，其核为$\SL(n,\RR)$，因而
+    \[
+        \GL(n,\RR)/\SL(n,\RR)\cong(\RR\backslash\{0\},\times).
+    \]
+\end{example}
+
+\section{环与域}
+\begin{definition}{环}{ring}
+    本节采用含幺环的约定。集合$R$及运算$+,{\cdot}$构成环，若$(R,+)$是Abel群，乘法满足结合律并有单位元$1$，且满足左右分配律：
+    \[
+        a(b+c)=ab+ac,\qquad(a+b)c=ac+bc.
+    \]
+    若乘法还满足交换律，则称为交换环。
+\end{definition}
+整数$\ZZ$、多项式$\RR[x]$是交换环；$n\geq2$时，实$n$阶矩阵组成的环不交换。环中的非零元素不一定可逆，例如$2$在$\ZZ$中没有乘法逆元。
+\begin{definition}{域}{field}
+    若交换环$F$满足$0\neq1$，且每个非零元素都有乘法逆元，则称为域。
+\end{definition}
+$\QQ,\RR,\CC$都是域；本章的抽象域定义比第1章“复数域的子域”这一数域定义更广，例如有限域无需嵌入$\CC$。
+\begin{example}{模$n$的剩余类环与有限域}{}
+    $n\geq2$时，在$\ZZ/n\ZZ$上定义$[a]+[b]=[a+b]$与$[a][b]=[ab]$，得到交换环。它是域当且仅当$n$为素数。
+    若$n=ab$且$1<a,b<n$，则两个非零元素$[a],[b]$之积为零，不可能都有乘法逆元。若$n=p$为素数，每个$1\leq a<p$都与$p$互素；由B\'ezout等式$ua+vp=1$得到$[u][a]=[1]$，故所有非零元素可逆。
+\end{example}

@@ -10,16 +10,16 @@
 气体分子通过碰撞使气体达致平衡。
 单位时间内碰到单位面积器壁上的粒子数$\Gamma$，定义分布函数$f(\bm r,\bm v,t)$，则
 \[
-	\Gamma(\bm r,t)=\int f(\bm r,\bm v,t)v_x\d\bm v.
+	\Gamma(\bm r,t)=\int_{v_x>0}f(\bm r,\bm v,t)v_x\d\bm v.
 \]
-若为平衡态，则满足Maxwell分布$\Gamma=n\avg v/4$。
+这里$x$轴指向器壁，$f$按$\int f\d\bm v=n$归一化。若为平衡态，则满足Maxwell分布$\Gamma=n\avg v/4$。
 
 采用弹性刚球模型（无摩擦，无形变，弹性碰撞）。对于稀薄气体，只考虑两体碰撞，对于两类不同分子间碰撞：单位时间内，平均一个分子1与分子2的碰撞次数$\theta_{12}$，称碰撞频率。
 
 指定速度的分子1的碰撞：
 单位时间内，一个速度$v_1$的分子1与任意速度的分子2碰撞次数$\theta_{12}(\bm r,\bm v_1,t)$。碰撞只与相对速度$\bm g_{21}=\bm v_2-\bm v_1$有关。发生碰撞的有效截面积$\pi\sigma^2_{12}$，其中$\sigma_{12}=(\sigma_1+\sigma_2)/2$为两分子直径平均值。易知，这个条件是各向同性的。
 \begin{align}
-	\theta_{12}(\bm r,\bm v_1,t)=\pi\sigma_{12}^2\Gamma=\pi\sigma_{12}^2\int f_2(\bm r,\bm v_2,t)g_{12}\d\bm v_2,
+	\theta_{12}(\bm r,\bm v_1,t)=\pi\sigma_{12}^2\int f_2(\bm r,\bm v_2,t)g_{12}\d\bm v_2,
 \end{align}
 以上采用了分子混沌假设，即分子速度分布是独立的：
 \[
@@ -53,13 +53,13 @@
 解出$\lambda_1,\lambda_2$，
 \begin{align}
 	\begin{cases}
-		\bm v_1'=\bm v_1+\frac{2m_1}{m_1+m_2}\bigb{(\bm v_2-\bm v_1)\cdot\bm n}\bm n\\[1ex]
-		\bm v_2'=\bm v_2+\frac{2m_2}{m_1+m_2}\bigb{(\bm v_1-\bm v_2)\cdot\bm n}\bm n
+		\bm v_1'=\bm v_1+\frac{2m_2}{m_1+m_2}\bigb{(\bm v_2-\bm v_1)\cdot\bm n}\bm n\\[1ex]
+		\bm v_2'=\bm v_2+\frac{2m_1}{m_1+m_2}\bigb{(\bm v_1-\bm v_2)\cdot\bm n}\bm n
 	\end{cases}
 \end{align}
 对称性：
 \begin{compactenum}
-	\item 碰撞前后相对速度不变
+	\item 碰撞前后相对速率不变
 	\[
 		\bm v_1'-\bm v_2'=\bm v_1-\bm v_2-2\bigb{(\bm v_1-\bm v_2)\cdot\bm n}\bm n\implies g_{21}'=g_{21}.
 	\]
@@ -76,9 +76,9 @@
 \section{Boltzmann输运方程}
 讨论分布函数如何随时间变化，记$t$时刻，$(\bm r,\bm v)$处体积元在$\mu$空间$\d\bm r\nd\bm v$中的粒子数$f(\bm r,\bm v,t)\d\bm r\nd\bm v$。
 
-将分子作为经典粒子处理，故只适用于高温情形
+将分子作为经典粒子处理，需要满足非简并条件；对不计内部简并度的气体，可写为
 \[
-	\lambda_T=\Bigp{\frac{h^2}{2\pi m\kB T}}^{3/2}\ll\Bigp{\frac VN}^{1/3}.
+	\lambda_T=\Bigp{\frac{h^2}{2\pi m\kB T}}^{1/2}\ll\Bigp{\frac VN}^{1/3}.
 \]
 稀薄气体近似: 分子除碰撞短时间隔处是自由的。（高温低密度）
 
@@ -124,14 +124,14 @@
 \end{align}
 方程左边的项即$\d f/\nd t$，这是一个非线性积分-微分方程，一般难求解。
 
-分子混沌假设对稀薄气体是精确的，但使得Boltzmann方程不封闭，为了求单粒子分布函数$f(\bm r,\bm v,t)$，需先求出两粒子关联函数$f(\bm r,\bm v,\bm v_1,t)$。为求$N-1$粒子关联函数，要先求出$N$粒子关联函数\footnote{BBGKY: Hierarchy, Bogoliubov-Born-Green-Kirkwood-Yvon.}，如何截断该方程见Huang \S 3.5。
+精确的单粒子演化方程依赖两粒子分布，后者又依赖三粒子分布，由此形成BBGKY层级\footnote{Bogoliubov-Born-Green-Kirkwood-Yvon hierarchy。}。分子混沌假设忽略碰撞前粒子的速度关联，将入射两粒子分布近似分解为单粒子分布的乘积，从而使Boltzmann方程封闭。这是稀薄气体动力学的近似，不能视为任意时刻的精确独立性。
 \section{Boltzmann \textit{H}定理}
 讨论系统趋向平衡态时，分布函数的性质。定义：$H$函数为分布函数$f(\bm r,\bm v,t)$的泛函
 \begin{align}
 	H(t)=\int f(\bm r,\bm v,t)\ln f(\bm r,\bm v,t)\d\bm r\nd\bm v.
 \end{align}
 \begin{theorem}{Boltzmann $H$定理}{Boltzmann H Theorem}
-	若$f(\bm r,\bm v,t)$满足Boltzmann输运方程，则
+	若$f(\bm r,\bm v,t)$满足上述Boltzmann输运方程，且空间边界无净熵流（如周期边界或镜面反射边界）、速度无穷远处$f$足够快地衰减，则
 	\begin{align}
 		\dv Ht\leqslant 0.
 	\end{align}
@@ -177,17 +177,17 @@
 	\begin{compactitem}
 		\item 对任意态可定义$H$，但热力学中$S$仅对平衡态有定义\footnote{可通过Boltzmann关系推广$S$定义。}；
 		\item 熵增原理适用于任意孤立系，$H$定理前提：$f$满足Boltzmann输运方程，即分子混沌假设成立；
-		\item $H$定理给出了系统趋向平衡态的速度，熵增原理不能。
+		\item $H$定理给出单调性；具体弛豫速率仍需求解输运方程或作额外近似。
 	\end{compactitem}
 	\item $H$定理具有统计特征，对统计性的$f$再取了一次平均：
 	\[
-		\dv Ht=N\avg{\ln f}.
+		H=N\avg{\ln f}.
 	\]
-	$H$随时间改变也是统计性的，且不连续，因碰撞而迅速改变。因此$\d H/\nd t$实际上是$\D H/\D t$。
-	\item 微观可逆性与宏观不可逆性：当Hamiltion量是动量偶函数时，微观运动中是可逆的。但$H$函数由微观分布决定，却是时间的单调函数。\footnote{Boltzmann指出：$H$定理是统计性的，即平均来说，$H$减少的几率最大，但不排除增大的可能性，只是几率非常小而已，即宏观不可逆性是统计性的，$H$定理不是力学规律，而是统计性的。}	
+	这里平均以$f/N$为权重。$f$是统计分布而非单条微观轨道；在通常的光滑解假设下，$H(t)$连续可微，不能把单次碰撞的离散性直接赋予$H(t)$。
+	\item 微观可逆性与宏观不可逆性：当Hamilton量在动量反号下不变时，微观方程具有时间反演对称性。Boltzmann方程还使用了碰撞前的分子混沌假设；把精确微观轨道反演后，通常会产生不满足这一假设的入射关联。因此$H$定理的单调性不能直接推广为任意有限系统微观轨道的逐时性质。
 	\item 微观运动可复原性问题
 	
-	Poincare定理：有限能量，有限范围的系统，经过足够长时间后，总能回到与初始状态无限接近的状态，称Poincare循环。
+	Poincaré回归定理：在保持测度且可达相空间体积有限的动力系统中，几乎所有初态都会在足够长的时间后回到任意小的初态邻域。这一结论针对精确微观动力学，不能直接套用于作了分子混沌近似的Boltzmann方程。
 
 	Boltzmann提出：Poincare周期很长，远超出实际观测的时间，因此，在观测时间里，回到原状的几率很小。不同的理解：如Huang \S 4.1, \S 4.4, \S 4.5。
 \end{compactenum}

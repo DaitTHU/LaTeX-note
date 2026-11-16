@@ -166,7 +166,7 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
     \Phi(\bm r,t)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r',t)}{\abs{\bm r-\bm r'}}\d V'
  \]
 这说明：标量势$\Phi(\bm r,t)$是由电荷密度$\rho(\bm r',t)$产生的瞬时Coulomb势\footnote{这是其被称为Coulomb规范的原因。}，%二者在不同地方同时改变，
-在空间中的传播没有任何延迟。
+它在这个规范下表现为瞬时函数；但势不是直接可观测量，这不表示电磁信号可以瞬时传播。$-\nabla\Phi$与$-\p\bm A/\p t$中的非推迟部分相消后，物理电磁场仍满足因果传播。
 
 对于式\eqref{eqn:Coulomb gauge A}，将电流密度$\bm J$写成纵向(longitudinal,或无旋irrotational)电流$\bm J_\text l$和横向(transverse，或螺旋solenoidal)电流$\bm J_\text t$之和，满足
 \[
@@ -179,10 +179,10 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
         \lapla\bm A-\frac1{c^2}\pv[2]{\bm A}t&=-\mu_0\bm J_\text t.
     \end{align}
 \end{subequations}
-这说明：标量势方程的源可以用纵向电流$\bm J_\text l$表示；而矢量势满足波动方程，在空间中以光速$c$传播，其源可以用横向电流$\bm J_\text t$表示。在Coulomb规范下，横向辐射场仅由矢量势给出，而瞬时Coulomb势只对近场有贡献。
+这说明：标量势方程的源可以用纵向电流$\bm J_\text l$表示；而矢量势满足波动方程，在空间中以光速$c$传播，其源可以用横向电流$\bm J_\text t$表示。在Coulomb规范下，横向电场由$-\p\bm A/\p t$给出，纵向电场由$-\nabla\Phi$给出；将它们组合为可观测场后，才能讨论传播与因果关系。
 
 \begin{example}{Coulomb规范下电磁波的表达}{em wave in Coulomb gauge}
-    无源情况下，第一个方程$\Phi=0$，第二个方程
+    在全空间无源、无外加静电场并取无穷远处电势为零时，可取$\Phi=0$；第二个方程
     \[
         \lapla\bm A-\frac1{c^2}\pv[2]{\bm A}t=\bm 0\implies\bm A=\bm A_0\e^{\i(\bm k\cdot\bm r-\omega t)}.
     \]
@@ -552,6 +552,7 @@ $\bm S$定义为Poynting矢量
     \]
 \end{example}
 \paragraph{动量守恒}
+以下使用真空中的微观场及总电荷、电流密度，$\bm H=\bm B/\mu_0$。所得场动量密度不应直接推广为一般物质中场与物质动量的划分。
 电磁场对带电粒子的力是Lorentz力
 \[
     \bm F=q(\bm E+\bm v\times\bm B).
@@ -706,17 +707,17 @@ Poynting定律形式变为
 \]
 场对$V$中源的稳态时间平均功率等于通过边界面$\p V$进入$V$的平均功率流，由$\Re(\bm S)$的法向分量计算。由于系统各组成部分的损失，上述方程的第二项有一个实部，这可以解释这种耗散。
 \paragraph{阻抗和导纳}
-阻抗$Z$ (impedance)、电阻$R$ (resistance)、电抗$X$ (reactance)
+本节继续采用$\e^{-\i\omega t}$的时间约定。阻抗$Z$ (impedance)、电阻$R$ (resistance)、电抗$X$ (reactance)
 \[
     Z=R+\i X,
 \]
-$X>0$：感抗(inductance)；$X<0$：容抗(capacitance)；\footnote{电气工程师的$i$已经被电流占用，故虚数单位采用j，阻抗写作$Z=R+\mathrm j X.$}
+$X<0$：感抗(inductance)；$X>0$：容抗(capacitance)，因为$Z_L=-\i\omega L$、$Z_C=\i/(\omega C)$。\footnote{电气工程师的$i$已经被电流占用，故虚数单位采用j，阻抗写作$Z=R+\mathrm j X.$}
 
 导纳$Y$ (admittance)、电导$G$ (conductance)、电纳$B$ (susceptance)
 \[
     Y=G+\i B,
 \]
-$B>0$：容纳(capacitive susceptance)；$B<0$：感纳(inductive susceptance)。
+$B<0$：容纳(capacitive susceptance)；$B>0$：感纳(inductive susceptance)。若改用电工学常见的$\e^{+\i\omega t}$约定，上述电抗、电纳的符号均反转。
 
 阻抗$Z$和导纳$Y$的关系为$Y=Z\iv$。
 \section{电磁场的变换性质、空间反演和时间反演}

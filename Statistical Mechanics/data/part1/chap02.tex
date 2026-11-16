@@ -23,7 +23,7 @@
 	则应有
 	\begin{equation}
 		\label{eqn:Euler's equation}
-		f(x_1,x_2,\ldots,x_r)=\frac1k\sum_{i=1}^r x_i\pv f{x_i}.
+		k f(x_1,x_2,\ldots,x_r)=\sum_{i=1}^r x_i\pv f{x_i}.
 	\end{equation}
 \end{theorem}
 
@@ -36,26 +36,27 @@
 \end{proof}
 
 \begin{corollary}
-	广延量$U=U(S,V)$是一阶齐次的，故
+	对单组分、仅有体积功的均匀系统，忽略表面效应时，$U=U(S,V,n)$对全部广延变量是一阶齐次的，故
 	\begin{equation}
 		\label{eqn:U=TS-pV}
-		U=TS-pV.
+		U=TS-pV+\mu n.
 	\end{equation}
-	由此可定义单位摩尔的内能$u:=U/n$、熵$s:=S/n$和体积$v:=V/n$，以及热容$c:=C/n$。
+	其中$\mu:=(\p U/\p n)_{S,V}$为摩尔化学势，详见\secref{sec:chemical potential}。即使过程保持$n$不变，也不能从Euler方程中删去$\mu n$；$U=TS-pV$仅适用于平衡光子气体等没有独立粒子数约束的情形。
+	定义单位摩尔的内能$u:=U/n$、熵$s:=S/n$和体积$v:=V/n$，以及热容$c:=C/n$。
 \end{corollary}
 
 \begin{theorem}
 	{Gibbs-Duhem关系}{Gibbs-Duhem relation}
-	$S$和$V$的约束关系为：
+	上述单组分系统的强度量满足：
 	\begin{equation}
-		S\d T-V\d p=0.
+		S\d T-V\d p+n\d\mu=0.
 	\end{equation}
 \end{theorem}
 
 \begin{proof}
-	对\eqref{eqn:U=TS-pV}两边微分，再结合\eqref{eqn:dU=TdS-pdV}消去一些项即得
+	对\eqref{eqn:U=TS-pV}两边微分，再与$\d U=T\d S-p\d V+\mu\d n$比较即得
 	\[
-		\cancel{\d U}=\cancel{T\d S}+S\d T\,\cancel{-p\d V}-V\d p.
+		0=S\d T-V\d p+n\d\mu.
 		\qedhere
 	\]
 \end{proof}
@@ -74,7 +75,7 @@
 	\end{align*}
 	凑微分：
 	\begin{gather*}
-		\d s=\frac1T\d u+\frac pT\d v=A^{-1/2}(u^{-3/4}v^{1/2}\d u+2u^{1/4}v^{-1/2}\d v)=4A^{-1/2}\d(v^{1/4}u^{1/2}),\\
+		\d s=\frac1T\d u+\frac pT\d v=A^{-1/2}(u^{-3/4}v^{1/2}\d u+2u^{1/4}v^{-1/2}\d v)=4A^{-1/2}\d(u^{1/4}v^{1/2}),\\
 		\implies
 		s=4A^{-1/2}u^{1/4}v^{1/2}+s_0,
 	\end{gather*}
@@ -406,7 +407,7 @@
 
 \begin{theorem}
 	{Helmholtz自由能最小原理}{}
-	与恒温热库$T\rev$接触的系统，移除内部约束后达到平衡态使得Helmholtz自由能最小。
+	与恒温热库$T\rev$接触、总体积和粒子数固定且仅有体积功的系统，移除内部约束后达到平衡态使得Helmholtz自由能最小。
 	%平衡态下，系统与热库进行热接触	时，系统的各个无约束的内部参量取值满足在 T = Tr 的条件下最小化 Helmholtz 自由能。
 \end{theorem}
 
@@ -417,7 +418,7 @@
 	\]
 	二阶导
 	\[
-		\d^2(U+U\rev)=\d^2(U-T\rev S\rev)\equiv\d^2F>0.\qedhere
+		\d^2(U+U\rev)=\d^2(U-T\rev S)\equiv\d^2F>0.\qedhere
 	\]
 	
 \end{proof}
@@ -433,19 +434,19 @@
 
 \begin{theorem}
 	{焓最小原理}{}
-	与压强库接触的系统，保持熵不变，移除内部约束后达到平衡态使得焓最小。
+	与恒压库接触、保持熵和粒子数不变且仅有体积功的系统，移除内部约束后达到平衡态使得焓最小。
 \end{theorem}
 
 \begin{theorem}
 	{Gibbs自由能最小原理}{}
-	与恒温恒压库接触的系统，移除内部约束后达到平衡态使得Gibbs自由能最小。
+	与恒温恒压库接触、粒子数固定且仅有体积功的系统，移除内部约束后达到平衡态使得Gibbs自由能最小。
 \end{theorem}
 
 \section{稳定性}
 
-已经提到，$S=S(U,V)$应该是严格上凸的：
+在粒子数固定的单相稳定区，$S=S(U,V)$的Hessian应为负定，即：
 \begin{equation}
-	\pv[2]SU\pv[2]SV>\biggp{\pw SUV}^2>0.
+	\pv[2]SU<0,\qquad\pv[2]SU\pv[2]SV-\biggp{\pw SUV}^2>0.
 \end{equation}
 
 \section{样例系统}

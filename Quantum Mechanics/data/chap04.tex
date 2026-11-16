@@ -1,5 +1,6 @@
 \chapter{时间演化与对称性}
 \paragraph{时间演化问题}
+本节先假设$\hat H$不显含时间；若Hamilton算符显含时间，演化算符一般不能直接写成$\e^{-\i\hat Ht/\hbar}$。
 定态\Schr 方程
 \[
 	\hat H\psi(\r)=E\psi(\r),
@@ -42,13 +43,13 @@
 	{一维自由粒子$\delta(x)$波函数随时间的演化}{}
 	\begin{equation*}
 		\begin{aligned}
-			\psi(x,t) & =\e^{-\i\hat Ht/\hbar}\vd(x)=\frac1{2\pi}\int\iti\e^{\i kx}\e^{\i\hbar k^2t/2m}\d k      \\
+			\psi(x,t) & =\e^{-\i\hat Ht/\hbar}\vd(x)=\frac1{2\pi}\int\iti\e^{\i kx}\e^{-\i\hbar k^2t/2m}\d k      \\
 			          & =\sqrt{\frac m{2\pi\hbar t}}\exp\biggp{\i\frac{mx^2}{2\hbar t}-\frac{\i\pi}4}\neq\vd(x).
 		\end{aligned}
 	\end{equation*}
-	其中用到了
+	这里取$t>0$，$\delta$初态和传播核按广义函数理解，并非归一化波包。其中用到了
 	\begin{align}
-		\int\iti\e^{-\alpha x^2}\d x=\sqrt{\frac\pi\alpha}.\quad\alpha\neq 0,\Re\alpha\geqslant 0.
+		\int\iti\e^{-\alpha x^2}\d x=\sqrt{\frac\pi\alpha}.\quad\Re\alpha>0.
 	\end{align}
 \end{example}
 \begin{example}
@@ -63,11 +64,11 @@
 	于是\footnote{Everyone should calculate it once in their lifetime. - Shuo Jiang.}
 	\begin{align*}
 		\psi(x,t) & =\frac1{\sqrt{2\pi}}\int\iti\varphi(k)\e^{\i kx}\e^{-\i\hbar k^2t/2m}\d k                                                                                                                            \\
-		          & =\fracdisp{\exp\Bigp{\i k_0x-\frac{\hbar k_0^2}{2m}t}}{\biggb{\sqrt{2\pi}\sigma\Bigp{1+\frac{\i\hbar t}{2m\sigma^2}}}^{1/2}}\exp\Biggl[-\fracdisp{\Bigp{x-\frac{\hbar k_0}mt}^2}{4\sigma^2+\frac{2\i\hbar t}m}\Biggr].
+		          & =\fracdisp{\exp\Bigp{\i k_0x-\frac{\i\hbar k_0^2}{2m}t}}{\biggb{\sqrt{2\pi}\sigma\Bigp{1+\frac{\i\hbar t}{2m\sigma^2}}}^{1/2}}\exp\Biggl[-\fracdisp{\Bigp{x-\frac{\hbar k_0}mt}^2}{4\sigma^2+\frac{2\i\hbar t}m}\Biggr].
 	\end{align*}
 	概率密度
 	\begin{align*}
-		\abs{\psi(x,t)}^2=\biggb{2\pi\Bigp{\sigma^2+\frac{\i\hbar t}{2m\sigma^2}}}^{-1/2}\exp\Biggl[-\fracdisp{\Bigp{x-\frac{\hbar k_0}mt}^2}{2\sigma^2+\frac{2\hbar^2 t^2}{m^2\sigma^2}}\Biggr].
+		\abs{\psi(x,t)}^2=\frac1{\sqrt{2\pi}\sigma(t)}\exp\biggp{-\frac{(x-\hbar k_0t/m)^2}{2\sigma(t)^2}}.
 	\end{align*}
 	
 	可见波包中心运动速度为$\hbar k_0/m$，而波包宽度是发散的
@@ -100,7 +101,7 @@
 		\dd t\ave A=\frac1{\i\hbar}\ave{\cmm AH}.
 	\end{align}
 \end{theorem}
-在量子力学系统随时间演化的过程中，如果一个力学量的平均值不随时间而改变，则
+若不显含时间的力学量$\hat A$在任意初态下的平均值都不随时间改变，则
 \[
 	\cmm AH\equiv 0.
 \]
@@ -118,7 +119,7 @@
 故测得$A_n$的概率
 \begin{align*}
 	\dd t(a_n^*a_n) & =\dv{a_n\cj}ta_n+a_n\cj\dv{a_n}t                                    \\
-	                & =-\frac{E_n}{\i\hbar}a_n\cj a_n+\frac{E_n}{\i\hbar}a_na_n\cj a_n=0.
+	                & =-\frac{E_n}{\i\hbar}a_n\cj a_n+\frac{E_n}{\i\hbar}a_n\cj a_n=0.
 \end{align*}
 也就是说，不论体系处于什么量子态下，如果$\hat A$与$\hat H$对易，则不仅$\hat A$的力学量平均值为常数，其可能测值的概率分布也不随时间变化。这一点与$\hat H$本身的概率分布守恒是一致的。
 
@@ -147,7 +148,7 @@
 	守恒量是指平均值及其概率分布不随时间变化的力学量；定态是指系统处于某一特定的能量本征态。
 	\begin{compactenum}
 		\item $\hat A$守恒与系统处于定态与否无关，但守恒量不一定取确定值；
-		\item 如果系统处于定态，一切不显含时间的力学量都守恒；
+		\item 如果系统处于定态，一切不显含时间的力学量的概率分布在该态中均不随时间变化；这并不意味着它们作为算符都与$\hat H$对易或都是守恒量；
 		\item 如果$\hat A$不守恒，则$\avg A$一般会随时间变化，反例：一维谐振子基态的动量平均值。
 	\end{compactenum}
 \end{theorem}
@@ -179,7 +180,7 @@
 \]
 左边即Virial定理。
 \begin{theorem}{Virial定理}{Virial Theorem}
-	若$\hat V$不含$\hat p$，则动能平均值
+	对$\hat H=\hat p^2/(2m)+V(\bm r)$的归一化束缚定态，若相关期望值存在且分部积分边界项消失，则动能平均值
 	\begin{align}
 		\ave T=\frac12\ave{\sum_i\hat x_i\pv{\hat V}{x_i}}.
 	\end{align}
@@ -236,7 +237,7 @@
 		\item 由于波包会随着时间扩散变大，所以由要求散射过程所需时间极短，% 使得在散射过程中波包本身大小变化不大。
 		这就需要粒子的de Broglie波长也要远小于波包的尺度
 	\end{compactenum}
-	上述条件都满足的情况下，$\alpha$粒子的散射就可以用经典力学的方法来处理(Rutherford~$\alpha$粒子散射实验)，或者说Ehrenfest定理适用，微观粒子波粒二象性中的粒子性性质占主导地位。
+	上述条件都满足的情况下，$\alpha$粒子的散射就可以用经典力学的方法来处理(Rutherford~$\alpha$粒子散射实验)，即Ehrenfest定理中的平均力可进一步近似为波包中心所受的经典力，微观粒子波粒二象性中的粒子性性质占主导地位。
 \end{example}
 
 若$\alpha$粒子能量为~\SI5\MeV，则其\deB 波长
@@ -303,7 +304,7 @@ Fourier变换也是幺正变换：
 	\biggb{\frac{p^2}{2m}+V\Bigp{\i\hbar\pp p}}\varphi(p)=E\varphi(p).
 \end{align}
 
-对波函数进行幺正变换而量子力学规律不变，
+若幺正变换还是所给Hamilton算符的对称性，即$\hat U\hat H\hat U^\dagger=\hat H$，则有
 \[
 	\hat H\psi=E\psi\implies\hat H\hat U\psi=E\hat U\psi
 \]
@@ -318,7 +319,7 @@ Fourier变换也是幺正变换：
 \]
 则幺正变换对应的生成元是守恒量。
 \begin{theorem}{Noether定理}{Noether Theorem}
-	每当量子系统存在一种对称性(么正不变性)，就相应的存在一个守恒律和守恒量。
+	若量子系统具有连续的一参数幺正对称性，且其生成元不显含时间，则该生成元与Hamilton算符对易，对应一个守恒量。
 \end{theorem}
 \paragraph{时间均匀性和能量守恒}时间平移
 \[

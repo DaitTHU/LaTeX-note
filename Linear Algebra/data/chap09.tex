@@ -5,7 +5,7 @@
 
 复数构成的向量$z$的共轭即将其中所有元素取共轭，记作$\bar z$。共轭转置记作$z\dg:=\bar z\tp$。
 
-所有实线性空间的知识都可以推广到复线性空间，只需要把原来是实数的地方换成复数。
+线性无关、维数和线性映射等代数概念可推广到复数域；内积、正交性和谱定理则必须加入复共轭，不能仅将实数符号机械地替换为复数。以下涉及基、对偶和谱分解的结论均在有限维空间中讨论。
 \section{内积和内积空间}
 \begin{definition}{$\CC^n$标准内积}{standard inner product}
 	复向量$u,v$的内积
@@ -16,14 +16,14 @@
 	一般复线性空间$V$的内积$\inp\cdot\cdot:V\times V\to\CC$：
 	\begin{compactitem}
 		\item 交换共轭：$\inp uv=\overline{\inp vu};$
-		\item 对第二个变量线性：$\inp u{cv}=c\inp uv,\enspace \inp u{v+w}=\inp uv+\inp vw;$
+		\item 对第二个变量线性：$\inp u{cv}=c\inp uv,\enspace \inp u{v+w}=\inp uv+\inp uw;$
 		\item 正定：$\inp uu\geqslant 0$当且仅当$u=0$时取等号。
 	\end{compactitem}
 \end{definition}
 \begin{remark}
 	对第一个变量不是简单的线性，而是多一个复共轭：
 	\[
-		\inp{cu}v=\bar c\inp uv,\quad \inp{u+v}w=\inp uv+\inp uw.
+		\inp{cu}v=\bar c\inp uv,\quad \inp{u+v}w=\inp uw+\inp vw.
 	\]
 \end{remark}
 % 定义了内积的空间叫做内积空间(inner product space)。
@@ -39,7 +39,7 @@
 	\]
 \end{proof}
 \begin{example}{内积与对偶空间}{inner product and dual space}
-	$V$的对偶空间$V^\ast$是所有$V\to\CC$的线性函数的集合。通过内积可以建立$V,V^\ast$的一一映射
+	$V$的对偶空间$V^\ast$是所有$V\to\CC$的线性函数的集合。通过内积可以建立$V,V^\ast$的一一映射（共轭线性，而非复线性）
 	\[
 		\forall v\in V,g_v\in V^\ast,\enspace g_v(w):=\inp vw
 .	\]
@@ -57,11 +57,11 @@
 	\begin{align*}
 		P_0&=1,\\
 		P_1&=x-\frac{\inp{P_0}x}{\inp{P_0}{P_0}}P_0=x,\\
-		P_2&=x^2-\frac{\inp{P_1}{x^2}}{\inp{P_1}{P_1}}P_1-\frac{\inp{P_0}{x^2}}{\inp{P_0}{P_0}}P_0=x^2-\frac23,\\
+		P_2&=x^2-\frac{\inp{P_1}{x^2}}{\inp{P_1}{P_1}}P_1-\frac{\inp{P_0}{x^2}}{\inp{P_0}{P_0}}P_0=x^2-\frac13,\\
 		P_3&=x^3-\frac{\inp{P_2}{x^3}}{\inp{P_2}{P_2}}P_2-\frac{\inp{P_1}{x^3}}{\inp{P_1}{P_1}}P_1-\frac{\inp{P_0}{x^3}}{\inp{P_0}{P_0}}P_0=x^3-\frac35x,\\
 		&\cdots
 	\end{align*}
-	这与实际Legendre多项式的定义只是系数的差别。
+	这里得到首一多项式；标准Legendre多项式通常取$P_n(1)=1$，例如标准$P_2(x)=(3x^2-1)/2$，与上述首一版本只差归一化系数。
 \end{example}
 \begin{example}{Hermite多项式}{Hermite polynomial}
 	在$\mathscr P^n(\RR)$内定义内积
@@ -70,21 +70,18 @@
 	\]
 	用Gram-Schmidt法则将$\{1,x,x^2,\ldots,x^n\}$变成一组正交基
 	\begin{align*}
-		H_0&=1,\\
-		H_1&=x-\frac{\inp{H_0}x}{\inp{H_0}{H_0}}H_0=x,\\
-		H_2&=x^2-\frac{\inp{H_1}{x^2}}{\inp{H_1}{H_1}}H_1-\frac{\inp{H_0}{x^2}}{\inp{H_0}{H_0}}H_0=x^2-1,\\
-		H_3&=x^3-\frac{\inp{H_2}{x^3}}{\inp{H_2}{H_2}}H_2-\frac{\inp{H_1}{x^3}}{\inp{H_1}{H_1}}H_1-\frac{\inp{H_0}{x^3}}{\inp{H_0}{H_0}}H_0=x^3-3x,\\
-		&\cdots
+        \mathrm{He}_0&=1, &\mathrm{He}_1&=x,\\
+        \mathrm{He}_2&=x^2-1, &\mathrm{He}_3&=x^3-3x.
 	\end{align*}
-	这与实际Hermite多项式的定义也只是系数的差别。
+	这里得到的是概率论约定的Hermite多项式$\mathrm{He}_n$。物理学中常用的$H_n$对应权重$\e^{-x^2}$，二者还涉及自变量缩放：$H_n(x)=2^{n/2}\mathrm{He}_n(\sqrt2x)$，不能仅相差一个整体系数。
 \end{example}
 
 \section{幺正矩阵}
 
-所有实矩阵相关的内容可以复制到复矩阵。
+在涉及内积的实矩阵公式中，应将转置换为共轭转置。例如复矩阵的SVD为$A=U\Sigma V\dg$，其奇异值由$A\dg A$决定。
 
 \begin{definition}{幺正矩阵}{unitary matrix}
-	矩阵$U$是幺正的(unitary)若$U\dg U=I.$
+	方阵$U\in\CC^{n\times n}$是幺正的(unitary)若$U\dg U=I$；此时也有$UU\dg=I$。矩形矩阵仅满足$U\dg U=I$时是等距嵌入，不称为幺正矩阵。
 \end{definition}
 幺正矩阵是正交矩阵(见\dfnref{dfn:orthogonal matrix})在复空间的推广。
 \begin{theorem}{幺正变换}{unitary transfomation}
@@ -111,7 +108,7 @@
 \begin{definition}{Hermite矩阵}{Hermite matrix}
 	方阵$H$是厄米(Hermite)矩阵若$H\dg=H.$
 \end{definition}
-Hermite矩阵是对称矩阵(见\dfnref{dfn:symmetric matrix})在复空间的推广。
+Hermite矩阵是实对称矩阵(见\dfnref{dfn:symmetric matrix})在复空间的推广。
 
 \begin{example}{Pauli矩阵}{Pauli matrix}
 	给出三个Pauli矩阵
@@ -136,7 +133,7 @@ Hermite矩阵是对称矩阵(见\dfnref{dfn:symmetric matrix})在复空间的推
 \end{example}
 
 \begin{theorem}{Hermite矩阵的二次型}{quadratic form of Hermite}
-	$\forall z\in\CC$，$z\dg Hz$是实数。
+	$\forall z\in\CC^n$，$z\dg Hz$是实数。
 \end{theorem}
 \begin{proof}
 	$(z\dg Hz)\dg=z\dg H\dg z=z\dg Hz.$
@@ -158,11 +155,47 @@ Hermite矩阵是对称矩阵(见\dfnref{dfn:symmetric matrix})在复空间的推
 	故$z_2\dg z_1=0.$
 \end{proof}
 \begin{theorem}{谱定理}{spectral theorem of Hermite}
-	Hermite矩阵的特征向量$u_1,\ldots,u_n$构成$\CC^n$中的一组幺正基。
+	Hermite矩阵可以选出$n$个特征向量$u_1,\ldots,u_n$构成$\CC^n$的一组正交归一基。重复特征值的子空间内需要另作正交归一化，并非任意选取的特征向量都正交。令$U=[u_1,\ldots,u_n]$，则
 	\[
 		H=U\Lambda U\dg.
 	\]
 \end{theorem}
 \begin{proof}
-	略。
+    由代数基本定理，$H$有归一化特征向量$u_1$，特征值$\lambda_1$为实数。若$w\perp u_1$，则
+    \[
+        \inp{u_1}{Hw}=\inp{Hu_1}{w}=\lambda_1\inp{u_1}{w}=0.
+    \]
+    因而$u_1^\perp$在$H$作用下不变，$H$在该子空间上的限制在正交归一基下仍有Hermite矩阵表示。对维数归纳，即可在整个空间选出正交归一特征基。
 \end{proof}
+
+\section{伴随、自伴与正规映射}
+\begin{definition}{伴随映射}{adjoint map}
+    有限维复内积空间上的线性映射$T:V\to V$的伴随$T^\dagger$由
+    \[
+        \inp{Tu}{v}=\inp{u}{T^\dagger v},\qquad u,v\in V
+    \]
+    唯一确定。若$T=T^\dagger$，则称$T$自伴。
+\end{definition}
+在正交归一基中，伴随映射的矩阵恰为原矩阵的共轭转置。因此有限维自伴映射与Hermite矩阵对应。若所选基并不正交归一，记Gram矩阵$G_{ij}=\inp{v_i}{v_j}$，$T$的矩阵为$A$，则伴随的矩阵为
+\[
+    [T^\dagger]=G^{-1}A^\dagger G.
+\]
+此时自伴条件是$A^\dagger G=GA$，不能直接要求$A^\dagger=A$。无限维空间的无界算符还需要指定定义域，不能直接照搬这里的有限维判定。
+
+\begin{definition}{正规矩阵}{normal matrix}
+    方阵$A\in\CC^{n\times n}$满足$A^\dagger A=AA^\dagger$时，称为正规矩阵。Hermite矩阵和幺正矩阵都是正规矩阵。
+\end{definition}
+\begin{theorem}{正规矩阵的谱定理}{spectral theorem of normal matrix}
+    复方阵$A$能被幺正矩阵对角化，当且仅当$A$正规。
+\end{theorem}
+\begin{proof}
+    若$A=U\Lambda U^\dagger$且$\Lambda$对角，直接计算可得$A^\dagger A=AA^\dagger$。
+    反之，取$A$的归一化特征向量$q_1$，将其补成正交归一基，得幺正矩阵$Q$与
+    \[
+        Q^\dagger AQ=\begin{bmatrix}\lambda&b^\dagger\\0&B\end{bmatrix}=:C.
+    \]
+    幺正相似变换保持正规性。比较$CC^\dagger=C^\dagger C$的左上元素，得$|\lambda|^2+\norm b^2=|\lambda|^2$，故$b=0$。此时$B$也正规，对维数归纳即可完成幺正对角化。
+\end{proof}
+\begin{remark}
+    一般可对角化矩阵未必正规。例如$\begin{bmatrix}1&1\\0&2\end{bmatrix}$有两个不同特征值，因而可相似对角化，但不能幺正对角化。实正交矩阵也未必能在实数域上对角化，例如平面上转角$\pi/2$的旋转矩阵；其复特征值为$\pm\i$。
+\end{remark}

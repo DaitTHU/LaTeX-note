@@ -670,7 +670,7 @@ $\omega_\text p$是介质的等离子体频率(plasma frequency)
 
 \paragraph{一维标量波}
 
-一维中的标量波的通解为
+一维均匀介质中，固定频率的标量波可写为
 \[
     u(x,t)=a\e^{\i(kx-\omega t)}+b\e^{\i(-kx-\omega t)},
 \]
@@ -722,32 +722,41 @@ $A(k)$描述了不同波的线性叠加的性质，
 
 \paragraph{群速度可以大于光速吗？}
 
-随着频率$\omega$的增大，经过一系列共振频率，折射率$n(\omega)$将在1附近出现上升和下降的变化，我们称上升段为正常色散，下降段为反常色散(anomalous dispersion)，由群速度$v_\text g$和$\d n/\d\omega$的关系\eqref{eqn:gruop v}，在反常色散中群速度是可以超越光速的，但这并不违反相对论，个人的解释是这种群速度是波包的速度，并不传递信息。\footnote{唐老师课上讲的词忘了。}
+在透明或弱吸收频段，$\d n/\d\omega>0$称为正常色散，$\d n/\d\omega<0$称为反常色散(anomalous dispersion)。由式\eqref{eqn:gruop v}，某些反常色散频段的群速度可大于$c$，甚至为负；仅有$\d n/\d\omega<0$并不足以保证超光速。此时吸收、增益或高阶色散可能显著重塑波包，波包峰值的移动不能直接等同于信息或能量输运。对满足因果性且高频极限$n(\omega)\to1$的局域电磁响应，携带新扰动的信号前沿仍不超越真空光速$c$。
 
 \paragraph{进一步讨论群速度的有效性}
 
-考虑频率对波数依赖的特定模型，并在不近似的情况下计算脉冲在该模型介质中的传播。$t=0$时标量波的初始值和初始变化率为$u(x,0),\dot u(x,0)$，则 
+对满足$\ddot{\hat u}(k,t)+\omega(k)^2\hat u(k,t)=0$的无损线性模型，设初值为$f(x)=u(x,0)$、$g(x)=\dot u(x,0)$，并以$\hat f,\hat g$表示同一归一化约定下的Fourier变换。保留两个时间分支后，解为
 \[
-    A(k)=\frac1{\sqrt{2\pi}}\int\iti\biggb{u(x,0)+\i\frac{\dot u(x,0)}{\omega(k)}}\e^{-\i kx}\d x,
+    u(x,t)=\frac1{\sqrt{2\pi}}\int\iti
+    \biggb{\hat f(k)\cos\bigp{\omega(k)t}
+    +\hat g(k)\frac{\sin\bigp{\omega(k)t}}{\omega(k)}}\e^{\i kx}\d k.
 \]
+若$\omega(k)=0$，其中$\sin(\omega t)/\omega$取连续极限$t$。令$t=0$并对$t$求导，即可分别恢复两项初始条件。
 \begin{example}{Gauss波包}{Gaussian modulated oscillation}
     考虑初始为Gauss调制振荡：
     \[
-        u(x,0)=\e^{-x^2/2L^2}\cos(k_0x),
+        f(x)=\e^{-x^2/2L^2}\cos(k_0x),\qquad g(x)=0.
     \]
-    若假设$\dot u(x,0)=0$，则
+    其Fourier谱为
     \[
-        u(x,t)=\e^{-x^2/2L^2}\cosh(kx-\omega t);
+        \hat f(k)=\frac L2\bigb{\e^{-L^2(k-k_0)^2/2}+\e^{-L^2(k+k_0)^2/2}},
     \]
+    故演化由
+    \[
+        u(x,t)=\frac1{\sqrt{2\pi}}\int\iti\hat f(k)\cos\bigp{\omega(k)t}\e^{\i kx}\d k
+    \]
+    给出。零初速度一般同时激发两个时间分支，不能直接用单个平移波包代替此解。
     \tcblower
-    假设 
+    例如，选取偶对称的模型色散关系
     \[
-        \omega(k)=v\Bigp{1+\frac{a^2k^2}2},
+        \omega(k)=\omega_\ast\Bigp{1+\frac{a^2k^2}2},
     \]
-    则群速度
+    其中$\omega_\ast$是角频率、$a$是长度，则正频率分支在$k_0$附近的群速度为
     \[
-        v_\text g=\dv\omega k(k_0)=va^2k_0.
+        v_\text g=\eval{\dv\omega k}_{k_0}=\omega_\ast a^2k_0.
     \]
+    此式量纲为速度；二阶导数$\omega''(k)=\omega_\ast a^2$还会使窄带波包展宽。
 \end{example}
 
 \section{\texorpdfstring{$\bm D$}{D}和\texorpdfstring{$\bm E$}{E}之间的因果关系}
@@ -815,6 +824,7 @@ $\tau<0$时$G(\tau)=0$。说明只有在$t$时间之前的电场$\bm E$进入以
 \newcommand{\PV}{\mathop{}\!\mathrm{P.V.}}
 
 \paragraph{Kramers-Kronig关系}
+下式假定$\varepsilon_\r(\omega)-1$在复频率上半平面解析、在无穷远充分衰减，且实轴上没有需要另行分离的极点（例如直流电导引起的零频极点）。
 由Cauchy定理
 \begin{align*}
     \varepsilon_\r(\omega)-1&=\frac1{2\pi\i}\oint_C\frac{\varepsilon_\r(\omega')-1}{\omega'-\omega}\d\omega'\\
@@ -831,22 +841,22 @@ $\tau<0$时$G(\tau)=0$。说明只有在$t$时间之前的电场$\bm E$进入以
 由$\Re[\varepsilon_\r(\omega)]$为偶，$\Im[\varepsilon_\r(\omega)]$为奇，得到Kramers-Kronig关系
 \begin{equation}
     \begin{aligned}
-        \Re[\varepsilon_\r(\omega)]&=1+\frac1\pi\PV\int\iti\frac{\Im[\varepsilon_\r(\omega)]}{\omega'-\omega}\d\omega'\\
-        \Im[\varepsilon_\r(\omega)]&=-\frac1\pi\mathop{}\!\mathrm{P.V.}\int\iti\frac{\Re[\varepsilon_\r(\omega)]-1}{\omega'-\omega}\d\omega'\\
+        \Re[\varepsilon_\r(\omega)]&=1+\frac1\pi\PV\int\iti\frac{\Im[\varepsilon_\r(\omega')]}{\omega'-\omega}\d\omega'\\
+        \Im[\varepsilon_\r(\omega)]&=-\frac1\pi\mathop{}\!\mathrm{P.V.}\int\iti\frac{\Re[\varepsilon_\r(\omega')]-1}{\omega'-\omega}\d\omega'\\
     \end{aligned}
 \end{equation}
 或
 \begin{equation}
     \begin{aligned}
-        \Re[\varepsilon_\r(\omega)]&=1+\frac2\pi\PV\int\zti\frac{\omega'\Im[\varepsilon_\r(\omega)]}{\omega'^2-\omega^2}\d\omega'\\
-        \Im[\varepsilon_\r(\omega)]&=-\frac{2\omega}\pi\PV\int\zti\frac{\Re[\varepsilon_\r(\omega)]-1}{\omega'^2-\omega^2}\d\omega'\\
+        \Re[\varepsilon_\r(\omega)]&=1+\frac2\pi\PV\int\zti\frac{\omega'\Im[\varepsilon_\r(\omega')]}{\omega'^2-\omega^2}\d\omega'\\
+        \Im[\varepsilon_\r(\omega)]&=-\frac{2\omega}\pi\PV\int\zti\frac{\Re[\varepsilon_\r(\omega')]-1}{\omega'^2-\omega^2}\d\omega'\\
     \end{aligned}
 \end{equation}
-Kramers-Kronig关系具有非常普遍的有效性，这仅仅是根据极化和电场之间的因果关系\eqref{eqn:D-E with omega}的假设而得出的。
+Kramers-Kronig关系将响应函数的实部与虚部联系起来，其物理基础是因果性；具体积分形式还依赖上述解析性、收敛性及奇点处理条件。
 
 对于$\omega=\omega_0$处的一条非常窄的吸收线或吸收带，由
 \begin{align*}
-    \Im[\varepsilon_\r(\omega)]&\simeq\frac{\pi K}{2\omega_0}\vd(\omega'-\omega_0)+\cdots\\
+    \Im[\varepsilon_\r(\omega)]&\simeq\frac{\pi K}{2\omega_0}\vd(\omega-\omega_0)+\cdots\\
     \Re[\varepsilon_\r(\omega)]&\simeq\bar\varepsilon+\frac K{\omega_0^2-\omega^2},
 \end{align*}
 后略。

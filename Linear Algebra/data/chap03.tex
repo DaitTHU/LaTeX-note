@@ -1,7 +1,7 @@
 \chapter{线性空间}
 \section{线性空间}
 \begin{definition}{线性空间}{linear space}
-	定义域$\FF$上的线性空间(linear space)~$V$是具有加法$+:V\times V\to V$和数乘$\cdot:\FF\times V\to V$运算且满足以下公理的集合。
+	数域$\FF$上的线性空间(linear space)~$V$是具有加法$+:V\times V\to V$和数乘$\cdot:\FF\times V\to V$运算且满足以下公理的集合。
 	\begin{compactenum}
 		\item 加法交换律\qqqquad\quad~$x+y=y+x;$
 		\item 加法结合律\qqqquad\quad~$x+(y+z)=(x+y)+z;$
@@ -20,7 +20,7 @@
 \end{example}
 
 \begin{definition}{子空间}{subspace}
-	给定线性空间$V$的子集$V_\mathrm s\subset V$，若其对于加法和数乘封闭：$\forall v,w\in V_\mathrm s,\forall c\in\FF$
+	给定线性空间$V$的非空子集$V_\mathrm s\subset V$，若其对于加法和数乘封闭：$\forall v,w\in V_\mathrm s,\forall c\in\FF$
 	\[
 		v+w\in V_\mathrm s,\quad cv\in V_\mathrm s,
 	\]
@@ -36,7 +36,7 @@
 \end{remark}
 
 \begin{definition}{线性扩张}{linear span}
-	$S$的线性扩张(linear span)是$S$中向量的所有线性组合的集合，记作$\lspan(S)$。
+	$S\subset V$的线性扩张(linear span)是$S$中向量的所有有限线性组合的集合，记作$\lspan(S)$；约定$\lspan(\varnothing)=\{0\}$。
 \end{definition}
 
 \begin{corollary}
@@ -44,6 +44,7 @@
 \end{corollary}
 
 \section{线性独立、基和维度}
+本章以下讨论有限维线性空间。
 \begin{definition}{线性独立}{linear independent}
 	$n$个向量$\{v_i\}$是线性独立的(linear independent)，当且仅当
 	\[
@@ -70,7 +71,7 @@
 	线性空间的维度和基的选取无关。
 \end{theorem}
 \begin{proof}
-	若线性空间$V$存在两组基$\{v_1,\ldots,v_m\},\{w_1,\ldots,w_n\}$元素个数不等，不妨设$n>m$。
+	若线性空间$V$存在两组基$\{v_1,\ldots,v_m\},\{w_1,\ldots,w_n\}$元素个数不等，不妨设$m>n$。
 	因为$\{w_i\}$是基，$\{v_i\}$可以被表示为其线性组合
 	\[
 		v_i=\sum_{j=1}^nw_ja_{ji},\quad\forall i.
@@ -87,7 +88,7 @@
 \end{proof}
 
 \begin{theorem}{}{}
-	若$\forall v\in V_1$可以写成$V_2$中向量的线性组合，则$\dim(V_1)\leqslant\dim(V_2)$。
+	设$V_1,V_2$是同一有限维线性空间的子空间。若$\forall v\in V_1$可以写成$V_2$中向量的线性组合，则$V_1\subseteq V_2$，从而$\dim(V_1)\leqslant\dim(V_2)$。
 \end{theorem}
 
 \begin{proof}
@@ -133,25 +134,25 @@
 \end{corollary}
 
 \begin{example}{子空间的基}{}
-	$\N(A)$的基：显然$\N(A)=\N(\rref(A))$，而$\rref(A)$的每个自由列各给出一个$\N(\rref(A))$的基。若第$j$列为自由列，则其对应的基$x$的分量为：
+	$\N(A)$的基：显然$\N(A)=\N(\rref(A))$，而$\rref(A)$的每个自由列各给出一个$\N(\rref(A))$的基向量。若第$j$列为自由列，则其对应的基$x$的分量为：
 	\[
 		x_i=\begin{cases}
 			\delta_{ij},&\text{第$i$列为自由列}\\
-			-\rref(A)_{ij},&\text{第$i$列为主列}
+			-\rref(A)_{kj},&\text{第$i$列为主列，主元位于第$k$行}
 		\end{cases}
 	\]
 	%$\dim(\rref(A))=\rref(A)$中自由列的数量；
 	\tcblower
-	$\C(A)$的基：$\rref(A)$的所有主列构成$\C(A)$的一组基。
+	$\C(A)$的基：先找出$\rref(A)$的主元列编号，再取原矩阵$A$中相应编号的列。行变换一般改变列空间，不能直接取$\rref(A)$的列作为$\C(A)$的基。
 \end{example}
 
 \begin{example}
 	{用矩阵配平化学方程式}{}
-	硫酸铜溶液可处理白磷中毒，其原理为：
+	考虑下列反应式的配平问题，这里只讨论元素守恒：
 	\[
 		\mathrm{P_4+CuSO_4+H_2O\to Cu_3P+H_3PO_4+H_2SO_4}.
 	\]
-	由反应前后$\mathrm{H,O,P,S,Cu}$元素守恒可得系数矩阵的每行为：
+	令反应物的带符号系数$\nu$为正、生成物的为负。由反应前后$\mathrm{H,O,P,S,Cu}$元素守恒可得：
 	\[
 		\begin{bmatrix}
 			&&2&&3&2\\
@@ -206,18 +207,18 @@
 			0\\2\\0\\0\\-2\\-1
 		\end{bmatrix}.
 	\]
-	零空间有两个基，不能确定最简系数，这是因为该方程可以线性叠加双氧水分解反应($\mathrm{2\,H_2O_2=2\,H_2O+O_2\uparrow}$)。
-	后来通过同位素标记法确定了$\mathrm{O_2}$中的氧原子仅来自$\mathrm{H_2O_2}$而不是$\mathrm{MnO_4^-}$：
+	零空间为二维，单靠这些守恒方程不能唯一确定反应的系数比，这是因为该方程可以线性叠加双氧水分解反应($\mathrm{2\,H_2O_2=2\,H_2O+O_2\uparrow}$)。
+	若进一步指定氧原子的来源，假定$\mathrm{H_2O_2}$中的氧全部进入$\mathrm{O_2}$，而$\mathrm{MnO_4^-}$中的氧全部进入水，可用同位素标签表示为：
 	\[
 		\mathrm{Mn{}^{16}O_4^-+H_2{}^{18}O_2+H^+\to Mn^{2+}+H_2{}^{16}O+{}^{18}O_2\uparrow}.
 	\]	
-	才能以$\mathrm{{}^{16}O,{}^{18}O}$守恒确定$\nu_\mathrm{MnO_4^-}:\nu_\mathrm{H_2O_2}=2:5$。
+	便可由$\mathrm{{}^{16}O,{}^{18}O}$分别守恒确定$\nu_\mathrm{MnO_4^-}:\nu_\mathrm{H_2O_2}=2:5$。
 	\[
 		\mathrm{2\,MnO_4^-+5\,H_2O_2+6\,H^+=2\,Mn^{2+}+8\,H_2O+5\,O_2\uparrow}.
 	\]
 \end{example}
 
-\clearpage
+
 \section{矩阵的秩、线性代数基本定理}
 
 \begin{definition}{矩阵的秩}{rank}
@@ -229,8 +230,8 @@
 	若秩等于列数，则称其列满秩(full column rank)。
 \end{definition}
 \begin{theorem}
-	{线性方程组$Ax=0$的完整解}{}
-	线性方程组$Ax=b$的通解可以分解为特解$x_{\mathrm p}$和零解$x_{\mathrm n}$的和：
+	{线性方程组$Ax=b$的完整解}{}
+	若线性方程组$Ax=b$有解，其通解可写为一个特解$x_{\mathrm p}$与齐次方程解$x_{\mathrm n}$的和：
 	\[
 		x=x_{\mathrm p}+x_{\mathrm n},
 	\]
@@ -242,7 +243,7 @@
 			b'_j,&\text{第$i$列为主列，其主元1在第$j$行}
 		\end{cases}
 	\]
-	而零解满足$Ax_{\mathrm n}=0$，可以写成零空间的基的线性组合。
+	而齐次解满足$Ax_{\mathrm n}=0$，可以写成零空间的基的线性组合。
 \end{theorem}
 \begin{corollary}
 	~
@@ -317,7 +318,7 @@
 % 参考：\url{https://zhuanlan.zhihu.com/p/55206421}
 
 \begin{theorem}{}{}
-	对于矩阵$A,B$有
+	对于同型矩阵$A,B$有
 	\begin{equation}
 		\rank(A+B)\leq\rank(A)+\rank(B).
 	\end{equation}
@@ -326,7 +327,7 @@
 	设$\C(A),\C(B)$的一组基分别为$\{a_1,\ldots,a_{\rank(A)}\}$和$\{b_1,\ldots,b_{\rank(B)}\}$，则$A+B$中的列必然可以由$\{a_1,\ldots,a_{\rank(A)},b_1,\ldots,b_{\rank(B)}\}$的线性组合表示出，故不等式成立。
 \end{proof}
 \begin{theorem}{Sylvester不等式}{Sylvester inequality}
-	对$n$阶方阵$A,B$有
+	对$A\in\FF^{m\times n},B\in\FF^{n\times p}$有
 	\begin{equation}
 		\label{eqn:Sylvester inequality}
 		\rank(AB)\geq\rank(A)+\rank(B)-n.
@@ -353,7 +354,7 @@
 \end{proof}
 
 \begin{theorem}{Frobenius不等式}{Frobenius inequality}
-	对于矩阵$A,B,C$，有
+	对于$A\in\FF^{m\times n},B\in\FF^{n\times p},C\in\FF^{p\times q}$，有
 	\begin{equation}
 		\label{eqn:Frobenius inequality}
 		\rank(ABC)\geq\rank(AB)+\rank(BC)-\rank(B).

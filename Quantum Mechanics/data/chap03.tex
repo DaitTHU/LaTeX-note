@@ -3,7 +3,7 @@
 \[
 	\hat A(\alpha\psi_1+\beta\psi_2)=\alpha\hat A\psi_1+\beta\hat A\psi_2.
 \]
-算符的加法满足交换律和结合率，但乘法不一定满足分配率。
+线性算符的加法满足交换律和结合律；乘法（复合）满足结合律和分配律，但一般不满足交换律。对无界算符，这些运算须在共同的适当定义域上讨论。
 \begin{definition}{对易子}{Commutator}
 	一般来说，算符不满足交换律，即对易子
 	\[
@@ -21,11 +21,11 @@
 考虑位移和动量的对易，一维中
 \begin{align*}
 	\hat x\hat p\psi & =-\i\hbar x\dv\psi{x}.                             \\
-	\hat p\hat x\psi & =-\i\hbar\dv{x\psi}x=-\i\hbar\Bigp{\psi+\dv\psi{x}}.
+	\hat p\hat x\psi & =-\i\hbar\dv{x\psi}x=-\i\hbar\Bigp{\psi+x\dv\psi{x}}.
 \end{align*}
 因此对波函数来说
 \begin{align}
-	\cmm xp=-\i\hbar.
+	\cmm xp=\i\hbar.
 \end{align}
 \begin{definition}{逆算符}{Inverse Operator}
 	记$\hat A$的逆算符为$\hat A\iv$，则以下等价
@@ -90,7 +90,7 @@
 	\int\iti & \psi\cj\hat p_x\varphi\d x=-\i\hbar\int\iti\psi\cj\dv\varphi{x}\d x                                                                     \\
 	         & =-\i\hbar\biggb{\cancel{\psi\cj\varphi{\Big\vert}\iti}-\int\iti\varphi\dv{\psi\cj}x\d x}=\int\iti(\hat p_x\psi)\cj\varphi\d x.
 \end{align*}
-以上用到了束缚态条件，其实非束缚态下算符也是Hermite的。
+以上分部积分要求边界项消失。算符是否自伴还取决于定义域和边界条件，不能仅由微分表达式判断；连续谱的平面波本征态应按广义函数理解。
 \section{Hermite算符}
 \begin{theorem}{Hermite算符的平均值}{Meanvalue of Hermite Operator}
 	Hermite算符的平均值是实数。
@@ -120,7 +120,7 @@
 	\begin{proof}
 		设$\hat A$的本征值$\lambda_1,\lambda_2$对应本征函数$\psi_1,\psi_2$
 		\begin{gather*}
-			\lambda_2(\psi_1,\psi_2)=(\psi_1,\hat A\psi_2)=(\hat A\psi_2,\psi_1)=\lambda_1(\psi_1,\psi_2).
+			\lambda_2(\psi_1,\psi_2)=(\psi_1,\hat A\psi_2)=(\hat A\psi_1,\psi_2)=\lambda_1(\psi_1,\psi_2).
 		\end{gather*}
 		由$\lambda_1\neq\lambda_2$，可知$(\psi_1,\psi_2)\equiv 0$。
 	\end{proof}
@@ -189,16 +189,16 @@
 
 共同本征函数描写的就是几个力学量同时有确定值的状态。这样，如果算符$\hat A$的本征值有简并，我们就再引进另一算符$\hat B$并求出$\hat A$和$\hat B$的共同本征函数。去除所有的简并后，这样一组量子数$(a,b,\ldots)$就完全确定了一个量子态。
 
-这种情形多半出现在多自由度体系中。对这种体系，一组两两对易的、完全去除简并的算符集称为它的对易可观测量完全集(complete system of commuting observables, CSCO)。完备算符集中算符的数目就是体系的自由度数。如果这些量子数都是分立量子数，共同本征函数的正交归一关系就是
+这种情形多半出现在多自由度体系中。对这种体系，一组两两对易的、完全去除简并的算符集称为它的对易可观测量完全集(complete system of commuting observables, CSCO)。完全集的含义是其联合本征值足以标记基态矢量；算符个数取决于标记方式，不能一般地等同于体系的自由度数。如果这些量子数都是分立量子数，共同本征函数的正交归一关系就是
 \[
 	\inp{\psi_{n\ell m}}{\psi_{n'\ell'm'}}=\vd_{nn'}\vd_{\ell\ell'}\vd_{mm'}.
 \]
-比如$\{\hat p_x,\hat p_y,\hat p_z\},\{\hat L^2,\hat L_z\}$等。
+例如无自旋自由粒子可用$\{\hat p_x,\hat p_y,\hat p_z\}$；$\{\hat L^2,\hat L_z\}$仅标记角向波函数，完整三维态还需要径向量子数等信息。
 
 \paragraph{量子力学的测量问题}在此引入量子力学的前四个基本公设
 \begin{theorem}{量子力学的基本公设}{Posulates of Quantum Mechanics}
 	\begin{compactenum}
-		\item 微观体系的状态由波函数描述，波函数单值、有限、连续；
+		\item 本节讨论纯态，其坐标表象由平方可积波函数描述；连续性及导数的边界条件由具体Hamilton算符的定义域决定；
 		\item 波函数的动力学演化满足Schrödinger方程；
 		\item 力学量用Hermite算符表示,且有组成完备集的本征函数系；
 		\item 任一波函数可以展开为力学量算符本征函数的线性叠加，测得力学量为本征值$\lambda_n$的几率（密度）为展开式中对应本征函数系数的模方$\abs{c_n}^2$。
@@ -220,19 +220,19 @@ c_n=(\phi_n,\psi),
 \]
 代入
 \begin{align*}
-	\psi(x) & =\sum\biggp{\int\phi_n(x')\psi(x')\d x'}\psi_n(x)  \\
-	        & =\int\biggp{\sum\phi_n(x)\phi_n(x')}\psi(x')\d x'.
+	\psi(x) & =\sum\biggp{\int\phi_n^*(x')\psi(x')\d x'}\phi_n(x)  \\
+	        & =\int\biggp{\sum\phi_n(x)\phi_n^*(x')}\psi(x')\d x'.
 \end{align*}
 因此完备性要求
 \begin{align}
-	\sum \phi_n(x)\phi_n(x')=\vd(x-x').
+	\sum \phi_n(x)\phi_n^*(x')=\vd(x-x').
 \end{align}
 从物理上说，函数系的完备性尽管很重要，我们却经常不对它做严格的证明。这是因为有些函数系的完备性已经由数学家证明过，也是因为物理上的完备性通常只意味着取这些基本函数来展开我们要研究的波函数已经足够了。
 \paragraph{波包坍缩}测量会使系统由原来许多态的叠加坍缩为一个本征态
 \[
 	\sum c_n\phi_n\e^{-\i E_nt/\hbar}\quad\rightarrow\quad\phi_i\e^{-\i E_it/\hbar}.
 \]
-这一过程称为“波包坍缩”(Neumann, 1932)。比如，在对粒子做空间位置测量后的一刻，其波函数坍缩为$\vd(r-r_0)$。
+这一过程称为“波包坍缩”(Neumann, 1932)。理想的无限精度位置测量形式上对应$\delta(\bm r-\bm r_0)$这样的广义本征态；它不是可归一化的物理波包，实际有限分辨率测量产生具有有限空间宽度的测后态。简并离散测量应使用本征子空间投影，而非任选其中一个基矢。
 波包坍缩的动力学过程不服从\Schr 方程，至今仍在研究。% 量子力学关于测量的假定是理论的基本假定之一，是量子力学目前无法解释的。
 
 \paragraph{平均值}对离散谱
@@ -317,7 +317,7 @@ I(\xi)=(\vd A)^2\xi^2-\i\ave{\cmm AB}\xi+(\vd B)^2.
 \begin{align}
 	(\vd A)^2(\vd B)^2\geqslant\frac14\ave C^2.
 \end{align}
-因此若$\cmm AB\neq 0$，$\vd A,\vd B$不能同时为0。特别地$\cmm xp=-\i\hbar$，因此
+只有在给定态中$\ave{\cmm AB}\neq0$时，上式才给出非零下界；算符不对易并不排除某些共同本征态。特别地$\cmm xp=\i\hbar$，因此
 \begin{align}
 	\vd x\vd p\geqslant\frac{\hbar}2.\label{Proof of UR}
 \end{align}
@@ -351,7 +351,7 @@ $\cmm{L_y}{L_z}$等同理，因此
 	&=-\i\hbar(\hat L_x\hat L_y+\hat L_y\hat L_x)+\i\hbar(\hat L_y\hat L_x+\hat L_x\hat L_y)=0.
 \end{align}
 
-联级Stern-Gerlach实验证明，在确定银原子的$\hat L_z$时，其$\hat L_x,\hat L_y$没有确定值，即$\hat L_x,\hat L_y,\hat L_z$不能同时有确定值。
+联级Stern-Gerlach实验体现了角动量不同分量的测量不相容。银原子基态的轨道角动量为零，实验中的二重分裂来自未配对电子的自旋，不能把它直接归因于轨道角动量$\hat L_z$。
 
 回顾\textit{球坐标系}下
 \[
@@ -447,7 +447,7 @@ Laplace算符
 %\[\int\abs{Y_{\ell m}(\theta,\varphi)}^2\d\Omega=1,\quad\d\Omega=\sin\theta\d\theta\nd\varphi.\]
 由于
 \[
-	\int_{-1}^1P_\ell^m(x)P_{\ell'}^{m'}(x)\d x=\frac2{2\ell+1}\frac{(\ell+m)!}{(\ell-m)!}\vd_{\ell\ell'}\vd_{mm'}.
+	\int_{-1}^1P_\ell^m(x)P_{\ell'}^m(x)\d x=\frac2{2\ell+1}\frac{(\ell+m)!}{(\ell-m)!}\vd_{\ell\ell'},\quad 0\leq m\leq\min(\ell,\ell').
 \]
 得
 \[
@@ -465,7 +465,7 @@ N_{\ell m}=(-1)^m\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}}
 		Y_2^{\pm 1} & =\mp\sqrt{\frac{15}{8\pi}}\sin\theta\cos\theta\e^{\pm \i\phi}, & Y_3^{\pm 3} & =\mp\sqrt{\frac{35}{64\pi}}\sin^3\theta\e^{\pm 3\i\phi}.
 	\end{align*}
 \end{example}
-$\hat L^2$的本征值$\ell$下有$2\ell+1$个可能的$m$，简并度为$2\ell+1$。
+$\hat L^2$的本征值$\ell(\ell+1)\hbar^2$下有$2\ell+1$个可能的$m$，简并度为$2\ell+1$。
 
 球谐函数是$\hat L^2$和$\hat L_z$的共同本征函数
 \begin{align*}
@@ -484,7 +484,7 @@ $\hat L^2$的本征值$\ell$下有$2\ell+1$个可能的$m$，简并度为$2\ell+
 \paragraph{递推关系}
 \begin{align}\label{costhetaYlm}
 	\cos\theta Y_\ell^m&=\sqrt{\frac{(\ell+1)^2-m^2}{(2\ell+1)(2\ell+3)}}Y_{\ell+1}^m+\sqrt{\frac{\ell^2-m^2}{(2\ell-1)(2\ell+1)}}Y_{\ell-1}^m.\\
-	\sin\theta\e^{\pm\i\varphi}Y_\ell^m&=\pm\sqrt{\frac{(\ell\pm m+1)(\ell\pm m+2)}{(2\ell+1)(2\ell+3)}}Y_{\ell+1}^{m+1}+\sqrt{\frac{(\ell\mp m)(\ell\mp m+1)}{(2\ell-1)(2\ell+1)}}Y_{\ell-1}^{m\pm 1}.
+	\sin\theta\e^{\pm\i\varphi}Y_\ell^m&=\mp\sqrt{\frac{(\ell\pm m+1)(\ell\pm m+2)}{(2\ell+1)(2\ell+3)}}Y_{\ell+1}^{m\pm 1}\pm\sqrt{\frac{(\ell\mp m)(\ell\mp m-1)}{(2\ell-1)(2\ell+1)}}Y_{\ell-1}^{m\pm 1}.
 \end{align}
 记不住，记住也没用。
 \paragraph{径向动量算符}球坐标系不同于直角坐标，$\qo r\cdot\,\qo p$并不是Hermite的。因此要使算符是Hermite的，定义

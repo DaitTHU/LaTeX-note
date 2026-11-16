@@ -27,7 +27,7 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 			u(x,0)=\varphi(x).
 		\end{cases}\longrightarrow\quad\begin{cases}
 			\hat u_t=-a^2\xi^2\hat u+\hat f,\\
-			\hat u(\xi,0)=\hat\varphi(\varphi).
+			\hat u(\xi,0)=\hat\varphi(\xi).
 		\end{cases}
 	\end{align*}
 	因此
@@ -40,14 +40,14 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 	\begin{align*}
 		u(x,t)&=\FT^{-1}\biggb{\int_0^t\hat f(\xi,\tau)\e^{-a^2\xi^2(t-\tau)}\d\tau}+\FT^{-1}\bigb{\hat\varphi(\xi)\e^{-a^2\xi^2t}}\\
 		&=\int_0^t\FT^{-1}\bigb{\hat f(\xi,\tau)}\ast\FT^{-1}\bigb{\e^{-a^2\xi^2(t-\tau)}}\d\tau+\FT^{-1}\bigb{\hat\varphi(\xi)}\ast\FT^{-1}\bigb{\e^{-a^2\xi^2t}}\\
-		&=\int_0^tf(x,t)\ast\frac{\e^{-x^2/4a^2(t-\tau)}}{2a\sqrt{\pi(t-\tau)}}\d\tau+\frac1{2a\sqrt{\pi t}}\int\iti\varphi(\eta)\e^{-(x-\eta)^2/4a^2t}\d\eta\\
+		&=\int_0^tf(x,\tau)\ast\frac{\e^{-x^2/4a^2(t-\tau)}}{2a\sqrt{\pi(t-\tau)}}\d\tau+\frac1{2a\sqrt{\pi t}}\int\iti\varphi(\eta)\e^{-(x-\eta)^2/4a^2t}\d\eta\\
 		&=\int_0^t\frac1{2a\sqrt{\pi(t-\tau)}}\int\iti f(\eta,\tau)\e^{-(x-\eta)^2/4a^2(t-\tau)}\d\eta\d\tau+\\
 		&\qqquad\frac1{2a\sqrt{\pi t}}\int\iti\varphi(\eta)\e^{-(x-\eta)^2/4a^2t}\d\eta.
 	\end{align*}
 	以上只是形式解。
 \end{example}
 \subsection{Fourier正余弦变换}
-对于定义在$\RR_{\geqslant  0}$上的函数，可将其奇偶延拓至$\RR$后再作4ier变换
+对于定义在$\RR_{\geqslant  0}$上的函数，可将其奇偶延拓至$\RR$后再作Fourier变换
 \begin{definition}{Fourier正余弦变换}{Fourier Sine and Cosine Transformation}
 	正余弦变换分别为
 	\begin{align*}
@@ -67,17 +67,17 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 		\begin{cases}
 			u_t=a^2u_{xx},\quad x>0,\;t>0\\
 			u(x,0)=0,\\
-			u_x(0,t)=\varphi(x)\\
+			u_x(0,t)=\varphi(t)\\
 		\end{cases}
 	\end{align*}
 	自然边界条件
 	\[
-		\lim_{x\to\infty}u(x,t)=\lim_{x\to\infty}u_t(x,t)=0
+		\lim_{x\to\infty}u(x,t)=\lim_{x\to\infty}u_x(x,t)=0
 	\]
 	
 	若用Fourier正弦变换，则会出现$u(0,t)$，此边界条件没有给出，因此只能用余弦变换，记$U(\xi,t)=\FT_\cosi[u(x,t)]$
 	\begin{align*}
-		U_t(\xi,t)&=a^2\bigb{u_x(x,t)\cos\xi x-\xi u(x,t)\sin\xi x}\zti-a^2\xi^2U(\xi,t)\\
+		U_t(\xi,t)&=a^2\bigb{u_x(x,t)\cos\xi x+\xi u(x,t)\sin\xi x}\zti-a^2\xi^2U(\xi,t)\\
 		&=-a^2\varphi(t)-a^2\xi^2U(\xi,t).
 	\end{align*}
 	故
@@ -100,11 +100,11 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 			u(x,0)=u_t(x,0)=0
 		\end{cases}
 	\end{align*}
-	自然边界条件$\lim_{x\to\infty}u(x,t)=\lim_{x\to\infty}u_t(x,t)=0$。
+	自然边界条件$\lim_{x\to\infty}u(x,t)=\lim_{x\to\infty}u_x(x,t)=0$。
 	\[
 		U_{tt}(\xi,t)=-a^2f(t)-a^2\xi^2U(\xi,t).
 	\]
-	其次方程通解$\cos a\xi t,\;\sin a\xi t$，运用\eqref{General to Particular Solution}和边界条件$U(\xi,0)=U_t(\xi,0)=0$
+	齐次方程通解$\cos a\xi t,\;\sin a\xi t$，运用\eqref{General to Particular Solution}和边界条件$U(\xi,0)=U_t(\xi,0)=0$
 	\begin{align*}
 		U(\xi,t)&=\int_0^t-a^2f(\tau)\frac{\cos a\xi\tau\sin a\xi t-\cos a\xi t\sin a\xi\tau}{\cos a\xi\tau(\sin a\xi\tau)'-(\cos a\xi\tau)'\sin a\xi\tau}\d\tau\\
 		&=-\frac a\xi\int_0^tf(\tau)\sin a\xi(t-\tau)\d\tau.
@@ -116,14 +116,15 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 	\end{align*}
 	由
 	\[
-		\FT\Bigb{\frac{\sin a\xi}\xi}=\frac{\Heaviside(x+a)-\Heaviside(x+a)}2.
+		\FT^{-1}\Bigb{\frac{\sin a\xi}\xi}(x)=\frac{\Heaviside(x+a)-\Heaviside(x-a)}2,\quad a>0.
 	\]
 	其中$\Heaviside(x)$为Heaviside跳跃函数，故
 	\begin{align*}
 		u(x,t)  &%=-a\int_0^tf(\tau)[H(x+a(t-\tau))-H(x-a(t-\tau))]\d\tau\\
 		% =-a\int_0^{t-x/a}f(\tau)\Heaviside(x+a(t-\tau))\d\tau
-		=-a\int_0^{t-x/a}f(\tau)\d\tau.\quad x<at
+		=\begin{cases}-a\int_0^{t-x/a}f(\tau)\d\tau,&0\leq x<at,\\0,&x\geq at.\end{cases}
 	\end{align*}
+对足够光滑的$f$，若要求跨越波前$x=at$的古典解，还需初边值相容条件$f(0)=f'(0)=0$；否则应在弱解意义下理解波前处的导数。
 \end{example}
 \subsection{Fourier变换与分离变量法}
 无界区域是否有相应的分离变量法？
@@ -153,7 +154,7 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 	\[
 		u(x,0)=\frac1{2\pi}\int\iti A(\xi)\e^{\i\xi x}\d\xi\equiv\FT^{-1}[A]=\varphi(x),
 	\]
-	故$\varphi(x)$是$A(\xi)$的Fourier变换。
+	故$\varphi(x)$是$A(\xi)$的Fourier逆变换，即$A=\FT[\varphi]$。
 \end{example}
 可见对无界区间上的问题，分离变量法依然适用，只是特征值是连续分布的。
 \section{Laplace变换}
@@ -168,7 +169,7 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 		f(x)=\LT^{-1}[\bar f(\xi)] = \frac1{2\pi\i}\int_{\sigma-\i\infty}^{\sigma+\i\infty}\bar f(\xi)\e^{\xi x}\d\xi,\quad x\geqslant 0.
 	\]
 \end{definition}
-注意Laplace变换存在条件需要$\exists M,\sigma_0$使得
+Laplace变换存在的一组充分条件是$f$局部可积，且$\exists M,\sigma_0$使得
 	\[
 		\abs{f(x)}<M\e^{\sigma_0x},\quad\forall x>0.
 	\]

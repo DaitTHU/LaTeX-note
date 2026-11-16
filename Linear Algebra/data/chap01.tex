@@ -116,7 +116,7 @@
 \end{remark}
 
 \begin{definition}{(实)向量的内积}{vector inner product}
-	两个向量的内积(inner product)结果是一个实数$\inp\cdot\cdot:\FF^n\times\FF^n\to\RR$。对于实向量
+	此处取$\FF=\RR$，标准内积(inner product)是映射$\inp\cdot\cdot:\RR^n\times\RR^n\to\RR$，定义为
 	\begin{equation}
 		\inp vu:=\sum_{i=1}^nv_iu_i\equiv v_1u_1+v_2u_2+\cdots+v_nu_n.
 	\end{equation}
@@ -143,7 +143,7 @@
 	长度为1的向量是单位向量(unit vector)。
 \end{definition}
 \begin{corollary}
-	与向量$v$同向的单位向量是
+	对非零向量$v$，与其同向的单位向量是
 	\begin{equation}
 		\hat v:=\frac{v}{\norm v},
 	\end{equation}
@@ -313,7 +313,7 @@
 \end{corollary}
 
 \begin{theorem}{}{}
-	若方阵$A$与任意方阵可交换，则$A=cI,\;c\in\FF$称作纯量矩阵(scalar matrix)。
+	若方阵$A$与任意同阶方阵可交换，则$A=cI,\;c\in\FF$称作纯量矩阵(scalar matrix)。
 \end{theorem}
 \begin{proof}
 	定义$e_{ij}\in\FF^{n\times n}$表示仅$i$行$j$列为1，其余项均为0的矩阵。则
@@ -343,7 +343,7 @@
 \end{definition}
 
 \begin{remark}
-	分块矩阵乘法：每个块当作矩阵的元素，块之间使用矩阵乘法。
+	分块矩阵乘法：当两个矩阵的分块内尺寸相容时，将每个块当作元素，块之间使用矩阵乘法并保持因子的先后次序。
 \end{remark}
 
 \subsection{矩阵的转置}
@@ -421,7 +421,7 @@
 	$\forall A,B\in\FF^{n\times n}$可逆，
 	\begin{itemize}
 		\item 逆矩阵的逆：$(A\iv)\iv=A$；
-		\item 数乘：$(cA)\iv=c\iv A\iv$；
+		\item 数乘：$(cA)\iv=c\iv A\iv$，其中$c\neq0$；
 		\item 矩阵乘法：$(AB)\iv=B\iv A\iv$；
 		\item 转置：$(A\iv)\tp=(A\tp)\iv$。
 	\end{itemize}
@@ -433,6 +433,7 @@
 \end{remark}
 
 \begin{example}{二阶方阵的逆}{inverse of 2x2 matrix}
+	当且仅当$ad-bc\neq0$时矩阵可逆，此时
 	\begin{equation}
 		\begin{bmatrix}
 			a&b\\c&d
@@ -479,7 +480,7 @@
 	\]
 	因为
 	\[
-		(I+A)\bigp{I-A+\cdots+(-A)^{n-1}}=I+A^n=I.
+		(I+A)\bigp{I-A+\cdots+(-A)^{n-1}}=I-(-A)^n=I.
 	\]
 \end{example}
 
@@ -503,7 +504,7 @@
 		% ={}&(I+UCVA\iv)(I-U(C\iv+VA\iv U)\iv VA\iv)\\
 		% ={}&I-UCVA\iv-(I+UCVA\iv)U(C\iv+VA\iv U)\iv VA\iv\\
 		% ={}&I-UCVA\iv-U(I+CVA\iv U)(C\iv+VA\iv U)\iv VA\iv\\
-		={}&I-UCVA\iv-UC(C\iv+VA\iv U)(C\iv+VA\iv U)\iv VA\iv=I.
+		={}&I+UCVA\iv-UC(C\iv+VA\iv U)(C\iv+VA\iv U)\iv VA\iv=I.
 		\qedhere
 		% ={}&I-UCVA\iv-UCVA\iv
 	\end{align*}
@@ -529,12 +530,13 @@
 		(I_n+UV)\iv=I_n-U(I_k+VU)\iv V.
 	\end{equation}
 	特别地，当$k=1$时，$U,V$都是向量，
-	令$U=u,\enspace V=v\tp$即得式\eqref{eqn:(I+uvT)-1}，将$u$替换为$A\iv u$即得式\eqref{eqn:Sherman-Morrison}。
+	令$U=u,\enspace V=v\tp$即得式\eqref{eqn:(I+uvT)-1}。再将$u$替换为$A\iv u$，利用$(A+uv\tp)\iv=(I+A\iv uv\tp)\iv A\iv$即得式\eqref{eqn:Sherman-Morrison}。
+	反之，若$1+v\tp A\iv u=0$，则$u\neq0$，且$(A+uv\tp)A\iv u=0$，故$A+uv\tp$不可逆。
 \end{proof}
 
 \begin{example}
 	{Sherman-Morrison公式的应用}{}
-	求逆矩阵：
+	对$n\geq2$求逆矩阵：
 	\[
 		A=\begin{bmatrix}
 			0&1&\cdots&1\\
@@ -556,7 +558,7 @@
 
 \begin{theorem}
 	{华罗庚恒等式}{Hua's identity}
-	对Woodbury恒等式\eqref{eqn:Woodbury}取$n=k$且$U=V=I_n$，有 
+	设$A,B,A+B$为同阶可逆矩阵。对Woodbury恒等式\eqref{eqn:Woodbury}取$n=k$且$U=V=I_n$、$C=B$，有
 		\begin{subequations}
 			\begin{align}
 				(A+B)\iv&=A\iv-A\iv(A\iv+B\iv)\iv A\iv\\
@@ -575,7 +577,7 @@
 		A&B\\C&D
 	\end{bmatrix},
 \]
-当$M$满足某些条件时，其逆可以被表达出来。比如$M$为分块对角时，
+以下设$A,D$分别为$m,n$阶方阵，$B\in\FF^{m\times n}$、$C\in\FF^{n\times m}$。当$M$满足某些条件时，其逆可以被表达出来。比如$M$为分块对角时，
 \begin{equation}
 	\begin{bmatrix}
 		A\\ &D
@@ -701,7 +703,7 @@
 
 \begin{theorem}
 	{分块反对角矩阵的逆}{}
-	当$M$是分块反对角的，即$A,D=O$时，$M$可逆$\iff B,C$均可逆，且
+	当$M$是分块反对角的，即$A,D=O$时，$M$可逆当且仅当两个分块维数相等($m=n$)且$B,C$均可逆，此时
 	\begin{equation}
 		\begin{bmatrix}
 			&B\\C

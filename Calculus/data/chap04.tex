@@ -1,41 +1,57 @@
 \chapter{曲线积分和曲面积分}
 \begin{definition}{第一类、第二类曲线积分和曲面积分}{}
-	第一类曲线积分
-	\[
-		\int_Lf(X)\d\ell=\int_\alpha^\beta f(x(t),y(t))\sqrt{x'(t)^2+y'(t)^2}\d t.
-	\]
-	第一类曲面积分
-	\[
-		\int_Sf(X)\d\sigma=\int_Df(x(u,v),y(u,v),z(u,v))\norm{\vec u\times\vec v}\d u\nd v.
-	\]
-	第二类曲线积分
-	\[
-		\int_A^B\vec F\cdot\d\vec\ell=\int_A^B X(x,y)\d x+Y(x,y)\d y.
-	\]
-	第二类曲面积分
-	\[
-		\int_{S^+}\vec V\cdot\d\vec S=\int_{S^+}X\d y\wedge\d z+Y\d z\wedge\d x+Z\d x\wedge\d y.
-	\]
+    设曲线分片$C^1$且正则，曲面分片光滑且具有不重复覆盖的正则参数化，以下被积函数连续。对平面曲线$\bm r(t)=(x(t),y(t))$，$\alpha\leq t\leq\beta$，第一类曲线积分为
+    \[
+        \int_Lf\d\ell=\int_\alpha^\beta f(x(t),y(t))\sqrt{x'(t)^2+y'(t)^2}\d t.
+    \]
+    空间曲线则用$\norm{\bm r'(t)}$作为弧长因子。第一类曲面积分为
+    \[
+        \iint_Sf\d\sigma=\iint_Df(\bm r(u,v))\norm{\bm r_u\times\bm r_v}\d u\nd v.
+    \]
+    第一类积分不依赖曲线或曲面的取向。第二类曲线积分沿指定路径$L$从$A$指向$B$；若$\vec F=(X,Y)$，则
+    \[
+        \int_L\vec F\cdot\d\vec\ell
+        =\int_LX\d x+Y\d y
+        =\int_\alpha^\beta\vec F(\bm r(t))\cdot\bm r'(t)\d t.
+    \]
+    积分通常依赖路径，而不仅由端点决定；反向后变号。若曲面可定向，选取连续的单位法向$\hat n$，令$\vec V=(X,Y,Z)$，第二类曲面积分为
+    \[
+        \iint_{S^+}\vec V\cdot\d\vec S
+        =\iint_{S^+}X\d y\wedge\d z+Y\d z\wedge\d x+Z\d x\wedge\d y.
+    \]
 \end{definition}
-第二类曲面积分可以化为第一类曲面积分
+第二类曲面积分可写为第一类曲面积分
 \[
-	\int_{S^+}\vec V\cdot\d\vec S=\int_S\vec V\cdot\hat n\d\sigma.
+    \iint_{S^+}\vec V\cdot\d\vec S=\iint_S\vec V\cdot\hat n\d\sigma.
 \]
-从计算方面来说
+记$\bm r_u\times\bm r_v=(A,B,C)$，计算公式为
 \[
-	\int_{S^+}X\d y\wedge\d z+Y\d z\wedge\d x+Z\d x\wedge\d y=\pm\iint_DXA+YB+ZC\d u\nd v.
+    \iint_{S^+}\vec V\cdot\d\vec S
+    =\pm\iint_D\bigb{XA+YB+ZC}\d u\nd v.
 \]
+右侧各量均在参数点对应的曲面点取值；当$\bm r_u\times\bm r_v$与指定法向同向时取正号，反向时取负号。多块参数曲面应分别匹配取向后相加。
 \section{Green, Gauss, Stokes公式}
+取向约定可参见\href{https://openstax.org/books/calculus-volume-3/pages/6-7-stokes-theorem}{OpenStax Calculus Volume 3, §6.7}。
 \begin{theorem}{Green公式}{}
-	$X(x,y),Y(x,y)$在有界单连通闭区域$D$上连续可微
-	\begin{align*}
-		\color{green}\iint_D\pv Xx+\pv Yy\d x\nd y=\oint_{\p D}X\d y-Y\d x, \\
-		\color{green}\iint_D\pv Yx-\pv Xy\d x\nd y=\oint_{\p D}X\d x+Y\d y.
-	\end{align*}
+    设$D$为有界平面区域，边界由有限条分片光滑的简单闭曲线组成；$X,Y$在$\overline D$的开邻域内属于$C^1$。边界采用正向：沿边界行进时区域在左侧，即外边界逆时针、内孔边界顺时针。则
+    \begin{align*}
+        \iint_D\Bigp{\pv Xx+\pv Yy}\d x\nd y&=\oint_{\p D}X\d y-Y\d x,\\
+        \iint_D\Bigp{\pv Yx-\pv Xy}\d x\nd y&=\oint_{\p D}X\d x+Y\d y.
+    \end{align*}
+    区域可以有孔，但所有边界分支都必须计入。
 \end{theorem}
 \begin{theorem}{Gauss公式}{}
-	$X(x,y),Y(x,y)$在有界单连通闭区域$D$上连续可微
-	\begin{align*}
-		\iiint_\Omega\nabla\cdot\vec V\d x\nd y\nd z=\iint_{\p\Omega}\vec V\cdot\d\vec S.
-	\end{align*}
+    设$\Omega\subset\RR^3$为有界区域，边界分片光滑，$\vec V=(X,Y,Z)$在$\overline\Omega$的开邻域内属于$C^1$。边界取相对于$\Omega$的外法向，包括空腔内壁，则
+    \[
+        \iiint_\Omega\nabla\cdot\vec V\d x\nd y\nd z
+        =\iint_{\p\Omega}\vec V\cdot\hat n\d\sigma.
+    \]
+\end{theorem}
+\begin{theorem}{Stokes公式}{}
+    设$S$为紧的、可定向的分片光滑曲面，边界$\p S$分片光滑，$\vec V$在$S$的开邻域内属于$C^1$。曲面法向与边界方向按右手规则相容，则
+    \[
+        \iint_S(\nabla\times\vec V)\cdot\hat n\d\sigma
+        =\oint_{\p S}\vec V\cdot\d\vec\ell.
+    \]
+    翻转曲面法向时，边界方向也必须同时翻转。
 \end{theorem}

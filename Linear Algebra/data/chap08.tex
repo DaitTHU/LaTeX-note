@@ -2,7 +2,7 @@
 \label{chap:linear mapping}
 
 \begin{definition}{映射}{mapping}
-	给定两个集合$S,S'$，如果$\forall x\in S$，均有一个对应的$f(x)\in S'$，这种对应关系$f$便称为映射(mapping)，记作
+	给定两个集合$S,S'$，如果$\forall x\in S$，均有唯一一个对应的$f(x)\in S'$，这种对应关系$f$便称为映射(mapping)，记作
 	\begin{equation}
 		f:S\to S',\enspace x\mapsto f(x).
 	\end{equation}
@@ -59,6 +59,7 @@
 	则称映射$f:S\to S'$可逆，$g=f\iv$为$f$的逆映射(inverse)。
 \end{definition}
 \begin{theorem}{有关映射的等价描述}{}
+	设$f:S\to S'$，在第1条中假设$S\neq\varnothing$。对任意无限集合，第2条的右逆存在性使用选择公理；有限集合不需要这一额外讨论。
 	\begin{enumerate}
 		\item 映射$f$为单射$\iff$存在映射$g$使得$g\circ f=\id$；
 		\item 映射$f$为满射$\iff$存在映射$g$使得$f\circ g=\id$；
@@ -66,9 +67,9 @@
 	\end{enumerate}
 \end{theorem}
 \begin{proof}
-	显然$(1),(2)\implies(3)$，故只需证明$(1),(2)$。
-	证明留作习题。
-	\qedhere
+    若$g\circ f=\id_S$，由$f(x)=f(y)$施加$g$即得$x=y$。反之，若$f$单射，在$f(S)$上令$g(f(x))=x$；在其余点上令$g$取某个固定的$x_0\in S$，便得到左逆。
+    若$f\circ g=\id_{S'}$，则每个$y\in S'$均为$f(g(y))$，故$f$满射。反之，对每个$y$选取一个原像$g(y)$即得到右逆。
+    若$f$为双射，每个原像唯一，所得逆映射同时是左逆与右逆；反方向由前两条成立。
 	% 若$f$可逆，$g:S'\to S$为$f$的逆。若$x,y\in S$，满足$f(x)=f(y)$，则 
 	% \[
 	% 	x=g\bigp{f(x)}=g\bigp{f(y)}=y.
@@ -152,7 +153,7 @@
 	\]
 	故
 	\begin{align*}
-		L(x)&=x_1(a_{11}f_1+\cdots+a_{m1}f_m)+\cdots+x_n(a_{n1}f_1+\cdots+a_{nm}f_m)\\
+		L(x)&=x_1(a_{11}f_1+\cdots+a_{m1}f_m)+\cdots+x_n(a_{1n}f_1+\cdots+a_{mn}f_m)\\
 		&=(a_{11}x_1+\cdots+a_{1n}x_n)f_1+\cdots+(a_{m1}x_1+\cdots+a_{mn}x_n)f_m\\
 		&=\begin{bmatrix}
 			a_{11}x_1+\cdots+a_{1n}x_n\\\vdots\\
@@ -210,14 +211,14 @@
 \begin{definition}{线性映射的像}{image}
 	线性映射$F:V\to W$的像(image)是所有$F(v)$的集合
 	\[
-		\im(F)\equiv\set{F(v)\in W}{\forall v\in V}.
+		\im(F)\equiv\set{F(v)}{v\in V}.
 	\]
 \end{definition}
 \begin{corollary}
 	$\im(F)$是$W$的线性子空间。$\im(L_A)=\C(A)$。
 \end{corollary}
 \begin{theorem}{核和像的关系}{kernel and image}
-	$V$是线性空间，$L:V\to W$是线性映射 
+	$V$是有限维线性空间，$L:V\to W$是线性映射
 	\begin{equation}
 		\dim(V)=\dim\bigp{\ker(L)}+\dim\bigp{\im(L)}.
 	\end{equation}
@@ -227,16 +228,16 @@
 	\[
 		\dim(V)=\dim\bigp{\N(A)}+\dim\bigp{\C(A\tp)}=\dim\bigp{\N(A)}+\dim\bigp{\C(A)}.
 	\]
-	(抽象版本) 略
+    (抽象版本) 取$\ker L$的一组基$k_1,\ldots,k_r$，扩张为$V$的基$k_1,\ldots,k_r,v_1,\ldots,v_s$。所有像由$Lv_1,\ldots,Lv_s$张成；若$\sum a_iLv_i=0$，则$\sum a_iv_i\in\ker L$，由扩张后基的线性无关性得到$a_i=0$。所以$\dim\im L=s$且$\dim V=r+s$。
 \end{proof}
 \begin{theorem}{核、像和双射}{kernel, image and bijection}
-	线性映射$L:V\to W$，且$\dim(V)=\dim(W)$，则 
+	线性映射$L:V\to W$，且$\dim(V)=\dim(W)<\infty$，则
 	\[
-		\ker(F)=\{0\}\iff\im(F)=W\iff L~\text{是双射.}
+		\ker(L)=\{0\}\iff\im(L)=W\iff L~\text{是双射.}
 	\]
 \end{theorem}
 \begin{proof}
-	略
+    由秩--零化度公式，$\ker L=\{0\}$当且仅当$\dim\im L=\dim V=\dim W$，而有限维子空间与母空间同维时相等。再结合单射、满射的定义即证。
 \end{proof}
 \section{基的变换}
 \begin{definition}{坐标向量}{coordinate vector}
@@ -264,7 +265,7 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 		x_1\\\vdots\\x_n
 	\end{bmatrix}.\tag{$\ast\ast$}
 \]
-\begin{theorem}{换基矩阵}{base transfomation matrix}
+\begin{theorem}{线性映射的表示矩阵}{base transfomation matrix}
 	$L:V\to W$是一个线性映射，$B=\{v_1,\ldots,v_n\}$是$V$上的一组基，$B'=\{w_1,\ldots,w_m\}$是$W$上的一组基。则存在唯一的$m\times n$矩阵$M_{B'}^B(L)$，使得$\forall v\in V$，
 	\[
 		x_{B'}\bigp{L(v)}=M_{B'}^B(L)x_B(v).
@@ -323,14 +324,14 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 	\[
 		M_{B'}^{B'}(L)=M_B^{B'}(\id)\iv M_B^B(L)M_B^{B'}(\id).
 	\]
-	因此相似变换就是换基，矩阵对角化就是找到描述线性变换的最好的基。
+	因此相似变换描述同一个线性算符在不同基下的表示；若能选出一组特征向量基，其表示矩阵就是对角矩阵。
 \end{corollary}
 
 \section{对偶空间}
 
 如何从已知的线性空间构造新的线性空间？
 \begin{definition}{对偶空间}{dual space}
-	线性空间$V$的对偶空间(dual space) $V^\ast$是所有线性映射$L:V\to\FF$构成的线性空间。
+	有限维线性空间$V$的对偶空间(dual space) $V^\ast$是所有线性映射$L:V\to\FF$构成的线性空间。
 \end{definition}
 \begin{theorem}{对偶空间的基}{dual space base}
 	通过$V$的一组基$\{v_1,\ldots,v_n\}$可构造$V^\ast$的基$\{v^{\ast 1},\ldots,v^{\ast n}\}$，满足
@@ -357,17 +358,17 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 	\[
 		\hat f(k)=\int f(x)\e^{\i k\cdot x}\d^3x,
 	\]
-	就是将$\RR^3$的函数变成$(\RR^3)^\ast$的函数。
+	其中可取$f\in L^1(\RR^3)$以保证积分存在。波矢$k$自然属于平移向量空间的对偶空间，指数中的$k\cdot x$是配对$k(x)$；选定Euclid内积后，才常将$k$也写作三维向量。Fourier变换是函数空间之间的线性映射，不是把单个空间向量映射成一个线性泛函。
 \end{example}
 \begin{example}{对偶的对偶}{double dual space}
 	依定义，对偶空间$V^\ast$的对偶空间$V^{\ast\ast}$是所有线性映射$F:V^\ast\to\RR$构成的线性空间。%我们可以构造一组基$\{v^{\ast\ast}_1,\ldots,v^{\ast\ast}_n\}$，满足
 	%v^{\ast\ast}_i(v^{\ast j})=\delta_i{}^j.
-	$\forall v\in V$，可定义映射$u^{\ast\ast}\in V^{\ast\ast}$，使得$\forall L\in V^\ast$
+	$\forall u\in V$，可定义映射$u^{\ast\ast}\in V^{\ast\ast}$，使得$\forall L\in V^\ast$
 	\begin{equation}
 		u^{\ast\ast}(L)=L(u).
 	\end{equation}
-	因此$V^{\ast\ast}$和$V$是自然同构的(natural isomorphism)：$V^{\ast\ast}\cong V$。这是范畴论(category theory)的概念，粗糙地说就是这种同构关系不依赖于基的选取，而$V$和$V^\ast$的同构是依赖于基的。因此我们可以将$V^{\ast\ast}$和$V$视为同一个线性空间，
-	从而$V^{\ast\ast},V^{\ast\ast\ast},\ldots$也就再没有研究价值了。
+	在有限维条件下，这一映射是双射，因此$V^{\ast\ast}$和$V$是自然同构的(natural isomorphism)：$V^{\ast\ast}\cong V$。这是范畴论(category theory)的概念，粗糙地说就是这种同构关系不依赖于基的选取，而$V$和$V^\ast$的同构是依赖于基的。因此我们可以将$V^{\ast\ast}$和$V$视为同一个线性空间，
+	由此有限维情形中的高阶对偶可自然地交替识别为$V$和$V^\ast$；无限维空间需要另行区分代数对偶与连续对偶，不能直接沿用此结论。
 \end{example}
 \begin{theorem}{对偶空间的基变换}{}
 	给定线性空间$V$及其中的两组基$\{v_1,\ldots,v_n\}$和$\{u_1,\ldots,u_n\}$，我们可以给出对偶空间$V^\ast$的基$\{v^{\ast 1},\ldots,v^{\ast n}\}$和$\{u^{\ast 1},\ldots,u^{\ast n}\}$，满足
@@ -403,9 +404,9 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 	若$U=V+W$且$V\cap W=\{0\}$，则$U=V\oplus W$。
 \end{theorem}
 \begin{proof}
-	假设$u\in U$可以写成$u=v+w=v'+w'$，则$v-v'=w-w'$，
+	假设$u\in U$可以写成$u=v+w=v'+w'$，则$v-v'=w'-w$，
 	
-	又$v-v'\in V,\enspace w-w'\in W$且$V\cap W=\{0\}$，所以$v-v'=w-w'=0$。故分解是唯一的。
+	又$v-v'\in V,\enspace w'-w\in W$且$V\cap W=\{0\}$，所以$v-v'=w-w'=0$。故分解是唯一的。
 \end{proof}
 \begin{theorem}{直和的存在}{exist of direct sum}
 	$U$是一个有限维线性空间，$V$是$U$的子空间，则存在$U$的子空间$W$使得$U=V\oplus W.$
@@ -424,7 +425,7 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 		V\times W\equiv\set{(v,w)}{v\in V,w\in W}.
 	\end{equation}
 \end{definition}
-\begin{theorem}{直基的维度}{}
+\begin{theorem}{直积的维度}{}
 	$V\times W$是一个线性空间。且
 	\begin{equation}
 		\dim(V\times W)=\dim(V)+\dim(W).
@@ -471,7 +472,7 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	给出$V,V^\ast$的另一组基$\{u_1,\ldots,u_n\},\{u^{\ast 1},\ldots,u^{\ast n}\}$，有变换
 	\begin{align*}
 		(u_1,\ldots,u_n)&=(v_1,\ldots,v_n)A,\\
-		(u^{\ast 1},\ldots,u^{\ast n})\tp&=(v^{\ast 1},\ldots,v^{\ast n})\tp A\iv.
+		(u^{\ast 1},\ldots,u^{\ast n})\tp&=A\iv(v^{\ast 1},\ldots,v^{\ast n})\tp.
 	\end{align*}
 	张量$w$在基$\{u^{\ast i}\otimes u^{\ast j}\}$下的分量
 	\[
@@ -482,17 +483,17 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 \begin{definition}{张量积}{tensor product}
 	$U,V$是两个线性空间，定义$u\in U,v\in V$的张量积(tensor product)是一个新的元素$u\otimes v$，且满足以下性质：
 	\begin{compactitem}
-		\item 结合律：$(u\otimes v)\otimes w=u\otimes(v\otimes w)\equiv u\otimes v\otimes w;$
+		\item 结合律（经自然同构识别）：$(u\otimes v)\otimes w=u\otimes(v\otimes w)\equiv u\otimes v\otimes w;$
 		\item 左分配律：$(u_1+u_2)\otimes v=u_1\otimes v+u_2\otimes v;$
 		\item 右分配律：$u\otimes(v_1+v_2)=u\otimes v_1+u\otimes v_2;$
 		\item 数乘：$(au)\otimes v=u\otimes(av)=a(u\otimes v).$
 	\end{compactitem}
 \end{definition}
 \begin{remark}
-	张量积并不满足交换律，即$u\otimes v\neq v\otimes u$是两个不同的张量。
+	一般不把$u\otimes v$与$v\otimes u$直接视为相等：它们分别属于$U\otimes V$和$V\otimes U$。两空间之间有自然的交换同构$u\otimes v\mapsto v\otimes u$；当$U=V$且$u=v$等特殊情形，两式也可以相等。
 \end{remark}
 \begin{definition}{线性空间的张量积}{linear space tensor product}
-	给定两个线性空间$U,V$和各自的一组基$\{u_1,\ldots,u_m\},\{v_1,\ldots,v_n\}$，定义$U,V$的张量积是基的张量积张成的线性空间：
+	给定两个线性空间$U,V$和各自的一组基$\{u_1,\ldots,u_m\},\{v_1,\ldots,v_n\}$，可构造一个以$mn$个形式符号$u_i\otimes v_j$为基的线性空间（这些符号按定义线性无关），并按双线性将$u\otimes v$扩展到任意$u,v$：
 	\begin{equation}
 		U\otimes V=\lspan\set{u_i\otimes v_j}{1\leqslant i\leqslant m,1\leqslant j\leqslant n}
 	\end{equation}
@@ -510,6 +511,16 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	\]
 	但并不是所有$U\otimes V$的元素都能写成$u\otimes v$的形式。
 \end{example}
+\begin{theorem}{张量积的普遍性质}{universal property of tensor product}
+    任一双线性映射$B:U\times V\to W$都唯一对应一个线性映射$\widetilde B:U\otimes V\to W$，满足
+    \[
+        \widetilde B(u\otimes v)=B(u,v).
+    \]
+\end{theorem}
+\begin{proof}
+    在基上指定$\widetilde B(u_i\otimes v_j)=B(u_i,v_j)$并作线性扩张；由$B$的双线性可得上述等式。由于纯张量张成整个空间，映射唯一。不同基构造出的空间都满足这一性质，因而有保持纯张量的唯一同构，张量积不依赖所选基。
+\end{proof}
+
 \begin{example}{张量空间$V\otimes V$}{}
 	$V\otimes V$是所有$V^\ast\times V^\ast\to\RR$的双线性函数构成的线性空间，%但我们也可以用张量积定义。
 	$\forall v\in V\otimes V$都可以写为
@@ -529,6 +540,7 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	\[
 		v=\sum_{i,j}v^i{}_jv_i\otimes v^{\ast j}.
 	\]
+    通过$(u\otimes\alpha)(x)=\alpha(x)u$，这个空间自然同构于$\hom(V,V)$，因此系数$v^i{}_j$正是一个线性算符的矩阵。在基变换$(u_1,\ldots,u_n)=(v_1,\ldots,v_n)A$下，其分量矩阵满足$[v]'=A^{-1}[v]A$，与前文的相似变换一致。
 \end{example}
 \begin{example}{$V\otimes\cdots\otimes V\otimes V^\ast\otimes\cdots\otimes V^\ast=V^{\otimes k}\otimes V^{\ast\otimes\ell}$}{}
 	考虑

@@ -33,7 +33,7 @@
 \]
 通解
 \[
-	\psi(x,t)=c_1\e^{\i(px-Et)/\hbar}+c_2\e^{\i(px+Et)/\hbar}.
+	\psi(x,t)=c_1\e^{\i(px-Et)/\hbar}+c_2\e^{-\i(px+Et)/\hbar}.
 \]
 能量是连续的，处于非束缚态，有简并．
 
@@ -61,7 +61,7 @@
 \begin{align}
 	\psi_n(x)=\sqrt{\frac2a}\sin\frac{n\pi x}a,\quad E_n=\frac{\pi^2\hbar^2n^2}{2ma^2},\quad n=1,2,\ldots
 \end{align}
-可以证明：波函数正交归一、完备、宇称奇偶相间．当$n$很大时，势阱内粒子概率分布趋于均匀，对应经典情况．
+可以证明：波函数正交归一、完备，关于阱中心$x=a/2$的宇称为$(-1)^{n+1}$。当$n$很大时，概率密度的快速振荡在空间粗粒化后趋于均匀，对应经典结果；概率密度本身并不逐点趋于常数。
 
 \subsubsection*{有限深方势阱}
 \begin{center}
@@ -74,7 +74,7 @@
 \begin{align*}
 	\begin{aligned}
 		k_1^2 & =\frac{2m(V_0-E)}{\hbar^2}, \\
-		k_2^2 & =-\frac{2mE}{\hbar^2},
+		k_2^2 & =\frac{2mE}{\hbar^2},
 	\end{aligned}\quad
 	\psi(x)=\begin{cases}
 		A\e^{k_1x},             & x<-a   \\
@@ -113,16 +113,16 @@
 	\psi(x)=\begin{cases}
 		\e^{\i kx}+R\e^{-\i kx},        & x<0   \\
 		A\e^{\kappa x}+B\e^{-\kappa x}, & 0<x<a \\
-		S\e^{-\i kx},                  & x>a
+		S\e^{\i kx},                  & x>a
 	\end{cases}
 \end{align*}
 对于$\psi=A\e^{\i kx}$的波，其概率流密度
 \[
 	j=-\frac{\i\hbar}{2m}\Bigp{\psi^*\pv\psi{x}-\psi\pv{\psi^*}x}=\abs{A}^2\frac{\hbar k}m.
 \]
-由边界条件解得
+由边界条件解得透射振幅
 \[
-	\frac{S\e^{\i ka-\kappa a}-1}{S\e^{\i ka+\kappa a}-1}=\Bigp{\frac{1-\i k/\kappa}{1+\i k/\kappa}}^2.
+	S=\frac{\e^{-\i ka}}{\cosh\kappa a+\i\frac{\kappa^2-k^2}{2k\kappa}\sinh\kappa a}.
 \]
 因此透射系数
 \begin{align}\notag
@@ -140,7 +140,7 @@
 \[
 	T=\biggb{1+\frac{\sin^2k'a}{4\epsilon(\epsilon+1)}}^{-1},
 \]
-当$k'a=n\pi$时，$T=1$，会发生\textbf{共振现象}。而一般情况下$T<1,R>0$说明粒子有概率被弹回。
+当$k'a=n\pi$时，$T=1$，会发生\textbf{共振现象}。这里$R$是反射振幅，反射率为$\abs R^2=1-T$；一般情况下$T<1$说明粒子有概率被弹回。
 \subsubsection*{$\delta$势阱}
 \begin{center}
 	$\dv[2]\psi{x}=-\frac{2m}{\hbar^2}[E+\gamma\delta(x)]\psi.$
@@ -149,9 +149,9 @@ $x=0$是方程的奇点，因此$\psi'$在$x=0$处不连续。上式两边$(0^-,
 \[
 	\psi'(0^+)-\psi'(0^-)=-\frac{2m\gamma}{\hbar^2}\psi(0).
 \]
-束缚态偶宇称下，左边即$-2k$，因此
+对吸引势$V(x)=-\gamma\delta(x)$，取$\gamma>0$。束缚态$E<0$可写成$\psi(x)=A\e^{-k\abs x}$，其中$k=\sqrt{-2mE}/\hbar$；导数跳变为$-2k\psi(0)$，因此
 \begin{align}
-	\frac{\sqrt{2mE}}\hbar=\frac{m\gamma}{\hbar^2}\implies E=-\frac{m\gamma^2}{2\hbar^2}.
+	\frac{\sqrt{-2mE}}\hbar=\frac{m\gamma}{\hbar^2}\implies E=-\frac{m\gamma^2}{2\hbar^2}.
 \end{align}
 束缚态只有一个
 \begin{align}
@@ -218,7 +218,7 @@ $x=0$是方程的奇点，因此$\psi'$在$x=0$处不连续。上式两边$(0^-,
 \end{example}
 Hermite多项式的内积
 \[
-	\int\iti H_nH_{n'}\e^{-x^2}\d x=2^nn!\,\delta_{nn'}.
+	\int\iti H_nH_{n'}\e^{-x^2}\d x=\sqrt\pi\,2^nn!\,\delta_{nn'}.
 \]
 因此本征态
 \begin{align}
@@ -226,6 +226,7 @@ Hermite多项式的内积
 \end{align}
 宇称为$(-1)^n.$
 \paragraph{递推关系}
+记$\alpha=\sqrt{m\omega/\hbar}$，则
 \begin{align}
 	x\ket n&=\frac1{\sqrt2\alpha}\Bigb{\sqrt n\ket{n-1}+\sqrt{n+1}\ket{n+1}};\\
 	x^2\ket n&%=\frac1{\alpha^2}\Bigb{\sqrt{\frac n2}\biggp{\sqrt{\frac{n-1}2}\ket{n-2}+\sqrt{\frac n2}\ket n}+\sqrt{\frac{n+1}2}\biggp{\sqrt{\frac{n+1}2}\ket n+\sqrt{\frac{n+2}2}\ket{n+2}}}\\

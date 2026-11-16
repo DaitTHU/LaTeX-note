@@ -73,6 +73,10 @@
 	colorlinks=true, breaklinks=true,
 	linkcolor=black, citecolor=black, urlcolor=blue
 }
+% The title page and the main matter both use page 1. Only the latter
+% should create a page anchor, otherwise PDF links have duplicate targets.
+\AddToHook{cmd/maketitle/before}{\hypersetup{pageanchor=false}}
+\AddToHook{cmd/maketitle/after}{\hypersetup{pageanchor=true}}
 \renewcommand{\eqref}[1]{(\ref{#1})}
 \newcommand{\chapref}[1]{第\ref{#1}章}
 \newcommand{\secref}[1]{第 \ref{#1} 节}

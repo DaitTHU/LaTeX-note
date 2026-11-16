@@ -36,7 +36,7 @@ $\D E=0$为弹性碰撞；$\D E>0$为第一类非弹性碰撞，使处于基态�
 \subsection{Bethe公式}
 
 重离子的能量损失率主要是电离能量损失率$S_{\mathrm{ion}}$。
-1930年，Bethe提出了描述电离能量损失率$S_{\mathrm{ion}}$与带电粒子速度$v$、电荷$z$等关系的经典公式。
+Bethe公式给出重带电粒子的平均电离能损，建立在量子力学散射计算上。先用经典冲量模型说明$z^2/v^2$因子和对数积分的来源，再区分这一估计与Bethe结果。
 
 公式推导的简化条件：
 \begin{compactenum}
@@ -69,7 +69,7 @@ $b\mini$对应电子获得最大能量的情况：按经典碰撞理论，重离
 \]
 $b\maxi$对应电子获得最小能量的情况：为了电离或者激发电子，入射粒子传给电子的能量必须大于物质原子中电子的激发能$I$
 \[
-	\D E(b\maxi)=I\implies b\maxi=\frac1{4\pi\varepsilon_0}\frac{ze^2}{v^2}\sqrt{\frac2{m_\elec I}}.
+	\D E(b\maxi)=I\implies b\maxi=\frac1{4\pi\varepsilon_0}\frac{ze^2}{v}\sqrt{\frac2{m_\elec I}}.
 \]
 \begin{example}{}{}
 	$\SI{4}{MeV}$的$\alpha$粒子射入一个平均电离能为$\SI{10}{eV}$的物质，
@@ -78,7 +78,7 @@ $b\maxi$对应电子获得最小能量的情况：为了电离或者激发电子
 	\]
 \end{example}
 
-代入$b\maxi,b\mini$，得到Bethe-Bloch公式
+代入上述经典截断$b\maxi,b\mini$，得到经典估计
 \begin{align}\label{Bethe-formula}
 	S_{\mathrm{ion}}=\frac{e^4}{4\pi\varepsilon_0^2}\frac{NZ}{m_\elec}\frac{z^2}{v^2}B,
 \end{align}
@@ -86,7 +86,11 @@ $b\maxi$对应电子获得最小能量的情况：为了电离或者激发电子
 \[
 	B=\frac12\ln\biggp{\frac{2m_\elec v^2}I}.
 \]
-Bethe考虑相对论与其他修正因子，得到精确表达式（略）。
+该截断估计不是Bethe公式。对于质量远大于电子的快重粒子，在非相对论范围并忽略壳层等修正时，Bethe结果在\eqref{Bethe-formula}的同一前因子下给出
+\[
+	B_{\mathrm{Bethe}}=\ln\biggp{\frac{2m_\elec v^2}I}.
+\]
+这里$I$是介质的平均激发能，不能视为所有碰撞统一的最低能量转移。相对论、密度效应、壳层及有效电荷修正应按粒子速度和介质另行考虑。
 %$B=\ln\Bigp{\frac{2m_\elec v^2}I}-\ln\biggp{1-\frac{v^2}{c^2}}-\frac{v^2}{c^2}.$
 
 
@@ -353,13 +357,13 @@ Compton散射：是光子与核外电子的非弹性碰撞过程。特点：
 \begin{align}\label{Compton-hnu}
 	h\nu'=\frac{h\nu}{1+\alpha(1-\cos\theta)},\quad \alpha:=\frac{h\nu}{m_\elec c^2},
 \end{align}
-$\theta=0$时，$h\nu'=h\nu$最大；$\theta=180^\circ$时，$h\nu'$最小。当光子发生大角度（$\theta>150^\circ$）散射时，$E_\elec$随$\theta$的变化很慢，就导致了\textbf{反散射峰}的出现——$\gamma$能谱中的一个著名本底峰。
+$\theta=0$时，$h\nu'=h\nu$最大；$\theta=180^\circ$时，$h\nu'$最小。当光子在探测器外的周围材料中发生大角度散射后再被探测器全吸收，可能形成\textbf{反散射峰}。其位置由散射光子能量$h\nu'$决定，而非反冲电子能量；大角度附近$h\nu'$随$\theta$的变化较慢。
 
 当$h\nu\gg m_\elec c^2$时，$h\nu'$的最小值
 \[
 	h\nu'=\frac12m_\elec c^2=\SI{255}{keV};
 \]
-当$h\nu\ll m_\elec c^2$时，$h\nu'\doteq h\nu$，变成Thomsom散射。
+当$h\nu\ll m_\elec c^2$时，$h\nu'\doteq h\nu$，变成Thomson散射。
 
 将式\eqref{Compton-hnu}改写为波长的形式，得到Compton移动
 \begin{align}
@@ -384,15 +388,15 @@ Klein-Nishina公式：
 \paragraph{反冲电子角分布和能量分布}
 反冲电子能量和方向与散射光子能量和方向一一对应，可以推出反冲电子的微分散射截面
 \[
-	\dv{\sigma_{\mathrm C,\elec}}{\Omega'}=\dv{\sigma_{\mathrm C,\elec}}\Omega\frac{\sin\theta\d\theta}{\sin\varphi\d\varphi}=\frac{(1+\alpha)^2(1-\cos\theta)^2}{\cos^2\varphi}\dv{\sigma_{\mathrm C,\elec}}\Omega.
+	\dv{\sigma_{\mathrm C,\elec}}{\Omega'}=\dv{\sigma_{\mathrm C,\elec}}\Omega\abs{\frac{\sin\theta\d\theta}{\sin\varphi\d\varphi}}=\frac{(1+\alpha)^2(1-\cos\theta)^2}{\cos^3\varphi}\dv{\sigma_{\mathrm C,\elec}}\Omega.
 \]
 反冲电子能量分布
 \[
 	\dv{\sigma_{\mathrm C,\elec}}{E_\elec}=\dv{\sigma_{\mathrm C,\elec}}\Omega\dv\Omega\theta\dv\theta{E_\elec}=\frac{2\pi m_\elec c^2}{(h\nu-E_\elec)^2}\dv{\sigma_{\mathrm C,\elec}}\Omega.
 \]
-即
+令$\eta:=\nu'/\nu=1-E_\elec/(h\nu)$，则
 \[
-	\dv{\sigma_{\mathrm C,\elec}}{E_\elec}=\pi r_\elec^2\cdot\frac{m_\elec c^2}{(h\nu)^2}\biggb{2+\biggp{\frac{E_\elec}{h\nu-E_\elec}}^2\biggp{\frac1{\alpha^2}-\frac{2(h\nu-E_\elec)}{\alpha E_\elec}}+\frac{h\nu-E_\elec}{E_\elec}}.
+	\dv{\sigma_{\mathrm C,\elec}}{E_\elec}=\pi r_\elec^2\frac{m_\elec c^2}{(h\nu)^2}\biggb{\eta+\frac1\eta-\frac{2(1-\eta)}{\alpha\eta}+\frac{(1-\eta)^2}{\alpha^2\eta^2}}.
 \]
 微分截面 - 反冲电子能量会呈现一个逐渐缓慢上升然后突然下降的形状，称之为Compton坪和Compton边缘。考虑原子外电子（非自由电子）的结合能时，就需要考虑Doppler效应，Compton边缘将不再锐利。Compton坪对$\gamma$能谱的解读而是很不利的。
 
@@ -407,9 +411,9 @@ Klein-Nishina公式：
 \[
 	\sigma_\mathrm C=Z\sigma_{\mathrm C,\elec}.
 \]
-原子中的电子毕竟不是自由的，整个原子的Compton散射总截面
+原子中的电子毕竟不是自由的，整个原子的Compton散射微分截面可近似写为
 \begin{align}
-	\sigma_\mathrm C=S(x,Z)\sigma_{\mathrm C,\elec},\quad x:=\frac1\lambda\sin\frac\theta{2}.
+	\dv{\sigma_\mathrm C}\Omega=S(x,Z)\dv{\sigma_{\mathrm C,\elec}}\Omega,\quad x:=\frac1\lambda\sin\frac\theta{2}.
 \end{align}
 $S(x,Z)$为非相干散射函数。
 \paragraph{相干散射}
