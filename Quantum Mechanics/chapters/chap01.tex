@@ -18,7 +18,7 @@ Stern--Gerlach实验要检验原子磁矩在一个给定方向上的投影是否
 \begin{figure}[htbp]
     \centering
     \tikzfigure[width=.74\linewidth]{sg-beam}
-    \caption{银原子束从左向右传播。$\ell$ 标出梯度磁场区的长度，$D$ 是出磁体后的漂移距离；在右侧屏上沿 $z$ 方向量取两斑间距 $2|z_\mathrm{det}|$。}
+    \caption{银原子束从左向右传播。$\ell$ 标出梯度磁场区的长度，$D$ 是出磁体后的漂移距离；在右侧屏上沿 $z$ 方向量取两斑间距 $2\abs{z_\mathrm{det}}$。}
     \label{fig:sg-beam}
 \end{figure}
 
@@ -36,15 +36,15 @@ Stern--Gerlach实验要检验原子磁矩在一个给定方向上的投影是否
 给出一个数。这个分支有确定的磁矩投影，取期望便得到该分支的能量。若原子保持在这一分支上，
 就可以把它当作质心的有效势能。沿横向偏转坐标 $z$，有
 \begin{equation}
-    F_z=-\frac{\partial E_{\interaction,s}}{\partial z}
-        \simeq\mu_z\frac{\partial B_z}{\partial z}.
+    F_z=-\frac{\p E_{\interaction,s}}{\p z}
+        \simeq\mu_z\frac{\p B_z}{\p z}.
 \end{equation}
 局域磁场方向给出测量磁矩分量的轴，称为量子化轴。该近似要求束流所在区域的场方向明确，
 且原子穿过磁体时从一个内部能量分支跳到另一分支的概率很小。
 
 为了把力与图\ref{fig:sg-beam}中屏上的位置联系起来，设磁体长度为$\ell$，
 其后到探测面的自由飞行距离为$D$，原子质量为$M_\mathrm{Ag}$，
-纵向速度为$v$，在窄束范围把梯度近似为常量$G=\partial_zB_z$。
+纵向速度为$v$，在窄束范围把梯度近似为常量$G=\p_zB_z$。
 原子在磁体中停留$\tau=\ell/v$，离开磁体时的横向速度和位移分别为
 \begin{subequations}
     \begin{alignat}{2}
@@ -130,25 +130,25 @@ $\bra{+z}$ 取出 $+z$ 分量，对 $\ket{+z}$ 给 1，对 $\ket{-z}$ 给 0。�
 \end{equation}
 一般纯态写成
 \begin{equation}
-    \ket{\psi}=c_+\ket{+z}+c_-\ket{-z},\qquad |c_+|^2+|c_-|^2=1.
+    \ket{\psi}=c_+\ket{+z}+c_-\ket{-z},\qquad \abs{c_+}^2+\abs{c_-}^2=1.
 \end{equation}
 \begin{postulate}{Born规则}{qm-born}
     对归一化纯态 $\ket{\psi}$，在一组正交归一基中作理想测量，
-    对应基矢 $\ket{a}$ 的出口概率为 $p(a\mid\psi)=|\brkt{a}{\psi}|^2$。
+    对应基矢 $\ket{a}$ 的出口概率为 $p(a\mid\psi)=\abs{\brkt{a}{\psi}}^2$。
 \end{postulate}
-例如 $p(\pm z)=|c_\pm|^2$。实验可以在相同制备下转动分析器，逐一检验这个公设给出的分布。
+例如 $p(\pm z)=\abs{c_\pm}^2$。实验可以在相同制备下转动分析器，逐一检验这个公设给出的分布。
 归一化态乘同一个相位$\e^{\i\chi}$不会改变任何概率。两个系数都非零时，$c_-/c_+$的相位称为相对相位(relative phase)，可由实验读出。
-左矢取共轭转置：$\bra{\psi}=c_+^*\bra{+z}+c_-^*\bra{-z}$。
+左矢取共轭转置：$\bra{\psi}=c_+\conj\bra{+z}+c_-\conj\bra{-z}$。
 
 例如$\brkt{\psi}{\psi}$展开为四项，其中两个交叉项因
-$\brkt{+z}{-z}=0$而消失，留下$|c_+|^2+|c_-|^2$。
+$\brkt{+z}{-z}=0$而消失，留下$\abs{c_+}^2+\abs{c_-}^2$。
 在有序基$\bigp{\ket{+z},\ket{-z}}$下，同一态及一个外积写成
 \begin{subequations}
     \begin{alignat}{2}
         \ket{\psi}&\ \longleftrightarrow
         \begin{pmatrix}c_+\\c_-\end{pmatrix},
         &\quad \bra{\psi}&\ \longleftrightarrow
-        \begin{pmatrix}c_+^*&c_-^*\end{pmatrix},\\
+        \begin{pmatrix}c_+\conj&c_-\conj\end{pmatrix},\\
         \ktbr{+z}{-z}&\ \longleftrightarrow
         \begin{pmatrix}0&1\\0&0\end{pmatrix}.
     \end{alignat}
@@ -161,14 +161,14 @@ $\brkt{+z}{-z}=0$而消失，留下$|c_+|^2+|c_-|^2$。
 使这两个系数都是正实数。$-x$ 态要与 $+x$ 态正交，于是系数一正一负。
 再将 $+y$ 束分别送入 $z$ 和 $x$ 分析器，两组计数也都各半。前一组把它的形式限制为
 $(\ket{+z}+\e^{\i\varphi}\ket{-z})/\sqrt2$，后一组要求
-$|1+\e^{\i\varphi}|^2/4=1/2$，即 $\cos\varphi=0$。与右手坐标系一致地取 $+y$ 对应 $\varphi=\pi/2$，
+$\abs{1+\e^{\i\varphi}}^2/4=1/2$，即 $\cos\varphi=0$。与右手坐标系一致地取 $+y$ 对应 $\varphi=\pi/2$，
 便有
 \begin{equation}
     \ket{\pm x}=\frac{\ket{+z}\pm\ket{-z}}{\sqrt2},\qquad
     \ket{\pm y}=\frac{\ket{+z}\pm\i\ket{-z}}{\sqrt2}.
 \end{equation}
 于是连续筛选的条件概率(conditional probability)为
-$|\brkt{+x}{+z}|^2=1/2$及$|\brkt{\pm z}{+x}|^2=1/2$。
+$\abs{\brkt{+x}{+z}}^2=1/2$及$\abs{\brkt{\pm z}{+x}}^2=1/2$。
 若分母是最初已经制备为$+z$的束流，最后每一路只占$1/4$，其余被$x$筛选器挡去。
 
 \begin{example}{逐次筛选的状态与计数}{qm-filter-chain}
@@ -244,7 +244,7 @@ $\hatbm{S}$是自旋角动量，量纲为作用量。
         \e^{\i\phi}\sin\theta&-\cos\theta
     \end{pmatrix}.
 \end{equation}
-令正本征态的系数为$(a,b)\tp$，第一行给出
+令正本征态的系数为$(a,b)\transp$，第一行给出
 $(1-\cos\theta)a=\e^{-\i\phi}\sin\theta\,b$。
 在$0<\theta<\pi$时，
 \begin{equation}
@@ -261,11 +261,11 @@ $b=\e^{\i\phi}\sin(\theta/2)$；两极取连续极限。
     =\frac{\one+\bm n\cdot\hatbm{\sigma}}{2}.
 \end{equation}
 有限维算符 $\op{A}$ 的迹(trace)等于它在任一正交归一基中对角矩阵元之和，记为 $\tr\op{A}$。由于 $\tr(\ktbr{a}{b})=\brkt{b}{a}$，
-两个一维投影乘积的迹正好给出 $|\brkt{+\bm m}{+\bm n}|^2$。
+两个一维投影乘积的迹正好给出 $\abs{\brkt{+\bm m}{+\bm n}}^2$。
 由$\tr\op{\sigma}_i=0$和$\tr(\op{\sigma}_i\op{\sigma}_j)=2\delta_{ij}$，
 $\tr(\op{P}_{+\bm m}\op{P}_{+\bm n})=(1+\bm m\cdot\bm n)/2$。
 两个方向间的夹角为$\gamma$时，
-$p(+\bm m|+\bm n)=(1+\bm m\cdot\bm n)/2=\cos^2(\gamma/2)$。
+$p(+\bm m\mid+\bm n)=(1+\bm m\cdot\bm n)/2=\cos^2(\gamma/2)$。
 转动分析器改变了两个自旋态的重叠（图\ref{fig:spin-angle-readout}）。若将每个自旋纯态
 $\ket{+\bm n}$ 画在单位球面方向 $\bm n$ 上，就得到 Bloch 球；沿同一轴的两种确定输出在球上相对。
 光子线偏振筛选中，透射概率为 $\cos^2\vartheta$，其中 $\vartheta$ 是两根偏振轴的较小夹角（$0$ 至 $\pi/2$）。
@@ -310,9 +310,9 @@ $\ket{\pm}=(\ket{a}\pm\ket{b})/\sqrt2$的装置重合路径，得到
 \begin{subequations}
     \begin{alignat}{2}
         \brkt{+}{\psi} &=\frac{1+\e^{\i\varphi}}2,
-        &\quad |\brkt{+}{\psi}|^2 &=\frac{(1+\e^{\i\varphi})(1+\e^{-\i\varphi})}{4},\\
+        &\quad \abs{\brkt{+}{\psi}}^2 &=\frac{(1+\e^{\i\varphi})(1+\e^{-\i\varphi})}{4},\\
         \brkt{-}{\psi} &=\frac{1-\e^{\i\varphi}}2,
-        &\quad |\brkt{-}{\psi}|^2 &=\frac{(1-\e^{\i\varphi})(1-\e^{-\i\varphi})}{4}.
+        &\quad \abs{\brkt{-}{\psi}}^2 &=\frac{(1-\e^{\i\varphi})(1-\e^{-\i\varphi})}{4}.
     \end{alignat}
 \end{subequations}
 两条正交路径各自的占据概率都是$1/2$，
@@ -355,11 +355,11 @@ $\ket{\pm}=(\ket{a}\pm\ket{b})/\sqrt2$的装置重合路径，得到
     对一般两态纯态$c_+\ket{+z}+c_-\ket{-z}$，
     三个分析方向给出
     \begin{equation}
-        \ave{\op{\sigma}_x}=2\Re(c_+^*c_-),\quad
-        \ave{\op{\sigma}_y}=2\Im(c_+^*c_-),\quad
-        \ave{\op{\sigma}_z}=|c_+|^2-|c_-|^2.
+        \ave{\op{\sigma}_x}=2\Re(c_+\conj c_-),\quad
+        \ave{\op{\sigma}_y}=2\Im(c_+\conj c_-),\quad
+        \ave{\op{\sigma}_z}=\abs{c_+}^2-\abs{c_-}^2.
     \end{equation}
-    三组计数给出两个分量的模，以及它们的干涉项 $c_+^*c_-$。
+    三组计数给出两个分量的模，以及它们的干涉项 $c_+\conj c_-$。
     同时将$c_+,c_-$乘$\e^{\i\chi}$，这些量保持不变，因此测量概率与整体相位(global phase)无关。}
 
 \reading{MIT 8.05讲义2核对自旋态和振幅规则\cite{mitspin}。

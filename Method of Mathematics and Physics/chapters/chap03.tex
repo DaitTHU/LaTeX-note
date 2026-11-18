@@ -11,11 +11,11 @@
 \begin{definition}{Fourier变换}{Fourier Transformation}
 	定义Fourier变换
 	\[
-		\hat f(\xi)\equiv\FT[f](\xi):=\int\iti f(x)\e^{-\i\xi x}\d x,\quad \xi\in\RR,
+		\hat f(\xi)\equiv\FT[f](\xi):=\intR f(x)\e^{-\i\xi x}\d x,\quad \xi\in\RR,
 	\]
 	及其逆变换
 	\[
-		f(x)=\mathcal F^{-1}\big[\hat f\big](x)=\frac1{2\pi}\int\iti\hat f(\xi)\e^{\i\xi x}\d\xi.
+		f(x)=\FT\inv\big[\hat f\big](x)=\frac1{2\pi}\intR\hat f(\xi)\e^{\i\xi x}\d\xi.
 	\]
 \end{definition}
 Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformation} 页的附录内容。
@@ -38,11 +38,11 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 	\end{align*}
 	再用Fourier逆变换
 	\begin{align*}
-		u(x,t)&=\FT^{-1}\biggb{\int_0^t\hat f(\xi,\tau)\e^{-a^2\xi^2(t-\tau)}\d\tau}+\FT^{-1}\bigb{\hat\varphi(\xi)\e^{-a^2\xi^2t}}\\
-		&=\int_0^t\FT^{-1}\bigb{\hat f(\xi,\tau)}\ast\FT^{-1}\bigb{\e^{-a^2\xi^2(t-\tau)}}\d\tau+\FT^{-1}\bigb{\hat\varphi(\xi)}\ast\FT^{-1}\bigb{\e^{-a^2\xi^2t}}\\
-		&=\int_0^tf(x,\tau)\ast\frac{\e^{-x^2/4a^2(t-\tau)}}{2a\sqrt{\pi(t-\tau)}}\d\tau+\frac1{2a\sqrt{\pi t}}\int\iti\varphi(\eta)\e^{-(x-\eta)^2/4a^2t}\d\eta\\
-		&=\int_0^t\frac1{2a\sqrt{\pi(t-\tau)}}\int\iti f(\eta,\tau)\e^{-(x-\eta)^2/4a^2(t-\tau)}\d\eta\d\tau+\\
-		&\qqquad\frac1{2a\sqrt{\pi t}}\int\iti\varphi(\eta)\e^{-(x-\eta)^2/4a^2t}\d\eta.
+		u(x,t)&=\FT\inv\biggb{\int_0^t\hat f(\xi,\tau)\e^{-a^2\xi^2(t-\tau)}\d\tau}+\FT\inv\bigb{\hat\varphi(\xi)\e^{-a^2\xi^2t}}\\
+		&=\int_0^t\FT\inv\bigb{\hat f(\xi,\tau)}\ast\FT\inv\bigb{\e^{-a^2\xi^2(t-\tau)}}\d\tau+\FT\inv\bigb{\hat\varphi(\xi)}\ast\FT\inv\bigb{\e^{-a^2\xi^2t}}\\
+		&=\int_0^tf(x,\tau)\ast\frac{\e^{-x^2/4a^2(t-\tau)}}{2a\sqrt{\pi(t-\tau)}}\d\tau+\frac1{2a\sqrt{\pi t}}\intR\varphi(\eta)\e^{-(x-\eta)^2/4a^2t}\d\eta\\
+		&=\int_0^t\frac1{2a\sqrt{\pi(t-\tau)}}\intR f(\eta,\tau)\e^{-(x-\eta)^2/4a^2(t-\tau)}\d\eta\d\tau+\\
+		&\qqquad\frac1{2a\sqrt{\pi t}}\intR\varphi(\eta)\e^{-(x-\eta)^2/4a^2t}\d\eta.
 	\end{align*}
 	以上只是形式解。
 \end{example}
@@ -51,13 +51,13 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 \begin{definition}{Fourier正余弦变换}{Fourier Sine and Cosine Transformation}
 	正余弦变换分别为
 	\begin{align*}
-		\hat f_\sine(\xi)\equiv\FT_\sine[f](\xi):=\int\zti f(x)\sin\xi x\d x;\\
-		\hat f_\cosi(\xi)\equiv\FT_\cosi[f](\xi):=\int\zti f(x)\cos\xi x\d x.
+		\hat f_\sine(\xi)\equiv\FT_\sine[f](\xi):=\intRplus f(x)\sin\xi x\d x;\\
+		\hat f_\cosine(\xi)\equiv\FT_\cosine[f](\xi):=\intRplus f(x)\cos\xi x\d x.
 	\end{align*}
 	其反变换
 	\begin{align*}
-		f(x)&=\frac2\pi\int\zti\hat f_\sine(\xi)\sin\xi x\d\xi=:\FT_\sine^{-1}[\hat f_\sine(\xi)]\\
-		&=\frac2\pi\int\zti\hat f_\cosi(\xi)\cos\xi x\d\xi=:\FT_\cosi^{-1}[\hat f_\cosi(\xi)]
+		f(x)&=\frac2\pi\intRplus\hat f_\sine(\xi)\sin\xi x\d\xi=:\FT_\sine\inv[\hat f_\sine(\xi)]\\
+		&=\frac2\pi\intRplus\hat f_\cosine(\xi)\cos\xi x\d\xi=:\FT_\cosine\inv[\hat f_\cosine(\xi)]
 	\end{align*}
 \end{definition}
 变换的性质见第 \pageref{The Property of Sine and Cosine Transformation} 页的附录内容。
@@ -75,9 +75,9 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 		\lim_{x\to\infty}u(x,t)=\lim_{x\to\infty}u_x(x,t)=0
 	\]
 	
-	若用Fourier正弦变换，则会出现$u(0,t)$，此边界条件没有给出，因此只能用余弦变换，记$U(\xi,t)=\FT_\cosi[u(x,t)]$
+	若用Fourier正弦变换，则会出现$u(0,t)$，此边界条件没有给出，因此只能用余弦变换，记$U(\xi,t)=\FT_\cosine[u(x,t)]$
 	\begin{align*}
-		U_t(\xi,t)&=a^2\bigb{u_x(x,t)\cos\xi x+\xi u(x,t)\sin\xi x}\zti-a^2\xi^2U(\xi,t)\\
+		U_t(\xi,t)&=a^2\bigb{u_x(x,t)\cos\xi x+\xi u(x,t)\sin\xi x}_0^\infty-a^2\xi^2U(\xi,t)\\
 		&=-a^2\varphi(t)-a^2\xi^2U(\xi,t).
 	\end{align*}
 	故
@@ -86,8 +86,8 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 	\]
 	逆变换
 	\begin{align*}
-		u(x,t)&=-\frac{2a^2}\pi\int\zti\biggb{\int_0^t\varphi(\tau)\e^{-a^2\xi^2(t-\tau)}\d\tau}\cos\xi x\d\xi\\
-		&=-\frac{2a^2}\pi\int_0^t\varphi(\tau)\biggp{\int\zti\e^{-a^2\xi^2(t-\tau)}\cos\xi x\d\xi}\d\tau\\
+		u(x,t)&=-\frac{2a^2}\pi\intRplus\biggb{\int_0^t\varphi(\tau)\e^{-a^2\xi^2(t-\tau)}\d\tau}\cos\xi x\d\xi\\
+		&=-\frac{2a^2}\pi\int_0^t\varphi(\tau)\biggp{\intRplus\e^{-a^2\xi^2(t-\tau)}\cos\xi x\d\xi}\d\tau\\
 		&=-a\int_0^t\varphi(\tau)\frac{\e^{-x^2/4a^2(t-\tau)}}{\sqrt{\pi(t-\tau)}}\d\tau.
 	\end{align*}
 \end{example}
@@ -111,12 +111,12 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 	\end{align*}
 	逆变换
 	\begin{align*}
-		u(x,t)&=-\frac{2}\pi\int\zti\biggb{\frac a\xi\int_0^tf(\tau)\sin a\xi(t-\tau)\d\tau}\cos \xi x\d\xi\\
-		&=-2a\int_0^tf(\tau)\cdot\frac1{2\pi}\int\iti\frac1\xi\sin a\xi(t-\tau)\e^{\i\xi x}\d\xi\d\tau
+		u(x,t)&=-\frac{2}\pi\intRplus\biggb{\frac a\xi\int_0^tf(\tau)\sin a\xi(t-\tau)\d\tau}\cos \xi x\d\xi\\
+		&=-2a\int_0^tf(\tau)\cdot\frac1{2\pi}\intR\frac1\xi\sin a\xi(t-\tau)\e^{\i\xi x}\d\xi\d\tau
 	\end{align*}
 	由
 	\[
-		\FT^{-1}\Bigb{\frac{\sin a\xi}\xi}(x)=\frac{\Heaviside(x+a)-\Heaviside(x-a)}2,\quad a>0.
+		\FT\inv\Bigb{\frac{\sin a\xi}\xi}(x)=\frac{\Heaviside(x+a)-\Heaviside(x-a)}2,\quad a>0.
 	\]
 	其中$\Heaviside(x)$为Heaviside跳跃函数，故
 	\begin{align*}
@@ -147,12 +147,12 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 	\]
 	故
 	\begin{align*}
-		u(x,t)&=\frac1{2\pi}\int\iti A(\xi)X(x,\xi)T(t,\xi)\d\xi\\
-		&=\frac1{2\pi}\int\iti A(\xi)\e^{\i\xi x}\e^{-a^2\xi^2t}\d\xi.
+		u(x,t)&=\frac1{2\pi}\intR A(\xi)X(x,\xi)T(t,\xi)\d\xi\\
+		&=\frac1{2\pi}\intR A(\xi)\e^{\i\xi x}\e^{-a^2\xi^2t}\d\xi.
 	\end{align*}
 	边界条件
 	\[
-		u(x,0)=\frac1{2\pi}\int\iti A(\xi)\e^{\i\xi x}\d\xi\equiv\FT^{-1}[A]=\varphi(x),
+		u(x,0)=\frac1{2\pi}\intR A(\xi)\e^{\i\xi x}\d\xi\equiv\FT\inv[A]=\varphi(x),
 	\]
 	故$\varphi(x)$是$A(\xi)$的Fourier逆变换，即$A=\FT[\varphi]$。
 \end{example}
@@ -161,12 +161,12 @@ Fourier变换的相关性质见第 \pageref{The Property of Fourier Transformati
 \begin{definition}{Laplace变换}{Laplace Transformation}
 	定义Laplace变换
 	\[
-		\bar f(\xi)\equiv\LT[f](\xi):=\int\zti f(x)\e^{-\xi x}\d x,\quad\Re\xi>\sigma_0.
+		\bar f(\xi)\equiv\LT[f](\xi):=\intRplus f(x)\e^{-\xi x}\d x,\quad\Re\xi>\sigma_0.
 	\]
 	
 	其逆变换
 	\[
-		f(x)=\LT^{-1}[\bar f(\xi)] = \frac1{2\pi\i}\int_{\sigma-\i\infty}^{\sigma+\i\infty}\bar f(\xi)\e^{\xi x}\d\xi,\quad x\geqslant 0.
+		f(x)=\LT\inv[\bar f(\xi)] = \frac1{2\pi\i}\int_{\sigma-\i\infty}^{\sigma+\i\infty}\bar f(\xi)\e^{\xi x}\d\xi,\quad x\geqslant 0.
 	\]
 \end{definition}
 Laplace变换存在的一组充分条件是$f$局部可积，且$\exists M,\sigma_0$使得
@@ -174,7 +174,7 @@ Laplace变换存在的一组充分条件是$f$局部可积，且$\exists M,\sigm
 		\abs{f(x)}<M\e^{\sigma_0x},\quad\forall x>0.
 	\]
 	% $x$为$f$连续点处
-% 再看Laplace逆变换$\LT^{-1}[\bar f(\xi)]\to f(x)$。
+% 再看Laplace逆变换$\LT\inv[\bar f(\xi)]\to f(x)$。
 % \begin{theorem}{Riemann-Mellin反演公式}{Riemann-Mellin Inversion Formula}
 其逆变换中$\sigma>\sigma_0$；注意，Laplace变换的积分中本身不包含$\RR_{<0}$的部分，一般认为$f(<0)\equiv 0$。
 \begin{theorem}{第一展开定理}{}
@@ -184,13 +184,13 @@ Laplace变换存在的一组充分条件是$f$局部可积，且$\exists M,\sigm
 	\]
 	则
 	\[
-		f(x)=\LT^{-1}[F(\xi)] = \sum_{n=1}^\infty\frac{c_n}{(n-1)!}x^{n-1},\quad x\geqslant 0
+		f(x)=\LT\inv[F(\xi)] = \sum_{n=1}^\infty\frac{c_n}{(n-1)!}x^{n-1},\quad x\geqslant 0
 	\]
 \end{theorem}
 \begin{theorem}{第二展开定理}{}
 	设$F(\xi)=A(\xi)/B(\xi)$是有理函数，$\deg A<\deg B$，$B(\xi)$只有单零点$\xi_1,\xi_2,\ldots,\xi_n$且是$F(\xi)$的单极点，则
 	\[
-		f(x)=\LT^{-1}[F(\xi)] = \sum_{k=1}^n\frac{A(\xi_k)}{B'(\xi_k)}\e^{\xi_kx}=\sum_{k=1}^n\Res\bigb{F(\xi)\e^{\xi x},\xi_k}.
+		f(x)=\LT\inv[F(\xi)] = \sum_{k=1}^n\frac{A(\xi_k)}{B'(\xi_k)}\e^{\xi_kx}=\sum_{k=1}^n\Res\bigb{F(\xi)\e^{\xi x},\xi_k}.
 	\]
 \tcblower
 	若$F(\xi)$满足
@@ -204,7 +204,7 @@ Laplace变换存在的一组充分条件是$f$局部可积，且$\exists M,\sigm
 	\end{compactenum}
 	则对于$x\geqslant 0$有
 	\[
-		f(x)=\LT^{-1}[F(\xi)] = \sum_{k=1}^n\Res[F(\xi)\e^{\xi x},\xi_k].
+		f(x)=\LT\inv[F(\xi)] = \sum_{k=1}^n\Res[F(\xi)\e^{\xi x},\xi_k].
 	\]
 \end{theorem}
 % \subsection{Laplace定理的应用}
@@ -231,8 +231,8 @@ Laplace变换存在的一组充分条件是$f$局部可积，且$\exists M,\sigm
 	\]
 	逆变换
 	\begin{align*}
-		u(x,t)&=\LT^{-1}\biggb{\frac{(A-B)\cosh\sqrt s x}{s\cosh\sqrt s L}}(t)+\LT^{-1}\biggb{\frac Bs}(t)\\
-		&=(A-B)\LT^{-1}\biggb{\frac{\cosh\sqrt s x}{s\cosh\sqrt s L}}(t)+B.
+		u(x,t)&=\LT\inv\biggb{\frac{(A-B)\cosh\sqrt s x}{s\cosh\sqrt s L}}(t)+\LT\inv\biggb{\frac Bs}(t)\\
+		&=(A-B)\LT\inv\biggb{\frac{\cosh\sqrt s x}{s\cosh\sqrt s L}}(t)+B.
 	\end{align*}
 	括号内函数的孤立奇点\footnote{注意，0不是此函数的孤立奇点，不能用留数算出。逆变换结果中的1是围道积出来的。详情可见附录}应使得$\cosh\sqrt s L=0$
 	\[

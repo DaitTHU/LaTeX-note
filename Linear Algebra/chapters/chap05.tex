@@ -149,7 +149,7 @@
 \begin{corollary}
 	逆的行列式为原行列式的倒数：
 	\begin{align}
-		\det(A\iv)=\det(A)\iv.
+		\det(A\inv)=\det(A)\inv.
 	\end{align}
 \end{corollary}
 
@@ -214,7 +214,7 @@
 	{行列式与矩阵转置}{}
 	行列式在矩阵转置下不变
 	\[
-		\det(A\tp)=\det(A),
+		\det(A\transp)=\det(A),
 	\]
 \end{theorem}
 \begin{proof}
@@ -248,8 +248,8 @@
 			A&B\\C&D
 		\end{bmatrix}}
 		=\begin{cases}
-			\det(A)\det(D-CA\iv B),&\text{$A$可逆}\\
-			\det(D)\det(A-BD\iv C),&\text{$D$可逆}
+			\det(A)\det(D-CA\inv B),&\text{$A$可逆}\\
+			\det(D)\det(A-BD\inv C),&\text{$D$可逆}
 		\end{cases}.
 	\end{equation}
 \end{theorem}
@@ -258,9 +258,9 @@
 	当$A$可逆时，对分块消元恒等式
 	\[
 		\begin{bmatrix}A&B\\C&D\end{bmatrix}
-		=\begin{bmatrix}I&0\\CA\iv&I\end{bmatrix}
-		\begin{bmatrix}A&0\\0&D-CA\iv B\end{bmatrix}
-		\begin{bmatrix}I&A\iv B\\0&I\end{bmatrix}
+		=\begin{bmatrix}I&0\\CA\inv&I\end{bmatrix}
+		\begin{bmatrix}A&0\\0&D-CA\inv B\end{bmatrix}
+		\begin{bmatrix}I&A\inv B\\0&I\end{bmatrix}
 	\]
 	取行列式即得第一式。$D$可逆时使用相应的另一种分块消元得到第二式；不要求两个对角块同时可逆。
 \end{proof}
@@ -299,7 +299,7 @@
 		A=\begin{bmatrix}
 			a_1&a_2&\cdots&a_n\\
 			1&1&\cdots&1
-		\end{bmatrix}\tp,\quad
+		\end{bmatrix}\transp,\quad
 		B=\begin{bmatrix}
 			1&1&\cdots&1\\
 			b_1&b_2&\cdots&b_n
@@ -316,32 +316,32 @@
 	%https://en.wikipedia.org/wiki/Matrix_determinant_lemma
 	若$A$可逆且$u,v$均为$n$维列向量，则
 	\begin{align}
-		\det(A+uv\tp)=(1+v\tp A\iv u)\det(A).
+		\det(A+uv\transp)=(1+v\transp A\inv u)\det(A).
 	\end{align}
 \end{theorem}
 \begin{proof}
 	先证明命题对于$A=I$成立，事实上
 	\begin{align*}
 		\begin{bmatrix}
-			I\\v\tp&1
+			I\\v\transp&1
 		\end{bmatrix}
 		\begin{bmatrix}
-			I+uv\tp&u\\ &1
+			I+uv\transp&u\\ &1
 		\end{bmatrix}
 		\begin{bmatrix}
-			I\\-v\tp&1
+			I\\-v\transp&1
 		\end{bmatrix}=
 		\begin{bmatrix}
-			I&u\\ &1+v\tp u
+			I&u\\ &1+v\transp u
 		\end{bmatrix}.
 	\end{align*}
 	故
 	\begin{align}
-		\det(I+uv\tp)=1+v\tp u
+		\det(I+uv\transp)=1+v\transp u
 	\end{align}
 	进而 
 	\[
-		\det(A+uv\tp)=\det(A)\det(I+A\iv uv\tp)=(1+v\tp A\iv u)\det(A).
+		\det(A+uv\transp)=\det(A)\det(I+A\inv uv\transp)=(1+v\transp A\inv u)\det(A).
 		\qedhere
 	\]
 \end{proof}
@@ -370,15 +370,15 @@
 
 \begin{corollary}
 	% Cramer法则的应用之一是矩阵求逆，
-	利用$AA\iv=I$，把$A$左乘$A\iv$的每一列看做一个线性方程组，解得
+	利用$AA\inv=I$，把$A$左乘$A\inv$的每一列看做一个线性方程组，解得
 	\[
-		(A\iv)_{ij}=\frac{\cof(A)_{ji}}{\det(A)}.
+		(A\inv)_{ij}=\frac{\cof(A)_{ji}}{\det(A)}.
 	\]
 \end{corollary}
 \begin{definition}{伴随矩阵}{adjugate matrix}
 	方阵$A$的伴随矩阵(adjugate matrix)定义为其代数余子式矩阵的转置：
 	\begin{align}
-		\adj(A):=\cof(A)\tp.
+		\adj(A):=\cof(A)\transp.
 	\end{align}
 \end{definition}
 
@@ -387,7 +387,7 @@
 	\begin{itemize}
 		\item $\adj(I)=I$；$\adj(O)=O$；
 		\item $\adj(cA)=c^{n-1}\adj(A)$；
-		\item $\adj(A\tp)=\adj(A)\tp$；
+		\item $\adj(A\transp)=\adj(A)\transp$；
 		\item $\adj(AB)=\adj(B)\adj(A)$，故$\adj(A^k)=\adj(A)^k$。
 	\end{itemize}
 \end{corollary}
@@ -396,7 +396,7 @@
 	{伴随矩阵与逆的关系}{}
 	当$\det(A)\neq0$时，根据Cramer法则，
 	\begin{align}
-		A\iv=\frac{\adj(A)}{\det(A)}.
+		A\inv=\frac{\adj(A)}{\det(A)}.
 	\end{align}
 \end{theorem}
 \begin{remark}
@@ -435,12 +435,12 @@
 		当$n=2$时，上式直接表示$\adj(\adj(A))=A$，对奇异矩阵也成立。
 		对可逆矩阵，若记$B=\adj(A)$、$d=\det(A)$，则反求关系为
 		\[
-			d^{n-1}=\det(B),\qquad A=dB\iv.
+			d^{n-1}=\det(B),\qquad A=dB\inv.
 		\]
 		不能无条件取实数幂而丢弃$d$的符号。例如$n=3$时，$\adj(I)=\adj(-I)=I$，仅凭伴随矩阵不能唯一恢复原矩阵。
 		\item 当$n\geq2$时，$A$可逆$\iff\adj(A)$可逆；此时
 		\begin{align}
-			\adj(A)\iv=\adj(A\iv)=\frac{A}{\det(A)};
+			\adj(A)\inv=\adj(A\inv)=\frac{A}{\det(A)};
 		\end{align}
 	\end{itemize}
 \end{corollary}
@@ -462,7 +462,7 @@
 	\begin{itemize}
 		\item $\rank(A)=n$时，$A$可逆，$\adj(A)$也可逆；
 		
-		\item $\rank(A)=n-1$时，$A\adj(A)=O$，故$\C(\adj(A))\subset\N(A)$，即
+		\item $\rank(A)=n-1$时，$A\adj(A)=O$，故$\colsp(\adj(A))\subset\nullsp(A)$，即
 		\[
 			\rank(\adj(A))\leq n-\rank(A)=1,
 		\]
@@ -485,7 +485,7 @@
 \begin{corollary}
 	在$A(t)$可逆的点，上式可写为
 	\begin{equation}
-		\dd t\det(A)=\det(A)\tr\biggp{A\iv\dv At}
+		\dd t\det(A)=\det(A)\tr\biggp{A\inv\dv At}
 	\end{equation}
 \end{corollary}
 
@@ -494,10 +494,10 @@
 
 	因此在解题中建议用增广矩阵和Gauss-Jordan消元法求解线性方程组$Ax=b$：
 	\[
-		[A,b]\sim[I,A\iv b];
+		[A,b]\sim[I,A\inv b];
 	\]
 	同时，不推荐用伴随矩阵$\adj(A)$求逆，因为其与Cramer法则等价。仍建议用增广矩阵和Gauss-Jordan消元法求逆：
 	\[
-		[A,I]\sim[I,A\iv].
+		[A,I]\sim[I,A\inv].
 	\]
 \end{remark}

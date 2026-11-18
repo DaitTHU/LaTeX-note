@@ -1,8 +1,8 @@
 % 引言：Monty Hall问题(三门问题)；% ——考虑最开始的选择：1/3选中汽车，则换门必得羊；2/3选中羊，因为另一羊已被排除，换门必得车——因此不换门得车的概率只有1/3，而换门得车的概率为2/3。
 % 你说你说分数怎么停留一直在停留谁让它停留的，为什么我女朋友场外加油你却还让我出糗。
-% 一种疾病，10000人中约有一人发病，患病者检测阳性的比例为99\%，未患病者检测阳性的比例为0.1\%。则阳性报告者患病率
+% 一种疾病，10000人中约有一人发病，患病者检测阳性的比例为\qty{99}{\percent}，未患病者检测阳性的比例为\qty{0.1}{\percent}。则阳性报告者患病率
 %\[
-%	\frac{0.99}{0.99+9.999}\doteq 9\%
+%	\frac{0.99}{0.99+9.999}\doteq \qty{9}{\percent}
 %\]
 %因此
 % 对阳性报告者进行二次检测是有必要的；	
@@ -57,7 +57,7 @@
 		\begin{equation}
 			A\setminus B:=\set x{x\in A\land x\notin B};
 		\end{equation}
-		特别地，补(complementary)事件 $A\c:=\Omega\setminus A$，称$A,A\c$对立。
+		特别地，补(complementary)事件 $A\eventcomp:=\Omega\setminus A$，称$A,A\eventcomp$对立。
 	\end{compactitem}
 	\begin{center}
 		\tikzfigure{venn}
@@ -70,7 +70,7 @@
 	{de Morgan定律}{de Morgan's laws}
 	对于事件集$\{A_i\}_{i\in I}$，其中指标集$I$可以有限或无限，有恒等式：
 	\[
-		\Bigp{\bigcup\nolimits_{i\in I} A_i}\c = \bigcap\nolimits_{i\in I} A_i\c.
+		\Bigp{\bigcup\nolimits_{i\in I} A_i}\eventcomp = \bigcap\nolimits_{i\in I} A_i\eventcomp.
 	\]
 \end{theorem}
 
@@ -79,7 +79,7 @@
 \section{概率}
 \label{sec:probability}
 
-概率函数$\P$应给出事件(及其运算)的概率。因此，$\P$作为一个映射的定义域(称为事件空间$\cF$)除了应包括样本空间$\Omega$和其若干子集外，还应满足事件运算的封闭性。
+概率函数$\P$应给出事件(及其运算)的概率。因此，$\P$作为一个映射的定义域(称为事件空间$\eventspace$)除了应包括样本空间$\Omega$和其若干子集外，还应满足事件运算的封闭性。
 
 \begin{definition}
 	{幂集}{power set}
@@ -90,14 +90,14 @@
 	幂集的子集$\Sigma\subset 2^\Omega$若满足事件运算的封闭性：
 	\begin{compactenum}
 		\item $\Omega \in \Sigma;$
-		\item $\forall A \in \Sigma, A\c \in \Sigma;$
+		\item $\forall A \in \Sigma, A\eventcomp \in \Sigma;$
 		\item 特别地，若$\forall i\in I$均有$A_i \in \Sigma$，则
 		$\bigcup\nolimits_{i\in I} A_i \in \Sigma.$
 	\end{compactenum}
 	则称$\Sigma$是$\Omega$的$\sigma$-代数($\sigma$-algebra)。
 \end{definition}
 
-借助测度论的语言，我们要求事件空间$\cF$必须是样本空间$\Omega$的一个$\sigma$-代数。
+借助测度论的语言，我们要求事件空间$\eventspace$必须是样本空间$\Omega$的一个$\sigma$-代数。
 
 \begin{example}{$\sigma$-代数}{sigma-algebra}
 	若$\Omega=\{a,b,c,d\}$，则一个平凡的$\sigma$-代数
@@ -110,28 +110,28 @@
 	\]
 \end{example}
 \begin{definition}{概率}{probability}
-	若映射$\P:\cF\to\RR$满足：
+	若映射$\P:\eventspace\to\RR$满足：
 	\begin{compactenum}
-		\item $\forall A\in\cF,\P(A)\geqslant 0;$
+		\item $\forall A\in\eventspace,\P(A)\geqslant 0;$
 		\item $\P (\Omega)=1;$
-		\item 加法公理：若$\forall i,j\in I\,(i\neq j)$均有$A_i,A_j\in\cF$且$A_i\cup A_j=\varnothing$，则
+		\item 加法公理：若$\forall i,j\in I\,(i\neq j)$均有$A_i,A_j\in\eventspace$且$A_i\cup A_j=\varnothing$，则
 		\begin{equation}
 			\P\Bigp{\bigcup\nolimits_{i\in I} A_i}=\sum\nolimits_{i\in I}\P(A_i).
 		\end{equation}
 	\end{compactenum}
-	则称$\P$是概率(probability)函数，$(\Omega,\cF,\P)$构成了概率空间(probability space)。
+	则称$\P$是概率(probability)函数，$(\Omega,\eventspace,\P)$构成了概率空间(probability space)。
 \end{definition}
 \begin{corollary}
 	由定义，可推出：
 	\begin{compactenum}
-		\item $\forall A\in\cF,\P(A)\leqslant 1;$
+		\item $\forall A\in\eventspace,\P(A)\leqslant 1;$
 		\item $\P(\varnothing)=0;$
 		\item 
-		% 若$A_i$两两互斥，即$\forall A_i \in \cF,A_iA_j=\varnothing\,(i\neq j)$，则
+		% 若$A_i$两两互斥，即$\forall A_i \in \eventspace,A_iA_j=\varnothing\,(i\neq j)$，则
 		% \[
 		% 	\P\Bigp{\bigcup_{i=1}^n A_i}=\sum_{i=1}^n\P(A_i)
 		% \]
-		特别地，$\P(A)+\P(A\c)=1;$
+		特别地，$\P(A)+\P(A\eventcomp)=1;$
 		\item $\forall A\subset B,\P(A)\leqslant\P(B);$
 		\item $\P(A\cup B)=\P(A)+\P(B)-\P(A\cap B).$推广之，得到
 	\end{compactenum}
@@ -158,7 +158,7 @@
 	\end{align*}
 	故所求概率即
 	\[
-		\P\Bigp{\bigcap\nolimits_{i=1}^nA_i\c}=1-1+\frac1{2!}-\frac1{3!}+\cdots+(-)^n\frac1{n!}\to\frac1{\e}.
+		\P\Bigp{\bigcap\nolimits_{i=1}^nA_i\eventcomp}=1-1+\frac1{2!}-\frac1{3!}+\cdots+(-)^n\frac1{n!}\to\frac1{\e}.
 	\]
 	\tcblower
 	这个问题称为乱序(derangement)问题，乱序数(subfactorial)记作
@@ -175,33 +175,33 @@
 \section{条件概率}
 
 \begin{definition}{条件概率}{conditional probability}
-	给定事件$B$且$\P(B)>0$，定义映射$\P(\cdot|B):\cF\to\RR$
+	给定事件$B$且$\P(B)>0$，定义映射$\P(\cdot\mid B):\eventspace\to\RR$
 	\begin{equation}
-		\P(A|B):=\frac{\P(A\cap B)}{\P(B)}
+		\P(A\mid B):=\frac{\P(A\cap B)}{\P(B)}
 	\end{equation}
 	表示在事件$B$发生的条件下，事件$A$发生的条件概率(conditional probability)。
 \end{definition}
 
 \begin{corollary}
-	$\P(\cdot|B)$是概率函数。
+	$\P(\cdot\mid B)$是概率函数。
 \end{corollary}
 
 \begin{corollary}
-	已观测到事件$A\iff\P(A|A)\equiv 1$，绝非$\P(A)=1$。
+	已观测到事件$A\iff\P(A\mid A)\equiv 1$，绝非$\P(A)=1$。
 \end{corollary}
 
 \begin{remark}
-	不能将条件概率$\P(A|B)$中的$A|B$视为事件，$\P(\cdot)$和$\P(\cdot|B)$是两个不同的概率函数。
+	不能将条件概率$\P(A\mid B)$中的$A\mid B$视为事件，$\P(\cdot)$和$\P(\cdot\mid B)$是两个不同的概率函数。
 \end{remark}
 
 \begin{theorem}{乘法法则}{multiplication rule}
 	由条件概率的定义可以直接导出：
 	\begin{equation}
-		\P(A\cap B)=\P(B)\P(A|B)=\P(A)\P(B|A).
+		\P(A\cap B)=\P(B)\P(A\mid B)=\P(A)\P(B\mid A).
 	\end{equation}
 	一般推广：
 	\begin{equation}
-		\P(A_1\cap\cdots\cap A_n)=\P(A_1)\P(A_2|A_1)\cdots\P(A_n|A_1\cap\cdots\cap A_{n-1}).
+		\P(A_1\cap\cdots\cap A_n)=\P(A_1)\P(A_2\mid A_1)\cdots\P(A_n\mid A_1\cap\cdots\cap A_{n-1}).
 	\end{equation}
 \end{theorem}
 
@@ -215,7 +215,7 @@
 下面讨论事件$A,B$独立的概念。
 按字面意义，$A,B$独立应代表事件$B$发生与否不影响事件$A$发生的概率，即
 \[
-	\P(A|B)=\P(A|B\c)=\P(A).
+	\P(A\mid B)=\P(A\mid B\eventcomp)=\P(A).
 \]
 
 \begin{definition}{独立事件}{independent event}
@@ -226,7 +226,7 @@
 \end{definition}
 
 \begin{corollary}
-	$A,B$独立$\iff A\c,B$独立$\iff A,B\c$独立$\iff A\c,B\c$独立。
+	$A,B$独立$\iff A\eventcomp,B$独立$\iff A,B\eventcomp$独立$\iff A\eventcomp,B\eventcomp$独立。
 \end{corollary}
 
 \begin{definition}{多个事件的独立}{}
@@ -249,7 +249,7 @@
 \begin{definition}{条件独立}{conditional independent}
 	若
 	\[
-		\P(A\cap B|E)=\P(A|E)\P(B|E),
+		\P(A\cap B\mid E)=\P(A\mid E)\P(B\mid E),
 	\]
 	则$A,B$关于事件$E$条件独立(conditional independent)。
 \end{definition}
@@ -262,7 +262,7 @@
 
 \begin{definition}
 	{分割}{partition}
-	事件空间的子集$\{B_i\}_{i\in I}\subset\cF$若满足：
+	事件空间的子集$\{B_i\}_{i\in I}\subset\eventspace$若满足：
 	\begin{compactenum}
 		\item $\bigcup\nolimits_{i\in I} B_i=\Omega;$
 		\item 两两互斥：$\forall i,j\in I\,(i\neq j)$均有$B_i\cap B_j=\varnothing;$
@@ -274,7 +274,7 @@
 \begin{theorem}{全概率公式}{total probability formula}
 	给定样本空间$\Omega$的一个分割$\{B_i\}_{i\in I}$，则$A$事件的概率
 	\begin{equation}
-		\P(A)=\sum_{i\in I}\P(B_i)\P(A|B_i)
+		\P(A)=\sum_{i\in I}\P(B_i)\P(A\mid B_i)
 	\end{equation}
 \end{theorem}
 
@@ -285,15 +285,15 @@
 	\]
 	且$\forall i,j\in I\,(i\neq j)$均有$(A\cap B_i)\cap(A\cap B_j)=A\cap B_i\cap B_j=\varnothing$，由加法公理
 	\[
-		\P(A)=\sum_{i\in I}\P(A\cap B_i)=\sum_{i\in I}\P(B_i)\P(A|B_i).
+		\P(A)=\sum_{i\in I}\P(A\cap B_i)=\sum_{i\in I}\P(B_i)\P(A\mid B_i).
 		\qedhere
 	\]
 \end{proof}
 
 \begin{corollary}
-	最简单的分割为$\{B,B\c\}$，则全概率公式化为
+	最简单的分割为$\{B,B\eventcomp\}$，则全概率公式化为
 	\[
-		\P(A)=\P(B)\P(A|B)+\P(B\c)\P(A|B\c).
+		\P(A)=\P(B)\P(A\mid B)+\P(B\eventcomp)\P(A\mid B\eventcomp).
 	\]
 \end{corollary}
 
@@ -303,7 +303,7 @@
 
 	$A=$甲最终赢，$B=$甲本局赢，由全概率公式
 	\[
-		\P(A)=\P(B)\P(A|B)+\P(B\c)\P(A|B\c).
+		\P(A)=\P(B)\P(A\mid B)+\P(B\eventcomp)\P(A\mid B\eventcomp).
 	\]
 	即
 	\[
@@ -326,32 +326,32 @@
 \begin{theorem}{Beyas公式}{Beyas formula}
 	Beyas公式即
 	\begin{equation}
-		\P(B_i|A)=\frac{\P(B_i)\P(A|B_i)}{\P(A)}=\frac{\P(B_i)\P(A|B_i)}{\sum_{j\in I}\P(B_j)\P(A|B_j)}
+		\P(B_i\mid A)=\frac{\P(B_i)\P(A\mid B_i)}{\P(A)}=\frac{\P(B_i)\P(A\mid B_i)}{\sum_{j\in I}\P(B_j)\P(A\mid B_j)}
 	\end{equation}
-	称$\P(B_i)$为\textbf{先验概率}(priori probability)，$\P(B_i|A)$为\textbf{后验概率}(posterior probability)。
+	称$\P(B_i)$为\textbf{先验概率}(priori probability)，$\P(B_i\mid A)$为\textbf{后验概率}(posterior probability)。
 \end{theorem}
 
 % \begin{remark}
-% 	这个公式的重要性不仅在数学意义上，还在于先验概率$\P(B_i)$ v.s.后验概率$\P(B_i|A)$
+% 	这个公式的重要性不仅在数学意义上，还在于先验概率$\P(B_i)$ v.s.后验概率$\P(B_i\mid A)$
 % \end{remark}
 
 \begin{example}{假阳性悖论}{false positive paradox}
-	假设有一种疾病，10000人中约有一人发病，患病者检测出阳性(真阳性)的概率为99\%，未患病者检测出阳性(假阳性)的概率为0.1\%。求检测出阳性的人患病的概率。
+	假设有一种疾病，10000人中约有一人发病，患病者检测出阳性(真阳性)的概率为\qty{99}{\percent}，未患病者检测出阳性(假阳性)的概率为\qty{0.1}{\percent}。求检测出阳性的人患病的概率。
 
 	$B=$患病，$A=$阳性，题中对应的概率为
 	\[
 		\P(B)=10^{-4},\enspace
-		\P(A|B)=0.99,\enspace
-		\P(A|B\c)=10^{-3},
+		\P(A\mid B)=0.99,\enspace
+		\P(A\mid B\eventcomp)=10^{-3},
 	\]
 	故检测出阳性的人患病的概率为
 	\[
-		\P(B|A)=\frac{\P(A\cap B)}{\P(A)}=\frac{\P(B)\P(A|B)}{\P(B)\P(A|B)+\P(B\c)\P(A|B\c)}\doteq 9\%
+		\P(B\mid A)=\frac{\P(A\cap B)}{\P(A)}=\frac{\P(B)\P(A\mid B)}{\P(B)\P(A\mid B)+\P(B\eventcomp)\P(A\mid B\eventcomp)}\doteq \qty{9}{\percent}
 	\]
-	并不高。其原因在于：发病率$\P(B)<$假阳性的概率$\P(A|B\c)$。
+	并不高。其原因在于：发病率$\P(B)<$假阳性的概率$\P(A\mid B\eventcomp)$。
 
 	如何避免假阳性悖论？可以进行二次检测，使得
-	$\P(B)>\P(A_2\cap A_1|B\c)=10^{-6}$
+	$\P(B)>\P(A_2\cap A_1\mid B\eventcomp)=10^{-6}$
 	
 \end{example}
 

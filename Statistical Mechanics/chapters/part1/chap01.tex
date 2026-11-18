@@ -1,5 +1,3 @@
-\newcommand{\pu}[3][{}]{\biggp{\pv{#2}{#3}}_{#1}}
-
 \chapter{热力学基本定律}
 
 %\section*{宏观}
@@ -73,7 +71,7 @@
 \end{theorem}
 
 \begin{corollary}
-	互为热平衡的系统有一共同的物理性质，称为温度$T$，单位为K。
+	互为热平衡的系统有一共同的物理性质，称为温度$T$，单位为 \unit{K}。
 \end{corollary}
 
 \begin{definition}
@@ -101,12 +99,12 @@
 
 	在国际单位制下，
 	理想气体的压强$p$、体积$V$、温度$T$和摩尔数$n$满足
-	\footnote{摩尔数即物质的量(amount of substance)，与粒子数$N$成正比，单位为mol，即$n:=N/\NA$，其中$\NA=\SI{6.02214076e23}{\per\mole}$是Avogadro常数。}
+	\footnote{摩尔数即物质的量(amount of substance)，与粒子数$N$成正比，单位为 \unit{mol}，即$n:=N/\NA$，其中$\NA=\qty{6.02214076e23}{\per\mole}$是Avogadro常数。}
 	\begin{equation}
 		\label{eqn:pV=nRT}
 		pV=nRT.
 	\end{equation}
-	其中$R=\SI{8.314}{J/K.mol}$是理想气体常数。
+	其中$R=\qty{8.314}{\joule\per\kelvin\per\mole}$是理想气体常数。
 \end{example}
 
 \begin{example}
@@ -151,7 +149,7 @@
 \end{theorem}
 
 \begin{remark}
-	如果系统是\textbf{绝热}（$\vd Q\equiv 0$）的，我们便可以用机械功$\vd W$测量内能的变化$\D U$，通过指定基准态的内能$U_0$就可以得出任意状态的内能$U$。进而我们可以测量导热系统的传热$\vd Q$。
+	如果系统是\textbf{绝热}（$\vd Q\equiv 0$）的，我们便可以用机械功$\vd W$测量内能的变化$\Delta U$，通过指定基准态的内能$U_0$就可以得出任意状态的内能$U$。进而我们可以测量导热系统的传热$\vd Q$。
 \end{remark}
 
 % \begin{example}
@@ -178,7 +176,7 @@
 	定义热容(heat capacity)是物质在单位温度变化下所吸收或放出的热量：
 	\begin{equation}
 		\label{eqn:C general}
-		C:=\lim_{\D T\to0}\frac{\D Q}{\D T}.
+		C:=\lim_{\Delta T\to0}\frac{\Delta Q}{\Delta T}.
 	\end{equation}
 	% 比热容(specific \textasciitilde)是单位质量的热容。
 	% 摩尔热容$c:=C/n$是单位摩尔的热容。
@@ -188,13 +186,13 @@
 	因此有必要将不变的状态参数写在偏导的脚标上。}
 	\begin{equation}
 		\label{eqn:C_V}
-		C_V=\pu[V]UT.
+		C_V=\pvat{U}{T}{V}.
 		\tag{\ref{eqn:C general}a}
 	\end{equation}
 	等压过程中$p=\const$，$\vd Q=\d U+p\d V$，故等压热容可以写成
 	\begin{equation}
 		\label{eqn:C_p}
-		C_p=\pu[p]UT+p\pu[p]VT.
+		C_p=\pvat{U}{T}{p}+p\pvat{V}{T}{p}.
 		\tag{\ref{eqn:C general}b}
 	\end{equation}
 \end{definition}
@@ -204,9 +202,9 @@
 	响应函数反应一个物理量在另一个物理量变化时的响应，通常容易实验测量得到。除了热容$C$，典型的响应函数还有热膨胀系数$\alpha$、压强系数$\beta$和等温压缩系数$\kappa_T$：
 	\begin{subequations}
 		\begin{align}
-			\alpha&:=\frac1V\pu[p]VT,\\
-			\beta&:=-\frac1p\pu[V]pT,\\
-			\kappa_T&:=-\frac1V\pu[T]Vp.
+			\alpha&:=\frac1V\pvat{V}{T}{p},\\
+			\beta&:=-\frac1p\pvat{p}{T}{V},\\
+			\kappa_T&:=-\frac1V\pvat{V}{p}{T}.
 		\end{align}
 	\end{subequations}
 \end{definition}
@@ -229,13 +227,13 @@
 	\begin{subequations}
 		\begin{align}
 			\label{eqn:XY->YX}
-			\pu[Z]XY&=\pu[Z]YX^{-1};\\
+			\pvat{X}{Y}{Z}&=\pvat{Y}{X}{Z}^{-1};\\
 			\label{eqn:XY*YZ*ZX=-1}
-			\pu[Z]XY&=-\fracdisp{\pu[X]ZY}{\pu[Y]ZX}\iff\pu[Z]XY\pu[X]YZ\pu[Y]ZX=-1;\\
+			\pvat{X}{Y}{Z}&=-\fracdisp{\pvat{Z}{Y}{X}}{\pvat{Z}{X}{Y}}\iff\pvat{X}{Y}{Z}\pvat{Y}{Z}{X}\pvat{Z}{X}{Y}=-1;\\
 			\label{eqn:XY->XW/YW}
-			\pu[Z]XY&=\fracdisp{\pu[Z]XW}{\pu[Z]YW};\\
+			\pvat{X}{Y}{Z}&=\fracdisp{\pvat{X}{W}{Z}}{\pvat{Y}{W}{Z}};\\
 			\label{eqn:XY->XY+XW*WY}
-			\pu[Z]XY&=\pu[W]XY+\pu[Y]XW\pu[Z]WY.
+			\pvat{X}{Y}{Z}&=\pvat{X}{Y}{W}+\pvat{X}{W}{Y}\pvat{W}{Y}{Z}.
 		\end{align}
 	\end{subequations}
 \end{theorem}
@@ -253,7 +251,7 @@
 	由于气体是向真空膨胀不受外界阻力，$W=0$；水温不变即$Q=0$，继而气体的内能不变，实验结果等价于$(\p T/\p V)_U=0$，
 	利用式\eqref{eqn:XY*YZ*ZX=-1}，可得
 	\[
-		\pu[T]UV=-\pu[V]UT\pu[U]TV=0.
+		\pvat{U}{V}{T}=-\pvat{U}{T}{V}\pvat{T}{V}{U}=0.
 	\]
 	说明气体的内能与体积无关，称为Joule定律。
 	\footnote{
@@ -280,10 +278,10 @@
 	利用\eqref{eqn:XY->XY+XW*WY}，等容热容和等压热容的差
 	\begin{align}
 		\notag
-		C_p-C_V&=\pu[p]UT+p\pu[p]VT-\pu[V]UT\\
+		C_p-C_V&=\pvat{U}{T}{p}+p\pvat{V}{T}{p}-\pvat{U}{T}{V}\\
 		\notag
-		&=\cancel{\pu[V]UT}+\pu[T]UV\pu[p]VT+p\pu[p]VT-\cancel{\pu[V]UT}\\
-		&=\biggb{\pu[T]UV+p}\pu[p]VT\\
+		&=\cancel{\pvat{U}{T}{V}}+\pvat{U}{V}{T}\pvat{V}{T}{p}+p\pvat{V}{T}{p}-\cancel{\pvat{U}{T}{V}}\\
+		&=\biggb{\pvat{U}{V}{T}+p}\pvat{V}{T}{p}\\
 		&=(0+p)\cdot\frac{nR}p=nR.
 	\end{align}
 	定义热容比
@@ -302,7 +300,7 @@
 	% \[
 	% 	W=-\int_{V_\text A}^{V_\text B}p\d V,
 	% \]
-	% 计算功$W$。若方便，可用\eqref{eqn:C_V->U}计算内能变化$\D U$，再利用\eqref{eqn:dU=dW+dQ}计算热$Q=\D U-W$。
+	% 计算功$W$。若方便，可用\eqref{eqn:C_V->U}计算内能变化$\Delta U$，再利用\eqref{eqn:dU=dW+dQ}计算热$Q=\Delta U-W$。
 	\begin{center}
 		\tikzfigure{ideal-gas-processes}
 		\captionof{figure}{理想气体的$p\vs V$图}
@@ -361,12 +359,9 @@
 
 \subsection{Carnot循环}
 
-\newcommand{\hi}{_{\mathrm{hi}}}
-\newcommand{\lo}{_{\mathrm{lo}}}
-
 热机(heat engine)是实现热和功之间转换的一种系统。
 1842年，Carnot通过对热机的总结归纳，指出
-热机必须工作于两个热源之间。工作物质从高温热源$T\hi$吸取热量，在低温热源$T\lo$放出热量，这样才能获得机械功。
+热机必须工作于两个热源之间。工作物质从高温热源$T_\hi$吸取热量，在低温热源$T_\lo$放出热量，这样才能获得机械功。
 
 \begin{example}
 	{理想气体的Carnot循环}{Carnot cycle of ideal gas}
@@ -375,15 +370,15 @@
 	% 可分别代表等容($\d V\equiv 0$)、等压($\d p\equiv 0$)、等温($\d T\equiv 0$)和绝热($\vd Q\equiv 0$)。
 	}
 	\[
-		\text A(V_\text A,T\hi)
+		\text A(V_\text A,T_\hi)
 		\overset{\d T}\longrightarrow 
-		\text B(V_\text B,T\hi)
+		\text B(V_\text B,T_\hi)
 		\overset{\vd Q}\longrightarrow 
-		\text C(V_\text C,T\lo)
+		\text C(V_\text C,T_\lo)
 		\overset{\d T}\longrightarrow 
-		\text D(V_\text D,T\lo)
+		\text D(V_\text D,T_\lo)
 		\overset{\vd Q}\longrightarrow 
-		\text A(V_\text A,T\hi).
+		\text A(V_\text A,T_\hi).
 	\]
 	称为Carnot循环(carnot cycle)，如\figref{fig:Carnot cycle} 所示。\footnote{实线只是示意图，虚线才是正确的形状，单靠坐标伸缩是不可能变成实线那么好看的。}
 	\begin{center}
@@ -393,20 +388,20 @@
 	\end{center}
 	下面分析这个循环的过程
 	\begin{alignat*}{2}
-		\text A\to\text B~&\text{等温膨胀(吸热)：} & Q\hi&=nRT\hi\ln\biggp{\frac{V_\text B}{V_\text A}};\\
-		\text B\to\text C~&\text{绝热膨胀(对外做功)：} & \frac{V_\text C}{V_\text B}&=\biggp{\frac{T\hi}{T\lo}}^c;\\
-		\text C\to\text D~&\text{等温压缩(放热)：} & Q\lo&=nRT\lo\ln\biggp{\frac{V_\text C}{V_\text D}};\\
-		\text D\to\text A~&\text{绝热压缩(外界对气体做功)：} & \frac{V_\text D}{V_\text A}&=\biggp{\frac{T\hi}{T\lo}}^c.
+		\text A\to\text B~&\text{等温膨胀(吸热)：} & Q_\hi&=nRT_\hi\ln\biggp{\frac{V_\text B}{V_\text A}};\\
+		\text B\to\text C~&\text{绝热膨胀(对外做功)：} & \frac{V_\text C}{V_\text B}&=\biggp{\frac{T_\hi}{T_\lo}}^c;\\
+		\text C\to\text D~&\text{等温压缩(放热)：} & Q_\lo&=nRT_\lo\ln\biggp{\frac{V_\text C}{V_\text D}};\\
+		\text D\to\text A~&\text{绝热压缩(外界对气体做功)：} & \frac{V_\text D}{V_\text A}&=\biggp{\frac{T_\hi}{T_\lo}}^c.
 	\end{alignat*}
 	整个循环过程完成后，气体回到原来状态，对外所作的净功为
 	\begin{equation}
-		W=Q\hi-Q\lo=nR(T\hi-T\lo)\ln\biggp{\frac{V_\text B}{V_\text A}}.
+		W=Q_\hi-Q_\lo=nR(T_\hi-T_\lo)\ln\biggp{\frac{V_\text B}{V_\text A}}.
 	\end{equation}
 	热功转化的效率
 	\begin{equation}
-		\eta:=\frac W{Q\hi}=1-\frac{T\lo}{T\hi}<1
+		\eta:=\frac W{Q_\hi}=1-\frac{T_\lo}{T_\hi}<1
 	\end{equation}
-	这是因为热机只把它从高温热源$T\hi$所吸取的热量$Q\hi$的一部分转化为机械功$W$，其余的热量$Q\lo$在低温热源$T\lo$放出去了。
+	这是因为热机只把它从高温热源$T_\hi$所吸取的热量$Q_\hi$的一部分转化为机械功$W$，其余的热量$Q_\lo$在低温热源$T_\lo$放出去了。
 \end{example}
 
 \begin{corollary}
@@ -422,23 +417,23 @@
 \end{corollary}
 
 \begin{proof}
-	考虑Carnot循环，热机从高温热源$T\hi$吸取热量$Q\hi$、向低温热源$T\lo$放出热量$Q\lo$，对外做功$W=Q\hi-Q\lo$。
-	如果Clausius表述不成立，则可以将热量$Q\lo$从$T\lo$传到$T\hi$而不引起其它变化。这相当于热机从单一热源$T\hi$吸取热量$Q\hi-Q\lo$，并将其完全转化为有用功$W$，而不引起其它变化，与Kelvin表述矛盾。
+	考虑Carnot循环，热机从高温热源$T_\hi$吸取热量$Q_\hi$、向低温热源$T_\lo$放出热量$Q_\lo$，对外做功$W=Q_\hi-Q_\lo$。
+	如果Clausius表述不成立，则可以将热量$Q_\lo$从$T_\lo$传到$T_\hi$而不引起其它变化。这相当于热机从单一热源$T_\hi$吸取热量$Q_\hi-Q_\lo$，并将其完全转化为有用功$W$，而不引起其它变化，与Kelvin表述矛盾。
 
-	反之，如果Kelvin表述不成立，则可以从单一热源$T\lo$吸取热量$Q\lo$，并将其完全转化为有用功$W=Q\lo$，而不引起其它变化。将此功完全转化为$T\hi$的热量，就相当于热量从$T\lo$传到$T\hi$而没有引起其他变化，这与Clausius表述矛盾。
+	反之，如果Kelvin表述不成立，则可以从单一热源$T_\lo$吸取热量$Q_\lo$，并将其完全转化为有用功$W=Q_\lo$，而不引起其它变化。将此功完全转化为$T_\hi$的热量，就相当于热量从$T_\lo$传到$T_\hi$而没有引起其他变化，这与Clausius表述矛盾。
 \end{proof}
 
 \begin{theorem}{Carnot定理}{Carnot's Theorem}
 	在相同高、低温热源之间工作的热机的效率
 	\begin{equation}
-		\eta=1-\frac{Q\lo}{Q\hi}\leq1-\frac{T\lo}{T\hi}.
+		\eta=1-\frac{Q_\lo}{Q_\hi}\leq1-\frac{T_\lo}{T_\hi}.
 	\end{equation}
 	取等号当且仅当热机是可逆的。
 \end{theorem}
 
 \begin{proof}
-	假设可逆热机A和热机B工作在各自的循环中，二者均从高温热源$T\hi$吸收热量均为$Q\hi$，对外做功分别为$W,W'$。
-	若$\eta_1<\eta_2$，即$W<W'$，则可将A反向工作，这样两个热机联合的循环相当于从低温热源$T\lo$吸收热量$Q=W'-W$，并将其完全转化为功，而不引起其它变化，这与Kelvin表述矛盾。
+	假设可逆热机A和热机B工作在各自的循环中，二者均从高温热源$T_\hi$吸收热量均为$Q_\hi$，对外做功分别为$W,W'$。
+	若$\eta_1<\eta_2$，即$W<W'$，则可将A反向工作，这样两个热机联合的循环相当于从低温热源$T_\lo$吸收热量$Q=W'-W$，并将其完全转化为功，而不引起其它变化，这与Kelvin表述矛盾。
 	因此$\eta_1\geq\eta_2$。
 \end{proof}
 
@@ -450,7 +445,7 @@
 	{热力学温标}{thermodynamic temperature scale}
 	借助Carnot热机，可通过测量热源吸收/放出的热量的比值来确定温度
 	\[
-		\frac{Q\lo}{Q\hi}=\frac{T\lo}{T\hi}.
+		\frac{Q_\lo}{Q_\hi}=\frac{T_\lo}{T_\hi}.
 	\]
 	钦定水
 	\footnote{这里需要给出水的严格定义，包括H和O的同位素比例。
@@ -460,7 +455,7 @@
 	% 	n_\mathrm{O^{16}}:n_\mathrm{O^{17}}:n_\mathrm{O^{18}}&=1:3.799\times 10^{-4}:2.0052\times 10^{-3}.
 	% \end{align*}
 	}
-	的三相点温度$T_0=\SI{273.16}{\kelvin}$作为参考温度后，便可完全确定其他物质的温度。
+	的三相点温度$T_0=\qty{273.16}{\kelvin}$作为参考温度后，便可完全确定其他物质的温度。
 	这种温标不依赖于具体的工作物质，因此是绝对的，称为热力学温标(thermodynamic temperature scale)，也称Kelvin温标。
 \end{definition}
 
@@ -479,12 +474,12 @@
 \end{theorem}
 
 \begin{proof}
-	考虑一个热机循环，热机从高温热源$T\hi$吸收热量$Q\hi$，向低温热源$T\lo$吸收热量$Q\lo$ (即放出热量$-Q\lo$)。
+	考虑一个热机循环，热机从高温热源$T_\hi$吸收热量$Q_\hi$，向低温热源$T_\lo$吸收热量$Q_\lo$ (即放出热量$-Q_\lo$)。
 	由Carnot定理可知
 	\[
-		\eta=1-\frac{-Q\lo}{Q\hi}\leq1-\frac{T\lo}{T\hi}
+		\eta=1-\frac{-Q_\lo}{Q_\hi}\leq1-\frac{T_\lo}{T_\hi}
 		\implies
-		\frac{Q\hi}{T\hi}+\frac{Q\lo}{T\lo}\leq 0.
+		\frac{Q_\hi}{T_\hi}+\frac{Q_\lo}{T_\lo}\leq 0.
 	\]
 	当且仅当热机可逆时取等号。
 	考虑若干个热机循环叠加成的热力学循环，从热源$T_1,\ldots,T_k$吸收热量$Q_1,\ldots,Q_k$，则
@@ -519,7 +514,7 @@
 
 \begin{theorem}
 	{熵增加原理}{principle of entropy increase}
-	在绝热条件下，系统在可逆过程中$\D S=0$，不可逆过程$\D S>0$，熵不可能减少。
+	在绝热条件下，系统在可逆过程中$\Delta S=0$，不可逆过程$\Delta S>0$，熵不可能减少。
 \end{theorem}
 
 \begin{corollary}
@@ -536,12 +531,12 @@
 
 % 	终态温度$T=(T_1+T_2)/2$，第一杯水的熵变为
 % 	\[
-% 		\D S_1=\int_{T_1}^T\frac{C_p\d T}T=C_p\ln\frac{T_1+T_2}{2T_1},
+% 		\Delta S_1=\int_{T_1}^T\frac{C_p\d T}T=C_p\ln\frac{T_1+T_2}{2T_1},
 % 	\]
-% 	第二杯水的熵变$\D S_2$同理可求，
+% 	第二杯水的熵变$\Delta S_2$同理可求，
 % 	总熵增
 % 	\[
-% 		\D S_1+\D S_2=C_p\ln\frac{(T_1+T_2)^2}{4T_1T_2}\geqslant 0.
+% 		\Delta S_1+\Delta S_2=C_p\ln\frac{(T_1+T_2)^2}{4T_1T_2}\geqslant 0.
 % 	\]
 % 	取等号当且仅当$T_1=T_2$。
 % \end{example}
@@ -559,8 +554,8 @@
 	根据全微分与偏导数的关系，温度和压强可以写成偏导形式：
 	\begin{subequations}
 		\begin{align}
-			T&=\pu[V]US,\\
-			p&=-\pu[S]UV.
+			T&=\pvat{U}{S}{V},\\
+			p&=-\pvat{U}{V}{S}.
 		\end{align}
 	\end{subequations}
 	在熵表象下，考虑$S$的全微分，可由\eqref{eqn:dU=TdS-pdV}直接得出
@@ -570,8 +565,8 @@
 	以及$S$的偏导数
 	\begin{subequations}
 		\begin{align}
-			\pu[V]SU&=\frac1T,\\
-			\pu[U]SV&=\frac pT.
+			\pvat{S}{U}{V}&=\frac1T,\\
+			\pvat{S}{V}{U}&=\frac pT.
 		\end{align}
 	\end{subequations}
 \end{corollary}
@@ -582,9 +577,9 @@
 % \end{theorem}
 
 % \begin{proof}
-% 	固定$V$，对于内能为$2U$的系统，其两个子系统内能$U_\pm=U\pm\D U$。不均匀的子系统熵更低，即
+% 	固定$V$，对于内能为$2U$的系统，其两个子系统内能$U_\pm=U\pm\Delta U$。不均匀的子系统熵更低，即
 % 	\[
-% 		S(U+\D U)+S(U-\D U)<S(2U)=2S(U)
+% 		S(U+\Delta U)+S(U-\Delta U)<S(2U)=2S(U)
 % 		\implies\pv[2]SU<0,
 % 	\]
 % \end{proof}
@@ -650,9 +645,9 @@
 	{理想气体自由膨胀}{}
 	理想气体从$V$自由(绝热)膨胀到$\lambda V$，其熵增为
 	\[
-		\D S=nR\ln\lambda.
+		\Delta S=nR\ln\lambda.
 	\]
-	显然$\D S>0$，然而实际上$Q\equiv 0$。因此自由膨胀是非准静态的，更不可逆。
+	显然$\Delta S>0$，然而实际上$Q\equiv 0$。因此自由膨胀是非准静态的，更不可逆。
 	\tcblower
 	自由膨胀过程是$\text A\to\text C$的等温过程(但这一过程$\vd W=\vd Q=0$，并非准静态过程)，
 	为了求其熵变，可以构造这样一个先$\text A\to\text B$绝热，后$\text B\to\text C$等容的过程
@@ -666,7 +661,7 @@
 	$\text A\to\text B$绝热，$T^cV=\const.$因此$T_\text A^c=\lambda T_\text B^c.$\\[1ex]
 	$\text B\to\text C$等容，$\vd Q=\d U=cnR\d T$，故 
 	\[
-		\D S=\int_\text B^\text C\frac{\vd Q}T=cnR\int_\text B^\text A\frac{\d T}T=nR\ln\lambda.
+		\Delta S=\int_\text B^\text C\frac{\vd Q}T=cnR\int_\text B^\text A\frac{\d T}T=nR\ln\lambda.
 	\]
 	与$\text A\to\text C$等温过程的熵变相同。
 \end{example}
@@ -697,13 +692,13 @@
 	\end{center}
 	将1中所有的气体推到2后，
 	\[
-		\D U=U_2-U_1=-p_2V_2+p_1V_1+0,
+		\Delta U=U_2-U_1=-p_2V_2+p_1V_1+0,
 	\]
 	即
 	\[
 		U_1+p_1V_1=U_2+p_2V_2\implies H_1=H_2.
 	\]
-	因此节流膨胀过程焓变$\D H=0$。
+	因此节流膨胀过程焓变$\Delta H=0$。
 \end{example}
 
 \begin{remark}
@@ -714,7 +709,7 @@
 	{Joule-Thomson效应}{}
 	由\eqref{eqn:XY->XW/YW}和Maxwell关系\eqref{eqn:Maxwell relation G}：
 	\begin{equation}
-		\pu[H]Tp=-\Biggdivision{\pu[T]Hp}{\pu[p]HT}=-\frac1{C_p}\biggb{T\pu[T]Sp+V}=\frac{V(T\alpha-1)}{C_p}.
+		\pvat{T}{p}{H}=-\Biggdivision{\pvat{H}{p}{T}}{\pvat{H}{T}{p}}=-\frac1{C_p}\biggb{T\pvat{S}{p}{T}+V}=\frac{V(T\alpha-1)}{C_p}.
 	\end{equation}
 	当$T\alpha>1$时，高压向低压的节流过程可以降低温度。
 \end{theorem}
@@ -728,7 +723,7 @@
 	{通过van der Waals气体实现降温}{}
 	考虑van der Waals气体，其热膨胀系数
 	\[
-		\alpha=\frac1v\pu[p]vT=\Bigp{\frac{Tv}{v-b}-\frac{2a(v-b)}{Rv^2}}^{-1}
+		\alpha=\frac1v\pvat{v}{T}{p}=\Bigp{\frac{Tv}{v-b}-\frac{2a(v-b)}{Rv^2}}^{-1}
 	\]
 	为了使$\alpha T>1$，应有
 	\[
@@ -749,16 +744,16 @@
 
 1906年，Nernst在研究各种化学反应在低温下的性质时，由于
 \[
-	\frac{\D G-\D H}T=-\D S
-	% \implies\lim_{T\to 0}\frac{\D G}T-\lim_{T\to 0}\frac{\D H}T=-\lim_{T\to 0}(\D S)_T.
+	\frac{\Delta G-\Delta H}T=-\Delta S
+	% \implies\lim_{T\to 0}\frac{\Delta G}T-\lim_{T\to 0}\frac{\Delta H}T=-\lim_{T\to 0}(\Delta S)_T.
 \]
-实验说明：低温下$\D H$相当接近$\D G$，因此可以期待$\D H,\D G$在$T=0$处具有相同的斜率。
+实验说明：低温下$\Delta H$相当接近$\Delta G$，因此可以期待$\Delta H,\Delta G$在$T=0$处具有相同的斜率。
 
 \begin{theorem}
 	{Nernst定理}{Nernst theorem}
-	温度$T\to 0$时，等温过程的熵变$(\D S)_T\to 0$：
+	温度$T\to 0$时，等温过程的熵变$(\Delta S)_T\to 0$：
 	\begin{equation}
-		\lim_{T\to 0}(\D S)_T=0.
+		\lim_{T\to 0}(\Delta S)_T=0.
 	\end{equation}
 \end{theorem}
 

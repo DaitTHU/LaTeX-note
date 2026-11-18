@@ -8,7 +8,7 @@
 	\begin{equation}
 		\E(X):=\int_0^1 x\d\CDF=\begin{cases}
 			\sum\nolimits_{i\in I} x_i\P(X=x_i),&\text{离散}\\[2ex]
-			\int\iti xf(x)\d x,&\text{连续}
+			\intR xf(x)\d x,&\text{连续}
 		\end{cases}
 	\end{equation}
 \end{definition}
@@ -74,7 +74,7 @@
 
 \begin{definition}
 	{众数}{mode}
-	众数(mode)也是一种集中趋势的刻画，方便定义$\arg\max f(x).$
+	众数(mode)也是一种集中趋势的刻画，方便定义$\argmax f(x).$
 \end{definition}
 
 \section{方差}
@@ -134,12 +134,12 @@
 	\begin{equation*}
 		\E\bigb{(X-c)^2}=\E(X^2)-2\E(X)c+c^2=:g(c)
 	\end{equation*}
-	当且仅当$c=\E(X)$时取到$g_{\mathrm{min}}=\E(X^2)-\E^2(X)=\Var(X)$。
+	当且仅当$c=\E(X)$时取到$g_{\min}=\E(X^2)-\E^2(X)=\Var(X)$。
 \end{example}
 \begin{example}{中位数在绝对值误差下的意义}{}
 	$m$为中位数，$\forall c$均有
 	\[
-		\E(|X-c|)\geqslant\E(|X-m|)
+		\E(\abs{X-c})\geqslant\E(\abs{X-m})
 	\]
 	取$=$当且仅当$c=m$。
 \end{example}
@@ -195,14 +195,14 @@
 	\end{equation}
 \end{corollary}
 \begin{example}{多项分布的协方差}{covariance of multinomial distribution}
-	在\exmref{exm:multinomial distribution} 中给过多项分布$(X_1,\ldots,X_n)\sim\Bino(n,p_1,\ldots,p_n)$，显然，其边际分布$X_i\sim\Bino(n,p_i)$，下面给出$X_i,X_j$的协方差
+	在\exmref{exm:multinomial distribution} 中给过多项分布$(X_1,\ldots,X_n)\sim\MultDist(n,p_1,\ldots,p_n)$，显然，其边际分布$X_i\sim\BinDist(n,p_i)$，下面给出$X_i,X_j$的协方差
 	\begin{equation}
 		\Cov(X_i,X_j)=-np_ip_j,\quad i\neq j.
 	\end{equation}
 	得到这个结论的过程见条件期望部分的\exmref{exm:covariance of multinomial distribution 2}。
 	结合$\Var(X_i)=np_i(1-p_i)$，可得方差矩阵
 	\begin{equation}
-		\Cov(X,X)=n(\diag(P)-PP\tp).
+		\Cov(X,X)=n(\diag(P)-PP\transp).
 	\end{equation}
 \end{example}
 \begin{example}{配对问题的期望和方差}{}
@@ -212,7 +212,7 @@
 	\end{equation}
 	我们依然可以通过简单的方法得到其期望和方差。
 	
-	记$X_i\sim\Bino\bigp{\P(A_i)}=\Bino(1/n)$表示第$i$个人是否拿到自己的帽子，从而
+	记$X_i\sim\BernDist\bigp{\P(A_i)}=\BernDist(1/n)$表示第$i$个人是否拿到自己的帽子，从而
 	\[
 		X=X_1+\cdots+X_n,
 	\]
@@ -281,19 +281,19 @@
 \end{corollary}
 
 \begin{example}{二元正态分布的相关系数}{correlation coefficient of 2-D normal distribution}
-	设$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，
+	设$(X_1,X_2)\sim\NormalDist(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，
 	取$\xi_1:=\frac{x_1-\mu_1}{\sigma_1},\,\xi_2:=\frac{x_2-\mu_2}{\sigma_2}$，则相关系数
 	\[
 		\Corr(X_1,X_2)=\frac1{2\pi\sqrt{1-\rho^2}}\iint_{\RR^2}\xi_1\xi_2\exp\biggb{-\frac{(\xi_1-\rho\xi_2)^2}{2(1-\rho^2)}-\frac{\xi_2^2}2}\d\xi_1\nd\xi_2=\rho.
 	\]
 	% 由
 	% \[
-	% 	\int\iti x\e^{-a(x-b)^2+c}\d x=\sqrt{\frac\pi{a}}b\e^c.
+	% 	\intR x\e^{-a(x-b)^2+c}\d x=\sqrt{\frac\pi{a}}b\e^c.
 	% \]
 	% 可得
 	% \begin{align*}
-	% 	\Corr(X,Y)&=\frac1{2\pi\sqrt{1-\rho^2}}\int\iti\eta\sqrt{2\pi(1-\rho^2)}\cdot\rho\eta\e^{-\eta^2/2}\d\eta\\
-	% 	&=\frac\rho{\sqrt{2\pi}}\int\iti\eta^2\e^{-\eta^2/2}\d\eta=\rho.
+	% 	\Corr(X,Y)&=\frac1{2\pi\sqrt{1-\rho^2}}\intR\eta\sqrt{2\pi(1-\rho^2)}\cdot\rho\eta\e^{-\eta^2/2}\d\eta\\
+	% 	&=\frac\rho{\sqrt{2\pi}}\intR\eta^2\e^{-\eta^2/2}\d\eta=\rho.
 	% \end{align*}
 \end{example}
 
@@ -339,18 +339,18 @@
 	\E(X^n)=\MGF_X^{(n)}(0).
 \end{equation}
 \begin{example}{指数分布和正态分布的矩母函数}{MGF of Expo & Norm}
-	若$X\sim\Expo(\lambda)$，则 
+	若$X\sim\ExpDist(\lambda)$，则
 	\[
-		\MGF_X(t)=\int\zti\e^{tx}\lambda\e^{-\lambda x}\d x=\frac\lambda{\lambda-t},\quad t\in(-\lambda,\lambda).
+		\MGF_X(t)=\intRplus\e^{tx}\lambda\e^{-\lambda x}\d x=\frac\lambda{\lambda-t},\quad t\in(-\lambda,\lambda).
 	\]
 	\tcblower
-	若$X\sim\Norm(\mu,\sigma^2)$，则
+	若$X\sim\NormalDist(\mu,\sigma^2)$，则
 	\[
-		\MGF_X(t)=\frac1{\sqrt{2\pi}\sigma}\int\iti\e^{tx}\e^{-(x-\mu)^2/2\sigma^2}\d x=\exp\Bigp{\mu t+\frac12\sigma^2t^2}.
+		\MGF_X(t)=\frac1{\sqrt{2\pi}\sigma}\intR\e^{tx}\e^{-(x-\mu)^2/2\sigma^2}\d x=\exp\Bigp{\mu t+\frac12\sigma^2t^2}.
 	\]
-	特别地，若$X\sim\Norm(0,1)$，则 
+	特别地，若$X\sim\NormalDist(0,1)$，则
 	\[
-		\MGF_X(t)=\e^{-t^2/2}=\sum_{n=0}^\infty\frac{(2n)!}{2^nn!}\frac{t^{2n}}{(2n)!}.
+		\MGF_X(t)=\e^{t^2/2}=\sum_{n=0}^\infty\frac{(2n)!}{2^nn!}\frac{t^{2n}}{(2n)!}.
 	\]
 	故$\E(X^{2k+1})=0,\enspace\E(X^{2k})=(2k-1)!!$
 \end{example}
@@ -382,7 +382,7 @@
 	\fi
 \end{example}
 \begin{example}{同矩不一定同分布}{}
-	对数正态分布$\ln X_1\sim\Norm(0,1)$，则$X_1$的PDF
+	对数正态分布$\ln X_1\sim\NormalDist(0,1)$，则$X_1$的PDF
 	\[
 		f_1(x)=\frac1{\sqrt{2\pi}x}\e^{-\ln^2x/2},\quad x>0
 	\]
@@ -393,7 +393,7 @@
 
 	可以证明，$X_1,X_2$所有的矩均相等
 	\[
-		\E(X_2^n)=\E(X_1^n)+\int\zti x^nf_1(x)\sin(2\pi\ln x)\d x
+		\E(X_2^n)=\E(X_1^n)+\intRplus x^nf_1(x)\sin(2\pi\ln x)\d x
 	\]
 	后面的积分做换元$y:=\ln x-n$可积得结果为0.
 \end{example}
@@ -408,9 +408,9 @@
 	%\prf \MGF_{X+Y}(t)=\E(\e^{tX}\e^{tY})=\E(\e^{tX})\E(\e^{tY})=\MGF_X(t)\MGF_Y(t).\rqed
 \end{theorem}
 \begin{corollary}
-	$n$个独立的正态分布$X_i\sim\Norm(\mu_i,\sigma_i^2)$的和仍然服从正态分布，且
+	$n$个独立的正态分布$X_i\sim\NormalDist(\mu_i,\sigma_i^2)$的和仍然服从正态分布，且
 	\[
-		\sum_{i=1}^nX_i\sim\Norm\biggp{\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2}.
+		\sum_{i=1}^nX_i\sim\NormalDist\biggp{\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2}.
 	\]
 \end{corollary}
 \begin{definition}{联合分布的矩母函数}{}
@@ -438,7 +438,7 @@
 \begin{definition}{特征函数}{characteristic function}
 	定义特征函数(characteristic function, CF)\index{CF, 特征函数}
 	\begin{equation}\label{CF-def}
-		\psi(t):=\E\bigp{\e^{\i tX}}.
+		\CF_X(t):=\E\bigp{\e^{\i tX}}.
 	\end{equation}
 \end{definition}
 与矩母函数不同，特征函数总是存在的。
@@ -446,35 +446,35 @@
 \begin{definition}{条件期望}{conditional expectation}
 	定义条件期望
 	\begin{equation}
-		\E(Y|X\in A):=\begin{cases}
-			\sum\nolimits_{i\in I}y_i\P(Y=y_i|X\in A),&\text{离散}\\
-			\int_\RR yf(y|X\in A)\d y,&\text{连续}
+		\E(Y\mid X\in A):=\begin{cases}
+			\sum\nolimits_{i\in I}y_i\P(Y=y_i\mid X\in A),&\text{离散}\\
+			\int_\RR yf(y\mid X\in A)\d y,&\text{连续}
 		\end{cases}
 	\end{equation}
 	若$\P(X\in A)>0$，条件期望可由下式计算
 	\begin{equation}
-		\E(Y|X\in A)=\frac{\E(Y,X\in A)}{\P(X\in A)}.
+		\E(Y\mid X\in A)=\frac{\E(Y,X\in A)}{\P(X\in A)}.
 	\end{equation}
 \end{definition}
 \begin{remark}
-	$\E(Y|X)$是$X$的函数，是一个新的随机变量（$Y$对$X$的回归函数）。
+	$\E(Y\mid X)$是$X$的函数，是一个新的随机变量（$Y$对$X$的回归函数）。
 \end{remark}
 \begin{example}{二元正态分布的条件期望}{}
-	$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，由\exmref{exm:conditional PDF of 2-D normal distribution}
+	$(X_1,X_2)\sim\NormalDist(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，由\exmref{exm:conditional PDF of 2-D normal distribution}
 	\[
-		\E(X_2|X_1)=\mu_2+\rho\frac{\sigma_2}{\sigma_1}(X_1-\mu_1)^2.
+		\E(X_2\mid X_1)=\mu_2+\rho\frac{\sigma_2}{\sigma_1}(X_1-\mu_1)^2.
 	\]
 \end{example}
 \begin{theorem}{全期望公式}{}
 	可由全概率公式推出
 	\begin{equation}
-		\E(Y)=\E\bigb{\E(Y|X)}.
+		\E(Y)=\E\bigb{\E(Y\mid X)}.
 	\end{equation}
 \end{theorem}
 \begin{theorem}{条件期望的性质}{}
 	\begin{compactenum}
-		\item $\E\bigb{g(X)h(Y)|X}=g(X)\E\bigb{h(Y)|X}$;
-		\item $\E\bigb{\E\bigb{g(X,Y)|X}}=\E\bigb{g(X,Y)}$;
+		\item $\E\bigb{g(X)h(Y)\mid X}=g(X)\E\bigb{h(Y)\mid X}$;
+		\item $\E\bigb{\E\bigb{g(X,Y)\mid X}}=\E\bigb{g(X,Y)}$;
 	\end{compactenum}
 \end{theorem}
 
@@ -482,7 +482,7 @@
 	{均值独立}{mean independence}
 	若$\forall X$
 	\begin{equation}
-		\E(Y|X)=\E(Y),
+		\E(Y\mid X)=\E(Y),
 	\end{equation}
 	则称$Y$均值独立(mean independent)于$X$，
 \end{definition}
@@ -490,22 +490,22 @@
 \begin{corollary}
 	$Y$均值独立于$X\implies X,Y$不相关：
 	\[
-		\E(XY)=\E\bigb{\E(XY|X)}=\E\bigb{X\E(Y|X)}=\E\bigb{X\E(Y)}=\E(X)\E(Y).
+		\E(XY)=\E\bigb{\E(XY\mid X)}=\E\bigb{X\E(Y\mid X)}=\E\bigb{X\E(Y)}=\E(X)\E(Y).
 	\]
 \end{corollary}
 
 \begin{example}{多项分布的协方差}{covariance of multinomial distribution 2}
 	接\exmref{exm:covariance of multinomial distribution}，由全期望公式
 	\[
-		\E(X_iX_j)=\E\bigb{\E(X_iX_j|X_j)}=\E\bigb{X_j\E(X_i|X_j)}.
+		\E(X_iX_j)=\E\bigb{\E(X_iX_j\mid X_j)}=\E\bigb{X_j\E(X_i\mid X_j)}.
 	\]
-	而$\E(X_i|X_j)$可以理解成先从$n$份中抽出$X_j$个$B_j$，剩下变成新的多项分布
+	而$\E(X_i\mid X_j)$可以理解成先从$n$份中抽出$X_j$个$B_j$，剩下变成新的多项分布
 	\[
-		(\ldots,X_i,\ldots)_{i\neq j}\sim\Bino\Bigp{n-X_j,\ldots,\frac{p_i}{1-p_j},\ldots}_{i\neq j}
+		(\ldots,X_i,\ldots)_{i\neq j}\sim\MultDist\Bigp{n-X_j,\ldots,\frac{p_i}{1-p_j},\ldots}_{i\neq j}
 	\]
 	继而
 	\[
-		\E(X_i|X_j)=(n-X_j)\frac{p_i}{1-p_j}.
+		\E(X_i\mid X_j)=(n-X_j)\frac{p_i}{1-p_j}.
 	\]
 	代入全期望公式：
 	\begin{align*}
@@ -521,16 +521,16 @@
 \begin{theorem}{最优预测}{}
 	用$g(X)$估计$Y$的均方误差
 	\begin{equation}
-		\E\bigb{(Y-g(X))^2}\geqslant\E\bigb{(Y-\E(Y|X))^2}.
+		\E\bigb{(Y-g(X))^2}\geqslant\E\bigb{(Y-\E(Y\mid X))^2}.
 	\end{equation}
 \end{theorem}
 这源于\exmref{exm:expectation under square error} 所给出的：
 \[
-	\E\bigb{(Y-g(X))^2|X}\geqslant\E\bigb{(Y-\E(Y|X))^2|X}.
+	\E\bigb{(Y-g(X))^2\mid X}\geqslant\E\bigb{(Y-\E(Y\mid X))^2\mid X}.
 \]
-事实上这也给出了条件期望$\E(Y|X)$的几何意义：$Y$在$X$张成的线性空间上的投影。
+事实上这也给出了条件期望$\E(Y\mid X)$的几何意义：$Y$在$X$张成的线性空间上的投影。
 \begin{example}{误差}{error}
-	$Y$对$X$的回归函数$\hat Y:=\E(Y|X)$，误差$\tilde Y:=Y-\hat Y$，易得
+	$Y$对$X$的回归函数$\hat Y:=\E(Y\mid X)$，误差$\tilde Y:=Y-\hat Y$，易得
 	\[
 		\E(\hat Y)=\E(Y),\quad\E(\tilde Y)=0,
 	\]
@@ -546,32 +546,32 @@
 \begin{definition}{条件方差}{conditional variance}
 	定义条件方差
 	\begin{equation}
-		\Var(Y|X):=\E\bigb{\bigp{X-\E(Y|X)}^2|X}
+		\Var(Y\mid X):=\E\bigb{\bigp{X-\E(Y\mid X)}^2\mid X}
 	\end{equation}
 \end{definition}
 自然
 \begin{equation}
-	\Var(Y|X)=\E(Y^2|X)-\E^2(Y|X).
+	\Var(Y\mid X)=\E(Y^2\mid X)-\E^2(Y\mid X).
 \end{equation}
 \begin{theorem}{全方差公式}{}
 	由\exmref{exm:error}
 	\begin{equation}
-		\Var(Y)=\E\bigb{\Var(Y|X)}+\Var\bigb{\E(Y|X)}.
+		\Var(Y)=\E\bigb{\Var(Y\mid X)}+\Var\bigb{\E(Y\mid X)}.
 	\end{equation}
 \end{theorem}
 \begin{example}{随机变量个随机变量的和}{}
 	随机变量序列$X_1,X_2,\ldots$ iid，$N$是取值为正整数的随机变量，且与$X_i$独立，令$Y=X_1+\cdots+X_N$，则
 	\begin{subequations}
 		\begin{align}
-			\E(Y)&=\E\bigb{\E(Y|N)}=\E\bigb{N\E(X)}=\E(N)\E(X);\\
+			\E(Y)&=\E\bigb{\E(Y\mid N)}=\E\bigb{N\E(X)}=\E(N)\E(X);\\
 			\notag
-			\Var(Y)&=\E\bigb{\Var(Y|N)}+\Var\bigb{\E(Y|N)}\\
+			\Var(Y)&=\E\bigb{\Var(Y\mid N)}+\Var\bigb{\E(Y\mid N)}\\
 			\notag
 			&=\E\bigb{N\Var(X)}+\Var\bigb{N\E(X)}\\
 			&=\Var(X)\E(N)+\E^2(X)\Var(N).
 		\end{align}
 	\end{subequations}
-	特别地，$N\sim\Pois(\lambda)$时，称$Y$为复合Poisson随机变量
+	特别地，$N\sim\PoisDist(\lambda)$时，称$Y$为复合Poisson随机变量
 	\[
 		\Var(Y)=\lambda\bigb{\Var(X)+\E^2(X)}=\lambda\E(X^2).
 	\]

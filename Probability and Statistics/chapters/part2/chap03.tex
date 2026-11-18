@@ -77,13 +77,13 @@
 \]
 检验统计量 
 \begin{equation}
-	F:=\frac{S_A}{S_E}\sim\mathrm F(\nu_A,\nu_E).
+	F:=\frac{S_A}{S_E}\sim\FDist(\nu_A,\nu_E).
 \end{equation}
 当$F>F_\alpha(\nu_A,\nu_E)$时拒绝$H_0$。
 \paragraph{双因素检验}
 设有两个因素$A,B$作用于试验的指标。因素$ A $有$ r $个水平$ A_1, A_2,\ldots, A_r$，因素$ B $有$ s $个水平$ B_1, B_2,\ldots, B_s $。现对因素$ A, B $的所有组合$(A_i, B_j)$都作$t$次试验，称为等重复试验。
 
-设$X_{ijk}\sim\Norm(\mu_{ij},\sigma^2)$，$i, j, k $分别为因素$ A, B $和重复试验的下标。
+设$X_{ijk}\sim\NormalDist(\mu_{ij},\sigma^2)$，$i, j, k $分别为因素$ A, B $和重复试验的下标。
 则
 总平均
 \[
@@ -126,7 +126,7 @@ $A_i,B_j$的效应分别为
 \]
 检验统计量 
 \[
-	F:=\biggdivision{\frac{S_A}{r-1}}{\frac{S_E}{rs(t-1)}}\sim\mathrm F\bigp{r-1,rs(t-1)}.
+	F:=\biggdivision{\frac{S_A}{r-1}}{\frac{S_E}{rs(t-1)}}\sim\FDist\bigp{r-1,rs(t-1)}.
 \]
 
 \section{回归分析}
@@ -139,7 +139,7 @@ $A_i,B_j$的效应分别为
 \]
 最小二乘法所求的是均方误差意义下的最优线性预测
 \[
-	(\alpha,\beta)=\arg\min_{a,b}\E\bigb{(Y-(a+bX))^2}
+	(\alpha,\beta)=\argmin_{a,b}\E\bigb{(Y-(a+bX))^2}
 \]
 实际上就是求二元函数
 \begin{align*}
@@ -170,7 +170,7 @@ $A_i,B_j$的效应分别为
 
 一元线性回归模型
 \[
-	y=a+bx+\epsilon,\enspace\epsilon\sim\Norm(0,\sigma^2).
+	y=a+bx+\epsilon,\enspace\epsilon\sim\NormalDist(0,\sigma^2).
 \]
 因随机因素引起的误差称为残差平方和
 \[
@@ -178,7 +178,7 @@ $A_i,B_j$的效应分别为
 \]
 则
 \[
-	\frac{Q_e}{\sigma^2}\sim\chi^2(n-2)\implies\hat\sigma^2=\frac{Q_e}{n-2},
+	\frac{Q_e}{\sigma^2}\sim\ChiSqDist(n-2)\implies\hat\sigma^2=\frac{Q_e}{n-2},
 \]
 检验假设 
 \[
@@ -186,15 +186,15 @@ $A_i,B_j$的效应分别为
 \]
 $\hat b$满足 
 \[
-	\hat b\sim\Norm\biggp{b,\frac{\sigma^2}{L_{xx}}},\quad L_{xx}:=\sum_{i=1}^n(x_i-\avg x)^2.
+	\hat b\sim\NormalDist\biggp{b,\frac{\sigma^2}{L_{xx}}},\quad L_{xx}:=\sum_{i=1}^n(x_i-\avg x)^2.
 \]
 如果原假设成立，
 \[
-	\frac{\hat b\sqrt{L_{xx}}}{\sigma}\sim\Norm(0,1),\quad\frac{Q_e}{\sigma^2}\sim\chi^2(n-2).
+	\frac{\hat b\sqrt{L_{xx}}}{\sigma}\sim\NormalDist(0,1),\quad\frac{Q_e}{\sigma^2}\sim\ChiSqDist(n-2).
 \]
 检验统计量 
 \begin{equation}
-	t:=\hat b\sqrt{\frac{(n-2)L_{xx}}{Q_e}}\sim\mathrm t(n-2).
+	t:=\hat b\sqrt{\frac{(n-2)L_{xx}}{Q_e}}\sim\TDist(n-2).
 \end{equation}
 拒绝域$\abs t\geqslant t_{\alpha/2}(n-2).$
 \paragraph{线性化回归}
@@ -202,5 +202,5 @@ $\hat b$满足
 \paragraph{多线性回归}
 随机变量$ Y $往往与多个变量$ x1, x2, \ldots , xp $有关。对自变量$ x1, x2, \ldots, xp $的一组确定的值，$Y $有它的分布
 \[
-	Y=b_0+\sum_{i=1}^pb_ix_i+\epsilon,\enspace\epsilon\sim\Norm(0,\sigma^2).
+	Y=b_0+\sum_{i=1}^pb_ix_i+\epsilon,\enspace\epsilon\sim\NormalDist(0,\sigma^2).
 \]

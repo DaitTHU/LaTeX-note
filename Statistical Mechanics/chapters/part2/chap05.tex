@@ -1,6 +1,3 @@
-\newcommand*{\df}{\mathrm d}
-\newcommand*{\cll}{\mathrm c}
-
 \chapter{非平衡态统计理论初步}
 
 平衡态性质及其统计方法存在大量非平衡态和不可逆过程。本章主要讨论稀薄气体的非平衡性质分子运动论方法。
@@ -12,7 +9,7 @@
 \[
 	\Gamma(\bm r,t)=\int_{v_x>0}f(\bm r,\bm v,t)v_x\d\bm v.
 \]
-这里$x$轴指向器壁，$f$按$\int f\d\bm v=n$归一化。若为平衡态，则满足Maxwell分布$\Gamma=n\avg v/4$。
+这里$x$轴指向器壁，$f$按$\int f\d\bm v=n$归一化。若为平衡态，则满足Maxwell分布$\Gamma=n\ave v/4$。
 
 采用弹性刚球模型（无摩擦，无形变，弹性碰撞）。对于稀薄气体，只考虑两体碰撞，对于两类不同分子间碰撞：单位时间内，平均一个分子1与分子2的碰撞次数$\theta_{12}$，称碰撞频率。
 
@@ -84,7 +81,7 @@
 
 因此$\p f/\p t$可看成两部分贡献：漂移项(drift)和碰撞项(collision)
 \begin{align}
-	\pv ft=\Bigp{\pv ft}_\df+\Bigp{\pv ft}_\cll.
+	\pv ft=\Bigp{\pv ft}_\mathrm{d}+\Bigp{\pv ft}_\mathrm{c}.
 \end{align}
 漂移项代表运动使$\bm r$变化，外场使$\bm v$变化；碰撞项代表碰撞使$\bm v$变化。
 \paragraph{漂移项}首先考虑位置变化：$\d t$内，由$x$处垂直$x$轴的平面进入，和由$x+\d x$处垂直$x$轴的平面离开体积元的粒子数所产生的净增加粒子数
@@ -93,16 +90,16 @@
 \]
 计所有分量
 \[
-	-\bm v\cdot\nabla_{\bm r}f(\bm r,\bm v,t)\d\bm r\nd\bm v\nd t.
+	-\bm v\cdot\grad_{\bm r}f(\bm r,\bm v,t)\d\bm r\nd\bm v\nd t.
 \]
 
 类似的，$x$方向速度变化所产生的净增加粒子数
 \[
-	-\pp{v_x}(a_xf)\d\bm r\nd\bm v\nd t\implies-\nabla_{\bm v}(\bm af)\d\bm r\nd\bm v\nd t.
+	-\pp{v_x}(a_xf)\d\bm r\nd\bm v\nd t\implies-\nabla_{\bm v}\cdot(\bm a f)\d\bm r\nd\bm v\nd t.
 \]
 假设作用力与速度$\bm v$无关，则$\bm a$项可提出来，继而
 \begin{align}
-	\Bigp{\pv ft}_\df=-\bm v\cdot\nabla_{\bm r}f-\bm a\cdot\nabla_{\bm v}f.
+	\Bigp{\pv ft}_\mathrm{d}=-\bm v\cdot\grad_{\bm r}f-\bm a\cdot\grad_{\bm v}f.
 \end{align}
 \paragraph{碰撞项}$\d\bm r\nd\bm v$中分子与别的分子碰撞后离开体积元，称原碰撞，别的分子碰后进入该体积元，称逆碰撞。
 
@@ -116,11 +113,11 @@
 \]
 积分之
 \begin{align}
-	\Bigp{\pv ft}_\cll=\iint(f'\!f_1'-f\!f_1)\Lambda\d\Omega\nd\bm v_1.\quad\theta\in[0,\pi/2].
+	\Bigp{\pv ft}_\mathrm{c}=\iint(f'\!f_1'-f\!f_1)\Lambda\d\Omega\nd\bm v_1.\quad\theta\in[0,\pi/2].
 \end{align}
 得到Boltzmann输运方程
 \begin{align}
-	\pv ft+(\bm v\cdot\nabla_{\bm r}+\bm a\cdot\nabla_{\bm v})f=\iint(f'\!f_1'-f\!f_1)\Lambda\d\Omega\nd\bm v_1.
+	\pv ft+(\bm v\cdot\grad_{\bm r}+\bm a\cdot\grad_{\bm v})f=\iint(f'\!f_1'-f\!f_1)\Lambda\d\Omega\nd\bm v_1.
 \end{align}
 方程左边的项即$\d f/\nd t$，这是一个非线性积分-微分方程，一般难求解。
 
@@ -143,8 +140,8 @@
 	\end{align*}
 	漂移项贡献为0
 	\begin{align*}
-		&-\int(1+\ln f)(\bm v\cdot\nabla_{\bm r}f+\bm a\cdot\nabla_{\bm v}f)\d\bm r\nd\bm v\\
-		=&-\int\bm v\cdot\nabla_{\bm r}(f\ln f)+\nabla_{\bm v}\cdot(\bm af\ln f)\d\bm r\nd\bm v\tag{Gauss}\\
+		&-\int(1+\ln f)(\bm v\cdot\grad_{\bm r}f+\bm a\cdot\grad_{\bm v}f)\d\bm r\nd\bm v\\
+		=&-\int\bm v\cdot\grad_{\bm r}(f\ln f)+\nabla_{\bm v}\cdot(\bm a f\ln f)\d\bm r\nd\bm v\tag{Gauss}\\
 		=&-\int\oint \bm v f\ln f\cdot\d\bm S\nd\bm v-\int\oint\bm af\ln f\cdot\d\bm S_{\bm v}\nd\bm r=0.
 	\end{align*}
 	碰撞项贡献
@@ -181,7 +178,7 @@
 	\end{compactitem}
 	\item $H$定理具有统计特征，对统计性的$f$再取了一次平均：
 	\[
-		H=N\avg{\ln f}.
+		H=N\ave{\ln f}.
 	\]
 	这里平均以$f/N$为权重。$f$是统计分布而非单条微观轨道；在通常的光滑解假设下，$H(t)$连续可微，不能把单次碰撞的离散性直接赋予$H(t)$。
 	\item 微观可逆性与宏观不可逆性：当Hamilton量在动量反号下不变时，微观方程具有时间反演对称性。Boltzmann方程还使用了碰撞前的分子混沌假设；把精确微观轨道反演后，通常会产生不满足这一假设的入射关联。因此$H$定理的单调性不能直接推广为任意有限系统微观轨道的逐时性质。

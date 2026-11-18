@@ -1,10 +1,12 @@
 \documentclass[tikz,border=3pt]{standalone}
-\usepackage{amsmath,bm,physics,siunitx}
+\usepackage{siunitx}
 \usepackage[copies]{contour} % XeLaTeX-compatible text outlines
 \usepackage{relsize,etoolbox,pgfplots}
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{3d,angles,arrows,arrows.meta,bending,calc,decorations.markings,
   decorations.pathmorphing,quotes}
+\input{../../mathdef.tex}
+
 \DeclareMathOperator{\sn}{sn}
 \DeclareMathOperator{\cn}{cn}
 \DeclareMathOperator{\dn}{dn}
@@ -61,7 +63,6 @@
 %   https://www.researchgate.net/publication/262746594_Exact_solution_for_the_nonlinear_pendulum
 %   https://tex.stackexchange.com/questions/545590/phase-portrait-of-van-der-pol-oscillator-with-pgfplots
 %   http://matlab.cheme.cmu.edu/2011/08/09/phase-portraits-of-a-system-of-odes/
-\sisetup{detect-all} % to allow \pi in \SI
 \tikzset{>=latex} % for LaTeX arrow head
 \contourlength{1.2pt}
 
@@ -91,31 +92,31 @@
 
 % PENDULUM
 \def\L{2.8}  % string length
-\def\ang{28} % angle string
+\def\diagramAngle{28} % angle string
 \def\R{0.25} % ball radius
 \def\F{1.0}  % force magnitude
 \begin{tikzpicture}
   \message{^^JPendulum}
-  \coordinate (M) at (\ang-90:\L);
+  \coordinate (M) at (\diagramAngle-90:\L);
   \coordinate (M') at (0,-\L);
   \coordinate (O) at (0,0);
   \coordinate (B) at (0,-\L-2.2*\R);
-  \coordinate (FT) at ($(M)+(90+\ang:{\F*cos(\ang)+\R})$);
+  \coordinate (FT) at ($(M)+(90+\diagramAngle:{\F*cos(\diagramAngle)+\R})$);
   \coordinate (FG) at ($(M)+(-90:{\F+\R})$);
-  \coordinate (FGx) at ($(M)+(-90+\ang:{0.55*\F+\R})$);
-  \coordinate (MA) at ($(M)+(180+\ang:{\F*sin(\ang)+\R})$);
+  \coordinate (FGx) at ($(M)+(-90+\diagramAngle:{0.55*\F+\R})$);
+  \coordinate (MA) at ($(M)+(180+\diagramAngle:{\F*sin(\diagramAngle)+\R})$);
   %\draw[faded mass] (M') circle(\R);
-  \draw[<->] (M)++(\ang-32:0.2*\L) node[below right=-1,scale=0.9] {$x$}
-    --++ (\ang:0.17*\L) --++ (90+\ang:0.17*\L) node[above right=-1,scale=0.9] {$y$};
+  \draw[<->] (M)++(\diagramAngle-32:0.2*\L) node[below right=-1,scale=0.9] {$x$}
+    --++ (\diagramAngle:0.17*\L) --++ (90+\diagramAngle:0.17*\L) node[above right=-1,scale=0.9] {$y$};
   \draw[dashed] (O) -- (B);
   %\draw[dashed,myred!60!black] (MA) -- (FG);
   \draw[dashed,myred!60!black] (M) -- (FGx);
-  \draw[dashed] (-90+\ang+10:\L) arc(-90+\ang+10:-110:\L) (B);
+  \draw[dashed] (-90+\diagramAngle+10:\L) arc(-90+\diagramAngle+10:-110:\L) (B);
   \rope{(O) -- (M)} \path (O) -- (M) node[midway,above right=-1] {$L$};
   \fill[black] (O) circle(0.04);
-  \draw[force] (M) -- (FT) node[midway,left=0] {$\vb{T}$};
-  \draw[force] (M) -- (FG) node[right=0] {$m\vb{g}$};
-  \draw[force,acol] (M) -- (MA) node[right=2,below=0] {$m\vb{a}$}; %{\contour{white}{$m\vb{a}$}};
+  \draw[force] (M) -- (FT) node[midway,left=0] {$\bm{T}$};
+  \draw[force] (M) -- (FG) node[right=0] {$m\bm{g}$};
+  \draw[force,acol] (M) -- (MA) node[right=2,below=0] {$m\bm{a}$}; %{\contour{white}{$m\bm{a}$}};
   \draw[mass] (M) circle(\R) node {$m$};
   \draw pic[myarr,"$\theta$",xcol,draw=xcol,angle radius=22,angle eccentricity=1.30] {angle=B--O--M}; %_\text{max}
   \draw pic[myarr,"$\theta$",xcol,draw=xcol,angle radius=14,angle eccentricity=1.45] {angle=FG--M--FGx};
@@ -127,15 +128,15 @@
   \message{^^JPendulum forces}
   \def\F{1.4}  % force magnitude
   \coordinate (O) at (0,0);
-  \coordinate (FT) at (90+\ang:{\F*cos(\ang)});
+  \coordinate (FT) at (90+\diagramAngle:{\F*cos(\diagramAngle)});
   \coordinate (FG) at (-90:\F);
-  \coordinate (FGx) at (-90+\ang:{0.7*\F});
-  \coordinate (MA) at (180+\ang:{\F*sin(\ang)});
+  \coordinate (FGx) at (-90+\diagramAngle:{0.7*\F});
+  \coordinate (MA) at (180+\diagramAngle:{\F*sin(\diagramAngle)});
   \draw[dashed,myred!60!black] (O) -- (FGx);
   \draw[dashed,myred!60!black] (MA) -- (FG);
-  \draw[force] (O) -- (FT) node[midway,above right=-2] {$\vb{T}$};
-  \draw[force] (O) -- (FG) node[right=0] {$m\vb{g}$};
-  \draw[force,acol] (O) -- (MA) node[left=0] {$m\vb{a}$};
+  \draw[force] (O) -- (FT) node[midway,above right=-2] {$\bm{T}$};
+  \draw[force] (O) -- (FG) node[right=0] {$m\bm{g}$};
+  \draw[force,acol] (O) -- (MA) node[left=0] {$m\bm{a}$};
   \draw pic[myarr,"$\theta$",xcol,draw=xcol,angle radius=14,angle eccentricity=1.45] {angle=FG--O--FGx};
     \label{pendulum-acceleration}
 \end{tikzpicture}
@@ -145,15 +146,15 @@
   \message{^^JPendulum forces}
   \def\F{1.4}  % force magnitude
   \coordinate (O) at (0,0);
-  \coordinate (FT) at (90+\ang:{\F*cos(\ang)});
+  \coordinate (FT) at (90+\diagramAngle:{\F*cos(\diagramAngle)});
   \coordinate (FG) at (-90:\F);
-  \coordinate (FGx) at (-90+\ang:{\F*cos(\ang)});
-  \coordinate (FGy) at (180+\ang:{\F*sin(\ang)});
+  \coordinate (FGx) at (-90+\diagramAngle:{\F*cos(\diagramAngle)});
+  \coordinate (FGy) at (180+\diagramAngle:{\F*sin(\diagramAngle)});
   \draw[dashed,myred!60!black] (FGy) -- (FG); %-- (FGx);
-  \draw[force] (O) -- (FT) node[midway,above right=-2] {$\vb{T}$};
+  \draw[force] (O) -- (FT) node[midway,above right=-2] {$\bm{T}$};
   \draw[Fproj] (O) -- (FGy) node[pos=0.4,above left=-3,scale=0.86] {$mg\sin\theta$};
   \draw[Fproj] (O) -- (FGx) node[pos=0.5,above right=-3,scale=0.86] {$mg\cos\theta$};
-  \draw[force] (O) -- (FG) node[right=0] {$m\vb{g}$};
+  \draw[force] (O) -- (FG) node[right=0] {$m\bm{g}$};
   \draw pic[myarr,"$\theta$",xcol,draw=xcol,angle radius=14,angle eccentricity=1.45] {angle=FG--O--FGx};
     \label{pendulum-forces}
 \end{tikzpicture}
@@ -164,7 +165,7 @@
 %  \coordinate (O) at (0,0);
 %  \rope{(O) -- (M)} \path (O) -- (M) node[midway,above right=-2] {$L$};
 %  \fill[black] (O) circle(0.04);
-%  \draw[velocity] (M)++(-\R,0) --++ (-2.7*\R,0) node[above=0] {$\vb{v}$};
+%  \draw[velocity] (M)++(-\R,0) --++ (-2.7*\R,0) node[above=0] {$\bm{v}$};
 %  \draw[mass] (M) circle(\R) node {$m$};
 %\end{tikzpicture}
 
@@ -172,30 +173,30 @@
 \begin{tikzpicture}
   \message{^^JPhysical pendulum}
   \def\L{2.0}  % string length
-  \def\ang{28} % angle string
+  \def\diagramAngle{28} % angle string
   \def\R{0.25} % ball radius
   \def\F{1.3}  % force magnitude
-  \coordinate (M) at (\ang-90:\L);
-  \coordinate (R) at (\ang-90:1.1*\L);
+  \coordinate (M) at (\diagramAngle-90:\L);
+  \coordinate (R) at (\diagramAngle-90:1.1*\L);
   \coordinate (M') at (0,-\L);
   \coordinate (O) at (0,0);
   \coordinate (B) at (0,-\L-2.5*\R);
   \coordinate (FT) at (90:\F);
   \coordinate (FG) at ($(M)+(-90:\F)$);
-  \coordinate (FGx) at ($(M)+(-90+\ang:{0.55*\F+\R})$);
-  \coordinate (MA) at ($(M)+(180+\ang:{\F*sin(\ang)+\R})$);
+  \coordinate (FGx) at ($(M)+(-90+\diagramAngle:{0.55*\F+\R})$);
+  \coordinate (MA) at ($(M)+(180+\diagramAngle:{\F*sin(\diagramAngle)+\R})$);
   \draw[mass]
     (180:0.3*\L) to[out=90,in=180] (80:0.36*\L) to[out=0,in=90] (0:0.3*\L) to[out=-90,in=90]
     ($(R)+(0:0.7*\L)$) to[out=-90,in=0] ($(R)+(-90:0.4*\L)$) to[out=180,in=-90] ($(R)+(-180:0.6*\L)$) to[out=90,in=-90] cycle; %node {$m$};
   \draw[dashed] (O) -- (B);
   \draw[dashed] (O) -- (M);
   %\draw[dashed,myred!60!black] (MA) -- (FG);
-  \draw[dashed] (-90+\ang+10:\L) arc(-90+\ang+10:-110:\L) (B);
+  \draw[dashed] (-90+\diagramAngle+10:\L) arc(-90+\diagramAngle+10:-110:\L) (B);
   \fill[black] (O) circle(0.04);
   \draw[CM] (M) circle(0.09);
-  \draw[force] (O) -- (FT) node[below right=0] {$\vb{F}_\mathrm{N}$};
-  \draw[force] (M) -- (FG) node[right=0] {$M\vb{g}$};
-%  \draw[force,acol] (M) -- (MA) node[right=2,below=0] {$m\vb{a}$}; %{\contour{white}{$m\vb{a}$}};
+  \draw[force] (O) -- (FT) node[below right=0] {$\bm{F}_\mathrm{N}$};
+  \draw[force] (M) -- (FG) node[right=0] {$M\bm{g}$};
+%  \draw[force,acol] (M) -- (MA) node[right=2,below=0] {$m\bm{a}$}; %{\contour{white}{$m\bm{a}$}};
 %  \draw pic[myarr,"$\theta$",xcol,draw=xcol,angle radius=22,angle eccentricity=1.30] {angle=B--O--M}; %_\text{max}
 %  \draw pic[myarr,"$\theta$",xcol,draw=xcol,angle radius=14,angle eccentricity=1.45] {angle=FG--M--FGx};
     \label{physical-pendulum}
@@ -234,9 +235,9 @@
 %  \draw[->,thick] (-0.2,0) -- (\xmax+0.05,0) node[right=-1] {$t$ [s]};
 %  \draw[mydarkblue!30,dashed]
 %    (0, pi*\ys) --++ (0.90*\xmax,0)
-%    node[right=1,scale=0.8] {$ \pi\,\si{rad}= \SI{180}{\degree}$}
+%    node[right=1,scale=0.8] {$ \pi\,\unit{rad}= \ang{180}$}
 %    (0,-pi*\ys) --++ (0.84*\xmax,0)
-%    node[right=1,scale=0.8] {$-\pi\,\si{rad}=-\SI{180}{\degree}$};
+%    node[right=1,scale=0.8] {$-\pi\,\unit{rad}=-\ang{180}$};
 %
 %  % PLOT REAL PENDULUM
 %  \begin{axis}[
@@ -258,7 +259,7 @@
 %    plot(\x,{\A*cos(360/\Ta*\x)});
 %
 %  % TICKS
-%  \tick{0, \A}{0} node[above=1,left=-1,scale=0.9,mydarkblue] {3.1}; %\SI{3.1}{\degree}
+%  \tick{0, \A}{0} node[above=1,left=-1,scale=0.9,mydarkblue] {3.1}; %\ang{3.1}
 %  \tick{0, \B}{0} node[below=0.5,left=-1,scale=0.9,mydarkred] {2.4};
 %  \tick{0, \C}{0} node[below=0.5,left=-1,scale=0.9,mydarkgreen] {0.6};
 %  \tick{0,-\A}{0} node[left=-1,scale=0.9,mydarkblue] {$-3.1$};
@@ -285,8 +286,8 @@
 %  \draw[->,thick] (0,-\ymax) -- (0,\ymax+0.2) node[above=-3] {$\dot{\theta}$ [rad/s]};
 %  \draw[->,thick] (-0.2,0) -- (\xmax+0.05,0) node[right=-1] {$t$ [s]};
 %  \draw[mydarkblue!30,dashed]
-%    (0, \wmax) --++ (0.9*\xmax,0) %node[right=1,scale=0.8] {$ \SI{\pi}{rad}= \SI{180}{\degree}$}
-%    (0,-\wmax) --++ (0.9*\xmax,0); %node[right=1,scale=0.8] {$-\SI{\pi}{rad}=-\SI{180}{\degree}$};
+%    (0, \wmax) --++ (0.9*\xmax,0) %node[right=1,scale=0.8] {$ \pi\,\unit{rad}= \ang{180}$}
+%    (0,-\wmax) --++ (0.9*\xmax,0); %node[right=1,scale=0.8] {$-\pi\,\unit{rad}=-\ang{180}$};
 %
 %  % PLOT REAL PENDULUM
 %  \begin{axis}[
@@ -330,8 +331,8 @@
 %  \draw[->,thick] (0,-\ymax) -- (0,\ymax+0.2) node[above=-3] {$\theta$ [rad]};
 %  \draw[->,thick] (-0.2,0) -- (\xmax+0.05,0) node[right=-1] {$t$ [s]};
 %  \draw[mydarkblue!30,dashed]
-%    (0, pi*\ys) --++ (0.98*\xmax,0) node[right=1,scale=0.8] {$ \pi\,\si{rad}= \SI{180}{\degree}$}
-%    (0,-pi*\ys) --++ (0.90*\xmax,0) node[right=1,scale=0.8] {$-\pi\,\si{rad}=-\SI{180}{\degree}$};
+%    (0, pi*\ys) --++ (0.98*\xmax,0) node[right=1,scale=0.8] {$ \pi\,\unit{rad}= \ang{180}$}
+%    (0,-pi*\ys) --++ (0.90*\xmax,0) node[right=1,scale=0.8] {$-\pi\,\unit{rad}=-\ang{180}$};
 %
 %  % PLOT REAL PENDULUM
 %  \begin{axis}[
@@ -379,8 +380,8 @@
 %  \draw[->,thick] (0,-\ymax) -- (0,\ymax+0.2) node[above=-3] {$\dot{\theta}$ [rad/s]};
 %  \draw[->,thick] (-0.2,0) -- (\xmax+0.05,0) node[right=-1] {$t$ [s]};
 %  \draw[mydarkblue!30,dashed]
-%    (0, \wmax) --++ (0.9*\xmax,0) %node[right=1,scale=0.8] {$ \SI{\pi}{rad}= \SI{180}{\degree}$}
-%    (0,-\wmax) --++ (0.9*\xmax,0); %node[right=1,scale=0.8] {$-\SI{\pi}{rad}=-\SI{180}{\degree}$};
+%    (0, \wmax) --++ (0.9*\xmax,0) %node[right=1,scale=0.8] {$ \pi\,\unit{rad}= \ang{180}$}
+%    (0,-\wmax) --++ (0.9*\xmax,0); %node[right=1,scale=0.8] {$-\pi\,\unit{rad}=-\ang{180}$};
 %
 %  % PLOT REAL PENDULUM
 %  \begin{axis}[
@@ -567,7 +568,7 @@
     \begin{minipage}{9.8cm}
       The differential equation for a simple pendulum is
       \begin{equation*}
-        \dv{^2\theta}{t^2} + \omega_0^2\sin\theta = 0.
+        \dv[2]{\theta}{t} + \omega_0^2\sin\theta = 0.
       \end{equation*}
       For the initial conditions
       \begin{equation*}
@@ -602,11 +603,11 @@
       %\end{equation*}
       The maximum angular velocity is
       \begin{equation*}
-        \Omega_\mathrm{max} = \dv{\theta}{t}\Bigr\rvert_{t=T/2} = 2k\omega_0.
+        \Omega_{\max} = \dv{\theta}{t}\Bigr\rvert_{t=T/2} = 2k\omega_0.
       \end{equation*}
       Therefore, the total energy is
       \begin{equation*}
-        E = \frac{mg^2\Omega_\mathrm{max}^2}{2\omega_0^4}
+        E = \frac{mg^2\Omega_{\max}^2}{2\omega_0^4}
           = 2\frac{mg^2}{\omega_0^2}\sin^2\frac{\theta_0}{2}.
       \end{equation*}
       with kinetic and potential energy
@@ -628,7 +629,7 @@
     \begin{minipage}{9.8cm}
       The differential equation for a simple pendulum is
       \begin{equation*}
-        \dv{^2\theta}{t^2} + \omega_0^2\sin\theta = 0.
+        \dv[2]{\theta}{t} + \omega_0^2\sin\theta = 0.
       \end{equation*}
       For the initial conditions
       \begin{equation*}
@@ -663,10 +664,10 @@
       \begin{equation*}
         \dv{\theta}{t} = 2\Omega_0\dn\myarg,
       \end{equation*}
-      The maximum angular velocity $\Omega_\mathrm{max}=\Omega_0$,
+      The maximum angular velocity $\Omega_{\max}=\Omega_0$,
       and the minimum is
       \begin{equation*}
-        \Omega_\mathrm{min} = 2\omega_0\sqrt{k^2-1}.
+        \Omega_{\min} = 2\omega_0\sqrt{k^2-1}.
       \end{equation*}
     \end{minipage}
   };
@@ -679,7 +680,6 @@
 % ref: https://tikz.net/complex/
 % Author: Izaak Neutelings (January 2021)
 
-\renewcommand{\i}{{\mathrm{i}}}
 
 %\usetikzlibrary{intersections}
 %\usetikzlibrary{decorations.markings}
@@ -710,21 +710,21 @@
   \def\xmax{2.0}
   \def\ymax{1.6}
   \def\R{1.9}
-  \def\ang{35}
+  \def\diagramAngle{35}
   \coordinate (O) at (0,0);
-  \coordinate (R) at (\ang:\R);
-  \coordinate (-R) at (-\ang:\R);
-  \coordinate (X) at ({\R*cos(\ang)},0);
-  \coordinate (Y) at (0,{\R*sin(\ang)});
-  \coordinate (-Y) at (0,{-\R*sin(\ang)});
+  \coordinate (R) at (\diagramAngle:\R);
+  \coordinate (-R) at (-\diagramAngle:\R);
+  \coordinate (X) at ({\R*cos(\diagramAngle)},0);
+  \coordinate (Y) at (0,{\R*sin(\diagramAngle)});
+  \coordinate (-Y) at (0,{-\R*sin(\diagramAngle)});
   \node[fill=mydarkblue,circle,inner sep=0.8] (R') at (R) {};
   \node[fill=mydarkred,circle,inner sep=0.8] (-R') at (-R) {};
-  \node[mydarkblue,above right=-2] at (R') {$z=x+iy=re^{\i\theta}$};
-  \node[mydarkred,below right=-1] at (-R') {$\overline{z}=x-iy=re^{-\i\theta}$};
+  \node[mydarkblue,above right=-2] at (R') {$z=x+\i y=r\e^{\i\theta}$};
+  \node[mydarkred,below right=-1] at (-R') {$\overline{z}=x-\i y=r\e^{-\i\theta}$};
   \draw[dashed,mydarkblue]
-    (Y) -- (R') --++ (0,{0.1-\R*sin(\ang)});
+    (Y) -- (R') --++ (0,{0.1-\R*sin(\diagramAngle)});
   \draw[dashed,mydarkred]
-    (-Y) -- (-R') --++ (0,{\R*sin(\ang)-0.45});
+    (-Y) -- (-R') --++ (0,{\R*sin(\diagramAngle)-0.45});
   \draw[->,line width=0.9] (-0.65*\xmax,0) -- (\xmax+0.05,0) node[right] {Re};
   \draw[->,line width=0.9] (0,-\ymax) -- (0,\ymax+0.05) node[left] {Im};
   \draw[vector] (O) -- (R') node[pos=0.55,above left=-2] {$r$};
@@ -776,16 +776,16 @@
   \def\xmax{2.2}
   \def\ymax{2.2}
   \def\R{1.8}
-  \def\ang{35}
+  \def\diagramAngle{35}
   \coordinate (O) at (0,0);
-  \coordinate (R) at (\ang:\R);
-  \coordinate (X) at ({\R*cos(\ang)},0);
-  \coordinate (Y) at (0,{\R*sin(\ang)});
+  \coordinate (R) at (\diagramAngle:\R);
+  \coordinate (X) at ({\R*cos(\diagramAngle)},0);
+  \coordinate (Y) at (0,{\R*sin(\diagramAngle)});
   \draw[xline] (O) circle (\R); %0.995*\R
   \node[fill=myred,circle,inner sep=1] (R') at (R) {};
-  \node[mydarkblue,above right=0] at (R') {$z(t)=Ae^{\i\omega t}$};
+  \node[mydarkblue,above right=0] at (R') {$z(t)=A\e^{\i\omega t}$};
   \draw[dashed,mydarkblue]
-    (Y) -- (R') --++ (0,{0.1-\R*sin(\ang)});
+    (Y) -- (R') --++ (0,{0.1-\R*sin(\diagramAngle)});
   \draw[->,line width=0.9] (-\xmax,0) -- (\xmax+0.05,0) node[right] {Re};
   \draw[->,line width=0.9] (0,-\ymax) -- (0,\ymax+0.05) node[left] {Im};
   \draw[vector] (O) -- (R') node[pos=0.55,above left=-2] {$A$};
@@ -813,10 +813,10 @@
   \def\A{(0.70*\ymax)}   % amplitude
   \def\T{(0.335*\xmax)}  % period
   \def\w{\zmax/11.2}     % spacing components
-  \def\ang{47}           % angle
-  \def\s{\ang/360*\T}    % time component
-  \def\x{\A*cos(\ang)}   % real component
-  \def\y{\A*sin(\ang)}   % imaginary component
+  \def\diagramAngle{47}           % angle
+  \def\s{\diagramAngle/360*\T}    % time component
+  \def\x{\A*cos(\diagramAngle)}   % real component
+  \def\y{\A*sin(\diagramAngle)}   % imaginary component
 
   % COMPLEX PLANE
   \begin{scope}[shift={(-1.6*\zmax,0,0)}]
@@ -828,9 +828,9 @@
       node[right=1,below=0,yzp] {Re} coordinate (X);
     %\node[scale=1,yzp] at (0,-\ymax,0) {Complex plane};
     \draw[xline,yzp] (0,0) circle(0.991*\A) coordinate (O);
-    \fill[myred,yzp] (\ang:{\A}) circle(0.07) coordinate(P);
-    \node[mydarkblue,above=3,right=-5,yzp,scale=0.8] at (P) {$z(t)=Ae^{\i\omega t}$};
-    \draw[vector,thick,yzp] (0,0) -- (\ang:{\A-0.03}) coordinate (R);
+    \fill[myred,yzp] (\diagramAngle:{\A}) circle(0.07) coordinate(P);
+    \node[mydarkblue,above=3,right=-5,yzp,scale=0.8] at (P) {$z(t)=A\e^{\i\omega t}$};
+    \draw[vector,thick,yzp] (0,0) -- (\diagramAngle:{\A-0.03}) coordinate (R);
     \draw pic[-{>[flex'=1]},draw=mydarkblue,angle radius=14,angle eccentricity=1,
               "$\omega t$"{above=0,right=-0.5,yslant=0.69,scale=0.8},mydarkblue,yzp]
       {angle = X--O--R};
@@ -845,7 +845,7 @@
     \draw[black,fill=white,opacity=0.3,xyp]
       (-0.5*\ymax,-1.2*\ymax) rectangle (1.10*\xmax,1.25*\ymax);
     \draw[->,thick] (-0.3*\ymax,0,0) -- (\xmax,0,0)
-      node[below right=-2,xyp] {$t$ [s]};
+      node[below right=-2,xyp] {$t$ [\unit{s}]};
     \draw[->,thick] (0,\ymin,0) -- (0,\ymax,0)
       node[left,xyp] {Im};
     \draw[xline,samples=\N,smooth,variable=\t,domain=-0.05*\T:0.95*\xmax]
@@ -866,7 +866,7 @@
     \draw[black,fill=white,opacity=0.3,xzp]
       (-0.5*\ymax,-1.4*\ymax) rectangle (1.10*\xmax,1.25*\ymax);
     \draw[->,thick] (-0.3*\ymax,0,0) -- (\xmax,0,0)
-      node[below right=-1,xzp] {$t$ [s]};
+      node[below right=-1,xzp] {$t$ [\unit{s}]};
     \draw[->,thick] (0,0,-\zmax) -- (0,0,\zmax)
       node[left=-1,xzp] {Re};
     \draw[xline,samples=\N,smooth,variable=\t,domain=-0.05*\T:0.95*\xmax]
@@ -887,7 +887,7 @@
     (P) -- ({\s},{\y},{\x})
     (I) -- ({\s},{\y},{\x+0.05})
     ({\s},{\y-0.06},{\x}) -- (R);
-  \draw[->,black,thick] (-0.1*\ymax,0,0) -- (\xmax,0,0) node[below right=-2] {$t$ [s]};
+  \draw[->,black,thick] (-0.1*\ymax,0,0) -- (\xmax,0,0) node[below right=-2] {$t$ [\unit{s}]};
   \draw[->,black,thick] (0,\ymin,0) -- (0,\ymax+0.02,0) node[above] {Im};
   \draw[->,black,thick] (0,0,-\zmax) -- (0,0,\zmax+0.02) node[right=1,below=3] {Re};
   \foreach \i [evaluate={\tmin=max(-0.05*\T,(\i-0.05)*\T); \tmax=min(0.95*\xmax,(\i+1)*\T);}] in {0,...,2}{
@@ -917,26 +917,26 @@
 \def\xmax{2.7}
 \def\ymax{2.7}
 \def\R{2.3}
-\def\ang{28}
+\def\diagramAngle{28}
 \def\dang{35}
 \begin{tikzpicture}
   \coordinate (O) at (0,0);
-  \coordinate (R) at (\ang:\R);
-  \coordinate (Q) at (\ang+\dang:\R);
-  \coordinate (X) at ({\R*cos(\ang)},0);
-  \coordinate (Y) at (0,{\R*sin(\ang)});
-  \coordinate (X') at ({\R*cos(\ang+\dang)},0);
-  \coordinate (Y') at (0,{\R*sin(\ang+\dang)});
+  \coordinate (R) at (\diagramAngle:\R);
+  \coordinate (Q) at (\diagramAngle+\dang:\R);
+  \coordinate (X) at ({\R*cos(\diagramAngle)},0);
+  \coordinate (Y) at (0,{\R*sin(\diagramAngle)});
+  \coordinate (X') at ({\R*cos(\diagramAngle+\dang)},0);
+  \coordinate (Y') at (0,{\R*sin(\diagramAngle+\dang)});
   %\draw[myblue] (O) circle (0.995*\R);
   \draw[myblue] (-10:\R) arc (-10:100:\R);
   \node[fill=myred,circle,inner sep=0.8] at (R) {};
   \node[fill=myred,circle,inner sep=0.8] at (Q) {};
-  \node[mydarkblue,above right=-2] at (R) {$\vb{r}=(x,y)$};
-  \node[mydarkblue,above right=-2] at (Q) {$\vb{r}'=(x',y')$};
+  \node[mydarkblue,above right=-2] at (R) {$\bm{r}=(x,y)$};
+  \node[mydarkblue,above right=-2] at (Q) {$\bm{r}'=(x',y')$};
   \draw[dashed,mydarkblue]
-    (Y) -- (R) --++ (0,{0.1-\R*sin(\ang)});
+    (Y) -- (R) --++ (0,{0.1-\R*sin(\diagramAngle)});
   \draw[dashed,mydarkblue]
-    (Y') -- (Q) --++ (0,{0.1-\R*sin(\ang+\dang)});
+    (Y') -- (Q) --++ (0,{0.1-\R*sin(\diagramAngle+\dang)});
   \draw[->,line width=0.9] (-0.1*\xmax,0) -- (\xmax+0.05,0) node[right] {$x$};
   \draw[->,line width=0.9] (0,-0.1*\ymax) -- (0,\ymax+0.05) node[left] {$y$};
   \draw[vector] (O) -- (R);
@@ -955,18 +955,18 @@
 % COMPLEX ROTATION
 \begin{tikzpicture}
   \coordinate (O) at (0,0);
-  \coordinate (R) at (\ang:\R);
-  \coordinate (Q) at (\ang+\dang:\R);
-  \coordinate (X) at ({\R*cos(\ang)},0);
-  \coordinate (Y) at (0,{\R*sin(\ang)});
+  \coordinate (R) at (\diagramAngle:\R);
+  \coordinate (Q) at (\diagramAngle+\dang:\R);
+  \coordinate (X) at ({\R*cos(\diagramAngle)},0);
+  \coordinate (Y) at (0,{\R*sin(\diagramAngle)});
   %\draw[myblue] (O) circle (0.995*\R);
   \draw[myblue] (-10:\R) arc (-10:100:\R);
   \node[fill=myred,circle,inner sep=0.8] at (R) {};
   \node[fill=myred,circle,inner sep=0.8] at (Q) {};
-  \node[mydarkblue,above right=0] at (R) {$z=re^{\i\theta}$};
-  \node[mydarkblue,left=2,above right=0] at (Q) {$ze^{\i\phi}=re^{\i(\theta+\phi)}$};
+  \node[mydarkblue,above right=0] at (R) {$z=r\e^{\i\theta}$};
+  \node[mydarkblue,left=2,above right=0] at (Q) {$z\e^{\i\phi}=r\e^{\i(\theta+\phi)}$};
   \draw[dashed,mydarkblue]
-    (Y) -- (R) --++ (0,{0.1-\R*sin(\ang)});
+    (Y) -- (R) --++ (0,{0.1-\R*sin(\diagramAngle)});
   \draw[->,line width=0.9] (-0.1*\xmax,0) -- (\xmax+0.05,0) node[right] {Re};
   \draw[->,line width=0.9] (0,-0.1*\ymax) -- (0,\ymax+0.05) node[left] {Im};
   \draw[vector] (O) -- (R) node[pos=0.65,above left=-3] {$r$};
@@ -1022,20 +1022,20 @@
 \def\L{3.1}     % axis lengths
 \def\R{1.0*\L}  % position vector radial distance
 \def\Rang{52}   % position vector angle
-\def\ang{25}    % angle of the CM velocity
+\def\diagramAngle{25}    % angle of the CM velocity
 \begin{tikzpicture}
   \coordinate (O) at (0,0);
   \coordinate (X) at (1.05*\L,0);
   \coordinate (Y) at (0,1.05*\L);
-  \coordinate (X') at (\ang:\L);
-  \coordinate (Y') at (90+\ang:\L);
+  \coordinate (X') at (\diagramAngle:\L);
+  \coordinate (Y') at (90+\diagramAngle:\L);
   \coordinate (R) at (\Rang:\R);
   \node[fill=blue!40!black,circle,inner sep=0.9] (R') at (R) {};
   \node[above right=-1] at (R') {P};
   \coordinate (Rx) at (0:{\R*cos(\Rang)});
   \coordinate (Ry) at (90:{\R*sin(\Rang)}); %($(Y)!(O)!(R)$);
-  \coordinate (Rx') at (\ang:{\R*cos(\Rang-\ang)});
-  \coordinate (Ry') at (90+\ang:{\R*sin(\Rang-\ang)});
+  \coordinate (Rx') at (\diagramAngle:{\R*cos(\Rang-\diagramAngle)});
+  \coordinate (Ry') at (90+\diagramAngle:{\R*sin(\Rang-\diagramAngle)});
 
   % AXES
   \draw[<->,very thick,xcol!70!black]
@@ -1046,7 +1046,7 @@
     (Y') node[left=-2,xcol'] {$y'$};
 
   % POSITION VECTOR
-  \draw[rvec,vvec,line cap=round] (O) -- (R') node[midway,left=2,above=1] {$\vb{r}$};
+  \draw[rvec,vvec,line cap=round] (O) -- (R') node[midway,left=2,above=1] {$\bm{r}$};
   \draw pic[-{Latex[length=3,width=2,flex'=1]},"$\theta=\omega t$"{scale=0.95,above=2,right},
             draw,angle radius=20,angle eccentricity=1] {angle=X--O--X'};
 
@@ -1060,8 +1060,8 @@
   \end{scope}
   \begin{scope}[xcol'!70!black]
     \draw[dashed] (Ry') -- (R') -- (Rx');
-    \tick{Rx'}{90+\ang};
-    \tick{Ry'}{\ang};
+    \tick{Rx'}{90+\diagramAngle};
+    \tick{Ry'}{\diagramAngle};
     \rightAngle{X'}{Rx'}{R'}{0.25}
     \rightAngle{Y'}{Ry'}{R'}{0.25}
   \end{scope}
@@ -1071,10 +1071,10 @@
 
 % ROTATION + angles
 \begin{tikzpicture}
-  \coordinate (Rx'') at (\ang:{\R*cos(\Rang)*cos(\ang)});     % projection of Rx on x' axis
-  \coordinate (Ry'') at (90+\ang:{\R*sin(\Rang)*cos(\ang)});  % projection of Ry on y' axis
-  \coordinate (Rx''') at ($(R')+(-90+\ang:{\R*sin(\Rang)*cos(\ang)})$); % projection of Rx on R-Rx' line
-  \coordinate (Ry''') at ($(R')+(180+\ang:{\R*cos(\Rang)*cos(\ang)})$); % projection of Ry on R-Ry' linex
+  \coordinate (Rx'') at (\diagramAngle:{\R*cos(\Rang)*cos(\diagramAngle)});     % projection of Rx on x' axis
+  \coordinate (Ry'') at (90+\diagramAngle:{\R*sin(\Rang)*cos(\diagramAngle)});  % projection of Ry on y' axis
+  \coordinate (Rx''') at ($(R')+(-90+\diagramAngle:{\R*sin(\Rang)*cos(\diagramAngle)})$); % projection of Rx on R-Rx' line
+  \coordinate (Ry''') at ($(R')+(180+\diagramAngle:{\R*cos(\Rang)*cos(\diagramAngle)})$); % projection of Ry on R-Ry' linex
 
   % TRIANGLES
   \fill[xcol!70!black!10]
@@ -1095,7 +1095,7 @@
     (Y') node[left=-2,xcol'] {$y'$};
 
   % POSITION VECTOR
-  \draw[vvec,line cap=round] (O) -- (R'); %node[midway,left=2,above=1] {$\vb{r}$};
+  \draw[vvec,line cap=round] (O) -- (R'); %node[midway,left=2,above=1] {$\bm{r}$};
   \draw pic["$\theta$"{scale=0.9},
             draw,angle radius=20,angle eccentricity=1.22] {angle=X--O--X'};
   \draw pic["$\theta$"{scale=0.9},
@@ -1121,10 +1121,10 @@
     \draw[dashed] (Rx) -- (Rx'');
     \draw[dashed] (Rx) -- (Rx''');
     \draw[dashed] (Ry) -- (Ry''');
-    \tick{Rx'}{90+\ang};
-    \tick{Ry'}{\ang};
-    \tick{Rx''}{90+\ang};
-    \tick{Ry''}{\ang};
+    \tick{Rx'}{90+\diagramAngle};
+    \tick{Ry'}{\diagramAngle};
+    \tick{Rx''}{90+\diagramAngle};
+    \tick{Ry''}{\diagramAngle};
     \rightAngle{X'}{Rx'}{R'}{0.25}
     \rightAngle{Y'}{Ry'}{R'}{0.25}
     \rightAngle{Rx}{Rx''}{O}{0.25}
@@ -1135,13 +1135,13 @@
 
   % LENGTHS
   %\node[xcol!70!black,above,scale=0.8] at ($(Ry)!0.5!(R)$) {$x$};
-  \node[xcol!80!black!60,above,scale=0.8,rotate=\ang] at ($(O)!0.6!(Rx'')$) {$x\cos\theta$};
-  \node[xcol'!80!black!60,right=1,below=-2,scale=0.8,rotate=\ang] at ($(Rx)!0.6!(Rx''')$) {\contour{white}{$y\sin\theta$}};
-  %\node[xcol!80!black!60,below=4,scale=0.8,rotate=-90+\ang] at ($(O)!0.6!(Ry'')$) {$y\cos\theta$};
-  \node[xcol'!80!black!60,below=-1,scale=0.8,rotate=-90+\ang] at ($(Ry)!0.6!(Ry''')$) {\contour{white}{$x\sin\theta$}};
+  \node[xcol!80!black!60,above,scale=0.8,rotate=\diagramAngle] at ($(O)!0.6!(Rx'')$) {$x\cos\theta$};
+  \node[xcol'!80!black!60,right=1,below=-2,scale=0.8,rotate=\diagramAngle] at ($(Rx)!0.6!(Rx''')$) {\contour{white}{$y\sin\theta$}};
+  %\node[xcol!80!black!60,below=4,scale=0.8,rotate=-90+\diagramAngle] at ($(O)!0.6!(Ry'')$) {$y\cos\theta$};
+  \node[xcol'!80!black!60,below=-1,scale=0.8,rotate=-90+\diagramAngle] at ($(Ry)!0.6!(Ry''')$) {\contour{white}{$x\sin\theta$}};
   \draw[<->,xcol!80!black!60]
-    ([shift={(180+\ang:0.3)}]O) -- ([shift={(180+\ang:0.3)}]Ry'')
-    node[xcol!80!black!60,midway,scale=0.8,rotate=-90+\ang,fill=white,inner sep=0.5] {$y\cos\theta$};
+    ([shift={(180+\diagramAngle:0.3)}]O) -- ([shift={(180+\diagramAngle:0.3)}]Ry'')
+    node[xcol!80!black!60,midway,scale=0.8,rotate=-90+\diagramAngle,fill=white,inner sep=0.5] {$y\cos\theta$};
 
     \label{rotating-frame-angles}
 \end{tikzpicture}
@@ -1149,8 +1149,8 @@
 % STATIONARY REFERENCE FRAME - CENTRIFUGAL
 \def\R{2}      % disk radius
 \def\t{0.1}    % disk thickness
-\def\p{0.05}   % pole radius
-\def\P{1.3}    % pole height
+\def\poleRadius{0.05}   % pole radius
+\def\poleHeight{1.3}    % pole height
 \def\r{0.24}   % mass radius
 \def\L{0.7*\R} % rope length
 \def\H{2.0}    % human height
@@ -1182,16 +1182,16 @@
     \draw[disk] (-\R,0) --++ (0,-\t) arc(180:360:{\R} and {0.4*\R}) --++ (0,\t);
     \draw[disk] (0,0) ellipse({\R} and {0.4*\R});
     \rope {(T) --++ (\L,0) coordinate (M)}
-    \draw[pole] (-\p,\P) --++ (0,-\P) arc(180:360:{\p} and {0.4*\p}) --++ (0,\P);
-    \draw[pole] (0,\P) ellipse({\p} and {0.4*\p});
-    \rope {(-1.4*\p,0.85*\r) arc(180:360:{1.4*\p} and {0.4*\p})}
-    \rope {(-1.4*\p,1.00*\r) arc(180:360:{1.4*\p} and {0.4*\p})}
-    \rope {(-1.4*\p,1.15*\r) arc(180:360:{1.4*\p} and {0.4*\p})}
-    \draw[force] (M)++(150:1.1*\r) --++ (-0.5*\L,0) node[above=-1] {$\vb{T}$};
-    \draw[avec] (M)++(210:1.1*\r) --++ (-0.5*\L,0) node[right=0,below=-1] {$\vb{a}$}; %_\mathrm{cm}
+    \draw[pole] (-\poleRadius,\poleHeight) --++ (0,-\poleHeight) arc(180:360:{\poleRadius} and {0.4*\poleRadius}) --++ (0,\poleHeight);
+    \draw[pole] (0,\poleHeight) ellipse({\poleRadius} and {0.4*\poleRadius});
+    \rope {(-1.4*\poleRadius,0.85*\r) arc(180:360:{1.4*\poleRadius} and {0.4*\poleRadius})}
+    \rope {(-1.4*\poleRadius,1.00*\r) arc(180:360:{1.4*\poleRadius} and {0.4*\poleRadius})}
+    \rope {(-1.4*\poleRadius,1.15*\r) arc(180:360:{1.4*\poleRadius} and {0.4*\poleRadius})}
+    \draw[force] (M)++(150:1.1*\r) --++ (-0.5*\L,0) node[above=-1] {$\bm{T}$};
+    \draw[avec] (M)++(210:1.1*\r) --++ (-0.5*\L,0) node[right=0,below=-1] {$\bm{a}$}; %_\mathrm{cm}
     \draw[mass] (M) circle(\r) node {$m$};
     \draw[->] (10:1.05*\R) arc(10:50:{1.05*\R} and {0.4*\R}) node[above left=-2] {$\omega$};
-    \draw[vvec] (0,\P+0.014) --++ (0,0.7*\L) node[midway,left] {$\vb*\omega$};
+    \draw[vvec] (0,\poleHeight+0.014) --++ (0,0.7*\L) node[midway,left] {$\bm{\omega}$};
   \end{scope}
 
     \label{centrifugal-inertial}
@@ -1215,13 +1215,13 @@
 
   % POLE + MASS
   \rope {(T) --++ (\L,0) coordinate (M)}
-  \draw[pole] (-\p,\P) --++ (0,-\P) arc(180:360:{\p} and {0.4*\p}) --++ (0,\P);
-  \draw[pole] (0,\P) ellipse({\p} and {0.4*\p});
-  \rope {(-1.4*\p,0.85*\r) arc(180:360:{1.4*\p} and {0.4*\p})}
-  \rope {(-1.4*\p,1.00*\r) arc(180:360:{1.4*\p} and {0.4*\p})}
-  \rope {(-1.4*\p,1.15*\r) arc(180:360:{1.4*\p} and {0.4*\p})}
-  \draw[force] (M)++(150:1.1*\r) --++ (-0.5*\L,0) node[above=-1] {$\vb{T}$};
-  \draw[force] (M)++(30:1.1*\r) --++ (0.5*\L,0) node[above=0] {$\vb{F}_\mathrm{cf}$};
+  \draw[pole] (-\poleRadius,\poleHeight) --++ (0,-\poleHeight) arc(180:360:{\poleRadius} and {0.4*\poleRadius}) --++ (0,\poleHeight);
+  \draw[pole] (0,\poleHeight) ellipse({\poleRadius} and {0.4*\poleRadius});
+  \rope {(-1.4*\poleRadius,0.85*\r) arc(180:360:{1.4*\poleRadius} and {0.4*\poleRadius})}
+  \rope {(-1.4*\poleRadius,1.00*\r) arc(180:360:{1.4*\poleRadius} and {0.4*\poleRadius})}
+  \rope {(-1.4*\poleRadius,1.15*\r) arc(180:360:{1.4*\poleRadius} and {0.4*\poleRadius})}
+  \draw[force] (M)++(150:1.1*\r) --++ (-0.5*\L,0) node[above=-1] {$\bm{T}$};
+  \draw[force] (M)++(30:1.1*\r) --++ (0.5*\L,0) node[above=0] {$\bm{F}_\mathrm{cf}$};
   \draw[mass] (M) circle(\r) node {$m$};
 
   % AXIS
@@ -1239,26 +1239,26 @@
 \def\r{0.1}     % mass radius
 \def\v{0.35*\R} % mass velocity
 \def\x{0.48}    % mass position (fraction of \R)
-\def\ang{50}    % angle displacement
+\def\diagramAngle{50}    % angle displacement
 \begin{tikzpicture}
   \coordinate (O) at (0,0);
   \coordinate (T) at (0,\r);
   \coordinate (M) at (90:0.45*\R);
   \coordinate (S) at (-145:1.6*\R);
-  \coordinate (B) at (90+\x*\ang:0.88*\R);
+  \coordinate (B) at (90+\x*\diagramAngle:0.88*\R);
 
   % DISK & DOTS
   \draw[disk] (O) circle(\R);
   \fill[myred!20] (90:0.88*\R) circle(0.05*\R);
-  \fill[myred] (90+\x*\ang:0.88*\R) circle(0.05*\R);
-  \fill[myred!20] (90+\ang:0.88*\R) circle(0.05*\R);
-  \draw[xcol,->] (92:0.88*\R) arc(92:88+\ang:0.88*\R);
+  \fill[myred] (90+\x*\diagramAngle:0.88*\R) circle(0.05*\R);
+  \fill[myred!20] (90+\diagramAngle:0.88*\R) circle(0.05*\R);
+  \draw[xcol,->] (92:0.88*\R) arc(92:88+\diagramAngle:0.88*\R);
 
   % MASS
   \draw[<->,black!25,line width=0.9]
     (0,0.35*\R) |-++ (0.35*\R,-0.35*\R);
   \draw[xcol] (O) --++ (90:1.1*\R);
-  \draw[vvec] (M) --++ (90:\v) node[below right] {$\vb{v}$};
+  \draw[vvec] (M) --++ (90:\v) node[below right] {$\bm{v}$};
   \draw[mass] (M) circle(\r) node[right=1] {$m$};
   \draw[->] (10:1.1*\R) arc(10:35:1.1*\R) node[left=2,above=0] {$\omega$};
 
@@ -1270,8 +1270,8 @@
 
   % AXIS S'
   \draw[<->,line width=0.9]
-    (90+\x*\ang:0.35*\R) node[below left=-2,scale=0.9] {$y'$} -- (0,0) --
-    (\x*\ang:0.35*\R) node[above=3,right=-2,scale=0.9] {$x'$};
+    (90+\x*\diagramAngle:0.35*\R) node[below left=-2,scale=0.9] {$y'$} -- (0,0) --
+    (\x*\diagramAngle:0.35*\R) node[above=3,right=-2,scale=0.9] {$x'$};
   \node[below=1] at (O) {A};
   \node[right=1,below=1] at (B) {B};
 
@@ -1287,7 +1287,7 @@
   \def\tmax{1.10}        % maximum t
   \def\xt{0.98*\x*\tmax} % mass position
   \coordinate (T) at (0,\r);
-  \coordinate (S) at (-145-\ang:1.6*\R);
+  \coordinate (S) at (-145-\diagramAngle:1.6*\R);
   \coordinate (M) at ({\vv*\xt*sin(\om*\xt)},{\vv*\xt*cos(\om*\xt)});
   \coordinate (V) at ({\v*sin(\om*\xt)+\v*\xt*cos(\om*\xt)},{\v*cos(\om*\xt)-\v*\xt*sin(\om*\xt)});
   \coordinate (F) at ({\FC*cos(\om*\xt)-\FC*\xt*sin(\om*\xt)},{-\FC*sin(\om*\xt)-\FC*\xt*cos(\om*\xt)});
@@ -1306,9 +1306,9 @@
   % MASS
   \draw[xcol,samples=50,smooth,variable=\t,domain=0:\tmax]
     plot({\vv*\t*sin(\om*\t)},{\vv*\t*cos(\om*\t)});
-  %\fill[myred] (90-\ang:0.88*\R) circle(0.05); % check
-  \draw[vvec] (M) --++ (V) node[above=3,left=0] {$\vb{v}$};
-  \draw[force] (M) --++ (F) node[right=-1] {$\vb{F}_\mathrm{Cor}$};
+  %\fill[myred] (90-\diagramAngle:0.88*\R) circle(0.05); % check
+  \draw[vvec] (M) --++ (V) node[above=3,left=0] {$\bm{v}$};
+  \draw[force] (M) --++ (F) node[right=-1] {$\bm{F}_\mathrm{Cor}$};
   \draw[mass] (M) circle(\r) node[left=4,above=2] {$m$};
 
   % AXIS
@@ -1317,8 +1317,8 @@
     (-145:1.6*\R)++(0,0.38*\R) node[left,scale=0.9] {$y$} |-++
                    (0.35*\R,-0.35*\R) node[below right=-3,scale=0.9] {$x$};
   \draw[<->,line width=0.9]
-    (S)++(90-\ang:0.38*\R) node[left=3,scale=0.9] {$y$} --++ (-90-\ang:0.38*\R) --++
-         (-\ang:0.38*\R) node[below right=-3,scale=0.9] {$x$};
+    (S)++(90-\diagramAngle:0.38*\R) node[left=3,scale=0.9] {$y$} --++ (-90-\diagramAngle:0.38*\R) --++
+         (-\diagramAngle:0.38*\R) node[below right=-3,scale=0.9] {$x$};
   \draw[->] (-165:1.55*\R) arc(-150:-210:0.6*\R) node[midway,left=0] {$\omega$};
 
     \label{coriolis-rotating}
@@ -1362,21 +1362,21 @@
   \draw[dashed,xcol] (O) -- (MC);
 
   % MASS A
-  \draw[vvec]  (MA)++({\vang{\ta}}:\r) --++ (\vvc{\ta}) node[right=1,above=-2] {$\vb{v}$};
-  \draw[force] (MA)++(90-\om*\ta:\r) --++ (\vFc{\ta}) node[above=3,left=0] {$\vb{F}_\mathrm{cf}$};
-  \draw[force] (MA)++({\vang{\ta}-90}:\r) --++ (\vFC{\ta}) node[right=6,below=-1] {\contour{white}{$\vb{F}_\mathrm{Cor}$}};
+  \draw[vvec]  (MA)++({\vang{\ta}}:\r) --++ (\vvc{\ta}) node[right=1,above=-2] {$\bm{v}$};
+  \draw[force] (MA)++(90-\om*\ta:\r) --++ (\vFc{\ta}) node[above=3,left=0] {$\bm{F}_\mathrm{cf}$};
+  \draw[force] (MA)++({\vang{\ta}-90}:\r) --++ (\vFC{\ta}) node[right=6,below=-1] {\contour{white}{$\bm{F}_\mathrm{Cor}$}};
   \draw[mass]  (MA) circle(\r); %node[left=4,above=2] {$m$};
 
   % MASS B
-  \draw[vvec]  (MB)++({\vang{\tb}}:\r) --++ (\vvc{\tb}) node[right=-2] {$\vb{v}$};
-  \draw[force] (MB)++(90-\om*\tb:\r) --++ (\vFc{\tb}) node[above=3,left=3] {$\vb{F}_\mathrm{cf}$};
-  \draw[force] (MB)++({\vang{\tb}-90}:\r) --++ (\vFC{\tb}) node[right=4,below=-2] {$\vb{F}_\mathrm{Cor}$};
+  \draw[vvec]  (MB)++({\vang{\tb}}:\r) --++ (\vvc{\tb}) node[right=-2] {$\bm{v}$};
+  \draw[force] (MB)++(90-\om*\tb:\r) --++ (\vFc{\tb}) node[above=3,left=3] {$\bm{F}_\mathrm{cf}$};
+  \draw[force] (MB)++({\vang{\tb}-90}:\r) --++ (\vFC{\tb}) node[right=4,below=-2] {$\bm{F}_\mathrm{Cor}$};
   \draw[mass]  (MB) circle(\r);
 
   % MASS C
-  \draw[vvec]  (MC)++({\vang{\tc}}:\r) --++ (\vvc{\tc}) node[right=-2] {$\vb{v}$};
-  \draw[force] (MC)++(90-\om*\tc:\r) --++ (\vFc{\tc}) node[above=-1] {$\vb{F}_\mathrm{cf}$};
-  \draw[force] (MC)++({\vang{\tc}-90}:\r) --++ (\vFC{\tc}) node[below=2,left=-5] {$\vb{F}_\mathrm{Cor}$};
+  \draw[vvec]  (MC)++({\vang{\tc}}:\r) --++ (\vvc{\tc}) node[right=-2] {$\bm{v}$};
+  \draw[force] (MC)++(90-\om*\tc:\r) --++ (\vFc{\tc}) node[above=-1] {$\bm{F}_\mathrm{cf}$};
+  \draw[force] (MC)++({\vang{\tc}-90}:\r) --++ (\vFC{\tc}) node[below=2,left=-5] {$\bm{F}_\mathrm{Cor}$};
   \draw[mass]  (MC) circle(\r);
 
     \label{centrifugal-and-coriolis}
@@ -1385,35 +1385,35 @@
 % EARTH + CENTRIFUGAL
 \contourlength{0.7pt}
 \begin{tikzpicture}
-  \def\E{1.2}
-  \def\ang{30} % latidude
+  \def\earthRadius{1.2}
+  \def\diagramAngle{30} % latidude
   \coordinate (O) at (0,0);
 
   % EARTH
-  %\draw[dashed,rotate=-11] (0,-1.3*\E) -- (0,1.45*\E);
+  %\draw[dashed,rotate=-11] (0,-1.3*\earthRadius) -- (0,1.45*\earthRadius);
   \fill[blue!70!black!70] (0,0) circle (1.2);
-  \draw[very thin,ball color=blue!70!black!40,fill opacity=0.2] (0,0) circle (\E);
+  \draw[very thin,ball color=blue!70!black!40,fill opacity=0.2] (0,0) circle (\earthRadius);
   \begin{scope}[rotate=-11]
     \draw[-{Latex[length=3,width=2,flex'=1]}]
-      (0,1.22*\E)++(120:{0.2*\E} and 0.1*\E) arc(120:430:{0.2*\E} and 0.1*\E)
+      (0,1.22*\earthRadius)++(120:{0.2*\earthRadius} and 0.1*\earthRadius) arc(120:430:{0.2*\earthRadius} and 0.1*\earthRadius)
       node[pos=0.7,right=0] {$\omega$};
-    \clip (0,0) circle (\E);
-    \fill[white] (0,\E) ellipse ({0.6*\E} and {0.15*\E});
-    \fill[white] (0,-\E) ellipse ({0.8*\E} and {0.08*\E});
-    \fill[green!70!black!60,rotate=-30] (160:1.1*\E) ellipse ({0.2*\E} and {0.8*\E});
-    \fill[green!70!black!60,rotate=40] (-10:1.14*\E) ellipse ({0.2*\E} and {0.9*\E});
+    \clip (0,0) circle (\earthRadius);
+    \fill[white] (0,\earthRadius) ellipse ({0.6*\earthRadius} and {0.15*\earthRadius});
+    \fill[white] (0,-\earthRadius) ellipse ({0.8*\earthRadius} and {0.08*\earthRadius});
+    \fill[green!70!black!60,rotate=-30] (160:1.1*\earthRadius) ellipse ({0.2*\earthRadius} and {0.8*\earthRadius});
+    \fill[green!70!black!60,rotate=40] (-10:1.14*\earthRadius) ellipse ({0.2*\earthRadius} and {0.9*\earthRadius});
     \fill[green!60!black!60,very thick,rotate=-20] % Australia
-      (230:0.86*\E) ellipse ({0.25*\E} and {0.18*\E});
-    \fill[fill=white,fill opacity=0.8] (0,0) circle (\E);
+      (230:0.86*\earthRadius) ellipse ({0.25*\earthRadius} and {0.18*\earthRadius});
+    \fill[fill=white,fill opacity=0.8] (0,0) circle (\earthRadius);
   \end{scope}
   \begin{scope}[rotate=-11]
-    %\draw[dashed] (-\E,0) to[out=-20,in=-160] (\E,0);
-    %\draw[->,thick] (-1.2*\E,0) -- (1.2*\E,0);
-    \draw[dashed] (-\E,0) -- (\E,0) coordinate (X);
-    \draw[dashed] (O) -- (\ang:\E) coordinate (R);
-    \draw[->,thick] (0,-1.2*\E) -- (0,1.6*\E);
-    \draw[rvec] (0,{\E*sin(\ang)}) -- (R) node[midway,above=0] {$\vb{r}$};
-    \draw[force] (R) --++ (0.4*\E,0) node[right] {$\vb{F}_\mathrm{cf}$};
+    %\draw[dashed] (-\earthRadius,0) to[out=-20,in=-160] (\earthRadius,0);
+    %\draw[->,thick] (-1.2*\earthRadius,0) -- (1.2*\earthRadius,0);
+    \draw[dashed] (-\earthRadius,0) -- (\earthRadius,0) coordinate (X);
+    \draw[dashed] (O) -- (\diagramAngle:\earthRadius) coordinate (R);
+    \draw[->,thick] (0,-1.2*\earthRadius) -- (0,1.6*\earthRadius);
+    \draw[rvec] (0,{\earthRadius*sin(\diagramAngle)}) -- (R) node[midway,above=0] {$\bm{r}$};
+    \draw[force] (R) --++ (0.4*\earthRadius,0) node[right] {$\bm{F}_\mathrm{cf}$};
     \draw pic[->,"$\phi$"{scale=0.9}, %{Latex[length=3,width=2,flex'=1]}
               draw,angle radius=17,angle eccentricity=1.3] {angle=X--O--R};
   \end{scope}
@@ -1424,43 +1424,43 @@
 % EARTH + CORIOLIS
 \contourlength{0.7pt}
 \begin{tikzpicture}
-  \def\E{1.2}
+  \def\earthRadius{1.2}
   \coordinate (O) at (0,0);
 
   % EARTH
-  \draw[dashed,rotate=-11] (0,-1.3*\E) -- (0,1.45*\E);
+  \draw[dashed,rotate=-11] (0,-1.3*\earthRadius) -- (0,1.45*\earthRadius);
   \fill[blue!70!black!70] (0,0) circle (1.2);
-  \draw[very thin,ball color=blue!70!black!40,fill opacity=0.2] (0,0) circle (\E);
+  \draw[very thin,ball color=blue!70!black!40,fill opacity=0.2] (0,0) circle (\earthRadius);
   \begin{scope}[rotate=-11]
-    \draw[-{Latex[length=3,width=2,flex'=1]}] (0,1.22*\E)++(120:{0.2*\E} and 0.1*\E) arc(120:430:{0.2*\E} and 0.1*\E);
-    \clip (0,0) circle (\E);
-    \fill[white] (0,\E) ellipse ({0.6*\E} and {0.15*\E});
-    \fill[white] (0,-\E) ellipse ({0.8*\E} and {0.08*\E});
-    \fill[green!70!black!60,rotate=-30] (160:1.1*\E) ellipse ({0.2*\E} and {0.8*\E});
-    \fill[green!70!black!60,rotate=40] (-10:1.14*\E) ellipse ({0.2*\E} and {0.9*\E});
+    \draw[-{Latex[length=3,width=2,flex'=1]}] (0,1.22*\earthRadius)++(120:{0.2*\earthRadius} and 0.1*\earthRadius) arc(120:430:{0.2*\earthRadius} and 0.1*\earthRadius);
+    \clip (0,0) circle (\earthRadius);
+    \fill[white] (0,\earthRadius) ellipse ({0.6*\earthRadius} and {0.15*\earthRadius});
+    \fill[white] (0,-\earthRadius) ellipse ({0.8*\earthRadius} and {0.08*\earthRadius});
+    \fill[green!70!black!60,rotate=-30] (160:1.1*\earthRadius) ellipse ({0.2*\earthRadius} and {0.8*\earthRadius});
+    \fill[green!70!black!60,rotate=40] (-10:1.14*\earthRadius) ellipse ({0.2*\earthRadius} and {0.9*\earthRadius});
     \fill[green!60!black!60,very thick,rotate=-20] % Australia
-      (230:0.86*\E) ellipse ({0.25*\E} and {0.18*\E});
-    \draw[dashed] (-\E,0) to[out=-20,in=-160] (\E,0);
+      (230:0.86*\earthRadius) ellipse ({0.25*\earthRadius} and {0.18*\earthRadius});
+    \draw[dashed] (-\earthRadius,0) to[out=-20,in=-160] (\earthRadius,0);
 
     % CORIOLIS
-    \draw[myred,mydashed,very thin] (0,-0.1*\E) coordinate (NS) --++ (0, 0.70*\E) coordinate (NN);
-    \draw[myred,mydashed,very thin] (0,-0.3*\E) coordinate (SN) --++ (0,-0.60*\E) coordinate (SS);
-    \draw[myred,mydashed,very thin] (-0.4*\E,0.32*\E) coordinate (NW) to[out=-20,in=-160]++ (0.8*\E,0) coordinate (NE);
-    \draw[myred,mydashed,very thin] (-0.4*\E,-0.53*\E) coordinate (SW) to[out=-20,in=-160]++ (0.8*\E,0) coordinate (SE);
-    \draw[myarr,red] (NN) to[out=-90,in=  50]++ (-110:0.35*\E); % northern hemisphere
-    \draw[myarr,red] (NS) to[out= 90,in=-120]++ (  70:0.35*\E);
-    \draw[myarr,red] (SN) to[out=-90,in= 130]++ ( -65:0.30*\E); % southern hemisphere
-    \draw[myarr,red] (SS) to[out= 90,in= -60]++ ( 110:0.30*\E);
-    \draw[myarr,red] (NE) to[out=200,in= -40]++ (170:0.38*\E); % northern hemisphere
-    \draw[myarr,red] (NW) to[out=-20,in= 140]++ (-30:0.42*\E);
-    \draw[myarr,red] (SE) to[out=200,in=  40]++ (210:0.42*\E); % southern hemisphere
-    \draw[myarr,red] (SW) to[out=-20,in=-140]++ ( 10:0.38*\E);
+    \draw[myred,mydashed,very thin] (0,-0.1*\earthRadius) coordinate (NS) --++ (0, 0.70*\earthRadius) coordinate (NN);
+    \draw[myred,mydashed,very thin] (0,-0.3*\earthRadius) coordinate (SN) --++ (0,-0.60*\earthRadius) coordinate (SS);
+    \draw[myred,mydashed,very thin] (-0.4*\earthRadius,0.32*\earthRadius) coordinate (NW) to[out=-20,in=-160]++ (0.8*\earthRadius,0) coordinate (NE);
+    \draw[myred,mydashed,very thin] (-0.4*\earthRadius,-0.53*\earthRadius) coordinate (SW) to[out=-20,in=-160]++ (0.8*\earthRadius,0) coordinate (SE);
+    \draw[myarr,red] (NN) to[out=-90,in=  50]++ (-110:0.35*\earthRadius); % northern hemisphere
+    \draw[myarr,red] (NS) to[out= 90,in=-120]++ (  70:0.35*\earthRadius);
+    \draw[myarr,red] (SN) to[out=-90,in= 130]++ ( -65:0.30*\earthRadius); % southern hemisphere
+    \draw[myarr,red] (SS) to[out= 90,in= -60]++ ( 110:0.30*\earthRadius);
+    \draw[myarr,red] (NE) to[out=200,in= -40]++ (170:0.38*\earthRadius); % northern hemisphere
+    \draw[myarr,red] (NW) to[out=-20,in= 140]++ (-30:0.42*\earthRadius);
+    \draw[myarr,red] (SE) to[out=200,in=  40]++ (210:0.42*\earthRadius); % southern hemisphere
+    \draw[myarr,red] (SW) to[out=-20,in=-140]++ ( 10:0.38*\earthRadius);
   \end{scope}
 
-  \node at (108-11:1.2*\E) {N};
-  \node at (180-11:1.2*\E) {W};
-  \node at (   -11:1.2*\E) {E};
-  \node at (-98-11:1.2*\E) {S};
+  \node at (108-11:1.2*\earthRadius) {N};
+  \node at (180-11:1.2*\earthRadius) {W};
+  \node at (   -11:1.2*\earthRadius) {E};
+  \node at (-98-11:1.2*\earthRadius) {S};
 
     \label{coriolis-earth}
 \end{tikzpicture}
@@ -1471,9 +1471,7 @@
 % ref: https://tikz.net/small_angle_approximation/
 % author: Izaak Neutelings (June 2020)
 
-\renewcommand{\abs}[1]{\lvert #1 \rvert}
 
-% \usepackage{physics}
 %\usetikzlibrary{fadings}
 \tikzset{>=latex} % for LaTeX arrow head
 \contourlength{1.6pt}
@@ -1500,7 +1498,7 @@
 \def\nsamples{100}
 \begin{tikzpicture}
 
-  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\si{\degree}]};
+  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\unit{\degree}]};
   \draw[->,thick,black] (0,-1.1*\A) -- (0,1.15*\A) node[above left=-3] {$y$};
   \draw[mypurple,thick,variable=\t,samples=\nsamples,smooth,domain=-1.1/\k:1.1/\k]
     plot(\t,\A*\k*\t) node[below=2,above right=-1] {$y=\theta$};
@@ -1512,9 +1510,9 @@
   \node[right=2,below left=1.4,scale=0.9] at (0,0) {$0$};
   \tick{0,-\A}{0} node[left=-1,scale=0.9] {$-1$};
   \tick{0,\A}{0} node[left=-1,scale=0.9] {$1$};
-  \foreach \i [evaluate={\ang=int(\i*105/\N); \t=pi/180/\k*\ang;}] in {1,...,\N}{
-    \tick{-\t,0}{90} node[left=2,below=-1,scale=0.85] {$-\ang$};
-    \tick{\t,0}{90} node[below=-1,scale=0.85] {$\ang$};
+  \foreach \i [evaluate={\diagramAngle=int(\i*105/\N); \t=pi/180/\k*\diagramAngle;}] in {1,...,\N}{
+    \tick{-\t,0}{90} node[left=2,below=-1,scale=0.85] {$-\diagramAngle$};
+    \tick{\t,0}{90} node[below=-1,scale=0.85] {$\diagramAngle$};
   }
 
     \label{small-angle-sine-tangent}
@@ -1523,7 +1521,7 @@
 % COS - X
 \begin{tikzpicture}
 
-  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\si{\degree}]};
+  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\unit{\degree}]};
   \draw[->,thick,black] (0,-0.8*\A) -- (0,1.15*\A) node[above left=-3] {$y$};
   \draw[mypurple,thick,variable=\t,samples=\nsamples,smooth,domain=-0.9*\xmax:0.9*\xmax]
     plot(\t,{\A*(1-(\k*\t)^2/2)}) node[below=4,left=6] {$y=1-\dfrac{\theta^2}{2}$};
@@ -1532,9 +1530,9 @@
 
   \node[right=2,below left=1.4,scale=0.9] at (0,0) {$0$};
   \tick{0,\A}{0} node[left=-1,scale=0.9] {$1$};
-  \foreach \i [evaluate={\ang=int(\i*105/\N); \t=pi/180/\k*\ang;}] in {1,...,\N}{
-    \tick{-\t,0}{90} node[left=2,below=-1,scale=0.85] {$-\ang$};
-    \tick{\t,0}{90} node[below=-1,scale=0.85] {$\ang$};
+  \foreach \i [evaluate={\diagramAngle=int(\i*105/\N); \t=pi/180/\k*\diagramAngle;}] in {1,...,\N}{
+    \tick{-\t,0}{90} node[left=2,below=-1,scale=0.85] {$-\diagramAngle$};
+    \tick{\t,0}{90} node[below=-1,scale=0.85] {$\diagramAngle$};
   }
 
     \label{small-angle-cosine}
@@ -1550,8 +1548,8 @@
 \def\nsamples{10}
 \begin{tikzpicture}
 
-  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\si{\degree}]};
-  \draw[->,thick,black] (0,-\ymax) -- (0,1.1*\ymax) node[above=-1] {$\Delta f / \abs{f} \;\; [\%]$};
+  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\unit{\degree}]};
+  \draw[->,thick,black] (0,-\ymax) -- (0,1.1*\ymax) node[above=-1] {$\Delta f / \abs{f} \;\; [\unit{\percent}]$};
   %\draw[myblue,thick,variable=\t,samples=\nsamples,smooth,domain=-\xmax:\xmax]
   %  plot(\t,{\A*reldiff(\k*\t,sin(180/pi*\k*\t))})
   %  node[above left=-7] {$\dfrac{\theta-\sin\theta}{\abs{\theta}}$};
@@ -1572,9 +1570,9 @@
     (0,-\A/100) --++ (pi/180/\k*15,0)
     (-0.13*\xmax,-\A/100) --++ (-pi/180/\k*15,0);
   \node[right=1,below left=0,scale=0.9] at (0,0) {$0$};
-  \foreach \i [evaluate={\ang=int(\i*25/\Nx); \t=pi/180/\k*\ang;}] in {1,...,\Nx}{
-    \tick{-\t,0}{90} node[left=2,below=-1,scale=0.85] {$-\ang$};
-    \tick{\t,0}{90} node[below=-1,scale=0.85] {$\ang$};
+  \foreach \i [evaluate={\diagramAngle=int(\i*25/\Nx); \t=pi/180/\k*\diagramAngle;}] in {1,...,\Nx}{
+    \tick{-\t,0}{90} node[left=2,below=-1,scale=0.85] {$-\diagramAngle$};
+    \tick{\t,0}{90} node[below=-1,scale=0.85] {$\diagramAngle$};
   }
   \foreach \i [evaluate={\rd=int(6*\i/\Ny); \y=\A*\rd/100;}] in {1,...,\Ny}{
     \tick{0,-\y}{0} node[left=-1,scale=0.85] {$-\rd$};
@@ -1590,8 +1588,8 @@
 \def\nsamples{50}
 \begin{tikzpicture}
 
-  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\si{\degree}]};
-  \draw[->,thick,black] (0,-4/3*\ymax) -- (0,1.1*2/3*\ymax) node[above=-1] {$\Delta f / \abs{f} \;\; [\%]$};
+  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\unit{\degree}]};
+  \draw[->,thick,black] (0,-4/3*\ymax) -- (0,1.1*2/3*\ymax) node[above=-1] {$\Delta f / \abs{f} \;\; [\unit{\percent}]$};
   %\draw[myblue,thick,variable=\t,samples=\nsamples,smooth,domain=-\xmax:\xmax]
   %  plot[domain=-\xmax:-0.4*\xmax](\t,{\A*reldiff(1-(\k*\t)^2/2,cos(180/pi*\k*\t))}) -- (0,0) --
   %  plot[domain=0.4*\xmax:\xmax](\t,{\A*reldiff(1-(\k*\t)^2/2,cos(180/pi*\k*\t))})
@@ -1601,9 +1599,9 @@
     node[left=11,below=-2] {$\dfrac{\bigl(1-\frac{\theta^2}{2}\bigr)-\cos\theta}{\abs{\cos\theta}}$};
 
   \node[right=1,below left=1,scale=0.9] at (0,0) {$0$};
-  \foreach \i [evaluate={\ang=int(\i*25/\Nx); \t=pi/180/\k*\ang;}] in {1,...,\Nx}{
-    \tick{-\t,0}{90} node[left=2,below=-1,scale=0.85] {$-\ang$};
-    \tick{\t,0}{90} node[below=-1,scale=0.85] {$\ang$};
+  \foreach \i [evaluate={\diagramAngle=int(\i*25/\Nx); \t=pi/180/\k*\diagramAngle;}] in {1,...,\Nx}{
+    \tick{-\t,0}{90} node[left=2,below=-1,scale=0.85] {$-\diagramAngle$};
+    \tick{\t,0}{90} node[below=-1,scale=0.85] {$\diagramAngle$};
   }
   \foreach \i [evaluate={\rd=int(\i); \y=\A*\rd/1000;}] in {1,...,\Ny}{
     \ifnumcomp{\i}{<}{3}{

@@ -7,14 +7,14 @@
 即使探测器能区分它们所占的模式，也不能给两个电子赋予可观测的粒子编号。
 
 考虑两个互不重叠的空间模式 $a,b$，并设探测器能够分辨粒子到达的模式。
-若入射的是电子和质子，$\ket{a}_{\elec}\otimes\ket{b}_{\mathrm p}$和
-$\ket{b}_{\elec}\otimes\ket{a}_{\mathrm p}$可以由“电子在哪一端”区分。
+若入射的是电子和质子，$\ket{a}_{\electron}\otimes\ket{b}_{\mathrm p}$和
+$\ket{b}_{\electron}\otimes\ket{a}_{\mathrm p}$可以由“电子在哪一端”区分。
 换成两个电子，且自旋相同，实验仍可读出$a,b$各有一个电子，记录中却没有粒子编号。
 为构造两粒子态，先给张量积的两个因子临时编号 $1,2$。
 \begin{definition}{全同粒子与交换对称性}{qm-exchange}
     全同粒子(identical particles)具有相同的内禀性质，交换其编号保持所有物理预测不变。
     交换算符(exchange operator)$\op{P}_{12}$在乘积基上把$\ket{a}_1\ket{b}_2$变为$\ket{b}_1\ket{a}_2$，
-    并按线性性作用于叠加态。满足$\op{P}_{12}\ket{\Psi}=+\ket{\Psi}$的态称为对称态，
+    并按线性作用于叠加态。满足$\op{P}_{12}\ket{\Psi}=+\ket{\Psi}$的态称为对称态，
     满足$\op{P}_{12}\ket{\Psi}=-\ket{\Psi}$的态称为反对称态。
 \end{definition}
 探测器$a,b$仍各在原处。连续交换两次回到原态，故若一次交换只乘一个相位，
@@ -38,19 +38,19 @@ $\ket{b}_{\elec}\otimes\ket{a}_{\mathrm p}$可以由“电子在哪一端”区�
 交换前后的两个乘积态一般有重叠，
 \begin{equation}
     (\bra{a}\otimes\bra{b})(\ket{b}\otimes\ket{a})
-    =\brkt{a}{b}\brkt{b}{a}=|s|^2.
+    =\brkt{a}{b}\brkt{b}{a}=\abs{s}^2.
 \end{equation}
 因此未归一化对称或反对称组合的范数平方为
-$1+1\pm|s|^2\pm|s|^2=2(1\pm|s|^2)$。
+$1+1\pm\abs{s}^2\pm\abs{s}^2=2(1\pm\abs{s}^2)$。
 
 相应的归一化态为
 \begin{equation}
     \ket{a,b}_\pm=
-    \frac{\ket{a}\ket{b}\pm\ket{b}\ket{a}}{\sqrt{2(1\pm|s|^2)}}.
+    \frac{\ket{a}\ket{b}\pm\ket{b}\ket{a}}{\sqrt{2(1\pm\abs{s}^2)}}.
 \end{equation}
 只在$s=0$时分母才是$\sqrt2$。
 \begin{corollary}[Pauli 不相容原理]
-    两个全同 Fermi 子不能占据同一个完整的单粒子态。此时 $|s|=1$，交换前后的两项在反对称组合中相消，
+    两个全同 Fermi 子不能占据同一个完整的单粒子态。此时 $\abs{s}=1$，交换前后的两项在反对称组合中相消，
     得到的零向量不能归一化。两个电子仍可占据同一空间轨道，只要它们的自旋态正交。
 \end{corollary}
 
@@ -98,15 +98,15 @@ Slater 行列式用粒子编号写出所有排列。实际计数实验直接给�
 例如在模式$a,b$的单粒子能量分别为$\epsilon_a,\epsilon_b$时，
 无相互作用的$\ket{1,1}$的能量就是$\epsilon_a+\epsilon_b$。
 若往空模式逐个加入粒子，计数改变便对应态空间中的一个操作。
-真空$\ket{\vac}$表示所有模式都空，产生算符$\op{a}_r^\dagger$在第$r$个模式加一个粒子，
+真空$\ket{\vac}$表示所有模式都空，产生算符$\op{a}_r\adjoint$在第$r$个模式加一个粒子，
 湮灭算符$\op{a}_r$从这个模式取走一个粒子。给定一组正交单粒子模式$\ket{r}$，Bose 子的算符满足
 \begin{equation}
-    [\op{a}_r,\op{a}_s^\dagger]=\delta_{rs}\one,\quad [\op{a}_r,\op{a}_s]=0,\qquad
+    [\op{a}_r,\op{a}_s\adjoint]=\delta_{rs}\one,\quad [\op{a}_r,\op{a}_s]=0,\qquad
     \ket{n_1,n_2,\ldots}=
-    \prod_r\frac{(\op{a}_r^\dagger)^{n_r}}{\sqrt{n_r!}}\ket{\vac}.
+    \prod_r\frac{(\op{a}_r\adjoint)^{n_r}}{\sqrt{n_r!}}\ket{\vac}.
 \end{equation}
-Fermi 子的产生、湮灭算符满足 $\{\op{c}_r,\op{c}_s^\dagger\}=\delta_{rs}\one$、$\{\op{c}_r,\op{c}_s\}=0$，
-所以$(\op{c}_r^\dagger)^2=0$，$n_r=0,1$。
+Fermi 子的产生、湮灭算符满足 $\{\op{c}_r,\op{c}_s\adjoint\}=\delta_{rs}\one$、$\{\op{c}_r,\op{c}_s\}=0$，
+所以$(\op{c}_r\adjoint)^2=0$，$n_r=0,1$。
 写多Fermi子态时固定模式顺序；对第$r$个模式湮灭会带前面已占据数决定的符号。
 
 \begin{definition}{占据数态上的产生与湮灭}{qm-fock-action}
@@ -116,40 +116,40 @@ Fermi 子的产生、湮灭算符满足 $\{\op{c}_r,\op{c}_s^\dagger\}=\delta_{r
     \begin{subequations}
         \begin{alignat}{1}
             \op{a}_r\ket{\bm n} &=\sqrt{n_r}\ket{\ldots,n_r-1,\ldots},\\
-            \op{a}_r^\dagger\ket{\bm n} &=\sqrt{n_r+1}\ket{\ldots,n_r+1,\ldots}.
+            \op{a}_r\adjoint\ket{\bm n} &=\sqrt{n_r+1}\ket{\ldots,n_r+1,\ldots}.
         \end{alignat}
     \end{subequations}
     对 Fermi 子，记排在第 $r$ 个模式之前的所有模式的占据数之和为 $N_{<r}$，则
     \begin{subequations}
         \begin{alignat}{1}
             \op{c}_r\ket{\bm n} &=(-1)^{N_{<r}}n_r\ket{\ldots,0_r,\ldots},\\
-            \op{c}_r^\dagger\ket{\bm n} &=(-1)^{N_{<r}}(1-n_r)\ket{\ldots,1_r,\ldots}.
+            \op{c}_r\adjoint\ket{\bm n} &=(-1)^{N_{<r}}(1-n_r)\ket{\ldots,1_r,\ldots}.
         \end{alignat}
     \end{subequations}
     真空 $\ket{\vac}$ 满足所有 $n_r=0$。总粒子数算符 $\op N$ 在占据数态上的本征值是各模式粒子数之和 $N$，即
     \[
-        \op N=\sum_r \op{a}_r^\dagger \op{a}_r\quad\text{（Bose 子）},\qquad
-        \op N=\sum_r \op{c}_r^\dagger \op{c}_r\quad\text{（Fermi 子）}.
+        \op N=\sum_r \op{a}_r\adjoint \op{a}_r\quad\text{（Bose 子）},\qquad
+        \op N=\sum_r \op{c}_r\adjoint \op{c}_r\quad\text{（Fermi 子）}.
     \]
 \end{definition}
 
 Fermi符号来自把$\op{c}_r$交换到第$r$个产生算符的位置，
 每经过一个已占据模式就出现一次负号。
-例如$\op{c}_2\op{c}_1^\dagger \op{c}_2^\dagger\ket{\vac}=-\op{c}_1^\dagger\ket{\vac}$。
+例如$\op{c}_2\op{c}_1\adjoint \op{c}_2\adjoint\ket{\vac}=-\op{c}_1\adjoint\ket{\vac}$。
 
-例如 $\op{a}_1^\dagger\ket{1,1}=\sqrt2\ket{2,1}$，产生算符使两 Bose 子态进入三粒子扇区。
+例如 $\op{a}_1\adjoint\ket{1,1}=\sqrt2\ket{2,1}$，产生算符使两 Bose 子态进入三粒子扇区。
 给定$N$且演化守恒粒子数时，整个计算都在同一扇区内完成。
 
 设单体算符(one-body operator)为 $\op{h}$，对称的两体相互作用(two-body interaction)为 $\op{v}$。多体 Hamilton 算符在占据数表示中为
 \begin{equation}
-    \op{H}=\sum_{rs}h_{rs}\op{a}_r^\dagger \op{a}_s
-    +\frac12\sum_{rstu}V_{rs;tu}\op{a}_r^\dagger \op{a}_s^\dagger \op{a}_u \op{a}_t,
+    \op{H}=\sum_{rs}h_{rs}\op{a}_r\adjoint \op{a}_s
+    +\frac12\sum_{rstu}V_{rs;tu}\op{a}_r\adjoint \op{a}_s\adjoint \op{a}_u \op{a}_t,
     \quad V_{rs;tu}=\mel{r,s}{\op{v}}{t,u}.
 \end{equation}
 Bose与Fermi粒子都采用这个表达式，Fermi情形把$\op{a}$换成$\op{c}$，按反对易关系运算。
 $h_{rs}=\mel{r}{\op{h}}{s}$描述一个粒子从$s$模式到$r$模式的矩阵元。
 两体项中的 $\op{a}_u\op{a}_t$ 在模式 $t,u$ 中各湮灭一个粒子，
-$\op{a}_r^\dagger\op{a}_s^\dagger$ 则在模式 $s,r$ 中各产生一个粒子。
+$\op{a}_r\adjoint\op{a}_s\adjoint$ 则在模式 $s,r$ 中各产生一个粒子。
 这里采用未反对称化的矩阵元，求和同时包含两种粒子排列，故有系数$1/2$。
 在固定 $N$ 扇区，这对应于按粒子编号写出的 Hamilton 算符
 \[
@@ -171,20 +171,20 @@ $\op{a}_r^\dagger\op{a}_s^\dagger$ 则在模式 $s,r$ 中各产生一个粒子�
 “两光子都透射”和“两光子都反射”通向同一符合结果。先按分束器的透反射相位叠加这两条过程的振幅，再取模平方，便得到符合概率。
 以 $a,b$ 标记输入端口，$c,d$ 标记输出端口。取无损平衡分束器的相位约定，使相应的产生算符满足
 \begin{equation}
-    \op{a}^\dagger\longmapsto\frac{\op{c}^\dagger+\op{d}^\dagger}{\sqrt2},\qquad
-    \op{b}^\dagger\longmapsto\frac{\op{c}^\dagger-\op{d}^\dagger}{\sqrt2}.
+    \op{a}\adjoint\longmapsto\frac{\op{c}\adjoint+\op{d}\adjoint}{\sqrt2},\qquad
+    \op{b}\adjoint\longmapsto\frac{\op{c}\adjoint-\op{d}\adjoint}{\sqrt2}.
 \end{equation}
 两个输入端各一个、其他自由度完全不可分辨的光子满足
 \begin{equation}
     \begin{alignedat}{1}
-        \ket{1,1}_{ab}=\op{a}^\dagger \op{b}^\dagger\ket{\vac} &\longmapsto\frac{(\op{c}^\dagger)^2-(\op{d}^\dagger)^2}{2}\ket{\vac}\\
+        \ket{1,1}_{ab}=\op{a}\adjoint \op{b}\adjoint\ket{\vac} &\longmapsto\frac{(\op{c}\adjoint)^2-(\op{d}\adjoint)^2}{2}\ket{\vac}\\
         &=\frac{\ket{2,0}_{cd}-\ket{0,2}_{cd}}{\sqrt2}.
     \end{alignedat}
 \end{equation}
 两输出各一个的振幅相消，符合概率为零。
 如果两个光子只有部分重叠，符合计数会恢复多少？
 设它们的归一化内部模式为 $\ket{u},\ket{v}$，忽略损耗，探测器只分辨输出端口。
-先保留内部标签，对 $\op{a}^\dagger(u)\op{b}^\dagger(v)\ket{\vac}$ 作同一分束变换，
+先保留内部标签，对 $\op{a}\adjoint(u)\op{b}\adjoint(v)\ket{\vac}$ 作同一分束变换，
 恰好每个输出一个光子的部分是
 \begin{equation}
     \ket{\Psi_{1,1}}
@@ -194,7 +194,7 @@ $\op{a}_r^\dagger\op{a}_s^\dagger$ 则在模式 $s,r$ 中各产生一个粒子�
 \begin{equation}
     \begin{alignedat}{1}
         P_{1,1}=\brkt{\Psi_{1,1}}{\Psi_{1,1}} &=\frac14\bigb{2-\brkt{v}{u}\brkt{u}{v}-\brkt{u}{v}\brkt{v}{u}}\\
-        &=\frac12(1-|\brkt{u}{v}|^2).
+        &=\frac12(1-\abs{\brkt{u}{v}}^2).
     \end{alignedat}
 \end{equation}
 内部模式相同时，两个到达不同端口的振幅相消，符合概率为零；
@@ -207,7 +207,7 @@ $f(\omega)=\brkt{\omega}{u}=\brkt{\omega}{v}$，
 把频谱归一化到总概率为 1，得到
 \begin{equation}
     \brkt{u}{v_\tau}
-    =\int |f(\omega)|^2\e^{-\i\omega\tau}\d\omega.
+    =\int \abs{f(\omega)}^2\e^{-\i\omega\tau}\d\omega.
 \end{equation}
 这里$f$是单光子态在频率基中的分量，$\omega$是角频率。
 
@@ -216,7 +216,7 @@ $f(\omega)=\brkt{\omega}{u}=\brkt{\omega}{v}$，
     角频率标准差为$\sigma_\omega\ll\omega_0$。
     将窄带积分延伸到整个实轴，有
     \begin{equation}
-        |f(\omega)|^2
+        \abs{f(\omega)}^2
         =\frac{1}{\sqrt{2\pi}\sigma_\omega}
             \exp\Bigp{-\frac{(\omega-\omega_0)^2}{2\sigma_\omega^2}}.
     \end{equation}
@@ -234,7 +234,7 @@ $f(\omega)=\brkt{\omega}{u}=\brkt{\omega}{v}$，
 
 \begin{figure}[htbp]
     \centering\includegraphics[width=.60\linewidth]{figures/hom_dip.pdf}
-    \caption{理想平衡分束器的符合概率 $P_{1,1}$。每条曲线的两个入射光子频谱相同、偏振平行；横轴用同一参考带宽 $\sigma_{\rm ref}$ 标度延迟，可在相同符合概率处比较两个凹陷的宽度。}
+    \caption{理想平衡分束器的符合概率 $P_{1,1}$。每条曲线的两个入射光子频谱相同、偏振平行；横轴用同一参考带宽 $\sigma_{\mathrm{ref}}$ 标度延迟，可在相同符合概率处比较两个凹陷的宽度。}
     \label{fig:hom-dip}
 \end{figure}
 这项分析适用于输入内部态可分解为两个纯单光子态的情形；
@@ -245,9 +245,9 @@ $f(\omega)=\brkt{\omega}{u}=\brkt{\omega}{v}$，
     设总态可分为$\ket{\Phi}\otimes\ket{s}$，
     其中$\ket{s}=(\ket{\up\dn}-\ket{\dn\up})/\sqrt2$。
     交换两个电子时，空间标签和自旋标签必须同时交换。
-    因为$\op{P}_{12}^{\mathrm{spin}}\ket{s}=-\ket{s}$，
+    因为$\op{P}_{12}^{\spinlabel}\ket{s}=-\ket{s}$，
     要使总态满足$\op{P}_{12}\ket{\Psi}=-\ket{\Psi}$，
-    就必须有$\op{P}_{12}^{\mathrm{space}}\ket{\Phi}=+\ket{\Phi}$。
+    就必须有$\op{P}_{12}^{\spatial}\ket{\Phi}=+\ket{\Phi}$。
 
     对两个正交空间轨道$\ket{a},\ket{b}$，
     允许的空间因子为

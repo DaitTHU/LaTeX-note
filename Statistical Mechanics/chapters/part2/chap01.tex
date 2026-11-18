@@ -1,5 +1,3 @@
-\newcommand{\Om}[1][]{\Omega_{\mathrm{#1}}}
-
 \chapter{近独立粒子系统的统计分布}
 
 统计物理是将宏观性质看作是对应微观量的统计平均的微观理论。单粒子的力学规律是决定论的，如量子力学的Schrödinger方程、经典力学中的正则方程或Newton II；而宏观系统的统计规律是非决定论的，用宏观量指定的宏观状态对应大量不同的微观状态。
@@ -24,7 +22,7 @@
 % 	\[
 % 		\varepsilon_n=\frac{n^2h^2}{8mL^2},\quad\omega_n=1\quad n=1,2,\ldots.
 % 	\]
-% 	能级间能量差$\ll$室温下热运动能量(典型值$\SI{25}{meV}$)，
+% 	能级间能量差$\ll$室温下热运动能量(典型值$\qty{25}{meV}$)，
 % 	因此能量准连续。
 % \end{example}
 
@@ -66,7 +64,7 @@
 
 \begin{example}
 	{}{}
-	考虑两个盒子，每个小球有$1/2\vs1/2$的概率在左边或右边的盒子中。
+	考虑两个盒子，每个小球落入左盒或右盒的概率各为 $1/2$。
 	我们统计左边盒子中的小球数量$X$作为宏观状态分布。
 	给定$N$个小球，则$X=k$的分布对应的微观状态数为
 	\[
@@ -74,7 +72,7 @@
 	\]
 	根据等概率假设，$X$服从二项分布，每种分布的概率为
 	\[
-		\Pr(X=k)=\frac{\Omega(X=k)}{\sum_{k=0}^N\Omega(X=k)}=\frac1{2^N}\binom Nk.
+		\P(X=k)=\frac{\Omega(X=k)}{\sum_{k=0}^N\Omega(X=k)}=\frac1{2^N}\binom Nk.
 	\]
 	随着$N$的增大，左边盒子中小球数量占比$x:=X/N$的概率密度$f(x)$越来越接近其最概然分布$1/2$，可以证明半高宽$\propto1/\sqrt N$。
 	对于宏观系统，粒子数$N$通常在$\NA\sim10^{23}$量级，在这一量级下，$X/N$以极高概率落在$1/2$的很小邻域内；这不意味着某个精确取值（例如$X=N/2$）的概率接近1。
@@ -116,7 +114,7 @@
 	\begin{subequations}
 		\label{eqn:Boltzmann system}
 		\begin{equation}
-			\Om[M]=N!\prod_i\frac{\omega_i^{a_i}}{a_i!}.
+			\multiplicity{M}=N!\prod_i\frac{\omega_i^{a_i}}{a_i!}.
 		\end{equation}
 	\end{subequations}
 	其最概然分布称为(经典) Maxwell-Boltzmann分布，满足
@@ -136,7 +134,7 @@
 	\end{equation}
 	可得
 	\[
-		\ln\Om[M]\simeq N\ln N-N+\sum_i a_i\biggb{\ln\biggp{\frac{\omega_i}{a_i}}+1}.
+		\ln\multiplicity{M}\simeq N\ln N-N+\sum_i a_i\biggb{\ln\biggp{\frac{\omega_i}{a_i}}+1}.
 	\]
 	结合粒子数和内能的条件：
 	\begin{subequations}
@@ -148,7 +146,7 @@
 	\end{subequations}
 	利用Lagrange乘数法，定义
 	\[
-		L:=\ln\Om[M]+\alpha\Bigp{N-\sum_i a_i}+\beta\Bigp{U-\sum_i a_i\varepsilon_i}.
+		L:=\ln\multiplicity{M}+\alpha\Bigp{N-\sum_i a_i}+\beta\Bigp{U-\sum_i a_i\varepsilon_i}.
 	\]
 	由最概然分布假设，要求
 	\[
@@ -185,7 +183,7 @@
 	\begin{subequations}
 		\label{eqn:Bose system}
 		\begin{equation}
-			\Om[B]=\prod_i\binom{a_i+\omega_i-1}{a_i}=\prod_i\frac{(a_i+\omega_i-1)!}{a_i!(\omega_i-1)!}.
+			\multiplicity{B}=\prod_i\binom{a_i+\omega_i-1}{a_i}=\prod_i\frac{(a_i+\omega_i-1)!}{a_i!(\omega_i-1)!}.
 		\end{equation}
 	\end{subequations}
 	最概然分布称为Bose-Einstein分布，满足
@@ -200,7 +198,7 @@
 	假设$a_i,\omega_i\gg 1$，
 	可得
 	\[
-		\ln\Om[B]\simeq\sum_i\biggb{a_i\ln\biggp{1+\frac{\omega_i}{a_i}}+\omega_i\ln\biggp{1+\frac{a_i}{\omega_i}}}.
+		\ln\multiplicity{B}\simeq\sum_i\biggb{a_i\ln\biggp{1+\frac{\omega_i}{a_i}}+\omega_i\ln\biggp{1+\frac{a_i}{\omega_i}}}.
 	\]
 	在最概然分布下，
 	\[
@@ -218,7 +216,7 @@
 	\begin{subequations}
 		\label{eqn:Fermi system}
 		\begin{equation}
-			\Om[F]=\prod_i\binom{\omega_i}{a_i}=\prod_i\frac{\omega_i!}{a_i!(\omega_i-a_i)!}.
+			\multiplicity{F}=\prod_i\binom{\omega_i}{a_i}=\prod_i\frac{\omega_i!}{a_i!(\omega_i-a_i)!}.
 		\end{equation}
 	\end{subequations}
 	最概然分布称为Fermi-Dirac分布，满足
@@ -233,7 +231,7 @@
 	假设每个粗粒化能级组均有$a_i\gg1$且$\omega_i-a_i\gg1$，以便使用Stirling近似；不要求$a_i\ll\omega_i$，否则会预先排除强简并情形。
 	可得
 	\[
-		\ln\Om[F]\simeq\sum_i\biggb{a_i\ln\biggp{\frac{\omega_i}{a_i}-1}-\omega_i\ln\biggp{1-\frac{a_i}{\omega_i}}}.
+		\ln\multiplicity{F}\simeq\sum_i\biggb{a_i\ln\biggp{\frac{\omega_i}{a_i}-1}-\omega_i\ln\biggp{1-\frac{a_i}{\omega_i}}}.
 	\]
 	在最概然分布下，
 	\[
@@ -250,7 +248,7 @@
 	当$\e^\alpha\gg 1$时，Bose分布和Fermi分布变为半经典的(semi-classical) Boltzmann分布
 	\begin{subequations}
 		\begin{gather}
-			\Om[S]=\prod_i\frac{\omega_i^{a_i}}{a_i!},\\			
+			\multiplicity{S}=\prod_i\frac{\omega_i^{a_i}}{a_i!},\\
 			a_i=\omega_i\e^{-\alpha-\beta\varepsilon_i}.
 		\end{gather}
 	\end{subequations}
@@ -259,7 +257,7 @@
 
 % \begin{proof}
 % 	\[
-% 		\ln\Om[S]=\sum_i a_i\ln\omega_i-\ln a_i!
+% 		\ln\multiplicity{S}=\sum_i a_i\ln\omega_i-\ln a_i!
 % 		=N+\sum_i a_i\ln\biggp{\frac{\omega_i}{a_i}}.
 % 	\]
 % \end{proof}
@@ -276,20 +274,15 @@
 
 \paragraph{最概然方法误差估计}
 
-\let\oldm\m
-\renewcommand{\m}{\mathrm{m}}
-
-对Boltzmann统计，在满足$\sum_i\vd a_i=0$、$\sum_i\varepsilon_i\vd a_i=0$的涨落下，在最概然分布$\{a_{i,\m}\}$附近$a_i=a_{i,\m}+\vd a_i$对$\ln\Omega$展开，得
+对Boltzmann统计，在满足$\sum_i\vd a_i=0$、$\sum_i\varepsilon_i\vd a_i=0$的涨落下，在最概然分布$\{a_{i,\mostprobable}\}$附近$a_i=a_{i,\mostprobable}+\vd a_i$对$\ln\Omega$展开，得
 \begin{align*}
-	\ln\Omega\{a_i\}&=\ln\Omega\{a_{i,\m}\}+\sum_i\pp{a_i}\ln\Omega\{a_{i,\m}\}\vd a_i+\frac12\sum_i\frac{\p^2}{\p a_i^2}\ln\Omega\{a_{i,\m}\}\vd a_i^2+\bigo(\vd a_i^3)\\
-	&\simeq\ln\Omega\{a_{i,\m}\}+0-\frac12\sum_i\frac{\vd a_i^2}{a_{i,\m}}+\bigo(\vd a_i^3).
+	\ln\Omega\{a_i\}&=\ln\Omega\{a_{i,\mostprobable}\}+\sum_i\pp{a_i}\ln\Omega\{a_{i,\mostprobable}\}\vd a_i+\frac12\sum_i\pp[2]{a_i}\ln\Omega\{a_{i,\mostprobable}\}\vd a_i^2+\bigo(\vd a_i^3)\\
+	&\simeq\ln\Omega\{a_{i,\mostprobable}\}+0-\frac12\sum_i\frac{\vd a_i^2}{a_{i,\mostprobable}}+\bigo(\vd a_i^3).
 \end{align*}
-对于宏观系统，$N=\textstyle\sum_ia_i\sim 10^{23}$，因此即使分布的相对偏差$\vd a_i/a_{i,\m}\sim 10^{-4}$很小，微观状态数的相对偏差也会大得离谱：
+对于宏观系统，$N=\textstyle\sum_ia_i\sim 10^{23}$，因此即使分布的相对偏差$\vd a_i/a_{i,\mostprobable}\sim 10^{-4}$很小，微观状态数的相对偏差也会大得离谱：
 \[
-	\frac{\Omega\{a_i\}}{\Omega\{a_{i,\m}\}}\simeq\exp\biggp{-\frac12\sum_ia_{i,\m}\cdot\frac{\vd a_i^2}{a_{i,\m}^2}}\sim\e^{-10^{23-8}}\lll 1.
+	\frac{\Omega\{a_i\}}{\Omega\{a_{i,\mostprobable}\}}\simeq\exp\biggp{-\frac12\sum_ia_{i,\mostprobable}\cdot\frac{\vd a_i^2}{a_{i,\mostprobable}^2}}\sim\e^{-10^{23-8}}\lll 1.
 \]
-
-\let\m\oldm
 
 \section{宏观量的统计表达式}
 
@@ -347,7 +340,7 @@
 	\begin{equation}
 		S=\kB\ln\Omega.
 	\end{equation}
-	其中$\kB=\SI{1.380649e-23}{\J\per\K}$为Boltzmann常数。
+	其中$\kB=\qty{1.380649e-23}{\joule\per\kelvin}$为Boltzmann常数。
 \end{theorem}
 
 \begin{proof}
@@ -362,7 +355,7 @@
 		S&=S_0+\kB(N\ln N+\alpha N+\beta U)
 		=S_0+\kB\biggp{N\ln N+\sum_i a_i(\alpha+\beta\varepsilon_i)}\\
 		&=S_0+\kB\biggp{N\ln N+\sum_i a_i\ln\biggp{\frac{\omega_i}{a_i}}}
-		=S_0+\kB\ln\Om[M].
+		=S_0+\kB\ln\multiplicity{M}.
 		\qedhere
 	\end{align*}
 \end{proof}
@@ -371,7 +364,7 @@
 	对于经典Boltzmann分布，可方便地取$S_0=0$；
 	而对于半经典Boltzmann分布，如果要使Boltzmann关系仍成立，应有$S_0=-\kB\ln N!$，或者说 
 	\[
-		S=\kB\ln\Om[S]=\kB\ln\biggp{\frac{\Om[M]}{N!}}
+		S=\kB\ln\multiplicity{S}=\kB\ln\biggp{\frac{\multiplicity{M}}{N!}}
 		=\kB\biggp{N+\sum_i a_i\ln\biggp{\frac{\omega_i}{a_i}}}.
 	\]
 \end{remark}
@@ -386,7 +379,7 @@
 % 				-N\kB T\alpha,&\text{semi-classical}
 % 			\end{cases}
 % 			\\
-% 			\mu&=\pu[T]FN=-\alpha\kB T.
+% 			\mu&=\pvat{F}{N}{T}=-\alpha\kB T.
 % 		\end{align}
 % 	\end{subequations}
 % \end{corollary}
@@ -407,7 +400,7 @@
 \end{definition}
 
 \begin{remark}
-	在经典力学中，粒子状态对应$\mu$空间中一个确定的点$(q,p)$；而在(半经典)量子力学中，由Heisenberg不确定性关系$\D q\D p\sim h$，粒子状态(量子态)对应$\mu$空间中的一块相体积。
+	在经典力学中，粒子状态对应$\mu$空间中一个确定的点$(q,p)$；而在(半经典)量子力学中，由Heisenberg不确定性关系$\Delta q\Delta p\sim h$，粒子状态(量子态)对应$\mu$空间中的一块相体积。
 \end{remark}
 
 \begin{theorem}{极限定理}{limit theorem}
@@ -430,9 +423,9 @@
 	由此可得配分函数$Z$、粒子数$N$和内能$U$的积分表达式
 	\begin{subequations}
 		\begin{align}
-			Z&=\int\zti g(\varepsilon)\e^{-\beta\varepsilon}\d\varepsilon,\\
-			N&=\e^{-\alpha}Z=\int\zti g(\varepsilon)\e^{-\alpha-\beta\varepsilon}\d\varepsilon,\\
-			U&=-\e^{-\alpha}\pv Z\beta=\int\zti g(\varepsilon)\varepsilon\e^{-\alpha-\beta\varepsilon}\d\varepsilon.
+			Z&=\intRplus g(\varepsilon)\e^{-\beta\varepsilon}\d\varepsilon,\\
+			N&=\e^{-\alpha}Z=\intRplus g(\varepsilon)\e^{-\alpha-\beta\varepsilon}\d\varepsilon,\\
+			U&=-\e^{-\alpha}\pv Z\beta=\intRplus g(\varepsilon)\varepsilon\e^{-\alpha-\beta\varepsilon}\d\varepsilon.
 		\end{align}
 	\end{subequations}
 \end{corollary}
@@ -457,7 +450,7 @@
 	$\varepsilon_{n-1}\to\varepsilon_n$只有一个状态，
 	相体积为$h$
 	\[
-		\D\Omega(\varepsilon_n)=\frac{2\pi}\omega\hbar\omega=h.
+		\Delta\Omega(\varepsilon_n)=\frac{2\pi}\omega\hbar\omega=h.
 	\]
 	\tcblower
 	二维谐振子的Hamilton量为
@@ -477,7 +470,7 @@
 	即$\varepsilon_{n-1}\to\varepsilon_n$有$(n+1)$个状态，每个状态的
 	相体积为
 	\[
-		\frac{\D\Omega(\varepsilon_n)}{n+1}=\frac{2\pi^2\hbar^2(2n+1)}{n+1}\to h^2.
+		\frac{\Delta\Omega(\varepsilon_n)}{n+1}=\frac{2\pi^2\hbar^2(2n+1)}{n+1}\to h^2.
 	\]
 \end{example}
 \begin{example}{转子}{rotor}
@@ -499,7 +492,7 @@
 	$\varepsilon_{\ell-1}\to\varepsilon_\ell$有$(2\ell+1)$个状态，每个状态的
 	相体积为
 	\[
-		\frac{\D\Omega(\varepsilon_\ell)}{2\ell+1}=\frac{8\pi^2\hbar^2\ell}{2\ell+1}\to h^2.
+		\frac{\Delta\Omega(\varepsilon_\ell)}{2\ell+1}=\frac{8\pi^2\hbar^2\ell}{2\ell+1}\to h^2.
 	\]
 \end{example}
 \begin{example}{单原子分子}{monatomic molecule}

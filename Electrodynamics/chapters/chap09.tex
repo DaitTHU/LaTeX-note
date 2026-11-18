@@ -2,7 +2,7 @@
 \label{chap:relativistic electromagnetic}
 
 %三维一般波动方程
-%\lapla u-\frac1{a^2}\pv[2]ut=-f(\bm r,t),
+%\laplacian u-\frac1{a^2}\pv[2]ut=-f(\bm r,t),
 %中的$a$是波速，依惯性系而不同。
 
 \paragraph{Michelson-Morley实验}
@@ -88,7 +88,7 @@
 \begin{definition}{四矢量}{4-vector}
     四矢量的逆变分量(contravariant components)不仅有四个分量，还必须按$a'{}^\mu=\Lambda^\mu{}_\nu a^\nu$变换，记为
     \begin{equation}
-        a^\mu\equiv(a^0,a^1,a^2,a^3)\tp,
+        a^\mu\equiv(a^0,a^1,a^2,a^3)\transp,
     \end{equation}
     % 称$a^0$是时间(temporal)分量。
 
@@ -99,7 +99,7 @@
 \end{definition}
 时空连续统(continuum)由位置四矢量表示：
 \begin{equation}
-    x^\mu\equiv(ct,x,y,z)\tp.
+    x^\mu\equiv(ct,x,y,z)\transp.
 \end{equation}
 \begin{definition}{Einstein求和约定}{Einstein summation convetion}
     表达式上下标中出现重复指标时，表示对其遍历求和，即
@@ -215,7 +215,7 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
     E^2=p^2c^2+m^2c^4.
 \end{equation}
 \begin{example}{Compton散射}{Compton scattering}
-    频率为$\nu$的光子与一个静止的电子发生Compton散射，散射后光子的频率变为$\nu'$，散射角为$\theta$，反冲电子动量大小为$p_\elec$，反冲角为$\phi$。
+    频率为$\nu$的光子与一个静止的电子发生Compton散射，散射后光子的频率变为$\nu'$，散射角为$\theta$，反冲电子动量大小为$p_\electron$，反冲角为$\phi$。
     \begin{center}
         \tikzfigure{compton-scattering}
         \captionof{figure}{Compton散射示意图}
@@ -223,19 +223,19 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
     由横向、纵向的动量守恒以及能量守恒：
     \begin{subequations}
         \begin{align}
-            \frac{h\nu}c&=\frac{h\nu'}c\cos\theta+p_\elec\cos\phi,\\
-            0&=\frac{h\nu'}c\sin\theta-p_\elec\sin\phi,\\
-            h\nu+m_\elec c^2&=h\nu'+\sqrt{(m_\elec c^2)^2+(p_\elec c)^2}.
+            \frac{h\nu}c&=\frac{h\nu'}c\cos\theta+p_\electron\cos\phi,\\
+            0&=\frac{h\nu'}c\sin\theta-p_\electron\sin\phi,\\
+            h\nu+m_\electron c^2&=h\nu'+\sqrt{(m_\electron c^2)^2+(p_\electron c)^2}.
         \end{align}
     \end{subequations}
     消去$\phi$，
     解得
     \begin{equation}
-        h\nu'=\frac{h\nu}{1+\alpha(1-\cos\theta)},\quad\alpha\equiv\frac{h\nu}{m_\elec c^2}.
+        h\nu'=\frac{h\nu}{1+\alpha(1-\cos\theta)},\quad\alpha\equiv\frac{h\nu}{m_\electron c^2}.
     \end{equation}
     将上式改写成波长的形式，得到Compton移动
     \begin{equation}
-        \D\lambda=\frac h{m_\elec c}(1-\cos\theta).
+        \Delta\lambda=\frac h{m_\electron c}(1-\cos\theta).
     \end{equation}
 \end{example}
 
@@ -247,7 +247,7 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
 \]
 因此功能关系仍然满足：
 \begin{equation}
-    W\equiv\int\bm F\cdot\d\bm\ell=\int\dv{\bm p}t\cdot\bm u\d t=\int\dd t\frac{m\bm u}{\sqrt{1-u^2/c^2}}\cdot\bm u\d t=\D E.
+    W\equiv\int\bm F\cdot\d\bm\ell=\int\dv{\bm p}t\cdot\bm u\d t=\int\dd t\frac{m\bm u}{\sqrt{1-u^2/c^2}}\cdot\bm u\d t=\Delta E.
 \end{equation}
 而Newton第三定律在不同地的时候不再成立，因为在相对论中，同时性是相对的。
 
@@ -281,7 +281,7 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
     \]
     正负电荷线密度变为$\lambda_\pm'=\pm\gamma_{v_\pm'}\lambda_0$，总电荷线密度和电场为
     \[
-        \lambda\tot=-\frac{2vu}{c^2}\gamma_u\lambda,\quad E=\frac{\lambda\tot}{2\pi\varepsilon_0r}.
+        \lambda_\tot=-\frac{2vu}{c^2}\gamma_u\lambda,\quad E=\frac{\lambda_\tot}{2\pi\varepsilon_0r}.
     \]
     因此$S'$系中电荷所受的电场力为
     \[
@@ -365,7 +365,7 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
 \paragraph{张量符号中的电动力学}
 用张量的语言重新表述电动力学定律（Maxwell方程和Lorentz力）。统一电荷源$\rho$和电流源$\bm J$，定义四矢量电流源
 \begin{equation}
-    J^\mu=(c\rho,J_x,J_y,J_z)\tp,
+    J^\mu=(c\rho,J_x,J_y,J_z)\transp,
 \end{equation}
 \begin{definition}{四维导数}{}
     定义 
@@ -416,7 +416,7 @@ $\mu=1,2,3$给出$x,y,z$分量
 
 将标量势和矢量势的定义：
 \begin{align*}
-    \bm E&=-\nabla\Phi-\pv{\bm A}t,\\
+    \bm E&=-\grad\Phi-\pv{\bm A}t,\\
     \bm B&=\curl\bm A,
 \end{align*}
 展开，可见对称性：
@@ -428,7 +428,7 @@ $\mu=1,2,3$给出$x,y,z$分量
 
 四矢量势
 \begin{equation}
-    A^\mu:=(\Phi/c,A_x,A_y,A_z)\tp,
+    A^\mu:=(\Phi/c,A_x,A_y,A_z)\transp,
 \end{equation}
 则电磁张量可以写成
 \begin{equation}
@@ -450,7 +450,7 @@ $\mu=1,2,3$给出$x,y,z$分量
     \]
     则
     \[
-        \bm E=-\nabla\Phi-\pv{\bm A}t=\frac1{4\pi\varepsilon_0}\frac{\gamma q\bm R}{\bigb{\gamma^2(x-vt)^2+y^2+z^2}^{3/2}},\quad\bm R=(x-vt,y,z).
+        \bm E=-\grad\Phi-\pv{\bm A}t=\frac1{4\pi\varepsilon_0}\frac{\gamma q\bm R}{\bigb{\gamma^2(x-vt)^2+y^2+z^2}^{3/2}},\quad\bm R=(x-vt,y,z).
     \]
 \end{example}
 利用四矢量势，Maxwell方程组变为

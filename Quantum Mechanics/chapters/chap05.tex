@@ -12,24 +12,24 @@
 把半径和极角暂时省略，一阶展开为
 \begin{equation}
     (\op{U}(\epsilon)\psi)(\phi)=\psi(\phi-\epsilon)
-        =\psi(\phi)-\epsilon\,\partial_\phi\psi(\phi)+\bigo(\epsilon^2).
+        =\psi(\phi)-\epsilon\,\p_\phi\psi(\phi)+\bigo(\epsilon^2).
 \end{equation}
 若把这个变化写成 $\op{U}(\epsilon)=\one-\i\epsilon \op{G}/\hbar+\cdots$，
-比较系数可知 $\op{G}=-\i\hbar\,\partial_\phi$。由
-$\partial_\phi=-y\partial_x+x\partial_y$，即得 $\op{G}=\op{X}\op{P}_y-\op{Y}\op{P}_x=\op{L}_z$。
+比较系数可知 $\op{G}=-\i\hbar\,\p_\phi$。由
+$\p_\phi=-y\p_x+x\p_y$，即得 $\op{G}=\op{X}\op{P}_y-\op{Y}\op{P}_x=\op{L}_z$。
 这种确定无穷小变化的算符称为生成元(generator)。
-有限维中，幺正性 $\op{U}^\dagger \op{U}=\one$ 的一阶项要求 $\op{G}^\dagger=\op{G}$。
+有限维中，幺正性 $\op{U}\adjoint \op{U}=\one$ 的一阶项要求 $\op{G}\adjoint=\op{G}$。
 对连续自由度，还要选定使生成元自伴的定义域。
 一般记 $\epsilon$ 为变换的参数，使乘积 $\epsilon \op{G}$ 具有作用量量纲。
 
 一个主动变换$\op{U}(\epsilon)=\exp(-\i\epsilon \op{G}/\hbar)$若保持Hamilton算符不变，
-$\op{U}^\dagger \op{H}\op{U}=\op{H}$，对$\epsilon$求导得到$[\op{G},\op{H}]=0$。
+$\op{U}\adjoint \op{H}\op{U}=\op{H}$，对$\epsilon$求导得到$[\op{G},\op{H}]=0$。
 当$\op{G}$不显含时间且定义域条件成立时，式\eqref{eq:heisenberg}给出$\d\ave{\op{G}}/\nd t=0$。
 这个对称性还使演化保持 $\op{G}$ 的各个谱子空间，因而 $\op{G}$ 的整个测量概率分布守恒。
-若生成元本身含时，正确条件是$\partial_t\op{G}+(\i/\hbar)[\op{H},\op{G}]=0$。
+若生成元本身含时，正确条件是$\p_t\op{G}+(\i/\hbar)[\op{H},\op{G}]=0$。
 
 平移(translation)$\op{T}(\bm a)=\exp(-\i\bm a\cdot\hatbm{P}/\hbar)$满足
-$\op{T}^\dagger\hatbm{X} \op{T}=\hatbm{X}+\bm a\,\one$；空间均匀性因此给出动量守恒。
+$\op{T}\adjoint\hatbm{X} \op{T}=\hatbm{X}+\bm a\,\one$；空间均匀性因此给出动量守恒。
 旋转$\op{R}(\bm n,\theta)=\exp(-\i\theta\bm n\cdot\hatbm{J}/\hbar)$的生成元满足
 \begin{equation}
     [\op{J}_i,\op{J}_j]=\i\hbar\epsilon_{ijk}\op{J}_k.
@@ -66,7 +66,7 @@ $\op{T}^\dagger\hatbm{X} \op{T}=\hatbm{X}+\bm a\,\one$；空间均匀性因此�
             \op{J}_z\bigket{\lambda,m}&=\hbar m\bigket{\lambda,m}.
         \end{alignat}
     \end{subequations}
-    定义$\op{J}_+=\op{J}_x+\i \op{J}_y$、$\op{J}_-=\op{J}_x-\i \op{J}_y$，且$\op{J}_+^\dagger=\op{J}_-$。
+    定义$\op{J}_+=\op{J}_x+\i \op{J}_y$、$\op{J}_-=\op{J}_x-\i \op{J}_y$，且$\op{J}_+\adjoint=\op{J}_-$。
     若一个非零子空间在三个 $\op{J}_i$ 的作用下封闭，且不含更小的非零共同不变子空间，就称它为不可约(irreducible)角动量多重态。
 \end{definition}
 
@@ -145,7 +145,7 @@ $\brkt{a',b'}{a,b}=\brkt{a'}{a}\brkt{b'}{b}$。
     固定两个子系统的角动量量子数 $j_1,j_2$，取各自一个不可约多重态。
     在其张量积空间中，总角动量 $\hatbm{J}=\hatbm{J}_1+\hatbm{J}_2$ 的量子数依次为
     \begin{equation}
-        j=|j_1-j_2|,|j_1-j_2|+1,\ldots,j_1+j_2 .
+        j=\abs{j_1-j_2},\abs{j_1-j_2}+1,\ldots,j_1+j_2 .
     \end{equation}
     每个这样的 $j$ 出现一个多重态，每个多重态中 $m=m_1+m_2$ 从 $-j$ 取到 $j$。
 \end{theorem}
@@ -377,7 +377,7 @@ $\op{d}_z=\op{d}_0$ 分量，吸收这样的光保持 $m$。其余磁量子数�
 这里$\brkt{jm;kq}{j'm'}$采用\dfnref{dfn:qm-cg}中的耦合系数约定。
 定理将旋转决定的角依赖与动力学决定的约化矩阵元分开；
 其一般证明可参照Littlejohn的讲义，比较公式时需统一约化矩阵元的归一化约定\cite{littlejohnwe}。
-三角规则(triangle rule)$|j-k|\leq j'\leq j+k$和$m'=m+q$来自角动量合成。
+三角规则(triangle rule)$\abs{j-k}\leq j'\leq j+k$和$m'=m+q$来自角动量合成。
 对电偶极$\hatbm{d}$，$k=1$且宇称为奇，因此必须改变宇称，
 $\Delta j=0,\pm1$但$0\leftrightarrow0$禁止，$\Delta m=0,\pm1$。
 角动量选择定则筛出允许通道；允许通道的跃迁强度还取决于径向积分，它也可能为零。

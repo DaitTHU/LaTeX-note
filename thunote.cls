@@ -53,7 +53,11 @@
 
 \RequirePackage[title]{appendix}
 
-\RequirePackage{amssymb, amsmath, amsfonts, amsthm}
+\RequirePackage{amsmath,amssymb,amsthm,mathrsfs,cancel}
+\theoremstyle{definition}
+\newtheorem*{corollary}{推论}
+\newtheorem*{remark}{注}
+\newtheorem*{lemma}{引理}
 \everymath{\displaystyle}
 % \allowdisplaybreaks[4] % 0: no-break; 4: force-break
 
@@ -117,17 +121,15 @@
 \RequirePackage{subcaption}
 \RequirePackage{booktabs}
 
-\RequirePackage{siunitx}
+\RequirePackage{siunitx}[2021/05/17]
 \sisetup{
   inter-unit-product = \ensuremath{{}\cdot{}},
-  per-mode = symbol,
-  per-mode = reciprocal-positive-first,
+  per-mode = power-positive-first,
   range-units = single,
-  separate-uncertainty = true,
-  range-phrase = \ifmmode\text{\;-\;}\else\;-\;\fi
+  uncertainty-mode = separate,
+  range-phrase = {\,\text{至}\,}
 }
-\DeclareSIUnit\angstrom{\text{Å}}
-\DeclareSIUnit\atm{\text{atm}}
+\DeclareSIUnit\atm{atm}
 
 \RequirePackage{tcolorbox}
 \tcbuselibrary{theorems, skins, breakable}

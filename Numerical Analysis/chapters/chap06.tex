@@ -52,7 +52,7 @@
     \]
     充分性：其矩阵各分量
     \[
-        \abs{a_{ij}^{(k)}}=\abs{e_i\tp A^{(k)}e_j}\leq\norm{A^{(k)}e_j}_\infty\to 0.
+        \abs{a_{ij}^{(k)}}=\abs{e_i\transp A^{(k)}e_j}\leq\norm{A^{(k)}e_j}_\infty\to 0.
         \qedhere
     \]
 \end{proof}
@@ -218,7 +218,7 @@
     {Krylov子空间}{Krylov subspace}
     给定非零向量$v$和非零方阵$A$，定义
     \[
-        \mathcal K_n(v):=\lspan(v,Av,\ldots,A^{n-1}v),
+        \mathcal K_n(v):=\Span(v,Av,\ldots,A^{n-1}v),
     \]
     称为Krylov子空间。
 \end{definition}
@@ -234,9 +234,9 @@
 
 \begin{definition}
     {预处理矩阵}{preconditioning matrix}
-    若$M$可逆且$M\iv$是$A\iv$的一个较好的近似，对$M\iv Ax=M\iv b$使用Richardson迭代：
+    若$M$可逆且$M\inv$是$A\inv$的一个较好的近似，对$M\inv Ax=M\inv b$使用Richardson迭代：
     \begin{equation}
-        x^{(k+1)}=(I-M\iv A)x^{(k)}+M\iv b=x^{(k)}+M\iv r^{(k)},
+        x^{(k+1)}=(I-M\inv A)x^{(k)}+M\inv b=x^{(k)}+M\inv r^{(k)},
     \end{equation}
     矩阵$M$称为预处理矩阵(preconditioning matrix)。
 \end{definition}
@@ -254,7 +254,7 @@
 
 \begin{example}
     {Jacobi迭代法}{Jacobi iterative method}
-    预处理矩阵$M=D$，迭代矩阵$B_\text J=-D\iv(L+U)$，迭代的分量形式为：
+    预处理矩阵$M=D$，迭代矩阵$B_\text J=-D\inv(L+U)$，迭代的分量形式为：
     \begin{equation}
         x_{i+1}^{(k)}=\frac1{a_{kk}}\biggp{b_k-\sum_{j\neq k}a_{kj}x_i^{(j)}}.
     \end{equation}
@@ -262,7 +262,7 @@
 
 \begin{example}
     {Gauss-Seidel迭代法}{GS iterative method}
-    预处理矩阵$M=D+L$，迭代矩阵$B_\text G=-(D+L)\iv U$，迭代的分量形式为：
+    预处理矩阵$M=D+L$，迭代矩阵$B_\text G=-(D+L)\inv U$，迭代的分量形式为：
     \begin{equation}
         x_{i+1}^{(k)}=\frac1{a_{kk}}\biggp{b_k-\sum_{j=1}^{k-1}a_{kj}x_{i+1}^{(j)}-\sum_{j=k+1}^na_{kj}x_i^{(j)}}.
     \end{equation}
@@ -281,15 +281,15 @@
 \begin{proof}
     对于Jacobi法，若$B_\text J$有特征值$\lambda$且$\abs\lambda\geq 1$，则 
     \[
-        \det(\lambda I-B_\text J)=0\implies\det(D+\lambda\iv(L+U))=0,
+        \det(\lambda I-B_\text J)=0\implies\det(D+\lambda\inv(L+U))=0,
     \]
-    若$A$严格对角占优(或不可约弱对角占优)，则$D+\lambda\iv(L+U)$也为严格对角占优(或不可约弱对角占优)，矛盾！故$\rho(B_\text J)<1$，Jacobi法收敛。
+    若$A$严格对角占优(或不可约弱对角占优)，则$D+\lambda\inv(L+U)$也为严格对角占优(或不可约弱对角占优)，矛盾！故$\rho(B_\text J)<1$，Jacobi法收敛。
 
     对于G-S法，设$B_\text G$有特征值$\lambda$且$\abs\lambda\geq 1$，则 
     \[
-        \det(\lambda I-B_\text G)=0\implies\det(D+L+\lambda\iv U)=0,
+        \det(\lambda I-B_\text G)=0\implies\det(D+L+\lambda\inv U)=0,
     \]
-    若$A$严格对角占优(或不可约弱对角占优)，则$D+L+\lambda\iv U$也为严格对角占优(或不可约弱对角占优)，矛盾！故$\rho(B_\text G)<1$，G-S法收敛。
+    若$A$严格对角占优(或不可约弱对角占优)，则$D+L+\lambda\inv U$也为严格对角占优(或不可约弱对角占优)，矛盾！故$\rho(B_\text G)<1$，G-S法收敛。
 \end{proof}
 
 \begin{theorem}
@@ -301,7 +301,7 @@
 
 \begin{example}
     {逐次超松弛迭代}{successive overrelaxation iterative method}
-    预处理矩阵$M=D/\omega+L$，迭代矩阵$L_\omega=(D+\omega L)\iv[(1-\omega)D-\omega U]$，
+    预处理矩阵$M=D/\omega+L$，迭代矩阵$L_\omega=(D+\omega L)\inv[(1-\omega)D-\omega U]$，
     \begin{equation}
         x_{i+1}^{(k)}=(1-\omega)x_i^{(k)}+\frac\omega{a_{kk}}\biggp{b_k-\sum_{j=1}^{k-1}a_{kj}x_{i+1}^{(j)}-\sum_{j=k+1}^na_{kj}x_i^{(j)}}.
     \end{equation}
@@ -317,9 +317,9 @@
 \end{theorem}
 
 \begin{proof}
-    设$L_\omega$的特征值是$\lambda_1,\ldots,\lambda_n$，由于$L_\omega=(D+\omega L)\iv[(1-\omega)D-\omega U]$可以写成下三角矩阵和上三角矩阵的乘积：
+    设$L_\omega$的特征值是$\lambda_1,\ldots,\lambda_n$，由于$L_\omega=(D+\omega L)\inv[(1-\omega)D-\omega U]$可以写成下三角矩阵和上三角矩阵的乘积：
     \[
-        \lambda_1\cdots\lambda_n=\det(L_\omega)=\det(D\iv)\det((1-\omega)D)=(1-\omega)^n,
+        \lambda_1\cdots\lambda_n=\det(L_\omega)=\det(D\inv)\det((1-\omega)D)=(1-\omega)^n,
     \]
     故
     \[
@@ -348,9 +348,9 @@
         % (1-\omega)\inp{Dx}x-\omega\inp{Ux}x=\lambda(\inp{Dx}x+\omega\inp{Lx}x)\implies
         \lambda=\frac{(1-\omega)\inp{Dx}x-\omega\inp{Ux}x}{\inp{Dx}x+\omega\inp{Lx}x},
     \]
-    由$A$正定，$D$也正定，记$\inp{Dx}x=:p>0$，$\inp{Lx}x=a+\i b$，由$A$对称，$L\tp=U$，
+    由$A$正定，$D$也正定，记$\inp{Dx}x=:p>0$，$\inp{Lx}x=a+\i b$，由$A$对称，$L\transp=U$，
     \[
-        \inp{Ux}x=\inp{L\tp x}x=\inp x{Lx}=\overline{\inp{Lx}x}=a-\i b,
+        \inp{Ux}x=\inp{L\transp x}x=\inp x{Lx}=\overline{\inp{Lx}x}=a-\i b,
     \]
     可将$\lambda$用$\omega,p,a,b$表示出来，继而
     \[
@@ -367,7 +367,7 @@
 
 希望选取最优的$\omega$使得迭代矩阵谱半径最小：
 \begin{equation}
-    \omega^*=\arg\min_{\omega}\rho(L_\omega).
+    \omega^*=\argmin_{\omega}\rho(L_\omega).
 \end{equation}
 
 \begin{theorem}
@@ -469,7 +469,7 @@
     \end{equation}
     若算子$A$对称正定，则
     \begin{equation}
-        Ax^*=b\iff x^*=\arg\min_{x\in V}\varphi(x).
+        Ax^*=b\iff x^*=\argmin_{x\in V}\varphi(x).
     \end{equation}
 \end{theorem}
 
@@ -496,7 +496,7 @@
     {子空间搜索}{subspace search}
     设$x+\Phi$是一个仿射(affine)平面，则
     \[
-        y^*=\arg\min_{y\in\Phi}\varphi(x+y)\iff 
+        y^*=\argmin_{y\in\Phi}\varphi(x+y)\iff
         % \forall y\in\Phi,\enspace\inp{b-A(x+y^*)}y=0\iff
         b-A(x+y^*)\perp\Phi.
     \]
@@ -520,7 +520,7 @@
     给定$x^{(k)}$和搜索方向$p^{(k)}\neq 0$，考虑一维极小值问题
     \begin{equation}
         \label{eqn:alphak}
-        \alpha_k=\arg\min_{\alpha\in\RR}\varphi(x^{(k)}+\alpha p^{(k)})=\frac{\inp{r^{(k)}}{p^{(k)}}}{\norm{p^{(k)}}_A^2}.
+        \alpha_k=\argmin_{\alpha\in\RR}\varphi(x^{(k)}+\alpha p^{(k)})=\frac{\inp{r^{(k)}}{p^{(k)}}}{\norm{p^{(k)}}_A^2}.
     \end{equation}
     并使
     \begin{equation}
@@ -572,32 +572,32 @@
 \begin{lemma}
     $\forall x\neq 0$，
     \begin{equation}
-        \frac{\norm x_A^2\norm x_{A\iv}^2}{\norm x^4}\leq\frac{(\cond_2(A)+1)^2}{4\cond_2(A)}.
+        \frac{\norm x_A^2\norm x_{A\inv}^2}{\norm x^4}\leq\frac{(\cond_2(A)+1)^2}{4\cond_2(A)}.
     \end{equation}
 \end{lemma}
 
 \begin{proof}
-    设$\lambda\maxi,\lambda\mini$分别是对称正定算子$A$的最大最小特征值。
+    设$\lambda_{\max},\lambda_{\min}$分别是对称正定算子$A$的最大最小特征值。
     则$\forall\lambda_i$为$A$的特征值，满足
     \[
-        \frac1{\lambda_i}\leq\frac1{\lambda\mini}+\frac1{\lambda\maxi}-\frac{\lambda_i}{\lambda\mini\lambda\maxi}.
+        \frac1{\lambda_i}\leq\frac1{\lambda_{\min}}+\frac1{\lambda_{\max}}-\frac{\lambda_i}{\lambda_{\min}\lambda_{\max}}.
     \]
     则$\forall x$且$\norm x=1$，
     \begin{align*}
-        \frac{\norm x_A^2\norm x_{A\iv}^2}{\norm x^4}&=\frac{\inp{Ax}x\inp{A\iv x}x}{\inp xx^2}=\sum_i\lambda_ix_i^2\sum_i\frac1{\lambda_i}x_i^2\\
-        &\leq\sum_i\lambda_ix_i^2\biggp{\frac1{\lambda\mini}+\frac1{\lambda\maxi}-\frac1{\lambda\mini\lambda\maxi}\sum_i\lambda_ix_i^2}\leq\frac{(\lambda\maxi+\lambda\mini)^2}{4\lambda\maxi\lambda\mini}.
+        \frac{\norm x_A^2\norm x_{A\inv}^2}{\norm x^4}&=\frac{\inp{Ax}x\inp{A\inv x}x}{\inp xx^2}=\sum_i\lambda_ix_i^2\sum_i\frac1{\lambda_i}x_i^2\\
+        &\leq\sum_i\lambda_ix_i^2\biggp{\frac1{\lambda_{\min}}+\frac1{\lambda_{\max}}-\frac1{\lambda_{\min}\lambda_{\max}}\sum_i\lambda_ix_i^2}\leq\frac{(\lambda_{\max}+\lambda_{\min})^2}{4\lambda_{\max}\lambda_{\min}}.
     \end{align*}
-    由$A$对称，$\cond_2(A)=\abs{\lambda\maxi}/\abs{\lambda\mini}$，由$A$正定，$\lambda\mini>0$。
+    由$A$对称，$\cond_2(A)=\abs{\lambda_{\max}}/\abs{\lambda_{\min}}$，由$A$正定，$\lambda_{\min}>0$。
 \end{proof}
 
 \begin{proof}
-    由$Ae^{(k)}=-r^{(k)}$，有$\inp{e^{(k)}}{r^{(k)}}_A=-\norm{r^{(k)}}^2$，$\norm{e^{(k)}}_A=\norm{r^{(k)}}_{A\iv}$，故
+    由$Ae^{(k)}=-r^{(k)}$，有$\inp{e^{(k)}}{r^{(k)}}_A=-\norm{r^{(k)}}^2$，$\norm{e^{(k)}}_A=\norm{r^{(k)}}_{A\inv}$，故
     \begin{align*}
         \norm{e^{(k+1)}}_A^2&=\norm{e^{(k)}+\alpha_kr^{(k)}}_A^2
         =\norm{e^{(k)}}_A^2+\alpha_k^2\norm{r^{(k)}}_A^2+2\alpha_k\inp{e^{(k)}}{r^{(k)}}_A\\
         &=\norm{e^{(k)}}_A^2+\alpha_k^2\norm{r^{(k)}}_A^2-2\alpha_k\norm{r^{(k)}}^2=
         \norm{e^{(k)}}_A^2-\frac{\norm{r^{(k)}}^4}{\norm{r^{(k)}}_A^2}\\
-        &=\norm{e^{(k)}}_A^2\biggp{1-\frac{\norm{r^{(k)}}^4}{\norm{r^{(k)}}_A^2\norm{r^{(k)}}_{A\iv}^2}}\leq\norm{e^{(k)}}_A^2\biggp{1-\frac{4\cond_2(A)}{(\cond_2(A)+1)^2}}\\
+        &=\norm{e^{(k)}}_A^2\biggp{1-\frac{\norm{r^{(k)}}^4}{\norm{r^{(k)}}_A^2\norm{r^{(k)}}_{A\inv}^2}}\leq\norm{e^{(k)}}_A^2\biggp{1-\frac{4\cond_2(A)}{(\cond_2(A)+1)^2}}\\
         &=\norm{e^{(k)}}_A^2\biggp{\frac{\cond_2(A)-1}{\cond_2(A)+1}}^2.
     \end{align*}
     迭代即可得到。
@@ -613,17 +613,17 @@
 仍然考虑对称正定矩阵$A$和一维极小搜索，但不再沿着正交的$r^{(0)},r^{(1)},\ldots$，寻找另一组$p^{(0)},p^{(1)},\ldots$
 对于第$k$次搜索：
 \[
-    \alpha_k=\arg\min_\alpha\varphi(x^{(k)}+\alpha p^{(k)})\implies
+    \alpha_k=\argmin_\alpha\varphi(x^{(k)}+\alpha p^{(k)})\implies
     x^{(k+1)}=x^{(k)}+\alpha_kp^{(k)},
 \]
 由于
 \[
     x^{(k+1)}=x^{(0)}+\alpha_0p^{(0)}+\cdots+\alpha_kp^{(k)}.
 \]
-我们希望$p^{(k)}$的选取能使得确定$\alpha_k$后，$x^{(k+1)}$是$x^{(0)}+\lspan(p^{(0)},\ldots,p^{(k)})$中最优的，
+我们希望$p^{(k)}$的选取能使得确定$\alpha_k$后，$x^{(k+1)}$是$x^{(0)}+\Span(p^{(0)},\ldots,p^{(k)})$中最优的，
 即一维极小搜索的结果与$(k+1)$维搜索结果相同：
 \[
-    (\alpha_0,\ldots,\alpha_k)=\mathop{\arg\min}\limits_{(\alpha_0,\ldots,\alpha_k)}\varphi(x^{(0)}+\alpha_0p^{(0)}+\cdots+\alpha_kp^{(k)}).
+    (\alpha_0,\ldots,\alpha_k)=\argmin_{(\alpha_0,\ldots,\alpha_k)}\varphi(x^{(0)}+\alpha_0p^{(0)}+\cdots+\alpha_kp^{(k)}).
 \]
 
 \begin{definition}
@@ -641,11 +641,11 @@
 
 \begin{theorem}
     {多维子空间搜索问题}{}
-    记$y\in\lspan(p^{(0)},\ldots,p^{(k-1)})$，$x=x^{(0)}+y+\alpha p^{(k)}$，
+    记$y\in\Span(p^{(0)},\ldots,p^{(k-1)})$，$x=x^{(0)}+y+\alpha p^{(k)}$，
     \[
         \varphi(x)=\varphi(x^{(0)}+y)+\alpha\inp{y}{p^{(k)}}_A-\alpha\inp{r^{(0)}}{p^{(k)}}+\frac{\alpha^2}2\norm{p^{(k)}}^2_A.
     \]
-    上式出现了交叉项$\inp{y}{p^{(k)}}_A$，为了简化问题，自然可考虑使交叉项$\inp{y}{p^{(k)}}_A=0$，这要求$p^{(k)}$与$\lspan(p^{(0)},\ldots,p^{(k-1)})$是$A$ - 正交的。%(见\dfnref{dfn:A-orthogonal})
+    上式出现了交叉项$\inp{y}{p^{(k)}}_A$，为了简化问题，自然可考虑使交叉项$\inp{y}{p^{(k)}}_A=0$，这要求$p^{(k)}$与$\Span(p^{(0)},\ldots,p^{(k-1)})$是$A$ - 正交的。%(见\dfnref{dfn:A-orthogonal})
 
     由此便分解成了两个极小问题：
     \[
@@ -664,7 +664,7 @@
 \end{theorem}
 
 \begin{corollary}
-    由子空间搜索\thmref{thm:subspace search}，$r^{(k)}\perp\lspan(p^{(0)},\ldots,p^{(k-1)})$。
+    由子空间搜索\thmref{thm:subspace search}，$r^{(k)}\perp\Span(p^{(0)},\ldots,p^{(k-1)})$。
 \end{corollary}
 
 \begin{remark}
@@ -682,11 +682,11 @@
 
 \begin{theorem}
     {}{}
-    $r^{(k)}\perp_A\lspan(p^{(0)},\ldots,p^{(k-2)})$。
+    $r^{(k)}\perp_A\Span(p^{(0)},\ldots,p^{(k-2)})$。
 \end{theorem}
 
 \begin{proof}
-    $r^{(k)}\perp\lspan(p^{(0)},\ldots,p^{(k-1)})=\lspan(r^{(0)},\ldots,r^{(k-1)})$，由式\eqref{eqn:r^k+1=r^k-alpha_kAp^k}
+    $r^{(k)}\perp\Span(p^{(0)},\ldots,p^{(k-1)})=\Span(r^{(0)},\ldots,r^{(k-1)})$，由式\eqref{eqn:r^k+1=r^k-alpha_kAp^k}
     \[
         Ap^{(i)}=\frac{r^{(i+1)}-r^{(i)}}{\alpha_i}\perp r^{(k)},\enspace i=0,\ldots,k-2.
         \qedhere
@@ -735,11 +735,11 @@
         \label{eqn:CG e^k}
         \norm{e^{(k)}}_A\leq 2\biggp{\frac{\sqrt{\cond_2(A)}-1}{\sqrt{\cond_2(A)}+1}}^k\norm{e^{(0)}}_A.
     \end{equation}
-    其中$\lambda\maxi,\lambda\mini$分别是对称正定算子$A$的最大最小特征值。
+    其中$\lambda_{\max},\lambda_{\min}$分别是对称正定算子$A$的最大最小特征值。
 \end{theorem}
 
 \begin{proof}
-    记$\alpha=\lambda\mini/\lambda\maxi$，取
+    记$\alpha=\lambda_{\min}/\lambda_{\max}$，取
     \[
         p_k^*(x)=\Biggdivision{T_k\biggp{\frac{2x-(1+\alpha)}{1-\alpha}}}{T_k\biggp{-\frac{1+\alpha}{1-\alpha}}},
     \]
@@ -763,24 +763,24 @@
     {预处理的共轭梯度算法}{preconditioning conjugate gradient}
     给定对称正定的预处理矩阵$M$，则
     \[
-        Ax=b\iff M\iv Ax=M\iv b,
+        Ax=b\iff M\inv Ax=M\inv b,
     \]
-    对预处理后的方程应用共轭梯度算法：$p^{(0)}=M\iv r^{(0)}$，
+    对预处理后的方程应用共轭梯度算法：$p^{(0)}=M\inv r^{(0)}$，
     \begin{subequations}
         \begin{align}
             % r^{(k)}&=b-Ax^{(k)},\\
-            \alpha_k&=\frac{\norm{r^{(k)}}_{M\iv}^2}{\norm{p^{(k)}}_A^2},\\
+            \alpha_k&=\frac{\norm{r^{(k)}}_{M\inv}^2}{\norm{p^{(k)}}_A^2},\\
             x^{(k+1)}&=x^{(k)}+\alpha_kp^{(k)},\\
             r^{(k+1)}&=r^{(k)}-\alpha_kAp^{(k)};\\
-            \beta_k&=\frac{\norm{r^{(k+1)}}_{M\iv}^2}{\norm{r^{(k)}}_{M\iv}^2},\\
-            p^{(k+1)}&=M\iv r^{(k+1)}+\beta_kp^{(k)}.
+            \beta_k&=\frac{\norm{r^{(k+1)}}_{M\inv}^2}{\norm{r^{(k)}}_{M\inv}^2},\\
+            p^{(k+1)}&=M\inv r^{(k+1)}+\beta_kp^{(k)}.
         \end{align}
     \end{subequations}
     当$r^{(k)}=0$时计算终止。
 \end{theorem}
 
 \begin{corollary}
-    其误差仍满足式\eqref{eqn:CG e^k}，但条件数改善为$\cond_2(M\iv A)$。
+    其误差仍满足式\eqref{eqn:CG e^k}，但条件数改善为$\cond_2(M\inv A)$。
 \end{corollary}
 
 \begin{remark}
@@ -788,13 +788,13 @@
     方便计算、
     好近似。
     \begin{itemize}
-        \item 代数方法：分解$A=M+N$，其中$M=LL\tp$对称正定、$L$尽可能稀疏，而$N$尽可能小，称为$A$的不完全Cholesky分解。
+        \item 代数方法：分解$A=M+N$，其中$M=LL\transp$对称正定、$L$尽可能稀疏，而$N$尽可能小，称为$A$的不完全Cholesky分解。
         
         比如取为对角部分$M=D$，在$A$的对角元素相差较大时收敛速度会大大提高。
         \item 分析方法：谱等价，$\forall x$
         \[
             c_1\norm x_A^2\leq\norm x_M^2\leq c_2\norm x_A^2,
         \]
-        则$\rho(M\iv A)\in[c_2\iv,c_1\iv]$。
+        则$\rho(M\inv A)\in[c_2\inv,c_1\inv]$。
     \end{itemize}
 \end{remark}

@@ -13,7 +13,7 @@
 \section{消元法}
 \label{sec:elimination}
 
-如何解线性方程组，得到$x$？如果$A$是可逆的，将$Ax=b$左乘逆$A\iv$，当然可以得到$x=A\iv b$。但一般我们不知道逆$A\iv$，甚至$A$本身可能都不可逆，此时如何求解？
+如何解线性方程组，得到$x$？如果$A$是可逆的，将$Ax=b$左乘逆$A\inv$，当然可以得到$x=A\inv b$。但一般我们不知道逆$A\inv$，甚至$A$本身可能都不可逆，此时如何求解？
 
 \begin{theorem}{Gauss消元法}{Gaussian elimination}
 	消元法(elimination)通过交换方程和倍加消元，得到等价的行阶梯型方程组。
@@ -195,9 +195,9 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 	初等矩阵的逆还是初等矩阵：
 	\begin{subequations}
 		\begin{align}
-			E_{i\to j}(a)\iv&=E_{i\to j}(-a),\\
-			E_{i\leftrightarrow j}\iv&=E_{i\leftrightarrow j},\\
-			E_i(c)\iv&=E_i(c\iv)
+			E_{i\to j}(a)\inv&=E_{i\to j}(-a),\\
+			E_{i\leftrightarrow j}\inv&=E_{i\leftrightarrow j},\\
+			E_i(c)\inv&=E_i(c\inv)
 		\end{align}
 	\end{subequations}
 \end{corollary}
@@ -208,20 +208,20 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 
 \begin{definition}
 	{初等矩阵的广义定义}{}
-	$\forall u,v\in\FF^m$，$\sigma\in\FF$，当$1+\sigma v\tp u\neq0$时，称可逆的秩一更新$I+\sigma uv\tp$为这里的广义初等矩阵。
+	$\forall u,v\in\FF^m$，$\sigma\in\FF$，当$1+\sigma v\transp u\neq0$时，称可逆的秩一更新$I+\sigma uv\transp$为这里的广义初等矩阵。
 \end{definition}
 \begin{remark}
-	三种行变换对应的初等矩阵也可以写成$I+\sigma uv\tp$的形式：
+	三种行变换对应的初等矩阵也可以写成$I+\sigma uv\transp$的形式：
 	\begin{subequations}
 		\begin{align}
-			E_{i\to j}(a)&=I+ae_je_i\tp,\\
-			E_{i\leftrightarrow j}&=I-(e_i-e_j)(e_i-e_j)\tp,\\
-			E_i(c)&=I+(c-1)e_ie_i\tp.
+			E_{i\to j}(a)&=I+ae_je_i\transp,\\
+			E_{i\leftrightarrow j}&=I-(e_i-e_j)(e_i-e_j)\transp,\\
+			E_i(c)&=I+(c-1)e_ie_i\transp.
 		\end{align}
 	\end{subequations}
 	由式\eqref{eqn:(I+uvT)-1}，初等矩阵都是可逆的，并且逆也是初等矩阵：
 	\begin{equation}
-		(I+\sigma uv\tp)\iv=I-\frac{\sigma}{1+\sigma v\tp u}uv\tp,
+		(I+\sigma uv\transp)\inv=I-\frac{\sigma}{1+\sigma v\transp u}uv\transp,
 	\end{equation}
 \end{remark}
 
@@ -241,7 +241,7 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 \begin{proof}
 	采用轮转证法：
 
-	$(1)\implies(2)$：左乘$A\iv$可得$x=A\iv b$；
+	$(1)\implies(2)$：左乘$A\inv$可得$x=A\inv b$；
 
 	$(2)\implies(3)$：取$b=0$，又注意到$A0=0$，由解的唯一性得证；
 
@@ -249,7 +249,7 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 
 	$(4)\implies(5)$：显然；
 
-	$(5)\implies(6)$：在$A$化为$\rref(A)=I$的初等变换中，与每步初等变换过程等价的初等矩阵为$E_1,\ldots,E_k$，即$E_k\cdots E_1A=I$，因此$A=E_1\iv\cdots E_k\iv$，且$E_1\iv,\ldots,E_k\iv$也是初等矩阵；
+	$(5)\implies(6)$：在$A$化为$\rref(A)=I$的初等变换中，与每步初等变换过程等价的初等矩阵为$E_1,\ldots,E_k$，即$E_k\cdots E_1A=I$，因此$A=E_1\inv\cdots E_k\inv$，且$E_1\inv,\ldots,E_k\inv$也是初等矩阵；
 
 	$(6)\implies(1)$：初等矩阵均可逆，故其乘积$A$也可逆。
 \end{proof}
@@ -260,9 +260,9 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 
 \begin{corollary}
 	利用Gauss-Jordan消元法
-	对增广矩阵$[A\enspace I]$做消元操作，就可以得到$A$的逆$A\iv$：
+	对增广矩阵$[A\enspace I]$做消元操作，就可以得到$A$的逆$A\inv$：
 	\[
-		[A\enspace I]\enspace\sim\enspace[I\enspace A\iv].
+		[A\enspace I]\enspace\sim\enspace[I\enspace A\inv].
 	\]
 \end{corollary}
 
@@ -281,7 +281,7 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 \end{theorem}
 
 \begin{proof}
-	若$A$不可逆，则$\exists x\neq 0$使得$Ax=0$。令$k=\arg\max_i\abs{x_i}$，即$\abs{x_k}=\max_i\abs{x_i}$。考虑$Ax$的第$k$行：
+	若$A$不可逆，则$\exists x\neq 0$使得$Ax=0$。令$k=\argmax_i\abs{x_i}$，即$\abs{x_k}=\max_i\abs{x_i}$。考虑$Ax$的第$k$行：
 	\[
 		\sum_{i=1}^nA_{ki}x_i=0\iff A_{kk}x_k=-\sum_{i\neq k}A_{ki}x_i,
 	\]
@@ -316,9 +316,9 @@ Gauss消元法所得到的阶梯型方程组，对应的矩阵可称为行阶梯
 	\[
 		E_k\cdots E_2E_1A=U.
 	\]
-	由于$E_i$及其逆$E_i\iv$都是下三角的，故
+	由于$E_i$及其逆$E_i\inv$都是下三角的，故
 	\[
-		L=E_1\iv E_2\iv\cdots E_k\iv,
+		L=E_1\inv E_2\inv\cdots E_k\inv,
 	\]
 	也是下三角的，%进而$A=LU$；
 	$A=LU$；反之，则存在一个置换矩阵$P$，使得$PA=LU$。

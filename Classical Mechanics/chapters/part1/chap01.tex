@@ -5,14 +5,14 @@
 这并不要求物体真的没有尺寸：计算行星轨道时可以忽略自转，计算陀螺时就不能这样做。
 在惯性系中，对质量恒定的质点，
 \begin{equation}
- m\ddot{\bm r}=\bm F(\bm r,\dot{\bm r},t).
+ m\ddot{\bm r}=\bm F(\bm r,\dotbm{r},t).
  \label{eq:cm-newton}
 \end{equation}
-给定初始位置和速度，便得到一个初值问题。在通常的光滑力模型下，运动在局部唯一。\footnote{一组充分条件是力连续，且在所考察的时间邻域内对$(\bm r,\dot{\bm r})$一致局部Lipschitz。}
+给定初始位置和速度，便得到一个初值问题。在通常的光滑力模型下，运动在局部唯一。\footnote{一组充分条件是力连续，且在所考察的时间邻域内对$(\bm r,\dotbm{r})$一致局部Lipschitz。}
 碰撞、奇异势和分段摩擦需要另加处理，不能对任意方程都预先断言解存在且唯一。
 
 实际解题的顺序是：选系统和参考系，画受力图，写约束，再选择坐标。
-支持力和张力来自约束，并不总能事先取成$mg$；静摩擦力满足不等式$|f|\leq\mu_s N$，
+支持力和张力来自约束，并不总能事先取成$mg$；静摩擦力满足不等式$\abs{f}\leq\mu_s N$，
 只有临界滑动时才取等号。滑动摩擦$\mu_kN$则是经验模型，方向与接触面的相对滑动速度相反。
 
 两个惯性系以恒定相对速度$\bm u$平移时，$t'=t$，$\bm r'=\bm r-\bm u t-\bm r_0$，
@@ -22,31 +22,31 @@
 \section{平面极坐标中的速度与加速度}
 笛卡尔坐标中的基矢固定，故可以直接逐分量求导。平面极坐标的基矢随粒子位置旋转：
 \begin{align}
- \bm r&=r\nvec r,&
- \dot{\nvec r}&=\dot\phi\nvec\phi,&
- \dot{\nvec\phi}&=-\dot\phi\nvec r,\\
- \bm v&=\dot r\nvec r+r\dot\phi\nvec\phi,&&&
- \bm a&=(\ddot r-r\dot\phi^2)\nvec r
- +(r\ddot\phi+2\dot r\dot\phi)\nvec\phi.
+ \bm r&=r\uvec r,&
+ \dot{\uvec r}&=\dot\phi\uvec\phi,&
+ \dot{\uvec\phi}&=-\dot\phi\uvec r,\\
+ \bm v&=\dot r\uvec r+r\dot\phi\uvec\phi,&&&
+ \bm a&=(\ddot r-r\dot\phi^2)\uvec r
+ +(r\ddot\phi+2\dot r\dot\phi)\uvec\phi.
  \label{eq:cm-polar-a}
 \end{align}
-基矢导数可由$\nvec r=(\cos\phi,\sin\phi)$直接得到；向心项不是额外施加的力。
+基矢导数可由$\uvec r=(\cos\phi,\sin\phi)$直接得到；向心项不是额外施加的力。
 对半径固定的圆周运动，径向加速度为$-r\dot\phi^2$，切向加速度为$r\ddot\phi$。
 以后选择极坐标，是因为中心力天然区分径向与切向，而不是为了增加坐标形式。
 
 \section{功、势能与能量守恒}
 将式\eqref{eq:cm-newton}与速度点乘，得到功率关系
 \begin{equation}
- \dv{}{t}\Bigp{\frac12m v^2}=\bm F\cdot\bm v,
+ \dd{t}\Bigp{\frac12m v^2}=\bm F\cdot\bm v,
  \qquad T_B-T_A=\int_A^B\bm F\cdot\d\bm r.
 \end{equation}
-若$\bm F=-\nabla V(\bm r)$，则$E=T+V$守恒。
-在单连通区域内，连续可微力场的$\nabla\times\bm F=0$保证存在单值势能；
+若$\bm F=-\grad V(\bm r)$，则$E=T+V$守恒。
+在单连通区域内，连续可微力场的$\curl\bm F=0$保证存在单值势能；
 在有洞区域内还须检查闭合回路的环量，不能仅凭局部旋度判断全局保守性。
 
-更一般地，若$\bm F=-\nabla V(\bm r,t)+\bm F_{\rm nc}$，则
+更一般地，若$\bm F=-\grad V(\bm r,t)+\bm F_\nonconservative$，则
 \begin{equation}
- \dot E=\pv{V}{t}+\bm F_{\rm nc}\cdot\bm v.
+ \dot E=\pv{V}{t}+\bm F_\nonconservative\cdot\bm v.
  \label{eq:cm-energy-work}
 \end{equation}
 势能显含时间时，即使力在每一时刻都可由势函数给出，机械能也未必守恒。
@@ -78,27 +78,27 @@
 对固定成员、质量不变的$N$个粒子，令
 \begin{equation}
  M=\sum_a m_a,\quad \bm R=\frac1M\sum_a m_a\bm r_a,
- \quad \bm P=\sum_a m_a\dot{\bm r}_a=M\dot{\bm R}.
+ \quad \bm P=\sum_a m_a\dotbm{r}_a=M\dotbm{R}.
 \end{equation}
 若内部力成对大小相等、方向相反，求和得到
 \begin{equation}
- \dot{\bm P}=\bm F_{\rm ext},\qquad M\ddot{\bm R}=\bm F_{\rm ext}.
+ \dotbm{P}=\bm F_\external,\qquad M\ddot{\bm R}=\bm F_\external.
 \end{equation}
 因此无外力时质心匀速运动。令$\bm\rho_a=\bm r_a-\bm R$，则
 \begin{equation}
- T=\frac12M\norm{\dot{\bm R}}^2+\frac12\sum_a m_a\norm{\dot{\bm\rho}_a}^2.
+ T=\frac12M\norm{\dotbm{R}}^2+\frac12\sum_a m_a\norm{\dotbm{\rho}_a}^2.
  \label{eq:cm-com-energy}
 \end{equation}
 交叉项因$\sum_a m_a\bm\rho_a=0$而消失。这区分整体平移与内部运动。
 
-关于惯性系中固定原点的角动量为$\bm\ell=\sum_a\bm r_a\times m_a\dot{\bm r}_a$。
+关于惯性系中固定原点的角动量为$\bm\ell=\sum_a\bm r_a\times m_a\dotbm{r}_a$。
 若内部力还沿两粒子连线，则其内力矩相消，
 \begin{equation}
- \dot{\bm\ell}=\bm\tau_{\rm ext},\qquad
- \bm\ell=\bm R\times M\dot{\bm R}+\bm\ell_{\rm CM}.
+ \dotbm{\ell}=\bm\tau_\external,\qquad
+ \bm\ell=\bm R\times M\dotbm{R}+\bm\ell_\CM.
 \end{equation}
 第一项是质心的轨道角动量，第二项是关于质心的角动量；
-关于质心同样有$\dot{\bm\ell}_{\rm CM}=\bm\tau_{{\rm ext},\rm CM}$。
+关于质心同样有$\dotbm{\ell}_\CM=\bm\tau_{\external,\CM}$。
 对任意运动的取矩点则须重新求导，不能直接套用固定原点公式。
 含电磁场的系统还可能需要计入场动量，不能只对粒子强行假定内力遵循上述成对关系。
 
@@ -116,14 +116,14 @@
 火箭不是固定成员的粒子集合。取前进方向为正，设喷气相对火箭的速度为$-u$，$u>0$，
 在$\d t$内排出质量$-\d m>0$。对“火箭加刚排出的气体”用动量定理，保留一阶小量：
 \begin{equation}
- mv+F_{\rm ext}\d t=(m+\d m)(v+\d v)+(-\d m)(v-u),
+ mv+F_\external\d t=(m+\d m)(v+\d v)+(-\d m)(v-u),
 \end{equation}
 于是
 \begin{equation}
- m\dot v=F_{\rm ext}-u\dot m.
+ m\dot v=F_\external-u\dot m.
 \end{equation}
 无外力且$u$恒定时，$v_f-v_i=u\ln(m_i/m_f)$。
-直接对火箭写$F_{\rm ext}=\d(mv)/\d t$会漏掉穿越系统边界的动量流。
+直接对火箭写$F_\external=\d(mv)/\nd t$会漏掉穿越系统边界的动量流。
 
 \paragraph{复习与阅读}
 Newton方程给出各分量的运动；守恒律减少要求解的自由度。

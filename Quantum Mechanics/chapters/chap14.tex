@@ -27,14 +27,14 @@ $\op{\rho}_S=\tr_E\op{\rho}_{SE}$。
         \end{alignat}
     \end{subequations}
     两个输出仍正交归一，因此可扩充为整个联合空间上的幺正变换。
-    设原子的初态为 $a\ket{g}+b\ket{e}$，其中 $|a|^2+|b|^2=1$。
+    设原子的初态为 $a\ket{g}+b\ket{e}$，其中 $\abs{a}^2+\abs{b}^2=1$。
     根据线性叠加，等候结束后的联合态为
     \begin{equation}
         \bigp{a\ket{g}+\sqrt{1-p}\,b\ket{e}}\ket{0_E}
             +\sqrt p\,b\ket{g}\ket{1_E}.
     \end{equation}
     光子计数器理想时，这两个正交的环境记录可以区分。读到零个光子的概率是第一项的模方
-    $|a|^2+(1-p)|b|^2$，读到一个的概率是第二项的模方 $p|b|^2$。
+    $\abs{a}^2+(1-p)\abs{b}^2$，读到一个的概率是第二项的模方 $p\abs{b}^2$。
     例如初态为等幅叠加、$p=1/2$，四分之一的实验会记录一个光子，原子随即确定在基态。
     其余四分之三记录为零，其中原子仍在激发态的条件概率是 $(1/4)/(3/4)=1/3$。
 
@@ -45,7 +45,7 @@ $\op{\rho}_S=\tr_E\op{\rho}_{SE}$。
         \op{K}_1=\sqrt p\ktbr{g}{e}.
     \end{equation}
     若只测量原子，各条光子记录所对应的条件态应按记录概率加权。
-    条件态的归一化分母与权重相消，便有 $\op{\rho}'=\op{K}_0\op{\rho} \op{K}_0^\dagger+\op{K}_1\op{\rho} \op{K}_1^\dagger$。
+    条件态的归一化分母与权重相消，便有 $\op{\rho}'=\op{K}_0\op{\rho} \op{K}_0\adjoint+\op{K}_1\op{\rho} \op{K}_1\adjoint$。
     在有序基$(\ket{g},\ket{e})$中逐项相乘，
     \begin{equation}
         \op{\rho}'=
@@ -62,13 +62,13 @@ $\op{\rho}_S=\tr_E\op{\rho}_{SE}$。
 \end{example}
 
 上述两种记录可以推广到任意环境基，即使实际实验只观测原子也可以求和。
-封闭联合系统满足$\op{\rho}_{SE}(t)=\op{U}\op{\rho}_{SE}(0)\op{U}^\dagger$。
+封闭联合系统满足$\op{\rho}_{SE}(t)=\op{U}\op{\rho}_{SE}(0)\op{U}\adjoint$。
 若初始态可分为$\op{\rho}_S\otimes\op{\rho}_E$且环境处于纯态$\ket{e_0}$，选环境基$\ket{\alpha}$，定义
 \begin{equation}
     \begin{aligned}
         \op{K}_\alpha&=(\one_S\otimes\bra{\alpha})\op{U}(\one_S\otimes\ket{e_0}),\\
-        \op{\rho}_S(t)&=\sum_\alpha \op{K}_\alpha\op{\rho}_S\op{K}_\alpha^\dagger,
-        \qquad\sum_\alpha \op{K}_\alpha^\dagger \op{K}_\alpha=\one_S.
+        \op{\rho}_S(t)&=\sum_\alpha \op{K}_\alpha\op{\rho}_S\op{K}_\alpha\adjoint,
+        \qquad\sum_\alpha \op{K}_\alpha\adjoint \op{K}_\alpha=\one_S.
     \end{aligned}
 \end{equation}
 
@@ -80,12 +80,12 @@ $\op{K}_\alpha$ 称为 Kraus 算符，作用在系统空间上。右端先把系
     =\sum_\alpha(\op{K}_\alpha\ket{\psi})\otimes\ket{\alpha}.
 \end{equation}
 求外积并取环境的迹，因环境基正交，具有不同 $\alpha$ 的交叉项消失，余下各项给出上式中的约化态。
-由线性性，该式对一般$\op{\rho}_S$同样成立。
-再由环境完备性和$\op{U}^\dagger \op{U}=\one$，
+由线性，该式对一般$\op{\rho}_S$同样成立。
+再由环境完备性和$\op{U}\adjoint \op{U}=\one$，
 \begin{equation}
     \begin{alignedat}{1}
-        \sum_\alpha \op{K}_\alpha^\dagger \op{K}_\alpha &=(\one_S\otimes\bra{e_0})
-            \op{U}^\dagger
+        \sum_\alpha \op{K}_\alpha\adjoint \op{K}_\alpha &=(\one_S\otimes\bra{e_0})
+            \op{U}\adjoint
             \Bigp{\one_S\otimes\sum_\alpha\ktbr{\alpha}{\alpha}}
             \op{U}(\one_S\otimes\ket{e_0})\\
         &=\one_S.
@@ -108,8 +108,8 @@ $\op{K}_\alpha$ 称为 Kraus 算符，作用在系统空间上。右端先把系
 \begin{theorem}{Kraus算符和的完全正性与保迹条件}{qm-kraus-trace}
     有限维中，给定一组算符 $\op{K}_\alpha$，令
     \[
-        \mathcal E(\op{\rho})=\sum_\alpha \op{K}_\alpha\op{\rho} \op{K}_\alpha^\dagger,\qquad
-        \op{Q}=\sum_\alpha \op{K}_\alpha^\dagger \op{K}_\alpha .
+        \mathcal E(\op{\rho})=\sum_\alpha \op{K}_\alpha\op{\rho} \op{K}_\alpha\adjoint,\qquad
+        \op{Q}=\sum_\alpha \op{K}_\alpha\adjoint \op{K}_\alpha .
     \]
     映射 $\mathcal E$ 完全正。它是量子信道的充要条件为 $\op{Q}=\one$。
 \end{theorem}
@@ -123,7 +123,7 @@ $\op{K}_\alpha$ 称为 Kraus 算符，作用在系统空间上。右端先把系
         =\sum_\alpha
         \mel{w_\alpha}{\op{R}}{w_\alpha}\geq0,
         \qquad
-        \ket{w_\alpha}=(\op{K}_\alpha^\dagger\otimes\one_A)\ket{v}.
+        \ket{w_\alpha}=(\op{K}_\alpha\adjoint\otimes\one_A)\ket{v}.
     \end{equation}
     因此加入任意辅助空间后仍保持正性。
 \end{proof}
@@ -162,12 +162,12 @@ $1-p(t)=\e^{-\Gamma t}$，其中$\Gamma\geq0$。
 \begin{theorem}{有限维GKSL生成元}{qm-gksl}
     有限维系统的连续、时间齐次完全正迹保持半群，其生成元可写为
     \begin{equation}
-        \mathcal L(\op{\rho})=-\frac\i\hbar[\op{H}_{\effective},\op{\rho}]
-        +\sum_\mu\Bigp{\op{L}_\mu\op{\rho} \op{L}_\mu^\dagger
-            -\frac12\{\op{L}_\mu^\dagger \op{L}_\mu,\op{\rho}\}}.
+        \mathcal L(\op{\rho})=-\frac\i\hbar[\op{H}_\eff,\op{\rho}]
+        +\sum_\mu\Bigp{\op{L}_\mu\op{\rho} \op{L}_\mu\adjoint
+            -\frac12\{\op{L}_\mu\adjoint \op{L}_\mu,\op{\rho}\}}.
         \label{eq:lindblad}
     \end{equation}
-    其中$\op{H}_{\effective}$自伴，$\op{L}_\mu$是系统算符。
+    其中$\op{H}_\eff$自伴，$\op{L}_\mu$是系统算符。
     反过来，这一形式生成完全正迹保持半群。
 \end{theorem}
 GKSL 是 Gorini、Kossakowski、Sudarshan 与 Lindblad 的姓氏缩写。
@@ -177,11 +177,11 @@ GKSL 是 Gorini、Kossakowski、Sudarshan 与 Lindblad 的姓氏缩写。
 
 从短时 Kraus 算符可看清反对易项的来历。先将各通道的贡献合写成算符
 \[
-    \op{C}=\sum_\mu \op{L}_\mu^\dagger \op{L}_\mu .
+    \op{C}=\sum_\mu \op{L}_\mu\adjoint \op{L}_\mu .
 \]
 保留无跃迁算符的一阶项和跃迁算符的最低阶项，取
 \begin{equation}
-    \op{K}_0=\one-\biggp{\frac{\i \op{H}_{\effective}}\hbar+\frac{\op{C}}{2}}\d t,
+    \op{K}_0=\one-\biggp{\frac{\i \op{H}_\eff}\hbar+\frac{\op{C}}{2}}\d t,
     \qquad \op{K}_\mu=\sqrt{\d t}\,\op{L}_\mu.
 \end{equation}
 代入Kraus和并保留$\d t$，便得到式\eqref{eq:lindblad}。
@@ -189,22 +189,22 @@ GKSL 是 Gorini、Kossakowski、Sudarshan 与 Lindblad 的姓氏缩写。
 分别展开无跃迁项和跃迁项，得到
 \begin{subequations}
     \begin{alignat}{1}
-        \op{K}_0\op{\rho} \op{K}_0^\dagger &=\op{\rho}-\frac{\i}{\hbar}[\op{H}_{\effective},\op{\rho}]\d t
+        \op{K}_0\op{\rho} \op{K}_0\adjoint &=\op{\rho}-\frac{\i}{\hbar}[\op{H}_\eff,\op{\rho}]\d t
             -\frac12(\op{C}\op{\rho}+\op{\rho} \op{C})\d t+\bigo(\d t^2),\\
-        \sum_\mu \op{K}_\mu\op{\rho} \op{K}_\mu^\dagger &=\sum_\mu \op{L}_\mu\op{\rho} \op{L}_\mu^\dagger\d t.
+        \sum_\mu \op{K}_\mu\op{\rho} \op{K}_\mu\adjoint &=\sum_\mu \op{L}_\mu\op{\rho} \op{L}_\mu\adjoint\d t.
     \end{alignat}
 \end{subequations}
 相加后减去$\op{\rho}$、除以$\d t$，得到主方程。
-其中$\op{H}_{\effective}$为自伴的有效Hamilton算符，
+其中$\op{H}_\eff$为自伴的有效Hamilton算符，
 可包含环境引起的能移；耗散由$\op{L}_\mu$表示。
 
 概率守恒要求所有记录的概率之和为一。由上面的短时算符可验算
 \[
-    \op{K}_0^\dagger \op{K}_0+\sum_\mu \op{K}_\mu^\dagger \op{K}_\mu
+    \op{K}_0\adjoint \op{K}_0+\sum_\mu \op{K}_\mu\adjoint \op{K}_\mu
     =\one-\op{C}\d t+\op{C}\d t+\bigo(\d t^2)=\one+\bigo(\d t^2).
 \]
 无跃迁项中 $\op{C}$ 的系数恰好使一阶概率变化相消。
-具体的$\op{H}_{\effective}$和$\op{L}_\mu$由系统与环境的耦合及以下近似确定。
+具体的$\op{H}_\eff$和$\op{L}_\mu$由系统与环境的耦合及以下近似确定。
 
 微观推导通常先假定系统与环境弱耦合，采用 Born 近似。再要求环境关联时间远短于系统弛豫(relaxation)时间，采用 Markov 近似。
 随后对可分辨的不同跃迁频率作长期平均，即久期近似(secular approximation)；也可以使用其他保证完全正性的受控极限。
@@ -258,7 +258,7 @@ $\op{\sigma}_z=\ktbr{e}{e}-\ktbr{g}{g}$。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=.62\linewidth]{figures/relaxation.pdf}
-    \caption{各量分别除以自身初值，时间以 $T_1$ 为单位。虚线为激发布居 $\rho_{ee}$；两条实线为不同 $\gamma_\phi$ 下的相干幅值 $|\rho_{eg}|$。}
+    \caption{各量分别除以自身初值，时间以 $T_1$ 为单位。虚线为激发布居 $\rho_{ee}$；两条实线为不同 $\gamma_\phi$ 下的相干幅值 $\abs{\rho_{eg}}$。}
     \label{fig:relaxation}
 \end{figure}
 
@@ -289,7 +289,7 @@ $\phi_0$是两次脉冲设置的相对相位；
     不同粒子的$\delta$服从均值为零、标准差为$\sigma_\delta$的 Gauss 分布。
     自由等待$T$后的系综相干含因子
     \begin{equation}
-        \int_{-\infty}^{\infty}
+        \intR
         \frac{\e^{-\delta^2/(2\sigma_\delta^2)}}{\sqrt{2\pi}\sigma_\delta}
         \e^{-\i\delta T}\d\delta
         =\e^{-\sigma_\delta^2T^2/2}.
@@ -316,8 +316,8 @@ $\phi_0$是两次脉冲设置的相对相位；
     在理想光子计数中，某一发射通道的点击所引起的条件态突变称为量子跳跃(quantum jump)。
     对以 $\op{L}_1$ 表示的通道，短时间 $\d t$ 内的点击概率（取一阶）和点击后的态分别为
     \begin{equation}
-        p_1=\d t\,\tr(\op{L}_1^\dagger \op{L}_1\op{\rho}),\qquad
-        \op{\rho}_1=\frac{\op{L}_1\op{\rho} \op{L}_1^\dagger}{\tr(\op{L}_1^\dagger \op{L}_1\op{\rho})}\quad(p_1>0).
+        p_1=\d t\,\tr(\op{L}_1\adjoint \op{L}_1\op{\rho}),\qquad
+        \op{\rho}_1=\frac{\op{L}_1\op{\rho} \op{L}_1\adjoint}{\tr(\op{L}_1\adjoint \op{L}_1\op{\rho})}\quad(p_1>0).
     \end{equation}
 \end{definition}
 若所有发射通道均受到理想监测且无其他耗散，没有点击时按 $\op{K}_0$ 更新并归一化。
@@ -338,7 +338,7 @@ $\phi_0$是两次脉冲设置的相对相位；
     封闭系统按不显含时间的自伴 $\op{H}$ 演化，若归一化初态 $\ket{\Psi}$ 的能量方差有限，
     则在时刻 $t$ 测得系统仍处于该初态的概率（生存概率，survival probability）满足
     \begin{equation}
-        |\mel{\Psi}{\e^{-\i \op{H}t/\hbar}}{\Psi}|^2
+        \abs{\mel{\Psi}{\e^{-\i \op{H}t/\hbar}}{\Psi}}^2
         =1-\frac{(\Delta H)^2t^2}{\hbar^2}+o(t^2).
     \end{equation}
 \end{theorem}
@@ -355,7 +355,7 @@ $\phi_0$是两次脉冲设置的相对相位；
 在上述条件下，于固定总时间 $t$ 内作 $N$ 次等间隔的理想瞬时测量，每次都投影到同一个一维初态及其正交补。
 每次回答“仍在初态”的分支都从 $\ket{\Psi}$ 重新出发，连续 $N$ 次都得到这一结果的概率为
 \begin{equation}
-    P_N(t)=|A(t/N)|^{2N}
+    P_N(t)=\abs{A(t/N)}^{2N}
         =\Bigb{1-\frac{(\Delta H)^2t^2}{N^2\hbar^2}+o(N^{-2})}^N\longrightarrow1.
 \end{equation}
 \end{corollary}

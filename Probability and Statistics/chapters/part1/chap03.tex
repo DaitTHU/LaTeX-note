@@ -17,11 +17,11 @@
 \end{definition}
 
 \begin{example}{多项分布}{multinomial distribution}
-	给定$\Omega$的一个分割$\{B_1,\ldots,B_n\}$，$\P(B_i)=:p_i$，则 
+	给定$\Omega$的一个分割$\{B_1,\ldots,B_n\}$，$\P(B_i)=:p_i$，则
 	\[
 		p_1+\cdots+p_n=1,
 	\]
-	独立试验$n$次，记$X_i=B_i$发生的次数，则$(X_1,\ldots,X_n)$服从多项分布(multinomial distribution)，记作$(X_1,\ldots,X_n)\sim\Bino(n,p_1,\ldots,p_n)$，其联合PDF
+	独立试验$n$次，记$X_i=B_i$发生的次数，则$(X_1,\ldots,X_n)$服从多项分布(multinomial distribution)，记作$(X_1,\ldots,X_n)\sim\MultDist(n,p_1,\ldots,p_n)$，其联合PDF
 	\begin{equation}
 		\P(X_1=k_1,\ldots,X_n=k_n)=\binom{n}{k_1,\ldots,k_n}p_1^{k_1}\cdots p_n^{k_n}.
 	\end{equation}
@@ -32,7 +32,7 @@
 	\end{equation}
 	\begin{center}
 		\includegraphics[width=.9\textwidth]{figures/pdf_bin3.pdf}
-		\captionof{figure}{多项分布的例子：$(X_1,X_2,X_3)\sim\Bino(10,0.2,0.3,0.5)$}
+		\captionof{figure}{多项分布的例子：$(X_1,X_2,X_3)\sim\MultDist(10,0.2,0.3,0.5)$}
 		\label{fig:pdf_bin3}
 	\end{center}
 \end{example} 
@@ -73,27 +73,27 @@
 	\]
 \end{example}
 \begin{example}{二元正态分布}{2-D normal distribution}
-	$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，要求$\abs\rho<1$，其联合PDF为
+	$(X_1,X_2)\sim\NormalDist(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，要求$\abs\rho<1$，其联合PDF为
 	\begin{align}
 		\begin{aligned}
 			f(x_1,x_2)={}&\frac1{2\pi\sigma_1\sigma_2}\frac1{\sqrt{1-\rho^2}}\cdot\\
 			&\exp\biggB{-\frac1{2(1-\rho^2)}\biggb{\biggp{\frac{x_1-\mu_1}{\sigma_1}}^2+\biggp{\frac{x_2-\mu_2}{\sigma_2}}^2-2\rho\frac{x_1-\mu_1}{\sigma_1}\frac{x_2-\mu_2}{\sigma_2}}}.
 		\end{aligned}
 	\end{align}
-	特别地，标准二元正态分布为$(X_1,X_2)\sim\Norm(0,0,1,1,0)$。
+	特别地，标准二元正态分布为$(X_1,X_2)\sim\NormalDist(0,0,1,1,0)$。
 	\begin{center}
 		\includegraphics[width=.9\textwidth]{figures/pdf_norm2.pdf}
 		\captionof{figure}{标准二元正态分布的PDF}
 		\label{fig:pdf_norm2}
 	\end{center}
 	\tcblower
-	指数项部分构成了一个二次型：$-x\tp Wx/2$，其中
+	指数项部分构成了一个二次型：$-x\transp Wx/2$，其中
 	\[
-		x=\Bigb{\frac{x_1-\mu_1}{\sigma_1},\frac{x_2-\mu_2}{\sigma_2}}\tp,\quad W=\frac1{1-\rho^2}\begin{bmatrix}
+		x=\Bigb{\frac{x_1-\mu_1}{\sigma_1},\frac{x_2-\mu_2}{\sigma_2}}\transp,\quad W=\frac1{1-\rho^2}\begin{bmatrix}
 			1&-\rho\\-\rho&1
 		\end{bmatrix}.
 	\]
-	$W$是正定的，Cholesky分解$W=A\tp A$给出
+	$W$是正定的，Cholesky分解$W=A\transp A$给出
 	\[
 		A=\frac1{\sqrt{1-\rho^2}}\begin{bmatrix}
 			1&-\rho\\0&\pm\sqrt{1-\rho^2}
@@ -119,7 +119,7 @@
 	\]
 	连续型边际PDF
 	\[
-		f_X(x)=\int\iti f_{X,Y}(x,y)\d y.
+		f_X(x)=\intR f_{X,Y}(x,y)\d y.
 	\]
 \end{definition}
 
@@ -131,11 +131,11 @@
 \end{corollary}
 
 \begin{example}{二元正态的边际}{marginal PDF of 2-D normal distribution}
-	二元正态分布$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$的边际密度
+	二元正态分布$(X_1,X_2)\sim\NormalDist(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$的边际密度
 	\[
-		f_{X_1}(x_1)=\int\iti f_{X_1,X_2}(x_1,x_2)\d x_2=\frac1{\sqrt{2\pi}\sigma_1}\exp\biggb{-\frac{(x_1-\mu_1)^2}{2\sigma_1^2}}.
+		f_{X_1}(x_1)=\intR f_{X_1,X_2}(x_1,x_2)\d x_2=\frac1{\sqrt{2\pi}\sigma_1}\exp\biggb{-\frac{(x_1-\mu_1)^2}{2\sigma_1^2}}.
 	\]
-	即$X_1\sim\Norm(\mu_1,\sigma_1^2)$，同理$X_2\sim\Norm(\mu_2,\sigma_2^2)$。
+	即$X_1\sim\NormalDist(\mu_1,\sigma_1^2)$，同理$X_2\sim\NormalDist(\mu_2,\sigma_2^2)$。
 \end{example}
 \begin{remark}
 	联合分布可确定边际分布，反之不行。
@@ -148,7 +148,7 @@
 	是$(X,Y)$的二元CDF。且$X,Y$的边际分布分别为$\CDF_X(x),\CDF_Y(y)$。
 \end{example}
 \begin{example}{连接函数}{Copula function}
-	我们称边际分布为$\Unif(0,1)$的联合CDF $C(u,v)$为连接(Copula)函数，则对于随机变量$X,Y$，可用连接函数构造二元分布
+	我们称边际分布为$\UnifDist(0,1)$的联合CDF $C(u,v)$为连接(Copula)函数，则对于随机变量$X,Y$，可用连接函数构造二元分布
 	\begin{equation}
 		\CDF_{X,Y}(x,y)=C\bigp{\CDF_X(x),\CDF_Y(y)}
 	\end{equation}
@@ -165,43 +165,43 @@
 	\]
 	有条件概率
 	\begin{equation}
-		\P(X=x_i|Y=y_i)=\frac{\P(X=x_i,Y=y_i)}{\P(Y=y_i)}=\frac{p_{ij}}{\sum_kp_{kj}}=:\frac{p_{ij}}{p_{\cdot j}}.
+		\P(X=x_i\mid Y=y_i)=\frac{\P(X=x_i,Y=y_i)}{\P(Y=y_i)}=\frac{p_{ij}}{\sum_kp_{kj}}=:\frac{p_{ij}}{p_{\cdot j}}.
 	\end{equation}
 	
 	连续型PDF为$f(x,y)$，
-	%\P(X\leqslant x|y<Y\leqslant y+\d y)=\division{\int_{-\infty}^x\int_y^{y+\d y}f(\xi,\eta)\d\eta\nd\xi}{\int_y^{y+\d y}f(\xi,\eta)\d\eta}
+	%\P(X\leqslant x\mid y<Y\leqslant y+\d y)=\division{\int_{-\infty}^x\int_y^{y+\d y}f(\xi,\eta)\d\eta\nd\xi}{\int_y^{y+\d y}f(\xi,\eta)\d\eta}
 	可定义条件PDF
-	\footnote{唐宏岩老师记作$f_X(x|y)$，好处是下标仍然是随机变量($X|Y$不是随机变量)，但没有在下标中体现$Y$。}
+	\footnote{唐宏岩老师记作$f_X(x\mid y)$，好处是下标仍然是随机变量($X\mid Y$不是随机变量)，但没有在下标中体现$Y$。}
 	\begin{equation}
-		f_{X|Y}(x|y)=\frac{f_{X,Y}(x,y)}{f_Y(y)}.
+		f_{X\mid Y}(x\mid y)=\frac{f_{X,Y}(x,y)}{f_Y(y)}.
 	\end{equation}
 	条件CDF
 	\[
-		\CDF(x|y)=\P(X\leqslant x|Y=y)=\int_{-\infty}^x f_{X|Y}(\xi|y)\d \xi.
+		\CDF(x\mid y)=\P(X\leqslant x\mid Y=y)=\int_{-\infty}^x f_{X\mid Y}(\xi\mid y)\d \xi.
 	\]%不能用条件PDF计算，因为$Y=y$概率为0，应当直接积分
 \end{definition}
 
 \begin{corollary}
 	乘法法则
 	\begin{equation}
-		f_{X,Y}(x,y)=f_Y(y)f_{X|Y}(x|y)=f_X(x)f_{Y|X}(y|x);
+		f_{X,Y}(x,y)=f_Y(y)f_{X\mid Y}(x\mid y)=f_X(x)f_{Y\mid X}(y\mid x);
 	\end{equation}
 	全概率公式 
 	\begin{equation}
-		f_X(x)=\int\iti f_{X|Y}(x|y)f_Y(y)\d y;
+		f_X(x)=\intR f_{X\mid Y}(x\mid y)f_Y(y)\d y;
 	\end{equation}
 	Bayes公式 
 	\begin{equation}
-		f_{Y|X}(y|x)=\frac{f_{X|Y}(x|y)f_Y(y)}{f_X(x)}.
+		f_{Y\mid X}(y\mid x)=\frac{f_{X\mid Y}(x\mid y)f_Y(y)}{f_X(x)}.
 	\end{equation}
 \end{corollary}
 
 \begin{example}{二元正态的条件密度}{conditional PDF of 2-D normal distribution}
-	$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$
+	$(X_1,X_2)\sim\NormalDist(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$
 	\begin{equation}
-		f_{X_2|X_1}(x_2|x_1)=\frac1{\sqrt{2\pi}\sigma_2}\frac1{\sqrt{1-\rho^2}}\exp\biggb{-\frac1{2(1-\rho^2)}\Bigp{\frac{x_2-\mu_2}{\sigma_2}-\rho\frac{x_1-\mu_1}{\sigma_1}}^2},
+		f_{X_2\mid X_1}(x_2\mid x_1)=\frac1{\sqrt{2\pi}\sigma_2}\frac1{\sqrt{1-\rho^2}}\exp\biggb{-\frac1{2(1-\rho^2)}\Bigp{\frac{x_2-\mu_2}{\sigma_2}-\rho\frac{x_1-\mu_1}{\sigma_1}}^2},
 	\end{equation}
-	当$X_1=x_1$时，$X_2\sim\Norm\Bigp{\mu_2+\rho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1),(1-\rho^2)\sigma_2^2}$
+	当$X_1=x_1$时，$X_2\sim\NormalDist\Bigp{\mu_2+\rho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1),(1-\rho^2)\sigma_2^2}$
 \end{example}
 
 \section{独立性}
@@ -227,7 +227,7 @@
 	\]
 \end{corollary}
 \begin{example}{二元正态分布的独立性}{}
-	若$(X,Y)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，则$X,Y$独立$\iff\rho=0.$
+	若$(X,Y)\sim\NormalDist(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，则$X,Y$独立$\iff\rho=0.$
 \end{example}
 
 
@@ -281,11 +281,11 @@
 \begin{example}{$X+Y$}{X+Y}
 	$(X,Y)$的和$Z=X+Y$的PDF为
 	\begin{equation}
-		f_{X+Y}(z)=\int\iti f_{X,Y}(x,z-x)\d x\equiv\int\iti f_{X,Y}(z-y,y)\d y
+		f_{X+Y}(z)=\intR f_{X,Y}(x,z-x)\d x\equiv\intR f_{X,Y}(z-y,y)\d y
 	\end{equation}
 	特别地，当$X,Y$相互独立时，%若其边缘分布PDF分别为$f_X,f_Y$，则
 	\[
-		f_{X+Y}(z)=\int\iti f_X(x)f_Y(z-x)\d x\equiv\int\iti f_X(z-y)f_Y(y)\d y
+		f_{X+Y}(z)=\intR f_X(x)f_Y(z-x)\d x\equiv\intR f_X(z-y)f_Y(y)\d y
 	\]
 	这是$f_X,f_Y$的Fourier卷积，记作$f_X\ast f_Y$。
 \end{example}
@@ -296,15 +296,15 @@
 	$Z=Y/X,XY$的PDF为
 	\begin{subequations}
 		\begin{align}
-			f_{Y/X}(z)&=\int\iti f_{X,Y}(x,xz)\abs x\d x\\
-			f_{XY}(z)&=\int\iti f_{X,Y}\biggp{x,\frac zx}\frac1{\abs{x}}\d x
+			f_{Y/X}(z)&=\intR f_{X,Y}(x,xz)\abs x\d x\\
+			f_{XY}(z)&=\intR f_{X,Y}\biggp{x,\frac zx}\frac1{\abs{x}}\d x
 		\end{align}
 	\end{subequations}
 	特别地，当$X,Y$相互独立时，
 	\begin{subequations}
 		\begin{align}
-			f_{Y/X}(z)&=\int\iti f_X(x)f_Y(xz)\abs x\d x\\
-			f_{XY}(z)&=\int\iti f_X(x)f_Y\Bigp{\frac zx}\frac1{\abs x}\d x
+			f_{Y/X}(z)&=\intR f_X(x)f_Y(xz)\abs x\d x\\
+			f_{XY}(z)&=\intR f_X(x)f_Y\Bigp{\frac zx}\frac1{\abs x}\d x
 		\end{align}
 	\end{subequations}
 	第二个公式是$f_X,f_Y$的Mellin卷积。
@@ -324,14 +324,14 @@
 	\]
 \end{example}
 \begin{example}{离散分布的和}{sum of discrete distribution}
-	$X_i\sim\Bino(n_i,p)$独立，则$X_1+X_2\sim\Bino(n_1+n_2,p)$
+	$X_i\sim\BinDist(n_i,p)$独立，则$X_1+X_2\sim\BinDist(n_1+n_2,p)$
 	\begin{align*}
 		\P(X_1+X_2=k)&=\sum_{k_1=0}^k\P(X_1=k_1,X_2=k-k_1)\\
 		&=\sum_{k_1=0}^k\binom{n_1}{k_1}\binom{n_2}{k-k_1}p^k(1-p)^{n_1+n_2-k}\\
 		&=\binom{n_1+n_2}{k}p^k(1-p)^{n_1+n_2-k}
 	\end{align*}
 	\tcblower
-	$X_i\sim\Pois(\lambda_i)$独立，则$X_1+X_2\sim\Pois(\lambda_1+\lambda_2)$
+	$X_i\sim\PoisDist(\lambda_i)$独立，则$X_1+X_2\sim\PoisDist(\lambda_1+\lambda_2)$
 	\begin{align*}
 		\P(X_1+X_2=k)&=\sum_{k_1=0}^k\frac{\lambda_1^{k_1}}{k_1!}\e^{-\lambda_1}\frac{\lambda_2^{k-k_1}}{(k-k_1)!}\e^{-\lambda_2}\\
 		&=\frac{\e^{-(\lambda_1+\lambda_2)}}{k!}\sum_{k_1=0}^k\binom{k}{k_1}\lambda_1^{k_1}\lambda_2^{k-k_1}\\
@@ -342,14 +342,14 @@
 	在学习到矩母函数和特征函数后，由\thmref{thm:the distribution of the sum of the independent random variable}，这个结论就是显然的。
 \end{remark}
 \begin{example}{正态分布的和}{sum of continuous distribution}
-	$(X_1,X_2)\sim\Norm(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，则$X_1+X_2\sim\Norm(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2).$
+	$(X_1,X_2)\sim\NormalDist(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，则$X_1+X_2\sim\NormalDist(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2).$
 	\begin{align*}
-		f_{X_1+X_2}(y)&=\int\iti f_{X_1,X_2}(x,y-x)\d x\\
+		f_{X_1+X_2}(y)&=\intR f_{X_1,X_2}(x,y-x)\d x\\
 		&=\frac1{\sqrt{2\pi}\sqrt{\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2}}\exp\biggb{-\frac{(y-(\mu_1+\mu_2))^2}{2(\sigma_1^2+\sigma_2^2+2\rho\sigma_1\sigma_2)}}.
 	\end{align*}
 \end{example}
 \begin{example}{指数分布的最小值}{}
-	$X_i\sim\Expo(\lambda_i)$独立，则$\min(X_1,X_2)\sim\Expo(\lambda_1+\lambda_2).$
+	$X_i\sim\ExpDist(\lambda_i)$独立，则$\min(X_1,X_2)\sim\ExpDist(\lambda_1+\lambda_2).$
 	\[
 		\CDF_{\min{}}(x)=1-\bigb{1-\CDF_{X_1}(x)}\bigb{1-\CDF_{X_2}(x)}=1-\e^{-(\lambda_1+\lambda_2)x}.
 	\]
@@ -366,7 +366,7 @@
 	故
 	\begin{equation}
 		\label{eqn:min-max joint distribution}
-		f_{Y,Z}(y,z)=-\frac{\partial^2}{\partial y \partial z}\P(y<Y,Z\leqslant z)=n(n-1)f(y)f(z)\bigb{\CDF(z)-\CDF(y)}^{n-2}.
+		f_{Y,Z}(y,z)=-\pw{}{y}{z}\P(y<Y,Z\leqslant z)=n(n-1)f(y)f(z)\bigb{\CDF(z)-\CDF(y)}^{n-2}.
 	\end{equation}
 \end{example}
 
@@ -374,7 +374,7 @@
 \label{subsec:chi2, t, F}
 
 \begin{definition}{$\chi^2$分布}{chi-square distribution}
-	若$X_1,\ldots,X_n$ iid $\sim\Norm(0,1)$ ，则$X:=X_1^2+\cdots+X_n^2$服从自由度为$n$的$\chi^2$分布，记作$X\sim\chi^2(n)$，由数学归纳法可知
+	若$X_1,\ldots,X_n$ iid $\sim\NormalDist(0,1)$ ，则$X:=X_1^2+\cdots+X_n^2$服从自由度为$n$的$\chi^2$分布，记作$X\sim\ChiSqDist(n)$，由数学归纳法可知
 	\begin{equation}
 		f(x)=\frac1{\Gamma(n/2)2^{n/2}}x^{n/2-1}\e^{-x/2},\quad x>0.
 	\end{equation}
@@ -396,23 +396,23 @@
 \end{corollary}
 
 \begin{corollary}
-	若$X_i\sim\chi^2(n_i)$独立，则$X_1+X_2\sim\chi^2(n_1+n_2);$
+	若$X_i\sim\ChiSqDist(n_i)$独立，则$X_1+X_2\sim\ChiSqDist(n_1+n_2);$
 \end{corollary}
 
 \begin{corollary}
-	若$X\sim\Expo(\lambda)$，则$2\lambda X\sim\chi^2(2).$
+	若$X\sim\ExpDist(\lambda)$，则$2\lambda X\sim\ChiSqDist(2).$
 \end{corollary}
 
 \begin{definition}{Student's t分布}{Student's t distribution}
-	$X_1\sim\chi^2(n),X_2\sim\Norm(0,1)$独立，则可构造t分布：
+	$X_1\sim\ChiSqDist(n),X_2\sim\NormalDist(0,1)$独立，则可构造t分布：
 	\[
-		X:=\frac{X_2}{\sqrt{X_1/n}}\sim\mathrm t(n).
+		X:=\frac{X_2}{\sqrt{X_1/n}}\sim\TDist(n).
 	\]
 	其PDF为
 	\begin{equation}
-		f(x)=\frac1{\sqrt n\mathrm B(n/2,1/2)}\biggp{1+\frac{x^2}n}^{-(n+1)/2},\quad x\in\RR.
+		f(x)=\frac1{\sqrt n\Beta(n/2,1/2)}\biggp{1+\frac{x^2}n}^{-(n+1)/2},\quad x\in\RR.
 	\end{equation}
-	特别地，当$n=1$时，是Cauchy分布；$n\to\infty$时，趋于$\Norm(0,1)$。
+	特别地，当$n=1$时，是Cauchy分布；$n\to\infty$时，趋于$\NormalDist(0,1)$。
 	事实上，由\figref{fig:pdf_t} 可见，$n=30$时二者已经非常接近。
 	\begin{center}
 		\includegraphics[width=0.8\linewidth]{figures/pdf_t.pdf}
@@ -433,13 +433,13 @@
 \end{corollary}
 
 \begin{definition}{F分布}{F distribution}
-	$X_1\sim\chi^2(n_1),X_2\sim\chi^2(n_2)$独立，则可构造F分布：
+	$X_1\sim\ChiSqDist(n_1),X_2\sim\ChiSqDist(n_2)$独立，则可构造F分布：
 	\[
-		X:=\frac{X_1/n_1}{X_2/n_2}\sim\mathrm F(n_1,n_2).
+		X:=\frac{X_1/n_1}{X_2/n_2}\sim\FDist(n_1,n_2).
 	\]
 	其PDF为
 	\begin{equation}
-		f(x)=\frac1{\mathrm B(n_1/2,n_2/2)}\Bigp{\frac{n_1}{n_2}}^{n_1/2}x^{n_1/2-1}\Bigp{1+\frac{n_1}{n_2}x}^{-(n_1+n_2)/2},\quad x>0.
+		f(x)=\frac1{\Beta(n_1/2,n_2/2)}\Bigp{\frac{n_1}{n_2}}^{n_1/2}x^{n_1/2-1}\Bigp{1+\frac{n_1}{n_2}x}^{-(n_1+n_2)/2},\quad x>0.
 	\end{equation}
 	\begin{center}
 		\includegraphics[width=0.8\linewidth]{figures/pdf_F.pdf}
@@ -459,15 +459,15 @@
 \end{corollary}
 
 % \begin{corollary}
-% 	若$X\sim\mathrm F(n_1,n_2)$，则$1/X\sim\mathrm F(n_2,n_1)$。
+% 	若$X\sim\FDist(n_1,n_2)$，则$1/X\sim\FDist(n_2,n_1)$。
 % \end{corollary}
 
 % \begin{corollary}
-% 	若$X\sim\mathrm t(n)$，则$X^2\sim\mathrm F(1,n)$。
+% 	若$X\sim\TDist(n)$，则$X^2\sim\FDist(1,n)$。
 % \end{corollary}
 
 \begin{theorem}{正态总体统计量的分布}{the distribution of normal statistic}
-	$X_1\ldots,X_n$ iid $\sim\Norm(\mu,\sigma^2)$，定义 
+	$X_1\ldots,X_n$ iid $\sim\NormalDist(\mu,\sigma^2)$，定义
 	\begin{subequations}
 		\begin{align}
 			\avg X&:=\frac1n\sum_{i=1}^nX_i;\\
@@ -478,22 +478,22 @@
 	\begin{subequations}
 		\begin{align}
 			\label{sample-N}
-			\frac{\avg X-\mu}{\sigma/\sqrt n}&\sim\Norm(0,1);\\
+			\frac{\avg X-\mu}{\sigma/\sqrt n}&\sim\NormalDist(0,1);\\
 			\label{sample-chi2}
-			\frac{(n-1)S^2}{\sigma^2}&\sim\chi^2(n-1);\\
+			\frac{(n-1)S^2}{\sigma^2}&\sim\ChiSqDist(n-1);\\
 			\label{sample-t}
-			\frac{\avg X-\mu}{S/\sqrt n}&\sim\mathrm t(n-1);\\
+			\frac{\avg X-\mu}{S/\sqrt n}&\sim\TDist(n-1);\\
 			\label{2sample-F}
-			\frac{S^2/S'^2}{\sigma^2/\sigma'^2}&\sim\mathrm F(n-1,n'-1).
+			\frac{S^2/S'^2}{\sigma^2/\sigma'^2}&\sim\FDist(n-1,n'-1).
 		\end{align}
 	\end{subequations}
 \end{theorem}
 \begin{proof}
-	式\eqref{sample-N}是trivial的，因为$\avg X\sim\Norm(\mu,\sigma^2/n).$
+	式\eqref{sample-N}是trivial的，因为$\avg X\sim\NormalDist(\mu,\sigma^2/n).$
 	
 	式\eqref{sample-t}可由式\eqref{sample-chi2}, \eqref{sample-N}结合t分布的定义推导出来
 	\[
-		\frac{\avg X-\mu}{S/\sqrt n}=\Biggdivision{\frac{\avg X-\mu}{\sigma/\sqrt n}}{\sqrt{\frac{(n-1)S^2/\sigma^2}{n-1}}}\sim\mathrm t(n-1),
+		\frac{\avg X-\mu}{S/\sqrt n}=\Biggdivision{\frac{\avg X-\mu}{\sigma/\sqrt n}}{\sqrt{\frac{(n-1)S^2/\sigma^2}{n-1}}}\sim\TDist(n-1),
 	\]
 	式\eqref{2sample-F}也可由式\eqref{sample-chi2}结合F分布的定义推导而来，因此只需证明式\eqref{sample-chi2}即可。
 
@@ -521,7 +521,7 @@
 	\end{align*}
 	故$Y_1,\ldots,Y_n$独立，且
 	\[
-		Y_1\sim\Norm(\sqrt n\mu,\sigma^2),\quad Y_i\sim\Norm(0,\sigma^2),\enspace i=2,\ldots,n.
+		Y_1\sim\NormalDist(\sqrt n\mu,\sigma^2),\quad Y_i\sim\NormalDist(0,\sigma^2),\enspace i=2,\ldots,n.
 	\]
 	% 从而$Y_1$与$Y_2^2+\cdots+Y_n^2$独立，又
 	% \[
@@ -533,7 +533,7 @@
 		\frac{(n-1)S^2}{\sigma^2}
 		=\frac1{\sigma^2}\biggp{\sum_{i=1}^nX_i^2-n\avg X^2}
 		=\frac1{\sigma^2}\biggp{\sum_{i=1}^nY_i^2-Y_1^2}
-		=\frac1{\sigma^2}\sum_{i=2}^nY_i^2\sim\chi^2(n-1).
+		=\frac1{\sigma^2}\sum_{i=2}^nY_i^2\sim\ChiSqDist(n-1).
 		\qedhere
 	\]
 \end{proof}

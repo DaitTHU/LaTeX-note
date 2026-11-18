@@ -34,18 +34,18 @@ Poisson串Bernoulli得到Poisson。
 
 若$X_i$独立同分布，且与$N$独立，则$Y$的期望和方差
 \[
-	E(Y)=E(N)E(X),\quad D(Y)=D(N)E^2(X)+E(N)D(X).
+	\E(Y)=\E(N)\E(X),\quad \Var(Y)=\Var(N)\E^2(X)+\E(N)\Var(X).
 \]
 相对方差
 \begin{align}
-	\nu_Y^2:=\frac{D(Y)}{E^2(Y)}=\nu_N^2+\frac1{E(N)}\nu_X^2.
+	\nu_Y^2:=\frac{\Var(Y)}{\E^2(Y)}=\nu_N^2+\frac1{\E(N)}\nu_X^2.
 \end{align}
-因此，若第一级随机变量$N$的数学期望$E(N)$很大，则可忽略第二级随机变量$X$的相对方差$\nu_X$。%对串级随机变量的相对方差$\nu_Y$的贡献。
+因此，若第一级随机变量$N$的数学期望$\E(N)$很大，则可忽略第二级随机变量$X$的相对方差$\nu_X$。%对串级随机变量的相对方差$\nu_Y$的贡献。
 
 推广到$N$级串级随机变量
 \begin{gather*}
-	E(\xi)=E(\xi_1)\cdots E(\xi_N),\\
-	\nu_\xi^2=\nu_{\xi_1}^2+\frac{\nu_{\xi_2}^2}{E(\xi_1)}+\cdots+\frac{\nu_{\xi_N}^2}{E(\xi_1)\cdots E(\xi_{N-1})}.
+	\E(\xi)=\E(\xi_1)\cdots \E(\xi_N),\\
+	\nu_\xi^2=\nu_{\xi_1}^2+\frac{\nu_{\xi_2}^2}{\E(\xi_1)}+\cdots+\frac{\nu_{\xi_N}^2}{\E(\xi_1)\cdots \E(\xi_{N-1})}.
 \end{gather*}
 
 \section{核衰变数与探测器计数的涨落分布}
@@ -55,7 +55,7 @@ Poisson串Bernoulli得到Poisson。
 \[
 	N=N_0\e^{-\lambda t}.
 \]
-每个放射性原子核在时间$t$内发生衰变是一个Bernoulli事件。对初始核数$N_0$固定、同一核素且各核独立衰变的样品，时间$t$内的母核衰变数服从二项分布$\operatorname{Bin}(N_0,1-\e^{-\lambda t})$；衰变链中的关联事件不能直接套用此结论。
+每个放射性原子核在时间$t$内发生衰变是一个Bernoulli事件。对初始核数$N_0$固定、同一核素且各核独立衰变的样品，时间$t$内的母核衰变数服从二项分布$\BinDist(N_0,1-\e^{-\lambda t})$；衰变链中的关联事件不能直接套用此结论。
 
 通常放射源中的待衰变原子核数目$N_0$是很大的。若观测时间$t\ll T_{1/2}$，则可认为$t$时间内每个原子核衰变的概率$P=1-\e^{-\lambda t}\simeq\lambda t$，此时，我们可以认为核的衰变数服从Poisson分布。
 
@@ -69,13 +69,13 @@ Poisson串Bernoulli得到Poisson。
 \end{compactitem}
 $N_3$为一个三级串级型随机变量。这里假设发射和探测概率稳定，各事件独立，且可忽略死时间和脉冲堆积。
 \begin{align}\label{detector-expect}
-	E(N_3)=E(N_1)E(X_2)E(X_3)=N_0\lambda t\cdot\frac{\Omega}{4\pi}\cdot\varepsilon.
+	\E(N_3)=\E(N_1)\E(X_2)\E(X_3)=N_0\lambda t\cdot\frac{\Omega}{4\pi}\cdot\varepsilon.
 \end{align}
-如果源非各向同性，$\Omega$改为$f(\Omega)$即可，上述结论仍然成立。%若$E(N_3)$较大，可用正态分布描述。
+如果源非各向同性，$\Omega$改为$f(\Omega)$即可，上述结论仍然成立。%若$\E(N_3)$较大，可用正态分布描述。
 
-$E(N)$较大时，其与有限次测量平均值$\avg N$或单次测量值$N$相差不大，标准偏差估计
+$\E(N)$较大时，其与有限次测量平均值$\avg N$或单次测量值$N$相差不大，标准偏差估计
 \[
-	\sigma=\sqrt{E(N)}\doteq\sqrt{\avg N}\doteq\sqrt N.
+	\sigma=\sqrt{\E(N)}\doteq\sqrt{\avg N}\doteq\sqrt N.
 \]
 此标准偏差仅由统计涨落引起，未考虑其它因素的贡献。
 
@@ -124,7 +124,7 @@ $E(N)$较大时，其与有限次测量平均值$\avg N$或单次测量值$N$相
 \end{compactitem}
 \paragraph{粒子束脉冲（累计型）的总电离电荷量的涨落}
 射入探测器的X光子数目$n_0$服从Poisson分布，探测器对入射光子的本征探测效率$\varepsilon$，则
-独立探测时，给定$n_0$后的$n_1$服从二项分布$\operatorname{Bin}(n_0,\varepsilon)$；对Poisson入射流，$n_1$仍为Poisson变量，且$\avg n_1=\varepsilon\avg n_0$。设每个被探测光子产生的离子对数为独立同分布的$n_{2,j}$，均值$\avg n_2$、方差$F\avg n_2$。总离子对数为随机和$N=\sum_{j=1}^{n_1}n_{2,j}$，其平均值和相对方差
+独立探测时，给定$n_0$后的$n_1$服从二项分布$\BinDist(n_0,\varepsilon)$；对Poisson入射流，$n_1$仍为Poisson变量，且$\avg n_1=\varepsilon\avg n_0$。设每个被探测光子产生的离子对数为独立同分布的$n_{2,j}$，均值$\avg n_2$、方差$F\avg n_2$。总离子对数为随机和$N=\sum_{j=1}^{n_1}n_{2,j}$，其平均值和相对方差
 \[
 	\avg N=\avg n_1\avg n_2,\quad\nu_N^2=\frac1{\avg n_1}\Bigp{1+\frac F{\avg n_2}}.
 \]
@@ -134,7 +134,7 @@ $E(N)$较大时，其与有限次测量平均值$\avg N$或单次测量值$N$相
 
 核辐射事件及探测器的计数服从Poisson分布，单位时间脉冲数$n$的期望为$\lambda$，相邻两个脉冲的时间间隔$T$是一连续型随机变量
 \[
-	P(t\leqslant T<t+\d t)=P_t(0)P_{\d t}(1)=\e^{-\lambda t}\cdot \lambda\d t
+	\P(t\leqslant T<t+\d t)=\P_t(0)\P_{\d t}(1)=\e^{-\lambda t}\cdot \lambda\d t
 \]
 故$T$服从指数分布
 \[

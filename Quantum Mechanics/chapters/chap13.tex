@@ -12,7 +12,7 @@
 
 以固定场强的自旋为例。在磁场指向 $z$ 时制备 $\ket{+z}$，再把磁场转过角度 $\vartheta$。
 若转动快到自旋态来不及演化，用新场方向 $\bm n$ 的分析器测量，
-由式\eqref{eq:spinor}得到正支概率 $|\brkt{+\bm n}{+z}|^2=\cos^2(\vartheta/2)$。
+由式\eqref{eq:spinor}得到正支概率 $\abs{\brkt{+\bm n}{+z}}^2=\cos^2(\vartheta/2)$。
 即使场强和能级间距始终一样，只要转过直角，两支就各占一半。
 若沿同一条路径缓慢转动且能隙保持打开，绝热跟随意味着末态测到正支的概率趋于一。
 两种操作最终用的是同一台分析器，区别在于磁场转动期间自旋是否来得及随它改变。
@@ -32,11 +32,11 @@ $\op{H}(t)\ket{n(t)}=E_n(t)\ket{n(t)}$。
 
 直接对态展开求导时有三类项，
 \begin{equation}
-    \partial_t\ket{\psi}
+    \p_t\ket{\psi}
     =\sum_n\e^{-\i\theta_n}
     \bigp{\dot c_n\ket{n}-\i\dot\theta_n c_n\ket{n}+c_n\ket{\dot n}}.
 \end{equation}
-将它代入$\i\hbar\partial_t\ket{\psi}=\op{H}\ket{\psi}$，
+将它代入$\i\hbar\p_t\ket{\psi}=\op{H}\ket{\psi}$，
 $\hbar\dot\theta_n=E_n$使中间项与右侧抵消；
 左乘$\bra{m}\e^{\i\theta_m}$便得到振幅方程。
 
@@ -55,11 +55,11 @@ $\hbar\dot\theta_n=E_n$使中间项与右侧抵消；
 \end{proof}
 
 因此能隙(spectral gap)越小，驱动越容易混合不同能级。
-还需比较两个频率。在很短的一段上，$|\brkt{m}{\dot n}|$ 是基矢向另一能级转动的速率，
-而振幅方程中两项的相对相位以 $|E_m-E_n|/\hbar$ 转动。
+还需比较两个频率。在很短的一段上，$\abs{\brkt{m}{\dot n}}$ 是基矢向另一能级转动的速率，
+而振幅方程中两项的相对相位以 $\abs{E_m-E_n}/\hbar$ 转动。
 后一个频率很大时，来自相邻时段的跃迁振幅在积分中会互相抵消。两种速率的比给出常用的局部判据
 \begin{equation}
-    \frac{\hbar|\mel{m}{\dot{\op{H}}}{n}|}{|E_m-E_n|^2}\ll1
+    \frac{\hbar\abs{\mel{m}{\dot{\op{H}}}{n}}}{\abs{E_m-E_n}^2}\ll1
     \label{eq:adiabaticcriterion}
 \end{equation}
 此比值估计给定时刻两条能级的混合强弱。关于整条路径的结论可在以下条件下表述。
@@ -75,9 +75,9 @@ $\hbar\dot\theta_n=E_n$使中间项与右侧抵消；
 还可看出总演化时间$T$如何压低跃迁。
 用$s=t/T$参数化路径，并选取对角几何连接(geometric connection)为零的平行输运(parallel transport)规范。
 这样选相位的含义是让相邻两点的 $\brkt{n(s)}{n(s+\d s)}$ 到一阶为正实数。
-归一化使 $\brkt{n}{\partial_s n}$ 只有虚部，沿一段路径逐点调整本征矢的相位就能把它消去。
+归一化使 $\brkt{n}{\p_s n}$ 只有虚部，沿一段路径逐点调整本征矢的相位就能把它消去。
 走完闭路后，按此规则选出的末端矢量可能与起点相差一个相位。
-从 $n$ 出发，记 $a_{mn}(u)=\brkt{m}{\partial_u n}$，沿参数路径累积的能隙积分为
+从 $n$ 出发，记 $a_{mn}(u)=\brkt{m}{\p_u n}$，沿参数路径累积的能隙积分为
 \[
     \Phi_{mn}(u)=\int_0^u\Delta_{mn}(v)\d v,\qquad
     \Delta_{mn}=E_m-E_n.
@@ -114,7 +114,7 @@ $\hbar\dot\theta_n=E_n$使中间项与右侧抵消；
 \end{equation}
 归一化使$\brkt{n}{\dot n}$纯虚，故$\gamma_n$为实。
 
-因为$\partial_t\brkt{n}{n}=0$，
+因为$\p_t\brkt{n}{n}=0$，
 有$\brkt{\dot n}{n}+\brkt{n}{\dot n}=0$。
 对角振幅方程 $\dot c_n=-c_n\brkt{n}{\dot n}$ 以 $c_n(0)=1$ 积分后，恰给出相位因子 $c_n(t)=\e^{\i\gamma_n(t)}$。
 
@@ -128,7 +128,7 @@ $\hbar\dot\theta_n=E_n$使中间项与右侧抵消；
 \end{definition}
 
 重定义$\ket{n}\to\e^{\i\chi(\bm R)}\ket{n}$时，
-$\bm{\mathcal A}_n\to\bm{\mathcal A}_n-\nabla\chi$。
+$\bm{\mathcal A}_n\to\bm{\mathcal A}_n-\grad\chi$。
 闭路相位模$2\pi$保持不变。对于开放路径，连接的积分随端点的相位约定改变；与端点态重叠的相位合并后，得到规范不变的干涉相位(gauge-invariant phase)。
 
 \begin{remark}[开放路径的端点贡献]
@@ -158,14 +158,14 @@ $\bm{\mathcal A}_n\to\bm{\mathcal A}_n-\nabla\chi$。
 条纹位移取决于两束相干振幅沿各自路径积累的相对相位。
 例如在平衡双路径干涉仪的一臂让同一自旋能量支 $n$ 绝热走完闭路 $C$，
 另一臂提供固定参考，末端两臂的自旋重新重合。
-设参考相位可调，记为 $\varphi$，信号臂相对于参考臂的动力学相位为 $\delta_{\rm dyn}$。
+设参考相位可调，记为 $\varphi$，信号臂相对于参考臂的动力学相位为 $\delta_{\mathrm{dyn}}$。
 取合束器一个出口，两个路径振幅之和给出
 \begin{equation}
-    P(\varphi)=\frac14\big|\e^{\i\varphi}
-        +\e^{\i[\delta_{\rm dyn}+\gamma_n(C)]}\big|^2
-        =\frac12\{1+\cos[\delta_{\rm dyn}+\gamma_n(C)-\varphi]\}.
+    P(\varphi)=\frac14\bigabs{\e^{\i\varphi}
+        +\e^{\i[\delta_{\mathrm{dyn}}+\gamma_n(C)]}}^2
+        =\frac12\{1+\cos[\delta_{\mathrm{dyn}}+\gamma_n(C)-\varphi]\}.
 \end{equation}
-只将闭路反向且保持相同的场强历程与参考臂，$\delta_{\rm dyn}$ 不变，$\gamma_n$ 反号。
+只将闭路反向且保持相同的场强历程与参考臂，$\delta_{\mathrm{dyn}}$ 不变，$\gamma_n$ 反号。
 扫描 $\varphi$，两次条纹峰的位置相差 $2\gamma_n(C)$（模 $2\pi$）。
 若采用前述单束自旋实验，干涉的两项是两个能量支，须先算它们的几何相位差 $\gamma_+-\gamma_-$。
 
@@ -175,7 +175,7 @@ $\bm{\mathcal A}_n\to\bm{\mathcal A}_n-\nabla\chi$。
 并使用式\eqref{eq:spinor}的正本征态。
 直接微分得到
 \begin{equation}
-    \i\brkt{+\bm n}{\partial_\phi(+\bm n)}
+    \i\brkt{+\bm n}{\p_\phi(+\bm n)}
     =-\sin^2\frac\theta2=-\frac{1-\cos\theta}{2}.
 \end{equation}
 绕固定$\theta$一圈，$\gamma_+=-\pi(1-\cos\theta)$，
@@ -205,19 +205,19 @@ $\op{R}(t)=\exp(-\i\Omega t\op{\sigma}_z/2)$，旋转系Hamilton算符为
 \end{equation}
 记其频率向量为$\bm h_R$，模长为
 \begin{equation}
-    \omega_{\effective}
+    \omega_\eff
     =\sqrt{\omega_0^2+\Omega^2-2\omega_0\Omega\cos\theta}.
 \end{equation}
 初态取$\ket{+\bm n(0)}$，考察末态中与瞬时正支正交的分量。
 旋转系中，能造成跃迁的是$\bm h_R$垂直于初始方向的部分，
-其大小为$|\Omega\sin\theta|$。
+其大小为$\abs{\Omega\sin\theta}$。
 对Pauli指数展开后，得到精确泄漏概率
 \begin{equation}
     P_{+\to-}(t)
-    =\frac{\Omega^2\sin^2\theta}{\omega_{\effective}^2}
-        \sin^2\frac{\omega_{\effective} t}{2}.
+    =\frac{\Omega^2\sin^2\theta}{\omega_\eff^2}
+        \sin^2\frac{\omega_\eff t}{2}.
 \end{equation}
-在$|\Omega|\ll\omega_0$时，最大泄漏是
+在$\abs{\Omega}\ll\omega_0$时，最大泄漏是
 $\bigo[(\Omega\sin\theta/\omega_0)^2]$。
 若磁场大小趋零，$\omega_0$即能隙除以$\hbar$，
 同一个转速不再保证绝热，这与式\eqref{eq:adiabaticcriterion}一致。
@@ -232,7 +232,7 @@ $\bigo[(\Omega\sin\theta/\omega_0)^2]$。
 \begin{equation}
     \op{H}(t)=\frac{vt}{2}\op{\sigma}_z+g\op{\sigma}_x,\qquad v>0,\quad g\text{为实数}.
 \end{equation}
-最小能隙为$2|g|$，瞬时能量为$\pm\sqrt{(vt/2)^2+g^2}$。
+最小能隙为$2\abs{g}$，瞬时能量为$\pm\sqrt{(vt/2)^2+g^2}$。
 可沿图\ref{fig:avoided-crossing}的下支从左向右读这个扫描，取图中的未耦合能量差为 $vt$。
 在 $t$ 为大负值时，固定态 $\ket{+z}$ 的对角能量 $vt/2$ 较低；
 在 $t$ 为大正值时，同一个固定态的对角能量较高。于是从低能态出发，
@@ -297,7 +297,7 @@ $g\ne0$时，两独立解可取抛物柱函数(parabolic cylinder function)$D_{-
 
     这一速度无关性要求绝热近似成立。
     \ssecref{ss:rotating-adiabatic}的精确解给出泄漏上界
-    $\Omega^2\sin^2\theta/\omega_\effective^2$；
+    $\Omega^2\sin^2\theta/\omega_\eff^2$；
     在$\omega_0T\gg1$时它随$T^{-2}$下降。
     沿同一条路径减慢驱动，泄漏减小，几何相位趋于由有向立体角决定的绝热值。}
 

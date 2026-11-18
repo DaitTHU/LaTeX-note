@@ -60,36 +60,36 @@
 	\begin{compactenum}
 		\item $N(0)=0$
 		\item $\set{N(t)}{t\geqslant 0}$是时齐的独立增量过程
-		\item $\forall t>0,\D t>0$有
+		\item $\forall t>0,\Delta t>0$有
 		\begin{compactitem}
-			\item $\P\bigp{N(t+\D t)-N(t)=1}=\lambda\D t+o(\D t)$
-			\item $\P\bigp{N(t+\D t)-N(t)\geqslant 2}=o(\D t)$
+			\item $\P\bigp{N(t+\Delta t)-N(t)=1}=\lambda\Delta t+o(\Delta t)$
+			\item $\P\bigp{N(t+\Delta t)-N(t)\geqslant 2}=o(\Delta t)$
 		\end{compactitem}
 	\end{compactenum}
 \end{definition}
-Poisson过程中任意长度为$ t $的区间中事件个数$\sim\Pois(\lambda t).$
+Poisson过程中任意长度为$ t $的区间中事件个数$\sim\PoisDist(\lambda t).$
 \begin{theorem}{Poisson过程的性质}{}
 	%若$\set{N(t)}{t\geqslant 0}$是一个强度为$\lambda$的Poisson过程，则
-	$N(t)\sim\Pois(\lambda t),\enspace\mu_N(t)=\lambda t,\enspace\sigma^2_N(t)=\lambda t,\enspace R_N(s,t)=\lambda\min(s,t).$%的一维分布是参数为$\lambda t$的Poisson分布。
+	$N(t)\sim\PoisDist(\lambda t),\enspace\mu_N(t)=\lambda t,\enspace\sigma^2_N(t)=\lambda t,\enspace R_N(s,t)=\lambda\min(s,t).$%的一维分布是参数为$\lambda t$的Poisson分布。
 \end{theorem}
 \paragraph{二项分布视角}
 将区间$ [0, t] $分为$ k $份，
-当$k\to\infty$时，$N(t)\sim\Bino(k,p)$
+当$k\to\infty$时，$N(t)\sim\BinDist(k,p)$
 \[
 	\mu_N(t)=\lim_{k\to\infty}kp=\lim_{k\to\infty}k\biggb{\frac{\lambda t}k+o\biggp{\frac tk}}=\lambda t+o(t).
 \]
 \paragraph{指数分布视角}
-将Poisson过程第$ n $个事件发生时刻记为$ T_n$。记$\D T_n=T_n-T_{n-1} $为第$ n $个事件的等待时间，特别地$\D T_1 = T_1$。
+将Poisson过程第$ n $个事件发生时刻记为$ T_n$。记$\Delta T_n=T_n-T_{n-1} $为第$ n $个事件的等待时间，特别地$\Delta T_1 = T_1$。
 \begin{theorem}{Poisson过程的指数间隔}{}
-	$\D T_1,\D T_2,\ldots$ iid $\sim\Expo(\lambda)$
+	$\Delta T_1,\Delta T_2,\ldots$ iid $\sim\ExpDist(\lambda)$
 	\begin{align*}
-		\P(\D T_1>t)&=\P\bigp{N(t)=0}=\e^{-\lambda t};\\
-		\P(\D T_2>t|T_1=s)&=\P\bigp{N(t+s)-N(t)=0\cancel{|T_1=s}}=\e^{-\lambda t}.
+		\P(\Delta T_1>t)&=\P\bigp{N(t)=0}=\e^{-\lambda t};\\
+		\P(\Delta T_2>t\mid T_1=s)&=\P\bigp{N(t+s)-N(t)=0\cancel{\mid T_1=s}}=\e^{-\lambda t}.
 	\end{align*}
-	由全概率公式，$\P(\D T_2>t)=\E_{T_1}\bigb{\P(\D T_2>t|T_1)}=\e^{-\lambda t}.$
+	由全概率公式，$\P(\Delta T_2>t)=\E_{T_1}\bigb{\P(\Delta T_2>t\mid T_1)}=\e^{-\lambda t}.$
 \end{theorem}
 \begin{theorem}{Poisson过程判定}{}
-	给定iid随机变量列$\{\D T_i\sim\Expo(\lambda)\}$。称第$ n $个事件在时间$T_n =\D T_1 + \cdots +\D T_n $发生，得到$\set{N(t)=\max(n)}{t\geqslant T_n}$
+	给定iid随机变量列$\{\Delta T_i\sim\ExpDist(\lambda)\}$。称第$ n $个事件在时间$T_n =\Delta T_1 + \cdots +\Delta T_n $发生，得到$\set{N(t)=\max(n)}{t\geqslant T_n}$
 	是强度为$\lambda$的时齐Poisson过程。
 \end{theorem}
 \begin{definition}{Wiener过程}{Wiener process}
@@ -99,23 +99,23 @@ Poisson过程中任意长度为$ t $的区间中事件个数$\sim\Pois(\lambda t
 		\item $\set{W(t)}{t\geqslant 0}$是时齐的独立增量过程
 		\item 增量服从正态分布，即$\forall t\geqslant s\geqslant 0$
 		\[
-			W(t)-W(s)\sim\Norm\bigp{0,(t-s)\sigma^2}.
+			W(t)-W(s)\sim\NormalDist\bigp{0,(t-s)\sigma^2}.
 		\]
 		若$\sigma=1$，则称为 标准Wiener过程。
 	\end{compactitem}
 \end{definition}
 Brown运动是Wiener过程。
 \begin{theorem}{Wiener过程的性质}{}
-	$W(t)\sim\Norm(0,\sigma^2t),\enspace\mu_W(t)=0,\enspace\sigma^2_W(t)=\sigma^2t,\ldots$%,\enspace R_W(s,t)=\sigma^2\min(s,t)
+	$W(t)\sim\NormalDist(0,\sigma^2t),\enspace\mu_W(t)=0,\enspace\sigma^2_W(t)=\sigma^2t,\ldots$%,\enspace R_W(s,t)=\sigma^2\min(s,t)
 \end{theorem}
 任意Wiener过程$W(t)$，可令$W(t)/\sigma$转化为标准Wiener过程。
 
 对$t_1<\cdots<t_n$，标准Wiener过程的各个增量
 \begin{align*}
-	W(t_1)&=w_1\sim\Norm(0,t_1),\\
-	W(t_2)-W(t_1)&=w_2-w_1\sim\Norm(0,t_2-t_1),\\
+	W(t_1)&=w_1\sim\NormalDist(0,t_1),\\
+	W(t_2)-W(t_1)&=w_2-w_1\sim\NormalDist(0,t_2-t_1),\\
 	\vdots\\
-	W(t_n)-W(t_{n-1})&=w_n-w_{n-1}\sim\Norm(0,t_n-t_{n-1}).
+	W(t_n)-W(t_{n-1})&=w_n-w_{n-1}\sim\NormalDist(0,t_n-t_{n-1}).
 \end{align*}
 独立，则$W(t_1),\ldots,W(t_n)$的联合PDF为 
 \begin{align*}
@@ -138,8 +138,8 @@ Brown运动是Wiener过程。
 \begin{definition}{Markov过程}{}
 	随机过程$\set{X(t)}{t\in T}$为Markov过程若%其状态空间为$I$，$\forall n\geqslant 3,t_1,t_2,\ldots,t_$
 	\begin{align*}
-		&\P\bigp{X(t_n)\leqslant x_n|X(t_1)=x_1,\ldots,X(t_{n-1})=x_{n-1}}\\
-		={}&\P\bigp{X(t_n)\leqslant x_n|X(t_{n-1})=x_{n-1}}
+		&\P\bigp{X(t_n)\leqslant x_n\mid X(t_1)=x_1,\ldots,X(t_{n-1})=x_{n-1}}\\
+		={}&\P\bigp{X(t_n)\leqslant x_n\mid X(t_{n-1})=x_{n-1}}
 	\end{align*}
 	时间和状态都离散Markov过程称为Markov链，记为：
 	\[
@@ -149,7 +149,7 @@ Brown运动是Wiener过程。
 \begin{definition}{转移概率}{}
 	条件概率 
 	\[
-		\P(X_{t+n}=j|X_t=i)=:p_{ij}(t,t+n)
+		\P(X_{t+n}=j\mid X_t=i)=:p_{ij}(t,t+n)
 	\]
 	称为Markov链在时间$t$处于状态$i$条件下，在时间$t+n$转移到状态$j$的转移概率。
 \end{definition}
@@ -284,7 +284,7 @@ Poisson过程和Wiener过程都不是平稳过程。
 \begin{theorem}{平稳随机过程的性质}{}
 	\begin{compactitem}
 		\item $R_X(\tau)$是偶函数，且在0处取最大值
-		\item 若$\exists\tau\neq 0,|R_X(\tau)|=R_X(0)$，则$X(t)$是周期的
+		\item 若$\exists\tau\neq 0,\abs{R_X(\tau)}=R_X(0)$，则$X(t)$是周期的
 		\item 若$R_X(\tau)$在0处连续，则处处连续
 		\item $R_X(\tau)$非负定，即$\forall t_i\in T,g(t)$
 		\[
@@ -369,7 +369,7 @@ Poisson过程和Wiener过程都不是平稳过程。
 \begin{definition}{偏相关函数}{}
 	用$X_t$的前$ k $个时刻的值$X_{t-1},\ldots,X_{t-k}$对$ X_t $做最小二乘估计，即
 	\[
-		a_{k1},\ldots,a_{kk}=\arg\min\E\biggb{\biggp{X_t-\sum_{i=1}^ka_{ki}X_{t-i}}^2}
+		a_{k1},\ldots,a_{kk}=\argmin\E\biggb{\biggp{X_t-\sum_{i=1}^ka_{ki}X_{t-i}}^2}
 	\]
 	其中$a_{kk}$称作$X_t$的偏相关函数。
 \end{definition}
@@ -382,7 +382,7 @@ $k\geqslant 3$，偏相关函数值变得不显著。
 	\]
 	$\gamma_k=\sigma^2\delta_k$
 \end{definition}
-一般还可以再假设$\epsilon_t\sim\Norm(0,\sigma^2)$为Gauss白噪声序列。
+一般还可以再假设$\epsilon_t\sim\NormalDist(0,\sigma^2)$为Gauss白噪声序列。
 \begin{definition}{AR($p$)过程}{}
 	平稳过程$\{X_t\}$被叫作p阶自回归(auto-regression)过程，简记为AR($p$)过程，如果
 	\begin{equation}
@@ -414,7 +414,7 @@ $k\geqslant 3$，偏相关函数值变得不显著。
 	\begin{compactitem}
 		\item 生成多项式为$\Phi(\cdot)$的AR($p$)过程的功率谱为
 		\[
-			S_X(\omega)=\frac{\sigma^2}{|\Phi(\e^{-\i\omega})|^2}.
+			S_X(\omega)=\frac{\sigma^2}{\abs{\Phi(\e^{-\i\omega})}^2}.
 		\]
 		因此它的自相关函数$\gamma_k$作为$ S_X(\omega) $的Fourier变换，有无穷多非零项，称为拖尾的。
 		\item 由AR($p$)的定义知，当$ k > p $时，它们偏相关函数$ a_{kk} = 0$，称为截尾的。
@@ -422,7 +422,7 @@ $k\geqslant 3$，偏相关函数值变得不显著。
 \end{theorem}
 由于$\epsilon_t$是白噪声，即作为误差独立同分布，可以使用多线性回归模型来估计生成多项式中的系数$\varphi_1,\ldots,\varphi_p$
 \[
-	X_t=\varphi_1X_{t-1}+\cdots+\varphi_pX_{t-p}+\epsilon_t,\enspace\epsilon_t\sim\Norm(0,\sigma^2).
+	X_t=\varphi_1X_{t-1}+\cdots+\varphi_pX_{t-p}+\epsilon_t,\enspace\epsilon_t\sim\NormalDist(0,\sigma^2).
 \]
 \subsubsection{ARMA(\textit{p, q})}
 \begin{definition}{ARMA($p,q$)}{}

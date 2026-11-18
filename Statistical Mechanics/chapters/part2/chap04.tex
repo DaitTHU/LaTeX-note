@@ -1,7 +1,3 @@
-\newcommand*{\Cr}{\mathrm C}
-\newcommand*{\rs}{\mathrm r}
-\newcommand*{\st}{\mathrm s}
-
 \chapter{系综}
 
 前面讨论的是近独立粒子系统，忽略粒子间作用，用单粒子态分布描述系统状态；如果粒子间作用不能忽略，单粒子态无确切含义，就要以系统为整体研究，这就是\textbf{系综}。
@@ -43,9 +39,9 @@
 	\[
 		\int_\varGamma\rho(q,p,t)\d\Omega=1.
 	\]
-	宏观量$\avg B(t)$就是各微观态对应量$B(q,p)$的统计平均值
+	角括号表示系综平均。宏观量$\ave{B}(t)$是微观量$B(q,p)$按各微观态概率加权的平均值
 	\begin{equation}
-		\avg B(t)=\int_\varGamma B(q,p)\rho(q,p,t)\d\Omega.
+		\ave{B}(t)=\int_\varGamma B(q,p)\rho(q,p,t)\d\Omega.
 	\end{equation}
 \end{definition}
 
@@ -77,7 +73,7 @@
 % \]
 % 而测量的期望值为
 % \begin{equation}
-% 	\avg B(t)=\sum_s B_s\rho_s(t).
+% 	\ave{B}(t)=\sum_s B_s\rho_s(t).
 % \end{equation}
 % 由不确定度关系，每个量子态在$\varGamma$空间中占据的相体积为$h^f$。
 
@@ -102,38 +98,38 @@
 
 平衡的孤立系统服从的分布叫微正则分布。满足Boltzmann等几率假设：处平衡态的孤立系统，各可能微观状态出现的几率相等。
 
-微正则系综的特性函数就是熵
+记 $s$ 为微观态指标，$\Omega$ 为所有可达微观态的总数。各态的概率和系统熵为
 \[
-	\rho_\st=\frac1\Omega,\quad S=-\kB\sum_\st\rho_\st\ln\rho_\st=\kB\ln\Omega.
+	\rho_s=\frac1\Omega,\quad S=-\kB\sum_s\rho_s\ln\rho_s=\kB\ln\Omega.
 \]
 
 \section{正则系综}
 
-考虑系统$A$与热源$A_\rs$间的平衡，注意到$A+A_\rs$构成孤立系统，当二者相互作用可忽略时，总能量$E^{(0)}=E_\st+E_\rs$，且对很大的热源$E_\rs\gg E_\st$。记当$A$处于系统$E_\st$某一量子态，$A_\rs$处于系统$E_\rs$任一量子态，微观态数目为$\Omega_\rs(E_\rs)$
+考虑系统$A$与热源$A_\reservoir$间的平衡，注意到$A+A_\reservoir$构成孤立系统，当二者相互作用可忽略时，总能量$E^{(0)}=E_s+E_\reservoir$，且对很大的热源$E_\reservoir\gg E_s$。当 $A$ 处于能量为 $E_s$ 的微观态 $s$ 时，热源的可达微观态数为 $\Omega_\reservoir(E_\reservoir)$，其中 $E_\reservoir=E^{(0)}-E_s$。于是
 \[
-	\ln\Omega_\rs(E_\rs)=\ln\Omega_\rs(E^{(0)}-E_\st)\simeq\ln\Omega_\rs(E^{(0)})-\beta E_\st
+	\ln\Omega_\reservoir(E_\reservoir)=\ln\Omega_\reservoir(E^{(0)}-E_s)\simeq\ln\Omega_\reservoir(E^{(0)})-\beta E_s
 \]
 故分布概率
 \[
-	\rho_\st\propto\e^{-\beta E_\st}\xrightarrow{\text{normalize}}\rho_\st=Z^{-1}\e^{-\beta E_\st}.
+	\rho_s\propto\e^{-\beta E_s}\xrightarrow{\text{normalize}}\rho_s=Z^{-1}\e^{-\beta E_s}.
 \]
 配分函数
 \[
-	Z=\sum_\st\e^{-\beta E_\st}.
+	Z=\sum_s\e^{-\beta E_s}.
 \]
 由定义，$\beta$只与热源有关，不同系统达到平衡时温度相同，故$\beta=\beta(T)$。
 
-若能级有简并度$\varGamma_\st$，则 
+将微观态按能量分组，用 $a$ 标记不同能级，$g_a$ 为能量等于 $E_a$ 的微观态数。配分函数也可写为
 \begin{align}
-	Z=\sum_\st\varGamma_\st\e^{-\beta E_\st}.
+	Z=\sum_a g_a\e^{-\beta E_a}.
 \end{align}
 \paragraph{正则分布的热力学公式}内能
 \begin{align}
-	E=\sum_\st\rho_\st E_\st=Z^{-1}\sum_\st E_\st\e^{-\beta E_\st}=-\pv{\ln Z}\beta.
+	E=\sum_s\rho_s E_s=Z^{-1}\sum_s E_s\e^{-\beta E_s}=-\pv{\ln Z}\beta.
 \end{align}
 状态方程
 \begin{align}
-	Y_i=\sum_\st\rho_\st\pv{E_\st}{y_i}=-\frac1\beta\pv{\ln Z}{y_i}.
+	Y_i=\sum_s\rho_s\pv{E_s}{y_i}=-\frac1\beta\pv{\ln Z}{y_i}.
 \end{align}
 熵
 \begin{align*}
@@ -141,25 +137,25 @@
 	&=-\d\biggp{\pv{\ln Z}\beta}+\frac1\beta\Bigb{\d(\ln Z)-\pv{\ln Z}\beta\d\beta}\\
 	&=\frac1\beta\d\biggp{\ln Z-\beta\pv{\ln Z}\beta}.
 \end{align*}
-由热库的$S_\rs=\kB\ln\Omega_\rs$及$(\p S_\rs/\p E_\rs)_{V,N}=1/T$可得$\beta=1/(\kB T)$，且
+由热库的$S_\reservoir=\kB\ln\Omega_\reservoir$及$(\p S_\reservoir/\p E_\reservoir)_{V,N}=1/T$可得$\beta=1/(\kB T)$，且
 \begin{align}
 	S-S'=\kB\biggp{\ln Z-\beta\pv{\ln Z}\beta}=\kB(\ln Z+\beta E).
 \end{align}
 
 另一方面，由Boltzmann关系
 \begin{align*}
-	S&=\kB\ln\Omega\{M_\st\}=\kB\Bigp{\ln M!-\sum_\st\ln M_\st!}\\
-	&\simeq\kB\Bigb{M(\ln M-1)-\sum_\st M_\st(\ln M_\st-1)}
+	S&=\kB\ln\Omega\{M_s\}=\kB\Bigp{\ln M!-\sum_s\ln M_s!}\\
+	&\simeq\kB\Bigb{M(\ln M-1)-\sum_s M_s(\ln M_s-1)}
 \end{align*}
 而
 \[
-	\ln M_\st=\ln M-\ln Z-\beta E_\st
+	\ln M_s=\ln M-\ln Z-\beta E_s
 \]
 故$S'=0$。
 
 从微观角度说，
 \begin{align}
-	S=-\kB\sum_\st\rho_\st\ln\rho_\st.
+	S=-\kB\sum_s\rho_s\ln\rho_s.
 \end{align}
 自由能
 \begin{align}
@@ -167,18 +163,18 @@
 \end{align}
 \paragraph{能量涨落}由
 \begin{align*}
-	\ave{E^2}&=\sum_\st\rho_\st E_\st^2=Z^{-1}\sum_\st E_\st^2\e^{-\beta E_\st}\\
+	\ave{E^2}&=\sum_s\rho_s E_s^2=Z^{-1}\sum_s E_s^2\e^{-\beta E_s}\\
 	&=Z^{-1}\pv[2]Z\beta=\pv[2]{\ln Z}\beta+\biggp{\pv{\ln Z}\beta}^2\\
 	&=\kB T^2C_V+\ave E^2
 \end{align*}
-能量的绝对涨落
+能量涨落的方差为
 \begin{align}
-	\D E^2=\ave{E^2}-\ave E^2=\kB T^2C_V.
+	(\Delta E)^2=\ave{E^2}-\ave E^2=\kB T^2C_V.
 \end{align}
 \begin{example}{单原子分子理想气体的相对涨落}{}
-	能量$E=\frac32 N\kB T$，比热$C_V=\frac32N\kB$，故相对涨落
+	平均能量$\ave E=\frac32 N\kB T$，比热$C_V=\frac32N\kB$，故相对涨落
 	\[
-		\vd E=\frac{\D E}E=\sqrt{\frac2{3N}}\sim 10^{-11}
+		\frac{\Delta E}{\ave E}=\sqrt{\frac2{3N}}\sim 10^{-11}
 	\]
 	涨落对宏观系统量很小的。
 \end{example}
@@ -193,7 +189,7 @@
 \end{align}
 故按能量分布
 \begin{align}
-	Z=\frac1{N!}\frac1{h^f}\int\zti\Omega'(E)\e^{-\beta E}\d E.
+	Z=\frac1{N!}\frac1{h^f}\intRplus\Omega'(E)\e^{-\beta E}\d E.
 \end{align}
 \begin{example}{用正则分布求单原子理想气体状态方程}{}
 	$N$个单原子分子气体的Hamilton量
@@ -206,10 +202,10 @@
 	\]
 	故
 	\begin{align*}
-		Z&=\frac1{N!h^{3N}}\int\zti\Omega'(E)\e^{-\beta E}\d E\\
-		&=\frac{V^N}{N!(3N/2)!}\Bigp{\frac{2\pi m}{h^2}}^{3N/2}\cdot\frac{3N}2\int\zti E^{3N/2-1}\e^{-\beta E}\d E\\
+		Z&=\frac1{N!h^{3N}}\intRplus\Omega'(E)\e^{-\beta E}\d E\\
+		&=\frac{V^N}{N!(3N/2)!}\Bigp{\frac{2\pi m}{h^2}}^{3N/2}\cdot\frac{3N}2\intRplus E^{3N/2-1}\e^{-\beta E}\d E\\
 		&%=\frac{V^N}{N!(3N/2)!}\Bigp{\frac{2\pi m}{h^2}}^{3N/2}\cdot\frac{3N}2\beta^{-3N/2}\Gamma\Bigp{\frac{3N}2}
-		=\frac{V^N}{N!}\Bigp{\frac{2\pi m}{h^2\beta}}^{3N/2}=\frac{Z_\tl^N}{N!}.
+		=\frac{V^N}{N!}\Bigp{\frac{2\pi m}{h^2\beta}}^{3N/2}=\frac{Z_\transl^N}{N!}.
 	\end{align*}
 	内能
 	\begin{align}
@@ -225,11 +221,11 @@
 
 $N$个全同粒子，体积$V$，
 \[
-	E=E_\tl+\varPhi+E_\i.
+	E=E_\transl+\varPhi+E_{\mathrm i}.
 \]
-其中$E_\tl(p)$与质心平动有关，$\varPhi(q)$是分子间势能，$E_\i$是分子内部运动。故
+其中$E_\transl(p)$与质心平动有关，$\varPhi(q)$是分子间势能，$E_{\mathrm i}$是分子内部运动。故
 \[
-	Z=\frac1{N!h^{3N}}\int\e^{-\beta E_\tl}\d p\int\e^{-\beta\varPhi}\d q\cdot Z_\i.
+	Z=\frac1{N!h^{3N}}\int\e^{-\beta E_\transl}\d p\int\e^{-\beta\varPhi}\d q\cdot Z_{\mathrm i}.
 \]
 考虑分子间势能项
 \[
@@ -261,7 +257,7 @@ $N$个全同粒子，体积$V$，
 \]
 第二级Virial系数
 \begin{align}
-	a_2(T)=-\frac12\int f(r)\d\bm r=-2\pi\int\zti\bigp{\e^{-\beta\phi(r)}-1}r^2\d r
+	a_2(T)=-\frac12\int f(r)\d\bm r=-2\pi\intRplus\bigp{\e^{-\beta\phi(r)}-1}r^2\d r
 \end{align}
 在热力学极限中，$N^2a_2/V$一般并不小，不能将$Q$截断后直接使用$\ln(1-x)\simeq-x$。应对$\ln Q$作连通集团展开：在低密度且高阶集团贡献可忽略时，保留二体项得到
 \begin{align}
@@ -307,7 +303,7 @@ $N$个全同粒子，体积$V$，
 
 \subsection{Ising模型}
 
-对于Fe, Ni, Co等铁磁性物质，存在Curie温度$T_\Cr$，当$T<T_\Cr$时会有自发磁化现象，而$T>T_\Cr$时消磁。1920年Lenz为解释铁磁-顺磁相变提出一个模型，并由其学生Ising求解出一维的情形(一维模型无相变)。
+对于Fe, Ni, Co等铁磁性物质，存在Curie温度$T_\Curie$，当$T<T_\Curie$时会有自发磁化现象，而$T>T_\Curie$时消磁。1920年Lenz为解释铁磁-顺磁相变提出一个模型，并由其学生Ising求解出一维的情形(一维模型无相变)。
 
 \paragraph{Ising模型}$N$个取值为$\pm 1$($\uparrow\downarrow$)的格点$S_i$，系统的能量包括邻对的相互作用和外磁场能
 \begin{align}
@@ -330,89 +326,89 @@ $N$个全同粒子，体积$V$，
 \]
 其平均值
 \[
-	\avg H=H+\frac1{\mu_0\mu}z\varepsilon\avg S,
+	\ave H=H+\frac1{\mu_0\mu}z\varepsilon\ave S,
 \]
 其中$z$为任一给定格点的最近邻格点数，对于二维方阵，$z=4$。
 
-令$m=\avg S$，用$S_iS_j\simeq m(S_i+S_j)-m^2$忽略涨落的乘积，得到
+令$m=\ave S$，用$S_iS_j\simeq m(S_i+S_j)-m^2$忽略涨落的乘积，得到
 \[
-	E_{\mathrm{MF}}=\frac12Nz\varepsilon m^2-\mu_0\mu\avg H\sum_iS_i,
+	E_{\mathrm{MF}}=\frac12Nz\varepsilon m^2-\mu_0\mu\ave H\sum_iS_i,
 \]
 从而平均场配分函数为
 \[
-	Z_{\mathrm{MF}}=\e^{-\beta Nz\varepsilon m^2/2}\bigp{2\cosh(\beta\mu_0\mu\avg H)}^N.
+	Z_{\mathrm{MF}}=\e^{-\beta Nz\varepsilon m^2/2}\bigp{2\cosh(\beta\mu_0\mu\ave H)}^N.
 \]
 常数项避免重复计数相互作用能，计算自由能时不能省略。令$F_{\mathrm{MF}}=-\kB T\ln Z_{\mathrm{MF}}$对$m$取驻值，即得自洽方程。平衡处磁矩为
 \begin{align}
-	M=\frac1\beta\biggp{\pv{\ln Z_{\mathrm{MF}}}{\mu_0 H}}_m=N\mu\tanh(\beta\mu_0\mu\avg H).
+	M=\frac1\beta\biggp{\pv{\ln Z_{\mathrm{MF}}}{\mu_0 H}}_m=N\mu\tanh(\beta\mu_0\mu\ave H).
 \end{align}
 
 不加外场时$H=0$，有
 \begin{align}
-	M=N\mu\avg S=N\mu\tanh\beta z\varepsilon\avg S.\implies\avg S=\tanh\beta z\varepsilon\avg S.
+	M=N\mu\ave S=N\mu\tanh\beta z\varepsilon\ave S.\implies\ave S=\tanh\beta z\varepsilon\ave S.
 \end{align}
-由$y=\tanh x$图像的性质，当$\beta z\varepsilon\leqslant 1$时，只有$\avg S=0$的解，自发磁化为0，顺磁态；而当$\beta z\varepsilon>1$时，有非零的自发磁化，铁磁态。平均场近似给出的临界温度为
+由$y=\tanh x$图像的性质，当$\beta z\varepsilon\leqslant 1$时，只有$\ave S=0$的解，自发磁化为0，顺磁态；而当$\beta z\varepsilon>1$时，有非零的自发磁化，铁磁态。平均场近似给出的临界温度为
 \begin{align}
-	T_\Cr=\frac{z\varepsilon}\kB.
+	T_\Curie=\frac{z\varepsilon}\kB.
 \end{align}
 Ising模型在平均场近似下的临界指数与Landau模型相同。该结果并非任意维数的精确结论：一维短程Ising模型在零场、有限温度下没有相变。
 \section{巨正则分布}
 %巨正则分布是$V$恒定，并与恒温粒子源接触而达平衡系统服从的分布，平衡时，温度$T$和化学势$\mu$相同。
 
-与正则分布相似，系统与热源构成孤立系统，总能量和总粒子数恒定。系统处于处粒子数为$N$，能量为$E_\st$的某一量子态的几率
+与正则分布相似，系统与热源构成孤立系统，总能量和总粒子数恒定。给定粒子数 $N$，用 $s$ 标记该粒子数下的微观态，$E_{N,s}$ 为该态的能量。系统具有粒子数 $N$ 并处于该态的概率满足
 \[
-	\rho_{N\st}\propto\Omega_\rs(N_\rs,E_\rs)=\Omega_\rs(N^{(0)}-N,E^{(0)}-E_\st).
+	\rho_{N,s}\propto\Omega_\reservoir(N_\reservoir,E_\reservoir)=\Omega_\reservoir(N^{(0)}-N,E^{(0)}-E_{N,s}).
 \]
-$N^{(0)}\gg N,E^{(0)}\gg E_\st$，故可在$(N^{(0)},E^{(0)})$处展开
+$N^{(0)}\gg N,E^{(0)}\gg E_{N,s}$，故可在$(N^{(0)},E^{(0)})$处展开
 \[
-	\ln\Omega_\rs(N^{(0)}-N,E^{(0)}-E_\st)\simeq\ln\Omega_\rs(N^{(0)},E^{(0)})-\alpha N-\beta E_\st.
+	\ln\Omega_\reservoir(N^{(0)}-N,E^{(0)}-E_{N,s})\simeq\ln\Omega_\reservoir(N^{(0)},E^{(0)})-\alpha N-\beta E_{N,s}.
 \]
 其中$\alpha=\alpha(T,\mu),\;\beta=\beta(T)$只与热源有关，故
 \begin{align}
-	\rho_{N\st}=\Xi^{-1}\e^{-\alpha N-\beta E_\st}.
+	\rho_{N,s}=\Xi^{-1}\e^{-\alpha N-\beta E_{N,s}}.
 \end{align}
 其中巨配分函数
 \begin{align}
-	\Xi=\sum_{N=0}^\infty\sum_\st\e^{-\alpha N-\beta E_\st}.
+	\Xi=\sum_{N=0}^\infty\sum_s\e^{-\alpha N-\beta E_{N,s}}.
 \end{align}
-\paragraph{连续形式}对不同粒子数$N$，需定义不同维数的$\Gamma$空间，设粒子自由度为$r$，则系统自由度为$f=Nr$：
+\paragraph{连续形式}对不同粒子数$N$，需定义不同维数的$\varGamma$空间，设粒子自由度为$r$，则系统自由度为$f=Nr$：
 \begin{align}
 	\Xi=\sum_{N=0}^\infty\frac1{N!h^{Nr}}\e^{-\alpha N}\int\e^{-\beta E(q,p,y)}\prod_{i=1}^{Nr}\d q_i\nd p_i.
 \end{align}
 \paragraph{巨配分函数与配分函数的关系}有时，如量子统计情形，$\Xi$比$Z$计算方便
 \[
-	\Xi(\alpha,\beta,y)=\sum_{N=0}^\infty\sum_\st\e^{-\alpha N-\beta E_\st}=\sum_Nq^NZ_N(\beta,y).
+	\Xi(\alpha,\beta,y)=\sum_{N=0}^\infty\sum_s\e^{-\alpha N-\beta E_{N,s}}=\sum_Nq^NZ_N(\beta,y).
 \]
 其中易逸度(fugacity) $q=\e^{-\alpha}$
 
 \paragraph{巨正则分布的热力学公式}宏观量等于对应微观量的统计平均值
 \begin{align}
-	\avg N=\sum_N\sum_\st N\rho_{N\st}=-\pv{\ln\Xi}\alpha.
+	\ave N=\sum_N\sum_s N\rho_{N,s}=-\pv{\ln\Xi}\alpha.
 \end{align}
 内能
 \begin{align}
-	U=\avg E=\sum_N\sum_\st E_\st\rho_{N\st}=-\pv{\ln\Xi}\beta.
+	U=\ave E=\sum_N\sum_s E_{N,s}\rho_{N,s}=-\pv{\ln\Xi}\beta.
 \end{align}
 状态方程
 \begin{align}
-	\avg Y=\sum_N\sum_\st\pv{E_\st}y\rho_{N\st}=-\frac1\beta\pv{\ln\Xi}y.
+	\ave Y=\sum_N\sum_s\pv{E_{N,s}}y\rho_{N,s}=-\frac1\beta\pv{\ln\Xi}y.
 \end{align}
 熵，首先由
 \begin{align*}
-	\d(\ln\Xi+\alpha\avg N+\beta\avg E)=\alpha\d\avg N+\beta\d\avg E-\beta\avg Y\d y=\beta\Bigp{\d\avg E-\avg Y\d y+\frac\alpha\beta\d\avg N}.
+	\d(\ln\Xi+\alpha\ave N+\beta\ave E)=\alpha\d\ave N+\beta\d\ave E-\beta\ave Y\d y=\beta\Bigp{\d\ave E-\ave Y\d y+\frac\alpha\beta\d\ave N}.
 \end{align*}
 故$\mu=-\frac\alpha\beta,\;\beta=\frac1{\kB T}$，熵
 \begin{align}
-	S=\kB(\ln\Xi+\alpha\avg N+\beta\avg E){\color{lightgray}\,+\,S'}.
+	S=\kB(\ln\Xi+\alpha\ave N+\beta\ave E){\color{lightgray}\,+\,S'}.
 \end{align}
 由Boltzmann关系，$S'=0$
 \begin{align}
-	S=-\kB\sum_N\sum_\st\rho_{N\st}\ln\rho_{N\st}.
+	S=-\kB\sum_N\sum_s\rho_{N,s}\ln\rho_{N,s}.
 \end{align}
 \paragraph{巨正则势}
 由熵的表达式知，
 \[
-	\ln\Xi=\frac{ST+\mu\avg N-\avg E}{\kB T}=\frac{pV}{\kB T}.
+	\ln\Xi=\frac{ST+\mu\ave N-\ave E}{\kB T}=\frac{pV}{\kB T}.
 \]
 可定义巨正则势
 \begin{align}
@@ -425,17 +421,16 @@ $N^{(0)}\gg N,E^{(0)}\gg E_\st$，故可在$(N^{(0)},E^{(0)})$处展开
 \paragraph{涨落}
 粒子数涨落
 \begin{align}
-	\D N^2=\ave{N^2}-\ave N^2=-\pv{\avg N}\alpha=\kB T\biggp{\pv{\avg N}\mu}_{T,V}.
+	(\Delta N)^2=\ave{N^2}-\ave N^2=-\pv{\ave N}\alpha=\kB T\biggp{\pv{\ave N}\mu}_{T,V}.
 \end{align}
 能量涨落
 \begin{align}
-	\D E^2=\kB T^2C_V+\Bigp{\pv EN}_{V,T}^2\D N^2.
+	(\Delta E)^2=\kB T^2C_V+\Bigp{\pv EN}_{V,T}^2(\Delta N)^2.
 \end{align}
-\paragraph{由巨正则分布导出近独立粒子系统的平衡分布}系统处粒子数$N$，能量$E_\st$的几率
+\paragraph{由巨正则分布导出近独立粒子系统的平衡分布}在粒子数为 $N$ 的态中，用 $a$ 标记能级，$g_{N,a}$ 为能量等于 $E_{N,a}$ 的微观态数。将这些微观态的概率相加，得到系统具有粒子数 $N$ 和能量 $E_{N,a}$ 的概率
 \[
-	\rho_{Na}=\Xi^{-1}\Omega_\st\e^{-\alpha N-\beta E_\st}.
+	P_{N,a}=\sum_{s:\,E_{N,s}=E_{N,a}}\rho_{N,s}=\Xi^{-1}g_{N,a}\e^{-\alpha N-\beta E_{N,a}}.
 \]
-其中$\Omega_\st$为$E_\st$的简并度。
 
 对于近独立粒子系统，单粒子能级$\varepsilon_i$，简并度$\omega_i$，对应分布$\{a_i\}$时，系统粒子数$N_{\{a_i\}}$，能量$E_{\{a_i\}}$
 \[
@@ -461,7 +456,7 @@ $N^{(0)}\gg N,E^{(0)}\gg E_\st$，故可在$(N^{(0)},E^{(0)})$处展开
 \]
 则
 \begin{align*}
-	\avg{a_i}=\sum_{\{a_i\}}a_i\rho_{\{a_i\}}=\Xi_i^{-1}\sum_{a_i}a_i\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}=-\pv{\ln\Xi_i}\alpha.
+	\ave{a_i}=\sum_{\{a_i\}}a_i\rho_{\{a_i\}}=\Xi_i^{-1}\sum_{a_i}a_i\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}=-\pv{\ln\Xi_i}\alpha.
 \end{align*}
 
 Bose分布

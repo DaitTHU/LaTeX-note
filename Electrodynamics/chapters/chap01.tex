@@ -23,13 +23,13 @@
     真空中的静止点电荷$q_1$相对$q_2$的位置为$\bm r$，则$q_1$受到$q_2$的静电力为：
     \begin{equation}
         \label{eqn:Coulomb law}
-        \bm F=k_\elec\frac{q_1q_2}{r^2}\uvec r.
+        \bm F=k_\electric\frac{q_1q_2}{r^2}\uvec r.
     \end{equation}
-    其中$k_\elec$是实验测定的系数。SI单位制中
+    其中$k_\electric$是实验测定的系数。SI单位制中
     \[
-        k_\elec=\frac1{4\pi\varepsilon_0}=\SI{8.9875517923(14)E9}{N.m^2/C^2},
+        k_\electric=\frac1{4\pi\varepsilon_0}=\qty{8.9875517923(14)E9}{\newton\metre\squared\per\coulomb\squared},
     \]
-    其中$\varepsilon_0=\SI{8.8541878128(13)E-12}{C^2/N.m^2}$是真空介电常数(vacuum permittivity)。
+    其中$\varepsilon_0=\qty{8.8541878128(13)E-12}{\coulomb\squared\per\newton\per\metre\squared}$是真空介电常数(vacuum permittivity)。
 \end{theorem}
 
 % Coulomb定律指出：静电力$F\propto 1/r^2$，即。
@@ -74,7 +74,7 @@
 \begin{corollary}
     利用Dirac $\delta$函数，电荷密度也可以用来描述分立的点电荷系统：
     \begin{equation}
-        \rho(\bm r)=\sum_{i=1}^nq_i\vd(\bm r-\bm r_i).
+        \rho(\bm r)=\sum_{i=1}^nq_i\delta(\bm r-\bm r_i).
     \end{equation}
 \end{corollary}
 
@@ -192,12 +192,12 @@
 \begin{proof}
     由恒等式\footnote{在同时存在多个变量时，需要用下标指定$\nabla$作用的变量。约定：$\nabla$不带下标时，默认作用在$\bm r$上；特别地，当作用在$\bm r'$上时，$\nabla_{\bm r'}$可简记为$\nabla'$。}
     \[
-        \nabla\biggp{\frac1{\abs{\bm r-\bm r'}}}=-\frac{\bm r-\bm r'}{\abs{\bm r-\bm r'}^3}.
+        \grad\biggp{\frac1{\abs{\bm r-\bm r'}}}=-\frac{\bm r-\bm r'}{\abs{\bm r-\bm r'}^3}.
     \]
     可将电场\eqref{eqn:E(r)}写成梯度的形式：
     \begin{equation}
         \label{eqn:E(r)=grad}
-        \bm E(\bm r)=-\frac1{4\pi\varepsilon_0}\nabla\biggp{\int_V\frac{\rho(\bm r')}{\abs{\bm r'-\bm r}}\d V'}
+        \bm E(\bm r)=-\frac1{4\pi\varepsilon_0}\grad\biggp{\int_V\frac{\rho(\bm r')}{\abs{\bm r'-\bm r}}\d V'}
     \end{equation}
     由式\eqref{eqn:curlgrad}梯度的旋度为$\bm0$即证。
 \end{proof}
@@ -215,7 +215,7 @@
     定义标量势(或电势、电位，potential)满足
     \begin{equation}
         \label{eqn:gradPhi}
-        \bm E=-\nabla\Phi.
+        \bm E=-\grad\Phi.
     \end{equation}
     显然满足上式的$\Phi$并不唯一，但它们之间仅相差一个常量，因此在讨论电位时我们需要提前选定某一参考点(通常是无穷远处)电位为0。$\Phi$的最简单的形式是：
     \begin{equation}
@@ -284,7 +284,7 @@
     \captionof{figure}{表面电荷分布}
     \label{fig:surface charge}
 \end{center}
-式\eqref{eqn:En2-En1}也可以写成电位在表面上的分布：由$\bm E\cdot\uvec n=-\nabla\Phi\cdot\uvec n=-\p\Phi/\p n$，
+式\eqref{eqn:En2-En1}也可以写成电位在表面上的分布：由$\bm E\cdot\uvec n=-\grad\Phi\cdot\uvec n=-\p\Phi/\p n$，
 \begin{equation}
     -\pv{\Phi_2}n+\pv{\Phi_1}n=\frac\sigma{\varepsilon_0}.
 \end{equation}
@@ -304,7 +304,7 @@
     \end{align*}
     上式用到了三维Taylor展开(注意上式是对$\bm r'$求导)，
     \[
-        \frac1{\abs{\bm r+\bm a}}=\frac1r+\bm a\cdot\nabla\biggp{\frac1r}+\cdots,\quad a\ll r.
+        \frac1{\abs{\bm r+\bm a}}=\frac1r+\bm a\cdot\grad\biggp{\frac1r}+\cdots,\quad a\ll r.
     \]
     定义层矩(surface-dipole-moment density) 
     \begin{equation}
@@ -342,9 +342,9 @@
     \label{eqn:W-rhoPhi}
     W=\frac12\int_V\rho(\bm r)\Phi(\bm r)\d V.
 \end{equation}
-可对上式进行变形，由式\eqref{eqn:divE}和\eqref{eqn:gradPhi}，$\rho=\varepsilon_0\div\bm E=-\varepsilon_0\lapla\Phi$，
+可对上式进行变形，由式\eqref{eqn:divE}和\eqref{eqn:gradPhi}，$\rho=\varepsilon_0\div\bm E=-\varepsilon_0\laplacian\Phi$，
 \begin{equation*}
-    W=-\frac{\varepsilon_0}2\int_V\Phi\lapla\Phi\d V=-\frac{\varepsilon_0}2\biggb{\oint_{\p V}\Phi\nabla\Phi\cdot\d\bm A-\int_V\abs{\nabla\Phi}^2\d V}
+    W=-\frac{\varepsilon_0}2\int_V\Phi\laplacian\Phi\d V=-\frac{\varepsilon_0}2\biggb{\oint_{\p V}\Phi\grad\Phi\cdot\d\bm A-\int_V\abs{\grad\Phi}^2\d V}
 \end{equation*}
 由于$V$是整个空间，故边界(无穷远处)的$\Phi=0$，
 因此我们用场的形式表示静电势能
@@ -367,7 +367,7 @@
 最后一项是互能项，在全空间的积分正是静电势能的形式。
 
 \begin{example}{导体的能量密度}{energy density of conductor}
-    由式\eqref{eqn:Et2-Et1}，导体内的电场$\bm E_\text{in}=\bm 0$，故导体的法向电场$E=\sigma/\varepsilon_0$，能量密度
+    由式\eqref{eqn:Et2-Et1}，导体内的电场$\bm E_\internal=\bm 0$，故导体的法向电场$E=\sigma/\varepsilon_0$，能量密度
     \[
         w=\frac{\varepsilon_0}2E^2=\frac{\sigma^2}{2\varepsilon_0}.
     \]
@@ -428,12 +428,12 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     结合式\eqref{eqn:divE}和\eqref{eqn:gradPhi}，便会得到Poisson方程
     \begin{equation}
         \label{eqn:Poisson}
-        \lapla\Phi=-\frac\rho{\varepsilon_0}.
+        \laplacian\Phi=-\frac\rho{\varepsilon_0}.
     \end{equation}
     特别地，$\rho\equiv 0$时，变成Laplace方程
     \begin{equation}
         \label{eqn:Laplace}
-        \lapla\Phi=0.
+        \laplacian\Phi=0.
     \end{equation}
 \end{definition}
 %式\eqref{eqn:Phi-rho}可以是Poisson方程的一个解。
@@ -448,17 +448,17 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
         \label{eqn:Green}
         \begin{gather}
             \label{eqn:Green I}
-            \int_V(\nabla\phi\cdot\nabla\psi+\phi\lapla\psi)\d V=\oint_{\p V}\phi\pv\psi n\d A,\\
+            \int_V(\grad\phi\cdot\grad\psi+\phi\laplacian\psi)\d V=\oint_{\p V}\phi\pv\psi n\d A,\\
             \label{eqn:Green II}
-            \int_V(\phi\lapla\psi-\psi\lapla\phi)\d V=\oint_{\p V}\biggp{\phi\pv\psi n-\psi\pv\phi n}\d A.
+            \int_V(\phi\laplacian\psi-\psi\laplacian\phi)\d V=\oint_{\p V}\biggp{\phi\pv\psi n-\psi\pv\phi n}\d A.
         \end{gather}
     \end{subequations}
 \end{theorem}
 
 \begin{proof}
-    对$\phi\nabla\psi$应用散度定理\eqref{eqn:div}：
+    对$\phi\grad\psi$应用散度定理\eqref{eqn:div}：
     \[
-        \int_V\div(\phi\nabla\psi)\d V=\oint_{\p V}\phi\nabla\psi\cdot\d\bm A,
+        \int_V\div(\phi\grad\psi)\d V=\oint_{\p V}\phi\grad\psi\cdot\d\bm A,
     \]
     便得到了Green第一公式；将$\phi,\psi$轮换后两式相减，便得到Green第二公式。
 \end{proof}
@@ -467,7 +467,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 
 利用Green第二公式\eqref{eqn:Green II}，我们令$\phi:=\Phi(\bm r'),\enspace\psi:=\abs{\bm r-\bm r'}^{-1}$，则
 \[
-    \nabla'^2\phi=-\frac{\rho}{\varepsilon_0},\quad\nabla'^2\psi=-4\pi\vd(\bm r-\bm r'),
+    \nabla'^2\phi=-\frac{\rho}{\varepsilon_0},\quad\nabla'^2\psi=-4\pi\delta(\bm r-\bm r'),
 \]
 我们选定$\bm r\in V$使得$\delta$函数的积分项得以保留，代入并移项得到
 \begin{equation}
@@ -497,7 +497,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     \begin{itemize}
         \item Dirichlet边界条件：给定表面上的电位
         \[
-            \Phi|_{\p V}=f;
+            \eval{\Phi}_{\p V}=f;
         \]
         \item Neumann边界条件：给定表面上电位的法向导数
         \[
@@ -505,7 +505,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
         \]
         \item 混合边界条件：给定$\Gamma_{\text{D}}$上的电位和$\Gamma_{\text{N}}$上电位的法向导数
         \[
-            \Phi|_{\Gamma_{\text{D}}}=f,\quad
+            \eval{\Phi}_{\Gamma_{\text{D}}}=f,\quad
             \biggeval{\pv\Phi n}_{\Gamma_{\text{N}}}=f',
         \]
         其中$\Gamma_{\text{D}},\Gamma_{\text{N}}$是表面$\p V$的一个划分，满足$\Gamma_{\text{D}}\cup\Gamma_{\text{N}}=\p V$且$\Gamma_{\text{D}}\cap\Gamma_{\text{N}}=\varnothing$；
@@ -526,24 +526,24 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     若存在两个解$\Phi_1,\Phi_2$满足同一个边界条件。令$U:=\Phi_1-\Phi_2$，则
 \[
     \begin{cases}
-        \nabla^2U=0,\\
-        U|_{\p V}=0\enspace\text{或}\enspace\biggeval{\pv Un}_{\p V}=0,
+        \laplacian U=0,\\
+        \eval{U}_{\p V}=0\enspace\text{或}\enspace\biggeval{\pv Un}_{\p V}=0,
     \end{cases}
 \]
 由Green第一公式\eqref{eqn:Green I}，令式中$\phi=\psi=U$，则
 \[
-    \int_V(U\cancel{\lapla U}+\nabla U\cdot\nabla U)\d V=\oint_{\p V}\cancel{U\pv Un}\d A,
+    \int_V(U\cancel{\laplacian U}+\grad U\cdot\grad U)\d V=\oint_{\p V}\cancel{U\pv Un}\d A,
 \]
 即
 \[
-    \int_V\abs{\nabla U}^2\d V=0\implies\abs{\nabla U}\equiv 0\implies U=\const.
+    \int_V\abs{\grad U}^2\d V=0\implies\abs{\grad U}\equiv 0\implies U=\const.
 \]
 这说明$\Phi_1$和$\Phi_2$仅相差一个常数。对电位来说，这仅是参考点的差别。%唯一性定理得证。
 \end{proof}
 
 \begin{remark}
     对于Dirichlet边界条件(以及混合边界条件)，可以由边界确定$U\equiv 0$，故解是唯一的；
-    对于Neumann边界条件，$U\equiv\const$，对电场而言$-\nabla\Phi$也是唯一的。解的存在还要求边界数据与总电荷相容：
+    对于Neumann边界条件，$U\equiv\const$，对电场而言$-\grad\Phi$也是唯一的。解的存在还要求边界数据与总电荷相容：
     \[
         \oint_{\p V}\pv\Phi n\d A=-\frac1{\varepsilon_0}\int_V\rho\d V.
     \]
@@ -552,7 +552,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \begin{remark}
     对于Robin边界条件，
     \[
-        \biggeval{\alpha U+\beta\pv Un}_{\p V}=0\implies\int_V\abs{\nabla U}^2\d V=-\oint_{\p V}\alpha U^2/\beta\d A,
+        \biggeval{\alpha U+\beta\pv Un}_{\p V}=0\implies\int_V\abs{\grad U}^2\d V=-\oint_{\p V}\alpha U^2/\beta\d A,
     \]
     当$\alpha,\beta$同号时，仍可得出$U\equiv 0$，解是唯一的。
     但当$\alpha,\beta$异号时，无法保证解的唯一性。
@@ -565,7 +565,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \begin{definition}{Green函数}{Green function}
     Green函数是满足如下方程的一系列函数：
     \begin{equation}
-        \nabla'^2G(\bm r,\bm r')=-4\pi\vd(\bm r-\bm r').
+        \nabla'^2G(\bm r,\bm r')=-4\pi\delta(\bm r-\bm r').
     \end{equation}
 \end{definition}
 回到Green第二公式\eqref{eqn:Green II}，这次令$\phi:=\Phi(\bm r'),\enspace\psi:=G(\bm r,\bm r')$，式\eqref{eqn:Phi-rho with boundary}变为
@@ -578,7 +578,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     我们可设法找到一个$G$满足
     \begin{equation}
         \label{eqn:Dirichlet Green condition}
-        G(\bm r,\bm r')|_{\p V}\equiv 0,\tag{$\ast$}
+        \eval{G(\bm r,\bm r')}_{\p V}\equiv 0,\tag{$\ast$}
     \end{equation}
     上式变为：
     \begin{equation}
@@ -609,7 +609,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     \[
         \ave\Phi_{\p V}:=\frac1S\oint_{\p V}\Phi(\bm r')\d A'.
     \]
-    如果$V$包括无穷远处，则\eqref{eqn:Neumann Green condition}变为$\p G/\p n'|_{\p V}\equiv 0$，此时$\ave\Phi_{\p V}=0$。
+    如果$V$包括无穷远处，则\eqref{eqn:Neumann Green condition}变为$\eval{\p G/\p n'}_{\p V}\equiv 0$，此时$\ave\Phi_{\p V}=0$。
 \end{theorem}
 
 \begin{remark}
@@ -669,29 +669,29 @@ $F(\bm r, \bm r')/4\pi\varepsilon_0$表示$V$外的电荷系统的势，
 \end{definition}
 Dirichlet边界条件的泛函
 \begin{equation}
-    I[\psi]=\frac12\int_V\nabla\psi\cdot\nabla\psi\d V-\int_Vg\psi\d V
+    I[\psi]=\frac12\int_V\grad\psi\cdot\grad\psi\d V-\int_Vg\psi\d V
 \end{equation}
 考虑一阶变分$\psi\to\psi+\vd\psi$，$\vd I:=I[\psi+\vd\psi]-I[\psi]$
 \[
-    \vd I=\int_V\bigb{\nabla\psi\cdot\nabla(\vd\psi)-g\vd\psi}\d V=-\int_V(\lapla\psi+g)\vd\psi\d V+\oint_{\p V}\pv\psi n\vd\psi\d A.
+    \vd I=\int_V\bigb{\grad\psi\cdot\grad(\vd\psi)-g\vd\psi}\d V=-\int_V(\laplacian\psi+g)\vd\psi\d V+\oint_{\p V}\pv\psi n\vd\psi\d A.
 \]
-考虑$\vd\psi|_{\p V}\equiv 0$，则泛函取极值(即$\vd I=0$)当且仅当
+考虑$\eval{\vd\psi}_{\p V}\equiv 0$，则泛函取极值(即$\vd I=0$)当且仅当
 \begin{equation}
-    \lapla\psi=-g.
+    \laplacian\psi=-g.
 \end{equation}
 
 Neumann边界条件的泛函
 \begin{equation}
-    I[\psi]=\frac12\int_V\nabla\psi\cdot\nabla\psi\d V-\int_Vg\psi\d V-\oint_{\p V}f\psi\d A.
+    I[\psi]=\frac12\int_V\grad\psi\cdot\grad\psi\d V-\int_Vg\psi\d V-\oint_{\p V}f\psi\d A.
 \end{equation}
 可得 
 \[
-    \vd I=-\int_V(\lapla\psi+g)\vd\psi\d V+\oint_{\p V}\biggp{\pv\psi n-f}\vd\psi\d A,
+    \vd I=-\int_V(\laplacian\psi+g)\vd\psi\d V+\oint_{\p V}\biggp{\pv\psi n-f}\vd\psi\d A,
 \]
 则$\vd I=0$当且仅当
 \begin{subequations}
     \begin{align}
-        \lapla\psi&=-g,\\
+        \laplacian\psi&=-g,\\
         \biggeval{\pv\psi n}_{\p V}&=f.
     \end{align}
 \end{subequations}
@@ -702,7 +702,7 @@ Neumann边界条件的泛函
     {松弛法}{relaxation method}
     松弛法(relaxation method)也称有限差分法(finite difference method, FDM)，是一种求解微分方程数值解的近似方法，其主要原理是对微分方程中的微分项进行直接差分近似：
     \[
-        \dv fx\approx\frac{\D f}{\D x}=\frac{f(x+h)-f(x)}h
+        \dv fx\approx\frac{\Delta f}{\Delta x}=\frac{f(x+h)-f(x)}h
     \]
     从而将微分方程转化为代数方程组求解。
 \end{definition}

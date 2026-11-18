@@ -19,13 +19,13 @@
     \notag
     \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r')}{\abs{\bm r'-\bm r}}\d V'\\
     \notag
-    &=\frac1{\varepsilon_0}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac1{2\ell+1}\biggb{\int_V\rho(\bm r'){r'^\ell}Y^\ast_{\ell m}(\theta',\phi')\d V'}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}\\
+    &=\frac1{\varepsilon_0}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac1{2\ell+1}\biggb{\int_V\rho(\bm r'){r'^\ell}Y\conj_{\ell m}(\theta',\phi')\d V'}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}\\
     \label{eqn:Phi multipole}
     &=:\frac1{\varepsilon_0}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac{q_{\ell m}}{2\ell+1}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}.
 \end{align}
 其中系数$q_{\ell m}$称为多极矩(multipole moment)
 \begin{equation}
-    q_{\ell m}:=\int_V\rho(\bm r'){r'^\ell}Y^\ast_{\ell m}(\theta',\phi')\d V'.
+    q_{\ell m}:=\int_V\rho(\bm r'){r'^\ell}Y\conj_{\ell m}(\theta',\phi')\d V'.
 \end{equation}
 另一方面，也可应用式\eqref{eqn:1/|r-r'|}展开$1/\abs{\bm r-\bm r'}$：
 \begin{align}
@@ -41,7 +41,7 @@
     \begin{align}
         q={}&\int_V\rho(\bm r')\d V',\\
         \bm p:={}&\int_V\bm r'\rho(\bm r')\d V',\\
-        Q_{\alpha\beta}:={}&\int_V(3r_\alpha'r_\beta'-r'^2\vd_{\alpha\beta})\rho(\bm r')\d V'.
+        Q_{\alpha\beta}:={}&\int_V(3r_\alpha'r_\beta'-r'^2\delta_{\alpha\beta})\rho(\bm r')\d V'.
     \end{align}
 \end{subequations}
 
@@ -59,7 +59,7 @@
             q_{22}&=\sqrt{\frac{15}{32\pi}}\int_V(x'-\i y')^2\rho(\bm r')\d V'=\sqrt{\frac5{96\pi}}(Q_{xx}-Q_{yy}-2\i Q_{xy}).
         \end{align}
     \end{subequations}
-    负$m$项可由$q_{\ell,-m}=(-)^mq_{\ell m}^\ast$推出，
+    负$m$项可由$q_{\ell,-m}=(-)^mq_{\ell m}\conj$推出，
     \tcblower
     对于任何电荷分布，其最低阶的不为0的多极矩$q_{\ell m}$与原点的选择无关，但剩下所有较高阶的多极矩一般都与原点的位置有关。
 \end{example}
@@ -87,14 +87,14 @@
             \bm E&=\frac p{4\pi\varepsilon_0r^3}(2\cos\theta\uvec r+\sin\theta\uvec\theta).
         \end{align}
     \end{subequations}
-    上式只适用于$r\neq0$。若要将理想点偶极子的电场作为全空间上的分布，应由$\bm E=-\nabla\Phi$求分布导数，补上原点处的接触项：
+    上式只适用于$r\neq0$。若要将理想点偶极子的电场作为全空间上的分布，应由$\bm E=-\grad\Phi$求分布导数，补上原点处的接触项：
     \begin{equation}
         \label{eqn:E dipole with delta}
-        \bm E(\bm r)=\frac1{4\pi\varepsilon_0}\biggb{\frac{3(\bm p\cdot\uvec r)\uvec r-\bm p}{r^3}-\frac{4\pi}3\bm p\vd(\bm r)}.
+        \bm E(\bm r)=\frac1{4\pi\varepsilon_0}\biggb{\frac{3(\bm p\cdot\uvec r)\uvec r-\bm p}{r^3}-\frac{4\pi}3\bm p\delta(\bm r)}.
     \end{equation}
-    此时$\div\bm E=-\bm p\cdot\nabla\delta(\bm r)/\varepsilon_0$，即电偶极子的电荷密度为
+    此时$\div\bm E=-\bm p\cdot\grad\delta(\bm r)/\varepsilon_0$，即电偶极子的电荷密度为
     \begin{equation}
-        \rho(\bm r)=-\bm p\cdot\nabla\delta(\bm r).
+        \rho(\bm r)=-\bm p\cdot\grad\delta(\bm r).
     \end{equation}
 \end{example}
 
@@ -102,7 +102,7 @@
     {电场的体积分}{volume integral of E}
     对于局域分布的电荷系统，其电场在以原点为球心、半径为$R$的球内的体积分为
     \begin{align*}
-        \int_{r<R}\bm E(\bm r)\d V&=-\int_{r<R}\nabla\Phi(\bm r)\d V=-\int_{r=R}\Phi(\bm r)\d\bm A=-\int_{r=R}\Phi(\bm r)\uvec rR^2\d\Omega\\
+        \int_{r<R}\bm E(\bm r)\d V&=-\int_{r<R}\grad\Phi(\bm r)\d V=-\int_{r=R}\Phi(\bm r)\d\bm A=-\int_{r=R}\Phi(\bm r)\uvec rR^2\d\Omega\\
         &=-\frac{R^2}{4\pi\varepsilon_0}\int_{r=R}\int_V\frac{\rho(\bm r')}{\abs{\bm r-\bm r'}}\d V'\uvec r\d\Omega,
     \end{align*}
     其中球面上的单位矢量可以写成$Y_{1m}(\theta,\phi)$的线性组合：
@@ -123,7 +123,7 @@
             \frac{4\pi}{3}R^3\bm E(\bm 0),&\text{电荷全在球外}.
         \end{cases}
     \end{equation}
-    这也对应于电偶极子电场\eqref{eqn:E dipole with delta}中的$-\bm p\vd(\bm r)/3\varepsilon_0$项。
+    这也对应于电偶极子电场\eqref{eqn:E dipole with delta}中的$-\bm p\delta(\bm r)/3\varepsilon_0$项。
 \end{example}
 
 \subsection{能量的多极矩展开}
@@ -154,11 +154,11 @@
     \label{eqn:F=(p dot nabla)E}
     \bm F=\int_V\rho\bm E\d V\simeq(\bm p\cdot\nabla)\bm E,
 \end{equation}
-一般地，$\bm p$不随坐标变化，上式也可写成$\nabla(\bm p\cdot\bm E)$： 
+一般地，$\bm p$不随坐标变化，上式也可写成$\grad(\bm p\cdot\bm E)$：
 \[
-    \nabla(\bm p\cdot\bm E)=\bm p\times\cancel{(\curl\bm E)}+\bm E\times\cancel{(\curl\bm p)}+(\bm p\cdot\nabla)\bm E+(\bm E\cdot\cancel{\nabla)\bm p}.
+    \grad(\bm p\cdot\bm E)=\bm p\times\cancel{(\curl\bm E)}+\bm E\times\cancel{(\curl\bm p)}+(\bm p\cdot\nabla)\bm E+(\bm E\cdot\cancel{\nabla)\bm p}.
 \]
-由$\bm F=-\nabla U$，可定义电偶极子在电场中的势能为
+由$\bm F=-\grad U$，可定义电偶极子在电场中的势能为
 \begin{equation}
     U=-\bm p\cdot\bm E.
 \end{equation}
@@ -190,11 +190,9 @@
     \label{eqn:curlE-macro}
     \curl\bm E_\text{micro}=\bm 0\implies\curl\bm E=\bm 0.
 \end{equation}
-这意味着宏观电场$\bm E$同样可以表达成电势的梯度$-\nabla\Phi$。
+这意味着宏观电场$\bm E$同样可以表达成电势的梯度$-\grad\Phi$。
 
 \paragraph{电极化}
-
-\newcommand{\pol}{\mathrm{p}}
 
 %如果电场作用于由大量原子(或分子)组成的介质，束缚在每个分子中的电荷将执行摄动运动(perturbed motions)，由此在介质中产生了电极化。
 在电介质内的多极子被外电场极化的过程中，偶极子占主导地位。
@@ -214,10 +212,10 @@
 其中$\rho$是自由电荷(或过剩电荷)密度，
 $\rho_\pol:=-\div\bm P$是极化电荷密度。%上式是由电荷分布$(\rho-\div\bm P)$激发电势的习惯表达式。
 从而
-%由$\bm E=-\nabla\Phi$，第一个Maxwell方程为 
+%由$\bm E=-\grad\Phi$，第一个Maxwell方程为
 \begin{equation}
     \label{eqn:divE-P}
-    \div\bm E=-\lapla\Phi=\frac{\rho-\div\bm P}{\varepsilon_0}.
+    \div\bm E=-\laplacian\Phi=\frac{\rho-\div\bm P}{\varepsilon_0}.
 \end{equation}
 若极化不均匀，则任何小体积内的电荷都会有净增加或净减少，这对应$\div\bm P$这一项。
 \begin{definition}
@@ -239,14 +237,14 @@ $\rho_\pol:=-\div\bm P$是极化电荷密度。%上式是由电荷分布$(\rho-\
     % 为了解Maxwell方程组，我们需要找到。
     为了简化，我们假设介质是各向同性的(isotropic)，且系统对外加场的响应是线性的(linear)。因此$\bm D$和$\bm E$之间的本构关系(constitutive relation)为
     \begin{equation}
-        \bm P=\varepsilon_0\chi_\elec\bm E.
+        \bm P=\varepsilon_0\chi_\electric\bm E.
     \end{equation}
-    其中无量纲常数$\chi_\elec$称为介质的电极化率(electric susceptibility)。由此得到 
+    其中无量纲常数$\chi_\electric$称为介质的电极化率(electric susceptibility)。由此得到
     \begin{equation}
         \bm D=\varepsilon\bm E,
     \end{equation}
-    其中$\varepsilon:=\varepsilon_\r\varepsilon_0$称为电容率或介电常数(permittivity)，
-    无量纲常数$\varepsilon_\r:=1+\chi_\elec$称为相对介电常数(relative permittivity)。
+    其中$\varepsilon:=\varepsilon_\relative\varepsilon_0$称为电容率或介电常数(permittivity)，
+    无量纲常数$\varepsilon_\relative:=1+\chi_\electric$称为相对介电常数(relative permittivity)。
 \end{definition}
 
 % \begin{table}[!htp]
@@ -254,7 +252,7 @@ $\rho_\pol:=-\div\bm P$是极化电荷密度。%上式是由电荷分布$(\rho-\
 %     \caption{常见物质的相对介电常数}
 %     \begin{tabular}{cc}
 %         \toprule
-%         物质&$\varepsilon_\r$\\
+%         物质&$\varepsilon_\relative$\\
 %         \midrule
 %         真空&1\\
 %         空气&1.0006\\
@@ -327,7 +325,7 @@ $\sigma$是宏观表面电荷密度（不包含极化电荷$\sigma_\pol$）。
     $\varepsilon_2<\varepsilon_1$时，$q,q'$同号，$\varepsilon_1$内电场线内凸。
     \tcblower 
     由式\eqref{eqn:Pn2-Pn1}，$z=0$上极化电荷面密度为
-    %\bm P_i=(\varepsilon_i-\varepsilon_0)\bm E_i=-(\varepsilon_i-\varepsilon_0)\nabla\Phi(0^\pm).
+    %\bm P_i=(\varepsilon_i-\varepsilon_0)\bm E_i=-(\varepsilon_i-\varepsilon_0)\grad\Phi(0^\pm).
     \[
         \sigma_\pol=P_{2z}-P_{1z}=-\frac q{2\pi}\frac{\varepsilon_0(\varepsilon_2-\varepsilon_1)}{\varepsilon_1(\varepsilon_2+\varepsilon_1)}\frac d{(\rho^2+d^2)^{3/2}}.
     \]
@@ -351,37 +349,33 @@ $\sigma$是宏观表面电荷密度（不包含极化电荷$\sigma_\pol$）。
     可解得
     \[
         \Phi=\begin{cases}
-            -\frac{3}{\varepsilon_\r+2}E_0r\cos\theta,&r<a\\
-            -E_0r\cos\theta+\biggp{\frac{\varepsilon_\r-1}{\varepsilon_\r+2}}E_0\frac{a^3}{r^2}\cos\theta,&r>a
+            -\frac{3}{\varepsilon_\relative+2}E_0r\cos\theta,&r<a\\
+            -E_0r\cos\theta+\biggp{\frac{\varepsilon_\relative-1}{\varepsilon_\relative+2}}E_0\frac{a^3}{r^2}\cos\theta,&r>a
         \end{cases}
     \]
     因此介质球内是匀强电场
     \[
-        E_1=\frac{3}{\varepsilon_\r+2}E_0;
+        E_1=\frac{3}{\varepsilon_\relative+2}E_0;
     \]
     介质球外相当于外加场$E_0$加上原点的电偶极场，偶极矩朝向电偶极场的方向
     \[
-        \bm p=4\pi\varepsilon_0\biggp{\frac{\varepsilon_\r-1}{\varepsilon_\r+2}}a^3\bm E_0,
+        \bm p=4\pi\varepsilon_0\biggp{\frac{\varepsilon_\relative-1}{\varepsilon_\relative+2}}a^3\bm E_0,
     \]
     球体内的电极化强度
     \begin{equation}
         \label{eqn:P-E}
-        \bm P=(\varepsilon-\varepsilon_0)\bm E_1=3\varepsilon_0\biggp{\frac{\varepsilon_\r-1}{\varepsilon_\r+2}}\bm E_0,
+        \bm P=(\varepsilon-\varepsilon_0)\bm E_1=3\varepsilon_0\biggp{\frac{\varepsilon_\relative-1}{\varepsilon_\relative+2}}\bm E_0,
     \end{equation}
     因此表面极化电荷面密度：
     \[
-        \sigma_\pol=\bm P\cdot\uvec r=3\varepsilon_0\biggp{\frac{\varepsilon_\r-1}{\varepsilon_\r+2}}E_0\cos\theta.
+        \sigma_\pol=\bm P\cdot\uvec r=3\varepsilon_0\biggp{\frac{\varepsilon_\relative-1}{\varepsilon_\relative+2}}E_0\cos\theta.
     \]
 \end{example}
 
 \subsection{分子极化率和电极化率}
 \label{ssec:molecular polarizability and electric susceptibility}
 
-\newcommand{\molecule}{\mathrm{mol}}
-\newcommand{\internal}{\mathrm{in}}
-\newcommand{\near}{\mathrm{near}}
-
-本节中讨论分子极化率(molecular polarizability) $\chi_\molecule$和电极化率(electric susceptibility) $\chi_\elec$之间的关系。%我们仅从给它列个大纲开始。
+本节中讨论分子极化率(molecular polarizability) $\gamma_\molecule$和电极化率(electric susceptibility) $\chi_\electric$之间的关系。%我们仅从给它列个大纲开始。
 
 在稀薄(rarefied)介质中，宏观场与作用在任何分子(或分子群)上的场几乎没有区别；但在致密(dense)介质中，相邻分子的极化会产生一个内部场$\bm E_\internal$，所以分子上的总电场是$\bm E+\bm E_\internal$。
 内部场$\bm E_\internal$除了考虑相邻分子的贡献$\bm E_\near$外，还要减去可以用极化强度$\bm P$描述的平均贡献$\bm E_\pol$：
@@ -402,9 +396,9 @@ $\sigma$是宏观表面电荷密度（不包含极化电荷$\sigma_\pol$）。
 
 \begin{theorem}
     {Clausius-Mossotti方程}{Clausius-Mossotti equation}
-    分子极化率$\gamma_\molecule$与电极化率$\chi_\elec$之间的关系为
+    分子极化率$\gamma_\molecule$与电极化率$\chi_\electric$之间的关系为
     \begin{equation}
-        \gamma_\molecule=\frac3N\frac{\chi_\elec}{\chi_\elec+3}=\frac3N\frac{\varepsilon_\r-1}{\varepsilon_\r+2}.
+        \gamma_\molecule=\frac3N\frac{\chi_\electric}{\chi_\electric+3}=\frac3N\frac{\varepsilon_\relative-1}{\varepsilon_\relative+2}.
     \end{equation}
 \end{theorem}
 
@@ -413,29 +407,29 @@ $\sigma$是宏观表面电荷密度（不包含极化电荷$\sigma_\pol$）。
     \[
         \bm P=N\ave{\bm p_\molecule}=N\varepsilon_0\gamma_\molecule(\bm E+\bm E_\internal)=N\gamma_\molecule\biggp{\varepsilon_0\bm E+\frac{\bm P}3}.
     \]
-    代入$\bm P=\varepsilon_0\chi_\elec\bm E,\enspace\varepsilon_\r=1+\chi_\elec$即得。
+    代入$\bm P=\varepsilon_0\chi_\electric\bm E,\enspace\varepsilon_\relative=1+\chi_\electric$即得。
 \end{proof}
 
 \begin{remark}
     这种关系对气体等稀释物质最适用。
-    对于液体和固体，尤其是$\varepsilon_\r$很大时，上式仅近似有效。
+    对于液体和固体，尤其是$\varepsilon_\relative$很大时，上式仅近似有效。
 \end{remark}
 
 \paragraph{分子极化率的模型}
 由谐振子模型
 \[
-    m\omega_0^2\bm r=e\bm E\implies\bm p_\text{mol}=e\bm r=\frac{e^2\bm E}{m\omega_0^2}\implies\gamma_\text{mol}=\frac{e^2}{m\omega_0^2\varepsilon_0}.
+    m\omega_0^2\bm r=e\bm E\implies\bm p_\molecule=e\bm r=\frac{e^2\bm E}{m\omega_0^2}\implies\gamma_\molecule=\frac{e^2}{m\omega_0^2\varepsilon_0}.
 \]
 $\omega_0$为分子的固有频率。
 
 \begin{example}
     {}{}
-    常温常压(normal temperature and pressure, NTP)下，气体$\chi_\elec<10^{-3}$，固体和液体$\chi_\elec\sim 1$。
+    常温常压(normal temperature and pressure, NTP)下，气体$\chi_\electric<10^{-3}$，固体和液体$\chi_\electric\sim 1$。
 \end{example}
 
 一般地，考虑不同能量的分子的Boltzmann分布，
 \[
-    \gamma_\text{mol}\simeq\frac{e^2}{m\omega_0^2\varepsilon_0}+\frac{p_0^2}{3\varepsilon_0\kB T}.
+    \gamma_\molecule\simeq\frac{e^2}{m\omega_0^2\varepsilon_0}+\frac{p_0^2}{3\varepsilon_0\kB T}.
 \]
 $p_0$为分子固有偶极矩的大小。
 
@@ -455,7 +449,7 @@ $p_0$为分子固有偶极矩的大小。
 \subparagraph{电荷分布不变过程}
 若电介质放入前后源电荷分布$\rho(\bm r)$不变
 \begin{align*}
-    \D W&=\frac12\int_V(\bm E\cdot\bm D-\bm E_0\cdot\bm D_0)\d V\\
+    \Delta W&=\frac12\int_V(\bm E\cdot\bm D-\bm E_0\cdot\bm D_0)\d V\\
     &=\frac12\int_V(\bm E\cdot\bm D_0-\bm E_0\cdot\bm D)\d V+\frac12\int_V(\bm E+\bm E_0)\cdot\cancel{(\bm D-\bm D_0)}\d V\\
     &=-\frac12(\varepsilon-\varepsilon_0)\int_V\bm E\cdot\bm E_0\d V=-\frac12\int_V\bm P\cdot\bm E_0\d V,
 \end{align*}

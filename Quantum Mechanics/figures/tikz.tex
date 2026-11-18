@@ -1,8 +1,9 @@
 \documentclass[tikz,border=4pt]{standalone}
 \usepackage[scheme=plain]{ctex}
-\usepackage{amsmath,anyfontsize,bm,pgfplots,siunitx}
+\usepackage{anyfontsize,pgfplots,siunitx}
 \usetikzlibrary{arrows.meta,calc,decorations.markings,decorations.pathmorphing,positioning}
-\newcommand{\ket}[1]{\lvert#1\rangle}
+\input{../../mathdef.tex}
+\input{../notation.tex}
 \colorlet{ink}{blue!20!black}
 \colorlet{curve}{teal!74!black}
 \colorlet{amplitude}{teal!75!black}
@@ -108,7 +109,7 @@
             node[above] {$\mathrm{\electrode}$};
     }
     \draw[radiation,shortwave] (\gap/3,\plate+2*\wall) node[right] {$h\nu$} -- (K);
-    \draw[beam] (\wall,0) -- node[above] {$e^-$} (\gap-\wall,0);
+    \draw[beam] (\wall,0) -- node[above] {$\electron^-$} (\gap-\wall,0);
     \node[draw,fill=black!5] (bias) at (\gap/3,\wireY) {$V_{\rm ret}$};
     \node[draw,circle,inner sep=2pt] (meter) at (2*\gap/3,\wireY) {A};
     \draw (0,-\plate) |- (bias.west) node[above left] {$+$};
@@ -124,7 +125,7 @@
     \draw[radiation,shortwave] (source.east) -- node[above=1mm] {$\lambda$} (0,0);
     \draw[black!45,dashed] (0,0) -- (\arm,0);
     \draw[radiation=4.5mm,longwave] (0,0) -- (spectrometer);
-    \draw[thick,->] (0,0) -- (-\recoilAngle:2*\arcRadius) node[right] {$e^-$};
+    \draw[thick,->] (0,0) -- (-\recoilAngle:2*\arcRadius) node[right] {$\electron^-$};
     \draw (\arcRadius,0) arc[start angle=0,end angle=\thetaOut,radius=\arcRadius];
     \node at (\thetaOut/2:1.45*\arcRadius) {$\theta$};
     \fill (0,0) circle (2pt);
@@ -141,7 +142,7 @@
     \draw[very thick] (0,-\plate) -- (0,\plate);
     \draw[thick,densely dotted] (\gridX,-\plate) -- (\gridX,\plate);
     \draw[very thick] (\collectorX,-\plate) -- (\collectorX,\plate);
-    \draw[beam] (\wall,0) -- node[above] {$e^-$} (\gridX-\wall,0);
+    \draw[beam] (\wall,0) -- node[above] {$\electron^-$} (\gridX-\wall,0);
     \node[below] at (\gridX/2,0) {$\mathrm{Hg}$};
     \draw[beam] (\gridX+\wall,0) -- (\collectorX-\wall,0);
     \node[draw,circle,inner sep=2pt] (meter) at (\collectorX+3*\wall,0) {A};
@@ -246,31 +247,31 @@
     \label{oscillator-ladder}
 \def\span{3.7} \def\step{.85} \def\inset{.8}
 \foreach \n in {0,...,3}{
-    \draw[level] (0,{(\n+.5)*\step}) -- (\span,{(\n+.5)*\step}) node[right] {$|\n\rangle$};
+    \draw[level] (0,{(\n+.5)*\step}) -- (\span,{(\n+.5)*\step}) node[right] {$\ket{\n}$};
 }
 \draw[guide] (0,0) -- (\span,0) node[right,ink] {$E=0$};
 \draw[<->] (-.35,1.5*\step) -- node[left] {$\hbar\omega$} (-.35,2.5*\step);
-\draw[signal,->] (\inset,1.5*\step) -- node[right] {$\hat a^\dagger$} (\inset,2.5*\step);
-\draw[signal,->] (\span-\inset,1.5*\step) -- node[left] {$\hat a$} (\span-\inset,.5*\step);
+\draw[signal,->] (\inset,1.5*\step) -- node[right] {$\op{a}\adjoint$} (\inset,2.5*\step);
+\draw[signal,->] (\span-\inset,1.5*\step) -- node[left] {$\op{a}$} (\span-\inset,.5*\step);
 \end{tikzpicture}
 
 % 第 5 章
 \begin{tikzpicture}[>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
     \label{angular-projection}
-\def\ell{2} \def\unit{.84} \def\tilt{.12}
-\pgfmathsetmacro{\radius}{sqrt(\ell*(\ell+1))*\unit}
+\def\ell{2} \def\momentumScale{.84} \def\tilt{.12}
+\pgfmathsetmacro{\radius}{sqrt(\ell*(\ell+1))*\momentumScale}
 \filldraw[fill=ink!3,draw=ink!50] (0,0) circle (\radius);
 \draw[->] (0,-\radius) -- (0,\radius+.45) node[above] {$m\hbar$};
 \foreach \m in {-2,...,2}{
-    \pgfmathsetmacro{\ring}{sqrt(\radius^2-(\unit*\m)^2)}
-    \draw[ink!30,dashed] (\ring,\unit*\m) arc[start angle=0,end angle=180,x radius=\ring,y radius=\ring*\tilt];
-    \draw[ink!50] (-\ring,\unit*\m) arc[start angle=180,end angle=360,x radius=\ring,y radius=\ring*\tilt];
-    \draw[guide] (\ring,\unit*\m) -- (\radius+.2,\unit*\m) node[right,ink] {$m=\m$};
+    \pgfmathsetmacro{\ring}{sqrt(\radius^2-(\momentumScale*\m)^2)}
+    \draw[ink!30,dashed] (\ring,\momentumScale*\m) arc[start angle=0,end angle=180,x radius=\ring,y radius=\ring*\tilt];
+    \draw[ink!50] (-\ring,\momentumScale*\m) arc[start angle=180,end angle=360,x radius=\ring,y radius=\ring*\tilt];
+    \draw[guide] (\ring,\momentumScale*\m) -- (\radius+.2,\momentumScale*\m) node[right,ink] {$m=\m$};
 }
-\pgfmathsetmacro{\reach}{sqrt(\radius^2-\unit^2)}
-\draw[signal,->] (0,0) -- (\reach,\unit);
-\draw[signal,densely dotted] (\reach,\unit) -- (0,\unit);
-\fill[teal!75!black] (0,\unit) circle (1.6pt);
+\pgfmathsetmacro{\reach}{sqrt(\radius^2-\momentumScale^2)}
+\draw[signal,->] (0,0) -- (\reach,\momentumScale);
+\draw[signal,densely dotted] (\reach,\momentumScale) -- (0,\momentumScale);
+\fill[teal!75!black] (0,\momentumScale) circle (1.6pt);
 \end{tikzpicture}
 
 \begin{tikzpicture}[>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
@@ -317,7 +318,7 @@
     \ifnum\n<7 \node[above,font=\scriptsize] at ({pos(\wave)},\lineheight) {$\n$};\fi
 }
 \draw[guide] ({pos(4/\rydberg)},0) -- ++(0,\stripheight) node[above,ink] {$n_i\to\infty$};
-\draw[->] (0,0) -- (\axiswidth,0) node[right] {$\lambda$/nm};
+\draw[->] (0,0) -- (\axiswidth,0) node[right] {$\lambda/\unit{nm}$};
 \foreach \tick in {400,450,...,650}\draw ({pos(\tick)},0) -- ++(0,-.09) node[below] {$\tick$};
 \end{tikzpicture}
 
@@ -495,7 +496,7 @@
 	\node at(-.3,-1){$\bm B$};
 	\draw[-Latex](0,1)--(0,2);
 	\node at(-.3,2){$z$};
-	\node at(-2.8,.06){$e^-$};
+	\node at(-2.8,.06){$\electron^-$};
 	\draw[thick](0,0)--(-2.5,0);
 	\draw[thick](0,0)parabola bend(0,0)(4,1);
 	\draw[thick,-Latex](4,1)--(5,1.5);
@@ -602,8 +603,8 @@
     (hit9.center) -- (hit14.center) -- (hit2.center) -- (hit10.center) -- (hit3.center) --
     (hit4.center) -- (hit11.center) -- (hit13.center);
 
-  \foreach \ang in {-35,-5,35}{
-    \draw[cavity radiation] (1,0)++(\ang:0.1 and 0.2) --++ (\ang:0.35);
+  \foreach \diagramAngle in {-35,-5,35}{
+    \draw[cavity radiation] (1,0)++(\diagramAngle:0.1 and 0.2) --++ (\diagramAngle:0.35);
   }
 
 \end{tikzpicture}
@@ -624,12 +625,12 @@
     decorate[decoration={random steps,segment length=2,amplitude=1pt}]
         {arc (-7:-353:0.82)} -- cycle;
 
-  \foreach \ang [evaluate={\angin=\ang-180+10*rand; \r=0.76+0.05*rand; \l=0.4+0.02*rand}] in {10,45,100,140,190,240,290,330}{
-    \draw[cavity radiation] (\ang:\r) --++ (\angin:\l);
+  \foreach \diagramAngle [evaluate={\angin=\diagramAngle-180+10*rand; \r=0.76+0.05*rand; \l=0.4+0.02*rand}] in {10,45,100,140,190,240,290,330}{
+    \draw[cavity radiation] (\diagramAngle:\r) --++ (\angin:\l);
   }
 
-  \foreach \ang in {-30,0,30}{
-    \draw[cavity radiation] (1,0)++(\ang:0.05 and 0.16) --++ (\ang:0.35);
+  \foreach \diagramAngle in {-30,0,30}{
+    \draw[cavity radiation] (1,0)++(\diagramAngle:0.05 and 0.16) --++ (\diagramAngle:0.35);
   }
 
 \end{tikzpicture}
@@ -657,8 +658,8 @@
       ticklabel style={scale=0.8},
       %xtick style={draw=none},xticklabels=none,
       max space between ticks=26,
-      xlabel={Wavelength $\lambda$ [nm]},
-      ylabel={Power $P$ [kW/sr\,m$^2$\,nm]},
+      xlabel={Wavelength $\lambda$ [\unit{nm}]},
+      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
       xlabel style={at={(rel axis cs:0.5,0)},below=-1pt,font=\small},
       ylabel style={at={(rel axis cs:-0.11,0.5)},rotate=90},
       width=9cm, height=7cm,
@@ -689,10 +690,10 @@
     %  ({lampeak(T)},{planck(lampeak(T),T)});
 
     % LABELS
-    \node[above=0pt,scale=0.75,red] at (1150,{planck(1150,3000)}) {\SI{3000}{K}};
-    \node[above right=-1pt,scale=0.75,orange!80!black] at (740,{planck(740,4000)}) {\SI{4000}{K}};
-    \node[above right=-1pt,scale=0.75,blue] at (800,{planck(800,5000)}) {\SI{5000}{K}};
-    \node[above right=-1pt,scale=0.75,blue] at (1500,{rayleighjeans(1500,5000)}) {\SI{5000}{K} Rayleigh-Jeans};
+    \node[above=0pt,scale=0.75,red] at (1150,{planck(1150,3000)}) {\qty{3000}{K}};
+    \node[above right=-1pt,scale=0.75,orange!80!black] at (740,{planck(740,4000)}) {\qty{4000}{K}};
+    \node[above right=-1pt,scale=0.75,blue] at (800,{planck(800,5000)}) {\qty{5000}{K}};
+    \node[above right=-1pt,scale=0.75,blue] at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh-Jeans};
 
     %% TICKS
     %\tick{500,0}{500}
@@ -727,8 +728,8 @@
       ticklabel style={scale=0.8},
       %xtick style={draw=none},xticklabels=none,
       max space between ticks=26,
-      xlabel={Wavelength $\lambda$ [nm]},
-      ylabel={Power $P$ [kW/sr\,m$^2$\,nm]},
+      xlabel={Wavelength $\lambda$ [\unit{nm}]},
+      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
       xlabel style={at={(rel axis cs:0.5,0)},below=-1pt,font=\small},
       ylabel style={at={(rel axis cs:-0.11,0.5)},rotate=90},
       width=9cm, height=7cm,
@@ -759,10 +760,10 @@
     \fill[mydarkgreen!80!black] ({lampeak(5000)},{planck(lampeak(5000),5000)}) circle(1.5pt);
 
     % LABELS
-    \node[above=0pt,scale=0.75,red] at (1150,{planck(1150,3000)}) {\SI{3000}{K}};
-    \node[above right=-1pt,scale=0.75,orange!80!black] at (740,{planck(740,4000)}) {\SI{4000}{K}};
-    \node[above right=-1pt,scale=0.75,blue] at (800,{planck(800,5000)}) {\SI{5000}{K}};
-    \node[above right=-1pt,scale=0.75,blue] at (1500,{rayleighjeans(1500,5000)}) {\SI{5000}{K} Rayleigh-Jeans};
+    \node[above=0pt,scale=0.75,red] at (1150,{planck(1150,3000)}) {\qty{3000}{K}};
+    \node[above right=-1pt,scale=0.75,orange!80!black] at (740,{planck(740,4000)}) {\qty{4000}{K}};
+    \node[above right=-1pt,scale=0.75,blue] at (800,{planck(800,5000)}) {\qty{5000}{K}};
+    \node[above right=-1pt,scale=0.75,blue] at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh-Jeans};
 
   \end{axis}
 \end{tikzpicture}
@@ -786,8 +787,8 @@
       axis line style=thick,
       tick style={black,thick},
       ticklabel style={scale=0.8},
-      xlabel={Wavelength $\lambda$ [nm]},
-      ylabel={Power $P$ [kW/sr\,m$^2$\,nm]},
+      xlabel={Wavelength $\lambda$ [\unit{nm}]},
+      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
       xlabel style={below=-1pt,font=\small},
       ylabel style={above=-1pt},
       width=9cm, height=7cm,
@@ -821,13 +822,13 @@
 
     % LABELS
     \node[above=0pt,scale=0.75,red]
-      at (1150,{planck(1150,3000)}) {\SI{3000}{K}};
+      at (1150,{planck(1150,3000)}) {\qty{3000}{K}};
     \node[above right=-1pt,scale=0.75,orange!80!black]
-      at (740,{planck(740,4000)}) {\SI{4000}{K}};
+      at (740,{planck(740,4000)}) {\qty{4000}{K}};
     \node[above right=-1pt,scale=0.75,blue]
-      at (800,{planck(800,5000)}) {\SI{5000}{K}};
+      at (800,{planck(800,5000)}) {\qty{5000}{K}};
     \node[above right=-1pt,scale=0.75,blue]
-      at (1500,{rayleighjeans(1500,5000)}) {\SI{5000}{K} Rayleigh-Jeans};
+      at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh-Jeans};
 
     % LABELS
     \node[below=2pt,scale=0.8] at (200,\ymax) {\strut UV}; % 10 - 400 nm
@@ -860,8 +861,8 @@
       ticklabel style={scale=0.8},
       max space between ticks=23,
       yminorticks=false,
-      xlabel={Wavelength $\lambda$ [nm]},
-      ylabel={Power $P$ [kW/sr\,m$^2$\,nm]},
+      xlabel={Wavelength $\lambda$ [\unit{nm}]},
+      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
       xlabel style={at={(rel axis cs:0.5,0)},below=8pt},
       ylabel style={above=-2pt},
       legend style={at={(0.98,0.95)},anchor=north east,draw=none,fill=none,
@@ -885,13 +886,13 @@
     %\addplot[dashed,thick,black] {rayleighjeans(x,500)};
 
     % LEGENDS
-    \addlegendentry{\SI{10000}{K}}
-    \addlegendentry{\SI{7500}{K}}
-    \addlegendentry{\SI{5000}{K}}
-    \addlegendentry{\SI{3000}{K}}
-    \addlegendentry{\SI{2000}{K}}
-    \addlegendentry{\SI{1000}{K}}
-    \addlegendentry{\SI{500}{K}}
+    \addlegendentry{\qty{10000}{K}}
+    \addlegendentry{\qty{7500}{K}}
+    \addlegendentry{\qty{5000}{K}}
+    \addlegendentry{\qty{3000}{K}}
+    \addlegendentry{\qty{2000}{K}}
+    \addlegendentry{\qty{1000}{K}}
+    \addlegendentry{\qty{500}{K}}
 
   \end{loglogaxis}
 \end{tikzpicture}
@@ -919,8 +920,8 @@
       %ticks=none,
       max space between ticks=23,
       yminorticks=false,
-      xlabel={Wavelength $\lambda$ [nm]},
-      ylabel={Power $P$ [kW/sr\,m$^2$\,nm]},
+      xlabel={Wavelength $\lambda$ [\unit{nm}]},
+      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
       xlabel style={at={(rel axis cs:0.5,0)},below=8pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
@@ -938,7 +939,7 @@
     \addlegendentry{Planck}
     \addlegendentry{Rayleigh-Jeans}
     \addlegendentry{Wien}
-    \node[scale=1] at (0.18*\xmax,0.01*\ymax) {$T=\SI{300}{K}$};
+    \node[scale=1] at (0.18*\xmax,0.01*\ymax) {$T=\qty{300}{K}$};
 
   \end{loglogaxis}
 \end{tikzpicture}
@@ -966,8 +967,8 @@
       %ticks=none,
       max space between ticks=23,
       yminorticks=false,
-      xlabel={Wavelength $\lambda$ [nm]},
-      ylabel={Power $P$ [kW/sr\,m$^2$\,nm]},
+      xlabel={Wavelength $\lambda$ [\unit{nm}]},
+      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
       xlabel style={at={(rel axis cs:0.5,0)},below=8pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
@@ -988,7 +989,7 @@
     \addlegendentry{Planck}
     \addlegendentry{Rayleigh-Jeans}
     \addlegendentry{Wien}
-    \node[scale=1] at (0.17*\xmax,0.01*\ymax) {$T=\SI{3000}{K}$};
+    \node[scale=1] at (0.17*\xmax,0.01*\ymax) {$T=\qty{3000}{K}$};
 
   \end{loglogaxis}
 \end{tikzpicture}
@@ -1016,8 +1017,8 @@
       %ticks=none,
       max space between ticks=23,
       yminorticks=false,
-      xlabel={Wavelength $\lambda$ [nm]},
-      ylabel={Power $P$ [kW/sr\,m$^2$\,nm]},
+      xlabel={Wavelength $\lambda$ [\unit{nm}]},
+      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
       xlabel style={at={(rel axis cs:0.5,0)},below=9pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
@@ -1041,9 +1042,9 @@
     \addplot[dotted,thick,blue]  {wien(x,800)};
 
     % LEGENDS
-    \addlegendentry{\SI{800}{K}}
-    \addlegendentry{\SI{300}{K}}
-    \addlegendentry{\SI{100}{K}}
+    \addlegendentry{\qty{800}{K}}
+    \addlegendentry{\qty{300}{K}}
+    \addlegendentry{\qty{100}{K}}
 
   \end{loglogaxis}
 \end{tikzpicture}
@@ -1072,8 +1073,8 @@
       max space between ticks=23,
       yminorticks=false,
       variable=x,
-      xlabel={Wavelength $\lambda$ [nm]},
-      ylabel={Power $P$ [kW/sr\,m$^2$\,nm]},
+      xlabel={Wavelength $\lambda$ [\unit{nm}]},
+      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
       xlabel style={at={(rel axis cs:0.5,0)},below=9pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
@@ -1097,8 +1098,8 @@
     \addplot[domain=2e5:\xmax,mygreen] {planck(x,2.725)};
 
     % LABELS
-    \node[above right=-1,red] at (1e4,{planck(1e4,3000)}) {\SI{3000}{K}};
-    \node[anchor=-70,mygreen] at (1e6,{planck(1e6,2.725)}) {\SI{2.725}{K}};
+    \node[above right=-1,red] at (1e4,{planck(1e4,3000)}) {\qty{3000}{K}};
+    \node[anchor=-70,mygreen] at (1e6,{planck(1e6,2.725)}) {\qty{2.725}{K}};
 
     % ARROW
     \draw[->,line width=2,myred] (7e3,1e2) --++ (-42:17mm)
@@ -1138,8 +1139,8 @@
         \pgfmathprintnumber[sci,sci zerofill,precision=0]{\pgfmathresult}
         \pgfkeys{/pgf/fpu=false}
       },
-      xlabel={Wavelength $\lambda$ [nm]},
-      ylabel={Power $P$ [kW/sr\,m$^2$\,nm]},
+      xlabel={Wavelength $\lambda$ [\unit{nm}]},
+      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
       xlabel style={at={(rel axis cs:0.5,0)},below=9pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
@@ -1160,9 +1161,9 @@
     \addplot[red,dashed]  {planck(x,2.750)}; % draw over 2.725
 
     % LEGENDS
-    \addlegendentry{\SI{2.750}{K}}
-    \addlegendentry{\SI{2.725}{K}}
-    \addlegendentry{\SI{2.700}{K}}
+    \addlegendentry{\qty{2.750}{K}}
+    \addlegendentry{\qty{2.725}{K}}
+    \addlegendentry{\qty{2.700}{K}}
 
   \end{loglogaxis}
 \end{tikzpicture}
@@ -1202,7 +1203,7 @@
   % http://www.vendian.org/mncharity/dir3/blackbody/UnstableURLs/bbr_color.html
 
   \shade[shading=blackbody,shading angle=-90] (0,0) rectangle (10,1);
-  \draw[->,thick] (-0.2,0) -- (10.8,0) node[right,scale=1.1] {T [\si{\degree C}]};
+  \draw[->,thick] (-0.2,0) -- (10.8,0) node[right,scale=1.1] {T [\unit{\degreeCelsius}]};
   \tick{0,0}{ 900}
   \tick{10/11*1,0}{1000}
   \tick{10/11*2,0}{2000}

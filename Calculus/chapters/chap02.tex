@@ -61,7 +61,7 @@
     \]
     若只讨论某个内点附近，可在该点周围的紧参数区间上验证这些条件。
 \end{theorem}
-若有限积分上下限$\alpha,\beta\in C^1$，且$f,f_y$在相应积分区域的邻域内连续，则Leibniz公式为
+若有限积分上下限$\alpha,\beta\in \cont^1$，且$f,f_y$在相应积分区域的邻域内连续，则Leibniz公式为
 \[
     \dd y\int_{\alpha(y)}^{\beta(y)}f(x,y)\d x
     =\int_{\alpha(y)}^{\beta(y)}f_y(x,y)\d x+f(\beta(y),y)\beta'(y)-f(\alpha(y),y)\alpha'(y).
@@ -99,18 +99,18 @@
 Gamma与Beta积分的参数范围及关系可核对\href{https://dlmf.nist.gov/5.2}{NIST DLMF §5.2}和\href{https://dlmf.nist.gov/5.12}{§5.12}。
 \begin{example}{Gamma函数}{}
 	\begin{center}
-		$\Gamma(x):=\int\zti t^{x-1}\e^{-t}\d t,\quad x>0.$
+		$\Gamma(x):=\intRplus t^{x-1}\e^{-t}\d t,\quad x>0.$
 	\end{center}
 	对$x>0$，分部积分中的两个端点项均为零，得到递推公式
 	\begin{align*}
-		\Gamma(1)   & =\int\zti\e^{-t}\d t=1.                                              \\
-		\Gamma(x+1) & =\int\zti t^x\cdot\e^{-t}\d t                                        \\
-					& =\eval{-t^x\e^{-t}}\zti+\int\zti\e^{-t}\cdot xt^{x-1}\d t=x\Gamma(x).
+		\Gamma(1)   & =\intRplus\e^{-t}\d t=1.                                              \\
+		\Gamma(x+1) & =\intRplus t^x\cdot\e^{-t}\d t                                        \\
+					& =\eval{-t^x\e^{-t}}_0^\infty+\intRplus\e^{-t}\cdot xt^{x-1}\d t=x\Gamma(x).
 	\end{align*}
 	对于正整数$n\geq1$，$\Gamma(n)=(n-1)!$。上述积分定义不适用于$x\leq0$，不能将其与解析延拓混为一谈。
 	% $\Gamma(x+1)=x\Gamma(x),\Gamma(1)=1$，对正整数$n$,
 	% \[
-	% 	\Gamma(n)=\int_0^{+\infty}t^{n-1}\e^{-t}\d t=(n-1)!
+	% 	\Gamma(n)=\intRplus t^{n-1}\e^{-t}\d t=(n-1)!
 	% \]
 
 	\textbf{余元公式}
@@ -121,18 +121,18 @@ Gamma与Beta积分的参数范围及关系可核对\href{https://dlmf.nist.gov/5
 \end{example}
 \begin{example}{Beta函数}{}
 	\begin{center}
-		$\mathrm B(p,q):=\int_0^1t^{p-1}(1-t)^{q-1}\d t,\quad p,q>0.$ % =2\int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\d\theta.$
+		$\Beta(p,q):=\int_0^1t^{p-1}(1-t)^{q-1}\d t,\quad p,q>0.$ % =2\int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\d\theta.$
 	\end{center}
-	在$p,q>0$条件下，与Gamma函数的关系为$\mathrm B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}.$
+	在$p,q>0$条件下，与Gamma函数的关系为$\Beta(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}.$
 \end{example}
 \begin{example}{Poisson积分}{}
 	\begin{center}
-		$\int\zti\e^{-t^2}\d t=\frac{\sqrt\pi}2.$
+		$\intRplus\e^{-t^2}\d t=\frac{\sqrt\pi}2.$
 	\end{center}
 	\textbf{证明：}考虑积分的平方
 	\begin{align*}
-		\int\zti\e^{-x^2}\d x\int\zti\e^{-y^2}\d y=\int\zti\int\zti\e^{-x^2-y^2}\d x\nd y \\
-		=\int_0^{\pi/2}\int\zti\e^{-r^2}\cdot r\d r\nd\theta=\frac\pi{2}\cdot\frac12\int\zti\e^{-s}\d s=\frac\pi{4}.
+		\intRplus\e^{-x^2}\d x\intRplus\e^{-y^2}\d y=\intRplus\intRplus\e^{-x^2-y^2}\d x\nd y \\
+		=\int_0^{\pi/2}\intRplus\e^{-r^2}\cdot r\d r\nd\theta=\frac\pi{2}\cdot\frac12\intRplus\e^{-s}\d s=\frac\pi{4}.
 	\end{align*}
 	\iffalse
 		由$\ex>0,\forall x\in\RR$
@@ -151,29 +151,29 @@ Gamma与Beta积分的参数范围及关系可核对\href{https://dlmf.nist.gov/5
 			\iint_B\e^{-x^2-y^2}\d x\nd y & =\int_0^R\int_0^R\e^{-x^2}\e^{-y^2}\d x\nd y=\biggp{\int_0^R\e^{-t^2}\d t}^2,          \\
 			\iint_C\e^{-x^2-y^2}\d x\nd y & =\frac{\pi}4(1-\e^{-2R^2}).
 		\end{align*}
-		当$R\to+\infty$，即得$\int\zti\e^{-t^2}\d t=\frac{\sqrt\pi}2$.
+		当$R\to+\infty$，即得$\intRplus\e^{-t^2}\d t=\frac{\sqrt\pi}2$.
 	\fi
 \end{example}
 \begin{example}{Dirichlet积分}{}
 	\begin{center}
-		$\int\zti\frac{\sin x}x\d x=\frac{\pi}2.$
+		$\intRplus\frac{\sin x}x\d x=\frac{\pi}2.$
 	\end{center}
 	\textbf{证明：}令
 	\[
-		F(y)=\int\zti\frac{\sin x}x\e^{-xy}\d x,\quad y\geqslant 0.
+		F(y)=\intRplus\frac{\sin x}x\e^{-xy}\d x,\quad y\geqslant 0.
 	\]
 	被积函数在$x=0$可连续延拓，但这本身不足以推出广义积分$F(y)$连续；还需检查收敛的一致性。
 
-	在$[1,+\infty)$上，$\sin x$的原函数有界且$1/x$单调趋于零，故由Dirichlet判别法，$\int_0^\infty(\sin x)/x\d x$收敛（$x=0$为可去奇点）；$\forall x,y\geqslant 0,|\e^{-xy}|\leqslant 1$且$\e^{-xy}$关于$x$递减，由Abel判别准则可知$F(y)$关于$y\in[0,+\infty)$一致收敛，因此$F(y)$在该区间连续，包括端点$y=0$。
+	在$[1,+\infty)$上，$\sin x$的原函数有界且$1/x$单调趋于零，故由Dirichlet判别法，$\intRplus(\sin x)/x\d x$收敛（$x=0$为可去奇点）；$\forall x,y\geqslant 0,|\e^{-xy}|\leqslant 1$且$\e^{-xy}$关于$x$递减，由Abel判别准则可知$F(y)$关于$y\in[0,+\infty)$一致收敛，因此$F(y)$在该区间连续，包括端点$y=0$。
 
-	任取$a>0,\forall x\geqslant 0,y\geqslant a,$可知$\abs{-\sin x\e^{-xy}}\leqslant \e^{-xy}\leqslant \e^{-ax}$，且$\int_0^\infty\e^{-ax}\d x=1/a<\infty$，由Weierstrass判别准则知，积分
+	任取$a>0,\forall x\geqslant 0,y\geqslant a,$可知$\abs{-\sin x\e^{-xy}}\leqslant \e^{-xy}\leqslant \e^{-ax}$，且$\intRplus\e^{-ax}\d x=1/a<\infty$，由Weierstrass判别准则知，积分
 	\[
-		\int\zti\pv {}y\frac{\sin x}x\e^{-xy}\d x=-\int\zti\sin x\e^{-xy}\d x
+		\intRplus\pv {}y\frac{\sin x}x\e^{-xy}\d x=-\intRplus\sin x\e^{-xy}\d x
 	\]
 	一致收敛，因此$F(y)$在$[a,+\infty)$上可导
 	\begin{align*}
-        F'(y)&=-\int_0^\infty\sin x\,\e^{-yx}\d x
-        =-\Im\int_0^\infty\e^{-(y-\i)x}\d x\\
+        F'(y)&=-\intRplus\sin x\,\e^{-yx}\d x
+        =-\Im\intRplus\e^{-(y-\i)x}\d x\\
         &=-\Im\frac1{y-\i}=-\frac1{1+y^2}.
     \end{align*}
 	因为$a>0$任意，故$\forall y>0,$
@@ -182,13 +182,13 @@ Gamma与Beta积分的参数范围及关系可核对\href{https://dlmf.nist.gov/5
 	\]
 	又$y\to+\infty,$
 	\[
-		|F(y)|\leqslant\int\zti\frac{|\sin x|}x\e^{-xy}\d x\leqslant\int\zti\e^{-xy}\d x=\frac1y\to0.
+		|F(y)|\leqslant\intRplus\frac{|\sin x|}x\e^{-xy}\d x\leqslant\intRplus\e^{-xy}\d x=\frac1y\to0.
 	\]
 	故$\lim_{y\to+\infty}F(y)=C-\frac{\pi}2=0$，即$C=\frac{\pi}2.$
 
 	又$F(y)$在$[0,+\infty)$上连续，故$\forall y\geqslant 0,F(y)=\frac{\pi}2-\arctan y$。特别地，
 	\[
-		F(0)=\int\zti\frac{\sin x}x\d x=\frac{\pi}2.
+		F(0)=\intRplus\frac{\sin x}x\d x=\frac{\pi}2.
 	\]
 \end{example}
 \newpage

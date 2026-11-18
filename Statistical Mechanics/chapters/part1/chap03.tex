@@ -1,17 +1,3 @@
-\newcommand*{\phI}{\mathrm{I}}
-\newcommand*{\phII}{\mathrm{II}}
-\newcommand*{\phs}{\mathrm{s}}
-\newcommand*{\phl}{\mathrm{l}}
-\newcommand*{\phg}{\mathrm{g}}
-\newcommand*{\phaq}{\mathrm{aq}}
-\newcommand*{\phel}{\mathrm{el}}
-
-\newcommand*{\rmA}{\mathrm{A}}
-\newcommand*{\rmB}{\mathrm{B}}
-
-\newcommand*{\crt}{\mathrm{C}}
-\newcommand*{\tri}{_\mathrm{tr}}
-
 \chapter{相与相变}
 \label{chap:phase}
 
@@ -42,7 +28,7 @@
 	{化学势}{chemical potential}
 	在确定的温度$T$和压强$p$下，系统的化学势是Gibbs自由能对摩尔数的偏导数：
 	\begin{equation}
-		\mu=\pu[T,p]Gn.
+		\mu=\pvat{G}{n}{T,p}.
 	\end{equation}
 \end{definition}
 
@@ -73,30 +59,30 @@
 \section{相变}
 \label{sec:phase transition}
 
-考虑单组份的孤立系统中共存的两个相(记为$\phI,\phII$)，有
+考虑单组份的孤立系统中共存的两个相(记为$\phaseI,\phaseII$)，有
 \begin{align*}
-	U_\phI+U_\phII&=U\tot,\\
-	V_\phI+V_\phII&=V\tot,\\
-	n_\phI+n_\phII&=n\tot.
+	U_\phaseI+U_\phaseII&=U_\tot,\\
+	V_\phaseI+V_\phaseII&=V_\tot,\\
+	n_\phaseI+n_\phaseII&=n_\tot.
 \end{align*}
 平衡条件要求
 \[
-	\d S=\d S_\phI+\d S_\phII
-	=\biggp{\frac1{T_\phI}-\frac1{T_\phII}}\d U_\phI
-	+\biggp{\frac{p_\phI}{T_\phI}-\frac{p_\phII}{T_\phII}}\d V_\phI
-	-\biggp{\frac{\mu_\phI}{T_\phI}-\frac{\mu_\phII}{T_\phII}}\d n_\phI
+	\d S=\d S_\phaseI+\d S_\phaseII
+	=\biggp{\frac1{T_\phaseI}-\frac1{T_\phaseII}}\d U_\phaseI
+	+\biggp{\frac{p_\phaseI}{T_\phaseI}-\frac{p_\phaseII}{T_\phaseII}}\d V_\phaseI
+	-\biggp{\frac{\mu_\phaseI}{T_\phaseI}-\frac{\mu_\phaseII}{T_\phaseII}}\d n_\phaseI
 	=0.
 \]
 可得
 \begin{subequations}
 	\begin{align}
-		T_\phI&=T_\phII,\\
-		p_\phI&=p_\phII,\\
-		\mu_\phI&=\mu_\phII.
+		T_\phaseI&=T_\phaseII,\\
+		p_\phaseI&=p_\phaseII,\\
+		\mu_\phaseI&=\mu_\phaseII.
 	\end{align}
 \end{subequations}
 因此平衡时两相的温度、压强和化学势都是相同的，这分别对应热平衡、力学平衡和相平衡。
-当$\mu_\phI\neq\mu_\phII$时，$n_\phI,n_\phII$会对应增减直到达到新的平衡，
+当$\mu_\phaseI\neq\mu_\phaseII$时，$n_\phaseI,n_\phaseII$会对应增减直到达到新的平衡，
 相当于一部分物质从一个相变到了另一个相，称为相变(phase transition)。
 也就是说，化学势决定了相变。
 
@@ -119,7 +105,7 @@
 
 \begin{center}
 	\tikzfigure{water-pvt}
-	\captionof{figure}{水的$p\vs T\vs V$相图(示意图)}
+	\captionof{figure}{水在温度 $T$、体积 $V$ 和压强 $p$ 构成的三维空间中的相图}
 	\label{fig:H2O phase P-T-V}
 	% \footnote{这张图花了我老长时间了。}
 \end{center}
@@ -129,32 +115,32 @@
 将\figref{fig:H2O phase P-T-V} 投影到$p\vs T$坐标上，如\figref{fig:H2O phase P-T} 所示，
 % 对于单一组分而言，某一相的化学势$\mu(T,p)$只是温度$T$和压强$p$的函数，
 固液气三相分别占据了不同的区域，区域的边界线上两个相共存。
-相共存线的斜率，也就是熔点、沸点或升华点随压强的变化符合Clapeyron方程。
+沿共存线，Clapeyron 方程给出熔点、沸点或升华点随压强的变化率 $\d T/\nd p$。在线性压强轴上曲线斜率为 $\d p/\nd T$，本图采用对数压强轴。
 
 \begin{theorem}
 	{Clapeyron方程}{Clapeyron equation}
-	相共存曲线下$\mu_\phI=\mu_\phII$，
+	相共存曲线下$\mu_\phaseI=\mu_\phaseII$，
 	由$\d\mu=-s\d T+v\d p$可得
 	\[
-		(s_\phI-s_\phII)\d T=(v_\phI-v_\phII)\d p\implies\dv Tp=\frac{v_\phI-v_\phII}{s_\phI-s_\phII}.
+		(s_\phaseI-s_\phaseII)\d T=(v_\phaseI-v_\phaseII)\d p\implies\dv Tp=\frac{v_\phaseI-v_\phaseII}{s_\phaseI-s_\phaseII}.
 	\]
-	定义单位摩尔系统$\phI\to\phII$吸收的相变潜热(latent heat)为$\ell:=T(s_\phI-s_\phII)$，则有
+	定义单位摩尔系统$\phaseI\to\phaseII$吸收的相变潜热(latent heat)为$\ell:=T(s_\phaseI-s_\phaseII)$，则有
 	\begin{equation}
-		\dv Tp=\frac{T(v_\phI-v_\phII)}\ell.
+		\dv Tp=\frac{T(v_\phaseI-v_\phaseII)}\ell.
 	\end{equation}
 \end{theorem}
 
 \begin{corollary}
-	一般的气 - 液相变$v_\phg\gg v_\phl$，若气相符合理想气体，并且近似认为相变潜热与温度无关(这个近似是十分粗糙的)，可得 
+	一般的气 - 液相变$v_\gas\gg v_\liquid$，若气相符合理想气体，并且近似认为相变潜热与温度无关(这个近似是十分粗糙的)，可得
 	\[
-		\dv Tp\approx\frac{Tv_\phg}\ell=\frac{RT^2}{\ell p}\implies p=p_0\exp\biggb{\frac\ell{R}\biggp{\frac1{T_0}-\frac1T}}.
+		\dv Tp\approx\frac{Tv_\gas}\ell=\frac{RT^2}{\ell p}\implies p=p_0\exp\biggb{\frac\ell{R}\biggp{\frac1{T_0}-\frac1T}}.
 	\]
 	
 \end{corollary}
 
 \begin{remark}
-	水凝固存在反常膨胀，$v_\phl<v_\phs$，$\d T/\d p<0$。
-	% 在Celsius温标下，$\SI{1}{atm}=\SI{101325}{Pa}$下水的凝固点和沸点分别为$\SI{0}{\degreeCelsius}$和$\SI{100}{\degreeCelsius}$。
+	水凝固存在反常膨胀，$v_\liquid<v_\solid$，$\d T/\d p<0$。
+	% 在Celsius温标下，$\qty{1}{\atm}=\qty{101325}{Pa}$下水的凝固点和沸点分别为$\qty{0}{\degreeCelsius}$和$\qty{100}{\degreeCelsius}$。
 \end{remark}
 
 \begin{center}
@@ -164,26 +150,26 @@
 \end{center}
 
 特别地，随着温度的升高，气液共存线会存在一个终点，称为临界点(critical point)。
-当$T>T_\crt$时，气液两相将不可分辨，或者说只有气相。
+当$T>T_\criticalpoint$时，气液两相将不可分辨，或者说只有气相。
 这将在\secref{ssec:liquid-gas phase transition}讨论。
-水的临界点$T_\crt=\SI{647.1}{K},p_\crt=\SI{22.064}{MPa}$。
+水的临界点$T_\criticalpoint=\qty{647.1}{K},p_\criticalpoint=\qty{22.064}{MPa}$。
 
 三个相所占区域的边界会，该点代表固液气三相共存，称为三相点(triple point)。
-在Kelvin温标下，水的三相点$T\tri=\SI{273.16}{K},p\tri=\SI{611.73}{Pa}$。
+在Kelvin温标下，水的三相点$T_\triplepoint=\qty{273.16}{K},p_\triplepoint=\qty{611.73}{Pa}$。
 
 \paragraph{$p\vs V$相图}
 
-投影到$p\vs V$\figref{fig:H2O phase P-V} 上，画出等温线。
-当$T>T_\crt$时，全为气相区；
-当$T<T_\crt$时，会存在气液共存区，对应$p\vs T$图上的气液共存线，因此$p,T$是一一对应的，即等温线在气液共存区内是一条垂直于$p$轴的直线。
+投影到 $p\vs V$ 平面后可画出等温线，如\figref{fig:H2O phase P-V} 所示。
+当$T>T_\criticalpoint$时，全为气相区；
+当$T<T_\criticalpoint$时，会存在气液共存区，对应$p\vs T$图上的气液共存线，因此$p,T$是一一对应的，即等温线在气液共存区内是一条垂直于$p$轴的直线。
 
 \begin{example}
 	{杠杆原理}{}
 	气液共存区中的等温线代表确定的$p,T$下可以有不同的体积，这与气液两相的摩尔比有关。
-	等温线在气液共存区的两端表示全为液相或气相，对应的摩尔体积为$v_\phl,v_\phg$；
-	而在共存区内，若液、气相所占的摩尔比分别为$x_\phl,x_\phg$，则其摩尔体积满足杠杆原理：
+	等温线在气液共存区的两端表示全为液相或气相，对应的摩尔体积为$v_\liquid,v_\gas$；
+	而在共存区内，若液、气相所占的摩尔比分别为$x_\liquid,x_\gas$，则其摩尔体积满足杠杆原理：
 	\[
-		v=v_\phl x_\phl+v_\phg x_\phg\iff x_\phg=\frac{v-v_\phl}{v_\phg-v_\phl}.
+		v=v_\liquid x_\liquid+v_\gas x_\gas\iff x_\gas=\frac{v-v_\liquid}{v_\gas-v_\liquid}.
 	\]
 \end{example}
 
@@ -193,21 +179,21 @@
 	\label{fig:H2O phase P-V}
 \end{center}
 
-当$T=T_\crt$时，作为$T\to T_\crt$的极限，等温线在临界点C处应有$(\p p/\p V)_T=0$，
+当$T=T_\criticalpoint$时，作为$T\to T_\criticalpoint$的极限，等温线在临界点C处应有$(\p p/\p V)_T=0$，
 此外，平衡态的稳定性要求：
 \[
-	\pv[2]Gp=\pu[T]Vp\leq 0\implies\pu[T]pV\leq 0.
+	\pv[2]Gp=\pvat{V}{p}{T}\leq 0\implies\pvat{p}{V}{T}\leq 0.
 \]
 因此临界点C只能是等温线上的一个拐点，即
 \begin{equation}
 	\label{eqn:critical point}
-	\pu[T]pV=0,\quad\biggp{\pv[2]pV}_T=0.
+	\pvat{p}{V}{T}=0,\quad\biggp{\pv[2]pV}_T=0.
 \end{equation}
 
 \begin{example}
 	{van der Waals气体的约化变量}{vdW critical}
 	理想气体不存在液化，考虑van der Waals气体。
-	% 对于临界温度$T_\crt$
+	% 对于临界温度$T_\criticalpoint$
 	% \begin{align*}
 	% 	\pv pv&=-\frac{RT}{(v-b)^2}+\frac{2a}{v^3}=0, \\
 	% 	\pv[2]pv&=\frac{2RT}{(v-b)^3}-\frac{6a}{v^4}=0.
@@ -216,12 +202,12 @@
 	\begin{subequations}
 		\label{eqn:vdW critical}
 		\begin{align}
-			v_\crt&=3b,\\
-			T_\crt&=\frac{8}{27}\frac{a}{Rb},\\
-			p_\crt&=\frac{RT_\crt}{v_\crt-b}-\frac a{v_\crt}=\frac1{27}\frac a{b^2}.
+			v_\criticalpoint&=3b,\\
+			T_\criticalpoint&=\frac{8}{27}\frac{a}{Rb},\\
+			p_\criticalpoint&=\frac{RT_\criticalpoint}{v_\criticalpoint-b}-\frac a{v_\criticalpoint}=\frac1{27}\frac a{b^2}.
 		\end{align}
 	\end{subequations}
-	可以定义约化变量$\tilde T:=T/T_\crt$等，可得状态方程：
+	可以定义约化变量$\tilde T:=T/T_\criticalpoint$等，可得状态方程：
 	\begin{equation}
 		\tilde p=\frac{8\tilde T}{3\tilde v-1}-\frac3{\tilde v^2}.
 	\end{equation}
@@ -230,16 +216,16 @@
 \paragraph{$T\vs V$相图}
 
 投影到$T\vs V$图上与$p\vs V$图类似。
-% 只有$p<p_\crt$时才会有气液共存区，共存区的等压线垂直于$T$轴（对应沸点）。
+% 只有$p<p_\criticalpoint$时才会有气液共存区，共存区的等压线垂直于$T$轴（对应沸点）。
 
 \subsection{气液相变}
 \label{ssec:liquid-gas phase transition}
 
-考虑$G\vs p\vs T$相图，每个相的Gibbs自由能都是$p,T$的连续函数，只有Gibbs自由能最低的那个相可以稳定存在，而相等的两相Gibbs自由能确定了相的边界。在边界处，Gibbs自由能仍然是连续的，但其导数就不一定连续了。形成的面就像一张有折痕的纸，如\figref{fig:phase G-p-T} 所示。
+在 $G(p,T)$ 曲面上，每个相的 Gibbs 自由能都是 $p,T$ 的连续函数，只有Gibbs自由能最低的那个相可以稳定存在，而相等的两相Gibbs自由能确定了相的边界。在边界处，Gibbs自由能仍然是连续的，但其导数就不一定连续了。形成的面就像一张有折痕的纸，如\figref{fig:phase G-p-T} 所示。
 
 \begin{center}
 	\tikzfigure{gibbs-pt}
-	\captionof{figure}{$G\vs p\vs T$相图}
+	\captionof{figure}{气液两相的 Gibbs 自由能曲面 $G(p,T)$}
 	\label{fig:phase G-p-T}
 \end{center}
 
@@ -293,7 +279,7 @@
 \paragraph{过热与成核}
 
 升高液体的温度，在相变温度$T_V$处，气态和液态的Gibbs势相同。再升高温度，气相为稳态。但是液相与气相之间有一个\textit{势垒}$\Delta G$，因此液相变为气相必须克服这个势垒。否则即使$T>T_V$，系统仍处于液相的亚稳态，称为过热(overheating)。
-% 势垒$\D U$随温度增加而变小，在$T_\crt$处完全消失。这种在$T_V$之上存在液相的现象。类似在降温时，气相在相变点处不一定会变成液相而是成为过饱和蒸气。
+% 势垒$\Delta U$随温度增加而变小，在$T_\criticalpoint$处完全消失。这种在$T_V$之上存在液相的现象。类似在降温时，气相在相变点处不一定会变成液相而是成为过饱和蒸气。
 \begin{center}
 	\tikzfigure{superheated-liquid}
 	\captionof{figure}{液体的过热}
@@ -304,18 +290,18 @@
 
 考虑液滴的Gibbs自由能
 \begin{equation}
-	G=\sigma A-V\tilde n(\mu_\phg-\mu_\phl)=\sigma\cdot 4\pi R^2-\frac43\pi R^3\tilde n\cdot\frac\ell{T_V}\D T.
+	G=\sigma A-V\tilde n(\mu_\gas-\mu_\liquid)=\sigma\cdot 4\pi R^2-\frac43\pi R^3\tilde n\cdot\frac\ell{T_V}\Delta T.
 \end{equation}
 其中$\sigma$为表面张力，$A$为表面积，$\tilde n$为液态摩尔密度。
 最大值点对应成核的临界半径
 \begin{equation}
-	R_\crt=\frac{2\sigma T_V}{\tilde n\ell\D T}.
+	R_\criticalpoint=\frac{2\sigma T_V}{\tilde n\ell\Delta T}.
 \end{equation}
-如果涨落产生了一个大于$R_\crt$的核，则该核将倾向于长大，最终过冷水蒸气全部液化。
+如果涨落产生了一个大于$R_\criticalpoint$的核，则该核将倾向于长大，最终过冷水蒸气全部液化。
 
 \begin{center}
 	\tikzfigure{nucleation-barrier}
-	\captionof{figure}{成核临界半径$R_\crt$}
+	\captionof{figure}{成核临界半径$R_\criticalpoint$}
 	\label{fig:nucleation}
 \end{center}
 
@@ -325,7 +311,7 @@
 % \subsectionstar{铁磁相变}
 
 % 在无外场的条件下，固体中具有磁矩的分子会在热运动中无序排列，对外不显磁性。
-% 但铁磁物质在低于临界温度(称为Curie温度) $T_\crt$时会自发地产生磁性，形成磁有序结构，称为铁磁相变。\footnote{历史上是反过来的：磁铁在超过Curie温度时会失去磁性。}
+% 但铁磁物质在低于临界温度(称为Curie温度) $T_\criticalpoint$时会自发地产生磁性，形成磁有序结构，称为铁磁相变。\footnote{历史上是反过来的：磁铁在超过Curie温度时会失去磁性。}
 
 % 我们只考虑磁矩仅取上下两个方向的情形。对于一个无外磁场的系统，上下应该等价，系统的运动方程关于上下两方向间的变换应该保持不变，即具有对上下变换的对称性。但是，在居里温度下，铁磁系统只会选择上下其中的一个方向。这个现象称为自发对称破缺。发生破缺的是系统的状态而不是系统的运动方程。温度是系统的一个强度量。铁磁系统会与外磁场相互作用。因此另一个强度量为外磁场。表示系统性质的量为磁化强度。
 % 系统的相图如图10.18所示。M作为T和B的函数，如同撕开一个缝的一张纸。缝隙垂直于B-T平面，并关于M对称。
@@ -350,8 +336,8 @@
 			\toprule
 			系统 & 相变 & 序参量 & 物理意义 \\
 			\hline
-			液 - 气 & 气化/液化 & $\tilde n_\phl-\tilde n_\phg$ & 密度差 \\
-			% 固 - 液 & 熔化/凝固 & $\tilde n_\phs-\tilde n_\phl$ & 密度差 \\
+			液 - 气 & 气化/液化 & $\tilde n_\liquid-\tilde n_\gas$ & 密度差 \\
+			% 固 - 液 & 熔化/凝固 & $\tilde n_\solid-\tilde n_\liquid$ & 密度差 \\
 			\multirow{2}{*}{磁性} & 铁磁/顺磁 & $M$ & 磁化强度 \\
 			& 反铁磁/顺磁 & $M_{\mathrm{s}}$ & 子晶格磁化强度 \\
 			\multirow{2}{*}{量子液体} & 超导 & \multirow{2}{*}{$\psi$} & 超导电子对波函数 \\
@@ -364,26 +350,26 @@
 
 \begin{definition}
 	{临界点与临界现象}{critical phenomenon}
-	临界点(critical point)是连续相变的相变点，临界温度$T_\crt$；
+	临界点(critical point)是连续相变的相变点，临界温度$T_\criticalpoint$；
 	临界现象(critical phenomenon)是物质在临界点邻域的统计热力学行为。
 
 	以磁性系统的铁磁相变为例，
-	比热$C_H$、磁化强度$M$、磁化率$\chi$等物理量以及状态方程在临界点$T_\crt$附近常表现出幂律行为，这种幂律行为的指数称为临界指数(critical exponent)。
+	比热$C_H$、磁化强度$M$、磁化率$\chi$等物理量以及状态方程在临界点$T_\criticalpoint$附近常表现出幂律行为，这种幂律行为的指数称为临界指数(critical exponent)。
 	\begin{subequations}
 		\begin{align}
 			C&=\begin{cases}
-				A(T/T_\crt-1)^{-\alpha}, & T>T_\crt \\
-				A'(1-T/T_\crt)^{-\alpha'}, & T<T_\crt
+				A(T/T_\criticalpoint-1)^{-\alpha}, & T>T_\criticalpoint \\
+				A'(1-T/T_\criticalpoint)^{-\alpha'}, & T<T_\criticalpoint
 			\end{cases}\\
 			M&=\begin{cases}
-				0, & T>T_\crt \\
-				B(1-T/T_\crt)^{\beta},\phantom{\quad} & T<T_\crt
+				0, & T>T_\criticalpoint \\
+				B(1-T/T_\criticalpoint)^{\beta},\phantom{\quad} & T<T_\criticalpoint
 			\end{cases}\\
 			\chi&=\begin{cases}
-				C(T/T_\crt-1)^{-\gamma}, & T>T_\crt \\
-				C'(1-T/T_\crt)^{-\gamma'}, & T<T_\crt
+				C(T/T_\criticalpoint-1)^{-\gamma}, & T>T_\criticalpoint \\
+				C'(1-T/T_\criticalpoint)^{-\gamma'}, & T<T_\criticalpoint
 			\end{cases}\\
-			M&=DH^{1/\delta},\qqqquad\qquad T=T_\crt
+			M&=DH^{1/\delta},\qqqquad\qquad T=T_\criticalpoint
 		\end{align}
 	\end{subequations}
 	其中$\alpha,\alpha',\beta,\gamma,\gamma',\delta$为临界指数，$A,A',B,C,C',D$为临界幅度。
@@ -413,22 +399,22 @@ $\eta$应使$F$取极小值：
 	% \quad\pv[2]F\eta=a+3b\eta^2>0.
 	\implies\eta=0,\pm\sqrt{-\frac ab}.
 \]
-有三个解，$\eta=0$对应无序态($T>T_\crt$)；$\eta_\pm$对应有序态($T<T_\crt$)。当$T\to T_\crt^-$时，$\eta_\pm\to 0$，因此$a(T_\crt)=0$。
+有三个解，$\eta=0$对应无序态($T>T_\criticalpoint$)；$\eta_\pm$对应有序态($T<T_\criticalpoint$)。当$T\to T_\criticalpoint^-$时，$\eta_\pm\to 0$，因此$a(T_\criticalpoint)=0$。
 由$\eta_\pm$是极小值点：
 \[
 	\pv[2]F\eta=a+3b\eta_\pm^2=-2a>0
-	\implies a<0,\enspace (T<T_\crt).
+	\implies a<0,\enspace (T<T_\criticalpoint).
 \]
-将$a,b$在$T_\crt$附近Taylor展开至一阶：
+将$a,b$在$T_\criticalpoint$附近Taylor展开至一阶：
 \[
-	a(T)=a_0\biggp{\frac T{T_\crt}-1},\quad b(T)=b_0.
+	a(T)=a_0\biggp{\frac T{T_\criticalpoint}-1},\quad b(T)=b_0.
 \]
 可得临界指数$\beta=1/2$：
 \begin{equation}
 	\eta=
 	\begin{cases}
-		0,&T\geqslant T_\crt\\
-		\pm\sqrt{\frac{a_0}{b_0}\biggp{1-\frac T{T_\crt}}},&T<T_\crt
+		0,&T\geqslant T_\criticalpoint\\
+		\pm\sqrt{\frac{a_0}{b_0}\biggp{1-\frac T{T_\criticalpoint}}},&T<T_\criticalpoint
 	\end{cases}
 \end{equation}
 \begin{center}
@@ -438,21 +424,21 @@ $\eta$应使$F$取极小值：
 \end{center}
 熵是连续的：
 \begin{equation}
-	S=-\pv FT=S_0-\frac{a_0}{2T_\crt}\eta^2=
+	S=-\pv FT=S_0-\frac{a_0}{2T_\criticalpoint}\eta^2=
 	\begin{cases}
-		S_0,                             & T\geqslant T_\crt \\
-		S_0+\frac{a_0^2}{2b_0T_\crt}\biggp{\frac T{T_\crt}-1}, & T<T_\crt
+		S_0,                             & T\geqslant T_\criticalpoint \\
+		S_0+\frac{a_0^2}{2b_0T_\criticalpoint}\biggp{\frac T{T_\criticalpoint}-1}, & T<T_\criticalpoint
 	\end{cases}
 \end{equation}
 比热却不连续了：
 \begin{equation}
 	C=T\pv ST=
 	\begin{cases}
-		C_0,                 & T\geqslant T_\crt \\
-		C_0+\frac{a_0^2}{2b_0T_\crt^2}T, & T<T_\crt
+		C_0,                 & T\geqslant T_\criticalpoint \\
+		C_0+\frac{a_0^2}{2b_0T_\criticalpoint^2}T, & T<T_\criticalpoint
 	\end{cases}
 \end{equation}
-因此是\textbf{二级相变}。有序相的比热$>$无序相，且$T=T_\crt$处比热的突变是有限的，$\alpha=\alpha'=0$。
+因此是\textbf{二级相变}。有序相的比热$>$无序相，且$T=T_\criticalpoint$处比热的突变是有限的，$\alpha=\alpha'=0$。
 
 \paragraph{外加场$B$}
 在外加弱磁场$B$下，序参量为磁化强度$M$，自由能
@@ -463,13 +449,13 @@ $\eta$应使$F$取极小值：
 \[
 	\pv GM=a\eta+bM^3-B=0.
 \]
-$T=T_\crt$时，$a=0,\;B=bM^3$故$\delta=3$。
+$T=T_\criticalpoint$时，$a=0,\;B=bM^3$故$\delta=3$。
 磁化率
 \[
-	\chi=\mu_0\pu[T]MB=\frac{\mu_0}{a+3bM^3}=
+	\chi=\mu_0\pvat{M}{B}{T}=\frac{\mu_0}{a+3bM^3}=
 	\begin{cases}
-		\frac{\mu_0}{a_0}\biggp{\frac T{T_\crt}-1}^{-1},&T\geqslant T_\crt \\
-		\frac{\mu_0}{2a_0}\biggp{\frac T{T_\crt}-1}^{-1}, & T<T_\crt
+		\frac{\mu_0}{a_0}\biggp{\frac T{T_\criticalpoint}-1}^{-1},&T\geqslant T_\criticalpoint \\
+		\frac{\mu_0}{2a_0}\biggp{\frac T{T_\criticalpoint}-1}^{-1}, & T<T_\criticalpoint
 	\end{cases}
 \]
 $\gamma'=\gamma=1$。
@@ -482,12 +468,12 @@ Landau模型得到的
 当系统由$r$个组分组成时，各组分摩尔数分别为$n_1,\ldots,n_r$，
 选取状态参量$T,p,n_1,\ldots,n_r$，则由Euler方程
 \begin{equation}
-	U=\sum_{i=1}^r\pu[T,p,n_{\neq i}]U{n_i}n_i=:\sum_{i=1}^rn_iu_i.
+	U=\sum_{i=1}^r\pvat{U}{n_i}{T,p,n_{\neq i}}n_i=:\sum_{i=1}^rn_iu_i.
 \end{equation}
 其中下标$n_{\neq i}$表示不包括组分$i$的其他组分的摩尔数，$u_i$表示在温度$T$、压强$p$和其他组分摩尔数$n_{\neq i}$不变时，组分$i$的偏摩尔内能。
 同理可以定义偏摩尔体积$v_i$、偏摩尔熵$s_i$和偏摩尔Gibbs自由能$g_i$，即组分$i$的化学势：
 \begin{equation}
-	\mu_i=\pu[T,p,n_{\neq i}]G{n_i}.
+	\mu_i=\pvat{G}{n_i}{T,p,n_{\neq i}}.
 \end{equation}
 内能的微分式、Euler方程和Gibbs-Duhem关系分别为
 \begin{subequations}
@@ -554,14 +540,14 @@ $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
 		\label{eqn:mu solvent}
 		\mu         & \equiv\pv GN=\mu_0-xRT.    \\
 		\label{eqn:mu solute}
-		\mu_\rmB & \equiv\pv Gn=\psi+RT\ln x.
+		\mu_\mathrm{B} & \equiv\pv Gn=\psi+RT\ln x.
 	\end{align}
 \end{subequations}
 对于稀溶液，溶质与溶剂的相互作用造成的化学势的变化$\psi\ll$混合带来的熵变。
 
 \begin{theorem}
 	{渗透压与van't Hoff关系}{van't Hoff relation}
-	溶液的压强$p_\phaq\neq$纯溶剂的压强$p_\phl$，将二者用只允许溶剂通过的半透膜隔开时，会在半透膜上产生压强，称为渗透压(osmotic pressure) $\pi$，满足
+	溶液的压强$p_\aqueous\neq$纯溶剂的压强$p_\liquid$，将二者用只允许溶剂通过的半透膜隔开时，会在半透膜上产生压强，称为渗透压(osmotic pressure) $\pi$，满足
 	\begin{equation}
 		\label{eqn:van't Hoff}
 		\pi v=xRT.
@@ -573,34 +559,34 @@ $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
 \end{theorem}
 
 \begin{proof}
-	平衡时两端水的化学势相同$\mu_0(T,p_\phl)=\mu(T,p_\phaq)$，代入\eqref{eqn:mu solvent}并对$p$展开：
+	平衡时两端水的化学势相同$\mu_0(T,p_\liquid)=\mu(T,p_\aqueous)$，代入\eqref{eqn:mu solvent}并对$p$展开：
 	\[
-		\mu(T,p_\phaq)=\mu_0(T,p_\phaq)-xRT=\mu_0(T,p_\phl)+\pv{\mu_0}p\pi-xRT,
+		\mu(T,p_\aqueous)=\mu_0(T,p_\aqueous)-xRT=\mu_0(T,p_\liquid)+\pv{\mu_0}p\pi-xRT,
 	\]
 	由Maxwell关系$\p\mu_0/\p p=v$，即证。
 \end{proof}
 
 \begin{example}
 	{溶液相变点随溶质的变化}{}
-	没有溶质时气液共存$\mu_{\phl,0}=\mu_\phg$；加入溶质后，溶剂的化学势变为
+	没有溶质时气液共存$\mu_{\liquid,0}=\mu_\gas$；加入溶质后，溶剂的化学势变为
 	\[
-		\mu_\phl=\mu_{\phl,0}-xRT<\mu_\phg.
+		\mu_\liquid=\mu_{\liquid,0}-xRT<\mu_\gas.
 	\]
-	如果溶质为不易挥发的物质（如盐），则气态的化学势形式不变，液相的化学势会低于气相，为了达到新的平衡需要改变温度。由$s_\phl<s_\phg$，且
+	如果溶质为不易挥发的物质（如盐），则气态的化学势形式不变，液相的化学势会低于气相，为了达到新的平衡需要改变温度。由$s_\liquid<s_\gas$，且
 	\[
 		\pv\mu{T}=-s,
 	\]
-	故气相化学势$\mu_\phg$的下降要快于液相，故沸点会升高，再次平衡时
+	故气相化学势$\mu_\gas$的下降要快于液相，故沸点会升高，再次平衡时
 	\[
-		\mu_{\phl,0}(T+\D T,p)-xR(T+\D T)=\mu_\phg(T+\D T,p).
+		\mu_{\liquid,0}(T+\Delta T,p)-xR(T+\Delta T)=\mu_\gas(T+\Delta T,p).
 	\]
-	对$\D T$展开
+	对$\Delta T$展开
 	\[
-		\cancel{\mu_{\phl,0}(T,p)}-s_\phl\D T-xRT-xR\D T=\cancel{\mu_\phg(T,p)}-s_\phg\D T.
+		\cancel{\mu_{\liquid,0}(T,p)}-s_\liquid\Delta T-xRT-xR\Delta T=\cancel{\mu_\gas(T,p)}-s_\gas\Delta T.
 	\]
-	由于$xR\ll s_\phg-s_\phl$
+	由于$xR\ll s_\gas-s_\liquid$
 	\begin{equation}
-		\D T=\frac{xRT}{s_\phg-s_\phl-xR}\doteq\frac{xRT^2}\ell.
+		\Delta T=\frac{xRT}{s_\gas-s_\liquid-xR}\doteq\frac{xRT^2}\ell.
 	\end{equation}
 	从液相到固相的情况正相反（因为只有液相才有溶质），熔点会降低。
 \end{example}
@@ -608,19 +594,19 @@ $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
 	{电化学电池}{}
 	离子的化学势也与电势$\phi$有关
 	\[
-		\mu=\mu_\i+ze\NA\phi.
+		\mu=\mu_{\mathrm i}+ze\NA\phi.
 	\]
-	$\mu_\i$是离子的本征化学势，$ze$是每个离子所带电荷。
+	$\mu_{\mathrm i}$是离子的本征化学势，$ze$是每个离子所带电荷。
 	电流的驱动力是化学势的梯度。
 	% \[J\propto-\nabla\mu=-\nabla\mu_i+ze\NA E.\]
 	
-	平衡时，电极上离子化学势$\mu_{\i,\phel}$与溶液中离子化学势相等
+	平衡时，电极上离子化学势$\mu_{\mathrm i,\electrode}$与溶液中离子化学势相等
 	\[
-		\mu_{\i,\phel}=\mu_{\i,\phaq}+RT\ln x+ze\NA\phi,
+		\mu_{\mathrm i,\electrode}=\mu_{\mathrm i,\aqueous}+RT\ln x+ze\NA\phi,
 	\]
 	因此电势$\phi$与溶液浓度的关系为
 	\[
-		\phi=-\frac{RT}{ze\NA}\ln x+\const(\D\mu).
+		\phi=-\frac{RT}{ze\NA}\ln x+\const(\Delta\mu).
 	\]
 \end{example}
 
@@ -628,7 +614,7 @@ $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
 	{化学反应}{}
 	考虑化学反应
 	\[
-		0\rightleftharpoons\sum_{i=1}^r\nu_i\rmA_i.
+		0\rightleftharpoons\sum_{i=1}^r\nu_i\mathrm{A}_i.
 	\]
 	在恒温恒压的条件下，平衡时Gibbs自由能最小
 	% \footnote{在混合系统中，总化学势一般不是各组分简单相加。}
@@ -638,19 +624,19 @@ $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
 	% 应当注意：$\mu_i$均来自于混合系统的Gibbs自由能。
 	考虑一个由理想气体参与的化学反应，在多组分理想气体系统中，组分$i$的化学势为
 	\[
-		\mu_i=RT\ln[\rmA_i]+\const(T).
+		\mu_i=RT\ln[\mathrm{A}_i]+\const(T).
 	\]
-	其中$[\rmA_i]:=n_i/V$表示摩尔浓度，因此
+	其中$[\mathrm{A}_i]:=n_i/V$表示摩尔浓度，因此
 	\begin{equation}
-		\prod_{i=1}^r[\rmA_i]^{\nu_i}=:K(T).
+		\prod_{i=1}^r[\mathrm{A}_i]^{\nu_i}=:K(T).
 	\end{equation}
 	只与$T$有关，$K$称为化学平衡常数。
 \end{example}
 
 \subsectionstar{相分离}
 
-A和B两种组份混合后可能出现相分离，分成$\alpha$和$\beta$两相。每一相都有A和B两组份，但比例不同。%我们来看一下这是怎么发生的。假设两组份的摩尔数分别为$n_\rmA$和$n_\rmB$，总摩尔数$n=n_\rmA+n_\rmB$，
-设B的摩尔比$x:=n_\rmB/n$。假设如果没有相分离，即两组份互溶，单位摩尔的Gibbs自由能为$g(x)$。
+A和B两种组份混合后可能出现相分离，分成$\alpha$和$\beta$两相。每一相都有A和B两组份，但比例不同。%我们来看一下这是怎么发生的。假设两组份的摩尔数分别为$n_\mathrm{A}$和$n_\mathrm{B}$，总摩尔数$n=n_\mathrm{A}+n_\mathrm{B}$，
+设B的摩尔比$x:=n_\mathrm{B}/n$。假设如果没有相分离，即两组份互溶，单位摩尔的Gibbs自由能为$g(x)$。
 在一定温度下，$\alpha$和$\beta$两相中B的摩尔比分别为$x_\alpha$和$x_\beta$，故两相的摩尔数$n_\alpha$和$n_\beta$%下面求如果有
 \begin{align*}
 	\begin{cases}

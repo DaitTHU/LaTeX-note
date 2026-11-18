@@ -8,7 +8,7 @@
 要把自旋实验的方法推广到能量、位置等可观测量，需要先确定哪些态对应同一读数，
 以及筛出这个读数后，再测别的量会得到什么。谱投影把每个读数与相应的整组态联系起来。
 
-以两个出口为例，内积 $\brkt{\phi}{\psi}=\phi_+^*\psi_++\phi_-^*\psi_-$ 可以由两列系数逐项相乘求和。
+以两个出口为例，内积 $\brkt{\phi}{\psi}=\phi_+\conj\psi_++\phi_-\conj\psi_-$ 可以由两列系数逐项相乘求和。
 增加出口数目时，仍然可以如此取分量、算振幅。若必须用越来越多的分量来逼近一个态，
 还要让这些近似的极限属于同一空间。
 \begin{definition}{复Hilbert空间}{qm-hilbert}
@@ -32,7 +32,7 @@
     \begin{equation}
         \op{P}_a=\sum_{\mu=1}^{d_a}\ktbr{a,\mu}{a,\mu}.
     \end{equation}
-    它称为$\op{A}$在本征值$a$上的谱投影(spectral projection)，满足$\op{P}_a^\dagger=\op{P}_a$、$\op{P}_a^2=\op{P}_a$。
+    它称为$\op{A}$在本征值$a$上的谱投影(spectral projection)，满足$\op{P}_a\adjoint=\op{P}_a$、$\op{P}_a^2=\op{P}_a$。
     $\op{P}_a\ket{\psi}$是原态中具有测量值$a$的分量。
 \end{definition}
 
@@ -62,7 +62,7 @@
 \[
     (\one_S\otimes \op{A}_D)(\ket{s}\otimes\ket{D})=\ket{s}\otimes(\op{A}_D\ket{D}).
 \]
-对多个乘积态的叠加，按线性性把这一式用到每一项。只写 $\op{A}_D$ 作用在联合态上时，默认它代表 $\one_S\otimes \op{A}_D$。
+对多个乘积态的叠加，按线性把这一式用到每一项。只写 $\op{A}_D$ 作用在联合态上时，默认它代表 $\one_S\otimes \op{A}_D$。
 只作用于粒子的算符则写成 $\op{A}_S\otimes\one_D$。测量还要求仪器的输出依赖粒子的输入，
 必须让两者耦合，才能从同一个初始指针态产生不同读数。
 
@@ -75,7 +75,7 @@
 不同读数的指针态应正交，$\brkt{D_a}{D_b}=\delta_{ab}$，
 从而理想读出可以把它们完全区分。
 
-将初态在 $\ket{a,\mu}$ 基中展开，由 $\op{U}$ 的线性性和谱投影的定义，
+将初态在 $\ket{a,\mu}$ 基中展开，由 $\op{U}$ 的线性和谱投影的定义，
 \begin{equation}
     \op{U}\bigp{\ket{\psi}\otimes\ket{D_0}}
     =\sum_a \op{P}_a\ket{\psi}\otimes\ket{D_a}.
@@ -102,7 +102,7 @@ Born规则应用于指针输出，给出该分量的范数平方；
 \end{postulate}
 
 测后归一化来自
-$\|\op{P}_a\ket{\psi}\|^2=\mel{\psi}{\op{P}_a^\dagger \op{P}_a}{\psi}=p_a$。
+$\|\op{P}_a\ket{\psi}\|^2=\mel{\psi}{\op{P}_a\adjoint \op{P}_a}{\psi}=p_a$。
 若紧接着再测同一个量，
 \begin{equation}
     \op{P}_a\frac{\op{P}_a\ket{\psi}}{\sqrt{p_a}}
@@ -113,10 +113,10 @@ $\|\op{P}_a\ket{\psi}\|^2=\mel{\psi}{\op{P}_a^\dagger \op{P}_a}{\psi}=p_a$。
 \begin{example}{同一能量对应两个态时怎样更新}{qm-degenerate-measurement}
     设$\op{A}=a(\ktbr{1}{1}+\ktbr{2}{2})+b\ktbr{3}{3}$，其中$a\ne b$，
     初态为$c_1\ket{1}+c_2\ket{2}+c_3\ket{3}$。
-    测得$a$的概率是$|c_1|^2+|c_2|^2$，Lüders更新给出
+    测得$a$的概率是$\abs{c_1}^2+\abs{c_2}^2$，Lüders更新给出
     \begin{equation}
         \ket{\psi_a}=
-        \frac{c_1\ket{1}+c_2\ket{2}}{\sqrt{|c_1|^2+|c_2|^2}}.
+        \frac{c_1\ket{1}+c_2\ket{2}}{\sqrt{\abs{c_1}^2+\abs{c_2}^2}}.
     \end{equation}
     两个分量之间的相对相位仍被保留。
     若仪器还区分了标签1与2，再把标签丢掉，
@@ -189,14 +189,14 @@ $N_j/(N\Delta x)$，这样柱的面积才等于该格的概率。若概率密度
 
 \begin{definition}{位置表象的波函数}{qm-wave-function}
     一维无自旋粒子的纯态 $\ket{\psi}$ 在位置基中的分量 $\psi(x)=\brkt{x}{\psi}$ 称为波函数(wave function)。
-    根据连续位置的 Born 规则，$|\psi(x)|^2$ 是位置概率密度。对整条线上归一化的态，
+    根据连续位置的 Born 规则，$\abs{\psi(x)}^2$ 是位置概率密度。对整条线上归一化的态，
     \begin{equation}
-        p(a\leq x\leq b)=\int_a^b|\psi(x)|^2\d x,\qquad
-        \int_{\RR}|\psi(x)|^2\d x=1.
+        p(a\leq x\leq b)=\int_a^b\abs{\psi(x)}^2\d x,\qquad
+        \int_{\RR}\abs{\psi(x)}^2\d x=1.
     \end{equation}
 \end{definition}
-因此 $|\psi(x)|^2$ 的单位是长度的倒数。例如均匀分布在 $1\,\mathrm{cm}$ 内的粒子，
-落在其中一个 $1\,\mathrm{mm}$ 像素内的概率为 $0.1$。
+因此 $\abs{\psi(x)}^2$ 的单位是长度的倒数。例如均匀分布在 $\qty{1}{cm}$ 内的粒子，
+落在其中一个 $\qty{1}{mm}$ 像素内的概率为 $0.1$。
 
 在离散基中，Kronecker 符号在求和中选出第 $i$ 个分量。推广到连续指标时，
 在积分中选出指定位置的函数值的核称为 Dirac $\delta$ 分布。对照两种取分量的运算，后一式取光滑试验函数 $f$，
@@ -241,9 +241,9 @@ de Broglie 关系 $p=\hbar k$ 将动量 $p$ 与空间相位 $\exp(\i px/\hbar)$ 
 \[
     \psi(x)=\int_{\RR}\brkt{x}{p}\brkt{p}{\psi}\d p.
 \]
-对每个平面波作用 $-\i\hbar\partial_x$，恰好将它乘以 $p$。在允许逐项求导的波包上，由线性性便有
+对每个平面波作用 $-\i\hbar\p_x$，恰好将它乘以 $p$。在允许逐项求导的波包上，由线性便有
 \begin{equation}
-    \brkt{x}{\op{P}\psi}=-\i\hbar\,\partial_x\psi(x),\qquad \brkt{x}{\op{X}\psi}=x\psi(x).
+    \brkt{x}{\op{P}\psi}=-\i\hbar\,\p_x\psi(x),\qquad \brkt{x}{\op{X}\psi}=x\psi(x).
 \end{equation}
 现在可直接检验次序的影响。$\op{X}\op{P}$ 给出 $-\i\hbar x\psi'$，
 $\op{P}\op{X}$ 给出 $-\i\hbar(x\psi)'=-\i\hbar(\psi+x\psi')$，相减留下 $\i\hbar\psi$。
@@ -264,11 +264,11 @@ $\op{P}\op{X}$ 给出 $-\i\hbar(x\psi)'=-\i\hbar(\psi+x\psi')$，相减留下 $\
         \mel{\phi}{\op{A}}{\psi}=\brkt{\eta}{\psi}
         \qquad\text{对所有 }\ket{\psi}\in\Dom(\op{A})
     \end{equation}
-    成立，则$\ket{\phi}$属于$\Dom(\op{A}^\dagger)$，并定义
-    $\op{A}^\dagger\ket{\phi}=\ket{\eta}$。
+    成立，则$\ket{\phi}$属于$\Dom(\op{A}\adjoint)$，并定义
+    $\op{A}\adjoint\ket{\phi}=\ket{\eta}$。
 \end{definition}
 
-对稠密定义的$\op{A}$，伴随$\op{A}^\dagger$的定义域由哪些左矢使
+对稠密定义的$\op{A}$，伴随$\op{A}\adjoint$的定义域由哪些左矢使
 $\mel{\phi}{\op{A}}{\psi}$成为关于$\ket{\psi}$的有界线性泛函(bounded linear functional)来决定。
 \begin{definition}{对称算符与自伴算符}{qm-self-adjoint}
     对稠密定义的 $\op{A}$，以下条件分别定义对称性与自伴性：
@@ -276,11 +276,11 @@ $\mel{\phi}{\op{A}}{\psi}$成为关于$\ket{\psi}$的有界线性泛函(bounded 
         \begin{alignat}{1}
             \op{A}\text{ 对称}&:\quad \brkt{\phi}{\op{A}\psi}=\brkt{\op{A}\phi}{\psi}
                 \quad(\phi,\psi\in\Dom(\op{A})),\\
-            \op{A}\text{ 自伴}&:\quad \Dom(\op{A})=\Dom(\op{A}^\dagger),\quad
-                \op{A}\psi=\op{A}^\dagger\psi\quad(\psi\in\Dom(\op{A})).
+            \op{A}\text{ 自伴}&:\quad \Dom(\op{A})=\Dom(\op{A}\adjoint),\quad
+                \op{A}\psi=\op{A}\adjoint\psi\quad(\psi\in\Dom(\op{A})).
         \end{alignat}
     \end{subequations}
-    在有限维空间中，定义在整个空间上的 Hermite 矩阵满足 $\op{A}=\op{A}^\dagger$，因而自伴。
+    在有限维空间中，定义在整个空间上的 Hermite 矩阵满足 $\op{A}=\op{A}\adjoint$，因而自伴。
 \end{definition}
 这里用 $\ket{\op{A}\psi}$ 表示向量 $\op{A}\ket{\psi}$。有些物理教材将对称(symmetric)也叫Hermitian；本书在无穷维情形用“对称”避免混淆。
 对称性约束已有的本征值为实，却不足以保证完整的自伴谱理论和唯一的幺正时间演化。
@@ -312,7 +312,7 @@ $\brkt{\phi}{L}\e^{\i\theta}=\brkt{\phi}{0}$，
 本征方程的分量关系给出
 $\brkt{x}{p_n}=C\e^{\i p_nx/\hbar}$；
 代入端点条件得到$\e^{\i p_nL/\hbar}=\e^{\i\theta}$，
-概率密度 $|C|^2$ 为常数，在长为 $L$ 的区间上归一化给出 $L|C|^2=1$，所以 $|C|=L^{-1/2}$。
+概率密度 $\abs{C}^2$ 为常数，在长为 $L$ 的区间上归一化给出 $L\abs{C}^2=1$，所以 $\abs{C}=L^{-1/2}$。
 
 它描述带相位边界条件的环；硬墙盒子则采用端点为零的边界条件。
 硬墙盒子的动能可由二阶微分表达式及Dirichlet定义域自伴地定义，
@@ -334,10 +334,10 @@ $\brkt{x}{p_n}=C\e^{\i p_nx/\hbar}$；
 \begin{theorem}{不确定关系与等号条件}{qm-uncertainty-equality}
     设 $\op{A},\op{B}$ 自伴且归一化态 $\ket{\psi}$ 属于两者的定义域，取
     $\ket{u}=\delta \op{A}\ket{\psi}$、$\ket{v}=\delta \op{B}\ket{\psi}$。则
-    $(\Delta A)^2(\Delta B)^2\geq|\brkt{u}{v}|^2$，等号成立当且仅当两个涨落态线性相关。
+    $(\Delta A)^2(\Delta B)^2\geq\abs{\brkt{u}{v}}^2$，等号成立当且仅当两个涨落态线性相关。
     若算符乘积 $\op{A}\op{B}$ 和 $\op{B}\op{A}$ 在此态上也有定义，下界可写成
     \begin{equation}
-        (\Delta A)^2(\Delta B)^2\geq|\brkt{u}{v}|^2
+        (\Delta A)^2(\Delta B)^2\geq\abs{\brkt{u}{v}}^2
             =\frac14\bigabs{\ave{[\op{A},\op{B}]}}^2
             +\frac14\bigabs{\ave{\{\delta \op{A},\delta \op{B}\}}}^2.
         \label{eq:uncertainty}
@@ -352,8 +352,8 @@ $\brkt{x}{p_n}=C\e^{\i p_nx/\hbar}$；
     \qquad \brkt{v}{u_\perp}=0.
 \end{equation}
 两部分范数相加，得到
-$\brkt{u}{u}\,\brkt{v}{v}=|\brkt{u}{v}|^2+\brkt{u_\perp}{u_\perp}\brkt{v}{v}
-\geq|\brkt{u}{v}|^2$；$\ket{v}=0$时也成立。
+$\brkt{u}{u}\,\brkt{v}{v}=\abs{\brkt{u}{v}}^2+\brkt{u_\perp}{u_\perp}\brkt{v}{v}
+\geq\abs{\brkt{u}{v}}^2$；$\ket{v}=0$时也成立。
 接着利用
 \begin{equation}
     \delta \op{A}\delta \op{B}
@@ -373,19 +373,19 @@ $\brkt{u}{u}\,\brkt{v}{v}=|\brkt{u}{v}|^2+\brkt{u_\perp}{u_\perp}\brkt{v}{v}
     此式取等号要求两个涨落态线性相关，且 $\ave{\{\delta \op{A},\delta \op{B}\}}=0$。
 \end{corollary}
 对$[\op{X},\op{P}]=\i\hbar\one$、满足上述条件的态，$\Delta X\Delta P\geq\hbar/2$。
-对自旋，$\Delta S_x\Delta S_y\geq(\hbar/2)|\ave{\op{S}_z}|$。这个下界取决于制备态，在 $\ave{\op{S}_z}=0$ 时为零。
+对自旋，$\Delta S_x\Delta S_y\geq(\hbar/2)\abs{\ave{\op{S}_z}}$。这个下界取决于制备态，在 $\ave{\op{S}_z}=0$ 时为零。
 
 时间在此是外部参数，并无普适的自伴时间算符$\op{T}$满足$[\op{T},\op{H}]=\i\hbar\one$。
 对不显含时间的$\op{A}$，以后得到的动力学关系给出
 \begin{equation}
     \tau_A\Delta H\geq\frac\hbar2,\qquad
-    \tau_A:=\frac{\Delta A}{|\d\ave{\op{A}}/\nd t|},
+    \tau_A:=\frac{\Delta A}{\abs{\d\ave{\op{A}}/\nd t}},
 \end{equation}
 分母非零且上述不确定关系成立时，$\tau_A$ 给出均值按当前变化率改变一个标准差所需的时间尺度。
 
-\checkpoint{一个自由粒子在 $|p|<p_0$ 内的动量振幅为常数 $C$，其余处为零，$p_0>0$。
+\checkpoint{一个自由粒子在 $\abs{p}<p_0$ 内的动量振幅为常数 $C$，其余处为零，$p_0>0$。
     一台探测器接受 $-p_0/2\leq p\leq p_0/2$ 的粒子。重复制备后，通过的比例是多少？}{
-    归一化要求 $2p_0|C|^2=1$，故密度为 $1/(2p_0)$。
+    归一化要求 $2p_0\abs{C}^2=1$，故密度为 $1/(2p_0)$。
     接受窗口的宽度为 $p_0$，对该窗口积分得到 $p_0/(2p_0)=1/2$。
     在窗口内继续缩小宽度，概率随宽度成比例减小，密度保持不变。}
 \reading{不确定度与相容测量核对MIT 8.05讲义5\cite{mituncertainty}；

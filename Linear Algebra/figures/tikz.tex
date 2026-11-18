@@ -1,34 +1,35 @@
 \documentclass[tikz]{standalone}
 
 \usepackage{anyfontsize}
-\usepackage{amsmath, amssymb}
 \usetikzlibrary{backgrounds}
+
+\input{../../mathdef.tex}
 
 \begin{document}
 
 \begin{tikzpicture}[font=\fontsize{10.5bp}{12.6bp}\selectfont]
     \label{four-subspaces}
     \node at(3, 0){The big picture};
-    \draw[thick](0, 0)node[left]{$\mathbb R^n$}--(2, 2)--(.5, 3.5)--(-1.5, 1.5)node[midway, left]{$r$}--(2, -2)--(1, -3)--(-1, -1)node[midway, left]{$n-r~$}--cycle;
+    \draw[thick](0, 0)node[left]{$\RR^n$}--(2, 2)--(.5, 3.5)--(-1.5, 1.5)node[midway, left]{$r$}--(2, -2)--(1, -3)--(-1, -1)node[midway, left]{$n-r~$}--cycle;
     \draw(.15, .15)--(.3, 0)--(.15, -.15);
-    \node at(.25, 1.75){$\operatorname{C}(A^\top)$};
-    \node at(.5, -1.5){$\operatorname{N}(A)$};
-    \draw[thick](6, 0)node[right]{$~\mathbb R^m$}--(8, 1)--(6.8, 3.4)node[midway, right]{$r$}--(4.8, 2.4)--(6.5, -1)--(4.1, -2.2)node[midway, right]{$~m-r$}--(3.6, -1.2)--cycle; % +6
+    \node at(.25, 1.75){$\colsp(A\transp)$};
+    \node at(.5, -1.5){$\nullsp(A)$};
+    \draw[thick](6, 0)node[right]{$~\RR^m$}--(8, 1)--(6.8, 3.4)node[midway, right]{$r$}--(4.8, 2.4)--(6.5, -1)--(4.1, -2.2)node[midway, right]{$~m-r$}--(3.6, -1.2)--cycle; % +6
     \draw(5.905, .19)--(5.715, .095)--(5.81, -.095); % .03√10
-    \node at(6.4, 1.7){$\operatorname{C}(A)$};
-    \node at(5.05, -1.1){$\operatorname{N}(A^\top)$};
+    \node at(6.4, 1.7){$\colsp(A)$};
+    \node at(5.05, -1.1){$\nullsp(A\transp)$};
 \end{tikzpicture}
 
 \begin{tikzpicture}[font=\fontsize{10.5bp}{12.6bp}\selectfont]
     \label{subspace-mapping}
-    \draw[thick](0, 0)node[left]{$\mathbb R^n~$}--(2, 2)--(.5, 3.5)--(-1.5, 1.5)node[midway, left]{$r$}--(2, -2)--(1, -3)--(-1, -1)node[midway, left]{$n-r~$}--cycle;
+    \draw[thick](0, 0)node[left]{$\RR^n~$}--(2, 2)--(.5, 3.5)--(-1.5, 1.5)node[midway, left]{$r$}--(2, -2)--(1, -3)--(-1, -1)node[midway, left]{$n-r~$}--cycle;
     \draw(-.15, .15)--(-.3, 0)--(-.15, -.15);
-    \node at(.25, 1.75){$\operatorname{C}(A^\top)$};
-    \node at(.5, -1.5){$\operatorname{N}(A)$};
-    \draw[thick](6, 0)node[right]{$~~\mathbb R^m$}--(8, 1)--(6.8, 3.4)node[midway, right]{$~r$}--(4.8, 2.4)--(6.5, -1)--(4.1, -2.2)node[midway, right]{$~m-r$}--(3.6, -1.2)--cycle; % +6
+    \node at(.25, 1.75){$\colsp(A\transp)$};
+    \node at(.5, -1.5){$\nullsp(A)$};
+    \draw[thick](6, 0)node[right]{$~~\RR^m$}--(8, 1)--(6.8, 3.4)node[midway, right]{$~r$}--(4.8, 2.4)--(6.5, -1)--(4.1, -2.2)node[midway, right]{$~m-r$}--(3.6, -1.2)--cycle; % +6
     \draw(6.19, .095)--(6.285, -.095)--(6.095, -.19); % .03√10
-    \node at(6.4, 1.7){$\operatorname{C}(A)$};
-    \node at(5.05, -1.1){$\operatorname{N}(A^\top)$};
+    \node at(6.4, 1.7){$\colsp(A)$};
+    \node at(5.05, -1.1){$\nullsp(A\transp)$};
     \coordinate[label=below:$x$](X)at(2, 1);
     \coordinate[label=left:$x_\mathrm r$](R)at(1.5, 1.5);
     \coordinate[label=left:$x_\mathrm n$](N)at(.5, -.5);

@@ -1,9 +1,12 @@
 \documentclass[tikz]{standalone}
-\usepackage{amsmath,bm,physics,siunitx}
+\usepackage{siunitx}
 \usepackage[copies]{contour} % XeLaTeX-compatible text outlines
 \usepackage{etoolbox,ifthen}
 \usetikzlibrary{3d,angles,arrows,arrows.meta,calc,circuits.ee.IEC,decorations.markings,
   decorations.pathmorphing,fadings,patterns,quotes,shapes,shapes.multipart}
+
+\input{../../mathdef.tex}
+\input{../notation.tex}
 
 \begin{tikzfadingfrompicture}[name=interference]
   \def\lambd{0.5} % wavelength
@@ -25,11 +28,6 @@
   markings,
   mark=at position .5 with {\arrow{<}}},postaction={decorate}}}
 
-\renewcommand{\abs}[1]{\lvert#1\rvert}
-\renewcommand*{\i}{\mathrm{i}}
-\renewcommand*{\r}{\mathrm{r}}
-\renewcommand*{\t}{\mathrm{t}}
-\renewcommand*{\d}{\mathrm{d}}
 
 \begin{tikzpicture}
     \fill(0,0) circle (2pt) node[below left]{$q$};
@@ -45,8 +43,8 @@
         (-0.25,-0.15) -- cycle;
     \node at (P) [xshift=0.7cm] {$\d A$};
 
-    \draw[->, very thick] (P) -- (r) node[right]{$\hat{\bm r}$};
-    \draw[->, very thick] (P) -- (n) node[above]{$\hat{\bm n}$};
+    \draw[->, very thick] (P) -- (r) node[right]{$\uvec{r}$};
+    \draw[->, very thick] (P) -- (n) node[above]{$\uvec{n}$};
 
     \pic["$\theta$", draw, angle radius=15, angle eccentricity=1.5]{angle=r--P--n};
 
@@ -99,7 +97,7 @@
 
 \begin{tikzpicture}
     \draw[thick](-3, 0)node[below right]{1}node[above right]{2}--(3, 0)node[right]{$\sigma$};
-    \draw[thick, ->](0, 0)--(0, 1)node[right]{$\hat{\bm n}$};
+    \draw[thick, ->](0, 0)--(0, 1)node[right]{$\uvec{n}$};
     \draw[dashed](0, 2)--(0, -2);
     \draw[thick, ->](-2, -1)node[left]{$\bm E_1$}--(0, 0);
     \draw[thick, ->](0, 0)--(2, 1.5)node[right]{$\bm E_2$};
@@ -111,7 +109,7 @@
     \draw[thick, yshift=-.3cm](0, 0).. controls (1, 1) and (2, -1) .. (3, 0)node[right]{$-\sigma$};
     \draw[->, shift={(.75, 0)}](0, -.5)--(0, 0);
     \draw[->, shift={(.75, .3)}](0, .5)node[right]{$d$}--(0, 0);
-    \draw[thick, ->, xshift=1.5cm](0, 0)--(.1, 1)node[right]{$\hat{\bm n}$};
+    \draw[thick, ->, xshift=1.5cm](0, 0)--(.1, 1)node[right]{$\uvec{n}$};
     \label{dipole-layers}
 \end{tikzpicture}
 
@@ -345,15 +343,15 @@
     \coordinate(t)at(1.2, -2);
     \fill[gray!8](-3, 0)rectangle(3, 2);
     \fill[gray!50](-3, 0)rectangle(3, -2);
-    \draw(-3, 0)node[above right]{$n_\i$}node[below right]{$n_\t$}--(3, 0);
+    \draw(-3, 0)node[above right]{$n_\incident$}node[below right]{$n_\transmitted$}--(3, 0);
     \draw[dashed](O)--(u);
-    \draw[->](O)--(n)node[above]{$\hat{\bm n}$};
-    \draw[thick, ->-](O)--(r)node[midway, right]{$\bm k_\r$};
-    \draw[thick, ->-](i)--(O)node[midway, left]{$\bm k_\i$};
-    \draw[thick, ->-](O)--(t)node[midway, right]{$\bm k_\t$};
-    \pic["$\theta_\i$", draw, angle radius=20, angle eccentricity=1.5]{angle=n--O--i};
-    \pic["$\theta_\r$", draw, angle radius=20, angle eccentricity=1.5]{angle=r--O--n};
-    \pic["$\theta_\t$", draw, angle radius=20, angle eccentricity=1.5]{angle=u--O--t};
+    \draw[->](O)--(n)node[above]{$\uvec{n}$};
+    \draw[thick, ->-](O)--(r)node[midway, right]{$\bm k_\reflected$};
+    \draw[thick, ->-](i)--(O)node[midway, left]{$\bm k_\incident$};
+    \draw[thick, ->-](O)--(t)node[midway, right]{$\bm k_\transmitted$};
+    \pic["$\theta_\incident$", draw, angle radius=20, angle eccentricity=1.5]{angle=n--O--i};
+    \pic["$\theta_\reflected$", draw, angle radius=20, angle eccentricity=1.5]{angle=r--O--n};
+    \pic["$\theta_\transmitted$", draw, angle radius=20, angle eccentricity=1.5]{angle=u--O--t};
     \label{reflection-and-transmission}
 \end{tikzpicture}
 
@@ -390,25 +388,25 @@
     \coordinate(Et)at(.6, -1);
     \fill[gray!8](-3, 0)rectangle(3, 2);
     \fill[gray!50](-3, 0)rectangle(3, -2.5);
-    \draw(-3, 0)node[above right]{$n_\i$}node[below right]{$n_\t$}--(3, 0);
+    \draw(-3, 0)node[above right]{$n_\incident$}node[below right]{$n_\transmitted$}--(3, 0);
     \draw[dashed](n)--(u);
     \draw(O)--(r);
     \draw(i)--(O);
     \draw(O)--(t);
     % incident
-    \draw[thick, ->](Ei)--(-.7, .7)node[shift={(30:.3)}]{$\bm k_\i$};
-    \draw[thick, ->](Ei)--(-1.7, .7)node[left]{$\bm H_\i$};
-    \draw[thick, fill=white](Ei)circle(.12)node[shift={(30:.4)}]{$\bm E_\i$};
+    \draw[thick, ->](Ei)--(-.7, .7)node[shift={(30:.3)}]{$\bm k_\incident$};
+    \draw[thick, ->](Ei)--(-1.7, .7)node[left]{$\bm H_\incident$};
+    \draw[thick, fill=white](Ei)circle(.12)node[shift={(30:.4)}]{$\bm E_\incident$};
     \fill[black](Ei)circle(.06);
     % reflect
-    \draw[thick, ->](Er)--(1.5, 1.5)node[shift={(150:.3)}]{$\bm k_\r$};
-    \draw[thick, ->](Er)--(1.5, .5)node[right]{$\bm H_\r$};
-    \draw[thick, fill=white](Er)circle(.12)node[shift={(150:.4)}]{$\bm E_\r$};
+    \draw[thick, ->](Er)--(1.5, 1.5)node[shift={(150:.3)}]{$\bm k_\reflected$};
+    \draw[thick, ->](Er)--(1.5, .5)node[right]{$\bm H_\reflected$};
+    \draw[thick, fill=white](Er)circle(.12)node[shift={(150:.4)}]{$\bm E_\reflected$};
     \fill[black](Er)circle(.06);
     % transmit
-    \draw[thick, ->](Et)--(1.2, -2)node[right]{$\bm k_\t$};
-    \draw[thick, ->](Et)--(.1, -1.3)node[left]{$\bm H_\t\!$};
-    \draw[thick, fill=white](Et)circle(.12)node[right]{$\bm E_\t$};
+    \draw[thick, ->](Et)--(1.2, -2)node[right]{$\bm k_\transmitted$};
+    \draw[thick, ->](Et)--(.1, -1.3)node[left]{$\bm H_\transmitted\!$};
+    \draw[thick, fill=white](Et)circle(.12)node[right]{$\bm E_\transmitted$};
     \fill[black](Et)circle(.06);
     \label{senkrecht-polarization}
 \end{tikzpicture}
@@ -416,25 +414,25 @@
 \begin{tikzpicture}
     \fill[gray!8](-3, 0)rectangle(3, 2);
     \fill[gray!50](-3, 0)rectangle(3, -2.5);
-    \draw(-3, 0)node[above right]{$n_\i$}node[below right]{$n_\t$}--(3, 0);
+    \draw(-3, 0)node[above right]{$n_\incident$}node[below right]{$n_\transmitted$}--(3, 0);
     \draw[dashed](n)--(u);
     \draw(O)--(r);
     \draw(i)--(O);
     \draw(O)--(t);
     % incident
-    \draw[thick, ->](Ei)--(-.7, .7)node[shift={(30:.3)}]{$\bm k_\i$};
-    \draw[thick, ->](Ei)--(-.7, 1.7)node[right]{$\bm E_\i$};
-    \draw[thick, fill=white](Ei)circle(.12)node[shift={(210:.4)}]{$\bm H_\i$};
+    \draw[thick, ->](Ei)--(-.7, .7)node[shift={(30:.3)}]{$\bm k_\incident$};
+    \draw[thick, ->](Ei)--(-.7, 1.7)node[right]{$\bm E_\incident$};
+    \draw[thick, fill=white](Ei)circle(.12)node[shift={(210:.4)}]{$\bm H_\incident$};
     \fill[black](Ei)circle(.06);
     % reflect
-    \draw[thick, ->](Er)--(1.5, 1.5)node[shift={(-30:.3)}]{$\bm k_\r$};
-    \draw[thick, ->](Er)--(.5, 1.5)node[shift={(150:.3)}]{$\bm E_\r$};
-    \draw[thick, fill=white](Er)circle(.12)node[shift={(-30:.4)}]{$\bm H_\r$};
+    \draw[thick, ->](Er)--(1.5, 1.5)node[shift={(-30:.3)}]{$\bm k_\reflected$};
+    \draw[thick, ->](Er)--(.5, 1.5)node[shift={(150:.3)}]{$\bm E_\reflected$};
+    \draw[thick, fill=white](Er)circle(.12)node[shift={(-30:.4)}]{$\bm H_\reflected$};
     \fill[black](Er)circle(.06);
     % transmit
-    \draw[thick, ->](Et)--(1.2, -2)node[right]{$\bm k_\t$};
-    \draw[thick, ->](Et)--(1.1, -.7)node[right]{$\bm E_\t$};
-    \draw[thick, fill=white](Et)circle(.12)node[shift={(210:.4)}]{$\bm H_\t$};
+    \draw[thick, ->](Et)--(1.2, -2)node[right]{$\bm k_\transmitted$};
+    \draw[thick, ->](Et)--(1.1, -.7)node[right]{$\bm E_\transmitted$};
+    \draw[thick, fill=white](Et)circle(.12)node[shift={(210:.4)}]{$\bm H_\transmitted$};
     \fill[black](Et)circle(.06);
     \label{parallel-polarization}
 \end{tikzpicture}
@@ -533,9 +531,9 @@
     \draw[thick, ->](O)--(z);
     \draw[thick, ->](O)--(x);
     \draw[dashed](O)--(P)node[midway, left]{$r$};
-    \draw[thick, ->](P)--(2.52, 3.5)node[above]{$\hat{\bm r}$};
-    \draw[thick, ->](P)--(3, 3)node[right]{$\hat{\bm\phi}$};
-    \draw[thick, ->](P)--(2.8, 1.78)node[right]{$\hat{\bm\theta}$};
+    \draw[thick, ->](P)--(2.52, 3.5)node[above]{$\uvec{r}$};
+    \draw[thick, ->](P)--(3, 3)node[right]{$\uvec{\phi}$};
+    \draw[thick, ->](P)--(2.8, 1.78)node[right]{$\uvec{\theta}$};
     \draw[dashed](O)--(Q)--(P);
     \fill[black](P)circle(0.05);
     \draw[dashed](-1, -1)--(Q)--(2.8, 0);
@@ -555,9 +553,9 @@
     \draw[thick, ->](O)--(y);
     \draw[thick, ->](O)--(z);
     \draw[thick, ->](O)--(x);
-    \draw[thick, ->](P)--(2.88, 1.9)node[right]{$\hat{\bm\rho}$};
-    \draw[thick, ->](P)--(3, 3)node[right]{$\hat{\bm\phi}$};
-    \draw[thick, ->](P)--(1.8, 3.8)node[right]{$\hat{\bm z}$};
+    \draw[thick, ->](P)--(2.88, 1.9)node[right]{$\uvec{\rho}$};
+    \draw[thick, ->](P)--(3, 3)node[right]{$\uvec{\phi}$};
+    \draw[thick, ->](P)--(1.8, 3.8)node[right]{$\uvec{z}$};
     \draw[dashed](O)--(Q)node[midway, above]{$\rho$}--(P)node[midway, right]{$z$};
     \fill[black](P)circle(0.05);
     \draw[dashed](-1, -1)--(Q)--(2.8, 0);
@@ -591,7 +589,7 @@
 						 mark=between positions 0.6 and 0.9 step 0.5cm with {
 						 \draw[fill=red, draw = red] circle[radius=1pt];
 						 \draw[red, {Latex[length=1.3mm, width=1.5mm]}-{Latex[length=1.3mm, width=1.5mm]}] (0,-7pt) -- (0,7pt);}
-														}
+                                                        }
 						 }
 		}
 %% Bottom Ray Inside Box
@@ -600,7 +598,7 @@
 						 mark=between positions 0.65 and 0.9 step 0.7cm with {
 						 \draw[red, {Latex[length=1.3mm, width=1.5mm]}-{Latex[length=1.3mm, width=1.5mm]}] (0,-7pt) -- (0,7pt);
 						 \draw[fill=black!10, draw = black!10] circle[radius=1pt];}
-														}
+                                                        }
 						 }
 		}
 %% Bottom Ray Outside Box
@@ -612,7 +610,7 @@
 						 mark=between positions 0.6 and 0.9 step 0.5cm with {
 						 \draw[red, {Latex[length=1.3mm, width=1.5mm]}-{Latex[length=1.3mm, width=1.5mm]}] (0,-7pt) -- (0,7pt);
 						 \draw[fill=white, draw = white] circle[radius=1pt];}
-														}
+                                                        }
 						 }
 		}
 %% Upper Ray Inside Box
@@ -620,7 +618,7 @@
 						 mark=at position .52 with \arrow{stealth},
 						 mark=between positions 0.65 and 0.9 step 0.7cm with {
 						 \draw[fill=red, draw = red] circle[radius=1pt];}
-														}
+                                                        }
 						 }
 		}
 %% Upper Ray Outside Box
@@ -630,7 +628,7 @@
 						 \draw[fill=red, draw = red] circle[radius=1pt];},
 						 mark=between positions 0.6 and 0.9 step 0.5cm with {
 						 \draw[fill=red, draw = red] circle[radius=1pt];}
-														}
+                                                        }
 						 }
 		}
 
@@ -698,7 +696,7 @@
 \begin{tikzpicture}[xscale=1]
   \def\h{1}
   \def\radio{-4}
-  \def\micro{0}
+  \def\microwaveEdge{0}
   \def\IR{3}
   \def\red{6.10}  % log(700e-9) = -6.15490196
   \def\blue{6.40} % log(400e-9) = -6.39794001
@@ -715,14 +713,14 @@
 
   % MIDDLE
   \fill[green!60!black!10] (\radio-0.82*\dx,0) rectangle (\IR,\h);
-  \fill[yellow!60!black!10] (\micro,0.18*\h) rectangle (\IR,0.8*\h);
+  \fill[yellow!60!black!10] (\microwaveEdge,0.18*\h) rectangle (\IR,0.8*\h);
   \fill[red!60!black!10] (\IR,0) rectangle (\red,\h);
   \fill[blue!60!violet!80!black!10] (\UV,0) rectangle (\Xray,\h);
   \fill[blue!50!black!15] (\Xray,0) rectangle (\gamm,\h);
   \fill[blue!40!black!25] (\gamm,0) rectangle (\last+0.8*\dx,\h);
   \shade[shading=rainbow,shading angle=-90] (\red,0) rectangle (\blue,\h);
-  \node at ({(\radio+\micro)/2},\h/2) {\strut radio};
-  \node at ({(\micro+\IR)/2},   \h/2) {\strut micro};
+  \node at ({(\radio+\microwaveEdge)/2},\h/2) {\strut radio};
+  \node at ({(\microwaveEdge+\IR)/2},   \h/2) {\strut micro};
   \node at ({(\IR+\red)/2},     \h/2) {\strut IR};
   %\node at (\red,  \h/2) {red};
   %\node at (\red,  \h/2) {blue};
@@ -731,49 +729,49 @@
   \node at ({(\gamm+\last+0.8*\dx)/2},  \h/2) {\strut gamma};
 
   % WAVELENGTH
-  \draw[->,thick,wavecol] (\last+\dx,\h) -- (\radio-1.5*\dx,\h) node[left=-3,scale=1.1] {$\lambda$ [\si{m}]};
+  \draw[->,thick,wavecol] (\last+\dx,\h) -- (\radio-1.5*\dx,\h) node[left=-3,scale=1.1] {$\lambda$ [\unit{m}]};
   \foreach \x [evaluate={\i=int(-\x)}] in {\radio,...,\last}{
     \ifthenelse{\i=0}{ \ticka{\x,\h}{wavecol}{$1$} }
                      { \ticka{\x,\h}{wavecol}{$10^{\i}$} }
   }
-  \node[wavecol,scale=1] at (-3,1.71*\h) {\strut km};
-  \node[wavecol,scale=1] at ( 0,1.71*\h) {\strut m};
-  \node[wavecol,scale=1] at ( 3,1.71*\h) {\strut mm};
-  \node[wavecol,scale=1] at ( 6,1.71*\h) {\strut \si{\micro m}};
-  \node[wavecol,scale=1] at ( 9,1.71*\h) {\strut pm};
-  \node[wavecol,scale=1] at (12,1.71*\h) {\strut fm};
+  \node[wavecol,scale=1] at (-3,1.71*\h) {\strut \unit{km}};
+  \node[wavecol,scale=1] at ( 0,1.71*\h) {\strut \unit{m}};
+  \node[wavecol,scale=1] at ( 3,1.71*\h) {\strut \unit{mm}};
+  \node[wavecol,scale=1] at ( 6,1.71*\h) {\strut \unit{\micro\metre}};
+  \node[wavecol,scale=1] at ( 9,1.71*\h) {\strut \unit{nm}};
+  \node[wavecol,scale=1] at (12,1.71*\h) {\strut \unit{pm}};
   %\node[wavecol,scale=1] at (15,1.71*\h) {\strut am};
 
   % FREQUENCY
   % log(f) = log(c) - log(lambda)
   % log(c) = log(2.997e8) = 8.4766867429
-  \draw[->,thick,freqcol] (\radio-\dx,0) -- (\last+1.5*\dx,0) node[right=-3,scale=1.1] {$f$ [\si{Hz}]};
+  \draw[->,thick,freqcol] (\radio-\dx,0) -- (\last+1.5*\dx,0) node[right=-3,scale=1.1] {$f$ [\unit{Hz}]};
   \foreach \x [evaluate={\i=int(\x+9);\X=\x+0.53}] in {\radiof,...,\last}{
     \tick{\X,0}{freqcol}{$10^{\i}$}
   }
-  %\node[freqcol,scale=1] at (-8.47+ 3,-0.65*\h) {\strut kHz};
-  \node[freqcol,scale=1] at (-8.47+ 6,-0.71*\h) {\strut MHz};
-  \node[freqcol,scale=1] at (-8.47+ 9,-0.71*\h) {\strut GHz};
-  \node[freqcol,scale=1] at (-8.47+12,-0.71*\h) {\strut THz};
-  \node[freqcol,scale=1] at (-8.47+15,-0.71*\h) {\strut PHz};
-  \node[freqcol,scale=1] at (-8.47+18,-0.71*\h) {\strut EHz};
+  %\node[freqcol,scale=1] at (-8.47+ 3,-0.65*\h) {\strut \unit{kHz}};
+  \node[freqcol,scale=1] at (-8.47+ 6,-0.71*\h) {\strut \unit{MHz}};
+  \node[freqcol,scale=1] at (-8.47+ 9,-0.71*\h) {\strut \unit{GHz}};
+  \node[freqcol,scale=1] at (-8.47+12,-0.71*\h) {\strut \unit{THz}};
+  \node[freqcol,scale=1] at (-8.47+15,-0.71*\h) {\strut \unit{PHz}};
+  \node[freqcol,scale=1] at (-8.47+18,-0.71*\h) {\strut \unit{EHz}};
 
   % ENERGY
   % log(E) = log(hc) - log(lambda)
   % log(hc) = log(2.997e8*4.135e-15) = -5.9068377432
-  \draw[->,thick,enercol] (\radio-\dx,\yE) -- (\last+1.5*\dx,\yE) node[right=-3,scale=1.1] {$E$ [\si{eV}]};
+  \draw[->,thick,enercol] (\radio-\dx,\yE) -- (\last+1.5*\dx,\yE) node[right=-3,scale=1.1] {$E$ [\unit{eV}]};
   \foreach \x [evaluate={\i=int(\x-6);\X=\x-0.09}] in {\radio,...,\last}{
     \ifthenelse{\i=0}{ \tick{\X,\yE}{enercol}{$1$} }
                      { \tick{\X,\yE}{enercol}{$10^{\i}$} }
   }
   %\node[enercol,scale=1] at (5.91-15,\yE-0.69*\h) {\strut feV};
   %\node[enercol,scale=1] at (5.91-12,\yE-0.69*\h) {\strut peV};
-  \node[enercol,scale=1] at (5.91- 9,\yE-0.69*\h) {\strut neV};
-  \node[enercol,scale=1] at (5.91- 6,\yE-0.69*\h) {\strut \si{\micro eV}};
-  \node[enercol,scale=1] at (5.91- 3,\yE-0.69*\h) {\strut meV};
-  \node[enercol,scale=1] at (5.91+ 0,\yE-0.69*\h) {\strut  eV};
-  \node[enercol,scale=1] at (5.91+ 3,\yE-0.69*\h) {\strut keV};
-  \node[enercol,scale=1] at (5.91+ 6,\yE-0.69*\h) {\strut MeV};
+  \node[enercol,scale=1] at (5.91- 9,\yE-0.69*\h) {\strut \unit{neV}};
+  \node[enercol,scale=1] at (5.91- 6,\yE-0.69*\h) {\strut \unit{\micro\electronvolt}};
+  \node[enercol,scale=1] at (5.91- 3,\yE-0.69*\h) {\strut \unit{meV}};
+  \node[enercol,scale=1] at (5.91+ 0,\yE-0.69*\h) {\strut \unit{eV}};
+  \node[enercol,scale=1] at (5.91+ 3,\yE-0.69*\h) {\strut \unit{keV}};
+  \node[enercol,scale=1] at (5.91+ 6,\yE-0.69*\h) {\strut \unit{MeV}};
   %\node[enercol,scale=1] at (5.91+9,\yE-0.69*\h) {\strut GeV};
 
     \label{electromagnetic-spectrum}
@@ -1010,7 +1008,6 @@
 %\renewcommand{\familydefault}{\sfdefault}
 \tikzset{>=latex} % for LaTeX arrow head
 
-\renewcommand\degree{^\circ}
 \colorlet{crystal}{blue!75}
 \colorlet{vcol}{green!50!black}
 \colorlet{Ecol}{orange!90!black}
@@ -1078,16 +1075,16 @@
   \def\nwave{4}
   \def\k{(360*\nwave/\M)} % 2pi*n / L = 360*n / L
   %\def\dx{90/\k}
-  \def\nvec{40} % per wavelength
+  \def\fieldSteps{40} % sampling intervals along the plotted wave
 
   % SECTION 1
   \draw[thick] (0,0,0) -- (0,0,0.4*\L);
-  \foreach \ang in {45,90,...,360}{
-    \draw[<->,very thick,Ecol] (0,0,0.4*\L)++(\ang:\A) --++ (\ang+180:2*\A);
+  \foreach \diagramAngle in {45,90,...,360}{
+    \draw[<->,very thick,Ecol] (0,0,0.4*\L)++(\diagramAngle:\A) --++ (\diagramAngle+180:2*\A);
   }
-  %\node[Ecol,above] at (45:\A) {$\vb{E}$};
+  %\node[Ecol,above] at (45:\A) {$\bm{E}$};
   \draw[thick] (0,0,0.4*\L) -- (0,0,\L);
-  \draw[->,very thick,vcol] (0,0,0.4*\L)++(60:1.1*\A) --++ (0,0,0.2*\L) node[right] {$\vb{v}$};
+  \draw[->,very thick,vcol] (0,0,0.4*\L)++(60:1.1*\A) --++ (0,0,0.2*\L) node[right] {$\bm{v}$};
   \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.4*\L) {unpolarized};
 
   % SECTION 2
@@ -1098,7 +1095,7 @@
     \draw[<->,very thick,Ecol] (0,0,\M/2)++(90:\A) --++ (-90:2*\A); %-\dx
     \draw[EWcol,samples=100,smooth,variable=\z,domain=0:\M]
       plot(0,{\A*cos(\k*\z)},\z);
-    \foreach \i [evaluate={\z=\i*\M/\nvec; \c=int(\i!=\nvec/2);}] in {0,...,\nvec}{
+    \foreach \i [evaluate={\z=\i*\M/\fieldSteps; \c=int(\i!=\fieldSteps/2);}] in {0,...,\fieldSteps}{
       \ifnum\c=1
         \draw[Evec] (0,0,\z) --++ (90:{\A*cos(\k*\z)});
       \fi
@@ -1118,7 +1115,7 @@
       (90:\A) -- (45:{\A*cos(45)});
     \draw[EWcol,samples=100,smooth,variable=\z,domain=0:0.74*\M]
       plot({\A*cos(\k*\z)*cos(45)^2},{\A*cos(\k*\z)*cos(45)^2},\z);
-    \foreach \i [evaluate={\z=\i*\M/\nvec; \c=int(\i!=\nvec/2 && \i<23);}] in {0,...,\nvec}{
+    \foreach \i [evaluate={\z=\i*\M/\fieldSteps; \c=int(\i!=\fieldSteps/2 && \i<23);}] in {0,...,\fieldSteps}{
       \ifnum\c=1
         \draw[Evec] (0,0,\z) --++ (45:{\A*cos(\k*\z)*cos(45)});
       \fi
@@ -1139,16 +1136,16 @@
   \def\nwave{4}
   \def\k{(360*\nwave/\M)} % 2pi*n / L = 360*n / L
   %\def\dx{90/\k}
-  \def\nvec{40} % per wavelength
+  \def\fieldSteps{40} % sampling intervals along the plotted wave
 
   % SECTION 1
   \draw[thick] (0,0,0) -- (0,0,0.4*\L);
-  \foreach \ang in {45,90,...,360}{
-    \draw[<->,very thick,Ecol] (0,0,0.4*\L)++(\ang:\A) --++ (\ang+180:2*\A);
+  \foreach \diagramAngle in {45,90,...,360}{
+    \draw[<->,very thick,Ecol] (0,0,0.4*\L)++(\diagramAngle:\A) --++ (\diagramAngle+180:2*\A);
   }
-  %\node[Ecol,above] at (45:\A) {$\vb{E}$};
+  %\node[Ecol,above] at (45:\A) {$\bm{E}$};
   \draw[thick] (0,0,0.4*\L) -- (0,0,\L);
-  \draw[->,very thick,vcol] (0,0,0.4*\L)++(60:1.1*\A) --++ (0,0,0.2*\L) node[right] {$\vb{v}$};
+  \draw[->,very thick,vcol] (0,0,0.4*\L)++(60:1.1*\A) --++ (0,0,0.2*\L) node[right] {$\bm{v}$};
   \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.4*\L) {unpolarized};
 
   % SECTION 2
@@ -1158,7 +1155,7 @@
     \draw[<->,very thick,Ecol] (0,0,\M/2)++(90:\A) --++ (-90:2*\A); %-\dx
     \draw[EWcol,samples=100,smooth,variable=\z,domain=0:\M]
       plot(0,{\A*cos(\k*\z)},\z);
-    \foreach \i [evaluate={\z=\i*\M/\nvec; \c=int(\i!=\nvec/2);}] in {0,...,\nvec}{
+    \foreach \i [evaluate={\z=\i*\M/\fieldSteps; \c=int(\i!=\fieldSteps/2);}] in {0,...,\fieldSteps}{
       \ifnum\c=1
         \draw[Evec] (0,0,\z) --++ (90:{\A*cos(\k*\z)});
       \fi
@@ -1185,16 +1182,16 @@
   \def\nwave{3}
   \def\k{(360*\nwave/\L)} % 2pi*n / L = 360*n / L
   %\def\dx{90/\k}
-  \def\nvec{30} % per wavelength
+  \def\fieldSteps{30} % sampling intervals along the plotted wave
 
   % SECTION 1
   \draw[thick] (0,0,0) -- (0,0,0.4*\L);
-  \foreach \ang in {45,90,...,360}{
-    \draw[<->,very thick,Ecol] (0,0,0.4*\L)++(\ang:\A) --++ (\ang+180:2*\A);
+  \foreach \diagramAngle in {45,90,...,360}{
+    \draw[<->,very thick,Ecol] (0,0,0.4*\L)++(\diagramAngle:\A) --++ (\diagramAngle+180:2*\A);
   }
-  %\node[Ecol,above] at (45:\A) {$\vb{E}$};
+  %\node[Ecol,above] at (45:\A) {$\bm{E}$};
   \draw[thick] (0,0,0.4*\L) -- (0,0,\L);
-  \draw[->,very thick,vcol] (0,0,0.4*\L)++(60:1.1*\A) --++ (0,0,0.2*\L) node[right] {$\vb{v}$};
+  \draw[->,very thick,vcol] (0,0,0.4*\L)++(60:1.1*\A) --++ (0,0,0.2*\L) node[right] {$\bm{v}$};
   \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.4*\L) {$I_0$}; %,align=center
 
   % SECTION 2
@@ -1204,13 +1201,13 @@
     \draw[<->,very thick,Ecol] (0,0,\L/2)++(90:\A) --++ (-90:2*\A); %-\dx
     \draw[EWcol,samples=100,smooth,variable=\z,domain=0:\L]
       plot(0,{\A*cos(\k*\z)},\z);
-    \foreach \i [evaluate={\z=\i*\L/\nvec; \c=int(\i!=\nvec/2);}] in {0,...,\nvec}{
+    \foreach \i [evaluate={\z=\i*\L/\fieldSteps; \c=int(\i!=\fieldSteps/2);}] in {0,...,\fieldSteps}{
       \ifnum\c=1
         \draw[Evec] (0,0,\z) --++ (90:{\A*cos(\k*\z)});
       \fi
     }
     \draw[thick] (0,0,\L/2) -- (0,0,\L);
-    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.4*\L) {$\dfrac{I_0}{2}$}; %, $90\degree$
+    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.4*\L) {$\dfrac{I_0}{2}$}; %, $\ang{90}$
   \end{scope}
 
   % SECTION 3
@@ -1223,19 +1220,19 @@
       (90:\A) -- (45:{\A*cos(45)});
     \draw[EWcol,samples=100,smooth,variable=\z,domain=0:\L]
       plot({\A*cos(\k*\z)*cos(45)^2},{\A*cos(\k*\z)*cos(45)^2},\z);
-    \foreach \i [evaluate={\z=\i*\L/\nvec; \c=int(\i!=\nvec/2);}] in {0,...,\nvec}{
+    \foreach \i [evaluate={\z=\i*\L/\fieldSteps; \c=int(\i!=\fieldSteps/2);}] in {0,...,\fieldSteps}{
       \ifnum\c=1
         \draw[Evec] (0,0,\z) --++ (45:{\A*cos(\k*\z)*cos(45)});
       \fi
     }
-    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.4*\L) {$\dfrac{I_0}{2}\cos^2(45\degree)$}; %, $45\degree$
+    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.4*\L) {$\dfrac{I_0}{2}\cos^2(\ang{45})$}; %, $\ang{45}$
   \end{scope}
 
   % SECTION 4
   \begin{scope}[shift={(0,0,3*\L)}]
     \pic at (0,0) {plate={0}};
     \draw[thick] (0,0,0) -- (0,0,\L/2);
-    \draw[Evec] (0,0,14*\L/\nvec) --++ (0:{\A*cos(\k*14*\L/\nvec)*cos(45)^2}); % put behind big arrow
+    \draw[Evec] (0,0,14*\L/\fieldSteps) --++ (0:{\A*cos(\k*14*\L/\fieldSteps)*cos(45)^2}); % put behind big arrow
     \draw[<->,very thick,Ecol] (0,0,\L/2)++(0:{\A*cos(45)^2}) --++ (180:{2*\A*cos(45)^2}); %-\dx
     \draw[->,thick] (0,0,\L/2) -- (0,0,1.05*\L);
     \draw[Ecol!50!black!90,mydashed]
@@ -1243,14 +1240,14 @@
     \draw[EWcol,samples=100,smooth,variable=\z,domain=0:0.93*\L]
       plot({\A*cos(\k*\z)*cos(45)^2},0,\z);
     \foreach \i [evaluate={
-        \z=\i*\L/\nvec;
-        \c=int(\i!=\nvec/2 && \i!=\nvec/2-1 && \i<\nvec-2);
-      }] in {0,...,\nvec}{
+        \z=\i*\L/\fieldSteps;
+        \c=int(\i!=\fieldSteps/2 && \i!=\fieldSteps/2-1 && \i<\fieldSteps-2);
+      }] in {0,...,\fieldSteps}{
       \ifnum\c=1
         \draw[Evec] (0,0,\z) --++ (0:{\A*cos(\k*\z)*cos(45)^2});
       \fi
     }
-    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.45*\L) {$\dfrac{I_0}{2}\cos^4(45\degree)$}; %, $0\degree$
+    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.45*\L) {$\dfrac{I_0}{2}\cos^4(\ang{45})$}; %, $\ang{0}$
   \end{scope}
 
     \label{three-polarizers}
@@ -1263,22 +1260,22 @@
   \def\l{2.3}  % length slit
   \def\N{7}    % number of slits
   \def\A{1.5}  % amplitude/size E vector
-  \def\ang{45} % angle polarizer
+  \def\diagramAngle{45} % angle polarizer
   \coordinate (O) at (0,0);
   \coordinate (E0) at (90:\A);
   \coordinate (E) at (45:{\A*cos(45)});
 
   \fill[blue!80!black!15,shift={(45:0.11*\W)}]
-    (\ang:\W/2)++(\ang-90:\W/2) --++ (\ang-180:\W) --++ (\ang+90:\W) --++ (\ang:\W) -- cycle
+    (\diagramAngle:\W/2)++(\diagramAngle-90:\W/2) --++ (\diagramAngle-180:\W) --++ (\diagramAngle+90:\W) --++ (\diagramAngle:\W) -- cycle
     \foreach \i [evaluate={\x=-\W/2+\i*\W/(\N+1);}] in {1,...,\N}{
-      (\ang:\l/2)++(\ang+90:\x+\w/2) --++ (\ang-180:\l) --++ (\ang-90:\w) --++ (\ang:\l) -- cycle
+      (\diagramAngle:\l/2)++(\diagramAngle+90:\x+\w/2) --++ (\diagramAngle-180:\l) --++ (\diagramAngle-90:\w) --++ (\diagramAngle:\l) -- cycle
     };
 
   \draw[Ecol!50!black!90,dashed] (-135:0.75*\A) -- (45:1.2*\A) coordinate (T);
   \draw[Ecol!50!black!90,dashed] (90:\A) -- (45:{\A*cos(45)});
   \rightAngle{O}{E}{E0}{0.38}
   \draw[->,Ecol,very thick] (0,0) -- (E0) node[midway,left] {$E_0$};
-  \draw[->,Ecol,very thick] (0,0) -- (E) node[midway,below right=-2] {$E_0 \cos\theta$}; %45\degree
+  \draw[->,Ecol,very thick] (0,0) -- (E) node[midway,below right=-2] {$E_0 \cos\theta$}; %\ang{45}
   \draw pic[<-,"$\theta$"{anchor=-85},draw=black,angle radius=16,angle eccentricity=1] {angle = E--O--E0};
 
     \label{polarizer-projection}
@@ -1482,7 +1479,7 @@
   \def\h{2.8}       % plane wave height
   \def\t{0.15}      % wall thickness
   \def\a{1.15}      % slit distance
-  \def\d{0.20}      % slit size
+  \def\slitWidth{0.20}      % slit size
   \def\N{21}        % number of waves
   \def\lambd{0.20}  % wavelength
   \def\R{\N*\lambd} % wave radius
@@ -1491,7 +1488,7 @@
   %\def\r{0.06}      % point source radius
   %\def\nmax{10}
   \def\nsamples{100}
-  \def\ang{62}
+  \def\diagramAngle{62}
 
   \begin{scope}
     \clip (-\t/2,-\H/2) rectangle (\L,\H/2);
@@ -1524,11 +1521,11 @@
     % WAVES
     \foreach \i [evaluate={\R=\i*\lambd;}] in {1,...,\N}{
       \ifodd\i
-        \draw[myblue,line width=0.8] (0,\a/2)++(\ang:\R) arc (\ang:-\ang:\R);
-        \draw[myred,line width=0.8] (0,-\a/2)++(\ang:\R) arc (\ang:-\ang:\R);
+        \draw[myblue,line width=0.8] (0,\a/2)++(\diagramAngle:\R) arc (\diagramAngle:-\diagramAngle:\R);
+        \draw[myred,line width=0.8] (0,-\a/2)++(\diagramAngle:\R) arc (\diagramAngle:-\diagramAngle:\R);
       \else
-        \draw[myblue!80,line width=0.1] (0,\a/2)++(\ang:\R) arc (\ang:-\ang:\R);
-        \draw[myred!80,line width=0.1] (0,-\a/2)++(\ang:\R) arc (\ang:-\ang:\R);
+        \draw[myblue!80,line width=0.1] (0,\a/2)++(\diagramAngle:\R) arc (\diagramAngle:-\diagramAngle:\R);
+        \draw[myred!80,line width=0.1] (0,-\a/2)++(\diagramAngle:\R) arc (\diagramAngle:-\diagramAngle:\R);
       \fi
     }
   \end{scope}
@@ -1544,9 +1541,9 @@
 
   % WALL
   \fill[wall]
-    (\t/2,\a/2-\d/2) rectangle (-\t/2,-\a/2+\d/2)
-    (\t/2,\a/2+\d/2) rectangle (-\t/2,\H/2)
-    (\t/2,-\a/2-\d/2) rectangle (-\t/2,-\H/2)
+    (\t/2,\a/2-\slitWidth/2) rectangle (-\t/2,-\a/2+\slitWidth/2)
+    (\t/2,\a/2+\slitWidth/2) rectangle (-\t/2,\H/2)
+    (\t/2,-\a/2-\slitWidth/2) rectangle (-\t/2,-\H/2)
     (\L,-\H/2) rectangle (\L+\t,\H/2);
 
   % SHADES
@@ -1580,7 +1577,7 @@
 
   % INTENSITY
   \begin{scope}[shift={(1.1*\L+1.1*\A,0)}]
-    \draw[->,thick] (-0.08*\A,0) -- (1.3*\A,0) node[right=-2] {$\expval{I}$}; % I axis
+    \draw[->,thick] (-0.08*\A,0) -- (1.3*\A,0) node[right=-2] {$\ave{I}$}; % I axis
     \draw[->,thick] (0,-0.52*\H) -- (0,0.54*\H) node[right] {$y$}; % y axis
     \draw[nodal] (NP0) --++ (0.15*\L+2.1*\A,0); % green nodal lines
     \foreach \i [evaluate={\y=\L/sqrt((\a/(\lambd*\i))^2-1)}] in {1,...,\Nlines}{ % green nodal lines
@@ -1613,10 +1610,10 @@
   \def\L{5.9}       % distance between walls
   \def\H{3.0}       % total wall height
   \def\f{0.9}       % fractional height of projection point
-  \def\ang{atan((\f*\H+\a)/\L/2)} % theta
+  \def\diagramAngle{atan((\f*\H+\a)/\L/2)} % theta
   \def\t{0.15}      % wall thickness
   \def\a{1.5}       % slit distance
-  \def\d{0.20}      % slit size
+  \def\slitWidth{0.20}      % slit size
   \coordinate (T) at (0,\a/2);
   \coordinate (B) at (0,-\a/2);
   \coordinate (L) at (0,0);
@@ -1641,16 +1638,16 @@
   % MEASURES
   \draw[<->,black] (0,-0.47*\H) --++ (\L,0) node[midway,fill=white,inner sep=1] {$L$};
   \draw[<->,black] (-2.1*\t,-\a/2) --++ (0,\a) node[midway,fill=white,inner sep=1] {$a$};
-  \draw[<->,black] ([shift={({\ang-90}:0.1)}]B) -- ([shift={({\ang-90}:0.1)}]M)
+  \draw[<->,black] ([shift={({\diagramAngle-90}:0.1)}]B) -- ([shift={({\diagramAngle-90}:0.1)}]M)
     node[midway,above=1,below right=-3]{$a\sin\theta'$};
   \draw[<->,black] ([shift={(2.1*\t,0)}]P) -- ([shift={(2.1*\t,0)}]R)
     node[midway,fill=white,inner sep=1]{$y$};
 
   % WALL
   \fill[wall]
-    (0,\a/2-\d/2) rectangle (-\t,-\a/2+\d/2)
-    (0,\a/2+\d/2) rectangle (-\t,\H/2)
-    (0,-\a/2-\d/2) rectangle (-\t,-\H/2)
+    (0,\a/2-\slitWidth/2) rectangle (-\t,-\a/2+\slitWidth/2)
+    (0,\a/2+\slitWidth/2) rectangle (-\t,\H/2)
+    (0,-\a/2-\slitWidth/2) rectangle (-\t,-\H/2)
     (\L,-\H/2) rectangle (\L+\t,\H/2);
   \fill[mygreen!80!black] (P) circle (0.3*\t) node[right=1,above left=-2] {P};
 
@@ -1666,26 +1663,26 @@
   \def\f{0.9}       % fractional height of projection point
   \def\t{0.15}      % wall thickness
   \def\a{1.6}       % slit distance
-  \def\d{0.20}      % slit size
-  \def\ang{27}      % angle
+  \def\slitWidth{0.20}      % slit size
+  \def\diagramAngle{27}      % angle
   \coordinate (T) at (0,\a/2);
   \coordinate (B) at (0,-\a/2);
   \coordinate (L) at (0,0);
   \coordinate (R) at (\L,0);
-  \coordinate (I) at ({\a/2/tan(\ang)},0);
+  \coordinate (I) at ({\a/2/tan(\diagramAngle)},0);
 
   % LINES
-  \draw[mygreen,thick] (T) --++ (\ang:.8*\l) coordinate (PT) node[midway,below=1,above left=-2] {$r_1$};
-  \draw[mygreen,thick] (B) --++ (\ang:\l) coordinate (PB) node[midway,left=2,below right=-1] {$r_2$};
+  \draw[mygreen,thick] (T) --++ (\diagramAngle:.8*\l) coordinate (PT) node[midway,below=1,above left=-2] {$r_1$};
+  \draw[mygreen,thick] (B) --++ (\diagramAngle:\l) coordinate (PB) node[midway,left=2,below right=-1] {$r_2$};
   \draw[mydarkred,dashed] (T) -- ($(B)!(T)!(PB)$) coordinate (M);
-  \draw[black!60,dashed] (L) --++ (\ang:.9*\l) coordinate (PR);
+  \draw[black!60,dashed] (L) --++ (\diagramAngle:.9*\l) coordinate (PR);
   %\draw[black!60,dashed] (T) --++ (.20*\L,0) coordinate (TR);
   \draw[black!60,dashed] (L) --++ (.6*\L,0) coordinate (LR);
   %\draw[black!60,dashed] (B) --++ (.20*\L,0) coordinate (BR);
 
   % LINE END
-  \lineend{PT}{\ang+70}
-  \lineend{PB}{\ang+70}
+  \lineend{PT}{\diagramAngle+70}
+  \lineend{PB}{\diagramAngle+70}
 
   % ANGLES
   \draw pic[mysmallarr,"\contour{white}{$\theta$}",mydarkred,draw=mydarkred,angle radius=18.8,angle eccentricity=1.38 ]
@@ -1702,14 +1699,14 @@
 
   % MEASURES
   \draw[<->,black] (-2.2*\t,-\a/2) --++ (0,\a) node[midway,fill=white,inner sep=1.5] {$a$};
-  \draw[<->,black] ([shift={({\ang-90}:0.1)}]B) -- ([shift={({\ang-90}:0.1)}]M)
+  \draw[<->,black] ([shift={({\diagramAngle-90}:0.1)}]B) -- ([shift={({\diagramAngle-90}:0.1)}]M)
     node[midway,above=1,below right=-3]{$a\sin\theta$};
 
   % WALL
   \fill[wall]
-    (0,\a/2-\d/2) rectangle (-\t,-\a/2+\d/2)
-    (0,\a/2+\d/2) rectangle (-\t,\H/2)
-    (0,-\a/2-\d/2) rectangle (-\t,-\H/2);
+    (0,\a/2-\slitWidth/2) rectangle (-\t,-\a/2+\slitWidth/2)
+    (0,\a/2+\slitWidth/2) rectangle (-\t,\H/2)
+    (0,-\a/2-\slitWidth/2) rectangle (-\t,-\H/2);
 
     \label{double-slit-path-detail}
 \end{tikzpicture}

@@ -43,7 +43,7 @@
 \end{definition}
 矩估计就是认为总体矩$\doteq$样本矩，从而得到参数的估计。
 \begin{example}{正态分布和Poisson分布的矩估计}{}
-	iid $X_i\sim\Norm(\mu,\sigma^2)$用样本均值$\avg X$和样本2阶中心矩$m_2$估计
+	iid $X_i\sim\NormalDist(\mu,\sigma^2)$用样本均值$\avg X$和样本2阶中心矩$m_2$估计
 	\[
 		\begin{cases}
 			\mu=\avg X,\\
@@ -51,7 +51,7 @@
 		\end{cases}
 	\]
 	\tcblower
-	iid $X_i\sim\Expo(\lambda)$的参数$\lambda$有不止一种估计方法
+	iid $X_i\sim\ExpDist(\lambda)$的参数$\lambda$有不止一种估计方法
 	\[
 		\lambda=\frac1{\avg X}\enspace\text{or}\enspace\lambda=\frac1{\sqrt{m_2}}.
 	\]
@@ -85,11 +85,11 @@
 \begin{definition}{极大似然估计}{maximum likelihood estimation}
 	$\theta$的极大似然估计(maximum likelihood estimation, MLE)为\index{MLE, 极大似然估计}
 	\begin{equation}
-		\theta^\ast:=\mathop{\arg\max}_\theta L(\theta).
+		\theta^\ast:=\argmax_\theta L(\theta).
 	\end{equation}
 \end{definition}
 \begin{example}{正态分布的MLE}{MLE of Normal distribution}
-	iid $X_i\sim\Norm(\mu,\sigma^2)$，$\mu,\sigma^2$未知，则其似然函数为
+	iid $X_i\sim\NormalDist(\mu,\sigma^2)$，$\mu,\sigma^2$未知，则其似然函数为
 	\[
 		L(\mu,\sigma^2)=\prod_{i=1}^n\biggb{\frac1{\sqrt{2\pi}\sigma}\exp\Bigp{-\frac{(X_i-\mu)^2}{2\sigma^2}}}
 	\]
@@ -117,7 +117,7 @@
 	\end{equation}
 \end{remark}
 \begin{example}{均匀分布的MLE}{MLE of Uniform distribution}
-	iid $X_i\sim\Unif(0,\theta)$，$\theta$未知
+	iid $X_i\sim\UnifDist(0,\theta)$，$\theta$未知
 	\[
 		L(\theta)=\begin{cases}
 			\frac1{\theta^n},&0<X_i\leqslant\theta\\
@@ -152,44 +152,44 @@
 	\]
 	$\theta$是$\varTheta$的实现值；$X$是试验(观测)结果，样本分布为
 	\[
-		f_{X|\varTheta}(x|\theta)
+		f_{X\mid\varTheta}(x\mid\theta)
 	\]
 	由Bayes公式，后验分布(posterior distribution)为
 	\begin{equation}
-		f_{\varTheta|X}(\theta|X)=\frac{f_\varTheta(\theta)f_{X|\varTheta}(x|\theta)}{f_X(x)}=\frac{f_\varTheta(\theta)f_{X|\varTheta}(x|\theta)}{\textstyle\int f_\varTheta(\theta)f_{X|\varTheta}(x|\theta)\d\theta}.
+		f_{\varTheta\mid X}(\theta\mid X)=\frac{f_\varTheta(\theta)f_{X\mid\varTheta}(x\mid\theta)}{f_X(x)}=\frac{f_\varTheta(\theta)f_{X\mid\varTheta}(x\mid\theta)}{\textstyle\int f_\varTheta(\theta)f_{X\mid\varTheta}(x\mid\theta)\d\theta}.
 	\end{equation}
-	若$\varTheta\sim\Unif$为均匀分布，称为Bayes法则，也叫同等无知原则。
+	若$\varTheta\sim\UnifDist$为均匀分布，称为Bayes法则，也叫同等无知原则。
 \end{definition}
 
 \begin{example}{二项分布的Bayes估计}{}
 	% $X=n$次掷币正面向上次数，
-	当$\varTheta=\theta$时，$X\sim\Bino(n,\theta)$
+	当$\varTheta=\theta$时，$X\sim\BinDist(n,\theta)$
 	\[
-		f_{X|\varTheta}(x|\theta)=\binom nx\theta^x(1-\theta)^{n-x},\quad x=0,1,\ldots,n.
+		f_{X\mid\varTheta}(x\mid\theta)=\binom nx\theta^x(1-\theta)^{n-x},\quad x=0,1,\ldots,n.
 	\]
-	采用Bayes法则，先验分布$\theta\sim\Unif(0,1)$，则$(X,\varTheta)$的联合分布PDF为
+	采用Bayes法则，先验分布$\theta\sim\UnifDist(0,1)$，则$(X,\varTheta)$的联合分布PDF为
 	\[
-		f_{X,\varTheta}(x,\theta)=f_{\varTheta}(\theta)f_{X|\varTheta}(x|\theta)=\binom nx\theta^x(1-\theta)^{n-x},\quad\theta\in(0,1).
+		f_{X,\varTheta}(x,\theta)=f_{\varTheta}(\theta)f_{X\mid\varTheta}(x\mid\theta)=\binom nx\theta^x(1-\theta)^{n-x},\quad\theta\in(0,1).
 	\]
 	所以
 	\[
-		f_X(x)=\binom nx\int_0^1\theta^x(1-\theta)^{n-x}\d\theta=\binom nx\mathrm B(x+1,n-x+1)=\frac1{n+1}.
+		f_X(x)=\binom nx\int_0^1\theta^x(1-\theta)^{n-x}\d\theta=\binom nx\Beta(x+1,n-x+1)=\frac1{n+1}.
 	\]
 	故后验概率
 	\[
-		f_{\varTheta|X}(\theta|x)=\frac{(n+1)!}{x!(n-x)!}\theta^x(1-\theta)^{n-x}.
+		f_{\varTheta\mid X}(\theta\mid x)=\frac{(n+1)!}{x!(n-x)!}\theta^x(1-\theta)^{n-x}.
 	\]
-	故$\theta\sim\mathrm{Be}(x+1,n-x+1)$，
+	故$\theta\sim\BetaDist(x+1,n-x+1)$，
 	
 	\[
-		\hat\theta=\E(\varTheta|x)=\frac{x+1}{n+2}.
+		\hat\theta=\E(\varTheta\mid x)=\frac{x+1}{n+2}.
 	\]
 	或
 	\[
-		\theta^\ast=\arg\max f_{\varTheta|X}(\theta|x)=\frac xn.
+		\theta^\ast=\argmax f_{\varTheta\mid X}(\theta\mid x)=\frac xn.
 	\]
 	\tcblower
-	Bayes法则的先验分布为$\Unif(0,1)=\mathrm{Be}(1,1)$，若先验分布取为$\mathrm{Be}(a,b)$，则后验分布为$\mathrm{Be}(a+x,b+n-x)$
+	Bayes法则的先验分布为$\UnifDist(0,1)=\BetaDist(1,1)$，若先验分布取为$\BetaDist(a,b)$，则后验分布为$\BetaDist(a+x,b+n-x)$
 \end{example}
 
 \begin{remark}
@@ -248,10 +248,10 @@ $\hat g(X_1,\ldots,X_n)$是$g(\theta)$的无偏估计当
 		\Var(S^2)=\biggb{\frac{\nu_4}n-\frac{n-3}{n(n-1)}}\sigma^4.
 	\end{equation}
 	比如正态分布的峰度系数$\nu_4=3$，$\Var(S^2)=2\sigma^4/(n-1)$。
-	% 特别地，正态分布的$\Var(S^2)$也可以通过$(n-1)S^2/\sigma^2\sim\chi^2(n-1)$来方便计算。
+	% 特别地，正态分布的$\Var(S^2)$也可以通过$(n-1)S^2/\sigma^2\sim\ChiSqDist(n-1)$来方便计算。
 \end{example}
 \begin{example}{均匀分布的无偏估计}{unbiased estimation of Uniform distribution}
-	在\exmref{exm:MLE of Uniform distribution} 中给出了均匀分布$\Unif(0,
+	在\exmref{exm:MLE of Uniform distribution} 中给出了均匀分布$\UnifDist(0,
 	\theta)$的MLE 
 	\[
 		\theta^\ast=\max(X_1,\ldots,X_n).
@@ -346,12 +346,12 @@ $\hat g(X_1,\ldots,X_n)$是$g(\theta)$的无偏估计当
 	其中$I_n(\theta)$是Fisher信息量，见\dfnref{dfn:Fisher information}
 \end{theorem}
 \begin{example}{低偏倚换方差}{}
-	总体$X\sim\Norm(\mu,\sigma^2)$，样本方差$S^2$是无偏的，而样本二阶矩$m_2$是有偏的，
+	总体$X\sim\NormalDist(\mu,\sigma^2)$，样本方差$S^2$是无偏的，而样本二阶矩$m_2$是有偏的，
 	但MSE
 	\[
 		\E\bigb{(m_2-\sigma^2)^2}<\E\bigb{(S^2-\sigma^2)^2}.
 	\]
-	由于正态分布的样本方差满足$(n-1)S^2/\sigma^2\sim\chi^2(n-1)$，故
+	由于正态分布的样本方差满足$(n-1)S^2/\sigma^2\sim\ChiSqDist(n-1)$，故
 	\begin{equation}
 		\E\bigb{(S^2-\sigma^2)^2}=\Var(S^2)+0=\biggp{\frac{\sigma^2}{n-1}}^2\cdot 2(n-1)=\frac{2}{n-1}\sigma^4.
 	\end{equation}
@@ -407,11 +407,11 @@ WLLN指出，$\avg X$为$\mu$的一个相合估计。相合性为良好点估计
 \end{definition}
 \begin{compactenum}
 	\item 有时，取$\sigma_n^2=\Var(\hat\theta)$，比如用$\avg X$估计$\mu$；
-	\item $n\gg 1$时，$\hat\theta\dotsim\Norm(\theta,\sigma_n^2).$；
+	\item $n\gg 1$时，$\hat\theta\dotsim\NormalDist(\theta,\sigma_n^2).$；
 	\item 原始分布（即$X_i$的分布） $f$满足光滑性条件，则$\exists\sigma_n>0$使得
 	\begin{equation}
 		\label{MLE-dto-N01}
-		\frac{\theta^\ast-\theta}{\sigma_n}\dto\Norm(0,1).
+		\frac{\theta^\ast-\theta}{\sigma_n}\dto\NormalDist(0,1).
 	\end{equation}
 \end{compactenum}
 \begin{definition}{Fisher信息量}{Fisher information}
@@ -453,7 +453,7 @@ Fisher信息量与样本容量有关：
 	\]
 	CLT说明，$\avg Y$是渐进正态的，故分子
 	\[
-		\frac1{\sqrt n}\ell'(\theta)=\sqrt n\,\avg Y\dto\Norm\bigp{0,I(\theta)}.
+		\frac1{\sqrt n}\ell'(\theta)=\sqrt n\,\avg Y\dto\NormalDist\bigp{0,I(\theta)}.
 	\]
 	分母
 	\[
@@ -462,7 +462,7 @@ Fisher信息量与样本容量有关：
 
 	故$\theta^\ast-\theta$是渐进正态的：
 	\[
-		\sqrt n(\theta^\ast-\theta)\dto\Norm\Bigp{0,\frac1{I(\theta)}}.
+		\sqrt n(\theta^\ast-\theta)\dto\NormalDist\Bigp{0,\frac1{I(\theta)}}.
 	\]
 	式\eqref{MLE-dto-N01}中的 
 	\[
@@ -490,7 +490,7 @@ Fisher信息量与样本容量有关：
 
 	\item Bayes估计：将$\theta$理解成一个随机变量$\varTheta$的实现值。$\varTheta$刻画了对$\theta$的认知
 	\[
-		f_\varTheta(\theta)\enspace\to\enspace f_{\varTheta|X}(\theta|x),
+		f_\varTheta(\theta)\enspace\to\enspace f_{\varTheta\mid X}(\theta\mid x),
 	\]
 	后验众数v.s. MLE。Bayes假设二者相等。
 \end{compactenum}
@@ -514,16 +514,16 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\end{compactenum}
 \end{method}
 \begin{example}{正态分布的区间估计}{}
-	$X\sim\Norm(\mu,\sigma^2)$的$\sigma^2$已知，$\mu$未知，由$\avg X\sim\Norm(\mu,\sigma^2/n)$，
+	$X\sim\NormalDist(\mu,\sigma^2)$的$\sigma^2$已知，$\mu$未知，由$\avg X\sim\NormalDist(\mu,\sigma^2/n)$，
 	取枢轴变量
 	\[
-		Z:=\frac{\avg X-\mu}{\sigma/\sqrt n}\sim\Norm(0,1)
+		Z:=\frac{\avg X-\mu}{\sigma/\sqrt n}\sim\NormalDist(0,1)
 	\]
 	取对称的上下限
 	\[
 		\P(\abs Z\geqslant z_{\alpha/2})=\alpha\implies\Phi(z_{\alpha/2})=1-\alpha/2
 	\]
-	其中$z_{\alpha/2}$是$\Norm(0,1)$的上$\alpha/2$分位数。
+	其中$z_{\alpha/2}$是$\NormalDist(0,1)$的上$\alpha/2$分位数。
 	故$\mu$的$(1-\alpha)$置信区间为
 	\begin{equation}
 		\Bigp{\avg X\pm z_{\alpha/2}\frac\sigma{\sqrt n}}.
@@ -534,7 +534,7 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\tcblower
 	若$\mu,\sigma^2$均未知，需要用$S^2$估计$\sigma^2$，由式(\ref{sample-chi2})
 	\[
-		\chi^2:=\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1),
+		\chi^2:=\frac{(n-1)S^2}{\sigma^2}\sim\ChiSqDist(n-1),
 	\]
 	卡方分布并不对称，我们选择等尾置信区间，即
 	\[
@@ -547,7 +547,7 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 
 	对$\mu$的估计，由式\eqref{sample-t}
 	\[
-		t:=\frac{\avg X-\mu}{S/\sqrt n}\sim\mathrm t(n-1).
+		t:=\frac{\avg X-\mu}{S/\sqrt n}\sim\TDist(n-1).
 	\]
 	%\P\bigp{\abs G\geqslant t_{\alpha/2}(n-1)}=\alpha.
 	可得$\mu$的$(1-\alpha)$置信区间为
@@ -572,14 +572,14 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\]
 \end{example}
 \begin{example}{两个正态总体}{}
-	$X\sim\Norm(\mu_1,\sigma^2),Y\sim\Norm(\mu_2,\sigma^2)$独立，$\mu_1,\mu_2,\sigma^2$未知，估计$\mu_1-\mu_2$
+	$X\sim\NormalDist(\mu_1,\sigma^2),Y\sim\NormalDist(\mu_2,\sigma^2)$独立，$\mu_1,\mu_2,\sigma^2$未知，估计$\mu_1-\mu_2$
 	\begin{align*}
-		\avg X-\mu_1-(\avg Y-\mu_2)&\sim\Norm\Bigp{0,\frac{\sigma^2}{n_1}+\frac{\sigma^2}{n_2}};\\
-		\frac{(n_1-1)S_1^2}{\sigma^2}+\frac{(n_2-1)S_2^2}{\sigma^2}&\sim\chi^2(n_1+n_2-2).
+		\avg X-\mu_1-(\avg Y-\mu_2)&\sim\NormalDist\Bigp{0,\frac{\sigma^2}{n_1}+\frac{\sigma^2}{n_2}};\\
+		\frac{(n_1-1)S_1^2}{\sigma^2}+\frac{(n_2-1)S_2^2}{\sigma^2}&\sim\ChiSqDist(n_1+n_2-2).
 	\end{align*}
 	利用t分布的定义，构造枢轴变量：
 	\[
-		H:=\frac{\avg X-\mu_1-(\avg Y-\mu_2)}{S_w\sqrt{\frac1{n_1}+\frac1{n_2}}}\sim\mathrm t(n_1+n_2-2)
+		H:=\frac{\avg X-\mu_1-(\avg Y-\mu_2)}{S_w\sqrt{\frac1{n_1}+\frac1{n_2}}}\sim\TDist(n_1+n_2-2)
 	\]
 	其中 
 	\[
@@ -597,15 +597,15 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\[
 		\frac{684}{1200}\doteq 0.57
 	\]
-	给出$p$的一个95\% 置信区间。
+	给出$p$的一个\qty{95}{\percent} 置信区间。
 
-	近似有放回：$X_i\sim\Bino(p)$ iid，$P_n=\avg X$，故
+	近似有放回：$X_i\sim\BernDist(p)$ iid，$P_n=\avg X$，故
 	\[
 		\E(P_n)=p,\quad\Var(P_n)=\frac{p(1-p)}n
 	\]
 	由CLT，
 	\[
-		\frac{P_n-p}{\sqrt{p(1-p)/n}}\dotsim\Norm(0,1).
+		\frac{P_n-p}{\sqrt{p(1-p)/n}}\dotsim\NormalDist(0,1).
 	\]
 	由于$p$未知，这个方法不能直接用，需要进行一个好的估计。
 	\begin{compactenum}[I]
@@ -615,9 +615,9 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 			\]
 			可认为
 			\[
-				\frac{P_n-p}{\hat{se}}\dotsim\Norm(0,1).
+				\frac{P_n-p}{\hat{se}}\dotsim\NormalDist(0,1).
 			\]
-			$p$的95\%置信区间
+			$p$的\qty{95}{\percent}置信区间
 			\[
 				(P_n\pm z_{\alpha/2}\hat{se})=(0.542,0598)
 			\]
@@ -638,7 +638,7 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 \begin{example}{相合估计}{}
 	上例，极大似然估计$P^\ast=P_n$，由MLE的渐进正态性
 	\[
-		\frac{P^\ast-P}{\sigma_n^2}\dotsim\Norm(0,1)
+		\frac{P^\ast-P}{\sigma_n^2}\dotsim\NormalDist(0,1)
 	\]
 	$f(X_i;p)=p^{X_i}(1-p)^{1-X_i}$，故
 	\[
@@ -650,36 +650,36 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\]
 	则
 	\[
-		\frac{P^\ast-p}{1/\sqrt{nI(p)}}\dotsim\Norm(0,1).
+		\frac{P^\ast-p}{1/\sqrt{nI(p)}}\dotsim\NormalDist(0,1).
 	\]
 	可以用$I(P^\ast)$估计$I(p)$，即
 	\[
-		\frac{P_n-p}{\sqrt{P_n(1-P_n)/n}}\dotsim\Norm(0,1)
+		\frac{P_n-p}{\sqrt{P_n(1-P_n)/n}}\dotsim\NormalDist(0,1)
 	\]
 \end{example}
 \begin{example}{两个正态总体的相合估计}{}
-	$X\sim\Norm(\mu_1,\sigma_1^2),Y\sim\Norm(\mu_2,\sigma_2^2)$独立，自然
+	$X\sim\NormalDist(\mu_1,\sigma_1^2),Y\sim\NormalDist(\mu_2,\sigma_2^2)$独立，自然
 	\[
-		\frac{\avg X-\mu_1-(\avg Y-\mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}}\sim\Norm(0,1).
+		\frac{\avg X-\mu_1-(\avg Y-\mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}}\sim\NormalDist(0,1).
 	\]
 	可估计
 	\[
-		\frac{\avg X-\mu_1-(\avg Y-\mu_2)}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}\dotsim\Norm(0,1).
+		\frac{\avg X-\mu_1-(\avg Y-\mu_2)}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}\dotsim\NormalDist(0,1).
 	\]
 \end{example}
 \section{Beyas区间估计}
-有了$\varTheta$的后验分布$f_{\varTheta|X}(\theta|x)$
+有了$\varTheta$的后验分布$f_{\varTheta\mid X}(\theta\mid x)$
 \[
-	\P(a<\varTheta<b|x)=1-\alpha.
+	\P(a<\varTheta<b\mid x)=1-\alpha.
 \]
 
 最大后验区间满足
 \[
-	f_{\varTheta|X}(a|x)=f_{\varTheta|X}(b|x).
+	f_{\varTheta\mid X}(a\mid x)=f_{\varTheta\mid X}(b\mid x).
 \]
 等尾可信区间满足
 \[
-	\P(\varTheta<a|x)=\P(\varTheta>b|x)=\frac\alpha{2}.
+	\P(\varTheta<a\mid x)=\P(\varTheta>b\mid x)=\frac\alpha{2}.
 \]
 \paragraph{Review}
 \begin{compactenum}
@@ -690,7 +690,7 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\]
 	$(\hat\theta_1,\hat\theta_2)$——随机区间。当得到样本具体观测值$(x_1,\ldots,x_n)$代入$\hat\theta_1,\hat\theta_2$得到具体区间。
 	\[
-		\P(a<\varTheta<b|x)=1-\alpha.
+		\P(a<\varTheta<b\mid x)=1-\alpha.
 	\]
 	后验分布
 	\item 小样本方法v.s.大样本方法：精确分布v.s.近似分布

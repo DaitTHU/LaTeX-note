@@ -36,7 +36,7 @@
 \end{remark}
 
 \begin{definition}{线性扩张}{linear span}
-	$S\subset V$的线性扩张(linear span)是$S$中向量的所有有限线性组合的集合，记作$\lspan(S)$；约定$\lspan(\varnothing)=\{0\}$。
+	$S\subset V$的线性扩张(linear span)是$S$中向量的所有有限线性组合的集合，记作$\Span(S)$；约定$\Span(\varnothing)=\{0\}$。
 \end{definition}
 
 \begin{corollary}
@@ -103,38 +103,38 @@
 
 给定矩阵$A\in\FF^{m\times n}$，可由其得到四个子空间：列空间、行空间、零空间和左零空间。
 \begin{definition}{列空间和行空间}{column space}
-	矩阵$A$的列空间(column space)是$A$的所有列的线性组合的集合，记作$\C(A)$：
+	矩阵$A$的列空间(column space)是$A$的所有列的线性组合的集合，记作$\colsp(A)$：
 	\begin{equation}
-		\C(A)\equiv\set{Ax}{x\in\FF^n}.
+		\colsp(A)\equiv\set{Ax}{x\in\FF^n}.
 	\end{equation}
 	\tcblower
 	矩阵$A$的行空间(row space)是$A$的所有行的线性组合的集合，%由于转置并不影响性质，行空间
-	可用$\C(A\tp)$表示。
+	可用$\colsp(A\transp)$表示。
 \end{definition}
 
 \begin{corollary}
-	$\C(A)$是$\FF^m$的子空间，$\C(A\tp)$是$\FF^n$的子空间。
+	$\colsp(A)$是$\FF^m$的子空间，$\colsp(A\transp)$是$\FF^n$的子空间。
 \end{corollary}
 
 \begin{remark}
-	线性方程组$Ax=b$有解$\iff b\in\C(A)$。
+	线性方程组$Ax=b$有解$\iff b\in\colsp(A)$。
 \end{remark}
 
 \begin{definition}{零空间和左零空间}{null space}
-	矩阵$A$的零空间(null space)是所有满足$Ax=0$的$x$的集合，记作$\N(A)$：
+	矩阵$A$的零空间(null space)是所有满足$Ax=0$的$x$的集合，记作$\nullsp(A)$：
 	\begin{equation}
-		\N(A)\equiv\set x{Ax=0}.
+		\nullsp(A)\equiv\set x{Ax=0}.
 	\end{equation}
 	\tcblower
-	矩阵$A$的左零空间(left null space)是所有满足$x\tp A=0$的$x$的集合，可用$\N(A\tp)$表示。
+	矩阵$A$的左零空间(left null space)是所有满足$x\transp A=0$的$x$的集合，可用$\nullsp(A\transp)$表示。
 \end{definition}
 
 \begin{corollary}
-	$\N(A)$是$\FF^n$的子空间，$\N(A\tp)$是$\FF^m$的子空间。
+	$\nullsp(A)$是$\FF^n$的子空间，$\nullsp(A\transp)$是$\FF^m$的子空间。
 \end{corollary}
 
 \begin{example}{子空间的基}{}
-	$\N(A)$的基：显然$\N(A)=\N(\rref(A))$，而$\rref(A)$的每个自由列各给出一个$\N(\rref(A))$的基向量。若第$j$列为自由列，则其对应的基$x$的分量为：
+	$\nullsp(A)$的基：显然$\nullsp(A)=\nullsp(\rref(A))$，而$\rref(A)$的每个自由列各给出一个$\nullsp(\rref(A))$的基向量。若第$j$列为自由列，则其对应的基$x$的分量为：
 	\[
 		x_i=\begin{cases}
 			\delta_{ij},&\text{第$i$列为自由列}\\
@@ -143,7 +143,7 @@
 	\]
 	%$\dim(\rref(A))=\rref(A)$中自由列的数量；
 	\tcblower
-	$\C(A)$的基：先找出$\rref(A)$的主元列编号，再取原矩阵$A$中相应编号的列。行变换一般改变列空间，不能直接取$\rref(A)$的列作为$\C(A)$的基。
+	$\colsp(A)$的基：先找出$\rref(A)$的主元列编号，再取原矩阵$A$中相应编号的列。行变换一般改变列空间，不能直接取$\rref(A)$的列作为$\colsp(A)$的基。
 \end{example}
 
 \begin{example}
@@ -224,7 +224,7 @@
 \begin{definition}{矩阵的秩}{rank}
 	矩阵$A$的秩(rank)定义为列空间的维数：%\footnote{后面很快会证明行空间列空间维数相等。}：
 	\[
-		\rank(A):=\dim(\C(A)).
+		\rank(A):=\dim(\colsp(A)).
 	\]
 	若矩阵的秩等于行数，则称其行满秩(full row rank)；
 	若秩等于列数，则称其列满秩(full column rank)。
@@ -235,7 +235,7 @@
 	\[
 		x=x_{\mathrm p}+x_{\mathrm n},
 	\]
-	%其中$x_{\mathrm n}\in\N(A)$，
+	%其中$x_{\mathrm n}\in\nullsp(A)$，
 	特解满足$Ax_{\mathrm p}=b$，其各个分量可以由约化的增广矩阵$[\rref(A)\enspace b']$得到：
 	\[
 		(x_{\mathrm p})_i=\begin{cases}
@@ -248,51 +248,51 @@
 \begin{corollary}
 	~
 	\begin{itemize}
-		\item 若$A$列满秩，则$\rref(A)$没有自由列，$\N(A)=\{0\}$。当$b\in\C(A)$时有唯一解，否则无解；
-		\item 若$A$行满秩，则$\rref(A)$没有零行，$\C(A)=\FF^m$，$\forall b$都有解，有唯一解或无穷多解。
+		\item 若$A$列满秩，则$\rref(A)$没有自由列，$\nullsp(A)=\{0\}$。当$b\in\colsp(A)$时有唯一解，否则无解；
+		\item 若$A$行满秩，则$\rref(A)$没有零行，$\colsp(A)=\FF^m$，$\forall b$都有解，有唯一解或无穷多解。
 	\end{itemize}
 \end{corollary}
 \paragraph{四个子空间的维度}已经知道，初等行变换就是用初等矩阵$E$左乘$A$，相应的，列变换就是$E$右乘$A$。
 \begin{theorem}{初等变换和子空间}{}
 	\begin{compactitem}
-		\item $\N(A)=\N(EA)$，因为
+		\item $\nullsp(A)=\nullsp(EA)$，因为
 		\[
 			Ax=0\iff EAx=0.
 		\]
-		\item $\dim(\C(A))=\dim(\C(EA))$，因为
+		\item $\dim(\colsp(A))=\dim(\colsp(EA))$，因为
 		\[
-			\{v_i\}\text{~是~}\C(A)\text{~一组基}\iff\{Ev_i\}\text{~是~}\C(EA)\text{~一组基}.
+			\{v_i\}\text{~是~}\colsp(A)\text{~一组基}\iff\{Ev_i\}\text{~是~}\colsp(EA)\text{~一组基}.
 		\]
-		\item $\C(A)=\C(AE)$，因为
+		\item $\colsp(A)=\colsp(AE)$，因为
 		\[
-			AE\text{~的每一列}\in\C(A)\text{~且~}A=(AE)E\iv\text{~的每一列}\in\C(AE)
+			AE\text{~的每一列}\in\colsp(A)\text{~且~}A=(AE)E\inv\text{~的每一列}\in\colsp(AE)
 		\]
-		\item $\dim(\N(A))=\dim(\N(AE))$，因为可由$Ax=0\iff AE(E\iv x)=0$推出
+		\item $\dim(\nullsp(A))=\dim(\nullsp(AE))$，因为可由$Ax=0\iff AE(E\inv x)=0$推出
 		\[
-			\{v_i\}\text{~是~}\N(A)\text{~一组基}\iff\{E\iv v_i\}\text{~是~}\N(AE)\text{~一组基}
+			\{v_i\}\text{~是~}\nullsp(A)\text{~一组基}\iff\{E\inv v_i\}\text{~是~}\nullsp(AE)\text{~一组基}
 		\]
 	\end{compactitem}
 \end{theorem}
 \begin{corollary}
-	矩阵$A$在初等变换下，$\dim(\C(A))$和$\dim(\N(A))$均不变，而行变换下$\N(A)$不变，列变换下$\C(A)$不变。
+	矩阵$A$在初等变换下，$\dim(\colsp(A))$和$\dim(\nullsp(A))$均不变，而行变换下$\nullsp(A)$不变，列变换下$\colsp(A)$不变。
 	因此，可以将$A$先由行变换为$\rref(A)$，再列变换为
 	\[
 		\tilde I=\begin{bmatrix}
 			I_r&0\\0&0
 		\end{bmatrix}\in\FF^{m\times n}.
 	\]
-	显然，$\tilde I$的行秩$\dim(\C(\tilde I\tp))=$列秩$\dim(\C(\tilde I))=r$，且
+	显然，$\tilde I$的行秩$\dim(\colsp(\tilde I\transp))=$列秩$\dim(\colsp(\tilde I))=r$，且
 	\begin{align*}
-		\dim(\C(\tilde I\tp))+\dim(\N(\tilde I))&=n;\\
-		\dim(\C(\tilde I))+\dim(\N(\tilde I\tp))&=m.
+		\dim(\colsp(\tilde I\transp))+\dim(\nullsp(\tilde I))&=n;\\
+		\dim(\colsp(\tilde I))+\dim(\nullsp(\tilde I\transp))&=m.
 	\end{align*}
 \end{corollary}
 % 以上的这些量在初等变化下都不变，故
 \begin{theorem}{线性代数基本定理·一}{fundamental theorems of linear algebra I}
 	\begin{compactenum}
-		\item 行秩=列秩：$\rank(A)=\dim(\C(A))=\dim(\C(A\tp));$
-		\item $\dim(\C(A\tp))+\dim(\N(A))=n;$
-		\item $\dim(\C(A))+\dim(\N(A\tp))=m.$
+		\item 行秩=列秩：$\rank(A)=\dim(\colsp(A))=\dim(\colsp(A\transp));$
+		\item $\dim(\colsp(A\transp))+\dim(\nullsp(A))=n;$
+		\item $\dim(\colsp(A))+\dim(\nullsp(A\transp))=m.$
 	\end{compactenum}
 \end{theorem}
 \begin{corollary}
@@ -314,7 +314,7 @@
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	设$\C(A),\C(B)$的一组基分别为$\{a_1,\ldots,a_{\rank(A)}\}$和$\{b_1,\ldots,b_{\rank(B)}\}$，则$A+B$中的列必然可以由$\{a_1,\ldots,a_{\rank(A)},b_1,\ldots,b_{\rank(B)}\}$的线性组合表示出，故不等式成立。
+	设$\colsp(A),\colsp(B)$的一组基分别为$\{a_1,\ldots,a_{\rank(A)}\}$和$\{b_1,\ldots,b_{\rank(B)}\}$，则$A+B$中的列必然可以由$\{a_1,\ldots,a_{\rank(A)},b_1,\ldots,b_{\rank(B)}\}$的线性组合表示出，故不等式成立。
 \end{proof}
 \begin{theorem}{Sylvester不等式}{Sylvester inequality}
 	对$A\in\FF^{m\times n},B\in\FF^{n\times p}$有

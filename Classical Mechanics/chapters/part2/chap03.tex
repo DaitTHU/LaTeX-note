@@ -4,11 +4,11 @@
 刚体近似要求各质点间距离不随时间变化，适用于形变对所研究运动可忽略的情形。
 把参考点选在质心，任一点的速度为
 \begin{equation}
- \bm v_a=\dot{\bm R}+\bm\omega\times\bm\rho_a.
+ \bm v_a=\dotbm{R}+\bm\omega\times\bm\rho_a.
 \end{equation}
 利用质心关系消去交叉项，动能分解为
 \begin{equation}
- T=\frac12M\dot{\bm R}^{\,2}+\frac12\bm\omega\tp I\bm\omega,\qquad
+ T=\frac12M\dotbm{R}^{\,2}+\frac12\bm\omega\transp I\bm\omega,\qquad
  I_{ij}=\sum_a m_a(\rho_a^2\delta_{ij}-\rho_{ai}\rho_{aj}).
  \label{eq:cm-inertia}
 \end{equation}
@@ -20,9 +20,9 @@
 对通常三维刚体它们为正；理想直线质量分布绕自身轴的惯量可以为零。
 关于与质心相距$\bm a$的点、保持平行坐标轴，平行轴定理是
 \begin{equation}
- I_O=I_{\rm CM}+M(a^2\mathbf 1-\bm a\bm a\tp).
+ I_O=I_\CM+M(a^2\mathbf 1-\bm a\bm a\transp).
 \end{equation}
-其中$\mathbf 1$为单位矩阵。特别地，两条平行轴相距垂直距离$d$时，$I_O=I_{\rm CM}+Md^2$。
+其中$\mathbf 1$为单位矩阵。特别地，两条平行轴相距垂直距离$d$时，$I_O=I_\CM+Md^2$。
 式\eqref{eq:cm-inertia}的纯转动形式也适用于惯性系中固定的支点，
 但不能将任意加速点都当成固定支点使用所有转动公式。
 
@@ -30,7 +30,7 @@
 选固定在刚体上的主轴。此坐标系中$I$不随时间变化，
 但把角动量的惯性系导数换成随体导数时必须加上$\bm\omega\times\bm\ell$：
 \begin{equation}
- \bm\tau=I\dot{\bm\omega}+\bm\omega\times(I\bm\omega).
+ \bm\tau=I\dotbm{\omega}+\bm\omega\times(I\bm\omega).
 \end{equation}
 分量形式为
 \begin{align}
@@ -40,7 +40,7 @@
  \label{eq:cm-euler-rigid}
 \end{align}
 这里的力矩和惯量均关于质心，或关于一个惯性系中的固定支点。
-点表示随体系分量对时间的导数。把$\bm\tau=I\dot{\bm\omega}$用于一般三维刚体会漏掉基矢转动。
+点表示随体系分量对时间的导数。把$\bm\tau=I\dotbm{\omega}$用于一般三维刚体会漏掉基矢转动。
 
 \section{自由刚体与中间轴不稳定}
 无外力矩时，惯性系中的$\bm\ell$固定，转动能$T$也守恒：
@@ -74,7 +74,7 @@
 
 对自由对称陀螺$I_1=I_2=I_\perp$，$\omega_3$恒定，且
 \begin{equation}
- \dv{}{t}(\omega_1+\i\omega_2)
+ \dd{t}(\omega_1+\i\omega_2)
  =\i\frac{I_3-I_\perp}{I_\perp}\omega_3(\omega_1+\i\omega_2).
 \end{equation}
 这是角速度横向分量相对随体轴的转动频率。
@@ -96,22 +96,22 @@
 守恒。$\ell_z$是空间竖直角动量，$\ell_3$是随体对称轴分量。
 消去两个角速度后，能量变成一维章动问题：
 \begin{equation}
- E=\frac12I_\perp\dot\theta^2+U_{\rm eff}(\theta),\quad
- U_{\rm eff}=\frac{(\ell_z-\ell_3\cos\theta)^2}{2I_\perp\sin^2\theta}
+ E=\frac12I_\perp\dot\theta^2+U_\eff(\theta),\quad
+ U_\eff=\frac{(\ell_z-\ell_3\cos\theta)^2}{2I_\perp\sin^2\theta}
  +\frac{\ell_3^2}{2I_3}+Mgl\cos\theta.
 \end{equation}
 对于$0<\theta<\pi$，有效势的转向点给出章动范围；Euler角在两极退化，需单独取极限分析。
 此处由能量守恒降维是合法的，但把守恒动量直接代回$L$并对剩余坐标变分一般不合法；
 固定动量的变分降维需要Routh变换。
 
-匀速进动满足$\dot\theta=0$、$\dot\phi=\Omega_{\rm p}$。
+匀速进动满足$\dot\theta=0$、$\dot\phi=\Omega_{\mathrm{p}}$。
 在$\sin\theta\ne0$时，$\theta$方程给出
 \begin{equation}
- I_\perp\Omega_{\rm p}^2\cos\theta-\ell_3\Omega_{\rm p}+Mgl=0.
+ I_\perp\Omega_{\mathrm{p}}^2\cos\theta-\ell_3\Omega_{\mathrm{p}}+Mgl=0.
 \end{equation}
-高速自转、慢进动支满足$|I_\perp\Omega_{\rm p}\cos\theta|\ll|\ell_3|$，于是
+高速自转、慢进动支满足$\abs{I_\perp\Omega_{\mathrm{p}}\cos\theta}\ll\abs{\ell_3}$，于是
 \begin{equation}
- \Omega_{\rm p}\simeq\frac{Mgl}{\ell_3}.
+ \Omega_{\mathrm{p}}\simeq\frac{Mgl}{\ell_3}.
 \end{equation}
 这不是任意初态的精确解；通常还会叠加章动，快速进动支也被此近似排除。
 

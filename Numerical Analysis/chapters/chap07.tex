@@ -301,16 +301,16 @@
 \]
 下一项$x_{k+1}-x^*\approx\varphi'(x^*)(x_k-x^*)$，故可联立消掉$\varphi'(x^*)$，得到：
 \begin{equation}
-    x^*\approx x_k-\frac{(x_{k+1}-x_k)^2}{x_{k+2}-2x_{k+1}+x_k}\equiv x_k-\frac{\D x_k^2}{\D^2 x_k}.
+    x^*\approx x_k-\frac{(x_{k+1}-x_k)^2}{x_{k+2}-2x_{k+1}+x_k}\equiv x_k-\frac{\Delta x_k^2}{\Delta^2 x_k}.
 \end{equation}
-其中差分$\D x_k=x_{k+1}-x_k$，二阶差分$\D^2x_k=\D x_{k+1}-\D x_k$。和微分记号一样，约定$\D x_k^2\equiv(\D x_k)^2$，而$\D(x_k^2)$需要加括号。
+其中差分$\Delta x_k=x_{k+1}-x_k$，二阶差分$\Delta^2x_k=\Delta x_{k+1}-\Delta x_k$。和微分记号一样，约定$\Delta x_k^2\equiv(\Delta x_k)^2$，而$\Delta(x_k^2)$需要加括号。
 
 \begin{theorem}
     {Aitken加速方法}{Aitken}
     若$x_k$至少线性收敛到$x^*$，则可定义
     \begin{equation}
         \label{eqn:Aitken}
-        x_k':=x_k-\frac{\D x_k^2}{\D^2x_k},
+        x_k':=x_k-\frac{\Delta x_k^2}{\Delta^2x_k},
     \end{equation}
     并且$x_k'$收敛比$x_k$快：
     \[
@@ -325,10 +325,10 @@
     \]
     则
     \begin{align*}
-        \D x_k&=e_{k+1}-e_k=e_k[(\lambda-1)+\delta_k],\\
-        \D^2x_k&=e_{k+2}-2e_{k+1}+e_k=e_k[(\lambda+\delta_{k+1})(\lambda+\delta_k)-2(\lambda+\delta_k)+1]=e_k[(\lambda-1)^2+\mu_k],
+        \Delta x_k&=e_{k+1}-e_k=e_k[(\lambda-1)+\delta_k],\\
+        \Delta^2x_k&=e_{k+2}-2e_{k+1}+e_k=e_k[(\lambda+\delta_{k+1})(\lambda+\delta_k)-2(\lambda+\delta_k)+1]=e_k[(\lambda-1)^2+\mu_k],
     \end{align*}
-    其中$\mu_k=\lambda(\delta_{k+1}+\delta_k)-2\delta_k+\delta_k\delta_{k+1}\to 0$。当$k$充分大时，$\D^2x_k\neq 0$，可定义$x_k'$，且
+    其中$\mu_k=\lambda(\delta_{k+1}+\delta_k)-2\delta_k+\delta_k\delta_{k+1}\to 0$。当$k$充分大时，$\Delta^2x_k\neq 0$，可定义$x_k'$，且
     \[
         \lim_{k\to\infty}\frac{x_k'-x^*}{x_k-x^*}=\lim_{k\to\infty}1-\frac{[(\lambda-1)+\delta_k]^2}{(\lambda-1)^2+\mu_k}=0.
         \qedhere
@@ -490,7 +490,7 @@
     {Newton法(向量形式)}{}
     给定$x^{(0)}$，计算 
     \[
-        x^{(k+1)}=x^{(k)}-F'(x^{(k)})\iv F(x^{(k)}).
+        x^{(k+1)}=x^{(k)}-F'(x^{(k)})\inv F(x^{(k)}).
     \]
 \end{theorem}
 
@@ -502,7 +502,7 @@
     {修正的Newton法}{}
     将Jacobi矩阵$F'(x^{(k)})$替换为矩阵$A^{(k)}$：
     \[
-        x^{(k+1)}=x^{(k)}-{A^{(k)}}\iv F(x^{(k)}),
+        x^{(k+1)}=x^{(k)}-{A^{(k)}}\inv F(x^{(k)}),
     \]
     矩阵$A^{(k)}$满足拟Newton方程：
     \begin{equation}
@@ -510,23 +510,23 @@
     \end{equation}
     显然$A^{(k)}$的取法并不唯一，可以迭代地写成
     \[
-        A^{(k+1)}=A^{(k)}+\D A^{(k)},
+        A^{(k+1)}=A^{(k)}+\Delta A^{(k)},
     \]
     且$\rank(A^{(k)})$一般为1或2，即$A^{(k+1)}$是$A^{(k)}$的一个低秩修正。
 \end{theorem}
 
 \begin{theorem}
     {Broyden秩1方法}{}
-    令$p^{(k)}=x^{(k+1)}-x^{(k)},\;q^{(k)}=F(x^{(k+1)})-F(x^{(k)})$，设$\D A^{(k)}=u^{(k)}{v^{(k)}}\tp$是秩1矩阵，则
+    令$p^{(k)}=x^{(k+1)}-x^{(k)},\;q^{(k)}=F(x^{(k+1)})-F(x^{(k)})$，设$\Delta A^{(k)}=u^{(k)}{v^{(k)}}\transp$是秩1矩阵，则
     \[
-        (A^{(k)}+u^{(k)}{v^{(k)}}\tp)p^{(k)}=q^{(k)}\implies u^{(k)}=\frac{q^{(k)}-A^{(k)}p^{(k)}}{{v^{(k)}}\tp p^{(k)}},
+        (A^{(k)}+u^{(k)}{v^{(k)}}\transp)p^{(k)}=q^{(k)}\implies u^{(k)}=\frac{q^{(k)}-A^{(k)}p^{(k)}}{{v^{(k)}}\transp p^{(k)}},
     \]
     可令$v^{(k)}=p^{(k)}$，则 
     \begin{subequations}
         \begin{align}
-            x^{(k+1)}&=x^{(k)}-{A^{(k)}}\iv F(x^{(k)}),\\
-            \D A^{(k)}&=\frac{(q^{(k)}-A^{(k)}p^{(k)}){p^{(k)}}\tp}{\norm{p^{(k)}}^2},\\
-            A^{(k+1)}&=A^{(k)}+\D A^{(k)}.
+            x^{(k+1)}&=x^{(k)}-{A^{(k)}}\inv F(x^{(k)}),\\
+            \Delta A^{(k)}&=\frac{(q^{(k)}-A^{(k)}p^{(k)}){p^{(k)}}\transp}{\norm{p^{(k)}}^2},\\
+            A^{(k+1)}&=A^{(k)}+\Delta A^{(k)}.
         \end{align}
     \end{subequations}
 \end{theorem}

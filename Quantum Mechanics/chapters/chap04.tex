@@ -31,7 +31,7 @@ $\omega$是小振幅角频率。经典弹簧振子的位移为 $x=A\cos(\omega t
 \begin{equation}
     x+\frac{\i p}{m\omega}=A\e^{-\i(\omega t+\phi)},\qquad
     H_{\mathrm{cl}}=\frac{m\omega^2}{2}
-        \bigg|x+\frac{\i p}{m\omega}\bigg|^2 .
+        \biggabs{x+\frac{\i p}{m\omega}}^2 .
 \end{equation}
 相应地，在量子问题中将 $\op{X}$ 与 $\i \op{P}/(m\omega)$ 相加，把能量写成这一组合与其伴随的乘积。
 要使乘积以 $\hbar\omega$ 为能量单位，组合应乘 $\sqrt{m\omega/(2\hbar)}$。
@@ -44,17 +44,17 @@ $\omega$是小振幅角频率。经典弹簧振子的位移为 $x=A\cos(\omega t
 
 \begin{definition}{谐振子的升降算符与数算符}{qm-oscillator-ladder}
     以 $x_0,p_0$ 为单位，定义无量纲的湮灭算符(annihilation operator) $\op{a}$、
-    产生算符(creation operator) $\op{a}^\dagger$ 和数算符(number operator) $\op{N}$：
+    产生算符(creation operator) $\op{a}\adjoint$ 和数算符(number operator) $\op{N}$：
     \begin{equation}
         \op{a}=\frac{\op{X}}{2x_0}+\frac{\i \op{P}}{2p_0},\qquad
-        \op{a}^\dagger=\frac{\op{X}}{2x_0}-\frac{\i \op{P}}{2p_0},\qquad \op{N}=\op{a}^\dagger \op{a}.
+        \op{a}\adjoint=\frac{\op{X}}{2x_0}-\frac{\i \op{P}}{2p_0},\qquad \op{N}=\op{a}\adjoint \op{a}.
     \end{equation}
 \end{definition}
-由 $\op{X}^\dagger=\op{X}$、$\op{P}^\dagger=\op{P}$ 可见前两者互为伴随。逐项相乘得到
+由 $\op{X}\adjoint=\op{X}$、$\op{P}\adjoint=\op{P}$ 可见前两者互为伴随。逐项相乘得到
 \begin{subequations}
     \begin{alignat}{1}
-        [\op{a},\op{a}^\dagger] &=-\frac{\i}{2x_0p_0}[\op{X},\op{P}]=\one,\\
-        \op{a}^\dagger \op{a} &=\frac{\op{X}^2}{4x_0^2}+\frac{\op{P}^2}{4p_0^2}
+        [\op{a},\op{a}\adjoint] &=-\frac{\i}{2x_0p_0}[\op{X},\op{P}]=\one,\\
+        \op{a}\adjoint \op{a} &=\frac{\op{X}^2}{4x_0^2}+\frac{\op{P}^2}{4p_0^2}
             +\frac{\i}{4x_0p_0}[\op{X},\op{P}]
             =\frac{\op{H}}{\hbar\omega}-\frac12\one.
     \end{alignat}
@@ -82,18 +82,18 @@ $\omega$是小振幅角频率。经典弹簧振子的位移为 $x=A\cos(\omega t
     所得向量若非零，对应的能量比原态低 $\hbar\omega$。
     若基态经$\op{a}$作用后非零，就会得到能量低$\hbar\omega$的态；
     因此$\op{a}\ket{0}=0$，从而$\op{N}\ket{0}=0$、$E_0=\hbar\omega/2$。
-    另一方面$[\op{N},\op{a}^\dagger]=\op{a}^\dagger$，升高一次使$\op{N}$的本征值增加1。
+    另一方面$[\op{N},\op{a}\adjoint]=\op{a}\adjoint$，升高一次使$\op{N}$的本征值增加1。
     对归一化本征态$\ket{n}$，
     \begin{equation}
-        \|\op{a}^\dagger\ket{n}\|^2
-        =\mel{n}{\op{a}\op{a}^\dagger}{n}
+        \|\op{a}\adjoint\ket{n}\|^2
+        =\mel{n}{\op{a}\op{a}\adjoint}{n}
         =\mel{n}{\op{N}+\one}{n}=n+1.
     \end{equation}
     从真空逐次升高，并在每一步除以$\sqrt{n+1}$归一化，得到
     \begin{equation}
         \op{a}\ket{n}=\sqrt n\ket{n-1},\quad
-        \op{a}^\dagger\ket{n}=\sqrt{n+1}\ket{n+1},\quad
-        \ket{n}=\frac{(\op{a}^\dagger)^n}{\sqrt{n!}}\ket{0}.
+        \op{a}\adjoint\ket{n}=\sqrt{n+1}\ket{n+1},\quad
+        \ket{n}=\frac{(\op{a}\adjoint)^n}{\sqrt{n!}}\ket{0}.
     \end{equation}
     不同$n$的态因属于自伴$\op{N}$的不同本征值而正交。
     它们的闭线性张成空间在正则位置、动量平移下不变；
@@ -106,32 +106,32 @@ $\omega$是小振幅角频率。经典弹簧振子的位移为 $x=A\cos(\omega t
 
 在位置表象中，以平衡点为原点，令
 $b=\sqrt{\hbar/(m\omega)}=\sqrt 2 x_0$、$\xi=x/b$。
-动量作用于位置波函数为 $\op{P}=-\i\hbar\,\partial_x$。
+动量作用于位置波函数为 $\op{P}=-\i\hbar\,\p_x$。
 代入 $\op{a}$ 后，$\op{X}/(2x_0)$ 给出 $\xi/\sqrt2$，
-$\i \op{P}/(2p_0)$ 给出 $\partial_\xi/\sqrt2$。
-基态方程 $\op{a}\ket{0}=0$ 于是化为 $\partial_\xi\psi_0=-\xi\psi_0$。
+$\i \op{P}/(2p_0)$ 给出 $\p_\xi/\sqrt2$。
+基态方程 $\op{a}\ket{0}=0$ 于是化为 $\p_\xi\psi_0=-\xi\psi_0$。
 积分给出 $\psi_0=C\e^{-\xi^2/2}$；归一化时还要用 $\d x=b\d\xi$，从而有
 \[
-    1=|C|^2 b\int_{-\infty}^{\infty}\e^{-\xi^2}\d\xi
-    =|C|^2 b\sqrt\pi .
+    1=\abs{C}^2 b\intR\e^{-\xi^2}\d\xi
+    =\abs{C}^2 b\sqrt\pi .
 \]
-取 $C$ 为正实数，再依次作用 $\op{a}^\dagger=(\xi-\partial_\xi)/\sqrt2$，得到
+取 $C$ 为正实数，再依次作用 $\op{a}\adjoint=(\xi-\p_\xi)/\sqrt2$，得到
 \begin{equation}
     \psi_0(x)=\frac{\e^{-\xi^2/2}}{\pi^{1/4}\sqrt b},\qquad
     \psi_1=\sqrt2\,\xi\psi_0,\qquad
     \psi_2=\frac{2\xi^2-1}{\sqrt2}\psi_0.
 \end{equation}
-乘 $\xi$ 和对 $\xi$ 求导都会改变波函数的奇偶性，所以从偶宇称的基态逐次作用 $\op{a}^\dagger$，所得定态的宇称交替（图\ref{fig:oscillator-states}）。
+乘 $\xi$ 和对 $\xi$ 求导都会改变波函数的奇偶性，所以从偶宇称的基态逐次作用 $\op{a}\adjoint$，所得定态的宇称交替（图\ref{fig:oscillator-states}）。
 \begin{figure}[htbp]
     \centering
     \raisebox{-.5\height}{\includegraphics[width=.57\linewidth]{figures/oscillator_states.pdf}}\hfill
     \raisebox{-.5\height}{\tikzfigure[width=.37\linewidth]{oscillator-ladder}}
-    \caption{按相同的 $n$ 对照两图：左图在共同的振幅零线上读节点和符号，右图以虚线所示的势阱底为能量零点，上、下箭头分别表示 $\op{a}^\dagger$、$\op{a}$ 连接的相邻能级。}
+    \caption{按相同的 $n$ 对照两图：左图在共同的振幅零线上读节点和符号，右图以虚线所示的势阱底为能量零点，上、下箭头分别表示 $\op{a}\adjoint$、$\op{a}$ 连接的相邻能级。}
     \label{fig:oscillator-states}
     \label{fig:osc-ladder}
 \end{figure}
 
-由$\op{X}=x_0(\op{a}+\op{a}^\dagger)$，$x_0=\sqrt{\hbar/(2m\omega)}$，直接得到
+由$\op{X}=x_0(\op{a}+\op{a}\adjoint)$，$x_0=\sqrt{\hbar/(2m\omega)}$，直接得到
 \begin{subequations}
     \begin{alignat}{1}
         \mel{m}{\op{X}}{n}&=x_0\bigl(\sqrt n\,\delta_{m,n-1}+\sqrt{n+1}\,\delta_{m,n+1}\bigr),\\
@@ -184,26 +184,26 @@ $\i \op{P}/(2p_0)$ 给出 $\partial_\xi/\sqrt2$。
 把 $\ket{\alpha}$ 在数算符的本征基中展开，系数记为 $c_n$。对比本征方程两边的第 $n$ 个分量得到
 $c_{n+1}=\alpha c_n/\sqrt{n+1}$，从而 $c_n=c_0\alpha^n/\sqrt{n!}$。归一化要求
 \[
-    1=|c_0|^2\sum_{n=0}^{\infty}\frac{|\alpha|^{2n}}{n!}=|c_0|^2\e^{|\alpha|^2}.
+    1=\abs{c_0}^2\sum_{n=0}^{\infty}\frac{\abs{\alpha}^{2n}}{n!}=\abs{c_0}^2\e^{\abs{\alpha}^2}.
 \]
 取 $c_0$ 为正实数，得到
 \begin{equation}
-    \ket{\alpha}=\e^{-|\alpha|^2/2}\sum_{n=0}^\infty\frac{\alpha^n}{\sqrt{n!}}\ket{n}.
+    \ket{\alpha}=\e^{-\abs{\alpha}^2/2}\sum_{n=0}^\infty\frac{\alpha^n}{\sqrt{n!}}\ket{n}.
 \end{equation}
 
 对数算符 $\op{N}$ 的测量给出整数读数 $n$。由展开系数可求得各读数的概率 $p_n$ 及其均值和方差，
 \begin{subequations}
     \begin{alignat}{1}
-        p_n&=\e^{-|\alpha|^2}\frac{|\alpha|^{2n}}{n!},\\
-        \ave{\op{N}}&=|\alpha|^2,\qquad (\Delta N)^2=|\alpha|^2.
+        p_n&=\e^{-\abs{\alpha}^2}\frac{\abs{\alpha}^{2n}}{n!},\\
+        \ave{\op{N}}&=\abs{\alpha}^2,\qquad (\Delta N)^2=\abs{\alpha}^2.
     \end{alignat}
 \end{subequations}
-这里 $p_n$ 是均值为 $|\alpha|^2$ 的 Poisson 分布。不同相干态的内积为
+这里 $p_n$ 是均值为 $\abs{\alpha}^2$ 的 Poisson 分布。不同相干态的内积为
 \begin{equation}
     \brkt{\beta}{\alpha}
-    =\exp\Bigp{-\frac{|\alpha|^2+|\beta|^2}{2}+\beta^*\alpha}.
+    =\exp\Bigp{-\frac{\abs{\alpha}^2+\abs{\beta}^2}{2}+\beta\conj\alpha}.
 \end{equation}
-其模为 $\exp(-|\alpha-\beta|^2/2)$，不同相干态有有限的重叠。它们是湮灭算符 $\op{a}$ 的本征态，$\op{a}^\dagger$ 是相应的产生算符。
+其模为 $\exp(-\abs{\alpha-\beta}^2/2)$，不同相干态有有限的重叠。它们是湮灭算符 $\op{a}$ 的本征态，$\op{a}\adjoint$ 是相应的产生算符。
 
 演化到$t$时刻，
 \begin{equation}
@@ -215,7 +215,7 @@ $c_{n+1}=\alpha c_n/\sqrt{n+1}$，从而 $c_n=c_0\alpha^n/\sqrt{n!}$。归一化
     (\Delta X)^2=x_0^2,\qquad (\Delta P)^2=\frac{m\hbar\omega}{2}.
 \end{equation}
 平均值沿经典振动轨迹运动，方差不随时间变化。
-当 $|\alpha|\gg1$ 时，振幅相对于零点涨落很大；相对涨落随之减小，均值呈现经典振荡。
+当 $\abs{\alpha}\gg1$ 时，振幅相对于零点涨落很大；相对涨落随之减小，均值呈现经典振荡。
 
 \section{黑体辐射与Planck分布}
 \label{sec:planck}
@@ -292,10 +292,10 @@ $\beta$是逆温度参数，$\kB$为Boltzmann常数。
     u_\nu=\frac{8\pi h\nu^3}{c^3}\frac1{\e^{h\nu/\kB T}-1},\qquad
     B_\nu=\frac{c}{4\pi}u_\nu.
 \end{equation}
-$B_\nu$的单位是$\mathrm{W\,m^{-2}\,sr^{-1}\,Hz^{-1}}$。
+$B_\nu$的单位是$\unit{\watt\per\metre\squared\per\steradian\per\hertz}$。
 它不同于单位面积的出射通量(radiant exitance)；各向同性黑体在向外半球积分给出
 \begin{equation}
-    M=\pi\int_0^\infty B_\nu\d\nu
+    M=\pi\intRplus B_\nu\d\nu
     =\sigma T^4,\qquad
     \sigma=\frac{2\pi^5\kB^4}{15h^3c^2}.
 \end{equation}
@@ -310,13 +310,13 @@ $B_\nu\cos\theta\d\Omega\d\nu$是单位面积向方向$(\theta,\phi)$发出的�
 在频率积分中换元$x=h\nu/(\kB T)$，
 \begin{equation}
     M=\frac{2\pi\kB^4T^4}{h^3c^2}
-    \int_0^\infty\frac{x^3}{\e^x-1}\d x.
+    \intRplus\frac{x^3}{\e^x-1}\d x.
 \end{equation}
 把分母的倒数按公比 $\e^{-x}$ 展成几何级数。各项非负，可以逐项积分；
 每项对 $x$ 作三次分部积分，得到
 \[
-    \int_0^\infty\frac{x^3}{\e^x-1}\d x
-    =\sum_{r=1}^\infty\int_0^\infty x^3\e^{-rx}\d x
+    \intRplus\frac{x^3}{\e^x-1}\d x
+    =\sum_{r=1}^\infty\intRplus x^3\e^{-rx}\d x
     =6\sum_{r=1}^\infty\frac1{r^4}
     =6\zeta(4)=\frac{\pi^4}{15}.
 \]
@@ -330,7 +330,7 @@ $B_\nu\cos\theta\d\Omega\d\nu$是单位面积向方向$(\theta,\phi)$发出的�
     =\frac{2hc^2}{\lambda^5}\frac1{\e^{hc/(\lambda\kB T)}-1}.
 \end{equation}
 $B_\lambda$峰值满足$x=5(1-\e^{-x})$的正根$x=4.965114\ldots$，
-所以$\lambda_{\max}T\simeq2.898\times10^{-3}\,\mathrm{m\,K}$，升温使峰值移向短波（图\ref{fig:planck-wavelength}）。
+所以$\lambda_{\max}T\simeq\qty{2.898e-3}{\metre\kelvin}$，升温使峰值移向短波（图\ref{fig:planck-wavelength}）。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=.65\linewidth]{figures/blackbody.pdf}
@@ -349,17 +349,17 @@ $B_\nu$的峰值满足$x=3(1-\e^{-x})$。从频率谱换成波长谱时，Jacobi
 在低效率、背景可忽略且时间窗一致时，$p_{12}/(p_1p_2)$ 消去效率和分束比，给出归一化二阶关联。
 若该比值小于一，符合少于独立点击的预期，称为反关联(anticorrelation)。
 
-理想光电探测的单次计数率正比于平均光子数 $\ave{\op{a}^\dagger\op{a}}$。
+理想光电探测的单次计数率正比于平均光子数 $\ave{\op{a}\adjoint\op{a}}$。
 \begin{definition}{单模式的零延迟二阶关联}{qm-photon-correlation}
     对平均光子数 $\ave{\op{N}}>0$ 的单个模式，归一化零延迟二阶关联函数(second-order correlation function)为
     \begin{equation}
-        g^{(2)}(0)=\frac{\ave{\op{a}^\dagger \op{a}^\dagger \op{a}\op{a}}}{\ave{\op{a}^\dagger \op{a}}^2}
+        g^{(2)}(0)=\frac{\ave{\op{a}\adjoint \op{a}\adjoint \op{a}\op{a}}}{\ave{\op{a}\adjoint \op{a}}^2}
         =\frac{\ave{\op{N}(\op{N}-\one)}}{\ave{\op{N}}^2}.
     \end{equation}
     分子数的是同一模式中可依次吸收的光子对，分母给出按平均强度计算的独立计数基准。
 \end{definition}
 在含有 $n\geq1$ 个光子的数态 $\ket{n}$ 中，测量 $\op{N}$ 总是得到 $n$，故 $g^{(2)}(0)=1-1/n$。
-对相干态，连续两次用 $\op{a}\ket{\alpha}=\alpha\ket{\alpha}$ 得分子 $|\alpha|^4$，与分母相等，故比值为一。
+对相干态，连续两次用 $\op{a}\ket{\alpha}=\alpha\ket{\alpha}$ 得分子 $\abs{\alpha}^4$，与分母相等，故比值为一。
 对单模式热态(thermal state)，$g^{(2)}(0)=2$，因为对几何级数求两次导数有
 \begin{equation}
     \ave{\op{N}(\op{N}-\one)}
@@ -380,7 +380,7 @@ $\ket{1}$不能在理想分束后触发两个单光子吸收探测器的同次�
             Z&=\sum_{n=0}^{\infty}\e^{-\beta\hbar\omega(n+1/2)}
                 =\frac{\e^{-\beta\hbar\omega/2}}
                     {1-\e^{-\beta\hbar\omega}},\\
-            \ave{\op{H}}&=-\frac{\partial\ln Z}{\partial\beta}
+            \ave{\op{H}}&=-\frac{\p\ln Z}{\p\beta}
                 =\frac{\hbar\omega}{2}
                     +\frac{\hbar\omega}{\e^{\beta\hbar\omega}-1}.
         \end{alignat}

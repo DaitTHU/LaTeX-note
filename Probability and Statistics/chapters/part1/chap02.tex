@@ -15,7 +15,7 @@
 
 \begin{definition}
 	{随机变量的概率}{}
-	$\forall I\subset\RR$可测，记原像集$X\inv(I)\in\cF$，定义\footnote{这种定义属于好看的鱼(形式简洁)，而不属于好吃的鱼(实用)。}
+	$\forall I\subset\RR$可测，记原像集$X\inv(I)\in\eventspace$，定义\footnote{这种定义属于好看的鱼(形式简洁)，而不属于好吃的鱼(实用)。}
 	\[
 		\P_X(X\in I):=\P(X\inv(I)),\quad\forall I\subset\RR~\text{可测}
 	\]
@@ -90,8 +90,8 @@
 	期望存在要求级数绝对收敛。
 \end{remark}
 
-\begin{definition}{\Bern 分布}{Bernoulli distribution}
-	\Bern 分布也称0-1分布，其描述的是一次成功概率为$p$的\Bern 试验，$X=0,1$分别代表失败和成功，记作$X\sim\Bino(p)$，其分布列为
+\begin{definition}{Bernoulli分布}{Bernoulli distribution}
+	Bernoulli分布也称0-1分布，其描述的是一次成功概率为$p$的Bernoulli试验，$X=0,1$分别代表失败和成功，记作$X\sim\BernDist(p)$，其分布列为
 	\begin{equation}
 		\P(X=k)=\begin{cases}
 			1-p,&k=0\\
@@ -110,7 +110,7 @@
 \end{definition}
 
 \begin{definition}{二项分布}{binominal distribution}
-	$n$次独立\Bern 试验的成功次数$X$服从二项分布(binominal distribution)，记作$X\sim\Bino(n,p)$，
+	$n$次独立Bernoulli试验的成功次数$X$服从二项分布(binomial distribution)，记作$X\sim\BinDist(n,p)$，
 	可得
 	\begin{equation}
 		\P(X=k)=\binom nk p^k(1-p)^{n-k},\quad k=0,\ldots,n
@@ -126,7 +126,7 @@
 \end{definition}
 
 \begin{corollary}
-	% 显然\Bern 分布就是二项分布的特例。
+	% 显然Bernoulli分布就是二项分布的特例。
 	二项分布的期望和方差为
 	\begin{subequations}
 		\begin{align}
@@ -136,7 +136,7 @@
 	\end{subequations}
 \end{corollary}
 
-我们考虑一个时间段内的事件次数$X\sim\Bino(n,p)$，其中$n$是时间段的切片份数。
+我们考虑一个时间段内的事件次数$X\sim\BinDist(n,p)$，其中$n$是时间段的切片份数。
 保持其期望$\E(X)=np=:\lambda$不变，令$n\to\infty$，即事件可能发生在任一时刻，则
 \[
 	\lim_{n\to\infty}\binom nk\biggp{\frac\lambda{n}}^k\biggp{1-\frac\lambda{n}}^{n-k}=\lim_{n\to\infty}\frac{\lambda^k}{k!}\biggp{1-\frac\lambda{n}}^n\cancel{\frac{n!}{n^k(n-k)!}}\cancel{\biggp{1-\frac\lambda{n}}^{-k}}=\frac{\lambda^k}{k!}\e^{-\lambda}.
@@ -144,7 +144,7 @@
 % 我们便得到了一个新的分布，称为Poisson分布。
 
 \begin{definition}{Poisson分布}{Poisson distribution}
-	小概率事件在一段时间内发生的次数$X$服从Poisson分布，记作$X\sim\Pois(\lambda)$，
+	小概率事件在一段时间内发生的次数$X$服从Poisson分布，记作$X\sim\PoisDist(\lambda)$，
 	\[
 		\P(X=k)=\frac{\lambda^k}{k!}\e^{-\lambda},\quad k=0,1,2,\ldots
 	\]
@@ -164,7 +164,7 @@
 \end{corollary}
 
 \begin{theorem}{Poisson分布近似二项分布}{}
-	用$\Pois(np)$近似$\Bino(n,p)$的误差最多为$\min(p,np^2)$。
+	用$\PoisDist(np)$近似$\BinDist(n,p)$的误差最多为$\min(p,np^2)$。
 \end{theorem}
 
 \begin{remark}
@@ -174,9 +174,9 @@
 \begin{example}{弱相依条件举例：配对问题}{weak dependence condition}
 	在\exmref{exm:derangement} 中，尽管$A_i$和$A_j$并不独立，但弱相依
 	\[
-		\P(A_i)=\frac1n\approx\P(A_i|A_j)=\frac1{n-1}.
+		\P(A_i)=\frac1n\approx\P(A_i\mid A_j)=\frac1{n-1}.
 	\]
-	记$X=$拿到自己帽子的人数，当$n\to\infty$时，$X\sim\Pois(1)$
+	记$X=$拿到自己帽子的人数，当$n\to\infty$时，$X\sim\PoisDist(1)$
 	\[
 		\P(X=k)=\frac{\e^{-1}}{k!},\quad k=0,1,2,\ldots
 	\]
@@ -186,9 +186,9 @@
 		\item $E=$这$k$个人都拿到自己的帽子；
 		\item $F=$余下$n-k$个人都未拿到自己的帽子。
 	\end{itemize}
-	则$\P(F|E)$就是$n-k$个人的错排问题，根据\exmref{exm:derangement} 中的结果：
+	则$\P(F\mid E)$就是$n-k$个人的错排问题，根据\exmref{exm:derangement} 中的结果：
 	\[
-		\P(E\cap F)=\P(E)\P(F|E)=\frac{(n-k)!}{n!}\cdot\frac{!(n-k)}{(n-k)!},
+		\P(E\cap F)=\P(E)\P(F\mid E)=\frac{(n-k)!}{n!}\cdot\frac{!(n-k)}{(n-k)!},
 	\]
 	对于$\P(X=k)$来说，由于这$k$个人是任选的，故
 	\[
@@ -212,13 +212,13 @@
 		\item $\forall x\in\RR,\enspace\P(X=x)\equiv 0;$
 		\item 归一性：
 			\begin{equation}
-				\int\iti f(x)\d x\equiv 1;
+				\intR f(x)\d x\equiv 1;
 			\end{equation}
 		\item 期望和方差(要求积分\textbf{绝对收敛})
 			\begin{subequations}
 				\begin{align}
-					\E(X)&=\int\iti xf(x)\d x,\\
-					\Var(X)&=\int\iti(x-\E(X))^2f(x)\d x.
+					\E(X)&=\intR xf(x)\d x,\\
+					\Var(X)&=\intR(x-\E(X))^2f(x)\d x.
 				\end{align}
 			\end{subequations}
 		\item 连续分布的CDF $\CDF(x)$连续且可导，且
@@ -244,14 +244,14 @@
 \end{example}
 \fi
 \begin{definition}{均匀分布}{uniform distribution}
-	均匀分布(uniform distribution)记作$X\sim\Unif(a,b)$，%随机数$\Unif(0,1)$
+	均匀分布(uniform distribution)记作$X\sim\UnifDist(a,b)$，%随机数$\UnifDist(0,1)$
 	\begin{equation}
 		f(x)=\begin{cases}
 			\frac1{b-a},&x\in(a,b)\\
 			0,&\text{elsewhere}
 		\end{cases}
 	\end{equation}
-	特别地，服从标准均匀分布的随机变量$X\sim\Unif(0,1)$也称为随机数。
+	特别地，服从标准均匀分布的随机变量$X\sim\UnifDist(0,1)$也称为随机数。
 \end{definition}
 \begin{corollary}
 	均匀分布的期望和方差为
@@ -263,11 +263,11 @@
 	\end{subequations}
 \end{corollary}
 \begin{definition}{正态分布}{normal distribution}
-	正态分布(normal distribution)记作$X\sim\Norm(\mu,\sigma^2)$，%标准正态$\Norm(0,1)$
+	正态分布(normal distribution)记作$X\sim\NormalDist(\mu,\sigma^2)$，%标准正态$\NormalDist(0,1)$
 	\begin{equation}
 		f(x)=\frac1{\sqrt{2\pi}\sigma}\exp\biggb{-\frac{(x-\mu)^2}{2\sigma^2}},\quad x\in\RR
 	\end{equation}
-	特别地，标准正态分布$Z\sim\Norm(0,1)$的CDF记作$\Phi(x)$。
+	特别地，标准正态分布$Z\sim\NormalDist(0,1)$的CDF记作$\Phi(x)$。
 	\begin{center}
 		\includegraphics[width=.9\textwidth]{figures/pdf_normal.pdf}
 		\captionof{figure}{不同$\mu,\sigma$下的正态分布}
@@ -283,7 +283,7 @@
 	\end{subequations}
 \end{corollary}
 \begin{definition}{指数分布}{exponential distribution}
-	指数分布(exponential distribution)通常刻画寿命、等待时间，记作$X\sim\Expo(\lambda)$，
+	指数分布(exponential distribution)通常刻画寿命、等待时间，记作$X\sim\ExpDist(\lambda)$，
 	\begin{equation}
 		f(x)=\begin{cases}
 			\lambda\e^{-\lambda x},&x>0\\
@@ -304,21 +304,21 @@
 			\Var(X)&=\frac1{\lambda^2}.
 		\end{align}
 	\end{subequations}
-	其期望往往被定义为平均寿命$\beta:=\E(X)\equiv 1/\lambda$，因此也有教材将指数分布记作$\Expo(\beta)$。
+	其期望往往被定义为平均寿命$\beta:=\E(X)\equiv 1/\lambda$，因此也有教材将指数分布记作$\ExpDist(\beta)$。
 \end{corollary}
 
 \begin{corollary}
 	指数分布的尾概率与Poisson分布有关：
 	\[
-		\P_{\Expo(\lambda)}(T>\tau)=\e^{-\lambda\tau}=\P_{\Pois(\lambda\tau)}(N=0).
+		\P_{\ExpDist(\lambda)}(T>\tau)=\e^{-\lambda\tau}=\P_{\PoisDist(\lambda\tau)}(N=0).
 	\]
-	这说明：如果时间$(0,\tau)$内事件的发生次数$N\sim\Pois(\lambda\tau)$，则相邻事件的时间间隔$\D T\sim\Expo(\lambda)$。
+	这说明：如果时间$(0,\tau)$内事件的发生次数$N\sim\PoisDist(\lambda\tau)$，则相邻事件的时间间隔$\Delta T\sim\ExpDist(\lambda)$。
 \end{corollary}
 
 \begin{example}{指数分布的导出}{}
 	产品在$(t,t+\d t)$时间内的失效率为
 	\[
-		\P(t<T<t+\d t|T>t)=\frac{\P(t<T<t+\d t)}{\P(T>t)}=\frac{\CDF(t+\d t)-\CDF(t)}{1-\CDF(t)}=\frac{\CDF'(t)}{1-\CDF(t)}\d t,
+		\P(t<T<t+\d t\mid T>t)=\frac{\P(t<T<t+\d t)}{\P(T>t)}=\frac{\CDF(t+\d t)-\CDF(t)}{1-\CDF(t)}=\frac{\CDF'(t)}{1-\CDF(t)}\d t,
 	\]
 	令失效率为$\lambda(t)\d t$
 	\[
@@ -331,7 +331,7 @@
 
 	这体现出指数分布的无记忆性：$\forall t_0>0$
 	\[
-		\P(T>t+t_0|T>t_0)=\frac{\e^{-\lambda(t+t_0)}}{\e^{-\lambda t_0}}=\e^{-\lambda t}=\P(T>t).
+		\P(T>t+t_0\mid T>t_0)=\frac{\e^{-\lambda(t+t_0)}}{\e^{-\lambda t_0}}=\e^{-\lambda t}=\P(T>t).
 	\]
 
 	\tcblower
@@ -363,7 +363,7 @@
 	\end{equation}
 \end{theorem}
 \begin{example}{生成随机变量}{}
-	服从CDF $\CDF(y)$的随机变量$Y$可由随机数$X\sim\Unif(0,1)$生成：
+	服从CDF $\CDF(y)$的随机变量$Y$可由随机数$X\sim\UnifDist(0,1)$生成：
 	\begin{equation}
 		Y=\CDF\inv(X).
 	\end{equation}

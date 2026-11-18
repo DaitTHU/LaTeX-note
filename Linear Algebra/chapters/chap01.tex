@@ -17,7 +17,7 @@
 	\begin{itemize}
 		\item 最小的数域：有理数域$\QQ$；
 	
-		\item 二次数域(quadratic field)：如$\QQ(\sqrt 2)=\nset{a+b\sqrt2}{a,b\in\QQ}$；
+		\item 二次数域(quadratic field)：如$\QQ(\sqrt 2)=\set{a+b\sqrt2}{a,b\in\QQ}$；
 	
 		\item 实数域$\RR$、复数域$\CC$。
 	\end{itemize}
@@ -349,18 +349,18 @@
 \subsection{矩阵的转置}
 
 \begin{definition}{矩阵的转置}{transpose matrix}
-	矩阵$A\in\FF^{m\times n}$的转置(transpose)记作$A\tp\in\FF^{n\times m}$，其元素由$A$给出：
+	矩阵$A\in\FF^{m\times n}$的转置(transpose)记作$A\transp\in\FF^{n\times m}$，其元素由$A$给出：
 	\[
-		(A\tp)_{ij}=A_{ji}.
+		(A\transp)_{ij}=A_{ji}.
 	\]
 \end{definition}
 \begin{corollary}
 	矩阵转置的性质：%property of transpose
 	$\forall A,B$可运算的，
 	\begin{itemize}
-		\item $(A\tp)\tp=A$；
-		\item $(A+B)\tp=A\tp+B\tp$，$(cA)\tp=cA\tp$；
-		\item $(AB)\tp=B\tp A\tp$。
+		\item $(A\transp)\transp=A$；
+		\item $(A+B)\transp=A\transp+B\transp$，$(cA)\transp=cA\transp$；
+		\item $(AB)\transp=B\transp A\transp$。
 	\end{itemize}
 \end{corollary}
 
@@ -377,10 +377,10 @@
 	$\forall A,B\in\FF^{n\times n},\enspace c\in\FF$
     \begin{itemize}
     	\item 线性：$\tr(A+B)=\tr(A)+\tr(B),\enspace \tr(cA)=c\tr(A)$；
-    	\item 转置：$\tr(A\tp)=\tr(A)$；
-    	% \item 两个$n$维列向量$u,v$，有$\tr(uv\tp)=v\tp u$
+        \item 转置：$\tr(A\transp)=\tr(A)$；
+        % \item 两个$n$维列向量$u,v$，有$\tr(uv\transp)=v\transp u$
     	% \[
-    	% 	\tr(uv\tp)=\sum_{i=1}^nu_iv_i=u\tp v=v\tp u.
+        % 	\tr(uv\transp)=\sum_{i=1}^nu_iv_i=u\transp v=v\transp u.
     	% \]
     \end{itemize}
 \end{corollary}
@@ -409,26 +409,26 @@
 \subsection{矩阵的逆}
 
 \begin{definition}{矩阵的逆}{inverse matrix}
-	方阵$A\in\FF^{n\times n}$的逆矩阵(inverse)记作$A\iv\in\FF^{n\times n}$，满足
+	方阵$A\in\FF^{n\times n}$的逆矩阵(inverse)记作$A\inv\in\FF^{n\times n}$，满足
 	\[
-		AA\iv=A\iv A=I_n.
+		AA\inv=A\inv A=I_n.
 	\]
-	若存在$A\iv$，则称矩阵$A$是可逆的；否则称为不可逆的，也称奇异的(singular)。
+	若存在$A\inv$，则称矩阵$A$是可逆的；否则称为不可逆的，也称奇异的(singular)。
 \end{definition}
 
 \begin{corollary}
 	矩阵逆的性质：
 	$\forall A,B\in\FF^{n\times n}$可逆，
 	\begin{itemize}
-		\item 逆矩阵的逆：$(A\iv)\iv=A$；
-		\item 数乘：$(cA)\iv=c\iv A\iv$，其中$c\neq0$；
-		\item 矩阵乘法：$(AB)\iv=B\iv A\iv$；
-		\item 转置：$(A\iv)\tp=(A\tp)\iv$。
+		\item 逆矩阵的逆：$(A\inv)\inv=A$；
+		\item 数乘：$(cA)\inv=c\inv A\inv$，其中$c\neq0$；
+		\item 矩阵乘法：$(AB)\inv=B\inv A\inv$；
+		\item 转置：$(A\inv)\transp=(A\transp)\inv$。
 	\end{itemize}
 \end{corollary}
 
 \begin{remark}
-	一般地，$A,B$均可逆$\notimplies(A+B)$可逆。
+	即使 $A,B$ 均可逆，$A+B$ 仍可能不可逆。
 	% 除非满足一些额外性质，见\thmref{thm:Woodbury matrix identity}。
 \end{remark}
 
@@ -437,7 +437,7 @@
 	\begin{equation}
 		\begin{bmatrix}
 			a&b\\c&d
-		\end{bmatrix}\iv=\frac1{ad-bc}
+		\end{bmatrix}\inv=\frac1{ad-bc}
 		\begin{bmatrix}
 			d&-b\\
 			-c&a
@@ -447,11 +447,11 @@
 \begin{example}{对角矩阵的逆}{inverse of diagonal matrix}
 	显然，对角矩阵可逆$\iff$所有对角元均不为0，且逆为
 	\begin{align}
-		\diag(a_1,\ldots,a_n)\iv=\diag(a_1^{-1},\ldots,a_n^{-1}).
+		\diag(a_1,\ldots,a_n)\inv=\diag(a_1\inv,\ldots,a_n\inv).
 	\end{align}
 	这对于分块对角矩阵也成立，即式中$a_i$可以为可逆矩阵。
 \end{example}
-% 若$A$可逆，则方程组$Ax=b$的解为 \[x=A\iv b.\]
+% 若$A$可逆，则方程组$Ax=b$的解为 \[x=A\inv b.\]
 \begin{theorem}{左逆和右逆}{linverse and rinverse}
 	若$A,B,C$为方阵，且$BA=AC=I$，则$B=C$。
 \end{theorem}
@@ -473,10 +473,10 @@
 % 	故$AB=I$。
 % \end{proof}
 \begin{example}{幂零矩阵}{nilpotent matrix}
-	若$A$是幂零矩阵(nilpotent matrix)，即$\exists n\in\mathbb N$使$A^n=O$，
+	若$A$是幂零矩阵(nilpotent matrix)，即$\exists n\in\NN$使$A^n=O$，
 	则$I+A$可逆，且
 	\[
-		(I+A)\iv=I-A+A^2-\cdots+(-A)^{n-1}.
+		(I+A)\inv=I-A+A^2-\cdots+(-A)^{n-1}.
 	\]
 	因为
 	\[
@@ -490,48 +490,48 @@
 
 \begin{theorem}
 	{Woodbury矩阵恒等式}{Woodbury matrix identity}
-	给定$A\in\FF^{n\times n},U\in\FF^{n\times k},C\in\FF^{k\times k},V\in\FF^{k\times n}$且$A,C,(C\iv+VA\iv U)$可逆，则$(A+UCV)$可逆，且 
+	给定$A\in\FF^{n\times n},U\in\FF^{n\times k},C\in\FF^{k\times k},V\in\FF^{k\times n}$且$A,C,(C\inv+VA\inv U)$可逆，则$(A+UCV)$可逆，且
 	\begin{equation}
 		\label{eqn:Woodbury}
-		(A+UCV)\iv=A\iv-A\iv U(C\iv+VA\iv U)\iv VA\iv.
+		(A+UCV)\inv=A\inv-A\inv U(C\inv+VA\inv U)\inv VA\inv.
 	\end{equation}
 \end{theorem}
 \begin{proof}
 	直接代入验证即可：
 	\begin{align*}
-		&(A+UCV)(A\iv-A\iv U(C\iv+VA\iv U)\iv VA\iv)\\
-		% ={}&(A+UCV)A\iv(I-U(C\iv+VA\iv U)\iv VA\iv)\\
-		% ={}&(I+UCVA\iv)(I-U(C\iv+VA\iv U)\iv VA\iv)\\
-		% ={}&I-UCVA\iv-(I+UCVA\iv)U(C\iv+VA\iv U)\iv VA\iv\\
-		% ={}&I-UCVA\iv-U(I+CVA\iv U)(C\iv+VA\iv U)\iv VA\iv\\
-		={}&I+UCVA\iv-UC(C\iv+VA\iv U)(C\iv+VA\iv U)\iv VA\iv=I.
+		&(A+UCV)(A\inv-A\inv U(C\inv+VA\inv U)\inv VA\inv)\\
+		% ={}&(A+UCV)A\inv(I-U(C\inv+VA\inv U)\inv VA\inv)\\
+		% ={}&(I+UCVA\inv)(I-U(C\inv+VA\inv U)\inv VA\inv)\\
+		% ={}&I-UCVA\inv-(I+UCVA\inv)U(C\inv+VA\inv U)\inv VA\inv\\
+		% ={}&I-UCVA\inv-U(I+CVA\inv U)(C\inv+VA\inv U)\inv VA\inv\\
+		={}&I+UCVA\inv-UC(C\inv+VA\inv U)(C\inv+VA\inv U)\inv VA\inv=I.
 		\qedhere
-		% ={}&I-UCVA\iv-UCVA\iv
+		% ={}&I-UCVA\inv-UCVA\inv
 	\end{align*}
 \end{proof}
 
 \begin{theorem}
 	{Sherman-Morrison公式}{Sherman-Morrison formula}
-	给定可逆矩阵$A\in\FF^{n\times n}$和向量$u,v\in\FF^n$，则$(A+uv\tp)$可逆$\iff 1+v\tp A\iv u\neq 0$，此时
+	给定可逆矩阵$A\in\FF^{n\times n}$和向量$u,v\in\FF^n$，则$(A+uv\transp)$可逆$\iff 1+v\transp A\inv u\neq 0$，此时
 	\begin{equation}
 		\label{eqn:Sherman-Morrison}
-		(A+uv\tp)\iv=A\iv-\frac{A\iv uv\tp A\iv}{1+v\tp A\iv u}.
+		(A+uv\transp)\inv=A\inv-\frac{A\inv uv\transp A\inv}{1+v\transp A\inv u}.
 	\end{equation}
 	特别地，当$A=I$时，
 	\begin{equation}
 		\label{eqn:(I+uvT)-1}
-		(I+uv\tp)\iv=I-\frac{uv\tp}{1+v\tp u}.
+		(I+uv\transp)\inv=I-\frac{uv\transp}{1+v\transp u}.
 	\end{equation}
 \end{theorem}
 \begin{proof}
 	对Woodbury恒等式\eqref{eqn:Woodbury}取$A=I_n,\enspace C=I_k$，得到
 	\begin{equation}
 		\label{eqn:(I+UVT)-1}
-		(I_n+UV)\iv=I_n-U(I_k+VU)\iv V.
+		(I_n+UV)\inv=I_n-U(I_k+VU)\inv V.
 	\end{equation}
 	特别地，当$k=1$时，$U,V$都是向量，
-	令$U=u,\enspace V=v\tp$即得式\eqref{eqn:(I+uvT)-1}。再将$u$替换为$A\iv u$，利用$(A+uv\tp)\iv=(I+A\iv uv\tp)\iv A\iv$即得式\eqref{eqn:Sherman-Morrison}。
-	反之，若$1+v\tp A\iv u=0$，则$u\neq0$，且$(A+uv\tp)A\iv u=0$，故$A+uv\tp$不可逆。
+	令$U=u,\enspace V=v\transp$即得式\eqref{eqn:(I+uvT)-1}。再将$u$替换为$A\inv u$，利用$(A+uv\transp)\inv=(I+A\inv uv\transp)\inv A\inv$即得式\eqref{eqn:Sherman-Morrison}。
+	反之，若$1+v\transp A\inv u=0$，则$u\neq0$，且$(A+uv\transp)A\inv u=0$，故$A+uv\transp$不可逆。
 \end{proof}
 
 \begin{example}
@@ -545,9 +545,9 @@
 			1&1&\cdots&0
 		\end{bmatrix}
 	\]
-	设$v=[1\enspace\cdots\enspace 1]\tp$，不难看出$A=-I+vv\tp$，故
+	设$v=[1\enspace\cdots\enspace 1]\transp$，不难看出$A=-I+vv\transp$，故
 	\[
-		A\iv=-I-\frac{vv\tp}{1-n}=\frac1{n-1}\begin{bmatrix}
+		A\inv=-I-\frac{vv\transp}{1-n}=\frac1{n-1}\begin{bmatrix}
 			2-n&1&\cdots&1\\
 			1&2-n&\cdots&1\\
 			\vdots&\vdots&\ddots&\vdots\\
@@ -561,9 +561,9 @@
 	设$A,B,A+B$为同阶可逆矩阵。对Woodbury恒等式\eqref{eqn:Woodbury}取$n=k$且$U=V=I_n$、$C=B$，有
 		\begin{subequations}
 			\begin{align}
-				(A+B)\iv&=A\iv-A\iv(A\iv+B\iv)\iv A\iv\\
+				(A+B)\inv&=A\inv-A\inv(A\inv+B\inv)\inv A\inv\\
 				\label{eqn:Hua}
-				&=A\iv-(A+AB\iv A)\iv.
+				&=A\inv-(A+AB\inv A)\inv.
 			\end{align}
 		\end{subequations}
 		% 式\eqref{eqn:Hua}称为华罗庚恒等式()。
@@ -581,55 +581,55 @@
 \begin{equation}
 	\begin{bmatrix}
 		A\\ &D
-	\end{bmatrix}\iv=\begin{bmatrix}
-		A\iv\\ &D\iv
+	\end{bmatrix}\inv=\begin{bmatrix}
+		A\inv\\ &D\inv
 	\end{bmatrix}.
 \end{equation}
 下面介绍比较一般的情况，首先引入Schur补。
 
 \begin{definition}
 	{Schur补}{Schur complement}
-	当$A$可逆时，记$M/A:=D-CA\iv B$是$A$在$M$中的Schur补(Schur complement)；
-	当$D$可逆时，记$M/D:=A-BD\iv C$是$D$在$M$中的Schur补。
+	当$A$可逆时，记$M/A:=D-CA\inv B$是$A$在$M$中的Schur补(Schur complement)；
+	当$D$可逆时，记$M/D:=A-BD\inv C$是$D$在$M$中的Schur补。
 \end{definition}
 
 \begin{theorem}
 	{分块矩阵的逆}{inverse of block matrix}
-	当$A$可逆且$M/A=D-CA\iv B$可逆时，$M$可逆，且
+	当$A$可逆且$M/A=D-CA\inv B$可逆时，$M$可逆，且
 	\begin{subequations}
 		\begin{align}
 			\begin{bmatrix}
 				A&B\\C&D
-			\end{bmatrix}\iv&=\begin{bmatrix}
-				I&-A\iv B\\ &I
+			\end{bmatrix}\inv&=\begin{bmatrix}
+				I&-A\inv B\\ &I
 			\end{bmatrix}\begin{bmatrix}
-				A\iv\\ &(D-CA\iv B)\iv
+				A\inv\\ &(D-CA\inv B)\inv
 			\end{bmatrix}\begin{bmatrix}
-				I\\-CA\iv&I
+				I\\-CA\inv&I
 			\end{bmatrix}\\
 			\label{eqn:[AB;CD]-1=M/A}
 			&=\begin{bmatrix}
-				A\iv+A\iv B(M/A)\iv CA\iv&-A\iv B(M/A)\iv\\
-				-(M/A)\iv CA\iv&(M/A)\iv
+				A\inv+A\inv B(M/A)\inv CA\inv&-A\inv B(M/A)\inv\\
+				-(M/A)\inv CA\inv&(M/A)\inv
 			\end{bmatrix};
 		\end{align}
 	\end{subequations}
-	当$D$可逆且$M/D=A-BD\iv C$可逆时，$M$可逆，且
+	当$D$可逆且$M/D=A-BD\inv C$可逆时，$M$可逆，且
 	\begin{subequations}
 		\begin{align}
 			\begin{bmatrix}
 				A&B\\C&D
-			\end{bmatrix}\iv&=\begin{bmatrix}
-				I\\-D\iv C&I
+			\end{bmatrix}\inv&=\begin{bmatrix}
+				I\\-D\inv C&I
 			\end{bmatrix}\begin{bmatrix}
-				(A-BD\iv C)\iv\\ &D\iv
+				(A-BD\inv C)\inv\\ &D\inv
 			\end{bmatrix}\begin{bmatrix}
-				I&-BD\iv\\ &I
+				I&-BD\inv\\ &I
 			\end{bmatrix}\\
 			\label{eqn:[AB;CD]-1=M/D}
 			&=\begin{bmatrix}
-				(M/D)\iv&-(M/D)\iv BD\iv\\
-				-D\iv C(M/D)\iv&D\iv+D\iv C(M/D)\iv BD\iv
+				(M/D)\inv&-(M/D)\inv BD\inv\\
+				-D\inv C(M/D)\inv&D\inv+D\inv C(M/D)\inv BD\inv
 			\end{bmatrix}.
 		\end{align}
 	\end{subequations}
@@ -638,10 +638,10 @@
 	\begin{eqnarray}
 		\begin{bmatrix}
 			A&B\\C&D
-		\end{bmatrix}\iv=\begin{bmatrix}
-			(A-BD\iv C)\iv\\ &(D-CA\iv B)\iv
+		\end{bmatrix}\inv=\begin{bmatrix}
+			(A-BD\inv C)\inv\\ &(D-CA\inv B)\inv
 		\end{bmatrix}\begin{bmatrix}
-			I&-BD\iv\\-CA\iv&I
+			I&-BD\inv\\-CA\inv&I
 		\end{bmatrix}.
 	\end{eqnarray}
 \end{theorem}
@@ -654,11 +654,11 @@
 		\begin{bmatrix}
 			A&B\\C&D
 		\end{bmatrix}=\begin{bmatrix}
-			I\\CA\iv&I
+			I\\CA\inv&I
 		\end{bmatrix}\begin{bmatrix}
-			A\\ &D-CA\iv B
+			A\\ &D-CA\inv B
 		\end{bmatrix}\begin{bmatrix}
-			I&A\iv B\\ &I
+			I&A\inv B\\ &I
 		\end{bmatrix},
 	\]
 	上式的分块对角矩阵中出现了$A$的Schur补$M/A$；当$D$可逆时，同理有
@@ -666,11 +666,11 @@
 		\begin{bmatrix}
 			A&B\\C&D
 		\end{bmatrix}=\begin{bmatrix}
-			I&BD\iv\\ &I
+			I&BD\inv\\ &I
 		\end{bmatrix}\begin{bmatrix}
-			A-BD\iv C\\ &D
+			A-BD\inv C\\ &D
 		\end{bmatrix}\begin{bmatrix}
-			I\\D\iv C&I
+			I\\D\inv C&I
 		\end{bmatrix},
 	\]
 	对上两式求逆即得。
@@ -680,10 +680,10 @@
 	对比\eqref{eqn:[AB;CD]-1=M/A}和\eqref{eqn:[AB;CD]-1=M/D}，可得
 	\begin{subequations}
 		\begin{align}
-			A\iv+A\iv B(M/A)\iv CA\iv&=(M/D)\iv\\
-			-A\iv B(M/A)\iv&=-(M/D)\iv BD\iv\\
-			-(M/A)\iv CA\iv&=-D\iv C(M/D)\iv\\
-			(M/A)\iv&=D\iv+D\iv C(M/D)\iv BD\iv
+			A\inv+A\inv B(M/A)\inv CA\inv&=(M/D)\inv\\
+			-A\inv B(M/A)\inv&=-(M/D)\inv BD\inv\\
+			-(M/A)\inv CA\inv&=-D\inv C(M/D)\inv\\
+			(M/A)\inv&=D\inv+D\inv C(M/D)\inv BD\inv
 		\end{align}
 	\end{subequations}
 	可得Woodbury矩阵恒等式(\thmref{thm:Woodbury matrix identity})。
@@ -694,9 +694,9 @@
 	\begin{equation}
 		\begin{bmatrix}
 			A&B\\ &D
-		\end{bmatrix}\iv=\begin{bmatrix}
-			A\iv&-A\iv BD\iv\\
-			& D\iv
+		\end{bmatrix}\inv=\begin{bmatrix}
+			A\inv&-A\inv BD\inv\\
+			& D\inv
 		\end{bmatrix};
 	\end{equation}
 \end{corollary}
@@ -707,8 +707,8 @@
 	\begin{equation}
 		\begin{bmatrix}
 			&B\\C
-		\end{bmatrix}\iv=\begin{bmatrix}
-			&C\iv\\B\iv
+		\end{bmatrix}\inv=\begin{bmatrix}
+			&C\inv\\B\inv
 		\end{bmatrix}.
 	\end{equation}
 \end{theorem}

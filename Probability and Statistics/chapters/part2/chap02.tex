@@ -2,7 +2,7 @@
 \begin{example}{零件检测}{component test}
 	一大批电子元件寿命$X$，样本$X_1,\ldots,X_n$
 	\begin{compactenum}
-		\item 若假设$X\sim\Expo(\lambda)$，那么$\lambda=\,?$
+		\item 若假设$X\sim\ExpDist(\lambda)$，那么$\lambda=\,?$
 
 		回答：参数估计
 		\item 若合格标准为$\E(X)\geqslant 5000$，那么如何判断这一批是否合格？
@@ -34,7 +34,7 @@
 	\]
 	$H_0$是复合假设，单侧检验(看$H_1$)。
 	\tcblower
-	$X\sim\Norm(\mu,\sigma_0^2)$，
+	$X\sim\NormalDist(\mu,\sigma_0^2)$，
 	\[
 		H_0:\mu=\mu_0,\quad H_1:\mu\neq\mu_0,
 	\]
@@ -46,7 +46,7 @@ $H_0$往往是受保护的，无充分证据不能拒绝；$H_1$往往是真正�
 	在$H_0$成立时，若预先指定的检验统计量取到当前观测值或更极端值的尾概率很小，则可按预定显著性水平拒绝$H_0$。连续型样本恰好取到某一组数值的概率为零，不能以此作为拒绝依据。
 	%概率很小的事件在一次试验中是不会发生的；在一次试验中小概率事件如果发生了，我们就有理由认为提出的$H_0$是不对的。
 \end{theorem}
-%小概率由研究者事先确定，一般取1\%, 5\%或10\%。小概率的取值不同，假设检验的结果可能不同。
+%小概率由研究者事先确定，一般取\qty{1}{\percent}, \qty{5}{\percent}或\qty{10}{\percent}。小概率的取值不同，假设检验的结果可能不同。
 \textbf{显著性水平}$\alpha$是检验前指定的I类错误率上限；它与由观测数据计算的$p$值不同。检验的目标是控制错误率并评估证据，统计显著性也不等同于效应在物理上的重要性。
 \begin{definition}{假设检验}{hypothesis test}
 	检验（准则）：做出决策的一个具体法则。
@@ -108,13 +108,13 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 \end{method}
 这个过程缺少对于功效$1-\beta(R)$的讨论。
 \begin{example}{$Z$检验法和$t$检验法}{Z test & t test}
-	$X\sim\Norm(\mu,\sigma^2)$，$\sigma^2$已知， 
+	$X\sim\NormalDist(\mu,\sigma^2)$，$\sigma^2$已知，
 	\[
 		H_0:\mu=\mu_0,\quad H_1:\mu\neq\mu_0,
 	\]
 	当$H_0$为真时，由式\eqref{sample-N}，选择统计量
 	\[
-		Z:=\frac{\avg X-\mu_0}{\sigma/\sqrt n}\sim\Norm(0,1),
+		Z:=\frac{\avg X-\mu_0}{\sigma/\sqrt n}\sim\NormalDist(0,1),
 	\]
 	显著性水平$\alpha>0$给定，检验的拒绝域为
 	\[
@@ -124,7 +124,7 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 	\tcblower
 	当$\sigma^2$未知时，就需要选择统计量
 	\[
-		t:=\frac{\avg X-\mu_0}{S/\sqrt n}\sim\mathrm t(n-1),
+		t:=\frac{\avg X-\mu_0}{S/\sqrt n}\sim\TDist(n-1),
 	\]
 	相应的，检验的拒绝域为
 	\[
@@ -138,9 +138,9 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 		\toprule
 		条件&$H_0$&统计量&拒绝域\\
 		\midrule
-		$\sigma^2$已知&$\mu=\mu_0$&$Z:=\frac{\avg X-\mu_0}{\sigma/\sqrt n}\sim\Norm(0,1)$&$\abs Z\geqslant z_{\alpha/2}$\\[2ex]
-		$\sigma^2$未知&$\mu=\mu_0$&$t:=\frac{\avg X-\mu_0}{S/\sqrt n}\sim\mathrm t(n-1)$&$\abs t\geqslant t_{\alpha/2}(n-1)$\\[2ex]
-		\multirow{2}*{$\mu$未知}&\multirow{2}*{$\sigma^2=\sigma_0^2$}&\multirow{2}*{$\chi^2:=\frac{(n-1)S^2}{\sigma_0^2}\sim\chi^2(n-1)$}&$\chi^2\geqslant\chi^2_{\alpha/2}(n-1)$或\\
+		$\sigma^2$已知&$\mu=\mu_0$&$Z:=\frac{\avg X-\mu_0}{\sigma/\sqrt n}\sim\NormalDist(0,1)$&$\abs Z\geqslant z_{\alpha/2}$\\[2ex]
+		$\sigma^2$未知&$\mu=\mu_0$&$t:=\frac{\avg X-\mu_0}{S/\sqrt n}\sim\TDist(n-1)$&$\abs t\geqslant t_{\alpha/2}(n-1)$\\[2ex]
+		\multirow{2}*{$\mu$未知}&\multirow{2}*{$\sigma^2=\sigma_0^2$}&\multirow{2}*{$\chi^2:=\frac{(n-1)S^2}{\sigma_0^2}\sim\ChiSqDist(n-1)$}&$\chi^2\geqslant\chi^2_{\alpha/2}(n-1)$或\\
 		&&&$\chi^2\leqslant\chi^2_{1-\alpha/2}(n-1)$\\
 		\bottomrule
 	\end{tabular}
@@ -166,7 +166,7 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 \end{compactenum}
 \section{临界值检验与置信区间的对偶关系}
 \begin{example}{正态分布的临界值检验与置信区间}{}
-	$X\sim\Norm(\mu,\sigma^2)$，$\sigma^2$已知，$\alpha\in(0,1)$给定，$X_1,\ldots,X_n$ iid 
+	$X\sim\NormalDist(\mu,\sigma^2)$，$\sigma^2$已知，$\alpha\in(0,1)$给定，$X_1,\ldots,X_n$ iid
 
 	（双侧）置信区间
 	\[
@@ -181,7 +181,7 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 	检验：%当$\abs{\avg X-\mu_0}\geqslant z_{\alpha/2}\sigma/\sqrt n$时拒绝$H_0$，
 	接受域
 	\[
-		R\c=\biggset{(X_1,\ldots,X_n)}{\abs{\avg X-\mu_0}<z_{\alpha/2}\frac\sigma{\sqrt n}}.
+		R\eventcomp=\biggset{(X_1,\ldots,X_n)}{\abs{\avg X-\mu_0}<z_{\alpha/2}\frac\sigma{\sqrt n}}.
 	\]
 \end{example}
 \begin{theorem}{临界值检验与置信区间的对偶关系}{}
@@ -196,7 +196,7 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 \end{remark}
 \section{\textit{P}值检验法}
 \begin{example}{}{}
-	$X\sim\Norm(\mu,\sigma^2)$，$\sigma^2=25$，考虑
+	$X\sim\NormalDist(\mu,\sigma^2)$，$\sigma^2=25$，考虑
 	\[
 		H_0:\mu=10,\quad H_1:\mu\neq  10,
 	\]
@@ -211,7 +211,7 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 		\abs{\avg x-10}=0.935>1.65\times\frac{5}{\sqrt{100}}\implies\text{拒绝}~H_0.
 	\]
 	\[
-		\P(|\avg X-10|\geqslant\abs{\avg x-10})=\P(\abs Z\geqslant 1.87)=0.0614.
+		\P(\abs{\avg X-10}\geqslant\abs{\avg x-10})=\P(\abs Z\geqslant 1.87)=0.0614.
 	\]
 	\begin{center}
 		\tikzfigure{p-value}
@@ -224,7 +224,7 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 \end{definition}
 当$P$值$\leqslant\alpha$时拒绝$H_0$，也称为观测值显著。
 \begin{compactenum}
-	\item $P$值$=\P(\text{观测值及更极端的观测}|H_0)\neq\P(H_0|\text{观测值})$
+	\item $P$值$=\P(\text{观测值及更极端的观测}\mid H_0)\neq\P(H_0\mid\text{观测值})$
 	\item 若$P$值不小，则不拒绝$H_0$，原因可能为：(a) $H_0$为真；(b) $H_0$为假，但检验功效低。
 \end{compactenum}
 \begin{method}{$P$值检验法}{}
@@ -248,11 +248,11 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 	\]
 	检验统计量$P_n$，由CLT
 	\[
-		\frac{P_n-p}{\sqrt{p(1-p)/n}}\dotsim\Norm(0,1)
+		\frac{P_n-p}{\sqrt{p(1-p)/n}}\dotsim\NormalDist(0,1)
 	\]
 	当$H_0$为真时，
 	\[
-		Z:=\frac{P_n-p_0}{se(P_0)}\dotsim\Norm(0,1),\quad se(P_n)=\sqrt{\frac{p_0(1-p_0)}n}.
+		Z:=\frac{P_n-p_0}{se(P_0)}\dotsim\NormalDist(0,1),\quad se(P_n)=\sqrt{\frac{p_0(1-p_0)}n}.
 	\]
 	则$P$值
 	\[
@@ -291,11 +291,11 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 	则
 	\begin{equation}
 		\label{eqn:Bayes test}
-		\frac{\P(H_0|x)}{\P(H_1|x)}=\frac{\P(H_0)\P(x|H_0)}{\P(H_1)\P(x|H_1)}<1\enspace(\text{或}\ll 1)
+		\frac{\P(H_0\mid x)}{\P(H_1\mid x)}=\frac{\P(H_0)\P(x\mid H_0)}{\P(H_1)\P(x\mid H_1)}<1\enspace(\text{或}\ll 1)
 	\end{equation}
 	时拒绝$H_0$
 \end{example}
-若$H_0:\theta=\theta_0$，$\varTheta$连续，则$\P(H_0|x)=\P(\varTheta=\theta_0|x)\equiv 0$，此时需要技术性处理，可参考陈5.2.8
+若$H_0:\theta=\theta_0$，$\varTheta$连续，则$\P(H_0\mid x)=\P(\varTheta=\theta_0\mid x)\equiv 0$，此时需要技术性处理，可参考陈5.2.8
 \paragraph{Review}
 \begin{compactenum}
 	\item Neyman-Pearson假设检验：临界值、$P$值检验法
@@ -313,7 +313,7 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 	将在$H_0$下$X$可能取值的全体$\Omega$分成互不相交的子集$A_1,\ldots,A_k$，$p_i:=\P(A_i)$。
 	观测到样本值$x_1,\ldots,x_n$落在$A_i$的频数为$f_i$，相应的期望频数为$np_i$，Pearson证明：
 	\begin{equation}
-		\chi^2:=\sum_{i=1}^k\frac{(f_i-np_i)^2}{np_i}\dotsim\chi^2(k-1).
+		\chi^2:=\sum_{i=1}^k\frac{(f_i-np_i)^2}{np_i}\dotsim\ChiSqDist(k-1).
 	\end{equation}
 	拒绝域$\chi^2\geqslant\chi^2_\alpha(k-1).$
 \end{theorem}
@@ -336,17 +336,17 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 	\[
 		\chi^2:=\sum_{i=1}^k\frac{(f_i-np_i)^2}{np_i}=14.2.
 	\]
-	检验$P$值$=\P_{H_0}(\chi^2(5)\geqslant\chi^2)=0.014$
+	检验$P$值$=\P_{H_0}(\ChiSqDist(5)\geqslant\chi^2)=0.014$
 \end{example}
-连续情况，划分区间，分别计算参数$\theta$的MLE $\theta^\ast$，卡方统计量分布近似$\chi^2(k-1-r)$，其中$r=\dim(\theta)$。但分别计算MLE非常麻烦。
+连续情况，划分区间，分别计算参数$\theta$的MLE $\theta^\ast$，卡方统计量分布近似$\ChiSqDist(k-1-r)$，其中$r=\dim(\theta)$。但分别计算MLE非常麻烦。
 
-实践中先计算$\theta$的MLE $\theta^\ast$，再划分区间，计算$p_i$，卡方统计量分布不是近似$\chi^2(k-1-r)$，但是检验$P$值介于分布$\chi^2(k-1-r)$和$\chi^2(k-1)$算得的$P$值之间。
+实践中先计算$\theta$的MLE $\theta^\ast$，再划分区间，计算$p_i$，卡方统计量分布不是近似$\ChiSqDist(k-1-r)$，但是检验$P$值介于分布$\ChiSqDist(k-1-r)$和$\ChiSqDist(k-1)$算得的$P$值之间。
 
 事实：独立的卡方统计量可以合并，自由度相应的相加。
 \begin{example}{Mendel豌豆试验}{}
 	Mendel的试验全部独立（不同作物组），Fisher计算其每个卡方统计量并且合并，得到的卡方统计量$\chi^2=41.6056$，自由度为84，$P$值
 	\[
-		\P(\chi^2(84)\geqslant\chi^2)=0.99993
+		\P(\ChiSqDist(84)\geqslant\chi^2)=0.99993
 	\]
 	\textit{were far too perfect}，Fisher对这个extraordinary result没有发表任何评论，只是指出\textit{the bias seems to pervade the whole of the data.}
 \end{example}
@@ -425,11 +425,11 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 \begin{example}{}{}
 	接\exmref{exm:Bayes test}，式\eqref{eqn:Bayes test}中，考虑
 	\[
-		\underset{\text{后验比}}{\frac{\P(H_0|x)}{\P(H_1|x)}}=\underset{\text{先验比}}{\frac{\P(H_0)}{\P(H_1)}}\underset{\text{似然比}}{\frac{\P(x|H_0)}{\P(x|H_1)}}<1\enspace(\text{或}\ll 1)
+		\underset{\text{后验比}}{\frac{\P(H_0\mid x)}{\P(H_1\mid x)}}=\underset{\text{先验比}}{\frac{\P(H_0)}{\P(H_1)}}\underset{\text{似然比}}{\frac{\P(x\mid H_0)}{\P(x\mid H_1)}}<1\enspace(\text{或}\ll 1)
 	\]
 	时拒绝$H_0$；似然比检验就是当
 	\[
-		\frac{\P(x|H_0)}{\P(x|H_1)}\leqslant c
+		\frac{\P(x\mid H_0)}{\P(x\mid H_1)}\leqslant c
 	\]
 	时拒绝$H_0$。
 \end{example}
@@ -454,13 +454,13 @@ $\alpha$固定时，使$\beta(R)$最小的检验称为水平$\alpha$下的\textb
 \]
 $\Lambda$越小则样本越不支持$H_0$。
 \begin{method}{临界值检验}{}
-	选择$\lambda_0$使得$\P(\Lambda\leqslant\lambda_0|H_0)\leqslant\alpha$，若$H_0$为真时$\Lambda$的分布方便求，则可直接计算$\P(\Lambda\leqslant\lambda_0|H_0)$。
+	选择$\lambda_0$使得$\P(\Lambda\leqslant\lambda_0\mid H_0)\leqslant\alpha$，若$H_0$为真时$\Lambda$的分布方便求，则可直接计算$\P(\Lambda\leqslant\lambda_0\mid H_0)$。
 \end{method}
 \begin{theorem}{}{}
 	在一定光滑性的条件下，%当$n\to\infty$时，
 	在$H_0$为真的前提下，
 	\begin{equation}
-		-2\ln\Lambda\dto\chi^2(d).
+		-2\ln\Lambda\dto\ChiSqDist(d).
 	\end{equation}
 	其自由度$d=\dim(\varTheta_0\cup\varTheta_1)-\dim(\varTheta_0)$，$\dim$表示自由参数的个数。
 \end{theorem}
@@ -510,7 +510,7 @@ $\Lambda$越小则样本越不支持$H_0$。
 	\]
 	且
 	\[
-		\frac{(P_1-P_2)-(p_1-p_2)}{\hat{se}}\dotsim\Norm(0,1),
+		\frac{(P_1-P_2)-(p_1-p_2)}{\hat{se}}\dotsim\NormalDist(0,1),
 	\]
 	在$H_0$为真的前提下，$p_1=p_2=:p$，
 	\[

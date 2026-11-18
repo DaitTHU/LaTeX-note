@@ -54,7 +54,7 @@
 	\end{align*}
 \end{definition}
 \begin{theorem}{Parseval等式}{Parserval Equality}
-	若$f\in\mathscr L^2\bigb{-\ell,\ell}$即平方可积，则
+	若$f\in L^2\bigb{-\ell,\ell}$即平方可积，则
 	\[
 		\frac1\ell\int_{-\ell}^\ell \abs{f(x)}^2\d x=\frac{\abs{a_0}^2}2+\sum_{n=1}^\infty(\abs{a_n}^2+\abs{b_n}^2).
 	\]
@@ -117,7 +117,7 @@
 	圆域上的Laplace方程，采用极坐标
 	\begin{align*}
 		\begin{cases}
-			\lapla u=u_{rr}+\frac1ru_r+\frac1{r^2}u_{\theta\theta}=0,&r<r_0\\
+			\laplacian u=u_{rr}+\frac1ru_r+\frac1{r^2}u_{\theta\theta}=0,&r<r_0\\
 			u(r_0,\theta)=\varphi(\theta)
 		\end{cases}
 	\end{align*}
@@ -177,13 +177,13 @@
 	圆域上的Neumann问题
 	\begin{align*}
 		\begin{cases}
-			\lapla u=0,\quad r<R\\
+			\laplacian u=0,\quad r<R\\
 			\biggeval{\pv un}_{r=R}=\varphi(\theta)
 		\end{cases}
 	\end{align*}
 	由~\textcolor[rgb]{0,.8,0}{Green公式}
 	\begin{align*}
-		{\color[rgb]{0,.8,0}{\int_{D_R}\lapla u\d x\nd y=\oint_{r=R}\pv un\d\ell}}=R\int_0^{2\pi}\varphi(\theta)\d\theta=0.
+		{\color[rgb]{0,.8,0}{\int_{D_R}\laplacian u\d x\nd y=\oint_{r=R}\pv un\d\ell}}=R\int_0^{2\pi}\varphi(\theta)\d\theta=0.
 	\end{align*}
 	剩下的证明留给读者
 \end{example}
@@ -211,7 +211,7 @@
 	
 	可以验证$X_n$是正交的，即
 	\[
-		\ave{X_m,X_n}=\int_0^LX_m(x)X_n(x)\d x=0,\quad m\neq n.
+		\inp{X_m}{X_n}=\int_0^LX_m(x)X_n(x)\d x=0,\quad m\neq n.
 	\]
 	形式解
 	\[
@@ -224,7 +224,7 @@
 	\]
 	在后面可以看到，这是广义Fourier级数，其系数
 	\[
-		C_n=\frac{\ave{\varphi,\sin\beta_nx}}{\ave{\sin\beta_nx,\sin\beta_nx}}=\frac{\int_0^L\varphi(x)\sin\beta_nx\d x}{\int_0^L\sin^2\beta_nx\d x}.
+		C_n=\frac{\inp{\varphi}{\sin\beta_nx}}{\inp{\sin\beta_nx}{\sin\beta_nx}}=\frac{\int_0^L\varphi(x)\sin\beta_nx\d x}{\int_0^L\sin^2\beta_nx\d x}.
 	\]
 \end{example}
 \begin{definition}{加权内积}{Weight Inner Product}
@@ -236,13 +236,13 @@
 	% 若$f,g$正交，则$\inp fg_\rho=0$。
 	%定义范数$\norm f_\rho:=\inp ff_\rho^{1/2}$。及
 
-	加权平方可积函数空间
+	加权平方可积函数空间把几乎处处相等的函数视为同一个元素，记作
 	\[
-		\mathscr L_\rho^2\bigb{a,b}:=\set f{\norm f_\rho<\infty}.
+		L^2_\rho\bigb{a,b}:=\set f{\norm f_\rho<\infty}.
 	\]
 \end{definition}
 \begin{theorem}{广义Fourier级数}{Generalized Fourier Series}
-	若$f_1,f_2,\ldots$在$\mathscr L_\rho^2$中完备且加权正交，则$\forall f\in\mathscr L_\rho^2$有广义Fourier级数展开
+	若$f_1,f_2,\ldots$在$L^2_\rho$中完备且加权正交，则$\forall f\in L^2_\rho$有广义Fourier级数展开
 	\[
 		f(x)\sim\sum_{i=1}^\infty a_if_i(x),\quad a_i=\frac{\inp f{f_i}_\rho}{\norm{f_i}^2_\rho}.
 	\]
@@ -259,18 +259,18 @@
 	其中$\lambda$为参数，$k,q,\rho$为实函数。
 	记
 	\[
-		\LT[f]:=-\frac{(kf')'-qf}\rho.
+		\SLop[f]:=-\frac{(kf')'-qf}\rho.
 	\]
 	则
 	\[
-		\inp{\LT[f]}g_\rho-\inp f{\LT[g]}_\rho=\bigb{k(fg'-f'g)}_a^b.
+		\inp{\SLop[f]}g_\rho-\inp f{\SLop[g]}_\rho=\bigb{k(fg'-f'g)}_a^b.
 	\]
 	好的边界条件可以使上式等于0。
 \end{definition}
 \begin{definition}{正则Sturm-Liouville问题}{}
     正则Sturm-Liouville问题
     \[
-    	\LT[f](x)=\lambda f(x).
+        \SLop[f](x)=\lambda f(x).
     \]
     
     正则条件：保证Sturm-Liouville方程在$\bigb{a,b}$上没有奇点。
@@ -290,9 +290,9 @@
 			k(a)f'(a)=k(b)f'(b)
     		\end{cases}$
     \end{center}
-    可分边界的实系数对$(c_1,c_2),(d_1,d_2)$均不同时为零。上述条件可使$\LT$是对称算子，即
+    可分边界的实系数对$(c_1,c_2),(d_1,d_2)$均不同时为零。上述条件可使$\SLop$是对称算子，即
     \[
-    	\inp{\LT[f]}g_\rho=\inp f{\LT[g]}_\rho.
+        \inp{\SLop[f]}g_\rho=\inp f{\SLop[g]}_\rho.
     \]
 \end{definition}
 \begin{theorem}{Sturm-Liouville定理1}{Sturm-Liouville Theorem I}
@@ -308,7 +308,7 @@
 		\item 特征值的特征子空间至多2维，
 
 		      可分边界条件下，特征子空间为1维；
-		\item 特征函数构成$\mathscr L_\rho^2$上完备的正交基底。
+		\item 特征函数构成$L^2_\rho$上完备的正交基底。
 	\end{compactenum}
     \tcblower
     奇异Sturm-Liouville问题不满足上述正则条件，例如端点处系数退化或区间无界。此时必须另外确定端点条件和算子的自伴定义域，谱可能含连续部分，不能直接套用上述离散谱结论。
@@ -326,8 +326,8 @@
 	扇形域上的Dirichlet问题
 	\begin{align*}
 		\begin{cases}
-			\lapla u=0,\quad r\in(1,\mathrm e),\;\theta\in(0,\pi/2).\\
-			u(1,\theta)=u(\mathrm e,\theta)=0,\\
+			\laplacian u=0,\quad r\in(1,\e),\;\theta\in(0,\pi/2).\\
+			u(1,\theta)=u(\e,\theta)=0,\\
 			u(r,0)=0,\quad u(r,\pi/2)=g(r).
 		\end{cases}
 	\end{align*}
@@ -349,10 +349,10 @@
 对非齐次方程，有时可靠直觉找出特解$v$，但对一般的非齐次方程，需要借助齐次化原理转化为齐次方程：
 
 \begin{method}{齐次化原理法}{}
-	设$\Dif_t$中关于2阶导数的系数为1
+	设$\DiffOp_t$中关于2阶导数的系数为1
 	\begin{align*}
 		\begin{cases}
-			\Dif_xu+\Dif_tu=f(x,t),\quad x\in(a,b),\;t>0\\
+			\DiffOp_xu+\DiffOp_tu=f(x,t),\quad x\in(a,b),\;t>0\\
 			(\alpha_1u-\beta_1u_x)_{x=a}=0,\quad(\alpha_2u+\beta_2u_x)_{x=b}=0,\\
 			\eval u_{t=0}=\eval{u_t}_{t=0}=0.
 		\end{cases}
@@ -364,7 +364,7 @@
 	$v$满足
 	\begin{align*}
 		\begin{cases}
-			\Dif_xv+\Dif_tv=0,\quad x\in(a,b),\;t>0\\
+			\DiffOp_xv+\DiffOp_tv=0,\quad x\in(a,b),\;t>0\\
 			(\alpha_1v-\beta_1v_x)_{x=a}=0,\quad(\alpha_2v+\beta_2v_x)_{x=b}=0,\\
 			\eval v_{t=0}=0,\quad\eval{v_t}_{t=0}=f(x,\tau).
 		\end{cases}
@@ -375,7 +375,7 @@
 	对于 
 	\begin{align*}
 		\begin{cases}
-			\Dif_xu+\Dif_tu=f(x,t),\quad x\in(a,b),\;t>0\\
+			\DiffOp_xu+\DiffOp_tu=f(x,t),\quad x\in(a,b),\;t>0\\
 			(\alpha_1u-\beta_1u_x)_{x=a}=0,\quad(\alpha_2u+\beta_2u_x)_{x=b}=0,\\
 			\eval u_{t=0}=\varphi(x),\quad\eval{u_t}_{t=0}=\psi(x).
 		\end{cases}
@@ -383,7 +383,7 @@
 	\begin{compactenum}
 		\item 首先分离变量，求出$f\equiv 0$对应的特征值问题
 		\[
-			\Dif_xX=-\lambda X.
+			\DiffOp_xX=-\lambda X.
 		\]
 		解出特征值$\{\lambda_n\}$和本征函数$\{X_n(x)\}$，注意$n$的取值是否含0。
 		\item 根据Sturm-Liouville定理判断$\{X_n\}$的完备性，展开
@@ -394,7 +394,7 @@
 		求解 
 		\begin{align*}
 			\begin{cases}
-				\Dif_tT_n(t)-\lambda_nT_n(t)=f_n(t),\\
+				\DiffOp_tT_n(t)-\lambda_nT_n(t)=f_n(t),\\
 				T_n(t)=\varphi_n,\quad T_n'(t)=\psi_n.
 			\end{cases}
 		\end{align*}
@@ -406,7 +406,7 @@
 	对于一般地非齐次问题
 	\begin{align*}
 		\begin{cases}
-			\Dif_xu+\Dif_tu=f(x,t),\quad x\in(a,b),\;t>0\\
+			\DiffOp_xu+\DiffOp_tu=f(x,t),\quad x\in(a,b),\;t>0\\
 			(\alpha_1u-\beta_1u_x)_{x=a}=g_1(t),\quad(\alpha_2u+\beta_2u_x)_{x=b}=g_2(t),\\
 			\eval u_{t=0}=\varphi(x),\quad\eval{u_t}_{t=0}=\psi(x).
 		\end{cases}
@@ -432,7 +432,7 @@
 	这样便可将$u$分解为$u=v+w$，而$w$的边界条件是齐次化的：
 	\begin{align*}
 		\begin{cases}
-			\Dif_xw+\Dif_tw=f(x,t)-\Dif_xv-\Dif_tv,\quad x\in(a,b),\;t>0\\
+			\DiffOp_xw+\DiffOp_tw=f(x,t)-\DiffOp_xv-\DiffOp_tv,\quad x\in(a,b),\;t>0\\
 			(\alpha_1w-\beta_1w_x)_{x=a}=0,\quad(\alpha_2w+\beta_2w_x)_{x=b}=0,\\
 			\eval w_{t=0}=\varphi(x)-\eval v_{t=0},\quad\eval{w_t}_{t=0}=\psi(x)-\eval{v_t}_{t=0}.
 		\end{cases}

@@ -27,8 +27,8 @@
 法向量$\uvec n$指向理想导体外部。其余两个边界条件是关于法向$\bm B$和切向$\bm E$的：
 \begin{subequations}
     \begin{align}
-        \uvec n\cdot(\bm B-\bm B_\c)&=0,\\
-        \uvec n\times(\bm E-\bm E_\c)&=\bm 0.
+        \uvec n\cdot(\bm B-\bm B_\conductor)&=0,\\
+        \uvec n\times(\bm E-\bm E_\conductor)&=\bm 0.
     \end{align}
 \end{subequations}
 下标c表示导体。
@@ -40,63 +40,63 @@
 非理想的良导体的电导率$\sigma$有限，其内部会存在电场，
 且振幅随趋肤深度(skin depth)指数衰减：
 \begin{equation}
-    \delta:=\sqrt{\frac2{\mu_\c\omega\sigma}}.
+    \delta:=\sqrt{\frac2{\mu_\conductor\omega\sigma}}.
 \end{equation}
 而Ohm定律$\bm J=\sigma\bm E$说明表面没有电流$\bm\jmath$：
 % 边界条件应改为
 \[
-    \uvec n\times(\bm H-\bm H_\c)=\bm 0,
+    \uvec n\times(\bm H-\bm H_\conductor)=\bm 0,
 \]
 由于场在垂直于表面的方向上的空间变化比平行方向快得多，因此和法向导数相比，切向导数可以忽略。若$\xi$表示导体向内的法向坐标，则
 \[
-    \nabla\simeq-\uvec n\pp\xi.
+    \nabla\simeq-{\uvec n}\pp\xi.
 \]
-在$\sigma\gg\omega\varepsilon_\c$且$\delta$远小于表面曲率半径和切向变化尺度时，忽略导体内的位移电流，谐振场的Maxwell方程变为
+在$\sigma\gg\omega\varepsilon_\conductor$且$\delta$远小于表面曲率半径和切向变化尺度时，忽略导体内的位移电流，谐振场的Maxwell方程变为
 \begin{align*}
-    \bm E_\c&\simeq\frac1\sigma\curl\bm H_\c\simeq-\frac1\sigma\uvec n\times\pv{\bm H_\c}\xi,\\
-    \bm H_\c&=-\i\frac1{\mu_\c\omega}\curl\bm E_\c\simeq\i\frac1{\mu_\c\omega}\uvec n\times\pv{\bm E_\c}\xi.
+    \bm E_\conductor&\simeq\frac1\sigma\curl\bm H_\conductor\simeq-\frac1\sigma\uvec n\times\pv{\bm H_\conductor}\xi,\\
+    \bm H_\conductor&=-\i\frac1{\mu_\conductor\omega}\curl\bm E_\conductor\simeq\i\frac1{\mu_\conductor\omega}\uvec n\times\pv{\bm E_\conductor}\xi.
 \end{align*}
 变形得到
 \begin{align*}
-    \Bigp{\pp[2]\xi+\i\frac2{\delta^2}}(\uvec n\times\bm H_\c)&\simeq\bm 0,\\
-    \uvec n\cdot\bm H_\c&\simeq 0.
+    \Bigp{\pp[2]\xi+\i\frac2{\delta^2}}(\uvec n\times\bm H_\conductor)&\simeq\bm 0,\\
+    \uvec n\cdot\bm H_\conductor&\simeq 0.
 \end{align*}
 第二个方程说明：导体内$\bm H$平行于表面，这与边界条件相符。解得
 \begin{equation}
-    \bm H_\c=\bm H_\parallel\e^{-\xi/\delta}\e^{\i\xi/\delta}.
+    \bm H_\conductor=\bm H_\parallel\e^{-\xi/\delta}\e^{\i\xi/\delta}.
 \end{equation}
 $\bm H_\parallel$是导体外表面的切向磁场，则导体内电场
 \begin{equation}
-    \bm E_\c\simeq\sqrt{\frac{\mu_\c\omega}{2\sigma}}(1-\i)(\uvec n\times\bm H_\parallel)\e^{-\xi/\delta}\e^{\i\xi/\delta}.
+    \bm E_\conductor\simeq\sqrt{\frac{\mu_\conductor\omega}{2\sigma}}(1-\i)(\uvec n\times\bm H_\parallel)\e^{-\xi/\delta}\e^{\i\xi/\delta}.
 \end{equation}
-故导体内的$\bm H_\c$和$\bm E_\c$与表面平行，大小随指数迅速衰减，二者有相位差，且磁场比电场强得多。
+故导体内的$\bm H_\conductor$和$\bm E_\conductor$与表面平行，大小随指数迅速衰减，二者有相位差，且磁场比电场强得多。
 在表面外侧，除了法向的$\bm E$和切向的$\bm H$外，还有$\bm E$的一个微小的切向分量存在。
 这意味着有功率流入导体，每单位面积吸收功率的时间平均为
 \begin{equation}
-    \dv{P_\text{loss}}a=-\frac12\Re[\uvec n\cdot(\bm E\times\bm H\cj)]=\frac{\mu_\c\omega\delta}4\abs{\bm H_\parallel}^2.
+    \dv{P_{\mathrm{loss}}}a=-\frac12\Re[\uvec n\cdot(\bm E\times\bm H\conj)]=\frac{\mu_\conductor\omega\delta}4\abs{\bm H_\parallel}^2.
 \end{equation}
 可把这个结果简单地解释为导体内的Ohm损失。
 每单位体积内Ohm损失率的时间平均为
-% 由Ohm定律，导体表面附件有电流密度$\bm J=\sigma\bm E_\c$，而
+% 由Ohm定律，导体表面附件有电流密度$\bm J=\sigma\bm E_\conductor$，而
 \[
-    \dv{P_\text{loss}}V=\frac12\Re(\bm J\cdot\bm E\cj)=\frac1{2\sigma}\abs{\bm J}^2=\frac\sigma2\abs{\bm E}^2.
+    \dv{P_{\mathrm{loss}}}V=\frac12\Re(\bm J\cdot\bm E\conj)=\frac1{2\sigma}\abs{\bm J}^2=\frac\sigma2\abs{\bm E}^2.
 \]
 由于电流密度$\bm J$局限于导体表面下的薄层内，
 其等效有效面电流密度为
 \begin{equation}
     \label{eqn:jeff}
-    \bm\jmath\eff:=\int\zti\bm J\d\xi=\uvec n\times\bm H_\parallel.
+    \bm\jmath_\eff:=\intRplus\bm J\d\xi=\uvec n\times\bm H_\parallel.
 \end{equation}
 其形式与理想导体\eqref{eqn:nxH=j}相同，
-只是理想面电流密度$\bm\jmath$换成了等效面电流密度$\bm\jmath\eff$。
+只是理想面电流密度$\bm\jmath$换成了等效面电流密度$\bm\jmath_\eff$。
 功率损失可以用等效面电流密度表示：
 \begin{equation}
     \label{eqn:dPloss/da}
-    \dv{P_\text{loss}}a=\frac1{2\sigma\delta}\abs{\bm\jmath\eff}^2.
+    \dv{P_{\mathrm{loss}}}a=\frac1{2\sigma\delta}\abs{\bm\jmath_\eff}^2.
 \end{equation}
-可定义等效表面电阻$R_\text s=1/\sigma\delta$。
+可定义等效表面电阻$R_{\mathrm{s}}=1/\sigma\delta$。
 % 这说明$1/2\sigma\delta$起着导体表面电阻的作用。
-因此，只要我们解出理想导体边界的场，就可以通过\eqref{eqn:jeff}和\eqref{eqn:dPloss/da}给出的$\bm\jmath\eff$近似地算出实际波导、谐振腔和传输线的电阻损失。
+因此，只要我们解出理想导体边界的场，就可以通过\eqref{eqn:jeff}和\eqref{eqn:dPloss/da}给出的$\bm\jmath_\eff$近似地算出实际波导、谐振腔和传输线的电阻损失。
 
 \section{柱形波导和谐振腔}
 
@@ -116,7 +116,7 @@ $\bm H_\parallel$是导体外表面的切向磁场，则导体内电场
 \end{subequations}
 得到Helmholtz方程：
 \[
-    (\lapla+\mu\varepsilon\omega^2)\bm E=\bm 0,
+    (\laplacian+\mu\varepsilon\omega^2)\bm E=\bm 0,
 \]
 假定柱形曲面$S$的截面形状和大小沿轴不变，称轴线方向为纵向(longitudinal)，垂直于纵向的方向为横向(transverse)。
 由边界限制，单独考虑纵向($z$轴)的空间变化：
@@ -128,16 +128,16 @@ $\bm H_\parallel$是导体外表面的切向磁场，则导体内电场
 假定了场对$z$有上述依赖关系后，波动方程就简化为二维形式：
 \begin{equation}
     \label{eqn:lapla_tE}
-    (\lapla_\t+\mu\varepsilon\omega^2-k_z^2)\bm E=0,
+    (\laplacian_\transv+\mu\varepsilon\omega^2-k_z^2)\bm E=0,
 \end{equation}
-其中$\lapla_\t$表示Laplace算符的横向部分：
+其中$\laplacian_\transv$表示Laplace算符的横向部分：
 \[
-    \lapla=:\lapla_\t+\pp[2]z,
+    \laplacian=:\laplacian_\transv+\pp[2]z,
 \]
-将场分解为横向和纵向两个分量$\bm E=\bm E_\t+\bm E_z$，有
+将场分解为横向和纵向两个分量$\bm E=\bm E_\transv+\bm E_z$，有
 \begin{subequations}
     \begin{align}
-        \bm E_\t&=(\uvec z\times\bm E)\times\uvec z,\\
+        \bm E_\transv&=(\uvec z\times\bm E)\times\uvec z,\\
         \bm E_z&=E_z\uvec z,
     \end{align}
 \end{subequations}
@@ -145,22 +145,22 @@ Maxwell方程组变为
 \begin{subequations}
     \label{eqn:EtEzBtBz}
     \begin{align}
-        \nabla_\t\cdot\bm E_\t+\pv{E_z}z&=0,\\
-        \nabla_\t\cdot\bm B_\t+\pv{B_z}z&=0,\\
-        \nabla_\t E_z-\pv{\bm E_\t}z&=\i\omega\uvec z\times\bm B_\t,\\
-        \uvec z\cdot(\nabla_\t\times\bm E_\t)&=\i\omega\bm B_z,\\
-        \nabla_\t B_z-\pv{\bm B_\t}z&=-\i\mu\varepsilon\omega\uvec z\times\bm E_\t,\\
-        \uvec z\cdot(\nabla_\t\times\bm B_\t)&=\i\mu\varepsilon\omega\bm E_z.
+        \nabla_\transv\cdot\bm E_\transv+\pv{E_z}z&=0,\\
+        \nabla_\transv\cdot\bm B_\transv+\pv{B_z}z&=0,\\
+        \nabla_\transv E_z-\pv{\bm E_\transv}z&=\i\omega\uvec z\times\bm B_\transv,\\
+        \uvec z\cdot(\nabla_\transv\times\bm E_\transv)&=\i\omega\bm B_z,\\
+        \nabla_\transv B_z-\pv{\bm B_\transv}z&=-\i\mu\varepsilon\omega\uvec z\times\bm E_\transv,\\
+        \uvec z\cdot(\nabla_\transv\times\bm B_\transv)&=\i\mu\varepsilon\omega\bm E_z.
     \end{align}
 \end{subequations}
-结合纵向波数的关系式\eqref{eqn:lapla_tE}，$\bm E_\t,\bm B_\t$可以被$E_z,B_z$确定
+结合纵向波数的关系式\eqref{eqn:lapla_tE}，$\bm E_\transv,\bm B_\transv$可以被$E_z,B_z$确定
 \begin{subequations}
     \label{eqn:EtBt=EzBz}
     \begin{align}
         \label{eqn:Et=EzBz}
-        \bm E_\t&=\i\frac1{\mu\varepsilon\omega^2-k_z^2}(k_z\nabla_\t E_z-\omega\uvec z\times\nabla_\t B_z),\\
+        \bm E_\transv&=\i\frac1{\mu\varepsilon\omega^2-k_z^2}(k_z\nabla_\transv E_z-\omega\uvec z\times\nabla_\transv B_z),\\
         \label{eqn:Bt=EzBz}
-        \bm B_\t&=\i\frac1{\mu\varepsilon\omega^2-k_z^2}(k_z\nabla_\t B_z+\mu\varepsilon\omega\uvec z\times\nabla_\t E_z),
+        \bm B_\transv&=\i\frac1{\mu\varepsilon\omega^2-k_z^2}(k_z\nabla_\transv B_z+\mu\varepsilon\omega\uvec z\times\nabla_\transv E_z),
     \end{align}
 \end{subequations}
 
@@ -169,18 +169,18 @@ Maxwell方程组变为
 在讨论中空柱体内可以存在的各种场之前，我们先介绍简并型或特殊型解：横电磁(transverse electromagnetic, TEM)波。这种解只有垂直于传播方向的横场分量，$E_z=B_z=0$且
 \begin{subequations}
     \begin{align}
-        \nabla_\t\cdot\bm E_\text{TEM}&=0,\\
-        \nabla_\t\times\bm E_\text{TEM}&=\bm 0,
+        \nabla_\transv\cdot\bm E_\mathrm{TEM}&=0,\\
+        \nabla_\transv\times\bm E_\mathrm{TEM}&=\bm 0,
     \end{align}
 \end{subequations}
-因此$\bm E_\text{TEM}$是二维静电问题的一个解。纵向波数就是无限介质中的波数
+因此$\bm E_\mathrm{TEM}$是二维静电问题的一个解。纵向波数就是无限介质中的波数
 \begin{equation}
     \label{eqn:TEM k0}
     k_z=k_0:=\omega\sqrt{\mu\varepsilon},
 \end{equation}
 磁场 
 \[
-    \bm B_\text{TEM}=\pm\sqrt{\mu\varepsilon}\uvec z\times\bm E_\text{TEM},
+    \bm B_\mathrm{TEM}=\pm\sqrt{\mu\varepsilon}\uvec z\times\bm E_\mathrm{TEM},
 \]
 电导率为无穷大的单个中空柱形导体内不可能存在TEM模。为了运载TEM模，必须有两个及以上的等势面(比如同轴线)。TEM模的一个重要性质是不存在截止频率，即任意$\omega$均可以传播（$k_z$均是实数）。
 \paragraph{TE模式和TM模式}
@@ -198,7 +198,7 @@ Maxwell方程组变为
 \begin{compactitem}
 	\item TM模式：磁场为横向($B_z=0$)，边界条件：
     \begin{equation}
-        E_z|_S=0;
+        \eval{E_z}_S=0;
     \end{equation}
 	\item TE模式：电场为横向($E_z=0$)，边界条件：
     \begin{equation}
@@ -210,40 +210,40 @@ Maxwell方程组变为
 由\eqref{eqn:EtEzBtBz}，
 TM波和TE波的横磁场和横电场的关系如下：
 \[
-    \bm H_\t=\pm\uvec z\times\frac{\bm E_\t}Z,
+    \bm H_\transv=\pm{\uvec z}\times\frac{\bm E_\transv}Z,
 \]
 式中$Z$定义为波阻抗(wave impedance)：
 \[
     Z:=\begin{cases}
-        \frac{k_z}{\varepsilon\omega}=\frac{k_z}{k_0}\sqrt{\frac\mu\varepsilon},&\text{TM}\\
-        \frac{\mu\omega}{k_z}=\frac{k_0}{k_z}\sqrt{\frac\mu\varepsilon},&\text{TE}
+        \frac{k_z}{\varepsilon\omega}=\frac{k_z}{k_0}\sqrt{\frac\mu\varepsilon},&\mathrm{TM}\\
+        \frac{\mu\omega}{k_z}=\frac{k_0}{k_z}\sqrt{\frac\mu\varepsilon},&\mathrm{TE}
     \end{cases}
 \]
 这里$k_0$由\eqref{eqn:TEM k0}给出。
 特别地，自由空间阻抗(impedance of free space)为
 \begin{equation}
-    Z_0=\sqrt{\frac{\mu_0}{\varepsilon_0}}=\mu_0c\simeq 120\pi\,\si{\ohm}
+    Z_0=\sqrt{\frac{\mu_0}{\varepsilon_0}}=\mu_0c\simeq 120\pi\,\unit{\ohm}
 \end{equation}
 横向场可由纵向场决定
 \begin{subequations}
     \label{eqn:TE/TM field psi}
     \begin{alignat}{2}
         \label{eqn:TM field psi}
-        \text{TM}&:\quad&\bm E_\t&=\pm\i\frac{k_z}{k_\c^2}\nabla_\t\psi,\quad E_z=\psi\e^{\pm\i k_zz};\\
+        \mathrm{TM}&:\quad&\bm E_\transv&=\pm\i\frac{k_z}{k_\cutoff^2}\nabla_\transv\psi,\quad E_z=\psi\e^{\pm\i k_zz};\\
         \label{eqn:TE field psi}
-        \text{TE}&:\quad&\bm H_\t&=\pm\i\frac{k_z}{k_\c^2}\nabla_\t\psi,\quad H_z=\psi\e^{\pm\i k_zz}.
+        \mathrm{TE}&:\quad&\bm H_\transv&=\pm\i\frac{k_z}{k_\cutoff^2}\nabla_\transv\psi,\quad H_z=\psi\e^{\pm\i k_zz}.
     \end{alignat}
 \end{subequations}
-其中$k_\c^2=\mu\varepsilon\omega^2-k_z^2$。
+其中$k_\cutoff^2=\mu\varepsilon\omega^2-k_z^2$。
 标量函数$\psi$满足二维波动方程
 \begin{equation}
     \label{eqn:laplat+kc2}
-    (\lapla_\t+k_\c^2)\psi=0,
+    (\laplacian_\transv+k_\cutoff^2)\psi=0,
 \end{equation}
 根据边界条件：
 \begin{alignat*}{2}
-    \text{TM}&:&\psi|_S&=0;\\
-    \text{TE}&:&\quad\biggeval{\pv\psi n}_S&=0.
+    \mathrm{TM}&:&\eval{\psi}_S&=0;\\
+    \mathrm{TE}&:&\quad\biggeval{\pv\psi n}_S&=0.
 \end{alignat*}
 可以确定一系列本征值$k_{\mathrm ci}$和本征函数$\psi_i$，这些不同的解称为波导的模式(mode)。
 \begin{definition}
@@ -251,18 +251,18 @@ TM波和TE波的横磁场和横电场的关系如下：
     定义单个模式的截止频率(cutoff frequency)：
     \begin{equation}
         \label{eqn:cutoff omega}
-        \omega_\c:=\frac{k_\c}{\sqrt{\mu\varepsilon}},
+        \omega_\cutoff:=\frac{k_\cutoff}{\sqrt{\mu\varepsilon}},
     \end{equation}
-    相应的波长$\lambda_\c$称为截止波长。
+    相应的波长$\lambda_\cutoff$称为截止波长。
 \end{definition}
 对于给定的频率$\omega$，单个模式对应的波数
 \begin{equation}
-    k_z=\sqrt{\mu\varepsilon}\sqrt{\omega^2-\omega_\c^2}.
+    k_z=\sqrt{\mu\varepsilon}\sqrt{\omega^2-\omega_\cutoff^2}.
 \end{equation}
 截止频率的意义为：
 \begin{compactitem}
-    \item 当$\omega>\omega_\c$时，$k_z^2>0$，模式可以在波导中传播；
-    \item 当$\omega<\omega_\c$时，$k_z^2<0$，模式不能在波导中传播。
+    \item 当$\omega>\omega_\cutoff$时，$k_z^2>0$，模式可以在波导中传播；
+    \item 当$\omega<\omega_\cutoff$时，$k_z^2<0$，模式不能在波导中传播。
 \end{compactitem}
 因此给定频率上，只有有限个模式可以传播。
 可以通过选择波导的尺寸，使得在使用频率上只能出现最低模式的波。
@@ -271,17 +271,17 @@ TM波和TE波的横磁场和横电场的关系如下：
 
 均匀介质波导中的波数$k_z$总是小于无限空间中的波数$k_0$，因此相速度$v_\varphi$大于无限空间中的光速：
 \[
-    v_\varphi=\frac\omega{k_z}=\frac1{\sqrt{\mu\varepsilon}}\frac1{\sqrt{1-(\omega_\c/\omega)^2}}>\frac1{\sqrt{\mu\varepsilon}}.
+    v_\varphi=\frac\omega{k_z}=\frac1{\sqrt{\mu\varepsilon}}\frac1{\sqrt{1-(\omega_\cutoff/\omega)^2}}>\frac1{\sqrt{\mu\varepsilon}}.
 \]
 对于无色散填充介质，群速度小于介质中的光速，并在截止频率处趋于0：
 \[
-    v_\text g=\dv\omega{k_z}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{1-\Bigp{\frac{\omega_\c}\omega}^2}<\frac1{\sqrt{\mu\varepsilon}}.
+    v_{\mathrm{g}}=\dv\omega{k_z}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{1-\Bigp{\frac{\omega_\cutoff}\omega}^2}<\frac1{\sqrt{\mu\varepsilon}}.
 \]
 因此并不违反相对论，并且有关系
 \begin{equation}
-    v_\varphi v_\text g=\frac1{\mu\varepsilon}.
+    v_\varphi v_{\mathrm{g}}=\frac1{\mu\varepsilon}.
 \end{equation}
-$\omega\vs k_z$的关系称为色散曲线，曲线上的点的幅角是相速度，切线斜率是群速度。
+在 $\omega\vs k_z$ 色散图上，原点与曲线上一点的连线斜率 $\omega/k_z$ 是相速度，该点的切线斜率 $\d\omega/\nd k_z$ 是群速度。
 在均匀传输系统中是双曲线。
 
 \subsection{矩形波导}
@@ -297,14 +297,14 @@ $\omega\vs k_z$的关系称为色散曲线，曲线上的点的幅角是相速�
 采用直角坐标，
 波动方程\eqref{eqn:laplat+kc2}为：
 \begin{equation}
-    \Bigp{\pp[2]x+\pp[2]y+k_\c^2}\psi=0,
+    \Bigp{\pp[2]x+\pp[2]y+k_\cutoff^2}\psi=0,
 \end{equation}
 分离变量$\psi(x,y)=X(x)Y(y)$可得
 \begin{align*}
     X(x)&=A\cos(k_xx)+B\sin(k_xx),\\
     Y(y)&=C\cos(k_yy)+D\sin(k_yy).
 \end{align*}
-满足$k_\c^2=k_x^2+k_y^2$，故
+满足$k_\cutoff^2=k_x^2+k_y^2$，故
 \begin{equation}
     k_x^2+k_y^2+k_z^2=k_0^2=\mu\varepsilon\omega^2.
 \end{equation}
@@ -327,15 +327,15 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 由\eqref{eqn:TE field psi}和\eqref{eqn:Et=EzBz}，场的表达式为：
 \begin{subequations}
     \begin{align}
-        H_x&=-\i\frac{k_zk_x}{k_\c^2}H_0\sin(k_xx)\cos(k_yy)\e^{\i(k_zz-\omega t)},\\
-        H_y&=-\i\frac{k_zk_y}{k_\c^2}H_0\cos(k_xx)\sin(k_yy)\e^{\i(k_zz-\omega t)},\\
+        H_x&=-\i\frac{k_zk_x}{k_\cutoff^2}H_0\sin(k_xx)\cos(k_yy)\e^{\i(k_zz-\omega t)},\\
+        H_y&=-\i\frac{k_zk_y}{k_\cutoff^2}H_0\cos(k_xx)\sin(k_yy)\e^{\i(k_zz-\omega t)},\\
         H_z&=H_0\cos(k_xx)\cos(k_yy)\e^{\i(k_zz-\omega t)},\\
-        E_x&=-\i\frac{\omega\mu k_y}{k_\c^2}H_0\cos(k_xx)\sin(k_yy)\e^{\i(k_zz-\omega t)},\\
-        E_y&=\i\frac{\omega\mu k_x}{k_\c^2}H_0\sin(k_xx)\cos(k_yy)\e^{\i(k_zz-\omega t)},\\
+        E_x&=-\i\frac{\omega\mu k_y}{k_\cutoff^2}H_0\cos(k_xx)\sin(k_yy)\e^{\i(k_zz-\omega t)},\\
+        E_y&=\i\frac{\omega\mu k_x}{k_\cutoff^2}H_0\sin(k_xx)\cos(k_yy)\e^{\i(k_zz-\omega t)},\\
         E_z&=0.
     \end{align}
 \end{subequations}
-虚数单位$\i$说明传播方向上$\bm H_\t,\bm E_\t$与$H_z$有$90\degree$的相位差。
+虚数单位$\i$说明传播方向上$\bm H_\transv,\bm E_\transv$与$H_z$有$\ang{90}$的相位差。
 
 由此便可画出不同TE模式的电场线和磁场线。如\figref{fig:waveguide rect TE} 所示为$xy$截面，蓝色实线是电场线、红色虚线是磁场线(的投影)。
 注意磁场线不接触内壁，而是会在$z$方向延伸形成回路。
@@ -357,11 +357,11 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
 截止频率表达式同TM模，但由于$\psi\not\equiv 0$，故$m,n$均不能为0，最低模式为TM$_{11}$。
 \begin{subequations}
     \begin{align}
-        H_x&=-\i\frac{\omega\varepsilon k_y}{k_\c^2}E_0\sin(k_xx)\cos(k_yy)\e^{\i(k_zz-\omega t)},\\
-        H_y&=\i\frac{\omega\varepsilon k_x}{k_\c^2}E_0\cos(k_xx)\sin(k_yy)\e^{\i(k_zz-\omega t)},\\
+        H_x&=-\i\frac{\omega\varepsilon k_y}{k_\cutoff^2}E_0\sin(k_xx)\cos(k_yy)\e^{\i(k_zz-\omega t)},\\
+        H_y&=\i\frac{\omega\varepsilon k_x}{k_\cutoff^2}E_0\cos(k_xx)\sin(k_yy)\e^{\i(k_zz-\omega t)},\\
         H_z&=0,\\
-        E_x&=\i\frac{k_zk_x}{k_\c^2}E_0\cos(k_xx)\sin(k_yy)\e^{\i(k_zz-\omega t)},\\
-        E_y&=\i\frac{k_zk_y}{k_\c^2}E_0\sin(k_xx)\cos(k_yy)\e^{\i(k_zz-\omega t)},\\
+        E_x&=\i\frac{k_zk_x}{k_\cutoff^2}E_0\cos(k_xx)\sin(k_yy)\e^{\i(k_zz-\omega t)},\\
+        E_y&=\i\frac{k_zk_y}{k_\cutoff^2}E_0\sin(k_xx)\cos(k_yy)\e^{\i(k_zz-\omega t)},\\
         E_z&=E_0\sin(k_xx)\sin(k_yy)\e^{\i(k_zz-\omega t)}.
     \end{align}
 \end{subequations}
@@ -390,11 +390,11 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
 \end{center}
 采用柱坐标，波动方程\eqref{eqn:laplat+kc2}为：
 \begin{equation}
-    \Bigp{\pp[2]\rho+\frac1\rho\pp\rho+\frac1{\rho^2}\pp[2]\phi+k_\c^2}\psi=0,
+    \Bigp{\pp[2]\rho+\frac1\rho\pp\rho+\frac1{\rho^2}\pp[2]\phi+k_\cutoff^2}\psi=0,
 \end{equation}
 分离变量$\psi(\rho,\phi)=R(\rho)\Phi(\phi)$可得
 \begin{align*}
-    R(\rho)&=AJ_m(k_\c\rho)+BN_m(k_\c\rho),\\
+    R(\rho)&=AJ_m(k_\cutoff\rho)+BN_m(k_\cutoff\rho),\\
     \Phi(\phi)&=\e^{\pm\i m\phi}.
 \end{align*}
 其中$J_m,N_m$分别是第一、二类Bessel函数，由$R(0)<\infty$知$B=0$。由于极轴的选取是任意的，取$D=0$。
@@ -403,18 +403,18 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
 
 $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
 \begin{equation}
-    \psi_{mn}=AJ_m(k_\c\rho)\e^{\pm\i m\phi},\quad k_\c=\frac{x_{mn}}a.
+    \psi_{mn}=AJ_m(k_\cutoff\rho)\e^{\pm\i m\phi},\quad k_\cutoff=\frac{x_{mn}}a.
 \end{equation}
 其中$x_{mn}$表示$J_m$的第$n$个正零点。
 场的表达式为
 \begin{subequations}
     \begin{align*}
-        H_\rho&=\pm m\frac{\omega\varepsilon k_z}{k_\c^2\rho}E_0J_m(k_\c\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
-        H_\phi&=\i\frac{\omega\varepsilon k_z}{k_\c}E_0J_m'(k_\c\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        H_\rho&=\pm m\frac{\omega\varepsilon k_z}{k_\cutoff^2\rho}E_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        H_\phi&=\i\frac{\omega\varepsilon k_z}{k_\cutoff}E_0J_m'(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
         H_z&=0,\\
-        E_\rho&=\i\frac{k_z}{k_\c}E_0J_m'(k_\c\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
-        E_\phi&=\mp m\frac{k_z}{k_\c^2\rho}E_0J_m(k_\c\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
-        E_z&=E_0J_m(k_\c\rho)\e^{\i(k_zz-\omega t\pm m\phi)}.
+        E_\rho&=\i\frac{k_z}{k_\cutoff}E_0J_m'(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        E_\phi&=\mp m\frac{k_z}{k_\cutoff^2\rho}E_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        E_z&=E_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)}.
     \end{align*}
 \end{subequations}
 
@@ -422,17 +422,17 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
 
 $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 \begin{equation}
-    \psi_{mn}=AJ_m(k_\c\rho)\e^{\pm\i m\phi},\quad k_\c=\frac{x_{mn}'}a.
+    \psi_{mn}=AJ_m(k_\cutoff\rho)\e^{\pm\i m\phi},\quad k_\cutoff=\frac{x_{mn}'}a.
 \end{equation}
 其中$x_{mn}'$表示$J_m'$的第$n$个正零点。
 场的表达式为
 \begin{subequations}
     \begin{align*}
-        H_\rho&=\i\frac{k_z}{k_\c}H_0J_m'(k_\c\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
-        H_\phi&=\mp m\frac{k_z}{k_\c^2\rho}H_0J_m(k_\c\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
-        H_z&=H_0J_m(k_\c\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
-        E_\rho&=\pm m\frac{\omega\mu k_z}{k_\c^2\rho}H_0J_m(k_\c\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
-        E_\phi&=\i\frac{\omega\mu k_z}{k_\c}H_0J_m'(k_\c\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        H_\rho&=\i\frac{k_z}{k_\cutoff}H_0J_m'(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        H_\phi&=\mp m\frac{k_z}{k_\cutoff^2\rho}H_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        H_z&=H_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        E_\rho&=\pm m\frac{\omega\mu k_z}{k_\cutoff^2\rho}H_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        E_\phi&=\i\frac{\omega\mu k_z}{k_\cutoff}H_0J_m'(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
         E_z&=0.
     \end{align*}
 \end{subequations}
@@ -527,12 +527,12 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 便可在给定$\omega$下求得$k_{x1},k_{x2}$和$k_z$。
 另一方面，也可以令$k_z=0$求得截止频率满足的方程：
 \begin{equation}
-    \sqrt{\frac{\mu_1}{\varepsilon_1}}\tan(\omega_\c\sqrt{\mu_1\varepsilon_1}d)=
-    \sqrt{\frac{\mu_2}{\varepsilon_2}}\tan(\omega_\c\sqrt{\mu_2\varepsilon_2}(a-d)).
+    \sqrt{\frac{\mu_1}{\varepsilon_1}}\tan(\omega_\cutoff\sqrt{\mu_1\varepsilon_1}d)=
+    \sqrt{\frac{\mu_2}{\varepsilon_2}}\tan(\omega_\cutoff\sqrt{\mu_2\varepsilon_2}(a-d)).
 \end{equation}
 上式可以通过作图求出交点。显然，TE$_{m0}$的截止频率位于分别完全填充介质1 ($d=a$)和介质2 ($d=0$)的截止频率之间：
 \[
-    \frac{m\pi}{a\sqrt{\mu_1\varepsilon_1}}<\omega_\c<\frac{m\pi}{a\sqrt{\mu_2\varepsilon_2}},
+    \frac{m\pi}{a\sqrt{\mu_1\varepsilon_1}}<\omega_\cutoff<\frac{m\pi}{a\sqrt{\mu_2\varepsilon_2}},
 \]
 
 考虑介质2为真空，
@@ -543,10 +543,10 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 
 我们扩大前面对任意截面形状的柱形波导所作的一般讨论，使它包括沿波导的能流以及波的衰减，后者是当电导率有限时由波导管壁中能量损耗所引起的。我们只限于讨论波导中只存在一种模式的情况；不过将简短提一下简并模式。能流用复Poynting矢量描写；
 \begin{equation}
-    \bm S=\frac12\bm E\times\bm H\cj=\frac{\omega k}{2\gamma^4}
+    \bm S=\frac12\bm E\times\bm H\conj=\frac{\omega k}{2\gamma^4}
     \begin{cases}
-        \varepsilon\Bigp{\uvec z\abs{\nabla_\t\psi}^2+\i\frac{\gamma^2}k\psi\nabla_\t\psi\cj},&\text{TM}\\[1ex]
-        \mu\Bigp{\uvec z\abs{\nabla_\t\psi}^2-\i\frac{\gamma^2}k\psi\cj\nabla_\t\psi},&\text{TE}
+        \varepsilon\Bigp{\uvec z\abs{\nabla_\transv\psi}^2+\i\frac{\gamma^2}k\psi\nabla_\transv\psi\conj},&\mathrm{TM}\\[1ex]
+        \mu\Bigp{\uvec z\abs{\nabla_\transv\psi}^2-\i\frac{\gamma^2}k\psi\conj\nabla_\transv\psi},&\mathrm{TE}
     \end{cases}
 \end{equation}
 因为$\psi$一般是实数，\footnote{有可能这样激发一个波导，使得某给定模式或一些模式的线性组合具有复数$\psi$。这时候横向能流对时间的平均值将不为零，但因为它是一个环流，所以实际上只代表贮藏的能量，在实用上不大重要。}
@@ -556,19 +556,19 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
     \begin{Bmatrix}
         \varepsilon\\\mu
     \end{Bmatrix}
-    \biggp{\oint_{\p A}\cancel{\psi\cj\pv\psi n}\d\ell-\int_A\psi\cj\nabla_\t^2\psi\d A}.
+    \biggp{\oint_{\p A}\cancel{\psi\conj\pv\psi n}\d\ell-\int_A\psi\conj\nabla_\transv^2\psi\d A}.
 \]
-由特征方程$(\nabla_\t^2+\gamma_\lambda^2)\psi=0$，
+由特征方程$(\nabla_\transv^2+\gamma_\lambda^2)\psi=0$，
 \[
     P=\frac1{2\sqrt{\mu\varepsilon}}\biggp{\frac\omega{\omega_\lambda}}^2\biggp{1-\frac{\omega_\lambda^2}{\omega^2}}^{1/2}
     \begin{Bmatrix}
         \varepsilon\\\mu
     \end{Bmatrix}
-    \int_A\psi\cj\psi\d A.
+    \int_A\psi\conj\psi\d A.
 \]
 时间平均能量密度
 \[
-    u=\frac14\Bigp{\varepsilon\bm E\cdot\bm E\cj+\frac1\mu\bm B\cdot\bm B\cj},
+    u=\frac14\Bigp{\varepsilon\bm E\cdot\bm E\conj+\frac1\mu\bm B\cdot\bm B\conj},
 \]
 单位长度的场能量
 \[
@@ -576,17 +576,17 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
     \begin{Bmatrix}
         \varepsilon\\\mu
     \end{Bmatrix}
-    \int_A\psi\cj\psi\d A,
+    \int_A\psi\conj\psi\d A,
 \]
 能流的速度正是群速度
 \[
-    \frac PU=\frac k\omega\frac1{\mu\varepsilon}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{1-\frac{\omega_\lambda^2}{\omega^2}}=v_\text g.
+    \frac PU=\frac k\omega\frac1{\mu\varepsilon}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{1-\frac{\omega_\lambda^2}{\omega^2}}=v_{\mathrm{g}}.
 \]
 结合前面说的相速度
 \begin{equation}
     v_\text gv_\varphi=\frac1{\mu\varepsilon},
 \end{equation}
-在无限介质中，$v_\text g$总是小于$v_\varphi$，并且在截止频率时降为零。
+在无限介质中，$v_{\mathrm{g}}$总是小于$v_\varphi$，并且在截止频率时降为零。
 \paragraph{良导体的波导}
 对于理想导体，$k_\lambda$是实数或纯虚数；而对于电导率有限的良导体来说，$k_\lambda$是一个实数与一个小复数的和。
 
@@ -600,8 +600,8 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 
 由$z=0,d$的边界条件，应有驻波形式：
 \begin{align*}
-    \text{TM}&:&E_z=\psi(x,y)\cos\Bigp{\frac{p\pi z}d},&&p&=0,1,2,\ldots,\\
-    \text{TE}&:&H_z=\psi(x,y)\sin\Bigp{\frac{p\pi z}d},&&p&=1,2,3,\ldots,
+    \mathrm{TM}&:&E_z=\psi(x,y)\cos\Bigp{\frac{p\pi z}d},&&p&=0,1,2,\ldots,\\
+    \mathrm{TE}&:&H_z=\psi(x,y)\sin\Bigp{\frac{p\pi z}d},&&p&=1,2,3,\ldots,
 \end{align*}
 特征值频率
 \[

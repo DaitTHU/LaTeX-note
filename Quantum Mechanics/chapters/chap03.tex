@@ -11,8 +11,8 @@
 
 两个相干分量分别如何演化，决定了它们叠加后如何演化；这正是上述线性的物理内容。
 对任意归一化初态，演化后所有出口的总概率仍为 1，故
-$\brkt{\psi}{\psi}=\mel{\psi}{\op{U}^\dagger \op{U}}{\psi}$ 对所有初态成立，从而 $\op{U}^\dagger \op{U}=\one$。
-再要求演化可逆，就有 $\op{U}^{-1}=\op{U}^\dagger$；这样的算符称为幺正(unitary)，也保持任意两态的内积。
+$\brkt{\psi}{\psi}=\mel{\psi}{\op{U}\adjoint \op{U}}{\psi}$ 对所有初态成立，从而 $\op{U}\adjoint \op{U}=\one$。
+再要求演化可逆，就有 $\op{U}^{-1}=\op{U}\adjoint$；这样的算符称为幺正(unitary)，也保持任意两态的内积。
 
 \begin{definition}{传播子与时间演化的生成元}{qm-propagator}
     $\op{U}(t,t_0)$称为从初始时刻$t_0$到$t$的传播子(propagator)，
@@ -20,15 +20,15 @@ $\brkt{\psi}{\psi}=\mel{\psi}{\op{U}^\dagger \op{U}}{\psi}$ 对所有初态成�
     $\op{U}(t_2,t_0)=\op{U}(t_2,t_1)\op{U}(t_1,t_0)$。
     在有限维且对时间可微时，定义
     \begin{equation}
-        \op{H}(t)=\i\hbar\,\pv{\op{U}(t,t_0)}t\,\op{U}^\dagger(t,t_0).
+        \op{H}(t)=\i\hbar\,\pv{\op{U}(t,t_0)}t\,\op{U}\adjoint(t,t_0).
     \end{equation}
     $\op{H}(t)$具有能量量纲，称为Hamilton算符。
 \end{definition}
 
-由$\op{U}\op{U}^\dagger=\one$求导，
-$(\partial_t\op{U})\op{U}^\dagger=-\op{U}(\partial_t\op{U}^\dagger)$，
-所以$\op{H}^\dagger=\op{H}$。定义式右乘$\op{U}$得到
-$\i\hbar\partial_t\op{U}=\op{H}\op{U}$，再作用于初态便得到态的运动方程。
+由$\op{U}\op{U}\adjoint=\one$求导，
+$(\p_t\op{U})\op{U}\adjoint=-\op{U}(\p_t\op{U}\adjoint)$，
+所以$\op{H}\adjoint=\op{H}$。定义式右乘$\op{U}$得到
+$\i\hbar\p_t\op{U}=\op{H}\op{U}$，再作用于初态便得到态的运动方程。
 等价地，短时间传播子为
 \begin{equation}
     \op{U}(t+\d t,t)=\one-\frac{\i}{\hbar}\op{H}(t)\d t+o(\d t).
@@ -79,8 +79,8 @@ $\op{H}$控制态在每一个短时间间隔内的变化。
     \ket{\psi(t)}=\sum_n c_n\e^{-\i E_nt/\hbar}\ket{n}.
 \end{equation}
 一个能量本征态只积累整体相位，任意不显含时间的可观测量分布不变；
-两个不同能量的分量之间则以角频率 $|E_m-E_n|/\hbar$ 积累相对相位。
-沿能量基测量，两分量的概率 $|c_n|^2$ 仍然不变。若某个分析器的同一出口同时接收这两个分量，
+两个不同能量的分量之间则以角频率 $\abs{E_m-E_n}/\hbar$ 积累相对相位。
+沿能量基测量，两分量的概率 $\abs{c_n}^2$ 仍然不变。若某个分析器的同一出口同时接收这两个分量，
 对应的概率可以随相对相位振荡，这与两束频率不同的光叠加产生拍频的计算相同。
 简并子空间中的任意固定叠加也都是定态(stationary state)。
 
@@ -145,20 +145,20 @@ Rabi分子束方法先用非均匀磁场选择或分析磁态，
 从随场转动的基回到实验室基的矩阵为 $\op{R}(t)=\e^{-\i\omega t\op{\sigma}_z/2}$，故 $\ket{\psi}=\op{R}\ket{\psi_R}$。
 代入式\eqref{eq:schrket}，
 \begin{equation}
-    \op{H}_R=\op{R}^\dagger \op{H}\op{R}-\i\hbar \op{R}^\dagger\dot{\op{R}}
+    \op{H}_R=\op{R}\adjoint \op{H}\op{R}-\i\hbar \op{R}\adjoint\dot{\op{R}}
     =\frac\hbar2(\Delta\op{\sigma}_z+\Omega\op{\sigma}_x),\qquad\Delta=\omega_0-\omega.
 \end{equation}
 
-$\Delta$称为失谐(detuning)，$\Omega$为共振Rabi角频率，两者单位都是$\mathrm{s^{-1}}$。
+$\Delta$称为失谐(detuning)，$\Omega$为共振Rabi角频率，两者单位都是$\unit{\per\second}$。
 这里旋转变换的两个部分分别是
 \begin{subequations}
     \begin{alignat}{1}
-        \op{R}^\dagger \op{H} \op{R} &=\frac{\hbar}{2}(\omega_0\op{\sigma}_z+\Omega\op{\sigma}_x),\\
-        -\i\hbar \op{R}^\dagger\dot{\op{R}} &=-\frac{\hbar\omega}{2}\op{\sigma}_z.
+        \op{R}\adjoint \op{H} \op{R} &=\frac{\hbar}{2}(\omega_0\op{\sigma}_z+\Omega\op{\sigma}_x),\\
+        -\i\hbar \op{R}\adjoint\dot{\op{R}} &=-\frac{\hbar\omega}{2}\op{\sigma}_z.
     \end{alignat}
 \end{subequations}
 第一行利用
-$\op{R}\op{\sigma}_x\op{R}^\dagger=\op{\sigma}_x\cos\omega t+\op{\sigma}_y\sin\omega t$，
+$\op{R}\op{\sigma}_x\op{R}\adjoint=\op{\sigma}_x\cos\omega t+\op{\sigma}_y\sin\omega t$，
 第二行来自$\dot{\op{R}}=-(\i\omega/2)\op{\sigma}_z\op{R}$。
 
 由于$(\Delta\op{\sigma}_z+\Omega\op{\sigma}_x)^2=(\Delta^2+\Omega^2)\one$，
@@ -190,7 +190,7 @@ $\Omega_R=0$时$\op{H}_R=0$，直接得到$\op{U}_R=\one$。
     \sin^2\Bigp{\frac{t}{2}\sqrt{\Omega^2+\Delta^2}}.
     \label{eq:rabi}
 \end{equation}
-固定驱动强度时，$|\Delta|$ 越大，旋转系中的进动轴越接近纵向，自旋进动时 $z$ 投影的变化幅度越小（图\ref{fig:rabi-detuning}）。
+固定驱动强度时，$\abs{\Delta}$ 越大，旋转系中的进动轴越接近纵向，自旋进动时 $z$ 投影的变化幅度越小（图\ref{fig:rabi-detuning}）。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=.62\linewidth]{figures/rabi.pdf}
@@ -198,7 +198,7 @@ $\Omega_R=0$时$\op{H}_R=0$，直接得到$\op{U}_R=\one$。
     \label{fig:rabi-detuning}
 \end{figure}
 共振时，持续到 $\Omega t=\pi$ 的驱动将自旋完全翻转，称为 $\pi$ 脉冲。
-固定$\Delta=0$改变$t$，振荡周期$2\pi/|\Omega|$标定耦合强度；
+固定$\Delta=0$改变$t$，振荡周期$2\pi/\abs{\Omega}$标定耦合强度；
 固定脉冲持续时间$\tau$改变$\omega$，测到的是
 \begin{equation}
     P_{-z\to+z}(\omega;\tau)
@@ -218,7 +218,7 @@ $\Omega_R=0$时$\op{H}_R=0$，直接得到$\op{U}_R=\one$。
     此处$\sinc x=\sin x/x$，在$x=0$连续定义为1。
     第一对零点位于$\Delta=\pm2\pi/\tau$，
     因而延长相互作用时间可缩小中心峰的频率尺度。
-    共振处近似要求$|\Omega|\tau\ll1$；
+    共振处近似要求$\abs{\Omega}\tau\ll1$；
     要描述完整翻转和多次振荡，应使用式\eqref{eq:rabi}。
 \end{example}
 
@@ -226,12 +226,12 @@ $\Omega_R=0$时$\op{H}_R=0$，直接得到$\op{U}_R=\one$。
 
 若实际驱动为线偏振形式
 $\op{H}_{\drive}=\hbar\Omega\cos(\omega t)\op{\sigma}_x$，旋转系(rotating frame)中还存在$2\omega$项。
-在$|\Delta|,|\Omega|\ll\omega_0,\omega$且观察尺度允许平均快速项时，旋波近似(rotating-wave approximation, RWA)给出同一个$\op{H}_R$。
+在$\abs{\Delta},\abs{\Omega}\ll\omega_0,\omega$且观察尺度允许平均快速项时，旋波近似(rotating-wave approximation, RWA)给出同一个$\op{H}_R$。
 式\eqref{eq:rabi}对旋转场是精确解，对线偏振场则是上述旋波近似的结果。
 
 具体地，
 \begin{equation}
-    \op{R}^\dagger \op{H}_{\drive}\op{R}
+    \op{R}\adjoint \op{H}_{\drive}\op{R}
     =\frac{\hbar\Omega}{2}\op{\sigma}_x
     +\frac{\hbar\Omega}{2}
     \bigp{\op{\sigma}_x\cos2\omega t-\op{\sigma}_y\sin2\omega t}.
@@ -294,7 +294,7 @@ $\ket{+\chi}=(\ket{+z}+\e^{\i\chi}\ket{-z})/\sqrt2$，
 
 \begin{example}{Ramsey条纹的统计灵敏度}{qm-ramsey-sensitivity}
     在条纹斜率最大的工作点$\Delta T-\chi=\pi/2$，
-    $P_+=1/2$，且$|\partial P_+/\partial\Delta|=T/2$。
+    $P_+=1/2$，且$\abs{\p P_+/\p\Delta}=T/2$。
     $N$次独立读出的概率估计标准差为
     $\sqrt{P_+(1-P_+)/N}=1/(2\sqrt N)$。
     线性误差传播给出失谐估计的标准差
@@ -363,9 +363,9 @@ $\ket{+\chi}=(\ket{+z}+\e^{\i\chi}\ket{-z})/\sqrt2$，
     \psi(x)=A\bigb{\cosh[\kappa(x-a)]+\i(k/\kappa)\sinh[\kappa(x-a)]}.
 \end{equation}
 再在 $x=0$ 接到左侧解
-$A_{\incoming}\e^{\i kx}+A_{\rm r}\e^{-\i kx}$。
-此处有 $\psi(0)=A_{\incoming}+A_{\rm r}$、$\psi'(0)/(\i k)=A_{\incoming}-A_{\rm r}$。
-两式相加消去反射振幅 $A_{\rm r}$，用势垒内的解计算左端值，得到
+$A_{\incoming}\e^{\i kx}+A_{\mathrm{r}}\e^{-\i kx}$。
+此处有 $\psi(0)=A_{\incoming}+A_{\mathrm{r}}$、$\psi'(0)/(\i k)=A_{\incoming}-A_{\mathrm{r}}$。
+两式相加消去反射振幅 $A_{\mathrm{r}}$，用势垒内的解计算左端值，得到
 \begin{equation}
     \frac{A_{\incoming}}{A}
     =\cosh(\kappa a)+\frac{\i}{2}
@@ -375,7 +375,7 @@ $A_{\incoming}\e^{\i kx}+A_{\rm r}\e^{-\i kx}$。
 所以透射流与入射流之比只需取上式模平方的倒数。
 用 $\cosh^2u=1+\sinh^2u$ 及 $k^2+\kappa^2=2mV_0/\hbar^2$，得到
 \begin{equation}
-    T=\frac{|A|^2}{|A_{\incoming}|^2}
+    T=\frac{\abs{A}^2}{\abs{A_{\incoming}}^2}
     =\bigg[1+\frac{V_0^2\sinh^2(\kappa a)}{4E(V_0-E)}\bigg]^{-1}.
 \end{equation}
 图\ref{fig:rectangular-barrier}左图中，入射波与反射波干涉使势垒左侧的密度起伏，定态净概率流处处相同。
@@ -394,31 +394,31 @@ $A_{\incoming}\e^{\i kx}+A_{\rm r}\e^{-\i kx}$。
 \begin{definition}{Schrödinger、Heisenberg与相互作用绘景}{qm-pictures}
     取 $t_0=0$，记 $\op{U}=\op{U}(t,0)$。Schrödinger 绘景以态
     $\ket{\psi(t)}=\op{U}\ket{\psi(0)}$ 和测量算符 $\op{A}_S(t)$ 计算读数。
-    Heisenberg 绘景固定初态，以 $\op{A}_H(t)=\op{U}^\dagger \op{A}_S(t)\op{U}$ 表示同一测量。
+    Heisenberg 绘景固定初态，以 $\op{A}_H(t)=\op{U}\adjoint \op{A}_S(t)\op{U}$ 表示同一测量。
     若 $\op{H}=\op{H}_0+\op{V}(t)$ 且 $\op{H}_0$ 不显含时间，相互作用绘景(interaction picture)取
-    $\op{U}_0=\e^{-\i \op{H}_0t/\hbar}$，以 $\ket{\psi_I}=\op{U}_0^\dagger\ket{\psi(t)}$ 和
-    $\op{A}_I=\op{U}_0^\dagger \op{A}_S\op{U}_0$ 计算读数。
+    $\op{U}_0=\e^{-\i \op{H}_0t/\hbar}$，以 $\ket{\psi_I}=\op{U}_0\adjoint\ket{\psi(t)}$ 和
+    $\op{A}_I=\op{U}_0\adjoint \op{A}_S\op{U}_0$ 计算读数。
 \end{definition}
 Heisenberg 绘景里直接对 $\op{A}_H$ 求导，得到
 \begin{equation}
-    \frac{\d \op{A}_H}{\nd t}=\frac\i\hbar[\op{H}_H,\op{A}_H]+\op{U}^\dagger\frac{\partial \op{A}_S}{\partial t}\op{U}.
+    \frac{\d \op{A}_H}{\nd t}=\frac\i\hbar[\op{H}_H,\op{A}_H]+\op{U}\adjoint\frac{\p \op{A}_S}{\p t}\op{U}.
     \label{eq:heisenberg}
 \end{equation}
 
-这里$\op{H}_H=\op{U}^\dagger \op{H}_S\op{U}$。乘积求导的三项分别为
+这里$\op{H}_H=\op{U}\adjoint \op{H}_S\op{U}$。乘积求导的三项分别为
 \begin{alignat*}{1}
-    \dot{\op{A}}_H &=(\dot{\op{U}}^\dagger)\op{A}_S\op{U}+\op{U}^\dagger\dot{\op{A}}_S\op{U}
-        +\op{U}^\dagger \op{A}_S\dot{\op{U}}\\
-    &=\frac{\i}{\hbar}\op{U}^\dagger \op{H}_S\op{A}_S\op{U}
-        +\op{U}^\dagger\dot{\op{A}}_S\op{U}
-        -\frac{\i}{\hbar}\op{U}^\dagger \op{A}_S\op{H}_S\op{U}.
+    \dot{\op{A}}_H &=(\dot{\op{U}}\adjoint)\op{A}_S\op{U}+\op{U}\adjoint\dot{\op{A}}_S\op{U}
+        +\op{U}\adjoint \op{A}_S\dot{\op{U}}\\
+    &=\frac{\i}{\hbar}\op{U}\adjoint \op{H}_S\op{A}_S\op{U}
+        +\op{U}\adjoint\dot{\op{A}}_S\op{U}
+        -\frac{\i}{\hbar}\op{U}\adjoint \op{A}_S\op{H}_S\op{U}.
 \end{alignat*}
-把两端的$\op{U}^\dagger,\op{U}$并入算符，便得到式\eqref{eq:heisenberg}。
+把两端的$\op{U}\adjoint,\op{U}$并入算符，便得到式\eqref{eq:heisenberg}。
 
 在相互作用绘景里，$\ket{\psi_I}$ 的变化由变换后的相互作用产生，
 \begin{equation}
     \op{V}_I=\e^{\i \op{H}_0t/\hbar}\op{V}\e^{-\i \op{H}_0t/\hbar},\quad
-    \i\hbar\partial_t\ket{\psi_I}=\op{V}_I\ket{\psi_I}.
+    \i\hbar\p_t\ket{\psi_I}=\op{V}_I\ket{\psi_I}.
 \end{equation}
 三种绘景把时间依赖分配给态或算符，给出相同的测量概率。
 
@@ -427,7 +427,7 @@ Heisenberg 绘景里直接对 $\op{A}_H$ 求导，得到
 直接由$\ket{\psi(t)}=\op{U}\ket{\psi(t_0)}$和伴随关系得到。
 相互作用绘景的态方程中，$\op{H}_0$产生的两项也正好相消：
 \begin{equation}
-    \i\hbar\partial_t\ket{\psi_I}
+    \i\hbar\p_t\ket{\psi_I}
     =-\op{H}_0\ket{\psi_I}
     +\e^{\i \op{H}_0t/\hbar}(\op{H}_0+\op{V})\e^{-\i \op{H}_0t/\hbar}\ket{\psi_I}
     =\op{V}_I\ket{\psi_I}.
@@ -480,7 +480,7 @@ Heisenberg 绘景里直接对 $\op{A}_H$ 求导，得到
         \sin^2x=x^2-\frac{x^4}{3}+\bigo(x^6).
     \end{equation}
     被删去的首项相对于$x^2$为$x^2/3$，
-    因而弱激发近似的条件是$|\Omega|t\ll1$。
+    因而弱激发近似的条件是$\abs{\Omega}t\ll1$。
 
     初态振幅也从$1$变成
     $1-x^2/2+\bigo(x^4)$；其模平方为$1-x^2+\bigo(x^4)$，

@@ -15,11 +15,11 @@
 	$e\in S$是恒等元(identity element)，若$\forall a\in S,\enspace e\circ a=a\circ e=a.$
 \end{definition}
 \begin{definition}{可逆}{inversible}
-	$a\in S$是可逆的(inversible)，若$\exists a\iv\in S,\enspace a\circ a\iv=a\iv\circ a=e.$
+	$a\in S$是可逆的(inversible)，若$\exists a\inv\in S,\enspace a\circ a\inv=a\inv\circ a=e.$
 \end{definition}
 在运算满足结合律并有单位元时，令$a^0=e$；对正整数$m$，简记
 \[
-	a^m\equiv a\circ\cdots\circ a,\quad a^{-m}\equiv a\iv\circ\cdots\circ a\iv.
+	a^m\equiv a\circ\cdots\circ a,\quad a^{-m}\equiv a\inv\circ\cdots\circ a\inv.
 \]
 
 \section{群与子群}
@@ -29,7 +29,7 @@
 	\begin{compactitem}
 		\item 结合律：$(a\circ b)\circ c=a\circ(b\circ c)\equiv a\circ b\circ c;$
 		\item 单位元：$\exists e\in G$使得$e\circ a=a\circ e=a;$
-		\item 逆：$\forall a\in G,\enspace\exists a\iv$使得$a\iv\circ a=a\circ a\iv=e.$
+		\item 逆：$\forall a\in G,\enspace\exists a\inv$使得$a\inv\circ a=a\circ a\inv=e.$
 	\end{compactitem}
 	若还满足交换律，则称为交换群或Abel群。
 
@@ -69,10 +69,10 @@
 	\end{subequations}
 \end{theorem}
 \begin{proof}
-	左乘/右乘$a\iv$.
+	左乘/右乘$a\inv$.
 \end{proof}
 \begin{remark}
-	逆$a\iv$的存在很关键，如果$G$上的运算只是结合的，则$(G,\circ)$是一个半群(semigroup)，有单位元的半群又叫幺半群(monoid)。
+	逆$a\inv$的存在很关键，如果$G$上的运算只是结合的，则$(G,\circ)$是一个半群(semigroup)，有单位元的半群又叫幺半群(monoid)。
 \end{remark}
 \begin{definition}{置换群和对称群}{permutation group and symmetric group}
 	给定有限集合$T$，所有可逆映射$f:T\to T$构成一个群$\sym(T)$，运算是映射的复合，称为集合$T$的对称群；它的任意子群称为$T$上的置换群(permutation group)
@@ -114,7 +114,7 @@
 	\begin{itemize}
 		\item 封闭性：$\forall a,b\in H$，$a\circ b\in H$；
 		\item 单位元：$e\in H$；
-		\item 逆元：$\forall a\in H,\enspace\exists a\iv\in H$。
+		\item 逆元：$\forall a\in H,\enspace\exists a\inv\in H$。
 	\end{itemize}
 	$\{e\}$称为平凡子群；任意不等于$G$的子群称为真子群(proper subgroup)，因此当$G\neq\{e\}$时，平凡子群也是真子群。
 \end{definition}
@@ -149,13 +149,13 @@
 \begin{theorem}{群同态下的单位元和逆元}{}
 	若$\phi:G\to G'$是群同态，$G,G'$的单位元分别为$1,1'$，$a\in G$，则
 	\begin{equation}
-		\phi(1)=1',\quad \phi(a\iv)=\phi(a)\iv.
+		\phi(1)=1',\quad \phi(a\inv)=\phi(a)\inv.
 	\end{equation}
 \end{theorem}
 \begin{proof}
 	(1)由$\phi(1)=\phi(1\circ 1)=\phi(1)\circ'\phi(1)$，再运用消去律可得$1'=\phi(1)$；
 
-	(2)由$\phi(a\iv)\circ'\phi(a)=\phi(a\iv\circ a)=\phi(1)=1'$可得$\phi(a\iv)=\phi(a)\iv$。
+	(2)由$\phi(a\inv)\circ'\phi(a)=\phi(a\inv\circ a)=\phi(1)=1'$可得$\phi(a\inv)=\phi(a)\inv$。
 \end{proof}
 \begin{example}
 	{}{}
@@ -177,8 +177,8 @@
 	若$\phi:G\to G'$是群同态，则$\im\phi$是$G'$的子群，$\ker\phi$是$G$的子群。
 \end{theorem}
 \begin{proof}
-    对像空间，$1'=\phi(1)\in\im\phi$；若$\phi(a),\phi(b)\in\im\phi$，则其积$\phi(ab)$和逆$\phi(a^{-1})$也在像中。
-    对核，$1\in\ker\phi$；若$a,b\in\ker\phi$，则$\phi(ab)=1'$且$\phi(a^{-1})=1'$，所以核对乘法与取逆封闭。两者均满足子群判据。这里省略乘法符号$\circ$。
+    对像空间，$1'=\phi(1)\in\im\phi$；若$\phi(a),\phi(b)\in\im\phi$，则其积$\phi(ab)$和逆$\phi(a\inv)$也在像中。
+    对核，$1\in\ker\phi$；若$a,b\in\ker\phi$，则$\phi(ab)=1'$且$\phi(a\inv)=1'$，所以核对乘法与取逆封闭。两者均满足子群判据。这里省略乘法符号$\circ$。
 \end{proof}
 \begin{definition}{左陪集}{left coset}
 	$H$是$G$的子群，$a\in G$，则
@@ -191,7 +191,7 @@
 	群同态$\phi:G\to G'$，$a,b\in G$，则以下命题等价：
 	\begin{enumerate}
 		\item $\phi(a)=\phi(b)$；
-		\item $a\iv\circ b\in\ker\phi$；
+		\item $a\inv\circ b\in\ker\phi$；
 		\item $b\in a\circ\ker\phi$；
 		\item $b\circ\ker\phi=a\circ\ker\phi$。
 	\end{enumerate}
@@ -199,16 +199,16 @@
 \begin{proof}
 	$(1)\Rightarrow(2)$：
 	\[
-		\phi(a)=\phi(b)\implies 1'=\phi(a)\iv\circ'\phi(b)=\phi(a\iv\circ b)\implies a\iv\circ b\in\ker\phi;
+		\phi(a)=\phi(b)\implies 1'=\phi(a)\inv\circ'\phi(b)=\phi(a\inv\circ b)\implies a\inv\circ b\in\ker\phi;
 	\]
 
 	$(2)\Rightarrow(3)$：
 	\[
-		a\iv\circ b=h\in\ker\phi\implies b=a\circ h\in a\circ\ker\phi.
+		a\inv\circ b=h\in\ker\phi\implies b=a\circ h\in a\circ\ker\phi.
 	\]
 
 	$(3)\Rightarrow(4)$：由$b\in a\circ\ker\phi$，$\exists h\in\ker\phi$使得$b=a\circ h$；
-	$\forall b'\in b\circ\ker\phi$，$\exists h'\in \ker\phi$使得$b'=b\circ h'=(a\circ h)\circ h'=a\circ(h\circ h')\in a\circ\ker\phi$，故$b\circ\ker\phi\subset a\circ\ker\phi$；同理由$a=b\circ h\iv$可以证明$a\circ\ker\phi\subset b\circ\ker\phi$，故$a\circ\ker\phi=b\circ\ker\phi.$
+	$\forall b'\in b\circ\ker\phi$，$\exists h'\in \ker\phi$使得$b'=b\circ h'=(a\circ h)\circ h'=a\circ(h\circ h')\in a\circ\ker\phi$，故$b\circ\ker\phi\subset a\circ\ker\phi$；同理由$a=b\circ h\inv$可以证明$a\circ\ker\phi\subset b\circ\ker\phi$，故$a\circ\ker\phi=b\circ\ker\phi.$
 
 	$(4)\Rightarrow(1)$：$\forall h\in\ker\phi,\enspace\exists h'\in\ker\phi$使得$a\circ h=b\circ h'$
 	\begin{align*}
@@ -227,13 +227,13 @@
 	群同态$\phi:G\to G'$是单射$\iff\ker\phi=\{1\}$。
 \end{corollary}
 \begin{definition}{正规子群}{normal subgroup}
-	$N$首先是$G$的子群；若$\forall a\in N,\forall g\in G$，共轭$g\circ a\circ g\iv\in N$，则称$N$为正规子群(normal subgroup)，记作$N\trianglelefteq G$。
+	$N$首先是$G$的子群；若$\forall a\in N,\forall g\in G$，共轭$g\circ a\circ g\inv\in N$，则称$N$为正规子群(normal subgroup)，记作$N\trianglelefteq G$。
 \end{definition}
 \begin{theorem}{}{}
 	$\phi:G\to G'$是群同态，$\ker\phi$是$G$的正规子群。
 \end{theorem}
 \begin{proof}
-    若$a\in\ker\phi$且$g\in G$，则$\phi(gag^{-1})=\phi(g)1'\phi(g)^{-1}=1'$，故$gag^{-1}\in\ker\phi$。
+    若$a\in\ker\phi$且$g\in G$，则$\phi(gag\inv)=\phi(g)1'\phi(g)\inv=1'$，故$gag\inv\in\ker\phi$。
 \end{proof}
 \begin{definition}{中心}{center of group}
 	群$G$的中心(center)是
@@ -319,11 +319,11 @@
     \[
         (aN)(bN):=(ab)N
     \]
-    下构成群，称为商群。其单位元是$N$，$aN$的逆是$a^{-1}N$。
+    下构成群，称为商群。其单位元是$N$，$aN$的逆是$a\inv N$。
 \end{definition}
 这个定义必须检查代表元的选择不影响结果。若$a'=an_1,b'=bn_2$，其中$n_1,n_2\in N$，则
 \[
-    a'b'=an_1bn_2=ab(b^{-1}n_1b)n_2\in abN.
+    a'b'=an_1bn_2=ab(b\inv n_1b)n_2\in abN.
 \]
 这里用到了正规性；结合律由$G$继承。一般子群的陪集仍构成一个集合，但上述乘法未必良定义。
 

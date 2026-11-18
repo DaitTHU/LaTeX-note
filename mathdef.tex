@@ -1,180 +1,205 @@
-\theoremstyle{definition}
-\newtheorem*{corollary}{推论}
-\newtheorem*{remark}{注}
-\newtheorem*{lemma}{引理}
+% 各卷共用的数学记号。课程专用记号见相应的主入口。
+\RequirePackage{amsmath,amssymb,bm}
 
-%% text
-\newcommand*{\vs}{~\text{-}~}
-\newcommand*{\otherwise}{\text{otherwise}}
-\newcommand*{\const}{\mathrm{const}}
-\newcommand*{\plusc}{+\const}
-\newcommand*{\LHS}{\mathrm{LHS}}
-\newcommand*{\RHS}{\mathrm{RHS}}
+% 数集与函数空间
+\newcommand*{\NN}{\mathbb{N}}
+\newcommand*{\ZZ}{\mathbb{Z}}
+\newcommand*{\QQ}{\mathbb{Q}}
+\newcommand*{\RR}{\mathbb{R}}
+\newcommand*{\CC}{\mathbb{C}}
+\newcommand*{\FF}{\mathbb{F}}
+\newcommand*{\cont}{\mathcal{C}}  % 连续函数空间，\cont^k 表示 k 次连续可微
+\newcommand*{\poly}{\mathcal{P}}  % \poly_n 中多项式的次数至多为 n
 
-%% roman
-\newcommand*{\e}{\mathop{}\!\mathrm{e}}  % exp
-\let\accenti\i
+% 微分与常数。文本中的无点 i 和字母下加点另有明确的命令。
+\NewCommandCopy{\dotlessi}{\i}
+\NewCommandCopy{\dotbelow}{\d}
 \renewcommand*{\i}{\mathrm{i}}
+\newcommand*{\nd}{\mathrm{d}}
+\renewcommand*{\d}{\mathop{}\!\mathrm{d}}
+\newcommand*{\e}{\mathop{}\!\mathrm{e}}
+\newcommand*{\const}{\mathrm{const}}
+\newcommand*{\vd}{\mathop{}\!\delta}  % 变分、依赖过程的热量或功的微元
+\newcommand*{\p}{\partial}
+\newcommand{\dd}[2][]{\frac{\d^{#1}}{\nd{#2}^{#1}}}
+\newcommand{\dv}[3][]{\frac{\d^{#1}#2}{\nd{#3}^{#1}}}
+\newcommand{\pp}[2][]{\frac{\p^{#1}}{\p{#2}^{#1}}}
+\newcommand{\pv}[3][]{\frac{\p^{#1}#2}{\p{#3}^{#1}}}
+\newcommand{\pw}[3]{\frac{\p^2{#1}}{\p{#2}\p{#3}}}
 
-\usepackage{bm}
-\newcommand{\hatbm}[1]{\hat{\bm{#1}}}  % bm with hat, maybe Fourier Transform
-\newcommand{\nvec}[1]{\hat{\bm{#1}}}  % normalized vector, without space
-\newcommand{\uvec}[1]{\mathop{}\!\nvec{#1}}  % unit vector, with possible space
-\newcommand{\dotbm}[1]{\dot{\bm{#1}}}
-
-\usepackage{mathrsfs}  % \mathscr
-
-%% blackboard bold: number sets
-\newcommand*{\NN}{\mathbb N}    % natural
-\newcommand*{\ZZ}{\mathbb Z}    % integer
-\newcommand*{\QQ}{\mathbb Q}    % rational
-\newcommand*{\RR}{\mathbb R}    % real
-\newcommand*{\CC}{\mathbb C}    % complex
-\newcommand*{\FF}{\mathbb F}    % any number field
-\newcommand*{\PP}{\mathbb P}    % prime
-
-\usepackage{cancel}
-
-%% vector operator
-\let\divides\div
-\newcommand{\grad}[1][{}]{\nabla{#1}}           % gradient
-\renewcommand{\div}[1][{}]{\nabla{#1}\cdot}     % divergence
-\newcommand{\curl}[1][{}]{\nabla{#1}\times}     % curl
-\newcommand*{\lapla}{\nabla^2}                    % Laplacian
-
-%% differential
-\let\accentd\d
-\renewcommand*{\d}{\mathop{}\!\mathrm{d}}   % differential
-\newcommand*{\nd}{\mathrm{d}}               % differential without space
-\newcommand*{\vd}{\mathop{}\!\delta}    % delta: δ
-\newcommand*{\D}{\Delta}                % Delta: Δ
-\newcommand*{\p}{\partial}              % partial: ∂
-\newcommand{\dd}[2][{}]{\frac{\d^{#1}}{\nd{#2}^{#1}}}      % d/dx
-\newcommand{\dv}[3][{}]{\frac{\d^{#1}#2}{\nd{#3}^{#1}}}    % df/dx
-\newcommand{\pp}[2][{}]{\frac{\p^{#1}}{\p{#2}^{#1}}}    % ∂/∂x
-\newcommand{\pv}[3][{}]{\frac{\p^{#1}#2}{\p{#3}^{#1}}}  % ∂f/∂x
-\newcommand{\pw}[3]{\frac{\p^2{#1}}{\p{#2}\p{#3}}}      % ∂^2f/∂x∂y
-
-%% integral limits
-\newcommand*{\zti}{_0^{+\infty}}            % zero to infinity
-\newcommand*{\iti}{_{-\infty}^{+\infty}}    % -infinity to +infinity
-
-%% Delimiters: ordinary size by default, explicit sizes for taller material.
-\makeatletter
-\newcommand*{\mathdef@new}[1]{\expandafter\newcommand\csname#1\endcsname}
-% #1 is the name prefix; #2, #3, #4 size opening, inner and closing delimiters.
-% An inner Dirac bar or a division slash has no relation spacing.
-\newcommand*{\mathdef@delimiters}[4]{%
-    \mathdef@new{#1abs}[1]{#2\lvert##1#4\rvert}%
-    \mathdef@new{#1norm}[1]{#2\lVert##1#4\rVert}%
-    \mathdef@new{#1eval}[1]{{##1}#4\rvert}%
-    \mathdef@new{#1floor}[1]{#2\lfloor##1#4\rfloor}%
-    \mathdef@new{#1ceil}[1]{#2\lceil##1#4\rceil}%
-    \mathdef@new{#1ave}[1]{#2\langle##1#4\rangle}%
-    \mathdef@new{#1set}[2]{#2\{##1\,#3\vert\,##2#4\}}%
-    \mathdef@new{#1division}[2]{{##1}#3/{##2}}%
-    \mathdef@new{#1inp}[2]{#2\langle##1,##2#4\rangle}%
-    \mathdef@new{#1bra}[1]{#2\langle##1#4\rvert}%
-    \mathdef@new{#1ket}[1]{#2\lvert##1#4\rangle}%
-    \mathdef@new{#1brkt}[2]{#2\langle##1#3\vert##2#4\rangle}%
-    \mathdef@new{#1mel}[3]{#2\langle##1#3\vert##2#3\vert##3#4\rangle}%
-    \mathdef@new{#1ktbr}[2]{#2\lvert##1#4\rangle#2\langle##2#4\rvert}%
-}
-% Plain ( ), [ ] and \{ \} already have ordinary-size spellings.
-\newcommand*{\mathdef@sized}[4]{%
-    \mathdef@delimiters{#1}{#2}{#3}{#4}%
-    \mathdef@new{#1p}[1]{#2(##1#4)}%
-    \mathdef@new{#1b}[1]{#2[##1#4]}%
-    \mathdef@new{#1B}[1]{#2\{##1#4\}}%
-}
-\mathdef@delimiters{}{}{}{}
-\mathdef@sized{big} \bigl \big \bigr
-\mathdef@sized{Big} \Bigl \Big \Bigr
-\mathdef@sized{bigg}\biggl\bigg\biggr
-\mathdef@sized{Bigg}\Biggl\Bigg\Biggr
-\makeatother
-
-\let\nnorm\norm
-\let\nset\set
-% A system has one aligned block. Span both cases columns to omit their gap.
-\newcommand{\eqnset}[1]{%
-    \begin{cases}\multicolumn{2}{@{}l@{}}{\displaystyle #1}\end{cases}%
-}
-
-%% math operator
-\let\Real\Re
-\let\Imaginary\Im
+% 函数与算符
 \let\Re\relax
 \let\Im\relax
-\DeclareMathOperator{\Re}{Re}  % real part
-\DeclareMathOperator{\Im}{Im}  % imaginary part
+\DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator{\Im}{Im}
 \DeclareMathOperator{\sech}{sech}
-\DeclareMathOperator{\csch}{csch} 
-\DeclareMathOperator{\arcsec}{arcsec}
-\DeclareMathOperator{\arccot}{arccot} 
-\DeclareMathOperator{\arccsc}{arccsc} 
-\DeclareMathOperator{\arsinh}{arsinh} 
-\DeclareMathOperator{\arcosh}{arcosh} 
-\DeclareMathOperator{\artanh}{artanh} 
+\DeclareMathOperator{\csch}{csch}
 \DeclareMathOperator{\sinc}{sinc}
-\DeclareMathOperator{\sgn}{sgn}     % sign function
-\DeclareMathOperator{\id}{id}       % identity mapping
-\DeclareMathOperator{\Res}{Res}     % residue
-\DeclareMathOperator{\principalvalue}{PV}       % Cauchy principal value
-\DeclareMathOperator{\supp}{supp}   % support set
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\PV}{PV}
+\DeclareMathOperator{\FT}{\mathcal{F}}
+\DeclareMathOperator{\Beta}{B}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand*{\bigo}{\mathcal{O}}
+\newcommand*{\intR}{\int_{-\infty}^\infty}
+\newcommand*{\intRplus}{\int_0^\infty}
 
-%% linear algebra
-\DeclareMathOperator{\rank}{rank}   % rank
-\DeclareMathOperator{\diag}{diag}   % diagonal
-\DeclareMathOperator{\tr}{tr}       % trace
-\newcommand*{\tp}{^\top}    % transpose: A^T
-\newcommand*{\cj}{^\ast}    % conjugate: A*
-\newcommand*{\dg}{^\dagger} % conjugate transpose/Hermite: A†
-\newcommand*{\iv}{^{-1}}    % inverse: A^-1
+% 矢量、线性代数与场算符
+\newcommand*{\hatbm}[1]{\hat{\bm{#1}}} % 带帽的粗体符号，含义随卷定义
+\newcommand*{\dotbm}[1]{\dot{\bm{#1}}}
+\newcommand*{\uvec}[1]{\mathop{}\!\hatbm{#1}}  % 系数后自动留薄空；单独取负写 -{\uvec n}
+\newcommand*{\grad}{\nabla}
+\renewcommand*{\div}{\nabla\cdot}
+\newcommand*{\curl}{\nabla\times}
+\newcommand*{\laplacian}{\nabla^2}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\nullsp}{N}
+\DeclareMathOperator{\colsp}{C}
+\newcommand*{\transp}{^\top}
+\newcommand*{\conj}{^\ast}
+\newcommand*{\adjoint}{^\dagger}
+\newcommand*{\inv}{^{-1}}
 
-%% physicists
-\newcommand*{\Schr}{Schrödinger}
-\newcommand*{\Legd}{Legendre}
-\newcommand*{\deB}{de Broglie}
-\newcommand*{\Rayl}{Rayleigh}
-\newcommand*{\Lande}{Landé}
+% 概率、统计与物理量
+\renewcommand*{\P}{\operatorname{P}}  % 段落符号 ¶ 可用 \textparagraph
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\BinDist}{Bin}
+\DeclareMathOperator{\NormalDist}{N}
+\newcommand*{\avg}[1]{\overline{#1}}
+\newcommand*{\NA}{N_{\mathrm{A}}}
+\newcommand*{\kB}{k_{\mathrm{B}}}
+\newcommand*{\muB}{\mu_{\mathrm{B}}}
+\newcommand*{\Ek}{E_{\mathrm{k}}}
+\newcommand*{\FWHM}{\mathrm{FWHM}}
+\newcommand*{\electron}{\mathrm{e}}       % 粒子标签，如 m_\electron
+\newcommand*{\proton}{\mathrm{p}}
+\newcommand*{\CM}{\mathrm{CM}}
+\newcommand*{\transv}{\mathrm t}  % 横向分量或模式的标签
+\newcommand*{\longit}{\mathrm l}  % 纵向分量或模式的标签
+\newcommand*{\electric}{\mathrm e}
+\newcommand*{\magnetic}{\mathrm m}
+\newcommand*{\incident}{\mathrm i}
+\newcommand*{\initial}{\mathrm i}
+\newcommand*{\final}{\mathrm f}
+\newcommand*{\eff}{\mathrm{eff}}
+\newcommand*{\tot}{\mathrm{tot}}
 
-%% particles
-\newcommand*{\elec}{\mathrm e}
-\newcommand*{\pton}{\mathrm p}
-\newcommand*{\nton}{\mathrm n}
-\newcommand*{\mol}{\mathrm m}
+% 括号与 Dirac 记号。显式声明让公式预览也能读到每个尺寸的命令。
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\bigabs}[1]{\bigl\lvert#1\bigr\rvert}
+\newcommand{\Bigabs}[1]{\Bigl\lvert#1\Bigr\rvert}
+\newcommand{\biggabs}[1]{\biggl\lvert#1\biggr\rvert}
+\newcommand{\Biggabs}[1]{\Biggl\lvert#1\Biggr\rvert}
 
-%% physical constants/notation
-\newcommand*{\NA}{N_{\mathrm A}}    % Avogadro constant
-\newcommand*{\kB}{k_{\mathrm B}}    % Boltzmann constant
-\newcommand*{\muB}{\mu_\mathrm B}   % Bohr magneton
-\newcommand*{\Ek}{E_{\mathrm k}}    % kinetic energy
-\newcommand*{\FWHM}{\mathrm{FWHM}}  % full width at half maximum
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\bignorm}[1]{\bigl\lVert#1\bigr\rVert}
+\newcommand{\Bignorm}[1]{\Bigl\lVert#1\Bigr\rVert}
+\newcommand{\biggnorm}[1]{\biggl\lVert#1\biggr\rVert}
+\newcommand{\Biggnorm}[1]{\Biggl\lVert#1\Biggr\rVert}
 
-%% subscript/superscript 
-\newcommand*{\eff}{_\mathrm{eff}}   % effective
-\newcommand*{\tot}{_\mathrm{tot}}   % total
-\newcommand*{\maxi}{_\mathrm{max}}  % maximum
-\newcommand*{\mini}{_\mathrm{min}}  % minimum
+\newcommand{\eval}[1]{{#1}\rvert}
+\newcommand{\bigeval}[1]{{#1}\bigr\rvert}
+\newcommand{\Bigeval}[1]{{#1}\Bigr\rvert}
+\newcommand{\biggeval}[1]{{#1}\biggr\rvert}
+\newcommand{\Biggeval}[1]{{#1}\Biggr\rvert}
 
-%% unit tag
-\newcommand*{\lSI}{\tag{SI}}    % le SI
-\newcommand*{\CGS}{\tag{CGS}}   % cm, g, s system
+\newcommand{\floor}[1]{\lfloor#1\rfloor}
+\newcommand{\bigfloor}[1]{\bigl\lfloor#1\bigr\rfloor}
+\newcommand{\Bigfloor}[1]{\Bigl\lfloor#1\Bigr\rfloor}
+\newcommand{\biggfloor}[1]{\biggl\lfloor#1\biggr\rfloor}
+\newcommand{\Biggfloor}[1]{\Biggl\lfloor#1\Biggr\rfloor}
 
-%% other
+\newcommand{\ceil}[1]{\lceil#1\rceil}
+\newcommand{\bigceil}[1]{\bigl\lceil#1\bigr\rceil}
+\newcommand{\Bigceil}[1]{\Bigl\lceil#1\Bigr\rceil}
+\newcommand{\biggceil}[1]{\biggl\lceil#1\biggr\rceil}
+\newcommand{\Biggceil}[1]{\Biggl\lceil#1\Biggr\rceil}
+
+\newcommand{\ave}[1]{\langle#1\rangle}
+\newcommand{\bigave}[1]{\bigl\langle#1\bigr\rangle}
+\newcommand{\Bigave}[1]{\Bigl\langle#1\Bigr\rangle}
+\newcommand{\biggave}[1]{\biggl\langle#1\biggr\rangle}
+\newcommand{\Biggave}[1]{\Biggl\langle#1\Biggr\rangle}
+
+\newcommand{\set}[2]{\{#1\,\vert\,#2\}}
+\newcommand{\bigset}[2]{\bigl\{#1\,\big\vert\,#2\bigr\}}
+\newcommand{\Bigset}[2]{\Bigl\{#1\,\Big\vert\,#2\Bigr\}}
+\newcommand{\biggset}[2]{\biggl\{#1\,\bigg\vert\,#2\biggr\}}
+\newcommand{\Biggset}[2]{\Biggl\{#1\,\Bigg\vert\,#2\Biggr\}}
+
+\newcommand{\division}[2]{{#1}/{#2}}
+\newcommand{\bigdivision}[2]{{#1}\big/{#2}}
+\newcommand{\Bigdivision}[2]{{#1}\Big/{#2}}
+\newcommand{\biggdivision}[2]{{#1}\bigg/{#2}}
+\newcommand{\Biggdivision}[2]{{#1}\Bigg/{#2}}
+
+\newcommand{\inp}[2]{\langle#1,#2\rangle}
+\newcommand{\biginp}[2]{\bigl\langle#1,#2\bigr\rangle}
+\newcommand{\Biginp}[2]{\Bigl\langle#1,#2\Bigr\rangle}
+\newcommand{\bigginp}[2]{\biggl\langle#1,#2\biggr\rangle}
+\newcommand{\Bigginp}[2]{\Biggl\langle#1,#2\Biggr\rangle}
+
+\newcommand{\bra}[1]{\langle#1\rvert}
+\newcommand{\bigbra}[1]{\bigl\langle#1\bigr\rvert}
+\newcommand{\Bigbra}[1]{\Bigl\langle#1\Bigr\rvert}
+\newcommand{\biggbra}[1]{\biggl\langle#1\biggr\rvert}
+\newcommand{\Biggbra}[1]{\Biggl\langle#1\Biggr\rvert}
+
+\newcommand{\ket}[1]{\lvert#1\rangle}
+\newcommand{\bigket}[1]{\bigl\lvert#1\bigr\rangle}
+\newcommand{\Bigket}[1]{\Bigl\lvert#1\Bigr\rangle}
+\newcommand{\biggket}[1]{\biggl\lvert#1\biggr\rangle}
+\newcommand{\Biggket}[1]{\Biggl\lvert#1\Biggr\rangle}
+
+\newcommand{\brkt}[2]{\langle#1\vert#2\rangle}
+\newcommand{\bigbrkt}[2]{\bigl\langle#1\big\vert#2\bigr\rangle}
+\newcommand{\Bigbrkt}[2]{\Bigl\langle#1\Big\vert#2\Bigr\rangle}
+\newcommand{\biggbrkt}[2]{\biggl\langle#1\bigg\vert#2\biggr\rangle}
+\newcommand{\Biggbrkt}[2]{\Biggl\langle#1\Bigg\vert#2\Biggr\rangle}
+
+\newcommand{\mel}[3]{\langle#1\vert#2\vert#3\rangle}
+\newcommand{\bigmel}[3]{\bigl\langle#1\big\vert#2\big\vert#3\bigr\rangle}
+\newcommand{\Bigmel}[3]{\Bigl\langle#1\Big\vert#2\Big\vert#3\Bigr\rangle}
+\newcommand{\biggmel}[3]{\biggl\langle#1\bigg\vert#2\bigg\vert#3\biggr\rangle}
+\newcommand{\Biggmel}[3]{\Biggl\langle#1\Bigg\vert#2\Bigg\vert#3\Biggr\rangle}
+
+\newcommand{\ktbr}[2]{\lvert#1\rangle\langle#2\rvert}
+\newcommand{\bigktbr}[2]{\bigl\lvert#1\bigr\rangle\bigl\langle#2\bigr\rvert}
+\newcommand{\Bigktbr}[2]{\Bigl\lvert#1\Bigr\rangle\Bigl\langle#2\Bigr\rvert}
+\newcommand{\biggktbr}[2]{\biggl\lvert#1\biggr\rangle\biggl\langle#2\biggr\rvert}
+\newcommand{\Biggktbr}[2]{\Biggl\lvert#1\Biggr\rangle\Biggl\langle#2\Biggr\rvert}
+
+\newcommand{\bigp}[1]{\bigl(#1\bigr)}
+\newcommand{\Bigp}[1]{\Bigl(#1\Bigr)}
+\newcommand{\biggp}[1]{\biggl(#1\biggr)}
+\newcommand{\Biggp}[1]{\Biggl(#1\Biggr)}
+
+\newcommand{\bigb}[1]{\bigl[#1\bigr]}
+\newcommand{\Bigb}[1]{\Bigl[#1\Bigr]}
+\newcommand{\biggb}[1]{\biggl[#1\biggr]}
+\newcommand{\Biggb}[1]{\Biggl[#1\Biggr]}
+
+\newcommand{\bigB}[1]{\bigl\{#1\bigr\}}
+\newcommand{\BigB}[1]{\Bigl\{#1\Bigr\}}
+\newcommand{\biggB}[1]{\biggl\{#1\biggr\}}
+\newcommand{\BiggB}[1]{\Biggl\{#1\Biggr\}}
+
+% 公式排版
+% 方程组的内容是一个 aligned 块，左花括号随整组方程的高度伸展。
+\newcommand{\eqnset}[1]{\left\{#1\right.}
+\newcommand{\fracdisp}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand*{\vs}{\mathord{\text{–}}}
+\newcommand*{\otherwise}{\text{otherwise}}
 \newcommand*{\qqquad}{\qquad\quad}
 \newcommand*{\qqqquad}{\qquad\qquad}
 
-\newcommand{\notimplies}{\hspace{1ex}\not\hspace{-1ex}\implies}
-
-\let\geq\geqslant
-\let\leq\leqslant
-
-\newcommand*{\avg}[1]{\overline{#1}}
-
-\newcommand*{\bigo}{\mathcal O}     % big O notation
-\newcommand*{\degree}{^\circ}       % degree
-
-\newcommand{\fracdisp}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
-
+\renewcommand*{\le}{\leqslant}
+\renewcommand*{\leq}{\leqslant}
+\renewcommand*{\ge}{\geqslant}
+\renewcommand*{\geq}{\geqslant}

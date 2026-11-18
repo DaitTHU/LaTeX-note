@@ -39,7 +39,7 @@
 %NaI(Tl) vs BGO
 大小、形状、窗、
 入射粒子的种类、能量、
-%100keV光子 vs 1MeV光子，α粒子
+%\qty{100}{keV} 光子与 \qty{1}{MeV} 能区的光子，α粒子
 入射束的形状、
 记录仪器的阈值等有关。
 \paragraph{吸收因素$f_a$}
@@ -56,13 +56,13 @@
 狭义的本底计数率：无样品时测量装置的计数率；
 干扰计数率：样品中其它射线的计数率。二者之和为总本底。
 
-\subsection{\textalpha 放射性样品活度的测量}
+\subsection{\alpharay 放射性样品活度的测量}
 
 \paragraph{小立体角法测量薄$\alpha$放射性样品}
 \begin{compactitem}
 	\item 探测器：塑料闪烁体，ZnS(Ag)，CsI(Tl)，金硅面垒探测器，薄窗正比管
 	\item 源发射$\alpha$：各向同性
-	\item 点源：要求源探距离远，管子长度$\sim\SI{10}{cm}$
+	\item 点源：要求源探距离远，管子长度$\sim\qty{10}{cm}$
 	\item 避免吸收和散射：抽真空
 \end{compactitem}
 \[
@@ -83,11 +83,11 @@ $n_0\ll n_\mathrm b$，则$n_\mathrm s\doteq n_b$探测源装置的优质因子
 \[
 	N_0=N_\mathrm s-N_\mathrm b,
 \]
-如果样品没有放射性，$N_0\sim\mathrm N(0,\sqrt{2N_\mathrm b})$，为将误认为有放射性的概率控制在5\%
+以下以 $\NormalDist(\mu,\sigma^2)$ 表示均值为 $\mu$、方差为 $\sigma^2$ 的正态分布，标准差为 $\sigma$。若样品没有放射性，$N_0\sim\NormalDist(0,2N_\mathrm b)$，为将误认为有放射性的概率控制在\qty{5}{\percent}
 \[
 	L_\mathrm C=1.645\sqrt{2 N_\mathrm b}
 \]
-如果样品有放射性，$N_0\sim\mathrm N(N_\mathrm D,\sqrt{2N_\mathrm b+N_\mathrm D})$，为将误认为没有放射性的概率控制在5\%
+如果样品有放射性，$N_0\sim\NormalDist(N_\mathrm D,2N_\mathrm b+N_\mathrm D)$，为将误认为没有放射性的概率控制在\qty{5}{\percent}
 \[
 	N_\mathrm D=L_\mathrm C+1.645\sqrt{2N_\mathrm b+N_\mathrm D}\doteq 4.653\sqrt{N_\mathrm b}+2.706,
 \]
@@ -128,8 +128,8 @@ $n_0\ll n_\mathrm b$，则$n_\mathrm s\doteq n_b$探测源装置的优质因子
 	\item 符合电路的工作特性（电子学分辨时间$\tau_\mathrm s$）
 	\item 信号形成过程的时间离散，反映了系统的时间分辨能力
 	\begin{compactitem}
-		\item 快符合($\tau_\mathrm s<\SI{10}{ns}$)：符合曲线宽度主要由“同步”信号的时间离散来决定；
-		\item 慢符合($\tau_\mathrm s>\SI{10}{ns}$)：符合曲线宽度主
+		\item 快符合($\tau_\mathrm s<\qty{10}{ns}$)：符合曲线宽度主要由“同步”信号的时间离散来决定；
+		\item 慢符合($\tau_\mathrm s>\qty{10}{ns}$)：符合曲线宽度主
 		要由电子学分辨时间决定
 	\end{compactitem}
 	\item 信号间的时间关系（$\beta,\gamma$的时间差）
@@ -154,7 +154,7 @@ $n_0\ll n_\mathrm b$，则$n_\mathrm s\doteq n_b$探测源装置的优质因子
 
 \section{能量测量}
 
-\subsection{\textgamma 能谱分析}
+\subsection{\gammaray 能谱分析}
 
 \paragraph{探测器的能量分辨率}见前文。
 \paragraph{$\gamma$射线在探测器中沉积能量}
@@ -199,7 +199,7 @@ $\gamma$射线经一次反应后，产物有且仅有三种情况：
 	\item 减少窗吸收：用铍窗正比计数器、铍窗Si(Li)探测器。
 	\item 主要是光电效应。
 	\item 有明显的X射线逃逸峰（光电峰），由探测器介质决定：I/Ge/Si逃逸。
-	%I逃逸$\SI{28.6}{keV}$、Ge逃逸$\SI{9.89}{keV}$、Si逃逸$\SI{1.74}{keV}$。
+	%I逃逸$\qty{28.6}{keV}$、Ge逃逸$\qty{9.89}{keV}$、Si逃逸$\qty{1.74}{keV}$。
 \end{compactitem}
 \paragraph{射线来源\& 堆积问题}
 \begin{center}
@@ -212,40 +212,40 @@ $\gamma$射线经一次反应后，产物有且仅有三种情况：
 		\midrule
 		全能峰&$h\nu$&\multirow{5}*{源、探测器}\\
 		光电峰&$h\nu-\varepsilon_{\mathrm K}$\\%[1ex]
-		Compton边缘&$h\nu-E_{\gamma'}(180^\circ)$\\
-		单逃逸峰&$h\nu-m_\elec c^2$\\
-		双逃逸峰&$h\nu-2m_\elec c^2$\\
+		Compton边缘&$h\nu-E_{\gamma'}(\ang{180})$\\
+		单逃逸峰&$h\nu-m_\electron c^2$\\
+		双逃逸峰&$h\nu-2m_\electron c^2$\\
 		\midrule
-		湮没峰&$m_\elec c^2$&\multirow{3}*{源、环境}\\
-		反散射峰&$E_{\gamma'}(>\!150^\circ)$\\
+		湮没峰&$m_\electron c^2$&\multirow{3}*{源、环境}\\
+		反散射峰&$E_{\gamma'}(>\!\ang{150})$\\
 		特征X射线峰&$\varepsilon_{\mathrm{K,b}}$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
 \begin{remark}
-	$m_\elec c^2=\SI{511}{keV},\enspace E_{\gamma'}\sim\SI{200}{keV},\enspace\varepsilon_{\mathrm{K,I/Ge/Si}}\sim\SI{10}{keV}$，
+	$m_\electron c^2=\qty{511}{keV},\enspace E_{\gamma'}\sim\qty{200}{keV},\enspace\varepsilon_{\mathrm{K,I/Ge/Si}}\sim\qty{10}{keV}$，
 	\[
-		E_{\gamma'}(\theta)=h\nu'=\frac{h\nu}{1+\alpha(1-\cos\theta)},\quad\alpha:=\frac{h\nu}{m_\elec c^2}.
+		E_{\gamma'}(\theta)=h\nu'=\frac{h\nu}{1+\alpha(1-\cos\theta)},\quad\alpha:=\frac{h\nu}{m_\electron c^2}.
 	\]
 \end{remark}
 能量未全部沉积：
 \begin{compactitem}
 	\item 光电峰：光子与探测器（I/Ge/Si）发生光电效应后特征X射线跑了
 	\item (多次) Compton散射坪：Compton散射光子跑了
-	\item 单(双)逃逸峰：1(2)个$\SI{511}{keV}$光子跑了
+	\item 单(双)逃逸峰：1(2)个$\qty{511}{keV}$光子跑了
 	\item 次级电子轫致辐射逃逸：电子减速时，辐射光子跑了
 	\item 边缘效应(次级电子逃逸)：电子能量没损失完就跑了
 \end{compactitem}
 周围介质(屏蔽材料等)影响：
 \begin{compactitem}
-	\item 正电子湮没辐射：（$>\SI{1.022}{MeV}$的）光子在探测器外的材料中发生电子对效应，正电子湮没后产生的$\SI{511}{keV}$光子
+	\item 正电子湮没辐射：（$>\qty{1.022}{MeV}$的）光子在探测器外的材料中发生电子对效应，正电子湮没后产生的$\qty{511}{keV}$光子
 	\item 轫致辐射
 	\item 散射光子 
-	\item 反散射峰：光子在探测器外发生Compton反散射，产生了$\sim\SI{200}{keV}$的光子
+	\item 反散射峰：光子在探测器外发生Compton反散射，产生了$\sim\qty{200}{keV}$的光子
 	\item 特征X射线
 \end{compactitem}
 
-\subsection{\textgamma 能谱装置}
+\subsection{\gammaray 能谱装置}
 
 \paragraph{单晶$\gamma$能谱仪}
 

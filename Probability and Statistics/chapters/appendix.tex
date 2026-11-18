@@ -4,27 +4,27 @@
 
 \paragraph{二项分布}
 
-$\Bino(n,p)$：进行$n$次独立\Bern 试验中，共成功了$X$次
+$\BinDist(n,p)$：进行$n$次独立Bernoulli试验中，共成功了$X$次
 \begin{equation}
 	\P(X=k)=\binom nk p^k(1-p)^{n-k},\quad k=0,\ldots,n
 \end{equation}
 
 \paragraph{Pascal分布}
 
-$\mathrm{Pa}(r,p)$：进行$X$次独立\Bern 试验，直到成功了$r$次
+$\PascalDist(r,p)$：进行$X$次独立Bernoulli试验，直到成功了$r$次
 \begin{equation}
 	\P(X=k)=\binom{k-1}{r-1}p^r(1-p)^{k-r},\quad k=r,r+1,\ldots
 \end{equation}
 
 \paragraph{几何分布}
 
-$\mathrm{Ge}(p)=\mathrm{Pa}(1,p)$。
+$\GeomDist(p)=\PascalDist(1,p)$。
 
 \paragraph{负二项分布}
 
-$\mathrm{NB}(r,p)$：进行独立\Bern 试验，直到成功了$r$次。之前共失败了$X$次
+$\NegBinDist(r,p)$：进行独立Bernoulli试验，直到成功了$r$次。之前共失败了$X$次
 \footnote{
-	显然，Pascal分布和负二项分布只是平移的区别：$\P_{\mathrm{Pa}}(X=k+r)=\P_{\mathrm{NB}}(X=k)$。负二项分布名称中负的来源是
+	显然，Pascal分布和负二项分布只是平移的区别：$\P_{\PascalDist}(X=k+r)=\P_{\NegBinDist}(X=k)$。负二项分布名称中负的来源是
 	\begin{equation}
 		\binom{k+r-1}{r-1}=(-)^k\binom{-r}{k}.
 	\end{equation}
@@ -35,14 +35,14 @@ $\mathrm{NB}(r,p)$：进行独立\Bern 试验，直到成功了$r$次。之前�
 
 \paragraph{超几何分布}
 
-$\mathrm H(n,N,M)$：$N$个球中有$M$个有标记，从中不放回地随机抽取$n$个，其中$X$个球有标记
+$\HypergeomDist(n,N,M)$：$N$个球中有$M$个有标记，从中不放回地随机抽取$n$个，其中$X$个球有标记
 \begin{equation}
 	\P(X=k)=\frac{\binom Mk\binom{N-M}{n-k}}{\binom N n},\quad k=0,1,\ldots,\min(M,n).
 \end{equation}
 
 \paragraph{负超几何分布}
 
-$\mathrm{NH}(r,N,M)$：$N$个球中有$M$个有标记，从中不放回地随机抽取$X$个，
+$\NegHypergeomDist(r,N,M)$：$N$个球中有$M$个有标记，从中不放回地随机抽取$X$个，
 直到取到$r$个有标记的球
 \begin{equation}
 	\P(X=k)=\frac{\binom{k-1}{r-1}\binom{N-k}{M-r}}{\binom N M},\quad k=r,\ldots,r+n-M.
@@ -50,7 +50,7 @@ $\mathrm{NH}(r,N,M)$：$N$个球中有$M$个有标记，从中不放回地随机
 
 \paragraph{Poisson分布}
 
-$\Pois(\lambda)$：$\Bino(n,\lambda/n)$当$n\to\infty$的极限
+$\PoisDist(\lambda)$：$\BinDist(n,\lambda/n)$当$n\to\infty$的极限
 \begin{equation}
 	\P(X=k)=\frac{\lambda^k}{k!}\e^{-\lambda},\quad k=0,1,2,\ldots
 \end{equation}
@@ -62,19 +62,19 @@ $\Pois(\lambda)$：$\Bino(n,\lambda/n)$当$n\to\infty$的极限
 		\toprule
 		Distribution&$\E(X)$&$\Var(X)$\\
 		\midrule
-		$\Bino(n,p)$&$np$&$np(1-p)$\\[1ex]
-		$\mathrm{Pa}(r,p)$&$\frac rp$&$\frac rp\Bigp{\frac1p-1}$\\[2ex]
-		% $\mathrm{Ge}(p)$&$\frac1p$&$\frac1p\Bigp{\frac1p-1}$\\
-		$\mathrm H(n,N,M)$&$\frac{nM}N$&$\frac{n(N-n)M(N-M)}{N^2(N-1)}$\\[2ex]
-		$\mathrm{NH}(r,N,M)$&$\frac{r(N+1)}{M+1}$&$\frac{r(N+1)(N-M)(M-r+1)}{(M+1)^2(M+2)}$\\
-		$\Pois(\lambda)$&$\lambda$&$\lambda$\\
+		$\BinDist(n,p)$&$np$&$np(1-p)$\\[1ex]
+		$\PascalDist(r,p)$&$\frac rp$&$\frac rp\Bigp{\frac1p-1}$\\[2ex]
+		% $\GeomDist(p)$&$\frac1p$&$\frac1p\Bigp{\frac1p-1}$\\
+		$\HypergeomDist(n,N,M)$&$\frac{nM}N$&$\frac{n(N-n)M(N-M)}{N^2(N-1)}$\\[2ex]
+		$\NegHypergeomDist(r,N,M)$&$\frac{r(N+1)}{M+1}$&$\frac{r(N+1)(N-M)(M-r+1)}{(M+1)^2(M+2)}$\\
+		$\PoisDist(\lambda)$&$\lambda$&$\lambda$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
 
 \paragraph{二项分布}
 
-$X\sim\Bino(n,p)$可以视作$X_1,\ldots,X_n$ iid $\sim\Bino(p)$的和：$X=X_1+\cdots+X_n$，故
+$X\sim\BinDist(n,p)$可以视作$X_1,\ldots,X_n$ iid $\sim\BernDist(p)$的和：$X=X_1+\cdots+X_n$，故
 期望和方差
 \begin{subequations}
 	\begin{align}
@@ -123,12 +123,12 @@ $X\sim\Bino(n,p)$可以视作$X_1,\ldots,X_n$ iid $\sim\Bino(p)$的和：$X=X_1+
 \begin{center}
 	\begin{tabular}{ccc}
 		\toprule
-		Distribution&$\MGF(X)$&$\CF(X)$\\
+		Distribution&$\MGF_X(t)$&$\CF_X(t)$\\
 		\midrule
-		$\Bino(n,p)$&$(q+p\e^t)^n$&$(q+p\e^{\i t})^n$\\
-		$\mathrm{NB}(r,p)$&$\Bigp{\frac p{q+p\e^{t}}}^r$&$\Bigp{\frac p{q+p\e^{\i t}}}^r$\\
-		$\mathrm H(n,N,M)$&-&-\\
-		$\Pois(\lambda)$&$\e^{\lambda(\e^t-1)}$&$\e^{\lambda(\e^{\i t}-1)}$\\
+		$\BinDist(n,p)$&$(q+p\e^t)^n$&$(q+p\e^{\i t})^n$\\
+		$\NegBinDist(r,p)$&$\Bigp{\frac p{q+p\e^{t}}}^r$&$\Bigp{\frac p{q+p\e^{\i t}}}^r$\\
+		$\HypergeomDist(n,N,M)$&-&-\\
+		$\PoisDist(\lambda)$&$\e^{\lambda(\e^t-1)}$&$\e^{\lambda(\e^{\i t}-1)}$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -137,61 +137,61 @@ $X\sim\Bino(n,p)$可以视作$X_1,\ldots,X_n$ iid $\sim\Bino(p)$的和：$X=X_1+
 
 \paragraph{均匀分布}
 
-$\Unif(a,b)$
+$\UnifDist(a,b)$
 \begin{equation}
 	f(x)=\frac1{b-a},\quad x\in(a,b).
 \end{equation}
 
 \paragraph{正态分布}
 
-$\Norm(\mu,\sigma^2)$
+$\NormalDist(\mu,\sigma^2)$
 \begin{equation}
 	f(x)=\frac1{\sqrt{2\pi}\sigma}\exp\biggb{-\frac{(x-\mu)^2}{2\sigma^2}},\quad x\in\RR.
 \end{equation}
 
 \paragraph{指数分布}
 
-$\Expo(\lambda)$
+$\ExpDist(\lambda)$
 \begin{equation}
 	f(x)=\lambda\e^{-\lambda x},\quad x>0.
 \end{equation}
 
 \paragraph{Gamma分布}
 
-$\mathrm{Ga}(\alpha,\lambda)$
+$\GammaDist(\alpha,\lambda)$
 \begin{equation}
 	f(x)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\e^{-\lambda x},\quad x>0.
 \end{equation}
 其中$\alpha,\lambda>0$，Gamma函数
 \[
-	\Gamma(\alpha)=\int\zti x^{\alpha-1}\e^{-x}\d x,
+	\Gamma(\alpha)=\intRplus x^{\alpha-1}\e^{-x}\d x,
 \]
 特别地，$\Gamma(x+1)=x\Gamma(x),\,\Gamma(1)=1,\,\Gamma(1/2)=\sqrt\pi,\,\Gamma(n)=(n-1)!$，且
 \begin{gather*}
-	\mathrm{Ga}(1,\lambda)=\Expo(\lambda),\,\mathrm{Ga}(n/2,1/2)=\chi^2(n)\\
+	\GammaDist(1,\lambda)=\ExpDist(\lambda),\,\GammaDist(n/2,1/2)=\ChiSqDist(n)\\
 	f(x;\alpha,\lambda)\d x=f(\lambda x;\alpha,1)\d\lambda x
 \end{gather*}
 
 \paragraph{卡方分布}
 
-$\chi^2(n)$
+$\ChiSqDist(n)$
 \begin{equation}
 	f(x)=\frac{x^{n/2-1}}{2^{n/2}\Gamma(n/2)}\e^{-x/2},\quad x>0.
 \end{equation}
-其中$n\in\mathbb N_+$，特别地，$\chi^2(1)$
+其中$n\in\NN_+$，特别地，$\ChiSqDist(1)$
 \[
 	f(x)=\frac1{\sqrt{2\pi x}}\e^{-x/2},\quad\lim_{x\to 0^+}f(x)=+\infty.
 \]
 
 \paragraph{Beta分布}
 
-$\mathrm{Be}(a,b)$
+$\BetaDist(a,b)$
 \begin{equation}
-	f(x)=\frac1{\mathrm B(a,b)}x^{a-1}(1-x)^{b-1},\quad x\in(0,1).
+	f(x)=\frac1{\Beta(a,b)}x^{a-1}(1-x)^{b-1},\quad x\in(0,1).
 \end{equation}
 其中$a,b>0$，Beta函数
 \[
-	\mathrm B(a,b)=\int_0^1x^{a-1}(1-x)^{b-1}\d x\equiv\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)},
+	\Beta(a,b)=\int_0^1x^{a-1}(1-x)^{b-1}\d x\equiv\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)},
 \]
 
 \paragraph{Cauchy分布}
@@ -211,10 +211,10 @@ $\mathrm{Be}(a,b)$
 		\toprule
 		Distribution&Mode&$\E(X)$&$\Var(X)$\\
 		\midrule
-		$\Unif(a,b)$&-&$\frac{a+b}2$&$\frac{(b-a)^2}{12}$\\
-		$\Norm(\mu,\sigma^2)$&$\mu$&$\mu$&$\sigma^2$\\
-		$\Expo(\lambda)$&0&$\frac1\lambda$&$\frac1\lambda$\\
-		$\mathrm{Ga}(\alpha,\lambda)$&-&&\\
+		$\UnifDist(a,b)$&-&$\frac{a+b}2$&$\frac{(b-a)^2}{12}$\\
+		$\NormalDist(\mu,\sigma^2)$&$\mu$&$\mu$&$\sigma^2$\\
+		$\ExpDist(\lambda)$&0&$\frac1\lambda$&$\frac1\lambda$\\
+		$\GammaDist(\alpha,\lambda)$&-&&\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -226,7 +226,7 @@ $\mathrm{Be}(a,b)$
 
 $A:=$样本中含有$Y_j$
 \[
-	\P(X_i=Y_j)=\P(X_i=Y_j|A)\P(A)+0=\frac1n\cdot\frac{\binom{N-1}{n-1}}{\binom{N}{n}}=\frac1N.
+	\P(X_i=Y_j)=\P(X_i=Y_j\mid A)\P(A)+0=\frac1n\cdot\frac{\binom{N-1}{n-1}}{\binom{N}{n}}=\frac1N.
 \]
 故
 \begin{subequations}

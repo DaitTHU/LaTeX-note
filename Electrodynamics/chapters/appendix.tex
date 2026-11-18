@@ -68,7 +68,7 @@
     \end{equation}
     标量场$\psi$的梯度(gradient)为
     \begin{equation}
-        \nabla\psi=\pv\psi x\uvec x+\pv\psi y\uvec y+\pv\psi z\uvec z.
+        \grad\psi=\pv\psi x\uvec x+\pv\psi y\uvec y+\pv\psi z\uvec z.
     \end{equation}
     矢量场$\bm A$的散度(divergence)为
     \begin{equation}
@@ -85,11 +85,11 @@
     \end{equation}
     标量Laplacian
     \begin{equation}
-        \lapla\psi \equiv \div(\nabla\psi) = \pv[2]\psi x + \pv[2]\psi y + \pv[2]\psi z.
+        \laplacian\psi \equiv \div(\grad\psi) = \pv[2]\psi x + \pv[2]\psi y + \pv[2]\psi z.
     \end{equation}
     矢量Laplacian
     \begin{equation}
-        \lapla\bm A\equiv\lapla A_x\uvec x+\lapla A_y\uvec y+\lapla A_z\uvec z.
+        \laplacian\bm A\equiv\laplacian A_x\uvec x+\laplacian A_y\uvec y+\laplacian A_z\uvec z.
     \end{equation}
 \end{definition}
 
@@ -97,9 +97,9 @@
     {简单乘法法则}{simple product rules}
     由Leibniz法则易得梯度、散度和旋度的简单乘法法则：
     \begin{align}
-        \nabla(\psi\phi)&=(\nabla\psi)\phi+\psi\nabla\phi;\\
-        \div(\psi\bm A)&=(\nabla\psi)\cdot\bm A+\psi(\div\bm A);\\
-        \curl(\psi\bm A)&=(\nabla\psi)\times\bm A+\psi(\curl\bm A).
+        \grad(\psi\phi)&=(\grad\psi)\phi+\psi\grad\phi;\\
+        \div(\psi\bm A)&=(\grad\psi)\cdot\bm A+\psi(\div\bm A);\\
+        \curl(\psi\bm A)&=(\grad\psi)\times\bm A+\psi(\curl\bm A).
     \end{align}
 \end{theorem}
 
@@ -108,7 +108,7 @@
     梯度、散度和旋度的复杂乘法法则：
     \begin{align}
         \label{eqn:gradA.B}
-        \nabla(\bm A\cdot\bm B)&=\bm A\times(\curl\bm B)+\bm B\times(\curl\bm A)+(\bm A\cdot\nabla)\bm B+(\bm B\cdot\nabla)\bm A;\\
+        \grad(\bm A\cdot\bm B)&=\bm A\times(\curl\bm B)+\bm B\times(\curl\bm A)+(\bm A\cdot\nabla)\bm B+(\bm B\cdot\nabla)\bm A;\\
         \label{eqn:divAxB}
         \div(\bm A\times\bm B)&=(\curl\bm A)\cdot\bm B-(\curl\bm B)\cdot\bm A;\\
         \label{eqn:curlAxB}
@@ -122,11 +122,11 @@
 
 \begin{corollary}
     \begin{equation}
-        (\bm A\cdot\nabla)\bm B=\frac12[\nabla(\bm A\cdot\bm B)-\curl(\bm A\times\bm B)-\bm B\times(\curl\bm A)+\bm A(\div\bm B)+\bm B(\div\bm A)].
+        (\bm A\cdot\nabla)\bm B=\frac12[\grad(\bm A\cdot\bm B)-\curl(\bm A\times\bm B)-\bm B\times(\curl\bm A)+\bm A(\div\bm B)+\bm B(\div\bm A)].
     \end{equation}
     特别地，$\bm B=\bm A$时，
     \begin{equation}
-        (\bm A\cdot\nabla)\bm A=\frac12\nabla(A^2)-\bm A\times(\curl\bm A).
+        (\bm A\cdot\nabla)\bm A=\frac12\grad(A^2)-\bm A\times(\curl\bm A).
     \end{equation}
 \end{corollary}
 
@@ -135,7 +135,7 @@
     梯度的旋度恒为$\bm0$，旋度和散度恒为0
     \begin{align}
         \label{eqn:curlgrad}
-        \curl(\nabla\psi)&\equiv \bm 0;\\
+        \curl(\grad\psi)&\equiv \bm 0;\\
         \label{eqn:divcurl}
         \div(\curl\bm A)&\equiv 0.
     \end{align}
@@ -146,13 +146,13 @@
     旋度的旋度
     \begin{equation}
         \label{eqn:curlcurl}
-        \curl(\curl\bm A)=\nabla(\div\bm A)-\lapla\bm A.
+        \curl(\curl\bm A)=\grad(\div\bm A)-\laplacian\bm A.
     \end{equation}
     Laplacian的乘法法则
     \begin{align}
-        \lapla(\psi\phi)&=\psi\lapla\phi+2\nabla\psi\cdot\nabla\phi+(\lapla\psi)\phi,\\
-        \lapla(\psi\bm A)&=\psi\lapla\bm A+2(\nabla\psi\cdot\nabla)\bm A+(\lapla\psi)\bm A,\\
-        \lapla(\bm A\cdot\bm B)&=\bm A\cdot\lapla\bm B-\bm B\cdot\lapla\bm A+2\div[(\bm B\cdot\nabla)\bm A+\bm B\times(\curl\bm A)].
+        \laplacian(\psi\phi)&=\psi\laplacian\phi+2\grad\psi\cdot\grad\phi+(\laplacian\psi)\phi,\\
+        \laplacian(\psi\bm A)&=\psi\laplacian\bm A+2(\grad\psi\cdot\nabla)\bm A+(\laplacian\psi)\bm A,\\
+        \laplacian(\bm A\cdot\bm B)&=\bm A\cdot\laplacian\bm B-\bm B\cdot\laplacian\bm A+2\div[(\bm B\cdot\nabla)\bm A+\bm B\times(\curl\bm A)].
     \end{align}
 \end{theorem}
 
@@ -160,9 +160,9 @@
     {三重微分}{third order differential}
     散度、旋度、散度与Laplacian可交换：
     \begin{align}
-        \lapla(\nabla\psi)&=\nabla(\lapla\psi),\\
-        \lapla(\div\bm A)&=\div(\lapla\bm A),\\
-        \lapla(\curl\bm A)&=\curl(\lapla\bm A).
+        \laplacian(\grad\psi)&=\grad(\laplacian\psi),\\
+        \laplacian(\div\bm A)&=\div(\laplacian\bm A),\\
+        \laplacian(\curl\bm A)&=\curl(\laplacian\bm A).
     \end{align}
 \end{theorem}
 
@@ -170,13 +170,13 @@
 \begin{example}
     {}{}
     \begin{align}
-        \nabla r&=\uvec r,\\
+        \grad r&=\uvec r,\\
         \div\bm r&=3,\\
         \curl\bm r&=\bm 0,\\
         \div(f(r)\uvec r)&=\frac2rf(r)+\pv fr,\\
         \curl(f(r)\uvec r)&=\bm 0,\\
         (\bm a\cdot\nabla)f(r)\uvec r&=[\bm a-(\bm a\cdot\uvec r)\uvec r]\frac{f(r)}r+(\bm a\cdot\uvec r)\uvec r\,\pv fr,\\
-        \nabla(\bm a\cdot\bm r)&=\bm a+(\div\bm a)\bm r+\bm r\times(\curl\bm a).
+        \grad(\bm a\cdot\bm r)&=\bm a+(\div\bm a)\bm r+\bm r\times(\curl\bm a).
     \end{align}
 \end{example}
 \fi
@@ -195,7 +195,7 @@
     \end{equation}
     其实就是Leibniz法则$+$微积分基本定理$+$移项
     % \begin{equation}
-    %     \int_V\psi\div\bm F\d V=\oint_{\p V}\psi\bm F\cdot\d\bm A-\int_V\bm F\cdot\nabla\psi\d V.
+    %     \int_V\psi\div\bm F\d V=\oint_{\p V}\psi\bm F\cdot\d\bm A-\int_V\bm F\cdot\grad\psi\d V.
     % \end{equation}
 \end{compactitem}
 
@@ -203,7 +203,7 @@
     {体积分}{volume integral}
     区域$V$的体积分
     \begin{align}
-        \int_V\nabla\psi\d V&=\oint_{\p V}\psi\d\bm A,\\
+        \int_V\grad\psi\d V&=\oint_{\p V}\psi\d\bm A,\\
         \label{eqn:div}
         \int_V\div\bm F\d V&=\oint_{\p V}\bm F\cdot\d\bm A,\\
         \int_V\curl\bm F\d V&=-\oint_{\p V}\bm F\times\d\bm A.
@@ -215,7 +215,7 @@
     {面积分}{surface integral}
     曲面$S$的面积分
     \begin{align}
-        \int_S\nabla\psi\times\d\bm A&=-\oint_{\p S}\psi\d\bm\ell,\\
+        \int_S\grad\psi\times\d\bm A&=-\oint_{\p S}\psi\d\bm\ell,\\
         \label{eqn:curl}
         \int_S(\curl\bm F)\cdot\d\bm A&=\oint_{\p S}\bm F\cdot\d\bm\ell.
     \end{align}
@@ -256,7 +256,7 @@
     在曲线坐标系下，梯度、散度、旋度和Laplacian都可以用Lam\'e系数表示：
     \begin{align}
         \label{eqn:grad Lame}
-        \nabla\psi&=\frac1{H_1}\pv\psi{q_1}\uvec e_1+\frac1{H_2}\pv\psi{q_2}\uvec e_2+\frac1{H_3}\pv\psi{q_3}\uvec e_3;\\
+        \grad\psi&=\frac1{H_1}\pv\psi{q_1}\uvec e_1+\frac1{H_2}\pv\psi{q_2}\uvec e_2+\frac1{H_3}\pv\psi{q_3}\uvec e_3;\\
         \label{eqn:div Lame}
         \div\bm F&=\frac1{H_1H_2H_3}\biggb{\pv{(H_2H_3F_1)}{q_1}+\pv{(H_3H_1F_2)}{q_2}+\pv{(H_1H_2F_3)}{q_3}};\\
         \label{eqn:curl Lame}
@@ -266,7 +266,7 @@
             H_1F_1&H_2F_2&H_3F_3
         \end{vmatrix};\\
         \label{eqn:Laplacian Lame}
-        \lapla\psi&=\frac1{H_1H_2H_3}\biggb{\pp{q_1}\biggp{\frac{H_2H_3}{H_1}\pv\psi{q_1}}+\pp{q_2}\biggp{\frac{H_3H_1}{H_2}\pv\psi{q_2}}+\pp{q_3}\biggp{\frac{H_1H_2}{H_3}\pv\psi{q_3}}}.
+        \laplacian\psi&=\frac1{H_1H_2H_3}\biggb{\pp{q_1}\biggp{\frac{H_2H_3}{H_1}\pv\psi{q_1}}+\pp{q_2}\biggp{\frac{H_3H_1}{H_2}\pv\psi{q_2}}+\pp{q_3}\biggp{\frac{H_1H_2}{H_3}\pv\psi{q_3}}}.
     \end{align}
 \end{theorem}
 
@@ -311,7 +311,7 @@ Lam\'e系数：
 \end{subequations}
 矢量微分
 \begin{align}
-    \nabla\psi&=\pv\psi r\uvec r+\frac1r\pv\psi \theta\uvec\theta+\frac1{r\sin\theta}\pv\psi \phi\uvec\phi,\\
+    \grad\psi&=\pv\psi r\uvec r+\frac1r\pv\psi \theta\uvec\theta+\frac1{r\sin\theta}\pv\psi \phi\uvec\phi,\\
     \div\bm F&=\frac1{r^2}\pp r(r^2F_r)+\frac1{r\sin\theta}\pp\theta(\sin\theta\,F_\theta)+\frac1{r\sin\theta}\pp\phi F_\phi,\\
     \curl\bm F&=\frac1{r^2\sin\theta}
     \begin{vmatrix}
@@ -319,7 +319,7 @@ Lam\'e系数：
         \pp r&\pp\theta&\pp\phi\\
         F_r&rF_\theta&r\sin\theta F_\phi
     \end{vmatrix},\\
-    \lapla\psi&=\frac1{r^2}\pp r\biggp{r^2\pv\psi r}+\frac1{r^2\sin\theta}\pp\theta\biggp{\sin\theta\pv\psi\theta}+\frac1{r^2\sin^2\theta}\pv[2]\psi\phi.
+    \laplacian\psi&=\frac1{r^2}\pp r\biggp{r^2\pv\psi r}+\frac1{r^2\sin\theta}\pp\theta\biggp{\sin\theta\pv\psi\theta}+\frac1{r^2\sin^2\theta}\pv[2]\psi\phi.
 \end{align}
 
 \subsection{柱坐标系}
@@ -349,7 +349,7 @@ Lam\'e系数：
 \end{subequations}
 矢量微分
 \begin{align}
-    \nabla\psi&=\pv\psi\rho\uvec\rho+\frac1\rho\pv\psi\phi\uvec\phi+\pv\psi z\uvec z,\\
+    \grad\psi&=\pv\psi\rho\uvec\rho+\frac1\rho\pv\psi\phi\uvec\phi+\pv\psi z\uvec z,\\
     \div\bm F&=\frac1\rho\pp\rho(\rho F_\rho)+\frac1\rho\pv{F_\phi}\phi+\pv{F_z}z,\\
     \curl\bm F&=\frac1\rho
     \begin{vmatrix}
@@ -357,7 +357,7 @@ Lam\'e系数：
         \pp\rho&\pp\phi&\pp z\\
         F_\rho&\rho F_\phi&F_z
     \end{vmatrix},\\
-    \lapla\psi&=\frac1\rho\pp\rho\biggp{\rho\pv\psi\rho}+\frac1{\rho^2}\pv[2]\psi\phi+\pv[2]\psi z.
+    \laplacian\psi&=\frac1\rho\pp\rho\biggp{\rho\pv\psi\rho}+\frac1{\rho^2}\pv[2]\psi\phi+\pv[2]\psi z.
 \end{align}
 
 \section{Dirac函数}
@@ -378,11 +378,11 @@ Lam\'e系数：
 \begin{definition}{Dirac $\delta$函数}{Dirac delta function}
     $\delta$函数是一个将任意函数$f$映射到$f(0)$的线性泛函(linear functional)，即
     \[
-        \int\iti f(x)\vd(x)\d x=f(0).
+        \intR f(x)\delta(x)\d x=f(0).
     \]
     其特点为：$\forall x\neq 0,\,\delta(x)=0$，但
     \[
-        \int\iti\delta(x)\d x=1,
+        \intR\delta(x)\d x=1,
     \]
     因此$\delta$函数并不是一个严格意义上的函数，而是一个广义函数(general function)或分布(distribution)。
     %其只有出现在积分中才有实质意义。
@@ -390,9 +390,9 @@ Lam\'e系数：
 \end{definition}
 
 \begin{corollary}
-    \exmref{exm:introduce delta function} 中的散度其实应为$4\pi\vd(\bm r)$，进而
+    \exmref{exm:introduce delta function} 中的散度其实应为$4\pi\delta(\bm r)$，进而
     \begin{equation}
-        \lapla\biggp{\frac1r}=-\div\biggp{\frac{\uvec r}{r^2}}=-4\pi\vd(\bm r).
+        \laplacian\biggp{\frac1r}=-\div\biggp{\frac{\uvec r}{r^2}}=-4\pi\delta(\bm r).
     \end{equation}
 \end{corollary}
 
@@ -404,7 +404,7 @@ Lam\'e系数：
     对于无旋场$\bm F$，下列命题是等价的：
     \begin{enumerate}
         \item $\curl\bm F=\bm 0$;
-        \item $\bm F$可以写成标量势(scalar potential)的梯度：$\bm F=-\nabla\Phi$;
+        \item $\bm F$可以写成标量势(scalar potential)的梯度：$\bm F=-\grad\Phi$;
         \item 给定路径$C$的起点终点$A,B$，线积分与路径无关
         \begin{equation}
             \int_A^B\bm F\cdot\d\bm\ell=\Phi(A)-\Phi(B);
@@ -439,20 +439,20 @@ Lam\'e系数：
 \end{proof}
 
 \begin{remark}
-    $\bm A$并不唯一，$\bm A'=\bm A+\nabla\varLambda$可以给出同一个$\bm F$。
+    $\bm A$并不唯一，$\bm A'=\bm A+\grad\varLambda$可以给出同一个$\bm F$。
     可以通过确定一个规范(gauge)来唯一确定$\bm A$，比如最简单的Coulomb规范$\div\bm A=0$。
 \end{remark}
 
 \begin{theorem}{Helmholtz分解}{Helmholtz decomposition}
     向量场$\bm F$可以被唯一地分解为无旋场和无源场的叠加：
     \begin{equation}
-        \bm F=-\nabla\Phi+\curl\bm A,
+        \bm F=-\grad\Phi+\curl\bm A,
     \end{equation}
     其中
     \begin{subequations}
         \begin{align}
-            \Phi(\bm r)&=\frac1{4\pi}\int_V\frac{\div[']\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V'-\frac1{4\pi}\oint_{\p V}\frac{\bm F(\bm r')}{\abs{\bm r-\bm r'}}\cdot\d\bm A,\\
-            \bm A(\bm r)&=\frac1{4\pi}\int_V\frac{\curl[']\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V'+\frac1{4\pi}\oint_{\p V}\frac{\bm F(\bm r')}{\abs{\bm r-\bm r'}}\times\d\bm A.
+            \Phi(\bm r)&=\frac1{4\pi}\int_V\frac{\nabla'\cdot\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V'-\frac1{4\pi}\oint_{\p V}\frac{\bm F(\bm r')}{\abs{\bm r-\bm r'}}\cdot\d\bm A,\\
+            \bm A(\bm r)&=\frac1{4\pi}\int_V\frac{\nabla'\times\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V'+\frac1{4\pi}\oint_{\p V}\frac{\bm F(\bm r')}{\abs{\bm r-\bm r'}}\times\d\bm A.
         \end{align}
     \end{subequations}
 \end{theorem}
@@ -460,7 +460,7 @@ Lam\'e系数：
 \begin{proof}
     利用$\delta$函数
     \[
-        \bm F(\bm r)=\int_V\bm F(\bm r')\vd(\bm r-\bm r')\d V'=-\frac1{4\pi}\int_V\bm F(\bm r')\lapla\biggp{\frac1{\abs{\bm r-\bm r'}}}\d V'.
+        \bm F(\bm r)=\int_V\bm F(\bm r')\delta(\bm r-\bm r')\d V'=-\frac1{4\pi}\int_V\bm F(\bm r')\laplacian\biggp{\frac1{\abs{\bm r-\bm r'}}}\d V'.
     \]
     剩下的展开部分在推导$\Phi$和$\bm A$时有体现，此处不再赘述。    
 \end{proof}
@@ -469,8 +469,8 @@ Lam\'e系数：
     若$V$无界且$\bm F=o(1/r)$，则
     \begin{subequations}
         \begin{align}
-            \Phi(\bm r)&=\frac1{4\pi}\int_V\frac{\div[']\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V',\\
-            \bm A(\bm r)&=\frac1{4\pi}\int_V\frac{\curl[']\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V'.
+            \Phi(\bm r)&=\frac1{4\pi}\int_V\frac{\nabla'\cdot\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V',\\
+            \bm A(\bm r)&=\frac1{4\pi}\int_V\frac{\nabla'\times\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V'.
         \end{align}
     \end{subequations}
 \end{corollary}

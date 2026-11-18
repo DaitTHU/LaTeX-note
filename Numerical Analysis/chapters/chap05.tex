@@ -27,14 +27,14 @@
 
 \begin{definition}
     {秩一矩阵}{rank-1 matrix}
-    若一个矩阵可以表示成$A=uv\dg$，则其秩为一。
+    若一个矩阵可以表示成$A=uv\adjoint$，则其秩为一。
 \end{definition}
 
 \begin{theorem}
     {奇异值分解}{singular value}
     根据奇异值分解，可以将矩阵表示成秩一矩阵的线性组合：
     \begin{equation}
-        A=U\Sigma V\dg=\sum_i\sigma_iu_iv_i\dg,
+        A=U\Sigma V\adjoint=\sum_i\sigma_iu_iv_i\adjoint,
     \end{equation}
     其中$U,V$为幺正矩阵。
 \end{theorem}
@@ -125,7 +125,7 @@
     \end{eqnarray}
     事实上$F$上只有$n$个不同的元素。其逆变换为
     \begin{equation}
-        F\iv=\frac1N\bar F.
+        F\inv=\frac1N\bar F.
     \end{equation}
 \end{definition}
 
@@ -154,7 +154,7 @@
     \[
         X_n=\sum_{m=0}^{N-1}x_m\omega^{-mn}=\sum_{m=0}^Nx_m\omega^{[(m-n)^2-m^2-n^2]/2}.
     \]
-    定义$\nu_k:=\omega^{k^2/2}$，记$Y_n:=\nu_nX_n,\;z_m:=\nu_m\iv x_m$，则有卷积形式：
+    定义$\nu_k:=\omega^{k^2/2}$，记$Y_n:=\nu_nX_n,\;z_m:=\nu_m\inv x_m$，则有卷积形式：
     \[
         Y_n=\sum_{m=0}^{N-1}z_m\nu_{m-n}.
     \]
@@ -171,7 +171,7 @@
     {周期Toeplitz变换}{periodic Toeplitz transform}
     $n$阶矩阵$A$若满足$a_{ij}=c_{i-j}$且序列$c_k$周期为$n$，则$A$称为周期Toeplitz矩阵，且
     \begin{equation}
-        A=F\iv\Lambda F,
+        A=F\inv\Lambda F,
     \end{equation}
     其中$\Lambda=\diag(\lambda_0,\ldots,\lambda_{n-1})$且
     \begin{equation}
@@ -253,7 +253,7 @@
     {列主元方法}{pivoting technique}
     在第$k$步消去之前，找到绝对值最大的主元(pivot)：
     \begin{equation}
-        i_k=\mathop{\arg\max}\limits_{k\leq i\leq n}\abs{a_{ik}^{(k)}},
+        i_k=\argmax_{k\leq i\leq n}\abs{a_{ik}^{(k)}},
     \end{equation}
     然后交换第$k,i_k$行。
 \end{theorem}
@@ -278,7 +278,7 @@
     {初等矩阵}{elementary matrix}
     给定(实)向量$u,v$和标量$\sigma$，形如
     \begin{equation}
-        E=I-\sigma uv\tp
+        E=I-\sigma uv\transp
     \end{equation}
     的称为(实)初等矩阵(elementary matrix)。
 \end{definition}
@@ -286,7 +286,7 @@
 \begin{corollary}
     初等矩阵的逆也是同类型的初等矩阵：
     \begin{equation}
-        (I-\sigma uv\tp)\iv=I-\frac{\sigma}{\sigma v\tp u-1}uv\tp.
+        (I-\sigma uv\transp)\inv=I-\frac{\sigma}{\sigma v\transp u-1}uv\transp.
     \end{equation}
 \end{corollary}
 
@@ -295,12 +295,12 @@
     \begin{itemize}
         \item 初等排列矩阵：
         \[
-            P_{ij}=I-(e_i-e_j)(e_i-e_j)\tp=I-e_{ii}-e_{jj}+e_{ij}+e_{ji}.
+            P_{ij}=I-(e_i-e_j)(e_i-e_j)\transp=I-e_{ii}-e_{jj}+e_{ij}+e_{ji}.
         \]
         左乘$P_{ij}$即互换第$i,j$行，右乘即互换第$i,j$列；
         \item 倍加矩阵：
         \[
-            I+\alpha e_ie_j\tp=I+\alpha e_{ij},
+            I+\alpha e_ie_j\transp=I+\alpha e_{ij},
         \]
         左乘$I+\alpha e_{ij}$即将第$i$行的$\alpha$倍加到第$j$行上。
     \end{itemize}
@@ -310,7 +310,7 @@
     {初等单位下三角矩阵}{elementary lower-triangle matrix}
     形如
     \begin{equation}
-        L_i=I+\ell_ie_i\tp=\begin{bmatrix}
+        L_i=I+\ell_ie_i\transp=\begin{bmatrix}
             1\\ &\ddots\\ &&1\\ &&\ell_{i+1,i}&1\\ &&\vdots&&\ddots\\ &&\ell_{ni}&&&1
         \end{bmatrix}
     \end{equation}
@@ -320,7 +320,7 @@
 \begin{corollary}
     初等单位下三角矩阵的逆也是初等单位下三角矩阵
     \begin{equation}
-        (I+\ell_ie_i\tp)\iv=I-\ell_ie_i\tp.
+        (I+\ell_ie_i\transp)\inv=I-\ell_ie_i\transp.
     \end{equation}
 \end{corollary}
 
@@ -351,16 +351,16 @@
             0\\\vdots\\0\\a_{k+1,k}^{(k)}\\\vdots\\a_{nk}^{(k)}
         \end{bmatrix}.
     \]
-    相应的初等单位下三角矩阵为$L_k=I+\ell_ke_k\tp$。
+    相应的初等单位下三角矩阵为$L_k=I+\ell_ke_k\transp$。
     增广矩阵有递推关系：
     \begin{equation}
         [A^{(k+1)}\enspace b^{(k+1)}]=L_k[A^{(k)}\enspace b^{(k)}],
     \end{equation}
     即
     \[
-        A^{(n)}=L_{n-1}\cdots L_1A^{(1)}\iff A^{(1)}=L_1\iv\cdots L_{n-1}\iv A^{(n)},
+        A^{(n)}=L_{n-1}\cdots L_1A^{(1)}\iff A^{(1)}=L_1\inv\cdots L_{n-1}\inv A^{(n)},
     \]
-    则$L=L_1\iv\cdots L_{n-1}\iv$为单位下三角矩阵，$U=A^{(n)}$为上三角矩阵，这样就将$A^{(1)}$分解成了下上三角矩阵的乘积。    
+    则$L=L_1\inv\cdots L_{n-1}\inv$为单位下三角矩阵，$U=A^{(n)}$为上三角矩阵，这样就将$A^{(1)}$分解成了下上三角矩阵的乘积。
 \end{theorem}
 
 \begin{remark}
@@ -388,9 +388,9 @@
     \[
         A=L_1U_1=L_2U_2,
     \]
-    两边左乘$L_1\iv$，右乘$U_2\iv$得到：
+    两边左乘$L_1\inv$，右乘$U_2\inv$得到：
     \[
-        U_1U_2\iv=L_1\iv L_2,
+        U_1U_2\inv=L_1\inv L_2,
     \]
     此式左边为上三角矩阵，右边为单位下三角矩阵，故只能是单位矩阵$I$，即$U_1=U_2,L_1=L_2$。
 \end{proof}
@@ -420,14 +420,14 @@
             1\\\ell_{n-k+1}&L^{(k-1)}
         \end{bmatrix},\quad
         U^{(k)}=\begin{bmatrix}
-            u_{u-k+1,u-k+1}&u_{u-k+1}\tp\\ &U^{(k-1)}
+            u_{u-k+1,u-k+1}&u_{u-k+1}\transp\\ &U^{(k-1)}
         \end{bmatrix},
     \]
     则
     \[
         A^{(k)}=L^{(k)}U^{(k)}=\begin{bmatrix}
-            u_{u-k+1,u-k+1}&u_{u-k+1}\tp\\
-            u_{u-k+1,u-k+1}\ell_{n-k+1}&A^{(k-1)}+\ell_{n-k+1}u_{u-k+1}\tp
+            u_{u-k+1,u-k+1}&u_{u-k+1}\transp\\
+            u_{u-k+1,u-k+1}\ell_{n-k+1}&A^{(k-1)}+\ell_{n-k+1}u_{u-k+1}\transp
         \end{bmatrix}.
     \]
     由此可确定$u,\ell$，同时$A^{(k)}$的阶数减1.
@@ -475,19 +475,19 @@
     \[
         A^{(n)}=L_{n-1}I_{n-1,i_{n-1}}\cdots L_1I_{1i_1}A^{(1)},
         \iff
-        A^{(1)}=I_{1i_1}L_1\iv\cdots I_{n-1,i_{n-1}}L_{n-1}\iv A^{(n)},
+        A^{(1)}=I_{1i_1}L_1\inv\cdots I_{n-1,i_{n-1}}L_{n-1}\inv A^{(n)},
     \]
     定义
     \[
         P_k=I_{n-1,i_{n-1}}\cdots I_{ki_k},
     \]
-    则$P_k\tp P_{k+1}=I_{ki_k}$，进而
+    则$P_k\transp P_{k+1}=I_{ki_k}$，进而
     \[
-        P_1A^{(1)}=P_2L_1\iv P_2\tp P_3L_2\iv\cdots P_{n-1}L_{n-1}\iv A^{(n)},
+        P_1A^{(1)}=P_2L_1\inv P_2\transp P_3L_2\inv\cdots P_{n-1}L_{n-1}\inv A^{(n)},
     \]
     易得$P_{k+1}e_k=e_k$，故
     \[
-        L_k':=P_{k+1}L_k\iv P_{k+1}\tp=P_{k+1}(I-\ell_ke_k\tp)P_{k+1}\tp=I-P_{k+1}\ell_ke_k\tp,
+        L_k':=P_{k+1}L_k\inv P_{k+1}\transp=P_{k+1}(I-\ell_ke_k\transp)P_{k+1}\transp=I-P_{k+1}\ell_ke_k\transp,
     \]
     仍然是第$k$列的初等单位上三角矩阵，
     令$P=P_1,\;L=L_1'\cdots L_{n-2}'L_{n-1},\;U=A^{(n)}$即得。
@@ -501,7 +501,7 @@
     {Cholesky分解}{Cholesky decomposition}
     若$A$实对称正定，则存在唯一的对角元素为正的下三角矩阵$L$使得
     \begin{equation}
-        A=LL\tp.
+        A=LL\transp.
     \end{equation}
 \end{theorem}
 
@@ -509,17 +509,17 @@
     采用加边Cholesky分解法：写成分块矩阵的形式
     \[
         L_i=\begin{bmatrix}
-            L_{i-1}\\\ell_{i-1}\tp&\ell_{ii}
+            L_{i-1}\\\ell_{i-1}\transp&\ell_{ii}
         \end{bmatrix},\quad A_i=\begin{bmatrix}
-            A_{i-1}&a_{i-1}\\ a_{i-1}\tp&a_{ii}
+            A_{i-1}&a_{i-1}\\ a_{i-1}\transp&a_{ii}
         \end{bmatrix}
     \]
-    满足$A_i=L_iL_i\tp$，
+    满足$A_i=L_iL_i\transp$，
     可得 
     \begin{subequations}
         \begin{align}
-            \ell_{i-1}&=L_{i-1}\iv a_{i-1},\\
-            \ell_{ii}&=\sqrt{a_{ii}-\ell_{i-1}\tp\ell_{i-1}}.
+            \ell_{i-1}&=L_{i-1}\inv a_{i-1},\\
+            \ell_{ii}&=\sqrt{a_{ii}-\ell_{i-1}\transp\ell_{i-1}}.
         \end{align}
     \end{subequations}
     从$\ell_{11}=\sqrt{a_{11}}$出发便可迭代得到整个$L$。
@@ -594,7 +594,7 @@
     {条件数}{condition number}
     给定诱导的矩阵范数$\norm\cdot$，可逆矩阵$A$的条件数(condition number)为
     \begin{equation}
-        \cond(A)\equiv\norm A\nnorm{A\iv}.
+        \cond(A)\equiv\norm A\norm{A\inv}.
     \end{equation}
 \end{definition}
 
@@ -602,7 +602,7 @@
     条件数的性质：
     \begin{itemize}
         \item $\cond(A)\geq 1$；
-        \item $\cond(A\iv)=\cond(A)$；
+        \item $\cond(A\inv)=\cond(A)$；
         \item $\cond(cA)=\cond(A)$；
         \item 若$U$为正交矩阵，则$\cond_2(U)=1$，且
         \begin{equation}
@@ -626,46 +626,46 @@
 
 \begin{theorem}
     {解的扰动定理}{}
-    给定可逆矩阵$A$和微小扰动$\D A$，满足
+    给定可逆矩阵$A$和微小扰动$\Delta A$，满足
     \begin{equation}
         \label{eqn:perturbation condition}
-        \frac{\norm{\D A}}{\norm A}<\frac1{\cond(A)},
+        \frac{\norm{\Delta A}}{\norm A}<\frac1{\cond(A)},
     \end{equation}
-    则$(A+\D A)$也可逆，考察线性方程组$Ax=b$及其扰动方程组
+    则$(A+\Delta A)$也可逆，考察线性方程组$Ax=b$及其扰动方程组
     \[
-        (A+\D A)(x+\D x)=b+\D b,
+        (A+\Delta A)(x+\Delta x)=b+\Delta b,
     \]
     则有
     \begin{equation}
-        \frac{\norm{\D x}}{\norm x}\leq\frac{\cond(A)}{1-\norm{A\iv}\norm{\D A}}\biggp{\frac{\norm{\D A}}{\norm A}+\frac{\norm{\D b}}{\norm b}}.
+        \frac{\norm{\Delta x}}{\norm x}\leq\frac{\cond(A)}{1-\norm{A\inv}\norm{\Delta A}}\biggp{\frac{\norm{\Delta A}}{\norm A}+\frac{\norm{\Delta b}}{\norm b}}.
     \end{equation}
 \end{theorem}
 
 \begin{proof}
-    \eqref{eqn:perturbation condition}即$\norm{A\iv}\norm{\D A}<1$。
-    若$(A+\D A)$不可逆，即存在$x\neq 0$使得
+    \eqref{eqn:perturbation condition}即$\norm{A\inv}\norm{\Delta A}<1$。
+    若$(A+\Delta A)$不可逆，即存在$x\neq 0$使得
     \[
-        (A+\D A)x=0\iff A\iv\D A x=-x,
+        (A+\Delta A)x=0\iff A\inv\Delta A x=-x,
     \]
-    即$A\iv\D A$有一个特征值$-1$，谱半径$\rho(A\iv\D A)\geq 1>\norm{A\iv}\norm{\D A}\geq\norm{A\iv\D A}$与\eqref{eqn:rho<=norm}矛盾，故$(A+\D A)$可逆。令$B=(A+\D A)\iv$，则
+    即$A\inv\Delta A$有一个特征值$-1$，谱半径$\rho(A\inv\Delta A)\geq 1>\norm{A\inv}\norm{\Delta A}\geq\norm{A\inv\Delta A}$与\eqref{eqn:rho<=norm}矛盾，故$(A+\Delta A)$可逆。令$B=(A+\Delta A)\inv$，则
     \begin{align*}
-        (A+\D A)B=I\iff&B=A\iv-A\iv\D AB=A\iv(I-\D AB)\\
-        \implies&\norm B\leq\norm{A\iv}\norm{I-\D AB}\leq\norm{A\iv}\Bigp{1+\norm{\D A}\norm B},
+        (A+\Delta A)B=I\iff&B=A\inv-A\inv\Delta AB=A\inv(I-\Delta AB)\\
+        \implies&\norm B\leq\norm{A\inv}\norm{I-\Delta AB}\leq\norm{A\inv}\Bigp{1+\norm{\Delta A}\norm B},
     \end{align*}
     移项即得
     \begin{equation}
-        \norm{(A+\D A)\iv}\leq\frac{\norm{A\iv}}{1-\norm{A\iv}\norm{\D A}}.
+        \norm{(A+\Delta A)\inv}\leq\frac{\norm{A\inv}}{1-\norm{A\inv}\norm{\Delta A}}.
     \end{equation}
     由
     \begin{align*}
-        \D x&=(A+\D A)\iv(b+\D b)-x\\
-        &=(A+\D A)\iv(b+\D b-(A+\D A)x)\\
-        &=(A+\D A)\iv(\D b-\D Ax),
+        \Delta x&=(A+\Delta A)\inv(b+\Delta b)-x\\
+        &=(A+\Delta A)\inv(b+\Delta b-(A+\Delta A)x)\\
+        &=(A+\Delta A)\inv(\Delta b-\Delta Ax),
     \end{align*}
     两边取范数
     \begin{align*}
-        \norm{\D x}&\leq\norm{(A+\D A)\iv}(\norm{\D b}+\norm{\D A}\norm x)\\
-        &\leq\frac{\norm{A\iv}}{1-\norm{A\iv}\norm{\D A}}\biggp{\frac{\norm{\D A}}{\norm A}\norm A\norm x+\frac{\norm{\D b}}{\norm b}\norm A\norm x}.
+        \norm{\Delta x}&\leq\norm{(A+\Delta A)\inv}(\norm{\Delta b}+\norm{\Delta A}\norm x)\\
+        &\leq\frac{\norm{A\inv}}{1-\norm{A\inv}\norm{\Delta A}}\biggp{\frac{\norm{\Delta A}}{\norm A}\norm A\norm x+\frac{\norm{\Delta b}}{\norm b}\norm A\norm x}.
         \qedhere
     \end{align*}
 \end{proof}
@@ -676,28 +676,28 @@
 
 \begin{theorem}
     {矩阵相对奇异性的度量}{relative singularity}
-    若$A$可逆，定义所有使得$(A+\D A)$不可逆的$\D A$构成集合$S$，则 
+    若$A$可逆，定义所有使得$(A+\Delta A)$不可逆的$\Delta A$构成集合$S$，则
     \begin{equation}
-        \min_{\D A\in S}\frac{\norm{\D A}_2}{\norm A_2}=\frac1{\cond_2(A)},
+        \min_{\Delta A\in S}\frac{\norm{\Delta A}_2}{\norm A_2}=\frac1{\cond_2(A)},
     \end{equation}
 \end{theorem}
 
 \begin{proof}
-    当$\nnorm{A\iv}\norm{\D A}<1$时，$(A+\D A)$可逆，故
+    当$\norm{A\inv}\norm{\Delta A}<1$时，$(A+\Delta A)$可逆，故
     \[
-        \min_{\D A\in S}\norm{\D A}_2\geq\frac1{\norm{A\iv}_2}.
+        \min_{\Delta A\in S}\norm{\Delta A}_2\geq\frac1{\norm{A\inv}_2}.
     \]
-    由$\norm\cdot_2$的定义，$\exists x$且$\norm x_2=1$使得$\norm{A\iv x}_2=\norm{A\iv}_2$，令$y=A\iv x/\nnorm{A\iv}_2$，并取
+    由$\norm\cdot_2$的定义，$\exists x$且$\norm x_2=1$使得$\norm{A\inv x}_2=\norm{A\inv}_2$，令$y=A\inv x/\norm{A\inv}_2$，并取
     \[
-        \D A=-\frac{xy\tp}{\norm{A\iv}_2},
+        \Delta A=-\frac{xy\transp}{\norm{A\inv}_2},
     \]
     则$\norm y_2=1$且
     \[
-        (A+\D A)y=\frac{x}{\norm{A\iv}_2}-\frac{xy\tp y}{\norm{A\iv}_2}=0,
+        (A+\Delta A)y=\frac{x}{\norm{A\inv}_2}-\frac{xy\transp y}{\norm{A\inv}_2}=0,
     \]
-    故$(A+\D A)$不可逆，又
+    故$(A+\Delta A)$不可逆，又
     \[
-        \norm{\D A}_2=\max_{\norm z_2=1}\norm{\D Az}_2=\frac{\norm x_2}{\norm{A\iv}_2}\max_{\norm z_2=1}\abs{y\tp z}=\frac1{\norm{A\iv}_2}.
+        \norm{\Delta A}_2=\max_{\norm z_2=1}\norm{\Delta Az}_2=\frac{\norm x_2}{\norm{A\inv}_2}\max_{\norm z_2=1}\abs{y\transp z}=\frac1{\norm{A\inv}_2}.
         \qedhere
     \]
 \end{proof}
@@ -717,15 +717,15 @@
 \begin{proof}
     由$A(x'-x)=-r$和$\norm A\norm x\geq\norm b$可得
     \[
-        \norm r\leq\norm A\norm{x'-x}=\frac{\cond(A)}{\norm{A\iv}}\norm{x'-x},
+        \norm r\leq\norm A\norm{x'-x}=\frac{\cond(A)}{\norm{A\inv}}\norm{x'-x},
     \]
-    两边除$\norm b$，由$x=A\iv b$可得 
+    两边除$\norm b$，由$x=A\inv b$可得
     \[
-        \frac{\norm r}{\norm b}\leq\cond(A)\frac{\norm{x'-x}}{\norm{A\iv}\norm b}\leq\cond(A)\frac{\norm{x'-x}}{\norm x};
+        \frac{\norm r}{\norm b}\leq\cond(A)\frac{\norm{x'-x}}{\norm{A\inv}\norm b}\leq\cond(A)\frac{\norm{x'-x}}{\norm x};
     \]
-    另一方面，由$x'-x=-A\iv r$可得
+    另一方面，由$x'-x=-A\inv r$可得
     \[
-        \norm{x'-x}=\norm{A\iv r}\leq\norm{A\iv}\norm r=\cond(A)\frac{\norm r}{\norm A}.
+        \norm{x'-x}=\norm{A\inv r}\leq\norm{A\inv}\norm r=\cond(A)\frac{\norm r}{\norm A}.
     \]
     两边同除$\norm x$，由$Ax=b$可得 
     \[
@@ -764,7 +764,7 @@
 
 除采用更高精度的运算外，另一个更有效的方法是对原方程进行预处理：
 \[
-    Ax=b\iff PAQ(Q\iv x)=Pb,
+    Ax=b\iff PAQ(Q\inv x)=Pb,
 \]
 从而降低系数矩阵的条件数：$\cond(PAQ)\ll\cond(A)$。一般$P,Q$可选择为三角矩阵或对角矩阵。
 

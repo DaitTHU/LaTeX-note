@@ -58,7 +58,7 @@ $c_n(t)=\brkt{n}{\psi_I(t)}$。将态方程左乘 $\bra{f}$ 得到
 
 对于在$[0,t]$内近似恒定的矩阵元$V_{fi}$，
 \begin{equation}
-    P_{i\to f}(t)=\frac{4|V_{fi}|^2}{(E_f-E_i)^2}
+    P_{i\to f}(t)=\frac{4\abs{V_{fi}}^2}{(E_f-E_i)^2}
     \sin^2\frac{(E_f-E_i)t}{2\hbar}.
     \label{eq:finitetrans}
 \end{equation}
@@ -76,11 +76,11 @@ $c_n(t)=\brkt{n}{\psi_I(t)}$。将态方程左乘 $\bra{f}$ 得到
 其中$\e^{\i\omega_{fi}t/2}$模长为1，
 取模平方即得式\eqref{eq:finitetrans}。
 
-当$E_f=E_i$时，直接对常数振幅积分，得到共振概率$|V_{fi}|^2t^2/\hbar^2$，与式\eqref{eq:finitetrans}的连续极限一致。
+当$E_f=E_i$时，直接对常数振幅积分，得到共振概率$\abs{V_{fi}}^2t^2/\hbar^2$，与式\eqref{eq:finitetrans}的连续极限一致。
 这个峰也可用波的叠加来理解。将作用时间分成相同的小段，每段贡献的振幅大小相同，
 相邻两段的相位相差 $\omega_{fi}\d t$。共振时各段同相相加；
 若整个时间内相位恰好转过一周，前半段的每个小振幅都在后半段找到一个相反的伙伴，
-总振幅为零。这就是图\ref{fig:finite-time-line}中第一个零点 $|E_f-E_i|t/\hbar=2\pi$ 的来源。
+总振幅为零。这就是图\ref{fig:finite-time-line}中第一个零点 $\abs{E_f-E_i}t/\hbar=2\pi$ 的来源。
 \begin{figure}[htbp]
     \centering
     \begin{minipage}[c]{.38\linewidth}
@@ -89,7 +89,7 @@ $c_n(t)=\brkt{n}{\psi_I(t)}$。将态方程左乘 $\bra{f}$ 得到
     \begin{minipage}[c]{.56\linewidth}
         \centering\includegraphics[width=\linewidth]{figures/finite_time_line.pdf}
     \end{minipage}
-    \caption{左：每支箭头给出六等分时间段中的一段所贡献的复振幅，首尾相接后从起点到终点读出总振幅。右：两条线共用参考时间 $t_0$ 和概率单位 $(|V_{fi}|t_0/\hbar)^2$，可直接比较峰高与第一零点的位置。}
+    \caption{左：每支箭头给出六等分时间段中的一段所贡献的复振幅，首尾相接后从起点到终点读出总振幅。右：两条线共用参考时间 $t_0$ 和概率单位 $(\abs{V_{fi}}t_0/\hbar)^2$，可直接比较峰高与第一零点的位置。}
     \label{fig:finite-time-line}
 \end{figure}
 
@@ -115,8 +115,8 @@ $c_n(t)=\brkt{n}{\psi_I(t)}$。将态方程左乘 $\bra{f}$ 得到
 换元$x=\Delta E\,t/(2\hbar)$：
 \begin{equation}
     \begin{alignedat}{1}
-        \int_{-\infty}^{\infty}\d\Delta E\,
-        F(\Delta E)\frac{4\sin^2(\Delta E\,t/2\hbar)}{(\Delta E)^2} &=\frac{2t}{\hbar}\int_{-\infty}^{\infty}\d x\,
+        \intR\d\Delta E\,
+        F(\Delta E)\frac{4\sin^2(\Delta E\,t/2\hbar)}{(\Delta E)^2} &=\frac{2t}{\hbar}\intR\d x\,
             F(2\hbar x/t)\frac{\sin^2x}{x^2}\\
         &\simeq\frac{2\pi t}{\hbar}F(0).
     \end{alignedat}
@@ -126,11 +126,11 @@ $c_n(t)=\brkt{n}{\psi_I(t)}$。将态方程左乘 $\bra{f}$ 得到
 将系数记为 $\Gamma_{i\to F}$，即单位时间的跃迁概率，便得到 Fermi 黄金规则
 \begin{equation}
     \Gamma_{i\to F}=\frac{2\pi}{\hbar}
-    \sum_{f\in F}|V_{fi}|^2\delta(E_f-E_i).
+    \sum_{f\in F}\abs{V_{fi}}^2\delta(E_f-E_i).
     \label{eq:golden}
 \end{equation}
 若已把末态密度记为$\rho_f(E)$且矩阵元近似相同，则
-$\Gamma=(2\pi/\hbar)|V_{fi}|^2\rho_f(E_i)$。
+$\Gamma=(2\pi/\hbar)\abs{V_{fi}}^2\rho_f(E_i)$。
 各简并态或偏振通道可显式求和，也可在矩阵元相同时将其重数计入 $\rho_f$；每个末态计数一次。
 
 这个极限的物理尺度可以明确比较。
@@ -158,7 +158,7 @@ $\Gamma=(2\pi/\hbar)|V_{fi}|^2\rho_f(E_i)$。
 孤立共振两态没有足够多的末态供积分平均，
 其相干往返由Rabi振荡描述。
 
-对$\op{V}(t)=\op{W}\e^{-\i\omega t}+\op{W}^\dagger\e^{\i\omega t}$，吸收项的守恒条件变为
+对$\op{V}(t)=\op{W}\e^{-\i\omega t}+\op{W}\adjoint\e^{\i\omega t}$，吸收项的守恒条件变为
 $E_f-E_i=\hbar\omega$；受激发射(stimulated emission)项为$E_f-E_i=-\hbar\omega$。
 若扰动算符写为 $\op{V}_0\cos\omega t$，则吸收项的系数为 $\op{W}=\op{V}_0/2$，相应的跃迁概率带有因子 $1/4$。
 
@@ -208,7 +208,7 @@ $ka\ll1$控制空间多极展开，弱驱动控制微扰阶数，二者是不同
 在忽略自旋和精细结构的模型中，$n=2$ 的四个空间态同能；实验能激发其中哪一个？
 在位置表象中，$\op{d}_z$ 使波函数乘以 $-er\cos\theta$，矩阵元的角向因子是
 \[
-    \int Y_{\ell m}^*(\theta,\phi)\cos\theta\,Y_{00}(\theta,\phi)\d\Omega .
+    \int Y_{\ell m}\conj(\theta,\phi)\cos\theta\,Y_{00}(\theta,\phi)\d\Omega .
 \]
 由\chapref{ch:hydrogen}的 $Y_{00}=1/\sqrt{4\pi}$、$Y_{10}=\sqrt{3/(4\pi)}\cos\theta$，
 有 $\cos\theta\,Y_{00}=Y_{10}/\sqrt3$。用球谐函数的正交性，逐态判断的结果见\tabref{tab:hydrogen-dipole-z}。
@@ -233,20 +233,20 @@ $R_{10}=2a_Z^{-3/2}\e^{-\rho}$、$R_{21}=a_Z^{-3/2}\rho\e^{-\rho/2}/\sqrt{24}$�
 \begin{equation}
     \begin{alignedat}{1}
         \mel{2,1,0}{\op Z}{1,0,0}
-            &=\frac{1}{\sqrt3}\int_0^\infty R_{21}R_{10}\,r^3\d r\\
-            &=\frac{a_Z}{\sqrt{18}}\int_0^\infty \rho^4\e^{-3\rho/2}\d\rho
+            &=\frac{1}{\sqrt3}\intRplus R_{21}R_{10}\,r^3\d r\\
+            &=\frac{a_Z}{\sqrt{18}}\intRplus \rho^4\e^{-3\rho/2}\d\rho
               =\frac{256}{243\sqrt2}\,a_Z .
     \end{alignedat}
 \end{equation}
 这里 $\op Z$ 是位置算符的 $z$ 分量。最后一步令 $x=3\rho/2$ 并分部积分四次，积分值为 $4!(2/3)^5$。
-此长度乘上 $-e$ 就是跃迁偶极矩；模平方乘以 $E_0^2/4$ 给出吸收振幅公式所需的 $|W_{fi}|^2$。
+此长度乘上 $-e$ 就是跃迁偶极矩；模平方乘以 $E_0^2/4$ 给出吸收振幅公式所需的 $\abs{W_{fi}}^2$。
 
 除单条谱线的跃迁偶极矩外，所有通道的带权总和也受到约束。
 \begin{theorem}{单粒子振子强度求和规则}{qm-oscillator-strength}
     对局域势 $\op{H}=\op{P}^2/(2m)+V(\op{X})$ 的归一化能量本征态 $\ket{i}$，
     在下列对易子矩阵元存在、谱求和收敛时，位置矩阵元满足
     \begin{equation}
-        2\sum_f(E_f-E_i)|\mel{f}{\op{X}}{i}|^2=\frac{\hbar^2}{m}.
+        2\sum_f(E_f-E_i)\abs{\mel{f}{\op{X}}{i}}^2=\frac{\hbar^2}{m}.
         \label{eq:trk}
     \end{equation}
     求和遍及完备末态，连续谱部分以积分代替。
@@ -261,8 +261,8 @@ $R_{10}=2a_Z^{-3/2}\e^{-\rho}$、$R_{21}=a_Z^{-3/2}\rho\e^{-\rho/2}/\sqrt{24}$�
 \end{subequations}
 在态 $\ket i$ 中取期望，并在两个 $\op{X}$ 之间插入一组完备能量态，便有
 \begin{alignat*}{1}
-    \mel{i}{\op{X}\op{H}\op{X}}{i} &=\sum_f E_f|\mel{f}{\op{X}}{i}|^2,\\
-    \mel{i}{\op{X}^2\op{H}}{i}=\mel{i}{\op{H}\op{X}^2}{i} &=E_i\sum_f|\mel{f}{\op{X}}{i}|^2.
+    \mel{i}{\op{X}\op{H}\op{X}}{i} &=\sum_f E_f\abs{\mel{f}{\op{X}}{i}}^2,\\
+    \mel{i}{\op{X}^2\op{H}}{i}=\mel{i}{\op{H}\op{X}^2}{i} &=E_i\sum_f\abs{\mel{f}{\op{X}}{i}}^2.
 \end{alignat*}
 第一行乘 2 后减去两份第二行，得到式\eqref{eq:trk}的左侧。
 由 $[\op{X},\op{P}]=\i\hbar\one$，同一双对易子又等于 $\hbar^2\one/m$，取期望即得右侧。
@@ -287,8 +287,8 @@ $\eta_g N_e(0)A_{e\to g}P_e(t)\d t$。
 把原子置于原点附近，在电偶极近似(electric dipole approximation)中取原子处的电场。
 电场每个模式的系数可以从能量定标。
 对体积 $\mathcal V$ 的周期盒，先取一个线偏振行波模式，把电场在原点沿偏振方向的分量写作
-$\op{E}=\i C(\op{a}-\op{a}^\dagger)$。这个算符与谐振子的动量具有相同的形式。
-在数态 $\ket n$ 中，$\op{a}^2$ 与 $(\op{a}^\dagger)^2$ 改变占据数，因而期望为零，
+$\op{E}=\i C(\op{a}-\op{a}\adjoint)$。这个算符与谐振子的动量具有相同的形式。
+在数态 $\ket n$ 中，$\op{a}^2$ 与 $(\op{a}\adjoint)^2$ 改变占据数，因而期望为零，
 其余两项给 $\ave{\op{E}^2}=C^2(2n+1)$。行波的电场能和磁场能相等，场强平方的期望在盒内均匀；
 由 $\varepsilon_0\mathcal V\ave{\op{E}^2}=\hbar\omega(n+1/2)$，
 得 $C=\sqrt{\hbar\omega/(2\varepsilon_0\mathcal V)}$。恢复所有模式和偏振，就有
@@ -297,38 +297,38 @@ $\op{E}=\i C(\op{a}-\op{a}^\dagger)$。这个算符与谐振子的动量具有�
     =\i\sum_{\bm k,\lambda}
     \sqrt{\frac{\hbar\omega_k}{2\varepsilon_0\mathcal V}}\,
     \bigp{\bm\epsilon_{\bm k\lambda}\op{a}_{\bm k\lambda}
-        -\bm\epsilon_{\bm k\lambda}^*\op{a}_{\bm k\lambda}^\dagger}.
+        -\bm\epsilon_{\bm k\lambda}\conj\op{a}_{\bm k\lambda}\adjoint}.
 \end{equation}
-$\bm k$是模式波矢，$\omega_k=c|\bm k|$；
+$\bm k$是模式波矢，$\omega_k=c\abs{\bm k}$；
 $\lambda=1,2$标记两种横向偏振(transverse polarization)，单位偏振向量满足
 $\bm k\cdot\bm\epsilon_{\bm k\lambda}=0$。
 $\op{a}_{\bm k\lambda}$湮灭该模式的一个光子，
-$\op{a}^\dagger_{\bm k\lambda}\ket{0}=\ket{1_{\bm k\lambda}}$。
+$\op{a}\adjoint_{\bm k\lambda}\ket{0}=\ket{1_{\bm k\lambda}}$。
 联合态 $\ket{e;0}=\ket{e}\otimes\ket{0}$ 中，第一因子属于原子，第二因子属于辐射场。
 相互作用为
 \[
     \op{V}=-\sum_{i=x,y,z}\op{d}_i\otimes\op{E}_i(\bm0),
 \]
 其中 $\op{d}_i$ 作用于原子，$\op{E}_i$ 作用于辐射场。
-只有含$\op{a}^\dagger$的项连接$\ket{e;0}$与$\ket{g;1_{\bm k\lambda}}$。
+只有含$\op{a}\adjoint$的项连接$\ket{e;0}$与$\ket{g;1_{\bm k\lambda}}$。
 
 在体积$\mathcal V$的量子化盒中，电场单光子矩阵元的大小给出
 \begin{equation}
-    |V_{g1,e0}|^2=\frac{\hbar\omega_k}{2\varepsilon_0\mathcal V}
-    |\bm\epsilon_{\bm k\lambda}^*\cdot\bm d_{ge}|^2,
+    \abs{V_{g1,e0}}^2=\frac{\hbar\omega_k}{2\varepsilon_0\mathcal V}
+    \abs{\bm\epsilon_{\bm k\lambda}\conj\cdot\bm d_{ge}}^2,
     \quad \bm d_{ge}=\mel{g}{\hatbm{d}}{e}.
 \end{equation}
 应用式\eqref{eq:golden}时，以大盒内的模式数把波矢求和换为积分，
 \[
     \sum_{\bm k}\ \longrightarrow\ \frac{\mathcal V}{(2\pi)^3}
-    \int_0^\infty k^2\d k\int \d\Omega .
+    \intRplus k^2\d k\int \d\Omega .
 \]
 求和还须包括两个横向偏振。先固定方向，再对角度积分，就得到发射率中的角因子。
 \begin{lemma}[两个横向偏振的求和]
-    给定非零波矢 $\bm k$，记其单位方向为 $\bm e_k=\bm k/|\bm k|$。
+    给定非零波矢 $\bm k$，记其单位方向为 $\bm e_k=\bm k/\abs{\bm k}$。
     在垂直于 $\bm e_k$ 的平面内任选两个正交归一偏振 $\bm\epsilon_{\bm k\lambda}$，则
     \[
-        \sum_{\lambda=1}^2\epsilon_{\bm k\lambda,i}\epsilon_{\bm k\lambda,j}^*
+        \sum_{\lambda=1}^2\epsilon_{\bm k\lambda,i}\epsilon_{\bm k\lambda,j}\conj
         =\delta_{ij}-(e_k)_i(e_k)_j .
     \]
 \end{lemma}
@@ -336,23 +336,23 @@ $\op{a}^\dagger_{\bm k\lambda}\ket{0}=\ket{1_{\bm k\lambda}}$。
     两个偏振和传播方向合成三维空间的一组正交归一基。三个方向的投影相加为单位算符，
     从中减去沿 $\bm e_k$ 的投影，就得到横向平面的投影。
 \end{proof}
-偶极矩 $\bm d_{ge}$ 在横向平面上投影的模平方为 $|\bm d_{ge}|^2-|\bm e_k\cdot\bm d_{ge}|^2$，正好给出偏振求和。
+偶极矩 $\bm d_{ge}$ 在横向平面上投影的模平方为 $\abs{\bm d_{ge}}^2-\abs{\bm e_k\cdot\bm d_{ge}}^2$，正好给出偏振求和。
 在球面上，$(e_k)_i(e_k)_j$ 的平均值在 $i\ne j$ 时因反射对称而为零，
 三个对角分量则因旋转对称相等且总和为 1。乘上球面立体角 $4\pi$，就有
 \begin{equation}
-    \int\d\Omega\sum_\lambda|\bm\epsilon_{\bm k\lambda}^*\cdot\bm d_{ge}|^2
-    =\frac{8\pi}{3}|\bm d_{ge}|^2.
+    \int\d\Omega\sum_\lambda\abs{\bm\epsilon_{\bm k\lambda}\conj\cdot\bm d_{ge}}^2
+    =\frac{8\pi}{3}\abs{\bm d_{ge}}^2.
 \end{equation}
 保留所有归一化因子，剩余径向积分为
 \begin{equation}
     A_{e\to g}=\frac{2\pi}{\hbar}\,
         \frac{\hbar c}{2\varepsilon_0(2\pi)^3}\,
-        \frac{8\pi}{3}|\bm d_{ge}|^2
-        \int_0^\infty k^3\delta\bigp{\hbar ck-\hbar\omega_{eg}}\d k .
+        \frac{8\pi}{3}\abs{\bm d_{ge}}^2
+        \intRplus k^3\delta\bigp{\hbar ck-\hbar\omega_{eg}}\d k .
 \end{equation}
 能量 $\delta$ 函数选取 $k=\omega_{eg}/c$，换元再给出 $1/(\hbar c)$，故积分为 $(\omega_{eg}/c)^3/(\hbar c)$。自由空间中单个通道的电偶极自发发射率为
 \begin{equation}
-    A_{e\to g}=\frac{\omega_{eg}^3|\bm d_{ge}|^2}
+    A_{e\to g}=\frac{\omega_{eg}^3\abs{\bm d_{ge}}^2}
     {3\pi\varepsilon_0\hbar c^3},\qquad\omega_{eg}>0.
     \label{eq:spontaneous}
 \end{equation}
@@ -365,12 +365,12 @@ $\op{a}^\dagger_{\bm k\lambda}\ket{0}=\ket{1_{\bm k\lambda}}$。
     仅有寿命展宽时，$t\geq0$ 的激发振幅为 $c_e(t)=\e^{-\i\omega_{eg}t-\Gamma t/2}$。
     对它作 Fourier 变换得到辐射振幅 $F(\omega)$，取模平方便得到 Lorentz 线型，
     \begin{equation}
-        F(\omega)=\int_0^\infty \e^{\i\omega t}c_e(t)\d t
+        F(\omega)=\intRplus \e^{\i\omega t}c_e(t)\d t
           =\frac1{\Gamma/2-\i(\omega-\omega_{eg})},\qquad
-        I(\omega)\propto |F(\omega)|^2=
+        I(\omega)\propto \abs{F(\omega)}^2=
         \frac1{(\omega-\omega_{eg})^2+(\Gamma/2)^2}.
     \end{equation}
-    在 $\omega_{eg}\pm\Gamma/2$ 处强度为峰值的一半，故角频率的半高全宽(full width at half maximum, FWHM)为 $\Gamma$，换成 Hz 为 $\Gamma/(2\pi)$。
+    在 $\omega_{eg}\pm\Gamma/2$ 处强度为峰值的一半，故角频率的半高全宽(full width at half maximum, FWHM)为 $\Gamma$，以 \unit{Hz} 表示的频宽为 $\Gamma/(2\pi)$。
 \end{example}
 
 \reading{含时微扰见 MIT 8.06 讲义 4\cite{mittime}，电偶极规则见 Feynman 第 III 卷第 18 章\cite{feynman18}。下章讨论电磁势的规范选择。}

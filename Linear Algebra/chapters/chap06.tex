@@ -15,7 +15,7 @@
 	特征值的性质：
 	\begin{compactenum}
 		\item $A$的特征向量$x$也是$A^n$的特征向量，特征值是$\lambda^n;$
-		\item 若$A$可逆，则$x$也是$A\iv$的特征向量，特征值是$\lambda^{-1};$
+		\item 若$A$可逆，则$x$也是$A\inv$的特征向量，特征值是$\lambda\inv;$
 		\item 三角矩阵的特征值就是对角元；
 		\item $A$可逆$\iff A$所有特征值非0。
 		
@@ -52,7 +52,7 @@
 \section{特征多项式}
 
 \begin{definition}{特征子空间}{eigen-subspace}
-	$A$的所有特征值为$\lambda$的特征向量张成$\RR^n$的一个线性子空间：$\N(A-\lambda I).$
+	$A$的所有特征值为$\lambda$的特征向量张成$\RR^n$的一个线性子空间：$\nullsp(A-\lambda I).$
 \end{definition}
 
 % \begin{corollary}
@@ -122,8 +122,8 @@
 	\]
 	两边展开可得
 	\begin{alignat*}{2}
-		\LHS&=B_1\lambda^n+(B_2-AB_1)\lambda^{n-1}+\cdots+(B_n-AB_{n-1})\lambda-AB_n,\\
-		\RHS&=I\lambda^n+a_1I\lambda^{n-1}+\cdots+a_{n-1}\lambda+a_nI.
+		\mathrm{LHS}&=B_1\lambda^n+(B_2-AB_1)\lambda^{n-1}+\cdots+(B_n-AB_{n-1})\lambda-AB_n,\\
+		\mathrm{RHS}&=I\lambda^n+a_1I\lambda^{n-1}+\cdots+a_{n-1}\lambda+a_nI.
 	\end{alignat*}
 	作为系数的矩阵均由$A$确定，与$\lambda$无关。由于上式$\forall\lambda$均成立，故对应系数相同：
 	\begin{align*}
@@ -210,7 +210,7 @@
 
 \begin{definition}
 	{相似变换}{similar transformation}
-	给定$n$阶矩阵$A$和可逆矩阵$B$，称$B\iv AB$为$A$的相似变换(similar transformation)。
+	给定$n$阶矩阵$A$和可逆矩阵$B$，称$B\inv AB$为$A$的相似变换(similar transformation)。
 \end{definition}
 
 \begin{corollary}
@@ -218,24 +218,24 @@
 \end{corollary}
 
 \begin{theorem}{相似变换与特征多项式}{}
-	$A$的相似变换$B\iv AB$和$A$有相同的特征多项式。
+	$A$的相似变换$B\inv AB$和$A$有相同的特征多项式。
 \end{theorem}
 \begin{proof} 
 	对下式两边取行列式即证。
 	\[
-		\lambda I-B\iv AB=\lambda B\iv IB-B\iv AB=B\iv(\lambda I-A)B.
+		\lambda I-B\inv AB=\lambda B\inv IB-B\inv AB=B\inv(\lambda I-A)B.
 		\qedhere
 	\]
 \end{proof}
 
-由于对角矩阵有很多简单的性质，考虑相似变换$\Lambda=X\iv AX$，其中$\Lambda$为对角矩阵。
+由于对角矩阵有很多简单的性质，考虑相似变换$\Lambda=X\inv AX$，其中$\Lambda$为对角矩阵。
 这称为对角化(diagonalization)。
 显然，不是所有方阵都可以对角化。
 
 \begin{theorem}{可对角化判定}{}
 	$n$阶矩阵$A$可对角化$\iff A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$。
 	\tcblower
-	此时$A=X\Lambda X\iv$，$X$由特征向量给出，对角矩阵$\Lambda$由对应特征值$\lambda_1,\ldots,\lambda_n$给出：
+	此时$A=X\Lambda X\inv$，$X$由特征向量给出，对角矩阵$\Lambda$由对应特征值$\lambda_1,\ldots,\lambda_n$给出：
 	\begin{equation}
 		X=[x_1,\ldots,x_n]
 		\quad
@@ -248,7 +248,7 @@
 	\[
 		AX=[Ax_1,\ldots,Ax_n]=[\lambda_1x_1,\ldots,\lambda_nx_n]=X\Lambda,
 	\]
-	反过来说，若$A$可对角化为$X\Lambda X\iv$，则$AX=X\Lambda$，即
+	反过来说，若$A$可对角化为$X\Lambda X\inv$，则$AX=X\Lambda$，即
 	\[
 		[Ax_1,\ldots,Ax_n]=[\lambda_1x_1,\ldots,\lambda_nx_n],
 	\]
@@ -264,11 +264,8 @@
 两个线性无关的特征向量的特征值可能相同，或者说，一个特征值可能对应多个线性无关的特征向量，这在量子力学中称为简并(degeneracy)，意味着无法通过单个矩阵的特征值区分两个线性无关的特征向量。
 对于简并情形，需要引入特征值的重数(multiplicity)的概念。
 
-\newcommand*{\GM}{\mathrm{GM}}
-\newcommand*{\AM}{\mathrm{AM}}
-
 \begin{definition}{几何重数和代数重数}{}
-	几何重数(geometric multiplicity, GM)：特征值$\lambda_i$对应的线性无关特征向量的最大个数，即特征子空间的维数$\dim\bigp{\N(\lambda_iI-A)}$。
+	几何重数(geometric multiplicity, GM)：特征值$\lambda_i$对应的线性无关特征向量的最大个数，即特征子空间的维数$\dim\bigp{\nullsp(\lambda_iI-A)}$。
 
 	代数重数(algebraic multiplicity, AM)：特征值$\lambda_i$作为特征方程$\det(\lambda I-A)=0$的根$\lambda=\lambda_i$的重复次数。
 	\[
@@ -287,7 +284,7 @@
 \begin{proof}
     令$g=\GM_k$，先取$\ker(A-\lambda_k I)$的一组基$x_1,\ldots,x_g$，再扩张成整个空间的基，组成可逆矩阵$P_k$。因为$Ax_i=\lambda_kx_i$，有
 	\[
-        P_k^{-1}AP_k=\begin{bmatrix}
+        P_k\inv AP_k=\begin{bmatrix}
             \lambda_k I_g&C_k\\0&D_k
         \end{bmatrix}.
 	\]
@@ -301,7 +298,7 @@
 \begin{corollary}
 	$n$阶矩阵$A$的全部特征值为$\{\lambda_1,\ldots,\lambda_r\}$，$A$可对角化当且仅当
 	\[
-		\sum_{i=1}^r\dim\bigp{\N(\lambda_iI-A)}=n,
+		\sum_{i=1}^r\dim\bigp{\nullsp(\lambda_iI-A)}=n,
 	\]
 	等价地，特征多项式在所选数域内完全分裂，且所有特征值都满足$\AM_i=\GM_i$。
 \end{corollary}
@@ -320,11 +317,11 @@
 
 	一方面，若$A_1,A_2$可对角化，即
 	\[
-		X_1\iv A_1X_1=\Lambda_1,\quad X_2\iv A_2X_2=\Lambda_2,
+		X_1\inv A_1X_1=\Lambda_1,\quad X_2\inv A_2X_2=\Lambda_2,
 	\]
 	则令$X=\diag(X_1,X_2),\,\Lambda=\diag(\Lambda_1,\Lambda_2)$可将$A$对角化：
 	\[
-		X\iv AX=\Lambda;
+		X\inv AX=\Lambda;
 	\]
 	另一方面，若$A$可对角化，任取$A$的一个特征值$\lambda_i$，
 	考虑其关于$A,A_1,A_2$的代数重数$\AM,\AM_1,\AM_2$和几何重数$\GM,\GM_1,\GM_2$，由
@@ -343,37 +340,37 @@
 \begin{proof}
 	若$A,B$可以同时对角化，即存在可逆矩阵$X$和对角矩阵$\Lambda_A,\Lambda_B$，使得
 	\[
-		A=X\Lambda_AX\iv,\quad B=X\Lambda_BX\iv,
+		A=X\Lambda_AX\inv,\quad B=X\Lambda_BX\inv,
 	\]
 	故
 	\[
-		AB-BA=X(\Lambda_A\Lambda_B-\Lambda_B\Lambda_A)X\iv=0;
+		AB-BA=X(\Lambda_A\Lambda_B-\Lambda_B\Lambda_A)X\inv=0;
 	\]
 	另一方面，若$AB=BA$，下证$A,B$可同时对角化。
 	由$A$可对角化，可知存在$X$使得
 	\[
-		X\iv AX=\begin{bmatrix}
+		X\inv AX=\begin{bmatrix}
 			\lambda_1I_{n_1}\\ &\ddots\\ &&\lambda_rI_{n_r}
 		\end{bmatrix},
 	\]
 	又由$AB=BA$可得
 	\[
-		(X\iv AX)(X\iv BX)=(X\iv BX)(X\iv AX),
+		(X\inv AX)(X\inv BX)=(X\inv BX)(X\inv AX),
 	\]
-	将$X\iv BX$按$X\iv AX$的形状分块，由上式可知$X\iv BX$应是分块对角的：
+	将$X\inv BX$按$X\inv AX$的形状分块，由上式可知$X\inv BX$应是分块对角的：
 	\[
-		X\iv BX=\begin{bmatrix}
+		X\inv BX=\begin{bmatrix}
 			B_1\\ &\ddots\\ &&B_r
 		\end{bmatrix}.
 	\]
-	由$B$可对角化知$B_i$可对角化，$Y_i\iv B_iY_i=\Lambda_i$。
+	由$B$可对角化知$B_i$可对角化，$Y_i\inv B_iY_i=\Lambda_i$。
 	令
 	\[
 		Y=\diag(Y_1,\ldots,Y_r),
 		\quad
 		\Lambda_B=\diag(\Lambda_1,\ldots,\Lambda_r),
 	\]
-	则$Y\iv X\iv BXY=\Lambda_B$。
+	则$Y\inv X\inv BXY=\Lambda_B$。
 	由此$A,B$可以被$XY$同时对角化。
 \end{proof}
 
@@ -385,7 +382,7 @@
 \begin{theorem}{Jordan标准型}{Jordan normal form}
 	设$n$阶矩阵$A$的特征多项式在数域$\FF$内完全分裂，且$r$是线性无关特征向量的最大个数。则可选取特征向量$v_1,\ldots,v_r$（特征值$\lambda_1,\ldots,\lambda_r$可重复），并存在$\FF$上的可逆矩阵$P$，使得
 	\[
-		P^{-1}AP=J=\begin{bmatrix}
+		P\inv AP=J=\begin{bmatrix}
 			J_1             \\
 			 & \ddots       \\
 			 &        & J_r
@@ -403,8 +400,8 @@
 
 其证明是线性代数的核心。其中一些概念需要等到\chapref{chap:linear mapping}线性映射才会提及。先给出几个概念证明引理。
 
-首先，矩阵$A$不可对角化的原因是存在一个特征值$\lambda_i$的$\AM_i>\GM_i=\dim\bigp{\N(\lambda_iI-A)}$。
-也就是说，特征子空间$\N(\lambda_iI-A)$还是太小了，不能提供足够多线性无关的特征向量。
+首先，矩阵$A$不可对角化的原因是存在一个特征值$\lambda_i$的$\AM_i>\GM_i=\dim\bigp{\nullsp(\lambda_iI-A)}$。
+也就是说，特征子空间$\nullsp(\lambda_iI-A)$还是太小了，不能提供足够多线性无关的特征向量。
 为此我们需要引入广义特征向量的概念。
 
 \begin{definition}{广义特征向量}{generalized eigenvector}
@@ -454,11 +451,11 @@
 \end{remark}
 
 \begin{theorem}{}{}
-	$X=\lspan(u_0,\ldots,u_{d-1})$是$T$的不变子空间，即$T(X)\subset X$。
+	$X=\Span(u_0,\ldots,u_{d-1})$是$T$的不变子空间，即$T(X)\subset X$。
 \end{theorem}
 
 \begin{proof}
-	由线性无关，$B:=\{u_0,\ldots,u_{d-1}\}$是$X=\lspan(B)$的一组基，考虑$T$在基上的作用：
+	由线性无关，$B:=\{u_0,\ldots,u_{d-1}\}$是$X=\Span(B)$的一组基，考虑$T$在基上的作用：
 	\begin{itemize}
 		\item $0\leq j< d-1$时，$(T-\lambda I)u_j=u_{j+1}\implies Tu_j=\lambda u_j+u_{j+1}$；
 		\item $j=d-1$时，$(T-\lambda I)u_j=0\implies Tu_j=\lambda u_j$；
@@ -486,7 +483,7 @@
 \begin{corollary}
 	若$v_1,\ldots,v_r$是$T$的广义特征向量，相应的特征值为$\lambda_i$，幂指数为$d_i$，定义
 	\[
-		u_{i,j}:=(T-\lambda_iI)^jv_i,\quad V_i:=\lspan(u_{i,0},\ldots,u_{i,d_i-1}),
+		u_{i,j}:=(T-\lambda_iI)^jv_i,\quad V_i:=\Span(u_{i,0},\ldots,u_{i,d_i-1}),
 	\]
 	则$V_i$是$T$的不变子空间，且$T$在$V_i$上的表示矩阵是Jordan块。
 	若这些子空间的和是直和，则$T$在$V_1\oplus\cdots\oplus V_r$上的表示矩阵是分块对角的，且每一块都是Jordan块的形式。
@@ -567,21 +564,21 @@
 
 \begin{definition}
 	{对称矩阵}{symmetric matrix}
-	若$S\tp=S$，则称$S$是对称矩阵(symmetric matrix)；
+	若$S\transp=S$，则称$S$是对称矩阵(symmetric matrix)；
 	
-	若$A\tp=-A$，则称$A$是反对称矩阵(skew-symmetric/anti-symmetric)。
+	若$A\transp=-A$，则称$A$是反对称矩阵(skew-symmetric/anti-symmetric)。
 \end{definition}
 \begin{theorem}{对称矩阵的性质·一}{characterist of symmetric matrix I}
 	若$S$是一个$n$阶实对称矩阵，则$S$至少有一个实特征值$\lambda$
 \end{theorem}
 \begin{proof}
-	由代数基本定理，对任何矩阵，$S$的特征方程至少会得到一个复特征值$\lambda$，其对应的特征向量为$z$ (一般也是复的)，则$\bar z\tp z>0$。
+	由代数基本定理，对任何矩阵，$S$的特征方程至少会得到一个复特征值$\lambda$，其对应的特征向量为$z$ (一般也是复的)，则$\bar z\transp z>0$。
 	\[
 		Sz=\lambda z,\quad S\bar z=\bar S\bar z=\overline{Sz}=\bar\lambda\bar z,
 	\]
 	由$S$的对称的性质，注意到
 	\[
-		\bar z\tp Sz=\lambda\bar z\tp z=\lambda(\bar z\tp z)\tp=\lambda z\tp\bar z=(Sz)\tp\bar z=z\tp S\bar z=\bar\lambda z\tp\bar z.
+		\bar z\transp Sz=\lambda\bar z\transp z=\lambda(\bar z\transp z)\transp=\lambda z\transp\bar z=(Sz)\transp\bar z=z\transp S\bar z=\bar\lambda z\transp\bar z.
 	\]
 	故$\lambda=\bar\lambda$.
 \end{proof}
@@ -596,7 +593,7 @@
 \begin{proof}
 	
 	\[
-		(Sw)\tp v=w\tp S\tp v=w\tp Sv=\lambda w\tp v=0.
+		(Sw)\transp v=w\transp S\transp v=w\transp Sv=\lambda w\transp v=0.
 		\qedhere
 	\]
 \end{proof}
@@ -613,7 +610,7 @@
 \begin{proof}
 	$\forall w\in W,u\in W^\perp$
 	\[
-		(Su)\tp w=u\tp S\tp w=u\tp(Sw)=0.
+		(Su)\transp w=u\transp S\transp w=u\transp(Sw)=0.
 		\qedhere
 	\]
 \end{proof}
@@ -621,30 +618,30 @@
 	实对称矩阵$S$总可以被一个实正交矩阵$Q$对角化。
 \end{theorem}
 \begin{proof}
-	由\thmref{thm:characterist of symmetric matrix I} 和推论可知$S$至少有一个实特征值$\lambda_1$和实特征向量$q_1$且$q_1\tp q_1=1$，$S$在$q_1$张成的一维线性空间上是稳定的。
+	由\thmref{thm:characterist of symmetric matrix I} 和推论可知$S$至少有一个实特征值$\lambda_1$和实特征向量$q_1$且$q_1\transp q_1=1$，$S$在$q_1$张成的一维线性空间上是稳定的。
 	
-	由\thmref{thm:characterist of symmetric matrix III} 可知$S$作用在$\C(q_1)^\perp$上也是稳定的，假设$\C(q_1)^\perp$上有一组正交归一基为$\{a_1,\ldots,a_{n-1}\}$，构造矩阵$X_1=[q_1,a_1,\ldots,a_{n-1}]$，且$X_1$是正交的$X_1\tp X_1=I$，
+	由\thmref{thm:characterist of symmetric matrix III} 可知$S$作用在$\colsp(q_1)^\perp$上也是稳定的，假设$\colsp(q_1)^\perp$上有一组正交归一基为$\{a_1,\ldots,a_{n-1}\}$，构造矩阵$X_1=[q_1,a_1,\ldots,a_{n-1}]$，且$X_1$是正交的$X_1\transp X_1=I$，
 	\[
-		X_1\tp SX_1=X_1\tp[\lambda q_1,Sa_1,\ldots,Sa_{n-1}]=\begin{bmatrix}
+		X_1\transp SX_1=X_1\transp[\lambda q_1,Sa_1,\ldots,Sa_{n-1}]=\begin{bmatrix}
 			\lambda_1\\ &S_1
 		\end{bmatrix}.
 	\]
-	$S_1$是一个$(n-1)$阶方阵，且$(S_1)_{ij}=a_i\tp Sa_j$的，显然它也是对称的。
+	$S_1$是一个$(n-1)$阶方阵，且$(S_1)_{ij}=a_i\transp Sa_j$的，显然它也是对称的。
 	
 	重复上述步骤，直到用$S$的特征向量构造出$\RR^n$的一组正交归一基：
 	
 	\noindent
 	对$S_1$可构造$(n-1)$阶的正交矩阵$X_2$，使得
 	\[
-		X_2\tp S_1X_2=\begin{bmatrix}
+		X_2\transp S_1X_2=\begin{bmatrix}
 			\lambda_2\\ &S_2
 		\end{bmatrix},
 	\]
 	其中$S_2$是一个$(n-2)$阶对称方阵。从而
 	\[
 		\begin{bmatrix}
-			1\\ &X_2\tp
-		\end{bmatrix}X_1\tp SX_1\begin{bmatrix}
+			1\\ &X_2\transp
+		\end{bmatrix}X_1\transp SX_1\begin{bmatrix}
 			1\\ &X_2
 		\end{bmatrix}=\begin{bmatrix}
 			\lambda_1\\ &\lambda_2\\ &&S_2
@@ -652,7 +649,7 @@
 	\]
 	$Q_2:=X_1\diag(1, X_2)$也是正交的……最终有
 	\[
-		Q_n\tp SQ_n=\begin{bmatrix}
+		Q_n\transp SQ_n=\begin{bmatrix}
 			\lambda_1\\ &\ddots\\ &&\lambda_n
 		\end{bmatrix}.
 	\]
@@ -670,67 +667,67 @@
 \section{正定矩阵}
 
 \begin{definition}{二次型}{quadratic form}
-	二次型(quadratic form)是形如$x\tp Sx$的二次多项式，其中$S$是实对称矩阵。
+	二次型(quadratic form)是形如$x\transp Sx$的二次多项式，其中$S$是实对称矩阵。
 \end{definition}
 \begin{definition}{正定矩阵}{positive definite matrix}
-	给定实对称矩阵$S$，如果$\forall x\neq 0$，二次型$x\tp Sx>0$，则称$S$是正定的(positive definite)。
+	给定实对称矩阵$S$，如果$\forall x\neq 0$，二次型$x\transp Sx>0$，则称$S$是正定的(positive definite)。
 \end{definition}
 \begin{theorem}{正定矩阵的判定}{determination of positive definite matrix}
 	对于实对称矩阵$S$，下述命题是等价的：
 	\begin{compactenum}
-		\item $\forall x\neq 0$，二次型$x\tp Sx>0$；
+		\item $\forall x\neq 0$，二次型$x\transp Sx>0$；
 		\item $S$的所有$n$个特征值都是正的；
 		\item $S$无须换行，按顺序消去主对角线下方元素时得到$n$个正的主元；
 		\item $S$的所有左上行列式（前$i$行$i$列子矩阵的行列式）均$>0$；
-		\item 存在$A$列之间线性无关，使得$S=A\tp A$。
+		\item 存在$A$列之间线性无关，使得$S=A\transp A$。
 	\end{compactenum}
 \end{theorem}
 \begin{proof}
-	$1\implies 2$：$S$对称，则$\Lambda=Q\tp SQ$
+	$1\implies 2$：$S$对称，则$\Lambda=Q\transp SQ$
 	\[
-		\lambda_i=e_i\tp \Lambda e_i=e_i\tp Q\tp SQe_i=(Qe_i)\tp S(Qe_i)>0.
+		\lambda_i=e_i\transp \Lambda e_i=e_i\transp Q\transp SQe_i=(Qe_i)\transp S(Qe_i)>0.
 	\]
 	$2\implies 1$：$S$的所有$n$个特征值都是正的，故
 	\[
-		x\tp Sx=x\tp Q\Lambda Q\tp x=\sum_{i=1}^n\lambda_i(Q\tp x)^2_i>0.
+		x\transp Sx=x\transp Q\Lambda Q\transp x=\sum_{i=1}^n\lambda_i(Q\transp x)^2_i>0.
 	\]
 	$5\implies 1$：$A$列之间线性无关，故$\forall x\neq 0,\enspace Ax\neq 0$
 	\[
-		x\tp Sx=x\tp A\tp Ax=(Ax)\tp(Ax)>0.
+		x\transp Sx=x\transp A\transp Ax=(Ax)\transp(Ax)>0.
 	\]
 	$1\implies 5$：$S$正定，故
 	\[
-		S=Q\Lambda Q\tp=Q\begin{bmatrix}
+		S=Q\Lambda Q\transp=Q\begin{bmatrix}
 			\sqrt{\lambda_1}\\ &\ddots\\ &&\sqrt{\lambda_n}
 		\end{bmatrix}\begin{bmatrix}
 			\sqrt{\lambda_1}\\ &\ddots\\ &&\sqrt{\lambda_n}
-		\end{bmatrix}Q\tp=:A\tp A.
+		\end{bmatrix}Q\transp=:A\transp A.
 	\]
 	$3\implies 4$：不换行且仅将前面的主元行倍加到后面的行，这样的消元保持每个左上行列式。$S$经此消元得到上三角矩阵$U$，其$i\times i$的左上行列式就是前$i$个主元的乘积，所以$>0$。\\
 	$4\implies 3$：记左上$i$阶行列式为$\Delta_i$，$\Delta_0=1$。由于$\Delta_i>0$，消元可在不换行的情况下逐步进行，第$i$个主元为$\Delta_i/\Delta_{i-1}>0$。\\
-	$3\implies 5$：$S=LDU$，由$S$对称且$LDU$分解唯一可知$L=U\tp$，又主元全正，故
+	$3\implies 5$：$S=LDU$，由$S$对称且$LDU$分解唯一可知$L=U\transp$，又主元全正，故
 	\[
-		S=U\tp DU=U\tp\begin{bmatrix}
+		S=U\transp DU=U\transp\begin{bmatrix}
 			\sqrt{a_1}\\ &\ddots\\ &&\sqrt{a_n}
 		\end{bmatrix}\begin{bmatrix}
 			\sqrt{a_1}\\ &\ddots\\ &&\sqrt{a_n}
-		\end{bmatrix}U=:A\tp A.
+		\end{bmatrix}U=:A\transp A.
 	\]
-	$5\implies 3$：$A$列之间线性无关，作薄QR分解$A=QR$，其中$Q\tp Q=I$且$R$为可逆上三角矩阵。令$D_R=\diag(R_{11},\ldots,R_{nn})$与单位上三角矩阵$U=D_R^{-1}R$，则
+	$5\implies 3$：$A$列之间线性无关，作薄QR分解$A=QR$，其中$Q\transp Q=I$且$R$为可逆上三角矩阵。令$D_R=\diag(R_{11},\ldots,R_{nn})$与单位上三角矩阵$U=D_R\inv R$，则
 	\[
-		A\tp A=R\tp R=U\tp D_R^2U.
+		A\transp A=R\transp R=U\transp D_R^2U.
 	\]
 	各消元主元为$R_{ii}^2>0$，完成最后一步。
 \end{proof}
 
 \begin{definition}{半正定矩阵}{positive semi-definite matrix}
-	对实对称矩阵$S$，如果$\forall x\neq 0$，二次型$x\tp Sx\geqslant 0$，则称$S$是半正定的(positive semi-definite)。
+	对实对称矩阵$S$，如果$\forall x\neq 0$，二次型$x\transp Sx\geqslant 0$，则称$S$是半正定的(positive semi-definite)。
 \end{definition}
 \begin{theorem}{半正定但非正定矩阵的判定}{determination of positive semi-but-not definite matrix}
 	对实对称矩阵$S$，半正定但非正定与下列任一条件等价：
 	\begin{compactenum}
 		\item $S$的最小特征值是0；
-		\item 存在$A$列之间线性相关，使得$S=A\tp A$。
+		\item 存在$A$列之间线性相关，使得$S=A\transp A$。
 	\end{compactenum}
 \end{theorem}
 \begin{corollary}
@@ -741,7 +738,7 @@
 	{Cholesky分解}{Cholesky decomposition}
 	实对称正定矩阵$A$可以唯一分解为
 	\begin{equation}
-		A=LL\tp,
+		A=LL\transp,
 	\end{equation}
 	其中$L$是对角元为正的下三角矩阵，这称为Cholesky分解。
 \end{theorem}

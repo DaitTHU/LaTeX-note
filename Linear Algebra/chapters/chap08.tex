@@ -6,11 +6,11 @@
 	\begin{equation}
 		f:S\to S',\enspace x\mapsto f(x).
 	\end{equation}
-	其中$S$称为定义域(domain)，$S'$称为陪域(codomain)。$f(x)$称为$x$的像(image)，所有像的集合$f(S)=\nset{f(x)}{x\in S}$称为值域(image of $S$)，有$f(S)\subset S'$。
+	其中$S$称为定义域(domain)，$S'$称为陪域(codomain)。$f(x)$称为$x$的像(image)，所有像的集合$f(S)=\set{f(x)}{x\in S}$称为值域(image of $S$)，有$f(S)\subset S'$。
 	\tcblower
 	给定$y\in S'$，所有满足$f(x)=y$的$x$的集合称为$y$的原像(preimage)，记作
 	\begin{equation}
-		f\iv(y):=\nset{x\in S}{f(x)=y}.
+		f\inv(y):=\set{x\in S}{f(x)=y}.
 	\end{equation}
 \end{definition}
 
@@ -56,7 +56,7 @@
 	\[
 		g\circ f=\id_S,\quad f\circ g=\id_{S'},
 	\]
-	则称映射$f:S\to S'$可逆，$g=f\iv$为$f$的逆映射(inverse)。
+	则称映射$f:S\to S'$可逆，$g=f\inv$为$f$的逆映射(inverse)。
 \end{definition}
 \begin{theorem}{有关映射的等价描述}{}
 	设$f:S\to S'$，在第1条中假设$S\neq\varnothing$。对任意无限集合，第2条的右逆存在性使用选择公理；有限集合不需要这一额外讨论。
@@ -97,7 +97,7 @@
 	{}{}
 	求导运算
 	\[
-		\dd x:\mathcal C^\infty\to\mathcal C^\infty,\; f\mapsto f'
+		\dd x:\cont^\infty\to\cont^\infty,\; f\mapsto f'
 	\]
 	是线性映射，而$\e^{\lambda x}$是其特征函数。
 \end{example}
@@ -184,7 +184,7 @@
 	\]
 \end{definition}
 \begin{corollary}
-	$\ker(F)$是$V$的线性子空间。$\ker (L_A)=\N(A)$。
+	$\ker(F)$是$V$的线性子空间。$\ker (L_A)=\nullsp(A)$。
 \end{corollary}
 \begin{theorem}{核和单射}{kernel and injection}
 	\begin{center}
@@ -215,7 +215,7 @@
 	\]
 \end{definition}
 \begin{corollary}
-	$\im(F)$是$W$的线性子空间。$\im(L_A)=\C(A)$。
+	$\im(F)$是$W$的线性子空间。$\im(L_A)=\colsp(A)$。
 \end{corollary}
 \begin{theorem}{核和像的关系}{kernel and image}
 	$V$是有限维线性空间，$L:V\to W$是线性映射
@@ -226,7 +226,7 @@
 \begin{proof}
 	(矩阵版本)
 	\[
-		\dim(V)=\dim\bigp{\N(A)}+\dim\bigp{\C(A\tp)}=\dim\bigp{\N(A)}+\dim\bigp{\C(A)}.
+		\dim(V)=\dim\bigp{\nullsp(A)}+\dim\bigp{\colsp(A\transp)}=\dim\bigp{\nullsp(A)}+\dim\bigp{\colsp(A)}.
 	\]
     (抽象版本) 取$\ker L$的一组基$k_1,\ldots,k_r$，扩张为$V$的基$k_1,\ldots,k_r,v_1,\ldots,v_s$。所有像由$Lv_1,\ldots,Lv_s$张成；若$\sum a_iLv_i=0$，则$\sum a_iv_i\in\ker L$，由扩张后基的线性无关性得到$a_i=0$。所以$\dim\im L=s$且$\dim V=r+s$。
 \end{proof}
@@ -255,13 +255,13 @@
 \]
 $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保持不变，故
 \[
-	v=(v_1,\ldots,v_n)(x_1,\ldots,x_n)\tp=(u_1,\ldots,u_n)(y_1,\ldots,y_n)\tp.
+	v=(v_1,\ldots,v_n)(x_1,\ldots,x_n)\transp=(u_1,\ldots,u_n)(y_1,\ldots,y_n)\transp.
 \]
 可以推出
 \[
 	\begin{bmatrix}
 		y_1\\\vdots\\y_n
-	\end{bmatrix}=M\iv\begin{bmatrix}
+	\end{bmatrix}=M\inv\begin{bmatrix}
 		x_1\\\vdots\\x_n
 	\end{bmatrix}.\tag{$\ast\ast$}
 \]
@@ -282,9 +282,9 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 	\]
 	写成矩阵的形式即$\bigp{L(v_1),\ldots,L(v_n)}=(w_1,\ldots,w_m)M$，从而
 	\[
-		L(v)=\bigp{L(v_1),\ldots,L(v_n)}(x_1,\ldots,x_n)\tp=(w_1,\ldots,w_m)M(x_1,\ldots,x_n)\tp.
+		L(v)=\bigp{L(v_1),\ldots,L(v_n)}(x_1,\ldots,x_n)\transp=(w_1,\ldots,w_m)M(x_1,\ldots,x_n)\transp.
 	\]
-	故$L(v)$在$B'$上的坐标为$M(x_1,\ldots,x_n)\tp$。
+	故$L(v)$在$B'$上的坐标为$M(x_1,\ldots,x_n)\transp$。
 \end{proof}
 
 \begin{corollary}
@@ -307,13 +307,13 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 \noindent 线性映射的复合等价于对应矩阵的乘法，由此可自然得到矩阵乘法的规则。
 \begin{theorem}{$M_{B'}^B(\id)$可逆}{MB'Bid inversible}
 	\[
-		M_{B'}^B(\id)=M_B^{B'}(\id)\iv.
+		M_{B'}^B(\id)=M_B^{B'}(\id)\inv.
 	\]
 \end{theorem}
 \begin{theorem}{}{}
 	线性映射$L:V\to W$，$B,B'$是$V$上的两组基，$C,C'$是$W$上的两组基，则
 	\[
-		M_{C'}^{B'}(L)=M_{C'}^C(\id)M_C^B(L)M_B^{B'}(\id)=M_C^{C'}(\id)\iv M_C^B(L)M_B^{B'}(\id)
+		M_{C'}^{B'}(L)=M_{C'}^C(\id)M_C^B(L)M_B^{B'}(\id)=M_C^{C'}(\id)\inv M_C^B(L)M_B^{B'}(\id)
 	\]
 \end{theorem}
 \begin{proof}
@@ -322,7 +322,7 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 \begin{corollary}
 	$L:V\to V$，$B,B'$是$V$上的两组基，则
 	\[
-		M_{B'}^{B'}(L)=M_B^{B'}(\id)\iv M_B^B(L)M_B^{B'}(\id).
+		M_{B'}^{B'}(L)=M_B^{B'}(\id)\inv M_B^B(L)M_B^{B'}(\id).
 	\]
 	因此相似变换描述同一个线性算符在不同基下的表示；若能选出一组特征向量基，其表示矩阵就是对角矩阵。
 \end{corollary}
@@ -375,19 +375,19 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 	\[
 		v^{\ast i}(v_j)=\delta^i{}_j,\quad u^{\ast i}(u_j)=\delta^i{}_j,
 	\]
-	若$(v_1,\ldots,v_n)=(u_1,\ldots,u_n)A$，则$(v^{\ast 1},\ldots,v^{\ast n})\tp=A\iv(u^{\ast 1},\ldots,u^{\ast n})\tp$
+	若$(v_1,\ldots,v_n)=(u_1,\ldots,u_n)A$，则$(v^{\ast 1},\ldots,v^{\ast n})\transp=A\inv(u^{\ast 1},\ldots,u^{\ast n})\transp$
 \end{theorem}
 \begin{proof}
-	若$(v^{\ast 1},\ldots,v^{\ast n})\tp=B(u^{\ast 1},\ldots,u^{\ast n})\tp$，即
+	若$(v^{\ast 1},\ldots,v^{\ast n})\transp=B(u^{\ast 1},\ldots,u^{\ast n})\transp$，即
 	\[
 		v_i=\sum_{j=1}^nu_jA^j{}_i,\quad v^{\ast i}=\sum_{j=1}^nB^i{}_ju^{\ast j}.
 	\]
 	则
 	\begin{align*}
 		v^{\ast i}(v_j)&=\sum_{k=1}^nB^i{}_ku^{\ast k}\biggp{\sum_{\ell=1}^n u_\ell A^\ell{}_j}=\sum_{k,\ell}B^i{}_kA^\ell{}_ju^{\ast k}(u_\ell)\\
-		&=\sum_{k,\ell}B^i{}_kA^\ell{}_j\vd^k{}_\ell=\sum_{k=1}^nB^i{}_kA^k{}_j=\delta^i{}_j.
+		&=\sum_{k,\ell}B^i{}_kA^\ell{}_j\delta^k{}_\ell=\sum_{k=1}^nB^i{}_kA^k{}_j=\delta^i{}_j.
 	\end{align*}
-	故$B=A\iv$。
+	故$B=A\inv$。
 \end{proof}
 \section{直和、直积}
 \begin{definition}{线性空间的和}{sum of linear space}
@@ -412,7 +412,7 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 	$U$是一个有限维线性空间，$V$是$U$的子空间，则存在$U$的子空间$W$使得$U=V\oplus W.$
 \end{theorem}
 \begin{proof}
-	取$V$的一组基$\{v_1,\ldots,v_r\}$，可将其扩张成$U$的一组基$\{v_1,\ldots,v_r,$\ $w_1,\ldots,w_m\}$，取$W=\lspan(w_1,\ldots,w_m)$即可。
+	取$V$的一组基$\{v_1,\ldots,v_r\}$，可将其扩张成$U$的一组基$\{v_1,\ldots,v_r,$\ $w_1,\ldots,w_m\}$，取$W=\Span(w_1,\ldots,w_m)$即可。
 \end{proof}
 \begin{corollary}
 	\begin{equation}
@@ -461,7 +461,7 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	\]
 	从而
 	\[
-		v^{\ast i}\otimes v^{\ast j}(v_k,v_\ell)=v^{\ast i}(v_k)v^{\ast j}(v_\ell)=\delta^i{}_k\vd^j{}_\ell.
+		v^{\ast i}\otimes v^{\ast j}(v_k,v_\ell)=v^{\ast i}(v_k)v^{\ast j}(v_\ell)=\delta^i{}_k\delta^j{}_\ell.
 	\]
 	$n^2$个张量$v^{\ast i}\otimes v^{\ast j}$构成$V^\ast\otimes V^\ast$的一组基。
 	\tcblower
@@ -472,7 +472,7 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	给出$V,V^\ast$的另一组基$\{u_1,\ldots,u_n\},\{u^{\ast 1},\ldots,u^{\ast n}\}$，有变换
 	\begin{align*}
 		(u_1,\ldots,u_n)&=(v_1,\ldots,v_n)A,\\
-		(u^{\ast 1},\ldots,u^{\ast n})\tp&=A\iv(v^{\ast 1},\ldots,v^{\ast n})\tp.
+		(u^{\ast 1},\ldots,u^{\ast n})\transp&=A\inv(v^{\ast 1},\ldots,v^{\ast n})\transp.
 	\end{align*}
 	张量$w$在基$\{u^{\ast i}\otimes u^{\ast j}\}$下的分量
 	\[
@@ -495,7 +495,7 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 \begin{definition}{线性空间的张量积}{linear space tensor product}
 	给定两个线性空间$U,V$和各自的一组基$\{u_1,\ldots,u_m\},\{v_1,\ldots,v_n\}$，可构造一个以$mn$个形式符号$u_i\otimes v_j$为基的线性空间（这些符号按定义线性无关），并按双线性将$u\otimes v$扩展到任意$u,v$：
 	\begin{equation}
-		U\otimes V=\lspan\set{u_i\otimes v_j}{1\leqslant i\leqslant m,1\leqslant j\leqslant n}
+		U\otimes V=\Span\set{u_i\otimes v_j}{1\leqslant i\leqslant m,1\leqslant j\leqslant n}
 	\end{equation}
 \end{definition}
 \begin{corollary}
@@ -531,7 +531,7 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	\tcblower
 	换基时，
 	\[
-		v^{k\ell}=\sum_{i,j}A^k{}_iA^\ell{}_jv'^{ij},\quad v'^{ij}=\sum_{k,\ell}(A\iv)^i{}_k(A\iv)^j{}_\ell v^{k\ell}.
+		v^{k\ell}=\sum_{i,j}A^k{}_iA^\ell{}_jv'^{ij},\quad v'^{ij}=\sum_{k,\ell}(A\inv)^i{}_k(A\inv)^j{}_\ell v^{k\ell}.
 	\]
 	逆变(contravariant)的含义：换基时分量每个指标对应的变换矩阵是基的变换矩阵的逆矩阵。
 \end{example}
@@ -540,7 +540,7 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	\[
 		v=\sum_{i,j}v^i{}_jv_i\otimes v^{\ast j}.
 	\]
-    通过$(u\otimes\alpha)(x)=\alpha(x)u$，这个空间自然同构于$\hom(V,V)$，因此系数$v^i{}_j$正是一个线性算符的矩阵。在基变换$(u_1,\ldots,u_n)=(v_1,\ldots,v_n)A$下，其分量矩阵满足$[v]'=A^{-1}[v]A$，与前文的相似变换一致。
+    通过$(u\otimes\alpha)(x)=\alpha(x)u$，这个空间自然同构于$\hom(V,V)$，因此系数$v^i{}_j$正是一个线性算符的矩阵。在基变换$(u_1,\ldots,u_n)=(v_1,\ldots,v_n)A$下，其分量矩阵满足$[v]'=A\inv[v]A$，与前文的相似变换一致。
 \end{example}
 \begin{example}{$V\otimes\cdots\otimes V\otimes V^\ast\otimes\cdots\otimes V^\ast=V^{\otimes k}\otimes V^{\ast\otimes\ell}$}{}
 	考虑
@@ -557,6 +557,6 @@ $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 	\]
 	是$(k,\ell)$阶张量。基变换
 	\begin{align*}
-		&v'^{i_1\cdots i_k}{}_{j_1\cdots j_\ell}=\sum_{\substack{p_1,\ldots,p_k\\q_1,\ldots,q_\ell}}(A\iv)^{i_1}{}_{p_1}\cdots(A\iv)^{i_k}{}_{p_k}(v^{p_1\cdots p_k}{}_{q_1\cdots q_\ell})A^{q_1}{}_{j_1}\cdots A^{q_\ell}{}_{j_\ell}.
+		&v'^{i_1\cdots i_k}{}_{j_1\cdots j_\ell}=\sum_{\substack{p_1,\ldots,p_k\\q_1,\ldots,q_\ell}}(A\inv)^{i_1}{}_{p_1}\cdots(A\inv)^{i_k}{}_{p_k}(v^{p_1\cdots p_k}{}_{q_1\cdots q_\ell})A^{q_1}{}_{j_1}\cdots A^{q_\ell}{}_{j_\ell}.
 	\end{align*}
 \end{example}

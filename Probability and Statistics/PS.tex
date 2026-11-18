@@ -1,22 +1,12 @@
 \documentclass{../thunote}
+\usepackage{multirow,ulem}
 
 \input{../mathdef.tex}
-
 \externaldocument[tikz:]{figures/tikz}
 
-\usepackage{ulem}
-\usepackage{booktabs}
-\usepackage{multirow}
-
-\renewcommand*{\c}{^\mathrm{c}}
-\newcommand*{\cF}{\mathcal F}
-\let\originP\P
-\let\P\relax
-\let\originE\E
-\let\E\relax
-\DeclareMathOperator{\P}{P}
-\DeclareMathOperator{\E}{E}
-\DeclareMathOperator{\Var}{Var}
+% 事件、矩和分布函数
+\newcommand*{\eventcomp}{^{\mathrm c}}
+\newcommand*{\eventspace}{\mathcal F}
 \DeclareMathOperator{\SD}{SD}
 \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\Corr}{Corr}
@@ -24,26 +14,32 @@
 \DeclareMathOperator{\MGF}{M}
 \DeclareMathOperator{\CF}{\psi}
 
-\DeclareMathOperator{\Bino}{B}
-\DeclareMathOperator{\Pois}{\pi}
-\DeclareMathOperator{\Unif}{U}
-\DeclareMathOperator{\Norm}{N}
-\DeclareMathOperator{\Expo}{Exp}
+% 本卷的分布记号
+\DeclareMathOperator{\BernDist}{Bern}
+\DeclareMathOperator{\MultDist}{Mult}
+\DeclareMathOperator{\PascalDist}{Pa}
+\DeclareMathOperator{\GeomDist}{Ge}
+\DeclareMathOperator{\NegBinDist}{NB}
+\DeclareMathOperator{\HypergeomDist}{H}
+\DeclareMathOperator{\NegHypergeomDist}{NH}
+\DeclareMathOperator{\PoisDist}{\pi}
+\DeclareMathOperator{\UnifDist}{U}
+\DeclareMathOperator{\ExpDist}{Exp}
+\newcommand*{\ChiSqDist}{\chi^2}
+\DeclareMathOperator{\TDist}{t}
+\DeclareMathOperator{\FDist}{F}
+\DeclareMathOperator{\GammaDist}{Ga}
+\DeclareMathOperator{\BetaDist}{Be}
 
-\newcommand{\Bern}{Bernoulli}
-
-\newcommand*{\inv}{^{-1}}
-\newcommand*{\semilongrightarrow}{-\hspace{-4pt}-\hspace{-5pt}\longrightarrow}
-\newcommand*{\dto}{\overset{\text{d}}\semilongrightarrow}
-\newcommand*{\pto}{\overset\P\semilongrightarrow}
-\newcommand*{\asto}{\overset{\text{a.}\,\text{s.}}\semilongrightarrow}
-\newcommand*{\dotsim}{\overset\cdot\sim}
-
-% \makeindex[title=索引]
-
-\begin{document}
+% 依分布、依概率、几乎处处收敛与近似分布
+\newcommand*{\dto}{\xrightarrow{\mathrm d}}
+\newcommand*{\pto}{\xrightarrow{\P}}
+\newcommand*{\asto}{\xrightarrow{\text{a.s.}}}
+\newcommand*{\dotsim}{\overset{\cdot}{\sim}}
 
 \title{概率论与数理统计\\Probability and Statistics}
+
+\begin{document}
 \maketitle
 
 \frontmatter
@@ -75,6 +71,5 @@
 \appendix
 \input{chapters/appendix.tex}
 
-% \printindex
 
 \end{document}

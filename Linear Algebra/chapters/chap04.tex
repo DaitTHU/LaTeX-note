@@ -1,5 +1,5 @@
 \chapter{正交性}
-本章取$\FF=\RR$，讨论有限维实内积空间；对$\RR^n$使用标准内积$\inp vw=v\tp w$。下文涉及正交性的线性空间均已指定这一正定内积。
+本章取$\FF=\RR$，讨论有限维实内积空间；对$\RR^n$使用标准内积$\inp vw=v\transp w$。下文涉及正交性的线性空间均已指定这一正定内积。
 \begin{definition}{向量的正交}{vector orthogonal}
 	若$\inp vw=0$，则称$v$和$w$正交(orthogonal)，记作$v\perp w$。
 \end{definition}
@@ -36,27 +36,27 @@
 	$V\cap V^\perp=\{0\}$。
 \end{corollary}
 \begin{theorem}{线性代数基本定理·二}{fundamental theorems of linear algebra II}
-	在$\FF^n$中，$\N(A)=\C(A\tp)^\perp.$
+	在$\FF^n$中，$\nullsp(A)=\colsp(A\transp)^\perp.$
 
-	在$\FF^m$中，$\N(A\tp)=\C(A)^\perp.$
+	在$\FF^m$中，$\nullsp(A\transp)=\colsp(A)^\perp.$
 \end{theorem}
 \begin{theorem}{分解}{resolve}
 给定矩阵$A\in\FF^{m\times n}$，则$\forall x\in\FF^n$均可以分解成
 \[
 	x=x_\mathrm r+x_\mathrm n,
 \]
-其中$x_\mathrm r\in\C(A\tp),\enspace x_\mathrm n\in\N(A)$，且这种分解是唯一的。
+其中$x_\mathrm r\in\colsp(A\transp),\enspace x_\mathrm n\in\nullsp(A)$，且这种分解是唯一的。
 \end{theorem}
 \begin{proof}
-	由正交性，$\C(A\tp)\cap\N(A)=\{0\}$；又由线性代数基本定理，
+	由正交性，$\colsp(A\transp)\cap\nullsp(A)=\{0\}$；又由线性代数基本定理，
 	\[
-		\dim\C(A\tp)+\dim\N(A)=\rank(A)+n-\rank(A)=n.
+		\dim\colsp(A\transp)+\dim\nullsp(A)=\rank(A)+n-\rank(A)=n.
 	\]
 	因此这两个子空间的基合起来构成$\RR^n$的一组基，保证每个$x$都有上述分解。若存在两种分解，则两者的行空间分量之差也在零空间中，只能为零，故分解唯一。
 \end{proof}
 \begin{theorem}
 	{矩阵的可逆部分}{}
-	设$\rank(A)=r$。限制映射$A:\C(A\tp)\to\C(A)$是双射；在这两个$r$维空间中分别选基，其表示矩阵为$r$阶可逆矩阵。这里需要先按这四个子空间选择坐标基，不能把零空间理解为原矩阵中可以直接删除的若干行或列。
+	设$\rank(A)=r$。限制映射$A:\colsp(A\transp)\to\colsp(A)$是双射；在这两个$r$维空间中分别选基，其表示矩阵为$r$阶可逆矩阵。这里需要先按这四个子空间选择坐标基，不能把零空间理解为原矩阵中可以直接删除的若干行或列。
 \end{theorem}
 \begin{center}
     \tikzfigure{subspace-mapping}
@@ -67,76 +67,76 @@
 	{向量在向量上的投影}{}
 	考虑向量$b$在非零向量$a$所张成的直线上的投影(projection)~$p$，依内积的性质：
 	\[
-		p=(\hat a\cdot b)\hat a=\frac{a\tp b}{a\tp a}a=\frac{aa\tp}{a\tp a}b.
+		p=(\hat a\cdot b)\hat a=\frac{a\transp b}{a\transp a}a=\frac{aa\transp}{a\transp a}b.
 	\]
 	那么对于一个矩阵，投影的概念应该如何定义？
 \end{example}
 
-考虑$\RR^m$中$n$个线性无关的向量$a_1,\ldots,a_n$张成的子空间$\lspan(a_1,\ldots,a_n)=\C(A)$，其中$A=[a_1\enspace\cdots\enspace a_n]$。向量$b\in\RR^m$在$\C(A)$上的投影为$p\in\C(A)$
+考虑$\RR^m$中$n$个线性无关的向量$a_1,\ldots,a_n$张成的子空间$\Span(a_1,\ldots,a_n)=\colsp(A)$，其中$A=[a_1\enspace\cdots\enspace a_n]$。向量$b\in\RR^m$在$\colsp(A)$上的投影为$p\in\colsp(A)$
 \[
 	p=Ax=x_1a_1+\cdots+x_na_n.
 \]
-投影的性质要求：$p$的终点在$\C(A)$中，且距离$b$的终点最近，即$(b-p)\perp\C(A)$，等价于
+投影的性质要求：$p$的终点在$\colsp(A)$中，且距离$b$的终点最近，即$(b-p)\perp\colsp(A)$，等价于
 \[
-	A\tp(b-Ax)=0,
+	A\transp(b-Ax)=0,
 \]
 相当于求解线性方程组
 \[
-	A\tp Ax=A\tp b.
+	A\transp Ax=A\transp b.
 \]
-若$A\tp A$可逆，则$x=(A\tp A)\iv A\tp b$，故$b$在$\C(A)$上的投影为$p=Ax=A(A\tp A)\iv A\tp b$。
+若$A\transp A$可逆，则$x=(A\transp A)\inv A\transp b$，故$b$在$\colsp(A)$上的投影为$p=Ax=A(A\transp A)\inv A\transp b$。
 \begin{definition}
 	{投影矩阵}{projection matrix}
 	对列满秩矩阵$A\in\RR^{m\times n}$，其列空间的正交投影矩阵(orthogonal projection matrix)为
 	\begin{align}
-		P=A(A\tp A)\iv A\tp.
+		P=A(A\transp A)\inv A\transp.
 	\end{align}
 \end{definition}
 
 \begin{corollary}
-	$P^2=P$且$P\tp=P$。幂等性表示重复投影不改变结果；对称性保证投影方向与目标子空间正交。仅有$P^2=P$也可能是斜投影。
+	$P^2=P$且$P\transp=P$。幂等性表示重复投影不改变结果；对称性保证投影方向与目标子空间正交。仅有$P^2=P$也可能是斜投影。
 \end{corollary}
 
 \begin{remark}
-	只有当$A$可逆时，才能拆开$(A\tp A)\iv=A\iv(A\tp)\iv$，此时$P=AA\iv(A\tp)\iv A\tp=I$。
+	只有当$A$可逆时，才能拆开$(A\transp A)\inv=A\inv(A\transp)\inv$，此时$P=AA\inv(A\transp)\inv A\transp=I$。
 \end{remark}
 
-\begin{theorem}{$A\tp A$的可逆性}{ATA inverse}
-	$A\tp A$可逆$\iff A$的列之间线性无关。
+\begin{theorem}{$A\transp A$的可逆性}{ATA inverse}
+	$A\transp A$可逆$\iff A$的列之间线性无关。
 \end{theorem}
 \begin{proof}
-	只需证明$\N(A\tp A)=\N(A)$即可。
+	只需证明$\nullsp(A\transp A)=\nullsp(A)$即可。
 	
-	一方面：$\forall x\in\N(A)$，对$Ax=0$左乘$A\tp$得$A\tp Ax=0$，故$x\in\N(A\tp A)$；
+	一方面：$\forall x\in\nullsp(A)$，对$Ax=0$左乘$A\transp$得$A\transp Ax=0$，故$x\in\nullsp(A\transp A)$；
 	
-	另一方面：$\forall x\in\N(A\tp A)$，对$A\tp Ax=0$左乘$x\tp$得
+	另一方面：$\forall x\in\nullsp(A\transp A)$，对$A\transp Ax=0$左乘$x\transp$得
 	\[
-		x\tp A\tp Ax=\norm{Ax}^2=0\implies Ax=0\implies x\in\N(A).
+		x\transp A\transp Ax=\norm{Ax}^2=0\implies Ax=0\implies x\in\nullsp(A).
 	\]
-	综上，$\N(A\tp A)=\N(A)$。
+	综上，$\nullsp(A\transp A)=\nullsp(A)$。
 \end{proof}
 \begin{corollary}
 	\[
-		\rank(A)=\rank(A\tp)=\rank(A\tp A)=\rank(AA\tp).
+		\rank(A)=\rank(A\transp)=\rank(A\transp A)=\rank(AA\transp).
 	\]
 \end{corollary}
 
 \section{最小二乘法}
 
 \paragraph{问题背景}
-考虑$A\in\RR^{m\times n}$和$b\in\RR^m$。当$m>n$时，方程组可能无精确解，但是否有解仍取决于$b\in\C(A)$，不能单靠矩阵形状判断。无论是否相容，都可寻找使$\norm{b-Ax}$最小的最小二乘解$x'$：
+考虑$A\in\RR^{m\times n}$和$b\in\RR^m$。当$m>n$时，方程组可能无精确解，但是否有解仍取决于$b\in\colsp(A)$，不能单靠矩阵形状判断。无论是否相容，都可寻找使$\norm{b-Ax}$最小的最小二乘解$x'$：
 \[
-	x'\in\arg\min_x\norm{b-Ax},
+	x'\in\argmin_x\norm{b-Ax},
 \]
-由投影的性质，$Ax'$是$b$在$\C(A)$上的唯一正交投影，所有最小二乘解均满足正规方程
+由投影的性质，$Ax'$是$b$在$\colsp(A)$上的唯一正交投影，所有最小二乘解均满足正规方程
 \[
- A\tp Ax'=A\tp b.
+ A\transp Ax'=A\transp b.
 \]
 当且仅当$A$列满秩时，系数向量$x'$唯一，此时
 \begin{equation}
-	x'=(A\tp A)\iv A\tp b.
+	x'=(A\transp A)\inv A\transp b.
 \end{equation}
-若$A$列不满秩，拟合向量$Ax'$仍唯一，但系数$x'$可加上任意$\N(A)$中的向量。以下拟合公式均须先检查列满秩条件。
+若$A$列不满秩，拟合向量$Ax'$仍唯一，但系数$x'$可加上任意$\nullsp(A)$中的向量。以下拟合公式均须先检查列满秩条件。
 
 \begin{example}{直线拟合(最小二乘法)}{least square}
 	$m$组数据$(x_i,y_i)$，确定线性关系$y=a+bx$中的系数$a,b$，即 
@@ -151,30 +151,30 @@
 			y_1\\\vdots\\y_m
 		\end{bmatrix}\iff Ax=b.
 	\]
-	\newcommand*{\sumi}[1]{\langle{#1}\rangle}
-	若$m\geq2$且$x_i$不全相同，则$A$列满秩$\rank(A)=2$，从而$A\tp A$可逆；否则截距与斜率不能分别确定。满足满秩条件时，
+	记 $S_x=\sum_{i=1}^m x_i$、$S_y=\sum_{i=1}^m y_i$、$S_{xx}=\sum_{i=1}^m x_i^2$、$S_{xy}=\sum_{i=1}^m x_i y_i$。
+	若$m\geq2$且$x_i$不全相同，则$A$列满秩$\rank(A)=2$，从而$A\transp A$可逆；否则截距与斜率不能分别确定。满足满秩条件时，
 	\[
-		A\tp A=
+		A\transp A=
 		\begin{bmatrix}
-			m&\sumi{x_i}\\
-			\sumi{x_i}&\sumi{x_i^2}
+			m&S_x\\
+			S_x&S_{xx}
 		\end{bmatrix},\quad
-		(A\tp A)\iv=\frac1{m\sumi{x_i^2}-\sumi{x_i}^2}
+		(A\transp A)\inv=\frac1{mS_{xx}-S_x^2}
 		\begin{bmatrix}
-			\sumi{x_i^2}&-\sumi{x_i}\\
-			-\sumi{x_i}&m
+			S_{xx}&-S_x\\
+			-S_x&m
 		\end{bmatrix}.
 	\]
-	为了简化符号，此处且仅在此处$\sumi{\cdot}$特指对$i=1,\ldots,m$求和，得到 
+	由正规方程得到
 	\begin{equation}
 		\begin{cases}
-			a=\frac{\sumi{x_i^2}\sumi{y_i}-\sumi{x_i}\sumi{x_iy_i}}{m\sumi{x_i^2}-\sumi{x_i}^2}\\[2ex]
-			b=\frac{-\sumi{x_i}\sumi{y_i}+m\sumi{x_iy_i}}{m\sumi{x_i^2}-\sumi{x_i}^2}
+			a=\frac{S_{xx}S_y-S_xS_{xy}}{mS_{xx}-S_x^2}\\[2ex]
+			b=\frac{-S_xS_y+mS_{xy}}{mS_{xx}-S_x^2}
 		\end{cases}
 	\end{equation}
 	\iffalse
 	\[
-		A\tp A=
+		A\transp A=
 		\begin{bmatrix}
 			n&\textstyle\sum_{i=1}^n x_i\\
 			\textstyle\sum_{i=1}^n x_i&\textstyle\sum_{i=1}^n x_i^2
@@ -182,7 +182,7 @@
 	\]
 	则
 	\[
-		(A\tp A)\iv=\frac1{\textstyle{n\sum_{i=1}^n x_i^2-\bigp{\sum_{i=1}^n x_i}^2}}
+		(A\transp A)\inv=\frac1{\textstyle{n\sum_{i=1}^n x_i^2-\bigp{\sum_{i=1}^n x_i}^2}}
 		\begin{bmatrix}
 			\textstyle\sum_{i=1}^n x_i^2&-\textstyle\sum_{i=1}^n x_i\\
 			-\textstyle\sum_{i=1}^n x_i&n
@@ -214,9 +214,9 @@
 			y_1\\\vdots\\y_m
 		\end{bmatrix}\iff Ax=b.
 	\]
-	当采样点中至少有$n+1$个互不相同的$x_i$时，$A$列满秩，从而系数唯一且$x'=(A\tp A)\iv A\tp b$；若不满足此条件，则系数不唯一。
+	当采样点中至少有$n+1$个互不相同的$x_i$时，$A$列满秩，从而系数唯一且$x'=(A\transp A)\inv A\transp b$；若不满足此条件，则系数不唯一。
 	% \[
-	% 	A_{ij}=x_i^{j-1},\quad(A\tp A)_{ij}=\sum_{k=1}^nx_k^{i+j-2}.
+	% 	A_{ij}=x_i^{j-1},\quad(A\transp A)_{ij}=\sum_{k=1}^nx_k^{i+j-2}.
 	% \]
 \end{example}
 % 一般最小二乘拟合：……
@@ -242,13 +242,13 @@
 	\[
 		Q=[q_1\enspace\cdots\enspace q_n],
 	\]
-	则$Q$是方阵且$Q\tp=Q\iv$，称$Q$为正交矩阵(orthogonal matrix)。
+	则$Q$是方阵且$Q\transp=Q\inv$，称$Q$为正交矩阵(orthogonal matrix)。
 \end{definition}
 \begin{theorem}
 	{正交归一基的完备性}{completeness}
-	由$Q\tp Q=QQ\tp=I$，可得正交归一基的完备性(completeness)
+	由$Q\transp Q=QQ\transp=I$，可得正交归一基的完备性(completeness)
 	\begin{equation}
-		\sum_{i=1}^nq_iq_i\tp=I.
+		\sum_{i=1}^nq_iq_i\transp=I.
 	\end{equation}
 \end{theorem}
 % \begin{example}{Fourier级数}{Fourier series}
@@ -297,24 +297,24 @@
 \begin{theorem}{QR分解}{QR decomposition}
 	若$m\times n$矩阵$A=(a_1,\ldots,a_n)$的列之间线性无关，可用Gram-Schmidt法则构造一组正交归一基$\{q_1,\ldots,q_n\}$，$q_i$同$a_1,\ldots,a_{i-1}$正交，定义
 	\[
-		R:=Q\tp A=\begin{bmatrix}
-			q_1\tp a_1&q_1\tp a_2&\cdots&q_1\tp a_n\\[1ex]
-			&q_2\tp a_2&\cdots&q_2\tp a_n\\
+		R:=Q\transp A=\begin{bmatrix}
+			q_1\transp a_1&q_1\transp a_2&\cdots&q_1\transp a_n\\[1ex]
+			&q_2\transp a_2&\cdots&q_2\transp a_n\\
 			&&\ddots&\vdots\\
-			&&&q_n\tp a_n
+			&&&q_n\transp a_n
 		\end{bmatrix}
 	\]
-	$Q=[q_1\enspace\cdots\enspace q_n]\in\RR^{m\times n}$满足$Q\tp Q=I_n$，$R\in\RR^{n\times n}$是对角元非零的上三角矩阵，且$\C(Q)=\C(A)$，故
+	$Q=[q_1\enspace\cdots\enspace q_n]\in\RR^{m\times n}$满足$Q\transp Q=I_n$，$R\in\RR^{n\times n}$是对角元非零的上三角矩阵，且$\colsp(Q)=\colsp(A)$，故
 	\begin{equation}
 		A=QR.
 	\end{equation}
-	这称为薄QR分解。当$m>n$时，$Q$不是正交方阵，$QQ\tp$是$\C(A)$上的投影；仅当$m=n$时才有$QQ\tp=I_m$及$Q\tp=Q\iv$。
+	这称为薄QR分解。当$m>n$时，$Q$不是正交方阵，$QQ\transp$是$\colsp(A)$上的投影；仅当$m=n$时才有$QQ\transp=I_m$及$Q\transp=Q\inv$。
 \end{theorem}
 
 \begin{remark}
-	在最小二乘法等应用中，$A\tp A=R\tp R$
+	在最小二乘法等应用中，$A\transp A=R\transp R$
 	\[
-		x=(A\tp A)\iv A\tp b=R\iv Q\tp b.
+		x=(A\transp A)\inv A\transp b=R\inv Q\transp b.
 	\]
-	计算时通过回代求解$Rx=Q\tp b$，不必显式形成$R\iv$或$A\tp A$。
+	计算时通过回代求解$Rx=Q\transp b$，不必显式形成$R\inv$或$A\transp A$。
 \end{remark}

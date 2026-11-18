@@ -74,7 +74,7 @@
 \end{align*}
 
 \paragraph{Fourier变换}
-利用$\e^{ix}=\cos x+\i\sin x$，可得到Fourier级数的复数形式：
+利用$\e^{\i x}=\cos x+\i\sin x$，可得到Fourier级数的复数形式：
 \[f(x)=\sum_{n=-\infty}^{+\infty}c_n\e^{\i nx},\quad c_n=\frac1{2\pi}\int_{-\pi}^\pi f(x)\e^{-\i nx}\d x.\]
 对于其他周期$T=\lambda,\;k=2\pi/\lambda$
 \[f(x)=\sum_{n=-\infty}^{+\infty}c_n\e^{\i nkx},\quad c_n=\frac1\lambda\int_{-\lambda/2}^{\lambda/2} f(x)\e^{-\i nkx}\d x.\]
@@ -83,24 +83,24 @@
 然而，若认为其周期$\lambda=2N$充分大，令$\xi=nk$，
 \[f(x)=\sum_\xi\biggb{\frac{k}{2\pi}\int_{-N}^Nf(x)\e^{-\i\xi x}\d x}\e^{\i\xi x}.\]
 再让$N\to\infty,\;k\to0$，定义
-\[\hat f(\xi):=\int_{-\infty}^\infty f(x)\e^{-\i\xi x}\d x,\]
+\[\hat f(\xi):=\intR f(x)\e^{-\i\xi x}\d x,\]
 以及
-\[f(x)=\frac1{2\pi}\int_{-\infty}^\infty\hat f(\xi)\e^{\i\xi x}\d\xi,\]
+\[f(x)=\frac1{2\pi}\intR\hat f(\xi)\e^{\i\xi x}\d\xi,\]
 这就是Fourier变换。
 
 \subsection{Fourier系数}
 
-下面简要介绍不同函数的Fourier系数如何计算。
+下面简要介绍不同函数的Fourier系数如何计算。各不定积分中的 $C$ 表示任意积分常数。
 
 \paragraph{多项式函数}
 只需要利用分部积分将$x^k$不断微分降幂，
 \begin{align*}
-	\int x\cos ax\d x&=\frac{x\sin ax}a+\frac{\cos ax}{a^2}\plusc.\\
-	\int x\sin ax\d x&=-\frac{x\cos ax}a+\frac{\sin ax}{a^2}\plusc.\\
-	\int x^2\cos ax\d x&=\frac{x^2\sin ax}a+\frac{2x\cos ax}{a^2}-\frac{2\sin ax}{a^3}\plusc.\\
-	\int x^2\sin ax\d x&=-\frac{x^2\cos ax}a+\frac{2x\sin ax}{a^2}+\frac{2\cos ax}{a^3}\plusc.\\
-	\int x^3\cos ax\d x&=\frac{x^3\sin ax}a+\frac{3x^2\cos ax}{a^2}-\frac{6x\sin ax}{a^3}-\frac{6\cos ax}{a^4}\plusc.\\
-	\int x^3\sin ax\d x&=-\frac{x^3\cos ax}a+\frac{3x^2\sin ax}{a^2}+\frac{6x\cos ax}{a^3}-\frac{6\sin ax}{a^4}\plusc.
+	\int x\cos ax\d x&=\frac{x\sin ax}a+\frac{\cos ax}{a^2}+C.\\
+	\int x\sin ax\d x&=-\frac{x\cos ax}a+\frac{\sin ax}{a^2}+C.\\
+	\int x^2\cos ax\d x&=\frac{x^2\sin ax}a+\frac{2x\cos ax}{a^2}-\frac{2\sin ax}{a^3}+C.\\
+	\int x^2\sin ax\d x&=-\frac{x^2\cos ax}a+\frac{2x\sin ax}{a^2}+\frac{2\cos ax}{a^3}+C.\\
+	\int x^3\cos ax\d x&=\frac{x^3\sin ax}a+\frac{3x^2\cos ax}{a^2}-\frac{6x\sin ax}{a^3}-\frac{6\cos ax}{a^4}+C.\\
+	\int x^3\sin ax\d x&=-\frac{x^3\cos ax}a+\frac{3x^2\sin ax}{a^2}+\frac{6x\cos ax}{a^3}-\frac{6\sin ax}{a^4}+C.
 \end{align*}
 \begin{remark}可以证明，按照降幂顺序，系数的规律是：
 	\begin{itemize}
@@ -119,8 +119,8 @@
 \paragraph{指数函数}
 对于指数函数的Fourier系数，只需记住
 \begin{align*}
-	\mathcal I:=\int\e^{ax}\cos bx\d x=\e^{ax}\cdot\frac{a\cos bx+b\sin bx}{a^2+b^2}\plusc;\\
-	\mathcal J:=\int\e^{ax}\sin bx\d x=\e^{ax}\cdot\frac{a\sin bx-b\cos bx}{a^2+b^2}\plusc.
+	\mathcal I:=\int\e^{ax}\cos bx\d x=\e^{ax}\cdot\frac{a\cos bx+b\sin bx}{a^2+b^2}+C;\\
+	\mathcal J:=\int\e^{ax}\sin bx\d x=\e^{ax}\cdot\frac{a\sin bx-b\cos bx}{a^2+b^2}+C.
 \end{align*}
 \begin{proof}
 	分部积分
@@ -134,10 +134,10 @@
 \paragraph{双曲函数}
 有
 \begin{align*}
-	\int\cosh ax\cos bx\d x=\frac{a\sinh ax\cos bx+b\cosh ax\sin bx}{a^2+b^2}\plusc,\\
-	\int\cosh ax\sin bx\d x=\frac{a\sinh ax\sin bx-b\cosh ax\cos bx}{a^2+b^2}\plusc,\\
-	\int\sinh ax\cos bx\d x=\frac{a\cosh ax\cos bx+b\sinh ax\sin bx}{a^2+b^2}\plusc,\\
-	\int\sinh ax\sin bx\d x=\frac{a\cosh ax\sin bx-b\sinh ax\cos bx}{a^2+b^2}\plusc.
+	\int\cosh ax\cos bx\d x=\frac{a\sinh ax\cos bx+b\cosh ax\sin bx}{a^2+b^2}+C,\\
+	\int\cosh ax\sin bx\d x=\frac{a\sinh ax\sin bx-b\cosh ax\cos bx}{a^2+b^2}+C,\\
+	\int\sinh ax\cos bx\d x=\frac{a\cosh ax\cos bx+b\sinh ax\sin bx}{a^2+b^2}+C,\\
+	\int\sinh ax\sin bx\d x=\frac{a\cosh ax\sin bx-b\sinh ax\cos bx}{a^2+b^2}+C.
 \end{align*}
 
 \paragraph{对数函数}
@@ -173,8 +173,8 @@ Fourier变换的定义见第~\pageref{dfn:Integral Transformation}~页\dfnref{df
 		\]
 	\item $\hat f(\xi)$积分
 			\begin{gather}
-				\int_{-\infty}^\xi\hat f(\zeta)\d\zeta=\mathcal F\Bigb{\frac{f(x)}{-\i x}}(\xi)+C_1,\\
-				\int_\xi^{+\infty}\hat f(\zeta)\d\zeta=\mathcal F\Bigb{\frac{f(x)}{\i x}}(\xi)+C_2.
+				\int_{-\infty}^\xi\hat f(\zeta)\d\zeta=\FT\Bigb{\frac{f(x)}{-\i x}}(\xi)+C_1,\\
+				\int_\xi^{+\infty}\hat f(\zeta)\d\zeta=\FT\Bigb{\frac{f(x)}{\i x}}(\xi)+C_2.
 			\end{gather}
 	\item 位移性质
 			\begin{gather*}
@@ -183,51 +183,51 @@ Fourier变换的定义见第~\pageref{dfn:Integral Transformation}~页\dfnref{df
 			\end{gather*}
 	\item 相似
 			\[\FT[f(kx)](\xi)=\frac1{\abs k}\hat f\Bigp{\frac\xi{k}}.\]
-	\item 卷积\footnote{$f,g$的卷积\[f\ast g(x)=\int\iti f(\eta)g(x-\eta)\d\eta.\]且有$f\ast g=g\ast f$．}
+	\item 卷积\footnote{$f,g$的卷积\[f\ast g(x)=\intR f(\eta)g(x-\eta)\d\eta.\]且有$f\ast g=g\ast f$．}
 			\[\FT[f\ast g]=\hat f\hat g.\]
 	\item 象函数卷积
 			\[\hat f\ast\hat g=2\pi\FT[fg]\]
 	\item 反射
 			\[\FT[\hat f(\xi)](x)=2\pi f(-x).\]
 			因此Fourier逆变换
-			\[\FT^{-1}[g](x)=\frac1{2\pi}\int\iti g(\xi)\e^{\i\xi x}\d\xi.\]
-			在$f$连续点处$\FT^{-1}[\hat f(\xi)](x)=f(x)$．
+			\[\FT\inv[g](x)=\frac1{2\pi}\intR g(\xi)\e^{\i\xi x}\d\xi.\]
+			在$f$连续点处$\FT\inv[\hat f(\xi)](x)=f(x)$．
 \end{enumerate}
 高维下Fourier变换的性质是相似的．
 \paragraph{Fourier正余弦变换的性质}\label{The Property of Sine and Cosine Transformation}\footnote{定义见第~\pageref{dfn:Fourier Sine and Cosine Transformation}~页~\ref{dfn:Fourier Sine and Cosine Transformation}。}
 \begin{enumerate}
 	\item 微分
 	\begin{align*}
-		\FT_\sine[f'](\xi)&=f(x)\sin\xi x|_{x=0}^{+\infty}-\xi\FT_\cosi[f](\xi);\\
-		\FT_\cosi[f'](\xi)&=f(x)\cos\xi x|_{x=0}^{+\infty}+\xi\FT_\sine[f](\xi);\\
+		\FT_\sine[f'](\xi)&=f(x)\sin\xi x|_{x=0}^{+\infty}-\xi\FT_\cosine[f](\xi);\\
+		\FT_\cosine[f'](\xi)&=f(x)\cos\xi x|_{x=0}^{+\infty}+\xi\FT_\sine[f](\xi);\\
 		\FT_\sine[f''](\xi)&=\Bigp{f'(x)\sin\xi x-\xi f(x)\cos\xi x}_{x=0}^{+\infty}-\xi^2\FT_\sine[f](\xi);\\
-		\FT_\cosi[f''](\xi)&=\Bigp{f'(x)\cos\xi x-\xi f(x)\sin\xi x}_{x=0}^{+\infty}-\xi^2\FT_\cosi[f](\xi).
+		\FT_\cosine[f''](\xi)&=\Bigp{f'(x)\cos\xi x-\xi f(x)\sin\xi x}_{x=0}^{+\infty}-\xi^2\FT_\cosine[f](\xi).
 	\end{align*}
 	\item 积分
 	\begin{align*}
-		\FT_\sine\biggb{\int_0^xf(\eta)\d\eta}(\xi)&=\frac1\xi\FT_\cosi[f](\xi);\\
-		\FT_\cosi\biggb{\int_0^xf(\eta)\d\eta}(\xi)&=-\frac1\xi\FT_\sine[f](\xi).
+		\FT_\sine\biggb{\int_0^xf(\eta)\d\eta}(\xi)&=\frac1\xi\FT_\cosine[f](\xi);\\
+		\FT_\cosine\biggb{\int_0^xf(\eta)\d\eta}(\xi)&=-\frac1\xi\FT_\sine[f](\xi).
 	\end{align*}
-	其中$\int\zti f(x)\d x=0.$
+	其中$\intRplus f(x)\d x=0.$
 	\item 象函数微分
 	\begin{align*}
-		\hat f_\sine'&=-\FT_\cosi[xf]&\hat f_\sine''&=-\FT_\sine[x^2f]\\
-		\hat f_\cosi'&=\FT_\sine[xf]&\hat f_\cosi''&=-\FT_\cosi[x^2f].
+		\hat f_\sine'&=-\FT_\cosine[xf]&\hat f_\sine''&=-\FT_\sine[x^2f]\\
+		\hat f_\cosine'&=\FT_\sine[xf]&\hat f_\cosine''&=-\FT_\cosine[x^2f].
 	\end{align*}
 	\item 相似\begin{align*}
 		\FT_\sine[f(kx)](\xi)=\frac1k\hat f_\sine\Bigp{\frac\xi{\abs k}},\\
-		\FT_\cosi[f(kx)](\xi)=\frac1{\abs k}\hat f_\cosi\Bigp{\frac\xi{\abs k}}
+		\FT_\cosine[f(kx)](\xi)=\frac1{\abs k}\hat f_\cosine\Bigp{\frac\xi{\abs k}}
 	\end{align*}
 	\item 反射\begin{align*}
 		\FT_\sine[\hat f_\sine(x)](\xi)&=-\frac\pi{2}f(-\xi),\\
-		\FT_\cosi[\hat f_\cosi(x)](\xi)&=\frac\pi{2}f(-\xi).
+		\FT_\cosine[\hat f_\cosine(x)](\xi)&=\frac\pi{2}f(-\xi).
 	\end{align*}
 \end{enumerate}
 \paragraph{Fourier变换函数表}
 \begin{enumerate}
 	\item $\FT[\delta(x)]=1,$\qquad$\FT[\delta^{(n)}(x)]=(\i\xi)^n;$
-	\item $\FT[1]=2\pi\vd(\xi),$\qquad$\FT[x^n]=2\pi\i^n\vd^{(n)}(\xi);$
-	\item $\FT[\e^{\i ax}]=2\pi\vd(\xi-a);$
+	\item $\FT[1]=2\pi\delta(\xi),$\qquad$\FT[x^n]=2\pi\i^n\delta^{(n)}(\xi);$
+	\item $\FT[\e^{\i ax}]=2\pi\delta(\xi-a);$
 	\item $\FT[\cos ax]=\pi\Bigp{\delta(\xi-a)+\delta(\xi+a)};$
 	\item $\FT[\sin ax]=-\i\pi\Bigp{\delta(\xi-a)-\delta(\xi+a)};$
 	\item $\FT[\cos ax^2]=\sqrt{\frac\pi{2a}}\Bigp{\cos\frac{\xi^2}{4a}+\sin\frac{\xi^2}{4a}};$
@@ -238,10 +238,17 @@ Fourier变换的定义见第~\pageref{dfn:Integral Transformation}~页\dfnref{df
 	\item $\FT[\frac1x]=-\i\pi\sgn\xi;$
 	\item $\FT[\frac1{x^n}]=-\i\pi\frac{(-\i\xi)^{n-1}}{(n-1)!}\sgn\xi,$\qquad$\FT[\frac1{x^2}]=-\pi\xi\sgn\xi;$
 	\item $\FT[\abs x^\alpha]=-2\Gamma(\alpha+1)\sin\Bigp{\frac{\pi\alpha}2}\abs\xi^{-1-\alpha};$
-	\item $\FT[\Heaviside(x)]=\frac1{\i\xi}+\pi\vd(\xi);$
-	\item $\FT[\Lambda(x)]=\sinc\frac\xi{2};$（系数应该是错的）
-	\item $\FT[\sinc x]=\Pi\Bigp{\frac\xi{2}}$（系数应该是错的）
+	\item $\FT[\Heaviside(x)]=\frac1{\i\xi}+\pi\delta(\xi);$
+	\item $\FT[\Lambda](\xi)=\sinc^2(\xi/2)$；
+	\item $\FT[\sinc](\xi)=\pi\Pi(\xi/2)$。
 \end{enumerate}
+这里 $\sinc x=\sin(x)/x$，在 $x=0$ 连续取值为 $1$。单位宽矩形窗 $\Pi(x)$ 在
+$\abs x<1/2$ 时取 $1$，在 $\abs x>1/2$ 时取 $0$，两个端点取 $1/2$。
+两个矩形窗的卷积等于它们平移后的重叠长度，给出三角窗 $\Lambda(x)=(\Pi\ast\Pi)(x)=\max(1-\abs x,0)$。
+直接积分得 $\FT[\Pi](\xi)=\int_{-1/2}^{1/2}\e^{-\i\xi x}\d x=\sinc(\xi/2)$，卷积定理给出表中的平方。
+把矩形窗加宽一倍得 $\FT[\Pi(x/2)](\xi)=2\sinc\xi$，再用 $\FT[\hat f](\xi)=2\pi f(-\xi)$ 即得最后一式；
+按对称截断取极限时，$\xi=\pm1$ 处的变换值为 $\pi/2$。
+
 Heaviside阶梯函数
 \[
 	\Heaviside(x):=\begin{cases}
@@ -293,7 +300,7 @@ Heaviside阶梯函数
 \end{enumerate}
 \paragraph{Laplace变换函数表}
 \begin{enumerate}
-	\item $\LT[\vd(t)] = 1,\quad \LT[\vd^{(n)}(t)] = s^n;$
+	\item $\LT[\delta(t)] = 1,\quad \LT[\delta^{(n)}(t)] = s^n;$
 	\item $\LT[\sgn t]=\LT[\Heaviside(t)]=\frac1s,\quad \LT[t\Heaviside(t)]=\frac1{s^2};$
 	\item $\LT\Bigb{\frac1{\sqrt{\pi t}}}=\frac1{\sqrt s};$%,\quad\LT\Bigb{2\sqrt{\frac t\pi}}=\frac1{s\sqrt s};$
 	\item $\LT[\e^{at}]=\frac1{s-a};$

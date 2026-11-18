@@ -13,7 +13,7 @@
 
 给定分析态$\ket{a}$，按条件概率求和，
 \begin{equation}
-    p(a)=\sum_r p_r|\brkt{a}{\psi_r}|^2
+    p(a)=\sum_r p_r\abs{\brkt{a}{\psi_r}}^2
         =\mel{a}{\sum_rp_r\ktbr{\psi_r}{\psi_r}}{a}.
 \end{equation}
 中间的算符包含这类制备对所有分析器的预测，
@@ -55,8 +55,8 @@ $\ave{\op{A}}=\tr(\op{\rho} \op{A})$、$p_a=\tr(\op{\rho} \op{P}_a)$给出。
 这些性质可直接从制备概率验证：
 \begin{subequations}
     \begin{alignat}{1}
-        \mel{u}{\op{\rho}}{u}&=\sum_rp_r|\brkt{u}{\psi_r}|^2\geq0,\\
-        \tr\op{\rho}&=\sum_rp_r\sum_a|\brkt{a}{\psi_r}|^2=\sum_rp_r=1,\\
+        \mel{u}{\op{\rho}}{u}&=\sum_rp_r\abs{\brkt{u}{\psi_r}}^2\geq0,\\
+        \tr\op{\rho}&=\sum_rp_r\sum_a\abs{\brkt{a}{\psi_r}}^2=\sum_rp_r=1,\\
         \tr(\op{\rho} \op{A})&=\sum_rp_r\mel{\psi_r}{\op{A}}{\psi_r}.
     \end{alignat}
 \end{subequations}
@@ -71,9 +71,9 @@ $\ave{\op{A}}=\tr(\op{\rho} \op{A})$、$p_a=\tr(\op{\rho} \op{P}_a)$给出。
 
 对两态系统可唯一写成
 \begin{equation}
-    \op{\rho}=\frac12(\one+\bm r\cdot\hatbm{\sigma}),\qquad |\bm r|\leq1.
+    \op{\rho}=\frac12(\one+\bm r\cdot\hatbm{\sigma}),\qquad \abs{\bm r}\leq1.
 \end{equation}
-本征值为$(1\pm|\bm r|)/2$，故所有物理态都在 Bloch 球内或球面上，纯态恰在球面。
+本征值为$(1\pm\abs{\bm r})/2$，故所有物理态都在 Bloch 球内或球面上，纯态恰在球面。
 
 $\bm r=(r_x,r_y,r_z)$称为 Bloch 向量，其分量由自旋测量确定，
 \begin{equation}
@@ -82,10 +82,10 @@ $\bm r=(r_x,r_y,r_z)$称为 Bloch 向量，其分量由自旋测量确定，
 因为$\one,\op{\sigma}_x,\op{\sigma}_y,\op{\sigma}_z$张成所有二阶Hermite矩阵，
 迹为1固定了$\one$的系数为$1/2$。
 其余三个系数由$\tr(\op{\sigma}_i\op{\sigma}_j)=2\delta_{ij}$读出。
-又$(\bm r\cdot\hatbm{\sigma})^2=|\bm r|^2\one$，
+又$(\bm r\cdot\hatbm{\sigma})^2=\abs{\bm r}^2\one$，
 所以$\op{\rho}$的两个本征值正是上式。
 
-对封闭系统，$\op{\rho}(t)=\op{U}(t)\op{\rho}(0)\op{U}^\dagger(t)$，求导便得von Neumann方程
+对封闭系统，$\op{\rho}(t)=\op{U}(t)\op{\rho}(0)\op{U}\adjoint(t)$，求导便得von Neumann方程
 \begin{equation}
     \i\hbar\dot{\op{\rho}}=[\op{H},\op{\rho}].
 \end{equation}
@@ -105,9 +105,9 @@ $\bm r=(r_x,r_y,r_z)$称为 Bloch 向量，其分量由自旋测量确定，
 下文将乘积态 $\ket{a}\otimes\ket{b}$ 简写成 $\ket{a}\ket{b}$ 或 $\ket{a,b}$。
 把 $A$ 端的分析器转到 $\ket{u}$，仍忽略 $B$ 端的结果，则
 \begin{equation}
-    p_A(u)=\sum_b\Bigl|\sum_a\brkt{u}{a}C_{ab}\Bigr|^2
+    p_A(u)=\sum_b\Bigabs{\sum_a\brkt{u}{a}C_{ab}}^2
     =\sum_{a,a'}\brkt{u}{a}
-        \Bigp{\sum_b C_{ab}C_{a'b}^*}\brkt{a'}{u}.
+        \Bigp{\sum_b C_{ab}C_{a'b}\conj}\brkt{a'}{u}.
 \end{equation}
 固定$b$时，通向同一结果$(u,b)$的各项先相加振幅。
 不同$b$代表互相正交的结果，忽略读数时再相加概率。括号内的系数是 $A$ 端约化密度算符的矩阵元，记这个算符为 $\op{\rho}_A$。
@@ -142,7 +142,7 @@ $\rho_{ab,a'b'}=\mel{a,b}{\op{\rho}_{AB}}{a',b'}$，
     用 $z$ 基展开 $\ket{+x}_B$。系数矩阵的行、列分别对应 $A,B$ 两端的基态，在这些基底中有
     \begin{equation}
         C=\begin{pmatrix}1/\sqrt2&0\\1/2&1/2\end{pmatrix},
-        \qquad \op{\rho}_A=CC^\dagger
+        \qquad \op{\rho}_A=CC\adjoint
         =\frac12\begin{pmatrix}1&1/\sqrt2\\1/\sqrt2&1\end{pmatrix}.
     \end{equation}
     因此$p_A(+x)=(1+1/\sqrt2)/2$。若把原态两项之间的加号改为减号，
@@ -172,13 +172,13 @@ $\rho_{ab,a'b'}=\mel{a,b}{\op{\rho}_{AB}}{a',b'}$，
 \end{proof}
 
 \begin{proof}[用系数矩阵计算Schmidt分解]
-    取前面乘积基中的系数矩阵 $C$，作奇异值分解(singular value decomposition, SVD) $C=UDV^\dagger$。
+    取前面乘积基中的系数矩阵 $C$，作奇异值分解(singular value decomposition, SVD) $C=UDV\adjoint$。
     $U,V$的列正交归一，$D$的非零对角元记为$\sqrt{\lambda_r}$。
     定义
     \begin{subequations}
         \begin{alignat}{1}
             \ket{a_r}&=\sum_aU_{ar}\ket{a},\\
-            \ket{b_r}&=\sum_bV_{br}^*\ket{b}.
+            \ket{b_r}&=\sum_bV_{br}\conj\ket{b}.
         \end{alignat}
     \end{subequations}
     代回乘积基展开，奇异值分解的每个非零奇异值就对应一个 Schmidt 项。
@@ -251,7 +251,7 @@ $\brkt{D_b}{D_a}\ktbr{a}{b}$。因此
 \begin{equation}
     P_+=\frac12\bigb{1+\Re\bigl(\e^{\i\varphi}\brkt{D_a}{D_b}\bigr)}.
 \end{equation}
-在等路径权重的理想模型中，可见度(visibility)为$|\brkt{D_a}{D_b}|$。
+在等路径权重的理想模型中，可见度(visibility)为$\abs{\brkt{D_a}{D_b}}$。
 记录正交时完全无条纹；记录相同时恢复全对比度。
 按记录器的读数分组后，某些子样本可以恢复条纹；把各组按出现概率合并，又得到原来的局部计数分布。
 
@@ -291,10 +291,10 @@ Bell 实验要把每对粒子的两端读数配成一次联合计数，并按两
 
 \begin{theorem}{CHSH不等式}{qm-chsh}
     设两端各选两种设置之一，每次分别得到 $\pm1$。若给定共同隐藏变量 $\lambda$ 后，
-    两端联合概率分解为各自局部条件概率的乘积 $p(A|a,\lambda)p(B|b,\lambda)$，且 $\lambda$ 的分布与设置选择独立，
+    两端联合概率分解为各自局部条件概率的乘积 $p(A\mid a,\lambda)p(B\mid b,\lambda)$，且 $\lambda$ 的分布与设置选择独立，
     则四组结果乘积的平均值 $E$ 满足
     \begin{equation}
-        |S|=|E(a,b)+E(a,b')+E(a',b)-E(a',b')|\leq2 .
+        \abs{S}=\abs{E(a,b)+E(a,b')+E(a',b)-E(a',b')}\leq2 .
     \end{equation}
 \end{theorem}
 \begin{proof}
@@ -316,8 +316,8 @@ Bell 实验要把每对粒子的两端读数配成一次联合计数，并按两
     设置与$\lambda$分布独立，使四个关联都能用同一个$p(\lambda)$平均。
     记逐次组合为 $C(\lambda)$。由三角不等式，平均后的 CHSH 组合满足
     \[
-        |S|=\bigg|\int p(\lambda)C(\lambda)\d\lambda\bigg|
-        \leq\int p(\lambda)|C(\lambda)|\d\lambda=2 .
+        \abs{S}=\biggabs{\int p(\lambda)C(\lambda)\d\lambda}
+        \leq\int p(\lambda)\abs{C(\lambda)}\d\lambda=2 .
     \]
 \end{proof}
 自旋单态$\ket{0,0}$则满足
@@ -344,8 +344,8 @@ $\bm b=(\bm z+\bm x)/\sqrt2$、$\bm b'=(\bm z-\bm x)/\sqrt2$，
 若 Bob 操作后保留全部测量结果，Alice 能否仅从本地计数察觉这一操作？
 设 $\op{M}_b$ 只作用在 Bob 的空间，$b$ 标记一个可能的结果。对结果求和，联合态成为
 \[
-    \op{\rho}'=\sum_b(\one_A\otimes \op{M}_b)\op{\rho}(\one_A\otimes \op{M}_b^\dagger),
-    \qquad \sum_b\op{M}_b^\dagger \op{M}_b=\one_B .
+    \op{\rho}'=\sum_b(\one_A\otimes \op{M}_b)\op{\rho}(\one_A\otimes \op{M}_b\adjoint),
+    \qquad \sum_b\op{M}_b\adjoint \op{M}_b=\one_B .
 \]
 右侧的完备条件保证概率总和为一。
 
@@ -354,10 +354,10 @@ $\bm b=(\bm z+\bm x)/\sqrt2$、$\bm b'=(\bm z-\bm x)/\sqrt2$，
     \begin{alignedat}{1}
         \ave{\op{O}_A}'&=\sum_b
             \tr\Bigb{\op{\rho}\,
-            (\one_A\otimes \op{M}_b^\dagger)(\op{O}_A\otimes\one_B)
+            (\one_A\otimes \op{M}_b\adjoint)(\op{O}_A\otimes\one_B)
             (\one_A\otimes \op{M}_b)}\\
         &=\tr\Bigb{\op{\rho}\,
-            \bigp{\op{O}_A\otimes\sum_b\op{M}_b^\dagger \op{M}_b}}
+            \bigp{\op{O}_A\otimes\sum_b\op{M}_b\adjoint \op{M}_b}}
             =\tr\bigb{\op{\rho}(\op{O}_A\otimes\one_B)}.
     \end{alignedat}
 \end{equation}
@@ -374,11 +374,11 @@ Bell 关联取决于分析器记录的正负号。如果读出电路偶尔将正
 \begin{definition}{离散测量的POVM与仪器映射}{qm-povm-instrument}
     仪器映射(instrument map)将输入态 $\op{\rho}$ 映到记录 $m$ 对应的未归一化输出态，
     \begin{equation*}
-        \mathcal I_m(\op{\rho})=\sum_\alpha \op{M}_{m\alpha}\op{\rho} \op{M}_{m\alpha}^\dagger .
+        \mathcal I_m(\op{\rho})=\sum_\alpha \op{M}_{m\alpha}\op{\rho} \op{M}_{m\alpha}\adjoint .
     \end{equation*}
     其中 $\alpha$ 标记同一记录下未进一步分辨的作用通道。相应的效应算符(effect operator)满足
     \begin{equation}
-        \op{E}_m=\sum_\alpha \op{M}_{m\alpha}^\dagger \op{M}_{m\alpha}\geq0,\qquad
+        \op{E}_m=\sum_\alpha \op{M}_{m\alpha}\adjoint \op{M}_{m\alpha}\geq0,\qquad
         \sum_m\op{E}_m=\one,
     \end{equation}
     这样一族正算符 $\{\op{E}_m\}$ 称为正算符值测度(positive operator-valued measure, POVM)。结果概率及条件态为

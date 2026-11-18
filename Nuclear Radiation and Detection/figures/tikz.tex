@@ -1,5 +1,7 @@
 \documentclass[tikz]{standalone}
 \usepackage{ctex,bm,siunitx}
+\input{../../mathdef.tex}
+\input{../notation.tex}
 \usetikzlibrary{angles,calc,circuits.ee.IEC,quotes,shapes}
 
 \begin{document}
@@ -12,17 +14,10 @@
 	\draw[thick, <->](0, #4)node[left]{$#3$}--(0, 0)node[shift={(-135:7pt)}]{$O$}--(#2, 0)node[right]{$#1$}
 }
 
-\sisetup{separate-uncertainty = true}
-
-\newcommand{\nucli}[2]{{^{#1}\mathrm{#2}}}
-\newcommand{\nuc}[1]{\mathrm{#1}}
-
-\newcommand*{\CM}{_{\mathrm C}}
-\newcommand*{\LAB}{_{\mathrm L}}
-\newcommand*{\sca}{{\mathrm{sc}}}
+\sisetup{uncertainty-mode = separate}
 
 \begin{tikzpicture}
-	\draw[thick](0, 0)node[above right]{$I^\pi$}--(6, 0)node[midway, below]{$\nucli ZX$}node[above left]{$E$}node[right]{$T_{1/2}$};
+	\draw[thick](0, 0)node[above right]{$I^\pi$}--(6, 0)node[midway, below]{$\nuclide[Z]{A}{X}$}node[above left]{$E$}node[right]{$T_{1/2}$};
     \label{energy-state}
 \end{tikzpicture}
 
@@ -50,31 +45,31 @@
 \end{tikzpicture}
 
 \begin{tikzpicture}
-    \draw[ultra thick](-4, 5)node[above right]{\small$7/2^+$}--(0, 5)node[midway, below]{$\nucli{137}{Cs}$}node[above left]{\small 0}node[right]{\small\SI{30}{yr}};
-    \draw[thick, latex-latex](1, 2)--(0, 5)--(1, 0);%node[midway, right]{94.4\%}node[midway, left]{5.6\%};
-    \draw(.5, 3.5)--(-.5, 3)--(-3.5, 3)node[above right]{\small$\beta^-$ 511.6 94.6\%};
-    \draw(.5, 2.5)--(-.5, 2)--(-3.5, 2)node[above right]{\small$\beta^-$ 1173.2 5.4\%};
-    \draw[thick](1, 2)node[above right]{\small$11/2^-$}--(5, 2)node[above left]{\small 661.66}node[right]{\small$\SI{2.5}{min}$};
-    \draw[ultra thick](1, 0)node[above right]{\small$3/2^+$}--(5, 0)node[midway, below]{$\nucli{137}{Ba}$ (stable)}node[above left]{\small 0}node[right]{\small stable};
-    \draw[thick, latex-](3, 0)--(3, 2)node[right, rotate=60]{\small 661.66\enspace$\gamma$ 85.0\% e 9.6\%};%node[midway, right]{\small 661.66};
-    \node[left]{$Q_{\beta^-}=\SI{1173.2+-0.9}{keV}$};
+    \draw[ultra thick](-4, 5)node[above right]{\small$7/2^+$}--(0, 5)node[midway, below]{$\nuclide{137}{Cs}$}node[above left]{\small 0}node[right]{\small\qty{30}{yr}};
+    \draw[thick, latex-latex](1, 2)--(0, 5)--(1, 0);%node[midway, right]{\qty{94.4}{\percent}}node[midway, left]{\qty{5.6}{\percent}};
+    \draw(.5, 3.5)--(-.5, 3)--(-3.5, 3)node[above right]{\small$\beta^-$ \qty{511.6}{keV} \qty{94.6}{\percent}};
+    \draw(.5, 2.5)--(-.5, 2)--(-3.5, 2)node[above right]{\small$\beta^-$ \qty{1173.2}{keV} \qty{5.4}{\percent}};
+    \draw[thick](1, 2)node[above right]{\small$11/2^-$}--(5, 2)node[above left]{\small \qty{661.66}{keV}}node[right]{\small$\qty{2.5}{min}$};
+    \draw[ultra thick](1, 0)node[above right]{\small$3/2^+$}--(5, 0)node[midway, below]{$\nuclide{137}{Ba}\stable$}node[above left]{\small 0}node[right]{\small stable};
+    \draw[thick, latex-](3, 0)--(3, 2)node[right, yshift=9pt, rotate=60]{\small \qty{661.66}{keV}\enspace$\gamma$ \qty{85.0}{\percent} e \qty{9.6}{\percent}};%node[midway, right]{\small \qty{661.66}{keV}};
+    \node[left]{$Q_{\beta^-}=\qty{1173.2+-0.9}{keV}$};
     \label{cesium-decay}
 \end{tikzpicture}
 
 \begin{tikzpicture}
-    \node[right]at(4, -.5){$Q_\alpha=\SI{5407.63+-0.10}{keV}$};
-    \draw[ultra thick](0, 0)node[above right]{\small $0^+$}--(4, 0)node[midway, below]{$\nucli{206}{Pb}$ (stable)}node[above left]{\small 0};
-    \draw[thick](0, 2)node[above right]{\small $2^+$}--(4, 2)node[above left]{\small 803.1};
-    \draw[thick, latex-](2, 0)--(2, 2)node[right, rotate=60]{\small 804\enspace$\gamma$ \num{0.00107}\%};
+    \node[right]at(4, -.5){$Q_\alpha=\qty{5407.63+-0.10}{keV}$};
+    \draw[ultra thick](0, 0)node[above right]{\small $0^+$}--(4, 0)node[midway, below]{$\nuclide{206}{Pb}\stable$}node[above left]{\small 0};
+    \draw[thick](0, 2)node[above right]{\small $2^+$}--(4, 2)node[above left]{\small \qty{803.1}{keV}};
+    \draw[thick, latex-](2, 0)--(2, 2)node[right, yshift=9pt, rotate=60]{\small \qty{804}{keV}\enspace$\gamma$ \qty{0.00107}{\percent}};
     \draw[thick, latex-](4, 2)--(5, 2)node[right]{\small\enspace\num{4524}\qquad\num{0.00107}};
-    \node[above right]at(5, 2.1){\small$E_\alpha(\si{eV})\qquad I_\alpha(\%)$};
+    \node[above right]at(5, 2.1){\small$E_\alpha\,(\unit{keV})\qquad I_\alpha\,(\unit{\percent})$};
     \draw[thick](5, 0)--(5, 6);
     \draw[thick, latex-](4, 0)--(5.05, 0)node[right]{\small\num{5304.61}\qquad 99}--(5.05, 5.95);
     \draw[thick](4.95, 6.05)--(5.1, 5.9);
     \draw[thick](4.95, 6.15)--(5.1, 6);
     \draw[thick](5, 6.1)--(5, 7);
     \draw[thick](5.05, 6.05)--(5.05, 7);
-    \draw[ultra thick](5, 7)node[above right]{\small $0^+$}--(9, 7)node[midway, below]{$\nucli{210}{Po}$}node[right]{\small\SI{138.38}{d}};
+    \draw[ultra thick](5, 7)node[above right]{\small $0^+$}--(9, 7)node[midway, below]{$\nuclide{210}{Po}$}node[right]{\small\qty{138.38}{d}};
     \label{alpha-decay}
 \end{tikzpicture}
 
@@ -90,19 +85,19 @@
 \end{tikzpicture}
 
 \begin{tikzpicture}
-    \draw[ultra thick](0, 4)node[above right]{\small$1^+$}--(4, 4)node[midway, below]{$\nucli{64}{Cu}$}node[right]{\small\SI{12.70}{h}};
-    \draw[ultra thick](-4, 0)node[above right]{\small$0^+$}--(-1, 0)node[midway, below]{$\nucli{64}{Ni}$(稳定)}node[above left]{\small0};
-    \draw[thick](-4, 3)node[above right]{$2^+$}--(-1, 3)node[above left]{\small\num{1345.8}};
-    \draw[ultra thick](5, 2.5)node[above right]{\small$0^+$}--(7, 2.5)node[midway, below]{$\nucli{64}{Zn}$(稳定)};
+    \draw[ultra thick](0, 4)node[above right]{\small$1^+$}--(4, 4)node[midway, below]{$\nuclide{64}{Cu}$}node[right]{\small\qty{12.70}{h}};
+    \draw[ultra thick](-4, 0)node[above right]{\small$0^+$}--(-1, 0)node[midway, below]{$\nuclide{64}{Ni}$(稳定)}node[above left]{\small0};
+    \draw[thick](-4, 3)node[above right]{$2^+$}--(-1, 3)node[above left]{\small\qty{1345.8}{keV}};
+    \draw[ultra thick](5, 2.5)node[above right]{\small$0^+$}--(7, 2.5)node[midway, below]{$\nuclide{64}{Zn}$(稳定)};
     \draw[thick, -latex](4, 4)--(5, 2.5);
     \draw[thick, -latex](0, 4)--(-1, 3);
     \draw[thick, -latex](0, 4)--(-1, 0);
     \draw[thick, -latex](0, 4)--(0, 2)--(-1, 0);
-    \draw[thick, latex-](-2.8, 0)--(-2.8, 3)node[right, rotate=60]{\small\num{1345.77}\enspace$\gamma$ \num{0.48}\%};
-    \draw(4.5, 3.25)--(4, 2.8)--(.5, 2.8)node[above right]{\small$\beta^-$\enspace\SI{578.2}{keV} 37.1\%}node[below right]{\small $Q_{\beta^-}=\SI{578.2+-1.5}{keV}$};
-    \draw(-.5, 3.5)--(.5, 1.65)node[above right]{\small EC$_1$}--(4, 1.65)node[above left]{\small 0.48\%};
-    \draw(-.5, 2)--(.5, 1)node[above right]{\small EC$_2$}--(4, 1)node[above left]{\small 44.5\%};
-    \draw(-.5, 1)--(.5, .35)node[above right]{\small$\beta^+$\enspace\SI{652.9}{keV}\enspace\,17.9\%}node[below right]{\small$Q_{\mathrm{EC}}=\SI{1674.9+-0.8}{keV}$}--(4, .35);
+    \draw[thick, latex-](-2.8, 0)--(-2.8, 3)node[right, yshift=9pt, rotate=60]{\small\qty{1345.77}{keV}\enspace$\gamma$ \qty{0.48}{\percent}};
+    \draw(4.5, 3.25)--(4, 2.8)--(.5, 2.8)node[above right]{\small$\beta^-$\enspace\qty{578.2}{keV} \qty{37.1}{\percent}}node[below right]{\small $Q_{\beta^-}=\qty{578.2+-1.5}{keV}$};
+    \draw(-.5, 3.5)--(.5, 1.65)node[above right]{\small EC$_1$}--(4, 1.65)node[above left]{\small \qty{0.48}{\percent}};
+    \draw(-.5, 2)--(.5, 1)node[above right]{\small EC$_2$}--(4, 1)node[above left]{\small \qty{44.5}{\percent}};
+    \draw(-.5, 1)--(.5, .35)node[above right]{\small$\beta^+$\enspace\qty{652.9}{keV}\enspace\,\qty{17.9}{\percent}}node[below right]{\small$Q_{\mathrm{EC}}=\qty{1674.9+-0.8}{keV}$}--(4, .35);
     \label{copper-decay}
 \end{tikzpicture}
 
@@ -134,9 +129,9 @@
     % \coordinate(a)at(-1, 0);
     \draw[dashed](C)--(f);
     \draw[thick, -latex](C)--(b)node[midway, right]{$\bm v_b'$};
-    \draw[thick, latex-latex](C)--(A)node[midway, below]{$\bm v\CM$}--(b)node[midway, above]{$\bm v_b$};
-    \pic["$\theta\LAB$", draw, angle eccentricity=1.75, angle radius=15]{angle=f--A--b};
-    \pic["$\theta\CM$", draw, angle eccentricity=1.9, angle radius=10]{angle=f--C--b};
+    \draw[thick, latex-latex](C)--(A)node[midway, below]{$\bm v_\CM$}--(b)node[midway, above]{$\bm v_b$};
+    \pic["$\theta_\LAB$", draw, angle eccentricity=1.75, angle radius=15]{angle=f--A--b};
+    \pic["$\theta_\CM$", draw, angle eccentricity=1.9, angle radius=10]{angle=f--C--b};
     \label{laboratory-velocities}
 \end{tikzpicture}
 
@@ -151,11 +146,11 @@
     \draw[dashed](t)--(1.5, 3);
     \draw[cyan, thick, -latex](A)--(t)node[left]{$v_{b\tan}~$};
     \draw[-latex](C)--(b)node[midway, right]{$\bm v_b'$};
-    \draw[latex-latex](C)--(A)node[midway, above]{$\bm v\CM$}--(b)node[midway, above]{$\bm v_b$};
+    \draw[latex-latex](C)--(A)node[midway, above]{$\bm v_\CM$}--(b)node[midway, above]{$\bm v_b$};
     \draw[red, thick, -latex](A)--(f)node[right]{$v_{b\max{}}$};
     \draw[blue, thick, -latex](A)--(a)node[below]{$v_{b\min{}}$};
-    \pic["$\theta\LAB$", draw, angle eccentricity=1.5, angle radius=30]{angle=f--A--b};
-    \pic["$\theta\CM$", draw, angle eccentricity=1.9, angle radius=10]{angle=f--C--b};
+    \pic["$\theta_\LAB$", draw, angle eccentricity=1.5, angle radius=30]{angle=f--A--b};
+    \pic["$\theta_\CM$", draw, angle eccentricity=1.9, angle radius=10]{angle=f--C--b};
     \label{scattering-angles}
 \end{tikzpicture}
 
@@ -167,17 +162,17 @@
     \coordinate(d)at(-1, 0);
     \draw[dashed](C)circle(2.5);
     \draw[-latex](C)--(b)node[midway, right]{$\bm v_b'$};
-    \draw[latex-latex](C)--(o)node[midway, below]{$\bm v\CM$}--(b)node[midway, above]{$\bm v_b$};
+    \draw[latex-latex](C)--(o)node[midway, below]{$\bm v_\CM$}--(b)node[midway, above]{$\bm v_b$};
     \draw[red, thick, -latex](o)--(a)node[right]{$v_{b\max{}}$};
     \draw[blue, thick, -latex](o)--(d)node[left]{$v_{b\min{}}$};
-    \pic["$\theta\LAB$", draw, angle eccentricity=1.75, angle radius=15]{angle=a--o--b};
-    \pic["$\theta\CM$", draw, angle eccentricity=1.9, angle radius=10]{angle=a--C--b};
+    \pic["$\theta_\LAB$", draw, angle eccentricity=1.75, angle radius=15]{angle=a--o--b};
+    \pic["$\theta_\CM$", draw, angle eccentricity=1.9, angle radius=10]{angle=a--C--b};
     \label{scattering-cone}
 \end{tikzpicture}
 
 \begin{tikzpicture}
     \draw[thick, domain=0:4, samples=500, fill=gray!50]plot(\x, {2*sqrt(\x)-\x})node[below]{4};
-    \xOy{\sigma_\sca}{4.5}{\sigma_\mathrm r}{1.5};
+    \xOy{\sigma_\scattered}{4.5}{\sigma_\reactionlabel}{1.5};
     \draw[dashed](0, 1)node[left]{1}--(1, 1)--(1, 0)node[below]{1};
     \label{cross-sections}
 \end{tikzpicture}
@@ -221,7 +216,7 @@
 
 \begin{tikzpicture}
     \xOy t5I4;
-    \draw[thick](0, 3)node[left]{$I_1$}--(.5, 3)node[midway, above]{\si{\micro s}}--(1, .5)--(3.7, .5)node[midway, above]{ms}--(4.2, 0)node[below]{$T^+$};
+    \draw[thick](0, 3)node[left]{$I_1$}--(.5, 3)node[midway, above]{\unit{\micro\second}}--(1, .5)--(3.7, .5)node[midway, above]{\unit{ms}}--(4.2, 0)node[below]{$T^+$};
     \draw[dashed](.5, 3)--(.5, 0)node[below]{$t_1$};
     \draw[dashed](0, .5)node[left]{$I_2$}--(1, .5)--(1, 0)node[below]{$T^-$};
     \draw[dashed](3.7, .5)--(3.7, 0)node[below]{$t_2$};
@@ -293,7 +288,7 @@
     \draw[thick](2, 2)--(4, 2.1);
     \draw[thick](4, 2.1)parabola(5, 3)node[above]{正比区};
     \draw[dashed](0, 2)--(2, 2);
-    \draw[dashed](0, 1.8)node[left]{90\%}--(1.37, 1.8)--(1.37, 0)node[below]{$V_1$};
+    \draw[dashed](0, 1.8)node[left]{\qty{90}{\percent}}--(1.37, 1.8)--(1.37, 0)node[below]{$V_1$};
     \draw[dashed](4, 2.1)--(4, 0)node[below]{$V_2$};
     \draw[dashed](2.25, 2)--(2.25, 0)node[below]{$V_{\mathrm{work}}$};
     \node[above right]at(0, 3){复合区};

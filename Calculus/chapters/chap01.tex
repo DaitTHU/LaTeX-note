@@ -2,23 +2,23 @@
 \begin{definition}{向量和多元函数}{}
 	$x_1,x_2,\ldots,x_n\in\RR$向量
 	\[
-		X:=[x_1,x_2,\ldots,x_n]\tp,
+		X:=[x_1,x_2,\ldots,x_n]\transp,
 	\]
 	定义在开集$\Omega\subset\RR^n$上的$n$元函数$f:\Omega\to\RR.$
 \end{definition}
-$f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=[f_1,f_2,\ldots,f_m]\tp.$
+$f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=[f_1,f_2,\ldots,f_m]\transp.$
 \section{偏导数}
 \begin{definition}{}{}
-	$\hat e_1,\hat e_2,\ldots,\hat e_n$ 是$\RR^n$的标准正交基，$X_0\in\Omega$，则$f$在$X_0$点关于$x_i$的偏导数
+	$\uvec{e}_1,\uvec{e}_2,\ldots,\uvec{e}_n$ 是$\RR^n$的标准正交基，$X_0\in\Omega$，则$f$在$X_0$点关于$x_i$的偏导数
 	\[
-		\pv f{x_i}(X_0):=\lim_{t\to 0}\frac{f(X_0+t\hat e_i)-f(X_0)}t,
+		\pv f{x_i}(X_0):=\lim_{t\to 0}\frac{f(X_0+t\uvec{e}_i)-f(X_0)}t,
 	\]
 	若$f$在$X_0$可微，其全微分为
 	\begin{align}
 		\d f(X_0)=\sum_{i=1}^n\pv f{x_i}(X_0)\d x_i.
 	\end{align}
 \end{definition}
-有时用$\partial_if$比$\p f/\p x_i$更好.
+有时用$\p_if$比$\p f/\p x_i$更好.
 \begin{theorem}{可微性判定}{}
 	对二元函数$f(x,y)$
 	\begin{center}
@@ -28,22 +28,22 @@ $f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=[f_1,f_2,\ldots,f_m]\tp
 		\viff
 		$f(X)-\Bigb{f(X_0)+\pv fx(X_0)\Delta x+\pv fy(X_0)\Delta y}=o(\norm{\Delta X})$
 	\end{center}
-	其中$\D X\equiv[\D x,\D y]\tp.$
+	其中$\Delta X\equiv[\Delta x,\Delta y]\transp.$
 \end{theorem}
 \section{方向导数和梯度}
 \begin{definition}{}{}
-	$f$可微，其沿单位向量$\hat \ell=[\cos\alpha_1,\cos\alpha_2,\ldots,\cos\alpha_n]\tp$方向的方向导数 % \vec \ell=[x_1,x_2,\ldots,x_n], \vec \ell/|\ell|=
+	$f$可微，其沿单位向量$\uvec{\ell}=[\cos\alpha_1,\cos\alpha_2,\ldots,\cos\alpha_n]\transp$方向的方向导数 % \bm \ell=[x_1,x_2,\ldots,x_n], \bm \ell/|\ell|=
 	\[
-		\pv f{\vec \ell}(X_0):=\lim_{t\to 0}\frac{f(X_0+t\hat \ell)-f(X_0)}t;
+		\pv f{\uvec{\ell}}(X_0):=\lim_{t\to 0}\frac{f(X_0+t\uvec{\ell})-f(X_0)}t;
 	\]
 	梯度
 	\[
-		\nabla f:=\Bigb{\pv f{x_1},\pv f{x_2},\ldots,\pv f{x_n}}\tp.
+		\grad f:=\Bigb{\pv f{x_1},\pv f{x_2},\ldots,\pv f{x_n}}\transp.
 	\]
 \end{definition}
 因此方向导数也可以看做
 \begin{align}
-	\pv f{\vec \ell}(X_0)=\sum_{i=1}^n\pv f{x_i}(X_0)\cos\alpha_i=\nabla f(X_0)\cdot\hat \ell.
+	\pv f{\uvec{\ell}}(X_0)=\sum_{i=1}^n\pv f{x_i}(X_0)\cos\alpha_i=\grad f(X_0)\cdot\uvec{\ell}.
 \end{align}
 \section{高阶偏导数}
 \begin{definition}{}{}
@@ -51,7 +51,7 @@ $f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=[f_1,f_2,\ldots,f_m]\tp
 	\[
 		\pw f{x_j}{x_i}:=\pp{x_j}\pv f{x_i};\quad \pv[2]f{x_i}\equiv\pw f{x_i}{x_i}
 	\]
-	也可记作$\partial_{ji}f.$
+	也可记作$\p_{ji}f.$
 \end{definition}
 \begin{theorem}{混合偏导交换的充分条件}{}
 	\begin{center}
@@ -62,7 +62,7 @@ $f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=[f_1,f_2,\ldots,f_m]\tp
 \end{theorem}
 \section{向量值函数微分}
 \begin{definition}[breakable=false]{Jacobi矩阵}{}
-	可微的向量值函数$F:\Omega\subset\RR^n\to\RR^m$%，于是$\vec f:\Omega\to\RR^m$
+	可微的向量值函数$F:\Omega\subset\RR^n\to\RR^m$%，于是$\bm f:\Omega\to\RR^m$
 	\begin{gather*}
 		\begin{bmatrix}
 			\d f_1 \\
@@ -110,36 +110,36 @@ $f_1,f_2,\ldots,f_m:\Omega\to\RR$构成向量值函数$F=[f_1,f_2,\ldots,f_m]\tp
 \end{align}
 $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 \section{隐函数}
-本节采用常见的$C^1$充分条件，参见\href{https://math.rice.edu/~hardt/401F03/ift.pdf}{Rice University：Inverse and Implicit Function Theorems}。
+本节采用常见的$\cont^1$充分条件，参见\href{https://math.rice.edu/~hardt/401F03/ift.pdf}{Rice University：Inverse and Implicit Function Theorems}。
 \begin{theorem}{二元隐函数}{}
-    设$f$在$P=(x_0,y_0)$的邻域内属于$C^1$（一阶连续可微），且$f(P)=0$、$f_y(P)\neq0$。则在该点附近，方程$f(x,y)=0$唯一确定经过$P$的局部$C^1$函数$y=y(x)$，且
+    设$f$在$P=(x_0,y_0)$的邻域内属于$\cont^1$（一阶连续可微），且$f(P)=0$、$f_y(P)\neq0$。则在该点附近，方程$f(x,y)=0$唯一确定经过$P$的局部$\cont^1$函数$y=y(x)$，且
     \[
         y'(x)=-\frac{f_x(x,y(x))}{f_y(x,y(x))}.
     \]
 \end{theorem}
 隐函数的存在性和可微性由定理保证；在此基础上，对恒等式$f(x,y(x))=0$使用链式法则，才得到上述求导公式。这不是存在性定理本身的证明。
 \begin{theorem}{多元隐函数}{}
-    设$f(X,y)$在$P=(X_0,y_0)$的邻域内属于$C^1$，其中$X\in\RR^n$，且$f(P)=0$、$f_y(P)\neq0$。则存在唯一的局部$C^1$函数$y=y(X)$，满足$y(X_0)=y_0$和$f(X,y(X))=0$，并且
+    设$f(X,y)$在$P=(X_0,y_0)$的邻域内属于$\cont^1$，其中$X\in\RR^n$，且$f(P)=0$、$f_y(P)\neq0$。则存在唯一的局部$\cont^1$函数$y=y(X)$，满足$y(X_0)=y_0$和$f(X,y(X))=0$，并且
     \[
         \pv y{x_i}(X)=-\frac{f_{x_i}(X,y(X))}{f_y(X,y(X))}.
     \]
 \end{theorem}
 \begin{theorem}{向量值隐函数}{}
-    设$F=(f_1,\ldots,f_m)\tp$在$P=(X_0,Y_0)\in\RR^{n+m}$的邻域内属于$C^1$，$F(P)=\bm0$，且$m\times m$矩阵$J_YF(P)$可逆。则存在唯一的局部$C^1$函数$Y=Y(X)$，满足$Y(X_0)=Y_0$和$F(X,Y(X))=\bm0$，并且
+    设$F=(f_1,\ldots,f_m)\transp$在$P=(X_0,Y_0)\in\RR^{n+m}$的邻域内属于$\cont^1$，$F(P)=\bm0$，且$m\times m$矩阵$J_YF(P)$可逆。则存在唯一的局部$\cont^1$函数$Y=Y(X)$，满足$Y(X_0)=Y_0$和$F(X,Y(X))=\bm0$，并且
     \[
-        J_Y(X)=-\bigb{J_YF(X,Y(X))}^{-1}J_XF(X,Y(X)).
+        J_Y(X)=-\bigb{J_YF(X,Y(X))}\inv J_XF(X,Y(X)).
     \]
     这里$J_Y(X)$表示映射$X\mapsto Y(X)$的$m\times n$Jacobi矩阵，$J_XF,J_YF$分别表示$F$对两组自变量的偏导矩阵。
 \end{theorem}
 \begin{theorem}{反函数}{}
-    设$F:\Omega\subset\RR^n\to\RR^n$属于$C^1$，$X_0\in\Omega$且$\det J_F(X_0)\neq0$。则$F$在$X_0$附近有$C^1$局部反函数。令$Y=F(X)$，在相应邻域内有
+    设$F:\Omega\subset\RR^n\to\RR^n$属于$\cont^1$，$X_0\in\Omega$且$\det J_F(X_0)\neq0$。则$F$在$X_0$附近有$\cont^1$局部反函数。令$Y=F(X)$，在相应邻域内有
     \[
-        J_{F^{-1}}(Y)=\bigb{J_F(F^{-1}(Y))}^{-1}=\bigb{J_F(X)}^{-1}.
+        J_{F\inv}(Y)=\bigb{J_F(F\inv(Y))}\inv=\bigb{J_F(X)}\inv.
     \]
     Jacobi行列式非零保证的是局部可逆，不自动保证全局一一对应。
 \end{theorem}
 \begin{example}{二阶偏导数举例}{}
-    设$f\in C^2$，$f_z\neq0$，由$f(x,y,z)=0$局部确定$z=z(x,y)$。求导得到
+    设$f\in \cont^2$，$f_z\neq0$，由$f(x,y,z)=0$局部确定$z=z(x,y)$。求导得到
     \[
         z_x=-\frac{f_x}{f_z},\qquad z_y=-\frac{f_y}{f_z}.
     \]
@@ -154,7 +154,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
     右侧的$f$及其偏导均在$(x,y,z(x,y))$处取值。
 \end{example}
 \section{法与切}
-给定非零向量$\vec v=[a,b,c]\tp$与点$P_0(x_0,y_0,z_0)$，可以确定
+给定非零向量$\bm v=[a,b,c]\transp$与点$P_0(x_0,y_0,z_0)$，可以确定
 \begin{align*}
 	\text{线}:   & \qquad \frac{x-x_0}a=\frac{y-y_0}b=\frac{z-z_0}c \\
 	\text{平面}: & \qquad a(x-x_0)+b(y-y_0)+c(z-z_0)=0
@@ -190,10 +190,10 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 	\end{vmatrix}.
 \end{gather*}
 \paragraph{曲面的法线和切平面}
-以下函数至少属于$C^1$；参数曲面要求两个切向量线性无关，隐式曲面要求$\nabla f(P_0)\neq\bm0$。
+以下函数至少属于$\cont^1$；参数曲面要求两个切向量线性无关，隐式曲面要求$\grad f(P_0)\neq\bm0$。
 \subparagraph{显函数}
 \[
-	z=f(x,y)\implies\vec v=\Bigb{\pv fx,\pv fy,-1}_{(x_0,y_0)}.
+	z=f(x,y)\implies\bm v=\Bigb{\pv fx,\pv fy,-1}_{(x_0,y_0)}.
 \]
 \subparagraph{参数方程}
 \begin{align*}
@@ -202,14 +202,14 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 		y=f_2(u,v) \\
 		z=f_3(u,v)
 	\end{cases}
-	\implies\vec v=\biggb{\frac{D(f_2,f_3)}{D(u,v)},\frac{D(f_3,f_1)}{D(u,v)},\frac{D(f_1,f_2)}{D(u,v)}}_{(u_0,v_0)}.
+	\implies\bm v=\biggb{\frac{D(f_2,f_3)}{D(u,v)},\frac{D(f_3,f_1)}{D(u,v)},\frac{D(f_1,f_2)}{D(u,v)}}_{(u_0,v_0)}.
 \end{align*}
 \subparagraph{隐函数}
 \[
-	f(x,y,z)=0\implies\vec v=\Bigb{\pv fx,\pv fy,\pv fz}_{P_0}=\nabla f(P_0).
+	f(x,y,z)=0\implies\bm v=\Bigb{\pv fx,\pv fy,\pv fz}_{P_0}=\grad f(P_0).
 \]
 \paragraph{曲线的法平面和切线}
-参数曲线要求$\bm r'(t_0)\neq\bm0$；两曲面交线要求$\nabla F_1(P_0),\nabla F_2(P_0)$线性无关。以下向量为曲线的切向量，也是法平面的法向量。
+参数曲线要求$\bm r'(t_0)\neq\bm0$；两曲面交线要求$\grad F_1(P_0),\grad F_2(P_0)$线性无关。以下向量为曲线的切向量，也是法平面的法向量。
 \subparagraph{参数}
 \begin{align*}
 	\begin{cases}
@@ -217,7 +217,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 		y=y(t) \\[-1ex]
 		z=z(t)
 	\end{cases}
-	\implies\vec v=[x'(t),y'(t),z'(t)].
+	\implies\bm v=[x'(t),y'(t),z'(t)].
 \end{align*}
 \subparagraph{隐函数}
 \begin{align*}
@@ -225,7 +225,7 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 		F_1(x,y,z)=0 \\
 		F_2(x,y,z)=0
 	\end{cases}
-	\implies\vec v=\biggb{\frac{D(F_1,F_2)}{D(y,z)},\frac{D(F_1,F_2)}{D(z,x)},\frac{D(F_1,F_2)}{D(x,y)}}_{P_0}
+	\implies\bm v=\biggb{\frac{D(F_1,F_2)}{D(y,z)},\frac{D(F_1,F_2)}{D(z,x)},\frac{D(F_1,F_2)}{D(x,y)}}_{P_0}
 \end{align*}
 \section{Taylor公式}
 \begin{definition}{Hesse矩阵}{}
@@ -241,23 +241,23 @@ $\color{gray}\text{例：}\pv{f(x,y,x^2)}x=\p_1f(x,y,x^2)+2x\,\p_3f(x,y,x^2)$
 	\end{align*}
 \end{definition}
 \paragraph{带Lagrange余项的1阶Taylor公式}
-设$f\in C^2$于包含线段$[X_0,X]$的开邻域，$\Delta X=X-X_0$。则$\exists\theta\in(0,1)$，记$X_\theta:=X_0+\theta\Delta X$，有
+设$f\in \cont^2$于包含线段$[X_0,X]$的开邻域，$\Delta X=X-X_0$。则$\exists\theta\in(0,1)$，记$X_\theta:=X_0+\theta\Delta X$，有
 \begin{align}
-	f(X)=f(X_0)+J_f(X_0)\Delta X+\frac12\Delta X\tp H_f(X_\theta)\Delta X.
+	f(X)=f(X_0)+J_f(X_0)\Delta X+\frac12\Delta X\transp H_f(X_\theta)\Delta X.
 \end{align}
 \paragraph{带Peano余项的2阶Taylor公式}
-设$f$在$X_0$附近属于$C^2$，则
+设$f$在$X_0$附近属于$\cont^2$，则
 \begin{align}
-	f(X)=f(X_0)+J_f(X_0)\Delta X+\frac12\Delta X\tp H_f(X_0)\Delta X+\alpha(\Delta X).
+	f(X)=f(X_0)+J_f(X_0)\Delta X+\frac12\Delta X\transp H_f(X_0)\Delta X+\alpha(\Delta X).
 \end{align}
-此处$\alpha(\Delta X)=\frac12\Delta X\tp\bigb{H_f(X_0+\theta\Delta X)-H_f(X_0)}\Delta X=o(\norm{\Delta X}^2)$，$\Delta X\to0$。
+此处$\alpha(\Delta X)=\frac12\Delta X\transp\bigb{H_f(X_0+\theta\Delta X)-H_f(X_0)}\Delta X=o(\norm{\Delta X}^2)$，$\Delta X\to0$。
 \paragraph{$m$阶Taylor公式}
-记$D_{\Delta X}:=\sum_{i=1}^n\Delta x_i\p_{x_i}$；求导时$\Delta X$视为常向量，先对函数求导，再在指定点取值。若$f\in C^{m+1}$于包含线段$[X_0,X]$的开邻域，则
+记$D_{\Delta X}:=\sum_{i=1}^n\Delta x_i\p_{x_i}$；求导时$\Delta X$视为常向量，先对函数求导，再在指定点取值。若$f\in \cont^{m+1}$于包含线段$[X_0,X]$的开邻域，则
 \[
     f(X)=\sum_{k=0}^m\frac{D_{\Delta X}^kf(X_0)}{k!}
     +\frac{D_{\Delta X}^{m+1}f(X_\theta)}{(m+1)!},\qquad0<\theta<1.
 \]
-若只假定$f$在$X_0$附近属于$C^m$，则有Peano形式
+若只假定$f$在$X_0$附近属于$\cont^m$，则有Peano形式
 \[
     f(X)=\sum_{k=0}^m\frac{D_{\Delta X}^kf(X_0)}{k!}+o(\norm{\Delta X}^m).
 \]
@@ -286,7 +286,7 @@ $\color{gray}\text{最后换回来：}\Delta x=x-x_0,\Delta y=y-y_0$
 	判断正负定方法：(1)顺序主子式; (2)特征值。半正定或半负定时此判据不能决定是否有极值，还需考察高阶项或沿不同路径的变化。
 \end{theorem}
 \begin{theorem}{Lagrange乘数法}{}
-	设$f,\varphi_1,\ldots,\varphi_{n-k}$均属于$C^1$，约束梯度在候选点$X_0$线性无关，从而约束集在该点附近构成$k$维光滑曲面
+	设$f,\varphi_1,\ldots,\varphi_{n-k}$均属于$\cont^1$，约束梯度在候选点$X_0$线性无关，从而约束集在该点附近构成$k$维光滑曲面
 	\[
 		S=\set X{\varphi_i(X)=0,i=1,2,\ldots,n-k}.
 	\]

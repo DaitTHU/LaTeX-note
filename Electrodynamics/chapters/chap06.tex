@@ -11,7 +11,7 @@
 % 当没有源存在时，无限介质中的Maxwell方程组是：
 % \begin{alignat*}{2}
 %     \div\bm D&=0,&\qquad\curl\bm E+\pv{\bm B}t&=\bm 0,\\
-%     \div\bm B&=0,&\curl\bm H-\pv{\bm D}t&=\bm 0.    
+%     \div\bm B&=0,&\curl\bm H-\pv{\bm D}t&=\bm 0.
 % \end{alignat*}
 
 考虑无源介质($\rho=0,\;\bm J=\bm 0$)，并假设场是随时间简谐的($\e^{-\i\omega t}$)，Maxwell方程为
@@ -31,7 +31,7 @@
 %进一步假设没有色散，即$\varepsilon,\mu$是不随时间变化的正实数(无损耗)，可以得到
 可以推出，$\bm E,\bm H$均满足如下的Helmholtz波动方程：
 \begin{equation}
-    (\lapla+k^2)\begin{Bmatrix}
+    (\laplacian+k^2)\begin{Bmatrix}
         \bm E\\\bm H
     \end{Bmatrix}=0,
 \end{equation}
@@ -44,7 +44,7 @@ Helmholtz方程的一个解是沿$z$方向传播的平面波$\e^{\i(kz-\omega t)
 相位为$\varphi=kz-\omega t$，等相位面移动的速度称为
 相速度(phase velocity)：
 \begin{equation}
-    v_\varphi:=\frac{\omega}k=\frac1{\sqrt{\mu\varepsilon}}=\frac{c}{\sqrt{\mu_\r\varepsilon_\r}}.
+    v_\varphi:=\frac{\omega}k=\frac1{\sqrt{\mu\varepsilon}}=\frac{c}{\sqrt{\mu_\relative\varepsilon_\relative}}.
 \end{equation}
 % 对于非色散介质，$\varepsilon,\mu$与频率无关，有通解
 % \[
@@ -65,7 +65,7 @@ Helmholtz方程的一个解是沿$z$方向传播的平面波$\e^{\i(kz-\omega t)
     无源Maxwell方程组与下列方程组等价
     \begin{subequations}
         \begin{align}
-            \lapla\bm E+k^2\bm E&=\bm 0,\\
+            \laplacian\bm E+k^2\bm E&=\bm 0,\\
             \div\bm E&=0,\\
             \curl\bm E&=\i\omega\bm B.
         \end{align}
@@ -101,11 +101,11 @@ $\uvec\epsilon_1,\uvec\epsilon_2$称为极化矢量(polarization vector)。
 能流的时间平均%单位时间流过单位面积的能量
 由复Poynting矢量的实部给出：
 \begin{equation}
-    \bm S=\frac12\bm E\times\bm H\cj=\frac12\sqrt{\frac\varepsilon\mu}\abs{\bm E_0}^2\uvec n.
+    \bm S=\frac12\bm E\times\bm H\conj=\frac12\sqrt{\frac\varepsilon\mu}\abs{\bm E_0}^2\uvec n.
 \end{equation}
 相应地，电磁场能量密度的时间平均为
 \begin{equation}
-    u=\frac14\biggp{\varepsilon\bm E\cdot\bm E\cj+\frac1\mu\bm B\cdot\bm B\cj}=\frac\varepsilon 2\abs{\bm E_0}^2.
+    u=\frac14\biggp{\varepsilon\bm E\cdot\bm E\conj+\frac1\mu\bm B\cdot\bm B\conj}=\frac\varepsilon 2\abs{\bm E_0}^2.
 \end{equation}
 因此，对于实波矢的平面横波，能流的速度等于相速度：$\abs{\bm S}/u=v_\varphi$。
 
@@ -140,17 +140,17 @@ $\uvec\epsilon_1,\uvec\epsilon_2$称为极化矢量(polarization vector)。
 振幅$E_1,E_2$是复数，$E_2$相对$E_1$的相位差为$\delta$。
 % 因为$t$的起始点是任意的，不妨令$E_1$是实数，则$E_2=\abs{E_2}\e^{\i\delta}$。
 % \[
-%     E_1=a_1\e^{\i\vd_1},\quad E_2=a_2\e^{\i\vd_2}.
+%     E_1=a_1\e^{\i\delta_1},\quad E_2=a_2\e^{\i\delta_2}.
 % \]
 % 若选定$(\uvec n,\uvec\epsilon_1,\uvec\epsilon_2)=(\uvec z,\uvec x,\uvec y)$，取实部得到
 % \begin{align*}
-%     E_x&=a_1\cos(kz-\omega t+\vd_1),\\
-%     E_y&=a_2\cos(kz-\omega t+\vd_2).
+%     E_x&=a_1\cos(kz-\omega t+\delta_1),\\
+%     E_y&=a_2\cos(kz-\omega t+\delta_2).
 % \end{align*}
 
 \paragraph{线偏振}
 
-若$E_1,E_2$同相($\vd=0,180\degree$)，则$\bm E$是线偏振的(linear polarized)。%$\bm E$与$\uvec\epsilon_1$的夹角是不变的，
+若$E_1,E_2$同相($\delta=0,\ang{180}$)，则$\bm E$是线偏振的(linear polarized)。%$\bm E$与$\uvec\epsilon_1$的夹角是不变的，
 %在$\uvec\epsilon_1,\uvec\epsilon_2$坐标系中，
 如\figref{fig:linear polarization}，
 $\bm E$的终点在一条直线(图中虚线)上简谐运动。
@@ -164,7 +164,7 @@ $\bm E$的终点在一条直线(图中虚线)上简谐运动。
 
 \paragraph{圆偏振}
 
-若$E_1,E_2$不同相，但幅值相同($\abs{E_1}=\abs{E_2}$)且相位差$\delta=\pm 90\degree$，则
+若$E_1,E_2$不同相，但幅值相同($\abs{E_1}=\abs{E_2}$)且相位差$\delta=\pm \ang{90}$，则
 $\bm E$是圆偏振的(circular polarized)，可以写成
 \[
     \bm E=E_1(\uvec\epsilon_1\pm\i\uvec\epsilon_2)\e^{\i(\bm k\cdot\bm r-\omega t)},
@@ -173,7 +173,7 @@ $\bm E$是圆偏振的(circular polarized)，可以写成
 \begin{center}
     \tikzfigure{circular-polarization}
     \includegraphics[width=0.5\linewidth]{figures/polarization_circ.pdf}
-	\captionof{figure}{圆偏振($\delta=+90\degree$)}
+	\captionof{figure}{圆偏振($\delta=+\ang{90}$)}
     \label{fig:circular polarization}
 \end{center}
 依此定义圆偏振基：
@@ -218,7 +218,7 @@ $\bm E$是圆偏振的(circular polarized)，可以写成
 
 我们如何从观察光束的细节来确定偏振的状态？对于一束光来说，
 \[
-    \uvec\epsilon_1\cdot\bm E,\quad\uvec\epsilon_2\cdot\bm E;\quad\uvec\epsilon_+\cj\cdot\bm E,\quad\uvec\epsilon_-\cj\cdot\bm E,
+    \uvec\epsilon_1\cdot\bm E,\quad\uvec\epsilon_2\cdot\bm E;\quad\uvec\epsilon_+\conj\cdot\bm E,\quad\uvec\epsilon_-\conj\cdot\bm E,
 \]
 分别是沿$\uvec\epsilon_{1,2}$方向线偏振的、左旋和右旋圆偏振的振幅。这些振幅的平方给出了各类偏振强度的一种测量。%为体现幅值和相位因素，记
 %我们给出相对于线偏振基和相对于圆偏振基的斯托克斯参数的定义，把这些参数用投影振幅(7.25)来表示，并且还直接用诸分量的幅值和相对位相来表示.为了达到后一目的，我们把(7.19)和(7.24)中的各标量系数定义为一
@@ -230,17 +230,17 @@ $\bm E$是圆偏振的(circular polarized)，可以写成
         \begin{align}
             s_0&=\abs{\uvec\epsilon_1\cdot\bm E}^2+\abs{\uvec\epsilon_2\cdot\bm E}^2=\abs{E_1}^2+\abs{E_2}^2,\\
             s_1&=\abs{\uvec\epsilon_1\cdot\bm E}^2-\abs{\uvec\epsilon_2\cdot\bm E}^2=\abs{E_1}^2-\abs{E_2}^2,\\
-            s_2&=2\Re\bigb{(\uvec\epsilon_1\cdot\bm E)\cj(\uvec\epsilon_2\cdot\bm E)}=2\abs{E_1}\abs{E_2}\cos\delta,\\
-            s_3&=2\Im\bigb{(\uvec\epsilon_1\cdot\bm E)\cj(\uvec\epsilon_2\cdot\bm E)}=2\abs{E_1}\abs{E_2}\sin\delta;
+            s_2&=2\Re\bigb{(\uvec\epsilon_1\cdot\bm E)\conj(\uvec\epsilon_2\cdot\bm E)}=2\abs{E_1}\abs{E_2}\cos\delta,\\
+            s_3&=2\Im\bigb{(\uvec\epsilon_1\cdot\bm E)\conj(\uvec\epsilon_2\cdot\bm E)}=2\abs{E_1}\abs{E_2}\sin\delta;
         \end{align}
     \end{subequations}
     在圆偏振基$\uvec\epsilon_\pm$下，Stokes参数表示为
     \begin{subequations}
         \begin{align}
-            s_0&=\abs{\uvec\epsilon_+\cj\cdot\bm E}^2+\abs{\uvec\epsilon_-\cj\cdot\bm E}^2=\abs{E_+}^2+\abs{E_-}^2,\\
-            s_1&=2\Re\bigb{(\uvec\epsilon_+\cj\cdot\bm E)\cj(\uvec\epsilon_-\cj\cdot\bm E)}=2\abs{E_+}\abs{E_-}\cos\alpha,\\
-            s_2&=2\Im\bigb{(\uvec\epsilon_+\cj\cdot\bm E)\cj(\uvec\epsilon_-\cj\cdot\bm E)}=2\abs{E_+}\abs{E_-}\sin\alpha,\\
-            s_3&=\abs{\uvec\epsilon_+\cj\cdot\bm E}^2-\abs{\uvec\epsilon_-\cj\cdot\bm E}^2=\abs{E_+}^2-\abs{E_-}^2.
+            s_0&=\abs{\uvec\epsilon_+\conj\cdot\bm E}^2+\abs{\uvec\epsilon_-\conj\cdot\bm E}^2=\abs{E_+}^2+\abs{E_-}^2,\\
+            s_1&=2\Re\bigb{(\uvec\epsilon_+\conj\cdot\bm E)\conj(\uvec\epsilon_-\conj\cdot\bm E)}=2\abs{E_+}\abs{E_-}\cos\alpha,\\
+            s_2&=2\Im\bigb{(\uvec\epsilon_+\conj\cdot\bm E)\conj(\uvec\epsilon_-\conj\cdot\bm E)}=2\abs{E_+}\abs{E_-}\sin\alpha,\\
+            s_3&=\abs{\uvec\epsilon_+\conj\cdot\bm E}^2-\abs{\uvec\epsilon_-\conj\cdot\bm E}^2=\abs{E_+}^2-\abs{E_-}^2.
         \end{align}
     \end{subequations}
 \end{definition}
@@ -259,7 +259,7 @@ $\bm E$是圆偏振的(circular polarized)，可以写成
         偏振 & 取向 & Stokes参数\\
         \midrule
         \multirow{2}{*}{线偏振} & 水平(horizontal)和垂直(vertical) & $[1\enspace\pm1\enspace0\enspace0]$ \\
-         & $\pm 45\degree$ & $[1\enspace0\enspace\pm1\enspace0]$ \\
+         & $\pm \ang{45}$ & $[1\enspace0\enspace\pm1\enspace0]$ \\
         圆偏振 & 右旋和左旋 & $[1\enspace0\enspace0\enspace\pm1]$ \\
         \bottomrule
     \end{tabular}
@@ -267,10 +267,10 @@ $\bm E$是圆偏振的(circular polarized)，可以写成
 \end{table}
 
 现实中，即使是%目前应用的
-单色性(monochromatic)很好的辐射波束也是由有限波列(finite wave trains)叠加成的，因而根据Fourier定理，它包含一个频率范围，即不完全是单色的。%一种看法认为$a_i,\vd_i$随时间变化缓慢，
+单色性(monochromatic)很好的辐射波束也是由有限波列(finite wave trains)叠加成的，因而根据Fourier定理，它包含一个频率范围，即不完全是单色的。%一种看法认为$a_i,\delta_i$随时间变化缓慢，
 这时可观测的Stokes参数就是在一个较长时间尺度上的平均，比如：
 \[
-    s_2=2\ave{a_1a_2\cos(\vd_2-\vd_1)},
+    s_2=2\ave{a_1a_2\cos(\delta_2-\delta_1)},
 \]
 求平均的结果是：准单色波束的Stokes参数满足不等式：
 \[
@@ -282,9 +282,9 @@ $\bm E$是圆偏振的(circular polarized)，可以写成
 \]
 
 \begin{definition}{偏振度}{}
-    定义偏振度是总光强$I\tot$中椭圆偏振的成分$I_\text{elp}$占比：
+    定义偏振度是总光强$I_\tot$中椭圆偏振的成分$I_\text{elp}$占比：
     \[
-        P:=\frac{I_\text{elp}}{I\tot}=\frac{\sqrt{s_1^2+s_2^2+s_3^2}}{s_0},
+        P:=\frac{I_\text{elp}}{I_\tot}=\frac{\sqrt{s_1^2+s_2^2+s_3^2}}{s_0},
     \]
     显然$0\leqslant P\leqslant 1$，
 \end{definition}
@@ -323,16 +323,16 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
 由此可以利用线偏振器和1/4波片，通过测量4次出射光强来得到4个Stokes参数：
 \begin{compactitem}
 	\item 线偏振器$\theta=0$：$I(0,0)=(s_0+s_1)/2;$
-    \item 线偏振器$\theta=90\degree$：$I(90\degree,0)=(s_0-s_1)/2;$
-    \item 线偏振器$\theta=45\degree$：$I(45\degree,0)=(s_0+s_2)/2;$
-    \item 线偏振器$\theta=45\degree+1/4$波片：$I(45\degree,45\degree)=(s_0-s_3)/2.$
+    \item 线偏振器$\theta=\ang{90}$：$I(\ang{90},0)=(s_0-s_1)/2;$
+    \item 线偏振器$\theta=\ang{45}$：$I(\ang{45},0)=(s_0+s_2)/2;$
+    \item 线偏振器$\theta=\ang{45}+1/4$波片：$I(\ang{45},\ang{45})=(s_0-s_3)/2.$
 \end{compactitem}
 
 \begin{example}
     {Stokes参数的应用：蟹状星云辐射的偏振态}{the Crab nebula}
     在天体物理中，
     蟹状星云中的脉冲星发来的可见光频和射频(radiofrequency)辐射可以用Stokes参数描写偏振态。
-    光频辐射显示出微小的线偏振，而$\omega\simeq\SI{2.5e9}{s^{-1}}$的射频辐射有高度的线偏振。但两个频段均没有圆偏振的迹象。
+    光频辐射显示出微小的线偏振，而$\omega\simeq\qty{2.5e9}{\per\second}$的射频辐射有高度的线偏振。但两个频段均没有圆偏振的迹象。
     这类资料有助于阐明这些迷人天体发出辐射的机理。
 \end{example}
 
@@ -347,43 +347,43 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
 
 \paragraph{反射定律和折射定律}
 
-入射波、反射波和透射波的波数分别为$k_\i,k_\r,k_\t$。由前文的结论，边界上电场的切向分量是连续的：
+入射波、反射波和透射波的波数分别为$k_\incident,k_\reflected,k_\transmitted$。由前文的结论，边界上电场的切向分量是连续的：
 \[
-    (\bm E_\i+\bm E_\r-\bm E_\t)\times\uvec n=\bm 0.
+    (\bm E_\incident+\bm E_\reflected-\bm E_\transmitted)\times\uvec n=\bm 0.
 \]
 上式对任意$t$均成立，因此光在任意介质中都具有相同的频率：
 \begin{equation}
     \label{eqn:omegai=omegar=omegat}
-    \omega_\i=\omega_\r=\omega_\t=\omega,
+    \omega_\incident=\omega_\reflected=\omega_\transmitted=\omega,
 \end{equation}
 % 式\eqref{eqn:omegai=omegar=omegat}说明，不论光怎样被散射，都具有相同的频率；
-又上式对于分界面上的任意一点均成立，故$\bm E_\i,\bm E_\r,\bm E_\t$在分界面上任意一点的相位差均相同，故
+又上式对于分界面上的任意一点均成立，故$\bm E_\incident,\bm E_\reflected,\bm E_\transmitted$在分界面上任意一点的相位差均相同，故
 % \[
-%     \bm k_\i\cdot\bm r=\bm k_\r\cdot\bm r+\delta_\r=\bm k_\t\cdot\bm r+\delta_\t.
+%     \bm k_\incident\cdot\bm r=\bm k_\reflected\cdot\bm r+\delta_\reflected=\bm k_\transmitted\cdot\bm r+\delta_\transmitted.
 % \]
 % 从前两项可以得到
 % \[
-%     (\bm k_\i-\bm k_\r)\cdot\bm r=\delta_\r,
+%     (\bm k_\incident-\bm k_\reflected)\cdot\bm r=\delta_\reflected,
 % \]
-% 由内积的投影性质，$\bm r$的终点会扫过一个垂直于$(\bm k_\i-\bm k_\r)$的平面，而$\bm r$的终点正好在分界面上，因此$(\bm k_\i-\bm k_\r)$垂直于分界面：
+% 由内积的投影性质，$\bm r$的终点会扫过一个垂直于$(\bm k_\incident-\bm k_\reflected)$的平面，而$\bm r$的终点正好在分界面上，因此$(\bm k_\incident-\bm k_\reflected)$垂直于分界面：
 % \[
-%     (\bm k_\i-\bm k_\r)\times\uvec n=\bm 0,
+%     (\bm k_\incident-\bm k_\reflected)\times\uvec n=\bm 0,
 % \]
 % 上述关系当然对第三项也适用，因此：
-$\bm k_\i,\bm k_\r,\bm k_\t$三线共面，且三者的切向分量相等：
+$\bm k_\incident,\bm k_\reflected,\bm k_\transmitted$三线共面，且三者的切向分量相等：
 \begin{equation}
-    k_\i\sin\theta_\i=k_\r\sin\theta_\r=k_\t\sin\theta_\t,
+    k_\incident\sin\theta_\incident=k_\reflected\sin\theta_\reflected=k_\transmitted\sin\theta_\transmitted,
 \end{equation}
 
 \begin{theorem}{反射定律}{}
-    入射波与反射波在同一介质中，当然有$k_\i=k_\r$，故入射角$\theta_\i$和反射角$\theta_\r$相等：
+    入射波与反射波在同一介质中，当然有$k_\incident=k_\reflected$，故入射角$\theta_\incident$和反射角$\theta_\reflected$相等：
     \begin{equation}
-        \theta_\i=\theta_\r;
+        \theta_\incident=\theta_\reflected;
     \end{equation}
 \end{theorem}
 入射波与折射波在不同介质中，角度的正弦与波数成反比：
 \[
-    \frac{\sin\theta_\i}{\sin\theta_\t}=\frac{k_\t}{k_\i},
+    \frac{\sin\theta_\incident}{\sin\theta_\transmitted}=\frac{k_\transmitted}{k_\incident},
 \]
 但二者频率相同，对波矢同乘$c/\omega$得到一个无量纲参数：
 \begin{definition}
@@ -394,10 +394,10 @@ $\bm k_\i,\bm k_\r,\bm k_\t$三线共面，且三者的切向分量相等：
     \end{equation}
 \end{definition}
 \begin{theorem}{Snell定律}{Snell's law}
-    入射角$\theta_\i$和折射角$\theta_\t$的正弦与折射率成反比：
+    入射角$\theta_\incident$和折射角$\theta_\transmitted$的正弦与折射率成反比：
     \begin{equation}
         \label{eqn:Snell}
-        n_\i\sin\theta_\i=n_\t\sin\theta_\t.
+        n_\incident\sin\theta_\incident=n_\transmitted\sin\theta_\transmitted.
     \end{equation}
 \end{theorem}
 
@@ -405,7 +405,7 @@ $\bm k_\i,\bm k_\r,\bm k_\t$三线共面，且三者的切向分量相等：
 
 定义振幅的反射系数(reflection coefficient)和透射系数(transmission coefficient)：
 \[
-    r:=\frac{E_\r}{E_\i},\enspace t:=\frac{E_\t}{E_\i}.
+    r:=\frac{E_\reflected}{E_\incident},\enspace t:=\frac{E_\transmitted}{E_\incident}.
 \]
 
 \begin{theorem}
@@ -426,7 +426,7 @@ $\bm k_\i,\bm k_\r,\bm k_\t$三线共面，且三者的切向分量相等：
 \end{theorem}
 
 由边界上：$\bm D$和$\bm B$法向分量连续，$\bm E$和$\bm H$切向分量连续。我们可以求出$r,t$的表达式。
-根据入射面(入射光线与法线确定的平面)与$\bm E_\i$的关系可以分成两种独立情形：
+根据入射面(入射光线与法线确定的平面)与$\bm E_\incident$的关系可以分成两种独立情形：
 \begin{figure}[!htp]
     \centering
     \subcaptionbox{垂直极化波}{\tikzfigure{senkrecht-polarization}}
@@ -436,81 +436,81 @@ $\bm k_\i,\bm k_\r,\bm k_\t$三线共面，且三者的切向分量相等：
 \end{figure}
 % 在应用这些边界条件时，可以考虑线偏振的两种独立情况：
 \begin{compactenum}
-	\item 垂直极化波(senkrecht polarized)：$\bm E_\i$与入射面垂直(即$\bm E_\i$垂直纸面向外)%\footnote{在讨论Fresnel公式之前，我们必须指定$\bm E_\i$的方向。}
+	\item 垂直极化波(senkrecht polarized)：$\bm E_\incident$与入射面垂直(即$\bm E_\incident$垂直纸面向外)%\footnote{在讨论Fresnel公式之前，我们必须指定$\bm E_\incident$的方向。}
 	\begin{align*}
-        E_\i+E_\r&=E_\t,\\
-        H_\i\cos\theta_\i-H_\r\cos\theta_\r&=H_\t\cos\theta_\t,
+        E_\incident+E_\reflected&=E_\transmitted,\\
+        H_\incident\cos\theta_\incident-H_\reflected\cos\theta_\reflected&=H_\transmitted\cos\theta_\transmitted,
     \end{align*}
-    \item 平行极化波(parallel polarized)：$\bm E_\i$与入射面平行(或者说$\bm H_\i$垂直纸面向外)
+    \item 平行极化波(parallel polarized)：$\bm E_\incident$与入射面平行(或者说$\bm H_\incident$垂直纸面向外)
     \begin{align*}
-        E_\i\cos\theta_\i-E_\r\cos\theta_\r&=E_\t\cos\theta_\t,\\
-        H_\i+H_\r&=H_\t,
+        E_\incident\cos\theta_\incident-E_\reflected\cos\theta_\reflected&=E_\transmitted\cos\theta_\transmitted,\\
+        H_\incident+H_\reflected&=H_\transmitted,
     \end{align*}
 \end{compactenum}
-电介质通常满足$\mu_\i=\mu_\r\approx\mu_\t\approx\mu_0$，因此$r,t$的表达式为：
+电介质通常满足$\mu_\incident=\mu_\reflected\approx\mu_\transmitted\approx\mu_0$，因此$r,t$的表达式为：
 \begin{theorem}
     {Fresnel公式}{Fresnel formula}
     对于垂直极化波，$1+r_\perp=t_\perp$：
     \begin{subequations}
         \begin{align}
             \label{eqn:Fresnel rperp}
-            r_\perp&=\frac{n_\i\cos\theta_\i-n_\t\cos\theta_\t}{n_\i\cos\theta_\i+n_\t\cos\theta_\t},\\%=-\frac{\sin(\theta_\i-\theta_\t)}{\sin(\theta_\i+\theta_\t)},\\
+            r_\perp&=\frac{n_\incident\cos\theta_\incident-n_\transmitted\cos\theta_\transmitted}{n_\incident\cos\theta_\incident+n_\transmitted\cos\theta_\transmitted},\\%=-\frac{\sin(\theta_\incident-\theta_\transmitted)}{\sin(\theta_\incident+\theta_\transmitted)},\\
             \label{eqn:Fresnel tperp}
-            t_\perp&=\frac{2n_\i\cos\theta_\i}{n_\i\cos\theta_\i+n_\t\cos\theta_\t};%=\frac{2\sin\theta_\i\sin\theta_\t}{\sin(\theta_\i+\theta_\t)};
+            t_\perp&=\frac{2n_\incident\cos\theta_\incident}{n_\incident\cos\theta_\incident+n_\transmitted\cos\theta_\transmitted};%=\frac{2\sin\theta_\incident\sin\theta_\transmitted}{\sin(\theta_\incident+\theta_\transmitted)};
         \end{align}
     \end{subequations}
-    对于平行极化波，$1+r_\parallel=t_\parallel\cdot n_\t/n_\i$：
+    对于平行极化波，$1+r_\parallel=t_\parallel\cdot n_\transmitted/n_\incident$：
     \begin{subequations}
         \begin{align}
             \label{eqn:Fresnel rpara}
-            r_\parallel&=\frac{n_\t\cos\theta_\i-n_\i\cos\theta_\t}{n_\t\cos\theta_\i+n_\i\cos\theta_\t},\\
+            r_\parallel&=\frac{n_\transmitted\cos\theta_\incident-n_\incident\cos\theta_\transmitted}{n_\transmitted\cos\theta_\incident+n_\incident\cos\theta_\transmitted},\\
             \label{eqn:Fresnel tpara}
-            t_\parallel&=\frac{2n_\i\cos\theta_\i}{n_\t\cos\theta_\i+n_\i\cos\theta_\t}.
+            t_\parallel&=\frac{2n_\incident\cos\theta_\incident}{n_\transmitted\cos\theta_\incident+n_\incident\cos\theta_\transmitted}.
         \end{align}
     \end{subequations}
 \end{theorem}
     
-利用Snell定律\eqref{eqn:Snell}，$r,t$便完全由折射率之比$n_\i/n_\t$与入射角$\theta_\i$决定。
+利用Snell定律\eqref{eqn:Snell}，$r,t$便完全由折射率之比$n_\incident/n_\transmitted$与入射角$\theta_\incident$决定。
 
 \begin{example}
     {Brewster角}{Brewster angle}
-    对于平行极化波，存在一个特殊的入射角$\theta_\i$使得$r_\parallel=0$，%依\eqref{eqn:Fresnel rpara}
+    对于平行极化波，存在一个特殊的入射角$\theta_\incident$使得$r_\parallel=0$，%依\eqref{eqn:Fresnel rpara}
     % \[
-    %     n_\t\cos\theta_\i-n_\i\cos\theta_\t=0,\quad n_\i\sin\theta_\i=n_\t\sin\theta_\t.
-    %     %n_\t^2\cos i_\text B=n_\i\sqrt{n_\t^2-n_\i^2\sin^2 i_\text B},
+    %     n_\transmitted\cos\theta_\incident-n_\incident\cos\theta_\transmitted=0,\quad n_\incident\sin\theta_\incident=n_\transmitted\sin\theta_\transmitted.
+    %     %n_\transmitted^2\cos i_{\mathrm{B}}=n_\incident\sqrt{n_\transmitted^2-n_\incident^2\sin^2 i_{\mathrm{B}}},
     % \]
     称为Brewster角：
     \begin{equation}
         \label{eqn:Brewster}
-        \theta_\text B=\arctan\Bigp{\frac{n_\t}{n_\i}}.
+        \theta_{\mathrm{B}}=\arctan\Bigp{\frac{n_\transmitted}{n_\incident}}.
     \end{equation}
     在Brewster角下，平行极化波可以发生全透射，因此加了偏振镜的相机可以拍出更通透的照片：
     \begin{itemize}
-        \item 空气折射率$n_\i=1$，玻璃的折射率$n_\t=1.5$，得到$\theta_\text B=56.31\degree$；
-        \item 水折射率$n_\t=4/3$，得到$\theta_\text B=53.13\degree$。
+        \item 空气折射率$n_\incident=1$，玻璃的折射率$n_\transmitted=1.5$，得到$\theta_{\mathrm{B}}=\ang{56.31}$；
+        \item 水折射率$n_\transmitted=4/3$，得到$\theta_{\mathrm{B}}=\ang{53.13}$。
     \end{itemize}
     
 \end{example}
 
 \paragraph{全反射}
 
-前面的讨论在绝大程度上只限于外反射($n_\i<n_\t$)，即光疏介质入射光密介质。相反的情况是内反射($n_\i>n_\t$)，这时$\theta_\i<\theta_\t$。
-考虑$\theta_\t\geqslant90\degree$，即光疏介质没有折射光，我们称之为全反射(total internal reflection)，由Snell定律，全反射的临界角
+前面的讨论在绝大程度上只限于外反射($n_\incident<n_\transmitted$)，即光疏介质入射光密介质。相反的情况是内反射($n_\incident>n_\transmitted$)，这时$\theta_\incident<\theta_\transmitted$。
+考虑$\theta_\transmitted\geqslant\ang{90}$，即光疏介质没有折射光，我们称之为全反射(total internal reflection)，由Snell定律，全反射的临界角
 \begin{equation}
     \label{eqn:total reflect}
-    \theta_\c=\arcsin\Bigp{\frac{n_\t}{n_\i}}.
+    \theta_\critical=\arcsin\Bigp{\frac{n_\transmitted}{n_\incident}}.
 \end{equation}
-发生全反射时，$\theta_\i>\theta_\c$，折射角的正弦
+发生全反射时，$\theta_\incident>\theta_\critical$，折射角的正弦
 \[
-    \sin\theta_\t=\frac{n_\i}{n_\t}\sin\theta_\i=\frac{\sin\theta_\i}{\sin\theta_\c}>1,
+    \sin\theta_\transmitted=\frac{n_\incident}{n_\transmitted}\sin\theta_\incident=\frac{\sin\theta_\incident}{\sin\theta_\critical}>1,
 \]
-则$\cos\theta_\t$是纯虚的，
+则$\cos\theta_\transmitted$是纯虚的，
 \[
-    \e^{\i\bm k'\cdot\bm r}=\e^{\i k_\t(x\sin\theta_\t+z\cos\theta_\t)},
+    \e^{\i\bm k'\cdot\bm r}=\e^{\i k_\transmitted(x\sin\theta_\transmitted+z\cos\theta_\transmitted)},
 \]
 此时折射波在光疏介质内仅平行于表面传播，并在垂直方向上呈指数衰减，Poynting矢量的法向分量在时间平均上为0：
 \[
-    \bm S\cdot\uvec n=\frac12\Re[(\bm E\times\bm H\cj)\cdot\uvec n]=\frac1{2\omega\mu'}\Re[(\bm k'\cdot\uvec n)\abs{\bm E'_0}^2]=0.
+    \bm S\cdot\uvec n=\frac12\Re[(\bm E\times\bm H\conj)\cdot\uvec n]=\frac1{2\omega\mu'}\Re[(\bm k'\cdot\uvec n)\abs{\bm E'_0}^2]=0.
 \]
 
 \paragraph{Goos-Haenchen效应}
@@ -518,29 +518,29 @@ $\bm k_\i,\bm k_\r,\bm k_\t$三线共面，且三者的切向分量相等：
 发生全反射时，光疏介质中的
 倏逝波(evanescent wave)在垂直方向上以$\e^{-z/\delta}$衰减，其中
 \[
-    \delta\iv:=k'\sqrt{\sin^2\theta_\i-\sin^2\theta_\c}.
+    \delta\inv:=k'\sqrt{\sin^2\theta_\incident-\sin^2\theta_\critical}.
 \]
 如果有限横向范围内的光束经历全反射，则反射光将相对几何反射光束出现横向偏移。对于线偏振光，偏移的距离称为Goos-Haenchen偏移
 \[
-    D\simeq 2\delta\sin\theta_\i.
+    D\simeq 2\delta\sin\theta_\incident.
 \]
 
 \paragraph{Fresnel菱体}
 
 发生全反射时，
-反射光相对入射光的相位差为$n_\t\cos\theta_\t$，是一个纯虚数，与入射角$\theta_\i$和折射率$n_\i,n_\t$有关，这种相位差可以用来将一种偏振态的光转化为另一种偏振态，Fresnel菱体(rhombus)便是以此为原理，将垂直于表面入射的线偏振光转换为出射的圆偏振光。
+反射光相对入射光的相位差为$n_\transmitted\cos\theta_\transmitted$，是一个纯虚数，与入射角$\theta_\incident$和折射率$n_\incident,n_\transmitted$有关，这种相位差可以用来将一种偏振态的光转化为另一种偏振态，Fresnel菱体(rhombus)便是以此为原理，将垂直于表面入射的线偏振光转换为出射的圆偏振光。
 
 经过复杂的计算，如果要实现此效果，需要满足
 \[
-    \cos^2\theta_\i+\frac{n_\t^2}{n_\i^2}\sin^2\theta_\i-1=\pm\,2(n_\t^2-n_\i^2)\cos\theta_\i^2\sqrt{\frac{n_\t^2}{n_\i^2}\sin^2\theta_\i-1},
+    \cos^2\theta_\incident+\frac{n_\transmitted^2}{n_\incident^2}\sin^2\theta_\incident-1=\pm\,2(n_\transmitted^2-n_\incident^2)\cos\theta_\incident^2\sqrt{\frac{n_\transmitted^2}{n_\incident^2}\sin^2\theta_\incident-1},
 \]
-玻璃的折射率$n=1.5$，因此内反射角位$50.2\degree$或$53.3\degree$即可满足条件。
+玻璃的折射率$n=1.5$，因此内反射角位$\ang{50.2}$或$\ang{53.3}$即可满足条件。
 
 % \paragraph{垂直入射}
-% 如果光是垂直界面入射的，$\theta_\i=\theta_\t=0$，则 
+% 如果光是垂直界面入射的，$\theta_\incident=\theta_\transmitted=0$，则
 % \begin{align*}
-%     r&=\frac{n_\i-n_\t}{n_\i+n_\t},\\
-%     t&=\frac{2n_\i}{n_\i+n_\t}.
+%     r&=\frac{n_\incident-n_\transmitted}{n_\incident+n_\transmitted},\\
+%     t&=\frac{2n_\incident}{n_\incident+n_\transmitted}.
 % \end{align*}
 
 \section{色散}
@@ -553,34 +553,34 @@ $\bm k_\i,\bm k_\r,\bm k_\t$三线共面，且三者的切向分量相等：
 忽略磁场力，
 由谐波力束缚和由电场作用的电荷电子的运动方程为：
 \[
-    -m_\elec\omega_0^2\bm r-m_\elec\gamma\dot{\bm r}-e\bm E=m_\elec\ddot{\bm r}.
+    -m_\electron\omega_0^2\bm r-m_\electron\gamma\dotbm{r}-e\bm E=m_\electron\ddot{\bm r}.
 \]
-$-m_\elec\omega_0^2\bm r$是回复力(restoring force)，$-m_\elec\gamma\dot{\bm r}$是唯象的阻尼力(damping force)。
+$-m_\electron\omega_0^2\bm r$是回复力(restoring force)，$-m_\electron\gamma\dotbm{r}$是唯象的阻尼力(damping force)。
 如果振荡的振幅足够小，便可以计算电子平均位置的电场。场随频率$\omega$的简谐$\e^{-\i\omega t}$变化。
 则由一个电子贡献的偶极矩为：
 \[
-    \bm p=-e\bm r=\frac{e^2}{m_\elec(\omega_0^2-\omega^2-\i\omega\gamma)}\bm E.
+    \bm p=-e\bm r=\frac{e^2}{m_\electron(\omega_0^2-\omega^2-\i\omega\gamma)}\bm E.
 \]
 从微观到宏观，单位体积内有$N$个分子，每个分子有$Z$个电子；我们将分子中的电子分类，第$j$组有$f_j$个特性相同的电子，其结合频率为$\omega_j$，阻尼常数为$\gamma_j$。
-代入$\bm P=\varepsilon_0\chi_\elec\bm E$和$\varepsilon_\r=1+\chi_\elec$得到
+代入$\bm P=\varepsilon_0\chi_\electric\bm E$和$\varepsilon_\relative=1+\chi_\electric$得到
 \begin{equation}
-    \varepsilon_\r(\omega)=1+\frac{Ne^2}{\varepsilon_0m_\elec}\sum_j\frac{f_j}{\omega_j^2-\omega^2-\i\omega\gamma_j},
+    \varepsilon_\relative(\omega)=1+\frac{Ne^2}{\varepsilon_0m_\electron}\sum_j\frac{f_j}{\omega_j^2-\omega^2-\i\omega\gamma_j},
 \end{equation}
 在量子力学中，$f_j,\omega_j,\gamma_j$都有合适的定义，因此上面的方程准确地描述了原子对介电常数的贡献。我们称$f_j$为振子强度(oscillator strength)，$\omega_j$为共振频率(resonant frequency)。
 
 通常$\gamma_j\ll\omega_j$，上式可约化为
 \[
-    \varepsilon_\r(\omega)\simeq 1+\frac{Ne^2}{\varepsilon_0m_\elec}\sum_j\frac{f_j}{\omega_j^2-\omega^2},
+    \varepsilon_\relative(\omega)\simeq 1+\frac{Ne^2}{\varepsilon_0m_\electron}\sum_j\frac{f_j}{\omega_j^2-\omega^2},
 \]
-对于$\omega<\min(\omega_j)$的低频率下，和的贡献是正的，$\varepsilon_\r>1$；随着频率的增加，它将穿过越来越多的$\omega_j$，求和将从正到负，最后$\varepsilon_\r<1$。
+对于$\omega<\min(\omega_j)$的低频率下，和的贡献是正的，$\varepsilon_\relative>1$；随着频率的增加，它将穿过越来越多的$\omega_j$，求和将从正到负，最后$\varepsilon_\relative<1$。
 
 \paragraph{反常色散和共振吸收}
 
 当$\omega$在共振频率$\omega_j$附近时，
 \[
-    \varepsilon_\r(\omega)\simeq 1+\i\frac{Ne^2}{\varepsilon_0m_\elec}\sum_j\frac{f_j}{\omega\gamma_j},
+    \varepsilon_\relative(\omega)\simeq 1+\i\frac{Ne^2}{\varepsilon_0m_\electron}\sum_j\frac{f_j}{\omega\gamma_j},
 \]
-$\varepsilon_\r$的虚部是可观的，由于$\varepsilon_\r$的正虚部表示电磁波向介质中产生的能量耗散，因此$\Im[\varepsilon_\r(\omega)]$较大的区域称为共振吸收(resonant absorption)区域。
+$\varepsilon_\relative$的虚部是可观的，由于$\varepsilon_\relative$的正虚部表示电磁波向介质中产生的能量耗散，因此$\Im[\varepsilon_\relative(\omega)]$较大的区域称为共振吸收(resonant absorption)区域。
 
 回忆\secref{ssec:Poynting in dissipative media}中线性色散介质中的Poynting定律\eqref{eqn:Poynting with loss}，考虑平面波的衰减(attenuation)，波数是一个复数
 \[
@@ -588,22 +588,22 @@ $\varepsilon_\r$的虚部是可观的，由于$\varepsilon_\r$的正虚部表示
 \]
 其中$\alpha$是衰减常数或吸收系数，波的强度随$\e^{-\alpha z}$衰减，且$\alpha\ll\beta$。由
 \[
-    k\simeq\frac\omega c\sqrt{\varepsilon_\r}\implies
+    k\simeq\frac\omega c\sqrt{\varepsilon_\relative}\implies
     \begin{cases}
-        \alpha\simeq\frac{\Im(\varepsilon_\r)}{\Re(\varepsilon_\r)}\beta,\\
-        \beta\simeq\frac\omega c\sqrt{\Re(\varepsilon_\r)}.
+        \alpha\simeq\frac{\Im(\varepsilon_\relative)}{\Re(\varepsilon_\relative)}\beta,\\
+        \beta\simeq\frac\omega c\sqrt{\Re(\varepsilon_\relative)}.
     \end{cases}
 \]
 
 \paragraph{低频表现，电导}
 
-在低频极限$\omega\to0$下，如果每个分子中电子的某些$f_0$是自由的，即$\omega_0=0$，则$\varepsilon_\r$在$\omega=0$处是奇异的。
+在低频极限$\omega\to0$下，如果每个分子中电子的某些$f_0$是自由的，即$\omega_0=0$，则$\varepsilon_\relative$在$\omega=0$处是奇异的。
 
 如果自由电子的贡献被分别显示出来，
 \[
-    \varepsilon(\omega)=\varepsilon_\text b(\omega)+\i\frac{Ne^2f_0}{m_\elec\omega(\gamma_0-\i\omega)},
+    \varepsilon(\omega)=\varepsilon_{\mathrm{b}}(\omega)+\i\frac{Ne^2f_0}{m_\electron\omega(\gamma_0-\i\omega)},
 \]
-其中$\varepsilon_\text b$体现其他偶极子的贡献。
+其中$\varepsilon_{\mathrm{b}}$体现其他偶极子的贡献。
 
 \begin{definition}{电导率}{conductivity}
     引入电导率(conductivity) $\sigma$的概念，体现电流密度与电场强度的关系：
@@ -616,42 +616,42 @@ $\varepsilon_\r$的虚部是可观的，由于$\varepsilon_\r$的正虚部表示
 \[
     \curl\bm H=\sigma\bm E-\i\omega\bm D.
 \]
-而$\bm D=\varepsilon_\text b\bm E$，
+而$\bm D=\varepsilon_{\mathrm{b}}\bm E$，
 故电导率也是一个复数：
 \begin{equation}
-    \sigma=\frac{f_0Ne^2}{m_\elec(\gamma-\i\omega)},
+    \sigma=\frac{f_0Ne^2}{m_\electron(\gamma-\i\omega)},
 \end{equation} 
 \begin{example}{铜的电导率}{conductivity of copper}
     铜的参数为
     \begin{align*}
-        N&=\SI{8e28}{/m^3},\\
-        \sigma&=\SI{5.9e7}{/\ohm.m}.
+        N&=\qty{8e28}{\per\metre\cubed},\\
+        \sigma&=\qty{5.9e7}{\per\ohm\per\metre}.
     \end{align*}
-    由此得到$\gamma_0/f_0\simeq\SI{4e13}{s^{-1}}$，而$f_0\sim 1$，因此当$\omega\leqslant\SI{e11}{s^{-1}}$时，铜的导电率是实数，并且与频率无关。
+    由此得到$\gamma_0/f_0\simeq\qty{4e13}{\per\second}$，而$f_0\sim 1$，因此当$\omega\leqslant\qty{e11}{\per\second}$时，铜的导电率是实数，并且与频率无关。
 \end{example}
 
 \paragraph{高频极限，等离子体频率}
 
 在$\omega\gg\max(\omega_j)$的高频下，
 \[
-    \varepsilon_\r(\omega)\simeq 1-\frac{\omega_\text p^2}{\omega^2},
+    \varepsilon_\relative(\omega)\simeq 1-\frac{\omega_{\mathrm{p}}^2}{\omega^2},
 \]
-$\omega_\text p$是介质的等离子体频率(plasma frequency)
+$\omega_{\mathrm{p}}$是介质的等离子体频率(plasma frequency)
 \begin{equation}
-    \omega_\text p^2=\frac{NZe^2}{\varepsilon_0m_\elec},\quad Z=\sum_jf_j.
+    \omega_{\mathrm{p}}^2=\frac{NZe^2}{\varepsilon_0m_\electron},\quad Z=\sum_jf_j.
 \end{equation}
 仅取决于总电子密度$NZ$。
 \begin{example}{地球电离层的短波全反射}{ionisphere}
-    电离层中，电子均是自由的且阻尼可忽略不计。对于$\omega<\omega_\text p$的情形，$\varepsilon_\r\simeq 1-\omega_\text p^2/\omega^2$的关系仍成立，此时
+    电离层中，电子均是自由的且阻尼可忽略不计。对于$\omega<\omega_{\mathrm{p}}$的情形，$\varepsilon_\relative\simeq 1-\omega_{\mathrm{p}}^2/\omega^2$的关系仍成立，此时
     \[
-        ck=\omega\sqrt{\varepsilon_\r}=\sqrt{\omega^2-\omega_\text p^2}.
+        ck=\omega\sqrt{\varepsilon_\relative}=\sqrt{\omega^2-\omega_{\mathrm{p}}^2}.
     \]
     是纯虚的。因此低频电磁波会被电离层反射。
 
-    地球电离层的电子密度$NZ=\SIrange{e18}{e22}{/m^3}$，故等离子体频率$\omega_\text p\simeq\SIrange{6e10}{6e12}{s^{-1}}$，$\omega=0$的衰减常数$\alpha^{-1}=\SIrange{0.2}{2e-3}{cm}$。
+    地球电离层的电子密度$NZ=\qtyrange{e18}{e22}{\per\metre\cubed}$，故等离子体频率$\omega_{\mathrm{p}}\simeq\qtyrange{6e10}{6e12}{\per\second}$，$\omega=0$的衰减常数$\alpha^{-1}=\qtyrange{0.2}{2e-3}{cm}$。
 \end{example}
 \begin{example}{金属的紫外透射现象}{ultraviolet transparency}
-    对于$\omega\ll\omega_\text p$，光被完全反射；当频率$\omega$增加到$\varepsilon_\r(\omega)>0$的区间，金属便突然可以透射光，其反射率变化得很剧烈(drastically)，这称为紫外透射(ultraviolet transparency)现象。
+    对于$\omega\ll\omega_{\mathrm{p}}$，光被完全反射；当频率$\omega$增加到$\varepsilon_\relative(\omega)>0$的区间，金属便突然可以透射光，其反射率变化得很剧烈(drastically)，这称为紫外透射(ultraviolet transparency)现象。
 \end{example}
 
 \paragraph{水的折射率和吸收系数随频率的变化}
@@ -676,19 +676,19 @@ $\omega_\text p$是介质的等离子体频率(plasma frequency)
 \]
 由色散性质，$\omega=\omega(k)$是波数的函数。将标量波表示成Fourier变换的形式
 \[
-    u(x,t)=\frac1{\sqrt{2\pi}}\int\iti A(k)\e^{\i(kx-\omega t)}\d k,
+    u(x,t)=\frac1{\sqrt{2\pi}}\intR A(k)\e^{\i(kx-\omega t)}\d k,
 \]
 $A(k)$描述了不同波的线性叠加的性质，
 \[
-    A(k)=\frac1{\sqrt{2\pi}}\int\iti u(x,0)\e^{-\i kx}\d x,
+    A(k)=\frac1{\sqrt{2\pi}}\intR u(x,0)\e^{-\i kx}\d x,
 \]
-对于一个单色行波，$u(x,0)\sim\e^{\i k_0x}$，则$A(k)=\sqrt{2\pi}\vd(k-k_0)$，从而$u(x,t)=\e^{\i(k_0x-\omega_0t)}$。
+对于一个单色行波，$u(x,0)\sim\e^{\i k_0x}$，则$A(k)=\sqrt{2\pi}\delta(k-k_0)$，从而$u(x,t)=\e^{\i(k_0x-\omega_0t)}$。
 
 \paragraph{有限波列、群速度}
 
-对于一个有限波列(wave train)，$x,k$平均值的均方根偏差$\D x,\D k$满足Fourier带宽(bandwidth)定律
+对于一个有限波列(wave train)，$x,k$平均值的均方根偏差$\Delta x,\Delta k$满足Fourier带宽(bandwidth)定律
 \begin{equation}
-    \D x\D k\geqslant\frac12,
+    \Delta x\Delta k\geqslant\frac12,
 \end{equation}
 如果一个脉冲的波数谱不太广，或者一个介质中的频率对波数的依赖性较弱，则$\omega(k)$可以被展开
 \[
@@ -700,7 +700,7 @@ $A(k)$描述了不同波的线性叠加的性质，
 \]
 除了一个整体的相位因子，脉冲以一种没有失真的(undistorted)速度传播，称为群速度(group velocity)
 \begin{equation}
-    v_\text g:=\biggeval{\dv\omega k}_0,
+    v_{\mathrm{g}}:=\biggeval{\dv\omega k}_0,
 \end{equation}
 对于光波，以折射率$n(k)$表示更方便：
 \[
@@ -712,12 +712,12 @@ $A(k)$描述了不同波的线性叠加的性质，
 \]
 群速度
 \[
-    v_\text g=c\biggp{\frac1n-\frac k{n^2}\dv nk}=\frac cn-\frac\omega n\dv n\omega v_\text g,
+    v_{\mathrm{g}}=c\biggp{\frac1n-\frac k{n^2}\dv nk}=\frac cn-\frac\omega n\dv n\omega v_{\mathrm{g}},
 \]
 得到 
 \begin{equation}
     \label{eqn:gruop v}
-    v_\text g=\frac c{\displaystyle n(\omega)+\omega\dv n\omega},
+    v_{\mathrm{g}}=\frac c{\displaystyle n(\omega)+\omega\dv n\omega},
 \end{equation}
 
 \paragraph{群速度可以大于光速吗？}
@@ -728,7 +728,7 @@ $A(k)$描述了不同波的线性叠加的性质，
 
 对满足$\ddot{\hat u}(k,t)+\omega(k)^2\hat u(k,t)=0$的无损线性模型，设初值为$f(x)=u(x,0)$、$g(x)=\dot u(x,0)$，并以$\hat f,\hat g$表示同一归一化约定下的Fourier变换。保留两个时间分支后，解为
 \[
-    u(x,t)=\frac1{\sqrt{2\pi}}\int\iti
+    u(x,t)=\frac1{\sqrt{2\pi}}\intR
     \biggb{\hat f(k)\cos\bigp{\omega(k)t}
     +\hat g(k)\frac{\sin\bigp{\omega(k)t}}{\omega(k)}}\e^{\i kx}\d k.
 \]
@@ -744,7 +744,7 @@ $A(k)$描述了不同波的线性叠加的性质，
     \]
     故演化由
     \[
-        u(x,t)=\frac1{\sqrt{2\pi}}\int\iti\hat f(k)\cos\bigp{\omega(k)t}\e^{\i kx}\d k
+        u(x,t)=\frac1{\sqrt{2\pi}}\intR\hat f(k)\cos\bigp{\omega(k)t}\e^{\i kx}\d k
     \]
     给出。零初速度一般同时激发两个时间分支，不能直接用单个平移波包代替此解。
     \tcblower
@@ -754,7 +754,7 @@ $A(k)$描述了不同波的线性叠加的性质，
     \]
     其中$\omega_\ast$是角频率、$a$是长度，则正频率分支在$k_0$附近的群速度为
     \[
-        v_\text g=\biggeval{\dv\omega k}_{k_0}=\omega_\ast a^2k_0.
+        v_{\mathrm{g}}=\biggeval{\dv\omega k}_{k_0}=\omega_\ast a^2k_0.
     \]
     此式量纲为速度；二阶导数$\omega''(k)=\omega_\ast a^2$还会使窄带波包展宽。
 \end{example}
@@ -776,20 +776,20 @@ $A(k)$描述了不同波的线性叠加的性质，
 \]
 Fourier变换得到
 \[
-    \bm D(\bm r,t)=\frac1{2\pi}\int\iti\varepsilon(\omega)\biggb{\int\iti\bm E(\bm r,t')\e^{\i\omega t'}\d t'}\e^{-\i\omega t}\d\omega,
+    \bm D(\bm r,t)=\frac1{2\pi}\intR\varepsilon(\omega)\biggb{\intR\bm E(\bm r,t')\e^{\i\omega t'}\d t'}\e^{-\i\omega t}\d\omega,
 \]
 假设积分的次序可以交换，可以得到
 \begin{equation}
     \label{eqn:D-E with omega}
-    \bm D(\bm r,t)=\varepsilon_0\biggb{\bm E(\bm r,t)+\int\iti\bm E(\bm r,t-\tau)G(\tau)\d\tau},
+    \bm D(\bm r,t)=\varepsilon_0\biggb{\bm E(\bm r,t)+\intR\bm E(\bm r,t-\tau)G(\tau)\d\tau},
 \end{equation}
 其中 
 \[
-    G(\tau)=\frac1{2\pi}\int\iti\bigb{\varepsilon_\r(\omega)-1}\e^{-\i\omega\tau}\d\omega,
+    G(\tau)=\frac1{2\pi}\intR\bigb{\varepsilon_\relative(\omega)-1}\e^{-\i\omega\tau}\d\omega,
 \]
 因此$t$时刻的$\bm D(\bm r,t)$依赖除$t$以外的电场$\bm E(\bm r,t-\tau)$。若$\varepsilon$是不依赖于$\omega$的，则 
 \[
-    G(\tau)=(\varepsilon_\r-1)\vd(\tau),\quad\bm D(\bm r,t)=\varepsilon\bm E(\bm r,t),
+    G(\tau)=(\varepsilon_\relative-1)\delta(\tau),\quad\bm D(\bm r,t)=\varepsilon\bm E(\bm r,t),
 \]
 $\bm D(\bm r,t)$和$\bm E(\bm r,t)$有瞬时的联系；但如果$\varepsilon(\omega)$随$\omega$变化，则$G(\tau)$在$\tau\neq 0$的一些地方也不会消失。
 
@@ -797,11 +797,11 @@ $\bm D(\bm r,t)$和$\bm E(\bm r,t)$有瞬时的联系；但如果$\varepsilon(\o
 
 假设所有的电子都以一个频率$\omega_0$振荡，则 
 \[
-    \varepsilon_\r(\omega)=1+\frac{\omega_\text p^2}{\omega_0^2-\omega^2-\i\gamma\omega},
+    \varepsilon_\relative(\omega)=1+\frac{\omega_{\mathrm{p}}^2}{\omega_0^2-\omega^2-\i\gamma\omega},
 \]
 即 
 \[
-    G(\tau)=\frac{\omega_\text p^2}{2\pi}\int\iti\frac{\e^{-\i\omega\tau}\d\omega}{\omega_0^2-\omega^2-\i\gamma\omega}.
+    G(\tau)=\frac{\omega_{\mathrm{p}}^2}{2\pi}\intR\frac{\e^{-\i\omega\tau}\d\omega}{\omega_0^2-\omega^2-\i\gamma\omega}.
 \]
 被积函数在$\omega$的下半平面上有两个奇点
 \[
@@ -809,9 +809,9 @@ $\bm D(\bm r,t)$和$\bm E(\bm r,t)$有瞬时的联系；但如果$\varepsilon(\o
 \]
 利用复变函数中对留数的处理，得到
 \[
-    G(\tau)=\omega_\text p^2\frac{\sin\nu_0\tau}{\nu_0}\e^{-\gamma\tau/2},\quad\tau>0.
+    G(\tau)=\omega_{\mathrm{p}}^2\frac{\sin\nu_0\tau}{\nu_0}\e^{-\gamma\tau/2},\quad\tau>0.
 \]
-若没有上述假设，$G(\tau)$也仅仅是上式的线性组合。因此，$\bm D(\bm r,t)$和$\bm E(\bm r,t)$之间连接上的非局域性被限制在$\gamma\iv$的时间内。而$\gamma\iv$的典型值$\SI{e-9}s$。
+若没有上述假设，$G(\tau)$也仅仅是上式的线性组合。因此，$\bm D(\bm r,t)$和$\bm E(\bm r,t)$之间连接上的非局域性被限制在$\gamma\inv$的时间内。而$\gamma\inv$的典型值$\qty{e-9}{\second}$。
 
 上面的方程在时间(而非空间)上是非局部的。
 
@@ -821,43 +821,42 @@ $\tau<0$时$G(\tau)=0$。说明只有在$t$时间之前的电场$\bm E$进入以
 
 假设：空间局域、线性、因果关系，均匀各向同性介质。
 
-\newcommand{\PV}{\mathop{}\!\mathrm{P.V.}}
 
 \paragraph{Kramers-Kronig关系}
-下式假定$\varepsilon_\r(\omega)-1$在复频率上半平面解析、在无穷远充分衰减，且实轴上没有需要另行分离的极点（例如直流电导引起的零频极点）。
+下式假定$\varepsilon_\relative(\omega)-1$在复频率上半平面解析、在无穷远充分衰减，且实轴上没有需要另行分离的极点（例如直流电导引起的零频极点）。
 由Cauchy定理
 \begin{align*}
-    \varepsilon_\r(\omega)-1&=\frac1{2\pi\i}\oint_C\frac{\varepsilon_\r(\omega')-1}{\omega'-\omega}\d\omega'\\
-    &=\frac1{2\pi\i}\lim_{\delta\to0^+}\int\iti\frac{\varepsilon_\r(\omega')-1}{\omega'-\omega-\i\delta}\d\omega'
+    \varepsilon_\relative(\omega)-1&=\frac1{2\pi\i}\oint_C\frac{\varepsilon_\relative(\omega')-1}{\omega'-\omega}\d\omega'\\
+    &=\frac1{2\pi\i}\lim_{\delta\to0^+}\intR\frac{\varepsilon_\relative(\omega')-1}{\omega'-\omega-\i\delta}\d\omega'
 \end{align*}
 由Sokhotski-Plemelj定理
 \[
-    \lim_{\delta\to0^+}\frac1{x\pm\i\delta}=\PV\Bigp{\frac1x}\mp\i\pi\vd(x),
+    \lim_{\delta\to0^+}\frac1{x\pm\i\delta}=\PV\Bigp{\frac1x}\mp\i\pi\delta(x),
 \]
 故
 \[
-    \varepsilon_\r(\omega)=1+\frac1{\pi\i}\PV\int\iti\frac{\varepsilon_\r(\omega')-1}{\omega'-\omega}\d\omega'
+    \varepsilon_\relative(\omega)=1+\frac1{\pi\i}\PV\intR\frac{\varepsilon_\relative(\omega')-1}{\omega'-\omega}\d\omega'
 \]
-由$\Re[\varepsilon_\r(\omega)]$为偶，$\Im[\varepsilon_\r(\omega)]$为奇，得到Kramers-Kronig关系
+由$\Re[\varepsilon_\relative(\omega)]$为偶，$\Im[\varepsilon_\relative(\omega)]$为奇，得到Kramers-Kronig关系
 \begin{equation}
     \begin{aligned}
-        \Re[\varepsilon_\r(\omega)]&=1+\frac1\pi\PV\int\iti\frac{\Im[\varepsilon_\r(\omega')]}{\omega'-\omega}\d\omega'\\
-        \Im[\varepsilon_\r(\omega)]&=-\frac1\pi\mathop{}\!\mathrm{P.V.}\int\iti\frac{\Re[\varepsilon_\r(\omega')]-1}{\omega'-\omega}\d\omega'\\
+        \Re[\varepsilon_\relative(\omega)]&=1+\frac1\pi\PV\intR\frac{\Im[\varepsilon_\relative(\omega')]}{\omega'-\omega}\d\omega'\\
+        \Im[\varepsilon_\relative(\omega)]&=-\frac1\pi\PV\intR\frac{\Re[\varepsilon_\relative(\omega')]-1}{\omega'-\omega}\d\omega'\\
     \end{aligned}
 \end{equation}
 或
 \begin{equation}
     \begin{aligned}
-        \Re[\varepsilon_\r(\omega)]&=1+\frac2\pi\PV\int\zti\frac{\omega'\Im[\varepsilon_\r(\omega')]}{\omega'^2-\omega^2}\d\omega'\\
-        \Im[\varepsilon_\r(\omega)]&=-\frac{2\omega}\pi\PV\int\zti\frac{\Re[\varepsilon_\r(\omega')]-1}{\omega'^2-\omega^2}\d\omega'\\
+        \Re[\varepsilon_\relative(\omega)]&=1+\frac2\pi\PV\intRplus\frac{\omega'\Im[\varepsilon_\relative(\omega')]}{\omega'^2-\omega^2}\d\omega'\\
+        \Im[\varepsilon_\relative(\omega)]&=-\frac{2\omega}\pi\PV\intRplus\frac{\Re[\varepsilon_\relative(\omega')]-1}{\omega'^2-\omega^2}\d\omega'\\
     \end{aligned}
 \end{equation}
 Kramers-Kronig关系将响应函数的实部与虚部联系起来，其物理基础是因果性；具体积分形式还依赖上述解析性、收敛性及奇点处理条件。
 
 对于$\omega=\omega_0$处的一条非常窄的吸收线或吸收带，由
 \begin{align*}
-    \Im[\varepsilon_\r(\omega)]&\simeq\frac{\pi K}{2\omega_0}\vd(\omega-\omega_0)+\cdots\\
-    \Re[\varepsilon_\r(\omega)]&\simeq\bar\varepsilon+\frac K{\omega_0^2-\omega^2},
+    \Im[\varepsilon_\relative(\omega)]&\simeq\frac{\pi K}{2\omega_0}\delta(\omega-\omega_0)+\cdots\\
+    \Re[\varepsilon_\relative(\omega)]&\simeq\bar\varepsilon+\frac K{\omega_0^2-\omega^2},
 \end{align*}
 后略。
 

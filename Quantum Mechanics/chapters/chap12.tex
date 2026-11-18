@@ -54,15 +54,15 @@ $\ket{\bm k}$的动量是$\hbar\bm k$；本章的连续归一化与按动量归�
 \end{equation}
 相位$kr-E_kt/\hbar$恒定的波面向外移动，$f$就是散射振幅(scattering amplitude)，其量纲是长度。
 在直射束以外，探测器只接收出射波。将出射分量$\psi_{\mathrm{sc}}$代入自由粒子的径向概率流
-$j_r=(\hbar/\mu)\Im(\psi_{\mathrm{sc}}^*\partial_r\psi_{\mathrm{sc}})$，得
+$j_r=(\hbar/\mu)\Im(\psi_{\mathrm{sc}}\conj\p_r\psi_{\mathrm{sc}})$，得
 \begin{equation}
-    j_r=\frac{\hbar k}{\mu}|C|^2\frac{|f|^2}{r^2},
+    j_r=\frac{\hbar k}{\mu}\abs{C}^2\frac{\abs{f}^2}{r^2},
     \qquad
-    \frac{j_r r^2\d\Omega}{j_{\incoming}}=|f|^2\d\Omega,
-    \qquad j_{\incoming}=\frac{\hbar k}{\mu}|C|^2 .
+    \frac{j_r r^2\d\Omega}{j_{\incoming}}=\abs{f}^2\d\Omega,
+    \qquad j_{\incoming}=\frac{\hbar k}{\mu}\abs{C}^2 .
 \end{equation}
 分子是穿过探测面的粒子数率，分母是照到靶上的通量密度。
-这就把实验定义的$\d\sigma/\nd\Omega$与理论中的$|f|^2$联系起来。
+这就把实验定义的$\d\sigma/\nd\Omega$与理论中的$\abs{f}^2$联系起来。
 在前向还要考虑入射波与出射波的干涉，后面的光学定理将给出它与总截面的关系。
 
 \section{散射态、预解式与跃迁算符}
@@ -93,7 +93,7 @@ $j_r=(\hbar/\mu)\Im(\psi_{\mathrm{sc}}^*\partial_r\psi_{\mathrm{sc}})$，得
     \end{alignat}
 \end{subequations}
 $\op{\Omega}_{\incoming}$把自由入射态映到相互作用中的态，
-$\op{S}=\op{\Omega}_{\outgoing}^\dagger\op{\Omega}_{\incoming}$则将入射自由标签映到最终出射标签。
+$\op{S}=\op{\Omega}_{\outgoing}\adjoint\op{\Omega}_{\incoming}$则将入射自由标签映到最终出射标签。
 $\ket{\bm k^{(+)}}$表示由$\ket{\bm k}$指定的入射散射态(scattering state)。
 
 令$\op{H}=\op{H}_0+\op{V}$，定义自由预解式
@@ -104,7 +104,7 @@ Lippmann--Schwinger方程写作
 \end{equation}
 它由$(E-\op{H}_0)\ket{\bm k^{(+)}}=\op{V}\ket{\bm k^{(+)}}$配合出射边界条件得到；
 $+\i0$表示先取$E+\i\eta$、$\eta>0$，再令$\eta\to0^+$。
-可从位置表象看出这个符号的作用。记 $R=|\bm x-\bm x'|$，自由预解式在位置表象中的核是一个复值函数，
+可从位置表象看出这个符号的作用。记 $R=\abs{\bm x-\bm x'}$，自由预解式在位置表象中的核是一个复值函数，
 \begin{equation}
     G_0^{(+)}(\bm x,\bm x';E_k)=\mel{\bm x}{\op{G}_0^{(+)}(E_k)}{\bm x'}
     =-\frac{\mu}{2\pi\hbar^2}\frac{\e^{\i kR}}{R}.
@@ -150,12 +150,12 @@ $+\i0$表示先取$E+\i\eta$、$\eta>0$，再令$\eta\to0^+$。
     \begin{alignedat}{1}
         \mel{\bm k'}{\op{S}}{\bm k} &=\delta^{(3)}(\bm k'-\bm k)-2\pi\i\delta(E_{k'}-E_k)\mel{\bm k'}{\op{T}(E_k)}{\bm k},\\
         f(\bm k',\bm k)&=-\frac{4\pi^2\mu}{\hbar^2}\mel{\bm k'}{\op{T}(E_k)}{\bm k},\qquad
-            \frac{\d\sigma}{\nd\Omega}=|f|^2.
+            \frac{\d\sigma}{\nd\Omega}=\abs{f}^2.
         \label{eq:scatnorm}
     \end{alignedat}
 \end{equation}
 最后一式限同一弹性通道；不同通道通常还带末初速度比。
-完整的散射子空间中，概率守恒要求$\op{S}^\dagger \op{S}=\one$。
+完整的散射子空间中，概率守恒要求$\op{S}\adjoint \op{S}=\one$。
 对短程自伴势，合适的入出态极限存在时可构造这些算符；Coulomb长程尾需要修改渐近态。
 
 \section{Born近似}
@@ -172,14 +172,14 @@ $+\i0$表示先取$E+\i\eta$、$\eta>0$，再令$\eta\to0^+$。
 末态数为 $\mathcal V k'^2\d k'\d\Omega/(2\pi)^3$。利用 $E_{k'}=\hbar^2 k'^2/(2\mu)$，
 能量壳积分只选中正根 $k'=k$，给出
 \[
-    \int_0^\infty k'^2\delta(E_{k'}-E_k)\d k'
+    \intRplus k'^2\delta(E_{k'}-E_k)\d k'
     =\frac{k^2}{\hbar^2 k/\mu}=\frac{\mu k}{\hbar^2}.
 \]
 把这些因子按实验定义依次组合，单位立体角内的跃迁率为
 \begin{equation}
     \frac{\d\Gamma}{\nd\Omega}
     =\frac{2\pi}{\hbar}
-        \frac{|\widetilde V(\bm q)|^2}{\mathcal V^2}
+        \frac{\abs{\widetilde V(\bm q)}^2}{\mathcal V^2}
         \frac{\mathcal V}{(2\pi)^3}
         \frac{\mu k}{\hbar^2}.
 \end{equation}
@@ -190,7 +190,7 @@ $+\i0$表示先取$E+\i\eta$、$\eta>0$，再令$\eta\to0^+$。
 将上式除以这个通量，得到截面的Born近似。振幅的符号由前面选定的出射波约定给出。
 \begin{equation}
     \Bigp{\frac{\d\sigma}{\nd\Omega}}_{\Born}
-    =\frac{\mu^2}{4\pi^2\hbar^4}|\widetilde V(\bm q)|^2,\qquad
+    =\frac{\mu^2}{4\pi^2\hbar^4}\abs{\widetilde V(\bm q)}^2,\qquad
     f_{\Born}=-\frac\mu{2\pi\hbar^2}\widetilde V(\bm q).
 \end{equation}
 所有任意量子化体积均消去，$f$有长度量纲。
@@ -215,11 +215,11 @@ $\ket{\bm k}_{\boxnorm}=(2\pi)^{3/2}\ket{\bm k}/\sqrt{\mathcal V}$。
 \end{equation}
 $r^2$的体积因子与势中的$1/r$、角积分中的$1/r$相消，留下
 \begin{equation}
-    \widetilde V(q)=\frac{4\pi g}{q}\int_0^\infty\e^{-r/a}\sin(qr)\d r
+    \widetilde V(q)=\frac{4\pi g}{q}\intRplus\e^{-r/a}\sin(qr)\d r
     =\frac{4\pi g}{q^2+a^{-2}},\qquad q=2k\sin\frac\theta2.
 \end{equation}
 因而$f_{\Born}=-2\mu g/[\hbar^2(q^2+a^{-2})]$。
-低能弱耦合的自然检验参数为$\mu|g|a/\hbar^2\ll1$；更一般应检查Born后项。
+低能弱耦合的自然检验参数为$\mu\abs{g}a/\hbar^2\ll1$；更一般应检查Born后项。
 取 $a\to\infty$ 可得未屏蔽势的 Fourier 变换（取 $q>0$）。构造散射态时还要使用适合 Coulomb 长程尾的渐近边界条件。
 
 \section{分波、幺正性与低能共振}
@@ -256,7 +256,7 @@ $P_\ell$是$\ell$阶Legendre多项式，来自角动量方向基的加法定理�
 \begin{theorem}{光学定理}{qm-optical}
     对短程相互作用，若所有开放通道的总通量守恒，本章的出射波约定给出
     \begin{equation}
-        \sigma_{\total}=\frac{4\pi}{k}\Im f(0).
+        \sigma_\tot=\frac{4\pi}{k}\Im f(0).
     \end{equation}
     左边计入所有末态通道，右边取入射通道的前向弹性散射振幅。
 \end{theorem}
@@ -304,7 +304,7 @@ $a_s$也能从低能径向波认出。有限$a_s$时取$\delta_0$趋零模$\pi$�
 $k\cot\delta_0\to-1/a_s$意味着$\delta_0\simeq-ka_s$。
 在势外且$kr\ll1$时，$\sin(kr+\delta_0)\simeq k(r-a_s)$。
 把这一段近似直线延长到零，其$r$轴截距就是$a_s$；对刚才的硬球，截距恰好为半径$a$。
-$a_s$可正可负，由低能散射决定；当$|a_s|$很大，截面受$4\pi/k^2$幺正上限约束。
+$a_s$可正可负，由低能散射决定；当$\abs{a_s}$很大，截面受$4\pi/k^2$幺正上限约束。
 这比把零能结果$4\pi a_s^2$无限外推更可靠。
 
 \section{一维接触相互作用}
@@ -317,14 +317,14 @@ $a_s$可正可负，由低能散射决定；当$|a_s|$很大，截面受$4\pi/k^
 代入 $\op{T}=\op{V}+\op{V}\op{G}_0\op{T}$，用标量函数 $I(E)$ 记中间动量的积分，得到
 \begin{equation}
     \tau(E)=\frac{g}{1-g I(E)},\qquad
-    I(E)=\int_{-\infty}^{\infty}\frac{\d p}{2\pi\hbar}
+    I(E)=\intR\frac{\d p}{2\pi\hbar}
     \frac1{E-p^2/(2m)+\i0}.
 \end{equation}
 对于$E=\hbar^2k^2/(2m)>0$，留数或主值加$\delta$分解给出$I=-\i m/(\hbar^2k)$。
 
 展开这个积分时，使用
-$(x+\i0)^{-1}=\principalvalue(1/x)-\i\pi\delta(x)$，
-其中 $\principalvalue$ 表示 Cauchy 主值。
+$(x+\i0)^{-1}=\PV(1/x)-\i\pi\delta(x)$，
+其中 $\PV$ 表示 Cauchy 主值。
 正能量下主值部分为零，而
 \begin{equation}
     \delta\Bigp{E-\frac{p^2}{2m}}
@@ -357,7 +357,7 @@ $I=-\i\pi(2m/\hbar k)/(2\pi\hbar)$。
 此时积分没有实轴极点(pole)，直接得到
 \begin{equation}
     I=-\frac{2m}{2\pi\hbar}
-    \int_{-\infty}^{\infty}\frac{\d p}{p^2+\hbar^2\kappa_b^2}
+    \intR\frac{\d p}{p^2+\hbar^2\kappa_b^2}
     =-\frac{m}{\hbar^2\kappa_b}.
 \end{equation}
 
@@ -378,24 +378,24 @@ $I=-\i\pi(2m/\hbar k)/(2\pi\hbar)$。
     要在二阶检验光学定理，就必须保留二阶振幅的虚部。
 
     在自由能量基中，用
-    $(x+\i0)^{-1}=\principalvalue(1/x)-\i\pi\delta(x)$，
+    $(x+\i0)^{-1}=\PV(1/x)-\i\pi\delta(x)$，
     得到前向二阶矩阵元的虚部
     \begin{equation}
         \Im\mel{\bm k}{\op{V}\op{G}_0^{(+)}(E_k)\op{V}}{\bm k}
         =-\pi\int\d^3k'\,
-            |\mel{\bm k'}{\op{V}}{\bm k}|^2\delta(E_k-E_{k'}).
+            \abs{\mel{\bm k'}{\op{V}}{\bm k}}^2\delta(E_k-E_{k'}).
     \end{equation}
     势为自伴保证两侧矩阵元互为共轭。
     对 $k'$ 作能量壳积分得到 $\mu k/\hbar^2$，再将 $\op{T}$ 的壳上矩阵元乘以 $-4\pi^2\mu/\hbar^2$ 换算为振幅，得到
     \begin{equation}
         \Im f^{(2)}(0)
         =\frac{4\pi^3\mu^2k}{\hbar^4}
-            \int|\mel{\bm k'}{\op{V}}{\bm k}|^2\d\Omega.
+            \int\abs{\mel{\bm k'}{\op{V}}{\bm k}}^2\d\Omega.
     \end{equation}
     另一方面，将一级振幅的模平方在全立体角上积分给出
     \[
         \sigma^{(2)}=\frac{16\pi^4\mu^2}{\hbar^4}
-            \int|\mel{\bm k'}{\op{V}}{\bm k}|^2\d\Omega .
+            \int\abs{\mel{\bm k'}{\op{V}}{\bm k}}^2\d\Omega .
     \]
     因而$\Im f^{(2)}(0)=k\sigma^{(2)}/(4\pi)$，
     正是在一致阶数上的光学定理。}

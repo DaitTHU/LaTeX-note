@@ -143,7 +143,7 @@
     由于$R\gg r$，可进行Taylor展开：
     \begin{align}
         \notag
-        \Phi(r,\theta)&=\frac1{4\pi\varepsilon_0}\frac{2Q}{R^2}\biggp{-r\cos\theta+\frac{a^3}{r^2}\cos\theta+\mathcal O\biggp{\frac1R}}\\
+        \Phi(r,\theta)&=\frac1{4\pi\varepsilon_0}\frac{2Q}{R^2}\biggp{-r\cos\theta+\frac{a^3}{r^2}\cos\theta+\bigo\biggp{\frac1R}}\\
         &=-E_0\biggp{r-\frac{a^3}{r^2}}\cos\theta.
     \end{align}
     省略的部分内容随着$R\to\infty$而消失。则导体球的面电荷密度为
@@ -236,14 +236,14 @@
 %     {函数内积}{inner product of funtions}
 %     两个实(复)函数$U(\xi),V(\xi)$在区间$(a,b)$上平方可积，可定义内积为
 %     \begin{equation}
-%         \inp UV:=\int_a^bU\cj(\xi)V(\xi)\rho(\xi)\d\xi.
+%         \inp UV:=\int_a^bU\conj(\xi)V(\xi)\rho(\xi)\d\xi.
 %     \end{equation}
 % \end{definition}
 
 \begin{definition}{正交函数}{orthogonal function}
     一组实(复)函数$U_i(\xi)$在区间$(a,b)$上平方可积，若两两正交(orthogonal)：
     \begin{equation}
-        \int_a^bU_m\cj(\xi)U_n(\xi)\d\xi=\delta_{mn}.
+        \int_a^bU_m\conj(\xi)U_n(\xi)\d\xi=\delta_{mn}.
     \end{equation}
     则称为正交函数。其中$\delta_{mn}$为Kronecker符号。
 \end{definition}
@@ -252,18 +252,18 @@
     {完备正交函数展开}{complete orthogonal function expansion}
     若有一组完备的正交函数集$\{U_i(\xi)\}$，则在区间$(a,b)$上任意平方可积的函数$f(\xi)$均可被展开成正交函数的线性组合
     \[
-        f(\xi)=\sum_{i=1}^\infty a_iU_i(\xi),\quad a_i:=\int_a^bU_i\cj(\xi)f(\xi)\d\xi.
+        f(\xi)=\sum_{i=1}^\infty a_iU_i(\xi),\quad a_i:=\int_a^bU_i\conj(\xi)f(\xi)\d\xi.
     \]
     完备关系(completeness relation)为
     \begin{equation}
-        \sum_{i=1}^\infty U_i\cj(\xi')U_i(\xi)=\delta(\xi'-\xi).
+        \sum_{i=1}^\infty U_i\conj(\xi')U_i(\xi)=\delta(\xi'-\xi).
     \end{equation}
 \end{theorem}
 
 \begin{proof}
     直接代入系数$a_i$
     \[
-        f(\xi)=\int_a^b\biggb{\sum_{i=1}^\infty U_i\cj(\xi')U_i(\xi)}f(\xi')\d\xi'.
+        f(\xi)=\int_a^b\biggb{\sum_{i=1}^\infty U_i\conj(\xi')U_i(\xi)}f(\xi')\d\xi'.
         \qedhere
     \]
 \end{proof}
@@ -305,19 +305,19 @@
     \]
     当$\ell\to\infty$时，
     \[
-        f(x)=\frac1{2\pi}\int\iti\biggb{\int\iti f(x')\e^{-\i kx'}\d x'}\e^{\i kx}\d k.
+        f(x)=\frac1{2\pi}\intR\biggb{\intR f(x')\e^{-\i kx'}\d x'}\e^{\i kx}\d k.
     \]
     由此可得$f(x)$的Fourier变换为
     \begin{equation}
-        \hat f(k)=\frac1{\sqrt{2\pi}}\int\iti f(x)\e^{-\i kx}\d x;
+        \hat f(k)=\frac1{\sqrt{2\pi}}\intR f(x)\e^{-\i kx}\d x;
     \end{equation}
     相应的Fourier反变换为
     \begin{equation}
-        f(x)=\frac1{\sqrt{2\pi}}\int\iti\hat f(k)\e^{\i kx}\d k.
+        f(x)=\frac1{\sqrt{2\pi}}\intR\hat f(k)\e^{\i kx}\d k.
     \end{equation}
     其体现的正交性：
     \[
-        \frac1{2\pi}\int\iti\e^{\i(k-k')x}\d x=\delta(k-k').
+        \frac1{2\pi}\intR\e^{\i(k-k')x}\d x=\delta(k-k').
     \]
 \end{example}
 
@@ -335,7 +335,7 @@
     \end{center}
     直角坐标系下，Laplace方程为
     \[
-        \lapla\Phi=\pv[2]\Phi x+\pv[2]\Phi y+\pv[2]\Phi z=0.
+        \laplacian\Phi=\pv[2]\Phi x+\pv[2]\Phi y+\pv[2]\Phi z=0.
     \]
     分离变量，假定解形如$\Phi(x,y,z)=X(x)Y(y)Z(z)$，代入原方程：
     \[
@@ -386,7 +386,7 @@
     \end{center}
     二维直角坐标Laplace方程为
     \[
-        \lapla\Phi=\pv[2]\Phi x+\pv[2]\Phi y+\cancel{\pv[2]\Phi z}=0,
+        \laplacian\Phi=\pv[2]\Phi x+\pv[2]\Phi y+\cancel{\pv[2]\Phi z}=0,
     \]
     分离变量$\Phi(x,y)=X(x)Y(y)$，由$\Phi$在$x=0,a$处为0可得
     \[
@@ -406,7 +406,7 @@
 \paragraph{二维极坐标}
 二维极坐标Laplace方程为柱坐标Laplace中$z$坐标偏微分为0：
 \begin{equation}
-    \lapla\Phi=\frac1\rho\pp\rho\biggp{\rho\pv\Phi\rho}+\frac1{\rho^2}\pv[2]\Phi\phi+\cancel{\pv[2]\Phi z}%=\pv[2]\Phi\rho+\frac1\rho\pv\Phi\rho+\frac1{\rho^2}\pv[2]\Phi\phi
+    \laplacian\Phi=\frac1\rho\pp\rho\biggp{\rho\pv\Phi\rho}+\frac1{\rho^2}\pv[2]\Phi\phi+\cancel{\pv[2]\Phi z}%=\pv[2]\Phi\rho+\frac1\rho\pv\Phi\rho+\frac1{\rho^2}\pv[2]\Phi\phi
     =0.
 \end{equation}
 分离变量$\Phi(\rho,\phi)=R(\rho)\Psi(\phi)$，得到
@@ -485,7 +485,7 @@
 球坐标系$(r,\theta,\phi)$中Laplace方程可以写成
 \begin{equation}
     \label{eqn:Laplace in spherical}
-    \lapla\Phi=\frac1{r^2}\pp r\biggp{r^2\pv\Phi r}+\frac1{r^2\sin\theta}\pp\theta\biggp{\sin\theta\pv\Phi\theta}+\frac1{r^2\sin^2\theta}\pv[2]\Phi\phi=0.
+    \laplacian\Phi=\frac1{r^2}\pp r\biggp{r^2\pv\Phi r}+\frac1{r^2\sin\theta}\pp\theta\biggp{\sin\theta\pv\Phi\theta}+\frac1{r^2\sin^2\theta}\pv[2]\Phi\phi=0.
 \end{equation}
 分离变量$\Phi(r,\theta,\phi)=R(r)P(\theta)Q(\phi)$，得到 
 \begin{subequations}
@@ -545,8 +545,8 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
     Legendre多项式是正交且完备的
     \begin{subequations}
         \begin{align}
-            \int_{-1}^1P_\ell(x)P_{\ell'}(x)\d x&=\frac2{2\ell+1}\vd_{\ell\ell'},\\
-            \sum_{\ell=0}^\infty P_\ell\cj(x')P_\ell^m(x)&=\delta(x-x').
+            \int_{-1}^1P_\ell(x)P_{\ell'}(x)\d x&=\frac2{2\ell+1}\delta_{\ell\ell'},\\
+            \sum_{\ell=0}^\infty P_\ell\conj(x')P_\ell^m(x)&=\delta(x-x').
         \end{align}
     \end{subequations}
     因此任意$[-1,1]$上的函数$f(x)$均可被展开为Legendre级数
@@ -635,7 +635,7 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
     \]
     表面电荷密度
     \[
-        \sigma_r=-\varepsilon_0E_\theta|_{\theta=\beta}\simeq-\varepsilon_0Ar^{\nu-1}\sin\beta P_\nu'(\cos\beta).
+        \sigma_r=-\varepsilon_0\eval{E_\theta}_{\theta=\beta}\simeq-\varepsilon_0Ar^{\nu-1}\sin\beta P_\nu'(\cos\beta).
     \]
 \end{example}
 
@@ -667,8 +667,8 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
     连带Legendre函数对固定的$m$或固定的$\ell$有以下正交关系；第二式要求$1\leq m,m'\leq\ell$：
     \begin{subequations}
         \begin{align}
-            \int_{-1}^1P_\ell^m(x)P_{\ell'}^m(x)\d x&=\frac2{2\ell+1}\frac{(\ell+m)!}{(\ell-m)!}\vd_{\ell\ell'};\\
-            \int_{-1}^1P_\ell^m(x)P_\ell^{m'}(x)\frac{\d x}{1-x^2}&=\frac1m\frac{(\ell+m)!}{(\ell-m)!}\vd_{mm'}.
+            \int_{-1}^1P_\ell^m(x)P_{\ell'}^m(x)\d x&=\frac2{2\ell+1}\frac{(\ell+m)!}{(\ell-m)!}\delta_{\ell\ell'};\\
+            \int_{-1}^1P_\ell^m(x)P_\ell^{m'}(x)\frac{\d x}{1-x^2}&=\frac1m\frac{(\ell+m)!}{(\ell-m)!}\delta_{mm'}.
         \end{align}
     \end{subequations}
     但不能同时对$\ell$和$m$正交，比如$P_1^1$和$P_2^2$并不正交。
@@ -686,7 +686,7 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
     {球谐函数的正交性和完备性}{}
     球谐函数是正交且完备的：
     \[
-        \oint Y_{\ell m}\cj Y_{\ell'm'}\d\Omega=\int_0^{2\pi}\int_0^\pi Y_{\ell m}\cj(\theta,\phi) Y_{\ell'm'}(\theta,\phi)\sin\theta\d\theta\nd\phi=\delta_{\ell\ell'}\vd_{mm'}.
+        \oint Y_{\ell m}\conj Y_{\ell'm'}\d\Omega=\int_0^{2\pi}\int_0^\pi Y_{\ell m}\conj(\theta,\phi) Y_{\ell'm'}(\theta,\phi)\sin\theta\d\theta\nd\phi=\delta_{\ell\ell'}\delta_{mm'}.
     \]
     \begin{equation}
         \sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell Y_{\ell m}^*(\theta',\phi')Y_{\ell m}(\theta,\phi)=\delta(\phi-\phi')\delta(\cos\theta-\cos\theta').
@@ -700,7 +700,7 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
 由$P_\ell(\cos\gamma)$的球谐函数展开式及\eqref{eqn:1/|r-r'|}，点电荷之间电势的球谐函数展开
 \begin{equation}
     \label{eqn:1/|r-r'|=YY}
-    \frac1{\abs{\bm r-\bm r'}}=\frac{4\pi}{r_>}\sum_{\ell=0}^\infty\biggb{\frac1{2\ell+1}\biggp{\frac{r_<}{r_>}}^\ell\cdot\sum_{m=-\ell}^\ell Y_{\ell m}\cj(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
+    \frac1{\abs{\bm r-\bm r'}}=\frac{4\pi}{r_>}\sum_{\ell=0}^\infty\biggb{\frac1{2\ell+1}\biggp{\frac{r_<}{r_>}}^\ell\cdot\sum_{m=-\ell}^\ell Y_{\ell m}\conj(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
 \end{equation}
 
 \section{柱坐标系中的正交函数}
@@ -764,15 +764,15 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
     由$\phi$的对称性，$\nu=0$；由区域包含$z$轴$\rho=0$，$Y_\nu$项系数为0。
     电势有形式解
     \[
-        \Phi(\rho,z)=\int\zti J_0(k\rho)\bigb{A(k)\cosh(kz)+B(k)\sinh(kz)}\d k.
+        \Phi(\rho,z)=\intRplus J_0(k\rho)\bigb{A(k)\cosh(kz)+B(k)\sinh(kz)}\d k.
     \]
     由边界条件关于$z$奇对称可得$A(k)\equiv 0$，而
     \[
-        \Phi(\rho,d/2)=\int\zti J_0(k\rho)B(k)\sinh(kd/2)\d k=V,\quad 0<\rho<a,
+        \Phi(\rho,d/2)=\intRplus J_0(k\rho)B(k)\sinh(kd/2)\d k=V,\quad 0<\rho<a,
     \]
     注意到
     \[
-        \int\zti J_0(k\rho)\frac{\sin(ka)}k\d k=\begin{cases}
+        \intRplus J_0(k\rho)\frac{\sin(ka)}k\d k=\begin{cases}
             \frac\pi2,&0<\rho<a\\
             \arcsin\Bigp{\frac a\rho},&\rho>a
         \end{cases}
@@ -783,14 +783,14 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
     \]
     最终电势分布为
     \[
-        \Phi(\rho,z)=\frac{2V}{\pi}\int\zti J_0(k\rho)\frac{\sin(ka)}{k\sinh(kd/2)}\sinh(kz)\d k.
+        \Phi(\rho,z)=\frac{2V}{\pi}\intRplus J_0(k\rho)\frac{\sin(ka)}{k\sinh(kd/2)}\sinh(kz)\d k.
     \]
 \end{example}
 
 \begin{theorem}{Bessel函数的正交性}{}
     令$x_{\nu n}$是$J_\nu(x)$的第$n$个零点，则
     \begin{equation}
-        \int_0^1 J_\nu(x_{\nu n}\xi)J_\nu(x_{\nu n'}\xi)\xi\d\xi=\frac12J_{\nu+1}^2(x_{\nu n})\vd_{nn'}.
+        \int_0^1 J_\nu(x_{\nu n}\xi)J_\nu(x_{\nu n'}\xi)\xi\d\xi=\frac12J_{\nu+1}^2(x_{\nu n})\delta_{nn'}.
     \end{equation}
     因此$[0,a]$上且$f(a)=0$的函数$f(\rho)$均可被展开为Bessel级数
     \[
@@ -850,7 +850,7 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
     \notag
     G(\bm r,\bm r')&=\frac1{\abs{\bm r-\bm r'}}-\frac a{r'}\frac1{\abs{\bm r-(a/r')^2\bm r'}}\\
     \label{eqn:Green YY}
-    &=4\pi\sum_{\ell=0}^\infty\biggb{\frac1{2\ell+1}\frac1{r_>^{\ell+1}}\biggp{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\sum_{m=-\ell}^\ell Y_{\ell m}\cj(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
+    &=4\pi\sum_{\ell=0}^\infty\biggb{\frac1{2\ell+1}\frac1{r_>^{\ell+1}}\biggp{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\sum_{m=-\ell}^\ell Y_{\ell m}\conj(\theta',\phi')Y_{\ell m}(\theta,\phi)}.
 \end{align}
 其中$r_>=\max(r,r'),\enspace r_<=\min(r,r')$。%，展开可得
 \iffalse
@@ -867,13 +867,13 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
 
 现在我们从基本原理开始，来系统地构建这种展开。有%Dirichlet势问题的Green函数满足：
 \[
-    \lapla G(\bm r,\bm r')=-4\pi\vd(\bm r-\bm r').
+    \laplacian G(\bm r,\bm r')=-4\pi\delta(\bm r-\bm r').
 \]
-且$G(\bm r,\bm r')|_{r=a}=0$。
+且$\eval{G(\bm r,\bm r')}_{r=a}=0$。
 对于球坐标，$\delta$函数可以写成
 \begin{align*}
-    \delta(\bm r-\bm r')&=\frac1{r^2}\vd(r-r')\vd(\phi-\phi')\vd(\cos\theta-\cos\theta')\\
-    &=\frac1{r^2}\vd(r-r')\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell Y_{\ell m}\cj(\theta',\phi')Y_{\ell m}(\theta,\phi).
+    \delta(\bm r-\bm r')&=\frac1{r^2}\delta(r-r')\delta(\phi-\phi')\delta(\cos\theta-\cos\theta')\\
+    &=\frac1{r^2}\delta(r-r')\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell Y_{\ell m}\conj(\theta',\phi')Y_{\ell m}(\theta,\phi).
 \end{align*}
 将Green函数看做$\bm r$的函数，可以被展开为
 \[
@@ -881,11 +881,11 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
 \]
 由上面三式，可得 
 \[
-    A_{\ell m}(r|r',\theta',\phi')=g_\ell(r,r')Y_{\ell m}\cj(\theta',\phi')
+    A_{\ell m}(r|r',\theta',\phi')=g_\ell(r,r')Y_{\ell m}\conj(\theta',\phi')
 \]
 $g_\ell$满足
 \[
-    \frac1r\dd[2]r\bigp{rg_\ell(r,r')}-\frac{\ell(\ell+1)}{r^2}g_\ell(r,r')=-\frac{4\pi}{r^2}\vd(r-r').
+    \frac1r\dd[2]r\bigp{rg_\ell(r,r')}-\frac{\ell(\ell+1)}{r^2}g_\ell(r,r')=-\frac{4\pi}{r^2}\delta(r-r').
 \]
 当$r\neq r'$，右边$\delta(r-r')=0$，$g_\ell$可被写成
 \[
@@ -900,7 +900,7 @@ $g_\ell$满足
     边界面为半径为$a,b\,(a<b)$的同心球面，
     其Green函数的边界条件为
     \[
-        G(\bm r,\bm r')|_{r=a}=G(\bm r,\bm r')|_{r=b}=0,
+        \eval{G(\bm r,\bm r')}_{r=a}=\eval{G(\bm r,\bm r')}_{r=b}=0,
     \]
     \begin{center}
         \tikzfigure{concentric-spheres-boundary}
@@ -921,7 +921,7 @@ $g_\ell$满足
     \]
     为了确定系数$C$，对$\epsilon\to0$
     \[
-        \int_{r'-\epsilon}^{r'+\epsilon}\biggb{\dd[2]r\bigp{rg_\ell(r,r')}-\frac{\ell(\ell+1)}{r}g_\ell(r,r')}\d r=\int_{r'-\epsilon}^{r'+\epsilon}-\frac{4\pi}r\vd(r-r')\d r.
+        \int_{r'-\epsilon}^{r'+\epsilon}\biggb{\dd[2]r\bigp{rg_\ell(r,r')}-\frac{\ell(\ell+1)}{r}g_\ell(r,r')}\d r=\int_{r'-\epsilon}^{r'+\epsilon}-\frac{4\pi}r\delta(r-r')\d r.
     \]
     即
     \[
@@ -933,7 +933,7 @@ $g_\ell$满足
     \]
     故Green函数的展开
     \begin{equation}
-        G(\bm r,\bm r')=4\pi\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell \frac{Y_{\ell m}\cj(\theta',\phi')Y_{\ell m}(\theta,\phi)}{(2\ell+1)\bigb{1-(a/b)^{2\ell+1}}}\biggp{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\biggp{\frac1{r_>^{\ell+1}}-\frac{r_>^\ell}{b^{2\ell+1}}}.
+        G(\bm r,\bm r')=4\pi\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell \frac{Y_{\ell m}\conj(\theta',\phi')Y_{\ell m}(\theta,\phi)}{(2\ell+1)\bigb{1-(a/b)^{2\ell+1}}}\biggp{r_<^\ell-\frac{a^{2\ell+1}}{r_<^{\ell+1}}}\biggp{\frac1{r_>^{\ell+1}}-\frac{r_>^\ell}{b^{2\ell+1}}}.
     \end{equation}
     \tcblower
     $a\to0,\,b\to\infty$时，变为式\eqref{eqn:1/|r-r'|=YY}
@@ -953,7 +953,7 @@ $g_\ell$满足
     \fi
     环的电荷密度可以写成
     \[
-        \rho(\bm r')=\frac Q{2\pi a^2}\vd(r'-a)\vd(\cos\theta').
+        \rho(\bm r')=\frac Q{2\pi a^2}\delta(r'-a)\delta(\cos\theta').
     \]
     由方位角的对称性，$m=0$，故
     \begin{align*}
@@ -968,16 +968,16 @@ $g_\ell$满足
 
 柱坐标系下，
 \[
-    \lapla G(\bm r,\bm r')=-\frac{4\pi}\rho\vd(\rho-\rho')\vd(\phi-\phi')\vd(z-z').
+    \laplacian G(\bm r,\bm r')=-\frac{4\pi}\rho\delta(\rho-\rho')\delta(\phi-\phi')\delta(z-z').
 \]
 Green函数可以写成
 \[
-    G(\bm r,\bm r')=\frac1{4\pi^2}\sum_{m=-\infty}^\infty\int\iti\e^{\i m(\phi-\phi')}\e^{\i k(z-z')}g_m(k,\rho,\rho')\d k.
+    G(\bm r,\bm r')=\frac1{4\pi^2}\sum_{m=-\infty}^\infty\intR\e^{\i m(\phi-\phi')}\e^{\i k(z-z')}g_m(k,\rho,\rho')\d k.
 \]
 径向Green函数$g_m(k,\rho,\rho')$
 \begin{equation}
     \label{eqn:cylinder green}
-    \frac1\rho\dd\rho\biggp{\rho\dv{g_m}\rho}-\biggp{k^2+\frac{m^2}{\rho^2}}g_m=-\frac{4\pi}\rho\vd(\rho-\rho').
+    \frac1\rho\dd\rho\biggp{\rho\dv{g_m}\rho}-\biggp{k^2+\frac{m^2}{\rho^2}}g_m=-\frac{4\pi}\rho\delta(\rho-\rho').
 \end{equation}
 当$\rho\neq\rho'$时，上式为修正Bessel方程，解为$I_m(k\rho),\,K_m(k\rho)$，由对称性
 \[
@@ -1001,7 +1001,7 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 \]
 故$A=4\pi$，我们得到了$1/\abs{\bm r-\bm r'}$的展开 
 \begin{equation}
-    \frac1{\abs{\bm r-\bm r'}}=\frac1\pi\sum_{m=-\infty}^{+\infty}\int\iti\e^{\i m(\phi-\phi')}\e^{\i k(z-z')}I_m(k\rho_<)K_m(k\rho_>)\d k.
+    \frac1{\abs{\bm r-\bm r'}}=\frac1\pi\sum_{m=-\infty}^{+\infty}\intR\e^{\i m(\phi-\phi')}\e^{\i k(z-z')}I_m(k\rho_<)K_m(k\rho_>)\d k.
 \end{equation}
 
 \subsection{Green函数的本征函数展开式}
@@ -1009,20 +1009,20 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 
 另一种获得Green函数展开式的技术是在一些相关问题上使用本征函数(eigenfunction)。作为说明，我们考虑一个椭圆微分方程的形式
 \begin{equation}
-    \lapla\psi(\bm r)+\bigb{f(\bm r)+\lambda}\psi(\bm r)=0.
+    \laplacian\psi(\bm r)+\bigb{f(\bm r)+\lambda}\psi(\bm r)=0.
 \end{equation}
 为了使本征函数$\psi_n(\bm r)$满足边界条件，$\lambda$必须取一系列本征值$\lambda_n$。
-%\lapla\psi_n(x)+\bigb{f(x)+\lambda_n}\psi_n(x)=0.
+%\laplacian\psi_n(x)+\bigb{f(x)+\lambda_n}\psi_n(x)=0.
 
 本征函数是正交的：
 \[
-    \int_V\psi_m\cj(\bm r)\psi_n(\bm r)\d V=\vd_{mn}.
+    \int_V\psi_m\conj(\bm r)\psi_n(\bm r)\d V=\delta_{mn}.
 \]
 本征值$\lambda$的谱可以是离散集，也可以是连续集，或者两者兼而有之。我们假定所有本征函数构成一个完备集。
 
 现在我们希望找到Green函数的方程:
 \begin{equation}
-    \lapla G(\bm r,\bm r')+\bigb{f(\bm r)+\lambda}G(\bm r,\bm r')=-4\pi\vd(\bm r,\bm r'),
+    \laplacian G(\bm r,\bm r')+\bigb{f(\bm r)+\lambda}G(\bm r,\bm r')=-4\pi\delta(\bm r,\bm r'),
 \end{equation}
 若Green函数与的本征函数$\psi_n(\bm r)$具有相同的边界条件，则可将Green函数展开为一系列本征函数的形式:
 \[
@@ -1030,25 +1030,25 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 \]
 代入得
 \[
-    \sum_n a_n(\bm r')(\lambda-\lambda_n)\psi_n=-4\pi\vd(\bm r,\bm r'),
+    \sum_n a_n(\bm r')(\lambda-\lambda_n)\psi_n=-4\pi\delta(\bm r,\bm r'),
 \]
 因此系数为
 \[
-    a_n(\bm r')=\frac{4\pi}{\lambda_n-\lambda}\int_V\psi_n\cj(\bm r)\vd(\bm r,\bm r')\d V=4\pi\frac{\psi_n\cj(\bm r')}{\lambda_n-\lambda}.
+    a_n(\bm r')=\frac{4\pi}{\lambda_n-\lambda}\int_V\psi_n\conj(\bm r)\delta(\bm r,\bm r')\d V=4\pi\frac{\psi_n\conj(\bm r')}{\lambda_n-\lambda}.
 \]
 因此Green函数的本征函数展开式为
 \begin{equation}
-    G(\bm r,\bm r')=4\pi\sum_n \frac{\psi_n\cj(\bm r')\psi_n(\bm r)}{\lambda_n-\lambda}
+    G(\bm r,\bm r')=4\pi\sum_n \frac{\psi_n\conj(\bm r')\psi_n(\bm r)}{\lambda_n-\lambda}
 \end{equation}
 对于连续谱，求和用积分代替。
 \begin{example}{$1/\abs{\bm r-\bm r'}$的三维Fourier积分表示}{1/|r-r'| Fourier}
     自由边界下，$f(\bm r)\equiv 0$的特征方程
     \[
-        (\lapla+k^2)\psi_{\bm k}(\bm r)=0\implies\psi_{\bm k}(\bm r)=\frac{\e^{\i\bm k\cdot\bm r}}{(2\pi)^{3/2}}.
+        (\laplacian+k^2)\psi_{\bm k}(\bm r)=0\implies\psi_{\bm k}(\bm r)=\frac{\e^{\i\bm k\cdot\bm r}}{(2\pi)^{3/2}}.
     \]
     则$\lambda=0$时的Green函数为
     \[
-        G(\bm r,\bm r')=4\pi\int\frac{\psi_{\bm k}\cj(\bm r')\psi_{\bm k}(\bm r)}{k^2}\d V_k=\frac1{2\pi^2}\int\frac{\e^{\i\bm k\cdot(\bm r'-\bm r)}}{k^2}\d V_k.
+        G(\bm r,\bm r')=4\pi\int\frac{\psi_{\bm k}\conj(\bm r')\psi_{\bm k}(\bm r)}{k^2}\d V_k=\frac1{2\pi^2}\int\frac{\e^{\i\bm k\cdot(\bm r'-\bm r)}}{k^2}\d V_k.
     \]
 \end{example}
 

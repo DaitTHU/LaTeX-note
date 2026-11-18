@@ -1,16 +1,16 @@
 \chapter{偏微分方程的定解问题}
 % 我们先从$\bcancel{\text{三}}$两个具体问题出发推导典型方程。
 \begin{example}{弦振动}{string vibration}
-	线密度为$\rho$的弦在自身张力$T$的作用下平衡位置在$x$轴，横向位移$u=u(x,t)$，取$(x_1,x_2)$段进行受力分析
+	线密度为$\rho$的弦在自身张力$T$的作用下平衡位置在$x$轴，横向位移$u=u(x,t)$，取长度 $\Delta x=x_2-x_1$ 的小段进行受力分析
 	\begin{align*}
 		T_2\cos\theta_2-T_1\cos\theta_1&=0,\\
-		T_2\sin\theta_2-T_1\sin\theta_1&=\rho\vd x\cdot\pv[2]ut.
+		T_2\sin\theta_2-T_1\sin\theta_1&=\rho\Delta x\cdot\pv[2]ut.
 	\end{align*}
 	%其中$T$为弦内张力，为弦的线密度。
-	限定$\theta\ll 1$，有$\cos\theta\doteq 1,\,\sin\theta\doteq\theta,$
+	记 $\Delta\theta=\theta_2-\theta_1$。当 $\abs\theta\ll 1$ 时，有$\cos\theta\doteq 1,\,\sin\theta\doteq\theta,$
 	\begin{align*}
 		T_1&=T_2=:T,\\
-		T\vd\theta&=\rho\vd x\cdot\pv[2]ut.
+		T\Delta\theta&=\rho\Delta x\cdot\pv[2]ut.
 	\end{align*}
 	又$\tan\theta=\p u/\p x\simeq\theta$，得到波动方程
 	% \nomenclature{$u_t$}{The number of angels per unit area\nomrefeq}
@@ -22,7 +22,7 @@
 \begin{example}{热传导}{heat conduction}
 	假设介质均匀、各向同性，$k,c,\rho$为常数，无体热源且无宏观流动。由Fourier热传导定律，一段时间内流入物体$\Omega$的热量为
 	\[
-		Q=\int_{t_1}^{t_2}\oint_{\p\Omega}k\pv u{\bm n}\d S\d t=\int_{t_1}^{t_2}\int_\Omega k\lapla u\d V\d t,
+		Q=\int_{t_1}^{t_2}\oint_{\p\Omega}k\pv un\d S\d t=\int_{t_1}^{t_2}\int_\Omega k\laplacian u\d V\d t,
 	\]
 	其中$k$为介质的热传导系数，$u=u(x,y,z,t)$为各点温度。
 	
@@ -35,28 +35,28 @@
 	因为上式对任意$\Omega\times(t_1,t_2)$均成立，得到热传导方程
 	%$c$ - 比热，$\rho$ - 密度，$k$ - 热传导系数\\
 	\begin{align}
-		\pv ut=a^2\lapla u,\quad a^2:=\frac k{c\rho}.
+		\pv ut=a^2\laplacian u,\quad a^2:=\frac k{c\rho}.
 	\end{align}
 \end{example}
 \iffalse
 	\begin{example}{Maxwell方程组}{}
 		电动力学中
 		\begin{align*}
-			\nabla\cdot\bm D  & =\rho,              \\
-			\nabla\cdot\bm B  & =0,                 \\
-			\nabla\times\bm E & =-\pv{\bm B}t,      \\
-			\nabla\times\bm H & =\bm J+\pv{\bm D}t.
+			\div\bm D  & =\rho,              \\
+			\div\bm B  & =0,                 \\
+			\curl\bm E & =-\pv{\bm B}t,      \\
+			\curl\bm H & =\bm J+\pv{\bm D}t.
 		\end{align*}
 	\end{example}
 \fi
 \section{定解问题及适定性}
-$V\subseteq\mathbb R^n$内$m$阶PDE形如
+$V\subseteq\RR^n$内$m$阶PDE形如
 \[
 	F\biggp{x,u,\pv u{x_1},\ldots,\pv u{x_n},\ldots,\frac{\p^mu}{\p x_1^{m_1}\cdots\p x_n^{m_n}}}=0,
 \]
 其中$m=m_1+m_2+\cdots+m_n$。在本笔记中，偏微分$\p u/\p x$可以简记为$u_x$。
 \begin{definition}{定解条件}{Definite Condition}
-	定解条件包括初始条件和边界条件。以下列出三类空间边界条件，其中$\bm n$为外法向；在半轴$x>0$的左端点有$\p_n=-\p_x$。
+	定解条件包括初始条件和边界条件。以下列出三类空间边界条件，其中 $\uvec{n}$ 为单位外法向，$\p_n u=\p u/\p n=\grad u\cdot\uvec{n}$。在半轴$x>0$的左端点有$\p_n=-\p_x$。
 	\begin{compactenum}[I.]
 		\item (Dirichlet)\quad$\eval u_{x=0}=f$,\qqqquad$\eval u_{\p V}=f$;
 		\item (Neumann)\enspace$\eval{-u_x}_{x=0}=f$,\qqqquad\!$\bigeval{\pv un}_{\p V}=f$;
@@ -159,7 +159,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 	无限长弦自由振动
 	\begin{align*}
 		\begin{cases}
-			u_{tt}=a^2u_{xx},&t>0,\;x\in\mathbb R. \\
+			u_{tt}=a^2u_{xx},&t>0,\;x\in\RR. \\
 			u|_{t=0}=\varphi(x),\quad u_t|_{t=0}=\psi(x).
 		\end{cases}
 	\end{align*}
@@ -216,7 +216,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 \begin{example}{中心对称球面波}{}
 	中心对称的球面波$u=u(r,t)$，采用球坐标
 	\[
-		\lapla=\frac1{r^2}\pp r\Bigp{r^2\pp r}+\frac1{r^2\sin\theta}\pp \theta\Bigp{\sin\theta\pp \theta}+\frac1{r^2\sin^2\theta}\pp[2]\phi.
+		\laplacian=\frac1{r^2}\pp r\Bigp{r^2\pp r}+\frac1{r^2\sin\theta}\pp \theta\Bigp{\sin\theta\pp \theta}+\frac1{r^2\sin^2\theta}\pp[2]\phi.
 	\]
 	波动方程变为
 	\[
@@ -366,7 +366,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 	\end{bmatrix}\begin{bmatrix}
 		\xi_x  & \xi_y  \\
 		\eta_x & \eta_y
-	\end{bmatrix}\tp.
+	\end{bmatrix}\transp.
 \end{align*}
 
 考虑使$A_{11}=0$或$A_{22}=0$则有
@@ -415,7 +415,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 \section{叠加原理和齐次化原理}
 定义算子为从函数类到函数类的映射$\mathcal T$。
 %一般地，二阶线性PDE中
-%\[\Par\equiv\sum_{i,j=1}^na_{ij}(X)\pw{}{x_i}{x_j}+\sum_{i=1}^nb_i(X)\pp{x_i}+c(X).\]
+%\[\PDEop\equiv\sum_{i,j=1}^na_{ij}(X)\pw{}{x_i}{x_j}+\sum_{i=1}^nb_i(X)\pp{x_i}+c(X).\]
 %是$\cont^2\to\cont$的线性算子。
 \begin{theorem}{叠加原理}{Superposition Principle}
 	%所谓叠加原理，即
@@ -431,7 +431,7 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 \end{align*}
 利用叠加原理，解$u=u_0+w$；其中$u_0$表示$f\equiv 0$的齐次化解；$w$表示$\varphi,\psi\equiv 0$的解，即纯受迫振动。
 
-考虑时间段$(\tau,\tau+\vd\tau)$内，位移分布$w(x,t)=:v(x,t;\tau)\vd\tau$，外力冲量$f(x,\tau)\vd\tau$，有
+在时间元 $\d\tau$ 内，外力给出的单位质量冲量为 $f(x,\tau)\d\tau$。记它对位移 $w(x,t)$ 的贡献为 $v(x,t;\tau)\d\tau$，则
 \begin{align*}
 	%w(x,t)=\int_0^tv(x,t;\tau)\d\tau,\quad
 	\begin{cases}
@@ -451,26 +451,26 @@ $V\subseteq\mathbb R^n$内$m$阶PDE形如
 	定解问题
 	\begin{align*}
 		\begin{cases}
-			\frac{\p^mu}{\p t^m}=\Par u+f(\bm x,t),&\bm x\in\mathbb R^n,\\
+			\frac{\p^mu}{\p t^m}=\PDEop u+f(\bm x,t),&\bm x\in\RR^n,\\
 			\eval u_{t=0}=\biggeval{\pv ut}_{t=0}=\cdots=\biggeval{\frac{\p^{m-1}u}{\p t^{m-1}}}_{t=0}=0.
 		\end{cases}
 	\end{align*}
-	其中$\Par$为常系数线性偏微分算子，有解
+	其中$\PDEop$为常系数线性偏微分算子，有解
 	\[
 		u(\bm x,t)=\int_0^tv(\bm x,t;\tau)\d\tau,
 	\]
 	$v$满足
 	\begin{align*}
 		\begin{cases}
-			\pv[m]vt=\Par v,&\bm x\in\mathbb R^n,\\
+			\pv[m]vt=\PDEop v,&\bm x\in\RR^n,\\
 			\eval v_{t=\tau}=\biggeval{\pv v{t}}_{t=\tau}=\cdots=\Biggeval{\pv[m-2]vt}_{t=\tau}=0, \\
 			\Biggeval{\pv[m-1]vt}_{t=\tau}=f(\bm x,\tau).
 		\end{cases}
 	\end{align*}
 
-	当$\bm x\in V\subsetneq\mathbb R^n$时，还应加上其次边界条件
+	当$\bm x\in V\subsetneq\RR^n$时，还应加上其次边界条件
 	\[
-		\eval{\Par u}_{\p V}=0,\quad\eval{\Par v}_{\p V}=0.
+		\eval{\PDEop u}_{\p V}=0,\quad\eval{\PDEop v}_{\p V}=0.
 	\]
 \end{theorem}
 
