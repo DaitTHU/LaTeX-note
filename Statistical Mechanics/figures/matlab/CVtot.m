@@ -33,11 +33,11 @@ set(gca, Children=[p1 p2 p3 p4 p5])
 grid on
 xscale log
 ylim([0 4])
-xlabel("$T$ [K]", Interpreter="latex")
-ylabel("$C_V/Nk_{\mathrm{B}}$", Interpreter="latex")
+xlabel("$T/\mathrm{K}$", Interpreter="latex")
+ylabel("$C_V/(Nk_{\mathrm{B}})$", Interpreter="latex")
 
-text(Tr, -.13, "$\theta_{\mathrm{r}}$", Interpreter="latex")
-text(Tv, -.13, "$\theta_{\mathrm{v}}$", Interpreter="latex")
+text([Tr Tv], [0.15 0.15], ["$\theta_{\mathrm{r}}/\mathrm{K}$", "$\theta_{\mathrm{v}}/\mathrm{K}$"], ...
+    Interpreter="latex", HorizontalAlignment="center", BackgroundColor="white")
 
 set(gcf, Position=[200 200 700 500])
 

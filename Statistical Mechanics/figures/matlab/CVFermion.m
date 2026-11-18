@@ -17,7 +17,7 @@ p2 = plot(t0, pi^2/2*t0, 'k--');
 set(gca, Children=[p1 p2])
 
 xlabel("$T/T_{\mathrm{F}}$", Interpreter="latex")
-ylabel("$C_V/Nk_{\mathrm{B}}$", Interpreter="latex")
+ylabel("$C_V/(Nk_{\mathrm{B}})$", Interpreter="latex")
 
 grid on
 axis([0 2 0 1.5])

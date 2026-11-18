@@ -13,8 +13,8 @@ lincomp(plot(v, f, LineWidth=2))
 % xline(sqrt(2 * kT / m))
 
 grid on
-xlabel("$v$ [m/s]", Interpreter="latex")
-ylabel("$f(v)$", Interpreter="latex")
+xlabel("$v/(\mathrm{m}\,\mathrm{s}^{-1})$", Interpreter="latex")
+ylabel("$p(v)/(\mathrm{s}\,\mathrm{m}^{-1})$", Interpreter="latex")
 pad_legend(legend("$T="+T+"$ K", Interpreter="latex"));
 
 set(gcf, Position=[200 200 700 400])

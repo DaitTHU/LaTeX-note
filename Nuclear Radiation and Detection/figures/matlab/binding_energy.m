@@ -32,8 +32,8 @@ text(z_max, SBE_max+0.15, "$^{"+(z_max+n_max)+"}$"+elements.symbols(z_max), ...
     VerticalAlignment="bottom", HorizontalAlignment="center", ...
     Interpreter="latex")
 
-xlabel('proton (Z)', Interpreter='latex');
-ylabel('specific binding energy [MeV]', Interpreter='latex');
+xlabel('Proton number $Z$', Interpreter='latex');
+ylabel('$\max_A\varepsilon(Z,A)/\mathrm{MeV}$', Interpreter='latex');
 xticks(sort([xticks z_max]))
 ylim([0 10])
 

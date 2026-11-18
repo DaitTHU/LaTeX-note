@@ -57,13 +57,13 @@
 % PLANCK & RAYLEIGH-JEANS
 % 2hc^2/lambda^5 = 2 * 6.62607015e-34 * 299792458^2
 %                = 1.191042972e-16
-%    W.m -> kW.nm: 1.191042972e26
+% For wavelength in nm and spectral radiance in uW sr^-1 m^-2 nm^-1: 1.191042972e26
 %  hc/k lambda T = 6.62607015e-34*299792458/(1.38064852e-23)
 %                = 0.01438777378
 %         m -> nm: 0.01438777378e9
 % 2ckT/lambda^4  = 2 * 299792458 * 1.38064852e-23
 %                = 8.278160269e-15
-%    W.m -> kW.nm: 8.278160269e18
+% In the same units: 8.278160269e18
 \pgfmathdeclarefunction{planck}{2}{%
   \pgfmathparse{1.191042972e26/(#1^5)/(exp(0.01439e9/(#1*#2))-1)}%
 }
@@ -199,7 +199,7 @@
         \node[below] at (0,-1.55) {分析器在 $xz$ 平面内转动};
     \end{scope}
     \begin{scope}[shift={(5.1,-1.25)},x=1.52cm,y=2.5cm]
-        \draw[->] (0,0)--(3.52,0) node[right] {$\gamma$};
+        \draw[->] (0,0)--(3.52,0) node[right] {$\gamma/\unit{rad}$};
         \draw[->] (0,0)--(0,1.23) node[above] {$p$};
         \draw[densely dotted,gray] (0,.5)--(1.5708,.5)--(1.5708,0);
         \draw[very thick,blue!65!black,domain=0:3.14159,samples=48] plot (\x,{(1+cos(deg(\x)))/2});
@@ -658,8 +658,8 @@
       ticklabel style={scale=0.8},
       %xtick style={draw=none},xticklabels=none,
       max space between ticks=26,
-      xlabel={Wavelength $\lambda$ [\unit{nm}]},
-      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
+      xlabel={$\lambda/\unit{nm}$},
+      ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
       xlabel style={at={(rel axis cs:0.5,0)},below=-1pt,font=\small},
       ylabel style={at={(rel axis cs:-0.11,0.5)},rotate=90},
       width=9cm, height=7cm,
@@ -728,8 +728,8 @@
       ticklabel style={scale=0.8},
       %xtick style={draw=none},xticklabels=none,
       max space between ticks=26,
-      xlabel={Wavelength $\lambda$ [\unit{nm}]},
-      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
+      xlabel={$\lambda/\unit{nm}$},
+      ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
       xlabel style={at={(rel axis cs:0.5,0)},below=-1pt,font=\small},
       ylabel style={at={(rel axis cs:-0.11,0.5)},rotate=90},
       width=9cm, height=7cm,
@@ -787,8 +787,8 @@
       axis line style=thick,
       tick style={black,thick},
       ticklabel style={scale=0.8},
-      xlabel={Wavelength $\lambda$ [\unit{nm}]},
-      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
+      xlabel={$\lambda/\unit{nm}$},
+      ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
       xlabel style={below=-1pt,font=\small},
       ylabel style={above=-1pt},
       width=9cm, height=7cm,
@@ -861,8 +861,8 @@
       ticklabel style={scale=0.8},
       max space between ticks=23,
       yminorticks=false,
-      xlabel={Wavelength $\lambda$ [\unit{nm}]},
-      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
+      xlabel={$\lambda/\unit{nm}$},
+      ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
       xlabel style={at={(rel axis cs:0.5,0)},below=8pt},
       ylabel style={above=-2pt},
       legend style={at={(0.98,0.95)},anchor=north east,draw=none,fill=none,
@@ -920,8 +920,8 @@
       %ticks=none,
       max space between ticks=23,
       yminorticks=false,
-      xlabel={Wavelength $\lambda$ [\unit{nm}]},
-      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
+      xlabel={$\lambda/\unit{nm}$},
+      ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
       xlabel style={at={(rel axis cs:0.5,0)},below=8pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
@@ -967,8 +967,8 @@
       %ticks=none,
       max space between ticks=23,
       yminorticks=false,
-      xlabel={Wavelength $\lambda$ [\unit{nm}]},
-      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
+      xlabel={$\lambda/\unit{nm}$},
+      ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
       xlabel style={at={(rel axis cs:0.5,0)},below=8pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
@@ -1017,8 +1017,8 @@
       %ticks=none,
       max space between ticks=23,
       yminorticks=false,
-      xlabel={Wavelength $\lambda$ [\unit{nm}]},
-      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
+      xlabel={$\lambda/\unit{nm}$},
+      ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
       xlabel style={at={(rel axis cs:0.5,0)},below=9pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
@@ -1073,8 +1073,8 @@
       max space between ticks=23,
       yminorticks=false,
       variable=x,
-      xlabel={Wavelength $\lambda$ [\unit{nm}]},
-      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
+      xlabel={$\lambda/\unit{nm}$},
+      ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
       xlabel style={at={(rel axis cs:0.5,0)},below=9pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
@@ -1139,8 +1139,8 @@
         \pgfmathprintnumber[sci,sci zerofill,precision=0]{\pgfmathresult}
         \pgfkeys{/pgf/fpu=false}
       },
-      xlabel={Wavelength $\lambda$ [\unit{nm}]},
-      ylabel={Spectral radiance [\unit{\kilo\watt\per\steradian\per\metre\squared\per\nano\metre}]},
+      xlabel={$\lambda/\unit{nm}$},
+      ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
       xlabel style={at={(rel axis cs:0.5,0)},below=9pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
@@ -1203,7 +1203,7 @@
   % http://www.vendian.org/mncharity/dir3/blackbody/UnstableURLs/bbr_color.html
 
   \shade[shading=blackbody,shading angle=-90] (0,0) rectangle (10,1);
-  \draw[->,thick] (-0.2,0) -- (10.8,0) node[right,scale=1.1] {T [\unit{\degreeCelsius}]};
+  \draw[->,thick] (-0.2,0) -- (10.8,0) node[right,scale=1.1] {$T/\unit{K}$};
   \tick{0,0}{ 900}
   \tick{10/11*1,0}{1000}
   \tick{10/11*2,0}{2000}

@@ -28,8 +28,8 @@ colormap hsv
 
 set(gca, Children=[p1; p2; p3; p4])
 
-xlabel("$\lambda$ [$\mu$m]", Interpreter="latex")
-ylabel("$I$ [kW/(sr$\cdot$mm$^3$)]", Interpreter="latex")
+xlabel("$\lambda/\mu\mathrm{m}$", Interpreter="latex")
+ylabel("$B_\lambda/(\mathrm{MW}\,\mathrm{m}^{-2}\,\mathrm{sr}^{-1}\,{\mu\mathrm{m}}^{-1})$", Interpreter="latex")
 ylim([0, 15])
 
 pad_legend(legend([p1; p2; p3], "$T=" + [T + "$ K"; ...

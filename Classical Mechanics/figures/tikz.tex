@@ -845,7 +845,7 @@
     \draw[black,fill=white,opacity=0.3,xyp]
       (-0.5*\ymax,-1.2*\ymax) rectangle (1.10*\xmax,1.25*\ymax);
     \draw[->,thick] (-0.3*\ymax,0,0) -- (\xmax,0,0)
-      node[below right=-2,xyp] {$t$ [\unit{s}]};
+      node[below right=-2,xyp] {$t$};
     \draw[->,thick] (0,\ymin,0) -- (0,\ymax,0)
       node[left,xyp] {Im};
     \draw[xline,samples=\N,smooth,variable=\t,domain=-0.05*\T:0.95*\xmax]
@@ -855,7 +855,7 @@
     \draw[vector,thick,xyp] ({\s},0) --++ (0,{\y-0.03});
     \tick{0,{\A},0}{180};
     \tick{0,{-\A},0}{180};
-    \tick{{\s},0,0}{90} node[right=0,below=-1,xyp] {$\omega t$};
+    \tick{{\s},0,0}{90} node[right=0,below=-1,xyp] {$t$};
     \tick{{\T},0,0}{90} node[right=0,below,xyp] {\contour{white}{$T$}};
     \tick{{2*\T},0,0}{90} node[right=0,below,xyp] {\contour{white}{$2T$}};
     \node[mydarkblue,below=0,xyp] at (0.4*\xmax,1.15*\ymax,0) {$y(t)=A\sin(\omega t)$};
@@ -866,7 +866,7 @@
     \draw[black,fill=white,opacity=0.3,xzp]
       (-0.5*\ymax,-1.4*\ymax) rectangle (1.10*\xmax,1.25*\ymax);
     \draw[->,thick] (-0.3*\ymax,0,0) -- (\xmax,0,0)
-      node[below right=-1,xzp] {$t$ [\unit{s}]};
+      node[below right=-1,xzp] {$t$};
     \draw[->,thick] (0,0,-\zmax) -- (0,0,\zmax)
       node[left=-1,xzp] {Re};
     \draw[xline,samples=\N,smooth,variable=\t,domain=-0.05*\T:0.95*\xmax]
@@ -876,7 +876,7 @@
     \draw[vector,thick,xzp] ({\s},0) --++ (0,{\x-0.03});
     \tick{0,0,{\A}}{180};
     \tick{0,0,{-\A}}{180};
-    \tick{{\s},0,0}{\zang} node[below=-1,xzp] {$\omega t$};
+    \tick{{\s},0,0}{\zang} node[below=-1,xzp] {$t$};
     \tick{{\T},0,0}{\zang} node[below,xzp] {$T$};
     \tick{{2*\T},0,0}{\zang} node[below,xzp] {$2T$};
     \node[mydarkblue,above=0,xzp] at (0.3*\xmax,-\ymax,0) {$x(t)=A\cos(\omega t)$};
@@ -887,7 +887,7 @@
     (P) -- ({\s},{\y},{\x})
     (I) -- ({\s},{\y},{\x+0.05})
     ({\s},{\y-0.06},{\x}) -- (R);
-  \draw[->,black,thick] (-0.1*\ymax,0,0) -- (\xmax,0,0) node[below right=-2] {$t$ [\unit{s}]};
+  \draw[->,black,thick] (-0.1*\ymax,0,0) -- (\xmax,0,0) node[below right=-2] {$t$};
   \draw[->,black,thick] (0,\ymin,0) -- (0,\ymax+0.02,0) node[above] {Im};
   \draw[->,black,thick] (0,0,-\zmax) -- (0,0,\zmax+0.02) node[right=1,below=3] {Re};
   \foreach \i [evaluate={\tmin=max(-0.05*\T,(\i-0.05)*\T); \tmax=min(0.95*\xmax,(\i+1)*\T);}] in {0,...,2}{
@@ -1498,7 +1498,7 @@
 \def\nsamples{100}
 \begin{tikzpicture}
 
-  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\unit{\degree}]};
+  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta/\unit{\degree}$};
   \draw[->,thick,black] (0,-1.1*\A) -- (0,1.15*\A) node[above left=-3] {$y$};
   \draw[mypurple,thick,variable=\t,samples=\nsamples,smooth,domain=-1.1/\k:1.1/\k]
     plot(\t,\A*\k*\t) node[below=2,above right=-1] {$y=\theta$};
@@ -1521,7 +1521,7 @@
 % COS - X
 \begin{tikzpicture}
 
-  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\unit{\degree}]};
+  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta/\unit{\degree}$};
   \draw[->,thick,black] (0,-0.8*\A) -- (0,1.15*\A) node[above left=-3] {$y$};
   \draw[mypurple,thick,variable=\t,samples=\nsamples,smooth,domain=-0.9*\xmax:0.9*\xmax]
     plot(\t,{\A*(1-(\k*\t)^2/2)}) node[below=4,left=6] {$y=1-\dfrac{\theta^2}{2}$};
@@ -1548,8 +1548,8 @@
 \def\nsamples{10}
 \begin{tikzpicture}
 
-  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\unit{\degree}]};
-  \draw[->,thick,black] (0,-\ymax) -- (0,1.1*\ymax) node[above=-1] {$\Delta f / \abs{f} \;\; [\unit{\percent}]$};
+  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta/\unit{\degree}$};
+  \draw[->,thick,black] (0,-\ymax) -- (0,1.1*\ymax) node[above=-1] {$(\Delta f/\abs{f})/\unit{\percent}$};
   %\draw[myblue,thick,variable=\t,samples=\nsamples,smooth,domain=-\xmax:\xmax]
   %  plot(\t,{\A*reldiff(\k*\t,sin(180/pi*\k*\t))})
   %  node[above left=-7] {$\dfrac{\theta-\sin\theta}{\abs{\theta}}$};
@@ -1588,8 +1588,8 @@
 \def\nsamples{50}
 \begin{tikzpicture}
 
-  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta$ [\unit{\degree}]};
-  \draw[->,thick,black] (0,-4/3*\ymax) -- (0,1.1*2/3*\ymax) node[above=-1] {$\Delta f / \abs{f} \;\; [\unit{\percent}]$};
+  \draw[->,thick,black] (-1.05*\xmax,0) -- (1.1*\xmax,0) node[below right=-2] {$\theta/\unit{\degree}$};
+  \draw[->,thick,black] (0,-4/3*\ymax) -- (0,1.1*2/3*\ymax) node[above=-1] {$(\Delta f/\abs{f})/\unit{\percent}$};
   %\draw[myblue,thick,variable=\t,samples=\nsamples,smooth,domain=-\xmax:\xmax]
   %  plot[domain=-\xmax:-0.4*\xmax](\t,{\A*reldiff(1-(\k*\t)^2/2,cos(180/pi*\k*\t))}) -- (0,0) --
   %  plot[domain=0.4*\xmax:\xmax](\t,{\A*reldiff(1-(\k*\t)^2/2,cos(180/pi*\k*\t))})
@@ -1620,7 +1620,7 @@
 \tikzset{>=stealth}
 \fontsize{10.53937pt}{12.65pt}\selectfont
 \begin{tikzpicture}
-\begin{axis}[width=13.2cm,height=5.4cm,xlabel={$\theta$},ylabel={$p_\theta/(m\sqrt{gl^3})$},
+\begin{axis}[width=13.2cm,height=5.4cm,xlabel={$\theta/\unit{rad}$},ylabel={$p_\theta/(m\sqrt{gl^3})$},
  xmin=-3.4,xmax=3.4,ymin=-2.6,ymax=2.6,xtick={-3.14159,0,3.14159},xticklabels={$-\pi$,0,$\pi$},
  samples=121,domain=-pi:pi,axis lines=middle,
  ylabel style={at={(axis description cs:-0.03,0.5)},anchor=south,rotate=90}]

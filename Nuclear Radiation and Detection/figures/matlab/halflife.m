@@ -19,8 +19,8 @@ end
 end
 patch(0.5+[0 Z Z 0], 0.5+[0 0 N N], 'w', FaceColor='none', EdgeColor='k')
 
-xlabel("proton $Z$", Interpreter="latex")
-ylabel("neutron $N$", Interpreter="latex")
+xlabel("Proton number $Z$", Interpreter="latex")
+ylabel("Neutron number $N$", Interpreter="latex")
 xticks([2 8 28 50 82])
 yticks([2 8 28 50 82 126])
 grid on
@@ -29,8 +29,8 @@ colormap(sky)
 cb = colorbar;
 clim([1e-10 1e32])
 set(gca, ColorScale="log")
-cb.Label.String = "decay half-life [s]";
 cb.Label.Interpreter = "latex";
+cb.Label.String = "Half-life $T_{1/2}/\mathrm{s}$";
 
 axis equal
 axis(0.5 + [0 Z 0 N])

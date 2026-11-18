@@ -18,7 +18,7 @@ set(gca, Children=[p1 p2])
 
 grid on
 xlabel("$T/\theta_{\mathrm{D}}$", Interpreter="latex")
-ylabel("$C_V/Nk_{\mathrm{B}}$", Interpreter="latex")
+ylabel("$C_V/(Nk_{\mathrm{B}})$", Interpreter="latex")
 
 set(gcf, Position=[200 200 700 400])
 

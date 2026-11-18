@@ -41,9 +41,9 @@ for mode = ["line", "circ", "elli"]
     axis([[0, kzm], Exm*[-1, 1], Eym*[-1, 1]])
     xticks(0 : pi/2 : kzm)
     xticklabels(xpi(xticks / pi))
-    xlabel('$k\cdot x$', Interpreter='latex')
-    ylabel('$\epsilon_1$', Interpreter='latex')
-    zlabel('$\epsilon_2$', Interpreter='latex')
+    xlabel('$kz$', Interpreter='latex')
+    ylabel('$E_{\epsilon_1}/E_{\mathrm{ref}}$', Interpreter='latex')
+    zlabel('$E_{\epsilon_2}/E_{\mathrm{ref}}$', Interpreter='latex')
     view(45, 15)
     exportgraphics(gca, "../polarization_" + mode + ".pdf", ...
         ContentType="vector", BackgroundColor="none")

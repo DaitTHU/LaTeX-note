@@ -17,7 +17,7 @@ current = envelope.*(1-dipDepth*sum(dips, 2));
 figure(Visible='off', Units='centimeters', Position=[2 2 9.2 6.1])
 plot(voltage, current, LineWidth=1.5)
 xlim([0 maxVoltage])
-xlabel('$U$ (V)', Interpreter='latex')
-ylabel('$I$ (arb. units)', Interpreter='latex')
+xlabel('$U/\mathrm{V}$', Interpreter='latex')
+ylabel('$I/I_0$', Interpreter='latex')
 grid on
 exportgraphics(gca, '../franck_hertz_current.pdf', ContentType='vector', BackgroundColor='none')

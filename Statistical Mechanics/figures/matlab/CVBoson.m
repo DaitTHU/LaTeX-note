@@ -28,7 +28,7 @@ xlim([0 4])
 yticks(0:.5:2)
 text(-.05, Cmax, "1.926", HorizontalAlignment="right")
 xlabel("$T/T_{\mathrm{C}}$", Interpreter="latex")
-ylabel("$C_V/Nk_{\mathrm{B}}$", Interpreter="latex")
+ylabel("$C_V/(Nk_{\mathrm{B}})$", Interpreter="latex")
 
 set(gcf, Position=[200 200 600 450])
 

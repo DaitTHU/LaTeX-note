@@ -43,6 +43,12 @@
 
 图册里的 `spin-axis` 决定导入哪一页，章节里的 `fig:spin-axis` 用于引用正文图号。移动或增加图页后运行课程构建命令即可更新两者。图源含有作者、出处和许可说明时，请在对应图组旁保留。
 
+### 坐标轴和色标
+
+对有量纲且带数值刻度的坐标轴，MATLAB 和 TikZ 都用“量符号 / 单位符号”。例如，`t/s` 轴的刻度 2 表示 2 秒。量符号用斜体，单位符号用正体；复合单位用括号括起，例如 $v/(\mathrm{m}\,\mathrm{s}^{-1})$。色条遵循同一写法。前缀应与送入绘图函数的数值一致，例如将以米记录的波长乘以 $10^9$ 后，轴标写作 $\lambda/\mathrm{nm}$。[BIPM《国际单位制手册》§5.4.1](https://www.bipm.org/en/publications/si-brochure)；[NIST SP 811 §7.1](https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-7-rules-and-style-conventions-expressing-values)
+
+归一化的量直接标出比值，例如 $t/\tau$；概率、量子数和核子计数直接写 $P$、$n$、$Z$。度和弧度用于数值角度轴时标明所选角单位。仅示意方向的坐标箭头可以只标符号。
+
 ### MATLAB 绘图
 
 从仓库根目录运行以下命令，可使用仓库自带的输入一次生成全部 MATLAB 插图。
