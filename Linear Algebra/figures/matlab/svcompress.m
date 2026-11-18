@@ -1,7 +1,7 @@
-% Set inputImage to the absolute path of an RGB or grayscale image before run().
-% The original photograph used for the note was Original_Doge_meme.jpg.
+% Photograph of Kabosu by Atsuko Sato. See CONTRIBUTING.md for the source.
+% Set inputImage before run() to try another RGB or grayscale image.
 if ~exist('inputImage', 'var')
-    inputImage = 'Original_Doge_meme.jpg';
+    inputImage = fullfile('inputs', 'Original_Doge_meme.jpg');
 end
 if ~isfile(inputImage)
     error('Set inputImage to the path of a local image before running svcompress.m.')

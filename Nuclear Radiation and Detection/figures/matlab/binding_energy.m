@@ -27,8 +27,8 @@ hold on
 scatter(z, SBE_data, '.')
 
 plot([z_max z_max], [0 SBE_max], '--k')
-load inputs/symbol
-text(z_max, SBE_max+0.15, "$^{"+(z_max+n_max)+"}$"+symbols(z_max), ...
+elements = load('inputs/symbol.mat', 'symbols');
+text(z_max, SBE_max+0.15, "$^{"+(z_max+n_max)+"}$"+elements.symbols(z_max), ...
     VerticalAlignment="bottom", HorizontalAlignment="center", ...
     Interpreter="latex")
 

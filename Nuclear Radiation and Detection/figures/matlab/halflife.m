@@ -1,9 +1,8 @@
 clear
 close all
 
-load inputs/halfLife
-
-halfLife = halfLife';
+data = load('inputs/halfLife.mat', 'halfLife');
+halfLife = data.halfLife';
 
 for Z = 1 : height(halfLife)
 for N = 1 : width(halfLife)

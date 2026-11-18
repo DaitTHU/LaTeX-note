@@ -10,7 +10,8 @@ set(groot, properties, {'off', [100 100 560 420], @(fig, ~) theme(fig, "light")}
 build_course(root, 'Electrodynamics', [
     "Bessel", "Besselzero", "ellipseKE", "hysteresis", "image_charge_plane", ...
     "image_charge_sphere", "polarization", "poly_Legendre", "rect_TE", "spherical_harmonic"])
-build_course(root, 'Nuclear Radiation and Detection', "decay2")
+build_course(root, 'Linear Algebra', "svcompress")
+build_course(root, 'Nuclear Radiation and Detection', ["binding_energy", "decay2", "decay_system", "halflife"])
 build_course(root, 'Numerical Analysis', ["fixpoint", "Lpspace", "Runge"])
 build_course(root, 'Probability and Statistics', [
     "bootstrap", "CLT_bin", "gamble", "monte_carlo", "pdf_bin", "pdf_bin3", ...
