@@ -48,7 +48,7 @@ GitHub Actions 使用同一脚本，成功后提供 PDF 下载产物。自动编
 
 ## 源文件结构
 
-- 各课程的 `data/` 存放正文，入口文件控制章节顺序。
+- 各课程的 `chapters/` 存放正文，入口文件控制章节顺序。
 - `figures/` 存放插图，`figures/tikz/` 中的 `.tex` 可单独编译；构建脚本使用已收录的插图 PDF，只自动重建有外部标签依赖的图册。
 - [thunote.cls](thunote.cls) 是共享排版类，主要参考 [ThuThesis](https://github.com/tuna/thuthesis)。中文排版由 `ctexbook` 提供，使用 XeLaTeX 编译。
 - [mathdef.tex](mathdef.tex) 定义共享数学宏，示例见 [mathdef_example.md](mathdef_example.md)。
