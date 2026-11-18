@@ -13,6 +13,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check quantum formulas
+        run: |
+          python -m pip install 'numpy>=2'
+          python scripts/check_quantum_formulas.py
       - name: Install TeX Live
         run: |
           sudo apt-get update
@@ -26,15 +33,41 @@ jobs:
         with:
           command: addpath('figures/matlab'); build_figures
       - name: Build all notes
-        run: python3 scripts/build_notes.py
+        run: python3 scripts/build_notes.py --archive "$RUNNER_TEMP/course-notes.zip"
       - name: Upload compiled notes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: course-notes
-          path: '*/*.pdf'
+          path: ${{ runner.temp }}/course-notes.zip
+          archive: false
+          if-no-files-found: error
+      - name: Upload figure atlases and English quantum notes
+        uses: actions/upload-artifact@v7
+        with:
+          name: supplements
+          path: |
+            */figures/tikz.pdf
+            Quantum Mechanics/ref/QM.pdf
       - name: Upload diagnostics
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: latex-logs
           path: '**/*.log'
+
+  release:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && !github.event.deleted
+    needs: compile
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: course-notes.zip
+          skip-decompress: true
+      - name: Publish the PDF collection
+        uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3.0.4
+        with:
+          files: course-notes.zip
+          fail_on_unmatched_files: true
+          overwrite_files: false

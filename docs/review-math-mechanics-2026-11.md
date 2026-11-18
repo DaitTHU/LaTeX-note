@@ -42,7 +42,7 @@
 
 ## 经典力学：从运动问题出发的九章复习稿
 
-入口为 [CM.tex](../Classical%20Mechanics/CM.tex)，成稿为 [CM.pdf](../Classical%20Mechanics/CM.pdf)。移除了以仿射空间、拓扑、流形和图册定义开篇的组织方式。必要坐标工具在使用时简要引入，核心顺序改为：
+入口为 [CM.tex](../Classical%20Mechanics/CM.tex)，成稿在十卷压缩包中的 `Classical Mechanics/CM.pdf`。移除了以仿射空间、拓扑、流形和图册定义开篇的组织方式。必要坐标工具在使用时简要引入，核心顺序改为：
 
 1. **运动方程与守恒律**：受力、功率、质心、碰撞和火箭，先界定系统和参考系。
 2. **中心力与两体问题**：约化质量、有效势、稳定圆轨道、Kepler 轨道、Rutherford 散射和 Virial 条件。
