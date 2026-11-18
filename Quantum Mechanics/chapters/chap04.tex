@@ -1,398 +1,391 @@
-\chapter{时间演化与对称性}
-\paragraph{时间演化问题}
-本节先假设$\hat H$不显含时间；若Hamilton算符显含时间，演化算符一般不能直接写成$\e^{-\i\hat Ht/\hbar}$。
-定态\Schr 方程
-\[
-	\hat H\psi(\r)=E\psi(\r),
-\]
-有本征值$E_n$和本征函数$\phi_n$，则\Schr 方程的通解为
-\[
-	\psi(\r,t)=\sum a_n(t)\phi_n(\r).
-\]
-代回\Schr 方程
-\[
-	\i\hbar\dv{a_n}t=E_na_n\implies a_n(t)=a_n\e^{-\i E_nt/\hbar}.
-\]
-因此波函数的时间演化为
-\[
-	\psi(\r,0)=\sum_n a_n\phi_n(\r)\enspace\rightarrow\enspace\psi(\r,t)=\sum_n a_n\e^{-\i E_nt/\hbar}\phi_n(\r).
-\]
-由于
-\[
-	\abs{a_n}^2=\abs{a_n\e^{-\i E_nt/\hbar}}^2,
-\]
-即系统在任意时刻的能量几率分布都和初始时刻的能量几率分布相同。
+\chapter{振动能级、光子计数与黑体辐射}
+\label{ch:oscillator}
 
-形式上，利用Taylor展开
-\begin{align*}
-	\psi(\r,t) & =\sum_na_n\e^{-\i E_nt/\hbar}\phi_n(\r)=\sum_na_n\biggb{\sum_{k=0}^\infty\frac1{k!}\biggp{-\frac{\i E_nt}\hbar}^k}\phi_n(\r)     \\
-	           & =\sum_na_n\biggb{\sum_{k=0}^\infty\frac1{k!}\biggp{-\frac{\i\hat Ht}\hbar}^k}\phi_n(\r)=\sum_na_n\e^{-\i\hat Ht/\hbar}\phi_n(\r) \\
-	           & =\e^{-\i\hat Ht/\hbar}\psi(\r,0).
-\end{align*}
-\begin{definition}{时间演化算符}{Time Evolution Operator}
-	定义时间演化算符
-	\begin{align}
-		\hat U(t):=\e^{-\i\hat Ht/\hbar},
-	\end{align}
-	则可从波函数的初值知道其时间演化
-	\[
-		\psi(\r,t)=\hat U(t)\psi(\r,0).
-\]
+\section{谐振子模型与能谱}
+前一章用一对给定的能级解释了共振频率。测量分子的振动光谱或用振荡力激发陷阱中的粒子时，
+实验还会遇到一个新问题：为什么在低激发区相邻两级的跃迁频率常常近似相同？
+经典弹簧的回复力由势能在稳定平衡点的曲率决定。量子理论中，这个曲率决定相邻能级的间距，势能的高阶项则会使能级偏离等间隔。
+
+若一维势能$V(x)$在$x_\mathrm{eq}$有极小值，令 $\delta x=x-x_\mathrm{eq}$，
+Taylor展开给出
+\begin{equation}
+    V(x_\mathrm{eq}+\delta x)
+    =V(x_\mathrm{eq})+\frac12V''(x_\mathrm{eq})(\delta x)^2
+        +\frac16V^{(3)}(x_\mathrm{eq})(\delta x)^3+\cdots.
+\end{equation}
+极小点的一阶导数为零，常数项只平移全部能级。
+记$m\omega^2=V''(x_\mathrm{eq})>0$，保留二次项便得到谐振子模型。
+截断条件是所占据态上的高阶势能矩阵元相对于相关能级差足够小，
+因此“位于平衡点附近”应由态的涨落范围来检验。
+
+分子振动、陷阱中粒子的微小运动和电磁场的单个模式，都能在适当条件下归结为一个二次Hamilton量。
+对稳定平衡点附近的一个自由度，舍去常数势能，以 $\op{X}$ 表示相对平衡点的位移算符。保留二次项并取 $\omega>0$，得到
+\begin{equation}
+    \op{H}=\frac{\op{P}^2}{2m}+\frac12m\omega^2\op{X}^2,\qquad [\op{X},\op{P}]=\i\hbar\one.
+\end{equation}
+较大振幅会探及势阱的非二次部分，相邻能级间距随之可能改变。
+
+$\op{X}$、$\op{P}$分别是位移和正则动量(canonical momentum)；$m$是该正常模式(normal mode)的有效质量(effective mass)，
+$\omega$是小振幅角频率。经典弹簧振子的位移为 $x=A\cos(\omega t+\phi)$。
+动量 $p=m\dot x$ 比位移相差四分之一个周期，两者合成一个复数便能同时记录振幅和相位：
+\begin{equation}
+    x+\frac{\i p}{m\omega}=A\e^{-\i(\omega t+\phi)},\qquad
+    H_{\mathrm{cl}}=\frac{m\omega^2}{2}
+        \bigg|x+\frac{\i p}{m\omega}\bigg|^2 .
+\end{equation}
+相应地，在量子问题中将 $\op{X}$ 与 $\i \op{P}/(m\omega)$ 相加，把能量写成这一组合与其伴随的乘积。
+要使乘积以 $\hbar\omega$ 为能量单位，组合应乘 $\sqrt{m\omega/(2\hbar)}$。
+记相应的位移、动量尺度为
+\begin{equation}
+    x_0=\sqrt{\frac{\hbar}{2m\omega}},\qquad
+    p_0=\sqrt{\frac{m\hbar\omega}{2}},\qquad x_0p_0=\frac{\hbar}{2}.
+\end{equation}
+它们分别具有长度和动量量纲。
+
+\begin{definition}{谐振子的升降算符与数算符}{qm-oscillator-ladder}
+    以 $x_0,p_0$ 为单位，定义无量纲的湮灭算符(annihilation operator) $\op{a}$、
+    产生算符(creation operator) $\op{a}^\dagger$ 和数算符(number operator) $\op{N}$：
+    \begin{equation}
+        \op{a}=\frac{\op{X}}{2x_0}+\frac{\i \op{P}}{2p_0},\qquad
+        \op{a}^\dagger=\frac{\op{X}}{2x_0}-\frac{\i \op{P}}{2p_0},\qquad \op{N}=\op{a}^\dagger \op{a}.
+    \end{equation}
 \end{definition}
-\begin{example}
-	{一维自由粒子$\delta(x)$波函数随时间的演化}{}
-	\begin{equation*}
-		\begin{aligned}
-			\psi(x,t) & =\e^{-\i\hat Ht/\hbar}\vd(x)=\frac1{2\pi}\int\iti\e^{\i kx}\e^{-\i\hbar k^2t/2m}\d k      \\
-			          & =\sqrt{\frac m{2\pi\hbar t}}\exp\biggp{\i\frac{mx^2}{2\hbar t}-\frac{\i\pi}4}\neq\vd(x).
-		\end{aligned}
-	\end{equation*}
-	这里取$t>0$，$\delta$初态和传播核按广义函数理解，并非归一化波包。其中用到了
-	\begin{align}
-		\int\iti\e^{-\alpha x^2}\d x=\sqrt{\frac\pi\alpha}.\quad\Re\alpha>0.
-	\end{align}
-\end{example}
-\begin{example}
-	{一维自由粒子Gauss波包的时间演化}{}
-	\[
-		\psi(x,0)=\frac1{(2\pi\sigma^2)^{1/4}}\e^{-x^2/4\sigma^2}\e^{\i k_0x},
-	\]
-	Fourier变换得
-	\[
-		\varphi(k)=\sqrt[4]{\frac{2\sigma^2}{\pi}}\e^{-\sigma^2(k-k_0)^2}.
-	\]%\footnote{$\mathcal F(e^{-x^2/\sigma^2})=\frac\sigma{\sqrt2}e^{-\sigma^2k^2/4}$.}
-	于是\footnote{Everyone should calculate it once in their lifetime. - Shuo Jiang.}
-	\begin{align*}
-		\psi(x,t) & =\frac1{\sqrt{2\pi}}\int\iti\varphi(k)\e^{\i kx}\e^{-\i\hbar k^2t/2m}\d k                                                                                                                            \\
-		          & =\fracdisp{\exp\Bigp{\i k_0x-\frac{\i\hbar k_0^2}{2m}t}}{\biggb{\sqrt{2\pi}\sigma\Bigp{1+\frac{\i\hbar t}{2m\sigma^2}}}^{1/2}}\exp\Biggl[-\fracdisp{\Bigp{x-\frac{\hbar k_0}mt}^2}{4\sigma^2+\frac{2\i\hbar t}m}\Biggr].
-	\end{align*}
-	概率密度
-	\begin{align*}
-		\abs{\psi(x,t)}^2=\frac1{\sqrt{2\pi}\sigma(t)}\exp\biggp{-\frac{(x-\hbar k_0t/m)^2}{2\sigma(t)^2}}.
-	\end{align*}
-	
-	可见波包中心运动速度为$\hbar k_0/m$，而波包宽度是发散的
-	\[
-		\sigma(t)=\sqrt{\sigma^2+\frac{\hbar^2t^2}{4m^2\sigma^2}}.
-	\]
-\end{example}
-\section{守恒}
-先看力学量的平均值
-\[
-	\ave A=(\psi,\hat A\psi),
-\]
-随时间的变化
-\begin{align*}
-	\dd t{\ave A} & =\inp{\pv\psi{t}}{\hat A\psi}+\cancel{\inp{\psi}{\pv{\hat A}t\psi}}+\inp{\psi}{\hat A\pv{\psi}t}.
-\end{align*}
-一般力学量不显含时间$t$，由\Schr 方程
-\[
-	\i\hbar\pv\psi{t}=\hat H\psi.
-\]
-因此
-\begin{align*}
-	\dd t{\ave A} & =\inp{\frac{\hat H\psi}{\i\hbar}}{\hat A\psi}+\inp{\psi}{\hat A\frac{\hat H\psi}{\i\hbar}}
-	% \\	&=-\frac1{\i\hbar}(\psi,\hat H\hat A\psi)+\ave{\pv{\!\hat A}t}+\frac1{\i\hbar}(\psi,\hat A\hat H\psi)
-	=\frac1{\i\hbar}\ave{\cmm AH}. % +\ave{\pv{\!\hat A}t}.
-\end{align*}
-\begin{theorem}{力学量平均值的时间演化}{Time Evolution of Mean Value}
-	若$\hat A$不显含时间$t$，则
-	\begin{align}
-		\dd t\ave A=\frac1{\i\hbar}\ave{\cmm AH}.
-	\end{align}
-\end{theorem}
-若不显含时间的力学量$\hat A$在任意初态下的平均值都不随时间改变，则
-\[
-	\cmm AH\equiv 0.
-\]
-\begin{theorem}{守恒量}{Conservation}
-	若$\hat A$不显含时间，且$\cmm AH=0$，则$\hat A$是守恒量，即测量值概率分布不随时间改变。
-\end{theorem}
-由于$\hat A$和$\hat H$对易,我们可以选取其共同本征函数系$\psi_n$来展开任一波函数$\psi$
-\[
-	\psi(t)=\sum a_n(t)\psi_n
-\]
-由于
-\[
-	\dv{a_n}t=\frac{E_n}{\i\hbar}a_n,
-\]
-故测得$A_n$的概率
-\begin{align*}
-	\dd t(a_n^*a_n) & =\dv{a_n\cj}ta_n+a_n\cj\dv{a_n}t                                    \\
-	                & =-\frac{E_n}{\i\hbar}a_n\cj a_n+\frac{E_n}{\i\hbar}a_n\cj a_n=0.
-\end{align*}
-也就是说，不论体系处于什么量子态下，如果$\hat A$与$\hat H$对易，则不仅$\hat A$的力学量平均值为常数，其可能测值的概率分布也不随时间变化。这一点与$\hat H$本身的概率分布守恒是一致的。
+由 $\op{X}^\dagger=\op{X}$、$\op{P}^\dagger=\op{P}$ 可见前两者互为伴随。逐项相乘得到
+\begin{subequations}
+    \begin{alignat}{1}
+        [\op{a},\op{a}^\dagger] &=-\frac{\i}{2x_0p_0}[\op{X},\op{P}]=\one,\\
+        \op{a}^\dagger \op{a} &=\frac{\op{X}^2}{4x_0^2}+\frac{\op{P}^2}{4p_0^2}
+            +\frac{\i}{4x_0p_0}[\op{X},\op{P}]
+            =\frac{\op{H}}{\hbar\omega}-\frac12\one.
+    \end{alignat}
+\end{subequations}
 
-\begin{theorem}{*简并}{*Degenerate}
-	如果系统有两个彼此不对易的守恒量，则系统能级一般简并。
-\end{theorem}
-设$\hat A$和$\hat B$是守恒量，则它们分别都和$\hat H$对易。如果$\psi$是$\hat H$的对应于能量$\hat E$的本征态，则$\hat A\psi$和$\hat B\psi$也都是对应于$\hat E$的本征态。设$\psi$是$\hat A$的本征态($\hat H$和$\hat A$可有共同本征态)：
-\[
-	\hat A\psi=A\psi
-\]
-则一般$\psi$不会是$\hat B$的本征态(不对易力学算符不能拥有\textit{共同完备本征函数集})，也就是说
-\[
-	\hat B\psi\neq B\psi\propto\hat A\psi
-\]
-或者说$\hat A\psi$和$\hat B\psi$是线性无关的，即能级$E$是简并的。
+便得
+\begin{equation}
+    \op{H}=\hbar\omega\bigp{\op{N}+\tfrac12\one},\qquad [\op{N},\op{a}]=-\op{a}.
+\end{equation}
 
-例：$\hat L_x,\hat L_y,\hat L_z$都和$\hat H$对易，但彼此不对易，所以氢原子能级是简并的。
-\begin{theorem}{非简并}{Non-Degenerate}
-	如果体系有一个守恒量$\hat A$和一个非简并的能级$E$，则此能级对应的本征态也是$\hat A$的本征态。
+\begin{theorem}{一维谐振子的能谱与升降作用}{qm-oscillator}
+    设谐振子存在归一化基态(ground state)，并取通常的正则不可约表示。
+    则它有正交归一能量基$\ket{n}$，
+    $n=0,1,\ldots$，满足
+    \begin{equation}
+        E_n=\hbar\omega\bigp{n+\tfrac12},\qquad
+        \op{N}\ket{n}=n\ket{n}.
+    \end{equation}
 \end{theorem}
+
 \begin{proof}
-	设这一能级$E$对应的本征态为中，则因为守恒量$\hat A$和$\hat H$对易，所以$\hat A\psi$也是$E$对应的本征态。又因为能级$E$无简并所以$\psi$和$\hat A\psi$必线性相关，这就证明了$\psi$也是$\hat A$的本征态。
+    任何态的期望 $\mel{\psi}{\op{N}}{\psi}=\|\op{a}\ket{\psi}\|^2\geq0$。
+    若 $\op{N}\ket{\nu}=\nu\ket{\nu}$，由 $\op{N}\op{a}=\op{a}\op{N}-\op{a}$ 有
+    $\op{N}(\op{a}\ket{\nu})=(\nu-1)\op{a}\ket{\nu}$。
+    所得向量若非零，对应的能量比原态低 $\hbar\omega$。
+    若基态经$\op{a}$作用后非零，就会得到能量低$\hbar\omega$的态；
+    因此$\op{a}\ket{0}=0$，从而$\op{N}\ket{0}=0$、$E_0=\hbar\omega/2$。
+    另一方面$[\op{N},\op{a}^\dagger]=\op{a}^\dagger$，升高一次使$\op{N}$的本征值增加1。
+    对归一化本征态$\ket{n}$，
+    \begin{equation}
+        \|\op{a}^\dagger\ket{n}\|^2
+        =\mel{n}{\op{a}\op{a}^\dagger}{n}
+        =\mel{n}{\op{N}+\one}{n}=n+1.
+    \end{equation}
+    从真空逐次升高，并在每一步除以$\sqrt{n+1}$归一化，得到
+    \begin{equation}
+        \op{a}\ket{n}=\sqrt n\ket{n-1},\quad
+        \op{a}^\dagger\ket{n}=\sqrt{n+1}\ket{n+1},\quad
+        \ket{n}=\frac{(\op{a}^\dagger)^n}{\sqrt{n!}}\ket{0}.
+    \end{equation}
+    不同$n$的态因属于自伴$\op{N}$的不同本征值而正交。
+    它们的闭线性张成空间在正则位置、动量平移下不变；
+    不可约性使它等于全部态空间，因而这些升降态构成完整基。
 \end{proof}
-例：一维线性谐振子能级无简并，宇称算符与$\hat H$对易，所以谐振子的本征态必有确定的宇称。
-\begin{theorem}{守恒量与定态}{Conserved Quantities and Stationary States}
-	守恒量是指平均值及其概率分布不随时间变化的力学量；定态是指系统处于某一特定的能量本征态。
-	\begin{compactenum}
-		\item $\hat A$守恒与系统处于定态与否无关，但守恒量不一定取确定值；
-		\item 如果系统处于定态，一切不显含时间的力学量的概率分布在该态中均不随时间变化；这并不意味着它们作为算符都与$\hat H$对易或都是守恒量；
-		\item 如果$\hat A$不守恒，则$\avg A$一般会随时间变化，反例：一维谐振子基态的动量平均值。
-	\end{compactenum}
-\end{theorem}
-\section{Virial定理}
-定态系统中
+
+\section{零点涨落与可测矩阵元}
+基态具有零点能 $\hbar\omega/2$，其位置分布有多宽？振荡力又能在什么能级之间激发跃迁？
+前一问题取决于基态位移的方差，后一问题取决于位移算符在不同能量本征态之间的矩阵元。两者都可以用升降算符计算。
+
+在位置表象中，以平衡点为原点，令
+$b=\sqrt{\hbar/(m\omega)}=\sqrt 2 x_0$、$\xi=x/b$。
+动量作用于位置波函数为 $\op{P}=-\i\hbar\,\partial_x$。
+代入 $\op{a}$ 后，$\op{X}/(2x_0)$ 给出 $\xi/\sqrt2$，
+$\i \op{P}/(2p_0)$ 给出 $\partial_\xi/\sqrt2$。
+基态方程 $\op{a}\ket{0}=0$ 于是化为 $\partial_\xi\psi_0=-\xi\psi_0$。
+积分给出 $\psi_0=C\e^{-\xi^2/2}$；归一化时还要用 $\d x=b\d\xi$，从而有
 \[
-	\ave H=\ave T+\ave V=E.
+    1=|C|^2 b\int_{-\infty}^{\infty}\e^{-\xi^2}\d\xi
+    =|C|^2 b\sqrt\pi .
 \]
-设$\psi$为$\hat E$的本征函数
-\[
-	\sum\hat x_i\hat p_i(\hat T+\hat V-E)\psi=0,
-\]
-显然$\hat T,\hat p_i$对易，$\hat V,\hat x_i$对易，展开为
-\[
-	\sum\Bigp{\cmm{x_i}T\hat p_i+\hat T\hat x_i\hat p_i+\hat x_i\cmm{p_i}V+\hat V\hat x_i\hat p_i-E\hat x_i\hat p_i}\psi=0.
-\]
-由
-\[
-	\cmm{x_i}T=\i\hbar\pv{\hat T}{p_i}=\i\hbar\frac{\hat p_i}m,\quad \cmm{p_i}V=-\i\hbar\pv{\hat V}{x_i}.
-\]
-化为
-\begin{gather*}
-	\sum_i\biggb{\i\hbar\frac{\hat p_i^2}m-\i\hbar\hat x_i\pv{\hat V}{x_i}+(\hat T+\hat V-E)\hat x_i\hat p_i}\psi=0,\\
-	\biggp{\frac{\hat p^2}m-\sum_i\hat x_i\pv{\hat V}{x_i}}\psi=\frac\i\hbar(\hat T+\hat V-E)\sum_i\hat x_i\hat p_i\psi.
-\end{gather*}
-左乘$\psi\cj$并全空间积分
-\[
-	\ave{\frac{\hat p^2}m-\sum_i\hat x_i\pv{\hat V}{x_i}}=\frac\i\hbar\inp{(\hat T+\hat V-E)\psi}{\sum_i\hat x_i\hat p_i\psi}=0.
-\]
-左边即Virial定理。
-\begin{theorem}{Virial定理}{Virial Theorem}
-	对$\hat H=\hat p^2/(2m)+V(\bm r)$的归一化束缚定态，若相关期望值存在且分部积分边界项消失，则动能平均值
-	\begin{align}
-		\ave T=\frac12\ave{\sum_i\hat x_i\pv{\hat V}{x_i}}.
-	\end{align}
-\end{theorem}
-\begin{example}{一维谐振子定态的动能平均值}{}
-	\[
-		V(x)=\frac12m\omega^2x^2,\quad\ave T=\frac12\ave{x\dv Vx}=\frac12m\omega^2\ave{x^2}=\ave V,
-	\]
-	因此$\ave T=\ave V=E/2$，进而
-	\begin{gather*}
-		\delta x=\sqrt{\ave{x^2}}=\sqrt{\frac{2\ave V}{m\omega^2}}=\sqrt{\frac E{m\omega^2}},\\
-		\delta p=\sqrt{\ave{p^2}}=\sqrt{2m\ave T}=\sqrt{mE}.
-	\end{gather*}
-	故
-	\[
-		\delta x\,\delta p=\frac E\omega=\Bigp{n+\frac12}\hbar\geqslant\frac\hbar{2}.
-	\]
-\end{example}
-\begin{example}{氢原子动能}{}
-	\[
-		V(r)=-\frac1{4\pi\varepsilon_0}\frac{e^2}r,\quad\ave T=\frac12\ave{r\dv Vr}=-\frac12\ave V,
-	\]
-	故$\ave T=-E,\;\ave V=2E$，与Bohr轨道模型结论一致。
-\end{example}
-\section{Ehrenfest定理}
-已经知道
-\[
-	\hat H=\frac{\hat p^2}{2m}+\hat V.
-\]
-于是
-\[
-	\dd t\ave{\r}=\frac1{\i\hbar}\ave{\cmm{\r}H}=\frac1{\i\hbar}\frac1{2m}\ave{\cmm{\r}{p^2}}=\frac{\ave{\bm p}}m.
-\]
-和
-\[
-	\dd t\ave{\bm p}=\frac1{\i\hbar}\ave{\cmm{{\bm p}}H}=\frac1{\i\hbar}\ave{\cmm{{\bm p}}V}=-\ave{\nabla V}.
-\]
-定义$\bm F:=-\nabla V$
-\begin{theorem}{Ehrenfest定理}{Ehrenfest Theorem}
-	和经典Newton方程类似，在量子力学中
-	\begin{align}
-		m\dv[2]{\avg\r}t=\avg{\bm F}.
-	\end{align}
-\end{theorem}
-考虑一个波包的运动，若波包空间范围很窄，则可近似
-\[
-	\bm F(\avg\r)\doteq m\dv[2]{\avg\r}{t}.
-\]
-\begin{example}{}{}
-	$\alpha$粒子被原子散射来探测原子结构，就需要：
-	\begin{compactenum}
-		\item 进入原子时$\alpha$粒子的波包的大小远小于原子的尺度(\si\angstrom)
-		\item 原子势场在波包大小的范围内变化不大，这样原子核对波包的作用力可以用原子核对波包中心的作用力代替
-		\item 由于波包会随着时间扩散变大，所以由要求散射过程所需时间极短，% 使得在散射过程中波包本身大小变化不大。
-		这就需要粒子的de Broglie波长也要远小于波包的尺度
-	\end{compactenum}
-	上述条件都满足的情况下，$\alpha$粒子的散射就可以用经典力学的方法来处理(Rutherford~$\alpha$粒子散射实验)，即Ehrenfest定理中的平均力可进一步近似为波包中心所受的经典力，微观粒子波粒二象性中的粒子性性质占主导地位。
+取 $C$ 为正实数，再依次作用 $\op{a}^\dagger=(\xi-\partial_\xi)/\sqrt2$，得到
+\begin{equation}
+    \psi_0(x)=\frac{\e^{-\xi^2/2}}{\pi^{1/4}\sqrt b},\qquad
+    \psi_1=\sqrt2\,\xi\psi_0,\qquad
+    \psi_2=\frac{2\xi^2-1}{\sqrt2}\psi_0.
+\end{equation}
+乘 $\xi$ 和对 $\xi$ 求导都会改变波函数的奇偶性，所以从偶宇称的基态逐次作用 $\op{a}^\dagger$，所得定态的宇称交替（图\ref{fig:oscillator-states}）。
+\begin{figure}[htbp]
+    \centering
+    \raisebox{-.5\height}{\includegraphics[width=.57\linewidth]{figures/oscillator_states.pdf}}\hfill
+    \raisebox{-.5\height}{\tikzfigure[width=.37\linewidth]{oscillator-ladder}}
+    \caption{按相同的 $n$ 对照两图：左图在共同的振幅零线上读节点和符号，右图以虚线所示的势阱底为能量零点，上、下箭头分别表示 $\op{a}^\dagger$、$\op{a}$ 连接的相邻能级。}
+    \label{fig:oscillator-states}
+    \label{fig:osc-ladder}
+\end{figure}
+
+由$\op{X}=x_0(\op{a}+\op{a}^\dagger)$，$x_0=\sqrt{\hbar/(2m\omega)}$，直接得到
+\begin{subequations}
+    \begin{alignat}{1}
+        \mel{m}{\op{X}}{n}&=x_0\bigl(\sqrt n\,\delta_{m,n-1}+\sqrt{n+1}\,\delta_{m,n+1}\bigr),\\
+        \mel{n}{\op{X}^2}{n}&=x_0^2(2n+1),\qquad
+            \mel{n}{\op{P}^2}{n}=\frac{m\hbar\omega}{2}(2n+1).
+    \end{alignat}
+\end{subequations}
+第一式意味着与$\op{X}$线性耦合的微弱探针只在相邻谐振子能级间产生一级跃迁。
+基态的位置与动量均值都为零，二者的标准差满足$\Delta X\Delta P=\hbar/2$。
+这些涨落给出有限的平均动能与势能，两项之和就是零点能。
+
+\begin{example}{用升降算符计算四次位移矩}{qm-x-fourth}
+    四次势微扰需要$\mel{n}{\op{X}^4}{n}$。先作用两次$\op{X}$：
+    \begin{equation}
+        \op{X}^2\ket{n}=x_0^2\Bigb{
+            \sqrt{n(n-1)}\ket{n-2}
+            +(2n+1)\ket{n}
+            +\sqrt{(n+1)(n+2)}\ket{n+2}}.
+    \end{equation}
+    三个右矢相互正交，因此取范数平方即可：
+    \begin{equation}
+        \begin{alignedat}{1}
+            \mel{n}{\op{X}^4}{n} &=\|\op{X}^2\ket{n}\|^2\\
+            &=x_0^4\bigb{n(n-1)+(2n+1)^2+(n+1)(n+2)}\\
+            &=3x_0^4(2n^2+2n+1).
+        \end{alignedat}
+    \end{equation}
+    基态的结果是$3x_0^4$；不需要逐项展开16个不对易乘积。
 \end{example}
 
-若$\alpha$粒子能量为~\SI5\MeV，则其\deB 波长
-\[
-	\lambda=\frac hp=\frac h{\sqrt{2m_\alpha E}}=\SI{1e-14}\m\ll a_0.
-\]
-所以原子对低能电子的散射就不能用经典的轨道动力学来计算，而必须计及电子的波动效应，用量子力学的方法来计算 %，其结果必然与经典结果有很大不同
-；要想探索更细微的物质组成结构，就必须适用能量更高的入射粒子束来照射样品。
+对三个独立、等频自由度，能量是三个振子能量之和，$\op{H}=\hbar\omega(\op{N}_x+\op{N}_y+\op{N}_z+3\one/2)$。
+总量子数$N=n_x+n_y+n_z$的态数是满足该式的有序非负整数三元组数
+\begin{equation}
+    g_N=\sum_{n_x=0}^{N}(N-n_x+1)=\frac{(N+1)(N+2)}2.
+\end{equation}
+不同频率会打破这种简并；耦合则先要求找出正常模式。
 
-在粒子波包足够窄的情况下，% 如果使定理成立，还必须满足势场变化缓慢的条件
-\[
-F(x)=-\biggb{\pv{V(\avg x)}{\avg x}+\pv[2]{V(\avg x)}{\avg x}(x-\avg x)+\frac12\pv[3]{V(\avg x)}{\avg x}(x-\avg x)^2+\cdots}.
-\]
-若要满足$\avg F(x)=F(\avg x)$，必须还要有
-\begin{align}
-	\frac12\abs{\pv[3]{V(\avg x)}{\avg x}}\vd x^2\ll\abs{\pv{V(\avg x)}{\avg x}},
-\end{align}
-如果势能函数最多含坐标的2次幂(如线性势或谐振子势)，则这个条件自动满足。
-\section{幺正算符}
-\begin{definition}{幺正算符}{Unitary Operator}
-	若算符$\hat U$的逆算符存在，且
-	\[
-		(\psi,\varphi)=(\hat U\psi,\hat U\varphi).
-\]
-	则$\hat U$是幺正的。可以验证
-	$\hat U\dg\hat U=I.$
+\section{相干态}
+在单个能量本征态中，位置分布始终不变。经典弹簧的质点却会来回振动，振幅和初相位都能测量。
+要让位置分布的中心像经典振子一样往返，同时让波包宽度保持在基态的水平，
+就需要选择多个能级的振幅和相对相位。下面的一族态恰好有这样的运动，它们各由一个复数标记。
+
+\begin{definition}{相干态}{qm-coherent-state}
+    湮灭算符$\op{a}$的归一化右本征态称为相干态(coherent state)：
+    \begin{equation}
+        \op{a}\ket{\alpha}=\alpha\ket{\alpha},\qquad \alpha\in\CC.
+    \end{equation}
+    复数$\alpha$同时编码振动幅度和相位。
 \end{definition}
-$I$显然是一个trivial的幺正算符，若幺正算符$\hat U$与$\hat I$差距充分小，即
+把 $\ket{\alpha}$ 在数算符的本征基中展开，系数记为 $c_n$。对比本征方程两边的第 $n$ 个分量得到
+$c_{n+1}=\alpha c_n/\sqrt{n+1}$，从而 $c_n=c_0\alpha^n/\sqrt{n!}$。归一化要求
 \[
-	\hat U=I+\i\varepsilon\hat F,\quad\varepsilon\ll 1.
+    1=|c_0|^2\sum_{n=0}^{\infty}\frac{|\alpha|^{2n}}{n!}=|c_0|^2\e^{|\alpha|^2}.
 \]
-略去$\varepsilon$的高阶项
-\[
-	\hat U\dg\hat U=(I-\i\varepsilon\hat F\dg)(I+\i\varepsilon\hat F)=I+\i\varepsilon(\hat F-\hat F\dg)=I.
-\]
-因此$\hat F$是Hermite的。称$\hat F$的幺正算符$\hat U$的生成元。
+取 $c_0$ 为正实数，得到
+\begin{equation}
+    \ket{\alpha}=\e^{-|\alpha|^2/2}\sum_{n=0}^\infty\frac{\alpha^n}{\sqrt{n!}}\ket{n}.
+\end{equation}
 
-如果$\hat U$和$\hat I$差距并不小，则可以通过充分多次充分小的幺正变换
-\begin{align}
-	\hat U=\lim_{n\to\infty}\Bigp{I+\i\,\frac an\hat F}^n\equiv\e^{\i a\hat F}.
-\end{align}
-用幺正算符实现的波函数和算符的变换称为幺正变换
-\begin{align}
-	\begin{cases}
-		\psi\to\psi'=\hat U\psi\\
-		\hat A\to\hat A'=\hat U\hat A\hat U\dg
-	\end{cases}
-\end{align}
-与经典物理中的坐标变换相似，幺正变换不改变系统的物理规律(运动方程、对易关系、平均值及概率)：
-\[
-	\hat A\psi=\varphi\implies\hat A'\psi'=\varphi'.
-\]
-Fourier变换也是幺正变换：
-\begin{align}
-	\hat U(p)\psi(x)&=\frac1{\sqrt{2\pi\hbar}}\int\psi(x)\e^{-\i px/\hbar}\d x=\varphi(p);\\
-	\hat U^{-1}(x)\varphi(p)&=\frac1{\sqrt{2\pi\hbar}}\int\varphi(p)\e^{\i px/\hbar}\d x=\psi(x).
-\end{align}
-对Hamilton算符进行幺正变换
-\begin{align}
-	\hat U\hat H\hat U^{-1}=\frac{p^2}{2m}+V\Bigp{\i\hbar\pp p}
-\end{align}
-故动量表象下的\Schr 方程 
-\begin{align}
-	\biggb{\frac{p^2}{2m}+V\Bigp{\i\hbar\pp p}}\varphi(p)=E\varphi(p).
-\end{align}
+对数算符 $\op{N}$ 的测量给出整数读数 $n$。由展开系数可求得各读数的概率 $p_n$ 及其均值和方差，
+\begin{subequations}
+    \begin{alignat}{1}
+        p_n&=\e^{-|\alpha|^2}\frac{|\alpha|^{2n}}{n!},\\
+        \ave{\op{N}}&=|\alpha|^2,\qquad (\Delta N)^2=|\alpha|^2.
+    \end{alignat}
+\end{subequations}
+这里 $p_n$ 是均值为 $|\alpha|^2$ 的 Poisson 分布。不同相干态的内积为
+\begin{equation}
+    \brkt{\beta}{\alpha}
+    =\exp\Bigp{-\frac{|\alpha|^2+|\beta|^2}{2}+\beta^*\alpha}.
+\end{equation}
+其模为 $\exp(-|\alpha-\beta|^2/2)$，不同相干态有有限的重叠。它们是湮灭算符 $\op{a}$ 的本征态，$\op{a}^\dagger$ 是相应的产生算符。
 
-若幺正变换还是所给Hamilton算符的对称性，即$\hat U\hat H\hat U^\dagger=\hat H$，则有
-\[
-	\hat H\psi=E\psi\implies\hat H\hat U\psi=E\hat U\psi
-\]
-等效为对系统算符进行幺正变换而量子力学规律不变。
-\[
-	\hat H\psi=E\psi\implies\hat U\dg\hat H\hat U\psi=E\psi
-\]
+演化到$t$时刻，
+\begin{equation}
+    \e^{-\i \op{H}t/\hbar}\ket{\alpha}=\e^{-\i\omega t/2}\ket{\alpha\e^{-\i\omega t}}.
+\end{equation}
+因此
+\begin{equation}
+    \ave{\op{X}}=2x_0\Re(\alpha\e^{-\i\omega t}),\qquad
+    (\Delta X)^2=x_0^2,\qquad (\Delta P)^2=\frac{m\hbar\omega}{2}.
+\end{equation}
+平均值沿经典振动轨迹运动，方差不随时间变化。
+当 $|\alpha|\gg1$ 时，振幅相对于零点涨落很大；相对涨落随之减小，均值呈现经典振荡。
 
-如果Hamilton算符幺正变换不变，
-\[
-	\hat H=\hat U\hat H\hat U\dg\implies\cmm FH=0.
-\]
-则幺正变换对应的生成元是守恒量。
-\begin{theorem}{Noether定理}{Noether Theorem}
-	若量子系统具有连续的一参数幺正对称性，且其生成元不显含时间，则该生成元与Hamilton算符对易，对应一个守恒量。
-\end{theorem}
-\paragraph{时间均匀性和能量守恒}时间平移
-\[
-	\psi(t-\tau)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\Bigp{\dd t}^n\psi(t)=\sum_{n=0}^\infty\frac{(-\tau)^n}{n!}\Bigp{\frac{\hat H}{\i\hbar}}^n\psi(t)=\e^{\i\tau\hat H/\hbar}\psi(t).
-\]
-故时间平移算符
-\begin{align}
-	\hat U(\tau)=\e^{\i\tau\hat H/\hbar}.
-\end{align}
-时间平移算符的生成元为$\hat H$，自然是与自身对易，故系统能量守恒。时间平移不变性对应系统能量守恒。
-\paragraph{空间均匀性与动量守恒}空间平移
-\[
-	\psi(\r-\bm a)=\sum_{n=0}^\infty\frac{1}{n!}(-\bm a\cdot\nabla)^n\psi(\r)=\e^{-\i\bm a\cdot\qo p/\hbar}\psi(\r).
-\]
-空间平移算符
-\begin{align}
-	\hat U(\bm a)=\e^{-\i\bm a\cdot\qo p/\hbar}.
-\end{align}
-空间平移不变性对应动量守恒。
-\paragraph{空间各向同性与角动量守恒}绕$\bm e_n$旋转小角度$\alpha$
-\begin{align*}
-	\psi(\r-\bm\alpha\times\r)&=\sum_{n=0}^\infty\frac{1}{n!}[-(\bm\alpha\times\r)\cdot\nabla]^n\psi(\r),\qquad\bm\alpha:=\alpha\bm e_n.\\
-	&=\sum_{n=0}^\infty\frac{1}{n!}[-\bm\alpha\cdot(\r\times\nabla)]^n\psi(\r)=\e^{-\i\bm\alpha\cdot\qo L/\hbar}\psi(\r).
-\end{align*}
-空间转动算符
-\begin{align}
-	\hat U(\bm\alpha)=\e^{-\i\bm\alpha\cdot\qo L/\hbar}
-\end{align}
-故空间转动不变性对应角动量守恒。
-\paragraph{空间反射不变性}定义宇称(parity)算符
-\begin{align}
-	\hat P\psi(\r)=\psi(-\r).
-\end{align}
-显然$\hat P^2=I$，本征值为$\pm 1$，且$(\hat P\varphi,\hat P\psi)=(\varphi,\psi)$。
-根据本征函数完备性，任一波函数都可以展开为$\hat P$的本征函数的叠加(对称和反对称部分)\[
-	\psi(\r)=\psi_\mathrm S(\r)+\psi_\mathrm A(\r).
-\]
-由于宇称是内禀的，所以没有经典对应力学量。如果系统宇称守恒，且系统能级是非简并的，则系统能量本征态必有确定的宇称。
+\section{黑体辐射与Planck分布}
+\label{sec:planck}
+前面可以指定一个谐振子的振幅和相位。在受热空腔中，腔壁不断吸收和发射辐射，
+实验给定的是温度，待求的是各个频段平均带出多少能量。
+每个电磁驻波模式都可以当作一个量子谐振子，因此先求温度怎样决定一个模式的平均激发数，
+再数每个频段里有多少个模式，就能得到从小孔测出的频谱。
 
-推论：一维束缚态对称势能情况下系统本征态必有确定的宇称，宇称守恒的系统并不一定处于宇称的本征态。
+\subsection{空腔频谱与经典预言}
+\label{ss:blackbody-experiment}
 
-对于多粒子系统，系统的总宇称是各部分相乘的，而能量等力学量的本征值是相加的。
-\paragraph{全同粒子效应}顾名思义，全同粒子在量子力学里是不可区分的。
-\begin{theorem}{全同粒子原理}{Identical Particle Principle}
-	调换全同粒子不改变体系状态。
-\end{theorem}
-定义交换算符
-\begin{align}
-	\hat P_{ij}\psi(\ldots,q_i,\ldots,q_j,\ldots;t)=\psi(\ldots,q_j,\ldots,q_i,\ldots;t).
-\end{align}
-显然$\hat P_{ij}^2=I$。由全同粒子原理，应有$\hat P_{ij}\psi=\pm\psi$。自旋整数的Bose子取$+$，对应交换对称；半整数的Fermi子取$-$，对应交换反对称。
+热辐射实验要测量温度固定时，发射功率怎样分配在不同频率区间。
+把带有小孔的空腔加热到稳定温度，小孔射出的光经分光元件选频，
+再由经过标定的热探测器测量各窄频段的功率。
+孔足够小，使辐射逸出不显著破坏腔内热平衡(thermal equilibrium)；
+腔壁反复吸收和发射，使频谱主要由温度决定\cite{history}。
 
-无耦合情形，体系的总波函数可写为单个粒子波函数的乘积
+测量结果有三个相互关联的特征：每一温度下存在谱峰，
+温度升高时谱峰移向更高频率，总辐射功率迅速增加，
+而高频端最终下降。经典电磁场也有一组腔模式，
+但若对每个二次模式采用能量均分，每个模式平均具有$\kB T$的热能。
+由于高频模式的数量密度随$\nu^2$增加，
+经典能量密度谱也随$\nu^2$增长，对全部频率积分就会发散。
+
+下面保留电磁模式的空间计数，只改变每个模式允许的能量和热概率。
+这一分工很重要：频谱中的$\nu^2$来自模式数，
+高频抑制则来自激发一个量子所需的能量$h\nu$。
+
+\subsection{单模式热分布}
+\label{ss:thermal-occupation}
+
+在空腔里固定一个驻波的空间形状和偏振，随时间变化的只剩一个振幅；
+Maxwell 方程给这个振幅与弹簧位移同样的简谐振动方程。将这个自由度量子化，
+频率 $\nu$ 的模式每增加一级，能量便增加 $\hbar\omega=h\nu$，称为增加一个光子。
+电磁场可与壁交换能量。按热平衡的 Boltzmann 权重，
+能量为 $E_n$ 的每个微观态具有正比于 $\exp[-E_n/(\kB T)]$ 的概率。
+因此相邻占据数的概率比为 $p_{n+1}/p_n=\exp[-h\nu/(\kB T)]$，
+零点能在这个比值里抵消。所有占据数的概率相加必须为一，得到
+\begin{equation}
+    p_n=(1-\e^{-\beta h\nu})\e^{-n\beta h\nu},\qquad\beta=\frac1{\kB T}.
+\end{equation}
+
+$\beta$是逆温度参数，$\kB$为Boltzmann常数。
+令$q=\e^{-\beta h\nu}$，有限正温度下$0<q<1$。
+以真空能为能量零点，配分函数(partition function) $Z$ 为所有权重相加所得的几何级数。
+各能级概率为 $p_n=q^n/Z$。把几何级数求和，再对 $q$ 求导，可得
+\begin{equation}
+    Z=\sum_{n=0}^\infty q^n=\frac1{1-q},\qquad
+    \sum_{n=0}^\infty nq^n=q\dv{Z}q=\frac{q}{(1-q)^2}.
+\end{equation}
+于是
+\begin{equation}
+    \bar n=\sum_{n=0}^\infty np_n=\frac1{\e^{\beta h\nu}-1}.
+\end{equation}
+热平衡辐射的光子数可变，其化学势(chemical potential)为零。单模式的热能相对真空取值，等于 $h\nu\bar n$。
+
+\subsection{模式计数与辐射量}
+\label{ss:radiation-density}
+
+边长为$L$的周期盒给出$k_i=2\pi n_i/L$，其中$n_i$为整数。
+每个波矢点在三维$k$空间占据体积$(2\pi/L)^3$。
+半径$k$到$k+\d k$的球壳体积为$4\pi k^2\d k$，
+因此该频率区间的模式数等于球壳体积除以每点体积，再乘偏振数。
+正负波矢表示不同传播方向，已包含在整个球壳中，不再另乘2。
+
+大体积空腔采用周期边界条件，每个波矢(wave vector)格点占据$(2\pi)^3/\mathcal V$，
+再计入两种横向偏振。单位体积、单位频率的模式密度为
+\begin{equation}
+    g(\nu)=2\frac{4\pi k^2}{(2\pi)^3}\frac{\d k}{\nd\nu}
+    =\frac{8\pi\nu^2}{c^3},\qquad k=\frac{2\pi\nu}{c}.
+\end{equation}
+于是能量密度谱(spectral energy density)及谱辐亮度(spectral radiance)为
+\begin{equation}
+    u_\nu=\frac{8\pi h\nu^3}{c^3}\frac1{\e^{h\nu/\kB T}-1},\qquad
+    B_\nu=\frac{c}{4\pi}u_\nu.
+\end{equation}
+$B_\nu$的单位是$\mathrm{W\,m^{-2}\,sr^{-1}\,Hz^{-1}}$。
+它不同于单位面积的出射通量(radiant exitance)；各向同性黑体在向外半球积分给出
+\begin{equation}
+    M=\pi\int_0^\infty B_\nu\d\nu
+    =\sigma T^4,\qquad
+    \sigma=\frac{2\pi^5\kB^4}{15h^3c^2}.
+\end{equation}
+
+上式的几何因子来自辐亮度的定义：
+$B_\nu\cos\theta\d\Omega\d\nu$是单位面积向方向$(\theta,\phi)$发出的功率。
+因此向外半球的角积分为
+\begin{equation}
+    \int_0^{2\pi}\d\phi\int_0^{\pi/2}
+    \cos\theta\sin\theta\d\theta=\pi.
+\end{equation}
+在频率积分中换元$x=h\nu/(\kB T)$，
+\begin{equation}
+    M=\frac{2\pi\kB^4T^4}{h^3c^2}
+    \int_0^\infty\frac{x^3}{\e^x-1}\d x.
+\end{equation}
+把分母的倒数按公比 $\e^{-x}$ 展成几何级数。各项非负，可以逐项积分；
+每项对 $x$ 作三次分部积分，得到
 \[
-	\psi(q_1,\ldots,q_N)=\psi_1(q_1)\cdots\psi_N(q_N).
+    \int_0^\infty\frac{x^3}{\e^x-1}\d x
+    =\sum_{r=1}^\infty\int_0^\infty x^3\e^{-rx}\d x
+    =6\sum_{r=1}^\infty\frac1{r^4}
+    =6\zeta(4)=\frac{\pi^4}{15}.
 \]
-比如二粒子体系，有对称化波函数
-\[
-	\psi_\mathrm S(q_1,q_2)=\frac1{\sqrt2}[\psi_1(q_1)\psi_2(q_2)+\psi_1(q_2)\psi_2(q_1)],
-\]
-和反对称化波函数
-\[
-	\psi_\mathrm A(q_1,q_2)=\frac1{\sqrt2}[\psi_1(q_1)\psi_2(q_2)-\psi_1(q_2)\psi_2(q_1)].
-\]
-推广到$N$粒子体系，反对称化波函数可以写为
-\begin{align}
-	\psi_\mathrm A(q_1,\ldots,q_N)=\frac1{\sqrt{N!}}\begin{vmatrix}
-		\psi_1(q_1)&\cdots&\psi_1(q_N)\\
-		\vdots&\ddots&\vdots\\
-		\psi_N(q_1)&\cdots&\psi_N(q_N)
-	\end{vmatrix}
-\end{align}
-这称为Slater行列式。显然，当$\psi_1,\ldots,\psi_N$任两者相等时，上式为0，即
-\begin{theorem}{Pauli不相容原理}{Pauli Exclusive Principle}
-	两个Fermi子不能处于相同的量子态中。
-\end{theorem}
+最后一步采用 Riemann $\zeta$ 函数的已知值 $\zeta(4)=\pi^4/90$。
+
+低频$h\nu\ll\kB T$恢复每模式$\kB T$的经典结果，高频受指数抑制。
+
+换成波长时必须乘Jacobian：
+\begin{equation}
+    B_\lambda=B_\nu(c/\lambda)\frac{c}{\lambda^2}
+    =\frac{2hc^2}{\lambda^5}\frac1{\e^{hc/(\lambda\kB T)}-1}.
+\end{equation}
+$B_\lambda$峰值满足$x=5(1-\e^{-x})$的正根$x=4.965114\ldots$，
+所以$\lambda_{\max}T\simeq2.898\times10^{-3}\,\mathrm{m\,K}$，升温使峰值移向短波（图\ref{fig:planck-wavelength}）。
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.65\linewidth]{figures/blackbody.pdf}
+    \caption{不同温度的黑体波长谱，纵轴 $I$ 对应正文的谱辐亮度 $B_\lambda$。与最高温度的曲线相比，Wien近似适用于短波一侧，Rayleigh--Jeans近似适用于长波一侧。}
+    \label{fig:planck-wavelength}
+\end{figure}
+$B_\nu$的峰值满足$x=3(1-\e^{-x})$。从频率谱换成波长谱时，Jacobian也随波长变化，两种谱密度的峰值波长与峰值频率应分别由相应的极值条件确定。
+这些公式要求热平衡和黑体吸收发射条件，非平衡激光没有Planck分布。
+
+\section{光子计数与反关联}
+\label{sec:photoncount}
+热辐射谱给出各频段的平均能量。弱相干光和低重复率的单光子源都能给出稀疏计数，怎样知道光子是否成对到达？
+将光送入分束器，在两端分别记录单计数及同一时间窗内的符合(coincidence)。触发式实验还用另一次探测标记制备，所有概率都在同一批触发中估计\cite{grangier}。
+
+一次触发后，两路各自点击的概率记为 $p_1,p_2$，符合概率记为 $p_{12}$。
+在低效率、背景可忽略且时间窗一致时，$p_{12}/(p_1p_2)$ 消去效率和分束比，给出归一化二阶关联。
+若该比值小于一，符合少于独立点击的预期，称为反关联(anticorrelation)。
+
+理想光电探测的单次计数率正比于平均光子数 $\ave{\op{a}^\dagger\op{a}}$。
+\begin{definition}{单模式的零延迟二阶关联}{qm-photon-correlation}
+    对平均光子数 $\ave{\op{N}}>0$ 的单个模式，归一化零延迟二阶关联函数(second-order correlation function)为
+    \begin{equation}
+        g^{(2)}(0)=\frac{\ave{\op{a}^\dagger \op{a}^\dagger \op{a}\op{a}}}{\ave{\op{a}^\dagger \op{a}}^2}
+        =\frac{\ave{\op{N}(\op{N}-\one)}}{\ave{\op{N}}^2}.
+    \end{equation}
+    分子数的是同一模式中可依次吸收的光子对，分母给出按平均强度计算的独立计数基准。
+\end{definition}
+在含有 $n\geq1$ 个光子的数态 $\ket{n}$ 中，测量 $\op{N}$ 总是得到 $n$，故 $g^{(2)}(0)=1-1/n$。
+对相干态，连续两次用 $\op{a}\ket{\alpha}=\alpha\ket{\alpha}$ 得分子 $|\alpha|^4$，与分母相等，故比值为一。
+对单模式热态(thermal state)，$g^{(2)}(0)=2$，因为对几何级数求两次导数有
+\begin{equation}
+    \ave{\op{N}(\op{N}-\one)}
+    =(1-q)q^2\dv[2]{}q\frac1{1-q}
+    =\frac{2q^2}{(1-q)^2}=2\bar n^2.
+\end{equation}
+$\ket{1}$不能在理想分束后触发两个单光子吸收探测器的同次符合；
+经典正随机强度则由$\ave{I^2}\geq\ave{I}^2$给出$g^{(2)}(0)\geq1$。
+实验判别反关联需控制暗计数、多光子成分、时间窗和背景\cite{grangier}。
+弱相干光即使平均光子数很小，仍给出 $g^{(2)}(0)=1$。
+
+\checkpoint{谐振子热态在$T\to0$时的平均能量，
+    为什么有时写为0，有时写为$\hbar\omega/2$？}{
+    保留完整能谱$E_n=\hbar\omega(n+1/2)$时，
+    配分函数和平均能量为
+    \begin{subequations}
+        \begin{alignat}{1}
+            Z&=\sum_{n=0}^{\infty}\e^{-\beta\hbar\omega(n+1/2)}
+                =\frac{\e^{-\beta\hbar\omega/2}}
+                    {1-\e^{-\beta\hbar\omega}},\\
+            \ave{\op{H}}&=-\frac{\partial\ln Z}{\partial\beta}
+                =\frac{\hbar\omega}{2}
+                    +\frac{\hbar\omega}{\e^{\beta\hbar\omega}-1}.
+        \end{alignat}
+    \end{subequations}
+    以真空为能量零点时，$\op{H}'=\op{H}-\hbar\omega\one/2$。各态的 Boltzmann 权重与配分函数都乘以 $\exp(\beta\hbar\omega/2)$，归一化概率因而相同，热容和跃迁概率也相同。
+    零点能保留在 $\op{H}$ 中，$\op{H}'$ 的期望值则只含可热激发的部分 $\hbar\omega\bar n$。当 $T\to0$ 时，$\bar n\to0$，热辐射通量趋于零。}
+
+\reading{光子的热占据见 Feynman 第 III 卷第 4 章\cite{feynman4}。下一章用升降算符求角动量谱。}

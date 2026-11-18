@@ -21,6 +21,7 @@ NOTES = {
     "SM": "Statistical Mechanics",
     "ED": "Electrodynamics",
     "NRD": "Nuclear Radiation and Detection",
+    "CA": "Complex Analysis",  # This collection has only a standalone figure.
 }
 
 
@@ -44,6 +45,7 @@ def build(source):
     )
     if problems:
         raise RuntimeError(f"{source}:\n" + "\n".join(problems))
+    print(f"OK: {source.with_suffix('.pdf')}", flush=True)
 
 
 def main():
@@ -58,11 +60,13 @@ def main():
         parser.error("latexmk and xelatex are required (TeX Live or MacTeX)")
     for name in dict.fromkeys(args.notes or NOTES):
         directory = ROOT / NOTES[name]
-        # These two notes select PDF pages using xr-hyper's external labels.
-        if name in {"ED", "NA"}:
-            build(directory / "figures/tikz/layouts.tex")
+        atlas = directory / "figures/tikz.tex"
+        if name == "CA":
+            build(atlas)
+            continue
+        if atlas.is_file():
+            build(atlas)
         build(directory / f"{name}.tex")
-        print(f"OK: {directory / (name + '.pdf')}", flush=True)
 
 
 if __name__ == "__main__":

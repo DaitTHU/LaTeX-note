@@ -1,338 +1,429 @@
-\chapter{中心力场}
-\begin{definition}{中心力场}{Central Feild}
-	中心力场$V(r)$与$\theta,\varphi$无关，具有转动对称性．
+\chapter{旋转、角动量与谱线分裂}
+\label{ch:angular}
+
+\section{连续对称性与守恒量}
+
+谐振子每升高一级，振动能量就增加一份 $\hbar\omega$。原子束通过磁场时也出现离散的读数，但这次读数还取决于磁体朝向。
+要把沿 $z$ 轴的测量与转过一个角度后的测量联系起来，先要知道怎样转动一个量子态。
+空间波函数对无穷小旋转的响应给出轨道角动量；体系的旋转对称性决定相应分量是否守恒。
+
+把一个无自旋粒子的制备绕 $z$ 轴转过小角度 $\epsilon$，探测器的位置固定。
+转动后在方位角 $\phi$ 读到的振幅，等于原来在 $\phi-\epsilon$ 处的振幅。
+把半径和极角暂时省略，一阶展开为
+\begin{equation}
+    (\op{U}(\epsilon)\psi)(\phi)=\psi(\phi-\epsilon)
+        =\psi(\phi)-\epsilon\,\partial_\phi\psi(\phi)+\bigo(\epsilon^2).
+\end{equation}
+若把这个变化写成 $\op{U}(\epsilon)=\one-\i\epsilon \op{G}/\hbar+\cdots$，
+比较系数可知 $\op{G}=-\i\hbar\,\partial_\phi$。由
+$\partial_\phi=-y\partial_x+x\partial_y$，即得 $\op{G}=\op{X}\op{P}_y-\op{Y}\op{P}_x=\op{L}_z$。
+这种确定无穷小变化的算符称为生成元(generator)。
+有限维中，幺正性 $\op{U}^\dagger \op{U}=\one$ 的一阶项要求 $\op{G}^\dagger=\op{G}$。
+对连续自由度，还要选定使生成元自伴的定义域。
+一般记 $\epsilon$ 为变换的参数，使乘积 $\epsilon \op{G}$ 具有作用量量纲。
+
+一个主动变换$\op{U}(\epsilon)=\exp(-\i\epsilon \op{G}/\hbar)$若保持Hamilton算符不变，
+$\op{U}^\dagger \op{H}\op{U}=\op{H}$，对$\epsilon$求导得到$[\op{G},\op{H}]=0$。
+当$\op{G}$不显含时间且定义域条件成立时，式\eqref{eq:heisenberg}给出$\d\ave{\op{G}}/\nd t=0$。
+这个对称性还使演化保持 $\op{G}$ 的各个谱子空间，因而 $\op{G}$ 的整个测量概率分布守恒。
+若生成元本身含时，正确条件是$\partial_t\op{G}+(\i/\hbar)[\op{H},\op{G}]=0$。
+
+平移(translation)$\op{T}(\bm a)=\exp(-\i\bm a\cdot\hatbm{P}/\hbar)$满足
+$\op{T}^\dagger\hatbm{X} \op{T}=\hatbm{X}+\bm a\,\one$；空间均匀性因此给出动量守恒。
+旋转$\op{R}(\bm n,\theta)=\exp(-\i\theta\bm n\cdot\hatbm{J}/\hbar)$的生成元满足
+\begin{equation}
+    [\op{J}_i,\op{J}_j]=\i\hbar\epsilon_{ijk}\op{J}_k.
+    \label{eq:Jalgebra}
+\end{equation}
+无自旋粒子的轨道部分为$\hatbm{L}=\hatbm{X}\times\hatbm{P}$；
+有内禀自旋(intrinsic spin)时，旋转同时作用于轨道和自旋，生成元为$\hatbm{J}=\hatbm{L}+\hatbm{S}$。
+记 $\hatbm{X}=(\op{X},\op{Y},\op{Z})$。由轨道角动量的分量表达式可直接验证式\eqref{eq:Jalgebra}。
+写 $\op{L}_x=\op{Y}\op{P}_z-\op{Z}\op{P}_y$、$\op{L}_y=\op{Z}\op{P}_x-\op{X}\op{P}_z$。
+展开 $[\op{L}_x,\op{L}_y]$ 的四项，不同坐标与动量彼此对易，只留下
+\begin{equation}
+    [\op{L}_x,\op{L}_y]=\op{Y}[\op{P}_z,\op{Z}]\op{P}_x+\op{X}[\op{Z},\op{P}_z]\op{P}_y
+        =\i\hbar(\op{X}\op{P}_y-\op{Y}\op{P}_x)=\i\hbar \op{L}_z .
+\end{equation}
+自旋的同一关系已由 Pauli 算符的乘法得到。轨道算符与自旋算符分别作用在空间和内部自由度上，交叉对易子为零，两部分就能直接相加。
+
+\section{角动量谱}
+
+知道角动量产生旋转以后，可以回到束流实验：给定角动量的大小，沿一个选定的轴究竟能分出几束？
+确定束数要找出在同一大小下有哪些允许的投影。为此先找能同时有确定值的两个量，再考察怎样从一个投影态走到另一个。
+
+角动量(angular momentum)的平方是标量算符 $\hatbm{J}^2=\op{J}_x^2+\op{J}_y^2+\op{J}_z^2$。由式\eqref{eq:Jalgebra}，
+\begin{equation}
+    [\hatbm{J}^2,\op{J}_i]
+    =\sum_k\bigp{\op{J}_k[\op{J}_k,\op{J}_i]+[\op{J}_k,\op{J}_i]\op{J}_k}=0,
+\end{equation}
+因为反对称的$\epsilon_{kil}$与关于$k,l$对称的算符组合缩并为零。
+
+\begin{definition}{角动量量子数与升降算符}{qm-angular-labels}
+    用无量纲数$\lambda,m$暂记共同本征值：
+    \begin{subequations}
+        \begin{alignat}{1}
+            \hatbm{J}^2\bigket{\lambda,m}&=\hbar^2\lambda\bigket{\lambda,m},\\
+            \op{J}_z\bigket{\lambda,m}&=\hbar m\bigket{\lambda,m}.
+        \end{alignat}
+    \end{subequations}
+    定义$\op{J}_+=\op{J}_x+\i \op{J}_y$、$\op{J}_-=\op{J}_x-\i \op{J}_y$，且$\op{J}_+^\dagger=\op{J}_-$。
+    若一个非零子空间在三个 $\op{J}_i$ 的作用下封闭，且不含更小的非零共同不变子空间，就称它为不可约(irreducible)角动量多重态。
 \end{definition}
-守恒量完全集\footnote{区分力学完全集和守恒量完全集．}一般选$\{\hat H,\hat L^2,\hat L_z\}$，用$\psi_{n\ell m}$表示共同本征态，本征值问题表示为
-\begin{align*}
-	\hat H\psi_{n\ell m}   & =E_{n\ell}\psi_{n\ell m},           \\
-	\hat L^2\psi_{n\ell m} & =\ell(\ell+1)\hbar^2\psi_{n\ell m}, \\
-	\hat L_z\psi_{n\ell m} & =m\hbar\psi_{n\ell m}.
-\end{align*}
 
-中心力场中粒子运动的Hamilton量
-\iffalse
-\[
-	\hat H=\frac{\hat p^2}{2\mu}+V(r)=-\frac{\hbar^2}{2\mu}\nabla^2+V(r).
-\]
-球坐标系中
-\[
-	\nabla^2=\frac1{r^2}\pp r\Bigp{r^2\pp r}+\frac1{r^2}\Lambda.
-\]
-\[
-	\nabla^2=\frac1{r^2}\pp r\Bigp{r^2\pp r}+\frac1{r^2\sin\theta}\pp \theta\Bigp{\sin\theta\pp \theta}+\frac1{r^2\sin^2\theta}\pd[2]{}\phi.
-\]
-又径向动能算符
-\[
-	\frac{\hat p_r^2}{2\mu}=-\frac{\hbar^2}{2\mu}\Bigp{\pp r+\frac1r}^2,
-\]
-径向动量算符
-\[
-	\hat L^2=-\hbar^2\Lambda.
-\]
-因此Hamilton量可以写为
-\fi
-\begin{align}
-	\hat H=\frac{\hat p_r^2}{2\mu}+\frac{\hat L^2}{2\mu r^2}+V(r).
-\end{align}
-可分离变量
-\[
-	\psi_{n\ell m}(r,\theta,\varphi)=R_{n\ell}(r)Y_{\ell m}(\theta,\varphi).
-\]
-得到径向方程
-\begin{align}
-	\Bigb{\frac1r\dd[2]rr+\frac{2\mu}{\hbar^2}\bigp{E-V(r)}-\frac{\ell(\ell+1)}{r^2}}R_\ell(r)=0.
-\end{align}
-令$\chi_\ell(r):=rR_\ell(r)$
-\begin{align}
-	\chi''_\ell(r)+\Bigb{\frac{2\mu}{\hbar^2}\bigp{E-V(r)}-\frac{\ell(\ell+1)}{r^2}}\chi_\ell(r)=0.
-\end{align}
-\paragraph{解的渐进行为}
-$r\to0$时，粒子出现在的半径$r$球体内的概率
-\[
-	\int_0^r\abs{R_\ell(s)}^2s^2\d s\propto r^{2\lambda+3}\quad\text{若 }R_\ell(r)\sim r^\lambda,\ \lambda>-3/2
-\]
-也应趋于0，因此$r\to0$时
-\[
-R_\ell(r)\sim r^\lambda,\quad\lambda>-\frac32.
-\]
+\begin{lemma}[升降一步后的投影与范数]
+    给定 $\hatbm{J}^2,\op{J}_z$ 的归一化共同本征态 $\ket{\lambda,m}$，若 $\op{J}_\pm\ket{\lambda,m}$ 非零，
+    它的 $\hatbm{J}^2$ 本征值仍为 $\hbar^2\lambda$，投影量子数变为 $m\pm1$。升降后向量的范数平方为
+    $\hbar^2[\lambda-m(m\pm1)]$。
+\end{lemma}
+\begin{proof}
+由 $\op{J}_\pm$ 的定义和角动量对易关系，
+\begin{subequations}
+    \begin{alignat}{1}
+        [\op{J}_z,\op{J}_\pm]&=\pm\hbar \op{J}_\pm,\\
+        \op{J}_\mp \op{J}_\pm&=\hatbm{J}^2-\op{J}_z^2\mp\hbar \op{J}_z.
+    \end{alignat}
+\end{subequations}
+因 $\hatbm{J}^2$ 与各分量对易，升降不改变 $\hatbm{J}^2$ 的本征值。由第一式，$\op{J}_z \op{J}_\pm\ket{\lambda,m}=\hbar(m\pm1)\op{J}_\pm\ket{\lambda,m}$。
+在原态上取第二式的期望，左侧就是升降后向量的范数平方，右侧给出所述表达式。
+\end{proof}
 
-一般$r\to0$时$V(r)$增长比$1/r^2$慢，即$r^2V(r)\to0$，则径向方程的渐近形式为\footnote{通常碰到的中心场均满足此条件，譬如：谐振子势、线性中心势、对数中心势、球方势、自由粒子、Coulomb势、Yukawa势等．} % →
-\[
-	\Bigb{\frac1{r}\dd[2]rr-\frac{\ell(\ell+1)}{r^2}}R_\ell(r)=0.
-\]
-在$r=0$附近，$R_\ell(r)\sim r^\lambda$，代入
-\[
-	\lambda(\lambda+1)-\ell(\ell+1)=0\implies\lambda=\ell,\;\cancel{-(\ell+1)}.
-\]
-% 应有$R_\ell(r)\sim r^\ell.$
-虽然$\ell=0$时，取$\lambda=-(\ell+1)$也满足条件，但此时$\psi\sim 1/r$，因为
-\[
-	\nabla^2\frac1r=-4\pi\delta^{(3)}(\bm r),
-\]
-故此解并不满足\Schr 方程。
-\paragraph{离心势能}
-$r$方向的有效势为
-\[
-V\eff=V(r)+\frac{\hat L^2}{2\mu r^2}=V(r)+\frac{\ell(\ell+1)\hbar^2}{2\mu r^2}.
-\]
-其中的离心势能
-\[
-U_\ell=\frac{\ell(\ell+1)\hbar^2}{2\mu r^2}\geqslant 0
-\] % ,\quad U_0(r)=0.\]
-在$r=0$附近构筑了很高的势垒，产生自中心向外的斥力，使粒子在$r=0$附近出现的概率明显下降．后面知，当$r\to0$时，$R(r)$将以$r^\ell\to0$，而且$\ell$越大这种现象越明显.
-\iffalse
-	\begin{table}[!ht]
-		\centering
-		\begin{tabular}{cccccc}
-			\bottomrule
-			\rowcolor[gray]{0.9}
-			$\ell$ & 0 & 1 & 2 & 3 & 4 \\
-			\hline
-			       & s & p & d & f & g \\
-			\toprule
-		\end{tabular}
-		\caption{角动量量子数用下面原子光谱学记号代表}
-	\end{table}
-\fi
+\begin{theorem}{角动量的大小与投影谱}{qm-angular-spectrum}
+    在一个有限维不可约角动量多重态内，有一个整数或半整数 $j\geq0$，使得
+    \begin{equation}
+        \hatbm{J}^2\ket{j,m}=\hbar^2j(j+1)\ket{j,m},\qquad
+        \op{J}_z\ket{j,m}=\hbar m\ket{j,m},\qquad m=-j,-j+1,\ldots,j .
+    \end{equation}
+    因此沿一根轴可分辨出 $2j+1$ 个投影值。
+\end{theorem}
+\begin{proof}
+根据引理，范数平方非负。对固定 $\lambda$，若 $m$ 无限增加或减少，
+$\lambda-m(m\pm1)$最终会变负，因此升降链必须在两端终止。
+设最高、最低的$m$分别为$a,b$，端点条件为
+\begin{subequations}
+    \begin{alignat}{1}
+        \op{J}_+\ket{\lambda,a}=0 &\ \Longrightarrow\ \lambda=a(a+1),\\
+        \op{J}_-\ket{\lambda,b}=0 &\ \Longrightarrow\ \lambda=b(b-1).
+    \end{alignat}
+\end{subequations}
+两式相减给出$(a+b)(a-b+1)=0$。
+由于$a\geq b$，第二个因子为正，故$b=-a$。
+记$a=j\geq0$，便有$\lambda=j(j+1)$。
+从 $-j$ 升到 $j$ 共走 $2j$ 步，每步使 $m$ 增加一，故 $2j$ 必为非负整数。
+所得各态的线性组合在三个角动量分量作用下仍留在这条升降链内；
+不可约性保证这条链已给出整个多重态。由升降后态的范数，并逐态选择相位，可得
+\begin{equation}
+    \op{J}_\pm\ket{j,m}=\hbar\sqrt{(j\mp m)(j\pm m+1)}\ket{j,m\pm1}.
+\end{equation}
+\end{proof}
+普通三维位置自由度的轨道角动量(orbital angular momentum)只有整数$\ell$，
+因为标量位置态上的$2\pi$旋转为恒等；自旋允许半整数。
+自旋$1/2$的$2\pi$旋转给出$-\one$；若只旋转干涉仪的一条支路，这个相对符号可以被读出。
 
-\paragraph{两体问题求解}质量为$m_1$和$m_2$两粒子体系的Schrödinger方程
-\[
-	\i\hbar\pv\psi{t}=\Bigb{-\frac{\hbar^2}{2m_1}\nabla_1^2-\frac{\hbar^2}{2m_2}\nabla_2^2+V(r)}\psi.
-\]
-% 其中相对坐标$\r=\r_1-\r_2$、质心质量$M=m_1+m_2$、约化质量和质心坐标\[\mu=\frac{m_1m_2}{m_1+m_2}\quad\bm R=\frac{m_1\r_1+m_2\r_2}{m_1+m_2}.\]
-运用质心质量和约化质量分离出相对运动，\Schr 方程变为
-\[
-	\i\hbar\pv\psi{t}=\Bigb{-\frac{\hbar^2}{2M}\nabla_M^2-\frac{\hbar^2}{2\mu}\nabla_\mu^2+V(r)}\psi.
-\]
-\section{三维各向同性谐振子}
-% 无论在理论上或应用上，谐振子的研究都很重要。三维各向同性谐振子
-势函数
-\[
-	V(r)=\frac12\mu\omega^2(x^2+y^2+z^2).
-\]
-% 在实际计算中，常用三维各向同性谐振子的本征函数系作基底．
-完全集取$\{\hat H_x,\hat H_y,\hat H_z\}$分离变量，利用前面已经提到一维谐振子
-\[
-	\Bigb{-\frac{\hbar^2}{2\mu}\dd[2]x+\frac12\mu \omega^2x^2}\psi(x)=E\psi(x)
-\]
-的结论：能量本征值简并度为1
-\[
-	E_{n}=\Bigp{n+\frac12}\hbar \omega, \quad n=0,1,2, \ldots
-\]
-本征函数
-\[
-	\psi_n(x)=\sqrt{\frac{\alpha}{2^nn!\sqrt\pi}}H_n(\alpha x)\e^{-\alpha^2x^2/2},\quad\alpha=\sqrt{\frac{\mu\omega}\hbar}.
-\]
-因此三维各向同性谐振子的本征函数
-\[
-	\varPhi_{n_xn_yn_z}(x,y,z)=\psi_{n_x}(x)\psi_{n_y}(y)\psi_{n_z}(z)
-\]
-本征值
-\[
-	E_N=\Bigp{N+\frac32}\hbar\omega,\quad N=n_x+n_y+n_z
-\]
-能级简并度
-\[
-	f_N=\frac12(N+1)(N+2).
-\]
-或取$\{\hat H,\hat L^2,\hat L_z\}$，并分离变量$\varPsi(r,\theta,\varphi)=R_\ell(r)Y_{\ell m}(\theta,\varphi)$，则
-\[
-	R_\ell''+\frac2rR_\ell'+\Bigb{\frac{2\mu}{\hbar^2}\Bigp{E-\frac12\mu\omega^2r^2}-\frac{\ell(\ell+1)}{r^2}}R_\ell=0.
-\]
-采用级数解法\footnote{参见：教材 P103-104}，
-本征值
-\[
-	E_N=\Bigp{N+\frac32}\hbar\omega,\quad N=2n_r+\ell,\quad n_r,\ell=0,1,2\ldots
-\]
-简并度
-\[
-	f_N=\frac12(N+1)(N+2).
-\]
-基底间的变换
-\[
-	\varPsi_{n_r\ell m}=\sum_{n_xn_yn_z}\varPhi_{n_xn_yn_z}\int\varPhi_{n_xn_yn_z}\cj\varPsi_{n_r\ell m}\d\bm r.
-\]
-\section{氢原子}
-氢原子是由电子和原子核构成的两体体系，相互作用是Coulomb势 % (取无穷远为势能零点)
-\[
-	V(r)=-\frac{e^2}r.\CGS
-\]
-注意这里使用的是Gauss单位制。
-\[
-	\Bigb{-\frac{\hbar^2}{2m_\pton}\nabla_\pton^2-\frac{\hbar^2}{2m_\elec}\nabla_\elec^2+V(r)}\psi(\bm r_\pton,\bm r_\elec)=E\tot\psi(\bm r_\pton,\bm r_\elec),
-\]
-前面已经证明，可以分为质心$M$整体运动和内部约化质量$\mu$的运动
-\[
-	\Bigb{-\frac{\hbar^2}{2M}\nabla_R^2-\frac{\hbar^2}{2\mu}\nabla_r^2+V(r)}\psi(\bm R,\bm r)=E\tot\psi(\bm R,\bm r).
-\]
-可分离变量$\psi(\bm R,\bm r)=\varPhi(\bm R)\varPsi(\bm r)$，分别满足
-\begin{gather*}
-	-\frac{\hbar^2}{2M}\nabla_R^2\varPhi(\bm R)=E_\mathrm{CM}\varPhi(\bm R)\\
-	\Bigb{-\frac{\hbar^2}{2\mu}\nabla_r^2+V(r)}\varPsi(\bm r)=E\varPsi(\bm r).
-\end{gather*}
-相对运动方程通过能量本征值和相应的本征波函数描述了氢原子的结构. 相对运动能量$E$就是电子的能级。
+在图\ref{fig:angular-projection}所示的 $\hatbm{L}^2,\op{L}_z$ 共同本征态中，横向分量仍有量子涨落。
+\begin{figure}[htbp]
+    \centering\tikzfigure[width=.40\linewidth]{angular-projection}
+    \caption{$\ell=2$ 时球半径为 $\sqrt{6}\hbar$，五条纬圈的高度对应五个 $\op{L}_z$ 本征值。点线标出 $m=1$ 态的轴向投影，其读数为 $m\hbar=\hbar$。}\label{fig:angular-projection}
+\end{figure}
 
-由Coulomb势可知, 本征能量包括$E>0$的非束缚态和$E<0$的束缚态。
+\section{角动量合成}
+单个角动量的大小和投影都有了标签。原子同时有轨道角动量和自旋，转动整个原子时两者一起转动。
+分开测量两个投影，与测量总角动量的大小和投影，给出两种不同的态标签。
+两个自旋均为 $1/2$ 的粒子给出了一个例子：不同乘积态可具有相同的总投影，测量总角动量的大小还能区分它们的某些叠加态。
 
-径向方程采用自然单位值$\hbar=e=\mu=1$无量纲化
-\[
-	\dv[2]{\chi_\ell}r+\Bigb{2E+\frac2r-\frac{\ell(\ell+1)}{r^2}}\chi_\ell=0.
-\]
-实际上，相当于把长度和能量的单位分别定义为
-\begin{align}
-	a=\frac{\hbar^2}{\mu e^2}=\SI{5.29e-11}\m,\quad b=\frac{\mu e^4}{\hbar^2}=\SI{27.21}\eV.
-\end{align}
+设有两个可区分的自旋，各自的 $z$ 分析器给出 $\up$ 或 $\dn$。
+同一次实验会记录一对结果，因此描述联合态的基有四个标签
+$\up\up,\up\dn,\dn\up,\dn\dn$。记 $\ket{a}\otimes\ket{b}\equiv\ket{a,b}$，
+左、右各指定一个自旋。这就是\dfnref{dfn:qm-tensor-product}中的张量积空间，此处四个乘积态构成它的一组基。
+若两边独立制备在 $\ket{a}$ 和 $\ket{b}$，
+联合振幅是两边振幅的乘积，内积也相应满足
+$\brkt{a',b'}{a,b}=\brkt{a'}{a}\brkt{b'}{b}$。
+在联合空间里，$\op{J}_{1z}$ 简写 $\op{J}_{1z}\otimes\one_2$，$\op{J}_{2z}$ 简写 $\one_1\otimes \op{J}_{2z}$。
+分别作用于两个因子的算符可以交换作用次序，因此它们对易。
+例如 $\ket{\up\dn}$ 给出的总投影为 $\hbar/2-\hbar/2=0$。
+另一个态 $\ket{\dn\up}$ 也给出零，总投影相同的结果还可以按总角动量的大小区分。
+\begin{theorem}{两个角动量的合成}{qm-angular-addition}
+    固定两个子系统的角动量量子数 $j_1,j_2$，取各自一个不可约多重态。
+    在其张量积空间中，总角动量 $\hatbm{J}=\hatbm{J}_1+\hatbm{J}_2$ 的量子数依次为
+    \begin{equation}
+        j=|j_1-j_2|,|j_1-j_2|+1,\ldots,j_1+j_2 .
+    \end{equation}
+    每个这样的 $j$ 出现一个多重态，每个多重态中 $m=m_1+m_2$ 从 $-j$ 取到 $j$。
+\end{theorem}
+\begin{proof}
+    设 $j_1\geq j_2$，对允许的非负投影 $m$，数出有多少乘积态满足 $m_1+m_2=m$，记为 $d_m$。
+    当 $m\leq j_1-j_2$ 时，$m_2$ 从 $-j_2$ 到 $j_2$ 均可取，故 $d_m=2j_2+1$。
+    当 $j_1-j_2\leq m\leq j_1+j_2$ 时，为使 $m_1=m-m_2\leq j_1$，
+    $m_2$ 只能从 $m-j_1$ 取到 $j_2$，于是 $d_m=j_1+j_2-m+1$。
+    超过最高投影后 $d_m=0$。
 
-在$r=0$邻域的渐进行为
-\[
-	\chi_\ell(r)=rR_\ell(r)\propto r^{\ell+1},\;\cancel{r^{-\ell}}.
-\]
-% 满足物理要求的解$\chi_\ell\propto r^{\ell+1}$。
-$r\to\infty$的渐进行为
-\[
-	\dv[2]{\chi_\ell}r+2E\chi_\ell=0\implies\chi_\ell\propto\e^{-\beta r},\;\cancel{\e^{\beta r}},\quad \beta:=\sqrt{-2E}.
-\]
-故
-\[
-	\chi_\ell(r)=r^{\ell+1}\e^{-\beta r}u(r).
-\]
+    从最高投影态开始逐次下降，取走一整个多重态；其正交补仍在各 $\op{J}_i$ 作用下封闭，可继续作同样的分解。
+    每个 $j\geq m+1$ 的多重态各给 $d_m$ 和 $d_{m+1}$ 贡献一个态，只有 $j=m$ 的多重态仅给前者贡献一个。
+    所以 $j=m$ 的出现次数是 $d_m-d_{m+1}$。代入各投影态的数目，这个差在 $j_1-j_2\leq m\leq j_1+j_2$ 时为一，在更小的 $m$ 处为零。
+\end{proof}
 
-代入径向方程，得
-\[
-	ru''+[2(\ell+1)-2\beta r]u'-2[(\ell+1)\beta-1]u=0.
-\]
-化为合流超几何方程，解$u=F(\alpha,\gamma,\xi)$，但其若为无穷级数$\sim\e^{\xi}$仍发散，故需要截断为有限多项式
-\begin{example}{$R_{n\ell}$表}{Table of Rnl}
-	约定$\xi=r/na$
-	\begin{align*}
-		R_{10} & =2a^{-3/2}\e^{-\xi},&R_{32} & =\frac{4a^{-3/2}}{9\sqrt{30}}\xi^2\e^{-\xi},\\
-		R_{20} & =\frac{a^{-3/2}}{\sqrt2}(1-\xi)\e^{-\xi},&R_{40} & =\frac{a^{-3/2}}{12}(3-9\xi+6\xi^2-\xi^3)\e^{-\xi},\\
-		R_{21} & =\frac{a^{-3/2}}{\sqrt6}\xi\e^{-\xi},&R_{41} & =\frac{a^{-3/2}}{4\sqrt{15}}(5\xi-5\xi^2+\xi^3)\e^{-\xi},\\
-		R_{30} & =\frac{2a^{-3/2}}{9\sqrt3}(3-6\xi+2\xi^2)\e^{-\xi},&R_{42} & =\frac{a^{-3/2}}{12\sqrt5}(3\xi^2-\xi^3)\e^{-\xi},\\
-		R_{31} & =\frac{4a^{-3/2}}{9\sqrt6}(2\xi-\xi^2)\e^{-\xi},&R_{43} & =\frac{a^{-3/2}}{12\sqrt{35}}\xi^3\e^{-\xi}.
-	\end{align*}
+\begin{definition}{Clebsch--Gordan系数}{qm-cg}
+    非耦合基(uncoupled basis)为$\ket{j_1m_1}\otimes\ket{j_2m_2}$，
+    耦合基(coupled basis)为$\ket{j_1j_2;jm}$。
+    两组正交归一基之间的变换系数定义为
+    \begin{equation}
+        C^{jm}_{j_1m_1,j_2m_2}
+        =\bigbrkt{j_1m_1;j_2m_2}{j_1j_2;jm}.
+    \end{equation}
+    只有$m=m_1+m_2$的系数可能非零。
+    固定$j_1,j_2$后，常把耦合态简记为$\ket{j,m}$。
+\end{definition}
+
+\begin{example}{由最高态构造单态与三重态}{qm-two-spins}
+    对两个自旋$1/2$，总磁量子数$m=1$只有一个态$\ket{\up\up}$，
+    故它是$j=1$的最高态。
+    用$\op{J}_-=\op{S}_{1-}+\op{S}_{2-}$作用，
+    \begin{equation}
+        \op{J}_-\ket{\up\up}
+        =\hbar\bigp{\ket{\dn\up}+\ket{\up\dn}}
+        =\hbar\sqrt2\ket{1,0}.
+    \end{equation}
+    再下降一次得到$\ket{1,-1}=\ket{\dn\dn}$。
+    $m=0$子空间中与$\ket{1,0}$正交的归一化态
+    $(\ket{\up\dn}-\ket{\dn\up})/\sqrt2$
+    被$\op{J}_+$和$\op{J}_-$同时湮灭，因此$j=0$。
 \end{example}
-能量本征值
-\[
-	E_n=-\frac{e^2}{2a}\frac1{n^2}=-\frac{13.6}{n^2}\si\eV.
-\]
-本征波函数
-\[
-	\varPsi_{n\ell m}(r,\theta,\varphi)=R_{n\ell}(r)Y_{\ell m}(\theta,\varphi)
-\]
-主量子数$n=1,2,\ldots$，$\ell=0,1,\ldots,n-1;\enspace m=0,\pm 1,\ldots,\pm\ell$
 
-径向函数的归一化采用$\int_0^\infty\abs{R_{n\ell}(r)}^2r^2\d r=1$，完整波函数满足正交归一关系。
+两个自旋$1/2$的例子是
+\begin{subequations}
+    \begin{alignat}{1}
+        \ket{1,1}&=\ket{\up\up},\qquad \ket{1,-1}=\ket{\dn\dn},\\
+        \ket{1,0}&=\frac{\ket{\up\dn}+\ket{\dn\up}}{\sqrt2},\qquad
+            \ket{0,0}=\frac{\ket{\up\dn}-\ket{\dn\up}}{\sqrt2}.
+    \end{alignat}
+\end{subequations}
+前三个是三重态(triplet)，最后一个是单态(singlet)。
+借助$\hatbm{J}_1\cdot\hatbm{J}_2=(\hatbm{J}^2-\hatbm{J}_1^2-\hatbm{J}_2^2)/2$，
+交换模型$\op{H}=(A/\hbar^2)\hatbm{S}_1\cdot\hatbm{S}_2$的三重态能量为$A/4$、单态为$-3A/4$。这里 $A$ 是有能量量纲的耦合常数。
+因此交换耦合把四维自旋空间分成三重态与单态两个能量子空间。
 
-能级简并度\footnote{考虑自旋后$\times 2$}$f_n=n^2$比一般中心力场中能级的简并度高，一般中心力场中，粒子能级依赖于两个量子数$n_r$和$\ell$，在
-Coulomb场中，能量只依赖于一个量子数$n=n_r+\ell+1$，这是Coulomb场具有比一般中心力场的几何对称性SO(3)更高的动力学对称性SO(4)的表现。
+\section{Zeeman效应}
+\label{sec:zeeman}
+轨道和自旋合成后，给定 $j$ 的各个 $m_j$ 在零场中可以同能。外加磁场选定了一根轴，
+沿轴的磁矩投影不同，原子与场的相互作用能也不同。于是原来的一条谱线能够分裂成几条。
+要预言光谱仪上各条线的位置，必须把发光前、后两个能级各自的磁能变化都算进去。
 
-概率密度
-\[
-	W_{n\ell m}\d\bm r=\abs{\varPsi_{n\ell m}}^2r^2\sin\theta\d r\nd\theta\nd\varphi,
-\]
-径向分布
-\[
-	W_{n\ell}\d r=R^2(r)r^2\d r.
-\]
-角向分布
-\[
-	W_{\ell m}\d\Omega=\abs{Y_{\ell m}}^2\d\Omega\propto\abs{P_\ell^m(\cos\theta)}^2\d\Omega.
-\]
-\paragraph{本征态轨道电流分布与磁矩}
-以下讨论采用固定原子核近似，忽略核反冲对电流和磁矩的修正，取$\mu\simeq m_\elec$。
-电流密度
-\[
-	\bm j_\elec=-e\bm j.
-\]
-其中概率流密度
-\[
-	\bm j=\frac1{2m_\elec}(\psi\cj\qo p\psi-\psi\qo p\psi\cj)=-\frac{\i\hbar}{2m_\elec}(\varPsi_{n\ell m}\cj\nabla\varPsi_{n\ell m}-\varPsi_{n\ell m}\nabla\varPsi_{n\ell m}\cj)
-\]
-注意到$R_{n\ell},P_\ell^m$均为实函数，故$j_r,j_\theta=0$
-\[
-	j_\varphi=-\frac{\i\hbar}{2m_\elec}\frac1{r\sin\theta}\Bigp{\varPsi_{n\ell m}\cj\pp\varphi\varPsi_{n\ell m}-\varPsi_{n\ell m}\pp\varphi\varPsi_{n\ell m}\cj}=\frac{m\hbar}{m_\elec r\sin\theta}\abs{\varPsi_{n\ell m}}^2.
-\]
-得到电流密度矢量
-\begin{align}
-	\bm j_\elec=-\frac{em\hbar}{m_\elec r\sin\theta}\abs{\varPsi_{n\ell m}}^2\uvec e_\varphi.
-\end{align}
-截面为$\d\sigma$的环形电流的磁矩
-\[
-	\d\mu_z=\frac1c\pi(r\sin\theta)^2j_\elec\d\sigma=\frac{r\sin\theta}{2c}j\d\bm r.
-\]
-因此，磁矩
-\begin{align}
-	\mu_z=-\frac{em\hbar}{2m_\elec c}\int\abs{\varPsi_{n\ell m}}^2\d\bm r=-\frac{e\hbar}{2m_\elec c}m\equiv-\muB m,
-\end{align}
-其中$\muB$为Bohr磁矩，轨道磁矩与量子数$m$有关，这就是把$m$称为磁量子数的理由。
+\subsection{磁场中的光谱测量}
+\label{ss:zeeman-experiment}
 
-轨道磁矩算符
-\[
-	\qo{\mu_\ell}=-\frac{\muB}\hbar\qo L.
-\]
-轨道磁矩与外磁场作用能
-\[
-	\hat W=-\qo{\mu_\ell}\cdot\,\bm B=\frac{\muB}\hbar\qo L\cdot\,\bm B.
-\]
-\paragraph{类氢原子}电离到只剩一个电子的离子，例如He$^+$，径向方程变为
-\[
-	\chi''_\ell(r)+\Bigb{\frac{2\mu}{\hbar^2}\Bigp{E+\frac{Ze^2}{r}}-\frac{\ell(\ell+1)}{r^2}}\chi_\ell(r)=0.
-\]
-将长度和能量的单位分别取为$a/Z,Z^2b$，故类氢原子的能级为
-\[
-	E_n=-\frac{e^2}{2a}\frac{Z^2}{n^2},
-\]
-且波函数的空间尺度为氢原子的$1/Z$。这就是Pickering线系的理论解释。
-\paragraph{重要修正}
-Kepler问题（电子在Coulomb场中的运动问题）是量子力学的试金石：
-量子力学的Coulomb场运动可以精确求解
-计算结果能以高度的精确性与光谱学精密实验作比较。
-\subparagraph*{精细结构}
-\begin{compactenum}
-	\item 对动能项的修正
-	\[
-		E=\sqrt{p^2c^2+m^2c^4}=mc^2\sqrt{1+\frac{p^2}{m^2c^2}}\doteq mc^2+\frac{p^2}{2m}-\frac{p^4}{8m^3c^2}+\cdots
-	\]
-	\item 自旋轨道耦合效应
-	\item Darwin振颤项
+Zeeman实验研究外磁场是否改变发光原子的谱线。
+把光源放在磁极之间，用高分辨率光谱仪比较加场与不加场时的谱线，
+并通过偏振分析器分别观察不同偏振成分。
+实验不仅测量原有谱线是否展宽或分裂，还测量各成分随磁场的频移及其偏振。
+这些量共同约束原子磁矩与角动量的关系\cite{zeemanlecture}。
 
-	电子的波动性导致Coulomb场对它的作用有弥散效应，加在电子上的Coulomb场并非$V(\r)$，而是场。
-\end{compactenum}
-\subparagraph*{超精细结构}
-\begin{compactenum}
-	\item 核电荷分布有限体积的修正；
-	\item 核磁矩和电子磁矩(自旋和轨道两部分)相互作用的修正；
-	\item 对多电子原子，电子之间的电磁相互作用修正更是十分明显。
-\end{compactenum}
-\sectionstar{无限深球方势阱}
-考虑质量为$\mu$的粒子在半径为$a$的球形匣子中运动，相当于粒子在一个无限深球方势阱中运动
-\begin{align*}
-	V(r)=\begin{cases}
-		0, & r<a \\[
-	-1ex]\infty,&r>a
-	\end{cases}
-\end{align*}
-\paragraph{$\ell=0$态(s)}径向方程
-\[
-	\chi_0''+k^2\chi_0=0,\quad k^2:=\frac{2\mu E}{\hbar^2}.
-\]
-边界条件$\chi_0(0)=\chi_0(a)=0$，故 
-\[
-	\chi_{n0}(r)=\sqrt{\frac2a}\sin\frac{n\pi r}a,\quad n=1,2,\ldots
-\]
-\paragraph{$\ell\neq 0$态}径向方程 
-\[
-	R_\ell''+\frac2rR_\ell'+\Bigb{k^2-\frac{\ell(\ell+1)}{r^2}}R_\ell=0.
-\]
-边界条件$R_\ell(a)=0$，引入无量纲变量$\rho=kr$，径向方程变为 
-\[
-	\dv[2]{R_\ell}\rho+\frac2\rho\dv{R_\ell}\rho+\Bigb{1-\frac{\ell(\ell+1)}{\rho^2}}R_\ell=0,
-\]
-这是Bessel方程，两个特解为球Bessel函数$j_\ell(\rho)$与球Neumann函数$n_\ell(\rho)$。
+光谱仪直接读到的是上下能级之差。
+将零场上、下能级记为$E_u^{(0)},E_l^{(0)}$，则无场频率为
+$\nu_0=(E_u^{(0)}-E_l^{(0)})/h$。
+加场后某一允许跃迁的频率为
+\begin{equation}
+    \nu_{m_u m_l}(B)
+    =\nu_0+\frac{\Delta E_u(m_u,B)-\Delta E_l(m_l,B)}h.
+    \label{eq:zeeman-line}
+\end{equation}
+求谱线位置，先分别求上、下能级的磁子态能量，再按允许跃迁配对取能量差。
 
-$\rho\to0$时的渐进方程
-\[
-	j_\ell\to\frac{\rho^\ell}{(2\ell+1)!!},\quad \cancel{n_\ell\to-\frac{(2\ell-1)!!}{\rho^{\ell+1}}}.
-\]
-因此球方势阱内的解为$R_\ell(r)\propto j_\ell(kr)$，令$j_\ell(x)=0$的根依次为$x_{n\ell}$
+\subsection{磁矩与弱场能移}
+\label{ss:zeeman-weak}
+
+固定原子核近似下，电子磁矩及线性磁相互作用为
+\begin{equation}
+    \hatbm{\mu}=-\frac{\muB}{\hbar}(\hatbm{L}+g_s\hatbm{S}),\qquad
+    \op{H}_Z=\frac{\muB B}{\hbar}(\op{L}_z+g_s\op{S}_z).
+\end{equation}
+这里$g_s\simeq2$为最低阶电子自旋因子，精密实验还需反常磁矩修正。
+设零场能级已被自旋轨道作用按$j$分开，且Zeeman能远小于相邻$j$能级间隔。
+在量子数 $\ell,s,j$ 固定且 $j>0$ 的子空间，旋转对称性(rotational symmetry)要求$\hatbm{\mu}$的投影正比于$\hatbm{J}$。
+
+令$\op{P}_j$为固定$\ell,s,j$多重态的投影。
+该子空间中矢量算符的投影写为
+$\op{P}_j(\hatbm{L}+g_s\hatbm{S})\op{P}_j=g_J\op{P}_j\hatbm{J}\op{P}_j$。
+因为$\hatbm{L}+g_s\hatbm{S}=\hatbm{J}+(g_s-1)\hatbm{S}$，
+点乘$\hatbm{J}$并在$\ket{j,m_j}$中取期望，得到
+\begin{equation}
+    g_J\hbar^2j(j+1)
+    =\hbar^2j(j+1)
+    +(g_s-1)\frac{\hbar^2}{2}
+    \bigb{j(j+1)+s(s+1)-\ell(\ell+1)}.
+\end{equation}
+
+该投影关系也可从角动量合成看出：
+在固定$\ell,s,j$的一个不可约子空间内，矢量算符的三个分量
+与$\op{J}_x,\op{J}_y,\op{J}_z$具有相同的旋转变换关系，差别只剩一个与$m_j$无关的系数。
+将$\hatbm{S}\cdot\hatbm{J}=(\hatbm{J}^2+\hatbm{S}^2-\hatbm{L}^2)/2$代入后，
+除以$\hbar^2j(j+1)$便得到
+\begin{equation}
+    g_J=1+(g_s-1)\frac{j(j+1)+s(s+1)-\ell(\ell+1)}{2j(j+1)},
+    \qquad\Delta E=\muB B g_Jm_j.
+\end{equation}
+
+这里$g_J$称为Landé因子，$m_j$是$\op{J}_z/\hbar$的本征值。
+上述 $g_J$ 公式适用于 $j>0$。非简并的 $j=0$ 态由旋转对称性给出零磁矩，一阶能移为零。
+\subsection{谱线分裂与偏振}
+\label{ss:zeeman-lines}
+
+将上下能级的线性能移代入式\eqref{eq:zeeman-line}，得
+\begin{equation}
+    \nu_{m_um_l}
+    =\nu_0+\frac{\muB B}{h}
+        \bigp{g_u m_u-g_l m_l}.
+\end{equation}
+在电偶极近似中，允许的磁量子数差为$m_u-m_l=0,\pm1$。
+差为零的跃迁称为$\pi$成分，差为$\pm1$的称为$\sigma$成分。
+沿磁场方向观察时，$\pi$偶极沿观察方向不辐射，
+两个$\sigma$成分对应相反的圆偏振；
+垂直磁场观察时，$\pi$与$\sigma$成分呈相互正交的线偏振。
+偏振分析由此提供了独立于频移的跃迁标签。
+
+对于$s=0$，$g_u=g_l=1$，于是
+\begin{equation}
+    \nu_{m_um_l}-\nu_0
+    =\frac{\muB B}{h}(m_u-m_l)
+    \in\BigB{0,\ \frac{\muB B}{h},\ -\frac{\muB B}{h}}.
+\end{equation}
+多组不同$m_u,m_l$可能具有同一个频移，
+所以即使原子有多个磁子态，正常Zeeman效应仍形成三个频率组（图\ref{fig:zeeman-triplet}）。
+各组总强度则应把落在该组内的跃迁按初态布居加权求和。
+\begin{figure}[htbp]
+    \centering\tikzfigure[width=.58\linewidth]{zeeman-triplet}
+    \caption{正常 Zeeman 三重线：从 $j_u=1$ 的三个磁子态向同一 $j_l=0$ 态发射。横向分列三个通道，箭头的高度对应光子能量；图中放大了磁分裂。}\label{fig:zeeman-triplet}
+\end{figure}
+
+\begin{example}{含自旋的四条Zeeman成分}{qm-zeeman-doublet}
+    考虑弱场下的$\,{}^2P_{1/2}\to{}^2S_{1/2}$跃迁，
+    忽略核自旋并取$g_s=2$。
+    光谱项符号$\,{}^{2s+1}L_j$中，$L=S,P,D,\ldots$分别代表
+    $\ell=0,1,2,\ldots$，上标给出自旋多重度$2s+1$。
+    代入Landé公式，得到
+    \begin{subequations}
+        \begin{alignat}{2}
+            g_u&=1+\frac{3/4+3/4-2}{2(3/4)}
+                =\frac23,
+            &\quad m_u&=\pm\frac12,\\
+            g_l&=1+\frac{3/4+3/4}{2(3/4)}
+                =2,
+            &\quad m_l&=\pm\frac12.
+        \end{alignat}
+    \end{subequations}
+    两个$\pi$跃迁满足$m_u=m_l$，频移为$\mp2\muB B/(3h)$；
+    两个$\sigma$跃迁连接相反的$m$，频移为$\pm4\muB B/(3h)$。
+    四种允许跃迁对应四个不同的上下能级差，形成四条谱线。
+    四个频率的强度还取决于磁子态布居、偏振和角动量耦合系数。
+\end{example}
+
+若零场相邻$j$多重态的间距为$\Delta_\mathrm{fs}$，
+上述投影计算要求磁混合矩阵元远小于这个间距。
+磁场增加到两者可比时，$\hatbm{J}^2$不再近似守恒，
+应在共同的固定$m_j$子空间内对角化自旋轨道项与Zeeman项的和。
+
+\subsection{Paschen--Back极限}
+
+强场若压过自旋轨道作用但仍可忽略抗磁项，则采用$\ket{\ell m_\ell;s m_s}$，
+$\Delta E\simeq\muB B(m_\ell+g_sm_s)$，即Paschen--Back极限。
+这个场强区间有两个边界：Zeeman能量超过精细结构劈裂，而正比于 $B^2$ 的抗磁能移仍是小量。
+
+\section{宇称与选择定则}
+列出磁场中全部能级后，若把上、下能级任意配对，会预言出实验中看不到的线。
+一次电偶极跃迁要有非零的偶极矩阵元。把原子作空间反演或绕量子化轴旋转，便能在计算径向积分之前，
+先判断哪些配对的矩阵元必定为零。
+
+\begin{definition}{空间反演与宇称}{qm-parity}
+    空间反演算符 $\op{\Pi}$ 将相对原点的位置反号，对标量位置波函数有 $(\op{\Pi}\psi)(\bm x)=\psi(-\bm x)$。
+    $\op{\Pi}$ 幺正且 $\op{\Pi}^2=\one$，本征值为 $+1$ 或 $-1$，分别称为偶宇称和奇宇称(parity)。
+\end{definition}
+反演使 $\hatbm{X},\hatbm{P}$ 同时反号，故 $\hatbm{L}=\hatbm{X}\times\hatbm{P}$ 保持不变。
+若$[\op{H},\op{\Pi}]=0$，非简并能量本征态必有确定宇称；简并时可在该子空间内选共同本征基。
+一般制备态可以叠加两种宇称的分量。普通中心势轨道态的宇称为$(-1)^\ell$。
+
+\begin{definition}{球张量算符}{qm-spherical-tensor}
+    一组$2k+1$个算符$\op{T}_q^{(k)}$（$q=-k,\ldots,k$）
+    若满足
+    \begin{subequations}
+        \begin{alignat}{1}
+            [\op{J}_z,\op{T}_q^{(k)}]&=\hbar q\op{T}_q^{(k)},\\
+            [\op{J}_\pm,\op{T}_q^{(k)}] &=\hbar\sqrt{(k\mp q)(k\pm q+1)}\,\op{T}_{q\pm1}^{(k)},
+        \end{alignat}
+    \end{subequations}
+    就称为秩$k$的不可约球张量(irreducible spherical tensor)。
+    $k$描述它在旋转下如何变换，$q$标记其球分量。
+    对普通矢量$\hatbm{V}$，秩为1，球分量是
+    $\op{V}_0=\op{V}_z$、$\op{V}_{\pm1}=\mp(\op{V}_x\pm\i \op{V}_y)/\sqrt2$。
+\end{definition}
+
+只用第一条对易式就能筛去一些谱线。设
+$M=\mel{j'm'}{\op{T}_q^{(k)}}{jm}$，将 $\op{J}_z$ 分别作用在左矢和右矢上，得到
+\begin{equation}
+    \mel{j'm'}{[\op{J}_z,\op{T}_q^{(k)}]}{jm}
+        =\hbar(m'-m)M=\hbar qM.
+\end{equation}
+所以只有 $m'=m+q$ 时 $M$ 才可能非零。例如沿 $z$ 的电场只耦合偶极的
+$\op{d}_z=\op{d}_0$ 分量，吸收这样的光保持 $m$。其余磁量子数的跃迁可用改变偏振来探测。
+
+\begin{theorem}{Wigner--Eckart定理}{qm-wigner-eckart}
+    对秩$k$的不可约球张量，其角动量矩阵元可以分解为
+    \begin{equation}
+        \mel{\alpha'j'm'}{\op{T}_q^{(k)}}{\alpha jm}
+        =\frac{\brkt{jm;kq}{j'm'}}{\sqrt{2j'+1}}
+        \langle\alpha'j'\|\op{T}^{(k)}\|\alpha j\rangle.
+    \end{equation}
+    $\alpha,\alpha'$表示除角动量之外的其余态标签，如主量子数。
+    双竖线表示约化矩阵元(reduced matrix element)，它与$m,m',q$无关，归一化由上式约定。
+\end{theorem}
+
+这里$\brkt{jm;kq}{j'm'}$采用\dfnref{dfn:qm-cg}中的耦合系数约定。
+定理将旋转决定的角依赖与动力学决定的约化矩阵元分开；
+其一般证明可参照Littlejohn的讲义，比较公式时需统一约化矩阵元的归一化约定\cite{littlejohnwe}。
+三角规则(triangle rule)$|j-k|\leq j'\leq j+k$和$m'=m+q$来自角动量合成。
+对电偶极$\hatbm{d}$，$k=1$且宇称为奇，因此必须改变宇称，
+$\Delta j=0,\pm1$但$0\leftrightarrow0$禁止，$\Delta m=0,\pm1$。
+角动量选择定则筛出允许通道；允许通道的跃迁强度还取决于径向积分，它也可能为零。
+
+宇称选择规则也可直接检查。若
+$\op{\Pi}\ket{i}=\pi_i\ket{i}$、$\op{\Pi}\ket{f}=\pi_f\ket{f}$，其中$\pi_i,\pi_f=\pm1$，
+且$\op{\Pi} \op{d}_q\op{\Pi}^{-1}=-\op{d}_q$，则
+\begin{equation}
+    \mel{f}{\op{d}_q}{i}
+    =\mel{f}{\op{\Pi}^{-1}(\op{\Pi} \op{d}_q\op{\Pi}^{-1})\op{\Pi}}{i}
+    =-\pi_f\pi_i\mel{f}{\op{d}_q}{i}.
+\end{equation}
+同宇称时右侧是原矩阵元的负数，故矩阵元为零；
+相反宇称时该约束自动满足。
+
+\section{时间反演与Kramers简并}
+空间反演能迫使某些跃迁的强度为零。回到零磁场，还可以问另一个光谱问题：
+即使原子周围的环境破坏了旋转对称性，半整数自旋的能级为何仍可能成对出现？
+将一次运动反向播放时，角动量变号。若反向运动服从同一个 Hamilton 算符，就能用它寻找同能的伙伴。
+
+\begin{definition}{反幺正变换与时间反演}{qm-time-reversal}
+    反幺正(antiunitary)变换 $\op{\Theta}$ 是共轭线性的双射，满足
+    $\brkt{\op{\Theta} u}{\op{\Theta} v}=\brkt{v}{u}$。
+    时间反演(time reversal)由这样的算符表示，保持位置不变，使动量和角动量反号。
+\end{definition}
+自旋$1/2$可取$\op{\Theta}=-\i\op{\sigma}_y \op{K}$，其中$\op{K}$是在$z$基的复共轭，故$\op{\Theta}^2=-\one$。
+\begin{theorem}{Kramers简并}{qm-kramers}
+    若自伴Hamilton算符$\op{H}$在反幺正变换$\op{\Theta}$下不变，
+    即$\op{\Theta} \op{H}\op{\Theta}^{-1}=\op{H}$，且$\op{\Theta}^2=-\one$，
+    则每个离散能量本征态$\ket{n}$都有与它正交的同能伙伴$\op{\Theta}\ket{n}$。
+\end{theorem}
+\begin{proof}
+    在反幺正内积关系中取$\ket{u}=\ket{n}$、$\ket{v}=\op{\Theta}\ket{n}$，得到
+    \begin{equation}
+        \brkt{\op{\Theta} n}{\op{\Theta}^2n}=\brkt{\op{\Theta} n}{n}.
+    \end{equation}
+    左侧又等于$-\brkt{\op{\Theta} n}{n}$，所以这个内积为零。
+    若$\op{H}\ket{n}=E_n\ket{n}$，由$E_n$为实数与$[\op{H},\op{\Theta}]=0$，
+    \begin{equation}
+        \op{H}\op{\Theta}\ket{n}=\op{\Theta} \op{H}\ket{n}=E_n\op{\Theta}\ket{n}.
+    \end{equation}
+    这两个正交态由此构成同一能量下的一对态。
+\end{proof}
+
+整个实验作时间反演时，外磁场也随之反向；固定外磁场通常破坏时间反演对称性。
+
+\checkpoint{转动对称性给出了基态的哪些信息？}{它要求各个$j$多重态内的$m$简并。哪个$j$多重态能量最低，取决于具体Hamilton量、粒子统计和边界条件。}
+\reading{角动量的升降与合成核对MIT 8.05讲义9、10及Feynman第III卷第18章\cite{mitangular,feynman18}。
+    下一章用这些代数解释氢谱中更大的简并。}

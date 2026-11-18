@@ -91,6 +91,7 @@
 \renewcommand{\eqref}[1]{(\ref{#1})}
 \newcommand{\chapref}[1]{第\ref{#1}章}
 \newcommand{\secref}[1]{第 \ref{#1} 节}
+\newcommand{\ssecref}[1]{第 \ref{#1} 小节}
 \newcommand{\appref}[1]{附录 \ref{#1}}
 \newcommand{\dfnref}[1]{定义 \ref{#1}}
 \newcommand{\thmref}[1]{定理 \ref{#1}}
@@ -104,23 +105,17 @@
 
 \RequirePackage{float}
 \RequirePackage{graphicx}
+\newcommand{\tikzfigure}[2][]{%
+  \IfRefUndefinedExpandable{tikz:#2}{%
+    \ClassError{thunote}{Unknown TikZ figure '#2'}%
+      {Build figures/tikz.tex first, then check its label and the externaldocument path.}%
+  }{%
+    \includegraphics[#1,page=\pagenumref{tikz:#2}]{figures/tikz.pdf}%
+  }%
+}
 \RequirePackage[hypcap=false]{caption}
 \RequirePackage{subcaption}
 \RequirePackage{booktabs}
-
-\RequirePackage{tikz}
-\usetikzlibrary{quotes, angles, patterns}
-\usetikzlibrary{decorations.markings}
-\tikzset{>=stealth}
-\tikzset{->-/.style={decoration={
-  markings,
-  mark=at position .5 with {\arrow{>}}},postaction={decorate}}}
-\tikzset{-<-/.style={decoration={
-  markings,
-  mark=at position .5 with {\arrow{<}}},postaction={decorate}}}
-
-\RequirePackage{pgfplots}
-\pgfplotsset{compat=1.18}
 
 \RequirePackage{siunitx}
 \sisetup{

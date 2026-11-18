@@ -391,11 +391,11 @@
     \]
     边界条件$u|_{\p\Omega}=0$。采用差分法，在均匀网格点$(x_i,y_i)$附近作Taylor展开：
     \[
-        u_{i\pm 1,j}=u_{ij}\pm h\eval{\pv ux}_{ij}+\frac{h^2}2\eval{\pv[2]ux}_{ij}\pm\frac{h^3}6\eval{\pv[3]ux}_{ij}+\bigo(h^4).
+        u_{i\pm 1,j}=u_{ij}\pm h\biggeval{\pv ux}_{ij}+\frac{h^2}2\biggeval{\pv[2]ux}_{ij}\pm\frac{h^3}6\biggeval{\pv[3]ux}_{ij}+\bigo(h^4).
     \]
     可得
     \[
-        \eval{\pv[2]ux}_{ij}=\frac{u_{i+1,j}+u_{i-1,j}-2u_{ij}}{h^2}+\bigo(h^2)
+        \biggeval{\pv[2]ux}_{ij}=\frac{u_{i+1,j}+u_{i-1,j}-2u_{ij}}{h^2}+\bigo(h^2)
     \]
     同理可得$\p^2u/\p^2y$。代入原Poisson方程得到五点差分格式：
     \begin{equation}
@@ -741,7 +741,7 @@
 \begin{proof}
     记$\alpha=\lambda\mini/\lambda\maxi$，取
     \[
-        p_k^*(x)=\division{T_k\biggp{\frac{2x-(1+\alpha)}{1-\alpha}}}{T_k\biggp{-\frac{1+\alpha}{1-\alpha}}},
+        p_k^*(x)=\Biggdivision{T_k\biggp{\frac{2x-(1+\alpha)}{1-\alpha}}}{T_k\biggp{-\frac{1+\alpha}{1-\alpha}}},
     \]
     其中$T_k$是Chebyshev多项式，由于$\abs t\geq 1$时，
     \[
@@ -749,7 +749,7 @@
     \]
     则$\forall x\in(\alpha,1)$，
     \[
-        \norm{p_k^*}_\infty=\division{1}{T_k\biggp{-\frac{1+\alpha}{1-\alpha}}}\leq 2\biggp{\frac{1+\alpha}{1-\alpha}-\sqrt{\Bigp{\frac{1+\alpha}{1-\alpha}}^2-1}}^k=2\biggp{\frac{1-\sqrt\alpha}{1+\sqrt\alpha}}^k.
+        \norm{p_k^*}_\infty=\Biggdivision{1}{T_k\biggp{-\frac{1+\alpha}{1-\alpha}}}\leq 2\biggp{\frac{1+\alpha}{1-\alpha}-\sqrt{\Bigp{\frac{1+\alpha}{1-\alpha}}^2-1}}^k=2\biggp{\frac{1-\sqrt\alpha}{1+\sqrt\alpha}}^k.
         \qedhere
     \]
 \end{proof}

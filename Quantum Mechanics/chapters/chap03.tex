@@ -1,505 +1,497 @@
-\chapter{算符}
-量子力学的算符表示对波函数的运算．描述可观测量的算符都是线性的
-\[
-	\hat A(\alpha\psi_1+\beta\psi_2)=\alpha\hat A\psi_1+\beta\hat A\psi_2.
-\]
-线性算符的加法满足交换律和结合律；乘法（复合）满足结合律和分配律，但一般不满足交换律。对无界算符，这些运算须在共同的适当定义域上讨论。
-\begin{definition}{对易子}{Commutator}
-	一般来说，算符不满足交换律，即对易子
-	\[
-		\cmm AB:=\hat A\hat B-\hat B\hat A
-	\]
-	一般不为0．相应的还有反对易子$\acmm AB:=\hat A\hat B+\hat B\hat A$。
-\end{definition}
-易于验证，对易子满足这些恒等式：
-\begin{compactenum}
-	\item $\cmm AB=-\cmm BA;$\qquad$[\hat A,\hat B+\hat C]=\cmm AB+\cmm AC;$
-	\item $[\hat A,\hat B\hat C]=\hat B\cmm AC+\cmm AB\hat C;$
-	\item $[\hat A\hat B,\hat C]=\hat A\cmm BC+\cmm AC\hat B.$
-\end{compactenum}
+\chapter{时间演化、共振与隧穿}
+\label{ch:dynamics}
 
-考虑位移和动量的对易，一维中
-\begin{align*}
-	\hat x\hat p\psi & =-\i\hbar x\dv\psi{x}.                             \\
-	\hat p\hat x\psi & =-\i\hbar\dv{x\psi}x=-\i\hbar\Bigp{\psi+x\dv\psi{x}}.
-\end{align*}
-因此对波函数来说
-\begin{align}
-	\cmm xp=\i\hbar.
-\end{align}
-\begin{definition}{逆算符}{Inverse Operator}
-	记$\hat A$的逆算符为$\hat A\iv$，则以下等价
-	\[
-		\hat A\psi=\varphi\iff\hat A^{-1}\varphi=\psi.
-	\]
-	若$\hat A\iv$存在，则$\hat A^{-1}\hat A=\hat A\hat A^{-1}=I$
-\end{definition}
-显然，若$\hat A\iv,\;\hat B\iv$都存在，
-\[
-	(\hat A\hat B)^{-1}=\hat B^{-1}\hat A^{-1}.
-\]
-\iffalse
-	在直角坐标系下，nabla算符
-	\[
-		\nabla=\pp x\ibm i+\pp y\ibm j+\pp z\ibm k.
-	\]
-	Laplace算符
-	\[
-		\nabla^2=\pp[2]x+\pp[2]y+\pp[2]z.
-	\]
+\section{幺正演化与Hamilton算符}
+上一章的测量规则给定一个态，就能预言分析器各出口的计数。但若沿 $x$ 筛出的原子先在均匀磁场中飞行，
+即使两端的筛选器和分析器都固定，改变飞行时间也可能改变计数。
+要沿用同一个测量规则，现在缺的是从制备时的态求出到达分析器时的态。
+为此引入一个随时间变化的线性算符，
+即 $\ket{\psi(t)}=\op{U}(t,t_0)\ket{\psi(t_0)}$。在这段飞行中我们把粒子的内部自由度当作封闭系统(closed system)：
+已知外场给定了演化规律，忽略与其他自由度的纠缠和损失。
 
-	柱坐标系下
-	\[
-		\nabla=\pp\rho\ibm e_\rho+\frac1\rho\pp\varphi\ibm e_\varphi+\pp z\ibm e_z.
-	\]
-	Laplace算符
-	\[
-		\nabla^2=\frac1\rho\pp\rho\Bigp{\rho\pp\rho}+\frac1{\rho^2}\pp[2]\varphi+\pp[2]z.
-	\]
-\fi
-\begin{definition}{共轭算符}{Conjugate Operator}
-	记$\hat A$的共轭算符为$\hat A\cj$
-	\[
-		\hat A\cj\psi\equiv(\hat A\psi\cj)\cj.
-	\]
-	特别注意，取共轭的结果和表象有关。比如在坐标表象中，$\qo p\cj=-\qo p$，而在动量表象中$\qo p\cj=\qo p$。
-\end{definition}
-\begin{definition}{转置算符}{Tanspose Operator}
-	记$\hat A$的转置算符为
-	$\hat A\tp$
-	\[
-		(\psi,\hat A\tp\varphi)=(\varphi\cj,\hat A\psi\cj).
-	\]
-	% 易于验证$\qo p\tp=-\qo p$。
-\end{definition}
-易证
-\((\hat A\hat B)\tp=\hat B\tp\hat A\tp\)
-\begin{definition}{Hermite算符}{Hermite Operator}
-	记$\hat A$的Hermite变换为$\hat A\dg$
-	\[
-		(\psi,\hat A\dg\varphi)=(\hat A\psi,\varphi).
-	\]
-	易证
-	\[
-		\hat A\dg=(\hat A\cj)\tp=(\hat A\tp)\cj.
-	\]
-	特别地，若$\hat A\dg=\hat A$，则称$\hat A$为\textbf{Hermite算符}。
-\end{definition}
-显然$\qo x,\qo p$是Hermite算符。比如
-\begin{align*}
-	\int\iti & \psi\cj\hat p_x\varphi\d x=-\i\hbar\int\iti\psi\cj\dv\varphi{x}\d x                                                                     \\
-	         & =-\i\hbar\biggb{\cancel{\psi\cj\varphi{\Big\vert}\iti}-\int\iti\varphi\dv{\psi\cj}x\d x}=\int\iti(\hat p_x\psi)\cj\varphi\d x.
-\end{align*}
-以上分部积分要求边界项消失。算符是否自伴还取决于定义域和边界条件，不能仅由微分表达式判断；连续谱的平面波本征态应按广义函数理解。
-\section{Hermite算符}
-\begin{theorem}{Hermite算符的平均值}{Meanvalue of Hermite Operator}
-	Hermite算符的平均值是实数。
-	\begin{proof}
-		\[
-			\avg A=(\psi,\hat A\psi)=(\hat A\psi,\psi)=(\psi,\hat A\psi)\cj=\avg A\cj.\qedhere
-		\]
-	\end{proof}
-	\tcblower
-	\paragraph{逆定理}任意态下平均值均为实数的算符是Hermite算符。
-\end{theorem}
-因此实验上的可观测量对应的算符都是Hermite的。
-\begin{theorem}{Hermite算符的本征值}{Eigenvalue of Hermite Operator}
-	Hermite算符的本征值都是实数。
-	\begin{proof}
-		若$\hat A$本征值$\lambda$及对应本征函数$\psi$有
-		\(\hat A\psi=\lambda\psi\)，
-		则
-		\begin{gather*}
-			\lambda\cj(\psi,\psi)=(\hat A\psi,\psi)=(\psi,\hat A\psi)=\lambda(\psi,\psi)
-		\end{gather*}
-		故$\lambda=\lambda\cj$为实数。
-	\end{proof}
-\end{theorem}
-\begin{theorem}{Hermite算符的本征函数}{Eigenfunction of Hermite Operator}
-	Hermite算符对应不同特征值的本征函数彼此正交。
-	\begin{proof}
-		设$\hat A$的本征值$\lambda_1,\lambda_2$对应本征函数$\psi_1,\psi_2$
-		\begin{gather*}
-			\lambda_2(\psi_1,\psi_2)=(\psi_1,\hat A\psi_2)=(\hat A\psi_1,\psi_2)=\lambda_1(\psi_1,\psi_2).
-		\end{gather*}
-		由$\lambda_1\neq\lambda_2$，可知$(\psi_1,\psi_2)\equiv 0$。
-	\end{proof}
-\end{theorem}
-\paragraph{本征函数的归一化}若本征函数是非简并、离散的，则波函数平方可积，可以归一化
-\[
-	(\psi_n,\psi_m)=\delta_{nm}=\begin{cases}
-		1, & n=m \\0,&n\neq m
-	\end{cases}
-\]
-其中$\delta_{nm}$是Kronecker符号。
+两个相干分量分别如何演化，决定了它们叠加后如何演化；这正是上述线性的物理内容。
+对任意归一化初态，演化后所有出口的总概率仍为 1，故
+$\brkt{\psi}{\psi}=\mel{\psi}{\op{U}^\dagger \op{U}}{\psi}$ 对所有初态成立，从而 $\op{U}^\dagger \op{U}=\one$。
+再要求演化可逆，就有 $\op{U}^{-1}=\op{U}^\dagger$；这样的算符称为幺正(unitary)，也保持任意两态的内积。
 
-若本征函数是非简并、连续的，则波函数可以$\delta$函数归一化：%或箱归一化
-\[
-	(\psi_{\lambda'},\psi_\lambda)=\delta(\lambda'-\lambda).
-\]
-\begin{example}{动量本征函数的归一化}{}
-	\[
-		\hat p\psi=-\i\hbar\dv\psi{x}=p\psi\implies\psi_p(x)=C\e^{\i px/\hbar}.
-	\]
-	但$\psi_p$在$\RR$上平方不可积，应考虑$\delta$函数归一化
-	\[
-		(\psi_{p'},\psi_p)=\abs C^2\int\iti\e^{\i(p-p')x/\hbar}\d x=\abs C^2\cdot 2\pi\hbar\vd(p-p').
-	\]
-	$\delta$函数前系数应为一，有
-	\[
-		\psi_p(x)=\frac1{\sqrt{2\pi\hbar}}\e^{\i px/\hbar}.
-	\]
-	
-	三维动量算符本征函数同理
-	\[
-		\psi_{\bm p}(\r)=\frac1{(2\pi\hbar)^{3/2}}\e^{\i\bm p\cdot\r/\hbar}.
-	\]
-	\tcblower
-	或对其进行\textbf{箱归一化}：粒子波函数在任意边长为$L$的正方体内是正交归一化的
-	\[
-		\int_V\psi_{\bm p_1}\cj(\r)\psi_{\bm p_2}(\r)\d\r=\abs C^2\int_V\e^{\i(\bm p_2-\bm p_1)\cdot\r/\hbar}\d\r
-	\]
-	$\bm p_1=\bm p_2$时
-	\[
-		\abs C^2L^3=1\implies C=L^{-3/2}.
-	\]
-	$\bm p_1\neq\bm p_2$时
-	\[
-		\frac{(-\i\hbar)^3}{L^3\D p_x\D p_y\D p_z}\bigp{\e^{\i L\D p_x/\hbar}-1}\bigp{\e^{\i L\D p_y/\hbar}-1}\bigp{\e^{\i L\D p_z/\hbar}-1}=0.
-	\]
-	于是
-	\[
-		\e^{\i L\D p_x/\hbar}=\e^{\i L\D p_y/\hbar}=\e^{\i L\D p_z/\hbar}=1\implies\D p=\frac{2\pi\hbar}Ln.
-	\]
-	因此
-	\[
-		\psi_{\bm p}(\r)=\frac1{L^{3/2}}\e^{2\pi\i(n_xx+n_yy+n_zz)/L}=\frac1{L^{3/2}}\e^{2\pi\i\bm n\cdot\bm r/L}.
-	\]
-	系统的动量是分立的，但当$L\to\infty$时,又过渡到连续的动量谱。
+\begin{definition}{传播子与时间演化的生成元}{qm-propagator}
+    $\op{U}(t,t_0)$称为从初始时刻$t_0$到$t$的传播子(propagator)，
+    满足$\op{U}(t_0,t_0)=\one$和
+    $\op{U}(t_2,t_0)=\op{U}(t_2,t_1)\op{U}(t_1,t_0)$。
+    在有限维且对时间可微时，定义
+    \begin{equation}
+        \op{H}(t)=\i\hbar\,\pv{\op{U}(t,t_0)}t\,\op{U}^\dagger(t,t_0).
+    \end{equation}
+    $\op{H}(t)$具有能量量纲，称为Hamilton算符。
+\end{definition}
+
+由$\op{U}\op{U}^\dagger=\one$求导，
+$(\partial_t\op{U})\op{U}^\dagger=-\op{U}(\partial_t\op{U}^\dagger)$，
+所以$\op{H}^\dagger=\op{H}$。定义式右乘$\op{U}$得到
+$\i\hbar\partial_t\op{U}=\op{H}\op{U}$，再作用于初态便得到态的运动方程。
+等价地，短时间传播子为
+\begin{equation}
+    \op{U}(t+\d t,t)=\one-\frac{\i}{\hbar}\op{H}(t)\d t+o(\d t).
+\end{equation}
+其中$o(\d t)$表示除以$\d t$后趋于零的余项。
+$\op{H}$控制态在每一个短时间间隔内的变化。
+
+若系统的演化规律不随起始时刻改变，传播子只依赖时间差，依次等待两段时间等价于等待它们之和。
+从有限维推广到一般 Hilbert 空间时，本书引用下述定理。
+\begin{theorem}{Stone定理}{qm-stone}
+    设 $\op{U}(\tau)$ 是强连续(strongly continuous)的单参数幺正群，即时间 $\tau$ 取遍实数，
+    $\op{U}(0)=\one$、$\op{U}(\tau+s)=\op{U}(\tau)\op{U}(s)$，且对每个态，$\op{U}(\tau)\ket{\psi}$ 在范数下连续。
+    则存在唯一自伴生成元 $\op{H}$（采用下式的能量单位和符号约定）。反过来，每个自伴 $\op{H}$ 也确定这样的群。
+    令 $\tau=t-t_0$，传播子与态方程为
+    \begin{equation}
+        \op{U}(t,t_0)=\e^{-\i\op{H}(t-t_0)/\hbar},\qquad
+        \i\hbar\frac{\d}{\nd t}\ket{\psi(t)}=\op{H}\ket{\psi(t)}.
+        \label{eq:schrket}
+    \end{equation}
+    微分式要求初态属于 $\Dom(\op{H})$，指数给出的幺正演化作用于整个 Hilbert 空间。
+\end{theorem}
+概率守恒决定生成元的性质，却不决定某种原子的$\op{H}$具体是什么；后者须由物理建模并经实验检验。
+
+对随时间变化的$\op{H}(t)$，在保证传播子存在的适当共同定义域与正则性条件下，
+\begin{equation}
+    \op{U}(t,t_0)=\mathcal T\exp\biggb{-\frac\i\hbar\int_{t_0}^t\op{H}(s)\d s}.
+\end{equation}
+时间序(time ordering)把较晚时刻放在左侧。
+只有当所有不同时刻的$\op{H}$相互对易时，才可一般地去掉$\mathcal T$；有限维连续$\op{H}(t)$没有这些定义域困难。
+
+时间排序可从相邻短时间步的乘积看出：
+\begin{equation}
+    \op{U}(t_N,t_0)
+    \simeq
+    \Bigp{\one-\frac{\i \op{H}(t_{N-1})\Delta t}{\hbar}}
+    \cdots
+    \Bigp{\one-\frac{\i \op{H}(t_0)\Delta t}{\hbar}}.
+\end{equation}
+这里$t_j=t_0+j\Delta t$。后发生的变化作用在先前演化后的态上，
+因此对应的因子位于左侧。恒定$\op{H}$的所有因子对易，
+取$\Delta t\to0$便恢复指数$\exp[-\i \op{H}(t-t_0)/\hbar]$。
+
+若 $\op{H}$ 不显含时间，取一组与时间无关的离散能量本征态，满足 $\op{H}\ket{n}=E_n\ket{n}$。
+把态在这组基下展开，系数记为 $c_n(t)=\brkt{n}{\psi(t)}$。从左边对式\eqref{eq:schrket}取 $\bra{m}$ 分量，
+正交性使两边各只剩第 $m$ 项，于是 $\i\hbar\dot c_m=E_mc_m$。
+解这个一阶方程、令 $c_n=c_n(0)$，得到
+\begin{equation}
+    \ket{\psi(t)}=\sum_n c_n\e^{-\i E_nt/\hbar}\ket{n}.
+\end{equation}
+一个能量本征态只积累整体相位，任意不显含时间的可观测量分布不变；
+两个不同能量的分量之间则以角频率 $|E_m-E_n|/\hbar$ 积累相对相位。
+沿能量基测量，两分量的概率 $|c_n|^2$ 仍然不变。若某个分析器的同一出口同时接收这两个分量，
+对应的概率可以随相对相位振荡，这与两束频率不同的光叠加产生拍频的计算相同。
+简并子空间中的任意固定叠加也都是定态(stationary state)。
+
+\input{chapters/position_well}
+
+\section{自旋进动}
+现在可以计算本章开头的计数了：等候时间增加，筛出的 $+x$ 束是否仍能全部通过 $x$ 分析器？
+在恒定磁场中，两个能量分量各自只积累相位；沿 $x$ 分析时，这两个分量会在同一出口相加。
+因而只要算出场造成的能量差，便能预言通过率的变化周期。
+
+均匀磁场 $B\bm e_z$ 与磁矩 $\hatbm\mu=\gamma\hatbm S$ 耦合，
+能量为 $\op{H}=-\op{\mu}_z B=-\gamma B(\hbar/2)\op{\sigma}_z$。写成 $\op{H}=\hbar\omega_0\op{\sigma}_z/2$，
+即规定了带符号的 $\omega_0=-\gamma B$。初态 $\ket{+x}$ 在两个能量分量上各有振幅 $1/\sqrt2$。
+把相应能量 $\pm\hbar\omega_0/2$ 代入上面的时间因子，得到
+\begin{subequations}
+    \begin{alignat}{1}
+        \ket{\psi(t)}&=\frac{\e^{-\i\omega_0t/2}\ket{+z}
+            +\e^{\i\omega_0t/2}\ket{-z}}{\sqrt2},\\
+        \ave{\op{\sigma}_x}&=\cos\omega_0t,\qquad
+            \ave{\op{\sigma}_y}=\sin\omega_0t.
+    \end{alignat}
+\end{subequations}
+例如，送入 $x$ 分析器时，两分量在正出口的振幅相加为
+$(\e^{-\i\omega_0t/2}+\e^{\i\omega_0t/2})/2=\cos(\omega_0t/2)$。
+设 $\omega_0>0$，从 $t=0$ 到 $t=\pi/(2\omega_0)$，$+x$ 通过率从 1 降到一半，
+此时两分量的相对相位为 $\pi/2$，若改测 $y$ 则全部从正出口离开。
+通过率的周期性变化反映自旋的进动(precession)。电子的 $\gamma$ 为负，进动方向还取决于所加磁场的方向。
+
+\section{Rabi振荡}
+\label{sec:rabi}
+只加静磁场时，自旋可以进动，沿静场方向的两个能级却各自保持原来的占据概率。
+若先把所有原子制备在低能级，再加一个振荡横向磁场，高能级出口会出现多少原子？
+驱动的频率决定每一小段时间产生的翻转振幅能否同相积累，作用时间则决定累积到什么程度。
+这就把自由进动的相位变成了可以人为控制的能级跃迁。
+
+\subsection{磁共振的制备、驱动与读出}
+\label{ss:rabi-measurement}
+
+磁共振(magnetic resonance)要从可控制的跃迁中测量磁矩和能级差。
+Rabi分子束方法先用非均匀磁场选择或分析磁态，
+在中间近均匀静磁场中加入射频磁场，再由后续分析器将内部态变化转成束流强度变化\cite{rabi}。
+扫射频频率时，只有靠近某一能级差的位置出现明显的计数变化；
+共振频率由此给出磁能级间隔。
+在现代脉冲实验中，还可以固定频率，改变驱动持续时间，直接测量布居(population)振荡。
+
+以两态$\ket{-z}$、$\ket{+z}$为例，
+令静场能量为$E_\pm=\pm\hbar\omega_0/2$，$\omega_0>0$。
+重复实验先制备$\ket{-z}$，驱动$t$时间后测量$z$分量，
+用$N_+/(N_++N_-)$估计跃迁概率。
+静场沿$z$时，横向磁场通过$\op{S}_x,\op{S}_y$的非对角矩阵元驱动自旋翻转；纵向场改变两能级的能量差，因而改变两个分量积累相对相位的速率。
+
+\subsection{旋转场与旋转系}
+\label{ss:rabi-rotating}
+
+隔离出这一对能级，并把横向场强及磁矩矩阵元合并为角频率$\Omega$。
+对旋转驱动，取
+\begin{equation}
+    \op{H}(t)=\frac\hbar2\bigb{\omega_0\op{\sigma}_z+
+        \Omega(\op{\sigma}_x\cos\omega t+\op{\sigma}_y\sin\omega t)}.
+\end{equation}
+选择以横向场的角速度旋转的坐标系，并令 $x$ 轴沿横向场。自由进动相对该轴的角速度为 $\omega_0-\omega$。把这个坐标选择写成算符，
+从随场转动的基回到实验室基的矩阵为 $\op{R}(t)=\e^{-\i\omega t\op{\sigma}_z/2}$，故 $\ket{\psi}=\op{R}\ket{\psi_R}$。
+代入式\eqref{eq:schrket}，
+\begin{equation}
+    \op{H}_R=\op{R}^\dagger \op{H}\op{R}-\i\hbar \op{R}^\dagger\dot{\op{R}}
+    =\frac\hbar2(\Delta\op{\sigma}_z+\Omega\op{\sigma}_x),\qquad\Delta=\omega_0-\omega.
+\end{equation}
+
+$\Delta$称为失谐(detuning)，$\Omega$为共振Rabi角频率，两者单位都是$\mathrm{s^{-1}}$。
+这里旋转变换的两个部分分别是
+\begin{subequations}
+    \begin{alignat}{1}
+        \op{R}^\dagger \op{H} \op{R} &=\frac{\hbar}{2}(\omega_0\op{\sigma}_z+\Omega\op{\sigma}_x),\\
+        -\i\hbar \op{R}^\dagger\dot{\op{R}} &=-\frac{\hbar\omega}{2}\op{\sigma}_z.
+    \end{alignat}
+\end{subequations}
+第一行利用
+$\op{R}\op{\sigma}_x\op{R}^\dagger=\op{\sigma}_x\cos\omega t+\op{\sigma}_y\sin\omega t$，
+第二行来自$\dot{\op{R}}=-(\i\omega/2)\op{\sigma}_z\op{R}$。
+
+由于$(\Delta\op{\sigma}_z+\Omega\op{\sigma}_x)^2=(\Delta^2+\Omega^2)\one$，
+令$\Omega_R=\sqrt{\Delta^2+\Omega^2}$，称为广义Rabi角频率，
+当$\Omega_R>0$时，令$\op{K}=(\Delta\op{\sigma}_z+\Omega\op{\sigma}_x)/\Omega_R$，则$\op{K}^2=\one$。
+指数级数的偶数项与奇数项分别相加：
+\begin{equation}
+    \begin{alignedat}{1}
+        \op{U}_R(t) &=\sum_{r=0}^\infty
+            \frac{(-1)^r(\Omega_Rt/2)^{2r}}{(2r)!}\one
+            -\i\sum_{r=0}^\infty
+            \frac{(-1)^r(\Omega_Rt/2)^{2r+1}}{(2r+1)!}\op{K}\\
+        &=\cos\frac{\Omega_Rt}{2}\,\one
+            -\i\sin\frac{\Omega_Rt}{2}\,
+            \frac{\Delta\op{\sigma}_z+\Omega\op{\sigma}_x}{\Omega_R}.
+    \end{alignedat}
+\end{equation}
+$\Omega_R=0$时$\op{H}_R=0$，直接得到$\op{U}_R=\one$。
+非零$\Omega_R$时跃迁振幅为
+\begin{equation}
+    \mel{+z}{\op{U}_R(t)}{-z}
+    =-\i\frac{\Omega}{\Omega_R}\sin\frac{\Omega_Rt}{2}.
+\end{equation}
+回到实验室系时$\op{R}(t)$只给这两个$z$分量各乘一个相位，故布居不变。
+
+从$\ket{-z}$出发得到精确的两态结果
+\begin{equation}
+    P_{-z\to+z}(t)=\frac{\Omega^2}{\Omega^2+\Delta^2}
+    \sin^2\Bigp{\frac{t}{2}\sqrt{\Omega^2+\Delta^2}}.
+    \label{eq:rabi}
+\end{equation}
+固定驱动强度时，$|\Delta|$ 越大，旋转系中的进动轴越接近纵向，自旋进动时 $z$ 投影的变化幅度越小（图\ref{fig:rabi-detuning}）。
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.62\linewidth]{figures/rabi.pdf}
+    \caption{固定 $\Omega$，从 $\ket{-z}$ 制备出发。各线对应不同的 $\Delta/\Omega$；峰高读出最大跃迁概率，相邻两峰的横坐标差给出以 $\pi/\Omega$ 为单位的振荡周期。}
+    \label{fig:rabi-detuning}
+\end{figure}
+共振时，持续到 $\Omega t=\pi$ 的驱动将自旋完全翻转，称为 $\pi$ 脉冲。
+固定$\Delta=0$改变$t$，振荡周期$2\pi/|\Omega|$标定耦合强度；
+固定脉冲持续时间$\tau$改变$\omega$，测到的是
+\begin{equation}
+    P_{-z\to+z}(\omega;\tau)
+    =\frac{\Omega^2}{\Omega^2+(\omega_0-\omega)^2}
+        \sin^2\Bigp{\frac{\tau}{2}
+        \sqrt{\Omega^2+(\omega_0-\omega)^2}}.
+\end{equation}
+曲线的对称中心给出 $\omega_0$。有限脉宽和驱动强度都影响线形；从实测谱线提取由寿命决定的自然线宽时，需要分辨这两种效应。
+
+\begin{example}{弱激发极限与有限时间分辨率}{qm-rabi-weak}
+    当激发概率很小，驱动尚未明显耗尽初态时，保留最低阶$\Omega$得到
+    \begin{equation}
+        P_{-z\to+z}(\tau)
+        \simeq\frac{\Omega^2\tau^2}{4}
+            \sinc^2\Bigp{\frac{\Delta\tau}{2}}.
+    \end{equation}
+    此处$\sinc x=\sin x/x$，在$x=0$连续定义为1。
+    第一对零点位于$\Delta=\pm2\pi/\tau$，
+    因而延长相互作用时间可缩小中心峰的频率尺度。
+    共振处近似要求$|\Omega|\tau\ll1$；
+    要描述完整翻转和多次振荡，应使用式\eqref{eq:rabi}。
 \end{example}
-%如果出现简并（即一个本征值有若干个线性独立的本征函数）的情形，则正交性定理不能保证同一本征值的不同本征函数是彼此正交的。
-%但是经过对本征函数进行适当的重新组合，可以使它们仍然是正交的，比如线性代数里的Gram-Schmidt法则。
-\section{测量}
-\paragraph{共同本征函数}
-若$\hat A$和$\hat B$有共同本征函数$\psi$，即
-\[
-	\hat A\psi=a\psi,\quad\hat B\psi=b\psi,
-\]
-同时成立。
 
-共同本征函数描写的就是几个力学量同时有确定值的状态。这样，如果算符$\hat A$的本征值有简并，我们就再引进另一算符$\hat B$并求出$\hat A$和$\hat B$的共同本征函数。去除所有的简并后，这样一组量子数$(a,b,\ldots)$就完全确定了一个量子态。
+\subsection{线偏振驱动与旋波近似}
 
-这种情形多半出现在多自由度体系中。对这种体系，一组两两对易的、完全去除简并的算符集称为它的对易可观测量完全集(complete system of commuting observables, CSCO)。完全集的含义是其联合本征值足以标记基态矢量；算符个数取决于标记方式，不能一般地等同于体系的自由度数。如果这些量子数都是分立量子数，共同本征函数的正交归一关系就是
-\[
-	\inp{\psi_{n\ell m}}{\psi_{n'\ell'm'}}=\vd_{nn'}\vd_{\ell\ell'}\vd_{mm'}.
-\]
-例如无自旋自由粒子可用$\{\hat p_x,\hat p_y,\hat p_z\}$；$\{\hat L^2,\hat L_z\}$仅标记角向波函数，完整三维态还需要径向量子数等信息。
+若实际驱动为线偏振形式
+$\op{H}_{\drive}=\hbar\Omega\cos(\omega t)\op{\sigma}_x$，旋转系(rotating frame)中还存在$2\omega$项。
+在$|\Delta|,|\Omega|\ll\omega_0,\omega$且观察尺度允许平均快速项时，旋波近似(rotating-wave approximation, RWA)给出同一个$\op{H}_R$。
+式\eqref{eq:rabi}对旋转场是精确解，对线偏振场则是上述旋波近似的结果。
 
-\paragraph{量子力学的测量问题}在此引入量子力学的前四个基本公设
-\begin{theorem}{量子力学的基本公设}{Posulates of Quantum Mechanics}
-	\begin{compactenum}
-		\item 本节讨论纯态，其坐标表象由平方可积波函数描述；连续性及导数的边界条件由具体Hamilton算符的定义域决定；
-		\item 波函数的动力学演化满足Schrödinger方程；
-		\item 力学量用Hermite算符表示,且有组成完备集的本征函数系；
-		\item 任一波函数可以展开为力学量算符本征函数的线性叠加，测得力学量为本征值$\lambda_n$的几率（密度）为展开式中对应本征函数系数的模方$\abs{c_n}^2$。
-	\end{compactenum}
-\end{theorem}
-量子力学关于测量问题的基本假设是：算符$\hat A$的本征值集$\{\lambda\}$就是力学量$\hat A$的测量值集；$\hat A$的本征函数$\psi_\lambda$代表力学量$\hat A$有确定值$\lambda$的量子状态。且若一般的态
-\[
-	\psi=\sum c_\lambda\phi_\lambda,
-\]
-则处于$\phi_\lambda$的概率为$\abs{c_\lambda}^2$。
+具体地，
+\begin{equation}
+    \op{R}^\dagger \op{H}_{\drive}\op{R}
+    =\frac{\hbar\Omega}{2}\op{\sigma}_x
+    +\frac{\hbar\Omega}{2}
+    \bigp{\op{\sigma}_x\cos2\omega t-\op{\sigma}_y\sin2\omega t}.
+\end{equation}
+后一组快速振荡项在多个载波周期内平均接近零；
+保留第一项后，驱动贡献恰是$\hbar\Omega\op{\sigma}_x/2$。
 
-对于正交归一的完备本征函数系$\{\psi_n(x)\}$叠加
-\[
-	\psi(x)=\sum c_n\phi_n(x)
-\]
-由基的正交归一性，其系数
-\[
-c_n=(\phi_n,\psi),
-\]
-代入
-\begin{align*}
-	\psi(x) & =\sum\biggp{\int\phi_n^*(x')\psi(x')\d x'}\phi_n(x)  \\
-	        & =\int\biggp{\sum\phi_n(x)\phi_n^*(x')}\psi(x')\d x'.
-\end{align*}
-因此完备性要求
-\begin{align}
-	\sum \phi_n(x)\phi_n^*(x')=\vd(x-x').
-\end{align}
-从物理上说，函数系的完备性尽管很重要，我们却经常不对它做严格的证明。这是因为有些函数系的完备性已经由数学家证明过，也是因为物理上的完备性通常只意味着取这些基本函数来展开我们要研究的波函数已经足够了。
-\paragraph{波包坍缩}测量会使系统由原来许多态的叠加坍缩为一个本征态
-\[
-	\sum c_n\phi_n\e^{-\i E_nt/\hbar}\quad\rightarrow\quad\phi_i\e^{-\i E_it/\hbar}.
-\]
-这一过程称为“波包坍缩”(Neumann, 1932)。理想的无限精度位置测量形式上对应$\delta(\bm r-\bm r_0)$这样的广义本征态；它不是可归一化的物理波包，实际有限分辨率测量产生具有有限空间宽度的测后态。简并离散测量应使用本征子空间投影，而非任选其中一个基矢。
-波包坍缩的动力学过程不服从\Schr 方程，至今仍在研究。% 量子力学关于测量的假定是理论的基本假定之一，是量子力学目前无法解释的。
+还须保证对其他能级的失谐大于相关耦合，并在相干时间内操作。
 
-\paragraph{平均值}对离散谱
-\begin{align}\notag
-	\avg A & =\sum\abs{c_n}^2a_n=\sum\inp{\psi}{\phi_n}\inp{\phi_n}{\psi}a_n  \\
-	       & =\sum\inp{\psi}{\hat A \phi_n}\inp{\phi_n}{\psi}=\inp{\psi}{\hat A\psi}.\label{Derivation of Mean Value}
-\end{align}
-对于未归一化的情形
-\[
-	\avg A=\frac{\inp{\psi}{\hat A\psi}}{\inp{\psi}{\psi}}.
-\]
-连续谱的形式的相同的。
+\section{Ramsey干涉}
+\label{sec:ramsey}
+一次共振脉冲可以把一个确定的能量态变成两个能级各占一半的叠加态。
+如果此时关掉驱动，两个布居保持不变，怎样读出自由进动期间积累的相对相位？
+Ramsey 方法在自由演化时间 $T$ 之后加第二个短脉冲，使两支振幅在同一出口汇合，
+由末端计数读出它们的相位差。
+两次驱动必须具有已知的相位关系，否则逐次平均会洗掉条纹\cite{ramsey}。
 
-\paragraph{对易和同时测量的关系}下面来看两个力学量可以被同时测量的条件。
-事实上，这与力学量的算符有关：
-\begin{theorem}{对易关系}{Commutate Relation}
-	\centering $\hat A,\hat B$对易$\iff$二者可被同时测量。
+在分子束装置中，两个空间分开的振荡场区域承担两次脉冲，
+自由飞行时间由区域间距与束速决定；在囚禁粒子实验中则直接按时间开关驱动。
+实验可以扫驱动频率，也可以扫第二脉冲相位。
+两种扫描读出的都是原子相位相对于外部振荡器的差。
+
+在驱动旋转系，先用$\op{R}_y(\pi/2)$将$\ket{+z}$制备为$\ket{+x}$。
+等待$T$后施加$\op{R}_y(-\pi/2)$。
+这里$\op{R}_y(\theta)=\exp(-\i\theta\op{\sigma}_y/2)$。
+
+这三个步骤的态可逐个写出：
+\begin{subequations}\label{eq:ramsey-states}
+    \begin{alignat}{1}
+        \ket{\psi_1} &=\frac{\ket{+z}+\ket{-z}}{\sqrt2},\\
+        \ket{\psi_2} &=\frac{\e^{-\i\Delta T/2}\ket{+z}
+            +\e^{\i\Delta T/2}\ket{-z}}{\sqrt2},\\
+        \ket{\psi_3} &=\cos\frac{\Delta T}{2}\ket{+z}
+            +\i\sin\frac{\Delta T}{2}\ket{-z}.
+    \end{alignat}
+\end{subequations}
+第二个脉冲将自由演化积累的相位差$\Delta T$变成两个输出的振幅差。
+
+测得$+z$的概率是
+\begin{equation}
+    P_{+z}=\Bigl\lvert\bra{+z}\op{R}_y(-\pi/2)
+    \e^{-\i\Delta T\op{\sigma}_z/2}\op{R}_y(\pi/2)\ket{+z}\Bigr\rvert^2
+    =\frac{1+\cos\Delta T}{2}.
+\end{equation}
+若第二脉冲选择的分析态为
+$\ket{+\chi}=(\ket{+z}+\e^{\i\chi}\ket{-z})/\sqrt2$，
+它与$\ket{\psi_2}$的内积为
+\begin{equation}
+    \brkt{+\chi}{\psi_2}
+    =\frac{\e^{-\i\Delta T/2}
+        +\e^{-\i\chi}\e^{\i\Delta T/2}}2.
+\end{equation}
+取模平方得到带可控相位的条纹
+\begin{equation}
+    P_{+}(\Delta,\chi)=\frac{1+\cos(\Delta T-\chi)}2.
+\end{equation}
+因此自由演化期间即使两个能级的布居始终各为一半，
+其相位仍可通过第二脉冲读出。
+相邻条纹在角频率上的间隔为$2\pi/T$，在普通频率上为$1/T$。
+
+\begin{example}{Ramsey条纹的统计灵敏度}{qm-ramsey-sensitivity}
+    在条纹斜率最大的工作点$\Delta T-\chi=\pi/2$，
+    $P_+=1/2$，且$|\partial P_+/\partial\Delta|=T/2$。
+    $N$次独立读出的概率估计标准差为
+    $\sqrt{P_+(1-P_+)/N}=1/(2\sqrt N)$。
+    线性误差传播给出失谐估计的标准差
+    \begin{equation}
+        \delta\Delta=\frac{1}{T\sqrt N}.
+    \end{equation}
+    若可见度为$\mathcal C<1$，条纹成为
+    $P_+=[1+\mathcal C\cos(\Delta T-\chi)]/2$，
+    同一工作点的统计极限变为$1/(\mathcal C T\sqrt N)$。
+    延长$T$只有在相干性与振荡器稳定性仍可维持时才继续改善读出。
+\end{example}
+
+上述短脉冲表达式要求脉冲时间远小于$T$，并且脉冲内失谐相对于驱动足够小。
+有限脉宽可用\secref{sec:rabi}的传播子逐段相乘计算；
+速度分布、场不均匀和退相干则需要对不同自由演化相位或条件态作平均。
+
+\section{氨分子的反演与隧穿}
+\label{sec:tunneling}
+在 Ramsey 实验中，两种能量分量积累不同的相位，使另一组读数出现振荡。
+若粒子可以局域在两个位置，位置读数也能这样振荡吗？
+氨分子给出了可用微波光谱检验的例子：三个氢原子近似确定一个平面，氮原子可以位于平面两侧，
+这两种构型的耦合会在光谱中留下反演跃迁。
+实验扫描微波频率并测量吸收，得到这两个构型所形成的能量劈裂；
+外电场改变吸收频率，还能检验两构型的电偶极耦合\cite{feynman9}。
+理论的任务是从构型间的耦合解释定态能级和局域制备的时间演化。
+
+氨分子有两个近似局域的反演构型，记为$\ket{L}$和$\ket{R}$。
+以下固定一个转动状态，并忽略其他振动激发\cite{feynman9}。
+在相位选取使耦合$J>0$后，
+\begin{equation}
+    \op{H}=E_0\one-J(\ktbr{L}{R}+\ktbr{R}{L}),\qquad
+    \ket{\pm}=\frac{\ket{L}\pm\ket{R}}{\sqrt2},\quad E_\pm=E_0\mp J.
+\end{equation}
+
+初态满足$\ket{L}=(\ket{+}+\ket{-})/\sqrt2$。两个能量分量分别演化后，
+\begin{equation}
+    \begin{alignedat}{1}
+        \op{U}(t)\ket{L} &=\frac{\e^{-\i(E_0-J)t/\hbar}\ket{+}
+            +\e^{-\i(E_0+J)t/\hbar}\ket{-}}{\sqrt2}\\
+        &=\e^{-\i E_0t/\hbar}
+            \Bigb{\cos\frac{Jt}{\hbar}\ket{L}
+            +\i\sin\frac{Jt}{\hbar}\ket{R}}.
+    \end{alignedat}
+\end{equation}
+投影到$\bra{R}$再取模平方，得到$P_R(t)=\sin^2(Jt/\hbar)$。
+每个能量本征态的构型概率恒定。局域制备包含两个本征态，它们以角频率 $2J/\hbar$ 积累相对相位，由此产生隧穿(tunneling)振荡。
+
+对不对称双阱，加入$\varepsilon(\ktbr{L}{L}-\ktbr{R}{R})/2$，便有
+\begin{equation}
+    P_R(t)=\frac{4J^2}{\varepsilon^2+4J^2}
+    \sin^2\Bigp{\frac{t\sqrt{\varepsilon^2+4J^2}}{2\hbar}}.
+\end{equation}
+这里$J$是低能有效模型的矩阵元，必须由更完整的势能模型计算或由实验拟合。
+给定这个劈裂，两态模型就能预言局域布居的振荡周期。
+
+\subsection{穿过有限宽势垒的概率流}
+若问题改为“入射束有多少能到达势垒另一侧”，边界条件就不同了。
+考虑一维矩形势垒：在 $0<x<a$ 内势能为 $V_0$，两侧为零，仅从左侧入射，且 $0<E<V_0$。
+右侧只有出射波。令 $k=\sqrt{2mE}/\hbar$、$\kappa=\sqrt{2m(V_0-E)}/\hbar$。
+定态方程在两侧成为 $\psi''=-k^2\psi$，在势垒内成为 $\psi''=\kappa^2\psi$，振荡解在此变成实指数的线性组合。
+用复数 $A$ 记透射波振幅，右侧解写成 $A\e^{\i k(x-a)}$，故 $\psi(a)=A$、$\psi'(a)=\i k A$。
+势能只有有限跳变，定态方程在端点两侧的无穷小区间上积分给出 $\psi'$ 连续，$\psi$ 也连续。
+在势垒内取基函数 $\cosh[\kappa(x-a)]$ 和 $\sinh[\kappa(x-a)]$，
+前者在 $a$ 处取 1、导数为零，后者在 $a$ 处取零、导数为 $\kappa$，于是
+\begin{equation}
+    \psi(x)=A\bigb{\cosh[\kappa(x-a)]+\i(k/\kappa)\sinh[\kappa(x-a)]}.
+\end{equation}
+再在 $x=0$ 接到左侧解
+$A_{\incoming}\e^{\i kx}+A_{\rm r}\e^{-\i kx}$。
+此处有 $\psi(0)=A_{\incoming}+A_{\rm r}$、$\psi'(0)/(\i k)=A_{\incoming}-A_{\rm r}$。
+两式相加消去反射振幅 $A_{\rm r}$，用势垒内的解计算左端值，得到
+\begin{equation}
+    \frac{A_{\incoming}}{A}
+    =\cosh(\kappa a)+\frac{\i}{2}
+        \bigg(\frac{\kappa}{k}-\frac{k}{\kappa}\bigg)\sinh(\kappa a).
+\end{equation}
+向右行进的平面波的概率流为 $\hbar k/m$ 乘以振幅模平方。势垒两侧的 $k$ 相同，
+所以透射流与入射流之比只需取上式模平方的倒数。
+用 $\cosh^2u=1+\sinh^2u$ 及 $k^2+\kappa^2=2mV_0/\hbar^2$，得到
+\begin{equation}
+    T=\frac{|A|^2}{|A_{\incoming}|^2}
+    =\bigg[1+\frac{V_0^2\sinh^2(\kappa a)}{4E(V_0-E)}\bigg]^{-1}.
+\end{equation}
+图\ref{fig:rectangular-barrier}左图中，入射波与反射波干涉使势垒左侧的密度起伏，定态净概率流处处相同。
+势垒内单个实指数解的概率流为零；两个指数分量的相对相位使它们的叠加态携带透射流。
+\begin{figure}[htbp]
+    \centering\includegraphics[width=.94\linewidth]{figures/rectangular_barrier.pdf}
+    \caption{左：取 $E=V_0/2$、$\kappa a=1$，虚线标出势垒两端，以入射波密度为单位，右侧平台高度即 $T$。右：固定 $V_0$ 改变宽度；在半对数坐标上，厚势垒的曲线趋于直线，对应 $T\propto\e^{-2\kappa a}$。}
+    \label{fig:rectangular-barrier}
+\end{figure}
+
+\section{三种绘景与Ehrenfest关系}
+前面的进动和反演问题都先求态随时间的变化，再计算读数。如果实验只问一个波包的中心怎样移动，
+能否直接写出平均位置的运动方程？同一个期望值可以把时间变化放在态上，也可以放在测量算符上。
+后一种写法直接给出量子平均值的运动方程，从而可以判定它何时近似服从经典的 Newton 方程。
+
+\begin{definition}{Schrödinger、Heisenberg与相互作用绘景}{qm-pictures}
+    取 $t_0=0$，记 $\op{U}=\op{U}(t,0)$。Schrödinger 绘景以态
+    $\ket{\psi(t)}=\op{U}\ket{\psi(0)}$ 和测量算符 $\op{A}_S(t)$ 计算读数。
+    Heisenberg 绘景固定初态，以 $\op{A}_H(t)=\op{U}^\dagger \op{A}_S(t)\op{U}$ 表示同一测量。
+    若 $\op{H}=\op{H}_0+\op{V}(t)$ 且 $\op{H}_0$ 不显含时间，相互作用绘景(interaction picture)取
+    $\op{U}_0=\e^{-\i \op{H}_0t/\hbar}$，以 $\ket{\psi_I}=\op{U}_0^\dagger\ket{\psi(t)}$ 和
+    $\op{A}_I=\op{U}_0^\dagger \op{A}_S\op{U}_0$ 计算读数。
+\end{definition}
+Heisenberg 绘景里直接对 $\op{A}_H$ 求导，得到
+\begin{equation}
+    \frac{\d \op{A}_H}{\nd t}=\frac\i\hbar[\op{H}_H,\op{A}_H]+\op{U}^\dagger\frac{\partial \op{A}_S}{\partial t}\op{U}.
+    \label{eq:heisenberg}
+\end{equation}
+
+这里$\op{H}_H=\op{U}^\dagger \op{H}_S\op{U}$。乘积求导的三项分别为
+\begin{alignat*}{1}
+    \dot{\op{A}}_H &=(\dot{\op{U}}^\dagger)\op{A}_S\op{U}+\op{U}^\dagger\dot{\op{A}}_S\op{U}
+        +\op{U}^\dagger \op{A}_S\dot{\op{U}}\\
+    &=\frac{\i}{\hbar}\op{U}^\dagger \op{H}_S\op{A}_S\op{U}
+        +\op{U}^\dagger\dot{\op{A}}_S\op{U}
+        -\frac{\i}{\hbar}\op{U}^\dagger \op{A}_S\op{H}_S\op{U}.
+\end{alignat*}
+把两端的$\op{U}^\dagger,\op{U}$并入算符，便得到式\eqref{eq:heisenberg}。
+
+在相互作用绘景里，$\ket{\psi_I}$ 的变化由变换后的相互作用产生，
+\begin{equation}
+    \op{V}_I=\e^{\i \op{H}_0t/\hbar}\op{V}\e^{-\i \op{H}_0t/\hbar},\quad
+    \i\hbar\partial_t\ket{\psi_I}=\op{V}_I\ket{\psi_I}.
+\end{equation}
+三种绘景把时间依赖分配给态或算符，给出相同的测量概率。
+
+例如$\mel{\psi(t)}{\op{A}_S(t)}{\psi(t)}
+=\mel{\psi(t_0)}{\op{A}_H(t)}{\psi(t_0)}$，
+直接由$\ket{\psi(t)}=\op{U}\ket{\psi(t_0)}$和伴随关系得到。
+相互作用绘景的态方程中，$\op{H}_0$产生的两项也正好相消：
+\begin{equation}
+    \i\hbar\partial_t\ket{\psi_I}
+    =-\op{H}_0\ket{\psi_I}
+    +\e^{\i \op{H}_0t/\hbar}(\op{H}_0+\op{V})\e^{-\i \op{H}_0t/\hbar}\ket{\psi_I}
+    =\op{V}_I\ket{\psi_I}.
+\end{equation}
+
+\begin{theorem}{Ehrenfest定理在一维力学中的形式}{qm-ehrenfest}
+    对整条直线上无矢势、$\op{H}=\op{P}^2/(2m)+V(\op{X})$ 的粒子，设 $V$ 可微，所考察的波包足够光滑、
+    在无穷远衰减，使有关对易子和期望的时间导数存在，
+    则平均位置与平均动量满足
+    \begin{equation}
+        \frac{\d\ave{\op{X}}}{\nd t}=\frac{\ave{\op{P}}}{m},\qquad
+        \frac{\d\ave{\op{P}}}{\nd t}=-\ave{V'(\op{X})}.
+    \end{equation}
 \end{theorem}
 \begin{proof}
-	必要性。若$\hat A,\hat B$可以被同时测量，则二者有共同本征函数$\phi_{ab}$
-	\[
-		\hat A\phi=a\phi,\quad \hat B\phi=b\phi.
-	\]
-	则
-	\[
-		\cmm AB\phi=(ab-ba)\phi=0.
-	\]
-	故$\forall\psi,$
-	\[
-		\cmm AB\psi=\sum_{ab}c_{ab}\cmm AB\phi_{ab}=0.
-	\]
-	因此$\cmm AB\equiv 0$。
-	
-	充分性。若$\hat A,\hat B$对易，且其中有一个是非简并的，不妨设$\hat A$非简并，有一组本征函数集$\{\phi_a\}$
-	\[
-		\cmm AB\phi_a=\hat A\hat B\phi_a-a\hat B\phi_a=0.
-	\]
-	因此$\hat B\phi_a$也是$\hat A$的本征值为$a$的本征函数，因为$\hat A$非简并，有$\hat B\phi_a\propto\phi_a$，即$\phi_a$也是$\hat B$的本征函数。进而$\hat A,\hat B$可以被同时测量。
+    在整条直线上对足够光滑且在无穷远衰减的波包，$[\op{P}^2,\op{X}]=-2\i\hbar \op{P}$、
+    $[V(\op{X}),\op{P}]=\i\hbar V'(\op{X})$。将这两个对易子依次代入式\eqref{eq:heisenberg}并取期望值即得。
 \end{proof}
+一般$\ave{V'(\op{X})}\ne V'(\ave{\op{X}})$。
+力是位置的线性函数时，均值严格服从经典运动方程。若力在波包宽度内近似线性，均值的运动也近似服从该方程。
 
-若$\hat A,\hat B$对易，且皆简并，对$\hat A$的本征值$a$有$n$个本征函数$\phi_i$
-\[
-	\hat A\phi_i=a\phi_i,\quad i=1,2,\ldots,n.
-\]
-同理$\hat B\phi_i$是$\hat A$的本征值为$a$的本征函数，用$\phi_j$线性组合表示
-\begin{align*}
-	\hat B\begin{bmatrix}
-		\phi_1 \\\vdots\\\phi_n
-	\end{bmatrix}=\begin{bmatrix}
-		c_{11} & \cdots & c_{1n} \\
-		\vdots & \ddots & \vdots \\
-		c_{n1} & \cdots & c_{nn}
-	\end{bmatrix}\begin{bmatrix}
-		\phi_1 \\\vdots\\\phi_n
-	\end{bmatrix},
-\end{align*}
-将矩阵进行对角化变换，就得到了$\hat B$的本征值和本征函数。
-\paragraph{不确定度}定义偏差为测量值和平均值间的差\footnote{从此处开始，在平均值记号$\avg X$中的$X$过于复杂的时候，我会在这一段统一使用$\ave X$。}
-\[
-	\D\hat A:=\hat A-\ave A.
-\]
-定义\textit{涨落}
-\[
-	(\vd A)^2:=\langle\D\hat A^2\rangle=\langle\hat A^2\rangle-\ave A^2.
-\]
-
-由于Hermite算符的对易子是反Hermite的
-\[
-	\cmm AB\dg=\hat B\hat A-\hat A\hat B=\cmm BA,
-\]
-故若$\cmm AB=\i\hat C$，则$\hat C$也是Hermite的。
-
-考察以下积分不等式
-\[
-I(\xi):=\int\abs{\bigp{\xi\,\D\hat A-\i\D\hat B}\psi}^2\d r\geqslant 0.
-\]
-拆开
-\[
-I(\xi)=(\vd A)^2\xi^2-\i\ave{\cmm AB}\xi+(\vd B)^2.
-\]
-因此
-\begin{align}
-	(\vd A)^2(\vd B)^2\geqslant\frac14\ave C^2.
-\end{align}
-只有在给定态中$\ave{\cmm AB}\neq0$时，上式才给出非零下界；算符不对易并不排除某些共同本征态。特别地$\cmm xp=\i\hbar$，因此
-\begin{align}
-	\vd x\vd p\geqslant\frac{\hbar}2.\label{Proof of UR}
-\end{align}
-证明了第~\pageref{thm:Uncertainty Relation}~面的不确定性定理~\ref{thm:Uncertainty Relation}。
-
-可以证明，满足最小不确定性的波函数为Gauss函数形式。
-\section{角动量算符}
-顺承经典力学中的定义，角动量算符
-\[
-	\qo L:=\qo r\times\,\qo p.
-\]
-直角坐标表象下
-\begin{align*}
-	\qo L & =[\hat x,\hat y,\hat z]\tp\times[\hat p_x,\hat p_y,\hat p_z]\tp                             \\
-	      & =[\hat y\hat p_z-\hat z\hat p_y,\hat z\hat p_x-\hat x\hat p_z,\hat x\hat p_y-\hat y\hat p_x]\tp % \\ &
-	=:[\hat L_x,\hat L_y,\hat L_z]\tp.
-\end{align*}
-易证$\hat L_x,\hat L_y,\hat L_z$是Hermite的。对易子
-\[
-	\cmm{L_x}{L_y}=(\hat p_z\hat z-\hat z\hat p_z)(\hat y\hat p_x-\hat x\hat p_y)=\i\hbar\,\hat L_z.
-\]
-$\cmm{L_y}{L_z}$等同理，因此
-\begin{align}
-	\qo L\times\,\qo L=\i\hbar\qo L.
-\end{align}
-
-另一方面，角动量平方算符$\hat L^2\equiv\hat L_x^2+\hat L_y^2+\hat L_z^2$与$\hat L_z$等分量对易
-\begin{align}\notag
-	\cmm{L^2}{L_z}&=\cmm{L^2_x}{L_z}+\cmm{L^2_y}{L_z}+0\\\notag
-	&=\hat L_x\cmm{L_x}{L_z}+\cmm{L_x}{L_z}\hat L_x+\hat L_y\cmm{L_y}{L_z}+\cmm{L_y}{L_z}\hat L_y\\
-	&=-\i\hbar(\hat L_x\hat L_y+\hat L_y\hat L_x)+\i\hbar(\hat L_y\hat L_x+\hat L_x\hat L_y)=0.
-\end{align}
-
-联级Stern-Gerlach实验体现了角动量不同分量的测量不相容。银原子基态的轨道角动量为零，实验中的二重分裂来自未配对电子的自旋，不能把它直接归因于轨道角动量$\hat L_z$。
-
-回顾\textit{球坐标系}下
-\[
-	\nabla=\Bigb{\pp r,\frac1r\pp\theta,\frac1{r\sin\theta}\pp\varphi}\tp_\mathrm{Sp}.
-\]
-Laplace算符
-\[
-	\nabla^2=\frac1{r^2}\pp r\Bigp{r^2\pp r}+\frac1{r^2\sin\theta}\pp\theta\Bigp{\sin\theta\pp\theta}+\frac1{r^2\sin^2\theta}\pp[2]\varphi.
-\]
-定义$\qo L=-\i\hbar\,\qo\Lambda$
-\[
-	\qo\Lambda:=\qo r\times\,\nabla=\Bigb{0,-\frac1{\sin\theta}\pp\varphi,\pp\theta}\tp_\mathrm{Sp}.
-\]
-特别地，代回直角坐标系后，有
-\iffalse
-	\begin{align*}
-		\hat L_x & =\i\hbar\Bigp{+\sin\varphi\pp\theta+\cot\theta\cos\varphi\pp\varphi} \\
-		\hat L_y & =\i\hbar\Bigp{-\cos\varphi\pp\theta+\cot\theta\sin\varphi\pp\varphi} \\
-		\hat L_z & =-\i\hbar\pp\varphi.
-	\end{align*}
-\fi
-\begin{gather}
-	\hat L_z=-\i\hbar\pp\varphi;\\
-	\hat L^2=-\hbar^2\Bigb{\frac1{\sin\theta}\pp\theta\Bigp{\sin\theta\pp\theta}+\frac1{\sin^2\theta}\pp[2]\varphi}.
-\end{gather}
-由$\hat L_z,\hat L^2$对易，二者有共同本征函数。
-\paragraph{$\hat L_z$的本征态}设本征值为$m\hbar$，本征函数$\psi_m(\varphi)$
-\[
-	\hat L_z\psi_m=-\i\hbar\pv{\psi_m}\varphi=m\hbar\psi_m\implies\psi_m=C\e^{\i m\varphi}.
-\]
-且本征态应具有周期性$\psi_m(\varphi+2\pi)=\psi_m(\varphi)$，故$m=0,\pm 1,\pm 2,\ldots$
-\[
-	(\psi_m,\psi_m)=\abs C^2\int_0^{2\pi}\d\varphi=1\implies C=\frac1{\sqrt{2\pi}}.
-\]
-\paragraph{$\hat L^2$的本征态}设本征值为$\lambda\hbar^2$，本征函数$Y(\theta,\varphi)$
-\[
-	\hat\Lambda^2Y=\frac1{\sin\theta}\pp\theta\Bigp{\sin\theta\pv Y\theta}+\frac1{\sin^2\theta}\pv[2]Y\varphi=-\lambda Y.
-\]
-分离变量$Y(\theta,\varphi)=\varTheta(\theta)\varPhi(\varphi)$
-\[
-	\frac\varPhi{\sin\theta}\dd\theta\Bigp{\sin\theta\dv\varTheta\theta}+\frac\varTheta{\sin^2\theta}\dv[2]\varPhi\varphi=-\lambda\varTheta\varPhi.
-\]
-即
-\[
-	\frac{\sin\theta}\varTheta\dd\theta\Bigp{\sin\theta\dv\varTheta\theta}+\lambda\sin^2\theta=-\frac1\varPhi\pv[2]\varPhi\varphi=m^2.
-\]
-
-引入$w:=\cos\theta,\;P(w):=\varTheta(\arccos w)=\varTheta(\theta)$
+\subsection{自由波包：中心匀速，宽度却在变}
+撤去外力后，$\ave{\op{X}}_t=\ave{\op{X}}_0+t\ave{\op{P}}_0/m$。中心的位置遵循匀速运动规律，波包的宽度还取决于初态的动量分布。
+自由演化给出 $\op{X}_H(t)=\op{X}+t\op{P}/m$。设初态为位置和动量协方差为零的最小不确定度 Gauss 波包，
+位置标准差为 $\sigma_0$，动量标准差为 $\hbar/(2\sigma_0)$。
+不同动量分量以不同速度散开；把 $\op{X}_H(t)$ 的方差展开，交叉项为零，故
 \begin{equation}
-	\dd w\Bigb{(1-w^2)\dv Pw}+\Bigp{\lambda-\frac{m^2}{1-w^2}}P=0.
+    \sigma_x^2(t)=\sigma_0^2+\frac{t^2}{m^2}\frac{\hbar^2}{4\sigma_0^2}
+    =\sigma_0^2[1+(t/t_s)^2],\qquad t_s=\frac{2m\sigma_0^2}{\hbar}.
 \end{equation}
-这是缔合Legendre方程，$\pm 1$是方程的奇点，只有
-\[
-	\lambda=\ell(\ell+1),\quad\ell=\abs m,\abs m+1,\ldots
-\]
-时，方程才有收敛解$P_\ell^m(w)$。
+自由传播保持 Gauss 形状和总概率，展宽因而伴随峰值下降（图\ref{fig:free-packet}）。
+\begin{figure}[H]
+    \centering\includegraphics[width=.62\linewidth]{figures/free_packet.pdf}
+    \caption{横坐标以各时刻的波包中心 $\ave{\op{X}}_t$ 为原点，以初始标准差 $\sigma_0$ 为长度单位。三条曲线分别对应 $t/t_s=0,1,2$，可直接比较同一共动位置的概率密度。}
+    \label{fig:free-packet}
+\end{figure}
 
-特别地，当$m=0$时，
-\[
-	\dd w\Bigb{(1-w^2)\dv Pw}+\ell(\ell+1)P=0.
-\]
-便是Legendre方程，其解是Legendre多项式
-\[
-	P_\ell(w)=\frac1{2^\ell\ell!}\dd[\ell]w(w^2-1)^\ell.
-\]
-对应的，当$m>0$时，缔合\Legd 函数
-\[
-	P_\ell^m(w)=(1-w^2)^{m/2}\dd[m]wP_\ell(w).
-\]
-而对于$m<0$的情形，其实应当与$\abs m$相同；若对正负均沿用原定义，则
-\[
-	P_\ell^{-m}=(-1)^m\frac{(\ell-m)!}{(\ell+m)!}P_\ell^m,\quad m>0.
-\]
+\checkpoint{共振驱动下，一级微扰给出
+    $P\simeq\Omega^2t^2/4$。该近似对脉冲时长有何要求？}{
+    在旋转系取$\op{H}_R=\hbar\Omega\op{\sigma}_x/2$，初态为$\ket{-z}$。
+    由$\op{\sigma}_x^2=\one$，
+    \begin{equation}
+        \op{U}_R(t)\ket{-z}
+        =\cos\frac{\Omega t}{2}\ket{-z}
+            -\i\sin\frac{\Omega t}{2}\ket{+z}.
+    \end{equation}
+    两个振幅的模平方之和严格为1。
+    以$x=\Omega t/2$展开，跃迁概率为
+    \begin{equation}
+        \sin^2x=x^2-\frac{x^4}{3}+\bigo(x^6).
+    \end{equation}
+    被删去的首项相对于$x^2$为$x^2/3$，
+    因而弱激发近似的条件是$|\Omega|t\ll1$。
 
-\Legd 多项式的奇偶性由$\ell$决定。
-\begin{example}{\Legd 函数表}{Table of Legendre}
-	$\ell=0,1,2,3$的Legendre多项式$P_\ell$和缔合Legendre函数$P_\ell^m(\cos\theta)$%\setlength\abovedisplayskip{10pt}
-	\begin{align*}
-		P_0 & =1, & P_0^0 & =1;\\
-		P_1 & =x, & P_1^0 & =\cos\theta, & P_1^1 & =\sin\theta;\\
-		P_2 & =\frac12(3x^2-1), & P_2^0 & =\frac12(3\cos^2\theta-1), & P_2^1 & =3\sin\theta\cos\theta,\\
-			&& P_2^2 &=3\sin^2\theta;\\
-		P_3 & =\frac12(5x^3-3x), & P_3^0 & =\frac12(5\cos^3\theta-3\cos\theta), & P_3^1 & =\frac32\sin\theta(5\cos^2\theta-1),\\
-			&& P_3^2 & =15\sin^2\theta\cos\theta, & P_3^3 & =15\sin^3\theta;
-		%\\P_4&=\frac18(35x^4-30&x^2&+3),&P_5&=\frac18(63x^5-70x^3+15x).
-	\end{align*}
-\end{example}
-轨道角动量本征函数最后为
-\[
-	Y_{\ell m}(\theta,\varphi)=N_{\ell m}P_\ell^m(\cos\theta)\e^{\i m\varphi},
-\]
-%正交归一
-%\[\int\abs{Y_{\ell m}(\theta,\varphi)}^2\d\Omega=1,\quad\d\Omega=\sin\theta\d\theta\nd\varphi.\]
-由于
-\[
-	\int_{-1}^1P_\ell^m(x)P_{\ell'}^m(x)\d x=\frac2{2\ell+1}\frac{(\ell+m)!}{(\ell-m)!}\vd_{\ell\ell'},\quad 0\leq m\leq\min(\ell,\ell').
-\]
-得
-\[
-N_{\ell m}=(-1)^m\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}}
-\]
-称$Y_{\ell m(\theta,\varphi)}$为球谐函数，$\ell$为角量子数，$m$为磁量子数。原子物理中将$\ell=0,1,2,3,\ldots$的状态分别称为$\mathrm{s,p,d,f}$态。
+    初态振幅也从$1$变成
+    $1-x^2/2+\bigo(x^4)$；其模平方为$1-x^2+\bigo(x^4)$，
+    恰好补偿跃迁概率的$x^2$项。
+    若把初态振幅永远固定为1，同时保留有限的末态概率，
+    就会在二阶破坏归一化。
+    微扰计算必须在同一阶上比较各通道的概率。
 
-\begin{example}{球谐函数表}{Table of Spherical Harmonics}
-	$\ell=0,1,2,3$已归一化后的$Y_\ell^m$
-	\begin{align*}
-		Y_0^0~\;    & =\frac1{2\sqrt\pi},                                           & Y_2^{\pm 2} & =\sqrt{\frac{15}{32\pi}}\sin^2\theta\e^{\pm 2\i\phi},                 \\
-		Y_1^0~\;    & =\sqrt{\frac3{4\pi}}\cos\theta,                               & Y_3^0~\;    & =\sqrt{\frac7{16\pi}}(5\cos^3\theta-3\cos\theta),                    \\
-		Y_1^{\pm 1} & =\mp\sqrt{\frac3{8\pi}}\sin\theta\e^{\pm\i\phi},               & Y_3^{\pm 1} & =\mp\sqrt{\frac{21}{64\pi}}\sin\theta(5\cos^2\theta-1)\e^{\pm\i\phi}, \\
-		Y_2^0~\;    & =\sqrt{\frac5{16\pi}}(3\cos^2\theta-1),                       & Y_3^{\pm 2} & =\sqrt{\frac{105}{32\pi}}\sin^2\theta\cos\theta\e^{\pm 2\i\phi},      \\
-		Y_2^{\pm 1} & =\mp\sqrt{\frac{15}{8\pi}}\sin\theta\cos\theta\e^{\pm \i\phi}, & Y_3^{\pm 3} & =\mp\sqrt{\frac{35}{64\pi}}\sin^3\theta\e^{\pm 3\i\phi}.
-	\end{align*}
-\end{example}
-$\hat L^2$的本征值$\ell(\ell+1)\hbar^2$下有$2\ell+1$个可能的$m$，简并度为$2\ell+1$。
+    当$\Omega t=\pi$时系统完全翻转，
+    当$\Omega t=2\pi$时布居返回初态。
+    孤立两态的布居在两个能级间周期性往返。}
 
-球谐函数是$\hat L^2$和$\hat L_z$的共同本征函数
-\begin{align*}
-	\begin{cases}
-		\hat L^2Y_{\ell m}=\ell(\ell+1)\hbar^2Y_{\ell m}, & \ell=0,1,2,\ldots           \\
-		\hat L_zY_{\ell m}=m\hbar Y_{\ell m},             & m=-\ell,-\ell+1,\ldots,\ell
-	\end{cases}
-\end{align*}
-\paragraph{宇称}作空间反射变换$\r\to-\r$，对应球坐标中$(r,\theta,\varphi)\to(r,\pi-\theta,\pi+\varphi)$
-\begin{gather*}
-	P_{\ell}^{m}\bigp{\cos (\pi-\theta)}=P_{\ell}^{m}(-\cos \theta)=(-1)^{\ell-m} P_{\ell}^{m}(\cos \theta) \\
-	\e^{\i m(\pi+\varphi)}=(-1)^{m}\e^{\i m \varphi}                                                   \\
-	Y_{\ell m}(\pi-\theta, \pi+\varphi)=(-1)^{\ell} Y_{\ell m}(\theta, \varphi)
-\end{gather*}
-因此$Y_{\ell m}(\theta,\varphi)$的宇称为$(-1)^\ell$．
-\paragraph{递推关系}
-\begin{align}\label{costhetaYlm}
-	\cos\theta Y_\ell^m&=\sqrt{\frac{(\ell+1)^2-m^2}{(2\ell+1)(2\ell+3)}}Y_{\ell+1}^m+\sqrt{\frac{\ell^2-m^2}{(2\ell-1)(2\ell+1)}}Y_{\ell-1}^m.\\
-	\sin\theta\e^{\pm\i\varphi}Y_\ell^m&=\mp\sqrt{\frac{(\ell\pm m+1)(\ell\pm m+2)}{(2\ell+1)(2\ell+3)}}Y_{\ell+1}^{m\pm 1}\pm\sqrt{\frac{(\ell\mp m)(\ell\mp m-1)}{(2\ell-1)(2\ell+1)}}Y_{\ell-1}^{m\pm 1}.
-\end{align}
-记不住，记住也没用。
-\paragraph{径向动量算符}球坐标系不同于直角坐标，$\qo r\cdot\,\qo p$并不是Hermite的。因此要使算符是Hermite的，定义
-\[
-	\hat p_r=\frac12(\qo{e_r}\cdot\,\qo p+\,\qo p\,\cdot\,\qo{e_r}).
-\]
-计算得
-\begin{align}
-	\hat p_r=-\frac{\i\hbar}2\Bigp{\pp r+\pp r+\frac1r+\frac1{r\sin\theta}\cdot\sin\theta}=-\i\hbar\Bigp{\pp r+\frac1r}.
-\end{align}
-且
-\[
-	\hat p_r^2=-\hbar^2\Bigp{\pp[2]r+\frac2r\pp r}=-\hbar^2\frac1{r^2}\pp r\Bigp{r^2\pp r}.
-\]
-因此
-\begin{align}
-	\hat p^2=\hat p_r^2+\frac{\hat L^2}{r^2}.
-\end{align}
+\reading{两态动力学核对MIT 8.05讲义7\cite{mittwostate}。
+    下一章将“两个能级”推广为一串等间隔能级，并解释热辐射。}

@@ -1,0 +1,305 @@
+\chapter{绝热演化与几何相位}
+\label{ch:adiabatic}
+
+\section{绝热近似}
+前章的散射靶在粒子通过时保持不变。若外场随时间改变，例如磁场方向转动或势阱逐渐变形，Hamilton 算符也会随之改变。
+即使已知各组控制参数下的瞬时能谱，仍有一个动力学问题。起初制备在某个能级上的粒子，
+到最后是否仍在相应的能级上？沿同一路径作快慢不同的扫描，末端的能级计数就能检验这一点。
+
+用 $\bm R(t)=(R_1(t),R_2(t),\ldots)$ 表示外部控制参数，例如外加磁场沿三个坐标轴的分量。
+固定某一时刻的参数，求 $\op{H}(\bm R(t))$ 的本征值与本征矢，
+所得 $E_n(\bm R)$ 和 $\ket{n(\bm R)}$ 分别称为瞬时能量与瞬时本征态(instantaneous eigenstate)。
+
+以固定场强的自旋为例。在磁场指向 $z$ 时制备 $\ket{+z}$，再把磁场转过角度 $\vartheta$。
+若转动快到自旋态来不及演化，用新场方向 $\bm n$ 的分析器测量，
+由式\eqref{eq:spinor}得到正支概率 $|\brkt{+\bm n}{+z}|^2=\cos^2(\vartheta/2)$。
+即使场强和能级间距始终一样，只要转过直角，两支就各占一半。
+若沿同一条路径缓慢转动且能隙保持打开，绝热跟随意味着末态测到正支的概率趋于一。
+两种操作最终用的是同一台分析器，区别在于磁场转动期间自旋是否来得及随它改变。
+此处“绝热”说的是瞬时能级间的跃迁受到抑制，判断它要比较驱动时间与量子演化的时间尺度。
+
+设关注的能级非简并且与其他谱始终有非零间隔，
+$\op{H}(t)\ket{n(t)}=E_n(t)\ket{n(t)}$。
+先把每个瞬时能量累积的相位写出，再用振幅 $c_n(t)$ 记录其余变化。取
+\begin{equation}
+    \theta_n(t)=\frac1\hbar\int_0^t E_n(s)\d s,\qquad
+    \ket{\psi(t)}=\sum_n c_n(t)\e^{-\i\theta_n(t)}\ket{n(t)}.
+\end{equation}
+代入态方程得到
+\begin{equation}
+    \dot c_m=-\sum_n c_n\brkt{m}{\dot n}\e^{\i(\theta_m-\theta_n)} .
+\end{equation}
+
+直接对态展开求导时有三类项，
+\begin{equation}
+    \partial_t\ket{\psi}
+    =\sum_n\e^{-\i\theta_n}
+    \bigp{\dot c_n\ket{n}-\i\dot\theta_n c_n\ket{n}+c_n\ket{\dot n}}.
+\end{equation}
+将它代入$\i\hbar\partial_t\ket{\psi}=\op{H}\ket{\psi}$，
+$\hbar\dot\theta_n=E_n$使中间项与右侧抵消；
+左乘$\bra{m}\e^{\i\theta_m}$便得到振幅方程。
+
+振幅方程中的非对角内积 $\brkt{m}{\dot n}$ 描述瞬时本征矢随外场变化而产生的能级间耦合。它可以由 Hamilton 算符的时间导数直接确定。
+\begin{lemma}[不同能级之间的导数耦合]
+    设 $\op{H}(t)$ 自伴且可微，选取可微的归一化瞬时本征态 $\ket{n(t)}$。
+    对本征能量 $E_m(t)\ne E_n(t)$ 的态 $\ket{m(t)}$，有
+    \begin{equation}
+        \brkt{m}{\dot n}=\frac{\mel{m}{\dot{\op{H}}}{n}}{E_n-E_m}.
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    微分本征方程得 $\dot{\op{H}}\ket{n}+\op{H}\ket{\dot n}=\dot E_n\ket{n}+E_n\ket{\dot n}$。
+    左乘 $\bra{m}$，由正交性得 $\dot E_n\brkt{m}{n}=0$。
+    再用 $\bra{m}\op{H}=E_m\bra{m}$ 合并其余两项即可。
+\end{proof}
+
+因此能隙(spectral gap)越小，驱动越容易混合不同能级。
+还需比较两个频率。在很短的一段上，$|\brkt{m}{\dot n}|$ 是基矢向另一能级转动的速率，
+而振幅方程中两项的相对相位以 $|E_m-E_n|/\hbar$ 转动。
+后一个频率很大时，来自相邻时段的跃迁振幅在积分中会互相抵消。两种速率的比给出常用的局部判据
+\begin{equation}
+    \frac{\hbar|\mel{m}{\dot{\op{H}}}{n}|}{|E_m-E_n|^2}\ll1
+    \label{eq:adiabaticcriterion}
+\end{equation}
+此比值估计给定时刻两条能级的混合强弱。关于整条路径的结论可在以下条件下表述。
+\begin{theorem}{孤立非简并能级的绝热跟随}{qm-adiabatic-following}
+    设有限维自伴 $\op{H}(s)$ 在 $0\le s\le1$ 上二次连续可微，能级 $E_n(s)$ 与其余能谱的间隔
+    全程大于某个正的常数。初态取 $\ket{n(0)}$，在总时长 $T$ 内按 $s=t/T$ 沿这条固定路径演化。
+    绝热极限 $T\to\infty$ 下，随时测量瞬时能量，得到对应本征值 $E_n(s)$ 的概率一致趋于1。
+\end{theorem}
+这里的测量概率对应每次重新制备、只在选定的时刻读出一次。固定路径再放慢，
+保证整段驱动都随 $T$ 一起变慢。有限时长的实验还需检查端点、累积跃迁及可能的共振；
+能隙闭合时要重新处理简并子空间或采用非绝热模型。定理的推导可参见文献\cite{mitadiabatic}。
+
+还可看出总演化时间$T$如何压低跃迁。
+用$s=t/T$参数化路径，并选取对角几何连接(geometric connection)为零的平行输运(parallel transport)规范。
+这样选相位的含义是让相邻两点的 $\brkt{n(s)}{n(s+\d s)}$ 到一阶为正实数。
+归一化使 $\brkt{n}{\partial_s n}$ 只有虚部，沿一段路径逐点调整本征矢的相位就能把它消去。
+走完闭路后，按此规则选出的末端矢量可能与起点相差一个相位。
+从 $n$ 出发，记 $a_{mn}(u)=\brkt{m}{\partial_u n}$，沿参数路径累积的能隙积分为
+\[
+    \Phi_{mn}(u)=\int_0^u\Delta_{mn}(v)\d v,\qquad
+    \Delta_{mn}=E_m-E_n.
+\]
+一阶跃迁到 $m$ 的振幅为
+\begin{equation}
+    c_m^{(1)}(s)
+    =-\int_0^s a_{mn}(u)\e^{\i T\Phi_{mn}(u)/\hbar}\d u,
+\end{equation}
+以指数的导数作分部积分，
+\begin{equation}
+    \begin{alignedat}{1}
+        c_m^{(1)}(s) &=-\frac{\hbar}{\i T}
+            \biggb{\frac{a_{mn}}{\Delta_{mn}}
+            \e^{\i T\Phi_{mn}/\hbar}}_0^s\\
+        &\quad+\frac{\hbar}{\i T}
+            \int_0^s\dv{}{u}\Bigp{\frac{a_{mn}}{\Delta_{mn}}}
+            \e^{\i T\Phi_{mn}/\hbar}\d u.
+    \end{alignedat}
+\end{equation}
+若能隙有一致下界、路径及其导数受控，端点项和积分项都随$1/T$减小。
+这个计算解释了慢时间极限中能隙、光滑性与总时长共同出现的原因。
+
+\section{Berry相位}
+绝热跟随预测的是能级计数。若把参数绕一圈后调回起点，这些计数几乎全回到原来的能级，
+当这一支与参考振幅干涉时，条纹却可能移动。要预测条纹的位移，需要从演化振幅中分出由能量积累的相位，
+再求本征态沿路径改变所贡献的相位。
+
+忽略不同能级间的耦合，仅保留对角项，得到
+\begin{equation}
+    \ket{\psi(t)}\simeq
+    \e^{-\i\theta_n(t)}\e^{\i\gamma_n(t)}\ket{n(t)},\qquad
+    \gamma_n(t)=\i\int_0^t\brkt{n(s)}{\dot n(s)}\d s.
+\end{equation}
+归一化使$\brkt{n}{\dot n}$纯虚，故$\gamma_n$为实。
+
+因为$\partial_t\brkt{n}{n}=0$，
+有$\brkt{\dot n}{n}+\brkt{n}{\dot n}=0$。
+对角振幅方程 $\dot c_n=-c_n\brkt{n}{\dot n}$ 以 $c_n(0)=1$ 积分后，恰给出相位因子 $c_n(t)=\e^{\i\gamma_n(t)}$。
+
+\begin{definition}{闭合路径的Berry相位}{qm-berry}
+    对沿参数闭路 $C$ 绝热跟随的非简并能级，扣除动力学相位后积累的几何相位称为 Berry 相位。
+    在路径上选取光滑、首尾一致的本征态相位约定。参数空间的连接是由内积给出的普通向量场
+    $\bm{\mathcal A}_n=\i\brkt{n(\bm R)}{\nabla_{\bm R}n(\bm R)}$，则
+    \begin{equation}
+        \gamma_n(C)=\oint_C\bm{\mathcal A}_n\cdot\d\bm R\pmod{2\pi}.
+    \end{equation}
+\end{definition}
+
+重定义$\ket{n}\to\e^{\i\chi(\bm R)}\ket{n}$时，
+$\bm{\mathcal A}_n\to\bm{\mathcal A}_n-\nabla\chi$。
+闭路相位模$2\pi$保持不变。对于开放路径，连接的积分随端点的相位约定改变；与端点态重叠的相位合并后，得到规范不变的干涉相位(gauge-invariant phase)。
+
+\begin{remark}[开放路径的端点贡献]
+当端点态重叠非零时，一个规范不变的开放路径组合是
+\begin{equation}
+    \gamma_{\geometric}
+    =\arg\brkt{n(0)}{n(T)}
+    +\i\int_0^T\brkt{n(t)}{\dot n(t)}\d t.
+\end{equation}
+相位重定义使第一项增加$\chi(T)-\chi(0)$，
+使积分项减少同一数，二者相消。
+\end{remark}
+
+\section{旋转磁场中的自旋}
+取一个可以画出参数路径的实验：保持磁场大小不变，让场方向在单位球上绕一条纬圈。
+自旋的两条能级在整个过程中有固定间隔，纬圈包围的面积却能通过调节倾角而改变。
+于是可以分别检验路径决定的条纹移动和转动过快引起的能级跃迁。
+
+\subsection{几何相位的干涉读出}
+\label{ss:berry-readout}
+
+自旋通过缓变磁场时，两条瞬时能量支都积累动力学相位和几何相位。
+将自旋制备为两支的叠加，再用末端自旋分析器读出相对相位，
+可以把几何贡献转成计数变化。
+中子在螺旋磁场中的自旋旋转实验实现了这类检验\cite{berryneutron}。
+
+条纹位移取决于两束相干振幅沿各自路径积累的相对相位。
+例如在平衡双路径干涉仪的一臂让同一自旋能量支 $n$ 绝热走完闭路 $C$，
+另一臂提供固定参考，末端两臂的自旋重新重合。
+设参考相位可调，记为 $\varphi$，信号臂相对于参考臂的动力学相位为 $\delta_{\rm dyn}$。
+取合束器一个出口，两个路径振幅之和给出
+\begin{equation}
+    P(\varphi)=\frac14\big|\e^{\i\varphi}
+        +\e^{\i[\delta_{\rm dyn}+\gamma_n(C)]}\big|^2
+        =\frac12\{1+\cos[\delta_{\rm dyn}+\gamma_n(C)-\varphi]\}.
+\end{equation}
+只将闭路反向且保持相同的场强历程与参考臂，$\delta_{\rm dyn}$ 不变，$\gamma_n$ 反号。
+扫描 $\varphi$，两次条纹峰的位置相差 $2\gamma_n(C)$（模 $2\pi$）。
+若采用前述单束自旋实验，干涉的两项是两个能量支，须先算它们的几何相位差 $\gamma_+-\gamma_-$。
+
+\subsection{立体角公式}
+
+取$\op{H}=(\hbar\omega_0/2)\bm n\cdot\hatbm{\sigma}$、$\omega_0>0$，
+并使用式\eqref{eq:spinor}的正本征态。
+直接微分得到
+\begin{equation}
+    \i\brkt{+\bm n}{\partial_\phi(+\bm n)}
+    =-\sin^2\frac\theta2=-\frac{1-\cos\theta}{2}.
+\end{equation}
+绕固定$\theta$一圈，$\gamma_+=-\pi(1-\cos\theta)$，
+一般闭路为$\gamma_+=-\Omega_C/2$，$\Omega_C$为有向立体角。
+换到负本征支或反转绕行方向，几何相位均变号（图\ref{fig:berry-cap}）。
+\begin{figure}[htbp]
+    \centering\tikzfigure[width=.38\linewidth]{berry-cap}
+    \caption{单位球上的磁场方向 $\bm n$。纬圈箭头标出绕行方向，阴影球冠的面积给出该方向的立体角 $\Omega_C=2\pi(1-\cos\theta)$。}\label{fig:berry-cap}
+\end{figure}
+
+\subsection{有限转速的精确检验}
+\label{ss:rotating-adiabatic}
+
+还可以用一个可精确求解的驱动检查绝热近似。
+令磁场方向保持极角$\theta$，方位角以角速度$\Omega$变化：
+\begin{equation}
+    \op{H}(t)=\frac{\hbar\omega_0}{2}
+        \bigb{\sin\theta\cos(\Omega t)\op{\sigma}_x
+        +\sin\theta\sin(\Omega t)\op{\sigma}_y+\cos\theta\op{\sigma}_z}.
+\end{equation}
+采用与\ssecref{ss:rabi-rotating}相同的
+$\op{R}(t)=\exp(-\i\Omega t\op{\sigma}_z/2)$，旋转系Hamilton算符为
+\begin{equation}
+    \op{H}_R=\frac{\hbar}{2}
+        \bigb{\omega_0\sin\theta\,\op{\sigma}_x
+        +(\omega_0\cos\theta-\Omega)\op{\sigma}_z}.
+\end{equation}
+记其频率向量为$\bm h_R$，模长为
+\begin{equation}
+    \omega_{\effective}
+    =\sqrt{\omega_0^2+\Omega^2-2\omega_0\Omega\cos\theta}.
+\end{equation}
+初态取$\ket{+\bm n(0)}$，考察末态中与瞬时正支正交的分量。
+旋转系中，能造成跃迁的是$\bm h_R$垂直于初始方向的部分，
+其大小为$|\Omega\sin\theta|$。
+对Pauli指数展开后，得到精确泄漏概率
+\begin{equation}
+    P_{+\to-}(t)
+    =\frac{\Omega^2\sin^2\theta}{\omega_{\effective}^2}
+        \sin^2\frac{\omega_{\effective} t}{2}.
+\end{equation}
+在$|\Omega|\ll\omega_0$时，最大泄漏是
+$\bigo[(\Omega\sin\theta/\omega_0)^2]$。
+若磁场大小趋零，$\omega_0$即能隙除以$\hbar$，
+同一个转速不再保证绝热，这与式\eqref{eq:adiabaticcriterion}一致。
+这一精确比较同时区分路径几何与走过路径的速度。
+
+\section{避免交叉处的非绝热跃迁}
+旋转磁场的例子中，能隙沿路径处处相同。若扫描路径经过两支能级最接近的位置，
+即使控制参数匀速变化，最小能隙也可能决定最终跃迁到另一支的概率。
+把\chapref{ch:approximations}的避免交叉图改作一次从左到右的时间扫描，就得到可与末端能级计数比较的Landau--Zener模型。
+
+取两条未耦合能级之差随时间线性变化，耦合保持常量：
+\begin{equation}
+    \op{H}(t)=\frac{vt}{2}\op{\sigma}_z+g\op{\sigma}_x,\qquad v>0,\quad g\text{为实数}.
+\end{equation}
+最小能隙为$2|g|$，瞬时能量为$\pm\sqrt{(vt/2)^2+g^2}$。
+可沿图\ref{fig:avoided-crossing}的下支从左向右读这个扫描，取图中的未耦合能量差为 $vt$。
+在 $t$ 为大负值时，固定态 $\ket{+z}$ 的对角能量 $vt/2$ 较低；
+在 $t$ 为大正值时，同一个固定态的对角能量较高。于是从低能态出发，
+始终沿下支走会在末端测到 $\ket{-z}$，保持原来的 $\ket{+z}$ 则会出现在上支。
+这一区别决定了下面跃迁概率的读法。
+
+在固定的$\op{\sigma}_z$基中写
+$\ket{\psi}=a(t)\ket{+z}+b(t)\ket{-z}$。
+两分量满足
+\begin{subequations}
+    \begin{alignat}{1}
+        \i\hbar\dot a&=\frac{vt}{2}a+gb,\\
+        \i\hbar\dot b&=ga-\frac{vt}{2}b.
+    \end{alignat}
+\end{subequations}
+$g$是能量，$v$是两条未耦合能级之差的扫描速率，量纲为能量除以时间。
+对第一式求导并消去$b,\dot b$，得到
+\begin{equation}
+    \ddot a+
+    \Bigp{\frac{v^2t^2}{4\hbar^2}
+        +\frac{g^2}{\hbar^2}+\frac{\i v}{2\hbar}}a=0.
+\end{equation}
+定义无量纲参数$\delta=g^2/(\hbar v)$及
+$z=\e^{\i\pi/4}\sqrt{v/\hbar}\,t$，方程化为Weber形式
+\begin{equation}
+    \dv[2]a z+\Bigp{\frac12-\i\delta-\frac{z^2}{4}}a=0.
+\end{equation}
+$g\ne0$时，两独立解可取抛物柱函数(parabolic cylinder function)$D_{-\i\delta}(\pm z)$；
+将两端的渐近解连接，留在原固定基态上的振幅模为$\e^{-\pi\delta}$\cite{lz}。
+
+对$t=-\infty$到$+\infty$的线性扫描，从初始低能绝热支出发，最终落到高能绝热支的概率为
+\begin{equation}
+    P_{\nonadiabatic}=\exp\Bigp{-\frac{2\pi g^2}{\hbar v}}.
+\end{equation}
+它也等于留在原来对角基态标签中的概率。精确连接公式由两分量振幅方程的渐近解得到\cite{lz}。
+有限扫描范围、非线性扫描、环境或多次通过会改变结果；多次通过还要保留路径间相位。
+
+若一个简并子空间始终与外部隔离，应绝热跟随整个投影子空间。
+在给定的瞬时基底中，连接矩阵 $\mathcal A_{ab}=\i\brkt{n_a}{\dot n_b}$ 的非对角元耦合不同基矢的振幅；几何演化由相应的时间序指数给出。
+
+\checkpoint{把同一条磁场方向闭路走得更慢，
+    动力学相位与几何相位分别怎样改变？}{
+    取场强不变、极角$\theta$固定的一周旋转，
+    总时间为$T$，角速度$\Omega=2\pi/T$。
+    对正能支$E_+=\hbar\omega_0/2$，
+    动力学相位为
+    \begin{equation}
+        \varphi_\mathrm{dyn}
+        =-\frac1\hbar\int_0^T E_+\d t
+        =-\frac{\omega_0T}{2}.
+    \end{equation}
+    它随总时长线性改变。
+    几何相位(geometric phase)则是
+    \begin{equation}
+        \gamma_+
+        =-\int_0^{2\pi}\frac{1-\cos\theta}{2}\d\phi
+        =-\pi(1-\cos\theta),
+    \end{equation}
+    只依赖闭路所围的有向立体角，与$T$无关。
+    反向绕行改变$\d\phi$的符号，因而反转$\gamma_+$，
+    但相同场强和时长下的动力学相位不变。
+
+    这一速度无关性要求绝热近似成立。
+    \ssecref{ss:rotating-adiabatic}的精确解给出泄漏上界
+    $\Omega^2\sin^2\theta/\omega_\effective^2$；
+    在$\omega_0T\gg1$时它随$T^{-2}$下降。
+    沿同一条路径减慢驱动，泄漏减小，几何相位趋于由有向立体角决定的绝热值。}
+
+\reading{绝热展开与几何相位核对MIT 8.06讲义6\cite{mitadiabatic}。
+    下一章放松封闭系统假设，解释相干条纹为什么会随时间衰减。}

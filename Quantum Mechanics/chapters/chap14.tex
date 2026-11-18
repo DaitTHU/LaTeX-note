@@ -1,0 +1,366 @@
+\chapter{开放系统}
+\label{ch:open}
+
+\section{约化动力学与量子信道}
+
+上一章用干涉条纹的位置读出相位，前提是两路振幅还能相干叠加。实际把原子制备成叠加态，
+延长等待时间，还会看到 Ramsey 条纹的对比度下降。若把同种原子制备到激发态，寿命测量记录的激发态比例也会下降，
+两种衰减的速率可以不同。若要用同一模型解释两组读数，需要确定光子离开后，仅测量原子还能获得哪些信息。
+
+从封闭总系统出发，可以保留概率守恒而只观测其中一部分。
+开放系统(open quantum system)与外部自由度交换能量或信息。
+把关心的自由度记为系统$S$，未逐项观测的自由度记为环境(environment)$E$。
+系统的状态是联合密度算符对环境的部分迹，
+$\op{\rho}_S=\tr_E\op{\rho}_{SE}$。
+例如发光原子是$S$，逸出到各个方向的辐射模式组成$E$。
+
+\begin{example}{一次发射对应的振幅阻尼信道}{qm-amplitude-damping}
+    设环境最初没有光子，记为$\ket{0_E}$，
+    发射后的归一化环境态记为$\ket{1_E}$。
+    在一次演化区间内，以$p\in[0,1]$表示激发态发射的概率。
+    联合演化在相关初态子空间上为
+    \begin{subequations}
+        \begin{alignat}{1}
+            \ket{g,0_E}&\longmapsto\ket{g,0_E},\\
+            \ket{e,0_E}&\longmapsto
+                \sqrt{1-p}\ket{e,0_E}+\sqrt p\ket{g,1_E}.
+        \end{alignat}
+    \end{subequations}
+    两个输出仍正交归一，因此可扩充为整个联合空间上的幺正变换。
+    设原子的初态为 $a\ket{g}+b\ket{e}$，其中 $|a|^2+|b|^2=1$。
+    根据线性叠加，等候结束后的联合态为
+    \begin{equation}
+        \bigp{a\ket{g}+\sqrt{1-p}\,b\ket{e}}\ket{0_E}
+            +\sqrt p\,b\ket{g}\ket{1_E}.
+    \end{equation}
+    光子计数器理想时，这两个正交的环境记录可以区分。读到零个光子的概率是第一项的模方
+    $|a|^2+(1-p)|b|^2$，读到一个的概率是第二项的模方 $p|b|^2$。
+    例如初态为等幅叠加、$p=1/2$，四分之一的实验会记录一个光子，原子随即确定在基态。
+    其余四分之三记录为零，其中原子仍在激发态的条件概率是 $(1/4)/(3/4)=1/3$。
+
+    为了将计算推广到任意原子初态，可分别考察零光子和一个光子记录下的原子态。它们对初态的线性依赖分别由下列两个算符给出，
+    \begin{equation}
+        \op{K}_0=\ktbr{g}{g}+\sqrt{1-p}\ktbr{e}{e},
+        \qquad
+        \op{K}_1=\sqrt p\ktbr{g}{e}.
+    \end{equation}
+    若只测量原子，各条光子记录所对应的条件态应按记录概率加权。
+    条件态的归一化分母与权重相消，便有 $\op{\rho}'=\op{K}_0\op{\rho} \op{K}_0^\dagger+\op{K}_1\op{\rho} \op{K}_1^\dagger$。
+    在有序基$(\ket{g},\ket{e})$中逐项相乘，
+    \begin{equation}
+        \op{\rho}'=
+        \begin{pmatrix}
+            \rho_{gg}+p\rho_{ee}&\sqrt{1-p}\rho_{ge}\\
+            \sqrt{1-p}\rho_{eg}&(1-p)\rho_{ee}
+        \end{pmatrix}.
+    \end{equation}
+    激发态布居减少因子$1-p$，相干只减少因子$\sqrt{1-p}$，
+    因为相干连接“尚未发射”的振幅与基态振幅。
+    初态为$\ket{e}$时，约化态为
+    $(1-p)\ktbr{e}{e}+p\ktbr{g}{g}$；
+    混合来自系统与光子的关联，联合态仍是纯态。
+\end{example}
+
+上述两种记录可以推广到任意环境基，即使实际实验只观测原子也可以求和。
+封闭联合系统满足$\op{\rho}_{SE}(t)=\op{U}\op{\rho}_{SE}(0)\op{U}^\dagger$。
+若初始态可分为$\op{\rho}_S\otimes\op{\rho}_E$且环境处于纯态$\ket{e_0}$，选环境基$\ket{\alpha}$，定义
+\begin{equation}
+    \begin{aligned}
+        \op{K}_\alpha&=(\one_S\otimes\bra{\alpha})\op{U}(\one_S\otimes\ket{e_0}),\\
+        \op{\rho}_S(t)&=\sum_\alpha \op{K}_\alpha\op{\rho}_S\op{K}_\alpha^\dagger,
+        \qquad\sum_\alpha \op{K}_\alpha^\dagger \op{K}_\alpha=\one_S.
+    \end{aligned}
+\end{equation}
+
+$\op{K}_\alpha$ 称为 Kraus 算符，作用在系统空间上。右端先把系统态与 $\ket{e_0}$ 配成初态，
+联合演化后，左端只取环境态 $\ket{\alpha}$ 的分量，留下一个系统态。于是可简记 $\op{K}_\alpha=\bra{\alpha}\op{U}\ket{e_0}$。
+对初始纯系统态$\ket{\psi}$，联合演化可展开为
+\begin{equation}
+    \op{U}(\ket{\psi}\otimes\ket{e_0})
+    =\sum_\alpha(\op{K}_\alpha\ket{\psi})\otimes\ket{\alpha}.
+\end{equation}
+求外积并取环境的迹，因环境基正交，具有不同 $\alpha$ 的交叉项消失，余下各项给出上式中的约化态。
+由线性性，该式对一般$\op{\rho}_S$同样成立。
+再由环境完备性和$\op{U}^\dagger \op{U}=\one$，
+\begin{equation}
+    \begin{alignedat}{1}
+        \sum_\alpha \op{K}_\alpha^\dagger \op{K}_\alpha &=(\one_S\otimes\bra{e_0})
+            \op{U}^\dagger
+            \Bigp{\one_S\otimes\sum_\alpha\ktbr{\alpha}{\alpha}}
+            \op{U}(\one_S\otimes\ket{e_0})\\
+        &=\one_S.
+    \end{alignedat}
+\end{equation}
+
+若 $\op{\rho}_E$ 是混合态，取其正交本征态 $\ket{e_j}$，以本征值 $w_j$ 为各初始环境态的权重。
+将权重吸收到 $\op{K}_{\alpha j}=\sqrt{w_j}\bra{\alpha}\op{U}\ket{e_j}$ 中，仍得到上述形式。
+这个作用于任意 $\op{\rho}_S$ 的映射来自固定环境态的乘积制备。若初态包含系统与环境的关联，预测演化还须指定这些关联。
+
+\begin{definition}{完全正迹保持映射}{qm-cptp}
+    线性映射$\mathcal E$对所有输入态均满足$\tr\mathcal E(\op{\rho})=\tr\op{\rho}$，称为迹保持(trace-preserving)。
+    若对任意辅助系统$A$，$\mathcal E\otimes\id_A$都把正算符映到正算符，
+    称为完全正(completely positive)。同时满足这两条的映射称为量子信道(quantum channel)，
+    英文简写为 CPTP (completely positive and trace-preserving)。
+\end{definition}
+例如对一对纠缠粒子的其中一个施加信道，另一个置于装置之外，所有联合概率仍须为非负。
+完全正性保证这种只在一侧操作的实验也有一致的概率解释。
+
+\begin{theorem}{Kraus算符和的完全正性与保迹条件}{qm-kraus-trace}
+    有限维中，给定一组算符 $\op{K}_\alpha$，令
+    \[
+        \mathcal E(\op{\rho})=\sum_\alpha \op{K}_\alpha\op{\rho} \op{K}_\alpha^\dagger,\qquad
+        \op{Q}=\sum_\alpha \op{K}_\alpha^\dagger \op{K}_\alpha .
+    \]
+    映射 $\mathcal E$ 完全正。它是量子信道的充要条件为 $\op{Q}=\one$。
+\end{theorem}
+\begin{proof}
+    由迹的循环性质，$\tr\mathcal E(\op{\rho})=\tr(\op{\rho} \op{Q})$。
+    当 $\op{Q}=\one$ 时便有迹保持。反之，在每个归一化纯态上测试迹保持，
+    就得到自伴算符 $\op{Q}$ 在每个纯态中的期望值均为 1，故 $\op{Q}=\one$。
+    对联合正算符$\op{R}\geq0$及任意$\ket{v}$，
+    \begin{equation}
+        \mel{v}{(\mathcal E\otimes\id_A)(\op{R})}{v}
+        =\sum_\alpha
+        \mel{w_\alpha}{\op{R}}{w_\alpha}\geq0,
+        \qquad
+        \ket{w_\alpha}=(\op{K}_\alpha^\dagger\otimes\one_A)\ket{v}.
+    \end{equation}
+    因此加入任意辅助空间后仍保持正性。
+\end{proof}
+取部分迹后，环境携带的路径或发射信息无法仅从原子读出。由系统与环境关联引起的局部相干衰减称为退相干(decoherence)，
+在干涉实验中表现为可见度下降。对光子记录求平均得到约化态，保留某个记录则得到对应的条件态。
+
+\section{Lindblad生成元与无记忆演化}
+
+上节的信道给出原子等待一段时间后的状态。现在把等待分成两段。若第一段发出的光会返回原子，
+第二段的演化就可能受早先的发射影响。若环境记忆可以忽略且外部条件保持恒定，只需给定当前的原子态，便可用同一演化规则预测它在下一时段的状态。
+在这个条件下，一条微分方程足以描述整条衰减曲线。
+
+\begin{definition}{时间齐次动力学半群与生成元}{qm-semigroup}
+    用 $\mathcal E_t$ 表示经过时间 $t\geq0$ 的量子信道。若
+    $\mathcal E_0=\id$ 且 $\mathcal E_{t+s}=\mathcal E_t\mathcal E_s$，这族信道称为时间齐次动力学半群(semigroup)。
+    若下列极限存在，相应的初始变化率称为生成元(generator)，
+    \[
+        \mathcal L(\op{\rho})=\lim_{h\to0^+}\frac{\mathcal E_h(\op{\rho})-\op{\rho}}{h}.
+    \]
+    由合成律，任意时刻的态满足主方程(master equation) $\dot{\op{\rho}}=\mathcal L(\op{\rho})$。
+\end{definition}
+
+以\exmref{exm:qm-amplitude-damping}为例，设$p=p(t)$。
+连续两段演化使未发射比例相乘，半群条件要求
+\begin{equation}
+    1-p(t+s)=[1-p(t)][1-p(s)].
+\end{equation}
+若$p(0)=0$且随时间连续，该乘法关系给出
+$1-p(t)=\e^{-\Gamma t}$，其中$\Gamma\geq0$。
+具体说，设激发态在一个短的时间段 $\Delta t$ 内有 $\Gamma\Delta t+o(\Delta t)$ 的概率发射。
+到 $t$ 时仍激发的比例记为 $s(t)$，则 $s(t+\Delta t)=s(t)[1-\Gamma\Delta t+o(\Delta t)]$。
+移项除以 $\Delta t$ 就得到 $\dot s=-\Gamma s$，以 $s(0)=1$ 积分便是上述指数律。
+振幅阻尼信道同时把失去的激发布居转移给基态，保持总概率为一。
+有限环境发生复现时，未发射比例一般不满足这个乘法关系。
+
+\begin{theorem}{有限维GKSL生成元}{qm-gksl}
+    有限维系统的连续、时间齐次完全正迹保持半群，其生成元可写为
+    \begin{equation}
+        \mathcal L(\op{\rho})=-\frac\i\hbar[\op{H}_{\effective},\op{\rho}]
+        +\sum_\mu\Bigp{\op{L}_\mu\op{\rho} \op{L}_\mu^\dagger
+            -\frac12\{\op{L}_\mu^\dagger \op{L}_\mu,\op{\rho}\}}.
+        \label{eq:lindblad}
+    \end{equation}
+    其中$\op{H}_{\effective}$自伴，$\op{L}_\mu$是系统算符。
+    反过来，这一形式生成完全正迹保持半群。
+\end{theorem}
+GKSL 是 Gorini、Kossakowski、Sudarshan 与 Lindblad 的姓氏缩写。
+本书将速率平方根吸收到$\op{L}_\mu$中，其量纲为时间$^{-1/2}$。
+一般分类证明见参考资料\cite{manzano}；
+无穷维推广还需给定生成元的定义域和相应收敛条件。
+
+从短时 Kraus 算符可看清反对易项的来历。先将各通道的贡献合写成算符
+\[
+    \op{C}=\sum_\mu \op{L}_\mu^\dagger \op{L}_\mu .
+\]
+保留无跃迁算符的一阶项和跃迁算符的最低阶项，取
+\begin{equation}
+    \op{K}_0=\one-\biggp{\frac{\i \op{H}_{\effective}}\hbar+\frac{\op{C}}{2}}\d t,
+    \qquad \op{K}_\mu=\sqrt{\d t}\,\op{L}_\mu.
+\end{equation}
+代入Kraus和并保留$\d t$，便得到式\eqref{eq:lindblad}。
+
+分别展开无跃迁项和跃迁项，得到
+\begin{subequations}
+    \begin{alignat}{1}
+        \op{K}_0\op{\rho} \op{K}_0^\dagger &=\op{\rho}-\frac{\i}{\hbar}[\op{H}_{\effective},\op{\rho}]\d t
+            -\frac12(\op{C}\op{\rho}+\op{\rho} \op{C})\d t+\bigo(\d t^2),\\
+        \sum_\mu \op{K}_\mu\op{\rho} \op{K}_\mu^\dagger &=\sum_\mu \op{L}_\mu\op{\rho} \op{L}_\mu^\dagger\d t.
+    \end{alignat}
+\end{subequations}
+相加后减去$\op{\rho}$、除以$\d t$，得到主方程。
+其中$\op{H}_{\effective}$为自伴的有效Hamilton算符，
+可包含环境引起的能移；耗散由$\op{L}_\mu$表示。
+
+概率守恒要求所有记录的概率之和为一。由上面的短时算符可验算
+\[
+    \op{K}_0^\dagger \op{K}_0+\sum_\mu \op{K}_\mu^\dagger \op{K}_\mu
+    =\one-\op{C}\d t+\op{C}\d t+\bigo(\d t^2)=\one+\bigo(\d t^2).
+\]
+无跃迁项中 $\op{C}$ 的系数恰好使一阶概率变化相消。
+具体的$\op{H}_{\effective}$和$\op{L}_\mu$由系统与环境的耦合及以下近似确定。
+
+微观推导通常先假定系统与环境弱耦合，采用 Born 近似。再要求环境关联时间远短于系统弛豫(relaxation)时间，采用 Markov 近似。
+随后对可分辨的不同跃迁频率作长期平均，即久期近似(secular approximation)；也可以使用其他保证完全正性的受控极限。
+这些是不同步骤。强耦合、结构化谱和长期记忆可能导致非Markov动力学；
+未经久期处理的Redfield方程也不自动保持正性\cite{manzano}。
+
+\section{布居弛豫与退相干}
+同一条主方程怎样给出寿命实验和 Ramsey 实验各自测到的衰减时间？
+原子发射一个光子会减少激发态的数目，能级间相位的随机变化则可以在布居不变时使条纹变淡。
+把这两种过程分别代入上节的主方程，便能分别跟踪激发态的概率和条纹的对比度。
+
+设$\op{H}=\hbar\omega_0\ket{e}\bra{e}$，$\ket{g}$为基态。
+零温自发发射取$\op{L}_1=\sqrt\Gamma\ket{g}\bra{e}$；纯退相干(pure dephasing)取
+$\op{L}_\phi=\sqrt{\gamma_\phi/2}\op{\sigma}_z$。
+
+$\rho_{ee}=\mel{e}{\op{\rho}}{e}$是激发态布居，
+$\rho_{eg}=\mel{e}{\op{\rho}}{g}$是基态与激发态之间的相干，
+$\op{\sigma}_z=\ktbr{e}{e}-\ktbr{g}{g}$。
+两种耗散的算符形式分别为
+\begin{subequations}
+    \begin{alignat}{1}
+        \mathcal D_1(\op{\rho}) &=\Gamma\rho_{ee}\ktbr{g}{g}
+            -\frac{\Gamma}{2}\{\ktbr{e}{e},\op{\rho}\},\\
+        \mathcal D_\phi(\op{\rho}) &=\frac{\gamma_\phi}{2}(\op{\sigma}_z\op{\rho}\op{\sigma}_z-\op{\rho}).
+    \end{alignat}
+\end{subequations}
+第一式的馈入项只增加$\rho_{gg}$，
+反对易项在$ee$元贡献$-\Gamma\rho_{ee}$，
+在$eg$元贡献$-\Gamma\rho_{eg}/2$。
+第二式对对角元为零，对$eg$元贡献$-\gamma_\phi\rho_{eg}$。
+
+直接代入矩阵元得
+\begin{subequations}
+    \begin{alignat}{1}
+        \dot\rho_{ee}&=-\Gamma\rho_{ee},\\
+        \dot\rho_{eg}&=-\Bigp{\i\omega_0+\frac\Gamma2+\gamma_\phi}\rho_{eg}.
+    \end{alignat}
+\end{subequations}
+\begin{definition}{布居弛豫时间与相干时间}{qm-relaxation-times}
+    若能量布居与平衡值之差按指数衰减，其幅值降至初值 $1/\e$ 的时间称为 $T_1$。
+    若能量基中非对角元的模按指数衰减，其幅值降至初值 $1/\e$ 的时间称为 $T_2$。
+    在理想 Ramsey 读出中，后一衰减可由条纹对比度测得。
+\end{definition}
+读出上述两个微分方程的衰减率，得到这个零温两态模型中的关系
+\begin{equation}
+    T_1=\Gamma^{-1},\qquad
+    T_2^{-1}=\frac1{2T_1}+\gamma_\phi,
+    \qquad T_2\leq2T_1.
+\end{equation}
+纯退相干打乱两能级之间的相对相位而保持布居，因此只对 $T_2^{-1}$ 贡献附加的一项（图\ref{fig:relaxation}）。
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.62\linewidth]{figures/relaxation.pdf}
+    \caption{各量分别除以自身初值，时间以 $T_1$ 为单位。虚线为激发布居 $\rho_{ee}$；两条实线为不同 $\gamma_\phi$ 下的相干幅值 $|\rho_{eg}|$。}
+    \label{fig:relaxation}
+\end{figure}
+
+解这两个一阶微分方程可得
+\begin{subequations}
+    \begin{alignat}{1}
+        \rho_{ee}(t)&=\rho_{ee}(0)\e^{-t/T_1},\\
+        \rho_{eg}(t)&=\rho_{eg}(0)\e^{-\i\omega_0t-t/T_2},\\
+        \rho_{gg}(t)&=1-\rho_{ee}(t).
+    \end{alignat}
+\end{subequations}
+第三式由迹守恒确定，显示激发态损失的布居进入了基态。
+
+有热激发时需再加$\sqrt{\Gamma_{\up}}\ket{e}\bra{g}$，
+布居弛豫率变为$\Gamma_\downarrow+\Gamma_{\up}$，平衡布居由两率之比决定。
+
+Ramsey实验在理想脉冲下读出
+\begin{equation}
+    P_+(T)=\frac12[1+\e^{-T/T_2}\cos(\Delta T+\phi_0)]
+\end{equation}
+$\phi_0$是两次脉冲设置的相对相位；
+这里取初始制备与读出轴使纵向布居项不贡献该信号。
+静态失谐分布的系综平均还会引入$T_2^*$；其包络未必指数，且可被自旋回波部分恢复。
+回波可用来区分静态失谐引起的相位散布与不可逆的相干衰减。
+
+\begin{example}{静态失谐的自由感应与自旋回波}{qm-spin-echo}
+    设每个粒子的附加失谐$\delta$在一次实验内固定，
+    不同粒子的$\delta$服从均值为零、标准差为$\sigma_\delta$的 Gauss 分布。
+    自由等待$T$后的系综相干含因子
+    \begin{equation}
+        \int_{-\infty}^{\infty}
+        \frac{\e^{-\delta^2/(2\sigma_\delta^2)}}{\sqrt{2\pi}\sigma_\delta}
+        \e^{-\i\delta T}\d\delta
+        =\e^{-\sigma_\delta^2T^2/2}.
+    \end{equation}
+    Gauss 包络的宽度由静态失谐的标准差 $\sigma_\delta$ 决定。
+    若在$T/2$插入理想$\pi$脉冲$\op{R}_x(\pi)=-\i\op{\sigma}_x$，
+    利用$\op{\sigma}_x\op{\sigma}_z\op{\sigma}_x=-\op{\sigma}_z$，
+    两段失谐演化满足
+    \begin{equation}
+        \e^{-\i\delta T\op{\sigma}_z/4}
+        \op{R}_x(\pi)
+        \e^{-\i\delta T\op{\sigma}_z/4}
+        =\op{R}_x(\pi).
+    \end{equation}
+    固定失谐的相位因而被消去，末端适当读出可恢复对比度。
+    在两半段之间变化的噪声及真实能量弛豫通常不能这样完全消除。
+\end{example}
+
+\section{量子跳跃}
+上节的布居曲线平均了许多次制备。若在一次实验中也记下光子到达的时刻，
+每次探测到光子都提供了一次发射事件的时间信息。如何根据这类记录更新原子态，并由单次记录恢复平均衰减曲线？
+
+\begin{definition}{光子计数下的量子跳跃}{qm-photon-jump}
+    在理想光子计数中，某一发射通道的点击所引起的条件态突变称为量子跳跃(quantum jump)。
+    对以 $\op{L}_1$ 表示的通道，短时间 $\d t$ 内的点击概率（取一阶）和点击后的态分别为
+    \begin{equation}
+        p_1=\d t\,\tr(\op{L}_1^\dagger \op{L}_1\op{\rho}),\qquad
+        \op{\rho}_1=\frac{\op{L}_1\op{\rho} \op{L}_1^\dagger}{\tr(\op{L}_1^\dagger \op{L}_1\op{\rho})}\quad(p_1>0).
+    \end{equation}
+\end{definition}
+若所有发射通道均受到理想监测且无其他耗散，没有点击时按 $\op{K}_0$ 更新并归一化。
+将各记录的条件态按概率加权，便恢复主方程。所选的监测方式决定单次记录对应的条件轨迹。
+探测效率不足时，“没有计数”还可能表示已经发射、但光子漏检。
+计算这组记录的条件态时，需要将未发射与漏检两种可能按概率合并。
+
+\section{短时演化与量子Zeno效应}
+光子计数等待发射自行发生。若改为周期性测量系统是否仍处于初态，每次测量的结果还决定了下一时段的初态。
+缩短测量间隔会怎样影响生存概率，取决于单次演化中离开初态的概率如何随时间增长。
+这里要回到封闭系统的幺正演化，考察指数衰减模型尚未分辨的时间尺度。
+
+令 $\op{H}$ 为不显含时间的自伴 Hamilton 算符。对归一化初态 $\ket{\Psi}$，生存振幅(survival amplitude) $A(t)$ 是演化后的态在原态方向上的分量。它是复数，由下列矩阵元给出，
+\begin{equation*}
+    A(t)=\mel{\Psi}{\exp(-\i \op{H}t/\hbar)}{\Psi}.
+\end{equation*}
+\begin{theorem}{短时生存律}{qm-short-time-survival}
+    封闭系统按不显含时间的自伴 $\op{H}$ 演化，若归一化初态 $\ket{\Psi}$ 的能量方差有限，
+    则在时刻 $t$ 测得系统仍处于该初态的概率（生存概率，survival probability）满足
+    \begin{equation}
+        |\mel{\Psi}{\e^{-\i \op{H}t/\hbar}}{\Psi}|^2
+        =1-\frac{(\Delta H)^2t^2}{\hbar^2}+o(t^2).
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    能量方差有限时，能量分布的二阶矩存在。对 $A(t)$ 的能量谱积分求出在 $t=0$ 的前两阶导数，便有
+    \begin{equation}
+        A(t)=1-\frac{\i\ave{\op{H}}t}{\hbar}
+        -\frac{\ave{\op{H}^2}t^2}{2\hbar^2}+o(t^2).
+    \end{equation}
+    与其共轭相乘，一阶项相消，二阶系数为 $-(\ave{\op{H}^2}-\ave{\op{H}}^2)/\hbar^2$。
+\end{proof}
+因此在极短时间内损失的概率以 $t^2$ 起始。指数律 $\e^{-\Gamma t}=1-\Gamma t+\cdots$ 则描述环境相关时间之后的有效动力学。
+\begin{corollary}[理想量子 Zeno 效应]
+在上述条件下，于固定总时间 $t$ 内作 $N$ 次等间隔的理想瞬时测量，每次都投影到同一个一维初态及其正交补。
+每次回答“仍在初态”的分支都从 $\ket{\Psi}$ 重新出发，连续 $N$ 次都得到这一结果的概率为
+\begin{equation}
+    P_N(t)=|A(t/N)|^{2N}
+        =\Bigb{1-\frac{(\Delta H)^2t^2}{N^2\hbar^2}+o(N^{-2})}^N\longrightarrow1.
+\end{equation}
+\end{corollary}
+实际能达到的生存概率还取决于每次测量的持续时间、带宽与反馈。
+
+\checkpoint{怎样在衰变原子的密度算符中保持总概率为一？}{激发态失去的布居由跳跃项馈入基态；二者的迹变化相消。若只保留尚未发射的子系综，其未归一化态的迹给出该记录的概率。}
+\reading{完全正映射和GKSL形式核对Manzano的教学综述\cite{manzano}。
+    最后一章回到精密光谱，说明非相对论单粒子理论何时必须扩展。}

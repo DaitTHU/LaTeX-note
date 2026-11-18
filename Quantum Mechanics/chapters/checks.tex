@@ -1,0 +1,100 @@
+\chapter{实验读数、近似条件与推导依据}
+\label{app:checks}
+
+\section{从连续分布到实验读数}
+实验公布的量可能是一格探测器里的计数，也可能是按频率绘出的谱线。与理论比较时，先确定读数对应的区间和单位。同一批事件用动量或波数标记，区间内的计数必须相同，密度的数值则随横坐标改变。算符与矩阵元的记号可查卷首的\hyperref[chap:symbols]{常用符号表}。
+
+\paragraph*{区间概率与概率密度}
+对归一化的一维波包，位置探测器第 $j$ 格覆盖 $[x_j,x_j+\Delta x]$。由\secref{sec:continuous}，该格的概率为
+\[
+    p_j=\int_{x_j}^{x_j+\Delta x}|\psi(x)|^2\,\d x .
+\]
+$p_j$ 无量纲，因此 $|\psi(x)|^2$ 的量纲是长度的倒数。对同一制备测动量，分别以 $w_p(p)$ 和 $w_k(k)$ 表示每单位动量和每单位波数的概率密度。由 $p=\hbar k$ 及 $w_p(p)\,\d p=w_k(k)\,\d k$，有
+\[
+    w_k(k)=\hbar\,w_p(\hbar k).
+\]
+这个因子保证在两种横坐标下，对应区间的面积相同。黑体光谱从频率换到波长也遵循这条规则，具体换算见\ssecref{ss:radiation-density}。
+
+\paragraph*{寿命与半高全宽}
+当谱线只受激发态寿命限制时，布居按 $\exp(-\Gamma t)$ 衰减，寿命为 $T_1=1/\Gamma$。\exmref{exm:qm-linewidth}得到的强度在角频率 $\omega_0\pm\Gamma/2$ 处降至峰值的一半。两个半高点之差给出全宽，换到普通频率 $\nu=\omega/(2\pi)$ 得
+\[
+    \Delta\omega_{\mathrm{FWHM}}=\Gamma,
+    \qquad \Delta\nu_{\mathrm{FWHM}}=\frac{1}{2\pi T_1}.
+\]
+例如 $T_1=10\,\mathrm{ns}$ 对应的寿命展宽约为 $15.9\,\mathrm{MHz}$。若另有纯退相干，布居寿命可以相同，相干却更快衰减。对\chapref{ch:open}中的指数相干模型，角频率半高全宽为 $2/T_2$，仅当 $T_2=2T_1$ 时才等于 $1/T_1$。
+
+\section{从实验尺度选择近似}
+对一对孤立能级施加近共振驱动，原子可以多次往返于两态之间。若末态十分密集，同一段驱动却可能表现为近似恒定的跃迁率。选择这两种描述，需要比较耦合强度、能级间隔与观察时间。下面列出几个在正文中实际决定计算方法的尺度。
+
+{\small
+\renewcommand{\arraystretch}{1.22}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.22\linewidth}@{\hspace{1em}}>{\raggedright\arraybackslash}p{\dimexpr.78\linewidth-1em\relax}@{}}
+    \toprule
+    问题 & 采用近似的依据及其失效情形\\
+    \midrule\endfirsthead
+    \toprule 问题 & 采用近似的依据及其失效情形\\\midrule\endhead
+    \bottomrule\endfoot
+    孤立两态与旋波近似（\secref{sec:rabi}） &
+    两态截断要求驱动对其他能级的激发可忽略。对线偏振的近谐振驱动，旋波近似还要求 $|\Omega|,|\Delta|\ll\omega$，并在多个载波周期上观察慢演化。正文的理想圆偏振驱动可直接变换到旋转系。\\
+    定态微扰（\chapref{ch:approximations}） &
+    比较 $|\lambda V_{mn}|$ 与能隙 $|E_n^{(0)}-E_m^{(0)}|$。各一阶混合振幅的模平方之和也应很小。若出现小分母，先把相近能级纳入同一子空间进行对角化。\\
+    Fermi 黄金规则（方法~\ref{mtd:qm-golden-window}） &
+    设末态间隔为 $\delta E$，矩阵元与态密度组合明显变化的能量尺度为 $W$。要求 $\delta E\ll\hbar/t\ll W$ 且 $\Gamma t\ll1$。此时观测窗覆盖许多末态，窗内的谱近似平滑，初态的耗尽也可忽略。\\
+    自发辐射（\chapref{ch:transitions}） &
+    $ka\ll1$ 允许在尺度为 $a$ 的原子内以同一光场驱动电偶极。自由空间发射率还用到真空辐射模式。放入腔内可能仍满足电偶极条件，却需要重新计算耦合与模式密度。\\
+    一阶 Born 散射（\chapref{ch:scattering}） &
+    对给定入射能量和出射方向，估计重复散射对振幅的贡献。在共振附近或一阶振幅接近零的方向，高阶项可决定结果。长程势还需单独检查远场边界条件。\\
+    绝热跟随（\thmref{thm:qm-adiabatic-following}） &
+    对固定的光滑路径，若目标能级全程与其余能级隔开，延长总时长可抑制泄漏。有限时长下，式\eqref{eq:adiabaticcriterion}估计局部混合，还需检验沿整段路径累积的跃迁。\\
+    指数弛豫（\chapref{ch:open}） &
+    从系统与环境的微观耦合导出无记忆主方程时，常利用弱耦合和环境关联时间远短于系统弛豫时间的条件。若环境在系统弛豫期间仍保留并反馈先前的信息，可把有关的环境自由度纳入模型。\\
+    精细结构（\chapref{ch:relativity}） &
+    对氢样离子，$Z\alpha\ll1$ 使相对论修正小于 Coulomb 束缚能。与精密谱线比较还须给定核质量和核尺寸，并考虑所需精度下的辐射修正。\\
+\end{longtable}
+}
+
+还有两类条件容易与小参数混淆。理想投影测量规定了仪器如何制备测后态，简并子空间内的额外扰动会改变这一更新规则（\ssecref{ss:measurement-record}）。变分上界则是严格不等式。只要归一化试探态属于下有界 Hamilton 算符的二次型域，其能量期望就是基态能量的上界（\thmref{thm:qm-variational}）。试探态的选取决定这个界有多紧。
+
+\section{正文推导与引用的结论}
+有些公式在一个具体模型中可以直接推出，推广到一般系统则需要额外的数学结果。下表指出正文的计算在哪一步结束，以及哪一步采用定理或已知解。定理的适用条件随正文链接列出，相关讲义和原始文献见参考资料。
+
+{\small
+\renewcommand{\arraystretch}{1.22}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.46\linewidth}@{\hspace{1.4em}}>{\raggedright\arraybackslash}p{\dimexpr.54\linewidth-1.4em\relax}@{}}
+    \toprule
+    正文展开的计算 & 推广时使用的结论\\
+    \midrule\endfirsthead
+    \toprule 正文展开的计算 & 推广时使用的结论\\\midrule\endhead
+    \bottomrule\endfoot
+    两个自旋出口的正交投影之和为 $\one$。连续位置测量中，一个像素对应一个区间（\secref{sec:continuous}）。
+    & 自伴算符的谱定理（\thmref{thm:qm-spectral-theorem}）保证可以给每个可测读数集合指派谱投影。无界算符还需指定定义域（\secref{sec:selfadjoint}）。\\
+    恒定二态 Hamilton 算符在能量基中给每个分量乘一个相位（\chapref{ch:dynamics}）。
+    & Stone 定理（\thmref{thm:qm-stone}）把强连续的单参数幺正群与自伴生成元联系起来。\\
+    从氢的 $1s$ 态出发，用 $z$ 偏振光激发到 $n=2$ 能级时，角向积分选出 $2p,m=0$（表\ref{tab:hydrogen-dipole-z}）。
+    & Wigner--Eckart 定理（\thmref{thm:qm-wigner-eckart}）给出一般球张量矩阵元对磁量子数的依赖\cite{littlejohnwe}。\\
+    将指数形波函数代入 Coulomb 方程，得到 $1s$ 态的能量、长度尺度和归一化（\secref{sec:hydrogen-1s}）。
+    & 每个允许主量子数都对应束缚态，以及精细结构所需的一般径向矩阵元，还用到 Coulomb 谱的已知结果\cite{mitfine}。\\
+    两个单粒子态相同时，反对称组合的两项相消，由此得到 Pauli 不相容原理（\chapref{ch:identical}）。
+    & 哪些粒子应取反对称态由自旋统计定理（\thmref{thm:qm-spin-statistics}）决定。证明需要相对论量子场论的局域性等条件。\\
+    在线性扫描的两态模型中，消去一个振幅得到 Weber 方程。比较扫描两端的能量，可确定固定基矢各自对应的能量支（\chapref{ch:adiabatic}）。
+    & 从负无穷扫到正无穷的 Landau--Zener 跃迁概率还需要两端渐近解的连接公式\cite{lz}。\\
+    分别计算零光子和单光子的探测记录，再对两种结果取平均，得到振幅阻尼信道（\exmref{exm:qm-amplitude-damping}）。
+    & 有限维 GKSL 定理（\thmref{thm:qm-gksl}）刻画所有连续、时间齐次、完全正且迹保持的半群生成元\cite{manzano}。\\
+\end{longtable}
+}
+
+\section{计算结果的独立检验}
+检验一个近似结果，可以选用另一种可计算的极限，或选取在推导中未曾用过的守恒量。下面三个例子分别针对演化时间、散射通量和能谱截断，它们检验的是不同类型的误差。
+
+\paragraph*{用短时极限核对驱动强度}
+在\secref{sec:rabi}的两态模型中，把式\eqref{eq:rabi}在 $\Omega_R t\ll1$ 处展开，得到 $P_{-z\to+z}(t)=\Omega^2t^2/4+\bigo(t^4)$。独立地，驱动的非对角矩阵元大小为 $\hbar|\Omega|/2$，故一阶跃迁振幅的模在短时为 $|\Omega|t/2$。两种算法给出相同的二次项，可检出驱动幅度定义中相差的因子 $2$。
+
+\paragraph*{用通量核对透射概率}
+在\secref{sec:tunneling}的一维定态散射中，反射和透射概率均是出射通量与入射通量之比。对无吸收的实势，仅左右两个传播通道开放时，必有 $R+T=1$。若两侧势能不同，入、出射速度分别为 $v_L,v_R>0$，则透射振幅与入射振幅之比 $t$ 给出 $T=(v_R/v_L)|t|^2$。忽略速度比会使算出的总概率偏离 $1$。
+
+\paragraph*{用完整算符核对截断本征态}
+设 $\op P$ 投影到所选基底，$\ket{\phi}$ 是截断矩阵 $\op P\op H\op P$ 的归一化本征态，本征值为 $E$。若 $\ket{\phi}$ 属于 $\op H$ 的定义域，它在完整空间中的残差为
+\[
+    (\op H-E\one)\ket{\phi}=(\one-\op P)\op H\ket{\phi}.
+\]
+左式和右式相等，因为保留空间内的分量已在对角化时抵消。残差范数给出 $E$ 到完整能谱距离的上界。若要判定附近的谱值属于哪个能级，还需要相邻能级的间隔（\dfnref{dfn:qm-eigen-residual}）。

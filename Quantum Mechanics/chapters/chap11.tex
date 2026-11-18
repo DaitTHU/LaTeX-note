@@ -1,0 +1,398 @@
+\chapter{纠缠、混合态与Bell实验}
+\label{ch:entanglement}
+
+\section{密度算符与混合态}
+
+上一章的双光子实验保留两路输出，才能看到符合凹陷。若只留一路的记录，它还可以用一个纯态描述吗？
+一个直接的例子是让制备装置随机切换两种已知状态，同时舍去每次使用的制备标签。
+由这束粒子的测量统计引出的密度算符，同样适用于联合系统中单独一端的测量。
+
+设装置以一半概率输出$\ket{+z}$、一半概率输出$\ket{-z}$。
+这种束流的$z$计数与$\ket{+x}$相同，$x$计数却不同：前者仍是各半，后者全部为$+x$。
+要预测对每一种分析器的计数，须把制备的经典概率与每个纯态的量子概率结合。
+
+给定分析态$\ket{a}$，按条件概率求和，
+\begin{equation}
+    p(a)=\sum_r p_r|\brkt{a}{\psi_r}|^2
+        =\mel{a}{\sum_rp_r\ktbr{\psi_r}{\psi_r}}{a}.
+\end{equation}
+中间的算符包含这类制备对所有分析器的预测，
+由此引入密度算符。
+
+把这两种制备写在同一组基$(\ket{+z},\ket{-z})$中，计数的差别就体现在矩阵元上。
+\begin{equation}
+    \op{\rho}_{\mixed}=\tfrac12\begin{pmatrix}1&0\\0&1\end{pmatrix},
+    \qquad
+    \op{\rho}_{+x}=\tfrac12\begin{pmatrix}1&1\\1&1\end{pmatrix}.
+\end{equation}
+这里的 $+$、$-$ 是 $z$ 基的行列标号。例如 $\rho_{+-}=\mel{+z}{\op{\rho}}{-z}$ 是一个复数。两种制备的对角元相同，沿 $z$ 轴测量都给出两端各半。对任意两态密度算符，
+把$\bra{+x}=(\bra{+z}+\bra{-z})/\sqrt2$从左乘、$\ket{+x}$从右乘，
+得到$p(+x)=(\rho_{++}+\rho_{--}+\rho_{+-}+\rho_{-+})/2$。
+混合束的这个概率是$1/2$，纯$\ket{+x}$束为1。
+用同一组基描述时，非对角元保留了在另一方向可以读出的相干信息。
+
+\begin{definition}{密度算符与迹}{qm-density}
+    密度算符(density operator)$\op{\rho}$是正的、迹为1的算符。
+    在正交归一基 $\ket{a}$ 中，算符 $\op{A}$ 的迹是其矩阵对角元之和，
+    \begin{equation}
+        \tr \op{A}=\sum_a\mel{a}{\op{A}}{a}.
+    \end{equation}
+    对有限维算符或满足迹类条件的乘积，
+    迹与所选基底无关，并满足循环性质$\tr(\op{A}\op{B})=\tr(\op{B}\op{A})$。
+    正性(positivity)$\op{\rho}\geq0$指每个$\ket{u}$都满足$\mel{u}{\op{\rho}}{u}\geq0$。
+\end{definition}
+
+若以经典概率$p_r$制备$\ket{\psi_r}$，忽略制备标签，定义密度算符
+\begin{equation}
+    \op{\rho}=\sum_rp_r\ktbr{\psi_r}{\psi_r},\qquad
+    \op{\rho}\geq0,\quad\tr\op{\rho}=1.
+\end{equation}
+所有测量平均值和概率由
+$\ave{\op{A}}=\tr(\op{\rho} \op{A})$、$p_a=\tr(\op{\rho} \op{P}_a)$给出。
+不同的制备系综(ensemble)可以给出同一个$\op{\rho}$，因而对系统的任何测量都有相同的结果分布。
+纯态满足$\op{\rho}^2=\op{\rho}$、$\tr\op{\rho}^2=1$，混合态(mixed state)有$\tr\op{\rho}^2<1$。
+
+这些性质可直接从制备概率验证：
+\begin{subequations}
+    \begin{alignat}{1}
+        \mel{u}{\op{\rho}}{u}&=\sum_rp_r|\brkt{u}{\psi_r}|^2\geq0,\\
+        \tr\op{\rho}&=\sum_rp_r\sum_a|\brkt{a}{\psi_r}|^2=\sum_rp_r=1,\\
+        \tr(\op{\rho} \op{A})&=\sum_rp_r\mel{\psi_r}{\op{A}}{\psi_r}.
+    \end{alignat}
+\end{subequations}
+再将 $\op{\rho}$ 对角化，得到非负的本征值 $\lambda_j$。在本征基中有
+\[
+    \op{\rho}=\sum_j\lambda_j\ktbr{j}{j},\qquad
+    \sum_j\lambda_j=1,\qquad
+    \tr\op{\rho}^2=\sum_j\lambda_j^2\leq1.
+\]
+等号只有在一个$\lambda_j=1$、其余为零时成立，
+这时$\op{\rho}$就是一维投影。
+
+对两态系统可唯一写成
+\begin{equation}
+    \op{\rho}=\frac12(\one+\bm r\cdot\hatbm{\sigma}),\qquad |\bm r|\leq1.
+\end{equation}
+本征值为$(1\pm|\bm r|)/2$，故所有物理态都在 Bloch 球内或球面上，纯态恰在球面。
+
+$\bm r=(r_x,r_y,r_z)$称为 Bloch 向量，其分量由自旋测量确定，
+\begin{equation}
+    r_i=\tr(\op{\rho}\op{\sigma}_i)=\ave{\op{\sigma}_i}.
+\end{equation}
+因为$\one,\op{\sigma}_x,\op{\sigma}_y,\op{\sigma}_z$张成所有二阶Hermite矩阵，
+迹为1固定了$\one$的系数为$1/2$。
+其余三个系数由$\tr(\op{\sigma}_i\op{\sigma}_j)=2\delta_{ij}$读出。
+又$(\bm r\cdot\hatbm{\sigma})^2=|\bm r|^2\one$，
+所以$\op{\rho}$的两个本征值正是上式。
+
+对封闭系统，$\op{\rho}(t)=\op{U}(t)\op{\rho}(0)\op{U}^\dagger(t)$，求导便得von Neumann方程
+\begin{equation}
+    \i\hbar\dot{\op{\rho}}=[\op{H},\op{\rho}].
+\end{equation}
+幺正演化保持$\op{\rho}$的本征值，所以保持纯度(purity)和熵(entropy)。
+当 Hamilton 算符不显含时间时，满足$[\op{H},\op{\rho}]=0$的态是平稳态，可以是混合态；
+能量基中的非对角元以相应能量差频率变化，简并态间的相干也可以保持不变。
+
+\section{部分迹与约化密度算符}
+上节的混合态来自舍去制备标签。设两台分析器分别测量联合系统的两端 $A,B$。
+若只保留 $A$ 端的记录，将联合计数表中 $a$ 相同的各项相加，就得到边缘概率 $p_A(a)$。
+要预言转动 $A$ 分析器后的计数，还需要找出对每一种测量方向都适用的局部密度算符。
+
+用 $\ket{a}$ 和 $\ket{b}$ 分别表示两端的正交归一基。联合态在张量积空间中的展开为
+\[
+    \ket{\Psi}=\sum_{a,b}C_{ab}\ket{a}\otimes\ket{b}.
+\]
+下文将乘积态 $\ket{a}\otimes\ket{b}$ 简写成 $\ket{a}\ket{b}$ 或 $\ket{a,b}$。
+把 $A$ 端的分析器转到 $\ket{u}$，仍忽略 $B$ 端的结果，则
+\begin{equation}
+    p_A(u)=\sum_b\Bigl|\sum_a\brkt{u}{a}C_{ab}\Bigr|^2
+    =\sum_{a,a'}\brkt{u}{a}
+        \Bigp{\sum_b C_{ab}C_{a'b}^*}\brkt{a'}{u}.
+\end{equation}
+固定$b$时，通向同一结果$(u,b)$的各项先相加振幅。
+不同$b$代表互相正交的结果，忽略读数时再相加概率。括号内的系数是 $A$ 端约化密度算符的矩阵元，记这个算符为 $\op{\rho}_A$。
+\begin{definition}[unbreakable]{部分迹与约化密度算符}{qm-partial-trace}
+    对联合态 $\op{\rho}_{AB}$，取 $B$ 的任意一组正交归一基 $\ket{b}$，对 $B$ 作部分迹(partial trace)得到 $A$ 的约化密度算符
+    \begin{equation}
+        \op{\rho}_A=\tr_B\op{\rho}_{AB}
+        =\sum_b(\one_A\otimes\bra{b})\op{\rho}_{AB}(\one_A\otimes\ket{b}).
+    \end{equation}
+    它对任意局部可观测量 $\op{O}_A$ 满足 $\tr_A(\op{\rho}_A \op{O}_A)=\ave{\op{O}_A\otimes\one_B}$。
+\end{definition}
+
+若
+$\rho_{ab,a'b'}=\mel{a,b}{\op{\rho}_{AB}}{a',b'}$，
+部分迹的分量是
+\begin{equation}
+    (\op{\rho}_A)_{aa'}=\sum_b\rho_{ab,a'b}.
+\end{equation}
+验证它给出全部局部测量只需展开迹：
+\begin{equation}
+    \tr_{AB}\bigb{\op{\rho}_{AB}(\op{O}_A\otimes\one_B)}
+    =\sum_{a,a',b}\rho_{ab,a'b}(\op{O}_A)_{a'a}
+    =\tr_A(\op{\rho}_A\op{O}_A).
+\end{equation}
+在$B$上更换正交基时，变换矩阵与其伴随相乘为单位矩阵，
+故这个求和不变。
+
+\begin{example}{改变一侧自旋分析器的方向}{qm-marginal-counts}
+    取$\ket{\Psi}=(\ket{+z}_A\ket{+z}_B+\ket{-z}_A\ket{+x}_B)/\sqrt2$。
+    两端都测$z$时，按$(+,+),(+,-),(-,+),(-,-)$排序的概率为$1/2,0,1/4,1/4$。
+    在 $A$ 端测得正、负结果的概率均为 $1/2$。若将这一端的分析器转向 $x$，原来的四项计数是否足以预测新结果？
+    用 $z$ 基展开 $\ket{+x}_B$。系数矩阵的行、列分别对应 $A,B$ 两端的基态，在这些基底中有
+    \begin{equation}
+        C=\begin{pmatrix}1/\sqrt2&0\\1/2&1/2\end{pmatrix},
+        \qquad \op{\rho}_A=CC^\dagger
+        =\frac12\begin{pmatrix}1&1/\sqrt2\\1/\sqrt2&1\end{pmatrix}.
+    \end{equation}
+    因此$p_A(+x)=(1+1/\sqrt2)/2$。若把原态两项之间的加号改为减号，
+    两端的$z$计数全部相同，$\op{\rho}_A$的非对角元却反号，此时$p_A(+x)=(1-1/\sqrt2)/2$。
+    因此，原来沿 $z$ 轴的计数不足以确定新方向的测量概率。
+\end{example}
+
+能否分别给两端各指定一个纯态，从而完整描述联合制备？
+若$\ket{\Psi}=\ket{u}_A\ket{v}_B$，系数矩阵$C$的每一行
+都是同一行向量$(v_1,v_2,\ldots)$的倍数。上例的两行并不成比例，故这个态无法写成乘积，
+称为纠缠的纯态。一般情形可用下面的方法找出所需的乘积项数。
+
+\begin{theorem}{二分纯态的Schmidt分解}{qm-schmidt}
+    对有限维的两个系统，归一化联合纯态总可写成 Schmidt 分解
+    \begin{equation}
+        \ket{\Psi}=\sum_r\sqrt{\lambda_r}\ket{a_r}\ket{b_r},
+        \qquad \lambda_r>0,\quad\sum_r\lambda_r=1.
+    \end{equation}
+    两组局部态各自正交归一，$\lambda_r$ 是两端约化态共有的非零本征值。
+\end{theorem}
+\begin{proof}
+    选 $\op{\rho}_A$ 的正交本征基 $\ket{a_r}$，相应本征值为 $\lambda_r$。
+    将 $A$ 投影到 $\ket{a_r}$，$B$ 留下的未归一化态是 $\ket{w_r}=(\bra{a_r}\otimes\one_B)\ket{\Psi}$。
+    部分迹的分量公式给出 $\brkt{w_s}{w_r}=\mel{a_r}{\op{\rho}_A}{a_s}=\lambda_r\delta_{rs}$。
+    因此非零 $\ket{w_r}$ 彼此正交，将每项除以 $\sqrt{\lambda_r}$ 得到 $\ket{b_r}$。
+    把 $\ket{\Psi}$ 沿 $A$ 的这组基展开就得到上式。分别对一端取迹，两端都留下以 $\lambda_r$ 为权重的正交投影之和。
+\end{proof}
+
+\begin{proof}[用系数矩阵计算Schmidt分解]
+    取前面乘积基中的系数矩阵 $C$，作奇异值分解(singular value decomposition, SVD) $C=UDV^\dagger$。
+    $U,V$的列正交归一，$D$的非零对角元记为$\sqrt{\lambda_r}$。
+    定义
+    \begin{subequations}
+        \begin{alignat}{1}
+            \ket{a_r}&=\sum_aU_{ar}\ket{a},\\
+            \ket{b_r}&=\sum_bV_{br}^*\ket{b}.
+        \end{alignat}
+    \end{subequations}
+    代回乘积基展开，奇异值分解的每个非零奇异值就对应一个 Schmidt 项。
+    对 $B$ 取部分迹，利用 $\brkt{b_s}{b_r}=\delta_{sr}$，得到
+    \[
+        \op{\rho}_A=\sum_r\lambda_r\ktbr{a_r}{a_r}.
+    \]
+\end{proof}
+\begin{corollary}[由一端的纯度判别二分纯态的纠缠]
+    对联合纯态，只要一端的约化态是纯态，联合态就是乘积态，反之亦然。
+    因为一端的约化态为纯态恰好表示只有一个非零本征值，而此时 Schmidt 分解只含一个乘积项。
+\end{corollary}
+约化态(reduced state)的 von Neumann 熵量化纯联合态的二分纠缠，其值为
+\[
+    S(\op{\rho}_A)=-\sum_r\lambda_r\ln\lambda_r .
+\]
+当联合态是混合态时，局部熵也包含随机制备所贡献的不确定性。
+\begin{definition}{可分态与纠缠}{qm-separability}
+    两个有限维系统的联合态若可由下式制备，则称为可分态(separable state)，
+    \[
+        \op{\rho}_{AB}=\sum_r p_r\,\op{\rho}_A^{(r)}\otimes\op{\rho}_B^{(r)},\qquad
+        p_r\geq0,\qquad \sum_r p_r=1 .
+    \]
+    即先以概率 $p_r$ 选择共同标签 $r$，再按标签分别制备两端。
+    无法这样制备的联合态称为纠缠态(entangled state)。对纯态，可分条件化为态矢本身是乘积态。
+\end{definition}
+
+\begin{example}[unbreakable]{单态的局部混合与跨方向关联}{qm-singlet-density}
+    自旋单态$\ket{s}=(\ket{\up\dn}-\ket{\dn\up})/\sqrt2$的密度算符为
+    \begin{equation}
+        \op{\rho}_s=\frac14\Bigp{\one\otimes\one
+            -\sum_{i=x,y,z}\op{\sigma}_i\otimes\op{\sigma}_i}.
+    \end{equation}
+    对第二个自旋取迹，
+    $\tr\one=2$、$\tr\op{\sigma}_i=0$给出$\op{\rho}_A=\one/2$。
+    但联合相关为
+    \begin{equation}
+        \begin{alignedat}{1}
+            \ave{\op{\sigma}_i\otimes\op{\sigma}_j} &=\tr\bigb{\op{\rho}_s(\op{\sigma}_i\otimes\op{\sigma}_j)}\\
+            &=-\frac14\sum_k
+                \tr(\op{\sigma}_k\op{\sigma}_i)\tr(\op{\sigma}_k\op{\sigma}_j)
+                =-\delta_{ij}.
+        \end{alignedat}
+    \end{equation}
+    所以任意方向有
+    $\bigave{(\bm a\cdot\hatbm{\sigma})\otimes(\bm b\cdot\hatbm{\sigma})}
+    =-\bm a\cdot\bm b$。
+\end{example}
+
+\section{路径记录与干涉}
+以粒子的路径自由度和记录器组成联合系统，部分迹便能回答\secref{sec:interference}提出的问题。即使无人读取记录，干涉条纹为什么仍会减弱？两条路径对应的记录态之间的内积决定了条纹对比度。
+
+用 $\ket{D_a},\ket{D_b}$ 表示与路径 $a,b$ 关联的归一化记录态(which-path record)。记录器与两条路径耦合后，
+\begin{equation}
+    \ket{\Psi}=\frac{\ket{a}\ket{D_a}+\e^{\i\varphi}\ket{b}\ket{D_b}}{\sqrt2}.
+\end{equation}
+
+联合密度算符展开含四项，其中
+$\ket{a}\ket{D_a}\bra{b}\bra{D_b}$这项在取记录器的迹后变成
+$\brkt{D_b}{D_a}\ktbr{a}{b}$。因此
+\begin{equation}
+    \op{\rho}_{\pathstate}=\frac12\Bigb{
+        \ktbr{a}{a}+\ktbr{b}{b}
+        +\e^{-\i\varphi}\brkt{D_b}{D_a}\ktbr{a}{b}
+        +\e^{\i\varphi}\brkt{D_a}{D_b}\ktbr{b}{a}}.
+\end{equation}
+
+对记录器取迹后，路径约化态的 $ab$ 矩阵元带有因子 $\brkt{D_b}{D_a}$。
+在正输出端测得 $\ket{+}$ 的概率为
+\begin{equation}
+    P_+=\frac12\bigb{1+\Re\bigl(\e^{\i\varphi}\brkt{D_a}{D_b}\bigr)}.
+\end{equation}
+在等路径权重的理想模型中，可见度(visibility)为$|\brkt{D_a}{D_b}|$。
+记录正交时完全无条纹；记录相同时恢复全对比度。
+按记录器的读数分组后，某些子样本可以恢复条纹；把各组按出现概率合并，又得到原来的局部计数分布。
+
+\section{Bell实验与CHSH不等式}
+单端统计需要对另一端所有可能的结果求和。若保留两端的配对记录，就能检验关联从何而来。
+同一方向上两个自旋总给出相反读数，也可以由源预先给两端分发相反的指令解释。
+Bell实验让两端各自改变测量方向，比较四组关联能否同时由一套局域指令给出。
+
+\subsection{实验设置与关联估计}
+\label{ss:bell-counting}
+
+Bell 实验要把每对粒子的两端读数配成一次联合计数，并按两端的设置组合分别统计（图\ref{fig:bell-pair}）。
+
+\begin{figure}[htbp]
+    \centering
+    \tikzfigure[width=.72\linewidth]{bell-pair}
+    \caption{从中央的源 $S$ 沿箭头向两端读：方框内的 $a,a'$ 与 $b,b'$ 分别是 Alice 和 Bob 可选的方向；每端在所选方向的两个出口之一记录 $+1$ 或 $-1$。}
+    \label{fig:bell-pair}
+\end{figure}
+
+对每组设置$(a,b)$，分别记录同号计数$N_{++},N_{--}$
+和异号计数$N_{+-},N_{-+}$。
+对已定义的试验样本，总次数为$N_{ab}$，关联估计为
+\begin{equation}
+    E(a,b)=
+    \frac{N_{++}+N_{--}-N_{+-}-N_{-+}}{N_{ab}}.
+\end{equation}
+同号结果对乘积贡献$+1$，异号结果贡献$-1$，
+所以这个式子正是两端结果乘积的样本平均。
+没有成功读出的试验怎样记入样本，必须在数据分析前规定；
+事后只挑选有利的符合样本会改变所检验的概率分布。
+
+为使四组关联都取样于同一类源制备，两端各自独立随机选择设置。实验还安排两端的距离和测量时刻，使一端的设置在测量期间来不及影响另一端\cite{belltests}。
+
+\subsection{局域模型的界与量子预测}
+\label{ss:chsh-derivation}
+
+\begin{theorem}{CHSH不等式}{qm-chsh}
+    设两端各选两种设置之一，每次分别得到 $\pm1$。若给定共同隐藏变量 $\lambda$ 后，
+    两端联合概率分解为各自局部条件概率的乘积 $p(A|a,\lambda)p(B|b,\lambda)$，且 $\lambda$ 的分布与设置选择独立，
+    则四组结果乘积的平均值 $E$ 满足
+    \begin{equation}
+        |S|=|E(a,b)+E(a,b')+E(a',b)-E(a',b')|\leq2 .
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    在局域隐藏变量模型(local hidden variable model)中，可把两端的局部随机数一起记入 $\lambda$。
+    固定 $\lambda$ 后，左端的结果 $A(a,\lambda)$ 只由设置 $a$ 决定，右端的结果 $B(b,\lambda)$ 只由设置 $b$ 决定。
+    暂略去共同的 $\lambda$，用两个结果各取 $\pm1$ 可得
+    \begin{equation}
+        A(a)[B(b)+B(b')]+A(a')[B(b)-B(b')]=\pm2.
+    \end{equation}
+    记隐藏变量的归一化概率分布为$p(\lambda)$。
+    关联函数(correlation function)是两端测量结果乘积的平均值，
+    \begin{equation}
+        E(a,b)=\int\d\lambda\,p(\lambda)A(a,\lambda)B(b,\lambda).
+    \end{equation}
+    逐次上界可以直接分情况验证。
+    若$B(b)=B(b')$，第一组括号等于$\pm2$、第二组为零；
+    若$B(b)=-B(b')$，则第一组为零、第二组等于$\pm2$。
+    无论Alice取哪个$\pm1$结果，整个组合的绝对值都等于2。
+    设置与$\lambda$分布独立，使四个关联都能用同一个$p(\lambda)$平均。
+    记逐次组合为 $C(\lambda)$。由三角不等式，平均后的 CHSH 组合满足
+    \[
+        |S|=\bigg|\int p(\lambda)C(\lambda)\d\lambda\bigg|
+        \leq\int p(\lambda)|C(\lambda)|\d\lambda=2 .
+    \]
+\end{proof}
+自旋单态$\ket{0,0}$则满足
+$E(\bm a,\bm b)=\mel{0,0}{(\bm a\cdot\hatbm{\sigma})\otimes(\bm b\cdot\hatbm{\sigma})}{0,0}
+=-\bm a\cdot\bm b$。
+取$\bm a=\bm z$、$\bm a'=\bm x$、
+$\bm b=(\bm z+\bm x)/\sqrt2$、$\bm b'=(\bm z-\bm x)/\sqrt2$，
+四个点积分别给出
+\begin{subequations}
+    \begin{alignat}{2}
+        E(a,b)&=-\frac1{\sqrt2},
+        &\quad E(a,b')&=-\frac1{\sqrt2},\\
+        E(a',b)&=-\frac1{\sqrt2},
+        &\quad E(a',b')&=\frac1{\sqrt2}.
+    \end{alignat}
+\end{subequations}
+于是$S=-2\sqrt2$，其绝对值超过局域界2。
+这里使用的是自旋测量轴；线偏振光子实验的物理偏振角与Bloch球角相差二倍，
+选取光学分析器角度时应转换这一约定。
+
+实验违反不等式，就排除了同时满足局域因果分解和设置独立性的模型。
+实验为此需要独立选择设置、隔离两端的因果影响，并控制漏检和样本选择造成的偏差；
+从早期光子实验到2015年的检验，关闭这些漏洞是关键改进\cite{belltests}。
+若 Bob 操作后保留全部测量结果，Alice 能否仅从本地计数察觉这一操作？
+设 $\op{M}_b$ 只作用在 Bob 的空间，$b$ 标记一个可能的结果。对结果求和，联合态成为
+\[
+    \op{\rho}'=\sum_b(\one_A\otimes \op{M}_b)\op{\rho}(\one_A\otimes \op{M}_b^\dagger),
+    \qquad \sum_b\op{M}_b^\dagger \op{M}_b=\one_B .
+\]
+右侧的完备条件保证概率总和为一。
+
+现在计算 Alice 端任意可观测量 $\op{O}_A$ 在操作后的期望值。由迹的循环性质，
+\begin{equation}
+    \begin{alignedat}{1}
+        \ave{\op{O}_A}'&=\sum_b
+            \tr\Bigb{\op{\rho}\,
+            (\one_A\otimes \op{M}_b^\dagger)(\op{O}_A\otimes\one_B)
+            (\one_A\otimes \op{M}_b)}\\
+        &=\tr\Bigb{\op{\rho}\,
+            \bigp{\op{O}_A\otimes\sum_b\op{M}_b^\dagger \op{M}_b}}
+            =\tr\bigb{\op{\rho}(\op{O}_A\otimes\one_B)}.
+    \end{alignedat}
+\end{equation}
+所有局部平均值相同，故 $\op{\rho}_A$ 不变，Bob 无法借此向 Alice 传递信号。Alice 收到 Bob 发来的结果标签后，才可将样本分组并比较各组的条件态。
+
+\section{一般量子测量}
+\label{sec:povm}
+Bell 关联取决于分析器记录的正负号。如果读出电路偶尔将正、负标签互换，怎样给出所记录的概率？按这个标签筛出的粒子，又处于什么态？
+
+设每次记录独立地以概率 $\epsilon$ 发生标记错误，$\op{P}_\pm$ 为实际出口的投影。正记录可能来自正确标记的正出口，也可能来自误记的负出口。
+将两种概率相加，得到 $p_+=\tr(\op{\rho} \op{E}_+)$，其中 $\op{E}_+=(1-\epsilon)\op{P}_++\epsilon \op{P}_-$。
+若 $0<\epsilon<1/2$，其本征值 $1-\epsilon$ 和 $\epsilon$ 均在 0 与 1 之间，故 $\op{E}_+$ 已超出投影算符的范围。
+
+\begin{definition}{离散测量的POVM与仪器映射}{qm-povm-instrument}
+    仪器映射(instrument map)将输入态 $\op{\rho}$ 映到记录 $m$ 对应的未归一化输出态，
+    \begin{equation*}
+        \mathcal I_m(\op{\rho})=\sum_\alpha \op{M}_{m\alpha}\op{\rho} \op{M}_{m\alpha}^\dagger .
+    \end{equation*}
+    其中 $\alpha$ 标记同一记录下未进一步分辨的作用通道。相应的效应算符(effect operator)满足
+    \begin{equation}
+        \op{E}_m=\sum_\alpha \op{M}_{m\alpha}^\dagger \op{M}_{m\alpha}\geq0,\qquad
+        \sum_m\op{E}_m=\one,
+    \end{equation}
+    这样一族正算符 $\{\op{E}_m\}$ 称为正算符值测度(positive operator-valued measure, POVM)。结果概率及条件态为
+    \begin{equation}
+        p_m=\tr(\op{E}_m\op{\rho}),\qquad
+        \op{\rho}_m=\frac{\mathcal I_m(\op{\rho})}{p_m}
+        \quad(p_m>0).
+    \end{equation}
+\end{definition}
+由迹的循环性质，$\tr\mathcal I_m(\op{\rho})=\tr(\op{E}_m\op{\rho})=p_m$，这解释了条件态的归一化因子。各结果相加，由完备条件得到总迹 $\tr\op{\rho}$。
+在误记模型中，正记录的两个测量算符分别为 $\op{M}_{+,1}=\sqrt{1-\epsilon}\,\op{P}_+$、$\op{M}_{+,2}=\sqrt{\epsilon}\,\op{P}_-$。
+两项的输出各保留实际出口的自旋，输出的迹相加便是 $p_+$。
+
+理想 Lüders 测量取 $\op{M}_m=\op{P}_m$。若在出口 $m$ 接上幺正变换 $\op{U}_m$，新算符 $\op{U}_m\op{P}_m$ 给出相同的概率，却可改变测后态。
+
+\checkpoint{单态与等权混合的 $\ket{\up\dn}$、$\ket{\dn\up}$ 具有相同的局部态 $\one/2$，怎样区分这两种制备？}{分别沿 $x$ 轴测量两端自旋。单态给出完全反相关的结果，等权混合态的两端结果在这个方向上彼此独立。}
+\reading{Bell 实验见文献\cite{belltests}，部分迹与量子操作见文献\cite{manzano}。下一章从远处的散射计数反推相互作用。}

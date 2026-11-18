@@ -305,7 +305,7 @@
 \begin{proof}
     当$y=0$时显然成立，当$y\neq 0$时，考虑
     \[
-        \norm{x-\frac{\inp xy}{\inp yy}y}^2=\inp xx-\frac{\abs{\inp xy}^2}{\inp yy}\geq 0.
+        \biggnorm{x-\frac{\inp xy}{\inp yy}y}^2=\inp xx-\frac{\abs{\inp xy}^2}{\inp yy}\geq 0.
         \qedhere
     \]
 \end{proof}
@@ -462,7 +462,7 @@
     \begin{proof}
         由Cauchy-Schwarz不等式
         \begin{align*}
-            \Forb{AB}&=\sqrt{\sum_{i=1}^n\sum_{j=1}^n\abs{\sum_{k=1}^nA_{ik}B_{kj}}^2}\leq\sqrt{\sum_{i=1}^n\sum_{j=1}^n\biggp{\sum_{k=1}^n\abs{A_{ik}}^2\sum_{k=1}^n\abs{B_{kj}}^2}}\\
+            \Forb{AB}&=\sqrt{\sum_{i=1}^n\sum_{j=1}^n\Biggabs{\sum_{k=1}^nA_{ik}B_{kj}}^2}\leq\sqrt{\sum_{i=1}^n\sum_{j=1}^n\biggp{\sum_{k=1}^n\abs{A_{ik}}^2\sum_{k=1}^n\abs{B_{kj}}^2}}\\
             &=\sqrt{\sum_{i=1}^n\sum_{k=1}^n\abs{A_{ik}}^2\sum_{j=1}^n\sum_{k=1}^n\abs{B_{kj}}^2}=\Forb A\Forb B.
             \qedhere
         \end{align*}
@@ -494,7 +494,7 @@
 
 \begin{proof}
     \[
-        \norm{Ax}_2=\sqrt{\sum_{i=1}^n\abs{\sum_{j=1}^n A_{ij}x_j}^2}\leq\sqrt{\sum_{i=1}^n\biggp{\sum_{j=1}^n\abs{A_{ij}}^2\sum_{j=1}^n\abs{x_j}^2}}=\Forb A\norm x_2.
+        \norm{Ax}_2=\sqrt{\sum_{i=1}^n\Biggabs{\sum_{j=1}^n A_{ij}x_j}^2}\leq\sqrt{\sum_{i=1}^n\biggp{\sum_{j=1}^n\abs{A_{ij}}^2\sum_{j=1}^n\abs{x_j}^2}}=\Forb A\norm x_2.
         \qedhere
     \]
 \end{proof}
@@ -555,7 +555,7 @@
     \begin{proof}
         先证明\eqref{eqn:op 1-norm}，将$A=[A_1\enspace\cdots\enspace A_n]$写作列向量的形式，令$k=\arg\max_j\norm{A_j}_1$，则$\forall x\in\FF^n$且$\norm x_1=\sum_{j=1}^n\abs{x_j}=1$，有
         \[
-            \norm{Ax}_1=\norm{\sum_{j=1}^nA_jx_j}_1\leq\sum_{j=1}^n\abs{x_j}\norm{A_j}_1\leq\norm{A_k}_1\sum_{j=1}^n\abs{x_j}=\norm{A_k}_1\norm x_1=\norm{A_k}_1,
+            \norm{Ax}_1=\Biggnorm{\sum_{j=1}^nA_jx_j}_1\leq\sum_{j=1}^n\abs{x_j}\norm{A_j}_1\leq\norm{A_k}_1\sum_{j=1}^n\abs{x_j}=\norm{A_k}_1\norm x_1=\norm{A_k}_1,
         \]
         特别地，取$x=e_k$可使等号成立，故
         \[
@@ -563,7 +563,7 @@
         \]
         然后证明\eqref{eqn:op inf-norm}，令$k=\arg\max_i\sum_{j=1}^n\abs{A_{ij}}$，$\forall x\in\FF^n$且$\norm x_\infty=\max_j\abs{x_j}=1$，有
         \[
-            \norm{Ax}_\infty=\max_i\abs{\sum_{j=1}^nA_{ij}x_j}\leq\max_i\sum_{j=1}^n\abs{A_{ij}}\abs{x_j}\leq\max_i\sum_{j=1}^n\abs{A_{ij}}\max_j\abs{x_j}=\sum_{j=1}^n\abs{A_{kj}}.
+            \norm{Ax}_\infty=\max_i\Biggabs{\sum_{j=1}^nA_{ij}x_j}\leq\max_i\sum_{j=1}^n\abs{A_{ij}}\abs{x_j}\leq\max_i\sum_{j=1}^n\abs{A_{ij}}\max_j\abs{x_j}=\sum_{j=1}^n\abs{A_{kj}}.
         \]
         特别地，取$x_j=\sgn(A_{kj})$可使等号成立，故 
         \[

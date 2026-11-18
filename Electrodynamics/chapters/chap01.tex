@@ -99,7 +99,7 @@
     \]
     其中$\d\bm A=\uvec n\d A$，$\uvec n$是曲面上的点$\bm r$向外的单位法向矢量；$\theta$是$\bm r$与$\uvec n$的夹角，$\d\Omega$是$\d A$对点电荷所张的立体角(solid angle)元，其大小等于$\d A$在单位球面上中心投影的面积。
     \begin{center}
-        \includegraphics[page=\pagenumref{tikz:Gauss law}]{figures/tikz/layouts.pdf}
+        \tikzfigure{gauss-law}
         \captionof{figure}{立体角元}
         \label{fig:solid angle}
     \end{center}
@@ -140,7 +140,7 @@
     \]
     $\uvec n$为指向远离平面的单位法向量。
     \begin{center}
-        \includegraphics[page=\pagenumref{tikz:E of plane}]{figures/tikz/layouts.pdf}
+        \tikzfigure{e-of-plane}
         \captionof{figure}{无限大平板的静电场}
         \label{fig:infinite plate}
     \end{center}
@@ -151,14 +151,14 @@
         E\cdot 2\pi\rho L=\frac{\lambda L}{\varepsilon_0}\implies\bm E=\frac{\lambda}{2\pi\varepsilon_0\rho}\uvec\rho.
     \]
     \begin{center}
-        \includegraphics[page=\pagenumref{tikz:E of line}]{figures/tikz/layouts.pdf}
+        \tikzfigure{e-of-line}
         \captionof{figure}{无限长直线的静电场}
         \label{fig:infinite line}
     \end{center}
     \tcblower
     可以证明，均匀带电半圆在圆心处的电场与距离为半径的无限长直线的电场相同，因为可以构造二者微元的一一映射，如\figref{fig:semicircle <=> line} 所示。
     \begin{center}
-        \includegraphics[page=\pagenumref{tikz:E of half circle}]{figures/tikz/layouts.pdf}
+        \tikzfigure{e-of-half-circle}
         \captionof{figure}{半圆与直线微元的一一映射}
         \label{fig:semicircle <=> line}
     \end{center}
@@ -262,7 +262,7 @@
         \end{cases}
     \]
     \begin{center}
-        \includegraphics[page=\pagenumref{tikz:Phi of sphere conductor}]{figures/tikz/layouts.pdf}
+        \tikzfigure{phi-of-sphere-conductor}
         \captionof{figure}{带电导体球的电势}
         \label{fig:conducting sphere}
     \end{center}
@@ -280,7 +280,7 @@
     (\bm E_2-\bm E_1)\times\uvec n=\bm 0.
 \end{equation}
 \begin{center}
-    \includegraphics[page=\pagenumref{tikz:E between surfaces}]{figures/tikz/layouts.pdf}
+    \tikzfigure{e-between-surfaces}
     \captionof{figure}{表面电荷分布}
     \label{fig:surface charge}
 \end{center}
@@ -292,7 +292,7 @@
 \begin{example}{电偶层}{dipole layers}
     两个面电荷密度为$\sigma$、间距为$d$的电偶层，
     \begin{center}
-        \includegraphics[page=\pagenumref{tikz:dipole layers}]{figures/tikz/layouts.pdf}
+        \tikzfigure{dipole-layers}
         \captionof{figure}{电偶层}
         \label{fig:dipole layers}
     \end{center}
@@ -501,17 +501,17 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
         \]
         \item Neumann边界条件：给定表面上电位的法向导数
         \[
-            \eval{\pv\Phi n}_{\p V}=f;
+            \biggeval{\pv\Phi n}_{\p V}=f;
         \]
         \item 混合边界条件：给定$\Gamma_{\text{D}}$上的电位和$\Gamma_{\text{N}}$上电位的法向导数
         \[
             \Phi|_{\Gamma_{\text{D}}}=f,\quad
-            \eval{\pv\Phi n}_{\Gamma_{\text{N}}}=f',
+            \biggeval{\pv\Phi n}_{\Gamma_{\text{N}}}=f',
         \]
         其中$\Gamma_{\text{D}},\Gamma_{\text{N}}$是表面$\p V$的一个划分，满足$\Gamma_{\text{D}}\cup\Gamma_{\text{N}}=\p V$且$\Gamma_{\text{D}}\cap\Gamma_{\text{N}}=\varnothing$；
         \item Robin边界条件：给定表面上电位与其法向导数的线性组合
         \[
-            \eval{\alpha\Phi+\beta\pv\Phi n}_{\p V}=f.
+            \biggeval{\alpha\Phi+\beta\pv\Phi n}_{\p V}=f.
         \]
         % 其中$\alpha,\beta$可以是函数。
     \end{itemize}
@@ -527,7 +527,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \[
     \begin{cases}
         \nabla^2U=0,\\
-        U|_{\p V}=0\enspace\text{或}\enspace\eval{\pv Un}_{\p V}=0,
+        U|_{\p V}=0\enspace\text{或}\enspace\biggeval{\pv Un}_{\p V}=0,
     \end{cases}
 \]
 由Green第一公式\eqref{eqn:Green I}，令式中$\phi=\psi=U$，则
@@ -552,7 +552,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \begin{remark}
     对于Robin边界条件，
     \[
-        \eval{\alpha U+\beta\pv Un}_{\p V}=0\implies\int_V\abs{\nabla U}^2\d V=-\oint_{\p V}\alpha U^2/\beta\d A,
+        \biggeval{\alpha U+\beta\pv Un}_{\p V}=0\implies\int_V\abs{\nabla U}^2\d V=-\oint_{\p V}\alpha U^2/\beta\d A,
     \]
     当$\alpha,\beta$同号时，仍可得出$U\equiv 0$，解是唯一的。
     但当$\alpha,\beta$异号时，无法保证解的唯一性。
@@ -596,7 +596,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     我们也可以设法找到一个$G$满足：
     \begin{equation}
         \label{eqn:Neumann Green condition}
-        \eval{\pv G{n'}}_{\p V}\equiv-\frac{4\pi}S,
+        \biggeval{\pv G{n'}}_{\p V}\equiv-\frac{4\pi}S,
         \tag{$\ast\ast$}
     \end{equation}
     其中$S$是边界$\p V$的面积，
@@ -692,7 +692,7 @@ Neumann边界条件的泛函
 \begin{subequations}
     \begin{align}
         \lapla\psi&=-g,\\
-        \eval{\pv\psi n}_{\p V}&=f.
+        \biggeval{\pv\psi n}_{\p V}&=f.
     \end{align}
 \end{subequations}
 
@@ -709,19 +709,19 @@ Neumann边界条件的泛函
 
 采用直角网格划分，格点$(i,j)$处的电位为$\Phi_{i,j}$，网格间距为$h$，
 \begin{center}
-    \includegraphics[page=\pagenumref{tikz:finite difference method}]{figures/tikz/layouts.pdf}
+    \tikzfigure{finite-difference-method}
     \captionof{figure}{有限差分法示意图}
     \label{fig:finite difference method}
 \end{center}
 则
 \begin{equation}
-    \Phi_{i\pm 1,j}=\Phi_{i,j}\pm h\eval{\pv\Phi x}_{i,j}+\frac{h^2}2\eval{\pv[2]\Phi x}_{i,j}\pm\frac{h^3}6\eval{\pv[3]\Phi x}_{i,j}+\bigo(h^4),
+    \Phi_{i\pm 1,j}=\Phi_{i,j}\pm h\biggeval{\pv\Phi x}_{i,j}+\frac{h^2}2\biggeval{\pv[2]\Phi x}_{i,j}\pm\frac{h^3}6\biggeval{\pv[3]\Phi x}_{i,j}+\bigo(h^4),
 \end{equation}
 $\Phi_{i,j\pm 1}$同理，可得
 \begin{subequations}
     \begin{align}
-        \eval{\pv[2]\Phi x}_{i,j}&=\frac{\Phi_{i+1,j}+\Phi_{i-1,j}-2\Phi_{i,j}}{h^2}+\bigo(h^2),\\
-        \eval{\pv[2]\Phi y}_{i,j}&=\frac{\Phi_{i,j+1}+\Phi_{i,j-1}-2\Phi_{i,j}}{h^2}+\bigo(h^2),
+        \biggeval{\pv[2]\Phi x}_{i,j}&=\frac{\Phi_{i+1,j}+\Phi_{i-1,j}-2\Phi_{i,j}}{h^2}+\bigo(h^2),\\
+        \biggeval{\pv[2]\Phi y}_{i,j}&=\frac{\Phi_{i,j+1}+\Phi_{i,j-1}-2\Phi_{i,j}}{h^2}+\bigo(h^2),
     \end{align}
 \end{subequations}
 故二维Poisson方程

@@ -1,241 +1,283 @@
 \setcounter{chapter}{-1}
-\chapter{绪论：量子力学背景}
 
-1900年，Kelvin勋爵给英国皇家研究院做了一个广为人知的演讲，题为《覆盖热和光的动力学理论的十九世纪的乌云》\footnote{\textit{Nineteenth-Century Clouds over the Dynamical Theory of Heat and Light}. }。
-\begin{quote}
-	The beauty and clearness of the dynamical theory, which asserts heat and light to be modes of motion, is at present obscured by two clouds.
-	I. The first came into existence with the undulatory theory of light, and was dealt with by Fresnel and Dr. Thomas Young; it involved the question, How could the earth move through an elastic solid, such as essentially is the luminiferous ether?
-	II. The second is the Maxwell-Boltzmann doctrine regarding the partition of energy.
-\end{quote}
-他所说的两朵\textit{乌云}是指：
-\begin{itemize}
-    \item 物质如何穿过以太而运动；%\footnote{Michelson-Morley实验}；
-    \item 统计力学中的能量均分原理可能会被打破。
-\end{itemize}
-而在二十世纪，针对这两个问题，产生了两个主要的物理理论：针对前者产生了狭义相对论；针对后者产生了量子力学。%\url{https://books.google.com.tw/books?id=YvoAAAAAYAAJ&pg=PA363&redir_esc=y#v=onepage&q&f=false}
+\chapter{绪论}
+\label{ch:intro}
 
-涉及统计力学的部分，包括热容、Einstein晶体模型等，详见本人的统计力学笔记内容，此处不多赘述。
+同样制备的银原子穿过一个不均匀磁场，为什么会在屏上留下两个斑点？若只保留上面那束，
+再让它通过一块转过角度的磁铁，两处出口的计数会怎样改变？
+逐个发射电子会积累出干涉条纹，给氢原子照光只在某些频率有明显吸收，这些现象也可以问同一个问题。
+这就是本书学习量子力学(quantum mechanics)的主线。给定粒子的制备、途中受到的作用和末端的测量，
+\textbf{怎样预测各个读数出现的概率？}起初只需数两个出口的原子，以后可以逐个像素数电子，也可以逐个频率测吸收。
+增加位置这样的自由度(degree of freedom)、增加粒子或把环境计入时，我们仍用实验能记录的分布检验计算。
 
-\section{黑体辐射问题}
+\section{历史顺序与学习顺序}
+\label{sec:timeline}
+氢的可见谱线比原子束分裂更早为人熟知，解释起来却需要更多准备。即使知道了哪些频率能被吸收，
+要预言哪条线更亮，还得知道光怎样使原子从一个态转到另一个态。\tabref{tab:history}按年代列出这些观测，
+右栏列出各物理问题的讨论位置。正文从只有两个读数的实验出发，再推广到连续读数和多粒子测量。
+历史记录见文末所列原始论文和回顾\cite{history,sg,compton,davisson,franck,rabi,ramsey,lamb,abexp,belltests}。
 
-19世纪，人们希望研究物体热辐射的性质，比如通过烧热钢铁的颜色来判断其温度。
-为了避免外界辐射的因素，可以考虑一个可以完全吸收外界辐射的理想物体，由于这种物体不反射任何光线，因此称为\textbf{黑体}。
-因此，黑体的辐射便完全取决于其本身的性质，比如说温度。
+{\small
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.18}
+    \begin{longtable}{@{}>{\raggedright\arraybackslash}p{1.45cm}>{\raggedright\arraybackslash}p{3.25cm}>{\raggedright\arraybackslash}p{5.35cm}>{\raggedright\arraybackslash}p{3.3cm}@{}}
+        \caption{历史实验时间表与正文索引}\label{tab:history}\\
+        \toprule
+        年份 & 实验事实 & 所提出的物理问题 & 正文入口\\
+        \midrule
+        \endfirsthead
+        \multicolumn{4}{l}{\tabref{tab:history}（续）}\\
+        \toprule 年份 & 实验事实 & 所提出的物理问题 & 正文入口\\\midrule
+        \endhead
+        \bottomrule\endfoot
+        1885 & Balmer归纳氢可见谱线 & 为什么频率由整数关系组织？ & \chapref{ch:hydrogen}：氢能谱\\
+        1887；1916 & Hertz光电现象；Millikan定量检验 & 光的频率和强度分别决定什么？ & \ssecref{sec:photons}；\chapref{ch:transitions}\\
+        1896 & Zeeman光谱分裂 & 磁场如何分辨原子的角动量？ & \secref{sec:zeeman}\\
+        1899--1900 & Lummer--Pringsheim、Rubens--Kurlbaum热辐射测量 & 经典能量均分为何失效？ & \secref{sec:planck}\\
+        1914 & Franck--Hertz非弹性碰撞 & 原子吸收的能量是否连续？ & \ssecref{sec:fh}；\chapref{ch:transitions}\\
+        1922 & Stern--Gerlach银原子束分裂 & 磁矩的一个分量为何离散？ & \chapref{ch:spin}\\
+        1923 & Compton散射频移 & 光与电子怎样交换能量和动量？ & \ssecref{ss:compton}\\
+        1927 & Davisson--Germer及G.~P.~Thomson电子衍射 & 粒子计数如何包含相位关系？ & \secref{sec:interference}；\chapref{ch:scattering}\\
+        1938 & Rabi等分子束磁共振 & 如何用外场控制态间跃迁？ & \secref{sec:rabi}\\
+        1947 & Lamb--Retherford氢能级位移 & Dirac理论为什么仍不足？ & \chapref{ch:relativity}\\
+        1960 & Chambers磁通干涉实验 & 粒子路径上磁场很小时，相位为何仍受磁通影响？ & \secref{sec:ab}\\
+        1972 & Freedman--Clauser的Bell不等式实验 & 局域隐藏变量能否复现光子关联？ & \chapref{ch:entanglement}\\
+        1980 & 整数量子Hall效应 & 磁场中态数怎样量子化？ & \secref{sec:landau}\\
+        1982 & Aspect等切换分析器的Bell实验 & 怎样限制两端设置之间的因果接触？ & \chapref{ch:entanglement}\\
+        1986 & 单光子分束反关联实验 & 光子计数与经典随机强度有何区别？ & \secref{sec:photoncount}\\
+        1987 & 中子自旋几何相位实验 & 缓变磁场的参数路径怎样改变干涉相位？ & \ssecref{ss:berry-readout}\\
+        1987 & Hong--Ou--Mandel双光子符合计数 & 不可分辨粒子的交换怎样改变概率？ & \secref{sec:hom}\\
+        1989 & Tonomura等单电子条纹累积 & 一次一个粒子为什么仍能干涉？ & \secref{sec:interference}\\
+        2015 & 同时关闭主要漏洞的Bell检验 & 排除局域模型时，探测与设置条件是否同时满足？ & \chapref{ch:entanglement}\\
+    \end{longtable}
+}
 
-\iffalse
-考虑边长为$L$的立方黑体，电磁波在其内满足驻波条件：
-\[
-	k^2=k_x^2+k_y^2+k_z^2=\Bigp{\frac\pi{L}}^2\bigp{n_x^2+n_y^2+n_z^2}.
-\]
-其中$k=2\pi/\lambda$为波数，对应频率$\nu=c/\lambda=ck/2\pi$，$n_x,n_y,n_z$是驻波在$x,y,z$方向上的半波长个数，应为不全为0的非负整数。
-由上式，解$(n_x,n_y,n_z)$分布在半径为$kL/\pi=2\nu L/c$的球面上，则球内解的个数为
-\[
-	N(\nu)=2\cdot\frac18\cdot\frac43\pi\Bigp{\frac{2L\nu}c}^3=\frac{8\pi L^3}{3c^3}\nu^3,
-\]
-系数前乘2是因为光是横波，存在两种偏振态．
-\fi
+与实验相关的方法节点也需单独辨明：Ramsey于1949年提出分离振荡场方法，1950年发表系统方法论文，见\secref{sec:ramsey}及文献\cite{ramsey}。
 
-考虑体积$L^3$的立方空腔，计入电磁波的两种横向偏振，频率不超过$\nu$的模式数在大体积极限为$N(\nu)=8\pi L^3\nu^3/(3c^3)$。单位体积、单位频率间隔内的模式数为：
-\[
-	g(\nu)=\frac1{L^3}\dv{N(\nu)}\nu=\frac{8\pi}{c^3}\nu^2.
-\]
-在经典统计描述中，单个电磁模式的能量可连续变化，其能量概率密度正比于$\e^{-\varepsilon/\kB T}$。
-故能量平均值为
-\begin{align}
-	\avg E=\frac{\textstyle\int\zti\varepsilon\e^{-\varepsilon/\kB T}\d\varepsilon}{\textstyle\int\zti\e^{-\varepsilon/\kB T}\d\varepsilon}=\kB T.
-\end{align}
-因此能量密度
-\[
-u(\nu,T)=\avg Eg(\nu)=\frac{8\pi\nu^2}{c^3}\kB T.
-\]
-考虑黑体辐射在$4\pi$立体角内是各向同性的，
-辐射率\footnote{指定方向上的单位立体角和垂直此方向的单位面积上的辐射通量．}
-为
-\begin{align}
-	\label{eqn:Rayleigh-Jeans Formula of frequency}
-	I_\nu(\nu,T)=\frac c{4\pi}u(\nu,T)=\frac{2\nu^2}{c^2}\kB T.
-\end{align}
-如果以波长$\lambda$为变量，%由于得到$g$的过程中有求导，因此
-\begin{align}
-	\label{eqn:Rayleigh-Jeans Formula of wavelength}
-	I_\lambda(\lambda,T)=\frac{c}{\lambda^2}\cdot I_\nu\biggp{\frac c\lambda,T}=\frac{2c\kB T}{\lambda^4}.
-\end{align}
-注意
-$I_\nu$的单位为$\si{W.m^{-2}.sr^{-1}.Hz^{-1}}$，
-而$I_\lambda$的单位为$\si{W.m^{-3}.sr^{-1}}$．
+理论的几个时间节点另列于此：1900年Planck提出能量元，1905年Einstein提出光量子，
+1913年Bohr提出原子模型，1923--1924年de Broglie提出并发展动量与空间相位的联系；
+1925--1926年建立现代量子力学，1926年Born提出概率解释，1928年Dirac提出相对论电子理论。
+Bohr模型以轨道量子化解释氢谱；现代理论用态与算符描述原子，角动量谱由\chapref{ch:angular}的旋转代数给出。
 
-\eqref{eqn:Rayleigh-Jeans Formula of frequency}和\eqref{eqn:Rayleigh-Jeans Formula of wavelength}式被称为Rayleigh-Jeans公式．可以看到，当$\lambda\to0$时，$I_\lambda(\lambda,T)\to\infty$，这显然与事实不符，因此被称为\textit{紫外灾难}．\footnote{需要指出的时间顺序：Rayleigh于1900年推导公式，Jeans于1905年修正系数，紫外灾变是Ehrenfest于1911年提出，而Planck公式提出于1900年．}
+\section{量子理论的实验基础}
+时间表中的光谱来自光与物质交换能量。怎样从仪器读数知道交换了多少？
+光电实验用电压测出逸出电子的最大动能，Compton 实验用散射波长检验光子传给电子的动量，
+Franck--Hertz 实验则让电子碰撞原子，从电流的起伏读出原子的激发能。
+三种装置都可以先用大学物理的守恒律来分析，也由此看出哪些微观规律还要由实验给定。
 
-\paragraph{能量量子化}
+\subsection{光电效应}
+\label{sec:photons}
 
-Wien通过对黑体辐射的实验数据进行拟合，提出了一个经验公式：
+光电实验研究光照金属后逸出电子的能量与数量怎样依赖入射光。
+把金属阴极置于真空中，用频率为$\nu$的近单色光照射，
+另一电极收集逸出的电子，电流表测量单位时间到达的电荷。
+改变两电极之间的电压，可以分别测量发射率和电子的最大动能。
+
+先让收集极吸引电子。电压足够大后，能逸出的电子几乎都被收集，
+电流接近饱和值；在表面状态不变的弱光范围，饱和电流随光强增加。
+再使收集极排斥电子，电子必须克服电势能障碍才能到达它。
+反向电压增大到某个值时，电流降至背景，说明能量最高的电子也无法通过。
+将这个电压的大小记为截止电压(stopping potential)$V_{\stopping}$。
+电荷为$-e$的电子克服的能量障碍是$eV_{\stopping}$，因而
+$K_{\max}=eV_{\stopping}$，其中$e>0$为元电荷。
+
+实验要比较的是两组扫描。固定频率而改变光强，主要改变饱和电流；
+固定表面而改变频率，截止电压随频率近似线性增加，
+并存在低于它就不出现单光子光电发射的阈频。
+若一次吸收向电子转移能量$h\nu$，其中$h$为Planck常数，
+电子从材料逸出还要付出逸出功(work function)$W$，
+则能量守恒给出光电效应(photoelectric effect)的基本关系
 \begin{equation}
-	I_\lambda=C_1\lambda^{-5}\e^{-C_2/\lambda T},
+    eV_{\stopping}=K_{\max}=h\nu-W,\qquad e>0.
 \end{equation}
-其在$\lambda$较小时符合得很好，但在$\lambda$较大时存在较大偏差。
-Planck的解决方法是将能量分布变为离散的，即$\varepsilon_n=nh\nu$
-\begin{align}
-	\avg E=\frac{\textstyle\sum_{n=0}^\infty \varepsilon_n\e^{-\varepsilon_n/\kB T}}{\textstyle\sum_{n=0}^\infty\e^{-\varepsilon_n/\kB T}}=\frac{h\nu}{\e^{h\nu/\kB T}-1}.
-\end{align}
-由此得到的辐射率与实验符合的很好。
+更换金属改变了电子逸出表面所需的能量 $W$；光子的能量仍由频率唯一确定（图\ref{fig:photoelectric-threshold}）。
+\begin{figure}[htbp]
+    \centering
+    \raisebox{-.5\height}{\tikzfigure[width=.40\linewidth]{photoelectric-cell}}\hfill
+    \raisebox{-.5\height}{\includegraphics[width=.52\linewidth]{figures/photoelectric_threshold.pdf}}
+    \caption{光电截止电压。左：波浪线为入射光，直箭头为从阴极 K 飞向收集极 C 的电子。右：每个频率取电流表 A 的读数降至背景时的反向电压；直线的斜率为 $h/e$，横轴截距为 $W/h$。}
+    \label{fig:photoelectric-threshold}
+\end{figure}
+若单位时间照到表面的功率为$\mathcal P$，单光子数流为$\mathcal P/(h\nu)$；
+以$\eta$表示吸收、逸出和收集的总效率，则饱和电流近似为
+\begin{equation}
+    I_\mathrm{sat}=e\eta\frac{\mathcal P}{h\nu}.
+\end{equation}
+截止电压读出单个光电子的最大动能，饱和电流除以 $e$ 给出每秒收集的电子数。
 
-\begin{center}
-	\includegraphics[width=0.8\linewidth]{figures/blackbody.pdf}
-	\captionof{figure}{黑体辐射}
-	\label{fig:blackbody radiation}
-\end{center}
+\begin{example}{由截止电压确定能量转移}{qm-photoelectric-fit}
+    对同一块稳定表面，用两个频率$\nu_1,\nu_2$测得截止电压$V_1,V_2$。
+    两个能量方程相减，逸出功消去：
+    \begin{equation}
+        e(V_2-V_1)=h(\nu_2-\nu_1).
+    \end{equation}
+    由两次读数的差便可求出斜率 $h/e$。
+    共同的接触电势也只改变截距；若表面在两次测量之间变化，
+    两个方程中的$W$便不再相同，需要重新控制表面与电极条件。
+\end{example}
 
-\begin{theorem}{Planck黑体辐射定律}{Planck's Law}
-	黑体辐射的辐射率
-	\begin{align}
-		I_\nu(\nu,T)=\frac{2h\nu^3}{c^2}\frac{1}{\e^{h\nu/\kB T}-1}.
-	\end{align}
-	波长情况下
-	\begin{align}
-		I_\lambda(\lambda,T)=\frac{2hc^2}{\lambda^5}\frac{1}{\e^{hc/\lambda\kB T}-1}
-	\end{align}
-\end{theorem}
-由$x\to0$时，$\e^x-1\sim x$，有
-\[
-	\lambda\gg\frac{hc}{\kB T},\quad I_\lambda\sim\frac{2c\kB T}{\lambda^4}.
-\]
-正是Rayleigh-Jeans公式的形式．
+上述解释适用于弱光下单光子吸收占主导的范围。
+强场中可以吸收多个光子，复杂表面的功函数分布也会展宽截止区。
+截止电压随频率的变化给出了单次吸收的能量规律 $eV_{\stopping}+W=h\nu$；
+\secref{sec:photoncount}再用符合计数区分单光子态与弱相干光。
 
-考虑$I_\lambda(\lambda,T)$最大时对应的波长$\lambda_{\mathrm m}$，做变换$\xi=\frac{hc}{\lambda\kB T}$，则
-\begin{align*}
-	\dv{I_\lambda}\lambda & =\dv{I_\lambda}\xi\cdot\dv\xi\lambda\propto\dd\xi\biggp{\frac{\xi^5}{\e^{\xi}-1}}
-	=\frac{\xi^4\bigb{5(\e^\xi-1)-\xi\e^\xi}}{(\e^\xi-1)^2}=0.
-\end{align*}
-\iffalse
-	\[
-		\dv{I_\lambda}\lambda=\frac c4\cdot\frac{8\pi}{3c^3}\cdot\dd\lambda\biggp{\frac{h\nu}{\e^{h\nu/\kB T}-1}\cdot\dd\lambda\nu^3}.
-	\]
-	由
-	\[
-		\dd\lambda=\dd\nu\cdot\dv\nu\lambda=-\frac c{\lambda^2}\dd\nu=-\frac{\nu^2}c\dd\nu.
-	\]
-	故
-	\begin{align*}
-		\dv r\lambda&=\frac{2h}{3c^2}\cdot\frac{\nu^2}{c}\cdot\dd\nu\biggp{\frac{\nu}{\e^{h\nu/\kB T}-1}\cdot\frac{\nu^2}c\cdot 3\nu^2}\\
-		&=\frac{2h\nu^2}{c^4}\cdot\dd\nu\frac{\nu^5}{\e^{h\nu/\kB T}-1},
-	\end{align*}
-	设$\xi:=h\nu/\kB T$，则导数等价于
-	\[
-		\dd\xi\frac{\xi^5}{\e^\xi-1}=\frac{\xi^4}{(\e^\xi-1)^2}\bigb{5(\e^\xi-1)-\xi\e^\xi}=0.
-\]
-\fi
-解方程
-\[
-	\xi=5\bigp{1-\e^{-\xi}}\implies\xi_0=\num{4.96511423}\ldots
-\]
-\begin{theorem}{Wien位移定律}{Wien's Displacement Law}
-	黑体电磁辐射光谱辐射度的峰值波长与自身温度乘积为常数
-	\begin{align}
-		\lambda_\mathrm m T=\frac{hc}{4.965\kB}=\SI{2.89777}{\mm\K}.
-	\end{align}
-\end{theorem}
-\iffalse
-	let $x:=\frac{\lambda kT}{hc}$, then $\d\lambda=\frac{hc}{kT}\d x,\frac{2\pi hc^2}{\lambda^5}=\frac{2\pi k^5T^5}{h^4c^3}\frac1{x^5}$
-	\begin{align*}
-		\frac{\d r}{\d\lambda} & =\frac{kT}{hc}\frac{2\pi k^5T^5}{h^4c^3}\frac{\d}{\d x}\frac1{x^5(e^{1/x}-1)}     \\
-		                       & =\frac{2\pi k^6T^6}{h^5c^4}\frac{5x^4(e^{1/x}-1)+x^3e^{1/x}}{x^{10}(e^{1/x}-1)^2} \\
-		                       & =\frac{2\pi k^6T^6}{h^5c^4}\frac{5xe^{1/x}-5x+e^{1/x}}{x^7(e^{1/x}-1)^2}
-	\end{align*}
-\fi
-黑体表面单位面积在单位时间内辐射出的总能量
-\[
-	j=\int\zti\int_{\Omega_0}I_\nu(\nu,T)\cos\theta\d\Omega\d\nu
-\]
-黑体辐射几何上严格符合Lambert余弦定律，因此
-\begin{align*}
-	j & =\int\zti\int_0^{2\pi}\int_0^{\pi/2}I_\nu(\nu,T)\cos\theta\sin\theta\d\theta\d\varphi\d\nu \\
-	  & =\pi\int\zti I_\nu(\nu,T)\d\nu=\frac{2\pi h}{c^2}\int\zti\frac{\nu^3}{\e^{h\nu/\kB T}-1}\d\nu,
-\end{align*}
-又
-\[
-	\int\zti\frac{x^3\d x}{\e^x-1}=\Gamma(4)\zeta(4)=3!\times\frac{\pi^4}{90}=\frac{\pi^4}{15},
-\]
-得到
-\begin{theorem}{Stefan-Boltzmann定律}{Stefan-Boltzmann Law}
-	黑体表面单位面积在单位时间内辐射出的总能量
-	\begin{align}
-		j=\sigma T^4.
-	\end{align}
-	其中$\sigma:=\frac{2\pi^5\kB^4}{15h^3c^2}=\SI{5.6704e-8}{W.m^{-2}.K^{-4}}.$
-\end{theorem}
-\section{光电效应和Compton效应}
-1897年，Hertz发现紫外线照射到金属电极上，可以帮助产生电火花。对于光电效应中经典理论所不能解释的现象，1905年\footnote{该年Einstein发布了四篇划时代的论文，分别涉及光电效应、Brown运动、狭义相对论和质能方程，也被称为Einstein奇迹年。}Einstein在他的论文《关于光的产生和转变的一个启发性观点》中主张光子也是量子化的，其能量$E=h\nu$，且光电效应方程
-\begin{align}
-	\Ek=h\nu-W.
-\end{align}
-其中$\Ek$为光电子最大初动能，$W$为金属表面逸出功．
+\subsection{Compton散射}
+\label{ss:compton}
 
-1923年，Compton发现X射线跟物质相互作用时，散射光波长变长的现象。利用光子的动量$p=h/\lambda$，得出增加的波长与散射角的关系
-\begin{align}
-	\D\lambda=\frac h{m_\elec c}(1-\cos\theta).
-\end{align}
+Compton实验把近单色X射线照向散射体，用晶体光谱分析测量不同散射角的出射波长。
+需要解释的结果是：除了可能保留的原波长成分，还出现向长波长移动的散射成分，
+其位移随散射角变化\cite{compton}。
+散射角与波长位移的关系同时受能量守恒和动量守恒约束。
+采用光子能量$E=h\nu$、动量大小$p=E/c$，
+并把参与碰撞的电子在碰撞时间内近似为自由粒子，就能定量计算位移。
 
-这些效应证明了光具有\textbf{波粒二象性}
-\begin{align}
-	E=h\nu,\quad p=\frac h\lambda.
-\end{align}
-\section{Bohr原子模型}
-1914年，Franck-Hertz实验表明，原子能级是分立的；对氢原子光谱有Rydberg经验公式
-\begin{align}
-	\frac1\lambda=R_\infty\Bigp{\frac1{n^2}-\frac1{m^2}}.
-\end{align}
+对初始静止的自由电子，入射、出射光子的能量分别为$E,E'$，夹角为$\theta$。
+$m_\elec$是电子静质量，$c$是真空光速。
+由能量守恒，末态电子能量为$m_\elec c^2+E-E'$；由动量守恒及电子质壳关系，
+\begin{equation}
+    \begin{alignedat}{1}
+        (m_\elec c^2+E-E')^2 &=m_\elec^2c^4+E^2+E'^2-2EE'\cos\theta,\\
+        m_\elec c^2(E-E')&=EE'(1-\cos\theta).
+    \end{alignedat}
+\end{equation}
+第一行左侧展开为
+$m_\elec^2c^4+2m_\elec c^2(E-E')+E^2+E'^2-2EE'$。
+与右侧相同的静质量项和两个平方项消去，再除以2便得第二行。
+将第二行除以$EE'm_\elec c^2$，得到
+\begin{equation}
+    \frac1{E'}-\frac1E=\frac{1-\cos\theta}{m_\elec c^2}.
+\end{equation}
+代入$E=hc/\lambda$、$E'=hc/\lambda'$便得
+\begin{equation}
+    \lambda'-\lambda=\frac{h}{m_\elec c}(1-\cos\theta).
+\end{equation}
+束缚电子可近似为自由静止电子的程度，取决于束缚能与初始动量相对动量转移的大小。
+光子将部分能量交给反冲电子，出射波长随散射角增大而增长（图\ref{fig:compton-shift}）。各方向的计数强度还取决于散射相互作用。
+\begin{figure}[htbp]
+    \centering
+    \raisebox{-.5\height}{\tikzfigure[width=.42\linewidth]{compton-geometry}}\hfill
+    \raisebox{-.5\height}{\includegraphics[width=.52\linewidth]{figures/compton_shift.pdf}}
+    \caption{Compton 散射。左：蓝、橙波浪线分别标记入射和出射 X 射线，$\theta$ 从入射束的延长线量起；直箭头为反冲电子。右：横轴取 $\theta$，纵轴以电子的 Compton 波长 $\lambda_C=h/(m_\elec c)$ 为位移单位。}
+    \label{fig:compton-shift}
+\end{figure}
 
-1913年，Bohr为了解决氢原子问题，提出电子角动量是量子化的
-\begin{align}
-	L=m_\elec vr=n\hbar,\quad n=1,2,\ldots
-\end{align}
-再利用经典力学中，Coulomb力提供电子圆周运动的向心力
-\[
-	\frac1{4\pi\varepsilon_0}\frac{e^2}{r^2}=m_\elec\frac{v^2}r.
-\]
-解得电子速率
-\begin{align}
-	v_n=\frac{e^2}{4\pi\varepsilon_0}\frac{1}{n\hbar}=\frac{e^2}{2nh\varepsilon_0},
-\end{align}
-特别地，基态电子速率和光速的比值是一个无量纲常数：精细结构常数
-\[
-	\alpha\equiv\frac{e^2}{2\varepsilon_0 hc}\doteq\frac1{137}.
-\]
+\subsection{Franck--Hertz实验}
+\label{sec:fh}
+光谱提示原子的能量交换有特殊尺度，但还需要独立的碰撞实验来检验：
+电子把动能交给原子时，损失可以任意小，还是需要达到一定的激发阈值？
+Franck--Hertz实验用加热阴极发射电子，以可调加速电压$U$使电子穿过稀薄汞蒸气，
+再由栅极后的收集极测量电流。栅极与收集极之间保留一个小的反向电压$U_r$，
+使刚刚损失了大部分动能的电子不能到达收集极\cite{franck}。
 
-电子轨道半径
-\begin{align}
-	r_n=\frac{4\pi\varepsilon_0\hbar^2}{m_\elec e^2}n^2,
-\end{align}
-称基态半径为Bohr半径
-\[
-a_0\equiv\frac{4\pi\varepsilon_0\hbar^2}{m_\elec e^2}=\SI{5.29177e-11}{m}.
-\]
+先考虑电子能量低于第一个显著激发阈值的情况。
+电子与重原子的弹性碰撞主要改变方向；由于电子质量远小于原子质量，
+一次弹性碰撞转移给原子质心的能量比例很小。
+增大$U$通常使更多电子克服反向势垒，收集电流增加。
+若电子获得的动能刚好足以激发原子，并且碰撞发生在接近栅极的位置，
+它会把一份能量$\Delta E$交给原子，剩余动能不足以克服$eU_r$，
+于是收集电流出现下降。
 
-能量
-\begin{align}
-	E_n=-\frac{m_\elec e^4}{8\varepsilon_0^2h^2}\frac1{n^2},
-\end{align}
-基态能量
-\[
-E_1=-\frac{m_\elec e^3}{8\varepsilon_0^2h^2}e=\SI{-13.6}{\eV}.
-\]
+继续增大$U$，失能后的电子可以在剩余路程重新加速，
+收集电流恢复；更高电压下又可能发生两次、三次相同类型的非弹性碰撞。
+因此近似等间隔的电流结构可以来自同一个激发能量的重复损失。
+设第$r$个同类结构的位置为$U_r^{*}$，以$U_c$合并接触电势及收集阈值的偏移，
+则简化关系为
+\begin{equation}
+    U_r^{*}\simeq U_c+r\frac{\Delta E}{e},
+    \qquad
+    e\bigp{U_{r+1}^{*}-U_r^{*}}\simeq\Delta E.
+\end{equation}
+对图\ref{fig:franck-hertz-current}中的相邻电流谷取电压差，共同的偏移 $U_c$ 便消去。
+\begin{figure}[htbp]
+    \centering
+    \raisebox{-.5\height}{\tikzfigure[width=.44\linewidth]{franck-hertz-tube}}\hfill
+    \raisebox{-.5\height}{\includegraphics[width=.52\linewidth]{figures/franck_hertz_current.pdf}}
+    \caption{Franck--Hertz 管及收集电流。左：K、G、C 下方依次标出热阴极、栅极、收集极的电势。右：扫描加速电压 $U$，记录收集电流 $I$；曲线示意谷的位置，谷深和谷宽取绘图值。}
+    \label{fig:franck-hertz-current}
+\end{figure}
 
-由跃迁条件
-\[
-h\nu=E_n-E_m,
-\]
-可得Rydberg常数
-\[
-R_\infty=\frac{m_\elec e^4}{8\varepsilon_0^2h^3c}=\SI{1.09737375e7}{\per\m}.
-\]
+汞实验中约$4.9\,\mathrm V$的重复间距对应约$4.9\,\mathrm{eV}$的能量损失。
+若原子随后由该激发态回到基态并辐射一个光子，
+能量关系预言
+\begin{equation}
+    \lambda=\frac{hc}{\Delta E}\simeq253\,\mathrm{nm},
+\end{equation}
+与相应的汞紫外谱线处于同一尺度。
+碰撞阈值与光谱能量差由此互相核对：前者通过电子失能读出，
+后者通过发射光的频率读出。
 
-为处理多自由度体系的周期运动的分立能级问题，Sommerfeld提出了推广的量子化条件，对于周期运动的广义坐标和广义动量$(q,p)$
-\begin{align}
-	\oint p\d q=nh,\quad n=1,2,\ldots
-\end{align}
+这套推断所需的条件也来自装置。蒸气压太低时碰撞太少，
+太高时多次碰撞与能量分布会抹平结构；温度改变蒸气密度，
+阴极热发射给出初始速度分布，反向电压决定哪些失能电子被拒收。
+这些因素改变峰谷位置和形状，所以详细曲线还需电子输运与碰撞截面。
+从实验提取的稳定结论是存在特定的内部激发能量。
 
-1924年，de Broglie提出实物粒子也具有波粒二象性：
-\[
-	\lambda=\frac hp,\quad\nu=\frac Eh.
-\]
-并称之为物质波，1926年Bohr提出概率波的概念．
+理论据此把稳定原子态标记为$\ket{n}$，并赋予能量$E_n$。
+尖括号里的 $n$ 是制备态的标签。例如 $n=i$ 表示碰撞前的原子态，$n=f$ 表示碰撞后的原子态。
+忽略原子整体反冲时，吸收或发射频率满足$h\nu=|E_f-E_i|$。
+能级差给出谱线的位置；探针与原子之间的耦合矩阵元决定哪些跃迁能被激发，并参与决定谱线强度。
+
+\section{本书路线与记号}
+\label{sec:roadmap}
+碰撞阈值反映原子所能吸收的能量。要预言给定制备下各读数的概率，还需要能分别控制制备与测量的实验。
+在\chapref{ch:spin}，沿给定方向测自旋只有两个出口，挡住一路便制备了供下一次测量的束流。
+转动下一台分析器，两路所占比例会变。\chapref{ch:observables}由此追问，换成能量或位置测量，
+怎样根据同一个制备态算出新仪器的读数分布？可观测量把仪器能分辨的读数与态联系起来。
+把两台仪器调回同一方向，在两者之间加一段横向磁场，两路计数便会随原子在场中停留的时间振荡，
+要预言这次变化，就需要\chapref{ch:dynamics}的时间演化。
+
+有了态、测量与演化，便可以回到光谱。\chapref{ch:oscillator}至\chapref{ch:transitions}由能级差预言谱线位置，
+再由光与原子的相互作用计算哪些跃迁更强。\chapref{ch:em}至\chapref{ch:scattering}把读数换成干涉条纹、双粒子符合和不同方向的散射计数。
+最后三章追问，缓慢转动磁场会积累什么相位，只观察原子会丢失什么信息，提高光谱分辨率又会看到哪些能级分裂。
+
+从离散出口到连续探测，变化的是概率与计数的对应方式。
+在\ssecref{ss:sg-sequence}的连续筛选中，1000 个制备在 $+z$ 态的原子约有一半通过 $+x$ 出口，
+再经 $z$ 分析器，其中约一半到达 $-z$ 出口，故最终计数的期望值为 250。
+\secref{sec:continuous}将离散出口换为位置探测器。若概率密度在像素内变化很小，单个像素的计数比例近似为当地概率密度乘以像素宽度。
+\ssecref{ss:position-well}用两端的硬墙条件确定驻波，再对给定区间积分求探测概率。
+\secref{sec:hydrogen-1s}沿用定态方程，势能改为 Coulomb 势，原点的正则性和无穷远处的衰减条件共同约束基态的空间尺度和能量。
+
+态(state) $\ket{\psi}$ 描述系统的制备。概率振幅(probability amplitude) $\brkt{a}{\psi}$ 表示该态沿分析器出口态 $\ket{a}$ 的分量。
+振幅是复数，可以像光波的复振幅一样叠加。
+写成 $c=u+\i v=r\e^{\i\varphi}$ 时，$\e^{\i\varphi}=\cos\varphi+\i\sin\varphi$，
+$r$ 和 $\varphi$ 分别是复平面上箭头的长度和方向。模平方 $|c|^2=c^*c=u^2+v^2=r^2$。
+光学实验测量强度，单粒子实验则逐次记录粒子的到达。离散出口的概率由振幅的模平方给出；
+下一章就用两台不同朝向的分析器检验这一规则。
+
+位置分量 $\brkt{x}{\psi}$、动量分量 $\brkt{p}{\psi}$ 及矩阵元(matrix element) $\mel{a}{\op{A}}{b}$ 的读法见卷首\hyperref[chap:symbols]{常用符号表}。
+全文采用 SI，$\hbar=h/(2\pi)$ 为约化 Planck 常数，$\varepsilon_0$ 为真空介电常数。Bohr 磁子 $\muB=e\hbar/(2m_\elec)$ 给出电子磁矩的尺度，
+精细结构常数 $\alpha=e^2/(4\pi\varepsilon_0\hbar c)$ 给出无量纲电磁耦合强度。
+能量为 $E$ 的态取时间因子 $\exp(-\i Et/\hbar)$。绕单位轴 $\bm n$ 主动旋转 $\theta$ 角采用 $\exp(-\i\theta\bm n\cdot\hatbm{J}/\hbar)$，其中 $\hatbm{J}$ 为总角动量。
+
+\begin{definition}{算符与线性}{qm-notation}
+    在态空间 $\HH$ 中取定一个定义域 $\Dom(\op{A})\subseteq\HH$。算符(operator) $\op A:\Dom(\op{A})\to\HH$
+    给域内每个输入向量 $\ket{\psi}$ 指定唯一的输出向量 $\op A\ket{\psi}$。
+    若定义域是线性子空间，对其中任意两个向量和任意复数 $c,d$ 有
+    \[
+        \op A(c\ket{\psi}+d\ket{\phi})=c\,\op A\ket{\psi}+d\,\op A\ket{\phi},
+    \]
+    则称 $\op A$ 为线性算符(linear operator)。线性关系使算符在基矢上的作用唯一确定它在这些基矢的任意有限叠加上的作用。
+    单位算符(identity operator) $\one$ 将每个向量映回自身，即 $\one\ket{\psi}=\ket{\psi}$。
+\end{definition}
+
+例如，取一个可观测量 $\op A$。在两个正交出口的基 $\ket{1},\ket{2}$ 中，若 $\op A\ket{1}=a_1\ket{1}$、$\op A\ket{2}=a_2\ket{2}$，
+则 $\op A(c_1\ket{1}+c_2\ket{2})=a_1c_1\ket{1}+a_2c_2\ket{2}$。帽号表示 $\op A$ 作用于态向量。本征值 $a_1,a_2$ 是可能的读数，矩阵元 $A_{mn}=\mel{m}{\op A}{n}$ 是复数，两者均用无帽记号。
+在正交归一基下，右矢(ket) $\ket{\psi}$ 的系数构成列向量。对它取共轭转置得到对应左矢(bra) $\bra{\psi}$ 的行向量。
+在有限维正交归一基下，伴随算符(adjoint operator) $\op{A}^\dagger$ 的矩阵是 $\op{A}$ 的矩阵的共轭转置(conjugate transpose)。
+乘积 $\op{A}\op{B}\ket{\psi}$ 先作用 $\op{B}$，再作用 $\op{A}$。对易子(commutator)与反对易子(anticommutator)分别定义为
+\begin{equation}
+    [\op{A},\op{B}]=\op{A}\op{B}-\op{B}\op{A},\qquad \{\op{A},\op{B}\}=\op{A}\op{B}+\op{B}\op{A}.
+\end{equation}
+
+三维分量指标 $i,j,k$ 取 $x,y,z$。Kronecker 符号 $\delta_{ij}$ 在 $i=j$ 时为 1，否则为 0。
+Levi-Civita 符号 $\epsilon_{ijk}$ 在 $(i,j,k)$ 为 $(x,y,z)$ 的偶置换时为 1，奇置换时为 $-1$，有重复指标时为 0。
+同一项中重复出现的空间分量指标约定求和，能级和态标签的求和则显式写出求和号。
+
+在全空间光滑且迅速衰减的波函数上，位置与动量满足 $[\op{X}_i,\op{P}_j]=\i\hbar\delta_{ij}\one$。
+沿同一方向，对易子为 $\i\hbar\one$，沿不同方向则为零。\secref{sec:continuous}将验证这个关系。例如，角动量分量的重复指标求和写为
+\begin{equation}
+    \epsilon_{ijk}\op{J}_k=\sum_{k=x,y,z}\epsilon_{ijk}\op{J}_k.
+\end{equation}
+取$i=x,j=y$时，右侧只剩$\op{J}_z$。
+
+\reading{主要教材为Feynman第III卷与MIT 8.05、8.06讲义；书目及实验出处见书末。}

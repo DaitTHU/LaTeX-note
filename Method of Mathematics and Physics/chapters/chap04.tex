@@ -33,7 +33,7 @@
 	\end{align}
 	并记
 	\[
-		\mathscr L_0(\RR):=\set f{\int\iti\abs{f(x)}\d x<\infty,\;\supp f\,\text{有界}}
+		\mathscr L_0(\RR):=\biggset f{\int\iti\abs{f(x)}\d x<\infty,\;\supp f\,\text{有界}}
 	\]
 	则$\forall f\in\mathscr L_0(\RR)$，$f$确定了$\cont(\RR)$上一个线性泛函：
 	\begin{align}
@@ -99,7 +99,7 @@
 	与一维类似，函数空间
 	\begin{gather*}
 		\Cinf(\RR^n)\equiv\cont_0^\infty(\RR^n):=\set f{f\in\cont^\infty(\RR^n),\;\supp f\,\text{有界}},\\
-		\Schw(\RR^n):=\set\varphi{\lim_{\abs X\to\infty}\abs X^m\frac{\p^k\varphi(X)}{\p x_1^{k_1}\cdots\p x_n^{k_n}}=0,\quad\forall m,k\in\ZZ^+}
+		\Schw(\RR^n):=\Biggset\varphi{\lim_{\abs X\to\infty}\abs X^m\frac{\p^k\varphi(X)}{\p x_1^{k_1}\cdots\p x_n^{k_n}}=0,\quad\forall m,k\in\ZZ^+}
 	\end{gather*}
 	对函数空间$\vect$上的线性泛函$f$
 	\[
@@ -109,11 +109,11 @@
 	
 	广义函数$f\in\Cinf^\ast(\RR^n)$的偏导数定义为
 	\[
-		\inp{\frac{\p^kf}{\p x_1^{k_1}\cdots\p x_n^{k_n}}}\varphi:=(-1)^k\inp f{\frac{\p^k\varphi}{\p x_1^{k_1}\cdots\p x_n^{k_n}}}
+		\bigginp{\frac{\p^kf}{\p x_1^{k_1}\cdots\p x_n^{k_n}}}\varphi:=(-1)^k\bigginp f{\frac{\p^k\varphi}{\p x_1^{k_1}\cdots\p x_n^{k_n}}}
 	\]
 	特别地，$f=\delta$时
 	\[
-		\inp{\frac{\p^k\delta}{\p x_1^{k_1}\cdots\p x_n^{k_n}}}\varphi=(-1)^k\frac{\p^k\varphi(\mathbf 0)}{\p x_1^{k_1}\cdots\p x_n^{k_n}}.
+		\bigginp{\frac{\p^k\delta}{\p x_1^{k_1}\cdots\p x_n^{k_n}}}\varphi=(-1)^k\frac{\p^k\varphi(\mathbf 0)}{\p x_1^{k_1}\cdots\p x_n^{k_n}}.
 	\]
 \end{theorem}
 \begin{example}{$\delta$函数与Laplace算子}{}
@@ -336,7 +336,7 @@ Fourier方法是求Green函数的基本方法，但对于一些特殊的区域�
     \end{align*}
 	边界方向导数
 	\[
-		\eval{\pv Gn}_{\zeta=0}=\eval{-\pv G\zeta}_{\zeta=0}=\frac{-z}{2\pi[(x-\xi)^2+(y-\eta)^2+z^2]^{3/2}}
+		\biggeval{\pv Gn}_{\zeta=0}=\biggeval{-\pv G\zeta}_{\zeta=0}=\frac{-z}{2\pi[(x-\xi)^2+(y-\eta)^2+z^2]^{3/2}}
 	\]
 	故对于上半空间Dirichlet问题
 	\[
@@ -363,7 +363,7 @@ Fourier方法是求Green函数的基本方法，但对于一些特殊的区域�
 			\lapla G(M;N)=-\vd(M-N),&0\leqslant r<R\\
 			\eval G_{r=R}=0
 		\end{cases}\\
-		\implies \eval{\pv Gn}_{\rho=R}=\frac{R^2-r^2}{4\pi R(R^2+r^2-2Rr\cos\psi)^{3/2}}.
+		\implies \biggeval{\pv Gn}_{\rho=R}=\frac{R^2-r^2}{4\pi R(R^2+r^2-2Rr\cos\psi)^{3/2}}.
 	\end{gather*}
 	故球内Dirichlet问题，解的Poisson形式
 	\begin{gather*}
@@ -407,8 +407,8 @@ Fourier法是求Green函数的基本方法，主要思想是按照特征函数�
 	\end{equation*}
 	有
 	\begin{align*}
-		u(x,y)&=-\biggb{\int\zti\varphi(\xi)\eval{\pv Gn}_{\eta=0}\d\xi+\int\zti\psi(\xi)\eval{\pv Gn}_{\eta=a}\d\xi}\\
-		&=\int\zti\varphi(\xi)\eval{\pv G\eta}_{\eta=0}\d\xi-\int\zti\psi(\xi)\eval{\pv G\eta}_{\eta=a}\d\xi
+		u(x,y)&=-\biggb{\int\zti\varphi(\xi)\biggeval{\pv Gn}_{\eta=0}\d\xi+\int\zti\psi(\xi)\biggeval{\pv Gn}_{\eta=a}\d\xi}\\
+		&=\int\zti\varphi(\xi)\biggeval{\pv G\eta}_{\eta=0}\d\xi-\int\zti\psi(\xi)\biggeval{\pv G\eta}_{\eta=a}\d\xi
 	\end{align*}
 	进而
 	\begin{align*}
@@ -439,11 +439,11 @@ $\beta=0$即第I边值问题。$\alpha=0$即第II边值问题，但此时表示�
 \begin{align*}
 	\begin{cases}
 		\lapla G=-\vd(M-N)+\frac1v,\\
-		\eval{\pv Gn}_{\p V}=0,
+		\biggeval{\pv Gn}_{\p V}=0,
 	\end{cases}\enspace\text{或}\quad
 	\begin{cases}
 		\lapla G=-\vd(M-N),\\
-		\eval{\pv Gn}_{\p V}=-\frac1s,
+		\biggeval{\pv Gn}_{\p V}=-\frac1s,
 	\end{cases}
 \end{align*}
 其中$v,s$为$V$的体积和表面积。有解

@@ -1,215 +1,418 @@
-\chapter{电磁场}
-\paragraph{经典力学电磁场}考虑质量$\mu$电荷量$q$的粒子在电磁场中的运动，经典力学的Hamilton量\footnote{注意这里采用Gauss单位制；国际单位制下正则动量$mv+qA$。}
-\[
-	H=\frac1{2\mu}\Bigp{\bm p-\frac qc\bm A}^2+q\varphi.\CGS
-\]
-其中$\bm A$是电磁矢势，$\varphi$是标势，$\bm p$是正则动量。
-\begin{align*}
-	\bm E & =-\frac1c\pv{\bm A}t-\nabla\varphi \\
-	\bm B & =\nabla\times\bm A.
-\end{align*}
+\chapter{氢原子}
+\label{ch:hydrogen}
 
-粒子的机械动量可由Hamilton量正则方程得出
-\[
-	\mu\dot x=\mu\pv H{p_x}=p_x-\frac qcA_x.
-\]
-可见，带电粒子的正则动量$\bm p$和机械动量$\bm P$的关系为
-\[
-	\bm p=\mu\bm v+\frac qc\bm A\neq\bm P=\mu\bm v.
-\]
+氢原子放电光谱由一系列离散谱线组成。
+测量各谱线的波长后，Balmer型整数关系把看似无关的频率组织成不同系列。
+同一系列共享一个较低能级，较高能级逐步接近电离阈值。
+电子与原子核之间的 Coulomb 相互作用为何给出与 $1/n^2$ 成比例的束缚能量？具有不同角动量的态又为何可以同能？
 
-另一方面
-\begin{align*}
-	\mu\ddot x & =\dot p_x-\frac qc\dot A_x=-\pv Hx-\frac qc\dot A_x                                                        \\
-	           & =\frac1\mu\sum_{i=1}^3\Bigp{p_i-\frac qcA_i}\frac qc\pv{A_i}x-q\pv\varphi{x}-\frac qc\dot A_x                    \\
-	           & =\frac qc\sum_{i=1}^3\dot r_i\pv{A_i}x-q\pv\varphi{x}-\frac qc\biggp{\pv{A_x}t+\sum_{i=1}^3\dot r_i\pv{A_x}{r_i}} \\
-	           & =-q\biggp{\pv\varphi{x}+\frac1c\pv{A_x}t}+\frac qc[\bm v\times(\curl\bm A)]_x.
-\end{align*}
+观测到的光谱频率只给能量差。
+取无限远分离的电子与原子核为内部能量零点后，
+束缚态能量为负，谱线终点与电离阈值才共同固定能级的绝对标度。
+此外原子核具有有限质量；同一套电子相互作用在不同同位素中
+应产生可预测的小位移，这提供了两体模型的独立检验。
+
+\section{两体运动的约化}
+角动量代数给出了同一多重态的取向数。求谱线的波长还需要确定能级差。
+对氢原子，束缚来自电子和原子核之间的静电吸引。分离质心动能后，
+两者的相对运动决定原子的内部能级。
+
+把原子核视为电荷$Ze$、质量$M$的点粒子，电子质量为$m_\elec$。
+忽略自旋、相对论和辐射修正，记约化质量(reduced mass)为$\mu$、Coulomb耦合常数为$\kappa$：
+\begin{equation}
+    \mu=\frac{m_\elec M}{m_\elec+M},\qquad
+    \kappa=\frac{Ze^2}{4\pi\varepsilon_0}.
+\end{equation}
+
+电子和核的位置算符与动量算符分别记为
+$(\hatbm{X}_\elec,\hatbm{P}_\elec)$与$(\hatbm{X}_N,\hatbm{P}_N)$。
+定义质心(center of mass)和相对变量
+\begin{subequations}\label{eq:cm-relative}
+    \begin{alignat}{2}
+        \hatbm{X}_{\cm} &=\frac{m_\elec\hatbm{X}_\elec+M\hatbm{X}_N}{m_\elec+M},
+        &\quad \hatbm{X}&=\hatbm{X}_\elec-\hatbm{X}_N,\\
+        \hatbm{P}_{\cm} &=\hatbm{P}_\elec+\hatbm{P}_N,
+        &\quad \hatbm{P}&=\frac{M\hatbm{P}_\elec-m_\elec\hatbm{P}_N}{m_\elec+M}.
+    \end{alignat}
+\end{subequations}
+这些变量满足两组相互独立的正则对易关系。
+动量的逆变换为
+\begin{subequations}
+    \begin{alignat}{1}
+        \hatbm{P}_\elec&=\frac{m_\elec}{m_\elec+M}\hatbm{P}_{\cm}+\hatbm{P},\\
+        \hatbm{P}_N&=\frac{M}{m_\elec+M}\hatbm{P}_{\cm}-\hatbm{P}.
+    \end{alignat}
+\end{subequations}
+代入动能，两项交叉项分别为
+$+\hatbm{P}_{\cm}\cdot\hatbm{P}/(m_\elec+M)$和它的负值，因而消去。
+
+余下的平方项给出
+\begin{equation}
+    \op{H}_{\total}=\frac{\hatbm{P}_{\cm}^2}{2(m_\elec+M)}+\op{H},
+    \qquad \op{H}=\frac{\hatbm{P}^2}{2\mu}-\frac{\kappa}{\op{R}},
+    \quad \op{R}=|\hatbm{X}|.
+\end{equation}
+$\op{R}$ 是相对距离算符，在位置表象中使波函数乘以距离 $r=|\bm r|$。自由质心的连续能谱与内部能级属于不同自由度。
+后面$E$专指相对运动(relative motion)能量，零点取无穷远电离阈值(ionization threshold)。
+点Coulomb模型采用通常的自伴Hamilton实现，不在原点另加接触相互作用。
+
+\section{从位置波函数求原子的大小}
+\label{sec:hydrogen-1s}
+相对运动的一个可观测量是电子到原子核的距离。若探测器只记录距离，球对称束缚态的读数将如何分布？
+Coulomb 势具有球对称性，可以先求振幅只依赖距离的定态。
+径向方程同时确定波函数的衰减长度和能量。
+
+写这个球对称态为 $\psi(\bm r)=f(r)$。
+位置表象中 $\hatbm P^2=-\hbar^2\nabla^2$。对球对称的 $f$，
+梯度沿径向，穿过半径 $r$ 球面的梯度通量是 $4\pi r^2 f'(r)$。
+在薄壳的内、外表面取通量差，再除以壳体积 $4\pi r^2\d r$，
+得 $\nabla^2 f=(r^2 f')'/r^2=f''+2f'/r$。定态方程因此写作
+\begin{equation}
+    -\frac{\hbar^2}{2\mu}\biggp{f''+\frac{2}{r}f'}-\frac{\kappa}{r}f=Ef.
+\end{equation}
+在远处势能趋于零，负能量解必须选随距离衰减的分支才能归一化。
+试取处处有限、无节点的 $f=C\e^{-r/a}$，其中 $a>0$ 待定。代回方程并除以 $f$，得
+\begin{equation}
+    E=-\frac{\hbar^2}{2\mu a^2}+
+        \frac{1}{r}\biggp{\frac{\hbar^2}{\mu a}-\kappa}.
+\end{equation}
+同一个定态在各处必须有相同的 $E$，所以 $1/r$ 的系数必须为零。
+此条件使指数函数在所有 $r>0$ 处都满足径向方程，同时确定了长度 $a_Z$ 和能量。
+\begin{equation}
+    a_Z=\frac{\hbar^2}{\mu\kappa},\qquad
+    E_{1s}=-\frac{\hbar^2}{2\mu a_Z^2}=-\frac{\mu\kappa^2}{2\hbar^2}.
+    \label{eq:hydrogen-1s-scale}
+\end{equation}
+取 $C$ 为正实数，球壳上的归一化条件给出
+\begin{equation}
+    1=4\pi C^2\int_0^\infty r^2\e^{-2r/a_Z}\d r=\pi a_Z^3 C^2,\qquad
+    \psi_{1s}(\bm r)=\frac{\e^{-r/a_Z}}{\sqrt{\pi a_Z^3}}.
+\end{equation}
+若探测器按半径等宽分箱，落入 $[r,r+\d r]$ 的概率为
+$4\pi r^2|\psi_{1s}|^2\d r$。对 $r^2\e^{-2r/a_Z}$ 求导可得，计数最多的一箱在
+$r=a_Z$ 附近，而放在等体积小格中的探测器在核附近计数最多。
+这个态称为 $1s$；$s$ 表示轨道角动量 $\ell=0$。下面的能谱推导将说明它正是最低能态，
+也将回答球对称的计算尚未回答的问题：角分布不同的态怎样才会有相同能量？
+
+\section{Coulomb问题的守恒量}
+球对称解给出了一个能量值，还没有说明不同角分布的激发态为什么可能同能。
+普通中心势(central potential)使角动量守恒，旋转能联系同一 $\ell$ 中的不同投影态，但保持轨道角动量量子数 $\ell$。
+要从对称性解释氢原子更高的简并度，需要寻找能够联系不同 $\ell$ 的守恒量。
+
+这个守恒量可以从经典反平方力找出来。令 $\bm n=\bm r/r$，把速度分成径向和横向两部分，
+$\bm v_\perp=\bm v-(\bm v\cdot\bm n)\bm n$，于是 $\dot{\bm n}=\bm v_\perp/r$。
+在力 $\dot{\bm p}=-\kappa\bm n/r^2$ 下，$\bm L=\bm r\times\mu\bm v$ 守恒。
+利用 $\bm n\times\bm L=-\mu r\bm v_\perp$ 可得
+\begin{equation}
+    \dv{}{t}\frac{\bm p\times\bm L}{\mu}
+       =-\frac{\kappa}{\mu r^2}\bm n\times\bm L
+       =\kappa\dot{\bm n}.
+\end{equation}
+两边作差就得到守恒的 $\bm p\times\bm L/\mu-\kappa\bm n$。
+量子理论中 $\op{P}_j$ 与 $\op{L}_k$ 的先后次序会影响结果，因此对经典乘积取对称排序。
+\begin{definition}{Coulomb问题的Runge--Lenz向量}{qm-runge-lenz}
+    对 $V(\op{R})=-\kappa/\op{R}$ 的相对运动，Runge--Lenz 向量是由三个算符组成的量，定义为
+    \begin{equation}
+        \hatbm{A}=\frac{\hatbm{P}\times\hatbm{L}-\hatbm{L}\times\hatbm{P}}{2\mu}
+        -\kappa\frac{\hatbm{X}}{\op{R}}.
+        \label{eq:RL}
+    \end{equation}
+    $\hatbm{L}=\hatbm{X}\times\hatbm{P}$ 是相对轨道角动量。
+    $\hatbm{A}$ 的每个分量 $\op{A}_i$ 都具有能量乘长度的量纲，与 $\kappa$ 相同。
+    其平方定义为 $\hatbm{A}^2=\hatbm{A}\cdot\hatbm{A}$。
+\end{definition}
+由$[\op{L}_j,\op{P}_k]=\i\hbar\epsilon_{jkl}\op{P}_l$，
+\begin{equation}
+    \begin{alignedat}{1}
+        (\hatbm{L}\times\hatbm{P})_i &=\epsilon_{ijk}\bigp{\op{P}_k\op{L}_j+[\op{L}_j,\op{P}_k]}\\
+        &=-(\hatbm{P}\times\hatbm{L})_i+2\i\hbar \op{P}_i.
+    \end{alignedat}
+\end{equation}
+所以式\eqref{eq:RL}等于
+$\hatbm{A}=(\hatbm{P}\times\hatbm{L}-\i\hbar\hatbm{P})/\mu
+-\kappa\hatbm{X}/\op{R}$，并且各分量为对称算符。
+
+与经典表达式 $\bm p\times\bm L/\mu$ 相比，对称排序产生了正比于 $\hbar$ 的修正。
+在公共不变核上由正则对易关系计算，得到
+\begin{subequations}
+    \begin{alignat}{2}
+        [\op{H},\op{A}_i]&=0,&\quad [\op{L}_i,\op{A}_j]&=\i\hbar\epsilon_{ijk}\op{A}_k,\\
+        [\op{A}_i,\op{A}_j]&=-\frac{2\i\hbar \op{H}}{\mu}\epsilon_{ijk}\op{L}_k,
+        &\quad \hatbm{L}\cdot\hatbm{A}&=\hatbm{A}\cdot\hatbm{L}=0,\\
+        \hatbm{A}^2&=\kappa^2\one+\frac{2\op{H}}{\mu}(\hatbm{L}^2+\hbar^2\one).
+        \label{eq:RLsquare}
+    \end{alignat}
+\end{subequations}
+为推导平方恒等式，令 $\hatbm{Q}=\hatbm{P}\times\hatbm{L}-\i\hbar\hatbm{P}$，
+则$\hatbm{A}=\hatbm{Q}/\mu-\kappa\hatbm{X}/\op{R}$，
+\begin{equation}
+    \hatbm{Q}^2=\hatbm{P}^2(\hatbm{L}^2+\hbar^2\one),\qquad
+    \hatbm{Q}\cdot\frac{\hatbm{X}}{\op{R}}+\frac{\hatbm{X}}{\op{R}}\cdot\hatbm{Q}
+    =\frac{2}{\op{R}}(\hatbm{L}^2+\hbar^2\one).
+\end{equation}
+将这两式代入$\hatbm{A}^2$，逐步得到
+\begin{equation}
+    \begin{alignedat}{1}
+        \hatbm{A}^2 &=\frac{\hatbm{Q}^2}{\mu^2}+\kappa^2\one
+            -\frac{\kappa}{\mu}
+            \Bigp{\hatbm{Q}\cdot\frac{\hatbm{X}}{\op{R}}
+            +\frac{\hatbm{X}}{\op{R}}\cdot\hatbm{Q}}\\
+        &=\kappa^2\one+
+            \Bigp{\frac{\hatbm{P}^2}{\mu^2}-\frac{2\kappa}{\mu \op{R}}}
+            (\hatbm{L}^2+\hbar^2\one)
+            =\kappa^2\one+\frac{2\op{H}}{\mu}(\hatbm{L}^2+\hbar^2\one).
+    \end{alignedat}
+\end{equation}
+这就得到式\eqref{eq:RLsquare}，其中$\hbar^2$项来自量子排序。
+这里$[\op{R},\hatbm{L}^2]=[\hatbm{P}^2,\hatbm{L}^2]=0$，因此可将$\hatbm{L}^2+\hbar^2\one$统一移到右侧。
+
+其他对易式可逐分量用下面两式检验：
+\[
+    [\op{P}_i,f(\hatbm{X})]=-\i\hbar(\partial_i f)(\hatbm{X}),\qquad
+    \epsilon_{ijk}\epsilon_{imn}=\delta_{jm}\delta_{kn}-\delta_{jn}\delta_{km}.
+\]
+这些算符恒等式适用于上述点Coulomb势及其定义域\cite{runge}。
+
+\subsection{检验额外守恒量}
+\label{ss:rl-conservation}
+守恒关系$[\op{H},\hatbm{A}]=0$可用两个相消的对易子直接验证。
+令$\hatbm{n}=\hatbm{X}/\op{R}$，对位置函数有
+\begin{equation}
+    [\hatbm{P}^2,f(\hatbm{X})]
+    =-2\i\hbar\sum_j(\partial_j f)(\hatbm X)\op{P}_j-\hbar^2(\lapla f)(\hatbm X).
+\end{equation}
+取普通函数 $n_i(\bm r)=r_i/r$，其导数为
+$\partial_j n_i=\delta_{ij}/r-r_i r_j/r^3$、$\lapla n_i=-2r_i/r^3$（$r>0$）。
+分别代入位置算符 $\hatbm X$，即得到上式所需的乘法算符。
+再用$\hatbm{X}\times\hatbm{L}
+=\hatbm{X}(\hatbm{X}\cdot\hatbm{P})-\op{R}^2\hatbm{P}$，得到
+\begin{equation}
+    [\hatbm{P}^2,\hatbm{n}]
+    =\frac{2\i\hbar}{\op{R}^3}\hatbm{X}\times\hatbm{L}
+    +\frac{2\hbar^2}{\op{R}^3}\hatbm{X}.
+\end{equation}
+另一方面$[\hatbm{P}^2,\hatbm{Q}]=0$，而
+\begin{equation}
+    [\op{R}^{-1},\hatbm{Q}]
+    =-\frac{\i\hbar}{\op{R}^3}\hatbm{X}\times\hatbm{L}
+    -\frac{\hbar^2}{\op{R}^3}\hatbm{X}.
+\end{equation}
 因此
-\[
-	\mu\ddot{\bm r}=q\Bigp{\bm E+\frac{\bm v}c\times\bm B}.\CGS
-\]
-\section{电磁场中的Hamilton算符}
-在\Schr 方程的一次量子化中，使用了以下对应关系
-\begin{align}
-	\begin{cases}
-		E\to\i\hbar\pp t \\
-		\bm p\to-\i\hbar\nabla
-	\end{cases}
-\end{align}
-有电磁场时，电磁势表示为
-\[
-	A_\mu=(\bm A,\i\varphi)
-\]
-按照经典的最小电磁耦合原理，对电荷$q$的粒子，其$H-q\varphi$和$\bm p-\frac qc\bm A$之间的关系如同无电磁场时$H$和$\bm p$的关系一样。
+\begin{equation}
+    \begin{alignedat}{1}
+        \relax[\op{H},\hatbm{A}] &=-\frac{\kappa}{\mu}[\op{R}^{-1},\hatbm{Q}]
+            -\frac{\kappa}{2\mu}[\hatbm{P}^2,\hatbm{n}]\\
+        &=0.
+    \end{alignedat}
+\end{equation}
+动能与Coulomb势的两组贡献逐项相消，说明$\hatbm{A}$确实把同能态联系起来。
 
-由经典的最小电磁耦合原理和正则量子化规则\footnote{将$x$和$p$其正则动量量子化为满足对易子$\i\hbar$的算符。}，有电磁场时，量子化规则应当变为
-\begin{align}
-	\begin{cases}
-		E\to\i\hbar\pp t-q\varphi \\
-		\bm p\to-\i\hbar\nabla-\frac qc\bm A
-	\end{cases}
-\end{align}
-因而引入电磁场中带电粒子的Hamilton算符为
-\begin{align}
-	\hat H=\frac1{2\mu}\Bigp{\qo p-\frac qc\bm A}^2+q\varphi+V.
-\end{align}
-其中$\qo p=-\i\hbar\nabla$为正则动量算符，而机械动量算符$\qo P=\qo p-\frac qc\bm A$。
-电磁场中的\Schr 方程依然满足连续性方程
-\[
-	\pv\rho{t}+\div\bm j=0
-\]
-\paragraph{规范不变性}作下列变换
-\begin{align}
-	\begin{cases}
-		\bm A\to\bm A+\nabla f\\
-		\varphi\to\varphi-\frac1c\pv ft
-	\end{cases}
-\end{align}
-其中$f(\r,t)$为任意可微函数，具有磁通的量纲，则$\bm E$和$\bm B$均不改变，这就是电磁场的规范不变性。
-而对波函数作相应变换
-\begin{align}
-	\psi\to\psi\e^{\i qf/\hbar c}.
-\end{align}
-则$\psi'$满足的\Schr 方程，形式上与$\psi$相同。上式相因子依赖于空间坐标，所以称作电磁场下\Schr 方程的定域规范变换不变性。相应的$\rho,\bm j$和机械动量的平均值$\avg{\bm P}$规范不变；正则动量的平均值$\avg{\bm p}$一般会改变。此时概率流为
-\[
-\bm j=\frac{\hbar}{2\mu\i}(\psi^*\nabla\psi-\psi\nabla\psi^*)-\frac{q}{\mu c}\bm A\abs\psi^2.
-\]
-\paragraph{时间反演}在时间反演下，
-$\qo p\to-\qo p$，相应的需要$\bm A\to-\bm A$，方程才不变。
-\newpage
-\section{Landau能级}
-考虑质量为$M$电荷为$-e$的电子在磁场$\bm B=B\bm e_z$中运动。磁矢势取
-\[
-	\bm A=\frac12\bm B\times\r=\frac12(-By,Bx,0).
-\]
-电子的Hamilton算符
-\begin{align*}
-	\hat H\tot & =\frac1{2M}\Bigb{\Bigp{\hat p_x-\frac{eB}{2c}\hat y}^2+\Bigp{\hat p_y+\frac{eB}{2c}\hat x}^2+\hat p_z^2}\CGS\\
-	           & =\frac1{2M}(\hat p_x^2+\hat p_y^2+\hat p_z^2)+\frac{e^2B^2}{8Mc^2}(\hat x^2+\hat y^2)+\frac{eB}{2Mc}(\hat x\hat p_y-\hat y\hat p_x).
-\end{align*}
-将运动分解为$z$方向的自由运动和$xy$平面中的运动
-\begin{gather*}
-	\hat H\tot=\hat H+\omega_\Larmor\hat L_z+\frac{\hat p_z^2}{2M},\\
-	\hat H=\frac1{2M}(\hat p_x^2+\hat p_y^2)+\frac12M\omega_\Larmor^2(\hat x^2+\hat y^2)
-\end{gather*}
-其中Larmor频率
-\[
-	\omega_\Larmor:=\frac{eB}{2Mc}.
-\]
-$B$的线性项：表示电子的轨道磁矩与外磁场的相互作用；
-$B^2$的线性项：表示反磁项，对于自由电子，该项必须考虑。
+\section{束缚谱的代数推导}
+$\hatbm A$ 和 $\hatbm L$ 的各分量均保持能量本征子空间。
+在能量为 $E$ 的子空间内，$[\op{A}_i,\op{A}_j]$ 中 $\epsilon_{ijk}\op{L}_k$ 的系数为常数 $-2\i\hbar E/\mu$。
+对于束缚态，这个性质使求能谱的问题可以归结为两个角动量的合成。
 
-取守恒量完全集$\{\hat H,\hat L_z\}$的共同本征态 % ,\hat p_z
-\[
-	\psi(\rho,\varphi)=R(\rho)\e^{\i m\varphi},\quad m=0,\pm 1,\ldots
-\]
-代入$\hat H\psi=E\psi$
-\[
-	\Bigb{-\frac{\hbar^2}{2M}\Bigp{\dd[2]\rho+\frac1\rho\dd\rho-\frac{m^2}{\rho^2}}+\frac12M\omega_\Larmor^2\rho^2}R=ER.
-\]
-本征函数涉及合流超几何函数
-\[
-R_{n_\rho\abs m}(\rho)\propto\rho^{\abs m}F(-n_\rho,\abs m+1,\alpha^2\rho^2)\e^{-\alpha^2\rho^2/2},\quad \alpha:=\sqrt{\frac{M\omega_\Larmor}\hbar}=\sqrt{\frac{eB}{2\hbar  c}}.
-\]
-上述二维谐振子能量为$E=(2n_\rho+\abs m+1)\hbar\omega_\Larmor$。加上$\omega_\Larmor L_z$后，横向Landau能级为
-\begin{gather*}
-	E_N=(N+1)\hbar\omega_\Larmor,\quad N=(2n_\rho+\abs m+m)=0,2,4,\ldots\\
-	n_\rho=0,1,2,\ldots,\quad m=0,\pm 1,\pm 2,\ldots
-\end{gather*}
+在固定负能量$E<0$的子空间，定义
+\begin{equation}
+    \hatbm{D}=\sqrt{-\frac\mu{2E}}\hatbm{A},
+    \qquad \hatbm{M}_\pm=\frac{\hatbm{L}\pm\hatbm{D}}{2}.
+\end{equation}
+此处$\hatbm{D}$有角动量量纲。
 
-自由带电粒子在垂直于磁场的平面内($xy$平面)能谱是分立的，呈现为谐振子能谱，称为Landau能级。这是粒子在磁场中回旋运动时自身干涉而呈现的量子化现象，而沿磁场方向仍为自由运动，并未受到影响。
+由于$[\op{H},\op{A}_i]=0$，$\op{A}_i$把固定$E$子空间映到自身，
+而 $\op{H}$ 在这个子空间中作用为 $E\one$。
+由缩放定义，三组对易关系变为
+\begin{subequations}
+    \begin{alignat}{1}
+        [\op{L}_i,\op{L}_j]&=\i\hbar\epsilon_{ijk}\op{L}_k,\\
+        [\op{L}_i,\op{D}_j]&=\i\hbar\epsilon_{ijk}\op{D}_k,\\
+        [\op{D}_i,\op{D}_j]&=\i\hbar\epsilon_{ijk}\op{L}_k.
+    \end{alignat}
+\end{subequations}
+例如$[\op{M}_{+i},\op{M}_{+j}]$展开后有四项，
+\begin{equation}
+    \begin{alignedat}{1}
+        \relax[\op{M}_{+i},\op{M}_{+j}]
+        &=\frac14\bigp{[\op{L}_i,\op{L}_j]+[\op{L}_i,\op{D}_j]+[\op{D}_i,\op{L}_j]+[\op{D}_i,\op{D}_j]}\\
+        &=\frac{\i\hbar}{4}\epsilon_{ijk}(2\op{L}_k+2\op{D}_k)
+        =\i\hbar\epsilon_{ijk}\op{M}_{+k}.
+    \end{alignedat}
+\end{equation}
+$[\op{M}_{+i},\op{M}_{-j}]$中的$\hatbm{L}$项和$\hatbm{D}$项分别抵消。
 
-磁场中的自由带电粒子的磁附加能为正值，具有反磁性。
-\paragraph{Landau规范}给定磁场的磁矢势具有一定的规范自由度。当$\bm A$被添加一个标量场的梯度时，波函数的局部相位也会随之变化，Hamilton算符与波函数协同变换，系统的物理性质并不受选定的规范影响。在Landau规范中，磁矢势取为
-\[
-	\bm A=(-By,0,0)
-\]
-Hamilton量
-\[
-	\hat H=\frac1{2M}\Bigb{\Bigp{\hat p_x-\frac{eB}c\hat y}^2+\hat p_y^2}.
-\]
-横向Hamilton量不显含$x$，故$\hat p_x$守恒（完整三维问题还包括自由的$z$运动，$\hat p_z$也守恒），取守恒量完全集$\{\hat H,\hat p_x\}$的共同本征态
-\[
-	\phi(x,y)=\e^{\i p_xx/\hbar}\phi(y),\quad-\infty<p_x<+\infty
-\]
-进而
-\[
-	\frac1{2M}\Bigb{\Bigp{p_x-\frac{eB}cy}^2-\hbar^2\dd[2]y}\phi(y)=E\phi(y).
-\]
-令$y_0=cp_x/eB$
-\[
-	-\frac{\hbar^2}{2M}\phi''+\frac12M\omega_\cyc^2(y-y_0)^2\phi=E\phi.
-\]
-回旋(cyclotron)角频率
-\[
-	\omega_\cyc=\frac{eB}{Mc}=2\omega_\Larmor
-\]
-上述描述的是一个一维谐振子，平衡点在$y_0$点，比前面的合流超几何函数要简单很多。
+因此得到两组彼此对易的角动量。
+\begin{equation}
+    [\op{M}_{\pm i},\op{M}_{\pm j}]=\i\hbar\epsilon_{ijk}\op{M}_{\pm k},\qquad
+    [\op{M}_{+i},\op{M}_{-j}]=0.
+\end{equation}
+由 $\hatbm{L}\cdot\hatbm{D}=\hatbm{D}\cdot\hatbm{L}=0$，有 $\hatbm{M}_+^2=\hatbm{M}_-^2$。
 
-能量本征值
+两组角动量量子数因而相同，记为 $j$。在量子数为 $j$ 的子空间内，
+\begin{equation}
+    \hatbm{M}_\pm^2=\frac14(\hatbm{L}^2+\hatbm{D}^2)
+    =\hbar^2j(j+1)\one.
+\end{equation}
+另一方面，将$\hatbm{A}^2$恒等式乘$-\mu/(2E)$，并与上式联立，
+\begin{equation}
+    \hatbm{L}^2+\hatbm{D}^2=\biggp{-\frac{\mu\kappa^2}{2E}-\hbar^2}\one
+    =4\hbar^2j(j+1)\one.
+\end{equation}
+把正整数 $n=2j+1$ 称为主量子数(principal quantum number)，便得到束缚谱。
+\begin{theorem}{Coulomb束缚能谱}{qm-coulomb-spectrum}
+    在点核、非相对论Coulomb模型的通常自伴实现中，
+    内部束缚态的能量为
+    \begin{equation}
+        E_n=-\frac{\mu\kappa^2}{2\hbar^2n^2}
+            =-\frac{\mu c^2(Z\alpha)^2}{2n^2},
+        \qquad n=1,2,\ldots.
+        \label{eq:hydrogen}
+    \end{equation}
+    $\mu$为电子与核的约化质量；未计入自旋时，
+    固定$n$下的角动量为$\ell=0,\ldots,n-1$。
+\end{theorem}
+
+整数$n$来自恒等式
+$4j(j+1)+1=(2j+1)^2$：
+\begin{equation}
+    -\frac{\mu\kappa^2}{2E}
+    =\hbar^2\bigb{4j(j+1)+1}
+    =\hbar^2n^2.
+\end{equation}
+每一组角动量具有$2j+1=n$个投影态，
+两个彼此对易的角动量因此构成$n\times n$维子空间。
+
+\begin{corollary}[氢原子束缚能级的简并度]
+固定主量子数 $n$，合成 $\hatbm{L}=\hatbm{M}_++\hatbm{M}_-$ 给出 $\ell=0,1,\ldots,n-1$，
+每个 $\ell$ 有 $2\ell+1$ 个磁量子数 $m$。因此空间态的总数是
+\begin{equation}
+    \sum_{\ell=0}^{n-1}(2\ell+1)=n^2.
+\end{equation}
+计入两个电子自旋投影且忽略自旋耦合时，总简并度为 $2n^2$。
+\end{corollary}
+\begin{figure}[htbp]
+    \centering\tikzfigure[width=.47\linewidth]{hydrogen-levels}
+    \caption{非相对论氢原子的前四层束缚态。纵向按 $-1/n^2$ 排列，横向按轨道角动量分列。红、青箭头各举一个 Balmer 通道：$3p\to2s$ 对应 $\mathrm H_\alpha$，$4d\to2p$ 对应 $\mathrm H_\beta$。}\label{fig:hydrogen-levels}
+\end{figure}
+标准Coulomb问题的束缚态(bound state)记为$\ket{n\ell m}$，其中$n$标记能量，$\ell,m$标记轨道角动量。
+位置与动量的矩阵元可结合这些量子数和算符恒等式进一步求取。
+$E\geq0$的连续谱也不适用上述两个紧致角动量代数。
+
+\section{谱线、同位素位移与尺度检验}
+光谱仪测量波长。选取一对允许跃迁的能级，将能量差换算为光子波长，就可以把预测与观测逐线比较。
+把氢换成氘时，核电荷相同，约化质量却变了；比较两种原子的同一条谱线，就能单独检验两体约化留下的质量因子。
+
+$R_M$表示核质量为$M$时的Rydberg常数，$R_\infty$表示无限重核的极限；二者量纲均为逆长度。
+
+若忽略光子反冲和高阶修正，从$n_i$到$n_f<n_i$发射的频率满足
+\begin{equation}
+    \frac1\lambda=R_MZ^2\biggp{\frac1{n_f^2}-\frac1{n_i^2}},\qquad
+    R_M=\frac\mu{m_\elec}R_\infty,
+    \quad R_\infty=\frac{m_\elec e^4}{8\varepsilon_0^2h^3c}.
+\end{equation}
+这里从能量差到波数的步骤是
+\begin{equation}
+    \frac{E_{n_i}-E_{n_f}}{hc}
+    =\frac{\mu Z^2e^4}{32\pi^2\varepsilon_0^2\hbar^2hc}
+        \biggp{\frac1{n_f^2}-\frac1{n_i^2}}.
+\end{equation}
+用$h=2\pi\hbar$整理系数，便得到上述$R_M$。
+固定 $n_f=2$，图\ref{fig:hydrogen-levels}中越来越密的上能级给出图\ref{fig:balmer-lines}的 Balmer 系列。令 $n_i\to\infty$ 得到短波极限。
+\begin{figure}[htbp]
+    \centering\tikzfigure[width=.80\linewidth]{balmer-lines}
+    \caption{氢的 Balmer 发射线（真空波长）。数字标出初态 $n_i$，红线 $\mathrm H_\alpha$ 和青线 $\mathrm H_\beta$ 对应图\ref{fig:hydrogen-levels}中的同色箭头；左侧虚线标出约 $365\,\mathrm{nm}$ 的系限。}\label{fig:balmer-lines}
+\end{figure}
+将各实测波数除以括号中的整数因子后，
+若模型适用，应得到同一个$R_MZ^2$，这比逐条拟合独立能量更强。
+
+\begin{example}{同位素谱线的质量依赖}{qm-isotope}
+    对同一核电荷$Z$的两个核质量$M_1,M_2$，
+    同一电子跃迁的最低阶频率比为
+    \begin{equation}
+        \frac{\nu(M_2)}{\nu(M_1)}
+        =\frac{\mu(M_2)}{\mu(M_1)},
+        \qquad
+        \mu(M)=\frac{m_\elec}{1+m_\elec/M}.
+    \end{equation}
+    在$M\gg m_\elec$时展开分母，
+    \begin{equation}
+        \frac{\nu(M_2)-\nu(M_1)}{\nu_\infty}
+        \simeq m_\elec\biggp{\frac1{M_1}-\frac1{M_2}}.
+    \end{equation}
+    因而较重同位素的频率更高、波长更短。
+    这个质量依赖由质心分离产生，不需要改变电子电荷或Coulomb耦合。
+\end{example}
+
+有限核质量通过约化质量改变 $R_M$，产生同位素位移(isotope shift)。
+精密谱还包括吸收发射时的整体反冲、精细结构、超精细结构、核大小和辐射修正。
+谱线强弱则需要\chapref{ch:transitions}的跃迁矩阵元。
+
+同能的 $2s$ 和 $2p$ 态如何在空间上区别？写 $\psi_{n\ell m}=R_{n\ell}(r)Y_{\ell m}(\theta,\phi)$。
+这里的球谐函数(spherical harmonic) $Y_{\ell m}$ 是角动量态 $\ket{\ell,m}$ 在方向上的振幅。
+其模平方在整个球面上的积分为 1，因此球对称态可取 $Y_{00}=1/\sqrt{4\pi}$。
+对与方位角 $\phi$ 无关的函数，$\op{L}_z=-\i\hbar\partial_\phi$ 给出 $m=0$，
+而 $\hatbm{L}^2$ 的作用是 $-\hbar^2(\sin\theta)^{-1}\partial_\theta(\sin\theta\,\partial_\theta)$。
+将它作用于 $\cos\theta$ 得 $2\hbar^2\cos\theta$，对应 $\ell(\ell+1)=2$。
+由球对称性，单位径向量三个分量的平方在球面上的平均值相同，而平方和为 1。
+故 $z$ 分量的平方 $\cos^2\theta$ 的球面平均值为 $1/3$，积分为 $4\pi/3$。
+归一化便得到 $Y_{10}=\sqrt{3/(4\pi)}\cos\theta$，在赤道过零。
+在球坐标中，动能分为径向项和角向项 $\hatbm{L}^2/(2\mu r^2)$。
+取 $\hatbm{L}^2$ 的本征值后，径向方程为
+\begin{equation}
+    -\frac{\hbar^2}{2\mu}
+       \biggp{R_{n\ell}''+\frac{2}{r}R_{n\ell}'
+       -\frac{\ell(\ell+1)}{r^2}R_{n\ell}}
+       -\frac{\kappa}{r}R_{n\ell}=E_n R_{n\ell}.
+    \label{eq:hydrogen-radial}
+\end{equation}
+可从方程逐步重建图中的曲线。以 $n=2$ 为例，令 $\rho=r/a_Z$。
+远处的衰减率 $\sqrt{-2\mu E_2}/\hbar=1/(2a_Z)$，故先提取指数
+$R_{2\ell}=\e^{-\rho/2}w(\rho)$。用式\eqref{eq:hydrogen}中的 $E_2$ 代入并约去指数，得
+\begin{equation}
+    \rho w''+(2-\rho)w'+\biggp{1-\frac{\ell(\ell+1)}{\rho}}w=0,
+\end{equation}
+其中撇号表示对 $\rho$ 求导。试取 $w=c_0+c_1\rho$，其中 $c_0,c_1$ 是待定系数。$\ell=0$ 时条件为 $2c_1+c_0=0$，
+所以 $R_{20}$ 正比于 $(2-\rho)\e^{-\rho/2}$。$\ell=1$ 时条件为 $c_0=0$，
+所以 $R_{21}$ 正比于 $\rho\e^{-\rho/2}$。前者在 $\rho=2$ 过零，后者在正半径上没有零点。
+
+把角向概率积遍整个球面，球壳概率可写为 $P_{n\ell}(r)\d r$，其中
+$P_{n\ell}(r)=r^2|R_{n\ell}(r)|^2$。归一化时，对各幂次可反复分部积分，得到
 \[
-	E_n=\Bigp{n+\frac12}\hbar\omega_\cyc,\quad n=0,1,2,\ldots
+    \int_0^\infty \rho^k\e^{-\rho}\d\rho=k!,\qquad k=0,1,2,\ldots .
 \]
-与$E_N\equiv(2n+1)\hbar\omega_\Larmor$正对应，相应的能量本征函数
-\[
-	\phi_{y_0n}\propto H_n(\alpha(y-y_0))\e^{-\alpha^2(y-y_0)^2/2},\quad\alpha=\sqrt{\frac{M\omega_\cyc}\hbar}.
-\]
-能级简并度$f_N=\infty$，能级依赖于$n$不依赖$y_0$；本征函数依赖于$n$和$y_0=cp_x/eB\in(-\infty,+\infty)$。
+前三个径向分布由此写成
+\begin{equation}
+    a_Z P_{1s}=4\rho^2\e^{-2\rho},\qquad
+    a_Z P_{2s}=\tfrac18\rho^2(2-\rho)^2\e^{-\rho},\qquad
+    a_Z P_{2p}=\tfrac1{24}\rho^4\e^{-\rho}.
+\end{equation}
+$1s$ 态的体概率密度从原点向外按指数衰减。乘上球壳的面积 $4\pi r^2$ 后，径向概率密度在 $r=a_Z$ 达到峰值（图\ref{fig:hydrogen-radial}）。
+\begin{figure}[htbp]
+    \centering\includegraphics[width=.62\linewidth]{figures/hydrogen_radial.pdf}
+    \caption{氢样原子的 $1s$、$2s$、$2p$ 径向分布。两个横坐标之间的曲线下面积给出电子落在相应球壳内的概率。$2s$ 曲线在 $r/a_Z=2$ 处触及横轴，标出两个峰之间的径向节点。}
+    \label{fig:hydrogen-radial}
+\end{figure}
 
-从上面看，在均匀磁场中运动的电子，可以出现在无穷远处($y_0\to\pm\infty$)，即为非束缚态($x$方向为平面波，也是非束缚态)，但电子的能级却是离散的。而通常一个二维非束缚态粒子的能量则是连续的。
-\paragraph{Landau能级讨论}
-\begin{compactenum}
-	\item 能级间距
-		\[
-			\D E=\frac{\hbar eB}{\mu c},\CGS
-		\]
-		只和磁场强度有关，和粒子运动能量无关。此间距是将电子局限在磁力线直径
-		\[
-			2\rho_B=2\sqrt{\frac{\hbar c}{eB}}\CGS
-		\]
-		范围内，按不确定关系所得电子最小动能的8倍。
-	\item 磁场中自由电子谐振子运动的固有频率是
-		\[
-			\omega=\frac{eB}{\mu c}.\CGS
-		\]
-		此频率不含$\hbar$，有经典图像，是Lorentz力在$\rho_B$半径上产生回旋运动的频率。
-	\item 由于能级简并度为$f_n=\infty$；Landau能级的简并度与规范选择无关。
+利用Hellmann--Feynman关系（见\thmref{thm:qm-hellmann-feynman}及其证明）对$\kappa$求导，
+\begin{equation}
+    -\ave{\op{R}^{-1}}=\frac{\partial E_n}{\partial\kappa}
+    =-\frac{\mu\kappa}{\hbar^2n^2},\qquad
+    \ave{\op{R}^{-1}}=\frac1{a_Zn^2}.
+\end{equation}
+要分别求动能与势能的均值，记 $\op{T}=\hatbm P^2/(2\mu)$、$\op{V}=-\kappa/\op R$，并引入缩放生成元 $\op G=(\hatbm X\cdot\hatbm P+\hatbm P\cdot\hatbm X)/2$。由正则对易关系，
+\begin{subequations}
+    \begin{alignat}{2}
+        [\op{G},\op{X}_i]&=-\i\hbar \op{X}_i,
+        &\quad [\op{G},\op{P}_i]&=\i\hbar \op{P}_i,\\
+        \frac{\i}{\hbar}[\op{H},\op{G}] &=2\op{T}-\hatbm{X}\cdot(\grad V)(\hatbm X).
+    \end{alignat}
+\end{subequations}
+定态中 $\ave{\dot{\op G}}=0$。对 Coulomb 势 $V(\bm r)=-\kappa/r$，有 $\hatbm X\cdot(\grad V)(\hatbm X)=-\op V$，故 $2\ave{\op T}+\ave{\op V}=0$。这是位力定理(virial theorem)在此势中的形式。联立 $E_n=\ave{\op T}+\ave{\op V}$，得到 $\ave{\op T}=-E_n$、$\ave{\op V}=2E_n$。
 
-		由于$N=2n_\rho+\abs m+m$，固定$n_\rho$时，所有$m\leqslant 0$的态所对应的能量都相同。无穷简并对应无限平面；有限面积$A$内，每个Landau能级每种自旋的体态数约为$eBA/(2\pi\hbar c)$（Gauss单位制），边界会改变边缘态。
-\end{compactenum}
-\section{量子Hall效应}
-本节Hall电压和电阻的公式采用SI单位制。
-在导体(半导体)片上通电流，并在垂直方向加上磁场，这样载流子受到磁场偏转力为$q\bm v\times\bm B$，会使载流子产生垂直于电流方向的运动，并在样品两侧堆积形成横向电场抵消掉磁场的偏转力，形成Hall电压
-\[
-U=\frac1{\rho q}\frac{IB}d.
-\]
-其中$\rho$为载流子密度。Hall电阻
-\[
-R_\Hall=\frac UI=\frac B{\rho qd}.
-\]
-\paragraph{整数Hall效应}
-1980年K.von Klitzing 在测量Si-SiO$_2$界面二维电子气在强磁场下的Hall效应时发现(随后在GaAs/AlGaAs调制掺杂异质结界面也观测到)。\footnote{1980, Klaus von Klitzing, 德国；1985年Nobel物理学奖。}
+这个推导要求相应矩有限且边界项为零。有硬墙时，位力关系还包含壁面压力的贡献。
+由此典型速度$\sqrt{\ave{\hatbm{P}^2}}/\mu=Z\alpha c/n$，
+非相对论近似的自然控制参数便是$Z\alpha/n$，对于低能级通常要求$Z\alpha\ll1$。
 
-低温下二维电子气在强磁场中出现的Hall电阻(电导)率的量子化现象，即在磁场固定的条件下，$\rho_{xy}$和界面电子密度(正比于栅压)的关系在反比的规律上出现了一系列的台阶，台阶处所对应的Hall电阻严格地符合
-\[
-	\rho_{xy}=\frac h{ne^2},\quad n=1,2,3,\ldots
-\]
-平台处的霍尔电阻只和最基本的物理常数$h$和$e$有关.所测得的霍尔电阻值精确度极高，在$\num{e-7}$以内，在低温强磁场下出现的这一量子化现象，与二维电子气的朗道能级有关。
-
-意义：在计量学上的意义很大
-\begin{compactenum}
-	\item 用它能比较简单地测量出物理学中的基本常数，并且精度极高；
-	\item 可以作为电阻高精确度标准。
-\end{compactenum}
-% \paragraph{分数Hall效应\footnote{1981年, Robert B. Laughlin, Horst L. Stormer, Daniel C.Tsui, 美国；1998年Nobel物理学奖}}
-% 发现当填充因子$p/q$~(定义为二维电子浓度$N_\mathrm{2D}$除以自旋极化朗道能级简并度$eB/hc$，$q$总是奇数)时，Hall电阻出现与磁场无关的平台,在出现平台的磁场范围内,纵向电阻出现极小.除了\sfrac13, \sfrac23,还观察\sfrac43, \sfrac53, \sfrac15, \sfrac25等等，这被称为分数量子Hall效应。
-\paragraph{量子反常Hall效应}
-量子反常霍尔效应不同于量子霍尔效应，它不依赖于强磁场而由材料本身的自发磁化产生。在零磁场中就可以实现量子霍尔态，更容易应用到人们日常所需的电子器件中。
-
-自1988年开始，就不断有理论物理学家提出各种方案，然而在实验上没有取得任何进展。
-
-2013年，由清华大学物理系实验团队和中科院物理研究所组成的实验团队从实验上首次观测到量子反常霍尔效应。美国Science杂志于2013年3月14日在线发表这一研究成果。
-% \paragraph{自旋Hall效应\footnote{理论预言：1971年, Mikhail Dyakonov and Vladimir Perel, the Ioffe Physico-Technical Institute in Leninggrad}}
-% J. E. Hirsch在1999年的论文中首次提出了自旋Hall效应的概念，提出自旋流可由杂质对自旋的不对称散射产生。
-2004年得到实验验证。
+\checkpoint{为什么一般中心势只有$2\ell+1$的旋转简并，却不能推出氢的$n^2$简并？}{旋转只联系同一$\ell$下的$m$。
+    Coulomb问题的$\op{A}_i$还联系不同$\ell$，两个角动量代数才把所有$\ell=0,\ldots,n-1$放在同一能量中。}
+\reading{Coulomb额外对称性参照Runge--Lenz代数资料\cite{runge}；
+    空间波函数、非相对论能谱及其精细结构修正可对照MIT 8.06讲义2第2.1至2.4节\cite{mitfine}。下一章研究偏离精确可解模型时怎样给出受控预测。}

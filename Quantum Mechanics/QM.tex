@@ -1,37 +1,93 @@
 \documentclass{../thunote}
-
 \input{../mathdef.tex}
-
-\let\oldr\r
-\renewcommand*{\r}{\bm r}						% 坐标向量
-\newcommand{\qo}[1]{\bm{\hat #1}\!\mathop{}}	% 量子力学中的向量算符
-\newcommand{\cmm}[2]{[\hat #1,\hat #2]}		% 对易子
-\newcommand{\acmm}[2]{\{\hat #1,\hat #2\}}
-
-\newcommand{\Larmor}{\mathrm L}
-\newcommand{\Hall}{\mathrm H}
-
-\newcommand{\cyc}{\mathrm c}
-\DeclareMathOperator{\Cle}{C}
-
+\externaldocument[tikz:]{figures/tikz}
+\usepackage{longtable,array}
+\geometry{margin=2.5cm}
+\newcommand{\op}[1]{\hat{#1}}
+\newcommand{\one}{\mathbb I}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\Dom}{\mathcal D}
+\newcommand{\up}{\mathord{\uparrow}}
+\newcommand{\dn}{\mathord{\downarrow}}
+% Physical labels are ordinary roman atoms, not function operators.
+\newcommand{\stopping}{\mathrm{stop}}
+\newcommand{\interaction}{\mathrm{int}}
+\newcommand{\cm}{\mathrm{cm}}
+\newcommand{\total}{\mathrm{tot}}
+\newcommand{\effective}{\mathrm{eff}}
+\newcommand{\trial}{\mathrm{trial}}
+\newcommand{\mixed}{\mathrm{mix}}
+\newcommand{\pathstate}{\mathrm{path}}
+\newcommand{\geometric}{\mathrm{geom}}
+\newcommand{\nonadiabatic}{\mathrm{nonad}}
+\newcommand{\incoming}{\mathrm{in}}
+\newcommand{\outgoing}{\mathrm{out}}
+\newcommand{\Born}{\mathrm{B}}
+\newcommand{\boxnorm}{\mathrm{box}}
+\newcommand{\elastic}{\mathrm{el}}
+\newcommand{\spatial}{\mathrm{spatial}}
+\newcommand{\FW}{\mathrm{FW}}
+\newcommand{\kinetic}{\mathrm{kin}}
+\newcommand{\spinorbit}{\mathrm{so}}
+\newcommand{\hyperfine}{\mathrm{hfs}}
+\newcommand{\spinlabel}{\mathrm{spin}}
+\newcommand{\antisym}{\mathrm{A}}
+\newcommand{\drive}{\mathrm{d}}
+\newcommand{\vac}{\mathrm{vac}}
+\DeclareMathOperator{\Var}{Var}
+\newcommand{\reading}[1]{
+    \par\medskip
+    \begingroup
+        \small\noindent\textbf{参考与衔接}\quad #1
+        \par
+    \endgroup
+}
+\newcommand{\checkpoint}[2]{
+    \begin{example}{自检}{}
+        #1
+        \par\smallskip
+        \textbf{解答}\quad #2
+    \end{example}
+}
+\allowdisplaybreaks[1]
+\tcbset{lines before break=4}
+\ctexset{
+    chapter={beforeskip=18pt,afterskip=20pt},
+    section={beforeskip=2.5ex,afterskip=1.2ex},
+    subsection={beforeskip=2ex,afterskip=0.8ex}
+}
+\AddToHook{cmd/normalsize/after}{
+    \setlength{\abovedisplayskip}{8pt plus 2pt minus 3pt}
+    \setlength{\belowdisplayskip}{8pt plus 2pt minus 3pt}
+    \setlength{\abovedisplayshortskip}{4pt plus 2pt minus 2pt}
+    \setlength{\belowdisplayshortskip}{6pt plus 2pt minus 2pt}
+}
+\hypersetup{pdftitle={量子力学},pdfauthor={Dait}}
 \begin{document}
-
-\title{量子力学\\Quantum Mechanics}
-\maketitle
-
-\frontmatter
-\tableofcontents
-
-\mainmatter
-\input{chapters/chap00.tex}
-\input{chapters/chap01.tex}
-\input{chapters/chap02.tex}
-\input{chapters/chap03.tex}
-\input{chapters/chap04.tex}
-\input{chapters/chap05.tex}
-\input{chapters/chap06.tex}
-\input{chapters/chap07.tex}
-\input{chapters/chap08.tex}
-\input{chapters/chap09.tex}
-
+    \title{量子力学\\Quantum Mechanics}
+    \maketitle
+    \frontmatter
+    \tableofcontents
+    \input{chapters/symbols.tex}
+    \mainmatter
+    \input{chapters/chap00.tex}
+    \input{chapters/chap01.tex}
+    \input{chapters/chap02.tex}
+    \input{chapters/chap03.tex}
+    \input{chapters/chap04.tex}
+    \input{chapters/chap05.tex}
+    \input{chapters/chap06.tex}
+    \input{chapters/chap07.tex}
+    \input{chapters/chap08.tex}
+    \input{chapters/chap09.tex}
+    \input{chapters/chap10.tex}
+    \input{chapters/chap11.tex}
+    \input{chapters/chap12.tex}
+    \input{chapters/chap13.tex}
+    \input{chapters/chap14.tex}
+    \input{chapters/chap15.tex}
+    \appendix
+    \input{chapters/checks.tex}
+    \backmatter
+    \input{chapters/references.tex}
 \end{document}
