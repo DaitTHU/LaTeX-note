@@ -8,7 +8,7 @@
     
     和某些教材上使用并矢张量的标记法不同，本文使用的是球谐函数表示（通过球谐函数导出也更为自然和简洁）。
 
-    \item \secref{sec:dielectric}介绍了电介质(dielectrics)及含电介质的边值问题。并扼要介绍了分子极化率(atomic polarizability)和宏观电极化率 (susceptibility)的主要特征及彼此之间的关系，导出了 Clausius-Mossotti 方程。最后介绍了含电介质时系统的能量表示。
+    \item \secref{sec:dielectric}介绍了电介质(dielectrics)及含电介质的边值问题。并扼要介绍了分子极化率(atomic polarizability)和宏观电极化率 (susceptibility)的主要特征及彼此之间的关系，导出了 Clausius--Mossotti 方程。最后介绍了含电介质时系统的能量表示。
 \end{compactenum}
 
 \section{多极矩展开}
@@ -290,13 +290,14 @@ $\sigma$是宏观表面电荷密度（不包含极化电荷$\sigma_\pol$）。
 
 我们可以推广之前介绍的方法来解决电介质的边界问题。
 \begin{example}{电介质中的镜像电荷}{method of images, dielectrics}
-    半无限电介质$\varepsilon_1$与半无限电介质$\varepsilon_2$被隔开，
-    考虑嵌入在$\varepsilon_1$中的点电荷$q$距离边界$d$，如图所示。
-    \begin{center}
-        \tikzfigure{method-of-images-dielectrics}
-        \captionof{figure}{电介质中的电荷}
+    两种均匀电介质以$z=0$为界，$z>0$一侧的介电常数为$\varepsilon_1$，$z<0$一侧为$\varepsilon_2$，界面没有自由电荷。
+    点电荷$q$位于$z$轴上的$z=d$处。场点$(\rho,z)$到真电荷及其镜像位置的距离分别为
+    $R_1=\sqrt{\rho^2+(z-d)^2}$和$R_2=\sqrt{\rho^2+(z+d)^2}$。
+    \begin{notecaptionblock}
+        \includegraphics[width=.98\linewidth]{figures/image_charge_dielectrics.pdf}
+        \captionof{figure}[两种电介质界面附近的电场线]{两种电介质中的电场线（$xz$截面）。竖线为界面$z=0$，白点为正电荷$q$，灰点标出计算介质1中的场所用的镜像电荷$q'$的位置。两图取相同的界面交点以比较折角。}
         \label{fig:method of images, dielectrics}
-    \end{center}
+    \end{notecaptionblock}
     为了计算$z>0$部分的电位，在$z<0$部分与$q$对称的位置放置镜像电荷$q'$：
     \[
         \Phi_1=\frac1{4\pi\varepsilon_1}\biggp{\frac q{R_1}+\frac{q'}{R_2}},\quad z>0;
@@ -320,16 +321,16 @@ $\sigma$是宏观表面电荷密度（不包含极化电荷$\sigma_\pol$）。
             q''=\frac{2\varepsilon_2}{\varepsilon_2+\varepsilon_1}q
         \end{cases}
     \end{align*}
-    $\varepsilon_2>\varepsilon_1$时，$q,q'$符号相反，$\varepsilon_1$内的电场线外凸；
-    
-    $\varepsilon_2<\varepsilon_1$时，$q,q'$同号，$\varepsilon_1$内电场线内凸。
+    令$\theta_i$为界面处介质$i$内电场线与法线的夹角，取$0\leq\theta_i<\pi/2$。
+    由切向电场和法向电位移连续，有$\tan\theta_2=(\varepsilon_2/\varepsilon_1)\tan\theta_1$。
+    因此在\figref{fig:method of images, dielectrics} 中，斜穿界面进入介质2的电场线在左图偏离法线，在右图向法线偏折。在介质2中，电势正比于$1/R_1$，故电场线沿直线延伸。
     \tcblower 
     由式\eqref{eqn:Pn2-Pn1}，$z=0$上极化电荷面密度为
     %\bm P_i=(\varepsilon_i-\varepsilon_0)\bm E_i=-(\varepsilon_i-\varepsilon_0)\grad\Phi(0^\pm).
     \[
         \sigma_\pol=P_{2z}-P_{1z}=-\frac q{2\pi}\frac{\varepsilon_0(\varepsilon_2-\varepsilon_1)}{\varepsilon_1(\varepsilon_2+\varepsilon_1)}\frac d{(\rho^2+d^2)^{3/2}}.
     \]
-    当$\varepsilon_2\gg\varepsilon_1$时，介质$\varepsilon_2$表现很像导体($q'=-q$)。
+    当$\varepsilon_2/\varepsilon_1\to\infty$时，$q'\to-q$，介质1内的电场趋于接地导体平面前的电场。
 \end{example}
 \begin{example}{匀强电场中的介质球}{dielectric sphere in uniform electric field}
     半径为$a$的介质球$\varepsilon$在匀强电场$E_0$中。其电势
@@ -395,7 +396,7 @@ $\sigma$是宏观表面电荷密度（不包含极化电荷$\sigma_\pol$）。
 \end{definition}
 
 \begin{theorem}
-    {Clausius-Mossotti方程}{Clausius-Mossotti equation}
+    {Clausius--Mossotti方程}{Clausius-Mossotti equation}
     分子极化率$\gamma_\molecule$与电极化率$\chi_\electric$之间的关系为
     \begin{equation}
         \gamma_\molecule=\frac3N\frac{\chi_\electric}{\chi_\electric+3}=\frac3N\frac{\varepsilon_\relative-1}{\varepsilon_\relative+2}.

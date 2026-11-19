@@ -9,7 +9,7 @@
 % 其次把地球-电离层系统当作谐振腔处理，接着简短地讨论电介质波导。我们还阐述波导中任意场的简正模展开，并应用到定域源产生的场。本章最后把简正模展开进一步应用到用变分法处理波导中障碍物问题。
 
 \section{导体表面和内部的场}
-理想导体(perfect conductor)的零电阻条件给出内部$\bm E=0$，由Faraday定律只能推出$\p\bm B/\p t=0$，即初始磁场保持不变。超导体(superconductor)在Meissner态还会排斥体内磁场（表面穿透层除外），因此零电阻本身并不等价于Meissner效应。下面讨论非零频率的谐振场，或假定导体内部初始磁场为零。
+理想导体(perfect conductor)的零电阻条件给出内部$\bm E=0$，由Faraday定律只能推出$\p\bm B/\p t=0$，即初始磁场保持不变。超导体(superconductor)在Meißner态还会排斥体内磁场（表面穿透层除外），因此零电阻本身并不等价于Meißner效应。下面讨论非零频率的谐振场，或假定导体内部初始磁场为零。
 
 \paragraph{理想导体}
 
@@ -289,11 +289,11 @@ TM波和TE波的横磁场和横电场的关系如下：
 
 在内尺寸为$a,b$的矩形波导中（不失一般性取$a>b$），
 如\figref{fig:rectangle waveguide} 所示：
-\begin{center}
+\begin{notecaptionblock}
     \tikzfigure{rectangular-waveguide}
     \captionof{figure}{矩形波导}
     \label{fig:rectangle waveguide}
-\end{center}
+\end{notecaptionblock}
 采用直角坐标，
 波动方程\eqref{eqn:laplat+kc2}为：
 \begin{equation}
@@ -321,9 +321,8 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 \end{equation}
 其中$m,n$不同时为0，则TE模式的最低截止频率为TE$_{10}$，对应的
 \[
-    \omega_{10}=\frac\pi{\sqrt{\mu\varepsilon}a},\quad\lambda_{10}=2a\frac{\sqrt{\mu\varepsilon}}c.
+    \omega_{10}=\frac\pi{\sqrt{\mu\varepsilon}a},\quad\lambda_{10}=\frac{2\pi}{\omega_{10}\sqrt{\mu\varepsilon}}=2a.
 \]
-% 在自由空间(即波导中没有介质)中正好$\lambda_{10}=2a$。
 由\eqref{eqn:TE field psi}和\eqref{eqn:Et=EzBz}，场的表达式为：
 \begin{subequations}
     \begin{align}
@@ -337,13 +336,14 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 \end{subequations}
 虚数单位$\i$说明传播方向上$\bm H_\transv,\bm E_\transv$与$H_z$有$\ang{90}$的相位差。
 
-由此便可画出不同TE模式的电场线和磁场线。如\figref{fig:waveguide rect TE} 所示为$xy$截面，蓝色实线是电场线、红色虚线是磁场线(的投影)。
-注意磁场线不接触内壁，而是会在$z$方向延伸形成回路。
-\begin{center}
+在垂直于传播方向的截面内，$\bm E_\transv$与$\bm H_\transv$处处正交。
+\figref{fig:waveguide rect TE} 用深蓝实线表示横向电场、橙色虚线表示横向磁场。理想导体壁上，电场沿法向，磁场沿切向。
+TE模式还含有$H_z$，图中只画出磁场的横向分量。
+\begin{notecaptionblock}
     \includegraphics[width=0.8\linewidth]{figures/waveguide_rect_TE.pdf}
     \captionof{figure}{矩形波导的前几个TE模式}
     \label{fig:waveguide rect TE}
-\end{center}
+\end{notecaptionblock}
 可见，TE$_{m0}$模式就是TE$_{10}$模式在$x$方向上复制$m$倍。
 同样地，
 TE$_{0n}$模式就是TE$_{01}$模式在$y$方向上复制$n$倍；
@@ -354,7 +354,7 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
 \begin{equation}
     \psi_{mn}=A\sin(k_xx)\sin(k_yy),\quad k_x=\frac{m\pi}a,\;k_y=\frac{n\pi}b.
 \end{equation}
-截止频率表达式同TM模，但由于$\psi\not\equiv 0$，故$m,n$均不能为0，最低模式为TM$_{11}$。
+截止频率表达式同TE模，但由于$\psi\not\equiv 0$，故$m,n$均不能为0，最低模式为TM$_{11}$。
 \begin{subequations}
     \begin{align}
         H_x&=-\i\frac{\omega\varepsilon k_y}{k_\cutoff^2}E_0\sin(k_xx)\cos(k_yy)\e^{\i(k_zz-\omega t)},\\
@@ -366,11 +366,11 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
     \end{align}
 \end{subequations}
 同样地可以画出TM模式在截面上的电场线和磁场线，由于TM$_{mn}$模式同样只是TM$_{11}$模式的简单复制，故只需画出TM$_{11}$模式，如\figref{fig:waveguide rect TM} 所示：
-\begin{center}
+\begin{notecaptionblock}
     \includegraphics[width=0.4\linewidth]{figures/waveguide_rect_TM.pdf}
     \captionof{figure}{矩形波导的TM$_{11}$模式}
     \label{fig:waveguide rect TM}
-\end{center}
+\end{notecaptionblock}
 
 \paragraph{传输特性}
 
@@ -382,12 +382,12 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
 
 \subsection{圆波导}
 
-在内径为$a$的圆形波导中，
-\begin{center}
+圆波导的内半径记为$a$，如\figref{fig:circle waveguide} 所示。
+\begin{notecaptionblock}
     \tikzfigure{circle-waveguide}
     \captionof{figure}{圆波导}
     \label{fig:circle waveguide}
-\end{center}
+\end{notecaptionblock}
 采用柱坐标，波动方程\eqref{eqn:laplat+kc2}为：
 \begin{equation}
     \Bigp{\pp[2]\rho+\frac1\rho\pp\rho+\frac1{\rho^2}\pp[2]\phi+k_\cutoff^2}\psi=0,
@@ -397,7 +397,10 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
     R(\rho)&=AJ_m(k_\cutoff\rho)+BN_m(k_\cutoff\rho),\\
     \Phi(\phi)&=\e^{\pm\i m\phi}.
 \end{align*}
-其中$J_m,N_m$分别是第一、二类Bessel函数，由$R(0)<\infty$知$B=0$。由于极轴的选取是任意的，取$D=0$。
+其中$J_m,N_m$分别是第一、二类Bessel函数，轴线上场有限，故$B=0$。
+方位角的周期性要求$m$为整数。取$m\geq 0$，对于$m>0$，$\e^{\i m\phi}$与$\e^{-\i m\phi}$是两个独立的角向解。
+以下两幅场线图均取沿 $+z$ 传播的波，纵向场的截面振幅取 $\psi=J_m(k_\cutoff\rho)\cos(m\phi)$。
+图中箭头对应 $k_z z-\omega t=-\pi/2$ 的瞬间。对于 $m>0$，将截面图绕轴旋转 $\pi/(2m)$，就得到角向因子为 $\sin(m\phi)$ 的另一简并模式。
 
 \paragraph{TM模式}
 
@@ -409,14 +412,23 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
 场的表达式为
 \begin{subequations}
     \begin{align*}
-        H_\rho&=\pm m\frac{\omega\varepsilon k_z}{k_\cutoff^2\rho}E_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
-        H_\phi&=\i\frac{\omega\varepsilon k_z}{k_\cutoff}E_0J_m'(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        H_\rho&=\pm m\frac{\omega\varepsilon}{k_\cutoff^2\rho}E_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        H_\phi&=\i\frac{\omega\varepsilon}{k_\cutoff}E_0J_m'(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
         H_z&=0,\\
         E_\rho&=\i\frac{k_z}{k_\cutoff}E_0J_m'(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
         E_\phi&=\mp m\frac{k_z}{k_\cutoff^2\rho}E_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
         E_z&=E_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)}.
     \end{align*}
 \end{subequations}
+
+在所选相位，$\bm E_\transv$ 指向 $\psi$ 增大的方向，$\bm H_\transv$ 沿 $\psi$ 的等值线。
+如\figref{fig:waveguide circle TM}，轴对称的 TM$_{01}$ 模中，电场线沿半径，磁场线为同心圆。
+TM$_{11}$ 模的纵向电场在直径两侧异号，两侧各有一个极值点，极值点处的横向电场为零。图中在这些点附近略微收短电场线，以便分辨相邻曲线。
+\begin{notecaptionblock}
+    \includegraphics[width=.96\linewidth]{figures/waveguide_circle_TM.pdf}
+    \captionof{figure}[圆波导的 TM 模式]{圆波导 TM 模式的横向电场线（深蓝实线）和磁场线（橙色虚线）。在理想导体壁上，横向电场沿壁面法线。}
+    \label{fig:waveguide circle TM}
+\end{notecaptionblock}
 
 \paragraph{TE模式}
 
@@ -431,14 +443,24 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
         H_\rho&=\i\frac{k_z}{k_\cutoff}H_0J_m'(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
         H_\phi&=\mp m\frac{k_z}{k_\cutoff^2\rho}H_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
         H_z&=H_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
-        E_\rho&=\pm m\frac{\omega\mu k_z}{k_\cutoff^2\rho}H_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
-        E_\phi&=\i\frac{\omega\mu k_z}{k_\cutoff}H_0J_m'(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        E_\rho&=\mp m\frac{\omega\mu}{k_\cutoff^2\rho}H_0J_m(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
+        E_\phi&=-\i\frac{\omega\mu}{k_\cutoff}H_0J_m'(k_\cutoff\rho)\e^{\i(k_zz-\omega t\pm m\phi)},\\
         E_z&=0.
     \end{align*}
 \end{subequations}
-不难发现，圆波导的TE模式与TM模式场的表达式仅仅是将$E,H$和$\varepsilon,\mu$互换。
+
+在相同相位下，TE 模式的 $\bm H_\transv$ 指向 $\psi$ 增大的方向，$\bm E_\transv$ 沿等值线。
+对照\figref{fig:waveguide circle TE} 与\figref{fig:waveguide circle TM}，同为轴对称模式，TE$_{01}$ 模的电场线为同心圆，磁场线沿半径。
+\begin{notecaptionblock}
+    \includegraphics[width=.96\linewidth]{figures/waveguide_circle_TE.pdf}
+    \captionof{figure}[圆波导的 TE 模式]{圆波导 TE 模式的横向电场线（深蓝实线）和磁场线（橙色虚线）。在理想导体壁上，横向磁场的法向分量为零。}
+    \label{fig:waveguide circle TE}
+\end{notecaptionblock}
 
 \paragraph{前几个$x_{mn}$和$x_{mn}'$分布}
+
+TE和TM的最低模式分别为TE$_{11}$和TM$_{01}$。二者的$k_\cutoff a$分别约为$1.841$和$2.405$，因此圆波导的最低截止模式为TE$_{11}$。
+由于$J_0'(x)=-J_1(x)$，TM$_{1n}$和TE$_{0n}$的截止频率相同。
 
 \begin{figure}[H]
     \centering
@@ -449,9 +471,6 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
     \caption{$J_m(x)$和$J_m'(x)$的零点分布}
     \label{fig:Bessel function zeros}
 \end{figure}
-
-查表知，TE和TM的最低模式分别为TM$_{01}$和TE$_{11}$。
-由于$J_0'(x)=-J_1(x)$，TM$_{1n}$和TE$_{0n}$的截止频率相同。
 
 \begin{table}[H]
     \centering
@@ -473,7 +492,7 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
         \toprule
         $x_{mn}'$&$n=1$&$n=2$&$n=3$\\
         \midrule
-        $m=0$&3.832&7.016&10.176\\
+        $m=0$&3.832&7.016&10.173\\
         $m=1$&1.841&5.331& 8.536\\
         $m=2$&3.054&6.706& 9.970\\
         $m=3$&4.201&8.015&11.346\\
@@ -488,11 +507,11 @@ $E_z=0,\,H_z=\psi$，边界上$\p\psi/\p n=0$可得
 带电粒子与电磁波交换能量(加速/减速)要求电磁波的相速度与电子的速度相同。
 因此需要波导中的相速度小于等于光速，称为慢波结构。
 由于带电粒子在介质中的速度超过介质光速时，会产生Cherenkov辐射，故无法采用全部填充介质的波导。本小节考虑部分填充介质的波导。
-\begin{center}
+\begin{notecaptionblock}
     \tikzfigure{dielectric-waveguide}
     \captionof{figure}{部分填充介质的矩形波导}
     \label{fig:rectangle waveguide part-filled}
-\end{center}
+\end{notecaptionblock}
 % 后面我们将说明不存在TM模式，
 考虑TE模式，根据金属边界条件，两部分的场形式为：
 \begin{alignat*}{2}

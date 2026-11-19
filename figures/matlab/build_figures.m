@@ -12,8 +12,9 @@ restoreDefaults = onCleanup(@() set(groot, properties, previous));
 set(groot, properties, {'off', [100 100 560 420], @(fig, ~) theme(fig, "light")})
 
 scripts = {
-    'Electrodynamics', ["Bessel", "Besselzero", "ellipseKE", "hysteresis", "image_charge_plane", ...
-        "image_charge_sphere", "polarization", "poly_Legendre", "rect_TE", "spherical_harmonic"];
+    'Electrodynamics', ["Bessel", "Besselzero", "circle_modes", "ellipseKE", "hysteresis", ...
+        "image_charge_dielectrics", "image_charge_plane", "image_charge_sphere", "polarization", ...
+        "poly_Legendre", "rect_TE", "spherical_harmonic", "water_dispersion"];
     'Linear Algebra', "svcompress";
     'Nuclear Radiation and Detection', ["binding_energy", "decay2", "decay_system", "halflife"];
     'Numerical Analysis', ["fixpoint", "Lpspace", "Runge"];

@@ -11,6 +11,14 @@ kz = p * 2*pi/L;
 t = tiledlayout(3, 2, TileSpacing="tight", Padding="tight");
 
 nexttile
+hold on
+sample = linspace(.65, 2.1, 40);
+e = plot(sample, 1.22*ones(size(sample)), '-', Color='#0072B2', LineWidth=1);
+hline = plot(sample, .67*ones(size(sample)), '--', Color='#C45116', LineWidth=1);
+addarrow([e; hline], size=.12, position=.65)
+text(2.35, 1.22, '$\mathbf{E}_{\perp}$', Interpreter='latex', FontSize=14)
+text(2.35, .67, '$\mathbf{H}_{\perp}$', Interpreter='latex', FontSize=14)
+axis equal
 axis off
 axis([0 a 0 b])
 
@@ -37,6 +45,7 @@ set(gcf, Position=100+[0 0 600 500])
 exportgraphics(t, '../waveguide_rect_TE.pdf', ContentType='vector', BackgroundColor='none')
 
 nexttile(1)
+cla reset
 rect_TM11
 
 exportgraphics(gca, '../waveguide_rect_TM.pdf', ContentType='vector', BackgroundColor='none')

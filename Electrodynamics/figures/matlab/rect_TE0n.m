@@ -23,8 +23,8 @@ startHy(2:2:end, :) = startHy(2:2:end, :) - b/n + 2*d;
 %% plot
 Eline = streamline(x, y, -Ex, -Ey, startEx, startEy);
 Hline = streamline(x, y, -Hx, -Hy, startHx, startHy);
-set(Eline, LineWidth=1, Color='b')
-set(Hline, LineWidth=1, Color='r', LineStyle='--')
+set(Eline, LineWidth=1, Color='#0072B2')
+set(Hline, LineWidth=1, Color='#C45116', LineStyle='--')
 addarrow([Hline; Eline], size=0.12, position=0.52)
 lincomp([Eline; Hline], disp=false)
 

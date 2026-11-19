@@ -26,8 +26,8 @@ for ii = 1 : numel(Hline)
     keep = ((1-lx/a).^2 + (1-ly/b).^2 > k^2) & ((lx/a).^2 + (ly/b).^2 > k^2);
     Hline(ii).XData = lx(keep); Hline(ii).YData = ly(keep);
 end
-set(Eline, LineWidth=1, Color='b')
-set(Hline, LineWidth=1, Color='r', LineStyle='--')
+set(Eline, LineWidth=1, Color='#0072B2')
+set(Hline, LineWidth=1, Color='#C45116', LineStyle='--')
 addarrow([Hline; Eline], size=0.12, position=0.52)
 lincomp([Eline; Hline], disp=false)
 

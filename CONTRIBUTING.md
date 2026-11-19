@@ -87,8 +87,9 @@ run('Quantum Mechanics/figures/matlab/free_packet.m')
 
 导出带图例的矢量 PDF 时，用 `pad_legend(legend(...))` 给文字右侧留白。已有图例句柄也可以直接传给 `pad_legend(lgd)`。LaTeX 图例使用 `\hspace{0.6em}`，其他图例使用两个不换行空格。普通行尾空格在导出时会被 MATLAB 裁掉。
 
-线性代数和核辐射卷的绘图输入保存在各卷的 `figures/matlab/inputs/` 中。
+电动力学、线性代数和核辐射卷的绘图输入保存在各卷的 `figures/matlab/inputs/` 中。
 
+- `water_dispersion.m` 读取 `water_hale_querry_1973.csv` 中 25 °C 液态水的 108 组光学常数。三列依次为真空波长（µm）、折射率实部和消光系数。数据取自原论文表 I 在 0.35–10 µm 范围内的表值，电子转录采用 CC0 许可。图中的强度吸收系数由波长和消光系数换算。[Hale 与 Querry 原论文](https://doi.org/10.1364/AO.12.000555) · [电子数据与许可](https://refractiveindex.info/?shelf=main&book=H2O&page=Hale)
 - `svcompress.m` 对 `Original_Doge_meme.jpg` 的灰度矩阵作奇异值分解，比较不同截断秩的近似。摄影者为佐藤敦子（Atsuko Sato）。来源页将原照片列为受著作权保护的非自由内容。[照片来源与权利说明](https://en.wiktionary.org/wiki/File:Original_Doge_meme.jpg)
 - `binding_energy.m` 使用 NuDat 导出的 `nndc_nudat_data_export.csv` 和元素符号表 `symbol.mat`。CSV 中的 `z`、`n` 分别是质子数和中子数，`bindingEnergy(keV)` 是以 keV 表示的每核子结合能。[NNDC NuDat](https://www.nndc.bnl.gov/nudat3/)
 - `halflife.m` 使用 `halfLife.mat` 中的矩阵 `halfLife(N,Z)`，单位为秒。无穷大表示稳定核素，NaN 表示缺少数据。
