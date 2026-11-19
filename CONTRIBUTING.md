@@ -47,6 +47,19 @@ CI 分别缓存每门课的 MATLAB 插图、每份 TikZ 图册及每个笔记入
 
 图册里的 `spin-axis` 决定导入哪一页，章节里的 `fig:spin-axis` 用于引用正文图号。移动或增加图页后运行课程构建命令即可更新两者。图源含有作者、出处和许可说明时，请在对应图组旁保留。
 
+### 让图表和题注同页
+
+允许浮动时，把图与 `\caption` 一起放进 `figure`，把表与 `\caption` 一起放进 `table`。在例题框内或需要原位排版时，用模板提供的 `notecaptionblock`。它用当前行宽的 `minipage` 包住整组内容，页底空间不足时整组移到下一页。
+
+```tex
+\begin{notecaptionblock}
+  \tikzfigure[width=.3\linewidth]{spin-axis}
+  \captionof{figure}{自旋测量的量子化轴}\label{fig:spin-axis}
+\end{notecaptionblock}
+```
+
+原位短表同样放在一个 `notecaptionblock` 内，先写 `\captionof{table}{表题}\label{...}`，再写 `tabular`。跨页长表使用 `longtable`，把表题和首段表头放在 `\endfirsthead` 之前，并用 `\endhead` 指定续页表头。
+
 ### 坐标轴和色标
 
 对有量纲且带数值刻度的坐标轴，MATLAB 和 TikZ 都用“量符号 / 单位符号”。例如，`t/s` 轴的刻度 2 表示 2 秒。量符号用斜体，单位符号用正体；复合单位用括号括起，例如 $v/(\mathrm{m}\,\mathrm{s}^{-1})$。色条遵循同一写法。前缀应与送入绘图函数的数值一致，例如将以米记录的波长乘以 $10^9$ 后，轴标写作 $\lambda/\mathrm{nm}$。[BIPM《国际单位制手册》§5.4.1](https://www.bipm.org/en/publications/si-brochure)；[NIST SP 811 §7.1](https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-7-rules-and-style-conventions-expressing-values)

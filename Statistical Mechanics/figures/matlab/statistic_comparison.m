@@ -7,7 +7,7 @@ hold on
 p2 = plot([-3 3], [1 1], 'k--');
 p3 = plot([0 0], [0, 3], 'k--');
 
-pad_legend(legend(p1, ["Bose-Einstein", "Maxwell-Boltzmann", "Fermi-Dirac"], Interpreter="latex"));
+pad_legend(legend(p1, ["Bose--Einstein", "Maxwell--Boltzmann", "Fermi--Dirac"], Interpreter="latex"));
 
 set(gca, Children=[p1; p2; p3])
 

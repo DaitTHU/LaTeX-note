@@ -247,7 +247,7 @@
     好近似。
 \end{remark}
 
-\subsection{Jacobi迭代法和Gauss-Seidel迭代法}
+\subsection{Jacobi迭代法和Gauss--Seidel迭代法}
 
 将$A$拆解为$A=D+L+U$的形式，其中$D$是对角部分，$L$是严格下三角部分，$U$是严格上三角部分。
 \footnote{本节对$L,U$的定义与教材上的定义相差一个负号。}
@@ -261,7 +261,7 @@
 \end{example}
 
 \begin{example}
-    {Gauss-Seidel迭代法}{GS iterative method}
+    {Gauss--Seidel迭代法}{GS iterative method}
     预处理矩阵$M=D+L$，迭代矩阵$B_\text G=-(D+L)\inv U$，迭代的分量形式为：
     \begin{equation}
         x_{i+1}^{(k)}=\frac1{a_{kk}}\biggp{b_k-\sum_{j=1}^{k-1}a_{kj}x_{i+1}^{(j)}-\sum_{j=k+1}^na_{kj}x_i^{(j)}}.
@@ -269,13 +269,13 @@
 \end{example}
 
 \begin{remark}
-    Jacobi法和G-S法收敛$\iff\rho(B_\text J)<1$和$\rho(B_\text G)<1$。
+    Jacobi法和G--S法收敛$\iff\rho(B_\text J)<1$和$\rho(B_\text G)<1$。
     另外，有时容易验证矩阵$A$满足收敛的充分条件。
 \end{remark}
 
 \begin{theorem}
-    {Jacobi法和G-S法收敛的充分条件：对角占优}{}
-    若$A$严格对角占优或不可约弱对角占优，则Jacobi法和G-S法收敛。
+    {Jacobi法和G--S法收敛的充分条件：对角占优}{}
+    若$A$严格对角占优或不可约弱对角占优，则Jacobi法和G--S法收敛。
 \end{theorem}
 
 \begin{proof}
@@ -285,16 +285,16 @@
     \]
     若$A$严格对角占优(或不可约弱对角占优)，则$D+\lambda\inv(L+U)$也为严格对角占优(或不可约弱对角占优)，矛盾！故$\rho(B_\text J)<1$，Jacobi法收敛。
 
-    对于G-S法，设$B_\text G$有特征值$\lambda$且$\abs\lambda\geq 1$，则 
+    对于G--S法，设$B_\text G$有特征值$\lambda$且$\abs\lambda\geq 1$，则
     \[
         \det(\lambda I-B_\text G)=0\implies\det(D+L+\lambda\inv U)=0,
     \]
-    若$A$严格对角占优(或不可约弱对角占优)，则$D+L+\lambda\inv U$也为严格对角占优(或不可约弱对角占优)，矛盾！故$\rho(B_\text G)<1$，G-S法收敛。
+    若$A$严格对角占优(或不可约弱对角占优)，则$D+L+\lambda\inv U$也为严格对角占优(或不可约弱对角占优)，矛盾！故$\rho(B_\text G)<1$，G--S法收敛。
 \end{proof}
 
 \begin{theorem}
-    {对称矩阵的Jacobi法和G-S法收敛的充要条件}{}
-    若$A$对称且对角元均为正，则Jacobi法和G-S法收敛$\iff D\pm(L+U)$均正定。
+    {对称矩阵的Jacobi法和G--S法收敛的充要条件}{}
+    若$A$对称且对角元均为正，则Jacobi法和G--S法收敛$\iff D\pm(L+U)$均正定。
 \end{theorem}
 
 \subsection{超松弛迭代法}
@@ -380,7 +380,7 @@
 \end{theorem}
 
 \begin{remark}
-    对于对称正定三对角矩阵，G-S法收敛速度是Jacobi法的两倍，SOR的收敛速度最快。
+    对于对称正定三对角矩阵，G--S法收敛速度是Jacobi法的两倍，SOR的收敛速度最快。
 \end{remark}
 
 \begin{example}
@@ -562,7 +562,7 @@
 
 \begin{theorem}
     {最速下降法的误差收敛性}{SDM error}
-    记误差$e^{(k)}:=x^{(k)}-x^*$，则误差的$A$ - 范数满足
+    记误差$e^{(k)}:=x^{(k)}-x^*$，则误差的$A$-范数满足
     \begin{equation}
         \label{eqn:SDM e^k}
         \norm{e^{(k)}}_A\leq\biggp{\frac{\cond_2(A)-1}{\cond_2(A)+1}}^k\norm{e^{(0)}}_A.
@@ -627,16 +627,16 @@
 \]
 
 \begin{definition}
-    {$A$ - 正交向量组}{A-orthogonal}
+    {$A$-正交向量组}{A-orthogonal}
     若向量组$p_1,\ldots,p_n,\ldots$满足$\forall i\neq j$均有
     \begin{equation}
         \inp{p_i}{p_j}_A=0\iff p_i\perp_A p_j.
     \end{equation}
-    则称为$A$ - 正交向量组，也称$A$ - 共轭向量组。
+    则称为$A$-正交向量组，也称$A$-共轭向量组。
 \end{definition}
 
 \begin{corollary}
-    给定一个线性无关的向量组，可按照Gram-Schmidt正交化得到对应的$A$ - 正交向量组。
+    给定一个线性无关的向量组，可按照Gram--Schmidt正交化得到对应的$A$-正交向量组。
 \end{corollary}
 
 \begin{theorem}
@@ -645,7 +645,7 @@
     \[
         \varphi(x)=\varphi(x^{(0)}+y)+\alpha\inp{y}{p^{(k)}}_A-\alpha\inp{r^{(0)}}{p^{(k)}}+\frac{\alpha^2}2\norm{p^{(k)}}^2_A.
     \]
-    上式出现了交叉项$\inp{y}{p^{(k)}}_A$，为了简化问题，自然可考虑使交叉项$\inp{y}{p^{(k)}}_A=0$，这要求$p^{(k)}$与$\Span(p^{(0)},\ldots,p^{(k-1)})$是$A$ - 正交的。%(见\dfnref{dfn:A-orthogonal})
+    上式出现了交叉项$\inp{y}{p^{(k)}}_A$，为了简化问题，自然可考虑使交叉项$\inp{y}{p^{(k)}}_A=0$，这要求$p^{(k)}$与$\Span(p^{(0)},\ldots,p^{(k-1)})$是$A$-正交的。%(见\dfnref{dfn:A-orthogonal})
 
     由此便分解成了两个极小问题：
     \[
@@ -668,12 +668,12 @@
 \end{corollary}
 
 \begin{remark}
-    与$p^{(0)},\ldots,p^{(k-1)}$ $A$ - 正交的$p^{(k)}$取法并不唯一。
+    与$p^{(0)},\ldots,p^{(k-1)}$ $A$-正交的$p^{(k)}$取法并不唯一。
 \end{remark}
 
 \paragraph{共轭梯度法}
 
-当$r^{(k)}\neq 0$时，$p^{(0)},\ldots,p^{(k-1)},r^{(k)}$线性无关，可通过Gram-Schmidt正交化得到$p^{(k)}$：
+当$r^{(k)}\neq 0$时，$p^{(0)},\ldots,p^{(k-1)},r^{(k)}$线性无关，可通过Gram--Schmidt正交化得到$p^{(k)}$：
 \begin{equation}
     \label{eqn:Gram-Schmidt p^k}
     p^{(k)}=r^{(k)}-\sum_{i=0}^{k-1}\frac{\inp{r^{(k)}}{p^{(i)}}_A}{\norm{p^{(i)}}_A^2}p^{(i)},
@@ -730,7 +730,7 @@
 
 \begin{theorem}
     {梯度下降法的误差收敛性}{}
-    误差$e^{(k)}:=x^{(k)}-x^*$的$A$ - 范数满足
+    误差$e^{(k)}:=x^{(k)}-x^*$的$A$-范数满足
     \begin{equation}
         \label{eqn:CG e^k}
         \norm{e^{(k)}}_A\leq 2\biggp{\frac{\sqrt{\cond_2(A)}-1}{\sqrt{\cond_2(A)}+1}}^k\norm{e^{(0)}}_A.

@@ -120,6 +120,10 @@
 \RequirePackage[hypcap=false]{caption}
 \RequirePackage{subcaption}
 \RequirePackage{booktabs}
+% Keep an in-place illustration or short table with its caption, also inside breakable boxes.
+\newenvironment{notecaptionblock}
+  {\begin{center}\begin{minipage}{\linewidth}\centering}
+  {\end{minipage}\end{center}}
 
 \RequirePackage{siunitx}[2021/05/17]
 \sisetup{
