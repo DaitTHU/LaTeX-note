@@ -11,6 +11,8 @@ permissions:
 jobs:
   compile:
     runs-on: ubuntu-24.04
+    env:
+      MATLAB_RELEASE: R2025bU7
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v6
@@ -24,16 +26,58 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y latexmk texlive-xetex texlive-lang-chinese texlive-science texlive-latex-extra fonts-noto-cjk
+      - name: Identify renderer and source versions
+        id: versions
+        run: |
+          digest() { sha256sum | cut -d' ' -f1; }
+          renderer=$( { printf '%s\n' "$ImageOS" "$ImageVersion" "$RUNNER_ARCH" "$MATLAB_RELEASE";
+                        dpkg-query -W; git hash-object .github/workflows/latex.yml; } | digest)
+          matlab=$(git ls-files --stage -z -- '*/figures/matlab/*' figures/matlab scripts/cache_matlab_figures.py | digest)
+          sources=$(git ls-files --stage -z -- ':!*.md' ':!LICENSE' ':!.gitignore' | digest)
+          echo "renderer=$renderer" >> "$GITHUB_OUTPUT"
+          echo "matlab=$matlab" >> "$GITHUB_OUTPUT"
+          echo "sources=$sources" >> "$GITHUB_OUTPUT"
+      - name: Cache MATLAB figures by course
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ runner.temp }}/matlab-figures
+          key: matlab-${{ steps.versions.outputs.renderer }}-${{ steps.versions.outputs.matlab }}
+          restore-keys: matlab-${{ steps.versions.outputs.renderer }}-
+      - name: Check figure scripts, data and cached outputs
+        id: figures
+        run: python3 scripts/cache_matlab_figures.py restore "$RUNNER_TEMP/matlab-figures"
       - name: Set up MATLAB
+        if: steps.figures.outputs.courses != ''
         uses: matlab-actions/setup-matlab@v3
         with:
-          release: R2025b
+          release: ${{ env.MATLAB_RELEASE }}
       - name: Render MATLAB figures
+        if: steps.figures.outputs.courses != ''
         uses: matlab-actions/run-command@v3
+        env:
+          MATLAB_FIGURE_COURSES: ${{ steps.figures.outputs.courses }}
         with:
-          command: addpath('figures/matlab'); build_figures
+          command: addpath('figures/matlab'); build_figures(split(getenv('MATLAB_FIGURE_COURSES'), '|'))
+      - name: Save redrawn figures
+        if: steps.figures.outputs.courses != ''
+        run: python3 scripts/cache_matlab_figures.py save "$RUNNER_TEMP/matlab-figures"
+      - name: Identify available TeX input paths
+        id: tex
+        run: |
+          # Include new optional inputs that would be absent from an older TeX recorder file.
+          paths=$( { git ls-files -z -- ':!*.md' ':!LICENSE' ':!.gitignore';
+                     find . -type f \( -path '*/figures/*.pdf' -o -path '*/figures/*.png' \) -print0;
+                   } | sort -z | sha256sum | cut -d' ' -f1)
+          builder=$(git ls-files --stage -z -- scripts | sha256sum | cut -d' ' -f1)
+          echo "prefix=tex-${{ steps.versions.outputs.renderer }}-$builder-$paths-" >> "$GITHUB_OUTPUT"
+      - name: Cache course PDFs and labeled TikZ atlases
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ runner.temp }}/tex-notes
+          key: ${{ steps.tex.outputs.prefix }}${{ steps.versions.outputs.sources }}
+          restore-keys: ${{ steps.tex.outputs.prefix }}
       - name: Build all notes
-        run: python3 scripts/build_notes.py --archive "$RUNNER_TEMP/course-notes.zip"
+        run: python3 scripts/build_notes.py --cache-dir "$RUNNER_TEMP/tex-notes" --archive "$RUNNER_TEMP/course-notes.zip"
       - name: Upload compiled notes
         uses: actions/upload-artifact@v7
         with:
@@ -68,6 +112,11 @@ jobs:
       - name: Publish the PDF collection
         uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3.0.4
         with:
+          name: 数理课程笔记 ${{ github.ref_name }}
+          body: |
+            下载 [course-notes.zip](${{ github.server_url }}/${{ github.repository }}/releases/download/${{ github.ref_name }}/course-notes.zip)，解压后即可按课程阅读十卷中文 PDF。
+
+            [旧版勘误](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/docs/errata.md)列出了影响计算结果或物理解释的代表性问题。独立英文量子力学笔记与九份图册可在[本版构建](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})中下载 `supplements`。
           files: course-notes.zip
           fail_on_unmatched_files: true
           overwrite_files: false

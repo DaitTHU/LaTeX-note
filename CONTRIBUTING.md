@@ -18,6 +18,8 @@
 
 从仓库根目录运行 `python3 scripts/build_notes.py QM` 可编译量子力学图册、正文和独立英文笔记。将 `QM` 换成其他课程缩写即可编译相应卷。修改共享模板或数学宏后，运行 `python3 scripts/build_notes.py` 编译所有入口。
 
+CI 分别缓存每门课的 MATLAB 插图、每份 TikZ 图册及每个笔记入口。绘图脚本或输入数据变更会重画该课程的图，共用 MATLAB 函数的变更会重画所有 MATLAB 图。TeX 根据上次编译实际读过的文件逐项核对内容，图册的 PDF 和带页码的 `.aux` 一起恢复。修改某卷的正文通常只重编该卷。新增、删除或改名构建输入时，CI 会重新建立 TeX 缓存，以识别首次出现的可选输入。构建环境更新、缓存过期或校验失败时也会重新编译相应产物。
+
 编译失败时，查看出错入口旁的 `*.build.log` 获取完整命令输出，或查看 `*.log` 定位 TeX 报错。出现 `Unknown TikZ figure` 时，核对正文引用与图册中的标签，再用构建脚本按顺序重编图册和正文。Linux 上如提示缺少“㶲”等专业汉字，检查是否安装了 `fonts-noto-cjk`。
 
 打开生成的 PDF，检查修改页及相邻页的公式换行、图表、引用和页眉。遇到 `tcolorbox` 跨页警告时，着重检查框内文字与公式是否完整。提交源文件即可，课程 PDF、TikZ 图册和 MATLAB 插图由 CI 生成。
@@ -70,7 +72,7 @@ python3 scripts/check_quantum_formulas.py
 matlab -batch "addpath('figures/matlab'); build_figures"
 ```
 
-修改单幅图时，也可以在 MATLAB 中单独运行对应脚本。例如：
+只改一门课的插图时，可以运行 `build_figures("Quantum Mechanics")` 重画这一卷。修改单幅图时，也可以在 MATLAB 中单独运行对应脚本。例如：
 
 ```matlab
 addpath('figures/matlab')

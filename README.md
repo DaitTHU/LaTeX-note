@@ -34,6 +34,8 @@ python3 scripts/build_notes.py --archive course-notes.zip
 
 插图生成后，也可以只编译一门课，例如 `python3 scripts/build_notes.py QM`。脚本会先编译该卷的 TikZ 图册，再编译正文，并将 PDF 写入课程目录。复分析目前只收录了一幅共形映射图，可用 `python3 scripts/build_notes.py CA` 单独编译图册。
 
+GitHub Actions 会复用同一构建环境下已校验的插图和笔记。只改一章正文时，通常只重编该卷。修改 MATLAB 脚本或绘图数据时，会重画该课程的 MATLAB 图。每次发布都将完整的十卷 PDF 打包。
+
 ## 勘误与贡献
 
 欢迎通过 Issue 或 Pull Request 提交勘误。请注明课程、章节和公式或源文件位置，并附推导、反例或参考出处。绘图约定、数据来源和构建排查见[贡献指南](CONTRIBUTING.md)，跨卷共用记号见[数学符号与排版示例](mathdef_example.md)。
