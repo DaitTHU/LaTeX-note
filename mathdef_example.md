@@ -32,7 +32,7 @@
 | 数学物理方法 · [MMP.tex](Method%20of%20Mathematics%20and%20Physics/MMP.tex) | `\LT` 与 `\SLop` 都排作花体 L，分别表示 Laplace 变换与 Sturm–Liouville 微分算子。`\testspace`、`\Schwartz` 分别是紧支撑光滑试验函数空间和 Schwartz 空间。分布对试验函数的作用是线性配对。 |
 | 概率论与数理统计 · [PS.tex](Probability%20and%20Statistics/PS.tex) | 事件补集、矩母函数、特征函数、单卷用到的分布族和三种收敛箭头在此定义。一次 Bernoulli 试验用 `\BernDist(p)`，二项计数用 `\BinDist(n,p)`，多项计数用 `\MultDist`。 |
 | 经典力学 · [CM.tex](Classical%20Mechanics/CM.tex) | 非保守力、外力、转动与惯性参考系的下标由 `\nonconservative`、`\external`、`\rotating`、`\inertial` 给出。位置、动量、角动量等随具体力学问题定义。 |
-| 量子力学 · [QM.tex](Quantum%20Mechanics/QM.tex) | `\op A`、`\one`、`\HH`、`\Dom` 标明算符、单位算符、Hilbert 空间与定义域。态和矩阵元采用共享 Dirac 括号。[独立英文笔记](Quantum%20Mechanics/ref/QM.tex) 保留无衬线算符字母，同样从共享文件取得微分与 Dirac 记号。 |
+| 量子力学 · [QM.tex](Quantum%20Mechanics/QM.tex) | `\op A`、`\one`、`\HH`、`\Dom` 标明算符、单位算符、Hilbert 空间与定义域。态和矩阵元采用共享 Dirac 括号。 |
 | 统计力学 · [SM.tex](Statistical%20Mechanics/SM.tex) | `\pvat{S}{T}{V}` 标明偏导中固定的变量。平动、转动、振动分别用 `\transl`、`\rot`、`\vib` 作下标；Einstein、Brillouin、Debye 函数也在入口定义。相图与正文复用固、液、气相的标签。 |
 | 电动力学 · [ED.tex](Electrodynamics/ED.tex) | `\relative` 和 `\reflected` 均排作正体 r，分别标记相对介电常数和反射波。临界角、导体、截止频率也各有其定义。频域的 `\hatbm E` 表示矢量场的 Fourier 分量。 |
 | 核辐射物理及探测学 · [NRD.tex](Nuclear%20Radiation%20and%20Detection/NRD.tex) | 核素写作 `\nuclide[6]{14}{C}`，省略原子序数可写 `\nuclide{14}{C}`。反应道、衰变箭头和阈值标签由本卷定义。约化波长用 `\lambdabar`，质心系与实验室系的标记同时用于散射公式与图。 |
@@ -43,7 +43,7 @@
 
 复分析目前只有独立图册。图中的虚数单位使用共享的 `\i`，圆盘、上半平面和映射变量沿用图内定义。
 
-数学物理方法和英文量子力学共用 Fourier 变换算符 `\FT`。前者将系数 `1/(2\pi)` 放在逆变换，后者在正逆变换中各放 `1/\sqrt{2\pi}`。从一卷取用另一卷的变换表时，系数要按定义换算。
+数学物理方法用 `\FT` 表示 Fourier 变换，系数 `1/(2\pi)` 放在逆变换中。量子力学以动量 *p* 标记平面波，位置与动量表象之间的正逆变换各带系数 `1/\sqrt{2\pi\hbar}`。从一卷取用另一卷的变换表时，要同时换算积分变量和归一化系数。
 
 ## 微分与指数
 

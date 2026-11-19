@@ -21,7 +21,7 @@
 | 电动力学 | [ED.tex](Electrodynamics/ED.tex) | 电磁场、平面波、波导、多极辐射与相对论。第十章为提纲 |
 | 核辐射物理及探测学 | [NRD.tex](Nuclear%20Radiation%20and%20Detection/NRD.tex) | 放射性衰变、辐射与物质的相互作用、探测器和计数测量。上下两部分的第五章待补 |
 
-使用旧版笔记时，可查阅[勘误](docs/errata.md)。量子力学卷另有一份[英文笔记](Quantum%20Mechanics/ref/QM.tex)。英文 PDF 和九份独立图册可在对应提交的 [GitHub Actions 构建](https://github.com/DaitTHU/LaTeX-note/actions/workflows/latex.yml)中下载 `supplements`（需登录 GitHub）。
+使用旧版笔记时，可查阅[勘误](docs/errata.md)。九份独立图册可在对应提交的 [GitHub Actions 构建](https://github.com/DaitTHU/LaTeX-note/actions/workflows/latex.yml)中下载 `supplements`（需登录 GitHub）。
 
 ## 从源码编译
 

@@ -350,8 +350,46 @@ $\ket{+\chi}=(\ket{+z}+\e^{\i\chi}\ket{-z})/\sqrt2$，
 这里$J$是低能有效模型的矩阵元，必须由更完整的势能模型计算或由实验拟合。
 给定这个劈裂，两态模型就能预言局域布居的振荡周期。
 
+\subsection{一个势阶的反射与透射}
+若问题改为“入射束有多少能到达势垒另一侧”，就要给定入射方向，用概率流计算反射率和透射率。
+先考虑只有一个界面的势阶。取 $x<0$ 时 $V=0$、$x>0$ 时 $V=V_0>0$，
+质量为 $m$ 的粒子从左入射，波数 $k=\sqrt{2mE}/\hbar$。
+当 $E>V_0$ 时，右侧波数 $q=\sqrt{2m(E-V_0)}/\hbar$ 也为实数。以入射振幅为单位，
+左侧空间波函数为 $\e^{\i kx}+r\e^{-\i kx}$，右侧只有沿 $+x$ 传播的 $t\e^{\i qx}$。
+在 $x=0$ 接续波函数及其一阶导数，得到 $1+r=t$、$k(1-r)=qt$，因此
+\begin{equation}
+    r=\frac{k-q}{k+q},\quad t=\frac{2k}{k+q},\qquad
+    R=\abs{r}^2,\quad T=\frac{q}{k}\abs{t}^2=\frac{4kq}{(k+q)^2}.
+\end{equation}
+反射波的流为负，$R$ 取其绝对值与入射流之比。右侧的粒子速度变为 $\hbar q/m$，
+透射率中相应出现速度比 $q/k$，直接相加可以检验 $R+T=1$。
+
+若粒子可以从两侧入射，记左侧向右、向左的振幅为 $A,B$，右侧为 $C,D$，各平面波的相位都在界面取零。
+匹配条件 $A+B=C+D$、$k(A-B)=q(C-D)$ 有两种直接用途。把同一侧的振幅放在一起，得到界面的转移矩阵(transfer matrix)
+\[
+    \begin{pmatrix}A\\B\end{pmatrix}
+    =\frac1{2k}\begin{pmatrix}k+q&k-q\\k-q&k+q\end{pmatrix}
+     \begin{pmatrix}C\\D\end{pmatrix}.
+\]
+在宽度 $d$、波数 $q$ 的均匀层中，从右端振幅倒推左端振幅还要乘
+$\diag(\e^{-\i qd},\e^{\i qd})$。多个界面和均匀层的矩阵可依空间次序相乘。
+若要从两个入射束直接预言两个出口的计数，则由匹配条件把 $B,C$ 表为 $A,D$ 的函数。
+将各振幅乘以所在区域波数的平方根，其模平方便正比于通量大小。这样得到散射矩阵(scattering matrix)
+\[
+    \begin{pmatrix}\sqrt{k}\,B\\ \sqrt{q}\,C\end{pmatrix}
+    =S\begin{pmatrix}\sqrt{k}\,A\\ \sqrt{q}\,D\end{pmatrix},\qquad
+    S=\frac1{k+q}\begin{pmatrix}k-q&2\sqrt{kq}\\2\sqrt{kq}&q-k\end{pmatrix}.
+\]
+当两侧都是传播波时，$S^\dagger S=I$ 表明任意双端入射的总流入等于总流出。
+
+当 $0<E<V_0$ 时，令 $\kappa=\sqrt{2m(V_0-E)}/\hbar$。
+右侧有界解为 $t\e^{-\kappa x}$，导数在界面给出 $\i k(1-r)=-\kappa t$。
+这相当于令 $q=\i\kappa$，故 $r=(k-\i\kappa)/(k+\i\kappa)$ 的模为 1。
+右侧仍有指数衰减的概率密度，但代入式\eqref{eq:position-current}，这一倏逝波的定态流为零。
+恰在 $E=V_0$ 时，右侧的定态方程为 $u''=0$；有界性选出常数解，导数匹配给出 $r=1$，仍为全反射。
+
 \subsection{穿过有限宽势垒的概率流}
-若问题改为“入射束有多少能到达势垒另一侧”，边界条件就不同了。
+若高势区只有有限宽度，右边第二个界面会改变势垒内部的解。
 考虑一维矩形势垒：在 $0<x<a$ 内势能为 $V_0$，两侧为零，仅从左侧入射，且 $0<E<V_0$。
 右侧只有出射波。令 $k=\sqrt{2mE}/\hbar$、$\kappa=\sqrt{2m(V_0-E)}/\hbar$。
 定态方程在两侧成为 $\psi''=-k^2\psi$，在势垒内成为 $\psi''=\kappa^2\psi$，振荡解在此变成实指数的线性组合。
@@ -385,6 +423,18 @@ $A_{\incoming}\e^{\i kx}+A_{\mathrm{r}}\e^{-\i kx}$。
     \caption{左：取 $E=V_0/2$、$\kappa a=1$，虚线标出势垒两端，以入射波密度为单位，右侧平台高度即 $T$。右：固定 $V_0$ 改变宽度；在半对数坐标上，厚势垒的曲线趋于直线，对应 $T\propto\e^{-2\kappa a}$。}
     \label{fig:rectangular-barrier}
 \end{figure}
+
+当 $E>V_0$ 时，垒内也为行波。沿用势阶中的 $q$，在同一匹配式中令 $\kappa=\i q$，
+利用 $\cosh(\i qa)=\cos(qa)$、$\sinh(\i qa)=\i\sin(qa)$，有
+\begin{equation}
+    \frac{A_{\incoming}}{A}=\cos(qa)-\frac{\i}{2}
+        \bigg(\frac{k}{q}+\frac{q}{k}\bigg)\sin(qa),\qquad
+    T=\bigg[1+\frac{V_0^2\sin^2(qa)}{4E(E-V_0)}\bigg]^{-1}.
+\end{equation}
+每个界面单独都会反射。当垒宽容纳整数个半波长，即 $qa=n\pi$、$n=1,2,\ldots$ 时，
+各次反射的振幅相消，形成完全透射的共振。恰在垒顶 $E=V_0$，垒内解是 $x$ 的线性函数；
+从任一侧取极限，用 $\sin(qa)/q\to a$ 或 $\sinh(\kappa a)/\kappa\to a$，
+均得 $T=[1+mV_0a^2/(2\hbar^2)]^{-1}$。
 
 \section{三种绘景与Ehrenfest关系}
 前面的进动和反演问题都先求态随时间的变化，再计算读数。如果实验只问一个波包的中心怎样移动，
@@ -458,7 +508,22 @@ Heisenberg 绘景里直接对 $\op{A}_H$ 求导，得到
     \sigma_x^2(t)=\sigma_0^2+\frac{t^2}{m^2}\frac{\hbar^2}{4\sigma_0^2}
     =\sigma_0^2[1+(t/t_s)^2],\qquad t_s=\frac{2m\sigma_0^2}{\hbar}.
 \end{equation}
-自由传播保持 Gauss 形状和总概率，展宽因而伴随峰值下降（图\ref{fig:free-packet}）。
+在位置表象中还可看见展宽对应的相位变化。把初始中心取为原点，写平均动量为 $\hbar k_0$，
+取 $\psi(x,0)=(2\pi\sigma_0^2)^{-1/4}\exp[-x^2/(4\sigma_0^2)+\i k_0x]$。
+波数 $k$ 的平面波以 $\omega(k)=\hbar k^2/(2m)$ 积累相位。
+令 $s=k-k_0$，在中心波数附近展开，恰有
+$\omega(k_0+s)=\omega(k_0)+v_0s+\hbar s^2/(2m)$，其中群速度 $v_0=\hbar k_0/m$。
+初态的 Fourier 振幅正比于 $\exp(-\sigma_0^2s^2)$。
+各分量传播后，除去载波相位，所需积分为
+$\int_\RR\exp[-\sigma_0^2(1+\i t/t_s)s^2+\i (x-v_0t)s]\d s$。
+完成平方，并用 $t=0$ 的归一化固定系数，得到
+\begin{equation}
+    \psi(x,t)=\frac{\exp[\i k_0x-\i\omega(k_0)t]}{(2\pi\sigma_0^2)^{1/4}\sqrt{1+\i t/t_s}}\,
+    \exp\bigg[-\frac{(x-v_0t)^2}{4\sigma_0^2(1+\i t/t_s)}\bigg],
+\end{equation}
+平方根取从 $t=0$ 的正根连续延伸的一支。位置的二次项随时间获得虚部，
+波包前后两侧因而有不同的相位梯度。取模平方则给出中心在 $v_0t$、
+标准差为 $\sigma_x(t)$ 的归一化 Gauss 密度，展宽伴随峰值下降（图\ref{fig:free-packet}）。
 \begin{figure}[H]
     \centering\includegraphics[width=.62\linewidth]{figures/free_packet.pdf}
     \caption{横坐标以各时刻的波包中心 $\ave{\op{X}}_t$ 为原点，以初始标准差 $\sigma_0$ 为长度单位。三条曲线分别对应 $t/t_s=0,1,2$，可直接比较同一共动位置的概率密度。}

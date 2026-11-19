@@ -104,6 +104,8 @@ $\omega$是小振幅角频率。经典弹簧振子的位移为 $x=A\cos(\omega t
 基态具有零点能 $\hbar\omega/2$，其位置分布有多宽？振荡力又能在什么能级之间激发跃迁？
 前一问题取决于基态位移的方差，后一问题取决于位移算符在不同能量本征态之间的矩阵元。两者都可以用升降算符计算。
 
+\subsection{振动能级的位置波函数}
+若把陷阱中的粒子反复制备在同一能级 $n$，测得的位置分布由 $\psi_n(x)=\brkt{x}{n}$ 决定。
 在位置表象中，以平衡点为原点，令
 $b=\sqrt{\hbar/(m\omega)}=\sqrt 2 x_0$、$\xi=x/b$。
 动量作用于位置波函数为 $\op{P}=-\i\hbar\,\p_x$。
@@ -131,6 +133,40 @@ $\i \op{P}/(2p_0)$ 给出 $\p_\xi/\sqrt2$。
     \label{fig:osc-ladder}
 \end{figure}
 
+对任意 $n$，升高一次怎样改变多项式？让 $\op a\adjoint$ 作用于
+$h(\xi)\e^{-\xi^2/2}$，可得 $\e^{-\xi^2/2}(2\xi h-h')/\sqrt2$，其中撇表示对 $\xi$ 求导。
+因此多项式从 $H_0=1$ 起按 $H_{n+1}=2\xi H_n-H'_n$ 递推。
+由于 $2\xi h-h'=-\e^{\xi^2}(\e^{-\xi^2}h)'$，递推 $n$ 次便得物理学家约定的 Hermite 多项式及归一化波函数
+\begin{equation}
+    H_n(\xi)=(-1)^n\e^{\xi^2}\dd[n]{\xi}\e^{-\xi^2},\qquad
+    \psi_n(x)=\frac{H_n(\xi)\e^{-\xi^2/2}}
+                       {\pi^{1/4}\sqrt{2^n n!\,b}} .
+\end{equation}
+分母中的 $\sqrt{n!}$ 来自 $\ket n=(\op a\adjoint)^n\ket 0/\sqrt{n!}$。
+利用 $\brkt{m}{n}=\delta_{mn}$ 并换元 $\d x=b\d\xi$，得到带权正交关系
+\[
+    \intR \e^{-\xi^2}H_m(\xi)H_n(\xi)\d\xi
+       =\sqrt\pi\,2^n n!\,\delta_{mn}.
+\]
+
+定态方程还给出逐项求多项式系数的方法。记 $\epsilon=2E/(\hbar\omega)$，
+则 $\psi''+(\epsilon-\xi^2)\psi=0$。分离出高斯因子，写
+$\psi=\e^{-\xi^2/2}h(\xi)$、$h(\xi)=\sum_{j\geq0}c_j\xi^j$，得
+\begin{subequations}
+    \begin{alignat}{1}
+        h''-2\xi h'+(\epsilon-1)h&=0,\\
+        c_{j+2}&=\frac{2j+1-\epsilon}{(j+2)(j+1)}c_j .
+    \end{alignat}
+\end{subequations}
+奇、偶次系数分别递推。势能关于原点对称，可以分别取奇、偶宇称解。
+若某一宇称的非零级数一直延续，大阶系数最终同号，且
+$(k+1)c_{2k+s+2}/c_{2k+s}\to1$，其中 $s=0$ 或 $1$。
+因此在 $\xi>1$ 时，级数尾项的绝对值从某阶起逐项大于常数乘 $(3\xi^2/4)^k/k!$。
+求和后即使乘回 $\e^{-\xi^2/2}$，波函数仍随 $\xi\to\infty$ 增长。平方可积就要求级数截断。
+若 $c_n$ 是最后一个非零系数，则 $c_{n+2}=0$ 给出 $\epsilon=2n+1$，
+重现 $E_n=\hbar\omega(n+\tfrac12)$，相应的 $h$ 正比于 $H_n$。
+
+\subsection{位移矩与跃迁}
 由$\op{X}=x_0(\op{a}+\op{a}\adjoint)$，$x_0=\sqrt{\hbar/(2m\omega)}$，直接得到
 \begin{subequations}
     \begin{alignat}{1}
@@ -388,4 +424,5 @@ $\ket{1}$不能在理想分束后触发两个单光子吸收探测器的同次�
     以真空为能量零点时，$\op{H}'=\op{H}-\hbar\omega\one/2$。各态的 Boltzmann 权重与配分函数都乘以 $\exp(\beta\hbar\omega/2)$，归一化概率因而相同，热容和跃迁概率也相同。
     零点能保留在 $\op{H}$ 中，$\op{H}'$ 的期望值则只含可热激发的部分 $\hbar\omega\bar n$。当 $T\to0$ 时，$\bar n\to0$，热辐射通量趋于零。}
 
-\reading{光子的热占据见 Feynman 第 III 卷第 4 章\cite{feynman4}。下一章用升降算符求角动量谱。}
+\reading{Hermite 多项式的权函数与归一化可查\href{https://dlmf.nist.gov/18.3}{NIST 数学函数手册第18.3节}。
+    光子的热占据见 Feynman 第 III 卷第 4 章\cite{feynman4}。下一章用升降算符求角动量谱。}

@@ -77,13 +77,11 @@ jobs:
           path: ${{ runner.temp }}/course-notes.zip
           archive: false
           if-no-files-found: error
-      - name: Upload figure atlases and English quantum notes
+      - name: Upload figure atlases
         uses: actions/upload-artifact@v7
         with:
           name: supplements
-          path: |
-            */figures/tikz.pdf
-            Quantum Mechanics/ref/QM.pdf
+          path: '*/figures/tikz.pdf'
       - name: Upload diagnostics
         if: failure()
         uses: actions/upload-artifact@v7
@@ -109,7 +107,7 @@ jobs:
           body: |
             下载 [course-notes.zip](${{ github.server_url }}/${{ github.repository }}/releases/download/${{ github.ref_name }}/course-notes.zip)，解压后即可按课程阅读十卷中文 PDF。
 
-            [旧版勘误](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/docs/errata.md)列出了影响计算结果或物理解释的代表性问题。独立英文量子力学笔记与九份图册可在[本版构建](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})中下载 `supplements`。
+            [旧版勘误](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/docs/errata.md)列出了影响计算结果或物理解释的代表性问题。九份图册可在[本版构建](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})中下载 `supplements`。
           files: course-notes.zip
           fail_on_unmatched_files: true
           overwrite_files: false

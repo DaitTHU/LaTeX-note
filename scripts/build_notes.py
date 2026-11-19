@@ -169,8 +169,6 @@ def main():
         source = directory / f"{name}.tex"
         build(source, cache_dir)
         course_pdfs.append(source.with_suffix(".pdf"))
-        if name == "QM":
-            build(directory / "ref/QM.tex", cache_dir)
     if args.archive:
         if not course_pdfs:
             parser.error("the selected collection has no course PDF to archive")

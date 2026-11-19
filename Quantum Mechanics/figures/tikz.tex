@@ -241,6 +241,44 @@
     \end{scope}
 \end{tikzpicture}
 
+% 有限深方阱，z_0=3。z=ka 的两个根分别满足 z tan z=κa 和 -z cot z=κa。
+\begin{tikzpicture}[>=Latex]
+    \label{finite-well-parity}
+    \def\zeven{1.17012095}
+    \def\zodd{2.27886266}
+    \pgfmathsetmacro{\decayeven}{sqrt(9-\zeven^2)}
+    \pgfmathsetmacro{\decayodd}{sqrt(9-\zodd^2)}
+    \begin{scope}[x=1.08cm,y=2.2cm]
+        \draw[->] (-2.22,-1.12) -- (-2.22,.18) node[above] {$E/V_0$};
+        \draw[->] (-2.22,-1.12) -- (2.25,-1.12) node[right] {$x/a$};
+        \foreach \x in {-1,0,1}
+            \draw (\x,-1.12) -- ++(0,-.035) node[below] {$\x$};
+        \foreach \y in {-1,0}
+            \draw (-2.22,\y) -- ++(-.06,0) node[left] {$\y$};
+        \draw[very thick,ink] (-2.15,0) -- (-1,0) -- (-1,-1) -- (1,-1) -- (1,0) -- (2.15,0);
+        \draw[thick,curve] (-1,{-(\decayeven/3)^2}) -- (1,{-(\decayeven/3)^2}) node[right] {偶态};
+        \draw[thick,dashed,shortwave] (-1,{-(\decayodd/3)^2}) -- (1,{-(\decayodd/3)^2}) node[right] {奇态};
+    \end{scope}
+    \begin{scope}[xshift=6.95cm,yshift=-1.16cm,x=1.08cm,y=1.12cm]
+        \draw[->] (-2.22,-1.16) -- (-2.22,1.19) node[above] {$u/\max\abs{u}$};
+        \draw[->] (-2.22,-1.16) -- (2.25,-1.16) node[right] {$x/a$};
+        \foreach \x in {-1,0,1}
+            \draw (\x,-1.16) -- ++(0,-.065) node[below] {$\x$};
+        \foreach \y in {-1,0,1}
+            \draw (-2.22,\y) -- ++(-.06,0) node[left] {$\y$};
+        \draw[black!35] (-2.15,0) -- (2.15,0);
+        \foreach \x in {-1,1} \draw[densely dotted,black!50] (\x,-1.11) -- (\x,1.1);
+        \draw[very thick,curve,samples=51,domain=-1:1] plot (\x,{cos(deg(\zeven*\x))});
+        \draw[thick,dashed,shortwave,samples=51,domain=-1:1] plot (\x,{sin(deg(\zodd*\x))});
+        \foreach \side in {-1,1}{
+            \draw[very thick,curve,samples=28,domain=1:2.15]
+                plot ({\side*\x},{cos(deg(\zeven))*exp(-\decayeven*(\x-1))});
+            \draw[thick,dashed,shortwave,samples=28,domain=1:2.15]
+                plot ({\side*\x},{\side*sin(deg(\zodd))*exp(-\decayodd*(\x-1))});
+        }
+    \end{scope}
+\end{tikzpicture}
+
 % 第 4 章
 \standaloneconfig{border=4pt}
 \begin{tikzpicture}[>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
@@ -481,100 +519,6 @@
     \draw[radiation,shortwave] (decay) -- (uv);
 \end{tikzpicture}
 
-% 旧版英文讲义（ref/QM.tex）
-\standaloneconfig{border=0pt}
-\begin{tikzpicture}
-    \label{ref-sg-magnet}
-	\draw(0.6,2)--(0.8,1.5)--(1.8,1.5)--(2,2);
-	\node at(1.3,1.75){\textbf S};
-	\draw[ultra thin,->](-.2,-1.5)--(1,1.5);
-	\draw[ultra thin,->](.8,-1.5)--(1.2,1.5);
-	\draw[ultra thin,->](1.8,-1.5)--(1.4,1.5);
-	\draw[ultra thin,->](2.8,-1.5)--(1.6,1.5);
-	\draw(-.4,-2.3)--(-.4,-1.5)--(3,-1.5)--(3,-2.3);
-	\node at(1.3,-1.9){\textbf N};
-	\node at(-.3,-1){$\bm B$};
-	\draw[-Latex](0,1)--(0,2);
-	\node at(-.3,2){$z$};
-	\node at(-2.8,.06){$\electron^-$};
-	\draw[thick](0,0)--(-2.5,0);
-	\draw[thick](0,0)parabola bend(0,0)(4,1);
-	\draw[thick,-Latex](4,1)--(5,1.5);
-	\node at(4.1,1.5){$\ket{\uparrow_z}$};
-	\draw[thick](0,0)parabola bend(0,0)(4,-1);
-	\draw[thick,-Latex](4,-1)--(5,-1.5);
-	\node at(4.1,-1.5){$\ket{\downarrow_z}$};
-	\draw(5.1,2.5)--(5.1,-2.5);
-	\draw(5.2,1)..controls(5.2,1.4)..(6,1.5);
-	\draw(5.2,2)..controls(5.2,1.6)..(6,1.5);
-	\draw(5.2,-1)..controls(5.2,-1.4)..(6,-1.5);
-	\draw(5.2,-2)..controls(5.2,-1.6)..(6,-1.5);
-\end{tikzpicture}
-
-\begin{tikzpicture}
-    \label{ref-infinite-well}
-	\draw[color=gray,-](-3,0)--(3,0);
-	\draw[latex-latex](-1.3,2.6)--(-1.3,0)--(1.3,0)--(1.3,2.6);
-	%\node at(-3.3,2.6){$\infty$};\node at(-1.6,0){$0$};
-	\node at(-1.3,-0.3){$0$};
-	\node at(1.3,-0.3){$a$};
-	\node at(-2.2,1.3){I};
-	\node at(0,1.3){II};
-	\node at(2.2,1.3){III};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-    \label{ref-potential-step}
-	\draw[-](-3,0)--(0,0)--(0,2)--(3,2);
-	\node at(3.3,2){$V_0$};
-	\node at(-3.3,0){$0$};
-	\node at(0,-0.3){$0$};
-	\node at(-1.5,1){I};
-	\node at(1.5,1){II};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-    \label{ref-potential-barrier}
-	\draw[-](-3,0)--(-1.3,0)--(-1.3,2.6)--(1.3,2.6)--(1.3,0)--(3,0);
-	\node at(-3.3,0){$0$};
-	\node at(-1.6,2.6){$V_0$};
-	\node at(-1.3,-0.3){$0$};
-	\node at(1.3,-0.3){$a$};
-	\node at(-2.2,1.3){I};
-	\node at(0,1.3){II};
-	\node at(2.2,1.3){III};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-    \label{ref-finite-well}
-	\draw[-](-3,2.6)--(-1.3,2.6)--(-1.3,0)--(1.3,0)--(1.3,2.6)--(3,2.6);
-	\node at(-3.3,2.6){$0$};
-	\node at(-1.8,0){$-V_0$};
-	\node at(-1.42,-0.3){$-a$};
-	\node at(1.3,-0.3){$a$};
-	\node at(-2.2,1.3){I};
-	\node at(0,1.3){II};
-	\node at(2.2,1.3){III};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-    \label{ref-spherical-coordinates}
-	\draw[-latex](0,0)--(3,0);
-	\node[right]at(3,0){$y$};
-	\draw[-latex](0,0)--(0,3);
-	\node at(0.2,3){$z$};
-	\draw[-latex](0,0)--(-2,-1.5);
-	\node at(-2.2,-1.6){$x$};
-	\node at(-0.3,0.1){$O$};
-	\draw[thick](0,0)--(1.8,2.5);
-	\node[right]at(1.8,2.5){$P$};
-	\draw[dashed](0,0)--(1.8,-1)--(1.8,2.5);
-	\draw[-](1.6,-.89)--(1.6,-.64)--(1.8,-.75);
-	\node at(0.9,1.5){$r$};
-	\node at(0,-0.3){$\phi$};
-	\node at(0.15,0.5){$\theta$};
-\end{tikzpicture}
-
 % 黑体辐射补充图
 \standaloneconfig{border=3pt}
 \tikzset{>=latex}
@@ -693,7 +637,7 @@
     \node[above=0pt,scale=0.75,red] at (1150,{planck(1150,3000)}) {\qty{3000}{K}};
     \node[above right=-1pt,scale=0.75,orange!80!black] at (740,{planck(740,4000)}) {\qty{4000}{K}};
     \node[above right=-1pt,scale=0.75,blue] at (800,{planck(800,5000)}) {\qty{5000}{K}};
-    \node[above right=-1pt,scale=0.75,blue] at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh-Jeans};
+    \node[above right=-1pt,scale=0.75,blue] at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh--Jeans};
 
     %% TICKS
     %\tick{500,0}{500}
@@ -763,7 +707,7 @@
     \node[above=0pt,scale=0.75,red] at (1150,{planck(1150,3000)}) {\qty{3000}{K}};
     \node[above right=-1pt,scale=0.75,orange!80!black] at (740,{planck(740,4000)}) {\qty{4000}{K}};
     \node[above right=-1pt,scale=0.75,blue] at (800,{planck(800,5000)}) {\qty{5000}{K}};
-    \node[above right=-1pt,scale=0.75,blue] at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh-Jeans};
+    \node[above right=-1pt,scale=0.75,blue] at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh--Jeans};
 
   \end{axis}
 \end{tikzpicture}
@@ -828,7 +772,7 @@
     \node[above right=-1pt,scale=0.75,blue]
       at (800,{planck(800,5000)}) {\qty{5000}{K}};
     \node[above right=-1pt,scale=0.75,blue]
-      at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh-Jeans};
+      at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh--Jeans};
 
     % LABELS
     \node[below=2pt,scale=0.8] at (200,\ymax) {\strut UV}; % 10 - 400 nm
@@ -937,7 +881,7 @@
 
     % LEGENDS
     \addlegendentry{Planck}
-    \addlegendentry{Rayleigh-Jeans}
+    \addlegendentry{Rayleigh--Jeans}
     \addlegendentry{Wien}
     \node[scale=1] at (0.18*\xmax,0.01*\ymax) {$T=\qty{300}{K}$};
 
@@ -987,7 +931,7 @@
 
     % LEGENDS
     \addlegendentry{Planck}
-    \addlegendentry{Rayleigh-Jeans}
+    \addlegendentry{Rayleigh--Jeans}
     \addlegendentry{Wien}
     \node[scale=1] at (0.17*\xmax,0.01*\ymax) {$T=\qty{3000}{K}$};
 

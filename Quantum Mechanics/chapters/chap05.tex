@@ -46,6 +46,13 @@ $\op{T}\adjoint\hatbm{X} \op{T}=\hatbm{X}+\bm a\,\one$；空间均匀性因此�
 \end{equation}
 自旋的同一关系已由 Pauli 算符的乘法得到。轨道算符与自旋算符分别作用在空间和内部自由度上，交叉对易子为零，两部分就能直接相加。
 
+质量为 $M$ 的粒子在静标势中的 Hamilton 算符是 $\op H=\hatbm P^2/(2M)+V(\hatbm X)$，动能与 $\hatbm L$ 对易。
+在相关算符乘积有定义且期望有限的态上，由 $[V,\op P_j]=\i\hbar\p_j V$ 和 Ehrenfest 关系得到力矩方程
+\begin{equation}
+    \dv{}{t}\ave{\hatbm L}=\ave{\hatbm X\times[-\grad V(\hatbm X)]}.
+\end{equation}
+若静势能只依赖距离，力沿径向，每个角动量分量都与 $\op H$ 对易，定态可以按 $\ell,m$ 分类。
+
 \section{角动量谱}
 
 知道角动量产生旋转以后，可以回到束流实验：给定角动量的大小，沿一个选定的轴究竟能分出几束？
@@ -124,6 +131,47 @@ $\lambda-m(m\pm1)$最终会变负，因此升降链必须在两端终止。
     \centering\tikzfigure[width=.40\linewidth]{angular-projection}
     \caption{$\ell=2$ 时球半径为 $\sqrt{6}\hbar$，五条纬圈的高度对应五个 $\op{L}_z$ 本征值。点线标出 $m=1$ 态的轴向投影，其读数为 $m\hbar=\hbar$。}\label{fig:angular-projection}
 \end{figure}
+
+\subsection{轨道角动量的方向波函数}
+\label{ss:qm-spherical-harmonics}
+若测量粒子的位置方向，轨道态 $\ket{\ell,m}$ 在立体角 $\d\Omega=\sin\theta\d\theta\d\phi$
+内的概率为 $\abs{Y_{\ell m}(\theta,\phi)}^2\d\Omega$。方向振幅 $Y_{\ell m}$ 称为球谐函数(spherical harmonic)。
+在极角 $\theta$、方位角 $\phi$ 的球坐标中，$\bm r=r\uvec r$ 与梯度叉乘消去了梯度的径向分量，故
+\begin{equation}
+    \hatbm L=-\i\hbar\,\bm r\times\grad
+       =-\i\hbar\biggp{\uvec\phi\,\p_\theta
+            -\frac{\uvec\theta}{\sin\theta}\p_\phi}.
+\end{equation}
+取它在 $z$ 轴的分量得 $\op L_z=-\i\hbar\p_\phi$，取 $x,y$ 分量的组合则有
+\begin{equation}
+    \op L_\pm=\op L_x\pm\i\op L_y
+        =\hbar\e^{\pm\i\phi}\bigp{\pm\p_\theta+\i\cot\theta\,\p_\phi}.
+\end{equation}
+因而 $\op L_\pm$ 使方位因子 $\e^{\i m\phi}$ 的 $m$ 增减一。
+将这两个微分算符代入 $\hatbm L^2=\op L_+\op L_-+\op L_z^2-\hbar\op L_z$，得
+\begin{equation}
+    \hatbm L^2=-\hbar^2\biggb{\frac{1}{\sin\theta}\p_\theta\bigp{\sin\theta\,\p_\theta}
+                       +\frac{1}{\sin^2\theta}\p_\phi^2}.
+    \label{eq:qm-angular-laplacian}
+\end{equation}
+由 $\op L_zY_{\ell m}=\hbar mY_{\ell m}$ 可写 $Y_{\ell m}=f(\cos\theta)\e^{\i m\phi}$。
+再令 $x=\cos\theta$，$\hatbm L^2$ 的本征方程成为
+\begin{equation}
+    \dv{}{x}\biggp{(1-x^2)\dv{f}{x}}
+        +\biggp{\ell(\ell+1)-\frac{m^2}{1-x^2}}f=0 .
+\end{equation}
+在两极正则的解由缔合 Legendre 函数给出。取 Condon--Shortley 相位约定，对 $0\le m\le\ell$ 写成
+\begin{equation}
+    Y_{\ell m}=\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}}\,
+        P_\ell^m(\cos\theta)\e^{\i m\phi},\qquad
+    P_\ell^m(x)=(-1)^m(1-x^2)^{m/2}\dv[m]{P_\ell(x)}{x}.
+\end{equation}
+这里 $P_\ell(x)=(2^\ell\ell!)^{-1}(\nd/\nd x)^\ell(x^2-1)^\ell$ 是 Legendre 多项式，
+负投影的方向振幅满足 $Y_{\ell,-m}=(-1)^m Y_{\ell m}\conj$。
+沿整个方位角积分得到 $2\pi\delta_{mm'}$；固定 $m$ 后，极角积分给出不同 $\ell$ 的正交性。两者合起来有
+\begin{equation}
+    \int_{S^2}Y_{\ell m}\conj Y_{\ell' m'}\d\Omega=\delta_{\ell\ell'}\delta_{mm'}.
+\end{equation}
 
 \section{角动量合成}
 单个角动量的大小和投影都有了标签。原子同时有轨道角动量和自旋，转动整个原子时两者一起转动。
@@ -426,4 +474,5 @@ $\op{\Pi}\ket{i}=\pi_i\ket{i}$、$\op{\Pi}\ket{f}=\pi_f\ket{f}$，其中$\pi_i,\
 
 \checkpoint{转动对称性给出了基态的哪些信息？}{它要求各个$j$多重态内的$m$简并。哪个$j$多重态能量最低，取决于具体Hamilton量、粒子统计和边界条件。}
 \reading{角动量的升降与合成核对MIT 8.05讲义9、10及Feynman第III卷第18章\cite{mitangular,feynman18}。
+    球坐标下的梯度与 Laplacian 可查《电动力学》卷附录“曲线坐标系”，球谐函数的相位与归一化见\href{https://dlmf.nist.gov/14.30}{NIST 数学函数手册第14.30节}。
     下一章用这些代数解释氢谱中更大的简并。}

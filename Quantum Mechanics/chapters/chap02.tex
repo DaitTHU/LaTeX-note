@@ -227,6 +227,12 @@ $N_j/(N\Delta x)$，这样柱的面积才等于该格的概率。若概率密度
 \end{theorem}
 本书引用该定理。对离散读数，谱积分还原为各投影乘以相应读数后的求和。
 对读数集合 $B$，Born 规则给出 $p(a\in B)=\mel{\psi}{\op P(B)}{\psi}$。
+若仪器把离散读数 $a$ 换算为实数 $f(a)$，相应的可观测量在原来读数为 $a$ 的子空间上乘以 $f(a)$。
+用同一组谱投影可写出这个算符，以及态 $\ket{\psi}$ 属于其定义域的条件：
+\[
+    f(\op A)=\sum_a f(a)\op P_a,\qquad
+    \sum_a |f(a)|^2\norm{\op P_a\ket{\psi}}^2<\infty .
+\]
 
 怎样在位置表象中识别动量？大学物理中波长 $\lambda$ 对应波数 $k=2\pi/\lambda$。
 de Broglie 关系 $p=\hbar k$ 将动量 $p$ 与空间相位 $\exp(\i px/\hbar)$ 联系起来。
@@ -249,6 +255,21 @@ de Broglie 关系 $p=\hbar k$ 将动量 $p$ 与空间相位 $\exp(\i px/\hbar)$ 
 $\op{P}\op{X}$ 给出 $-\i\hbar(x\psi)'=-\i\hbar(\psi+x\psi')$，相减留下 $\i\hbar\psi$。
 这就是绪论所写的 $[\op{X},\op{P}]=\i\hbar\one$。三维动量平面波的归一化因子为$(2\pi\hbar)^{-3/2}$。
 位置和动量振幅密度的量纲分别为长度$^{-1/2}$和动量$^{-1/2}$；模平方乘以相应的积分测度给出无量纲概率。
+
+对光滑的位置函数 $f$ 和光滑且有紧支撑的波函数 $\psi$，乘积求导给出
+\[
+    [\op P,f(\op X)]\psi
+    =-\i\hbar\bigl((f\psi)'-f\psi'\bigr)=-\i\hbar f'\psi .
+\]
+例如取 $f=V$，后面用 Ehrenfest 关系求平均力时就会出现这个势能导数。
+这里的求导也有代数解释。记 $\op C=[\op A,\op B]$，逐次展开乘积的对易子可得
+\begin{equation}
+    [\op A,\op B^n]
+    =\sum_{j=0}^{n-1}\op B^j\op C\op B^{n-1-j},\qquad n\geq1 .
+\end{equation}
+若 $[\op C,\op B]=0$，每一项都等于 $\op B^{n-1}\op C$，于是对任意多项式 $f$ 有
+$[\op A,f(\op B)]=f'(\op B)\op C$。无界算符的这些乘积可在共同不变的定义域上计算。
+若两算符有界，且 $f$ 在原点的幂级数收敛半径大于 $\|\op B\|$，则逐项取对易子和求导都在算符范数下收敛，公式仍成立。
 
 \section{Hermite、对称与自伴算符}
 \label{sec:selfadjoint}
@@ -351,7 +372,7 @@ $\brkt{x}{p_n}=C\e^{\i p_nx/\hbar}$；
     \ket{u}=\ket{v}\frac{\brkt{v}{u}}{\brkt{v}{v}}+\ket{u_\perp},
     \qquad \brkt{v}{u_\perp}=0.
 \end{equation}
-两部分范数相加，得到
+两部分正交，范数平方相加，得到
 $\brkt{u}{u}\,\brkt{v}{v}=\abs{\brkt{u}{v}}^2+\brkt{u_\perp}{u_\perp}\brkt{v}{v}
 \geq\abs{\brkt{u}{v}}^2$；$\ket{v}=0$时也成立。
 接着利用

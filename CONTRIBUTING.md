@@ -16,7 +16,7 @@
 
 首次构建先按[MATLAB 绘图](#matlab-绘图)生成插图，再用 XeLaTeX 和 latexmk 编译笔记。Ubuntu 的 TeX Live 包和中文字体清单见[构建工作流](.github/workflows/latex.yml)。
 
-从仓库根目录运行 `python3 scripts/build_notes.py QM` 可编译量子力学图册、正文和独立英文笔记。将 `QM` 换成其他课程缩写即可编译相应卷。修改共享模板或数学宏后，运行 `python3 scripts/build_notes.py` 编译所有入口。
+从仓库根目录运行 `python3 scripts/build_notes.py QM` 可编译量子力学图册和正文。将 `QM` 换成其他课程缩写即可编译相应卷。修改共享模板或数学宏后，运行 `python3 scripts/build_notes.py` 编译所有入口。
 
 CI 分别缓存每门课的 MATLAB 插图、每份 TikZ 图册及每个笔记入口。绘图脚本或输入数据变更会重画该课程的图，共用 MATLAB 函数的变更会重画所有 MATLAB 图。TeX 根据上次编译实际读过的文件逐项核对内容，图册的 PDF 和带页码的 `.aux` 一起恢复。修改某卷的正文通常只重编该卷。新增、删除或改名构建输入时，CI 会重新建立 TeX 缓存，以识别首次出现的可选输入。构建环境更新、缓存过期或校验失败时也会重新编译相应产物。
 
