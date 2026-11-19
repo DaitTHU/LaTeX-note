@@ -14,11 +14,24 @@
 
 ## 编译与排版检查
 
-首次构建时先按下文的 MATLAB 命令生成插图。在仓库根目录运行 `python3 scripts/build_notes.py 课程缩写`。修改共享模板或数学宏时，应运行 `python3 scripts/build_notes.py` 检查所有入口。
+首次构建先按[MATLAB 绘图](#matlab-绘图)生成插图，再用 XeLaTeX 和 latexmk 编译笔记。Ubuntu 的 TeX Live 包和中文字体清单见[构建工作流](.github/workflows/latex.yml)。
 
-打开生成的 PDF，检查修改页及相邻页的公式换行、图表、引用和页眉。提交源文件即可，课程 PDF、TikZ 图册和可重画的插图由 CI 生成。`.aux`、`.log`、`.xdv` 等中间文件由本地构建生成。
+从仓库根目录运行 `python3 scripts/build_notes.py QM` 可编译量子力学图册、正文和独立英文笔记。将 `QM` 换成其他课程缩写即可编译相应卷。修改共享模板或数学宏后，运行 `python3 scripts/build_notes.py` 编译所有入口。
 
-当前自动检查不能验证物理正确性，也不把所有排版警告视为错误。请在 PR 中简述验证方法和仍未解决的问题。
+编译失败时，查看出错入口旁的 `*.build.log` 获取完整命令输出，或查看 `*.log` 定位 TeX 报错。出现 `Unknown TikZ figure` 时，核对正文引用与图册中的标签，再用构建脚本按顺序重编图册和正文。Linux 上如提示缺少“㶲”等专业汉字，检查是否安装了 `fonts-noto-cjk`。
+
+打开生成的 PDF，检查修改页及相邻页的公式换行、图表、引用和页眉。遇到 `tcolorbox` 跨页警告时，着重检查框内文字与公式是否完整。提交源文件即可，课程 PDF、TikZ 图册和 MATLAB 插图由 CI 生成。
+
+### 量子力学公式核对
+
+在 Python 环境中安装 NumPy 2 或更新版本，然后从仓库根目录运行：
+
+```sh
+python3 -m pip install 'numpy>=2'
+python3 scripts/check_quantum_formulas.py
+```
+
+脚本独立计算旋量演化、微扰能级、光谱和光子符合等十四组算例，逐项输出 `PASS`。修改相应推导时，请在 PR 中注明核对的公式、参数和成立条件。
 
 ## 插图
 
@@ -72,10 +85,10 @@ run('Quantum Mechanics/figures/matlab/free_packet.m')
 
 线性代数和核辐射卷的绘图输入保存在各卷的 `figures/matlab/inputs/` 中。
 
-- `svcompress.m` 对 `Original_Doge_meme.jpg` 的灰度矩阵作奇异值分解，比较不同截断秩的近似。原照片由佐藤敦子（Atsuko Sato）拍摄，著作权归原作者。[照片来源与权利说明](https://en.wiktionary.org/wiki/File:Original_Doge_meme.jpg)
+- `svcompress.m` 对 `Original_Doge_meme.jpg` 的灰度矩阵作奇异值分解，比较不同截断秩的近似。摄影者为佐藤敦子（Atsuko Sato）。来源页将原照片列为受著作权保护的非自由内容。[照片来源与权利说明](https://en.wiktionary.org/wiki/File:Original_Doge_meme.jpg)
 - `binding_energy.m` 使用 NuDat 导出的 `nndc_nudat_data_export.csv` 和元素符号表 `symbol.mat`。CSV 中的 `z`、`n` 分别是质子数和中子数，`bindingEnergy(keV)` 是以 keV 表示的每核子结合能。[NNDC NuDat](https://www.nndc.bnl.gov/nudat3/)
 - `halflife.m` 使用 `halfLife.mat` 中的矩阵 `halfLife(N,Z)`，单位为秒。无穷大表示稳定核素，NaN 表示缺少数据。
-- `decay_system.m` 从随附的边表绘制钍系、铀系和锕铀系三页衰变链，正文按此顺序选页。表中各分支的母核、子核、分支比、半衰期和同质异能跃迁标记取自作者本科项目的衰变链计算。[Radiation](https://github.com/DaitTHU/Radiation)
+- `decay_system.m` 用 `decay_series.csv` 依次绘制钍系、铀系和锕铀系。边表取自作者的 Radiation 项目，保留原图中母核、子核、跃迁强度和半衰期的对应关系。原程序把相同质子数与中子数的核态合并到同一节点，`parentState` 标记产生该条边记录的母核态。[Radiation 的衰变链计算](https://github.com/DaitTHU/Radiation/blob/2629d2662865b396c23c6d0524886d3f662dd487/%40Nuclide/decayChain.m)
 
 核壳层模型的自旋–轨道分裂图由 `figures/tikz.tex` 中的 `spin-orbit-splitting` 图页生成。
 

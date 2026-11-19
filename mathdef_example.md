@@ -60,7 +60,7 @@
 
 数学模式中 `\i` 表示虚数单位，`\e` 表示自然指数的底，基本电荷写作斜体 `e`。热量、功的过程微元可写 `\vd Q`、`\vd W`，状态函数的全微分写 `\d U`，有限增量写 `\Delta U`。Dirac 分布 `\delta(x)` 和 Kronecker 符号 `\delta_{ij}` 使用普通的希腊字母。一维积分反复用到两个固定区间。`\intR` 展开为 `\int_{-\infty}^\infty`，`\intRplus` 展开为 `\int_0^\infty`。上限是变量的 `\int_{-\infty}^x`、从 `a` 起的尾积分 `\int_a^\infty` 及端点代入 `\eval{F}_0^\infty` 直接写界限。
 
-公式预览直接读取数学模式下的 `\d`、`\i` 及各个括号命令。正文需要无点的 i 或带下点的字母时，可用 `\dotlessi` 或 `\dotbelow{a}`。
+正文需要无点的 i 或带下点的字母时，可用 `\dotlessi` 或 `\dotbelow{a}`。
 
 ## 图的两个变量与物理单位
 
@@ -70,17 +70,16 @@
 | --- | --- |
 | 数值和单位 | `\qty{1.5}{\micro\second}`、`\qty{13.6}{\electronvolt}` |
 | 量的区间 | `\qtyrange{2}{5}{\kilo\electronvolt}` |
-| 坐标轴或表头单列单位 | `$t$ (\unit{\second})` |
+| 有量纲的数值轴或表头 | `$t/\unit{\second}$`、`$v/(\unit{\metre\per\second})$` |
+| 归一化的坐标轴 | `$t/\tau$`、`$r/a$` |
 | 带复合单位的量 | `\qty{9.81}{\metre\per\second\squared}` |
 | 数值角度 | `\ang{90}` |
 
 全库采用 siunitx v3 的命令。`\qty` 同时接收数值和单位，`\unit` 排印单独的单位，`\qtyrange` 接收区间两端的数值与共用单位。应按量的含义选单位。计数变量 *N*、折射率 *n*、数学区间以及解析式中的角变量直接写在数学模式中。
 
-单位、不确定度和范围的最终排版以 XeLaTeX 编译的 PDF 为准。LaTeX Workshop 10.20 的悬停预览使用 MathJax，本机默认配置会把 `\qty`、`\unit` 和 `\qtyrange` 显示为命令名。预览无需另行配置。
+数值轴和表头中的单位是除数。例如，`$t/\unit{\second}$` 的刻度 2 表示 2 秒。更多示例见[坐标轴和色标](CONTRIBUTING.md#坐标轴和色标)。
 
 ## 括号尺寸与 Dirac 记号
-
-`\bigg` 是 TeX 和 MathJax 均认识的尺寸命令。`\biggabs{x}` 这类项目命令在 `mathdef.tex` 中显式声明，LaTeX Workshop 可以直接读到。`\makeatletter` 内的公开声明也能读到。通过 `\csname` 动态拼出的宏名只在 TeX 展开时建立。
 
 期望值、绝对值、范数和 Dirac 记号默认采用当前数学样式的普通尺寸。例如，行内的 `\ave{\hat A}` 与 `\langle\hat A\rangle` 相同，放进下标也会随下标缩小。帽号或一个上下标通常用普通尺寸就足够。遇到分式、积分或嵌套结构时，可在宏名前加 `big`、`Big`、`bigg`、`Bigg`，按由小到大的顺序选取能看清层次的一档。
 
