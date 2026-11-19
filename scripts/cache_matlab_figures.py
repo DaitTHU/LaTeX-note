@@ -6,28 +6,29 @@ import json
 import os
 import shutil
 import subprocess
+from collections.abc import Callable, Collection
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def checksum(path):
+def checksum(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def add_tree(digest, directory):
+def add_tree(update: Callable[[bytes], None], directory: Path) -> None:
     for path in sorted(directory.rglob("*")):
         if path.is_file():
-            digest.update(path.relative_to(ROOT).as_posix().encode() + b"\0")
-            digest.update(bytes.fromhex(checksum(path)))
+            update(path.relative_to(ROOT).as_posix().encode() + b"\0")
+            update(bytes.fromhex(checksum(path)))
 
 
-def figure_name(name):
+def figure_name(name: str) -> bool:
     return (Path(name).name == name and name != "tikz.pdf"
             and Path(name).suffix in (".pdf", ".png"))
 
 
-def require_generated(directory, names):
+def require_generated(directory: Path, names: Collection[str]) -> None:
     """Never restore over source files or follow a link out of the figure directory."""
     if not names or not all(figure_name(name) for name in names):
         raise ValueError("expected plain PDF or PNG figure filenames")
@@ -45,7 +46,7 @@ def require_generated(directory, names):
         raise ValueError(f"expected only untracked, gitignored figures: {relative - ignored}")
 
 
-def snapshot(directory):
+def snapshot(directory: Path) -> dict[str, list[int]]:
     """Identify outputs written by this build, even in a previously built checkout."""
     stats = {}
     for path in directory.iterdir():
@@ -55,7 +56,7 @@ def snapshot(directory):
     return stats
 
 
-def restore_course(slot, directory, fingerprint):
+def restore_course(slot: Path, directory: Path, fingerprint: str) -> bool:
     try:
         manifest = json.loads((slot / "manifest.json").read_text(encoding="utf-8"))
         if manifest["source"] != fingerprint:
@@ -73,15 +74,15 @@ def restore_course(slot, directory, fingerprint):
     return True
 
 
-def restore(cache, state):
+def restore(cache: Path, state: Path) -> None:
     common = hashlib.sha256(Path(__file__).read_bytes())
-    add_tree(common, ROOT / "figures/matlab")
+    add_tree(common.update, ROOT / "figures/matlab")
     pending = {}
     for sources in sorted(ROOT.glob("*/figures/matlab")):
         directory = sources.parent
         course = directory.parent.name
         digest = common.copy()
-        add_tree(digest, sources)
+        add_tree(digest.update, sources)
         fingerprint = digest.hexdigest()
         if restore_course(cache / course, directory, fingerprint):
             print(f"Restored MATLAB figures: {course}")
@@ -94,7 +95,7 @@ def restore(cache, state):
             print("courses=" + "|".join(pending), file=file)
 
 
-def save(cache, state):
+def save(cache: Path, state: Path) -> None:
     pending = json.loads(state.read_text(encoding="utf-8"))
     for course, record in pending.items():
         directory = ROOT / course / "figures"
@@ -123,7 +124,7 @@ def save(cache, state):
         print(f"Cached {len(files)} MATLAB figures: {course}")
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("operation", choices=("restore", "save"))
     parser.add_argument("cache", type=Path)
