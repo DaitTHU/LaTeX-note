@@ -24,17 +24,6 @@ CI 分别缓存每门课的 MATLAB 插图、每份 TikZ 图册及每个笔记入
 
 打开生成的 PDF，检查修改页及相邻页的公式换行、图表、引用和页眉。遇到 `tcolorbox` 跨页警告时，着重检查框内文字与公式是否完整。提交源文件即可，课程 PDF、TikZ 图册和 MATLAB 插图由 CI 生成。
 
-### 量子力学公式核对
-
-在 Python 环境中安装 NumPy 2 或更新版本，然后从仓库根目录运行：
-
-```sh
-python3 -m pip install 'numpy>=2'
-python3 scripts/check_quantum_formulas.py
-```
-
-脚本独立计算旋量演化、微扰能级、光谱和光子符合等十四组算例，逐项输出 `PASS`。修改相应推导时，请在 PR 中注明核对的公式、参数和成立条件。
-
 ## 插图
 
 同一课程的 TikZ 图片写在 `figures/tikz.tex`。例如，在量子力学图册的正文中加入一页：
