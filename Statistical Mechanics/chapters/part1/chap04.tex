@@ -1,9 +1,9 @@
 \chapter{}
 
 \iffalse
-Gibbs自由能$G(T,P,N)=\mu N$，因此化学势是$T,P$的函数。一种测量化学势的方法是利用吸附现象。暴露在气体或液体中的表面，在某些位置上会吸附气体或液体中的分子。吸附和脱附过程是重要的表面现象。考虑最简单的情形，吸附能$\varepsilon<0$，统计力学给出该吸附位占据的几率是
+单组分均匀系统满足$G(T,P,N)=\mu N$，其中$N$为粒子数，$\mu$为每粒子化学势。可利用吸附测量$\mu$。设独立吸附位至多容纳一个分子，空位能量取为零，单占据态能量为$\varepsilon<0$，两态均不简并。与粒子库平衡时，吸附位占据的概率是
 \[
-	p=\frac1{1+\e^{(\varepsilon-\mu)/\kB T}}.
+	p=\frac1{1+\exp[(\varepsilon-\mu)/(\kB T)]}.
 \]
 \begin{notecaptionblock}
 	\tikzfigure{adsorption-occupation}
@@ -22,23 +22,24 @@ Gibbs自由能$G(T,P,N)=\mu N$，因此化学势是$T,P$的函数。一种测量
 	电导中，电流密度
 \[\bm j_e=-\sigma\,\grad\phi.\]
 即Ohm定律，其中$\sigma$为电导率。
-	扩散中，
-\[\bm j_n=D\,\grad n.\]
+	无外力、温度均匀时，粒子从高数密度向低数密度扩散，
+\[\bm j_n=-D\,\grad n.\]
 
 \subsection*{熵的产生}
-熵流
-\[\dv st=\pv st+\div \bm J_s\]
-这样热流密度
-\[\bm J_q=T\bm J_s=\bm J_u-\mu\bm J_n\]
-非平衡热力学基本方程
-\[\dv st=\sum\bm F_i\cdot\bm J_i.\]
-其中$\bm F_i:=\grad A_i$为驱动力。
+在静止介质中，令$s$为单位体积熵，$\bm J_s$为熵流密度，$\sigma_s$为单位体积、单位时间的熵产生。局域熵平衡为
+\[\pv st+\div\bm J_s=\sigma_s,\qquad \sigma_s\ge0.\]
+例如，在刚性介质中仅有能量和一种粒子输运，无化学反应及外力做功。记$u,n$为内能密度和粒子数密度，$\bm J_u,\bm J_n$为相应通量。将局域平衡关系$T\d s=\d u-\mu\d n$与两条守恒方程联立，有
+\[
+	\bm J_s=\frac{\bm J_u-\mu\bm J_n}{T},\qquad
+	\sigma_s=\bm J_u\cdot\grad(1/T)-\bm J_n\cdot\grad(\mu/T).
+\]
+纯导热时$\bm J_n=0$，Fourier定律给出$\sigma_s=\kappa|\grad T|^2/T^2\ge0$。
 
 \newcommand*{\entransy}{\scalebox{.4}[1]{火}\hspace{-4.3pt}\scalebox{.4}[1]{火}\hspace{-1pt}\scalebox{.7}[1]{积}}
 
 \subsection*{\entransy}
-\entransy\footnote{笑死，这个字根本打不出来。}(entransy)是清华大学过增元院士等通过热电类比提出的一个新的概念。顾名思义，\entransy 被定义为热能和温度的积（的一半）
-\[G:=\frac12QT.\]
+\entransy\footnote{笑死，这个字根本打不出来。}(entransy)是清华大学过增元院士等通过热电类比提出的一个新的概念。在固定体积、热容$C$取常数的模型中，以$U_{\rm th}=CT$表示物体所储存的热能，该量写为
+\[G:=\frac12U_{\rm th}T.\]
 在过院士等人的著作《传热\entransy 理论及其应用》中，\entransy 有热势能的含义，并类比熵的英文entropy，将\entransy 的英文称作entransy。在书中，作者基于能量守恒方程推导了平衡方程，并提出耗散和耗散热阻等概念。通过平衡方程建立了系统内部传热引起的耗散与边界换热温差、热流之间的关系，为传热过程和热系统的优化提供了新的方法。%\underline{并差点得了科技进步奖。}
 感兴趣的同学春季学期可以选修\textit{新概念热学(New Thermology)}\footnote{某老师更愿意简称其为NT。}。
 

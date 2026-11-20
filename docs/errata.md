@@ -22,6 +22,12 @@
 
 ## 统计力学
 
+- **自由膨胀的熵变。** 理想气体绝热地向真空膨胀时，初末平衡态温度相同。可沿连接这两态的可逆等温路径计算 $\Delta S=nR\ln(V_2/V_1)$。实际膨胀的吸热和做功均为零，中间状态通常不能用整团气体的同一组 $T,p$ 描述。[统计力学·热力学第二定律](../Statistical%20Mechanics/chapters/part1/chap01.tex)
+- **巨配分函数对逆温度的偏导。** 固定体积时，$-\partial_\beta\ln\Xi$ 在固定逸度下给出 $U$，在固定化学势 $\mu$ 下给出 $U-\mu\langle N\rangle$。计算固定平均粒子数的热容时，须随温度调节逸度。[统计力学·量子气体](../Statistical%20Mechanics/chapters/part2/chap03.tex) · [统计力学·巨正则系综](../Statistical%20Mechanics/chapters/part2/chap04.tex)
+- **气液共存的自由能判据。** 固定温度、外压和物质的量，均匀相的摩尔体积 $v$ 使 $f(T,v)+p_{\rm ext}v$ 取极小，其中 $f$ 是摩尔 Helmholtz 自由能。两极小值等深给出共存压强。旧版直接比较不同密度的 $G/V$，改变每摩尔能量的参考零点就会移动其极小值。[统计力学·气液相变](../Statistical%20Mechanics/chapters/part1/chap03.tex)
+- **节流与退磁的温度变化。** van der Waals 气体在力学稳定的单相分支上降压节流，制冷条件为 $T<2a(1-b/v)^2/(Rb)$。普通 Curie 顺磁体在恒压下可逆绝热退磁也会降温，因为 $(\partial T/\partial B)_{S,p}=-(T/C_{p,B})(\partial m/\partial T)_{p,B}>0$。旧版在这两处写反了方向。[统计力学·节流膨胀](../Statistical%20Mechanics/chapters/part1/chap01.tex) · [统计力学·磁热效应](../Statistical%20Mechanics/chapters/part1/chap02.tex)
+- **正则熵的计数。** 对 $M$ 个可区分的系统副本，$M!/\prod_s M_s!$ 计数的是全部副本的分配方式。取对数后须除以 $M$ 再取极限，才得到单个系统的熵 $-k_{\rm B}\sum_s\rho_s\ln\rho_s$。[统计力学·正则系综](../Statistical%20Mechanics/chapters/part2/chap04.tex)
+- **Bose 凝聚点的热容。** 对三维均匀理想 Bose 气体，$C_V(T_c)/(Nk_{\rm B})=15\zeta(5/2)/[4\zeta(3/2)]\simeq1.926$。从高温侧接近临界点时，逸度从下方趋于 1，$\operatorname{Li}_{1/2}$ 发散。旧版将这个极限归因于 $\zeta(s)$ 在 $s=1/2$ 有极点，并在热容公式中漏掉 $Nk_{\rm B}$。[统计力学·Bose 气体](../Statistical%20Mechanics/chapters/part2/chap03.tex) · [NIST 对 ζ 函数的定义](https://dlmf.nist.gov/25.2)
 - **固定物质的量与化学势。** 单组分均匀系统仅有体积功且可忽略表面效应时，内能对广延量一阶齐次，故 $U=TS-pV+\mu n$。取微分并与热力学基本关系比较，得到 $S\,\mathrm dT-V\,\mathrm dp+n\,\mathrm d\mu=0$。沿固定 $n$ 的过程可以令 $\mathrm dn=0$，但 $\mu n$ 和 $n\,\mathrm d\mu$ 仍须保留。[统计力学·Euler 方程与 Gibbs–Duhem 关系](../Statistical%20Mechanics/chapters/part1/chap02.tex)
 - **Fermi 巨配分函数的幂次。** 逆温度为 $\beta=1/(k_{\mathrm B}T)$。单个独立粒子态只允许占据 $0$ 或 $1$ 个费米子，因此对两种可能求和得到 $1+\exp[-\beta(\varepsilon-\mu)]$。简并度为 $g$ 的独立能级贡献这个因子的 $g$ 次幂，旧版的负幂会算错平均占据数。[统计力学·巨正则系综](../Statistical%20Mechanics/chapters/part2/chap04.tex)
 

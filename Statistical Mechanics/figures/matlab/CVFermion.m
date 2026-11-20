@@ -1,15 +1,12 @@
 figure
-alpha = -10 : 0.1 : 1.3;
+alpha = [-40 : -11, -10 : .1 : 1.3];
+fHalf = fermiIntegral(.5, alpha);
+fThreeHalves = fermiIntegral(1.5, alpha);
+fFiveHalves = fermiIntegral(2.5, alpha);
+T = (fThreeHalves * 3 * sqrt(pi) / 4).^(-2/3);
+C = 15/4 * fFiveHalves ./ fThreeHalves - 9/4 * fThreeHalves ./ fHalf;
 
-% Fermi
-xi = fermiIntegral(1.5, alpha);
-beta = (xi * 3 * sqrt(pi) / 4).^(1/1.5);
-T = 1./ beta;
-lnXi = fermiIntegral(2.5, alpha)./ xi;
-U = 3/2 * lnXi./ beta;
-C = diff(U)./ diff(T);
-
-p1 = lincomp(plot([0 T(2:end)], [0 C], LineWidth=2), disp=true);
+p1 = lincomp(plot([0 T], [0 C], LineWidth=2), disp=true);
 hold on
 t0 = [0 0.31];
 p2 = plot(t0, pi^2/2*t0, 'k--');
@@ -28,5 +25,5 @@ exportgraphics(gca, "../C_VFermion.pdf", ContentType="vector", BackgroundColor="
 
 % Fermi integral F_s(alpha) = -Li_s(-exp(-alpha)).
 function F = fermiIntegral(s, alpha)
-F = arrayfun(@(a) integral(@(x) x.^(s-1)./(exp(x+a)+1), 0, Inf), alpha) / gamma(s);
+F = arrayfun(@(a) integral(@(u) 2*u.^(2*s-1)./(exp(u.^2+a)+1), 0, Inf), alpha) / gamma(s);
 end

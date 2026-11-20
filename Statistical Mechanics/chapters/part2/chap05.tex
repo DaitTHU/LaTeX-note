@@ -1,6 +1,6 @@
 \chapter{非平衡态统计理论初步}
 
-平衡态性质及其统计方法存在大量非平衡态和不可逆过程。本章主要讨论稀薄气体的非平衡性质分子运动论方法。
+打开隔板后，气体中一小团被标记的分子会向四周扩散。本章从稀薄气体的分子碰撞出发，研究单粒子分布随时间的变化。扩散系数既可以从分子云的展宽求得，也可以从平衡时单个分子的速度记录求得。给分子施加一个弱力，还能测出同一组速度涨落决定的迁移率。
 
 \section{气体分子的碰撞频率}
 
@@ -14,19 +14,25 @@
 采用弹性刚球模型（无摩擦，无形变，弹性碰撞）。对于稀薄气体，只考虑两体碰撞，对于两类不同分子间碰撞：单位时间内，平均一个分子1与分子2的碰撞次数$\theta_{12}$，称碰撞频率。
 
 指定速度的分子1的碰撞：
-单位时间内，一个速度$v_1$的分子1与任意速度的分子2碰撞次数$\theta_{12}(\bm r,\bm v_1,t)$。碰撞只与相对速度$\bm g_{21}=\bm v_2-\bm v_1$有关。发生碰撞的有效截面积$\pi\sigma^2_{12}$，其中$\sigma_{12}=(\sigma_1+\sigma_2)/2$为两分子直径平均值。易知，这个条件是各向同性的。
+记速度为$\bm v_1$的分子1与第二种分子的平均碰撞频率为$\theta_{12}(\bm r,\bm v_1,t)$，相对速率为$g_{12}=\abs{\bm v_2-\bm v_1}$。两硬球的总截面为$\pi\sigma^2_{12}$，其中$\sigma_{12}=(\sigma_1+\sigma_2)/2$为两分子直径的平均值。给定入射速度后，碰撞参数和碰撞平面决定出射方向。
 \begin{align}
 	\theta_{12}(\bm r,\bm v_1,t)=\pi\sigma_{12}^2\int f_2(\bm r,\bm v_2,t)g_{12}\d\bm v_2,
 \end{align}
-以上采用了分子混沌假设，即分子速度分布是独立的：
+以上采用了分子混沌假设，把即将碰撞的两分子的速度联合分布近似为
 \[
 	f(\bm r,\bm v_1,\bm v_2,t)\simeq f_1(\bm r,\bm v_1,t)f_2(\bm r,\bm v_2,t).
 \]
 
 故单位时间内，平均一个分子1与分子2碰撞次数
 \begin{align}
-	\theta_{12}(\bm r,t)=\frac1{n_1(\bm r_1,t)}\int f_1(\bm r,\bm v_1,t)\theta_{12}(\bm r,\bm v_1,t)\d\bm v_1.
+	\theta_{12}(\bm r,t)=\frac1{n_1(\bm r,t)}\int f_1(\bm r,\bm v_1,t)\theta_{12}(\bm r,\bm v_1,t)\d\bm v_1.
 \end{align}
+\paragraph{平均自由程}
+设均匀平衡气体由质量$m$、直径$\sigma$相同的硬球组成，数密度为$n$。在气体静止系中，两分子各自的速度分量方差为$\kB T/m$，入射速度之差的分量方差为$2\kB T/m$。因此相对速率$g$服从约化质量$m/2$对应的Maxwell速率分布，平均值$\ave g=\sqrt 2\ave v$，其中$\ave v=\sqrt{8\kB T/(\pi m)}$。
+平均每个分子在单位时间内与其余分子碰撞$\theta=n\pi\sigma^2\ave g$次。用单位时间每个分子走过的平均路程除以平均碰撞次数，得到两次碰撞之间的平均自由程
+\begin{equation}
+	\ell=\frac{\ave v}{\theta}=\frac{1}{\sqrt2\,n\pi\sigma^2}.
+\end{equation}
 \paragraph{两体碰撞运动学}
 弹性碰撞满足动量守恒和能量守恒
 \begin{align}
@@ -35,7 +41,7 @@
 \end{align}
 4方程，6未知数，需指定碰撞方向$\bm n$ （或散射角$\theta,\phi$）才能完全决定末态速度。
 
-设速度改变方向$\bm n$，即
+设$\bm n$为两硬球接触时沿球心连线的单位法向量。无摩擦碰撞的冲量沿此法线，即
 \begin{gather*}
 	(m_1,\bm v_1)+(m_2,\bm v_2)\quad\overset{\bm n}{\longrightarrow}\quad(m_1,\bm v_1')+(m_2,\bm v_2').\\
 	\bm v_1'-\bm v_1=\lambda_1\bm n,\quad\bm v_2'-\bm v_2=\lambda_2\bm n.
@@ -58,7 +64,7 @@
 \begin{compactenum}
 	\item 碰撞前后相对速率不变
 	\[
-		\bm v_1'-\bm v_2'=\bm v_1-\bm v_2-2\bigb{(\bm v_1-\bm v_2)\cdot\bm n}\bm n\implies g_{21}'=g_{21}.
+		\bm v_1'-\bm v_2'=\bm v_1-\bm v_2-2\bigb{(\bm v_1-\bm v_2)\cdot\bm n}\bm n\implies g_{12}'=g_{12}.
 	\]
 	\item 碰撞前后相对速度沿碰撞方向变号，垂直方向不变
 	\begin{align*}
@@ -73,11 +79,11 @@
 \section{Boltzmann输运方程}
 讨论分布函数如何随时间变化，记$t$时刻，$(\bm r,\bm v)$处体积元在$\mu$空间$\d\bm r\nd\bm v$中的粒子数$f(\bm r,\bm v,t)\d\bm r\nd\bm v$。
 
-将分子作为经典粒子处理，需要满足非简并条件；对不计内部简并度的气体，可写为
+这里使用非简并气体的单粒子分布。对不计内部简并度的气体，相应条件为
 \[
 	\lambda_T=\Bigp{\frac{h^2}{2\pi m\kB T}}^{1/2}\ll\Bigp{\frac VN}^{1/3}.
 \]
-稀薄气体近似: 分子除碰撞短时间隔处是自由的。（高温低密度）
+硬球的稀薄条件为$n\sigma^3\ll1$，此时平均自由程远大于球径，多体同时碰撞可忽略。下文还假定一次碰撞可用经典散射描述。非简并条件本身只控制全同粒子的交换效应。
 
 因此$\p f/\p t$可看成两部分贡献：漂移项(drift)和碰撞项(collision)
 \begin{align}
@@ -105,9 +111,9 @@
 
 原碰撞：$\d t$内，$\d\bm r\nd\bm v$中分子与速度$\bm v_1\to\bm v_1+\d\bm v_1$分子碰撞使粒子数减少
 \[
-	f(\bm r,\bm v,t)\d\bm r\nd\bm v\cdot f(\bm r_1,\bm v_1,t)\d\bm v_1\sigma^2\d\Omega\cdot g\d t\cos\theta=f\!f_1\Lambda\d t\nd\Omega\nd\bm r\nd\bm v\nd\bm v_1.
+	f(\bm r,\bm v,t)\d\bm r\nd\bm v\cdot f(\bm r,\bm v_1,t)\d\bm v_1\sigma^2\d\Omega\cdot g\d t\cos\theta=f\!f_1\Lambda\d t\nd\Omega\nd\bm r\nd\bm v\nd\bm v_1.
 \]
-其中$\Lambda:=\abs{\bm v-\bm v_1}\sigma^2\cos\theta$，相应的逆碰撞
+其中$\theta$为入射相对速度与碰撞法线所成的锐角，$\Lambda:=\abs{\bm v-\bm v_1}\sigma^2\cos\theta$。相应的逆碰撞给出
 \[
 	f'\!f_1'\Lambda\d t\nd\Omega\nd\bm r\nd\bm v\nd\bm v_1.
 \]
@@ -123,16 +129,17 @@
 
 精确的单粒子演化方程依赖两粒子分布，后者又依赖三粒子分布，由此形成BBGKY层级\footnote{Bogoliubov--Born--Green--Kirkwood--Yvon hierarchy。}。分子混沌假设忽略碰撞前粒子的速度关联，将入射两粒子分布近似分解为单粒子分布的乘积，从而使Boltzmann方程封闭。这是稀薄气体动力学的近似，不能视为任意时刻的精确独立性。
 \section{Boltzmann \textit{H}定理}
-讨论系统趋向平衡态时，分布函数的性质。定义：$H$函数为分布函数$f(\bm r,\bm v,t)$的泛函
+为讨论系统趋向平衡时分布函数的变化，定义泛函
 \begin{align}
 	H(t)=\int f(\bm r,\bm v,t)\ln f(\bm r,\bm v,t)\d\bm r\nd\bm v.
 \end{align}
+这里$\ln f$表示$\ln(f/f_\ast)$，$f_\ast$是与$f$有相同量纲的常数。粒子数守恒时改变$f_\ast$只给$H$增加一个常数。
 \begin{theorem}{Boltzmann $H$定理}{Boltzmann H Theorem}
 	若$f(\bm r,\bm v,t)$满足上述Boltzmann输运方程，且空间边界无净熵流（如周期边界或镜面反射边界）、速度无穷远处$f$足够快地衰减，则
 	\begin{align}
 		\dv Ht\leqslant 0.
 	\end{align}
-	当且仅当$f\!f_1=f'\!f_1'$时取等号。
+	当且仅当对碰撞积分测度几乎处处有$f\!f_1=f'\!f_1'$时取等号。
 \end{theorem}
 \begin{proof}
 	\begin{align*}
@@ -141,7 +148,7 @@
 	漂移项贡献为0
 	\begin{align*}
 		&-\int(1+\ln f)(\bm v\cdot\grad_{\bm r}f+\bm a\cdot\grad_{\bm v}f)\d\bm r\nd\bm v\\
-		=&-\int\bm v\cdot\grad_{\bm r}(f\ln f)+\nabla_{\bm v}\cdot(\bm a f\ln f)\d\bm r\nd\bm v\tag{Gauss}\\
+		=&-\int\Bigb{\bm v\cdot\grad_{\bm r}(f\ln f)+\nabla_{\bm v}\cdot(\bm a f\ln f)}\d\bm r\nd\bm v\tag{Gauss}\\
 		=&-\int\oint \bm v f\ln f\cdot\d\bm S\nd\bm v-\int\oint\bm af\ln f\cdot\d\bm S_{\bm v}\nd\bm r=0.
 	\end{align*}
 	碰撞项贡献
@@ -160,31 +167,127 @@
 	\begin{align}
 		\dv Ht=-\frac14\int (\ln f'\!f_1'-\ln f\!f_1)(f'\!f_1'-f\!f_1)\Lambda\d\Omega\nd\bm v_1\nd\bm r\nd\bm v\leqslant 0.
 	\end{align}
-	当且仅当$f\!f_1=f'\!f_1'$时取等号。
+	被积式中两个差同号，因此取等号要求其乘积对碰撞积分测度几乎处处为零。
 \end{proof}
 
-\paragraph{讨论}
-\begin{compactenum}
-	\item 碰撞使$f$改变，从而使$H$不断减小，当$H$达到极小值时，达到平衡态。从统计理论上说明了趋向平衡的不可逆性（$H$单调减）。
-	\item 可以证明，熵与$H$函数的关系为
-	\begin{align}
-		S=-\kB H+\const.
-	\end{align}
-	因此，$H$趋于极小与$S$趋于极大一致，$H$定理与$S$增原理相当，但有不同之处：
-	\begin{compactitem}
-		\item 对任意态可定义$H$，但热力学中$S$仅对平衡态有定义\footnote{可通过Boltzmann关系推广$S$定义。}；
-		\item 熵增原理适用于任意孤立系，$H$定理前提：$f$满足Boltzmann输运方程，即分子混沌假设成立；
-		\item $H$定理给出单调性；具体弛豫速率仍需求解输运方程或作额外近似。
-	\end{compactitem}
-	\item $H$定理具有统计特征，对统计性的$f$再取了一次平均：
-	\[
-		H=N\ave{\ln f}.
-	\]
-	这里平均以$f/N$为权重。$f$是统计分布而非单条微观轨道；在通常的光滑解假设下，$H(t)$连续可微，不能把单次碰撞的离散性直接赋予$H(t)$。
-	\item 微观可逆性与宏观不可逆性：当Hamilton量在动量反号下不变时，微观方程具有时间反演对称性。Boltzmann方程还使用了碰撞前的分子混沌假设；把精确微观轨道反演后，通常会产生不满足这一假设的入射关联。因此$H$定理的单调性不能直接推广为任意有限系统微观轨道的逐时性质。
-	\item 微观运动可复原性问题
-	
-	Poincaré回归定理：在保持测度且可达相空间体积有限的动力系统中，几乎所有初态都会在足够长的时间后回到任意小的初态邻域。这一结论针对精确微观动力学，不能直接套用于作了分子混沌近似的Boltzmann方程。
+\paragraph{等号条件与局域平衡}
+取正的光滑分布$f$。在固定的$(\bm r,t)$，等号条件给出$\ln f+\ln f_1=\ln f'+\ln f_1'$。对弹性硬球的所有碰撞方向都成立的光滑碰撞不变量是$1,\bm v,v^2$的线性组合，分别对应粒子数、动量和能量守恒。因此$\ln f$是速度分量的线性项与$v^2$项之和加常数。配平方并用局域数密度$n$、平均速度$\bm u$和温度$T$表示这些系数，就得到局域Maxwell分布
+\[
+	f(\bm r,\bm v,t)=n(\bm r,t)\Bigp{\frac{m}{2\pi\kB T(\bm r,t)}}^{3/2}
+	\exp\biggb{-\frac{m\abs{\bm v-\bm u(\bm r,t)}^2}{2\kB T(\bm r,t)}}.
+\]
+这种分布使碰撞项逐点为零。全局平衡还要求分布满足定态漂移方程和边界条件。例如，在无外场的周期盒内，取恒温、$\bm u=0$且初始数密度$n(x)$随位置变化。记归一化的Maxwell速度分布为$M_T(\bm v)$，则初始时刻$\d H/\nd t=0$，但由输运方程$\p f/\p t=-v_x n'(x)M_T(\bm v)$，粒子仍会从不同位置流入和流出。
 
-	Boltzmann提出：Poincaré周期很长，远超出实际观测的时间，因此，在观测时间里，回到原状的几率很小。不同的理解：如Huang \S 4.1, \S 4.4, \S 4.5。
-\end{compactenum}
+\paragraph{熵与微观可逆性}
+按单粒子概率密度$f/N$取平均，有$H=N\ave{\ln f}$。定义稀薄气体的动理学熵
+\begin{equation}
+	S=-\kB H+\const.
+\end{equation}
+在平衡态，这一表达式给出气体的热力学熵。在上述边界条件下，沿Boltzmann方程的解有$\d S/\nd t\geq0$。弛豫所需的时间还取决于碰撞频率和扰动的空间尺度。
+
+对无外场的弹性硬球，把所有分子的速度反向，就能使精确微观运动沿原轨道返回。原先由碰撞产生的出射速度关联，此时成为入射速度关联，因而反演后的气体一般不满足分子混沌假设。这解释了微观运动的可逆性怎样与动理学熵的单调性相容。
+
+Poincaré回归定理也描述微观轨道：当演化保持测度且可达相空间体积有限时，几乎所有初态都会再次进入任意小的初态邻域。对于宏观气体，回归时间通常远长于实验观测时间（参见Huang \S 4.1、\S 4.4、\S 4.5）。
+
+\section{示踪粒子的扩散}
+在静止、均匀、温度为$T$的气体中标记少数分子，标记不改变分子质量和碰撞截面。记标记分子的数密度为$c(\bm r,t)$。分子在两次碰撞之间把标记带到邻近位置，反复碰撞使其逐渐失去对初始速度方向的记忆。若$c$在一个平均自由程上的变化很小，标记分布接近$f_0=cM_T(\bm v)$。
+
+用一个与速度无关的弛豫时间$\tau$近似标记分子的碰撞项$-(f-f_0)/\tau$。在远长于$\tau$的扩散时间尺度上，保留浓度梯度的一阶项，输运方程给出
+\[
+	f-f_0\simeq-\tau\,\bm v\cdot\grad_{\bm r} f_0
+	=-\tau M_T(\bm v)\,\bm v\cdot\grad c.
+\]
+平衡速度分布各向同性，$\int v_i v_jM_T(\bm v)\d\bm v=\delta_{ij}\ave{v^2}/3$。对速度取一阶矩便得到标记分子的数通量和Fick定律
+\begin{equation}
+	\bm j=\int \bm v f\d\bm v=-D\grad c,\qquad
+	D=\frac{\ave{v^2}\tau}{3}=\frac{\kB T}{m}\tau .
+\end{equation}
+标记分子数在碰撞中守恒。对输运方程按速度积分，得到$\p c/\p t+\div\bm j=0$，因此$c$满足扩散方程$\p c/\p t=D\nabla^2 c$。在三维空间中，若初始标记集中在原点附近且可忽略边界，方程两边乘$r^2$再积分，两次分部积分给出
+\[
+	\dv{\ave{r^2}}{t}=D\ave{\nabla^2 r^2}=6D.
+\]
+因此可以测量标记分子云的均方半径随时间增长的斜率来确定$D$。
+
+在量级估算中取$\tau\sim\ell/\ave v$及$\ave{v^2}\sim\ave v^2$，得$D\sim\ave v\ell/3$，量纲为面积除以时间。对给定直径的稀薄硬球，$D$随$\sqrt T/n$增加。一次碰撞保留的速度关联与入射速度、碰撞方向有关，要确定硬球扩散系数的数值前因子，需进一步求解碰撞项。
+
+\section{平衡涨落与线性响应}\label{sec:linear-response}
+
+\subsection{从速度记录求扩散系数}
+在均匀、各向同性的三维经典流体中跟踪一个粒子，取流体静止系，使$\ave{\bm v}=0$。速度自关联函数
+\[
+	C_v(t)=\ave{\bm v(t)\cdot\bm v(0)}
+\]
+度量粒子保留初始运动方向的程度。平均可以取遍许多平衡轨迹，也可以在遍历的平衡轨迹上取不同的时间原点。每条轨迹都满足$\Delta\bm r(t)=\int_0^t\bm v(s)\d s$。把位移平方，利用平衡态的时间平移不变性以及$C_v(-s)=C_v(s)$，得到
+\begin{equation}
+	\ave{\abs{\Delta\bm r(t)}^2}
+	=\int_0^t\d s\int_0^t\d s'\,C_v(s-s')
+	=2\int_0^t(t-s)C_v(s)\d s.
+	\label{eq:sm-msd-vacf}
+\end{equation}
+短时间内$C_v(s)\simeq\ave{v^2}$，均方位移按$t^2$增长，此时可以分辨粒子沿初始方向的飞行。若速度关联可积，长时间均方位移的斜率趋向$6D$。\eqref{eq:sm-msd-vacf}的导数给出自扩散的Green--Kubo公式
+\begin{equation}
+	D=\frac13\int_0^\infty C_v(s)\d s
+	=\int_0^\infty\ave{v_x(s)v_x(0)}\d s .
+	\label{eq:sm-green-kubo-d}
+\end{equation}
+在分子动力学模拟中，均方位移的长时斜率和速度关联积分的平台都可以用来确定$D$。若速度关联按时间常数$\tau$指数衰减，其积分为$C_v(0)\tau$，代入便给出上节的扩散系数。真实流体中的粒子也可能在碰到邻居后折返，使某段时间内的速度关联为负，这一段会减小扩散系数。
+
+\subsection{弱力、迁移率与Einstein关系}
+沿$x$方向给示踪粒子一个很小的冲量$I$。设该粒子的动量只通过$p_x^2/(2m)$进入经典哈密顿量，冲量把$p_x$变为$p_x+I$。脉冲后的相空间分布用脉冲前的正则分布$\rho_0$表示为
+\[
+	\rho_{0^+}(\ldots,p_x)=\rho_0(\ldots,p_x-I)
+	=\rho_0(\ldots,p_x)\bigb{1+\beta I v_x+O(I^2)},\qquad
+	\beta=\frac1{\kB T}.
+\]
+此后粒子仍按原哈密顿量运动。在上述分布中对$v_x(t)$取平均，得到脉冲响应$\delta\ave{v_x(t)}=\beta I\ave{v_x(t)v_x(0)}$至$I$的一阶。把任意弱力$F(t')$分解为连续的小冲量$F(t')\d t'$，便有
+\[
+	\delta\ave{v_x(t)}
+	=\beta\int_{-\infty}^{t}\ave{v_x(t-t')v_x(0)}F(t')\d t'.
+\]
+若恒力作用足够久，粒子取得稳定的漂移速度，定义迁移率$b$为漂移速度与弱力之比。与\eqref{eq:sm-green-kubo-d}比较得
+\begin{equation}
+	b=\beta\int_0^\infty\ave{v_x(s)v_x(0)}\d s,\qquad
+	D=\kB T b .
+	\label{eq:sm-einstein-mobility}
+\end{equation}
+这就是Einstein关系。举例来说，若长时间的阻力为$-\zeta v_x$，力平衡给出$b=1/\zeta$，于是平衡粒子的扩散系数为$\kB T/\zeta$。将速度关联除以初值$\ave{v_x^2}=\kB T/m$再积分，得到速度记忆的时间尺度$m/\zeta$。
+
+\subsection{量子Kubo公式与涨落耗散定理}
+设量子系统起初处于$\hat H_0$的正则平衡态$\hat\rho_0$，外场$f(t)$通过$\hat H'(t)=-f(t)\hat B$耦合到可观测量$\hat B$。系统对这个场的响应可以通过另一个可观测量$\hat A$来测定。在相互作用绘景中，将密度算符的运动方程积分至$f$的一阶得
+\[
+	\delta\hat\rho_I(t)=\frac{\i}{\hbar}\int_{-\infty}^t
+	f(t')\bigb{\hat B(t'),\hat\rho_0}\d t'.
+\]
+这里算符均按$\hat H_0$演化。把上式乘以$\hat A(t)$取迹，利用迹的循环性得到Kubo公式\footnote{参见David Tong的\href{https://davidtong.org/pdfs/teaching/kinetic-theory/kinetic4.pdf}{\textit{Kinetic Theory}第四章}。}
+\begin{align}
+	\delta\ave{\hat A(t)}&=\int_{-\infty}^{\infty}
+	\chi^R_{AB}(t-t')f(t')\d t',\notag\\
+	\chi^R_{AB}(s)&=\frac{\i}{\hbar}\Theta(s)
+	\ave{[\hat A(s),\hat B(0)]}_0 .
+	\label{eq:sm-kubo-retarded}
+\end{align}
+阶跃函数$\Theta(s)$体现因果性，外场只对其施加时刻之后的测量有贡献。
+
+取傅里叶变换$g(\omega)=\int_{-\infty}^{\infty}\e^{\i\omega t}g(t)\d t$。设$\hat A=\hat B$为厄米算符，记$\chi''_{AA}(\omega)=\Im\chi^R_{AA}(\omega)$。施加$f(t)=f_0\cos\omega t$时，外场的周期平均输入功率为
+\[
+	\avg{P}=-\avg{\dot f\,\ave{\hat A}}
+	=\tfrac12\omega f_0^2\chi''_{AA}(\omega).
+\]
+从而，测量吸收功率即可得到响应的耗散部分。平衡中也能测到同一组跃迁。令$\delta\hat A=\hat A-\ave{\hat A}_0$，定义未对称化的涨落谱
+\[
+	S_A(\omega)=\int_{-\infty}^{\infty}\e^{\i\omega t}
+	\ave{\delta\hat A(t)\delta\hat A(0)}_0\d t .
+\]
+在$\hat H_0$本征态中插入恒等算符，记$p_m=\e^{-\beta E_m}/Z$、$\omega_{nm}=(E_n-E_m)/\hbar$，即得
+\[
+	S_A(\omega)=2\pi\sum_{m,n}p_m\abs{\mel{m}{\delta\hat A}{n}}^2
+	\delta(\omega-\omega_{nm}).
+\]
+交换$m,n$并用$p_n/p_m=\e^{-\beta\hbar\omega_{nm}}$，可见正负频率的权重满足细致平衡$S_A(-\omega)=\e^{-\beta\hbar\omega}S_A(\omega)$。另一方面，\eqref{eq:sm-kubo-retarded}中的对易子给出$2\hbar\chi''_{AA}(\omega)=S_A(\omega)-S_A(-\omega)$。消去两种跃迁权重之差，得到非零频率处的量子涨落耗散定理
+\begin{equation}
+	S_A^{\mathrm{sym}}(\omega)
+	:=\frac{S_A(\omega)+S_A(-\omega)}2
+	=\hbar\coth\!\Bigp{\frac{\beta\hbar\omega}{2}}\chi''_{AA}(\omega).
+	\label{eq:sm-quantum-fdt}
+\end{equation}
+左边是对称化的平衡噪声谱。若$\hbar\abs{\omega}\ll\kB T$，便得到经典关系$S_A^{\mathrm{sym}}(\omega)\simeq 2\kB T\chi''_{AA}(\omega)/\omega$。在相反的极限$\hbar\omega\gg\kB T$下，$S_A(-\omega)$的权重受到指数抑制，因为能向外场释放能量$\hbar\omega$的激发态很少被占据。

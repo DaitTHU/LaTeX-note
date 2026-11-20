@@ -1,20 +1,18 @@
 \chapter{近独立粒子系统的统计分布}
 
-统计物理是将宏观性质看作是对应微观量的统计平均的微观理论。单粒子的力学规律是决定论的，如量子力学的Schrödinger方程、经典力学中的正则方程或Newton II；而宏观系统的统计规律是非决定论的，用宏观量指定的宏观状态对应大量不同的微观状态。
+统计物理用微观量的统计平均描述宏观性质。给定初态，经典正则方程决定一条轨道，Schrödinger方程决定封闭量子系统的态演化。实验给定的宏观量通常容许大量不同的微观状态，统计计算还需指定这些状态的概率。
 
 % 概率基本知识：概念、互斥事件几率的加法定理、独立事件几率的乘法定理、条件概率、二项分布、Poisson分布、Gauss分布、多个随机变量的联合概率分布、统计平均值和涨落等。
 
 \begin{theorem}
 	{Schrödinger方程}{Schrödinger equation}
-	微观粒子遵从量子力学规律。
-	对于单粒子状态，可以通过Schrödinger方程描述：
+	对不显含时间的单粒子哈密顿算符$\hat H$，能量本征态满足定态Schrödinger方程
 	\begin{equation}
-		\hat H\ket n=\varepsilon_n\ket n,
+		\hat H\ket{n,j}=\varepsilon_n\ket{n,j},
 	\end{equation}
-	解得能量本征值$\varepsilon_n$和对应的$\omega_n$个本征量子态$\ket n_1,\ldots,\ket n_{\omega_n}$。
+	其中$j=1,\ldots,\omega_n$标记同一能量$\varepsilon_n$的本征子空间的一组正交归一基。
 
-	一个本征值对应多个量子态的情况称为简并(degeneracy)，
-	$\omega_n$称为简并度。
+	$\omega_n$称为简并度。当$\omega_n>1$时，这个能级是简并的。
 \end{theorem}
 
 % \begin{example}{一维无穷深势阱}{1-D Infinte Square Potential Well}
@@ -28,14 +26,14 @@
 
 \begin{definition}
 	{微观状态和宏观状态}{microstate and macrostate}
-	对于多粒子系统，其微观状态(microstate)是粒子按量子态$\ket i_j$的一个分配方式。
-	而宏观状态(macrostate)是粒子按能量$\varepsilon_i$的一个分布(distribution)。
+	对本章的近独立粒子系统，用粒子在单粒子态$\ket{i,j}$上的分配来标记计数所用的多体基矢。每一种允许的分配计作一个微观状态(microstate)。
+	若只记录各能级$\varepsilon_i$的粒子数，就得到这里采用的宏观状态(macrostate)。
 
 	记分布$\{a_i\}$表示有$a_i$个粒子处于能级$\varepsilon_i$，其对应的微观状态数为$\Omega$。
 \end{definition}
 
 \begin{corollary}
-	由于简并，一个能级$\varepsilon_i$可能有多个量子态$\ket i_j$，因此一个宏观状态可以对应大量不同的微观状态。
+	计数时只记录能级占据数$a_i$，一个分布可以对应多种微观分配。例如，当能级简并时，同一能级内还可区分不同的单粒子态$\ket{i,j}$。
 \end{corollary}
 
 对于粒子总数$N$、内能$U$和体积$V$确定的平衡态孤立粒子系统，做出两点假设。
@@ -51,7 +49,7 @@
 
 \begin{postulate}
 	{最概然分布}{most probable distribution}
-	将概率最大的分布作为平衡态分布，称为最概然分布(most probable distribution)。
+	概率最大的分布称为最概然分布(most probable distribution)。当所求宏观量在其附近的相对涨落足够小时，可用这一分布计算平衡值。
 \end{postulate}
 
 \begin{corollary}
@@ -64,9 +62,9 @@
 
 \begin{example}
 	{}{}
-	考虑两个盒子，每个小球落入左盒或右盒的概率各为 $1/2$。
+	考虑两个盒子，$N$个可区分的小球独立地落入左盒或右盒，每个小球落入两盒的概率各为$1/2$。
 	我们统计左边盒子中的小球数量$X$作为宏观状态分布。
-	给定$N$个小球，则$X=k$的分布对应的微观状态数为
+	$X=k$的分布对应的微观状态数为
 	\[
 		\Omega(X=k)=\binom Nk:=\frac{N!}{k!(N-k)!}.
 	\]
@@ -74,7 +72,7 @@
 	\[
 		\P(X=k)=\frac{\Omega(X=k)}{\sum_{k=0}^N\Omega(X=k)}=\frac1{2^N}\binom Nk.
 	\]
-	随着$N$的增大，左边盒子中小球数量占比$x:=X/N$的概率密度$f(x)$越来越接近其最概然分布$1/2$，可以证明半高宽$\propto1/\sqrt N$。
+	占比$x=X/N$取离散值$k/N$。图中按相邻取值的间距$1/N$将概率质量换算为密度高度$f(k/N)=N\P(X=k)$。分布以$1/2$为中心，标准差为$1/(2\sqrt N)$，大$N$时半高宽也正比于$1/\sqrt N$。
 	对于宏观系统，粒子数$N$通常在$\NA\sim10^{23}$量级，在这一量级下，$X/N$以极高概率落在$1/2$的很小邻域内；这不意味着某个精确取值（例如$X=N/2$）的概率接近1。
 	\begin{notecaptionblock}
 		\includegraphics[width=0.6\linewidth]{figures/ML_distribution.pdf}
@@ -87,11 +85,7 @@
 
 \begin{definition}
 	{近独立粒子}{nearly independent particle}
-	在平均意义下，若
-	\begin{center}
-		$0<$粒子间作用能$\ll$单个粒子能量
-	\end{center}
-	则称粒子是近独立的(nearly independent)。
+	当粒子间相互作用对所研究的平衡性质只产生小修正，可以把多体能量近似写成各粒子能量之和时，称粒子是近独立的(nearly independent)。
 \end{definition}
 
 \begin{corollary}
@@ -99,7 +93,7 @@
 \end{corollary}
 
 \begin{remark}
-	近独立粒子间仍有相互作用，否则无法达到热力学平衡状态。
+	微弱的碰撞可以使能量在粒子间重新分配。在计算平衡能量时可以忽略这种作用，在讨论孤立气体从给定初态趋近平衡的时间时则须考虑它。
 \end{remark}
 
 \paragraph{经典分布}
@@ -179,7 +173,7 @@
 \begin{definition}{Bose系统}{Bose system}
 	性质：粒子不可分辨，量子态容纳粒子数不受限制。
 
-	微观状态数：相当于在$a_i+\omega_i$个粒子$+$空位的间隔中插$a_i$个隔板
+	把$a_i$个相同的粒子符号和$\omega_i-1$个隔板排成一列，隔板间的粒子数依次给出各单粒子态的占据数。各能级的分配数相乘得到
 	\begin{subequations}
 		\label{eqn:Bose system}
 		\begin{equation}
@@ -212,7 +206,7 @@
 \begin{definition}{Fermi系统}{Fermi System}
 	特点：粒子不可分辨，量子态容纳最多一个粒子。
 
-	微观状态数：从每个量子态的$\omega_i$个空位中挑出$a_i$个粒子
+	在能级$i$的$\omega_i$个单粒子态中选取$a_i$个，各放入一个粒子，得到微观状态数
 	\begin{subequations}
 		\label{eqn:Fermi system}
 		\begin{equation}
@@ -245,14 +239,14 @@
 \begin{definition}
 	{半经典Boltzmann分布}{semi-classical distribution}
 
-	当$\e^\alpha\gg 1$时，Bose分布和Fermi分布变为半经典的(semi-classical) Boltzmann分布
+	当各单粒子态的平均占据数均远小于1时，忽略交换修正，Bose分布和Fermi分布都趋于半经典的(semi-classical) Boltzmann分布，其统计权重和占据数为
 	\begin{subequations}
 		\begin{gather}
 			\multiplicity{S}=\prod_i\frac{\omega_i^{a_i}}{a_i!},\\
 			a_i=\omega_i\e^{-\alpha-\beta\varepsilon_i}.
 		\end{gather}
 	\end{subequations}
-	极限条件$\e^\alpha\gg 1$称为经典极限条件(classical limit condition)，其等价条件为$a_i\ll\omega_i$，因此也可以称为非简并条件(non-degenerate condition)。
+	条件$a_i\ll\omega_i$称为非简并条件(non-degenerate condition)。取单粒子基态能量为零且$T>0$时，它等价于$\e^\alpha\gg1$。
 \end{definition}
 
 % \begin{proof}
@@ -263,7 +257,7 @@
 % \end{proof}
 
 \begin{remark}
-	由于粒子不可分辨，半经典与经典Boltzmann分布的微观状态数相差$N!$倍，但二者的最概然分布是一样的。
+	全同粒子的半经典统计权重等于可分辨粒子计数除以$N!$。在固定$N$时，这个因子对所有分布相同，不影响最概然分布。
 \end{remark}
 
 \begin{notecaptionblock}
@@ -274,12 +268,13 @@
 
 \paragraph{最概然方法误差估计}
 
-对Boltzmann统计，在满足$\sum_i\vd a_i=0$、$\sum_i\varepsilon_i\vd a_i=0$的涨落下，在最概然分布$\{a_{i,\mostprobable}\}$附近$a_i=a_{i,\mostprobable}+\vd a_i$对$\ln\Omega$展开，得
-\begin{align*}
-	\ln\Omega\{a_i\}&=\ln\Omega\{a_{i,\mostprobable}\}+\sum_i\pp{a_i}\ln\Omega\{a_{i,\mostprobable}\}\vd a_i+\frac12\sum_i\pp[2]{a_i}\ln\Omega\{a_{i,\mostprobable}\}\vd a_i^2+\bigo(\vd a_i^3)\\
-	&\simeq\ln\Omega\{a_{i,\mostprobable}\}+0-\frac12\sum_i\frac{\vd a_i^2}{a_{i,\mostprobable}}+\bigo(\vd a_i^3).
-\end{align*}
-对于宏观系统，$N=\textstyle\sum_ia_i\sim 10^{23}$，因此即使分布的相对偏差$\vd a_i/a_{i,\mostprobable}\sim 10^{-4}$很小，微观状态数的相对偏差也会大得离谱：
+对Boltzmann统计，考虑满足$\sum_i\vd a_i=0$、$\sum_i\varepsilon_i\vd a_i=0$的涨落。写成$a_i=a_{i,\mostprobable}(1+\delta_i)$，其中$\delta_i=\vd a_i/a_{i,\mostprobable}$。在Stirling近似下，$\ln\Omega$的一阶变化为$\sum_i(\alpha+\beta\varepsilon_i)\vd a_i=0$。对每组的$|\delta_i|\ll1$展开，得到
+\[
+	\ln\frac{\Omega\{a_i\}}{\Omega\{a_{i,\mostprobable}\}}
+	=-\frac12\sum_i a_{i,\mostprobable}\delta_i^2
+	+\bigo\!\left(\sum_i a_{i,\mostprobable}|\delta_i|^3\right).
+\]
+若受到扰动的能级组总共含有量级为$N\sim10^{23}$的粒子，且各组相对偏差的绝对值约为$10^{-4}$，则该分布相对于最概然分布的权重已极小：
 \[
 	\frac{\Omega\{a_i\}}{\Omega\{a_{i,\mostprobable}\}}\simeq\exp\biggp{-\frac12\sum_ia_{i,\mostprobable}\cdot\frac{\vd a_i^2}{a_{i,\mostprobable}^2}}\sim\e^{-10^{23-8}}\lll 1.
 \]
@@ -287,7 +282,7 @@
 \section{宏观量的统计表达式}
 
 \begin{definition}{配分函数}{partition function}
-	对于(半)经典Boltzmann分布，定义配分函数(partition function)
+	对于(半)经典Boltzmann分布，定义单粒子配分函数(partition function)
 	\begin{equation}
 		Z:=\sum_i\omega_i\e^{-\beta\varepsilon_i}.
 	\end{equation}
@@ -295,7 +290,7 @@
 \end{definition}
 
 \begin{corollary}
-	配分函数给出了(半)经典Boltzmann分布的所有信息：
+	配合已知的单粒子能谱，可由配分函数求出占据数、内能和广义力：
 	\begin{subequations}
 		\begin{align}
 			N&=\e^{-\alpha}Z,\\
@@ -318,7 +313,7 @@
 	\[
 		U=\sum_i a_i\varepsilon_i=\e^{-\alpha}\sum_i \omega_i\varepsilon_i\e^{-\beta\varepsilon_i}=-\frac NZ\pv Z\beta=-N\pv{\ln Z}\beta.
 	\]
-	内能的微分
+	对粒子数固定的一系列平衡态，内能的微分为
 	\[
 		\d U=\sum_i a_i\d\varepsilon_i+\sum_i \varepsilon_i\d a_i
 	\]
@@ -336,7 +331,7 @@
 \end{proof}
 
 \begin{theorem}{Boltzmann关系}{Boltzmann relation}
-	熵与微观态数的关系为
+	若指定宏观条件下有$\Omega$个等概率的微观态，则熵为
 	\begin{equation}
 		S=\kB\ln\Omega.
 	\end{equation}
@@ -344,7 +339,7 @@
 \end{theorem}
 
 \begin{proof}
-	考虑
+	等概率时，将$p_s=1/\Omega$代入统计熵$-\kB\sum_s p_s\ln p_s$即得此式。也可以在Boltzmann分布中直接与热力学的熵比较。固定$N$，有
 	\begin{align*}
 		N\d\ln Z&=N\biggp{\pv{\ln Z}\beta\d\beta+\sum_k\pv{\ln Z}{y_k}\d y_k}=-U\d\beta-\beta\sum_k Y_k\d y_k\\
 		&=-U\d\beta-\beta(\d U-T\d S)=-\d(\beta U)+\beta T\d S.
@@ -355,17 +350,18 @@
 		S&=S_0+\kB(N\ln N+\alpha N+\beta U)
 		=S_0+\kB\biggp{N\ln N+\sum_i a_i(\alpha+\beta\varepsilon_i)}\\
 		&=S_0+\kB\biggp{N\ln N+\sum_i a_i\ln\biggp{\frac{\omega_i}{a_i}}}
-		=S_0+\kB\ln\multiplicity{M}.
+		\simeq S_0+\kB\ln\multiplicity{M}.
 		\qedhere
 	\end{align*}
 \end{proof}
 
 \begin{remark}
-	对于经典Boltzmann分布，可方便地取$S_0=0$；
-	而对于半经典Boltzmann分布，如果要使Boltzmann关系仍成立，应有$S_0=-\kB\ln N!$，或者说 
+	上面固定了$N$，积分常数可以依赖$N$。对可分辨粒子取$S_0=0$，最后一步对最概然分布的态数使用了Stirling近似。若只给定总能量和粒子数，还须把能壳内各个分布的态数相加。在最概然方法适用的热力学极限中，这个求和与最大项给出相同的熵的广延主项。
+
+	对于全同粒子的半经典气体，置换因子给出$S_0=-\kB\ln N!$。保留热力学极限的主项时，
 	\[
-		S=\kB\ln\multiplicity{S}=\kB\ln\biggp{\frac{\multiplicity{M}}{N!}}
-		=\kB\biggp{N+\sum_i a_i\ln\biggp{\frac{\omega_i}{a_i}}}.
+		S\simeq\kB\ln\multiplicity{S}=\kB\ln\biggp{\frac{\multiplicity{M}}{N!}}
+		\simeq\kB\biggp{N+\sum_i a_i\ln\biggp{\frac{\omega_i}{a_i}}}.
 	\]
 \end{remark}
 
@@ -400,7 +396,7 @@
 \end{definition}
 
 \begin{remark}
-	在经典力学中，粒子状态对应$\mu$空间中一个确定的点$(q,p)$；而在(半经典)量子力学中，由Heisenberg不确定性关系$\Delta q\Delta p\sim h$，粒子状态(量子态)对应$\mu$空间中的一块相体积。
+	在经典力学中，粒子状态对应$\mu$空间中一个确定的点$(q,p)$。量子力学中，共轭坐标和动量满足$\Delta q_i\Delta p_i\geq\hbar/2$。当一个能量区间内含有许多量子态时，可以用相空间体积估计该区间的态数。
 \end{remark}
 
 \begin{theorem}{极限定理}{limit theorem}
@@ -414,11 +410,9 @@
 	\[
 		Z=\sum_i \omega_i\e^{-\beta\varepsilon_i}\to \int_\mu\frac{\nd\omega}{h^\gamma}\e^{-\beta\varepsilon}.
 	\]
-	进一步地，一般情况下系统的能量分布是易求的，我们希望将上式写成能量的积分形式。
-	考虑在$(\varepsilon,\varepsilon+\d\varepsilon)$的能量范围内，量子态的数密度(简称态密度)为
-	$g(\varepsilon)\d\varepsilon\equiv\d\omega/h^\gamma$，即
+	记$\Omega(\varepsilon)=\int_{H\leq\varepsilon}\d\omega$为能量不超过$\varepsilon$的相空间体积。能量区间$(\varepsilon,\varepsilon+\d\varepsilon)$内的轨道量子态数为$g(\varepsilon)\d\varepsilon$，其中态密度为
 	\begin{equation}
-		g(\varepsilon)=h^{-\gamma}\dv\omega\varepsilon,
+		g(\varepsilon)=h^{-\gamma}\dv\Omega\varepsilon.
 	\end{equation}
 	由此可得配分函数$Z$、粒子数$N$和内能$U$的积分表达式
 	\begin{subequations}
@@ -508,17 +502,18 @@
 	\end{gather}
 	若考虑自旋，还应乘自旋因子$g_s=2s+1$。
 
-	另一方面
+	再从量子数计数。边长为$L$的立方无限深势阱内，$n_x,n_y,n_z$均取正整数，能级为
 	\[
 		\varepsilon_{n_x,n_y,n_z}=\frac{h^2}{8mL^2}(n_x^2+n_y^2+n_z^2),
 	\]
-	简并度$\omega_{n_x,n_y,n_z}$近似为第一卦限球体积：
+	同一球面上的格点数给出该能级的轨道简并度。球面以内（含球面）的格点数给出截至该能量的累计轨道态数$\mathcal N(\varepsilon)$。球半径远大于格点间距时，用第一卦限内的球体积近似求和，得
 	\[
-		\omega_{n_x,n_y,n_z}\simeq\frac18\cdot\frac{4\pi}3\biggp{\frac{8mL^2\varepsilon}{h^2}}^{3/2}=\frac{4\pi}{3}(2\pi\varepsilon)^{3/2}Vh^{-3}.
+		\mathcal N(\varepsilon)\simeq\frac18\cdot\frac{4\pi}3\biggp{\frac{8mL^2\varepsilon}{h^2}}^{3/2}=\frac{4\pi V}{3h^3}(2m\varepsilon)^{3/2}.
 	\]
-	因此每个状态的相体积
+	由此得到每个轨道态的平均相体积，并可从累计态数求得相同的半经典态密度：
 	\[
-		\frac{\Omega(\varepsilon)}{\omega_{n_x,n_y,n_z}}\simeq h^3.
+		\frac{\Omega(\varepsilon)}{\mathcal N(\varepsilon)}\simeq h^3,\qquad
+		g(\varepsilon)\simeq\dv{\mathcal N}{\varepsilon}.
 	\]
 	\tcblower
 	极端相对论情形下

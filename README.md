@@ -17,7 +17,7 @@
 | 数值分析 | [NA.tex](Numerical%20Analysis/NA.tex) | 方程求解、特征值、插值与逼近、数值积分与常微分方程。部分内容待补 |
 | 经典力学 | [CM.tex](Classical%20Mechanics/CM.tex) | 从牛顿力学、中心力和振动到刚体与哈密顿力学，附复习题 |
 | 量子力学 | [QM.tex](Quantum%20Mechanics/QM.tex) | 从实验引入量子态与测量，再讨论动力学、角动量、近似方法、光谱和散射，附公式核对 |
-| 统计力学 | [SM.tex](Statistical%20Mechanics/SM.tex) | 热力学、相变、系综、玻色与费米统计、非平衡统计 |
+| 统计力学 | [SM.tex](Statistical%20Mechanics/SM.tex) | 热力学与临界现象、系综与 Ising 链、量子气体和费米液体、输运与线性响应、有限温度格林函数 |
 | 电动力学 | [ED.tex](Electrodynamics/ED.tex) | 电磁场、平面波、波导、多极辐射与相对论。第十章为提纲 |
 | 核辐射物理及探测学 | [NRD.tex](Nuclear%20Radiation%20and%20Detection/NRD.tex) | 放射性衰变、辐射与物质的相互作用、探测器和计数测量。上下两部分的第五章待补 |
 

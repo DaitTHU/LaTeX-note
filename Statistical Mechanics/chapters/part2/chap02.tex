@@ -3,8 +3,7 @@
 \section{理想气体}
 \label{sec:ideal gas}
 
-本章讨论满足非简并条件($\e^\alpha\gg 1$)的理想气体，采用半经典Boltzmann分布。理想气体的无相互作用假设本身并不保证非简并。
-粒子的运动可分为质心的平动(translation)、粒子内部的振动(vibration)和粒子整体的转动(rotation)三个相互独立的运动。
+本节讨论满足非简并条件的理想气体，采用半经典Boltzmann分布。以单粒子基态为能量零点时，非简并要求$\e^\alpha\gg1$。在计算分子气体的热容时，以下将质心平动(translation)、分子振动(vibration)和整体转动(rotation)近似为相互独立的运动。
 
 \subsection{平动}
 \label{ssec:translation}
@@ -30,7 +29,7 @@
 	\lambda_T=\frac{h}{\sqrt{2\pi m\kB T}}.
 \end{equation}
 基于配分函数，可得平动所贡献的内能、比热、压强和熵：
-\footnote{经典统计采用经典Boltzmann分布推导出来的熵甚至不是广延量，应修正为半经典Boltzmann分布。}
+	\footnote{全同气体粒子的配分函数含有置换因子$1/N!$，其对熵的贡献保证了下式的广延性。}
 \begin{subequations}
 	\begin{align}
 		U_\transl&=-N\pv{\ln Z_\transl}\beta=\frac32N\kB T,\\
@@ -82,9 +81,9 @@
 			v_\mathrm s&=\sqrt{\frac{3\kB T}m}.
 		\end{align}
 	\end{subequations}
-	单位时间碰撞单位面积器壁上的粒子数
+	取$x$轴正向指向器壁，单位时间碰撞单位面积器壁的粒子数为
 	\begin{equation}
-		\Gamma=\intR\intR\intRplus f(v_x,v_y,x_z) v_x\d v_x\nd v_y\nd v_z=\frac14n\ave v.
+		\Gamma=\int_{v_x>0} v_x f(v_x,v_y,v_z)\,\d^3v=\frac14n\ave v.
 	\end{equation}
 \end{corollary}
 
@@ -150,20 +149,29 @@
 
 \end{example}
 
-比较有三个自由度$p_x,p_y,p_z$的平动能量$U_\transl=3N\kB T/2$和有两个自由度的振动能量$U_\vib=N\kB T$，可以总结这样一个规律：
+平动动能含三个动量二次项。一维简谐振动有一个振动自由度，其能量含动能和势能两个二次项。这解释了经典极限下$U_\transl=3N\kB T/2$、$U_\vib=N\kB T$。
 
 \begin{theorem}{能量均分定理}{energy equipartition}
-	高温下，能量准连续，能量的每个自由度对能量贡献为$N\kB T/2$。
+	在经典正则分布中，若广义坐标或动量$x$取遍实轴，且在Hamilton量中只以独立二次项$Ax^2$出现（$A>0$），则该项的平均能量为$\kB T/2$。
 \end{theorem}
 
+\begin{proof}
+	由正则权重分部积分，边界项$x\e^{-\beta Ax^2}$在两端均为零，因此
+	\[
+		\ave{Ax^2}=-\frac{1}{2\beta}
+		\frac{\intR x\,\d(\e^{-\beta Ax^2})}{\intR\e^{-\beta Ax^2}\d x}
+		=\frac1{2\beta}=\frac12\kB T.\qedhere
+	\]
+\end{proof}
+
 \begin{remark}
-	原子内部结构(电子、原子核等)的自由度对宏观量（特别是$C_V$）无贡献。因为在稳定性、结合能、能级间距上，从分子、原子到原子核越来越稳定，特征温度越来越高，越来越难以被激发。即，结合的紧密的自由能被冻结了，通常不激发。
+	对具有分立能级的运动，$\kB T$远大于相关能级间距时才可用经典近似。通常的分子气体中，电子和原子核激发所需的能量远大于$\kB T$，因而这些激发对热容的贡献很小。
 \end{remark}
 
 \subsection{转动}
 \label{ssec:rotation}
 
-以异核双原子分子\footnote{同核需考虑全同性原理。比如正氢(两个氢核自旋平行) $\ell$为奇数；仲氢(两个氢核自旋反平行) $\ell$为偶数。}为例，
+以异核双原子分子\footnote{同核分子还要满足核交换对称性。以电子基态的$\mathrm H_2$为例，正氢的两个质子组成总核自旋$I_{\rm nuc}=1$的对称三重态，只允许奇数$\ell$。仲氢的总核自旋$I_{\rm nuc}=0$，为反对称单态，只允许偶数$\ell$。}为例，
 \[
 	\varepsilon_\rot=\frac{\hbar^2}{2I}\ell(\ell+1),\quad\omega_\rot=2\ell+1.
 \]
@@ -195,40 +203,38 @@
 \[
 	C_V=C_{V,\transl}+C_{V,\rot}+C_{V,\vib}.
 \]
-代入氧气$\mathrm{O_2}$的数据：$\theta_\rot=\qty{2.40}{K},\,\theta_\vib=\qty{2230}{K}$，可得理想气体模型下$\mathrm{O_2}$的总比热$C_V$随温度的变化如\figref{fig:C_V - T} 所示。
-可见比热在相当长的一段温度范围内都是常数，当温度达到特征温度的量级后，对应部分的比热会开始出现，并在高温下符合能量均分定理。
+在上述双原子分子模型中，取与氧气相近的特征温度$\theta_\rot=\qty{2.40}{K}$、$\theta_\vib=\qty{2230}{K}$，并对所有非负整数$\ell$求和。随着转动、振动相继被激发，\figref{fig:C_V - T} 中的热容依次接近$3N\kB/2$、$5N\kB/2$和$7N\kB/2$。实际的$^{16}\mathrm{O}_2$在电子基态只允许奇数转动量子数，计算其低温热容需使用相应的分子能级。
 
 \begin{notecaptionblock}
 	\includegraphics[width=0.8\linewidth]{figures/C_Vtot.pdf}
-	\captionof{figure}{氧气总热容的 $C_V/(N\kB)\vs T$ 曲线}
+	\captionof{figure}{双原子分子模型的总热容随温度的变化}
 	\label{fig:C_V - T}
 \end{notecaptionblock}
 
 \section{顺磁性物质}
 
-由量子力学，顺磁物质的粒子磁矩$\bm\mu$与总角动量$\bm J=\bm L+\bm S$成正比：
+考虑由相互作用可忽略的原子磁矩组成的顺磁体。在给定的总角动量多重态内，电子的有效磁矩与总角动量$\bm J=\bm L+\bm S$之间满足
 \[
-	\bm\mu=g\muB\bm J,
+	\bm\mu=-g\muB\frac{\bm J}{\hbar},
 \]
-其中$\muB:=e\hbar/2m_\electron$为Bohr磁子，$g$为Landé因子。
+其中$\muB:=e\hbar/(2m_\electron)$为Bohr磁子。对满足$LS$耦合、$j>0$的多重态，取电子自旋$g$因子为2，Landé因子为
 \[
 	g=1+\frac{j(j+1)+s(s+1)-\ell(\ell+1)}{2j(j+1)}.
 \]
-在外磁场$\bm B=\mu_0\bm H$下，单个粒子的能量为
+取外加磁场$B=\mu_0 H$沿$z$方向，以$m=\mu_z/(g\muB)$标记磁矩的取向。忽略局域场修正，单个粒子的能量为
 \[
-	\varepsilon_m=-\bm\mu\cdot\bm B=-\mu_0\muB g\bm J\cdot\bm H=-\mu_0\muB gHm,
+	\varepsilon_m=-\mu_z B=-g\muB Bm,\qquad m=-j,-j+1,\ldots,j.
 \]
-其中$m=-j,-j+1,\ldots,j$是$\bm J$在$\bm H$方向上的投影。
-配分函数
+单粒子配分函数为
 \begin{equation}
 	Z=\sum_{m=-j}^j\e^{-\beta\varepsilon_m}=\frac{\e^{aj}-\e^{-a(j+1)}}{1-\e^{-a}}=\Biggdivision{\sinh\biggb{\biggp{j+\frac12}a}}{\sinh\frac a2}.
 \end{equation}
 其中$a:=\beta\mu_0\muB gH$。
-磁化强度、内能
+用$n=N/V$表示磁矩的数密度。沿外场方向的磁化强度$M$为单位体积的平均磁矩，系统的总磁矩为$VM$。由单粒子配分函数得到
 \begin{subequations}
 	\begin{align}
-		M&=\frac N\beta\pv{\ln Z}{\mu_0H}=N\muB gj\Brillouin_j(a),\\
-		U&=-N\pv{\ln Z}\beta=-\mu_0HM=-N\mu_0\muB gjH\Brillouin_j(a),
+		M&=\frac n\beta\pvat{\ln Z}{B}{T}=n\muB gj\Brillouin_j(a),\\
+		U&=-N\pvat{\ln Z}{\beta}{B}=-BVM.
 	\end{align}
 \end{subequations}
 其中Brillouin函数
@@ -249,18 +255,18 @@
 仅保留一阶项，
 可得
 \[
-	M\simeq\frac{N\mu_0\muB^2g^2j(j+1)}{3\kB T}H,
+	M\simeq\frac{n\mu_0\muB^2g^2j(j+1)}{3\kB T}H.
 \]
 \begin{theorem}
 	{Curie定律}{Curie's Law}
-	顺磁物体的磁化强度$M=\chi H$与外场强度$H$成正比，且磁化率$\chi$与温度成反比：
+	在弱场极限下，磁化强度$M=\chi H$与外场强度$H$成正比，体磁化率$\chi$与绝对温度成反比：
 	\begin{equation}
-		\chi=\frac{N\mu_0\muB^2g^2j(j+1)}{3\kB T}\propto\frac1T.
+		\chi=\frac{n\mu_0\muB^2g^2j(j+1)}{3\kB T}\propto\frac1T.
 	\end{equation}
 \end{theorem}
 低温强场极限下，$a\gg 1$，$\Brillouin_j(a)\simeq 1$
 \[
-	M\simeq N\muB gj.
+	M\simeq n\muB gj.
 \]
 代表所有磁矩都与外场平行，达到饱和。
 
@@ -271,7 +277,7 @@
 	F&=-\frac N\beta\ln Z=:\frac1\beta\phi(\beta H),\\
 	S&=-\pv FT=\kB[-\phi(\beta H)+\beta H\phi'(\beta H)].
 \end{align*}
-绝热情况下，$S$不变，因此$\beta H=\const$。
+在磁矩间相互作用和晶格热容均可忽略的温区，可逆绝热过程保持自旋熵不变，因此$\beta H=\const$。
 即当外场$H$下降时，温度$T$也会下降，并且满足
 \[
 	T_\final=T_\initial\frac{H_\final}{H_\initial}.
@@ -288,7 +294,7 @@
 
 \paragraph{核自旋系统}
 
-在外磁场$B$下，核自旋可以有两种取向，能量分别为$\pm\varepsilon$，
+在固定外磁场$B$下，考虑自旋量子数为$1/2$的核，其磁矩的两个投影对应能量$\pm\varepsilon$。取$\varepsilon>0$，
 记两种取向的核磁矩数为$N_\pm$，
 由系统的粒子数和能量关系：
 \[
@@ -299,7 +305,7 @@
 	\implies
 	N_\pm=\frac N2\biggp{1\pm\frac U{N\varepsilon}}.
 \]
-微观状态数$\Omega=N!/N_+!N_-!$，
+微观状态数$\Omega=N!/(N_+!N_-!)$，
 熵
 \begin{align*}
 	S & =\kB\ln\biggp{\frac{N!}{N_+!N_-!}}\simeq\kB(N\ln N-N_+\ln N_+-N_-\ln N_-).
@@ -307,7 +313,7 @@
 \end{align*}
 故温度的倒数
 \begin{equation}
-	\frac1T=\pvat{S}{U}{V,N}=\frac\kB{2\varepsilon}\ln\biggp{\frac{N\varepsilon-U}{N\varepsilon+U}}=\frac\kB{2\varepsilon}\ln\biggp{\frac{N_-}{N_+}}
+	\frac1T=\pvat{S}{U}{B,V,N}\simeq\frac\kB{2\varepsilon}\ln\biggp{\frac{N_-}{N_+}}
 	\begin{cases}
 		>0,&N_->N_+\\
 		<0,&N_-<N_+
@@ -328,7 +334,7 @@
 		\item 系统的能量$U$有上界；
 		\item 系统内部实现平衡（系统能与环境隔绝一段时间）。即
 		\begin{center}
-			系统本身达到平衡的弛予时间$\ll$系统与环境达到平衡的弛予时间
+			系统内部弛豫时间$\ll$系统与环境之间的弛豫时间
 		\end{center}
 		对于LiF晶体，前者为$\qty{e-5}{\second}$，后者为$\qty{5}{\minute}$。
 		1951年，Purcell和Pound在很纯的LiF晶体的核自旋系统中实现了负绝对温度的状态。

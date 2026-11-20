@@ -192,8 +192,8 @@
 \end{tikzpicture}
 
 \begin{tikzpicture}[x=2cm,y=7cm]
-    \draw[thick, domain=2/9:2, samples=80, fill=cll]
-        plot(\x, {(1-sqrt(\x/2))*(3*sqrt(\x/2)-1)}) -- cycle;
+    \draw[thick, domain=2/9:2, samples=80]
+        plot(\x, {(1-sqrt(\x/2))*(3*sqrt(\x/2)-1)});
     \xOy {RbT/a}{2.4}{pb^2/a}{.42};
     \node[below] at (2/9,0) {$2/9$};
     \node[below] at (2,0) {$2$};
@@ -281,17 +281,13 @@
     \coordinate (slend) at (1.98, 3.36);
     \coordinate (crit) at (4.31, 2.4);
     \coordinate (trip) at (2.06, 1.28);
-    \fill[clg](0, 0)--(trip)--(crit)--(4.31, 3.36)--(4.9, 3.36)--(4.9, 0);
-    \fill[cls](0, 0)--(trip)--(slend)--(0, 3.36);
-    \fill[cll](trip)--(slend)--(4.31, 3.36)--(crit);
-    %\shade[left color=lclr, right color=gclr](slend)..controls(1.14, 2.83)and(1.44, 1.95)..(trip)..controls(3.03, 1.44)and(3.71, 1.84)..(crit)--(4.31, 3.36);
-    \draw[thick, fill=cls](0, 0)..controls(0.76, 0.09)and(1.56, 0.58)..(trip);
-    \draw[thick, fill=cll](trip)..controls(3.03, 1.44)and(3.71, 1.84)..(crit);
-    \draw[thick, fill=cll](trip)..controls(2, 1.95)and(1.98, 2.83)..(slend);
-    %\draw[dashed](trip)..controls(2.34, 1.75)and(2.57, 2.47)..(2.64, 3.35);
-    \draw[dashed, thick](crit)--(4.31, 3.36);
-    % \draw[fill](trip)circle(.05);
-    % \draw[fill](crit)circle(.05);
+    \fill[cls](0,0)..controls(.76,.09)and(1.56,.58)..(trip)
+        ..controls(2,1.95)and(1.98,2.83)..(slend)--(0,3.36)--cycle;
+    \draw[thick](0,0)..controls(.76,.09)and(1.56,.58)..(trip)
+        ..controls(2,1.95)and(1.98,2.83)..(slend);
+    \draw[thick](trip)..controls(3.03,1.44)and(3.71,1.84)..(crit);
+    \fill (trip)circle(.045);
+    \fill (crit)circle(.045)node[above]{$\criticalpoint$};
     \draw[thick, <->](0, 3.8)node[left]{$p$}node[right]{(log-scale)}--(0, 0)--(5.3, 0)node[right]{$T$};
     \draw let \p1=(trip) in (\x1, 0)node[below]{$T_\triplepoint$}--(\x1, .1);
     \draw let \p2=(crit) in (\x2, 0)node[below]{$T_\criticalpoint$}--(\x2, .1);
@@ -309,20 +305,24 @@
 \end{tikzpicture}
 
 \begin{tikzpicture}
-    \fill[cll](0, 0)--(0, 5.13)--(1.42, 5.13)--(2.09, 3.98)--(0.91, 0);
-    \fill[clg](1.42, 5.13)--(2.09, 3.98)--(3, .35)--(5.79, .35)--(5.79, 5.13);
-    \fill[clgl](0.91, 0)--(0.91, .49)--(5.35, .49)--(5.79, 0.35)--(5.79, 0);
-    \draw[dashed, fill=clgl](0.91, 0.49)..controls(0.93, 1.72)and(1.27, 3.98)..(2.09, 3.98)..controls(2.91, 3.98)and(4.11, 1.01)..(5.35, 0.49);
+    \draw[dashed,fill=clgl](.9,0)..controls(.93,1.3)and(1.02,2.0)..(1.13,2.47)
+        ..controls(1.20,2.77)and(1.29,3.08)..(1.37,3.24)
+        ..controls(1.54,3.58)and(1.73,3.98)..(2.09,3.98)
+        ..controls(2.45,3.98)and(2.76,3.54)..(2.99,3.24)
+        ..controls(3.17,3.01)and(3.38,2.69)..(3.54,2.47)
+        ..controls(4.23,1.52)and(5.03,.55)..(5.79,0);
     \draw[thick](0.65, 5.13)..controls(1, 3)..(1.13, 2.47)--(3.54, 2.47)..controls(4.24, 1.72)and(4.89, 1.4)..(5.79, 1.25);
     \draw[thick](1.03, 5.13)..controls(1.2, 4)..(1.37, 3.24)--(2.99, 3.24)..controls(3.9, 2.4)and(4.82, 2.11)..(5.79, 2.08)node[right]{$T<T_\criticalpoint$};
-    \draw[thick, fill=clg](1.42, 5.13)..controls(1.49, 4.73)and(1.68, 3.99)..(2.09, 3.98)..controls(2.5, 3.97)and(4.64, 2.88)..(5.79, 2.91)node[right]{$T=T_\criticalpoint$};
+    \draw[thick](1.42,5.13)..controls(1.56,3.98)and(1.82,3.98)..(2.09,3.98)
+        ..controls(2.36,3.98)and(2.70,3.98)..(3.05,3.79)
+        ..controls(3.85,3.35)and(4.75,3.05)..(5.79,2.91)node[right]{$T=T_\criticalpoint$};
     \draw[thick](1.8, 5.13)..controls(2.11, 4.24)and(3.43, 3.97)..(5.79, 3.74)node[right]{$T>T_\criticalpoint$};
     %\node[right]at(5.79, 4.57){$T\gg T_\criticalpoint$};
     \draw[thick, <->](0, 5.5)node[left]{$p$}--(0, 0)--(6, 0)node[right]{$V$ (log-scale)};
     \draw[fill](2.09, 3.98)circle(.05)node[above]{C};
     \node at(.5, 2.5){$\liquid$};
     \node at(2.5, 1.2){$\liquid+\gas$};
-    \node at(4, 4.5){$\gas$};
+    \node at(5.2,1.65){$\gas$};
     \label{pv-isotherms}
 \end{tikzpicture}
 
@@ -348,51 +348,32 @@
     \label{gibbs-pt}
 \end{tikzpicture}
 
-\begin{tikzpicture}
-    \fill[clg](0, 0)--(0, .6)--(3, 3)--(3, 4)--(5, 4)--(5, 0);
-    \fill[cll](0, .6)--(0, 4)--(3, 4)--(3, 3);
-    \draw[thick, fill=cll](0, 0.6)..controls(1.6, 1.1)and(2.8, 2.5)..(3, 3);
-    \fill(3, 3)circle(.07);
-    \draw[thick, <->](5.3, 0)node[right]{$T$}--(0, 0)--(0, 4.3)node[left]{$p$};
-    \draw[dashed](3, 4)--(3, 0)node[below]{$T_\criticalpoint$};
-    \node at(.6, .3){$\gas$};
-    \node at(.6, 2.5){$\liquid$};
-    \begin{scope}[scale=0.4, xshift=5cm]
-        \begin{scope}[yshift=2cm]
-            \draw[domain=-1.5:1.3]plot(\x, {(\x)^4-2*(\x)^2+\x/2});
-            \fill[red](-1.05, -1.5)circle(.15);
-        \end{scope}
-        \begin{scope}[yshift=5cm]
-            \draw[domain=-1.4:1.4]plot(\x, {(\x)^4-2*(\x)^2});
-            \fill[red](-1, -1)circle(.15);
-            \fill[red](1, -1)circle(.15);
-        \end{scope}
-        \begin{scope}[yshift=8cm]
-            \draw[domain=-1.3:1.5]plot(\x, {(\x)^4-2*(\x)^2-\x/2});
-            \fill[red](1.05, -1.5)circle(.15);
-        \end{scope}
-        \begin{scope}[shift={(5, 4)}]
-            \draw[domain=-1:1]plot(\x, {(\x)^2});
-            \fill[red](0, 0)circle(.15);
-        \end{scope}
-    \end{scope}
+\begin{tikzpicture}[x=2.5cm,y=4cm,declare function={vdw(\v)=7.2/(3*\v-1)-3/(\v*\v);}]
+    \draw[thick,<->](.45,1.12)node[above]{$p/p_\criticalpoint$}--(.45,.25)--(2.98,.25)node[right]{$v/v_\criticalpoint$};
+    \foreach \v in {1,2} \draw (\v,.25)--++(0,-.02)node[below]{$\v$};
+    \foreach \p in {0.4,0.6,0.8,1.0} \draw (.45,\p)--++(-.025,0)node[left]{$\p$};
+    \fill[gr3,domain=.603402:1.090527,samples=60]plot(\x,{vdw(\x)})--cycle;
+    \fill[gr2,domain=1.090527:2.348842,samples=65]plot(\x,{vdw(\x)})--cycle;
+    \draw[thick,domain=.557:2.92,samples=140]plot(\x,{vdw(\x)});
+    \draw[thick](.603402,.646998)--(2.348842,.646998);
+    \foreach \v in {.603402,2.348842} \fill (\v,.646998)circle[radius=1.6pt];
+    \foreach \v in {.718597,1.528505} \draw[fill=white](\v,{vdw(\v)})circle[radius=1.6pt];
     \label{gibbs-phase-fraction}
 \end{tikzpicture}
 
-\begin{tikzpicture}
-    \draw[thick, domain=-1.4:1.6]plot(\x, {(\x)^4-2*(\x)^2-\x/2});
-    \draw[fill, red](-.93, -.4)circle(.1);
-    \draw[fill, red, opacity=.3](-.127, .15)circle(.1);
-    \draw[fill, red, opacity=.2](1.057, -1.4)circle(.1);
-    \draw[dashed](2, -.516)--(-.93, -.516);
-    \draw[dashed](2, .032)--(-.127, .032);
-    \draw[<->](1.9, -.516)--(1.9, .032)node[midway, right]{$\Delta G$};
-    %\draw(1.057, -1.515)--(-1, -1.515);
+\begin{tikzpicture}[x=2.1cm,y=23cm]
+    \draw[thick,<->](.42,.113)node[above]{$(\Phi-\Phi_\gas)/(p_\criticalpoint v_\criticalpoint)$}
+        --(.42,-.016)--(3.55,-.016)node[right]{$v/v_\criticalpoint$};
+    \foreach \v in {1,2,3} \draw (\v,-.016)--++(0,-.003)node[below]{$\v$};
+    \foreach \p in {0,0.05,0.10} \draw (.42,\p)--++(-.028,0)node[left]{$\p$};
+    \draw[thick,domain=.50:3.48,samples=110]plot(\x,{-2.4*ln(3*\x-1)-3/\x+.63*\x+4.117346});
+    \fill (.606533,.030773)circle[radius=1.6pt]node[below right]{液};
+    \fill (2.481878,0)circle[radius=1.6pt]node[above]{气};
     \label{superheated-liquid}
 \end{tikzpicture}
 
 \begin{tikzpicture}[scale=2]
-    \xOy R{2.5}G{1.5};
+    \xOy R{2.5}{\Delta G}{1.5};
     \draw[thick, domain=0:2.05]plot(\x, {2*(\x)^2-(\x)^3});
     \draw[dashed](4/3, 0)node[below]{$R_\criticalpoint$}--(4/3, 32/27);
     \label{nucleation-barrier}
@@ -408,15 +389,19 @@
     \label{binary-phase-envelope}
 \end{tikzpicture}
 
-\begin{tikzpicture}[scale=6]
+\begin{tikzpicture}[scale=6,declare function={
+    gmix(\x)=4*(-(\x-.53)^2+.7)+1.4*(\x*ln(\x)+(1-\x)*ln(1-\x))-1.4;}]
+    % At coexistence the common slope is .24; the two contact points are symmetric in x.
+    \def\xa{.0856826}
+    \def\xb{.9143174}
     \draw[thick](0, .6)node[left]{$g$}--(0, 0)--(1, 0)node[midway, below]{$x$}--(1, .6);
-    \draw[thick, domain=.001:.0867, samples=8]plot(\x, {4*(-(\x-.53)^2+.7)+1.4*(\x*ln(\x)+(1-\x)*ln(1-\x))-1.4});
-    \draw[thick, dashed, domain=.0867:.91532]plot(\x, {4*(-(\x-.53)^2+.7)+1.4*(\x*ln(\x)+(1-\x)*ln(1-\x))-1.4});
+    \draw[thick, domain=.001:\xa, samples=15]plot(\x,{gmix(\x)});
+    \draw[thick, dashed, domain=\xa:\xb, samples=70]plot(\x,{gmix(\x)});
     \node at(.5, .47){$g$};
-    \draw[thick, domain=.91532:.999, samples=8]plot(\x, {4*(-(\x-.53)^2+.7)+1.4*(\x*ln(\x)+(1-\x)*ln(1-\x))-1.4});
-    \draw[thick](.0867, .2)--(.91532, .4)node[midway, below]{$g^\star$};
-    \draw[dashed](.0867, 0)node[below]{$x_\alpha$}--(.0867, .2)--(0, .2)node[left]{$g_\alpha$};
-    \draw[dashed](.91532, 0)node[below]{$x_\beta$}--(.91532, .4)--(1, .4)node[right]{$g_\beta$};
+    \draw[thick, domain=\xb:.999, samples=15]plot(\x,{gmix(\x)});
+    \draw[thick](\xa,{gmix(\xa)})--(\xb,{gmix(\xb)})node[midway, below]{$g^\star$};
+    \draw[dashed](\xa,0)node[below]{$x_\alpha$}--(\xa,{gmix(\xa)})--(0,{gmix(\xa)})node[left]{$g_\alpha$};
+    \draw[dashed](\xb,0)node[below]{$x_\beta$}--(\xb,{gmix(\xb)})--(1,{gmix(\xb)})node[right]{$g_\beta$};
     \label{phase-separation}
 \end{tikzpicture}
 
@@ -457,7 +442,11 @@
     \draw[dashed](0, 1.926)node[left]{1.926}--(1, 1.926)--(1, 0)node[below]{$T_\criticalpoint$};
     \draw[dashed](0, 1.5)node[left]{1.5}--(5, 1.5);
     \draw[thick, domain=0:1]plot(\x, {1.926 * \x^1.5});
-    \draw[thick, domain=1:5]plot(\x, {1.5 + (1.926-1.5)/(\x^1.5)});
+    % Normal branch from the fixed-density Bose integrals used in CVBoson.m.
+    \draw[thick] plot[smooth] coordinates {
+        (1,1.925672) (1.05,1.889632) (1.1,1.858507) (1.2,1.807606)
+        (1.4,1.736175) (1.6,1.688964) (1.8,1.655783) (2,1.631381)
+        (2.5,1.592120) (3,1.569234) (4,1.544371) (5,1.531527)};
     \label{bose-heat-capacity}
 \end{tikzpicture}
 
@@ -500,9 +489,13 @@
 
 % Chapter illustrations
 \begin{tikzpicture}
-	\xOy T3g3;
-	\draw[dashed](1.5,0)--(1.5,1.5);
-	\draw[thick](.5,2)--(1.5,1.5)node[midway,above]{$\liquid$}--(2.5,.5)node[midway,above]{$\gas$};
+	\xOy T3g{3.4};
+	\draw[dashed](1.5,0)--(1.5,2.2);
+	% Each branch satisfies dg/dT = -s using the entropy shown below.
+	\draw[thick,domain=.5:1.5]plot(\x,{2.2-(\x-1.5)-.1*(\x-1.5)^2});
+	\draw[thick,domain=1.5:2.5]plot(\x,{2.2-2*(\x-1.5)-.1*(\x-1.5)^2});
+	\node[above] at (1,2.68) {$\liquid$};
+	\node[above right] at (2,1.18) {$\gas$};
     \label{transition-gibbs-energy}
 \end{tikzpicture}
 
@@ -516,7 +509,7 @@
 \begin{tikzpicture}
 	\xOy T3v3;
 	\draw[dashed](1.5,0)--(1.5,3);
-	\draw[thick](.5,1.8)--(1.5,2)node[midway,above]{$\liquid$}--(1.5,1)--(2.5,1.2)node[midway,above]{$\gas$};
+	\draw[thick](.5,.8)--(1.5,1)node[midway,above]{$\liquid$}--(1.5,2)--(2.5,2.2)node[midway,above]{$\gas$};
     \label{transition-volume}
 \end{tikzpicture}
 
@@ -528,6 +521,42 @@
 	\node at(0,3.1)[left]{1};
 	\draw[thick,domain=-5:1]plot(\x,{3/(1+exp((-2-\x)*1.5))});
     \label{adsorption-occupation}
+\end{tikzpicture}
+
+\begin{tikzpicture}[x=.50cm,y=.80cm]
+    \draw[thick,->] (0,-4.35) -- (12.8,-4.35) node[right] {$r$};
+    \draw[thick,->] (0,-4.35) -- (0,.38) node[above] {$C(r)$};
+    \foreach \r in {0,3,6,9,12}
+        \draw (\r,-4.35) -- ++(0,-.07) node[below] {$\r$};
+    \draw (0,0) -- ++(-.12,0) node[left] {$1$};
+    \foreach \j in {1,...,4}
+        \draw (0,-\j) -- ++(-.12,0) node[left] {$10^{-\j}$};
+    \foreach \K in {.5,1,1.5} {
+        \pgfmathsetmacro{\slope}{ln((exp(2*\K)-1)/(exp(2*\K)+1))/ln(10)}
+        \draw[thin] (0,0) -- (12,{12*\slope});
+        \foreach \r in {1,...,12}
+            \fill (\r,{\r*\slope}) circle[radius=1.15pt];
+        \pgfmathprintnumberto{\K}{\printedK}
+        \node[right] at (12,{12*\slope}) {$\beta J=\printedK$};
+    }
+    \fill (0,0) circle[radius=1.15pt];
+    \label{ising-chain-correlation}
+\end{tikzpicture}
+
+\begin{tikzpicture}[x=1.25cm,y=.39cm]
+    \draw[thick,->] (0,0) -- (4.7,0) node[right] {$p/(mc)$};
+    \draw[thick,->] (0,0) -- (0,10.9) node[above] {$E/(mc^2)$};
+    \foreach \x in {1,...,4}
+        \draw (\x,0) -- ++(0,-.15) node[below] {$\x$};
+    \foreach \y in {2,4,...,10}
+        \draw (0,\y) -- ++(-.05,0) node[left] {$\y$};
+    \node[below left] at (0,0) {$0$};
+    \draw[densely dotted,thick] (0,0) -- (4.2,4.2) node[right] {声波};
+    \draw[dashed,domain=0:4.2,samples=60] plot (\x,{\x*\x/2})
+        node[right,yshift=-2pt] {自由粒子};
+    \draw[thick,domain=0:4.2,samples=60] plot (\x,{\x*sqrt(1+\x*\x/4)})
+        node[right,yshift=2pt] {Bogoliubov谱};
+    \label{bogoliubov-spectrum}
 \end{tikzpicture}
 
 \end{document}

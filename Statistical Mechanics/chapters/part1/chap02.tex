@@ -5,12 +5,12 @@
 
 \begin{definition}
 	{广延量和强度量}{extensive parameter & intensive parameter}
-	内能$U$、体积$V$、熵$S$和摩尔数$n$等物理量，系统的量等于子系统的量之和，称为广延量(extensive parameter)：
+	将处于同一状态的样品等比例放大，内能$U$、体积$V$、熵$S$和摩尔数$n$也随之等比例增大，这些量称为广延量(extensive parameter)。当子系统间的相互作用和界面贡献可忽略时，熵可加：
 	\begin{equation}
 		S(U,V,n)=\sum_{i=1}^kS_i(U_i,V_i,n_i).
 	\end{equation}
 	而温度$T$、压强$p$%和化学势$\mu$
-	等物理量与广延量的比值有关，平衡时各子系统的量相同，称为强度量(intensive parameter)。
+	等物理量在样品等比例放大时保持不变，称为强度量(intensive parameter)。子系统间可自由交换热量时，平衡要求温度相等；可通过无外载荷的活动隔板交换体积时，平衡还要求压强相等。
 \end{definition}
 
 \begin{theorem}
@@ -41,8 +41,8 @@
 		\label{eqn:U=TS-pV}
 		U=TS-pV+\mu n.
 	\end{equation}
-	其中$\mu:=(\p U/\p n)_{S,V}$为摩尔化学势，详见\secref{sec:chemical potential}。即使过程保持$n$不变，也不能从Euler方程中删去$\mu n$；$U=TS-pV$仅适用于平衡光子气体等没有独立粒子数约束的情形。
-	定义单位摩尔的内能$u:=U/n$、熵$s:=S/n$和体积$v:=V/n$，以及热容$c:=C/n$。
+	其中$\mu:=(\p U/\p n)_{S,V}$为摩尔化学势，详见\secref{sec:chemical potential}。即使过程保持$n$不变，Euler方程中仍有$\mu n$。平衡黑体辐射的光子数可自由调节，$\mu=0$，此时$U=TS-pV$。
+	定义摩尔内能$u:=U/n$、摩尔熵$s:=S/n$、摩尔体积$v:=V/n$，以及摩尔热容$c_V:=C_V/n$、$c_p:=C_p/n$。
 \end{corollary}
 
 \begin{theorem}
@@ -114,7 +114,7 @@
 \end{theorem}
 
 \begin{corollary}
-	为了满足变换的可逆性，要求$p=y'$严格单调(即$y$具有凹凸性)，从而
+	在$p=y'$严格单调的区间内，斜率唯一确定切点，从而
 	\[
 		\d\psi=\d y-(p\d x+x\d p)=-x\d p,
 	\]
@@ -128,7 +128,7 @@
 \end{corollary}
 
 \begin{corollary}
-	推广到多元函数$y(x_1,x_2,\ldots,x_r)$，其Legendre变换为
+	推广到多元函数$y(x_1,x_2,\ldots,x_r)$。在梯度映射$\bm x\mapsto\bm p$光滑可逆的区域内，其Legendre变换为
 	\[
 		\begin{aligned}
 			p_i  & =\pv y{x_i}            \\
@@ -261,7 +261,7 @@
 	\[
 		\pvat{S}{p}{T}=-\pvat{V}{T}{p}=-V\alpha.
 	\]
-	说明弹性材料在伸长(或缩短)时会放热(或吸热)，而且其熵变大小与形变量有关。
+	对$\alpha>0$的材料，可逆等温压缩时$\d S=-V\alpha\d p<0$，材料向热库放热；可逆等温膨胀时吸热。
 \end{example}
 
 \begin{example}
@@ -270,7 +270,7 @@
 	继续\exmref{exm:ideal gas U and C} 的推导。
 	利用Maxwell关系\eqref{eqn:Maxwell relation F}，
 	\[
-		C_p-C_V=\biggb{\pvat{U}{V}{T}+p}\pvat{V}{T}{p}=T\pvat{S}{V}{T}\pvat{V}{T}{p}=-T\pvat{p}{T}{V}\pvat{V}{T}{p}.
+		C_p-C_V=\biggb{\pvat{U}{V}{T}+p}\pvat{V}{T}{p}=T\pvat{S}{V}{T}\pvat{V}{T}{p}=T\pvat{p}{T}{V}\pvat{V}{T}{p}.
 	\]
 	代入响应函数可得
 	\begin{equation}
@@ -300,52 +300,38 @@
 	\begin{align*}
 		\pvat{T}{V}{p}&=\frac1{V\alpha},\\
 		\pvat{T}{S}{p}&=\frac{T}{C_p},\\
-		\pvat{T}{p}{S}&=-\Biggdivision{\pvat{S}{p}{T}}{\pvat{S}{T}{p}}=\frac{TV\alpha}{c_p},\\
+		\pvat{T}{p}{S}&=-\Biggdivision{\pvat{S}{p}{T}}{\pvat{S}{T}{p}}=\frac{TV\alpha}{C_p},\\
 		\pvat{T}{p}{V}&=-\Biggdivision{\pvat{V}{p}{T}}{\pvat{V}{T}{p}}=\frac{\kappa_T}\alpha.
 	\end{align*}
 	故
 	\[
-		\pvat{p}{U}{G}=\biggp{-TV\alpha+\frac{VC_P}S+PV\kappa_T-\frac{PV^2\alpha}S}^{-1}.
+		\pvat{p}{U}{G}=\biggp{-TV\alpha+\frac{VC_p}S+pV\kappa_T-\frac{pV^2\alpha}S}^{-1}.
 	\]
 \end{example}
 
 \section{最值原理}
 
-物理系统有使熵变大的倾向，这一过程会释放能量。可以利用这一性质来做功。
-可以转化的最大功称为㶲(exergy)，剩下的不可转化为功的能量称为㷻(anergy)。
+热机能输出多少功，取决于它可以和哪些热源交换热量。先考虑封闭系统只与温度为$T_0>0$的热库换热，记$Q$为系统吸收的热量，$W_{\mathrm{out}}$为系统对外输出的总功。
 
 \begin{theorem}
 	{最大功原理}{maximum work principle}
-	当系统的初末态确定时，可逆过程做功最大。
+	给定初末态和上述热库，系统对外输出的功满足$W_{\mathrm{out}}\leq T_0\Delta S-\Delta U$。可逆过程达到这一上限。
 \end{theorem}
 
 \begin{proof}
-	用可逆功源接受功$\d W_\rev$，用可逆热源吸热$\d Q_\rev$，下标表示可逆过程。
-	能量守恒要求
+	由第一定律，$W_{\mathrm{out}}=Q-\Delta U$。热库放出热量$Q$，系统与热库的总熵变为$\Delta S_{\mathrm{tot}}=\Delta S-Q/T_0\geq0$。消去$Q$得
 	\[
-		\vd Q+\vd W+\d Q_\rev+\d W_\rev=0.
+		W_{\mathrm{out}}=T_0\Delta S-\Delta U-T_0\Delta S_{\mathrm{tot}} .
 	\]
-	熵增原理要求
-	\[
-		\d S+\frac{\d Q_\rev}{T_\rev}\geq 0.
-	\]
-	因此
-	\[
-		\d W_\rev\leqslant T_\rev\d S-\vd Q-\vd W=\biggp{1-\frac{T_\rev}{T}}(-\vd Q)+(-\vd W).
-	\]
-	当且仅当熵不变，可逆功取到最大值。
+	可逆过程的总熵变为零，产生熵会使输出功减少。
 \end{proof}
 
 \begin{corollary}
-	对于一个与热库接触的系统，可逆过程所做的功等于Helmholtz自由能的减少量：
-	\[
-		\d W=-\d(U+U_\rev)=-\d(U-T_\rev S)=-\d F.
-	\]
-	自由能的名字正代表\textit{一定条件下可获得的功}。
+	若系统初末态的温度均为$T_0$，可逆过程输出的总功等于Helmholtz自由能的减少量$-\Delta F$。若还需在环境压强$p_0$下排开体积$\Delta V$，可供其他用途的功须扣去$p_0\Delta V$。系统与给定环境达到平衡时所能输出的最大有用功称为㶲(exergy)。
 \end{corollary}
 
 \begin{example}{}{}
-	两个等容等摩尔的理想气体通过热机连接，温度分别为$T_1,T_2$，求热机所能输出最大功。
+	两份各为$n$摩尔、体积固定的理想气体具有相同的常热容$cnR$。它们与外界绝热，通过循环热机交换能量，初温分别为$T_1,T_2$，求热机所能输出的最大功。
 
 	平衡态两系统温度相等$T$，则能量变化
 	\[
@@ -362,9 +348,9 @@
 	\]
 \end{example}
 \begin{example}{}{}
-	三个等容等摩尔的理想气体通过热机连接，温度分别为$T_1,T_2,T_3$，求其中一个所能达到的最大温度。
+	三份体积固定的理想气体具有相同的常热容$cnR$，初温分别为$T_1,T_2,T_3$。用循环热机在它们之间传递能量，整个装置与外界既不换热也不做功，求其中一份气体所能达到的最大温度。
 
-	需要热机在两个温度间运行做最大功，将能量传递给第三个系统。最终最高温度系统的温度是$T_\hi$，另两个系统的温度均为$T_\lo$。由能量守恒，
+	设目标气体的末温为$T_\hi$。给定$T_\hi$时，另两份气体的总内能固定，因而其温度之和固定。两温相等时乘积最大，其总熵也最大。因此求可达的最高温度时，可以令另两份气体的末温同为$T_\lo$。由能量守恒，
 	\[
 		T_\hi+2T_\lo=T_1+T_2+T_3=:T_\tot.
 	\]
@@ -383,15 +369,16 @@
 
 \begin{theorem}
 	{能量最小原理}{minimum energy principle}
-	在总的熵确定时，任何不受约束的内部参量在平衡时的取值都使得能量最小。
+	在正温区，固定总熵、体积、物质的量及其他外部约束，平衡态使内能对可变内部参量取最小值。
 \end{theorem}
 
 \begin{proof}
-	根据熵最大原理：在总的内部能量确定时，任何不受约束的内部参量在平衡时的取值都使得熵最大。
+	设平衡态的能量和熵为$U_*,S_*$。固定其余外部约束和任意内部参量$X$，有$S(U_*,X)\le S_*$。由于$(\p S/\p U)_X=1/T>0$，在同一正温支上，能量低于$U_*$的态达不到$S_*$。故在给定熵$S_*$的态中，$U_*$是最小能量。
+
+	在严格稳定的平衡点附近，这一原理也可写成微分形式。在给定总内能时，平衡态使熵最大，
 	\[
 		\pvat{S}{X}{U}=0,\quad\biggp{\pv[2]SX}_U<0.
 	\]
-	其中$X$表示其他状态参量。
 	为方便，记能量的一阶导
 	\[
 		L:=\pvat{U}{X}{S}=-\Biggdivision{\pvat{S}{X}{U}}{\pvat{S}{U}{X}}=-T\pvat{S}{X}{U}=0.
@@ -405,19 +392,17 @@
 
 \begin{theorem}
 	{Helmholtz自由能最小原理}{}
-	与恒温热库$T_\rev$接触、总体积和粒子数固定且仅有体积功的系统，移除内部约束后达到平衡态使得Helmholtz自由能最小。
+	与正温热库$T_\rev$接触、总体积和粒子数固定且仅有体积功的系统，移除内部约束后达到平衡态使得Helmholtz自由能最小。
 	%平衡态下，系统与热库进行热接触	时，系统的各个无约束的内部参量取值满足在 T = Tr 的条件下最小化 Helmholtz 自由能。
 \end{theorem}
 
 \begin{proof}
-	热库是恒温$T_\rev$的，平衡时系统与热库总能量最小，一阶导
+	在定容、无其他功的条件下，热库放出的热量等于系统增加的内能。由系统和热库的总熵变化，
 	\[
-		\d(U+U_\rev)=\d U+T_\rev\d S_\rev=\d U-T_\rev\d S\equiv\d F=0.
+		\Delta S_{\rm tot}=\Delta S-\frac{\Delta U}{T_\rev}
+		=-\frac{\Delta(U-T_\rev S)}{T_\rev}\geq0 .
 	\]
-	二阶导
-	\[
-		\d^2(U+U_\rev)=\d^2(U-T_\rev S)\equiv\d^2F>0.\qedhere
-	\]
+	在总能量给定时，最大化总熵等价于最小化$U-T_\rev S$。与热库达到热平衡的各候选态都有$T=T_\rev$，此量等于系统的Helmholtz自由能$F$。
 	
 \end{proof}
 
@@ -441,11 +426,25 @@
 \end{theorem}
 
 \section{稳定性}
+\label{sec:thermo-stability}
 
-在粒子数固定的单相稳定区，$S=S(U,V)$的Hessian应为负定，即：
+把一个均匀系统分成等大的两部分，固定每部分的物质的量。若从一部分向另一部分转移少量能量和体积，两部分的熵的一阶变化相消。要使均匀态在这些扰动下稳定，总熵的二阶变化应为负。因此在严格稳定的单相区，$S(U,V)$的Hessian矩阵$H_S$负定，即
 \begin{equation}
-	\pv[2]SU<0,\qquad\pv[2]SU\pv[2]SV-\biggp{\pw SUV}^2>0.
+	\pv[2]SU<0,\qquad \det H_S=\pv[2]SU\pv[2]SV-\biggp{\pw SUV}^2>0.
 \end{equation}
+这两个条件分别约束热容和压缩率。由$S_U=1/T$和$S_V=p/T$，将二次型写成
+\[
+	\delta^2 S=\delta(1/T)\,\delta U+\delta(p/T)\,\delta V.
+\]
+利用Maxwell关系$(\p S/\p V)_T=(\p p/\p T)_V$，有
+\[
+	\delta U=C_V\delta T+\biggb{T\pvat{p}{T}{V}-p}\delta V.
+\]
+代回后交叉项相消，得到
+\begin{equation}
+	\delta^2 S=-\frac{C_V}{T^2}(\delta T)^2-\frac{1}{TV\kappa_T}(\delta V)^2.
+\end{equation}
+在$T>0$时，严格稳定要求$C_V>0$且$\kappa_T>0$。前者使子系统吸收能量后温度升高，后者使等温压缩时压强升高，两种响应都有助于恢复平衡。特别地，$\kappa_T>0$要求等温线的斜率$(\p p/\p V)_T<0$。这是对小扰动的局域判据；判断气液两相中哪一相稳定，还要比较两相的自由能，见\secref{ssec:liquid-gas phase transition}。
 
 \section{样例系统}
 
@@ -489,9 +488,9 @@ Gibbs自由能$g=u-Ts+pv$是$T,p$的函数：
 
 在低温、高压的条件下，理想气体就与实际气体相差较远了。
 van der Waals气体是对理想气体的一个比较好的修正：
-考虑理想气体的摩尔熵$s=R\ln(u^cv)+\const$，将其中的摩尔内能$u$减去分子间平均吸引势能$-a/v$，并将摩尔体积$v$减去分子的体积效应$b$，得到
+取参考态$(u_0,v_0)$的摩尔熵为$s_0$。从理想气体的熵式出发，将摩尔内能减去平均吸引势能$-a/v$，并将摩尔体积减去排除体积$b$，得到
 \begin{equation}
-	s=R\ln\Bigb{\Bigp{u+\frac av}^c(v-b)}+\const.
+	s=s_0+R\ln\biggb{\biggp{\frac{u+a/v}{u_0+a/v_0}}^c\frac{v-b}{v_0-b}} .
 \end{equation}
 由此可得到van der Waals气体的内能和状态方程：
 \begin{subequations}
@@ -500,7 +499,7 @@ van der Waals气体是对理想气体的一个比较好的修正：
 		\Bigp{p+\frac a{v^2}}(v-b)=RT.
 	\end{gather}
 \end{subequations}
-进而得到响应函数
+在力学稳定的均匀分支上，进而得到响应函数
 \begin{subequations}
 	\begin{align}
 		c_V&=cR,\\
@@ -533,7 +532,7 @@ van der Waals气体是对理想气体的一个比较好的修正：
 \begin{equation}
 	S=\frac43\frac UT=\frac{16\sigma}{3c}VT^3.
 \end{equation}
-因此绝热过程满足$VT^3=\const$；
+因此可逆绝热过程满足$VT^3=\const$；
 Gibbs自由能
 \begin{equation}
 	G=U-TS+pV=0.
@@ -543,36 +542,36 @@ Gibbs自由能
 
 \paragraph{电介质}
 
-电偶极矩为$\bm p_\electric$的电介质放入电场$\bm E$中，Gibbs自由能
+设电场方向固定，$p_\electric$为样品总电偶极矩沿电场的分量。以场强$E$为自变量，Gibbs自由能满足
 \[
 	\d G=-S\d T+V\d p-p_\electric\d E
 \]
 Maxwell关系
 \begin{equation}
 	\pw GEp=\pw GpE\implies
-	\pvat{V}{E}{p}=-\pvat{p_\electric}{p}{E}=-VE\pvat{\chi_\electric}{p}{E}.
+	\pvat{V}{E}{T,p}=-\pvat{p_\electric}{p}{T,E}.
 \end{equation}
-说明在电介质的极化方向上施加电场，这些电介质也会发生变形，这就是\textbf{压电效应}。
+对于各向同性、无自发极化的线性电介质，$p_\electric=\varepsilon_0 V\chi_\electric E$。弱场下上式右端正比于$E$，故恒温恒压下体积变化的首项正比于$E^2$。这种形变称为\textbf{电致伸缩}。
 
 \paragraph{磁介质}
 
-磁偶极矩为$\bm m$的磁介质放入磁场$\bm B$中，应有
+外磁场方向固定，以$m$记样品沿场方向的总磁矩，$B$记外场的磁感应强度。采用磁功$B\d m$的约定，有
 \[
 	\d U=T\d S-p\d V+B\d m.
 \]
 % 但应该注意的是，磁感应强度并不能作为平衡条件。
-磁介质的Gibbs自由能
+以外场为自变量的Gibbs自由能为$G=U-TS+pV-Bm$，其微分为
 \[
 	\d G=-S\d T+V\d p-m\d B
 \]
 Maxwell关系
 \[
 	\pw GBT=\pw GTB\implies
-	\pvat{S}{B}{T}=-\pvat{m}{T}{B}.
+	\pvat{S}{B}{T,p}=\pvat{m}{T}{B,p}.
 \]
-绝热条件下去磁升温
+在恒压下令$C_{p,B}=T(\p S/\p T)_{p,B}$。可逆绝热过程满足$\d S=0$，故
 \[
-	\pvat{T}{B}{S}=-\pvat{T}{S}{B}\pvat{S}{B}{T}=-\frac T{C_B}\pvat{m}{T}{B}=-\frac{TVB}{\mu_0C_B}\pvat{\chi_\magnetic}{T}{B}.
+	\pvat{T}{B}{S,p}=-\frac T{C_{p,B}}\pvat{m}{T}{B,p}.
 \]
-这体现了在绝热条件下磁性与热的关系，即\textbf{磁热效应}。铁磁和顺磁材料的磁热效应特别大。
+弱场下的Curie顺磁体满足$m\propto B/T$。固定正向外场时，升温使磁矩减小，故$(\p T/\p B)_{S,p}>0$，可逆绝热退磁使样品降温。这是\textbf{磁热效应}的一个实例。
 

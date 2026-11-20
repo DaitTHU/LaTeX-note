@@ -3,17 +3,17 @@
 
 \begin{definition}
 	{相}{phase}
-	物质的相(phase)是指其化学组份和物理性质在空间上均匀的形态。
+	一个相(phase)是系统中组成和物理性质在宏观上均匀的部分。例如晶体的微观密度可随晶格周期变化，宏观取平均后仍属于同一相。
 	比如：
 	\begin{itemize}
-		\item 固相(solid phase)：分子在晶格上有序排列，具有长程有序性；
+		\item 晶态固体(crystalline solid)：原子、离子或分子在晶格上排列，具有长程位置有序性；
 		\item 液相(liquid phase)：分子在空间上无序排列，具有短程有序性；
-		\item 气相(gas phase)：分子在空间上完全无序，几乎没有相互作用。
+		\item 气相(gas phase)：分子没有长程位置有序性，在稀薄极限下分子间作用对状态方程的影响很小。
 	\end{itemize}
 \end{definition}
 
 \begin{remark}
-	一个相可以是单组份，例如水，也可以由彼此不发生化学反应的多组份构成，例如溶液。
+	一个相可以是单组分，例如纯液态水，也可以包含多个组分，例如均匀溶液。相内的物种还可以发生化学反应并达到反应平衡。
 \end{remark}
 
 % 在一定条件下，不同的相可以共存。不同相之间的转变称为相变。相变发生在外部条件发生变化时，即强度量变化时。相变是竞争的结果。微观上有各种不同的相互作用。不同的相互作用可能会导致不同类型的相变。系统中两个能量尺度间的关系在强度量变化时发生变化。这种关系变化到一定程度后，系统出现新的相。例如，微观上原子分子的相互作用和热运动的相互竞争。控制这两个因素的参量可以是温度（也可以是压强）。在低温时，物质倾向于形成有长程关联的有序结构，这是分子间相互作用的结果。在高温，熵的作用占优势。这种竞争导致相变。相变可以发生在某一温度处，即相变温度，该温度将低温相和高温相隔开。在降温过程中，当微观上相互作用的能量与热运动能量可比拟时，相变发生，出现新的秩序。
@@ -81,10 +81,7 @@
 		\mu_\phaseI&=\mu_\phaseII.
 	\end{align}
 \end{subequations}
-因此平衡时两相的温度、压强和化学势都是相同的，这分别对应热平衡、力学平衡和相平衡。
-当$\mu_\phaseI\neq\mu_\phaseII$时，$n_\phaseI,n_\phaseII$会对应增减直到达到新的平衡，
-相当于一部分物质从一个相变到了另一个相，称为相变(phase transition)。
-也就是说，化学势决定了相变。
+因此，忽略界面和外力场的影响时，两相平衡要求温度、压强和化学势分别相等。在温度和压强相同的条件下，物质从化学势高的一相转入化学势低的一相会降低总Gibbs自由能，转变可持续到两相达到平衡或其中一相耗尽。
 
 考虑相变的方向，物体最常见的三种相——固、液、气——之间的转变共有6种。每种都有对应的名称，如\figref{fig:phase transition} 所示。
 这些相变的过程在日常生活中也是常见的。
@@ -119,19 +116,19 @@
 
 \begin{theorem}
 	{Clapeyron方程}{Clapeyron equation}
-	相共存曲线下$\mu_\phaseI=\mu_\phaseII$，
+	沿两相共存曲线有$\mu_\phaseI=\mu_\phaseII$，
 	由$\d\mu=-s\d T+v\d p$可得
 	\[
 		(s_\phaseI-s_\phaseII)\d T=(v_\phaseI-v_\phaseII)\d p\implies\dv Tp=\frac{v_\phaseI-v_\phaseII}{s_\phaseI-s_\phaseII}.
 	\]
-	定义单位摩尔系统$\phaseI\to\phaseII$吸收的相变潜热(latent heat)为$\ell:=T(s_\phaseI-s_\phaseII)$，则有
+	一摩尔物质由$\phaseI$相转为$\phaseII$相时吸收的相变潜热(latent heat)为$\ell:=T(s_\phaseII-s_\phaseI)$，故
 	\begin{equation}
-		\dv Tp=\frac{T(v_\phaseI-v_\phaseII)}\ell.
+		\dv Tp=\frac{T(v_\phaseII-v_\phaseI)}\ell.
 	\end{equation}
 \end{theorem}
 
 \begin{corollary}
-	一般的气--液相变$v_\gas\gg v_\liquid$，若气相符合理想气体，并且近似认为相变潜热与温度无关(这个近似是十分粗糙的)，可得
+	取$\ell$为摩尔汽化潜热。远离临界点时，若$v_\gas\gg v_\liquid$，气相可视为理想气体，且在所取温区内可将$\ell$视为常数，则
 	\[
 		\dv Tp\approx\frac{Tv_\gas}\ell=\frac{RT^2}{\ell p}\implies p=p_0\exp\biggb{\frac\ell{R}\biggp{\frac1{T_0}-\frac1T}}.
 	\]
@@ -139,7 +136,7 @@
 \end{corollary}
 
 \begin{remark}
-	水凝固存在反常膨胀，$v_\liquid<v_\solid$，$\d T/\d p<0$。
+	常压附近水结成普通冰时存在反常膨胀，$v_\liquid<v_\solid$，因此这段熔化曲线的$\d T/\d p<0$。
 	% 在Celsius温标下，$\qty{1}{\atm}=\qty{101325}{Pa}$下水的凝固点和沸点分别为$\qty{0}{\degreeCelsius}$和$\qty{100}{\degreeCelsius}$。
 \end{remark}
 
@@ -150,18 +147,18 @@
 \end{notecaptionblock}
 
 特别地，随着温度的升高，气液共存线会存在一个终点，称为临界点(critical point)。
-当$T>T_\criticalpoint$时，气液两相将不可分辨，或者说只有气相。
+当$T>T_\criticalpoint$时，流体可以从低密度连续压缩到高密度，途中不再跨越气液相界。
 这将在\secref{ssec:liquid-gas phase transition}讨论。
 水的临界点$T_\criticalpoint=\qty{647.1}{K},p_\criticalpoint=\qty{22.064}{MPa}$。
 
-三个相所占区域的边界会，该点代表固液气三相共存，称为三相点(triple point)。
-在Kelvin温标下，水的三相点$T_\triplepoint=\qty{273.16}{K},p_\triplepoint=\qty{611.73}{Pa}$。
+三条共存线的交点称为三相点(triple point)，此处固、液、气三相共存。
+水的三相点约为$T_\triplepoint=\qty{273.16}{K},p_\triplepoint=\qty{611.7}{Pa}$。
 
 \paragraph{$p\vs V$相图}
 
 投影到 $p\vs V$ 平面后可画出等温线，如\figref{fig:H2O phase P-V} 所示。
-当$T>T_\criticalpoint$时，全为气相区；
-当$T<T_\criticalpoint$时，会存在气液共存区，对应$p\vs T$图上的气液共存线，因此$p,T$是一一对应的，即等温线在气液共存区内是一条垂直于$p$轴的直线。
+在图示的流体区域内，$T>T_\criticalpoint$的等温线全部位于单相区；
+三相点与临界点之间的等温线穿过气液共存区。给定温度，气液共存压强便已确定，因此共存段是一条水平线。
 
 \begin{example}
 	{杠杆原理}{}
@@ -179,12 +176,11 @@
 	\label{fig:H2O phase P-V}
 \end{notecaptionblock}
 
-当$T=T_\criticalpoint$时，作为$T\to T_\criticalpoint$的极限，等温线在临界点C处应有$(\p p/\p V)_T=0$，
-此外，平衡态的稳定性要求：
+对于通常的液气临界点，等温压缩率发散，等温线在临界点C的斜率$(\p p/\p V)_T$趋于零。稳定单相支满足
 \[
-	\pv[2]Gp=\pvat{V}{p}{T}\leq 0\implies\pvat{p}{V}{T}\leq 0.
+	\pvat{p}{V}{T}=-\frac{1}{V\kappa_T}<0 .
 \]
-因此临界点C只能是等温线上的一个拐点，即
+若临界等温线在C附近二阶可微，一阶导数在C处达到局部最大值零，从而有水平拐点条件
 \begin{equation}
 	\label{eqn:critical point}
 	\pvat{p}{V}{T}=0,\quad\biggp{\pv[2]pV}_T=0.
@@ -204,7 +200,7 @@
 		\begin{align}
 			v_\criticalpoint&=3b,\\
 			T_\criticalpoint&=\frac{8}{27}\frac{a}{Rb},\\
-			p_\criticalpoint&=\frac{RT_\criticalpoint}{v_\criticalpoint-b}-\frac a{v_\criticalpoint}=\frac1{27}\frac a{b^2}.
+			p_\criticalpoint&=\frac{RT_\criticalpoint}{v_\criticalpoint-b}-\frac a{v_\criticalpoint^2}=\frac1{27}\frac a{b^2}.
 		\end{align}
 	\end{subequations}
 	可以定义约化变量$\tilde T:=T/T_\criticalpoint$等，可得状态方程：
@@ -221,7 +217,7 @@
 \subsection{气液相变}
 \label{ssec:liquid-gas phase transition}
 
-在 $G(p,T)$ 曲面上，每个相的 Gibbs 自由能都是 $p,T$ 的连续函数，只有Gibbs自由能最低的那个相可以稳定存在，而相等的两相Gibbs自由能确定了相的边界。在边界处，Gibbs自由能仍然是连续的，但其导数就不一定连续了。形成的面就像一张有折痕的纸，如\figref{fig:phase G-p-T} 所示。
+固定摩尔数$n$时，每个相的Gibbs自由能都是$p,T$的连续函数。平衡态取各相中最低的$G$，两相共存时二者相等。跨越一级相变边界时，平衡的$G$连续而斜率突变，曲面像一张有折痕的纸，如\figref{fig:phase G-p-T} 所示。
 
 \begin{notecaptionblock}
 	\tikzfigure{gibbs-pt}
@@ -247,57 +243,67 @@
 \end{notecaptionblock}
 \fi
 
-\paragraph{气液相变模型}
+\paragraph{共存压强与Maxwell等面积法则}
 
-同一物质的气相和液相在对称性上没有差别，可以统称为流体，其主要区别在于摩尔密度$\tilde n:=n/V$。
-参考理想气体单位体积的Gibbs自由能
+在低于临界温度的等温线上压缩气体，进入共存区后，压缩使部分蒸气液化，压强保持不变。为求出平台的压强，设活塞下有$n$摩尔流体，温度$T$和外压$p_{\rm ext}$给定。以$v=V/n$为试取的摩尔体积，$f(T,v)$为均匀流体的摩尔Helmholtz自由能。系统膨胀还须对外做功，故应比较
+\[
+	\Phi(v)=f(T,v)+p_{\rm ext}v,\qquad
+	\Phi'(v)=p_{\rm ext}-p(T,v),\qquad
+	\Phi''(v)=-\pvat{p}{v}{T}.
+\]
+驻点满足内压等于外压，此时$\Phi=g=\mu$。在\secref{sec:thermo-stability}的力学稳定支上，$(\partial p/\partial v)_T<0$，故$\Phi$取局部极小值。平衡时选取全局极小值。
+
+以van der Waals流体为例，由$(\partial f/\partial v)_T=-p$沿等温线积分得
+\[
+	p(T,v)=\frac{RT}{v-b}-\frac a{v^2},\qquad
+	f(T,v)=f_0(T)-RT\ln\frac{v-b}{b}-\frac av,\quad v>b .
+\]
+当$T<T_\criticalpoint$时，等温线可与同一水平线交于三点。若外侧两个交点$v_\liquid,v_\gas$处的$\Phi$相等，则液相与气相具有同一化学势。记此时的外压为$p_{\rm sat}(T)$，由$\Phi(v_\liquid)=\Phi(v_\gas)$可得
+\[
+	\frac{f(T,v_\gas)-f(T,v_\liquid)}{v_\gas-v_\liquid}
+	=-p_{\rm sat}
+	=\left.\pv f v\right|_{T,v_\liquid}
+	=\left.\pv f v\right|_{T,v_\gas}.
+\]
+连接两点的直线是$f(T,v)$的公切线，沿这条直线的摩尔自由能由两相按杠杆原理混合得到。用$f(T,v_\gas)-f(T,v_\liquid)=-\int_{v_\liquid}^{v_\gas}p(T,v)\d v$消去自由能，即得\textbf{Maxwell等面积法则}
 \begin{equation}
-	\frac GV=\tilde nT\biggb{\frac{\mu_0}{T_0}-cR\ln\biggp{\frac T{T_0}}-R\ln\tilde n_0}+RT\tilde n\ln\tilde n,
+	\int_{v_\liquid}^{v_\gas}\bigb{p(T,v)-p_{\rm sat}}\d v=0,\qquad
+	p(T,v_\liquid)=p(T,v_\gas)=p_{\rm sat}.
 \end{equation}
-其关于$\tilde n$至多只有一个极小值点，对应只有一种相。
-需要进行修正：
-实际流体需要考虑分子间的\textit{相互作用}，流体中的一个分子的势能应具有如下形式
+例如取$\tilde T=0.90$。对于试取的$\tilde p_{\rm sat}$，从约化等温线的三个交点中取最小、最大的根$\tilde v_\liquid,\tilde v_\gas$。等面积条件写为
 \[
-	\phi(\tilde n)=-a\tilde n+b\tilde n^2+\bigo(\tilde n^3),\quad a\gg b\tilde n>0.
+	\tilde p_{\rm sat}(\tilde v_\gas-\tilde v_\liquid)
+	=\frac{8\tilde T}{3}\ln\frac{3\tilde v_\gas-1}{3\tilde v_\liquid-1}
+	+3\biggp{\frac1{\tilde v_\gas}-\frac1{\tilde v_\liquid}} .
 \]
-其基本性质：$\phi(0)=0$，在低密度时表现为吸引($-a\tilde n$占主导)，高密度时表现为排斥($b\tilde n^2$占主导)。
-近似以为每一个分子都处于其他分子的平均势中，称为\textit{平均场近似}。
-由此
-\[
-	\frac GV=RT\tilde n\ln \tilde n-a\tilde n^2+b\tilde n^3.
-\]
-% 第一项是热运动动能，第二项是吸引势，第三项是排斥势。一般地，一个流体系统的Gibbs势都能近似地写为这种形式。
-在适当的温度下，$G/V$关于$\tilde n$可以有一大一小两个极小值点，小$\tilde n$对应气相，大$\tilde n$对应液相。
-两个极小值的大小关系会随温度变化，由此形成了气液相变。
+调节共存压强使上式成立，得到$\tilde p_{\rm sat}\simeq0.6470$、$\tilde v_\liquid\simeq0.6034$和$\tilde v_\gas\simeq2.3488$。在这两个体积之间，均匀支的两个转折点分别位于$\tilde v\simeq0.7186,1.5285$。两转折点之间的均匀流体有$\kappa_T<0$，对微小体积涨落已经失稳。从各共存端点延伸到相邻转折点的均匀支仍有$\kappa_T>0$，但两相混合的自由能更低，这一段是亚稳支。
 
 \begin{notecaptionblock}
 	\tikzfigure{gibbs-phase-fraction}
-	\captionof{figure}{不同$(T,p)$坐标下的$G(\tilde n)$取向}
+	\captionof{figure}{$T=0.90T_\criticalpoint$的van der Waals等温线。水平线两端的实心点给出共存体积，两个阴影区域的面积相等。空心点标出均匀支的力学失稳边界。}
 	\label{fig:model of liquid-gas phase transition}
 \end{notecaptionblock}
 
 \paragraph{过热与成核}
 
-升高液体的温度，在相变温度$T_V$处，气态和液态的Gibbs势相同。再升高温度，气相为稳态。但是液相与气相之间有一个\textit{势垒}$\Delta G$，因此液相变为气相必须克服这个势垒。否则即使$T>T_V$，系统仍处于液相的亚稳态，称为过热(overheating)。
-% 势垒$\Delta U$随温度增加而变小，在$T_\criticalpoint$处完全消失。这种在$T_V$之上存在液相的现象。类似在降温时，气相在相变点处不一定会变成液相而是成为过饱和蒸气。
+在给定外压下将液体加热到沸点以上时，气相的化学势较低。只要液相的局部极小值还存在，液体就可能暂时保持均匀，这种状态称为过热(overheating)。\figref{fig:overheating}中的两个极小值分别代表同一温度和外压下的均匀液相与气相。
 \begin{notecaptionblock}
 	\tikzfigure{superheated-liquid}
-	\captionof{figure}{液体的过热}
+	\captionof{figure}{$T=0.90T_\criticalpoint$、$p_{\rm ext}=0.63p_\criticalpoint$时均匀流体的摩尔势$\Phi$，以气相极小值$\Phi_\gas$为参考。液相位于较高的局部极小值。}
 	\label{fig:overheating}
 \end{notecaptionblock}
-过热现象往往出现在没有杂质和气泡的液体中。由亚稳态变为稳态需要对系统加以扰动，如加入杂质或机械扰动。%被扰动的系统有可能会克服势垒，成为稳态。
-由亚稳态跃迁到稳态的过程一般发生在系统中的一个小的子系统中。小的系统涨落大，有更大的几率通过\textit{热涨落}而发生跃迁，从而发生连锁反应，使整个系统发生跃迁。类似的过程还会出现在诸如过冷蒸气、过冷液体等系统中。例如，过冷蒸气通过涨落，会在原先均匀的相中出现微小的液滴。液滴与气相间存在界面。如果液滴足够大则界面能就会被相变产生的自由能下降克服，从而继续长大。这种过程叫成核(nucleation)。成核由热涨落造成。如果有杂质的存在，或其他扰动存在，则成核长大需要克服的势能会降低，因而更容易转变为稳态。
-
-考虑液滴的Gibbs自由能
+实际相变往往从局部热涨落产生的新相小核开始，称为成核(nucleation)。以蒸气凝结为例，在给定压强下将蒸气冷却至共存温度$T_V$以下，设过冷度$\Delta T=T_V-T>0$。形成液滴会增加界面能，液滴内部的物质转为化学势更低的液相则会降低自由能。设液滴为半径$R$的球，液相摩尔密度$\tilde n_\liquid$和表面张力$\sigma$近似不随半径改变。两项贡献给出形成液滴所需的自由能
 \begin{equation}
-	G=\sigma A-V\tilde n(\mu_\gas-\mu_\liquid)=\sigma\cdot 4\pi R^2-\frac43\pi R^3\tilde n\cdot\frac\ell{T_V}\Delta T.
+	\Delta G(R)=4\pi R^2\sigma-\frac{4\pi}3 R^3\tilde n_\liquid\Delta\mu,\qquad
+	\Delta\mu=\mu_\gas(T,p)-\mu_\liquid(T,p)>0.
 \end{equation}
-其中$\sigma$为表面张力，$A$为表面积，$\tilde n$为液态摩尔密度。
-最大值点对应成核的临界半径
-\begin{equation}
-	R_\criticalpoint=\frac{2\sigma T_V}{\tilde n\ell\Delta T}.
-\end{equation}
-如果涨落产生了一个大于$R_\criticalpoint$的核，则该核将倾向于长大，最终过冷水蒸气全部液化。
+在共存点附近，$(\partial\mu/\partial T)_p=-s$给出$\Delta\mu\simeq(s_\gas-s_\liquid)\Delta T=\ell\Delta T/T_V$，其中$\ell$为摩尔汽化潜热。$\Delta G(R)$的最大值给出临界半径及成核势垒
+\[
+	R_\criticalpoint=\frac{2\sigma}{\tilde n_\liquid\Delta\mu}
+	\simeq\frac{2\sigma T_V}{\tilde n_\liquid\ell\Delta T},\qquad
+	\Delta G(R_\criticalpoint)=\frac{4\pi}3\sigma R_\criticalpoint^2 .
+\]
+小于临界半径的液滴倾向于缩小，较大的液滴则倾向于长大。杂质和容器壁可降低形成新界面的代价，使成核更容易发生。
 
 \begin{notecaptionblock}
 	\tikzfigure{nucleation-barrier}
@@ -341,7 +347,7 @@
 			\multirow{2}{*}{磁性} & 铁磁/顺磁 & $M$ & 磁化强度 \\
 			& 反铁磁/顺磁 & $M_{\mathrm{s}}$ & 子晶格磁化强度 \\
 			\multirow{2}{*}{量子液体} & 超导 & \multirow{2}{*}{$\psi$} & 超导电子对波函数 \\
-			& 超流 & & 超流原子波函数 \\
+			 & 玻色原子超流 & & 凝聚体的宏观波函数 \\
 			\bottomrule
 		\end{tabular}
 		\label{tab:order parameter}
@@ -353,11 +359,10 @@
 	临界点(critical point)是连续相变的相变点，临界温度$T_\criticalpoint$；
 	临界现象(critical phenomenon)是物质在临界点邻域的统计热力学行为。
 
-	以磁性系统的铁磁相变为例，
-	比热$C_H$、磁化强度$M$、磁化率$\chi$等物理量以及状态方程在临界点$T_\criticalpoint$附近常表现出幂律行为，这种幂律行为的指数称为临界指数(critical exponent)。
+	以铁磁相变为例，在热力学极限下令$H\to0^+$选定一个磁化方向。比热的奇异部分$C_{H,\rm sing}$、自发磁化强度$M$和磁化率$\chi$在临界温度两侧常表现出幂律行为，临界等温线也有相应的幂律。其指数称为临界指数(critical exponent)。以下列出领先幂次：
 	\begin{subequations}
 		\begin{align}
-			C&=\begin{cases}
+			C_{H,\rm sing}&\sim\begin{cases}
 				A(T/T_\criticalpoint-1)^{-\alpha}, & T>T_\criticalpoint \\
 				A'(1-T/T_\criticalpoint)^{-\alpha'}, & T<T_\criticalpoint
 			\end{cases}\\
@@ -365,47 +370,52 @@
 				0, & T>T_\criticalpoint \\
 				B(1-T/T_\criticalpoint)^{\beta},\phantom{\quad} & T<T_\criticalpoint
 			\end{cases}\\
-			\chi&=\begin{cases}
+			\chi&\sim\begin{cases}
 				C(T/T_\criticalpoint-1)^{-\gamma}, & T>T_\criticalpoint \\
 				C'(1-T/T_\criticalpoint)^{-\gamma'}, & T<T_\criticalpoint
 			\end{cases}\\
-			M&=DH^{1/\delta},\qqqquad\qquad T=T_\criticalpoint
+			M&\sim DH^{1/\delta},\qqqquad\qquad T=T_\criticalpoint,\quad H\to0^+
 		\end{align}
 	\end{subequations}
-	其中$\alpha,\alpha',\beta,\gamma,\gamma',\delta$为临界指数，$A,A',B,C,C',D$为临界幅度。
+	其中$\alpha,\alpha',\beta,\gamma,\gamma',\delta$为临界指数，$A,A',B,C,C',D$为临界幅度。比热还可有解析背景，幂次为零时也可能出现对数奇异性。
 \end{definition}
 
 \begin{theorem}
 	{缩放关系}{scaling relations}
-	6个临界指数中只有2个是独立的，满足4个缩放关系(scaling relations)：
+	设约化温度$t=T/T_\criticalpoint-1$，自由能密度的奇异部分具有标度形式
+	\[
+		g_{\rm sing}(t,H)=|t|^{2-\alpha}\mathcal G_\pm(H/|t|^\Delta).
+	\]
+	两侧采用相同的指数和不同的标度函数$\mathcal G_\pm$。在通常的幂律标度下，六个热力学临界指数满足
 	\begin{subequations}
 		\begin{align}
 			\alpha+2\beta+\gamma&=2,\\
-			\alpha+\beta(1+\delta)&=2,\\
-			\gamma(1+\delta)&=(2-\alpha)(\delta-1),\\
-			\gamma&=\beta(\delta-1).
+			\gamma&=\beta(\delta-1),\\
+			\alpha'&=\alpha,\qquad\gamma'=\gamma .
 		\end{align}
 	\end{subequations}
 \end{theorem}
 
-唯象的，Landau自由能在临界点
+对场求一次、两次导数，分别得到磁化强度和磁化率的标度幂次，故$\beta=2-\alpha-\Delta$、$\gamma=2\Delta+\alpha-2$。要使临界等温线的$M\propto H^{1/\delta}$在$t\to0$时有有限幅度，还需$\Delta=\beta\delta$。消去$\Delta$即得上述关系。
+
+作为例子，在临界点附近按序参量展开Landau自由能，
 \begin{align}
 	F(T,\eta)=F_0(T)+\frac12a(T)\eta^2+\frac14b(T)\eta^4+\cdots,
 \end{align}
-由于系统对$\pm\eta$是对称的，展开中不含$\eta$的奇次幂。
+这里考虑具有$\eta\leftrightarrow-\eta$对称性的系统，取临界点附近$b(T)>0$，展开中不含$\eta$的奇次幂。
 $\eta$应使$F$取极小值：
 \[
 	\pv F\eta=\eta(a+b\eta^2)=0
 	% \quad\pv[2]F\eta=a+3b\eta^2>0.
 	\implies\eta=0,\pm\sqrt{-\frac ab}.
 \]
-有三个解，$\eta=0$对应无序态($T>T_\criticalpoint$)；$\eta_\pm$对应有序态($T<T_\criticalpoint$)。当$T\to T_\criticalpoint^-$时，$\eta_\pm\to 0$，因此$a(T_\criticalpoint)=0$。
+$a>0$时，$\eta=0$是唯一实驻点且为极小值。$a<0$时还出现一对非零实驻点$\eta_\pm$，此时$\eta=0$为极大值。当$T\to T_\criticalpoint^-$时，两个有序极小值$\eta_\pm$趋于零，因此$a(T_\criticalpoint)=0$。
 由$\eta_\pm$是极小值点：
 \[
 	\pv[2]F\eta=a+3b\eta_\pm^2=-2a>0
 	\implies a<0,\enspace (T<T_\criticalpoint).
 \]
-将$a,b$在$T_\criticalpoint$附近Taylor展开至一阶：
+取$a$在$T_\criticalpoint$附近的线性项及$b$的常数项，其中$a_0,b_0>0$，
 \[
 	a(T)=a_0\biggp{\frac T{T_\criticalpoint}-1},\quad b(T)=b_0.
 \]
@@ -441,26 +451,85 @@ $\eta$应使$F$取极小值：
 因此是\textbf{二级相变}。有序相的比热$>$无序相，且$T=T_\criticalpoint$处比热的突变是有限的，$\alpha=\alpha'=0$。
 
 \paragraph{外加场$B$}
-在外加弱磁场$B$下，序参量为磁化强度$M$，自由能
+以磁化强度$M$为序参量，记施加的场为$B=\mu_0H$。单位体积自由能中，外场与磁矩的耦合给出一项$-BM$，
 \[
-	G(M,B)=F_0+\frac12aM^2+\frac14bM^2-BM.
+	g(M,B)=g_0+\frac12aM^2+\frac14bM^4-BM.
 \]
 平衡时
 \[
-	\pv GM=a\eta+bM^3-B=0.
+	\pv gM=aM+bM^3-B=0.
 \]
 $T=T_\criticalpoint$时，$a=0,\;B=bM^3$故$\delta=3$。
-磁化率
+体磁化率为$\chi=(\partial M/\partial H)_T=\mu_0/(a+3bM^2)$。从$B\to0^+$取极限，在临界温度以下选定一个有序支$M^2=-a/b$，得到
 \[
-	\chi=\mu_0\pvat{M}{B}{T}=\frac{\mu_0}{a+3bM^3}=
+	\chi=
 	\begin{cases}
-		\frac{\mu_0}{a_0}\biggp{\frac T{T_\criticalpoint}-1}^{-1},&T\geqslant T_\criticalpoint \\
-		\frac{\mu_0}{2a_0}\biggp{\frac T{T_\criticalpoint}-1}^{-1}, & T<T_\criticalpoint
+		\frac{\mu_0}{a_0}\biggp{\frac T{T_\criticalpoint}-1}^{-1},&T>T_\criticalpoint \\
+		\frac{\mu_0}{2a_0}\biggp{1-\frac T{T_\criticalpoint}}^{-1}, & T<T_\criticalpoint .
 	\end{cases}
 \]
-$\gamma'=\gamma=1$。
-Landau模型得到的
-临界指数与实验结果有差异，原因是没考虑涨落。
+$\gamma'=\gamma=1$。这里用同一个$M$描述整个样品。要检验这个近似，就要知道一个区域的磁化涨落有多大，以及它和周围多大范围内的涨落相关。
+
+\subsection{临界涨落与重整化群}
+\label{sec:critical-fluctuations}
+
+\paragraph{从自由能到空间关联}
+在$d$维样品中，以$\phi(\bm x)$表示位置$\bm x$附近小区域内的平均序参量。区域的线度大于微观作用距离，又小于待研究的涨落尺度。先考虑相互作用各向同性、短程，且零场下具有$\phi\leftrightarrow-\phi$对称性的标量系统。将均匀Landau自由能推广为
+\begin{equation}
+    \mathcal F[\phi]=\int\d^d x\,
+    \left[\frac{\kappa}{2}|\nabla\phi|^2+
+    \frac{a_0t}{2}\phi^2+\frac{u}{4}\phi^4-h\phi\right],
+    \qquad t=\frac{T-T_\criticalpoint}{T_\criticalpoint}.
+    \label{eq:sm-landau-ginzburg}
+\end{equation}
+这里$a_0,u,\kappa>0$，系数按单位体积定义，$h$为与$\phi$共轭的外场。若$\phi=M$，上节使用的场便是$h=B$。正的梯度项意味着相邻区域的序参量取不同值要付出自由能，变化越急，代价越高。每个场构型在热平衡中的权重正比于$\exp[-\mathcal F[\phi]/(\kB T)]$。
+
+在零场下选取一个均匀极小值$\bar\phi$，令$\delta\phi=\phi-\bar\phi$。先在平均场临界温度附近作展开，短波涨落对临界温度的移动可以在重新确定临界点时计入。把自由能展开到涨落的二次项，其局域曲率为
+\[
+    R=a_0t+3u\bar\phi^2=
+    \begin{cases}a_0t,& t>0,\\ 2a_0|t|,& t<0.\end{cases}
+\]
+取体积$V$并用周期边界条件，定义$\delta\phi_{\bm q}=\int_V \d^d x\,\e^{-\i\bm q\cdot\bm x}\delta\phi(\bm x)$。此时不同波矢的涨落在高斯近似下解耦，
+\[
+    \mathcal F_2=\frac1{2V}\sum_{\bm q}(R+\kappa q^2)|\delta\phi_{\bm q}|^2 .
+\]
+对每个独立的实模式作高斯平均，就得到连通关联函数$C(\bm x)=\ave{\phi(\bm x)\phi(\bm0)}-\ave{\phi}^2$的傅里叶变换，即静态结构因子
+\begin{equation}
+    S(\bm q)=\int \d^d x\,\e^{-\i\bm q\cdot\bm x}C(\bm x)
+    =\frac{\ave{|\delta\phi_{\bm q}|^2}}{V}
+    =\frac{\kB T}{R+\kappa q^2},\qquad
+    \xi=\sqrt{\frac{\kappa}{R}} .
+    \label{eq:sm-gaussian-correlation}
+\end{equation}
+在三维，对上式作逆变换得到$C(r)=\kB T\,\e^{-r/\xi}/(4\pi\kappa r)$，其中$r=|\bm x|$大于微观尺度。关联长度$\xi$可以从实空间的衰减读出，也可以从散射实验测量的峰宽读出。散射强度降到峰值的一半时，波矢正好是$q=1/\xi$。越接近临界点，低波矢的峰越高、越窄。高斯近似给出$\xi\propto|t|^{-1/2}$。在\ssecref{sec:ising-chain}的一维格点模型中，可以直接从自旋之间的关联求出$\xi$，在那里关联长度只在零温发散。
+
+\paragraph{Ginzburg判据}
+在有序相选定一个分支，比较一个关联区域内的平均序参量$\phi_\xi$的涨落与$\bar\phi^2=a_0|t|/u$。取线度$\xi$的平滑空间平均，参与涨落的主要是$q\lesssim 1/\xi$的模式。由\eqref{eq:sm-gaussian-correlation}，忽略仅与平均窗口形状和维数有关的常数，
+\[
+    \ave{(\delta\phi_\xi)^2}\sim
+    \int_{q\lesssim1/\xi}\frac{\d^d q}{(2\pi)^d}
+         \frac{\kB T}{R+\kappa q^2}
+    \sim\frac{\kB T}{\kappa}\,\xi^{2-d}.
+\]
+用$R=2u\bar\phi^2=\kappa/\xi^2$消去$\bar\phi$，得到平均场近似适用的Ginzburg判据
+\begin{equation}
+    \frac{\ave{(\delta\phi_\xi)^2}}{\bar\phi^2}
+    \sim \frac{u\kB T}{\kappa^2}\,\xi^{4-d}\ll 1 .
+\end{equation}
+在$d>4$时，关联长度越大，这个比值越小。在$d<4$时，趋近有限温度连续相变会使比值增大，微弱的四次相互作用也会改变长波涨落。因而短程标量$\phi^4$模型的上临界维数为$4$。在$d=4$时，比值的幂次为零，需进一步考察耦合随尺度的变化，临界幂律可以带有对数修正。
+
+\paragraph{粗粒化与普适性}
+为什么液气临界点附近的密度涨落和单轴铁磁体的磁化涨落能有相同的临界指数？设$\Lambda$是空间粗粒化允许的最大波数。选取尺度因子$b>1$，先对$\Lambda/b<q<\Lambda$的短波涨落取热平均，再用$\bm x'=\bm x/b$恢复原来的波数截止，并重新标定场的大小。短波自由度的作用留在新的自由能系数中。反复进行这个变换，就是考察不同观察尺度下的有效理论。\footnote{参见David Tong，\href{https://davidtong.org/teaching/statistical-field-theory/}{\textit{Statistical Field Theory}}，第2、3章。}
+
+在临界高斯理论中，令$\phi(\bm x)=b^{-(d-2)/2}\phi'(\bm x')$，可保持$\int \d^d x\,|\nabla\phi|^2$不变。于是二次项系数在一次变换下乘以$b^2$，四次项系数乘以$b^{4-d}$。这从另一个角度给出了上临界维数。所有无量纲耦合在变换下保持不动的理论称为固定点。固定点附近，扰动若随放大尺度而增长，称为相关扰动，若衰减则称为无关扰动。
+
+把温度和外场调到临界点后，如果微观作用的差别沿无关方向衰减，长距离关联便由同一固定点控制。三维短程单轴铁磁体和普通单组分流体的液气临界点就属于同一个Ising普适类。流体没有精确的密度反演对称性，它的温度型和外场型标度场是温度、化学势偏离临界值的适当组合。两类系统有相同的临界指数，临界温度和关联长度的幅度仍取决于微观参数。
+
+在短程三维Ising普适类中，临界行为由相互作用固定点控制。以$t,h$代表温度和外场方向上归一化的标度场，记它们在固定点附近的放大指数为$y_t,y_h>0$。一个线度为$b$的块含有$b^d$个原来的体积单元，自由能密度的奇异部分满足
+\[
+    g_{\rm sing}(t,h)=b^{-d}g_{\rm sing}(b^{y_t}t,b^{y_h}h).
+\]
+取$b=|t|^{-1/y_t}$，便得到上节所用的$|t|^{d/y_t}\mathcal G_\pm(h/|t|^{y_h/y_t})$。同一尺度变换给出$\xi(t,0)=b\,\xi(b^{y_t}t,0)$，从而$\nu=1/y_t$、$2-\alpha=d\nu$和$\Delta=y_h/y_t$。这里的超标度关系$2-\alpha=d\nu$适用于自由能奇异部分由单一关联长度决定的情形。在上临界维数以上，四次耦合虽然随尺度而减小，却仍决定有序相的$\bar\phi^2$，直接在标度函数中将它置零会丢失这一支。
 
 \section{多组分系统}
 
@@ -479,15 +548,14 @@ Landau模型得到的
 \begin{subequations}
 	\begin{gather}
 		\d U=T\d S-p\d V+\sum_{i=1}^r\mu_i\d n_i,\\
-		U=TS-pV+\sum_{i=1}^n\mu_in_i,\\
+		U=TS-pV+\sum_{i=1}^r\mu_in_i,\\
 		S\d T-V\d p+\sum_{i=1}^rn_i\d\mu_i=0.
 	\end{gather}
 \end{subequations}
 
 \begin{theorem}
 	{Gibbs相律}{Gibbs phase rule}
-	有$r$个组分的系统在$t$个相共存时，系统有$T,p,\mu_1,\ldots,\mu_r$共$(r+2)$个强度量，每个相有一个Gibbs--Duhem关系，
-	因此自由度
+	有$r$个独立组分的系统在$t$个相共存时，系统有$T,p,\mu_1,\ldots,\mu_r$共$(r+2)$个强度量，每个相有一个Gibbs--Duhem关系。在没有其他外场或组成约束的通常共存条件下，自由度为
 	\begin{equation}
 		f=r+2-t.
 	\end{equation}
@@ -499,15 +567,11 @@ Landau模型得到的
 
 \begin{example}
 	{多组分理想气体}{}
-	考虑$r$种理想气体组成的系统，各组分温度相同，将熵以$T,V,n$表示更好
-	\[
-		s=R\ln(T^cv)+\varsigma\implies S=nR\ln\biggp{\frac{T^cV}n}+n\varsigma.
-	\]
-	根据\textbf{Gibbs定理}：多组分理想气体的熵是各组分气体熵之和
+	考虑$r$种可区分的理想气体，各组分温度相同。设组分$i$的定容摩尔热容为$c_iR$，它在参考温度$T_0$、摩尔体积$v_0$处的摩尔熵为$s_{i,0}$。根据\textbf{Gibbs定理}，混合物的熵等于各组分单独占据全部体积时的熵之和，
 	% \footnote{虽然陈曦老师课上用统计力学证明了这个定理，但这不是基本假设之一吗？🤔}
 	% 输入emoji会编译错误
 	\[
-		S=\sum_{i=1}^rn_iR\ln\biggp{\frac{T^cV}{n_i}}+n_i\varsigma_i.
+		S=\sum_{i=1}^rn_i\biggb{s_{i,0}+c_iR\ln\frac{T}{T_0}+R\ln\frac{V}{n_iv_0}} .
 	\]
 	当气体混合时，所有气体的体积均为$V$，这相比混合前(保持$T,p$不变)的体积$V_i$增大了，由此导致了熵的增加，称为混合熵
 	\begin{equation}
@@ -527,30 +591,29 @@ Landau模型得到的
 溶质B的摩尔分数$x:=n/(N+n)\ll 1$，
 溶质B溶于溶液的混合熵
 \begin{equation}
-	S^*=-(N+n)R\Bigb{x\ln x+(1+x)\ln(1-x)}=-nR(1+\ln x)+\bigo(x^2).
+	S^*=-(N+n)R\Bigb{x\ln x+(1-x)\ln(1-x)}
+	=nR(1-\ln x)+\bigo(nRx).
 \end{equation}
-将$G$展开到$n$的一阶
+在理想稀溶液近似下，将纯溶剂和无限稀释的溶质作为参考，可写出Gibbs自由能
 \[
 	G(T,p,N,n)=N\mu_0(T,p)+n\psi(T,p)-TS^*.
 \]
-$\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
-溶剂与溶质B的化学势
+$\mu_0$是纯溶剂的化学势，$\psi$是溶质的标准态化学势，包含溶质与溶剂相互作用的贡献。利用上式中完整的理想混合熵，在固定$T,p$时分别对$N,n$求导，得到
 \begin{subequations}
 	\begin{align}
 		\label{eqn:mu solvent}
-		\mu         & \equiv\pv GN=\mu_0-xRT.    \\
+		\mu         & \equiv\pvat{G}{N}{T,p,n}=\mu_0+RT\ln(1-x)\simeq\mu_0-xRT,\\
 		\label{eqn:mu solute}
-		\mu_\mathrm{B} & \equiv\pv Gn=\psi+RT\ln x.
+		\mu_\mathrm{B} & \equiv\pvat{G}{n}{T,p,N}=\psi+RT\ln x.
 	\end{align}
 \end{subequations}
-对于稀溶液，溶质与溶剂的相互作用造成的化学势的变化$\psi\ll$混合带来的熵变。
 
 \begin{theorem}
 	{渗透压与van ’t Hoff关系}{van't Hoff relation}
-	溶液的压强$p_\aqueous\neq$纯溶剂的压强$p_\liquid$，将二者用只允许溶剂通过的半透膜隔开时，会在半透膜上产生压强，称为渗透压(osmotic pressure) $\pi$，满足
+	以只允许溶剂通过的半透膜分隔溶液和纯溶剂。定温下阻止溶剂净流动所需的压差$\pi=p_\aqueous-p_\liquid$称为渗透压(osmotic pressure)。设$v$为纯溶剂的摩尔体积，理想稀溶液的一阶近似给出
 	\begin{equation}
 		\label{eqn:van't Hoff}
-		\pi v=xRT.
+		\pi v\simeq xRT.
 	\end{equation}
 	\begin{notecaptionblock}
 		\tikzfigure{osmotic-pressure}
@@ -559,11 +622,11 @@ $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
 \end{theorem}
 
 \begin{proof}
-	平衡时两端水的化学势相同$\mu_0(T,p_\liquid)=\mu(T,p_\aqueous)$，代入\eqref{eqn:mu solvent}并对$p$展开：
+	平衡时两端溶剂的化学势相同$\mu_0(T,p_\liquid)=\mu(T,p_\aqueous)$，代入\eqref{eqn:mu solvent}并对$p$展开：
 	\[
-		\mu(T,p_\aqueous)=\mu_0(T,p_\aqueous)-xRT=\mu_0(T,p_\liquid)+\pv{\mu_0}p\pi-xRT,
+		\mu(T,p_\aqueous)\simeq\mu_0(T,p_\aqueous)-xRT\simeq\mu_0(T,p_\liquid)+\pvat{\mu_0}pT\pi-xRT,
 	\]
-	由Maxwell关系$\p\mu_0/\p p=v$，即证。
+	由纯溶剂的$\d\mu_0=-s\d T+v\d p$即得结论。
 \end{proof}
 
 \begin{example}
@@ -580,34 +643,34 @@ $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
 	\[
 		\mu_{\liquid,0}(T+\Delta T,p)-xR(T+\Delta T)=\mu_\gas(T+\Delta T,p).
 	\]
-	对$\Delta T$展开
+	在纯溶剂的沸点处展开，保留$x$和$\Delta T$的一阶项，
 	\[
-		\cancel{\mu_{\liquid,0}(T,p)}-s_\liquid\Delta T-xRT-xR\Delta T=\cancel{\mu_\gas(T,p)}-s_\gas\Delta T.
+		(s_\gas-s_\liquid)\Delta T\simeq xRT .
 	\]
-	由于$xR\ll s_\gas-s_\liquid$
+	以$\ell=T(s_\gas-s_\liquid)$表示纯溶剂的摩尔汽化潜热，沸点升高量为
 	\begin{equation}
-		\Delta T=\frac{xRT}{s_\gas-s_\liquid-xR}\doteq\frac{xRT^2}\ell.
+		\Delta T\simeq\frac{xRT^2}\ell .
 	\end{equation}
 	从液相到固相的情况正相反（因为只有液相才有溶质），熔点会降低。
 \end{example}
 \begin{example}
 	{电化学电池}{}
-	离子的化学势也与电势$\phi$有关
+	带电粒子跨相输运时，化学和静电两项共同决定其电化学势
 	\[
-		\mu=\mu_{\mathrm i}+ze\NA\phi.
+		\widetilde\mu_i=\mu_i+z_iF\phi,\qquad F=e\NA .
 	\]
-	$\mu_{\mathrm i}$是离子的本征化学势，$ze$是每个离子所带电荷。
-	电流的驱动力是化学势的梯度。
+	$\mu_i$是摩尔化学势，$z_i$是带符号的电荷数，$F$为Faraday常数。在等温条件下，电化学势的空间差异可驱动带电粒子输运。
 	% \[J\propto-\nabla\mu=-\nabla\mu_i+ze\NA E.\]
 	
-	平衡时，电极上离子化学势$\mu_{\mathrm i,\electrode}$与溶液中离子化学势相等
+	以纯金属电极的还原半反应$\mathrm{M}^{z+}+z\,\mathrm e^-\rightleftharpoons\mathrm M$为例。平衡要求参与反应的摩尔电化学势满足
 	\[
-		\mu_{\mathrm i,\electrode}=\mu_{\mathrm i,\aqueous}+RT\ln x+ze\NA\phi,
+		\widetilde\mu_{\mathrm{M}^{z+},\aqueous}+z\widetilde\mu_{\mathrm e,\electrode}=\mu_{\mathrm M,\electrode}.
 	\]
-	因此电势$\phi$与溶液浓度的关系为
+	写$\mu_{\mathrm{M}^{z+},\aqueous}=\mu^\circ_{\mathrm{M}^{z+},\aqueous}+RT\ln a_{\mathrm{M}^{z+}}$，其中$a_{\mathrm{M}^{z+}}$是无量纲活度。固定温度、电极材料和参比电极，将组成无关的项并入标准电极电势$E^\circ$，得到还原电极电势
 	\[
-		\phi=-\frac{RT}{ze\NA}\ln x+\const(\Delta\mu).
+		E=E^\circ+\frac{RT}{zF}\ln a_{\mathrm{M}^{z+}}.
 	\]
+	这是电极反应的Nernst方程。\footnote{参见IUPAC \textit{Gold Book}的\href{https://goldbook.iupac.org/terms/view/09068}{Nernst equation}条目。}
 \end{example}
 
 \begin{example}
@@ -616,21 +679,21 @@ $\mu_0$是纯溶剂的化学势，$\psi$体现溶质与溶剂的相互作用。
 	\[
 		0\rightleftharpoons\sum_{i=1}^r\nu_i\mathrm{A}_i.
 	\]
-	在恒温恒压的条件下，平衡时Gibbs自由能最小
+	以$\xi$为反应进度，$\d n_i=\nu_i\d\xi$。在恒温恒压的条件下，反应能双向进行的平衡点使Gibbs自由能取极小值，
 	% \footnote{在混合系统中，总化学势一般不是各组分简单相加。}
 	\[
 		\d G=\sum_{i=1}^r\mu_i\d n_i=0\implies\sum_{i=1}^r\nu_i\mu_i=0.
 	\]
 	% 应当注意：$\mu_i$均来自于混合系统的Gibbs自由能。
-	考虑一个由理想气体参与的化学反应，在多组分理想气体系统中，组分$i$的化学势为
+	对于理想气体混合物，取标准压强$p^\circ$，组分$i$的分压为$p_i$，无量纲活度$a_i=p_i/p^\circ$。其化学势为
 	\[
-		\mu_i=RT\ln[\mathrm{A}_i]+\const(T).
+		\mu_i=\mu_i^\circ(T)+RT\ln a_i .
 	\]
-	其中$[\mathrm{A}_i]:=n_i/V$表示摩尔浓度，因此
+	将其代入平衡条件，定义标准反应Gibbs自由能$\Delta_{\rm r}G^\circ=\sum_i\nu_i\mu_i^\circ$，可得
 	\begin{equation}
-		\prod_{i=1}^r[\mathrm{A}_i]^{\nu_i}=:K(T).
+		\prod_{i=1}^r a_{i,\rm eq}^{\nu_i}=K(T)=\exp\biggl[-\frac{\Delta_{\rm r}G^\circ(T)}{RT}\biggr].
 	\end{equation}
-	只与$T$有关，$K$称为化学平衡常数。
+	给定标准态时，无量纲的化学平衡常数$K$只与$T$有关。若用摩尔浓度表示，可代入$p_i=(n_i/V)RT$。
 \end{example}
 
 \subsectionstar{相分离}
@@ -651,10 +714,10 @@ A和B两种组份混合后可能出现相分离，分成$\alpha$和$\beta$两相
 \end{align*}
 两相的自由能$g_\alpha=g(x_\alpha),\,g_\beta=g(x_\beta)$。若有相分离，其自由能是一条直线
 \[
-	g^\star(x)=x_\alpha g_\alpha+x_\beta g_\beta
+	g^\star(x)=\frac{n_\alpha}n g_\alpha+\frac{n_\beta}n g_\beta
 	=\frac{g_\beta-g_\alpha}{x_\beta-x_\alpha}(x-x_\alpha)+g_\alpha.
 \]
-若$x_\alpha<x<x_\beta$时有$g^\star<g$，便会出现相分离。
+若$x_\alpha<x<x_\beta$时有$g^\star<g$，分成两相即可降低自由能。平衡的$x_\alpha,x_\beta$使这条直线成为$g(x)$的下公切线。
 
 \begin{notecaptionblock}
 	\tikzfigure{phase-separation}
@@ -671,11 +734,11 @@ A和B两种组份混合后可能出现相分离，分成$\alpha$和$\beta$两相
 		\captionof{figure}{混合物的内能和熵}
 		\label{fig:mixture-energy-entropy}
 	\end{notecaptionblock}
-	混合物的Gibbs自由能
+	混合物的摩尔Gibbs自由能为
 	\[
-		g=u-Ts
+		g=h-Ts=u+pv-Ts.
 	\]
-	如\figref{fig:mixture-energy-entropy} 所示，混合后能量会升高，并且有混合熵
+	在混合体积变化可忽略的模型中，混合焓可用混合内能近似。\figref{fig:mixture-energy-entropy} 给出了混合内能为正的例子，摩尔混合熵为
 	\[
 		s^*=-R\Bigb{x\ln x+(1-x)\ln(1-x)}.
 	\]
