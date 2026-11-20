@@ -341,7 +341,7 @@
 \begin{example}{指数分布和正态分布的矩母函数}{MGF of Expo & Norm}
 	若$X\sim\ExpDist(\lambda)$，则
 	\[
-		\MGF_X(t)=\intRplus\e^{tx}\lambda\e^{-\lambda x}\d x=\frac\lambda{\lambda-t},\quad t\in(-\lambda,\lambda).
+		\MGF_X(t)=\intRplus\e^{tx}\lambda\e^{-\lambda x}\d x=\frac\lambda{\lambda-t},\quad t<\lambda.
 	\]
 	\tcblower
 	若$X\sim\NormalDist(\mu,\sigma^2)$，则
@@ -519,7 +519,7 @@
 	\]
 \end{example}
 \begin{theorem}{最优预测}{}
-	用$g(X)$估计$Y$的均方误差
+	设$Y$及$g(X)$二阶可积，用$g(X)$估计$Y$的均方误差满足
 	\begin{equation}
 		\E\bigb{(Y-g(X))^2}\geqslant\E\bigb{(Y-\E(Y\mid X))^2}.
 	\end{equation}
@@ -528,7 +528,7 @@
 \[
 	\E\bigb{(Y-g(X))^2\mid X}\geqslant\E\bigb{(Y-\E(Y\mid X))^2\mid X}.
 \]
-事实上这也给出了条件期望$\E(Y\mid X)$的几何意义：$Y$在$X$张成的线性空间上的投影。
+事实上这也给出了条件期望$\E(Y\mid X)$的几何意义：$Y$在所有关于$X$可测的平方可积随机变量所成闭子空间上的正交投影。
 \begin{example}{误差}{error}
 	$Y$对$X$的回归函数$\hat Y:=\E(Y\mid X)$，误差$\tilde Y:=Y-\hat Y$，易得
 	\[
@@ -546,7 +546,7 @@
 \begin{definition}{条件方差}{conditional variance}
 	定义条件方差
 	\begin{equation}
-		\Var(Y\mid X):=\E\bigb{\bigp{X-\E(Y\mid X)}^2\mid X}
+		\Var(Y\mid X):=\E\bigb{\bigp{Y-\E(Y\mid X)}^2\mid X}
 	\end{equation}
 \end{definition}
 自然
@@ -560,7 +560,7 @@
 	\end{equation}
 \end{theorem}
 \begin{example}{随机变量个随机变量的和}{}
-	随机变量序列$X_1,X_2,\ldots$ iid，$N$是取值为正整数的随机变量，且与$X_i$独立，令$Y=X_1+\cdots+X_N$，则
+	随机变量序列$X_1,X_2,\ldots$ iid，$N$是取值为非负整数的随机变量，且与整个序列独立，令$Y=X_1+\cdots+X_N$，则
 	\begin{subequations}
 		\begin{align}
 			\E(Y)&=\E\bigb{\E(Y\mid N)}=\E\bigb{N\E(X)}=\E(N)\E(X);\\

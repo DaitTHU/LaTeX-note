@@ -37,7 +37,7 @@ $\NegBinDist(r,p)$：进行独立Bernoulli试验，直到成功了$r$次。之�
 
 $\HypergeomDist(n,N,M)$：$N$个球中有$M$个有标记，从中不放回地随机抽取$n$个，其中$X$个球有标记
 \begin{equation}
-	\P(X=k)=\frac{\binom Mk\binom{N-M}{n-k}}{\binom N n},\quad k=0,1,\ldots,\min(M,n).
+	\P(X=k)=\frac{\binom Mk\binom{N-M}{n-k}}{\binom N n},\quad \max(0,n+M-N)\leqslant k\leqslant\min(M,n).
 \end{equation}
 
 \paragraph{负超几何分布}
@@ -45,7 +45,7 @@ $\HypergeomDist(n,N,M)$：$N$个球中有$M$个有标记，从中不放回地随
 $\NegHypergeomDist(r,N,M)$：$N$个球中有$M$个有标记，从中不放回地随机抽取$X$个，
 直到取到$r$个有标记的球
 \begin{equation}
-	\P(X=k)=\frac{\binom{k-1}{r-1}\binom{N-k}{M-r}}{\binom N M},\quad k=r,\ldots,r+n-M.
+	\P(X=k)=\frac{\binom{k-1}{r-1}\binom{N-k}{M-r}}{\binom N M},\quad k=r,\ldots,r+N-M.
 \end{equation}
 
 \paragraph{Poisson分布}
@@ -82,19 +82,11 @@ $X\sim\BinDist(n,p)$可以视作$X_1,\ldots,X_n$ iid $\sim\BernDist(p)$的和：
 		\Var(X)&=n\Var(X_i)=np(1-p).
 	\end{align}
 \end{subequations}
-众数
+当$0<p<1$时，相邻概率之比为
 \[
-	\frac{\P(X=k)}{\P(X=k-1)}=\frac{\binom nkp}{\binom n{k-1}(1-p)}=\frac{n-k+1}{k}\frac p{1-p}>1,
-	\implies k<(n+1)p.
+	\frac{\P(X=k)}{\P(X=k-1)}=\frac{n-k+1}{k}\frac p{1-p}.
 \]
-故
-\begin{equation}
-	\text{Mode}=\begin{cases}
-		n,&p>\frac{n}{n+1}\\
-		(n+1)p-1\text{~or~}(n+1)p,&(n+1)p\in\NN\\
-		\floor{(n+1)p},&(n+1)p\notin\NN
-	\end{cases}
-\end{equation}
+该比值大于1当且仅当$k<(n+1)p$。若$(n+1)p$不是整数，唯一众数是$\floor{(n+1)p}$；若$(n+1)p$为整数，则它和前一整数同为众数。退化情形$p=0,1$的众数分别为$0,n$。
 
 % \paragraph{Pascal分布}
 
@@ -118,7 +110,9 @@ $X\sim\BinDist(n,p)$可以视作$X_1,\ldots,X_n$ iid $\sim\BernDist(p)$的和：
 
 % \paragraph{Poisson分布}
 
-\subsection{PGF, MGF和CF}
+\subsection{MGF和CF}
+
+下表记$q=1-p$。负二项分布取失败次数，其MGF要求$q\e^t<1$。
 
 \begin{center}
 	\begin{tabular}{ccc}
@@ -126,7 +120,7 @@ $X\sim\BinDist(n,p)$可以视作$X_1,\ldots,X_n$ iid $\sim\BernDist(p)$的和：
 		Distribution&$\MGF_X(t)$&$\CF_X(t)$\\
 		\midrule
 		$\BinDist(n,p)$&$(q+p\e^t)^n$&$(q+p\e^{\i t})^n$\\
-		$\NegBinDist(r,p)$&$\Bigp{\frac p{q+p\e^{t}}}^r$&$\Bigp{\frac p{q+p\e^{\i t}}}^r$\\
+		$\NegBinDist(r,p)$&$\Bigp{\frac p{1-q\e^{t}}}^r$&$\Bigp{\frac p{1-q\e^{\i t}}}^r$\\
 		$\HypergeomDist(n,N,M)$&---&---\\
 		$\PoisDist(\lambda)$&$\e^{\lambda(\e^t-1)}$&$\e^{\lambda(\e^{\i t}-1)}$\\
 		\bottomrule
@@ -213,32 +207,34 @@ $\BetaDist(a,b)$
 		\midrule
 		$\UnifDist(a,b)$&---&$\frac{a+b}2$&$\frac{(b-a)^2}{12}$\\
 		$\NormalDist(\mu,\sigma^2)$&$\mu$&$\mu$&$\sigma^2$\\
-		$\ExpDist(\lambda)$&0&$\frac1\lambda$&$\frac1\lambda$\\
-		$\GammaDist(\alpha,\lambda)$&---&&\\
+		$\ExpDist(\lambda)$&0&$\frac1\lambda$&$\frac1{\lambda^2}$\\
+		$\GammaDist(\alpha,\lambda)$&$\max(\alpha-1,0)/\lambda$&$\alpha/\lambda$&$\alpha/\lambda^2$\\
 		\bottomrule
 	\end{tabular}
 \end{center}
 
+指数和Gamma分布在密度集中于左边界时，将边界值0记作众数。
+
 \section{简单随机抽样}
 \label{sec:simple random sampling}
 
-总体$Y_1,\ldots,Y_N$均值和方差为$\mu,\sigma^2$，简单随机样本为$X_1,\ldots,X_n$。
+有限总体的固定数值为$Y_1,\ldots,Y_N$，均值为$\mu$，方差为$\sigma^2=N^{-1}\sum_j(Y_j-\mu)^2$。设$J_i$为不放回简单随机抽样中第$i$次抽到的编号，$X_i=Y_{J_i}$。
 
-$A:=$样本中含有$Y_j$
+$A:=$样本中含有编号$j$
 \[
-	\P(X_i=Y_j)=\P(X_i=Y_j\mid A)\P(A)+0=\frac1n\cdot\frac{\binom{N-1}{n-1}}{\binom{N}{n}}=\frac1N.
+	\P(J_i=j)=\P(J_i=j\mid A)\P(A)+0=\frac1n\cdot\frac{\binom{N-1}{n-1}}{\binom{N}{n}}=\frac1N.
 \]
 故
 \begin{subequations}
 	\begin{align}
-		\E(X_i)&=\sum_{j=1}^N\P(X_i=Y_j)Y_j=\frac1N\sum_{j=1}^NY_j=\mu;\\
-		\Var(X_i)&=\sum_{j=1}^N\P(X_i=Y_j)\bigp{Y_j-\E(Y_j)}^2=\sigma^2.\\
+		\E(X_i)&=\sum_{j=1}^N\P(J_i=j)Y_j=\frac1N\sum_{j=1}^NY_j=\mu;\\
+		\Var(X_i)&=\sum_{j=1}^N\P(J_i=j)(Y_j-\mu)^2=\sigma^2.\\
 		\E(\avg X)&=\frac1n\sum_{i=1}^n\E(X_i)=\mu.
 	\end{align}
 \end{subequations}
-$B:=$样本中同时含有$Y_k,Y_\ell(k\neq\ell)$
+当$i\ne j$且$k\ne\ell$时，两个编号的联合抽取概率为
 \[
-	\P(X_i=Y_k,X_j=Y_\ell)=\frac1{n(n-1)}\cdot\frac{\binom{N-2}{n-2}}{\binom{N}{n}}=\frac1{N(N-1)}.
+	\P(J_i=k,J_j=\ell)=\frac1{n(n-1)}\cdot\frac{\binom{N-2}{n-2}}{\binom{N}{n}}=\frac1{N(N-1)}.
 \]
 故
 \begin{align*}

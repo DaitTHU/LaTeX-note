@@ -221,7 +221,7 @@
 					\Var(X)&=\intR(x-\E(X))^2f(x)\d x.
 				\end{align}
 			\end{subequations}
-		\item 连续分布的CDF $\CDF(x)$连续且可导，且
+		\item 有密度的分布，其CDF $\CDF(x)$绝对连续，且几乎处处满足
 			\begin{equation}
 				\CDF'(x)=f(x).
 			\end{equation}
@@ -353,13 +353,13 @@
 \end{theorem}
 
 \begin{theorem}{连续型随机变量的函数}{}
-	若$g$处处可导且严格单调，则$Y=g(X)$的PDF为
+	设$X$有密度，$g$在其取值区间上一阶连续可导且$g'$处处非零。则对值域内的$y$，$Y=g(X)$的PDF为
 	\begin{equation}
 		f_Y(y)=f_X\bigp{g^{-1}(y)}\Bigabs{\bigb{g^{-1}(y)}'}.
 	\end{equation}
 	其本质是
 	\begin{equation}
-		\CDF_Y(y)=\CDF_X\bigp{g^{-1}(y)}.
+		\CDF_Y(y)=\begin{cases}\CDF_X(g^{-1}(y)),&g\text{递增},\\1-\CDF_X(g^{-1}(y)),&g\text{递减}.\end{cases}
 	\end{equation}
 \end{theorem}
 \begin{example}{生成随机变量}{}
