@@ -130,7 +130,7 @@ $AA\transp$同理，因此$A\transp A$和$AA\transp$都可以对角化。
 	\[
 		\abs{\Delta A_{ij}}=\Biggabs{\sum_{\ell=k+1}^r\sigma_\ell (u_\ell)_i (v_\ell)_j}\leqslant\sum_{\ell=k+1}^r\sigma_\ell.
 	\]
-	因此误差由忽略的奇异值控制，忽略的越少误差越小。
+	随$k$增大，上述分量误差的共同上界减小。单个像素的带符号误差含有各项的抵消，其绝对值可以暂时增大。
 
 	\begin{center}
         \begin{minipage}{\linewidth}
@@ -202,11 +202,11 @@ $AA\transp$同理，因此$A\transp A$和$AA\transp$都可以对角化。
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	只需证$\forall B$秩为$k$，都有
+	只需证$\forall B$秩不超过$k$，都有
 	\[
 		\norm{A-B}\geqslant\norm{A-A_k}=\sigma_{k+1}.
 	\]
-	设$w=c_1v_1+\cdots+c_{k+1}v_{k+1}$，因为$\rank(B)=k$，故$Bv_1,\ldots,Bv_{k+1}$必然线性相关，继而存在不全为零的$c_1,\ldots,c_{k+1}$使得$Bw=0$，在此基础上再归一化$w$，从而
+	设$w=c_1v_1+\cdots+c_{k+1}v_{k+1}$，因为$\rank(B)\leq k$，故$Bv_1,\ldots,Bv_{k+1}$必然线性相关，继而存在不全为零的$c_1,\ldots,c_{k+1}$使得$Bw=0$，在此基础上再归一化$w$，从而
 	\begin{align*}
 		\norm{A-B}^2&\geqslant\norm{(A-B)w}^2=\norm{Aw}^2\\
 		&=\sigma_1^2c_1^2+\cdots+\sigma_{k+1}^2c_{k+1}^2\geqslant\sigma_{k+1}^2(c_1^2+\cdots+c_{k+1}^2)=\sigma_{k+1}^2.
