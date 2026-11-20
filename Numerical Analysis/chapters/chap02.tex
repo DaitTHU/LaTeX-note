@@ -104,9 +104,9 @@
     \]
     则$g\in\cont^{n+1}[a,b]$且在$[a,b]$上有$x_0,\ldots,x_n,x$共$n+2$个零点，在其划分的$n+1$个区间中应用Rolle定理：对应存在$\xi_1^{(1)},\ldots,\xi_{n+1}^{(1)}$使得
     \[
-        g'(\xi_i^{(1)})=0,\quad i=0,1,\ldots,n+1,
+        g'(\xi_i^{(1)})=0,\quad i=1,\ldots,n+1,
     \]
-    继续对$\xi_0^{(1)},\ldots,\xi_{n+1}^{(1)}$划分的$n$个区间上应用Rolle定理，直到$g^{(n+1)}(\xi^{(n+1)}_0)=0$：
+    继续对$\xi_1^{(1)},\ldots,\xi_{n+1}^{(1)}$划分的$n$个区间应用Rolle定理，直到$g^{(n+1)}(\xi^{(n+1)}_0)=0$：
     \[
         g^{(n+1)}(\xi^{(n+1)}_0)=f^{(n+1)}(\xi^{(n+1)}_0)-\frac{(n+1)!}{\prod_{i=0}^n(x-x_i)}R_n(x)=0.
     \]
@@ -114,7 +114,7 @@
 \end{proof}
 
 \begin{corollary}
-    若$f\in\cont^{n+1}[a,b]$，$h=\max(x_{i+1}-x_i)$则
+    若$f\in\cont^{n+1}[a,b]$，节点满足$a=x_0<\cdots<x_n=b$，且$h=\max_i(x_{i+1}-x_i)$，则
     \begin{equation}
         \norm{R_n}_\infty\leq\frac{h^{n+1}}{4(n+1)}\norm{f^{(n+1)}}_\infty.
     \end{equation}
@@ -250,14 +250,14 @@
 
 \begin{theorem}
     {中值定理与均差}{mean value theorem of divided differences}
-    如果$f\in\cont[a,b],\enspace x_0,\ldots,x_n\in[a,b]$，则$\exists\xi\in I(x_0,\ldots,x_n)$，
+    若$f\in\cont^n[a,b]$，$x_0,\ldots,x_n$为$[a,b]$内互异节点，则$\exists\xi\in I(x_0,\ldots,x_n)$，
     \begin{equation}
         f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!}.
     \end{equation}
 \end{theorem}
 
 \begin{corollary}
-    特别地，$n$阶均差：
+    令各节点趋于同一点，以连续延拓定义重复节点的$n$阶均差，得到
     \begin{equation}
         f[\underbrace{x,\ldots,x}_{n+1}]=\frac{f^{(n)}(x)}{n!}
     \end{equation}
@@ -433,9 +433,10 @@
         \beta_i(x_j)&=0,&\beta_i'(x_j)&=\delta_{ij}.
     \end{alignat}
 \end{subequations}
-则
+于是每一小段上的Hermite插值多项式为
 \begin{equation}
-    \varphi(x)=\sum_{i=1}^nf(x_i)\alpha_i(x)+f'(x)\beta_i(x).
+    \varphi(x)=\sum_{j=i}^{i+1}\bigl[f(x_j)\alpha_j(x)+f'(x_j)\beta_j(x)\bigr],
+    \qquad x\in[x_i,x_{i+1}].
 \end{equation}
 
 \section{Fourier插值}
@@ -455,9 +456,9 @@
         \end{align}
     \end{subequations}
     \tcblower
-    如果$f\in\cont^M$，则$a_n=\bigo(n^{-M}),\enspace b_n=\bigo(n^{-M})$，且
+    若$f$是$2\pi$周期的$\cont^M$函数，分部积分$M$次得到$a_n,b_n=\bigo(n^{-M})$。对$M>1$，用绝对值估计级数尾项可得
     \[
-        \Biggnorm{f(x)-\biggp{\frac{a_0}2+\sum_{n=1}^N[a_n\cos(nx)+b_n\sin(nx)]}}_\infty=\bigo(N^{-M}).
+        \Biggnorm{f(x)-\biggp{\frac{a_0}2+\sum_{n=1}^N[a_n\cos(nx)+b_n\sin(nx)]}}_\infty=\bigo(N^{1-M}).
     \] 
 \end{definition}
 
@@ -476,9 +477,14 @@
     存在唯一的相多项式满足Lagrange插值条件且
     \begin{equation}
         \label{eqn:Fourier betaj}
-        \beta_j=\frac1N\sum_{k=1}^{N-1}f(x_k)\omega^{-kj},\quad\omega=\e^{2\pi\i/N}.
+        \beta_j=\frac1N\sum_{k=0}^{N-1}f(x_k)\omega^{-kj},\quad\omega=\e^{2\pi\i/N},\quad 0\leq j<N.
     \end{equation}
-    对应三角多项式为
+    对实采样值，将成对频率$j,N-j$合并，可取实三角插值多项式
+    \[
+        \frac{A_0}{2}+\sum_{j=1}^{\lfloor(N-1)/2\rfloor}
+        \bigl[A_j\cos(jx)+B_j\sin(jx)\bigr].
+    \]
+    若$N$为偶数，另加$(A_{N/2}/2)\cos(Nx/2)$。其系数为
     \begin{subequations}
         \begin{align}
             A_j&=\frac2N\sum_{k=0}^{N-1}f(x_k)\cos\biggp{\frac{2\pi kj}N},\\

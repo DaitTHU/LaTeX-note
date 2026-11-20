@@ -306,16 +306,16 @@
 \[
     h_i=\frac{b-a}{n_i},\quad i=0,1,\ldots
 \]
-且$n_0<n_1<\cdots<n_m<\cdots$，记关于$h^2$的插值多项式$p_{i,j}\in\poly_{j-i}$满足插值条件：
+且$n_0<n_1<\cdots<n_m<\cdots$。取自变量$s=h^2$，定义$p_{i,j}\in\poly_{j-i}$满足插值条件
 \[
-    p_{i,j}(h_i)=T_{n_i}(f),\enspace
-    p_{i,j}(h_{i+1})=T_{n_{i+1}}(f),\enspace
+    p_{i,j}(h_i^2)=T_{n_i}(f),\enspace
+    p_{i,j}(h_{i+1}^2)=T_{n_{i+1}}(f),\enspace
     \ldots,\enspace
-    p_{i,j}(h_j)=T_{n_j}(f),
+    p_{i,j}(h_j^2)=T_{n_j}(f).
 \]
-由Neville算法\eqref{eqn:Neville}，有递推关系：$p_{i,i}(h)=T_{n_i}(f)$，
+由Neville算法\eqref{eqn:Neville}，有递推关系$p_{i,i}(s)=T_{n_i}(f)$，
 \[
-    p_{i,j}(h)=\frac{(h^2-h_i^2)p_{i+1,j}(h)+(h_j^2-h^2)p_{i,j-1}(x)}{h_j^2-h_i^2},
+    p_{i,j}(s)=\frac{(s-h_i^2)p_{i+1,j}(s)+(h_j^2-s)p_{i,j-1}(s)}{h_j^2-h_i^2}.
 \]
 
 \begin{theorem}

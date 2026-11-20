@@ -275,7 +275,7 @@
 
 \begin{theorem}
     {Jacobi法和G--S法收敛的充分条件：对角占优}{}
-    若$A$严格对角占优或不可约弱对角占优，则Jacobi法和G--S法收敛。
+    若$A$各行均严格对角占优，或$A$不可约、各行弱对角占优且至少一行严格占优，则Jacobi法和G--S法收敛。
 \end{theorem}
 
 \begin{proof}
@@ -294,7 +294,7 @@
 
 \begin{theorem}
     {对称矩阵的Jacobi法和G--S法收敛的充要条件}{}
-    若$A$对称且对角元均为正，则Jacobi法和G--S法收敛$\iff D\pm(L+U)$均正定。
+    设$A=D+L+U$实对称且对角元均为正。Jacobi法收敛当且仅当$A$与$2D-A$均正定；G--S法收敛当且仅当$A$正定。
 \end{theorem}
 
 \subsection{超松弛迭代法}
@@ -346,21 +346,17 @@
     上式两边与$x$内积得到
     \[
         % (1-\omega)\inp{Dx}x-\omega\inp{Ux}x=\lambda(\inp{Dx}x+\omega\inp{Lx}x)\implies
-        \lambda=\frac{(1-\omega)\inp{Dx}x-\omega\inp{Ux}x}{\inp{Dx}x+\omega\inp{Lx}x},
+        \lambda\bigl(\inp{Dx}x+\omega\inp{Lx}x\bigr)=(1-\omega)\inp{Dx}x-\omega\inp{Ux}x.
     \]
     由$A$正定，$D$也正定，记$\inp{Dx}x=:p>0$，$\inp{Lx}x=a+\i b$，由$A$对称，$L\transp=U$，
     \[
         \inp{Ux}x=\inp{L\transp x}x=\inp x{Lx}=\overline{\inp{Lx}x}=a-\i b,
     \]
-    可将$\lambda$用$\omega,p,a,b$表示出来，继而
+    由$A$正定，$\inp{Ax}x=p+2a>0$。因$0<\omega<2$，分母的实部$p+\omega a>p(1-\omega/2)>0$。因此
     \[
         \abs\lambda^2-1=\frac{[(1-\omega)p-\omega a]^2+\omega^2b^2}{(p+\omega a)^2+\omega^2b^2}-1=-\frac{p\omega(2-\omega)(p+2a)}{(p+\omega a)^2+\omega^2b^2}
     \]
-    由$A$正定，
-    \[
-        \inp{Ax}x=\inp{Dx}x+\inp{Lx}x+\inp{Ux}x=p+2a>0,
-    \]
-    又$2-\omega>0$，故$\abs\lambda^2<1$，从而$\rho(L_\omega)<1$，SOR收敛。
+    右侧为负，故$\abs\lambda^2<1$，从而$\rho(L_\omega)<1$，SOR收敛。
 \end{proof}
 
 \paragraph{最佳松弛因子}

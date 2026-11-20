@@ -170,17 +170,17 @@
 
 \begin{theorem}
     {零平方误差最小}{}
-    在所有首项系数为1的$n$次多项式中，Legendre多项式$P_n(x)$在$[-1,1]$与0的平方误差最小。
+    记标准Legendre多项式$P_n$的首项系数为$c_n=2^{-n}\binom{2n}{n}$。在所有首一的$n$次多项式中，$\widehat P_n=P_n/c_n$在$[-1,1]$与0的平方误差最小。
 \end{theorem}
 
 \begin{proof}
     $\forall f\in\poly_n$且首项系数为1，有
     \[
-        f=P_n+a_{n-1}P_{n-1}+\cdots+a_0P_0,
+        f=\widehat P_n+a_{n-1}P_{n-1}+\cdots+a_0P_0,
     \]
     则
     \[
-        \norm f_2^2=\norm{P_n}_2^2+\abs{a_{n-1}}^2\norm{P_{n-1}}_2^2+\cdots+\abs{a_0}^2\norm{P_0}_2^2\geq\norm{P_n}_2^2.
+        \norm f_2^2=\norm{\widehat P_n}_2^2+\abs{a_{n-1}}^2\norm{P_{n-1}}_2^2+\cdots+\abs{a_0}^2\norm{P_0}_2^2\geq\norm{\widehat P_n}_2^2.
         \qedhere
     \]
 \end{proof}
@@ -188,11 +188,11 @@
 \section{最小二乘法}
 \label{sec:least squares algorithm}
 
-给定$\Phi=\Span\{\varphi_0,\ldots,\varphi_n\}$
+给定$n+1$维空间$\Phi=\Span\{\varphi_0,\ldots,\varphi_n\}$及$m+1$个互异节点$x_0,\ldots,x_m$，其中$m\geq n$。
 
 \begin{definition}
     {Haar条件}{Haar condition}
-    $\forall \varphi_i\in\Phi$且$\varphi_i\neq 0$在$x_0,\ldots,x_m$上不同时为0，则称$\Phi$满足Haar条件。
+    若$\Phi$中每个非零函数在节点集上至多有$n$个零点，则称$\Phi$在该节点集上满足Haar条件。此时选取任意$n+1$个节点所得的插值矩阵都可逆。对于离散最小二乘解的唯一性，只需全体节点的采样矩阵列满秩。
 \end{definition}
 
 \begin{example}
@@ -236,17 +236,17 @@
 \end{proof}
 
 \begin{lemma}
-    最佳一致逼近多项式$p_n^*$关于$f$的正负偏差点同时存在。
+    若$f\notin\poly_n$，最佳一致逼近多项式$p_n^*$关于$f$的正负偏差点同时存在。
 \end{lemma}
 
 \begin{definition}
     {Chebyshev交错点}{}
-    若$x_1,\ldots,x_m$是$p_n$关于$f$的偏差点且轮流为正负，则称其为一组Chebyshev交错点。
+    若$x_1<\cdots<x_m$是$p_n$关于$f$的偏差点且误差在这些点上交替取正、负极值，则称其为一组Chebyshev交错点。
 \end{definition}
 
 \begin{theorem}
     {}{}
-    $p_n^*$是$f$的最佳一致逼近多项式$\iff$存在$n+2$个Chebyshev交错点。
+    若$f\notin\poly_n$，则$p_n^*$是$f$的最佳一致逼近多项式$\iff$存在$n+2$个Chebyshev交错点。若$f\in\poly_n$，最小偏差为零，由$f$本身取得。
 \end{theorem}
 
 \begin{corollary}
@@ -260,7 +260,7 @@
 
 \begin{theorem}
     {零偏差最小}{}
-    在所有首项系数为1的$n$次多项式中，Chebyshev多项式$T_n(x)$在$[-1,1]$与0的偏差最小。
+    在所有首项系数为1的$n$次多项式中（$n\geq1$），$2^{1-n}T_n(x)$在$[-1,1]$与0的一致偏差最小，最小值为$2^{1-n}$。
 \end{theorem}
 
 \begin{example}

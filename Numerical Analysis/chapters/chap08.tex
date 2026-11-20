@@ -19,7 +19,7 @@
 
 \paragraph{特征值的分布估计}
 
-由式\eqref{eqn:rho<=norm} $\sigma(A)\leq\norm A$可知，在复平面上，$A$的特征值都位于以原点为中心、(某一)矩阵范数$\norm A$为半径的圆盘内。
+由式\eqref{eqn:rho<=norm} $\rho(A)\leq\norm A$可知，在复平面上，$A$的特征值都位于以原点为中心、(某一)矩阵范数$\norm A$为半径的圆盘内。
 当然，这种对特征值界限的估计过于粗糙。
 
 \begin{theorem}
@@ -45,7 +45,7 @@
 
 \begin{theorem}
     {Gershgorin圆盘定理·二}{Gershgorin circle theorem II}
-    如果$k$个Gershgorin圆盘$D_{i_1},\ldots,D_{i_k}$与其他圆盘互不相交，则它们的并集中恰有$k$个特征值。
+    如果$k$个Gershgorin圆盘$D_{i_1},\ldots,D_{i_k}$的并集与其余圆盘不相交，则该并集中按代数重数计恰有$k$个特征值。
 \end{theorem}
 
 \begin{proof}
@@ -62,7 +62,7 @@
     由于$D_{i_1},\ldots,D_{i_k}$与其他圆盘互不相交，故$D_{i_1}(\theta),\ldots,D_{i_k}(\theta)$也与其他圆盘互不相交。
 
     易得$A(\theta)$的特征多项式关于$\theta$连续变化，故其特征值也关于$\theta$连续变化。
-    注意到$D_i(0)$退化为单点$\{a_{ii}\}$，每个$D_i(0)$中都恰有一个特征值。
+    当$\theta=0$时，所选圆盘的并集中包含$D$的$k$个对角元，重合的对角元按出现次数计数。
     考虑$\theta$从0变化到1的过程，由于$D_{i_1}(\theta),\ldots,D_{i_k}(\theta)$与其他圆盘互不相交，其并集中始终有$k$个特征值。
 \end{proof}
 
@@ -74,7 +74,7 @@
 
 \begin{corollary}
     为了更好的估计，可以设法缩小一些Gershgorin圆盘的半径。
-    例如$A$与其相似变换$BAB\inv$有相同的特征值，若$B=\diag(b_1,\ldots,b_n)$，则Gershgorin圆盘的半径变为
+    例如$A$与其相似变换$B\inv AB$有相同的特征值，若$B=\diag(b_1,\ldots,b_n)$且各$b_i\neq0$，则Gershgorin圆盘的半径变为
     \[
         r_i'=\sum_{j\neq i}\biggabs{\frac{b_j}{b_i}a_{ij}}.
     \]
@@ -82,14 +82,14 @@
 
 \begin{example}
     {}{}
-    考虑矩阵$A$及其相似变换$BAB\inv$
+    考虑矩阵$A$及其相似变换$B\inv AB$
     \[
         A=\begin{bmatrix}
             0.9&0.01&0.12\\
             0.01&0.8&0.13\\
             0.01&0.02&0.4
         \end{bmatrix},\quad
-        BAB\inv=\begin{bmatrix}
+        B\inv AB=\begin{bmatrix}
             0.9&0.01&0.012\\
             0.01&0.8&0.013\\
             0.1&0.2&0.4
