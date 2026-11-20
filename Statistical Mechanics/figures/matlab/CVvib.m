@@ -1,13 +1,12 @@
 figure
 T = linspace(0, 3, 10000);
-beta = 1./ T;
-
-C = beta.^2.* exp(beta)./ (exp(beta) - 1).^2;
+C = vibrational_heat_capacity(T);
 
 p1 = lincomp(plot(T, C, LineWidth=2));
 hold on
 % t << 1 limit
-p2 = lincomp(plot(T, beta.^2.* exp(-beta), 'k--'));
+beta = 1./T(2:end);
+p2 = lincomp(plot(T, [0 beta.^2.*exp(-beta)], 'k--'));
 
 set(gca, Children=[p1 p2])
 

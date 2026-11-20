@@ -22,6 +22,7 @@
 
 ## 统计力学
 
+- **转动热容的峰和声子热容的低温系数。** 刚性异核转子的热容可直接由各能级的正则权重计算，$C_{V,\mathrm r}/(Nk_{\mathrm B})=\beta^2\operatorname{Var}(\varepsilon_{\mathrm r})$。峰值为 $1.0976$，位于 $T/\theta_{\mathrm r}=0.8072$。旧图将连续两次差分的结果画在网格端点，偏移了峰位。Debye 图则在越来越长的积分区间上使用固定数目的等距点，在旧网格的第一个正温点仅算出正确热容的约 18%。用热容积分重算，低温极限恢复 $C_V/(Nk_{\mathrm B})\sim(12\pi^4/5)(T/\theta_{\mathrm D})^3$。[统计力学·分子转动](../Statistical%20Mechanics/chapters/part2/chap02.tex) · [统计力学·声子气体](../Statistical%20Mechanics/chapters/part2/chap03.tex) · [Tong《Statistical Physics》第 3 章](https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S3.html)
 - **自由膨胀的熵变。** 理想气体绝热地向真空膨胀时，初末平衡态温度相同。可沿连接这两态的可逆等温路径计算 $\Delta S=nR\ln(V_2/V_1)$。实际膨胀的吸热和做功均为零，中间状态通常不能用整团气体的同一组 $T,p$ 描述。[统计力学·热力学第二定律](../Statistical%20Mechanics/chapters/part1/chap01.tex)
 - **巨配分函数对逆温度的偏导。** 固定体积时，$-\partial_\beta\ln\Xi$ 在固定逸度下给出 $U$，在固定化学势 $\mu$ 下给出 $U-\mu\langle N\rangle$。计算固定平均粒子数的热容时，须随温度调节逸度。[统计力学·量子气体](../Statistical%20Mechanics/chapters/part2/chap03.tex) · [统计力学·巨正则系综](../Statistical%20Mechanics/chapters/part2/chap04.tex)
 - **气液共存的自由能判据。** 固定温度、外压和物质的量，均匀相的摩尔体积 $v$ 使 $f(T,v)+p_{\rm ext}v$ 取极小，其中 $f$ 是摩尔 Helmholtz 自由能。两极小值等深给出共存压强。旧版直接比较不同密度的 $G/V$，改变每摩尔能量的参考零点就会移动其极小值。[统计力学·气液相变](../Statistical%20Mechanics/chapters/part1/chap03.tex)

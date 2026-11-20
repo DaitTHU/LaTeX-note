@@ -331,8 +331,7 @@
 但在现实中，涉及热现象的过程都具有方向性。
 
 给定一个初态未平衡的孤立系统，经过一段时间的演化会达到平衡态，这个过程未受环境影响，称为自发过程。
-自发过程都是具有方向性的，或者说是不可逆的：
-孤立系统不可能自发地回到非平衡的状态。
+热量在有温差的物体间传递、气体自由膨胀等宏观弛豫过程具有方向性。达到平衡后，宏观系统在通常观测时间内自发回到原先非平衡态的概率极小。
 比如热量可以自发地从高温物体传导到低温物体，但其逆过程却不可能自发发生：热量无法自发地从低温物体传到高温物体。
 
 \begin{theorem}
@@ -383,7 +382,7 @@ Carnot在1824年研究热机时指出
 		\captionof{figure}{Carnot循环}
 		\label{fig:Carnot cycle}
 	\end{notecaptionblock}
-	下面分析这个循环的过程
+	取$Q_\hi,Q_\lo>0$分别表示吸热量和放热量的大小。设两条绝热支所在温区内$C_V=cnR$为常数，则四步过程给出
 	\begin{alignat*}{2}
 		\text A\to\text B~&\text{等温膨胀(吸热)：} & Q_\hi&=nRT_\hi\ln\biggp{\frac{V_\text B}{V_\text A}};\\
 		\text B\to\text C~&\text{绝热膨胀(对外做功)：} & \frac{V_\text C}{V_\text B}&=\biggp{\frac{T_\hi}{T_\lo}}^c;\\
@@ -392,13 +391,13 @@ Carnot在1824年研究热机时指出
 	\end{alignat*}
 	整个循环过程完成后，气体回到原来状态，对外所作的净功为
 	\begin{equation}
-		W=Q_\hi-Q_\lo=nR(T_\hi-T_\lo)\ln\biggp{\frac{V_\text B}{V_\text A}}.
+		W_{\rm out}=Q_\hi-Q_\lo=nR(T_\hi-T_\lo)\ln\biggp{\frac{V_\text B}{V_\text A}}.
 	\end{equation}
 	热功转化的效率
 	\begin{equation}
-		\eta:=\frac W{Q_\hi}=1-\frac{T_\lo}{T_\hi}<1
+		\eta:=\frac{W_{\rm out}}{Q_\hi}=1-\frac{T_\lo}{T_\hi}<1
 	\end{equation}
-	这是因为热机只把它从高温热源$T_\hi$所吸取的热量$Q_\hi$的一部分转化为机械功$W$，其余的热量$Q_\lo$在低温热源$T_\lo$放出去了。
+	在第一定律的符号约定下，一个循环中外界对工质做的净功为$W=-W_{\rm out}$。
 \end{example}
 
 \begin{corollary}
@@ -414,10 +413,10 @@ Carnot在1824年研究热机时指出
 \end{corollary}
 
 \begin{proof}
-	考虑Carnot循环，热机从高温热源$T_\hi$吸取热量$Q_\hi$、向低温热源$T_\lo$放出热量$Q_\lo$，对外做功$W=Q_\hi-Q_\lo$。
-	如果Clausius表述不成立，则可以将热量$Q_\lo$从$T_\lo$传到$T_\hi$而不引起其它变化。这相当于热机从单一热源$T_\hi$吸取热量$Q_\hi-Q_\lo$，并将其完全转化为有用功$W$，而不引起其它变化，与Kelvin表述矛盾。
+	考虑Carnot循环，热机从高温热源$T_\hi$吸取热量$Q_\hi$、向低温热源$T_\lo$放出热量$Q_\lo$，对外做功$W_{\rm out}=Q_\hi-Q_\lo$。
+	如果Clausius表述不成立，则可以将热量$Q_\lo$从$T_\lo$传到$T_\hi$而不引起其它变化。这相当于热机从单一热源$T_\hi$吸取热量$Q_\hi-Q_\lo$，并将其完全转化为有用功，与Kelvin表述矛盾。
 
-	反之，如果Kelvin表述不成立，则可以从单一热源$T_\lo$吸取热量$Q_\lo$，并将其完全转化为有用功$W=Q_\lo$，而不引起其它变化。将此功完全转化为$T_\hi$的热量，就相当于热量从$T_\lo$传到$T_\hi$而没有引起其他变化，这与Clausius表述矛盾。
+	反之，如果Kelvin表述不成立，则可以从单一热源$T_\lo$吸取热量$Q_\lo$，并将其完全转化为有用功$W_{\rm out}=Q_\lo$，而不引起其它变化。将此功完全转化为$T_\hi$的热量，就相当于热量从$T_\lo$传到$T_\hi$而没有引起其他变化，这与Clausius表述矛盾。
 \end{proof}
 
 \begin{theorem}{Carnot定理}{Carnot's Theorem}
@@ -429,9 +428,8 @@ Carnot在1824年研究热机时指出
 \end{theorem}
 
 \begin{proof}
-	假设可逆热机A和热机B工作在各自的循环中，二者均从高温热源$T_\hi$吸收热量均为$Q_\hi$，对外做功分别为$W,W'$。
-	若$\eta_1<\eta_2$，即$W<W'$，则可将A反向工作，这样两个热机联合的循环相当于从低温热源$T_\lo$吸收热量$Q=W'-W$，并将其完全转化为功，而不引起其它变化，这与Kelvin表述矛盾。
-	因此$\eta_1\geq\eta_2$。
+	令可逆热机A和待比较的热机B从高温热源各吸收$Q_\hi$，对外输出功分别为$W_{\rm A},W_{\rm B}$。若$W_{\rm B}>W_{\rm A}$，令A反向运行，两机合起来只从低温热源取热$W_{\rm B}-W_{\rm A}$，并将其全部转化为功，与Kelvin表述矛盾。因此$\eta_{\rm B}\leq\eta_{\rm A}$。
+	若B也可逆，交换A、B即得反向不等式，两者效率相等。反之，效率相等时，反向运行A恰好复原B对两个热源及功源的全部影响，符合可逆过程的定义。
 \end{proof}
 
 \begin{corollary}

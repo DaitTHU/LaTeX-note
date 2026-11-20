@@ -1,4 +1,4 @@
-% O2
+% Heteronuclear rotor with vibrational and rotational temperatures near O2.
 
 figure
 
@@ -6,16 +6,10 @@ Tv = 2.23e3;
 Tr = 2.40;
 
 T = logspace(-2, 5, 10000);
-beta = 1./ T;
 
 Ct = 3 / 2;
-Cv = Einst(Tv.* beta);
-
-l = (0 : 1000)';
-Z = sum((2 * l + 1).* exp(-l.* (l + 1) * Tr./ T));
-Z(1) = 1;
-U = [0 -diff(log(Z))./ diff(beta)];
-Cr = [0 diff(U)./ diff(T)];
+Cv = vibrational_heat_capacity(T/Tv);
+Cr = rotational_heat_capacity(T/Tr);
 
 [T_, C_] = xycomp(log10(T), Ct + Cv + Cr);
 p1 = plot(10.^T_, C_, LineWidth=2);
@@ -42,8 +36,3 @@ text([Tr Tv], [0.15 0.15], ["$\theta_{\mathrm{r}}/\mathrm{K}$", "$\theta_{\mathr
 set(gcf, Position=[200 200 700 500])
 
 exportgraphics(gca, "../C_Vtot.pdf", ContentType="vector", BackgroundColor="none")
-
-function y = Einst(x)
-y = x.^2.* exp(x)./ (exp(x) - 1).^2;
-y(isnan(y)) = 0;
-end

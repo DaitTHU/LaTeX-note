@@ -1,16 +1,11 @@
 figure
 T = linspace(0, 3, 1000);
-beta = 1./ T;
-l = (0 : 100)';
-Z = sum((2 * l + 1).* exp(-l.* (l + 1).* beta));
-Z(1) = 1;
-U = [0 -diff(log(Z))./ diff(beta)];
-C = [0 diff(U)./ diff(T)];
+C = rotational_heat_capacity(T);
 
 p1 = lincomp(plot(T, C, LineWidth=2));
 hold on
 % t << 1 limit
-t = linspace(0, 0.604, 1000);
+t = linspace(0.001, 0.604, 1000);
 p2 = lincomp(plot(t, 12 * exp(-2./ t)./ t.^2, 'k--'));
 % t >> 1 limit
 p3 = plot([0 max(T)], [1 1], 'k--');
