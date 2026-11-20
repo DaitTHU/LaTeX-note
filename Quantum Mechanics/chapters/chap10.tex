@@ -10,12 +10,16 @@
 若入射的是电子和质子，$\ket{a}_{\electron}\otimes\ket{b}_{\mathrm p}$和
 $\ket{b}_{\electron}\otimes\ket{a}_{\mathrm p}$可以由“电子在哪一端”区分。
 换成两个电子，且自旋相同，实验仍可读出$a,b$各有一个电子，记录中却没有粒子编号。
-为构造两粒子态，先给张量积的两个因子临时编号 $1,2$。
+为构造两粒子态，先给张量积的两个因子临时编号 $1,2$，按这个次序写
+$\ket{a,b}=\ket a_1\otimes\ket b_2$。两个位置各填一个单粒子态。
 \begin{definition}{全同粒子与交换对称性}{qm-exchange}
     全同粒子(identical particles)具有相同的内禀性质，交换其编号保持所有物理预测不变。
-    交换算符(exchange operator)$\op{P}_{12}$在乘积基上把$\ket{a}_1\ket{b}_2$变为$\ket{b}_1\ket{a}_2$，
-    并按线性作用于叠加态。满足$\op{P}_{12}\ket{\Psi}=+\ket{\Psi}$的态称为对称态，
-    满足$\op{P}_{12}\ket{\Psi}=-\ket{\Psi}$的态称为反对称态。
+    交换算符(exchange operator) $\op{P}_{12}$ 把乘积基矢 $\ket{a,b}$ 变为 $\ket{b,a}$，并按线性作用于叠加态。
+    对称态 $\ket{\Psi_+}$ 和反对称态 $\ket{\Psi_-}$ 分别满足
+    \begin{equation}
+        \op P_{12}\ket{\Psi_+}=+\ket{\Psi_+},\qquad
+        \op P_{12}\ket{\Psi_-}=-\ket{\Psi_-}.
+    \end{equation}
 \end{definition}
 探测器$a,b$仍各在原处。连续交换两次回到原态，故若一次交换只乘一个相位，
 这个相位的平方为 1。两种符号分别对应哪类粒子，由自旋统计定理确定。
@@ -29,16 +33,16 @@ $\ket{b}_{\electron}\otimes\ket{a}_{\mathrm p}$可以由“电子在哪一端”
 定理的场论条件见\href{https://web2.ph.utexas.edu/~vadim/Classes/2024f-qft/spinstat.pdf}{得克萨斯大学的自旋统计讲义}。
 二维准粒子的交换还可能产生其他相位，称为任意子(anyon)统计的情形需另行处理。
 
-\section{归一化与Pauli原理}
+\section{全同粒子态的归一化与 Pauli 不相容原理}
 交换算符的本征值决定了两个粒子能否共同占据某个单粒子态。
 从两个不同的单粒子态出发，对交换前后的乘积态取对称或反对称组合，就可以考察两态重合时的极限。
 
-设$\ket{a},\ket{b}$各自归一，重叠为$s=\brkt{a}{b}$。
+设$\ket{a},\ket{b}$各自归一，重叠为$s=\braket{a}{b}$。
 分子中的空间轨道、自旋态或光学脉冲模式都可以作为单粒子标签。
 交换前后的两个乘积态一般有重叠，
 \begin{equation}
     (\bra{a}\otimes\bra{b})(\ket{b}\otimes\ket{a})
-    =\brkt{a}{b}\brkt{b}{a}=\abs{s}^2.
+    =\braket{a}{b}\braket{b}{a}=\abs{s}^2.
 \end{equation}
 因此未归一化对称或反对称组合的范数平方为
 $1+1\pm\abs{s}^2\pm\abs{s}^2=2(1\pm\abs{s}^2)$。
@@ -46,7 +50,7 @@ $1+1\pm\abs{s}^2\pm\abs{s}^2=2(1\pm\abs{s}^2)$。
 相应的归一化态为
 \begin{equation}
     \ket{a,b}_\pm=
-    \frac{\ket{a}\ket{b}\pm\ket{b}\ket{a}}{\sqrt{2(1\pm\abs{s}^2)}}.
+    \frac{\ket{a,b}\pm\ket{b,a}}{\sqrt{2(1\pm\abs{s}^2)}}.
 \end{equation}
 只在$s=0$时分母才是$\sqrt2$。
 \begin{corollary}[Pauli 不相容原理]
@@ -57,7 +61,7 @@ $1+1\pm\abs{s}^2\pm\abs{s}^2=2(1\pm\abs{s}^2)$。
 \begin{definition}{Slater行列式}{qm-slater}
     将 $N$ 个正交归一单粒子态 $\ket{a_1},\ldots,\ket{a_N}$ 各占据一次，反对称化并归一化所得的态称为 Slater 行列式，
     \begin{equation}
-        \ket{a_1\cdots a_N}_{\antisym}=\frac1{\sqrt{N!}}
+        \ket{a_1,\ldots,a_N}_{\antisym}=\frac1{\sqrt{N!}}
         \sum_{\pi\in S_N}\sgn(\pi)\ket{a_{\pi(1)}}\otimes\cdots\otimes\ket{a_{\pi(N)}}.
     \end{equation}
     $S_N$包含$N$个编号的全部排列，$\sgn(\pi)$在偶排列时为$+1$、奇排列时为$-1$。
@@ -72,13 +76,20 @@ Slater 行列式用粒子编号写出所有排列。实际计数实验直接给�
 
 \begin{definition}{占据数与Fock空间}{qm-fock-space}
     选定一组正交归一的单粒子模式并固定次序，$\ket{n_1,n_2,\ldots}$表示各模式的粒子数分别确定为$n_1,n_2,\ldots$的占据数态。
-    各模式占据数之和为 $N$ 的这些态张成 $N$ 粒子扇区。把真空、单粒子、两粒子等扇区取正交直和，
-    得到该种粒子的 Fock 空间。
+    各模式占据数之和为 $N$ 的这些态张成 $N$ 粒子扇区。不同总粒子数的扇区彼此正交。
+    汇集所有扇区的基便得到 Fock 空间的一组基，这种空间组合称为正交直和。
+    用 $\ket{\Psi_N}$ 记总粒子数为 $N$ 的分量，归一化态的扇区分解满足
+    \begin{equation}
+        \ket{\Psi}=\sum_{N=0}^\infty\ket{\Psi_N},\qquad
+        \sum_{N=0}^\infty\norm{\Psi_N}^2=1.
+    \end{equation}
 \end{definition}
-例如只保留模式 $a,b$ 时，$\ket{1,1}$ 就表示两个模式各有一个粒子。
+例如只保留模式 $a,b$ 时，真空扇区有一个基矢 $\ket{0,0}$，单粒子扇区有两个基矢 $\ket{1,0},\ket{0,1}$，
+合起来是 $1+2=3$ 维。再纳入两粒子扇区，便可描述两个模式各有一个粒子的 $\ket{1,1}$。
 \tabref{tab:two-mode-occupations}列出只保留两个正交单粒子模式时的两粒子基。
-表中$\ket{ab}$简写$\ket{a}_1\otimes\ket{b}_2$，其下标位置指粒子编号；
-而$\ket{1,1}$中数字的位置指模式。模式的标签包含自旋等全部自由度。
+表的第一列按模式 $a,b$ 的顺序记粒子数，后两列按临时编号 $1,2$ 的顺序记单粒子态。
+例如 $\ket{1,1}$ 表示两个模式各有一个粒子，将同一占据情况写成带粒子编号的态时，须按交换对称性组合 $\ket{a,b}$ 和 $\ket{b,a}$。
+这里的模式标签包含自旋等全部自由度。
 
 \begin{table}[htbp]
     \centering
@@ -86,11 +97,11 @@ Slater 行列式用粒子编号写出所有排列。实际计数实验直接给�
     \label{tab:two-mode-occupations}
     \begin{tabular}{ccc}
         \toprule
-        占据数态 & 用粒子编号写的Bose态 & 用粒子编号写的Fermi态 \\
+        占据数态 $\ket{n_a,n_b}$ & 用粒子编号写的 Bose 态 & 用粒子编号写的 Fermi 态 \\
         \midrule
-        $\ket{2,0}$ & $\ket{aa}$ & 无允许态 \\
-        $\ket{1,1}$ & $(\ket{ab}+\ket{ba})/\sqrt2$ & $(\ket{ab}-\ket{ba})/\sqrt2$ \\
-        $\ket{0,2}$ & $\ket{bb}$ & 无允许态 \\
+        $\ket{2,0}$ & $\ket{a,a}$ & 无允许态 \\
+        $\ket{1,1}$ & $(\ket{a,b}+\ket{b,a})/\sqrt2$ & $(\ket{a,b}-\ket{b,a})/\sqrt2$ \\
+        $\ket{0,2}$ & $\ket{b,b}$ & 无允许态 \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -105,8 +116,12 @@ Slater 行列式用粒子编号写出所有排列。实际计数实验直接给�
     \ket{n_1,n_2,\ldots}=
     \prod_r\frac{(\op{a}_r\adjoint)^{n_r}}{\sqrt{n_r!}}\ket{\vac}.
 \end{equation}
-Fermi 子的产生、湮灭算符满足 $\{\op{c}_r,\op{c}_s\adjoint\}=\delta_{rs}\one$、$\{\op{c}_r,\op{c}_s\}=0$，
-所以$(\op{c}_r\adjoint)^2=0$，$n_r=0,1$。
+Fermi 子的产生、湮灭算符满足反对易关系
+\begin{equation}
+    \{\op{c}_r,\op{c}_s\adjoint\}=\delta_{rs}\one,\qquad
+    \{\op{c}_r,\op{c}_s\}=0.
+\end{equation}
+第二式取 $s=r$ 再取伴随，得到 $(\op{c}_r\adjoint)^2=0$，故 $n_r$ 只能取 $0$ 或 $1$。
 写多Fermi子态时固定模式顺序；对第$r$个模式湮灭会带前面已占据数决定的符号。
 
 \begin{definition}{占据数态上的产生与湮灭}{qm-fock-action}
@@ -133,11 +148,14 @@ Fermi 子的产生、湮灭算符满足 $\{\op{c}_r,\op{c}_s\adjoint\}=\delta_{r
     \]
 \end{definition}
 
-Fermi符号来自把$\op{c}_r$交换到第$r$个产生算符的位置，
-每经过一个已占据模式就出现一次负号。
-例如$\op{c}_2\op{c}_1\adjoint \op{c}_2\adjoint\ket{\vac}=-\op{c}_1\adjoint\ket{\vac}$。
-
-例如 $\op{a}_1\adjoint\ket{1,1}=\sqrt2\ket{2,1}$，产生算符使两 Bose 子态进入三粒子扇区。
+把 Fermi 子湮灭算符 $\op{c}_r$ 移到第 $r$ 个产生算符的位置，每经过一个已占据模式就出现一次负号。
+例如，从前两个模式各有一个粒子的态中移去第二个粒子，必须交换一次算符，
+\[
+    \op{c}_2\op{c}_1\adjoint\op{c}_2\adjoint\ket{\vac}
+    =-\op{c}_1\adjoint\op{c}_2\op{c}_2\adjoint\ket{\vac}
+    =-\op{c}_1\adjoint\ket{\vac}.
+\]
+对 Bose 子，$\op{a}_1\adjoint\ket{1,1}=\sqrt2\ket{2,1}$，产生算符使两粒子态进入三粒子扇区。
 给定$N$且演化守恒粒子数时，整个计算都在同一扇区内完成。
 
 设单体算符(one-body operator)为 $\op{h}$，对称的两体相互作用(two-body interaction)为 $\op{v}$。多体 Hamilton 算符在占据数表示中为
@@ -150,7 +168,7 @@ Bose与Fermi粒子都采用这个表达式，Fermi情形把$\op{a}$换成$\op{c}
 $h_{rs}=\mel{r}{\op{h}}{s}$描述一个粒子从$s$模式到$r$模式的矩阵元。
 两体项中的 $\op{a}_u\op{a}_t$ 在模式 $t,u$ 中各湮灭一个粒子，
 $\op{a}_r\adjoint\op{a}_s\adjoint$ 则在模式 $s,r$ 中各产生一个粒子。
-这里采用未反对称化的矩阵元，求和同时包含两种粒子排列，故有系数$1/2$。
+这里 $V_{rs;tu}$ 是在乘积基中计算的原始矩阵元，例如 $\ket{t,u}=\ket t_1\otimes\ket u_2$。求和同时包含两种粒子排列，故有系数 $1/2$。
 在固定 $N$ 扇区，这对应于按粒子编号写出的 Hamilton 算符
 \[
     \op{H}=\sum_{i=1}^N \op{h}(i)+\sum_{1\leq i<j\leq N}\op{v}(i,j).
@@ -188,13 +206,13 @@ $\op{a}_r\adjoint\op{a}_s\adjoint$ 则在模式 $s,r$ 中各产生一个粒子�
 恰好每个输出一个光子的部分是
 \begin{equation}
     \ket{\Psi_{1,1}}
-    =\frac12\bigp{\ket{v}_c\ket{u}_d-\ket{u}_c\ket{v}_d}.
+    =\frac12\bigp{\ket{v}_c\otimes\ket{u}_d-\ket{u}_c\otimes\ket{v}_d}.
 \end{equation}
 下标$c,d$指输出端口。这个未归一化分量的范数平方就是符合概率：
 \begin{equation}
     \begin{alignedat}{1}
-        P_{1,1}=\brkt{\Psi_{1,1}}{\Psi_{1,1}} &=\frac14\bigb{2-\brkt{v}{u}\brkt{u}{v}-\brkt{u}{v}\brkt{v}{u}}\\
-        &=\frac12(1-\abs{\brkt{u}{v}}^2).
+        P_{1,1}=\braket{\Psi_{1,1}}{\Psi_{1,1}} &=\frac14\bigb{2-\braket{v}{u}\braket{u}{v}-\braket{u}{v}\braket{v}{u}}\\
+        &=\frac12(1-\abs{\braket{u}{v}}^2).
     \end{alignedat}
 \end{equation}
 内部模式相同时，两个到达不同端口的振幅相消，符合概率为零；
@@ -203,10 +221,10 @@ $\op{a}_r\adjoint\op{a}_s\adjoint$ 则在模式 $s,r$ 中各产生一个粒子�
 若$\op{H}_\mathrm{ph}\ket{\omega}=\hbar\omega\ket{\omega}$，
 则$\ket{v_\tau}=\exp(-\i \op{H}_\mathrm{ph}\tau/\hbar)\ket{v}$。
 对相同频谱包络的纯单光子输入，记
-$f(\omega)=\brkt{\omega}{u}=\brkt{\omega}{v}$，
+$f(\omega)=\braket{\omega}{u}=\braket{\omega}{v}$，
 把频谱归一化到总概率为 1，得到
 \begin{equation}
-    \brkt{u}{v_\tau}
+    \braket{u}{v_\tau}
     =\int \abs{f(\omega)}^2\e^{-\i\omega\tau}\d\omega.
 \end{equation}
 这里$f$是单光子态在频率基中的分量，$\omega$是角频率。
@@ -221,7 +239,7 @@ $f(\omega)=\brkt{\omega}{u}=\brkt{\omega}{v}$，
             \exp\Bigp{-\frac{(\omega-\omega_0)^2}{2\sigma_\omega^2}}.
     \end{equation}
     Gauss 积分给出
-    $\brkt{u}{v_\tau}=\e^{-\i\omega_0\tau}
+    $\braket{u}{v_\tau}=\e^{-\i\omega_0\tau}
         \e^{-\sigma_\omega^2\tau^2/2}$，于是
     \begin{equation}
         P_{1,1}(\tau)
@@ -243,22 +261,18 @@ $f(\omega)=\brkt{\omega}{u}=\brkt{\omega}{v}$，
 \checkpoint{两电子的自旋单态反对称，
     对空间态施加了什么限制？}{
     设总态可分为$\ket{\Phi}\otimes\ket{s}$，
-    其中$\ket{s}=(\ket{\up\dn}-\ket{\dn\up})/\sqrt2$。
+    其中 $\ket{s}=(\ket{\up,\dn}-\ket{\dn,\up})/\sqrt2$，两个箭头依次给出编号 $1,2$ 的自旋投影方向。
     交换两个电子时，空间标签和自旋标签必须同时交换。
     因为$\op{P}_{12}^{\spinlabel}\ket{s}=-\ket{s}$，
     要使总态满足$\op{P}_{12}\ket{\Psi}=-\ket{\Psi}$，
     就必须有$\op{P}_{12}^{\spatial}\ket{\Phi}=+\ket{\Phi}$。
 
-    对两个正交空间轨道$\ket{a},\ket{b}$，
-    允许的空间因子为
+    对两个正交空间轨道 $\ket{a},\ket{b}$，自旋单态要求取对称空间因子 $\ket{\Phi_+}$，自旋三重态要求取反对称空间因子 $\ket{\Phi_-}$。两者可合写为
     \begin{equation}
-        \ket{\Phi_+}
-        =\frac{\ket{a}\ket{b}+\ket{b}\ket{a}}{\sqrt2}.
+        \ket{\Phi_\pm}
+        =\frac{\ket{a,b}\pm\ket{b,a}}{\sqrt2}.
     \end{equation}
-    反之，若自旋为对称三重态，
-    空间因子必须是
-    $\ket{\Phi_-}=(\ket{a}\ket{b}-\ket{b}\ket{a})/\sqrt2$。
-    当两个电子占据同一空间轨道时，$\ket{\Phi_-}=0$，
+    当两个电子占据同一空间轨道时，反对称组合的两项相消，
     所以只有自旋单态组合可以保留。
 
     这个限制还会改变相互作用能。

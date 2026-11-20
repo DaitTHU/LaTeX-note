@@ -15,23 +15,23 @@ $\op{\rho}_S=\tr_E\op{\rho}_{SE}$。
 例如发光原子是$S$，逸出到各个方向的辐射模式组成$E$。
 
 \begin{example}{一次发射对应的振幅阻尼信道}{qm-amplitude-damping}
-    设环境最初没有光子，记为$\ket{0_E}$，
-    发射后的归一化环境态记为$\ket{1_E}$。
+    设辐射场最初处于真空态 $\ket{0}_E$，发射一个光子后的归一化场态记为 $\ket{1}_E$。
+    按原子、辐射场的顺序写乘积基，例如 $\ket{e,0}=\ket{e}_S\otimes\ket{0}_E$ 表示原子在激发态而场中没有光子。
     在一次演化区间内，以$p\in[0,1]$表示激发态发射的概率。
     联合演化在相关初态子空间上为
     \begin{subequations}
         \begin{alignat}{1}
-            \ket{g,0_E}&\longmapsto\ket{g,0_E},\\
-            \ket{e,0_E}&\longmapsto
-                \sqrt{1-p}\ket{e,0_E}+\sqrt p\ket{g,1_E}.
+            \ket{g,0}&\longmapsto\ket{g,0},\\
+            \ket{e,0}&\longmapsto
+                \sqrt{1-p}\ket{e,0}+\sqrt p\ket{g,1}.
         \end{alignat}
     \end{subequations}
     两个输出仍正交归一，因此可扩充为整个联合空间上的幺正变换。
     设原子的初态为 $a\ket{g}+b\ket{e}$，其中 $\abs{a}^2+\abs{b}^2=1$。
     根据线性叠加，等候结束后的联合态为
     \begin{equation}
-        \bigp{a\ket{g}+\sqrt{1-p}\,b\ket{e}}\ket{0_E}
-            +\sqrt p\,b\ket{g}\ket{1_E}.
+        \bigp{a\ket{g}_S+\sqrt{1-p}\,b\ket{e}_S}\otimes\ket{0}_E
+            +\sqrt p\,b\ket{g}_S\otimes\ket{1}_E .
     \end{equation}
     光子计数器理想时，这两个正交的环境记录可以区分。读到零个光子的概率是第一项的模方
     $\abs{a}^2+(1-p)\abs{b}^2$，读到一个的概率是第二项的模方 $p\abs{b}^2$。
@@ -40,24 +40,25 @@ $\op{\rho}_S=\tr_E\op{\rho}_{SE}$。
 
     为了将计算推广到任意原子初态，可分别考察零光子和一个光子记录下的原子态。它们对初态的线性依赖分别由下列两个算符给出，
     \begin{equation}
-        \op{K}_0=\ktbr{g}{g}+\sqrt{1-p}\ktbr{e}{e},
+        \op{K}_0=\ketbra{g}{g}+\sqrt{1-p}\ketbra{e}{e},
         \qquad
-        \op{K}_1=\sqrt p\ktbr{g}{e}.
+        \op{K}_1=\sqrt p\ketbra{g}{e}.
     \end{equation}
     若只测量原子，各条光子记录所对应的条件态应按记录概率加权。
-    条件态的归一化分母与权重相消，便有 $\op{\rho}'=\op{K}_0\op{\rho} \op{K}_0\adjoint+\op{K}_1\op{\rho} \op{K}_1\adjoint$。
-    在有序基$(\ket{g},\ket{e})$中逐项相乘，
+    条件态的归一化分母与权重相消。以 $(\ket g,\ket e)$ 为有序基，把两种记录的贡献相加，
     \begin{equation}
-        \op{\rho}'=
-        \begin{pmatrix}
-            \rho_{gg}+p\rho_{ee}&\sqrt{1-p}\rho_{ge}\\
-            \sqrt{1-p}\rho_{eg}&(1-p)\rho_{ee}
-        \end{pmatrix}.
+        \begin{alignedat}{1}
+            \op{\rho}'&=\op K_0\op\rho\op K_0\adjoint+\op K_1\op\rho\op K_1\adjoint\\
+            &=\begin{pmatrix}
+                \rho_{gg}+p\rho_{ee}&\sqrt{1-p}\rho_{ge}\\
+                \sqrt{1-p}\rho_{eg}&(1-p)\rho_{ee}
+            \end{pmatrix}.
+        \end{alignedat}
     \end{equation}
     激发态布居减少因子$1-p$，相干只减少因子$\sqrt{1-p}$，
     因为相干连接“尚未发射”的振幅与基态振幅。
     初态为$\ket{e}$时，约化态为
-    $(1-p)\ktbr{e}{e}+p\ktbr{g}{g}$；
+    $(1-p)\ketbra{e}{e}+p\ketbra{g}{g}$；
     混合来自系统与光子的关联，联合态仍是纯态。
 \end{example}
 
@@ -86,7 +87,7 @@ $\op{K}_\alpha$ 称为 Kraus 算符，作用在系统空间上。右端先把系
     \begin{alignedat}{1}
         \sum_\alpha \op{K}_\alpha\adjoint \op{K}_\alpha &=(\one_S\otimes\bra{e_0})
             \op{U}\adjoint
-            \Bigp{\one_S\otimes\sum_\alpha\ktbr{\alpha}{\alpha}}
+            \Bigp{\one_S\otimes\sum_\alpha\ketbra{\alpha}{\alpha}}
             \op{U}(\one_S\otimes\ket{e_0})\\
         &=\one_S.
     \end{alignedat}
@@ -139,11 +140,11 @@ $\op{K}_\alpha$ 称为 Kraus 算符，作用在系统空间上。右端先把系
 \begin{definition}{时间齐次动力学半群与生成元}{qm-semigroup}
     用 $\mathcal E_t$ 表示经过时间 $t\geq0$ 的量子信道。若
     $\mathcal E_0=\id$ 且 $\mathcal E_{t+s}=\mathcal E_t\mathcal E_s$，这族信道称为时间齐次动力学半群(semigroup)。
-    若下列极限存在，相应的初始变化率称为生成元(generator)，
-    \[
-        \mathcal L(\op{\rho})=\lim_{h\to0^+}\frac{\mathcal E_h(\op{\rho})-\op{\rho}}{h}.
-    \]
-    由合成律，任意时刻的态满足主方程(master equation) $\dot{\op{\rho}}=\mathcal L(\op{\rho})$。
+    初始变化率的极限若存在，便定义生成元(generator) $\mathcal L$。由合成律，将它作用于时刻 $t$ 的态就得到主方程(master equation)，
+    \begin{equation}
+        \mathcal L(\op{\rho})=\lim_{h\to0^+}\frac{\mathcal E_h(\op{\rho})-\op{\rho}}{h},
+        \qquad \dv{\op{\rho}(t)}{t}=\mathcal L\bigp{\op{\rho}(t)}.
+    \end{equation}
 \end{definition}
 
 以\exmref{exm:qm-amplitude-damping}为例，设$p=p(t)$。
@@ -216,18 +217,20 @@ GKSL 是 Gorini、Kossakowski、Sudarshan 与 Lindblad 的姓氏缩写。
 原子发射一个光子会减少激发态的数目，能级间相位的随机变化则可以在布居不变时使条纹变淡。
 把这两种过程分别代入上节的主方程，便能分别跟踪激发态的概率和条纹的对比度。
 
-设$\op{H}=\hbar\omega_0\ket{e}\bra{e}$，$\ket{g}$为基态。
-零温自发发射取$\op{L}_1=\sqrt\Gamma\ket{g}\bra{e}$；纯退相干(pure dephasing)取
-$\op{L}_\phi=\sqrt{\gamma_\phi/2}\op{\sigma}_z$。
+设 $\op{H}=\hbar\omega_0\ketbra{e}{e}$，$\ket{g}$ 为基态。零温自发发射和纯退相干(pure dephasing)分别取跳跃算符
+\begin{equation}
+    \op{L}_1=\sqrt{\Gamma}\ketbra{g}{e},\qquad
+    \op{L}_\phi=\sqrt{\frac{\gamma_\phi}{2}}\,\op{\sigma}_z .
+\end{equation}
 
 $\rho_{ee}=\mel{e}{\op{\rho}}{e}$是激发态布居，
 $\rho_{eg}=\mel{e}{\op{\rho}}{g}$是基态与激发态之间的相干，
-$\op{\sigma}_z=\ktbr{e}{e}-\ktbr{g}{g}$。
+$\op{\sigma}_z=\ketbra{e}{e}-\ketbra{g}{g}$。
 两种耗散的算符形式分别为
 \begin{subequations}
     \begin{alignat}{1}
-        \mathcal D_1(\op{\rho}) &=\Gamma\rho_{ee}\ktbr{g}{g}
-            -\frac{\Gamma}{2}\{\ktbr{e}{e},\op{\rho}\},\\
+        \mathcal D_1(\op{\rho}) &=\Gamma\rho_{ee}\ketbra{g}{g}
+            -\frac{\Gamma}{2}\{\ketbra{e}{e},\op{\rho}\},\\
         \mathcal D_\phi(\op{\rho}) &=\frac{\gamma_\phi}{2}(\op{\sigma}_z\op{\rho}\op{\sigma}_z-\op{\rho}).
     \end{alignat}
 \end{subequations}
@@ -356,7 +359,7 @@ $\phi_0$是两次脉冲设置的相对相位；
 每次回答“仍在初态”的分支都从 $\ket{\Psi}$ 重新出发，连续 $N$ 次都得到这一结果的概率为
 \begin{equation}
     P_N(t)=\abs{A(t/N)}^{2N}
-        =\Bigb{1-\frac{(\Delta H)^2t^2}{N^2\hbar^2}+o(N^{-2})}^N\longrightarrow1.
+        =\Bigb{1-\frac{(\Delta H)^2t^2}{N^2\hbar^2}+o(N^{-2})}^N\to1.
 \end{equation}
 \end{corollary}
 实际能达到的生存概率还取决于每次测量的持续时间、带宽与反馈。

@@ -16,7 +16,7 @@
 
 取$\op{H}=\op{H}_0+\op{V}(t)$，初态为$\op{H}_0$本征态$\ket{i}$。
 在相互作用绘景中，以 $\op{H}_0$ 的本征态为基底，记态在 $\ket{n}$ 上的分量为
-$c_n(t)=\brkt{n}{\psi_I(t)}$。将态方程左乘 $\bra{f}$ 得到
+$c_n(t)=\braket{n}{\psi_I(t)}$。将态方程左乘 $\bra{f}$ 得到
 \begin{equation}
     \i\hbar\dot c_f(t)
     =\sum_n\e^{\i(E_f-E_n)t/\hbar}V_{fn}(t)c_n(t).
@@ -84,7 +84,7 @@ $c_n(t)=\brkt{n}{\psi_I(t)}$。将态方程左乘 $\bra{f}$ 得到
 \begin{figure}[htbp]
     \centering
     \begin{minipage}[c]{.38\linewidth}
-        \centering\tikzfigure[width=.94\linewidth]{transition-phasors}
+        \centering\tikzfigure{transition-phasors}
     \end{minipage}\hfill
     \begin{minipage}[c]{.56\linewidth}
         \centering\includegraphics[width=\linewidth]{figures/finite_time_line.pdf}
@@ -129,8 +129,10 @@ $c_n(t)=\brkt{n}{\psi_I(t)}$。将态方程左乘 $\bra{f}$ 得到
     \sum_{f\in F}\abs{V_{fi}}^2\delta(E_f-E_i).
     \label{eq:golden}
 \end{equation}
-若已把末态密度记为$\rho_f(E)$且矩阵元近似相同，则
-$\Gamma=(2\pi/\hbar)\abs{V_{fi}}^2\rho_f(E_i)$。
+若共振能区内矩阵元近似相同，式\eqref{eq:golden}的求和便给出初态能量处的末态密度，
+\begin{equation}
+    \Gamma_{i\to F}=\frac{2\pi}{\hbar}\abs{V_{fi}}^2\rho_f(E_i).
+\end{equation}
 各简并态或偏振通道可显式求和，也可在矩阵元相同时将其重数计入 $\rho_f$；每个末态计数一次。
 
 这个极限的物理尺度可以明确比较。
@@ -167,18 +169,21 @@ $E_f-E_i=\hbar\omega$；受激发射(stimulated emission)项为$E_f-E_i=-\hbar\o
 为解释这种偏振依赖性，需要用原子态的波函数和光的偏振方向具体求出矩阵元。
 
 \begin{definition}{电偶极矩与跃迁偶极矩}{qm-transition-dipole}
-    以原子核为原点，在固定核的单电子模型中，电子的电偶极矩算符为 $\hatbm{d}=-e\hatbm{X}$。
-    初态 $i$ 到末态 $f$ 的跃迁偶极矩为 $\bm d_{fi}=\mel{f}{\hatbm d}{i}$，
+    以原子核为原点，在固定核的单电子模型中，电子的电偶极矩算符为 $\opbm{d}=-e\opbm{X}$。
+    初态 $i$ 到末态 $f$ 的跃迁偶极矩为 $\bm d_{fi}=\mel{f}{\opbm d}{i}$，
     量纲是电荷乘长度。
 \end{definition}
-当场的空间变化尺度远大于原子尺寸、非相对论近似适用时，电偶极相互作用写成 $\op{V}(t)=-\hatbm{d}\cdot\bm E(t)$。
-单色线偏振场的吸收矩阵元为
-$W_{fi}=-(E_0/2)\mel{f}{\hatbm{d}\cdot\bm\epsilon}{i}$。
+当场的空间变化尺度远大于原子尺寸、非相对论近似适用时，单色线偏振场 $\bm E(t)=E_0\bm\epsilon\cos\omega t$ 的电偶极相互作用及吸收矩阵元为
+\begin{equation}
+    \op V(t)=-\opbm d\cdot\bm E(t),\qquad
+    W_{fi}=-\frac{E_0}{2}\mel{f}{\opbm d\cdot\bm\epsilon}{i} .
+    \label{eq:dipole-absorption-matrix-element}
+\end{equation}
 $ka\ll1$控制空间多极展开，弱驱动控制微扰阶数，二者是不同的近似。
 
 \checkpoint{把驱动写成$E_0\cos\omega t$时，
     为什么吸收振幅中出现$E_0/2$？}{
-    沿给定偏振定义$\op{d}_\epsilon=\hatbm d\cdot\bm\epsilon$。
+    沿给定偏振定义$\op{d}_\epsilon=\opbm d\cdot\bm\epsilon$。
     相互作用为
     \begin{equation}
         \op{V}(t)=-E_0\op{d}_\epsilon\cos\omega t
@@ -192,19 +197,17 @@ $ka\ll1$控制空间多极展开，弱驱动控制微扰阶数，二者是不同
         \biggp{\int_0^t\e^{\i(\omega_{fi}-\omega)s}\d s
             +\int_0^t\e^{\i(\omega_{fi}+\omega)s}\d s}.
     \end{equation}
-    吸收时 $\omega\simeq\omega_{fi}>0$，第一项缓慢积累，第二项快速振荡。共振矩阵元
-    $W_{fi}=-(E_0/2)\mel{f}{\op{d}_\epsilon}{i}$ 含一半场幅，故跃迁率含 $1/4$。
+    吸收时 $\omega\simeq\omega_{fi}>0$，第一项缓慢积累，第二项快速振荡。式\eqref{eq:dipole-absorption-matrix-element}中的共振矩阵元因而只含一半场幅，取模平方后跃迁率带有因子 $1/4$。
     向下跃迁时 $\omega\simeq-\omega_{fi}$，由第二项共振产生受激发射。}
 
-取$\op{d}_0=\op{d}_z$、$\op{d}_{\pm1}=\mp(\op{d}_x\pm\i \op{d}_y)/\sqrt2$。
-\chapref{ch:angular}的角动量与宇称条件意味着，在忽略自旋混合的单电子中心场中，
+将偶极矩按式\eqref{eq:dipole-spherical-components}分成三个球分量。在忽略自旋混合的单电子中心场中，角动量与宇称条件给出
 \begin{equation}
     \Delta\ell=\pm1,\quad\Delta m=0,\pm1,\quad\Delta s=0.
 \end{equation}
 有自旋轨道耦合时，需将轨道与自旋合成为总角动量，按总角动量量子数 $j,m_j$ 的选择定则与相应耦合系数求矩阵元。
 “禁戒”通常指某个近似阶数下的矩阵元为零；磁偶极、电四极、混合态或多光子过程仍可能产生弱线。
 
-以氢的 $1s$ 为初态，用沿 $z$ 线偏振的弱光照射，频率调到 $n=1$ 与 $n=2$ 的能量差除以 $h$。
+以氢的 $1\mathrm{s}$ 为初态，用沿 $z$ 线偏振的弱光照射，频率调到 $n=1$ 与 $n=2$ 的能量差除以 $h$。
 在忽略自旋和精细结构的模型中，$n=2$ 的四个空间态同能；实验能激发其中哪一个？
 在位置表象中，$\op{d}_z$ 使波函数乘以 $-er\cos\theta$，矩阵元的角向因子是
 \[
@@ -214,19 +217,20 @@ $ka\ll1$控制空间多极展开，弱驱动控制微扰阶数，二者是不同
 有 $\cos\theta\,Y_{00}=Y_{10}/\sqrt3$。用球谐函数的正交性，逐态判断的结果见\tabref{tab:hydrogen-dipole-z}。
 \begin{table}[htbp]
     \centering
-    \caption{沿 $z$ 线偏振的光从 $1s$ 激发氢原子时，$n=2$ 各末态的角向积分。}
+    \caption{沿 $z$ 线偏振的光从 $1\mathrm{s}$ 激发氢原子时，$n=2$ 各末态的角向积分。}
     \label{tab:hydrogen-dipole-z}
     \begin{tabular}{@{}lll@{}}
         \toprule
         末态 & 角向积分 & 沿 $z$ 线偏振的电偶极吸收\\
         \midrule
-        $2s$，$\ell=0,m=0$ & $0$ & 初末态宇称相同\\
-        $2p$，$\ell=1,m=0$ & $1/\sqrt3$ & 有吸收，强度还由径向积分决定\\
-        $2p$，$\ell=1,m=\pm1$ & $0$ & 此偏振保持 $m=0$\\
+        $2\mathrm{s}$，$\ell=0,m=0$ & $0$ & 初末态宇称相同\\
+        $2\mathrm{p}$，$\ell=1,m=0$ & $1/\sqrt3$ & 有吸收，强度还由径向积分决定\\
+        $2\mathrm{p}$，$\ell=1,m=\pm1$ & $0$ & 此偏振保持 $m=0$\\
         \bottomrule
     \end{tabular}
 \end{table}
-对唯一留下的 $2p,m=0$，取实的径向函数并选其近原点的系数为正。
+
+对唯一留下的 $2\mathrm{p},m=0$，取实的径向函数并选其近原点的系数为正。
 由\chapref{ch:hydrogen}的归一化，令 $\rho=r/a_Z$，有
 $R_{10}=2a_Z^{-3/2}\e^{-\rho}$、$R_{21}=a_Z^{-3/2}\rho\e^{-\rho/2}/\sqrt{24}$。
 位置算符提供一个 $r$，体积元再提供 $r^2\d r$。分离角向与径向积分得到
@@ -282,18 +286,27 @@ $\eta_g N_e(0)A_{e\to g}P_e(t)\d t$。
 理论因此既要给出总寿命，也要给出每种光子的频率、偏振和方向分布。
 
 如果只给定一个经典外场，令外场为零后非简并激发态只积累相位，不会自行变成基态。
-自发发射(spontaneous emission)要研究原子与辐射场的联合态：$\ket{e;0}\to\ket{g;1_{\bm k\lambda}}$。
+自发发射(spontaneous emission)要研究原子与辐射场的联合态。把原子写在左边、场写在右边，发射一个光子前后的乘积态分别为
+\[
+    \ket{e,0}=\ket e\otimes\ket 0,\qquad
+    \ket{g,1_{\bm k\lambda}}=\ket g\otimes\ket{1_{\bm k\lambda}} .
+\]
+这里 $\ket 0$ 是场的真空态，$\ket{1_{\bm k\lambda}}$ 表示波矢为 $\bm k$、偏振为 $\lambda$ 的模式有一个光子，其余模式均为空。
 
 把原子置于原点附近，在电偶极近似(electric dipole approximation)中取原子处的电场。
 电场每个模式的系数可以从能量定标。
 对体积 $\mathcal V$ 的周期盒，先取一个线偏振行波模式，把电场在原点沿偏振方向的分量写作
 $\op{E}=\i C(\op{a}-\op{a}\adjoint)$。这个算符与谐振子的动量具有相同的形式。
 在数态 $\ket n$ 中，$\op{a}^2$ 与 $(\op{a}\adjoint)^2$ 改变占据数，因而期望为零，
-其余两项给 $\ave{\op{E}^2}=C^2(2n+1)$。行波的电场能和磁场能相等，场强平方的期望在盒内均匀；
-由 $\varepsilon_0\mathcal V\ave{\op{E}^2}=\hbar\omega(n+1/2)$，
-得 $C=\sqrt{\hbar\omega/(2\varepsilon_0\mathcal V)}$。恢复所有模式和偏振，就有
+其余两项给 $\ave{\op{E}^2}=C^2(2n+1)$。行波的电场能和磁场能相等，场强平方的期望在盒内均匀。令总场能等于该模式的量子化能量，取正的幅度系数，得到
 \begin{equation}
-    \hatbm{E}(\bm0)
+    \varepsilon_0\mathcal V C^2(2n+1)
+      =\hbar\omega\bigp{n+\tfrac12},\qquad
+    C=\sqrt{\frac{\hbar\omega}{2\varepsilon_0\mathcal V}} .
+\end{equation}
+恢复所有模式和偏振，就有
+\begin{equation}
+    \opbm{E}(\bm0)
     =\i\sum_{\bm k,\lambda}
     \sqrt{\frac{\hbar\omega_k}{2\varepsilon_0\mathcal V}}\,
     \bigp{\bm\epsilon_{\bm k\lambda}\op{a}_{\bm k\lambda}
@@ -304,19 +317,19 @@ $\lambda=1,2$标记两种横向偏振(transverse polarization)，单位偏振向
 $\bm k\cdot\bm\epsilon_{\bm k\lambda}=0$。
 $\op{a}_{\bm k\lambda}$湮灭该模式的一个光子，
 $\op{a}\adjoint_{\bm k\lambda}\ket{0}=\ket{1_{\bm k\lambda}}$。
-联合态 $\ket{e;0}=\ket{e}\otimes\ket{0}$ 中，第一因子属于原子，第二因子属于辐射场。
 相互作用为
 \[
     \op{V}=-\sum_{i=x,y,z}\op{d}_i\otimes\op{E}_i(\bm0),
 \]
 其中 $\op{d}_i$ 作用于原子，$\op{E}_i$ 作用于辐射场。
-只有含$\op{a}\adjoint$的项连接$\ket{e;0}$与$\ket{g;1_{\bm k\lambda}}$。
+只有含 $\op{a}\adjoint$ 的项连接 $\ket{e,0}$ 与 $\ket{g,1_{\bm k\lambda}}$。
 
 在体积$\mathcal V$的量子化盒中，电场单光子矩阵元的大小给出
 \begin{equation}
-    \abs{V_{g1,e0}}^2=\frac{\hbar\omega_k}{2\varepsilon_0\mathcal V}
+    \abs{\mel{g,1_{\bm k\lambda}}{\op V}{e,0}}^2
+      =\frac{\hbar\omega_k}{2\varepsilon_0\mathcal V}
     \abs{\bm\epsilon_{\bm k\lambda}\conj\cdot\bm d_{ge}}^2,
-    \quad \bm d_{ge}=\mel{g}{\hatbm{d}}{e}.
+    \quad \bm d_{ge}=\mel{g}{\opbm{d}}{e}.
 \end{equation}
 应用式\eqref{eq:golden}时，以大盒内的模式数把波矢求和换为积分，
 \[
@@ -364,12 +377,14 @@ $\op{a}\adjoint_{\bm k\lambda}\ket{0}=\ket{1_{\bm k\lambda}}$。
 \begin{example}{寿命怎样变成谱线宽度}{qm-linewidth}
     仅有寿命展宽时，$t\geq0$ 的激发振幅为 $c_e(t)=\e^{-\i\omega_{eg}t-\Gamma t/2}$。
     对它作 Fourier 变换得到辐射振幅 $F(\omega)$，取模平方便得到 Lorentz 线型，
-    \begin{equation}
-        F(\omega)=\intRplus \e^{\i\omega t}c_e(t)\d t
-          =\frac1{\Gamma/2-\i(\omega-\omega_{eg})},\qquad
-        I(\omega)\propto \abs{F(\omega)}^2=
-        \frac1{(\omega-\omega_{eg})^2+(\Gamma/2)^2}.
-    \end{equation}
+    \begin{subequations}
+        \begin{align}
+            F(\omega)&=\intRplus \e^{\i\omega t}c_e(t)\d t
+              =\frac1{\Gamma/2-\i(\omega-\omega_{eg})},\\
+            I(\omega)&\propto \abs{F(\omega)}^2=
+            \frac1{(\omega-\omega_{eg})^2+(\Gamma/2)^2}.
+        \end{align}
+    \end{subequations}
     在 $\omega_{eg}\pm\Gamma/2$ 处强度为峰值的一半，故角频率的半高全宽(full width at half maximum, FWHM)为 $\Gamma$，以 \unit{Hz} 表示的频宽为 $\Gamma/(2\pi)$。
 \end{example}
 

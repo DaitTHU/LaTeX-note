@@ -1,15 +1,15 @@
-\subsection{从固定两端的驻波到箱中粒子}
+\subsection{无限深方势阱的定态与能级}
 \label{ss:position-well}
 长为 $L$、两端固定的弦，其驻波在弦长内恰有整数个半波长。质量为 $m$ 的粒子受限于两面硬墙之间时，两端的边界条件同样限制空间振幅的形状。位置表象使这些条件能够直接写入态方程。
-记 $\psi(x,t)=\brkt{x}{\psi(t)}$。对无自旋、无磁场的非相对论粒子，模型取 $\op{H}=\op{P}^2/(2m)+V(\op{X})$。
-把式\eqref{eq:schrket}左乘 $\bra{x}$，势能在位置 $x$ 处乘以 $V(x)$，
-动量则作用为 $-\i\hbar\p_x$。动量作用两次给出 $-\hbar^2\p_x^2$，于是
+记 $\psi(x,t)=\braket{x}{\psi(t)}$。对无自旋、无磁场的非相对论粒子，模型取 $\op{H}=\op{P}^2/(2m)+V(\op{X})$。
+把式\eqref{eq:schrket}左乘 $\bra{x}$，势能在位置 $x$ 处乘以 $V(x)$。
+在每个固定时刻，动量仍按式\eqref{eq:momentum-position}对空间坐标求导，作用两次就得到空间二阶偏导数。于是
 \begin{equation}
-    \i\hbar\p_t\psi(x,t)
-    =-\frac{\hbar^2}{2m}\p_x^2\psi(x,t)+V(x)\psi(x,t).
+    \i\hbar\pv{\psi}{t}
+    =-\frac{\hbar^2}{2m}\pv[2]{\psi}{x}+V(x)\psi(x,t).
     \label{eq:position-schrodinger}
 \end{equation}
-若制备在能量确定为 $E$ 的态，已知它的时间因子是 $\e^{-\i Et/\hbar}$。
+左边在固定 $x$ 时对 $t$ 求导，右边在固定 $t$ 时对 $x$ 求导。若制备在能量确定为 $E$ 的态，已知它的时间因子是 $\e^{-\i Et/\hbar}$。
 代入 $\psi(x,t)=u(x)\e^{-\i Et/\hbar}$，左侧对时间求导得到 $E\psi$，
 约去公共的相位，就得到决定空间形状的定态方程
 \begin{equation}
@@ -33,7 +33,7 @@
 
 \begin{figure}[htbp]
     \centering
-    \tikzfigure[width=.85\linewidth]{well-detection}
+    \tikzfigure{well-detection}
     \caption{箱中第一激发态 $n=2$。左图给出带符号的空间振幅，右图给出相应的位置概率密度。横坐标为 $x/L$；右图阴影的面积给出探测窗内的概率。}
     \label{fig:well-detection}
 \end{figure}
@@ -47,19 +47,24 @@
 \paragraph{驻波的位置与动量展宽}
 关于箱中心 $x=L/2$ 反射，$u_n(L-x)=(-1)^{n+1}u_n(x)$，
 所以基态为偶态，第一激发态为奇态，而各态的位置密度都关于中心对称。
-由此 $\ave{\op X}=L/2$。再用 $2\sin^2 k_nx=1-\cos(2k_nx)$ 积分，有
+由此 $\ave{\op X}=L/2$。记位置和动量的标准差为 $\sigma_x=\Delta X$、$\sigma_p=\Delta P$。再用 $2\sin^2 k_nx=1-\cos(2k_nx)$ 积分，有
 \[
     \sigma_x^2=\frac1L\int_0^L(x-L/2)^2[1-\cos(2k_nx)]\d x
     =L^2\bigg(\frac1{12}-\frac1{2n^2\pi^2}\bigg).
 \]
 若突然撤去箱壁，测量自由粒子的动量，初始波函数可在箱外延拓为零。
-实波函数及两端的零值给出 $\ave{\op P}=-\i\hbar\int_0^L u_nu_n'\d x=0$。
-由 Fourier 变换的模平方积分守恒，动量二阶矩为
-$\hbar^2\int_0^L\abs{u_n'}^2\d x=\hbar^2k_n^2$，故
-$\sigma_x\sigma_p=\hbar\sqrt{n^2\pi^2/12-1/2}$。
+由于 $u_n$ 为实函数且两端为零，动量均值为零。再用 Fourier 变换的模平方积分守恒求出动量方差，
+\begin{equation}
+    \ave{\op P}=-\i\hbar\int_0^L u_nu_n'\d x=0,\qquad
+    \sigma_p^2=\hbar^2\int_0^L\abs{u_n'}^2\d x=\hbar^2k_n^2 .
+\end{equation}
+代入 $k_n=n\pi/L$，两个标准差的乘积为
+\begin{equation}
+    \sigma_x\sigma_p=\hbar\sqrt{\frac{n^2\pi^2}{12}-\frac12}.
+\end{equation}
 对于最低的 $n=1$，这一乘积约为 $0.568\,\hbar$，高于不确定关系给出的 $\hbar/2$。
 
-\subsection{有限深方势阱能束缚几个态}
+\subsection{有限深方势阱的束缚态数目}
 \label{ss:finite-well}
 若把硬墙换成有限的势能台阶，粒子在墙外仍有出现的概率。
 取阱中心为原点、半宽为 $a$，在 $\abs{x}<a$ 内 $V=-V_0$，阱外 $V=0$，$V_0>0$。
@@ -75,7 +80,7 @@ $\sigma_x\sigma_p=\hbar\sqrt{n^2\pi^2/12-1/2}$。
 偶态给出 $k\tan(ka)=\kappa$，奇态给出 $-k\cot(ka)=\kappa$。
 \begin{figure}[htbp]
     \centering
-    \tikzfigure[width=.72\linewidth]{finite-well-parity}
+    \tikzfigure{finite-well-parity}
     \caption{取 $a\sqrt{2mV_0}/\hbar=3$。左图以 $V_0$ 为能量单位，给出方势阱及其两个束缚能级。
         右图在相同的 $x/a$ 坐标下画出实波函数，分别以各自的最大绝对值为单位。偶态（实线）在中心的导数为零，奇态（虚线）在中心有节点。}
     \label{fig:finite-well-parity}
@@ -92,14 +97,18 @@ $\sigma_x\sigma_p=\hbar\sqrt{n^2\pi^2/12-1/2}$。
 偶、奇两式的左边交替有一条从零递增到无穷的正支。
 右边随 $z$ 单调下降，在 $z=z_0$ 降到零，所以只要正支的左端小于 $z_0$，就恰有一个交点。
 若 $z_0=j\pi/2$，新一支的端点对应 $E=0$，阱外的有界解趋于常数，无法归一化。
-因此束缚态数为 $N=\ceil{2z_0/\pi}$。任意浅的吸引方阱都有一个偶基态，首个奇态要等到 $z_0>\pi/2$ 才出现。
+因此束缚态总数为
+\begin{equation}
+    N=\Bigceil{\frac{2z_0}{\pi}} .
+\end{equation}
+任意浅的吸引方阱都有一个偶基态，首个奇态要等到 $z_0>\pi/2$ 才出现。
 在固定 $a$、增大阱深的极限，对每个固定的低能级，$ka$ 趋于正支的右端；
 相对于阱底的动能趋于宽度为 $2a$ 的硬墙结果\cite{mitwave}。
 
-\subsection{概率怎样流过一个截面}
+\subsection{概率流与连续性方程}
 \label{ss:position-current}
 同一批次的粒子穿过一段区域时，区域内的概率会随进出而改变。对实势 $V$，
-将式\eqref{eq:position-schrodinger}乘以 $\psi\conj$，再减去它的复共轭，势能项相消，得到
+将式\eqref{eq:position-schrodinger}乘以 $\psi\conj$，再减去它的复共轭，势能项相消。用 $\p_x$、$\p_t$ 分别简写对 $x$、$t$ 的偏导数，得到
 \begin{equation}
     \p_t\abs{\psi}^2
     =\frac{\i\hbar}{2m}\p_x
@@ -108,7 +117,11 @@ $\sigma_x\sigma_p=\hbar\sqrt{n^2\pi^2/12-1/2}$。
     j=\frac{\hbar}{m}\Im(\psi\conj\p_x\psi).
     \label{eq:position-current}
 \end{equation}
-从 $a$ 积到 $b$，便有 $\d P_{[a,b]}/\nd t=j(a,t)-j(b,t)$。一维的 $j$ 有时间倒数的量纲，
+从 $a$ 积到 $b$，区间内概率的增长率等于从左端流入的概率流减去从右端流出的概率流，
+\begin{equation}
+    \dv{P_{[a,b]}}{t}=j(a,t)-j(b,t).
+\end{equation}
+一维的 $j$ 有时间倒数的量纲，
 正值表示概率沿 $+x$ 方向流动。箱中的单个定态可取实空间函数，处处有 $j=0$；
 行波 $A\e^{\i kx}$ 则给出 $j=(\hbar k/m)\abs{A}^2$，正是速度乘以密度。
 后面计算隧穿时，入射与透射的正向流之比就是透射率。关于位置方程、概率守恒及硬墙边界，参见文献\cite{mitwave}。

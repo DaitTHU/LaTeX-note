@@ -1,4 +1,4 @@
-\chapter{振动能级、光子计数与黑体辐射}
+\chapter{量子谐振子、黑体辐射与光子计数}
 \label{ch:oscillator}
 
 \section{谐振子模型与能谱}
@@ -11,7 +11,7 @@ Taylor展开给出
 \begin{equation}
     V(x_\mathrm{eq}+\delta x)
     =V(x_\mathrm{eq})+\frac12V''(x_\mathrm{eq})(\delta x)^2
-        +\frac16V^{(3)}(x_\mathrm{eq})(\delta x)^3+\cdots.
+        +\frac16V'''(x_\mathrm{eq})(\delta x)^3+\cdots.
 \end{equation}
 极小点的一阶导数为零，常数项只平移全部能级。
 记$m\omega^2=V''(x_\mathrm{eq})>0$，保留二次项便得到谐振子模型。
@@ -66,8 +66,8 @@ $\omega$是小振幅角频率。经典弹簧振子的位移为 $x=A\cos(\omega t
 \end{equation}
 
 \begin{theorem}{一维谐振子的能谱与升降作用}{qm-oscillator}
-    设谐振子存在归一化基态(ground state)，并取通常的正则不可约表示。
-    则它有正交归一能量基$\ket{n}$，
+    取整条实线上只有一个位置自由度的谐振子，其态空间是所有平方可积的位置波函数组成的 $L^2(\RR)$。
+    它有正交归一能量基$\ket{n}$，
     $n=0,1,\ldots$，满足
     \begin{equation}
         E_n=\hbar\omega\bigp{n+\tfrac12},\qquad
@@ -76,12 +76,12 @@ $\omega$是小振幅角频率。经典弹簧振子的位移为 $x=A\cos(\omega t
 \end{theorem}
 
 \begin{proof}
-    任何态的期望 $\mel{\psi}{\op{N}}{\psi}=\|\op{a}\ket{\psi}\|^2\geq0$。
+    对 $\op N$ 定义域内的归一化态，$\mel{\psi}{\op{N}}{\psi}=\|\op{a}\ket{\psi}\|^2\geq0$。
     若 $\op{N}\ket{\nu}=\nu\ket{\nu}$，由 $\op{N}\op{a}=\op{a}\op{N}-\op{a}$ 有
     $\op{N}(\op{a}\ket{\nu})=(\nu-1)\op{a}\ket{\nu}$。
     所得向量若非零，对应的能量比原态低 $\hbar\omega$。
-    若基态经$\op{a}$作用后非零，就会得到能量低$\hbar\omega$的态；
-    因此$\op{a}\ket{0}=0$，从而$\op{N}\ket{0}=0$、$E_0=\hbar\omega/2$。
+    若基态(ground state)经 $\op a$ 作用后非零，就会得到能量更低的态。于是求基态只需解 $\op a\ket 0=0$。
+    下一小节将给出它的归一化高斯解。由 $\op N=\op a\adjoint\op a$ 可知该态达到能量下界 $E_0=\hbar\omega/2$。
     另一方面$[\op{N},\op{a}\adjoint]=\op{a}\adjoint$，升高一次使$\op{N}$的本征值增加1。
     对归一化本征态$\ket{n}$，
     \begin{equation}
@@ -96,28 +96,30 @@ $\omega$是小振幅角频率。经典弹簧振子的位移为 $x=A\cos(\omega t
         \ket{n}=\frac{(\op{a}\adjoint)^n}{\sqrt{n!}}\ket{0}.
     \end{equation}
     不同$n$的态因属于自伴$\op{N}$的不同本征值而正交。
-    它们的闭线性张成空间在正则位置、动量平移下不变；
-    不可约性使它等于全部态空间，因而这些升降态构成完整基。
+    为验证这些态张成全部态空间，还需排除与每个 $\ket n$ 都正交的非零波函数。下面求得它们的位置波函数后就可完成这一步（\ssecref{ss:oscillator-position}）。
 \end{proof}
 
 \section{零点涨落与可测矩阵元}
 基态具有零点能 $\hbar\omega/2$，其位置分布有多宽？振荡力又能在什么能级之间激发跃迁？
 前一问题取决于基态位移的方差，后一问题取决于位移算符在不同能量本征态之间的矩阵元。两者都可以用升降算符计算。
 
-\subsection{振动能级的位置波函数}
-若把陷阱中的粒子反复制备在同一能级 $n$，测得的位置分布由 $\psi_n(x)=\brkt{x}{n}$ 决定。
+\subsection{谐振子能量本征态的波函数}
+\label{ss:oscillator-position}
+若把陷阱中的粒子反复制备在同一能级 $n$，测得的位置分布由 $\psi_n(x)=\braket{x}{n}$ 决定。
 在位置表象中，以平衡点为原点，令
 $b=\sqrt{\hbar/(m\omega)}=\sqrt 2 x_0$、$\xi=x/b$。
-动量作用于位置波函数为 $\op{P}=-\i\hbar\,\p_x$。
-代入 $\op{a}$ 后，$\op{X}/(2x_0)$ 给出 $\xi/\sqrt2$，
-$\i \op{P}/(2p_0)$ 给出 $\p_\xi/\sqrt2$。
-基态方程 $\op{a}\ket{0}=0$ 于是化为 $\p_\xi\psi_0=-\xi\psi_0$。
-积分给出 $\psi_0=C\e^{-\xi^2/2}$；归一化时还要用 $\d x=b\d\xi$，从而有
+动量按式\eqref{eq:momentum-position}作用为 $-\i\hbar\,\d/\nd x$。换用无量纲坐标后，$\d/\nd x=b^{-1}\d/\nd\xi$。
+将位置项和动量项代入 $\op a$，基态方程 $\op a\ket 0=0$ 在位置表象中成为
+\begin{equation}
+    \frac{1}{\sqrt2}\biggp{\xi+\dd{\xi}}\psi_0=0,\qquad
+    \dv{\psi_0}{\xi}=-\xi\psi_0 .
+\end{equation}
+积分给出 $\psi_0=C\e^{-\xi^2/2}$。归一化时用 $\d x=b\d\xi$，得到
 \[
     1=\abs{C}^2 b\intR\e^{-\xi^2}\d\xi
     =\abs{C}^2 b\sqrt\pi .
 \]
-取 $C$ 为正实数，再依次作用 $\op{a}\adjoint=(\xi-\p_\xi)/\sqrt2$，得到
+取 $C$ 为正实数，再依次作用 $\op{a}\adjoint=(\xi-\d/\nd\xi)/\sqrt2$，得到
 \begin{equation}
     \psi_0(x)=\frac{\e^{-\xi^2/2}}{\pi^{1/4}\sqrt b},\qquad
     \psi_1=\sqrt2\,\xi\psi_0,\qquad
@@ -127,15 +129,19 @@ $\i \op{P}/(2p_0)$ 给出 $\p_\xi/\sqrt2$。
 \begin{figure}[htbp]
     \centering
     \raisebox{-.5\height}{\includegraphics[width=.57\linewidth]{figures/oscillator_states.pdf}}\hfill
-    \raisebox{-.5\height}{\tikzfigure[width=.37\linewidth]{oscillator-ladder}}
+    \raisebox{-.5\height}{\tikzfigure{oscillator-ladder}}
     \caption{按相同的 $n$ 对照两图：左图在共同的振幅零线上读节点和符号，右图以虚线所示的势阱底为能量零点，上、下箭头分别表示 $\op{a}\adjoint$、$\op{a}$ 连接的相邻能级。}
     \label{fig:oscillator-states}
     \label{fig:osc-ladder}
 \end{figure}
 
-对任意 $n$，升高一次怎样改变多项式？让 $\op a\adjoint$ 作用于
-$h(\xi)\e^{-\xi^2/2}$，可得 $\e^{-\xi^2/2}(2\xi h-h')/\sqrt2$，其中撇表示对 $\xi$ 求导。
-因此多项式从 $H_0=1$ 起按 $H_{n+1}=2\xi H_n-H'_n$ 递推。
+对任意 $n$，升高一次怎样改变多项式？对高斯因子和多项式分别求导，得到
+\begin{equation}
+    \op a\adjoint\bigp{h(\xi)\e^{-\xi^2/2}}
+       =\frac{\e^{-\xi^2/2}}{\sqrt2}(2\xi h-h'),\qquad
+    H_{n+1}=2\xi H_n-H'_n .
+\end{equation}
+这里的撇表示对 $\xi$ 求导，递推从 $H_0=1$ 开始。
 由于 $2\xi h-h'=-\e^{\xi^2}(\e^{-\xi^2}h)'$，递推 $n$ 次便得物理学家约定的 Hermite 多项式及归一化波函数
 \begin{equation}
     H_n(\xi)=(-1)^n\e^{\xi^2}\dd[n]{\xi}\e^{-\xi^2},\qquad
@@ -143,21 +149,32 @@ $h(\xi)\e^{-\xi^2/2}$，可得 $\e^{-\xi^2/2}(2\xi h-h')/\sqrt2$，其中撇表�
                        {\pi^{1/4}\sqrt{2^n n!\,b}} .
 \end{equation}
 分母中的 $\sqrt{n!}$ 来自 $\ket n=(\op a\adjoint)^n\ket 0/\sqrt{n!}$。
-利用 $\brkt{m}{n}=\delta_{mn}$ 并换元 $\d x=b\d\xi$，得到带权正交关系
+利用 $\braket{m}{n}=\delta_{mn}$ 并换元 $\d x=b\d\xi$，得到带权正交关系
 \[
     \intR \e^{-\xi^2}H_m(\xi)H_n(\xi)\d\xi
        =\sqrt\pi\,2^n n!\,\delta_{mn}.
 \]
+现在检验这组态的完备性。由递推式，$H_n$ 的次数恰为 $n$，所以任意多项式都可用有限个 $H_n$ 线性表示。
+若平方可积的 $f(\xi)$ 与每个 $\psi_n$ 都正交，令 $g(\xi)=f(\xi)\e^{-\xi^2/2}$。对每个非负整数 $j$，$g$ 的 $j$ 阶矩都等于零。因此对任意实数 $k$，
+\[
+    \int_{\RR}\e^{-\i k\xi}g(\xi)\d\xi
+       =\sum_{j=0}^{\infty}\frac{(-\i k)^j}{j!}
+          \int_{\RR}\xi^j g(\xi)\d\xi=0 .
+\]
+这里可以逐项积分，因为绝对值之和以 $\abs{f(\xi)}\e^{-\xi^2/2+\abs{k\xi}}$ 为界，该上界由 Cauchy--Schwarz 不等式可积。
+这样 $g$ 的所有 Fourier 分量都为零，反变换给出 $g=0$，从而 $f=0$（几乎处处）。这就排除了任何被升降序列遗漏的正交方向。
 
 定态方程还给出逐项求多项式系数的方法。记 $\epsilon=2E/(\hbar\omega)$，
-则 $\psi''+(\epsilon-\xi^2)\psi=0$。分离出高斯因子，写
-$\psi=\e^{-\xi^2/2}h(\xi)$、$h(\xi)=\sum_{j\geq0}c_j\xi^j$，得
-\begin{subequations}
-    \begin{alignat}{1}
-        h''-2\xi h'+(\epsilon-1)h&=0,\\
-        c_{j+2}&=\frac{2j+1-\epsilon}{(j+2)(j+1)}c_j .
-    \end{alignat}
-\end{subequations}
+则 $\psi''+(\epsilon-\xi^2)\psi=0$。分离出高斯因子
+$\psi=\e^{-\xi^2/2}h(\xi)$可得
+\begin{equation}
+    h''-2\xi h'+(\epsilon-1)h=0,
+\end{equation}
+考虑级数形式，代入：
+\begin{equation}
+    h(\xi)=\sum_{j\geq0}c_j\xi^j,\qquad
+    c_{j+2}=\frac{2j+1-\epsilon}{(j+2)(j+1)}c_j.
+\end{equation}
 奇、偶次系数分别递推。势能关于原点对称，可以分别取奇、偶宇称解。
 若某一宇称的非零级数一直延续，大阶系数最终同号，且
 $(k+1)c_{2k+s+2}/c_{2k+s}\to1$，其中 $s=0$ 或 $1$。
@@ -170,7 +187,7 @@ $(k+1)c_{2k+s+2}/c_{2k+s}\to1$，其中 $s=0$ 或 $1$。
 由$\op{X}=x_0(\op{a}+\op{a}\adjoint)$，$x_0=\sqrt{\hbar/(2m\omega)}$，直接得到
 \begin{subequations}
     \begin{alignat}{1}
-        \mel{m}{\op{X}}{n}&=x_0\bigl(\sqrt n\,\delta_{m,n-1}+\sqrt{n+1}\,\delta_{m,n+1}\bigr),\\
+        \mel{m}{\op{X}}{n}&=x_0\bigp{\sqrt n\,\delta_{m,n-1}+\sqrt{n+1}\,\delta_{m,n+1}},\\
         \mel{n}{\op{X}^2}{n}&=x_0^2(2n+1),\qquad
             \mel{n}{\op{P}^2}{n}=\frac{m\hbar\omega}{2}(2n+1).
     \end{alignat}
@@ -236,7 +253,7 @@ $c_{n+1}=\alpha c_n/\sqrt{n+1}$，从而 $c_n=c_0\alpha^n/\sqrt{n!}$。归一化
 \end{subequations}
 这里 $p_n$ 是均值为 $\abs{\alpha}^2$ 的 Poisson 分布。不同相干态的内积为
 \begin{equation}
-    \brkt{\beta}{\alpha}
+    \braket{\beta}{\alpha}
     =\exp\Bigp{-\frac{\abs{\alpha}^2+\abs{\beta}^2}{2}+\beta\conj\alpha}.
 \end{equation}
 其模为 $\exp(-\abs{\alpha-\beta}^2/2)$，不同相干态有有限的重叠。它们是湮灭算符 $\op{a}$ 的本征态，$\op{a}\adjoint$ 是相应的产生算符。
@@ -260,7 +277,7 @@ $c_{n+1}=\alpha c_n/\sqrt{n+1}$，从而 $c_n=c_0\alpha^n/\sqrt{n!}$。归一化
 每个电磁驻波模式都可以当作一个量子谐振子，因此先求温度怎样决定一个模式的平均激发数，
 再数每个频段里有多少个模式，就能得到从小孔测出的频谱。
 
-\subsection{空腔频谱与经典预言}
+\subsection{空腔辐射谱与经典能量均分}
 \label{ss:blackbody-experiment}
 
 热辐射实验要测量温度固定时，发射功率怎样分配在不同频率区间。
@@ -365,15 +382,19 @@ $B_\nu\cos\theta\d\Omega\d\nu$是单位面积向方向$(\theta,\phi)$发出的�
     B_\lambda=B_\nu(c/\lambda)\frac{c}{\lambda^2}
     =\frac{2hc^2}{\lambda^5}\frac1{\e^{hc/(\lambda\kB T)}-1}.
 \end{equation}
-$B_\lambda$峰值满足$x=5(1-\e^{-x})$的正根$x=4.965114\ldots$，
-所以$\lambda_{\max}T\simeq\qty{2.898e-3}{\metre\kelvin}$，升温使峰值移向短波（图\ref{fig:planck-wavelength}）。
+取 $x=hc/(\lambda\kB T)$，$B_\lambda$ 的极值条件为 $x=5(1-\e^{-x})$。代入正根 $x_\lambda=4.965114\ldots$，得到 Wien 位移定律
+\begin{equation}
+    \lambda_{\max}T=\frac{hc}{x_\lambda\kB}
+       \simeq\qty{2.898e-3}{\metre\kelvin}.
+\end{equation}
+升温使峰值移向短波（图\ref{fig:planck-wavelength}）。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=.65\linewidth]{figures/blackbody.pdf}
     \caption{不同温度下的黑体谱辐亮度 $B_\lambda$ 随波长的变化。与最高温度的曲线相比，Wien近似适用于短波一侧，Rayleigh--Jeans近似适用于长波一侧。}
     \label{fig:planck-wavelength}
 \end{figure}
-$B_\nu$的峰值满足$x=3(1-\e^{-x})$。从频率谱换成波长谱时，Jacobian也随波长变化，两种谱密度的峰值波长与峰值频率应分别由相应的极值条件确定。
+若改求 $B_\nu$ 的峰值，无量纲变量 $x=h\nu/(\kB T)$ 满足 $x=3(1-\e^{-x})$。从频率谱换成波长谱时，Jacobian也随波长变化，两种谱密度的峰值波长与峰值频率应分别由相应的极值条件确定。
 这些公式要求热平衡和黑体吸收发射条件，非平衡激光没有Planck分布。
 
 \section{光子计数与反关联}
@@ -416,7 +437,7 @@ $\ket{1}$不能在理想分束后触发两个单光子吸收探测器的同次�
             Z&=\sum_{n=0}^{\infty}\e^{-\beta\hbar\omega(n+1/2)}
                 =\frac{\e^{-\beta\hbar\omega/2}}
                     {1-\e^{-\beta\hbar\omega}},\\
-            \ave{\op{H}}&=-\frac{\p\ln Z}{\p\beta}
+            \ave{\op{H}}&=-\pv{\ln Z}{\beta}
                 =\frac{\hbar\omega}{2}
                     +\frac{\hbar\omega}{\e^{\beta\hbar\omega}-1}.
         \end{alignat}

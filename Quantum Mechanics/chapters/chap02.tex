@@ -1,63 +1,93 @@
-\chapter{可观测量与量子测量}
+\chapter{可观测量与测量}
 \label{ch:observables}
 
-\section{谱、投影与测后态}
+\section{离散谱与投影测量}
 
 自旋分析器的每个出口既有读数，又能制备一个确定的自旋态。能量测量也给出读数，
 但两个不同的原子态可能有相同的能量，仪器只亮起同一盏指示灯。
 要把自旋实验的方法推广到能量、位置等可观测量，需要先确定哪些态对应同一读数，
 以及筛出这个读数后，再测别的量会得到什么。谱投影把每个读数与相应的整组态联系起来。
 
-以两个出口为例，内积 $\brkt{\phi}{\psi}=\phi_+\conj\psi_++\phi_-\conj\psi_-$ 可以由两列系数逐项相乘求和。
+\subsection{态空间、本征值与谱投影}
+以两个出口为例，内积 $\braket{\phi}{\psi}=\phi_+\conj\psi_++\phi_-\conj\psi_-$ 可以由两列系数逐项相乘求和。
 增加出口数目时，仍然可以如此取分量、算振幅。若必须用越来越多的分量来逼近一个态，
 还要让这些近似的极限属于同一空间。
 \begin{definition}{复Hilbert空间}{qm-hilbert}
-    带有内积、且在内积诱导的范数 $\|\psi\|=\sqrt{\brkt{\psi}{\psi}}$ 下完备的复向量空间，称为复 Hilbert 空间 $\HH$。
+    带有内积、且在内积诱导的范数 $\|\psi\|=\sqrt{\braket{\psi}{\psi}}$ 下完备的复向量空间，称为复 Hilbert 空间 $\HH$。
     完备是指，若一列向量足够靠后的任意两项之差的范数都可以任意小，则此列在 $\HH$ 中有极限。
     本书取内积对右侧线性、对左侧共轭线性。
 \end{definition}
-对于离散正交归一基，
+在复Hilbert空间里，右矢 $\ket\psi$ 是向量本身。给定 $\ket\phi$，对应的左矢 $\bra\phi$ 是把每个 $\ket\psi$ 映为复数 $\braket{\phi}{\psi}$ 的线性映射。选定基之后才需要写出坐标。
+
+在有限维空间选取正交归一基$\ket n$后，向量按坐标展开，
 \begin{equation}
-    \ket{\psi}=\sum_n\ket{n}\brkt{n}{\psi},\qquad
-    \mel{\phi}{\op{A}}{\psi}=\sum_{mn}\brkt{\phi}{m}\mel{m}{\op{A}}{n}\brkt{n}{\psi}.
+    \ket{\psi}=\sum_n\ket{n}\braket{n}{\psi},
 \end{equation}
-选择正交归一基后，可以用矩阵计算同一组物理预测。在有限维情形，表示可观测量的矩阵等于其共轭转置，
-其本征值都是实数，可以作为仪器的读数。后面讨论位置和动量时，还要说明算符允许作用于哪些态，才能准确表述同一条件。
+矩阵元由矩阵乘法给出，
+\begin{equation}
+    \mel{\phi}{\op{A}}{\psi}=\sum_{mn}\braket{\phi}{m}\mel{m}{\op{A}}{n}\braket{n}{\psi}.
+\end{equation}
+第一章的矩阵给每一列系数指定一列新的系数。一般地，线性算符 $\op{A}$ 把线性子空间 $\Dom(\op A)\subseteq\HH$ 中的向量映入 $\HH$，并保持线性组合。
+这里 $\Dom(\op A)$ 称为定义域。例如对一个波函数求导，导数能否作为态空间中的向量，需要另行检查。
+在有限维空间里，可以让矩阵作用于所有向量。实对称矩阵有一组正交归一的实本征向量；
+在复空间，相应条件是矩阵等于自己的共轭转置 $\op{A}\adjoint=\op{A}$，称为 Hermite 矩阵，也有一组正交归一的本征向量，本征值全为实数。
+选这些向量作基，矩阵成为对角阵，沿对角线列出仪器的可能读数。\secref{sec:selfadjoint}再讨论无限维可观测量的自伴条件。
 
 \begin{definition}{本征值、简并与谱投影}{qm-projector}
-    对具有离散谱(discrete spectrum)的自伴算符(self-adjoint operator)$\op{A}$，若$\op{A}\ket{a,\mu}=a\ket{a,\mu}$，称$a$为本征值(eigenvalue)。
-    $\mu=1,\ldots,d_a$标记同一本征值下的$d_a$个正交态；
-    $d_a>1$时称该本征值简并(degenerate)。
+    先考虑有限维的自伴算符 $\op A$，即在正交归一基中由 Hermite 矩阵表示的算符。若非零向量 $\ket v$ 满足
+    \begin{equation}
+        \op A\ket v = a\ket v,
+    \end{equation}
+    称 $a$ 为本征值(eigenvalue)。在它对应的本征子空间中选一组正交归一基，记作 $\ket{a,\mu}$。
+
+    逗号隔开同一基矢的两个标签。$a$ 给出测量读数，$\mu=1,\ldots,d_a$ 给这个读数下各个基矢编号。
+    $d_a>1$ 时称该本征值简并(degenerate)。
     到这个本征子空间的正交投影(orthogonal projection)为
     \begin{equation}
-        \op{P}_a=\sum_{\mu=1}^{d_a}\ktbr{a,\mu}{a,\mu}.
+        \op{\Pi}_a=\sum_{\mu=1}^{d_a}\ketbra{a,\mu}{a,\mu}.
     \end{equation}
-    它称为$\op{A}$在本征值$a$上的谱投影(spectral projection)，满足$\op{P}_a\adjoint=\op{P}_a$、$\op{P}_a^2=\op{P}_a$。
-    $\op{P}_a\ket{\psi}$是原态中具有测量值$a$的分量。
+    它称为$\op{A}$在本征值$a$上的谱投影(spectral projection)，满足$\op{\Pi}_a\adjoint=\op{\Pi}_a$、$\op{\Pi}_a^2=\op{\Pi}_a$。
+    $\op{\Pi}_a\ket{\psi}$是原态中具有测量值$a$的分量。
 \end{definition}
 
-由$\brkt{a,\mu}{b,\nu}=\delta_{ab}\delta_{\mu\nu}$，
-相乘即有$\op{P}_a\op{P}_b=\delta_{ab}\op{P}_a$。
-若这些本征态(eigenstate)张成全空间，它们对应的谱投影相加就给出单位算符。把各投影分量分别乘以读数 $a$，再相加，就恢复了 $\op{A}$ 的作用。
+由$\braket{a,\mu}{b,\nu}=\delta_{ab}\delta_{\mu\nu}$，
+相乘即有$\op{\Pi}_a\op{\Pi}_b=\delta_{ab}\op{\Pi}_a$。
+在有限维空间，所有本征值组成这个可观测量的谱(spectrum)。本征态(eigenstate)张成全空间，各个读数对应的谱投影相加就给出单位算符。把各投影分量分别乘以读数 $a$，再相加，就恢复了 $\op{A}$ 的作用。
+无限维空间中，若也有完备的正交归一本征基，可以同样展开，只需把无穷求和理解为取极限。
 
-\subsection{测量记录与谱投影}
+\subsection{测量记录与条件测后态}
 \label{ss:measurement-record}
 
 设探测器初态为$\ket{D_0}$，可辨认读数$a$对应指针态$\ket{D_a}$。
 同时描述粒子和仪器，要把“粒子在哪个态”和“指针指向哪里”这两个标签一起记录。
-例如，粒子有两个出口，仪器有两种指针读数时，标签的笛卡尔积列出四种配对。量子态还要给每种配对赋予振幅，使这些可能性能够叠加。
+例如粒子有两个出口 $+,-$，指针有两种读数 $L,R$。把粒子出口作行、指针读数作列，联合制备的四个振幅就排成下表。
+\[
+   \begin{array}{c|cc}
+        & L & R\\ \hline
+      + & C_{+L} & C_{+R}\\
+      - & C_{-L} & C_{-R}
+   \end{array}
+\]
+一次实验同时读两边，得到 $(+,R)$ 的概率是 $\abs{C_{+R}}^2$。若粒子与指针各自独立制备成纯态，
+两边的系数分别是 $(c_+,c_-)$ 与 $(d_L,d_R)$，则每个联合振幅是两侧振幅的乘积，如 $C_{+R}=c_+d_R$。
+要允许它们发生相互作用，就要能描述四个振幅的一般叠加。
 \begin{definition}{张量积与乘积态}{qm-tensor-product}
-    设粒子和仪器的态空间分别为 $\HH_S$ 和 $\HH_D$。分别取正交归一基 $\ket{i}$ 和 $\ket{j}$，
-    用所有成对的 $\ket{i}\otimes\ket{j}$ 作正交归一基，所得联合态空间称为张量积(tensor product) $\HH_S\otimes\HH_D$。
-    若两空间维数为 $d_S,d_D$，就有 $d_S d_D$ 个这样的基矢。
-    无限维时还要包含基矢的有限叠加在范数下的极限。若两边分别制备在 $\ket{s}$ 和 $\ket{D}$，
-    联合态是乘积态(product state) $\ket{s}\otimes\ket{D}$，有些教材也称直积态。张量积对两侧分别线性，例如
+    设粒子和仪器的态空间分别为 $\HH_S$ 和 $\HH_D$。若两边独立制备在态 $\ket{a}_S$ 和 $\ket{b}_D$，联合态称为乘积态(product state)，也称直积态。约定粒子在前、仪器在后，写作
+    \begin{equation}
+        \ket{a,b}=\ket{a}_S\otimes\ket{b}_D .
+        \label{eq:product-basis-ket}
+    \end{equation}
+    $\otimes$ 表示取两个态矢的张量积(tensor product)。在两侧各选一组正交归一基，让 $a,b$ 遍历各自的基标签，所有成对的乘积态就构成联合空间 $\HH_S\otimes\HH_D$ 的一组正交归一基，称为乘积基。
+    若两空间维数为 $d_S,d_D$，就有 $d_S d_D$ 个乘积基矢。无限维时还要包含有限叠加在范数下的极限。张量积对两侧分别线性，例如
     \[
         (c_1\ket{s_1}+c_2\ket{s_2})\otimes\ket{D}
         =c_1\ket{s_1}\otimes\ket{D}+c_2\ket{s_2}\otimes\ket{D}.
     \]
-    两个乘积态的内积等于各自内积之积，即 $\brkt{s'}{s}\brkt{D'}{D}$。
+    两个乘积态的内积等于两侧内积之积。例如，乘积基矢的内积为 $\braket{a',b'}{a,b}=\braket{a'}{a}\braket{b'}{b}$。
 \end{definition}
+例如，表中 $+$ 行、$R$ 列对应 $\ket{+,R}$，表示粒子在 $+$ 出口而指针指向 $R$。联合态 $\ket{\Psi}$ 在这个乘积基矢上的分量就是 $C_{+R}=\braket{+,R}{\Psi}$。
+有些教材把式\eqref{eq:product-basis-ket}中的 $\ket{a,b}$ 连写为 $\ket{ab}$。读这种简写时，要先知道标签怎样分开、各属于哪一侧。本书把两个因子的标签合写在一个右矢内时，用逗号隔开。
+
 如果只在仪器一侧施加算符 $\op{A}_D$，粒子一侧的操作就是单位算符 $\one_S$。由此可在联合空间上定义
 \[
     (\one_S\otimes \op{A}_D)(\ket{s}\otimes\ket{D})=\ket{s}\otimes(\op{A}_D\ket{D}).
@@ -72,48 +102,49 @@
     =\ket{a,\mu}\otimes\ket{D_a}.
 \end{equation}
 这里$\mu$标记同一读数内仪器没有区分的自由度。
-不同读数的指针态应正交，$\brkt{D_a}{D_b}=\delta_{ab}$，
+不同读数的指针态应正交，$\braket{D_a}{D_b}=\delta_{ab}$，
 从而理想读出可以把它们完全区分。
 
 将初态在 $\ket{a,\mu}$ 基中展开，由 $\op{U}$ 的线性和谱投影的定义，
 \begin{equation}
     \op{U}\bigp{\ket{\psi}\otimes\ket{D_0}}
-    =\sum_a \op{P}_a\ket{\psi}\otimes\ket{D_a}.
+    =\sum_a \op{\Pi}_a\ket{\psi}\otimes\ket{D_a}.
 \end{equation}
 例如，两态都有非零振幅且产生不同的正交指针读数时，联合态包含
 $c_1\ket{1}\otimes\ket{D_1}+c_2\ket{2}\otimes\ket{D_2}$。
 若能写成一个乘积态，沿 $\ket{1}$ 和 $\ket{2}$ 取分量得到的两个指针向量就必须成比例。这里的指针向量正交，因此联合态不可分，称为纠缠态。
-回到上式，与读数 $a$ 相连的整个粒子态分量正是 $\op{P}_a\ket{\psi}$。
+回到上式，与读数 $a$ 相连的整个粒子态分量正是 $\op{\Pi}_a\ket{\psi}$。
 Born规则应用于指针输出，给出该分量的范数平方；
 保留这一个读数后再归一化，就得到下面的更新规则。
-这里幺正耦合说明各分量怎样与记录关联，概率规则仍是理论公设。
+这里的耦合把不同输入基矢送到彼此正交的归一化联合态，所以它保持任意输入叠加的范数。各分量怎样与记录关联由耦合确定，把范数平方读作概率则用到了 Born 公设。
 
 \begin{postulate}{可观测量与理想投影测量}{measurement}
     可观测量(observable)由自伴算符表示。离散谱时，读数对应的投影满足
     \[
-        \op{A}=\sum_a a\op{P}_a,\qquad
-        \op{P}_a\op{P}_b=\delta_{ab}\op{P}_a,\qquad \sum_a\op{P}_a=\one .
+        \op{A}=\sum_a a\op{\Pi}_a,\qquad
+        \op{\Pi}_a\op{\Pi}_b=\delta_{ab}\op{\Pi}_a,\qquad \sum_a\op{\Pi}_a=\one .
     \]
-    归一化纯态中测得$a$的概率为
-    \[
-        p_a=\mel{\psi}{\op{P}_a}{\psi},
-    \]
-    若$p_a>0$，理想Lüders测量的条件测后态为$\op{P}_a\ket{\psi}/\sqrt{p_a}$。
+    以 $A$ 记数值读数。对归一化纯态 $\ket\psi$，测得 $a$ 的概率与理想 Lüders 测量在该读数下的条件测后态分别为
+    \begin{equation}
+        p_a=\P(A=a)=\mel{\psi}{\op{\Pi}_a}{\psi},\qquad
+        \ket{\psi_a}=\frac{\op\Pi_a\ket\psi}{\sqrt{p_a}}\quad(p_a>0).
+        \label{eq:luders-update}
+    \end{equation}
 \end{postulate}
 
 测后归一化来自
-$\|\op{P}_a\ket{\psi}\|^2=\mel{\psi}{\op{P}_a\adjoint \op{P}_a}{\psi}=p_a$。
+$\|\op{\Pi}_a\ket{\psi}\|^2=\mel{\psi}{\op{\Pi}_a\adjoint \op{\Pi}_a}{\psi}=p_a$。
 若紧接着再测同一个量，
 \begin{equation}
-    \op{P}_a\frac{\op{P}_a\ket{\psi}}{\sqrt{p_a}}
-    =\frac{\op{P}_a\ket{\psi}}{\sqrt{p_a}},
+    \op{\Pi}_a\frac{\op{\Pi}_a\ket{\psi}}{\sqrt{p_a}}
+    =\frac{\op{\Pi}_a\ket{\psi}}{\sqrt{p_a}},
 \end{equation}
 所以第二次仍得到$a$。
 
 \begin{example}{同一能量对应两个态时怎样更新}{qm-degenerate-measurement}
-    设$\op{A}=a(\ktbr{1}{1}+\ktbr{2}{2})+b\ktbr{3}{3}$，其中$a\ne b$，
+    设$\op{A}=a(\ketbra{1}{1}+\ketbra{2}{2})+b\ketbra{3}{3}$，其中$a\ne b$，
     初态为$c_1\ket{1}+c_2\ket{2}+c_3\ket{3}$。
-    测得$a$的概率是$\abs{c_1}^2+\abs{c_2}^2$，Lüders更新给出
+    测得$a$的概率是$\abs{c_1}^2+\abs{c_2}^2$，代入式\eqref{eq:luders-update}得到
     \begin{equation}
         \ket{\psi_a}=
         \frac{c_1\ket{1}+c_2\ket{2}}{\sqrt{\abs{c_1}^2+\abs{c_2}^2}}.
@@ -133,7 +164,7 @@ $\|\op{P}_a\ket{\psi}\|^2=\mel{\psi}{\op{P}_a\adjoint \op{P}_a}{\psi}=p_a$。
     \secref{sec:povm}将处理仪器扰动和有限分辨率。
 \end{remark}
 
-\subsection{统计矩与重复制备}
+\subsection{测量的期望值与标准差}
 \label{ss:measurement-moments}
 
 在同样制备的$N$个系统上各测量一次$\op{A}$，记录读数$a$出现的次数$N_a$。
@@ -153,12 +184,13 @@ $\|\op{P}_a\ket{\psi}\|^2=\mel{\psi}{\op{P}_a\adjoint \op{P}_a}{\psi}=p_a$。
 用读数对应的谱投影，可以直接从态计算：
 \begin{subequations}
     \begin{alignat}{1}
-        \sum_a ap_a &=\sum_a a\mel{\psi}{\op{P}_a}{\psi}
+        \sum_a ap_a &=\sum_a a\mel{\psi}{\op{\Pi}_a}{\psi}
             =\mel{\psi}{\op{A}}{\psi},\\
         \sum_a(a-\ave{\op{A}})^2p_a &=\ave{\op{A}^2}-\ave{\op{A}}^2.
     \end{alignat}
 \end{subequations}
-对无界算符(unbounded operator)，写成算符乘积时还要保证态属于相应定义域(domain)。
+有限维时，对一个给定矩阵，所有单位向量经它作用后的长度都有共同的上界。在无限维空间，一个算符若没有这样的有限上界，就称为无界算符(unbounded operator)。
+此时计算二阶矩可用 $\|\op A\ket\psi\|^2$。若写成矩阵元 $\mel{\psi}{\op A^2}{\psi}$，还要保证能对 $\op A\ket\psi$ 再作用一次 $\op A$。
 
 \begin{example}{自旋涨落与平均值的精度}{qm-spin-sampling}
     对$\ket{+z}$测$\op{S}_x$，两个读数$\pm\hbar/2$各占一半。
@@ -187,16 +219,32 @@ $\|\op{P}_a\ket{\psi}\|^2=\mel{\psi}{\op{P}_a\adjoint \op{P}_a}{\psi}=p_a$。
 $N_j/(N\Delta x)$，这样柱的面积才等于该格的概率。若概率密度在一格内近似常量，
 把这一格平分后，每个小格的概率约减半，直方柱高度近似保持原值。
 
+\subsection{位置算符与波函数}
+设一个无自旋粒子在整条直线上运动，表示其位置这一可观测量的算符称为\emph{位置算符}，记作 $\op X$。
+上一节用本征值标记自旋分析器的各个出口。位置的可能读数连续变化，我们同样用实数 $x$ 标记理想的精确位置态 $\ket{x}$，写作
+\begin{equation}
+    \op X\ket{x}=x\ket{x}.
+\end{equation}
+这里的 $\ket{x}$ 称为广义本征态。它像离散情形中的基矢一样用来展开态，但不能归一化为范数为一的向量。
+在离散基中，$c_j=\braket{j}{\psi}$ 给出态沿第 $j$ 个基矢的分量。换用位置基，同样的取分量运算给出随 $x$ 变化的函数。
 \begin{definition}{位置表象的波函数}{qm-wave-function}
-    一维无自旋粒子的纯态 $\ket{\psi}$ 在位置基中的分量 $\psi(x)=\brkt{x}{\psi}$ 称为波函数(wave function)。
+    态 $\ket{\psi}$ 在位置基中的分量称为位置表象的波函数(wave function)，记作
+    \begin{equation}
+        \psi(x)=\braket{x}{\psi}.
+    \end{equation}
     根据连续位置的 Born 规则，$\abs{\psi(x)}^2$ 是位置概率密度。对整条线上归一化的态，
     \begin{equation}
-        p(a\leq x\leq b)=\int_a^b\abs{\psi(x)}^2\d x,\qquad
+        \P(a\leq X\leq b)=\int_a^b\abs{\psi(x)}^2\d x,\qquad
         \int_{\RR}\abs{\psi(x)}^2\d x=1.
     \end{equation}
+    其中用 $X$ 记探测器的位置读数，用 $x$ 记积分中的位置坐标。
 \end{definition}
-因此 $\abs{\psi(x)}^2$ 的单位是长度的倒数。例如均匀分布在 $\qty{1}{cm}$ 内的粒子，
-落在其中一个 $\qty{1}{mm}$ 像素内的概率为 $0.1$。
+
+\begin{remark}
+    归一化要求波函数模平方在整条线上的积分有限，这些平方可积函数组成的位置态空间记为 $L^2(\RR)$。
+    因此 $\abs{\psi(x)}^2$ 的单位是长度的倒数。例如均匀分布在 $\qty{1}{cm}$ 内的粒子，
+    落在其中一个 $\qty{1}{mm}$ 像素内的概率为 $0.1$。
+\end{remark}
 
 在离散基中，Kronecker 符号在求和中选出第 $i$ 个分量。推广到连续指标时，
 在积分中选出指定位置的函数值的核称为 Dirac $\delta$ 分布。对照两种取分量的运算，后一式取光滑试验函数 $f$，
@@ -207,71 +255,133 @@ $N_j/(N\Delta x)$，这样柱的面积才等于该格的概率。若概率密度
 因为 $\delta(x-x')$ 与 $\d x'$ 合在一起才消去一次积分，它的量纲是长度的倒数。
 于是写出一维位置的广义态(generalized state)关系
 \begin{equation}
-    \brkt{x}{x'}=\delta(x-x'),\qquad \int_\RR\d x\,\ktbr{x}{x}=\one,
+    \braket{x}{x'}=\delta(x-x'),\qquad \int_\RR\d x\,\ketbra{x}{x}=\one,
 \end{equation}
 把第二式作用在 $\ket{\psi}$ 上，再从左乘 $\bra{x'}$，便由取样关系得到 $\psi(x')$。精确位置标签 $\ket{x}$ 是连续基的理想化，
 实验中制备可归一化的态，探测器记录粒子落入有限区间的概率。
 
-位置读数落在集合 $B$ 内，对应的投影为
+位置算符在自身的本征基中怎样作用？和离散情形中的对角矩阵一样，它把每个分量乘以相应的本征值。
+具体地，由 $\bra{x}\op X = x\bra{x}$ 得到
+\begin{equation}
+    \mel{x}{\op X}{\psi} = x\braket{x}{\psi} = x\psi(x).
+\end{equation}
+左边表示先对态作用 $\op X$，再取所得向量的位置分量。这个向量存在的条件是 $x\psi(x)$ 平方可积。
+
+位置读数 $X$ 落在集合 $B$ 内，对应的投影为
 \[
-    \op{P}(B)=\int_B\ktbr{x}{x}\d x .
+    \op{\Pi}_X(B)=\int_B\ketbra{x}{x}\d x .
 \]
-这里 $\op{P}(\RR)=\one$；互不相交的读数区间对应正交投影，它们相加就给出区间并集的投影。
-这样的可数可加投影族称为投影值测度(projection-valued measure, PVM)。这里的自变量 $B$ 是读数集合，每个 $\op{P}(B)$ 都是投影算符。
+这里 $\op{\Pi}_X(\RR)=\one$。互不相交的读数区间对应正交投影，它们相加就给出区间并集的投影。
+这样的可数可加投影族称为投影值测度(projection-valued measure, PVM)。下标 $X$ 指明测量的是位置，每个 $\op{\Pi}_X(B)$ 都是投影算符。
 
 \begin{theorem}{自伴算符的谱定理}{qm-spectral-theorem}
-    每个自伴算符 $\op{A}$ 唯一确定实轴上的投影值测度 $\op{P}$，使 $\op{A}$ 在其定义域上等于谱积分
+    每个自伴算符 $\op{A}$ 唯一确定实轴上的投影值测度 $\op{\Pi}_A$，使 $\op{A}$ 在其定义域上等于谱积分
     \begin{equation}
-        \op A=\int_{\RR}a\d\op P(a).
+        \op A=\int_{\RR}a\d\op\Pi_A(a).
     \end{equation}
 \end{theorem}
-本书引用该定理。对离散读数，谱积分还原为各投影乘以相应读数后的求和。
-对读数集合 $B$，Born 规则给出 $p(a\in B)=\mel{\psi}{\op P(B)}{\psi}$。
+本书引用该定理。对离散读数 $a$，单点集合的投影 $\op\Pi_A(\{a\})$ 就是前面简写的 $\op\Pi_a$，谱积分还原为 $\sum_a a\op\Pi_a$。
+对读数集合 $B$，Born 规则给出 $\P(A\in B)=\mel{\psi}{\op\Pi_A(B)}{\psi}$。
 若仪器把离散读数 $a$ 换算为实数 $f(a)$，相应的可观测量在原来读数为 $a$ 的子空间上乘以 $f(a)$。
 用同一组谱投影可写出这个算符，以及态 $\ket{\psi}$ 属于其定义域的条件：
 \[
-    f(\op A)=\sum_a f(a)\op P_a,\qquad
-    \sum_a |f(a)|^2\norm{\op P_a\ket{\psi}}^2<\infty .
+    f(\op A)=\sum_a f(a)\op\Pi_a,\qquad
+    \sum_a |f(a)|^2\norm{\op\Pi_a\ket{\psi}}^2<\infty .
 \]
 
-怎样在位置表象中识别动量？大学物理中波长 $\lambda$ 对应波数 $k=2\pi/\lambda$。
-de Broglie 关系 $p=\hbar k$ 将动量 $p$ 与空间相位 $\exp(\i px/\hbar)$ 联系起来。
-动量采用$\brkt{p}{p'}=\delta(p-p')$，标准相位约定是
+\subsection{动量算符}
+\label{ss:momentum-position}
+表示粒子沿 $x$ 轴的动量这一可观测量的算符称为\emph{动量算符}，记作 $\op P$。
+用 $p$ 标记可能的动量读数，相应的广义本征态 $\ket{p}$ 满足
 \begin{equation}
-    \brkt{x}{p}=\frac{\e^{\i px/\hbar}}{\sqrt{2\pi\hbar}},\qquad
-    \brkt{p}{\psi}=\int\d x\,\brkt{p}{x}\brkt{x}{\psi}.
+    \op P\ket{p}=p\ket{p}.
 \end{equation}
-第二式来自在 $\brkt{p}{\psi}$ 中插入位置基的单位算符。
-它就是 Fourier 分解：$\brkt{p}{\psi}$ 给出波数 $p/\hbar$ 的平面波在态中占有的振幅。
-反过来，在 $\brkt{x}{\psi}$ 中插入动量基的单位算符，就把这些平面波重新叠加成位置波函数，
+要知道 $\op P$ 怎样作用于位置波函数，先要知道动量确定的态 $\ket p$ 在位置基 $\ket x$ 中有哪些分量 $\braket{x}{p}$。
+
+电子衍射把粒子的动量与物质波的波长联系起来。在一维自由空间，可以把波包分解成平面波。用带符号的波数 $k$ 标记每个分量，$k$ 的正负区分传播方向，非零波数对应的波长为 $\lambda=2\pi/\abs{k}$。
+采用对称的 Fourier 变换约定，波数态的位置波函数为 $\braket{x}{k}=\e^{\i kx}/\sqrt{2\pi}$。要从 $\psi(x)$ 中取出这个分量，就与它的复共轭 $\braket{k}{x}$ 做积分，得到波数表象的振幅
+\begin{equation}
+    \braket{k}{\psi} = \frac{1}{\sqrt{2\pi}}\int_\RR\d x\,\psi(x)\e^{-\i kx}.
+\end{equation}
+按 de Broglie 关系 $p=\hbar k$，同一格读数用波数标记时宽为 $\d k$，用动量标记时宽为 $\d p=\hbar\,\d k$。换横轴时，这一格所占的概率保持不变，因此两种概率密度满足
+\begin{equation}
+    \abs{\braket{p}{\psi}}^2\,\d p=\abs{\braket{k}{\psi}}^2\,\d k .
+\end{equation}
+开平方就得到振幅的换算因子 $1/\sqrt{\hbar}$。给对应的动量态与波数态选取相同的平面波相位，便得到动量波函数
+\begin{equation}
+    \widetilde\psi(p)=\braket{p}{\psi}
+    =\frac{1}{\sqrt{\hbar}}\bigeval{\braket{k}{\psi}}_{k=p/\hbar}
+    =\frac{1}{\sqrt{2\pi\hbar}}\int_\RR\d x\,\psi(x)\e^{-\i px/\hbar}.
+\end{equation}
+另一方面，在 $\braket{p}{\psi}$ 中插入位置基的单位算符，得到
+\begin{equation}
+    \braket{p}{\psi}=\int_\RR\d x\,\braket{p}{x}\braket{x}{\psi}
+    =\int_\RR\d x\,\braket{p}{x}\psi(x).
+\end{equation}
+这两个表达式对任意光滑且迅速衰减的波包 $\psi(x)$ 都成立，因此可以识别出乘在 $\psi(x)$ 前面的积分核 $\braket{p}{x}$。取其复共轭，就得到动量态的位置波函数
+\begin{equation}
+    \braket{x}{p}=\braket{p}{x}\conj=\frac{\e^{\i px/\hbar}}{\sqrt{2\pi\hbar}}.
+\end{equation}
+现在对波包作用 $\op P$，再取位置分量。按动量本征态展开，$\op P$ 使每个平面波分量乘以 $p$。
+在位置空间也能实现这个乘法：对 $\e^{\i px/\hbar}$ 求导会带出因子 $\i p/\hbar$，所以 $p\braket{x}{p}=-\i\hbar\,(\d/\nd x)\braket{x}{p}$。
+对光滑且各阶导数均迅速衰减的波包，可以在积分号下求导，于是
+\begin{equation}
+    \begin{aligned}
+        \mel{x}{\op P}{\psi}
+        &=\int_\RR\d p\,p\braket{x}{p}\braket{p}{\psi}\\
+        &=-\i\hbar\,\dd{x}\int_\RR\d p\,\braket{x}{p}\braket{p}{\psi}
+        =-\i\hbar\,\dv{\psi}{x}(x).
+    \end{aligned}
+    \label{eq:momentum-position}
+\end{equation}
+从平移也能读出这个符号。保持坐标轴固定，将整个波包向右移 $a$，新波包在 $x$ 的振幅是原来的 $\psi(x-a)$。
+对平面波，这一步乘上 $\e^{-\i pa/\hbar}$。因而对上述波包，微小平移引起的变化既可从位置求导，也可从各动量分量的相位求出，
 \[
-    \psi(x)=\int_{\RR}\brkt{x}{p}\brkt{p}{\psi}\d p.
+   \lim_{a\to0}\frac{\psi(x-a)-\psi(x)}{a}
+   =-\psi'(x)=-\frac{\i}{\hbar}\mel{x}{\op P}{\psi}.
 \]
-对每个平面波作用 $-\i\hbar\p_x$，恰好将它乘以 $p$。在允许逐项求导的波包上，由线性便有
+动量由此决定平移的瞬时变化，称为\emph{空间平移生成元}。在整条实线上，$\op P\ket\psi$ 的范数平方就是动量的二阶矩。它有限时，平移差商在平方可积范数下也有极限。因此动量的定义域为
+\[
+   \Dom(\op P)=\biggset{\ket\psi\in\HH}{\int_{\RR}p^2\abs{\widetilde\psi(p)}^2\d p<\infty}.
+\]
+
+现在可直接检验作用次序。对于光滑且迅速衰减的波函数，
+\begin{subequations}
+    \begin{align}
+        \mel{x}{\op X\op P}{\psi}&=-\i\hbar x\psi'(x),\\
+        \mel{x}{\op P\op X}{\psi}&=-\i\hbar\bigp{\psi(x)+x\psi'(x)}.
+    \end{align}
+\end{subequations}
+相减留下 $\i\hbar\psi(x)$。三维时 $\op P_j$ 只对 $x_j$ 求偏导，因此一维和三维的正则对易关系分别为
 \begin{equation}
-    \brkt{x}{\op{P}\psi}=-\i\hbar\,\p_x\psi(x),\qquad \brkt{x}{\op{X}\psi}=x\psi(x).
+    [\op X,\op P]=\i\hbar\one,\qquad
+    [\op X_i,\op P_j]=\i\hbar\delta_{ij}\one .
+    \label{eq:canonical-position-momentum}
 \end{equation}
-现在可直接检验次序的影响。$\op{X}\op{P}$ 给出 $-\i\hbar x\psi'$，
-$\op{P}\op{X}$ 给出 $-\i\hbar(x\psi)'=-\i\hbar(\psi+x\psi')$，相减留下 $\i\hbar\psi$。
-这就是绪论所写的 $[\op{X},\op{P}]=\i\hbar\one$。三维动量平面波的归一化因子为$(2\pi\hbar)^{-3/2}$。
-位置和动量振幅密度的量纲分别为长度$^{-1/2}$和动量$^{-1/2}$；模平方乘以相应的积分测度给出无量纲概率。
+三个方向的平面波归一化因子相乘，得到 $(2\pi\hbar)^{-3/2}$。
+一维位置和动量振幅的量纲分别为长度$^{-1/2}$和动量$^{-1/2}$。动量算符 $\op P$ 把每个动量分量乘以其读数 $p$。
+若探测器只选取动量读数落在区间 $B$ 内的粒子，相应的投影 $\op\Pi_P(B)$ 保留区间内的分量。对归一化态，所保留分量的范数平方就是这个事件的概率，
+\begin{equation}
+    \op\Pi_P(B)=\int_B\ketbra{p}{p}\d p,\qquad
+    \P(P\in B)=\mel{\psi}{\op\Pi_P(B)}{\psi}=\int_B\abs{\widetilde\psi(p)}^2\d p .
+\end{equation}
 
 对光滑的位置函数 $f$ 和光滑且有紧支撑的波函数 $\psi$，乘积求导给出
 \[
-    [\op P,f(\op X)]\psi
-    =-\i\hbar\bigl((f\psi)'-f\psi'\bigr)=-\i\hbar f'\psi .
+    \bra{x}[\op P,f(\op X)]\ket\psi
+    =-\i\hbar\bigp{(f\psi)'-f\psi'}=-\i\hbar f'\psi .
 \]
 例如取 $f=V$，后面用 Ehrenfest 关系求平均力时就会出现这个势能导数。
-这里的求导也有代数解释。记 $\op C=[\op A,\op B]$，逐次展开乘积的对易子可得
+这里的求导也有代数解释：逐次展开乘积的对易子可得
 \begin{equation}
     [\op A,\op B^n]
-    =\sum_{j=0}^{n-1}\op B^j\op C\op B^{n-1-j},\qquad n\geq1 .
+    =\sum_{j=0}^{n-1}\op B^j[\op A,\op B]\op B^{n-1-j},\qquad n\geq1 .
 \end{equation}
-若 $[\op C,\op B]=0$，每一项都等于 $\op B^{n-1}\op C$，于是对任意多项式 $f$ 有
-$[\op A,f(\op B)]=f'(\op B)\op C$。无界算符的这些乘积可在共同不变的定义域上计算。
+若 $[[\op A,\op B],\op B]=0$，每一项都等于 $\op B^{n-1}[\op A,\op B]$，于是对任意多项式 $f$ 有
+$[\op A,f(\op B)]=f'(\op B)[\op A,\op B]$。无界算符的这些乘积可在共同不变的定义域上计算。
 若两算符有界，且 $f$ 在原点的幂级数收敛半径大于 $\|\op B\|$，则逐项取对易子和求导都在算符范数下收敛，公式仍成立。
 
-\section{Hermite、对称与自伴算符}
+\section{算符的定义域、对称性与自伴性}
 \label{sec:selfadjoint}
 上一节用求导表示动量。如果粒子只能沿环运动，同一个求导式怎样给出绕环一周所允许的动量？
 弦的两端是固定还是首尾相接，会改变驻波的波长。量子问题也要把允许的波函数和边界条件写进算符，
@@ -282,20 +392,20 @@ $[\op A,f(\op B)]=f'(\op B)\op C$。无界算符的这些乘积可在共同不�
     稠密(dense)是指每个$\HH$中的态都能由$\Dom(\op{A})$中的态逼近。
     对稠密定义的$\op{A}$，若存在$\ket{\eta}\in\HH$使
     \begin{equation}
-        \mel{\phi}{\op{A}}{\psi}=\brkt{\eta}{\psi}
+        \mel{\phi}{\op{A}}{\psi}=\braket{\eta}{\psi}
         \qquad\text{对所有 }\ket{\psi}\in\Dom(\op{A})
     \end{equation}
     成立，则$\ket{\phi}$属于$\Dom(\op{A}\adjoint)$，并定义
     $\op{A}\adjoint\ket{\phi}=\ket{\eta}$。
 \end{definition}
 
-对稠密定义的$\op{A}$，伴随$\op{A}\adjoint$的定义域由哪些左矢使
-$\mel{\phi}{\op{A}}{\psi}$成为关于$\ket{\psi}$的有界线性泛函(bounded linear functional)来决定。
+等价地，要让 $\ket\phi$ 属于伴随的定义域，就要能找到常数 $C_\phi$，使每个允许的 $\ket\psi$ 都满足
+$\abs{\mel{\phi}{\op A}{\psi}}\le C_\phi\norm{\psi}$。这时称 $\ket\psi\mapsto\mel{\phi}{\op A}{\psi}$ 为有界线性泛函(bounded linear functional)。
 \begin{definition}{对称算符与自伴算符}{qm-self-adjoint}
     对稠密定义的 $\op{A}$，以下条件分别定义对称性与自伴性：
     \begin{subequations}
         \begin{alignat}{1}
-            \op{A}\text{ 对称}&:\quad \brkt{\phi}{\op{A}\psi}=\brkt{\op{A}\phi}{\psi}
+            \op{A}\text{ 对称}&:\quad \braket{\phi}{\op{A}\psi}=\braket{\op{A}\phi}{\psi}
                 \quad(\phi,\psi\in\Dom(\op{A})),\\
             \op{A}\text{ 自伴}&:\quad \Dom(\op{A})=\Dom(\op{A}\adjoint),\quad
                 \op{A}\psi=\op{A}\adjoint\psi\quad(\psi\in\Dom(\op{A})).
@@ -309,29 +419,29 @@ $\mel{\phi}{\op{A}}{\psi}$成为关于$\ket{\psi}$的有界线性泛函(bounded 
 
 区间上的动量说明定义域如何体现物理边界条件(boundary condition)\cite{domains}。在区间$[0,L]$，以
 \begin{equation}
-    \bra{x}\op{P}\ket{\psi}=-\i\hbar\frac{\d}{\nd x}\brkt{x}{\psi}
+    \bra{x}\op{P}\ket{\psi}=-\i\hbar\frac{\d}{\nd x}\braket{x}{\psi}
 \end{equation}
 表示平移动量的局部作用规则。若位置分量绝对连续、一阶导数平方可积且两端均为零，
 分部积分给出
 \begin{equation}
-    \brkt{\phi}{\op{P}\psi}-\brkt{\op{P}\phi}{\psi}
-    =-\i\hbar[\brkt{\phi}{x}\brkt{x}{\psi}]_0^L=0.
+    \braket{\phi}{\op{P}\psi}-\braket{\op{P}\phi}{\psi}
+    =-\i\hbar[\braket{\phi}{x}\braket{x}{\psi}]_0^L=0.
 \end{equation}
 但伴随算符的定义域不要求两端为零，因此这个$\op{P}$只是对称而非自伴。
 改为同一个固定$\theta$的边界条件
-$\brkt{L}{\psi}=\e^{\i\theta}\brkt{0}{\psi}$，则得到一个自伴实现，谱为
+$\braket{L}{\psi}=\e^{\i\theta}\braket{0}{\psi}$，则得到一个自伴实现，谱为
 \begin{equation}
     p_n=\frac\hbar L(2\pi n+\theta),\qquad n\in\ZZ.
 \end{equation}
 
 这个边界条件也可从伴随域直接验证。令
-$\brkt{L}{\psi}=\e^{\i\theta}\brkt{0}{\psi}$。
-边界项对所有允许的$\brkt{0}{\psi}$为零，当且仅当
-$\brkt{\phi}{L}\e^{\i\theta}=\brkt{\phi}{0}$，
-取共轭即$\brkt{L}{\phi}=\e^{\i\theta}\brkt{0}{\phi}$。
+$\braket{L}{\psi}=\e^{\i\theta}\braket{0}{\psi}$。
+边界项对所有允许的$\braket{0}{\psi}$为零，当且仅当
+$\braket{\phi}{L}\e^{\i\theta}=\braket{\phi}{0}$，
+取共轭即$\braket{L}{\phi}=\e^{\i\theta}\braket{0}{\phi}$。
 伴随域因此具有同一边界条件。
 本征方程的分量关系给出
-$\brkt{x}{p_n}=C\e^{\i p_nx/\hbar}$；
+$\braket{x}{p_n}=C\e^{\i p_nx/\hbar}$；
 代入端点条件得到$\e^{\i p_nL/\hbar}=\e^{\i\theta}$，
 概率密度 $\abs{C}^2$ 为常数，在长为 $L$ 的区间上归一化给出 $L\abs{C}^2=1$，所以 $\abs{C}=L^{-1/2}$。
 
@@ -341,24 +451,64 @@ $\brkt{x}{p_n}=C\e^{\i p_nx/\hbar}$；
 半直线上的径向动量同样需要检查定义域；通常的径向动量不是自伴可观测量，
 中心力问题应直接使用有正确边界条件的Hamilton算符。
 
-\section{不相容观测量与不确定关系}
+\section{可观测量的相容性与不确定关系}
 沿 $z$ 筛出的原子，重复测 $\op{S}_z$ 有确定的结果，改测 $\op{S}_x$ 却有涨落。
 把同一种制备分成两批，各测一个量，两批读数的标准差能否同时任意小？
 谱投影说明哪些量可以一起精确测量，态的内积则给出两个标准差应当满足的不等式。
 
-在有限维，两个自伴算符对易当且仅当可选共同本征基(simultaneous eigenbasis)。
-对无界算符，共同谱测量要求两者的谱投影相互对易（强对易）。
+\subsection{对易性与共同本征基}
+设在同一系统上测量 $A$ 和 $B$。用读数给共同本征态加上标签 $\ket{a,b}$，表示
+\begin{align*}
+    \op A\ket{a,b}&=a\ket{a,b},\\
+    \op B\ket{a,b}&=b\ket{a,b}.
+\end{align*}
+这里的逗号分隔同一态的两个读数，这两个量也可以都属于同一个粒子。若这对读数仍然简并，可再加一个标签 $\mu$，写作 $\ket{a,b,\mu}$。
+若能选出这样的正交归一基，就能把任意制备展开在共同基里，直接求出两种读数的联合概率。怎样事先判断有无这样的基？
+\begin{theorem}{对易与共同本征基}{qm-compatible}
+    有限维空间上，两个自伴算符 $\op A,\op B$ 满足 $[\op A,\op B]=0$，当且仅当存在由它们的共同本征向量组成的正交归一基。
+\end{theorem}
+\begin{proof}
+设两算符对易，先把 $\op A$ 对角化。在本征值 $a$ 的子空间中任取 $\ket v$，就有
+\[
+   \op A(\op B\ket v)=\op B(\op A\ket v)=a\,\op B\ket v .
+\]
+所以 $\op B$ 把这个子空间映回自身。若其中只有一个独立方向，$\op B\ket v$ 就是 $\ket v$ 的数倍；
+若 $a$ 简并，$\op B$ 在这个子空间内仍是 Hermite 矩阵，可以在其中再选一组 $\op B$ 的正交归一本征向量。
+对每个 $a$ 都这样做，把得到的基合起来就是全空间的共同本征基。
+反过来，在每个共同本征向量上，两种作用次序分别乘以 $ab$ 和 $ba$，结果相同。
+若这些向量张成全空间，由线性，两种次序就在每个态上相同。
+\end{proof}
+\begin{remark}
+    这里需要一组\emph{完备}的共同本征向量。单独找到一个共同本征态，只能说明在那一态上两种读数都确定。
+    同时讨论两个可观测量时，记 $\op\Pi_a^A=\op\Pi_A(\{a\})$、$\op\Pi_b^B=\op\Pi_B(\{b\})$，分别筛出 $A=a$、$B=b$ 的分量。
+    它们在共同本征基上都是只含 $0,1$ 的对角矩阵，
+    故 $\op\Pi_a^A\op\Pi_b^B=\op\Pi_b^B\op\Pi_a^A$ 正好保留两个条件都满足的分量。
+    对于理想投影测量，两种筛选顺序给出相同的联合概率，
+    \begin{equation}
+        \P(A=a,B=b)=\norm{\op\Pi_b^B\op\Pi_a^A\ket\psi}^2
+        =\norm{\op\Pi_a^A\op\Pi_b^B\ket\psi}^2 .
+    \end{equation}
+    在无限维空间可以直接用筛选条件来表述相容性。若任取两个读数区间，相应的谱投影都对易，就称这两个可观测量\emph{强对易}。这给出了区间读数的联合谱测量，即使精确读数没有可归一化的本征向量也适用。对于无界算符，只在某个稠密定义域上算得对易子为零，还不足以推出强对易。
+\end{remark}
 
-对归一化态，令$\delta \op{A}=\op{A}-\ave{\op{A}}\one$、$\delta \op{B}=\op{B}-\ave{\op{B}}\one$。
-测量分布的标准差正是 $\delta \op{A}\ket{\psi}$ 和 $\delta \op{B}\ket{\psi}$ 的范数。
+\subsection{测量涨落与不确定关系}
+现在分两批测量，在同一归一化态 $\ket\psi$ 上分别求 $A,B$ 的读数分布。按\dfnref{dfn:qm-measurement-moments}，
+用大写 $\Delta A$ 表示 $A$ 的标准差，用小写 $\delta\op A$ 表示从算符中减去均值后的算符。对离散读数，
+\[
+    \delta\op A=\op A-\ave{\op A}\one,\qquad
+    \Delta A=\sqrt{\sum_a (a-\ave{\op A})^2p_a}
+            =\norm{\delta\op A\ket\psi}.
+\]
+最后一个等号来自把 $\ket\psi$ 按 $\op A$ 的谱投影分解后对各正交分量的范数平方求和。连续读数用积分代替求和，同理定义 $\Delta B$。
+于是 $\Delta A=0$ 恰好意味着 $\op A\ket\psi=\ave{\op A}\ket\psi$，即这一制备每次都给出相同的 $A$ 读数。
 
-\begin{theorem}{不确定关系与等号条件}{qm-uncertainty-equality}
+\begin{theorem}{不确定关系}{qm-uncertainty}
     设 $\op{A},\op{B}$ 自伴且归一化态 $\ket{\psi}$ 属于两者的定义域，取
     $\ket{u}=\delta \op{A}\ket{\psi}$、$\ket{v}=\delta \op{B}\ket{\psi}$。则
-    $(\Delta A)^2(\Delta B)^2\geq\abs{\brkt{u}{v}}^2$，等号成立当且仅当两个涨落态线性相关。
+    $(\Delta A)^2(\Delta B)^2\geq\abs{\braket{u}{v}}^2$，等号成立当且仅当两个涨落态线性相关。
     若算符乘积 $\op{A}\op{B}$ 和 $\op{B}\op{A}$ 在此态上也有定义，下界可写成
     \begin{equation}
-        (\Delta A)^2(\Delta B)^2\geq\abs{\brkt{u}{v}}^2
+        (\Delta A)^2(\Delta B)^2\geq\abs{\braket{u}{v}}^2
             =\frac14\bigabs{\ave{[\op{A},\op{B}]}}^2
             +\frac14\bigabs{\ave{\{\delta \op{A},\delta \op{B}\}}}^2.
         \label{eq:uncertainty}
@@ -366,21 +516,25 @@ $\brkt{x}{p_n}=C\e^{\i p_nx/\hbar}$；
 \end{theorem}
 \begin{proof}
 这个证明先把 Cauchy--Schwarz 不等式用于两个涨落态。由它们的定义，
-有$\brkt{u}{u}=(\Delta A)^2$、$\brkt{v}{v}=(\Delta B)^2$。
+有$\braket{u}{u}=(\Delta A)^2$、$\braket{v}{v}=(\Delta B)^2$。
 当$\ket{v}\ne0$时，将$\ket{u}$分解为沿$\ket{v}$和垂直于$\ket{v}$的两部分：
 \begin{equation}
-    \ket{u}=\ket{v}\frac{\brkt{v}{u}}{\brkt{v}{v}}+\ket{u_\perp},
-    \qquad \brkt{v}{u_\perp}=0.
+    \ket{u}=\ket{v}\frac{\braket{v}{u}}{\braket{v}{v}}+\ket{u_\perp},
+    \qquad \braket{v}{u_\perp}=0.
 \end{equation}
 两部分正交，范数平方相加，得到
-$\brkt{u}{u}\,\brkt{v}{v}=\abs{\brkt{u}{v}}^2+\brkt{u_\perp}{u_\perp}\brkt{v}{v}
-\geq\abs{\brkt{u}{v}}^2$；$\ket{v}=0$时也成立。
+\[
+    \braket{u}{u}\,\braket{v}{v}
+      =\abs{\braket{u}{v}}^2+\braket{u_\perp}{u_\perp}\braket{v}{v}
+      \geq\abs{\braket{u}{v}}^2 .
+\]
+当 $\ket v=0$ 时也成立。
 接着利用
 \begin{equation}
     \delta \op{A}\delta \op{B}
     =\frac12\{\delta \op{A},\delta \op{B}\}+\frac12[\op{A},\op{B}].
 \end{equation}
-若两个乘积有定义，就有 $\brkt{u}{v}=\mel{\psi}{\delta \op{A}\delta \op{B}}{\psi}$。
+若两个乘积有定义，就有 $\braket{u}{v}=\mel{\psi}{\delta \op{A}\delta \op{B}}{\psi}$。
 上式中反对易项的期望为实数，对易项的期望为纯虚数；模平方取两者平方之和，便得式\eqref{eq:uncertainty}。
 当$\ket{v}\ne0$时，范数不等式取等号要求$\ket{u_\perp}=0$。
 当$\ket{v}=0$时，两涨落态已线性相关，不等式两侧均为零。
@@ -393,8 +547,20 @@ $\brkt{u}{u}\,\brkt{v}{v}=\abs{\brkt{u}{v}}^2+\brkt{u_\perp}{u_\perp}\brkt{v}{v}
     \]
     此式取等号要求两个涨落态线性相关，且 $\ave{\{\delta \op{A},\delta \op{B}\}}=0$。
 \end{corollary}
-对$[\op{X},\op{P}]=\i\hbar\one$、满足上述条件的态，$\Delta X\Delta P\geq\hbar/2$。
-对自旋，$\Delta S_x\Delta S_y\geq(\hbar/2)\abs{\ave{\op{S}_z}}$。这个下界取决于制备态，在 $\ave{\op{S}_z}=0$ 时为零。
+
+\begin{corollary}
+    在实线上，对满足上述乘积定义域条件的态，由正则对易关系\eqref{eq:canonical-position-momentum}得
+    \begin{equation}
+        \Delta X \Delta P \geq \frac\hbar2.
+    \end{equation}
+\end{corollary}
+\begin{corollary}
+    对自旋，
+    \begin{equation}
+        \Delta S_x \Delta S_y \geq \frac{\hbar}{2}\abs{\ave{\op{S}_z}}.
+    \end{equation}
+    这个下界取决于制备态，在 $\ave{\op{S}_z}=0$ 时为零。
+\end{corollary}
 
 时间在此是外部参数，并无普适的自伴时间算符$\op{T}$满足$[\op{T},\op{H}]=\i\hbar\one$。
 对不显含时间的$\op{A}$，以后得到的动力学关系给出

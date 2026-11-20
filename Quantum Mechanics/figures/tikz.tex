@@ -11,7 +11,9 @@
 \colorlet{longwave}{orange!85!black}
 \colorlet{balmerAlpha}{red!74!black}
 \colorlet{balmerBeta}{teal!85!black}
+% 图按正文中的印刷尺寸绘制。坐标可单独缩放，文字统一用小五号。
 \tikzset{
+    every picture/.append style={font=\zihao{-5}},
     radiation/.style={thick,->,decorate,
         decoration={snake,amplitude=.65mm,segment length=#1,post length=1.4mm}},
     radiation/.default=3mm
@@ -98,7 +100,7 @@
 \begin{document}
 
 % 绪论
-\begin{tikzpicture}[>=Latex,beam/.style={teal!75!black,thick,->}]
+\begin{tikzpicture}[scale=1.3,>=Latex,beam/.style={teal!75!black,thick,->}]
     \label{photoelectric-cell}
     \def\gap{3.8} \def\plate{.58} \def\wall{.44} \def\wireY{-1.65}
     \coordinate (K) at (0,0);
@@ -131,7 +133,7 @@
     \fill (0,0) circle (2pt);
 \end{tikzpicture}
 
-\begin{tikzpicture}[>=Latex,beam/.style={teal!75!black,thick,->}]
+\begin{tikzpicture}[scale=.94,>=Latex,beam/.style={teal!75!black,thick,->}]
     \label{franck-hertz-tube}
     \def\gridX{3.5} \def\collectorX{5.1} \def\plate{.68} \def\wall{.46}
     \draw[rounded corners,black!50] (-\wall,-\plate-\wall) rectangle (\collectorX+\wall,\plate+\wall);
@@ -151,7 +153,7 @@
 
 % 第 1 章
 \standaloneconfig{border=3pt}
-\begin{tikzpicture}[>=Latex,beam/.style={blue!65!black,thick},hardware/.style={draw,fill=black!12}]
+\begin{tikzpicture}[scale=1.35,>=Latex,beam/.style={blue!65!black,thick},hardware/.style={draw,fill=black!12}]
     \label{sg-beam}
     \def\slitX{-1.0} \def\ovenX{-2.5} \def\gap{0.10}
     \def\magLength{2.4} \def\drift{3.2} \def\exitHeight{0.25}
@@ -175,7 +177,7 @@
 \end{tikzpicture}
 
 \standaloneconfig{border=0pt}
-\begin{tikzpicture}[>=stealth,font=\zihao{5},x=1cm,y=1cm]
+\begin{tikzpicture}[>=stealth,x=1cm,y=1cm]
     \label{sg-filters}
     \draw[->] (0,0)--(1,0);
     \node[draw,minimum width=1.5cm,minimum height=.9cm] at (1.75,0) {$z$筛选};
@@ -187,7 +189,7 @@
     \draw[->] (8.9,-.15)--(10.4,-.6) node[right] {$-z$};
 \end{tikzpicture}
 
-\begin{tikzpicture}[x=1cm,y=1cm, >=stealth,font=\zihao{-5}]
+\begin{tikzpicture}[x=1cm,y=1cm, >=stealth]
     \label{spin-angle-readout}
     \begin{scope}[shift={(1.15,0)}]
         \draw[gray!60] (0,0) circle (1.25);
@@ -216,7 +218,7 @@
 
 % 第 3 章
 \standaloneconfig{border=5pt}
-\begin{tikzpicture}[>=Latex,color=ink,font=\small,x=4.6cm,y=.83cm]
+\begin{tikzpicture}[>=Latex,color=ink,x=4.6cm,y=.83cm]
     \label{well-detection}
     \begin{scope}
         \draw[->] (0,0) -- (1.13,0) node[right] {$x/L$};
@@ -242,7 +244,7 @@
 \end{tikzpicture}
 
 % 有限深方阱，z_0=3。z=ka 的两个根分别满足 z tan z=κa 和 -z cot z=κa。
-\begin{tikzpicture}[>=Latex]
+\begin{tikzpicture}[scale=.85,>=Latex]
     \label{finite-well-parity}
     \def\zeven{1.17012095}
     \def\zodd{2.27886266}
@@ -312,7 +314,7 @@
 \fill[teal!75!black] (0,\momentumScale) circle (1.6pt);
 \end{tikzpicture}
 
-\begin{tikzpicture}[>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
+\begin{tikzpicture}[scale=1.3,>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
     \label{zeeman-triplet}
 \def\col{2.05} \def\halfwidth{.68} \def\excited{2.2} \def\split{.42}
 \draw[level] (-\col-\halfwidth,0) -- (\col+\halfwidth,0) node[right] {$j_l=0$};
@@ -327,20 +329,21 @@
     \label{hydrogen-levels}
 \def\binding{5.4} \def\column{1.45} \def\halfline{.52}
 \foreach \ell/\orb in {0/s,1/p,2/d,3/f}{
-    \node at (\ell*\column,.42) {$\orb$};
+    \node at (\ell*\column,.42) {$\mathrm{\orb}$};
     \foreach \n in {1,...,4}{\ifnum\n>\ell
         \draw[level] (\ell*\column-\halfline,-\binding/\n^2) -- ++(2*\halfline,0);
     \fi}
 }
 \draw[guide] (-\halfline,0) -- (3*\column+\halfline,0) node[right,ink] {$E=0$};
-\foreach \n in {1,...,4}\node[left] at (-\halfline,-\binding/\n^2) {$n=\n$};
+\foreach \n/\offset in {1/0,2/0,3/-1.5,4/1.5}
+    \node[left,yshift=\offset pt] at (-\halfline,-\binding/\n^2) {$n=\n$};
 \def\finalN{2}
 \foreach \n/\initialL/\finalL/\tag/\linecolor in {3/1/0/\alpha/balmerAlpha,4/2/1/\beta/balmerBeta}{
-    \draw[\linecolor,thick,->] (\initialL*\column,-\binding/\n^2) -- node[near end,above,sloped,font=\scriptsize] {$\mathrm H_{\tag}$} (\finalL*\column,-\binding/\finalN^2);
+    \draw[\linecolor,thick,->] (\initialL*\column,-\binding/\n^2) -- node[near end,above,sloped] {$\mathrm H_{\tag}$} (\finalL*\column,-\binding/\finalN^2);
 }
 \end{tikzpicture}
 
-\begin{tikzpicture}[>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
+\begin{tikzpicture}[scale=1.1,>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
     \label{balmer-lines}
 \def\rydberg{0.0109678} \def\start{350} \def\stop{680} \def\axiswidth{10}
 \def\lineheight{.72} \def\stripheight{1.15}
@@ -353,7 +356,7 @@
     \ifnum\n=4 \colorlet{linecolor}{balmerBeta}\fi
     \ifnum\n=5 \colorlet{linecolor}{blue!70!black}\fi
     \draw[linecolor,thick] ({pos(\wave)},0) -- ++(0,\lineheight);
-    \ifnum\n<7 \node[above,font=\scriptsize] at ({pos(\wave)},\lineheight) {$\n$};\fi
+    \ifnum\n<7 \node[above] at ({pos(\wave)},\lineheight) {$\n$};\fi
 }
 \draw[guide] ({pos(4/\rydberg)},0) -- ++(0,\stripheight) node[above,ink] {$n_i\to\infty$};
 \draw[->] (0,0) -- (\axiswidth,0) node[right] {$\lambda/\unit{nm}$};
@@ -361,14 +364,14 @@
 \end{tikzpicture}
 
 % 第 8 章
-\begin{tikzpicture}[color=ink,amplitude/.style={-{Latex[length=2mm]},line width=1pt,draw=amplitude}]
+\begin{tikzpicture}[scale=1.2,color=ink,amplitude/.style={-{Latex[length=2mm]},line width=1pt,draw=amplitude}]
     \label{transition-phasors}
     \node[anchor=west] at (-.03,2.20) {$\Delta E=0$};
     \foreach \step in {0,...,5}{
         \draw[amplitude] (.72*\step,1.79) -- ++(.72,0);
     }
     \node[anchor=west] at (-.03,1.32)
-        {$\bigl|\sum_j\Delta c_j\bigr|=6|\Delta c_1|$};
+        {$\bigabs{\sum_j\Delta c_j}=6\abs{\Delta c_1}$};
 
     \coordinate (start) at (.38,.34);
     \coordinate (tip) at (start);
@@ -381,7 +384,7 @@
 \end{tikzpicture}
 
 % 第 9 章
-\begin{tikzpicture}[>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
+\begin{tikzpicture}[scale=1.2,>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
     \label{flux-paths}
 \def\arm{3} \def\height{1.8} \def\core{.52}
 \filldraw[draw=ink!50,fill=ink!8] (0,0) circle (\core);
@@ -391,11 +394,13 @@
     (-\arm,0) .. controls (-\arm/2,\side*\height) and (\arm/2,\side*\height) .. (\arm,0);
     \node at (0,\side*\height) {$\branch$};
 }
-\foreach \side/\point in {-1/i,1/f}{\fill (\side*\arm,0) circle (2pt) node[below] {$\mathbf x_\point$};}
+\foreach \side/\point/\anchor in {-1/i/north east,1/f/north west}{
+    \fill (\side*\arm,0) circle (2pt) node[anchor=\anchor] {$\mathbf x_\point$};
+}
 \end{tikzpicture}
 
 \standaloneconfig{border=0pt}
-\begin{tikzpicture}[x=1cm,y=1cm,>=stealth,font=\zihao{-5}]
+\begin{tikzpicture}[x=1cm,y=1cm,>=stealth]
     \label{hall-voltage}
     \filldraw[fill=teal!6,draw=black!65] (0,0) rectangle (6,1.35);
     \draw[->,thick] (-1,.67) -- (0,.67) node[midway,above] {$I$};
@@ -412,7 +417,7 @@
 
 % 第 11 章
 \standaloneconfig{border=3pt}
-\begin{tikzpicture}[>=Latex,station/.style={draw,fill=blue!8,minimum width=1.5cm},detector/.style={draw,rounded corners,fill=black!8}]
+\begin{tikzpicture}[scale=1.25,>=Latex,station/.style={draw,fill=blue!8,minimum width=1.5cm},detector/.style={draw,rounded corners,fill=black!8}]
     \label{bell-pair}
     \def\arm{2.5} \def\readout{1.7} \def\split{0.65}
     \node[draw,circle,fill=orange!20] (source) at (0,0) {$S$};
@@ -428,7 +433,7 @@
 
 % 第 12 章
 \standaloneconfig{border=4pt}
-\begin{tikzpicture}[>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
+\begin{tikzpicture}[scale=1.35,>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
     \label{scattering-aperture}
 \def\angleout{32} \def\aperture{8} \def\distance{3.8} \def\beamlength{2.3}
 \fill[teal!10] (0,0) -- (\angleout-\aperture:\distance) arc[start angle=\angleout-\aperture,end angle=\angleout+\aperture,radius=\distance] -- cycle;
@@ -442,7 +447,7 @@
 \end{tikzpicture}
 
 \standaloneconfig{border=0pt}
-\begin{tikzpicture}[x=1.07cm,y=.75cm,>=stealth,font=\zihao{-5}]
+\begin{tikzpicture}[x=1.07cm,y=.75cm,>=stealth]
     \label{hard-sphere-nodes}
     \fill[black!8] (0,-1.10) rectangle (1,1.12);
     \draw[->] (-.15,0) -- (8.7,0) node[right] {$r/a$};
@@ -462,7 +467,7 @@
 
 % 第 13 章
 \standaloneconfig{border=4pt}
-\begin{tikzpicture}[>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
+\begin{tikzpicture}[scale=1.5,>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
     \label{berry-cap}
 \def\radius{1.85} \def\polar{52} \def\flatten{.16}
 \pgfmathsetmacro{\ring}{\radius*sin(\polar)} \pgfmathsetmacro{\height}{\radius*cos(\polar)}
@@ -478,7 +483,7 @@
 \end{tikzpicture}
 
 % 第 15 章
-\begin{tikzpicture}[>=Latex,level/.style={very thick,blue!20!black},
+\begin{tikzpicture}[scale=1.25,>=Latex,level/.style={very thick,blue!20!black},
     guide/.style={densely dashed,black!45},shifted/.style={very thick,teal!75!black}]
     \label{hydrogen-fine-lamb}
     \def\column{3.5} \def\halfwidth{.96} \def\fineGap{2.2} \def\lambGap{.72}
@@ -488,14 +493,14 @@
         \node[above] at (\col*\column,.48) {\textsf{\title}};
     }
     \draw[level] (-\halfwidth,0) -- node[above] {$n=2$} (\halfwidth,0);
-    \foreach \energy/\term in {\upper/{2P_{3/2}},\lower/{2S_{1/2},\,2P_{1/2}}}{
+    \foreach \energy/\term in {\upper/{2\mathrm{p}_{3/2}},\lower/{2\mathrm{s}_{1/2},\,2\mathrm{p}_{1/2}}}{
         \draw[guide] (\halfwidth,0) -- (\column-\halfwidth,\energy);
         \draw[level] (\column-\halfwidth,\energy) -- node[above] {$\term$} (\column+\halfwidth,\energy);
         \draw[guide] (\column+\halfwidth,\energy) -- (2*\column-\halfwidth,\energy);
     }
     \draw[guide] (\column+\halfwidth,\lower) -- (2*\column-\halfwidth,\lower+\lambGap);
-    \foreach \energy/\term/\style in {\upper/{2P_{3/2}}/level,\lower/{2P_{1/2}}/level,
-        {\lower+\lambGap}/{2S_{1/2}}/shifted}{
+    \foreach \energy/\term/\style in {\upper/{2\mathrm{p}_{3/2}}/level,\lower/{2\mathrm{p}_{1/2}}/level,
+        {\lower+\lambGap}/{2\mathrm{s}_{1/2}}/shifted}{
         \draw[\style] (2*\column-\halfwidth,\energy) -- node[above] {$\term$} (2*\column+\halfwidth,\energy);
     }
     \draw[<->] (2*\column+1.2*\halfwidth,\lower) -- node[right] {$h\nu_{\rm L}$}
@@ -505,15 +510,15 @@
 \begin{tikzpicture}[>=Latex,beam/.style={teal!75!black,thick,->},
     stage/.style={draw,rounded corners=2pt,fill=black!5,minimum height=9mm}]
     \label{lamb-readout}
-    \def\drift{1.45} \def\driveGap{.95}
-    \node[stage] (source) {$\mathrm{H}(2S)$};
-    \node[stage,right=\drift cm of source] (drive) {$2S\leftrightarrow 2P$};
-    \node[stage,right=\drift cm of drive] (detector) {$N_{2S}$};
+    \def\drift{3} \def\driveGap{1.65}
+    \node[stage] (source) {$\mathrm{H}(2\mathrm{s})$};
+    \node[stage,right=\drift cm of source] (drive) {$2\mathrm{s}\leftrightarrow 2\mathrm{p}$};
+    \node[stage,right=\drift cm of drive] (detector) {$N_{2\mathrm{s}}$};
     \draw[beam] (source) -- (drive);
-    \draw[beam] (drive) -- node[above] {$2S$} (detector);
+    \draw[beam] (drive) -- node[above] {$2\mathrm{s}$} (detector);
     \node[above=\driveGap cm of drive] (mw) {$\nu_{\rm mw}$};
     \draw[radiation=4.5mm,longwave] (mw) -- (drive);
-    \node[below=\driveGap cm of drive] (decay) {$2P\to1S$};
+    \node[below=\driveGap cm of drive] (decay) {$2\mathrm{p}\to1\mathrm{s}$};
     \draw[->] (drive) -- (decay);
     \node[right=\drift cm of decay] (uv) {$\gamma_{\rm UV}$};
     \draw[radiation,shortwave] (decay) -- (uv);
@@ -588,7 +593,7 @@
   \def\N{60}
   \def\xmax{3100}
   \def\ymax{1.36e10}
-  \def\tick#1#2{\draw[thick] (#1+.01*\ymax) -- (#1-.01*\ymax) node[below=-.5pt,scale=0.75] {#2};}
+  \def\tick#1#2{\draw[thick] (#1+.01*\ymax) -- (#1-.01*\ymax) node[below=-.5pt] {#2};}
   \begin{axis}[
       every axis plot/.style={
         mark=none,samples=\N,domain=5:\xmax,smooth},
@@ -599,12 +604,11 @@
       axis line style=thick,
       %enlargelimits=upper, % extend the axes a bit to the right and top
       tick style={black,thick},
-      ticklabel style={scale=0.8},
       %xtick style={draw=none},xticklabels=none,
       max space between ticks=26,
       xlabel={$\lambda/\unit{nm}$},
       ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
-      xlabel style={at={(rel axis cs:0.5,0)},below=-1pt,font=\small},
+      xlabel style={at={(rel axis cs:0.5,0)},below=-1pt},
       ylabel style={at={(rel axis cs:-0.11,0.5)},rotate=90},
       width=9cm, height=7cm,
       %clip=false
@@ -614,9 +618,9 @@
 
     % RAINBOW
     \shade[shading=rainbow,shading angle=90,opacity=0.5] (380,0) rectangle (740,\ymax);
-    \node[above=-1pt,scale=0.8] at (200,\ymax) {\strut UV}; % 10 - 400 nm
-    \node[above=-1pt,scale=0.8] at (570,\ymax) {\strut optical}; % 380 - 740 nm
-    \node[above=-1pt,scale=0.8] at (920,\ymax) {\strut IR}; % 740 - 1050 nm
+    \node[above,inner sep=0pt] at (190,\ymax) {\strut UV}; % 10 - 400 nm
+    \node[above,inner sep=0pt] at (560,\ymax) {\strut optical}; % 380 - 740 nm
+    \node[above,inner sep=0pt] at (970,\ymax) {\strut IR}; % 740 - 1050 nm
 
     % PLANCK
     \addplot[very thick,red]    {planck(x,3000)};
@@ -634,10 +638,10 @@
     %  ({lampeak(T)},{planck(lampeak(T),T)});
 
     % LABELS
-    \node[above=0pt,scale=0.75,red] at (1150,{planck(1150,3000)}) {\qty{3000}{K}};
-    \node[above right=-1pt,scale=0.75,orange!80!black] at (740,{planck(740,4000)}) {\qty{4000}{K}};
-    \node[above right=-1pt,scale=0.75,blue] at (800,{planck(800,5000)}) {\qty{5000}{K}};
-    \node[above right=-1pt,scale=0.75,blue] at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh--Jeans};
+    \node[above=1pt,xshift=1.5pt,inner sep=0.5pt,red] at (1160,{planck(1160,3000)}) {\qty{3000}{K}};
+    \node[above=4pt,xshift=2pt,inner sep=0.5pt,orange!80!black] at (930,{planck(930,4000)}) {\qty{4000}{K}};
+    \node[above right=-1pt,blue] at (800,{planck(800,5000)}) {\qty{5000}{K}};
+    \node[above right=-1pt,blue] at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh--Jeans};
 
     %% TICKS
     %\tick{500,0}{500}
@@ -658,7 +662,7 @@
   \def\N{60}
   \def\xmax{3100}
   \def\ymax{1.36e10}
-  \def\tick#1#2{\draw[thick] (#1+.01*\ymax) -- (#1-.01*\ymax) node[below=-.5pt,scale=0.75] {#2};}
+  \def\tick#1#2{\draw[thick] (#1+.01*\ymax) -- (#1-.01*\ymax) node[below=-.5pt] {#2};}
   \begin{axis}[
       every axis plot/.style={
         very thick,mark=none,samples=\N,domain=5:\xmax,smooth},
@@ -669,12 +673,11 @@
       axis line style=thick,
       %enlargelimits=upper, % extend the axes a bit to the right and top
       tick style={black,thick},
-      ticklabel style={scale=0.8},
       %xtick style={draw=none},xticklabels=none,
       max space between ticks=26,
       xlabel={$\lambda/\unit{nm}$},
       ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
-      xlabel style={at={(rel axis cs:0.5,0)},below=-1pt,font=\small},
+      xlabel style={at={(rel axis cs:0.5,0)},below=-1pt},
       ylabel style={at={(rel axis cs:-0.11,0.5)},rotate=90},
       width=9cm, height=7cm,
       %clip=false
@@ -684,9 +687,9 @@
 
     % RAINBOW
     \shade[shading=rainbow,shading angle=90,opacity=0.5] (380,0) rectangle (740,\ymax);
-    \node[above=-1pt,scale=0.8] at (200,\ymax) {\strut UV}; % 10 - 400 nm
-    \node[above=-1pt,scale=0.8] at (570,\ymax) {\strut optical}; % 380 - 740 nm
-    \node[above=-1pt,scale=0.8] at (920,\ymax) {\strut IR}; % 740 - 1050 nm
+    \node[above,inner sep=0pt] at (190,\ymax) {\strut UV}; % 10 - 400 nm
+    \node[above,inner sep=0pt] at (560,\ymax) {\strut optical}; % 380 - 740 nm
+    \node[above,inner sep=0pt] at (970,\ymax) {\strut IR}; % 740 - 1050 nm
 
     % PLANCK
     \addplot[red]    {planck(x,3000)};
@@ -704,10 +707,10 @@
     \fill[mydarkgreen!80!black] ({lampeak(5000)},{planck(lampeak(5000),5000)}) circle(1.5pt);
 
     % LABELS
-    \node[above=0pt,scale=0.75,red] at (1150,{planck(1150,3000)}) {\qty{3000}{K}};
-    \node[above right=-1pt,scale=0.75,orange!80!black] at (740,{planck(740,4000)}) {\qty{4000}{K}};
-    \node[above right=-1pt,scale=0.75,blue] at (800,{planck(800,5000)}) {\qty{5000}{K}};
-    \node[above right=-1pt,scale=0.75,blue] at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh--Jeans};
+    \node[above=1pt,xshift=1.5pt,inner sep=0.5pt,red] at (1160,{planck(1160,3000)}) {\qty{3000}{K}};
+    \node[above=4pt,xshift=2pt,inner sep=0.5pt,orange!80!black] at (930,{planck(930,4000)}) {\qty{4000}{K}};
+    \node[above right=-1pt,blue] at (800,{planck(800,5000)}) {\qty{5000}{K}};
+    \node[above right=-1pt,blue] at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh--Jeans};
 
   \end{axis}
 \end{tikzpicture}
@@ -720,7 +723,7 @@
   \def\N{60}
   \def\xmax{3100}
   \def\ymax{1.43e10}
-  \def\tick#1#2{\draw[thick] (#1+.01*\ymax) -- (#1-.01*\ymax) node[below=-.5pt,scale=0.75] {#2};}
+  \def\tick#1#2{\draw[thick] (#1+.01*\ymax) -- (#1-.01*\ymax) node[below=-.5pt] {#2};}
   \begin{axis}[
       every axis plot/.style={
         mark=none,samples=\N,domain=5:\xmax,smooth},
@@ -730,10 +733,9 @@
       %axis lines=middle,
       axis line style=thick,
       tick style={black,thick},
-      ticklabel style={scale=0.8},
       xlabel={$\lambda/\unit{nm}$},
       ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
-      xlabel style={below=-1pt,font=\small},
+      xlabel style={below=-1pt},
       ylabel style={above=-1pt},
       width=9cm, height=7cm,
       tick scale binop=\times,
@@ -741,8 +743,8 @@
     ]
 
     % RAINBOW
-    \draw[dashed] (380,{planck(380,5000)}) -- (380,\ymax);
-    \draw[dashed] (740,{planck(740,5000)}) -- (740,\ymax);
+    \draw[dashed] (380,{planck(380,5000)}) -- (380,.90*\ymax);
+    \draw[dashed] (740,{planck(740,5000)}) -- (740,.90*\ymax);
     \begin{scope}
       \clip[variable=\x,domain=200:1000,samples=40]
         plot(\x,{planck(\x,5000)}) |- (200,0) -- cycle;
@@ -765,19 +767,19 @@
     \fill[mydarkgreen!80!black] ({lampeak(5000)},{planck(lampeak(5000),5000)}) circle(1.5pt);
 
     % LABELS
-    \node[above=0pt,scale=0.75,red]
-      at (1150,{planck(1150,3000)}) {\qty{3000}{K}};
-    \node[above right=-1pt,scale=0.75,orange!80!black]
-      at (740,{planck(740,4000)}) {\qty{4000}{K}};
-    \node[above right=-1pt,scale=0.75,blue]
+    \node[above=1pt,xshift=1.5pt,inner sep=0.5pt,red]
+      at (1160,{planck(1160,3000)}) {\qty{3000}{K}};
+    \node[above=4pt,xshift=2pt,inner sep=0.5pt,orange!80!black]
+      at (930,{planck(930,4000)}) {\qty{4000}{K}};
+    \node[above right=-1pt,blue]
       at (800,{planck(800,5000)}) {\qty{5000}{K}};
-    \node[above right=-1pt,scale=0.75,blue]
+    \node[above right=-1pt,blue]
       at (1500,{rayleighjeans(1500,5000)}) {\qty{5000}{K} Rayleigh--Jeans};
 
     % LABELS
-    \node[below=2pt,scale=0.8] at (200,\ymax) {\strut UV}; % 10 - 400 nm
-    \node[below=2pt,scale=0.8] at (562,\ymax) {\strut optical}; % 380 - 740 nm
-    \node[below=2pt,scale=0.8] at (920,\ymax) {\strut IR}; % 740 - 1050 nm
+    \node[below=2pt] at (200,\ymax) {\strut UV}; % 10 - 400 nm
+    \node[below=2pt] at (562,\ymax) {\strut optical}; % 380 - 740 nm
+    \node[below=2pt] at (920,\ymax) {\strut IR}; % 740 - 1050 nm
 
   \end{axis}
 \end{tikzpicture}
@@ -802,15 +804,12 @@
       log basis y=10,
       axis line style=thick,
       tick style={black,thick},
-      ticklabel style={scale=0.8},
       max space between ticks=23,
       yminorticks=false,
       xlabel={$\lambda/\unit{nm}$},
       ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
-      xlabel style={at={(rel axis cs:0.5,0)},below=8pt},
       ylabel style={above=-2pt},
-      legend style={at={(0.98,0.95)},anchor=north east,draw=none,fill=none,
-                    nodes={scale=0.7, transform shape}},
+      legend style={at={(1.02,0.5)},anchor=west,draw=none,fill=none},
       legend cell align={left},
       width=8cm, height=6cm,
       axis line on top
@@ -860,16 +859,14 @@
       log basis y=10,
       axis line style=thick,
       tick style={black,thick},
-      ticklabel style={scale=0.8},
       %ticks=none,
       max space between ticks=23,
       yminorticks=false,
       xlabel={$\lambda/\unit{nm}$},
       ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
-      xlabel style={at={(rel axis cs:0.5,0)},below=8pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
-      legend style={at={(0.14,0.15)},anchor=south west,draw=none,fill=none,font=\small},
+      legend style={at={(0.14,0.15)},anchor=south west,draw=none,fill=none},
       legend cell align={left},
       axis line on top
     ]
@@ -883,7 +880,7 @@
     \addlegendentry{Planck}
     \addlegendentry{Rayleigh--Jeans}
     \addlegendentry{Wien}
-    \node[scale=1] at (0.18*\xmax,0.01*\ymax) {$T=\qty{300}{K}$};
+    \node at (0.18*\xmax,0.01*\ymax) {$T=\qty{300}{K}$};
 
   \end{loglogaxis}
 \end{tikzpicture}
@@ -907,16 +904,14 @@
       log basis y=10,
       axis line style=thick,
       tick style={black,thick},
-      ticklabel style={scale=0.8},
       %ticks=none,
       max space between ticks=23,
       yminorticks=false,
       xlabel={$\lambda/\unit{nm}$},
       ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
-      xlabel style={at={(rel axis cs:0.5,0)},below=8pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
-      legend style={at={(0.14,0.15)},anchor=south west,draw=none,fill=none,font=\small},
+      legend style={at={(0.14,0.15)},anchor=south west,draw=none,fill=none},
       legend cell align={left},
       axis line on top
     ]
@@ -933,7 +928,7 @@
     \addlegendentry{Planck}
     \addlegendentry{Rayleigh--Jeans}
     \addlegendentry{Wien}
-    \node[scale=1] at (0.17*\xmax,0.01*\ymax) {$T=\qty{3000}{K}$};
+    \node at (0.17*\xmax,0.01*\ymax) {$T=\qty{3000}{K}$};
 
   \end{loglogaxis}
 \end{tikzpicture}
@@ -957,17 +952,15 @@
       log basis y=10,
       axis line style=thick,
       tick style={black,thick},
-      ticklabel style={scale=0.8},
       %ticks=none,
       max space between ticks=23,
       yminorticks=false,
       xlabel={$\lambda/\unit{nm}$},
       ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
-      xlabel style={at={(rel axis cs:0.5,0)},below=9pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
       axis line on top,
-      legend style={at={(0.65,0.9)},anchor=north west,draw=none,fill=none,font=\small}%,
+      legend style={at={(0.65,0.9)},anchor=north west,draw=none,fill=none}%,
       %legend cell align={left},
     ]
 
@@ -1012,14 +1005,12 @@
       log basis y=10,
       axis line style=thick,
       tick style={black,thick},
-      ticklabel style={scale=0.8},
       %ticks=none,
       max space between ticks=23,
       yminorticks=false,
       variable=x,
       xlabel={$\lambda/\unit{nm}$},
       ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
-      xlabel style={at={(rel axis cs:0.5,0)},below=9pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
       axis line on top
@@ -1032,9 +1023,9 @@
     \fill[red!80!black!4] (740,\ymin) rectangle (1e6,\ymax); % infrared
     \fill[orange!80!black!4] (1e6,\ymin) rectangle (1e8,\ymax); % microwave
     \fill[green!80!black!4] (1e8,\ymin) rectangle (\xmax,\ymax); % radio
-    \node[below=3,scale=0.7,violet!50!black] at ({\xmin*10^(log10(380/\xmin)/2)},\ymax) {UV};
-    \node[below=3,scale=0.7,red!50!black] at ({740*10^(log10(1e6/740)/2)},\ymax) {infrared};
-    \node[below=3,scale=0.7,orange!60!black] at ({1e6*10},\ymax) {microwave};
+    \node[below=3,violet!50!black] at ({\xmin*10^(log10(380/\xmin)/2)},\ymax) {UV};
+    \node[below=3,red!50!black] at ({740*10^(log10(1e6/740)/2)},\ymax) {infrared};
+    \node[below=3,orange!60!black] at ({1e6*10},\ymax) {microwave};
 
     % PLANCK
     \addplot[domain=\xmin:1e5,red]     {planck(x,3000)};
@@ -1042,13 +1033,13 @@
     \addplot[domain=2e5:\xmax,mygreen] {planck(x,2.725)};
 
     % LABELS
-    \node[above right=-1,red] at (1e4,{planck(1e4,3000)}) {\qty{3000}{K}};
+    \node[above right=1pt,red] at (4e4,{planck(4e4,3000)}) {\qty{3000}{K}};
     \node[anchor=-70,mygreen] at (1e6,{planck(1e6,2.725)}) {\qty{2.725}{K}};
 
     % ARROW
     \draw[->,line width=2,myred] (7e3,1e2) --++ (-42:17mm)
-      node[pos=0.38,above,sloped,scale=0.95] {redshift}
-      node[pos=0.38,below,sloped,scale=0.90] {$z\sim1100$};
+      node[pos=0.38,above,sloped] {redshift}
+      node[pos=0.38,below,sloped] {$z\sim1100$};
 
   \end{loglogaxis}
 \end{tikzpicture}
@@ -1074,7 +1065,6 @@
       log basis y=10,
       axis line style=thick,
       tick style={black,thick},
-      ticklabel style={scale=0.8},
       xtick={5e5,1e6,2e6,5e6},
       minor xtick={4e5,6e5,7e5,8e5,9e5,3e6,4e6,6e6},
       log number format code/.code={
@@ -1085,12 +1075,11 @@
       },
       xlabel={$\lambda/\unit{nm}$},
       ylabel={$B_\lambda/(\unit{\micro\watt\per\steradian\per\metre\squared\per\nano\metre})$},
-      xlabel style={at={(rel axis cs:0.5,0)},below=9pt},
       ylabel style={above=-2pt},
       width=8cm, height=6cm,
       axis line on top,
       legend style={
-        at={(0.24,0.3)},anchor=south west,draw=none,fill=none,font=\small},
+        at={(0.24,0.3)},anchor=south west,draw=none,fill=none},
       legend cell align={left},
       legend image code/.code={
         \draw[mark repeat=2,mark phase=2]
@@ -1125,8 +1114,8 @@
 \begin{tikzpicture}
     \label{blackbody-colors}
 
-  \def\tick#1#2{\draw[thick] (#1+.08) --++ (0,-.16) node[below=-2pt,scale=1] {\strut #2};}
-  \def\ticka#1#2{\draw[thick] (#1+.08) --++ (0,-.16) node[above=2pt,scale=1] {\strut #2};}
+  \def\tick#1#2{\draw[thick] (#1+.08) --++ (0,-.16) node[below=-2pt] {\strut #2};}
+  \def\ticka#1#2{\draw[thick] (#1+.08) --++ (0,-.16) node[above=2pt] {\strut #2};}
 
   %   i  TEMPERATURE  RGB COLOR
   %   0        900    0.0000 0.0000 0.0000
@@ -1147,7 +1136,7 @@
   % http://www.vendian.org/mncharity/dir3/blackbody/UnstableURLs/bbr_color.html
 
   \shade[shading=blackbody,shading angle=-90] (0,0) rectangle (10,1);
-  \draw[->,thick] (-0.2,0) -- (10.8,0) node[right,scale=1.1] {$T/\unit{K}$};
+  \draw[->,thick] (-0.2,0) -- (10.8,0) node[right] {$T/\unit{K}$};
   \tick{0,0}{ 900}
   \tick{10/11*1,0}{1000}
   \tick{10/11*2,0}{2000}

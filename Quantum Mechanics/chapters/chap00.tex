@@ -10,7 +10,7 @@
 \textbf{怎样预测各个读数出现的概率？}起初只需数两个出口的原子，以后可以逐个像素数电子，也可以逐个频率测吸收。
 增加位置这样的自由度(degree of freedom)、增加粒子或把环境计入时，我们仍用实验能记录的分布检验计算。
 
-\section{历史顺序与学习顺序}
+\section{量子力学发展简史}
 \label{sec:timeline}
 氢的可见谱线比原子束分裂更早为人熟知，解释起来却需要更多准备。即使知道了哪些频率能被吸收，
 要预言哪条线更亮，还得知道光怎样使原子从一个态转到另一个态。\tabref{tab:history}按年代列出这些观测，
@@ -57,7 +57,7 @@
 理论的几个时间节点另列于此：1900年Planck提出能量元，1905年Einstein提出光量子，
 1913年Bohr提出原子模型，1923--1924年de Broglie提出并发展动量与空间相位的联系；
 1925--1926年建立现代量子力学，1926年Born提出概率解释，1928年Dirac提出相对论电子理论。
-Bohr模型以轨道量子化解释氢谱；现代理论用态与算符描述原子，角动量谱由\chapref{ch:angular}的旋转代数给出。
+Bohr 模型以轨道量子化解释氢谱。\chapref{ch:angular}将从旋转出发，求出现代理论允许的角动量读数。
 
 \section{量子理论的实验基础}
 时间表中的光谱来自光与物质交换能量。怎样从仪器读数知道交换了多少？
@@ -93,13 +93,13 @@ $K_{\max}=eV_{\stopping}$，其中$e>0$为元电荷。
 更换金属改变了电子逸出表面所需的能量 $W$；光子的能量仍由频率唯一确定（图\ref{fig:photoelectric-threshold}）。
 \begin{figure}[htbp]
     \centering
-    \raisebox{-.5\height}{\tikzfigure[width=.40\linewidth]{photoelectric-cell}}\hfill
+    \raisebox{-.5\height}{\tikzfigure{photoelectric-cell}}\hfill
     \raisebox{-.5\height}{\includegraphics[width=.52\linewidth]{figures/photoelectric_threshold.pdf}}
     \caption{光电截止电压。左：波浪线为入射光，直箭头为从阴极 K 飞向收集极 C 的电子。右：每个频率取电流表 A 的读数降至背景时的反向电压；直线的斜率为 $h/e$，横轴截距为 $W/h$。}
     \label{fig:photoelectric-threshold}
 \end{figure}
-若单位时间照到表面的功率为$\mathcal P$，单光子数流为$\mathcal P/(h\nu)$；
-以$\eta$表示吸收、逸出和收集的总效率，则饱和电流近似为
+本例用 $\mathcal P$ 表示照到金属表面的光功率。每个光子的能量为 $h\nu$，所以每秒入射的光子数为 $\mathcal P/(h\nu)$。
+以$\eta$表示吸收、逸出和收集的总效率，饱和电流近似为
 \begin{equation}
     I_\mathrm{sat}=e\eta\frac{\mathcal P}{h\nu}.
 \end{equation}
@@ -140,9 +140,12 @@ $m_\electron$是电子静质量，$c$是真空光速。
         m_\electron c^2(E-E')&=EE'(1-\cos\theta).
     \end{alignedat}
 \end{equation}
-第一行左侧展开为
-$m_\electron^2c^4+2m_\electron c^2(E-E')+E^2+E'^2-2EE'$。
-与右侧相同的静质量项和两个平方项消去，再除以2便得第二行。
+展开第一行左侧的平方，
+\[
+    (m_\electron c^2+E-E')^2
+    =m_\electron^2c^4+2m_\electron c^2(E-E')+E^2+E'^2-2EE' .
+\]
+与右侧相同的静质量项和两个平方项消去，再除以 2 便得第二行。
 将第二行除以$EE'm_\electron c^2$，得到
 \begin{equation}
     \frac1{E'}-\frac1E=\frac{1-\cos\theta}{m_\electron c^2}.
@@ -155,7 +158,7 @@ $m_\electron^2c^4+2m_\electron c^2(E-E')+E^2+E'^2-2EE'$。
 光子将部分能量交给反冲电子，出射波长随散射角增大而增长（图\ref{fig:compton-shift}）。各方向的计数强度还取决于散射相互作用。
 \begin{figure}[htbp]
     \centering
-    \raisebox{-.5\height}{\tikzfigure[width=.42\linewidth]{compton-geometry}}\hfill
+    \raisebox{-.5\height}{\tikzfigure{compton-geometry}}\hfill
     \raisebox{-.5\height}{\includegraphics[width=.52\linewidth]{figures/compton_shift.pdf}}
     \caption{Compton 散射。左：蓝、橙波浪线分别标记入射和出射 X 射线，$\theta$ 从入射束的延长线量起；直箭头为反冲电子。右：横轴取 $\theta$，纵轴以电子的 Compton 波长 $\lambda_C=h/(m_\electron c)$ 为位移单位。}
     \label{fig:compton-shift}
@@ -190,7 +193,7 @@ Franck--Hertz实验用加热阴极发射电子，以可调加速电压$U$使电�
 对图\ref{fig:franck-hertz-current}中的相邻电流谷取电压差，共同的偏移 $U_c$ 便消去。
 \begin{figure}[htbp]
     \centering
-    \raisebox{-.5\height}{\tikzfigure[width=.44\linewidth]{franck-hertz-tube}}\hfill
+    \raisebox{-.5\height}{\tikzfigure{franck-hertz-tube}}\hfill
     \raisebox{-.5\height}{\includegraphics[width=.52\linewidth]{figures/franck_hertz_current.pdf}}
     \caption{Franck--Hertz 管及收集电流。左：K、G、C 下方依次标出热阴极、栅极、收集极的电势。右图给出收集电流随加速电压的变化。参考电流 $I_0$ 取线性背景在扫描上限处的值，曲线示意电流谷的位置，谷深和谷宽取绘图值。}
     \label{fig:franck-hertz-current}
@@ -212,12 +215,15 @@ Franck--Hertz实验用加热阴极发射电子，以可调加速电压$U$使电�
 这些因素改变峰谷位置和形状，所以详细曲线还需电子输运与碰撞截面。
 从实验提取的稳定结论是存在特定的内部激发能量。
 
-理论据此把稳定原子态标记为$\ket{n}$，并赋予能量$E_n$。
-尖括号里的 $n$ 是制备态的标签。例如 $n=i$ 表示碰撞前的原子态，$n=f$ 表示碰撞后的原子态。
-忽略原子整体反冲时，吸收或发射频率满足$h\nu=\abs{E_f-E_i}$。
-能级差给出谱线的位置；探针与原子之间的耦合矩阵元决定哪些跃迁能被激发，并参与决定谱线强度。
+把碰撞前、后原子所在的能级分别记作 $E_i,E_f$。同一对能级也能用光谱来比较。
+忽略原子整体反冲时，吸收或发射光子的频率满足
+\begin{equation}
+    h\nu=\abs{E_f-E_i}.
+    \label{eq:spectral-frequency}
+\end{equation}
+能级差给出谱线的位置。哪些跃迁容易发生，还取决于光与原子的相互作用。
 
-\section{本书路线与记号}
+\section{全书结构与记号约定}
 \label{sec:roadmap}
 碰撞阈值反映原子所能吸收的能量。要预言给定制备下各读数的概率，还需要能分别控制制备与测量的实验。
 在\chapref{ch:spin}，沿给定方向测自旋只有两个出口，挡住一路便制备了供下一次测量的束流。
@@ -237,47 +243,14 @@ Franck--Hertz实验用加热阴极发射电子，以可调加速电压$U$使电�
 \ssecref{ss:position-well}用两端的硬墙条件确定驻波，再对给定区间积分求探测概率。
 \secref{sec:hydrogen-1s}沿用定态方程，势能改为 Coulomb 势，原点的正则性和无穷远处的衰减条件共同约束基态的空间尺度和能量。
 
-态(state) $\ket{\psi}$ 描述系统的制备。概率振幅(probability amplitude) $\brkt{a}{\psi}$ 表示该态沿分析器出口态 $\ket{a}$ 的分量。
-振幅是复数，可以像光波的复振幅一样叠加。
-写成 $c=u+\i v=r\e^{\i\varphi}$ 时，$\e^{\i\varphi}=\cos\varphi+\i\sin\varphi$，
-$r$ 和 $\varphi$ 分别是复平面上箭头的长度和方向。模平方 $\abs{c}^2=c\conj c=u^2+v^2=r^2$。
-光学实验测量强度，单粒子实验则逐次记录粒子的到达。离散出口的概率由振幅的模平方给出；
-下一章就用两台不同朝向的分析器检验这一规则。
+读\chapref{ch:spin}只需会用两行两列的矩阵乘列向量。描述同一束原子时，
+我们将用两个复数作坐标。复数 $c=u+\i v=r\e^{\i\varphi}$ 的模 $r$ 是它在复平面上到原点的距离，
+相位 $\varphi$ 是从正实轴量起的角，$\e^{\i\varphi}=\cos\varphi+\i\sin\varphi$。
+复共轭 $c\conj=u-\i v$ 使 $c\conj c=u^2+v^2=\abs{c}^2$。下一章将看到，坐标的模平方给出出口概率，
+两个坐标的相对相位则决定转动分析器以后的计数。卷首的\hyperref[chap:symbols]{常用符号表}可供各章随时查阅。
 
-位置分量 $\brkt{x}{\psi}$、动量分量 $\brkt{p}{\psi}$ 及矩阵元(matrix element) $\mel{a}{\op{A}}{b}$ 的读法见卷首\hyperref[chap:symbols]{常用符号表}。
-全文采用 SI，$\hbar=h/(2\pi)$ 为约化 Planck 常数，$\varepsilon_0$ 为真空介电常数。Bohr 磁子 $\muB=e\hbar/(2m_\electron)$ 给出电子磁矩的尺度，
+全文采用 SI，$\hbar=h/(2\pi)$ 为约化 Planck 常数，$\varepsilon_0$ 为真空介电常数。
+Bohr 磁子 $\muB=e\hbar/(2m_\electron)$ 给出电子磁矩的尺度，
 精细结构常数 $\alpha=e^2/(4\pi\varepsilon_0\hbar c)$ 给出无量纲电磁耦合强度。
-能量为 $E$ 的态取时间因子 $\exp(-\i Et/\hbar)$。绕单位轴 $\bm n$ 主动旋转 $\theta$ 角采用 $\exp(-\i\theta\bm n\cdot\hatbm{J}/\hbar)$，其中 $\hatbm{J}$ 为总角动量。
-
-\begin{definition}{算符与线性}{qm-notation}
-    在态空间 $\HH$ 中取定一个定义域 $\Dom(\op{A})\subseteq\HH$。算符(operator) $\op A:\Dom(\op{A})\to\HH$
-    给域内每个输入向量 $\ket{\psi}$ 指定唯一的输出向量 $\op A\ket{\psi}$。
-    若定义域是线性子空间，对其中任意两个向量和任意复数 $c,d$ 有
-    \[
-        \op A(c\ket{\psi}+d\ket{\phi})=c\,\op A\ket{\psi}+d\,\op A\ket{\phi},
-    \]
-    则称 $\op A$ 为线性算符(linear operator)。线性关系使算符在基矢上的作用唯一确定它在这些基矢的任意有限叠加上的作用。
-    单位算符(identity operator) $\one$ 将每个向量映回自身，即 $\one\ket{\psi}=\ket{\psi}$。
-\end{definition}
-
-例如，取一个可观测量 $\op A$。在两个正交出口的基 $\ket{1},\ket{2}$ 中，若 $\op A\ket{1}=a_1\ket{1}$、$\op A\ket{2}=a_2\ket{2}$，
-则 $\op A(c_1\ket{1}+c_2\ket{2})=a_1c_1\ket{1}+a_2c_2\ket{2}$。帽号表示 $\op A$ 作用于态向量。本征值 $a_1,a_2$ 是可能的读数，矩阵元 $A_{mn}=\mel{m}{\op A}{n}$ 是复数，两者均用无帽记号。
-在正交归一基下，右矢(ket) $\ket{\psi}$ 的系数构成列向量。对它取共轭转置得到对应左矢(bra) $\bra{\psi}$ 的行向量。
-在有限维正交归一基下，伴随算符(adjoint operator) $\op{A}\adjoint$ 的矩阵是 $\op{A}$ 的矩阵的共轭转置(conjugate transpose)。
-乘积 $\op{A}\op{B}\ket{\psi}$ 先作用 $\op{B}$，再作用 $\op{A}$。对易子(commutator)与反对易子(anticommutator)分别定义为
-\begin{equation}
-    [\op{A},\op{B}]=\op{A}\op{B}-\op{B}\op{A},\qquad \{\op{A},\op{B}\}=\op{A}\op{B}+\op{B}\op{A}.
-\end{equation}
-
-三维分量指标 $i,j,k$ 取 $x,y,z$。Kronecker 符号 $\delta_{ij}$ 在 $i=j$ 时为 1，否则为 0。
-Levi-Civita 符号 $\epsilon_{ijk}$ 在 $(i,j,k)$ 为 $(x,y,z)$ 的偶置换时为 1，奇置换时为 $-1$，有重复指标时为 0。
-同一项中重复出现的空间分量指标约定求和，能级和态标签的求和则显式写出求和号。
-
-在全空间光滑且迅速衰减的波函数上，位置与动量满足 $[\op{X}_i,\op{P}_j]=\i\hbar\delta_{ij}\one$。
-沿同一方向，对易子为 $\i\hbar\one$，沿不同方向则为零。\secref{sec:continuous}将验证这个关系。例如，角动量分量的重复指标求和写为
-\begin{equation}
-    \epsilon_{ijk}\op{J}_k=\sum_{k=x,y,z}\epsilon_{ijk}\op{J}_k.
-\end{equation}
-取$i=x,j=y$时，右侧只剩$\op{J}_z$。
 
 \reading{主要教材为Feynman第III卷与MIT 8.05、8.06讲义；书目及实验出处见书末。}

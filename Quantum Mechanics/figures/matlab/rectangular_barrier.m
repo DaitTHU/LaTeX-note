@@ -18,17 +18,36 @@ boundary = cosh(opticalWidth) - 1i*phase/opticalWidth*sinh(opticalWidth);
 slope = -opticalWidth*sinh(opticalWidth) + 1i*phase*cosh(opticalWidth);
 wave(left) = boundary*cos(phase*position(left)) + slope/phase*sin(phase*position(left));
 
-figure(Units='centimeters', Position=[2 2 17.5 7])
-panels = tiledlayout(1, 2, TileSpacing='compact');
-nexttile
-plot(position, transmission*abs(wave).^2, LineWidth=1.5)
-xline([0 1], 'k:')
-xlim([-leftExtent rightExtent])
-xlabel('$x/a$', Interpreter='latex')
-ylabel('$|\psi/\psi_{\rm in}|^2$', Interpreter='latex')
-grid on
+figure(Units='centimeters', Position=[2 2 17.5 8.2])
+panels = tiledlayout(3, 2, TileSpacing='compact', Padding='compact');
+barrierColor = [0.94 0.88 0.74];
+potentialAxes = nexttile(panels, 1);
+hold on
+patch([0 0 1 1], [0 1 1 0], barrierColor, EdgeColor='none')
+plot([-leftExtent 0 0 1 1 rightExtent], [0 0 1 1 0 0], 'k', LineWidth=1.3)
+yline(energy, 'k--')
+text(-leftExtent+0.2, energy, '$E/V_0$', Interpreter='latex', VerticalAlignment='bottom')
+ylim([-0.12 1.18])
+yticks([0 1])
+ylabel('$V(x)/V_0$', Interpreter='latex')
+xticklabels([])
 
-nexttile
+densityAxes = nexttile(panels, 3, [2 1]);
+density = transmission*abs(wave).^2;
+densityLimit = ceil(2*max(density))/2;
+hold on
+patch([0 0 1 1], [0 densityLimit densityLimit 0], barrierColor, EdgeColor='none')
+plot(position, density, Color=[0 0.35 0.60], LineWidth=1.5)
+text(rightExtent-0.2, transmission, '$T$', Interpreter='latex', ...
+    HorizontalAlignment='right', VerticalAlignment='bottom')
+ylim([0 densityLimit])
+linkaxes([potentialAxes densityAxes], 'x')
+xlim([-leftExtent rightExtent])
+xticks(-leftExtent:rightExtent)
+xlabel('$x/a$', Interpreter='latex')
+ylabel('$|\psi(x)/A_{\rm in}|^2$', Interpreter='latex')
+
+nexttile(panels, 2, [3 1])
 energyRatios = [1/4 1/2 3/4];
 maxWidth = 5;
 width = linspace(0, maxWidth, samples)';  % a*sqrt(2*m*V_0)/hbar

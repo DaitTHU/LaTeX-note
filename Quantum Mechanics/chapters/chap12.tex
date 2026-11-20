@@ -23,7 +23,7 @@
 \end{equation}
 因此从实验计数提取截面，要分别标定通量、靶厚度、效率和角接受度（图\ref{fig:scattering-aperture}）。
 \begin{figure}[htbp]
-    \centering\tikzfigure[width=.56\linewidth]{scattering-aperture}
+    \centering\tikzfigure{scattering-aperture}
     \caption{散射计数的几何。$\theta$ 是探测器中心相对入射束的散射角；阴影为接收锥的截面，从靶心看去，整个探测面张开的立体角是 $\Delta\Omega$。}\label{fig:scattering-aperture}
 \end{figure}
 当靶太厚时，后续再次散射改变出射角分布，
@@ -35,19 +35,19 @@
 
 自由能量为$E_k=\hbar^2k^2/(2\mu)$。采用三维波矢态约定
 \begin{equation}
-    \brkt{\bm k}{\bm k'}=\delta^{(3)}(\bm k-\bm k'),\qquad
-    \brkt{\bm x}{\bm k}=(2\pi)^{-3/2}\e^{\i\bm k\cdot\bm x}.
+    \braket{\bm k}{\bm k'}=\delta^{(3)}(\bm k-\bm k'),\qquad
+    \braket{\bm x}{\bm k}=(2\pi)^{-3/2}\e^{\i\bm k\cdot\bm x}.
 \end{equation}
 $\ket{\bm k}$的动量是$\hbar\bm k$；本章的连续归一化与按动量归一化相差$\hbar$因子。
 入射实验应理解为窄而可归一化的动量分布，精确$\ket{\bm k}$是用于取散射极限的广义态。
 
-\subsection{探测面上的球面波}
+\subsection{远场散射振幅与微分截面}
 取入射方向为$z$轴，探测器到靶心的距离为$r$。在远大于势的作用范围处，
 入射波的波面近似平面；从靶向某一方向散出的波穿过的面积却随$r^2$增长。
 为使每秒穿过相同立体角的粒子数与$r$无关，出射波的振幅必须按$1/r$衰减。
 采用时间因子$\exp(-\i E_k t/\hbar)$，于是可把散射态的位置分量写为
 \begin{equation}
-    \brkt{\bm x}{\bm k^{(+)}}\ \sim\
+    \braket{\bm x}{\bm k^{(+)}}\ \sim\
     C\Bigb{\e^{\i kz}+f(\bm k',\bm k)\frac{\e^{\i kr}}{r}},
     \qquad C=(2\pi)^{-3/2},\quad \bm k'=k\,\bm x/r .
     \label{eq:outgoing-wave-pattern}
@@ -92,9 +92,12 @@ $j_r=(\hbar/\mu)\Im(\psi_{\mathrm{sc}}\conj\p_r\psi_{\mathrm{sc}})$，得
         \op{\Omega}_{\outgoing} &=\lim_{t\to+\infty}\e^{\i \op{H}t/\hbar}\e^{-\i \op{H}_0t/\hbar}.
     \end{alignat}
 \end{subequations}
-$\op{\Omega}_{\incoming}$把自由入射态映到相互作用中的态，
-$\op{S}=\op{\Omega}_{\outgoing}\adjoint\op{\Omega}_{\incoming}$则将入射自由标签映到最终出射标签。
-$\ket{\bm k^{(+)}}$表示由$\ket{\bm k}$指定的入射散射态(scattering state)。
+$\op{\Omega}_{\incoming}$ 把自由入射态 $\ket{\bm k}$ 映到相互作用中的散射态(scattering state)。
+再用 $\op{\Omega}_{\outgoing}\adjoint$ 读出最终的自由态，就得到从入射到出射的散射算符 $\op S$，
+\begin{equation}
+    \ket{\bm k^{(+)}}=\op{\Omega}_{\incoming}\ket{\bm k},\qquad
+    \op S=\op{\Omega}_{\outgoing}\adjoint\op{\Omega}_{\incoming}.
+\end{equation}
 
 令$\op{H}=\op{H}_0+\op{V}$，定义自由预解式
 $\op{G}_0^{(+)}(E)=(E-\op{H}_0+\i0)^{-1}$。
@@ -104,15 +107,20 @@ Lippmann--Schwinger方程写作
 \end{equation}
 它由$(E-\op{H}_0)\ket{\bm k^{(+)}}=\op{V}\ket{\bm k^{(+)}}$配合出射边界条件得到；
 $+\i0$表示先取$E+\i\eta$、$\eta>0$，再令$\eta\to0^+$。
-可从位置表象看出这个符号的作用。记 $R=\abs{\bm x-\bm x'}$，自由预解式在位置表象中的核是一个复值函数，
+
+在位置表象中可以看出 $+\i0$ 如何选定传播方向。记 $R=\abs{\bm x-\bm x'}$，自由预解式的核为
 \begin{equation}
     G_0^{(+)}(\bm x,\bm x';E_k)=\mel{\bm x}{\op{G}_0^{(+)}(E_k)}{\bm x'}
     =-\frac{\mu}{2\pi\hbar^2}\frac{\e^{\i kR}}{R}.
 \end{equation}
 当能量有正虚部时，取正实部的波数也有正虚部，$\e^{\i kR}$随距离衰减；
-令虚部趋零留下向外传播的波。为确定核的系数，取包围波源的小球，
-将 $(E_k+\hbar^2\nabla_{\bm x}^2/2\mu)G_0^{(+)}(\bm x,\bm x';E_k)=\delta^{(3)}(\bm x-\bm x')$ 在球内积分，
-球缩小时只有$1/R$项的梯度通量$-4\pi$留下，恰好给出右端的1。
+令虚部趋零留下向外传播的波。核的系数由点源方程确定，
+\begin{equation}
+    \left(E_k+\frac{\hbar^2}{2\mu}\nabla_{\bm x}^2\right)
+        G_0^{(+)}(\bm x,\bm x';E_k)=\delta^{(3)}(\bm x-\bm x').
+\end{equation}
+在以 $\bm x'$ 为中心的小球内积分，右端为 $1$。球缩小时，仅 $1/R$ 奇性有贡献。
+记核中 $1/R$ 的系数为 $C$。由于 $\nabla(1/R)$ 穿过球面的通量为 $-4\pi$，左端趋于 $-4\pi C\hbar^2/(2\mu)$，故 $C=-\mu/(2\pi\hbar^2)$。
 \begin{definition}{跃迁算符}{qm-scattering-t}
     跃迁算符(transition operator)$\op{T}(E)$把给定的自由入射态映到激起散射波的源态，满足
     \begin{equation}
@@ -120,7 +128,13 @@ $+\i0$表示先取$E+\i\eta$、$\eta>0$，再令$\eta\to0^+$。
         \op{T}(E_k)\ket{\bm k}=\op{V}\ket{\bm k^{(+)}}.
     \end{equation}
 \end{definition}
-迭代为$\op{T}=\op{V}+\op{V}\op{G}_0\op{V}+\op{V}\op{G}_0\op{V}\op{G}_0\op{V}+\cdots$，一级 Born 近似取 $\op{T}\simeq \op{V}$。
+在右端反复代入 $\op T$ 的方程，按势的作用次数得到 Born 展开。略去能量自变量，有
+\begin{equation}
+    \op{T}=\op{V}+\op{V}\op{G}_0^{(+)}\op{V}
+        +\op{V}\op{G}_0^{(+)}\op{V}\op{G}_0^{(+)}\op{V}+\cdots .
+    \label{eq:born-scattering-series}
+\end{equation}
+保留势只作用一次的项，即得一级 Born 近似 $\op{T}\simeq\op{V}$。
 
 同一个结构还可由预解式恒等式看出：
 \begin{equation}
@@ -144,7 +158,7 @@ $+\i0$表示先取$E+\i\eta$、$\eta>0$，再令$\eta\to0^+$。
         \e^{-\i\bm k'\cdot\bm x'}\mel{\bm x'}{\op{V}}{\bm k^{(+)}}
     =-\frac{\mu}{2\pi\hbar^2 C}\mel{\bm k'}{\op{T}(E_k)}{\bm k}.
 \end{equation}
-最后一步使用$\brkt{\bm k'}{\bm x'}=C\e^{-\i\bm k'\cdot\bm x'}$。
+最后一步使用$\braket{\bm k'}{\bm x'}=C\e^{-\i\bm k'\cdot\bm x'}$。
 由连接入、出自由态的散射算符 $\op{S}$，可将这些关系写成
 \begin{equation}
     \begin{alignedat}{1}
@@ -159,12 +173,12 @@ $+\i0$表示先取$E+\i\eta$、$\eta>0$，再令$\eta\to0^+$。
 对短程自伴势，合适的入出态极限存在时可构造这些算符；Coulomb长程尾需要修改渐近态。
 
 \section{Born近似}
-在跃迁算符的展开中，第一项只包含一次势的作用。如果反复散射的振幅足够小，
+在式\eqref{eq:born-scattering-series}中，第一项只包含一次势的作用。如果反复散射的振幅足够小，
 就能直接用势的空间形状预言角分布。以下把这一近似与入射通量和末态数联系起来，
 由此确定各散射角对应的势场空间频率。
 
 为核对式\eqref{eq:scatnorm}的因子，暂用体积$\mathcal V$中单位归一的动量态。
-对局域势 $\op{V}=V(\hatbm{X})$，动量态之间的矩阵元是$\widetilde V(\bm q)/\mathcal V$，其中
+对局域势 $\op{V}=V(\opbm{X})$，动量态之间的矩阵元是$\widetilde V(\bm q)/\mathcal V$，其中
 \begin{equation}
     \widetilde V(\bm q)=\int\d^3x\e^{-\i\bm q\cdot\bm x}V(\bm x),\qquad
     \bm q=\bm k'-\bm k.
@@ -276,7 +290,7 @@ $P_\ell$是$\ell$阶Legendre多项式，来自角动量方向基的加法定理�
 光学定理(optical theorem)中的总截面(total cross section)必须包括这些通道。
 
 \begin{example}{从硬球边界读出相移}{qm-hard-sphere-phase}
-    半径为$a$的硬球要求波在$r=a$处为零。考虑角度上均匀的$\ell=0$分波（$s$波），
+    半径为$a$的硬球要求波在$r=a$处为零。考虑角度上均匀的$\ell=0$分波（$\mathrm{s}$ 波），
     写$u_0=rR_0$，其中$R_0$是态的径向分量。
     球外的自由方程为$u_0''+k^2u_0=0$，满足硬壁条件的解正比于$\sin[k(r-a)]$。
     与无势时的$\sin(kr)$对照，硬壁使球外的波节向外移了$a$（图\ref{fig:hard-sphere-nodes}），故$\delta_0=-ka$（模$\pi$）。
@@ -292,14 +306,18 @@ $P_\ell$是$\ell$阶Legendre多项式，来自角动量方向基的加法定理�
     \label{fig:hard-sphere-nodes}
 \end{figure}
 
-令$a$为势的有效作用范围。对短程势，$ka\ll1$且不处于高分波阈值共振时，通常$s$波占优。
+令$a$为势的有效作用范围。对短程势，$ka\ll1$且不处于高分波阈值共振时，通常$\mathrm{s}$ 波占优。
 有效力程(effective range)展开为
 \begin{equation}
     k\cot\delta_0=-\frac1{a_s}+\frac12r_e k^2+\cdots,
     \qquad f_0=\frac1{k\cot\delta_0-\i k}.
 \end{equation}
-忽略$r_e$项得到$\sigma\simeq4\pi a_s^2/(1+k^2a_s^2)$。
-$a_s$是散射长度(scattering length)，$r_e$是有效力程，两者都有长度量纲。
+$a_s$ 是散射长度(scattering length)，$r_e$ 是有效力程，两者都有长度量纲。
+忽略有效力程项和更高阶项，在 $\mathrm{s}$ 波占优时得到
+\begin{equation}
+    \sigma\simeq4\pi\abs{f_0}^2
+        \simeq\frac{4\pi a_s^2}{1+k^2a_s^2}.
+\end{equation}
 $a_s$也能从低能径向波认出。有限$a_s$时取$\delta_0$趋零模$\pi$的分支，
 $k\cot\delta_0\to-1/a_s$意味着$\delta_0\simeq-ka_s$。
 在势外且$kr\ll1$时，$\sin(kr+\delta_0)\simeq k(r-a_s)$。
@@ -312,7 +330,7 @@ $a_s$可正可负，由低能散射决定；当$\abs{a_s}$很大，截面受$4\p
 
 取$\op{H}=\op{P}^2/(2m)+g\delta(\op{X})$，$g$有能量乘长度量纲。
 这是标准一维接触相互作用(contact interaction)的自伴实现；在三维，点相互作用需要正则化并用物理散射参数确定耦合。
-采用$\brkt{p}{p'}=\delta(p-p')$，势矩阵元为$g/(2\pi\hbar)$，
+采用$\braket{p}{p'}=\delta(p-p')$，势矩阵元为$g/(2\pi\hbar)$，
 因此$\op{T}$的核仍可分离：$\mel{p'}{\op{T}}{p}=\tau(E)/(2\pi\hbar)$。
 代入 $\op{T}=\op{V}+\op{V}\op{G}_0\op{T}$，用标量函数 $I(E)$ 记中间动量的积分，得到
 \begin{equation}
@@ -320,19 +338,22 @@ $a_s$可正可负，由低能散射决定；当$\abs{a_s}$很大，截面受$4\p
     I(E)=\intR\frac{\d p}{2\pi\hbar}
     \frac1{E-p^2/(2m)+\i0}.
 \end{equation}
-对于$E=\hbar^2k^2/(2m)>0$，留数或主值加$\delta$分解给出$I=-\i m/(\hbar^2k)$。
-
-展开这个积分时，使用
-$(x+\i0)^{-1}=\PV(1/x)-\i\pi\delta(x)$，
-其中 $\PV$ 表示 Cauchy 主值。
-正能量下主值部分为零，而
+对于 $E=\hbar^2 k^2/(2m)>0$，积分在实轴上有两个极点。采用出射边界条件时，可使用分布恒等式
+\begin{equation}
+    \frac{1}{x+\i0}=\PV\!\left(\frac1x\right)-\i\pi\delta(x),
+    \label{eq:outgoing-principal-value}
+\end{equation}
+其中 $\PV$ 表示 Cauchy 主值。正能量下主值部分的积分为零，而
 \begin{equation}
     \delta\Bigp{E-\frac{p^2}{2m}}
     =\frac{m}{\hbar k}
     \bigb{\delta(p-\hbar k)+\delta(p+\hbar k)}.
 \end{equation}
 两个动量根都要计入，故
-$I=-\i\pi(2m/\hbar k)/(2\pi\hbar)$。
+\[
+    I(E)=\frac{-\i\pi}{2\pi\hbar}\,\frac{2m}{\hbar k}
+        =-\frac{\i m}{\hbar^2k}.
+\]
 
 定义$\alpha=\pm$表示右行或左行方向，
 并以$E$和$\alpha$标记单位能量归一化的自由态。
@@ -350,10 +371,13 @@ $I=-\i\pi(2m/\hbar k)/(2\pi\hbar)$。
     r=-\frac{\i m\tau}{\hbar^2k}=\frac{-\i\eta}{1+\i\eta},\quad
     \eta=\frac{mg}{\hbar^2k}.
 \end{equation}
-于是$\mathcal T=1/(1+\eta^2)$，$\mathcal R=\eta^2/(1+\eta^2)$，二者和为1。
-在负能量$E=-\hbar^2\kappa_b^2/(2m)$时，$I=-m/(\hbar^2\kappa_b)$。
-
-这里$\kappa_b>0$是束缚态的逆长度尺度。
+在接触势两侧，出射粒子速率与入射速率相同。因此透射率与反射率为
+\begin{equation}
+    \mathcal T=\abs t^2=\frac{1}{1+\eta^2},\qquad
+    \mathcal R=\abs r^2=\frac{\eta^2}{1+\eta^2},\qquad
+    \mathcal T+\mathcal R=1.
+\end{equation}
+在负能量 $E=-\hbar^2\kappa_b^2/(2m)$ 时，$\kappa_b>0$ 是束缚态的逆长度尺度。
 此时积分没有实轴极点(pole)，直接得到
 \begin{equation}
     I=-\frac{2m}{2\pi\hbar}
@@ -377,9 +401,7 @@ $I=-\i\pi(2m/\hbar k)/(2\pi\hbar)$。
     一级振幅与 $\lambda$ 成正比，其模平方给出二阶截面。下式取 $\lambda=1$。
     要在二阶检验光学定理，就必须保留二阶振幅的虚部。
 
-    在自由能量基中，用
-    $(x+\i0)^{-1}=\PV(1/x)-\i\pi\delta(x)$，
-    得到前向二阶矩阵元的虚部
+    在自由能量基中，用式\eqref{eq:outgoing-principal-value}取出前向二阶矩阵元的虚部，
     \begin{equation}
         \Im\mel{\bm k}{\op{V}\op{G}_0^{(+)}(E_k)\op{V}}{\bm k}
         =-\pi\int\d^3k'\,

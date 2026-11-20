@@ -14,7 +14,7 @@ plot(radius, density, LineWidth=1.5)
 xlim([0 extent])
 xlabel('$r/a_Z$', Interpreter='latex')
 ylabel('$a_Z r^2 |R_{n\ell}(r)|^2$', Interpreter='latex')
-pad_legend(legend('$1s$', '$2s$', '$2p$', Interpreter='latex'));
+pad_legend(legend('$1\mathrm{s}$', '$2\mathrm{s}$', '$2\mathrm{p}$', Interpreter='latex'));
 grid on
 set(findall(gcf, Type='AxesToolbar'), Visible='off')
 exportgraphics(gca, '../hydrogen_radial.pdf', ContentType='vector', BackgroundColor='none')

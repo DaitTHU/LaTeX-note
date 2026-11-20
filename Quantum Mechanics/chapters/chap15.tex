@@ -1,4 +1,4 @@
-\chapter{从精细结构到相对论量子理论}
+\chapter{相对论量子力学与原子精细结构}
 \label{ch:relativity}
 
 \section{精细结构与Dirac理论}
@@ -7,7 +7,8 @@
 先改变外磁场、偏振和初态制备，分辨哪些分裂在零外场仍然存在，再问\chapref{ch:hydrogen}的氢原子模型少计了哪一部分能量。
 
 谱学中 $n$ 标记主能级，$\ell$ 标记轨道角动量，$j$ 标记轨道角动量与电子自旋合成的总角动量。
-例如谱学记号 $2P_{1/2}$ 指 $n=2,\ell=1,j=1/2$，字母 $S,P,D$ 依次代表 $\ell=0,1,2$。
+例如氢的 $2\mathrm{p}_{1/2}$ 指 $n=2,\ell=1,j=1/2$。若同时写出电子组态和光谱项，同一能级记作
+$2\mathrm{p}\,{}^2\mathrm{P}_{1/2}$，其中左上角的 $2$ 是自旋多重度。
 相对论修正能有多大？在\chapref{ch:hydrogen}的点核模型中再取核质量无穷大的极限，
 令 $m$ 为电子质量，$\alpha=e^2/(4\pi\varepsilon_0\hbar c)$。在低主量子数的氢样原子中，
 特征动量 $p\sim\hbar/a_Z=mcZ\alpha$。展开自由粒子的相对论能量，得到
@@ -21,7 +22,7 @@
 
 非相对论Coulomb谱解释主要能级，却遗漏依赖总角动量的细小分裂。
 自旋磁矩说明内部态还携带旋转自由度。
-Lamb--Retherford实验分辨出氢原子$2S_{1/2}$与$2P_{1/2}$的能量差\cite{lamb}；点核Dirac模型给出的两态能量相同。
+Lamb--Retherford实验分辨出氢原子$2\mathrm{s}_{1/2}$与$2\mathrm{p}_{1/2}$的能量差\cite{lamb}；点核Dirac模型给出的两态能量相同。
 精细结构(fine structure)要求引入相对论与自旋修正，Lamb 位移则进一步探测到辐射场的量子效应。
 
 自由相对论能量满足$E^2=c^2p^2+m^2c^4$。
@@ -29,11 +30,11 @@ Lamb--Retherford实验分辨出氢原子$2S_{1/2}$与$2P_{1/2}$的能量差\cite
 Dirac选择让态仍按时间的一阶方程演化，同时让空间方程也只含一阶导数。
 在位置表象里一阶空间导数对应一个动量因子，这就提示尝试在动量中线性的自伴Hamilton算符
 \begin{equation}
-    \op{H}_D=c\hatbm{\alpha}\cdot\hatbm{P}+\op{\beta} mc^2.
+    \op{H}_D=c\opbm{\alpha}\cdot\opbm{P}+\op{\beta} mc^2.
 \end{equation}
 
 取 $\op{\alpha}_x,\op{\alpha}_y,\op{\alpha}_z,\op{\beta}$ 为只作用在内部自由度上的矩阵，因而与空间动量 $\op{P}_i$ 对易。
-这里的粗体 $\hatbm{\alpha}$ 表示三个矩阵组成的向量，标量 $\alpha$ 仍表示精细结构常数。
+这里的粗体 $\opbm{\alpha}$ 表示三个矩阵组成的向量，标量 $\alpha$ 仍表示精细结构常数。
 将Hamilton算符平方，
 \begin{equation}
     \op{H}_D^2=
@@ -41,7 +42,7 @@ Dirac选择让态仍按时间的一阶方程演化，同时让空间方程也只
     +mc^3\sum_i\{\op{\alpha}_i,\op{\beta}\}\op{P}_i
     +\op{\beta}^2m^2c^4.
 \end{equation}
-要求此式对任意动量都等于$(c^2\hatbm{P}^2+m^2c^4)\one$，
+要求此式对任意动量都等于$(c^2\opbm{P}^2+m^2c^4)\one$，
 就分别固定二次项、一次项和常数项的系数。
 
 \begin{definition}{Hamilton形式的Dirac矩阵}{qm-dirac-matrices}
@@ -54,7 +55,7 @@ Dirac选择让态仍按时间的一阶方程演化，同时让空间方程也只
 为什么自旋的二分量空间还不够？
 若用二阶矩阵实现，三个相互反对易且平方为单位阵的$\op{\alpha}_i$
 可以取为三组Pauli矩阵。
-再写$\op{\beta}=b_0\one+\bm b\cdot\hatbm{\sigma}$，
+再写$\op{\beta}=b_0\one+\bm b\cdot\opbm{\sigma}$，
 要求$\{\op{\beta},\op{\sigma}_i\}=0$给出
 $2b_0\op{\sigma}_i+2b_i\one=0$。
 对三个$i$同时成立只可能有$b_0=b_x=b_y=b_z=0$，
@@ -67,25 +68,30 @@ $2b_0\op{\sigma}_i+2b_i\one=0$。
     \op{\alpha}_i=\begin{pmatrix}0&\op{\sigma}_i\\\op{\sigma}_i&0\end{pmatrix},\qquad
     \op{\beta}=\begin{pmatrix}\one_2&0\\0&-\one_2\end{pmatrix}.
 \end{equation}
-态仍写$\ket{\Psi}\in\HH_{\spatial}\otimes\CC^4$，遵循
-$\i\hbar\p_t\ket{\Psi}=\op{H}_D\ket{\Psi}$。
-平方的本征值给出$E_\pm=\pm\sqrt{m^2c^4+c^2p^2}$。
+四分量态 $\ket{\Psi}\in\HH_{\spatial}\otimes\CC^4$ 遵循 Dirac 方程。对动量大小为 $p$ 的自由粒子，$\op H_D$ 的平方给出两支能量的大小，
+\begin{equation}
+    \i\hbar\,\dv{\ket{\Psi}}{t}=\op H_D\ket{\Psi},\qquad
+    E_\pm(p)=\pm\sqrt{m^2c^4+c^2p^2}.
+\end{equation}
 在静止系中 $\op{H}_D=\op{\beta} mc^2$，上面两个分量属于 $+mc^2$，下面两个属于 $-mc^2$，
-每一支都容纳两种自旋投影。一旦有动量，$\hatbm{\alpha}\cdot\hatbm{P}$ 的非对角块就把上下分量联系起来。
+每一支都容纳两种自旋投影。一旦有动量，$\opbm{\alpha}\cdot\opbm{P}$ 的非对角块就把上下分量联系起来。
 负能分支标志着相对论单粒子描述的边界；涉及粒子与反粒子成对产生的过程需要量子场论。
 
 \section{Pauli近似}
 Dirac 方程用四个分量描述自由电子，弱磁场中的自旋进动则可以用二分量态描述。这两种描述如何衔接？对同一个低速电子，四分量方程应能给出两种自旋投影以及磁场引起的能量分裂。
 为此先对能量接近 $+mc^2$ 的一支求低速极限。
 
-按\chapref{ch:em}的最小耦合，位置表象中的机械动量算符为 $\hatbm{\pi}=\hatbm{P}-q\hatbm{A}$。
-经典外场 $\bm A(\bm x,t)$、$\phi(\bm x,t)$ 和 $\bm B(\bm x,t)$ 都是给定的函数。将位置换为 $\hatbm{X}$，它们在位置表象中就以乘法作用于波函数，相应的算符记为
+按\chapref{ch:em}的最小耦合，位置表象中的机械动量算符为 $\opbm{\pi}=\opbm{P}-q\opbm{A}$。
+经典外场 $\bm A(\bm x,t)$、$\phi(\bm x,t)$ 和 $\bm B(\bm x,t)$ 都是给定的函数。将位置换为 $\opbm{X}$，它们在位置表象中就以乘法作用于波函数，相应的算符记为
 \[
-    \hatbm{A}=\bm A(\hatbm{X},t),\qquad
-    \op{\phi}=\phi(\hatbm{X},t),\qquad
-    \hatbm{B}=\bm B(\hatbm{X},t).
+    \opbm{A}=\bm A(\opbm{X},t),\qquad
+    \op{\phi}=\phi(\opbm{X},t),\qquad
+    \opbm{B}=\bm B(\opbm{X},t).
 \]
-Dirac 算符因此写成 $\op{H}_D=c\hatbm{\alpha}\cdot\hatbm{\pi}+\op{\beta} mc^2+q\op{\phi}$。
+在这个外场中，Dirac 算符为
+\begin{equation}
+    \op{H}_D=c\opbm{\alpha}\cdot\opbm{\pi}+\op{\beta} mc^2+q\op{\phi}.
+\end{equation}
 
 用两个二分量右矢表示四分量态，
 \begin{equation}
@@ -101,29 +107,36 @@ $\HH_{\spatial}\otimes\CC^2$；
 去掉静能相位并将态分成两个二分量块$\ket{\varphi},\ket{\chi}$，得
 \begin{subequations}
     \begin{alignat}{1}
-        \i\hbar\p_t\ket{\varphi}&=q\op{\phi}\ket{\varphi}+c\hatbm{\sigma}\cdot\hatbm{\pi}\ket{\chi},\\
-        \i\hbar\p_t\ket{\chi}&=c\hatbm{\sigma}\cdot\hatbm{\pi}\ket{\varphi}+(q\op{\phi}-2mc^2)\ket{\chi}.
+        \i\hbar\,\dv{\ket{\varphi}}{t}&=q\op{\phi}\ket{\varphi}+c\opbm{\sigma}\cdot\opbm{\pi}\ket{\chi},\\
+        \i\hbar\,\dv{\ket{\chi}}{t}&=c\opbm{\sigma}\cdot\opbm{\pi}\ket{\varphi}+(q\op{\phi}-2mc^2)\ket{\chi}.
     \end{alignat}
 \end{subequations}
-将第二式改写为 $(2mc^2+\i\hbar\p_t-q\op{\phi})\ket{\chi}
-=c\hatbm{\sigma}\cdot\hatbm{\pi}\ket{\varphi}$。
+要消去下块，先在第二式中把含 $\ket\chi$ 的项移到同一侧，
+\[
+    \biggp{2mc^2+\i\hbar\,\dd t-q\op{\phi}}\ket{\chi}
+        =c\,\opbm{\sigma}\cdot\opbm{\pi}\ket{\varphi}.
+\]
 提出静能相位后，若剩余能量、场致能量和 $\hbar$ 乘以相关变化频率都远小于 $2mc^2$，
 且负能支混合很弱，左边的主项就是 $2mc^2\ket{\chi}$。
-于是 $\ket{\chi}\simeq(\hatbm{\sigma}\cdot\hatbm{\pi})\ket{\varphi}/(2mc)$，
+于是小分量可由大分量近似算出，
+\begin{equation}
+    \ket{\chi}\simeq\frac{\opbm{\sigma}\cdot\opbm{\pi}}{2mc}\ket{\varphi}.
+    \label{eq:dirac-small-component}
+\end{equation}
 在机械动量集中于 $\bm\pi_0$ 的波包中，小分量与大分量的范数之比约为 $\abs{\bm\pi_0}/(2mc)$。
 由Pauli代数与式\eqref{eq:kincomm}，
 \begin{equation}
-    (\hatbm{\sigma}\cdot\hatbm{\pi})^2=\hatbm{\pi}^2-q\hbar\hatbm{\sigma}\cdot\hatbm{B}.
+    (\opbm{\sigma}\cdot\opbm{\pi})^2=\opbm{\pi}^2-q\hbar\opbm{\sigma}\cdot\opbm{B}.
 \end{equation}
 
 逐分量计算为
 \begin{equation}
     \begin{alignedat}{1}
-        (\hatbm{\sigma}\cdot\hatbm{\pi})^2 &=\sum_{ij}(\delta_{ij}\one+\i\epsilon_{ijk}\op{\sigma}_k)\op{\pi}_i\op{\pi}_j\\
-        &=\hatbm{\pi}^2+\frac{\i}{2}\epsilon_{ijk}\op{\sigma}_k[\op{\pi}_i,\op{\pi}_j]\\
-        &=\hatbm{\pi}^2-\frac{q\hbar}{2}
+        (\opbm{\sigma}\cdot\opbm{\pi})^2 &=\sum_{ij}(\delta_{ij}\one+\i\epsilon_{ijk}\op{\sigma}_k)\op{\pi}_i\op{\pi}_j\\
+        &=\opbm{\pi}^2+\frac{\i}{2}\epsilon_{ijk}\op{\sigma}_k[\op{\pi}_i,\op{\pi}_j]\\
+        &=\opbm{\pi}^2-\frac{q\hbar}{2}
             \epsilon_{ijk}\epsilon_{ijl}\op{\sigma}_k\op{B}_l
-            =\hatbm{\pi}^2-q\hbar\hatbm{\sigma}\cdot\hatbm{B}.
+            =\opbm{\pi}^2-q\hbar\opbm{\sigma}\cdot\opbm{B}.
     \end{alignedat}
 \end{equation}
 第二行使用 $\epsilon_{ijk}$ 的反对称性。最后一行对重复的 $i,j$ 求和，用到
@@ -131,11 +144,11 @@ $\HH_{\spatial}\otimes\CC^2$；
     \sum_{i,j}\epsilon_{ijk}\epsilon_{ijl}=2\delta_{kl}.
 \]
 
-所以正能低速态满足
+将式\eqref{eq:dirac-small-component}代回上块方程，再用上述恒等式，便得到正能低速态的 Pauli 算符，
 \begin{equation}
-    \op{H}_P=\frac{\hatbm{\pi}^2}{2m}+q\op{\phi}-\frac{q\hbar}{2m}\hatbm{\sigma}\cdot\hatbm{B}.
+    \op{H}_P=\frac{\opbm{\pi}^2}{2m}+q\op{\phi}-\frac{q\hbar}{2m}\opbm{\sigma}\cdot\opbm{B}.
 \end{equation}
-比较$-\hatbm{\mu}\cdot\hatbm{B}$与$\hatbm{S}=\hbar\hatbm{\sigma}/2$，得到$g_s=2$。
+比较$-\opbm{\mu}\cdot\opbm{B}$与$\opbm{S}=\hbar\opbm{\sigma}/2$，得到$g_s=2$。
 此值是最低阶Dirac预言；反常磁矩(anomalous magnetic moment)来自更高阶辐射效应，不在这次消去小分量的计算中。
 
 \section{Foldy--Wouthuysen变换}
@@ -149,7 +162,7 @@ $\HH_{\spatial}\otimes\CC^2$；
     与 $\op{\beta}$ 反对易的算符称为奇算符(odd operator)，它将一个本征子空间映入另一个。
     在 $\op{\beta}$ 对角的表示中，前者只有对角块，后者只有非对角块。
 \end{definition}
-记静电势能算符为 $\op{V}=V(\hatbm{X})$，则 $\op{H}_D=\op{\beta} mc^2+\op{O}+\op{V}$，其中 $\op{O}=c\hatbm{\alpha}\cdot\hatbm{P}$。
+记静电势能算符为 $\op{V}=V(\opbm{X})$，则 $\op{H}_D=\op{\beta} mc^2+\op{O}+\op{V}$，其中 $\op{O}=c\opbm{\alpha}\cdot\opbm{P}$。
 势能 $\op{V}$ 满足 $[\op{\beta},\op{V}]=0$，动量项 $\op{O}$ 则因 Dirac 矩阵的反对易关系满足 $\{\op{\beta},\op{O}\}=0$。
 
 可先把这个变换看作两能级对角化的推广。对只沿 $z$ 运动的自由粒子，取 $\op{\sigma}_z$ 的 $+1$ 本征子空间并固定动量 $p_z$ 后，
@@ -177,13 +190,12 @@ $\op{S}=\op{\beta}\op{O}/(2mc^2)$，则$\op{U}_{\FW}=\e^{\op{S}}$幺正。
 \end{subequations}
 例如第一式中$\op{O}\op{\beta}=-\op{\beta}\op{O}$，
 所以$[\op{\beta}\op{O},\op{O}]=2\op{\beta}\op{O}^2$。
-展开中$\op{\beta} mc^2$与$\op{O}$的贡献合并后，
-二阶偶项的系数来自
-$[\op{S},\op{O}]$与
-$[\op{S},[\op{S},\op{\beta} mc^2]]/2$之和。
-后者因$[\op{S},\op{\beta} mc^2]=-\op{O}$，
-恰为前者的$-1/2$，总系数为$1-1/2=1/2$。
-四阶偶项同理来自三次作用于$\op{O}$和四次作用于$\op{\beta} mc^2$：
+用 $[\op{S},\op{\beta}mc^2]=-\op{O}$ 合并来自动量项和静能项的贡献，二阶偶项为
+\begin{equation}
+    [\op{S},\op{O}]+\frac12[\op{S},[\op{S},\op{\beta}mc^2]]
+        =\frac12[\op{S},\op{O}]=\frac{\op{\beta}\op{O}^2}{2mc^2}.
+\end{equation}
+四阶偶项同理来自三次作用于 $\op O$ 和四次作用于 $\op{\beta}mc^2$，
 \begin{equation}
     \frac1{3!}[\op{S},[\op{S},[\op{S},\op{O}]]]
     +\frac1{4!}[\op{S},[\op{S},[\op{S},
@@ -205,35 +217,35 @@ $[\op{S},[\op{S},\op{\beta} mc^2]]/2$之和。
     \label{eq:fw-even}
 \end{equation}
 对于静电势，
-$[\op{O},\op{V}]=-\i\hbar c\hatbm{\alpha}\cdot(\grad V)(\hatbm{X})$。
+$[\op{O},\op{V}]=-\i\hbar c\opbm{\alpha}\cdot(\grad V)(\opbm{X})$。
 再用$\op{\alpha}_i\op{\alpha}_j=\delta_{ij}\one+\i\epsilon_{ijk}\op{\Sigma}_k$，
-其中$\hatbm{\Sigma}=\diag(\hatbm{\sigma},\hatbm{\sigma})$，
+其中$\opbm{\Sigma}=\diag(\opbm{\sigma},\opbm{\sigma})$，
 得到
 \begin{equation}
     [\op{O},[\op{O},\op{V}]]
-    =-\hbar^2c^2(\laplacian V)(\hatbm{X})
-    -2\hbar c^2\hatbm{\Sigma}\cdot\bigl[(\grad V)(\hatbm{X})\times\hatbm{P}\bigr].
+    =-\hbar^2c^2(\laplacian V)(\opbm{X})
+    -2\hbar c^2\opbm{\Sigma}\cdot\bigb{(\grad V)(\opbm{X})\times\opbm{P}}.
 \end{equation}
 这里$\curl\grad V=0$使反对称二阶导数项消失。
-取正能上块，$\op{\beta}$ 限制为 $\one_2$，$\hatbm{\Sigma}$ 限制为 $\hatbm{\sigma}$。
-记径向坐标算符 $\op{R}=\abs{\hatbm{X}}$。对中心势，$V'(r)$ 是普通径向函数，代入 $\op{R}$ 即得到乘法算符。利用
+取正能上块，$\op{\beta}$ 限制为 $\one_2$，$\opbm{\Sigma}$ 限制为 $\opbm{\sigma}$。
+记径向坐标算符 $\op{R}=\abs{\opbm{X}}$。对中心势，$V'(r)$ 是普通径向函数，代入 $\op{R}$ 即得到乘法算符。利用
 \[
-    (\grad V)(\hatbm{X})\times\hatbm{P}
-        =\frac{V'(\op{R})}{\op{R}}\hatbm{L}
+    (\grad V)(\opbm{X})\times\opbm{P}
+        =\frac{V'(\op{R})}{\op{R}}\opbm{L}
 \]
-及$\hatbm{S}=\hbar\hatbm{\sigma}/2$，便得到下一节的有效Hamilton量。
+及$\opbm{S}=\hbar\opbm{\sigma}/2$，便得到下一节的有效Hamilton量。
 
 \section{氢原子的精细结构}
-氢的 $2P_{1/2}$ 与 $2P_{3/2}$ 具有相同的主量子数和轨道角动量，
+氢的 $2\mathrm{p}_{1/2}$ 与 $2\mathrm{p}_{3/2}$ 具有相同的主量子数和轨道角动量，
 在非相对论的 Coulomb 势中能量相同。加入相对论修正后，这两条能级还会重合吗？在各个态上分别求三个修正项的期望值，再将结果相加，便可预测光谱中哪些能级分裂。
 
 对固定点核和静电中心势 $V(r)$，有 $\op{V}=V(\op{R})$。保留到 $1/c^2$ 阶，正能支的有效 Hamilton 算符为
 \begin{equation}
     \begin{aligned}
-        \op{H}_\eff &= mc^2\one+\frac{\hatbm{P}^2}{2m}+\op{V}
-            -\frac{\hatbm{P}^4}{8m^3c^2}\\
-            &\quad +\frac{1}{2m^2c^2}\frac{V'(\op{R})}{\op{R}}\hatbm{L}\cdot\hatbm{S}
-            +\frac{\hbar^2}{8m^2c^2}(\laplacian V)(\hatbm{X}).
+        \op{H}_\eff &= mc^2\one+\frac{\opbm{P}^2}{2m}+\op{V}
+            -\frac{\opbm{P}^4}{8m^3c^2}\\
+            &\quad +\frac{1}{2m^2c^2}\frac{V'(\op{R})}{\op{R}}\opbm{L}\cdot\opbm{S}
+            +\frac{\hbar^2}{8m^2c^2}(\laplacian V)(\opbm{X}).
     \end{aligned}
     \label{eq:paulicorrections}
 \end{equation}
@@ -244,14 +256,18 @@ $[\op{O},\op{V}]=-\i\hbar c\hatbm{\alpha}\cdot(\grad V)(\hatbm{X})$。
 为什么 Darwin 项能读出原点的概率密度？对 $V(r)=-\kappa/r$，在 $r>0$ 有 $\laplacian V=0$，
 可是 $\grad V=(\kappa/r^2)\bm e_r$ 穿过任意以原点为心的球面的通量都是 $4\pi\kappa$。
 由散度定理，$\laplacian V$ 在含原点的小球内的体积分也总是 $4\pi\kappa$。
-这给出分布意义下的 $\laplacian V=4\pi\kappa\delta^{(3)}(\bm r)$，取期望时只留下 $4\pi\kappa\abs{\psi(\bm 0)}^2$。
+因此 $\laplacian V$ 在分布意义下集中于原点，它在态 $\psi$ 中的期望只取决于原点的概率密度，
+\begin{equation}
+    \laplacian V(\bm r)=4\pi\kappa\delta^{(3)}(\bm r),\qquad
+    \ave{(\laplacian V)(\opbm X)}=4\pi\kappa\abs{\psi(\bm 0)}^2 .
+\end{equation}
 本节采用固定点核，令$m=m_\electron$、$\kappa=Z\alpha\hbar c$；有限核质量的反冲修正另行加入。
 计算所需的Coulomb矩阵元为
 \begin{subequations}
     \begin{alignat}{1}
         \ave{\op{R}^{-2}}&=\frac1{a_Z^2n^3(\ell+1/2)},\\
         \ave{\op{R}^{-3}}&=\frac1{a_Z^3n^3\ell(\ell+1/2)(\ell+1)}\quad(\ell>0),\\
-        \ave{\delta^{(3)}(\hatbm{X})}&=\frac{\delta_{\ell0}}{\pi a_Z^3n^3},\qquad
+        \ave{\delta^{(3)}(\opbm{X})}&=\frac{\delta_{\ell0}}{\pi a_Z^3n^3},\qquad
             a_Z=\frac{\hbar^2}{m\kappa}.
     \end{alignat}
 \end{subequations}
@@ -259,14 +275,15 @@ $[\op{O},\op{V}]=-\i\hbar c\hatbm{\alpha}\cdot(\grad V)(\hatbm{X})$。
 它们与\chapref{ch:hydrogen}的能谱一起构成精细结构计算的零级数据。
 对于$\ell=0$，轨道角动量算符直接给出零，自旋轨道项随之消失，而Darwin项有有限贡献。此时 $\ave{\op{R}^{-3}}$ 发散。
 
-各期望值均在零级耦合态$\ket{n,\ell,s=\tfrac12;j,m_j}$中计算。
+记所选的零级态为 $\ket{\psi_0}=\ket{n,\ell,s;j,m_j}$，其中电子的 $s=1/2$。
+分号后的 $j,m_j$ 标记轨道与自旋耦合后的总角动量和投影。以下期望值均在这同一个态上计算。
 
 为核对合并步骤，令$C=mc^2(Z\alpha)^4/(2n^3)$。
-用$\hatbm{P}^2\ket{n}=2m(E_n+\kappa/\op{R})\ket{n}$计算$\ave{\hatbm{P}^4}=\|\hatbm{P}^2\ket{n}\|^2$，得
+用 $\opbm{P}^2\ket{\psi_0}=2m(E_n+\kappa/\op{R})\ket{\psi_0}$ 计算 $\ave{\opbm{P}^4}=\|\opbm{P}^2\ket{\psi_0}\|^2$，得
 
 \begin{equation}
     \begin{alignedat}{1}
-        \ave{\hatbm{P}^4} &=4m^2\mel{n}{(E_n+\kappa/\op{R})^2}{n}\\
+        \ave{\opbm{P}^4} &=4m^2\mel{\psi_0}{(E_n+\kappa/\op{R})^2}{\psi_0}\\
         &=4m^2\Bigb{
             E_n^2+2E_n\kappa\ave{\op{R}^{-1}}
             +\kappa^2\ave{\op{R}^{-2}}}.
@@ -274,10 +291,13 @@ $[\op{O},\op{V}]=-\i\hbar c\hatbm{\alpha}\cdot(\grad V)(\hatbm{X})$。
 \end{equation}
 由$\kappa\ave{\op{R}^{-1}}=-2E_n$，
 方括号变成$-3E_n^2+\kappa^2\ave{\op{R}^{-2}}$。
-自旋轨道项则使用
-$\ave{\hatbm{L}\cdot\hatbm{S}}
-=\hbar^2[j(j+1)-\ell(\ell+1)-3/4]/2$。
-逐项代入后，
+自旋轨道项可从合成角动量 $\opbm J=\opbm L+\opbm S$ 求出。对电子取 $s=1/2$，有
+\[
+    \ave{\opbm L\cdot\opbm S}
+    =\frac12\ave{\opbm J^2-\opbm L^2-\opbm S^2}
+    =\frac{\hbar^2}{2}\bigb{j(j+1)-\ell(\ell+1)-3/4}.
+\]
+将各个期望值代入有效 Hamilton 算符，得到三个能量修正，
 
 \begin{subequations}
     \begin{alignat}{1}
@@ -295,21 +315,21 @@ $\ave{\hatbm{L}\cdot\hatbm{S}}
 \end{equation}
 
 对 $\ell>0$，自旋轨道项的分子 $j(j+1)-\ell(\ell+1)-3/4$ 在两支上分别为 $\ell$ 和 $-(\ell+1)$。因此括号内与 $\ell$ 有关的两项满足
-\begin{align}
-    j=\ell+\tfrac12,\qquad
+\begin{alignat}{2}
+    j&=\ell+\tfrac12,&\qquad
     -\frac1{\ell+1/2}+\frac1{2(\ell+1/2)(\ell+1)}
         &=-\frac1{\ell+1}=-\frac1{j+1/2},\\
-    j=\ell-\tfrac12,\qquad
+    j&=\ell-\tfrac12,&
     -\frac1{\ell+1/2}-\frac1{2\ell(\ell+1/2)}
         &=-\frac1{\ell}=-\frac1{j+1/2}.
-\end{align}
+\end{alignat}
 $\ell=0$时动能项中的$-2$加上Darwin项的$+1$，
 也给出$-1/(j+1/2)=-1$。
 
-修正只依赖 $n,j$，因此两个 $2P$ 态按 $j$ 分裂，而 $2S_{1/2}$ 与 $2P_{1/2}$ 在此阶仍简并（图\ref{fig:hydrogen-fine-lamb}）。
+修正只依赖 $n,j$，因此两个 $2\mathrm{p}$ 态按 $j$ 分裂，而 $2\mathrm{s}_{1/2}$ 与 $2\mathrm{p}_{1/2}$ 在此阶仍简并（图\ref{fig:hydrogen-fine-lamb}）。
 \begin{figure}[htbp]
-    \centering\tikzfigure[width=.80\linewidth]{hydrogen-fine-lamb}
-    \caption{零外场氢原子 $n=2$ 能级，忽略超精细结构。中列按式\eqref{eq:fine}画出相对非相对论能级的下移；虚线连接各模型中相互对应的能级。右列以 $2P_{1/2}$ 为参照，放大两态间的 Lamb 间隔 $h\nu_{\mathrm{L}}=E(2S_{1/2})-E(2P_{1/2})$。}
+    \centering\tikzfigure{hydrogen-fine-lamb}
+    \caption{零外场氢原子 $n=2$ 能级，忽略超精细结构。中列按式\eqref{eq:fine}画出相对非相对论能级的下移；虚线连接各模型中相互对应的能级。右列以 $2\mathrm{p}_{1/2}$ 为参照，放大两态间的 Lamb 间隔 $h\nu_{\mathrm{L}}=E(2\mathrm{s}_{1/2})-E(2\mathrm{p}_{1/2})$。}
     \label{fig:hydrogen-fine-lamb}
 \end{figure}
 $Z\alpha\ll1$控制展开；高$Z$时需完整Dirac问题、核大小及更高阶效应。
@@ -319,10 +339,10 @@ $Z\alpha\ll1$控制展开；高$Z$时需完整Dirac问题、核大小及更高�
 \section{超精细结构与Lamb位移}
 更高分辨率的氢谱显示，核磁矩的耦合使同一电子能级分裂。扣除这层分裂后，电子能级之间仍有 Dirac 理论未能解释的频移。
 
-核自旋算符 $\hatbm I$ 和电子角动量算符 $\hatbm J$ 耦合成总角动量 $\hatbm F=\hatbm I+\hatbm J$。沿用上节的 $j$ 表示电子角动量量子数，核自旋量子数记为 $I$，故 $F=\abs{I-j},\ldots,I+j$。在各向同性的超精细相互作用(hyperfine interaction)模型中，实常量 $A$ 具有能量量纲。将 $\hatbm F^2$ 展开，可将相互作用写成
+核自旋算符 $\opbm I$ 和电子角动量算符 $\opbm J$ 耦合成总角动量 $\opbm F=\opbm I+\opbm J$。沿用上节的 $j$ 表示电子角动量量子数，核自旋量子数记为 $I$，故 $F=\abs{I-j},\ldots,I+j$。在各向同性的超精细相互作用(hyperfine interaction)模型中，实常量 $A$ 具有能量量纲。将 $\opbm F^2$ 展开，可将相互作用写成
 \begin{equation}
-    \op H_{\hyperfine}=\frac{A}{\hbar^2}\hatbm I\cdot\hatbm J
-    =\frac{A}{2\hbar^2}\bigp{\hatbm F^2-\hatbm I^2-\hatbm J^2}.
+    \op H_{\hyperfine}=\frac{A}{\hbar^2}\opbm I\cdot\opbm J
+    =\frac{A}{2\hbar^2}\bigp{\opbm F^2-\opbm I^2-\opbm J^2}.
 \end{equation}
 在共同本征态 $\ket{I,j;F,m_F}$ 中，三个平方算符分别取本征值 $\hbar^2 F(F+1)$、$\hbar^2 I(I+1)$ 和 $\hbar^2 j(j+1)$，因此能移为
 \begin{equation}
@@ -335,14 +355,14 @@ $Z\alpha\ll1$控制展开；高$Z$时需完整Dirac问题、核大小及更高�
 \subsection{Lamb--Retherford实验}
 \label{ss:lamb-experiment}
 
-Lamb--Retherford 实验制备亚稳氢原子 $2S_{1/2}$ 束。电偶极选择定则禁止 $2S\to1S$ 单光子跃迁，而 $2P\to1S$ 可快速辐射。微波一旦将原子从 $2S$ 转入 $2P$，它就会在到达探测器前衰变，存活计数随之下降（图\ref{fig:lamb-readout}）。
+Lamb--Retherford 实验制备亚稳氢原子 $2\mathrm{s}_{1/2}$ 束。电偶极选择定则禁止 $2\mathrm{s}\to1\mathrm{s}$ 单光子跃迁，而 $2\mathrm{p}\to1\mathrm{s}$ 可快速辐射。微波一旦将原子从 $2\mathrm{s}$ 转入 $2\mathrm{p}$，它就会在到达探测器前衰变，存活计数随之下降（图\ref{fig:lamb-readout}）。
 \begin{figure}[htbp]
-    \centering\tikzfigure[width=.66\linewidth]{lamb-readout}
-    \caption{沿水平直箭头从制备端读到探测器，$N_{2S}$ 为存活的亚稳原子数。两条波浪线分别标记入射微波 $\nu_{\mathrm{mw}}$ 和 $2P\to1S$ 衰变发出的紫外光子 $\gamma_{\mathrm{UV}}$。}
+    \centering\tikzfigure{lamb-readout}
+    \caption{沿水平直箭头从制备端读到探测器，$N_{2\mathrm{s}}$ 为存活的亚稳原子数。两条波浪线分别标记入射微波 $\nu_{\mathrm{mw}}$ 和 $2\mathrm{p}\to1\mathrm{s}$ 衰变发出的紫外光子 $\gamma_{\mathrm{UV}}$。}
     \label{fig:lamb-readout}
 \end{figure}
 
-在受控磁场中扫描微波频率，存活计数的谷值标出共振。原实验据此推得零场下 $2S_{1/2}$ 高于 $2P_{1/2}$，频差约 $\qty{1}{GHz}$\cite{lamb}，即图\ref{fig:hydrogen-fine-lamb}最右列的间隔。
+在受控磁场中扫描微波频率，存活计数的谷值标出共振。原实验据此推得零场下 $2\mathrm{s}_{1/2}$ 高于 $2\mathrm{p}_{1/2}$，频差约 $\qty{1}{GHz}$\cite{lamb}，即图\ref{fig:hydrogen-fine-lamb}最右列的间隔。
 量子电动力学(quantum electrodynamics, QED)通过场量子化与重整化(renormalization)计算电子自能和真空极化对这一间隔的贡献。与精密谱线比较时，还须计入有限核大小和反冲。
 
 \reading{精细结构的推导见 MIT 8.06 讲义 2\cite{mitfine}，微波测量见原论文\cite{lamb}。

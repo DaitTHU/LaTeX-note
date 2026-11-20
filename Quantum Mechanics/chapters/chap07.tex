@@ -15,7 +15,7 @@
 \end{equation}
 
 上标$(r)$表示$\lambda^r$的系数；
-例如$E_n^{(2)}=\tfrac12(\p_\lambda^2E_n)_{\lambda=0}$。
+例如 $E_n^{(2)}=E_n''(0)/2$，其中撇表示对扰动强度 $\lambda$ 求导。
 在未扰动本征基中，扰动算符 $\op{V}$ 的矩阵元为 $V_{mn}=\mel{m}{\op{V}}{n}$。每个 $V_{mn}$ 都是复数，对角元为实数。
 将能量和态展开同时代入本征方程，
 按$\lambda^0,\lambda^1,\lambda^2$收集系数：
@@ -28,7 +28,7 @@
     \end{alignat}
 \end{subequations}
 
-中间归一化(intermediate normalization)$\brkt{n}{n(\lambda)}=1$固定了原态方向的系数。截断后的态还需按其范数归一化。
+中间归一化(intermediate normalization)$\braket{n}{n(\lambda)}=1$固定了原态方向的系数。截断后的态还需按其范数归一化。
 一级方程
 \begin{equation}
     (\op{H}_0-E_n^{(0)}\one)\ket{n^{(1)}}=(E_n^{(1)}\one-\op{V})\ket{n}
@@ -39,26 +39,25 @@
     \ket{n^{(1)}}=\sum_{m\ne n}\ket{m}\frac{V_{mn}}{E_n^{(0)}-E_m^{(0)}}.
 \end{equation}
 
-中间归一化使$\brkt{n}{n^{(r)}}=0$（$r\geq1$）。
+中间归一化使$\braket{n}{n^{(r)}}=0$（$r\geq1$）。
 在式\eqref{eq:pert-orders}的二阶方程左乘$\bra{n}$，
-两项$E_n^{(0)}\brkt{n}{n^{(2)}}$抵消，
-而$E_n^{(1)}\brkt{n}{n^{(1)}}=0$，留下
-$E_n^{(2)}=\mel{n}{\op{V}}{n^{(1)}}$。
-代入一阶态修正，得到
+两项$E_n^{(0)}\braket{n}{n^{(2)}}$抵消，
+且 $E_n^{(1)}\braket{n}{n^{(1)}}=0$。剩余的矩阵元可用一阶态修正展开，得到
 \begin{equation}
-    E_n^{(2)}=\sum_{m\ne n}\frac{\abs{V_{mn}}^2}{E_n^{(0)}-E_m^{(0)}}.
+    E_n^{(2)}=\mel{n}{\op V}{n^{(1)}}
+        =\sum_{m\ne n}\frac{\abs{V_{mn}}^2}{E_n^{(0)}-E_m^{(0)}}.
     \label{eq:pertsecond}
 \end{equation}
 连续谱应加相应积分。对孤立的非简并基态，每个分母都为负，所以二阶修正非正。
 一阶混合还会改变态的归一化。记 $s$ 为一阶修正态的范数平方，由正交性得到
 \[
-    s=\brkt{n^{(1)}}{n^{(1)}}
+    s=\braket{n^{(1)}}{n^{(1)}}
       =\sum_{m\ne n}\biggabs{\frac{V_{mn}}{E_n^{(0)}-E_m^{(0)}}}^2 .
 \]
 中间归一化的态满足
 \begin{equation}
-    \brkt{n(\lambda)}{n(\lambda)}
-    =1+\lambda^2\brkt{n^{(1)}}{n^{(1)}}+\bigo(\lambda^3).
+    \braket{n(\lambda)}{n(\lambda)}
+    =1+\lambda^2\braket{n^{(1)}}{n^{(1)}}+\bigo(\lambda^3).
 \end{equation}
 取范数平方的负二分之一次幂，归一化因子便是 $1-\lambda^2s/2+\bigo(\lambda^3)$。
 这里写到$\lambda^2$的原态方向系数；
@@ -96,32 +95,36 @@ $E_n^{(2)}=\mel{n}{\op{V}}{n^{(1)}}$。
 上一节的态修正含有两个能级的能量差作分母。若未扰动能量相等，即使把外场调得任意小，这个分母仍为零。
 原本重合的谱峰在弱场下如何分裂，可由各条分支在零场处的斜率刻画。求这些斜率首先需要找出外场在简并子空间中选定的线性组合。
 
-令$\op{P}$投影到$\op{H}_0$本征值$E_0$的简并子空间(degenerate subspace)，$\op{Q}=\one-\op{P}$。
-设 $\ket{\phi}$ 是该空间内待选的零级态。以 $\op{P}$ 左乘一级方程，
-$\op{P}(\op{H}_0-E_0\one)=0$ 消去未知的一阶态，留下 $\op{P}\op{V}\op{P}\ket{\phi}=E^{(1)}\ket{\phi}$。
-这解释了为何应先在简并子空间内对角化 $\op{P}\op{V}\op{P}$：
-所选的零级态和一级能移正是这个较小矩阵的本征矢和本征值。
+设 $E_0$ 是 $\op H_0$ 的简并本征值。记 $\op\Pi$ 为投影到相应简并子空间(degenerate subspace)的正交投影算符，$\op\Pi_\perp=\one-\op\Pi$ 则投影到它的正交补。
+设 $\ket{\phi}$ 是简并子空间内待选的零级态。以 $\op\Pi$ 左乘一级方程时，$\op\Pi(\op H_0-E_0\one)=0$ 消去了未知的一阶态，留下
+\begin{equation}
+    \op\Pi\op V\op\Pi\ket{\phi}=E^{(1)}\ket{\phi}.
+\end{equation}
+因此先在简并子空间内对角化 $\op\Pi\op V\op\Pi$，这个较小矩阵的本征矢给出零级态，本征值给出一级能移。
 
-令$\ket{\psi_P}=\op{P}\ket{\psi}$、$\ket{\psi_Q}=\op{Q}\ket{\psi}$。
-由于$\op{P}+\op{Q}=\one$、$\op{P}\op{Q}=0$，精确本征方程分成
+将精确态 $\ket{\psi}$ 分解为简并子空间内的分量 $\ket{\psi_\parallel}=\op\Pi\ket{\psi}$ 和正交补内的分量 $\ket{\psi_\perp}=\op\Pi_\perp\ket{\psi}$。
+由于$\op\Pi+\op\Pi_\perp=\one$、$\op\Pi\op\Pi_\perp=0$，精确本征方程分成
 \begin{subequations}
     \begin{alignat}{1}
-        \op{P}\op{H}\op{P}\ket{\psi_P}+\op{P}\op{H}\op{Q}\ket{\psi_Q}&=E\ket{\psi_P},\\
-        \op{Q}\op{H}\op{P}\ket{\psi_P}+\op{Q}\op{H}\op{Q}\ket{\psi_Q}&=E\ket{\psi_Q}.
+        \op\Pi\op{H}\op\Pi\ket{\psi_\parallel}+\op\Pi\op{H}\op\Pi_\perp\ket{\psi_\perp}&=E\ket{\psi_\parallel},\\
+        \op\Pi_\perp\op{H}\op\Pi\ket{\psi_\parallel}+\op\Pi_\perp\op{H}\op\Pi_\perp\ket{\psi_\perp}&=E\ket{\psi_\perp}.
     \end{alignat}
 \end{subequations}
-在 $\op{Q}$ 的像空间上，单位算符记为 $\one_Q$。若 $E\one_Q-\op{Q}\op{H}\op{Q}$ 在该空间上可逆，第二式给出
+在正交补上，单位算符记为 $\one_\perp$。若 $E\one_\perp-\op\Pi_\perp\op{H}\op\Pi_\perp$ 在该空间上可逆，第二式给出
 \begin{equation}
-    \ket{\psi_Q}=(E\one_Q-\op{Q}\op{H}\op{Q})^{-1}\op{Q}\op{H}\op{P}\ket{\psi_P}.
+    \ket{\psi_\perp}=(E\one_\perp-\op\Pi_\perp\op{H}\op\Pi_\perp)^{-1}\op\Pi_\perp\op{H}\op\Pi\ket{\psi_\parallel}.
 \end{equation}
 代回第一式，得到作用在保留子空间中的有效 Hamilton 算符
 \begin{equation}
-    \op{H}_\eff(E)=\op{P}\op{H}\op{P}+\op{P}\op{H}\op{Q}(E\one_Q-\op{Q}\op{H}\op{Q})^{-1}\op{Q}\op{H}\op{P}.
+    \op{H}_\eff(E)=\op\Pi\op{H}\op\Pi+\op\Pi\op{H}\op\Pi_\perp(E\one_\perp-\op\Pi_\perp\op{H}\op\Pi_\perp)^{-1}\op\Pi_\perp\op{H}\op\Pi.
 \end{equation}
 对隔离简并簇展开到二阶，
 \begin{equation}
-    \op{H}_\eff=E_0\op{P}+\lambda \op{P}\op{V}\op{P}
-    +\lambda^2\op{P}\op{V}\op{Q}(E_0\one_Q-\op{Q}\op{H}_0\op{Q})^{-1}\op{Q}\op{V}\op{P}+\bigo(\lambda^3).
+    \begin{aligned}
+        \op{H}_\eff &= E_0\op\Pi+\lambda \op\Pi\op{V}\op\Pi\\
+        &\quad +\lambda^2\op\Pi\op{V}\op\Pi_\perp(E_0\one_\perp-\op\Pi_\perp\op{H}_0\op\Pi_\perp)^{-1}
+        \op\Pi_\perp\op{V}\op\Pi+\bigo(\lambda^3).
+    \end{aligned}
 \end{equation}
 一级仍简并时还须对角化二级矩阵。
 当两态近简并时，保留整个两态子空间，在其基底中直接对角化
@@ -149,7 +152,7 @@ $\op{P}(\op{H}_0-E_0\one)=0$ 消去未知的一阶态，留下 $\op{P}\op{V}\op{
         \end{alignedat}
     \end{equation}
     同时本征方程的第二行给出
-    $\brkt{b}{-}/\brkt{a}{-}\simeq-g\conj/\Delta$。
+    $\braket{b}{-}/\braket{a}{-}\simeq-g\conj/\Delta$。
     能移是二阶，态混合已经是一阶。
 \end{example}
 
@@ -172,7 +175,7 @@ $\op{P}(\op{H}_0-E_0\one)=0$ 消去未知的一阶态，留下 $\op{P}\op{V}\op{
 二阶能量中的$1/2$可以通过诱导偶极核对。
 由Hellmann--Feynman关系，
 \begin{equation}
-    \ave{\op{d}_z}_n=-\frac{\p E_n}{\p\mathcal E}
+    \ave{\op{d}_z}_n=-\pv{E_n}{\mathcal E}
         =\alpha_n\mathcal E+\bigo(\mathcal E^2).
 \end{equation}
 逐渐开启电场时，偶极本身从零增长到 $\alpha_n\mathcal E$。
@@ -220,30 +223,31 @@ Stark 能移的微扰展开使用已知能级和偶极矩阵元。若只知道�
 例如，可选取一族宽度连续可调的归一化波函数，计算能量期望随宽度的变化，求出其中的最小值。
 由于所有态的能量期望均受能谱下界约束，这个最小值给出了基态能量的上界。
 
+将归一化试探态 $\ket\phi$ 的能量测量分布记为 $\mu_\phi$，即 $\mu_\phi(B)$ 是能量读数落入区间 $B$ 的概率。
+若能谱以下界 $E_0$ 为起点，每次读数高出 $E_0$ 的部分都非负。使这个差值有有限均值的向量组成能量二次型域(quadratic form domain)。
 \begin{theorem}[unbreakable]{变分上界}{qm-variational}
-    设自伴Hamilton算符$\op{H}$的谱有下界$E_0$。
-    对能量二次型域(quadratic form domain)中的任意归一化态$\ket{\phi}$，
+    设自伴 Hamilton 算符 $\op H$ 的能谱下确界为 $E_0$。对其能量二次型域内的任意归一化态，
     \begin{equation}
-        E_{\trial}=\mel{\phi}{\op{H}}{\phi}\geq E_0.
+        E_{\trial}=\int E\,\d\mu_\phi(E)\geq E_0 .
     \end{equation}
     当$E_0$为孤立基态能量时，等号要求试探态(trial state)完全位于基态子空间。
 \end{theorem}
 \begin{proof}
-    将$\ket{\phi}$的能量概率分布记为$\d p(E)$。
-    谱支撑上$E-E_0\geq0$，所以
+    能量分布的总概率为 $1$，且只在 $E\ge E_0$ 处有权重，所以
     \begin{equation}
         E_{\trial}-E_0
-        =\int(E-E_0)\d p(E)\geq0.
+        =\int(E-E_0)\d\mu_\phi(E)\geq0.
     \end{equation}
     等号要求在$E>E_0$的部分没有概率权重。
 \end{proof}
+若试探态还属于 $\Dom(\op H)$，就可以先求出向量 $\op H\ket\phi$，再将同一个均值写为 $\mel{\phi}{\op H}{\phi}$。
 
 变分法(variational method)给出所选试探族中的最低能量，它是基态能量的上界。上界的精度取决于试探族逼近基态的能力。
 激发态的上界则由极小极大原理(min--max principle)给出；
 直接变分时，应将试探态限制在与真实低能态正交的子空间。
 
 以$\op{H}=\op{P}^2/(2m)+m\omega^2\op{X}^2/2+\lambda \op{X}^4$、$\lambda>0$为例。
-取频率$\Omega>0$的辅助谐振子真空$\ket{0;\Omega}$作为试探态，升降代数给出
+取频率为 $\Omega>0$ 的辅助谐振子真空 $\ket{0(\Omega)}$ 作为试探态，升降代数给出
 \begin{equation}
     E_{\trial}(\Omega)=\frac{\hbar\Omega}{4}
     +\frac{\hbar\omega^2}{4\Omega}
@@ -281,17 +285,16 @@ $3\lambda\hbar^2/(4m^2\omega^2)$。
     设 $\op{H}(\eta)$ 是依赖实参数 $\eta$ 的自伴 Hamilton 算符，
     $\ket{n(\eta)}$ 为选定本征值分支上可微的归一化本征态，且本征方程的各项可对 $\eta$ 求导。则
     \begin{equation}
-        \frac{\p E_n}{\p\eta}=\mel{n}{\p \op{H}/\p\eta}{n}.
+        \dv{E_n}{\eta}=\mel{n}{\dv{\op H}{\eta}}{n}.
     \end{equation}
 \end{theorem}
 \begin{proof}
-对 $\op{H}\ket{n}=E_n\ket{n}$ 求导，再左乘 $\bra{n}$，
+用撇表示对 $\eta$ 求导，特别地 $\ket{n'}=\d\ket{n}/\nd\eta$。对 $\op{H}\ket{n}=E_n\ket{n}$ 求导，再左乘 $\bra{n}$，
 \begin{alignat*}{1}
-    (\p_\eta \op{H})\ket{n}+\op{H}\ket{\p_\eta n} &=(\p_\eta E_n)\ket{n}+E_n\ket{\p_\eta n},\\
-    \mel{n}{\p_\eta \op{H}}{n}
-    +E_n\brkt{n}{\p_\eta n} &=\p_\eta E_n+E_n\brkt{n}{\p_\eta n}.
+    \op H'\ket n+\op{H}\ket{n'} &=E_n'\ket n+E_n\ket{n'},\\
+    \mel{n}{\op H'}{n}+E_n\braket{n}{n'} &=E_n'+E_n\braket{n}{n'} .
 \end{alignat*}
-第二行利用$\op{H}$自伴、$E_n$为实数及$\brkt{n}{n}=1$。
+第二行利用$\op{H}$自伴、$E_n$为实数及$\braket{n}{n}=1$。
 态随参数的变化项因而相消。
 \end{proof}
 
@@ -300,31 +303,34 @@ $3\lambda\hbar^2/(4m^2\omega^2)$。
 
 若要检查候选态，将本征方程的两侧作差。
 \begin{definition}{本征方程的残差}{qm-eigen-residual}
-    对 $\op{H}$ 定义域内的归一化试探态 $\ket{\phi}$ 和候选能量 $E_{\trial}$，
-    残差向量(residual)为 $(\op{H}-E_{\trial}\one)\ket{\phi}$，其范数记为 $r$，具有能量量纲。
+    将 $\op H$ 定义域内的归一化试探态 $\ket{\phi}$ 和候选能量 $E_{\trial}$ 代入本征方程，两侧之差称为残差向量(residual)。其范数
+    \begin{equation}
+        r=\bignorm{(\op H-E_{\trial}\one)\ket{\phi}}
+    \end{equation}
+    具有能量量纲。
 \end{definition}
-由能量分布 $\d p(E)$ 计算，残差平方是能量偏差平方的平均值，
+沿用试探态的能量分布 $\mu_\phi$，残差平方是能量偏差平方的平均值，
 \[
-    r^2=\int (E-E_{\trial})^2\d p(E).
+    r^2=\int (E-E_{\trial})^2\d\mu_\phi(E).
 \]
 各谱值离 $E_{\trial}$ 的距离都至少等于它到谱的距离，因此这个最短距离不超过 $r$。
 要从这个邻域内的谱识别出目标能级，还需要相邻能隙的信息。
 若基态非简并、与其他谱的间隔至少为 $\Delta>0$，且试探态的能量期望为$E_0+\epsilon$，则
-$1-\abs{\brkt{0}{\phi}}^2\leq\epsilon/\Delta$。
+$1-\abs{\braket{0}{\phi}}^2\leq\epsilon/\Delta$。
 
 因为在基态正交补上$E-E_0\geq\Delta$，
 \begin{equation}
     \epsilon
-    =\int(E-E_0)\d p(E)
-    \geq\Delta\bigp{1-\abs{\brkt{0}{\phi}}^2}.
+    =\int(E-E_0)\d\mu_\phi(E)
+    \geq\Delta\bigp{1-\abs{\braket{0}{\phi}}^2}.
 \end{equation}
 这把能量上界与态的重叠联系起来；
 $\epsilon/\Delta$越小，试探态落在激发态子空间的概率越小。
 
 \begin{remark}[截断基底中的残差]
-    设 $\op{P}$ 投影到计算所保留的基矢张成的子空间，试探态满足 $\op{P}\ket{\phi}=\ket{\phi}$。
-    即使已把 $\op{P}\op{H}\op{P}$ 精确对角化，$\op{H}\ket{\phi}$ 仍可能有落在截断空间外的分量
-    $(\one-\op{P})\op{H}\ket{\phi}$。核验能级时，应把这部分也计入残差。
+    设 $\op\Pi$ 投影到计算所保留的基矢张成的子空间，试探态满足 $\op\Pi\ket{\phi}=\ket{\phi}$。
+    即使已把 $\op\Pi\op{H}\op\Pi$ 精确对角化，$\op{H}\ket{\phi}$ 仍可能有落在截断空间外的分量
+    $(\one-\op\Pi)\op{H}\ket{\phi}$。核验能级时，应把这部分也计入残差。
 \end{remark}
 
 \checkpoint{一阶能移为零时，微扰还会怎样改变态和能量？}{

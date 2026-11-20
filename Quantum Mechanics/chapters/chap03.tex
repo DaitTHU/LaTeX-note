@@ -11,53 +11,97 @@
 
 两个相干分量分别如何演化，决定了它们叠加后如何演化；这正是上述线性的物理内容。
 对任意归一化初态，演化后所有出口的总概率仍为 1，故
-$\brkt{\psi}{\psi}=\mel{\psi}{\op{U}\adjoint \op{U}}{\psi}$ 对所有初态成立，从而 $\op{U}\adjoint \op{U}=\one$。
+$\braket{\psi}{\psi}=\mel{\psi}{\op{U}\adjoint \op{U}}{\psi}$ 对所有初态成立，从而 $\op{U}\adjoint \op{U}=\one$。
 再要求演化可逆，就有 $\op{U}^{-1}=\op{U}\adjoint$；这样的算符称为幺正(unitary)，也保持任意两态的内积。
 
-\begin{definition}{传播子与时间演化的生成元}{qm-propagator}
-    $\op{U}(t,t_0)$称为从初始时刻$t_0$到$t$的传播子(propagator)，
-    满足$\op{U}(t_0,t_0)=\one$和
-    $\op{U}(t_2,t_0)=\op{U}(t_2,t_1)\op{U}(t_1,t_0)$。
-    在有限维且对时间可微时，定义
+\begin{definition}{传播子}{qm-propagator}
+    将初态 $\ket{\psi(t_0)}$ 变为末态 $\ket{\psi(t)}$ 的幺正算符 $\op{U}(t,t_0)$ 称为传播子(propagator)。零时长的传播和相邻两段时间的传播分别满足
     \begin{equation}
-        \op{H}(t)=\i\hbar\,\pv{\op{U}(t,t_0)}t\,\op{U}\adjoint(t,t_0).
+        \op U(t_0,t_0)=\one,\qquad
+        \op U(t_2,t_0)=\op U(t_2,t_1)\op U(t_1,t_0).
+        \label{eq:propagator-composition}
     \end{equation}
-    $\op{H}(t)$具有能量量纲，称为Hamilton算符。
 \end{definition}
 
-由$\op{U}\op{U}\adjoint=\one$求导，
-$(\p_t\op{U})\op{U}\adjoint=-\op{U}(\p_t\op{U}\adjoint)$，
-所以$\op{H}\adjoint=\op{H}$。定义式右乘$\op{U}$得到
-$\i\hbar\p_t\op{U}=\op{H}\op{U}$，再作用于初态便得到态的运动方程。
-等价地，短时间传播子为
+\subsection{短时演化与 Schrödinger 方程}
+先考虑只有两个自旋分量的原子，并假设传播矩阵的元素对终止时刻可微。
+在时刻 $t$ 多等待 $\tau$，把短时传播矩阵在 $\tau=0$ 展开为
+\[
+    \op{U}(t+\tau,t)=\one+\tau\op{K}(t)+o(\tau).
+\]
+这里 $o(\tau)$ 是除以 $\tau$ 后趋于零的余项。$\op{K}(t)$ 给出每单位时间两个分量怎样变化。
+由幺正性，$\op{U}(t+\tau,t)\adjoint\op{U}(t+\tau,t)=\one$ 的一次项必须为零，
+即 $\op{K}\adjoint+\op{K}=0$。因此 $\i\op{K}$ 是 Hermite 矩阵，再乘 $\hbar$ 就有能量量纲。
+量子动力学把 $\op{H}(t)=\i\hbar\op{K}(t)$ 认作系统的能量可观测量，称为 Hamilton 算符。
+这个物理认定可以用实验检验。例如在静磁场中，由能量测量得到的能级间隔应等于自旋进动角频率的绝对值乘以 $\hbar$。
+
+把短时矩阵作用在 $\ket{\psi(t)}$ 上，减去原态再除以 $\tau$，取 $\tau\to0$，得到
 \begin{equation}
-    \op{U}(t+\d t,t)=\one-\frac{\i}{\hbar}\op{H}(t)\d t+o(\d t).
+    \i\hbar\,\dv{\ket{\psi(t)}}{t}=\op{H}(t)\ket{\psi(t)} .
+    \label{eq:schrket}
 \end{equation}
-其中$o(\d t)$表示除以$\d t$后趋于零的余项。
-$\op{H}$控制态在每一个短时间间隔内的变化。
+这就是 Schrödinger 方程。将同一短时展开代入复合律\eqref{eq:propagator-composition}，保持初始时刻 $t_0$ 不动，得到传播子的方程
+\begin{equation}
+    \i\hbar\,\pv{\op{U}(t,t_0)}{t}=\op{H}(t)\op{U}(t,t_0).
+\end{equation}
+具体的 $\op H$ 仍须根据系统和外场来建立。
 
-若系统的演化规律不随起始时刻改变，传播子只依赖时间差，依次等待两段时间等价于等待它们之和。
-从有限维推广到一般 Hilbert 空间时，本书引用下述定理。
+回到静磁场中的自旋。此时 $\op H$ 恒定，可取一组能量本征基，满足 $\op{H}\ket{n}=E_n\ket{n}$。
+把态在这组基下展开，系数记为 $c_n(t)=\braket{n}{\psi(t)}$。从左边对式\eqref{eq:schrket}取 $\bra{m}$ 分量，
+正交性使两边各只剩第 $m$ 项，于是 $\i\hbar\dot c_m=E_mc_m$。
+解这个一阶方程、令 $c_n=c_n(0)$，得到
+\begin{equation}
+    \ket{\psi(t)}=\sum_n c_n\e^{-\i E_nt/\hbar}\ket{n}.
+\end{equation}
+一个能量本征态只积累整体相位，任意不显含时间的可观测量分布不变。
+两个不同能量的分量之间则以角频率 $\abs{E_m-E_n}/\hbar$ 积累相对相位。
+沿能量基测量，两分量的概率 $\abs{c_n}^2$ 仍然不变。若某个分析器的同一出口同时接收这两个分量，
+对应的概率可以随相对相位振荡，这与两束频率不同的光叠加产生拍频的计算相同。
+仅积累整体相位的态称为定态(stationary state)。简并能级内的任意固定叠加也都是定态。
+
+\subsection{时间平移群与 Stone 定理}
+在一般的态空间中，若演化规律与起始时刻无关，记 $\op{U}(t,t_0)=\op U(t-t_0)$。群律
+$\op U(t+s)=\op U(t)\op U(s)$ 表示先等 $s$ 再等 $t$ 与一次等完效果相同。
+那么只要求短时间内每个态的变化都很小，是否已足以谈论瞬时变化率？Stone 定理给出它存在的确切范围\cite{stone}。
 \begin{theorem}{Stone定理}{qm-stone}
-    设 $\op{U}(\tau)$ 是强连续(strongly continuous)的单参数幺正群，即时间 $\tau$ 取遍实数，
-    $\op{U}(0)=\one$、$\op{U}(\tau+s)=\op{U}(\tau)\op{U}(s)$，且对每个态，$\op{U}(\tau)\ket{\psi}$ 在范数下连续。
-    则存在唯一自伴生成元 $\op{H}$（采用下式的能量单位和符号约定）。反过来，每个自伴 $\op{H}$ 也确定这样的群。
-    令 $\tau=t-t_0$，传播子与态方程为
-    \begin{equation}
-        \op{U}(t,t_0)=\e^{-\i\op{H}(t-t_0)/\hbar},\qquad
-        \i\hbar\frac{\d}{\nd t}\ket{\psi(t)}=\op{H}\ket{\psi(t)}.
-        \label{eq:schrket}
-    \end{equation}
-    微分式要求初态属于 $\Dom(\op{H})$，指数给出的幺正演化作用于整个 Hilbert 空间。
+    设 $\op U(t)$ 是复 Hilbert 空间上的幺正算符，$t\in\RR$，满足群律和 $\op U(0)=\one$。
+    若对每个 $\ket\psi$ 都有 $\lim_{\tau\to 0}\norm{\op U(\tau)\ket\psi-\ket\psi} = 0$，
+    则称此群强连续(strongly continuous)。每个这样的群都有唯一的自伴算符 $\op H$ 使
+    \[
+        \op U(t)=\exp(-\i\op H t/\hbar).
+    \]
+    $\op H$ 的定义域恰由使下列差商在范数下收敛的向量组成，且在此域上
+    \[
+        \op H\ket\psi=\i\hbar\lim_{\tau\to0}
+        \frac{\op U(\tau)\ket\psi-\ket\psi}{\tau}.
+    \]
+    反过来，每个自伴 $\op H$ 都以此指数确定一个强连续的单参数幺正群。
 \end{theorem}
-概率守恒决定生成元的性质，却不决定某种原子的$\op{H}$具体是什么；后者须由物理建模并经实验检验。
+把群律用于差商，$\op U(t)$ 就能移到极限之外。
+因此初态属于 $\Dom(\op H)$ 时，$\op U(t)\ket{\psi(0)}$ 在每一时刻都可微并满足式\eqref{eq:schrket}。
+有限维时所有初态都有导数。一般情形中，指数仍能演化每个初态，导数只在定理给出的域上存在。
+这里的唯一性是对给定的 $\op U(t)$ 而言。若把各能级同时抬高 $C$，传播子会多出整体相位 $\e^{-\i Ct/\hbar}$，上述自旋计数仍相同。
+从强连续性构造生成元并证明它自伴的步骤见\secref{sec:stone-proof}。
 
-对随时间变化的$\op{H}(t)$，在保证传播子存在的适当共同定义域与正则性条件下，
+\subsection{含时 Hamilton 算符与时间排序}
+脉冲磁场中，同样长的一段等待可能落在脉冲之前，也可能落在脉冲之内。此时需保留传播子的两个时刻。
+设先后两个脉冲的传播子分别为 $\op U_1$ 和 $\op U_2$。初态先变为 $\op U_1\ket\psi$，
+第二个脉冲再作用于这个态，末态就是 $\op U_2\op U_1\ket\psi$。较晚时刻的因子因此写在左边。
+
+\textbf{时间排序}(time ordering) 用 $\mathcal T$ 表示。它把乘积中的算符按作用时刻从晚到早、自左向右排列。对两个 Hamilton 算符，规则是
+\begin{equation}
+    \mathcal T\bigb{\op H(t_1)\op H(t_2)}=
+    \begin{cases}
+        \op H(t_1)\op H(t_2), & t_1\ge t_2,\\
+        \op H(t_2)\op H(t_1), & t_1<t_2.
+    \end{cases}
+\end{equation}
+对三个或更多因子也按同一规则排列。将指数展开为幂级数，再对每一项积分中的算符乘积作时间排序，就得到\emph{时间序指数}。
+在有限维空间中，若 $\op H(t)$ 连续，式\eqref{eq:schrket}从 $t_0$ 到 $t\ge t_0$ 的传播子可写为
 \begin{equation}
     \op{U}(t,t_0)=\mathcal T\exp\biggb{-\frac\i\hbar\int_{t_0}^t\op{H}(s)\d s}.
 \end{equation}
-时间序(time ordering)把较晚时刻放在左侧。
-只有当所有不同时刻的$\op{H}$相互对易时，才可一般地去掉$\mathcal T$；有限维连续$\op{H}(t)$没有这些定义域困难。
+若任意两个时刻的 $\op H$ 对易，便可去掉 $\mathcal T$。对于随时间变化的无界算符，还须另行保证传播子的存在和相应态的可微性。
 
 时间排序可从相邻短时间步的乘积看出：
 \begin{equation}
@@ -67,23 +111,10 @@ $\op{H}$控制态在每一个短时间间隔内的变化。
     \cdots
     \Bigp{\one-\frac{\i \op{H}(t_0)\Delta t}{\hbar}}.
 \end{equation}
-这里$t_j=t_0+j\Delta t$。后发生的变化作用在先前演化后的态上，
-因此对应的因子位于左侧。恒定$\op{H}$的所有因子对易，
+这里 $t_j=t_0+j\Delta t$，最右侧的因子把初态从 $t_0$ 演化到 $t_1$。恒定$\op{H}$的所有因子对易，
 取$\Delta t\to0$便恢复指数$\exp[-\i \op{H}(t-t_0)/\hbar]$。
 
-若 $\op{H}$ 不显含时间，取一组与时间无关的离散能量本征态，满足 $\op{H}\ket{n}=E_n\ket{n}$。
-把态在这组基下展开，系数记为 $c_n(t)=\brkt{n}{\psi(t)}$。从左边对式\eqref{eq:schrket}取 $\bra{m}$ 分量，
-正交性使两边各只剩第 $m$ 项，于是 $\i\hbar\dot c_m=E_mc_m$。
-解这个一阶方程、令 $c_n=c_n(0)$，得到
-\begin{equation}
-    \ket{\psi(t)}=\sum_n c_n\e^{-\i E_nt/\hbar}\ket{n}.
-\end{equation}
-一个能量本征态只积累整体相位，任意不显含时间的可观测量分布不变；
-两个不同能量的分量之间则以角频率 $\abs{E_m-E_n}/\hbar$ 积累相对相位。
-沿能量基测量，两分量的概率 $\abs{c_n}^2$ 仍然不变。若某个分析器的同一出口同时接收这两个分量，
-对应的概率可以随相对相位振荡，这与两束频率不同的光叠加产生拍频的计算相同。
-简并子空间中的任意固定叠加也都是定态(stationary state)。
-
+\section{一维 Schrödinger 方程与方势阱}
 \input{chapters/position_well}
 
 \section{自旋进动}
@@ -91,7 +122,7 @@ $\op{H}$控制态在每一个短时间间隔内的变化。
 在恒定磁场中，两个能量分量各自只积累相位；沿 $x$ 分析时，这两个分量会在同一出口相加。
 因而只要算出场造成的能量差，便能预言通过率的变化周期。
 
-均匀磁场 $B\bm e_z$ 与磁矩 $\hatbm\mu=\gamma\hatbm S$ 耦合，
+均匀磁场 $B\bm e_z$ 与磁矩 $\opbm\mu=\gamma\opbm S$ 耦合，
 能量为 $\op{H}=-\op{\mu}_z B=-\gamma B(\hbar/2)\op{\sigma}_z$。写成 $\op{H}=\hbar\omega_0\op{\sigma}_z/2$，
 即规定了带符号的 $\omega_0=-\gamma B$。初态 $\ket{+x}$ 在两个能量分量上各有振幅 $1/\sqrt2$。
 把相应能量 $\pm\hbar\omega_0/2$ 代入上面的时间因子，得到
@@ -123,7 +154,7 @@ $(\e^{-\i\omega_0t/2}+\e^{\i\omega_0t/2})/2=\cos(\omega_0t/2)$。
 Rabi分子束方法先用非均匀磁场选择或分析磁态，
 在中间近均匀静磁场中加入射频磁场，再由后续分析器将内部态变化转成束流强度变化\cite{rabi}。
 扫射频频率时，只有靠近某一能级差的位置出现明显的计数变化；
-共振频率由此给出磁能级间隔。
+由式\eqref{eq:spectral-frequency}，共振频率给出磁能级间隔。
 在现代脉冲实验中，还可以固定频率，改变驱动持续时间，直接测量布居(population)振荡。
 
 以两态$\ket{-z}$、$\ket{+z}$为例，
@@ -157,13 +188,23 @@ $\Delta$称为失谐(detuning)，$\Omega$为共振Rabi角频率，两者单位�
         -\i\hbar \op{R}\adjoint\dot{\op{R}} &=-\frac{\hbar\omega}{2}\op{\sigma}_z.
     \end{alignat}
 \end{subequations}
-第一行利用
-$\op{R}\op{\sigma}_x\op{R}\adjoint=\op{\sigma}_x\cos\omega t+\op{\sigma}_y\sin\omega t$，
-第二行来自$\dot{\op{R}}=-(\i\omega/2)\op{\sigma}_z\op{R}$。
+第一行把实验室系中旋转的横向场还原到 $x$ 方向，第二行来自旋转算符自身的时间导数。两步分别用到
+\[
+    \begin{alignedat}{1}
+        \op{R}\op{\sigma}_x\op{R}\adjoint
+            &=\op{\sigma}_x\cos\omega t+\op{\sigma}_y\sin\omega t,\\
+        \dot{\op{R}}&=-\frac{\i\omega}{2}\op{\sigma}_z\op{R}.
+    \end{alignedat}
+\]
 
-由于$(\Delta\op{\sigma}_z+\Omega\op{\sigma}_x)^2=(\Delta^2+\Omega^2)\one$，
-令$\Omega_R=\sqrt{\Delta^2+\Omega^2}$，称为广义Rabi角频率，
-当$\Omega_R>0$时，令$\op{K}=(\Delta\op{\sigma}_z+\Omega\op{\sigma}_x)/\Omega_R$，则$\op{K}^2=\one$。
+由于 $(\Delta\op{\sigma}_z+\Omega\op{\sigma}_x)^2=(\Delta^2+\Omega^2)\one$，可引入广义 Rabi 角频率 $\Omega_R$，
+并在其非零时从 $\op H_R$ 中提出能量尺度 $\hbar\Omega_R/2$，
+\begin{equation}
+    \Omega_R=\sqrt{\Delta^2+\Omega^2},\qquad
+    \op K=\frac{\Delta\op{\sigma}_z+\Omega\op{\sigma}_x}{\Omega_R},\qquad
+    \op H_R=\frac{\hbar\Omega_R}{2}\op K .
+\end{equation}
+此时 $\op K^2=\one$。
 指数级数的偶数项与奇数项分别相加：
 \begin{equation}
     \begin{alignedat}{1}
@@ -194,7 +235,7 @@ $\Omega_R=0$时$\op{H}_R=0$，直接得到$\op{U}_R=\one$。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=.62\linewidth]{figures/rabi.pdf}
-    \caption{固定 $\Omega$，从 $\ket{-z}$ 制备出发。各线对应不同的 $\Delta/\Omega$；峰高读出最大跃迁概率，相邻两峰的横坐标差给出以 $\pi/\Omega$ 为单位的振荡周期。}
+    \caption{固定驱动强度 $\Omega>0$，从 $\ket{-z}$ 出发。共振曲线在 $\Omega t=\pi$ 首次达到 1，在 $2\pi$ 回到 0。失谐越大，峰越低，相邻两峰也越近。}
     \label{fig:rabi-detuning}
 \end{figure}
 共振时，持续到 $\Omega t=\pi$ 的驱动将自旋完全翻转，称为 $\pi$ 脉冲。
@@ -272,15 +313,15 @@ Ramsey 方法在自由演化时间 $T$ 之后加第二个短脉冲，使两支�
 
 测得$+z$的概率是
 \begin{equation}
-    P_{+z}=\Bigl\lvert\bra{+z}\op{R}_y(-\pi/2)
-    \e^{-\i\Delta T\op{\sigma}_z/2}\op{R}_y(\pi/2)\ket{+z}\Bigr\rvert^2
+    P_{+z}=\Bigabs{\bra{+z}\op{R}_y(-\pi/2)
+    \e^{-\i\Delta T\op{\sigma}_z/2}\op{R}_y(\pi/2)\ket{+z}}^2
     =\frac{1+\cos\Delta T}{2}.
 \end{equation}
 若第二脉冲选择的分析态为
 $\ket{+\chi}=(\ket{+z}+\e^{\i\chi}\ket{-z})/\sqrt2$，
 它与$\ket{\psi_2}$的内积为
 \begin{equation}
-    \brkt{+\chi}{\psi_2}
+    \braket{+\chi}{\psi_2}
     =\frac{\e^{-\i\Delta T/2}
         +\e^{-\i\chi}\e^{\i\Delta T/2}}2.
 \end{equation}
@@ -294,7 +335,7 @@ $\ket{+\chi}=(\ket{+z}+\e^{\i\chi}\ket{-z})/\sqrt2$，
 
 \begin{example}{Ramsey条纹的统计灵敏度}{qm-ramsey-sensitivity}
     在条纹斜率最大的工作点$\Delta T-\chi=\pi/2$，
-    $P_+=1/2$，且$\abs{\p P_+/\p\Delta}=T/2$。
+    $P_+=1/2$。固定第二脉冲的相位 $\chi$，此处的斜率大小为 $\abs{\p_\Delta P_+}=T/2$。
     $N$次独立读出的概率估计标准差为
     $\sqrt{P_+(1-P_+)/N}=1/(2\sqrt N)$。
     线性误差传播给出失谐估计的标准差
@@ -311,8 +352,9 @@ $\ket{+\chi}=(\ket{+z}+\e^{\i\chi}\ket{-z})/\sqrt2$，
 有限脉宽可用\secref{sec:rabi}的传播子逐段相乘计算；
 速度分布、场不均匀和退相干则需要对不同自由演化相位或条件态作平均。
 
-\section{氨分子的反演与隧穿}
+\section{量子隧穿与一维散射}
 \label{sec:tunneling}
+\subsection{氨分子的反演劈裂与隧穿振荡}
 在 Ramsey 实验中，两种能量分量积累不同的相位，使另一组读数出现振荡。
 若粒子可以局域在两个位置，位置读数也能这样振荡吗？
 氨分子给出了可用微波光谱检验的例子：三个氢原子近似确定一个平面，氮原子可以位于平面两侧，
@@ -325,7 +367,7 @@ $\ket{+\chi}=(\ket{+z}+\e^{\i\chi}\ket{-z})/\sqrt2$，
 以下固定一个转动状态，并忽略其他振动激发\cite{feynman9}。
 在相位选取使耦合$J>0$后，
 \begin{equation}
-    \op{H}=E_0\one-J(\ktbr{L}{R}+\ktbr{R}{L}),\qquad
+    \op{H}=E_0\one-J(\ketbra{L}{R}+\ketbra{R}{L}),\qquad
     \ket{\pm}=\frac{\ket{L}\pm\ket{R}}{\sqrt2},\quad E_\pm=E_0\mp J.
 \end{equation}
 
@@ -339,10 +381,13 @@ $\ket{+\chi}=(\ket{+z}+\e^{\i\chi}\ket{-z})/\sqrt2$，
             +\i\sin\frac{Jt}{\hbar}\ket{R}}.
     \end{alignedat}
 \end{equation}
-投影到$\bra{R}$再取模平方，得到$P_R(t)=\sin^2(Jt/\hbar)$。
+投影到 $\bra R$ 再取模平方，得到局域粒子到达另一侧的概率，
+\begin{equation}
+    P_R(t)=\abs{\mel{R}{\op U(t)}{L}}^2=\sin^2\frac{Jt}{\hbar}.
+\end{equation}
 每个能量本征态的构型概率恒定。局域制备包含两个本征态，它们以角频率 $2J/\hbar$ 积累相对相位，由此产生隧穿(tunneling)振荡。
 
-对不对称双阱，加入$\varepsilon(\ktbr{L}{L}-\ktbr{R}{R})/2$，便有
+对不对称双阱，加入$\varepsilon(\ketbra{L}{L}-\ketbra{R}{R})/2$，便有
 \begin{equation}
     P_R(t)=\frac{4J^2}{\varepsilon^2+4J^2}
     \sin^2\Bigp{\frac{t\sqrt{\varepsilon^2+4J^2}}{2\hbar}}.
@@ -350,7 +395,7 @@ $\ket{+\chi}=(\ket{+z}+\e^{\i\chi}\ket{-z})/\sqrt2$，
 这里$J$是低能有效模型的矩阵元，必须由更完整的势能模型计算或由实验拟合。
 给定这个劈裂，两态模型就能预言局域布居的振荡周期。
 
-\subsection{一个势阶的反射与透射}
+\subsection{势阶的反射与透射}
 若问题改为“入射束有多少能到达势垒另一侧”，就要给定入射方向，用概率流计算反射率和透射率。
 先考虑只有一个界面的势阶。取 $x<0$ 时 $V=0$、$x>0$ 时 $V=V_0>0$，
 质量为 $m$ 的粒子从左入射，波数 $k=\sqrt{2mE}/\hbar$。
@@ -388,7 +433,7 @@ $\diag(\e^{-\i qd},\e^{\i qd})$。多个界面和均匀层的矩阵可依空间�
 右侧仍有指数衰减的概率密度，但代入式\eqref{eq:position-current}，这一倏逝波的定态流为零。
 恰在 $E=V_0$ 时，右侧的定态方程为 $u''=0$；有界性选出常数解，导数匹配给出 $r=1$，仍为全反射。
 
-\subsection{穿过有限宽势垒的概率流}
+\subsection{矩形势垒的隧穿与透射共振}
 若高势区只有有限宽度，右边第二个界面会改变势垒内部的解。
 考虑一维矩形势垒：在 $0<x<a$ 内势能为 $V_0$，两侧为零，仅从左侧入射，且 $0<E<V_0$。
 右侧只有出射波。令 $k=\sqrt{2mE}/\hbar$、$\kappa=\sqrt{2m(V_0-E)}/\hbar$。
@@ -416,11 +461,13 @@ $A_{\incoming}\e^{\i kx}+A_{\mathrm{r}}\e^{-\i kx}$。
     T=\frac{\abs{A}^2}{\abs{A_{\incoming}}^2}
     =\bigg[1+\frac{V_0^2\sinh^2(\kappa a)}{4E(V_0-E)}\bigg]^{-1}.
 \end{equation}
-图\ref{fig:rectangular-barrier}左图中，入射波与反射波干涉使势垒左侧的密度起伏，定态净概率流处处相同。
-势垒内单个实指数解的概率流为零；两个指数分量的相对相位使它们的叠加态携带透射流。
+图\ref{fig:rectangular-barrier}左上图给出势能，水平虚线是粒子能量。沿同一位置坐标读左下图，
+入射波和反射波在垒前干涉，密度随位置起伏。进入 $E<V(x)$ 的区域后，密度向右下降，
+越过 $x=a$ 后仍有透射波。定态的净概率流处处相同。垒内单个实指数解的概率流为零，
+两个指数分量的相对相位使它们的叠加态携带透射流。
 \begin{figure}[htbp]
     \centering\includegraphics[width=.94\linewidth]{figures/rectangular_barrier.pdf}
-    \caption{左：取 $E=V_0/2$、$\kappa a=1$，虚线标出势垒两端，以入射波密度为单位，右侧平台高度即 $T$。右：固定 $V_0$ 改变宽度；在半对数坐标上，厚势垒的曲线趋于直线，对应 $T\propto\e^{-2\kappa a}$。}
+    \caption{矩形势垒的透射。左侧两图取 $E=V_0/2$、$\kappa a=1$，阴影标出 $0<x<a$ 的势垒。下图以入射波密度为单位，垒后平台高度即透射率 $T\simeq 0.42$。右图固定 $V_0$，每条曲线对应一种入射能量。随垒宽增大，半对数图上的曲线趋于直线，对应 $T\propto\e^{-2\kappa a}$。}
     \label{fig:rectangular-barrier}
 \end{figure}
 
@@ -436,22 +483,26 @@ $A_{\incoming}\e^{\i kx}+A_{\mathrm{r}}\e^{-\i kx}$。
 从任一侧取极限，用 $\sin(qa)/q\to a$ 或 $\sinh(\kappa a)/\kappa\to a$，
 均得 $T=[1+mV_0a^2/(2\hbar^2)]^{-1}$。
 
-\section{三种绘景与Ehrenfest关系}
+\section{时间演化的绘景与 Ehrenfest 定理}
 前面的进动和反演问题都先求态随时间的变化，再计算读数。如果实验只问一个波包的中心怎样移动，
 能否直接写出平均位置的运动方程？同一个期望值可以把时间变化放在态上，也可以放在测量算符上。
 后一种写法直接给出量子平均值的运动方程，从而可以判定它何时近似服从经典的 Newton 方程。
 
 \begin{definition}{Schrödinger、Heisenberg与相互作用绘景}{qm-pictures}
-    取 $t_0=0$，记 $\op{U}=\op{U}(t,0)$。Schrödinger 绘景以态
-    $\ket{\psi(t)}=\op{U}\ket{\psi(0)}$ 和测量算符 $\op{A}_S(t)$ 计算读数。
-    Heisenberg 绘景固定初态，以 $\op{A}_H(t)=\op{U}\adjoint \op{A}_S(t)\op{U}$ 表示同一测量。
-    若 $\op{H}=\op{H}_0+\op{V}(t)$ 且 $\op{H}_0$ 不显含时间，相互作用绘景(interaction picture)取
-    $\op{U}_0=\e^{-\i \op{H}_0t/\hbar}$，以 $\ket{\psi_I}=\op{U}_0\adjoint\ket{\psi(t)}$ 和
-    $\op{A}_I=\op{U}_0\adjoint \op{A}_S\op{U}_0$ 计算读数。
+    取 $t_0=0$，记 $\op{U}=\op{U}(t,0)$。Schrödinger 绘景用演化后的态 $\ket{\psi(t)}=\op U\ket{\psi(0)}$ 和测量算符 $\op A_S(t)$ 计算读数。
+    Heisenberg 绘景固定初态。相互作用绘景(interaction picture)则在 $\op H=\op H_0+\op V(t)$、$\op H_0$ 不显含时间时，用 $\op U_0=\e^{-\i\op H_0t/\hbar}$ 移去 $\op H_0$ 的演化。后两种绘景的态和测量算符分别为
+    \begin{equation}
+        \begin{alignedat}{2}
+            \ket{\psi_H}&=\ket{\psi(0)},&
+            \qquad \op A_H(t)&=\op U\adjoint\op A_S(t)\op U,\\
+            \ket{\psi_I(t)}&=\op U_0\adjoint\ket{\psi(t)},&
+            \op A_I(t)&=\op U_0\adjoint\op A_S(t)\op U_0 .
+        \end{alignedat}
+    \end{equation}
 \end{definition}
 Heisenberg 绘景里直接对 $\op{A}_H$ 求导，得到
 \begin{equation}
-    \frac{\d \op{A}_H}{\nd t}=\frac\i\hbar[\op{H}_H,\op{A}_H]+\op{U}\adjoint\frac{\p \op{A}_S}{\p t}\op{U}.
+    \dv{\op A_H}{t}=\frac\i\hbar[\op{H}_H,\op{A}_H]+\op{U}\adjoint\pv{\op A_S}{t}\op{U}.
     \label{eq:heisenberg}
 \end{equation}
 
@@ -468,16 +519,19 @@ Heisenberg 绘景里直接对 $\op{A}_H$ 求导，得到
 在相互作用绘景里，$\ket{\psi_I}$ 的变化由变换后的相互作用产生，
 \begin{equation}
     \op{V}_I=\e^{\i \op{H}_0t/\hbar}\op{V}\e^{-\i \op{H}_0t/\hbar},\quad
-    \i\hbar\p_t\ket{\psi_I}=\op{V}_I\ket{\psi_I}.
+    \i\hbar\,\dv{\ket{\psi_I}}{t}=\op{V}_I\ket{\psi_I}.
 \end{equation}
 三种绘景把时间依赖分配给态或算符，给出相同的测量概率。
 
-例如$\mel{\psi(t)}{\op{A}_S(t)}{\psi(t)}
-=\mel{\psi(t_0)}{\op{A}_H(t)}{\psi(t_0)}$，
-直接由$\ket{\psi(t)}=\op{U}\ket{\psi(t_0)}$和伴随关系得到。
+例如将 $\ket{\psi(t)}=\op U\ket{\psi(0)}$ 代入 Schrödinger 绘景的期望值，就可验证
+\[
+    \mel{\psi(t)}{\op A_S(t)}{\psi(t)}
+       =\mel{\psi(0)}{\op U\adjoint\op A_S(t)\op U}{\psi(0)}
+       =\mel{\psi(0)}{\op A_H(t)}{\psi(0)} .
+\]
 相互作用绘景的态方程中，$\op{H}_0$产生的两项也正好相消：
 \begin{equation}
-    \i\hbar\p_t\ket{\psi_I}
+    \i\hbar\,\dv{\ket{\psi_I}}{t}
     =-\op{H}_0\ket{\psi_I}
     +\e^{\i \op{H}_0t/\hbar}(\op{H}_0+\op{V})\e^{-\i \op{H}_0t/\hbar}\ket{\psi_I}
     =\op{V}_I\ket{\psi_I}.
@@ -499,7 +553,7 @@ Heisenberg 绘景里直接对 $\op{A}_H$ 求导，得到
 一般$\ave{V'(\op{X})}\ne V'(\ave{\op{X}})$。
 力是位置的线性函数时，均值严格服从经典运动方程。若力在波包宽度内近似线性，均值的运动也近似服从该方程。
 
-\subsection{自由波包：中心匀速，宽度却在变}
+\subsection{自由波包的传播与展宽}
 撤去外力后，$\ave{\op{X}}_t=\ave{\op{X}}_0+t\ave{\op{P}}_0/m$。中心的位置遵循匀速运动规律，波包的宽度还取决于初态的动量分布。
 自由演化给出 $\op{X}_H(t)=\op{X}+t\op{P}/m$。设初态为位置和动量协方差为零的最小不确定度 Gauss 波包，
 位置标准差为 $\sigma_0$，动量标准差为 $\hbar/(2\sigma_0)$。
@@ -508,14 +562,19 @@ Heisenberg 绘景里直接对 $\op{A}_H$ 求导，得到
     \sigma_x^2(t)=\sigma_0^2+\frac{t^2}{m^2}\frac{\hbar^2}{4\sigma_0^2}
     =\sigma_0^2[1+(t/t_s)^2],\qquad t_s=\frac{2m\sigma_0^2}{\hbar}.
 \end{equation}
-在位置表象中还可看见展宽对应的相位变化。把初始中心取为原点，写平均动量为 $\hbar k_0$，
-取 $\psi(x,0)=(2\pi\sigma_0^2)^{-1/4}\exp[-x^2/(4\sigma_0^2)+\i k_0x]$。
+在位置表象中还可看见展宽对应的相位变化。把初始中心取为原点，写平均动量为 $\hbar k_0$，取
+\begin{equation}
+    \psi(x,0)=\frac{1}{(2\pi\sigma_0^2)^{1/4}}\,
+         \exp\bigg(-\frac{x^2}{4\sigma_0^2}+\i k_0x\bigg).
+\end{equation}
 波数 $k$ 的平面波以 $\omega(k)=\hbar k^2/(2m)$ 积累相位。
 令 $s=k-k_0$，在中心波数附近展开，恰有
 $\omega(k_0+s)=\omega(k_0)+v_0s+\hbar s^2/(2m)$，其中群速度 $v_0=\hbar k_0/m$。
 初态的 Fourier 振幅正比于 $\exp(-\sigma_0^2s^2)$。
 各分量传播后，除去载波相位，所需积分为
-$\int_\RR\exp[-\sigma_0^2(1+\i t/t_s)s^2+\i (x-v_0t)s]\d s$。
+\[
+    \int_\RR\exp\bigb{-\sigma_0^2(1+\i t/t_s)s^2+\i (x-v_0t)s}\d s .
+\]
 完成平方，并用 $t=0$ 的归一化固定系数，得到
 \begin{equation}
     \psi(x,t)=\frac{\exp[\i k_0x-\i\omega(k_0)t]}{(2\pi\sigma_0^2)^{1/4}\sqrt{1+\i t/t_s}}\,

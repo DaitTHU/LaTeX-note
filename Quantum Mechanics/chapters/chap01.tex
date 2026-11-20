@@ -1,4 +1,4 @@
-\chapter{从自旋筛选到概率振幅}
+\chapter{自旋测量与概率振幅}
 \label{ch:spin}
 
 \section{Stern--Gerlach实验}
@@ -17,44 +17,29 @@ Stern--Gerlach实验要检验原子磁矩在一个给定方向上的投影是否
 
 \begin{figure}[htbp]
     \centering
-    \tikzfigure[width=.74\linewidth]{sg-beam}
-    \caption{银原子束从左向右传播。$\ell$ 标出梯度磁场区的长度，$D$ 是出磁体后的漂移距离；在右侧屏上沿 $z$ 方向量取两斑间距 $2\abs{z_\mathrm{det}}$。}
+    \tikzfigure{sg-beam}
+    \caption{银原子束从左向右传播。$\ell$ 标出梯度磁场区的长度，$D$ 是出磁体后的漂移距离；右侧屏上落点位置与磁矩对应。}
     \label{fig:sg-beam}
 \end{figure}
 
 均匀磁场可以改变磁矩的取向，却不给定磁矩一个持续的平移分离力。
 空间分束需要场梯度。大学物理中的磁偶极能是 $-\bm\mu\cdot\bm B$。
-量子理论保留这个空间向量的点积，把三个磁矩分量写成作用在原子内部态上的算符。
-在束轴附近取局域磁场沿 $z$ 方向，即 $\bm B(z)\simeq B_z(z)\bm e_z$。
-以 $\ket{s}$ 表示归一化的磁矩投影本征态，$\op\mu_z\ket{s}=\mu_z\ket{s}$，相应的相互作用能为
+在束轴附近，磁场近似沿 $z$ 方向。若在原子穿过磁体期间，沿场的磁矩分量保持某个确定值 $\mu_z$，
+这一束原子的内部能量随位置改变，可作为质心运动的势能。于是
 \begin{equation}
-    \op H_{\interaction}(z)=-\hatbm{\mu}\cdot\bm B(z),\qquad
-    E_{\interaction,s}(z)=\mel{s}{\op H_{\interaction}(z)}{s}
-    \simeq-\mu_z B_z(z).
-\end{equation}
-点号把三个空间分量收缩成一个能量算符。外层尖括号是态空间里的内积，取的是 $\ket{s}$ 与 $\op H_{\interaction}(z)\ket{s}$ 的内积，
-给出一个数。这个分支有确定的磁矩投影，取期望便得到该分支的能量。若原子保持在这一分支上，
-就可以把它当作质心的有效势能。沿横向偏转坐标 $z$，有
-\begin{equation}
-    F_z=-\frac{\p E_{\interaction,s}}{\p z}
-        \simeq\mu_z\frac{\p B_z}{\p z}.
+    E_{\interaction}\simeq-\mu_z B_z,\qquad
+    F_z=-\pv{E_{\interaction}}{z}\simeq\mu_z\pv{B_z}{z}.
 \end{equation}
 局域磁场方向给出测量磁矩分量的轴，称为量子化轴。该近似要求束流所在区域的场方向明确，
 且原子穿过磁体时从一个内部能量分支跳到另一分支的概率很小。
 
 为了把力与图\ref{fig:sg-beam}中屏上的位置联系起来，设磁体长度为$\ell$，
-其后到探测面的自由飞行距离为$D$，原子质量为$M_\mathrm{Ag}$，
-纵向速度为$v$，在窄束范围把梯度近似为常量$G=\p_zB_z$。
-原子在磁体中停留$\tau=\ell/v$，离开磁体时的横向速度和位移分别为
-\begin{subequations}
-    \begin{alignat}{2}
-        \Delta v_z&=\frac{\mu_zG}{M_\mathrm{Ag}}\tau,
-        &\quad z_\mathrm{mag}&=\frac{\mu_zG}{2M_\mathrm{Ag}}\tau^2,\\
-        z_\mathrm{drift}&=\Delta v_z\frac{D}{v},
-        &\quad z_\mathrm{det}&=\frac{\mu_zG\ell}{M_\mathrm{Ag}v^2}
-            \bigp{D+\ell/2}.
-    \end{alignat}
-\end{subequations}
+其后到探测面的自由飞行距离为$D$，原子质量为$m_\mathrm{Ag}$，
+纵向速度为 $v$。在窄束范围内，场分量 $B_z$ 沿 $z$ 的变化率近似为常量 $G=\p_z B_z$。
+可得银原子在探测屏上的落点位置为
+\begin{equation}
+    z_\mathrm{det} = \frac{\mu_zG\ell}{m_\mathrm{Ag}v^2} \Bigp{\frac{\ell}{2} + D} \propto \mu_z.
+\end{equation}
 因此在速度和几何条件固定时，探测位置直接标记$\mu_z$。
 速度分布与狭缝宽度使每个分支具有有限宽度；
 真正要比较的是连续的偏转带与分离的束流分支。
@@ -62,13 +47,13 @@ Stern--Gerlach实验要检验原子磁矩在一个给定方向上的投影是否
 若磁矩只是大小固定而方向连续随机的经典小磁针，
 $\mu_z=\mu\cos\theta$会在一个区间内连续取值。
 银原子束却出现两个主要分支，这要求内部磁矩的投影有离散结构。
-现代解释中，基态银原子的闭壳层不贡献净电子角动量，
-剩余未配对电子的轨道角动量为零，主要磁矩来自自旋(spin)。
-自旋是电子具有的内禀角动量，即使轨道角动量为零，磁场沿任何选定轴仍可分辨它的两个投影。
-忽略此处不能分辨的核自旋结构，电子自旋投影为$\pm\hbar/2$，
-磁矩约为$\hatbm{\mu}=-g_s\muB\hatbm{S}/\hbar$，其中 $g_s$ 为电子的无量纲自旋磁矩因子，约为 2。
-磁矩与电子自旋方向相反，因此屏上“向上偏转”与“正自旋标签”的对应
-还取决于梯度和电荷符号；实验标签应由所测算符统一规定。
+
+基态银原子 $\mathrm{Ag}$ 的电子排布为 $[\mathrm{Kr}]\,4\mathrm{d}^{10}\,5\mathrm{s}^1$。$[\mathrm{Kr}]$ 表示与氪原子相同的内层排布。
+在 $4\mathrm{d}^{10}$ 中，$4$ 是主量子数，$\mathrm{d}$ 是轨道角动量的标签，上标 $10$ 是该亚层的电子数。
+填满的内层和 $4\mathrm{d}$ 亚层都不贡献净电子角动量。最外层只有一个 $5\mathrm{s}$ 电子，它的轨道角动量为零，因此银原子的磁矩主要来自电子自旋(spin)。\footnote{核自旋也会贡献磁矩，但其量级远小于电子自旋磁矩，在Stern--Gerlach实验中无法分辨。}
+自旋是电子具有的内禀角动量，即使轨道角动量为零，磁场沿任何选定轴仍可分辨它的两个投影 $S_z = \pm\hbar/2$，
+自旋读数为 $S_z$ 的分支有磁矩分量 $\mu_z\simeq-g_s\muB S_z/\hbar$，其中 $g_s \approx 2$ 为电子的无量纲自旋磁矩因子。
+磁矩与电子自旋方向相反，因此屏上“向上偏转”对应哪个自旋读数，还取决于磁场梯度的符号。
 
 \subsection{连续筛选与条件概率}
 \label{ss:sg-sequence}
@@ -76,8 +61,10 @@ $\mu_z=\mu\cos\theta$会在一个区间内连续取值。
 分束说明可能的读数，连续筛选则研究测量后保留下来的原子具有怎样的状态。
 先沿一个方向筛选，再沿另一个方向筛选，最后回到原方向测量，能否重现第一次的确定读数？
 
-把能由理想$z$分析器确定区分的两种内部态记作$\ket{+z}$和$\ket{-z}$，
-测量自旋分量 $\op{S}_z$ 时，相应读数分别为 $+\hbar/2$ 和 $-\hbar/2$。筛选出$+z$后再做同方向测量，理想情况下仍得$+z$。
+用 $+z$ 和 $-z$ 标记沿 $z$ 测自旋的两个出口，读数分别为 $+\hbar/2$ 和 $-\hbar/2$。
+只保留 $+z$ 出口，就制备了再进同向分析器时必走 $+z$ 出口的一束原子。
+Dirac 用右矢(ket) $\ket{+z}$ 表示这个内部态，$\ket{-z}$ 则是只保留另一出口所制备的态。
+写在右矢里面的 $+z$ 同时指明分析器的方向和保留的出口。
 改用$x$方向测量会得到两种输出；若再筛出$+x$送入$z$分析器，$-z$输出重新出现。
 改变分析器方向会改变测后态；预测后续计数时，需要同时描述测量概率和筛选后的制备。
 
@@ -90,71 +77,56 @@ $\mu_z=\mu\cos\theta$会在一个区间内连续取值。
 设进入第一次$z$筛选的原子数为$N$，
 第一次保留$N_{+z}$个，第二次$x$筛选再保留$N_{+x,+z}$个。
 最后$z$分析的两个计数记为$N_{+z,+x,+z}$和$N_{-z,+x,+z}$。
-例如最后一步的条件频率为
+用 $\P(A\mid B)$ 记满足条件 $B$ 时事件 $A$ 的概率。最后一次得到 $-z$ 的条件概率可用计数比例估计，
 \begin{equation}
-    p(-z\mid+x,+z)
+    \P(-z\mid+x,+z)
     \simeq\frac{N_{-z,+x,+z}}{N_{+x,+z}}.
 \end{equation}
 分母是实际进入最后分析器的原子数。
 理想制备中，只要第二次筛选确实制备了同一个$+x$态，
 最后的概率就由这个态决定，不再依赖更早的筛选记录。
-下面的态与投影描述将把这一实验操作写成可计算的规则。
 
 \section{态与测量概率}
+\label{sec:spin-amplitudes}
 
 筛出 $+z$ 束后，沿 $z$ 分析只有一种结果，沿 $x$ 分析却有两种。
 若想把同一制备用到不同朝向的分析器上，就需要一种能对各个出口都给出概率的描述。
-量子力学用\emph{态}描述制备，再把选定的分析方向代入，计算对应的读数分布。
 
-\begin{definition}{纯态、振幅与整体相位}{qm-pure-state}
-    纯态(pure state)用归一化(normalized)右矢$\ket{\psi}$表示，满足$\brkt{\psi}{\psi}=1$。
-    $\ket{\psi}$与$\e^{\i\chi}\ket{\psi}$（$\chi$为实数）代表同一纯态。
-    对某个归一化分析态$\ket{a}$，复数
-    \begin{equation}
-        c_a=\brkt{a}{\psi}
-    \end{equation}
-    称为概率振幅。
-    $\bra{a}$作用于$\ket{\psi}$得到复数，而
-    外积(outer product)$\ktbr{a}{b}$是算符，其作用为
-    \begin{equation}
-        (\ktbr{a}{b})\ket{\psi}=\ket{a}\brkt{b}{\psi}.
-    \end{equation}
-\end{definition}
+\subsection{Dirac 记号与 Born 规则}
 
-把两个互相排斥、合起来包含全部输出的态用作一组基。沿用直角坐标中“沿一根轴取分量”的做法，
-$\bra{+z}$ 取出 $+z$ 分量，对 $\ket{+z}$ 给 1，对 $\ket{-z}$ 给 0。两个基矢满足的这种关系称为正交归一(orthonormal)。
-用 $s,s'\in\{+,-\}$ 表示出口的正负号，有
+把 $\ket{+z},\ket{-z}$ 作为二维复向量空间的一组正交归一基(orthonormal basis)，规定它们依次对应列向量
+$(1,0)\transp$ 和 $(0,1)\transp$。
+一个纯态(pure state) $\ket{\psi}$ 可以写成这两个基矢的线性组合
 \begin{equation}
-    \brkt{sz}{s'z}=\delta_{ss'},\qquad
-    \one=\ktbr{+z}{+z}+\ktbr{-z}{-z}.
+    \ket{\psi}=c_+\ket{+z}+c_-\ket{-z}
+    \quad\longleftrightarrow\quad
+    \begin{pmatrix}c_+\\c_-\end{pmatrix}.
 \end{equation}
-一般纯态写成
+系数向量 $(c_+,c_-)\transp$ 给出 $\ket\psi$ 在基 $\ket{+z},\ket{-z}$ 中的表示。用另一组基描述同一个态，系数列通常会变。
+
+给定一个纯态 $\ket\psi$，如何得到它在一个基 $\ket a$ 上的分量？通过二者的内积(inner product)：对 $\ket{a}$ 取共轭转置得到左矢(bra) $\bra{a} = \ket{a}\adjoint$。
+在基 $\ket{+z},\ket{-z}$ 中，$\ket{a}$ 的系数列向量 $(a_+,a_-)\transp$ 给出左矢的系数行向量 $(a_+\conj,a_-\conj)$，内积的结果作为一个复数，记作
 \begin{equation}
-    \ket{\psi}=c_+\ket{+z}+c_-\ket{-z},\qquad \abs{c_+}^2+\abs{c_-}^2=1.
+    \braket{a}{\psi}=a_+\conj c_++a_-\conj c_-.
 \end{equation}
+特别地，$\braket{+z}{\psi}=c_+$、$\braket{-z}{\psi}=c_-$。
 \begin{postulate}{Born规则}{qm-born}
     对归一化纯态 $\ket{\psi}$，在一组正交归一基中作理想测量，
-    对应基矢 $\ket{a}$ 的出口概率为 $p(a\mid\psi)=\abs{\brkt{a}{\psi}}^2$。
+    对应基矢 $\ket{a}$ 的出口概率为
+    \begin{equation}
+        \P(a\mid\psi)=\abs{\braket{a}{\psi}}^2 .
+        \label{eq:born-amplitude}
+    \end{equation}
+    复数 $c_a=\braket{a}{\psi}$ 称为概率振幅(probability amplitude)。
 \end{postulate}
-例如 $p(\pm z)=\abs{c_\pm}^2$。实验可以在相同制备下转动分析器，逐一检验这个公设给出的分布。
-归一化态乘同一个相位$\e^{\i\chi}$不会改变任何概率。两个系数都非零时，$c_-/c_+$的相位称为相对相位(relative phase)，可由实验读出。
-左矢取共轭转置：$\bra{\psi}=c_+\conj\bra{+z}+c_-\conj\bra{-z}$。
 
-例如$\brkt{\psi}{\psi}$展开为四项，其中两个交叉项因
-$\brkt{+z}{-z}=0$而消失，留下$\abs{c_+}^2+\abs{c_-}^2$。
-在有序基$\bigp{\ket{+z},\ket{-z}}$下，同一态及一个外积写成
-\begin{subequations}
-    \begin{alignat}{2}
-        \ket{\psi}&\ \longleftrightarrow
-        \begin{pmatrix}c_+\\c_-\end{pmatrix},
-        &\quad \bra{\psi}&\ \longleftrightarrow
-        \begin{pmatrix}c_+\conj&c_-\conj\end{pmatrix},\\
-        \ktbr{+z}{-z}&\ \longleftrightarrow
-        \begin{pmatrix}0&1\\0&0\end{pmatrix}.
-    \end{alignat}
-\end{subequations}
-最后这个算符把$\ket{-z}$变成$\ket{+z}$，并把$\ket{+z}$映为零向量。
-基矢本身对应可制备的态，系数列则是该态在所选基底下的表示。
+\begin{corollary}
+    相差整体相位的右矢 $\ket{\psi}$ 与 $\e^{\i\chi}\ket{\psi}$ （$\chi$ 为实数）代表同一纯态。
+
+    例如 $\P(\pm z\mid\psi)=\abs{c_\pm}^2$，两个出口概率之和为一。
+    整体相位使任一出口的振幅同乘 $\e^{\i\chi}$，所以各出口概率都不变。
+    两个系数都非零时，$c_-/c_+$ 的相位称为相对相位(relative phase)，可由转动分析器后的计数读出。
+\end{corollary}
 
 怎样从计数确定 $x$ 分析器筛出的态？把 $+x$ 束送到 $z$ 分析器，两束计数各半。
 由 Born 规则，两个 $z$ 分量的模都是 $1/\sqrt2$。可以给 $\ket{+x}$ 和基矢 $\ket{-z}$ 选择相位，
@@ -163,71 +135,126 @@ $\brkt{+z}{-z}=0$而消失，留下$\abs{c_+}^2+\abs{c_-}^2$。
 $(\ket{+z}+\e^{\i\varphi}\ket{-z})/\sqrt2$，后一组要求
 $\abs{1+\e^{\i\varphi}}^2/4=1/2$，即 $\cos\varphi=0$。与右手坐标系一致地取 $+y$ 对应 $\varphi=\pi/2$，
 便有
-\begin{equation}
-    \ket{\pm x}=\frac{\ket{+z}\pm\ket{-z}}{\sqrt2},\qquad
-    \ket{\pm y}=\frac{\ket{+z}\pm\i\ket{-z}}{\sqrt2}.
-\end{equation}
+\begin{subequations}
+    \begin{align}
+        \ket{\pm x}&=\frac{\ket{+z}\pm\ket{-z}}{\sqrt2},\\
+        \ket{\pm y}&=\frac{\ket{+z}\pm\i\ket{-z}}{\sqrt2}.
+    \end{align}
+\end{subequations}
 于是连续筛选的条件概率(conditional probability)为
-$\abs{\brkt{+x}{+z}}^2=1/2$及$\abs{\brkt{\pm z}{+x}}^2=1/2$。
+$\abs{\braket{+x}{+z}}^2=1/2$及$\abs{\braket{\pm z}{+x}}^2=1/2$。
 若分母是最初已经制备为$+z$的束流，最后每一路只占$1/4$，其余被$x$筛选器挡去。
+
+\subsection{线性算符与自旋投影}
+\label{ss:spin-operators}
+
+现在把挡住一路的动作写成计算规则。若只让 $+z$ 束通过，在 $z$ 基中可以用矩阵乘法完成这一筛选，
+\begin{equation}
+    \begin{pmatrix}1&0\\0&0\end{pmatrix}
+    \begin{pmatrix}c_+\\c_-\end{pmatrix}
+    =\begin{pmatrix}c_+\\0\end{pmatrix}.
+\end{equation}
+这一步保留了原来 $+z$ 分量的大小，所得向量一般尚未归一化。它的范数平方 $\abs{c_+}^2$ 就是通过率。
+把作用于向量的映射称为算符(operator)，用帽号标出，例如这台筛选器的投影算符 $\op\Pi_{+z}$。
+
+\begin{definition}{有限维空间上的线性算符}{qm-notation}
+    设 $\op A$ 把有限维态空间中的每个向量映为该空间中的一个向量。若对任意向量 $\ket{u},\ket{v}$ 和复数 $c,d$ 满足
+    \[
+        \op A(c\ket{u}+d\ket{v})=c\,\op A\ket{u}+d\,\op A\ket{v},
+    \]
+    就称 $\op A$ 为线性算符(linear operator)。因此只要给出它对每个基矢的作用，便能算出它对任一向量的作用。
+    在选定的正交归一基中，把 $\op A\ket{n}$ 的各个分量排成第 $n$ 列，就得到它的矩阵。
+    第 $m$ 行第 $n$ 列的数 $A_{mn}=\mel{m}{\op A}{n}$ 称为矩阵元(matrix element)。
+\end{definition}
+比如 $\op\Pi_{+z}\ket{\psi}=\ket{+z}\braket{+z}{\psi}$。从右向左读，先取出一个复数，再用它乘选定的方向。
+一般写作 $(\ketbra{a}{b})\ket{\psi}=\ket{a}\braket{b}{\psi}$，称 $\ketbra{a}{b}$ 为外积(outer product)。
+它的矩阵是列乘行。例如 $\ketbra{+z}{-z}$ 在 $z$ 基中只有右上角为 1，把 $\ket{-z}$ 变成 $\ket{+z}$，
+把 $\ket{+z}$ 映为零。把两个出口的投影相加，能逐项恢复任一输入向量，
+\begin{equation}
+    \op\Pi_{+z}+\op\Pi_{-z}=\ketbra{+z}{+z}+\ketbra{-z}{-z}=\one .
+\end{equation}
+这里 $\one$ 是单位算符(identity operator)，即 $\one\ket{\psi}=\ket{\psi}$。
+算符的乘积表示连续作用，如 $\op A\op B\ket{\psi}$ 中先用 $\op B$，再用 $\op A$。
 
 \begin{example}{逐次筛选的状态与计数}{qm-filter-chain}
     从归一化的$\ket{+z}$出发，$+x$筛选对应算符
-    $\op{P}_{+x}=\ktbr{+x}{+x}$。作用后的未归一化态是
+    $\op{\Pi}_{+x}=\ketbra{+x}{+x}$。作用后的未归一化态是
     \begin{equation}
-        \op{P}_{+x}\ket{+z}
-        =\ket{+x}\brkt{+x}{+z}
+        \op{\Pi}_{+x}\ket{+z}
+        =\ket{+x}\braket{+x}{+z}
         =\frac1{\sqrt2}\ket{+x}.
     \end{equation}
     范数平方$1/2$给出通过率；除以范数后，保留束的态为$\ket{+x}$。
     再投影到最后的$\pm z$输出，有
     \begin{equation}
-        \op{P}_{\pm z}\op{P}_{+x}\ket{+z}=\frac12\ket{\pm z}.
+        \op{\Pi}_{\pm z}\op{\Pi}_{+x}\ket{+z}=\frac12\ket{\pm z}.
     \end{equation}
     两个范数平方均为$1/4$，这是相对于最初$+z$束的联合概率。
     除以第二步通过率$1/2$，得到最后一步的两个条件概率均为$1/2$。
     筛选后的归一化与通过率分别保存，才能在多级装置中正确计算计数。
 \end{example}
 
-\section{Pauli算符与任意方向}
-已经知道沿 $x,y,z$ 筛选出的态。若把磁体停在 $x$ 与 $z$ 之间，怎样从旋转的角度算出两个出口的通过率？
-可以仿照经典角动量取分量的方法，把三个方向的读数写成一个矢量算符的三个分量，再沿磁体方向投影。
+\section{Pauli算符}
 
-\begin{definition}{自旋二分之一的Pauli算符}{qm-pauli}
+已经知道沿 $x,y,z$ 筛选出的态。若把磁体停在 $x$ 与 $z$ 之间，怎样从旋转的角度算出两个出口的通过率？
+先把一个方向上的两个读数连同相应的态写进同一个算符。沿 $z$ 测自旋的读数是 $\pm\hbar/2$，
+于是用读数给两个出口的投影加权，得到
+\begin{equation}
+    \op S_z=\frac{\hbar}{2}\op\Pi_{+z}-\frac{\hbar}{2}\op\Pi_{-z}
+    \quad\longleftrightarrow\quad
+    \frac{\hbar}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+\end{equation}
+矩阵乘回两个基矢，便有 $\op S_z\ket{\pm z}=(\pm\hbar/2)\ket{\pm z}$。
+一般地，若非零向量满足 $\op A\ket{a}=a\ket{a}$，就称它为 $\op A$ 的本征向量（特征向量），$a$ 为本征值（特征值）。
+在表示可观测量的算符中，本征值给出可能的读数，归一化的本征向量给出能确定重现该读数的制备，称为本征态。
+在一组本征基中，算符的矩阵便像这里的 $\op S_z$ 一样只有对角元可能非零。
+
+\begin{definition}{1/2-自旋的Pauli算符}{qm-pauli}
     把方向 $i$ 的两个自旋读数以 $\hbar/2$ 为单位，标为 $+1$ 和 $-1$。
-    相应的无量纲 Pauli 算符为 $\op{\sigma}_i=\ktbr{+i}{+i}-\ktbr{-i}{-i}$，其中 $i=x,y,z$。
-    自旋沿该轴的分量是 $\op{S}_i=(\hbar/2)\op{\sigma}_i$。
+    对 $i=x,y,z$，相应的无量纲 Pauli 算符和自旋分量分别为
+    \begin{equation}
+        \op{\sigma}_i=\ketbra{+i}{+i}-\ketbra{-i}{-i},\qquad
+        \op{S}_i=\frac{\hbar}{2}\op{\sigma}_i .
+    \end{equation}
 \end{definition}
 例如将上节求出的两个 $x$ 态代入 $\op{\sigma}_x$，对角项相消，交叉项相加。
 三个方向都改用 $z$ 基表示，得到
 \begin{subequations}
     \begin{alignat}{1}
-        \op{\sigma}_z&=\ktbr{+z}{+z}-\ktbr{-z}{-z},\\
-        \op{\sigma}_x&=\ktbr{+z}{-z}+\ktbr{-z}{+z},\\
-        \op{\sigma}_y&=-\i\ktbr{+z}{-z}+\i\ktbr{-z}{+z}.
+        \op{\sigma}_z&=\ketbra{+z}{+z}-\ketbra{-z}{-z},\\
+        \op{\sigma}_x&=\ketbra{+z}{-z}+\ketbra{-z}{+z},\\
+        \op{\sigma}_y&=-\i\ketbra{+z}{-z}+\i\ketbra{-z}{+z}.
     \end{alignat}
 \end{subequations}
-由外积相乘直接得到
-\begin{equation}
-    \op{\sigma}_i\op{\sigma}_j=\delta_{ij}\one+\i\epsilon_{ijk}\op{\sigma}_k.
-\end{equation}
-
-这里$\hatbm{\sigma}=(\op{\sigma}_x,\op{\sigma}_y,\op{\sigma}_z)$是三个Pauli算符组成的向量，
-$\hatbm{S}$是自旋角动量，量纲为作用量。
-例如由外积乘法，
+试算 $x,y$ 两个方向的乘积。将每个外积依次作用在另一个外积上，中间的内积在同一基矢时为 1，在不同基矢时为 0。于是
 \begin{alignat*}{1}
-    \op{\sigma}_x\op{\sigma}_y &=\i\ktbr{+z}{+z}-\i\ktbr{-z}{-z}
-        =\i\op{\sigma}_z,\\
-    \op{\sigma}_y\op{\sigma}_x&=-\i\op{\sigma}_z.
+    \op{\sigma}_x\op{\sigma}_y &=\i\ketbra{+z}{+z}-\i\ketbra{-z}{-z}=\i\op{\sigma}_z,\\
+    \op{\sigma}_y\op{\sigma}_x&=-\i\op{\sigma}_z .
 \end{alignat*}
-因此$[\op{S}_x,\op{S}_y]=\i\hbar\op{S}_z$。
-同样相乘可得$\op{\sigma}_i^2=\one$，由此构成全部Pauli乘法规则。
+两种作用次序的差称为对易子(commutator)，相应的和称为反对易子(anticommutator)，记作
+\begin{subequations}
+    \begin{align}
+        [\op A,\op B]&=\op A\op B-\op B\op A,\\
+        \{\op A,\op B\}&=\op A\op B+\op B\op A .
+    \end{align}
+\end{subequations}
+上例给出 $[\op S_x,\op S_y]=\i\hbar\op S_z$。沿同一轴相乘时，两次作用使 $+1,-1$ 两个因子各自平方，所以 $\op\sigma_i^2=\one$。再对 $x,y,z$ 作循环置换，就能把所有乘积写成
+\begin{equation}
+    \op{\sigma}_i\op{\sigma}_j=\delta_{ij}\one+\i\epsilon_{ijk}\op{\sigma}_k .
+\end{equation}
+三个空间指标取 $x,y,z$。
+Kronecker 符号 $\delta_{ij}$ 在 $i=j$ 时为 1，否则为 0。
+Levi-Civita 符号 $\epsilon_{ijk}$ 在 $(x,y,z)$ 及其循环置换时为 $+1$，
+调换其中两项后为 $-1$，有重复指标时为零。本书约定对同一项内出现两次的空间指标求和，
+如 $i=x,j=y$ 时，$\epsilon_{xyk}\op{\sigma}_k$ 的三项中只剩 $\op{\sigma}_z$。能级和态标签的求和显式写出求和号。
 
-把 $\op{\sigma}_z$ 作用在 $\ket{+z}$ 上，得到 $+\ket{+z}$，作用在 $\ket{-z}$ 上则得到 $-\ket{-z}$。
-一个算符在某个非零态上只给出数乘，便称这个态为它的本征态，所乘的数为本征值；
-在相应本征态上测量这个自旋分量，以概率一得到该本征值。
-任意单位向量$\bm n$对应$\op{S}_{\bm n}=(\hbar/2)\bm n\cdot\hatbm{\sigma}$，
-因为$(\bm n\cdot\hatbm{\sigma})^2=\one$，其本征值仍为$\pm\hbar/2$。
+三个分量组成矢量 $\opbm{\sigma}=(\op{\sigma}_x,\op{\sigma}_y,\op{\sigma}_z)$，自旋角动量矢量算符为 $\opbm S=(\hbar/2)\opbm\sigma$。
+现在可以写出银原子束在磁场中的相互作用能算符 $\op H_{\interaction}=-\opbm\mu\cdot\bm B$，其中 $\opbm\mu\simeq -g_s\muB\opbm S/\hbar$。
+沿 $z$ 的场使 $\op H_{\interaction}\simeq-\op\mu_z B_z$ 在 $z$ 基中也对角，
+它的两个能量本征值就是\ssecref{ss:sg-apparatus}用来计算偏转的分支势能。
+
+沿单位向量 $\bm n$ 测量的自旋分量为 $\op{S}_{\bm n}=(\hbar/2)\bm n\cdot\opbm{\sigma}$。
+Pauli 乘法给出 $(\bm n\cdot\opbm{\sigma})^2=\one$，所以 $\op{S}_{\bm n}$ 的本征值只能是 $+\hbar/2$ 或 $-\hbar/2$。
 
 若$\bm n=(\sin\theta\cos\phi,\sin\theta\sin\phi,\cos\theta)$，则
 \begin{equation}
@@ -236,14 +263,17 @@ $\hatbm{S}$是自旋角动量，量纲为作用量。
     \label{eq:spinor}
 \end{equation}
 
-这个式子可直接由本征方程求出。在$z$基中，
+这个式子可直接由本征方程求出。在 $z$ 基中，
 \begin{equation}
-    \bm n\cdot\hatbm{\sigma}=
+    \bm n\cdot\opbm{\sigma}=
     \begin{pmatrix}
         \cos\theta&\e^{-\i\phi}\sin\theta\\
         \e^{\i\phi}\sin\theta&-\cos\theta
     \end{pmatrix}.
 \end{equation}
+这个矩阵等于其共轭转置，即先转置、再把每个元素取复共轭所得的矩阵。这样的矩阵称为 Hermite 矩阵，
+是实对称矩阵在复数情形的推广。一般地，在有限维正交归一基中，$\op A$ 的矩阵取共轭转置后表示它的伴随算符(adjoint operator) $\op A\adjoint$。
+
 令正本征态的系数为$(a,b)\transp$，第一行给出
 $(1-\cos\theta)a=\e^{-\i\phi}\sin\theta\,b$。
 在$0<\theta<\pi$时，
@@ -257,15 +287,18 @@ $b=\e^{\i\phi}\sin(\theta/2)$；两极取连续极限。
 
 投影到$+\bm n$的算符为
 \begin{equation}
-    \op{P}_{+\bm n}=\ktbr{+\bm n}{+\bm n}
-    =\frac{\one+\bm n\cdot\hatbm{\sigma}}{2}.
+    \op{\Pi}_{+\bm n}=\ketbra{+\bm n}{+\bm n}
+    =\frac{\one+\bm n\cdot\opbm{\sigma}}{2}.
 \end{equation}
-有限维算符 $\op{A}$ 的迹(trace)等于它在任一正交归一基中对角矩阵元之和，记为 $\tr\op{A}$。由于 $\tr(\ktbr{a}{b})=\brkt{b}{a}$，
-两个一维投影乘积的迹正好给出 $\abs{\brkt{+\bm m}{+\bm n}}^2$。
-由$\tr\op{\sigma}_i=0$和$\tr(\op{\sigma}_i\op{\sigma}_j)=2\delta_{ij}$，
-$\tr(\op{P}_{+\bm m}\op{P}_{+\bm n})=(1+\bm m\cdot\bm n)/2$。
-两个方向间的夹角为$\gamma$时，
-$p(+\bm m\mid+\bm n)=(1+\bm m\cdot\bm n)/2=\cos^2(\gamma/2)$。
+有限维算符 $\op{A}$ 的迹(trace)等于它在任一正交归一基中对角矩阵元之和，记为 $\tr\op{A}$。由于 $\tr(\ketbra{a}{b})=\braket{b}{a}$，
+两个一维投影乘积的迹正好给出 $\abs{\braket{+\bm m}{+\bm n}}^2$。
+用 $\tr\op{\sigma}_i=0$ 和 $\tr(\op{\sigma}_i\op{\sigma}_j)=2\delta_{ij}$ 对投影乘积取迹。
+记两个方向间的夹角为 $\gamma$，由 Born 规则\eqref{eq:born-amplitude}得到
+\begin{equation}
+    \P(+\bm m\mid+\bm n)=\tr(\op{\Pi}_{+\bm m}\op{\Pi}_{+\bm n})
+        =\frac{1+\bm m\cdot\bm n}{2}=\cos^2\frac{\gamma}{2}.
+\end{equation}
+特别地，若固定 $+z$ 束而使分析轴转过 $\theta$，上式正好给出 $\ket{+\bm n}$ 的 $+z$ 分量的模平方。
 转动分析器改变了两个自旋态的重叠（图\ref{fig:spin-angle-readout}）。若将每个自旋纯态
 $\ket{+\bm n}$ 画在单位球面方向 $\bm n$ 上，就得到 Bloch 球；沿同一轴的两种确定输出在球上相对。
 光子线偏振筛选中，透射概率为 $\cos^2\vartheta$，其中 $\vartheta$ 是两根偏振轴的较小夹角（$0$ 至 $\pi/2$）。
@@ -302,24 +335,24 @@ $+x$ 和 $-x$ 两种制备沿 $z$ 测量时都给出各半的计数，换到 $x$
 $\ket{\psi}=(\ket{a}+\e^{\i\varphi}\ket{b})/\sqrt2$，再用能分析
 $\ket{\pm}=(\ket{a}\pm\ket{b})/\sqrt2$的装置重合路径，得到
 \begin{equation}
-    p(+)=\frac{1+\cos\varphi}{2},\qquad p(-)=\frac{1-\cos\varphi}{2}.
+    \P(+)=\frac{1+\cos\varphi}{2},\qquad \P(-)=\frac{1-\cos\varphi}{2}.
     \label{eq:fringe}
 \end{equation}
 
 求这两个概率只需要内积：
 \begin{subequations}
     \begin{alignat}{2}
-        \brkt{+}{\psi} &=\frac{1+\e^{\i\varphi}}2,
-        &\quad \abs{\brkt{+}{\psi}}^2 &=\frac{(1+\e^{\i\varphi})(1+\e^{-\i\varphi})}{4},\\
-        \brkt{-}{\psi} &=\frac{1-\e^{\i\varphi}}2,
-        &\quad \abs{\brkt{-}{\psi}}^2 &=\frac{(1-\e^{\i\varphi})(1-\e^{-\i\varphi})}{4}.
+        \braket{+}{\psi} &=\frac{1+\e^{\i\varphi}}2,
+        &\quad \abs{\braket{+}{\psi}}^2 &=\frac{(1+\e^{\i\varphi})(1+\e^{-\i\varphi})}{4},\\
+        \braket{-}{\psi} &=\frac{1-\e^{\i\varphi}}2,
+        &\quad \abs{\braket{-}{\psi}}^2 &=\frac{(1-\e^{\i\varphi})(1-\e^{-\i\varphi})}{4}.
     \end{alignat}
 \end{subequations}
 两条正交路径各自的占据概率都是$1/2$，
 相位却改变了合束后的输出。于是测量装置需要说明\emph{在哪个基底中读出}。
 
 这是对两条路径的复振幅先相加再取模平方。
-更一般地，在传播的中间时刻插入单位算符，并用中间态的一组正交归一基展开它，得到
+更一般地，设 $\op U_1,\op U_2$ 依次将态矢从制备端传到两路间的截面、再传到探测端。在两段传播之间插入单位算符，用中间态的一组正交归一基展开它，得到
 \begin{equation}
     \mel{f}{\op{U}_2\op{U}_1}{i}
     =\sum_a\mel{f}{\op{U}_2}{a}\mel{a}{\op{U}_1}{i}.
@@ -336,24 +369,24 @@ $\ket{\pm}=(\ket{a}\pm\ket{b})/\sqrt2$的装置重合路径，得到
     先将测量基换为$x$方向。因为
     $\bra{+x}=(\bra{+z}+\bra{-z})/\sqrt2$，
     \begin{equation}
-        \brkt{+x}{\psi}=\frac{1+\e^{\i\varphi}}2,
+        \braket{+x}{\psi}=\frac{1+\e^{\i\varphi}}2,
         \qquad
-        p(+x)=\frac{1+\cos\varphi}{2}.
+        \P(+x)=\frac{1+\cos\varphi}{2}.
     \end{equation}
     再换为$y$方向。
     $\ket{+y}=(\ket{+z}+\i\ket{-z})/\sqrt2$的左矢必须共轭复系数，
     因而
     \begin{equation}
-        \brkt{+y}{\psi}=\frac{1-\i\e^{\i\varphi}}2,
+        \braket{+y}{\psi}=\frac{1-\i\e^{\i\varphi}}2,
         \qquad
-        p(+y)=\frac{1+\sin\varphi}{2}.
+        \P(+y)=\frac{1+\sin\varphi}{2}.
     \end{equation}
     两组独立计数分别读出$\cos\varphi$和$\sin\varphi$，
     可以确定$\varphi$模$2\pi$的值。
     单测$x$方向时，$\varphi$与$-\varphi$给出相同的读数分布。
 
     对一般两态纯态$c_+\ket{+z}+c_-\ket{-z}$，
-    三个分析方向给出
+    沿方向 $i$ 给两出口赋值 $+1,-1$。两值按其概率加权所得的平均读数记为 $\ave{\op\sigma_i}=\P(+i\mid\psi)-\P(-i\mid\psi)$。三个方向给出
     \begin{equation}
         \ave{\op{\sigma}_x}=2\Re(c_+\conj c_-),\quad
         \ave{\op{\sigma}_y}=2\Im(c_+\conj c_-),\quad
