@@ -116,15 +116,15 @@
 | 绝对值、范数、期望值 | `\abs{x}`、`\norm{u}`、`\ave{A}` | `\bigabs`、`\Bignorm`、`\biggave` |
 | 取值、下取整、上取整 | `\eval{f}_a^b`、`\floor{x}`、`\ceil{x}` | `\Bigeval`、`\bigfloor`、`\Bigceil` |
 | 集合、斜线除式、内积 | `\set{x}{x>0}`、`\division{a}{b}`、`\inp{u}{v}` | `\Bigset`、`\Biggdivision`、`\biginp` |
-| 左矢、右矢、内积、外积、矩阵元 | `\bra{a}`、`\ket{b}`、`\brkt{a}{b}`、`\ktbr{a}{b}`、`\mel{a}{A}{b}` | `\bigbra`、`\Bigket`、`\biggbrkt`、`\bigktbr`、`\Bigmel` |
+| 左矢、右矢、内积、外积、矩阵元 | `\bra{a}`、`\ket{b}`、`\braket{a}{b}`、`\ketbra{a}{b}`、`\mel{a}{A}{b}` | `\bigbra`、`\Bigket`、`\biggbraket`、`\bigketbra`、`\Bigmel` |
 | 圆、方、花括号 | `(x)`、`[x]`、`\{x\}` | `\bigp`、`\Bigb`、`\biggB` |
 
 同一条 Dirac 内积或矩阵元里，中间的竖线与两端括号使用同一档尺寸。外积将右矢与左矢相接。
 
 ~~~LaTeX
-\hat A\ket{\psi},\qquad \bra{\phi}\hat A,\qquad \ktbr{a}{b}\ket{\psi}.
+\hat A\ket{\psi},\qquad \bra{\phi}\hat A,\qquad \ketbra{a}{b}\ket{\psi}.
 \mel{\phi}{\hat A}{\psi}
-    =\sum_n\mel{\phi}{\hat A}{n}\brkt{n}{\psi}.
+    =\sum_n\mel{\phi}{\hat A}{n}\braket{n}{\psi}.
 \Bigket{s=\frac12,m=\frac12},\qquad
 \Bigmel{\phi}{\frac{\hat A+\hat B}{2}}{\psi}.
 ~~~
@@ -142,16 +142,16 @@
     \label{eq:two-level-states}
     \begin{alignat}{2}
         \ket{+x}&=\frac{\ket{+z}+\ket{-z}}{\sqrt2},
-        &\quad P_{+x}&=\ktbr{+x}{+x},\\
+        &\quad \hat{\Pi}_{+x}&=\ketbra{+x}{+x},\\
         \ket{-x}&=\frac{\ket{+z}-\ket{-z}}{\sqrt2},
-        &\quad P_{-x}&=\ktbr{-x}{-x}.
+        &\quad \hat{\Pi}_{-x}&=\ketbra{-x}{-x}.
     \end{alignat}
 \end{subequations}
 
 \begin{equation}
     \begin{alignedat}{1}
-        P_{+x}\ket{+z}
-        &=\ket{+x}\brkt{+x}{+z}\\
+        \hat{\Pi}_{+x}\ket{+z}
+        &=\ket{+x}\braket{+x}{+z}\\
         &=\frac1{\sqrt2}\ket{+x}.
     \end{alignedat}
 \end{equation}
