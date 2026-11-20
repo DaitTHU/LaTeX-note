@@ -18,7 +18,7 @@
 在磁学中，基本单元是磁偶极子(magnetic dipole)，用于测量磁场的磁偶极子一般是小磁针，对应电学中的试探电荷。
 \begin{definition}
     {磁感应强度}{magnetic induction intensity}
-    磁场通常用磁感应强度(magnetic induction intensity) $\bm B$描述，其方向定义为磁偶极子平衡时磁矩$\bm\mu$的方向，大小可以由磁偶极子偏转时所受力矩$\bm N$来衡量：
+    磁场通常用磁感应强度(magnetic induction intensity) $\bm B$描述，其方向为磁偶极子稳定平衡时磁矩$\bm\mu$的方向，大小可以由磁偶极子偏转时所受力矩$\bm N$来衡量：
     \begin{equation}
         \bm N=\bm\mu\times\bm B.
     \end{equation}
@@ -34,7 +34,7 @@
     \begin{equation}
         \bm J:=\rho\bm v,
     \end{equation}
-    其大小为单位时间流过单位面积的电荷量，其方向为电荷运动的方向。
+    这里假定电荷以同一速度$\bm v$运动，负电荷的电流方向与其速度相反。有多类载流子时，$\bm J=\sum_s\rho_s\bm v_s$。通过定向面元的电流为$\d I=\bm J\cdot\d\bm A$。
 \end{definition}
 
 \begin{corollary}
@@ -53,7 +53,7 @@
     \end{equation}
 \end{theorem}
 \begin{proof}
-    考虑空间一体积微元$\delta V$，其内电荷量不随时间改变：
+    先考虑一种守恒的载流子。取随其运动的体积微元$\delta V$，其内电荷量不随时间改变：
     \begin{equation*}
         \label{eqn:d(rhoV)/dt=0}
         \dv{(\rho\delta V)}t=\dv\rho t\delta V+\rho\dv{(\delta V)}t=0,\tag{$\ast$}
@@ -73,8 +73,8 @@
     因此\eqref{eqn:d(rhoV)/dt=0}变为
     \[
         \dv\rho t+\rho\div\bm v=\pv\rho t+\bm v\cdot\grad\rho+\rho\div\bm v=\pv\rho t+\div(\rho\bm v)=0.
-        \qedhere
     \]
+    对各类载流子求和即得总电荷的连续性方程。若有不同种类间的转化，总电荷守恒要求各源项的代数和为零。
 \end{proof}
 
 \begin{corollary}
@@ -364,10 +364,10 @@
             \bm B&=\frac{\mu_0m}{4\pi r^3}(2\cos\theta\uvec r+\sin\theta\uvec\theta).
         \end{align}
     \end{subequations}
-    同样，上式只适用于$r\neq0$。将$\bm B=\curl\bm A$作为分布导数计算，理想点磁偶极子的全空间磁场应包含原点处的接触项：
+    同样，上式只适用于$r\neq0$。将$\bm B=\curl\bm A$作为分布导数计算，取球形主值后还须计入原点处的接触项：
     \begin{equation}
         \label{eqn:B dipole with delta}
-        \bm B(\bm r)=\frac{\mu_0}{4\pi}\biggb{\frac{3(\bm m\cdot\uvec r)\uvec r-\bm m}{r^3}+\frac{8\pi}3\bm m\delta(\bm r)}.
+        \bm B(\bm r)=\frac{\mu_0}{4\pi}\biggb{\PV\frac{3(\bm m\cdot\uvec r)\uvec r-\bm m}{r^3}+\frac{8\pi}3\bm m\delta(\bm r)}.
     \end{equation}
     可得磁场的旋度$\curl\bm B=\mu_0\grad\delta(\bm r)\times\bm m$，即磁偶极子的电流密度为
     \begin{equation}
@@ -467,7 +467,7 @@
     \bm F=\int_V\bm J(\bm r)\times\bm B(\bm r)\d V\simeq(\bm m\times\nabla)\times\bm B=\grad(\bm m\cdot\bm B)-\bm m\cancel{(\div\bm B)},
 \]
 即
-\footnote{此式包含了隐藏动量(hidden momentum) $\d(\bm E\times\bm m)/c^2\d t$的效应。}
+\footnote{这里计算的是外磁场对电流分布的总Lorentz力。静止小电流环处在外电场中时，可有内部机械动量$\bm p_{\mathrm{hid}}=\bm m\times\bm E/c^2$。若该动量随时间改变，求质心动量变化率时须从总力中扣除$\d\bm p_{\mathrm{hid}}/\d t$。}
 \begin{equation}
     \label{eqn:F=nabla(m dot B)}
     \bm F=\grad(\bm m\cdot\bm B),
@@ -623,7 +623,7 @@
 可得
 \begin{equation}
     \label{eqn:A with boundary}
-    \bm A(\bm r)=\frac1{4\pi}\int_V\frac{\nabla'\times\bm M(\bm r')}{\abs{\bm r-\bm r'}}\d V'+\frac1{4\pi}\oint_{\p V}\frac{\bm M(\bm r')\times\uvec n'}{\abs{\bm r-\bm r'}}\d A',
+    \bm A(\bm r)=\frac{\mu_0}{4\pi}\int_V\frac{\nabla'\times\bm M(\bm r')}{\abs{\bm r-\bm r'}}\d V'+\frac{\mu_0}{4\pi}\oint_{\p V}\frac{\bm M(\bm r')\times\uvec n'}{\abs{\bm r-\bm r'}}\d A',
 \end{equation}
 上式两项分别对应有效电流密度$\bm J_\magnetic$和有效面电流密度$\bm K$的贡献
 \begin{subequations}
@@ -679,36 +679,27 @@
     上式可以在磁滞图上画一条直线，并会产生交点。
 \end{example}
 \begin{example}{外场下的磁化球壳}{magnetized sphere shell in external field}
-    内外半径为$a,b$的球壳磁导率为$\mu$，放置在匀强磁场$\bm B_0$中，由于没有电流可应用磁势求解
+    内外半径为$a,b$的球壳具有均匀磁导率$\mu$，球腔和外界均为真空。沿$z$方向施加匀强场$\bm B_0=\mu_0 H_0\uvec z$。各区域均无自由电流，磁势满足Laplace方程。由于外场的角依赖为$\cos\theta$，两个同心球面上的边界条件只激发$\ell=1$项。由原点处正则及无穷远处趋于外场，可写成
     \[
-        \laplacian\Phi_\magnetic=0
+        \Phi_\magnetic=-H_0\cos\theta
+        \begin{cases}
+            A r, & r<a,\\
+            B r+C a^3/r^2, & a<r<b,\\
+            r+D b^3/r^2, & r>b.
+        \end{cases}
     \]
-    由式\eqref{eqn:Phi(r, theta)}，再加上$r\to\infty$时$\bm H=\bm H_0$的条件，可写出磁势的形式解，再通过边界条件
-    \[
-        \cdots
-    \]
-    \iffalse
+    记$f=(a/b)^3$，$\mu_\relative=\mu/\mu_0$。切向$H_\theta$和法向$B_r$在两个界面上连续，因而
     \begin{align*}
-        \begin{cases}
-            \biggeval{\pv{\Phi_\text{M,I}}\theta}_{r=a}=\biggeval{\pv{\Phi_\text{M,II}}\theta}_{r=a}\\[2ex]
-            \biggeval{\pv{\Phi_\text{M,II}}\theta}_{r=b}=\biggeval{\pv{\Phi_\text{M,III}}\theta}_{r=b}
-        \end{cases}
-        \begin{cases}
-            \mu_0\biggeval{\pv{\Phi_\text{M,I}}r}_{r=a}=\mu\biggeval{\pv{\Phi_\text{M,II}}r}_{r=a}\\[2ex]
-            \mu_0\biggeval{\pv{\Phi_\text{M,II}}r}_{r=b}=\mu\biggeval{\pv{\Phi_\text{M,III}}r}_{r=b}
-        \end{cases}
+        A&=B+C,     & A&=\mu_\relative(B-2C),\\
+        B+fC&=1+D,  & \mu_\relative(B-2fC)&=1-2D.
     \end{align*}
-    \fi
-    可得系数仅剩$\ell=1$项，壳内是一个匀强场：
-    \[
-        \Phi_\magnetic(r,\theta)=
-        \begin{cases}
-            a_1r\cos\theta,&r<a\\
-            \ldots,&a<r<b\\
-            -H_0r\cos\theta+\frac{d_1}{r^2}\cos\theta,&r>b
-        \end{cases}
-    \]
-    当$\mu\gg\mu_0$时，壳内场强趋于0，这便是磁屏蔽效应。
+    消去$D$，再用第一行的$C/B=(\mu_\relative-1)/(2\mu_\relative+1)$，得到球腔中的匀强场
+    \begin{equation}
+        \bm B_{\mathrm{cav}}=A\bm B_0,\qquad
+        A=\frac{9\mu_\relative}
+        {9\mu_\relative+2(\mu_\relative-1)^2(1-f)}.
+    \end{equation}
+    当$\mu_\relative=1$或壳厚趋于零时，球腔内恢复外场。固定壳厚且$\mu_\relative>1$时，增大磁导率会使更多磁通经由壳层，球腔内的场随之减弱。对于$0<\mu_\relative<1$的抗磁壳，由于$(\mu_\relative-1)^2/\mu_\relative$在$\mu_\relative$减小时增大，球腔内的场也随之减弱。
 \end{example}
 最后探究了在一侧具有渐近均匀切向磁场的完全导电平面上的圆孔的影响，略。
 
@@ -786,28 +777,36 @@ Faraday从实验上证实电磁感应现象在Galileo变换下不变：无论是
 \section{磁场的能量}
 \label{sec:energy in the magnetic field}
 
-我们在前面讨论静磁场时，避开了场能和能量密度的问题。
-因为
-要建立电流的稳恒组态及有关的磁场，必定经过一段初始的瞬变期，在这期间，电流和磁场从零增到终值。存在这种随时间变化的场，就存在使电流源做功的感生电动势。因为按照定义，场的能量等于建立这场时所做的总功，所以我们必须考虑这些贡献。
+固定线圈和磁性材料的位置，从零缓慢增加电流。磁通的改变产生反电动势，电源克服它所做的功储存在磁场和材料中。扣除导线的Joule热，忽略辐射，在磁似稳近似下有
+\[
+    \delta W=\int\bm J_{\mathrm f}\cdot\delta\bm A\d V
+       =\int\bm H\cdot\delta\bm B\d V .
+\]
+第二步用了$\curl\bm H=\bm J_{\mathrm f}$，并对全空间分部积分，局域电流在无穷远的表面项为零。
+以无场、无剩磁的状态为参考，对固定材料状态的可逆磁化过程，磁能密度为
+\[
+    w_\magnetic=\int_{\bm 0}^{\bm B}\bm H(\bm B')\cdot\d\bm B'.
+\]
+在线性互易介质中，沿比例增加电流可得
+\begin{equation}
+    W=\frac12\int\bm H\cdot\bm B\d V
+      =\frac12\int\bm J_{\mathrm f}\cdot\bm A\d V .
+\end{equation}
+若材料有磁滞，同一$\bm B$可以沿不同路径达到。每单位体积在一个完整磁滞回线中耗散的能量为$\oint\bm H\cdot\d\bm B$。
 
-保持电流恒定不变，
+另一种实验是固定自由电流的空间分布，将线性磁性材料放入原来的真空场$\bm B_0=\mu_0\bm H_0$。
+对初、末两组场分部积分，得到$\int\bm H_0\cdot\bm B\d V=\int\bm J_{\mathrm f}\cdot\bm A\d V$和$\int\bm H\cdot\bm B_0\d V=\int\bm J_{\mathrm f}\cdot\bm A_0\d V$。
+用$\bm B/\mu_0=\bm H+\bm M$相减，储能增加量为
 \[
-    \vd W=\int_V\vd\bm A\cdot\bm J\d V=\int_V\bm H\cdot\vd\bm B\d V.
+    \Delta W=\frac12\int(\bm H_0\cdot\bm B-\bm H\cdot\bm B_0)\d V
+            =\frac12\int_{\text{材料}}\bm M\cdot\bm B_0\d V .
 \]
-对于顺磁性和抗磁性物质，$2\bm H\cdot\vd\bm B=\vd(\bm H\cdot\bm B)$
-\[
-    W=\frac12\int_V\bm A\cdot\bm J\d V=\frac12\int_V\bm H\cdot\bm B\d V.
-\]
-
-将一个磁导率为$\mu$的物体放进电流源固定不动的磁场$\bm B$中，前后能量发生变化
-\[
-    \Delta W=\frac12\int_V\bm M\cdot\bm B_0\d V.
-\]
+材料移动时电源仍在做功，因此还须计算电源功，才能从储能的变化求力。
 
 \subsectionstar{自感和互感}
 \label{ssec:self- and mutual inductance}
 
-对于$N$个不导磁的载流电路系统，总能量可以描述为：
+固定几何下，若周围材料线性、互易且无永久磁化，$N$个载流线圈的总磁能为
 \[
     W=\frac12\sum_{i=1}^NL_iI_i^2+\frac12\sum_{i\neq j}M_{ij}I_iI_j.
 \]
@@ -820,25 +819,51 @@ $L_i$是线圈$i$的自感(self-inductance)，$M_{ij}$是线圈$i,j$之间的互
 \[
     W=\frac12\int_V\bm J\cdot\bm A\d V.
 \]
-求出，用磁通量的形式即
+求出。记$\varPhi_{ij}$为电流$I_j$在线圈$i$中建立的磁链，即穿过各匝的磁通量之和，则
 \[
     L_i=\frac{\varPhi_{ii}}{I_i},\quad M_{ij}=\frac{\varPhi_{ij}}{I_j}.
 \]
 \begin{example}
     {同轴线缆的电感}{inductance of coaxial cable}
-    内外半径为$r,R$的同轴线缆单位长度的电感为
+    理想同轴线的内导体半径为$r$，外导体内半径为$R$，两导体之间为真空。由环形区域的磁能得到单位长度电感
     \begin{equation}
-        L=\frac{\mu_0}{2\pi}\ln\biggp{\frac Rr}.
+        L'=\frac{\mu_0}{2\pi}\ln\biggp{\frac Rr}.
     \end{equation}
 \end{example}
-若电路是导磁的，则$W$的表达式不适用了，需要换为
-\[
-    W=\frac12\int_V\bm H\cdot\bm B\d V.
-\]
-后面还讨论了圆导线的自电感。
+\begin{example}{恒流线圈吸入磁芯}{magnetic core insertion}
+    电流源维持线圈的电流$I$，线性软磁芯插入距离$x$时，磁链为$\varPsi=L(x)I$。插入使电感增大，电源须克服反电动势，做功$I\d\varPsi=I^2\d L$。扣去储能的增加，磁场对磁芯做的机械功为
+    \[
+        F_x\d x=I\d\varPsi-\d\biggp{\frac12 LI^2}=\frac12 I^2\d L,\qquad
+        F_x=\frac12 I^2\dv Lx .
+    \]
+    磁芯被拉向电感增大的方向。可与\exmref{exm:dielectric insertion work}对照：恒流时电源输送$I\d\varPsi$的能量，恒压时电源输送$V\d Q$的能量。\footnote{多线圈系统的能量法和磁共能见 H.~A. Haus and J.~R. Melcher, \href{https://web.mit.edu/6.013_book/www/chapter11/11.7.html}{\textit{Electromagnetic Fields and Energy}, Sec.~11.7}。}
+\end{example}
 
 \sectionstar{似稳场}
 \label{sec:quasi-static field}
 
-似稳场(quasi-static field)、涡流(eddy current)、磁扩散(magnetic diffusion)
+导体放入随时间变化的磁场时，变化的磁通感生电场，在导体中驱动闭合的电流，称为涡流(eddy current)。涡流自身产生的磁场阻碍原磁通的变化，因此外磁场的改变需要一段时间才能传入导体内部。
+
+设导体静止，电导率$\sigma$、磁导率$\mu$和介电常数$\varepsilon$均为常量。场变化的时间尺度为$T$时，若$\varepsilon/(\sigma T)\ll1$，导体内的位移电流远小于传导电流。在这种磁似稳近似下，Ampère定律和Ohm定律给出
+\[
+    \bm J=\frac1\mu\curl\bm B=\sigma\bm E.
+\]
+代入Faraday定律\eqref{eqn:curlE-B}，利用$\div\bm B=0$，得到磁扩散方程
+\begin{equation}
+    \label{eqn:magnetic diffusion}
+    \pv{\bm B}t=-\frac1{\mu\sigma}\curl(\curl\bm B)
+    =D_\magnetic\laplacian\bm B,\qquad D_\magnetic=\frac1{\mu\sigma}.
+\end{equation}
+空间依赖为$\e^{\i\bm k\cdot\bm r}$的自由衰减分量随$\e^{-D_\magnetic k^2 t}$减小。因此，磁场扩散距离$L$所需的时间尺度为$\mu\sigma L^2$。扩散过程中，涡流以$\bm J\cdot\bm E=J^2/\sigma$的速率把电磁能转化为单位体积内的热。
+
+\begin{example}{导体平板中磁场的衰减}{magnetic diffusion in a slab}
+    导体占据$-a<x<a$，两侧表面的切向磁场保持为零。设初始场为$\bm B(x,0)=B_0\cos(\pi x/2a)\uvec z$。此分布是满足边界条件的最低阶扩散模。令$k_1=\pi/(2a)$，由式\eqref{eqn:magnetic diffusion}得
+    \[
+        B_z(x,t)=B_0\cos(k_1x)\e^{-t/\tau_1},\qquad
+        \tau_1=\frac1{D_\magnetic k_1^2}=\frac{4\mu\sigma a^2}{\pi^2}.
+    \]
+    电流沿$y$方向，$J_y=-\mu^{-1}\p B_z/\p x$，因此在平板两侧方向相反。内部磁场和电流以同一时间常量衰减，板厚加倍时，衰减时间增至四倍。
+\end{example}
+
+若在半无限导体的表面施加角频率为$\omega$的切向场，式\eqref{eqn:magnetic diffusion}给出振幅衰减至表面值$1/\e$的深度$\delta=\sqrt{2D_\magnetic/\omega}$。这一趋肤深度将在\chapref{chap:waveguide}计算金属壁的耗散时用到。
 

@@ -1,12 +1,7 @@
 \chapter{波导}
 \label{chap:waveguide}
-本章我们研究金属边界下的电磁场，这是一个相当重要且实用的题材。因为
-在波长为米量级(或更短)的高频情况下，只有利用线度与波长相当的金属结构才能有效产生和发送电磁波。
-% 在更高(红外)频率下，介电光纤在电信行业中被广泛应用。
-我们在本章里先考虑在一个导体附近的场，并讨论场对表面的穿透以及伴随的电阻损失。
-然后讨论了一般的波导和谐振腔中的电磁波等问题，并进行了具体说明。
-用两种不同观点讨论波导中的衰减和谐振腔的$Q$值。
-% 其次把地球-电离层系统当作谐振腔处理，接着简短地讨论电介质波导。我们还阐述波导中任意场的简正模展开，并应用到定域源产生的场。本章最后把简正模展开进一步应用到用变分法处理波导中障碍物问题。
+同轴线可以把任意低频的行波从一端送到另一端，而同样由金属围成的空心矩形管有最低传播频率。两种结构的差别来自导体给横向场施加的边界条件。
+本章先求电磁场在金属表面激起的电流和损耗，再由边界条件求波导的模式、截止频率和传输功率。最后将波导两端封闭，考察谐振腔的储能、损耗和品质因子。
 
 \section{导体表面和内部的场}
 理想导体(perfect conductor)的零电阻条件给出内部$\bm E=0$，由Faraday定律只能推出$\p\bm B/\p t=0$，即初始磁场保持不变。超导体(superconductor)在Meißner态还会排斥体内磁场（表面穿透层除外），因此零电阻本身并不等价于Meißner效应。下面讨论非零频率的谐振场，或假定导体内部初始磁场为零。
@@ -148,9 +143,9 @@ Maxwell方程组变为
         \nabla_\transv\cdot\bm E_\transv+\pv{E_z}z&=0,\\
         \nabla_\transv\cdot\bm B_\transv+\pv{B_z}z&=0,\\
         \nabla_\transv E_z-\pv{\bm E_\transv}z&=\i\omega\uvec z\times\bm B_\transv,\\
-        \uvec z\cdot(\nabla_\transv\times\bm E_\transv)&=\i\omega\bm B_z,\\
+        \uvec z\cdot(\nabla_\transv\times\bm E_\transv)&=\i\omega B_z,\\
         \nabla_\transv B_z-\pv{\bm B_\transv}z&=-\i\mu\varepsilon\omega\uvec z\times\bm E_\transv,\\
-        \uvec z\cdot(\nabla_\transv\times\bm B_\transv)&=\i\mu\varepsilon\omega\bm E_z.
+        \uvec z\cdot(\nabla_\transv\times\bm B_\transv)&=-\i\mu\varepsilon\omega E_z.
     \end{align}
 \end{subequations}
 结合纵向波数的关系式\eqref{eqn:lapla_tE}，$\bm E_\transv,\bm B_\transv$可以被$E_z,B_z$确定
@@ -182,7 +177,29 @@ Maxwell方程组变为
 \[
     \bm B_\mathrm{TEM}=\pm\sqrt{\mu\varepsilon}\uvec z\times\bm E_\mathrm{TEM},
 \]
-电导率为无穷大的单个中空柱形导体内不可能存在TEM模。为了运载TEM模，必须有两个及以上的等势面(比如同轴线)。TEM模的一个重要性质是不存在截止频率，即任意$\omega$均可以传播（$k_z$均是实数）。
+在封闭的均匀波导中，横向场可写成$\bm E_\transv=-\grad_\transv\Phi$，每个理想导体边界上的$\Phi$都是常数。若截面只有一个导体边界，Laplace方程的唯一解就是常数，故$\bm E_\transv=0$。同轴线有两个彼此绝缘的导体，能维持横向电势差，从而支持非零的TEM模。由\eqref{eqn:TEM k0}，均匀无损填充的理想同轴线没有几何截止频率。
+
+\begin{example}{同轴线上的能量怎样传输}{coax TEM power}
+    设内导体半径为$a$，外导体内半径为$b$，其间均匀填充无损、无色散的介质。取沿$+z$传播的TEM行波，$V$是同一截面上内导体相对外导体的瞬时电压，$I$是内导体沿$+z$的瞬时电流。由横向电势和Ampère环路定律得
+    \[
+        E_\rho=\frac{V}{\rho\ln(b/a)},\qquad
+        H_\phi=\frac{I}{2\pi\rho},\qquad a<\rho<b .
+    \]
+    对环形截面积分。轴向Poynting通量给出瞬时功率，电场能和磁场能给出单位长度的储能，
+    \[
+        P=\int_a^b E_\rho H_\phi\,2\pi\rho\d\rho=VI,\qquad
+        U=\frac12 C'V^2+\frac12 L'I^2 ,
+    \]
+    其中$C'=2\pi\varepsilon/\ln(b/a)$，$L'=\mu\ln(b/a)/(2\pi)$。两个量也可分别从\exmref{exm:capacitance of coaxial cable}和\exmref{exm:inductance of coaxial cable}得到。对正向行波，$E_\rho/H_\phi=\sqrt{\mu/\varepsilon}$，于是
+    \[
+        V=Z_{\mathrm c}I,\qquad
+        Z_{\mathrm c}=\frac{\ln(b/a)}{2\pi}\sqrt{\frac{\mu}{\varepsilon}}
+                     =\sqrt{\frac{L'}{C'}},\qquad
+        \frac P U=\frac1{\sqrt{L'C'}}=\frac1{\sqrt{\mu\varepsilon}} .
+    \]
+    电能和磁能各占一半。电路上测得的$VI$，正是沿两导体之间的介质流过截面的能量率。
+\end{example}
+
 \paragraph{TE模式和TM模式}
 横电(TE)波和横磁(TM)波是在中空柱体内(以及高频时的传输线上)出现两类场的构型，
 可以通过纵向分量$E_z$和$B_z$满足的波动方程以及边界条件得到。
@@ -229,9 +246,9 @@ TM波和TE波的横磁场和横电场的关系如下：
     \label{eqn:TE/TM field psi}
     \begin{alignat}{2}
         \label{eqn:TM field psi}
-        \mathrm{TM}&:\quad&\bm E_\transv&=\pm\i\frac{k_z}{k_\cutoff^2}\nabla_\transv\psi,\quad E_z=\psi\e^{\pm\i k_zz};\\
+        \mathrm{TM}&:\quad&\bm E_\transv&=\pm\i\frac{k_z}{k_\cutoff^2}\nabla_\transv\psi\,\e^{\pm\i k_zz},\quad E_z=\psi\e^{\pm\i k_zz};\\
         \label{eqn:TE field psi}
-        \mathrm{TE}&:\quad&\bm H_\transv&=\pm\i\frac{k_z}{k_\cutoff^2}\nabla_\transv\psi,\quad H_z=\psi\e^{\pm\i k_zz}.
+        \mathrm{TE}&:\quad&\bm H_\transv&=\pm\i\frac{k_z}{k_\cutoff^2}\nabla_\transv\psi\,\e^{\pm\i k_zz},\quad H_z=\psi\e^{\pm\i k_zz}.
     \end{alignat}
 \end{subequations}
 其中$k_\cutoff^2=\mu\varepsilon\omega^2-k_z^2$。
@@ -245,7 +262,7 @@ TM波和TE波的横磁场和横电场的关系如下：
     \mathrm{TM}&:&\eval{\psi}_S&=0;\\
     \mathrm{TE}&:&\quad\biggeval{\pv\psi n}_S&=0.
 \end{alignat*}
-可以确定一系列本征值$k_{\mathrm ci}$和本征函数$\psi_i$，这些不同的解称为波导的模式(mode)。
+可以确定一系列本征值$k_{\mathrm ci}$和本征函数$\psi_i$。TE的Neumann问题还给出$k_\cutoff=0$的常数解。沿截面边界应用Faraday定律，$\oint_{\p A}\bm E\cdot\d\bm\ell=\i\omega\mu\int_A H_z\d A=0$，因为理想导体壁上的切向电场为零。因此在非零频率下，常数$H_z$只能为零。以下TE、TM模式均取$k_\cutoff>0$，并设填充介质无色散。
 \begin{definition}
     {截止频率}{cutoff frequency}
     定义单个模式的截止频率(cutoff frequency)：
@@ -259,17 +276,12 @@ TM波和TE波的横磁场和横电场的关系如下：
 \begin{equation}
     k_z=\sqrt{\mu\varepsilon}\sqrt{\omega^2-\omega_\cutoff^2}.
 \end{equation}
-截止频率的意义为：
-\begin{compactitem}
-    \item 当$\omega>\omega_\cutoff$时，$k_z^2>0$，模式可以在波导中传播；
-    \item 当$\omega<\omega_\cutoff$时，$k_z^2<0$，模式不能在波导中传播。
-\end{compactitem}
-因此给定频率上，只有有限个模式可以传播。
-可以通过选择波导的尺寸，使得在使用频率上只能出现最低模式的波。
+当$\omega>\omega_\cutoff$时，$k_z$为实数，前进波可以把能量送往远处。当$\omega<\omega_\cutoff$时，令$k_z=\i\kappa$，$\kappa>0$。半无限、无损波导中，有界的解沿$+z$按$\e^{-\kappa z}$衰减。由横向场关系，横向电场与横向磁场相差$\pi/2$，单支倏逝模的轴向周期平均功率为零。
+若低于截止的波导段只有有限长，两端的边界条件可以同时激发$\e^{-\kappa z}$与$\e^{+\kappa z}$两支解。它们的相对相位可以使Poynting矢量的交叉项具有实部，因而这段波导可以传递功率。
 
 \paragraph{色散关系}
 
-均匀介质波导中的波数$k_z$总是小于无限空间中的波数$k_0$，因此相速度$v_\varphi$大于无限空间中的光速：
+对于截止以上的TE或TM模，$k_z^2=k_0^2-k_\cutoff^2$，轴向波数小于同一介质中平面波的波数。因此沿波导的相速度为
 \[
     v_\varphi=\frac\omega{k_z}=\frac1{\sqrt{\mu\varepsilon}}\frac1{\sqrt{1-(\omega_\cutoff/\omega)^2}}>\frac1{\sqrt{\mu\varepsilon}}.
 \]
@@ -277,12 +289,12 @@ TM波和TE波的横磁场和横电场的关系如下：
 \[
     v_{\mathrm{g}}=\dv\omega{k_z}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{1-\Bigp{\frac{\omega_\cutoff}\omega}^2}<\frac1{\sqrt{\mu\varepsilon}}.
 \]
-因此并不违反相对论，并且有关系
+两种速度的乘积与频率无关，
 \begin{equation}
     v_\varphi v_{\mathrm{g}}=\frac1{\mu\varepsilon}.
 \end{equation}
 在 $\omega\vs k_z$ 色散图上，原点与曲线上一点的连线斜率 $\omega/k_z$ 是相速度，该点的切线斜率 $\d\omega/\nd k_z$ 是群速度。
-在均匀传输系统中是双曲线。
+这些TE、TM模的色散曲线为双曲线的正频率分支，同轴线TEM模的色散曲线则是过原点的直线。
 
 \subsection{矩形波导}
 \label{ssec:rectangular waveguide}
@@ -374,11 +386,33 @@ $H_z=0,\,E_z=\psi$，边界上$\psi=0$可得
 
 \paragraph{传输特性}
 
-根据截止频率的表达式，TE$_{10}$模式具有最低的截止频率。一般波导内为真空，相应的截止波长$\lambda_{10}=2a$。其次为TE$_{20}$或TE$_{01}$。理论上当
+取$a>b$，填充真空。TE$_{10}$的截止波长为$2a$，下一个达到截止的模式是TE$_{20}$或TE$_{01}$。取远离两个截止端点的真空波长
 \[
-    \max(a,2b)\leq\lambda<2a
+    \max(a,2b)<\lambda<2a .
 \]
-时，波导内只存在TE$_{10}$模式，而其余频率均被截止。因此通常矩形波导会被设计成$a=2b$，且尺寸随着工作频率的增加而减小。
+此时只有TE$_{10}$可以把能量带到均匀波导的远处。馈源、台阶或开口附近仍可含有高阶倏逝模。常用的$a=2b$使第二组模式的截止频率为基模的两倍。
+
+\begin{example}{振荡电偶极能向矩形波导送入多少功率}{waveguide dipole excitation}
+    在上述单模波段，将给定偶极矩复振幅$\bm p$的小电偶极放在$(x_0,y_0,0)$，波导两端无限延伸。取时间因子$\e^{-\i\omega t}$，正向TE$_{10}$参考模的横向电场和磁场为
+    \[
+        E_y^+=E_m\sin(\pi x/a)\e^{\i k_z z},\qquad
+        H_x^+=-E_y^+/Z_{\mathrm{TE}},\qquad Z_{\mathrm{TE}}=\omega\mu_0/k_z .
+    \]
+    这里$E_m$是峰值复振幅。对截面上的$\tfrac12\Re(-E_y^+H_x^{+*})$积分，参考模沿正向携带的平均功率为$P_m=ab\abs{E_m}^2/(4Z_{\mathrm{TE}})$。
+
+    用\secref{sec:dyadic-green}的互易定理求激发振幅。取反向参考场$\bm E^-=(\bm E^+)^*$、$\bm H^-=-(\bm H^+)^*$，偶极源的电流为$\bm J=-\i\omega\bm p\,\delta^{(3)}(\bm r-\bm r_0)$。对包住偶极的一段波导积分，侧壁上的切向电场为零。两端截面取得足够远，左端的出射场与反向参考模同向，互易定理的两个通量项相消。右端若有振幅$a_+$的正向模，则
+    \[
+        \int_A(\bm E\times\bm H^--\bm E^-\times\bm H)\cdot\uvec z\d A
+        =-4P_m a_+=\int\bm E^-\cdot\bm J\d V
+        =-\i\omega\bm p\cdot\bm E^-(\bm r_0).
+    \]
+    因此每一端测到的TE$_{10}$功率均为
+    \[
+        P_+=P_-=\abs{a_+}^2P_m
+          =\frac{\omega^2 Z_{\mathrm{TE}}}{4ab}\abs{p_y}^2\sin^2(\pi x_0/a).
+    \]
+    沿$y$放置的偶极在$x_0=a/2$时耦合最强，沿$x$或$z$放置时该模的激发振幅为零。两端测得的总功率为$2P_+$。
+\end{example}
 
 \subsection{圆波导}
 
@@ -504,9 +538,7 @@ TE和TM的最低模式分别为TE$_{11}$和TM$_{01}$。二者的$k_\cutoff a$分
 \subsection{介质加载波导}
 
 \paragraph{慢波结构}
-带电粒子与电磁波交换能量(加速/减速)要求电磁波的相速度与电子的速度相同。
-因此需要波导中的相速度小于等于光速，称为慢波结构。
-由于带电粒子在介质中的速度超过介质光速时，会产生Cherenkov辐射，故无法采用全部填充介质的波导。本小节考虑部分填充介质的波导。
+要让粒子沿波导持续加速，轴向电场须在粒子经过时保持合适的相位，因此轴向相速度应与粒子速度相等。介质加载可降低相速度，同时为粒子保留真空通道。下面用场形较简单的TE模说明介质怎样改变色散关系。TE模的轴向电场为零，纵向加速需要具有$E_z$的模式。
 \begin{notecaptionblock}
     \tikzfigure{dielectric-waveguide}
     \captionof{figure}{部分填充介质的矩形波导}
@@ -529,7 +561,7 @@ TE和TM的最低模式分别为TE$_{11}$和TM$_{01}$。二者的$k_\cutoff a$分
 \[
     H_{yi}=\i\frac{k_z}{k_i^2-k_z^2}\pv{H_{zi}}y
 \]
-在$x=d$处连续，可得$\varepsilon_1\mu_1=\varepsilon_2\mu_2$。即$\varepsilon_1\mu_1\neq\varepsilon_2\mu_2$时，TE$_{mn}$不存在。
+在$x=d$处连续可知，只要$k_z\neq0$且$H_z$在界面上不恒为零，就须有$\varepsilon_1\mu_1=\varepsilon_2\mu_2$。两侧折射率不同时，具有这种横向依赖的一般传播模式同时含有$E_z$和$H_z$。
 % 由$E_y,H_y,H_z$在介质分界$x=d$处连续，可得$n_1=n_2=n$且$n\neq 0$时，
 但是TE$_{m0}$可以存在，此时$H_y\equiv 0$，再结合
 \[
@@ -537,7 +569,9 @@ TE和TM的最低模式分别为TE$_{11}$和TM$_{01}$。二者的$k_\cutoff a$分
 \]
 在$x=d$处连续，可得
 \begin{equation}
-    \frac{\mu_1}{k_{x1}}\tan(k_{x1}d)=\frac{\mu_2}{k_{x2}}\tan(k_{x2}(a-d)),
+    \frac{\mu_1}{k_{x1}}\sin u\cos v
+        +\frac{\mu_2}{k_{x2}}\cos u\sin v=0,\qquad
+    u=k_{x1}d,\quad v=k_{x2}(a-d),
 \end{equation}
 再结合
 \begin{equation}
@@ -546,114 +580,178 @@ TE和TM的最低模式分别为TE$_{11}$和TM$_{01}$。二者的$k_\cutoff a$分
 便可在给定$\omega$下求得$k_{x1},k_{x2}$和$k_z$。
 另一方面，也可以令$k_z=0$求得截止频率满足的方程：
 \begin{equation}
-    \sqrt{\frac{\mu_1}{\varepsilon_1}}\tan(\omega_\cutoff\sqrt{\mu_1\varepsilon_1}d)=
-    \sqrt{\frac{\mu_2}{\varepsilon_2}}\tan(\omega_\cutoff\sqrt{\mu_2\varepsilon_2}(a-d)).
+    \sqrt{\frac{\mu_1}{\varepsilon_1}}\sin u_\cutoff\cos v_\cutoff
+    +\sqrt{\frac{\mu_2}{\varepsilon_2}}\cos u_\cutoff\sin v_\cutoff=0.
 \end{equation}
-上式可以通过作图求出交点。显然，TE$_{m0}$的截止频率位于分别完全填充介质1 ($d=a$)和介质2 ($d=0$)的截止频率之间：
+其中$u_\cutoff=\omega_\cutoff\sqrt{\mu_1\varepsilon_1}d$、$v_\cutoff=\omega_\cutoff\sqrt{\mu_2\varepsilon_2}(a-d)$。两侧介质相同时，方程化为$\sin(k_xa)=0$，恢复均匀矩形波导的结果。
+若$\mu_1=\mu_2$、$\varepsilon_1>\varepsilon_2$且$0<d<a$，TE$_{m0}$的截止频率位于完全填充两种介质的两个极限之间：
 \[
     \frac{m\pi}{a\sqrt{\mu_1\varepsilon_1}}<\omega_\cutoff<\frac{m\pi}{a\sqrt{\mu_2\varepsilon_2}},
 \]
 
-考虑介质2为真空，
-当相速度$v_\varphi$等于电子速度(电子在一定能量下速度可以非常接近真空光速)时，即$v_\varphi=\omega/k_z=c$，
-有$k_{x2}=0$。
+设区域2为真空，电子在其中以速度$v_{\mathrm e}$沿$z$运动。要使电子所见的波相位$k_z z-\omega t$恒定，须有$k_z=\omega/v_{\mathrm e}$。对这里的TE$_{m0}$模，$k_{y2}=0$，因而
+\[
+    k_{x2}^2=\frac{\omega^2}{c^2}-\frac{\omega^2}{v_{\mathrm e}^2}
+       =-\frac{\omega^2}{\gamma^2v_{\mathrm e}^2},\qquad
+    \gamma=(1-v_{\mathrm e}^2/c^2)^{-1/2}.
+\]
+有限能量电子同步时，真空区的横向波数为纯虚数。只有在固定频率取$v_{\mathrm e}\to c$的极限时才有$k_{x2}\to0$，本征方程中的$\sin v/k_{x2}$相应趋于$a-d$。同步说明粒子能持续处在同一相位；这里的TE模有$E_z=0$，不能对纯轴向运动的电子做纵向加速功。
 
 \subsection{波导中的能流和衰减}
 
-我们扩大前面对任意截面形状的柱形波导所作的一般讨论，使它包括沿波导的能流以及波的衰减，后者是当电导率有限时由波导管壁中能量损耗所引起的。我们只限于讨论波导中只存在一种模式的情况；不过将简短提一下简并模式。能流用复Poynting矢量描写；
+考虑沿$+z$方向传播的一个TE或TM模。取横截面为$A$，波导内的介质均匀、无耗散且无色散。
+复Poynting矢量为
 \begin{equation}
-    \bm S=\frac12\bm E\times\bm H\conj=\frac{\omega k}{2\gamma^4}
+    \bm S=\frac12\bm E\times\bm H\conj=\frac{\omega k_z}{2k_\cutoff^4}
     \begin{cases}
-        \varepsilon\Bigp{\uvec z\abs{\nabla_\transv\psi}^2+\i\frac{\gamma^2}k\psi\nabla_\transv\psi\conj},&\mathrm{TM}\\[1ex]
-        \mu\Bigp{\uvec z\abs{\nabla_\transv\psi}^2-\i\frac{\gamma^2}k\psi\conj\nabla_\transv\psi},&\mathrm{TE}
+        \varepsilon\Bigp{\uvec z\abs{\nabla_\transv\psi}^2+\i\frac{k_\cutoff^2}{k_z}\psi\nabla_\transv\psi\conj},&\mathrm{TM},\\[1ex]
+        \mu\Bigp{\uvec z\abs{\nabla_\transv\psi}^2-\i\frac{k_\cutoff^2}{k_z}\psi\conj\nabla_\transv\psi},&\mathrm{TE}.
     \end{cases}
 \end{equation}
-因为$\psi$一般是实数，\footnote{有可能这样激发一个波导，使得某给定模式或一些模式的线性组合具有复数$\psi$。这时候横向能流对时间的平均值将不为零，但因为它是一个环流，所以实际上只代表贮藏的能量，在实用上不大重要。}
-因此$\bm S$的第二项代表无功能流，并且对能流的时间平均没有贡献。总功率流
+当横向本征函数$\psi$取实数时，第二项是纯虚数，时间平均能流沿$z$方向。
+对\eqref{eqn:laplat+kc2}分部积分，边界项因$\psi=0$（TM模）或$\p\psi/\p n=0$（TE模）而消失，故
 \[
-    P=\int_A\bm S\cdot\uvec z\d A=\frac{\omega k}{2\gamma^4}
-    \begin{Bmatrix}
-        \varepsilon\\\mu
-    \end{Bmatrix}
-    \biggp{\oint_{\p A}\cancel{\psi\conj\pv\psi n}\d\ell-\int_A\psi\conj\nabla_\transv^2\psi\d A}.
+    \int_A\abs{\nabla_\transv\psi}^2\d A=k_\cutoff^2\int_A\abs\psi^2\d A.
 \]
-由特征方程$(\nabla_\transv^2+\gamma_\lambda^2)\psi=0$，
-\[
-    P=\frac1{2\sqrt{\mu\varepsilon}}\biggp{\frac\omega{\omega_\lambda}}^2\biggp{1-\frac{\omega_\lambda^2}{\omega^2}}^{1/2}
-    \begin{Bmatrix}
-        \varepsilon\\\mu
-    \end{Bmatrix}
-    \int_A\psi\conj\psi\d A.
-\]
-时间平均能量密度
-\[
-    u=\frac14\Bigp{\varepsilon\bm E\cdot\bm E\conj+\frac1\mu\bm B\cdot\bm B\conj},
-\]
-单位长度的场能量
-\[
-    U=\frac12\biggp{\frac\omega{\omega_\lambda}}^2
-    \begin{Bmatrix}
-        \varepsilon\\\mu
-    \end{Bmatrix}
-    \int_A\psi\conj\psi\d A,
-\]
-能流的速度正是群速度
-\[
-    \frac PU=\frac k\omega\frac1{\mu\varepsilon}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{1-\frac{\omega_\lambda^2}{\omega^2}}=v_{\mathrm{g}}.
-\]
-结合前面说的相速度
+取$C=\varepsilon$（TM模）或$C=\mu$（TE模），通过截面的平均功率$P$和单位长度的平均场能量$U$分别为
+\begin{align*}
+    P&=\int_A\Re\bm S\cdot\uvec z\d A
+      =\frac{C\omega k_z}{2k_\cutoff^2}\int_A\abs\psi^2\d A,\\
+    U&=\frac14\int_A\bigp{\varepsilon\abs{\bm E}^2+\mu\abs{\bm H}^2}\d A
+      =\frac C2\Bigp{\frac{\omega}{\omega_\cutoff}}^2\int_A\abs\psi^2\d A.
+\end{align*}
+两式相除给出能量沿波导传播的速度
 \begin{equation}
-    v_\text gv_\varphi=\frac1{\mu\varepsilon},
+    \frac PU=\frac{k_z}{\mu\varepsilon\omega}=\dv\omega{k_z}=v_{\mathrm g}.
 \end{equation}
-在无限介质中，$v_{\mathrm{g}}$总是小于$v_\varphi$，并且在截止频率时降为零。
+趋近截止时，场仍能储存能量，但单位储能所能输送的功率趋于零。
+
 \paragraph{良导体的波导}
-对于理想导体，$k_\lambda$是实数或纯虚数；而对于电导率有限的良导体来说，$k_\lambda$是一个实数与一个小复数的和。
+若金属壁的趋肤深度远小于壁厚和截面尺寸，场只进入金属表面一薄层。
+由\eqref{eqn:dPloss/da}，波导每单位长度损失的平均功率为
+\[
+    p_{\mathrm{loss}}=\frac{R_{\mathrm s}}2\oint_{\p A}\abs{\bm H_\parallel}^2\d\ell,
+    \qquad -\dv Pz=p_{\mathrm{loss}}.
+\]
+本节的$\alpha\equiv\alpha_{\mathrm{amp}}$是导模的振幅衰减常数，使场振幅正比于$\e^{-\alpha z}$，则$P(z)=P(0)\e^{-2\alpha z}$。
+壁损很小时，积分中的磁场和功率可用理想导体模式的$\bm H^{(0)}$和$P^{(0)}$代入，得到一阶结果
+\begin{equation}
+    \label{eqn:guide wall attenuation}
+    \alpha=\frac{p_{\mathrm{loss}}}{2P^{(0)}}
+    =\frac{R_{\mathrm s}}{4P^{(0)}}\oint_{\p A}\abs{\bm H^{(0)}_\parallel}^2\d\ell .
+\end{equation}
+分子取沿金属表面的全部磁场分量，包括纵向磁场$H_z$。若填充介质也有微弱吸收，每单位长度的损失还应加上$\int_A q_{\mathrm{abs}}\d A$，其中$q_{\mathrm{abs}}$按理想模式的场计算。总功率损失除以$2P^{(0)}$给出总振幅衰减常数；同一导模的功率衰减常数则是它的两倍。
 
-后面的略。
-\paragraph{最小衰减频率}
-略。
+\paragraph{矩形波导的最小衰减频率}
+以$a\times b$矩形波导的TE$_{10}$模为例。记$k_\cutoff=\pi/a$，则$H_z=H_0\cos(k_\cutoff x)$，
+$H_x=-\i(k_z/k_\cutoff)H_0\sin(k_\cutoff x)$，二者省略了共同的传播因子。
+在$x=0,a$的两面上只需计入$H_z$，在$y=0,b$的两面上则两个分量都要计入。于是
+\begin{align*}
+    \oint_{\p A}\abs{\bm H^{(0)}_\parallel}^2\d\ell
+       &=\abs{H_0}^2\Bigb{2b+a\Bigp{1+\frac{k_z^2}{k_\cutoff^2}}},\\
+    P^{(0)}&=\frac{\mu\omega k_z ab}{4k_\cutoff^2}\abs{H_0}^2.
+\end{align*}
+记填充介质的本征阻抗$\eta=\sqrt{\mu/\varepsilon}$，代入\eqref{eqn:guide wall attenuation}得
+\begin{equation}
+    \alpha_{10}=\frac{R_{\mathrm s}}{\eta b}\,
+    \frac{1+(2b/a)(\omega_\cutoff/\omega)^2}{\sqrt{1-(\omega_\cutoff/\omega)^2}}.
+\end{equation}
+在截止附近，同样的壁电流对应较小的输送功率，因而衰减急剧增大。
+在高频端，正常趋肤效应给出$R_{\mathrm s}\propto\sqrt\omega$，衰减也随之上升。
+例如$a=2b$，令$x=\omega/\omega_\cutoff$，则$\alpha_{10}\propto(x^2+1)/\sqrt{x(x^2-1)}$。
+令导数为零，得$x^4-6x^2+1=0$，在传播区间内的极小值位于$x=1+\sqrt2$。
+此时已超过第二个模式的截止频率$2\omega_\cutoff$，这个极小值描述单独激发的TE$_{10}$模。
+
 \section{边界条件的扰动}
-略
-\section{谐振腔}
-一个谐振腔(resonant cavity)可以是任何形状的，具有一个封闭的导体表面。但通常我们将端面放置在一定长度的圆柱形波导上，以产生一个空腔。端面是垂直于圆柱体轴线的平面。
+功率损失给出振幅衰减。要同时求相位的变化，需要保留金属壁上切向电场与磁场的相位差。
+沿用从金属指向波导内部的法向量$\uvec n$，前面求出的良导体表面场满足
+\begin{equation}
+    \bm E_\parallel=Z_{\mathrm s}\uvec n\times\bm H_\parallel,
+    \qquad Z_{\mathrm s}=(1-\i)R_{\mathrm s}.
+\end{equation}
+$Z_{\mathrm s}$称为表面阻抗(surface impedance)，虚部的符号对应于时间因子$\e^{-\i\omega t}$。
 
-由$z=0,d$的边界条件，应有驻波形式：
+在同一个实频率下，记理想壁模式为$(\bm E^{(0)},\bm H^{(0)})$，其纵向波数为$k_z$。
+良导体壁上的相应模式记作$(\bm E,\bm H)$，纵向波数为$k_z+\Delta k_z$。
+在波导内部用Maxwell方程展开散度，可得
+\[
+    \div\bm F=0,\qquad
+    \bm F=\bm E\times\bm H^{(0)\ast}+\bm E^{(0)\ast}\times\bm H .
+\]
+对波导的一薄段应用散度定理。$\bm F$随$z$按$\e^{\i\Delta k_z z}$变化，
+侧壁处的外法向为$-\uvec n$，理想壁的切向电场为零，故
+\[
+    \i\Delta k_z\int_A\bm F\cdot\uvec z\d A
+    =-\oint_{\p A}Z_{\mathrm s}\bm H_\parallel\cdot\bm H^{(0)\ast}_\parallel\d\ell .
+\]
+两端的积分都已乘上一阶小量，可在积分中代入理想壁的场。左端的截面积分等于$4P^{(0)}$，于是
+\begin{equation}
+    \Delta k_z\simeq\frac{\i Z_{\mathrm s}}{4P^{(0)}}
+        \oint_{\p A}\abs{\bm H^{(0)}_\parallel}^2\d\ell=(1+\i)\alpha .
+\end{equation}
+因此场沿轴的因子为$\e^{\i(k_z+\alpha)z}\e^{-\alpha z}$。虚部给出了由能量守恒所得的衰减，实部说明波导波长略有缩短。
+上述微扰要求$\abs{\Delta k_z}\ll k_z$，在十分接近截止处须重新求解有损模式。
+遇到简并模式时，应先在简并子空间内选取使壁面磁场重叠积分对角化的功率归一化模式。
+
+\section{谐振腔}
+将一段长$d$的波导在$z=0,d$处用理想金属端板封闭。前进波和反射波叠加成驻波，
+端面上的切向电场和法向磁场均为零，故纵向分量分别取
 \begin{align*}
     \mathrm{TM}&:&E_z=\psi(x,y)\cos\Bigp{\frac{p\pi z}d},&&p&=0,1,2,\ldots,\\
-    \mathrm{TE}&:&H_z=\psi(x,y)\sin\Bigp{\frac{p\pi z}d},&&p&=1,2,3,\ldots,
+    \mathrm{TE}&:&H_z=\psi(x,y)\sin\Bigp{\frac{p\pi z}d},&&p&=1,2,3,\ldots.
 \end{align*}
-特征值频率
-\[
-    \omega_{\lambda_p}^2=\frac1{\mu\varepsilon}\Bigb{\gamma_\lambda^2+\Bigp{\frac{p\pi}d}^2},
-\]
-
-% 对于TM模，$\psi=E_z$，
-% \[
-%     \psi(\rho,\phi)=E_0J_m(\gamma_{mn}\rho)\e^{\pm\i m\phi},\quad\gamma_{mn}=\frac{x_{mn}}R,
-% \]
-% 其中$x_{mn}$表示$J_m(x)$的第$n$个零点：
-
-% 谐振频率为
-% \begin{equation}
-%     \omega_{mnp}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{\Bigp{\frac{x_{mn}}R}^2+\Bigp{\frac{p\pi}d}^2}.
-% \end{equation}
-
-% 对于TE模，$\psi=H_z$，
-% \[
-%     \gamma_{mn}=\frac{x'_{mn}}R,
-% \]
-% 其中$x'_{mn}$表示$J'_m(x)$的第$n$个零点：
-
-% 谐振频率为
-% \begin{equation}
-%     \omega_{mnp}=\frac1{\sqrt{\mu\varepsilon}}\sqrt{\Bigp{\frac{x'_{mn}}R}^2+\Bigp{\frac{p\pi}d}^2}.
-% \end{equation}
+横截面决定$k_\cutoff$的允许值，端面间距决定纵向波数$p\pi/d$。相应的本征频率为
+\begin{equation}
+    \omega_p^2=\frac1{\mu\varepsilon}\Bigb{k_\cutoff^2+\Bigp{\frac{p\pi}d}^2}.
+\end{equation}
+同一横截面模式可有多个纵向驻波。TM模还允许$p=0$，此时轴向电场处处垂直于端面，频率与腔长无关。
 
 \section{腔内的功率损失}
-对于理想导体，$\abs{E(\omega)}$在各个$\omega_i$上是一个个$\delta$函数；而对于良导体，则会有一定的半高宽。
-
-定义品质因子(quality factor)
+腔内的驻波也在金属表面激起电流。取均匀、无色散的填充介质，对一个孤立的本征模式，
+电场和磁场的时间平均总能量相等。因此总储能$W$和整个内壁上的平均损耗功率分别是
+\begin{align*}
+    W&=\frac14\int_V\bigp{\varepsilon\abs{\bm E}^2+\mu\abs{\bm H}^2}\d V
+      =\frac\mu2\int_V\abs{\bm H}^2\d V,\\
+    P_{\mathrm{loss}}&=\frac{R_{\mathrm s}}2\oint_{\p V}\abs{\bm H_\parallel}^2\d a.
+\end{align*}
+其中的场取理想腔模。只有壁损时，品质因子(quality factor)可由下式求得
 \begin{equation}
-    Q:=\omega_0\frac{\text{stored energy}}{\text{power loss}}.
+    \label{eqn:cavity wall Q}
+    Q=\omega_0\frac W{P_{\mathrm{loss}}}
+      \simeq\frac{\omega_0\mu}{R_{\mathrm s}}\,
+      \frac{\displaystyle\int_V\abs{\bm H}^2\d V}
+           {\displaystyle\oint_{\p V}\abs{\bm H_\parallel}^2\d a}.
 \end{equation}
+这里$\omega_0$为谐振角频率，积分范围包括两块端板和侧壁。
+切断激励后，由$\d W/\d t=-P_{\mathrm{loss}}$得
+\[
+    W(t)=W(0)\e^{-\omega_0 t/Q},\qquad
+    E_{\text{包络}}(t)\propto\e^{-\omega_0 t/(2Q)}.
+\]
+对于$Q\gg1$的孤立共振，将这个指数衰减的振荡作Fourier变换，得到共振附近的功率线形
+\[
+    \abs{E(\omega)}^2\propto
+       \frac1{(\omega-\omega_0)^2+(\omega_0/2Q)^2}.
+\]
+两个半功率点之间的角频率差为$\Delta\omega=\omega_0/Q$。若腔还通过耦合口向外输出功率，
+求测得的线宽时应将输出功率也计入总损耗。
 
+\paragraph{圆柱腔的TM$_{010}$模}
+取半径$a$、长$d$的真空腔，壁材料无磁性。记$x_{01}\simeq2.405$为$J_0$的第一个正零点。
+由圆波导TM模取$p=0$，得到$\omega_0=c x_{01}/a$，且仅有两个场分量
+\[
+    E_z=E_0J_0(x_{01}\rho/a),\qquad
+    H_\phi=-\i\frac{E_0}{Z_0}J_1(x_{01}\rho/a).
+\]
+$H_\phi$在侧壁和端板上均为切向分量。利用
+$\int_0^a\rho J_1^2(x_{01}\rho/a)\d\rho=a^2J_1^2(x_{01})/2$，
+记$H_a=\abs{H_\phi(a)}$，体积积分和壁面积分分别为
+\[
+    \int_V\abs{\bm H}^2\d V=\pi a^2d H_a^2,\qquad
+    \oint_{\p V}\abs{\bm H_\parallel}^2\d a=2\pi ad H_a^2+2\pi a^2 H_a^2.
+\]
+右端两项依次来自侧壁和两块端板。由$R_{\mathrm s}=\mu_0\omega_0\delta/2$，\eqref{eqn:cavity wall Q}给出
+\begin{equation}
+    Q_{010}=\frac{ad}{(a+d)\delta}.
+\end{equation}
+在固定半径下缩短腔长，谐振频率保持不变。储能与腔长成正比，而两块端板的损耗在固定场幅下保持不变，因此短腔的线宽变大。\secref{sec:single cavity mode}将用同一场分布算出腔内一个光子对应的电场振幅。

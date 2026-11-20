@@ -239,7 +239,7 @@
 \end{definition}
 
 \begin{corollary}
-    稳定时，导体内部不会存在静电场或静电电荷（因为自由电荷在电场下会快速移动到导体表面达到平衡态），并且导体表面和内部都是等势的。
+    静电平衡时，均匀导体材料内部的宏观电场和净体电荷密度均为零，多余电荷分布在表面。同一连通导体的表面和内部等势。
 \end{corollary}
 
 \begin{example}{带电导体球的电势}{potential of conducting sphere}
@@ -268,6 +268,19 @@
     \end{notecaptionblock}
 \end{example}
 
+\paragraph{用球壳检验平方反比律}
+\label{par:photon mass test}
+上例给出一种零值实验：给空心导体球壳充电，Coulomb定律预言空腔中任意两点的电势差都为零。实验可以反复改变外壳电势，在腔内寻找与外壳电压同步的微弱信号。
+
+具体看这个测量如何约束光子质量。若光子有静质量$m_\gamma$，记$\kappa=m_\gamma c/\hbar$，Proca理论中的点电荷势为$q\e^{-\kappa r}/(4\pi\varepsilon_0r)$。设理想球壳半径为$R$，电势为$V$（取无穷远处为零）。在没有探针扰动的球形空腔中，静电势满足$(\laplacian-\kappa^2)\Phi=0$。球对称下$(r\Phi)''=\kappa^2 r\Phi$，用球心处的正则性和$\Phi(R)=V$可得
+\[
+    \Phi(r)=V\frac{R\sinh(\kappa r)}{r\sinh(\kappa R)},\qquad
+    \frac{\Phi(R)-\Phi(0)}{V}
+    =1-\frac{\kappa R}{\sinh(\kappa R)}
+    =\frac{(\kappa R)^2}{6}+\bigo((\kappa R)^4).
+\]
+所以在$\kappa R\ll1$时，相对电压灵敏度$\delta$对应的光子质量尺度为$\hbar\sqrt{6\delta}/(cR)$。实际装置的系数取决于电极几何。Williams、Faller和Hill在1971年用同心导体的交变电压做了这类实验，按Proca模型得到$\kappa^2=(1.04\pm1.2)\times10^{-15}\,\si{\per\metre\squared}$，测量与零相容。\footnote{E. R. Williams, J. E. Faller and H. A. Hill, \href{https://doi.org/10.1103/PhysRevLett.26.721}{Phys. Rev. Lett. 26, 721 (1971)}。}
+
 \section{电荷的表面分布}
 
 考察面电荷密度为$\sigma$的表面，表面法向单位矢量$\uvec n$从表面的一侧(1)指向另一侧(2)，根据Gauss定律，电场法向分量在表面两侧是不连续的：
@@ -288,21 +301,21 @@
 \begin{equation}
     -\pv{\Phi_2}n+\pv{\Phi_1}n=\frac\sigma{\varepsilon_0}.
 \end{equation}
-可以证明，在体电荷和面电荷分布上，电位分布是连续的。但是对于点电荷、线电荷或电偶层(dipole layers)，电位分布是不连续的！
+局部有界的体电荷密度或面电荷密度产生连续的电势。理想点电荷和线电荷的电势在源处发散，理想电偶层(dipole layer)则可以产生有限的电势跃变。
 \begin{example}{电偶层}{dipole layers}
-    两个面电荷密度为$\sigma$、间距为$d$的电偶层，
+    设两层相应面元带等量异号电荷，$\uvec n$从负电荷指向正电荷，两面元沿法向相距$d$。正层的面电荷密度为$\sigma$。
     \begin{notecaptionblock}
         \tikzfigure{dipole-layers}
         \captionof{figure}{电偶层}
         \label{fig:dipole layers}
     \end{notecaptionblock}
-    当$d\to0$时，电位
+    取$d\to0$并保持单位面积偶极矩$\sigma d$固定，电位为
     \begin{align*}
-        \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\int_S\frac{\sigma(\bm r')}{\abs{\bm r-\bm r'}}\d A'-\frac1{4\pi\varepsilon_0}\int_{S'}\frac{\sigma(\bm r')}{\abs{\bm r-\bm r'+d(\bm r')\uvec n}}\d A'\\
+        \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\int_S\sigma(\bm r')\biggl[\frac1{\abs{\bm r-\bm r'}}-\frac1{\abs{\bm r-\bm r'+d(\bm r')\uvec n}}\biggr]\d A'\\
         &\simeq\frac1{4\pi\varepsilon_0}\int_S\sigma(\bm r')d(\bm r')\uvec n\cdot\nabla'\biggp{\frac1{\abs{\bm r-\bm r'}}}\d A'\\
-        &=-\frac1{4\pi\varepsilon_0}\int_S\sigma(\bm r')d(\bm r')\d\Omega,
+        &=\frac1{4\pi\varepsilon_0}\int_S\sigma(\bm r')d(\bm r')\d\Omega,
     \end{align*}
-    上式用到了三维Taylor展开(注意上式是对$\bm r'$求导)，
+    这里取有向立体角$\d\Omega=\uvec n\cdot(\bm r-\bm r')\d A'/\abs{\bm r-\bm r'}^3$。上式用到了三维Taylor展开(注意上式是对$\bm r'$求导)，
     \[
         \frac1{\abs{\bm r+\bm a}}=\frac1r+\bm a\cdot\grad\biggp{\frac1r}+\cdots,\quad a\ll r.
     \]
@@ -366,11 +379,13 @@
 前两项是自能项，在$\bm r=\bm r_1$或$\bm r=\bm r_2$处发散；
 最后一项是互能项，在全空间的积分正是静电势能的形式。
 
-\begin{example}{导体的能量密度}{energy density of conductor}
-    由式\eqref{eqn:Et2-Et1}，导体内的电场$\bm E_\internal=\bm 0$，故导体的法向电场$E=\sigma/\varepsilon_0$，能量密度
+\begin{example}{导体表面外侧的场能与电压力}{energy density of conductor}
+    设静电平衡的导体表面与真空相邻，外法向为$\uvec n$。导体内部电场为零，由法向边界条件\eqref{eqn:En2-En1}，紧贴表面外侧的场为$\bm E_\mathrm{out}=(\sigma/\varepsilon_0)\uvec n$，因而
     \[
-        w=\frac{\varepsilon_0}2E^2=\frac{\sigma^2}{2\varepsilon_0}.
+        w_\mathrm{out}=\frac{\varepsilon_0}2\abs{\bm E_\mathrm{out}}^2
+        =\frac{\sigma^2}{2\varepsilon_0},\qquad w_\mathrm{in}=0 .
     \]
+    要求表面电荷所受的力，应扣去该面元自身的场。面元自场在两侧大小相等、方向相反，其余电荷产生的场在面元处连续，故作用场为两侧场的平均值。单位面积所受的力沿外法向，电压力为$p=\sigma E_{\mathrm{out},n}/2=\sigma^2/(2\varepsilon_0)$，恰等于外侧场能密度。
 \end{example}
 
 \paragraph{导体系统、电容}
@@ -384,8 +399,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 \end{equation}
 \begin{compactitem}
 	\item $C_{ii}$即导体的电容(capacitance)，其物理意义是：当导体保持在单位电位、所有其他导体都保持在零电位时的导体的总电荷；
-	\item $C_{ij}$是感应系数(coefficients of induction)，%可以用来
-    表示两个导体系统的电容。
+	\item $i\ne j$时，$C_{ij}$是感应系数(coefficients of induction)，等于导体$j$置于单位电势、其余导体接地时导体$i$上的感应电荷。
 \end{compactitem}
 
 \begin{example}
@@ -410,9 +424,9 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
 
 \begin{example}
     {同轴线缆的电容}{capacitance of coaxial cable}
-    内外半径分别为$r,R$的同轴线缆单位长度的电容
+    内导体半径为$r$，外导体内半径为$R$，两者之间为真空，则同轴线单位长度的电容为
     \begin{equation}
-        C=\frac{2\pi\varepsilon_0}{\ln(R/r)}.
+        C'=\frac{2\pi\varepsilon_0}{\ln(R/r)}.
     \end{equation}
 \end{example}
 
@@ -609,7 +623,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     \[
         \ave\Phi_{\p V}:=\frac1S\oint_{\p V}\Phi(\bm r')\d A'.
     \]
-    如果$V$包括无穷远处，则\eqref{eqn:Neumann Green condition}变为$\eval{\p G/\p n'}_{\p V}\equiv 0$，此时$\ave\Phi_{\p V}=0$。
+    对外部区域，若取电势在无穷远处趋于零，可在有限边界上选$\p G/\p n'=0$；归一化所需的总通量$-4\pi$来自无穷远处的球面。
 \end{theorem}
 
 \begin{remark}
@@ -635,7 +649,7 @@ $p_{ij}$取决于导体的几何关系，这相当于一个矩阵，取逆即
     \]
     但对于Neumann边界条件，还需加上一项才是对称的：
     \[
-        G(\bm r,\bm r')+\frac1S\oint_{\p V}G(\bm r,\bm r'')\d A''=G(\bm r',\bm r)+\frac1S\oint_{\p V}G(\bm r',\bm r'')\d A''.
+        G(\bm r,\bm r')-\frac1S\oint_{\p V}G(\bm r,\bm r'')\d A''=G(\bm r',\bm r)-\frac1S\oint_{\p V}G(\bm r',\bm r'')\d A''.
     \]
     额外加的这一项并不影响电势$\Phi(\bm r)$。
 \end{theorem}
@@ -698,13 +712,10 @@ Neumann边界条件的泛函
 
 \subsectionstar{松弛法}
 
+有限差分法(finite difference method, FDM)用格点上的函数值近似微分项，将微分方程离散为代数方程组。
 \begin{definition}
     {松弛法}{relaxation method}
-    松弛法(relaxation method)也称有限差分法(finite difference method, FDM)，是一种求解微分方程数值解的近似方法，其主要原理是对微分方程中的微分项进行直接差分近似：
-    \[
-        \dv fx\approx\frac{\Delta f}{\Delta x}=\frac{f(x+h)-f(x)}h
-    \]
-    从而将微分方程转化为代数方程组求解。
+    松弛法(relaxation method)从格点值的一个初始估计出发，按各格点方程的残差修正估计，反复迭代以求得收敛解。
 \end{definition}
 
 采用直角网格划分，格点$(i,j)$处的电位为$\Phi_{i,j}$，网格间距为$h$，
@@ -732,11 +743,11 @@ $\Phi_{i,j\pm 1}$同理，可得
 \begin{equation}
     \Phi_{i+1,j}+\Phi_{i-1,j}+\Phi_{i,j+1}+\Phi_{i,j-1}-4\Phi_{i,j}=h^2f_{i,j}.
 \end{equation}
-对应的超松弛(successive over-relaxation, SOR)迭代格式为
+按$j$逐行、每行按$i$递增的顺序更新，逐次超松弛(successive over-relaxation, SOR)迭代采用已经更新的相邻格点：
 \begin{equation}
-    \Phi_{i,j}^{(n+1)}=(1-\omega)\Phi_{i,j}^{(n)}+\frac\omega4\biggb{\Phi_{i+1,j}^{(n)}+\Phi_{i-1,j}^{(n)}+\Phi_{i,j+1}^{(n)}+\Phi_{i,j-1}^{(n)}-h^2f_{i,j}},
+    \Phi_{i,j}^{(n+1)}=(1-\omega)\Phi_{i,j}^{(n)}+\frac\omega4\biggb{\Phi_{i+1,j}^{(n)}+\Phi_{i-1,j}^{(n+1)}+\Phi_{i,j+1}^{(n)}+\Phi_{i,j-1}^{(n+1)}-h^2f_{i,j}},
 \end{equation}
-可以证明，当$0<\omega<2$时，迭代是收敛的，最优松弛因子(最速收敛)约为
+在边长$L$、四边给定电势的正方形上取均匀方格，$0<\omega<2$时该迭代收敛，最优松弛因子为
 \begin{equation}
-    \omega_\text{opt}=\frac2{1+\sin(\pi h)}.
+    \omega_\text{opt}=\frac2{1+\sin(\pi h/L)}.
 \end{equation}

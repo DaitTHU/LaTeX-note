@@ -84,13 +84,13 @@
     作用在电荷$q$上的力等于电荷$q$和像电荷$q'$之间的Coulomb力：
     \begin{equation}
         \label{eqn:grounded sphere conductor-point, F}
-        F=\frac1{4\pi\varepsilon_0}\frac{qq'}{(d-d')^2}=\frac{q^2}{4\pi\varepsilon_0}\frac{ad}{(d^2-a^2)^2}.
+        F_r=\frac1{4\pi\varepsilon_0}\frac{qq'}{(d-d')^2}=-\frac{q^2}{4\pi\varepsilon_0}\frac{ad}{(d^2-a^2)^2}.
     \end{equation}
-    也可以将$\sigma^2/2\varepsilon_0$在$\p V$上积分得到。
+    负号表示球外电荷受到指向球心的吸引力。将电压力乘以局部外法向后在球面上积分，则得到导体所受的反作用力。
 \end{example}
 
 \begin{remark}
-    这个结果同样适用于球内的电荷($y<a$)。唯一需要改变的是\eqref{eqn:grounded sphere conductor-point, sigma}，其中导体外的法向导数现在是径向向内的，这意味着符号的变化。导体球内表面感应电荷为$-q$，与$d$无关。
+    对球形空腔内的电荷($d<a$)，像电荷位于球外。电荷所受力的大小仍为上式的绝对值，此时指向距离最近的腔壁。导体表面的外法向指向球心，内表面感应电荷为$-q$，与$d$无关。
 \end{remark}
 
 \begin{example}{带电孤立导体球的镜像电荷}{method of images, charged sphere conductor}
@@ -101,15 +101,15 @@
     \end{compactenum}
     因此电势会添加一项等效于处于原点的$(Q-q')$点电荷的电势。
     
-    而原点电荷受到的力为
+    球外点电荷$q$受到的径向力为
     \begin{equation}
         F=\frac1{4\pi\varepsilon_0}\frac q{d^2}\biggb{Q-q\frac{a^3(2d^2-a^2)}{d(d^2-a^2)^2}}.
     \end{equation}
-    当$y\gg a$时，电场力会退化为两个点电荷之间的Coulomb力
+    当$d\gg a$时，电场力的首项为两个点电荷之间的Coulomb力
     \[
         F\simeq\frac1{4\pi\varepsilon_0}\frac{qQ}{d^2}.
     \]
-    当$Q\gg q$时，相互作为用0的点（不稳定平衡点）坐标$y$为
+    当$Q/q\gg1$时，径向力为零的位置靠近球面，对应不稳定平衡：
     \begin{equation}
         Q\simeq\frac{qa^2}{4(d-a)^2}\implies d\simeq a\biggp{1+\frac12\sqrt{\frac qQ}}.
     \end{equation}
@@ -168,13 +168,13 @@
 式\eqref{eqn:Dirichlet Green}中还需要$\p G/\p n'$，若感兴趣的区域为球外，则$n'$指向球内，
 \begin{equation}
     \label{eqn:sphere dGreen function}
-    \biggeval{\pv G{n'}}_{r'=a}=-\biggeval{\pv G{r'}}_{r'=a}=-\frac{r'^2-a^2}{a(r'^2+a^2-2ar'\cos\gamma)^{3/2}}.
+    \biggeval{\pv G{n'}}_{r'=a}=-\biggeval{\pv G{r'}}_{r'=a}=-\frac{r^2-a^2}{a(r^2+a^2-2ar\cos\gamma)^{3/2}}.
 \end{equation}
-这正是式\eqref{eqn:grounded sphere conductor-point, sigma}的感应表面电荷密度。
+将电荷$q$置于距球心$r$处，则$(q/4\pi)\,\p G/\p n'$给出式\eqref{eqn:grounded sphere conductor-point, sigma}的感应表面电荷密度。
 
 \begin{theorem}
     {球外Laplace方程的解}{Laplacian solution outside sphere}
-    给定球表面电势$\Phi(a,\theta,\phi)$下，球外Laplace方程的解
+    给定球表面电势$\Phi(a,\theta,\phi)$，并令$\Phi$在无穷远处趋于零，球外Laplace方程的解为
     \begin{equation}
         \label{eqn:sphere Laplace solution}
         \Phi(r,\theta,\phi)=\frac1{4\pi}\oint_{\p V}\Phi(a,\theta',\phi')\frac{a(r^2-a^2)}{(r^2+a^2-2ar\cos\gamma)^{3/2}}\d\Omega'
@@ -250,7 +250,7 @@
 
 \begin{theorem}
     {完备正交函数展开}{complete orthogonal function expansion}
-    若有一组完备的正交函数集$\{U_i(\xi)\}$，则在区间$(a,b)$上任意平方可积的函数$f(\xi)$均可被展开成正交函数的线性组合
+    若$\{U_i(\xi)\}$是区间$(a,b)$上完备的正交归一函数系，则任意平方可积函数$f$都有如下均方收敛的展开：
     \[
         f(\xi)=\sum_{i=1}^\infty a_iU_i(\xi),\quad a_i:=\int_a^bU_i\conj(\xi)f(\xi)\d\xi.
     \]
@@ -290,11 +290,11 @@
         b_n&=\frac2\ell\int_{-\ell/2}^{\ell/2}f(x)\sin\biggp{\frac{2\pi nx}{\ell}}\d x.
     \end{align*}
 \end{example}
-一般化至二维，对于任意矩形区域$(a,b)\times(c,d)$上平方可积的函数$f(\xi,\eta)$，若可在两个维度分别找到一组正交函数$U_i(\xi),V_j(\eta)$，则$f(\xi,\eta)$可被展开为
+一般化至二维，对于矩形区域$(a,b)\times(c,d)$上平方可积的函数$f(\xi,\eta)$，若在两个维度分别取完备的正交归一函数系$U_i(\xi),V_j(\eta)$，则$f(\xi,\eta)$可被展开为
 \[
     f(\xi,\eta)=\sum_{i=1}^\infty\sum_{j=1}^\infty a_{ij}U_i(\xi)V_j(\eta),
     \quad
-    a_{ij}=\int_a^b\int_c^dU_i(\xi)V_j(\eta)f(\xi,\eta)\d\eta\nd\xi
+    a_{ij}=\int_a^b\int_c^dU_i\conj(\xi)V_j\conj(\eta)f(\xi,\eta)\d\eta\nd\xi .
 \]
 \begin{example}{Fourier变换}{Fourier transformation}
     Fourier级数有复变函数的形式
@@ -422,7 +422,7 @@
     \Psi_n(\phi)=a_n\cos(n\phi)+b_n\sin(n\phi),
     \enspace n=0,1,2,\ldots
 \]
-可得$\Psi_n''/\Psi_n=n^2$，
+可得$\Psi_n''/\Psi_n=-n^2$，
 继而$R(\rho)$满足Euler方程，
 % 做变量替换$u(t)=R(\e^t)$，
 % \[
@@ -476,8 +476,36 @@
 \sectionstar{有限元分析法}
 \label{sec:finite element analysis}
 
-有限元分析法（finite element analysis, FEA）是一种数值方法，用于求解复杂的工程和物理问题，特别是涉及偏微分方程的连续体力学问题，如结构力学、热传导、电磁场等。
-其基本思想是将一个复杂的连续体问题分解成许多简单的子问题，这些子问题在数学上更容易处理。每个子问题对应于一个“有限元”，它是一个小的、简单形状的区域（如三角形或四边形）。然后，在这些简单区域上，通过选择合适的数学近似（如多项式函数），将偏微分方程转化为代数方程。这些代数方程组成了所谓的有限元方程。
+边界形状复杂时，可以先将区域剖分成许多三角形，只把顶点的电势作为未知量。这便是求静电场的一种有限元方法(finite element method)。设场和源与$z$无关，介电常数$\varepsilon>0$，截面$D$的边界电势给定。在一切满足该边界条件的试探电势中，真实电势使单位长度的泛函
+\[
+    \mathcal F[\Phi]=\int_D\biggp{\frac{\varepsilon}{2}\abs{\grad\Phi}^2-\rho\Phi}\d A
+\]
+取极小值。事实上，对边界上为零的变分$w$分部积分，驻值条件给出
+\[
+    \int_D\varepsilon\grad w\cdot\grad\Phi\,\d A=\int_D w\rho\,\d A,
+\]
+这就是Poisson方程$-\div(\varepsilon\grad\Phi)=\rho$的弱形式。它只含一阶导数，因此允许相邻三角形上的电势连续、斜率不同。
+
+在三角形$e$内，取三个线性函数$N_i$，使$N_i$在顶点$i$等于1、在其余两顶点等于0。用节点电势插值$\Phi=\sum_{j=1}^3N_j\Phi_j$，分别取$w=N_i$计算各单元对节点方程的贡献：
+\begin{equation}
+    K^{(e)}_{ij}=\varepsilon_e A_e\,\grad N_i\cdot\grad N_j,\qquad
+    f^{(e)}_i=\frac{\rho_e A_e}{3}.
+\end{equation}
+这里假设$\varepsilon_e,\rho_e$在面积为$A_e$的单元内均匀，用到了$\int_e N_i\,\d A=A_e/3$。同一顶点从所有相邻单元收到的贡献相加，得到方程组$\sum_j K_{ij}\Phi_j=f_i$。代入边界节点的已知电势，就可以求解内部节点。
+
+\begin{example}{四个三角形的组装}{four triangular elements}
+    边长$2h$的正方形由中心$O$和四角连成四个单元，如\figref{fig:triangular-elements}。整个区域的$\rho,\varepsilon$为常量。以$O$为原点，在下方单元中$N_O=1+y/h$，两个底角的形函数为$(-y\mp x)/(2h)$。这一单元对中心节点贡献对角元$\varepsilon$，对两个相邻角点各贡献$-\varepsilon/2$。
+    \begin{notecaptionblock}
+        \tikzfigure{triangular-elements}
+        \captionof{figure}{正方形截面的线性三角形单元}
+        \label{fig:triangular-elements}
+    \end{notecaptionblock}
+    将四个单元相加，每个角点恰好出现两次。因此
+    \[
+        4\varepsilon\Phi_O-\varepsilon\sum_{j=1}^4\Phi_j=\frac{4\rho h^2}{3}.
+    \]
+    无电荷时，中心电势等于四角电势的平均值。若边界给定的是线性电势，例如$\Phi=E_0 x$，则插值在每个单元内都精确再现原解。
+\end{example}
 
 \section{球坐标系中的正交函数}
 \label{sec:laplace equation in spherical coordinate}
@@ -519,9 +547,9 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
 考虑$m=0$的情形，得到Legendre方程：
 \begin{equation}
     \label{eqn:Legendre}
-    \dd x\biggb{(1-x)^2\dv Px}+\ell(\ell+1)P=0.
+    \dd x\biggb{(1-x^2)\dv Px}+\ell(\ell+1)P=0.
 \end{equation}
-其解为Legendre多项式$P_\ell(x)$，可以写成
+在$x=\pm1$均正则且取$P_\ell(1)=1$的解为Legendre多项式，可以写成
 \begin{equation}
     \label{eqn:Rodrigues}
     P_\ell(x)=\frac1{2^\ell\ell!}\dd[\ell]x(x^2-1)^\ell.
@@ -777,14 +805,19 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
             \arcsin\Bigp{\frac a\rho},&\rho>a
         \end{cases}
     \]
-    故
+    若另给定两盘所在平面在$\rho>a$处的电势为$\pm(2V/\pi)\arcsin(a/\rho)$，便能据此选取
     \[
         B(k)=\frac{2V}{\pi}\cdot\frac{\sin(ka)}{k\sinh(kd/2)}.
     \]
-    最终电势分布为
+    这组平面Dirichlet数据在夹层内给出的电势为
     \[
         \Phi(\rho,z)=\frac{2V}{\pi}\intRplus J_0(k\rho)\frac{\sin(ka)}{k\sinh(kd/2)}\sinh(kz)\d k.
     \]
+    对于真空中仅有两个有限圆盘的电容器，盘外的平面电势须由内外场共同确定。上半空间$z>d/2$的衰减解决定后，连续匹配电势，外场展开中的径向谱系数为$B(k)\sinh(kd/2)\e^{-k(z-d/2)}$。盘外还须连续匹配法向导数，这给出
+    \[
+        \int_0^\infty kB(k)\e^{kd/2}J_0(k\rho)\d k=0,\qquad \rho>a .
+    \]
+    此式与盘面等势条件共同确定实际圆盘电容器的$B(k)$。
 \end{example}
 
 \begin{theorem}{Bessel函数的正交性}{}
@@ -825,7 +858,7 @@ $P(\theta)$经常通过$x=\cos\theta$代换，得到广义(generalized) Legendre
     \[
         \begin{cases}
             A_{mn}=\frac{2\csch(k_{mn}L)}{\pi a^2J_{m+1}^2(k_{mn}a)}\int_0^{2\pi}\int_0^aV(\rho,\phi)J_m(k_{mn}\rho)\sin(m\phi)\rho\d\rho\nd\phi\\
-            B_{mn}=\frac{2\csch(k_{mn}L)}{\pi a^2J_{m+1}^2(k_{mn}a)}\int_0^{2\pi}\int_0^aV(\rho,\phi)J_m(k_{mn}\rho)\cos(m\phi)\rho\d\rho\nd\phi
+            B_{mn}=\frac{2\csch(k_{mn}L)}{(1+\delta_{m0})\pi a^2J_{m+1}^2(k_{mn}a)}\int_0^{2\pi}\int_0^aV(\rho,\phi)J_m(k_{mn}\rho)\cos(m\phi)\rho\d\rho\nd\phi
         \end{cases}
     \]
 \end{example}
@@ -979,13 +1012,13 @@ Green函数可以写成
     \label{eqn:cylinder green}
     \frac1\rho\dd\rho\biggp{\rho\dv{g_m}\rho}-\biggp{k^2+\frac{m^2}{\rho^2}}g_m=-\frac{4\pi}\rho\delta(\rho-\rho').
 \end{equation}
-当$\rho\neq\rho'$时，上式为修正Bessel方程，解为$I_m(k\rho),\,K_m(k\rho)$，由对称性
+当$\rho\neq\rho'$时，上式为修正Bessel方程。令$\kappa=\abs k$，其径向解为$I_m(\kappa\rho),\,K_m(\kappa\rho)$，由对称性
 \[
-    g_m(k,\rho,\rho')=\psi_1(k\rho_<)\psi_2(k\rho_>).
+    g_m(k,\rho,\rho')=\psi_1(\kappa\rho_<)\psi_2(\kappa\rho_>).
 \]
 $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐含的斜率不连续条件：
 \[
-    \biggeval{\dv{g_m}\rho}_{\rho'+\epsilon}-\biggeval{\dv{g_m}\rho}_{\rho'-\epsilon}=kW[\psi_1,\psi_2]=-\frac{4\pi}\rho.
+    \lim_{\epsilon\to0^+}\biggb{\biggeval{\dv{g_m}\rho}_{\rho'+\epsilon}-\biggeval{\dv{g_m}\rho}_{\rho'-\epsilon}}=\kappa W[\psi_1,\psi_2](\kappa\rho')=-\frac{4\pi}{\rho'}.
 \]
 其中Wro\'nski行列式(Wronskian) $W[\psi_1,\psi_2]=\psi_1\psi_2'-\psi_2\psi_1'$，由于方程\eqref{eqn:cylinder green}是Sturm--Liouville型的：
 \[
@@ -995,13 +1028,13 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 \[
     W[\psi_1(x),\psi_2(x)]=-\frac{4\pi}x.
 \]
-如果没有边界，$g_m(k,\rho,\rho')$必须在$\rho=0$处收敛且在$\rho\to\infty$趋于0，由此$\psi_1(k\rho)=AI_m(k\rho),\,\psi_2(k\rho)=K_m(k\rho)$，又
+自由空间中，轴上正则的解取$\psi_1=AI_m$，远处衰减的解取$\psi_2=K_m$。由
 \[
     W[I_m(x),K_m(x)]=-\frac1x,
 \]
 故$A=4\pi$，我们得到了$1/\abs{\bm r-\bm r'}$的展开 
 \begin{equation}
-    \frac1{\abs{\bm r-\bm r'}}=\frac1\pi\sum_{m=-\infty}^{+\infty}\intR\e^{\i m(\phi-\phi')}\e^{\i k(z-z')}I_m(k\rho_<)K_m(k\rho_>)\d k.
+    \frac1{\abs{\bm r-\bm r'}}=\frac1\pi\sum_{m=-\infty}^{+\infty}\intR\e^{\i m(\phi-\phi')}\e^{\i k(z-z')}I_m(\abs k\rho_<)K_m(\abs k\rho_>)\d k.
 \end{equation}
 
 \subsection{Green函数的本征函数展开式}
@@ -1055,5 +1088,34 @@ $\psi_1,\psi_2$是$I_m,K_m$的线性组合。由方程右边$\delta$函数所隐
 \sectionstar{混合边界条件}
 \label{sec:mixed boundary condition}
 
-Jackson举例了带一圆孔的导电平板问题，略。
+无限大接地薄导体占据$z=0$平面，板上有半径$a$的圆孔。设远处上方电场为$-E_0\uvec z$，下方电场趋于零，两侧都是真空。封住圆孔时，上、下方电势分别为$E_0 z$和零。开孔使电场穿过平板，要求孔内电势和法向电场在两侧连续，金属部分仍为零电势。
+
+减去封孔时的解，两侧余下的电势在平面上的取值相同，在远处都趋于零。由唯一性定理，它们互为镜像。记这个修正为$u(\rho,s)$，其中$\rho$为到轴的距离，$s=\abs z$，于是
+\[
+    \Phi(\rho,z)=
+    \begin{cases}
+        E_0 z+u(\rho,z),&z>0,\\
+        u(\rho,-z),&z<0.
+    \end{cases}
+\]
+孔内两侧的$\p_z\Phi$相等，给出$E_0+\p_s u=-\p_s u$。这样，同一平面上满足两种边界条件，
+\begin{equation}
+    \p_s u(\rho,0)=-E_0/2\quad(\rho<a),\qquad
+    u(\rho,0)=0\quad(\rho>a).
+\end{equation}
+
+可以选取恰好适合孔缘的扁球坐标$\xi\ge0,\ 0\le\eta\le1$：
+\[
+    \rho=a\sqrt{(1+\xi^2)(1-\eta^2)},\qquad s=a\xi\eta.
+\]
+孔内对应$\xi=0$，金属对应$\eta=0$。取$u=\eta f(\xi)$便自动满足金属上的条件。代入轴对称Laplace方程得到
+\[
+    \dd{\xi}\biggb{(1+\xi^2)\dv{f}{\xi}}-2f=0.
+\]
+一个解为$\xi$，降阶得在无穷远处衰减的解$f=C[1-\xi\arctan(1/\xi)]$。在孔内固定$\rho$向上移动，有$\p_s u=f'(0)/a=-\pi C/(2a)$，故$C=aE_0/\pi$。特别地，孔面电势和孔正下方轴线上的电势为
+\begin{align}
+    \Phi(\rho,0)&=\frac{E_0}{\pi}\sqrt{a^2-\rho^2}\quad(\rho<a),\\
+    \Phi(0,-s)&=\frac{E_0}{\pi}\biggp{a-s\arctan\frac{a}{s}}\quad(s>0).
+\end{align}
+孔中心的法向场为$-E_0/2$。在$s\gg a$处，$\Phi(0,-s)\simeq E_0a^3/(3\pi s^2)$，穿过小孔的场在远处呈电偶极场的距离依赖。
 

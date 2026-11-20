@@ -330,14 +330,15 @@ Jackson用$[\cdot]_\ret$表示赋值$t'=t-R/c$，这样的好处是可以有效�
 上式称为Jefimenko对Coulomb定律和Biot--Savart定律的推广。
 若$\rho$和$\bm J$是与时间无关的，则可重新得到静电场和静磁场的表达式\eqref{eqn:E(r)}和\eqref{eqn:B(r)}。
 \begin{example}{电荷量变化的点电荷}{time-varying point charge}
-    空间中原点处一点电荷，其电荷量随时间变化
+    设电流流入或流出原点的小电极，使点电荷项随时间变化。其电荷密度为
     \[
         \rho(\bm r',t')=Q(t')\delta(\bm r'),
     \]
-    则
+    由连续性方程，供电电流的散度在原点有一项$-\dot Q(t)\delta(\bm r)$。该点电荷对Lorenz规范推迟标势的贡献为
     \[
         \Phi(r,t)=\frac1{4\pi\varepsilon_0r}Q\Bigp{t-\frac rc}.
     \]
+    求完整电场时，还须计入其余电荷的标势以及供电电流的矢量势。
 \end{example}
 \begin{example}{阶跃电流}{current}
     无限长直导线通阶跃电流
@@ -356,7 +357,7 @@ Jackson用$[\cdot]_\ret$表示赋值$t'=t-R/c$，这样的好处是可以有效�
         \bm A(\bm r,t)=\frac{\mu_0}{4\pi}\uvec z\intR I\Bigp{t-\frac Rc}\frac{\d z'}R,\quad R=\sqrt{\rho^2+(z-z')^2},
     \]
     $t\leqslant\rho/c$时，$\bm A=\bm 0$；
-    $t>\rho/c$时，仅$z'^2\leqslant(ct)^2-\rho^2$部分有贡献，则
+    $t>\rho/c$时，仅$(z'-z)^2\leqslant(ct)^2-\rho^2$部分有贡献，则
     \[
         \bm A(\rho,t)=\frac{\mu_0I_0}{2\pi}\ln\biggb{\frac{ct+\sqrt{(ct)^2-\rho^2}}{\rho}}\uvec z.
     \]
@@ -370,6 +371,72 @@ Jackson用$[\cdot]_\ret$表示赋值$t'=t-R/c$，这样的好处是可以有效�
         \bm E=\bm 0,\quad\bm B=\frac{\mu_0I_0}{2\pi\rho}\uvec\phi.
     \]
 \end{example}
+\subsection{电磁Green张量与互易定理}
+\label{sec:dyadic-green}
+给定一个振荡电偶极，在另一点放置一根短探针，探针沿哪个方向才能测到电场？前面标量波动方程的Green函数给出了推迟时间。要直接从偶极矩求矢量电场，还须保留源与探针的方向。取时间因子$\e^{-\i\omega t}$，记$k=\omega/c$。在非磁、线性、空间局域的介质中，相对介电张量为$\bm\varepsilon_\relative(\bm r,\omega)$，Maxwell方程给出
+\[
+    \curl(\curl\bm E)-k^2\bm\varepsilon_\relative\cdot\bm E=\i\omega\mu_0\bm J .
+\]
+记左边的算符为$\mathcal L$。在给定边界条件和向外辐射条件下，定义电场的推迟Green张量
+\begin{equation}
+    \mathcal L_{\bm r}\bm G(\bm r,\bm r';\omega)=
+    \bm I\,\delta^{(3)}(\bm r-\bm r'),\qquad
+    \bm E(\bm r)=\i\mu_0\omega\int\bm G(\bm r,\bm r';\omega)\cdot\bm J(\bm r')\,\d V'.
+    \label{eqn:electric dyadic green}
+\end{equation}
+这里$\bm I$为单位张量，$\bm J$为给定的外加电流密度。位于$\bm r_0$的点偶极$\bm p$产生电流$\bm J=-\i\omega\bm p\,\delta^{(3)}(\bm r-\bm r_0)$，故探针测得的第$i$个分量是$E_i=\mu_0\omega^2\sum_j G_{ij}p_j$。
+
+真空中取$R=\abs{\bm r-\bm r_0}$、$\uvec n=(\bm r-\bm r_0)/R$。令$g=\e^{\i kR}/(4\pi R)$，它满足$(\laplacian+k^2)g=-\delta^{(3)}(\bm r-\bm r_0)$。利用$\curl(\curl\bm E)=\grad(\div\bm E)-\laplacian\bm E$，可验得$\bm G_0=(\bm I+k^{-2}\grad\grad)g$，两个梯度都对场点求导。于是在$R>0$处，
+\begin{equation}
+    \bm E(\bm r)=\frac{\e^{\i kR}}{4\pi\varepsilon_0}
+    \biggl\{\frac{k^2}{R}\bigb{\bm p-\uvec n(\uvec n\cdot\bm p)}
+    +\biggl(\frac{1}{R^3}-\frac{\i k}{R^2}\biggr)
+    \bigb{3\uvec n(\uvec n\cdot\bm p)-\bm p}\biggr\}.
+    \label{eqn:dyadic dipole field}
+\end{equation}
+近区的主项恢复静电偶极场。对于线性振荡的偶极，沿偶极轴观测，$1/R$项为零。在赤道面观测，这一项的电场沿偶极方向。
+
+\paragraph{交换源和探针}
+令$\bm J_1,\bm J_2$为两个同频电流源，用相同下标标记各自的场。将两组Maxwell方程交叉点乘并相减，若$\bm\varepsilon_\relative^\top=\bm\varepsilon_\relative$，得到
+\[
+    \div(\bm E_1\times\bm H_2-\bm E_2\times\bm H_1)
+      =\bm E_2\cdot\bm J_1-\bm E_1\cdot\bm J_2 .
+\]
+理想导体壁上的切向电场为零，远处两组外行波的表面项相消。体积分后，$\int\bm E_2\cdot\bm J_1\,\d V=\int\bm E_1\cdot\bm J_2\,\d V$。用两个取向任意的点偶极作源，得到Lorentz互易定理
+\begin{equation}
+    G_{ij}(\bm r,\bm r';\omega)=G_{ji}(\bm r',\bm r;\omega).
+\end{equation}
+源和探针互换时要同时交换两者的取向。推导中的点积没有复共轭，故具有对称复介电张量的吸收介质也可满足互易性。
+
+\paragraph{理想镜面旁的偶极}
+理想导体占据$z<0$，真空中的偶极位于$\bm r_0=(0,0,h)$。给定偶极矩的峰值复振幅$\bm p$，驱动源维持振荡所付出的时均功率为
+\[
+    P=-\frac12\Re\int\bm J\conj\cdot\bm E\,\d V
+      =\frac{\omega}{2}\Im\bigb{\bm p\conj\cdot\bm E(\bm r_0)} .
+\]
+导体无损，向上半空间辐射的功率便等于$P$。把$\bm G$分成真空项$\bm G_0$和反射项$\bm G_\mathrm{ref}$。重合点处真空Green张量的实部有奇性，计算功率所用的虚部却是有限的。展开$\sin(kR)/(4\pi R)$并对它作用$\bm I+k^{-2}\grad\grad$，得$\Im\bm G_0(\bm r_0,\bm r_0)=k\bm I/(6\pi)$。因此
+\[
+    P_0=\frac{\omega^4\abs{\bm p}^2}{12\pi\varepsilon_0 c^3},\qquad
+    P-P_0=\frac{\mu_0\omega^3}{2}
+       \Im\bigb{\bm p\conj\cdot\bm G_\mathrm{ref}(\bm r_0,\bm r_0)\cdot\bm p}.
+\]
+镜像偶极位于$(0,0,-h)$，其切向分量反号、法向分量同号，使导体上的总切向电场为零。在式\eqref{eqn:dyadic dipole field}中放入镜像偶极，取$R=2h$、$\uvec n=\uvec z$，便得到作用回源点的反射场。记往返相位$x=2kh$，由该场对源做的功可得
+\begin{equation}
+    \begin{aligned}
+        \frac{P_\perp}{P_0}&=1+3\biggl(\frac{\sin x}{x^3}-\frac{\cos x}{x^2}\biggr),\\
+        \frac{P_\parallel}{P_0}&=1-\frac32\biggl(
+            \frac{\sin x}{x}+\frac{\cos x}{x^2}-\frac{\sin x}{x^3}\biggr).
+    \end{aligned}
+    \label{eqn:mirror-dipole-rates}
+\end{equation}
+图\ref{fig:mirror-dipole-power}中的下标以镜面为准。靠近镜面时，平行偶极和镜像在远区相消，$P_\parallel/P_0\simeq x^2/5$。垂直偶极与镜像同相，在上半空间场振幅加倍，积分所得功率趋于$2P_0$。远离镜面时，两种取向的总功率都趋于$P_0$。\chapref{chap:cavity qed}将用相同的两个比值计算原子在镜前的自发发射寿命。\footnote{电磁Green张量与自发发射率的关系可参阅S. Scheel、L. Knöll和D.-G. Welsch，\href{https://arxiv.org/abs/quant-ph/9905007}{Spontaneous decay in the presence of absorbing dielectric bodies} (1999)。}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.71\linewidth]{figures/mirror_dipole_power.pdf}
+    \caption{保持偶极矩振幅不变时，理想镜面前两种取向的总辐射功率。$h$为偶极与镜面的距离，$\lambda$为真空波长。}
+    \label{fig:mirror-dipole-power}
+\end{figure}
+
 \section{宏观电磁场}
 尽管我们已经得到了Maxwell方程组、电磁场与标量势矢量势的关系，但我们仍没有处理$\bm B\&\bm H,\bm D\&\bm E$之间的关系。在真空中
 \[
@@ -479,59 +546,31 @@ $\ave{\bm j}$的推导比$\ave{\varrho}$的处理复杂的多，在这里仅给�
 
 \paragraph{能量守恒}
 
-则对于电荷和电流的连续分布，在有限体积$V$中，各场做功的总功率为
+电流从场中获得的功率密度为$\bm J\cdot\bm E$。先用宏观场描述静止介质，$\bm J$为显式列入Ampère定律的自由电流。利用Maxwell方程组和式\eqref{eqn:divAxB}得
 \[
-    \int_V\bm J\cdot\bm E\d V,
+    \div(\bm E\times\bm H)+\bm E\cdot\pv{\bm D}t
+       +\bm H\cdot\pv{\bm B}t=-\bm J\cdot\bm E .
 \]
-利用Maxwell方程组和式\eqref{eqn:divAxB}变形
+这一步只用到了场方程。进一步设介质的电、磁响应线性、互易、无色散，本构参数为与时间无关的实数或实对称张量。此时上式中两个含时间导数的项恰好合成$\p u/\p t$，其中
 \[
-    \bm J\cdot\bm E=\Bigp{\curl\bm H-\pv{\bm D}t}\cdot\bm E=-\Bigb{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
+    u=w_\electric+w_\magnetic
+      =\frac12(\bm E\cdot\bm D+\bm H\cdot\bm B),\qquad
+    \bm S=\bm E\times\bm H .
 \]
-% \begin{align*}
-%     \bm J\cdot\bm E&=\Bigp{\curl\bm H-\pv{\bm D}t}\cdot\bm E\\
-%     &=\bm H\cdot(\curl\bm E)-\div(\bm E\times\bm H)-\bm E\cdot\pv{\bm D}t\\
-%     &=-\Bigb{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
-% \end{align*}
-假设：
-\begin{compactenum}
-    \item 总电磁能量密度为(即使是在时变场中)：
-    \[
-        u=w_\electric+w_\magnetic=\frac12(\bm E\cdot\bm D+\bm H\cdot\bm B);%\frac12\int_V\bm E\cdot\bm D\d V,\quad w_B=\frac12\int_V\bm H\cdot\bm B\d V.
-    \]
-	\item 宏观介质的电磁性质是线性的，
-    \[
-        \bm D=\varepsilon\bm E,\quad\bm H=\bm B/\mu;
-    \]
-    \item 介质无色散或损失%可以忽略不计
-    ，即$\varepsilon,\mu$不随时间(或频率)变化故
-    \[
-        \pv ut=\bm E\cdot\pv{\bm D}t+\bm H\cdot\pv{\bm B}t,
-    \]
-\end{compactenum}
-因此 
-%-\int_V\bm J\cdot\bm E\d V=\int_V\Bigb{\pv ut+\div(\bm E\times\bm H)}\d V
-%因为上式$V$是任意的，故
-\begin{align}
-    \pv ut+\div\bm S=-\bm J\cdot\bm E,
-\end{align}
-$\bm S$定义为Poynting矢量
-\begin{equation}
-    \bm S:=\bm E\times\bm H.
-\end{equation}
-%注意上式仅对线性和非色散介质成立。
 \begin{theorem}{Poynting定律(电磁场的能量守恒定律)}{Poynting theorem}
-    电磁能量在一定体积内的变化率，加上单位时间内流出的能量，等于该体积内各源的场所做的总功的负值。
+    体积$V$内的储能增加率，加上通过边界向外流出的功率，等于场对该体积内电流做功的功率取负号。取面积元指向外侧，
+    \[
+        \pv ut+\div\bm S=-\bm J\cdot\bm E,\qquad
+        \dd t\int_V u\d V+\oint_{\p V}\bm S\cdot\d\bm A
+             =-\int_V\bm J\cdot\bm E\d V .
+    \]
 \end{theorem}
-我们的重点一直是放在电磁场的能量上。场在单位时间和单位体积内所做的功$\bm J\cdot\bm E$代表电磁能转换为机械能或热能。因为物质归根到底是由带电粒子(电子和原子核)组成的，所以可把这能量转换率看作每单位体积带电粒子的能量增加率。这样一来，我们就可以把微观场($\bm E,\bm B$)的Poynting定理，解释为粒子和场的组合系统的能量守恒定律。%如果用Em表示体积V内诸粒子的总能量，就得到
-
-将空间$V$中的总能量$E$分成粒子的机械能(包含热能) $E_\text{m}$和场能$E_\text{f}$，并假定没有粒子移出体积外，总的能量随时间的变化
-\begin{align*}
-    \dv{E_{\mathrm{m}}}t+\dv{E_{\mathrm{f}}}t&=\int_V\bm J\cdot\bm E\d V+\dd t\int_Vu\d V=-\oint_{\p V}\bm S\cdot\d\bm A.
-\end{align*}
-若空间中没有电荷（源）
+若改用微观场，所有电荷的运动都计入总电流$\bm J_{\mathrm{tot}}$。直接从微观Maxwell方程得到同一守恒式，此时
 \[
-    E=E_{\mathrm{f}}=\int_Vu\d V=\frac{\varepsilon_0}2\int_V(E^2+c^2B^2)\d V.
+    u_{\mathrm f}=\frac{\varepsilon_0}2 E^2+\frac{B^2}{2\mu_0},\qquad
+    \bm S_{\mathrm f}=\frac{\bm E\times\bm B}{\mu_0}.
 \]
+即使体积内有电荷，这两个场量仍然适用。若粒子不穿过边界且只有电磁力做功，$\int_V\bm J_{\mathrm{tot}}\cdot\bm E\d V$正好是粒子机械能的增加率。宏观描述则把可逆极化和磁化所储存的能量计入$u$，显式传导电流的Joule热计入$\bm J\cdot\bm E$。
 \begin{example}{导线的Joule热}{Joule heating of a wire}
     圆柱形导线长度为$L$，半径$a$，两端电压为$V$，则电场强度
     \[
@@ -545,9 +584,9 @@ $\bm S$定义为Poynting矢量
     \[
         S=\frac VL\cdot\frac1{\mu_0}\frac{\mu_0}{2\pi}\frac Ia=\frac{VI}{2\pi aL},
     \]
-    通过导线表面的单位时间能量为
+    取导线表面的外法向，流入导线并转化为热的功率为
     \[
-        \int \bm S\cdot\d\bm A=S\cdot 2\pi aL=VI.
+        -\oint_{\p V}\bm S\cdot\d\bm A=S\cdot 2\pi aL=VI.
     \]
 \end{example}
 \paragraph{动量守恒}
@@ -584,6 +623,7 @@ $\bm S$定义为Poynting矢量
 \]
 从而右边的体积分具有散度的形式，定义Maxwell应力张量(Maxwell stress tensor)
 \begin{equation}
+    \label{eqn:vacuum maxwell stress}
     T_{\alpha\beta}:=\varepsilon_0\Bigb{E_\alpha E_\beta+c^2B_\alpha B_\beta-\frac12(E^2+c^2B^2)\delta_{\alpha\beta}}.
 \end{equation}
 则
@@ -591,23 +631,27 @@ $\bm S$定义为Poynting矢量
     \dd t({\bm P_{\mathrm{m}}}+{\bm P_{\mathrm{f}}})_\alpha=\oint_{\p V}\sum_\beta T_{\alpha\beta}\hat n_\beta\d A.
 \]
 \paragraph{角动量守恒}
-角动量与动量有关：
-\[
-    \bm L=\bm r\times\bm P,
-\]
-故结论与动量守恒相似，仅仅是所有表达式左乘$\bm r$罢了。而且也涉及并矢这种不是很优雅的表达，特略。
-\begin{example}{Feynman盘详谬}{paradox of Feynman disc}
-    塑料圆盘可以自由旋转，一个线圈（一个短的螺线管）与旋转轴同心。该电磁阀携带由一个小电池提供的稳定电流。此外，一些相互绝缘的小金属球围绕圆盘的圆周均匀间隔，每个球体上都有相同的$Q$电荷。一切静止。假设螺线管中的电流突然中断。圆盘是否会旋转？
+取固定原点，记Lorentz力密度为$\bm f=\rho\bm E+\bm J\times\bm B$。动量守恒的局域形式为$\p_t g_i+f_i=\sum_j\p_j T_{ij}$。场的角动量密度为$\bm r\times\bm g$，力矩密度为$\bm r\times\bm f$。将动量方程对原点取力矩，由于$T_{ij}=T_{ji}$，对$\bm r$求导产生的项$\sum_{jk}\epsilon_{ijk}T_{kj}$为零。对固定体积$V$积分得
+\begin{equation}
+    \dd t\int_V\bm r\times\bm g\,\d V
+    +\int_V\bm r\times\bm f\,\d V
+    =\oint_{\p V}\bm r\times(\bm T\cdot\uvec n)\,\d A .
+\end{equation}
+这里$\uvec n$为外法向。按本节的应力符号，$-\bm r\times(\bm T\cdot\uvec n)$为单位面积上向外的角动量通量。对封闭面积分给出电磁场通过边界带走的角动量率。
 
-    详谬是：角动量守恒似乎表明，在场消散前后，圆盘保持静止；但由于消散的磁场会产生一个与圆盘周边相切的强环形电场，静电荷将被该场推动，圆盘必然会开始旋转。
-
-    但事实是：由于电磁场具有角动量，因此圆盘转动也不违反角动量守恒；另外，磁场也不能立刻消失，而必须将存储的磁能消散到线圈的电阻中，这会将电流的角动量传递到线圈中，使圆盘旋转。
+\begin{example}{Feynman圆盘}{paradox of Feynman disc}
+    绝缘圆盘的边缘均匀带有总电荷$Q$，可以绕轴自由转动。记同轴线圈穿过整个盘面的磁通量为$\varPhi(t)$，取$+z$为磁通和转动的正向，忽略圆盘转动产生的自场。电流缓慢关断时，Faraday感应电场给盘缘的电荷以力矩。设盘缘半径为$b$，由轴对称性
+    \[
+        2\pi b E_\phi(b)=-\dv{\varPhi}t,\qquad
+        N_z=QbE_\phi(b)=-\frac{Q}{2\pi}\dv{\varPhi}t .
+    \]
+    若初始磁通量为$\varPhi_0$，最终为零，则盘得到的角动量为$\Delta L_z=Q\varPhi_0/(2\pi)$。初始的静电场和静磁场已经携带角动量。改变磁通量时，感应电场可以把角动量转移给圆盘。实际装置的完整角动量收支还包括线圈、支架和穿过所选边界的场。
 \end{example}
 \subsection{色散介质中的Poynting定律}
 \label{ssec:Poynting in dissipative media}
 在有色散介质中，$\varepsilon,\mu$与频率$\omega$有关，前面的假设不再成立，但仍有
 \[
-    \int_V\bm J\cdot\bm E\d V=-\int_V\Bigb{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}.
+    \int_V\bm J\cdot\bm E\d V=-\int_V\Bigb{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}\d V.
 \]
 为了讨论色散，有必要利用Fourier变换将时域变到频域中：
 \begin{align*}
@@ -622,45 +666,35 @@ $\bm S$定义为Poynting矢量
 \[
     \hatbm E(\bm r,-\omega)=\hatbm E\conj(\bm r,\omega),\quad\hatbm D(\bm r,-\omega)=\hatbm D\conj(\bm r,\omega),
 \]
-从而$\varepsilon(-\omega)=\varepsilon\conj(\omega)$，色散的性质表面：$\bm D(\bm r,t)$和$\bm E(\bm r,t)$在时间上的联系是非局域性的。因此$\bm E\cdot(\p\bm D/\p t)\neq\p(\bm E\cdot\bm D/2)/\p t$，我们先不考虑空间相关性，利用Fourier变换
-\begin{align*}
-    \bm E\cdot\pv{\bm D}t&=\intR\intR\hatbm E\conj(\omega')\cdot\bigb{-\i\omega\varepsilon(\omega)\hatbm E(\omega)}\e^{-\i(\omega-\omega')t}\d\omega\nd\omega'\\
-    &=\frac12\intR\intR\bigb{-\i\omega\varepsilon(\omega)+\i\omega'\varepsilon\conj(\omega')}\hatbm E\conj(\omega')\cdot\hatbm E(\omega)\e^{-\i(\omega-\omega')t}\d\omega\nd\omega'.
-\end{align*}
-我们现在假设电场在一个相对狭窄的范围内由频率分量主导，而在这个范围内$\varepsilon$有可观测的变化。然后我们可以%展开因子iω'e*(ω')在ω' = ω周围的方括号中得到
-将$\i\omega'\varepsilon\conj(\omega')$在$\omega$附近Taylor展开：
-\[
-    -\i\omega\varepsilon(\omega)+\i\omega'\varepsilon\conj(\omega')=2\omega\Im\bigb{\varepsilon(\omega)}-\i(\omega-\omega')\dd\omega\bigb{\omega\varepsilon\conj(\omega)}+\cdots
-\]
-因此 
-\begin{align*}
-    \bm E\cdot\pv{\bm D}t={}&\intR\intR\hatbm E\conj(\omega')\cdot\hatbm E(\omega)\,\omega\Im\bigb{\varepsilon(\omega)}\e^{-\i(\omega-\omega')t}\d\omega\nd\omega'\,+\\
-    &\frac12\pp t\intR\intR\hatbm E\conj(\omega')\cdot\hatbm E(\omega)\,\dd\omega\bigb{\omega\varepsilon\conj(\omega)}\e^{-\i(\omega-\omega')t}\d\omega\nd\omega'
-\end{align*}
-第一项表示电场能量转化为热能(或更一般地转化为各种形式的辐射)；第二项表示有效能量密度。
+从而$\varepsilon(-\omega)=\varepsilon\conj(\omega)$。频率响应使同一点的$\bm D(t)$依赖于此前的电场。即使介质透明，$\bm E\cdot\p\bm D/\p t$通常也不能写成$\p(\bm E\cdot\bm D/2)/\p t$。
 
-$\bm H\cdot(\p\bm B/\p t)$的表达式是相似的，只需$\bm E,\varepsilon$换为$\bm H,\mu$即可。
-\paragraph{谐振场}
-假设场有谐振的形式： 
+\paragraph{窄带波包的储能和吸收}
+取中心频率为$\omega_0$的窄带波包，记物理电场为$\Re[\bm E_a(t)\e^{-\i\omega_0t}]$，其中$\bm E_a$是缓变的峰值复振幅，磁场同理。将$-\i\omega\varepsilon(\omega)$在$\omega_0$处展开到一阶，$\p\bm D/\p t$的复包络为
 \[
-    \bm E=\tilde{\bm E}(t)\cos(\omega_0t+\varphi_\electric),\quad\bm H=\tilde{\bm H}(t)\cos(\omega_0t+\varphi_\magnetic),
+    -\i\omega_0\varepsilon(\omega_0)\bm E_a
+        +\eval{\dv{(\omega\varepsilon)}\omega}_{\omega_0}\pv{\bm E_a}t .
 \]
-其中$\tilde{\bm E}(t),\tilde{\bm H}(t)$相对$1/\omega$缓慢变化。则
-\begin{align*}
-    \biggave{\bm E\cdot\pv{\bm D}t+\bm H\cdot\pv{\bm B}t}={}&\omega_0\Im\bigb{\varepsilon(\omega_0)}\ave{E^2}+
-    \omega_0\Im\bigb{\mu(\omega_0)}\ave{H^2}+\pv{u_\eff}t.
-\end{align*}
-其中 
+在一个载波周期上取平均，相乘的两个实场给出各自复振幅乘积的一半实部。若频带透明，或吸收很弱且吸收项在带宽内的变化可忽略，则
 \[
-    u_\eff=\frac12\Re\biggb{\dv{(\omega\varepsilon)}\omega(\omega_0)}\ave{E^2}+\frac12\Re\biggb{\dv{(\omega\mu)}\omega(\omega_0)}\ave{H^2}.
+    \biggave{\bm E\cdot\pv{\bm D}t}\simeq
+      \frac{\omega_0}{2}\Im\varepsilon\,\abs{\bm E_a}^2+
+      \frac14\dv{(\omega\Re\varepsilon)}\omega\,\pv{\abs{\bm E_a}^2}t .
 \]
-Poynting定律形式变为
+以下本构参数及频率导数均取在$\omega_0$。加上磁场项，得到包含材料可逆响应的周期平均储能密度（Brillouin公式）和介质吸收的平均功率密度，
 \begin{align}
-    \label{eqn:Poynting with loss}
-    \pv{u_\eff}t+\div\bm S={}&-\bm J\cdot\bm E-\omega_0\Im\bigb{\varepsilon(\omega_0)}\ave{E^2}-\omega_0\Im\bigb{\mu(\omega_0)}\ave{H^2}
+    \label{eqn:Brillouin energy}
+    u_\eff&=\frac14\biggb{\dv{(\omega\Re\varepsilon)}\omega\abs{\bm E_a}^2+
+                              \dv{(\omega\Re\mu)}\omega\abs{\bm H_a}^2},\\
+    q_{\mathrm{abs}}&=\frac{\omega_0}{2}
+        \bigp{\Im\varepsilon\,\abs{\bm E_a}^2+\Im\mu\,\abs{\bm H_a}^2}.
 \end{align}
-右边第一项是Ohm热损耗，后面两项是在介质中的吸收耗散，不包括传导损耗。
-上述方程给出了现实情况下的电磁能局部守恒，在这种情况下，除了能量从局部流出外($\div\bm S\neq 0$)，介质的加热可能会造成损失($\Im\varepsilon\neq 0,\Im\mu\neq 0$)，从而导致(先前假设中提到的)场能量的缓慢衰减。
+令$\ave{\bm S}=\tfrac12\Re(\bm E_a\times\bm H_a\conj)$，周期平均的能量收支为
+\begin{equation}
+    \label{eqn:Poynting with loss}
+    \pv{u_\eff}t+\div\ave{\bm S}\simeq-\ave{\bm J\cdot\bm E}-q_{\mathrm{abs}} .
+\end{equation}
+例如，若$\bm J$显式包含$\sigma\bm E$，则$\varepsilon$只计入其余极化响应$\varepsilon_{\mathrm b}$；若改用$\varepsilon=\varepsilon_{\mathrm b}+\i\sigma/\omega$，同一传导损耗已计入$q_{\mathrm{abs}}$，右端的$\bm J$只保留其余显式电流。强吸收频带内，确定可回收的储能还需材料的动力学模型。\footnote{透明频带中Brillouin储能与能量速度的关系见 A.~Welters, Y.~Avniel and S.~G. Johnson, \href{https://doi.org/10.1103/PhysRevA.90.023847}{\textit{Physical Review A} \textbf{90}, 023847 (2014)}, Sec.~II。}
+
 \subsectionstar{谐振场的Poynting定律}
 我们假定所有的场和源都是随时间简谐的，即 
 \[
@@ -680,7 +714,7 @@ Poynting定律形式变为
         \curl\bm H&=\bm J-\i\omega\bm D.
     \end{align}
 \end{subequations}
-场在体积$V$上所做的时间平均工作量
+取复功率的形式，其实部为场对电流做功的周期平均功率，
 \begin{align*}
     \frac12\int_V\bm J\conj\cdot\bm E\d V&=\frac12\int_V(\curl\bm H\conj-\i\omega\bm D\conj)\cdot\bm E\d V\\
     &=\frac12\int_V\Bigb{-\div(\bm E\times\bm H\conj)-\i\omega(\bm E\cdot\bm D\conj-\bm B\cdot\bm H\conj)}\d V.
@@ -689,7 +723,7 @@ Poynting定律形式变为
 \begin{equation}
     \bm S=\frac12\bm E\times\bm H\conj.
 \end{equation}
-简谐电磁场能量密度
+为了分开电场项与磁场项，定义两个辅助量。无色散、无损的线性互易介质中，它们分别等于电、磁储能密度的周期平均值，
 \begin{subequations}
     \begin{align}
         w_\electric&=\frac14\bm E\cdot\bm D\conj,\\
@@ -700,11 +734,12 @@ Poynting定律形式变为
 \begin{equation}
     \frac12\int_V\bm J\conj\cdot\bm E\d V+2\i\omega\int_V(w_\electric-w_\magnetic)\d V+\oint_{\p V}\bm S\cdot\d\bm A=0.
 \end{equation}
-实部给出了时间平均量的能量守恒；虚部与反应性(或储存的)能量及其交替流动有关。如果能量密度$w_\electric$和$w_\magnetic$体积分为实数，就像具有无损耗介质和完美导体的系统一样，实部将是：
+取实部即得有功功率收支，虚部给出反应功率。若介质无损耗，$w_\electric,w_\magnetic$为实数，遂有
 \[
-    \frac12\int_V\Re(\bm J\conj\cdot\bm E)\d V+\oint_{\p V}\Re(\bm S)\cdot\d\bm A=0.
+    \frac12\int_V\Re(\bm J\conj\cdot\bm E)\d V
+       +\oint_{\p V}\Re(\bm S)\cdot\d\bm A=0 .
 \]
-场对$V$中源的稳态时间平均功率等于通过边界面$\p V$进入$V$的平均功率流，由$\Re(\bm S)$的法向分量计算。由于系统各组成部分的损失，上述方程的第二项有一个实部，这可以解释这种耗散。
+此时从边界流入的平均功率全部交给显式电流。有吸收时，$2\i\omega(w_\electric-w_\magnetic)$的实部正是上节的$q_{\mathrm{abs}}$。
 \paragraph{阻抗和导纳}
 本节继续采用$\e^{-\i\omega t}$的时间约定。阻抗$Z$ (impedance)、电阻$R$ (resistance)、电抗$X$ (reactance)
 \[
@@ -756,3 +791,9 @@ $B<0$：容纳(capacitive susceptance)；$B>0$：感纳(inductive susceptance)�
     同样有奇偶变换之分，但这与真赝矢量并无联系。
 \end{definition}
 
+将一段带电粒子的运动按相反的时间次序重放，在同一位置，电荷密度相同而电流反向。相应的源与场为
+\begin{align*}
+    \rho'(\bm r,t)&=\rho(\bm r,-t),& \bm J'(\bm r,t)&=-\bm J(\bm r,-t),\\
+    \bm E'(\bm r,t)&=\bm E(\bm r,-t),&\bm B'(\bm r,t)&=-\bm B(\bm r,-t).
+\end{align*}
+这样，速度和磁场同时反号，Lorentz力与加速度均保持原方向。真空场的能量密度也是偶的，Poynting矢量和角动量密度则反向。若原解描述向外传播的辐射，反演后的解描述向内会聚的波。选择推迟势给电磁问题指定了辐射边界条件。

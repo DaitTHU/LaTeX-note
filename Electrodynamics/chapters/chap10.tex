@@ -1,7 +1,309 @@
 \chapter{运动电荷的辐射}
 \label{chap:raidiation by moving charge}
 
-
+\chapref{chap:multipole radiation}从给定的电流分布求辐射场。现在设真空中只有一个点电荷$q$，已知它的轨迹$\bm r_q(t')$。电荷经过轨迹上不同位置时发出的信号，到达同一场点所用的时间也不同。先求出发射时刻与接收时刻的关系，便可以从一个推迟势同时求得电荷附近的场和远处的辐射。
 
 \section{Li\'enard--Wiechert势}
 
+设在固定场点$\bm r$、时刻$t$接收到电磁信号。由源点指向场点的位移、距离和方向分别为
+\[
+    \bm R(t')=\bm r-\bm r_q(t'),\quad R=\abs{\bm R},\quad \uvec n=\bm R/R.
+\]
+发射时刻$t_\ret$由光的传播时间确定，
+\begin{equation}
+    t=t_\ret+R(t_\ret)/c.
+    \label{eqn:moving charge retardation}
+\end{equation}
+记$\bm v=\d\bm r_q/\nd t'$，$\bm\beta=\bm v/c$，$\gamma=(1-\beta^2)^{-1/2}$。图\ref{fig:moving-charge-retardation}中，粒子前进$\bm v\d t'$时，第二次发射的路程改变了$\d R=-\uvec n\cdot\bm v\d t'$，相应的接收时间间隔为
+\begin{equation}
+    \d t=\kappa\d t',\qquad \kappa:=1-\uvec n\cdot\bm\beta.
+    \label{eqn:moving charge time intervals}
+\end{equation}
+粒子迎着观测者运动时，接收时间间隔缩短。由于有质量粒子满足$v<c$，$t'+R(t')/c$随$t'$严格递增。
+
+\begin{figure}[htbp]
+    \centering
+    \tikzfigure{moving-charge-retardation}
+    \caption{同一场点接收相邻两次发射的信号}
+    \label{fig:moving-charge-retardation}
+\end{figure}
+
+点电荷的源为$\rho(\bm r',t')=q\delta^{(3)}(\bm r'-\bm r_q(t'))$和$\bm J=\rho\bm v$。在\chapref{chap:Maxwell}的推迟Green函数中，先对源点的位置积分，Lorenz规范下的标量势便成为
+\[
+    \Phi(\bm r,t)=\frac{q}{4\pi\varepsilon_0}\intR
+    \frac{\delta\bigp{t-t'-R(t')/c}}{R(t')}\d t'.
+\]
+对发射时刻积分时，$\delta$函数的自变量在零点处的导数为$-\kappa$，故标量势和矢量势为
+\begin{equation}
+    \Phi=\frac{q}{4\pi\varepsilon_0}\biggb{\frac1{\kappa R}}_\ret,
+    \qquad
+    \bm A=\frac{\mu_0q}{4\pi}\biggb{\frac{\bm v}{\kappa R}}_\ret.
+    \label{eqn:moving charge potentials}
+\end{equation}
+这组势称为Li\'enard--Wiechert势。$[\cdot]_\ret$表示把轨迹上的物理量取在式\eqref{eqn:moving charge retardation}确定的$t'=t_\ret$。分母中的$\kappa$与式\eqref{eqn:moving charge time intervals}是同一个几何因子。
+
+\subsection{速度场和加速度场}
+
+从势求场时，场点或接收时刻的改变都会改变$t_\ret$。对式\eqref{eqn:moving charge retardation}作隐微分，得到
+\[
+    \pv{t_\ret}t=\frac1\kappa,\qquad
+    \grad t_\ret=-\frac{\uvec n}{c\kappa}.
+\]
+例如，令$D=\kappa R=R-\bm R\cdot\bm\beta$。在发射时刻固定时，$\grad D=\uvec n-\bm\beta$。在场点固定时，沿轨迹求导给出
+\[
+    \dv{D}{t'}=c\bigp{\beta^2-\uvec n\cdot\bm\beta}-R\uvec n\cdot\dotbm\beta,
+    \qquad \dotbm\beta=\frac{\bm a}c,\quad \bm a=\dv{\bm v}{t'}.
+\]
+因此在求$\grad[D]_\ret$时，还要加上$(\d D/\nd t')\grad t_\ret$。将这些导数代入$\bm E=-\grad\Phi-\p\bm A/\p t$、$\bm B=\curl\bm A$，整理得
+\begin{align}
+    \bm E&=\frac{q}{4\pi\varepsilon_0}
+    \biggb{\frac{(1-\beta^2)(\uvec n-\bm\beta)}{\kappa^3 R^2}
+    +\frac{\uvec n\times\bigb{(\uvec n-\bm\beta)\times\dotbm\beta}}{c\kappa^3 R}}_\ret,
+    \label{eqn:moving charge fields}\\
+    \bm B&=\frac1c[\uvec n]_\ret\times\bm E.\notag
+\end{align}
+第一项是速度场，随距离按$R^{-2}$衰减。粒子匀速运动时，$R(\uvec n-\bm\beta)=\bm r-\bm r_q(t)$，故正电荷的电场沿其\emph{当前}位置到场点的连线，与\chapref{chap:relativistic electromagnetic}中变换Coulomb场的结果相同。第二项是加速度场，记为$\bm E_\mathrm{rad}$。它垂直于$\uvec n$，随距离按$R^{-1}$衰减。以发射点为中心，球面面积按$R^2$增加，所以只有加速度场的能流在$R\to\infty$时仍给出有限的辐射功率。
+
+\section{辐射的角分布和总功率}
+
+远区探测器在接收时间$\d t$内、立体角$\d\Omega$中测得的能量为
+\[
+    \d W=R^2\uvec n\cdot\bm S_\mathrm{rad}\d\Omega\nd t,
+    \qquad \bm S_\mathrm{rad}=\varepsilon_0 c\abs{\bm E_\mathrm{rad}}^2\uvec n.
+\]
+要计算电荷在给定发射时刻的功率，需把这一能量除以$\d t'$。用式\eqref{eqn:moving charge time intervals}换算，单位立体角内的瞬时辐射功率为
+\begin{equation}
+    \dv P\Omega=\kappa R^2\uvec n\cdot\bm S_\mathrm{rad}
+    =\frac{q^2}{16\pi^2\varepsilon_0 c}
+    \frac{\bigabs{\uvec n\times\bigb{(\uvec n-\bm\beta)\times\dotbm\beta}}^2}{(1-\uvec n\cdot\bm\beta)^5}.
+    \label{eqn:moving charge angular power}
+\end{equation}
+这里各量取在同一发射时刻。对辐射场取模平方，接收能流的分母中出现$\kappa^6$，换算成发射功率后分母中只剩$\kappa^5$。
+
+当$\beta\ll1$时，若$\theta$为$\bm a$与$\uvec n$的夹角，则
+\[
+    \dv P\Omega=\frac{q^2a^2}{16\pi^2\varepsilon_0c^3}\sin^2\theta.
+\]
+用$\int\sin^2\theta\d\Omega=8\pi/3$积分得到Larmor公式
+\begin{equation}
+    P=\frac{q^2a^2}{6\pi\varepsilon_0c^3}.
+    \label{eqn:moving charge Larmor}
+\end{equation}
+例如$q$沿$z$轴作低速简谐振动，$z=z_0\cos\omega t'$，其平均功率为$q^2z_0^2\omega^4/(12\pi\varepsilon_0c^3)$。令偶极矩振幅为$p_0=qz_0$，便回到\chapref{chap:multipole radiation}的电偶极辐射公式。
+
+在粒子的瞬时静止系中，角分布前后对称，辐射的总三动量为零。在固有时间$\d\tau$内，若辐射能量为$\d W_*$，变换到实验室系得$\d W=\gamma\d W_*$，同时发射间隔变为$\d t'=\gamma\d\tau$。所以瞬时总功率等于在瞬时静止系用Larmor公式求得的值。将实验室加速度分解为平行、垂直于$\bm v$的分量，静止系中相应分量为$a_{*\parallel}=\gamma^3a_\parallel$和$a_{*\perp}=\gamma^2a_\perp$，从而有Li\'enard公式
+\begin{equation}
+    P=\frac{q^2}{6\pi\varepsilon_0c^3}\bigp{\gamma^6a_\parallel^2+\gamma^4a_\perp^2}
+     =\frac{q^2\gamma^6}{6\pi\varepsilon_0c^3}\bigp{a^2-\abs{\bm\beta\times\bm a}^2}.
+    \label{eqn:moving charge Lienard}
+\end{equation}
+
+\begin{example}{自由电子的Thomson散射}{Thomson scattering}
+    一束线偏振平面波照射初始静止的自由电子。设入射电场为$E_0\uvec e\cos\omega t$，$e>0$为元电荷。若$eE_0/(m_\electron\omega)\ll c$且$\hbar\omega\ll m_\electron c^2$，电子作非相对论振动，光子反冲可以忽略。领先阶的加速度为$-eE_0\uvec e\cos\omega t/m_\electron$。以散射功率的时间平均除以入射平均能流$\varepsilon_0cE_0^2/2$，得
+    \[
+        \dv\sigma\Omega=r_\electron^2\bigb{1-(\uvec n\cdot\uvec e)^2},
+        \qquad r_\electron:=\frac{e^2}{4\pi\varepsilon_0 m_\electron c^2}.
+    \]
+    对无偏振入射光，将两个横向偏振的截面取平均。记$\theta$为入射与散射方向的夹角，则
+    \[
+        \dv\sigma\Omega=\frac{r_\electron^2}2(1+\cos^2\theta),
+        \qquad \sigma_\mathrm{T}=\frac{8\pi}3r_\electron^2.
+    \]
+    自由电子的加速度振幅由电场强度直接给出，所以此极限下的散射截面与入射频率无关。计入光子反冲后，截面随入射能量改变，见式\eqref{eq:qed Klein Nishina}。
+\end{example}
+
+\section{辐射频谱与同步辐射}
+
+同一轨迹上各点向同一方向发出的场到达探测器时有相位差。为求一次有限加速过程的辐射能谱，取远区$\uvec n\simeq\bm r/r$，在幅度的分母取$R\simeq r$，在Fourier相位中保留$R\simeq r-\uvec n\cdot\bm r_q(t')$。设
+\[
+    \tilde{\bm E}(\omega)=\intR\bm E_\mathrm{rad}(t)\e^{\i\omega t}\d t.
+\]
+由Parseval等式，对实场有$\intR\abs{\bm E_\mathrm{rad}}^2\d t=\pi^{-1}\intRplus\abs{\tilde{\bm E}}^2\d\omega$。用$\d t=\kappa\d t'$将场的Fourier积分改写成轨迹积分，得到正角频率上的能量分布
+\begin{equation}
+    \frac{\d^2 W}{\nd\omega\nd\Omega}
+    =\frac{q^2}{16\pi^3\varepsilon_0c}\left|
+        \intR\frac{\uvec n\times\bigb{(\uvec n-\bm\beta)\times\dotbm\beta}}{(1-\uvec n\cdot\bm\beta)^2}
+        \,\e^{\i\omega(t'-\uvec n\cdot\bm r_q(t')/c)}\d t'
+    \right|^2.
+    \label{eqn:moving charge spectrum}
+\end{equation}
+从场点到坐标原点的固定传播相位$\e^{\i\omega r/c}$在取模方时消去。若轨道严格周期，可先对有限个周期计算能谱，再除以运动时间取长时间极限，得到轨道频率整数倍处的功率谱线。
+
+\subsection{圆轨道上的辐射}
+
+设粒子沿半径$\rho$的圆轨道匀速运动，$a_\perp=v^2/\rho$、$a_\parallel=0$。把式\eqref{eqn:moving charge Lienard}乘以周期$2\pi\rho/v$，可得辐射功率和每周辐射能量
+\begin{equation}
+    P=\frac{q^2c}{6\pi\varepsilon_0}\frac{\gamma^4\beta^4}{\rho^2},
+    \qquad U=\frac{q^2}{3\varepsilon_0}\frac{\gamma^4\beta^3}{\rho}.
+\end{equation}
+当$\gamma\gg1$时，若观察方向与瞬时速度夹角为$\theta\ll1$，则$\kappa=1-\beta\cos\theta\simeq(\gamma^{-2}+\theta^2)/2$。主要辐射集中在速度方向附近约$1/\gamma$的角度内。速度方向扫过观测者所需的发射时间为$\Delta t'\sim\rho/(\gamma c)$。这时$\kappa$为$1/\gamma^2$量级，所以探测器所见脉宽进一步缩短为$\Delta t\sim\rho/(\gamma^3c)$。
+
+这个时间尺度解释了同步辐射包含远高于回旋频率$\omega_0=v/\rho$的谐波。对超相对论圆轨道，将密集的高次谐波按频率平滑后，式\eqref{eqn:moving charge spectrum}对角度积分给出
+\begin{align}
+    \dv P\omega&=\frac{P}{\omega_\critical}\frac{9\sqrt3}{8\pi}
+      F\bigp{\omega/\omega_\critical}, &
+    F(x)&=x\int_x^\infty K_{5/3}(u)\d u, \\
+    \omega_\critical&=\frac{3c\gamma^3}{2\rho}. \notag
+\end{align}
+其中$K_{5/3}$为第二类修正Bessel函数，$\omega_\critical$称为临界角频率。在$\omega_0\ll\omega\ll\omega_\critical$范围内，谱包络按$\omega^{1/3}$上升，在约$0.29\omega_\critical$处达到最大（\figref{fig:synchrotron-spectrum}），高频端则按$\sqrt{\omega/\omega_\critical}\exp(-\omega/\omega_\critical)$衰减。
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.67\linewidth]{figures/synchrotron_spectrum.pdf}
+    \caption{圆轨道同步辐射的角积分功率谱。圆点标记谱峰，虚线标记临界角频率。}
+    \label{fig:synchrotron-spectrum}
+\end{figure}
+
+\subsection{周期磁场中的辐射}
+
+设电子沿$z$方向进入周期为$\lambda_u$的平面磁结构，磁场为$B_y=B_0\cos(k_uz)$，其中$k_u=2\pi/\lambda_u$。磁力使动量横向振荡，由$\d p_x/\nd z=eB_y$，选取平均横向动量为零的轨道，得到
+\[
+    \frac{p_x}{m_\electron c}=K\sin(k_uz),
+    \qquad K:=\frac{eB_0}{m_\electron c k_u}.
+\]
+当$\gamma\gg1$且$K/\gamma\ll1$时，电子的最大偏转角约为$K/\gamma$。令$T_u$为电子前进一个磁周期所用的时间，利用$\beta_z^2=1-\gamma^{-2}-\beta_x^2$和$\beta_x=(K/\gamma)\sin(k_uz)$可得
+\[
+    cT_u=\int_0^{\lambda_u}\frac{\d z}{\beta_z}
+    \simeq\lambda_u\biggp{1+\frac{1+K^2/2}{2\gamma^2}}.
+\]
+在与轴成小角$\theta$的远处观察，相邻周期对应点的接收时间差为$T_u-\lambda_u\cos\theta/c$。由相长干涉条件，第$h$次谐波波长为
+\[
+    \lambda_h=\frac{cT_u-\lambda_u\cos\theta}{h}
+    \simeq\frac{\lambda_u}{2h\gamma^2}
+    \bigp{1+K^2/2+\gamma^2\theta^2},\qquad h=1,2,\ldots
+\]
+在理想平面波荡器(undulator)轴线上，横向速度每半周期反向，偶次谐波相消。$K\lesssim1$时，一个周期内速度方向的摆角为$K/\gamma$量级，与辐射锥的半角$1/\gamma$相当或更小。近轴观测者可以接收到这一周期各段的辐射，$N$个相同周期的相干叠加使基频峰的相对宽度为$1/N$量级。若$K\gg1$，轨迹的偏转角远大于$1/\gamma$，这种磁结构称为扭摆器(wiggler)。在有限带宽与角接受度下，密集的谐波可以合并成接近弯转磁铁同步辐射的宽谱。
+
+\section{介质中匀速电荷的辐射}
+\label{sec:moving charge in matter}
+
+电荷在真空中匀速运动时只产生速度场。在介质中，还要考虑轨迹上不同位置激起的极化场传播到探测器时的相位。均匀介质可以让整段轨迹在某个方向同相辐射，介质界面则可以使随电荷移动的场与传播波发生转换。
+
+\subsection{Cherenkov角与Frank--Tamm公式}
+设均匀介质各向同性，在所考察的频带透明且$\mu=\mu_0$。记$n(\omega)>0$、$k=n(\omega)\omega/c$。电荷$q$以恒定速度$v$沿$z$轴前进，取长$L$的一段轨迹。位置$z'$、时刻$t'=z'/v$的电流在与轨迹成角$\theta$的远处带来相位$\omega z'/v-kz'\cos\theta$。沿轨迹的振幅叠加因子为
+\[
+    \mathcal I_L=\int_0^L\e^{\i\Delta k z'}\d z'
+        =L\e^{\i\Delta kL/2}\sinc(\Delta kL/2),\qquad
+    \Delta k=\frac{\omega}{v}-k\cos\theta ,
+\]
+其中$\sinc u=\sin u/u$。当$n(\omega)\beta>1$（$\beta=v/c$）时，存在一个方向使所有位置的相位相同，
+\begin{equation}
+    \cos\theta_\mathrm{C}=\frac{1}{\beta n(\omega)} .
+    \label{eqn:Cherenkov angle}
+\end{equation}
+这一条件比较的是粒子速度与该频率下的相速度。例如$\beta\simeq1$、$n=1.33$时，辐射锥的半角约为$\ang{41.2}$。
+
+用本章的Fourier变换约定，将电流代入均匀介质的出射Green函数。远区矢量势为$\mu_0q\,\e^{\i kr}\mathcal I_L\uvec z/(4\pi r)$，电场为矢量势横向投影的$\i\omega$倍。介质中的横波阻抗为$Z_0/n$。对通过大球面的Poynting通量作时间积分并用Parseval等式，正频率的能谱为
+\[
+    \frac{\d^2W}{\nd\omega\nd\Omega}
+    =\frac{\mu_0 q^2 n\omega^2}{16\pi^3c}
+        \sin^2\theta\,\abs{\mathcal I_L}^2 .
+\]
+有限轨道还含端点辐射。为取出正比于轨道长度的部分，先将能谱除以$L$，再用$\lim_{L\to\infty}\abs{\mathcal I_L}^2/L=2\pi\delta(\Delta k)$。对方位角和$\cos\theta$积分，$\delta$函数给出$1/k$的因子。每单位路程、单位角频率的辐射能量为
+\begin{equation}
+    \frac{\d^2 W_\mathrm{C}}{\nd z\nd\omega}
+    =\frac{q^2\omega}{4\pi\varepsilon_0 c^2}
+       \biggp{1-\frac{1}{\beta^2 n^2(\omega)}}\quad\bigl(\beta n(\omega)>1\bigr).
+    \label{eqn:Frank Tamm}
+\end{equation}
+阈值以下，这个体辐射项为零。若要求某一波段的辐射能量，应在透明且达到阈值的频段内用实际的$n(\omega)$积分。\footnote{M. Fowler，\href{https://galileoandeinstein.phys.virginia.edu/Elec_Mag/2022_Lectures/EM_70_Cherenkov_Radiation.html}{\textit{Cherenkov Radiation}}。}
+
+\subsection{单个平面界面的过渡辐射}
+电荷以速度$v\uvec z$从介质1（$z<0$）垂直穿入介质2（$z>0$），令$t=0$为穿越时刻。两侧均匀、非磁，绝对介电常数分别为$\varepsilon_j(\omega)$。先取两侧均透明且低于Cherenkov阈值的频带，以便单独计算界面产生的过渡辐射(transition radiation)。粒子两侧的随行场不同，在界面上须另加出射波才能满足切向场匹配。
+
+由于界面具有平移对称性，可分别匹配各个横向波矢$\bm h$。在已对时间作Fourier变换的场中取横向展开
+\[
+    \tilde{\bm E}(\bm r,\omega)=
+       \int\frac{\d^2 h}{(2\pi)^2}\,\bm E(\bm h,z,\omega)\,
+       \e^{\i\bm h\cdot\bm r_\perp}.
+\]
+在无限介质$j$中，源电流的$z$分量为$q\e^{\i s z}$，其中$s=\omega/v$。将波矢$\bm K=\bm h+s\uvec z$代入频域波动方程
+$[(K^2-k_j^2)\bm 1-\bm K\bm K]\cdot\bm E=\i\omega\mu_0\bm J$，其中$k_j^2=\mu_0\varepsilon_j\omega^2$。由此得到$z=0$处随行场的两个切向分量
+\[
+    E_j^q=-\frac{\i q h}{\varepsilon_j v D_j},\qquad
+    H_j^q=-\frac{\i qh}{D_j},\qquad D_j=h^2+s^2-k_j^2 .
+\]
+这里$h=\abs{\bm h}$，$E_j^q$沿$\bm h$，$H_j^q$沿$\uvec z\times\bm h$。出射的横磁波在两侧分别向$-z$和$+z$传播，令其切向电场振幅为$B_1,B_2$，记$k_{zj}=\sqrt{k_j^2-h^2}$、$Y_j=\omega\varepsilon_j/k_{zj}$。平方根取出射支，倏逝波取$\Im k_{zj}>0$。在界面匹配切向电、磁场得到
+\[
+    E_1^q+B_1=E_2^q+B_2,\qquad H_1^q-Y_1B_1=H_2^q+Y_2B_2 .
+\]
+两个简单方程便给出后向和前向的辐射振幅
+\[
+    B_1=\frac{H_1^q-H_2^q+Y_2(E_2^q-E_1^q)}{Y_1+Y_2},
+    \qquad B_2=B_1+E_1^q-E_2^q .
+\]
+当$\varepsilon_1=\varepsilon_2$时，两侧随行场相同，两个辐射振幅都为零。对平面上向外的能流作时间和横向面积积分，Parseval等式给出每个传播分量的能谱$\d W_j/(\nd\omega\,\d^2 h)=Y_j\abs{B_j}^2/(4\pi^3)$。记$\theta_j$为相对于本侧出射法线的夹角，用$h=k_j\sin\theta_j$即得
+\begin{equation}
+    \frac{\d^2 W_j}{\nd\omega\nd\Omega_j}
+       =\frac{k_j^2\cos\theta_j}{4\pi^3}\,Y_j\abs{B_j}^2 .
+    \label{eqn:single interface TR}
+\end{equation}
+这是一次穿越一个界面的能量。它由两侧的响应差决定，粒子在穿越前后可以保持同一速度。
+
+\begin{example}{真空与理想导体界面的后向辐射}{backward transition radiation}
+    取介质1为真空，在考察频段内把介质2的表面近似为理想导体。真空侧满足$E_1^q+B_1=0$。记$\theta$为相对于$-z$的夹角，代入$h=(\omega/c)\sin\theta$及\eqref{eqn:single interface TR}得到Ginzburg--Frank角谱
+    \[
+        \frac{\d^2 W_1}{\nd\omega\nd\Omega}
+        =\frac{q^2}{4\pi^3\varepsilon_0c}
+          \frac{\beta^2\sin^2\theta}{(1-\beta^2\cos^2\theta)^2},
+        \qquad 0\leq\theta\leq\pi/2 .
+    \]
+    沿轴线的辐射为零。$\gamma\gg1$时，小角区域的角因子正比于$\theta^2/(\gamma^{-2}+\theta^2)^2$，峰值位于$\theta\simeq1/\gamma$。对真空侧整个半球积分，取$u=\cos\theta$，可得
+    \[
+        \dv{W_1}{\omega}=\frac{q^2}{4\pi^2\varepsilon_0c}
+        \biggl[\frac{1+\beta^2}{2\beta}\ln\frac{1+\beta}{1-\beta}-1\biggr].
+    \]
+\end{example}
+
+理想导体在单位角频率上的后向辐射能量为常量。实际介质在高频逐渐失去屏蔽能力，计算总能量时须恢复$\varepsilon_2(\omega)$的频率依赖。\footnote{S. Casalbuoni et al.，\href{https://doi.org/10.1103/PhysRevSTAB.12.030705}{Phys. Rev. ST Accel. Beams 12, 030705 (2009)}。X射线频段的形成长度与介质色散也可参见\href{https://geant4.web.cern.ch/documentation/dev/prm_html/PhysicsReferenceManual/electromagnetic/xray_production/xtr.html}{Geant4的过渡辐射讲义}。}
+
+\section{辐射反作用}
+
+前面从给定轨迹求辐射。反过来，电荷向远处辐射能量时，它的运动和近区的电磁场也会改变。
+以下只考虑真空中速度远小于$c$的经典粒子，$m$表示已计入电磁惯性贡献的观测质量，点号表示对粒子运动时间求导。由Larmor公式\eqref{eqn:moving charge Larmor}，可将辐射功率写为
+\[
+    P_{\mathrm{rad}}=m\tau_q a^2,\qquad
+    \tau_q=\frac{q^2}{6\pi\varepsilon_0mc^3}.
+\]
+为看出这个功率怎样进入运动方程，将$a^2$写为
+$\d(\bm a\cdot\bm v)/\nd t-\dotbm a\cdot\bm v$。
+在非相对论点电荷模型中，辐射自力的最低阶项为Abraham--Lorentz力，
+\begin{equation}
+    \bm F_{\mathrm{rad}}=m\tau_q\dotbm a,\qquad m\bm a=\bm F_{\mathrm{ext}}+\bm F_{\mathrm{rad}} .
+    \label{eqn:moving charge radiation force}
+\end{equation}
+将运动方程与速度点乘，便得到外力的功率平衡
+\begin{equation}
+    \bm F_{\mathrm{ext}}\cdot\bm v
+    =\dd t\biggp{\frac12mv^2+E_{\mathrm S}}+P_{\mathrm{rad}},
+    \qquad E_{\mathrm S}=-m\tau_q\bm a\cdot\bm v .
+\end{equation}
+$E_{\mathrm S}$称为Schott能，是随运动改变的束缚场能量项。取一个完整的周期，或取两端加速度均为零的一段运动，这一项的净变化为零，自力所做的总功恰等于辐射能量的负值。
+
+\paragraph{失控解与降阶}
+式\eqref{eqn:moving charge radiation force}含有位置的三阶导数。撤去外力后，它还允许
+$\bm a(t)=\bm a(0)\e^{t/\tau_q}$。这样的自由粒子在$\tau_q$的尺度上自行加速，称为失控解(runaway solution)。
+在辐射反作用是微扰的情形，外力沿轨迹的变化时间$T$满足$\tau_q/T\ll1$。在已经带有$\tau_q$的一项中，用零阶运动$m\bm a=\bm F_{\mathrm{ext}}$计算$\dotbm a$，只保留$\tau_q$的一阶修正，得到
+\[
+    m\bm a\simeq\bm F_{\mathrm{ext}}+
+    \tau_q\biggeval{\dv{\bm F_{\mathrm{ext}}}{t}}_{\text{零阶运动}} .
+\]
+若外力依赖位置和速度，此处应取沿轨迹的全导数。降阶后的方程只需指定初始位置和初始速度，且自由粒子保持匀速运动。
+
+\paragraph{振子的辐射线宽}
+考虑沿$x$方向运动的电荷，回复力为$-m\omega_0^2x$，驱动力为$qE(t)$，忽略其他耗散。对这两个力一同降阶，得
+\[
+    \ddot x+\Gamma\dot x+\omega_0^2x=\frac qm\bigp{E+\tau_q\dot E},
+    \qquad \Gamma=\tau_q\omega_0^2.
+\]
+若$\omega_0\tau_q\ll1$，自由振荡的振幅包络按$\e^{-\Gamma t/2}$衰减，周期平均能量按$\e^{-\Gamma t}$衰减。
+取$E(t)=\Re(E_0\e^{-\i\omega t})$，则稳态位移的复振幅为
+\[
+    x_\omega=\frac{qE_0}{m}\frac{1-\i\omega\tau_q}{\omega_0^2-\omega^2-\i\Gamma\omega}.
+\]
+平均辐射功率为$m\tau_q\omega^4\abs{x_\omega}^2/2$。在窄共振峰内，可将分子及缓变因子取在$\omega_0$，得到
+\[
+    \ave{P_{\mathrm{rad}}}\propto
+    \frac{1}{(\omega-\omega_0)^2+(\Gamma/2)^2}.
+\]
+半功率点位于$\omega_0\pm\Gamma/2$附近，故辐射线宽（角频率的半高全宽）为$\Delta\omega\simeq\Gamma$，相应的品质因子为$Q\simeq\omega_0/\Gamma$。

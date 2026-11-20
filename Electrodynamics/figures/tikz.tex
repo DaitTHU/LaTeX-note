@@ -1723,4 +1723,58 @@
     \label{charged-ring-in-grounded-sphere}
 \end{tikzpicture}
 
+\begin{tikzpicture}[>=latex]
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (-1.25,-1.25);
+    \coordinate (B) at ( 1.25,-1.25);
+    \coordinate (C) at ( 1.25, 1.25);
+    \coordinate (D) at (-1.25, 1.25);
+    \fill[gray!16] (O)--(A)--(B)--cycle;
+    \draw[thick] (A)--(B)--(C)--(D)--cycle;
+    \draw (A)--(C) (B)--(D);
+    \foreach \p/\pos/\i in {A/left/1,B/right/2,C/right/3,D/left/4}
+        \fill (\p) circle (1.7pt) node[\pos] {$\Phi_{\i}$};
+    \fill (O) circle (2pt) node[above=3pt] {$O$};
+    \draw[<->] (-1.25,-1.55)--(1.25,-1.55) node[midway,below] {$2h$};
+    \label{triangular-elements}
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=latex]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (1.8,.24);
+    \coordinate (P) at (5.4,2.85);
+    \draw[gray,thick] (-.85,.05) .. controls (.3,-.10) and (1.65,.08) ..
+        (2.35,.56) .. controls (2.65,.76) and (2.95,1.00) .. (3.12,1.18);
+    \draw[->,thick] (A)--(P) node[pos=.47,above left] {$R$};
+    \draw[->,thick,dashed] (B)--(P) node[pos=.62,below right] {$R+\d R$};
+    \fill (A) circle (1.8pt) node[below left] {$\bm r_q(t')$};
+    \fill (B) circle (1.8pt) node[below right] {$\bm r_q(t'+\d t')$};
+    \fill (P) circle (2pt) node[above] {$\bm r$};
+    \label{moving-charge-retardation}
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=stealth,
+    electron/.style={thick,postaction={decorate},decoration={markings,
+        mark=at position .53 with {\arrow{stealth}}}},
+    photon/.style={thick,decorate,decoration={snake,amplitude=.85mm,segment length=3mm}},
+    every node/.style={font=\small}]
+    \foreach \offset in {0,5.6}{
+        \begin{scope}[xshift=\offset cm]
+            \draw[electron] (-.9,-.57) node[below] {$p$} -- (0,0);
+            \draw[electron] (0,0) -- (2,0);
+            \draw[electron] (2,0) -- (2.9,-.57) node[below] {$p'$};
+            \fill (0,0) circle (1.6pt) (2,0) circle (1.6pt);
+        \end{scope}
+    }
+    \draw[photon,->] (-.68,1.16) node[above] {$k$} -- (0,0);
+    \draw[photon,->] (2,0) -- (2.68,1.16) node[above] {$k'$};
+    \node[below=4pt] at (1,0) {$p+k$};
+    \begin{scope}[xshift=5.6cm]
+        \draw[photon,->] (0,0) -- (.52,1.16) node[above] {$k'$};
+        \draw[photon,->] (1.48,1.16) node[above] {$k$} -- (2,0);
+        \node[below=4pt] at (1,0) {$p-k'$};
+    \end{scope}
+    \label{compton-tree-graphs}
+\end{tikzpicture}
+
 \end{document}

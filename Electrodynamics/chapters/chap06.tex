@@ -86,7 +86,7 @@ Helmholtz方程的一个解是沿$z$方向传播的平面波$\e^{\i(kz-\omega t)
 
 \paragraph{实波矢}
 
-若$\uvec n$是实矢量，则$\bm E_0$和$\bm B_0$有相同的相位：
+在普通透明介质（$\varepsilon,\mu>0$）中，若$\uvec n$为实矢量，$\bm B_0=(k/\omega)\uvec n\times\bm E_0$。以线偏振为例，电场和磁场同相，且可写成
 \begin{subequations}
     \begin{align}
         \bm E_0&=E_0\uvec\epsilon_1,\\
@@ -98,16 +98,17 @@ $\uvec n,\uvec\epsilon_1,\uvec\epsilon_2$是两两正交的单位矢量。
 $\uvec n$称为传播矢量(propagation vector)，
 $\uvec\epsilon_1,\uvec\epsilon_2$称为极化矢量(polarization vector)。
 
-能流的时间平均%单位时间流过单位面积的能量
-由复Poynting矢量的实部给出：
+由复Poynting矢量的实部可得沿传播方向的周期平均能流，
 \begin{equation}
-    \bm S=\frac12\bm E\times\bm H\conj=\frac12\sqrt{\frac\varepsilon\mu}\abs{\bm E_0}^2\uvec n.
+    \ave{\bm S}=\frac12\Re(\bm E_0\times\bm H_0\conj)
+       =\frac12\sqrt{\frac{\varepsilon}{\mu}}\abs{\bm E_0}^2\uvec n .
 \end{equation}
-相应地，电磁场能量密度的时间平均为
+若本构参数在波包的频带内还可以视为与频率无关，则电、磁场分别贡献一半周期平均储能，
 \begin{equation}
-    u=\frac14\biggp{\varepsilon\bm E\cdot\bm E\conj+\frac1\mu\bm B\cdot\bm B\conj}=\frac\varepsilon 2\abs{\bm E_0}^2.
+    \ave u=\frac14\biggp{\varepsilon\abs{\bm E_0}^2+\frac1\mu\abs{\bm B_0}^2}
+          =\frac{\varepsilon}{2}\abs{\bm E_0}^2 .
 \end{equation}
-因此，对于实波矢的平面横波，能流的速度等于相速度：$\abs{\bm S}/u=v_\varphi$。
+在这些条件下，能量速度$\abs{\ave{\bm S}}/\ave u$等于相速度$v_\varphi$。透明色散介质则须计入材料的储能，见\eqref{eqn:Brillouin energy}和下文的\exmref{exm:plasma energy speed}。
 
 \paragraph{复波矢}
 
@@ -351,7 +352,7 @@ Stokes参数在场强上是二次的，只能通过强度测量来确定，并�
 \[
     (\bm E_\incident+\bm E_\reflected-\bm E_\transmitted)\times\uvec n=\bm 0.
 \]
-上式对任意$t$均成立，因此光在任意介质中都具有相同的频率：
+对于静止的界面和不随时间变化的线性介质，上式对任意$t$均成立，因此入射、反射和透射波的频率相同：
 \begin{equation}
     \label{eqn:omegai=omegar=omegat}
     \omega_\incident=\omega_\reflected=\omega_\transmitted=\omega,
@@ -390,7 +391,7 @@ $\bm k_\incident,\bm k_\reflected,\bm k_\transmitted$三线共面，且三者的
     {折射率}{index of refraction}
     将光速与相速度的比值称为折射率(index of refraction)
     \begin{equation}
-        n:=\frac c{v_\varphi}\geqslant1,
+        n:=\frac c{v_\varphi}.
     \end{equation}
 \end{definition}
 \begin{theorem}{Snell定律}{Snell's law}
@@ -495,7 +496,7 @@ $\bm k_\incident,\bm k_\reflected,\bm k_\transmitted$三线共面，且三者的
 \paragraph{全反射}
 
 前面的讨论在绝大程度上只限于外反射($n_\incident<n_\transmitted$)，即光疏介质入射光密介质。相反的情况是内反射($n_\incident>n_\transmitted$)，这时$\theta_\incident<\theta_\transmitted$。
-考虑$\theta_\transmitted\geqslant\ang{90}$，即光疏介质没有折射光，我们称之为全反射(total internal reflection)，由Snell定律，全反射的临界角
+当折射角达到$\ang{90}$时，透射波沿界面传播。再增大入射角，光疏侧变为倏逝波，发生全反射(total internal reflection)。由Snell定律，全反射的临界角为
 \begin{equation}
     \label{eqn:total reflect}
     \theta_\critical=\arcsin\Bigp{\frac{n_\transmitted}{n_\incident}}.
@@ -518,23 +519,22 @@ $\bm k_\incident,\bm k_\reflected,\bm k_\transmitted$三线共面，且三者的
 发生全反射时，光疏介质中的
 倏逝波(evanescent wave)在垂直方向上以$\e^{-z/\delta}$衰减，其中
 \[
-    \delta\inv:=k'\sqrt{\sin^2\theta_\incident-\sin^2\theta_\critical}.
+    \delta\inv=\sqrt{k_\parallel^2-k_\transmitted^2}
+    =k_\incident\sqrt{\sin^2\theta_\incident-\sin^2\theta_\critical},
+    \qquad k_\parallel=k_\incident\sin\theta_\incident .
 \]
-如果有限横向范围内的光束经历全反射，则反射光将相对几何反射光束出现横向偏移。对于线偏振光，偏移的距离称为Goos--Hänchen偏移
+若光束的角谱很窄，且远离临界角，反射系数的相位$\varphi$随$k_\parallel$变化，使反射光束中心沿界面偏移$D=-\p\varphi/\p k_\parallel$。对于垂直极化，代入$r_\perp$的相位得到Goos--Hänchen偏移
 \[
-    D\simeq 2\delta\sin\theta_\incident.
+    D_\perp\simeq 2\delta\tan\theta_\incident .
 \]
 
 \paragraph{Fresnel菱体}
 
-发生全反射时，
-反射光相对入射光的相位差为$n_\transmitted\cos\theta_\transmitted$，是一个纯虚数，与入射角$\theta_\incident$和折射率$n_\incident,n_\transmitted$有关，这种相位差可以用来将一种偏振态的光转化为另一种偏振态，Fresnel菱体(rhombus)便是以此为原理，将垂直于表面入射的线偏振光转换为出射的圆偏振光。
-
-经过复杂的计算，如果要实现此效果，需要满足
+全反射时两种偏振的反射系数模长都为1，但相位不同。令$m=n_\transmitted/n_\incident<1$，$\theta=\theta_\incident$。由Fresnel公式，每次反射产生的相对相移$\Delta=\abs{\arg(r_\parallel/r_\perp)}$满足
 \[
-    \cos^2\theta_\incident+\frac{n_\transmitted^2}{n_\incident^2}\sin^2\theta_\incident-1=\pm\,2(n_\transmitted^2-n_\incident^2)\cos\theta_\incident^2\sqrt{\frac{n_\transmitted^2}{n_\incident^2}\sin^2\theta_\incident-1},
+    \tan\frac{\Delta}{2}=\frac{\cos\theta\sqrt{\sin^2\theta-m^2}}{\sin^2\theta}.
 \]
-玻璃的折射率$n=1.5$，因此内反射角位$\ang{50.2}$或$\ang{53.3}$即可满足条件。
+Fresnel菱体让光束经历两次相同的全反射。选$\Delta=\pi/4$，总相移为$\pi/2$，两偏振分量等幅的入射线偏振光便转为圆偏振光。取玻璃到空气的折射率比$m=1/1.5$，可得内反射角$\ang{50.2}$或$\ang{53.3}$。
 
 % \paragraph{垂直入射}
 % 如果光是垂直界面入射的，$\theta_\incident=\theta_\transmitted=0$，则
@@ -547,7 +547,6 @@ $\bm k_\incident,\bm k_\reflected,\bm k_\transmitted$三线共面，且三者的
 
 所有介质都表现出一定的色散性，只有在有限的频率范围内，或在真空中，光的传播速度才能被视为常量。
 
-色散的应用：能量啁啾(chirped pulse amplification)。
 \paragraph{色散的简单模型}
 我们忽略外加电场和局部电场之间的区别。因此，该模型只适用于密度相对较低的物质。
 忽略磁场力，
@@ -588,7 +587,7 @@ $-m_\electron\omega_0^2\bm r$是回复力(restoring force)，$-m_\electron\gamma
 \[
     k=\beta+\i\frac\alpha 2=\frac{\omega}{c}(n+\i\kappa).
 \]
-这里 $n$ 和消光系数 $\kappa$ 分别是复折射率的实部和虚部。沿 $+z$ 传播时，光强按 $I(z)=I(0)\e^{-\alpha z}$ 衰减。用真空波长 $\lambda_0=2\pi c/\omega$ 表示，强度吸收系数 $\alpha=4\pi\kappa/\lambda_0$。对于非磁性介质，在弱吸收条件 $\alpha\ll\beta$ 下有
+这里 $n$ 和消光系数 $\kappa$ 分别是复折射率的实部和虚部。沿 $+z$ 传播时，光强按 $I(z)=I(0)\e^{-\alpha z}$ 衰减。用真空波长 $\lambda_0=2\pi c/\omega$ 表示，本章的强度吸收系数为$\alpha\equiv\alpha_I=4\pi\kappa/\lambda_0=2\Im k$，对应的场振幅衰减常数为$\alpha_I/2$。对于非磁性介质，在弱吸收条件 $\alpha\ll\beta$ 下有
 \[
     k=\frac\omega c\sqrt{\varepsilon_\relative}\implies
     \begin{cases}
@@ -656,6 +655,21 @@ $\omega_{\mathrm{p}}$是介质的等离子体频率(plasma frequency)
     $f_{\mathrm p}=\omega_{\mathrm p}/(2\pi)\simeq\qty{9}{\mega\hertz}$。
     \footnote{\href{https://data.ngdc.noaa.gov/instruments/remote-sensing/active/profilers-sounders/ionosonde/documentation/Digisonde/DPS4_Operations_Manual/NewSect1.pdf}{Digisonde 电离层探测仪手册，第 1 章}。}
 \end{example}
+\begin{example}{无碰撞等离子体中的能量速度}{plasma energy speed}
+    在静止、无背景磁场的冷等离子体中，设离子不动，电子数密度为$n_{\mathrm e}$。当$\omega>\omega_{\mathrm p}$时，横波满足$\omega^2=c^2k^2+\omega_{\mathrm p}^2$，其相速度$\omega/k>c$。能量以什么速度通过一个截面？
+    电子满足$-\i\omega m_\electron\bm v_0=-e\bm E_0$，故单位体积电子的周期平均动能为
+    \[
+        \ave{u_{\mathrm{kin}}}=\frac14 n_{\mathrm e}m_\electron\abs{\bm v_0}^2
+            =\frac{\varepsilon_0}4\frac{\omega_{\mathrm p}^2}{\omega^2}\abs{\bm E_0}^2 .
+    \]
+    由$\abs{\bm B_0}=k\abs{\bm E_0}/\omega$，电场和磁场本身的平均储能为$\varepsilon_0(1+c^2k^2/\omega^2)\abs{\bm E_0}^2/4$。加上电子动能后，色散关系给出$\ave u=\varepsilon_0\abs{\bm E_0}^2/2$，与\eqref{eqn:Brillouin energy}一致。取沿$+z$传播的波，
+    \[
+        \ave{S_z}=\frac{k}{2\mu_0\omega}\abs{\bm E_0}^2,\qquad
+        v_{\mathrm E}=\frac{\ave{S_z}}{\ave u}=\frac{c^2k}{\omega}
+                      =\dv\omega k=v_{\mathrm g}.
+    \]
+    接近截止时，磁场和能流趋于零，电场和电子仍交替储能。此时群速度也趋于零，而$v_{\mathrm g}v_\varphi=c^2$。
+\end{example}
 \begin{example}{金属的紫外透射现象}{ultraviolet transparency}
     对于$\omega\ll\omega_{\mathrm{p}}$，光被完全反射；当频率$\omega$增加到$\varepsilon_\relative(\omega)>0$的区间，金属便突然可以透射光，其反射率变化得很剧烈(drastically)，这称为紫外透射(ultraviolet transparency)现象。
 \end{example}
@@ -674,9 +688,49 @@ $\omega_{\mathrm{p}}$是介质的等离子体频率(plasma frequency)
 
 \sectionstar{在电离层和磁层中的传播模型}
 
-电磁波对等离子体中的传播会受到外部磁场的显著影响。
+在\exmref{exm:ionisphere}中，电子沿波的电场方向振荡。若存在地磁场，运动电子还受到横向Lorentz力。对于沿地磁场传播的波，两个旋向相反的圆偏振分量将有不同的波数。
 
-略
+\paragraph{沿磁场传播的圆偏振波}
+设均匀冷等离子体中有静磁场$\bm B_0=B_0\uvec z$，取$B_0>0$。考虑$\e^{\i(kz-\omega t)}$的微弱横波，频率足够高，可忽略碰撞和离子对波的响应。电子受到波电场和背景磁场的作用，一阶速度满足
+\[
+    -\i\omega m_\electron\bm v=-e(\bm E+\bm v\times\bm B_0).
+\]
+令$\Omega_\electron=eB_0/m_\electron$为电子回旋角频率的大小。按前面定义的圆偏振基$\uvec\epsilon_\pm=(\uvec x\pm\i\uvec y)/\sqrt2$，有$\uvec\epsilon_\pm\times\uvec z=\pm\i\uvec\epsilon_\pm$。两个分量各自满足
+\[
+    v_\pm=\frac{-\i e E_\pm}{m_\electron(\omega\mp\Omega_\electron)},\qquad
+    -\i\omega P_\pm=J_\pm=-n_\electron e v_\pm.
+\]
+其中$n_\electron$为自由电子数密度。由$D_\pm=\varepsilon_0 E_\pm+P_\pm$，两个传播分支的折射率为
+\begin{equation}
+    n_\pm^2=\frac{c^2 k_\pm^2}{\omega^2}
+    =1-\frac{\omega_{\mathrm p}^2}{\omega(\omega\mp\Omega_\electron)},
+    \qquad \omega_{\mathrm p}^2=\frac{n_\electron e^2}{\varepsilon_0m_\electron}.
+\end{equation}
+$B_0\to0$时，两支恢复相同的等离子体色散关系。固定$z$观察，$\uvec\epsilon_+$支的电场沿自由电子回旋的方向转动，在$\omega=\Omega_\electron$处产生回旋共振。在共振附近计算有限的吸收率时，需要计入阻尼或电子速度分布。
+
+\paragraph{Faraday旋转}
+设入射波沿$x$偏振，且两个圆偏振分量均可无损传播。它们的振幅相等，经过距离$L$后分别积累相位$k_+L$和$k_-L$。将两项相加，略去公共相位，偏振方向成为$\uvec x\cos\psi+\uvec y\sin\psi$，其中
+\[
+    \psi=\frac{k_--k_+}2 L.
+\]
+在$\omega\gg\omega_{\mathrm p},\Omega_\electron$时展开上式，得到
+\begin{equation}
+    \psi\simeq\frac{\omega_{\mathrm p}^2\Omega_\electron L}{2c\omega^2}.
+\end{equation}
+旋转角与真空波长的平方成正比。对于电子密度和纵向磁场沿路径缓慢变化的情形，应将$\omega_{\mathrm p}^2\Omega_\electron L$换为路径积分，回旋频率取$eB_z/m_\electron$的代数值。因此不同波长的偏振角可用来测量沿途$n_\electron B_z$的积分。
+
+\paragraph{Alfvén波}
+在远低于离子回旋频率的长波极限下，离子也随场运动，惯性主要来自离子。用理想导电的单流体描述密度均匀的等离子体。设其质量密度为$\rho_{\mathrm m}$，横向流速扰动$\bm u_\perp$和磁场扰动$\bm b_\perp$仅依赖于$z,t$。忽略位移电流，由$\bm J\times\bm B_0$给出的力密度以及理想导体条件$\bm E=-\bm u_\perp\times\bm B_0$，分别得到
+\[
+    \rho_{\mathrm m}\pv{\bm u_\perp}t=\frac{B_0}{\mu_0}\pv{\bm b_\perp}z,\qquad
+    \pv{\bm b_\perp}t=B_0\pv{\bm u_\perp}z.
+\]
+消去$\bm b_\perp$即得沿背景磁场传播的横波
+\begin{equation}
+    \pv[2]{\bm u_\perp}t=v_{\mathrm A}^2\pv[2]{\bm u_\perp}z,\qquad
+    v_{\mathrm A}=\frac{B_0}{\sqrt{\mu_0\rho_{\mathrm m}}}.
+\end{equation}
+弯曲磁力线产生的磁张力提供回复力，流体惯性决定其加速度。上式给出的Alfvén速度适用于$v_{\mathrm A}\ll c$、电阻扩散可忽略的情形。
 
 \section{群速度}
 
@@ -773,6 +827,27 @@ $A(k)$描述了不同波的线性叠加的性质，
     此式量纲为速度；二阶导数$\omega''(k)=\omega_\ast a^2$还会使窄带波包展宽。
 \end{example}
 
+\paragraph{Gauss脉冲的时间展宽}
+在实验中，常在固定位置记录一个单向传播的脉冲随时间的变化。设$x=0$处的复场为$u(0,t)=A_0\e^{-t^2/(2T_0^2)}\e^{-\i\omega_0t}$，初始包络没有啁啾。介质在脉冲带宽内透明，且带宽远小于$\omega_0$。记$\Omega=\omega-\omega_0$，将波数展开到二阶，
+\[
+    k(\omega_0+\Omega)\simeq k_0+\frac{\Omega}{v_{\mathrm g}}+\frac12 k''_0\Omega^2,
+    \qquad k''_0=\biggeval{\dv[2]k\omega}_{\omega_0}.
+\]
+在传播距离$x$内，若三阶及更高阶色散积累的相位在脉冲带宽内均可忽略，一次项使包络中心推迟$x/v_{\mathrm g}$，二次项使不同频率分量获得不同的群延迟。取$\tau=t-x/v_{\mathrm g}$，并从复场中提出载波因子$\e^{\i(k_0x-\omega_0t)}$，剩下的包络为
+\begin{align*}
+    A(x,\tau)
+    &=\frac{A_0 T_0}{\sqrt{2\pi}}\intR
+    \exp\biggb{-\frac{T_0^2-\i k''_0x}{2}\Omega^2-\i\Omega\tau}\d\Omega\\
+    &=\frac{A_0}{\sqrt{1-\i s}}\exp\biggb{-\frac{\tau^2}{2T_0^2(1-\i s)}},
+    \qquad s=\frac{k''_0x}{T_0^2}.
+\end{align*}
+强度包络正比于$\abs{A}^2$，其半高全宽为
+\begin{equation}
+    \Delta t(x)=2\sqrt{\ln 2}\,T_0
+        \sqrt{1+\biggp{\frac{k''_0x}{T_0^2}}^2}.
+\end{equation}
+脉冲传播一个色散长度$L_{\mathrm D}=T_0^2/\abs{k''_0}$后，宽度增至原来的$\sqrt2$倍。对于这里的无初始啁啾脉冲，$k''_0$的两种符号给出相同的展宽，却使瞬时频率沿脉冲前后以相反的次序排列。若入射脉冲已有啁啾，可选择累积色散$k''_0x$的符号与大小以压缩脉冲。
+
 \section{\texorpdfstring{$\bm D$}{D}和\texorpdfstring{$\bm E$}{E}之间的因果关系}
 
 静态电磁场
@@ -825,7 +900,7 @@ $\bm D(\bm r,t)$和$\bm E(\bm r,t)$有瞬时的联系；但如果$\varepsilon(\o
 \[
     G(\tau)=\omega_{\mathrm{p}}^2\frac{\sin\nu_0\tau}{\nu_0}\e^{-\gamma\tau/2},\quad\tau>0.
 \]
-若没有上述假设，$G(\tau)$也仅仅是上式的线性组合。因此，$\bm D(\bm r,t)$和$\bm E(\bm r,t)$之间连接上的非局域性被限制在$\gamma\inv$的时间内。而$\gamma\inv$的典型值$\qty{e-9}{\second}$。
+欠阻尼时，响应的振幅包络按$\e^{-\gamma\tau/2}$衰减，衰减时间为$2/\gamma$。若材料含有多个振子，各自的频率和阻尼共同决定响应延续的时间。
 
 上面的方程在时间(而非空间)上是非局部的。
 
@@ -867,10 +942,29 @@ $\tau<0$时$G(\tau)=0$。说明只有在$t$时间之前的电场$\bm E$进入以
 \end{equation}
 Kramers--Kronig关系将响应函数的实部与虚部联系起来，其物理基础是因果性；具体积分形式还依赖上述解析性、收敛性及奇点处理条件。
 
-对于$\omega=\omega_0$处的一条非常窄的吸收线或吸收带，由
+例如，在正频率$\omega_0$处有一条非常窄的吸收线。将它近似为$\delta$函数，由第一条关系可得该谱线两侧的色散
 \begin{align*}
     \Im[\varepsilon_\relative(\omega)]&\simeq\frac{\pi K}{2\omega_0}\delta(\omega-\omega_0)+\cdots\\
-    \Re[\varepsilon_\relative(\omega)]&\simeq\bar\varepsilon+\frac K{\omega_0^2-\omega^2},
+    \Re[\varepsilon_\relative(\omega)]&\simeq\bar\varepsilon+\frac K{\omega_0^2-\omega^2}.
 \end{align*}
-后略。
+其中$\bar\varepsilon$为其余谱线在该频段给出的平滑背景。
+
+\paragraph{介电响应的求和规则}
+对无直流电导的被动介质，若静态介电常数有限，在第一条Kramers--Kronig关系中令$\omega=0$即得
+\[
+    \varepsilon_\relative(0)-1
+    =\frac2\pi\intRplus\frac{\Im[\varepsilon_\relative(\omega')]}{\omega'}\d\omega'.
+\]
+相同面积的吸收线，频率越低，对静态极化的贡献越大。另一方面，在上半平面取纯虚频率$\i\xi$，因果响应的积分表示给出
+\[
+    \varepsilon_\relative(\i\xi)-1
+    =\frac2\pi\intRplus\frac{\omega'\Im[\varepsilon_\relative(\omega')]}{\omega'^2+\xi^2}\d\omega',
+    \qquad \xi>0.
+\]
+在本章的电子振子模型中，$\xi^2[\varepsilon_\relative(\i\xi)-1]\to\omega_{\mathrm p}^2$。将积分式乘以$\xi^2$并取$\xi\to\infty$，便得到吸收谱的总权重
+\begin{equation}
+    \intRplus\omega'\Im[\varepsilon_\relative(\omega')]\d\omega'
+    =\frac\pi2\omega_{\mathrm p}^2.
+\end{equation}
+固定总电子数密度$NZ$时，改变振子的回复力或阻尼会改变谱线的位置或宽度，保留这个加权积分。
 

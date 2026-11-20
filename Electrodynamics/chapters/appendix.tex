@@ -116,13 +116,18 @@
     \end{align}
     其中
     \begin{equation}
-        (\bm A\cdot\nabla)\bm B:=A_x\pv{B_x}x+A_y\pv{B_x}y+A_z\pv{B_x}z.
+        (\bm A\cdot\nabla)\bm B:=A_x\pv{\bm B}x+A_y\pv{\bm B}y+A_z\pv{\bm B}z.
     \end{equation}
 \end{theorem}
 
 \begin{corollary}
     \begin{equation}
-        (\bm A\cdot\nabla)\bm B=\frac12[\grad(\bm A\cdot\bm B)-\curl(\bm A\times\bm B)-\bm B\times(\curl\bm A)+\bm A(\div\bm B)+\bm B(\div\bm A)].
+        \begin{aligned}
+            2(\bm A\cdot\nabla)\bm B
+               &=\grad(\bm A\cdot\bm B)-\curl(\bm A\times\bm B)
+                  -\bm A\times(\curl\bm B)-\bm B\times(\curl\bm A)\\
+               &\quad+\bm A(\div\bm B)-\bm B(\div\bm A).
+        \end{aligned}
     \end{equation}
     特别地，$\bm B=\bm A$时，
     \begin{equation}
@@ -132,7 +137,7 @@
 
 \begin{theorem}
     {梯度场无旋、旋度场无源}{curlgrad=divcurl=0}
-    梯度的旋度恒为$\bm0$，旋度和散度恒为0
+    梯度的旋度恒为$\bm0$，旋度的散度恒为0
     \begin{align}
         \label{eqn:curlgrad}
         \curl(\grad\psi)&\equiv \bm 0;\\
@@ -229,11 +234,7 @@
 
 \subsection{Lam\'e系数}
 
-给定曲线坐标系(curvilinear coordinate)的正交基$\uvec e_1,\uvec e_2,\uvec e_3$，位置矢量
-\[
-    \bm r=q_1\uvec e_1+q_2\uvec e_2+q_3\uvec e_3,
-\]
-位置矢量$\bm r=\bm r(q_1,q_2,q_3)$的全微分
+给定正交曲线坐标$(q_1,q_2,q_3)$，取沿各坐标线正向的单位切矢$\uvec e_i$，并令三者组成右手系。位置矢量$\bm r=\bm r(q_1,q_2,q_3)$的全微分为
 \[
     \d\bm r=\pv{\bm r}{q_1}\d q_1+\pv{\bm r}{q_2}\d q_2+\pv{\bm r}{q_3}\d q_3,
 \]
@@ -401,7 +402,7 @@ Lam\'e系数：
 我们只讨论性质足够好的(well-behaved)向量场$\bm F$，而不考虑分析学中的那些反例。具体来说，$\bm F$在区域$V$中二次连续可微。
 
 \begin{theorem}{无旋场与标量势}{irrotational field and scalar potential}
-    对于无旋场$\bm F$，下列命题是等价的：
+    在单连通区域中，下列命题等价：
     \begin{enumerate}
         \item $\curl\bm F=\bm 0$;
         \item $\bm F$可以写成标量势(scalar potential)的梯度：$\bm F=-\grad\Phi$;
@@ -416,14 +417,14 @@ Lam\'e系数：
     由式\eqref{eqn:curlgrad}可知$(2)\implies(1)$；易知$(3)\iff(4)$；由Stokes定理\eqref{eqn:curl}可知$(4)\iff(1)$；最后确定参考点$\Phi=0$后，可由$(3)\implies(2)$得到$\Phi$。
 \end{proof}
 \begin{remark}
-    $\Phi$并不唯一，$\Phi'=\Phi+\const$可以给出同一个$\bm F$，需要确定$\Phi=0$的参考点，最简单的参考点是无穷远处$\Phi(\infty)=0$。
+    $\Phi'=\Phi+\const$给出同一个$\bm F$。若从无穷远处到场点的积分收敛，可取$\Phi(\infty)=0$，于是
     \[
-        \Phi(\bm r)=\int_\infty^{\bm r}\bm F\cdot\d\bm\ell.
+        \Phi(\bm r)=-\int_\infty^{\bm r}\bm F\cdot\d\bm\ell.
     \]
 \end{remark}
 
 \begin{theorem}{无源场与矢量势}{solenoidal field and vector potential}
-    对于无源场$\bm F$，下列命题是等价的：
+    若区域中每个闭合曲面都能围出完全位于区域内的体积，则下列命题等价：
     \begin{enumerate}
         \item $\div\bm F=0$;
         \item $\bm F$可以写成矢量势(vector potential)的旋度：$\bm F=\curl\bm A$;
@@ -440,11 +441,11 @@ Lam\'e系数：
 
 \begin{remark}
     $\bm A$并不唯一，$\bm A'=\bm A+\grad\varLambda$可以给出同一个$\bm F$。
-    可以通过确定一个规范(gauge)来唯一确定$\bm A$，比如最简单的Coulomb规范$\div\bm A=0$。
+    Coulomb规范$\div\bm A=0$仍允许$\laplacian\varLambda=0$的规范变换，须再给出适当的边界条件才能消除这一自由度。
 \end{remark}
 
 \begin{theorem}{Helmholtz分解}{Helmholtz decomposition}
-    向量场$\bm F$可以被唯一地分解为无旋场和无源场的叠加：
+    向量场$\bm F$在$V$内可由其散度、旋度和边界值写成无旋场和无源场的叠加。下面的边界项选定了这样一组分量：
     \begin{equation}
         \bm F=-\grad\Phi+\curl\bm A,
     \end{equation}
@@ -466,7 +467,7 @@ Lam\'e系数：
 \end{proof}
 
 \begin{corollary}
-    若$V$无界且$\bm F=o(1/r)$，则
+    若$V=\RR^3$且$\bm F=o(1/r)$，无穷远处的边界项消失，体积分收敛时有
     \begin{subequations}
         \begin{align}
             \Phi(\bm r)&=\frac1{4\pi}\int_V\frac{\nabla'\cdot\bm F(\bm r')}{\abs{\bm r-\bm r'}}\d V',\\
@@ -552,7 +553,7 @@ Lam\'e系数：
 \end{equation}
 考虑$m=0$的情形，得到Legendre方程：
 \begin{equation}
-    \dd x\biggb{(1-x)^2\dv Px}+\ell(\ell+1)P=0.
+    \dd x\biggb{(1-x^2)\dv Px}+\ell(\ell+1)P=0.
 \end{equation}
 采用级数解，设
 \[
@@ -560,7 +561,7 @@ Lam\'e系数：
 \]
 $\alpha$是待定系数，从而 
 \[
-    \sum_{j=0}^\infty(\alpha+j)(\alpha+j-1)a_j x^{\alpha+j-2}-\sum_{j=0}^\infty\bigb{(\alpha+j)(\alpha+j+1)-\ell(\ell+1)}a_jx_{\alpha+j}=0.
+    \sum_{j=0}^\infty(\alpha+j)(\alpha+j-1)a_j x^{\alpha+j-2}-\sum_{j=0}^\infty\bigb{(\alpha+j)(\alpha+j+1)-\ell(\ell+1)}a_jx^{\alpha+j}=0.
 \]
 解得
 \[
@@ -570,16 +571,7 @@ $\alpha$是待定系数，从而
         a_{j+2}=\frac{(\alpha+j)(\alpha+j+1)-\ell(\ell+1)}{(\alpha+j+1)(\alpha+j+2)}a_j,&j\geqslant 0
     \end{cases}
 \]
-对初始条件分情况讨论：
-\begin{compactitem}
-	\item $a_0=a_1=0$，解$P\equiv 0$是平凡的；
-	\item $a_0=0,\enspace a_1\neq 0$，展开式事实上与$a_0\neq 0,\enspace a_1=0$等价：
-	\[
-        P(x)=x^\alpha(a_1x+a_3x^3+\cdots)=x^{\alpha+1}(a_1+a_3x^2+\cdots);
-    \]
-	\item $a_0\neq 0,\enspace a_1\neq 0$，由递推关系知，级数会在$x=\pm 1$发散。
-\end{compactitem}
-综上，我们最终选取$a_0\neq 0,\enspace a_1=0$，从而$\alpha(\alpha-1)=0$，
+方程在$x\mapsto-x$下不变，递推关系分别确定偶次和奇次幂。可取$a_0\ne0,\ a_1=0$，用$\alpha=0,1$分别表示偶解和奇解：
 \[
     P(x)=\begin{cases}
         a_0+a_2x^2+a_4x^4+\cdots,&\alpha=0\\
@@ -593,15 +585,15 @@ $\alpha$是待定系数，从而
         \frac{(j+1)(j+2)-\ell(\ell+1)}{(j+2)(j+3)}a_j,&\alpha=1
     \end{cases}
 \]
-因此，收敛性要求$\ell=0,1,2,\ldots$
+要求两个端点均正则时，须选取截断的那个奇偶解。由于$\ell$与$-\ell-1$给出同一本征值，按惯例取$\ell=0,1,2,\ldots$。
 \begin{theorem}{Legendre多项式的递推关系}{recurrence relation among Legendre polynomial}
     可直接从Rodrigues公式和Legendre方程得到：
     \begin{subequations}
         \begin{align}
             \label{eqn:Legendre recurrence 1}
             (2\ell+1)P_\ell&=P'_{\ell+1}-P'_{\ell-1},\\
-            (\ell+1)P_{\ell+1}&=(2\ell+1)xP_\ell+\ell P_{\ell-1},\\
-            P'_{\ell+1}&=xP'_\ell+\ell(\ell+1)P_\ell,\\
+            (\ell+1)P_{\ell+1}&=(2\ell+1)xP_\ell-\ell P_{\ell-1},\\
+            P'_{\ell+1}&=xP'_\ell+(\ell+1)P_\ell,\\
             (x^2-1)P'_\ell&=\ell xP_\ell-\ell P_{\ell-1}.
         \end{align}
     \end{subequations}
@@ -620,7 +612,7 @@ $\alpha$是待定系数，从而
     从而 
     \begin{align*}
         P_{\ell+1}'-P_{\ell-1}'&=\frac1{2^\ell\ell!}\dd[\ell]x\bigb{\bigp{(2\ell+1)x^2-1}(x^2-1)^{\ell-1}}-\frac1{2^{\ell-1}(\ell-1)!}\dd[\ell]x(x^2-1)^{\ell-1}\\
-        &=\frac1{2^\ell\ell^2}\dd[\ell]x\bigb{(2\ell+1)(x^2-1)^\ell}=(2\ell+1)P_\ell.\qedhere
+        &=\frac1{2^\ell\ell!}\dd[\ell]x\bigb{(2\ell+1)(x^2-1)^\ell}=(2\ell+1)P_\ell.\qedhere
     \end{align*}
 \end{proof}
 
@@ -678,13 +670,13 @@ Bessel方程的另一对重要线性无关解是Hankel函数(第三类Bessel函�
 
 
 \begin{example}{Bessel函数的渐进性}{limit of Bessel function}
-    $x\to 0$时， 
+    对固定实阶$\nu\ge0$，当$x\to0^+$时，
     \begin{align*}
         J_\nu(x)&\simeq\frac1{\nu!}\Bigp{\frac x2}^\nu,\quad\\
         Y_\nu(x)&\simeq
         \begin{cases}
             \frac2\pi\Bigb{\ln\Bigp{\frac x2}+\gamma},&\nu=0\\[1ex]
-            -\frac{(\nu-1)!}\pi\Bigp{\frac x2}^{-\nu}+\frac{\cot(\nu\pi)}{\nu!}\Bigp{\frac x2}^\nu,&\nu\neq 0
+            -\frac{\Gamma(\nu)}\pi\Bigp{\frac x2}^{-\nu},&\nu>0
         \end{cases}
     \end{align*}
     其中$\gamma$是Euler--Mascheroni常数

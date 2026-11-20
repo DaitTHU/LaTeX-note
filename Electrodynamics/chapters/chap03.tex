@@ -14,7 +14,7 @@
 \section{多极矩展开}
 \label{sec:multipole expansion}
 
-考虑一个局域(localized)分布的电荷系统$\rho(\bm r')$在空间某点$\bm r$处激发的电势$\Phi(\bm r)$，所谓局域，是指电荷仅分布在有限体积$V$内，而我们感兴趣的点$\bm r$位于该体积之外(往往$r\gg r'$)。由$\Phi(\bm r)$的表达式\eqref{eqn:Phi-rho}和$1/\abs{\bm r-\bm r'}$的展开式\eqref{eqn:1/|r-r'|=YY}，代入$r_<=r',\,r_>=r$，有
+考虑分布在有限体积$V$内的电荷系统$\rho(\bm r')$。取以展开原点为心、能包住全部电荷的球，考察球外点$\bm r$的电势。此时对所有源点均有$r>r'$。由$\Phi(\bm r)$的表达式\eqref{eqn:Phi-rho}和$1/\abs{\bm r-\bm r'}$的展开式\eqref{eqn:1/|r-r'|=YY}，代入$r_<=r',\,r_>=r$，有
 \begin{align}
     \notag
     \Phi(\bm r)&=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r')}{\abs{\bm r'-\bm r}}\d V'\\
@@ -87,10 +87,10 @@
             \bm E&=\frac p{4\pi\varepsilon_0r^3}(2\cos\theta\uvec r+\sin\theta\uvec\theta).
         \end{align}
     \end{subequations}
-    上式只适用于$r\neq0$。若要将理想点偶极子的电场作为全空间上的分布，应由$\bm E=-\grad\Phi$求分布导数，补上原点处的接触项：
+    上式只适用于$r\neq0$。若要将理想点偶极子的电场作为全空间上的分布，应由$\bm E=-\grad\Phi$求分布导数。挖去以原点为心的小球并令球半径趋于零，得到球形主值$\PV$和原点处的接触项：
     \begin{equation}
         \label{eqn:E dipole with delta}
-        \bm E(\bm r)=\frac1{4\pi\varepsilon_0}\biggb{\frac{3(\bm p\cdot\uvec r)\uvec r-\bm p}{r^3}-\frac{4\pi}3\bm p\delta(\bm r)}.
+        \bm E(\bm r)=\frac1{4\pi\varepsilon_0}\biggb{\PV\frac{3(\bm p\cdot\uvec r)\uvec r-\bm p}{r^3}-\frac{4\pi}3\bm p\delta(\bm r)}.
     \end{equation}
     此时$\div\bm E=-\bm p\cdot\grad\delta(\bm r)/\varepsilon_0$，即电偶极子的电荷密度为
     \begin{equation}
@@ -378,13 +378,13 @@ $\sigma$是宏观表面电荷密度（不包含极化电荷$\sigma_\pol$）。
 
 本节中讨论分子极化率(molecular polarizability) $\gamma_\molecule$和电极化率(electric susceptibility) $\chi_\electric$之间的关系。%我们仅从给它列个大纲开始。
 
-在稀薄(rarefied)介质中，宏观场与作用在任何分子(或分子群)上的场几乎没有区别；但在致密(dense)介质中，相邻分子的极化会产生一个内部场$\bm E_\internal$，所以分子上的总电场是$\bm E+\bm E_\internal$。
+在稀薄(rarefied)介质中，宏观场与作用在任何分子(或分子群)上的场几乎没有区别。在致密(dense)介质中，相邻分子的极化会产生一个内部场$\bm E_\internal$，所以分子所受的局域场为$\bm E_{\mathrm{loc}}=\bm E+\bm E_\internal$。
 内部场$\bm E_\internal$除了考虑相邻分子的贡献$\bm E_\near$外，还要减去可以用极化强度$\bm P$描述的平均贡献$\bm E_\pol$：
 \[
     \bm E_\internal=\bm E_\near-\bm E_\pol,
 \]
 由\eqref{eqn:int E dV}，极化强度$\bm P$贡献的平均场为$\bm E_\pol=-\bm P/3\varepsilon_0$；
-而对于大多数材料，可有效近似$\bm E_\near=\bm 0$；
+在立方对称晶格上，球形邻域内等价格点的偶极场相消。各向同性、分子取向关联很弱的介质也可近似取$\bm E_\near=\bm 0$。
 故$\bm E_\internal=\bm P/3\varepsilon_0$。
 
 \begin{definition}
@@ -417,76 +417,78 @@ $\sigma$是宏观表面电荷密度（不包含极化电荷$\sigma_\pol$）。
 \end{remark}
 
 \paragraph{分子极化率的模型}
-由谐振子模型
+把分子内的束缚电荷看作固有频率为$\omega_0$的谐振子。外场使其平衡位置偏移，产生感应偶极矩
 \[
-    m\omega_0^2\bm r=e\bm E\implies\bm p_\molecule=e\bm r=\frac{e^2\bm E}{m\omega_0^2}\implies\gamma_\molecule=\frac{e^2}{m\omega_0^2\varepsilon_0}.
+    m\omega_0^2\bm r=e\bm E_{\mathrm{loc}},\qquad
+    \bm p_{\mathrm{ind}}=e\bm r=\frac{e^2}{m\omega_0^2}\bm E_{\mathrm{loc}}.
 \]
-$\omega_0$为分子的固有频率。
+若分子还有大小为$p_0$的永久偶极矩，外场也会改变分子的取向。设分子能自由转动，彼此的取向关联可忽略。偶极矩与局域场成$\theta$角时，势能为$-p_0E_{\mathrm{loc}}\cos\theta$。在温度$T$下，记$x=p_0E_{\mathrm{loc}}/(\kB T)$，对取向的Boltzmann权重积分得
+\[
+    Z(x)=\int\e^{x\cos\theta}\d\Omega
+    =2\pi\int_{-1}^1\e^{xu}\d u
+    =4\pi\frac{\sinh x}{x}.
+\]
+垂直于局域场的分量平均为零，沿场方向的平均分量为
+\begin{equation}
+    \ave{p_\parallel}=p_0\dv{\ln Z}{x}
+    =p_0\biggp{\coth x-\frac1x}.
+\end{equation}
+括号中的函数称为Langevin函数。弱场下$x\ll1$，它的首项是$x/3$，因而$\ave{p_\parallel}\simeq p_0^2 E_{\mathrm{loc}}/(3\kB T)$。将这一项与感应偶极矩相加，按本节的定义得到静态分子极化率
+\begin{equation}
+    \gamma_\molecule\simeq\frac{e^2}{m\omega_0^2\varepsilon_0}+\frac{p_0^2}{3\varepsilon_0\kB T}.
+\end{equation}
+在固定分子数密度$N$的稀薄气体中，$\chi_\electric\simeq N\gamma_\molecule$。降温使取向极化增强。固定温度而增大场强时，$\ave{p_\parallel}$趋于$p_0$，永久偶极对极化强度的贡献趋于$Np_0$。
 
 \begin{example}
     {}{}
-    常温常压(normal temperature and pressure, NTP)下，气体$\chi_\electric<10^{-3}$，固体和液体$\chi_\electric\sim 1$。
+    常温常压(normal temperature and pressure, NTP)下，许多气体的$\chi_\electric<10^{-3}$，而常见固体和液体的$\chi_\electric$可达$1$量级或更大。
 \end{example}
-
-一般地，考虑不同能量的分子的Boltzmann分布，
-\[
-    \gamma_\molecule\simeq\frac{e^2}{m\omega_0^2\varepsilon_0}+\frac{p_0^2}{3\varepsilon_0\kB T}.
-\]
-$p_0$为分子固有偶极矩的大小。
 
 \subsection{电介质中的静电能}
 \label{ssec:electrostatic energy in dielectric media}
 
-一般情况下，我们对电介质不作假设。可由微小功$\vd W$推出电介质中的静电能为
+固定电极和介质，准静态地把自由电荷从零增加到终值。将电荷$\delta q$送到电势$\Phi$处，电源做功$\Phi\,\delta q$。用Gauss定律，并对全空间分部积分，可得
 \[
-    W=\iint_0^D\bm E\cdot\vd\bm D\d V.
+    \delta W=\int\Phi\,\delta\rho_{\mathrm f}\d V
+        =\int\bm E\cdot\delta\bm D\d V .
 \]
-若介质是线性的，则
+这里假设电荷局域分布，电势在无穷远趋于零，导体的面电荷也计入$\rho_{\mathrm f}$。对于固定材料状态的可逆响应，以无场态为能量零点，静电能密度为
+\[
+    w_\electric=\int_{\bm 0}^{\bm D}\bm E(\bm D')\cdot\d\bm D'.
+\]
+若$\bm D=\varepsilon\bm E$，或更一般地介电张量线性且对称，则
 \begin{equation}
-    W=\frac12\int_V\bm E\cdot\bm D\d V=\frac12\int_V\rho(\bm r)\Phi(\bm r)\d V.
+    W=\frac12\int\bm E\cdot\bm D\d V=\frac12\int\rho_{\mathrm f}\Phi\d V .
 \end{equation}
-上式仅当介质是线性时才在宏观上成立。
-\paragraph{电介质在极化过程中储存的能量}过程分电荷不变和电势不变；
-\subparagraph{电荷分布不变过程}
-若电介质放入前后源电荷分布$\rho(\bm r)$不变
-\begin{align*}
-    \Delta W&=\frac12\int_V(\bm E\cdot\bm D-\bm E_0\cdot\bm D_0)\d V\\
-    &=\frac12\int_V(\bm E\cdot\bm D_0-\bm E_0\cdot\bm D)\d V+\frac12\int_V(\bm E+\bm E_0)\cdot\cancel{(\bm D-\bm D_0)}\d V\\
-    &=-\frac12(\varepsilon-\varepsilon_0)\int_V\bm E\cdot\bm E_0\d V=-\frac12\int_V\bm P\cdot\bm E_0\d V,
-\end{align*}
-因此电介质的能量密度为
+
+\paragraph{给定自由电荷分布时的能量变化}
+在原来的真空场$\bm E_0$中放入线性电介质，保持自由电荷的空间分布不变。此时$\div(\bm D-\bm D_0)=0$。
+分别取插入前后的电势作试探函数$\psi=\Phi_0,\Phi$，分部积分给出
+\[
+    \int(-\grad\psi)\cdot(\bm D-\bm D_0)\d V
+        =\int\psi\,\div(\bm D-\bm D_0)\d V=0 .
+\]
+这样可以在全空间积分中将$\bm E\cdot\bm D$换成$\bm E\cdot\bm D_0$，将$\bm E_0\cdot\bm D_0$换成$\bm E_0\cdot\bm D$。用$\bm D_0=\varepsilon_0\bm E_0$和$\bm D=\varepsilon_0\bm E+\bm P$得
 \begin{equation}
-    w=-\frac12\bm P\cdot\bm E_0,
+    \Delta W=\frac12\int(\bm E\cdot\bm D_0-\bm E_0\cdot\bm D)\d V
+            =-\frac12\int_{\text{介质}}\bm P\cdot\bm E_0\d V .
 \end{equation}
-%假设电介质移动了一个微小的位移$\vd x$，系统的总能量发生变化$\vd W$，则电介质受到的外力
-%F=-\biggp{\frac{\vd W}{\vd x}}_Q,
-\subparagraph{电势不变过程}下面分析在电势分布不变情形下，电介质放入前后的能量变化(不能用$\vd W_V=-F\vd x$计算)。
-\[
-    \vd W=\int_V\Phi(\bm r)\vd\rho(\bm r)\d V
-\]
-又对于线性介质，
-\[
-    \vd W=\frac12\int_V\bigb{\rho(\bm r)\vd\Phi(\bm r)+\Phi(\bm r)\vd\rho(\bm r)}\d V,
-\]
-故$\rho(\bm r)\vd\Phi(\bm r)=\Phi(\bm r)\vd\rho(\bm r)$。
+这个积分给出两种构型的总储能之差。要问插入后某处有多少储能，仍应使用该处的$\bm E\cdot\bm D/2$。
 
-在电势分布不变情形下，电介质放入的过程可以分为两步：
-\begin{compactenum}
-    \item 断开电极板和电源的接触，移动电介质，这一过程中电荷分布不变，
+\begin{example}{电容器吸入介质片}{dielectric insertion work}
+    平行板长$\ell$、宽$b$、间距$d$。介电常数为$\varepsilon>\varepsilon_0$的片材填满间隙，沿板长插入距离$x$。忽略边缘场对电容的修正，已填充和未填充部分并联，故
     \[
-        \vd W_1=\frac12\int_V\bigb{\rho(\bm r)\vd\Phi_1(\bm r)+0}\d V;
+        C(x)=\frac b d\bigb{\varepsilon x+\varepsilon_0(\ell-x)} .
     \]
-    \item 将极板与电源相连，电势恢复到初始值，$\vd\Phi_1+\vd\Phi_2=0$
+    断开电源后，每块极板的总电荷固定，面电荷可以重新分布。场对介质做的功来自储能的减少，沿插入方向的力为
     \[
-        \vd W_2=\frac12\int_V\bigb{\rho(\bm r)\vd\Phi_2(\bm r)+\Phi(\bm r)\vd\rho_2(\bm r)}\d V=-2\vd W_1.
+        F_Q=-\pp x\biggp{\frac{Q^2}{2C(x)}}_Q
+            =\frac{Q^2}{2C(x)^2}\dv Cx .
     \]
-\end{compactenum}
-因此$\vd W=\vd W_1+\vd W_2=-\vd W_1$，从而
-\[
-    \vd W_V=-\vd W_Q.
-\]
-力
-\[
-    F=-\biggp{\frac{\vd W}{\vd x}}_Q=\biggp{\frac{\vd W}{\vd x}}_V.
-\]
-
+    接回电源并保持电压$V$时，极板又得到电荷$\d Q=V\d C$。电源做功$V\d Q$，其中一半成为新增的场能，另一半成为机械功，
+    \[
+        F_V\d x=V\d Q-\d\biggp{\frac12 CV^2}=\frac12 V^2\d C,\qquad
+        F_V=\frac{b(\varepsilon-\varepsilon_0)}{2d}V^2 .
+    \]
+    在同一位置、同一瞬时电压下代入$Q=CV$，两种算法都给出指向电容器内部的力。
+\end{example}

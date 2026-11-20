@@ -27,9 +27,7 @@
 \[
 	T_1-T_2=\frac{2L}c\biggp{1+\frac{u^2}{c^2}}-\frac{2L}c\biggp{1+\frac{u^2}{2c^2}}+\bigo(u^4)=\frac{Lu^2}{c^3}+\bigo(u^4).
 \]
-由于存在光程差，$O$点上应当观测到干涉条纹，且随着$u$的改变，干涉条纹也应当发生偏移。
-然而，Michelson--Morley的实验结果发现：不论装置的运动状态和方位如何，光学干涉条纹并未发生任何改变。
-实验未观察到经典静止以太模型所预言的条纹位移，在实验精度内排除了这一模型的预言；单一实验本身并不能证明所有可能的以太模型都不存在，也不能独立推出狭义相对论的全部假设。
+将装置转过$\ang{90}$，两臂互换，模型预言两束光的相对时间延迟改变约$2Lu^2/c^3$，因而应有随装置方位变化的条纹位移。实验在其精度内未观察到这一模型预言的位移。
 
 狭义相对论(special relativity)以相对性原理和真空光速不变为基本假设，为此类实验与电磁学提供了统一描述。
 
@@ -42,9 +40,7 @@
 
 \begin{theorem}
     {相对性假设}{postulate of ralativity}
-    在一个给定的参照系中，一切自然规律和实验结果都与整个系统的平动(translational motion)无关。
-    更精确地说，存在无穷多个互相作匀速直线相对运动的三维等效Euclid参照系，称为惯性系
-    (inertial reference frame)。在惯性系中，一切物理现象都以等同方式发生，
+    物理定律在所有惯性系(inertial reference frame)中具有相同形式。惯性系之间作匀速直线相对运动，在一个封闭实验室中进行的实验不能确定其整体的绝对速度。
 \end{theorem}
 
 \begin{theorem}
@@ -158,7 +154,7 @@
         g_{\mu\nu}g^{\nu\rho}=\delta_\mu{}^\rho.
     \end{equation}
     % 为$g_{\mu\nu}$的归一化余子式。
-    对平坦时空来说，二者相同$g_{\mu\nu}=g^{\mu\nu}$。
+    在这里所用的惯性系直角坐标中，度规矩阵等于其逆矩阵。
 \end{definition}
 \begin{remark}
     Minkowski度规有两种：
@@ -237,6 +233,7 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
     \begin{equation}
         \Delta\lambda=\frac h{m_\electron c}(1-\cos\theta).
     \end{equation}
+    这个结果给定角度后就确定了光子能量。散射到该角度的概率由\secref{sec:qed Compton}的量子振幅给出。
 \end{example}
 
 \paragraph{相对论动力学}
@@ -263,6 +260,27 @@ $p^\mu$的时间分量是$p^0=\gamma_umc$，对应相对论能量：
 \begin{equation}
     \bm F_\perp'=\frac1\gamma\bm F_\perp,\qquad F_\parallel'=F_\parallel.
 \end{equation}
+\subsectionstar{Thomas进动}
+
+粒子沿曲线运动时，它在相邻两点的瞬时静止系之间要作不同方向的Lorentz变换。两次不共线的纯推进合成后带有一个空间转动。一个在自身静止系中不受力矩的陀螺，由实验室逐时比较其指向，便可看出这个转动。
+
+令$\bm s$为用实验室系沿瞬时速度$\bm u$作一次纯推进后测得的静止系自旋，四矢量$S^\mu$在该系中为$(0,\bm s)$。记$\gamma=\gamma_u$，变回实验室有
+\[
+    S^0=\frac{\gamma}{c}\bm u\cdot\bm s,\qquad
+    \bm S=\bm s+\frac{\gamma^2}{(\gamma+1)c^2}(\bm u\cdot\bm s)\bm u.
+\]
+由此$S^\mu\eta_\mu=0$。无力矩意味着在瞬时静止系中$\d S^\mu/\nd\tau$的空间分量为零，故此导数平行于四维速度$\eta^\mu$。对正交关系求导，用$\eta^\mu\eta_\mu=-c^2$决定比例系数：
+\[
+    \dv{S^\mu}{\tau}=\frac{S_\nu a^\nu}{c^2}\eta^\mu,\qquad a^\mu=\dv{\eta^\mu}{\tau}.
+\]
+这是无力矩自旋的Fermi--Walker输运。用$\bm s=\bm S-\gamma S^0\bm u/[(\gamma+1)c]$消去实验室四矢量的分量，并用$\dot\gamma=\gamma^3\bm u\cdot\bm a/c^2$，得到
+\begin{equation}
+    \dv{\bm s}t=\bm\omega_\mathrm{T}\times\bm s,\qquad
+    \bm\omega_\mathrm{T}=\frac{\gamma^2}{\gamma+1}\frac{\bm a\times\bm u}{c^2},
+    \quad \bm a=\dv{\bm u}t .
+\end{equation}
+匀速圆周运动中，取轨道角速度为$\bm\Omega$，则$\bm a\times\bm u=-u^2\bm\Omega$，从而$\bm\omega_\mathrm{T}=-(\gamma-1)\bm\Omega$。每绕行一圈，陀螺相对于实验室反向进动$2\pi(\gamma-1)$。实际带磁矩的粒子在磁场中还会受到磁力矩。
+
 \section{相对论电动力学}
 为什么会有磁场？利用静电学和相对论，我们可以计算出载电流线和运动电荷之间的磁力，而不需要援引磁力定律。
 \begin{example}{导线的磁场力}{}
@@ -465,3 +483,88 @@ $\mu=1,2,3$给出$x,y,z$分量
 \begin{equation}
     \p^\nu\p_\nu A^\mu=-\mu_0J^\mu.
 \end{equation}
+
+\section{外电磁场中带电粒子的运动}
+设质量为$m$、电荷为$q$的粒子在给定的外场中运动，忽略粒子自身辐射对轨道的影响。沿轨迹的作用量为
+\[
+    S=-mc^2\int\d\tau+q\int A_\mu\,\d x^\mu
+    =\int L\,\d t,\qquad
+    L=-mc^2\sqrt{1-u^2/c^2}+q\bm u\cdot\bm A-q\Phi .
+\]
+因为$A_0=-\Phi/c$，静止粒子的电势能为$q\Phi$。正则动量$\bm P=\p L/\p\bm u$和Hamilton量$H=\bm P\cdot\bm u-L$分别是
+\begin{equation}
+    \bm P=\gamma_um\bm u+q\bm A,\qquad
+    H=\sqrt{m^2c^4+c^2\abs{\bm P-q\bm A}^2}+q\Phi.
+\end{equation}
+这里$\bm p=\bm P-q\bm A$就是前面由速度定义的机械动量。势作规范变换$\bm A\mapsto\bm A+\grad\chi,\ \Phi\mapsto\Phi-\p_t\chi$时，$L$增加沿轨迹的全导数$q\,\d\chi/\nd t$，固定端点的变分不变。写出Euler--Lagrange方程的第$i$个分量，
+\[
+    \dv{p_i}t=q\biggl[-\p_i\Phi-\p_t A_i
+               +\sum_j u_j(\p_i A_j-\p_j A_i)\biggr],
+\]
+括号中最后一项正是$(\bm u\times\bm B)_i$，从作用量便得到Lorentz力。
+
+\begin{example}{正交均匀电磁场中的漂移}{crossed field drift}
+    设$\bm E\perp\bm B$且$E<cB$。取一个以$\bm v_\mathrm{d}=\bm E\times\bm B/B^2$运动的惯性系。由于$\bm v_\mathrm{d}\times\bm B=-\bm E$，由场变换可知$\bm E'=0$，且$B'=\sqrt{B^2-E^2/c^2}$。在这个系中，磁力保持粒子能量不变，沿磁场的动量也守恒。垂直磁场的动量匀速转动，轨道半径和回旋角频率分别为
+    \[
+        r_\mathrm{L}'=\frac{p_\perp'}{\abs q B'},\qquad
+        \omega_\mathrm{B}'=\frac{\abs q B'}{\gamma' m}.
+    \]
+    一个回旋周期后，粒子在该系的横向位移为零。变回实验室，横向平均速度即为$\bm v_\mathrm{d}$，与电荷正负无关。同一观察也给出条件$E<cB$的物理意义：只有这时，使电场消失的参考系所需速率$E/B$才小于$c$。
+\end{example}
+
+\subsection{电磁场的作用量}
+上面固定势，对粒子轨迹作变分。反过来，给定满足连续性方程的四维电流$J^\mu$，也可以把势$A_\mu$作为待求的场。在SI中，真空电磁场及其与源的耦合对应的作用量为
+\[
+    S[A]=\int\biggl(-\frac{1}{4\mu_0}F_{\mu\nu}F^{\mu\nu}+J^\mu A_\mu\biggr)\d V\,\d t .
+\]
+第一项等于$\varepsilon_0 E^2/2-B^2/(2\mu_0)$，第二项等于$\bm J\cdot\bm A-\rho\Phi$。由于$F^{\mu\nu}$反对称，在边界上固定势并分部积分，得到
+\[
+    \vd S=\int\biggl(\frac{1}{\mu_0}\p_\mu F^{\mu\nu}+J^\nu\biggr)\vd A_\nu\,\d V\,\d t .
+\]
+要求$\vd S=0$即得有源Maxwell方程$\p_\mu F^{\nu\mu}=\mu_0 J^\nu$。另两条无源方程由$F^{\mu\nu}=\p^\mu A^\nu-\p^\nu A^\mu$的定义自动满足。
+
+第\pageref{par:photon mass test}页的球壳实验可以从同一作用量理解。Proca理论在场的Lagrange密度中加入一项
+\[
+    \Delta\mathcal L=-\frac{\kappa^2}{2\mu_0}A_\mu A^\mu .
+\]
+对势作变分，场方程随之变为
+\[
+    \p_\mu F^{\nu\mu}+\kappa^2 A^\nu=\mu_0J^\nu .
+\]
+取四维散度，反对称项相消，由电荷守恒得$\kappa^2\p_\nu A^\nu=0$。当$\kappa\ne0$时，$\p_\nu A^\nu=0$由动力学强制满足。静电极限的时间分量给出$(\laplacian-\kappa^2)\Phi=-\rho/\varepsilon_0$，正是球壳内部电势偏离常量所依据的方程。
+
+\subsection{电磁场的能动张量与辐射压力}
+\label{sec:field stress energy}
+一束光照在镜面上，反射光带走能量，镜面却仍然受力。能动张量(energy-momentum tensor)把能量和三分量动量的输运写在同一个局域守恒律中。现在回到无质量光子的Maxwell场，取$x^0=ct$、$g_{\mu\nu}=\diag(-1,1,1,1)$。
+
+可以由场的作用量直接求得对称能动张量。把度规看作计算用的变量，记$g=\det(g_{\mu\nu})$、$\mathcal L_\mathrm{f}=-F_{\alpha\beta}F^{\alpha\beta}/(4\mu_0)$。对$\sqrt{-g}\mathcal L_\mathrm{f}$求变分时，固定$A_\mu$，故$F_{\alpha\beta}$固定，抬指标的度规参与变分。利用$\vd\sqrt{-g}=-\tfrac12\sqrt{-g}\,g_{\mu\nu}\vd g^{\mu\nu}$，得
+\begin{equation}
+    T^{\mu\nu}_\mathrm{em}
+    =\frac{1}{\mu_0}\biggl(F^{\mu\lambda}F^\nu{}_\lambda
+       -\frac14 g^{\mu\nu}F_{\alpha\beta}F^{\alpha\beta}\biggr),
+    \label{eqn:field stress energy}
+\end{equation}
+其中变分的符号约定为$\vd(\sqrt{-g}\mathcal L_\mathrm{f})=-\tfrac12\sqrt{-g}\,T_{\mu\nu}^\mathrm{em}\vd g^{\mu\nu}$。将平直时空的场张量代回，$F_{\alpha\beta}F^{\alpha\beta}=2(B^2-E^2/c^2)$，于是
+\begin{align}
+    T^{00}_\mathrm{em}&=\frac{\varepsilon_0 E^2}{2}+\frac{B^2}{2\mu_0}=u,
+    &T^{0i}_\mathrm{em}=T^{i0}_\mathrm{em}&=\frac{S_i}{c}=c\,g_i,\notag\\
+    T^{ij}_\mathrm{em}&=u\delta_{ij}-\varepsilon_0 E_iE_j-\frac{B_iB_j}{\mu_0}
+    =-T_{ij}^{\mathrm{Maxwell}}. &&
+    \label{eqn:field stress components}
+\end{align}
+分量$T^{ij}_\mathrm{em}$给出沿$i$方向输运的$j$分量动量通量。它等于式\eqref{eqn:vacuum maxwell stress}中Maxwell应力的负值。场的局域守恒律为
+\[
+    \p_\mu T^{\mu\nu}_\mathrm{em}=-F^{\nu\lambda}J_\lambda .
+\]
+取$\nu=0$并乘$c$即得$\p_t u+\div\bm S=-\bm J\cdot\bm E$。取$\nu=i$则得$\p_t g_i+\p_j T^{ji}_\mathrm{em}=-(\rho\bm E+\bm J\times\bm B)_i$，右端是场传给物质的力密度的负值。
+
+\begin{example}{平面镜所受的辐射压力}{pressure on a mirror}
+    在真空中令线偏振平面波沿$+z$正入射到$z=0$的静止理想导体，入射电场峰值为$E_0$。在镜面，入射和反射电场相消，两波的切向磁场同向，故$E=0$，$B_y=2(E_0/c)\cos\omega t$。导体内的振荡场为零。由式\eqref{eqn:field stress components}，单位时间进入镜面的法向动量除以面积，给出时均压力
+    \[
+        p_\mathrm{rad}=\ave{T^{zz}_\mathrm{em}(0^-)}
+         =\frac{\ave{B_y^2}}{2\mu_0}
+         =\varepsilon_0 E_0^2=\frac{2I}{c},
+         \qquad I=\frac12\varepsilon_0c E_0^2 .
+    \]
+    镜面处的时均净能流为零。入射能量$U$携带的法向动量为$U/c$，反射后变为$-U/c$，镜面正好获得$2U/c$。
+\end{example}
