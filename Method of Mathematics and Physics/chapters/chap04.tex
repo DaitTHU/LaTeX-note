@@ -136,7 +136,7 @@
 \]
 其中，$\PDEop$是常系数线性偏微分算子。
 
-视$f,u$为广义函数，它们在广义函数空间里可以自由地进行各种运算和交换。通过这种方式得到的解叫广义函数解，简称作\textbf{广义解}。如果解是一个正则广义函数，甚至还有足够的光滑性，那么这种解是经典解。
+在测试函数上按分布意义满足$\PDEop u=f$的解称为\textbf{广义解}。分布可以逐阶求导。若$u$由足够光滑的函数给出且$f$连续，则此等式也逐点成立，$u$是经典解。
 \begin{definition}{$\PDEop u=0$型方程的基本解}{Basic Solution of Pu=0}
 	方程
 	\begin{align}
@@ -146,7 +146,7 @@
 \end{definition}
 对一般的函数$f$，其对应的解是一般的源所产生的物理场。故基本解也叫点源函数。
 
-若$\PDEop u=0$型方程有基本解$U(M)$，令
+设$U$是基本解，源$f$为光滑紧支撑函数。若$U$局部可积，可写
 \begin{align}
 	u(M):=U\ast f(M)=\int U(M-N)f(N)\d N.
 \end{align}
@@ -154,7 +154,7 @@
 \[
 	\PDEop u(M)=\int\PDEop U(M-N)f(N)\d N=\int\delta(M-N)f(N)\d N=f(M).
 \]
-即$u$满足方程$\PDEop u=f$。
+即$u$满足方程$\PDEop u=f$。更一般地，只要分布卷积存在，就有$\PDEop(U\ast f)=(\PDEop U)\ast f=f$；例如$f$具有紧支撑时成立。再加任意齐次解仍满足同一非齐次方程。
 \begin{example}{}{}
 	求下面方程的基本解：
 	\[
@@ -165,11 +165,11 @@
 	\[
 		U'+aU=\delta(x),
 	\]
-	即
+	取在$x<0$处为零的因果基本解，由
 	\[
 		\dd x(U\e^{ax})=\delta(x)\e^{ax}=\delta(x)\implies U(x)=\Heaviside(x)\e^{-ax}.
 	\]
-	因此原方程的解
+	因此，只要下式积分收敛，便得到原方程的一个特解
 	\[
 		y(x)=U\ast f(x)=\intR\Heaviside(\xi)\e^{-a\xi}f(x-\xi)\d\xi=\int_{-\infty}^xf(\xi)\e^{-a(x-\xi)}\d\xi.
 	\]
@@ -219,10 +219,9 @@
 	
 	当$c>0$时，记$k:=\sqrt c$
 	\[
-		U=A\frac{\cos kr}r+B\cancel{\frac{\sin kr}r}.
+		U=A\frac{\cos kr}r+B\frac{\sin kr}r.
 	\]
-	$\sin kr/r$在$\CC$上是整函数，无奇异性，不能作为基本解。
-	积分$-4\pi A=1$
+	$\sin kr/r$在原点光滑，是齐次解。点源归一化给出$-4\pi A=1$，而$B$可任取。例如取$B=0$得到
 	\[
 		U(r)=-\frac{\cos kr}{4\pi r}.
 	\]
@@ -232,7 +231,7 @@
 \begin{theorem}{Green公式}{Green Formula}
 	设非空有界开集$\Omega\subset\RR^n(n\geqslant 2)$满足边界$\p\Omega$光滑，则
 	
-	$\forall u,v\in\cont^2(\Omega)\cap\cont(\bar\Omega)$，有
+	设$u,v$在$\bar\Omega$的一个开邻域上二阶连续可微，有
 	\begin{gather}
 		\label{Green's 1st formula}
 		\int_\Omega v\laplacian u\d V=\oint_{\p\Omega}v\pv un\d S-\int_\Omega\grad v\cdot\grad u\d V;\\
@@ -284,7 +283,7 @@
 	\end{align}
 	的解$G(M;N)$称为Poisson第I边值问题的Green函数。
 \end{definition}
-物理上看，Green函数就是边界接地条件下，置于$V$内$N$点电荷为$+\varepsilon$的点源在$V$内$M$点产生的电场，仍然是一个基本解。
+在介电常数为$\varepsilon$的均匀介质中，若边界接地，置于$N$点的点电荷$q$在$M$点产生的电势为$qG(M;N)/\varepsilon$。
 \begin{align}
 	u(M)=\int_Vf(N)G(M;N)\d N-\oint_{\p V}\varphi(N)\pv Gn\d S.
 \end{align}
@@ -293,7 +292,7 @@
 		u(M)&=\int_Vu(N)\delta(M-N)\d N=-\int_Vu(N)\,\laplacian G(M;N)\d N\\
 		&=-\int_V u\,\laplacian G\d N+\int_VG\,\laplacian u\d N-\int_VG\,\underline{\laplacian u}\d N\tag{Green II}\\
 		&=\oint_{\p V}\cancel{G}\pv un-\underline{u}\pv Gn\d S+\int_VG f\d N\\
-		&=-\oint_{\p V}\psi\pv Gn\d S+\int_VGf\d N.
+		&=-\oint_{\p V}\varphi\pv Gn\d S+\int_VGf\d N.
 	\end{align*}
 \end{proof}
 Fourier方法是求Green函数的基本方法，但对于一些特殊的区域，可以采用一些特殊方法，如镜像法。
@@ -404,16 +403,17 @@ Fourier法是求Green函数的基本方法，主要思想是按照特征函数�
 			u(0,y)=0,
 		\end{cases}
 	\end{equation*}
-	有
+	取光滑且紧支撑于$(0,\infty)$的边界数据，并取$x\to\infty$时衰减的解。有
 	\begin{align*}
 		u(x,y)&=-\biggb{\intRplus\varphi(\xi)\biggeval{\pv Gn}_{\eta=0}\d\xi+\intRplus\psi(\xi)\biggeval{\pv Gn}_{\eta=a}\d\xi}\\
 		&=\intRplus\varphi(\xi)\biggeval{\pv G\eta}_{\eta=0}\d\xi-\intRplus\psi(\xi)\biggeval{\pv G\eta}_{\eta=a}\d\xi
 	\end{align*}
-	进而
+	Green函数在$\eta$和$y$方向都采用正弦基，对源坐标$\eta$求导后得
 	\begin{align*}
-		\pv G\eta&=\sum_{n=1}^\infty4n\intRplus\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2+a^2\omega^2}\d\omega\cdot\cos\frac{n\pi\eta}a\cos\frac{n\pi y}a;\\
-		u(x,y)&=\sum_{n=1}^\infty4n\intRplus\intRplus\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2+a^2\omega^2}[\varphi(\xi)-(-1)^n\psi(\xi)]\d\omega\nd\xi\cdot\cos\frac{n\pi y}a.
+		\pv G\eta&=\sum_{n=1}^\infty4n\intRplus\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2+a^2\omega^2}\d\omega\cdot\cos\frac{n\pi\eta}a\sin\frac{n\pi y}a;\\
+		u(x,y)&=\sum_{n=1}^\infty4n\intRplus\intRplus\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2+a^2\omega^2}[\varphi(\xi)-(-1)^n\psi(\xi)]\d\omega\nd\xi\cdot\sin\frac{n\pi y}a.
 	\end{align*}
+	最后一式用于$0<y<a$，两端的边界值由内部极限取得。
 \end{example}
 \paragraph{$^\ast$Poisson方程第II, III边值问题}
 \begin{align}
@@ -422,7 +422,7 @@ Fourier法是求Green函数的基本方法，主要思想是按照特征函数�
 		\Bigp{\alpha u+\beta\pv un}_{\p V}=\varphi(M),&\alpha,\beta\neq 0.
 	\end{cases}
 \end{align}
-相应的Green函数
+设$V$为连通有界区域，取常系数Robin条件，且齐次问题只有零解（例如$\alpha/\beta>0$）。相应的Green函数满足
 \begin{align*}
 	\begin{cases}
 		\laplacian G=-\delta(M-N),&M,N\in V\subseteq\RR^n\\
@@ -434,7 +434,7 @@ Fourier法是求Green函数的基本方法，主要思想是按照特征函数�
 	u(M)&=\int_Vf(N)G(M;N)\d N+\frac1\beta\oint_{\p V}\varphi(N)G(M;N)\d S\\
 	&=\int_Vf(N)G(M;N)\d N-\frac1\alpha\oint_{\p V}\varphi(N)\pv Gn\d S
 \end{align}
-$\beta=0$即第I边值问题。$\alpha=0$即第II边值问题，但此时表示内部有热源而边界绝热的稳恒温度场，这是不可能的，因此需要修正为
+$\beta=0$即第I边值问题。$\alpha=0$时，记给定的外法向导数为$g=\varphi/\beta$。对第II边值问题，常数是齐次解。若同时要求$\laplacian G=-\delta$与齐次Neumann边界，对全域积分便与散度定理矛盾。因此可选用以下任一修正
 \begin{align*}
 	\begin{cases}
 		\laplacian G=-\delta(M-N)+\frac1v,\\
@@ -447,11 +447,11 @@ $\beta=0$即第I边值问题。$\alpha=0$即第II边值问题，但此时表示�
 \end{align*}
 其中$v,s$为$V$的体积和表面积。有解
 \begin{align}
-	u(M)=\int_Vf(N)G(M;N)\d N+\oint_{\p V}\varphi(N)G(M;N)\d S+\const.
+	u(M)=\int_Vf(N)G(M;N)\d N+\oint_{\p V}g(N)G(M;N)\d S+\const.
 \end{align}
 相容性条件
 \begin{align}
-	\int_Vf(M)\d M+\oint_{\p V}\varphi(M)\d S=0.
+	\int_Vf(M)\d M+\oint_{\p V}g(M)\d S=0.
 \end{align}
 \section{初值问题的基本解方法}
 本节主要用基本解方法来求解发展方程，如$u_t=\PDEop u$型方程

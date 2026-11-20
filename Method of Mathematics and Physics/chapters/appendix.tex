@@ -36,7 +36,7 @@
 		X''+\lambda X=0\\
 		X(0)-h_1X'(0)=0\\
 		X(L)+h_2X'(L)=0
-	\end{cases}\implies\tan L\gamma=\frac{(h_1+h_2)\gamma}{h_1h_2\gamma^2-1},$
+	\end{cases}\implies(1-h_1h_2\gamma^2)\sin(L\gamma)+(h_1+h_2)\gamma\cos(L\gamma)=0,\quad\gamma>0,$
 	\[\lambda_n=\gamma_n^2,\quad X_n=\sin\gamma_n x+h_1\gamma_n\cos\gamma_nx,\quad n=1,2,\ldots.\]
 	\item $\begin{cases}
 		\varTheta''+\lambda\varTheta=0\\
@@ -62,10 +62,10 @@
 \end{subequations}
 因此
 \[\{1,\sin x,\cos x,\sin2x,\ldots\}\]
-构成$[-\pi,\pi]$上一组完备的基底，归一化之
+构成$L^2[-\pi,\pi]$的一组完备正交基，归一化之
 \[\biggB{\frac1{\sqrt{2\pi}},\frac{\sin x}{\sqrt\pi},\frac{\cos x}{\sqrt\pi},\frac{\sin2x}{\sqrt\pi},\ldots}.\]
 
-用这一组基可将周期为$2\pi$的函数$f(x)$展开
+用这一组基可将周期为$2\pi$的平方可积函数$f(x)$按平方平均意义展开
 \[f(x)=\frac{a_0}2+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx),\]
 其中
 \begin{align*}
@@ -201,7 +201,7 @@ Fourier变换的定义见第~\pageref{dfn:Integral Transformation}~页\dfnref{df
 		\FT_\sine[f'](\xi)&=f(x)\sin\xi x|_{x=0}^{+\infty}-\xi\FT_\cosine[f](\xi);\\
 		\FT_\cosine[f'](\xi)&=f(x)\cos\xi x|_{x=0}^{+\infty}+\xi\FT_\sine[f](\xi);\\
 		\FT_\sine[f''](\xi)&=\Bigp{f'(x)\sin\xi x-\xi f(x)\cos\xi x}_{x=0}^{+\infty}-\xi^2\FT_\sine[f](\xi);\\
-		\FT_\cosine[f''](\xi)&=\Bigp{f'(x)\cos\xi x-\xi f(x)\sin\xi x}_{x=0}^{+\infty}-\xi^2\FT_\cosine[f](\xi).
+		\FT_\cosine[f''](\xi)&=\Bigp{f'(x)\cos\xi x+\xi f(x)\sin\xi x}_{x=0}^{+\infty}-\xi^2\FT_\cosine[f](\xi).
 	\end{align*}
 	\item 积分
 	\begin{align*}
@@ -211,19 +211,20 @@ Fourier变换的定义见第~\pageref{dfn:Integral Transformation}~页\dfnref{df
 	其中$\intRplus f(x)\d x=0.$
 	\item 象函数微分
 	\begin{align*}
-		\hat f_\sine'&=-\FT_\cosine[xf]&\hat f_\sine''&=-\FT_\sine[x^2f]\\
-		\hat f_\cosine'&=\FT_\sine[xf]&\hat f_\cosine''&=-\FT_\cosine[x^2f].
+		\hat f_\sine'&=\FT_\cosine[xf]&\hat f_\sine''&=-\FT_\sine[x^2f]\\
+		\hat f_\cosine'&=-\FT_\sine[xf]&\hat f_\cosine''&=-\FT_\cosine[x^2f].
 	\end{align*}
-	\item 相似\begin{align*}
-		\FT_\sine[f(kx)](\xi)=\frac1k\hat f_\sine\Bigp{\frac\xi{\abs k}},\\
-		\FT_\cosine[f(kx)](\xi)=\frac1{\abs k}\hat f_\cosine\Bigp{\frac\xi{\abs k}}
+	\item 半轴伸缩（$k>0$）\begin{align*}
+		\FT_\sine[f(kx)](\xi)=\frac1k\hat f_\sine\Bigp{\frac\xi{k}},\\
+		\FT_\cosine[f(kx)](\xi)=\frac1k\hat f_\cosine\Bigp{\frac\xi{k}}.
 	\end{align*}
-	\item 反射\begin{align*}
-		\FT_\sine[\hat f_\sine(x)](\xi)&=-\frac\pi{2}f(-\xi),\\
-		\FT_\cosine[\hat f_\cosine(x)](\xi)&=\frac\pi{2}f(-\xi).
+	\item 在半轴上连续施行两次同种变换，由反演公式得（$\xi>0$）\begin{align*}
+		\FT_\sine[\hat f_\sine(x)](\xi)&=\frac\pi{2}f(\xi),\\
+		\FT_\cosine[\hat f_\cosine(x)](\xi)&=\frac\pi{2}f(\xi).
 	\end{align*}
 \end{enumerate}
 \paragraph{Fourier变换函数表}
+下表的衰减指数和二次相位公式取$a>0$。广义函数各式中，$1/x$取Cauchy主值，$1/x^n$取由其逐次求导定义的有限部，$1/(\i\xi)$也取主值。
 \begin{enumerate}
 	\item $\FT[\delta(x)]=1,$\qquad$\FT[\delta^{(n)}(x)]=(\i\xi)^n;$
 	\item $\FT[1]=2\pi\delta(\xi),$\qquad$\FT[x^n]=2\pi\i^n\delta^{(n)}(\xi);$
@@ -237,7 +238,7 @@ Fourier变换的定义见第~\pageref{dfn:Integral Transformation}~页\dfnref{df
 	\item $\FT[\e^{-\i ax^2}]=\sqrt{\frac\pi{a}}\e^{\i(\xi^2/4a-\pi/4)};$
 	\item $\FT[\frac1x]=-\i\pi\sgn\xi;$
 	\item $\FT[\frac1{x^n}]=-\i\pi\frac{(-\i\xi)^{n-1}}{(n-1)!}\sgn\xi,$\qquad$\FT[\frac1{x^2}]=-\pi\xi\sgn\xi;$
-	\item $\FT[\abs x^\alpha]=-2\Gamma(\alpha+1)\sin\Bigp{\frac{\pi\alpha}2}\abs\xi^{-1-\alpha};$
+	\item $\FT[\abs x^\alpha]=-2\Gamma(\alpha+1)\sin\Bigp{\frac{\pi\alpha}2}\abs\xi^{-1-\alpha},\quad -1<\alpha<0;$
 	\item $\FT[\Heaviside(x)]=\frac1{\i\xi}+\pi\delta(\xi);$
 	\item $\FT[\Lambda](\xi)=\sinc^2(\xi/2)$；
 	\item $\FT[\sinc](\xi)=\pi\Pi(\xi/2)$。
@@ -296,7 +297,7 @@ Heaviside阶梯函数
 	\[
 		\LT[fg](\xi)=\frac1{2\pi\i}\int_{\sigma-\i\infty}^{\sigma+\i\infty}\bar f(\zeta)\bar g(\xi-\zeta)\d\zeta,
 		\]
-	其中$\xi>\max(\sigma_f,\sigma_g)$
+	其中竖直积分线应同时位于两变换的收敛域，即$\sigma_f<\sigma<\Re\xi-\sigma_g$，并假定反演积分收敛。
 \end{enumerate}
 \paragraph{Laplace变换函数表}
 \begin{enumerate}
