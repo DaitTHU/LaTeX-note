@@ -1,83 +1,93 @@
 \chapter{振动、共振与相图}
 
 \section{从势阱到谐振子}
-非退化稳定平衡附近的光滑势能可展开为$V(x_0+\eta)=V(x_0)+k\eta^2/2+O(\eta^3)$，$k>0$。
-只保留最低非平凡项，得到$\ddot\eta+\omega_0^2\eta=0$，$\omega_0=\sqrt{k/m}$。
+非退化稳定平衡附近的光滑势能可展开为$V(x_0 + \eta) = V(x_0) + k\eta^2/2 + O(\eta^3)$，$k > 0$。
+只保留最低非平凡项，得到$\ddot\eta + \omega_0^2\eta = 0$，$\omega_0 = \sqrt{k/m}$。
 谐振近似要求所访问的位移范围内高阶项远小于二次项；
 “振幅小”应相对于势能变化的特征长度来判断。
 
 若有线性阻尼和正弦驱动力，统一写为
 \begin{equation}
- \ddot x+2\gamma\dot x+\omega_0^2x=\frac{F_0}{m}\cos\omega t,
- \qquad \gamma\geq0.
+ \ddot x + 2\gamma\dot x + \omega_0^2x = \frac{F_0}{m}\cos\omega t,
+ \qquad \gamma \geq 0.
  \label{eq:cm-driven}
 \end{equation}
-无驱动时特征根$s_\pm=-\gamma\pm\sqrt{\gamma^2-\omega_0^2}$。
-欠阻尼$\gamma<\omega_0$时
-\begin{equation}
- x(t)=A\e^{-\gamma t}\cos(\omega_d t+\varphi),\qquad
- \omega_d=\sqrt{\omega_0^2-\gamma^2}.
-\end{equation}
-临界阻尼时$x=(A+Bt)\e^{-\omega_0t}$；过阻尼时为两个衰减指数之和。
+无驱动时特征根$s_\pm = -\gamma \pm \sqrt{\gamma^2 - \omega_0^2}$。
+欠阻尼$\gamma < \omega_0$时
+\begin{subequations}
+ \begin{align}
+  x(t) &= A\e^{-\gamma t}\cos(\omega_{\mathrm d} t + \varphi),\\
+  \omega_{\mathrm d} &= \sqrt{\omega_0^2 - \gamma^2}.
+ \end{align}
+\end{subequations}
+临界阻尼时$x = (A + Bt)\e^{-\omega_0t}$；过阻尼时为两个衰减指数之和。
 振幅包络的衰减率为$\gamma$，机械能的精确变化率则为
-$\dot E=-2m\gamma\dot x^2$。弱阻尼时周期平均能量近似按$\e^{-2\gamma t}$衰减。
+$\dot E = -2m\gamma\dot x^2$。弱阻尼时周期平均能量近似按$\e^{-2\gamma t}$衰减。
 
 \section{稳态响应：不要混淆三种频率}
-取复数约定$x=\Re(\tilde x\e^{\i\omega t})$，稳态解为
-\begin{equation}
- \tilde x=\frac{F_0/m}{\omega_0^2-\omega^2+2\i\gamma\omega},\qquad
- x_{\mathrm{st}}=A(\omega)\cos(\omega t-\delta),
-\end{equation}
+取复数约定$x = \Re(\tilde x\e^{\i\omega t})$，稳态解为
+\begin{subequations}
+ \begin{align}
+  \tilde x &= \frac{F_0/m}{\omega_0^2 - \omega^2 + 2\i\gamma\omega},\\
+  x_{\mathrm{st}} &= A(\omega)\cos(\omega t - \delta),
+ \end{align}
+\end{subequations}
 其中
-\begin{equation}
- A=\frac{F_0/m}{\sqrt{(\omega_0^2-\omega^2)^2+4\gamma^2\omega^2}},\quad
- \delta=\operatorname{atan2}(2\gamma\omega,\omega_0^2-\omega^2).
-\end{equation}
-$\gamma>0$时瞬态最终消失。$\gamma=0,\omega=\omega_0$时不存在有界正弦稳态，
+\begin{subequations}
+ \begin{align}
+  A &= \frac{F_0/m}{\sqrt{(\omega_0^2 - \omega^2)^2 + 4\gamma^2\omega^2}},\\
+  \delta &= \operatorname{atan2}(2\gamma\omega,\omega_0^2 - \omega^2).
+ \end{align}
+\end{subequations}
+$\gamma > 0$时瞬态最终消失。$\gamma = 0,\omega = \omega_0$时不存在有界正弦稳态，
 特解含$t\sin\omega_0t$，不能把响应公式的发散当成有限稳态振幅。
 
 位移振幅的非零频率峰值位于
 \begin{equation}
- \omega_{\mathrm{res}}=\sqrt{\omega_0^2-2\gamma^2},\qquad
- 0<\gamma<\omega_0/\sqrt2.
+ \omega_{\mathrm{res}} = \sqrt{\omega_0^2 - 2\gamma^2},\qquad
+ 0 < \gamma < \omega_0/\sqrt2.
 \end{equation}
 阻尼更大时位移振幅从零频率起单调下降。
-这与自由衰减频率$\omega_d$及无阻尼频率$\omega_0$不同。
+这与自由衰减频率$\omega_{\mathrm d}$及无阻尼频率$\omega_0$不同。
 平均输入功率为
 \begin{equation}
- \ave P=\frac{F_0^2\gamma\omega^2/m}
- { (\omega_0^2-\omega^2)^2+4\gamma^2\omega^2 }
- =m\gamma\omega^2A^2,
+ \ave P = \frac{F_0^2\gamma\omega^2/m}
+ { (\omega_0^2 - \omega^2)^2 + 4\gamma^2\omega^2 }
+ = m\gamma\omega^2A^2,
 \end{equation}
-对固定$F_0$和常数$\gamma>0$，功率峰值在$\omega=\omega_0$。
-在这一黏滞阻尼模型中功率半高全宽为$2\gamma$，品质因数定义为$Q=\omega_0/(2\gamma)$。
-在共振稳态中，$Q=2\pi E_{\mathrm{st}}/\Delta E_{\mathrm{cycle}}$，其中$E_{\mathrm{st}}=m\omega_0^2A^2/2$，
+对固定$F_0$和常数$\gamma > 0$，功率峰值在$\omega = \omega_0$。
+在这一黏滞阻尼模型中功率半高全宽为$2\gamma$，品质因数定义为$Q = \omega_0/(2\gamma)$。
+在共振稳态中，$Q = 2\pi E_{\mathrm{st}}/\Delta E_{\mathrm{cycle}}$，其中$E_{\mathrm{st}} = m\omega_0^2A^2/2$，
 $\Delta E_{\mathrm{cycle}}$是每周期耗散能量。把此能量比用于自由衰减，或用位移峰宽估计$Q$时，通常需要弱阻尼近似。
 
 \section{单摆：线性近似之外}
 长度$l$、质量$m$的理想单摆满足
-\begin{equation}
- \ddot\theta+\frac gl\sin\theta=0,\qquad
- E=\frac12ml^2\dot\theta^2+mgl(1-\cos\theta).
-\end{equation}
-当最大摆角$\theta_0\ll1$时，$\mathcal T_0=2\pi\sqrt{l/g}$。
-对$0<\theta_0<\pi$，由能量积分并令$\sin(\theta/2)=\sin(\theta_0/2)\sin\psi$得到
-\begin{equation}
- \mathcal T=4\sqrt{\frac lg}\,K(k),\quad
- k=\sin\frac{\theta_0}2,\quad
- K(k)=\int_0^{\pi/2}\frac{\d\psi}{\sqrt{1-k^2\sin^2\psi}}.
-\end{equation}
+\begin{subequations}
+ \begin{align}
+  \ddot\theta + \frac gl\sin\theta &= 0,\\
+  E &= \frac12ml^2\dot\theta^2 + mgl(1 - \cos\theta).
+ \end{align}
+\end{subequations}
+当最大摆角$\theta_0 \ll 1$时，$\mathcal T_0 = 2\pi\sqrt{l/g}$。
+对$0 < \theta_0 < \pi$，由能量积分并令$\sin(\theta/2) = \sin(\theta_0/2)\sin\psi$得到
+\begin{subequations}
+ \begin{align}
+  \mathcal T &= 4\sqrt{\frac lg}\,K(k),\\
+  k &= \sin\frac{\theta_0}2,\\
+  K(k) &= \int_0^{\pi/2}\frac{\d\psi}{\sqrt{1 - k^2\sin^2\psi}}.
+ \end{align}
+\end{subequations}
 小振幅展开为
 \begin{equation}
- \mathcal T=\mathcal T_0\Bigp{1+\frac{\theta_0^2}{16}
- +\frac{11\theta_0^4}{3072}+O(\theta_0^6)}.
+ \mathcal T = \mathcal T_0\Bigp{1 + \frac{\theta_0^2}{16}
+ + \frac{11\theta_0^4}{3072} + O(\theta_0^6)}.
 \end{equation}
-振幅越大周期越长；$\theta_0\to\pi$时周期发散，反映摆在顶部附近停留很久。
+振幅越大周期越长；$\theta_0 \to \pi$时周期发散，反映摆在顶部附近停留很久。
 
 \section{相图怎样展示运动}
-以$(\theta,p_\theta)$为相空间坐标，$p_\theta=ml^2\dot\theta$。
-能量曲线直接给出轨迹：低能量为绕稳定点的闭合曲线，$E>2mgl$时摆连续转动，
-$E=2mgl$的分界轨道称为分离曲线。
+以$(\theta,p_\theta)$为相空间坐标，$p_\theta = ml^2\dot\theta$。
+能量曲线直接给出轨迹：低能量为绕稳定点的闭合曲线，$E > 2mgl$时摆连续转动，
+$E = 2mgl$的分界轨道称为分离曲线。
 角度相差$2\pi$表示同一位置，所以单摆相空间是角度周期识别后的柱面；
 这里只需用这一事实识别图的左右边界，无须先引入一般流形理论。
 
@@ -87,7 +97,7 @@ $E=2mgl$的分界轨道称为分离曲线。
 小振荡所在的闭轨道（蓝），分离曲线（红），连续转动轨道（黑虚线）。
 \end{center}
 
-若单摆受到黏滞阻力矩$-b\dot\theta$（$b>0$），则$\dot E=-b\dot\theta^2\leq0$。
+若单摆受到黏滞阻力矩$-b\dot\theta$（$b > 0$），则$\dot E = -b\dot\theta^2 \leq 0$。
 除趋于不稳定平衡点的特殊初态外，轨道最终趋于稳定平衡点。
 保守系统中相邻轨道不会因耗散而汇聚；这一区别将在Liouville定理中精确表达。
 一个自治的一自由度保守系统能用能量降维求解，单摆的非线性本身并不等于混沌。

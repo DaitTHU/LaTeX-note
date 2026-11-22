@@ -2,138 +2,146 @@
 
 \section{什么样的变量替换保留Hamilton形式}
 一般变量变换不保证新变量仍满足正则Hamilton方程。
-允许变量变换显含时间。在每个固定$t$，可逆光滑变换$(q,p)\mapsto(Q,P)$若满足
+允许变量变换显含时间。在每个固定$t$，可逆光滑变换$(q,p) \mapsto (Q,P)$若满足
 \begin{equation}
- \{Q_i,Q_j\}=0,\qquad \{P_i,P_j\}=0,\qquad \{Q_i,P_j\}=\delta_{ij},
+ \{Q_i,Q_j\} = 0,\qquad \{P_i,P_j\} = 0,\qquad \{Q_i,P_j\} = \delta_{ij},
 \end{equation}
-就称它为正则变换。等价地，其Jacobian矩阵$S=\p(Q,P)/\p(q,p)$满足
-$SJS\transp=J$（等价于$S\transp JS=J$）。
+就称它为正则变换。等价地，其Jacobian矩阵$S = \p(Q,P)/\p(q,p)$满足
+$SJS\transp = J$（等价于$S\transp JS = J$）。
 线性正则变换可以混合坐标与动量；并不局限于在物理空间中换坐标。
 显含时间时，新Hamiltonian还需包含下述生成函数的时间导数，不能只在$H$中代换变量。
 
 在适当的局部区域内，可通过生成函数构造正则变换。
 第二类生成函数$F_2(q,P,t)$满足
 \begin{equation}
- \sum_i p_i\d q_i-H\d t
- =\sum_iP_i\d Q_i-K\d t+\d\biggp{F_2-\sum_iQ_iP_i}.
+ \sum_i p_i\d q_i - H\d t
+ = \sum_iP_i\d Q_i - K\d t + \d\biggp{F_2 - \sum_iQ_iP_i}.
 \end{equation}
 比较独立微分项得到
-\begin{equation}
- p_i=\pv{F_2}{q_i},\qquad Q_i=\pv{F_2}{P_i},\qquad
- K=H+\pv{F_2}{t}.
- \label{eq:cm-f2}
-\end{equation}
-需要$\det(\p^2F_2/\p q_i\p P_j)\ne0$，才能在该区域从$(q,p)$求出$(Q,P)$。
+\begin{subequations}\label{eq:cm-f2}
+ \begin{gather}
+  p_i = \pv{F_2}{q_i},\qquad Q_i = \pv{F_2}{P_i},\\
+  K = H + \pv{F_2}{t}.
+ \end{gather}
+\end{subequations}
+需要$\det(\p^2F_2/\p q_i\p P_j) \ne 0$，才能在该区域从$(q,p)$求出$(Q,P)$。
 不是每个正则变换都在整个相空间上具有同一种单值生成函数。
 
 \begin{example}{平移到匀速运动的坐标系}{cm-canonical-shift}
-对一维自由粒子，取$F_2=(q-ut)P$，则$p=P$、$Q=q-ut$，
-\begin{equation}
- K=\frac{P^2}{2m}-uP,
- \qquad \dot Q=\frac Pm-u,\quad \dot P=0.
-\end{equation}
+对一维自由粒子，取$F_2 = (q - ut)P$，则$p = P$、$Q = q - ut$，
+\begin{subequations}
+ \begin{gather}
+  K = \frac{P^2}{2m} - uP,\\
+  \dot Q = \frac Pm - u,\qquad \dot P = 0.
+ \end{gather}
+\end{subequations}
 这里$P$仍等于原惯性系动量，不是$m\dot Q$。
 若还要让新动量等于相对动量，取
-$F_2=(q-ut)P+muq-\tfrac12mu^2t$，便有$p=P+mu$、$Q=q-ut$且$K=P^2/(2m)$。
+$F_2 = (q - ut)P + muq - mu^2t/2$，便有$p = P + mu$、$Q = q - ut$且$K = P^2/(2m)$。
 两个选择都正则，但动量和Hamiltonian的含义不同。
 \end{example}
 
 \section{作用量与角变量：把周期运动化为匀速转动}
 一自由度自治系统的正则闭轨道上定义作用量
 \begin{equation}
- I=\frac1{2\pi}\oint p\d q.
+ I = \frac1{2\pi}\oint p\d q.
 \end{equation}
 积分沿运动方向绕一周期；$I$具有角动量量纲。
-在规则周期轨道族中，$I=I(E)$且
+在规则周期轨道族中，$I = I(E)$且
 \begin{equation}
- \dv I E=\frac1{2\pi}\oint\pv pE\d q
- =\frac1{2\pi}\oint\frac{\d q}{\dot q}
- =\frac{\mathcal T}{2\pi}.
+ \dv I E = \frac1{2\pi}\oint\pv pE\d q
+ = \frac1{2\pi}\oint\frac{\d q}{\dot q}
+ = \frac{\mathcal T}{2\pi}.
  \label{eq:cm-action-period}
 \end{equation}
-这里利用$H(q,p)=E$隐式求导，转向点处的积分以适当极限解释。
-若能反解$E=H(I)$，对应角变量$\theta$满足
+这里利用$H(q,p) = E$隐式求导，转向点处的积分以适当极限解释。
+若能反解$E = H(I)$，对应角变量$\theta$满足
 \begin{equation}
- \dot I=0,\qquad \dot\theta=\dv H I=\omega(I),\qquad \theta\sim\theta+2\pi.
+ \dot I = 0,\qquad \dot\theta = \dv H I = \omega(I),\qquad \theta \sim \theta + 2\pi.
 \end{equation}
 对谐振子可以显式写出
-\begin{equation}
- q=\sqrt{\frac{2I}{m\omega}}\sin\theta,\qquad
- p=\sqrt{2m\omega I}\cos\theta,\qquad H=\omega I.
-\end{equation}
-直接计算得$\{\theta,I\}=1$，于是$\dot\theta=\omega$。
-原点$I=0$的相位没有定义，所以这是有坐标退化点的局部表示。
+\begin{subequations}
+ \begin{align}
+  q &= \sqrt{\frac{2I}{m\omega}}\sin\theta,\\
+  p &= \sqrt{2m\omega I}\cos\theta,\\
+  H &= \omega I.
+ \end{align}
+\end{subequations}
+直接计算得$\{\theta,I\} = 1$，于是$\dot\theta = \omega$。
+原点$I = 0$的相位没有定义，所以这是有坐标退化点的局部表示。
 
 对于$n$自由度自治系统，设存在$n$个不显含时间、两两Poisson对易的守恒量$F_i$。
 若其微分$\d F_i$在某个紧致、连通的共同等值面上线性独立，
-则该等值面是不变环面，在其邻域可引入作用量--角变量，$H=H(I_1,\ldots,I_n)$。
+则该等值面是不变环面，在其邻域可引入作用量--角变量，$H = H(I_1,\ldots,I_n)$。
 各角以固定频率推进，但频率比一般无理，运动未必闭合。
 缺少正则性、紧致性或独立性时，不能仅凭“有几个守恒量”就推出这一结构。
 
 \section{慢变化参数与绝热不变量}
-设一自由度周期系统的外参数按慢时间变化，例如$\lambda(t)=\Lambda(\varepsilon t)$，
-其中$\Lambda$在所考察的慢时间区间内平滑，且自身及所需导数一致有界，$\varepsilon\mathcal T\ll1$。
+设一自由度周期系统的外参数按慢时间变化，例如$\lambda(t) = \Lambda(\varepsilon t)$，
+其中$\Lambda$在所考察的慢时间区间内平滑，且自身及所需导数一致有界，$\varepsilon\mathcal T \ll 1$。
 若瞬时周期轨道族保持规则、运动远离分离曲线且频率不趋零，
 作用量$I$在绝热近似下保持不变。
 这里$I(t)$由冻结当前参数$\lambda(t)$、取当前能量$E(t)$的闭轨道定义；实际随时间演化的轨迹一般不闭合。
 这不是任意缓慢过程中的精确守恒律；误差由变化率、光滑性和考察时长控制。
 
-对满足上述慢时间条件的谐振子，常用的小参数是$\abs{\dot\omega}/\omega^2\ll1$。
+对满足上述慢时间条件的谐振子，常用的小参数是$\abs{\dot\omega}/\omega^2 \ll 1$。
 仅有这个比值很小，不足以排除小振幅快速调制导致的参量共振。
 在绝热适用范围内，
-\begin{equation}
- I=\frac E\omega\simeq\const,\qquad
- E\propto\omega,\qquad A\propto\omega^{-1/2}
-\end{equation}
+\begin{subequations}
+ \begin{gather}
+  I = \frac E\omega \simeq \const,\\
+  E \propto \omega,\qquad A \propto \omega^{-1/2}
+ \end{gather}
+\end{subequations}
 （质量固定）。频率升高时外部装置做功，能量并不守恒。
-谐振子还可给出直观的一阶检验：$\dot E=m\omega\dot\omega q^2$，故
+谐振子还可给出直观的一阶检验：$\dot E = m\omega\dot\omega q^2$，故
 \begin{equation}
  \dd{t}\Bigp{\frac E\omega}
- =\dot\omega\Bigp{mq^2-\frac E{\omega^2}}.
+ = \dot\omega\Bigp{mq^2 - \frac E{\omega^2}}.
 \end{equation}
-一个快周期内近似保持$E,\omega$不变，利用$\ave{q^2}=E/(m\omega^2)$，右侧平均为零。
+一个快周期内近似保持$E,\omega$不变，利用$\ave{q^2} = E/(m\omega^2)$，右侧平均为零。
 这说明慢变化主要造成周期内小起伏，而不是最低阶的持续漂移。
 单摆接近分离曲线时周期发散，原来很慢的参数变化也不再相对于运动足够慢，
-因此不可直接跨越分离曲线继续沿用$I\simeq\const$。
+因此不可直接跨越分离曲线继续沿用$I \simeq \const$。
 
 \section{Hamilton--Jacobi方程从何而来}
 寻找一个生成函数$S(q,\alpha,t)$，使新Hamiltonian为零。
 由式\eqref{eq:cm-f2}得到Hamilton--Jacobi方程
 \begin{equation}
- \pv St+H\Bigp{q,\frac{\p S}{\p q},t}=0.
+ \pv St + H\Bigp{q,\frac{\p S}{\p q},t} = 0.
  \label{eq:cm-hj}
 \end{equation}
 若找到含$n$个独立参数$\alpha_i$的完全积分，并且混合导数矩阵
 $\p^2 S/\p q_i\p\alpha_j$非退化，则
 \begin{equation}
- p_i=\pv S{q_i},\qquad \beta_i=\pv S{\alpha_i}
+ p_i = \pv S{q_i},\qquad \beta_i = \pv S{\alpha_i}
 \end{equation}
 给出运动，$\alpha_i,\beta_i$都是常数。它把求轨道转化为求一个偏微分方程的完整解族，
 并非任何单个特解都包含足够初值信息。
-自治系统可设$S=W(q,\alpha)-E(\alpha)t$，得到定态方程$H(q,\p W/\p q)=E(\alpha)$；
+自治系统可设$S = W(q,\alpha) - E(\alpha)t$，得到定态方程$H(q,\p W/\p q) = E(\alpha)$；
 在适当区域内也可直接把$E$选作$n$个独立参数之一。
 
 \begin{example}{自由粒子与谐振子的Hamilton--Jacobi解}{cm-hj-example}
 一维自由粒子可取
 \begin{equation}
- S(q,P,t)=Pq-\frac{P^2}{2m}t.
+ S(q,P,t) = Pq - \frac{P^2}{2m}t.
 \end{equation}
-于是$p=P$、$Q=\p S/\p P=q-Pt/m$为常数，恢复$q(t)=Q+Pt/m$。
+于是$p = P$、$Q = \p S/\p P = q - Pt/m$为常数，恢复$q(t) = Q + Pt/m$。
 
-对一维谐振子，取$E>0$，在$p>0$且$\abs{q}<\sqrt{2E/(m\omega^2)}$的一支上可取
+对一维谐振子，取$E > 0$，在$p > 0$且$\abs{q} < \sqrt{2E/(m\omega^2)}$的一支上可取
 \begin{equation}
- S(q,E,t)=\int_0^q\sqrt{2mE-m^2\omega^2x^2}\d x-Et.
+ S(q,E,t) = \int_0^q\sqrt{2mE - m^2\omega^2x^2}\d x - Et.
 \end{equation}
-由$\beta=\p S/\p E$得到
-\begin{equation}
- \beta+t=\frac1\omega\arcsin\biggp{\sqrt{\frac{m\omega^2}{2E}}q},
-\end{equation}
-即$q=\sqrt{2E/(m\omega^2)}\sin[\omega(t+\beta)]$。
+由$\beta = \p S/\p E$得到
+\[
+ \beta + t = \frac1\omega\arcsin\biggp{\sqrt{\frac{m\omega^2}{2E}}q},
+\]
+即$q = \sqrt{2E/(m\omega^2)}\sin[\omega(t + \beta)]$。
 转向点之后要更换动量平方根的分支，不能用一个主值反正弦覆盖整条周期轨道。
 \end{example}
 
 \section{可积性与混沌的边界}
-能量守恒只是把$2n$维相空间限制到一个能量面，通常不足以解出$n>1$的所有运动。
+能量守恒只是把$2n$维相空间限制到一个能量面，通常不足以解出$n > 1$的所有运动。
 一般耦合非线性系统未必存在足够多的对易守恒量；
 正则变换本身也不能保证把任意Hamiltonian化成$n$个独立振子。
 实际研究可结合Poincaré截面、频谱及Lyapunov指数，但有限时间指数为正还需排除瞬态与数值误差。

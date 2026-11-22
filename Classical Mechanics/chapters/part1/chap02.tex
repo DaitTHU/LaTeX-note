@@ -1,100 +1,124 @@
 \chapter{中心力与两体问题}
 
 \section{把两个运动物体化为一个相对坐标}
-孤立的两个粒子通过$V(\abs{\bm r_1-\bm r_2})$相互作用。
-令$\bm r=\bm r_1-\bm r_2$，总质量$M=m_1+m_2$，约化质量$\mu=m_1m_2/M$，则
-\begin{equation}
- T=\frac12M\norm{\dotbm{R}}^2+\frac12\mu\norm{\dotbm{r}}^2,\qquad
- M\ddot{\bm R}=0,\qquad \mu\ddot{\bm r}=-V'(r)\uvec r.
-\end{equation}
+孤立的两个粒子通过$V(\abs{\bm r_1 - \bm r_2})$相互作用。
+令$\bm r = \bm r_1 - \bm r_2$，总质量$M = m_1 + m_2$，约化质量$\mu = m_1m_2/M$，则
+\begin{subequations}
+ \begin{align}
+  T &= \frac12M\norm{\dotbm{R}}^2 + \frac12\mu\norm{\dotbm{r}}^2,\\
+  M\ddot{\bm R} &= 0,\\
+  \mu\ddot{\bm r} &= -V'(r)\uvec r.
+ \end{align}
+\end{subequations}
 所以相对运动等价于质量为$\mu$的粒子在固定中心势中运动。
-当$m_2\gg m_1$时$\mu\simeq m_1$，才恢复重物近似固定的情形。
+当$m_2 \gg m_1$时$\mu \simeq m_1$，才恢复重物近似固定的情形。
 以下的$E$和$\ell$均指相对运动的能量和角动量大小。
 
-中心力没有关于力心的力矩，因此$\bm\ell=\mu\bm r\times\dotbm{r}$是固定矢量。
-当$\ell\ne0$时，运动限制在垂直于$\bm\ell$的平面；$\ell=0$时为径向运动。
+中心力没有关于力心的力矩，因此$\bm\ell = \mu\bm r \times \dotbm{r}$是固定矢量。
+当$\ell \ne 0$时，运动限制在垂直于$\bm\ell$的平面；$\ell = 0$时为径向运动。
 在运动平面选极坐标，方位角正向与$\bm\ell$遵循右手定则，
-\begin{equation}
- \ell=\mu r^2\dot\phi,\qquad \dv{A}{t}=\frac12r^2\dot\phi=\frac\ell{2\mu}.
- \label{eq:cm-area}
-\end{equation}
+\begin{subequations}
+ \begin{align}
+  \ell &= \mu r^2\dot\phi,\\
+  \dv{A}{t} &= \frac12r^2\dot\phi = \frac\ell{2\mu}. \label{eq:cm-area}
+ \end{align}
+\end{subequations}
 面积速度恒定来自中心力，对任意中心势都成立，不只适用于反平方力。
 
 \section{有效势与圆轨道稳定性}
 利用角动量守恒消去$\dot\phi$，能量写成
-\begin{equation}
- E=\frac12\mu\dot r^2+V_\eff(r),\qquad
- V_\eff(r)=V(r)+\frac{\ell^2}{2\mu r^2}.
- \label{eq:cm-effective}
-\end{equation}
+\begin{subequations}\label{eq:cm-effective}
+ \begin{align}
+  E &= \frac12\mu\dot r^2 + V_\eff(r),\\
+  V_\eff(r) &= V(r) + \frac{\ell^2}{2\mu r^2}.
+ \end{align}
+\end{subequations}
 最后一项描述固定角动量下逼近中心所需增加的横向动能。
 它是径向降维后的有效势，不能在原三维受力图中再加一遍。
 圆轨道半径$r_0$满足
-\begin{equation}
- V'(r_0)=\frac{\ell^2}{\mu r_0^3},\qquad
- \omega_r^2=\frac1\mu\Bigb{V''(r_0)+\frac{3V'(r_0)}{r_0}}.
-\end{equation}
+\begin{subequations}
+ \begin{align}
+  V'(r_0) &= \frac{\ell^2}{\mu r_0^3},\\
+  \omega_r^2 &= \frac1\mu\Bigb{V''(r_0) + \frac{3V'(r_0)}{r_0}}.
+ \end{align}
+\end{subequations}
 第二式是在保持$\ell$不变时展开有效势得到的小径向振动频率。
-$\omega_r^2>0$给出径向线性稳定；角频率为$\Omega^2=V'(r_0)/(\mu r_0)$。
+$\omega_r^2 > 0$给出径向线性稳定；角频率为$\Omega^2 = V'(r_0)/(\mu r_0)$。
 小径向振动每完成一周，方位角约增加$2\pi\Omega/\omega_r$，可据此分析近心点方向。
 频率不相等并不自动意味着轨道不闭合，下述各向同性谐振子就是反例。
 
 \begin{example}{幂律吸引力的稳定圆轨道}{cm-power-law}
-设径向力$F_r=-kr^s$，$k>0$。则
+设径向力$F_r = -kr^s$，$k > 0$。则
 \begin{equation}
- \Omega^2=\frac{k}{\mu}r_0^{s-1},\qquad
- \omega_r^2=(s+3)\Omega^2.
+ \Omega^2 = \frac{k}{\mu}r_0^{s-1},\qquad
+ \omega_r^2 = (s + 3)\Omega^2.
 \end{equation}
-故$s>-3$时圆轨道对小径向扰动稳定；$s=-3$时二阶检验失效，不能据此宣布稳定。
-反平方力$s=-2$给出$\omega_r=\Omega$；各向同性谐振子$s=1$给出$\omega_r=2\Omega$。
+故$s > -3$时圆轨道对小径向扰动稳定；$s = -3$时二阶检验失效，不能据此宣布稳定。
+反平方力$s = -2$给出$\omega_r = \Omega$；各向同性谐振子$s = 1$给出$\omega_r = 2\Omega$。
 \end{example}
 
 \section{轨道方程与Kepler椭圆}
-当$\ell\ne0$时可用$\phi$代替时间，令$u=1/r$。
-由$\dot r=-(\ell/\mu)\d u/\d\phi$以及径向Newton方程得到Binet方程
+当$\ell \ne 0$时可用$\phi$代替时间，令$u = 1/r$。
+由$\dot r = -(\ell/\mu)\d u/\d\phi$以及径向Newton方程得到Binet方程
 \begin{equation}
- \dv[2]{u}{\phi}+u=-\frac{\mu}{\ell^2u^2}F_r(1/u).
+ \dv[2]{u}{\phi} + u = -\frac{\mu}{\ell^2u^2}F_r(1/u).
 \end{equation}
-对$V=-k/r$，$k>0$，解为
-\begin{equation}
- r(\phi)=\frac{p}{1+e\cos(\phi-\phi_0)},\qquad
- p=\frac{\ell^2}{\mu k},\qquad
- e^2=1+\frac{2E\ell^2}{\mu k^2}.
- \label{eq:cm-conic}
-\end{equation}
-这里$e$是偏心率，$\phi_0$指定近心点方向。最后一式可由近心点$\dot r=0$代入能量得到。
-当$\ell\ne0$时，$E<0$对应椭圆（$e<1$），$E=0$对应抛物线，$E>0$对应双曲线；
-$e=0$是圆。$\ell=0$的径向坠落不应通过除以$\ell$的推导讨论。
+对$V = -k/r$，$k > 0$，解为
+\begin{subequations}
+ \begin{align}
+  r(\phi) &= \frac{p}{1 + e\cos(\phi - \phi_0)}, \label{eq:cm-conic}\\
+  p &= \frac{\ell^2}{\mu k},\\
+  e^2 &= 1 + \frac{2E\ell^2}{\mu k^2}.
+ \end{align}
+\end{subequations}
+这里$e$是偏心率，$\phi_0$指定近心点方向。最后一式可由近心点$\dot r = 0$代入能量得到。
+当$\ell \ne 0$时，$E < 0$对应椭圆（$e < 1$），$E = 0$对应抛物线，$E > 0$对应双曲线；
+$e = 0$是圆。$\ell = 0$的径向坠落不应通过除以$\ell$的推导讨论。
 
 椭圆半长轴$a$、半短轴$b$满足
-\begin{equation}
- E=-\frac{k}{2a},\qquad p=a(1-e^2),\qquad b=a\sqrt{1-e^2}.
-\end{equation}
+\begin{subequations}
+ \begin{align}
+  E &= -\frac{k}{2a},\\
+  p &= a(1 - e^2),\\
+  b &= a\sqrt{1 - e^2}.
+ \end{align}
+\end{subequations}
 用面积$\pi ab$除以式\eqref{eq:cm-area}的面积速度，得到周期
 \begin{equation}
- \mathcal T=2\pi\sqrt{\frac{\mu a^3}{k}}.
+ \mathcal T = 2\pi\sqrt{\frac{\mu a^3}{k}}.
 \end{equation}
-万有引力$k=Gm_1m_2$时，$\mathcal T^2=4\pi^2a^3/[G(m_1+m_2)]$。
+万有引力$k = Gm_1m_2$时，$\mathcal T^2 = 4\pi^2a^3/[G(m_1 + m_2)]$。
 此处$a$是相对轨道的半长轴；两个物体绕质心轨道的半长轴分别为$m_2a/M$与$m_1a/M$。
 若需要位置随时间变化，引入偏近点角$\mathcal E$：
-\begin{equation}
- r=a(1-e\cos\mathcal E),\qquad
- \mathcal E-e\sin\mathcal E=\sqrt{\frac{k}{\mu a^3}}(t-t_{\mathrm{p}}).
-\end{equation}
+\begin{subequations}
+ \begin{align}
+  r &= a(1 - e\cos\mathcal E),\\
+  \mathcal E - e\sin\mathcal E &= \sqrt{\frac{k}{\mu a^3}}(t - t_{\mathrm{p}}).
+ \end{align}
+\end{subequations}
 第二式是Kepler方程，通常先数值求$\mathcal E$再恢复位置，不能把椭圆轨道误当成匀速转动。
 
 \section{从轨道到散射截面}
-考虑从无穷远入射的排斥势$V=k/r$，$k>0$。
+考虑从无穷远入射的排斥势$V = k/r$，$k > 0$。
 入射相对速度$v_\infty$、碰撞参数$b$给出
-\begin{equation}
- E=\frac12\mu v_\infty^2,\qquad \ell=\mu v_\infty b,\qquad
- b=\frac{k}{2E}\cot\frac\chi2.
-\end{equation}
-$\chi\in(0,\pi]$为质心系中相对速度的偏转角。
+\begin{subequations}
+ \begin{align}
+  E &= \frac12\mu v_\infty^2,\\
+  \ell &= \mu v_\infty b,\\
+  b &= \frac{k}{2E}\cot\frac\chi2.
+ \end{align}
+\end{subequations}
+$\chi \in (0,\pi]$为质心系中相对速度的偏转角。
+图\ref{fig:rutherford-impact}中，$b$ 从力心量至入射渐近线，$\chi$ 由入射与出射的渐近方向确定。
+\begin{figure}[htbp]
+    \centering\tikzfigure{rutherford-impact}
+    \caption{排斥 Coulomb 势中的相对轨道。粒子从左方入射，受力后背离力心 $O$ 偏转。虚线给出远离力心时的两个传播方向。}
+    \label{fig:rutherford-impact}
+\end{figure}
 对轴对称、单调的$b(\chi)$，入射环带$2\pi b\,\abs{\d b}$对应立体角$2\pi\sin\chi\,\abs{\d\chi}$，故
 \begin{equation}
- \dv{\sigma}{\Omega}=\frac{b}{\sin\chi}\Bigabs{\dv b\chi}
- =\Bigp{\frac{k}{4E}}^2\frac1{\sin^4(\chi/2)}.
+ \dv{\sigma}{\Omega} = \frac{b}{\sin\chi}\Bigabs{\dv b\chi}
+ = \Bigp{\frac{k}{4E}}^2\frac1{\sin^4(\chi/2)}.
 \end{equation}
 这是经典Rutherford截面。若一个散射角对应多个碰撞参数，必须对各支求和；
 实验室系角度通常还要作两体运动学变换。
@@ -102,13 +126,13 @@ $\chi\in(0,\pi]$为质心系中相对速度的偏转角。
 不是任何真实装置都具有无限计数率。
 
 \section{Virial关系的适用条件}
-定义$G=\bm r\cdot\bm p$，则$\dot G=2T+\bm r\cdot\bm F$。
-若长时间平均存在且$[G(t)-G(0)]/t\to0$，就有
+定义$G = \bm r \cdot \bm p$，则$\dot G = 2T + \bm r \cdot \bm F$。
+若长时间平均存在且$[G(t) - G(0)]/t \to 0$，就有
 \begin{equation}
- 2\ave T=\ave{rV'(r)}.
+ 2\ave T = \ave{rV'(r)}.
 \end{equation}
-对$V=\alpha r^n$，$2\ave T=n\ave V$，其中势能零点采用该齐次形式。
-Kepler束缚轨道给出$2\ave T=-\ave V$。
+对$V = \alpha r^n$，$2\ave T = n\ave V$，其中势能零点采用该齐次形式。
+Kepler束缚轨道给出$2\ave T = -\ave V$。
 上述条件可由有界的$G$保证；无界散射轨道一般不能直接套用束缚态的Virial结论。
 
 \paragraph{复习与阅读}

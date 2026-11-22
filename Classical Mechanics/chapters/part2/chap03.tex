@@ -4,78 +4,83 @@
 刚体近似要求各质点间距离不随时间变化，适用于形变对所研究运动可忽略的情形。
 把参考点选在质心，任一点的速度为
 \begin{equation}
- \bm v_a=\dotbm{R}+\bm\omega\times\bm\rho_a.
+ \bm v_a = \dotbm{R} + \bm\omega \times \bm\rho_a.
 \end{equation}
 利用质心关系消去交叉项，动能分解为
-\begin{equation}
- T=\frac12M\dotbm{R}^{\,2}+\frac12\bm\omega\transp I\bm\omega,\qquad
- I_{ij}=\sum_a m_a(\rho_a^2\delta_{ij}-\rho_{ai}\rho_{aj}).
- \label{eq:cm-inertia}
-\end{equation}
-连续分布时将求和换为$\int\d m$。惯性张量是实对称矩阵，
+\begin{subequations}
+ \begin{align}
+  T &= \frac12M\dotbm{R}^{\,2} + \frac12\bm\omega\transp I\bm\omega, \label{eq:cm-inertia}\\
+  I_{ij} &= \sum_a m_a(\rho_a^2\delta_{ij} - \rho_{ai}\rho_{aj}).
+ \end{align}
+\end{subequations}
+连续分布时将求和换为$\textstyle \int\d m$。惯性张量是实对称矩阵，
 其方向依赖性描述在同一角速率下绕不同方向转动所需的动能。
-关于同一参考点，$\bm\ell=I\bm\omega$，角动量一般不与角速度平行。
+关于同一参考点，$\bm\ell = I\bm\omega$，角动量一般不与角速度平行。
 
 主轴是$I$的正交特征矢量，主惯量为$I_1,I_2,I_3$。
 对通常三维刚体它们为正；理想直线质量分布绕自身轴的惯量可以为零。
-关于与质心相距$\bm a$的点、保持平行坐标轴，平行轴定理是
+关于与质心相距$\bm a$的点 $\mathrm O$、保持平行坐标轴，平行轴定理是
 \begin{equation}
- I_O=I_\CM+M(a^2\mathbf 1-\bm a\bm a\transp).
+ I_{\mathrm O} = I_\CM + M(a^2\mathbf 1 - \bm a\bm a\transp).
 \end{equation}
-其中$\mathbf 1$为单位矩阵。特别地，两条平行轴相距垂直距离$d$时，$I_O=I_\CM+Md^2$。
+其中$\mathbf 1$为单位矩阵。特别地，两条平行轴相距垂直距离$d$时，$I_{\mathrm O} = I_\CM + Md^2$。
 式\eqref{eq:cm-inertia}的纯转动形式也适用于惯性系中固定的支点，
 但不能将任意加速点都当成固定支点使用所有转动公式。
 
 \section{Euler方程与随体坐标}
 选固定在刚体上的主轴。此坐标系中$I$不随时间变化，
-但把角动量的惯性系导数换成随体导数时必须加上$\bm\omega\times\bm\ell$：
+但把角动量的惯性系导数换成随体导数时必须加上$\bm\omega \times \bm\ell$：
 \begin{equation}
- \bm\tau=I\dotbm{\omega}+\bm\omega\times(I\bm\omega).
+ \bm\tau = I\dotbm{\omega} + \bm\omega \times (I\bm\omega).
 \end{equation}
 分量形式为
 \begin{align}
- I_1\dot\omega_1+(I_3-I_2)\omega_2\omega_3&=\tau_1,\\
- I_2\dot\omega_2+(I_1-I_3)\omega_3\omega_1&=\tau_2,\\
- I_3\dot\omega_3+(I_2-I_1)\omega_1\omega_2&=\tau_3.
+ I_1\dot\omega_1 + (I_3 - I_2)\omega_2\omega_3 &= \tau_1,\\
+ I_2\dot\omega_2 + (I_1 - I_3)\omega_3\omega_1 &= \tau_2,\\
+ I_3\dot\omega_3 + (I_2 - I_1)\omega_1\omega_2 &= \tau_3.
  \label{eq:cm-euler-rigid}
 \end{align}
 这里的力矩和惯量均关于质心，或关于一个惯性系中的固定支点。
-点表示随体系分量对时间的导数。把$\bm\tau=I\dotbm{\omega}$用于一般三维刚体会漏掉基矢转动。
+点表示随体系分量对时间的导数。把$\bm\tau = I\dotbm{\omega}$用于一般三维刚体会漏掉基矢转动。
 
 \section{自由刚体与中间轴不稳定}
 无外力矩时，惯性系中的$\bm\ell$固定，转动能$T$也守恒：
-\begin{equation}
- \ell^2=I_1^2\omega_1^2+I_2^2\omega_2^2+I_3^2\omega_3^2,
- \qquad 2T=I_1\omega_1^2+I_2\omega_2^2+I_3\omega_3^2.
-\end{equation}
+\begin{subequations}
+ \begin{align}
+  \ell^2 &= I_1^2\omega_1^2 + I_2^2\omega_2^2 + I_3^2\omega_3^2,\\
+  2T &= I_1\omega_1^2 + I_2\omega_2^2 + I_3\omega_3^2.
+ \end{align}
+\end{subequations}
 在随体角速度空间中，运动沿这两个二次曲面的交线进行。
 注意“角动量固定”说的是空间方向，随体分量仍会变化。
 
-设$0<I_1<I_2<I_3$，考察绕第3主轴的定常转动$\omega_3=\Omega\ne0$。
+设$0 < I_1 < I_2 < I_3$，考察绕第3主轴的定常转动$\omega_3 = \Omega \ne 0$。
 保留横向扰动的一阶项，
-\begin{equation}
- \dot\omega_1=\frac{I_2-I_3}{I_1}\Omega\omega_2,\qquad
- \dot\omega_2=\frac{I_3-I_1}{I_2}\Omega\omega_1,
-\end{equation}
+\begin{subequations}
+ \begin{align}
+  \dot\omega_1 &= \frac{I_2 - I_3}{I_1}\Omega\omega_2,\\
+  \dot\omega_2 &= \frac{I_3 - I_1}{I_2}\Omega\omega_1,
+ \end{align}
+\end{subequations}
 因而
 \begin{equation}
- \ddot\omega_1=-\Omega^2
- \frac{(I_3-I_2)(I_3-I_1)}{I_1I_2}\omega_1.
+ \ddot\omega_1 = -\Omega^2
+ \frac{(I_3 - I_2)(I_3 - I_1)}{I_1I_2}\omega_1.
 \end{equation}
 扰动振荡，所以绕最大惯量主轴的转动线性稳定；绕最小惯量主轴同样稳定。
 绕中间轴时，
 \begin{equation}
- \ddot\omega_1=\Omega^2
- \frac{(I_2-I_1)(I_3-I_2)}{I_1I_3}\omega_1,
+ \ddot\omega_1 = \Omega^2
+ \frac{(I_2 - I_1)(I_3 - I_2)}{I_1I_3}\omega_1,
 \end{equation}
 出现指数增长。这是网球拍翻转现象的局部机制，并非外力矩突然改变了空间角动量。
 以上讨论为无耗散理想刚体。若有内部耗散但总角动量近似不变，
 系统倾向于降低转动能，因此两种无耗散稳定旋转不一定具有相同的长期命运。
 
-对自由对称陀螺$I_1=I_2=I_\perp$，$\omega_3$恒定，且
+对自由对称陀螺$I_1 = I_2 = I_\perp$，$\omega_3$恒定，且
 \begin{equation}
- \dd{t}(\omega_1+\i\omega_2)
- =\i\frac{I_3-I_\perp}{I_\perp}\omega_3(\omega_1+\i\omega_2).
+ \dd{t}(\omega_1 + \i\omega_2)
+ = \i\frac{I_3 - I_\perp}{I_\perp}\omega_3(\omega_1 + \i\omega_2).
 \end{equation}
 这是角速度横向分量相对随体轴的转动频率。
 对称轴在空间绕固定角动量方向的进动频率则为$\ell/I_\perp$，两者不能混同。
@@ -83,53 +88,63 @@
 \section{重对称陀螺：循环坐标降低难度}
 考虑一端固定的轴对称刚体，质心距支点$l$，对称轴取由支点指向质心的方向。
 以竖直向上的轴为参考，$\theta$为对称轴与竖直轴的夹角，$\phi$为进动角，$\psi$为自转Euler角。
-惯量取关于支点的$I_1=I_2=I_\perp$及$I_3$，则
+惯量取关于支点的$I_1 = I_2 = I_\perp$及$I_3$，则
 \begin{equation}
- L=\frac12I_\perp(\dot\theta^2+\dot\phi^2\sin^2\theta)
- +\frac12I_3(\dot\psi+\dot\phi\cos\theta)^2-Mgl\cos\theta.
+ L = \frac12I_\perp(\dot\theta^2 + \dot\phi^2\sin^2\theta)
+ + \frac12I_3(\dot\psi + \dot\phi\cos\theta)^2 - Mgl\cos\theta.
 \end{equation}
 由于$\phi,\psi$循环，
-\begin{equation}
- p_\psi=I_3(\dot\psi+\dot\phi\cos\theta)=\ell_3,\qquad
- p_\phi=I_\perp\dot\phi\sin^2\theta+\ell_3\cos\theta=\ell_z
-\end{equation}
+\begin{subequations}
+ \begin{align}
+  p_\psi &= I_3(\dot\psi + \dot\phi\cos\theta) = \ell_3,\\
+  p_\phi &= I_\perp\dot\phi\sin^2\theta + \ell_3\cos\theta = \ell_z
+ \end{align}
+\end{subequations}
 守恒。$\ell_z$是空间竖直角动量，$\ell_3$是随体对称轴分量。
 消去两个角速度后，能量变成一维章动问题：
-\begin{equation}
- E=\frac12I_\perp\dot\theta^2+U_\eff(\theta),\quad
- U_\eff=\frac{(\ell_z-\ell_3\cos\theta)^2}{2I_\perp\sin^2\theta}
- +\frac{\ell_3^2}{2I_3}+Mgl\cos\theta.
-\end{equation}
-对于$0<\theta<\pi$，有效势的转向点给出章动范围；Euler角在两极退化，需单独取极限分析。
+\begin{subequations}
+ \begin{align}
+  E &= \frac12I_\perp\dot\theta^2 + U_\eff(\theta),\\
+  U_\eff &= \frac{(\ell_z - \ell_3\cos\theta)^2}{2I_\perp\sin^2\theta}
+  + \frac{\ell_3^2}{2I_3} + Mgl\cos\theta.
+ \end{align}
+\end{subequations}
+对于$0 < \theta < \pi$，有效势的转向点给出章动范围；Euler角在两极退化，需单独取极限分析。
 此处由能量守恒降维是合法的，但把守恒动量直接代回$L$并对剩余坐标变分一般不合法；
 固定动量的变分降维需要Routh变换。
 
-匀速进动满足$\dot\theta=0$、$\dot\phi=\Omega_{\mathrm{p}}$。
-在$\sin\theta\ne0$时，$\theta$方程给出
+匀速进动满足$\dot\theta = 0$、$\dot\phi = \Omega_{\mathrm{p}}$。
+在$\sin\theta \ne 0$时，$\theta$方程给出
 \begin{equation}
- I_\perp\Omega_{\mathrm{p}}^2\cos\theta-\ell_3\Omega_{\mathrm{p}}+Mgl=0.
+ I_\perp\Omega_{\mathrm{p}}^2\cos\theta - \ell_3\Omega_{\mathrm{p}} + Mgl = 0.
 \end{equation}
-高速自转、慢进动支满足$\abs{I_\perp\Omega_{\mathrm{p}}\cos\theta}\ll\abs{\ell_3}$，于是
+高速自转、慢进动支满足$\abs{I_\perp\Omega_{\mathrm{p}}\cos\theta} \ll \abs{\ell_3}$，于是
 \begin{equation}
- \Omega_{\mathrm{p}}\simeq\frac{Mgl}{\ell_3}.
+ \Omega_{\mathrm{p}} \simeq \frac{Mgl}{\ell_3}.
 \end{equation}
 这不是任意初态的精确解；通常还会叠加章动，快速进动支也被此近似排除。
 
 \section{滚动：能量法与摩擦条件必须同时满足}
-半径$R$、质心惯量$I=\beta mR^2$的轴对称圆柱状刚体，其质心在几何中心，
+半径$R$、质心惯量$I = \beta mR^2$的轴对称圆柱状刚体，其质心在几何中心，
 在倾角$\alpha$的固定斜面上无滑动滚动，转轴平行于斜面。
 取沿斜面向下为正，静摩擦力大小$f$沿上坡方向，
-\begin{equation}
- ma=mg\sin\alpha-f,\qquad I\dot\omega=fR,\qquad a=R\dot\omega.
-\end{equation}
+\begin{subequations}
+ \begin{align}
+  ma &= mg\sin\alpha - f,\\
+  I\dot\omega &= fR,\\
+  a &= R\dot\omega.
+ \end{align}
+\end{subequations}
 解得
-\begin{equation}
- a=\frac{g\sin\alpha}{1+\beta},\qquad
- f=\frac{\beta}{1+\beta}mg\sin\alpha.
-\end{equation}
-无滑动成立还要求$f\leq\mu_smg\cos\alpha$。
+\begin{subequations}
+ \begin{align}
+  a &= \frac{g\sin\alpha}{1 + \beta},\\
+  f &= \frac{\beta}{1 + \beta}mg\sin\alpha.
+ \end{align}
+\end{subequations}
+无滑动成立还要求$f \leq \mu_{\mathrm s}mg\cos\alpha$。
 在固定斜面、理想刚体且无滚阻时，接触点瞬时速度为零，静摩擦不做功，
-若从静止下降高度$h$，能量法给出相同结果：$mgh=\tfrac12m(1+\beta)v^2$。
+若从静止下降高度$h$，能量法给出相同结果：$mgh = m(1 + \beta)v^2/2$。
 若斜面本身运动，或接触发生形变耗散，不能沿用这一功率判断。
 
 \paragraph{复习与阅读}

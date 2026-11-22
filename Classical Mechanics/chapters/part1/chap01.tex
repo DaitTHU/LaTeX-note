@@ -5,125 +5,138 @@
 这并不要求物体真的没有尺寸：计算行星轨道时可以忽略自转，计算陀螺时就不能这样做。
 在惯性系中，对质量恒定的质点，
 \begin{equation}
- m\ddot{\bm r}=\bm F(\bm r,\dotbm{r},t).
+ m\ddot{\bm r} = \bm F(\bm r,\dotbm{r},t).
  \label{eq:cm-newton}
 \end{equation}
 给定初始位置和速度，便得到一个初值问题。在通常的光滑力模型下，运动在局部唯一。\footnote{一组充分条件是力连续，且在所考察的时间邻域内对$(\bm r,\dotbm{r})$一致局部Lipschitz。}
 碰撞、奇异势和分段摩擦需要另加处理，不能对任意方程都预先断言解存在且唯一。
 
 实际解题的顺序是：选系统和参考系，画受力图，写约束，再选择坐标。
-支持力和张力来自约束，并不总能事先取成$mg$；静摩擦力满足不等式$\abs{f}\leq\mu_s N$，
-只有临界滑动时才取等号。滑动摩擦$\mu_kN$则是经验模型，方向与接触面的相对滑动速度相反。
+支持力和张力来自约束，并不总能事先取成$mg$；静摩擦力满足不等式$\abs{f} \leq \mu_{\mathrm s} N$，
+只有临界滑动时才取等号。滑动摩擦$\mu_{\mathrm k}N$则是经验模型，方向与接触面的相对滑动速度相反。
 
-两个惯性系以恒定相对速度$\bm u$平移时，$t'=t$，$\bm r'=\bm r-\bm u t-\bm r_0$，
-因此$\ddot{\bm r}'=\ddot{\bm r}$。这是Galileo变换下Newton方程的运动学基础。
+两个惯性系以恒定相对速度$\bm u$平移时，$t' = t$，$\bm r' = \bm r - \bm u t - \bm r_0$，
+因此$\ddot{\bm r}' = \ddot{\bm r}$。这是Galileo变换下Newton方程的运动学基础。
 速度、动能依赖参考系；力学规律的形式相同不意味着每个物理量的数值相同。
 
 \section{平面极坐标中的速度与加速度}
-笛卡尔坐标中的基矢固定，故可以直接逐分量求导。平面极坐标的基矢随粒子位置旋转：
-\begin{align}
- \bm r&=r\uvec r,&
- \dot{\uvec r}&=\dot\phi\uvec\phi,&
- \dot{\uvec\phi}&=-\dot\phi\uvec r,\\
- \bm v&=\dot r\uvec r+r\dot\phi\uvec\phi,&&&
- \bm a&=(\ddot r-r\dot\phi^2)\uvec r
- +(r\ddot\phi+2\dot r\dot\phi)\uvec\phi.
- \label{eq:cm-polar-a}
-\end{align}
-基矢导数可由$\uvec r=(\cos\phi,\sin\phi)$直接得到；向心项不是额外施加的力。
+Cartesian 坐标中的基矢固定，故可以直接逐分量求导。平面极坐标中，位置矢量为$\bm r = r\uvec r$，基矢随粒子位置旋转。对时间求导得到
+\begin{subequations}
+ \begin{align}
+  \dot{\uvec r} &= \dot\phi\uvec\phi,\qquad \dot{\uvec\phi} = -\dot\phi\uvec r,\\
+  \bm v &= \dot r\uvec r + r\dot\phi\uvec\phi,\\
+  \bm a &= (\ddot r - r\dot\phi^2)\uvec r + (r\ddot\phi + 2\dot r\dot\phi)\uvec\phi. \label{eq:cm-polar-a}
+ \end{align}
+\end{subequations}
+基矢导数可由$\uvec r = (\cos\phi,\sin\phi)$直接得到；向心项不是额外施加的力。
 对半径固定的圆周运动，径向加速度为$-r\dot\phi^2$，切向加速度为$r\ddot\phi$。
 以后选择极坐标，是因为中心力天然区分径向与切向，而不是为了增加坐标形式。
 
 \section{功、势能与能量守恒}
 将式\eqref{eq:cm-newton}与速度点乘，得到功率关系
-\begin{equation}
- \dd{t}\Bigp{\frac12m v^2}=\bm F\cdot\bm v,
- \qquad T_B-T_A=\int_A^B\bm F\cdot\d\bm r.
-\end{equation}
-若$\bm F=-\grad V(\bm r)$，则$E=T+V$守恒。
-在单连通区域内，连续可微力场的$\curl\bm F=0$保证存在单值势能；
+\begin{subequations}
+ \begin{align}
+  \dd{t}\Bigp{\frac12m v^2} &= \bm F \cdot \bm v,\\
+  T_{\mathrm B} - T_{\mathrm A} &= \int_{\mathrm A}^{\mathrm B}\bm F \cdot \d\bm r.
+ \end{align}
+\end{subequations}
+若$\bm F = -\grad V(\bm r)$，则$E = T + V$守恒。
+在单连通区域内，连续可微力场的$\curl\bm F = 0$保证存在单值势能；
 在有洞区域内还须检查闭合回路的环量，不能仅凭局部旋度判断全局保守性。
 
-更一般地，若$\bm F=-\grad V(\bm r,t)+\bm F_\nonconservative$，则
+更一般地，若$\bm F = -\grad V(\bm r,t) + \bm F_\nonconservative$，则
 \begin{equation}
- \dot E=\pv{V}{t}+\bm F_\nonconservative\cdot\bm v.
+ \dot E = \pv{V}{t} + \bm F_\nonconservative \cdot \bm v.
  \label{eq:cm-energy-work}
 \end{equation}
 势能显含时间时，即使力在每一时刻都可由势函数给出，机械能也未必守恒。
-磁力$q\bm v\times\bm B$不做功，却通常不能用仅依赖位置的标量势表示；“不做功”和“保守力”不是同一个条件。
+磁力$q\bm v \times \bm B$不做功，却通常不能用仅依赖位置的标量势表示；“不做功”和“保守力”不是同一个条件。
 
-一维保守运动满足$\dot x=\pm\sqrt{2[E-V(x)]/m}$。
-允许区域由$V(x)\leq E$给出，转向点满足$V(x)=E$。
-平衡点满足$V'(x_0)=0$；若$V''(x_0)>0$，线性化给出
-\begin{equation}
- m\ddot\eta+V''(x_0)\eta=0,\qquad
- \omega_0^2=V''(x_0)/m,
- \quad \eta=x-x_0.
-\end{equation}
-若二阶导数为零，需要保留高阶项。例如$V=\alpha x^4$在$\alpha>0$时仍稳定，
+一维保守运动满足$\dot x = \pm\sqrt{2[E - V(x)]/m}$。
+允许区域由$V(x) \leq E$给出，转向点满足$V(x) = E$。
+平衡点满足$V'(x_0) = 0$；若$V''(x_0) > 0$，令$\eta = x - x_0$，线性化给出
+\begin{subequations}
+ \begin{align}
+  m\ddot\eta + V''(x_0)\eta &= 0,\\
+  \omega_0^2 &= V''(x_0)/m.
+ \end{align}
+\end{subequations}
+若二阶导数为零，需要保留高阶项。例如$V = \alpha x^4$在$\alpha > 0$时仍稳定，
 但没有非零的小振幅线性频率。
 
 \begin{example}{线性阻力下的落体}{cm-drag}
-取竖直向下为正，阻力$-bv$，$b>0$。由$m\dot v=mg-bv$得
-\begin{equation}
- v(t)=v_\infty+(v_0-v_\infty)\e^{-t/\tau},\quad
- v_\infty=\frac{mg}{b},\quad \tau=\frac mb.
-\end{equation}
-积分一次给出$x(t)-x_0=v_\infty t+(v_0-v_\infty)\tau(1-\e^{-t/\tau})$。
-从静止开始时，$t\ll\tau$恢复$x-x_0\simeq gt^2/2$，$t\gg\tau$趋于匀速。
+取竖直向下为正，阻力$-bv$，$b > 0$。由$m\dot v = mg - bv$得
+\begin{subequations}
+ \begin{gather}
+  v(t) = v_\infty + (v_0 - v_\infty)\e^{-t/\tau},\\
+  v_\infty = \frac{mg}{b},\qquad \tau = \frac mb.
+ \end{gather}
+\end{subequations}
+积分一次给出$x(t) - x_0 = v_\infty t + (v_0 - v_\infty)\tau(1 - \e^{-t/\tau})$。
+从静止开始时，$t \ll \tau$恢复$x - x_0 \simeq gt^2/2$，$t \gg \tau$趋于匀速。
 这里线性阻力是适用速度范围内的模型；高速空气阻力常需改为近似正比于$v^2$。
 \end{example}
 
 \section{质点组、质心与角动量}
 对固定成员、质量不变的$N$个粒子，令
-\begin{equation}
- M=\sum_a m_a,\quad \bm R=\frac1M\sum_a m_a\bm r_a,
- \quad \bm P=\sum_a m_a\dotbm{r}_a=M\dotbm{R}.
-\end{equation}
+\begin{subequations}
+ \begin{align}
+  M &= \sum_a m_a,\\
+  \bm R &= \frac1M\sum_a m_a\bm r_a,\\
+  \bm P &= \sum_a m_a\dotbm{r}_a = M\dotbm{R}.
+ \end{align}
+\end{subequations}
 若内部力成对大小相等、方向相反，求和得到
 \begin{equation}
- \dotbm{P}=\bm F_\external,\qquad M\ddot{\bm R}=\bm F_\external.
+ \dotbm{P} = \bm F_\external,\qquad M\ddot{\bm R} = \bm F_\external.
 \end{equation}
-因此无外力时质心匀速运动。令$\bm\rho_a=\bm r_a-\bm R$，则
+因此无外力时质心匀速运动。令$\bm\rho_a = \bm r_a - \bm R$，则
 \begin{equation}
- T=\frac12M\norm{\dotbm{R}}^2+\frac12\sum_a m_a\norm{\dotbm{\rho}_a}^2.
+ T = \frac12M\norm{\dotbm{R}}^2 + \frac12\sum_a m_a\norm{\dotbm{\rho}_a}^2.
  \label{eq:cm-com-energy}
 \end{equation}
-交叉项因$\sum_a m_a\bm\rho_a=0$而消失。这区分整体平移与内部运动。
+交叉项因$\textstyle \sum_a m_a\bm\rho_a = 0$而消失。这区分整体平移与内部运动。
 
-关于惯性系中固定原点的角动量为$\bm\ell=\sum_a\bm r_a\times m_a\dotbm{r}_a$。
-若内部力还沿两粒子连线，则其内力矩相消，
-\begin{equation}
- \dotbm{\ell}=\bm\tau_\external,\qquad
- \bm\ell=\bm R\times M\dotbm{R}+\bm\ell_\CM.
+关于惯性系中固定原点的角动量为
+\begin{equation}\label{eq:cm-total-angular-momentum}
+ \bm\ell = \sum_a\bm r_a \times m_a\dotbm{r}_a.
 \end{equation}
+若内部力还沿两粒子连线，则其内力矩相消，
+\begin{subequations}
+ \begin{align}
+  \dotbm{\ell} &= \bm\tau_\external,\\
+  \bm\ell &= \bm R \times M\dotbm{R} + \bm\ell_\CM.
+ \end{align}
+\end{subequations}
 第一项是质心的轨道角动量，第二项是关于质心的角动量；
-关于质心同样有$\dotbm{\ell}_\CM=\bm\tau_{\external,\CM}$。
+关于质心同样有$\dotbm{\ell}_\CM = \bm\tau_{\external,\CM}$。
 对任意运动的取矩点则须重新求导，不能直接套用固定原点公式。
 含电磁场的系统还可能需要计入场动量，不能只对粒子强行假定内力遵循上述成对关系。
 
 \section{碰撞和变质量：先选闭合系统}
 若碰撞期间外力冲量可忽略，系统碰前后的总动量相同。在下述两质点模型中，弹性碰撞还要求碰前后的总平动动能相等。
 一维两物体碰撞可用恢复系数$e$补充关系
-\begin{equation}
- v_2'-v_1'=-e(v_2-v_1),\qquad
- \Delta T=-\frac12\mu(1-e^2)(v_1-v_2)^2,
- \quad \mu=\frac{m_1m_2}{m_1+m_2}.
-\end{equation}
-这里碰前两物体相互接近，$0\leq e\leq1$是常见被动碰撞模型；$e=0$时碰后两者速度相同。
+\begin{subequations}
+ \begin{align}
+  v_2' - v_1' &= -e(v_2 - v_1),\\
+  \Delta T &= -\frac12\mu(1 - e^2)(v_1 - v_2)^2,\\
+  \mu &= \frac{m_1m_2}{m_1 + m_2}.
+ \end{align}
+\end{subequations}
+这里碰前两物体相互接近，$0 \leq e \leq 1$是常见被动碰撞模型；$e = 0$时碰后两者速度相同。
 质心动能不变，损失来自相对运动的动能。
 
-火箭不是固定成员的粒子集合。取前进方向为正，设喷气相对火箭的速度为$-u$，$u>0$，
-在$\d t$内排出质量$-\d m>0$。对“火箭加刚排出的气体”用动量定理，保留一阶小量：
-\begin{equation}
- mv+F_\external\d t=(m+\d m)(v+\d v)+(-\d m)(v-u),
-\end{equation}
+火箭不是固定成员的粒子集合。取前进方向为正，设喷气相对火箭的速度为$-u$，$u > 0$，
+在$\d t$内排出质量$-\d m > 0$。对“火箭加刚排出的气体”用动量定理，保留一阶小量：
+\[
+ mv + F_\external\d t = (m + \d m)(v + \d v) + (-\d m)(v - u),
+\]
 于是
 \begin{equation}
- m\dot v=F_\external-u\dot m.
+ m\dot v = F_\external - u\dot m.
 \end{equation}
-无外力且$u$恒定时，$v_f-v_i=u\ln(m_i/m_f)$。
-直接对火箭写$F_\external=\d(mv)/\nd t$会漏掉穿越系统边界的动量流。
+无外力且$u$恒定时，$v_\final - v_\initial = u\ln(m_\initial/m_\final)$。
+直接对火箭写$F_\external = \d(mv)/\nd t$会漏掉穿越系统边界的动量流。
 
 \paragraph{复习与阅读}
 Newton方程给出各分量的运动；守恒律减少要求解的自由度。

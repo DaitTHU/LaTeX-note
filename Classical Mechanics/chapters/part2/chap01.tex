@@ -1,48 +1,56 @@
 \chapter{从约束到Lagrange方程}
 
 \section{单摆为什么只需要一个方程}
-平面单摆的质点有两个笛卡尔坐标，却必须满足$x^2+y^2=l^2$。
+平面单摆的质点有两个 Cartesian 坐标，却必须满足$x^2 + y^2 = l^2$。
 直接使用Newton方程，要同时求$x,y$和未知张力；用摆角$\theta$描述位置，约束自动满足，
 张力又与允许的瞬时位移垂直，因此可以在求摆角运动时消去。
 Lagrange方法把这一想法推广到许多自由度。
 
-设$N$个粒子受到独立的完整约束$f_\alpha(\bm r_1,\ldots,\bm r_N,t)=0$，
-局部可以用$n$个独立广义坐标表示位置：$\bm r_a=\bm r_a(q_1,\ldots,q_n,t)$。
+设$N$个粒子受到独立的完整约束$f_\alpha(\bm r_1,\ldots,\bm r_N,t) = 0$，
+局部可以用$n$个独立广义坐标表示位置：$\bm r_a = \bm r_a(q_1,\ldots,q_n,t)$。
 广义坐标可以是长度、角度或其他参数，未必具有相同量纲。
 “独立”要求约束的Jacobian具有所需的满秩；坐标在极点等位置退化时应换坐标。
 
 在同一时刻比较两条允许位置，得到虚位移
 \begin{equation}
- \vd\bm r_a=\sum_i\pv{\bm r_a}{q_i}\vd q_i,\qquad \vd t=0.
+ \vd\bm r_a = \sum_i\pv{\bm r_a}{q_i}\vd q_i,\qquad \vd t = 0.
 \end{equation}
-它不同于实际位移$\d\bm r_a=\sum_i(\p\bm r_a/\p q_i)\d q_i+(\p\bm r_a/\p t)\d t$。
+实际位移还包含约束显含时间的贡献，
+\begin{equation}\label{eq:cm-actual-displacement}
+ \d\bm r_a = \sum_i\pv{\bm r_a}{q_i}\d q_i + \pv{\bm r_a}{t}\d t.
+\end{equation}
 例如运动支座的约束力可对实际运动做功，同时对允许虚位移不做功。
 
 \section{从Newton方程推导}
 以下在惯性系中使用Newton方程，并取各粒子质量$m_a$恒定。
 把力分为主动力$\bm F_a$与约束力$\bm R_a$。
-对于理想约束，$\sum_a\bm R_a\cdot\vd\bm r_a=0$，于是
+对于理想约束，$\textstyle \sum_a\bm R_a \cdot \vd\bm r_a = 0$，于是
 \begin{equation}
- \sum_a(\bm F_a-m_a\ddot{\bm r}_a)\cdot\vd\bm r_a=0.
+ \sum_a(\bm F_a - m_a\ddot{\bm r}_a) \cdot \vd\bm r_a = 0.
  \label{eq:cm-dalembert}
 \end{equation}
-这就是d'Alembert形式。定义$T=\tfrac12\sum_a m_a\dotbm{r}_a^2$与广义力
-$Q_i=\sum_a\bm F_a\cdot\p\bm r_a/\p q_i$。
-由$\p\dotbm{r}_a/\p\dot q_i=\p\bm r_a/\p q_i$及链式法则，
-\begin{align}
+这就是d'Alembert形式。系统的动能与主动力对应的广义力分别为
+\begin{subequations}\label{eq:cm-generalized-force}
+ \begin{align}
+  T &= \frac12\sum_a m_a\dotbm{r}_a^2,\\
+  Q_i &= \sum_a\bm F_a \cdot \pv{\bm r_a}{q_i}.
+ \end{align}
+\end{subequations}
+由$\p\dotbm{r}_a/\p\dot q_i = \p\bm r_a/\p q_i$及链式法则，
+\begin{align*}
  \dd{t}\pv{T}{\dot q_i}
- &=\sum_a m_a\ddot{\bm r}_a\cdot\pv{\bm r_a}{q_i}
- +\sum_a m_a\dotbm{r}_a\cdot\dd{t}\pv{\bm r_a}{q_i},\\
- \pv T{q_i}&=\sum_a m_a\dotbm{r}_a\cdot\pv{\dotbm{r}_a}{q_i}
- =\sum_a m_a\dotbm{r}_a\cdot\dd{t}\pv{\bm r_a}{q_i}.
-\end{align}
+ &= \sum_a m_a\ddot{\bm r}_a \cdot \pv{\bm r_a}{q_i}
+ + \sum_a m_a\dotbm{r}_a \cdot \dd{t}\pv{\bm r_a}{q_i},\\
+ \pv T{q_i} &= \sum_a m_a\dotbm{r}_a \cdot \pv{\dotbm{r}_a}{q_i}
+ = \sum_a m_a\dotbm{r}_a \cdot \dd{t}\pv{\bm r_a}{q_i}.
+\end{align*}
 相减并利用独立的$\vd q_i$，得到
 \begin{equation}
- \dd{t}\pv T{\dot q_i}-\pv T{q_i}=Q_i.
+ \dd{t}\pv T{\dot q_i} - \pv T{q_i} = Q_i.
 \end{equation}
-若主动力可分为$-\nabla_aV$与其余部分，令$L=T-V$，则
+若主动力可分为$-\nabla_aV$与其余部分，令$L = T - V$，则
 \begin{equation}
- \boxed{\dd{t}\pv L{\dot q_i}-\pv L{q_i}=Q_i^\nonconservative.}
+ \boxed{\dd{t}\pv L{\dot q_i} - \pv L{q_i} = Q_i^\nonconservative.}
  \label{eq:cm-el}
 \end{equation}
 广义力与对应坐标互为功的共轭：$Q_i\vd q_i$的量纲为能量。
@@ -53,77 +61,81 @@ $Q_i=\sum_a\bm F_a\cdot\p\bm r_a/\p q_i$。
 
 \begin{example}{移动支点的单摆}{cm-moving-pendulum}
 支点沿水平方向按给定函数$a(t)$运动，取
-$x=a(t)+l\sin\theta$，$y=-l\cos\theta$。
+$x = a(t) + l\sin\theta$，$y = -l\cos\theta$。
 忽略仅依赖时间的加项后，
 \begin{equation}
- L=\frac12ml^2\dot\theta^2+ml\dot a\dot\theta\cos\theta+mgl\cos\theta.
+ L = \frac12ml^2\dot\theta^2 + ml\dot a\dot\theta\cos\theta + mgl\cos\theta.
 \end{equation}
 Euler--Lagrange方程给出
 \begin{equation}
- \ddot\theta+\frac gl\sin\theta=-\frac{\ddot a}{l}\cos\theta.
+ \ddot\theta + \frac gl\sin\theta = -\frac{\ddot a}{l}\cos\theta.
 \end{equation}
-支点的加速度而非速度驱动摆角；$\ddot a=0$时恢复普通单摆，符合Galileo相对性。
+支点的加速度而非速度驱动摆角；$\ddot a = 0$时恢复普通单摆，符合Galileo相对性。
 该例中支点可以做功，不能预先假定摆的机械能守恒。
 \end{example}
 
 \section{驻定作用量，而不总是最小作用量}
 对于无非保守广义力的系统，定义
 \begin{equation}
- S[q]=\int_{t_1}^{t_2}L(q,\dot q,t)\d t.
+ S[q] = \int_{t_1}^{t_2}L(q,\dot q,t)\d t.
 \end{equation}
-取$q_i(t)\mapsto q_i(t)+\epsilon\eta_i(t)$，其中$\eta_i(t_1)=\eta_i(t_2)=0$。
+取$q_i(t) \mapsto q_i(t) + \epsilon\eta_i(t)$，其中$\eta_i(t_1) = \eta_i(t_2) = 0$。
 分部积分给出
 \begin{align}
  \vd S
- &=\sum_i\Bigb{\pv L{\dot q_i}\vd q_i}_{t_1}^{t_2}
- +\int_{t_1}^{t_2}\sum_i\Bigp{\pv L{q_i}-\dd{t}\pv L{\dot q_i}}\vd q_i\d t.
+ &= \sum_i\Bigb{\pv L{\dot q_i}\vd q_i}_{t_1}^{t_2}
+ + \int_{t_1}^{t_2}\sum_i\Bigp{\pv L{q_i} - \dd{t}\pv L{\dot q_i}}\vd q_i\d t.
 \end{align}
-端点项为零，对任意内部变分令$\vd S=0$就得到Lagrange方程。
+端点项为零，对任意内部变分令$\vd S = 0$就得到Lagrange方程。
 这固定了两端的时刻与位置，并不要求粒子预先“知道终点”；预测仍可用初值求解。
 驻定路径可能是局部最小或鞍点，不能一概称为“最小”。
 
-若$L'=L+\d F(q,t)/\nd t$，作用量只增加端点差，故固定端点方程不变。
+若$L' = L + \d F(q,t)/\nd t$，作用量只增加端点差，故固定端点方程不变。
 这解释了为什么不同形式的Lagrangian可以描述同一运动。
 
 \section{约束反力与耗散怎样放回来}
-若仍希望求约束力，可保留冗余坐标，并对完整约束$f_\alpha(q,t)=0$引入乘子：
+若仍希望求约束力，可保留冗余坐标，并对完整约束$f_\alpha(q,t) = 0$引入乘子：
 \begin{equation}
- \dd{t}\pv L{\dot q_i}-\pv L{q_i}
- =Q_i^\nonconservative+\sum_\alpha\lambda_\alpha\pv{f_\alpha}{q_i}.
+ \dd{t}\pv L{\dot q_i} - \pv L{q_i}
+ = Q_i^\nonconservative + \sum_\alpha\lambda_\alpha\pv{f_\alpha}{q_i}.
 \end{equation}
 配合约束方程一起求解。$\lambda_\alpha$的数值和量纲依赖$f_\alpha$的归一化，
 真实约束力是其与约束梯度的乘积；不要未经换算就把乘子本身叫作张力。
 
-对线性黏滞阻尼，若广义力可写为$Q_i^\nonconservative=-\sum_jc_{ij}\dot q_j$，
+对线性黏滞阻尼，若广义力可写为$\textstyle Q_i^\nonconservative = -\sum_jc_{ij}\dot q_j$，
 其中$C$对称半正定，可定义Rayleigh耗散函数
-\begin{equation}
- \mathcal R=\frac12\sum_{ij}c_{ij}\dot q_i\dot q_j,\qquad
- Q_i^\nonconservative=-\pv{\mathcal R}{\dot q_i},\qquad
- \sum_iQ_i^\nonconservative\dot q_i=-2\mathcal R\leq0.
-\end{equation}
-$\mathcal R$具有功率量纲，不是附加势能；不能简单写$L=T-V-\mathcal R$后使用无耗散方程。
+\begin{subequations}
+ \begin{align}
+  \mathcal R &= \frac12\sum_{ij}c_{ij}\dot q_i\dot q_j,\\
+  Q_i^\nonconservative &= -\pv{\mathcal R}{\dot q_i},\\
+  \sum_iQ_i^\nonconservative\dot q_i &= -2\mathcal R \leq 0.
+ \end{align}
+\end{subequations}
+$\mathcal R$具有功率量纲，不是附加势能；不能简单写$L = T - V - \mathcal R$后使用无耗散方程。
 干摩擦等力不一定具有这样的二次耗散函数。
 
 \section{循环坐标、能量与Noether关系}
-定义广义动量$p_i=\p L/\p\dot q_i$。当$\p L/\p q_j=0$且$Q_j^\nonconservative=0$时，
+定义广义动量$p_i = \p L/\p\dot q_i$。当$\p L/\p q_j = 0$且$Q_j^\nonconservative = 0$时，
 $q_j$称为循环坐标，$p_j$守恒。
-例如中心势中$\phi$循环，$p_\phi=\mu r^2\dot\phi$就是角动量。
+例如中心势中$\phi$循环，$p_\phi = \mu r^2\dot\phi$就是角动量。
 
-定义能量函数$E_L=\sum_i\dot q_ip_i-L$，沿运动方程有
+定义能量函数$\textstyle E_L = \sum_i\dot q_ip_i - L$，沿运动方程有
 \begin{equation}
- \dv{E_L}{t}=-\pv L t+\sum_iQ_i^\nonconservative\dot q_i.
+ \dv{E_L}{t} = -\pv L t + \sum_iQ_i^\nonconservative\dot q_i.
  \label{eq:cm-lagrange-energy}
 \end{equation}
-所以无非保守力且$\p L/\p t=0$时$E_L$守恒。
-当$T$对$\dot q$为二次齐次式且$V$与速度无关时，由Euler齐次函数定理直接得到$E_L=T+V$。
+所以无非保守力且$\p L/\p t = 0$时$E_L$守恒。
+当$T$对$\dot q$为二次齐次式且$V$与速度无关时，由Euler齐次函数定理直接得到$E_L = T + V$。
 显含时间的坐标变换或速度相关相互作用，需要实际计算后再判断能量的物理含义。
 
-对不改变时间的无穷小变换$\vd q_i=\epsilon\xi_i(q,t)$，若对任意允许路径
-（而非仅对某条运动方程的解）都有$\vd L=\epsilon\d B/\nd t$，由运动方程可得
-\begin{equation}
- \vd L=\epsilon\dd{t}\biggp{\sum_i p_i\xi_i},\qquad
- \mathcal Q=\sum_i p_i\xi_i-B=\const.
-\end{equation}
+对不改变时间的无穷小变换$\vd q_i = \epsilon\xi_i(q,t)$，若对任意允许路径
+（而非仅对某条运动方程的解）都有$\vd L = \epsilon\d B/\nd t$，由运动方程可得
+\begin{subequations}
+ \begin{align}
+  \vd L &= \epsilon\dd{t}\biggp{\sum_i p_i\xi_i},\\
+  \mathcal Q &= \sum_i p_i\xi_i - B = \const.
+ \end{align}
+\end{subequations}
 这是一种常用的Noether关系：连续对称性可以允许Lagrangian改变一个全导数。
 空间平移给出动量，旋转给出角动量；时间平移的结论由式\eqref{eq:cm-lagrange-energy}体现。
 上述推导对在壳运动且无非保守广义力成立，不能把有外部驱动的粒子子系统任意视为封闭系统。
@@ -132,18 +144,20 @@ $q_j$称为循环坐标，$p_j$守恒。
 半径$a$的光滑竖直圆环绕竖直直径以给定角速度$\Omega$转动，
 用从最低点量起的$\theta$描述小珠。惯性系动能和势能给出
 \begin{equation}
- L=\frac12ma^2\bigl(\dot\theta^2+\Omega^2\sin^2\theta\bigr)+mga\cos\theta,
+ L = \frac12ma^2\bigl(\dot\theta^2 + \Omega^2\sin^2\theta\bigr) + mga\cos\theta,
 \end{equation}
 从而
-\begin{equation}
- \ddot\theta=\sin\theta\Bigp{\Omega^2\cos\theta-\frac ga},\qquad
- V_\eff=-mga\cos\theta-\frac12ma^2\Omega^2\sin^2\theta.
-\end{equation}
-最低点在$\Omega^2<g/a$时稳定，小振动频率为$\sqrt{g/a-\Omega^2}$。
-当$\Omega^2>g/a$时，出现$\cos\theta_0=g/(a\Omega^2)$的两个稳定平衡，
+\begin{subequations}
+ \begin{align}
+  \ddot\theta &= \sin\theta\Bigp{\Omega^2\cos\theta - \frac ga},\\
+  V_\eff &= -mga\cos\theta - \frac12ma^2\Omega^2\sin^2\theta.
+ \end{align}
+\end{subequations}
+最低点在$\Omega^2 < g/a$时稳定，小振动频率为$\sqrt{g/a - \Omega^2}$。
+当$\Omega^2 > g/a$时，出现$\cos\theta_0 = g/(a\Omega^2)$的两个稳定平衡，
 其小振动频率为$\abs{\Omega\sin\theta_0}$；最低点变得不稳定。
-临界点$\Omega^2=g/a$的二阶项消失，但四阶项为正，仍需非线性分析。
-这里守恒的是$E_L=ma^2\dot\theta^2/2+V_\eff$，
+临界点$\Omega^2 = g/a$的二阶项消失，但四阶项为正，仍需非线性分析。
+这里守恒的是$E_L = ma^2\dot\theta^2/2 + V_\eff$，
 不是小珠的惯性系机械能；维持圆环匀速转动的电机参与能量交换。
 \end{example}
 
