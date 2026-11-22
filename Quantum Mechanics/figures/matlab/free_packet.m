@@ -14,7 +14,7 @@ plot(position, density, LineWidth=1.5)
 xlim([-extent extent])
 xlabel('$(x-\langle\hat{X}\rangle)/\sigma_0$', Interpreter='latex')
 ylabel('$\sigma_0 |\psi|^2$', Interpreter='latex')
-pad_legend(legend("$t/t_s=" + time + "$", Interpreter='latex'));
+pad_legend(legend("$t/t_{\mathrm{s}}=" + time + "$", Interpreter='latex'));
 grid on
 set(findall(gcf, Type='AxesToolbar'), Visible='off')
 exportgraphics(gca, '../free_packet.pdf', ContentType='vector', BackgroundColor='none')

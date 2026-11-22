@@ -137,7 +137,7 @@
     \label{franck-hertz-tube}
     \def\gridX{3.5} \def\collectorX{5.1} \def\plate{.68} \def\wall{.46}
     \draw[rounded corners,black!50] (-\wall,-\plate-\wall) rectangle (\collectorX+\wall,\plate+\wall);
-    \foreach \pos/\name/\potential in {0/K/0,\gridX/G/U,\collectorX/C/{U-U_r}}{
+    \foreach \pos/\name/\potential in {0/K/0,\gridX/G/U,\collectorX/C/{U-U_{\mathrm{r}}}}{
         \node[above] at (\pos,\plate) {$\mathrm{\name}$};
         \node[below] at (\pos,-\plate-\wall) {$\potential$};
     }
@@ -170,23 +170,43 @@
     }
     \draw (\screenX,\dimensionY) -- (\screenX,-\dimensionY);
     \draw[dashed,gray] (0,0) -- (\screenX,0);
-    \node[above] at (\magLength/2,\poleHeight) {$G=\partial_z B_z$};
+    \node[above] at (\magLength/2,\poleHeight) {$G = \partial_z B_z$};
     \draw[<->] (0,\dimensionY) -- node[above] {$\ell$} (\magLength,\dimensionY);
     \draw[<->] (\magLength,\dimensionY) -- node[above] {$D$} (\screenX,\dimensionY);
     \draw[->] (\ovenX,\poleGap) -- (\ovenX,-\dimensionY) node[right] {$z$};
 \end{tikzpicture}
 
 \standaloneconfig{border=0pt}
-\begin{tikzpicture}[>=stealth,x=1cm,y=1cm]
+\begin{tikzpicture}[>=Latex,
+    stage/.style={draw=ink,fill=ink!5,minimum width=1.3cm,minimum height=.68cm},
+    beam/.style={blue!65!black,thick},
+    empty port/.style={gray,dashed}, occupied port/.style={beam,->}]
     \label{sg-filters}
-    \draw[->] (0,0)--(1,0);
-    \node[draw,minimum width=1.5cm,minimum height=.9cm] at (1.75,0) {$z$筛选};
-    \draw[->] (2.5,0)--(4.2,0) node[midway,above] {$\ket{+z}$};
-    \node[draw,minimum width=1.5cm,minimum height=.9cm] at (4.95,0) {$x$筛选};
-    \draw[->] (5.7,0)--(7.4,0) node[midway,above] {$\ket{+x}$};
-    \node[draw,minimum width=1.5cm,minimum height=.9cm] at (8.15,0) {$z$分析};
-    \draw[->] (8.9,.15)--(10.4,.6) node[right] {$+z$};
-    \draw[->] (8.9,-.15)--(10.4,-.6) node[right] {$-z$};
+    % 两行分别实验，末级的百分数均以抵达该级的原子为分母。
+    \node[stage] (za) at (0,2.7) {$z$ 筛选};
+    \node[stage] (finala) at (6.4,3.22) {$z$ 分析};
+    \node[stage] (zb) at (0,0) {$z$ 筛选};
+    \node[stage] (xb) at (3.2,.52) {$x$ 筛选};
+    \node[stage] (finalb) at (6.4,1.04) {$z$ 分析};
+    \foreach \stage/\panel in {za/a,zb/b}{
+        \draw[beam,->] ($(\stage.west)+(-.9,0)$) node[left,text=black] {(\panel)}
+            -- (\stage.west);
+    }
+    \foreach \src/\axis/\dst in {za/z/finala,zb/z/xb,xb/x/finalb}{
+        \draw[beam,->] ($(\src.east)+(0,.12)$) -- ++(.62,.4)
+            -- node[above,text=black] {$\ket{+\axis}$} (\dst.west);
+        \draw[beam] ($(\src.east)+(0,-.12)$) -- ++(.62,-.4)
+            -- ++(.65,0) coordinate (stop);
+        \node[below] at ($(stop)+(-.32,0)$) {$-\axis$};
+        \draw[black,very thick] ($(stop)+(0,-.13)$) -- ($(stop)+(0,.13)$);
+    }
+    \foreach \src/\upper/\lower/\lowerstyle in
+        {finala/100/0/empty port,finalb/50/50/occupied port}{
+        \draw[beam,->] ($(\src.east)+(0,.12)$) -- ++(.62,.4) -- ++(.46,0)
+            node[right,text=black] {$+z\quad\upper\%$};
+        \draw[\lowerstyle] ($(\src.east)+(0,-.12)$) -- ++(.62,-.4) -- ++(.46,0)
+            node[right,text=black] {$-z\quad\lower\%$};
+    }
 \end{tikzpicture}
 
 \begin{tikzpicture}[x=1cm,y=1cm, >=stealth]
@@ -216,8 +236,227 @@
     \end{scope}
 \end{tikzpicture}
 
+% 相邻晶面 Bragg 散射的路程差。
+\begin{tikzpicture}[>=Latex,
+    ray/.style={ink,thick,postaction={decorate},decoration={
+        markings,mark=at position .55 with {\arrow{Latex}}}},
+    extra/.style={longwave,line width=1.5pt}]
+    \label{bragg-path-difference}
+    \def\braggAngle{34}
+    \coordinate (lower) at (0,0);
+    \coordinate (upper) at (0,1.75);
+    \coordinate (incident) at ($(lower)+(180-\braggAngle:3.6)$);
+    \coordinate (outgoing) at ($(lower)+(\braggAngle:3.6)$);
+    % 上层散射点在下层两条传播方向上的垂足。
+    \coordinate (left foot) at ($(lower)!(upper)!(incident)$);
+    \coordinate (right foot) at ($(lower)!(upper)!(outgoing)$);
+
+    \foreach \plane in {upper,lower}
+        \draw[black!55] ($(\plane)+(-3.35,0)$) -- ($(\plane)+(3.35,0)$);
+    \draw[ray] ($(upper)+(180-\braggAngle:2.6)$) node[above] {入射波} -- (upper);
+    \draw[ray] (upper) -- ($(upper)+(\braggAngle:2.6)$) node[above] {散射波};
+    \draw[ray] (incident) -- (lower);
+    \draw[ray] (lower) -- (outgoing);
+
+    \draw[black!65,dashed] (left foot) -- (upper) -- (right foot);
+    \begin{scope}[shift={(left foot)},rotate=-\braggAngle]
+        \draw[black!65] (.12,0) -- (.12,.12) -- (0,.12);
+    \end{scope}
+    \begin{scope}[shift={(right foot)},rotate=\braggAngle]
+        \draw[black!65] (-.12,0) -- (-.12,.12) -- (0,.12);
+    \end{scope}
+    \draw[extra] (left foot) -- node[pos=.26,below left,inner sep=1.5pt] {$d\sin\theta$} (lower);
+    \draw[extra] (lower) -- node[pos=.74,below right,inner sep=1.5pt] {$d\sin\theta$} (right foot);
+    \draw[<->,black!75] (lower) -- node[midway,right,inner sep=2pt] {$d$} (upper);
+    \draw (upper) ++(180:.65) arc[start angle=180,end angle=180-\braggAngle,radius=.65];
+    \path (upper) ++(180-\braggAngle/2:.89) node {$\theta$};
+\end{tikzpicture}
+
+% 两路径干涉仪，正负端口按相位零点标定。
+\begin{tikzpicture}[>=Latex,
+    beam/.style={draw=blue!65!black,thick},
+    traveling/.style={beam,postaction={decorate},decoration={
+        markings,mark=at position .53 with {\arrow{Latex}}}},
+    mirror/.style={draw=ink,line width=1.6pt},
+    splitter/.style={draw=teal!70!black,line width=1.6pt,dashed},
+    detector/.style={draw=ink,rounded corners=1.5pt,fill=black!4,inner sep=3pt}]
+    \label{two-path-interferometer}
+    \coordinate (split) at (0,0);
+    \coordinate (upper) at (0,1.85);
+    \coordinate (lower) at (4.8,0);
+    \coordinate (combine) at (4.8,1.85);
+    \node[left] (input) at (-1.45,0) {入射};
+    \node[detector] (plus) at (7,1.85) {$+$ 探测器};
+    \node[detector] (minus) at (4.8,3.05) {$-$ 探测器};
+    \node[detector,fill=teal!6] (phase) at (2.4,0) {移相 $\varphi$};
+    \draw[traveling] (input.east) -- (split);
+    \draw[traveling] (split) -- (upper);
+    \draw[traveling] (upper) -- node[above] {路径 $a$} (combine);
+    \draw[traveling] (split) -- (phase.west);
+    \draw[traveling] (phase.east) -- (lower);
+    \draw[traveling] (lower) -- (combine);
+    \node[below=1mm] at (phase.south) {路径 $b$};
+    \draw[beam,->] (combine) -- (plus.west);
+    \draw[beam,->] (combine) -- (minus.south);
+    \foreach \optic in {split,combine}
+        \draw[splitter] ($(\optic)+(-.24,-.24)$) -- ($(\optic)+(.24,.24)$);
+    \foreach \optic/\back in {upper/1,lower/-1}{
+        \begin{scope}[shift={(\optic)},rotate=45]
+            \foreach \s in {-.30,-.18,-.06,.06,.18,.30}
+                \draw[ink,thin] (\s,0) -- ++(.06,.09*\back);
+        \end{scope}
+        \draw[mirror] ($(\optic)+(-.24,-.24)$) -- ($(\optic)+(.24,.24)$);
+    }
+    \node[below left] at (split) {分束器};
+    \node[below right] at (combine) {合束器};
+\end{tikzpicture}
+
 % 第 3 章
 \standaloneconfig{border=5pt}
+% 同一右手坐标系的正交投影。球面、赤道用纸面坐标，态和旋转轴用 xyz 坐标。
+\tikzset{
+    bloch coordinates/.style={x={(-.8cm,-.3cm)},y={(.6cm,-.4cm)},z={(0cm,.866025cm)}},
+    bloch state/.style={curve,line width=1.35pt,-{Latex[length=2.2mm]}},
+    bloch orbit/.style={curve,thick,postaction={decorate},
+        decoration={markings,mark=at position .55 with {\arrow{Stealth[length=1.8mm]}}}},
+    bloch rotation axis/.style={longwave,thick,densely dashed,-{Stealth[length=1.9mm]}}
+}
+\newcommand{\blochSphere}{%
+    \draw[ink!40] (0,0) circle (1);
+    \draw[ink!30,densely dashed] (-1,0) arc[start angle=180,end angle=0,x radius=1,y radius=.5];
+    \draw[ink!43] (-1,0) arc[start angle=180,end angle=360,x radius=1,y radius=.5];
+    \begin{scope}[bloch coordinates]
+        \foreach \tip in {(1.38,0,0),(0,1.46,0),(0,0,1.39)}
+            \draw[ink!60,-{Stealth[length=1.1mm]}] (0,0,0) -- \tip;
+    \end{scope}
+}
+\newcommand{\blochLabels}{%
+    \begin{scope}[bloch coordinates,every node/.style={inner sep=1pt,text=ink}]
+        \node[left] at (1.38,0,0) {$x$};
+        \node[below right] at (0,1.46,0) {$y$};
+        \node[above] at (0,0,1.39) {$z$};
+    \end{scope}
+}
+
+\begin{tikzpicture}
+    \label{spin-precession}
+    \foreach \pos/\phase/\angletext/\prob in
+        {0/0/0/1,3.65/90/{\pi/2}/{1/2},7.3/180/{\pi}/0}{
+        \begin{scope}[shift={(\pos,0)}]
+            \blochSphere
+            \blochLabels
+            \begin{scope}[bloch coordinates]
+                \ifnum\phase>0
+                    \draw[bloch orbit] plot[variable=\a,domain=0:\phase,samples=48]
+                        ({cos(\a)},{sin(\a)},0);
+                \fi
+                \draw[bloch state] (0,0,0) -- ({cos(\phase)},{sin(\phase)},0);
+            \end{scope}
+            \node[below,align=center] at (0,-1.08)
+                {$\omega_0t = \angletext$\\$P_{+x} = \prob$};
+        \end{scope}
+    }
+\end{tikzpicture}
+
+\begin{tikzpicture}
+    \label{rabi-axes}
+    \foreach \pos/\tilt/\detuning in {0/0/0,3.45/45/\Omega}{
+        \begin{scope}[shift={(\pos,0)}]
+            \blochSphere
+            \blochLabels
+            \begin{scope}[bloch coordinates]
+                \draw[bloch rotation axis] (0,0,0) -- ({1.27*cos(\tilt)},0,{1.27*sin(\tilt)});
+                % 绕 (cos a,0,sin a) 将南极转过半圈；终点是首个布居峰。
+                \draw[bloch orbit] plot[variable=\b,domain=0:180,samples=64]
+                    ({-sin(\tilt)*cos(\tilt)*(1-cos(\b))},
+                     {cos(\tilt)*sin(\b)},{-sin(\tilt)^2-cos(\tilt)^2*cos(\b)});
+                \draw[bloch state] (0,0,0) -- ({-sin(2*\tilt)},0,{cos(2*\tilt)});
+                \filldraw[draw=curve,fill=white] (0,0,-1) circle[radius=1.5pt];
+            \end{scope}
+            \node[below] at (0,-1.07) {$\Delta = \detuning$};
+        \end{scope}
+    }
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=Latex,color=ink]
+    \label{ramsey-sequence}
+    \draw[->] (-1.6,0) -- (9.1,0) node[right] {$t$};
+    \foreach \start/\angle in {.35/{\pi/2},5.05/{-\pi/2}}{
+        \draw[draw=longwave,fill=longwave!12,thick] (\start,0) rectangle ++(.85,.49);
+        \node[above] at (\start+.425,.49) {$R_y(\angle)$};
+    }
+    \draw[<->] (1.2,.26) -- node[fill=white,inner ysep=0pt] {自由演化 $T$} (5.05,.26);
+    \node[above] at (-.9,0) {$\ket{+z}$};
+    \draw[thick] (8,-.10) -- (8,.10) node[above] {沿 $z$ 测量};
+    \foreach \pos/\stage in {1.2/第一脉冲后,4.65/等待结束,8/第二脉冲后}
+        \node at (\pos,-.45) {\stage};
+    \foreach \row/\phase/\sign/\xstate/\zstate/\prob in
+        {-1.80/0/1/{+x}/{+z}/1,-3.68/\pi/-1/{-x}/{-z}/0}{
+        \node[anchor=west] at (-1.7,\row) {$\Delta T = \phase$};
+        \foreach \pos/\sx/\sz/\state in {1.2/1/0/{+x},4.65/\sign/0/\xstate,8/0/\sign/\zstate}{
+            \begin{scope}[shift={(\pos,\row)},scale=.65]
+                \blochSphere
+                \begin{scope}[bloch coordinates]
+                    \ifnum\sx=-1
+                        \draw[bloch orbit] plot[variable=\a,domain=0:180,samples=40]
+                            ({cos(\a)},{sin(\a)},0);
+                    \fi
+                    \draw[bloch state] (0,0,0) -- (\sx,0,\sz);
+                \end{scope}
+                \node[right] at (1.18,0) {$\ket{\state}$};
+            \end{scope}
+        }
+        \node[right] at (9.65,\row) {$P_{+z} = \prob$};
+    }
+    \begin{scope}[shift={(1.2,-1.80)},scale=.65,font=\scriptsize]
+        \blochLabels
+    \end{scope}
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=Latex,color=ink]
+    \label{ammonia-inversion}
+    \begin{scope}[x=1.5cm]
+        \draw[->] (-2.95,0) -- (2.92,0) node[right] {$q$};
+        \draw[->] (-2.95,0) -- (-2.95,2.95) node[above] {能量};
+        \foreach \q/\energy in {-1.72/.25,0/2.05,1.72/.25}
+            \draw[ink!42,densely dotted] (\q,-.32) -- (\q,\energy);
+        \node[below right,inner sep=1pt] at (0,0) {$0$};
+        \draw[very thick,ink] plot[variable=\q,domain=-2.55:2.55,samples=101]
+            (\q,{.25+1.8*((\q/1.72)^2-1)^2});
+        \node[above] at (0,2.05) {势垒顶 $V(0)$};
+        \draw[curve,thick] (-2.12,.72) -- (2.12,.72);
+        \draw[shortwave,thick,dashed] (-2.25,1.16) -- (2.25,1.16);
+        \draw[<->] (2.57,.72) -- (2.57,1.16);
+        \node[right] at (2.60,.94) {$2J$};
+        \foreach \level/\value/\parity in {.72/{E_+=E_0-J}/对称,1.16/{E_-=E_0+J}/反对称}
+            \node[right] at (3.22,\level) {$\value$（\parity）};
+    \end{scope}
+    % 氢三角形的中心是局部原点。整体绕 Ha 与中心的连线转半圈，N 换向，Hb、Hc 换位。
+    \draw[ink!35] (4.12,-.52) -- (4.12,-2.55);
+    \foreach \center/\heightN/\upperH/\lowerH/\showaxis/\description in {
+        -2.58/-.68/b/c/1/{左阱 $\ket{\mathrm L}$},
+        0/0/b/c/0/{四核共面},
+        2.58/.68/b/c/0/{右阱 $\ket{\mathrm R}$},
+        5.98/.68/c/b/1/{左阱构型整体转 $180^\circ$}}{
+        \begin{scope}[shift={(\center,-1.43)}]
+            \coordinate (N) at (0,\heightN);
+            \coordinate (Ha) at (.96,0);
+            \coordinate (Hupper) at (-.48,.45);
+            \coordinate (Hlower) at (-.48,-.45);
+            \filldraw[fill=ink!6,draw=ink!45,densely dashed] (Ha)--(Hupper)--(Hlower)--cycle;
+            \foreach \atom in {Ha,Hupper,Hlower} \draw[ink,semithick] (N) -- (\atom);
+            \ifnum\showaxis=1
+                \draw[longwave,thick,dash dot] (-1.00,0) -- (1.25,0);
+                \fill[longwave] (0,0) circle[radius=1.3pt];
+            \fi
+            \foreach \atom/\tag in {Ha/a,Hupper/\upperH,Hlower/\lowerH}
+                \node[fill=white,inner sep=.5pt] at (\atom) {$\mathrm{H_{\tag}}$};
+            \node[fill=white,inner sep=.7pt,text=curve] at (N) {$\mathrm N$};
+            \node[below] at (0,-.86) {\description};
+        \end{scope}
+    }
+\end{tikzpicture}
+
 \begin{tikzpicture}[>=Latex,color=ink,x=4.6cm,y=.83cm]
     \label{well-detection}
     \begin{scope}
@@ -226,7 +465,7 @@
         \draw[ink!42,dashed] (1,-1.50) -- (1,1.50);
         \draw[curve,very thick,domain=0:1,samples=101] plot (\x,{sqrt(2)*sin(360*\x)});
         \node[below left] at (0,0) {$0$};
-        \node[above right,inner sep=2pt] at (.5,0) {$\frac12$};
+        \node[above right,inner sep=2pt] at (.5,0) {$1/2$};
         \node[below right,inner sep=2pt] at (1,0) {$1$};
     \end{scope}
     \begin{scope}[xshift=6.5cm,yshift=-1.00cm]
@@ -237,7 +476,7 @@
         \draw[curve,very thick,domain=0:1,samples=101] plot (\x,{2*sin(360*\x)^2});
         \draw (-.012,2) -- (.012,2) node[left=3pt] {$2$};
         \node[below left] at (0,0) {$0$};
-        \foreach \x/\ticktext in {.25/{\frac14},.5/{\frac12},.75/{\frac34},1/{1}}{
+        \foreach \x/\ticktext in {.25/{1/4},.5/{1/2},.75/{3/4},1/{1}}{
             \draw (\x,0) -- (\x,-.07) node[below] {$\ticktext$};
         }
     \end{scope}
@@ -289,7 +528,7 @@
 \foreach \n in {0,...,3}{
     \draw[level] (0,{(\n+.5)*\step}) -- (\span,{(\n+.5)*\step}) node[right] {$\ket{\n}$};
 }
-\draw[guide] (0,0) -- (\span,0) node[right,ink] {$E=0$};
+\draw[guide] (0,0) -- (\span,0) node[right,ink] {$E = 0$};
 \draw[<->] (-.35,1.5*\step) -- node[left] {$\hbar\omega$} (-.35,2.5*\step);
 \draw[signal,->] (\inset,1.5*\step) -- node[right] {$\op{a}\adjoint$} (\inset,2.5*\step);
 \draw[signal,->] (\span-\inset,1.5*\step) -- node[left] {$\op{a}$} (\span-\inset,.5*\step);
@@ -306,7 +545,7 @@
     \pgfmathsetmacro{\ring}{sqrt(\radius^2-(\momentumScale*\m)^2)}
     \draw[ink!30,dashed] (\ring,\momentumScale*\m) arc[start angle=0,end angle=180,x radius=\ring,y radius=\ring*\tilt];
     \draw[ink!50] (-\ring,\momentumScale*\m) arc[start angle=180,end angle=360,x radius=\ring,y radius=\ring*\tilt];
-    \draw[guide] (\ring,\momentumScale*\m) -- (\radius+.2,\momentumScale*\m) node[right,ink] {$m=\m$};
+    \draw[guide] (\ring,\momentumScale*\m) -- (\radius+.2,\momentumScale*\m) node[right,ink] {$m = \m$};
 }
 \pgfmathsetmacro{\reach}{sqrt(\radius^2-\momentumScale^2)}
 \draw[signal,->] (0,0) -- (\reach,\momentumScale);
@@ -317,9 +556,9 @@
 \begin{tikzpicture}[scale=1.3,>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
     \label{zeeman-triplet}
 \def\col{2.05} \def\halfwidth{.68} \def\excited{2.2} \def\split{.42}
-\draw[level] (-\col-\halfwidth,0) -- (\col+\halfwidth,0) node[right] {$j_l=0$};
+\draw[level] (-\col-\halfwidth,0) -- (\col+\halfwidth,0) node[right] {$j_\lo = 0$};
 \foreach \m/\pol in {-1/\sigma^-,0/\pi,1/\sigma^+}{
-    \draw[level] (\m*\col-\halfwidth,\excited+\m*\split) -- ++(2*\halfwidth,0) node[midway,above] {$m_u=\m$};
+    \draw[level] (\m*\col-\halfwidth,\excited+\m*\split) -- ++(2*\halfwidth,0) node[midway,above] {$m_\hi = \m$};
     \draw[signal,->] (\m*\col,\excited+\m*\split) -- node[right] {$\pol$} (\m*\col,0);
 }
 \end{tikzpicture}
@@ -334,11 +573,11 @@
         \draw[level] (\ell*\column-\halfline,-\binding/\n^2) -- ++(2*\halfline,0);
     \fi}
 }
-\draw[guide] (-\halfline,0) -- (3*\column+\halfline,0) node[right,ink] {$E=0$};
+\draw[guide] (-\halfline,0) -- (3*\column+\halfline,0) node[right,ink] {$E = 0$};
 \foreach \n/\offset in {1/0,2/0,3/-1.5,4/1.5}
-    \node[left,yshift=\offset pt] at (-\halfline,-\binding/\n^2) {$n=\n$};
+    \node[left,yshift=\offset pt] at (-\halfline,-\binding/\n^2) {$n = \n$};
 \def\finalN{2}
-\foreach \n/\initialL/\finalL/\tag/\linecolor in {3/1/0/\alpha/balmerAlpha,4/2/1/\beta/balmerBeta}{
+\foreach \n/\initialL/\finalL/\tag/\linecolor in {3/1/0/\upalpha/balmerAlpha,4/2/1/\upbeta/balmerBeta}{
     \draw[\linecolor,thick,->] (\initialL*\column,-\binding/\n^2) -- node[near end,above,sloped] {$\mathrm H_{\tag}$} (\finalL*\column,-\binding/\finalN^2);
 }
 \end{tikzpicture}
@@ -358,7 +597,7 @@
     \draw[linecolor,thick] ({pos(\wave)},0) -- ++(0,\lineheight);
     \ifnum\n<7 \node[above] at ({pos(\wave)},\lineheight) {$\n$};\fi
 }
-\draw[guide] ({pos(4/\rydberg)},0) -- ++(0,\stripheight) node[above,ink] {$n_i\to\infty$};
+\draw[guide] ({pos(4/\rydberg)},0) -- ++(0,\stripheight) node[above,ink] {$n_\initial \to \infty$};
 \draw[->] (0,0) -- (\axiswidth,0) node[right] {$\lambda/\unit{nm}$};
 \foreach \tick in {400,450,...,650}\draw ({pos(\tick)},0) -- ++(0,-.09) node[below] {$\tick$};
 \end{tikzpicture}
@@ -366,12 +605,12 @@
 % 第 8 章
 \begin{tikzpicture}[scale=1.2,color=ink,amplitude/.style={-{Latex[length=2mm]},line width=1pt,draw=amplitude}]
     \label{transition-phasors}
-    \node[anchor=west] at (-.03,2.20) {$\Delta E=0$};
+    \node[anchor=west] at (-.03,2.20) {$\Delta E = 0$};
     \foreach \step in {0,...,5}{
         \draw[amplitude] (.72*\step,1.79) -- ++(.72,0);
     }
     \node[anchor=west] at (-.03,1.32)
-        {$\bigabs{\sum_j\Delta c_j}=6\abs{\Delta c_1}$};
+        {$\bigabs{\sum_j\Delta c_j} = 6\abs{\Delta c_1}$};
 
     \coordinate (start) at (.38,.34);
     \coordinate (tip) at (start);
@@ -379,8 +618,8 @@
         \draw[amplitude] (tip) -- ++(\angle:.69) coordinate (tip);
     }
     \fill[ink] (start) circle (1.3pt);
-    \node[anchor=west] at (1.66,.16) {$|\Delta E|t/\hbar=2\pi$};
-    \node[anchor=west] at (1.66,-.46) {$\sum_j\Delta c_j=0$};
+    \node[anchor=west] at (1.66,.16) {$|\Delta E|t/\hbar = 2\pi$};
+    \node[anchor=west] at (1.66,-.46) {$\sum_j\Delta c_j = 0$};
 \end{tikzpicture}
 
 % 第 9 章
@@ -394,7 +633,7 @@
     (-\arm,0) .. controls (-\arm/2,\side*\height) and (\arm/2,\side*\height) .. (\arm,0);
     \node at (0,\side*\height) {$\branch$};
 }
-\foreach \side/\point/\anchor in {-1/i/north east,1/f/north west}{
+\foreach \side/\point/\anchor in {-1/\initial/north east,1/\final/north west}{
     \fill (\side*\arm,0) circle (2pt) node[anchor=\anchor] {$\mathbf x_\point$};
 }
 \end{tikzpicture}
@@ -412,7 +651,7 @@
     \draw[<->] (5.55,.08) -- (5.55,1.27) node[midway,left] {$w$};
     \draw[->] (2.85,.42) -- (3.65,.42) node[right] {$x$};
     \draw[->] (2.85,.42) -- (2.85,1.02) node[left] {$y$};
-    \node at (.75,.68) {$\odot\,B$};
+    \node at (.75,.68) {$\odot \,B$};
 \end{tikzpicture}
 
 % 第 11 章
@@ -420,7 +659,7 @@
 \begin{tikzpicture}[scale=1.25,>=Latex,station/.style={draw,fill=blue!8,minimum width=1.5cm},detector/.style={draw,rounded corners,fill=black!8}]
     \label{bell-pair}
     \def\arm{2.5} \def\readout{1.7} \def\split{0.65}
-    \node[draw,circle,fill=orange!20] (source) at (0,0) {$S$};
+    \node[draw,circle,fill=orange!20] (source) at (0,0) {$\mathrm{S}$};
     \foreach \side/\name/\settings in {-1/Alice/{a,a'},1/Bob/{b,b'}}{
         \node[station,label=above:\name] (analyzer) at (\side*\arm,0) {$\settings$};
         \draw[->,thick] (source) -- (analyzer);
@@ -492,7 +731,7 @@
     \foreach \col/\title in {0/Coulomb,1/Dirac,2/{Dirac + Lamb}}{
         \node[above] at (\col*\column,.48) {\textsf{\title}};
     }
-    \draw[level] (-\halfwidth,0) -- node[above] {$n=2$} (\halfwidth,0);
+    \draw[level] (-\halfwidth,0) -- node[above] {$n = 2$} (\halfwidth,0);
     \foreach \energy/\term in {\upper/{2\mathrm{p}_{3/2}},\lower/{2\mathrm{s}_{1/2},\,2\mathrm{p}_{1/2}}}{
         \draw[guide] (\halfwidth,0) -- (\column-\halfwidth,\energy);
         \draw[level] (\column-\halfwidth,\energy) -- node[above] {$\term$} (\column+\halfwidth,\energy);
@@ -512,15 +751,15 @@
     \label{lamb-readout}
     \def\drift{3} \def\driveGap{1.65}
     \node[stage] (source) {$\mathrm{H}(2\mathrm{s})$};
-    \node[stage,right=\drift cm of source] (drive) {$2\mathrm{s}\leftrightarrow 2\mathrm{p}$};
+    \node[stage,right=\drift cm of source] (drive) {$2\mathrm{s} \leftrightarrow 2\mathrm{p}$};
     \node[stage,right=\drift cm of drive] (detector) {$N_{2\mathrm{s}}$};
     \draw[beam] (source) -- (drive);
     \draw[beam] (drive) -- node[above] {$2\mathrm{s}$} (detector);
     \node[above=\driveGap cm of drive] (mw) {$\nu_{\rm mw}$};
     \draw[radiation=4.5mm,longwave] (mw) -- (drive);
-    \node[below=\driveGap cm of drive] (decay) {$2\mathrm{p}\to1\mathrm{s}$};
+    \node[below=\driveGap cm of drive] (decay) {$2\mathrm{p} \to 1\mathrm{s}$};
     \draw[->] (drive) -- (decay);
-    \node[right=\drift cm of decay] (uv) {$\gamma_{\rm UV}$};
+    \node[right=\drift cm of decay] (uv) {$\upgamma_{\mathrm{UV}}$};
     \draw[radiation,shortwave] (decay) -- (uv);
 \end{tikzpicture}
 
@@ -880,7 +1119,7 @@
     \addlegendentry{Planck}
     \addlegendentry{Rayleigh--Jeans}
     \addlegendentry{Wien}
-    \node at (0.18*\xmax,0.01*\ymax) {$T=\qty{300}{K}$};
+    \node at (0.18*\xmax,0.01*\ymax) {$T = \qty{300}{K}$};
 
   \end{loglogaxis}
 \end{tikzpicture}
@@ -928,7 +1167,7 @@
     \addlegendentry{Planck}
     \addlegendentry{Rayleigh--Jeans}
     \addlegendentry{Wien}
-    \node at (0.17*\xmax,0.01*\ymax) {$T=\qty{3000}{K}$};
+    \node at (0.17*\xmax,0.01*\ymax) {$T = \qty{3000}{K}$};
 
   \end{loglogaxis}
 \end{tikzpicture}
@@ -1039,7 +1278,7 @@
     % ARROW
     \draw[->,line width=2,myred] (7e3,1e2) --++ (-42:17mm)
       node[pos=0.38,above,sloped] {redshift}
-      node[pos=0.38,below,sloped] {$z\sim1100$};
+      node[pos=0.38,below,sloped] {$z \sim 1100$};
 
   \end{loglogaxis}
 \end{tikzpicture}
@@ -1154,6 +1393,28 @@
   \ticka{10/11*5.8,1}{\strut sun}
   \ticka{10/11*9.9,1}{\strut Sirius}
 
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=Latex,
+    light/.style={thick,blue!65!black,->},
+    readout/.style={draw=ink,rounded corners=1.5pt,fill=ink!4,inner sep=3pt}]
+    \label{hom-ports}
+    \coordinate (bs) at (0,0);
+    \node[left] (a) at (-3.5,0) {$a$};
+    \node[below] (b) at (0,-1.35) {$b$};
+    \node[draw=ink,fill=white] (delay) at (0,-.72) {延迟 $\tau$};
+    \node[readout] (c) at (3.1,0) {探测器 $c$};
+    \node[readout] (d) at (0,1.45) {探测器 $d$};
+    \node[readout] (both) at (3.1,1.45) {符合计数};
+    \draw[light] (a.east) -- (bs);
+    \draw[light] (b.north) -- (delay.south);
+    \draw[light] (delay.north) -- (bs);
+    \draw[light] (bs) -- (c.west);
+    \draw[light] (bs) -- (d.south);
+    \draw[teal!70!black,line width=1.6pt,dashed] (-.32,-.32) -- (.32,.32);
+    \node[above left] at (-.12,.1) {平衡分束器};
+    \draw[->] (c.north) -- (both.south);
+    \draw[->] (d.east) -- (both.west);
 \end{tikzpicture}
 
 \end{document}

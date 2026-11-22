@@ -14,6 +14,6 @@ hold on
 plot(time, coherence, LineWidth=1.5)
 xlabel('$t/T_1$', Interpreter='latex')
 ylabel('$Y(t)/Y(0)$', Interpreter='latex')
-pad_legend(legend(["$\rho_{ee}$", "$|\rho_{eg}|,\ \gamma_\phi T_1=" + dephasing + "$"], Interpreter='latex'));
+pad_legend(legend(["$\rho_{\mathrm{ee}}$", "$|\rho_{\mathrm{eg}}|,\ T_1/T_2=" + (1/2 + dephasing) + "$"], Interpreter='latex'));
 grid on
 exportgraphics(gca, '../relaxation.pdf', ContentType='vector', BackgroundColor='none')

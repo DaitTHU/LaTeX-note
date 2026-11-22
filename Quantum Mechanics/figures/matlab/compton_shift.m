@@ -11,6 +11,6 @@ plot(angle, shift, LineWidth=1.5)
 xticks(0:backscatter/4:backscatter)
 xlim([0 backscatter])
 xlabel('$\theta/{}^\circ$', Interpreter='latex')
-ylabel('$(\lambda''-\lambda)/\lambda_C$', Interpreter='latex')
+ylabel('$(\lambda''-\lambda)/\lambda_{\mathrm{C}}$', Interpreter='latex')
 grid on
 exportgraphics(gca, '../compton_shift.pdf', ContentType='vector', BackgroundColor='none')
