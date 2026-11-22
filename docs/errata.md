@@ -10,6 +10,8 @@
 
 ## 数学物理、概率统计与数值分析
 
+- **调查比例的标准误。** 在 1200 人中有 684 人支持的例题里，用无偏样本方差估计标准误，得到 $\sqrt{0.57(1-0.57)/1199}\approx0.01430$。对应的双侧 95% 正态近似区间为 $(0.5420,0.5980)$，旧版误写了标准误和区间右端点。[概率统计·区间估计](../Probability%20and%20Statistics/chapters/part2/chap01.tex)
+- **二元正态的条件均值。** 给定 $X_1=x_1$，条件均值为 $\mu_2+\rho(\sigma_2/\sigma_1)(x_1-\mu_1)$。旧版在条件期望例题中把最后一项的偏差误写成了平方。[概率统计·条件分布](../Probability%20and%20Statistics/chapters/part1/chap03.tex)
 - **热传导边界的导数方向。** 旧版在 Neumann 条件和半轴的 Robin 条件中写入了时间导数。给定边界通量时，应沿空间外法向取导数。半轴 $x>0$ 在左端满足 $\partial_n u=-\partial_xu$，故 $\partial_n u+\sigma u=g$ 在此处写成 $-u_x(0,t)+\sigma u(0,t)=g(t)$。[数学物理方法·定解条件](../Method%20of%20Mathematics%20and%20Physics/chapters/chap01.tex)
 - **显著性水平和不拒绝。** 显著性水平 $\alpha$ 是事先规定的第一类错误概率上界。对给定的零假设分布，$p$ 值是检验统计量出现当前观测值或更极端取值的概率，哪些取值更极端由检验预先规定。$p>\alpha$ 时结论为不拒绝零假设。旧版把小概率直接称为显著性水平，并把某些不拒绝结果解释成接受。[概率统计·假设检验](../Probability%20and%20Statistics/chapters/part2/chap02.tex) · [NIST 对临界值与 p 值的说明](https://www.itl.nist.gov/div898/handbook/prc/section1/prc131.htm)
 - **高阶常微分方程降阶。** 若原方程为 $y^{(n)}=f(x,y,\ldots,y^{(n-1)})$，将 $Y=(y,y',\ldots,y^{(n-1)})^{\mathsf T}$ 作为状态，则 $Y'$ 的最后一个分量仍是 $f$。旧版额外的负号会把 $y''=-\omega^2y$ 的振荡解改成指数解。[数值分析·常微分方程初值问题](../Numerical%20Analysis/chapters/chap09.tex)
@@ -30,12 +32,12 @@
 - **正则熵的计数。** 对 $M$ 个可区分的系统副本，$M!/\prod_s M_s!$ 计数的是全部副本的分配方式。取对数后须除以 $M$ 再取极限，才得到单个系统的熵 $-k_{\rm B}\sum_s\rho_s\ln\rho_s$。[统计力学·正则系综](../Statistical%20Mechanics/chapters/part2/chap04.tex)
 - **Bose 凝聚点的热容。** 对三维均匀理想 Bose 气体，$C_V(T_c)/(Nk_{\rm B})=15\zeta(5/2)/[4\zeta(3/2)]\simeq1.926$。从高温侧接近临界点时，逸度从下方趋于 1，$\operatorname{Li}_{1/2}$ 发散。旧版将这个极限归因于 $\zeta(s)$ 在 $s=1/2$ 有极点，并在热容公式中漏掉 $Nk_{\rm B}$。[统计力学·Bose 气体](../Statistical%20Mechanics/chapters/part2/chap03.tex) · [NIST 对 ζ 函数的定义](https://dlmf.nist.gov/25.2)
 - **固定物质的量与化学势。** 单组分均匀系统仅有体积功且可忽略表面效应时，内能对广延量一阶齐次，故 $U=TS-pV+\mu n$。取微分并与热力学基本关系比较，得到 $S\,\mathrm dT-V\,\mathrm dp+n\,\mathrm d\mu=0$。沿固定 $n$ 的过程可以令 $\mathrm dn=0$，但 $\mu n$ 和 $n\,\mathrm d\mu$ 仍须保留。[统计力学·Euler 方程与 Gibbs–Duhem 关系](../Statistical%20Mechanics/chapters/part1/chap02.tex)
-- **Fermi 巨配分函数的幂次。** 逆温度为 $\beta=1/(k_{\mathrm B}T)$。单个独立粒子态只允许占据 $0$ 或 $1$ 个费米子，因此对两种可能求和得到 $1+\exp[-\beta(\varepsilon-\mu)]$。简并度为 $g$ 的独立能级贡献这个因子的 $g$ 次幂，旧版的负幂会算错平均占据数。[统计力学·巨正则系综](../Statistical%20Mechanics/chapters/part2/chap04.tex)
+- **Fermi 巨配分函数的幂次。** 逆温度为 $\beta=1/(k_{\mathrm B}T)$。单个独立粒子态只允许占据 $0$ 或 $1$ 个 Fermi 子，因此对两种可能求和得到 $1+\exp[-\beta(\varepsilon-\mu)]$。简并度为 $g$ 的独立能级贡献这个因子的 $g$ 次幂，旧版的负幂会算错平均占据数。[统计力学·巨正则系综](../Statistical%20Mechanics/chapters/part2/chap04.tex)
 
 ## 量子力学
 
 - **氢原子波函数的衰减和归一化。** 旧稿把 $1s$ 总波函数的指数写成了正号。束缚态在无穷远处衰减，故 $\psi_{100}(r)=(\pi a_Z^3)^{-1/2}\exp(-r/a_Z)$。对一般径向态，体积元 $r^2\,\mathrm dr$ 使归一化积分比广义 Laguerre 多项式的正交权多一个径向因子，这时不同次数间的积分可以非零。[量子力学·氢原子的径向波函数](../Quantum%20Mechanics/chapters/chap06.tex)
-- **无限深方阱的宇称。** 旧稿把平移到箱中心后的奇偶解对调了。若能级从 $n=1$ 开始编号，关于中心反射的本征值为 $(-1)^{n+1}$。基态在中心的概率密度最大，第一激发态在中心有节点。[量子力学·箱中驻波](../Quantum%20Mechanics/chapters/position_well.tex)
+- **无限深方阱的宇称。** 旧稿把平移到箱中心后的奇偶解对调了。若能级从 $n=1$ 开始编号，关于中心反射的本征值为 $(-1)^{n+1}$。基态在中心的概率密度最大，第一激发态在中心有节点。[量子力学·箱中驻波](../Quantum%20Mechanics/chapters/chap03.tex)
 - **非简并微扰的能量分母。** 设 $H=H_0+\lambda V$。孤立非简并态 $n$ 的一阶态修正在第 $m\ne n$ 态上的分量为 $V_{mn}/(E_n^{(0)}-E_m^{(0)})$。旧版反写了能量差。对于离散谱的非简并基态，二阶能量修正中的每个分母都为负，可据此检查符号。简并时应先在简并子空间内处理扰动。[量子力学·定态近似方法](../Quantum%20Mechanics/chapters/chap07.tex)
 - **规范变换下的动量。** 对电荷 $q$，速度对应的机械动量为 $\boldsymbol\pi=\boldsymbol p-q\boldsymbol A$。同时变换态与矢势后，机械动量的期望值保持不变，旧版误把这一性质归给了正则动量 $\boldsymbol p$。[量子力学·机械动量与正则动量](../Quantum%20Mechanics/chapters/chap09.tex)
 
