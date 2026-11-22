@@ -595,11 +595,11 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\end{equation}
 \end{example}
 \paragraph{大样本方法}
-渐进置信区间
+渐近置信区间
 \begin{example}{选举问题的置信区间估计}{}
 	真实支持率$p$未知，$n = 1200$，观测比例
 	\[
-		\frac{684}{1200} \doteq 0.57
+		\frac{684}{1200} = 0.57.
 	\]
 	给出$p$的一个\qty{95}{\percent} 置信区间。
 
@@ -611,7 +611,7 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\[
 		\frac{P_n - p}{\sqrt{p(1 - p)/n}} \dotsim \NormalDist(0,1).
 	\]
-	由于$p$未知，这个方法不能直接用，需要进行一个好的估计。
+	分母含有未知参数$p$。可以估计标准误、给出标准误的上界，也可以直接对$p$求解。
 	\begin{compactenum}[I]
 		\item 用$S^2$估计$\sigma^2 = p(1 - p)$，则标准误差
 			\[
@@ -631,16 +631,16 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 				&= P_n(1 - P_n)^2 + (1 - P_n)(0 - P_n)^2 = P_n(1 - P_n).
 			\end{align*}
 			相当于用$P_n$估计$p$，所得区间取到四位小数仍为 $(0.5420,0.5980)$。
-		\item (Naïve)用$1/4$估计$p(1 - p)$，此时$\hat{\mathrm{se}} = 1/\sqrt{4n}$，估计结果为$(0.5417,0.5983)$。
-		\item (不具有推广性)由于 
+		\item 利用$p(1 - p) \le 1/4$，以$1/\sqrt{4n}$作为标准误的上界，得到近似区间$(0.5417,0.5983)$。
+		\item 保留标准误中的$p$，由双侧得分检验的边界方程
 		\[
 			\abs{P_n - p} = z_{\alpha/2}\sqrt{\frac{p(1 - p)}n},
 		\]
-		可以解出$p_\pm$，区间$(p_-,p_+) \doteq (0.5418,0.5977)$。
+		解出两个端点$p_\pm$，得到 Wilson 区间$(p_-,p_+) \doteq (0.5418,0.5977)$。
 	\end{compactenum}
 \end{example}
 \begin{example}{相合估计}{}
-	上例，极大似然估计$P^\ast = P_n$，由MLE的渐进正态性
+	上例，极大似然估计$P^\ast = P_n$，由MLE的渐近正态性
 	\[
 		\frac{P^\ast - p}{\sigma_n} \dotsim \NormalDist(0,1)
 	\]
