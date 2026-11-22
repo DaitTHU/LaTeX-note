@@ -7,7 +7,7 @@
 	{广延量和强度量}{extensive parameter & intensive parameter}
 	将处于同一状态的样品等比例放大，内能$U$、体积$V$、熵$S$和摩尔数$n$也随之等比例增大，这些量称为广延量(extensive parameter)。当子系统间的相互作用和界面贡献可忽略时，熵可加：
 	\begin{equation}
-		S(U,V,n)=\sum_{i=1}^kS_i(U_i,V_i,n_i).
+		S(U,V,n) = \sum_{i=1}^kS_i(U_i,V_i,n_i).
 	\end{equation}
 	而温度$T$、压强$p$%和化学势$\mu$
 	等物理量在样品等比例放大时保持不变，称为强度量(intensive parameter)。子系统间可自由交换热量时，平衡要求温度相等；可通过无外载荷的活动隔板交换体积时，平衡还要求压强相等。
@@ -15,73 +15,74 @@
 
 \begin{theorem}
 	{Euler方程}{Euler's equation}
-	设$r$元函数$f$在所讨论的点可微，且对任意$\lambda>0$满足$k$阶齐次条件
+	设$r$元函数$f$在所讨论的点可微，且对任意$\lambda > 0$满足$k$阶齐次条件
 	\begin{equation}
 		\label{eqn:k-order homogeneous}
-		f(\lambda x_1,\lambda x_2,\ldots,\lambda x_r)=\lambda^k f(x_1,x_2,\ldots,x_r),
+		f(\lambda x_1,\lambda x_2,\ldots,\lambda x_r) = \lambda^k f(x_1,x_2,\ldots,x_r),
 	\end{equation}
 	则应有
 	\begin{equation}
 		\label{eqn:Euler's equation}
-		k f(x_1,x_2,\ldots,x_r)=\sum_{i=1}^r x_i\pv f{x_i}.
+		k f(x_1,x_2,\ldots,x_r) = \sum_{i=1}^r x_i\pv f{x_i}.
 	\end{equation}
 \end{theorem}
 
 \begin{proof}
 	对\eqref{eqn:k-order homogeneous}两边同时对$\lambda$求导
 	\[
-		x_1\pv f{\lambda x_1}+x_2\pv f{\lambda x_2}+\cdots+x_r\pv f{\lambda x_r}=k\lambda^{k-1}f(x_1,x_2,\ldots,x_r).
+		x_1\pv f{\lambda x_1} + x_2\pv f{\lambda x_2} + \cdots + x_r\pv f{\lambda x_r} = k\lambda^{k-1}f(x_1,x_2,\ldots,x_r).
 	\]
-	取$\lambda=1$即得\eqref{eqn:Euler's equation}。
+	取$\lambda = 1$即得\eqref{eqn:Euler's equation}。
 \end{proof}
 
 \begin{corollary}
-	对单组分、仅有体积功的均匀系统，忽略表面效应时，$U=U(S,V,n)$对全部广延变量是一阶齐次的，故
+	对单组分、仅有体积功的均匀系统，忽略表面效应时，$U = U(S,V,n)$对全部广延变量是一阶齐次的，故
 	\begin{equation}
 		\label{eqn:U=TS-pV}
-		U=TS-pV+\mu n.
+		U = TS - pV + \mu n.
 	\end{equation}
-	其中$\mu:=(\p U/\p n)_{S,V}$为摩尔化学势，详见\secref{sec:chemical potential}。即使过程保持$n$不变，Euler方程中仍有$\mu n$。平衡黑体辐射的光子数可自由调节，$\mu=0$，此时$U=TS-pV$。
-	定义摩尔内能$u:=U/n$、摩尔熵$s:=S/n$、摩尔体积$v:=V/n$，以及摩尔热容$c_V:=C_V/n$、$c_p:=C_p/n$。
+	其中$\mu := (\p U/\p n)_{S,V}$为摩尔化学势，详见\secref{sec:chemical potential}。即使过程保持$n$不变，Euler方程中仍有$\mu n$。平衡黑体辐射的光子数可自由调节，$\mu = 0$，此时$U = TS - pV$。
+	定义摩尔内能$u := U/n$、摩尔熵$s := S/n$、摩尔体积$v := V/n$，以及摩尔热容$c_V := C_V/n$、$c_p := C_p/n$。
 \end{corollary}
 
 \begin{theorem}
 	{Gibbs--Duhem关系}{Gibbs-Duhem relation}
 	上述单组分系统的强度量满足：
 	\begin{equation}
-		S\d T-V\d p+n\d\mu=0.
+		S\d T - V\d p + n\d\mu = 0.
 	\end{equation}
 \end{theorem}
 
 \begin{proof}
-	对\eqref{eqn:U=TS-pV}两边微分，再与$\d U=T\d S-p\d V+\mu\d n$比较即得
+	对\eqref{eqn:U=TS-pV}两边微分，再与$\d U = T\d S - p\d V + \mu\d n$比较即得
 	\[
-		0=S\d T-V\d p+n\d\mu.
+		0 = S\d T - V\d p + n\d\mu.
 		\qedhere
 	\]
 \end{proof}
 
 \begin{example}{用形式关系求基本方程}{}
 	某热力学系统的内能和状态方程为
-	\[
-		U=\frac12pV,\qquad T^2=A\frac{U^{3/2}}{Vn^{1/2}}.
-	\]
-	其中常数$A>0$，求系统的基本方程。
-
-	条件中出现的广延量为$U,V,n$，因此用熵表象，考虑单位摩尔熵$s=s(u,v)$
 	\begin{align*}
-		\frac1T&=A^{-1/2}u^{-3/4}v^{1/2},\\
-		\frac pT&=2A^{-1/2}u^{1/4}v^{-1/2}.
+		U &= \frac12pV,\\
+		T^2 &= A\frac{U^{3/2}}{Vn^{1/2}}.
+	\end{align*}
+	其中常数$A > 0$，求系统的基本方程。
+
+	条件中出现的广延量为$U,V,n$，因此用熵表象，考虑单位摩尔熵$s = s(u,v)$
+	\begin{align*}
+		\frac1T &= A^{-1/2}u^{-3/4}v^{1/2},\\
+		\frac pT &= 2A^{-1/2}u^{1/4}v^{-1/2}.
 	\end{align*}
 	凑微分：
 	\begin{gather*}
-		\d s=\frac1T\d u+\frac pT\d v=A^{-1/2}(u^{-3/4}v^{1/2}\d u+2u^{1/4}v^{-1/2}\d v)=4A^{-1/2}\d(u^{1/4}v^{1/2}),\\
+		\d s = \frac1T\d u + \frac pT\d v = A^{-1/2}(u^{-3/4}v^{1/2}\d u + 2u^{1/4}v^{-1/2}\d v) = 4A^{-1/2}\d(u^{1/4}v^{1/2}),\\
 		\implies
-		s=4A^{-1/2}u^{1/4}v^{1/2}+s_0,
+		s = 4A^{-1/2}u^{1/4}v^{1/2} + s_0,
 	\end{gather*}
 	即
 	\[
-		S=4A^{-1/2}U^{1/4}V^{1/2}n^{1/4}+ns_0.
+		S = 4A^{-1/2}U^{1/4}V^{1/2}n^{1/4} + ns_0.
 	\]
 \end{example}
 
@@ -97,12 +98,12 @@
 
 \begin{theorem}
 	{Legendre变换}{Legendre transformation}
-	考虑函数$y=y(x)$，其在$x$处的切线斜率为$p$、纵截距为$\psi$，则存在$(x,y)\mapsto(p,\psi)$：
+	考虑函数$y = y(x)$，其在$x$处的切线斜率为$p$、纵截距为$\psi$，则存在$(x,y) \mapsto (p,\psi)$：
 	\begin{subequations}
 		\label{eqn:Legendre transformation}
 		\begin{align}
-			p&=\dv yx,\\
-			\psi&=y-px,
+			p &= \dv yx,\\
+			\psi &= y - px,
 		\end{align}
 	\end{subequations}
 	称为Legendre变换。
@@ -114,60 +115,61 @@
 \end{theorem}
 
 \begin{corollary}
-	在$p=y'$严格单调的区间内，斜率唯一确定切点，从而
+	在$p = y'$严格单调的区间内，斜率唯一确定切点，从而
 	\[
-		\d\psi=\d y-(p\d x+x\d p)=-x\d p,
+		\d\psi = \d y - (p\d x + x\d p) = -x\d p,
 	\]
 	可得Legendre逆变换
 	\begin{subequations}
 		\begin{align}
-			x&=-\dv\psi p,\\
-			y&=\psi+px.
+			x &= -\dv\psi p,\\
+			y &= \psi + px.
 		\end{align}
 	\end{subequations}
 \end{corollary}
 
 \begin{corollary}
-	推广到多元函数$y(x_1,x_2,\ldots,x_r)$。在梯度映射$\bm x\mapsto\bm p$光滑可逆的区域内，其Legendre变换为
-	\[
+	推广到多元函数$y(x_1,x_2,\ldots,x_r)$。在梯度映射$\bm x \mapsto \bm p$光滑可逆的区域内，其Legendre变换为
+	\begin{equation}
+		\label{eq:sm-multivariable-legendre-transform}
 		\begin{aligned}
-			p_i  & =\pv y{x_i}            \\
-			\psi & =y-\sum_{i=1}^rp_ix_i.
+			p_i & = \pv y{x_i}            \\
+			\psi & = y - \sum_{i=1}^rp_ix_i.
 		\end{aligned}
 		\iff
 		\begin{aligned}
-			x_i & =-\pv\psi{p_i}            \\
-			y   & =\psi+\sum_{i=1}^rp_ix_i.
+			x_i & = -\pv\psi{p_i}            \\
+			y & = \psi + \sum_{i=1}^rp_ix_i.
 		\end{aligned}
-	\]
+	\end{equation}
 \end{corollary}
 
 \begin{example}{分析力学中的Legendre变换}{}
 	Lagrange量$L(q,\dot q,t)$可以完整刻画一个力学系统，
-	其中$q=(q_1,q_2,\ldots,q_r)$为广义坐标，$\dot q=(\dot q_1,\dot q_2,\ldots,\dot q_r)$为广义速度。广义动量定义为
+	其中$q = (q_1,q_2,\ldots,q_r)$为广义坐标，$\dot q = (\dot q_1,\dot q_2,\ldots,\dot q_r)$为广义速度。广义动量定义为
 	\[
-		p_i:=\pv L{\dot q_i}.
+		p_i := \pv L{\dot q_i}.
 	\]
 	如果以动量代替速度作为独立变量，则需要对$\dot q_i$做Legendre变换，引入Hamilton量
 	\begin{equation}
-		H(q,p,t):=\sum_{i=1}^rp_i\dot q_i-L(q,\dot q,t).
+		H(q,p,t) := \sum_{i=1}^rp_i\dot q_i - L(q,\dot q,t).
 	\end{equation}
 	这样$H(q,p,t)$关于广义动量$p_i$的导数便是广义速度
 	\[
-		\pv H{p_i}=\dot q_i.
+		\pv H{p_i} = \dot q_i.
 	\]
 \end{example}
 
-从已有的能量$U=U(S,V)$出发，进行一系列Legendre变换，得到其它热力学表象。
+从已有的能量$U = U(S,V)$出发，进行一系列Legendre变换，得到其它热力学表象。
 % 从能量$\d U=T\d S-p\d V$出发
 
 \begin{definition}
 	{焓}{enthalpy}
-	考虑等压过程，$V\to p=-\p U/\p V$，可得焓(enthalpy) $H=H(S,p)$
+	考虑等压过程，$V \to p = -\p U/\p V$，可得焓(enthalpy) $H = H(S,p)$
 	\begin{subequations}
 		\begin{align}
-			H&=U+pV,\\
-			\d H&=T\d S+V\d p.
+			H &= U + pV,\\
+			\d H &= T\d S + V\d p.
 		\end{align}
 	\end{subequations}
 	% \begin{equation}
@@ -177,11 +179,11 @@
 
 \begin{definition}
 	{Helmholtz自由能}{Helmholtz free energy}
-	考虑等温过程，$S\to T=\p U/\p S$，可得Helmholtz自由能$F=F(T,V)$
+	考虑等温过程，$S \to T = \p U/\p S$，可得Helmholtz自由能$F = F(T,V)$
 	\begin{subequations}
 		\begin{align}
-			F&=U-TS,\\
-			\d F&=-S\d T-p\d V.
+			F &= U - TS,\\
+			\d F &= -S\d T - p\d V.
 		\end{align}
 	\end{subequations}
 	% \begin{equation}
@@ -190,16 +192,16 @@
 \end{definition}
 
 \begin{corollary}
-	自发的等温等容过程中$\Delta F=\Delta U-T\Delta S=Q-T\Delta S\leq 0$自由能减少。
+	自发的等温等容过程中$\Delta F = \Delta U - T\Delta S = Q - T\Delta S \leq 0$自由能减少。
 \end{corollary}
 
 \begin{definition}
 	{Gibbs自由能}{Gibbs free energy}
-	考虑等温等压过程，$(S,V)\to(T,p)$，可得Gibbs自由能$G=G(T,p)$
+	考虑等温等压过程，$(S,V) \to (T,p)$，可得Gibbs自由能$G = G(T,p)$
 	\begin{subequations}
 		\begin{align}
-			G&=U-TS+pV,\\
-			\d G&=-S\d T+V\d p.
+			G &= U - TS + pV,\\
+			\d G &= -S\d T + V\d p.
 		\end{align}
 	\end{subequations}
 	% \begin{equation}
@@ -208,7 +210,7 @@
 \end{definition}
 
 \begin{corollary}
-	自发的等温等压过程中$\Delta G=\Delta U-T\Delta S+p\Delta V=Q-T\Delta S\leq 0$自由能减少。
+	自发的等温等压过程中$\Delta G = \Delta U - T\Delta S + p\Delta V = Q - T\Delta S \leq 0$自由能减少。
 \end{corollary}
 
 \begin{definition}{特性函数}{characterist funtion}
@@ -222,20 +224,20 @@
 	\begin{subequations}
 		\begin{alignat}{3}
 			\label{eqn:Maxwell relation U}
-			\pw USV&=\pw UVS&&\implies& -\pvat{p}{S}{V}&=\pvat{T}{V}{S};\\
+			\pw USV &= \pw UVS& &\implies& -\pvat{p}{S}{V} &= \pvat{T}{V}{S};\\
 			\label{eqn:Maxwell relation H}
-			\pw HSp&=\pw HpS&&\implies& \pvat{V}{S}{p}&=\pvat{T}{p}{S};\\
+			\pw HSp &= \pw HpS& &\implies& \pvat{V}{S}{p} &= \pvat{T}{p}{S};\\
 			\label{eqn:Maxwell relation F}
-			\pw FTV&=\pw FVT&&\implies& \pvat{p}{T}{V}&=\pvat{S}{V}{T};\\
+			\pw FTV &= \pw FVT& &\implies& \pvat{p}{T}{V} &= \pvat{S}{V}{T};\\
 			\label{eqn:Maxwell relation G}
-			\pw GTp&=\pw GpT&&\implies& -\pvat{V}{T}{p}&=\pvat{S}{p}{T}.
+			\pw GTp &= \pw GpT& &\implies& -\pvat{V}{T}{p} &= \pvat{S}{p}{T}.
 		\end{alignat}
 	\end{subequations}
 	称为Maxwell关系。
 	可以借助图形记忆，如\figref{fig:Maxwell relation} 所示，
-	外围方形四边上的$U,F,H,G$是四个特性函数，每边的两个顶点分别是状态参量，如$U(S,V)$，对角线连接状态参量和导出量，箭头方向表示正负号，如$\d U=T\d S-p\d V$。再由二阶导可交换便可得到Maxwell关系。
+	外围方形四边上的$U,F,H,G$是四个特性函数，每边的两个顶点分别是状态参量，如$U(S,V)$，对角线连接状态参量和导出量，箭头方向表示正负号，如$\d U = T\d S - p\d V$。再由二阶导可交换便可得到Maxwell关系。
 	至于\figref{fig:Maxwell relation} 中字母的顺序，则可以通过一句口诀中的首字母记忆。
-	\footnote{其实还不如直接记住$\d U=T\d S-p\d V$和$H=U+pV$，剩下的其实很自然得都出来了。}
+	\footnote{其实还不如直接记住$\d U = T\d S - p\d V$和$H = U + pV$，剩下的其实很自然得都出来了。}
 	\begin{notecaptionblock}
 		\tikzfigure{thermodynamic-square}
 		\captionof{figure}{\textbf{G}ood \textbf{p}hysicists \textbf{H}ave \textbf{S}tudied \textbf{U}nder \textbf{V}ery \textbf{F}ine \textbf{T}eachers.}
@@ -247,9 +249,9 @@
 	考虑Gibbs自由能$G(T,p)$的二阶导：
 	\begin{subequations}
 		\begin{alignat}{2}
-			\pv[2]GT&=-&\pvat{S}{T}{p}&=-\frac{C_p}T,\\
-			\pw GTp&=&\pvat{V}{T}{p}&=V\alpha,\\
-			\pv[2]Gp&=&\pvat{V}{p}{T}&=-V\kappa_T.
+			\pv[2]GT &= -&\pvat{S}{T}{p} &= -\frac{C_p}T,\\
+			\pw GTp &=&\pvat{V}{T}{p} &= V\alpha,\\
+			\pv[2]Gp &=&\pvat{V}{p}{T} &= -V\kappa_T.
 		\end{alignat}
 	\end{subequations}
 	因此难以直接测量的响应函数(热力学偏微分)都可以用$C_p,\alpha,\kappa_T$来表示。
@@ -259,9 +261,9 @@
 	{热弹效应}{}
 	由Maxwell关系
 	\[
-		\pvat{S}{p}{T}=-\pvat{V}{T}{p}=-V\alpha.
+		\pvat{S}{p}{T} = -\pvat{V}{T}{p} = -V\alpha.
 	\]
-	对$\alpha>0$的材料，可逆等温压缩时$\d S=-V\alpha\d p<0$，材料向热库放热；可逆等温膨胀时吸热。
+	对$\alpha > 0$的材料，可逆等温压缩时$\d S = -V\alpha\d p < 0$，材料向热库放热；可逆等温膨胀时吸热。
 \end{example}
 
 \begin{example}
@@ -270,58 +272,58 @@
 	继续\exmref{exm:ideal gas U and C} 的推导。
 	利用Maxwell关系\eqref{eqn:Maxwell relation F}，
 	\[
-		C_p-C_V=\biggb{\pvat{U}{V}{T}+p}\pvat{V}{T}{p}=T\pvat{S}{V}{T}\pvat{V}{T}{p}=T\pvat{p}{T}{V}\pvat{V}{T}{p}.
+		C_p - C_V = \biggb{\pvat{U}{V}{T} + p}\pvat{V}{T}{p} = T\pvat{S}{V}{T}\pvat{V}{T}{p} = T\pvat{p}{T}{V}\pvat{V}{T}{p}.
 	\]
 	代入响应函数可得
 	\begin{equation}
-		C_p-C_V=-pVT\alpha\beta=\frac{VT\alpha^2}{\kappa_T}.
+		C_p - C_V = -pVT\alpha\beta = \frac{VT\alpha^2}{\kappa_T}.
 	\end{equation}
 	\tcblower
 	类似地，可定义绝热压缩率
 	\begin{equation}
-		\kappa_S:=-\frac1V\pvat{V}{p}{S},
+		\kappa_S := -\frac1V\pvat{V}{p}{S},
 	\end{equation}
 	压缩率的差也存在类似的关系，自证不难
 	\begin{equation}
-		\kappa_T-\kappa_S=\frac{VT\alpha^2}{C_p}.
+		\kappa_T - \kappa_S = \frac{VT\alpha^2}{C_p}.
 	\end{equation}
 \end{example}
 
 \begin{example}{}{}
-	化简$\pvat{p}{U}{G}=\pvat{U}{p}{G}^{-1}$，由$\d U=T\d S-p\d V$可得
+	化简$\pvat{p}{U}{G} = \pvat{U}{p}{G}^{-1}$，由$\d U = T\d S - p\d V$可得
 	\[
-		\pvat{U}{p}{G}=T\pvat{S}{p}{G}-p\pvat{V}{p}{G},
+		\pvat{U}{p}{G} = T\pvat{S}{p}{G} - p\pvat{V}{p}{G},
 	\]
-	利用\eqref{eqn:XY->XW/YW}和$\d G=-S\d T+V\d p$可得
+	利用\eqref{eqn:XY->XW/YW}和$\d G = -S\d T + V\d p$可得
 	\[
-		\pvat{U}{p}{G}=-T\fracdisp{\pvat{G}{p}{S}}{\pvat{G}{S}{p}}+p\fracdisp{\pvat{G}{p}{V}}{\pvat{G}{V}{p}}=-T\fracdisp{-S\pvat{T}{p}{S}+V}{-S\pvat{T}{S}{p}+0}+p\fracdisp{-S\pvat{T}{p}{V}+V}{-S\pvat{T}{V}{p}+0}.
+		\pvat{U}{p}{G} = -T\fracdisp{\pvat{G}{p}{S}}{\pvat{G}{S}{p}} + p\fracdisp{\pvat{G}{p}{V}}{\pvat{G}{V}{p}} = -T\fracdisp{-S\pvat{T}{p}{S} + V}{-S\pvat{T}{S}{p} + 0} + p\fracdisp{-S\pvat{T}{p}{V} + V}{-S\pvat{T}{V}{p} + 0}.
 	\]
 	由响应函数的定义、\eqref{eqn:XY->XW/YW}和Maxwell关系
 	\begin{align*}
-		\pvat{T}{V}{p}&=\frac1{V\alpha},\\
-		\pvat{T}{S}{p}&=\frac{T}{C_p},\\
-		\pvat{T}{p}{S}&=-\Biggdivision{\pvat{S}{p}{T}}{\pvat{S}{T}{p}}=\frac{TV\alpha}{C_p},\\
-		\pvat{T}{p}{V}&=-\Biggdivision{\pvat{V}{p}{T}}{\pvat{V}{T}{p}}=\frac{\kappa_T}\alpha.
+		\pvat{T}{V}{p} &= \frac1{V\alpha},\\
+		\pvat{T}{S}{p} &= \frac{T}{C_p},\\
+		\pvat{T}{p}{S} &= -\Biggdivision{\pvat{S}{p}{T}}{\pvat{S}{T}{p}} = \frac{TV\alpha}{C_p},\\
+		\pvat{T}{p}{V} &= -\Biggdivision{\pvat{V}{p}{T}}{\pvat{V}{T}{p}} = \frac{\kappa_T}\alpha.
 	\end{align*}
 	故
 	\[
-		\pvat{p}{U}{G}=\biggp{-TV\alpha+\frac{VC_p}S+pV\kappa_T-\frac{pV^2\alpha}S}^{-1}.
+		\pvat{p}{U}{G} = \biggp{-TV\alpha + \frac{VC_p}S + pV\kappa_T - \frac{pV^2\alpha}S}^{-1}.
 	\]
 \end{example}
 
 \section{最值原理}
 
-热机能输出多少功，取决于它可以和哪些热源交换热量。先考虑封闭系统只与温度为$T_0>0$的热库换热，记$Q$为系统吸收的热量，$W_{\mathrm{out}}$为系统对外输出的总功。
+热机能输出多少功，取决于它可以和哪些热源交换热量。先考虑封闭系统只与温度为$T_0 > 0$的热库换热，记$Q$为系统吸收的热量，$W_{\mathrm{out}}$为系统对外输出的总功。
 
 \begin{theorem}
 	{最大功原理}{maximum work principle}
-	给定初末态和上述热库，系统对外输出的功满足$W_{\mathrm{out}}\leq T_0\Delta S-\Delta U$。可逆过程达到这一上限。
+	给定初末态和上述热库，系统对外输出的功满足$W_{\mathrm{out}} \leq T_0\Delta S - \Delta U$。可逆过程达到这一上限。
 \end{theorem}
 
 \begin{proof}
-	由第一定律，$W_{\mathrm{out}}=Q-\Delta U$。热库放出热量$Q$，系统与热库的总熵变为$\Delta S_{\mathrm{tot}}=\Delta S-Q/T_0\geq0$。消去$Q$得
+	由第一定律，$W_{\mathrm{out}} = Q - \Delta U$。热库放出热量$Q$，系统与热库的总熵变为$\Delta S_{\mathrm{tot}} = \Delta S - Q/T_0 \geq 0$。消去$Q$得
 	\[
-		W_{\mathrm{out}}=T_0\Delta S-\Delta U-T_0\Delta S_{\mathrm{tot}} .
+		W_{\mathrm{out}} = T_0\Delta S - \Delta U - T_0\Delta S_{\mathrm{tot}} .
 	\]
 	可逆过程的总熵变为零，产生熵会使输出功减少。
 \end{proof}
@@ -335,29 +337,30 @@
 
 	平衡态两系统温度相等$T$，则能量变化
 	\[
-		\Delta U=cnR(2T-T_1-T_2).
+		\Delta U = cnR(2T - T_1 - T_2).
 	\]
 	为使功最大，应为可逆过程，即
 	\[
-		\Delta S=cnR\biggp{\ln\frac T{T_1}+\ln\frac T{T_2}}=cnR\ln\biggp{\frac{T^2}{T_1T_2}}=0
-		\implies T=\sqrt{T_1T_2}.
+		\Delta S = cnR\biggp{\ln\frac T{T_1} + \ln\frac T{T_2}} = cnR\ln\biggp{\frac{T^2}{T_1T_2}} = 0
+		\implies T = \sqrt{T_1T_2}.
 	\]
 	最大功为
-	\[
-		W_{\mathrm{out,max}}=-\Delta U=cnR\Bigp{\sqrt{T_1}-\sqrt{T_2}}^2.
-	\]
+	\begin{equation}
+		\label{eq:sm-maximum-work-two-reservoirs}
+		W_{\mathrm{out,max}} = -\Delta U = cnR\Bigp{\sqrt{T_1} - \sqrt{T_2}}^2.
+	\end{equation}
 \end{example}
 \begin{example}{}{}
 	三份体积固定的理想气体具有相同的常热容$cnR$，初温分别为$T_1,T_2,T_3$。用循环热机在它们之间传递能量，整个装置与外界既不换热也不做功，求其中一份气体所能达到的最大温度。
 
 	设目标气体的末温为$T_\hi$。给定$T_\hi$时，另两份气体的总内能固定，因而其温度之和固定。两温相等时乘积最大，其总熵也最大。因此求可达的最高温度时，可以令另两份气体的末温同为$T_\lo$。由能量守恒，
 	\[
-		T_\hi+2T_\lo=T_1+T_2+T_3=:T_\tot.
+		T_\hi + 2T_\lo = T_1 + T_2 + T_3 =: T_\tot.
 	\]
 	总熵变
 	\[
-		\Delta S=cnR\ln\biggp{\frac{T_\lo^2T_\hi}{T_1T_2T_3}}\geq 0
-		\implies(T_\tot-T_\hi)^2T_\hi\geq 4T_1T_2T_3.
+		\Delta S = cnR\ln\biggp{\frac{T_\lo^2T_\hi}{T_1T_2T_3}} \geq 0
+		\implies (T_\tot - T_\hi)^2T_\hi \geq 4T_1T_2T_3.
 	\]
 	阴影部分便对应满足条件的$T_\hi$的范围(显然，阴影部分总是存在的)，
 	进而可得到其最大值$T_{\max}$。
@@ -373,46 +376,47 @@
 \end{theorem}
 
 \begin{proof}
-	设平衡态的能量和熵为$U_*,S_*$。固定其余外部约束和任意内部参量$X$，有$S(U_*,X)\le S_*$。由于$(\p S/\p U)_X=1/T>0$，在同一正温支上，能量低于$U_*$的态达不到$S_*$。故在给定熵$S_*$的态中，$U_*$是最小能量。
+	设平衡态的能量和熵为$U_*,S_*$。固定其余外部约束和任意内部参量$X$，有$S(U_*,X) \le S_*$。由于$(\p S/\p U)_X = 1/T > 0$，在同一正温支上，能量低于$U_*$的态达不到$S_*$。故在给定熵$S_*$的态中，$U_*$是最小能量。
 
 	在严格稳定的平衡点附近，这一原理也可写成微分形式。在给定总内能时，平衡态使熵最大，
-	\[
-		\pvat{S}{X}{U}=0,\quad\biggp{\pv[2]SX}_U<0.
-	\]
+	\begin{equation}
+		\label{eq:sm-fixed-energy-entropy-maximum}
+		\pvat{S}{X}{U} = 0,\quad\biggp{\pv[2]SX}_U < 0.
+	\end{equation}
 	为方便，记能量的一阶导
 	\[
-		L:=\pvat{U}{X}{S}=-\Biggdivision{\pvat{S}{X}{U}}{\pvat{S}{U}{X}}=-T\pvat{S}{X}{U}=0.
+		L := \pvat{U}{X}{S} = -\Biggdivision{\pvat{S}{X}{U}}{\pvat{S}{U}{X}} = -T\pvat{S}{X}{U} = 0.
 	\]
 	再证能量的二阶导为正
 	\[
-		\biggp{\pv[2]UX}_S=\pvat{L}{X}{S}=\pvat{L}{U}{X}\cancel{\pvat{U}{X}{S}}+\pvat{L}{X}{U}=0-T\biggp{\pv[2]SX}_U>0.
+		\biggp{\pv[2]UX}_S = \pvat{L}{X}{S} = \pvat{L}{U}{X}\cancel{\pvat{U}{X}{S}} + \pvat{L}{X}{U} = 0 - T\biggp{\pv[2]SX}_U > 0.
 		\qedhere
 	\]
 \end{proof}
 
 \begin{theorem}
 	{Helmholtz自由能最小原理}{}
-	与正温热库$T_\rev$接触、总体积和粒子数固定且仅有体积功的系统，移除内部约束后达到平衡态使得Helmholtz自由能最小。
+	与正温热库$T_\reservoir$接触、总体积和粒子数固定且仅有体积功的系统，移除内部约束后达到平衡态使得Helmholtz自由能最小。
 	%平衡态下，系统与热库进行热接触	时，系统的各个无约束的内部参量取值满足在 T = Tr 的条件下最小化 Helmholtz 自由能。
 \end{theorem}
 
 \begin{proof}
 	在定容、无其他功的条件下，热库放出的热量等于系统增加的内能。由系统和热库的总熵变化，
 	\[
-		\Delta S_{\rm tot}=\Delta S-\frac{\Delta U}{T_\rev}
-		=-\frac{\Delta(U-T_\rev S)}{T_\rev}\geq0 .
+		\Delta S_\tot = \Delta S - \frac{\Delta U}{T_\reservoir}
+		= -\frac{\Delta(U - T_\reservoir S)}{T_\reservoir} \geq 0 .
 	\]
-	在总能量给定时，最大化总熵等价于最小化$U-T_\rev S$。与热库达到热平衡的各候选态都有$T=T_\rev$，此量等于系统的Helmholtz自由能$F$。
+	在总能量给定时，最大化总熵等价于最小化$U - T_\reservoir S$。与热库达到热平衡的各候选态都有$T = T_\reservoir$，此量等于系统的Helmholtz自由能$F$。
 	
 \end{proof}
 
 \begin{corollary}
-	平衡态的限制条件为$T=T_\rev$。
+	平衡态的限制条件为$T = T_\reservoir$。
 	当这个系统被活塞隔开时
 	\[
-		\d F=\pv F{V_1}\d V_1+\pv F{V_2}\d V_2=(-p_1+p_2)\d V_1=0.
+		\d F = \pv F{V_1}\d V_1 + \pv F{V_2}\d V_2 = (-p_1 + p_2)\d V_1 = 0.
 	\]
-	因此平衡时$p_1=p_2.$
+	因此平衡时$p_1 = p_2.$
 \end{corollary}
 
 \begin{theorem}
@@ -429,22 +433,25 @@
 \label{sec:thermo-stability}
 
 把一个均匀系统分成等大的两部分，固定每部分的物质的量。若从一部分向另一部分转移少量能量和体积，两部分的熵的一阶变化相消。要使均匀态在这些扰动下稳定，总熵的二阶变化应为负。因此在严格稳定的单相区，$S(U,V)$的Hessian矩阵$H_S$负定，即
-\begin{equation}
-	\pv[2]SU<0,\qquad \det H_S=\pv[2]SU\pv[2]SV-\biggp{\pw SUV}^2>0.
-\end{equation}
-这两个条件分别约束热容和压缩率。由$S_U=1/T$和$S_V=p/T$，将二次型写成
+\begin{subequations}
+	\begin{gather}
+		\pv[2]SU < 0,\\
+		\det H_S = \pv[2]SU\pv[2]SV - \biggp{\pw SUV}^2 > 0.
+	\end{gather}
+\end{subequations}
+这两个条件分别约束热容和压缩率。由$S_U = 1/T$和$S_V = p/T$，将二次型写成
 \[
-	\delta^2 S=\delta(1/T)\,\delta U+\delta(p/T)\,\delta V.
+	\delta^2 S = \delta(1/T)\,\delta U + \delta(p/T)\,\delta V.
 \]
-利用Maxwell关系$(\p S/\p V)_T=(\p p/\p T)_V$，有
+利用Maxwell关系$(\p S/\p V)_T = (\p p/\p T)_V$，有
 \[
-	\delta U=C_V\delta T+\biggb{T\pvat{p}{T}{V}-p}\delta V.
+	\delta U = C_V\delta T + \biggb{T\pvat{p}{T}{V} - p}\delta V.
 \]
 代回后交叉项相消，得到
 \begin{equation}
-	\delta^2 S=-\frac{C_V}{T^2}(\delta T)^2-\frac{1}{TV\kappa_T}(\delta V)^2.
+	\delta^2 S = -\frac{C_V}{T^2}(\delta T)^2 - \frac{1}{TV\kappa_T}(\delta V)^2.
 \end{equation}
-在$T>0$时，严格稳定要求$C_V>0$且$\kappa_T>0$。前者使子系统吸收能量后温度升高，后者使等温压缩时压强升高，两种响应都有助于恢复平衡。特别地，$\kappa_T>0$要求等温线的斜率$(\p p/\p V)_T<0$。这是对小扰动的局域判据；判断气液两相中哪一相稳定，还要比较两相的自由能，见\secref{ssec:liquid-gas phase transition}。
+在$T > 0$时，严格稳定要求$C_V > 0$且$\kappa_T > 0$。前者使子系统吸收能量后温度升高，后者使等温压缩时压强升高，两种响应都有助于恢复平衡。特别地，$\kappa_T > 0$要求等温线的斜率$(\p p/\p V)_T < 0$。这是对小扰动的局域判据；判断气液两相中哪一相稳定，还要比较两相的自由能，见\secref{ssec:liquid-gas phase transition}。
 
 \section{样例系统}
 
@@ -454,8 +461,8 @@
 理想气体内能和状态方程为
 \begin{subequations}
 	\begin{align}
-		u&=cRT,\\
-		pv&=RT.
+		u &= cRT,\\
+		pv &= RT.
 	\end{align}
 \end{subequations}
 % 其中$c$与理想气体自由度有关，$R=\NA\kB=\qty{8.3144}{\joule\per\mole\kelvin}$是普适的理想气体常数。
@@ -463,24 +470,24 @@
 可以直接得到响应函数
 \begin{subequations}
 	\begin{align}
-		c_V&=\pvat{u}{T}{V}=\frac uT=cR,\\
-		c_p&=\pvat{u}{T}{p}+p\pvat{v}{T}{p}=(c+1)R,\\
-		\alpha&=\frac1v\pvat{v}{T}{p}=\frac1T,\\
-		\beta&=-\frac1p\pvat{p}{T}{v}=-\frac1T,\\
-		\kappa_T&=-\frac1v\pvat{v}{p}{T}=\frac1p.
+		c_V &= \pvat{u}{T}{V} = \frac uT = cR,\\
+		c_p &= \pvat{u}{T}{p} + p\pvat{v}{T}{p} = (c + 1)R,\\
+		\alpha &= \frac1v\pvat{v}{T}{p} = \frac1T,\\
+		\beta &= -\frac1p\pvat{p}{T}{v} = -\frac1T,\\
+		\kappa_T &= -\frac1v\pvat{v}{p}{T} = \frac1p.
 	\end{align}
 \end{subequations}
-选定参考点$s_0=s(u_0,v_0)$后，摩尔熵$s$的表达式为
+选定参考点$s_0 = s(u_0,v_0)$后，摩尔熵$s$的表达式为
 \begin{equation}
-	s=R\ln\biggb{\biggp{\frac u{u_0}}^c\frac v{v_0}}+s_0.
+	s = R\ln\biggb{\biggp{\frac u{u_0}}^c\frac v{v_0}} + s_0.
 \end{equation}
-摩尔Helmholtz自由能$f=u-Ts$是$T,v$的函数，写成更简洁的形式：
+摩尔Helmholtz自由能$f = u - Ts$是$T,v$的函数，写成更简洁的形式：
 \begin{equation}
-	\frac fT=-R\ln\biggb{\biggp{\frac T{T_0}}^c\frac v{v_0}}+\frac{f_0}{T_0}.
+	\frac fT = -R\ln\biggb{\biggp{\frac T{T_0}}^c\frac v{v_0}} + \frac{f_0}{T_0}.
 \end{equation}
-Gibbs自由能$g=u-Ts+pv$是$T,p$的函数：
+Gibbs自由能$g = u - Ts + pv$是$T,p$的函数：
 \begin{equation}
-	\frac gT=-R\ln\biggb{\biggp{\frac T{T_0}}^{c+1}\frac{p_0}p}+\frac{g_0}{T_0}.
+	\frac gT = -R\ln\biggb{\biggp{\frac T{T_0}}^{c+1}\frac{p_0}p} + \frac{g_0}{T_0}.
 \end{equation}
 % 考虑等温过程，$\Delta G=nRT\ln(p'/p)$，这一简单关系在\chapref{chap:phase}中会被用到。
 
@@ -490,33 +497,33 @@ Gibbs自由能$g=u-Ts+pv$是$T,p$的函数：
 van der Waals气体是对理想气体的一个比较好的修正：
 取参考态$(u_0,v_0)$的摩尔熵为$s_0$。从理想气体的熵式出发，将摩尔内能减去平均吸引势能$-a/v$，并将摩尔体积减去排除体积$b$，得到
 \begin{equation}
-	s=s_0+R\ln\biggb{\biggp{\frac{u+a/v}{u_0+a/v_0}}^c\frac{v-b}{v_0-b}} .
+	s = s_0 + R\ln\biggb{\biggp{\frac{u + a/v}{u_0 + a/v_0}}^c\frac{v - b}{v_0 - b}} .
 \end{equation}
 由此可得到van der Waals气体的内能和状态方程：
 \begin{subequations}
 	\begin{gather}
-		u=cRT-\frac av,\\
-		\Bigp{p+\frac a{v^2}}(v-b)=RT.
+		u = cRT - \frac av,\\
+		\Bigp{p + \frac a{v^2}}(v - b) = RT.
 	\end{gather}
 \end{subequations}
 在力学稳定的均匀分支上，进而得到响应函数
 \begin{subequations}
 	\begin{align}
-		c_V&=cR,\\
-		c_p&=\biggp{c+\frac{RTv^3}{RTv^3-2a(v-b)^2}}R>(c+1)R,\\
-		\alpha&=\frac{Rv^2(v-b)}{RTv^3-2a(v-b)^2},\\
-		\kappa_T&=\frac{v^2(v-b)^2}{RTv^3-2a(v-b)^2}.
+		c_V &= cR,\\
+		c_p &= \biggp{c + \frac{RTv^3}{RTv^3 - 2a(v - b)^2}}R > (c + 1)R,\\
+		\alpha &= \frac{Rv^2(v - b)}{RTv^3 - 2a(v - b)^2},\\
+		\kappa_T &= \frac{v^2(v - b)^2}{RTv^3 - 2a(v - b)^2}.
 	\end{align}
 \end{subequations}
-在低密度极限$v\to\infty$下，形式变成$pv=RT$，$\alpha=1/T$，$\kappa_T=v/RT=1/p$，变成理想气体情形。
+在低密度极限$v \to \infty$下，形式变成$pv = RT$，$\alpha = 1/T$，$\kappa_T = v/RT = 1/p$，变成理想气体情形。
 
 \subsectionstar{黑体辐射}
 
 在一个黑体辐射系统中，内能和状态方程为
 \begin{subequations}
 	\begin{align}
-		U&=\frac{4\sigma}cVT^4,\\
-		p&=\frac13\frac UV=\frac{4\sigma}{3c}T^4.
+		U &= \frac{4\sigma}cVT^4,\\
+		p &= \frac13\frac UV = \frac{4\sigma}{3c}T^4.
 	\end{align}
 \end{subequations}
 其中$\sigma$是Stefan--Boltzmann常数，$c$在这里是光速。
@@ -524,18 +531,18 @@ van der Waals气体是对理想气体的一个比较好的修正：
 可得相应函数(恒压过程同时也为恒温过程，$C_p,\alpha,\kappa_T$无意义)：
 \begin{subequations}
 	\begin{align}
-		C_V&=\pvat{U}{T}{V}=4\frac UT=\frac{16\sigma}cVT^3,\\
-		\beta&=-\frac1p\pvat{p}{T}{V}=-\frac4T.
+		C_V &= \pvat{U}{T}{V} = 4\frac UT = \frac{16\sigma}cVT^3,\\
+		\beta &= -\frac1p\pvat{p}{T}{V} = -\frac4T.
 	\end{align}
 \end{subequations}
-熵的微分$\d S=(\d U+p\d V)/T$，积分可得熵
+熵的微分$\d S = (\d U + p\d V)/T$，积分可得熵
 \begin{equation}
-	S=\frac43\frac UT=\frac{16\sigma}{3c}VT^3.
+	S = \frac43\frac UT = \frac{16\sigma}{3c}VT^3.
 \end{equation}
-因此可逆绝热过程满足$VT^3=\const$；
+因此可逆绝热过程满足$VT^3 = \const$；
 Gibbs自由能
 \begin{equation}
-	G=U-TS+pV=0.
+	G = U - TS + pV = 0.
 \end{equation}
 
 \subsection{电介质和磁介质}
@@ -543,35 +550,40 @@ Gibbs自由能
 \paragraph{电介质}
 
 设电场方向固定，$p_\electric$为样品总电偶极矩沿电场的分量。以场强$E$为自变量，Gibbs自由能满足
-\[
-	\d G=-S\d T+V\d p-p_\electric\d E
-\]
+\begin{equation}
+	\label{eq:sm-dielectric-gibbs-differential}
+	\d G = -S\d T + V\d p - p_\electric\d E
+\end{equation}
 Maxwell关系
 \begin{equation}
-	\pw GEp=\pw GpE\implies
-	\pvat{V}{E}{T,p}=-\pvat{p_\electric}{p}{T,E}.
+	\pw GEp = \pw GpE \implies
+	\pvat{V}{E}{T,p} = -\pvat{p_\electric}{p}{T,E}.
 \end{equation}
-对于各向同性、无自发极化的线性电介质，$p_\electric=\varepsilon_0 V\chi_\electric E$。弱场下上式右端正比于$E$，故恒温恒压下体积变化的首项正比于$E^2$。这种形变称为\textbf{电致伸缩}。
+对于各向同性、无自发极化的线性电介质，$p_\electric = \varepsilon_0 V\chi_\electric E$。弱场下上式右端正比于$E$，故恒温恒压下体积变化的首项正比于$E^2$。这种形变称为\textbf{电致伸缩}。
 
 \paragraph{磁介质}
 
 外磁场方向固定，以$m$记样品沿场方向的总磁矩，$B$记外场的磁感应强度。采用磁功$B\d m$的约定，有
-\[
-	\d U=T\d S-p\d V+B\d m.
-\]
+\begin{equation}
+	\label{eq:sm-magnetic-first-law}
+	\d U = T\d S - p\d V + B\d m.
+\end{equation}
 % 但应该注意的是，磁感应强度并不能作为平衡条件。
-以外场为自变量的Gibbs自由能为$G=U-TS+pV-Bm$，其微分为
-\[
-	\d G=-S\d T+V\d p-m\d B
-\]
+以外场为自变量的Gibbs自由能为$G = U - TS + pV - Bm$，其微分为
+\begin{equation}
+	\label{eq:sm-magnetic-gibbs-differential}
+	\d G = -S\d T + V\d p - m\d B
+\end{equation}
 Maxwell关系
-\[
-	\pw GBT=\pw GTB\implies
-	\pvat{S}{B}{T,p}=\pvat{m}{T}{B,p}.
-\]
-在恒压下令$C_{p,B}=T(\p S/\p T)_{p,B}$。可逆绝热过程满足$\d S=0$，故
-\[
-	\pvat{T}{B}{S,p}=-\frac T{C_{p,B}}\pvat{m}{T}{B,p}.
-\]
-弱场下的Curie顺磁体满足$m\propto B/T$。固定正向外场时，升温使磁矩减小，故$(\p T/\p B)_{S,p}>0$，可逆绝热退磁使样品降温。这是\textbf{磁热效应}的一个实例。
+\begin{equation}
+	\label{eq:sm-magnetic-maxwell-relation}
+	\pw GBT = \pw GTB \implies
+	\pvat{S}{B}{T,p} = \pvat{m}{T}{B,p}.
+\end{equation}
+在恒压下令$C_{p,B} = T(\p S/\p T)_{p,B}$。可逆绝热过程满足$\d S = 0$，故
+\begin{equation}
+	\label{eq:sm-magnetocaloric-response}
+	\pvat{T}{B}{S,p} = -\frac T{C_{p,B}}\pvat{m}{T}{B,p}.
+\end{equation}
+弱场下的Curie顺磁体满足$m \propto B/T$。固定正向外场时，升温使磁矩减小，故$(\p T/\p B)_{S,p} > 0$，可逆绝热退磁使样品降温。这是\textbf{磁热效应}的一个实例。
 

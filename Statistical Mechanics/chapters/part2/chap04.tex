@@ -10,16 +10,16 @@
 \begin{definition}{$\varGamma$空间}{Gamma space}
 	$\varGamma$空间是系统中所有粒子的广义坐标$q_1,\ldots,q_f$与广义动量$p_1,\ldots,p_f$张成的空间。相体积元
 	\begin{equation}
-		\d\Omega=\prod_{i=1}^f\d q_i\nd p_i.
+		\d\Omega = \prod_{i=1}^f\d q_i\nd p_i.
 	\end{equation}
-	其中$f=N\gamma$为整个系统的自由度。
+	其中$f = N\gamma$为整个系统的自由度。
 \end{definition}
 
 \begin{theorem}
 	{Hamilton方程}{Hamilton equation}
 	系统的运动状态$(q,p)$随时间的演化遵从Hamilton正则方程
 	\begin{equation}
-		\dot q_i=\pv H{p_i},\quad \dot p_i=-\pv H{q_i}.
+		\dot q_i = \pv H{p_i},\quad \dot p_i = -\pv H{q_i}.
 	\end{equation}
 	其中$H$是系统的Hamilton量。
 \end{theorem}
@@ -36,12 +36,13 @@
 \begin{definition}
 	{分布函数}{distribution function}
 	系统的运动状态$(q,p)$在时刻$t$处于相体积元$\d\Omega$中的几率为$\rho(q,p,t)\d\Omega$，其中$\rho(q,p,t)$是概率密度，称为分布函数(distribution function)，满足归一化条件
-	\[
-		\int_\varGamma\rho(q,p,t)\d\Omega=1.
-	\]
+	\begin{equation}
+		\label{eq:sm-phase-density-normalization}
+		\int_\varGamma\rho(q,p,t)\d\Omega = 1.
+	\end{equation}
 	角括号表示系综平均。宏观量$\ave{B}(t)$是微观量$B(q,p)$按各微观态概率加权的平均值
 	\begin{equation}
-		\ave{B}(t)=\int_\varGamma B(q,p)\rho(q,p,t)\d\Omega.
+		\ave{B}(t) = \int_\varGamma B(q,p)\rho(q,p,t)\d\Omega.
 	\end{equation}
 \end{definition}
 
@@ -49,7 +50,7 @@
 	{Liouville定理}{Liouville Theorem}
 	孤立系统在$\varGamma$空间中运动时，其分布函数$\rho(q,p,t)$满足Liouville方程
 	\begin{equation}
-		\dv\rho t=\pv\rho t+\sum_{i=1}^f\Bigp{\pv\rho{q_i}\pv H{p_i}-\pv\rho{p_i}\pv H{q_i}}=0.
+		\dv\rho t = \pv\rho t + \sum_{i=1}^f\Bigp{\pv\rho{q_i}\pv H{p_i} - \pv\rho{p_i}\pv H{q_i}} = 0.
 	\end{equation}
 \end{theorem}
 
@@ -73,303 +74,334 @@
 \section{微正则系综}
 \label{sec:microcanonical}
 
-孤立系统的粒子数和体积固定，测得的能量位于窄区间$[E,E+\delta E]$。按等几率假设，平衡时能壳内各微观态的概率相同。若壳内有$W$个态，则
-\[
-	\rho_s=\begin{cases}1/W,&E\le E_s\le E+\delta E,\\0,&\text{其余},\end{cases}
-	\qquad S=-\kB\sum_s\rho_s\ln\rho_s=\kB\ln W.
-\]
+孤立系统的粒子数和体积固定，测得的能量位于窄区间$[E,E + \delta E]$。按等几率假设，平衡时能壳内各微观态的概率相同。若壳内有$W$个态，则
+\begin{subequations}
+	\label{eq:sm-microcanonical-distribution}
+	\begin{align}
+		\rho_s &= \begin{cases}1/W,&E \le E_s \le E + \delta E,\\0,&\text{其余},\end{cases}\\
+		S &= -\kB\sum_s\rho_s\ln\rho_s = \kB\ln W.
+	\end{align}
+\end{subequations}
 
 在半经典近似下，对由$N$个全同粒子组成的非简并气体，先忽略离散的内态简并度。能量曲面内的相体积$\Phi(E)$、累计态数$\mathcal N(E)$与态密度$g(E)$分别为
-\[
-	\Phi(E)=\int_{H\le E}\d\Omega,\qquad
-	\mathcal N(E)=\frac{\Phi(E)}{N!h^f},\qquad g(E)=\dv{\mathcal N}{E}.
-\]
+\begin{subequations}
+	\label{eq:sm-semiclassical-state-counts}
+	\begin{align}
+		\Phi(E) &= \int_{H\le E}\d\Omega,\\
+		\mathcal N(E) &= \frac{\Phi(E)}{N!h^f},\\
+		g(E) &= \dv{\mathcal N}{E}.
+	\end{align}
+\end{subequations}
 其中$h^f$是一个量子态占据的相体积，$N!$计及全同粒子的置换。能壳应包含大量微观态，而$\delta E$在宏观能标上很小。若$g(E)$在这个区间内变化也很小，则壳内态数
 \[
-	W=\int_E^{E+\delta E}g(E')\d E'\simeq g(E)\delta E.
+	W = \int_E^{E+\delta E}g(E')\d E' \simeq g(E)\delta E.
 \]
 
 \begin{example}{用能壳态数求单原子理想气体的温度和压强}{}
-	忽略内部简并度，$H=\sum_{i=1}^{3N}p_i^2/(2m)$。坐标积分给出$V^N$，动量积分是半径$\sqrt{2mE}$的$3N$维球的体积。记$s=3N/2$，则
-	\begin{equation}
-		\label{eqn:microcanonical ideal gas density}
-		\mathcal N(E)=\frac{V^N(2\pi m E)^s}{N!h^{3N}\Gamma(s+1)},\qquad
-		g(E)=\frac{V^N(2\pi m)^s E^{s-1}}{N!h^{3N}\Gamma(s)}.
-	\end{equation}
-	在薄壳近似下，固定能量分辨率$\delta E$，记由壳熵$S=\kB\ln[g(E)\delta E]$的偏导定义的温度和压强为$T_{\rm s},p_{\rm s}$。则
-	\[
-		\frac1{T_{\rm s}}=\pvat{S}{E}{V,N}=\frac{(s-1)\kB}{E},\qquad
-		\frac {p_{\rm s}}{T_{\rm s}}=\pvat{S}{V}{E,N}=\frac{N\kB}{V}.
-	\]
-	因此$p_{\rm s}V=N\kB T_{\rm s}$，$E/N=(3/2-1/N)\kB T_{\rm s}$。另由器壁碰撞的动量通量，薄壳极限下的力学压强满足$p_{\rm mech}V=2E/3$。两种压强的相对差为$1/(s-1)$，在热力学极限下消失。
+	忽略内部简并度，$\textstyle H = \sum_{i=1}^{3N}p_i^2/(2m)$。坐标积分给出$V^N$，动量积分是半径$\sqrt{2mE}$的$3N$维球的体积。记$s = 3N/2$，则
+	\begin{subequations}
+		\begin{align}
+			\mathcal N(E) &= \frac{V^N(2\pi m E)^s}{N!h^{3N}\Gamma(s + 1)},\\
+			g(E) &= \frac{V^N(2\pi m)^s E^{s-1}}{N!h^{3N}\Gamma(s)}. \label{eqn:microcanonical ideal gas density}
+		\end{align}
+	\end{subequations}
+	在薄壳近似下，固定能量分辨率$\delta E$，记由壳熵$S = \kB\ln[g(E)\delta E]$的偏导定义的温度和压强为$T_{\rm s},p_{\rm s}$。则
+	\begin{align*}
+		\frac1{T_{\rm s}} &= \pvat{S}{E}{V,N} = \frac{(s - 1)\kB}{E},\\
+		\frac {p_{\rm s}}{T_{\rm s}} &= \pvat{S}{V}{E,N} = \frac{N\kB}{V}.
+	\end{align*}
+	因此$p_{\rm s}V = N\kB T_{\rm s}$，$E/N = (3/2 - 1/N)\kB T_{\rm s}$。另由器壁碰撞的动量通量，薄壳极限下的力学压强满足$p_{\rm mech}V = 2E/3$。两种压强的相对差为$1/(s - 1)$，在热力学极限下消失。
 \end{example}
 
 \section{正则系综}
 
-系统$A$和热源$A_\reservoir$组成孤立系统。弱耦合下总能量为$E^{(0)}=E_s+E_\reservoir$。当$A$处于能量为$E_s$的微观态$s$时，其概率正比于热源的态数$\Omega_\reservoir(E^{(0)}-E_s)$。取平衡平均能量$\bar E$和$\bar E_\reservoir=E^{(0)}-\bar E$。当能量交换引起的热源温度变化可忽略时，在$\bar E_\reservoir$附近展开有
+系统$A$和热源$A_\reservoir$组成孤立系统。弱耦合下总能量为$E^{(0)} = E_s + E_\reservoir$。当$A$处于能量为$E_s$的微观态$s$时，其概率正比于热源的态数$\Omega_\reservoir(E^{(0)} - E_s)$。取平衡平均能量$\bar E$和$\bar E_\reservoir = E^{(0)} - \bar E$。当能量交换引起的热源温度变化可忽略时，在$\bar E_\reservoir$附近展开有
 \[
-	\ln\Omega_\reservoir(E^{(0)}-E_s)\simeq\ln\Omega_\reservoir(\bar E_\reservoir)-\beta(E_s-\bar E).
+	\ln\Omega_\reservoir(E^{(0)} - E_s) \simeq \ln\Omega_\reservoir(\bar E_\reservoir) - \beta(E_s - \bar E).
 \]
 故分布概率
-\[
-	\rho_s\propto\e^{-\beta E_s}\xrightarrow{\text{normalize}}\rho_s=Z^{-1}\e^{-\beta E_s}.
-\]
+\begin{equation}
+	\label{eq:sm-canonical-state-probability}
+	\rho_s \propto \e^{-\beta E_s}\xrightarrow{\text{normalize}}\rho_s = Z^{-1}\e^{-\beta E_s}.
+\end{equation}
 配分函数
-\[
-	Z=\sum_s\e^{-\beta E_s}.
-\]
-由定义，$\beta$只与热源有关，不同系统达到平衡时温度相同，故$\beta=\beta(T)$。
+\begin{equation}
+	\label{eq:sm-canonical-partition}
+	Z = \sum_s\e^{-\beta E_s}.
+\end{equation}
+由定义，$\beta$只与热源有关，不同系统达到平衡时温度相同，故$\beta = \beta(T)$。
 
 将微观态按能量分组，用 $a$ 标记不同能级，$g_a$ 为能量等于 $E_a$ 的微观态数。配分函数也可写为
 \begin{align}
-	Z=\sum_a g_a\e^{-\beta E_a}.
+	Z = \sum_a g_a\e^{-\beta E_a}.
 \end{align}
 \paragraph{正则分布的热力学公式}内能
 \begin{align}
-	E=\sum_s\rho_s E_s=Z^{-1}\sum_s E_s\e^{-\beta E_s}=-\pv{\ln Z}\beta.
+	E = \sum_s\rho_s E_s = Z^{-1}\sum_s E_s\e^{-\beta E_s} = -\pv{\ln Z}\beta.
 \end{align}
 状态方程
 \begin{align}
-	Y_i=\sum_s\rho_s\pv{E_s}{y_i}=-\frac1\beta\pv{\ln Z}{y_i}.
+	Y_i = \sum_s\rho_s\pv{E_s}{y_i} = -\frac1\beta\pv{\ln Z}{y_i}.
 \end{align}
 熵
 \begin{align*}
-	T\d S&=\d E-\sum_i Y_i\d y_i=-\d\biggp{\pv{\ln Z}\beta}+\frac1\beta\sum_i\pv{\ln Z}{y_i}\d y_i\\
-	&=-\d\biggp{\pv{\ln Z}\beta}+\frac1\beta\Bigb{\d(\ln Z)-\pv{\ln Z}\beta\d\beta}\\
-	&=\frac1\beta\d\biggp{\ln Z-\beta\pv{\ln Z}\beta}.
+	T\d S &= \d E - \sum_i Y_i\d y_i = -\d\biggp{\pv{\ln Z}\beta} + \frac1\beta\sum_i\pv{\ln Z}{y_i}\d y_i\\
+	&= -\d\biggp{\pv{\ln Z}\beta} + \frac1\beta\Bigb{\d(\ln Z) - \pv{\ln Z}\beta\d\beta}\\
+	&= \frac1\beta\d\biggp{\ln Z - \beta\pv{\ln Z}\beta}.
 \end{align*}
-由热库的$S_\reservoir=\kB\ln\Omega_\reservoir$及$(\p S_\reservoir/\p E_\reservoir)_{V,N}=1/T$可得$\beta=1/(\kB T)$，且
-\begin{align}
-	S-S'=\kB\biggp{\ln Z-\beta\pv{\ln Z}\beta}=\kB(\ln Z+\beta E).
-\end{align}
+由热库的$S_\reservoir = \kB\ln\Omega_\reservoir$及$(\p S_\reservoir/\p E_\reservoir)_{V,N} = 1/T$可得$\beta = 1/(\kB T)$，且
+\begin{align*}
+	S - S' = \kB\biggp{\ln Z - \beta\pv{\ln Z}\beta} = \kB(\ln Z + \beta E).
+\end{align*}
 
-也可以直接计算每个系统的熵。取$M$个独立副本，其中有$M_s$个处于微观态$s$，这组占据数有$M!/\prod_s M_s!$种分配方式。将这些副本的熵除以$M$，用Stirling公式并取$M_s/M\to\rho_s$，得到
+也可以直接计算每个系统的熵。取$M$个独立副本，其中有$M_s$个处于微观态$s$，这组占据数有$\textstyle M!/\prod_s M_s!$种分配方式。将这些副本的熵除以$M$，用Stirling公式并取$M_s/M \to \rho_s$，得到
 \begin{align}
-	S=\lim_{M\to\infty}\frac{\kB}{M}\ln\frac{M!}{\prod_s M_s!}
-	=-\kB\sum_s\rho_s\ln\rho_s.
+	S = \lim_{M\to\infty}\frac{\kB}{M}\ln\frac{M!}{\prod_s M_s!}
+	= -\kB\sum_s\rho_s\ln\rho_s.
 \end{align}
-代入$\ln\rho_s=-\ln Z-\beta E_s$即得$S=\kB(\ln Z+\beta E)$，故$S'=0$。自由能为
+代入$\ln\rho_s = -\ln Z - \beta E_s$即得$S = \kB(\ln Z + \beta E)$，故$S' = 0$。自由能为
 \begin{align}
-	F=E-TS=-\kB T\ln Z.
+	F = E - TS = -\kB T\ln Z.
 \end{align}
 \paragraph{能量涨落}由
 \begin{align*}
-	\ave{E^2}&=\sum_s\rho_s E_s^2=Z^{-1}\sum_s E_s^2\e^{-\beta E_s}\\
-	&=Z^{-1}\pv[2]Z\beta=\pv[2]{\ln Z}\beta+\biggp{\pv{\ln Z}\beta}^2\\
-	&=\kB T^2C_V+\ave E^2
+	\ave{E^2} &= \sum_s\rho_s E_s^2 = Z^{-1}\sum_s E_s^2\e^{-\beta E_s}\\
+	&= Z^{-1}\pv[2]Z\beta = \pv[2]{\ln Z}\beta + \biggp{\pv{\ln Z}\beta}^2\\
+	&= \kB T^2C_V + \ave E^2
 \end{align*}
 能量涨落的方差为
 \begin{align}
-	(\Delta E)^2=\ave{E^2}-\ave E^2=\kB T^2C_V.
+	(\Delta E)^2 = \ave{E^2} - \ave E^2 = \kB T^2C_V.
 \end{align}
 \begin{example}{单原子分子理想气体的相对涨落}{}
-	平均能量$\ave E=\frac32 N\kB T$，热容$C_V=\frac32N\kB$，故相对涨落
+	平均能量$\ave E = 3N\kB T/2$，热容$C_V = 3N\kB/2$，故相对涨落
 	\[
-		\frac{\Delta E}{\ave E}=\sqrt{\frac2{3N}}.
+		\frac{\Delta E}{\ave E} = \sqrt{\frac2{3N}}.
 	\]
 	单个系统与热库交换能量，能量的标准差随$\sqrt N$增加，而每粒子能量的标准差随$1/\sqrt N$衰减。
 \end{example}
 \paragraph{正则分布的连续形式}
 对上述非简并气体，按能量把相空间分成薄壳，配分函数写成态密度的积分。取基态能量为零，有
 \begin{align}
-	Z=\frac1{N!h^f}\int\e^{-\beta H}\d\Omega=\intRplus g(E)\e^{-\beta E}\d E.
+	Z = \frac1{N!h^f}\int\e^{-\beta H}\d\Omega = \intRplus g(E)\e^{-\beta E}\d E.
 \end{align}
 \begin{example}{用正则分布求单原子理想气体状态方程}{}
-	代入式\eqref{eqn:microcanonical ideal gas density}的$g(E)$，利用
-	$\intRplus E^{s-1}\e^{-\beta E}\d E=\Gamma(s)/\beta^s$，得
-	\[
-		Z=\frac{V^N}{N!}\Bigp{\frac{2\pi m}{h^2\beta}}^{3N/2}=\frac{Z_\transl^N}{N!}.
-	\]
+	代入式\eqref{eqn:microcanonical ideal gas density}的$g(E)$，利用Gamma函数积分求得配分函数，
+	\begin{gather*}
+		\intRplus E^{s-1}\e^{-\beta E}\d E = \frac{\Gamma(s)}{\beta^s},\\
+		Z = \frac{V^N}{N!}\Bigp{\frac{2\pi m}{h^2\beta}}^{3N/2} = \frac{Z_\transl^N}{N!}.
+	\end{gather*}
 	内能
 	\begin{align}
-		E=-\pv{\ln Z}\beta=\frac{3N}{2\beta}=\frac32N\kB T.
+		E = -\pv{\ln Z}\beta = \frac{3N}{2\beta} = \frac32N\kB T.
 	\end{align}
 	状态方程
 	\begin{align}
-		p=\frac1\beta\pv{\ln Z}V=\frac N{\beta V}=\frac{N\kB T}V.
+		p = \frac1\beta\pv{\ln Z}V = \frac N{\beta V} = \frac{N\kB T}V.
 	\end{align}
 \end{example}
-保持$N/V$不变并令$N,V\to\infty$，上述两种系综给出相同的每粒子内能和压强。对具有稳定短程相互作用的可加系统，在均匀单相区，选取相应的能量密度与温度即可用两种系综求平衡态方程。孤立系统的总能量在运动中守恒，能壳宽度表示制备的能量分辨率。正则系统与热库交换能量，其平衡涨落满足$(\Delta E)^2=\kB T^2C_V$。
+保持$N/V$不变并令$N,V \to \infty$，上述两种系综给出相同的每粒子内能和压强。对具有稳定短程相互作用的可加系统，在均匀单相区，选取相应的能量密度与温度即可用两种系综求平衡态方程。孤立系统的总能量在运动中守恒，能壳宽度表示制备的能量分辨率。正则系统与热库交换能量，其平衡涨落满足$(\Delta E)^2 = \kB T^2C_V$。
 
 \subsection{量子系综与自由能变分原理}
 \label{sec:gibbs-variational}
 
-给定温度和Hamilton算符，如何在所有量子态中选出热平衡态？沿用《量子力学》卷中密度算符的记号，以正算符$\hat\rho$描述系统，$\tr\hat\rho=1$，测量$\hat A$的平均值为$\tr(\hat\rho\hat A)$。在微正则系综中，若$\hat P_E$投影到指定能壳，等概率假设给出$\hat\rho_{\mathrm{mc}}=\hat P_E/\tr\hat P_E$。在正则系综中，系统与温度为$T>0$的热库交换能量。对固定粒子数和体积的系统，定义内能、von Neumann熵和自由能泛函
-\[
-	U[\hat\rho]=\tr(\hat\rho\hat H),\qquad
-	S[\hat\rho]=-\kB\tr(\hat\rho\ln\hat\rho),\qquad
-	\mathcal F_T[\hat\rho]=U[\hat\rho]-T S[\hat\rho].
-\]
-熵按密度算符的本征值计算，约定$0\ln0=0$。令$\beta=1/(\kB T)$，并假定配分函数$Z=\tr\e^{-\beta\hat H}$及所讨论态的内能和熵有限。代入Gibbs态$\hat\rho_\beta=\e^{-\beta\hat H}/Z$得
+给定温度和Hamilton算符，如何在所有量子态中选出热平衡态？沿用《量子力学》卷中密度算符的记号，以正算符$\hat\rho$描述系统，$\tr\hat\rho = 1$，测量$\hat A$的平均值为$\tr(\hat\rho\hat A)$。在微正则系综中，若$\hat P_E$投影到指定能壳，等概率假设给出$\hat\rho_{\mathrm{mc}} = \hat P_E/\tr\hat P_E$。在正则系综中，系统与温度为$T > 0$的热库交换能量。对固定粒子数和体积的系统，定义内能、von Neumann熵和自由能泛函
+\begin{subequations}
+	\label{eq:sm-density-operator-functionals}
+	\begin{align}
+		U[\hat\rho] &= \tr(\hat\rho\hat H),\\
+		S[\hat\rho] &= -\kB\tr(\hat\rho\ln\hat\rho),\\
+		\mathcal F_T[\hat\rho] &= U[\hat\rho] - T S[\hat\rho].
+	\end{align}
+\end{subequations}
+熵按密度算符的本征值计算，约定$0\ln0 = 0$。令$\beta = 1/(\kB T)$，并假定配分函数$Z = \tr\e^{-\beta\hat H}$及所讨论态的内能和熵有限。代入Gibbs态$\hat\rho_\beta = \e^{-\beta\hat H}/Z$得
 \begin{equation}
-	\mathcal F_T[\hat\rho]-F
-	=\kB T\,\tr\!\left[\hat\rho(\ln\hat\rho-\ln\hat\rho_\beta)\right],
-	\qquad F=-\kB T\ln Z .
+	\mathcal F_T[\hat\rho] - F
+	= \kB T\,\tr\!\left[\hat\rho(\ln\hat\rho - \ln\hat\rho_\beta)\right].
 	\label{eq:gibbs-var}
 \end{equation}
+其中$F = -\kB T\ln Z$为平衡自由能。
 
-右端的迹称为量子相对熵。在有限维空间中可以直接证明它非负。取$\hat\rho$与$\hat\rho_\beta$各自的本征基$\{\ket a\}$、$\{\ket b\}$，本征值分别为$p_a\geqslant0$、$q_b>0$。两组基的重叠权重$w_{ab}=|\langle a|b\rangle|^2$各行、各列之和都为一，因而$\sum_{a,b}w_{ab}(-p_a+q_b)=0$。将这项加入相对熵就有
+右端的迹称为量子相对熵。在有限维空间中可以直接证明它非负。取$\hat\rho$与$\hat\rho_\beta$各自的本征基$\{\ket a\}$、$\{\ket b\}$，本征值分别为$p_a \geqslant 0$、$q_b > 0$。两组基的重叠权重$w_{ab} = |\langle a|b\rangle|^2$各行、各列之和都为一，因而$\textstyle \sum_{a,b}w_{ab}(-p_a + q_b) = 0$。将这项加入相对熵就有
 \[
-	\tr\!\left[\hat\rho(\ln\hat\rho-\ln\hat\rho_\beta)\right]
-	=\sum_{a,b}w_{ab}\left[p_a\ln\frac{p_a}{q_b}-p_a+q_b\right]\geqslant0.
+	\tr\!\left[\hat\rho(\ln\hat\rho - \ln\hat\rho_\beta)\right]
+	= \sum_{a,b}w_{ab}\left[p_a\ln\frac{p_a}{q_b} - p_a + q_b\right] \geqslant 0.
 \]
-括号内的函数作为$p_a$的函数在$p_a=q_b$处取唯一最小值零。取等号时，每个$\ket a$仅在本征值$q_b=p_a$的子空间内有分量，因此$\hat\rho=\hat\rho_\beta$。证明对彼此不对易的试探态和Hamilton算符同样成立。由此得到自由能变分原理
-\[
-	F=\min_{\hat\rho}\mathcal F_T[\hat\rho]=\mathcal F_T[\hat\rho_\beta].
-\]
+括号内的函数作为$p_a$的函数在$p_a = q_b$处取唯一最小值零。取等号时，每个$\ket a$仅在本征值$q_b = p_a$的子空间内有分量，因此$\hat\rho = \hat\rho_\beta$。证明对彼此不对易的试探态和Hamilton算符同样成立。由此得到自由能变分原理
+\begin{equation}
+	\label{eq:sm-gibbs-variational-principle}
+	F = \min_{\hat\rho}\mathcal F_T[\hat\rho] = \mathcal F_T[\hat\rho_\beta].
+\end{equation}
 在能量本征基中，每个能量为$E_s$的态权重为$\e^{-\beta E_s}/Z$，简并能级中的各态等权。在受限的一族试探态中求最小值，就给出真实自由能的上界。下面用它计算铁磁体的平均场。
 
-若系统与粒子源交换粒子，而系统自身的Hamilton算符满足$[\hat H,\hat N]=0$，则$\hat H$与$\hat N$具有共同本征基。将上面的变分量改为$\mathcal F_T[\hat\rho]-\mu\tr(\hat\rho\hat N)$，并在所有粒子数扇区取迹，得到
-\[
-	\hat\rho_{\beta,\mu}=\frac{\e^{-\beta(\hat H-\mu\hat N)}}{\Xi},
-	\qquad \Xi=\tr\e^{-\beta(\hat H-\mu\hat N)}.
-\]
+若系统与粒子源交换粒子，而系统自身的Hamilton算符满足$[\hat H,\hat N] = 0$，则$\hat H$与$\hat N$具有共同本征基。将上面的变分量改为$\mathcal F_T[\hat\rho] - \mu\tr(\hat\rho\hat N)$，并在所有粒子数扇区取迹，得到
+\begin{subequations}
+	\label{eq:sm-grand-canonical-density-operator}
+	\begin{align}
+		\hat\rho_{\beta,\mu} &= \frac{\e^{-\beta(\hat H-\mu\hat N)}}{\Xi},\\
+		\Xi &= \tr\e^{-\beta(\hat H-\mu\hat N)}.
+	\end{align}
+\end{subequations}
 
 \subsection{实际气体的状态方程}
 
 $N$个全同粒子，体积$V$，
 \[
-	E=E_\transl+\varPhi+E_{\mathrm i}.
+	E = E_\transl + \varPhi + E_{\mathrm i}.
 \]
 其中$E_\transl(p)$与质心平动有关，$\varPhi(q)$是分子间势能，$E_{\mathrm i}$是分子内部运动。故
 \[
-	Z=\frac1{N!h^{3N}}\int\e^{-\beta E_\transl}\d p\int\e^{-\beta\varPhi}\d q\cdot Z_{\mathrm i}.
+	Z = \frac1{N!h^{3N}}\int\e^{-\beta E_\transl}\d p\int\e^{-\beta\varPhi}\d q \cdot Z_{\mathrm i}.
 \]
 考虑分子间势能项
+\begin{equation}
+	\label{eq:sm-configuration-integral}
+	Q := \int\e^{-\beta\varPhi}\d q
+\end{equation}
+只考虑分子间两两相互作用，其作用势$\phi_{ij} \equiv \phi(r_{ij})$只与分子间距离有关，
 \[
-	Q:=\int\e^{-\beta\varPhi}\d q
-\]
-只考虑分子间两两相互作用，其作用势$\phi_{ij}\equiv\phi(r_{ij})$只与分子间距离有关，
-\[
-	\varPhi=\sum_{i<j}\phi_{ij}
+	\varPhi = \sum_{i<j}\phi_{ij}
 \]
 引入Mayer函数
+\begin{equation}
+	\label{eq:sm-mayer-function}
+	f_{ij} = \e^{-\beta\phi_{ij}} - 1.
+\end{equation}
+取远处势能为零，则$r_{ij} \to \infty$时$f_{ij} \to 0$。对于$\phi(r) \to +\infty$的排斥芯，$r_{ij} \to 0$时$f_{ij} \to -1$。吸引区的$f_{ij}$可以大于1。将各对粒子的权重相乘并展开，得到
 \[
-	f_{ij}=\e^{-\beta\phi_{ij}}-1.
-\]
-取远处势能为零，则$r_{ij}\to\infty$时$f_{ij}\to0$。对于$\phi(r)\to+\infty$的排斥芯，$r_{ij}\to0$时$f_{ij}\to-1$。吸引区的$f_{ij}$可以大于1。将各对粒子的权重相乘并展开，得到
-\[
-	Q=\int\prod_{i<j}(1+f_{ij})\d q=\int\Bigp{1+\sum_{i<j}f_{ij}+\frac12\overset{(i,j)\neq(k,\ell)}{\sum_{i<j}\sum_{k<\ell}}f_{ij}f_{k\ell}+\cdots}\d q.
+	Q = \int\prod_{i<j}(1 + f_{ij})\d q = \int\Bigp{1 + \sum_{i<j}f_{ij} + \frac12\overset{(i,j) \neq (k,\ell)}{\sum_{i<j}\sum_{k<\ell}}f_{ij}f_{k\ell} + \cdots}\d q.
 \]
 先写出单个粒子对对构型积分的贡献：
 \[
-	Q=V^N+\frac12N(N-1)V^{N-2}\int f(r_{12})\d\bm r_1\nd\bm r_2+\cdots.
+	Q = V^N + \frac12N(N - 1)V^{N-2}\int f(r_{12})\d\bm r_1\nd\bm r_2 + \cdots.
 \]
-引入质心坐标$\bm R=\frac{m_1\bm r_1+m_2\bm r_2}{m_1+m_2}$和相对位置$\bm r=\bm r_1-\bm r_2$，变换的Jacobi行列式绝对值为1。忽略容器边界对短程相互作用的影响，有
+引入质心坐标和相对位置，
+\begin{align*}
+	\bm R &= \frac{m_1\bm r_1 + m_2\bm r_2}{m_1 + m_2},\\
+	\bm r &= \bm r_1 - \bm r_2.
+\end{align*}
+这一变换的Jacobi行列式绝对值为1。忽略容器边界对短程相互作用的影响，有
 \[
-	\int f(r_{12})\d\bm r_1\nd\bm r_2=\int f(r)\d\bm r\nd\bm R=-2Va_2(T).
+	\int f(r_{12})\d\bm r_1\nd\bm r_2 = \int f(r)\d\bm r\nd\bm R = -2Va_2(T).
 \]
 第二级Virial系数
 \begin{align}
-	a_2(T)=-\frac12\int f(r)\d\bm r=-2\pi\intRplus\bigp{\e^{-\beta\phi(r)}-1}r^2\d r
+	a_2(T) = -\frac12\int f(r)\d\bm r = -2\pi\intRplus\bigp{\e^{-\beta\phi(r)} - 1}r^2\d r
 \end{align}
-在热力学极限中，$N^2a_2/V$一般并不小，不能将$Q$截断后直接使用$\ln(1-x)\simeq-x$。应对$\ln Q$作连通集团展开：在低密度且高阶集团贡献可忽略时，保留二体项得到
+在热力学极限中，$N^2a_2/V$一般并不小，不能将$Q$截断后直接使用$\ln(1 - x) \simeq -x$。应对$\ln Q$作连通集团展开：在低密度且高阶集团贡献可忽略时，保留二体项得到
 \begin{align}
-	\ln Q=N\ln V-\frac{N(N-1)}Va_2(T)+\cdots\simeq N\ln V-\frac{N^2}Va_2(T).
+	\ln Q = N\ln V - \frac{N(N - 1)}Va_2(T) + \cdots \simeq N\ln V - \frac{N^2}Va_2(T).
 \end{align}
-这里的控制参数与密度$n=N/V$有关，例如$n\int\abs{f(r)}\d\bm r\ll1$可用于判断低密度近似；相变附近不应据此截断。
+这里的控制参数与密度$n = N/V$有关，例如$\textstyle n\int\abs{f(r)}\d\bm r \ll 1$可用于判断低密度近似；相变附近不应据此截断。
 状态方程
 \begin{align*}
-	p=\frac1\beta\pv{\ln Q}V=\frac1\beta\bigb{n+n^2a_2(T)+O(n^3)}.
+	p = \frac1\beta\pv{\ln Q}V = \frac1\beta\bigb{n + n^2a_2(T) + O(n^3)}.
 \end{align*}
-记$v=V/N$为每粒子占有的体积，得到
+记$v = V/N$为每粒子占有的体积，得到
 \begin{align}
-	\frac{pv}{\kB T}=1+\frac{a_2(T)}v+O(v^{-2}).
+	\frac{pv}{\kB T} = 1 + \frac{a_2(T)}v + O(v^{-2}).
 \end{align}
 \begin{example}{van der Waals力}{Van der Waals Force}
-	中性原子之间的London色散作用在远距离给出与$-r^{-6}$成正比的吸引势。用经验的$r^{-12}$项描述近距离排斥，可写成Lennard--Jones势
+	中性原子之间的London色散作用在远距离给出与$-r^{-6}$成正比的吸引势。用经验的$r^{-12}$项描述近距离排斥，可写成 Lennard-Jones 势
 	\[
-		\phi_{\mathrm{LJ}}(r)=\phi_0\Bigb{\Bigp{\frac{r_0}r}^{12}-2\Bigp{\frac{r_0}r}^6}.
+		\phi_{\mathrm{LJ}}(r) = \phi_0\Bigb{\Bigp{\frac{r_0}r}^{12} - 2\Bigp{\frac{r_0}r}^6}.
 	\]
-	势阱在$r=r_0$处达到极小值$-\phi_0$。为了估算第二维里系数，另取直径$r_0$的硬球，并选取同样的阱深，令
+	势阱在$r = r_0$处达到极小值$-\phi_0$。为了估算第二维里系数，另取直径$r_0$的硬球，并选取同样的阱深，令
 	\begin{equation}
-		\phi(r)=\begin{cases}
-			\infty,&r<r_0\\
-			-\phi_0\Bigp{\frac{r_0}r}^6,&r\ge r_0.
+		\phi(r) = \begin{cases}
+			\infty,&r < r_0\\
+			-\phi_0\Bigp{\frac{r_0}r}^6,&r \ge r_0.
 		\end{cases}
 	\end{equation}
 	\begin{notecaptionblock}
 		\tikzfigure{pair-potential}
-		\captionof{figure}{Lennard--Jones势与硬球模型的吸引势尾}
+		\captionof{figure}{Lennard-Jones 势与硬球模型的吸引势尾}
 		\label{fig:phi(r)}
 	\end{notecaptionblock}
 	故
 	{\begin{align*}
-		a_2(T)&=-2\pi\int_0^{r_0}-r^2\d r-2\pi\int_{r_0}^{+\infty}\bigp{\e^{-\beta\phi(r)}-1}r^2\d r\\
-		&\simeq\frac{2\pi}3r_0^3+2\pi\int_{r_0}^{+\infty}\beta\phi(r)r^2\d r\tag{$\kB T\gg\phi_0$}\\
-		&=\frac{2\pi}3r_0^3-\frac{2\pi}3\frac{\phi_0r_0^3}{\kB T}=:b-\frac a{\kB T}.
+		a_2(T) &= -2\pi\int_0^{r_0} - r^2\d r - 2\pi\int_{r_0}^{+\infty}\bigp{\e^{-\beta\phi(r)} - 1}r^2\d r\\
+		&\simeq \frac{2\pi}3r_0^3 + 2\pi\int_{r_0}^{+\infty}\beta\phi(r)r^2\d r\tag{$\kB T\gg\phi_0$}\\
+		&= \frac{2\pi}3r_0^3 - \frac{2\pi}3\frac{\phi_0r_0^3}{\kB T} =: b - \frac a{\kB T}.
 	\end{align*}}
-	硬球的几何体积为$v_0=\pi r_0^3/6$，故$b=4v_0$。在$b\ll v$时，
+	硬球的几何体积为$v_0 = \pi r_0^3/6$，故$b = 4v_0$。在$b \ll v$时，
 	\[
-		\frac{pv}{\kB T}\simeq1+\frac bv-\frac a{v\kB T}\simeq\frac1{1-b/v}-\frac a{v\kB T}.
+		\frac{pv}{\kB T} \simeq 1 + \frac bv - \frac a{v\kB T} \simeq \frac1{1 - b/v} - \frac a{v\kB T}.
 	\]
-	以$v-b$近似每粒子可用的体积，得到与上述第二维里系数相符的van der Waals方程
+	以$v - b$近似每粒子可用的体积，得到与上述第二维里系数相符的van der Waals方程
 	\begin{align}
-		\Bigp{p+\frac a{v^2}}(v-b)=\kB T.
+		\Bigp{p + \frac a{v^2}}(v - b) = \kB T.
 	\end{align}
 \end{example}
 
 \subsection{Ising模型与平均场近似}
 
-Fe、Ni、Co等铁磁性物质在Curie温度以下可以自发磁化。Lenz提出的Ising模型用格点上的两个自旋取向描述这种有序化。设$N$个格点上的自旋$S_i=\pm1$，每个磁矩的大小为$\mu$，沿自旋轴的外磁场为$H$。记$h=\mu_0\mu H$，则能量和正则配分函数为
-\[
-	E\{S_i\}=-\sum_{\langle ij\rangle}\varepsilon_{ij}S_iS_j-h\sum_i S_i,\qquad
-	Z=\sum_{S_1,\ldots,S_N=\pm1}\e^{-\beta E\{S_i\}}.
-\]
-$\langle ij\rangle$对每个无序最近邻对只计一次。以下取均匀铁磁耦合$\varepsilon_{ij}=J>0$，每个格点有$z$个近邻，如正方晶格的$z=4$。Hamilton算符在这些自旋构型组成的基中对角。
+Fe、Ni、Co等铁磁性物质在Curie温度以下可以自发磁化。Lenz提出的Ising模型用格点上的两个自旋取向描述这种有序化。设$N$个格点上的自旋$S_i = \pm1$，每个磁矩的大小为$\mu$，沿自旋轴的外磁场为$H$。记$h = \mu_0\mu H$，则能量和正则配分函数为
+\begin{subequations}
+	\label{eq:sm-ising-hamiltonian}
+	\begin{align}
+		E\{S_i\} &= -\sum_{\langle ij\rangle}\varepsilon_{ij}S_iS_j - h\sum_i S_i,\\
+		Z &= \sum_{S_1,\ldots,S_N=\pm1}\e^{-\beta E\{S_i\}}.
+	\end{align}
+\end{subequations}
+$\langle ij\rangle$对每个无序最近邻对只计一次。以下取均匀铁磁耦合$\varepsilon_{ij} = J > 0$，每个格点有$z$个近邻，如正方晶格的$z = 4$。Hamilton算符在这些自旋构型组成的基中对角。
 
 \paragraph{独立自旋试探态}
 
 取各格点相互独立且具有相同平均自旋$m$的试探态
-\[
-	\hat\rho_m=\bigotimes_{i=1}^N\left(\sum_{\sigma=\pm1}p_\sigma\ketbra{\sigma}{\sigma}\right),
-	\qquad p_\sigma=\frac{1+\sigma m}{2},\qquad -1\leqslant m\leqslant1 .
-\]
-这个态给出$\ave{S_i}=m$，并使不同格点的$\ave{S_iS_j}=\ave{S_i}\ave{S_j}=m^2$。由于全系统有$Nz/2$条键，且独立格点的熵可加，\eqref{eq:gibbs-var}给出的每格点自由能上界为
-\[
-	f_{\mathrm{var}}(m)=\frac{\mathcal F_T[\hat\rho_m]}N
-	=-\frac12 zJm^2-hm+\kB T\sum_{\sigma=\pm1}p_\sigma\ln p_\sigma .
-\]
-能量偏好同向排列，熵在$m=0$时最大。对$m$求导得到
+\begin{align*}
+	\hat\rho_m &= \bigotimes_{i=1}^N\left(\sum_{\sigma=\pm1}p_\sigma\ketbra{\sigma}{\sigma}\right),\\
+	p_\sigma &= \frac{1 + \sigma m}{2},\qquad -1 \leqslant m \leqslant 1 .
+\end{align*}
+这个态给出$\ave{S_i} = m$，并使不同格点的$\ave{S_iS_j} = \ave{S_i}\ave{S_j} = m^2$。由于全系统有$Nz/2$条键，且独立格点的熵可加，\eqref{eq:gibbs-var}给出的每格点自由能上界为
+\begin{equation}
+	\label{eq:sm-ising-variational-free-energy}
+	f_{\mathrm{var}}(m) = \frac{\mathcal F_T[\hat\rho_m]}N
+	= -\frac12 zJm^2 - hm + \kB T\sum_{\sigma=\pm1}p_\sigma\ln p_\sigma .
+\end{equation}
+能量偏好同向排列，熵在$m = 0$时最大。对$m$求导得到
 \begin{align}
-	0&=-zJm-h+\frac{\kB T}{2}\ln\frac{1+m}{1-m},\notag\\
-	m&=\tanh[\beta(h+zJm)] .
+	0 &= -zJm - h + \frac{\kB T}{2}\ln\frac{1 + m}{1 - m},\notag\\
+	m &= \tanh[\beta(h + zJm)] .
 	\label{eq:ising-mf-spin}
 \end{align}
-单个自旋感受到的平均有效场为$H+zJm/(\mu_0\mu)$。也可以在每条键上作近似$S_iS_j\simeq m(S_i+S_j)-m^2$，得到
-\[
-	E_{\mathrm{MF}}=\tfrac12NzJm^2-(h+zJm)\sum_iS_i,\qquad
-	Z_{\mathrm{MF}}=\e^{-\beta NzJm^2/2}\,[2\cosh(\beta(h+zJm))]^N .
-\]
-常数项补偿了相邻格点对同一条键的重复计数。在自洽解上，$-\kB T\ln Z_{\mathrm{MF}}/N=f_{\mathrm{var}}(m)$，总磁矩为$VM=N\mu m$。零场时$f_{\mathrm{var}}''(0)=\kB T-zJ$。高温下自由能在$m=0$取最小值，低于$T_\Curie=zJ/\kB$时出现一对非零的极小点。这个平均场临界点给出Landau理论的临界指数，临界附近空间涨落的作用见\secref{sec:critical-fluctuations}。独立自旋的假设将不同格点间的连通关联$\ave{S_iS_j}-\ave{S_i}\ave{S_j}$全部置零。下面在一维链上直接计算这项关联。
+单个自旋感受到的平均有效场为$H + zJm/(\mu_0\mu)$。也可以在每条键上作近似$S_iS_j \simeq m(S_i + S_j) - m^2$，得到
+\begin{align*}
+	E_{\mathrm{MF}} &= \frac12NzJm^2 - (h + zJm)\sum_iS_i,\\
+	Z_{\mathrm{MF}} &= \e^{-\beta NzJm^2/2}\,[2\cosh(\beta(h + zJm))]^N .
+\end{align*}
+常数项补偿了相邻格点对同一条键的重复计数。在自洽解上，$-\kB T\ln Z_{\mathrm{MF}}/N = f_{\mathrm{var}}(m)$，总磁矩为$VM = N\mu m$。零场时$f_{\mathrm{var}}''(0) = \kB T - zJ$。高温下自由能在$m = 0$取最小值，低于$T_\Curie = zJ/\kB$时出现一对非零的极小点。这个平均场临界点给出Landau理论的临界指数，临界附近空间涨落的作用见\secref{sec:critical-fluctuations}。独立自旋的假设将不同格点间的连通关联$\ave{S_iS_j} - \ave{S_i}\ave{S_j}$全部置零。下面在一维链上直接计算这项关联。
 
 \subsection{一维Ising链的转移矩阵与关联长度}
 \label{sec:ising-chain}
 
-将$N\geqslant3$个自旋排成格距为$a$的环，规定$S_{N+1}=S_1$。先令$h=0$，记$K=\beta J$。每条键的Boltzmann权重只依赖两端自旋，取$+1,-1$为行、列顺序，定义转移矩阵
-\[
-	\mathsf T_{\sigma\sigma'}=\e^{K\sigma\sigma'},\qquad
-	\mathsf T=\begin{pmatrix}\e^K&\e^{-K}\\\e^{-K}&\e^K\end{pmatrix}.
-\]
-将$\mathsf T_{S_1 S_2}\cdots\mathsf T_{S_N S_1}$对所有自旋求和，每个内部指标的求和都是一次矩阵乘法，首尾相接给出迹。$\mathsf T$的对称、反对称本征矢$(1,\pm1)^{\mathsf T}/\sqrt2$对应本征值$\lambda_+=2\cosh K$、$\lambda_-=2\sinh K$，故
-\[
-	Z_N=\tr(\mathsf T^N)=\lambda_+^N+\lambda_-^N .
-\]
-在第$i$个格点插入$S_i$，就要在矩阵乘积中相应位置插入$\mathsf S=\operatorname{diag}(1,-1)$。它交换上述两个本征矢。零场有限环具有整体自旋反演对称性，$\ave{S_i}=0$。相隔$r$个格点的连通关联因而为
+将$N \geqslant 3$个自旋排成格距为$a$的环，规定$S_{N+1} = S_1$。先令$h = 0$，记$K = \beta J$。每条键的Boltzmann权重只依赖两端自旋，取$+1,-1$为行、列顺序，定义转移矩阵
+\begin{equation}
+	\label{eq:sm-ising-transfer-matrix}
+	\mathsf T_{\sigma\sigma'} = \e^{K\sigma\sigma'},\qquad
+	\mathsf T = \begin{pmatrix}\e^K&\e^{-K}\\\e^{-K}&\e^K\end{pmatrix}.
+\end{equation}
+将$\mathsf T_{S_1 S_2}\cdots\mathsf T_{S_N S_1}$对所有自旋求和，每个内部指标的求和都是一次矩阵乘法，首尾相接给出迹。$\mathsf T$的对称、反对称本征矢$(1,\pm1)^{\mathsf T}/\sqrt2$对应本征值$\lambda_+ = 2\cosh K$、$\lambda_- = 2\sinh K$，故
+\begin{equation}
+	\label{eq:sm-ising-ring-partition}
+	Z_N = \tr(\mathsf T^N) = \lambda_+^N + \lambda_-^N .
+\end{equation}
+在第$i$个格点插入$S_i$，就要在矩阵乘积中相应位置插入$\mathsf S = \operatorname{diag}(1,-1)$。它交换上述两个本征矢。零场有限环具有整体自旋反演对称性，$\ave{S_i} = 0$。相隔$r$个格点的连通关联因而为
 \begin{align}
-	C_N(r)&=\ave{S_iS_{i+r}}
-	=\frac{\tr(\mathsf S\mathsf T^r\mathsf S\mathsf T^{N-r})}{Z_N}
-	=\frac{u^r+u^{N-r}}{1+u^N},\qquad
-	u=\frac{\lambda_-}{\lambda_+}=\tanh K,\quad 0\leqslant r\leqslant N .
+	C_N(r) &= \ave{S_iS_{i+r}}
+	= \frac{\tr(\mathsf S\mathsf T^r\mathsf S\mathsf T^{N-r})}{Z_N}
+	= \frac{u^r + u^{N-r}}{1 + u^N}.
 	\label{eq:ising-ring-correlation}
 \end{align}
-两项反映了绕环连接这两个格点的两条路径。任意$T>0$均有$0<u<1$。先令$N\to\infty$并保持$r$固定，得到无限链的结果
-\begin{equation}
-	C(r)=(\tanh\beta J)^{|r|}=\e^{-|r|a/\xi},\qquad
-	\xi=-\frac{a}{\ln(\tanh\beta J)} .
-	\label{eq:ising-chain-xi}
-\end{equation}
-关联长度$\xi$是关联衰减到原值$1/\e$时的距离。图~\ref{fig:ising-chain-correlation}中，对同一个非零格点间隔，温度越低，两自旋的关联越强。正温下$\xi$总是有限的，低温下$\tanh K\simeq1-2\e^{-2K}$，于是$\xi\simeq(a/2)\e^{2K}$。
+这里$u = \lambda_-/\lambda_+ = \tanh K$，间隔取$0 \leqslant r \leqslant N$。
+两项反映了绕环连接这两个格点的两条路径。任意$T > 0$均有$0 < u < 1$。先令$N \to \infty$并保持$r$固定，得到无限链的结果
+\begin{subequations}\label{eq:ising-chain-xi}
+	\begin{align}
+		C(r) &= (\tanh\beta J)^{|r|} = \e^{-|r|a/\xi},\\
+		\xi &= -\frac{a}{\ln(\tanh\beta J)} .
+	\end{align}
+\end{subequations}
+关联长度$\xi$是关联衰减到原值$1/\e$时的距离。图~\ref{fig:ising-chain-correlation}中，对同一个非零格点间隔，温度越低，两自旋的关联越强。正温下$\xi$总是有限的，低温下$\tanh K \simeq 1 - 2\e^{-2K}$，于是$\xi \simeq (a/2)\e^{2K}$。
 \begin{notecaptionblock}
 	\tikzfigure{ising-chain-correlation}
 	\captionof{figure}[一维零场铁磁链的自旋关联]{一维零场铁磁链的自旋关联。每个点对应相隔$r$个格距的两处自旋，半对数坐标下的斜率绝对值随降温而减小。}
@@ -377,163 +409,184 @@ $\langle ij\rangle$对每个无序最近邻对只计一次。以下取均匀铁�
 \end{notecaptionblock}
 
 在相邻反向自旋之间存在一道畴壁，键能从$-J$升至$+J$。周期边界要求畴壁成对出现，而在无限链上任一条键出现畴壁的概率为
-\[
-	p_{\mathrm{wall}}=\frac{1-\ave{S_iS_{i+1}}}{2}=\frac{1}{1+\e^{2K}} .
-\]
+\begin{equation}
+	\label{eq:sm-ising-domain-wall-probability}
+	p_{\mathrm{wall}} = \frac{1 - \ave{S_iS_{i+1}}}{2} = \frac{1}{1 + \e^{2K}} .
+\end{equation}
 在均匀背景中翻转一段自旋只需付出两道畴壁的能量$4J$，畴段可以任意长。正温下有限的畴壁密度破坏长程有序，低温时相邻畴壁的平均间距$a/p_{\mathrm{wall}}$约为$2\xi$。
 
-还可以用弱磁场同时检验关联和磁化。记$m=N^{-1}\sum_i\ave{S_i}$。对有限环的Boltzmann权重关于$h$求导，得到$\partial m/\partial h=(\beta/N)\sum_{ij}(\ave{S_i S_j}-\ave{S_i}\ave{S_j})$。取无限链零场极限后，
-\[
+还可以用弱磁场同时检验关联和磁化。记$\textstyle m = N^{-1}\sum_i\ave{S_i}$。对有限环的Boltzmann权重关于$h$求导，得到
+\begin{equation}
+	\label{eq:sm-finite-spin-response}
+	\pv m h = \frac{\beta}{N}\sum_{ij}\bigb{\ave{S_i S_j} - \ave{S_i}\ave{S_j}}.
+\end{equation}
+取无限链零场极限后，
+\begin{equation}
+	\label{eq:sm-ising-chain-susceptibility}
 	\left.\frac{\partial m}{\partial h}\right|_{h=0}
-	=\beta\sum_{r=-\infty}^{\infty}C(r)
-	=\beta\frac{1+u}{1-u}=\beta\e^{2K} .
-\]
-两点关联的空间积分由此决定均匀磁化对外场的响应。若使用磁化强度$M=(N/V)\mu m$，则$\partial M/\partial H=\mu_0(N/V)\mu^2\,\partial m/\partial h$。
+	= \beta\sum_{r=-\infty}^{\infty}C(r)
+	= \beta\frac{1 + u}{1 - u} = \beta\e^{2K} .
+\end{equation}
+两点关联的空间积分由此决定均匀磁化对外场的响应。若使用磁化强度$M = (N/V)\mu m$，则$\partial M/\partial H = \mu_0(N/V)\mu^2\,\partial m/\partial h$。
 
-为考察自发磁化，应当先取热力学极限，再令$h\to0^+$。将每个自旋的场能平分给左右两条键，转移矩阵变为$\mathsf T_{\sigma\sigma'}(h)=\exp[K\sigma\sigma'+\beta h(\sigma+\sigma')/2]$。解其二阶特征方程，最大本征值和无限链每格点自由能为
-\[
-	\lambda_+(h)=\e^K\!\left[\cosh(\beta h)+\sqrt{\sinh^2(\beta h)+\e^{-4K}}\right],
-	\qquad f=-\kB T\ln\lambda_+(h).
-\]
-因此$m=-\partial f/\partial h=\sinh(\beta h)/\sqrt{\sinh^2(\beta h)+\e^{-4K}}$。任意正温下$f$在$h=0$处解析，$h\to0^+$时$m\to0$。一维短程铁磁链的有序化只发生在零温。若始终保持$h=0$，周期链降至零温时两个全同向基态等权，单点平均为零而$\ave{S_iS_j}=1$。若先在正场中降至零温，再令$h\to0^+$，便选定了$m=1$的基态。转移矩阵解和平均场预测的差别来自一维链中能够分隔任意长畴段的有限能量畴壁。\footnote{参见David Tong的\href{https://davidtong.org/teaching/statistical-physics/statmechhtml/S5}{\textit{Statistical Physics}第五章}。}
+为考察自发磁化，应当先取热力学极限，再令$h \to 0^+$。将每个自旋的场能平分给左右两条键，转移矩阵变为$\mathsf T_{\sigma\sigma'}(h) = \exp[K\sigma\sigma' + \beta h(\sigma + \sigma')/2]$。解其二阶特征方程，最大本征值和无限链每格点自由能为
+\begin{subequations}
+	\label{eq:sm-ising-field-free-energy}
+	\begin{align}
+		\lambda_+(h) &= \e^K\!\left[\cosh(\beta h) + \sqrt{\sinh^2(\beta h) + \e^{-4K}}\right],\\
+		f &= -\kB T\ln\lambda_+(h).
+	\end{align}
+\end{subequations}
+因此$m = -\partial f/\partial h = \sinh(\beta h)/\sqrt{\sinh^2(\beta h) + \e^{-4K}}$。任意正温下$f$在$h = 0$处解析，$h \to 0^+$时$m \to 0$。一维短程铁磁链的有序化只发生在零温。若始终保持$h = 0$，周期链降至零温时两个全同向基态等权，单点平均为零而$\ave{S_iS_j} = 1$。若先在正场中降至零温，再令$h \to 0^+$，便选定了$m = 1$的基态。转移矩阵解和平均场预测的差别来自一维链中能够分隔任意长畴段的有限能量畴壁。\footnote{参见David Tong的\href{https://davidtong.org/teaching/statistical-physics/statmechhtml/S5}{\textit{Statistical Physics}第五章}。}
 
 \section{巨正则分布}
 %巨正则分布是$V$恒定，并与恒温粒子源接触而达平衡系统服从的分布，平衡时，温度$T$和化学势$\mu$相同。
 
 与正则分布相似，系统与热源构成孤立系统，总能量和总粒子数恒定。给定粒子数 $N$，用 $s$ 标记该粒子数下的微观态，$E_{N,s}$ 为该态的能量。系统具有粒子数 $N$ 并处于该态的概率满足
 \[
-	\rho_{N,s}\propto\Omega_\reservoir(N_\reservoir,E_\reservoir)=\Omega_\reservoir(N^{(0)}-N,E^{(0)}-E_{N,s}).
+	\rho_{N,s} \propto \Omega_\reservoir(N_\reservoir,E_\reservoir) = \Omega_\reservoir(N^{(0)} - N,E^{(0)} - E_{N,s}).
 \]
 设系统的平均粒子数、能量为$\bar N,\bar E$，相应的库平均量为$\bar N_\reservoir,\bar E_\reservoir$。库足够大时，交换粒子和能量引起的温度、化学势变化可忽略，故在库的平衡点作一阶展开
 \[
-	\ln\Omega_\reservoir(N_\reservoir,E_\reservoir)\simeq\ln\Omega_\reservoir(\bar N_\reservoir,\bar E_\reservoir)
-	-\alpha(N-\bar N)-\beta(E_{N,s}-\bar E).
+	\ln\Omega_\reservoir(N_\reservoir,E_\reservoir) \simeq \ln\Omega_\reservoir(\bar N_\reservoir,\bar E_\reservoir)
+	- \alpha(N - \bar N) - \beta(E_{N,s} - \bar E).
 \]
-其中$\alpha=\alpha(T,\mu),\;\beta=\beta(T)$只与热源有关，故
+其中$\alpha = \alpha(T,\mu),\;\beta = \beta(T)$只与热源有关，故
 \begin{align}
-	\rho_{N,s}=\Xi^{-1}\e^{-\alpha N-\beta E_{N,s}}.
+	\rho_{N,s} = \Xi^{-1}\e^{-\alpha N-\beta E_{N,s}}.
 \end{align}
 其中巨配分函数
 \begin{align}
-	\Xi=\sum_{N=0}^\infty\sum_s\e^{-\alpha N-\beta E_{N,s}}.
+	\Xi = \sum_{N=0}^\infty\sum_s\e^{-\alpha N-\beta E_{N,s}}.
 \end{align}
-\paragraph{连续形式}对不同粒子数$N$，需定义不同维数的$\varGamma$空间，设粒子自由度为$r$，则系统自由度为$f=Nr$：
+\paragraph{连续形式}对不同粒子数$N$，需定义不同维数的$\varGamma$空间，设粒子自由度为$r$，则系统自由度为$f = Nr$：
 \begin{align}
-	\Xi=\sum_{N=0}^\infty\frac1{N!h^{Nr}}\e^{-\alpha N}\int\e^{-\beta E(q,p,y)}\prod_{i=1}^{Nr}\d q_i\nd p_i.
+	\Xi = \sum_{N=0}^\infty\frac1{N!h^{Nr}}\e^{-\alpha N}\int\e^{-\beta E(q,p,y)}\prod_{i=1}^{Nr}\d q_i\nd p_i.
 \end{align}
 \paragraph{巨配分函数与配分函数的关系}有时，如量子统计情形，$\Xi$比$Z$计算方便
 \[
-	\Xi(\alpha,\beta,y)=\sum_{N=0}^\infty\sum_s\e^{-\alpha N-\beta E_{N,s}}=\sum_Nq^NZ_N(\beta,y).
+	\Xi(\alpha,\beta,y) = \sum_{N=0}^\infty\sum_s\e^{-\alpha N-\beta E_{N,s}} = \sum_Nq^NZ_N(\beta,y).
 \]
-其中逸度(fugacity)为$q=\e^{-\alpha}$。
+其中逸度(fugacity)为$q = \e^{-\alpha}$。
 
 \paragraph{巨正则分布的热力学公式}宏观量等于对应微观量的统计平均值
 \begin{align}
-	\ave N=\sum_N\sum_s N\rho_{N,s}=-\pv{\ln\Xi}\alpha.
+	\ave N = \sum_N\sum_s N\rho_{N,s} = -\pv{\ln\Xi}\alpha.
 \end{align}
 内能
 \begin{align}
-	U=\ave E=\sum_N\sum_s E_{N,s}\rho_{N,s}=-\pvat{\ln\Xi}{\beta}{\alpha,y}.
+	U = \ave E = \sum_N\sum_s E_{N,s}\rho_{N,s} = -\pvat{\ln\Xi}{\beta}{\alpha,y}.
 \end{align}
 状态方程
 \begin{align}
-	\ave Y=\sum_N\sum_s\pv{E_{N,s}}y\rho_{N,s}=-\frac1\beta\pv{\ln\Xi}y.
+	\ave Y = \sum_N\sum_s\pv{E_{N,s}}y\rho_{N,s} = -\frac1\beta\pv{\ln\Xi}y.
 \end{align}
 熵，首先由
 \begin{align*}
-	\d(\ln\Xi+\alpha\ave N+\beta\ave E)=\alpha\d\ave N+\beta\d\ave E-\beta\ave Y\d y=\beta\Bigp{\d\ave E-\ave Y\d y+\frac\alpha\beta\d\ave N}.
+	\d(\ln\Xi + \alpha\ave N + \beta\ave E) = \alpha\d\ave N + \beta\d\ave E - \beta\ave Y\d y = \beta\Bigp{\d\ave E - \ave Y\d y + \frac\alpha\beta\d\ave N}.
 \end{align*}
-故$\mu=-\frac\alpha\beta,\;\beta=\frac1{\kB T}$，熵
+故$\mu = -\alpha/\beta,\;\beta = 1/(\kB T)$，熵
 \begin{align}
-	S=\kB(\ln\Xi+\alpha\ave N+\beta\ave E){\color{lightgray}\,+\,S'}.
+	S = \kB(\ln\Xi + \alpha\ave N + \beta\ave E){\color{lightgray}\, + \,S'}.
 \end{align}
-由Boltzmann关系，$S'=0$
+由Boltzmann关系，$S' = 0$
 \begin{align}
-	S=-\kB\sum_N\sum_s\rho_{N,s}\ln\rho_{N,s}.
+	S = -\kB\sum_N\sum_s\rho_{N,s}\ln\rho_{N,s}.
 \end{align}
 \paragraph{巨正则势}
 对内能作Legendre变换，以$T,V,\mu$为独立变量。代入熵的统计表达式得到巨正则势
 \begin{align}
-	J(T,V,\mu):=U-TS-\mu\ave N=-\kB T\ln\Xi.
+	J(T,V,\mu) := U - TS - \mu\ave N = -\kB T\ln\Xi.
 \end{align}
 由其微分读出压强
-\[
-	\d J=-S\d T-p\d V-\ave N\d\mu,\qquad p=-\pvat{J}{V}{T,\mu}.
-\]
-对均匀、仅有体积功的系统，若可忽略表面效应，广延性还给出Euler关系$U=TS-pV+\mu\ave N$，因而$J=-pV$。
+\begin{subequations}
+	\label{eq:sm-grand-potential-differential}
+	\begin{align}
+		\d J &= -S\d T - p\d V - \ave N\d\mu,\\
+		p &= -\pvat{J}{V}{T,\mu}.
+	\end{align}
+\end{subequations}
+对均匀、仅有体积功的系统，若可忽略表面效应，广延性还给出Euler关系$U = TS - pV + \mu\ave N$，因而$J = -pV$。
 \paragraph{涨落}
 粒子数涨落
 \begin{align}
-	(\Delta N)^2=\ave{N^2}-\ave N^2=-\pv{\ave N}\alpha=\kB T\biggp{\pv{\ave N}\mu}_{T,V}.
+	(\Delta N)^2 = \ave{N^2} - \ave N^2 = -\pv{\ave N}\alpha = \kB T\biggp{\pv{\ave N}\mu}_{T,V}.
 \end{align}
-在固定体积下，记$\bar N=\ave N$和$K_{EN}=\ave{EN}-U\bar N$。对统计权重求导，在固定$\alpha$时有$\partial_\beta U=-(\Delta E)^2$、$\partial_\beta\bar N=-K_{EN}$，在固定$\beta$时有$\partial_\alpha U=-K_{EN}$、$\partial_\alpha\bar N=-(\Delta N)^2$。为保持$\bar N$不变，应使$\d\bar N=0$。在$(\Delta N)^2>0$时，消去$\d\alpha$就得到
+在固定体积下，记$\bar N = \ave N$和$K_{EN} = \ave{EN} - U\bar N$。对统计权重求导，在固定$\alpha$时有$\partial_\beta U = -(\Delta E)^2$、$\partial_\beta\bar N = -K_{EN}$，在固定$\beta$时有$\partial_\alpha U = -K_{EN}$、$\partial_\alpha\bar N = -(\Delta N)^2$。为保持$\bar N$不变，应使$\d\bar N = 0$。在$(\Delta N)^2 > 0$时，消去$\d\alpha$就得到
 \begin{align}
-	(\Delta E)^2=\kB T^2\pvat{U}{T}{V,\bar N}
-	+\frac{K_{EN}^2}{(\Delta N)^2}
-	=\kB T^2 C_{V,\bar N}+\pvat{U}{\bar N}{V,T}^{\!2}(\Delta N)^2 .
+	(\Delta E)^2 = \kB T^2\pvat{U}{T}{V,\bar N}
+	+ \frac{K_{EN}^2}{(\Delta N)^2}
+	= \kB T^2 C_{V,\bar N} + \pvat{U}{\bar N}{V,T}^{\!2}(\Delta N)^2 .
 \end{align}
 \begin{example}{巨正则系综中的单原子理想气体}{}
-	对同一种非简并理想气体，$Z_N=Z_\transl^N/N!$，故$\Xi=\sum_{N=0}^{\infty}(qZ_\transl)^N/N!=\exp(qZ_\transl)$。粒子数服从Poisson分布，
+	对同一种非简并理想气体，$Z_N = Z_\transl^N/N!$，故
 	\[
-		P(N)=\e^{-\ave N}\frac{\ave N^N}{N!},\qquad
-		\ave N=qZ_\transl,\qquad (\Delta N)^2=\ave N.
+		\Xi = \sum_{N=0}^{\infty}\frac{(qZ_\transl)^N}{N!} = \exp(qZ_\transl).
 	\]
-	由$Z_\transl\propto V\beta^{-3/2}$得$pV=\ave N\kB T$、$U=3\ave N\kB T/2$。取与前两种系综相同的数密度$\ave N/V$，三者的宏观状态方程一致，而开放系统的相对粒子数涨落为$1/\sqrt{\ave N}$。
+	粒子数服从Poisson分布，
+	\begin{subequations}
+		\label{eq:sm-grand-canonical-poisson}
+		\begin{align}
+			P(N) &= \e^{-\ave N}\frac{\ave N^N}{N!},\\
+			\ave N &= qZ_\transl,\qquad (\Delta N)^2 = \ave N.
+		\end{align}
+	\end{subequations}
+	由$Z_\transl \propto V\beta^{-3/2}$得$pV = \ave N\kB T$、$U = 3\ave N\kB T/2$。取与前两种系综相同的数密度$\ave N/V$，三者的宏观状态方程一致，而开放系统的相对粒子数涨落为$1/\sqrt{\ave N}$。
 \end{example}
 \paragraph{由巨正则分布导出近独立粒子系统的平衡分布}在粒子数为 $N$ 的态中，用 $a$ 标记能级，$g_{N,a}$ 为能量等于 $E_{N,a}$ 的微观态数。将这些微观态的概率相加，得到系统具有粒子数 $N$ 和能量 $E_{N,a}$ 的概率
 \[
-	P_{N,a}=\sum_{s:\,E_{N,s}=E_{N,a}}\rho_{N,s}=\Xi^{-1}g_{N,a}\e^{-\alpha N-\beta E_{N,a}}.
+	P_{N,a} = \sum_{s:\,E_{N,s}=E_{N,a}}\rho_{N,s} = \Xi^{-1}g_{N,a}\e^{-\alpha N-\beta E_{N,a}}.
 \]
 
 对于近独立粒子系统，单粒子能级$\varepsilon_i$，简并度$\omega_i$，对应分布$\{a_i\}$时，系统粒子数$N_{\{a_i\}}$，能量$E_{\{a_i\}}$
 \[
-	N_{\{a_i\}}=\sum_ia_i,\quad E_{\{a_i\}}=\sum_ia_i\varepsilon_i.
+	N_{\{a_i\}} = \sum_ia_i,\quad E_{\{a_i\}} = \sum_ia_i\varepsilon_i.
 \]
 微观态数
 \[
-	\Omega_{\{a_i\}}=\prod_i\Omega_{a_i}.
+	\Omega_{\{a_i\}} = \prod_i\Omega_{a_i}.
 \]
 其中$\Omega_{a_i}$为$a_i$个粒子在$\varepsilon_i$能级上微观方式数。
 
 系统具有分布$\{a_i\}$的几率：
 \[
-	\rho_{\{a_i\}}=\Xi^{-1}\Omega_{\{a_i\}}\e^{-\alpha N_{\{a_i\}}-\beta E_{\{a_i\}}}=\Xi^{-1}\prod_i\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}.
+	\rho_{\{a_i\}} = \Xi^{-1}\Omega_{\{a_i\}}\e^{-\alpha N_{\{a_i\}}-\beta E_{\{a_i\}}} = \Xi^{-1}\prod_i\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}.
 \]
 总巨配分函数
 \[
-	\Xi=\sum_{\{a_i\}}\prod_i\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}=\prod_i\Xi_i.
+	\Xi = \sum_{\{a_i\}}\prod_i\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}} = \prod_i\Xi_i.
 \]
 其中 
 \[
-	\Xi_i=\sum_{a_i}\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}.
+	\Xi_i = \sum_{a_i}\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}.
 \]
 则
 \begin{align*}
-	\ave{a_i}=\sum_{\{a_i\}}a_i\rho_{\{a_i\}}=\Xi_i^{-1}\sum_{a_i}a_i\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}}=-\pv{\ln\Xi_i}\alpha.
+	\ave{a_i} = \sum_{\{a_i\}}a_i\rho_{\{a_i\}} = \Xi_i^{-1}\sum_{a_i}a_i\Omega_{a_i}\e^{-\alpha{a_i}-\beta{a_i\varepsilon_i}} = -\pv{\ln\Xi_i}\alpha.
 \end{align*}
 
 Bose分布
 \begin{align}
-	\Omega_{a_i}=\binom{a_i+\omega_i-1}{a_i}=\frac{(a_i+\omega_i-1)!}{a_i!(\omega_i-1)!}.
+	\Omega_{a_i} = \binom{a_i + \omega_i - 1}{a_i} = \frac{(a_i + \omega_i - 1)!}{a_i!(\omega_i - 1)!}.
 \end{align}
-令$x_i=\e^{-\alpha-\beta\varepsilon_i}$。当$x_i<1$时，由$(1-x_i)^{-\omega_i}$的Taylor展开得
+令$x_i = \e^{-\alpha-\beta\varepsilon_i}$。当$x_i < 1$时，由$(1 - x_i)^{-\omega_i}$的Taylor展开得
 \begin{align}
-	\Xi_i&=\sum_{a_i=0}^\infty\frac{(a_i+\omega_i-1)!}{a_i!(\omega_i-1)!}\e^{-\alpha a_i-\beta a_i\varepsilon_i}=\bigp{1-\e^{-\alpha-\beta\varepsilon_i}}^{-\omega_i};\\
-	\ave{a_i}&=-\pv{\ln\Xi_i}\alpha=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}-1}.
+	\Xi_i &= \sum_{a_i=0}^\infty\frac{(a_i + \omega_i - 1)!}{a_i!(\omega_i - 1)!}\e^{-\alpha a_i-\beta a_i\varepsilon_i} = \bigp{1 - \e^{-\alpha-\beta\varepsilon_i}}^{-\omega_i};\\
+	\ave{a_i} &= -\pv{\ln\Xi_i}\alpha = \frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i} - 1}.
 \end{align}
 
 Fermi分布
 \begin{align}
-	\Omega_{a_i}=\binom{\omega_i}{a_i}=\frac{\omega_i!}{a_i!(\omega_i-a_i)!}.
+	\Omega_{a_i} = \binom{\omega_i}{a_i} = \frac{\omega_i!}{a_i!(\omega_i - a_i)!}.
 \end{align}
-由$(1+x)^n$的二项式展开
+由$(1 + x)^n$的二项式展开
 \begin{align}
-	\Xi_i&=\sum_{a_i=0}^{\omega_i}\frac{\omega_i!}{a_i!(\omega_i-a_i)!}\e^{-\alpha a_i-\beta a_i\varepsilon_i}=\bigp{1+\e^{-\alpha-\beta\varepsilon_i}}^{\omega_i};\\
-	\ave{a_i}&=-\pv{\ln\Xi_i}\alpha=\frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i}+1}.
+	\Xi_i &= \sum_{a_i=0}^{\omega_i}\frac{\omega_i!}{a_i!(\omega_i - a_i)!}\e^{-\alpha a_i-\beta a_i\varepsilon_i} = \bigp{1 + \e^{-\alpha-\beta\varepsilon_i}}^{\omega_i};\\
+	\ave{a_i} &= -\pv{\ln\Xi_i}\alpha = \frac{\omega_i}{\e^{\alpha+\beta\varepsilon_i} + 1}.
 \end{align}
-在非简并极限$x_i\ll1$，Bose和Fermi两式均给出
+在非简并极限$x_i \ll 1$，Bose和Fermi两式均给出
 \[
-	\ln\Xi_i=\omega_i[x_i+O(x_i^2)],\qquad
-	\ave{a_i}=\omega_i[x_i+O(x_i^2)].
+	\ln\Xi_i = \omega_i[x_i + O(x_i^2)],\qquad
+	\ave{a_i} = \omega_i[x_i + O(x_i^2)].
 \]
-保留首项便得到Maxwell--Boltzmann统计。此时$\Xi_i^{\rm MB}=\exp(\omega_i x_i)$，其$x_i^{a_i}$项的系数$\omega_i^{a_i}/a_i!$是含全同粒子置换因子的经典统计权重。
+保留首项便得到Maxwell--Boltzmann统计。此时$\Xi_i^{\rm MB} = \exp(\omega_i x_i)$，其$x_i^{a_i}$项的系数$\omega_i^{a_i}/a_i!$是含全同粒子置换因子的经典统计权重。

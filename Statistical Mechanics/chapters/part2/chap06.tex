@@ -1,23 +1,24 @@
-\chapter{有限温度格林函数与虚时间}\label{chap:thermal-green}
+\chapter{有限温度 Green 函数与虚时间}\label{chap:thermal-green}
 
-受外力驱动时，量子谐振子在其固有频率处吸收能量。只研究热平衡的振子，也能从位置关联中算出这个频率。\secref{sec:linear-response}用了两个实时时刻的关联。有限温度格林函数将两个算符插入同一个热迹，沿虚时间改变它们的间隔，使跃迁能量直接出现在指数衰减率中。
+受外力驱动时，量子谐振子在其固有频率处吸收能量。只研究热平衡的振子，也能从位置关联中算出这个频率。\secref{sec:linear-response}用了两个实时时刻的关联。有限温度 Green 函数将两个算符插入同一个热迹，沿虚时间改变它们的间隔，使跃迁能量直接出现在指数衰减率中。
 
 \section{热权重与虚时间演化}
-对不显含时间的哈密顿量，封闭系统的时间演化算符是$\exp(-\i\hat Ht/\hbar)$，取$t=-\i\tau$便得到$\exp(-\tau\hat H/\hbar)$。在正则系综中，把$\tau$取为
-\[
-	\tau_T=\beta\hbar=\frac{\hbar}{\kB T}
-\]
-就得到热权重$\exp(-\beta\hat H)$。本章的$\tau$具有时间量纲，降温会延长虚时间区间。下文用$\hat K$统一记热权重的生成元，正则系综中$\hat K=\hat H$，满足$[\hat H,\hat N]=0$的巨正则系综中$\hat K=\hat H-\mu\hat N$。相应地，$\mathcal Z=\tr\e^{-\beta\hat K}$，$\ave{\cdots}_\beta=\tr(\e^{-\beta\hat K}\cdots)/\mathcal Z$。若正则迹限定在固定粒子数的子空间，下文移动算符时要求它保持该子空间。产生、湮灭算符的单粒子关联以下采用对所有粒子数取迹的巨正则系综。
+对不显含时间的 Hamilton 量，封闭系统的时间演化算符是$\exp(-\i\hat Ht/\hbar)$，取$t = -\i\tau$便得到$\exp(-\tau\hat H/\hbar)$。在正则系综中，把$\tau$取为
+\begin{equation}
+	\label{eq:sm-thermal-time-period}
+	\tau_T = \beta\hbar = \frac{\hbar}{\kB T}
+\end{equation}
+就得到热权重$\exp(-\beta\hat H)$。本章的$\tau$具有时间量纲，降温会延长虚时间区间。下文用$\hat K$统一记热权重的生成元，正则系综中$\hat K = \hat H$，满足$[\hat H,\hat N] = 0$的巨正则系综中$\hat K = \hat H - \mu\hat N$。相应地，$\mathcal Z = \tr\e^{-\beta\hat K}$，$\ave{\cdots}_\beta = \tr(\e^{-\beta\hat K}\cdots)/\mathcal Z$。若正则迹限定在固定粒子数的子空间，下文移动算符时要求它保持该子空间。产生、湮灭算符的单粒子关联以下采用对所有粒子数取迹的巨正则系综。
 
-取虚时间算符$\hat A(\tau)=\e^{\tau\hat K/\hbar}\hat A\e^{-\tau\hat K/\hbar}$。对$0<\tau<\tau_T$，两个算符的热关联为
+取虚时间算符$\hat A(\tau) = \e^{\tau\hat K/\hbar}\hat A\e^{-\tau\hat K/\hbar}$。对$0 < \tau < \tau_T$，两个算符的热关联为
 \begin{equation}
 	\ave{\hat A(\tau)\hat B(0)}_\beta
-	=\frac1{\mathcal Z}\tr\!\left(
+	= \frac1{\mathcal Z}\tr\!\left(
 	\e^{-(\tau_T-\tau)\hat K/\hbar}\hat A\,
 	\e^{-\tau\hat K/\hbar}\hat B\right).
 	\label{eq:sm-thermal-trace}
 \end{equation}
-若$\hat K\ket{m}=K_m\ket m$，在两个算符之间插入完备集，右边成为
+若$\hat K\ket{m} = K_m\ket m$，在两个算符之间插入完备集，右边成为
 \[
 	\sum_{m,n}\frac{\e^{-\beta K_m}}{\mathcal Z}\,
 	\e^{-(K_n-K_m)\tau/\hbar}\mel{m}{\hat A}{n}\mel{n}{\hat B}{m}.
@@ -25,90 +26,99 @@
 初态的热概率决定哪些跃迁贡献显著。对于从基态出发的跃迁，能隙越大，对应项随$\tau$衰减越快。
 
 \section{量子谐振子的位置关联}
-考虑质量为$m$、角频率为$\omega_0$的谐振子。用升降算符表示哈密顿量和位置，
-\[
-	\hat H=\hbar\omega_0(\hat a^\dagger\hat a+\tfrac12),\qquad
-	\hat x=x_0(\hat a+\hat a^\dagger),\qquad
-	x_0=\sqrt{\frac{\hbar}{2m\omega_0}} .
-\]
-对能级求和得到$Z=\e^{-\beta\hbar\omega_0/2}/(1-\e^{-\beta\hbar\omega_0})$，以及平均激发数$\bar n=\ave{\hat a^\dagger\hat a}_\beta=(\e^{\beta\hbar\omega_0}-1)^{-1}$。由于$\hat a$与$\hat a^\dagger$各使能量改变一个量子，它们的虚时间演化分别给出因子$\e^{-\omega_0\tau}$和$\e^{\omega_0\tau}$。用$\ave{\hat a\hat a^\dagger}_\beta=\bar n+1$及$\ave{\hat a\hat a}_\beta=\ave{\hat a^\dagger\hat a^\dagger}_\beta=0$，得到在$0<\tau<\tau_T$上的位置关联\footnote{同一振子的虚时间路径积分可参见T.~Senthil的\href{https://ocw.mit.edu/courses/8-513-many-body-theory-for-condensed-matter-systems-fall-2004/resources/notes4/}{MIT 8.513讲义第四篇}。}
+考虑质量为$m$、角频率为$\omega_0$的谐振子。用升降算符表示 Hamilton 量和位置，
+\begin{gather*}
+	\hat H = \hbar\omega_0(\hat a^\dagger\hat a + 1/2),\\
+	\hat x = x_0(\hat a + \hat a^\dagger),\qquad
+	x_0 = \sqrt{\frac{\hbar}{2m\omega_0}} .
+\end{gather*}
+对能级求和得到$Z = \e^{-\beta\hbar\omega_0/2}/(1 - \e^{-\beta\hbar\omega_0})$，以及平均激发数$\bar n = \ave{\hat a^\dagger\hat a}_\beta = (\e^{\beta\hbar\omega_0} - 1)^{-1}$。由于$\hat a$与$\hat a^\dagger$各使能量改变一个量子，它们的虚时间演化分别给出因子$\e^{-\omega_0\tau}$和$\e^{\omega_0\tau}$。用$\ave{\hat a\hat a^\dagger}_\beta = \bar n + 1$及$\ave{\hat a\hat a}_\beta = \ave{\hat a^\dagger\hat a^\dagger}_\beta = 0$，得到在$0 < \tau < \tau_T$上的位置关联\footnote{同一振子的虚时间路径积分可参见T.~Senthil的\href{https://ocw.mit.edu/courses/8-513-many-body-theory-for-condensed-matter-systems-fall-2004/resources/notes4/}{MIT 8.513讲义第四篇}。}
 \begin{align}
-	C_x(\tau)&=\ave{\hat x(\tau)\hat x(0)}_\beta
-	=x_0^2\bigb{(\bar n+1)\e^{-\omega_0\tau}+\bar n\,\e^{\omega_0\tau}}\notag\\
-	&=\frac{\hbar}{2m\omega_0}\,
-	\frac{\cosh[\omega_0(\tau_T/2-\tau)]}{\sinh(\omega_0\tau_T/2)} .
+	C_x(\tau) &= \ave{\hat x(\tau)\hat x(0)}_\beta
+	= x_0^2\bigb{(\bar n + 1)\e^{-\omega_0\tau} + \bar n\,\e^{\omega_0\tau}}\notag\\
+	&= \frac{\hbar}{2m\omega_0}\,
+	\frac{\cosh[\omega_0(\tau_T/2 - \tau)]}{\sinh(\omega_0\tau_T/2)} .
 	\label{eq:sm-oscillator-imaginary}
 \end{align}
-第一项由$\hat x(0)$将振子升高一个能级得到。第二项要求初态里已有激发，降到一个较低能级后便给出符号相反的指数。两项相加使$C_x(\tau_T-\tau)=C_x(\tau)$。
+第一项由$\hat x(0)$将振子升高一个能级得到。第二项要求初态里已有激发，降到一个较低能级后便给出符号相反的指数。两项相加使$C_x(\tau_T - \tau) = C_x(\tau)$。
 
-取$\tau\to0^+$得到位置的均方涨落
-\[
-	\ave{\hat x^2}_\beta=\frac{\hbar}{2m\omega_0}
+取$\tau \to 0^+$得到位置的均方涨落
+\begin{equation}
+	\label{eq:sm-oscillator-thermal-variance}
+	\ave{\hat x^2}_\beta = \frac{\hbar}{2m\omega_0}
 	\coth\!\Bigp{\frac{\beta\hbar\omega_0}{2}} .
-\]
-在$\kB T\gg\hbar\omega_0$时还原出能量均分结果$\ave{\hat x^2}=\kB T/(m\omega_0^2)$。在$T\to0$时，等时涨落仍有基态的宽度$x_0^2$，固定$\tau>0$的关联趋于$x_0^2\e^{-\omega_0\tau}$，其衰减率量出了从基态到第一激发态的能隙$\hbar\omega_0$。
+\end{equation}
+在$\kB T \gg \hbar\omega_0$时还原出能量均分结果$\ave{\hat x^2} = \kB T/(m\omega_0^2)$。在$T \to 0$时，等时涨落仍有基态的宽度$x_0^2$，固定$\tau > 0$的关联趋于$x_0^2\e^{-\omega_0\tau}$，其衰减率量出了从基态到第一激发态的能隙$\hbar\omega_0$。
 
 \section{热迹的循环性与Matsubara频率}
 振子公式在虚时间区间的两端取相同的值。这是热迹首尾相接的一个例子。对一般的式\eqref{eq:sm-thermal-trace}，用迹的循环性移动算符并合并指数因子，得到
-\[
-	\ave{\hat A(\tau)\hat B(0)}_\beta
-	=\ave{\hat B(0)\hat A(\tau-\tau_T)}_\beta .
-\]
-这称为热平衡的Kubo--Martin--Schwinger条件，简称KMS条件。迹的循环性对玻色和费米算符都成立。为了把正负$\tau$写成一个函数，用虚时间排序$\mathcal T_\tau$把较晚的算符移到左侧。交换两个费米奇算符时取$\eta=-1$，对于玻色算符取$\eta=+1$。例如，费米粒子的数密度算符$\hat\psi^\dagger\hat\psi$是两个费米算符的乘积，遵守玻色型排序。定义
-\[
-	C_{AB}(\tau)=\ave{\mathcal T_\tau\hat A(\tau)\hat B(0)}_\beta
-	=\begin{cases}
-		\ave{\hat A(\tau)\hat B(0)}_\beta,&0<\tau<\tau_T,\\
-		\eta\ave{\hat B(0)\hat A(\tau)}_\beta,&-\tau_T<\tau<0 .
-	\end{cases}
-\]
-由KMS条件可将其延拓为$C_{AB}(\tau+\tau_T)=\eta C_{AB}(\tau)$。费米关联的反周期负号来自排序中的一次交换。单粒子费米格林函数通常还在$C_{AB}$的定义前加一个总负号，这不影响边界条件。
-
-在一个热周期内把有序关联展开为傅里叶级数，
 \begin{equation}
-	C_{AB}(\tau)=\frac1{\tau_T}\sum_n C_{AB}(\i\nu_n)\e^{-\i\nu_n\tau},
-	\qquad C_{AB}(\i\nu_n)=\int_0^{\tau_T}C_{AB}(\tau)\e^{\i\nu_n\tau}\d\tau .
-	\label{eq:sm-matsubara-transform}
+	\label{eq:sm-kms-relation}
+	\ave{\hat A(\tau)\hat B(0)}_\beta
+	= \ave{\hat B(0)\hat A(\tau - \tau_T)}_\beta .
 \end{equation}
-这里$\i\nu_n$表示复频率轴上的点。由$\e^{-\i\nu_n\tau_T}=\eta$，允许的角频率（Matsubara频率）为
-\[
-	\nu_n=\begin{cases}
-		2\pi n/(\beta\hbar),&\text{玻色型},\\
-		(2n+1)\pi/(\beta\hbar),&\text{费米型},
+这称为热平衡的Kubo--Martin--Schwinger条件，简称KMS条件。迹的循环性对 Bose 和 Fermi 算符都成立。为了把正负$\tau$写成一个函数，用虚时间排序$\mathcal T_\tau$把较晚的算符移到左侧。交换两个 Fermi 奇算符时取$\eta = -1$，对于 Bose 算符取$\eta = +1$。例如，Fermi 子的数密度算符$\hat\psi^\dagger\hat\psi$是两个 Fermi 算符的乘积，遵守 Bose 型排序。定义
+\begin{equation}
+	\label{eq:sm-imaginary-time-correlation}
+	C_{AB}(\tau) = \ave{\mathcal T_\tau\hat A(\tau)\hat B(0)}_\beta
+	= \begin{cases}
+		\ave{\hat A(\tau)\hat B(0)}_\beta,&0 < \tau < \tau_T,\\
+		\eta\ave{\hat B(0)\hat A(\tau)}_\beta,&-\tau_T < \tau < 0 .
 	\end{cases}
-	\qquad n\in\mathbb Z .
-\]
-玻色频率允许零模$\nu_0=0$，费米频率的最小绝对值为$\pi/(\beta\hbar)$。
+\end{equation}
+由KMS条件可将其延拓为$C_{AB}(\tau + \tau_T) = \eta C_{AB}(\tau)$。Fermi 关联的反周期负号来自排序中的一次交换。Fermi 子的单粒子 Green 函数通常还在$C_{AB}$的定义前加一个总负号，这不影响边界条件。
 
-以能量为$\varepsilon$的一个费米轨道为例，令$\xi=\varepsilon-\mu$，$n_\Fermi=(\e^{\beta\xi}+1)^{-1}$。湮灭算符的演化为$\hat c(\tau)=\e^{-\xi\tau/\hbar}\hat c$。由于$\ave{\hat c\hat c^\dagger}=1-n_\Fermi$、$\ave{\hat c^\dagger\hat c}=n_\Fermi$，常用的费米格林函数为
-\[
-	G(\tau)=-\ave{\mathcal T_\tau\hat c(\tau)\hat c^\dagger(0)}_\beta
-	=\begin{cases}
-		-(1-n_\Fermi)\e^{-\xi\tau/\hbar},&0<\tau<\tau_T,\\
-		n_\Fermi\,\e^{-\xi\tau/\hbar},&-\tau_T<\tau<0 .
+在一个热周期内把有序关联展开为 Fourier 级数，
+\begin{subequations}\label{eq:sm-matsubara-transform}
+	\begin{align}
+		C_{AB}(\tau) &= \frac1{\tau_T}\sum_n C_{AB}(\i\nu_n)\e^{-\i\nu_n\tau},\\
+		C_{AB}(\i\nu_n) &= \int_0^{\tau_T}C_{AB}(\tau)\e^{\i\nu_n\tau}\d\tau .
+	\end{align}
+\end{subequations}
+这里$\i\nu_n$表示复频率轴上的点。由$\e^{-\i\nu_n\tau_T} = \eta$，允许的角频率（Matsubara频率）为
+\begin{equation}
+	\label{eq:sm-matsubara-frequencies}
+	\nu_n = \begin{cases}
+		2\pi n/(\beta\hbar),&\text{Bose 型},\\
+		(2n + 1)\pi/(\beta\hbar),&\text{Fermi 型},
 	\end{cases}
-\]
-$G(0^-)=n_\Fermi$直接给出占据数。两侧的跳变$G(0^+)-G(0^-)=-1$来自费米反对易关系，而$(1-n_\Fermi)\e^{-\beta\xi}=n_\Fermi$保证了反周期性。
+	\qquad n \in \mathbb Z .
+\end{equation}
+Bose 频率允许零模$\nu_0 = 0$，Fermi 频率的最小绝对值为$\pi/(\beta\hbar)$。
+
+以能量为$\varepsilon$的一个 Fermi 轨道为例，令$\xi = \varepsilon - \mu$，$n_\Fermi = (\e^{\beta\xi} + 1)^{-1}$。湮灭算符的演化为$\hat c(\tau) = \e^{-\xi\tau/\hbar}\hat c$。由于$\ave{\hat c\hat c^\dagger} = 1 - n_\Fermi$、$\ave{\hat c^\dagger\hat c} = n_\Fermi$，该轨道的单粒子 Green 函数为
+\begin{equation}
+	\label{eq:sm-fermion-imaginary-time-green}
+	G(\tau) = -\ave{\mathcal T_\tau\hat c(\tau)\hat c^\dagger(0)}_\beta
+	= \begin{cases}
+		-(1 - n_\Fermi)\e^{-\xi\tau/\hbar},&0 < \tau < \tau_T,\\
+		n_\Fermi\,\e^{-\xi\tau/\hbar},&-\tau_T < \tau < 0 .
+	\end{cases}
+\end{equation}
+$G(0^-) = n_\Fermi$直接给出占据数。两侧的跳变$G(0^+) - G(0^-) = -1$来自 Fermi 反对易关系，而$(1 - n_\Fermi)\e^{-\beta\xi} = n_\Fermi$保证了反周期性。
 
 \section{从虚频关联到实频响应}
-将振子的式\eqref{eq:sm-oscillator-imaginary}按玻色频率变换。用$\e^{\i\nu_n\tau_T}=1$分别积分两个指数项，可得
+将振子的式\eqref{eq:sm-oscillator-imaginary}按 Bose 频率变换。用$\e^{\i\nu_n\tau_T} = 1$分别积分两个指数项，可得
 \begin{align}
 	C_x(\i\nu_n)
-	&=x_0^2\biggp{\frac1{\omega_0-\i\nu_n}+\frac1{\omega_0+\i\nu_n}}
-	=\frac{\hbar}{m(\omega_0^2+\nu_n^2)} .
+	&= x_0^2\biggp{\frac1{\omega_0 - \i\nu_n} + \frac1{\omega_0 + \i\nu_n}}
+	= \frac{\hbar}{m(\omega_0^2 + \nu_n^2)} .
 \end{align}
 现在给振子施加力$f(t)$，耦合能为$-f(t)\hat x$。未受扰动的位置算符随实时间的演化为
 \[
-	\hat x(t)=\hat x(0)\cos\omega_0t+\frac{\hat p(0)}{m\omega_0}\sin\omega_0t .
+	\hat x(t) = \hat x(0)\cos\omega_0t + \frac{\hat p(0)}{m\omega_0}\sin\omega_0t .
 \]
-由$[\hat x,\hat p]=\i\hbar$以及Kubo公式\eqref{eq:sm-kubo-retarded}，
-\[
-	\chi^R_{xx}(t)=\Theta(t)\frac{\sin\omega_0t}{m\omega_0},\qquad
-	\chi^R_{xx}(\omega)
-	=\lim_{\epsilon\to0^+}\frac1{m[\omega_0^2-(\omega+\i\epsilon)^2]} .
-\]
-因此$C_x(\i\nu_n)/\hbar$在正虚频处和$\chi^R_{xx}(\omega)$在实轴上缘，都是同一个解析函数$1/[m(\omega_0^2-z^2)]$在不同位置的取值。对这个振子，虚频零点给出静力下的位移与力之比$1/(m\omega_0^2)$，实轴的极点给出驱动振子的共振频率。
+由$[\hat x,\hat p] = \i\hbar$以及Kubo公式\eqref{eq:sm-kubo-retarded}，
+\begin{subequations}
+	\label{eq:sm-oscillator-retarded-response}
+	\begin{align}
+		\chi^R_{xx}(t) &= \Theta(t)\frac{\sin\omega_0t}{m\omega_0},\\
+		\chi^R_{xx}(\omega)
+		&= \lim_{\epsilon\to0^+}\frac1{m[\omega_0^2 - (\omega + \i\epsilon)^2]} .
+	\end{align}
+\end{subequations}
+因此$C_x(\i\nu_n)/\hbar$在正虚频处和$\chi^R_{xx}(\omega)$在实轴上缘，都是同一个解析函数$1/[m(\omega_0^2 - z^2)]$在不同位置的取值。对这个振子，虚频零点给出静力下的位移与力之比$1/(m\omega_0^2)$，实轴的极点给出驱动振子的共振频率。
 
-对其他体系也可从能量本征态的谱表示作解析延拓。巨正则系综的虚时间由$\hat K=\hat H-\mu\hat N$生成，单粒子费米格林函数的极点因此给出相对于化学势的加粒子或去粒子能量。对保持粒子数的观测量，跃迁两端的$N$相同，能量差中的化学势项抵消。
+对其他体系也可从能量本征态的谱表示作解析延拓。巨正则系综的虚时间由$\hat K = \hat H - \mu\hat N$生成，Fermi 子的单粒子 Green 函数的极点因此给出相对于化学势的加粒子或去粒子能量。对保持粒子数的观测量，跃迁两端的$N$相同，能量差中的化学势项抵消。
 
-零模还可能含有静态涨落。例如，守恒粒子数的偏差$\delta\hat N=\hat N-\ave{\hat N}$在巨正则系综中具有与$\tau$无关的关联$\ave{(\delta\hat N)^2}$，完全落在$\nu_n=0$，而$[\hat N(t),\hat N(0)]=0$，相应的推迟响应为零。数值计算若只给出有限个带误差的虚频数据，还需额外的谱信息或精度约束才能可靠地分辨实频峰。
+零模还可能含有静态涨落。例如，守恒粒子数的偏差$\delta\hat N = \hat N - \ave{\hat N}$在巨正则系综中具有与$\tau$无关的关联$\ave{(\delta\hat N)^2}$，完全落在$\nu_n = 0$，而$[\hat N(t),\hat N(0)] = 0$，相应的推迟响应为零。数值计算若只给出有限个带误差的虚频数据，还需额外的谱信息或精度约束才能可靠地分辨实频峰。
