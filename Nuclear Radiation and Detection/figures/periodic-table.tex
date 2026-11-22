@@ -1,0 +1,253 @@
+% Adapted from Ivan Griffin's Periodic Table of Chemical Elements (2009).
+% https://texample.net/periodic-table-of-chemical-elements/ — LPPL 1.3 or later.
+\documentclass[tikz,border=5mm]{standalone}
+\usetikzlibrary{calc}
+
+\begin{document}
+\begingroup
+% The atlas uses CTeX's larger type sizes and line spacing. Set the chart's
+% type locally so the fixed cells have the same metrics in either document.
+\linespread{1}\fontsize{10}{12}\selectfont
+% Fixed rows keep long names and configurations within their own cell.
+\newcommand{\ElemLabel}[5]{%
+  \begin{minipage}[c][2.25cm][s]{2.28cm}
+    \centering
+    \textbf{#2}\hfill #3\par
+    \vfill
+    {\fontsize{20.74}{25}\selectfont\bfseries #4\par}
+    \vfill
+    {\fontsize{9}{11}\selectfont\strut #1\par}
+    {\fontsize{9}{11}\selectfont\strut\mbox{#5}\par}
+  \end{minipage}%
+}
+
+\newcommand{\orbitalS}[1]{s\textsuperscript{#1}}
+\newcommand{\orbitalP}[1]{p\textsuperscript{#1}}
+\newcommand{\orbitalD}[1]{d\textsuperscript{#1}}
+\newcommand{\orbitalF}[1]{f\textsuperscript{#1}}
+
+\newcommand{\ElementEntry}[5][]{\ElemLabel{#1}{#2}{#3}{#4}{#5}}
+\newcommand{\TransuraniumEntry}[5][]{\ElemLabel{#1}{#2}{#3}{\textcolor{black!65}{#4}}{#5}}
+
+\begin{tikzpicture}[font=\sffamily]
+
+  % Fill Color Styles
+  \tikzstyle{ElementFill} = [fill=yellow!15]
+  \tikzstyle{AlkaliMetalFill} = [fill=blue!55]
+  \tikzstyle{AlkalineEarthMetalFill} = [fill=blue!40]
+  \tikzstyle{MetalFill} = [fill=blue!25]
+  \tikzstyle{MetalloidFill} = [fill=orange!40]
+  \tikzstyle{NonmetalFill} = [fill=teal!40]
+  \tikzstyle{HalogenFill} = [fill=yellow!40]
+  \tikzstyle{NobleGasFill} = [fill=green!55]
+  \tikzstyle{LanthanideActinideFill} = [fill=red!40]
+
+  % Element Styles
+  \tikzstyle{Element} = [ElementFill,
+    minimum width=2.5cm, minimum height=2.5cm, node distance=2.75cm]
+  \tikzstyle{AlkaliMetal} = [Element, AlkaliMetalFill]
+  \tikzstyle{AlkalineEarthMetal} = [Element, AlkalineEarthMetalFill]
+  \tikzstyle{Metal} = [Element, MetalFill]
+  \tikzstyle{Metalloid} = [Element, MetalloidFill]
+  \tikzstyle{Nonmetal} = [Element, NonmetalFill]
+  \tikzstyle{Halogen} = [Element, HalogenFill]
+  \tikzstyle{NobleGas} = [Element, NobleGasFill]
+  \tikzstyle{LanthanideActinide} = [Element, LanthanideActinideFill]
+  \tikzstyle{PeriodLabel} = [font={\sffamily\fontsize{17.28}{22}\selectfont}, node distance=2.0cm]
+  \tikzstyle{GroupLabel} = [font={\sffamily\fontsize{17.28}{22}\selectfont}, minimum width=2.75cm, node distance=2.0cm]
+
+  % Group 1
+  \node[Nonmetal] (H) {\ElementEntry[1\orbitalS1]{1}{1.0079}{H}{Hydrogen}};
+  \node[below of=H, AlkaliMetal] (Li) {\ElementEntry[2\orbitalS1]{3}{6.941}{Li}{Lithium}};
+  \node[below of=Li, AlkaliMetal] (Na) {\ElementEntry[3\orbitalS1]{11}{22.990}{Na}{Sodium}};
+  \node[below of=Na, AlkaliMetal] (K) {\ElementEntry[4\orbitalS1]{19}{39.098}{K}{Potassium}};
+  \node[below of=K, AlkaliMetal] (Rb) {\ElementEntry[5\orbitalS1]{37}{85.468}{Rb}{Rubidium}};
+  \node[below of=Rb, AlkaliMetal] (Cs) {\ElementEntry[6\orbitalS1]{55}{132.91}{Cs}{Caesium}};
+  \node[below of=Cs, AlkaliMetal] (Fr) {\ElementEntry[7\orbitalS1]{87}{(223)}{Fr}{Francium}};
+
+  % Group 2
+  \node[right of=Li, AlkalineEarthMetal] (Be) {\ElementEntry[2\orbitalS2]{4}{9.0122}{Be}{Beryllium}};
+  \node[below of=Be, AlkalineEarthMetal] (Mg) {\ElementEntry[3\orbitalS2]{12}{24.305}{Mg}{Magnesium}};
+  \node[below of=Mg, AlkalineEarthMetal] (Ca) {\ElementEntry[4\orbitalS2]{20}{40.078}{Ca}{Calcium}};
+  \node[below of=Ca, AlkalineEarthMetal] (Sr) {\ElementEntry[5\orbitalS2]{38}{87.62}{Sr}{Strontium}};
+  \node[below of=Sr, AlkalineEarthMetal] (Ba) {\ElementEntry[6\orbitalS2]{56}{137.33}{Ba}{Barium}};
+  \node[below of=Ba, AlkalineEarthMetal] (Ra) {\ElementEntry[7\orbitalS2]{88}{(226)}{Ra}{Radium}};
+
+  % Group 3
+  \node[right of=Ca, Metal] (Sc) {\ElementEntry[3\orbitalD14\orbitalS2]{21}{44.956}{Sc}{Scandium}};
+  \node[below of=Sc, Metal] (Y) {\ElementEntry[4\orbitalD15\orbitalS2]{39}{88.906}{Y}{Yttrium}};
+  \node[below of=Y, LanthanideActinide] (LaLu) {\ElementEntry{57--71}{}{La--Lu}{Lanthanide}};
+  \node[below of=LaLu, LanthanideActinide] (AcLr) {\ElementEntry{89--103}{}{Ac--Lr}{Actinide}};
+
+  % Group 4
+  \node[right of=Sc, Metal] (Ti) {\ElementEntry[3\orbitalD24\orbitalS2]{22}{47.867}{Ti}{Titanium}};
+  \node[below of=Ti, Metal] (Zr) {\ElementEntry[4\orbitalD25\orbitalS2]{40}{91.224}{Zr}{Zirconium}};
+  \node[below of=Zr, Metal] (Hf) {\ElementEntry[5\orbitalD26\orbitalS2]{72}{178.49}{Hf}{Hafnium}};
+  \node[below of=Hf, Metal] (Rf) {\TransuraniumEntry[(6\orbitalD27\orbitalS2)]{104}{(267)}{Rf}{Rutherfordium}};
+
+  % Group 5
+  \node[right of=Ti, Metal] (V) {\ElementEntry[3\orbitalD34\orbitalS2]{23}{50.942}{V}{Vanadium}};
+  \node[below of=V, Metal] (Nb) {\ElementEntry[4\orbitalD45\orbitalS1]{41}{92.906}{Nb}{Niobium}};
+  \node[below of=Nb, Metal] (Ta) {\ElementEntry[5\orbitalD36\orbitalS2]{73}{180.95}{Ta}{Tantalum}};
+  \node[below of=Ta, Metal] (Db) {\TransuraniumEntry[(6\orbitalD37\orbitalS2)]{105}{(268)}{Db}{Dubnium}};
+
+  % Group 6
+  \node[right of=V, Metal] (Cr) {\ElementEntry[3\orbitalD54\orbitalS1]{24}{51.996}{Cr}{Chromium}};
+  \node[below of=Cr, Metal] (Mo) {\ElementEntry[4\orbitalD55\orbitalS1]{42}{95.94}{Mo}{Molybdenum}};
+  \node[below of=Mo, Metal] (W) {\ElementEntry[5\orbitalD46\orbitalS2]{74}{183.84}{W}{Tungsten}};
+  \node[below of=W, Metal] (Sg) {\TransuraniumEntry{106}{(269)}{Sg}{Seaborgium}};
+
+  % Group 7
+  \node[right of=Cr, Metal] (Mn) {\ElementEntry[3\orbitalD54\orbitalS2]{25}{54.938}{Mn}{Manganese}};
+  \node[below of=Mn, Metal] (Tc) {\ElementEntry[4\orbitalD55\orbitalS2]{43}{(98)}{Tc}{Technetium}};
+  \node[below of=Tc, Metal] (Re) {\ElementEntry[5\orbitalD56\orbitalS2]{75}{186.21}{Re}{Rhenium}};
+  \node[below of=Re, Metal] (Bh) {\TransuraniumEntry{107}{(270)}{Bh}{Bohrium}};
+
+  % Group 8
+  \node[right of=Mn, Metal] (Fe) {\ElementEntry[3\orbitalD64\orbitalS2]{26}{55.845}{Fe}{Iron}};
+  \node[below of=Fe, Metal] (Ru) {\ElementEntry[4\orbitalD75\orbitalS1]{44}{101.07}{Ru}{Ruthenium}};
+  \node[below of=Ru, Metal] (Os) {\ElementEntry[5\orbitalD66\orbitalS2]{76}{190.23}{Os}{Osmium}};
+  \node[below of=Os, Metal] (Hs) {\TransuraniumEntry{108}{(277)}{Hs}{Hassium}};
+
+  % Group 9
+  \node[right of=Fe, Metal] (Co) {\ElementEntry[3\orbitalD74\orbitalS2]{27}{58.933}{Co}{Cobalt}};
+  \node[below of=Co, Metal] (Rh) {\ElementEntry[4\orbitalD85\orbitalS1]{45}{102.91}{Rh}{Rhodium}};
+  \node[below of=Rh, Metal] (Ir) {\ElementEntry[5\orbitalD76\orbitalS2]{77}{192.22}{Ir}{Iridium}};
+  \node[below of=Ir, Metal] (Mt) {\TransuraniumEntry{109}{(278)}{Mt}{Meitnerium}};
+
+  % Group 10
+  \node[right of=Co, Metal] (Ni) {\ElementEntry[3\orbitalD84\orbitalS2]{28}{58.693}{Ni}{Nickel}};
+  \node[below of=Ni, Metal] (Pd) {\ElementEntry[4\orbitalD{10}]{46}{106.42}{Pd}{Palladium}};
+  \node[below of=Pd, Metal] (Pt) {\ElementEntry[5\orbitalD96\orbitalS1]{78}{195.08}{Pt}{Platinum}};
+  \node[below of=Pt, Metal] (Ds) {\TransuraniumEntry{110}{(281)}{Ds}{Darmstadtium}};
+
+  % Group 11
+  \node[right of=Ni, Metal] (Cu) {\ElementEntry[3\orbitalD{10}4\orbitalS1]{29}{63.546}{Cu}{Copper}};
+  \node[below of=Cu, Metal] (Ag) {\ElementEntry[4\orbitalD{10}5\orbitalS1]{47}{107.87}{Ag}{Silver}};
+  \node[below of=Ag, Metal] (Au) {\ElementEntry[5\orbitalD{10}6\orbitalS1]{79}{196.97}{Au}{Gold}};
+  \node[below of=Au, Metal] (Rg) {\TransuraniumEntry{111}{(282)}{Rg}{Roentgenium}};
+
+  % Group 12
+  \node[right of=Cu, Metal] (Zn) {\ElementEntry[3\orbitalD{10}4\orbitalS2]{30}{65.38}{Zn}{Zinc}};
+  \node[below of=Zn, Metal] (Cd) {\ElementEntry[4\orbitalD{10}5\orbitalS2]{48}{112.41}{Cd}{Cadmium}};
+  \node[below of=Cd, Metal] (Hg) {\ElementEntry[5\orbitalD{10}6\orbitalS2]{80}{200.59}{Hg}{Mercury}};
+  \node[below of=Hg, Metal] (Cn) {\TransuraniumEntry{112}{(285)}{Cn}{Copernicium}};
+
+  % Group 13
+  \node[right of=Zn, Metal] (Ga) {\ElementEntry[4\orbitalS24\orbitalP1]{31}{69.723}{Ga}{Gallium}};
+  \node[above of=Ga, Metal] (Al) {\ElementEntry[3\orbitalS23\orbitalP1]{13}{26.982}{Al}{Aluminium}};
+  \node[above of=Al, Metalloid] (B) {\ElementEntry[2\orbitalS22\orbitalP1]{5}{10.811}{B}{Boron}};
+  \node[below of=Ga, Metal] (In) {\ElementEntry[5\orbitalS25\orbitalP1]{49}{114.82}{In}{Indium}};
+  \node[below of=In, Metal] (Tl) {\ElementEntry[6\orbitalS26\orbitalP1]{81}{204.38}{Tl}{Thallium}};
+  \node[below of=Tl, Metal] (Nh) {\TransuraniumEntry{113}{(286)}{Nh}{Nihonium}};
+
+  % Group 14
+  \node[right of=B, Nonmetal] (C) {\ElementEntry[2\orbitalS22\orbitalP2]{6}{12.011}{C}{Carbon}};
+  \node[below of=C, Metalloid] (Si) {\ElementEntry[3\orbitalS23\orbitalP2]{14}{28.085}{Si}{Silicon}};
+  \node[below of=Si, Metalloid] (Ge) {\ElementEntry[4\orbitalS24\orbitalP2]{32}{72.630}{Ge}{Germanium}};
+  \node[below of=Ge, Metal] (Sn) {\ElementEntry[5\orbitalS25\orbitalP2]{50}{118.71}{Sn}{Tin}};
+  \node[below of=Sn, Metal] (Pb) {\ElementEntry[6\orbitalS26\orbitalP2]{82}{207.2}{Pb}{Lead}};
+  \node[below of=Pb, Metal] (Fl) {\TransuraniumEntry{114}{(289)}{Fl}{Flerovium}};
+
+  % Group 15
+  \node[right of=C, Nonmetal] (N) {\ElementEntry[2\orbitalS22\orbitalP3]{7}{14.007}{N}{Nitrogen}};
+  \node[below of=N, Nonmetal] (P) {\ElementEntry[3\orbitalS23\orbitalP3]{15}{30.974}{P}{Phosphorus}};
+  \node[below of=P, Metalloid] (As) {\ElementEntry[4\orbitalS24\orbitalP3]{33}{74.922}{As}{Arsenic}};
+  \node[below of=As, Metalloid] (Sb) {\ElementEntry[5\orbitalS25\orbitalP3]{51}{121.76}{Sb}{Antimony}};
+  \node[below of=Sb, Metal] (Bi) {\ElementEntry[6\orbitalS26\orbitalP3]{83}{208.98}{Bi}{Bismuth}};
+  \node[below of=Bi, Metal] (Mc) {\TransuraniumEntry{115}{(290)}{Mc}{Moscovium}};
+
+  % Group 16
+  \node[right of=N, Nonmetal] (O) {\ElementEntry[2\orbitalS22\orbitalP4]{8}{15.999}{O}{Oxygen}};
+  \node[below of=O, Nonmetal] (S) {\ElementEntry[3\orbitalS23\orbitalP4]{16}{32.065}{S}{Sulphur}};
+  \node[below of=S, Nonmetal] (Se) {\ElementEntry[4\orbitalS24\orbitalP4]{34}{78.971}{Se}{Selenium}};
+  \node[below of=Se, Metalloid] (Te) {\ElementEntry[5\orbitalS25\orbitalP4]{52}{127.60}{Te}{Tellurium}};
+  \node[below of=Te, Metalloid] (Po) {\ElementEntry[6\orbitalS26\orbitalP4]{84}{(209)}{Po}{Polonium}};
+  \node[below of=Po, Metal] (Lv) {\TransuraniumEntry{116}{(293)}{Lv}{Livermorium}};
+
+  % Group 17
+  \node[right of=O, Halogen] (F) {\ElementEntry[2\orbitalS22\orbitalP5]{9}{18.998}{F}{Fluorine}};
+  \node[below of=F, Halogen] (Cl) {\ElementEntry[3\orbitalS23\orbitalP5]{17}{35.453}{Cl}{Chlorine}};
+  \node[below of=Cl, Halogen] (Br) {\ElementEntry[4\orbitalS24\orbitalP5]{35}{79.904}{Br}{Bromine}};
+  \node[below of=Br, Halogen] (I) {\ElementEntry[5\orbitalS25\orbitalP5]{53}{126.90}{I}{Iodine}};
+  \node[below of=I, Halogen] (At) {\ElementEntry[6\orbitalS26\orbitalP5]{85}{(210)}{At}{Astatine}};
+  \node[below of=At, Halogen] (Ts) {\TransuraniumEntry{117}{(294)}{Ts}{Tennessine}};
+
+  % Group 18
+  \node[right of=F, NobleGas] (Ne) {\ElementEntry[2\orbitalS22\orbitalP6]{10}{20.180}{Ne}{Neon}};
+  \node[above of=Ne, NobleGas] (He) {\ElementEntry[1\orbitalS2]{2}{4.0026}{He}{Helium}};
+  \node[below of=Ne, NobleGas] (Ar) {\ElementEntry[3\orbitalS23\orbitalP6]{18}{39.948}{Ar}{Argon}};
+  \node[below of=Ar, NobleGas] (Kr) {\ElementEntry[4\orbitalS24\orbitalP6]{36}{83.798}{Kr}{Krypton}};
+  \node[below of=Kr, NobleGas] (Xe) {\ElementEntry[5\orbitalS25\orbitalP6]{54}{131.29}{Xe}{Xenon}};
+  \node[below of=Xe, NobleGas] (Rn) {\ElementEntry[6\orbitalS26\orbitalP6]{86}{(222)}{Rn}{Radon}};
+  \node[below of=Rn, NobleGas] (Og) {\TransuraniumEntry{118}{(294)}{Og}{Oganesson}};
+
+  % Periods and IUPAC group numbers
+  \foreach \period/\element in {1/H,2/Li,3/Na,4/K,5/Rb,6/Cs,7/Fr}
+    \node[left of=\element, PeriodLabel] {\period};
+  \foreach \group/\element in {1/H,2/Be,3/Sc,4/Ti,5/V,6/Cr,7/Mn,8/Fe,9/Co,
+                               10/Ni,11/Cu,12/Zn,13/B,14/C,15/N,16/O,17/F,18/He}
+    \node[above of=\element, GroupLabel] {\group};
+
+  % Lanthanide
+  \node[below of=Rf, LanthanideActinide, yshift=-1cm] (La) {\ElementEntry[5\orbitalD16\orbitalS2]{57}{138.91}{La}{Lanthanum}};
+  \node[right of=La, LanthanideActinide] (Ce) {\ElementEntry[4\orbitalF15\orbitalD16\orbitalS2]{58}{140.12}{Ce}{Cerium}};
+  \node[right of=Ce, LanthanideActinide] (Pr) {\ElementEntry[4\orbitalF36\orbitalS2]{59}{140.91}{Pr}{Praseodymium}};
+  \node[right of=Pr, LanthanideActinide] (Nd) {\ElementEntry[4\orbitalF46\orbitalS2]{60}{144.24}{Nd}{Neodymium}};
+  \node[right of=Nd, LanthanideActinide] (Pm) {\ElementEntry[4\orbitalF56\orbitalS2]{61}{(145)}{Pm}{Promethium}};
+  \node[right of=Pm, LanthanideActinide] (Sm) {\ElementEntry[4\orbitalF66\orbitalS2]{62}{150.36}{Sm}{Samarium}};
+  \node[right of=Sm, LanthanideActinide] (Eu) {\ElementEntry[4\orbitalF76\orbitalS2]{63}{151.96}{Eu}{Europium}};
+  \node[right of=Eu, LanthanideActinide] (Gd) {\ElementEntry[4\orbitalF75\orbitalD16\orbitalS2]{64}{157.25}{Gd}{Gadolinium}};
+  \node[right of=Gd, LanthanideActinide] (Tb) {\ElementEntry[4\orbitalF96\orbitalS2]{65}{158.93}{Tb}{Terbium}};
+  \node[right of=Tb, LanthanideActinide] (Dy) {\ElementEntry[4\orbitalF{10}6\orbitalS2]{66}{162.50}{Dy}{Dysprosium}};
+  \node[right of=Dy, LanthanideActinide] (Ho) {\ElementEntry[4\orbitalF{11}6\orbitalS2]{67}{164.93}{Ho}{Holmium}};
+  \node[right of=Ho, LanthanideActinide] (Er) {\ElementEntry[4\orbitalF{12}6\orbitalS2]{68}{167.26}{Er}{Erbium}};
+  \node[right of=Er, LanthanideActinide] (Tm) {\ElementEntry[4\orbitalF{13}6\orbitalS2]{69}{168.93}{Tm}{Thulium}};
+  \node[right of=Tm, LanthanideActinide] (Yb) {\ElementEntry[4\orbitalF{14}6\orbitalS2]{70}{173.05}{Yb}{Ytterbium}};
+  \node[right of=Yb, LanthanideActinide] (Lu) {\ElementEntry[4\orbitalF{14}5\orbitalD16\orbitalS2]{71}{174.97}{Lu}{Lutetium}};
+
+  % Actinide
+  \node[below of=La, LanthanideActinide] (Ac) {\ElementEntry[6\orbitalD17\orbitalS2]{89}{(227)}{Ac}{Actinium}};
+  \node[right of=Ac, LanthanideActinide] (Th) {\ElementEntry[6\orbitalD27\orbitalS2]{90}{232.04}{Th}{Thorium}};
+  \node[right of=Th, LanthanideActinide] (Pa) {\ElementEntry[5\orbitalF26\orbitalD17\orbitalS2]{91}{231.04}{Pa}{Protactinium}};
+  \node[right of=Pa, LanthanideActinide] (U) {\ElementEntry[5\orbitalF36\orbitalD17\orbitalS2]{92}{238.03}{U}{Uranium}};
+  \node[right of=U, LanthanideActinide] (Np) {\TransuraniumEntry[5\orbitalF46\orbitalD17\orbitalS2]{93}{(237)}{Np}{Neptunium}};
+  \node[right of=Np, LanthanideActinide] (Pu) {\TransuraniumEntry[5\orbitalF67\orbitalS2]{94}{(244)}{Pu}{Plutonium}};
+  \node[right of=Pu, LanthanideActinide] (Am) {\TransuraniumEntry[5\orbitalF77\orbitalS2]{95}{(243)}{Am}{Americium}};
+  \node[right of=Am, LanthanideActinide] (Cm) {\TransuraniumEntry[5\orbitalF76\orbitalD17\orbitalS2]{96}{(247)}{Cm}{Curium}};
+  \node[right of=Cm, LanthanideActinide] (Bk) {\TransuraniumEntry[5\orbitalF97\orbitalS2]{97}{(247)}{Bk}{Berkelium}};
+  \node[right of=Bk, LanthanideActinide] (Cf) {\TransuraniumEntry[5\orbitalF{10}7\orbitalS2]{98}{(251)}{Cf}{Californium}};
+  \node[right of=Cf, LanthanideActinide] (Es) {\TransuraniumEntry[5\orbitalF{11}7\orbitalS2]{99}{(252)}{Es}{Einsteinium}};
+  \node[right of=Es, LanthanideActinide] (Fm) {\TransuraniumEntry[5\orbitalF{12}7\orbitalS2]{100}{(257)}{Fm}{Fermium}};
+  \node[right of=Fm, LanthanideActinide] (Md) {\TransuraniumEntry[(5\orbitalF{13}7\orbitalS2)]{101}{(258)}{Md}{Mendelevium}};
+  \node[right of=Md, LanthanideActinide] (No) {\TransuraniumEntry[(5\orbitalF{14}7\orbitalS2)]{102}{(259)}{No}{Nobelium}};
+  \node[right of=No, LanthanideActinide] (Lr) {\TransuraniumEntry[(5\orbitalF{14}7\orbitalS27\orbitalP1)]{103}{(266)}{Lr}{Lawrencium}};
+
+  % Legend
+   \fill[AlkaliMetalFill] ($(La.north -| Fr.west) + (0,1em)$)
+     rectangle +(1em, 1em) node[right, yshift=-1.2ex]  (AlkaliMetal) {Alkali Metal};
+   \fill[AlkalineEarthMetalFill] ($(AlkaliMetal.west) - (1em,2em)$)
+     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (AlkalineEarthMetal) {Alkaline Earth Metal};
+   \fill[MetalFill] ($(AlkalineEarthMetal.west) - (1em,2em)$)
+     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (Metal) {Metal};
+   \fill[MetalloidFill] ($(Metal.west) - (1em,2em)$)
+     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (Metalloid) {Metalloid};
+   \fill[NonmetalFill] ($(Metalloid.west) - (1em,2em)$)
+     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (Non-metal) {Non-metal};
+   \fill[HalogenFill] ($(Non-metal.west) - (1em,2em)$)
+     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (Halogen) {Halogen};
+   \fill[NobleGasFill] ($(Halogen.west) - (1em,2em)$)
+     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (NobleGas) {Noble Gas};
+   \fill[LanthanideActinideFill] ($(NobleGas.west) - (1em,2em)$)
+     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (Lanthanide/Actinide) {Lanthanide/Actinide};
+
+  \node at (Ac -| Fr) [draw, Element, fill=white, yshift=-1cm] (legend) {\ElementEntry[configuration]{Z}{\textit{A}\textsubscript{r} or (\textit{A})}{\fontsize{17.28}{22}\selectfont Symbol}{Name}};
+  \node[anchor=west, align=left, xshift=3mm] at (legend.east)
+    {\textit{Z}:\ 1--92\\\color{black!65}\textit{Z}:\ 93--118 (transuranium)};
+
+  \node at (H -| Fe) [font=\sffamily\fontsize{24.88}{30}\selectfont\bfseries] {Periodic Table of the Elements};
+
+  \label{periodic-table}
+\end{tikzpicture}
+\endgroup
+\end{document}

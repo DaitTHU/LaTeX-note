@@ -1,5 +1,5 @@
 \documentclass[tikz]{standalone}
-\usepackage{ctex,bm,siunitx}
+\usepackage{standalone,ctex,bm,siunitx}
 \input{../../mathdef.tex}
 \input{../notation.tex}
 \usetikzlibrary{angles,calc,circuits.ee.IEC,quotes,shapes}
@@ -21,57 +21,7 @@
     \label{energy-state}
 \end{tikzpicture}
 
-% 按原图“图 1.19 考虑自旋–轨道耦合后的核子能级”的能级顺序重绘。
-\begin{tikzpicture}[
-    x=1cm, y=.44cm, font=\small,
-    splitting/.style={densely dashed, black!58, line width=.4pt},
-    level/.style={line width=.7pt},
-    count/.style={minimum width=2.35em, inner sep=1pt},
-    closed/.style={count, draw, rounded corners=1pt, font=\small\bfseries}
-]
-    \node at (1.15,29) {振子激发能};
-    \node at (3.1,29) {耦合前 $n\ell$};
-    \node at (7.05,29) {耦合后 $n\ell_j$};
-    \node at (8.95,29) {容量 $2j+1$};
-    \node at (10.75,29) {累计数};
-    \draw[->] (-.05,0) -- (-.05,27.9) node[above] {$E$};
-
-    % 左列按振子壳层分组。短括号涵盖同一壳层内所画的轨道。
-    \foreach \shell/\height in {0/0,1/2.35,2/5.6,3/10.65,4/16.3,5/22.45,6/27.55}
-        \node at (1.15,\height) {$\shell\hbar\omega$};
-    \foreach \low/\high in {5.15/6.05,9.8/11.5,14.35/18.25,20.15/24.75}
-        \draw (2.37,\low) -- (2.23,\low) -- (2.23,\high) -- (2.37,\high);
-
-    \foreach \orbital/\height in {
-        1s/0, 1p/2.35, 1d/5.15, 2s/6.05, 1f/9.8, 2p/11.5,
-        1g/14.35, 2d/16.85, 3s/18.25, 1h/20.15, 2f/22.65,
-        3p/24.75, 1i/27.55}
-    {
-        \node at (2.95,\height) {$\mathrm{\orbital}$};
-        \draw[level] (3.35,\height) -- (4.05,\height) coordinate (parent-\orbital);
-    }
-
-    % 依能量递增列出：轨道、2j、图上高度、累计粒子数、闭壳层标记。
-    \foreach \orbital/\twoj/\height/\total/\style in {
-        1s/1/0/2/closed,
-        1p/3/1.85/6/count,    1p/1/2.85/8/closed,
-        1d/5/4.7/14/count,    2s/1/5.7/16/count,    1d/3/6.7/20/closed,
-        1f/7/8.55/28/closed,
-        2p/3/10.4/32/count,   1f/5/11.4/38/count,   2p/1/12.4/40/count,
-        1g/9/13.4/50/closed,
-        1g/7/15.25/58/count,  2d/5/16.25/64/count,  2d/3/17.25/68/count,
-        3s/1/18.25/70/count,  1h/11/19.25/82/closed,
-        1h/9/21.1/92/count,   2f/7/22.1/100/count,  2f/5/23.1/106/count,
-        3p/3/24.1/110/count,  3p/1/25.1/112/count,  1i/13/26.1/126/closed}
-    {
-        \draw[splitting] (parent-\orbital) -- (5.5,\height);
-        \draw[level] (5.5,\height) -- (6.48,\height);
-        \node[anchor=west] at (6.52,\height) {$\mathrm{\orbital}_{\twoj/2}$};
-        \node at (8.95,\height) {\the\numexpr\twoj+1\relax};
-        \node[\style] at (10.75,\height) {\total};
-    }
-    \label{spin-orbit-splitting}
-\end{tikzpicture}
+\input{spin-orbit-splitting.tex}
 
 \begin{tikzpicture}
     \draw[ultra thick](-4, 5)node[above right]{\small$7/2^+$}--(0, 5)node[midway, below]{$\nuclide{137}{Cs}$}node[above left]{\small 0}node[right]{\small\qty{30}{yr}};
@@ -81,17 +31,17 @@
     \draw[thick](1, 2)node[above right]{\small$11/2^-$}--(5, 2)node[above left]{\small \qty{661.66}{keV}}node[right]{\small$\qty{2.5}{min}$};
     \draw[ultra thick](1, 0)node[above right]{\small$3/2^+$}--(5, 0)node[midway, below]{$\nuclide{137}{Ba}\stable$}node[above left]{\small 0}node[right]{\small stable};
     \draw[thick, latex-](3, 0)--(3, 2)node[right, yshift=9pt, rotate=60]{\small \qty{661.66}{keV}\enspace$\gamma$ \qty{85.0}{\percent} e \qty{9.6}{\percent}};%node[midway, right]{\small \qty{661.66}{keV}};
-    \node[left]{$Q_{\beta^-}=\qty{1173.2+-0.9}{keV}$};
+    \node[left]{$Q_{\upbeta^-} = \qty{1173.2+-0.9}{keV}$};
     \label{cesium-decay}
 \end{tikzpicture}
 
 \begin{tikzpicture}
-    \node[right]at(4, -.5){$Q_\alpha=\qty{5407.63+-0.10}{keV}$};
+    \node[right]at(4, -.5){$Q_\upalpha = \qty{5407.63+-0.10}{keV}$};
     \draw[ultra thick](0, 0)node[above right]{\small $0^+$}--(4, 0)node[midway, below]{$\nuclide{206}{Pb}\stable$}node[above left]{\small 0};
     \draw[thick](0, 2)node[above right]{\small $2^+$}--(4, 2)node[above left]{\small \qty{803.1}{keV}};
     \draw[thick, latex-](2, 0)--(2, 2)node[right, yshift=9pt, rotate=60]{\small \qty{804}{keV}\enspace$\gamma$ \qty{0.00107}{\percent}};
     \draw[thick, latex-](4, 2)--(5, 2)node[right]{\small\enspace\num{4524}\qquad\num{0.00107}};
-    \node[above right]at(5, 2.1){\small$E_\alpha/\unit{keV}\qquad I_\alpha/\unit{\percent}$};
+    \node[above right]at(5, 2.1){\small$E_\upalpha/\unit{keV}\qquad I_\upalpha/\unit{\percent}$};
     \draw[thick](5, 0)--(5, 6);
     \draw[thick, latex-](4, 0)--(5.05, 0)node[right]{\small\num{5304.61}\qquad 99}--(5.05, 5.95);
     \draw[thick](4.95, 6.05)--(5.1, 5.9);
@@ -123,16 +73,16 @@
     \draw[thick, -latex](0, 4)--(-1, 0);
     \draw[thick, -latex](0, 4)--(0, 2)--(-1, 0);
     \draw[thick, latex-](-2.8, 0)--(-2.8, 3)node[right, yshift=9pt, rotate=60]{\small\qty{1345.77}{keV}\enspace$\gamma$ \qty{0.48}{\percent}};
-    \draw(4.5, 3.25)--(4, 2.8)--(.5, 2.8)node[above right]{\small$\beta^-$\enspace\qty{578.2}{keV} \qty{37.1}{\percent}}node[below right]{\small $Q_{\beta^-}=\qty{578.2+-1.5}{keV}$};
+    \draw(4.5, 3.25)--(4, 2.8)--(.5, 2.8)node[above right]{\small$\beta^-$\enspace\qty{578.2}{keV} \qty{37.1}{\percent}}node[below right]{\small $Q_{\upbeta^-} = \qty{578.2+-1.5}{keV}$};
     \draw(-.5, 3.5)--(.5, 1.65)node[above right]{\small EC$_1$}--(4, 1.65)node[above left]{\small \qty{0.48}{\percent}};
     \draw(-.5, 2)--(.5, 1)node[above right]{\small EC$_2$}--(4, 1)node[above left]{\small \qty{44.5}{\percent}};
-    \draw(-.5, 1)--(.5, .35)node[above right]{\small$\beta^+$\enspace\qty{652.9}{keV}\enspace\,\qty{17.9}{\percent}}node[below right]{\small$Q_{\mathrm{EC}}=\qty{1674.9+-0.8}{keV}$}--(4, .35);
+    \draw(-.5, 1)--(.5, .35)node[above right]{\small$\beta^+$\enspace\qty{652.9}{keV}\enspace\,\qty{17.9}{\percent}}node[below right]{\small$Q_{\mathrm{EC}} = \qty{1674.9+-0.8}{keV}$}--(4, .35);
     \label{copper-decay}
 \end{tikzpicture}
 
 \begin{tikzpicture}
-    \xOy{p_\beta}{4.5}{I(p_\beta)}{3};
-    \draw[thick, domain=0:4, samples=100]plot(\x, {(2-sqrt(\x^2+9)+3)^2*\x^2/3})node[below]{$p_{\beta\max{}}$};
+    \xOy{p_\upbeta}{4.5}{I(p_\upbeta)}{3};
+    \draw[thick, domain=0:4, samples=100]plot(\x, {(2-sqrt(\x^2+9)+3)^2*\x^2/3})node[below]{$p_{\upbeta\max{}}$};
     \draw[dashed](0, 0)parabola(1.5, 3);
     \draw[dashed](4, 0)parabola(3.1, 2.7648);
     \label{beta-phase-space}
@@ -233,13 +183,13 @@
 \begin{tikzpicture}[circuit ee IEC]
     \draw (6, 0) to (0, 0) to [ground={at end}] (0, -.5);
     \draw (2, 3) to (0, 3) to [battery] (0, 0) node [contact] {};
-    \draw (2, 0) node [contact] {} to [resistor={info={$R_L$}}] (2, 1.5) to [capacitor={info={$C_1$}}] (2, 3);
+    \draw (2, 0) node [contact] {} to [resistor={info={$R_{\mathrm{L}}$}}] (2, 1.5) to [capacitor={info={$C_1$}}] (2, 3);
     \draw (3.5, 0) node [contact] {} to [capacitor={info={$C'$}}] (3.5, 1.5) node [contact] {};
-    \draw (5, 0) node [contact] {} to [resistor={info={$R_i$}}] (5, 1.5) node [contact] {};
-    \draw (6, 0) to [capacitor={info={$C_i$}}] (6, 1.5) to (2, 1.5) node [contact] {};
+    \draw (5, 0) node [contact] {} to [resistor={info={$R_{\mathrm{i}}$}}] (5, 1.5) node [contact] {};
+    \draw (6, 0) to [capacitor={info={$C_{\mathrm{i}}$}}] (6, 1.5) to (2, 1.5) node [contact] {};
     \draw [dashed] (4.2, -.2) rectangle (6.5, 1.7);
     \node [above] at (5.25, 1.7) {测量仪器};
-    \node [right, align=left] at (7, 1.5) {\small$C_1$探测器电容\\$R_L$负载电阻\\$C'$电缆电容等\\$R_i$测量仪器输入电阻\\$C_i$测量仪器输入电容};
+    \node [right, align=left] at (7, 1.5) {\small$C_1$探测器电容\\$R_{\mathrm{L}}$负载电阻\\$C'$电缆电容等\\$R_{\mathrm{i}}$测量仪器输入电阻\\$C_{\mathrm{i}}$测量仪器输入电容};
     \label{output-circuit}
 \end{tikzpicture}
 
@@ -260,10 +210,10 @@
     \draw (0, 0) to [current source={direction info={}, info={$I_0$}}] (0, 2) to (9, 2);
     \draw (9, 0) to (0, 0) to [ground={at end}] (0, -.5);
     \draw (dn 1) to [capacitor={info={$C_1$}}] (up 1);
-    \draw (dn 2) to [resistor={info={$R_L$}}] (up 2);
+    \draw (dn 2) to [resistor={info={$R_{\mathrm{L}}$}}] (up 2);
     \draw (dn 3) to [capacitor={info={$C'$}}] (up 3);
-    \draw (dn 4) to [resistor={info={$R_i$}}] (up 4);
-    \draw (dn 5) to [capacitor={info={$C_i$}}] (up 5);
+    \draw (dn 4) to [resistor={info={$R_{\mathrm{i}}$}}] (up 4);
+    \draw (dn 5) to [capacitor={info={$C_{\mathrm{i}}$}}] (up 5);
     \draw[latex-latex](9, 0)--(9, 2)node[midway, fill=white]{$V$};
     \draw[dashed](-.8, -.2)rectangle(1.9, 2.2);
     \draw[dashed](2.1, -.2)rectangle(4.9, 2.2);
@@ -306,7 +256,7 @@
     \draw [dashed] (-4, 1.7) node [left] {Grid (G)} -- (-2, 1.7) node [above left] {a} node [below left] {b};
     \draw (-2, 1.7) -- (0, 1.7);
     \draw (-3, .5) to (-3, 0) to (0, 0) to [ground={at end}] (0, -.5);
-    \draw (-3, 2.5) to (-3, 3) to [resistor={info={$R_L$}}] (0, 3) to [battery] (0, 1.7) node [contact] {} to [battery] (0, 0) node [contact] {};
+    \draw (-3, 2.5) to (-3, 3) to [resistor={info={$R_{\mathrm{L}}$}}] (0, 3) to [battery] (0, 1.7) node [contact] {} to [battery] (0, 0) node [contact] {};
     \draw [red] (-3.5, 1.5) -- (-2.5, .5) node [midway, above, sloped] {$R$};
     \label{gridded-chamber}
 \end{tikzpicture}
@@ -351,285 +301,53 @@
 \end{tikzpicture}
 \endgroup
 
-% Periodic table
 \begingroup
 \standaloneconfig{border=5mm}
-% Adapted from https://texample.net/tikz/examples/periodic-table-of-chemical-elements.
-% All Credit to Ivan Griffin.
-
-\newcommand{\ElemLabel}[5]{
-  \begin{minipage}{2.2cm}
-    \centering
-      {\textbf{#2} \hfill #3}%
-      \linebreak \linebreak
-      {\textbf{#4}}%
-      \linebreak
-      {{#1}}
-      \linebreak
-      {{#5}}
-  \end{minipage}
-}
-
-%
-\newcommand{\orbitalS}[1]{s$^{\mathsf{#1}}$}
-\newcommand{\orbitalP}[1]{p$^{\mathsf{#1}}$}
-\newcommand{\orbitalD}[1]{d$^{\mathsf{#1}}$}
-\newcommand{\orbitalF}[1]{f$^{\mathsf{#1}}$}
-
-\newcommand{\NaturalElem}[5][]{\ElemLabel{#1}{#2}{#3}{\huge {#4}}{#5}}
-
-\newcommand{\SyntheticElem}[5][]{\ElemLabel{#1}{#2}{#3}{\color{gray}{\huge #4}}{#5}}
-
-\begin{tikzpicture}[font=\sffamily]
-
-  % Fill Color Styles
-  \tikzstyle{ElementFill} = [fill=yellow!15]
-  \tikzstyle{AlkaliMetalFill} = [fill=blue!55]
-  \tikzstyle{AlkalineEarthMetalFill} = [fill=blue!40]
-  \tikzstyle{MetalFill} = [fill=blue!25]
-  \tikzstyle{MetalloidFill} = [fill=orange!40]
-  \tikzstyle{NonmetalFill} = [fill=teal!40]
-  \tikzstyle{HalogenFill} = [fill=yellow!40]
-  \tikzstyle{NobleGasFill} = [fill=green!55]
-  \tikzstyle{LanthanideActinideFill} = [fill=red!40]
-
-  % Element Styles
-  \tikzstyle{Element} = [ElementFill,
-    minimum width=2.5cm, minimum height=2.5cm, node distance=2.75cm]
-  \tikzstyle{AlkaliMetal} = [Element, AlkaliMetalFill]
-  \tikzstyle{AlkalineEarthMetal} = [Element, AlkalineEarthMetalFill]
-  \tikzstyle{Metal} = [Element, MetalFill]
-  \tikzstyle{Metalloid} = [Element, MetalloidFill]
-  \tikzstyle{Nonmetal} = [Element, NonmetalFill]
-  \tikzstyle{Halogen} = [Element, HalogenFill]
-  \tikzstyle{NobleGas} = [Element, NobleGasFill]
-  \tikzstyle{LanthanideActinide} = [Element, LanthanideActinideFill]
-  \tikzstyle{PeriodLabel} = [font={\sffamily\LARGE}, node distance=2.0cm]
-  \tikzstyle{GroupLabel} = [font={\sffamily\LARGE}, minimum width=2.75cm, node distance=2.0cm]
-
-  % Group 1 - IA
-  \node[Element] (H) {\NaturalElem[1\orbitalS1]{1}{1.0079}{H}{Hydrogen}};
-  \node[below of=H, AlkaliMetal] (Li) {\NaturalElem[2\orbitalS1]{3}{6.941}{Li}{Lithium}};
-  \node[below of=Li, AlkaliMetal] (Na) {\NaturalElem[3\orbitalS1]{11}{22.990}{Na}{Sodium}};
-  \node[below of=Na, AlkaliMetal] (K) {\NaturalElem[4\orbitalS1]{19}{39.098}{K}{Potassium}};
-  \node[below of=K, AlkaliMetal] (Rb) {\NaturalElem[5\orbitalS1]{37}{85.468}{Rb}{Rubidium}};
-  \node[below of=Rb, AlkaliMetal] (Cs) {\NaturalElem[6\orbitalS1]{55}{132.91}{Cs}{Caesium}};
-  \node[below of=Cs, AlkaliMetal] (Fr) {\NaturalElem[7\orbitalS1]{87}{(223)}{Fr}{Francium}};
-
-  % Group 2 - IIA
-  \node[right of=Li, AlkalineEarthMetal] (Be) {\NaturalElem[2\orbitalS2]{4}{9.0122}{Be}{Beryllium}};
-  \node[below of=Be, AlkalineEarthMetal] (Mg) {\NaturalElem[3\orbitalS2]{12}{24.305}{Mg}{Magnesium}};
-  \node[below of=Mg, AlkalineEarthMetal] (Ca) {\NaturalElem[4\orbitalS2]{20}{40.078}{Ca}{Calcium}};
-  \node[below of=Ca, AlkalineEarthMetal] (Sr) {\NaturalElem[5\orbitalS2]{38}{87.62}{Sr}{Strontium}};
-  \node[below of=Sr, AlkalineEarthMetal] (Ba) {\NaturalElem[6\orbitalS2]{56}{137.33}{Ba}{Barium}};
-  \node[below of=Ba, AlkalineEarthMetal] (Ra) {\NaturalElem[7\orbitalS2]{88}{(226)}{Ra}{Radium}};
-
-  % Group 3 - IIIB
-  \node[right of=Ca, Metal] (Sc) {\NaturalElem[3\orbitalD14\orbitalS2]{21}{44.956}{Sc}{Scandium}};
-  \node[below of=Sc, Metal] (Y) {\NaturalElem[4\orbitalD15\orbitalS2]{39}{88.906}{Y}{Yttrium}};
-  \node[below of=Y, LanthanideActinide] (LaLu) {\NaturalElem{57--71}{}{La--Lu}{Lanthanide}};
-  \node[below of=LaLu, LanthanideActinide] (AcLr) {\NaturalElem{89--103}{}{Ac--Lr}{Actinide}};
-
-  % Group 4 - IVB
-  \node[right of=Sc, Metal] (Ti) {\NaturalElem[3\orbitalD24\orbitalS2]{22}{47.867}{Ti}{Titanium}};
-  \node[below of=Ti, Metal] (Zr) {\NaturalElem[4\orbitalD25\orbitalS2]{40}{91.224}{Zr}{Zirconium}};
-  \node[below of=Zr, Metal] (Hf) {\NaturalElem[5\orbitalD26\orbitalS2]{72}{178.49}{Hf}{Hafnium}};
-  \node[below of=Hf, Metal] (Rf) {\SyntheticElem[(6\orbitalD27\orbitalS2)]{104}{(267)}{Rf}{Rutherfordium}};
-
-  % Group 5 - VB
-  \node[right of=Ti, Metal] (V) {\NaturalElem[3\orbitalD34\orbitalS2]{23}{50.942}{V}{Vanadium}};
-  \node[below of=V, Metal] (Nb) {\NaturalElem[4\orbitalD45\orbitalS1]{41}{92.906}{Nb}{Niobium}};
-  \node[below of=Nb, Metal] (Ta) {\NaturalElem[5\orbitalD36\orbitalS2]{73}{180.95}{Ta}{Tantalum}};
-  \node[below of=Ta, Metal] (Db) {\SyntheticElem[(6\orbitalD37\orbitalS2)]{105}{(268)}{Db}{Dubnium}};
-
-  % Group 6 - VIB
-  \node[right of=V, Metal] (Cr) {\NaturalElem[3\orbitalD54\orbitalS1]{24}{51.996}{Cr}{Chromium}};
-  \node[below of=Cr, Metal] (Mo) {\NaturalElem[4\orbitalD55\orbitalS1]{42}{95.94}{Mo}{Molybdenum}};
-  \node[below of=Mo, Metal] (W) {\NaturalElem[5\orbitalD46\orbitalS2]{74}{183.84}{W}{Tungsten}};
-  \node[below of=W, Metal] (Sg) {\SyntheticElem{106}{(269)}{Sg}{Seaborgium}};
-
-  % Group 7 - VIIB
-  \node[right of=Cr, Metal] (Mn) {\NaturalElem[3\orbitalD54\orbitalS2]{25}{54.938}{Mn}{Manganese}};
-  \node[below of=Mn, Metal] (Tc) {\NaturalElem[4\orbitalD55\orbitalS2]{43}{(98)}{Tc}{Technetium}};
-  \node[below of=Tc, Metal] (Re) {\NaturalElem[5\orbitalD56\orbitalS2]{75}{186.21}{Re}{Rhenium}};
-  \node[below of=Re, Metal] (Bh) {\SyntheticElem{107}{(270)}{Bh}{Bohrium}};
-
-  % Group 8 - VIIIB
-  \node[right of=Mn, Metal] (Fe) {\NaturalElem[3\orbitalD64\orbitalS2]{26}{55.845}{Fe}{Iron}};
-  \node[below of=Fe, Metal] (Ru) {\NaturalElem[4\orbitalD75\orbitalS1]{44}{101.07}{Ru}{Ruthenium}};
-  \node[below of=Ru, Metal] (Os) {\NaturalElem[5\orbitalD66\orbitalS2]{76}{190.23}{Os}{Osmium}};
-  \node[below of=Os, Metal] (Hs) {\SyntheticElem{108}{(277)}{Hs}{Hassium}};
-
-  % Group 9 - VIIIB
-  \node[right of=Fe, Metal] (Co) {\NaturalElem[3\orbitalD74\orbitalS2]{27}{58.933}{Co}{Cobalt}};
-  \node[below of=Co, Metal] (Rh) {\NaturalElem[4\orbitalD85\orbitalS1]{45}{102.91}{Rh}{Rhodium}};
-  \node[below of=Rh, Metal] (Ir) {\NaturalElem[5\orbitalD76\orbitalS2]{77}{192.22}{Ir}{Iridium}};
-  \node[below of=Ir, Metal] (Mt) {\SyntheticElem{109}{(278)}{Mt}{Meitnerium}};
-
-  % Group 10 - VIIIB
-  \node[right of=Co, Metal] (Ni) {\NaturalElem[3\orbitalD84\orbitalS2]{28}{58.693}{Ni}{Nickel}};
-  \node[below of=Ni, Metal] (Pd) {\NaturalElem[4\orbitalD{10}]{46}{106.42}{Pd}{Palladium}};
-  \node[below of=Pd, Metal] (Pt) {\NaturalElem[5\orbitalD96\orbitalS1]{78}{195.08}{Pt}{Platinum}};
-  \node[below of=Pt, Metal] (Ds) {\SyntheticElem{110}{(281)}{Ds}{Darmstadtium}};
-
-  % Group 11 - IB
-  \node[right of=Ni, Metal] (Cu) {\NaturalElem[3\orbitalD{10}4\orbitalS1]{29}{63.546}{Cu}{Copper}};
-  \node[below of=Cu, Metal] (Ag) {\NaturalElem[4\orbitalD{10}5\orbitalS1]{47}{107.87}{Ag}{Silver}};
-  \node[below of=Ag, Metal] (Au) {\NaturalElem[5\orbitalD{10}6\orbitalS1]{79}{196.97}{Au}{Gold}};
-  \node[below of=Au, Metal] (Rg) {\SyntheticElem{111}{(282)}{Rg}{Roentgenium}};
-
-  % Group 12 - IIB
-  \node[right of=Cu, Metal] (Zn) {\NaturalElem[3\orbitalD{10}4\orbitalS2]{30}{65.38}{Zn}{Zinc}};
-  \node[below of=Zn, Metal] (Cd) {\NaturalElem[4\orbitalD{10}5\orbitalS2]{48}{112.41}{Cd}{Cadmium}};
-  \node[below of=Cd, Metal] (Hg) {\NaturalElem[5\orbitalD{10}6\orbitalS2]{80}{200.59}{Hg}{Mercury}};
-  \node[below of=Hg, Metal] (Cn) {\SyntheticElem{112}{(285)}{Cn}{Copernicium}};
-
-  % Group 13 - IIIA
-  \node[right of=Zn, Metal] (Ga) {\NaturalElem[4\orbitalS24\orbitalP1]{31}{69.723}{Ga}{Gallium}};
-  \node[above of=Ga, Metal] (Al) {\NaturalElem[3\orbitalS23\orbitalP1]{13}{26.982}{Al}{Aluminium}};
-  \node[above of=Al, Metalloid] (B) {\NaturalElem[2\orbitalS22\orbitalP1]{5}{10.811}{B}{Boron}};
-  \node[below of=Ga, Metal] (In) {\NaturalElem[5\orbitalS25\orbitalP1]{49}{114.82}{In}{Indium}};
-  \node[below of=In, Metal] (Tl) {\NaturalElem[6\orbitalS26\orbitalP1]{81}{204.38}{Tl}{Thallium}};
-  \node[below of=Tl, Metal] (Nh) {\SyntheticElem{113}{(286)}{Nh}{Nihonium}};
-
-  % Group 14 - IVA
-  \node[right of=B, Nonmetal] (C) {\NaturalElem[2\orbitalS22\orbitalP2]{6}{12.011}{C}{Carbon}};
-  \node[below of=C, Metalloid] (Si) {\NaturalElem[3\orbitalS23\orbitalP2]{14}{28.085}{Si}{Silicon}};
-  \node[below of=Si, Metalloid] (Ge) {\NaturalElem[4\orbitalS24\orbitalP2]{32}{72.630}{Ge}{Germanium}};
-  \node[below of=Ge, Metal] (Sn) {\NaturalElem[5\orbitalS25\orbitalP2]{50}{118.71}{Sn}{Tin}};
-  \node[below of=Sn, Metal] (Pb) {\NaturalElem[6\orbitalS26\orbitalP2]{82}{207.2}{Pb}{Lead}};
-  \node[below of=Pb, Metal] (Fl) {\SyntheticElem{114}{(289)}{Fl}{Flerovium}};
-
-  % Group 15 - VA
-  \node[right of=C, Nonmetal] (N) {\NaturalElem[2\orbitalS22\orbitalP3]{7}{14.007}{N}{Nitrogen}};
-  \node[below of=N, Nonmetal] (P) {\NaturalElem[3\orbitalS23\orbitalP3]{15}{30.974}{P}{Phosphorus}};
-  \node[below of=P, Metalloid] (As) {\NaturalElem[4\orbitalS24\orbitalP3]{33}{74.922}{As}{Arsenic}};
-  \node[below of=As, Metalloid] (Sb) {\NaturalElem[5\orbitalS25\orbitalP3]{51}{121.76}{Sb}{Antimony}};
-  \node[below of=Sb, Metal] (Bi) {\NaturalElem[6\orbitalS26\orbitalP3]{83}{208.98}{Bi}{Bismuth}};
-  \node[below of=Bi, Metal] (Mc) {\SyntheticElem{115}{(290)}{Mc}{Moscovium}};
-
-  % Group 16 - VIA
-  \node[right of=N, Nonmetal] (O) {\NaturalElem[2\orbitalS22\orbitalP4]{8}{15.999}{O}{Oxygen}};
-  \node[below of=O, Nonmetal] (S) {\NaturalElem[3\orbitalS23\orbitalP4]{16}{32.065}{S}{Sulphur}};
-  \node[below of=S, Nonmetal] (Se) {\NaturalElem[4\orbitalS24\orbitalP4]{34}{78.971}{Se}{Selenium}};
-  \node[below of=Se, Metalloid] (Te) {\NaturalElem[5\orbitalS25\orbitalP4]{52}{127.60}{Te}{Tellurium}};
-  \node[below of=Te, Metalloid] (Po) {\NaturalElem[6\orbitalS26\orbitalP4]{84}{(209)}{Po}{Polonium}};
-  \node[below of=Po, Metal] (Lv) {\SyntheticElem{116}{(293)}{Lv}{Livermorium}};
-
-  % Group 17 - VIIA
-  \node[right of=O, Halogen] (F) {\NaturalElem[2\orbitalS22\orbitalP5]{9}{18.998}{F}{Fluorine}};
-  \node[below of=F, Halogen] (Cl) {\NaturalElem[3\orbitalS23\orbitalP5]{17}{35.453}{Cl}{Chlorine}};
-  \node[below of=Cl, Halogen] (Br) {\NaturalElem[4\orbitalS24\orbitalP5]{35}{79.904}{Br}{Bromine}};
-  \node[below of=Br, Halogen] (I) {\NaturalElem[5\orbitalS25\orbitalP5]{53}{126.90}{I}{Iodine}};
-  \node[below of=I, Halogen] (At) {\NaturalElem[6\orbitalS26\orbitalP5]{85}{(210)}{At}{Astatine}};
-  \node[below of=At, Element] (Ts) {\SyntheticElem{117}{(294)}{Ts}{Tennessine}};
-
-  % Group 18 - VIIIA
-  \node[right of=F, NobleGas] (Ne) {\NaturalElem[2\orbitalS22\orbitalP6]{10}{20.180}{Ne}{Neon}};
-  \node[above of=Ne, NobleGas] (He) {\NaturalElem[1\orbitalS2]{2}{4.0026}{He}{Helium}};
-  \node[below of=Ne, NobleGas] (Ar) {\NaturalElem[3\orbitalS23\orbitalP6]{18}{39.948}{Ar}{Argon}};
-  \node[below of=Ar, NobleGas] (Kr) {\NaturalElem[4\orbitalS24\orbitalP6]{36}{83.798}{Kr}{Krypton}};
-  \node[below of=Kr, NobleGas] (Xe) {\NaturalElem[5\orbitalS25\orbitalP6]{54}{131.29}{Xe}{Xenon}};
-  \node[below of=Xe, NobleGas] (Rn) {\NaturalElem[6\orbitalS26\orbitalP6]{86}{(222)}{Rn}{Radon}};
-  \node[below of=Rn, Nonmetal] (Og) {\SyntheticElem{118}{(294)}{Og}{Oganesson}};
-
-  % Period
-  \node[left of=H, PeriodLabel] (Period1) {1};
-  \node[left of=Li, PeriodLabel] (Period2) {2};
-  \node[left of=Na, PeriodLabel] (Period3) {3};
-  \node[left of=K, PeriodLabel] (Period4) {4};
-  \node[left of=Rb, PeriodLabel] (Period5) {5};
-  \node[left of=Cs, PeriodLabel] (Period6) {6};
-  \node[left of=Fr, PeriodLabel] (Period7) {7};
-
-  % Group
-  \node[above of=H, GroupLabel] (Group1) {1 \hfill IA};
-  \node[above of=Be, GroupLabel] (Group2) {2 \hfill IIA};
-  \node[above of=Sc, GroupLabel] (Group3) {3 \hfill IIIA};
-  \node[above of=Ti, GroupLabel] (Group4) {4 \hfill IVB};
-  \node[above of=V, GroupLabel] (Group5) {5 \hfill VB};
-  \node[above of=Cr, GroupLabel] (Group6) {6 \hfill VIB};
-  \node[above of=Mn, GroupLabel] (Group7) {7 \hfill VIIB};
-  \node[above of=Fe, GroupLabel] (Group8) {8 \hfill VIIIB};
-  \node[above of=Co, GroupLabel] (Group9) {9 \hfill VIIIB};
-  \node[above of=Ni, GroupLabel] (Group10) {10 \hfill VIIIB};
-  \node[above of=Cu, GroupLabel] (Group11) {11 \hfill IB};
-  \node[above of=Zn, GroupLabel] (Group12) {12 \hfill IIB};
-  \node[above of=B, GroupLabel] (Group13) {13 \hfill IIIA};
-  \node[above of=C, GroupLabel] (Group14) {14 \hfill IVA};
-  \node[above of=N, GroupLabel] (Group15) {15 \hfill VA};
-  \node[above of=O, GroupLabel] (Group16) {16 \hfill VIA};
-  \node[above of=F, GroupLabel] (Group17) {17 \hfill VIIA};
-  \node[above of=He, GroupLabel] (Group18) {18 \hfill VIIIA};
-
-  % Lanthanide
-  \node[below of=Rf, LanthanideActinide, yshift=-1cm] (La) {\NaturalElem[5\orbitalD16\orbitalS2]{57}{138.91}{La}{Lanthanum}};
-  \node[right of=La, LanthanideActinide] (Ce) {\NaturalElem[4\orbitalF15\orbitalD16\orbitalS2]{58}{140.12}{Ce}{Cerium}};
-  \node[right of=Ce, LanthanideActinide] (Pr) {\NaturalElem[4\orbitalF36\orbitalS2]{59}{140.91}{Pr}{Praseodymium}};
-  \node[right of=Pr, LanthanideActinide] (Nd) {\NaturalElem[4\orbitalF46\orbitalS2]{60}{144.24}{Nd}{Neodymium}};
-  \node[right of=Nd, LanthanideActinide] (Pm) {\NaturalElem[4\orbitalF56\orbitalS2]{61}{(145)}{Pm}{Promethium}};
-  \node[right of=Pm, LanthanideActinide] (Sm) {\NaturalElem[4\orbitalF66\orbitalS2]{62}{150.36}{Sm}{Samarium}};
-  \node[right of=Sm, LanthanideActinide] (Eu) {\NaturalElem[4\orbitalF76\orbitalS2]{63}{151.96}{Eu}{Europium}};
-  \node[right of=Eu, LanthanideActinide] (Gd) {\NaturalElem[4\orbitalF75\orbitalD16\orbitalS2]{64}{157.25}{Gd}{Gadolinium}};
-  \node[right of=Gd, LanthanideActinide] (Tb) {\NaturalElem[4\orbitalF96\orbitalS2]{65}{158.93}{Tb}{Terbium}};
-  \node[right of=Tb, LanthanideActinide] (Dy) {\NaturalElem[4\orbitalF{10}6\orbitalS2]{66}{162.50}{Dy}{Dysprosium}};
-  \node[right of=Dy, LanthanideActinide] (Ho) {\NaturalElem[4\orbitalF{11}6\orbitalS2]{67}{164.93}{Ho}{Holmium}};
-  \node[right of=Ho, LanthanideActinide] (Er) {\NaturalElem[4\orbitalF{12}6\orbitalS2]{68}{167.26}{Er}{Erbium}};
-  \node[right of=Er, LanthanideActinide] (Tm) {\NaturalElem[4\orbitalF{13}6\orbitalS2]{69}{168.93}{Tm}{Thulium}};
-  \node[right of=Tm, LanthanideActinide] (Yb) {\NaturalElem[4\orbitalF{14}6\orbitalS2]{70}{173.05}{Yb}{Ytterbium}};
-  \node[right of=Yb, LanthanideActinide] (Lu) {\NaturalElem[4\orbitalF{14}5\orbitalD16\orbitalS2]{71}{174.97}{Lu}{Lutetium}};
-
-  % Actinide
-  \node[below of=La, LanthanideActinide] (Ac) {\NaturalElem[6\orbitalD17\orbitalS2]{89}{(227)}{Ac}{Actinium}};
-  \node[right of=Ac, LanthanideActinide] (Th) {\NaturalElem[6\orbitalD27\orbitalS2]{90}{232.04}{Th}{Thorium}};
-  \node[right of=Th, LanthanideActinide] (Pa) {\NaturalElem[5\orbitalF26\orbitalD17\orbitalS2]{91}{231.04}{Pa}{Protactinium}};
-  \node[right of=Pa, LanthanideActinide] (U) {\NaturalElem[5\orbitalF36\orbitalD17\orbitalS2]{92}{238.03}{U}{Uranium}};
-  \node[right of=U, LanthanideActinide] (Np) {\SyntheticElem[5\orbitalF46\orbitalD17\orbitalS2]{93}{(237)}{Np}{Neptunium}};
-  \node[right of=Np, LanthanideActinide] (Pu) {\SyntheticElem[5\orbitalF67\orbitalS2]{94}{(244)}{Pu}{Plutonium}};
-  \node[right of=Pu, LanthanideActinide] (Am) {\SyntheticElem[5\orbitalF77\orbitalS2]{95}{(243)}{Am}{Americium}};
-  \node[right of=Am, LanthanideActinide] (Cm) {\SyntheticElem[5\orbitalF56\orbitalD17\orbitalS2]{96}{(247)}{Cm}{Curium}};
-  \node[right of=Cm, LanthanideActinide] (Bk) {\SyntheticElem[5\orbitalF97\orbitalS2]{97}{(247)}{Bk}{Berkelium}};
-  \node[right of=Bk, LanthanideActinide] (Cf) {\SyntheticElem[5\orbitalF{10}7\orbitalS2]{98}{(251)}{Cf}{Californium}};
-  \node[right of=Cf, LanthanideActinide] (Es) {\SyntheticElem[5\orbitalF{11}7\orbitalS2]{99}{(252)}{Es}{Einsteinium}};
-  \node[right of=Es, LanthanideActinide] (Fm) {\SyntheticElem[5\orbitalF{12}7\orbitalS2]{100}{(257)}{Fm}{Fermium}};
-  \node[right of=Fm, LanthanideActinide] (Md) {\SyntheticElem[(5\orbitalF{13}7\orbitalS2)]{101}{(258)}{Md}{Mendelevium}};
-  \node[right of=Md, LanthanideActinide] (No) {\SyntheticElem[(5\orbitalF{14}7\orbitalS2)]{102}{(259)}{No}{Nobelium}};
-  \node[right of=No, LanthanideActinide] (Lr) {\SyntheticElem[(5\orbitalF{14}6\orbitalD17\orbitalS2)]{103}{(266)}{Lr}{Lawrencium}};
-
-  % % Draw dotted lines connecting Lanthanide breakout to main table
-  % \draw[thick,dotted] (LaLu.north west) -- (La.north west)
-  %       (LaLu.south west) -- (La.south west);
-  % % Draw dotted lines connecting Actinide breakout to main table
-  % \draw[thick,dotted] (AcLr.north west) -- (Ac.north west)
-  %       (AcLr.south west) -- (Ac.south west);
-
-  % Legend
-   \fill[AlkaliMetalFill] ($(La.north -| Fr.west) + (0,1em)$)
-     rectangle +(1em, 1em) node[right, yshift=-1.2ex]  (AlkaliMetal) {Alkali Metal};
-   \fill[AlkalineEarthMetalFill] ($(AlkaliMetal.west) - (1em,2em)$)
-     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (AlkalineEarthMetal) {Alkaline Earth Metal};
-   \fill[MetalFill] ($(AlkalineEarthMetal.west) - (1em,2em)$)
-     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (Metal) {Metal};
-   \fill[MetalloidFill] ($(Metal.west) - (1em,2em)$)
-     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (Metalloid) {Metalloid};
-   \fill[NonmetalFill] ($(Metalloid.west) - (1em,2em)$)
-     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (Non-metal) {Non-metal};
-   \fill[HalogenFill] ($(Non-metal.west) - (1em,2em)$)
-     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (Halogen) {Halogen};
-   \fill[NobleGasFill] ($(Halogen.west) - (1em,2em)$)
-     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (NobleGas) {Noble Gas};
-   \fill[LanthanideActinideFill] ($(NobleGas.west) - (1em,2em)$)
-     rectangle +(1em, 1em) node[right, yshift=-1.2ex] (Lanthanide/Actinide) {Lanthanide/Actinide};
-
-  \node at (Ac -| Fr) [draw, Element, fill=white, yshift=-1cm] (legend) {\NaturalElem[configuration]{Z}{mass}{\LARGE Symbol}{Name}};
-  \node at (Ac -| Ra) [align=left, yshift=-1cm] {black: natural\\\color{gray}gray: synthetic};
-
-  % Diagram Title
-  % \node at (H.west -| Fe.north) [scale=2, font={\sffamily\Huge\bfseries}]
-  %   {Periodic Table of Elements};
-
-    \label{periodic-table}
-\end{tikzpicture}
+\input{periodic-table.tex}
 \endgroup
+
+\begin{tikzpicture}[>=latex,font=\small]
+    \label{coincidence-window}
+    \fill[teal!12] (1.95,-.16) rectangle (4.05,1.32);
+    \foreach \x in {1.95,4.05}
+        \draw[gray,dashed] (\x,-.20) -- (\x,1.53);
+    \draw[<->] (1.95,1.53) -- node[above] {$2\tau_{\mathrm s}$} (4.05,1.53);
+    \draw[->] (0,1) node[left] {通道 1} -- (6.6,1) node[right] {$t$};
+    \draw[->] (0,0) node[left] {通道 2} -- (6.6,0) node[right] {$t$};
+    \draw[very thick] (3,1) -- ++(0,.31);
+    \node[below right,inner sep=2pt] at (3,1) {$t_1$};
+    \draw[gray,dotted] (3,.98) -- (3,-.12);
+    \draw[very thick] (2.45,0) -- ++(0,.34);
+    \draw[very thick] (5.15,0) -- ++(0,.34);
+    \node[below] at (2.45,-.17) {计入符合};
+    \node[below] at (5.15,-.17) {窗外};
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=latex,font=\small,
+    electron/.style={->,thick,blue!65!black},
+    photon/.style={->,thick,orange!80!black}]
+    \label{scintillator-pmt}
+    \draw[thick,fill=teal!6] (-2.55,-.80) rectangle (-.62,.80);
+    \draw[thick,rounded corners=4pt] (-.62,-.80) rectangle (5.52,.80);
+    \draw[->,thick] (-3.73,.28) node[above right] {射线} -- (-1.95,.02);
+    \fill (-1.95,.02) circle (1.7pt);
+    \foreach \height in {-.46,-.06,.40}
+        \draw[photon] (-1.95,.02) -- (-.62,\height);
+    \draw[very thick] (-.62,-.57) -- (-.62,.57);
+    \draw[electron] (-.60,-.06) to[bend right=9] (1.08,.45);
+    \draw[very thick] (.92,.49) -- (1.38,.49);
+    \draw[very thick] (2.34,-.49) -- (2.89,-.49);
+    \foreach \offset in {0,.16}
+        \draw[electron] (1.08+\offset,.45) to[bend left=7] (2.46+\offset,-.44);
+    \foreach \offset in {0,.13,.26}
+        \draw[electron] (2.46+\offset,-.44) to[bend right=10] (4.49,.09+\offset);
+    \draw[very thick] (4.54,-.46) -- (4.54,.52);
+    \draw[->] (4.54,-.27) -- (6.18,-.27) node[right] {读出};
+    \node[below] at (-1.72,-.80) {闪烁体};
+    \node[above] at (-.62,.80) {光阴极};
+    \node[above] at (1.14,.82) {打拿极 $D_1$};
+    \node[below] at (2.58,-.80) {打拿极 $D_2$};
+    \node[above] at (4.54,.80) {阳极};
+\end{tikzpicture}
 
 \end{document}
