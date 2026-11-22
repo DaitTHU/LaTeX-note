@@ -6,8 +6,8 @@
 	{期望}{expectation}
 	期望是集中趋势的一种刻画，可用Lebesgue--Stieltjes积分给出一般形式
 	\begin{equation}
-		\E(X):=\int_0^1 x\d\CDF=\begin{cases}
-			\sum\nolimits_{i\in I} x_i\P(X=x_i),&\text{离散}\\[2ex]
+		\E(X) := \intR x\d\CDF(x) = \begin{cases}
+			\sum\nolimits_{i\in I} x_i\P(X = x_i),&\text{离散}\\[2ex]
 			\intR xf(x)\d x,&\text{连续}
 		\end{cases}
 	\end{equation}
@@ -22,19 +22,19 @@
 	\begin{itemize}
 		\item 随机向量的期望：
 		\begin{equation}
-			\E\bigb{(X_1,\ldots,X_n)}=\bigp{\E(X_1),\ldots,\E(X_n)};
+			\E\bigb{(X_1,\ldots,X_n)} = \bigp{\E(X_1),\ldots,\E(X_n)};
 		\end{equation}
 		\item 随机向量的函数的期望：
 		\begin{equation}
-			\E\bigb{g(X_1,\ldots,X_n)}=\int_{\RR^n}g(x_1,\ldots,x_n)f(x_1,\ldots,x_n)\d x;
+			\E\bigb{g(X_1,\ldots,X_n)} = \int_{\RR^n}g(x_1,\ldots,x_n)f(x_1,\ldots,x_n)\d x;
 		\end{equation}
 		\item 线性：
 		\begin{equation}
-			\E(aX+bY)=a\E(X)+b\E(Y);
+			\E(aX + bY) = a\E(X) + b\E(Y);
 		\end{equation}
 		\item 若$X_1,\ldots,X_n$独立\footnote{后面很快会看到，有一个更弱的条件：$X_1,\ldots,X_n$不相关。}，则
 		\begin{equation}
-			\E(X_1\cdots X_n)=\E(X_1)\cdots\E(X_n).
+			\E(X_1\cdots X_n) = \E(X_1)\cdots\E(X_n).
 		\end{equation}
 	\end{itemize}
 \end{corollary}
@@ -43,33 +43,33 @@
 	{Cauchy--Schwarz不等式}{Cauchy-Schwarz inequality}
 	若$\E(X^2),\E(Y^2)$存在，则
 	\begin{equation}
-		\E^2(XY)\leqslant\E(X^2)\E(Y^2).
+		\E^2(XY) \leqslant \E(X^2)\E(Y^2).
 	\end{equation}
-	取等号当且仅当存在$a,b\in\RR$，使得
+	取等号当且仅当存在不全为零的 $a,b \in \RR$，使得
 	\begin{equation}
-		\P(aX+bY=0)=1,
+		\P(aX + bY = 0) = 1,
 	\end{equation}
-	称为$aX+bY$以概率1 (almost surely, a.s.)等于0。
+	称为$aX + bY$以概率1 (almost surely, a.s.)等于0。
 	\index{a.s.,以概率1}
 \end{theorem}
 
 \begin{proof}
-	考虑$\forall t\in\RR$，
+	考虑$\forall t \in \RR$，
 	\[
-		\E\bigb{(X-tY)^2}=t^2\E(Y^2)-2t\E(XY)+\E(X^2)\geqslant 0.
+		\E\bigb{(X - tY)^2} = t^2\E(Y^2) - 2t\E(XY) + \E(X^2) \geqslant 0.
 	\]
-	作为关于$t$的二次不等式，其判别式$\Delta=4\E^2(XY)-4\E(X^2)\E(Y^2)\leqslant 0$，即得证。
+	作为关于$t$的二次不等式，其判别式$\Delta = 4\E^2(XY) - 4\E(X^2)\E(Y^2) \leqslant 0$，即得证。
 \end{proof}
 
 \begin{definition}{分位数}{quantile}
-	给定$\alpha\in(0,1)$，若
-	\[
-		\P(X\leqslant a)\geqslant\alpha,\quad\P(X\geqslant a)\geqslant 1-\alpha,
-	\]
+	给定$\alpha \in (0,1)$，若
+	\begin{equation}\label{eq:ps-quantile}
+		\P(X \leqslant a) \geqslant \alpha,\quad\P(X \geqslant a) \geqslant 1 - \alpha,
+	\end{equation}
 	则称$a$为$X$的下$\alpha$-分位数(lower $\alpha$-quantile)。
-	据定义\eqref{eqn:CDF-1}，$a=\CDF\inv(\alpha)$。
+	若有多个 $a$ 满足这两个不等式，定义\eqref{eqn:CDF-1}的广义逆 $\CDF\inv(\alpha)$ 取其中最小的一个。
 
-	特别地，$\alpha=1/2$时，$a$称为中位数，也是集中趋势的一种刻画。
+	特别地，$\alpha = 1/2$时，$a$称为中位数，也是集中趋势的一种刻画。
 \end{definition}
 
 \begin{definition}
@@ -83,35 +83,35 @@
 	{方差}{variance}
 	\dfnref{dfn:expectation and variance} 中已经定义过：
 	\begin{equation}
-		\Var(X):=\E\bigb{(X-\E(X))^2}\equiv\E(X^2)-\E^2(X)
+		\Var(X) := \E\bigb{(X - \E(X))^2} \equiv \E(X^2) - \E^2(X)
 	\end{equation}
-	标准差(standard deviation, SD) $\SD(X):=\sqrt{\Var(X)}.$
+	标准差(standard deviation, SD) $\SD(X) := \sqrt{\Var(X)}.$
 \end{definition}
 
 \begin{corollary}
 	标准化
 	\begin{equation}
-		\check X:=\frac{X-\E(X)}{\sqrt{\Var(X)}},
+		\check X := \frac{X - \E(X)}{\sqrt{\Var(X)}},
 	\end{equation}
-	可使$\E(\check X)=0,\Var(\check X)=1.$
+	可使$\E(\check X) = 0,\Var(\check X) = 1.$
 \end{corollary}
 
 \begin{corollary}
 	方差的性质：
 	\begin{subequations}
 		\begin{align}
-			\Var(c)&=0,\\
-			\Var(X+c)&=\Var(X),\\
-			\Var(cX)&=c^2\Var(X).
+			\Var(c) &= 0,\\
+			\Var(X + c) &= \Var(X),\\
+			\Var(cX) &= c^2\Var(X).
 		\end{align}
 	\end{subequations}
 	当$X,Y$不相关时，
 	\begin{equation}
-		\Var(X\pm Y)=\Var(X)+\Var(Y).
+		\Var(X \pm Y) = \Var(X) + \Var(Y).
 	\end{equation}
 	当$X,Y$独立时，
 	\begin{equation}
-		\Var(XY)=\Var(X)\Var(Y)+\E^2(X)\Var(Y)+\E^2(Y)\Var(X).
+		\Var(XY) = \Var(X)\Var(Y) + \E^2(X)\Var(Y) + \E^2(Y)\Var(X).
 	\end{equation}
 \end{corollary}
 
@@ -127,21 +127,21 @@
 % \end{theorem}
 \begin{example}{期望在均方误差下的意义}{expectation under square error}
 	期望是使得均方误差最小的常数估计，即$\forall c$均有
-	\[
-		\E\bigb{(X-c)^2}\geqslant\Var(X),
-	\]
-	取$=$当且仅当$c=\E(X)$。因为
+	\begin{equation}\label{eq:ps-mean-least-squares}
+		\E\bigb{(X - c)^2} \geqslant \Var(X),
+	\end{equation}
+	取$=$当且仅当$c = \E(X)$。因为
 	\begin{equation*}
-		\E\bigb{(X-c)^2}=\E(X^2)-2\E(X)c+c^2=:g(c)
+		\E\bigb{(X - c)^2} = \E(X^2) - 2\E(X)c + c^2 =: g(c)
 	\end{equation*}
-	当且仅当$c=\E(X)$时取到$g_{\min}=\E(X^2)-\E^2(X)=\Var(X)$。
+	当且仅当$c = \E(X)$时取到$g_{\min} = \E(X^2) - \E^2(X) = \Var(X)$。
 \end{example}
 \begin{example}{中位数在绝对值误差下的意义}{}
 	$m$为中位数，$\forall c$均有
-	\[
-		\E(\abs{X-c})\geqslant\E(\abs{X-m})
-	\]
-	取$=$当且仅当$c=m$。
+	\begin{equation}\label{eq:ps-median-absolute-deviation}
+		\E(\abs{X - c}) \geqslant \E(\abs{X - m})
+	\end{equation}
+	取$=$当且仅当$c = m$。
 \end{example}
 \section{协方差及相关系数}
 % 考虑随机变量$X,Y$
@@ -151,9 +151,9 @@
 \begin{definition}{协方差}{covariance}
 	定义协方差(covariance)
 	\begin{equation}
-		\Cov(X,Y):=\E\bigb{(X-\E(X))(Y-\E(Y))}\equiv\E(XY)-\E(X)\E(Y).
+		\Cov(X,Y) := \E\bigb{(X - \E(X))(Y - \E(Y))} \equiv \E(XY) - \E(X)\E(Y).
 	\end{equation}
-	显然，$\Cov(X,X)=\Var(X)$。
+	显然，$\Cov(X,X) = \Var(X)$。
 \end{definition}
 
 \begin{corollary}
@@ -161,26 +161,26 @@
 	\begin{itemize}
 		\item 交换性
 		\begin{equation}
-			\Cov(X,Y)=\Cov(Y,X);
+			\Cov(X,Y) = \Cov(Y,X);
 		\end{equation}
 		\item 双线性
 		\begin{subequations}
 			\begin{align}
-				\Cov(aX+bY,Z)&=a\Cov(X,Z)+b\Cov(Y,Z),\\
-				\Cov(X,aY+bZ)&=a\Cov(X,Y)+b\Cov(X,Z);
+				\Cov(aX + bY,Z) &= a\Cov(X,Z) + b\Cov(Y,Z),\\
+				\Cov(X,aY + bZ) &= a\Cov(X,Y) + b\Cov(X,Z);
 			\end{align}
 		\end{subequations}
 		\item 和/差的方差
 		\begin{equation}
-			\Var(X\pm Y)=\Var(X)+\Var(Y)\pm 2\Cov(X,Y).
+			\Var(X \pm Y) = \Var(X) + \Var(Y) \pm 2\Cov(X,Y).
 		\end{equation}
 	\end{itemize}
 \end{corollary}
 
 \begin{definition}{协方差矩阵}{covariance matrix}
-	定义$X=(X_1,\ldots,X_m),Y=(Y_1,\ldots,Y_n)$的协方差矩阵(covariance matrix)
+	定义$X = (X_1,\ldots,X_m),Y = (Y_1,\ldots,Y_n)$的协方差矩阵(covariance matrix)
 	\begin{equation}
-		\Cov(X,Y):=\begin{bmatrix}
+		\Cov(X,Y) := \begin{bmatrix}
 			\Cov(X_1,Y_1)&\cdots&\Cov(X_1,Y_n)\\
 			\vdots&\ddots&\vdots\\
 			\Cov(X_m,Y_1)&\cdots&\Cov(X_m,Y_n)
@@ -191,70 +191,70 @@
 \begin{corollary}
 	和的方差为
 	\begin{equation}
-		\Var\biggp{\sum_{i=1}^nX_i}=\sum_{i=1}^n\Var(X_i)+2\sum_{i<j}\Cov(X_i,X_j)\equiv\sum_{i,j}\Cov(X_i,X_j).
+		\Var\biggp{\sum_{i=1}^nX_i} = \sum_{i=1}^n\Var(X_i) + 2\sum_{i<j}\Cov(X_i,X_j) \equiv \sum_{i,j}\Cov(X_i,X_j).
 	\end{equation}
 \end{corollary}
 \begin{example}{多项分布的协方差}{covariance of multinomial distribution}
-	在\exmref{exm:multinomial distribution} 中给过多项分布$(X_1,\ldots,X_n)\sim\MultDist(n,p_1,\ldots,p_n)$，显然，其边际分布$X_i\sim\BinDist(n,p_i)$，下面给出$X_i,X_j$的协方差
+	在\exmref{exm:multinomial distribution} 中给过多项分布$(X_1,\ldots,X_n) \sim \MultDist(n,p_1,\ldots,p_n)$，显然，其边际分布$X_i \sim \BinDist(n,p_i)$，下面给出$X_i,X_j$的协方差
 	\begin{equation}
-		\Cov(X_i,X_j)=-np_ip_j,\quad i\neq j.
+		\Cov(X_i,X_j) = -np_ip_j,\quad i \neq j.
 	\end{equation}
 	得到这个结论的过程见条件期望部分的\exmref{exm:covariance of multinomial distribution 2}。
-	结合$\Var(X_i)=np_i(1-p_i)$，可得方差矩阵
+	结合$\Var(X_i) = np_i(1 - p_i)$，可得方差矩阵
 	\begin{equation}
-		\Cov(X,X)=n(\diag(P)-PP\transp).
+		\Cov(X,X) = n(\diag(P) - PP\transp).
 	\end{equation}
 \end{example}
 \begin{example}{配对问题的期望和方差}{}
-	继\exmref{exm:weak dependence condition} 中的配对问题，尽管$X=$拿到自己帽子的人数的分布列较为复杂：
+	继\exmref{exm:weak dependence condition} 中的配对问题，尽管$X =$拿到自己帽子的人数的分布列较为复杂：
 	\begin{equation}
-		\P(X=k)=\frac1{k!}\cdot\frac{!(n-k)}{(n-k)!},\quad k=0,1,\ldots,n,
+		\P(X = k) = \frac1{k!} \cdot \frac{!(n - k)}{(n - k)!},\quad k = 0,1,\ldots,n,
 	\end{equation}
 	我们依然可以通过简单的方法得到其期望和方差。
 	
-	记$X_i\sim\BernDist\bigp{\P(A_i)}=\BernDist(1/n)$表示第$i$个人是否拿到自己的帽子，从而
+	记$X_i \sim \BernDist\bigp{\P(A_i)} = \BernDist(1/n)$表示第$i$个人是否拿到自己的帽子，从而
 	\[
-		X=X_1+\cdots+X_n,
+		X = X_1 + \cdots + X_n,
 	\]
-	尽管$X_i$之间并不独立，但其期望$\E(X_i)=1/n$是相同的。
+	尽管$X_i$之间并不独立，但其期望$\E(X_i) = 1/n$是相同的。
 	进而可以得到作为和的$X$的期望就是期望的和（这并不要求独立性）
 	\begin{equation}
-		\E(X)=\sum_{i=1}^n\E(X_i)=n\cdot\frac1n=1.
+		\E(X) = \sum_{i=1}^n\E(X_i) = n \cdot \frac1n = 1.
 	\end{equation}
-	而$X_iX_j(i\neq j)$的期望
+	而$X_iX_j(i \neq j)$的期望
 	\[
-		\E(X_iX_j)=\P(X_iX_j=1)+0=\frac1n\cdot\frac1{n-1},
+		\E(X_iX_j) = \P(X_iX_j = 1) + 0 = \frac1n \cdot \frac1{n - 1},
 	\]
 	从而协方差
 	\begin{equation}
 		\begin{aligned}
-			\Cov(X_i,X_j)&=\E(X_iX_j)-\E(X_i)\E(X_j)\\
-			&=\frac1n\cdot\frac1{n-1}-\frac1n\cdot\frac1n=\frac1{n^2(n-1)}.
+			\Cov(X_i,X_j) &= \E(X_iX_j) - \E(X_i)\E(X_j)\\
+			&= \frac1n \cdot \frac1{n - 1} - \frac1n \cdot \frac1n = \frac1{n^2(n - 1)}.
 		\end{aligned}
 	\end{equation}
 	因此作为和的$X$的方差
 	\begin{equation}
 		\begin{aligned}
-			\Var(X)&=\sum_{i=1}^n\Var(X_i)+\sum_{i\neq j}\Cov(X_i,X_j)\\
-			&=n\cdot\frac1n\Bigp{1-\frac1n}+n(n-1)\cdot\frac1{n^2(n-1)}=1.
+			\Var(X) &= \sum_{i=1}^n\Var(X_i) + \sum_{i\neq j}\Cov(X_i,X_j)\\
+			&= n \cdot \frac1n\Bigp{1 - \frac1n} + n(n - 1) \cdot \frac1{n^2(n - 1)} = 1.
 		\end{aligned}
 	\end{equation}
 \end{example}
 \begin{definition}{相关系数}{correlation coefficient}
 	定义相关系数(correlation coefficient)
 	\begin{equation}
-		\Corr(X,Y):=\frac{\Cov(X,Y)}{\sqrt{\Var(X)\Var(Y)}}\equiv\E\biggp{\frac{X-\E(X)}{\sqrt{\Var(X)}}\cdot\frac{Y-\E(Y)}{\sqrt{\Var(Y)}}},
+		\Corr(X,Y) := \frac{\Cov(X,Y)}{\sqrt{\Var(X)\Var(Y)}} \equiv \E\biggp{\frac{X - \E(X)}{\sqrt{\Var(X)}} \cdot \frac{Y - \E(Y)}{\sqrt{\Var(Y)}}},
 	\end{equation}
-	若$\Corr(X,Y)=0$，称为$X,Y$不（线性）相关(uncorrelated)。
+	若$\Corr(X,Y) = 0$，称为$X,Y$不（线性）相关(uncorrelated)。
 \end{definition}
 
 \begin{corollary}
 	独立是不相关的充分不必要条件：
 	\begin{equation}
-		\Corr(X,Y)=0
+		\Corr(X,Y) = 0
 		% \iff\Cov(X,Y)=0
-		\iff\E(XY)=\E(X)\E(Y)
-		\iff\Var(X\pm Y)=\Var(X)+\Var(Y).
+		\iff \E(XY) = \E(X)\E(Y)
+		\iff \Var(X \pm Y) = \Var(X) + \Var(Y).
 	\end{equation}
 \end{corollary}
 
@@ -265,26 +265,26 @@
 \begin{corollary}
 	对于事件$A,B$，定义示性函数
 	\begin{equation}
-		1(A):=\begin{cases}
+		1(A) := \begin{cases}
 			1,&\text{事件$A$发生}\\
 			0,&\text{事件$A$不发生}
 		\end{cases}
 	\end{equation}
 	则
 	\begin{equation}
-		\Corr\bigp{1(A),1(B)}=\frac{\P(A\cap B)-\P(A)\P(B)}{\sqrt{\P(A)\bigp{1-\P(A)}\P(B)\bigp{1-\P(B)}}}.
+		\Corr\bigp{1(A),1(B)} = \frac{\P(A \cap B) - \P(A)\P(B)}{\sqrt{\P(A)\bigp{1 - \P(A)}\P(B)\bigp{1 - \P(B)}}}.
 	\end{equation}
 	可得
 	\begin{equation}
-		\abs{\P(A\cap B)-\P(A)\P(B)}\leqslant\sqrt{\P(A)\bigp{1-\P(A)}\P(B)\bigp{1-\P(B)}}\leqslant\frac14.
+		\abs{\P(A \cap B) - \P(A)\P(B)} \leqslant \sqrt{\P(A)\bigp{1 - \P(A)}\P(B)\bigp{1 - \P(B)}} \leqslant \frac14.
 	\end{equation}
 \end{corollary}
 
 \begin{example}{二元正态分布的相关系数}{correlation coefficient of 2-D normal distribution}
-	设$(X_1,X_2)\sim\NormalDist(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，
-	取$\xi_1:=\frac{x_1-\mu_1}{\sigma_1},\,\xi_2:=\frac{x_2-\mu_2}{\sigma_2}$，则相关系数
+	设$(X_1,X_2) \sim \NormalDist(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，
+	取标准化变量$\xi_i := (x_i - \mu_i)/\sigma_i$（$i = 1,2$），则相关系数
 	\[
-		\Corr(X_1,X_2)=\frac1{2\pi\sqrt{1-\rho^2}}\iint_{\RR^2}\xi_1\xi_2\exp\biggb{-\frac{(\xi_1-\rho\xi_2)^2}{2(1-\rho^2)}-\frac{\xi_2^2}2}\d\xi_1\nd\xi_2=\rho.
+		\Corr(X_1,X_2) = \frac1{2\pi\sqrt{1 - \rho^2}}\iint_{\RR^2}\xi_1\xi_2\exp\biggb{-\frac{(\xi_1 - \rho\xi_2)^2}{2(1 - \rho^2)} - \frac{\xi_2^2}2}\d\xi_1\nd\xi_2 = \rho.
 	\]
 	% 由
 	% \[
@@ -302,9 +302,9 @@
 \begin{definition}{矩}{moment}
 	$X$的关于$c$点的$k$阶矩(moment)
 	\begin{equation}
-		\E\bigb{(X-c)^k},
+		\E\bigb{(X - c)^k},
 	\end{equation}
-	特别地，当$c=0$时，称为原点矩；当$c=\E(X)$时，称为中心矩。
+	特别地，当$c = 0$时，称为原点矩；当$c = \E(X)$时，称为中心矩。
 \end{definition}
 \begin{remark}
 	$\E(X)$为1阶原点矩，$\Var(X)$为2阶中心矩。
@@ -313,52 +313,52 @@
 	定义3阶标准矩为偏度系数(skewness)
 	\begin{equation}
 		\label{eqn:skewness}
-		\mathrm{skew}(X):=\E\biggb{\Bigp{\frac{X-\mu}\sigma}^3}
-		\equiv\frac{\E(X^3)-3\mu\sigma^2-\mu^3}{\sigma^3}.
+		\mathrm{skew}(X) := \E\biggb{\Bigp{\frac{X - \mu}\sigma}^3}
+		\equiv \frac{\E(X^3) - 3\mu\sigma^2 - \mu^3}{\sigma^3}.
 	\end{equation}
 \end{definition}
-1阶标准矩为0，2阶标准矩为1。当中心往右偏时，偏度系数$<0$。
+1阶标准矩为0，2阶标准矩为1。当中心往右偏时，偏度系数$< 0$。
 \begin{definition}{峰度系数}{kurtosis}
 	定义4阶标准矩为峰度系数(kurtosis)
 	\begin{equation}
-		\mathrm{kurt}(X):=\E\biggb{\Bigp{\frac{X-\mu}\sigma}^4}.
+		\mathrm{kurt}(X) := \E\biggb{\Bigp{\frac{X - \mu}\sigma}^4}.
 	\end{equation}
 \end{definition}
 正态分布的峰度系数为3%，以正态分布为标准，定义超额峰度系数=峰度系数$-~3$
-。一般地，尖峰厚尾的峰度系数$>3$。
+。一般地，尖峰厚尾的峰度系数$> 3$。
 \section{矩母函数}
 \begin{definition}{矩母函数}{moment generating funtion}
 	若下面期望在$t$的某含0邻域内存在，
 	\begin{equation}\label{MGF def}
-		\MGF_X(t):=\E(\e^{tX})=\sum_{k=0}^\infty\frac{\E(X^k)}{k!}t^k
+		\MGF_X(t) := \E(\e^{tX}) = \sum_{k=0}^\infty\frac{\E(X^k)}{k!}t^k
 	\end{equation}
 	则称$\MGF_X(t)$为$X$的矩母函数(moment generating function, MGF).\index{MGF, 矩母函数}
 \end{definition}
 矩母函数可以用来确定各阶矩
 \begin{equation}
-	\E(X^n)=\MGF_X^{(n)}(0).
+	\E(X^n) = \MGF_X^{(n)}(0).
 \end{equation}
 \begin{example}{指数分布和正态分布的矩母函数}{MGF of Expo & Norm}
-	若$X\sim\ExpDist(\lambda)$，则
-	\[
-		\MGF_X(t)=\intRplus\e^{tx}\lambda\e^{-\lambda x}\d x=\frac\lambda{\lambda-t},\quad t<\lambda.
-	\]
+	若$X \sim \ExpDist(\lambda)$，则
+	\begin{equation}\label{eq:ps-exponential-mgf}
+		\MGF_X(t) = \intRplus\e^{tx}\lambda\e^{-\lambda x}\d x = \frac\lambda{\lambda - t},\quad t < \lambda.
+	\end{equation}
 	\tcblower
-	若$X\sim\NormalDist(\mu,\sigma^2)$，则
+	若$X \sim \NormalDist(\mu,\sigma^2)$，则
+	\begin{equation}\label{eq:ps-normal-mgf}
+		\MGF_X(t) = \frac1{\sqrt{2\pi}\sigma}\intR\e^{tx}\e^{-(x-\mu)^2/2\sigma^2}\d x = \exp\Bigp{\mu t + \frac12\sigma^2t^2}.
+	\end{equation}
+	特别地，若$X \sim \NormalDist(0,1)$，则
 	\[
-		\MGF_X(t)=\frac1{\sqrt{2\pi}\sigma}\intR\e^{tx}\e^{-(x-\mu)^2/2\sigma^2}\d x=\exp\Bigp{\mu t+\frac12\sigma^2t^2}.
+		\MGF_X(t) = \e^{t^2/2} = \sum_{n=0}^\infty\frac{(2n)!}{2^nn!}\frac{t^{2n}}{(2n)!}.
 	\]
-	特别地，若$X\sim\NormalDist(0,1)$，则
-	\[
-		\MGF_X(t)=\e^{t^2/2}=\sum_{n=0}^\infty\frac{(2n)!}{2^nn!}\frac{t^{2n}}{(2n)!}.
-	\]
-	故$\E(X^{2k+1})=0,\enspace\E(X^{2k})=(2k-1)!!$
+	故$\E(X^{2k+1}) = 0,\enspace\E(X^{2k}) = (2k - 1)!!$
 \end{example}
 \begin{theorem}{矩母函数确定分布}{}
-	若存在$a>0$，使得
-	\[
-		\MGF_X(t)=\MGF_Y(t),\quad\forall t\in(-a,a)
-	\]
+	若存在$a > 0$，使得
+	\begin{equation}\label{eq:ps-mgf-uniqueness}
+		\MGF_X(t) = \MGF_Y(t),\quad\forall t \in (-a,a)
+	\end{equation}
 	则$X,Y$同分布。
 \end{theorem}
 \begin{proof}
@@ -367,7 +367,7 @@
 \begin{example}{离散分布的矩母函数}{}
 	从$X$的矩母函数可直接看出$X$的分布列，比如
 	\[
-		\MGF_X(t)=\frac14\e^{-t}+\frac12+\frac18\e^{4t}+\frac18\e^{5t},
+		\MGF_X(t) = \frac14\e^{-t} + \frac12 + \frac18\e^{4t} + \frac18\e^{5t},
 	\]
 	\iffalse
 	\begin{center}
@@ -382,63 +382,63 @@
 	\fi
 \end{example}
 \begin{example}{同矩不一定同分布}{}
-	对数正态分布$\ln X_1\sim\NormalDist(0,1)$，则$X_1$的PDF
+	对数正态分布$\ln X_1 \sim \NormalDist(0,1)$，则$X_1$的PDF
 	\[
-		f_1(x)=\frac1{\sqrt{2\pi}x}\e^{-\ln^2x/2},\quad x>0
+		f_1(x) = \frac1{\sqrt{2\pi}x}\e^{-\ln^2x/2},\quad x > 0
 	\]
 	构造$X_2$，其PDF
 	\[
-		f_2(x)=f_1(x)\bigb{1+\sin(2\pi\ln x)}\geqslant 0.
+		f_2(x) = f_1(x)\bigb{1 + \sin(2\pi\ln x)} \geqslant 0.
 	\]
 
 	可以证明，$X_1,X_2$所有的矩均相等
 	\[
-		\E(X_2^n)=\E(X_1^n)+\intRplus x^nf_1(x)\sin(2\pi\ln x)\d x
+		\E(X_2^n) = \E(X_1^n) + \intRplus x^nf_1(x)\sin(2\pi\ln x)\d x
 	\]
-	后面的积分做换元$y:=\ln x-n$可积得结果为0.
+	后面的积分做换元$y := \ln x - n$可积得结果为0.
 \end{example}
 \begin{corollary}
 	同矩不一定同分布，因此矩母函数相同是比所有矩相同更强的条件。
 \end{corollary}
 \begin{theorem}{独立随机变量和的分布}{the distribution of the sum of the independent random variable}
 	若$X,Y$独立，则
-	\[
-		\MGF_{X+Y}(t)=\MGF_X(t)\MGF_Y(t).
-	\]
+	\begin{equation}\label{eq:ps-mgf-independent-sum}
+		\MGF_{X+Y}(t) = \MGF_X(t)\MGF_Y(t).
+	\end{equation}
 	%\prf \MGF_{X+Y}(t)=\E(\e^{tX}\e^{tY})=\E(\e^{tX})\E(\e^{tY})=\MGF_X(t)\MGF_Y(t).\rqed
 \end{theorem}
 \begin{corollary}
-	$n$个独立的正态分布$X_i\sim\NormalDist(\mu_i,\sigma_i^2)$的和仍然服从正态分布，且
-	\[
-		\sum_{i=1}^nX_i\sim\NormalDist\biggp{\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2}.
-	\]
+	$n$个独立的正态分布$X_i \sim \NormalDist(\mu_i,\sigma_i^2)$的和仍然服从正态分布，且
+	\begin{equation}\label{eq:ps-normal-sum}
+		\sum_{i=1}^nX_i \sim \NormalDist\biggp{\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2}.
+	\end{equation}
 \end{corollary}
 \begin{definition}{联合分布的矩母函数}{}
 	联合分布的矩母函数定义为
 	\begin{equation}
-		\MGF_{X_1,\ldots,X_n}(t_1,\ldots,t_n):=\E\bigp{\e^{t_1X_1+\cdots+t_nX_n}}.
+		\MGF_{X_1,\ldots,X_n}(t_1,\ldots,t_n) := \E\bigp{\e^{t_1X_1+\cdots+t_nX_n}}.
 	\end{equation}
 \end{definition}
 也可以通过矩母函数确定分布。
 \begin{definition}{概率母函数}{probability generating function}
 	离散型随机变量$X$取值为非负整数
 	\[
-		p_k=\P(X=k),\quad k=0,1,2,\ldots
+		p_k = \P(X = k),\quad k = 0,1,2,\ldots
 	\]
 	则概率母函数(probability generating function, PGF)\index{PGF, 概率母函数}
-	\[
-		g(t):=\E(t^X)=\sum_{k=0}^\infty p_kt^k.
-	\]
+	\begin{equation}\label{eq:ps-pgf}
+		g(t) := \E(t^X) = \sum_{k=0}^\infty p_kt^k.
+	\end{equation}
 \end{definition}
 概率母函数给出了各点的概率
-\[
-	\P(X=k)=\frac{g^{(k)}(0)}{k!}
-\]
-也给出了期望$\E(X)=g'(1)$.
+\begin{equation}\label{eq:ps-pgf-mass}
+	\P(X = k) = \frac{g^{(k)}(0)}{k!}
+\end{equation}
+也给出了期望$\E(X) = g'(1)$.
 \begin{definition}{特征函数}{characteristic function}
 	定义特征函数(characteristic function, CF)\index{CF, 特征函数}
 	\begin{equation}\label{CF-def}
-		\CF_X(t):=\E\bigp{\e^{\i tX}}.
+		\CF_X(t) := \E\bigp{\e^{\i tX}}.
 	\end{equation}
 \end{definition}
 与矩母函数不同，特征函数总是存在的。
@@ -446,35 +446,35 @@
 \begin{definition}{条件期望}{conditional expectation}
 	定义条件期望
 	\begin{equation}
-		\E(Y\mid X\in A):=\begin{cases}
-			\sum\nolimits_{i\in I}y_i\P(Y=y_i\mid X\in A),&\text{离散}\\
-			\int_\RR yf(y\mid X\in A)\d y,&\text{连续}
+		\E(Y \mid X \in A) := \begin{cases}
+			\sum\nolimits_{i\in I}y_i\P(Y = y_i \mid X \in A),&\text{离散}\\
+			\int_\RR yf(y \mid X \in A)\d y,&\text{连续}
 		\end{cases}
 	\end{equation}
-	若$\P(X\in A)>0$，条件期望可由下式计算
+	若$\P(X \in A) > 0$，条件期望可由下式计算
 	\begin{equation}
-		\E(Y\mid X\in A)=\frac{\E(Y,X\in A)}{\P(X\in A)}.
+		\E(Y \mid X \in A) = \frac{\E(Y,X \in A)}{\P(X \in A)}.
 	\end{equation}
 \end{definition}
 \begin{remark}
-	$\E(Y\mid X)$是$X$的函数，是一个新的随机变量（$Y$对$X$的回归函数）。
+	$\E(Y \mid X)$是$X$的函数，是一个新的随机变量（$Y$对$X$的回归函数）。
 \end{remark}
 \begin{example}{二元正态分布的条件期望}{}
-	$(X_1,X_2)\sim\NormalDist(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，由\exmref{exm:conditional PDF of 2-D normal distribution}
+	$(X_1,X_2) \sim \NormalDist(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，由\exmref{exm:conditional PDF of 2-D normal distribution}
 	\[
-		\E(X_2\mid X_1)=\mu_2+\rho\frac{\sigma_2}{\sigma_1}(X_1-\mu_1)^2.
+		\E(X_2 \mid X_1) = \mu_2 + \rho\frac{\sigma_2}{\sigma_1}(X_1 - \mu_1).
 	\]
 \end{example}
 \begin{theorem}{全期望公式}{}
 	可由全概率公式推出
 	\begin{equation}
-		\E(Y)=\E\bigb{\E(Y\mid X)}.
+		\E(Y) = \E\bigb{\E(Y \mid X)}.
 	\end{equation}
 \end{theorem}
 \begin{theorem}{条件期望的性质}{}
 	\begin{compactenum}
-		\item $\E\bigb{g(X)h(Y)\mid X}=g(X)\E\bigb{h(Y)\mid X}$;
-		\item $\E\bigb{\E\bigb{g(X,Y)\mid X}}=\E\bigb{g(X,Y)}$;
+		\item $\E\bigb{g(X)h(Y) \mid X} = g(X)\E\bigb{h(Y) \mid X}$;
+		\item $\E\bigb{\E\bigb{g(X,Y) \mid X}} = \E\bigb{g(X,Y)}$;
 	\end{compactenum}
 \end{theorem}
 
@@ -482,62 +482,62 @@
 	{均值独立}{mean independence}
 	若$\forall X$
 	\begin{equation}
-		\E(Y\mid X)=\E(Y),
+		\E(Y \mid X) = \E(Y),
 	\end{equation}
 	则称$Y$均值独立(mean independent)于$X$，
 \end{definition}
 
 \begin{corollary}
-	$Y$均值独立于$X\implies X,Y$不相关：
+	$Y$均值独立于$X \implies X,Y$不相关：
 	\[
-		\E(XY)=\E\bigb{\E(XY\mid X)}=\E\bigb{X\E(Y\mid X)}=\E\bigb{X\E(Y)}=\E(X)\E(Y).
+		\E(XY) = \E\bigb{\E(XY \mid X)} = \E\bigb{X\E(Y \mid X)} = \E\bigb{X\E(Y)} = \E(X)\E(Y).
 	\]
 \end{corollary}
 
 \begin{example}{多项分布的协方差}{covariance of multinomial distribution 2}
 	接\exmref{exm:covariance of multinomial distribution}，由全期望公式
 	\[
-		\E(X_iX_j)=\E\bigb{\E(X_iX_j\mid X_j)}=\E\bigb{X_j\E(X_i\mid X_j)}.
+		\E(X_iX_j) = \E\bigb{\E(X_iX_j \mid X_j)} = \E\bigb{X_j\E(X_i \mid X_j)}.
 	\]
-	而$\E(X_i\mid X_j)$可以理解成先从$n$份中抽出$X_j$个$B_j$，剩下变成新的多项分布
+	而$\E(X_i \mid X_j)$可以理解成先从$n$份中抽出$X_j$个$B_j$，剩下变成新的多项分布
 	\[
-		(\ldots,X_i,\ldots)_{i\neq j}\sim\MultDist\Bigp{n-X_j,\ldots,\frac{p_i}{1-p_j},\ldots}_{i\neq j}
+		(\ldots,X_i,\ldots)_{i\neq j} \sim \MultDist\Bigp{n - X_j,\ldots,\frac{p_i}{1 - p_j},\ldots}_{i\neq j}
 	\]
 	继而
 	\[
-		\E(X_i\mid X_j)=(n-X_j)\frac{p_i}{1-p_j}.
+		\E(X_i \mid X_j) = (n - X_j)\frac{p_i}{1 - p_j}.
 	\]
 	代入全期望公式：
 	\begin{align*}
-		\E(X_iX_j)&=\frac{p_i}{1-p_j}\bigb{n\E(X_j)-\E(X_j^2)}\\
-		&=\frac{p_i}{1-p_j}\bigb{n\cdot np_j-\bigp{np_j(1-p_j)+(np_j)^2}}\\
-		&=n(n-1)p_ip_j.
+		\E(X_iX_j) &= \frac{p_i}{1 - p_j}\bigb{n\E(X_j) - \E(X_j^2)}\\
+		&= \frac{p_i}{1 - p_j}\bigb{n \cdot np_j - \bigp{np_j(1 - p_j) + (np_j)^2}}\\
+		&= n(n - 1)p_ip_j.
 	\end{align*}
 	协方差
 	\[
-		\Cov(X_i,X_j)=n(n-1)p_ip_j-np_i\cdot np_j=-np_ip_j.
+		\Cov(X_i,X_j) = n(n - 1)p_ip_j - np_i \cdot np_j = -np_ip_j.
 	\]
 \end{example}
 \begin{theorem}{最优预测}{}
 	设$Y$及$g(X)$二阶可积，用$g(X)$估计$Y$的均方误差满足
 	\begin{equation}
-		\E\bigb{(Y-g(X))^2}\geqslant\E\bigb{(Y-\E(Y\mid X))^2}.
+		\E\bigb{(Y - g(X))^2} \geqslant \E\bigb{(Y - \E(Y \mid X))^2}.
 	\end{equation}
 \end{theorem}
 这源于\exmref{exm:expectation under square error} 所给出的：
 \[
-	\E\bigb{(Y-g(X))^2\mid X}\geqslant\E\bigb{(Y-\E(Y\mid X))^2\mid X}.
+	\E\bigb{(Y - g(X))^2 \mid X} \geqslant \E\bigb{(Y - \E(Y \mid X))^2 \mid X}.
 \]
-事实上这也给出了条件期望$\E(Y\mid X)$的几何意义：$Y$在所有关于$X$可测的平方可积随机变量所成闭子空间上的正交投影。
+事实上这也给出了条件期望$\E(Y \mid X)$的几何意义：$Y$在所有关于$X$可测的平方可积随机变量所成闭子空间上的正交投影。
 \begin{example}{误差}{error}
-	$Y$对$X$的回归函数$\hat Y:=\E(Y\mid X)$，误差$\tilde Y:=Y-\hat Y$，易得
+	$Y$对$X$的回归函数$\hat Y := \E(Y \mid X)$，误差$\tilde Y := Y - \hat Y$，易得
 	\[
-		\E(\hat Y)=\E(Y),\quad\E(\tilde Y)=0,
+		\E(\hat Y) = \E(Y),\quad\E(\tilde Y) = 0,
 	\]
 	且$\hat Y,\tilde Y$不相关，也就是说
-	\[
-		\Var(Y)=\Var(\hat Y)+\Var(\tilde Y).
-	\]
+	\begin{equation}\label{eq:ps-prediction-variance}
+		\Var(Y) = \Var(\hat Y) + \Var(\tilde Y).
+	\end{equation}
 	\begin{notecaptionblock}
 		\tikzfigure{conditional-expectation}
 		\captionof{figure}{$Y,\hat Y,\tilde Y$关系示意图}
@@ -546,33 +546,33 @@
 \begin{definition}{条件方差}{conditional variance}
 	定义条件方差
 	\begin{equation}
-		\Var(Y\mid X):=\E\bigb{\bigp{Y-\E(Y\mid X)}^2\mid X}
+		\Var(Y \mid X) := \E\bigb{\bigp{Y - \E(Y \mid X)}^2 \mid X}
 	\end{equation}
 \end{definition}
 自然
 \begin{equation}
-	\Var(Y\mid X)=\E(Y^2\mid X)-\E^2(Y\mid X).
+	\Var(Y \mid X) = \E(Y^2 \mid X) - \E^2(Y \mid X).
 \end{equation}
 \begin{theorem}{全方差公式}{}
 	由\exmref{exm:error}
 	\begin{equation}
-		\Var(Y)=\E\bigb{\Var(Y\mid X)}+\Var\bigb{\E(Y\mid X)}.
+		\Var(Y) = \E\bigb{\Var(Y \mid X)} + \Var\bigb{\E(Y \mid X)}.
 	\end{equation}
 \end{theorem}
 \begin{example}{随机变量个随机变量的和}{}
-	随机变量序列$X_1,X_2,\ldots$ iid，$N$是取值为非负整数的随机变量，且与整个序列独立，令$Y=X_1+\cdots+X_N$，则
+	随机变量序列$X_1,X_2,\ldots$ iid，$N$是取值为非负整数的随机变量，且与整个序列独立，令$Y = X_1 + \cdots + X_N$，则
 	\begin{subequations}
 		\begin{align}
-			\E(Y)&=\E\bigb{\E(Y\mid N)}=\E\bigb{N\E(X)}=\E(N)\E(X);\\
+			\E(Y) &= \E\bigb{\E(Y \mid N)} = \E\bigb{N\E(X)} = \E(N)\E(X);\\
 			\notag
-			\Var(Y)&=\E\bigb{\Var(Y\mid N)}+\Var\bigb{\E(Y\mid N)}\\
+			\Var(Y) &= \E\bigb{\Var(Y \mid N)} + \Var\bigb{\E(Y \mid N)}\\
 			\notag
-			&=\E\bigb{N\Var(X)}+\Var\bigb{N\E(X)}\\
-			&=\Var(X)\E(N)+\E^2(X)\Var(N).
+			&= \E\bigb{N\Var(X)} + \Var\bigb{N\E(X)}\\
+			&= \Var(X)\E(N) + \E^2(X)\Var(N).
 		\end{align}
 	\end{subequations}
-	特别地，$N\sim\PoisDist(\lambda)$时，称$Y$为复合Poisson随机变量
-	\[
-		\Var(Y)=\lambda\bigb{\Var(X)+\E^2(X)}=\lambda\E(X^2).
-	\]
+	特别地，$N \sim \PoisDist(\lambda)$时，称$Y$为复合Poisson随机变量
+	\begin{equation}\label{eq:ps-compound-poisson-variance}
+		\Var(Y) = \lambda\bigb{\Var(X) + \E^2(X)} = \lambda\E(X^2).
+	\end{equation}
 \end{example}

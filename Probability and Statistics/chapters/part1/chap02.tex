@@ -1,7 +1,7 @@
 \chapter{随机变量及其分布}
 
 \begin{definition}{（一维）随机变量}{random variable}
-	定义随机变量(random variable)~$X:\Omega\to\RR$是样本空间上的实值函数。有
+	定义随机变量(random variable)~$X:\Omega \to \RR$是样本空间上的实值函数。有
 	\begin{compactitem}
 		\item 离散型(discrete)：值域为有限集或可数集(countable set)；
 		\item 连续型(continuous)：值域为不可数集(uncountable set)；
@@ -10,24 +10,24 @@
 \end{definition}
 
 \begin{remark}
-	随机变量$X$的随机要素来自样本点$\omega\in\Omega$的随机选择。
+	随机变量$X$的随机要素来自样本点$\omega \in \Omega$的随机选择。
 \end{remark}
 
 \begin{definition}
 	{随机变量的概率}{}
-	$\forall I\subset\RR$可测，记原像集$X\inv(I)\in\eventspace$，定义\footnote{这种定义属于好看的鱼(形式简洁)，而不属于好吃的鱼(实用)。}
-	\[
-		\P_X(X\in I):=\P(X\inv(I)),\quad\forall I\subset\RR~\text{可测}
-	\]
+	$\forall I \subset \RR$可测，记原像集$X\inv(I) \in \eventspace$，定义\footnote{这种定义属于好看的鱼(形式简洁)，而不属于好吃的鱼(实用)。}
+	\begin{equation}\label{eq:ps-pushforward-law}
+		\P_X(X \in I) := \P(X\inv(I)),\quad\forall I \subset \RR~\text{可测}
+	\end{equation}
 	一般记$\P_X$为$\P$。
 \end{definition}
 
 \begin{definition}{累计分布函数}{cumulative distribution function}
 	记$X$的累计分布函数(cumulative distribution function, CDF)\index{CDF, 累计分布函数}
-	$\CDF:\RR\to[0,1]$
+	$\CDF:\RR \to [0,1]$
 	\begin{equation}
 		\label{eqn:CDF}
-		\CDF(x):=\P(X\leqslant x).
+		\CDF(x) := \P(X \leqslant x).
 	\end{equation}
 \end{definition}
 
@@ -36,12 +36,12 @@
 	\begin{itemize}
 		\item 区间的概率
 		\begin{equation}
-			\P(a<X\leqslant b)=\CDF(b)-\CDF(a).
+			\P(a < X \leqslant b) = \CDF(b) - \CDF(a).
 		\end{equation}
 		\item $\CDF(x)$单调递增（不严格单调），有界：
 		\begin{equation}
-			\lim_{x\to-\infty}\CDF(x)=0,\quad
-			\lim_{x\to+\infty}\CDF(x)=1.
+			\lim_{x\to-\infty}\CDF(x) = 0,\quad
+			\lim_{x\to+\infty}\CDF(x) = 1.
 		\end{equation}
 		\item $\CDF(x)$右连续，不一定左连续。
 	\end{itemize}
@@ -78,11 +78,11 @@
 \begin{definition}{期望和方差}{expectation and variance}
 	期望(expectation)即均值
 	\begin{equation}
-		\E(X):=\sum\nolimits_{i\in I}x_ip_i,
+		\E(X) := \sum\nolimits_{i\in I}x_ip_i,
 	\end{equation}
 	方差(variance)
 	\begin{equation}
-		\Var(X):=\sum\nolimits_{i\in I}\bigp{x_i-\E(X)}^2p_i\equiv\E(X^2)-\E(X)^2.
+		\Var(X) := \sum\nolimits_{i\in I}\bigp{x_i - \E(X)}^2p_i \equiv \E(X^2) - \E(X)^2.
 	\end{equation}
 \end{definition}
 
@@ -91,11 +91,11 @@
 \end{remark}
 
 \begin{definition}{Bernoulli分布}{Bernoulli distribution}
-	Bernoulli分布也称0-1分布，其描述的是一次成功概率为$p$的Bernoulli试验，$X=0,1$分别代表失败和成功，记作$X\sim\BernDist(p)$，其分布列为
+	Bernoulli分布也称0-1分布，其描述的是一次成功概率为$p$的Bernoulli试验，$X = 0,1$分别代表失败和成功，记作$X \sim \BernDist(p)$，其分布列为
 	\begin{equation}
-		\P(X=k)=\begin{cases}
-			1-p,&k=0\\
-			p,&k=1
+		\P(X = k) = \begin{cases}
+			1 - p,&k = 0\\
+			p,&k = 1
 		\end{cases}
 	\end{equation}
 	% \begin{center}
@@ -110,14 +110,14 @@
 \end{definition}
 
 \begin{definition}{二项分布}{binominal distribution}
-	$n$次独立Bernoulli试验的成功次数$X$服从二项分布(binomial distribution)，记作$X\sim\BinDist(n,p)$，
+	$n$次独立Bernoulli试验的成功次数$X$服从二项分布(binomial distribution)，记作$X \sim \BinDist(n,p)$，
 	可得
 	\begin{equation}
-		\P(X=k)=\binom nk p^k(1-p)^{n-k},\quad k=0,\ldots,n
+		\P(X = k) = \binom nk p^k(1 - p)^{n-k},\quad k = 0,\ldots,n
 	\end{equation}
 	其中二项式系数
 	\begin{equation}
-		\binom nk:=\frac{n!}{k!(n-k)!}.
+		\binom nk := \frac{n!}{k!(n - k)!}.
 	\end{equation}
 	\begin{notecaptionblock}
 		\includegraphics[width=.95\textwidth]{figures/pdf_bin.pdf}
@@ -130,24 +130,24 @@
 	二项分布的期望和方差为
 	\begin{subequations}
 		\begin{align}
-			\E(X)&=np,\\
-			\Var(X)&=np(1-p).
+			\E(X) &= np,\\
+			\Var(X) &= np(1 - p).
 		\end{align}
 	\end{subequations}
 \end{corollary}
 
-我们考虑一个时间段内的事件次数$X\sim\BinDist(n,p)$，其中$n$是时间段的切片份数。
-保持其期望$\E(X)=np=:\lambda$不变，令$n\to\infty$，即事件可能发生在任一时刻，则
+我们考虑一个时间段内的事件次数$X \sim \BinDist(n,p)$，其中$n$是时间段的切片份数。
+保持其期望$\E(X) = np =: \lambda$不变，令$n \to \infty$，即事件可能发生在任一时刻，则
 \[
-	\lim_{n\to\infty}\binom nk\biggp{\frac\lambda{n}}^k\biggp{1-\frac\lambda{n}}^{n-k}=\lim_{n\to\infty}\frac{\lambda^k}{k!}\biggp{1-\frac\lambda{n}}^n\cancel{\frac{n!}{n^k(n-k)!}}\cancel{\biggp{1-\frac\lambda{n}}^{-k}}=\frac{\lambda^k}{k!}\e^{-\lambda}.
+	\lim_{n\to\infty}\binom nk\biggp{\frac\lambda{n}}^k\biggp{1 - \frac\lambda{n}}^{n-k} = \lim_{n\to\infty}\frac{\lambda^k}{k!}\biggp{1 - \frac\lambda{n}}^n\cancel{\frac{n!}{n^k(n - k)!}}\cancel{\biggp{1 - \frac\lambda{n}}^{-k}} = \frac{\lambda^k}{k!}\e^{-\lambda}.
 \]
 % 我们便得到了一个新的分布，称为Poisson分布。
 
 \begin{definition}{Poisson分布}{Poisson distribution}
-	小概率事件在一段时间内发生的次数$X$服从Poisson分布，记作$X\sim\PoisDist(\lambda)$，
-	\[
-		\P(X=k)=\frac{\lambda^k}{k!}\e^{-\lambda},\quad k=0,1,2,\ldots
-	\]
+	小概率事件在一段时间内发生的次数$X$服从Poisson分布，记作$X \sim \PoisDist(\lambda)$，
+	\begin{equation}\label{eq:ps-poisson-mass}
+		\P(X = k) = \frac{\lambda^k}{k!}\e^{-\lambda},\quad k = 0,1,2,\ldots
+	\end{equation}
 	\begin{notecaptionblock}
 		\includegraphics[width=.9\textwidth]{figures/pdf_poission.pdf}
 		\captionof{figure}{不同$\lambda$下的Poisson分布}
@@ -157,8 +157,8 @@
 	Poisson分布的期望和方差为
 	\begin{subequations}
 		\begin{align}
-			\E(X)&=\lambda,\\
-			\Var(X)&=\lambda.
+			\E(X) &= \lambda,\\
+			\Var(X) &= \lambda.
 		\end{align}
 	\end{subequations}
 \end{corollary}
@@ -174,61 +174,61 @@
 \begin{example}{弱相依条件举例：配对问题}{weak dependence condition}
 	在\exmref{exm:derangement} 中，尽管$A_i$和$A_j$并不独立，但弱相依
 	\[
-		\P(A_i)=\frac1n\approx\P(A_i\mid A_j)=\frac1{n-1}.
+		\P(A_i) = \frac1n \approx \P(A_i \mid A_j) = \frac1{n - 1}.
 	\]
-	记$X=$拿到自己帽子的人数，当$n\to\infty$时，$X\sim\PoisDist(1)$
+	记$X =$拿到自己帽子的人数，当$n \to \infty$时，$X \sim \PoisDist(1)$
 	\[
-		\P(X=k)=\frac{\e^{-1}}{k!},\quad k=0,1,2,\ldots
+		\P(X = k) = \frac{\e^{-1}}{k!},\quad k = 0,1,2,\ldots
 	\]
 	\tcblower
 	下面用常规做法检验：指定$k$个人，记
 	\begin{itemize}
-		\item $E=$这$k$个人都拿到自己的帽子；
-		\item $F=$余下$n-k$个人都未拿到自己的帽子。
+		\item $E =$这$k$个人都拿到自己的帽子；
+		\item $F =$余下$n - k$个人都未拿到自己的帽子。
 	\end{itemize}
-	则$\P(F\mid E)$就是$n-k$个人的错排问题，根据\exmref{exm:derangement} 中的结果：
+	则$\P(F \mid E)$就是$n - k$个人的错排问题，根据\exmref{exm:derangement} 中的结果：
 	\[
-		\P(E\cap F)=\P(E)\P(F\mid E)=\frac{(n-k)!}{n!}\cdot\frac{!(n-k)}{(n-k)!},
+		\P(E \cap F) = \P(E)\P(F \mid E) = \frac{(n - k)!}{n!} \cdot \frac{!(n - k)}{(n - k)!},
 	\]
-	对于$\P(X=k)$来说，由于这$k$个人是任选的，故
+	对于$\P(X = k)$来说，由于这$k$个人是任选的，故
 	\[
-		\P(X=k)=\binom nk\P(E\cap F)=\frac1{k!}\cdot\frac{!(n-k)}{(n-k)!}\to\frac{1}{k!}\cdot\frac1{\e}.
+		\P(X = k) = \binom nk\P(E \cap F) = \frac1{k!} \cdot \frac{!(n - k)}{(n - k)!} \to \frac{1}{k!} \cdot \frac1{\e}.
 	\]
 \end{example}
 
 \section{连续分布}
 
 \begin{definition}{连续分布}{continuous distribution}
-	若存在$f(x)\geqslant 0$，使得$\forall I\subset\RR$可测，都有
-	\[
-		\P(X\in I)=\int_If(x)\d x
-	\]
+	若存在$f(x) \geqslant 0$，使得$\forall I \subset \RR$可测，都有
+	\begin{equation}\label{eq:ps-probability-density}
+		\P(X \in I) = \int_If(x)\d x
+	\end{equation}
 	则称$X$为连续型随机变量，服从连续分布，$f(x)$为概率密度函数(probability density function, PDF)。\index{PDF, 概率密度函数}
 \end{definition}
 
 \begin{corollary}
 	连续分布的性质：
 	\begin{itemize}
-		\item $\forall x\in\RR,\enspace\P(X=x)\equiv 0;$
+		\item $\forall x \in \RR,\enspace\P(X = x) \equiv 0;$
 		\item 归一性：
 			\begin{equation}
-				\intR f(x)\d x\equiv 1;
+				\intR f(x)\d x \equiv 1;
 			\end{equation}
 		\item 期望和方差(要求积分\textbf{绝对收敛})
 			\begin{subequations}
 				\begin{align}
-					\E(X)&=\intR xf(x)\d x,\\
-					\Var(X)&=\intR(x-\E(X))^2f(x)\d x.
+					\E(X) &= \intR xf(x)\d x,\\
+					\Var(X) &= \intR(x - \E(X))^2f(x)\d x.
 				\end{align}
 			\end{subequations}
 		\item 有密度的分布，其CDF $\CDF(x)$绝对连续，且几乎处处满足
 			\begin{equation}
-				\CDF'(x)=f(x).
+				\CDF'(x) = f(x).
 			\end{equation}
 			若$\CDF(x)$严格递增，则$\CDF^{-1}(y)$存在；但若其不严格递增，也可well define
 			\begin{equation}
 				\label{eqn:CDF-1}
-				\CDF^{-1}(y):=\inf\set x{\CDF(x)\geqslant y}.
+				\CDF^{-1}(y) := \inf\set x{\CDF(x) \geqslant y}.
 			\end{equation}
 	\end{itemize}
 \end{corollary}
@@ -244,30 +244,30 @@
 \end{example}
 \fi
 \begin{definition}{均匀分布}{uniform distribution}
-	均匀分布(uniform distribution)记作$X\sim\UnifDist(a,b)$，%随机数$\UnifDist(0,1)$
+	均匀分布(uniform distribution)记作$X \sim \UnifDist(a,b)$，%随机数$\UnifDist(0,1)$
 	\begin{equation}
-		f(x)=\begin{cases}
-			\frac1{b-a},&x\in(a,b)\\
+		f(x) = \begin{cases}
+			\frac1{b - a},&x \in (a,b)\\
 			0,&\text{elsewhere}
 		\end{cases}
 	\end{equation}
-	特别地，服从标准均匀分布的随机变量$X\sim\UnifDist(0,1)$也称为随机数。
+	特别地，服从标准均匀分布的随机变量$X \sim \UnifDist(0,1)$也称为随机数。
 \end{definition}
 \begin{corollary}
 	均匀分布的期望和方差为
 	\begin{subequations}
 		\begin{align}
-			\E(X)&=\frac{a+b}2,\\
-			\Var(X)&=\frac{(b-a)^2}{12}.
+			\E(X) &= \frac{a + b}2,\\
+			\Var(X) &= \frac{(b - a)^2}{12}.
 		\end{align}
 	\end{subequations}
 \end{corollary}
 \begin{definition}{正态分布}{normal distribution}
-	正态分布(normal distribution)记作$X\sim\NormalDist(\mu,\sigma^2)$，%标准正态$\NormalDist(0,1)$
+	正态分布(normal distribution)记作$X \sim \NormalDist(\mu,\sigma^2)$，%标准正态$\NormalDist(0,1)$
 	\begin{equation}
-		f(x)=\frac1{\sqrt{2\pi}\sigma}\exp\biggb{-\frac{(x-\mu)^2}{2\sigma^2}},\quad x\in\RR
+		f(x) = \frac1{\sqrt{2\pi}\sigma}\exp\biggb{-\frac{(x - \mu)^2}{2\sigma^2}},\quad x \in \RR
 	\end{equation}
-	特别地，标准正态分布$Z\sim\NormalDist(0,1)$的CDF记作$\Phi(x)$。
+	特别地，标准正态分布$Z \sim \NormalDist(0,1)$的CDF记作$\Phi(x)$。
 	\begin{notecaptionblock}
 		\includegraphics[width=.9\textwidth]{figures/pdf_normal.pdf}
 		\captionof{figure}{不同$\mu,\sigma$下的正态分布}
@@ -277,17 +277,17 @@
 	正态分布的期望和方差为
 	\begin{subequations}
 		\begin{align}
-			\E(X)&=\mu,\\
-			\Var(X)&=\sigma^2.
+			\E(X) &= \mu,\\
+			\Var(X) &= \sigma^2.
 		\end{align}
 	\end{subequations}
 \end{corollary}
 \begin{definition}{指数分布}{exponential distribution}
-	指数分布(exponential distribution)通常刻画寿命、等待时间，记作$X\sim\ExpDist(\lambda)$，
+	指数分布(exponential distribution)通常刻画寿命、等待时间，记作$X \sim \ExpDist(\lambda)$，
 	\begin{equation}
-		f(x)=\begin{cases}
-			\lambda\e^{-\lambda x},&x>0\\
-			0,&x\leqslant 0
+		f(x) = \begin{cases}
+			\lambda\e^{-\lambda x},&x > 0\\
+			0,&x \leqslant 0
 		\end{cases}
 	\end{equation}
 	\begin{notecaptionblock}
@@ -300,78 +300,78 @@
 	指数分布的期望和方差为
 	\begin{subequations}
 		\begin{align}
-			\E(X)&=\frac1\lambda,\\
-			\Var(X)&=\frac1{\lambda^2}.
+			\E(X) &= \frac1\lambda,\\
+			\Var(X) &= \frac1{\lambda^2}.
 		\end{align}
 	\end{subequations}
-	其期望往往被定义为平均寿命$\beta:=\E(X)\equiv 1/\lambda$，因此也有教材将指数分布记作$\ExpDist(\beta)$。
+	其期望往往被定义为平均寿命$\beta := \E(X) \equiv 1/\lambda$，因此也有教材将指数分布记作$\ExpDist(\beta)$。
 \end{corollary}
 
 \begin{corollary}
 	指数分布的尾概率与Poisson分布有关：
-	\[
-		\P_{\ExpDist(\lambda)}(T>\tau)=\e^{-\lambda\tau}=\P_{\PoisDist(\lambda\tau)}(N=0).
-	\]
-	这说明：如果时间$(0,\tau)$内事件的发生次数$N\sim\PoisDist(\lambda\tau)$，则相邻事件的时间间隔$\Delta T\sim\ExpDist(\lambda)$。
+	\begin{equation}\label{eq:ps-poisson-waiting-time}
+		\P_{\ExpDist(\lambda)}(T > \tau) = \e^{-\lambda\tau} = \P_{\PoisDist(\lambda\tau)}(N = 0).
+	\end{equation}
+	这说明：如果时间$(0,\tau)$内事件的发生次数$N \sim \PoisDist(\lambda\tau)$，则相邻事件的时间间隔$\Delta T \sim \ExpDist(\lambda)$。
 \end{corollary}
 
 \begin{example}{指数分布的导出}{}
-	产品在$(t,t+\d t)$时间内的失效率为
+	产品在$(t,t + \d t)$时间内的失效率为
 	\[
-		\P(t<T<t+\d t\mid T>t)=\frac{\P(t<T<t+\d t)}{\P(T>t)}=\frac{\CDF(t+\d t)-\CDF(t)}{1-\CDF(t)}=\frac{\CDF'(t)}{1-\CDF(t)}\d t,
+		\P(t < T < t + \d t \mid T > t) = \frac{\P(t < T < t + \d t)}{\P(T > t)} = \frac{\CDF(t + \d t) - \CDF(t)}{1 - \CDF(t)} = \frac{\CDF'(t)}{1 - \CDF(t)}\d t,
 	\]
 	令失效率为$\lambda(t)\d t$
-	\[
-		\frac{\CDF'(t)}{1-\CDF(t)}=\lambda(t)\implies\CDF(t)=1-\exp\biggb{-\int_0^t\lambda(\tau)\d\tau}.
-	\]
-	若假设无老化：$\lambda(t)\equiv\lambda$，则分布为指数分布：
+	\begin{equation}\label{eq:ps-hazard-survival}
+		\frac{\CDF'(t)}{1 - \CDF(t)} = \lambda(t) \implies \CDF(t) = 1 - \exp\biggb{-\int_0^t\lambda(\tau)\d\tau}.
+	\end{equation}
+	若假设无老化：$\lambda(t) \equiv \lambda$，则分布为指数分布：
 	\begin{equation}
-		\CDF(t)=1-\e^{-\lambda t},\quad t>0,
+		\CDF(t) = 1 - \e^{-\lambda t},\quad t > 0,
 	\end{equation}
 
-	这体现出指数分布的无记忆性：$\forall t_0>0$
-	\[
-		\P(T>t+t_0\mid T>t_0)=\frac{\e^{-\lambda(t+t_0)}}{\e^{-\lambda t_0}}=\e^{-\lambda t}=\P(T>t).
-	\]
+	这体现出指数分布的无记忆性：$\forall t_0 > 0$
+	\begin{equation}\label{eq:ps-exponential-memoryless}
+		\P(T > t + t_0 \mid T > t_0) = \frac{\e^{-\lambda(t+t_0)}}{\e^{-\lambda t_0}} = \e^{-\lambda t} = \P(T > t).
+	\end{equation}
 
 	\tcblower
 	
-	改进$\lambda(x)=\alpha x^{\alpha+1}/\beta^\alpha$，得到Weibull分布
+	改进$\lambda(x) = \alpha x^{\alpha+1}/\beta^\alpha$，得到Weibull分布
 	\begin{equation}
 		\label{eqn:Weibull CDF}
-		\CDF(x)=1-\e^{-(x/\beta)^\alpha},\quad x>0.
+		\CDF(x) = 1 - \e^{-(x/\beta)^\alpha},\quad x > 0.
 	\end{equation}
 \end{example}
 
 \section{随机变量的函数}
 
-随机变量$X,Y$同样本空间时，一般地，$aX+bY$等$X,Y$的函数也是随机变量。
+随机变量$X,Y$同样本空间时，一般地，$aX + bY$等$X,Y$的函数也是随机变量。
 
 \begin{theorem}
 	{离散型随机变量的函数}{}
-	$X$离散$\implies Y:=g(X)$离散。
+	$X$离散$\implies Y := g(X)$离散。
 \end{theorem}
 
 \begin{theorem}{连续型随机变量的函数}{}
-	设$X$有密度，$g$在其取值区间上一阶连续可导且$g'$处处非零。则对值域内的$y$，$Y=g(X)$的PDF为
+	设$X$有密度，$g$在其取值区间上一阶连续可导且$g'$处处非零。则对值域内的$y$，$Y = g(X)$的PDF为
 	\begin{equation}
-		f_Y(y)=f_X\bigp{g^{-1}(y)}\Bigabs{\bigb{g^{-1}(y)}'}.
+		f_Y(y) = f_X\bigp{g^{-1}(y)}\Bigabs{\bigb{g^{-1}(y)}'}.
 	\end{equation}
 	其本质是
 	\begin{equation}
-		\CDF_Y(y)=\begin{cases}\CDF_X(g^{-1}(y)),&g\text{递增},\\1-\CDF_X(g^{-1}(y)),&g\text{递减}.\end{cases}
+		\CDF_Y(y) = \begin{cases}\CDF_X(g^{-1}(y)),&g\text{递增},\\1 - \CDF_X(g^{-1}(y)),&g\text{递减}.\end{cases}
 	\end{equation}
 \end{theorem}
 \begin{example}{生成随机变量}{}
-	服从CDF $\CDF(y)$的随机变量$Y$可由随机数$X\sim\UnifDist(0,1)$生成：
+	服从CDF $\CDF(y)$的随机变量$Y$可由随机数$X \sim \UnifDist(0,1)$生成：
 	\begin{equation}
-		Y=\CDF\inv(X).
+		Y = \CDF\inv(X).
 	\end{equation}
 \end{example}
 \section*{Review}
 \begin{compactenum}
 	\item PMF/PDF, CDF
-	\item 期望$\mu$、标准差$\sigma$；标准化$\frac{X-\mu}\sigma$
+	\item 期望$\mu$、标准差$\sigma$；标准化$(X - \mu)/\sigma$
 	\item 参数的意义：位置、尺度、形状
-	\item $Y=g(X)$
+	\item $Y = g(X)$
 \end{compactenum}

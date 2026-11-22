@@ -15,7 +15,7 @@
 \begin{definition}{简单随机抽样}{simple random sampling}
 	简单随机抽样(simple random sampling)总体个数$N$有限，无放回，任意容量相同的样本都有相同的发生概率。
 	\[
-		p=\biggdivision{1}{\binom Nn}.
+		p = \biggdivision{1}{\binom Nn}.
 	\]
 \end{definition}
 \begin{definition}{随机样本}{random sample}
@@ -24,36 +24,37 @@
 不当抽样。
 \begin{definition}{统计量}{statistic}
 	统计量(statistic)是完全由样本决定的量，比如样本期望$\avg X$和样本方差$S^2$
-	\[
-		\avg X:=\frac1n\sum_{i=1}^nX_i,\quad S^2:=\frac1{n-1}\sum_{i=1}^n(X_i-\avg X)^2.
-	\]
+	\begin{align*}
+		\avg X &:= \frac1n\sum_{i=1}^nX_i,\\
+		S^2 &:= \frac1{n - 1}\sum_{i=1}^n(X_i - \avg X)^2.
+	\end{align*}
 \end{definition}
 总体决定样本，用样本来推断总体，这就是统计推断。
 \section{矩估计}
 随机样本$X_1,X_2,\ldots$ iid
 \begin{definition}{样本矩}{}
 	样本$k$阶原点矩
-	\[
-		a_k:=\frac1n\sum_{i=1}^nX_i^k\pto\E(X^k),
-	\]
+	\begin{equation}\label{eq:ps-raw-sample-moment}
+		a_k := \frac1n\sum_{i=1}^nX_i^k \pto \E(X^k),
+	\end{equation}
 	$k$阶中心矩
-	\[
-		m_k:=\frac1n\sum_{i=1}^n(X_i-\avg X)^k\pto\E\bigb{(X-\mu)^k},
-	\]
+	\begin{equation}\label{eq:ps-central-sample-moment}
+		m_k := \frac1n\sum_{i=1}^n(X_i - \avg X)^k \pto \E\bigb{(X - \mu)^k},
+	\end{equation}
 \end{definition}
 矩估计就是认为总体矩$\doteq$样本矩，从而得到参数的估计。
 \begin{example}{正态分布和Poisson分布的矩估计}{}
-	iid $X_i\sim\NormalDist(\mu,\sigma^2)$用样本均值$\avg X$和样本2阶中心矩$m_2$估计
+	iid $X_i \sim \NormalDist(\mu,\sigma^2)$用样本均值$\avg X$和样本2阶中心矩$m_2$估计
 	\[
 		\begin{cases}
-			\mu=\avg X,\\
-			\sigma^2=m_2
+			\mu = \avg X,\\
+			\sigma^2 = m_2
 		\end{cases}
 	\]
 	\tcblower
-	iid $X_i\sim\ExpDist(\lambda)$的参数$\lambda$有不止一种估计方法
+	iid $X_i \sim \ExpDist(\lambda)$的参数$\lambda$有不止一种估计方法
 	\[
-		\lambda=\frac1{\avg X}\enspace\text{or}\enspace\lambda=\frac1{\sqrt{m_2}}.
+		\lambda = \frac1{\avg X}\enspace\text{or}\enspace\lambda = \frac1{\sqrt{m_2}}.
 	\]
 	但是我们采用低阶矩$\avg X$，因为其受噪声的影响更小。
 \end{example}
@@ -66,7 +67,7 @@
 \begin{definition}{似然函数}{likelihood function}
 	对于观测$(X_1,\ldots,X_n)$的似然函数(likelihood function)
 	\begin{equation}
-		L(\theta):=f(X_1,\ldots,X_n;\theta).
+		L(\theta) := f(X_1,\ldots,X_n;\theta).
 	\end{equation}
 \end{definition}
 
@@ -77,67 +78,67 @@
 
 \begin{corollary}
 	若$X_1,\ldots,X_n$ iid，总体分布为$g(x;\theta)$，则
-	\[
-		L(\theta)=g(X_1;\theta)\cdots g(X_n;\theta).
-	\]
+	\begin{equation}\label{eq:ps-independent-likelihood}
+		L(\theta) = g(X_1;\theta)\cdots g(X_n;\theta).
+	\end{equation}
 \end{corollary}
 
 \begin{definition}{极大似然估计}{maximum likelihood estimation}
 	$\theta$的极大似然估计(maximum likelihood estimation, MLE)为\index{MLE, 极大似然估计}
 	\begin{equation}
-		\theta^\ast:=\argmax_\theta L(\theta).
+		\theta^\ast := \argmax_\theta L(\theta).
 	\end{equation}
 \end{definition}
 \begin{example}{正态分布的MLE}{MLE of Normal distribution}
-	iid $X_i\sim\NormalDist(\mu,\sigma^2)$，$\mu,\sigma^2$未知，则其似然函数为
+	iid $X_i \sim \NormalDist(\mu,\sigma^2)$，$\mu,\sigma^2$未知，则其似然函数为
 	\[
-		L(\mu,\sigma^2)=\prod_{i=1}^n\biggb{\frac1{\sqrt{2\pi}\sigma}\exp\Bigp{-\frac{(X_i-\mu)^2}{2\sigma^2}}}
+		L(\mu,\sigma^2) = \prod_{i=1}^n\biggb{\frac1{\sqrt{2\pi}\sigma}\exp\Bigp{-\frac{(X_i - \mu)^2}{2\sigma^2}}}
 	\]
 	要求$L$的最大值点，可对$L$求导，然而更方便的做法是求对数似然：
 	\[
-		\ln L(\mu,\sigma^2)=-\frac n2\ln2\pi-n\ln\sigma-\frac1{2\sigma^2}\sum_{i=1}^n(X_i-\mu)^2.
+		\ln L(\mu,\sigma^2) = -\frac n2\ln2\pi - n\ln\sigma - \frac1{2\sigma^2}\sum_{i=1}^n(X_i - \mu)^2.
 	\]
 	最大值点处满足
-	\[
+	\begin{equation}\label{eq:ps-normal-mle}
 		\begin{cases}
-			\pv{\ln L}\mu=0\\[1ex]
-			\pv{\ln L}{(\sigma^2)}=0
-		\end{cases}\implies
+			\pv{\ln L}\mu = 0\\[1ex]
+			\pv{\ln L}{(\sigma^2)} = 0
+		\end{cases} \implies
 		\begin{cases}
-			\mu^\ast=\avg X\\
-			(\sigma^2)^\ast=m_2=\frac1n\sum_{i=1}^n(X_i-\avg X)^2.
+			\mu^\ast = \avg X\\
+			(\sigma^2)^\ast = m_2 = \frac1n\sum_{i=1}^n(X_i - \avg X)^2.
 		\end{cases}
-	\]
+	\end{equation}
 	经验证，$\mu^\ast,(\sigma^2)^\ast$为所求MLE。
 \end{example}
 \begin{remark}
 	MLE具有不变性：
 	\begin{equation}
-		\bigp{g(\theta)}^\ast=g(\theta^\ast).
+		\bigp{g(\theta)}^\ast = g(\theta^\ast).
 	\end{equation}
 \end{remark}
 \begin{example}{均匀分布的MLE}{MLE of Uniform distribution}
-	iid $X_i\sim\UnifDist(0,\theta)$，$\theta$未知
+	iid $X_i \sim \UnifDist(0,\theta)$，$\theta$未知
 	\[
-		L(\theta)=\begin{cases}
-			\frac1{\theta^n},&0<X_i\leqslant\theta\\
+		L(\theta) = \begin{cases}
+			\frac1{\theta^n},&0 < X_i \leqslant \theta\\
 			0,&\text{elsewhere}
 		\end{cases}
 	\]
-	$\theta^\ast=\max(X_1,\ldots,X_n)$
+	$\theta^\ast = \max(X_1,\ldots,X_n)$
 \end{example}
 \begin{example}{Cauchy分布的估计}{estimation of Cauchy distribution}
 	估计Cauchy分布的参数$\theta$
 	\[
-		f(x;\theta)=\frac1\pi\frac1{1+(x-\theta)^2},\quad x\in\RR
+		f(x;\theta) = \frac1\pi\frac1{1 + (x - \theta)^2},\quad x \in \RR
 	\]
 	期望不存在，无矩。
 	
 	似然方程
 	\[
-		\dv{\ln L}\theta=0\implies\sum_{i=1}^n\frac{X_i-\theta}{1+(X_i-\theta)^2}=0.
+		\dv{\ln L}\theta = 0 \implies \sum_{i=1}^n\frac{X_i - \theta}{1 + (X_i - \theta)^2} = 0.
 	\]
-	当$n>2$时很难解。回到参数的意义，$\theta$可用样本中位数估计。
+	当$n > 2$时很难解。回到参数的意义，$\theta$可用样本中位数估计。
 \end{example}
 估计方法不唯一，即使MLE也不一定唯一，MLE需要$f$ (分布的参数形式)，算法。
 
@@ -152,44 +153,44 @@
 	\]
 	$\theta$是$\varTheta$的实现值；$X$是试验(观测)结果，样本分布为
 	\[
-		f_{X\mid\varTheta}(x\mid\theta)
+		f_{X\mid\varTheta}(x \mid \theta)
 	\]
 	由Bayes公式，后验分布(posterior distribution)为
 	\begin{equation}
-		f_{\varTheta\mid X}(\theta\mid X)=\frac{f_\varTheta(\theta)f_{X\mid\varTheta}(x\mid\theta)}{f_X(x)}=\frac{f_\varTheta(\theta)f_{X\mid\varTheta}(x\mid\theta)}{\textstyle\int f_\varTheta(\theta)f_{X\mid\varTheta}(x\mid\theta)\d\theta}.
+		f_{\varTheta\mid X}(\theta \mid X) = \frac{f_\varTheta(\theta)f_{X\mid\varTheta}(x \mid \theta)}{f_X(x)} = \frac{f_\varTheta(\theta)f_{X\mid\varTheta}(x \mid \theta)}{\textstyle\int f_\varTheta(\theta)f_{X\mid\varTheta}(x \mid \theta)\d\theta}.
 	\end{equation}
-	若$\varTheta\sim\UnifDist$为均匀分布，称为Bayes法则，也叫同等无知原则。
+	若$\varTheta \sim \UnifDist$为均匀分布，称为Bayes法则，也叫同等无知原则。
 \end{definition}
 
 \begin{example}{二项分布的Bayes估计}{}
 	% $X=n$次掷币正面向上次数，
-	当$\varTheta=\theta$时，$X\sim\BinDist(n,\theta)$
+	当$\varTheta = \theta$时，$X \sim \BinDist(n,\theta)$
 	\[
-		f_{X\mid\varTheta}(x\mid\theta)=\binom nx\theta^x(1-\theta)^{n-x},\quad x=0,1,\ldots,n.
+		f_{X\mid\varTheta}(x \mid \theta) = \binom nx\theta^x(1 - \theta)^{n-x},\quad x = 0,1,\ldots,n.
 	\]
-	采用Bayes法则，先验分布$\theta\sim\UnifDist(0,1)$，则$(X,\varTheta)$的联合分布PDF为
+	采用Bayes法则，先验分布$\theta \sim \UnifDist(0,1)$，则$(X,\varTheta)$的联合分布PDF为
 	\[
-		f_{X,\varTheta}(x,\theta)=f_{\varTheta}(\theta)f_{X\mid\varTheta}(x\mid\theta)=\binom nx\theta^x(1-\theta)^{n-x},\quad\theta\in(0,1).
+		f_{X,\varTheta}(x,\theta) = f_{\varTheta}(\theta)f_{X\mid\varTheta}(x \mid \theta) = \binom nx\theta^x(1 - \theta)^{n-x},\quad\theta \in (0,1).
 	\]
 	所以
 	\[
-		f_X(x)=\binom nx\int_0^1\theta^x(1-\theta)^{n-x}\d\theta=\binom nx\Beta(x+1,n-x+1)=\frac1{n+1}.
+		f_X(x) = \binom nx\int_0^1\theta^x(1 - \theta)^{n-x}\d\theta = \binom nx\Beta(x + 1,n - x + 1) = \frac1{n + 1}.
 	\]
 	故后验概率
-	\[
-		f_{\varTheta\mid X}(\theta\mid x)=\frac{(n+1)!}{x!(n-x)!}\theta^x(1-\theta)^{n-x}.
-	\]
-	故$\theta\sim\BetaDist(x+1,n-x+1)$，
+	\begin{equation}\label{eq:ps-beta-binomial-posterior}
+		f_{\varTheta\mid X}(\theta \mid x) = \frac{(n + 1)!}{x!(n - x)!}\theta^x(1 - \theta)^{n-x}.
+	\end{equation}
+	故$\theta \sim \BetaDist(x + 1,n - x + 1)$，
 	
-	\[
-		\hat\theta=\E(\varTheta\mid x)=\frac{x+1}{n+2}.
-	\]
+	\begin{equation}\label{eq:ps-posterior-mean-uniform-prior}
+		\hat\theta = \E(\varTheta \mid x) = \frac{x + 1}{n + 2}.
+	\end{equation}
 	或
 	\[
-		\theta^\ast=\argmax f_{\varTheta\mid X}(\theta\mid x)=\frac xn.
+		\theta^\ast = \argmax f_{\varTheta\mid X}(\theta \mid x) = \frac xn.
 	\]
 	\tcblower
-	Bayes法则的先验分布为$\UnifDist(0,1)=\BetaDist(1,1)$，若先验分布取为$\BetaDist(a,b)$，则后验分布为$\BetaDist(a+x,b+n-x)$
+	Bayes法则的先验分布为$\UnifDist(0,1) = \BetaDist(1,1)$，若先验分布取为$\BetaDist(a,b)$，则后验分布为$\BetaDist(a + x,b + n - x)$
 \end{example}
 
 \begin{remark}
@@ -201,121 +202,121 @@
 \begin{definition}{偏差}{bias}
 	统计量
 	\[
-		\hat\theta=\hat\theta(X_1,\ldots,X_n).
+		\hat\theta = \hat\theta(X_1,\ldots,X_n).
 	\]
 	是对$\theta$的一个估计，定义偏差(bias)%\index{bias, 偏差}
 	\begin{equation}
-		\E(\hat\theta-\theta)=\E(\hat\theta)-\theta.
+		\E(\hat\theta - \theta) = \E(\hat\theta) - \theta.
 	\end{equation}
-	若$\forall\theta,\enspace\E(\hat\theta)=\theta$，则$\hat\theta$是$\theta$的一个无偏估计(unbiased estimation)。
+	若$\forall\theta,\enspace\E(\hat\theta) = \theta$，则$\hat\theta$是$\theta$的一个无偏估计(unbiased estimation)。
 \end{definition}
 $\hat g(X_1,\ldots,X_n)$是$g(\theta)$的无偏估计当
-\[
-	\E(\hat g)=g(\theta),\quad\forall\theta.
-\]
+\begin{equation}\label{eq:ps-unbiased-estimator}
+	\E(\hat g) = g(\theta),\quad\forall\theta.
+\end{equation}
 若无偏，由LLN
 \[
-	\frac1{N}\sum_{n=1}^N\hat g(X_1^{(n)},\ldots,X_n^{(n)})\asto\E(\hat g)=g(\theta).
+	\frac1{N}\sum_{n=1}^N\hat g(X_1^{(n)},\ldots,X_n^{(n)}) \asto \E(\hat g) = g(\theta).
 \]
 \begin{example}{样本期望、方差的无偏性}{unbiasedness sample expectation and variance}
 	样本均值$\avg X$的期望和方差
 	\begin{subequations}
 		\begin{align}
 			\label{eqn:E(avg X)}
-			\E(\avg X)&=\frac1n\sum_{i=1}^n\E(X_i)=\mu,\\
+			\E(\avg X) &= \frac1n\sum_{i=1}^n\E(X_i) = \mu,\\
 			\label{eqn:Var(avg X)}
-			\Var(\avg X)&=\frac1{n^2}\sum_{i=1}^n\Var(X_i)=\frac{\sigma^2}n.
+			\Var(\avg X) &= \frac1{n^2}\sum_{i=1}^n\Var(X_i) = \frac{\sigma^2}n.
 		\end{align}
 	\end{subequations}
 	样本方差
 	\[
-		S^2=\frac1{n-1}\sum_{i=1}^n(X_i-\avg X)^2=\frac1{n-1}\biggp{\sum_{i=1}^nX_i^2-n\avg X^2}
+		S^2 = \frac1{n - 1}\sum_{i=1}^n(X_i - \avg X)^2 = \frac1{n - 1}\biggp{\sum_{i=1}^nX_i^2 - n\avg X^2}
 	\]
 	的期望
 	\begin{equation}
 		\label{eqn:E(S2)}
-		\E(S^2)=\frac1{n-1}\biggb{\sum_{i=1}^n\E(X_i^2)-n\E(\avg X^2)}=\frac n{n-1}\biggb{\sigma^2+\mu^2-\Bigp{\frac{\sigma^2}n+\mu^2}}=\sigma^2.
+		\E(S^2) = \frac1{n - 1}\biggb{\sum_{i=1}^n\E(X_i^2) - n\E(\avg X^2)} = \frac n{n - 1}\biggb{\sigma^2 + \mu^2 - \Bigp{\frac{\sigma^2}n + \mu^2}} = \sigma^2.
 	\end{equation}
-	样本方差$S^2$的方差与样本分布的峰度系数$\nu_4=\E\bigb{(X_i-\mu)^4/\sigma^4}$有关，
-	记$Y_i:=X_i-\mu$，
+	样本方差$S^2$的方差与样本分布的峰度系数$\nu_4 = \E\bigb{(X_i - \mu)^4/\sigma^4}$有关，
+	记$Y_i := X_i - \mu$，
 	\begin{align*}
-		(n-1)^2\E(S^4)&=\E\biggb{\biggp{\sum_{i=1}^nY_i^2}^2}-2n\sum_{i=1}^n\E(Y_i^2\avg Y^2)+n^2\E(\avg Y^4)\\
-		&=\biggb{n\nu_4+n(n-1)-2n\cdot\frac{\nu_4+(n-1)}n+n^2\cdot\frac{\nu_4+3(n-1)}{n^3}}\sigma^4.
+		(n - 1)^2\E(S^4) &= \E\biggb{\biggp{\sum_{i=1}^nY_i^2}^2} - 2n\sum_{i=1}^n\E(Y_i^2\avg Y^2) + n^2\E(\avg Y^4)\\
+		&= \biggb{n\nu_4 + n(n - 1) - 2n \cdot \frac{\nu_4 + (n - 1)}n + n^2 \cdot \frac{\nu_4 + 3(n - 1)}{n^3}}\sigma^4.
 	\end{align*}
 	由此
 	\begin{equation}
 		\label{eqn:Var(S2)}
-		\Var(S^2)=\biggb{\frac{\nu_4}n-\frac{n-3}{n(n-1)}}\sigma^4.
+		\Var(S^2) = \biggb{\frac{\nu_4}n - \frac{n - 3}{n(n - 1)}}\sigma^4.
 	\end{equation}
-	比如正态分布的峰度系数$\nu_4=3$，$\Var(S^2)=2\sigma^4/(n-1)$。
+	比如正态分布的峰度系数$\nu_4 = 3$，$\Var(S^2) = 2\sigma^4/(n - 1)$。
 	% 特别地，正态分布的$\Var(S^2)$也可以通过$(n-1)S^2/\sigma^2\sim\ChiSqDist(n-1)$来方便计算。
 \end{example}
 \begin{example}{均匀分布的无偏估计}{unbiased estimation of Uniform distribution}
 	在\exmref{exm:MLE of Uniform distribution} 中给出了均匀分布$\UnifDist(0,
 	\theta)$的MLE 
-	\[
-		\theta^\ast=\max(X_1,\ldots,X_n).
-	\] 
-	这种估计是有偏的，($\E(\theta^\ast)=n\theta/(n+1)$)。而
+	\begin{equation}\label{eq:ps-uniform-endpoint-mle}
+		\theta^\ast = \max(X_1,\ldots,X_n).
+	\end{equation}
+	这种估计是有偏的，($\E(\theta^\ast) = n\theta/(n + 1)$)。而
 	以下四种估计都是无偏的：
 	\begin{subequations}
 		\begin{align}
-			\hat\theta_1&:=\frac{n+1}n\max(X_1,\ldots,X_n).\\
-			\hat\theta_2&:=\max(X_1,\ldots,X_n)+\min(X_1,\ldots,X_n),\\
-			\hat\theta_3&:=2\avg X,\enspace\text{(矩估计)}\\
-			\hat\theta_4&:=(n+1)\min(X_1,\ldots,X_n).
+			\hat\theta_1 &:= \frac{n + 1}n\max(X_1,\ldots,X_n).\\
+			\hat\theta_2 &:= \max(X_1,\ldots,X_n) + \min(X_1,\ldots,X_n),\\
+			\hat\theta_3 &:= 2\avg X,\enspace\text{(矩估计)}\\
+			\hat\theta_4 &:= (n + 1)\min(X_1,\ldots,X_n).
 		\end{align}
 	\end{subequations}
-	但其精确度越来越差：$\Var(\hat\theta_1)\leqslant\Var(\hat\theta_2)\leqslant\Var(\hat\theta_3)\leqslant\Var(\hat\theta_4)$，具体而言，
+	但其精确度越来越差：$\Var(\hat\theta_1) \leqslant \Var(\hat\theta_2) \leqslant \Var(\hat\theta_3) \leqslant \Var(\hat\theta_4)$，具体而言，
 	\begin{subequations}
 		\begin{align}
-			\Var(\hat\theta_1)&=\frac{\theta^2}{n(n+2)},\\
-			\Var(\hat\theta_2)&=\frac{2\theta^2}{(n+1)(n+2)},\\
-			\Var(\hat\theta_3)&=\frac{\theta^2}{3n},\\
-			\Var(\hat\theta_4)&=\frac{n\theta^2}{n+2}.
+			\Var(\hat\theta_1) &= \frac{\theta^2}{n(n + 2)},\\
+			\Var(\hat\theta_2) &= \frac{2\theta^2}{(n + 1)(n + 2)},\\
+			\Var(\hat\theta_3) &= \frac{\theta^2}{3n},\\
+			\Var(\hat\theta_4) &= \frac{n\theta^2}{n + 2}.
 		\end{align}
 	\end{subequations}
 	\tcblower
 	下面推导这四个估计的方差。首先是最平凡的，
 	\[
-		\Var(\hat\theta_3)=4\Var(\avg X)=\frac4n\Var(X_i)=\frac4n\cdot\frac{\theta^2}{12}=\frac{\theta^2}{3n}.
+		\Var(\hat\theta_3) = 4\Var(\avg X) = \frac4n\Var(X_i) = \frac4n \cdot \frac{\theta^2}{12} = \frac{\theta^2}{3n}.
 	\]
-	令$Y:=\min(X_1,\ldots,X_n),\enspace Z=\max(X_1,\ldots,X_n)$，则由\eqref{eqn:min-max distribution}可得PDF
+	令$Y := \min(X_1,\ldots,X_n),\enspace Z = \max(X_1,\ldots,X_n)$，则由\eqref{eqn:min-max distribution}可得PDF
 	\begin{subequations}
 		\begin{align}
-			f_Y(y)&=\dd y\biggp{1-\frac y\theta}^n=\frac n\theta\biggp{1-\frac y\theta}^{n-1},\\
-			f_Z(z)&=\dd z\biggp{\frac z\theta}^n=\frac n\theta\biggp{\frac z\theta}^{n-1}.
+			f_Y(y) &= \dd y\biggp{1 - \frac y\theta}^n = \frac n\theta\biggp{1 - \frac y\theta}^{n-1},\\
+			f_Z(z) &= \dd z\biggp{\frac z\theta}^n = \frac n\theta\biggp{\frac z\theta}^{n-1}.
 		\end{align}
 	\end{subequations}
 	继而
 	\begin{align*}
-		\E(Y^2)&=\frac n\theta\int_0^\theta y^2\biggp{1-\frac y\theta}^{n-1}\d y=\frac{2\theta^2}{(n+1)(n+2)},\\
-		\E(Z^2)&=\frac n{\theta^n}\int_0^\theta y^{n+1}\d y=\frac{n\theta^2}{n+2}.
+		\E(Y^2) &= \frac n\theta\int_0^\theta y^2\biggp{1 - \frac y\theta}^{n-1}\d y = \frac{2\theta^2}{(n + 1)(n + 2)},\\
+		\E(Z^2) &= \frac n{\theta^n}\int_0^\theta y^{n+1}\d y = \frac{n\theta^2}{n + 2}.
 	\end{align*}
 	可得 
 	\begin{equation}
-		\Var(Y)=\Var(Z)=\frac{n\theta^2}{(n+1)^2(n+2)}.
+		\Var(Y) = \Var(Z) = \frac{n\theta^2}{(n + 1)^2(n + 2)}.
 	\end{equation}
 	因此
 	\begin{align*}
-		\Var(\hat\theta_4)&=(n+1)^2\Var(Y)=\frac{n\theta^2}{n+2};\\
-		\Var(\hat\theta_1)&=\biggp{\frac{n+1}n}^2\Var(Z)=\frac{\theta^2}{n(n+2)}.
+		\Var(\hat\theta_4) &= (n + 1)^2\Var(Y) = \frac{n\theta^2}{n + 2};\\
+		\Var(\hat\theta_1) &= \biggp{\frac{n + 1}n}^2\Var(Z) = \frac{\theta^2}{n(n + 2)}.
 	\end{align*}
-	最后求$\Var(\hat\theta_2)=\Var(Y+Z)$，这需要知道$Y,Z$的联合分布，由\eqref{eqn:min-max joint distribution}，
+	最后求$\Var(\hat\theta_2) = \Var(Y + Z)$，这需要知道$Y,Z$的联合分布，由\eqref{eqn:min-max joint distribution}，
 	\begin{equation}
-		f_{Y,Z}(y,z)=\frac{n(n-1)}{\theta^n}(z-y)^{n-2},\quad 0<y<z<\theta.
+		f_{Y,Z}(y,z) = \frac{n(n - 1)}{\theta^n}(z - y)^{n-2},\quad 0 < y < z < \theta.
 	\end{equation}
 	则
 	\[
-		\E(YZ)=\int_0^\theta\int_y^\theta yzf_{Y,Z}(y,z)\d z\d y=\frac1{\theta^n}\int_0^\theta y\Bigb{\Bigp{(n-1)z+y}(z-y)^{n-1}}_y^\theta\d y=\frac{\theta^2}{n+2}.
+		\E(YZ) = \int_0^\theta\int_y^\theta yzf_{Y,Z}(y,z)\d z\d y = \frac1{\theta^n}\int_0^\theta y\Bigb{\Bigp{(n - 1)z + y}(z - y)^{n-1}}_y^\theta\d y = \frac{\theta^2}{n + 2}.
 	\]
 	故
 	\begin{equation}
-		\Cov(Y,Z)=\E(YZ)-\E(Y)\E(Z)=\frac{\theta^2}{n+2}-\frac{n\theta^2}{(n+1)^2}=\frac{\theta^2}{(n+1)^2(n+2)}.
+		\Cov(Y,Z) = \E(YZ) - \E(Y)\E(Z) = \frac{\theta^2}{n + 2} - \frac{n\theta^2}{(n + 1)^2} = \frac{\theta^2}{(n + 1)^2(n + 2)}.
 	\end{equation}
 	因此
 	\[
-		\Var(\hat\theta_2)=\Var(Y+Z)=\Var(Y)+\Var(Z)+2\Cov(Y,Z)=\frac{2\theta^2}{(n+1)(n+2)}.
+		\Var(\hat\theta_2) = \Var(Y + Z) = \Var(Y) + \Var(Z) + 2\Cov(Y,Z) = \frac{2\theta^2}{(n + 1)(n + 2)}.
 	\]
 \end{example}
 
@@ -324,16 +325,16 @@ $\hat g(X_1,\ldots,X_n)$是$g(\theta)$的无偏估计当
 \begin{definition}{均方误差}{mean square error}
 	定义均方误差(mean square error, MSE)\index{MES, 均方误差}
 	\begin{equation}
-		\E\bigb{(\hat\theta-\theta)^2}=\Var(\hat\theta)+\E^2(\hat\theta-\theta).
+		\E\bigb{(\hat\theta - \theta)^2} = \Var(\hat\theta) + \E^2(\hat\theta - \theta).
 	\end{equation}
-	由两部分构成，$\Var(\hat\theta)$称为精确度(precision)，$\E^2(\hat\theta-\theta)$代表准确度(accuracy)。后者在无偏估计中为0。
+	由两部分构成，$\Var(\hat\theta)$称为精确度(precision)，$\E^2(\hat\theta - \theta)$代表准确度(accuracy)。后者在无偏估计中为0。
 \end{definition}
 %由定义可以看出，
 \begin{definition}{有效性}{}
 	假定$\hat\theta_1,\hat\theta_2$是$\theta$的无偏估计，若
-	\[
-		\Var(\hat\theta_1)\leqslant\Var(\hat\theta_2),\quad\forall\theta
-	\]
+	\begin{equation}\label{eq:ps-estimator-efficiency}
+		\Var(\hat\theta_1) \leqslant \Var(\hat\theta_2),\quad\forall\theta
+	\end{equation}
 	且存在一个分布(i.e.一个$\theta$值)使得$<$成立，则称在MSE意义下，$\hat\theta_1$比$\hat\theta_2$更有效。
 	
 	如果所有无偏估计中存在最小的方差，则称为一致最小方差无偏估计(uniformly minimum variance unbiased estimator, UMVUE)。
@@ -341,132 +342,135 @@ $\hat g(X_1,\ldots,X_n)$是$g(\theta)$的无偏估计当
 \begin{theorem}{Cramér--Rao下限}{}
 	任何$\theta$的无偏估计量满足
 	\begin{equation}
-		\Var(\hat\theta)\geqslant\frac1{I_n(\theta)}.
+		\Var(\hat\theta) \geqslant \frac1{I_n(\theta)}.
 	\end{equation}
 	其中$I_n(\theta)$是Fisher信息量，见\dfnref{dfn:Fisher information}
 \end{theorem}
 \begin{example}{低偏倚换方差}{}
-	总体$X\sim\NormalDist(\mu,\sigma^2)$，样本方差$S^2$是无偏的，而样本二阶矩$m_2$是有偏的，
+	总体$X \sim \NormalDist(\mu,\sigma^2)$，样本方差$S^2$是无偏的，而样本二阶矩$m_2$是有偏的，
 	但MSE
 	\[
-		\E\bigb{(m_2-\sigma^2)^2}<\E\bigb{(S^2-\sigma^2)^2}.
+		\E\bigb{(m_2 - \sigma^2)^2} < \E\bigb{(S^2 - \sigma^2)^2}.
 	\]
-	由于正态分布的样本方差满足$(n-1)S^2/\sigma^2\sim\ChiSqDist(n-1)$，故
+	由于正态分布的样本方差满足$(n - 1)S^2/\sigma^2 \sim \ChiSqDist(n - 1)$，故
 	\begin{equation}
-		\E\bigb{(S^2-\sigma^2)^2}=\Var(S^2)+0=\biggp{\frac{\sigma^2}{n-1}}^2\cdot 2(n-1)=\frac{2}{n-1}\sigma^4.
+		\E\bigb{(S^2 - \sigma^2)^2} = \Var(S^2) + 0 = \biggp{\frac{\sigma^2}{n - 1}}^2 \cdot 2(n - 1) = \frac{2}{n - 1}\sigma^4.
 	\end{equation}
 	可得
 	\[
-		\E\bigb{(m_2-\sigma^2)^2}=\biggp{\frac{\sigma^2}{n}}^2\cdot 2(n-1)+\biggp{\frac{n-1}n-1}^2\sigma^4=\frac{2n-1}{n^2}\sigma^4<\frac{2}{n-1}\sigma^4.
+		\E\bigb{(m_2 - \sigma^2)^2} = \biggp{\frac{\sigma^2}{n}}^2 \cdot 2(n - 1) + \biggp{\frac{n - 1}n - 1}^2\sigma^4 = \frac{2n - 1}{n^2}\sigma^4 < \frac{2}{n - 1}\sigma^4.
 	\]
 	\tcblower
 	一般地，由\exmref{exm:unbiased estimation of Uniform distribution}，
 	\begin{align*}
-		\E\bigb{(S^2-\sigma^2)^2}&=\frac{(\nu_4-1)n+3-\nu_4}{n(n-1)}\sigma^4,\\
-		\E\bigb{(m_2-\sigma^2)^2}&=\frac{(\nu_4-1)n^2+(5-2\nu_4)n+\nu_4-3}{n^3}\sigma^4.
+		\E\bigb{(S^2 - \sigma^2)^2} &= \frac{(\nu_4 - 1)n + 3 - \nu_4}{n(n - 1)}\sigma^4,\\
+		\E\bigb{(m_2 - \sigma^2)^2} &= \frac{(\nu_4 - 1)n^2 + (5 - 2\nu_4)n + \nu_4 - 3}{n^3}\sigma^4.
 	\end{align*}
 	二者的差
 	\[
-		\E\bigb{(S^2-\sigma^2)^2}-\E\bigb{(m_2-\sigma^2)^2}
+		\E\bigb{(S^2 - \sigma^2)^2} - \E\bigb{(m_2 - \sigma^2)^2}
 		% =\frac{(3-2\nu_4)n^2+(3\nu_4-8)n+3-\nu_4}{n^3(n-1)}.
-		=\frac{(2n^2-3n+1)\nu_4-(3n^2-8n+3)}{n^3(n-1)}\sigma^4.
+		= \frac{(2n^2 - 3n + 1)\nu_4 - (3n^2 - 8n + 3)}{n^3(n - 1)}\sigma^4.
 	\]
-	可证当峰度系数$\nu_4\geqslant 3/2$时，均有$\E\bigb{(S^2-\sigma^2)^2}>\E\bigb{(m_2-\sigma^2)^2}$。
+	可证当峰度系数$\nu_4 \geqslant 3/2$时，均有$\E\bigb{(S^2 - \sigma^2)^2} > \E\bigb{(m_2 - \sigma^2)^2}$。
 \end{example}
 
 \section{大样本性质}
 
-$\hat\theta=\hat\theta(X_1,\ldots,X_n)$当样本容量$n\to\infty$时的性质，
+$\hat\theta = \hat\theta(X_1,\ldots,X_n)$当样本容量$n \to \infty$时的性质，
 
 \begin{definition}{渐进无偏性}{}
-	$n\to\infty$时，
+	$n \to \infty$时，
 	\begin{equation}
-		\E(\hat\theta)\to\theta.
+		\E(\hat\theta) \to \theta.
 	\end{equation}
 \end{definition}
 \begin{definition}{相合性}{consistent}
 	称$\hat\theta$为$\theta$的(弱)相合估计(consistent estimate)当
 	\begin{equation}
-		\hat\theta\pto\theta.
+		\hat\theta \pto \theta.
 	\end{equation}
 \end{definition}
 WLLN指出，$\avg X$为$\mu$的一个相合估计。相合性为良好点估计的自然要求。
 \begin{example}{二阶中心矩}{}
 	二阶中心矩$m_2$是总体方差$\sigma^2$的相合估计。
 	\[
-		m_2=\frac1n\sum_{i=1}^n(X_i-\avg X)^2=\frac1n\sum_{i=1}^n(X_i-\mu)^2-(\avg X-\mu)^2\pto\sigma^2+0.
+		m_2 = \frac1n\sum_{i=1}^n(X_i - \avg X)^2 = \frac1n\sum_{i=1}^n(X_i - \mu)^2 - (\avg X - \mu)^2 \pto \sigma^2 + 0.
 	\]
 \end{example}
 \begin{definition}{渐进正态性}{}
-	若$\exists\sigma_n>0$使得
-	\begin{compactenum}
-		\item $\lim_{n\to\infty}\sigma_n=0;$
-		\item $\lim_{n\to\infty}\P\biggl(\frac{\hat\theta-\theta}{\sigma_n}\leqslant x\biggr)=\Phi(x).$
-	\end{compactenum}
+	若存在一列$\sigma_n > 0$满足
+	\begin{equation}\label{eq:ps-asymptotic-normality}
+	    \begin{aligned}
+			\lim_{n\to\infty}\sigma_n &= 0,\\
+			\lim_{n\to\infty}\P\biggl(\frac{\hat\theta - \theta}{\sigma_n} \leqslant x\biggr) &= \Phi(x),
+	    \end{aligned}
+	\end{equation}
 	则称$\hat\theta$为$\theta$的相合近似正态估计。
 \end{definition}
 \begin{compactenum}
-	\item 有时，取$\sigma_n^2=\Var(\hat\theta)$，比如用$\avg X$估计$\mu$；
-	\item $n\gg 1$时，$\hat\theta\dotsim\NormalDist(\theta,\sigma_n^2).$；
-	\item 原始分布（即$X_i$的分布） $f$满足光滑性条件，则$\exists\sigma_n>0$使得
+	\item 有时，取$\sigma_n^2 = \Var(\hat\theta)$，比如用$\avg X$估计$\mu$；
+	\item $n \gg 1$时，$\hat\theta \dotsim \NormalDist(\theta,\sigma_n^2).$；
+	\item 原始分布（即$X_i$的分布） $f$满足光滑性条件，则$\exists\sigma_n > 0$使得
 	\begin{equation}
 		\label{MLE-dto-N01}
-		\frac{\theta^\ast-\theta}{\sigma_n}\dto\NormalDist(0,1).
+		\frac{\theta^\ast - \theta}{\sigma_n} \dto \NormalDist(0,1).
 	\end{equation}
 \end{compactenum}
 \begin{definition}{Fisher信息量}{Fisher information}
 	$X_1,\ldots,X_n$ iid，对数似然函数
-	\[
-		\ell(\theta):=\ln f(X;\theta)=\sum_{i=1}^n\ln f(X_i;\theta).
-	\]
+	\begin{equation}\label{eq:ps-iid-log-likelihood}
+		\ell(\theta) := \ln f(X;\theta) = \sum_{i=1}^n\ln f(X_i;\theta).
+	\end{equation}
 	定义Fisher信息量
 	\begin{equation}
-		I_n(\theta):=\E(\ell'(\theta)^2).
+		I_n(\theta) := \E(\ell'(\theta)^2).
 	\end{equation}
 	Fisher信息量是衡量观测所得的随机变量$X$携带的关于未知参数$\theta$的信息量，其中$X$的概率分布依赖于参数$\theta$。
 \end{definition}
 
 $\ell(\theta)$导数的期望
 \[
-	\E(\ell'(\theta))=\int\frac1f\pv f\theta\cdot f\d x=\pp\theta\int f\d x\equiv 0.
+	\E(\ell'(\theta)) = \int\frac1f\pv f\theta \cdot f\d x = \pp\theta\int f\d x \equiv 0.
 \]
 二阶导期望
-\[
-	\E(\ell''(\theta))=\E\biggl[\frac1f\pv[2]f\theta-\biggl(\frac1f\pv f\theta\biggr)^2\biggr]=0-\E(\ell'(\theta)^2)=-\Var(\ell'(\theta)).
-\]
+\begin{equation}\label{eq:ps-fisher-negative-hessian}
+	\E(\ell''(\theta)) = \E\biggl[\frac1f\pv[2]f\theta - \biggl(\frac1f\pv f\theta\biggr)^2\biggr] = 0 - \E(\ell'(\theta)^2) = -\Var(\ell'(\theta)).
+\end{equation}
 Fisher信息量与样本容量有关：
-\[
-	I_n(\theta)=\sum_{i=1}^n\E\biggl[\biggl(\pp\theta\ln f(X_i;\theta)\biggr)^2\biggr]=nI_1(\theta)=:nI(\theta).
-\]
+\begin{equation}\label{eq:ps-fisher-additivity}
+	I_n(\theta) = \sum_{i=1}^n\E\biggl[\biggl(\pp\theta\ln f(X_i;\theta)\biggr)^2\biggr] = nI_1(\theta) =: nI(\theta).
+\end{equation}
 \begin{example}{Fisher信息量证明式\eqref{MLE-dto-N01}}{}
-	由MLE的性质，$\ell'(\theta^\ast)=0$，做Taylor展开，
+	由MLE的性质，$\ell'(\theta^\ast) = 0$，做Taylor展开，
 	\[
-		0=\ell'(\theta^\ast)=\ell'(\theta)+(\theta^\ast-\theta)\ell''(\theta)+\cdots
+		0 = \ell'(\theta^\ast) = \ell'(\theta) + (\theta^\ast - \theta)\ell''(\theta) + \cdots
 	\]
 	故
 	\[
-		\theta^\ast-\theta\doteq-\frac{\ell'(\theta)}{\ell''(\theta)}.
+		\theta^\ast - \theta \doteq -\frac{\ell'(\theta)}{\ell''(\theta)}.
 	\]
-	设$\ell'(\theta)=n\avg Y$，
-	\[
-		Y_i:=\pp\theta\ln f(X_i;\theta),\quad\E(Y_i)=0,\enspace\Var(Y_i)=I(\theta).
-	\]
+	令$Y_i := \pp\theta\ln f(X_i;\theta)$，则$\ell'(\theta) = n\avg Y$，且
+	\begin{align*}
+		\E(Y_i) &= 0,\\
+		\Var(Y_i) &= I(\theta).
+	\end{align*}
 	CLT说明，$\avg Y$是渐进正态的，故分子
 	\[
-		\frac1{\sqrt n}\ell'(\theta)=\sqrt n\,\avg Y\dto\NormalDist\bigp{0,I(\theta)}.
+		\frac1{\sqrt n}\ell'(\theta) = \sqrt n\,\avg Y \dto \NormalDist\bigp{0,I(\theta)}.
 	\]
 	分母
 	\[
-		\frac1n\ell''(\theta)\pto I(\theta).
+		\frac1n\ell''(\theta) \pto -I(\theta).
 	\]
 
-	故$\theta^\ast-\theta$是渐进正态的：
-	\[
-		\sqrt n(\theta^\ast-\theta)\dto\NormalDist\Bigp{0,\frac1{I(\theta)}}.
-	\]
+	故$\theta^\ast - \theta$是渐进正态的：
+	\begin{equation}\label{eq:ps-mle-asymptotic-variance}
+		\sqrt n(\theta^\ast - \theta) \dto \NormalDist\Bigp{0,\frac1{I(\theta)}}.
+	\end{equation}
 	式\eqref{MLE-dto-N01}中的 
 	\[
-		\sigma_n=\frac1{\sqrt{nI(\theta)}}~\text{或}~\frac1{\sqrt{nI(\theta^\ast)}}
+		\sigma_n = \frac1{\sqrt{nI(\theta)}}~\text{或}~\frac1{\sqrt{nI(\theta^\ast)}}
 	\]
 \end{example}
 \paragraph{Review}
@@ -475,32 +479,32 @@ Fisher信息量与样本容量有关：
 	
 	样本分布$f(x_1,\ldots,x_n;\theta)$即$X_1,\ldots,X_n$的联合分布
 
-	估计$\hat\theta=\hat\theta(X_1,\ldots,X_n)$是统计量，样本的函数
+	估计$\hat\theta = \hat\theta(X_1,\ldots,X_n)$是统计量，样本的函数
 
 	标准误差的估计
 	% \[
 	% 	se(\hat\theta):=\sqrt{\Var(\hat\theta)}.
 	% \]
-	$\hat{se}=\hat{se}(\hat\theta)$
+	$\hat{\mathrm{se}} = \hat{\mathrm{se}}(\hat\theta)$
 	\item 经典估计的优良性：
 	
 	$n$固定：无偏性、有效性；
 
-	$n\to\infty$：渐进无偏性、相合性、渐进正态性。
+	$n \to \infty$：渐进无偏性、相合性、渐进正态性。
 
 	\item Bayes估计：将$\theta$理解成一个随机变量$\varTheta$的实现值。$\varTheta$刻画了对$\theta$的认知
 	\[
-		f_\varTheta(\theta)\enspace\to\enspace f_{\varTheta\mid X}(\theta\mid x),
+		f_\varTheta(\theta)\enspace \to \enspace f_{\varTheta\mid X}(\theta \mid x),
 	\]
 	后验众数v.s. MLE。Bayes假设二者相等。
 \end{compactenum}
 \section{区间估计}
 \begin{definition}{置信区间}{}
-	给定$\alpha\in(0,1)$，$\forall\theta$可能值，有$\hat\theta_1,\hat\theta_2$使得
+	给定$\alpha \in (0,1)$，$\forall\theta$可能值，有$\hat\theta_1,\hat\theta_2$使得
 	\begin{equation}
-		\P(\hat\theta_1<\theta<\hat\theta_2)\geqslant1-\alpha.
+		\P(\hat\theta_1 < \theta < \hat\theta_2) \geqslant 1 - \alpha.
 	\end{equation}
-	这里$\hat\theta_i=\hat\theta_i(X_1,\ldots,X_n)$，则称$(\hat\theta_1,\hat\theta_2)$为$\theta$的$(1-\alpha)$置信的区间估计。
+	这里$\hat\theta_i = \hat\theta_i(X_1,\ldots,X_n)$，则称$(\hat\theta_1,\hat\theta_2)$为$\theta$的$(1 - \alpha)$置信的区间估计。
 \end{definition}
 $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 \begin{definition}{枢轴变量}{}
@@ -514,45 +518,45 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 	\end{compactenum}
 \end{method}
 \begin{example}{正态分布的区间估计}{}
-	$X\sim\NormalDist(\mu,\sigma^2)$的$\sigma^2$已知，$\mu$未知，由$\avg X\sim\NormalDist(\mu,\sigma^2/n)$，
+	$X \sim \NormalDist(\mu,\sigma^2)$的$\sigma^2$已知，$\mu$未知，由$\avg X \sim \NormalDist(\mu,\sigma^2/n)$，
 	取枢轴变量
 	\[
-		Z:=\frac{\avg X-\mu}{\sigma/\sqrt n}\sim\NormalDist(0,1)
+		Z := \frac{\avg X - \mu}{\sigma/\sqrt n} \sim \NormalDist(0,1)
 	\]
 	取对称的上下限
 	\[
-		\P(\abs Z\geqslant z_{\alpha/2})=\alpha\implies\Phi(z_{\alpha/2})=1-\alpha/2
+		\P(\abs Z \geqslant z_{\alpha/2}) = \alpha \implies \Phi(z_{\alpha/2}) = 1 - \alpha/2
 	\]
 	其中$z_{\alpha/2}$是$\NormalDist(0,1)$的上$\alpha/2$分位数。
-	故$\mu$的$(1-\alpha)$置信区间为
+	故$\mu$的$(1 - \alpha)$置信区间为
 	\begin{equation}
-		\Bigp{\avg X\pm z_{\alpha/2}\frac\sigma{\sqrt n}}.
+		\Bigp{\avg X \pm z_{\alpha/2}\frac\sigma{\sqrt n}}.
 	\end{equation}
 	%若$\alpha=0.05$，则$z_{0.025}=1.96$
 	%若要求误差不超过$\varepsilon$，则
 	%n=\frac{z_{\alpha/2}^2\sigma^2}{\varepsilon^2}
 	\tcblower
-	若$\mu,\sigma^2$均未知，需要用$S^2$估计$\sigma^2$，由式(\ref{sample-chi2})
+	若$\mu,\sigma^2$均未知，需要用$S^2$估计$\sigma^2$，由式\eqref{sample-chi2}
 	\[
-		\chi^2:=\frac{(n-1)S^2}{\sigma^2}\sim\ChiSqDist(n-1),
+		\chi^2 := \frac{(n - 1)S^2}{\sigma^2} \sim \ChiSqDist(n - 1),
 	\]
 	卡方分布并不对称，我们选择等尾置信区间，即
 	\[
-		\P\bigp{\chi^2<\chi_{\alpha/2}^2(n-1)}=\P\bigp{\chi^2>\chi_{1-\alpha/2}^2(n-1)}=\frac\alpha{2},
+		\P\bigp{\chi^2 < \chi_{\alpha/2}^2(n - 1)} = \P\bigp{\chi^2 > \chi_{1-\alpha/2}^2(n - 1)} = \frac\alpha{2},
 	\]
-	$\sigma^2$的$(1-\alpha)$置信区间为
+	$\sigma^2$的$(1 - \alpha)$置信区间为
 	\begin{equation}
-		\biggp{\frac{(n-1)S^2}{\chi_{\alpha/2}^2(n-1)},\frac{(n-1)S^2}{\chi_{1-\alpha/2}^2(n-1)}};
+		\biggp{\frac{(n - 1)S^2}{\chi_{\alpha/2}^2(n - 1)},\frac{(n - 1)S^2}{\chi_{1-\alpha/2}^2(n - 1)}};
 	\end{equation}
 
 	对$\mu$的估计，由式\eqref{sample-t}
 	\[
-		t:=\frac{\avg X-\mu}{S/\sqrt n}\sim\TDist(n-1).
+		t := \frac{\avg X - \mu}{S/\sqrt n} \sim \TDist(n - 1).
 	\]
 	%\P\bigp{\abs G\geqslant t_{\alpha/2}(n-1)}=\alpha.
-	可得$\mu$的$(1-\alpha)$置信区间为
+	可得$\mu$的$(1 - \alpha)$置信区间为
 	\begin{equation}
-		\biggp{\avg X\pm t_{\alpha/2}(n-1)\frac{S}{\sqrt n}}.
+		\biggp{\avg X \pm t_{\alpha/2}(n - 1)\frac{S}{\sqrt n}}.
 	\end{equation}
 	\begin{notecaptionblock}
 		\captionof{table}{区间估计}
@@ -560,137 +564,138 @@ $\alpha$通常取0.05, 0.01, 0.1，可靠性优先。
 			\toprule
 			条件&估计&枢轴量&置信区间\\
 			\midrule
-			$\sigma^2$已知&$\mu$&$\frac{\avg X-\mu}{\sigma/\sqrt n}$&$\Bigp{\avg X\pm z_{\alpha/2}\frac\sigma{\sqrt n}}$\\[2ex]
-			$\sigma^2$未知&$\mu$&$\frac{\avg X-\mu}{S/\sqrt n}$&$\biggp{\avg X\pm t_{\alpha/2}(n-1)\frac S{\sqrt n}}$\\[2ex]
-			$\mu$未知&$\sigma^2$&$\frac{(n-1)S^2}{\sigma^2}$&$\biggl(\frac{(n-1)S^2}{\chi_{\alpha/2}^2(n-1)},\frac{(n-1)S^2}{\chi_{1-\alpha/2}^2(n-1)}\biggr)$\\
+			$\sigma^2$已知&$\mu$&$\frac{\avg X - \mu}{\sigma/\sqrt n}$&$\bigp{\avg X \pm z_{\alpha/2}\sigma/\sqrt n}$\\[2ex]
+			$\sigma^2$未知&$\mu$&$\frac{\avg X - \mu}{S/\sqrt n}$&$\bigp{\avg X \pm t_{\alpha/2}(n - 1)S/\sqrt n}$\\[2ex]
+			$\mu$未知&$\sigma^2$&$(n - 1)S^2/\sigma^2$&$\biggl(\frac{(n - 1)S^2}{\chi_{\alpha/2}^2(n - 1)},\frac{(n - 1)S^2}{\chi_{1-\alpha/2}^2(n - 1)}\biggr)$\\
 			\bottomrule
 		\end{tabular}
 	\end{notecaptionblock}
 	同理可求单侧置信限，如$\sigma^2$已知时$\mu$的上、下单侧置信限分别为
-	\[
-		\mu^\pm=\avg X\pm z_\alpha\frac\sigma{\sqrt n}
-	\]
+	\begin{equation}\label{eq:ps-one-sided-normal-limits}
+		\mu^\pm = \avg X \pm z_\alpha\frac\sigma{\sqrt n}
+	\end{equation}
 \end{example}
 \begin{example}{两个正态总体}{}
-	$X\sim\NormalDist(\mu_1,\sigma^2),Y\sim\NormalDist(\mu_2,\sigma^2)$独立，$\mu_1,\mu_2,\sigma^2$未知，估计$\mu_1-\mu_2$
+	$X \sim \NormalDist(\mu_1,\sigma^2),Y \sim \NormalDist(\mu_2,\sigma^2)$独立，$\mu_1,\mu_2,\sigma^2$未知，估计$\mu_1 - \mu_2$
 	\begin{align*}
-		\avg X-\mu_1-(\avg Y-\mu_2)&\sim\NormalDist\Bigp{0,\frac{\sigma^2}{n_1}+\frac{\sigma^2}{n_2}};\\
-		\frac{(n_1-1)S_1^2}{\sigma^2}+\frac{(n_2-1)S_2^2}{\sigma^2}&\sim\ChiSqDist(n_1+n_2-2).
+		\avg X - \mu_1 - (\avg Y - \mu_2) &\sim \NormalDist\Bigp{0,\frac{\sigma^2}{n_1} + \frac{\sigma^2}{n_2}};\\
+		\frac{(n_1 - 1)S_1^2}{\sigma^2} + \frac{(n_2 - 1)S_2^2}{\sigma^2} &\sim \ChiSqDist(n_1 + n_2 - 2).
 	\end{align*}
 	利用t分布的定义，构造枢轴变量：
-	\[
-		H:=\frac{\avg X-\mu_1-(\avg Y-\mu_2)}{S_w\sqrt{\frac1{n_1}+\frac1{n_2}}}\sim\TDist(n_1+n_2-2)
-	\]
+	\begin{equation}\label{eq:ps-pooled-t-pivot}
+		H := \frac{\avg X - \mu_1 - (\avg Y - \mu_2)}{S_{\mathrm w}\sqrt{\frac1{n_1} + \frac1{n_2}}} \sim \TDist(n_1 + n_2 - 2)
+	\end{equation}
 	其中 
-	\[
-		S_w:=\sqrt{\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}}
-	\]
-	$\mu_1-\mu_2$的$(1-\alpha)$置信区间为
-	\[
-		\biggp{\avg X-\avg Y\pm t_{\alpha/2}(n_1+n_2-2)S_w\sqrt{\frac1{n_1}+\frac1{n_2}}}
-	\]
+	\begin{equation}\label{eq:ps-pooled-variance}
+		S_{\mathrm w} := \sqrt{\frac{(n_1 - 1)S_1^2 + (n_2 - 1)S_2^2}{n_1 + n_2 - 2}}
+	\end{equation}
+	$\mu_1 - \mu_2$的$(1 - \alpha)$置信区间为
+	\begin{equation}\label{eq:ps-pooled-mean-difference-interval}
+		\biggp{\avg X - \avg Y \pm t_{\alpha/2}(n_1 + n_2 - 2)S_{\mathrm w}\sqrt{\frac1{n_1} + \frac1{n_2}}}
+	\end{equation}
 \end{example}
 \paragraph{大样本方法}
 渐进置信区间
 \begin{example}{选举问题的置信区间估计}{}
-	真实支持率$p$未知，$n=1200$，观测比例
+	真实支持率$p$未知，$n = 1200$，观测比例
 	\[
-		\frac{684}{1200}\doteq 0.57
+		\frac{684}{1200} \doteq 0.57
 	\]
 	给出$p$的一个\qty{95}{\percent} 置信区间。
 
-	近似有放回：$X_i\sim\BernDist(p)$ iid，$P_n=\avg X$，故
+	近似有放回：$X_i \sim \BernDist(p)$ iid，$P_n = \avg X$，故
 	\[
-		\E(P_n)=p,\quad\Var(P_n)=\frac{p(1-p)}n
+		\E(P_n) = p,\quad\Var(P_n) = \frac{p(1 - p)}n
 	\]
 	由CLT，
 	\[
-		\frac{P_n-p}{\sqrt{p(1-p)/n}}\dotsim\NormalDist(0,1).
+		\frac{P_n - p}{\sqrt{p(1 - p)/n}} \dotsim \NormalDist(0,1).
 	\]
 	由于$p$未知，这个方法不能直接用，需要进行一个好的估计。
 	\begin{compactenum}[I]
-		\item 用$S^2$估计$\sigma^2=p(1-p)$，则标准误差
+		\item 用$S^2$估计$\sigma^2 = p(1 - p)$，则标准误差
 			\[
-				\hat{se}=\sqrt{\frac{S^2}n}=0.2475.
+				\hat{\mathrm{se}} = \sqrt{\frac{S^2}n} = \sqrt{\frac{0.57(1 - 0.57)}{1199}} \doteq 0.01430.
 			\]
 			可认为
 			\[
-				\frac{P_n-p}{\hat{se}}\dotsim\NormalDist(0,1).
+				\frac{P_n - p}{\hat{\mathrm{se}}} \dotsim \NormalDist(0,1).
 			\]
 			$p$的\qty{95}{\percent}置信区间
 			\[
-				(P_n\pm z_{\alpha/2}\hat{se})=(0.542,0598)
+				(P_n \pm z_{\alpha/2}\hat{\mathrm{se}}) \doteq (0.5420,0.5980).
 			\]
 		\item 用$m_2$估计$\sigma^2$，
 			\begin{align*}
-				m_2&=\frac1n\sum_{i=1}^n(X_i-\avg X)^2\\
-				&=P_n(1-P_n)^2+(1-P_n)(0-P_n)^2=P_n(1-P_n).
+				m_2 &= \frac1n\sum_{i=1}^n(X_i - \avg X)^2\\
+				&= P_n(1 - P_n)^2 + (1 - P_n)(0 - P_n)^2 = P_n(1 - P_n).
 			\end{align*}
-			相当于用$P_n$估计$p$，估计结果与I相同。
-		\item (Naïve)用$1/4$估计$p(1-p)$，此时$\hat{se}=1/\sqrt{4n}$，估计结果为$(0.542,0.599).$
+			相当于用$P_n$估计$p$，所得区间取到四位小数仍为 $(0.5420,0.5980)$。
+		\item (Naïve)用$1/4$估计$p(1 - p)$，此时$\hat{\mathrm{se}} = 1/\sqrt{4n}$，估计结果为$(0.5417,0.5983)$。
 		\item (不具有推广性)由于 
 		\[
-			\abs{P_n-p}=z_{\alpha/2}\sqrt{\frac{p(1-p)}n},
+			\abs{P_n - p} = z_{\alpha/2}\sqrt{\frac{p(1 - p)}n},
 		\]
-		可以解出$p_\pm$，区间$(p_-,p_+)=(0.542,0598).$
+		可以解出$p_\pm$，区间$(p_-,p_+) \doteq (0.5418,0.5977)$。
 	\end{compactenum}
 \end{example}
 \begin{example}{相合估计}{}
-	上例，极大似然估计$P^\ast=P_n$，由MLE的渐进正态性
+	上例，极大似然估计$P^\ast = P_n$，由MLE的渐进正态性
 	\[
-		\frac{P^\ast-P}{\sigma_n^2}\dotsim\NormalDist(0,1)
+		\frac{P^\ast - p}{\sigma_n} \dotsim \NormalDist(0,1)
 	\]
-	$f(X_i;p)=p^{X_i}(1-p)^{1-X_i}$，故
+	$f(X_i;p) = p^{X_i}(1 - p)^{1-X_i}$，故
 	\[
-		\pp p\ln f(X_i;p)=\frac{X_i}p-\frac{1-X_i}{1-p}=\frac{X_i-p}{p(1-p)}.
+		\pp p\ln f(X_i;p) = \frac{X_i}p - \frac{1 - X_i}{1 - p} = \frac{X_i - p}{p(1 - p)}.
 	\]
 	Fisher信息量
-	\[
-		I(p)=\E\biggb{\biggp{\frac{X_i-p}{p(1-p)}}^2}=\frac1{p(1-p)}.
-	\]
+	\begin{equation}\label{eq:ps-bernoulli-fisher-information}
+		I(p) = \E\biggb{\biggp{\frac{X_i - p}{p(1 - p)}}^2} = \frac1{p(1 - p)}.
+	\end{equation}
 	则
 	\[
-		\frac{P^\ast-p}{1/\sqrt{nI(p)}}\dotsim\NormalDist(0,1).
+		\frac{P^\ast - p}{1/\sqrt{nI(p)}} \dotsim \NormalDist(0,1).
 	\]
 	可以用$I(P^\ast)$估计$I(p)$，即
 	\[
-		\frac{P_n-p}{\sqrt{P_n(1-P_n)/n}}\dotsim\NormalDist(0,1)
+		\frac{P_n - p}{\sqrt{P_n(1 - P_n)/n}} \dotsim \NormalDist(0,1)
 	\]
 \end{example}
 \begin{example}{两个正态总体的相合估计}{}
-	$X\sim\NormalDist(\mu_1,\sigma_1^2),Y\sim\NormalDist(\mu_2,\sigma_2^2)$独立，自然
+	$X \sim \NormalDist(\mu_1,\sigma_1^2),Y \sim \NormalDist(\mu_2,\sigma_2^2)$独立，自然
 	\[
-		\frac{\avg X-\mu_1-(\avg Y-\mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}}\sim\NormalDist(0,1).
+		\frac{\avg X - \mu_1 - (\avg Y - \mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}} \sim \NormalDist(0,1).
 	\]
 	可估计
 	\[
-		\frac{\avg X-\mu_1-(\avg Y-\mu_2)}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}\dotsim\NormalDist(0,1).
+		\frac{\avg X - \mu_1 - (\avg Y - \mu_2)}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}} \dotsim \NormalDist(0,1).
 	\]
 \end{example}
 \section{Bayes区间估计}
-有了$\varTheta$的后验分布$f_{\varTheta\mid X}(\theta\mid x)$
-\[
-	\P(a<\varTheta<b\mid x)=1-\alpha.
-\]
+有了$\varTheta$的后验分布$f_{\varTheta\mid X}(\theta \mid x)$
+\begin{equation}\label{eq:ps-credible-interval}
+	\P(a < \varTheta < b \mid x) = 1 - \alpha.
+\end{equation}
 
 最大后验区间满足
 \[
-	f_{\varTheta\mid X}(a\mid x)=f_{\varTheta\mid X}(b\mid x).
+	f_{\varTheta\mid X}(a \mid x) = f_{\varTheta\mid X}(b \mid x).
 \]
 等尾可信区间满足
-\[
-	\P(\varTheta<a\mid x)=\P(\varTheta>b\mid x)=\frac\alpha{2}.
-\]
+\begin{equation}\label{eq:ps-equal-tailed-credible-interval}
+	\P(\varTheta < a \mid x) = \P(\varTheta > b \mid x) = \frac\alpha{2}.
+\end{equation}
 \paragraph{Review}
 \begin{compactenum}
 	\item 不管是连续还是离散分布，它们的参数都是连续的。
 	\item 置信区间 v.s. Bayes区间（可信区间）
+	设$\hat\theta_i = \hat\theta_i(X_1,\ldots,X_n)$为统计量。随机区间$(\hat\theta_1,\hat\theta_2)$满足
 	\[
-		\P(\hat\theta_1<\theta<\hat\theta_2)\geqslant 1-\alpha,\quad\hat\theta_i=\hat\theta_i(X_1,\ldots,X_n)\text{——统计量}
+		\P(\hat\theta_1 < \theta < \hat\theta_2) \geqslant 1 - \alpha.
 	\]
-	$(\hat\theta_1,\hat\theta_2)$——随机区间。当得到样本具体观测值$(x_1,\ldots,x_n)$代入$\hat\theta_1,\hat\theta_2$得到具体区间。
+	代入具体观测值$(x_1,\ldots,x_n)$便得到一个具体区间。
 	\[
-		\P(a<\varTheta<b\mid x)=1-\alpha.
+		\P(a < \varTheta < b \mid x) = 1 - \alpha.
 	\]
 	后验分布
 	\item 小样本方法v.s.大样本方法：精确分布v.s.近似分布

@@ -17,61 +17,61 @@
 \paragraph{不确定度的传递}
 一个被测量$ y $可能是通过对一些输入变量$x_1,\ldots,x_n$的测量而间接得到的。如果被测量$ y $和输入变量之间满足关系式
 \[
-	y=f(x_1,\ldots,x_n)
+	y = f(x_1,\ldots,x_n)
 \]
 则$ y $的标准不确定度$ u(y) $可以由输入变量的标准不确定度$u(x_1),\ldots,u(x_n)$在输入估计值处作一阶Taylor展开。输入量互不相关时，近似式为
 \begin{equation}
-	u^2(y)\simeq\sum_{i=1}^n\biggp{\pv y{x_i}}^2u^2(x_i)
+	u^2(y) \simeq \sum_{i=1}^n\biggp{\pv y{x_i}}^2u^2(x_i)
 \end{equation}
 线性模型中此式精确。输入变量的标准不确定度可以是A类，也可以是B类。
 
-若具有相关性，$\rho(x_i,x_j)\neq 0$
+若具有相关性，$\rho(x_i,x_j) \neq 0$
 \begin{equation}
-	u^2(y)\simeq\sum_{i,j}\rho(x_i,x_j)\pv y{x_i}\pv y{x_j}u(x_i)u(x_j).
+	u^2(y) \simeq \sum_{i,j}\rho(x_i,x_j)\pv y{x_i}\pv y{x_j}u(x_i)u(x_j).
 \end{equation}
 \paragraph{扩展不确定度}
-设$n$次观测独立且同服从方差未知的正态分布，样本均值、样本标准差分别为$\avg x,s$。总体均值$\mu$的双侧$1-\alpha$置信区间为
+设$n$次观测独立且同服从方差未知的正态分布，样本均值、样本标准差分别为$\avg x,s$。总体均值$\mu$的双侧$1 - \alpha$置信区间为
 \[
-	\avg x\pm t_{\alpha/2}(n-1)\frac{s}{\sqrt n}.
+	\avg x \pm t_{\alpha/2}(n - 1)\frac{s}{\sqrt n}.
 \]
-这里$t_{\alpha/2}(n-1)$是上尾概率为$\alpha/2$的$t$分位数。在这个模型中，区间半宽等于均值的扩展不确定度$U=k u(\avg x)$，其中$u(\avg x)=s/\sqrt n$、$k=t_{\alpha/2}(n-1)$。一般测量模型中的覆盖因子还取决于输出分布及目标覆盖概率。
+这里$t_{\alpha/2}(n - 1)$是上尾概率为$\alpha/2$的$t$分位数。在这个模型中，区间半宽等于均值的扩展不确定度$U = k u(\avg x)$，其中$u(\avg x) = s/\sqrt n$、$k = t_{\alpha/2}(n - 1)$。一般测量模型中的覆盖因子还取决于输出分布及目标覆盖概率。
 \paragraph{不确定度的不确定度}
 对独立、同方差的正态观测作满秩线性最小二乘拟合，残差方差估计为
-\[
-	s^2=\frac1\nu\sum_{i=1}^n\epsilon_i^2
-\]
+\begin{equation}\label{eq:ps-residual-variance}
+	s^2 = \frac1\nu\sum_{i=1}^n\epsilon_i^2
+\end{equation}
 其中$\nu$为自由度，$\epsilon_i$为残差。
 
 $s^2$常用作不确定度的A类估计，它自身的不确定度由$\chi^2$分布估计
 \begin{equation}
 	\label{eqn:uncertainty of uncertainty}
-	\frac\nu{\sigma^2}s^2\sim\ChiSqDist(\nu)\implies u^2(s^2)=\frac{2\sigma^4}\nu.\tag{$\ast$}
+	\frac\nu{\sigma^2}s^2 \sim \ChiSqDist(\nu) \implies u^2(s^2) = \frac{2\sigma^4}\nu.\tag{$\ast$}
 \end{equation}
 如果$ s $表示测量值的标准不确定度，那么$ s $自身的不确定度$ u(s) $为
 \[
-	u^2(s)\simeq\frac1{(2s)^2}u^2(s^2)\implies u(s)=\frac1{\sqrt{2\nu}}\frac{\sigma^2}s\doteq\frac s{\sqrt{2\nu}}.
+	u^2(s) \simeq \frac1{(2s)^2}u^2(s^2) \implies u(s) = \frac1{\sqrt{2\nu}}\frac{\sigma^2}s \doteq \frac s{\sqrt{2\nu}}.
 \]
 自由度$\nu$等于测量值的个数$ n $减去用这些测量值所决定的特征量的
 个数。$s $的相对不确定度表示为
-\[
-	\frac{u(s)}s\sim\frac1{\sqrt{2\nu}}.
-\]
-如果$\nu<4$，那么$ s $的相对不确定度高达\qty{35}{\percent}；而如果$\nu>50$，那么$ s $的相对不确定度会降到$<\qty{10}{\percent}$。
+\begin{equation}\label{eq:ps-uncertainty-relative}
+	\frac{u(s)}s \sim \frac1{\sqrt{2\nu}}.
+\end{equation}
+如果$\nu < 4$，那么$ s $的相对不确定度高达\qty{35}{\percent}；而如果$\nu > 50$，那么$ s $的相对不确定度会降到$< \qty{10}{\percent}$。
 \begin{theorem}{Welch--Satterthwaite公式}{}
-	设两个输入量互不相关，各自的方差估计独立。记$c_i=\p f/\p x_i$为一阶灵敏度系数，在该线性化模型中有
+	设两个输入量互不相关，各自的方差估计独立。记$c_i = \p f/\p x_i$为一阶灵敏度系数，在该线性化模型中有
 	\[
-		u^2(y)=c_1^2u^2(x_1)+c_2^2u^2(x_2),
+		u^2(y) = c_1^2u^2(x_1) + c_2^2u^2(x_2),
 	\]
 	$y $对应的不确定度的不确定度为
 	\[
-		u^2\bigp{u^2(y)}=c_1^4u^2\bigp{u^2(x_1)}+c_2^4u^2\bigp{u^2(x_2)},
+		u^2\bigp{u^2(y)} = c_1^4u^2\bigp{u^2(x_1)} + c_2^4u^2\bigp{u^2(x_2)},
 	\]
 	由$\chi^2$分布，利用“不确定度的不确定度”和自由度$\nu$的关系式\eqref{eqn:uncertainty of uncertainty}
 	\[
-		\frac{2u^4(y)}{\nu_\eff}=\frac{2c_1^4u^4(x_1)}{\nu_1}+\frac{2c_2^4u^4(x_2)}{\nu_2}.
+		\frac{2u^4(y)}{\nu_\eff} = \frac{2c_1^4u^4(x_1)}{\nu_1} + \frac{2c_2^4u^4(x_2)}{\nu_2}.
 	\]
 	$\nu_\eff$为$ y $的等效自由度(不必为整数)，则
-	\[
-		\frac{[c_1^2u^2(x_1)+c_2^2u^2(x_2)]^2}{\nu_\eff}=\frac{c_1^4u^4(x_1)}{\nu_1}+\frac{c_2^4u^4(x_2)}{\nu_2}.
-	\]
+	\begin{equation}\label{eq:ps-effective-degrees-of-freedom}
+		\frac{[c_1^2u^2(x_1) + c_2^2u^2(x_2)]^2}{\nu_\eff} = \frac{c_1^4u^4(x_1)}{\nu_1} + \frac{c_2^4u^4(x_2)}{\nu_2}.
+	\end{equation}
 \end{theorem}
