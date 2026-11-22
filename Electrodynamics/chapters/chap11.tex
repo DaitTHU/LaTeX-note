@@ -7,146 +7,168 @@
 \label{sec:single cavity mode}
 
 仍取半径$a$、长$d$的真空圆柱腔，先将壁视为理想导体。TM$_{010}$模的电场沿轴向，取实模函数$\bm u$并将其峰值归一为1，
-\[
-    \bm u(\bm r)=\uvec z J_0(x_{01}\rho/a),\qquad
-    J_0(x_{01})=0,\quad x_{01}\simeq2.405,\qquad \omega_c=cx_{01}/a .
-\]
-定义模体积$V_{\mathrm m}=\int_V\abs{\bm u}^2\d V$。由$J_0$在侧壁上为零，径向积分给出
+\begin{gather*}
+    \bm u(\bm r) = \uvec z J_0(x_{01}\rho/a),\\
+    J_0(x_{01}) = 0,\quad x_{01} \simeq 2.405,\\
+    \omega_{\mathrm{c}} = cx_{01}/a .
+\end{gather*}
+模体积由模函数的平方在腔内的积分定义。利用$J_0$在侧壁上为零，可得
 \begin{equation}
-    V_{\mathrm m}=2\pi d\int_0^a \rho J_0^2(x_{01}\rho/a)\d\rho
-       =\pi a^2d J_1^2(x_{01})\simeq0.270\,\pi a^2d .
+    \begin{aligned}
+        V_{\mathrm m} &= \int_V\abs{\bm u}^2\d V
+          = 2\pi d\int_0^a \rho J_0^2(x_{01}\rho/a)\d\rho\\
+        &= \pi a^2d J_1^2(x_{01}) \simeq 0.270\,\pi a^2d .
+    \end{aligned}
     \label{eqn:tm010 mode volume}
 \end{equation}
 因此用轴上峰值估算全腔电场能时，应乘这个模体积。离轴电场的减弱已经包含在积分中。
 
 \paragraph{场能给出正则坐标}
-在无源腔内取Coulomb规范和$\Phi=0$，以实函数$q(t)$为这个模式的广义坐标，令
+在无源腔内取Coulomb规范和$\Phi = 0$，以实函数$q(t)$为这个模式的广义坐标，令
+\begin{gather*}
+    \bm A(\bm r,t) = \frac{q(t)\bm u(\bm r)}{\sqrt{\varepsilon_0 V_{\mathrm m}}},\\
+    \bm E = -\pv{\bm A}t,\qquad \bm B = \curl\bm A .
+\end{gather*}
+模函数满足$\curl(\curl\bm u) = (\omega_{\mathrm{c}}/c)^2\bm u$，且$\uvec n \times \bm u = 0$。分部积分消去壁面项，得
 \[
-    \bm A(\bm r,t)=\frac{q(t)\bm u(\bm r)}{\sqrt{\varepsilon_0 V_{\mathrm m}}},
-    \qquad \bm E=-\pv{\bm A}t,\qquad \bm B=\curl\bm A .
+    \int_V\abs{\curl\bm u}^2\d V = (\omega_{\mathrm{c}}/c)^2 V_{\mathrm m}.
 \]
-模函数满足$\curl(\curl\bm u)=(\omega_c/c)^2\bm u$，且$\uvec n\times\bm u=0$。分部积分消去壁面项，得
-$\int_V\abs{\curl\bm u}^2\d V=(\omega_c/c)^2 V_{\mathrm m}$。对瞬时实场积分，电场能和磁场能分别为
-\[
-    U_{\electric}=\frac{\varepsilon_0}{2}\int_V\bm E^2\d V=\frac{\dot q^2}{2},
-    \qquad
-    U_{\magnetic}=\frac{1}{2\mu_0}\int_V\bm B^2\d V=\frac{\omega_c^2q^2}{2}.
-\]
-故$L=U_\electric-U_\magnetic$给出正则动量$p=\dot q$，Hamilton量为$H=(p^2+\omega_c^2q^2)/2$。若经典轴上场的峰值为$E_0$，总储能等于电场能最大值$\varepsilon_0 V_{\mathrm m}\abs{E_0}^2/2$，也与\chapref{chap:waveguide}的复振幅计算相符。
+对瞬时实场积分，电场能和磁场能分别为
+\begin{subequations}
+    \label{eq:ed-cavity-canonical-energies}
+    \begin{align}
+        U_{\electric} &= \frac{\varepsilon_0}{2}\int_V\bm E^2\d V = \frac{\dot q^2}{2},\\
+        U_{\magnetic} &= \frac{1}{2\mu_0}\int_V\bm B^2\d V = \frac{\omega_{\mathrm{c}}^2q^2}{2}.
+    \end{align}
+\end{subequations}
+故$L = U_\electric - U_\magnetic$给出正则动量$p = \dot q$，Hamilton量为$H = (p^2 + \omega_{\mathrm{c}}^2q^2)/2$。若经典轴上场的峰值为$E_0$，总储能等于电场能最大值$\varepsilon_0 V_{\mathrm m}\abs{E_0}^2/2$，也与\chapref{chap:waveguide}的复振幅计算相符。
 
-将$q,p$提升为算符，使$[\hat q,\hat p]=\i\hbar$。写成满足$[\hat a,\hat a^\dagger]=1$的产生、湮灭算符，
-\[
-    \hat q=\sqrt{\frac{\hbar}{2\omega_c}}(\hat a+\hat a^\dagger),\qquad
-    \hat p=-\i\sqrt{\frac{\hbar\omega_c}{2}}(\hat a-\hat a^\dagger),\qquad
-    \hat H=\hbar\omega_c\bigp{\hat a^\dagger\hat a+\tfrac12}.
-\]
+将$q,p$提升为算符，使$[\hat q,\hat p] = \i\hbar$。写成满足$[\hat a,\hat a^\dagger] = 1$的产生、湮灭算符，
+\begin{subequations}
+    \label{eq:ed-mode-quantization}
+    \begin{align}
+        \hat q &= \sqrt{\frac{\hbar}{2\omega_{\mathrm{c}}}}(\hat a + \hat a^\dagger),\\
+        \hat p &= -\i\sqrt{\frac{\hbar\omega_{\mathrm{c}}}{2}}(\hat a - \hat a^\dagger),\\
+        \hat H &= \hbar\omega_{\mathrm{c}}\bigp{\hat a^\dagger\hat a + 1/2}.
+    \end{align}
+\end{subequations}
 由于电场正比于$-\hat p$，在选定的模式相位下有
 \begin{equation}
     \mel 0{\hat{\bm E}(\bm r)}1
-      =\i\sqrt{\frac{\hbar\omega_c}{2\varepsilon_0 V_{\mathrm m}}}\,
+      = \i\sqrt{\frac{\hbar\omega_{\mathrm{c}}}{2\varepsilon_0 V_{\mathrm m}}}\,
        J_0(x_{01}\rho/a)\uvec z .
     \label{eqn:tm010 vacuum matrix element}
 \end{equation}
-这里$\ket1=\hat a^\dagger\ket0$。真空态的平均电场为零，轴上这个模式的电场均方根却等于式\eqref{eqn:tm010 vacuum matrix element}的模。原子沿轴移动时矩阵元不变，沿半径靠近侧壁时则趋于零。
+这里$\ket1 = \hat a^\dagger\ket0$。真空态的平均电场为零，轴上这个模式的电场均方根却等于式\eqref{eqn:tm010 vacuum matrix element}的模。原子沿轴移动时矩阵元不变，沿半径靠近侧壁时则趋于零。
 
 \section{边界附近的发射率}
 \label{sec:cavity spontaneous emission}
 
-设静止的两能级原子有向下跃迁角频率$\omega_a>0$，跃迁偶极矩为$\bm d_{ge}=\mel g{\hat{\bm d}}e$，原子位于$\bm r_a$。自由空间中，电偶极近似给出单个通道的发射率
-\[
-    \Gamma_0=\frac{\omega_a^3\abs{\bm d_{ge}}^2}{3\pi\varepsilon_0\hbar c^3}.
-\]
-《量子力学》卷第8章由两个横向偏振的求和推导了这个结果。改变边界时，电偶极相互作用$\hat H_{\rm int}=-\hat{\bm d}\cdot\hat{\bm E}(\bm r_a)$依然成立，变化的是每个模式的场和允许发射的末态。
+设静止的两能级原子有向下跃迁角频率$\omega_{\mathrm{a}} > 0$，跃迁偶极矩为$\bm d_{\groundstate\excitedstate} = \mel{\groundstate}{\hat{\bm d}}{\excitedstate}$，原子位于$\bm r_{\mathrm{a}}$。自由空间中，电偶极近似给出单个通道的发射率
+\begin{equation}
+    \label{eq:ed-vacuum-emission-rate}
+    \Gamma_0 = \frac{\omega_{\mathrm{a}}^3\abs{\bm d_{\groundstate\excitedstate}}^2}{3\pi\varepsilon_0\hbar c^3}.
+\end{equation}
+《量子力学》卷第8章由两个横向偏振的求和推导了这个结果。改变边界时，电偶极相互作用$\hat H_{\rm int} = -\hat{\bm d} \cdot \hat{\bm E}(\bm r_{\mathrm{a}})$依然成立，变化的是每个模式的场和允许发射的末态。
 
-取真空区域无损电磁场的正频率本征模$\bm f_\nu$，归一化为$\int \bm f_\nu\conj\cdot\bm f_{\nu'}\d V=\delta_{\nu\nu'}$。在大盒极限中用Fermi黄金规则对单光子末态求和，有
-\[
-    \Gamma=\frac{\pi\omega_a}{\varepsilon_0\hbar}
-       \sum_\nu\abs{\bm f_\nu\conj(\bm r_a)\cdot\bm d_{ge}}^2
-                \delta(\omega_a-\omega_\nu).
-\]
+取真空区域无损电磁场的正频率本征模$\bm f_\nu$，归一化为$\textstyle \int \bm f_\nu\conj \cdot \bm f_{\nu'}\d V = \delta_{\nu\nu'}$。在大盒极限中用Fermi黄金规则对单光子末态求和，有
+\begin{equation}
+    \label{eq:ed-mode-summed-emission}
+    \Gamma = \frac{\pi\omega_{\mathrm{a}}}{\varepsilon_0\hbar}
+       \sum_\nu\abs{\bm f_\nu\conj(\bm r_{\mathrm{a}}) \cdot \bm d_{\groundstate\excitedstate}}^2
+                \delta(\omega_{\mathrm{a}} - \omega_\nu).
+\end{equation}
 这正是电磁Green张量的谱展开。对\secref{sec:dyadic-green}的推迟Green张量，在正频率取
-$\Im[(\omega_\nu^2-(\omega+\i0)^2)^{-1}]=\pi\delta(\omega-\omega_\nu)/(2\omega)$，
+$\Im[(\omega_\nu^2 - (\omega + \i0)^2)^{-1}] = \pi\delta(\omega - \omega_\nu)/(2\omega)$，
 可将求和写为
 \begin{equation}
-    \Gamma=\frac{2\omega_a^2}{\hbar\varepsilon_0 c^2}\,
-    \bm d_{ge}\conj\cdot\Im\bm G(\bm r_a,\bm r_a;\omega_a)\cdot\bm d_{ge}.
+    \Gamma = \frac{2\omega_{\mathrm{a}}^2}{\hbar\varepsilon_0 c^2}\,
+    \bm d_{\groundstate\excitedstate}\conj \cdot \Im\bm G(\bm r_{\mathrm{a}},\bm r_{\mathrm{a}};\omega_{\mathrm{a}}) \cdot \bm d_{\groundstate\excitedstate}.
     \label{eqn:decay from Green tensor}
 \end{equation}
-这里假设场起初处于真空，耦合较弱，且环境记忆时间短于原子布居的衰减时间。自由空间的同点虚部为$(\omega_a/6\pi c)\bm I$，代入即恢复$\Gamma_0$。
+这里假设场起初处于真空，耦合较弱，且环境记忆时间短于原子布居的衰减时间。自由空间的同点虚部为$(\omega_{\mathrm{a}}/6\pi c)\bm I$，代入即恢复$\Gamma_0$。
 
 \begin{example}{镜前偶极的寿命}{mirror changes atomic lifetime}
-    将原子移至距理想导体平面$h$处，保持跃迁偶极矩和跃迁频率固定。按给定取向，式\eqref{eqn:decay from Green tensor}的比值$\Gamma/\Gamma_0$恰等于同取向经典偶极的功率比$P/P_0$。在$h=\lambda_a/4$处，$\lambda_a=2\pi c/\omega_a$，往返传播相位为$\pi$。由式\eqref{eqn:mirror-dipole-rates}，
+    将原子移至距理想导体平面$h$处，保持跃迁偶极矩和跃迁频率固定。按给定取向，式\eqref{eqn:decay from Green tensor}的比值$\Gamma/\Gamma_0$恰等于同取向经典偶极的功率比$P/P_0$。在$h = \lambda_{\mathrm{a}}/4$处，$\lambda_{\mathrm{a}} = 2\pi c/\omega_{\mathrm{a}}$，往返传播相位为$\pi$。由式\eqref{eqn:mirror-dipole-rates}，
     \[
-        \frac{\Gamma_\parallel}{\Gamma_0}=1+\frac{3}{2\pi^2},
-        \qquad \frac{\Gamma_\perp}{\Gamma_0}=1+\frac{3}{\pi^2}.
+        \frac{\Gamma_\parallel}{\Gamma_0} = 1 + \frac{3}{2\pi^2},
+        \qquad \frac{\Gamma_\perp}{\Gamma_0} = 1 + \frac{3}{\pi^2}.
     \]
-    若这条跃迁是唯一衰减通道，寿命就分别为自由空间寿命的$0.868$倍和$0.767$倍。在$h\ll\lambda_a$的理想镜面模型中，平行偶极及其反向像偶极在远区相消，垂直偶极则与同向像偶极叠加，两个发射率分别趋于零和$2\Gamma_0$。
+    若这条跃迁是唯一衰减通道，寿命就分别为自由空间寿命的$0.868$倍和$0.767$倍。在$h \ll \lambda_{\mathrm{a}}$的理想镜面模型中，平行偶极及其反向像偶极在远区相消，垂直偶极则与同向像偶极叠加，两个发射率分别趋于零和$2\Gamma_0$。
 \end{example}
 
 \section{腔中的寿命与真空Rabi劈裂}
 \label{sec:purcell and vacuum rabi}
 
-将同一原子置于圆柱腔内。单光子发射的耦合角频率$g$由式\eqref{eqn:tm010 vacuum matrix element}给出，选取原子和光子态的相位使$g\ge0$。令$\eta$表示位置和取向带来的因子，
-\begin{equation}
-    g^2=\frac{\omega_c\abs{\bm d_{ge}}^2}{2\hbar\varepsilon_0 V_{\mathrm m}}\eta,
-    \qquad \eta=J_0^2(x_{01}\rho_a/a)
-        \frac{\abs{\uvec z\cdot\bm d_{ge}}^2}{\abs{\bm d_{ge}}^2}.
-    \label{eqn:local cavity coupling}
-\end{equation}
-轴上沿$z$的偶极取得最大耦合$g_{\max}$，与$z$垂直的偶极与此模耦合为零。下文假设此模孤立、近共振，且$g,\abs{\omega_a-\omega_c}$及各线宽都远小于$\omega_c$，采用旋转波近似。
+将同一原子置于圆柱腔内。单光子发射的耦合角频率$g$由式\eqref{eqn:tm010 vacuum matrix element}给出，选取原子和光子态的相位使$g \ge 0$。令$\eta$表示位置和取向带来的因子，
+\begin{subequations}
+    \begin{align}
+        g^2 &= \frac{\omega_{\mathrm{c}}\abs{\bm d_{\groundstate\excitedstate}}^2}{2\hbar\varepsilon_0 V_{\mathrm m}}\eta, \label{eqn:local cavity coupling}\\
+        \eta &= J_0^2(x_{01}\rho_{\mathrm{a}}/a)
+            \frac{\abs{\uvec z \cdot \bm d_{\groundstate\excitedstate}}^2}{\abs{\bm d_{\groundstate\excitedstate}}^2}.
+    \end{align}
+\end{subequations}
+轴上沿$z$的偶极取得最大耦合$g_{\max}$，与$z$垂直的偶极与此模耦合为零。下文假设此模孤立、近共振，且$g,\abs{\omega_{\mathrm{a}} - \omega_{\mathrm{c}}}$及各线宽都远小于$\omega_{\mathrm{c}}$，采用旋转波近似。
 
 \paragraph{弱耦合下的Purcell效应}
-沿用式\eqref{eqn:cavity wall Q}的约定，腔模能量衰减率为$\kappa=\omega_c/Q$，这里$Q$计入壁损及输出耦合等全部损耗。腔场振幅的衰减率为$\kappa/2$。原子通过其余通道的布居衰减率记为$\Gamma_{\rm bg}$。忽略纯退相干，在以$\omega_a$旋转的参考系中，原子激发态振幅$c_e$与腔内单光子振幅$c_1$满足
-\begin{align}
-    \dot c_e&=-\tfrac12\Gamma_{\rm bg}c_e-\i g c_1, &
-    \dot c_1&=(\i\Delta-\tfrac12\kappa)c_1-\i g c_e,
-    \qquad \Delta=\omega_a-\omega_c .
-    \label{eqn:atom cavity amplitudes}
-\end{align}
-这些振幅描述能量尚留在原子和所选腔模内的单激发分量。若$\kappa\gg g,\Gamma_{\rm bg}$，腔场在原子布居明显改变前就已衰减。在最初的腔瞬态之后，取$\dot c_1\simeq0$，代回原子方程，由$\abs{c_e}^2$的衰减得到
-\[
-    \Gamma_{\rm tot}=\Gamma_{\rm bg}+\Gamma_c,\qquad
-    \Gamma_c=\frac{g^2\kappa}{\Delta^2+(\kappa/2)^2}.
-\]
-因而单激发原子的寿命为$1/\Gamma_{\rm tot}$。只有当其他通道与自由空间相同，才可置$\Gamma_{\rm bg}=\Gamma_0$。将腔通道单独与自由空间的同一跃迁比较，得到
+沿用式\eqref{eqn:cavity wall Q}的约定，腔模能量衰减率为$\kappa = \omega_{\mathrm{c}}/Q$，这里$Q$计入壁损及输出耦合等全部损耗。腔场振幅的衰减率为$\kappa/2$。原子通过其余通道的布居衰减率记为$\Gamma_{\rm bg}$。忽略纯退相干，记失谐量$\Delta = \omega_{\mathrm{a}} - \omega_{\mathrm{c}}$。在以$\omega_{\mathrm{a}}$旋转的参考系中，原子激发态振幅$c_\excitedstate$与腔内单光子振幅$c_1$满足
+\begin{subequations}\label{eqn:atom cavity amplitudes}
+    \begin{align}
+        \dot c_\excitedstate &= -\frac{\Gamma_{\rm bg}}{2}c_\excitedstate - \i g c_1,\\
+        \dot c_1 &= (\i\Delta - \kappa/2)c_1 - \i g c_\excitedstate.
+    \end{align}
+\end{subequations}
+这些振幅描述能量尚留在原子和所选腔模内的单激发分量。若$\kappa \gg g,\Gamma_{\rm bg}$，腔场在原子布居明显改变前就已衰减。在最初的腔瞬态之后，取$\dot c_1 \simeq 0$，代回原子方程，由$\abs{c_\excitedstate}^2$的衰减得到
+\begin{subequations}
+    \label{eq:ed-cavity-enhanced-decay}
+    \begin{align}
+        \Gamma_\tot &= \Gamma_{\rm bg} + \Gamma_{\mathrm{c}},\\
+        \Gamma_{\mathrm{c}} &= \frac{g^2\kappa}{\Delta^2 + (\kappa/2)^2}.
+    \end{align}
+\end{subequations}
+因而单激发原子的寿命为$1/\Gamma_\tot$。只有当其他通道与自由空间相同，才可置$\Gamma_{\rm bg} = \Gamma_0$。将腔通道单独与自由空间的同一跃迁比较，得到
 \begin{equation}
-    \frac{\Gamma_c}{\Gamma_0}
-       =\frac{3}{4\pi^2}\frac{\lambda_a^3 Q}{V_{\mathrm m}}\,
-        \frac{\eta}{1+(2\Delta/\kappa)^2}.
+    \frac{\Gamma_{\mathrm{c}}}{\Gamma_0}
+       = \frac{3}{4\pi^2}\frac{\lambda_{\mathrm{a}}^3 Q}{V_{\mathrm m}}\,
+        \frac{\eta}{1 + (2\Delta/\kappa)^2}.
     \label{eqn:purcell rate}
 \end{equation}
 共振时腔通道的发射率为$4g^2/\kappa$。高$Q$把可用光子态集中在较窄的频带，小模体积增大归一化场强。这两个效应在式\eqref{eqn:purcell rate}中以$Q/V_{\mathrm m}$出现。
 
 \paragraph{共振下的两个本征频率}
-减小腔损耗，腔光子便有时间重新激发原子。以$\ket{e,0},\ket{g,1}$为基底、以$\ket{g,0}$的能量为零点，封闭系统的Hamilton量为
-\[
-    \frac{\hat H_1}{\hbar}=
-    \begin{pmatrix}\omega_a&g\\g&\omega_c\end{pmatrix}.
-\]
-当$\omega_a=\omega_c$时，对称和反对称叠加态$(\ket{e,0}\pm\ket{g,1})/\sqrt 2$的角频率为$\omega_c\pm g$。从$\ket{e,0}$出发，原子布居按$\cos^2(gt)$变化。频域中两个允许的跃迁相距$2g$，称为真空Rabi劈裂。
+减小腔损耗，腔光子便有时间重新激发原子。以$\ket{\excitedstate,0},\ket{\groundstate,1}$为基底、以$\ket{\groundstate,0}$的能量为零点，封闭系统的Hamilton量为
+\begin{equation}
+    \label{eq:ed-single-excitation-hamiltonian}
+    \frac{\hat H_1}{\hbar} =
+    \begin{pmatrix}\omega_{\mathrm{a}}&g\\g&\omega_{\mathrm{c}}\end{pmatrix}.
+\end{equation}
+当$\omega_{\mathrm{a}} = \omega_{\mathrm{c}}$时，对称和反对称叠加态$(\ket{\excitedstate,0} \pm \ket{\groundstate,1})/\sqrt 2$的角频率为$\omega_{\mathrm{c}} \pm g$。从$\ket{\excitedstate,0}$出发，原子布居按$\cos^2(gt)$变化。频域中两个允许的跃迁相距$2g$，称为真空Rabi劈裂。
 
 考虑损耗后，在矩阵的两个对角元分别加上$-\i\Gamma_{\rm bg}/2$和$-\i\kappa/2$。共振时复频率为
 \begin{equation}
-    \tilde\omega_\pm=\omega_c-\frac{\i}{4}(\kappa+\Gamma_{\rm bg})
-       \pm\sqrt{g^2-\frac{(\kappa-\Gamma_{\rm bg})^2}{16}} .
+    \tilde\omega_\pm = \omega_{\mathrm{c}} - \frac{\i}{4}(\kappa + \Gamma_{\rm bg})
+       \pm \sqrt{g^2 - \frac{(\kappa - \Gamma_{\rm bg})^2}{16}} .
     \label{eqn:damped vacuum rabi}
 \end{equation}
-当$g>\abs{\kappa-\Gamma_{\rm bg}}/4$时，两极点已有不同实部。要在弱探测频谱上清楚看见双峰，还需两支模式都耦合到探测通道，峰间距大于各支的线宽和仪器分辨宽度。在$g\gg\kappa,\Gamma_{\rm bg}$的极限，每支峰的功率半高全宽约为$(\kappa+\Gamma_{\rm bg})/2$。
+当$g > \abs{\kappa - \Gamma_{\rm bg}}/4$时，两极点已有不同实部。要在弱探测频谱上清楚看见双峰，还需两支模式都耦合到探测通道，峰间距大于各支的线宽和仪器分辨宽度。在$g \gg \kappa,\Gamma_{\rm bg}$的极限，每支峰的功率半高全宽约为$(\kappa + \Gamma_{\rm bg})/2$。
 
 \begin{example}{改变同一模式的输出损耗}{cavity lifetime and splitting}
-    设原子位于轴上、偶极沿$z$，固定$\Gamma_{\rm bg}=g/100$。令原子与腔共振，调节输出耦合，在小扰动下保持腔模形状和$g$固定。若$\kappa=40g$，腔带来的发射率为$0.10g$，布居寿命约为$1/(0.11g)$。将失谐调至$\abs\Delta=\kappa/2$，此通道减半，寿命增至约$1/(0.06g)$。
-    若调回共振并使$\kappa=0.20g$，式\eqref{eqn:damped vacuum rabi}给出的极点间距约为$2.00g$，每支线宽约为$0.105g$。此时原子与光子相干交换能量，低损耗使两个联合模式可以在频谱上分辨。
+    设原子位于轴上、偶极沿$z$，固定$\Gamma_{\rm bg} = g/100$。令原子与腔共振，调节输出耦合，在小扰动下保持腔模形状和$g$固定。若$\kappa = 40g$，腔带来的发射率为$0.10g$，布居寿命约为$1/(0.11g)$。将失谐调至$\abs\Delta = \kappa/2$，此通道减半，寿命增至约$1/(0.06g)$。
+    若调回共振并使$\kappa = 0.20g$，式\eqref{eqn:damped vacuum rabi}给出的极点间距约为$2.00g$，每支线宽约为$0.105g$。此时原子与光子相干交换能量，低损耗使两个联合模式可以在频谱上分辨。
 \end{example}
 
-在同样的初态$c_e(0)=1,\ c_1(0)=0$下，可以直接计算这两种测量。图\ref{fig:cavity observables}左图由式\eqref{eqn:atom cavity amplitudes}求出激发态布居。右图取低损耗共振腔，测从腔输出口离开的光子。记$\delta=\omega-\omega_c$，输出谱正比于$\abs{\int_0^\infty c_1(t)\e^{\i\delta t}\d t}^2$。将两个振幅方程作单边Fourier变换，得到归一化前的谱形
-\[
-    S_{\rm out}(\delta)\ \propto\
-    \frac{g^2}{\bigabs{(\kappa/2-\i\delta)(\Gamma_{\rm bg}/2-\i\delta)+g^2}^2}.
-\]
+在同样的初态$c_\excitedstate(0) = 1,\ c_1(0) = 0$下，可以直接计算这两种测量。图\ref{fig:cavity observables}左图由式\eqref{eqn:atom cavity amplitudes}求出激发态布居。右图取低损耗共振腔，测从腔输出口离开的光子。记$\delta = \omega - \omega_{\mathrm{c}}$。输出谱正比于腔内单光子振幅的单边Fourier变换的模平方。对两个振幅方程作变换，得到归一化前的谱形
+\begin{equation}
+    \label{eq:ed-cavity-output-spectrum}
+    \begin{aligned}
+        S_{\rm out}(\delta) &\propto \biggabs{\int_0^\infty c_1(t)\e^{\i\delta t}\d t}^2\\
+          &= \frac{g^2}{\bigabs{(\kappa/2 - \i\delta)(\Gamma_{\rm bg}/2 - \i\delta) + g^2}^2}.
+    \end{aligned}
+\end{equation}
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=.92\linewidth]{figures/cavity_decay_spectrum.pdf}
-    \caption{同一跃迁的激发态布居和腔输出谱。左图取$\kappa=40g$，右图取$\kappa=0.20g$且腔与原子共振，两图均取$\Gamma_{\rm bg}=0.01g$。}
+    \caption{同一跃迁的激发态布居和腔输出谱。左图取$\kappa = 40g$，右图取$\kappa = 0.20g$且腔与原子共振，两图均取$\Gamma_{\rm bg} = 0.01g$。}
     \label{fig:cavity observables}
 \end{figure}
 
@@ -155,27 +177,28 @@ $\Im[(\omega_\nu^2-(\omega+\i0)^2)^{-1}]=\pi\delta(\omega-\omega_\nu)/(2\omega)$
 
 单个腔模在基态也有$\hbar\omega/2$的能量。改变板距会改变整组本征频率，可以通过板间压力测得基态能量差对几何的依赖。\footnote{H. B. G. Casimir，\href{https://web.mit.edu/kardar/www/research/seminars/Casimir/Casimir1948.pdf}{On the Attraction Between Two Perfectly Conducting Plates} (1948)。}考虑零温下两块面积为$S$、相距$a$的平行理想导体，板间为真空，忽略边缘。平行于板面的$\bm k_\parallel$连续，法向波数取$n\pi/a$，故
 \[
-    \omega_n=c\sqrt{k_\parallel^2+(n\pi/a)^2},\qquad n=0,1,2,\ldots .
+    \omega_n = c\sqrt{k_\parallel^2 + (n\pi/a)^2},\qquad n = 0,1,2,\ldots .
 \]
-对$n\ge1$有两种偏振。对$n=0$，沿板法向的电场允许存在，另一偏振的切向电场在两块板上均须为零，故只剩一种偏振。
+对$n \ge 1$有两种偏振。对$n = 0$，沿板法向的电场允许存在，另一偏振的切向电场在两块板上均须为零，故只剩一种偏振。
 
-用同一长度参数$\ell>0$为所有零点能乘上截止因子$\exp(-\ell\omega/c)$。保留两板相互作用引起的能量差时，须减去板距无限大、相同体积内的真空能。这样内外相同的体能密度不给板施加净力。设$b=\pi/a$，对横向波矢以$k=\omega/c$换元，$k_\parallel\d k_\parallel=k\d k$，得
+用同一长度参数$\ell > 0$为所有零点能乘上截止因子$\exp(-\ell\omega/c)$。保留两板相互作用引起的能量差时，须减去板距无限大、相同体积内的真空能。这样内外相同的体能密度不给板施加净力。设$b = \pi/a$，对横向波矢以$k = \omega/c$换元，$k_\parallel\d k_\parallel = k\d k$，得
 \begin{align*}
     \frac{E_{\rm int}(a,\ell)}{S}
-       &=\frac{\hbar c}{2\pi}\biggl[
+       &= \frac{\hbar c}{2\pi}\biggl[
            \sum_{n=0}^\infty{}'F_\ell(nb)
-           -\frac{1}{b}\int_0^\infty F_\ell(t)\d t\biggr],\\
-    F_\ell(t)&=\int_t^\infty k^2\e^{-\ell k}\d k .
+           - \frac{1}{b}\int_0^\infty F_\ell(t)\d t\biggr],\\
+    F_\ell(t) &= \int_t^\infty k^2\e^{-\ell k}\d k .
 \end{align*}
-求和符号的撇表示$n=0$项取半权，已将两种偏振的公共因子提到求和之外。连续极限的法向模密度为$1/b$。在截止因子相同的条件下作差，可用Euler--Maclaurin公式求其有限部分，
+求和符号的撇表示$n = 0$项取半权，已将两种偏振的公共因子提到求和之外。连续极限的法向模密度为$1/b$。在截止因子相同的条件下作差，可用Euler--Maclaurin公式求其有限部分，
 \[
-    \sum_{n=0}^\infty{}'F_\ell(nb)-\frac{1}{b}\int_0^\infty F_\ell(t)\d t
-       =-\frac{b}{12}F_\ell'(0)+\frac{b^3}{720}F_\ell'''(0)+\bigo(b^5\ell^2).
+    \sum_{n=0}^\infty{}'F_\ell(nb) - \frac{1}{b}\int_0^\infty F_\ell(t)\d t
+       = -\frac{b}{12}F_\ell'(0) + \frac{b^3}{720}F_\ell'''(0) + \bigo(b^5\ell^2).
 \]
-由于$F_\ell'(t)=-t^2\e^{-\ell t}$，前两个所需导数为$F_\ell'(0)=0$、$F_\ell'''(0)=-2$。固定$a$取$\ell\to0^+$，得到单位面积的相互作用能及法向压力
-\begin{equation}
-    \frac{E_{\rm int}(a)}{S}=-\frac{\pi^2\hbar c}{720a^3},\qquad
-    P=-\dd a\biggl(\frac{E_{\rm int}}S\biggr)=-\frac{\pi^2\hbar c}{240a^4}.
-    \label{eqn:Casimir pressure}
-\end{equation}
-负号表示两块板相吸。若$a=\qty{1}{\micro\metre}$，理想模型给出$\abs P\simeq\qty{1.30e-3}{\pascal}$。将板距减半，吸引压强增大到16倍。有限导电率或有限温度下须相应改变反射边界或场模的占据数。
+由于$F_\ell'(t) = -t^2\e^{-\ell t}$，前两个所需导数为$F_\ell'(0) = 0$、$F_\ell'''(0) = -2$。固定$a$取$\ell \to 0^+$，得到单位面积的相互作用能及法向压力
+\begin{subequations}
+    \begin{align}
+        \frac{E_{\rm int}(a)}{S} &= -\frac{\pi^2\hbar c}{720a^3},\\
+        P &= -\dd a\biggl(\frac{E_{\rm int}}S\biggr) = -\frac{\pi^2\hbar c}{240a^4}. \label{eqn:Casimir pressure}
+    \end{align}
+\end{subequations}
+负号表示两块板相吸。若$a = \qty{1}{\micro\metre}$，理想模型给出$\abs P \simeq \qty{1.30e-3}{\pascal}$。将板距减半，吸引压强增大到16倍。有限导电率或有限温度下须相应改变反射边界或场模的占据数。

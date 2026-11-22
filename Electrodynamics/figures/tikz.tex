@@ -90,7 +90,7 @@
     \draw[thick](0, 0)node[left]{$O$}circle(1.5);
     \draw[thick, <->](0, 3)node[left]{$\Phi$}--(0, 0)--(5, 0)node[right]{$r$};
     \draw[dashed](1.5, 0)node[below right]{$R$}--(1.5, 2);
-    \draw[thick](0, 2)node[left]{$\displaystyle\frac1{4\pi\varepsilon_0}\frac qR$}--(1.5, 2);
+    \draw[thick](0, 2)node[left]{$q/(4\pi\varepsilon_0R)$}--(1.5, 2);
     \draw[thick, domain=1.5:5]plot(\x, {3/\x});
     \label{phi-of-sphere-conductor}
 \end{tikzpicture}
@@ -132,14 +132,14 @@
 \begin{tikzpicture}[circuit ee IEC]
     \begin{scope}
         \fill[pattern=north east lines](-.3, 0)rectangle(0, 4);
-        \draw[thick](0, 0)--(0, 4)node[right]{$\Phi=0$};
+        \draw[thick](0, 0)--(0, 4)node[right]{$\Phi = 0$};
         \draw (0, 0.5) to (0.8, 0.5) to [ground={at end}] (0.8, 0.15);
         \draw[dashed](0, 2)--(2, 2)node[below]{$d$};
         \fill[black](2, 2)circle(.05)node[above]{$q$};
     \end{scope}
     \node at (3, 2) {$\iff$};
     \begin{scope}[xshift=6cm]
-        \draw[dashed](0, 0)--(0, 4)node[right]{$\Phi=0$};
+        \draw[dashed](0, 0)--(0, 4)node[right]{$\Phi = 0$};
         \draw[dashed](-2, 2)--(2, 2);
         \fill[black](2, 2)circle(.05)node[above]{$q$};
         \fill[black](-2, 2)circle(.05)node[above]{$q'$};
@@ -278,7 +278,7 @@
 \begin{tikzpicture}
     \fill[gray!25](0, 0)rectangle(4, 4);
     \fill[gray!50](0, 0)rectangle(-2, 4);
-    \node at(-1, 3){$\mu_1\gg\mu_2$};
+    \node at(-1, 3){$\mu_1 \gg \mu_2$};
     \node at(2, 3){$\mu_2$};
     \draw[thick](0, 0)--(0, 4);
     \draw[dashed, <->](-.5, 2)--(-1.5, 2)--(-1.5, 1.5);
@@ -469,16 +469,18 @@
 \end{tikzpicture}
 
 \begin{tikzpicture}[scale=1.2]
-    \draw[->-](0, 0)--(2, 0)node[shift={(.2, -.3)}]{$O$};
-    \draw[thick](2-.5, -.5)--(2.5, .5)node[above right]{BS};
-    \draw[->-](2, 0)--(5, 0)node[midway, below]{$c+u$};
-    \draw[-<-](2.1, .1)--(5, .1)node[midway, above]{$c-u$};
+    \draw[->-](0, 0)--(2, 0)node[shift={(-.35, -.15)}]{$O$};
+    \draw[thick,dashed](2-.5, -.5)--(2.5, .5)node[above right]{BS};
+    \draw[->-](2, 0)--(5, 0)node[midway, below]{$c - u$};
+    \draw[-<-](2.1, .1)--(5, .1)node[midway, above]{$c + u$};
     \fill[pattern=north east lines](5, .5)rectangle(5.2, -.5);
     \draw[thick](5, -.5)--(5, .5)node[above]{M$_1$};
-    \draw[->-](2, 0)--(2, 3)node[midway, left]{$\sqrt{c^2-u^2}$};
+    \draw[->-](2, 0)--(2, 3)node[midway, left]{$\sqrt{c^2 - u^2}$};
     \draw[-<-](2.1, .1)--(2.1, 3);
     \fill[pattern=north east lines](1.5, 3)rectangle(2.5, 3.2);
     \draw[thick](1.5, 3)--(2.5, 3)node[right]{M$_2$};
+    \draw[->-](2.1,.1)--(2.1,-1.08);
+    \node[draw,anchor=north] at (2.1,-1.08) {$\mathrm D$};
     \draw[<-](3.5, 1.5)--(4.5, 1.5)node[midway, below]{$u$}node[midway, above]{ether wind};
     \label{michelson-morley-experiment}
 \end{tikzpicture}
@@ -972,7 +974,7 @@
 		\end{scope}
 	\end{pgfonlayer}
 	%% Intensities of Light
-	\node at (0.5,0,1.2) {\small{$I_o$}};
+	\node at (0.5,0,1.2) {\small{$I_0$}};
 	\node at (3.8,0,1.2) {\small{$I_1$}};
 	\node at (8,0,1.4) {\small{$I_2$}};
 	\node at (12,0,0.8) {\small{$I_3$}};
@@ -1207,7 +1209,7 @@
       \fi
     }
     \draw[thick] (0,0,\L/2) -- (0,0,\L);
-    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.4*\L) {$\dfrac{I_0}{2}$}; %, $\ang{90}$
+    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.4*\L) {$I_0/2$}; %, $\ang{90}$
   \end{scope}
 
   % SECTION 3
@@ -1225,7 +1227,7 @@
         \draw[Evec] (0,0,\z) --++ (45:{\A*cos(\k*\z)*cos(45)});
       \fi
     }
-    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.4*\L) {$\dfrac{I_0}{2}\cos^2(\ang{45})$}; %, $\ang{45}$
+    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.4*\L) {$I_0\cos^2(\ang{45})/2$}; %, $\ang{45}$
   \end{scope}
 
   % SECTION 4
@@ -1247,7 +1249,7 @@
         \draw[Evec] (0,0,\z) --++ (0:{\A*cos(\k*\z)*cos(45)^2});
       \fi
     }
-    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.45*\L) {$\dfrac{I_0}{2}\cos^4(\ang{45})$}; %, $\ang{0}$
+    \node[scale=0.9,yslant=tan(-10)] at (0,-1.4*\A,0.45*\L) {$I_0\cos^4(\ang{45})/2$}; %, $\ang{0}$
   \end{scope}
 
     \label{three-polarizers}
@@ -1592,11 +1594,11 @@
         \y=\L/sqrt((\a/(\lambd*\i))^2-1);
                 }] in {1,...,\Nlines}{
       \ifodd\i
-        \tick{0,-\y}{180} node[right=0,scale=0.85] {$m=-\frac{\modd}{2}$};
-        \tick{0,\y}{180} node[right=0,scale=0.85] {$m=+\frac{\modd}{2}$};
+        \tick{0,-\y}{180} node[right=0,scale=0.85] {$m = -\modd/2$};
+        \tick{0,\y}{180} node[right=0,scale=0.85] {$m = +\modd/2$};
       \else
-        \tick{0,-\y}{180} node[right=0,scale=0.85] {$m=-\meven$};
-        \tick{0,\y}{180} node[right=0,scale=0.85] {$m=+\meven$};
+        \tick{0,-\y}{180} node[right=0,scale=0.85] {$m = -\meven$};
+        \tick{0,\y}{180} node[right=0,scale=0.85] {$m = +\meven$};
       \fi
     }
   \end{scope}
@@ -1746,9 +1748,9 @@
     \draw[gray,thick] (-.85,.05) .. controls (.3,-.10) and (1.65,.08) ..
         (2.35,.56) .. controls (2.65,.76) and (2.95,1.00) .. (3.12,1.18);
     \draw[->,thick] (A)--(P) node[pos=.47,above left] {$R$};
-    \draw[->,thick,dashed] (B)--(P) node[pos=.62,below right] {$R+\d R$};
+    \draw[->,thick,dashed] (B)--(P) node[pos=.62,below right] {$R + \d R$};
     \fill (A) circle (1.8pt) node[below left] {$\bm r_q(t')$};
-    \fill (B) circle (1.8pt) node[below right] {$\bm r_q(t'+\d t')$};
+    \fill (B) circle (1.8pt) node[below right] {$\bm r_q(t' + \d t')$};
     \fill (P) circle (2pt) node[above] {$\bm r$};
     \label{moving-charge-retardation}
 \end{tikzpicture}
@@ -1768,13 +1770,58 @@
     }
     \draw[photon,->] (-.68,1.16) node[above] {$k$} -- (0,0);
     \draw[photon,->] (2,0) -- (2.68,1.16) node[above] {$k'$};
-    \node[below=4pt] at (1,0) {$p+k$};
+    \node[below=4pt] at (1,0) {$p + k$};
     \begin{scope}[xshift=5.6cm]
         \draw[photon,->] (0,0) -- (.52,1.16) node[above] {$k'$};
         \draw[photon,->] (1.48,1.16) node[above] {$k$} -- (2,0);
-        \node[below=4pt] at (1,0) {$p-k'$};
+        \node[below=4pt] at (1,0) {$p - k'$};
     \end{scope}
     \label{compton-tree-graphs}
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=Latex,ray/.style={blue!65!black,thick,postaction={decorate},
+    decoration={markings,mark=at position .55 with {\arrow{Latex}}}}]
+    \label{fresnel-rhomb-path}
+    % 入射、出射均垂直端面。长边倾角为 40 度，两次内反射角均为 50 度。
+    \pgfmathsetmacro{\slope}{tan(40)}
+    \coordinate (first) at (1.50,0);
+    \pgfmathsetmacro{\run}{1.65/(tan(80)-\slope)}
+    \coordinate (second) at (1.50+\run,{\run*tan(80)});
+    \filldraw[fill=blue!5,draw=black,thick] (0,{-1.50*\slope})
+        -- ++(3.1,{3.1*\slope}) -- ++(0,1.65) -- ++(-3.1,{-3.1*\slope}) -- cycle;
+    \draw[ray] (-1.3,0) -- (first);
+    \draw[ray] (first) -- (second);
+    \draw[blue!65!black,thick,->] (second) -- ++(2.8,0);
+    \draw[gray,dashed] (first) ++(-50:.40) -- ++(130:1.38);
+    \draw (first) ++(130:.5) arc[start angle=130,end angle=180,radius=.5];
+    \path (first) ++(155:.75) node {$\theta$};
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=Latex]
+    \label{circular-aperture-geometry}
+    % 孔面正视图，x 轴取在观察方向的投影上。
+    \begin{scope}
+        \draw[thick] (0,0) circle (1.19);
+        \draw[->] (-1.40,0) -- (1.60,0) node[right] {$x$};
+        \draw[->] (0,-1.35) -- (0,1.46) node[above] {$y$};
+        \draw[->,blue!65!black,thick] (0,0) -- (38:.95);
+        \node[blue!65!black] at (.52,.72) {$\bm r'$};
+        \draw (0:.44) arc[start angle=0,end angle=38,radius=.44];
+        \node at (18:.64) {$\phi$};
+        \draw[<->] (0,0) -- node[below left,inner sep=1.5pt] {$a$} (135:1.19);
+    \end{scope}
+    % xz 截面，入射光沿 z 传播，远场观测点为 P。
+    \begin{scope}[xshift=4.1cm]
+        \foreach \y in {-.43,0,.43}
+            \draw[->,blue!65!black] (-1.15,\y) -- (-.17,\y);
+        \draw[line width=2pt] (0,.65) -- (0,1.4) (0,-.65) -- (0,-1.4);
+        \draw[gray,dashed] (0,-.65) -- (0,.65);
+        \draw[->] (0,0) -- (3.15,0) node[right] {$z$};
+        \draw[->,thick] (0,0) -- (2.85,1.32) node[above] {$P$};
+        \node[above] at (1.70,.81) {$\uvec n$};
+        \draw (0:.75) arc[start angle=0,end angle=24.85,radius=.75];
+        \node at (12:1.02) {$\theta$};
+    \end{scope}
 \end{tikzpicture}
 
 \end{document}

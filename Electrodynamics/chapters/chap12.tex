@@ -5,61 +5,70 @@
 
 \section{Dirac电流与单光子交换}
 
-沿用\chapref{chap:relativistic electromagnetic}的度规$g_{\mu\nu}=\diag(-1,1,1,1)$，四动量$p^\mu=(E/c,\bm p)$的各分量都具有动量量纲。以下写$M=mc$，于是质量为$m$的粒子在壳时$p^2=-M^2$。为直接使用《量子力学》第十五章的Dirac矩阵$\beta,\alpha^i$，取
-\[
-    \gamma^0=\beta,\qquad \gamma^i=\beta\alpha^i,\qquad
-    \{\gamma^\mu,\gamma^\nu\}=-2g^{\mu\nu}\mathbf1,\qquad
-    \not a:=-\gamma^\mu a_\mu=\gamma^0a^0-\sum_i\gamma^i a^i .
-\]
-这样$(\not p)^2=-p^2$。正能平面波的相位为$\exp(\i p_\mu x^\mu/\hbar)$，其时间因子为$\exp(-\i Et/\hbar)$。
+沿用\chapref{chap:relativistic electromagnetic}的度规$g_{\mu\nu} = \diag(-1,1,1,1)$，四动量$p^\mu = (E/c,\bm p)$的各分量都具有动量量纲。以下写$M = mc$，于是质量为$m$的粒子在壳时$p^2 = -M^2$。为直接使用《量子力学》第十五章的Dirac矩阵$\beta,\alpha^i$，取
+\begin{gather*}
+    \gamma^0 = \beta,\qquad \gamma^i = \beta\alpha^i,\\
+    \{\gamma^\mu,\gamma^\nu\} = -2g^{\mu\nu}\mathbf1,\\
+    \not a := -\gamma^\mu a_\mu = \gamma^0a^0 - \sum_i\gamma^i a^i .
+\end{gather*}
+这样$(\not p)^2 = -p^2$。正能平面波的相位为$\exp(\i p_\mu x^\mu/\hbar)$，其时间因子为$\exp(-\i Et/\hbar)$。
 
 \paragraph{源与外线态}
-设场$\psi$的粒子电荷为$q$，记$\bar\psi=\psi^\dagger\gamma^0$。将Dirac方程中的导数换成$\p_\mu-\i q A_\mu/\hbar$，物质场的Lagrange密度为
-\[
-    \mathcal L_\mathrm{D}
-    =c\bar\psi(\i\hbar\gamma^\mu\p_\mu-M)\psi+J^\mu A_\mu,
-    \qquad J^\mu=qc\,\bar\psi\gamma^\mu\psi .
-\]
-$J^0/c=q\psi^\dagger\psi$就是电荷密度。用Dirac方程及其伴随方程分别作用于$\psi$和$\bar\psi$，可得$\p_\mu J^\mu=0$。量子场的电流算符取正规序，使自由场真空的净电荷为零。
+设场$\psi$的粒子电荷为$q$，记$\bar\psi = \psi^\dagger\gamma^0$。将Dirac方程中的导数换成$\p_\mu - \i q A_\mu/\hbar$，物质场的Lagrange密度为
+\begin{subequations}
+    \label{eq:ed-dirac-field-current}
+    \begin{align}
+        \mathcal L_\mathrm{D}
+        &= c\bar\psi(\i\hbar\gamma^\mu\p_\mu - M)\psi + J^\mu A_\mu,\\
+        J^\mu &= qc\,\bar\psi\gamma^\mu\psi .
+    \end{align}
+\end{subequations}
+$J^0/c = q\psi^\dagger\psi$就是电荷密度。用Dirac方程及其伴随方程分别作用于$\psi$和$\bar\psi$，可得$\p_\mu J^\mu = 0$。量子场的电流算符取正规序，使自由场真空的净电荷为零。
 
 在体积$V$内取周期边界条件，自由Dirac场展开为
-\[
-    \hat\psi(x)=\sum_{\bm p,s}\frac{1}{\sqrt{2p^0 V}}
+\begin{equation}
+    \label{eq:ed-dirac-field-expansion}
+    \hat\psi(x) = \sum_{\bm p,s}\frac{1}{\sqrt{2p^0 V}}
     \left[\hat b_{\bm p s}u_s(p)\e^{\i p\cdot x/\hbar}
-    +\hat d_{\bm p s}^\dagger v_s(p)\e^{-\i p\cdot x/\hbar}\right].
-\]
-旋量满足$(\not p-M)u_s=0$、$(\not p+M)v_s=0$，归一化取$\bar u_s u_{s'}=2M\delta_{ss'}$、$\bar v_s v_{s'}=-2M\delta_{ss'}$。$\hat b^\dagger$和$\hat d^\dagger$分别产生电荷$q$的粒子和电荷$-q$的反粒子。以电子场为例，入射和出射电子在振幅中分别给出$u$和$\bar u$，入射和出射正电子分别给出$\bar v$和$v$。实光子的初、末态分别给出横向偏振矢量$\epsilon^\mu_\lambda$和$\epsilon^{\mu *}_\lambda$。在辐射规范中$\epsilon^0=0$，空间部分为垂直于光子动量的两个单位偏振矢量之一。
+    + \hat d_{\bm p s}^\dagger v_s(p)\e^{-\i p\cdot x/\hbar}\right].
+\end{equation}
+旋量满足$(\not p - M)u_s = 0$、$(\not p + M)v_s = 0$，归一化取$\bar u_s u_{s'} = 2M\delta_{ss'}$、$\bar v_s v_{s'} = -2M\delta_{ss'}$。$\hat b^\dagger$和$\hat d^\dagger$分别产生电荷$q$的粒子和电荷$-q$的反粒子。以电子场为例，入射和出射电子在振幅中分别给出$u$和$\bar u$，入射和出射正电子分别给出$\bar v$和$v$。实光子的初、末态分别给出横向偏振矢量$\epsilon^\mu_\lambda$和$\epsilon^{\mu *}_\lambda$。在辐射规范中$\epsilon^0 = 0$，空间部分为垂直于光子动量的两个单位偏振矢量之一。
 
 \paragraph{传播子}
 对一个振幅按相互作用作微扰展开，两个顶角之间传播的自由场给出时间有序的两点函数。写成四动量表示，从内线与顶角抽出SI归一化常数，把每个带电顶角的耦合强度记作
-\[
-    g_q=\frac{q}{\sqrt{\varepsilon_0\hbar c}},\qquad
-    g_e^2=4\pi\alpha,\qquad \alpha=\frac{e^2}{4\pi\varepsilon_0\hbar c},
-\]
-其中$e>0$为元电荷。以此归一化计算无量纲不变振幅，费米子内线为$\i S(P)$，Feynman规范的光子内线为$D_{\mu\nu}(Q)$，其中
-\begin{equation}
-    S(P)=\frac{\not P+M}{-P^2-M^2+\i0},\qquad
-    D_{\mu\nu}(Q)=\frac{\i g_{\mu\nu}}{-Q^2+\i0}.
-    \label{eq:qed propagators}
-\end{equation}
-分母是相应自由波算符的本征值，$\i0$指定时间有序的绕极点方向。静电势对应的交换光子传递空间动量，通常$Q^2>0$。若改变协变规范，光子传播子的变化正比于$Q_\mu Q_\nu$。它与在壳电流$j^\mu=\bar u(p')\gamma^\mu u(p)$收缩时消失，因为$Q_\mu j^\mu=-\bar u(p')(\not p'-\not p)u(p)=0$。
+\begin{subequations}
+    \label{eq:ed-qed-charge-convention}
+    \begin{align}
+        g_q &= \frac{q}{\sqrt{\varepsilon_0\hbar c}},\\
+        g_e^2 &= 4\pi\alpha,\\
+        \alpha &= \frac{e^2}{4\pi\varepsilon_0\hbar c},
+    \end{align}
+\end{subequations}
+其中$e > 0$为元电荷。以此归一化计算无量纲不变振幅，Fermi 子内线为$\i S(P)$，Feynman规范的光子内线为$D_{\mu\nu}(Q)$，其中
+\begin{subequations}\label{eq:qed propagators}
+    \begin{align}
+        S(P) &= \frac{\not P + M}{-P^2 - M^2 + \i0},\\
+        D_{\mu\nu}(Q) &= \frac{\i g_{\mu\nu}}{-Q^2 + \i0}.
+    \end{align}
+\end{subequations}
+分母是相应自由波算符的本征值，$\i0$指定时间有序的绕极点方向。静电势对应的交换光子传递空间动量，通常$Q^2 > 0$。若改变协变规范，光子传播子的变化正比于$Q_\mu Q_\nu$。它与在壳电流$j^\mu = \bar u(p')\gamma^\mu u(p)$收缩时消失，因为$Q_\mu j^\mu = -\bar u(p')(\not p' - \not p)u(p) = 0$。
 
 \begin{example}{由单光子交换求Coulomb势}{qed Coulomb exchange}
-    考虑两种可以区分的带电粒子，例如电子和缪子。记其质量和电荷为$m_i,q_i$，$M_i=m_i c$。最低阶只有一条连接两个电流的光子内线。令$Q=p'_1-p_1$，略去守恒自旋的指标，其振幅为
+    考虑两种可以区分的带电粒子，例如电子和缪子。记其质量和电荷为$m_i,q_i$，$M_i = m_i c$。最低阶只有一条连接两个电流的光子内线。令$Q = p'_1 - p_1$，略去守恒自旋的指标，其振幅为
     \[
-        \mathcal M=g_{q_1}g_{q_2}\frac{g_{\mu\nu}j_1^\mu j_2^\nu}{Q^2}
+        \mathcal M = g_{q_1}g_{q_2}\frac{g_{\mu\nu}j_1^\mu j_2^\nu}{Q^2}
         \simeq -\frac{4M_1M_2\,g_{q_1}g_{q_2}}{\abs{\bm Q}^2}.
     \]
-    最后一步取低速极限，此时$j_i^0\simeq2M_i$，空间电流比时间分量小$v_i/c$量级，且$|Q^0|\ll\abs{\bm Q}$。为匹配到普通量子力学，在质心系用阈值附近的散射振幅$f\simeq\hbar\mathcal M/[8\pi(M_1+M_2)]$。一阶Born近似给出$f=-m_\mathrm{red}\widetilde V/(2\pi\hbar^2)$，$m_\mathrm{red}=m_1m_2/(m_1+m_2)$是约化质量。故
+    最后一步取低速极限，此时$j_i^0 \simeq 2M_i$，空间电流比时间分量小$v_i/c$量级，且$|Q^0| \ll \abs{\bm Q}$。为匹配到普通量子力学，在质心系用阈值附近的散射振幅$f \simeq \hbar\mathcal M/[8\pi(M_1 + M_2)]$。一阶Born近似给出$f = -m_\mathrm{red}\widetilde V/(2\pi\hbar^2)$，$m_\mathrm{red} = m_1m_2/(m_1 + m_2)$是约化质量。故
     \[
-        \widetilde V(\bm Q)=-\frac{\hbar^3 c}{4M_1M_2}\mathcal M
-        =\frac{q_1q_2\hbar^2}{\varepsilon_0\abs{\bm Q}^2}.
+        \widetilde V(\bm Q) = -\frac{\hbar^3 c}{4M_1M_2}\mathcal M
+        = \frac{q_1q_2\hbar^2}{\varepsilon_0\abs{\bm Q}^2}.
     \]
     用$\bm Q/\hbar$作Fourier波矢，变回位置空间，得到
     \[
-        V(r)=\int\frac{\d^3 Q}{(2\pi\hbar)^3}\,
+        V(r) = \int\frac{\d^3 Q}{(2\pi\hbar)^3}\,
         \e^{\i\bm Q\cdot\bm r/\hbar}\widetilde V(\bm Q)
-        =\frac{q_1q_2}{4\pi\varepsilon_0 r}.
+        = \frac{q_1q_2}{4\pi\varepsilon_0 r}.
     \]
     $1/r$的长程形式来自无质量光子的$1/\abs{\bm Q}^2$极点。同号与异号电荷分别得到斥力与引力。
 \end{example}
@@ -67,19 +76,20 @@ $J^0/c=q\psi^\dagger\psi$就是电荷密度。用Dirac方程及其伴随方程�
 \section{Compton振幅与Klein--Nishina截面}
 \label{sec:qed Compton}
 
-设初态电子静止，初、末电子四动量记为$p,p'$，初、末光子四动量记为$k,k'$。这里$M=m_\electron c$，$k^0=\hbar\omega/c$。由$p+k=p'+k'$和$p^2=p'^2=-M^2$，可得\exmref{exm:Compton scattering}中的频率比
-\[
-    \xi:=\frac{\omega'}{\omega}
-    =\frac{1}{1+(\hbar\omega/m_\electron c^2)(1-\cos\theta)}.
-\]
+设初态电子静止，初、末电子四动量记为$p,p'$，初、末光子四动量记为$k,k'$。这里$M = m_\electron c$，$k^0 = \hbar\omega/c$。由$p + k = p' + k'$和$p^2 = p'^2 = -M^2$，可得\exmref{exm:Compton scattering}中的频率比
+\begin{equation}
+    \label{eq:ed-compton-frequency-ratio}
+    \xi := \frac{\omega'}{\omega}
+    = \frac{1}{1 + (\hbar\omega/m_\electron c^2)(1 - \cos\theta)}.
+\end{equation}
 为求光子散入某个方向的概率，还需要矩阵元。如\figref{fig:compton-tree-graphs}所示，树级有两项，沿电子线的两个光子顶角有两种排列。记初、末偏振为$\epsilon,\epsilon'$，则
 \begin{align}
-    \mathcal M&=-g_e^2\bar u(p')\,B\,u(p),\notag\\
-    B&=\not{\epsilon}'{}^* S(p+k)\not{\epsilon}
-          +\not{\epsilon} S(p-k')\not{\epsilon}'{}^* .
+    \mathcal M &= -g_e^2\bar u(p')\,B\,u(p),\notag\\
+    B &= \not{\epsilon}'{}^* S(p + k)\not{\epsilon}
+          + \not{\epsilon} S(p - k')\not{\epsilon}'{}^* .
     \label{eq:qed Compton amplitude}
 \end{align}
-两项的中间电子分别携带$p+k$与$p-k'$，两者都可偏离电子质量壳。
+两项的中间电子分别携带$p + k$与$p - k'$，两者都可偏离电子质量壳。
 
 \begin{figure}[htbp]
     \centering
@@ -89,92 +99,104 @@ $J^0/c=q\psi^\dagger\psi$就是电荷密度。用Dirac方程及其伴随方程�
 \end{figure}
 
 \paragraph{Ward恒等式}
-以$k$替换入射偏振。使用$S(P)^{-1}=\not P-M$和外线的Dirac方程，可得
+以$k$替换入射偏振。使用$S(P)^{-1} = \not P - M$和外线的Dirac方程，可得
 \begin{align*}
-    S(p+k)\not k\,u(p)
-      &=S(p+k)\big[(\not p+\not k-M)-(\not p-M)\big]u(p)=u(p),\\
-    \bar u(p')\not k S(p-k')
-      &=\bar u(p')\big[(\not p'-M)-(\not p-\not k'-M)\big]S(p-k')=-\bar u(p').
+    S(p + k)\not k\,u(p)
+      &= S(p + k)\big[(\not p + \not k - M) - (\not p - M)\big]u(p) = u(p),\\
+    \bar u(p')\not k S(p - k')
+      &= \bar u(p')\big[(\not p' - M) - (\not p - \not k' - M)\big]S(p - k') = -\bar u(p').
 \end{align*}
-代回式\eqref{eq:qed Compton amplitude}，两个剩余项分别为$\pm\bar u(p')\not{\epsilon}'{}^*u(p)$，相互抵消。类似地，$\bar u(p')\not k' S(p+k)=\bar u(p')$和$S(p-k')\not k' u(p)=-u(p)$保证出射光子也满足Ward恒等式。因而振幅与$\epsilon\mapsto\epsilon+\lambda k$中的任意$\lambda$无关。
+代回式\eqref{eq:qed Compton amplitude}，两个剩余项分别为$\pm\bar u(p')\not{\epsilon}'{}^*u(p)$，相互抵消。类似地，$\bar u(p')\not k' S(p + k) = \bar u(p')$和$S(p - k')\not k' u(p) = -u(p)$保证出射光子也满足Ward恒等式。因而振幅与$\epsilon \mapsto \epsilon + \lambda k$中的任意$\lambda$无关。
 
 \paragraph{偏振平均与相空间}
-记$X=-p\cdot k$、$Y=-p\cdot k'$，两内线的实分母分别为$2X$和$-2Y$。对初态自旋和偏振各平均一次，对末态求和。由$\sum_s u_s(p)\bar u_s(p)=\not p+M$，令$\bar B=\gamma^0B^\dagger\gamma^0$，则
+记$X = -p \cdot k$、$Y = -p \cdot k'$，两内线的实分母分别为$2X$和$-2Y$。对初态自旋和偏振各平均一次，对末态求和。由$\textstyle \sum_s u_s(p)\bar u_s(p) = \not p + M$，令$\bar B = \gamma^0B^\dagger\gamma^0$，则
 \[
-    \overline{\abs{\mathcal M}^2}=\frac{g_e^4}{4}
-    \sum_{\lambda,\lambda'}\tr\big[(\not p'+M)B(\not p+M)\bar B\big].
+    \overline{\abs{\mathcal M}^2} = \frac{g_e^4}{4}
+    \sum_{\lambda,\lambda'}\tr\big[(\not p' + M)B(\not p + M)\bar B\big].
 \]
-Ward恒等式允许在总振幅中将每个光子的偏振和换为$g^{\mu\nu}$。用$\tr(\not a\not b)=-4a\cdot b$和Dirac矩阵的反对易关系即可完成迹运算。例如两次都取第一项，利用$\gamma^\mu(\not p+M)\gamma_\mu=2\not p-4M$，所得贡献除以$2g_e^4$为$Y/X+M^2/X+M^4/X^2$。第二项的平方由$X\mapsto-Y,\ Y\mapsto-X$得到。加入两项的干涉后，
+Ward恒等式允许在总振幅中将每个光子的偏振和换为$g^{\mu\nu}$。用$\tr(\not a\not b) = -4a \cdot b$和Dirac矩阵的反对易关系即可完成迹运算。例如两次都取第一项，利用$\gamma^\mu(\not p + M)\gamma_\mu = 2\not p - 4M$，所得贡献除以$2g_e^4$为$Y/X + M^2/X + M^4/X^2$。第二项的平方由$X \mapsto -Y,\ Y \mapsto -X$得到。加入两项的干涉后，
 \[
     \frac{\overline{\abs{\mathcal M}^2}}{2g_e^4}
-    =\frac{X}{Y}+\frac{Y}{X}+2M^2\bigg(\frac1X-\frac1Y\bigg)
-      +M^4\bigg(\frac1X-\frac1Y\bigg)^2
-    =\xi^{-1}+\xi-\sin^2\theta .
+    = \frac{X}{Y} + \frac{Y}{X} + 2M^2\bigg(\frac1X - \frac1Y\bigg)
+      + M^4\bigg(\frac1X - \frac1Y\bigg)^2
+    = \xi^{-1} + \xi - \sin^2\theta .
 \]
-最后一步用到实验室系的$Y/X=\xi$和$M^2(1/Y-1/X)=1-\cos\theta$。
+最后一步用到实验室系的$Y/X = \xi$和$M^2(1/Y - 1/X) = 1 - \cos\theta$。
 
-末态两粒子的相空间各含因子$\d^3p'/[(2\pi)^3 2p'^0]$、$\d^3k'/[(2\pi)^3 2k'^0]$。四动量守恒先固定$\bm p'=\bm k-\bm k'$，再用能量约束$M+k^0-k'^0-p'^0=0$积分。此约束对$k'^0$的导数绝对值为$[M+k^0(1-\cos\theta)]/p'^0$。结合初态通量因子$4Mk^0$，得到
+末态两粒子的相空间各含因子$\d^3p'/[(2\pi)^3 2p'^0]$、$\d^3k'/[(2\pi)^3 2k'^0]$。四动量守恒先固定$\bm p' = \bm k - \bm k'$，再用能量约束$M + k^0 - k'^0 - p'^0 = 0$积分。此约束对$k'^0$的导数绝对值为$[M + k^0(1 - \cos\theta)]/p'^0$。结合初态通量因子$4Mk^0$，得到
 \begin{equation}
     \dv{\sigma}{\Omega}
-      =\frac{\hbar^2}{64\pi^2 M^2}\xi^2\,\overline{\abs{\mathcal M}^2}
-      =\frac{r_\electron^2}{2}\xi^2\big(\xi+\xi^{-1}-\sin^2\theta\big),
-    \qquad r_\electron=\frac{\alpha\hbar}{m_\electron c}.
+      = \frac{\hbar^2}{64\pi^2 M^2}\xi^2\,\overline{\abs{\mathcal M}^2}
+      = \frac{r_\electron^2}{2}\xi^2\big(\xi + \xi^{-1} - \sin^2\theta\big).
     \label{eq:qed Klein Nishina}
 \end{equation}
-这就是《核辐射物理及探测学》上篇第六章用于自由电子的Klein--Nishina截面。$\hbar\omega\ll m_\electron c^2$时，$\xi\to1$，微分截面趋于$r_\electron^2(1+\cos^2\theta)/2$，对立体角积分恢复\exmref{exm:Thomson scattering}的$8\pi r_\electron^2/3$。取$\hbar\omega=m_\electron c^2$、$\theta=\pi/2$作比较，则$\xi=1/2$，微分截面为$3r_\electron^2/16$，仅为同角度Thomson结果的$3/8$。
+其中$r_\electron = \alpha\hbar/(m_\electron c)$为经典电子半径。
+这就是《核辐射物理及探测学》上篇第六章用于自由电子的Klein--Nishina截面。$\hbar\omega \ll m_\electron c^2$时，$\xi \to 1$，微分截面趋于$r_\electron^2(1 + \cos^2\theta)/2$，对立体角积分恢复\exmref{exm:Thomson scattering}的$8\pi r_\electron^2/3$。取$\hbar\omega = m_\electron c^2$、$\theta = \pi/2$作比较，则$\xi = 1/2$，微分截面为$3r_\electron^2/16$，仅为同角度Thomson结果的$3/8$。
 
 \section{顶角修正与电子反常磁矩}
 
-以弱外场探测电子，把单个$\gamma^\mu$顶角推广为物理电流的矩阵元$q c\,\bar u(p')\Gamma^\mu u(p)$。当两条电子外线均在质量壳上时，由Lorentz协变性、宇称及电流守恒，可用两个形状因子表述这个顶角。设$Q=p'-p$、$\sigma^{\mu\nu}=\i[\gamma^\mu,\gamma^\nu]/2$，则
-\[
-    \Gamma^\mu=\gamma^\mu F_1(Q^2)
-       -\frac{\i\sigma^{\mu\nu}Q_\nu}{2M}F_2(Q^2).
-\]
-这里$Q_\nu=g_{\nu\lambda}Q^\lambda$。简写$\bar u'=\bar u(p')$、$u=u(p)$，用$\not p\,u=Mu$和伴随方程，得到Gordon分解
-\[
+以弱外场探测电子，把单个$\gamma^\mu$顶角推广为物理电流的矩阵元$q c\,\bar u(p')\Gamma^\mu u(p)$。当两条电子外线均在质量壳上时，由Lorentz协变性、宇称及电流守恒，可用两个形状因子表述这个顶角。设$Q = p' - p$、$\sigma^{\mu\nu} = \i[\gamma^\mu,\gamma^\nu]/2$，则
+\begin{equation}
+    \label{eq:ed-electromagnetic-form-factors}
+    \Gamma^\mu = \gamma^\mu F_1(Q^2)
+       - \frac{\i\sigma^{\mu\nu}Q_\nu}{2M}F_2(Q^2).
+\end{equation}
+这里$Q_\nu = g_{\nu\lambda}Q^\lambda$。简写$\bar u' = \bar u(p')$、$u = u(p)$，用$\not p\,u = Mu$和伴随方程，得到Gordon分解
+\begin{equation}
+    \label{eq:ed-gordon-identity}
     \bar u'\gamma^\mu u
-    =\bar u'\left[\frac{(p'+p)^\mu}{2M}
-                -\frac{\i\sigma^{\mu\nu}Q_\nu}{2M}\right]u .
-\]
-在几乎均匀的静电势中，$J^0$测得电荷$q F_1(0)$。取$q=-e$为长距离测定的电子电荷，就固定了在壳重整化条件$F_1(0)=1$，同时取$m_\electron$为电子传播子极点的质量。对缓慢变化的弱磁场，空间电流中自旋项的系数是$F_1(0)+F_2(0)$，相应的能量为$-\bm\mu\cdot\bm B$，其中
-\[
-    \bm\mu=g\,\frac{q}{2m_\electron}\bm S,\qquad
-    \frac{g}{2}=F_1(0)+F_2(0),\qquad a_\electron:=\frac{g-2}{2}=F_2(0).
-\]
-树级$F_2=0$，给出《量子力学》第十五章由Dirac方程的弱场极限算出的$g=2$。
+    = \bar u'\left[\frac{(p' + p)^\mu}{2M}
+                - \frac{\i\sigma^{\mu\nu}Q_\nu}{2M}\right]u .
+\end{equation}
+在几乎均匀的静电势中，$J^0$测得电荷$q F_1(0)$。取$q = -e$为长距离测定的电子电荷，就固定了在壳重整化条件$F_1(0) = 1$，同时取$m_\electron$为电子传播子极点的质量。对缓慢变化的弱磁场，空间电流中自旋项的系数是$F_1(0) + F_2(0)$，相应的能量为$-\bm\mu \cdot \bm B$，其中
+\begin{subequations}
+    \label{eq:ed-anomalous-moment}
+    \begin{align}
+        \bm\mu &= g\,\frac{q}{2m_\electron}\bm S,\\
+        \frac{g}{2} &= F_1(0) + F_2(0),\\
+        a_\electron &:= \frac{g - 2}{2} = F_2(0).
+    \end{align}
+\end{subequations}
+树级$F_2 = 0$，给出《量子力学》第十五章由Dirac方程的弱场极限算出的$g = 2$。
 
 \paragraph{一圈顶角}
 在外场顶角的两侧，电子可再发射和吸收一个虚光子。令其四动量为$\ell$，并引入动量量纲的红外调节参数$\lambda$。除共同的$\i0$外，三个传播子的分母及顶角分子为
 \begin{align*}
-    D_1&=-(p'-\ell)^2-M^2,\qquad
-    D_2=-(p-\ell)^2-M^2,\qquad D_3=-\ell^2-\lambda^2,\\
-    N^\mu&=\gamma^\rho(\not p'-\not\ell+M)\gamma^\mu
-                (\not p-\not\ell+M)\gamma_\rho .
+    D_1 &= -(p' - \ell)^2 - M^2,\\
+    D_2 &= -(p - \ell)^2 - M^2,\\
+    D_3 &= -\ell^2 - \lambda^2,\\
+    N^\mu &= \gamma^\rho(\not p' - \not\ell + M)\gamma^\mu
+                (\not p - \not\ell + M)\gamma_\rho .
 \end{align*}
-为合并分母，引入$x,y,z\ge0$，$x+y+z=1$，使用
+为合并分母，引入$x,y,z \ge 0$，$x + y + z = 1$，使用
 \[
     \frac1{D_1D_2D_3}
-    =2\int_0^1\d z\int_0^{1-z}\frac{\d x}{(xD_1+yD_2+zD_3)^3},
-    \qquad y=1-x-z .
+    = 2\int_0^1\d z\int_0^{1-z}\frac{\d x}{(xD_1 + yD_2 + zD_3)^3}.
 \]
-平移$L=\ell-xp'-yp$，分母的组合变为$-L^2-\Delta$，其中$\Delta=M^2(1-z)^2+xyQ^2+z\lambda^2$。分子中奇于$L$的项积分为零，二次项的对称积分正比于$\gamma^\mu$，归入$F_1$。对其余项用外线方程和Gordon分解，并利用分母在$x,y$交换时对称，保留下来的Pauli项为
+其中$y = 1 - x - z$。
+平移$L = \ell - xp' - yp$，分母的组合变为$-L^2 - \Delta$，其中$\Delta = M^2(1 - z)^2 + xyQ^2 + z\lambda^2$。分子中奇于$L$的项积分为零，二次项的对称积分正比于$\gamma^\mu$，归入$F_1$。对其余项用外线方程和Gordon分解，并利用分母在$x,y$交换时对称，保留下来的Pauli项为
 \[
     \big[\bar u'N^\mu u\big]_\mathrm{Pauli}
-      =4M^2z(1-z)\,\bar u'\frac{-\i\sigma^{\mu\nu}Q_\nu}{2M}u .
+      = 4M^2z(1 - z)\,\bar u'\frac{-\i\sigma^{\mu\nu}Q_\nu}{2M}u .
 \]
-Wick转动后的标量积分为$\int\d^4L_\mathrm{E}/[(2\pi)^4(L_\mathrm{E}^2+\Delta)^3]=1/(32\pi^2\Delta)$。乘以合并分母产生的因子2和两个内部顶角的$g_e^2$，便得到一圈磁形状因子
-\begin{equation}
-    F_2^{(1)}(Q^2)=\frac{\alpha}{\pi}
-      \int_0^1\d z\int_0^{1-z}\d x\,
-        \frac{M^2z(1-z)}{M^2(1-z)^2+x(1-z-x)Q^2+z\lambda^2}.
-\end{equation}
-在$Q^2=0$处，被积函数与$x$无关。先积$x$，再取$\lambda\to0$，得到Schwinger结果
+Wick转动后的标量积分为
 \[
-    F_2^{(1)}(0)=\frac{\alpha}{\pi}\lim_{\lambda\to0}
-       \int_0^1\frac{M^2z(1-z)^2}{M^2(1-z)^2+z\lambda^2}\,\d z
-       =\frac{\alpha}{\pi}\int_0^1 z\,\d z=\frac{\alpha}{2\pi}.
+    \int\frac{\d^4L_\mathrm{E}}{(2\pi)^4(L_\mathrm{E}^2 + \Delta)^3} = \frac{1}{32\pi^2\Delta}.
 \]
-因此$a_\electron=\alpha/(2\pi)+\bigo(\alpha^2)$。最低阶修正约为$1.16\times10^{-3}$。比较实验时，应把这一无量纲数加到$g/2$的树级值1上。
+乘以合并分母产生的因子2和两个内部顶角的$g_e^2$，便得到一圈磁形状因子
+\begin{equation}
+    F_2^{(1)}(Q^2) = \frac{\alpha}{\pi}
+      \int_0^1\d z\int_0^{1-z}\d x\,
+        \frac{M^2z(1 - z)}{M^2(1 - z)^2 + x(1 - z - x)Q^2 + z\lambda^2}.
+\end{equation}
+在$Q^2 = 0$处，被积函数与$x$无关。先积$x$，再取$\lambda \to 0$，得到Schwinger结果
+\begin{equation}
+    \label{eq:ed-schwinger-moment}
+    F_2^{(1)}(0) = \frac{\alpha}{\pi}\lim_{\lambda\to0}
+       \int_0^1\frac{M^2z(1 - z)^2}{M^2(1 - z)^2 + z\lambda^2}\,\d z
+       = \frac{\alpha}{\pi}\int_0^1 z\,\d z = \frac{\alpha}{2\pi}.
+\end{equation}
+因此$a_\electron = \alpha/(2\pi) + \bigo(\alpha^2)$。最低阶修正约为$1.16 \times 10^{-3}$。比较实验时，应把这一无量纲数加到$g/2$的树级值1上。
 
 \paragraph{参考资料}
 单光子交换和Coulomb势可对照D. Tong的\href{https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S6.html}{Quantum Field Theory，第6章}。Compton两项振幅及Ward恒等式见\href{https://www.epfl.ch/labs/lptp/wp-content/uploads/2025/04/NewQFTLectureNotes_03_2025.pdf}{EPFL量子场论讲义，第11.2节}（R. Rattazzi授课，2025年修订）。一圈顶角的参数积分见J. McGreevy的\href{https://mcgreevy.physics.ucsd.edu/w20/2020-215B-lectures.pdf}{Physics 215B讲义}，原始磁矩结果见J. Schwinger，\href{https://doi.org/10.1103/PhysRev.73.416}{Phys. Rev. 73, 416 (1948)}。

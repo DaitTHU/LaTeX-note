@@ -2,53 +2,55 @@
 \label{chap:multipole radiation}
 在\chapref{chap:plane wave}和\chapref{chap:waveguide}中，讨论了电磁波的性质，以及电磁波在有界的和无界的区域内的传播情况。但是，很少谈到如何产生这些电磁波的问题。本章就转入这个问题，并讨论定域振荡电荷和电流密度系统辐射的电磁波，我们的论述是直截了当的，而不去精心推敲数学形式。%当然，这样做只限于比较简单的辐射系统，我们把求系统辐射的渐近法(用任意$l$的矢量多极场)推迟到第十六章里论述。本章只讨论电偶极子、磁偶极子和电器极子，以及导体上电流的一些简单位形。也论述波导中一个源的简单多极子展开和孔的有效多极矩。
 
-%本章后半部，用较大篇幅讨论散射和衍射。首先解释长波长情形下的散射，包括瑞利对蓝天的解释和有关的论题，然后讨论标量衍射理论和矢量衍射理论，并举了一些例子。最后讨论短波长情形下的散射和重要的光学定理。
+%本章后半部，用较大篇幅讨论散射和衍射。首先解释长波长情形下的散射，包括 Rayleigh 对蓝天的解释和有关的论题，然后讨论标量衍射理论和矢量衍射理论，并举了一些例子。最后讨论短波长情形下的散射和重要的光学定理。
 \section{局域振荡源}
 对于随时间变化的电荷和电流系统，我们都可以将随时间变化的量作Fourier分析，并分别处理各个Fourier分量。因此，不失一般性，我们只考虑随时间作正弦变化的局域电荷和电流系统所产生的势、场和辐射，设
 \begin{align*}
-    \rho(\bm r,t)&=\Re\bigb{\rho(\bm r)\e^{-\i\omega t}},\\
-    \bm J(\bm r,t)&=\Re\bigb{\bm J(\bm r)\e^{-\i\omega t}},
+    \rho(\bm r,t) &= \Re\bigb{\rho(\bm r)\e^{-\i\omega t}},\\
+    \bm J(\bm r,t) &= \Re\bigb{\bm J(\bm r)\e^{-\i\omega t}},
 \end{align*}
-下文不带时间自变量的量均为复振幅，物理场取其与$\e^{-\i\omega t}$乘积的实部。记$k=\omega/c$、$Z_0=\sqrt{\mu_0/\varepsilon_0}$、$\uvec n=\bm r/r$。矢量势的复振幅为
+下文不带时间自变量的量均为复振幅，物理场取其与$\e^{-\i\omega t}$乘积的实部。记$k = \omega/c$、$Z_0 = \sqrt{\mu_0/\varepsilon_0}$、$\uvec n = \bm r/r$。矢量势的复振幅为
 \begin{equation}
     \label{eqn:A-Jeiwt}
-    \bm A(\bm r)=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{\abs{\bm r-\bm r'}}\e^{\i k\abs{\bm r-\bm r'}}\d V'.
+    \bm A(\bm r) = \frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r')}{\abs{\bm r - \bm r'}}\e^{\i k\abs{\bm r-\bm r'}}\d V'.
 \end{equation}
 磁场和电场为
-\[
-    \bm H=\frac1{\mu_0}\curl\bm A,\quad\bm E=\i\frac{Z_0}k\curl\bm H\quad(\text{源区之外}).
-\]
+\begin{align*}
+    \bm H &= \frac1{\mu_0}\curl\bm A,\\
+    \bm E &= \i\frac{Z_0}k\curl\bm H\quad(\text{源区之外}).
+\end{align*}
 给定电流分布$\bm J(\bm r')$以后，至少在原则上可以通过计算\eqref{eqn:A-Jeiwt}的积分来定出场的分布。%9.4节将讨论一两个直接计算源积分的实例.
-但是，现在我们先确立在电流源被局限于小区域内(与波长相比，确实很小)的极限情形下，场所具有的某些简单而普遍的性质。如果源的线度为$d$，波长为$\lambda=2\pi c/\omega$，并且$kd\ll1$，则在源区之外有三个空间区域：近区、中间区、远区。
+但是，现在我们先确立在电流源被局限于小区域内(与波长相比，确实很小)的极限情形下，场所具有的某些简单而普遍的性质。如果源的线度为$d$，波长为$\lambda = 2\pi c/\omega$，并且$kd \ll 1$，则在源区之外有三个空间区域：近区、中间区、远区。
 
-近区：$d\ll r$且$kr\ll1$，\eqref{eqn:A-Jeiwt}中的指数可以用1代替，并用球谐函数\eqref{eqn:1/|r-r'|=YY}展开，
+近区：$d \ll r$且$kr \ll 1$，\eqref{eqn:A-Jeiwt}中的指数可以用1代替，并用球谐函数\eqref{eqn:1/|r-r'|=YY}展开，
 \[
-    \lim_{kr\to0}\bm A(\bm r)=\frac{\mu_0}{4\pi}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac{4\pi}{2\ell+1}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}\int\bm J(\bm r')r'^\ell Y\conj_{\ell m}(\theta',\phi')\d V'.
+    \lim_{kr\to0}\bm A(\bm r) = \frac{\mu_0}{4\pi}\sum_{\ell=0}^\infty\sum_{m=-\ell}^\ell\frac{4\pi}{2\ell + 1}\frac{Y_{\ell m}(\theta,\phi)}{r^{\ell+1}}\int\bm J(\bm r')r'^\ell Y\conj_{\ell m}(\theta',\phi')\d V'.
 \]
 上式表明，近场是准静态的，除了按$\e^{-\i\omega t}$方式作简谐振荡外，其它性质都是静态的。
 
-远区，$r\gg d$且$kr\gg1$，
-\[
-    \bm A(\bm r)=\frac{\mu_0}{4\pi}\frac{\e^{\i kr}}r\int\bm J(\bm r')\e^{-\i\bm k\cdot\bm r'}\d V'.
-\]
-这里$\bm k=k\uvec n$。上式用到了$\abs{\bm r-\bm r'}=r-\uvec n\cdot\bm r'+\bigo(d^2/r)$。只要$r\gg d$、$kr\gg1$且$kd^2/r\ll1$，远区积分对任意$kd$都成立。若还有$kd\ll1$，便可将被积函数中的相位逐项展开，得到多极辐射。
+远区，$r \gg d$且$kr \gg 1$，
+\begin{equation}
+    \label{eq:ed-localized-source-far-potential}
+    \bm A(\bm r) = \frac{\mu_0}{4\pi}\frac{\e^{\i kr}}r\int\bm J(\bm r')\e^{-\i\bm k\cdot\bm r'}\d V'.
+\end{equation}
+这里$\bm k = k\uvec n$。上式用到了$\abs{\bm r - \bm r'} = r - \uvec n \cdot \bm r' + \bigo(d^2/r)$。只要$r \gg d$、$kr \gg 1$且$kd^2/r \ll 1$，远区积分对任意$kd$都成立。若还有$kd \ll 1$，便可将被积函数中的相位逐项展开，得到多极辐射。
 
-中间区，$d\ll r$且$kr\sim1$，近似失效，引入
+中间区，$d \ll r$且$kr \sim 1$，近似失效，引入
 球Bessel函数和Hankel函数
 \begin{align}
-    j_\ell(x)&:=\sqrt{\frac\pi{2x}}J_{\ell+1/2}(x),\\
-    y_\ell(x)&:=\sqrt{\frac\pi{2x}}Y_{\ell+1/2}(x),\\
-    h^\pm_\ell(x)&:=j_\ell(x)\pm\i y_\ell(x).
+    j_\ell(x) &:= \sqrt{\frac\pi{2x}}J_{\ell+1/2}(x),\\
+    y_\ell(x) &:= \sqrt{\frac\pi{2x}}Y_{\ell+1/2}(x),\\
+    h^\pm_\ell(x) &:= j_\ell(x) \pm \i y_\ell(x).
 \end{align}
 则
 \[
-    \bm A(\bm r)=\i\mu_0k\sum_{\ell,m}h_\ell^+(kr)Y_{\ell m}(\theta,\phi)\int\bm J(\bm r')j_\ell(kr')Y\conj_{\ell m}(\theta',\phi')\d V',
+    \bm A(\bm r) = \i\mu_0k\sum_{\ell,m}h_\ell^+(kr)Y_{\ell m}(\theta,\phi)\int\bm J(\bm r')j_\ell(kr')Y\conj_{\ell m}(\theta',\phi')\d V',
 \]
 推导和后面的略。
 
 标量势与矢量势形式相同，我们考虑电单极的情况
 \[
-    \Phi(\bm r,t)=\frac1{4\pi\varepsilon_0r}q\Bigp{t-\frac rc},
+    \Phi(\bm r,t) = \frac1{4\pi\varepsilon_0r}q\Bigp{t - \frac rc},
 \]
 式中$q(t)$是源的总电荷。因为电荷是守恒的，且根据定义，局域源是一个没有电荷流入或流出的源，所以总电荷$q$与时间无关。于是，一个定域源的势(和场)的电单极部分必然是静态的。%具有谐和时间依赖关系e-'(w≠0)的场没有单极子项。
 
@@ -56,255 +58,292 @@
 \section{电偶极辐射}
 下面我们求电偶极子
 \[
-    \bm p:=\int\bm r'\rho(\bm r')\d V',
+    \bm p := \int\bm r'\rho(\bm r')\d V',
 \]
 激发的电场和磁场。
-由连续性方程$\div\bm J=\i\omega\rho$，对局域电流分部积分得$\int\bm J\d V'=-\i\omega\bm p$。在$kd\ll1$、$r\gg d$条件下保留电偶极项（暂不要求$kr\gg1$），
+由连续性方程$\div\bm J = \i\omega\rho$，对局域电流分部积分得$\textstyle \int\bm J\d V' = -\i\omega\bm p$。在$kd \ll 1$、$r \gg d$条件下保留电偶极项（暂不要求$kr \gg 1$），
 \[
-    \bm A=-\i\frac{\mu_0\omega}{4\pi}\bm p\frac{\e^{\i kr}}r.
+    \bm A = -\i\frac{\mu_0\omega}{4\pi}\bm p\frac{\e^{\i kr}}r.
 \]
 场
+\begin{subequations}
+    \label{eq:ed-electric-dipole-harmonic-fields}
+    \begin{align}
+        \bm H &= \frac{ck^2}{4\pi}(\uvec n \times \bm p)\frac{\e^{\i kr}}r\Bigp{1 + \i\frac1{kr}},\\
+        \bm E &= \frac1{4\pi\varepsilon_0}\biggb{k^2(\uvec n \times \bm p) \times \uvec n\frac{\e^{\i kr}}r + \bigp{3\uvec n(\uvec n \cdot \bm p) - \bm p}\Bigp{\frac1{r^3} - \i\frac{k}{r^2}}\e^{\i kr}}.
+    \end{align}
+\end{subequations}
+在源区之外的近区$kr \ll 1$时，
 \begin{align*}
-    \bm H&=\frac{ck^2}{4\pi}(\uvec n\times\bm p)\frac{\e^{\i kr}}r\Bigp{1+\i\frac1{kr}},\\
-    \bm E&=\frac1{4\pi\varepsilon_0}\biggb{k^2(\uvec n\times\bm p)\times\uvec n\frac{\e^{\i kr}}r+\bigp{3\uvec n(\uvec n\cdot\bm p)-\bm p}\Bigp{\frac1{r^3}-\i\frac{k}{r^2}}\e^{\i kr}}.
+    \bm H &= \i\frac{\omega}{4\pi}\frac{\uvec n \times \bm p}{r^2},\\
+    \bm E &= \frac1{4\pi\varepsilon_0}\frac{3\uvec n(\uvec n \cdot \bm p) - \bm p}{r^3};
 \end{align*}
-在源区之外的近区$kr\ll1$时，
-\begin{align*}
-    \bm H&=\i\frac{\omega}{4\pi}\frac{\uvec n\times\bm p}{r^2},\\
-    \bm E&=\frac1{4\pi\varepsilon_0}\frac{3\uvec n(\uvec n\cdot\bm p)-\bm p}{r^3};
-\end{align*}
-在辐射远区$kr\gg1$时，
-\begin{align*}
-    \bm H&=\frac{ck^2}{4\pi}(\uvec n\times\bm p)\frac{\e^{\i kr}}r,\\
-    \bm E&=Z_0\bm H\times\uvec n,
-\end{align*}
+在辐射远区$kr \gg 1$时，
+\begin{subequations}
+    \label{eq:ed-electric-dipole-far-fields}
+    \begin{align}
+        \bm H &= \frac{ck^2}{4\pi}(\uvec n \times \bm p)\frac{\e^{\i kr}}r,\\
+        \bm E &= Z_0\bm H \times \uvec n,
+    \end{align}
+\end{subequations}
 % $Z_0$是自由空间阻抗。
-对于沿固定方向振荡的偶极子，令$\bm p=p_0\uvec z$，$p_0$为复振幅，$\theta$为观察方向与偶极轴的夹角。辐射的时间平均角分布为
-\[
-    \dv P\Omega=\frac12\Re\bigb{r^2(\bm E\times\bm H\conj)\cdot\uvec n}=\frac{c^2Z_0}{32\pi^2}k^4\abs{p_0}^2\sin^2\theta,
-\]
+对于沿固定方向振荡的偶极子，令$\bm p = p_0\uvec z$，$p_0$为复振幅，$\theta$为观察方向与偶极轴的夹角。辐射的时间平均角分布为
+\begin{equation}
+    \label{eq:ed-dipole-angular-power}
+    \dv P\Omega = \frac12\Re\bigb{r^2(\bm E \times \bm H\conj) \cdot \uvec n} = \frac{c^2Z_0}{32\pi^2}k^4\abs{p_0}^2\sin^2\theta,
+\end{equation}
 故
 \begin{equation}
-    P=\frac{c^2Z_0k^4}{12\pi}\abs{p_0}^2=\frac{\omega^4\abs{p_0}^2}{12\pi\varepsilon_0c^3}.
+    P = \frac{c^2Z_0k^4}{12\pi}\abs{p_0}^2 = \frac{\omega^4\abs{p_0}^2}{12\pi\varepsilon_0c^3}.
 \end{equation}
 辐射在垂直于偶极轴的方向最强，沿偶极轴为零。\secref{sec:Rayleigh cross sections}将利用这一角分布求小球的光散射。
 \begin{example}{中心馈电的短天线}{center-fed, linear antenna}
-    长度为$d\ll\lambda$的细直天线沿$z$轴放置，设电流的复振幅为$I(z)=I_0(1-2\abs{z}/d)$，其中$I_0$为馈电点的峰值复振幅。由$-\i\omega p=\int_{-d/2}^{d/2} I(z)\d z$得
-    \[
-        p=\i\frac{I_0d}{2\omega},\qquad
-        P=\frac{Z_0\abs{I_0}^2}{48\pi}(kd)^2.
-    \]
-    即使导线为理想导体，馈源也要供应辐射功率。把这部分平均功率写成$P=\abs{I_0}^2R_\mathrm{rad}/2$，相应的辐射电阻为
-    \[
-        R_\mathrm{rad}=\frac{Z_0}{24\pi}(kd)^2\simeq\qty{5}{\ohm}(kd)^2.
-    \]
+    长度为$d \ll \lambda$的细直天线沿$z$轴放置，设电流的复振幅为$I(z) = I_0(1 - 2\abs{z}/d)$，其中$I_0$为馈电点的峰值复振幅。对电流积分求出偶极矩，代入辐射功率公式，有
+    \begin{align*}
+        p &= \frac{\i}{\omega}\int_{-d/2}^{d/2}I(z)\d z = \i\frac{I_0d}{2\omega},\\
+        P &= \frac{Z_0\abs{I_0}^2}{48\pi}(kd)^2.
+    \end{align*}
+    即使导线为理想导体，馈源也要供应辐射功率。把这部分平均功率写成$P = \abs{I_0}^2R_\mathrm{rad}/2$，相应的辐射电阻为
+    \begin{equation}
+        \label{eq:ed-short-antenna-resistance}
+        R_\mathrm{rad} = \frac{Z_0}{24\pi}(kd)^2 \simeq \qty{5}{\ohm}(kd)^2.
+    \end{equation}
 \end{example}
 \section{磁偶极子和电四极子}
 \paragraph{磁偶极子}
 磁偶极矩对矢量势的贡献
 \[
-    \bm A=\frac{k\mu_0}{4\pi}(\uvec n\times\bm m)\frac{\e^{\i kr}}r\Bigp{\i-\frac1{kr}},
+    \bm A = \frac{k\mu_0}{4\pi}(\uvec n \times \bm m)\frac{\e^{\i kr}}r\Bigp{\i - \frac1{kr}},
 \]
 得到磁场和电场
-\begin{align*}
-    \bm H&=\frac1{4\pi}\biggb{k^2(\uvec n\times\bm m)\times\uvec n\frac{\e^{\i kr}}r+\bigp{3\uvec n(\uvec n\cdot\bm m)-\bm m}\Bigp{\frac1{r^3}-\i\frac{k}{r^2}}\e^{\i kr}},\\
-    \bm E&=-\frac{Z_0}{4\pi}k^2(\uvec n\times\bm m)\frac{\e^{\i kr}}r\Bigp{1+\i\frac1{ kr}}.
-\end{align*}
+\begin{subequations}
+    \label{eq:ed-magnetic-dipole-radiation-fields}
+    \begin{align}
+        \bm H &= \frac1{4\pi}\biggb{k^2(\uvec n \times \bm m) \times \uvec n\frac{\e^{\i kr}}r + \bigp{3\uvec n(\uvec n \cdot \bm m) - \bm m}\Bigp{\frac1{r^3} - \i\frac{k}{r^2}}\e^{\i kr}},\\
+        \bm E &= -\frac{Z_0}{4\pi}k^2(\uvec n \times \bm m)\frac{\e^{\i kr}}r\Bigp{1 + \i\frac1{ kr}}.
+    \end{align}
+\end{subequations}
 与电偶极子形式高度相似。
 \paragraph{电四极子}
 电四极子对矢量势的贡献
 \[
-    \bm A=-\frac{\mu_0ck^2}{8\pi}\frac{\e^{\i kr}}r\Bigp{1+\i\frac1{kr}}\int\bm r'(\uvec n\cdot\bm r')\rho(\bm r')\d V'.
+    \bm A = -\frac{\mu_0ck^2}{8\pi}\frac{\e^{\i kr}}r\Bigp{1 + \i\frac1{kr}}\int\bm r'(\uvec n \cdot \bm r')\rho(\bm r')\d V'.
 \]
 磁场
 \[
-    \bm H=-\i\frac{ck^3}{24\pi}\frac{\e^{\i kr}}r\uvec n\times(Q\cdot\uvec n).
+    \bm H = -\i\frac{ck^3}{24\pi}\frac{\e^{\i kr}}r\uvec n \times (Q \cdot \uvec n).
 \]
 辐射功率 
-\[
-    \dv P\Omega=\frac{c^2Z_0}{1152\pi^2}k^6\Bigabs{\bigb{\uvec n\times(Q\cdot\uvec n)}\times\uvec n}^2
-\]
+\begin{equation}
+    \label{eq:ed-quadrupole-angular-power}
+    \dv P\Omega = \frac{c^2Z_0}{1152\pi^2}k^6\Bigabs{\bigb{\uvec n \times (Q \cdot \uvec n)} \times \uvec n}^2
+\end{equation}
 从而 
-\[
-    P=\frac{c^2Z_0k^6}{1440\pi}\sum_{\alpha,\beta}\abs{Q_{\alpha\beta}}^2\sim\omega^6.
-\]
+\begin{equation}
+    \label{eq:ed-quadrupole-total-power}
+    P = \frac{c^2Z_0k^6}{1440\pi}\sum_{\alpha,\beta}\abs{Q_{\alpha\beta}}^2 \sim \omega^6.
+\end{equation}
 
 \section{有限长直天线的方向图}
 
 天线长度与波长可比时，同一根导线上各段电流的辐射在远处会产生可观的相位差。考虑沿$z$轴放置、长为$d$的中心馈电细天线。忽略导线半径和馈电间隙，取两端电流为零的正弦驻波近似，
 \[
-    I(z)=I_m\sin\bigb{k(d/2-\abs{z})},\qquad
-    \abs{z}\le d/2.
+    I(z) = I_{\mathrm{m}}\sin\bigb{k(d/2 - \abs{z})},\qquad
+    \abs{z} \le d/2.
 \]
-这里$I_m$为电流分布的系数，馈电点的电流为$I_0=I_m\sin(kd/2)$。设$\theta$为观察方向与天线轴的夹角。由式\eqref{eqn:A-Jeiwt}，远场只保留矢量势的横向分量，故
+这里$I_{\mathrm{m}}$为电流分布的系数，馈电点的电流为$I_0 = I_{\mathrm{m}}\sin(kd/2)$。设$\theta$为观察方向与天线轴的夹角。由式\eqref{eqn:A-Jeiwt}，远场只保留矢量势的横向分量，故
+\begin{align*}
+    E_\theta &= -\i\frac{kZ_0\e^{\i kr}}{4\pi r}\sin\theta
+       \int_{-d/2}^{d/2} I(z)\e^{-\i kz\cos\theta}\d z,\\
+    H_\phi &= E_\theta/Z_0.
+\end{align*}
+令$b = kd/2$。电流分布关于$z = 0$对称，因而
 \[
-    E_\theta=-\i\frac{kZ_0\e^{\i kr}}{4\pi r}\sin\theta
-       \int_{-d/2}^{d/2} I(z)\e^{-\i kz\cos\theta}\d z,
-    \qquad H_\phi=E_\theta/Z_0.
+    \int_{-d/2}^{d/2}I(z)\e^{-\i kz\cos\theta}\d z = 2I_{\mathrm{m}}\int_0^{d/2}\sin(b - kz)\cos(kz\cos\theta)\d z.
 \]
-令$b=kd/2$。利用电流分布关于$z=0$对称，积分可化为$2I_m\int_0^{d/2}\sin(b-kz)\cos(kz\cos\theta)\d z$。积分得到
-\begin{equation}
-    E_\theta=-\i\frac{Z_0 I_m}{2\pi}\frac{\e^{\i kr}}r F(\theta),
-    \qquad F(\theta)=\frac{\cos(b\cos\theta)-\cos b}{\sin\theta}.
-\end{equation}
-轴线处取连续极限，$F(0)=F(\pi)=0$。短天线有$b\ll1$，于是$I_0\simeq I_m b$，$F(\theta)\simeq b^2\sin\theta/2$。此时电流趋于三角形分布，积分所得功率与前面的短天线例相同。
+积分得到
+\begin{subequations}
+    \begin{align}
+        E_\theta &= -\i\frac{Z_0 I_{\mathrm{m}}}{2\pi}\frac{\e^{\i kr}}r F(\theta),\\
+        F(\theta) &= \frac{\cos(b\cos\theta) - \cos b}{\sin\theta}.
+    \end{align}
+\end{subequations}
+轴线处取连续极限，$F(0) = F(\pi) = 0$。短天线有$b \ll 1$，于是$I_0 \simeq I_{\mathrm{m}} b$，$F(\theta) \simeq b^2\sin\theta/2$。此时电流趋于三角形分布，积分所得功率与前面的短天线例相同。
 
-对于半波天线，$d=\lambda/2$，故$b=\pi/2$、$I_0=I_m$。功率方向图正比于$\cos^2[(\pi/2)\cos\theta]/\sin^2\theta$，最大值在天线的侧向。对整个球面积分，馈电点的辐射电阻为
-\[
-    R_\mathrm{rad}=\frac{2P}{\abs{I_0}^2}
-    =\frac{Z_0}{2\pi}\int_0^\pi\abs{F(\theta)}^2\sin\theta\d\theta
-    \simeq\qty{73}{\ohm}.
-\]
+对于半波天线，$d = \lambda/2$，故$b = \pi/2$、$I_0 = I_{\mathrm{m}}$。功率方向图正比于$\cos^2[(\pi/2)\cos\theta]/\sin^2\theta$，最大值在天线的侧向。对整个球面积分，馈电点的辐射电阻为
+\begin{equation}
+    \label{eq:ed-linear-antenna-resistance}
+    R_\mathrm{rad} = \frac{2P}{\abs{I_0}^2}
+    = \frac{Z_0}{2\pi}\int_0^\pi\abs{F(\theta)}^2\sin\theta\d\theta
+    \simeq \qty{73}{\ohm}.
+\end{equation}
 这个结果采用正弦电流近似。实际天线的输入阻抗还取决于导线半径、长度和馈电结构。
 
 \section{Rayleigh散射与光学定理}
 \label{sec:Rayleigh cross sections}
 
-当平面波照射介质小球时，球内的极化电荷受迫振荡，向各方向辐射。设入射波沿$\uvec s$传播，电场为$\bm E_\incident(\bm r)=E_0\bm e\,\e^{\i k\uvec s\cdot\bm r}$，其中$\bm e\cdot\uvec s=0$，$\bm e\conj\cdot\bm e=1$。对给定的入射偏振，用下式定义具有长度量纲的矢量散射振幅$\bm f$，
-\[
-    \bm E_\mathrm{sca}(\bm r)\simeq E_0\frac{\e^{\i kr}}r\bm f(\uvec n),
-    \qquad \uvec n\cdot\bm f=0.
-\]
-入射平均能流为$I_\incident=\abs{E_0}^2/(2Z_0)$。将单位立体角内的散射功率除以$I_\incident$，便得到微分散射截面
-\[
+当平面波照射介质小球时，球内的极化电荷受迫振荡，向各方向辐射。设入射波沿$\uvec s$传播，电场为$\bm E_\incident(\bm r) = E_0\bm e\,\e^{\i k\uvec s\cdot\bm r}$，其中$\bm e \cdot \uvec s = 0$，$\bm e\conj \cdot \bm e = 1$。对给定的入射偏振，用下式定义具有长度量纲的矢量散射振幅$\bm f$，
+\begin{equation}
+    \label{eq:ed-far-field-scattering-amplitude}
+    \bm E_\mathrm{sca}(\bm r) \simeq E_0\frac{\e^{\i kr}}r\bm f(\uvec n),
+    \qquad \uvec n \cdot \bm f = 0.
+\end{equation}
+入射平均能流为$I_\incident = \abs{E_0}^2/(2Z_0)$。将单位立体角内的散射功率除以$I_\incident$，便得到微分散射截面
+\begin{equation}
+    \label{eq:ed-differential-cross-section}
     \dv{\sigma_\mathrm{sca}}\Omega
-    :=\frac1{I_\incident}\dv{P_\mathrm{sca}}\Omega=\abs{\bm f(\uvec n)}^2.
-\]
-若探测器只接收归一化横向偏振$\bm e'$，则上式右端取$\abs{(\bm e')\conj\cdot\bm f}^2$。
+    := \frac1{I_\incident}\dv{P_\mathrm{sca}}\Omega = \abs{\bm f(\uvec n)}^2.
+\end{equation}
+若探测器只接收归一化横向偏振$\bm e'$，则上式右端取$\abs{(\bm e')\conj \cdot \bm f}^2$。
 
 \subsection{介质球的散射截面}
 
-设半径为$a$的均匀、各向同性非磁介质球位于真空中。在球的内外波长均远大于$a$、且电偶极响应占主导时，入射场在球上近似均匀。用$\bm p=\varepsilon_0\alpha E_0\bm e$定义单球的体积极化率$\alpha(\omega)$。由电偶极远场得
+设半径为$a$的均匀、各向同性非磁介质球位于真空中。在球的内外波长均远大于$a$、且电偶极响应占主导时，入射场在球上近似均匀。用$\bm p = \varepsilon_0\alpha E_0\bm e$定义单球的体积极化率$\alpha(\omega)$。由电偶极远场得
 \begin{equation}
-    \bm f(\uvec n)=\frac{k^2\alpha}{4\pi}
-       \bigb{\bm e-\uvec n(\uvec n\cdot\bm e)}.
+    \bm f(\uvec n) = \frac{k^2\alpha}{4\pi}
+       \bigb{\bm e - \uvec n(\uvec n \cdot \bm e)}.
     \label{eqn:dipole scattering amplitude}
 \end{equation}
 因此偏振因子就是入射电场在观察方向的横向平面上的投影。对全部出射偏振求和并作角积分，有
-\begin{equation}
-    \dv{\sigma_\mathrm{sca}}\Omega
-      =\frac{k^4\abs{\alpha}^2}{16\pi^2}
-         \bigp{1-\abs{\uvec n\cdot\bm e}^2},
-    \qquad \sigma_\mathrm{sca}=\frac{k^4\abs{\alpha}^2}{6\pi}.
-    \label{eqn:Rayleigh cross section}
-\end{equation}
+\begin{subequations}
+    \begin{align}
+        \dv{\sigma_\mathrm{sca}}\Omega
+          &= \frac{k^4\abs{\alpha}^2}{16\pi^2}
+             \bigp{1 - \abs{\uvec n \cdot \bm e}^2},\\
+        \sigma_\mathrm{sca} &= \frac{k^4\abs{\alpha}^2}{6\pi}. \label{eqn:Rayleigh cross section}
+    \end{align}
+\end{subequations}
 在准静态近似中，将均匀外场下介质球的极化强度\eqref{eqn:P-E}乘以球的体积，得到
-\[
-    \alpha_0=4\pi a^3\frac{\varepsilon_\relative(\omega)-1}{\varepsilon_\relative(\omega)+2},
-    \qquad \sigma_\mathrm{sca}\simeq\frac{8\pi}3 k^4a^6
-        \biggabs{\frac{\varepsilon_\relative(\omega)-1}{\varepsilon_\relative(\omega)+2}}^2 .
-\]
+\begin{align*}
+    \alpha_0 &= 4\pi a^3\frac{\varepsilon_\relative(\omega) - 1}{\varepsilon_\relative(\omega) + 2},\\
+    \sigma_\mathrm{sca} &\simeq \frac{8\pi}3 k^4a^6
+        \biggabs{\frac{\varepsilon_\relative(\omega) - 1}{\varepsilon_\relative(\omega) + 2}}^2 .
+\end{align*}
 在远离共振、极化率变化缓慢的频段，散射截面按$\lambda^{-4}$增加，因而空气分子对短波长的可见光散射更强。
 
 对无偏振入射光，把两种正交入射偏振的强度取平均。若$\theta$为$\uvec s$与$\uvec n$的夹角，则垂直于散射面的偏振分量保留原振幅，散射面内的分量多出投影因子$\cos\theta$，故
-\[
-    \dv{\sigma_\mathrm{sca}}\Omega=\frac{k^4\abs{\alpha}^2}{32\pi^2}
-       (1+\cos^2\theta).
-\]
-在$\theta=\ang{90}$的方向，单次电偶极散射只留下垂直于散射面的线偏振。这解释了侧向天空光的偏振。
+\begin{equation}
+    \label{eq:ed-unpolarized-rayleigh}
+    \dv{\sigma_\mathrm{sca}}\Omega = \frac{k^4\abs{\alpha}^2}{32\pi^2}
+       (1 + \cos^2\theta).
+\end{equation}
+在$\theta = \ang{90}$的方向，单次电偶极散射只留下垂直于散射面的线偏振。这解释了侧向天空光的偏振。
 
 \subsection{消光、吸收和前向散射}
 
-散射把能量送到其他传播方向，吸收把能量留在物质中。入射波损失的总功率称为消光功率，因而有$\sigma_\mathrm{ext}=\sigma_\mathrm{sca}+\sigma_\mathrm{abs}$，三种截面均以同一入射能流为分母。消光也可以直接从入射场对感应电流所作的功求得。令
-\[
-    \bm J_{\uvec n}:=\int\bm J(\bm r')\e^{-\i k\uvec n\cdot\bm r'}\d V',
-    \qquad P_\mathrm{ext}=\frac12\Re\int\bm E_\incident^*(\bm r')\cdot\bm J(\bm r')\d V'.
-\]
+散射把能量送到其他传播方向，吸收把能量留在物质中。入射波损失的总功率称为消光功率，因而有$\sigma_\mathrm{ext} = \sigma_\mathrm{sca} + \sigma_\mathrm{abs}$，三种截面均以同一入射能流为分母。消光也可以直接从入射场对感应电流所作的功求得。令
+\begin{align*}
+    \bm J_{\uvec n} &:= \int\bm J(\bm r')\e^{-\i k\uvec n\cdot\bm r'}\d V',\\
+    P_\mathrm{ext} &= \frac12\Re\int\bm E_\incident^*(\bm r') \cdot \bm J(\bm r')\d V'.
+\end{align*}
 远区矢量势正比于$\bm J_{\uvec n}$，只需保留垂直于$\uvec n$的部分，就有
 \[
-    \bm f(\uvec n)=\frac{\i kZ_0}{4\pi E_0}
-    \bigb{\bm J_{\uvec n}-\uvec n(\uvec n\cdot\bm J_{\uvec n})}.
+    \bm f(\uvec n) = \frac{\i kZ_0}{4\pi E_0}
+    \bigb{\bm J_{\uvec n} - \uvec n(\uvec n \cdot \bm J_{\uvec n})}.
 \]
-另一方面，功积分选出的正是$\bm J_{\uvec s}$。将$P_\mathrm{ext}$除以$I_\incident$，利用$\bm e\conj\cdot\uvec s=0$，得到光学定理(optical theorem)
+另一方面，功积分选出的正是$\bm J_{\uvec s}$。将$P_\mathrm{ext}$除以$I_\incident$，利用$\bm e\conj \cdot \uvec s = 0$，得到光学定理(optical theorem)
 \begin{equation}
-    \sigma_\mathrm{ext}=\frac{4\pi}k\Im\bigb{\bm e\conj\cdot\bm f(\uvec s)}.
+    \sigma_\mathrm{ext} = \frac{4\pi}k\Im\bigb{\bm e\conj \cdot \bm f(\uvec s)}.
 \end{equation}
 这一结果适用于真空中平面波照射的局域散射体。前向散射波与入射波的干涉决定了消光，因而这里出现的是与入射偏振相同的前向振幅的虚部。
 
-对于电偶极，式\eqref{eqn:dipole scattering amplitude}给出$\sigma_\mathrm{ext}=k\Im\alpha$。同一结果也可由$P_\mathrm{ext}=(\omega/2)\Im\bigb{(E_0\bm e)^*\cdot\bm p}$立即得到。结合式\eqref{eqn:Rayleigh cross section}，
-\[
-    \sigma_\mathrm{abs}=k\Im\alpha-\frac{k^4}{6\pi}\abs{\alpha}^2.
-\]
-无损粒子有$\sigma_\mathrm{abs}=0$，故辐射要求$\Im\alpha=k^3\abs{\alpha}^2/(6\pi)$。实数准静态极化率$\alpha_0$足以求领先阶散射功率，但在消光公式中必须保留重新辐射产生的相位滞后。忽略有限尺寸引起的动力学退极化修正，只保留偶极辐射修正时，可写成
-\[
-    \alpha\simeq\frac{\alpha_0}{1-\i k^3\alpha_0/(6\pi)}.
-\]
-对实数$\alpha_0$，代入即得$k\Im\alpha=k^4\abs{\alpha}^2/(6\pi)$，消光功率恰好等于散射功率。
+对于电偶极，式\eqref{eqn:dipole scattering amplitude}给出$\sigma_\mathrm{ext} = k\Im\alpha$。同一结果也可由$P_\mathrm{ext} = (\omega/2)\Im\bigb{(E_0\bm e)^* \cdot \bm p}$立即得到。结合式\eqref{eqn:Rayleigh cross section}，
+\begin{equation}
+    \label{eq:ed-dipole-absorption-cross-section}
+    \sigma_\mathrm{abs} = k\Im\alpha - \frac{k^4}{6\pi}\abs{\alpha}^2.
+\end{equation}
+无损粒子有$\sigma_\mathrm{abs} = 0$，故辐射要求$\Im\alpha = k^3\abs{\alpha}^2/(6\pi)$。实数准静态极化率$\alpha_0$足以求领先阶散射功率，但在消光公式中必须保留重新辐射产生的相位滞后。忽略有限尺寸引起的动力学退极化修正，只保留偶极辐射修正时，可写成
+\begin{equation}
+    \label{eq:ed-radiation-corrected-polarizability}
+    \alpha \simeq \frac{\alpha_0}{1 - \i k^3\alpha_0/(6\pi)}.
+\end{equation}
+对实数$\alpha_0$，代入即得$k\Im\alpha = k^4\abs{\alpha}^2/(6\pi)$，消光功率恰好等于散射功率。
 
 \section{矢量球谐函数与Mie散射}
 \label{sec:Mie scattering}
 
-介质球半径$a$与波长可比时，球内极化电流的相位随位置改变，远场中也会出现磁偶极和更高阶多极辐射。设球外是真空，球内各向同性、均匀且$\mu=\mu_0$，折射率为$m$。记尺寸参数$x=ka$，则球面在外场和内场的径向变量中分别位于$x$和$mx$。球面的旋转对称性使不同角动量的边界匹配可以分别进行。
+介质球半径$a$与波长可比时，球内极化电流的相位随位置改变，远场中也会出现磁偶极和更高阶多极辐射。设球外是真空，球内各向同性、均匀且$\mu = \mu_0$，折射率为$m$。记尺寸参数$x = ka$，则球面在外场和内场的径向变量中分别位于$x$和$mx$。球面的旋转对称性使不同角动量的边界匹配可以分别进行。
 
 \paragraph{球面上的两组横向场}
 在归一化的球谐函数$Y_{\ell s}$上作角向微分，定义切向矢量球谐函数
-\[
-    \bm X_{\ell s}=\frac{\bm r\times\grad Y_{\ell s}}{\sqrt{\ell(\ell+1)}},
-    \qquad \ell\ge1,\quad -\ell\le s\le\ell .
-\]
-对径向函数$z_\ell(y)$，在波数$k_j$的均匀介质中写$y=k_jr$，令
-\[
-    \bm M_{\ell s}=z_\ell(y)\bm X_{\ell s},\qquad
-    \bm N_{\ell s}=k_j^{-1}\curl\bm M_{\ell s}.
-\]
-由于$\bm M_{\ell s}$满足无源的横波方程，$\curl\bm N_{\ell s}=k_j\bm M_{\ell s}$。$\bm N_{\ell s}$在球面上的切向分量为$(\uvec r\times\bm X_{\ell s})[y z_\ell(y)]'/y$，撇号表示对径向函数的整个自变量求导。因此取$\bm E$正比于$\bm N$或$\bm M$，就得到电型或磁型多极波。另一场均由$\bm H=(\i\omega\mu_0)^{-1}\curl\bm E$确定。
+\begin{equation}
+    \label{eq:ed-vector-spherical-harmonics}
+    \bm X_{\ell s} = \frac{\bm r \times \grad Y_{\ell s}}{\sqrt{\ell(\ell + 1)}},
+    \qquad \ell \ge 1,\quad -\ell \le s \le \ell .
+\end{equation}
+对径向函数$z_\ell(y)$，在波数$k_j$的均匀介质中写$y = k_jr$，令
+\begin{subequations}
+    \label{eq:ed-vector-spherical-waves}
+    \begin{align}
+        \bm M_{\ell s} &= z_\ell(y)\bm X_{\ell s},\\
+        \bm N_{\ell s} &= k_j^{-1}\curl\bm M_{\ell s}.
+    \end{align}
+\end{subequations}
+由于$\bm M_{\ell s}$满足无源的横波方程，$\curl\bm N_{\ell s} = k_j\bm M_{\ell s}$。$\bm N_{\ell s}$在球面上的切向分量为$(\uvec r \times \bm X_{\ell s})[y z_\ell(y)]'/y$，撇号表示对径向函数的整个自变量求导。因此取$\bm E$正比于$\bm N$或$\bm M$，就得到电型或磁型多极波。另一场均由$\bm H = (\i\omega\mu_0)^{-1}\curl\bm E$确定。
 
 \paragraph{逐阶匹配}
-入射平面波可展开成在原点正则的$j_\ell$球面波，球内场也取$j_\ell$。散射场取出射函数$h_\ell^{(1)}=j_\ell+\i y_\ell$，与$\e^{-\i\omega t}$约定一致。对每个入射分波取单位系数，把外部总场的径向函数写成$j_\ell-a_\ell h_\ell^{(1)}$（电型）或$j_\ell-b_\ell h_\ell^{(1)}$（磁型）。定义$\psi_\ell(y)=y j_\ell(y)$、$\xi_\ell(y)=y h_\ell^{(1)}(y)$。在$r=a$处连续匹配$\bm E$与$\bm H$的切向分量，得到
+入射平面波可展开成在原点正则的$j_\ell$球面波，球内场也取$j_\ell$。散射场取出射函数$h_\ell^{(1)} = j_\ell + \i y_\ell$，与$\e^{-\i\omega t}$约定一致。对每个入射分波取单位系数，把外部总场的径向函数写成$j_\ell - a_\ell h_\ell^{(1)}$（电型）或$j_\ell - b_\ell h_\ell^{(1)}$（磁型）。定义$\psi_\ell(y) = y j_\ell(y)$、$\xi_\ell(y) = y h_\ell^{(1)}(y)$。在$r = a$处连续匹配$\bm E$与$\bm H$的切向分量，得到
 \[
  \begin{aligned}
-   \psi_\ell(x)-a_\ell\xi_\ell(x)&=C_\electric\psi_\ell(mx),&
-   \psi_\ell'(x)-a_\ell\xi_\ell'(x)&=\frac{C_\electric}{m}\psi_\ell'(mx),\\
-   \psi_\ell(x)-b_\ell\xi_\ell(x)&=C_\magnetic\psi_\ell(mx),&
-   \psi_\ell'(x)-b_\ell\xi_\ell'(x)&=m C_\magnetic\psi_\ell'(mx).
+   \psi_\ell(x) - a_\ell\xi_\ell(x) &= C_\electric\psi_\ell(mx),&
+   \psi_\ell'(x) - a_\ell\xi_\ell'(x) &= \frac{C_\electric}{m}\psi_\ell'(mx),\\
+   \psi_\ell(x) - b_\ell\xi_\ell(x) &= C_\magnetic\psi_\ell(mx),&
+   \psi_\ell'(x) - b_\ell\xi_\ell'(x) &= m C_\magnetic\psi_\ell'(mx).
  \end{aligned}
 \]
 这里$C_\electric,C_\magnetic$吸收了内场振幅的常数因子。二式中$m$的不同位置来自内外波阻抗之比。分别消去内场振幅，即得Mie系数
 \begin{align}
-    a_\ell&=\frac{m\psi_\ell(mx)\psi_\ell'(x)-\psi_\ell(x)\psi_\ell'(mx)}
-                   {m\psi_\ell(mx)\xi_\ell'(x)-\xi_\ell(x)\psi_\ell'(mx)},\\
-    b_\ell&=\frac{\psi_\ell(mx)\psi_\ell'(x)-m\psi_\ell(x)\psi_\ell'(mx)}
-                   {\psi_\ell(mx)\xi_\ell'(x)-m\xi_\ell(x)\psi_\ell'(mx)} .
+    a_\ell &= \frac{m\psi_\ell(mx)\psi_\ell'(x) - \psi_\ell(x)\psi_\ell'(mx)}
+                   {m\psi_\ell(mx)\xi_\ell'(x) - \xi_\ell(x)\psi_\ell'(mx)},\\
+    b_\ell &= \frac{\psi_\ell(mx)\psi_\ell'(x) - m\psi_\ell(x)\psi_\ell'(mx)}
+                   {\psi_\ell(mx)\xi_\ell'(x) - m\xi_\ell(x)\psi_\ell'(mx)} .
 \end{align}
 相同的$\ell$对所有$s$给出相同的系数。以单位入射平面波作展开，对散射远场的横向分量积分，各多极因角向正交而分别贡献功率。散射截面和由前向振幅求得的消光截面为\footnote{C. F. Bohren and D. R. Huffman，\href{https://doi.org/10.1002/9783527618156.ch4}{\textit{Absorption and Scattering of Light by Small Particles}，第4章}。}
 \begin{align}
-    \sigma_\mathrm{sca}&=\frac{2\pi}{k^2}\sum_{\ell=1}^\infty(2\ell+1)
-        (\abs{a_\ell}^2+\abs{b_\ell}^2),\label{eqn:Mie cross section}\\
-    \sigma_\mathrm{ext}&=\frac{2\pi}{k^2}\sum_{\ell=1}^\infty(2\ell+1)
-        \Re(a_\ell+b_\ell).
+    \sigma_\mathrm{sca} &= \frac{2\pi}{k^2}\sum_{\ell=1}^\infty(2\ell + 1)
+        (\abs{a_\ell}^2 + \abs{b_\ell}^2),\label{eqn:Mie cross section}\\
+    \sigma_\mathrm{ext} &= \frac{2\pi}{k^2}\sum_{\ell=1}^\infty(2\ell + 1)
+        \Re(a_\ell + b_\ell).
 \end{align}
-若$m=1$，两个分子逐阶为零。若$m$为实数，每个分母均由相应的实分子加上一个纯虚数构成，故$\Re a_\ell=\abs{a_\ell}^2$、$\Re b_\ell=\abs{b_\ell}^2$。无损球的散射与消光逐阶相等。
+若$m = 1$，两个分子逐阶为零。若$m$为实数，每个分母均由相应的实分子加上一个纯虚数构成，故$\Re a_\ell = \abs{a_\ell}^2$、$\Re b_\ell = \abs{b_\ell}^2$。无损球的散射与消光逐阶相等。
 
 \paragraph{从Mie解回到Rayleigh极限}
-当$x\ll1$且$\abs m x\ll1$，取$m$固定并远离材料共振，利用$\psi_1(y)=y^2/3+\bigo(y^4)$、$\xi_1(y)\sim-\i/y$得到
+当$x \ll 1$且$\abs m x \ll 1$，取$m$固定并远离材料共振，利用$\psi_1(y) = y^2/3 + \bigo(y^4)$、$\xi_1(y) \sim -\i/y$得到
 \[
-    a_1=-\frac{2\i}{3}\frac{m^2-1}{m^2+2}\,x^3+\bigo(x^5),
-    \qquad b_1,\ a_2=\bigo(x^5).
+    a_1 = -\frac{2\i}{3}\frac{m^2 - 1}{m^2 + 2}\,x^3 + \bigo(x^5),
+    \qquad b_1,\ a_2 = \bigo(x^5).
 \]
-将$a_1$的领先项代入\eqref{eqn:Mie cross section}，即得$\sigma_\mathrm{sca}\simeq (8\pi/3)k^4a^6\abs{(m^2-1)/(m^2+2)}^2$。这与前节由静电球的极化率得到的截面相同。
+将$a_1$的领先项代入\eqref{eqn:Mie cross section}，即得$\sigma_\mathrm{sca} \simeq (8\pi/3)k^4a^6\abs{(m^2 - 1)/(m^2 + 2)}^2$。这与前节由静电球的极化率得到的截面相同。
 
-\begin{figure}[htbp]
-    \centering
+\begin{notecaptionblock}
     \includegraphics[width=.94\linewidth]{figures/mie_scattering.pdf}
-    \caption{折射率$m=1.5$的无损球。左图给出散射效率，右图以完整Mie解为基准，圆点标出两种近似的相对误差首次达到$10\%$的位置。}
+    \captionof{figure}{折射率$m = 1.5$的无损球。左图给出散射效率，右图以完整Mie解为基准，圆点标出两种近似的相对误差首次达到$10\%$的位置。}
     \label{fig:mie-scattering}
-\end{figure}
-以$Q=\sigma_\mathrm{sca}/(\pi a^2)$比较同一球体的三种计算（\figref{fig:mie-scattering}）。Rayleigh近似同时忽略了电偶极系数的高阶修正和其余多极。取$m=1.5$，从小尺寸向上扫描时，这一近似的相对误差在$x\simeq1.052$首次达到$10\%$。若保留完整的$a_1(x)$，只略去磁偶极和更高阶多极，则对应位置移至$x\simeq1.295$。这两个数值随折射率及所比较的观测量而变。
+\end{notecaptionblock}
+以$Q = \sigma_\mathrm{sca}/(\pi a^2)$比较同一球体的三种计算（\figref{fig:mie-scattering}）。Rayleigh近似同时忽略了电偶极系数的高阶修正和其余多极。取$m = 1.5$，从小尺寸向上扫描时，这一近似的相对误差在$x \simeq 1.052$首次达到$10\%$。若保留完整的$a_1(x)$，只略去磁偶极和更高阶多极，则对应位置移至$x \simeq 1.295$。这两个数值随折射率及所比较的观测量而变。
 
 \section{圆孔的远场衍射}
 
-平面波垂直照射不透明薄屏上的圆孔，孔内不同位置发出的波在轴上同相，在偏离轴线的方向则有光程差。设孔半径为$a$，观察方向$\uvec n$与屏法向成$\theta$角。取$a\gg\lambda$，只考虑近轴区域，可把孔上给定偏振的场分量近似为常量$E_a$。这时标量衍射理论把远场写成孔面上各面积元的相干叠加。
+平面波垂直照射不透明薄屏上的圆孔，孔内不同位置发出的波在轴上同相，在偏离轴线的方向则有光程差。如图\ref{fig:circular-aperture-geometry}所示，设孔半径为$a$，观察方向$\uvec n$与屏法向成$\theta$角。取$a \gg \lambda$，只考虑近轴区域，可把孔上给定偏振的场分量近似为常量$E_{\mathrm{a}}$。这时标量衍射理论把远场写成孔面上各面积元的相干叠加。
+\begin{notecaptionblock}
+    \tikzfigure{circular-aperture-geometry}
+    \captionof{figure}{圆孔衍射的两个角。左图正视孔面，$\phi$ 是孔内面积元的位置矢量 $\bm r'$ 与 $x$ 轴的夹角。右图沿包含观察点 $P$ 和孔面法线的平面剖开，$\theta$ 是观察方向与孔面法线的夹角。}
+    \label{fig:circular-aperture-geometry}
+\end{notecaptionblock}
 
-记观察距离为$r$、孔面上的位置为$\bm r'$。路程展开为$r-\uvec n\cdot\bm r'+\bigo(a^2/r)$。在$ka^2/(2r)\ll1$时，二次项引起的相位变化很小，这就是Fraunhofer衍射条件。把孔面上的$x$轴取在观察方向的投影上，则$\uvec n\cdot\bm r'=\rho\sin\theta\cos\phi$。略去对各面积元相同的传播因子，远场相对于轴上场的复振幅为
-\begin{align*}
-    \frac{E(\theta)}{E(0)}
-    &=\frac1{\pi a^2}\int_0^a \rho\,\d\rho\int_0^{2\pi}
-        \e^{-\i k\rho\sin\theta\cos\phi}\d\phi\\
-    &=\frac{2}{a^2}\int_0^a J_0(k\rho\sin\theta)\rho\,\d\rho
-     =\frac{2J_1(x)}{x},\qquad x=ka\sin\theta .
-\end{align*}
-角积分给出零阶Bessel函数，径向积分用到了$(xJ_1(x))'=xJ_0(x)$。由于$J_1(x)\simeq x/2$，上式在轴上趋于1。强度正比于复振幅的模方，
+记观察距离为$r$、孔面上的位置为$\bm r'$。路程展开为$r - \uvec n \cdot \bm r' + \bigo(a^2/r)$。在$ka^2/(2r) \ll 1$时，二次项引起的相位变化很小，这就是Fraunhofer衍射条件。把孔面上的$x$轴取在观察方向的投影上，则$\uvec n \cdot \bm r' = \rho\sin\theta\cos\phi$。略去对各面积元相同的传播因子，远场相对于轴上场的复振幅为
 \begin{equation}
-    \frac{I(\theta)}{I(0)}=\biggl[\frac{2J_1(x)}{x}\biggr]^2 .
+    \label{eq:ed-circular-aperture-amplitude}
+    \begin{aligned}
+        \frac{E(\theta)}{E(0)}
+        &= \frac1{\pi a^2}\int_0^a \rho\,\d\rho\int_0^{2\pi}
+            \e^{-\i k\rho\sin\theta\cos\phi}\d\phi\\
+        &= \frac{2}{a^2}\int_0^a J_0(k\rho\sin\theta)\rho\,\d\rho
+         = \frac{2J_1(x)}{x},\qquad x = ka\sin\theta .
+    \end{aligned}
 \end{equation}
-$J_1$的第一个正零点约为$3.8317$。记孔径$D=2a$，中央亮斑（Airy斑）到第一暗环的角半径即为$\theta_1\simeq1.22\lambda/D$。例如波长$\qty{500}{\nano\metre}$的光通过直径$\qty{10}{\centi\metre}$的理想圆形孔径，第一暗环的角半径约为$\qty{6.1}{\micro\radian}$。在同样的波长下，增大口径能缩小点光源的衍射像。
+角积分给出零阶Bessel函数，径向积分用到了$(xJ_1(x))' = xJ_0(x)$。由于$J_1(x) \simeq x/2$，上式在轴上趋于1。强度正比于复振幅的模方，
+\begin{equation}
+    \frac{I(\theta)}{I(0)} = \biggl[\frac{2J_1(x)}{x}\biggr]^2 .
+\end{equation}
+$J_1$的第一个正零点约为$3.8317$。记孔径$D = 2a$，中央亮斑（Airy斑）到第一暗环的角半径即为$\theta_1 \simeq 1.22\lambda/D$。例如波长$\qty{500}{\nano\metre}$的光通过直径$\qty{10}{\centi\metre}$的理想圆形孔径，第一暗环的角半径约为$\qty{6.1}{\micro\radian}$。在同样的波长下，增大口径能缩小点光源的衍射像。

@@ -3,21 +3,21 @@
 \section{Maxwell位移电流}
 在前面的讨论中，我们已经得到了关于电场和磁场的基本定律，分别是：
 \begin{alignat*}{3}
-    \text{电场Gauss定律}&\,\eqref{eqn:divD}&\qqquad\div\bm D&=\rho,\\
-    \text{磁场Gauss定律}&\,\eqref{eqn:divB-macro}&\div\bm B&=0,\\
-    \text{Ampère定律}&\,\eqref{eqn:curlH}&\curl\bm H&=\bm J,\\
-    \text{Faraday电磁感应定律}&\,\eqref{eqn:curlE-B}&\curl\bm E&=-\pv{\bm B}t.
+    \text{电场Gauss定律}&\,\eqref{eqn:divD}&\qqquad\div\bm D &= \rho,\\
+    \text{磁场Gauss定律}&\,\eqref{eqn:divB-macro}&\div\bm B &= 0,\\
+    \text{Ampère定律}&\,\eqref{eqn:curlH}&\curl\bm H &= \bm J,\\
+    \text{Faraday电磁感应定律}&\,\eqref{eqn:curlE-B}&\curl\bm E &= -\pv{\bm B}t.
 \end{alignat*}
 %除了Faraday定律外，所有定律都是在稳恒态条件下得到的。
-但在\chapref{chap:magnetostatics}推导Ampère定律时，我们设定了稳恒电流条件$\div\bm J=0$，这在非稳恒态问题中便显然不适用了，而应该修正为连续性方程\eqref{eqn:continuity}：%与连续性方程不一致了。
+但在\chapref{chap:magnetostatics}推导Ampère定律时，我们设定了稳恒电流条件$\div\bm J = 0$，这在非稳恒态问题中便显然不适用了，而应该修正为连续性方程\eqref{eqn:continuity}：%与连续性方程不一致了。
 %Maxwell受Faraday观察结果的启发，发现了方程组中的矛盾。
 \[
-    \pv\rho t+\div\bm J=\div\biggp{\pv{\bm D}t+\bm J}=0.
+    \pv\rho t + \div\bm J = \div\biggp{\pv{\bm D}t + \bm J} = 0.
 \]
 上式利用了电场的Gauss定律，从而Ampère定律也被修正为
 \begin{equation}
     \label{eqn:curlH-JD}
-    \curl\bm H=\bm J+\pv{\bm D}t.
+    \curl\bm H = \bm J + \pv{\bm D}t.
 \end{equation}
 Maxwell将附加项$\p\bm D/\p t$称为位移电流(displacement current)。
 \section{Maxwell方程组}
@@ -25,41 +25,42 @@ Maxwell将附加项$\p\bm D/\p t$称为位移电流(displacement current)。
 \begin{subequations}
     \begin{align}
         \label{eqn:Maxwell divD}
-        \div\bm D&=\rho,\\
+        \div\bm D &= \rho,\\
         \label{eqn:Maxwell divB}
-        \div\bm B&=0,\\
+        \div\bm B &= 0,\\
         \label{eqn:Maxwell curlE}
-        \curl\bm E&=-\pv{\bm B}t,\\
+        \curl\bm E &= -\pv{\bm B}t,\\
         \label{eqn:Maxwell curlH}
-        \curl\bm H&=\bm J+\pv{\bm D}t.
+        \curl\bm H &= \bm J + \pv{\bm D}t.
     \end{align}
 \end{subequations}
 将Maxwell方程和Lorentz力
 \begin{equation}
     \label{eqn:Lorentz}
-    \bm F=q(\bm E+\bm v\times\bm B),
+    \bm F = q(\bm E + \bm v \times \bm B),
 \end{equation}
 以及Newton第二定律结合起来，就可以完全描写相互作用 带电粒子和电磁场的经典动力学。
 %Maxwell方程组是非常自洽、有非常深刻的物理背景。
 \begin{example}{真空中电磁波}{electromagnetic wave}
     在无源的真空中
-    \[
-        \rho=0,\enspace\bm J=\bm 0;\enspace\bm D=\varepsilon_0\bm E,\enspace\bm H=\bm B/\mu_0;
-    \]
+    \begin{gather*}
+        \rho = 0,\enspace\bm J = \bm 0;\\
+        \bm D = \varepsilon_0\bm E,\enspace\bm H = \bm B/\mu_0;
+    \end{gather*}
     利用式\eqref{eqn:curlcurl}，可得
     \begin{align*}
-        \laplacian\bm E&=\grad(\div\bm E)-\curl(\curl\bm E)=0+\pp t(\curl\bm B)
-        =\mu_0\varepsilon_0\pv[2]{\bm E}t,\\
-        \laplacian\bm B&=\grad(\div\bm B)-\curl(\curl\bm B)=0-\mu_0\varepsilon_0\pp t(\curl\bm E)
-        =\mu_0\varepsilon_0\pv[2]{\bm B}t.
+        \laplacian\bm E &= \grad(\div\bm E) - \curl(\curl\bm E) = 0 + \pp t(\curl\bm B)
+        = \mu_0\varepsilon_0\pv[2]{\bm E}t,\\
+        \laplacian\bm B &= \grad(\div\bm B) - \curl(\curl\bm B) = 0 - \mu_0\varepsilon_0\pp t(\curl\bm E)
+        = \mu_0\varepsilon_0\pv[2]{\bm B}t.
     \end{align*}
     因此真空中电场和磁场的各个分量均服从波动方程(wave equation)：
     \begin{equation}
-        \laplacian u=\frac1{c^2}\pv[2]ut,
+        \laplacian u = \frac1{c^2}\pv[2]ut,
     \end{equation}
     对于自由空间$\RR^3$，有平面波解，且波速为
     \begin{equation}
-        c=\frac1{\sqrt{\mu_0\varepsilon_0}}=\qty{299 792 458}{\metre\per\second},
+        c = \frac1{\sqrt{\mu_0\varepsilon_0}} = \qty{299 792 458}{\metre\per\second},
     \end{equation}
     与真空中光速相同！这意味着光就是电磁波(electromagnetic wave)。Maxwell方程组将电、磁和光作为同一现象的表现形式。
 \end{example}
@@ -74,20 +75,20 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
     \begin{subequations}
         \begin{align}
             \label{eqn:-nablaPhi-pApt}
-            \bm E&=-\grad\Phi-\pv{\bm A}t,\\
+            \bm E &= -\grad\Phi - \pv{\bm A}t,\\
             \label{eqn:curlA}
-            \bm B&=\curl\bm A.
+            \bm B &= \curl\bm A.
         \end{align}
     \end{subequations}
 \end{definition}
 
 \begin{proof}
-    式\eqref{eqn:Maxwell divB}可以写成$\div(\curl\bm A)\equiv 0$的形式，
+    式\eqref{eqn:Maxwell divB}可以写成$\div(\curl\bm A) \equiv 0$的形式，
     继而式\eqref{eqn:Maxwell curlE}变为 
     \[
-        \curl\bm E+\pv{\bm B}t=\curl\biggp{\bm E+\pv{\bm A}t}=\bm 0,
+        \curl\bm E + \pv{\bm B}t = \curl\biggp{\bm E + \pv{\bm A}t} = \bm 0,
     \]
-    也可以写成$\curl\grad\Phi\equiv\bm 0$的形式。
+    也可以写成$\curl\grad\Phi \equiv \bm 0$的形式。
 \end{proof}
 
 \begin{corollary}
@@ -96,9 +97,9 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
         \label{eqn:Phi-A coupled}
         \begin{align}
             \label{eqn:Phi-A coupled a}
-            \laplacian\Phi+\pp t(\div\bm A)&=-\frac\rho{\varepsilon_0},\\
+            \laplacian\Phi + \pp t(\div\bm A) &= -\frac\rho{\varepsilon_0},\\
             \label{eqn:Phi-A coupled b}
-            \laplacian\bm A-\frac1{c^2}\pv[2]{\bm A}t-\grad\biggp{\div\bm A+\frac1{c^2}\pv\Phi t}&=-\mu_0\bm J.
+            \laplacian\bm A - \frac1{c^2}\pv[2]{\bm A}t - \grad\biggp{\div\bm A + \frac1{c^2}\pv\Phi t} &= -\mu_0\bm J.
         \end{align}
     \end{subequations}
     下一步是解耦合(decouple)式\eqref{eqn:Phi-A coupled}中的$\Phi$和$\bm A$。
@@ -108,15 +109,15 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
     {规范不变性}{gauge invariance}
     电场和磁场在规范变换(gauge transformation)中保持不变：
     \begin{equation}
-        (\Phi,\bm A)\mapsto\Bigp{\Phi-\pv\varLambda t,\bm A+\grad\varLambda}.
+        (\Phi,\bm A) \mapsto \Bigp{\Phi - \pv\varLambda t,\bm A + \grad\varLambda}.
     \end{equation}
 \end{theorem}
 
 \begin{proof}
     规范变换后的$\Phi',\bm A'$得到的电场和磁场为
     \begin{align*}
-        \bm E'&=-\grad\biggp{\Phi-\pv\varLambda t}-\pp t(\bm A+\grad\varLambda)=-\grad\Phi-\pv{\bm A}t=\bm E;\\
-        \bm B'&=\curl(\bm A+\grad\varLambda)=\curl\bm A=\bm B.
+        \bm E' &= -\grad\biggp{\Phi - \pv\varLambda t} - \pp t(\bm A + \grad\varLambda) = -\grad\Phi - \pv{\bm A}t = \bm E;\\
+        \bm B' &= \curl(\bm A + \grad\varLambda) = \curl\bm A = \bm B.
         \qedhere
     \end{align*}
 \end{proof}
@@ -129,76 +130,78 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
 
 一种直接的想法是令梯度内的项为0
 \begin{equation}
-    \div\bm A+\frac1{c^2}\pv\Phi t=0,
+    \div\bm A + \frac1{c^2}\pv\Phi t = 0,
 \end{equation}
 这称为Lorenz规范\footnote{注意区分Lorentz和Lorenz。}，从而Maxwell方程组可以写成
 \begin{subequations}
     \begin{align}
-        \laplacian\Phi-\frac1{c^2}\pv[2]\Phi t&=-\frac\rho{\varepsilon_0};\\
-        \laplacian\bm A-\frac1{c^2}\pv[2]{\bm A}t&=-\mu_0\bm J.
+        \laplacian\Phi - \frac1{c^2}\pv[2]\Phi t &= -\frac\rho{\varepsilon_0};\\
+        \laplacian\bm A - \frac1{c^2}\pv[2]{\bm A}t &= -\mu_0\bm J.
     \end{align}
 \end{subequations}
 上面两式其实形式是一样的，可定义d'Alembertian%\footnote{其实就是四维赝Riemann度量下的Laplace算子。}
 \begin{equation}
-    \square:=\frac1{c^2}\pp[2]t-\laplacian.
+    \square := \frac1{c^2}\pp[2]t - \laplacian.
 \end{equation}
 若规范变换前后均满足Lorenz规范，则
 \begin{equation}
-    \laplacian\varLambda-\frac1{c^2}\pv[2]\varLambda t=0.
+    \laplacian\varLambda - \frac1{c^2}\pv[2]\varLambda t = 0.
 \end{equation}
 \paragraph{Coulomb规范}
 另一种规范是\secref{sec:vector potential}提到的Coulomb规范
-\[
-    \div\bm A=0,
-\]
+\begin{equation}
+    \label{eq:ed-coulomb-gauge}
+    \div\bm A = 0,
+\end{equation}
 得到的方程为
 \begin{subequations}
     \begin{align}
         \label{eqn:Coulomb gauge Phi}
-        \laplacian\Phi&=-\frac\rho{\varepsilon_0};\\
+        \laplacian\Phi &= -\frac\rho{\varepsilon_0};\\
         \label{eqn:Coulomb gauge A}
-        \laplacian\bm A-\frac1{c^2}\pv[2]{\bm A}t&=-\mu_0\bm J+\frac1{c^2}\pp t\grad\Phi.
+        \laplacian\bm A - \frac1{c^2}\pv[2]{\bm A}t &= -\mu_0\bm J + \frac1{c^2}\pp t\grad\Phi.
     \end{align}
 \end{subequations}
 
 式\eqref{eqn:Coulomb gauge Phi}是Poisson方程，可直接得到
-\[
-    \Phi(\bm r,t)=\frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r',t)}{\abs{\bm r-\bm r'}}\d V'
- \]
+\begin{equation}
+    \label{eq:ed-coulomb-gauge-potential}
+    \Phi(\bm r,t) = \frac1{4\pi\varepsilon_0}\int_V\frac{\rho(\bm r',t)}{\abs{\bm r - \bm r'}}\d V'
+ \end{equation}
 这说明：标量势$\Phi(\bm r,t)$是由电荷密度$\rho(\bm r',t)$产生的瞬时Coulomb势\footnote{这是其被称为Coulomb规范的原因。}，%二者在不同地方同时改变，
 它在这个规范下表现为瞬时函数；但势不是直接可观测量，这不表示电磁信号可以瞬时传播。$-\grad\Phi$与$-\p\bm A/\p t$中的非推迟部分相消后，物理电磁场仍满足因果传播。
 
 对于式\eqref{eqn:Coulomb gauge A}，将电流密度$\bm J$写成纵向(longitudinal,或无旋irrotational)电流$\bm J_{\mathrm{l}}$和横向(transverse，或螺旋solenoidal)电流$\bm J_\transv$之和，满足
 \[
-    \curl\bm J_{\mathrm{l}}=\bm 0,\quad\div\bm J_\transv=0.
+    \curl\bm J_{\mathrm{l}} = \bm 0,\quad\div\bm J_\transv = 0.
 \]
 从而将式\eqref{eqn:Coulomb gauge A}解耦合为(略去推导过程)
 \begin{subequations}
     \begin{align}
-        \frac1{c^2}\pp t\grad\Phi&=\mu_0\bm J_{\mathrm{l}};\\
-        \laplacian\bm A-\frac1{c^2}\pv[2]{\bm A}t&=-\mu_0\bm J_\transv.
+        \frac1{c^2}\pp t\grad\Phi &= \mu_0\bm J_{\mathrm{l}};\\
+        \laplacian\bm A - \frac1{c^2}\pv[2]{\bm A}t &= -\mu_0\bm J_\transv.
     \end{align}
 \end{subequations}
 这说明：标量势方程的源可以用纵向电流$\bm J_{\mathrm{l}}$表示；而矢量势满足波动方程，在空间中以光速$c$传播，其源可以用横向电流$\bm J_\transv$表示。在Coulomb规范下，横向电场由$-\p\bm A/\p t$给出，纵向电场由$-\grad\Phi$给出；将它们组合为可观测场后，才能讨论传播与因果关系。
 
 \begin{example}{Coulomb规范下电磁波的表达}{em wave in Coulomb gauge}
-    在全空间无源、无外加静电场并取无穷远处电势为零时，可取$\Phi=0$；第二个方程
+    在全空间无源、无外加静电场并取无穷远处电势为零时，可取$\Phi = 0$；第二个方程
     \[
-        \laplacian\bm A-\frac1{c^2}\pv[2]{\bm A}t=\bm 0\implies\bm A=\bm A_0\e^{\i(\bm k\cdot\bm r-\omega t)}.
+        \laplacian\bm A - \frac1{c^2}\pv[2]{\bm A}t = \bm 0 \implies \bm A = \bm A_0\e^{\i(\bm k\cdot\bm r-\omega t)}.
     \]
     从而
     \begin{align*}
-        \bm B&=\curl\bm A=\i\bm k\times\bm A;\\
-        \bm E&=0-\pv{\bm A}t=\i\omega\bm A.
+        \bm B &= \curl\bm A = \i\bm k \times \bm A;\\
+        \bm E &= 0 - \pv{\bm A}t = \i\omega\bm A.
     \end{align*}
 \end{example}
 \paragraph{磁荷存在吗？}
 如果自由磁荷真的存在，Maxwell方程组就要改写
 \begin{align*}
-    \div\bm D&=\rho_\electric,\\
-    \div\bm B&=\rho_\magnetic,\\
-    \curl\bm E&=-\bm J_\magnetic-\pv{\bm B}t,\\
-    \curl\bm H&=\bm J_\electric+\pv{\bm D}t.
+    \div\bm D &= \rho_\electric,\\
+    \div\bm B &= \rho_\magnetic,\\
+    \curl\bm E &= -\bm J_\magnetic - \pv{\bm B}t,\\
+    \curl\bm H &= \bm J_\electric + \pv{\bm D}t.
 \end{align*}
 我们需要新的理论，标量势和矢量势的形式也需要改写。
 \footnote{事实上，无论磁荷存在与否，理论物理学家都可以提出许多漂亮的理论，但是决定磁荷存在性仍需要实验物理学家的实验验证。举个例子：Higgs粒子是粒子物理学标准模型(standard model)预言的粒子，也有一些Higgsless的理论
@@ -208,88 +211,96 @@ Maxwell方程组是4个联立的一阶偏微分方程组，它们将电场和磁
 Lorenz规范下，$\Phi$和$\bm A$均满足有源波动方程
 \begin{equation}
     \label{eqn:DAlembertianPsi=4pif}
-    \laplacian\Psi-\frac1{c^2}\pv[2]\Psi t=-4\pi f(\bm r,t).
+    \laplacian\Psi - \frac1{c^2}\pv[2]\Psi t = -4\pi f(\bm r,t).
 \end{equation}
 %其Green函数
 %\biggp{\laplacian-\frac1{c^2}\pp[2]t}G(\bm r,t;\bm r',t')=-4\pi\delta(\bm r-\bm r')\delta(t-t'),
 %表示在$\bm r'$处的点源，且仅在$t'$时刻激发。
 对$t$进行Fourier变换，%频域里
 \[
-    (\laplacian+k^2)\hat\Psi(\bm r,\omega)=-4\pi\hat f(\bm r,\omega),
+    (\laplacian + k^2)\hat\Psi(\bm r,\omega) = -4\pi\hat f(\bm r,\omega),
 \]
-其中$k:=\omega/c$。
+其中$k := \omega/c$。
 则频域中的Green函数$\hat G_k(\bm r,\bm r')$满足
-\[
-    (\laplacian+k^2)\hat G_k(\bm r,\bm r')=-4\pi\delta(\bm r-\bm r').
-\]
+\begin{equation}
+    \label{eq:ed-helmholtz-green-source}
+    (\laplacian + k^2)\hat G_k(\bm r,\bm r') = -4\pi\delta(\bm r - \bm r').
+\end{equation}
 %不同于时域中的Green函数$G(\bm r,t;\bm r',t')$
-$\hat G_k$是关于源点$\bm r'$球对称的，定义$\bm R:=\bm r-\bm r'$可得
+$\hat G_k$是关于源点$\bm r'$球对称的，定义$\bm R := \bm r - \bm r'$可得
 \[
-    \frac1R\dd[2]R(R\hat G_k)+k^2\hat G_k=-4\pi\delta(\bm R),
+    \frac1R\dd[2]R(R\hat G_k) + k^2\hat G_k = -4\pi\delta(\bm R),
 \]
-当$R\neq 0$时， 
+当$R \neq 0$时，
 \[
-    \pp[2]R(R\hat G_k)+k^2(R\hat G_k)=0\implies \hat G_k^\pm(R)=\frac{\e^{\pm\i kR}}R
+    \pp[2]R(R\hat G_k) + k^2(R\hat G_k) = 0 \implies \hat G_k^\pm(R) = \frac{\e^{\pm\i kR}}R
 \]
 %即Green函数可以写成
 有两个线性无关的球面波(spherical wave)解，
 分别为发散(diverging)球面波$\hat G_k^+(R)$和会聚(converging)球面波$\hat G_k^-(R)$，后者的例子是透镜聚焦。则频域下Green函数是通解的线性组合
 \[
-    \hat G_k(R)=A\hat G_k^+(R)+B\hat G_k^-(R),
+    \hat G_k(R) = A\hat G_k^+(R) + B\hat G_k^-(R),
 \]
 Green函数要求在点源处
 \[
-    \lim_{kR\to0}\hat G_k(R)=\frac1R\implies A+B=1.
+    \lim_{kR\to0}\hat G_k(R) = \frac1R \implies A + B = 1.
 \]
 回到时域下的Green函数，满足
-\[
-    \biggp{\laplacian-\frac1{c^2}\pp[2]t}G^\pm(\bm r,t;\bm r',t')=-4\pi\delta(\bm r-\bm r')\delta(t-t'),
-\]
+\begin{equation}
+    \label{eq:ed-wave-green-source}
+    \biggp{\laplacian - \frac1{c^2}\pp[2]t}G^\pm(\bm r,t;\bm r',t') = -4\pi\delta(\bm r - \bm r')\delta(t - t'),
+\end{equation}
 对$t$进行Fourier变换， 
 \[
-    (\laplacian+k^2)\hat G(\bm r,\omega;\bm r',t')=-4\pi\delta(\bm r-\bm r')\e^{\i\omega t'}.
+    (\laplacian + k^2)\hat G(\bm r,\omega;\bm r',t') = -4\pi\delta(\bm r - \bm r')\e^{\i\omega t'}.
 \]
 可得 
 \[
-    \hat G^\pm(\bm r,\omega;\bm r',t')=\hat G_k^\pm(R)\e^{\i\omega t'}=\frac{\e^{\i(\pm kR+\omega t')}}R,
+    \hat G^\pm(\bm r,\omega;\bm r',t') = \hat G_k^\pm(R)\e^{\i\omega t'} = \frac{\e^{\i(\pm kR+\omega t')}}R,
 \]
 进行Fourier反变换，
 \[
-    G^\pm(R,\tau)=\frac1{2\pi}\intR\frac{\e^{\i(\pm kR-\omega\tau)}}R\d\omega,\quad\tau:=t-t',
+    G^\pm(R,\tau) = \frac1{2\pi}\intR\frac{\e^{\i(\pm kR-\omega\tau)}}R\d\omega,\quad\tau := t - t',
 \]
 对于非色散(nondispersive)介质，$c$与频率无关，Green函数有通解
-\[
-    G^\pm(R,\tau)=\frac1R\delta\biggp{\tau\mp\frac Rc}
-\]
+\begin{equation}
+    \label{eq:ed-causal-wave-green}
+    G^\pm(R,\tau) = \frac1R\delta\biggp{\tau \mp \frac Rc}
+\end{equation}
 即
 \begin{equation}
-    G^\pm(\bm r,t;\bm r',t')=\frac1{\abs{\bm r-\bm r'}}\delta\biggp{t'-\Bigp{t\mp\frac{\abs{\bm r-\bm r'}}c}}.
+    G^\pm(\bm r,t;\bm r',t') = \frac1{\abs{\bm r - \bm r'}}\delta\biggp{t' - \Bigp{t \mp \frac{\abs{\bm r - \bm r'}}c}}.
 \end{equation}
 分别为推迟(retarded)和超前(advanced) Green函数。$\delta$函数的自变量表明：在$\bm r$点于时间$t$观测的效应是由距离为$\bm R$的源在%推迟(或超前)
-时间为$t'=t\mp R/c$时的作用引起的。\footnote{课上的理解是：无穷远处产生的源经过$\bm r$后仍需要$R/c$的时间去经过$\bm r'$。}
+时间为$t' = t \mp R/c$时的作用引起的。\footnote{课上的理解是：无穷远处产生的源经过$\bm r$后仍需要$R/c$的时间去经过$\bm r'$。}
 从而有源波动方程\eqref{eqn:DAlembertianPsi=4pif}的两个解为 
 \[
-    \Psi^\pm(\bm r,t)=\int G^\pm(\bm r,t;\bm r',t')f(\bm r',t')\d V'\nd t',
+    \Psi^\pm(\bm r,t) = \int G^\pm(\bm r,t;\bm r',t')f(\bm r',t')\d V'\nd t',
 \]
-我们考虑一个在时间和空间中作局域分布的源$f(\bm r',t')$，这个源分布只在$t'=0$前后一段有限的时间间隔内不为零。则在无源的波动方程仅仅满足其次波动方程
+我们考虑一个在时间和空间中作局域分布的源$f(\bm r',t')$，这个源分布只在$t' = 0$前后一段有限的时间间隔内不为零。则在无源的波动方程仅仅满足其次波动方程
 \[
-    \laplacian\Psi-\frac1{c^2}\pv[2]\Psi t=0,
+    \laplacian\Psi - \frac1{c^2}\pv[2]\Psi t = 0,
 \]
 想像两种极限情形：
 \begin{compactenum}
-	\item $t\to-\infty$，存在一个特定的“背景”波$\Psi_\text{in}$，
-	\[
-        \Psi(\bm r,t)=\Psi_\text{in}(\bm r,t)+\int G^+(\bm r,t;\bm r',t')f(\bm r',t')\d V'\nd t';
-    \]
-	\item $t\to+\infty$，存在一个特定的“稳态”波$\Psi_\text{out}$，
-	\[
-        \Psi(\bm r,t)=\Psi_\text{out}(\bm r,t)+\int G^-(\bm r,t;\bm r',t')f(\bm r',t')\d V'\nd t',
-    \]
+	\item $t \to -\infty$，存在一个特定的“背景”波$\Psi_\text{in}$，
+	\begin{equation}
+	    \label{eq:ed-incoming-retarded-decomposition}
+        \Psi(\bm r,t) = \Psi_\text{in}(\bm r,t) + \int G^+(\bm r,t;\bm r',t')f(\bm r',t')\d V'\nd t';
+    \end{equation}
+	\item $t \to +\infty$，存在一个特定的“稳态”波$\Psi_\text{out}$，
+	\begin{equation}
+	    \label{eq:ed-outgoing-advanced-decomposition}
+        \Psi(\bm r,t) = \Psi_\text{out}(\bm r,t) + \int G^-(\bm r,t;\bm r',t')f(\bm r',t')\d V'\nd t',
+    \end{equation}
 \end{compactenum}
-最常见的物理情景是$\Psi_\text{in}=0$%“超前”这个概念总是太科幻了，
-\begin{equation}
-    \Psi(\bm r,t)=\int\frac{f(\bm r',t')}{\abs{\bm r-\bm r'}}\d V',\quad t'=t-\frac{\abs{\bm r-\bm r'}}c.
-\end{equation}
+最常见的物理情景是$\Psi_\text{in} = 0$%“超前”这个概念总是太科幻了，
+\begin{subequations}
+    \begin{align}
+        \Psi(\bm r,t) &= \int\frac{f(\bm r',t')}{\abs{\bm r - \bm r'}}\d V',\\
+        t' &= t - \frac{\abs{\bm r - \bm r'}}c.
+    \end{align}
+\end{subequations}
 物理学家已经就一维、二维和三维情形下的有限时间的初值和终值问题进行过广泛研究。\footnote{Morse and Feshbach, Methods of Theoretical Physics, pp.~843--847.}
 
 \subsection{推迟势和推迟场}
@@ -298,8 +309,8 @@ Green函数要求在点源处
 如果电荷密度和电流密度分布随时间变化，观测点的标量势和矢量势将会延迟：
 \begin{subequations}
     \begin{align}
-        \Phi(\bm r,t)&=\frac1{4\pi\varepsilon_0}\int\frac{\rho(\bm r',t')}{\abs{\bm r-\bm r'}}\d V',\\
-        \bm A(\bm r,t)&=\frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r',t')}{\abs{\bm r-\bm r'}}\d V'.
+        \Phi(\bm r,t) &= \frac1{4\pi\varepsilon_0}\int\frac{\rho(\bm r',t')}{\abs{\bm r - \bm r'}}\d V',\\
+        \bm A(\bm r,t) &= \frac{\mu_0}{4\pi}\int\frac{\bm J(\bm r',t')}{\abs{\bm r - \bm r'}}\d V'.
     \end{align}
 \end{subequations}
 % 由
@@ -310,21 +321,21 @@ Green函数要求在点源处
 得到
 \begin{subequations}
     \begin{align}
-        \bm E(\bm r,t)&=\frac1{4\pi\varepsilon_0}\int\biggb{-[\nabla'\rho]_\ret-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d V'}{\abs{\bm r-\bm r'}},\\
-        \bm B(\bm r,t)&=\frac{\mu_0}{4\pi}\int\frac{[\nabla'\times\bm J]_\ret}{\abs{\bm r-\bm r'}}\d V',
+        \bm E(\bm r,t) &= \frac1{4\pi\varepsilon_0}\int\biggb{-[\nabla'\rho]_\ret - \frac1{c^2}\pv{\bm J}{t'}}\frac{\d V'}{\abs{\bm r - \bm r'}},\\
+        \bm B(\bm r,t) &= \frac{\mu_0}{4\pi}\int\frac{[\nabla' \times \bm J]_\ret}{\abs{\bm r - \bm r'}}\d V',
     \end{align}
 \end{subequations}
 % 注意上式中$\nabla'\rho$和$\nabla'\times\bm J$是先求梯度和散度再令$t'=t-R/c$。
-Jackson用$[\cdot]_\ret$表示赋值$t'=t-R/c$，这样的好处是可以有效区分$\grad[f]_\ret\neq[\grad f]_\ret$，因为前者的$t$与$\bm r'$有关，进一步的：
+Jackson用$[\cdot]_\ret$表示赋值$t' = t - R/c$，这样的好处是可以有效区分$\grad[f]_\ret \neq [\grad f]_\ret$，因为前者的$t$与$\bm r'$有关，进一步的：
 \begin{align*}
-    [\nabla'\rho]_\ret&=\nabla'[\rho]_\ret-\Bigb{\pv\rho{t'}}_\ret\nabla'(t-R/c);\\
-    [\nabla'\times\bm J]_\ret&=\nabla'\times[\bm J]_\ret+\Bigb{\pv{\bm J}{t'}}_\ret\times\nabla'(t-R/c).
+    [\nabla'\rho]_\ret &= \nabla'[\rho]_\ret - \Bigb{\pv\rho{t'}}_\ret\nabla'(t - R/c);\\
+    [\nabla' \times \bm J]_\ret &= \nabla' \times [\bm J]_\ret + \Bigb{\pv{\bm J}{t'}}_\ret \times \nabla'(t - R/c).
 \end{align*}
-而$\nabla'R=-{\uvec R}$，故
+而$\nabla'R = -{\uvec R}$，故
 \begin{subequations}
     \begin{align}
-        \bm E(\bm r,t)&=\frac1{4\pi\varepsilon_0}\int\biggb{\biggp{\frac{\rho(\bm r',t')}R+\frac1c\pv\rho{t'}}\uvec R-\frac1{c^2}\pv{\bm J}{t'}}\frac{\d V'}R,\\
-        \bm B(\bm r,t)&=\frac{\mu_0}{4\pi}\int\biggb{\frac{\bm J(\bm r',t')}R+\frac1c\pv{\bm J}{t'}}\times\frac{\uvec R}R\d V'.
+        \bm E(\bm r,t) &= \frac1{4\pi\varepsilon_0}\int\biggb{\biggp{\frac{\rho(\bm r',t')}R + \frac1c\pv\rho{t'}}\uvec R - \frac1{c^2}\pv{\bm J}{t'}}\frac{\d V'}R,\\
+        \bm B(\bm r,t) &= \frac{\mu_0}{4\pi}\int\biggb{\frac{\bm J(\bm r',t')}R + \frac1c\pv{\bm J}{t'}} \times \frac{\uvec R}R\d V'.
     \end{align}
 \end{subequations}
 上式称为Jefimenko对Coulomb定律和Biot--Savart定律的推广。
@@ -332,104 +343,118 @@ Jackson用$[\cdot]_\ret$表示赋值$t'=t-R/c$，这样的好处是可以有效�
 \begin{example}{电荷量变化的点电荷}{time-varying point charge}
     设电流流入或流出原点的小电极，使点电荷项随时间变化。其电荷密度为
     \[
-        \rho(\bm r',t')=Q(t')\delta(\bm r'),
+        \rho(\bm r',t') = Q(t')\delta(\bm r'),
     \]
     由连续性方程，供电电流的散度在原点有一项$-\dot Q(t)\delta(\bm r)$。该点电荷对Lorenz规范推迟标势的贡献为
     \[
-        \Phi(r,t)=\frac1{4\pi\varepsilon_0r}Q\Bigp{t-\frac rc}.
+        \Phi(r,t) = \frac1{4\pi\varepsilon_0r}Q\Bigp{t - \frac rc}.
     \]
     求完整电场时，还须计入其余电荷的标势以及供电电流的矢量势。
 \end{example}
 \begin{example}{阶跃电流}{current}
     无限长直导线通阶跃电流
     \[
-        I(t)=\begin{cases}
-            0,&t\leqslant 0\\
-            I_0,&t>0
+        I(t) = \begin{cases}
+            0,&t \leqslant 0\\
+            I_0,&t > 0
         \end{cases}
     \]
     电流密度为
     \[
-        \bm J(\bm r',t')=I(t')\delta(x')\delta(y')\uvec z.
+        \bm J(\bm r',t') = I(t')\delta(x')\delta(y')\uvec z.
     \]
     矢量势
+    \begin{align*}
+        \bm A(\bm r,t) &= \frac{\mu_0}{4\pi}\uvec z\intR I\Bigp{t - \frac Rc}\frac{\d z'}R,\\
+        R &= \sqrt{\rho^2 + (z - z')^2},
+    \end{align*}
+    $t \leqslant \rho/c$时，$\bm A = \bm 0$；
+    $t > \rho/c$时，仅$(z' - z)^2 \leqslant (ct)^2 - \rho^2$部分有贡献，则
     \[
-        \bm A(\bm r,t)=\frac{\mu_0}{4\pi}\uvec z\intR I\Bigp{t-\frac Rc}\frac{\d z'}R,\quad R=\sqrt{\rho^2+(z-z')^2},
-    \]
-    $t\leqslant\rho/c$时，$\bm A=\bm 0$；
-    $t>\rho/c$时，仅$(z'-z)^2\leqslant(ct)^2-\rho^2$部分有贡献，则
-    \[
-        \bm A(\rho,t)=\frac{\mu_0I_0}{2\pi}\ln\biggb{\frac{ct+\sqrt{(ct)^2-\rho^2}}{\rho}}\uvec z.
+        \bm A(\rho,t) = \frac{\mu_0I_0}{2\pi}\ln\biggb{\frac{ct + \sqrt{(ct)^2 - \rho^2}}{\rho}}\uvec z.
     \]
     由式\eqref{eqn:-nablaPhi-pApt}和\eqref{eqn:curlA}，电场和磁场分别为
-    \begin{align*}
-        \bm E(\rho,t)&=-\frac{\mu_0I_0}{2\pi}\frac c{\sqrt{(ct)^2-\rho^2}}\uvec z,\\
-        \bm B(\rho,t)&=\frac{\mu_0I_0}{2\pi}\frac{ct}{\rho\sqrt{(ct)^2-\rho^2}}\uvec\phi.
-    \end{align*}
-    $t\to+\infty$时，电磁场趋于稳定，与恒稳电流情形相同：
+    \begin{subequations}
+        \label{eq:ed-switched-wire-fields}
+        \begin{align}
+            \bm E(\rho,t) &= -\frac{\mu_0I_0}{2\pi}\frac c{\sqrt{(ct)^2 - \rho^2}}\uvec z,\\
+            \bm B(\rho,t) &= \frac{\mu_0I_0}{2\pi}\frac{ct}{\rho\sqrt{(ct)^2 - \rho^2}}\uvec\phi.
+        \end{align}
+    \end{subequations}
+    $t \to +\infty$时，电磁场趋于稳定，与恒稳电流情形相同：
     \[
-        \bm E=\bm 0,\quad\bm B=\frac{\mu_0I_0}{2\pi\rho}\uvec\phi.
+        \bm E = \bm 0,\quad\bm B = \frac{\mu_0I_0}{2\pi\rho}\uvec\phi.
     \]
 \end{example}
 \subsection{电磁Green张量与互易定理}
 \label{sec:dyadic-green}
-给定一个振荡电偶极，在另一点放置一根短探针，探针沿哪个方向才能测到电场？前面标量波动方程的Green函数给出了推迟时间。要直接从偶极矩求矢量电场，还须保留源与探针的方向。取时间因子$\e^{-\i\omega t}$，记$k=\omega/c$。在非磁、线性、空间局域的介质中，相对介电张量为$\bm\varepsilon_\relative(\bm r,\omega)$，Maxwell方程给出
-\[
-    \curl(\curl\bm E)-k^2\bm\varepsilon_\relative\cdot\bm E=\i\omega\mu_0\bm J .
-\]
-记左边的算符为$\mathcal L$。在给定边界条件和向外辐射条件下，定义电场的推迟Green张量
+给定一个振荡电偶极，在另一点放置一根短探针，探针沿哪个方向才能测到电场？前面标量波动方程的Green函数给出了推迟时间。要直接从偶极矩求矢量电场，还须保留源与探针的方向。取时间因子$\e^{-\i\omega t}$，记$k = \omega/c$。在非磁、线性、空间局域的介质中，相对介电张量为$\bm\varepsilon_\relative(\bm r,\omega)$，Maxwell方程给出
 \begin{equation}
-    \mathcal L_{\bm r}\bm G(\bm r,\bm r';\omega)=
-    \bm I\,\delta^{(3)}(\bm r-\bm r'),\qquad
-    \bm E(\bm r)=\i\mu_0\omega\int\bm G(\bm r,\bm r';\omega)\cdot\bm J(\bm r')\,\d V'.
-    \label{eqn:electric dyadic green}
+    \label{eq:ed-electric-wave-operator}
+    \curl(\curl\bm E) - k^2\bm\varepsilon_\relative \cdot \bm E = \i\omega\mu_0\bm J .
 \end{equation}
-这里$\bm I$为单位张量，$\bm J$为给定的外加电流密度。位于$\bm r_0$的点偶极$\bm p$产生电流$\bm J=-\i\omega\bm p\,\delta^{(3)}(\bm r-\bm r_0)$，故探针测得的第$i$个分量是$E_i=\mu_0\omega^2\sum_j G_{ij}p_j$。
+记左边的算符为$\mathcal L$。在给定边界条件和向外辐射条件下，定义电场的推迟Green张量
+\begin{subequations}\label{eqn:electric dyadic green}
+    \begin{align}
+        \mathcal L_{\bm r}\bm G(\bm r,\bm r';\omega) &=
+        \bm I\,\delta^{(3)}(\bm r - \bm r'),\\
+        \bm E(\bm r) &= \i\mu_0\omega\int\bm G(\bm r,\bm r';\omega) \cdot \bm J(\bm r')\,\d V'.
+    \end{align}
+\end{subequations}
+这里$\bm I$为单位张量，$\bm J$为给定的外加电流密度。位于$\bm r_0$的点偶极$\bm p$产生电流$\bm J = -\i\omega\bm p\,\delta^{(3)}(\bm r - \bm r_0)$，故探针测得的第$i$个分量是$\textstyle E_i = \mu_0\omega^2\sum_j G_{ij}p_j$。
 
-真空中取$R=\abs{\bm r-\bm r_0}$、$\uvec n=(\bm r-\bm r_0)/R$。令$g=\e^{\i kR}/(4\pi R)$，它满足$(\laplacian+k^2)g=-\delta^{(3)}(\bm r-\bm r_0)$。利用$\curl(\curl\bm E)=\grad(\div\bm E)-\laplacian\bm E$，可验得$\bm G_0=(\bm I+k^{-2}\grad\grad)g$，两个梯度都对场点求导。于是在$R>0$处，
+真空中取$R = \abs{\bm r - \bm r_0}$、$\uvec n = (\bm r - \bm r_0)/R$。令$g = \e^{\i kR}/(4\pi R)$，它满足$(\laplacian + k^2)g = -\delta^{(3)}(\bm r - \bm r_0)$。利用$\curl(\curl\bm E) = \grad(\div\bm E) - \laplacian\bm E$，可验得$\bm G_0 = (\bm I + k^{-2}\grad\grad)g$，两个梯度都对场点求导。于是在$R > 0$处，
 \begin{equation}
-    \bm E(\bm r)=\frac{\e^{\i kR}}{4\pi\varepsilon_0}
-    \biggl\{\frac{k^2}{R}\bigb{\bm p-\uvec n(\uvec n\cdot\bm p)}
-    +\biggl(\frac{1}{R^3}-\frac{\i k}{R^2}\biggr)
-    \bigb{3\uvec n(\uvec n\cdot\bm p)-\bm p}\biggr\}.
+    \bm E(\bm r) = \frac{\e^{\i kR}}{4\pi\varepsilon_0}
+    \biggl\{\frac{k^2}{R}\bigb{\bm p - \uvec n(\uvec n \cdot \bm p)}
+    + \biggl(\frac{1}{R^3} - \frac{\i k}{R^2}\biggr)
+    \bigb{3\uvec n(\uvec n \cdot \bm p) - \bm p}\biggr\}.
     \label{eqn:dyadic dipole field}
 \end{equation}
 近区的主项恢复静电偶极场。对于线性振荡的偶极，沿偶极轴观测，$1/R$项为零。在赤道面观测，这一项的电场沿偶极方向。
 
 \paragraph{交换源和探针}
-令$\bm J_1,\bm J_2$为两个同频电流源，用相同下标标记各自的场。将两组Maxwell方程交叉点乘并相减，若$\bm\varepsilon_\relative^\top=\bm\varepsilon_\relative$，得到
+令$\bm J_1,\bm J_2$为两个同频电流源，用相同下标标记各自的场。将两组Maxwell方程交叉点乘并相减，若$\bm\varepsilon_\relative^\top = \bm\varepsilon_\relative$，得到
 \[
-    \div(\bm E_1\times\bm H_2-\bm E_2\times\bm H_1)
-      =\bm E_2\cdot\bm J_1-\bm E_1\cdot\bm J_2 .
+    \div(\bm E_1 \times \bm H_2 - \bm E_2 \times \bm H_1)
+      = \bm E_2 \cdot \bm J_1 - \bm E_1 \cdot \bm J_2 .
 \]
-理想导体壁上的切向电场为零，远处两组外行波的表面项相消。体积分后，$\int\bm E_2\cdot\bm J_1\,\d V=\int\bm E_1\cdot\bm J_2\,\d V$。用两个取向任意的点偶极作源，得到Lorentz互易定理
+理想导体壁上的切向电场为零，远处两组外行波的表面项相消。体积分后有
 \begin{equation}
-    G_{ij}(\bm r,\bm r';\omega)=G_{ji}(\bm r',\bm r;\omega).
+    \label{eq:ed-lorentz-reciprocity-sources}
+    \int\bm E_2 \cdot \bm J_1\,\d V = \int\bm E_1 \cdot \bm J_2\,\d V.
+\end{equation}
+用两个取向任意的点偶极作源，得到Lorentz互易定理
+\begin{equation}
+    G_{ij}(\bm r,\bm r';\omega) = G_{ji}(\bm r',\bm r;\omega).
 \end{equation}
 源和探针互换时要同时交换两者的取向。推导中的点积没有复共轭，故具有对称复介电张量的吸收介质也可满足互易性。
 
 \paragraph{理想镜面旁的偶极}
-理想导体占据$z<0$，真空中的偶极位于$\bm r_0=(0,0,h)$。给定偶极矩的峰值复振幅$\bm p$，驱动源维持振荡所付出的时均功率为
+理想导体占据$z < 0$，真空中的偶极位于$\bm r_0 = (0,0,h)$。给定偶极矩的峰值复振幅$\bm p$，驱动源维持振荡所付出的时均功率为
 \[
-    P=-\frac12\Re\int\bm J\conj\cdot\bm E\,\d V
-      =\frac{\omega}{2}\Im\bigb{\bm p\conj\cdot\bm E(\bm r_0)} .
+    P = -\frac12\Re\int\bm J\conj \cdot \bm E\,\d V
+      = \frac{\omega}{2}\Im\bigb{\bm p\conj \cdot \bm E(\bm r_0)} .
 \]
-导体无损，向上半空间辐射的功率便等于$P$。把$\bm G$分成真空项$\bm G_0$和反射项$\bm G_\mathrm{ref}$。重合点处真空Green张量的实部有奇性，计算功率所用的虚部却是有限的。展开$\sin(kR)/(4\pi R)$并对它作用$\bm I+k^{-2}\grad\grad$，得$\Im\bm G_0(\bm r_0,\bm r_0)=k\bm I/(6\pi)$。因此
-\[
-    P_0=\frac{\omega^4\abs{\bm p}^2}{12\pi\varepsilon_0 c^3},\qquad
-    P-P_0=\frac{\mu_0\omega^3}{2}
-       \Im\bigb{\bm p\conj\cdot\bm G_\mathrm{ref}(\bm r_0,\bm r_0)\cdot\bm p}.
-\]
-镜像偶极位于$(0,0,-h)$，其切向分量反号、法向分量同号，使导体上的总切向电场为零。在式\eqref{eqn:dyadic dipole field}中放入镜像偶极，取$R=2h$、$\uvec n=\uvec z$，便得到作用回源点的反射场。记往返相位$x=2kh$，由该场对源做的功可得
+导体无损，向上半空间辐射的功率便等于$P$。把$\bm G$分成真空项$\bm G_0$和反射项$\bm G_\mathrm{ref}$。重合点处真空Green张量的实部有奇性，计算功率所用的虚部却是有限的。展开$\sin(kR)/(4\pi R)$并对它作用$\bm I + k^{-2}\grad\grad$，得$\Im\bm G_0(\bm r_0,\bm r_0) = k\bm I/(6\pi)$。因此
+\begin{subequations}
+    \label{eq:ed-dipole-environment-power}
+    \begin{align}
+        P_0 &= \frac{\omega^4\abs{\bm p}^2}{12\pi\varepsilon_0 c^3},\\
+        P - P_0 &= \frac{\mu_0\omega^3}{2}
+           \Im\bigb{\bm p\conj \cdot \bm G_\mathrm{ref}(\bm r_0,\bm r_0) \cdot \bm p}.
+    \end{align}
+\end{subequations}
+镜像偶极位于$(0,0,-h)$，其切向分量反号、法向分量同号，使导体上的总切向电场为零。在式\eqref{eqn:dyadic dipole field}中放入镜像偶极，取$R = 2h$、$\uvec n = \uvec z$，便得到作用回源点的反射场。记往返相位$x = 2kh$，由该场对源做的功可得
 \begin{equation}
     \begin{aligned}
-        \frac{P_\perp}{P_0}&=1+3\biggl(\frac{\sin x}{x^3}-\frac{\cos x}{x^2}\biggr),\\
-        \frac{P_\parallel}{P_0}&=1-\frac32\biggl(
-            \frac{\sin x}{x}+\frac{\cos x}{x^2}-\frac{\sin x}{x^3}\biggr).
+        \frac{P_\perp}{P_0} &= 1 + 3\biggl(\frac{\sin x}{x^3} - \frac{\cos x}{x^2}\biggr),\\
+        \frac{P_\parallel}{P_0} &= 1 - \frac32\biggl(
+            \frac{\sin x}{x} + \frac{\cos x}{x^2} - \frac{\sin x}{x^3}\biggr).
     \end{aligned}
     \label{eqn:mirror-dipole-rates}
 \end{equation}
-图\ref{fig:mirror-dipole-power}中的下标以镜面为准。靠近镜面时，平行偶极和镜像在远区相消，$P_\parallel/P_0\simeq x^2/5$。垂直偶极与镜像同相，在上半空间场振幅加倍，积分所得功率趋于$2P_0$。远离镜面时，两种取向的总功率都趋于$P_0$。\chapref{chap:cavity qed}将用相同的两个比值计算原子在镜前的自发发射寿命。\footnote{电磁Green张量与自发发射率的关系可参阅S. Scheel、L. Knöll和D.-G. Welsch，\href{https://arxiv.org/abs/quant-ph/9905007}{Spontaneous decay in the presence of absorbing dielectric bodies} (1999)。}
+图\ref{fig:mirror-dipole-power}中的下标以镜面为准。靠近镜面时，平行偶极和镜像在远区相消，$P_\parallel/P_0 \simeq x^2/5$。垂直偶极与镜像同相，在上半空间场振幅加倍，积分所得功率趋于$2P_0$。远离镜面时，两种取向的总功率都趋于$P_0$。\chapref{chap:cavity qed}将用相同的两个比值计算原子在镜前的自发发射寿命。\footnote{电磁Green张量与自发发射率的关系可参阅S. Scheel、L. Knöll和D.-G. Welsch，\href{https://arxiv.org/abs/quant-ph/9905007}{Spontaneous decay in the presence of absorbing dielectric bodies} (1999)。}
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=.71\linewidth]{figures/mirror_dipole_power.pdf}
@@ -439,50 +464,54 @@ Jackson用$[\cdot]_\ret$表示赋值$t'=t-R/c$，这样的好处是可以有效�
 
 \section{宏观电磁场}
 尽管我们已经得到了Maxwell方程组、电磁场与标量势矢量势的关系，但我们仍没有处理$\bm B\&\bm H,\bm D\&\bm E$之间的关系。在真空中
-\[
-    \bm D=\varepsilon_0\bm E,\enspace\bm B=\mu_0\bm H,\quad c^2=\frac1{\varepsilon_0\mu_0}.
-\]
+\begin{gather*}
+    \bm D = \varepsilon_0\bm E,\enspace\bm B = \mu_0\bm H,\\
+    c^2 = \frac1{\varepsilon_0\mu_0}.
+\end{gather*}
 有质介质中，
-\[
-    \bm D=\varepsilon_0\bm E+\bm P,\quad \bm H=\bm B/\mu_0-\bm M.
-\]
-对于线性介质，$\bm P=\varepsilon_0\chi_\electric\bm E$，
-\[
-    \bm D=\varepsilon\bm E,\quad\bm H=\bm B/\mu;
-\]
+\begin{equation}
+    \label{eq:ed-macroscopic-constitutive-definitions}
+    \bm D = \varepsilon_0\bm E + \bm P,\quad \bm H = \bm B/\mu_0 - \bm M.
+\end{equation}
+对于线性介质，$\bm P = \varepsilon_0\chi_\electric\bm E$，
+\begin{equation}
+    \label{eq:ed-isotropic-constitutive-relations}
+    \bm D = \varepsilon\bm E,\quad\bm H = \bm B/\mu;
+\end{equation}
 在非线性介质中，关系变得复杂。
 \paragraph{微观场}
 考虑一个仅由电子和原子核构成的微观世界，由于原子之内是如此的空旷，以至于可以认为是真空条件，因此微观场的Maxwell方程
 \begin{align*}
-    \div\bm e&=\frac\varrho{\varepsilon_0},\\
-    \div\bm b&=0,\\
-    \curl\bm e+\pv{\bm b}t&=\bm 0,\\
-    \curl\bm b-\frac1{c^2}\pv{\bm e}t&=\mu_0\bm j.
+    \div\bm e &= \frac\varrho{\varepsilon_0},\\
+    \div\bm b &= 0,\\
+    \curl\bm e + \pv{\bm b}t &= \bm 0,\\
+    \curl\bm b - \frac1{c^2}\pv{\bm e}t &= \mu_0\bm j.
 \end{align*}
 $\varrho,\bm j$是微观电荷密度和电流密度，$\bm e,\bm b$是微观电场和磁场，而$\bm d,\bm h$并无定义。
 \paragraph{宏观场}
 宏观场被定义为微观场的空间平均：
 \[
-    \bm E(\bm r,t)=\ave{\bm e(\bm r,t)},\quad \bm B(\bm r,t)=\ave{\bm b(\bm r,t)},
+    \bm E(\bm r,t) = \ave{\bm e(\bm r,t)},\quad \bm B(\bm r,t) = \ave{\bm b(\bm r,t)},
 \]
 其中空间平均值是相对于测试函数$f(\bm r)$而言的，其定义为：
-\[
-    \ave{F(\bm r,t)}:=\int F(\bm r-\bm r',t)f(\bm r')\d V',
-\]
+\begin{equation}
+    \label{eq:ed-spatial-averaging}
+    \ave{F(\bm r,t)} := \int F(\bm r - \bm r',t)f(\bm r')\d V',
+\end{equation}
 因此，空间和时间的微分运算与平均运算可交换：
 \[
-    \pp{x_\alpha}\ave{F}=\biggave{\pv F{x_\alpha}},\quad\pp t\ave{F}=\biggave{\pv Ft}.
+    \pp{x_\alpha}\ave{F} = \biggave{\pv F{x_\alpha}},\quad\pp t\ave{F} = \biggave{\pv Ft}.
 \]
 从而宏观场的Maxwell方程为： 
 \begin{align}
     \label{eqn:average rho}
-    \varepsilon_0\div\bm E&=\ave{\varrho},\\
+    \varepsilon_0\div\bm E &= \ave{\varrho},\\
     \notag
-    \div\bm B&=0,\\
+    \div\bm B &= 0,\\
     \notag
-    \curl\bm E+\pv{\bm B}t&=\bm0,\\
+    \curl\bm E + \pv{\bm B}t &= \bm0,\\
     \label{eqn:average j}
-    \frac1{\mu_0}\curl\bm B-\varepsilon_0\pv{\bm E}t&=\ave{\bm j}.
+    \frac1{\mu_0}\curl\bm B - \varepsilon_0\pv{\bm E}t &= \ave{\bm j}.
 \end{align}
 因此导出场$\bm D$和$\bm H$是
 通过从$\ave\varrho$和$\ave{\bm j}$提出某些可以看作介质的宏观性质的贡献而引进的。
@@ -490,215 +519,235 @@ $\varrho,\bm j$是微观电荷密度和电流密度，$\bm e,\bm b$是微观电�
 \paragraph{电荷密度}
 我们将电荷$\varrho$分为自由电荷$\varrho_{\mathrm{free}}$和束缚电荷$\varrho_{\mathrm{bound}}$，后者被束缚在分子中，因此
 \begin{align*}
-    \varrho_{\mathrm{free}}(\bm r,t)&=\sum_jq_j\delta(\bm r-\bm r_j);\\
-    \varrho_{\mathrm{bound}}(\bm r,t)&=\sum_n\varrho_n(\bm r,t).
+    \varrho_{\mathrm{free}}(\bm r,t) &= \sum_jq_j\delta(\bm r - \bm r_j);\\
+    \varrho_{\mathrm{bound}}(\bm r,t) &= \sum_n\varrho_n(\bm r,t).
 \end{align*}
 $\varrho_n$是第$n$个分子的电荷密度，分子质心坐标为$\bm r_n$，分子电荷相对质心坐标为$\bm r_{nj}$，则其平均值为
 \[
-    \ave{\varrho_n(\bm r,t)}=\sum_{j(n)}q_jf(\bm r-\bm r_n-\bm r_{nj}),
+    \ave{\varrho_n(\bm r,t)} = \sum_{j(n)}q_jf(\bm r - \bm r_n - \bm r_{nj}),
 \]
-因为$\bm r_{nj}$具有原子线度的数量级，适合在$(\bm r-\bm r_n)$处Taylor展开： 
+因为$\bm r_{nj}$具有原子线度的数量级，适合在$(\bm r - \bm r_n)$处Taylor展开：
 \[
-    f(\bm r-\bm r_n-\bm r_{nj})=f(\bm r-\bm r_n)-\bm r_{nj}\cdot\grad f(\bm r-\bm r_n)+\frac12\sum_{\alpha,\beta}(\bm r_{nj})_\alpha(\bm r_{nj})_\beta\pw f{x_\alpha}{x_\beta}(\bm r-\bm r_n)+\cdots,
+    f(\bm r - \bm r_n - \bm r_{nj}) = f(\bm r - \bm r_n) - \bm r_{nj} \cdot \grad f(\bm r - \bm r_n) + \frac12\sum_{\alpha,\beta}(\bm r_{nj})_\alpha(\bm r_{nj})_\beta\pw f{x_\alpha}{x_\beta}(\bm r - \bm r_n) + \cdots,
 \]
 式中各项分别对应分子电荷、偶极矩、四极矩……
 \begin{align*}
-    \ave{\varrho_n(\bm r,t)}={}&q_nf(\bm r-\bm r_n)-\bm p_n\cdot\grad f(\bm r-\bm r_n)+\frac16\sum_{\alpha,\beta}(Q_n)_{\alpha\beta}\pw f{x_\alpha}{x_\beta}(\bm r-\bm r_n)+\cdots
+    \ave{\varrho_n(\bm r,t)} = {}&q_nf(\bm r - \bm r_n) - \bm p_n \cdot \grad f(\bm r - \bm r_n) + \frac16\sum_{\alpha,\beta}(Q_n)_{\alpha\beta}\pw f{x_\alpha}{x_\beta}(\bm r - \bm r_n) + \cdots
 \end{align*}
 将上式各项表示成空间平均的形式：
 \begin{align*}
-    \ave{\varrho_n(\bm r,t)}={}&\ave{q_n\delta(\bm r-\bm r_n)}-\div\ave{\bm p_n\delta(\bm r-\bm r_n)}+\frac16\sum_{\alpha,\beta}\pw{}{x_\alpha}{x_\beta}\ave{(Q_n)_{\alpha\beta}\delta(\bm r-\bm r_n)}+\cdots
+    \ave{\varrho_n(\bm r,t)} = {}&\ave{q_n\delta(\bm r - \bm r_n)} - \div\ave{\bm p_n\delta(\bm r - \bm r_n)} + \frac16\sum_{\alpha,\beta}\pw{}{x_\alpha}{x_\beta}\ave{(Q_n)_{\alpha\beta}\delta(\bm r - \bm r_n)} + \cdots
 \end{align*}
 就平均而言，可以把分子看作位于分子质心(也可选取其他固定点)上的点多极子的集合。对所有分子求和，得到
 \[
-    \ave{\varrho(\bm r,t)}=\rho(\bm r,t)-\div\bm P(\bm r,t)+\sum_{\alpha,\beta}\pw{}{x_\alpha}{x_\beta}Q_{\alpha\beta}(\bm r,t)+\cdots
+    \ave{\varrho(\bm r,t)} = \rho(\bm r,t) - \div\bm P(\bm r,t) + \sum_{\alpha,\beta}\pw{}{x_\alpha}{x_\beta}Q_{\alpha\beta}(\bm r,t) + \cdots
 \]
 其中$\rho,\bm P,Q_{\alpha\beta}$分别是宏观电荷密度、宏观电极化强度、宏观电四极矩密度……
 因此式\eqref{eqn:average rho}可以写成 
 \[
-    \div\bm D=\rho,
+    \div\bm D = \rho,
 \]
 宏观电位移矢量定义为
-\[
-    D_\alpha:=\varepsilon_0E_\alpha+P_\alpha-\sum_\beta\pv{Q_{\alpha\beta}}{x_\beta}+\cdots
-\]
+\begin{equation}
+    \label{eq:ed-displacement-quadrupole}
+    D_\alpha := \varepsilon_0E_\alpha + P_\alpha - \sum_\beta\pv{Q_{\alpha\beta}}{x_\beta} + \cdots
+\end{equation}
 前两项是熟知的结果，更高阶项原则上是存在的，但几乎可以忽略不计。
 \paragraph{电流密度}
 $\ave{\bm j}$的推导比$\ave{\varrho}$的处理复杂的多，在这里仅给出结果。定义分子磁矩和宏观磁化强度分别为
-\[
-    \bm m_n=\frac12\sum_{j(n)}q_j\bm r_{jn}\times\bm v_{jn},\quad\bm M(\bm r,t)=\sum_n\bm m_n\delta(\bm r-\bm r_n),
-\]
+\begin{align*}
+    \bm m_n &= \frac12\sum_{j(n)}q_j\bm r_{jn} \times \bm v_{jn},\\
+    \bm M(\bm r,t) &= \sum_n\bm m_n\delta(\bm r - \bm r_n),
+\end{align*}
 宏观电流密度
-\[
-    \bm J(\bm r,t)=\ave{\bm j_{\mathrm{free}}+\bm j_{\mathrm{bound}}},\quad\bm j_{\mathrm{free}}(\bm r,t):=\sum_jq_j\bm v_j\delta(\bm r-\bm r_j).
-\]
+\begin{align*}
+    \bm J(\bm r,t) &= \ave{\bm j_{\mathrm{free}} + \bm j_{\mathrm{bound}}},\\
+    \bm j_{\mathrm{free}}(\bm r,t) &:= \sum_jq_j\bm v_j\delta(\bm r - \bm r_j).
+\end{align*}
 进而定义磁场强度\footnote{本式其实是运动介质的%Minkowski电动力学的
 非相对论性极限。}
 \[
-    \bm H:=\frac{\bm B}{\mu_0}-\bm M-(\bm D-\varepsilon_0\bm E)\times\bm v.
+    \bm H := \frac{\bm B}{\mu_0} - \bm M - (\bm D - \varepsilon_0\bm E) \times \bm v.
 \]
 因此式\eqref{eqn:average j}可以写成
 \[
-    \curl\bm H-\pv{\bm D}t=\bm J.
+    \curl\bm H - \pv{\bm D}t = \bm J.
 \] 
 
 \section{电磁场的能量、动量和角动量}
 
 \paragraph{能量守恒}
 
-电流从场中获得的功率密度为$\bm J\cdot\bm E$。先用宏观场描述静止介质，$\bm J$为显式列入Ampère定律的自由电流。利用Maxwell方程组和式\eqref{eqn:divAxB}得
+电流从场中获得的功率密度为$\bm J \cdot \bm E$。先用宏观场描述静止介质，$\bm J$为显式列入Ampère定律的自由电流。利用Maxwell方程组和式\eqref{eqn:divAxB}得
 \[
-    \div(\bm E\times\bm H)+\bm E\cdot\pv{\bm D}t
-       +\bm H\cdot\pv{\bm B}t=-\bm J\cdot\bm E .
+    \div(\bm E \times \bm H) + \bm E \cdot \pv{\bm D}t
+       + \bm H \cdot \pv{\bm B}t = -\bm J \cdot \bm E .
 \]
 这一步只用到了场方程。进一步设介质的电、磁响应线性、互易、无色散，本构参数为与时间无关的实数或实对称张量。此时上式中两个含时间导数的项恰好合成$\p u/\p t$，其中
-\[
-    u=w_\electric+w_\magnetic
-      =\frac12(\bm E\cdot\bm D+\bm H\cdot\bm B),\qquad
-    \bm S=\bm E\times\bm H .
-\]
+\begin{subequations}
+    \label{eq:ed-macroscopic-energy-and-flux}
+    \begin{align}
+        u &= w_\electric + w_\magnetic
+          = \frac12(\bm E \cdot \bm D + \bm H \cdot \bm B),\\
+        \bm S &= \bm E \times \bm H .
+    \end{align}
+\end{subequations}
 \begin{theorem}{Poynting定律(电磁场的能量守恒定律)}{Poynting theorem}
     体积$V$内的储能增加率，加上通过边界向外流出的功率，等于场对该体积内电流做功的功率取负号。取面积元指向外侧，
-    \[
-        \pv ut+\div\bm S=-\bm J\cdot\bm E,\qquad
-        \dd t\int_V u\d V+\oint_{\p V}\bm S\cdot\d\bm A
-             =-\int_V\bm J\cdot\bm E\d V .
-    \]
+    \begin{subequations}
+        \label{eq:ed-poynting-theorem}
+        \begin{align}
+            \pv ut + \div\bm S &= -\bm J \cdot \bm E,\\
+            \dd t\int_V u\d V + \oint_{\p V}\bm S \cdot \d\bm A
+                 &= -\int_V\bm J \cdot \bm E\d V .
+        \end{align}
+    \end{subequations}
 \end{theorem}
-若改用微观场，所有电荷的运动都计入总电流$\bm J_{\mathrm{tot}}$。直接从微观Maxwell方程得到同一守恒式，此时
-\[
-    u_{\mathrm f}=\frac{\varepsilon_0}2 E^2+\frac{B^2}{2\mu_0},\qquad
-    \bm S_{\mathrm f}=\frac{\bm E\times\bm B}{\mu_0}.
-\]
-即使体积内有电荷，这两个场量仍然适用。若粒子不穿过边界且只有电磁力做功，$\int_V\bm J_{\mathrm{tot}}\cdot\bm E\d V$正好是粒子机械能的增加率。宏观描述则把可逆极化和磁化所储存的能量计入$u$，显式传导电流的Joule热计入$\bm J\cdot\bm E$。
+若改用微观场，所有电荷的运动都计入总电流$\bm J_{\mathrm{tot}}$。直接从微观Maxwell方程得到与式\eqref{eq:ed-poynting-theorem}相同形式的守恒律，此时
+\begin{subequations}
+    \label{eq:ed-microscopic-energy-and-flux}
+    \begin{align}
+        u_{\mathrm f} &= \frac{\varepsilon_0}2 E^2 + \frac{B^2}{2\mu_0},\\
+        \bm S_{\mathrm f} &= \frac{\bm E \times \bm B}{\mu_0}.
+    \end{align}
+\end{subequations}
+即使体积内有电荷，这两个场量仍然适用。若粒子不穿过边界且只有电磁力做功，$\textstyle \int_V\bm J_{\mathrm{tot}} \cdot \bm E\d V$正好是粒子机械能的增加率。宏观描述则把可逆极化和磁化所储存的能量计入$u$，显式传导电流的Joule热计入$\bm J \cdot \bm E$。
 \begin{example}{导线的Joule热}{Joule heating of a wire}
     圆柱形导线长度为$L$，半径$a$，两端电压为$V$，则电场强度
     \[
-        E=\frac VL,
+        E = \frac VL,
     \]
     导体表面磁场
     \[
-        B=\frac{\mu_0}{2\pi}\frac Ia.
+        B = \frac{\mu_0}{2\pi}\frac Ia.
     \]
     Poynting矢量向里，大小为
     \[
-        S=\frac VL\cdot\frac1{\mu_0}\frac{\mu_0}{2\pi}\frac Ia=\frac{VI}{2\pi aL},
+        S = \frac VL \cdot \frac1{\mu_0}\frac{\mu_0}{2\pi}\frac Ia = \frac{VI}{2\pi aL},
     \]
     取导线表面的外法向，流入导线并转化为热的功率为
     \[
-        -\oint_{\p V}\bm S\cdot\d\bm A=S\cdot 2\pi aL=VI.
+        -\oint_{\p V}\bm S \cdot \d\bm A = S \cdot 2\pi aL = VI.
     \]
 \end{example}
 \paragraph{动量守恒}
-以下使用真空中的微观场及总电荷、电流密度，$\bm H=\bm B/\mu_0$。所得场动量密度不应直接推广为一般物质中场与物质动量的划分。
+以下使用真空中的微观场及总电荷、电流密度，$\bm H = \bm B/\mu_0$。所得场动量密度不应直接推广为一般物质中场与物质动量的划分。
 电磁场对带电粒子的力是Lorentz力
 \[
-    \bm F=q(\bm E+\bm v\times\bm B).
+    \bm F = q(\bm E + \bm v \times \bm B).
 \]
 则粒子动量的变化率为
 \[
-    \dv{\bm P_{\mathrm{m}}}t=\int_V(\rho\bm E+\bm J\times\bm B)\d V
+    \dv{\bm P_{\mathrm{m}}}t = \int_V(\rho\bm E + \bm J \times \bm B)\d V
 \]
 消去源，得到
 \begin{align*}
-    \rho\bm E+\bm J\times\bm B&=\varepsilon_0(\div\bm E)\bm E+\biggp{\frac1{\mu_0}\curl\bm B-\varepsilon_0\pv{\bm E}t}\times\bm B\\
-    &=\varepsilon_0\Bigb{\bm E(\div\bm E)-c^2\bm B\times(\curl\bm B)-\bm E\times(\curl\bm E)-\pp t(\bm E\times\bm B)},
+    \rho\bm E + \bm J \times \bm B &= \varepsilon_0(\div\bm E)\bm E + \biggp{\frac1{\mu_0}\curl\bm B - \varepsilon_0\pv{\bm E}t} \times \bm B\\
+    &= \varepsilon_0\Bigb{\bm E(\div\bm E) - c^2\bm B \times (\curl\bm B) - \bm E \times (\curl\bm E) - \pp t(\bm E \times \bm B)},
 \end{align*}
 右边出现了%Poynting矢量对
 时间的导数，我们依此定义电磁场的动量
-\[
-    \bm P_{\mathrm{f}}:=\varepsilon_0\int_V\bm E\times\bm B\d V=\frac1{c^2}\int_V\bm E\times\bm H\d V.
-\]
+\begin{equation}
+    \label{eq:ed-vacuum-field-momentum}
+    \bm P_{\mathrm{f}} := \varepsilon_0\int_V\bm E \times \bm B\d V = \frac1{c^2}\int_V\bm E \times \bm H\d V.
+\end{equation}
 电磁场的动量密度
-\[
-    \bm g:=\frac1{c^2}\bm E\times\bm H=\frac1{c^2}\bm S.
-\]
+\begin{equation}
+    \label{eq:ed-vacuum-momentum-density}
+    \bm g := \frac1{c^2}\bm E \times \bm H = \frac1{c^2}\bm S.
+\end{equation}
 则
 \[
-    \dv{\bm P_{\mathrm{m}}}t+\dv{\bm P_{\mathrm{f}}}t=\varepsilon_0\int_V\Bigb{\bm E(\div\bm E)-\bm E\times(\curl\bm E)-c^2\bm B\times(\curl\bm B)}\d V.
+    \dv{\bm P_{\mathrm{m}}}t + \dv{\bm P_{\mathrm{f}}}t = \varepsilon_0\int_V\Bigb{\bm E(\div\bm E) - \bm E \times (\curl\bm E) - c^2\bm B \times (\curl\bm B)}\d V.
 \]
-右边的体积分完全可以加上$c^2\bm B(\div\bm B)\equiv 0$以更对称。并且注意到
+右边的体积分完全可以加上$c^2\bm B(\div\bm B) \equiv 0$以更对称。并且注意到
 \[
-    [\bm E(\div\bm E)-\bm E\times(\curl\bm E)]_\alpha=\sum_\beta\pp{x_\beta}\Bigp{E_\alpha E_\beta-\frac12E^2\delta_{\alpha\beta}};
+    [\bm E(\div\bm E) - \bm E \times (\curl\bm E)]_\alpha = \sum_\beta\pp{x_\beta}\Bigp{E_\alpha E_\beta - \frac12E^2\delta_{\alpha\beta}};
 \]
 从而右边的体积分具有散度的形式，定义Maxwell应力张量(Maxwell stress tensor)
 \begin{equation}
     \label{eqn:vacuum maxwell stress}
-    T_{\alpha\beta}:=\varepsilon_0\Bigb{E_\alpha E_\beta+c^2B_\alpha B_\beta-\frac12(E^2+c^2B^2)\delta_{\alpha\beta}}.
+    T_{\alpha\beta} := \varepsilon_0\Bigb{E_\alpha E_\beta + c^2B_\alpha B_\beta - \frac12(E^2 + c^2B^2)\delta_{\alpha\beta}}.
 \end{equation}
 则
-\[
-    \dd t({\bm P_{\mathrm{m}}}+{\bm P_{\mathrm{f}}})_\alpha=\oint_{\p V}\sum_\beta T_{\alpha\beta}\hat n_\beta\d A.
-\]
-\paragraph{角动量守恒}
-取固定原点，记Lorentz力密度为$\bm f=\rho\bm E+\bm J\times\bm B$。动量守恒的局域形式为$\p_t g_i+f_i=\sum_j\p_j T_{ij}$。场的角动量密度为$\bm r\times\bm g$，力矩密度为$\bm r\times\bm f$。将动量方程对原点取力矩，由于$T_{ij}=T_{ji}$，对$\bm r$求导产生的项$\sum_{jk}\epsilon_{ijk}T_{kj}$为零。对固定体积$V$积分得
 \begin{equation}
-    \dd t\int_V\bm r\times\bm g\,\d V
-    +\int_V\bm r\times\bm f\,\d V
-    =\oint_{\p V}\bm r\times(\bm T\cdot\uvec n)\,\d A .
+    \label{eq:ed-integral-momentum-balance}
+    \dd t({\bm P_{\mathrm{m}}} + {\bm P_{\mathrm{f}}})_\alpha = \oint_{\p V}\sum_\beta T_{\alpha\beta}\hat n_\beta\d A.
 \end{equation}
-这里$\uvec n$为外法向。按本节的应力符号，$-\bm r\times(\bm T\cdot\uvec n)$为单位面积上向外的角动量通量。对封闭面积分给出电磁场通过边界带走的角动量率。
+\paragraph{角动量守恒}
+取固定原点，记Lorentz力密度为$\bm f = \rho\bm E + \bm J \times \bm B$。动量守恒的局域形式为
+\begin{equation}
+    \label{eq:ed-local-momentum-balance}
+    \p_t g_i + f_i = \sum_j\p_j T_{ij}.
+\end{equation}
+场的角动量密度为$\bm r \times \bm g$，力矩密度为$\bm r \times \bm f$。将动量方程对原点取力矩，由于$T_{ij} = T_{ji}$，对$\bm r$求导产生的项$\textstyle \sum_{jk}\epsilon_{ijk}T_{kj}$为零。对固定体积$V$积分得
+\begin{equation}
+    \dd t\int_V\bm r \times \bm g\,\d V
+    + \int_V\bm r \times \bm f\,\d V
+    = \oint_{\p V}\bm r \times (\bm T \cdot \uvec n)\,\d A .
+\end{equation}
+这里$\uvec n$为外法向。按本节的应力符号，$-\bm r \times (\bm T \cdot \uvec n)$为单位面积上向外的角动量通量。对封闭面积分给出电磁场通过边界带走的角动量率。
 
 \begin{example}{Feynman圆盘}{paradox of Feynman disc}
     绝缘圆盘的边缘均匀带有总电荷$Q$，可以绕轴自由转动。记同轴线圈穿过整个盘面的磁通量为$\varPhi(t)$，取$+z$为磁通和转动的正向，忽略圆盘转动产生的自场。电流缓慢关断时，Faraday感应电场给盘缘的电荷以力矩。设盘缘半径为$b$，由轴对称性
-    \[
-        2\pi b E_\phi(b)=-\dv{\varPhi}t,\qquad
-        N_z=QbE_\phi(b)=-\frac{Q}{2\pi}\dv{\varPhi}t .
-    \]
-    若初始磁通量为$\varPhi_0$，最终为零，则盘得到的角动量为$\Delta L_z=Q\varPhi_0/(2\pi)$。初始的静电场和静磁场已经携带角动量。改变磁通量时，感应电场可以把角动量转移给圆盘。实际装置的完整角动量收支还包括线圈、支架和穿过所选边界的场。
+    \begin{align*}
+        2\pi b E_\phi(b) &= -\dv{\varPhi}t,\\
+        N_z &= QbE_\phi(b) = -\frac{Q}{2\pi}\dv{\varPhi}t .
+    \end{align*}
+    若初始磁通量为$\varPhi_0$，最终为零，则盘得到的角动量为$\Delta L_z = Q\varPhi_0/(2\pi)$。初始的静电场和静磁场已经携带角动量。改变磁通量时，感应电场可以把角动量转移给圆盘。实际装置的完整角动量收支还包括线圈、支架和穿过所选边界的场。
 \end{example}
 \subsection{色散介质中的Poynting定律}
 \label{ssec:Poynting in dissipative media}
 在有色散介质中，$\varepsilon,\mu$与频率$\omega$有关，前面的假设不再成立，但仍有
 \[
-    \int_V\bm J\cdot\bm E\d V=-\int_V\Bigb{\div(\bm E\times\bm H)+\bm H\cdot\pv{\bm B}t+\bm E\cdot\pv{\bm D}t}\d V.
+    \int_V\bm J \cdot \bm E\d V = -\int_V\Bigb{\div(\bm E \times \bm H) + \bm H \cdot \pv{\bm B}t + \bm E \cdot \pv{\bm D}t}\d V.
 \]
 为了讨论色散，有必要利用Fourier变换将时域变到频域中：
 \begin{align*}
-    \bm E(\bm r,t)&=\intR\hatbm E(\bm r,\omega)\e^{-\i\omega t}\d\omega,\\
-    \bm D(\bm r,t)&=\intR\hatbm D(\bm r,\omega)\e^{-\i\omega t}\d\omega;
+    \bm E(\bm r,t) &= \intR\hatbm E(\bm r,\omega)\e^{-\i\omega t}\d\omega,\\
+    \bm D(\bm r,t) &= \intR\hatbm D(\bm r,\omega)\e^{-\i\omega t}\d\omega;
 \end{align*}
 在此我们仍假设介质是各向同性的，从而
 \[
-    \hatbm D(\bm r,\omega)=\varepsilon(\omega)\hatbm E(\bm r,\omega),
+    \hatbm D(\bm r,\omega) = \varepsilon(\omega)\hatbm E(\bm r,\omega),
 \]
 其中$\varepsilon$是复数，而场$\bm E(\bm r,t)$必然仍是实数，因此%简单的将积分变量$\omega$变为$-\omega$可得
 \[
-    \hatbm E(\bm r,-\omega)=\hatbm E\conj(\bm r,\omega),\quad\hatbm D(\bm r,-\omega)=\hatbm D\conj(\bm r,\omega),
+    \hatbm E(\bm r,-\omega) = \hatbm E\conj(\bm r,\omega),\quad\hatbm D(\bm r,-\omega) = \hatbm D\conj(\bm r,\omega),
 \]
-从而$\varepsilon(-\omega)=\varepsilon\conj(\omega)$。频率响应使同一点的$\bm D(t)$依赖于此前的电场。即使介质透明，$\bm E\cdot\p\bm D/\p t$通常也不能写成$\p(\bm E\cdot\bm D/2)/\p t$。
+从而$\varepsilon(-\omega) = \varepsilon\conj(\omega)$。频率响应使同一点的$\bm D(t)$依赖于此前的电场。即使介质透明，$\bm E \cdot \p\bm D/\p t$通常也不能写成$\p(\bm E \cdot \bm D/2)/\p t$。
 
 \paragraph{窄带波包的储能和吸收}
-取中心频率为$\omega_0$的窄带波包，记物理电场为$\Re[\bm E_a(t)\e^{-\i\omega_0t}]$，其中$\bm E_a$是缓变的峰值复振幅，磁场同理。将$-\i\omega\varepsilon(\omega)$在$\omega_0$处展开到一阶，$\p\bm D/\p t$的复包络为
+取中心频率为$\omega_0$的窄带波包，记物理电场为$\Re[\bm E_{\mathrm{a}}(t)\e^{-\i\omega_0t}]$，其中$\bm E_{\mathrm{a}}$是缓变的峰值复振幅，磁场同理。将$-\i\omega\varepsilon(\omega)$在$\omega_0$处展开到一阶，$\p\bm D/\p t$的复包络为
 \[
-    -\i\omega_0\varepsilon(\omega_0)\bm E_a
-        +\eval{\dv{(\omega\varepsilon)}\omega}_{\omega_0}\pv{\bm E_a}t .
+    -\i\omega_0\varepsilon(\omega_0)\bm E_{\mathrm{a}}
+        + \eval{\dv{(\omega\varepsilon)}\omega}_{\omega_0}\pv{\bm E_{\mathrm{a}}}t .
 \]
 在一个载波周期上取平均，相乘的两个实场给出各自复振幅乘积的一半实部。若频带透明，或吸收很弱且吸收项在带宽内的变化可忽略，则
 \[
-    \biggave{\bm E\cdot\pv{\bm D}t}\simeq
-      \frac{\omega_0}{2}\Im\varepsilon\,\abs{\bm E_a}^2+
-      \frac14\dv{(\omega\Re\varepsilon)}\omega\,\pv{\abs{\bm E_a}^2}t .
+    \biggave{\bm E \cdot \pv{\bm D}t} \simeq
+      \frac{\omega_0}{2}\Im\varepsilon\,\abs{\bm E_{\mathrm{a}}}^2 +
+      \frac14\dv{(\omega\Re\varepsilon)}\omega\,\pv{\abs{\bm E_{\mathrm{a}}}^2}t .
 \]
 以下本构参数及频率导数均取在$\omega_0$。加上磁场项，得到包含材料可逆响应的周期平均储能密度（Brillouin公式）和介质吸收的平均功率密度，
 \begin{align}
     \label{eqn:Brillouin energy}
-    u_\eff&=\frac14\biggb{\dv{(\omega\Re\varepsilon)}\omega\abs{\bm E_a}^2+
-                              \dv{(\omega\Re\mu)}\omega\abs{\bm H_a}^2},\\
-    q_{\mathrm{abs}}&=\frac{\omega_0}{2}
-        \bigp{\Im\varepsilon\,\abs{\bm E_a}^2+\Im\mu\,\abs{\bm H_a}^2}.
+    u_\eff &= \frac14\biggb{\dv{(\omega\Re\varepsilon)}\omega\abs{\bm E_{\mathrm{a}}}^2 +
+                              \dv{(\omega\Re\mu)}\omega\abs{\bm H_{\mathrm{a}}}^2},\\
+    q_{\mathrm{abs}} &= \frac{\omega_0}{2}
+        \bigp{\Im\varepsilon\,\abs{\bm E_{\mathrm{a}}}^2 + \Im\mu\,\abs{\bm H_{\mathrm{a}}}^2}.
 \end{align}
-令$\ave{\bm S}=\tfrac12\Re(\bm E_a\times\bm H_a\conj)$，周期平均的能量收支为
+令$\ave{\bm S} = \Re(\bm E_{\mathrm{a}} \times \bm H_{\mathrm{a}}\conj)/2$，周期平均的能量收支为
 \begin{equation}
     \label{eqn:Poynting with loss}
-    \pv{u_\eff}t+\div\ave{\bm S}\simeq-\ave{\bm J\cdot\bm E}-q_{\mathrm{abs}} .
+    \pv{u_\eff}t + \div\ave{\bm S} \simeq -\ave{\bm J \cdot \bm E} - q_{\mathrm{abs}} .
 \end{equation}
-例如，若$\bm J$显式包含$\sigma\bm E$，则$\varepsilon$只计入其余极化响应$\varepsilon_{\mathrm b}$；若改用$\varepsilon=\varepsilon_{\mathrm b}+\i\sigma/\omega$，同一传导损耗已计入$q_{\mathrm{abs}}$，右端的$\bm J$只保留其余显式电流。强吸收频带内，确定可回收的储能还需材料的动力学模型。\footnote{透明频带中Brillouin储能与能量速度的关系见 A.~Welters, Y.~Avniel and S.~G. Johnson, \href{https://doi.org/10.1103/PhysRevA.90.023847}{\textit{Physical Review A} \textbf{90}, 023847 (2014)}, Sec.~II。}
+例如，若$\bm J$显式包含$\sigma\bm E$，则$\varepsilon$只计入其余极化响应$\varepsilon_{\mathrm b}$；若改用$\varepsilon = \varepsilon_{\mathrm b} + \i\sigma/\omega$，同一传导损耗已计入$q_{\mathrm{abs}}$，右端的$\bm J$只保留其余显式电流。强吸收频带内，确定可回收的储能还需材料的动力学模型。\footnote{透明频带中Brillouin储能与能量速度的关系见 A.~Welters, Y.~Avniel and S.~G. Johnson, \href{https://doi.org/10.1103/PhysRevA.90.023847}{\textit{Physical Review A} \textbf{90}, 023847 (2014)}, Sec.~II。}
 
 \subsectionstar{谐振场的Poynting定律}
 我们假定所有的场和源都是随时间简谐的，即 
 \[
-    \bm E(\bm r,t)=\Re\bigb{\bm E(\bm r)\e^{-\i\omega t}},
+    \bm E(\bm r,t) = \Re\bigb{\bm E(\bm r)\e^{-\i\omega t}},
 \]
 其中$\bm E(\bm r)$一般是复的，有相位的信息。
 %因此
@@ -706,67 +755,68 @@ $\ave{\bm j}$的推导比$\ave{\varrho}$的处理复杂的多，在这里仅给�
 谐振场的Maxwell方程组可以写成
 \begin{subequations}
     \begin{align}
-        \div\bm D&=\rho,\\
-        \div\bm B&=0,\\
+        \div\bm D &= \rho,\\
+        \div\bm B &= 0,\\
         \label{eqn:Maxwell curlE freq}
-        \curl\bm E&=\i\omega\bm B,\\
+        \curl\bm E &= \i\omega\bm B,\\
         \label{eqn:Maxwell curlH freq}
-        \curl\bm H&=\bm J-\i\omega\bm D.
+        \curl\bm H &= \bm J - \i\omega\bm D.
     \end{align}
 \end{subequations}
 取复功率的形式，其实部为场对电流做功的周期平均功率，
 \begin{align*}
-    \frac12\int_V\bm J\conj\cdot\bm E\d V&=\frac12\int_V(\curl\bm H\conj-\i\omega\bm D\conj)\cdot\bm E\d V\\
-    &=\frac12\int_V\Bigb{-\div(\bm E\times\bm H\conj)-\i\omega(\bm E\cdot\bm D\conj-\bm B\cdot\bm H\conj)}\d V.
+    \frac12\int_V\bm J\conj \cdot \bm E\d V &= \frac12\int_V(\curl\bm H\conj - \i\omega\bm D\conj) \cdot \bm E\d V\\
+    &= \frac12\int_V\Bigb{-\div(\bm E \times \bm H\conj) - \i\omega(\bm E \cdot \bm D\conj - \bm B \cdot \bm H\conj)}\d V.
 \end{align*}
 复Poynting矢量
 \begin{equation}
-    \bm S=\frac12\bm E\times\bm H\conj.
+    \bm S = \frac12\bm E \times \bm H\conj.
 \end{equation}
 为了分开电场项与磁场项，定义两个辅助量。无色散、无损的线性互易介质中，它们分别等于电、磁储能密度的周期平均值，
 \begin{subequations}
     \begin{align}
-        w_\electric&=\frac14\bm E\cdot\bm D\conj,\\
-        w_\magnetic&=\frac14\bm B\cdot\bm H\conj.
+        w_\electric &= \frac14\bm E \cdot \bm D\conj,\\
+        w_\magnetic &= \frac14\bm B \cdot \bm H\conj.
     \end{align}
 \end{subequations}
 故简谐场的Poynting定律为
 \begin{equation}
-    \frac12\int_V\bm J\conj\cdot\bm E\d V+2\i\omega\int_V(w_\electric-w_\magnetic)\d V+\oint_{\p V}\bm S\cdot\d\bm A=0.
+    \frac12\int_V\bm J\conj \cdot \bm E\d V + 2\i\omega\int_V(w_\electric - w_\magnetic)\d V + \oint_{\p V}\bm S \cdot \d\bm A = 0.
 \end{equation}
 取实部即得有功功率收支，虚部给出反应功率。若介质无损耗，$w_\electric,w_\magnetic$为实数，遂有
-\[
-    \frac12\int_V\Re(\bm J\conj\cdot\bm E)\d V
-       +\oint_{\p V}\Re(\bm S)\cdot\d\bm A=0 .
-\]
-此时从边界流入的平均功率全部交给显式电流。有吸收时，$2\i\omega(w_\electric-w_\magnetic)$的实部正是上节的$q_{\mathrm{abs}}$。
+\begin{equation}
+    \label{eq:ed-harmonic-power-balance}
+    \frac12\int_V\Re(\bm J\conj \cdot \bm E)\d V
+       + \oint_{\p V}\Re(\bm S) \cdot \d\bm A = 0 .
+\end{equation}
+此时从边界流入的平均功率全部交给显式电流。有吸收时，$2\i\omega(w_\electric - w_\magnetic)$的实部正是上节的$q_{\mathrm{abs}}$。
 \paragraph{阻抗和导纳}
 本节继续采用$\e^{-\i\omega t}$的时间约定。阻抗$Z$ (impedance)、电阻$R$ (resistance)、电抗$X$ (reactance)
 \[
-    Z=R+\i X,
+    Z = R + \i X,
 \]
-$X<0$：感抗(inductance)；$X>0$：容抗(capacitance)，因为$Z_L=-\i\omega L$、$Z_C=\i/(\omega C)$。\footnote{电气工程师的$i$已经被电流占用，故虚数单位采用j，阻抗写作$Z=R+\mathrm j X.$}
+$X < 0$：感抗(inductance)；$X > 0$：容抗(capacitance)，因为$Z_L = -\i\omega L$、$Z_C = \i/(\omega C)$。\footnote{电气工程师的$i$已经被电流占用，故虚数单位采用j，阻抗写作$Z = R + \mathrm j X.$}
 
 导纳$Y$ (admittance)、电导$G$ (conductance)、电纳$B$ (susceptance)
 \[
-    Y=G+\i B,
+    Y = G + \i B,
 \]
-$B<0$：容纳(capacitive susceptance)；$B>0$：感纳(inductive susceptance)。若改用电工学常见的$\e^{+\i\omega t}$约定，上述电抗、电纳的符号均反转。
+$B < 0$：容纳(capacitive susceptance)；$B > 0$：感纳(inductive susceptance)。若改用电工学常见的$\e^{+\i\omega t}$约定，上述电抗、电纳的符号均反转。
 
-阻抗$Z$和导纳$Y$的关系为$Y=Z\inv$。
+阻抗$Z$和导纳$Y$的关系为$Y = Z\inv$。
 \section{电磁场的变换性质、空间反演和时间反演}
 \begin{definition}{空间反演}{spatial reflection}
     空间反演(spatial reflection)变换或称宇称(parity)变换是指
     \[
-        P:\bm r_i\mapsto -\bm r_i,
+        P:\bm r_i \mapsto -\bm r_i,
     \]
     在此反演变换下，(真)矢量将同步反转(奇变换)：
     \[
-        P:\bm V\mapsto -\bm V;
+        P:\bm V \mapsto -\bm V;
     \]
     而赝矢量(pseudovector)将保持不变(偶变换)：
     \[
-        P:\bm A\mapsto \bm A.
+        P:\bm A \mapsto \bm A.
     \]
 \end{definition}
 
@@ -776,24 +826,27 @@ $B<0$：容纳(capacitive susceptance)；$B>0$：感纳(inductive susceptance)�
     	\item 真矢量：坐标$\bm r$、速度$\bm v$、动量$\bm p$、电场$\bm E$；
     	\item 赝矢量：角动量$\bm L$、力矩$\bm N$、磁场$\bm B$。
     \end{compactitem}
-    此外还有真标量(如质量$m$、电荷$q$)和赝标量(如混合积$\bm A\cdot(\bm B\times\bm C)$)之分。
+    此外还有真标量(如质量$m$、电荷$q$)和赝标量(如混合积$\bm A \cdot (\bm B \times \bm C)$)之分。
 \end{corollary}
 
 \begin{remark}
-    Poynting矢量是真矢量与赝矢量叉乘($\bm S=\bm E\times\bm H$)，但其仍是真矢量。
+    Poynting矢量是真矢量与赝矢量叉乘($\bm S = \bm E \times \bm H$)，但其仍是真矢量。
 \end{remark}
 
 \begin{definition}{时间反演}{time reversal}
     时间反演(time reversal)即
     \[
-        t'=-t,
+        t' = -t,
     \]
     同样有奇偶变换之分，但这与真赝矢量并无联系。
 \end{definition}
 
 将一段带电粒子的运动按相反的时间次序重放，在同一位置，电荷密度相同而电流反向。相应的源与场为
-\begin{align*}
-    \rho'(\bm r,t)&=\rho(\bm r,-t),& \bm J'(\bm r,t)&=-\bm J(\bm r,-t),\\
-    \bm E'(\bm r,t)&=\bm E(\bm r,-t),&\bm B'(\bm r,t)&=-\bm B(\bm r,-t).
-\end{align*}
+\begin{subequations}
+    \label{eq:ed-time-reversal-fields}
+    \begin{align}
+        \rho'(\bm r,t) &= \rho(\bm r,-t),& \bm J'(\bm r,t) &= -\bm J(\bm r,-t),\\
+        \bm E'(\bm r,t) &= \bm E(\bm r,-t),&\bm B'(\bm r,t) &= -\bm B(\bm r,-t).
+    \end{align}
+\end{subequations}
 这样，速度和磁场同时反号，Lorentz力与加速度均保持原方向。真空场的能量密度也是偶的，Poynting矢量和角动量密度则反向。若原解描述向外传播的辐射，反演后的解描述向内会聚的波。选择推迟势给电磁问题指定了辐射边界条件。
