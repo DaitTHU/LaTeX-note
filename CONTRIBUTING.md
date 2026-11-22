@@ -22,11 +22,11 @@ CI 分别缓存每门课的 MATLAB 插图、每份 TikZ 图册及每个笔记入
 
 编译失败时，查看出错入口旁的 `*.build.log` 获取完整命令输出，或查看 `*.log` 定位 TeX 报错。出现 `Unknown TikZ figure` 时，核对正文引用与图册中的标签，再用构建脚本按顺序重编图册和正文。Linux 上如提示缺少“㶲”等专业汉字，检查是否安装了 `fonts-noto-cjk`。
 
-打开生成的 PDF，检查修改页及相邻页的公式换行、图表、引用和页眉。遇到 `tcolorbox` 跨页警告时，着重检查框内文字与公式是否完整。提交源文件即可，课程 PDF、TikZ 图册和 MATLAB 插图由 CI 生成。
+打开生成的 PDF，检查修改页及相邻页的公式换行、行内公式的行距、子式编号与引用，以及图表和页眉。行内分式、行间公式编号和数学源码空格的约定见[数学宏与公式排版](mathdef_example.md)。遇到 `tcolorbox` 跨页警告时，着重检查框内文字与公式是否完整。提交源文件即可，课程 PDF、TikZ 图册和 MATLAB 插图由 CI 生成。
 
 ## 插图
 
-同一课程的 TikZ 图片写在 `figures/tikz.tex`。例如，在量子力学图册的正文中加入一页：
+同一课程的 TikZ 图片汇集在 `figures/tikz.tex`。简单示意图可以直接写在图册里，例如在量子力学图册中加入一页：
 
 ```tex
 \begin{tikzpicture}
@@ -46,6 +46,16 @@ CI 分别缓存每门课的 MATLAB 插图、每份 TikZ 图册及每个笔记入
 ```
 
 图册里的 `spin-axis` 决定导入哪一页，章节里的 `fig:spin-axis` 用于引用正文图号。移动或增加图页后运行课程构建命令即可更新两者。图源含有作者、出处和许可说明时，请在对应图组旁保留。
+
+需要单独使用的复杂图可以各写成一个 `standalone` 文档。图册加载 `standalone` 宏包，用 `\input{periodic-table.tex}` 读入同一份图源，并在图册导言区加载该图用到的 TikZ 库。要单独导出元素周期表，可从仓库根目录运行以下命令，生成的单页 PDF 就在图源旁边。
+
+```sh
+latexmk -cd -xelatex "Nuclear Radiation and Detection/figures/periodic-table.tex"
+```
+
+### 实验光路图
+
+讲义用实线表示平面镜的反射面，短斜线贴在镜背，反射光束所在的一侧留白。干涉仪中的分束面用粗虚线，保留反射和透射两路，并在图内或题注标明分束器。探测器可画成带名称的方框，信号线从方框接到计数或读出装置。讲解器件内部过程时，再画出参与该过程的部件。
 
 ### 让图表和题注同页
 
@@ -83,7 +93,7 @@ run('Quantum Mechanics/figures/matlab/free_packet.m')
 
 `run` 在脚本所在目录执行，图稿写回该卷的 `figures/`，会覆盖对应的 PDF 或 PNG。部分脚本一次生成多幅图，例如数值分析的 `Runge.m` 同时输出等距节点与 Chebyshev 节点的插值对照图。新增可自动重画的插图时，把脚本加到 `figures/matlab/build_figures.m`。课程目录和各卷 `figures/` 下生成的 PDF 已加入 `.gitignore`。
 
-这些脚本在基础 MATLAB R2025b 上运行。分布曲线直接计算概率质量或密度，自助抽样用 `randi` 生成有放回的抽样索引，费米积分用 `integral` 计算。
+这些脚本在基础 MATLAB R2025b 上运行。分布曲线直接计算概率质量或密度，自助抽样用 `randi` 生成有放回的抽样索引，Fermi 积分用 `integral` 计算。
 
 导出带图例的矢量 PDF 时，用 `pad_legend(legend(...))` 给文字右侧留白。已有图例句柄也可以直接传给 `pad_legend(lgd)`。LaTeX 图例使用 `\hspace{0.6em}`，其他图例使用两个不换行空格。普通行尾空格在导出时会被 MATLAB 裁掉。
 

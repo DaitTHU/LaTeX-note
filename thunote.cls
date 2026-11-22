@@ -70,15 +70,12 @@
 \renewcommand{\thempfootnote}{\Roman{mpfootnote}}
 \renewcommand{\thefootnote}{\Roman{footnote}}
 
-\newcommand{\sectionstar}[1]{
-	\section[\hspace{-.8em}*\hspace{.3em}#1]{\hspace{-1em}*\hspace{.5em}#1}
-}
-\newcommand{\subsectionstar}[1]{
-	\subsection{\hspace{-1em}*\hspace{.5em}#1}
-}
-\newcommand{\subsubsectionstar}[1]{
-	\subsubsection{\hspace{-1em}*\hspace{.5em}#1}
-}
+% Hang the optional-reading mark in the number–title gap, including in the TOC.
+\DeclareRobustCommand{\thu@optionalmark}{%
+  \texorpdfstring{\llap{\scalebox{.75}{*}\kern.1em}}{* }}
+\newcommand{\sectionstar}[1]{\section{\thu@optionalmark#1}}
+\newcommand{\subsectionstar}[1]{\subsection{\thu@optionalmark#1}}
+\newcommand{\subsubsectionstar}[1]{\subsubsection{\thu@optionalmark#1}}
 
 \RequirePackage{xr-hyper}
 \RequirePackage{hyperref}

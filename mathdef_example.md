@@ -6,7 +6,7 @@
 
 | 对象 | 统一写法 | 使用约定 |
 | --- | --- | --- |
-| 数集与函数空间 | `\RR`、`\CC`、`\FF`、`\cont^k`、`\poly_n` | `\cont^k` 表示至多到第 *k* 阶的导数均连续。单变量多项式空间 `\poly_n` 包含次数不超过 *n* 的多项式，维数为 *n* + 1。 |
+| 数集与函数空间 | `\RR`、`\CC`、`\FF`、`\cont^k`、`\poly_n` | `\cont^k` 表示函数及其直到第 *k* 阶的各阶导数均连续。单变量多项式空间 `\poly_n` 包含次数不超过 *n* 的多项式，维数为 *n* + 1。 |
 | 矩阵和线性映射 | `A\transp`、`A\adjoint`、`A\inv`、`\rank A`、`\tr A`、`\diag`、`\colsp(A)`、`\nullsp(A)`、`\Span(S)` | 分别区分转置、共轭转置和逆。物理公式中 `z\conj` 表示复共轭，线性代数中对偶空间的 `V^\ast` 有单独的含义。 |
 | 最优化与数量级 | `\argmin`、`\argmax`、`\bigo` | `\argmin_{x\in S} f(x)` 取使目标函数最小的点，`\min_{x\in S} f(x)` 取最小值。 |
 | 矢量与场 | `\bm v`、`\dotbm v`、`v_r\uvec r`、`\grad f`、`\div\bm F`、`\curl\bm F`、`\laplacian f` | `\uvec` 表示单位矢量。对源坐标求散度写作 `\nabla'\cdot\bm F`。 |
@@ -14,11 +14,15 @@
 | 特殊函数与奇异积分 | `\Beta(a,b)`、`\sinc x`、`\PV` | `\Beta` 是 Euler 的 Beta 函数，概率卷另用 `\BetaDist` 表示 Beta 分布。`\sinc x` 取 `\sin x/x`，在零点取 1。`\PV` 表示 Cauchy 主值。 |
 | 物理常数、粒子与下标 | `\NA`、`\kB`、`\muB`、`m_\electron`、`m_\proton`、`\CM`、`\FWHM` | `\electron`、`\proton` 分别是正体的电子、质子标签。质心写作 `R_\CM`。有效量、总量写作 `H_\eff`、`E_\tot`，复合标签写作 `E_{n,\eff}`。最大、最小值直接写 `v_{\max}`、`v_{\min}`。角度数值可写 `\ang{90}`。 |
 
-概率和期望分别写作 `\P`、`\E`，都排成正体算符。量子力学中表示某个投影算符的 `P_n`、热力学中的压强 `P` 仍是物理变量。文本段落符号 ¶ 可用 `\textparagraph`。
+概率和期望分别写作 `\P`、`\E`，都排成正体算符。量子力学卷用 `\op\Pi_a` 表示读数为 $a$ 的投影，用 `\op P` 表示正则动量。热力学中的压强 `P` 用斜体。文本段落符号 ¶ 可用 `\textparagraph`。
 
-单位矢量沿用微分 `\d` 的间距写法。分量展开直接写 `v_r\uvec r+v_\theta\uvec\theta`，点乘写 `\bm v\cdot\uvec n`。TeX 按前一个数学原子的类别决定间距。一元负号直接作用在单位矢量上时，用 `-{\uvec n}` 把符号与矢量排紧。
+单位矢量沿用微分 `\d` 的间距写法。分量展开直接写 `v_r\uvec r + v_\theta\uvec\theta`，点乘写 `\bm v \cdot \uvec n`。TeX 按前一个数学原子的类别决定间距。一元负号直接作用在单位矢量上时，用 `-{\uvec n}` 把符号与矢量排紧。
 
-上下标里的描述性标签由公式决定位置，例如 `\tau_{\external,\CM}` 可以同时标出外力矩和取矩中心。电、磁响应写作 `\chi_\electric`、`\chi_\magnetic`。`\incident` 和 `\initial` 虽都排作 i，前者是入射波，后者与末态 `\final` 相对。横向和纵向分量分别写作 `v_\transv` 和 `v_\longit`。
+下标的字体由含义决定。描述性标签用正体，例如起点和终点的坐标 `x_\initial`、`x_\final`，高低能级的能量 `E_\hi`、`E_\lo`，以及核磁子 `\mu_\nucleus`。代表变量或物理量的下标用斜体，例如 `\sum_f \abs{V_{fi}}^2` 中的末态编号 $f$、`C_V` 中的体积 $V$。在 `m_\lo` 中，磁量子数 $m$ 可以取不同值，正体下标仅说明它属于低能级。[NIST SP 811，第 10 章](https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-10-more-printing-and-using-symbols-and-numbers)
+
+二能级系统用 `\excitedstate`、`\groundstate` 标出激发态和基态。例如 `\rho_{\excitedstate\groundstate}` 表示矩阵元 `\mel{\excitedstate}{\op\rho}{\groundstate}`，两个下标都用正体。写成任意两个能量本征态的矩阵元 `\rho_{mn}` 时，态编号 `m,n` 都用斜体。希腊字母也按含义区分，例如光子能量 `E_\upgamma` 中的 γ 是粒子标签。
+
+`\tau_{\external,\CM}` 同时标出外力矩和取矩中心。电、磁响应写作 `\chi_\electric`、`\chi_\magnetic`。入射波标签 `\incident` 和初态标签 `\initial` 都排作正体 i。横向和纵向分量分别写作 `v_\transv` 和 `v_\longit`。
 
 ## 各卷单独定义的符号
 
@@ -51,8 +55,15 @@
 `\e` 也已处理乘积中的间距，不要在这些宏前重复加薄空格。
 
 ~~~LaTeX
-\intR \e^{-x^2}\d x=\sqrt{\pi},\qquad \intRplus \e^{-x}\d x=1.
+\begin{align*}
+    \intR \e^{-x^2}\d x &= \sqrt{\pi},\\
+    \intRplus \e^{-x}\d x &= 1.
+\end{align*}
+~~~
 
+同一个一阶导数可以用斜线、分数线或导数宏表示。高阶导数和混合偏导数也有对应的宏。
+
+~~~LaTeX
 \d f/\nd t,\qquad \frac{\d f}{\nd t},\qquad \dv{f}{t}.
 \dd[n-1]{x}\dv{y}{x}=\dv[n]{y}{x}.
 \pv{y}{x},\qquad \pv[n]{y}{x},\qquad \pw{z}{x}{y}.
@@ -125,41 +136,55 @@
 \hat A\ket{\psi},\qquad \bra{\phi}\hat A,\qquad \ketbra{a}{b}\ket{\psi}.
 \mel{\phi}{\hat A}{\psi}
     =\sum_n\mel{\phi}{\hat A}{n}\braket{n}{\psi}.
-\Bigket{s=\frac12,m=\frac12},\qquad
+\ket{s=1/2,m=1/2}.
 \Bigmel{\phi}{\frac{\hat A+\hat B}{2}}{\psi}.
 ~~~
 
 多行方程组的左花括号要覆盖整组方程。已有的 `\eqnset{\begin{aligned}…\end{aligned}}` 按实际行高排版。分段函数用 `cases`，矩阵可用 `pmatrix` 或 `bmatrix`。
 
-## 分组、对齐与引用
+## 行内运算符与分式
 
-并列关系使用 subequations。多列对齐使用 alignat，
-列组之间显式加入 quad 或 enspace，不依赖自动拉伸间隔。
-同一等式的连续推导使用 equation 配合 alignedat，共用一个编号。
+读者要辨认积分上下限、跟随求和推导或在后文引用的关系，宜放在行间。正文里引用一个简短条件时可留在句中。课程模板 `thunote.cls` 采用 `\everymath{\displaystyle}`，例如句中的归一化条件可写作 `$\textstyle\sum_i p_i=1$`，让求和指标排在右侧。独立 TikZ 图册按自身文档类选择样式。
+
+简单比值在行内写作 `$\hbar/2$`、`$(x-\mu)/\sigma$` 或 `$p^2/(2m)$`，用括号标明斜线的作用范围。分母本身是比值时，上下分式更容易辨认，例如统计表中的 `$\frac{\avg X-\mu}{S/\sqrt n}$`。表格或图注确实需要紧凑的上下分式时可用 `\tfrac`，并在最终字号下检查可读性。
+
+## 行间公式的编号、分组与对齐
+
+只有能从上下文确认是一次性代入、算术核对或随即消去的辅助式，才将单行公式写作 `\[ ... \]`。后文要按式号调用的关系，以及读者会反复查阅的核心公式，用 `equation` 编号，给它一个说明含义的 `\label{eq:...}`，在正文中用 `\eqref{eq:...}` 引用。量子力学卷推导时间演化时，态的瞬时变化率写在无编号的行间。随后得到的 Schrödinger 方程有标签 `eq:schrket`，下一节转到位置表象时还要用它。即使暂时没有显式引用，重要定义、适用条件和可独立使用的结论也值得编号。用途尚不明确时保留已有编号。修改旧公式前，先核对已有标签和正文中手写的式号，因为增删一个编号也会改变后续式号。模板加载了 `amsmath`，其中 `\[ ... \]` 与 `equation*` 等价。[amsmath 使用手册 §3.2](https://www.latex-project.org/help/documentation/amsldoc.pdf#page=8)
+
+独立关系若在正文中分别说明或引用，就各占一行。需要共享主编号时用 `subequations`，在 `align` 中按共同的关系符对齐，或在 `gather` 中逐行居中。组标签放在 `subequations` 开头，具体子式的标签放在对应行。下面两行给出 $x$ 方向两个自旋本征态，后文可分别引用。
 
 ~~~LaTeX
 \begin{subequations}
     \label{eq:two-level-states}
-    \begin{alignat}{2}
-        \ket{+x}&=\frac{\ket{+z}+\ket{-z}}{\sqrt2},
-        &\quad \hat{\Pi}_{+x}&=\ketbra{+x}{+x},\\
-        \ket{-x}&=\frac{\ket{+z}-\ket{-z}}{\sqrt2},
-        &\quad \hat{\Pi}_{-x}&=\ketbra{-x}{-x}.
-    \end{alignat}
+    \begin{align}
+        \ket{+x} &= \frac{\ket{+z} + \ket{-z}}{\sqrt{2}}, \label{eq:spin-plus-x} \\
+        \ket{-x} &= \frac{\ket{+z} - \ket{-z}}{\sqrt{2}}. \label{eq:spin-minus-x}
+    \end{align}
 \end{subequations}
+~~~
 
+量子力学卷中，投影到这两个态的算符分别为 `$\op\Pi_{\pm x} = \ketbra{\pm x}{\pm x}$`。同一个等式的连续推导只需一个编号时，将 `aligned` 放在 `equation` 内。原本无编号的推导可用 `align*` 或 `gather*`。
+
+~~~LaTeX
 \begin{equation}
-    \begin{alignedat}{1}
-        \hat{\Pi}_{+x}\ket{+z}
-        &=\ket{+x}\braket{+x}{+z}\\
-        &=\frac1{\sqrt2}\ket{+x}.
-    \end{alignedat}
+    \label{eq:spin-x-projection}
+    \begin{aligned}
+        \op\Pi_{+x}\ket{+z}
+        &= \ket{+x}\braket{+x}{+z} \\
+        &= \frac{1}{\sqrt{2}}\ket{+x}.
+    \end{aligned}
 \end{equation}
 ~~~
 
-只在数学步骤、并列关系或实际行宽需要时换行。
-连续推导的等号纵向对齐；解释中间步骤的文字放在公式之间。
+Hamilton 正则方程等成对短式可以并排，便于横向比较两个正则变量的位置和符号。适用条件和指标范围也可紧随主式。确有多列需要逐行对照时，用 `alignat` 并以 `\quad` 等命令设置列组间距。
 
 章、节、小节分别使用 chapref、secref、ssecref。
 重要结论连同条件放入 theorem，具体计算放入 example，
 概念与符号约定放入 definition，不给孤立公式加框。
+
+## 数学源码中的空格
+
+新写或实质修订公式时，用普通空格帮助读源码的人看清结构。在主关系符和连接各项的二元加减号两侧各留一个空格，例如 `E = p^2/(2m) + V(x)`、`a \le b`。显式的点乘或叉乘也可这样写，如 `\bm L = \bm r \times \bm p`。对齐点放在关系符前，写作 `x &= -y + z`。一元正负号贴着操作数，简单斜线比、幂和短指标保持紧凑，如 `-x`、`p/q`、`x^2`、`a_{i+1}`、`\sum_{n=0}^N`。
+
+数学模式中的普通源码空格通常不产生可见间距。例如 `a+b` 和 `a + b` 排印相同。控制词后接字母时要留出边界，如 `\sin x`；`\text{for all}` 里的空格属于文字。实际的数学间距由符号类别和宏决定，例如 `\int_a^b f(x) \d x` 中的微分宏已处理微分前的间距。
