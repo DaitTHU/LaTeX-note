@@ -1,142 +1,150 @@
 \chapter{重积分}
 \section{二重积分}
 \begin{theorem}{累次积分法}{}
-	设$D=\{(x,y)~|~\alpha(x)\leqslant y\leqslant\beta(x),a\leqslant x\leqslant b\}$，$\alpha,\beta$在$[a,b]$上连续且$\alpha\leq\beta$。若$f$在$D$上连续，则$f$可积，并有
-	\[
-		\iint_Df(x,y)\d x\nd y=\int_a^b\int_{\alpha(x)}^{\beta(x)}f(x,y)\d y\d x.
-	\]
+	设$D = \{(x,y)~|~\alpha(x) \leqslant y \leqslant \beta(x),a \leqslant x \leqslant b\}$，$\alpha,\beta$在$[a,b]$上连续且$\alpha \leq \beta$。若$f$在$D$上连续，则$f$可积，并有
+	\begin{equation}\label{eq:calc-iterated-double-integral}
+		\iint_Df(x,y)\d x\nd y = \int_a^b\int_{\alpha(x)}^{\beta(x)}f(x,y)\d y\d x.
+	\end{equation}
 \end{theorem}
 \begin{theorem}{变量代换法}{}
 	设$D,D'$为有界、边界分片光滑的区域，$f$在$\overline D$上连续。假设变量代换在两区域内部构成$\cont^1$一一映射，逆映射也为$\cont^1$，并连续延拓到边界。以下写出代换及其非退化条件
 	\begin{align*}
 		\begin{cases}
-			u=u(x,y), \\
-			v=v(x,y).
+			u = u(x,y), \\
+			v = v(x,y).
 		\end{cases}
-		\quad\frac{D(x,y)}{D(u,v)}\neq 0.
+		\quad\frac{D(x,y)}{D(u,v)} \neq 0.
 	\end{align*}
 	则积分变换为
-	\[
-		\iint_Df(x,y)\d x\nd y=\iint_{D'}f(x(u,v),y(u,v))\biggabs{\frac{D(x,y)}{D(u,v)}}\d u\nd v.
-	\]
+	\begin{equation}\label{eq:calc-planar-substitution}
+		\iint_Df(x,y)\d x\nd y = \iint_{D'}f(x(u,v),y(u,v))\biggabs{\frac{D(x,y)}{D(u,v)}}\d u\nd v.
+	\end{equation}
 \end{theorem}
-\paragraph{例：极坐标}$x=\rho\cos\theta,y=\rho\sin\theta$，取$\rho\geq0$并选择不重复覆盖的角区间。原点与角度切缝可作为零面积的例外集处理。
-\[
-	\iint_Df(x,y)\d x\nd y=\iint_{D'}f(\rho\cos\theta,\rho\sin\theta)\rho\d\rho\nd\theta.
-\]
-\paragraph{例：旋转}$x=u\cos\theta-v\sin\theta,y=u\sin\theta+v\cos\theta.$
-\[
-	\iint_Df(x,y)\d x\nd y=\iint_{D'}f(u\cos\theta-v\sin\theta,u\sin\theta+v\cos\theta)\d u\nd v.
-\]
+\paragraph{例：极坐标}$x = \rho\cos\theta,y = \rho\sin\theta$，取$\rho \geq 0$并选择不重复覆盖的角区间。原点与角度切缝可作为零面积的例外集处理。
+\begin{equation}\label{eq:calc-polar-integral}
+	\iint_Df(x,y)\d x\nd y = \iint_{D'}f(\rho\cos\theta,\rho\sin\theta)\rho\d\rho\nd\theta.
+\end{equation}
+\paragraph{例：旋转}$x = u\cos\theta - v\sin\theta,y = u\sin\theta + v\cos\theta.$
+\begin{equation}\label{eq:calc-rotated-coordinates}
+	\iint_Df(x,y)\d x\nd y = \iint_{D'}f(u\cos\theta - v\sin\theta,u\sin\theta + v\cos\theta)\d u\nd v.
+\end{equation}
 \subsection*{曲面面积问题}
 设曲面由$\cont^1$参数化在区域$D$上给出，除边界等零面积集合外不重复覆盖，且参数化正则：
 \begin{align*}
 	\begin{cases}
-		x=x(u,v), \\
-		y=y(u,v), \\
-		z=z(u,v).
+		x = x(u,v), \\
+		y = y(u,v), \\
+		z = z(u,v).
 	\end{cases}
 	\quad\pv{(x,y,z)}{(u,v)}\text{列满秩}.
 \end{align*}
 转化为 $(u,v)$ 参数平面中的二重积分问题，其中两条曲线切向量
-\[
-	\bm u=\Bigb{\pv xu,\pv yu,\pv zu}\transp,\qquad\bm v=\Bigb{\pv xv,\pv yv,\pv zv}\transp
-\]
+\begin{align*}
+	\bm u &= \Bigb{\pv xu,\pv yu,\pv zu}\transp,\\
+	\bm v &= \Bigb{\pv xv,\pv yv,\pv zv}\transp
+\end{align*}
 则
-\[
-	S=\iint_D\norm{\bm u\times\bm v}\d u\nd v
-\]
+\begin{equation}\label{eq:calc-parametric-surface-area}
+	S = \iint_D\norm{\bm u \times \bm v}\d u\nd v
+\end{equation}
 若设
 \begin{align}
-	A=\frac{D(y,z)}{D(u,v)},\qquad B=\frac{D(z,x)}{D(u,v)},\qquad C=\frac{D(x,y)}{D(u,v)}.
+	A = \frac{D(y,z)}{D(u,v)},\qquad B = \frac{D(z,x)}{D(u,v)},\qquad C = \frac{D(x,y)}{D(u,v)}.
 \end{align}
-则$\bm u\times\bm v=[A,B,C]\transp,$
+则$\bm u \times \bm v = [A,B,C]\transp,$
 \begin{align}
-	S=\iint_D\sqrt{A^2+B^2+C^2}\d u\nd v
+	S = \iint_D\sqrt{A^2 + B^2 + C^2}\d u\nd v
 \end{align}
-另一种方式是利用$\norm{\bm u\times\bm v}^2=\norm{\bm u}^2\norm{\bm v}^2-(\bm u\cdot\bm v)^2$，
+另一种方式是利用$\norm{\bm u \times \bm v}^2 = \norm{\bm u}^2\norm{\bm v}^2 - (\bm u \cdot \bm v)^2$，
 \begin{align}
-	E & =\bm u\cdot\bm u=\Bigp{\pv xu}^2+\Bigp{\pv yu}^2+\Bigp{\pv zu}^2, \\
-	G & =\bm v\cdot\bm v=\Bigp{\pv xv}^2+\Bigp{\pv yv}^2+\Bigp{\pv zv}^2, \\
-	F & =\bm u\cdot\bm v=\pv xu\pv xv+\pv yu\pv yv+\pv zu\pv zv.
+	E & = \bm u \cdot \bm u = \Bigp{\pv xu}^2 + \Bigp{\pv yu}^2 + \Bigp{\pv zu}^2, \\
+	G & = \bm v \cdot \bm v = \Bigp{\pv xv}^2 + \Bigp{\pv yv}^2 + \Bigp{\pv zv}^2, \\
+	F & = \bm u \cdot \bm v = \pv xu\pv xv + \pv yu\pv yv + \pv zu\pv zv.
 \end{align}
-\[
-	S=\iint_D\sqrt{EG-F^2}\d u\nd v
-\]
-特别地，当曲面是显式的，即$z=z(x,y)$
-\[
-	S=\iint_D\sqrt{1+\Bigp{\pv zx}^2+\Bigp{\pv zy}^2}\d x\nd y.
-\]
+\begin{equation}\label{eq:calc-area-first-fundamental-form}
+	S = \iint_D\sqrt{EG - F^2}\d u\nd v
+\end{equation}
+特别地，当曲面是显式的，即$z = z(x,y)$
+\begin{equation}\label{eq:calc-graph-surface-area}
+	S = \iint_D\sqrt{1 + \Bigp{\pv zx}^2 + \Bigp{\pv zy}^2}\d x\nd y.
+\end{equation}
+\Needspace{10\baselineskip}
 \section{三重积分}
 \begin{theorem}
 	{累次积分法}{}
-	设$D$是有界、边界分片光滑的平面区域，$\alpha,\beta$在$\overline D$上连续且$\alpha\leq\beta$。令$\Omega=\{(x,y,z)~|~\alpha(x,y)\leq z\leq\beta(x,y),(x,y)\in D\}$。若$f$在$\overline\Omega$上连续，则
-	\[
-		\iiint_\Omega f(x,y,z)\d x\nd y\nd z=\iint_D\int_{\alpha(x,y)}^{\beta(x,y)}f(x,y,z)\d z\d x\nd y.
-	\]
+	设$D$是有界、边界分片光滑的平面区域，$\alpha,\beta$在$\overline D$上连续且$\alpha \leq \beta$。令$\Omega = \{(x,y,z)~|~\alpha(x,y) \leq z \leq \beta(x,y),(x,y) \in D\}$。若$f$在$\overline\Omega$上连续，则
+	\begin{equation}\label{eq:calc-iterated-triple-integral}
+		\iiint_\Omega f(x,y,z)\d x\nd y\nd z = \iint_D\int_{\alpha(x,y)}^{\beta(x,y)}f(x,y,z)\d z\d x\nd y.
+	\end{equation}
 \end{theorem}
 \begin{theorem}
 	{变量代换法}{}
 	同样，设$\Omega,\Omega'$为有界、边界分片光滑的区域，$f$连续。变量替换在内部应为$\cont^1$一一映射、具有$\cont^1$逆映射，并连续延拓到边界：
 	\begin{align*}
 		\begin{cases}
-			x=x(r,s,t), \\
-			y=y(r,s,t), \\
-			z=z(r,s,t).
+			x = x(r,s,t), \\
+			y = y(r,s,t), \\
+			z = z(r,s,t).
 		\end{cases}
-		\quad\frac{D(x,y,z)}{D(r,s,t)}\neq 0.
+		\quad\frac{D(x,y,z)}{D(r,s,t)} \neq 0.
 	\end{align*}
 	有
-	\[
-		\iiint_\Omega f(x,y,z)\d x\nd y\nd z=\iiint_{\Omega'}\tilde f(r,s,t)\biggabs{\frac{D(x,y,z)}{D(r,s,t)}}\d r\nd s\nd t.
-	\]
-	其中$\tilde f(r,s,t)=f(x(r,s,t),y(r,s,t),z(r,s,t)).$
+	\begin{equation}\label{eq:calc-spatial-substitution}
+		\iiint_\Omega f(x,y,z)\d x\nd y\nd z = \iiint_{\Omega'}\tilde f(r,s,t)\biggabs{\frac{D(x,y,z)}{D(r,s,t)}}\d r\nd s\nd t.
+	\end{equation}
+	其中$\tilde f(r,s,t) = f(x(r,s,t),y(r,s,t),z(r,s,t)).$
 \end{theorem}
-\paragraph{例：柱坐标}$x=\rho\cos\theta,y=\rho\sin\theta,z=z.$
-\[
-	\iiint_\Omega f(x,y,z)\d x\nd y\nd z=\iiint_{\Omega'}f(\rho\cos\theta,\rho\sin\theta,z)\rho\d\rho\nd\theta\nd z.
-\]
-\paragraph{例：球坐标}$x=r\sin\theta\cos\phi,y=r\sin\theta\sin\phi,z=r\cos\theta$。这里$r\geq0$、$0\leq\theta\leq\pi$，$\phi$选取不重复覆盖的角区间；坐标奇点可作为零体积的例外集处理。
-\begin{align*}
-	\iiint_\Omega & f(x,y,z)\d x\nd y\nd z                                                                                   \\
-				  & =\iiint_{\Omega'}f(r\sin\theta\cos\phi,r\sin\theta\sin\phi,r\cos\theta)r^2\sin\theta\d r\nd\theta\nd\phi.
-\end{align*}
+\paragraph{例：柱坐标}$x = \rho\cos\theta,y = \rho\sin\theta,z = z.$
+\begin{equation}\label{eq:calc-cylindrical-integral}
+	\iiint_\Omega f(x,y,z)\d x\nd y\nd z = \iiint_{\Omega'}f(\rho\cos\theta,\rho\sin\theta,z)\rho\d\rho\nd\theta\nd z.
+\end{equation}
+\paragraph{例：球坐标}$x = r\sin\theta\cos\phi,y = r\sin\theta\sin\phi,z = r\cos\theta$。这里$r \geq 0$、$0 \leq \theta \leq \pi$，$\phi$选取不重复覆盖的角区间；坐标奇点可作为零体积的例外集处理。
+\begin{equation}\label{eq:calc-spherical-integral}
+	\begin{aligned}
+		\iiint_\Omega & f(x,y,z)\d x\nd y\nd z                                                                                   \\
+					  & = \iiint_{\Omega'}f(r\sin\theta\cos\phi,r\sin\theta\sin\phi,r\cos\theta)r^2\sin\theta\d r\nd\theta\nd\phi.
+	\end{aligned}
+\end{equation}
 \begin{example}{$n$重积分}{}
 	定义$\RR^n$中单位球
 	\[
-		\Omega_n=\Biggset{(x_1,x_2,\ldots,x_n)}{\sum_{i=1}^nx_i^2\leqslant 1}
+		\Omega_n = \Biggset{(x_1,x_2,\ldots,x_n)}{\sum_{i=1}^nx_i^2 \leqslant 1}
 	\]
 	的体积
 	\[
-		V_n=\int\cdot\cdot\cdot\int_{\Omega_n}\d x_1\cdot\cdot\cdot\d x_n=\int_{-1}^1\int\cdot\cdot\cdot\int_{D_{n-1}}\d x_1\cdot\cdot\cdot\d x_{n-1}\d x_n.
+		V_n = \int \cdot \cdot \cdot \int_{\Omega_n}\d x_1 \cdot \cdot \cdot \d x_n = \int_{-1}^1\int \cdot \cdot \cdot \int_{D_{n-1}}\d x_1 \cdot \cdot \cdot \d x_{n-1}\d x_n.
 	\]
 	其中
 	\[
-		D_{n-1}=\Biggset{(x_1,\ldots,x_{n-1})}{\sum_{i=1}^{n-1}x_i^2\leqslant 1-x_n^2}.
+		D_{n-1} = \Biggset{(x_1,\ldots,x_{n-1})}{\sum_{i=1}^{n-1}x_i^2 \leqslant 1 - x_n^2}.
 	\]
-	作变换$x_i=\sqrt{1-x_n^2}\,u_i,(i=1,\ldots,n-1)$，则
+	作变换$x_i = \sqrt{1 - x_n^2}\,u_i,(i = 1,\ldots,n - 1)$，则
 	\[
-		\frac{D(x_1,\ldots,x_{n-1})}{D(u_1,\ldots,u_{n-1})}=(1-x_n^2)^{(n-1)/2}.
+		\frac{D(x_1,\ldots,x_{n-1})}{D(u_1,\ldots,u_{n-1})} = (1 - x_n^2)^{(n-1)/2}.
 	\]
 	可得
 	\begin{align*}
-		V_n & =\int_{-1}^1\int\cdot\cdot\cdot\int_{\Omega_{n-1}}(1-x_n^2)^{(n-1)/2}\d u_1\cdot\cdot\cdot\d u_{n-1}\d x_n \\
-			& =\int_{-1}^1(1-x_n^2)^{(n-1)/2}V_{n-1}\d x_n=2V_{n-1}\int_0^1(1-x^2)^{(n-1)/2}\d x.
+		V_n & = \int_{-1}^1\int \cdot \cdot \cdot \int_{\Omega_{n-1}}(1 - x_n^2)^{(n-1)/2}\d u_1 \cdot \cdot \cdot \d u_{n-1}\d x_n \\
+			& = \int_{-1}^1(1 - x_n^2)^{(n-1)/2}V_{n-1}\d x_n = 2V_{n-1}\int_0^1(1 - x^2)^{(n-1)/2}\d x.
 	\end{align*}
-	令$x=\sqrt t$，则
+	令$x = \sqrt t$，则
 	\begin{align*}
-		V_n & =V_{n-1}\int_0^1(1-t)^{(n-1)/2}t^{-1/2}\d t=V_{n-1}\Beta\Bigp{\frac12,\frac{n+1}2}\\
-			& =V_{n-1}\cdot\fracdisp{\Gamma\Bigp{\frac12}\Gamma\Bigp{\frac{n+1}2}}{\Gamma\Bigp{\frac{n+2}2}}=V_{n-1}\cdot\fracdisp{\Gamma\Bigp{\frac{n+1}2}}{\Gamma\Bigp{\frac{n+2}2}}\sqrt\pi \\
-			& =V_1\cdot\fracdisp{\Gamma\Bigp{\frac32}}{\Gamma\Bigp{\frac{n+2}2}}\pi^{(n-1)/2}=\fracdisp{\pi^{n/2}}{\Gamma\Bigp{\frac n2+1}}.
+		V_n & = V_{n-1}\int_0^1(1 - t)^{(n-1)/2}t^{-1/2}\d t = V_{n-1}\Beta\Bigp{\frac12,\frac{n + 1}2}\\
+			& = V_{n-1} \cdot \fracdisp{\Gamma\Bigp{\frac12}\Gamma\Bigp{\frac{n + 1}2}}{\Gamma\Bigp{\frac{n + 2}2}} = V_{n-1} \cdot \fracdisp{\Gamma\Bigp{\frac{n + 1}2}}{\Gamma\Bigp{\frac{n + 2}2}}\sqrt\pi \\
+			& = V_1 \cdot \fracdisp{\Gamma\Bigp{\frac32}}{\Gamma\Bigp{\frac{n + 2}2}}\pi^{(n-1)/2} = \fracdisp{\pi^{n/2}}{\Gamma\Bigp{\frac n2 + 1}}.
 	\end{align*}
 	我们就得到了“体积”公式
 	\begin{align}
-		V_n=
+		V_n =
 		\begin{cases}
-			\frac{\pi^k}{k!},        & n=2k,   \\[
+			\frac{\pi^k}{k!},        & n = 2k,   \\[
 		2ex]
-			\frac{2^k\pi^{k-1}}{(2k-1)!!}, & n=2k-1.
+			\frac{2^k\pi^{k-1}}{(2k - 1)!!}, & n = 2k - 1.
 		\end{cases}
 	\end{align}
-	其中$(2k-1)!!=1\cdot3\cdots(2k-1)$，$k\geq1$。例如$V_1=2,\quad V_2=\pi,\quad V_3=\frac 43\pi,\quad V_4=\frac 12\pi^2,\quad V_5=\frac 8{15}\pi^2,\ldots.$
+	其中$(2k - 1)!! = 1 \cdot 3\cdots(2k - 1)$，$k \geq 1$。前五维的单位球体积依次为
+	\[
+		(V_1,V_2,V_3,V_4,V_5)
+		= \Bigp{2,\pi,\frac{4\pi}3,\frac{\pi^2}2,\frac{8\pi^2}{15}}.
+	\]
 \end{example}

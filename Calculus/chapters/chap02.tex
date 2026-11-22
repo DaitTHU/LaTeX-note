@@ -1,87 +1,94 @@
 \chapter{含参积分及广义含参积分}
 \begin{definition}{含参积分}{}
     含参积分
-    \[
-        I(y)=\int_a^bf(x,y)\d x,\quad y\in[c,d].
-    \]
+    \begin{equation}\label{eq:calc-parameter-integral}
+        I(y) = \int_a^bf(x,y)\d x,\quad y \in [c,d].
+    \end{equation}
     广义含参积分包括无穷积分和瑕积分，可写为
-    \[
-        I(y)=\int_a^\omega f(x,y)\d x:=\lim_{A\to\omega^-}\int_a^Af(x,y)\d x.
-    \]
-    无穷积分取$\omega=+\infty$；瑕积分可取有限端点$\omega$。下文假定$f$在每个紧矩形$[a,A]\times[c,d]$上连续，奇异性仅位于上端点。若有多个瑕点或两个无穷端点，须在内点处分段，分别检查收敛条件。
+    \begin{equation}\label{eq:calc-improper-parameter-integral}
+        I(y) = \int_a^\omega f(x,y)\d x := \lim_{A\to\omega^-}\int_a^Af(x,y)\d x.
+    \end{equation}
+    无穷积分取$\omega = +\infty$；瑕积分可取有限端点$\omega$。下文假定$f$在每个紧矩形$[a,A] \times [c,d]$上连续，奇异性仅位于上端点。若有多个瑕点或两个无穷端点，须在内点处分段，分别检查收敛条件。
 \end{definition}
 \begin{definition}{一致连续}{}
-    函数$f:\Omega\to\RR$一致连续，是指$\forall\varepsilon>0$，存在与点的位置无关的$\delta>0$，使所有$X,Y\in\Omega$只要$\norm{X-Y}<\delta$，便有$|f(X)-f(Y)|<\varepsilon$。
+    函数$f:\Omega \to \RR$一致连续，是指$\forall\varepsilon > 0$，存在与点的位置无关的$\delta > 0$，使所有$X,Y \in \Omega$只要$\norm{X - Y} < \delta$，便有$|f(X) - f(Y)| < \varepsilon$。
     \tcblower
-    \paragraph{否定形式：}存在$\varepsilon_0>0$及两点列$X_k,Y_k\in\Omega$，满足$\norm{X_k-Y_k}\to0$，但对所有$k$有$|f(X_k)-f(Y_k)|\geq\varepsilon_0$。
+    \paragraph{否定形式：}存在$\varepsilon_0 > 0$及两点列$X_k,Y_k \in \Omega$，满足$\norm{X_k - Y_k} \to 0$，但对所有$k$有$|f(X_k) - f(Y_k)| \geq \varepsilon_0$。
 \end{definition}
 \begin{theorem}{一致连续的判定}{}
     定义在$\RR^n$的闭有界集上的连续函数一致连续。
 \end{theorem}
 \begin{definition}{一致收敛}{}
-    设$I(y)$对每个$y\in[c,d]$均存在。若$\forall\varepsilon>0$，存在$N\in(a,\omega)$，使所有$N<A<\omega$及所有$y\in[c,d]$均满足
-    \[
-        \biggabs{\int_a^Af(x,y)\d x-I(y)}<\varepsilon,
-    \]
-    则称广义积分关于$y$一致收敛。这一定义同时适用于$\omega<\infty$和$\omega=+\infty$。
+    设$I(y)$对每个$y \in [c,d]$均存在。若$\forall\varepsilon > 0$，存在$N \in (a,\omega)$，使所有$N < A < \omega$及所有$y \in [c,d]$均满足
+    \begin{equation}\label{eq:calc-uniform-convergence}
+        \biggabs{\int_a^Af(x,y)\d x - I(y)} < \varepsilon,
+    \end{equation}
+    则称广义积分关于$y$一致收敛。这一定义同时适用于$\omega < \infty$和$\omega = +\infty$。
 \end{definition}
 \begin{theorem}{一致收敛的Weierstrass判别法}{}
-    若对所有$x\in[a,\omega)$及$y\in[c,d]$都有$|f(x,y)|\leq F(x)$，其中$F\geq0$且$\int_a^\omega F(x)\d x<\infty$，则$\int_a^\omega f(x,y)\d x$关于$y$一致收敛。
+    若对所有$x \in [a,\omega)$及$y \in [c,d]$都有$|f(x,y)| \leq F(x)$，其中$F \geq 0$且
+    \[
+        \int_a^\omega F(x)\d x < \infty,
+    \]
+    则广义积分$\textstyle \int_a^\omega f(x,y)\d x$关于$y$一致收敛。
 \end{theorem}
 \begin{theorem}{一致收敛的Dirichlet判别法}{}
     设$f,g$局部连续，并且
     \begin{compactenum}
-        \item 存在常数$M$，使所有$A\in(a,\omega)$、$y\in[c,d]$满足$\bigabs{\int_a^Af(x,y)\d x}\leq M$；
-        \item 对每个$y$，$g(x,y)$关于$x$单调，且$g(x,y)\to0$在$x\to\omega^-$时对$y$一致成立。
+        \item 存在常数$M$，使所有$A \in (a,\omega)$、$y \in [c,d]$满足
+        \[
+            \biggabs{\int_a^Af(x,y)\d x} \leq M.
+        \]
+        \item 对每个$y$，$g(x,y)$关于$x$单调，且$g(x,y) \to 0$在$x \to \omega^-$时对$y$一致成立。
     \end{compactenum}
-    则$\int_a^\omega f(x,y)g(x,y)\d x$关于$y$一致收敛。仅有逐个参数下的有界性或趋零性是不够的。
+    则$\textstyle \int_a^\omega f(x,y)g(x,y)\d x$关于$y$一致收敛。仅有逐个参数下的有界性或趋零性是不够的。
 \end{theorem}
 \begin{theorem}{一致收敛的Abel判别法}{}
-    设$f,g$局部连续，$\int_a^\omega f(x,y)\d x$关于$y$一致收敛；对每个$y$，$g(x,y)$关于$x$单调，并且存在常数$M$使所有$x,y$满足$|g(x,y)|\leq M$。则$\int_a^\omega f(x,y)g(x,y)\d x$关于$y$一致收敛。
+    设$f,g$局部连续，$\textstyle \int_a^\omega f(x,y)\d x$关于$y$一致收敛；对每个$y$，$g(x,y)$关于$x$单调，并且存在常数$M$使所有$x,y$满足$|g(x,y)| \leq M$。则$\textstyle \int_a^\omega f(x,y)g(x,y)\d x$关于$y$一致收敛。
 \end{theorem}
 \section{积分号的可交换性}
 交换极限、求导与积分必须逐项验证条件；另可参阅 Keith Conrad 的\href{https://kconrad.math.uconn.edu/blurbs/analysis/diffunderint.pdf}{Differentiating under the Integral Sign}，其中也讨论了条件收敛的情形。
 \begin{theorem}{连续性}{}
-    若$f$在$[a,b]\times[c,d]$上连续，则$I(y)=\int_a^bf(x,y)\d x$在$[c,d]$上连续，即
-    \[
-        \lim_{y\to y_0}\int_a^bf(x,y)\d x=\int_a^b\lim_{y\to y_0}f(x,y)\d x.
-    \]
+    若$f$在$[a,b] \times [c,d]$上连续，则$\textstyle I(y) = \int_a^bf(x,y)\d x$在$[c,d]$上连续，即
+    \begin{equation}\label{eq:calc-integral-continuity}
+        \lim_{y\to y_0}\int_a^bf(x,y)\d x = \int_a^b\lim_{y\to y_0}f(x,y)\d x.
+    \end{equation}
     \tcblower
-    对广义积分，若$f$在每个截断矩形上连续，且$\int_a^\omega f(x,y)\d x$关于$y\in[c,d]$一致收敛，则$I(y)$连续，仍可交换参数极限与积分。
+    对广义积分，若$f$在每个截断矩形上连续，且$\textstyle \int_a^\omega f(x,y)\d x$关于$y \in [c,d]$一致收敛，则$I(y)$连续，仍可交换参数极限与积分。
 \end{theorem}
 \begin{theorem}{可微性}{}
-    若$f,f_y$在$[a,b]\times[c,d]$上连续，则$I$在$(c,d)$内可微，且
-    \[
-        I'(y)=\dd y\int_a^bf(x,y)\d x=\int_a^bf_y(x,y)\d x.
-    \]
+    若$f,f_y$在$[a,b] \times [c,d]$上连续，则$I$在$(c,d)$内可微，且
+    \begin{equation}\label{eq:calc-differentiation-under-integral}
+        I'(y) = \dd y\int_a^bf(x,y)\d x = \int_a^bf_y(x,y)\d x.
+    \end{equation}
     \tcblower
-    对广义积分，假设$f,f_y$在每个截断矩形上连续，$\int_a^\omega f(x,y_0)\d x$在至少一个$y_0\in[c,d]$收敛，且$\int_a^\omega f_y(x,y)\d x$关于$y\in[c,d]$一致收敛。则$I$存在并在$(c,d)$内可微，而且
-    \[
-        I'(y)=\int_a^\omega f_y(x,y)\d x.
-    \]
+    对广义积分，假设$f,f_y$在每个截断矩形上连续，$\textstyle \int_a^\omega f(x,y_0)\d x$在至少一个$y_0 \in [c,d]$收敛，且$\textstyle \int_a^\omega f_y(x,y)\d x$关于$y \in [c,d]$一致收敛。则$I$存在并在$(c,d)$内可微，而且
+    \begin{equation}\label{eq:calc-improper-integral-derivative}
+        I'(y) = \int_a^\omega f_y(x,y)\d x.
+    \end{equation}
     若只讨论某个内点附近，可在该点周围的紧参数区间上验证这些条件。
 \end{theorem}
-若有限积分上下限$\alpha,\beta\in \cont^1$，且$f,f_y$在相应积分区域的邻域内连续，则Leibniz公式为
-\[
+若有限积分上下限$\alpha,\beta \in \cont^1$，且$f,f_y$在相应积分区域的邻域内连续，则Leibniz公式为
+\begin{equation}\label{eq:calc-leibniz-rule}
     \dd y\int_{\alpha(y)}^{\beta(y)}f(x,y)\d x
-    =\int_{\alpha(y)}^{\beta(y)}f_y(x,y)\d x+f(\beta(y),y)\beta'(y)-f(\alpha(y),y)\alpha'(y).
-\]
+    = \int_{\alpha(y)}^{\beta(y)}f_y(x,y)\d x + f(\beta(y),y)\beta'(y) - f(\alpha(y),y)\alpha'(y).
+\end{equation}
 \begin{theorem}{积分性}{}
-    若$f$在$[a,b]\times[c,d]$上连续，则
-    \[
-        \int_c^dI(y)\d y=\int_c^d\int_a^bf(x,y)\d x\nd y
-        =\int_a^b\int_c^df(x,y)\d y\nd x.
-    \]
+    若$f$在$[a,b] \times [c,d]$上连续，则
+    \begin{equation}\label{eq:calc-integral-interchange}
+        \int_c^dI(y)\d y = \int_c^d\int_a^bf(x,y)\d x\nd y
+        = \int_a^b\int_c^df(x,y)\d y\nd x.
+    \end{equation}
     \tcblower
-    若$f$在每个截断矩形上连续，且$\int_a^\omega f(x,y)\d x$关于$y\in[c,d]$一致收敛，则
-    \[
-        \int_c^dI(y)\d y=\int_c^d\int_a^\omega f(x,y)\d x\nd y
-        =\int_a^\omega\int_c^df(x,y)\d y\nd x.
-    \]
+    若$f$在每个截断矩形上连续，且$\textstyle \int_a^\omega f(x,y)\d x$关于$y \in [c,d]$一致收敛，则
+    \begin{equation}\label{eq:calc-improper-integral-interchange}
+        \int_c^dI(y)\d y = \int_c^d\int_a^\omega f(x,y)\d x\nd y
+        = \int_a^\omega\int_c^df(x,y)\d y\nd x.
+    \end{equation}
 \end{theorem}
 对于两个广义积分，一组便于使用的充分条件是：
 \begin{compactenum}
-    \item $f(x,y)$在$[a,+\infty)\times[c,+\infty)$上连续；
+    \item $f(x,y)$在$[a,+\infty) \times [c,+\infty)$上连续；
     \item 两个内层广义积分分别对另一参数的每个紧区间一致收敛；
     \item 下列两个非负累次积分中至少一个收敛到有限值：
     \[
@@ -90,49 +97,54 @@
     \]
 \end{compactenum}
 此时可交换积分次序：
-\[
+\begin{equation}\label{eq:calc-fubini-improper}
     \int_c^{+\infty}\int_a^{+\infty}f(x,y)\d x\nd y
-    =\int_a^{+\infty}\int_c^{+\infty}f(x,y)\d y\nd x.
-\]
+    = \int_a^{+\infty}\int_c^{+\infty}f(x,y)\d y\nd x.
+\end{equation}
 绝对可积是控制换序的关键充分条件；仅有两个条件收敛的累次积分存在，不能保证它们相等。
 
 Gamma与Beta积分的参数范围及关系可核对\href{https://dlmf.nist.gov/5.2}{NIST DLMF §5.2}和\href{https://dlmf.nist.gov/5.12}{§5.12}。
 \begin{example}{Gamma函数}{}
-	\begin{center}
-		$\Gamma(x):=\intRplus t^{x-1}\e^{-t}\d t,\quad x>0.$
-	\end{center}
-	对$x>0$，分部积分中的两个端点项均为零，得到递推公式
-	\begin{align*}
-		\Gamma(1)   & =\intRplus\e^{-t}\d t=1.                                              \\
-		\Gamma(x+1) & =\intRplus t^x\cdot\e^{-t}\d t                                        \\
-					& =\eval{-t^x\e^{-t}}_0^\infty+\intRplus\e^{-t}\cdot xt^{x-1}\d t=x\Gamma(x).
-	\end{align*}
-	对于正整数$n\geq1$，$\Gamma(n)=(n-1)!$。上述积分定义不适用于$x\leq0$，不能将其与解析延拓混为一谈。
+	\begin{equation}\label{eq:calc-gamma-integral}
+		\Gamma(x) := \intRplus t^{x-1}\e^{-t}\d t,\quad x > 0.
+	\end{equation}
+	对$x > 0$，分部积分中的两个端点项均为零，得到递推公式
+	\begin{subequations}\label{eq:calc-gamma-recursion}
+		\begin{align}
+			\Gamma(1) & = \intRplus\e^{-t}\d t = 1.                                              \\
+			\Gamma(x + 1) & = \intRplus t^x \cdot \e^{-t}\d t\notag\\
+						& = \eval{-t^x\e^{-t}}_0^\infty + \intRplus\e^{-t} \cdot xt^{x-1}\d t = x\Gamma(x).
+		\end{align}
+	\end{subequations}
+	对于正整数$n \geq 1$，$\Gamma(n) = (n - 1)!$。上述积分定义不适用于$x \leq 0$，不能将其与解析延拓混为一谈。
 	% $\Gamma(x+1)=x\Gamma(x),\Gamma(1)=1$，对正整数$n$,
 	% \[
 	% 	\Gamma(n)=\intRplus t^{n-1}\e^{-t}\d t=(n-1)!
 	% \]
 
 	\textbf{余元公式}
-	\[
-		\Gamma(x)\Gamma(1-x)=\frac{\pi}{\sin\pi x},\quad x\in(0,1).
-	\]
-	证明略，有$\Gamma(1/2)=\sqrt\pi$
+	\begin{equation}\label{eq:calc-gamma-reflection}
+		\Gamma(x)\Gamma(1 - x) = \frac{\pi}{\sin\pi x},\quad x \in (0,1).
+	\end{equation}
+	证明略，有$\Gamma(1/2) = \sqrt\pi$
 \end{example}
 \begin{example}{Beta函数}{}
-	\begin{center}
-		$\Beta(p,q):=\int_0^1t^{p-1}(1-t)^{q-1}\d t,\quad p,q>0.$ % =2\int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\d\theta.$
-	\end{center}
-	在$p,q>0$条件下，与Gamma函数的关系为$\Beta(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}.$
+	\begin{equation}\label{eq:calc-beta-integral}
+		\Beta(p,q) := \int_0^1t^{p-1}(1 - t)^{q-1}\d t,\quad p,q > 0. % =2\int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\d\theta.$
+	\end{equation}
+	在$p,q > 0$条件下，Beta函数与Gamma函数满足
+	\begin{equation}\label{eq:calc-beta-gamma}
+		\Beta(p,q) = \frac{\Gamma(p)\Gamma(q)}{\Gamma(p + q)}.
+	\end{equation}
 \end{example}
 \begin{example}{Poisson积分}{}
-	\begin{center}
-		$\intRplus\e^{-t^2}\d t=\frac{\sqrt\pi}2.$
-	\end{center}
+	\begin{equation}\label{eq:calc-gaussian-integral}
+		\intRplus\e^{-t^2}\d t = \frac{\sqrt\pi}2.
+	\end{equation}
 	\textbf{证明：}考虑积分的平方
 	\begin{align*}
-		\intRplus\e^{-x^2}\d x\intRplus\e^{-y^2}\d y=\intRplus\intRplus\e^{-x^2-y^2}\d x\nd y \\
-		=\int_0^{\pi/2}\intRplus\e^{-r^2}\cdot r\d r\nd\theta=\frac\pi{2}\cdot\frac12\intRplus\e^{-s}\d s=\frac\pi{4}.
+		\intRplus\e^{-x^2}\d x\intRplus\e^{-y^2}\d y = \intRplus\intRplus\e^{-x^2-y^2}\d x\nd y \\
+		= \int_0^{\pi/2}\intRplus\e^{-r^2} \cdot r\d r\nd\theta = \frac\pi{2} \cdot \frac12\intRplus\e^{-s}\d s = \frac\pi{4}.
 	\end{align*}
 	\iffalse
 		由$\ex>0,\forall x\in\RR$
@@ -155,40 +167,44 @@ Gamma与Beta积分的参数范围及关系可核对\href{https://dlmf.nist.gov/5
 	\fi
 \end{example}
 \begin{example}{Dirichlet积分}{}
-	\begin{center}
-		$\intRplus\frac{\sin x}x\d x=\frac{\pi}2.$
-	\end{center}
+	\begin{equation}\label{eq:calc-dirichlet-integral}
+		\intRplus\frac{\sin x}x\d x = \frac{\pi}2.
+	\end{equation}
 	\textbf{证明：}令
 	\[
-		F(y)=\intRplus\frac{\sin x}x\e^{-xy}\d x,\quad y\geqslant 0.
+		F(y) = \intRplus\frac{\sin x}x\e^{-xy}\d x,\quad y \geqslant 0.
 	\]
-	被积函数在$x=0$可连续延拓，但这本身不足以推出广义积分$F(y)$连续；还需检查收敛的一致性。
+	被积函数在$x = 0$可连续延拓，但这本身不足以推出广义积分$F(y)$连续；还需检查收敛的一致性。
 
-	在$[1,+\infty)$上，$\sin x$的原函数有界且$1/x$单调趋于零，故由Dirichlet判别法，$\intRplus(\sin x)/x\d x$收敛（$x=0$为可去奇点）；$\forall x,y\geqslant 0,|\e^{-xy}|\leqslant 1$且$\e^{-xy}$关于$x$递减，由Abel判别准则可知$F(y)$关于$y\in[0,+\infty)$一致收敛，因此$F(y)$在该区间连续，包括端点$y=0$。
+	在$[1,+\infty)$上，$\sin x$的原函数有界，$1/x$单调趋于零。由Dirichlet判别法及$x = 0$处的奇点可去，知$F(0)$收敛。对所有$x,y \geqslant 0$，都有$|\e^{-xy}| \leqslant 1$，且$\e^{-xy}$关于$x$单调不增。由Abel判别准则，定义$F(y)$的积分关于$y \in [0,+\infty)$一致收敛，因此$F$在该区间连续，包括端点$y = 0$。
 
-	任取$a>0,\forall x\geqslant 0,y\geqslant a,$可知$\abs{-\sin x\e^{-xy}}\leqslant \e^{-xy}\leqslant \e^{-ax}$，且$\intRplus\e^{-ax}\d x=1/a<\infty$，由Weierstrass判别准则知，积分
+	任取$a > 0$。当$x \geqslant 0$、$y \geqslant a$时，有$\abs{-\sin x\e^{-xy}} \leqslant \e^{-ax}$，而
 	\[
-		\intRplus\pv {}y\frac{\sin x}x\e^{-xy}\d x=-\intRplus\sin x\e^{-xy}\d x
+		\intRplus\e^{-ax}\d x = \frac1a < \infty.
+	\]
+	由Weierstrass判别准则，积分
+	\[
+		\intRplus\pv {}y\frac{\sin x}x\e^{-xy}\d x = -\intRplus\sin x\e^{-xy}\d x
 	\]
 	一致收敛，因此$F(y)$在$[a,+\infty)$上可导
 	\begin{align*}
-        F'(y)&=-\intRplus\sin x\,\e^{-yx}\d x
-        =-\Im\intRplus\e^{-(y-\i)x}\d x\\
-        &=-\Im\frac1{y-\i}=-\frac1{1+y^2}.
+        F'(y) &= -\intRplus\sin x\,\e^{-yx}\d x
+        = -\Im\intRplus\e^{-(y-\i)x}\d x\\
+        &= -\Im\frac1{y - \i} = -\frac1{1 + y^2}.
     \end{align*}
-	因为$a>0$任意，故$\forall y>0,$
+	因为$a > 0$任意，上述导数公式对所有$y > 0$成立。积分得
 	\[
-		F'(y)=-\frac1{1+y^2},\quad F(y)=-\arctan y+C.
+		F(y) = -\arctan y + C.
 	\]
-	又$y\to+\infty,$
+	又$y \to +\infty,$
 	\[
-		|F(y)|\leqslant\intRplus\frac{|\sin x|}x\e^{-xy}\d x\leqslant\intRplus\e^{-xy}\d x=\frac1y\to0.
+		|F(y)| \leqslant \intRplus\frac{|\sin x|}x\e^{-xy}\d x \leqslant \intRplus\e^{-xy}\d x = \frac1y \to 0.
 	\]
-	故$\lim_{y\to+\infty}F(y)=C-\frac{\pi}2=0$，即$C=\frac{\pi}2.$
+	结合$F(y) = -\arctan y + C$，取$y \to +\infty$得$C - \pi/2 = 0$，即$C = \pi/2$。
 
-	又$F(y)$在$[0,+\infty)$上连续，故$\forall y\geqslant 0,F(y)=\frac{\pi}2-\arctan y$。特别地，
+	又$F(y)$在$[0,+\infty)$上连续，故$\forall y \geqslant 0,F(y) = \pi/2 - \arctan y$。特别地，
 	\[
-		F(0)=\intRplus\frac{\sin x}x\d x=\frac{\pi}2.
+		F(0) = \intRplus\frac{\sin x}x\d x = \frac{\pi}2.
 	\]
 \end{example}
 \newpage
