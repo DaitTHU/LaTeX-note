@@ -3,10 +3,10 @@
 本章的实矩阵默认在实数域上讨论；若特征多项式没有实根，可将矩阵视为复矩阵来求谱。可对角化和Jordan标准型都依赖所选数域，使用复数域时会明确说明。
 \section{特征值和特征向量}
 \begin{definition}{特征值和特征向量}{eigenvalue and eigenvector}
-	给定方阵$A$，若存在$x\neq 0$和$\lambda\in\FF$满足：
-	\[
-		Ax=\lambda x,
-	\]
+	给定方阵$A$，若存在$x \neq 0$和$\lambda \in \FF$满足：
+	\begin{equation}\label{eq:la-eigenpair}
+		Ax = \lambda x,
+	\end{equation}
 	则称$x$是$A$的特征向量(eigenvector)，$\lambda$是对应的特征值(eigenvalue)。
 	矩阵$A$所有特征值构成的集合称为$A$的谱(spectrum)。
 \end{definition}
@@ -28,23 +28,23 @@
 	若$\lambda_1,\ldots,\lambda_r$两两不等，则$x_1,\ldots,x_r$线性无关。
 \end{theorem}
 \begin{proof}
-	运用数学归纳法证明。$r=1$时，$x_1\neq 0$自然线性无关；
+	运用数学归纳法证明。$r = 1$时，$x_1 \neq 0$自然线性无关；
 	
-	假设$r=m-1$时，$x_1,\ldots,x_{m-1}$线性无关；当$r=m$时，考虑
+	假设$r = m - 1$时，$x_1,\ldots,x_{m-1}$线性无关；当$r = m$时，考虑
 	\begin{equation}
 		\label{eqn:proof eigen 1}
-		x_m=c_1x_1+\cdots+c_{m-1}x_{m-1},\tag{$\ast$}
+		x_m = c_1x_1 + \cdots + c_{m-1}x_{m-1},
 	\end{equation}
 	两边同时左乘$A$得
 	\begin{equation}
 		\label{eqn:proof eigen 2}
-		\lambda_mx_m=c_1\lambda_1x_1+\cdots+c_{m-1}\lambda_{m-1}x_{m-1},\tag{$\ast\ast$}
+		\lambda_mx_m = c_1\lambda_1x_1 + \cdots + c_{m-1}\lambda_{m-1}x_{m-1},
 	\end{equation}
 	$\lambda_m$\eqref{eqn:proof eigen 1} $-$ \eqref{eqn:proof eigen 2}得，
 	\[
-		0=c_1(\lambda_m-\lambda_1)x_1+\cdots+c_{m-1}(\lambda_m-\lambda_{m-1})x_{m-1},
+		0 = c_1(\lambda_m - \lambda_1)x_1 + \cdots + c_{m-1}(\lambda_m - \lambda_{m-1})x_{m-1},
 	\]
-	由$x_1,\ldots,x_{m-1}$线性无关可得所有的$c_i=0$，代回\eqref{eqn:proof eigen 1} 将得到$x_m=0$，与特征向量非零矛盾。因此$x_m$不在前$m-1$个向量张成的空间中，$x_1,\ldots,x_m$线性无关。
+	由$x_1,\ldots,x_{m-1}$线性无关可得所有的$c_i = 0$，代回\eqref{eqn:proof eigen 1} 将得到$x_m = 0$，与特征向量非零矛盾。因此$x_m$不在前$m - 1$个向量张成的空间中，$x_1,\ldots,x_m$线性无关。
 
 	综上，定理对所有可能的$r$均成立。
 \end{proof}
@@ -52,7 +52,7 @@
 \section{特征多项式}
 
 \begin{definition}{特征子空间}{eigen-subspace}
-	$A$的所有特征值为$\lambda$的特征向量张成$\RR^n$的一个线性子空间：$\nullsp(A-\lambda I).$
+	$A$的所有特征值为$\lambda$的特征向量张成$\RR^n$的一个线性子空间：$\nullsp(A - \lambda I).$
 \end{definition}
 
 % \begin{corollary}
@@ -62,22 +62,22 @@
 \begin{definition}
 	{特征方程和特征多项式}{characteristic equation and polynomial}
 	求特征值$\lambda$需要解特征方程(characteristic equation)：
-	\[
-		\det(\lambda I-A)=\lambda^n+a_1\lambda^{n-1}+\cdots+a_n=0,
-	\]
-	而$p_A(\lambda):=\det(\lambda I-A)$称为特征多项式(characteristic polynomial)。
+	\begin{equation}\label{eq:la-characteristic-equation}
+		\det(\lambda I - A) = \lambda^n + a_1\lambda^{n-1} + \cdots + a_n = 0,
+	\end{equation}
+	而$p_A(\lambda) := \det(\lambda I - A)$称为特征多项式(characteristic polynomial)。
 \end{definition}
 
 \begin{corollary}
-	特别地，$p_A(0)=a_n=\det(-A)$，由Viète定理：在复数域中计入全部$n$个根，并按代数重数重复计数，有
+	特别地，$p_A(0) = a_n = \det(-A)$，由Viète定理：在复数域中计入全部$n$个根，并按代数重数重复计数，有
 	\begin{equation}
 		\label{eqn:det lambda}
-		\det(A)=\prod_{i=1}^n\lambda_i.
+		\det(A) = \prod_{i=1}^n\lambda_i.
 	\end{equation}
-	另一方面，通过对行列式进行Laplace展开，可得$a_1=-\tr(A)$，由Viète定理：
+	另一方面，通过对行列式进行Laplace展开，可得$a_1 = -\tr(A)$，由Viète定理：
 	\begin{equation}
 		\label{eqn:trace lambda}
-		\tr(A)=\sum_{i=1}^n\lambda_i,
+		\tr(A) = \sum_{i=1}^n\lambda_i,
 	\end{equation}
 \end{corollary}
 
@@ -85,16 +85,16 @@
 
 \begin{theorem}
 	{Cayley--Hamilton定理}{Cayley-Hamilton theorem}
-	给定特征多项式$p_A:\FF\to\FF$的系数$1,a_1,\ldots,a_n$，可定义矩阵多项式$p_A^*:\FF^{n\times n}\to\FF^{n\times n}$
+	给定特征多项式$p_A:\FF \to \FF$的系数$1,a_1,\ldots,a_n$，可定义矩阵多项式$p_A^*:\FF^{n\times n} \to \FF^{n\times n}$
 	\begin{equation}
-		p_A^*(X)=X^n+a_1X^{n-1}+\cdots+a_{n-1}X+a_nI,
+		p_A^*(X) = X^n + a_1X^{n-1} + \cdots + a_{n-1}X + a_nI,
 	\end{equation}
-	则$p_A^*(A)=O$。
+	则$p_A^*(A) = O$。
 \end{theorem}
 
 \noindent
 \textit{完全错误的证明.}
-将特征多项式$p_A(\lambda)=\det(\lambda I-A)$中的$\lambda$替换为$A$，自然得到$p_A(A)=\det(AI-A)=0$。
+将特征多项式$p_A(\lambda) = \det(\lambda I - A)$中的$\lambda$替换为$A$，自然得到$p_A(A) = \det(AI - A) = 0$。
 错误在于：左侧把标量系数多项式作用到矩阵上，右侧却把行列式中的标量变量直接替换为矩阵；两种操作并不相同。正确证明应先展开伴随矩阵并比较多项式系数。
 
 % \begin{proof}
@@ -111,29 +111,31 @@
 % \end{remark}
 
 \begin{proof}
-	考察伴随矩阵$\adj(\lambda I-A)$，可以写成如下形式：
+	考察伴随矩阵$\adj(\lambda I - A)$，可以写成如下形式：
 	\[
-		\adj(\lambda I-A)=B_1\lambda^{n-1}+\cdots+B_{n-1}\lambda+B_n,
+		\adj(\lambda I - A) = B_1\lambda^{n-1} + \cdots + B_{n-1}\lambda + B_n,
 	\]
 	其中$B_1,\ldots,B_n$完全由$A$决定。
 	由伴随矩阵的性质：
 	\[
-		(\lambda I-A)\adj(\lambda I-A)=\det(\lambda I-A)I=p_A(\lambda)I,
+		(\lambda I - A)\adj(\lambda I - A) = \det(\lambda I - A)I = p_A(\lambda)I,
 	\]
 	两边展开可得
 	\begin{alignat*}{2}
-		\mathrm{LHS}&=B_1\lambda^n+(B_2-AB_1)\lambda^{n-1}+\cdots+(B_n-AB_{n-1})\lambda-AB_n,\\
-		\mathrm{RHS}&=I\lambda^n+a_1I\lambda^{n-1}+\cdots+a_{n-1}\lambda+a_nI.
+		\mathrm{LHS} &= B_1\lambda^n + (B_2 - AB_1)\lambda^{n-1} + \cdots + (B_n - AB_{n-1})\lambda - AB_n,\\
+		\mathrm{RHS} &= I\lambda^n + a_1I\lambda^{n-1} + \cdots + a_{n-1}\lambda + a_nI.
 	\end{alignat*}
 	作为系数的矩阵均由$A$确定，与$\lambda$无关。由于上式$\forall\lambda$均成立，故对应系数相同：
-	\begin{align*}
-		B_1&=I,\\
-		B_{i+1}-AB_i&=a_iI,\quad i=1,2,\ldots,n-1,\\
-		-AB_n&=a_nI.
-	\end{align*}
+	\begin{equation}\label{eq:la-adjugate-coefficient-recurrence}
+		\begin{aligned}
+			B_1 &= I,\\
+			B_{i+1} - AB_i &= a_iI,\quad i = 1,2,\ldots,n - 1,\\
+			-AB_n &= a_nI.
+		\end{aligned}
+	\end{equation}
 	因而$p_A^*(A)$可以化为裂项和(telescoping sum)
 	\[
-		p_A^*(A)=A^nB_1+A^{n-1}(B_2-AB_1)+\cdots+A(B_n-AB_{n-1})-AB_n=O.
+		p_A^*(A) = A^nB_1 + A^{n-1}(B_2 - AB_1) + \cdots + A(B_n - AB_{n-1}) - AB_n = O.
 		\qedhere
 	\]
 \end{proof}
@@ -142,13 +144,13 @@
 	{Faddeev--Le Verrier算法}{Faddeev-LeVerrier algorithm}
 	特征多项式$p_A(\lambda)$的第$k$个系数$a_k$可以递归地求出：
 	\begin{equation}
-		a_k=-\frac1k\bigb{\tr(A^k)+a_1\tr(A^{k-1})+\cdots+a_{k-1}\tr(A)}.
+		a_k = -\frac1k\bigb{\tr(A^k) + a_1\tr(A^{k-1}) + \cdots + a_{k-1}\tr(A)}.
 		% a_m=-\frac1m\sum_{k=1}^ma_{m-k}\tr(A^k).
 	\end{equation}
 \end{theorem}
 
 \begin{proof}
-	沿用\thmref{thm:Cayley-Hamilton theorem} 证明中的定义，并补充$B_{n+1}=O$，使递推式在$k=n$时仍成立。
+	沿用\thmref{thm:Cayley-Hamilton theorem} 证明中的定义，并补充$B_{n+1} = O$，使递推式在$k = n$时仍成立。
 	% 并额外定义$B_0=O,\enspace c_0=1$。
 	% 两边取迹得
 	% \[
@@ -156,49 +158,49 @@
 	% \]
 	由Jacobi公式\eqref{eqn:Jacobi det'}，有 
 	\[
-		p_A'(\lambda)=\tr(\adj(\lambda I-A)I)=\tr(B_1\lambda^{n-1}+\cdots+B_n)
+		p_A'(\lambda) = \tr(\adj(\lambda I - A)I) = \tr(B_1\lambda^{n-1} + \cdots + B_n)
 	\]
 	展开
 	\[
-		n\lambda^{n-1}+(n-1)a_1\lambda^{n-2}+\cdots+a_{n-1}=\tr(B_1)\lambda^{n-1}+\tr(B_2)\lambda^{n-2}+\cdots+\tr(B_n).
+		n\lambda^{n-1} + (n - 1)a_1\lambda^{n-2} + \cdots + a_{n-1} = \tr(B_1)\lambda^{n-1} + \tr(B_2)\lambda^{n-2} + \cdots + \tr(B_n).
 	\]
 	由于上式$\forall\lambda$均成立，故对应系数相同：
 	\[
-		(n-k)a_k=\tr(B_{k+1}),
+		(n - k)a_k = \tr(B_{k+1}),
 	\]
-	又$B_k$满足递推关系$B_{k+1}=AB_k+a_kI$，两边取迹可得
+	又$B_k$满足递推关系$B_{k+1} = AB_k + a_kI$，两边取迹可得
 	\[
-		(n-k)a_k=\tr(AB_k)+na_k\implies a_k=-\frac1k\tr(AB_k),
+		(n - k)a_k = \tr(AB_k) + na_k \implies a_k = -\frac1k\tr(AB_k),
 	\]
 	再展开$B_k$即证：
 	\[
-		B_k=AB_{k-1}+a_{k-1}I=\cdots=A^{k-1}+a_1A^{k-2}+\cdots+a_{k-1}I.
+		B_k = AB_{k-1} + a_{k-1}I = \cdots = A^{k-1} + a_1A^{k-2} + \cdots + a_{k-1}I.
 		\qedhere
 	\]
 \end{proof}
 
 \begin{corollary}
-	取$\lambda=0$可得伴随矩阵：
+	取$\lambda = 0$可得伴随矩阵：
 	\begin{equation}
-		\adj(-A)=B_n=A^{n-1}+a_1A^{n-2}+\cdots+a_{n-1}I.
+		\adj(-A) = B_n = A^{n-1} + a_1A^{n-2} + \cdots + a_{n-1}I.
 	\end{equation}
-	易证这满足$\adj(-A)(-A)=(-A)\adj(-A)=\det(-A)I=a_nI$。
+	易证这满足$\adj(-A)(-A) = (-A)\adj(-A) = \det(-A)I = a_nI$。
 \end{corollary}
 
 \begin{example}
 	{特征多项式的前几项}{}
-	继$a_1=-\tr(A)$之后，可得
+	继$a_1 = -\tr(A)$之后，可得
 	\begin{subequations}
 		\begin{align}
-			a_2&=\frac12\bigp{\tr(A)^2-\tr(A^2)},\\
-			a_3&=-\frac16\bigp{\tr(A)^3-3\tr(A)\tr(A^2)+2\tr(A^3)},
+			a_2 &= \frac12\bigp{\tr(A)^2 - \tr(A^2)},\\
+			a_3 &= -\frac16\bigp{\tr(A)^3 - 3\tr(A)\tr(A^2) + 2\tr(A^3)},
 		\end{align}
 	\end{subequations}
 	更一般地，$a_k$的显性表达式由一个$k$阶行列式给出：
 	\begin{equation}
-		a_k=\frac{(-)^k}{k!}\begin{vmatrix}
-			\tr(A)&k-1\\
-			\tr(A^2)&\tr(A)&k-2\\
+		a_k = \frac{(-)^k}{k!}\begin{vmatrix}
+			\tr(A)&k - 1\\
+			\tr(A^2)&\tr(A)&k - 2\\
 			\vdots&\vdots&\ddots&\ddots\\
 			\vdots&\vdots&\vdots&\ddots&1\\
 			\tr(A^k)&\tr(A^{k-1})&\tr(A^{k-2})&\cdots&\tr(A)
@@ -223,34 +225,34 @@
 \begin{proof} 
 	对下式两边取行列式即证。
 	\[
-		\lambda I-B\inv AB=\lambda B\inv IB-B\inv AB=B\inv(\lambda I-A)B.
+		\lambda I - B\inv AB = \lambda B\inv IB - B\inv AB = B\inv(\lambda I - A)B.
 		\qedhere
 	\]
 \end{proof}
 
-由于对角矩阵有很多简单的性质，考虑相似变换$\Lambda=X\inv AX$，其中$\Lambda$为对角矩阵。
+由于对角矩阵有很多简单的性质，考虑相似变换$\Lambda = X\inv AX$，其中$\Lambda$为对角矩阵。
 这称为对角化(diagonalization)。
 显然，不是所有方阵都可以对角化。
 
 \begin{theorem}{可对角化判定}{}
 	$n$阶矩阵$A$可对角化$\iff A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$。
 	\tcblower
-	此时$A=X\Lambda X\inv$，$X$由特征向量给出，对角矩阵$\Lambda$由对应特征值$\lambda_1,\ldots,\lambda_n$给出：
+	此时$A = X\Lambda X\inv$，$X$由特征向量给出，对角矩阵$\Lambda$由对应特征值$\lambda_1,\ldots,\lambda_n$给出：
 	\begin{equation}
-		X=[x_1,\ldots,x_n]
+		X = [x_1,\ldots,x_n]
 		\quad
-	\Lambda=\diag(\lambda_1,\ldots,\lambda_n).
+	\Lambda = \diag(\lambda_1,\ldots,\lambda_n).
 	\end{equation}
 \end{theorem}
 
 \begin{proof}
 	假设$A$有$n$个线性无关的特征向量$x_1,\ldots,x_n$，则$A$可对角化：
 	\[
-		AX=[Ax_1,\ldots,Ax_n]=[\lambda_1x_1,\ldots,\lambda_nx_n]=X\Lambda,
+		AX = [Ax_1,\ldots,Ax_n] = [\lambda_1x_1,\ldots,\lambda_nx_n] = X\Lambda,
 	\]
-	反过来说，若$A$可对角化为$X\Lambda X\inv$，则$AX=X\Lambda$，即
+	反过来说，若$A$可对角化为$X\Lambda X\inv$，则$AX = X\Lambda$，即
 	\[
-		[Ax_1,\ldots,Ax_n]=[\lambda_1x_1,\ldots,\lambda_nx_n],
+		[Ax_1,\ldots,Ax_n] = [\lambda_1x_1,\ldots,\lambda_nx_n],
 	\]
 	故$x_1,\ldots,x_n$是$A$的特征向量；又由$X$可逆，可得$x_1,\ldots,x_n$线性无关。
 \end{proof}
@@ -265,46 +267,46 @@
 对于简并情形，需要引入特征值的重数(multiplicity)的概念。
 
 \begin{definition}{几何重数和代数重数}{}
-	几何重数(geometric multiplicity, GM)：特征值$\lambda_i$对应的线性无关特征向量的最大个数，即特征子空间的维数$\dim\bigp{\nullsp(\lambda_iI-A)}$。
+	几何重数(geometric multiplicity, GM)：特征值$\lambda_i$对应的线性无关特征向量的最大个数，即特征子空间的维数$\dim\bigp{\nullsp(\lambda_iI - A)}$。
 
-	代数重数(algebraic multiplicity, AM)：特征值$\lambda_i$作为特征方程$\det(\lambda I-A)=0$的根$\lambda=\lambda_i$的重复次数。
-	\[
-		\det(\lambda I-A)=\prod_{i=1}^r(\lambda-\lambda_i)^{\AM_i}=0,
-	\]
+	代数重数(algebraic multiplicity, AM)：特征值$\lambda_i$作为特征方程$\det(\lambda I - A) = 0$的根$\lambda = \lambda_i$的重复次数。
+	\begin{equation}\label{eq:la-characteristic-multiplicities}
+		\det(\lambda I - A) = \prod_{i=1}^r(\lambda - \lambda_i)^{\AM_i} = 0,
+	\end{equation}
 	这里假设特征多项式在所选数域内完全分裂，$\lambda_i$是互不相同的根，$\AM_i$是$\lambda_i$的代数重数；在$\CC$上这一分裂条件总成立。
 \end{definition}
 
 \begin{corollary}
-	当特征多项式在所选数域内完全分裂时，代数重数之和$\textstyle\sum_{i=1}^r\AM_i=n$等于矩阵的阶数。
+	当特征多项式在所选数域内完全分裂时，代数重数之和$\textstyle\sum_{i=1}^r\AM_i = n$等于矩阵的阶数。
 \end{corollary}
 
 \begin{theorem}{}{GM <= AM}
-	$\GM\leqslant\AM.$
+	$\GM \leqslant \AM.$
 \end{theorem}
 \begin{proof}
-    令$g=\GM_k$，先取$\ker(A-\lambda_k I)$的一组基$x_1,\ldots,x_g$，再扩张成整个空间的基，组成可逆矩阵$P_k$。因为$Ax_i=\lambda_kx_i$，有
+    令$g = \GM_k$，先取$\ker(A - \lambda_k I)$的一组基$x_1,\ldots,x_g$，再扩张成整个空间的基，组成可逆矩阵$P_k$。因为$Ax_i = \lambda_kx_i$，有
 	\[
-        P_k\inv AP_k=\begin{bmatrix}
+        P_k\inv AP_k = \begin{bmatrix}
             \lambda_k I_g&C_k\\0&D_k
         \end{bmatrix}.
 	\]
     因而
 	\[
-        p_A(\lambda)=(\lambda-\lambda_k)^g\det(\lambda I-D_k),
+        p_A(\lambda) = (\lambda - \lambda_k)^g\det(\lambda I - D_k),
 	\]
-    所以$\AM_k\geq g=\GM_k$。此证明不要求选择正交基，适用于实数域和复数域。
+    所以$\AM_k \geq g = \GM_k$。此证明不要求选择正交基，适用于实数域和复数域。
 \end{proof}
 
 \begin{corollary}
 	$n$阶矩阵$A$的全部特征值为$\{\lambda_1,\ldots,\lambda_r\}$，$A$可对角化当且仅当
-	\[
-		\sum_{i=1}^r\dim\bigp{\nullsp(\lambda_iI-A)}=n,
-	\]
-	等价地，特征多项式在所选数域内完全分裂，且所有特征值都满足$\AM_i=\GM_i$。
+	\begin{equation}\label{eq:la-diagonalization-eigenspaces}
+		\sum_{i=1}^r\dim\bigp{\nullsp(\lambda_iI - A)} = n,
+	\end{equation}
+	等价地，特征多项式在所选数域内完全分裂，且所有特征值都满足$\AM_i = \GM_i$。
 \end{corollary}
 
 \begin{corollary}
-	在特征多项式完全分裂的前提下，矩阵不可对角化当且仅当存在某个$\lambda_k$使$\det(\lambda_kI-D_k)=0$，即行列式提供了新的$(\lambda-\lambda_k)$因子使得$\AM_k>\GM_k$。
+	在特征多项式完全分裂的前提下，矩阵不可对角化当且仅当存在某个$\lambda_k$使$\det(\lambda_kI - D_k) = 0$，即行列式提供了新的$(\lambda - \lambda_k)$因子使得$\AM_k > \GM_k$。
 \end{corollary}
 
 \begin{theorem}
@@ -313,167 +315,172 @@
 \end{theorem}
 
 \begin{proof}
-	考虑只有2个分块对角矩阵$A=\diag(A_1,A_2)$，因为对于$k$块对角矩阵，可令$A_2$是$k-1$块的，通过数学归纳法证明即可。
+	考虑只有2个分块对角矩阵$A = \diag(A_1,A_2)$，因为对于$k$块对角矩阵，可令$A_2$是$k - 1$块的，通过数学归纳法证明即可。
 
 	一方面，若$A_1,A_2$可对角化，即
 	\[
-		X_1\inv A_1X_1=\Lambda_1,\quad X_2\inv A_2X_2=\Lambda_2,
+		X_1\inv A_1X_1 = \Lambda_1,\quad X_2\inv A_2X_2 = \Lambda_2,
 	\]
-	则令$X=\diag(X_1,X_2),\,\Lambda=\diag(\Lambda_1,\Lambda_2)$可将$A$对角化：
+	则令$X = \diag(X_1,X_2),\,\Lambda = \diag(\Lambda_1,\Lambda_2)$可将$A$对角化：
 	\[
-		X\inv AX=\Lambda;
+		X\inv AX = \Lambda;
 	\]
 	另一方面，若$A$可对角化，任取$A$的一个特征值$\lambda_i$，
-	考虑其关于$A,A_1,A_2$的代数重数$\AM,\AM_1,\AM_2$和几何重数$\GM,\GM_1,\GM_2$，由
-	\begin{alignat*}{2}
-		\det(\lambda I_n-A)&=\det(\lambda I_{n_1}-A_1)\det(\lambda I_{n_2}-A_2)&\implies\AM&=\AM_1+\AM_2;\\
-		\rank(\lambda_iI_n-A)&=\rank(\lambda_iI_{n_1}-A_1)+\rank(\lambda_iI_{n_2}-A_2)&\implies\GM&=\GM_1+\GM_2.
-	\end{alignat*}
-	由$A$可对角化知$\AM=\GM$，而$\AM_1\geq\GM_1,\,\AM_2\geq\GM_2$，
-	故$\AM_1=\GM_1,\,\AM_2=\GM_2$，即$A_1,A_2$均可对角化。
+	记它关于$A,A_1,A_2$的代数重数为$\AM,\AM_1,\AM_2$，几何重数为$\GM,\GM_1,\GM_2$。分块对角结构给出
+	\begin{align*}
+		\det(\lambda I_n - A) &= \det(\lambda I_{n_1} - A_1)\det(\lambda I_{n_2} - A_2),\\
+		\rank(\lambda_iI_n - A) &= \rank(\lambda_iI_{n_1} - A_1) + \rank(\lambda_iI_{n_2} - A_2).
+	\end{align*}
+	由第一式中特征多项式的根重数得$\AM = \AM_1 + \AM_2$，对第二式用秩--零化度公式得$\GM = \GM_1 + \GM_2$。
+	由$A$可对角化知$\AM = \GM$，而$\AM_1 \geq \GM_1,\,\AM_2 \geq \GM_2$，
+	故$\AM_1 = \GM_1,\,\AM_2 = \GM_2$，即$A_1,A_2$均可对角化。
 \end{proof}
 
 \begin{theorem}{同时对角化}{}
-	若$A,B$可对角化，则$A,B$可以同时对角化$\iff A,B$可交换($AB=BA$)。
+	若$A,B$可对角化，则$A,B$可以同时对角化$\iff A,B$可交换($AB = BA$)。
 \end{theorem}
 
 \begin{proof}
 	若$A,B$可以同时对角化，即存在可逆矩阵$X$和对角矩阵$\Lambda_A,\Lambda_B$，使得
 	\[
-		A=X\Lambda_AX\inv,\quad B=X\Lambda_BX\inv,
+		A = X\Lambda_AX\inv,\quad B = X\Lambda_BX\inv,
 	\]
 	故
 	\[
-		AB-BA=X(\Lambda_A\Lambda_B-\Lambda_B\Lambda_A)X\inv=0;
+		AB - BA = X(\Lambda_A\Lambda_B - \Lambda_B\Lambda_A)X\inv = 0;
 	\]
-	另一方面，若$AB=BA$，下证$A,B$可同时对角化。
+	另一方面，若$AB = BA$，下证$A,B$可同时对角化。
 	由$A$可对角化，可知存在$X$使得
 	\[
-		X\inv AX=\begin{bmatrix}
+		X\inv AX = \begin{bmatrix}
 			\lambda_1I_{n_1}\\ &\ddots\\ &&\lambda_rI_{n_r}
 		\end{bmatrix},
 	\]
-	又由$AB=BA$可得
+	又由$AB = BA$可得
 	\[
-		(X\inv AX)(X\inv BX)=(X\inv BX)(X\inv AX),
+		(X\inv AX)(X\inv BX) = (X\inv BX)(X\inv AX),
 	\]
 	将$X\inv BX$按$X\inv AX$的形状分块，由上式可知$X\inv BX$应是分块对角的：
 	\[
-		X\inv BX=\begin{bmatrix}
+		X\inv BX = \begin{bmatrix}
 			B_1\\ &\ddots\\ &&B_r
 		\end{bmatrix}.
 	\]
-	由$B$可对角化知$B_i$可对角化，$Y_i\inv B_iY_i=\Lambda_i$。
+	由$B$可对角化知$B_i$可对角化，$Y_i\inv B_iY_i = \Lambda_i$。
 	令
 	\[
-		Y=\diag(Y_1,\ldots,Y_r),
+		Y = \diag(Y_1,\ldots,Y_r),
 		\quad
-		\Lambda_B=\diag(\Lambda_1,\ldots,\Lambda_r),
+		\Lambda_B = \diag(\Lambda_1,\ldots,\Lambda_r),
 	\]
-	则$Y\inv X\inv BXY=\Lambda_B$。
+	则$Y\inv X\inv BXY = \Lambda_B$。
 	由此$A,B$可以被$XY$同时对角化。
 \end{proof}
 
 \sectionstar{Jordan标准型}
 
-不是所有方阵都可以对角化，如果$n$阶矩阵$A$有$r<n$个线性独立的特征向量，怎么把$A$变成最接近对角矩阵的形式？
+不是所有方阵都可以对角化，如果$n$阶矩阵$A$有$r < n$个线性独立的特征向量，怎么把$A$变成最接近对角矩阵的形式？
 在复数域上，任何方阵都可以通过相似变换变成Jordan标准型。更一般地，只要特征多项式在所选数域内完全分裂即可；实矩阵若有非实特征值，则需扩展到复数域，不能直接声称存在实Jordan标准型。
 
 \begin{theorem}{Jordan标准型}{Jordan normal form}
 	设$n$阶矩阵$A$的特征多项式在数域$\FF$内完全分裂，且$r$是线性无关特征向量的最大个数。则可选取特征向量$v_1,\ldots,v_r$（特征值$\lambda_1,\ldots,\lambda_r$可重复），并存在$\FF$上的可逆矩阵$P$，使得
-	\[
-		P\inv AP=J=\begin{bmatrix}
-			J_1             \\
-			 & \ddots       \\
-			 &        & J_r
-		\end{bmatrix},\quad
-		J_i=\begin{bmatrix}
-			\lambda_i & 1                              \\
-			          & \lambda_i & \ddots             \\
-			          &           & \ddots & 1         \\
-			          &           &        & \lambda_i
-		\end{bmatrix}
-	\]
+	\begin{subequations}\label{eq:la-jordan-normal-form}
+		\begin{align}
+			P\inv AP &= J = \begin{bmatrix}
+				J_1             \\
+				 & \ddots       \\
+				 &        & J_r
+			\end{bmatrix},\\
+			J_i &= \begin{bmatrix}
+				\lambda_i & 1                              \\
+				          & \lambda_i & \ddots             \\
+				          &           & \ddots & 1         \\
+				          &           &        & \lambda_i
+			\end{bmatrix}
+		\end{align}
+	\end{subequations}
 	其中$J_i$称为Jordan块，其主对角线全为$\lambda_i$，主对角线上方的次对角线(若有)全为1，其余元素全为0。
-	$J=\diag(J_1,\ldots,J_r)$就是$A$的Jordan标准型(Jordan normal form)。
+	$J = \diag(J_1,\ldots,J_r)$就是$A$的Jordan标准型(Jordan normal form)。
 \end{theorem}
 
 其证明是线性代数的核心。其中一些概念需要等到\chapref{chap:linear mapping}线性映射才会提及。先给出几个概念证明引理。
 
-首先，矩阵$A$不可对角化的原因是存在一个特征值$\lambda_i$的$\AM_i>\GM_i=\dim\bigp{\nullsp(\lambda_iI-A)}$。
-也就是说，特征子空间$\nullsp(\lambda_iI-A)$还是太小了，不能提供足够多线性无关的特征向量。
+首先，矩阵$A$不可对角化的原因是存在一个特征值$\lambda_i$的$\AM_i > \GM_i = \dim\bigp{\nullsp(\lambda_iI - A)}$。
+也就是说，特征子空间$\nullsp(\lambda_iI - A)$还是太小了，不能提供足够多线性无关的特征向量。
 为此我们需要引入广义特征向量的概念。
 
 \begin{definition}{广义特征向量}{generalized eigenvector}
-	给定线性映射$T:V\to V$，若存在$\lambda\in\FF$、正整数$d\in\NN$和$v\in V$且$v\neq 0$，使得
-	\[
-		(T-\lambda I)^dv=0,
-	\]
+	给定线性映射$T:V \to V$，若存在$\lambda \in \FF$、正整数$d \in \NN$和$v \in V$且$v \neq 0$，使得
+	\begin{equation}\label{eq:la-generalized-eigenvector}
+		(T - \lambda I)^dv = 0,
+	\end{equation}
 	则称$v$为$T$的广义特征向量(generalized eigenvector)，使得上式成立的最小正整数$d$称为$v$的幂指数(exponent)。
 \end{definition}
 
 \begin{theorem}{}{}
-	给定正整数$k$，广义特征方程$(T-\lambda I)^kv=0$有非零解$\iff\lambda$是$T$的特征值。
+	给定正整数$k$，广义特征方程$(T - \lambda I)^kv = 0$有非零解$\iff \lambda$是$T$的特征值。
 \end{theorem}
 
 \begin{proof}
-	若$\lambda$是$T$的特征值，则$(T-\lambda I)v=0$，左乘$(T-\lambda I)^{k-1}$即可。
+	若$\lambda$是$T$的特征值，则$(T - \lambda I)v = 0$，左乘$(T - \lambda I)^{k-1}$即可。
 	
-	若$(T-\lambda I)^kv=0$且$v\neq0$，令$d\leq k$为使$(T-\lambda I)^dv=0$成立的最小正整数。则$w=(T-\lambda I)^{d-1}v\neq0$且$(T-\lambda I)w=0$，所以$\lambda$是特征值。
+	若$(T - \lambda I)^kv = 0$且$v \neq 0$，令$d \leq k$为使$(T - \lambda I)^dv = 0$成立的最小正整数。则$w = (T - \lambda I)^{d-1}v \neq 0$且$(T - \lambda I)w = 0$，所以$\lambda$是特征值。
 \end{proof}
 
 \begin{theorem}{}{}
 	% 给定特征值$\lambda$和广义特征向量$v$，
-	令$u_i:=(T-\lambda I)^iv$，则$u_0,\ldots,u_{d-1}$线性无关。
+	令$u_i := (T - \lambda I)^iv$，则$u_0,\ldots,u_{d-1}$线性无关。
 \end{theorem}
 
 \begin{proof}
-	考虑线性组合$a_0u_0+\cdots+a_{d-1}u_{d-1}=0$，左乘$(T-\lambda I)^{d-1}$可得
+	考虑线性组合$a_0u_0 + \cdots + a_{d-1}u_{d-1} = 0$，左乘$(T - \lambda I)^{d-1}$可得
 	\[
-		a_0(T-\lambda I)^{d-1}v+0+\cdots+0=0\implies a_0=0.
+		a_0(T - \lambda I)^{d-1}v + 0 + \cdots + 0 = 0 \implies a_0 = 0.
 	\]
-	左乘$(T-\lambda I)^{d-2},(T-\lambda I)^{d-3},\ldots$可得$a_1=\cdots=a_{d-1}=0$，从而$u_0,\ldots,u_{d-1}$线性无关。
+	左乘$(T - \lambda I)^{d-2},(T - \lambda I)^{d-3},\ldots$可得$a_1 = \cdots = a_{d-1} = 0$，从而$u_0,\ldots,u_{d-1}$线性无关。
 \end{proof}
 
 \begin{remark}
 	也可以逆向寻找一条Jordan链：
 	首先给出$T$的特征向量$u_{d-1}$，从$u_{d-1}$出发，
-	根据$(T-\lambda I)u_j=u_{j+1}$从$u_{j+1}$逆推出$u_j$，
-	直到$(T-\lambda I)u_{-1}=u_0$对于$u_{-1}$无解。
+	根据$(T - \lambda I)u_j = u_{j+1}$从$u_{j+1}$逆推出$u_j$，
+	直到$(T - \lambda I)u_{-1} = u_0$对于$u_{-1}$无解。
 	由此得到的$u_{d-1},\ldots,u_0$称为Jordan链，满足
-	\[
-		u_{d-1}\in\ker(T-\lambda I),\quad
-		u_{d-2}\in\ker\bigp{(T-\lambda I)^2},\quad
-		\ldots,\quad
-		u_0\in\ker\bigp{(T-\lambda I)^d}\backslash\ker\bigp{(T-\lambda I)^{d-1}}.
-	\]
-	若逆向过程已不能延长，则$u_0\notin\im(T-\lambda I)$，而此前各向量都在像空间内。寻找多条链时仍须保证它们合起来线性无关；任意分别延长特征向量并不能保证得到全空间的基。
+	\begin{equation}\label{eq:la-jordan-chain-kernels}
+		\begin{aligned}
+			u_{d-1} &\in \ker(T - \lambda I),\\
+			u_{d-2} &\in \ker\bigp{(T - \lambda I)^2},\\
+			&\vdots\\
+			u_0 &\in \ker\bigp{(T - \lambda I)^d}\backslash\ker\bigp{(T - \lambda I)^{d-1}}.
+		\end{aligned}
+	\end{equation}
+	若逆向过程已不能延长，则$u_0 \notin \im(T - \lambda I)$，而此前各向量都在像空间内。寻找多条链时仍须保证它们合起来线性无关；任意分别延长特征向量并不能保证得到全空间的基。
 \end{remark}
 
 \begin{theorem}{}{}
-	$X=\Span(u_0,\ldots,u_{d-1})$是$T$的不变子空间，即$T(X)\subset X$。
+	$X = \Span(u_0,\ldots,u_{d-1})$是$T$的不变子空间，即$T(X) \subset X$。
 \end{theorem}
 
 \begin{proof}
-	由线性无关，$B:=\{u_0,\ldots,u_{d-1}\}$是$X=\Span(B)$的一组基，考虑$T$在基上的作用：
+	由线性无关，$B := \{u_0,\ldots,u_{d-1}\}$是$X = \Span(B)$的一组基，考虑$T$在基上的作用：
 	\begin{itemize}
-		\item $0\leq j< d-1$时，$(T-\lambda I)u_j=u_{j+1}\implies Tu_j=\lambda u_j+u_{j+1}$；
-		\item $j=d-1$时，$(T-\lambda I)u_j=0\implies Tu_j=\lambda u_j$；
-		\item $j>d-1$时，$u_j=0\implies Tu_j=0$。
+		\item $0 \leq j < d - 1$时，$(T - \lambda I)u_j = u_{j+1} \implies Tu_j = \lambda u_j + u_{j+1}$；
+		\item $j = d - 1$时，$(T - \lambda I)u_j = 0 \implies Tu_j = \lambda u_j$；
+		\item $j > d - 1$时，$u_j = 0 \implies Tu_j = 0$。
 	\end{itemize}
-	故$\forall u=a_0u_0+\cdots+a_{d-1}u_{d-1}\in X$，有
+	故$\forall u = a_0u_0 + \cdots + a_{d-1}u_{d-1} \in X$，有
 	\begin{align*}
-		Tu&=a_0(\lambda u_0+u_1)+\cdots+a_{d-2}(\lambda u_{d-2}+u_{d-1})+a_{d-1}\lambda u_{d-1}\\
-		&=\lambda a_0u_0+(a_0+\lambda a_1)u_1+\cdots+(a_{d-2}+\lambda a_{d-1})u_{d-1}\in X.
+		Tu &= a_0(\lambda u_0 + u_1) + \cdots + a_{d-2}(\lambda u_{d-2} + u_{d-1}) + a_{d-1}\lambda u_{d-1}\\
+		&= \lambda a_0u_0 + (a_0 + \lambda a_1)u_1 + \cdots + (a_{d-2} + \lambda a_{d-1})u_{d-1} \in X.
 		\qedhere
 	\end{align*}
 \end{proof}
 
 \begin{corollary}
-	因为$X$是$T$的不变子空间，我们可以把$T$看成是$X\to X$的线性映射。
+	因为$X$是$T$的不变子空间，我们可以把$T$看成是$X \to X$的线性映射。
 	以Jordan链$u_{d-1},\ldots,u_0$作为$X$的基，$T$的表示矩阵为
 	\[
-		T=\begin{bmatrix}
+		T = \begin{bmatrix}
 			\lambda&1\\ &\lambda&\ddots\\ &&\ddots&1\\ &&&\lambda
 		\end{bmatrix},
 	\]
@@ -482,13 +489,16 @@
 
 \begin{corollary}
 	若$v_1,\ldots,v_r$是$T$的广义特征向量，相应的特征值为$\lambda_i$，幂指数为$d_i$，定义
-	\[
-		u_{i,j}:=(T-\lambda_iI)^jv_i,\quad V_i:=\Span(u_{i,0},\ldots,u_{i,d_i-1}),
-	\]
+	\begin{subequations}\label{eq:la-cyclic-subspace}
+		\begin{align}
+			u_{i,j} &:= (T - \lambda_iI)^jv_i,\\
+			V_i &:= \Span(u_{i,0},\ldots,u_{i,d_i-1}),
+		\end{align}
+	\end{subequations}
 	则$V_i$是$T$的不变子空间，且$T$在$V_i$上的表示矩阵是Jordan块。
-	若这些子空间的和是直和，则$T$在$V_1\oplus\cdots\oplus V_r$上的表示矩阵是分块对角的，且每一块都是Jordan块的形式。
+	若这些子空间的和是直和，则$T$在$V_1 \oplus \cdots \oplus V_r$上的表示矩阵是分块对角的，且每一块都是Jordan块的形式。
 
-	所以我们只要证明存在这样一组广义特征向量$v_1,\ldots,v_r$使得$V=V_1\oplus\cdots\oplus V_r$就可以证明Jordan标准型的\thmref{thm:Jordan normal form}。
+	所以我们只要证明存在这样一组广义特征向量$v_1,\ldots,v_r$使得$V = V_1 \oplus \cdots \oplus V_r$就可以证明Jordan标准型的\thmref{thm:Jordan normal form}。
 \end{corollary}
 
 \begin{remark}
@@ -496,91 +506,96 @@
 \end{remark}
 
 \begin{theorem}{}{}
-	设$T^i$的核$K_i:=\ker(T^i)$和像$U_i:=\im(T^i)$，则
-	\begin{alignat*}{4}
-		K_1&\subset{}&K_2&\subset\cdots&\\
-		U_1&\supset{}&U_2&\supset\cdots&
-	\end{alignat*}
+	设$T^i$的核$K_i := \ker(T^i)$和像$U_i := \im(T^i)$，则
+	\begin{subequations}\label{eq:la-kernel-image-filtrations}
+		\begin{alignat}{4}
+			K_1 &\subset {}&K_2 &\subset \cdots&\\
+			U_1 &\supset {}&U_2 &\supset \cdots&
+		\end{alignat}
+	\end{subequations}
 \end{theorem}
 
 \begin{proof}
-	$\forall v\in K_i$，有 
+	$\forall v \in K_i$，有
 	\[
-		T^iv=0\implies T^{i+1}v=0\implies v\in K_{i+1};
+		T^iv = 0 \implies T^{i+1}v = 0 \implies v \in K_{i+1};
 	\]
-	$\forall u\in U_i$，可表示为$u=T^iv$，则
+	$\forall u \in U_i$，可表示为$u = T^iv$，则
 	\[
-		u=T^{i-1}Tv\implies u\in U_{i-1}.
+		u = T^{i-1}Tv \implies u \in U_{i-1}.
 		\qedhere
 	\]
 \end{proof} 
 
 \begin{corollary}
-	若$K_i\neq K_{i+1}$，由$K_i\subset K_{i+1}$可知$\exists v\in K_{i+1}$不能被$K_i$张成，故$\dim(K_i)<\dim(K_{i+1})$；
-	又由$\dim(K_i)\leq \dim(V)$有限，故$K_1\subset K_2\subset\cdots$最后会稳定$K_m=K_{m+1}=\cdots$，将最后稳定的空间记为$K$，显然$K$是$T$的不变子空间。
+	若$K_i \neq K_{i+1}$，由$K_i \subset K_{i+1}$可知$\exists v \in K_{i+1}$不能被$K_i$张成，故$\dim(K_i) < \dim(K_{i+1})$；
+	又由$\dim(K_i) \leq \dim(V)$有限，故$K_1 \subset K_2 \subset \cdots$最后会稳定$K_m = K_{m+1} = \cdots$，将最后稳定的空间记为$K$，显然$K$是$T$的不变子空间。
 
-	类似地，$U_1\supset U_2\supset\cdots$最后也会稳定$U_{m'}=U_{m'+1}=\cdots=:U$，易证$U$也是$T$的不变子空间。
+	类似地，$U_1 \supset U_2 \supset \cdots$最后也会稳定$U_{m'} = U_{m'+1} = \cdots =: U$，易证$U$也是$T$的不变子空间。
 \end{corollary}
 
 \begin{theorem}
 	{}{}
-	$V=K\oplus U$。
+	$V = K \oplus U$。
 \end{theorem}
 
 \begin{proof}
-    取足够大的同一个$m$，使$K=\ker(T^m)=\ker(T^{2m})$且$U=\im(T^m)$。若$u\in K\cap U$，写成$u=T^mv$，则$T^{2m}v=T^mu=0$，于是$v\in K=\ker(T^m)$，故$u=T^mv=0$。
-    再由秩--零化度公式，$\dim K+\dim U=\dim V$，得到$V=K\oplus U$。
+    取足够大的同一个$m$，使$K = \ker(T^m) = \ker(T^{2m})$且$U = \im(T^m)$。若$u \in K \cap U$，写成$u = T^mv$，则$T^{2m}v = T^mu = 0$，于是$v \in K = \ker(T^m)$，故$u = T^mv = 0$。
+    再由秩--零化度公式，$\dim K + \dim U = \dim V$，得到$V = K \oplus U$。
 \end{proof}
 
 \begin{corollary}
-	由$\dim(K)>0$知$\dim(U)<\dim(V)$，根据归纳假设，$T:U\to U$在$U$上可以分解成Jordan标准型。
-	下面我们证明$T:K\to K$在$K$上也可以分解成Jordan标准型。
+	由$\dim(K) > 0$知$\dim(U) < \dim(V)$，根据归纳假设，$T:U \to U$在$U$上可以分解成Jordan标准型。
+	下面我们证明$T:K \to K$在$K$上也可以分解成Jordan标准型。
 \end{corollary}
 
 \begin{theorem}{幂零映射的Jordan基}{nilpotent Jordan basis}
     有限维空间上的幂零映射$N$存在由Jordan链组成的一组基。
 \end{theorem}
 \begin{proof}
-    对空间维数归纳。若$N=0$，任一组基都是长度为1的Jordan链。否则令$W=\im N$；由于$N$幂零，$\dim W<\dim V$，且$N|_W$仍幂零。
+    对空间维数归纳。若$N = 0$，任一组基都是长度为1的Jordan链。否则令$W = \im N$；由于$N$幂零，$\dim W < \dim V$，且$N|_W$仍幂零。
 
-    由归纳假设，$W$有Jordan链基
+    由归纳假设，$W$有Jordan链基。第$i$条链的基向量$w_{i,1},\ldots,w_{i,\ell_i}$（$i = 1,\ldots,s$）满足
+    \begin{subequations}\label{eq:la-nilpotent-chain}
+        \begin{align}
+            Nw_{i,1} &= 0,\\
+            Nw_{i,j} &= w_{i,j-1},\qquad 2 \le j \le \ell_i.
+        \end{align}
+    \end{subequations}
+    每条链的顶端$w_{i,\ell_i} \in \im N$，可选$v_i$使$Nv_i = w_{i,\ell_i}$，从而把各链延长一项。
+    这些延长后的链合起来仍线性无关：若$\textstyle\sum_i a_iv_i + w = 0$且$w \in W$，施加$N$得
     \[
-        w_{i,1},\ldots,w_{i,\ell_i},\qquad
-        Nw_{i,1}=0,\quad Nw_{i,j}=w_{i,j-1},\quad i=1,\ldots,s.
+        \sum_i a_iw_{i,\ell_i} + Nw = 0.
     \]
-    每条链的顶端$w_{i,\ell_i}\in\im N$，可选$v_i$使$Nv_i=w_{i,\ell_i}$，从而把各链延长一项。
-    这些延长后的链合起来仍线性无关：若$\sum_i a_iv_i+w=0$且$w\in W$，施加$N$得
-    \[
-        \sum_i a_iw_{i,\ell_i}+Nw=0.
-    \]
-    而$NW$由各原链除顶端以外的基向量张成，因此$a_i=0$，继而$w=0$。
+    而$NW$由各原链除顶端以外的基向量张成，因此$a_i = 0$，继而$w = 0$。
 
-    记延长后的链张成$X$，则$NX=W$。对任意$v\in V$，可选$x\in X$使$Nx=Nv$，所以$v-x\in\ker N$，即$V=X+\ker N$。在$\ker N$中选取$X\cap\ker N$的补空间$Z$，便有$V=X\oplus Z$。将$Z$的基作为长度为1的链加入，即得到全空间的Jordan基。
+    记延长后的链张成$X$，则$NX = W$。对任意$v \in V$，可选$x \in X$使$Nx = Nv$，所以$v - x \in \ker N$，即$V = X + \ker N$。在$\ker N$中选取$X \cap \ker N$的补空间$Z$，便有$V = X \oplus Z$。将$Z$的基作为长度为1的链加入，即得到全空间的Jordan基。
 \end{proof}
 
-对前面的$T:K\to K$，有$T^m=0$，因而可应用此定理。结合$V=K\oplus U$上的归纳步骤，再加回所减去的特征值$\lambda I$，便完成Jordan标准型的存在性证明。归纳的每一步都使用特征多项式在所选数域内完全分裂这一条件。
+对前面的$T:K \to K$，有$T^m = 0$，因而可应用此定理。结合$V = K \oplus U$上的归纳步骤，再加回所减去的特征值$\lambda I$，便完成Jordan标准型的存在性证明。归纳的每一步都使用特征多项式在所选数域内完全分裂这一条件。
 
 \section{对称矩阵}
 
 \begin{definition}
 	{对称矩阵}{symmetric matrix}
-	若$S\transp=S$，则称$S$是对称矩阵(symmetric matrix)；
+	若$S\transp = S$，则称$S$是对称矩阵(symmetric matrix)；
 	
-	若$A\transp=-A$，则称$A$是反对称矩阵(skew-symmetric/anti-symmetric)。
+	若$A\transp = -A$，则称$A$是反对称矩阵(skew-symmetric/anti-symmetric)。
 \end{definition}
 \begin{theorem}{对称矩阵的性质·一}{characterist of symmetric matrix I}
 	若$S$是一个$n$阶实对称矩阵，则$S$至少有一个实特征值$\lambda$
 \end{theorem}
 \begin{proof}
-	由代数基本定理，对任何矩阵，$S$的特征方程至少会得到一个复特征值$\lambda$，其对应的特征向量为$z$ (一般也是复的)，则$\bar z\transp z>0$。
-	\[
-		Sz=\lambda z,\quad S\bar z=\bar S\bar z=\overline{Sz}=\bar\lambda\bar z,
-	\]
+	由代数基本定理，对任何矩阵，$S$的特征方程至少会得到一个复特征值$\lambda$，其对应的特征向量为$z$ (一般也是复的)，则$\bar z\transp z > 0$。
+	\begin{align*}
+		Sz &= \lambda z,\\
+		S\bar z &= \bar S\bar z = \overline{Sz} = \bar\lambda\bar z,
+	\end{align*}
 	由$S$的对称的性质，注意到
 	\[
-		\bar z\transp Sz=\lambda\bar z\transp z=\lambda(\bar z\transp z)\transp=\lambda z\transp\bar z=(Sz)\transp\bar z=z\transp S\bar z=\bar\lambda z\transp\bar z.
+		\bar z\transp Sz = \lambda\bar z\transp z = \lambda(\bar z\transp z)\transp = \lambda z\transp\bar z = (Sz)\transp\bar z = z\transp S\bar z = \bar\lambda z\transp\bar z.
 	\]
-	故$\lambda=\bar\lambda$.
+	故$\lambda = \bar\lambda$.
 \end{proof}
 
 \begin{corollary}
@@ -588,29 +603,29 @@
 \end{corollary}
 
 \begin{theorem}{对称矩阵的性质·二}{characterist of symmetric matrix II}
-	$v$是$S$的特征向量，若$w\perp v$，则$Sw\perp v$。
+	$v$是$S$的特征向量，若$w \perp v$，则$Sw \perp v$。
 \end{theorem}
 \begin{proof}
 	
 	\[
-		(Sw)\transp v=w\transp S\transp v=w\transp Sv=\lambda w\transp v=0.
+		(Sw)\transp v = w\transp S\transp v = w\transp Sv = \lambda w\transp v = 0.
 		\qedhere
 	\]
 \end{proof}
 \begin{theorem}{对称矩阵的性质·三}{characterist of symmetric matrix III}
 	若$W$是$\RR^n$的一个线性子空间，且在$S$的作用下稳定，即：
 	\[
-		\forall w\in W,\enspace Sw\in W,
+		\forall w \in W,\enspace Sw \in W,
 	\]
 	则$W^\perp$也在$S$的作用下稳定：
 	\[
-		\forall u\in W^\perp,\enspace Su\in W^\perp.
+		\forall u \in W^\perp,\enspace Su \in W^\perp.
 	\]
 \end{theorem}
 \begin{proof}
-	$\forall w\in W,u\in W^\perp$
+	$\forall w \in W,u \in W^\perp$
 	\[
-		(Su)\transp w=u\transp S\transp w=u\transp(Sw)=0.
+		(Su)\transp w = u\transp S\transp w = u\transp(Sw) = 0.
 		\qedhere
 	\]
 \end{proof}
@@ -618,48 +633,48 @@
 	实对称矩阵$S$总可以被一个实正交矩阵$Q$对角化。
 \end{theorem}
 \begin{proof}
-	由\thmref{thm:characterist of symmetric matrix I} 和推论可知$S$至少有一个实特征值$\lambda_1$和实特征向量$q_1$且$q_1\transp q_1=1$，$S$在$q_1$张成的一维线性空间上是稳定的。
+	由\thmref{thm:characterist of symmetric matrix I} 和推论可知$S$至少有一个实特征值$\lambda_1$和实特征向量$q_1$且$q_1\transp q_1 = 1$，$S$在$q_1$张成的一维线性空间上是稳定的。
 	
-	由\thmref{thm:characterist of symmetric matrix III} 可知$S$作用在$\colsp(q_1)^\perp$上也是稳定的，假设$\colsp(q_1)^\perp$上有一组正交归一基为$\{a_1,\ldots,a_{n-1}\}$，构造矩阵$X_1=[q_1,a_1,\ldots,a_{n-1}]$，且$X_1$是正交的$X_1\transp X_1=I$，
+	由\thmref{thm:characterist of symmetric matrix III} 可知$S$作用在$\colsp(q_1)^\perp$上也是稳定的，假设$\colsp(q_1)^\perp$上有一组正交归一基为$\{a_1,\ldots,a_{n-1}\}$，构造矩阵$X_1 = [q_1,a_1,\ldots,a_{n-1}]$，且$X_1$是正交的$X_1\transp X_1 = I$，
 	\[
-		X_1\transp SX_1=X_1\transp[\lambda q_1,Sa_1,\ldots,Sa_{n-1}]=\begin{bmatrix}
+		X_1\transp SX_1 = X_1\transp[\lambda q_1,Sa_1,\ldots,Sa_{n-1}] = \begin{bmatrix}
 			\lambda_1\\ &S_1
 		\end{bmatrix}.
 	\]
-	$S_1$是一个$(n-1)$阶方阵，且$(S_1)_{ij}=a_i\transp Sa_j$的，显然它也是对称的。
+	$S_1$是一个$(n - 1)$阶方阵，且$(S_1)_{ij} = a_i\transp Sa_j$的，显然它也是对称的。
 	
 	重复上述步骤，直到用$S$的特征向量构造出$\RR^n$的一组正交归一基：
 	
 	\noindent
-	对$S_1$可构造$(n-1)$阶的正交矩阵$X_2$，使得
+	对$S_1$可构造$(n - 1)$阶的正交矩阵$X_2$，使得
 	\[
-		X_2\transp S_1X_2=\begin{bmatrix}
+		X_2\transp S_1X_2 = \begin{bmatrix}
 			\lambda_2\\ &S_2
 		\end{bmatrix},
 	\]
-	其中$S_2$是一个$(n-2)$阶对称方阵。从而
+	其中$S_2$是一个$(n - 2)$阶对称方阵。从而
 	\[
 		\begin{bmatrix}
 			1\\ &X_2\transp
 		\end{bmatrix}X_1\transp SX_1\begin{bmatrix}
 			1\\ &X_2
-		\end{bmatrix}=\begin{bmatrix}
+		\end{bmatrix} = \begin{bmatrix}
 			\lambda_1\\ &\lambda_2\\ &&S_2
 		\end{bmatrix}.
 	\]
-	$Q_2:=X_1\diag(1, X_2)$也是正交的……最终有
-	\[
-		Q_n\transp SQ_n=\begin{bmatrix}
+	$Q_2 := X_1\diag(1, X_2)$也是正交的……最终有
+	\begin{equation}\label{eq:la-symmetric-spectral-decomposition}
+		Q_n\transp SQ_n = \begin{bmatrix}
 			\lambda_1\\ &\ddots\\ &&\lambda_n
 		\end{bmatrix}.
-	\]
+	\end{equation}
 	$Q_n$也是正交的。
 \end{proof}
 
 \begin{remark}
 	对角化对称矩阵$S$的正交矩阵$Q$可被构造：
 	\begin{compactitem}
-		\item 若$S$的特征值互不相同，对应的归一特征向量$q_i$两两正交，可选$Q=[q_1,\ldots,q_n]$；
+		\item 若$S$的特征值互不相同，对应的归一特征向量$q_i$两两正交，可选$Q = [q_1,\ldots,q_n]$；
 		\item 若$S$的特征值有重复，取$\{q_i\}$为相应特征子空间的正交归一基。
 	\end{compactitem}
 \end{remark}
@@ -670,64 +685,64 @@
 	二次型(quadratic form)是形如$x\transp Sx$的二次多项式，其中$S$是实对称矩阵。
 \end{definition}
 \begin{definition}{正定矩阵}{positive definite matrix}
-	给定实对称矩阵$S$，如果$\forall x\neq 0$，二次型$x\transp Sx>0$，则称$S$是正定的(positive definite)。
+	给定实对称矩阵$S$，如果$\forall x \neq 0$，二次型$x\transp Sx > 0$，则称$S$是正定的(positive definite)。
 \end{definition}
 \begin{theorem}{正定矩阵的判定}{determination of positive definite matrix}
 	对于实对称矩阵$S$，下述命题是等价的：
 	\begin{compactenum}
-		\item $\forall x\neq 0$，二次型$x\transp Sx>0$；
+		\item $\forall x \neq 0$，二次型$x\transp Sx > 0$；
 		\item $S$的所有$n$个特征值都是正的；
 		\item $S$无须换行，按顺序消去主对角线下方元素时得到$n$个正的主元；
-		\item $S$的所有左上行列式（前$i$行$i$列子矩阵的行列式）均$>0$；
-		\item 存在$A$列之间线性无关，使得$S=A\transp A$。
+		\item $S$的所有左上行列式（前$i$行$i$列子矩阵的行列式）均$> 0$；
+		\item 存在$A$列之间线性无关，使得$S = A\transp A$。
 	\end{compactenum}
 \end{theorem}
 \begin{proof}
-	$1\implies 2$：$S$对称，则$\Lambda=Q\transp SQ$
+	$1 \implies 2$：$S$对称，则$\Lambda = Q\transp SQ$
 	\[
-		\lambda_i=e_i\transp \Lambda e_i=e_i\transp Q\transp SQe_i=(Qe_i)\transp S(Qe_i)>0.
+		\lambda_i = e_i\transp \Lambda e_i = e_i\transp Q\transp SQe_i = (Qe_i)\transp S(Qe_i) > 0.
 	\]
-	$2\implies 1$：$S$的所有$n$个特征值都是正的，故
+	$2 \implies 1$：$S$的所有$n$个特征值都是正的，故
+	\begin{equation}\label{eq:la-spectral-quadratic-form}
+		x\transp Sx = x\transp Q\Lambda Q\transp x = \sum_{i=1}^n\lambda_i(Q\transp x)^2_i > 0.
+	\end{equation}
+	$5 \implies 1$：$A$列之间线性无关，故$\forall x \neq 0,\enspace Ax \neq 0$
 	\[
-		x\transp Sx=x\transp Q\Lambda Q\transp x=\sum_{i=1}^n\lambda_i(Q\transp x)^2_i>0.
+		x\transp Sx = x\transp A\transp Ax = (Ax)\transp(Ax) > 0.
 	\]
-	$5\implies 1$：$A$列之间线性无关，故$\forall x\neq 0,\enspace Ax\neq 0$
+	$1 \implies 5$：$S$正定，故
 	\[
-		x\transp Sx=x\transp A\transp Ax=(Ax)\transp(Ax)>0.
-	\]
-	$1\implies 5$：$S$正定，故
-	\[
-		S=Q\Lambda Q\transp=Q\begin{bmatrix}
+		S = Q\Lambda Q\transp = Q\begin{bmatrix}
 			\sqrt{\lambda_1}\\ &\ddots\\ &&\sqrt{\lambda_n}
 		\end{bmatrix}\begin{bmatrix}
 			\sqrt{\lambda_1}\\ &\ddots\\ &&\sqrt{\lambda_n}
-		\end{bmatrix}Q\transp=:A\transp A.
+		\end{bmatrix}Q\transp =: A\transp A.
 	\]
-	$3\implies 4$：不换行且仅将前面的主元行倍加到后面的行，这样的消元保持每个左上行列式。$S$经此消元得到上三角矩阵$U$，其$i\times i$的左上行列式就是前$i$个主元的乘积，所以$>0$。\\
-	$4\implies 3$：记左上$i$阶行列式为$\Delta_i$，$\Delta_0=1$。由于$\Delta_i>0$，消元可在不换行的情况下逐步进行，第$i$个主元为$\Delta_i/\Delta_{i-1}>0$。\\
-	$3\implies 5$：$S=LDU$，由$S$对称且$LDU$分解唯一可知$L=U\transp$，又主元全正，故
+	$3 \implies 4$：不换行且仅将前面的主元行倍加到后面的行，这样的消元保持每个左上行列式。$S$经此消元得到上三角矩阵$U$，其$i \times i$的左上行列式就是前$i$个主元的乘积，所以$> 0$。\\
+	$4 \implies 3$：记左上$i$阶行列式为$\Delta_i$，$\Delta_0 = 1$。由于$\Delta_i > 0$，消元可在不换行的情况下逐步进行，第$i$个主元为$\Delta_i/\Delta_{i-1} > 0$。\\
+	$3 \implies 5$：$S = LDU$，由$S$对称且$LDU$分解唯一可知$L = U\transp$，又主元全正，故
 	\[
-		S=U\transp DU=U\transp\begin{bmatrix}
+		S = U\transp DU = U\transp\begin{bmatrix}
 			\sqrt{a_1}\\ &\ddots\\ &&\sqrt{a_n}
 		\end{bmatrix}\begin{bmatrix}
 			\sqrt{a_1}\\ &\ddots\\ &&\sqrt{a_n}
-		\end{bmatrix}U=:A\transp A.
+		\end{bmatrix}U =: A\transp A.
 	\]
-	$5\implies 3$：$A$列之间线性无关，作薄QR分解$A=QR$，其中$Q\transp Q=I$且$R$为可逆上三角矩阵。令$D_R=\diag(R_{11},\ldots,R_{nn})$与单位上三角矩阵$U=D_R\inv R$，则
+	$5 \implies 3$：$A$列之间线性无关，作薄QR分解$A = QR$，其中$Q\transp Q = I$且$R$为可逆上三角矩阵。令$D_R = \diag(R_{11},\ldots,R_{nn})$与单位上三角矩阵$U = D_R\inv R$，则
 	\[
-		A\transp A=R\transp R=U\transp D_R^2U.
+		A\transp A = R\transp R = U\transp D_R^2U.
 	\]
-	各消元主元为$R_{ii}^2>0$，完成最后一步。
+	各消元主元为$R_{ii}^2 > 0$，完成最后一步。
 \end{proof}
 
 \begin{definition}{半正定矩阵}{positive semi-definite matrix}
-	对实对称矩阵$S$，如果$\forall x\neq 0$，二次型$x\transp Sx\geqslant 0$，则称$S$是半正定的(positive semi-definite)。
+	对实对称矩阵$S$，如果$\forall x \neq 0$，二次型$x\transp Sx \geqslant 0$，则称$S$是半正定的(positive semi-definite)。
 \end{definition}
 \begin{theorem}{半正定但非正定矩阵的判定}{determination of positive semi-but-not definite matrix}
 	对实对称矩阵$S$，半正定但非正定与下列任一条件等价：
 	\begin{compactenum}
 		\item $S$的最小特征值是0；
-		\item 存在$A$列之间线性相关，使得$S=A\transp A$。
+		\item 存在$A$列之间线性相关，使得$S = A\transp A$。
 	\end{compactenum}
 \end{theorem}
 \begin{corollary}
@@ -738,7 +753,7 @@
 	{Cholesky分解}{Cholesky decomposition}
 	实对称正定矩阵$A$可以唯一分解为
 	\begin{equation}
-		A=LL\transp,
+		A = LL\transp,
 	\end{equation}
 	其中$L$是对角元为正的下三角矩阵，这称为Cholesky分解。
 \end{theorem}

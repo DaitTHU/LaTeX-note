@@ -1,16 +1,16 @@
 \chapter{线性空间}
 \section{线性空间}
 \begin{definition}{线性空间}{linear space}
-	数域$\FF$上的线性空间(linear space)~$V$是具有加法$+:V\times V\to V$和数乘$\cdot:\FF\times V\to V$运算且满足以下公理的集合。
+	数域$\FF$上的线性空间(linear space)~$V$是具有加法$+:V \times V \to V$和数乘$\cdot :\FF \times V \to V$运算且满足以下公理的集合。
 	\begin{compactenum}
-		\item 加法交换律\qqqquad\quad~$x+y=y+x;$
-		\item 加法结合律\qqqquad\quad~$x+(y+z)=(x+y)+z;$
-		\item 加法零元\qqqquad\qquad~$x+0=x;$
-		\item 加法逆元\qqqquad\qquad~$x+(-x)=0;$
-		\item 数乘单位元\qqqquad\quad~$1x=x;$
-		\item 数乘结合律\qqqquad\quad~$(c_1c_2)x=c_1(c_2x);$
-		\item 数乘对向量的分配律\quad$c(x+y)=cx+cy;$
-		\item 数乘对标量的分配律\quad$(c_1+c_2)x=c_1x+c_2x.$
+		\item 加法交换律\qqqquad\quad~$x + y = y + x;$
+		\item 加法结合律\qqqquad\quad~$x + (y + z) = (x + y) + z;$
+		\item 加法零元\qqqquad\qquad~$x + 0 = x;$
+		\item 加法逆元\qqqquad\qquad~$x + (-x) = 0;$
+		\item 数乘单位元\qqqquad\quad~$1x = x;$
+		\item 数乘结合律\qqqquad\quad~$(c_1c_2)x = c_1(c_2x);$
+		\item 数乘对向量的分配律\quad$c(x + y) = cx + cy;$
+		\item 数乘对标量的分配律\quad$(c_1 + c_2)x = c_1x + c_2x.$
 	\end{compactenum}
 \end{definition}
 
@@ -20,15 +20,15 @@
 \end{example}
 
 \begin{definition}{子空间}{subspace}
-	给定线性空间$V$的非空子集$V_\mathrm s\subset V$，若其对于加法和数乘封闭：$\forall v,w\in V_\mathrm s,\forall c\in\FF$
-	\[
-		v+w\in V_\mathrm s,\quad cv\in V_\mathrm s,
-	\]
+	给定线性空间$V$的非空子集$V_\mathrm s \subset V$，若其对于加法和数乘封闭：$\forall v,w \in V_\mathrm s,\forall c \in \FF$
+	\begin{equation}\label{eq:la-subspace-closure}
+		v + w \in V_\mathrm s,\quad cv \in V_\mathrm s,
+	\end{equation}
 	则$V_\mathrm s$为$V$的子空间(subspace)。子空间中元素的线性组合都在同一个子空间，
 \end{definition}
 
 \begin{corollary}
-	子空间必然包含零向量。因为若$v\in V_\mathrm s$，则$v+(-v)=0\in V_\mathrm s$。
+	子空间必然包含零向量。因为若$v \in V_\mathrm s$，则$v + (-v) = 0 \in V_\mathrm s$。
 \end{corollary}
 
 \begin{remark}
@@ -36,7 +36,7 @@
 \end{remark}
 
 \begin{definition}{线性扩张}{linear span}
-	$S\subset V$的线性扩张(linear span)是$S$中向量的所有有限线性组合的集合，记作$\Span(S)$；约定$\Span(\varnothing)=\{0\}$。
+	$S \subset V$的线性扩张(linear span)是$S$中向量的所有有限线性组合的集合，记作$\Span(S)$；约定$\Span(\varnothing) = \{0\}$。
 \end{definition}
 
 \begin{corollary}
@@ -47,10 +47,10 @@
 本章以下讨论有限维线性空间。
 \begin{definition}{线性独立}{linear independent}
 	$n$个向量$\{v_i\}$是线性独立的(linear independent)，当且仅当
-	\[
-		\sum_{i=1}^nx_iv_i=0,
-	\]
-	只在$x_i=0$时成立，即只有零解。$n$个向量$\{v_i\}$不是线性独立，那么他们是线性相关的(linear correlate)。
+	\begin{equation}\label{eq:la-linear-independence}
+		\sum_{i=1}^nx_iv_i = 0,
+	\end{equation}
+	只在$x_i = 0$时成立，即只有零解。$n$个向量$\{v_i\}$不是线性独立，那么他们是线性相关的(linear correlate)。
 	
 	等价描述：集合中每一个向量都不能写成其它向量的线性组合。
 \end{definition}
@@ -71,24 +71,24 @@
 	线性空间的维度和基的选取无关。
 \end{theorem}
 \begin{proof}
-	若线性空间$V$存在两组基$\{v_1,\ldots,v_m\},\{w_1,\ldots,w_n\}$元素个数不等，不妨设$m>n$。
+	若线性空间$V$存在两组基$\{v_1,\ldots,v_m\},\{w_1,\ldots,w_n\}$元素个数不等，不妨设$m > n$。
 	因为$\{w_i\}$是基，$\{v_i\}$可以被表示为其线性组合
 	\[
-		v_i=\sum_{j=1}^nw_ja_{ji},\quad\forall i.
+		v_i = \sum_{j=1}^nw_ja_{ji},\quad\forall i.
 	\]
 	考虑线性组合
 	\[
-		\sum_{i=1}^mx_iv_i=\sum_{i=1}^m\sum_{j=1}^nx_iw_ja_{ji}=0.
+		\sum_{i=1}^mx_iv_i = \sum_{i=1}^m\sum_{j=1}^nx_iw_ja_{ji} = 0.
 	\]
 	因为$\{w_i\}$线性无关，故
 	\[
-		\sum_{i=1}^ma_{ji}x_i=0,\quad\forall j,
+		\sum_{i=1}^ma_{ji}x_i = 0,\quad\forall j,
 	\]
-	但是其未知数的个数$m>$方程的个数$n$，系数矩阵$A$一定有自由列，所以$x$有非零解。这与$\{v_i\}$线性无关矛盾！故$m=n.$
+	但是其未知数的个数$m >$方程的个数$n$，系数矩阵$A$一定有自由列，所以$x$有非零解。这与$\{v_i\}$线性无关矛盾！故$m = n.$
 \end{proof}
 
 \begin{theorem}{}{}
-	设$V_1,V_2$是同一有限维线性空间的子空间。若$\forall v\in V_1$可以写成$V_2$中向量的线性组合，则$V_1\subseteq V_2$，从而$\dim(V_1)\leqslant\dim(V_2)$。
+	设$V_1,V_2$是同一有限维线性空间的子空间。若$\forall v \in V_1$可以写成$V_2$中向量的线性组合，则$V_1 \subseteq V_2$，从而$\dim(V_1) \leqslant \dim(V_2)$。
 \end{theorem}
 
 \begin{proof}
@@ -101,11 +101,11 @@
 
 \section{矩阵\textit{A}的四个子空间}
 
-给定矩阵$A\in\FF^{m\times n}$，可由其得到四个子空间：列空间、行空间、零空间和左零空间。
+给定矩阵$A \in \FF^{m\times n}$，可由其得到四个子空间：列空间、行空间、零空间和左零空间。
 \begin{definition}{列空间和行空间}{column space}
 	矩阵$A$的列空间(column space)是$A$的所有列的线性组合的集合，记作$\colsp(A)$：
 	\begin{equation}
-		\colsp(A)\equiv\set{Ax}{x\in\FF^n}.
+		\colsp(A) \equiv \set{Ax}{x \in \FF^n}.
 	\end{equation}
 	\tcblower
 	矩阵$A$的行空间(row space)是$A$的所有行的线性组合的集合，%由于转置并不影响性质，行空间
@@ -117,16 +117,16 @@
 \end{corollary}
 
 \begin{remark}
-	线性方程组$Ax=b$有解$\iff b\in\colsp(A)$。
+	线性方程组$Ax = b$有解$\iff b \in \colsp(A)$。
 \end{remark}
 
 \begin{definition}{零空间和左零空间}{null space}
-	矩阵$A$的零空间(null space)是所有满足$Ax=0$的$x$的集合，记作$\nullsp(A)$：
+	矩阵$A$的零空间(null space)是所有满足$Ax = 0$的$x$的集合，记作$\nullsp(A)$：
 	\begin{equation}
-		\nullsp(A)\equiv\set x{Ax=0}.
+		\nullsp(A) \equiv \set x{Ax = 0}.
 	\end{equation}
 	\tcblower
-	矩阵$A$的左零空间(left null space)是所有满足$x\transp A=0$的$x$的集合，可用$\nullsp(A\transp)$表示。
+	矩阵$A$的左零空间(left null space)是所有满足$x\transp A = 0$的$x$的集合，可用$\nullsp(A\transp)$表示。
 \end{definition}
 
 \begin{corollary}
@@ -134,13 +134,13 @@
 \end{corollary}
 
 \begin{example}{子空间的基}{}
-	$\nullsp(A)$的基：显然$\nullsp(A)=\nullsp(\rref(A))$，而$\rref(A)$的每个自由列各给出一个$\nullsp(\rref(A))$的基向量。若第$j$列为自由列，则其对应的基$x$的分量为：
-	\[
-		x_i=\begin{cases}
+	$\nullsp(A)$的基：显然$\nullsp(A) = \nullsp(\rref(A))$，而$\rref(A)$的每个自由列各给出一个$\nullsp(\rref(A))$的基向量。若第$j$列为自由列，则其对应的基$x$的分量为：
+	\begin{equation}\label{eq:la-null-basis-components}
+		x_i = \begin{cases}
 			\delta_{ij},&\text{第$i$列为自由列}\\
 			-\rref(A)_{kj},&\text{第$i$列为主列，主元位于第$k$行}
 		\end{cases}
-	\]
+	\end{equation}
 	%$\dim(\rref(A))=\rref(A)$中自由列的数量；
 	\tcblower
 	$\colsp(A)$的基：先找出$\rref(A)$的主元列编号，再取原矩阵$A$中相应编号的列。行变换一般改变列空间，不能直接取$\rref(A)$的列作为$\colsp(A)$的基。
@@ -172,7 +172,7 @@
 		\begin{bmatrix}
 			\nu_\mathrm{P_4}\\\nu_\mathrm{CuSO_4}\\\nu_\mathrm{H_2O}\\\nu_\mathrm{Cu_3P}\\\nu_\mathrm{H_3PO_4}\\\nu_\mathrm{H_2SO_4}
 		\end{bmatrix}
-		=k\begin{bmatrix}
+		= k\begin{bmatrix}
 			11\\60\\96\\-20\\-24\\-60
 		\end{bmatrix}.
 	\]
@@ -195,15 +195,15 @@
 		\end{bmatrix}
 		\begin{bmatrix}
 			\nu_\mathrm{MnO_4^-}\\\nu_\mathrm{H_2O_2}\\\nu_\mathrm{H^+}\\\nu_\mathrm{Mn^{2+}}\\\nu_\mathrm{H_2O}\\\nu_\mathrm{O_2}
-		\end{bmatrix}=\begin{bmatrix}
+		\end{bmatrix} = \begin{bmatrix}
 			0\\0\\0\\0
 		\end{bmatrix}
 		\implies
 		\begin{bmatrix}
 			\nu_\mathrm{MnO_4^-}\\\nu_\mathrm{H_2O_2}\\\nu_\mathrm{H^+}\\\nu_\mathrm{Mn^{2+}}\\\nu_\mathrm{H_2O}\\\nu_\mathrm{O_2}
-		\end{bmatrix}=k_1\begin{bmatrix}
+		\end{bmatrix} = k_1\begin{bmatrix}
 			2\\5\\6\\-2\\-8\\-5
-		\end{bmatrix}+k_2\begin{bmatrix}
+		\end{bmatrix} + k_2\begin{bmatrix}
 			0\\2\\0\\0\\-2\\-1
 		\end{bmatrix}.
 	\]
@@ -212,7 +212,7 @@
 	\[
 		\mathrm{Mn{}^{16}O_4^-+H_2{}^{18}O_2+H^+\to Mn^{2+}+H_2{}^{16}O+{}^{18}O_2\uparrow}.
 	\]	
-	便可由$\mathrm{{}^{16}O,{}^{18}O}$分别守恒确定$\nu_\mathrm{MnO_4^-}:\nu_\mathrm{H_2O_2}=2:5$。
+	便可由$\mathrm{{}^{16}O,{}^{18}O}$分别守恒确定$\nu_\mathrm{MnO_4^-}:\nu_\mathrm{H_2O_2} = 2:5$。
 	\[
 		\mathrm{2\,MnO_4^-+5\,H_2O_2+6\,H^+=2\,Mn^{2+}+8\,H_2O+5\,O_2\uparrow}.
 	\]
@@ -223,53 +223,53 @@
 
 \begin{definition}{矩阵的秩}{rank}
 	矩阵$A$的秩(rank)定义为列空间的维数：%\footnote{后面很快会证明行空间列空间维数相等。}：
-	\[
-		\rank(A):=\dim(\colsp(A)).
-	\]
+	\begin{equation}\label{eq:la-matrix-rank}
+		\rank(A) := \dim(\colsp(A)).
+	\end{equation}
 	若矩阵的秩等于行数，则称其行满秩(full row rank)；
 	若秩等于列数，则称其列满秩(full column rank)。
 \end{definition}
 \begin{theorem}
-	{线性方程组$Ax=b$的完整解}{}
-	若线性方程组$Ax=b$有解，其通解可写为一个特解$x_{\mathrm p}$与齐次方程解$x_{\mathrm n}$的和：
-	\[
-		x=x_{\mathrm p}+x_{\mathrm n},
-	\]
+	{线性方程组$Ax = b$的完整解}{}
+	若线性方程组$Ax = b$有解，其通解可写为一个特解$x_{\mathrm p}$与齐次方程解$x_{\mathrm n}$的和：
+	\begin{equation}\label{eq:la-inhomogeneous-solutions}
+		x = x_{\mathrm p} + x_{\mathrm n},
+	\end{equation}
 	%其中$x_{\mathrm n}\in\nullsp(A)$，
-	特解满足$Ax_{\mathrm p}=b$，其各个分量可以由约化的增广矩阵$[\rref(A)\enspace b']$得到：
-	\[
-		(x_{\mathrm p})_i=\begin{cases}
+	特解满足$Ax_{\mathrm p} = b$，其各个分量可以由约化的增广矩阵$[\rref(A)\enspace b']$得到：
+	\begin{equation}\label{eq:la-particular-solution-components}
+		(x_{\mathrm p})_i = \begin{cases}
 			0,&\text{第$i$列为自由列}\\
 			b'_j,&\text{第$i$列为主列，其主元1在第$j$行}
 		\end{cases}
-	\]
-	而齐次解满足$Ax_{\mathrm n}=0$，可以写成零空间的基的线性组合。
+	\end{equation}
+	而齐次解满足$Ax_{\mathrm n} = 0$，可以写成零空间的基的线性组合。
 \end{theorem}
 \begin{corollary}
 	~
 	\begin{itemize}
-		\item 若$A$列满秩，则$\rref(A)$没有自由列，$\nullsp(A)=\{0\}$。当$b\in\colsp(A)$时有唯一解，否则无解；
-		\item 若$A$行满秩，则$\rref(A)$没有零行，$\colsp(A)=\FF^m$，$\forall b$都有解，有唯一解或无穷多解。
+		\item 若$A$列满秩，则$\rref(A)$没有自由列，$\nullsp(A) = \{0\}$。当$b \in \colsp(A)$时有唯一解，否则无解；
+		\item 若$A$行满秩，则$\rref(A)$没有零行，$\colsp(A) = \FF^m$，$\forall b$都有解，有唯一解或无穷多解。
 	\end{itemize}
 \end{corollary}
 \paragraph{四个子空间的维度}已经知道，初等行变换就是用初等矩阵$E$左乘$A$，相应的，列变换就是$E$右乘$A$。
 \begin{theorem}{初等变换和子空间}{}
 	\begin{compactitem}
-		\item $\nullsp(A)=\nullsp(EA)$，因为
+		\item $\nullsp(A) = \nullsp(EA)$，因为
 		\[
-			Ax=0\iff EAx=0.
+			Ax = 0 \iff EAx = 0.
 		\]
-		\item $\dim(\colsp(A))=\dim(\colsp(EA))$，因为
+		\item $\dim(\colsp(A)) = \dim(\colsp(EA))$，因为
 		\[
-			\{v_i\}\text{~是~}\colsp(A)\text{~一组基}\iff\{Ev_i\}\text{~是~}\colsp(EA)\text{~一组基}.
+			\{v_i\}\text{~是~}\colsp(A)\text{~一组基} \iff \{Ev_i\}\text{~是~}\colsp(EA)\text{~一组基}.
 		\]
-		\item $\colsp(A)=\colsp(AE)$，因为
+		\item $\colsp(A) = \colsp(AE)$，因为
 		\[
-			AE\text{~的每一列}\in\colsp(A)\text{~且~}A=(AE)E\inv\text{~的每一列}\in\colsp(AE)
+			AE\text{~的每一列} \in \colsp(A)\text{~且~}A = (AE)E\inv\text{~的每一列} \in \colsp(AE)
 		\]
-		\item $\dim(\nullsp(A))=\dim(\nullsp(AE))$，因为可由$Ax=0\iff AE(E\inv x)=0$推出
+		\item $\dim(\nullsp(A)) = \dim(\nullsp(AE))$，因为可由$Ax = 0 \iff AE(E\inv x) = 0$推出
 		\[
-			\{v_i\}\text{~是~}\nullsp(A)\text{~一组基}\iff\{E\inv v_i\}\text{~是~}\nullsp(AE)\text{~一组基}
+			\{v_i\}\text{~是~}\nullsp(A)\text{~一组基} \iff \{E\inv v_i\}\text{~是~}\nullsp(AE)\text{~一组基}
 		\]
 	\end{compactitem}
 \end{theorem}
@@ -277,22 +277,22 @@
 	矩阵$A$在初等变换下，$\dim(\colsp(A))$和$\dim(\nullsp(A))$均不变，而行变换下$\nullsp(A)$不变，列变换下$\colsp(A)$不变。
 	因此，可以将$A$先由行变换为$\rref(A)$，再列变换为
 	\[
-		\tilde I=\begin{bmatrix}
+		\tilde I = \begin{bmatrix}
 			I_r&0\\0&0
-		\end{bmatrix}\in\FF^{m\times n}.
+		\end{bmatrix} \in \FF^{m\times n}.
 	\]
-	显然，$\tilde I$的行秩$\dim(\colsp(\tilde I\transp))=$列秩$\dim(\colsp(\tilde I))=r$，且
+	显然，$\tilde I$的行秩$\dim(\colsp(\tilde I\transp)) =$列秩$\dim(\colsp(\tilde I)) = r$，且
 	\begin{align*}
-		\dim(\colsp(\tilde I\transp))+\dim(\nullsp(\tilde I))&=n;\\
-		\dim(\colsp(\tilde I))+\dim(\nullsp(\tilde I\transp))&=m.
+		\dim(\colsp(\tilde I\transp)) + \dim(\nullsp(\tilde I)) &= n;\\
+		\dim(\colsp(\tilde I)) + \dim(\nullsp(\tilde I\transp)) &= m.
 	\end{align*}
 \end{corollary}
 % 以上的这些量在初等变化下都不变，故
 \begin{theorem}{线性代数基本定理·一}{fundamental theorems of linear algebra I}
 	\begin{compactenum}
-		\item 行秩=列秩：$\rank(A)=\dim(\colsp(A))=\dim(\colsp(A\transp));$
-		\item $\dim(\colsp(A\transp))+\dim(\nullsp(A))=n;$
-		\item $\dim(\colsp(A))+\dim(\nullsp(A\transp))=m.$
+		\item 行秩=列秩：$\rank(A) = \dim(\colsp(A)) = \dim(\colsp(A\transp));$
+		\item $\dim(\colsp(A\transp)) + \dim(\nullsp(A)) = n;$
+		\item $\dim(\colsp(A)) + \dim(\nullsp(A\transp)) = m.$
 	\end{compactenum}
 \end{theorem}
 \begin{corollary}
@@ -310,17 +310,17 @@
 \begin{theorem}{}{}
 	对于同型矩阵$A,B$有
 	\begin{equation}
-		\rank(A+B)\leq\rank(A)+\rank(B).
+		\rank(A + B) \leq \rank(A) + \rank(B).
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	设$\colsp(A),\colsp(B)$的一组基分别为$\{a_1,\ldots,a_{\rank(A)}\}$和$\{b_1,\ldots,b_{\rank(B)}\}$，则$A+B$中的列必然可以由$\{a_1,\ldots,a_{\rank(A)},b_1,\ldots,b_{\rank(B)}\}$的线性组合表示出，故不等式成立。
+	设$\colsp(A),\colsp(B)$的一组基分别为$\{a_1,\ldots,a_{\rank(A)}\}$和$\{b_1,\ldots,b_{\rank(B)}\}$，则$A + B$中的列必然可以由$\{a_1,\ldots,a_{\rank(A)},b_1,\ldots,b_{\rank(B)}\}$的线性组合表示出，故不等式成立。
 \end{proof}
 \begin{theorem}{Sylvester不等式}{Sylvester inequality}
-	对$A\in\FF^{m\times n},B\in\FF^{n\times p}$有
+	对$A \in \FF^{m\times n},B \in \FF^{n\times p}$有
 	\begin{equation}
 		\label{eqn:Sylvester inequality}
-		\rank(AB)\geq\rank(A)+\rank(B)-n.
+		\rank(AB) \geq \rank(A) + \rank(B) - n.
 	\end{equation}
 \end{theorem}
 \begin{proof}
@@ -328,26 +328,26 @@
 	\[
 		\begin{bmatrix}
 			I_n\\ &AB
-		\end{bmatrix}\sim\begin{bmatrix}
+		\end{bmatrix} \sim \begin{bmatrix}
 			I_n\\A&AB
-		\end{bmatrix}\sim\begin{bmatrix}
+		\end{bmatrix} \sim \begin{bmatrix}
 			I_n&-B\\A
 		\end{bmatrix}.
 	\]
 	两边取秩即得
 	\[
-		\rank(AB)+n=\rank\biggp{\begin{bmatrix}
+		\rank(AB) + n = \rank\biggp{\begin{bmatrix}
 			I_n&-B\\A
-		\end{bmatrix}}\geq\rank(A)+\rank(B).
+		\end{bmatrix}} \geq \rank(A) + \rank(B).
 		\qedhere
 	\]
 \end{proof}
 
 \begin{theorem}{Frobenius不等式}{Frobenius inequality}
-	对于$A\in\FF^{m\times n},B\in\FF^{n\times p},C\in\FF^{p\times q}$，有
+	对于$A \in \FF^{m\times n},B \in \FF^{n\times p},C \in \FF^{p\times q}$，有
 	\begin{equation}
 		\label{eqn:Frobenius inequality}
-		\rank(ABC)\geq\rank(AB)+\rank(BC)-\rank(B).
+		\rank(ABC) \geq \rank(AB) + \rank(BC) - \rank(B).
 	\end{equation}
 \end{theorem}
 \begin{proof}
@@ -355,22 +355,22 @@
 	\[
 		\begin{bmatrix}
 			ABC\\ &B
-		\end{bmatrix}\sim\begin{bmatrix}
+		\end{bmatrix} \sim \begin{bmatrix}
 			ABC&AB\\ &B
-		\end{bmatrix}\sim\begin{bmatrix}
+		\end{bmatrix} \sim \begin{bmatrix}
 			&AB\\-BC&B
 		\end{bmatrix},
 	\]
 	两边取秩即得
 	\[
-		\rank(ABC)+\rank(B)=\rank\biggp{\begin{bmatrix}
+		\rank(ABC) + \rank(B) = \rank\biggp{\begin{bmatrix}
 			&AB\\-BC&B
-		\end{bmatrix}}\geq\rank(AB)+\rank(BC).
+		\end{bmatrix}} \geq \rank(AB) + \rank(BC).
 		\qedhere
 	\]
 \end{proof}
 
 \begin{corollary}
-	对Frobenius不等式\eqref{eqn:Frobenius inequality}取$B=I_n$即可得到Sylvester不等式\eqref{eqn:Sylvester inequality}。
+	对Frobenius不等式\eqref{eqn:Frobenius inequality}取$B = I_n$即可得到Sylvester不等式\eqref{eqn:Sylvester inequality}。
 \end{corollary}
 

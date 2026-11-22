@@ -3,28 +3,37 @@
 
 这一章我们将数域由实数域$\RR$扩展至复数域$\CC$，复数的定义和运算高中已经讲过，也可参见复变函数的笔记。在此略。
 
-复数构成的向量$z$的共轭即将其中所有元素取共轭，记作$\bar z$。共轭转置记作$z\adjoint:=\bar z\transp$。
+复数构成的向量$z$的共轭即将其中所有元素取共轭，记作$\bar z$。共轭转置记作$z\adjoint := \bar z\transp$。
 
 线性无关、维数和线性映射等代数概念可推广到复数域；内积、正交性和谱定理则必须加入复共轭，不能仅将实数符号机械地替换为复数。以下涉及基、对偶和谱分解的结论均在有限维空间中讨论。
 \section{内积和内积空间}
 \begin{definition}{$\CC^n$标准内积}{standard inner product}
 	复向量$u,v$的内积
-	\[
-		u\adjoint v=\sum_{i=1}^n\bar u_iv_i=\bar u_1v_1+\cdots+\bar u_nv_n.
-	\]
+	\begin{equation}\label{eq:la-complex-inner-product}
+		u\adjoint v = \sum_{i=1}^n\bar u_iv_i = \bar u_1v_1 + \cdots + \bar u_nv_n.
+	\end{equation}
 	\tcblower
-	一般复线性空间$V$的内积$\inp\cdot\cdot:V\times V\to\CC$：
+	一般复线性空间$V$的内积$\inp \cdot \cdot :V \times V \to \CC$：
 	\begin{compactitem}
-		\item 交换共轭：$\inp uv=\overline{\inp vu};$
-		\item 对第二个变量线性：$\inp u{cv}=c\inp uv,\enspace \inp u{v+w}=\inp uv+\inp uw;$
-		\item 正定：$\inp uu\geqslant 0$当且仅当$u=0$时取等号。
+		\item 交换共轭：$\inp uv = \overline{\inp vu};$
+		\item 对第二个变量线性，即
+		\begin{subequations}\label{eq:la-inner-product-linearity}
+			\begin{align}
+				\inp u{cv} &= c\inp uv,\\
+				\inp u{v + w} &= \inp uv + \inp uw.
+			\end{align}
+		\end{subequations}
+		\item 正定：$\inp uu \geqslant 0$当且仅当$u = 0$时取等号。
 	\end{compactitem}
 \end{definition}
 \begin{remark}
 	对第一个变量不是简单的线性，而是多一个复共轭：
-	\[
-		\inp{cu}v=\bar c\inp uv,\quad \inp{u+v}w=\inp uw+\inp vw.
-	\]
+	\begin{subequations}\label{eq:la-inner-product-antilinearity}
+		\begin{align}
+			\inp{cu}v &= \bar c\inp uv,\\
+			\inp{u + v}w &= \inp uw + \inp vw.
+		\end{align}
+	\end{subequations}
 \end{remark}
 % 定义了内积的空间叫做内积空间(inner product space)。
 \begin{theorem}{}{}
@@ -32,56 +41,63 @@
 \end{theorem}
 \begin{proof}
 	$v_1,\ldots,v_n$是$V$上的一组基，%$g_{ij}:=\inp{v_i}{v_j}$，则$g_{ji}=\bar g_{ij}.$
-	$\forall u,w\in V,\enspace u=u^1v_1+\cdots+u^nv_n,\enspace w=w^1v_1+\cdots+w^nv_n$
+	对任意$u,w \in V$，按这组基展开，
+	\begin{align*}
+		u &= u^1v_1 + \cdots + u^nv_n,\\
+		w &= w^1v_1 + \cdots + w^nv_n.
+	\end{align*}
+	利用内积对第一个变量的共轭线性和对第二个变量的线性，得到
 	\[
-		\inp uw=\inp{u^1v_1+\cdots+u^nv_n}{w^1v_1+\cdots+w^nv_n}=\sum_{i,j}\bar u^iw^j\inp{v_i}{v_j}.
+		\inp uw = \inp{u^1v_1 + \cdots + u^nv_n}{w^1v_1 + \cdots + w^nv_n} = \sum_{i,j}\bar u^iw^j\inp{v_i}{v_j}.
 		\qedhere
 	\]
 \end{proof}
 \begin{example}{内积与对偶空间}{inner product and dual space}
-	$V$的对偶空间$V^\ast$是所有$V\to\CC$的线性函数的集合。通过内积可以建立$V,V^\ast$的一一映射（共轭线性，而非复线性）
-	\[
-		\forall v\in V,g_v\in V^\ast,\enspace g_v(w):=\inp vw
-.	\]
+	$V$的对偶空间$V^\ast$是所有$V \to \CC$的线性函数的集合。通过内积可以建立$V,V^\ast$的一一映射（共轭线性，而非复线性）
+	\begin{equation}\label{eq:la-inner-product-dual-map}
+		\forall v \in V,g_v \in V^\ast,\enspace g_v(w) := \inp vw
+.	\end{equation}
 \end{example}
 \begin{example}{Legendre多项式}{Legendre polynomial}
 	所有不高于$n$的实系数多项式
 	\[
-		f(x)=a_0+a_1x+\cdots+a_nx^n,
+		f(x) = a_0 + a_1x + \cdots + a_nx^n,
 	\]
 	构成线性空间$\poly_n(\RR)$，显然$\{1,x,x^2,\ldots,x^n\}$构成$\poly_n(\RR)$的一组基。定义内积
-	\[
-		\inp fg:=\int_{-1}^1f(x)g(x)\d x,
-	\]
+	\begin{equation}\label{eq:la-legendre-inner-product}
+		\inp fg := \int_{-1}^1f(x)g(x)\d x,
+	\end{equation}
 	用Gram--Schmidt法则将$\{1,x,x^2,\ldots,x^n\}$变成一组正交基%$\{P_0,P_1,P_2,\ldots,P_n\}$
 	\begin{align*}
-		P_0&=1,\\
-		P_1&=x-\frac{\inp{P_0}x}{\inp{P_0}{P_0}}P_0=x,\\
-		P_2&=x^2-\frac{\inp{P_1}{x^2}}{\inp{P_1}{P_1}}P_1-\frac{\inp{P_0}{x^2}}{\inp{P_0}{P_0}}P_0=x^2-\frac13,\\
-		P_3&=x^3-\frac{\inp{P_2}{x^3}}{\inp{P_2}{P_2}}P_2-\frac{\inp{P_1}{x^3}}{\inp{P_1}{P_1}}P_1-\frac{\inp{P_0}{x^3}}{\inp{P_0}{P_0}}P_0=x^3-\frac35x,\\
+		P_0 &= 1,\\
+		P_1 &= x - \frac{\inp{P_0}x}{\inp{P_0}{P_0}}P_0 = x,\\
+		P_2 &= x^2 - \frac{\inp{P_1}{x^2}}{\inp{P_1}{P_1}}P_1 - \frac{\inp{P_0}{x^2}}{\inp{P_0}{P_0}}P_0 = x^2 - \frac13,\\
+		P_3 &= x^3 - \frac{\inp{P_2}{x^3}}{\inp{P_2}{P_2}}P_2 - \frac{\inp{P_1}{x^3}}{\inp{P_1}{P_1}}P_1 - \frac{\inp{P_0}{x^3}}{\inp{P_0}{P_0}}P_0 = x^3 - \frac35x,\\
 		&\cdots
 	\end{align*}
-	这里得到首一多项式；标准Legendre多项式通常取$P_n(1)=1$，例如标准$P_2(x)=(3x^2-1)/2$，与上述首一版本只差归一化系数。
+	这里得到首一多项式；标准Legendre多项式通常取$P_n(1) = 1$，例如标准$P_2(x) = (3x^2 - 1)/2$，与上述首一版本只差归一化系数。
 \end{example}
 \begin{example}{Hermite多项式}{Hermite polynomial}
 	在$\poly_n(\RR)$内定义内积
-	\[
-		\inp fg:=\intR f(x)g(x)\e^{-x^2/2}\d x,
-	\]
+	\begin{equation}\label{eq:la-hermite-inner-product}
+		\inp fg := \intR f(x)g(x)\e^{-x^2/2}\d x,
+	\end{equation}
 	用Gram--Schmidt法则将$\{1,x,x^2,\ldots,x^n\}$变成一组正交基
-	\begin{align*}
-        \mathrm{He}_0&=1, &\mathrm{He}_1&=x,\\
-        \mathrm{He}_2&=x^2-1, &\mathrm{He}_3&=x^3-3x.
-	\end{align*}
-	这里得到的是概率论约定的Hermite多项式$\mathrm{He}_n$。物理学中常用的$H_n$对应权重$\e^{-x^2}$，二者还涉及自变量缩放：$H_n(x)=2^{n/2}\mathrm{He}_n(\sqrt2x)$，不能仅相差一个整体系数。
+	\begin{equation}\label{eq:la-hermite-first-polynomials}
+		\begin{aligned}
+	        \mathrm{He}_0 &= 1, &\mathrm{He}_1 &= x,\\
+	        \mathrm{He}_2 &= x^2 - 1, &\mathrm{He}_3 &= x^3 - 3x.
+		\end{aligned}
+	\end{equation}
+	这里得到的是概率论约定的Hermite多项式$\mathrm{He}_n$。物理学中常用的$H_n$对应权重$\e^{-x^2}$，二者还涉及自变量缩放：$H_n(x) = 2^{n/2}\mathrm{He}_n(\sqrt2x)$，不能仅相差一个整体系数。
 \end{example}
 
 \section{幺正矩阵}
 
-在涉及内积的实矩阵公式中，应将转置换为共轭转置。例如复矩阵的SVD为$A=U\Sigma V\adjoint$，其奇异值由$A\adjoint A$决定。
+在涉及内积的实矩阵公式中，应将转置换为共轭转置。例如复矩阵的SVD为$A = U\Sigma V\adjoint$，其奇异值由$A\adjoint A$决定。
 
 \begin{definition}{幺正矩阵}{unitary matrix}
-	方阵$U\in\CC^{n\times n}$是幺正的(unitary)若$U\adjoint U=I$；此时也有$UU\adjoint=I$。矩形矩阵仅满足$U\adjoint U=I$时是等距嵌入，不称为幺正矩阵。
+	方阵$U \in \CC^{n\times n}$是幺正的(unitary)若$U\adjoint U = I$；此时也有$UU\adjoint = I$。矩形矩阵仅满足$U\adjoint U = I$时是等距嵌入，不称为幺正矩阵。
 \end{definition}
 幺正矩阵是正交矩阵(见\dfnref{dfn:orthogonal matrix})在复空间的推广。
 \begin{theorem}{幺正变换}{unitary transfomation}
@@ -89,16 +105,16 @@
 \end{theorem}
 \begin{proof}
 	\[
-		\norm{Uz}^2=z\adjoint U\adjoint Uz=z\adjoint z=\norm z^2.
+		\norm{Uz}^2 = z\adjoint U\adjoint Uz = z\adjoint z = \norm z^2.
 		\qedhere
 	\]
 \end{proof}
 \begin{theorem}{幺正矩阵的行列式}{determinant of unitary}
-	$\abs{\det(U)}=1.$
+	$\abs{\det(U)} = 1.$
 \end{theorem}
 \begin{proof}
 	\[
-		1=\det(U\adjoint U)=\det(U\adjoint)\det(U)=\overline{\det(U)}\det(U)=\abs{\det(U)}^2.
+		1 = \det(U\adjoint U) = \det(U\adjoint)\det(U) = \overline{\det(U)}\det(U) = \abs{\det(U)}^2.
 		\qedhere
 	\]
 \end{proof}
@@ -106,95 +122,95 @@
 \section{Hermite矩阵}
 
 \begin{definition}{Hermite矩阵}{Hermite matrix}
-	方阵$H$是厄米(Hermite)矩阵若$H\adjoint=H.$
+	若方阵 $H$ 满足 $H\adjoint = H$，则称 $H$ 为 Hermite 矩阵。
 \end{definition}
 Hermite矩阵是实对称矩阵(见\dfnref{dfn:symmetric matrix})在复空间的推广。
 
 \begin{example}{Pauli矩阵}{Pauli matrix}
 	给出三个Pauli矩阵
-	\[
-		\sigma_1=
+	\begin{equation}\label{eq:la-pauli-matrices}
+		\sigma_1 =
 		\begin{bmatrix}
 			0&1\\1&0
 		\end{bmatrix},\enspace
-		\sigma_2=
+		\sigma_2 =
 		\begin{bmatrix}
 			0&-\i\\\i&0
 		\end{bmatrix},\enspace
-		\sigma_3=
+		\sigma_3 =
 		\begin{bmatrix}
 			1&0\\0&-1
 		\end{bmatrix}.
-	\]
+	\end{equation}
 	$\sigma_1,\sigma_2,\sigma_3$都是Hermite的，且
-	\[
-		\sigma_i\sigma_j=\i\sigma_k,\quad(ijk)=(123).
-	\]
+	\begin{equation}\label{eq:la-pauli-cyclic-product}
+		\sigma_i\sigma_j = \i\sigma_k,\quad(ijk) = (123).
+	\end{equation}
 \end{example}
 
 \begin{theorem}{Hermite矩阵的二次型}{quadratic form of Hermite}
-	$\forall z\in\CC^n$，$z\adjoint Hz$是实数。
+	$\forall z \in \CC^n$，$z\adjoint Hz$是实数。
 \end{theorem}
 \begin{proof}
-	$(z\adjoint Hz)\adjoint=z\adjoint H\adjoint z=z\adjoint Hz.$
+	$(z\adjoint Hz)\adjoint = z\adjoint H\adjoint z = z\adjoint Hz.$
 \end{proof}
 \begin{theorem}{Hermite矩阵的特征值}{}
 	Hermite矩阵$H$的特征值都是实数。
 \end{theorem}
 \begin{proof}
-	$Hz=\lambda z$，左乘$z\adjoint$得$z\adjoint Hz=\lambda z\adjoint z$，由$z\adjoint Hz,z\adjoint z$均是实数知，$\lambda$也是实数。
+	$Hz = \lambda z$，左乘$z\adjoint$得$z\adjoint Hz = \lambda z\adjoint z$，由$z\adjoint Hz,z\adjoint z$均是实数知，$\lambda$也是实数。
 \end{proof}
 \begin{theorem}{Hermite矩阵的特征向量}{eigenvalue of Hermite}
 	Hermite矩阵$H$不同特征值对应的特征向量正交。
 \end{theorem}
 \begin{proof}
-	$Hz_1=\lambda_1z_1,\enspace Hz_2=\lambda_2z_2,\quad\lambda_1\neq\lambda_2$
+	$Hz_1 = \lambda_1z_1,\enspace Hz_2 = \lambda_2z_2,\quad\lambda_1 \neq \lambda_2$
 	\[
-		\lambda_1z_2\adjoint z_1=z_2\adjoint Hz_1=(z_1\adjoint Hz_2)\adjoint=(\lambda_2z_1\adjoint z_2)\adjoint=\lambda_2z_2\adjoint z_1.
+		\lambda_1z_2\adjoint z_1 = z_2\adjoint Hz_1 = (z_1\adjoint Hz_2)\adjoint = (\lambda_2z_1\adjoint z_2)\adjoint = \lambda_2z_2\adjoint z_1.
 	\]
-	故$z_2\adjoint z_1=0.$
+	故$z_2\adjoint z_1 = 0.$
 \end{proof}
 \begin{theorem}{谱定理}{spectral theorem of Hermite}
-	Hermite矩阵可以选出$n$个特征向量$u_1,\ldots,u_n$构成$\CC^n$的一组正交归一基。重复特征值的子空间内需要另作正交归一化，并非任意选取的特征向量都正交。令$U=[u_1,\ldots,u_n]$，则
-	\[
-		H=U\Lambda U\adjoint.
-	\]
+	Hermite矩阵可以选出$n$个特征向量$u_1,\ldots,u_n$构成$\CC^n$的一组正交归一基。重复特征值的子空间内需要另作正交归一化，并非任意选取的特征向量都正交。令$U = [u_1,\ldots,u_n]$，则
+	\begin{equation}\label{eq:la-hermitian-spectral-theorem}
+		H = U\Lambda U\adjoint.
+	\end{equation}
 \end{theorem}
 \begin{proof}
-    由代数基本定理，$H$有归一化特征向量$u_1$，特征值$\lambda_1$为实数。若$w\perp u_1$，则
+    由代数基本定理，$H$有归一化特征向量$u_1$，特征值$\lambda_1$为实数。若$w \perp u_1$，则
     \[
-        \inp{u_1}{Hw}=\inp{Hu_1}{w}=\lambda_1\inp{u_1}{w}=0.
+        \inp{u_1}{Hw} = \inp{Hu_1}{w} = \lambda_1\inp{u_1}{w} = 0.
     \]
     因而$u_1^\perp$在$H$作用下不变，$H$在该子空间上的限制在正交归一基下仍有Hermite矩阵表示。对维数归纳，即可在整个空间选出正交归一特征基。
 \end{proof}
 
 \section{伴随、自伴与正规映射}
 \begin{definition}{伴随映射}{adjoint map}
-    有限维复内积空间上的线性映射$T:V\to V$的伴随$T\adjoint$由
-    \[
-        \inp{Tu}{v}=\inp{u}{T\adjoint v},\qquad u,v\in V
-    \]
-    唯一确定。若$T=T\adjoint$，则称$T$自伴。
+    有限维复内积空间上的线性映射$T:V \to V$的伴随$T\adjoint$由
+    \begin{equation}\label{eq:la-adjoint-definition}
+        \inp{Tu}{v} = \inp{u}{T\adjoint v},\qquad u,v \in V
+    \end{equation}
+    唯一确定。若$T = T\adjoint$，则称$T$自伴。
 \end{definition}
-在正交归一基中，伴随映射的矩阵恰为原矩阵的共轭转置。因此有限维自伴映射与Hermite矩阵对应。若所选基并不正交归一，记Gram矩阵$G_{ij}=\inp{v_i}{v_j}$，$T$的矩阵为$A$，则伴随的矩阵为
-\[
-    [T\adjoint]=G\inv A\adjoint G.
-\]
-此时自伴条件是$A\adjoint G=GA$，不能直接要求$A\adjoint=A$。无限维空间的无界算符还需要指定定义域，不能直接照搬这里的有限维判定。
+在正交归一基中，伴随映射的矩阵恰为原矩阵的共轭转置。因此有限维自伴映射与Hermite矩阵对应。若所选基并不正交归一，记Gram矩阵$G_{ij} = \inp{v_i}{v_j}$，$T$的矩阵为$A$，则伴随的矩阵为
+\begin{equation}\label{eq:la-adjoint-gram-matrix}
+    [T\adjoint] = G\inv A\adjoint G.
+\end{equation}
+此时自伴条件是$A\adjoint G = GA$，不能直接要求$A\adjoint = A$。无限维空间的无界算符还需要指定定义域，不能直接照搬这里的有限维判定。
 
 \begin{definition}{正规矩阵}{normal matrix}
-    方阵$A\in\CC^{n\times n}$满足$A\adjoint A=AA\adjoint$时，称为正规矩阵。Hermite矩阵和幺正矩阵都是正规矩阵。
+    方阵$A \in \CC^{n\times n}$满足$A\adjoint A = AA\adjoint$时，称为正规矩阵。Hermite矩阵和幺正矩阵都是正规矩阵。
 \end{definition}
 \begin{theorem}{正规矩阵的谱定理}{spectral theorem of normal matrix}
     复方阵$A$能被幺正矩阵对角化，当且仅当$A$正规。
 \end{theorem}
 \begin{proof}
-    若$A=U\Lambda U\adjoint$且$\Lambda$对角，直接计算可得$A\adjoint A=AA\adjoint$。
+    若$A = U\Lambda U\adjoint$且$\Lambda$对角，直接计算可得$A\adjoint A = AA\adjoint$。
     反之，取$A$的归一化特征向量$q_1$，将其补成正交归一基，得幺正矩阵$Q$与
     \[
-        Q\adjoint AQ=\begin{bmatrix}\lambda&b\adjoint\\0&B\end{bmatrix}=:C.
+        Q\adjoint AQ = \begin{bmatrix}\lambda&b\adjoint\\0&B\end{bmatrix} =: C.
     \]
-    幺正相似变换保持正规性。比较$CC\adjoint=C\adjoint C$的左上元素，得$\abs{\lambda}^2+\norm b^2=\abs{\lambda}^2$，故$b=0$。此时$B$也正规，对维数归纳即可完成幺正对角化。
+    幺正相似变换保持正规性。比较$CC\adjoint = C\adjoint C$的左上元素，得$\abs{\lambda}^2 + \norm b^2 = \abs{\lambda}^2$，故$b = 0$。此时$B$也正规，对维数归纳即可完成幺正对角化。
 \end{proof}
 \begin{remark}
     一般可对角化矩阵未必正规。例如$\begin{bmatrix}1&1\\0&2\end{bmatrix}$有两个不同特征值，因而可相似对角化，但不能幺正对角化。实正交矩阵也未必能在实数域上对角化，例如平面上转角$\pi/2$的旋转矩阵；其复特征值为$\pm\i$。

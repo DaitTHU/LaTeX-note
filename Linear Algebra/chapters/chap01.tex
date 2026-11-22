@@ -4,10 +4,10 @@
 
 \begin{definition}
 	{数域}{number field}
-	给定复数集的子集$\FF\subset\CC$，若满足：
+	给定复数集的子集$\FF \subset \CC$，若满足：
 	\begin{itemize}
-		\item 非平凡：$0,1\in\FF$；
-		\item 封闭性：$\forall a,b\in\FF$，有$a\pm b\in\FF$，$ab\in\FF$，且$a/b\in\FF$ (当$b\neq 0$时)。
+		\item 非平凡：$0,1 \in \FF$；
+		\item 封闭性：$\forall a,b \in \FF$，有$a \pm b \in \FF$，$ab \in \FF$，且$a/b \in \FF$ (当$b \neq 0$时)。
 	\end{itemize}
 	则称$\FF$是一个数域(number field)。
 \end{definition}
@@ -17,20 +17,20 @@
 	\begin{itemize}
 		\item 最小的数域：有理数域$\QQ$；
 	
-		\item 二次数域(quadratic field)：如$\QQ(\sqrt 2)=\set{a+b\sqrt2}{a,b\in\QQ}$；
+		\item 二次数域(quadratic field)：如$\QQ(\sqrt 2) = \set{a + b\sqrt2}{a,b \in \QQ}$；
 	
 		\item 实数域$\RR$、复数域$\CC$。
 	\end{itemize}
 \end{example}
 
 \begin{remark}
-	直到\chapref{chap:complex linear space}复线性空间之前，均只考虑实数域$\FF=\RR$。
+	直到\chapref{chap:complex linear space}复线性空间之前，均只考虑实数域$\FF = \RR$。
 \end{remark}
 
 \begin{definition}{向量}{vector}
-	一个$n$维向量(vector)~$v$由$n$个标量(scalar) $v_1,\ldots,v_n\in\FF$组成，记作：
+	一个$n$维向量(vector)~$v$由$n$个标量(scalar) $v_1,\ldots,v_n \in \FF$组成，记作：
 	\[
-		v=\begin{bmatrix}
+		v = \begin{bmatrix}
 			v_1\\\vdots\\v_n
 		\end{bmatrix},
 	\]
@@ -69,12 +69,12 @@
 
 \begin{corollary}
 	向量加法的性质：%property of vector addition
-	$\forall v,u,w\in\FF^n$，
+	$\forall v,u,w \in \FF^n$，
     \begin{itemize}
-    	\item 交换律：$v+u=u+v$；
-    	\item 结合律：$v+(u+w)=(v+u)+w\equiv v+u+w$；
-    	\item 零向量：$0+v=v+0=v$；
-    	\item 反向量：$v+(-v)=0$。
+        \item 交换律：$v + u = u + v$；
+        \item 结合律：$v + (u + w) = (v + u) + w \equiv v + u + w$；
+        \item 零向量：$0 + v = v + 0 = v$；
+        \item 反向量：$v + (-v) = 0$。
     \end{itemize}
 \end{corollary}
 
@@ -91,12 +91,12 @@
 
 \begin{corollary}
 	向量数乘的性质：%property of vector scalar product
-	$\forall v,u\in\FF^n,c,d\in\FF$，
+	$\forall v,u \in \FF^n,c,d \in \FF$，
     \begin{itemize}
-    	\item $1v=v,\;(-1)v=-v,\;0v=0.$
-    	\item 结合律：$c(dv)=(cd)v\equiv cdv;$
-    	\item 对标量的分配律：$(c+d)v=cv+dv;$
-    	\item 对向量的分配律：$c(v+u)=cv+cu.$
+        \item $1v = v,\;(-1)v = -v,\;0v = 0.$
+        \item 结合律：$c(dv) = (cd)v \equiv cdv;$
+        \item 对标量的分配律：$(c + d)v = cv + dv;$
+        \item 对向量的分配律：$c(v + u) = cv + cu.$
     \end{itemize}
 \end{corollary}
 
@@ -106,9 +106,9 @@
 	% 	cv+du,\quad\forall c,d\in\FF.
 	% \]
 	一般地，$n$个向量$v_1,v_2,\ldots,v_n$的线性组合(linear combination)形如
-	\[
-		c_1v_1+c_2v_2+\cdots+c_nv_n,\quad\forall c_i\in\FF.
-	\]
+	\begin{equation}\label{eq:la-linear-combination}
+		c_1v_1 + c_2v_2 + \cdots + c_nv_n,\quad\forall c_i \in \FF.
+	\end{equation}
 \end{definition}
 
 \begin{remark}
@@ -116,36 +116,36 @@
 \end{remark}
 
 \begin{definition}{(实)向量的内积}{vector inner product}
-	此处取$\FF=\RR$，标准内积(inner product)是映射$\inp\cdot\cdot:\RR^n\times\RR^n\to\RR$，定义为
+	此处取$\FF = \RR$，标准内积(inner product)是映射$\inp \cdot \cdot :\RR^n \times \RR^n \to \RR$，定义为
 	\begin{equation}
-		\inp vu:=\sum_{i=1}^nv_iu_i\equiv v_1u_1+v_2u_2+\cdots+v_nu_n.
+		\inp vu := \sum_{i=1}^nv_iu_i \equiv v_1u_1 + v_2u_2 + \cdots + v_nu_n.
 	\end{equation}
-	有时可以将内积写成点乘的形式：$\inp vu=v\cdot u$。
+	有时可以将内积写成点乘的形式：$\inp vu = v \cdot u$。
 	% 特别地，简记$v^2\equiv\inp vv.$
 \end{definition}
 
 \begin{corollary}
 	实向量内积的性质：%property of vector inner product
-	$\forall v,u\in\FF^n,c\in\FF$，
+	$\forall v,u \in \FF^n,c \in \FF$，
     \begin{itemize}
-    	\item 交换律：$\inp vu=\inp uv$；
-    	\item 与数乘的结合律：$\inp{cv}u=\inp v{cu}=c\inp vu$；
-    	\item 分配律：$\inp{v+u}w=\inp vw+\inp uw$；
-    	\item 正定性：$\inp vv\geqslant 0$，且$\inp vv=0\iff v=0.$
+        \item 交换律：$\inp vu = \inp uv$；
+        \item 与数乘的结合律：$\inp{cv}u = \inp v{cu} = c\inp vu$；
+        \item 分配律：$\inp{v + u}w = \inp vw + \inp uw$；
+        \item 正定性：$\inp vv \geqslant 0$，且$\inp vv = 0 \iff v = 0.$
     \end{itemize}
 \end{corollary}
 
 \begin{definition}{向量的长度}{vector norm}
 	向量的长度(或范数，norm)可通过内积定义：
 	\begin{equation}
-		\norm v:=\sqrt{\inp vv}=(v_1^2+v_2^2+\cdots+v_n^2)^{1/2}.
+		\norm v := \sqrt{\inp vv} = (v_1^2 + v_2^2 + \cdots + v_n^2)^{1/2}.
 	\end{equation}
 	长度为1的向量是单位向量(unit vector)。
 \end{definition}
 \begin{corollary}
 	对非零向量$v$，与其同向的单位向量是
 	\begin{equation}
-		\hat v:=\frac{v}{\norm v},
+		\hat v := \frac{v}{\norm v},
 	\end{equation}
 \end{corollary}
 \begin{remark}
@@ -170,15 +170,15 @@
 \begin{definition}{矩阵}{matrix}
     一个$m$行$n$列的矩阵(matrix) $A$形如
     \[
-        A=\begin{bmatrix}
+        A = \begin{bmatrix}
             A_{11}&\cdots&A_{1n}\\
             \vdots&\ddots&\vdots\\
             A_{m1}&\cdots&A_{mn}
-        \end{bmatrix},\quad A_{ij}\in\FF.
+        \end{bmatrix},\quad A_{ij} \in \FF.
     \]
     其中$A_{ij}$是矩阵第$i$行第$j$列的元素(entry)。
     % 矩阵$A$的行数和列数分别记作$\row(A)=m,\enspace\col(A)=n$。
-	特别地，当行数$m=$列数$n$时，称矩阵是$n$阶方阵(square matrix)。
+	特别地，当行数$m =$列数$n$时，称矩阵是$n$阶方阵(square matrix)。
     \tcblower
 	所有$m$行$n$列矩阵构成的集合记作$\FF^{m\times n}$。
 \end{definition}
@@ -189,20 +189,20 @@
 
 \begin{definition}
 	{矩阵和向量的乘法（左乘）}{matrix vector product}
-	$m\times n$矩阵$A$左乘$n$维向量$x$，结果$b=Ax$是一个$m$维向量，其各分量为：
+	$m \times n$矩阵$A$左乘$n$维向量$x$，结果$b = Ax$是一个$m$维向量，其各分量为：
 	\begin{equation}
-		b_i=\sum_{j=1}^nA_{ij}x_j,\quad i=1,\ldots,m.
+		b_i = \sum_{j=1}^nA_{ij}x_j,\quad i = 1,\ldots,m.
 	\end{equation}
 \end{definition}
 
 \begin{remark}
-	$Ax$可以看成$A$所有列的线性组合，或者说$A$的各行与$x$分别内积。这样线性方程组就可以等价地写成$Ax=b$的形式，即：
-	\[
+	$Ax$可以看成$A$所有列的线性组合，或者说$A$的各行与$x$分别内积。这样线性方程组就可以等价地写成$Ax = b$的形式，即：
+	\begin{equation}\label{eq:la-linear-system-matrix-form}
 		\eqnset{\begin{aligned}
-	        A_{11}x_1+\cdots+A_{1n}x_n&=b_1\\
+	        A_{11}x_1 + \cdots + A_{1n}x_n &= b_1\\
 	        \cdots&\\
-	        A_{m1}x_1+\cdots+A_{mn}x_n&=b_m
-	    \end{aligned}}\iff
+	        A_{m1}x_1 + \cdots + A_{mn}x_n &= b_m
+	    \end{aligned}} \iff
 	    \begin{bmatrix}
 	        A_{11}&\cdots&A_{1n}\\
 	        \vdots&\ddots&\vdots\\
@@ -210,18 +210,18 @@
 	    \end{bmatrix}
 	    \begin{bmatrix}
 	        x_1\\\vdots\\x_n
-	    \end{bmatrix}=
+	    \end{bmatrix} =
 	    \begin{bmatrix}
 	        b_1\\\vdots\\b_m
 	    \end{bmatrix},
-	\]
+	\end{equation}
 	这种思想有助于我们掌握线性代数的理念。
 \end{remark}
 
 \begin{definition}{矩阵的乘法}{matrix product}
-	$m\times n$矩阵$A$左乘$n\times p$矩阵$B$，结果$AB$是一个$m\times p$的矩阵，其分量为
+	$m \times n$矩阵$A$左乘$n \times p$矩阵$B$，结果$AB$是一个$m \times p$的矩阵，其分量为
 	\begin{align}
-		(AB)_{ij}=\sum_{k=1}^nA_{ik}B_{kj}.
+		(AB)_{ij} = \sum_{k=1}^nA_{ik}B_{kj}.
 	\end{align}
 	特别地，当$A$是方阵时，将$n$个$A$相乘简记为$A^n$。
 	% \[
@@ -230,48 +230,48 @@
 \end{definition}
 
 \begin{remark}
-	若$A$可以左乘$B$，要求$A$的列数$=B$的行数。
+	若$A$可以左乘$B$，要求$A$的列数$= B$的行数。
 \end{remark}
 
 \begin{corollary}
 	矩阵乘法的性质：%property of matrix product
 	$\forall A,B,C$可运算的，
     \begin{itemize}
-    	\item 左分配律：$(A+B)C=AC+BC;$
-    	\item 右分配律：$A(B+C)=AB+AC.$
-        \item 结合律：$(AB)C=A(BC)\equiv ABC;$
+        \item 左分配律：$(A + B)C = AC + BC;$
+        \item 右分配律：$A(B + C) = AB + AC.$
+        \item 结合律：$(AB)C = A(BC) \equiv ABC;$
     \end{itemize}
 \end{corollary}
 
 \begin{proof}
 	仅给出矩阵乘法结合律的证明：
-	$\forall A\in\FF^{m\times n},B\in\FF^{n\times p},C\in\FF^{p\times q}$
+	$\forall A \in \FF^{m\times n},B \in \FF^{n\times p},C \in \FF^{p\times q}$
 	\begin{align*}
-		\bigb{A(BC)}_{ij}&=\sum_{k=1}^nA_{ik}(BC)_{kj}=\sum_{k=1}^nA_{ik}\sum_{\ell=1}^pB_{k\ell}C_{\ell j}\\
-		&=\sum_{\ell=1}^p\sum_{k=1}^nA_{ik}B_{k\ell}C_{\ell j}=\sum_{\ell=1}^p(AB)_{i\ell}C_{\ell j}=\bigb{(AB)C}_{ij}.
+		\bigb{A(BC)}_{ij} &= \sum_{k=1}^nA_{ik}(BC)_{kj} = \sum_{k=1}^nA_{ik}\sum_{\ell=1}^pB_{k\ell}C_{\ell j}\\
+		&= \sum_{\ell=1}^p\sum_{k=1}^nA_{ik}B_{k\ell}C_{\ell j} = \sum_{\ell=1}^p(AB)_{i\ell}C_{\ell j} = \bigb{(AB)C}_{ij}.
 	\end{align*}
 	对应元素均相等，即证。
 \end{proof}
 
 \begin{remark}
-	矩阵乘法一般不满足交换律，即一般地，$AB\neq BA$，
+	矩阵乘法一般不满足交换律，即一般地，$AB \neq BA$，
 	比如
 	\[
 		\begin{bmatrix}
 			0&1\\1&0
 		\end{bmatrix}\begin{bmatrix}
 			1&0\\0&-1
-		\end{bmatrix}=\begin{bmatrix}
+		\end{bmatrix} = \begin{bmatrix}
 			0&-1\\1&0
-		\end{bmatrix}\neq\begin{bmatrix}
+		\end{bmatrix} \neq \begin{bmatrix}
 			0&1\\-1&0
-		\end{bmatrix}=\begin{bmatrix}
+		\end{bmatrix} = \begin{bmatrix}
 			1&0\\0&-1
 		\end{bmatrix}\begin{bmatrix}
 			0&1\\1&0
 		\end{bmatrix}.
 	\]
-	若$AB=BA$，则称$A,B$是可交换的(commutable)。
+	若$AB = BA$，则称$A,B$是可交换的(commutable)。
 \end{remark}
 
 \begin{corollary}
@@ -282,46 +282,48 @@
 	{对角矩阵}{diagonal matrix}
 	当方阵$A$的非对角项均为0时，称$A$是对角的(diagonal)，可记作
 	\begin{equation}
-		A=\begin{bmatrix}
+		A = \begin{bmatrix}
 			A_{11}\\ &\ddots\\ &&A_{nn}
-		\end{bmatrix}\equiv\diag(A_{11},\ldots,A_{nn}).
+		\end{bmatrix} \equiv \diag(A_{11},\ldots,A_{nn}).
 	\end{equation}
 \end{definition}
 
 \begin{remark}
 	对角矩阵有很多简单的性质，比如对角矩阵的乘法很简单
 	\begin{align}
-		\diag(a_1,\ldots,a_n)\diag(b_1,\ldots,b_n)=\diag(a_1b_1,\ldots,a_nb_n).
+		\diag(a_1,\ldots,a_n)\diag(b_1,\ldots,b_n) = \diag(a_1b_1,\ldots,a_nb_n).
 	\end{align}
 	因此任意同阶对角矩阵可交换。
 \end{remark}
 
 \begin{definition}{单位矩阵}{identity matrix}
 	$n$阶单位矩阵(identity matrix)是$n$阶对角矩阵，对角项均为1：
-	\[
-		I_n=\begin{bmatrix}
+	\begin{equation}\label{eq:la-identity-matrix}
+		I_n = \begin{bmatrix}
 		1&\\ &\ddots\\&&1
 		\end{bmatrix}.
-	\]
+	\end{equation}
 \end{definition}
 
 \begin{corollary}
-	$\forall A\in\FF^{m\times n}$，均有
-	\[
-		I_mA=AI_n=A.
-	\]
+	$\forall A \in \FF^{m\times n}$，均有
+	\begin{equation}\label{eq:la-identity-action}
+		I_mA = AI_n = A.
+	\end{equation}
 \end{corollary}
 
 \begin{theorem}{}{}
-	若方阵$A$与任意同阶方阵可交换，则$A=cI,\;c\in\FF$称作纯量矩阵(scalar matrix)。
+	若方阵$A$与任意同阶方阵可交换，则$A = cI,\;c \in \FF$称作纯量矩阵(scalar matrix)。
 \end{theorem}
 \begin{proof}
-	定义$e_{ij}\in\FF^{n\times n}$表示仅$i$行$j$列为1，其余项均为0的矩阵。则
-	\begin{align*}
-		(Ae_{ij})_{k\ell}=\sum_{p=1}^nA_{kp}(e_{ij})_{p\ell}=A_{ki}\delta_{j\ell};\\
-		(e_{ij}A)_{k\ell}=\sum_{p=1}^n(e_{ij})_{kp}A_{p\ell}=\delta_{ki}A_{j\ell},
-	\end{align*}
-	当$k\neq i=j=\ell$时，$A_{ki}=0$；当$k=i\neq j=\ell$时，$A_{ii}=A_{jj}$。
+	定义$e_{ij} \in \FF^{n\times n}$表示仅$i$行$j$列为1，其余项均为0的矩阵。则
+	\begin{subequations}\label{eq:la-matrix-unit-action}
+		\begin{align}
+			(Ae_{ij})_{k\ell} = \sum_{p=1}^nA_{kp}(e_{ij})_{p\ell} = A_{ki}\delta_{j\ell};\\
+			(e_{ij}A)_{k\ell} = \sum_{p=1}^n(e_{ij})_{kp}A_{p\ell} = \delta_{ki}A_{j\ell},
+		\end{align}
+	\end{subequations}
+	当$k \neq i = j = \ell$时，$A_{ki} = 0$；当$k = i \neq j = \ell$时，$A_{ii} = A_{jj}$。
 \end{proof}
 \begin{definition}{分块矩阵}{block matrix}
 	可以将矩阵分块，每一块(block)是一个小矩阵，比如
@@ -349,18 +351,18 @@
 \subsection{矩阵的转置}
 
 \begin{definition}{矩阵的转置}{transpose matrix}
-	矩阵$A\in\FF^{m\times n}$的转置(transpose)记作$A\transp\in\FF^{n\times m}$，其元素由$A$给出：
-	\[
-		(A\transp)_{ij}=A_{ji}.
-	\]
+	矩阵$A \in \FF^{m\times n}$的转置(transpose)记作$A\transp \in \FF^{n\times m}$，其元素由$A$给出：
+	\begin{equation}\label{eq:la-transpose-entries}
+		(A\transp)_{ij} = A_{ji}.
+	\end{equation}
 \end{definition}
 \begin{corollary}
 	矩阵转置的性质：%property of transpose
 	$\forall A,B$可运算的，
 	\begin{itemize}
-		\item $(A\transp)\transp=A$；
-		\item $(A+B)\transp=A\transp+B\transp$，$(cA)\transp=cA\transp$；
-		\item $(AB)\transp=B\transp A\transp$。
+		\item $(A\transp)\transp = A$；
+		\item $(A + B)\transp = A\transp + B\transp$，$(cA)\transp = cA\transp$；
+		\item $(AB)\transp = B\transp A\transp$。
 	\end{itemize}
 \end{corollary}
 
@@ -369,15 +371,15 @@
 \begin{definition}{矩阵的迹}{trace}
 	$n$阶方阵的迹(trace)是对角元的和
 	\begin{equation}
-		\tr(A):=\sum_{i=1}^nA_{ii}.
+		\tr(A) := \sum_{i=1}^nA_{ii}.
 	\end{equation}
 \end{definition}
 \begin{corollary}
 	矩阵迹的性质：%property of trace
-	$\forall A,B\in\FF^{n\times n},\enspace c\in\FF$
+	$\forall A,B \in \FF^{n\times n},\enspace c \in \FF$
     \begin{itemize}
-    	\item 线性：$\tr(A+B)=\tr(A)+\tr(B),\enspace \tr(cA)=c\tr(A)$；
-        \item 转置：$\tr(A\transp)=\tr(A)$；
+        \item 线性：$\tr(A + B) = \tr(A) + \tr(B),\enspace \tr(cA) = c\tr(A)$；
+        \item 转置：$\tr(A\transp) = \tr(A)$；
         % \item 两个$n$维列向量$u,v$，有$\tr(uv\transp)=v\transp u$
     	% \[
         % 	\tr(uv\transp)=\sum_{i=1}^nu_iv_i=u\transp v=v\transp u.
@@ -385,19 +387,19 @@
     \end{itemize}
 \end{corollary}
 \begin{remark}
-	一般地，$\tr(AB)\neq\tr(A)\tr(B)$。
+	一般地，$\tr(AB) \neq \tr(A)\tr(B)$。
 \end{remark}
 \begin{theorem}{交换矩阵乘法的迹}{trace of commute multiplication}
-	$\forall A\in\FF^{m\times n},B\in\FF^{n\times m}$，都有
+	$\forall A \in \FF^{m\times n},B \in \FF^{n\times m}$，都有
 	\begin{equation}
-		\tr(AB)=\tr(BA).
+		\tr(AB) = \tr(BA).
 	\end{equation}
 \end{theorem}
 \begin{proof}
 	直接展开计算：
 	\begin{align*}
-		\tr(AB)&=\sum_{i=1}^m(AB)_{ii}=\sum_{i=1}^m\sum_{j=1}^nA_{ij}B_{ji}\\
-		&=\sum_{j=1}^n\sum_{i=1}^mB_{ji}A_{ij}=\sum_{j=1}^n(BA)_{jj}=\tr(BA).
+		\tr(AB) &= \sum_{i=1}^m(AB)_{ii} = \sum_{i=1}^m\sum_{j=1}^nA_{ij}B_{ji}\\
+		&= \sum_{j=1}^n\sum_{i=1}^mB_{ji}A_{ij} = \sum_{j=1}^n(BA)_{jj} = \tr(BA).
 		\qedhere
 	\end{align*}
 \end{proof}
@@ -409,35 +411,35 @@
 \subsection{矩阵的逆}
 
 \begin{definition}{矩阵的逆}{inverse matrix}
-	方阵$A\in\FF^{n\times n}$的逆矩阵(inverse)记作$A\inv\in\FF^{n\times n}$，满足
-	\[
-		AA\inv=A\inv A=I_n.
-	\]
+	方阵$A \in \FF^{n\times n}$的逆矩阵(inverse)记作$A\inv \in \FF^{n\times n}$，满足
+	\begin{equation}\label{eq:la-inverse-definition}
+		AA\inv = A\inv A = I_n.
+	\end{equation}
 	若存在$A\inv$，则称矩阵$A$是可逆的；否则称为不可逆的，也称奇异的(singular)。
 \end{definition}
 
 \begin{corollary}
 	矩阵逆的性质：
-	$\forall A,B\in\FF^{n\times n}$可逆，
+	$\forall A,B \in \FF^{n\times n}$可逆，
 	\begin{itemize}
-		\item 逆矩阵的逆：$(A\inv)\inv=A$；
-		\item 数乘：$(cA)\inv=c\inv A\inv$，其中$c\neq0$；
-		\item 矩阵乘法：$(AB)\inv=B\inv A\inv$；
-		\item 转置：$(A\inv)\transp=(A\transp)\inv$。
+		\item 逆矩阵的逆：$(A\inv)\inv = A$；
+		\item 数乘：$(cA)\inv = c\inv A\inv$，其中$c \neq 0$；
+		\item 矩阵乘法：$(AB)\inv = B\inv A\inv$；
+		\item 转置：$(A\inv)\transp = (A\transp)\inv$。
 	\end{itemize}
 \end{corollary}
 
 \begin{remark}
-	即使 $A,B$ 均可逆，$A+B$ 仍可能不可逆。
+	即使 $A,B$ 均可逆，$A + B$ 仍可能不可逆。
 	% 除非满足一些额外性质，见\thmref{thm:Woodbury matrix identity}。
 \end{remark}
 
 \begin{example}{二阶方阵的逆}{inverse of 2x2 matrix}
-	当且仅当$ad-bc\neq0$时矩阵可逆，此时
+	当且仅当$ad - bc \neq 0$时矩阵可逆，此时
 	\begin{equation}
 		\begin{bmatrix}
 			a&b\\c&d
-		\end{bmatrix}\inv=\frac1{ad-bc}
+		\end{bmatrix}\inv = \frac1{ad - bc}
 		\begin{bmatrix}
 			d&-b\\
 			-c&a
@@ -447,19 +449,19 @@
 \begin{example}{对角矩阵的逆}{inverse of diagonal matrix}
 	显然，对角矩阵可逆$\iff$所有对角元均不为0，且逆为
 	\begin{align}
-		\diag(a_1,\ldots,a_n)\inv=\diag(a_1\inv,\ldots,a_n\inv).
+		\diag(a_1,\ldots,a_n)\inv = \diag(a_1\inv,\ldots,a_n\inv).
 	\end{align}
 	这对于分块对角矩阵也成立，即式中$a_i$可以为可逆矩阵。
 \end{example}
 % 若$A$可逆，则方程组$Ax=b$的解为 \[x=A\inv b.\]
 \begin{theorem}{左逆和右逆}{linverse and rinverse}
-	若$A,B,C$为方阵，且$BA=AC=I$，则$B=C$。
+	若$A,B,C$为方阵，且$BA = AC = I$，则$B = C$。
 \end{theorem}
 \begin{proof}
-	考察恒等式$B(AC)=(BA)C$即得$B=C$。
+	考察恒等式$B(AC) = (BA)C$即得$B = C$。
 \end{proof}
 \begin{remark}
-	事实上，可以有更强的命题：若$A,B$为方阵，则$BA=I\iff AB=I$。
+	事实上，可以有更强的命题：若$A,B$为方阵，则$BA = I \iff AB = I$。
 \end{remark}
 % \begin{proof}
 % 	$\forall A\in\FF^{n\times n}$且存在左逆$B\in\FF^{n\times n}$，即$BA=I$。构造映射$f,g:\FF^{n\times n}\to\FF^{n\times n}$，其中
@@ -473,14 +475,14 @@
 % 	故$AB=I$。
 % \end{proof}
 \begin{example}{幂零矩阵}{nilpotent matrix}
-	若$A$是幂零矩阵(nilpotent matrix)，即$\exists n\in\NN$使$A^n=O$，
-	则$I+A$可逆，且
-	\[
-		(I+A)\inv=I-A+A^2-\cdots+(-A)^{n-1}.
-	\]
+	若$A$是幂零矩阵(nilpotent matrix)，即$\exists n \in \NN$使$A^n = O$，
+	则$I + A$可逆，且
+	\begin{equation}\label{eq:la-nilpotent-geometric-series}
+		(I + A)\inv = I - A + A^2 - \cdots + (-A)^{n-1}.
+	\end{equation}
 	因为
 	\[
-		(I+A)\bigp{I-A+\cdots+(-A)^{n-1}}=I-(-A)^n=I.
+		(I + A)\bigp{I - A + \cdots + (-A)^{n-1}} = I - (-A)^n = I.
 	\]
 \end{example}
 
@@ -490,21 +492,21 @@
 
 \begin{theorem}
 	{Woodbury矩阵恒等式}{Woodbury matrix identity}
-	给定$A\in\FF^{n\times n},U\in\FF^{n\times k},C\in\FF^{k\times k},V\in\FF^{k\times n}$且$A,C,(C\inv+VA\inv U)$可逆，则$(A+UCV)$可逆，且
+	给定$A \in \FF^{n\times n},U \in \FF^{n\times k},C \in \FF^{k\times k},V \in \FF^{k\times n}$且$A,C,(C\inv + VA\inv U)$可逆，则$(A + UCV)$可逆，且
 	\begin{equation}
 		\label{eqn:Woodbury}
-		(A+UCV)\inv=A\inv-A\inv U(C\inv+VA\inv U)\inv VA\inv.
+		(A + UCV)\inv = A\inv - A\inv U(C\inv + VA\inv U)\inv VA\inv.
 	\end{equation}
 \end{theorem}
 \begin{proof}
 	直接代入验证即可：
 	\begin{align*}
-		&(A+UCV)(A\inv-A\inv U(C\inv+VA\inv U)\inv VA\inv)\\
+		&(A + UCV)(A\inv - A\inv U(C\inv + VA\inv U)\inv VA\inv)\\
 		% ={}&(A+UCV)A\inv(I-U(C\inv+VA\inv U)\inv VA\inv)\\
 		% ={}&(I+UCVA\inv)(I-U(C\inv+VA\inv U)\inv VA\inv)\\
 		% ={}&I-UCVA\inv-(I+UCVA\inv)U(C\inv+VA\inv U)\inv VA\inv\\
 		% ={}&I-UCVA\inv-U(I+CVA\inv U)(C\inv+VA\inv U)\inv VA\inv\\
-		={}&I+UCVA\inv-UC(C\inv+VA\inv U)(C\inv+VA\inv U)\inv VA\inv=I.
+		= {}&I + UCVA\inv - UC(C\inv + VA\inv U)(C\inv + VA\inv U)\inv VA\inv = I.
 		\qedhere
 		% ={}&I-UCVA\inv-UCVA\inv
 	\end{align*}
@@ -512,60 +514,59 @@
 
 \begin{theorem}
 	{Sherman--Morrison公式}{Sherman-Morrison formula}
-	给定可逆矩阵$A\in\FF^{n\times n}$和向量$u,v\in\FF^n$，则$(A+uv\transp)$可逆$\iff 1+v\transp A\inv u\neq 0$，此时
+	给定可逆矩阵$A \in \FF^{n\times n}$和向量$u,v \in \FF^n$，则$(A + uv\transp)$可逆$\iff 1 + v\transp A\inv u \neq 0$，此时
 	\begin{equation}
 		\label{eqn:Sherman-Morrison}
-		(A+uv\transp)\inv=A\inv-\frac{A\inv uv\transp A\inv}{1+v\transp A\inv u}.
+		(A + uv\transp)\inv = A\inv - \frac{A\inv uv\transp A\inv}{1 + v\transp A\inv u}.
 	\end{equation}
-	特别地，当$A=I$时，
+	特别地，当$A = I$时，
 	\begin{equation}
 		\label{eqn:(I+uvT)-1}
-		(I+uv\transp)\inv=I-\frac{uv\transp}{1+v\transp u}.
+		(I + uv\transp)\inv = I - \frac{uv\transp}{1 + v\transp u}.
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	对Woodbury恒等式\eqref{eqn:Woodbury}取$A=I_n,\enspace C=I_k$，得到
+	对Woodbury恒等式\eqref{eqn:Woodbury}取$A = I_n,\enspace C = I_k$，得到
 	\begin{equation}
 		\label{eqn:(I+UVT)-1}
-		(I_n+UV)\inv=I_n-U(I_k+VU)\inv V.
+		(I_n + UV)\inv = I_n - U(I_k + VU)\inv V.
 	\end{equation}
-	特别地，当$k=1$时，$U,V$都是向量，
-	令$U=u,\enspace V=v\transp$即得式\eqref{eqn:(I+uvT)-1}。再将$u$替换为$A\inv u$，利用$(A+uv\transp)\inv=(I+A\inv uv\transp)\inv A\inv$即得式\eqref{eqn:Sherman-Morrison}。
-	反之，若$1+v\transp A\inv u=0$，则$u\neq0$，且$(A+uv\transp)A\inv u=0$，故$A+uv\transp$不可逆。
+	特别地，当$k = 1$时，$U,V$都是向量，
+	令$U = u,\enspace V = v\transp$即得式\eqref{eqn:(I+uvT)-1}。再将$u$替换为$A\inv u$，利用$(A + uv\transp)\inv = (I + A\inv uv\transp)\inv A\inv$即得式\eqref{eqn:Sherman-Morrison}。
+	反之，若$1 + v\transp A\inv u = 0$，则$u \neq 0$，且$(A + uv\transp)A\inv u = 0$，故$A + uv\transp$不可逆。
 \end{proof}
 
 \begin{example}
 	{Sherman--Morrison公式的应用}{}
-	对$n\geq2$求逆矩阵：
+	对$n \geq 2$求逆矩阵：
 	\[
-		A=\begin{bmatrix}
+		A = \begin{bmatrix}
 			0&1&\cdots&1\\
 			1&0&\cdots&1\\
 			\vdots&\vdots&\ddots&\vdots\\
 			1&1&\cdots&0
 		\end{bmatrix}
 	\]
-	设$v=[1\enspace\cdots\enspace 1]\transp$，不难看出$A=-I+vv\transp$，故
+	设$v = [1\enspace\cdots\enspace 1]\transp$，不难看出$A = -I + vv\transp$，故
 	\[
-		A\inv=-I-\frac{vv\transp}{1-n}=\frac1{n-1}\begin{bmatrix}
-			2-n&1&\cdots&1\\
-			1&2-n&\cdots&1\\
+		A\inv = -I - \frac{vv\transp}{1 - n} = \frac1{n - 1}\begin{bmatrix}
+			2 - n&1&\cdots&1\\
+			1&2 - n&\cdots&1\\
 			\vdots&\vdots&\ddots&\vdots\\
-			1&1&\cdots&2-n
+			1&1&\cdots&2 - n
 		\end{bmatrix}.
 	\]
 \end{example}
 
 \begin{theorem}
 	{华罗庚恒等式}{Hua's identity}
-	设$A,B,A+B$为同阶可逆矩阵。对Woodbury恒等式\eqref{eqn:Woodbury}取$n=k$且$U=V=I_n$、$C=B$，有
-		\begin{subequations}
-			\begin{align}
-				(A+B)\inv&=A\inv-A\inv(A\inv+B\inv)\inv A\inv\\
-				\label{eqn:Hua}
-				&=A\inv-(A+AB\inv A)\inv.
-			\end{align}
-		\end{subequations}
+	设$A,B,A + B$为同阶可逆矩阵。对Woodbury恒等式\eqref{eqn:Woodbury}取$n = k$且$U = V = I_n$、$C = B$，有
+		\begin{equation}\label{eqn:Hua}
+			\begin{aligned}
+				(A + B)\inv &= A\inv - A\inv(A\inv + B\inv)\inv A\inv\\
+				&= A\inv - (A + AB\inv A)\inv.
+			\end{aligned}
+		\end{equation}
 		% 式\eqref{eqn:Hua}称为华罗庚恒等式()。
 \end{theorem}
 
@@ -573,15 +574,15 @@
 
 给定分块矩阵
 \[
-	M=\begin{bmatrix}
+	M = \begin{bmatrix}
 		A&B\\C&D
 	\end{bmatrix},
 \]
-以下设$A,D$分别为$m,n$阶方阵，$B\in\FF^{m\times n}$、$C\in\FF^{n\times m}$。当$M$满足某些条件时，其逆可以被表达出来。比如$M$为分块对角时，
+以下设$A,D$分别为$m,n$阶方阵，$B \in \FF^{m\times n}$、$C \in \FF^{n\times m}$。当$M$满足某些条件时，其逆可以被表达出来。比如$M$为分块对角时，
 \begin{equation}
 	\begin{bmatrix}
 		A\\ &D
-	\end{bmatrix}\inv=\begin{bmatrix}
+	\end{bmatrix}\inv = \begin{bmatrix}
 		A\inv\\ &D\inv
 	\end{bmatrix}.
 \end{equation}
@@ -589,90 +590,90 @@
 
 \begin{definition}
 	{Schur补}{Schur complement}
-	当$A$可逆时，记$M/A:=D-CA\inv B$是$A$在$M$中的Schur补(Schur complement)；
-	当$D$可逆时，记$M/D:=A-BD\inv C$是$D$在$M$中的Schur补。
+	当$A$可逆时，记$M/A := D - CA\inv B$是$A$在$M$中的Schur补(Schur complement)；
+	当$D$可逆时，记$M/D := A - BD\inv C$是$D$在$M$中的Schur补。
 \end{definition}
 
 \begin{theorem}
 	{分块矩阵的逆}{inverse of block matrix}
-	当$A$可逆且$M/A=D-CA\inv B$可逆时，$M$可逆，且
+	当$A$可逆且$M/A = D - CA\inv B$可逆时，$M$可逆，且
 	\begin{subequations}
 		\begin{align}
 			\begin{bmatrix}
 				A&B\\C&D
-			\end{bmatrix}\inv&=\begin{bmatrix}
+			\end{bmatrix}\inv &= \begin{bmatrix}
 				I&-A\inv B\\ &I
 			\end{bmatrix}\begin{bmatrix}
-				A\inv\\ &(D-CA\inv B)\inv
+				A\inv\\ &(D - CA\inv B)\inv
 			\end{bmatrix}\begin{bmatrix}
 				I\\-CA\inv&I
 			\end{bmatrix}\\
 			\label{eqn:[AB;CD]-1=M/A}
-			&=\begin{bmatrix}
-				A\inv+A\inv B(M/A)\inv CA\inv&-A\inv B(M/A)\inv\\
+			&= \begin{bmatrix}
+				A\inv + A\inv B(M/A)\inv CA\inv&-A\inv B(M/A)\inv\\
 				-(M/A)\inv CA\inv&(M/A)\inv
 			\end{bmatrix};
 		\end{align}
 	\end{subequations}
-	当$D$可逆且$M/D=A-BD\inv C$可逆时，$M$可逆，且
+	当$D$可逆且$M/D = A - BD\inv C$可逆时，$M$可逆，且
 	\begin{subequations}
 		\begin{align}
 			\begin{bmatrix}
 				A&B\\C&D
-			\end{bmatrix}\inv&=\begin{bmatrix}
+			\end{bmatrix}\inv &= \begin{bmatrix}
 				I\\-D\inv C&I
 			\end{bmatrix}\begin{bmatrix}
-				(A-BD\inv C)\inv\\ &D\inv
+				(A - BD\inv C)\inv\\ &D\inv
 			\end{bmatrix}\begin{bmatrix}
 				I&-BD\inv\\ &I
 			\end{bmatrix}\\
 			\label{eqn:[AB;CD]-1=M/D}
-			&=\begin{bmatrix}
+			&= \begin{bmatrix}
 				(M/D)\inv&-(M/D)\inv BD\inv\\
-				-D\inv C(M/D)\inv&D\inv+D\inv C(M/D)\inv BD\inv
+				-D\inv C(M/D)\inv&D\inv + D\inv C(M/D)\inv BD\inv
 			\end{bmatrix}.
 		\end{align}
 	\end{subequations}
 	\tcblower 
 	当$A,D,M/A,M/D$均可逆时，$M$的逆可以写成简单的分解：
-	\begin{eqnarray}
+	\begin{equation}\label{eq:la-block-inverse-factorization}
 		\begin{bmatrix}
 			A&B\\C&D
-		\end{bmatrix}\inv=\begin{bmatrix}
-			(A-BD\inv C)\inv\\ &(D-CA\inv B)\inv
+		\end{bmatrix}\inv = \begin{bmatrix}
+			(A - BD\inv C)\inv\\ &(D - CA\inv B)\inv
 		\end{bmatrix}\begin{bmatrix}
 			I&-BD\inv\\-CA\inv&I
 		\end{bmatrix}.
-	\end{eqnarray}
+	\end{equation}
 \end{theorem}
 
 \begin{proof}
 	可以直接代入验证。下面介绍得到这一形式的思路：
 	由于分块对角矩阵的逆是易求的。
 	当$A$可逆时，可以利用Gauss--Jordan消元法(见\secref{sec:elimination})将$M$化为分块对角的，即LDU分解(见\thmref{thm:LDU decomposition})
-	\[
+	\begin{equation}\label{eq:la-schur-factorization-a}
 		\begin{bmatrix}
 			A&B\\C&D
-		\end{bmatrix}=\begin{bmatrix}
+		\end{bmatrix} = \begin{bmatrix}
 			I\\CA\inv&I
 		\end{bmatrix}\begin{bmatrix}
-			A\\ &D-CA\inv B
+			A\\ &D - CA\inv B
 		\end{bmatrix}\begin{bmatrix}
 			I&A\inv B\\ &I
 		\end{bmatrix},
-	\]
+	\end{equation}
 	上式的分块对角矩阵中出现了$A$的Schur补$M/A$；当$D$可逆时，同理有
-	\[
+	\begin{equation}\label{eq:la-schur-factorization-d}
 		\begin{bmatrix}
 			A&B\\C&D
-		\end{bmatrix}=\begin{bmatrix}
+		\end{bmatrix} = \begin{bmatrix}
 			I&BD\inv\\ &I
 		\end{bmatrix}\begin{bmatrix}
-			A-BD\inv C\\ &D
+			A - BD\inv C\\ &D
 		\end{bmatrix}\begin{bmatrix}
 			I\\D\inv C&I
 		\end{bmatrix},
-	\]
+	\end{equation}
 	对上两式求逆即得。
 \end{proof}
 
@@ -680,21 +681,21 @@
 	对比\eqref{eqn:[AB;CD]-1=M/A}和\eqref{eqn:[AB;CD]-1=M/D}，可得
 	\begin{subequations}
 		\begin{align}
-			A\inv+A\inv B(M/A)\inv CA\inv&=(M/D)\inv\\
-			-A\inv B(M/A)\inv&=-(M/D)\inv BD\inv\\
-			-(M/A)\inv CA\inv&=-D\inv C(M/D)\inv\\
-			(M/A)\inv&=D\inv+D\inv C(M/D)\inv BD\inv
+			A\inv + A\inv B(M/A)\inv CA\inv &= (M/D)\inv\\
+			-A\inv B(M/A)\inv &= -(M/D)\inv BD\inv\\
+			-(M/A)\inv CA\inv &= -D\inv C(M/D)\inv\\
+			(M/A)\inv &= D\inv + D\inv C(M/D)\inv BD\inv
 		\end{align}
 	\end{subequations}
 	可得Woodbury矩阵恒等式(\thmref{thm:Woodbury matrix identity})。
 \end{corollary}
 
 \begin{corollary}
-	当$C=O$时，$M$可逆$\iff A,D$均可逆，且
+	当$C = O$时，$M$可逆$\iff A,D$均可逆，且
 	\begin{equation}
 		\begin{bmatrix}
 			A&B\\ &D
-		\end{bmatrix}\inv=\begin{bmatrix}
+		\end{bmatrix}\inv = \begin{bmatrix}
 			A\inv&-A\inv BD\inv\\
 			& D\inv
 		\end{bmatrix};
@@ -703,11 +704,11 @@
 
 \begin{theorem}
 	{分块反对角矩阵的逆}{}
-	当$M$是分块反对角的，即$A,D=O$时，$M$可逆当且仅当两个分块维数相等($m=n$)且$B,C$均可逆，此时
+	当$M$是分块反对角的，即$A,D = O$时，$M$可逆当且仅当两个分块维数相等($m = n$)且$B,C$均可逆，此时
 	\begin{equation}
 		\begin{bmatrix}
 			&B\\C
-		\end{bmatrix}\inv=\begin{bmatrix}
+		\end{bmatrix}\inv = \begin{bmatrix}
 			&C\inv\\B\inv
 		\end{bmatrix}.
 	\end{equation}

@@ -3,33 +3,33 @@
 \section{二元运算}
 
 \begin{definition}{二元运算}{binary operation}
-	集合$S$上的一个二元运算(binary operation)形如映射$\circ:S\times S\to S$。
+	集合$S$上的一个二元运算(binary operation)形如映射$\circ :S \times S \to S$。
 
-	其中$S\times S\equiv S^2$是笛卡尔积(Cartesian product)，
-	\[
-		A\times B:=\set{(a,b)}{a\in A, b\in B}.
-	\]
+	其中 $S \times S \equiv S^2$ 是集合 $S$ 与自身的 Cartesian 积。对任意两个集合 $A,B$，有
+	\begin{equation}\label{eq:la-cartesian-product}
+		A \times B := \set{(a,b)}{a \in A, b \in B}.
+	\end{equation}
 \end{definition}
 二元运算在$S$上是封闭的(property of closure)。
 \begin{definition}{恒等元}{identity element}
-	$e\in S$是恒等元(identity element)，若$\forall a\in S,\enspace e\circ a=a\circ e=a.$
+	$e \in S$是恒等元(identity element)，若$\forall a \in S,\enspace e \circ a = a \circ e = a.$
 \end{definition}
 \begin{definition}{可逆}{inversible}
-	$a\in S$是可逆的(inversible)，若$\exists a\inv\in S,\enspace a\circ a\inv=a\inv\circ a=e.$
+	$a \in S$是可逆的(inversible)，若$\exists a\inv \in S,\enspace a \circ a\inv = a\inv \circ a = e.$
 \end{definition}
-在运算满足结合律并有单位元时，令$a^0=e$；对正整数$m$，简记
+在运算满足结合律并有单位元时，令$a^0 = e$；对正整数$m$，简记
 \[
-	a^m\equiv a\circ\cdots\circ a,\quad a^{-m}\equiv a\inv\circ\cdots\circ a\inv.
+	a^m \equiv a \circ \cdots \circ a,\quad a^{-m} \equiv a\inv \circ \cdots \circ a\inv.
 \]
 
 \section{群与子群}
 
 \begin{definition}{群}{group}
-	群(group)是有二元运算$\circ:G\times G\to G$和集合$G$并满足下列性质的组合$(G,\circ)$：
+	群(group)是有二元运算$\circ :G \times G \to G$和集合$G$并满足下列性质的组合$(G, \circ)$：
 	\begin{compactitem}
-		\item 结合律：$(a\circ b)\circ c=a\circ(b\circ c)\equiv a\circ b\circ c;$
-		\item 单位元：$\exists e\in G$使得$e\circ a=a\circ e=a;$
-		\item 逆：$\forall a\in G,\enspace\exists a\inv$使得$a\inv\circ a=a\circ a\inv=e.$
+		\item 结合律：$(a \circ b) \circ c = a \circ (b \circ c) \equiv a \circ b \circ c;$
+		\item 单位元：$\exists e \in G$使得$e \circ a = a \circ e = a;$
+		\item 逆：$\forall a \in G,\enspace\exists a\inv$使得$a\inv \circ a = a \circ a\inv = e.$
 	\end{compactitem}
 	若还满足交换律，则称为交换群或Abel群。
 
@@ -43,28 +43,28 @@
 \begin{proof}
 	若一个群存在两个单位元$e,e'$，则 
 	\[
-		e=e\circ e'=e';
+		e = e \circ e' = e';
 	\]
 	若一个元素$a$存在两个逆$b,c$，则 
 	\[
-		b=b\circ e=b\circ(a\circ c)=(b\circ a)\circ c=e\circ c=c.
+		b = b \circ e = b \circ (a \circ c) = (b \circ a) \circ c = e \circ c = c.
 		\qedhere
 	\]
 \end{proof}
 \begin{example}{群的例子}{example of group}
 	\begin{compactitem}
 		\item 整数加群$(\ZZ,+)$：单位元0；
-		\item 非零实数乘法群$(\RR\backslash\{0\},\times)$：单位元1；
+		\item 非零实数乘法群$(\RR\backslash\{0\}, \times)$：单位元1；
 		\item 一般线性(general linear)群$\GL(n)$：所有$n$阶可逆矩阵集合，单位元$I_n$。
 	\end{compactitem}
 \end{example}
 \begin{theorem}{消去律}{cancellation law}
-	$\forall a,b,c\in G$，有
+	$\forall a,b,c \in G$，有
 	\begin{subequations}
 		\begin{gather}
-			a\circ b=a\circ c\implies b=c;\\
-			b\circ a=c\circ a\implies b=c;\\
-			b\circ a=a~\text{或}~a\circ b=a\implies b=e.
+			a \circ b = a \circ c \implies b = c;\\
+			b \circ a = c \circ a \implies b = c;\\
+			b \circ a = a~\text{或}~a \circ b = a \implies b = e.
 		\end{gather}
 	\end{subequations}
 \end{theorem}
@@ -72,18 +72,18 @@
 	左乘/右乘$a\inv$.
 \end{proof}
 \begin{remark}
-	逆$a\inv$的存在很关键，如果$G$上的运算只是结合的，则$(G,\circ)$是一个半群(semigroup)，有单位元的半群又叫幺半群(monoid)。
+	逆$a\inv$的存在很关键，如果$G$上的运算只是结合的，则$(G, \circ)$是一个半群(semigroup)，有单位元的半群又叫幺半群(monoid)。
 \end{remark}
 \begin{definition}{置换群和对称群}{permutation group and symmetric group}
-	给定有限集合$T$，所有可逆映射$f:T\to T$构成一个群$\sym(T)$，运算是映射的复合，称为集合$T$的对称群；它的任意子群称为$T$上的置换群(permutation group)
+	给定有限集合$T$，所有可逆映射$f:T \to T$构成一个群$\sym(T)$，运算是映射的复合，称为集合$T$的对称群；它的任意子群称为$T$上的置换群(permutation group)
 	\tcblower
-	当$T=\{1,2,\ldots,n\}$时，对应的置换群称为对称群(symmetric group) $S_n$。
+	当$T = \{1,2,\ldots,n\}$时，对应的置换群称为对称群(symmetric group) $S_n$。
 \end{definition}
 \begin{example}{$S_2$}{symmetric group S2}
-	$S_2=\{1,p\}$，其中 
+	$S_2 = \{1,p\}$，其中
 		\begin{align*}
-			1=\id:\{1,2\}\to\{1,2\}&,\\
-			p:\{1,2\}\to\{1,2\}&,\quad p(1)=2,\enspace p(2)=1.
+			1 = \id:\{1,2\} \to \{1,2\}&,\\
+			p:\{1,2\} \to \{1,2\}&,\quad p(1) = 2,\enspace p(2) = 1.
 		\end{align*}
 		$S_2$是交换群。可列出Cayley表
 		\begin{align*}
@@ -98,147 +98,147 @@
 \begin{example}{$S_3$}{symmetric group S3}
 	$S_3$：定义生成元$x,y$满足：
 	\begin{align*}
-		x(1)=2,\quad x(2)=3,\quad x(3)=1;\\
-		y(1)=2,\quad y(2)=1,\quad y(3)=3.
+		x(1) = 2,\quad x(2) = 3,\quad x(3) = 1;\\
+		y(1) = 2,\quad y(2) = 1,\quad y(3) = 3.
 	\end{align*}
-	可以证明生成元之间的关系：$x^3=1,\enspace y^2=1,\enspace x^2y=yx$，故$S_3$中所有元素都能写成生成元的积：
+	可以证明生成元之间的关系：$x^3 = 1,\enspace y^2 = 1,\enspace x^2y = yx$，故$S_3$中所有元素都能写成生成元的积：
 	\[
-		S_3=\{1,x,x^2,y,xy,x^2y\},
+		S_3 = \{1,x,x^2,y,xy,x^2y\},
 	\]
-	易知$S_3$不交换。根据生成元，$S_3$还可写为$S_3=\set{x,y}{x^3=1,y^2=1,x^2y=yx}$。
+	易知$S_3$不交换。根据生成元，$S_3$还可写为$S_3 = \set{x,y}{x^3 = 1,y^2 = 1,x^2y = yx}$。
 	
 	生成元及其关系称作一个群的表现(presentation)，一个群的表现不唯一。
 \end{example}
 \begin{definition}{子群}{subgroup}
-	$H\subset G$是$G$的子群(subgroup)，若$H$满足
+	$H \subset G$是$G$的子群(subgroup)，若$H$满足
 	\begin{itemize}
-		\item 封闭性：$\forall a,b\in H$，$a\circ b\in H$；
-		\item 单位元：$e\in H$；
-		\item 逆元：$\forall a\in H,\enspace\exists a\inv\in H$。
+		\item 封闭性：$\forall a,b \in H$，$a \circ b \in H$；
+		\item 单位元：$e \in H$；
+		\item 逆元：$\forall a \in H,\enspace\exists a\inv \in H$。
 	\end{itemize}
-	$\{e\}$称为平凡子群；任意不等于$G$的子群称为真子群(proper subgroup)，因此当$G\neq\{e\}$时，平凡子群也是真子群。
+	$\{e\}$称为平凡子群；任意不等于$G$的子群称为真子群(proper subgroup)，因此当$G \neq \{e\}$时，平凡子群也是真子群。
 \end{definition}
 
 \begin{example}{子群的例子}{}
 	\begin{itemize}
-		\item 圆群：$(\set{z\in\CC}{\abs z=1},\times)\subset(\CC\backslash\{0\},\times)$；
-		\item 特殊线性群$\SL(n)\subset\GL(n)$：所有行列式为1的$n$阶方阵；
+		\item 圆群：$(\set{z \in \CC}{\abs z = 1}, \times) \subset (\CC\backslash\{0\}, \times)$；
+		\item 特殊线性群$\SL(n) \subset \GL(n)$：所有行列式为1的$n$阶方阵；
 	\end{itemize}
 \end{example}
 
 \begin{definition}{循环群}{cyclic group}
-	由单个元素$x$生成的群$\langle x\rangle=\{x^k:k\in\ZZ\}$称为循环群(cyclic group)。若$x$的阶为$n$，即$n$是满足$x^n=1$的最小正整数，则该群有$n$个元素，可记为
+	由单个元素$x$生成的群$\langle x\rangle = \{x^k:k \in \ZZ\}$称为循环群(cyclic group)。若$x$的阶为$n$，即$n$是满足$x^n = 1$的最小正整数，则该群有$n$个元素，可记为
 	\begin{equation}
-		Z_n\equiv\set{1,x,\ldots,x^{n-1}}{x^n=1},
+		Z_n \equiv \set{1,x,\ldots,x^{n-1}}{x^n = 1},
 	\end{equation}
 	若不存在这样的正整数，则得到无限循环群，与整数加群$(\ZZ,+)$同构。
 \end{definition}
 \begin{example}{}{}
-	$S_3$的循环子群例如：$\set{x^k}{x^3=1}=Z_3$和$\set{y^k}{y^2=1}=Z_2$。
+	$S_3$的循环子群例如：$\set{x^k}{x^3 = 1} = Z_3$和$\set{y^k}{y^2 = 1} = Z_2$。
 \end{example}
 
 \section{群同态}
 
 \begin{definition}{群同态}{group homomorphism}
-	$(G,\circ),(G',\circ')$是群，映射$\phi:G\to G'$是群同态(group homomorphism)若$\forall a,b\in G$
+	$(G, \circ),(G', \circ ')$是群，映射$\phi:G \to G'$是群同态(group homomorphism)若$\forall a,b \in G$
 	\begin{equation}
-		\phi(a\circ b)=\phi(a)\circ'\phi(b).
+		\phi(a \circ b) = \phi(a) \circ '\phi(b).
 	\end{equation}
 	也称映射$\phi$和群上的乘法相容(compatible)。
 \end{definition}
 \begin{theorem}{群同态下的单位元和逆元}{}
-	若$\phi:G\to G'$是群同态，$G,G'$的单位元分别为$1,1'$，$a\in G$，则
+	若$\phi:G \to G'$是群同态，$G,G'$的单位元分别为$1,1'$，$a \in G$，则
 	\begin{equation}
-		\phi(1)=1',\quad \phi(a\inv)=\phi(a)\inv.
+		\phi(1) = 1',\quad \phi(a\inv) = \phi(a)\inv.
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	(1)由$\phi(1)=\phi(1\circ 1)=\phi(1)\circ'\phi(1)$，再运用消去律可得$1'=\phi(1)$；
+	(1)由$\phi(1) = \phi(1 \circ 1) = \phi(1) \circ '\phi(1)$，再运用消去律可得$1' = \phi(1)$；
 
-	(2)由$\phi(a\inv)\circ'\phi(a)=\phi(a\inv\circ a)=\phi(1)=1'$可得$\phi(a\inv)=\phi(a)\inv$。
+	(2)由$\phi(a\inv) \circ '\phi(a) = \phi(a\inv \circ a) = \phi(1) = 1'$可得$\phi(a\inv) = \phi(a)\inv$。
 \end{proof}
 \begin{example}
 	{}{}
 	线性空间和$+$构成一个群，线性映射都是群同态。
 \end{example}
 \begin{definition}{群同态的像}{image of group homomorphism}
-	群同态$\phi:G\to G'$的像(image) $\im\phi$定义为
+	群同态$\phi:G \to G'$的像(image) $\im\phi$定义为
 	\begin{equation}
-		\im\phi\equiv\set{x\in G'}{\exists a\in G,\enspace\phi(a)=x}.
+		\im\phi \equiv \set{x \in G'}{\exists a \in G,\enspace\phi(a) = x}.
 	\end{equation}
 \end{definition}
 \begin{definition}{群同态的核}{kernel of group homomorphism}
-	群同态$\phi:G\to G'$的核(kernel) $\ker\phi$定义为
+	群同态$\phi:G \to G'$的核(kernel) $\ker\phi$定义为
 	\begin{equation}
-		\ker\phi\equiv\set{a\in G}{\phi(a)=1'}.
+		\ker\phi \equiv \set{a \in G}{\phi(a) = 1'}.
 	\end{equation}
 \end{definition}
 \begin{theorem}{}{}
-	若$\phi:G\to G'$是群同态，则$\im\phi$是$G'$的子群，$\ker\phi$是$G$的子群。
+	若$\phi:G \to G'$是群同态，则$\im\phi$是$G'$的子群，$\ker\phi$是$G$的子群。
 \end{theorem}
 \begin{proof}
-    对像空间，$1'=\phi(1)\in\im\phi$；若$\phi(a),\phi(b)\in\im\phi$，则其积$\phi(ab)$和逆$\phi(a\inv)$也在像中。
-    对核，$1\in\ker\phi$；若$a,b\in\ker\phi$，则$\phi(ab)=1'$且$\phi(a\inv)=1'$，所以核对乘法与取逆封闭。两者均满足子群判据。这里省略乘法符号$\circ$。
+    对像空间，$1' = \phi(1) \in \im\phi$；若$\phi(a),\phi(b) \in \im\phi$，则其积$\phi(ab)$和逆$\phi(a\inv)$也在像中。
+    对核，$1 \in \ker\phi$；若$a,b \in \ker\phi$，则$\phi(ab) = 1'$且$\phi(a\inv) = 1'$，所以核对乘法与取逆封闭。两者均满足子群判据。这里省略乘法符号$\circ$。
 \end{proof}
 \begin{definition}{左陪集}{left coset}
-	$H$是$G$的子群，$a\in G$，则
+	$H$是$G$的子群，$a \in G$，则
 	\begin{equation}
-		a\circ H\equiv\set{a\circ h}{h\in H}
+		a \circ H \equiv \set{a \circ h}{h \in H}
 	\end{equation}
 	是$H$在$G$下的一个左陪集(left coset)。同理可定义右陪集。
 \end{definition}
 \begin{theorem}{}{}
-	群同态$\phi:G\to G'$，$a,b\in G$，则以下命题等价：
+	群同态$\phi:G \to G'$，$a,b \in G$，则以下命题等价：
 	\begin{enumerate}
-		\item $\phi(a)=\phi(b)$；
-		\item $a\inv\circ b\in\ker\phi$；
-		\item $b\in a\circ\ker\phi$；
-		\item $b\circ\ker\phi=a\circ\ker\phi$。
+		\item $\phi(a) = \phi(b)$；
+		\item $a\inv \circ b \in \ker\phi$；
+		\item $b \in a \circ \ker\phi$；
+		\item $b \circ \ker\phi = a \circ \ker\phi$。
 	\end{enumerate}
 \end{theorem}
 \begin{proof}
-	$(1)\Rightarrow(2)$：
+	$(1) \Rightarrow (2)$：
 	\[
-		\phi(a)=\phi(b)\implies 1'=\phi(a)\inv\circ'\phi(b)=\phi(a\inv\circ b)\implies a\inv\circ b\in\ker\phi;
+		\phi(a) = \phi(b) \implies 1' = \phi(a)\inv \circ '\phi(b) = \phi(a\inv \circ b) \implies a\inv \circ b \in \ker\phi;
 	\]
 
-	$(2)\Rightarrow(3)$：
+	$(2) \Rightarrow (3)$：
 	\[
-		a\inv\circ b=h\in\ker\phi\implies b=a\circ h\in a\circ\ker\phi.
+		a\inv \circ b = h \in \ker\phi \implies b = a \circ h \in a \circ \ker\phi.
 	\]
 
-	$(3)\Rightarrow(4)$：由$b\in a\circ\ker\phi$，$\exists h\in\ker\phi$使得$b=a\circ h$；
-	$\forall b'\in b\circ\ker\phi$，$\exists h'\in \ker\phi$使得$b'=b\circ h'=(a\circ h)\circ h'=a\circ(h\circ h')\in a\circ\ker\phi$，故$b\circ\ker\phi\subset a\circ\ker\phi$；同理由$a=b\circ h\inv$可以证明$a\circ\ker\phi\subset b\circ\ker\phi$，故$a\circ\ker\phi=b\circ\ker\phi.$
+	$(3) \Rightarrow (4)$：由$b \in a \circ \ker\phi$，$\exists h \in \ker\phi$使得$b = a \circ h$；
+	$\forall b' \in b \circ \ker\phi$，$\exists h' \in \ker\phi$使得$b' = b \circ h' = (a \circ h) \circ h' = a \circ (h \circ h') \in a \circ \ker\phi$，故$b \circ \ker\phi \subset a \circ \ker\phi$；同理由$a = b \circ h\inv$可以证明$a \circ \ker\phi \subset b \circ \ker\phi$，故$a \circ \ker\phi = b \circ \ker\phi.$
 
-	$(4)\Rightarrow(1)$：$\forall h\in\ker\phi,\enspace\exists h'\in\ker\phi$使得$a\circ h=b\circ h'$
+	$(4) \Rightarrow (1)$：$\forall h \in \ker\phi,\enspace\exists h' \in \ker\phi$使得$a \circ h = b \circ h'$
 	\begin{align*}
-		&\implies \phi(a\circ h)=\phi(b\circ h')\implies\phi(a)\circ'\phi(h)=\phi(b)\circ'\phi(h')\\
-		&\implies\phi(a)\circ'1'=\phi(b)\circ'1'\implies\phi(a)=\phi(b).
+		&\implies \phi(a \circ h) = \phi(b \circ h') \implies \phi(a) \circ '\phi(h) = \phi(b) \circ '\phi(h')\\
+		&\implies \phi(a) \circ '1' = \phi(b) \circ '1' \implies \phi(a) = \phi(b).
 	\end{align*}
 	故以上4个命题等价。
 \end{proof}
 \begin{remark}~
 	\begin{itemize}
 		\item 群同态的核不仅告诉我们$G$中的哪些元素映射到1，也告诉我们哪些元素的像相同；
-		\item 上面的命题在线性方程组中的应用就是$Ax=b$的通解$=$特解$+\,\{Ax=0\}$的通解。
+		\item 上面的命题在线性方程组中的应用就是$Ax = b$的通解$=$特解$+\,\{Ax = 0\}$的通解。
 	\end{itemize}
 \end{remark}
 \begin{corollary}
-	群同态$\phi:G\to G'$是单射$\iff\ker\phi=\{1\}$。
+	群同态$\phi:G \to G'$是单射$\iff \ker\phi = \{1\}$。
 \end{corollary}
 \begin{definition}{正规子群}{normal subgroup}
-	$N$首先是$G$的子群；若$\forall a\in N,\forall g\in G$，共轭$g\circ a\circ g\inv\in N$，则称$N$为正规子群(normal subgroup)，记作$N\trianglelefteq G$。
+	$N$首先是$G$的子群；若$\forall a \in N,\forall g \in G$，共轭$g \circ a \circ g\inv \in N$，则称$N$为正规子群(normal subgroup)，记作$N\trianglelefteq G$。
 \end{definition}
 \begin{theorem}{}{}
-	$\phi:G\to G'$是群同态，$\ker\phi$是$G$的正规子群。
+	$\phi:G \to G'$是群同态，$\ker\phi$是$G$的正规子群。
 \end{theorem}
 \begin{proof}
-    若$a\in\ker\phi$且$g\in G$，则$\phi(gag\inv)=\phi(g)1'\phi(g)\inv=1'$，故$gag\inv\in\ker\phi$。
+    若$a \in \ker\phi$且$g \in G$，则$\phi(gag\inv) = \phi(g)1'\phi(g)\inv = 1'$，故$gag\inv \in \ker\phi$。
 \end{proof}
 \begin{definition}{中心}{center of group}
 	群$G$的中心(center)是
 	\begin{equation}
-		Z_G\equiv\set{z\in G}{z\circ x=x\circ z,\forall x\in G},
+		Z_G \equiv \set{z \in G}{z \circ x = x \circ z,\forall x \in G},
 	\end{equation}
 	中心$Z_G$总是$G$的正规子群。
 \end{definition}
@@ -246,31 +246,31 @@
 	\begin{itemize}
 		\item 对实矩阵，行列式是GL的群同态：
 		\[
-			\det:\GL(n,\RR)\to(\RR\backslash\{0\},\times)
+			\det:\GL(n,\RR) \to (\RR\backslash\{0\}, \times)
 		\]
-		核$\ker\det=\SL(n)$是$\GL(n)$的正规子群。
-		\item $Z_{\SL(2)}=\{I,-I\}$；
-		\item $Z_{S_n}=\{1\},\enspace n\geq 3$。
+		核$\ker\det = \SL(n)$是$\GL(n)$的正规子群。
+		\item $Z_{\SL(2)} = \{I,-I\}$；
+		\item $Z_{S_n} = \{1\},\enspace n \geq 3$。
 	\end{itemize}
 \end{example}
 
 \section{群同构}
 
 \begin{definition}{群同构}{isomorphism}
-	若群同态$\phi:G\to G'$是双射，则称$\phi$为群同构(isomorphism)，称$G,G'$是同构的(isomorphic)，记作$G\simeq G'$。
+	若群同态$\phi:G \to G'$是双射，则称$\phi$为群同构(isomorphism)，称$G,G'$是同构的(isomorphic)，记作$G \simeq G'$。
 	
-	群到自己的同构$\phi:G\to G$也叫自同构。(automorphism)
+	群到自己的同构$\phi:G \to G$也叫自同构。(automorphism)
 \end{definition}
-恒等映射$\id:G\to G$是自同构。
+恒等映射$\id:G \to G$是自同构。
 \begin{example}{群同构的例子}{}
 	\begin{itemize}
 		\item 指数函数
 		\[
-			\exp:(\RR,+)\to(\RR_{>0},\times),\enspace x\mapsto\e^x.
+			\exp:(\RR,+) \to (\RR_{>0}, \times),\enspace x \mapsto \e^x.
 		\]
-		\item $P$是非零实投影矩阵：$P^2=P$。将$S_2$的单位元映为$I$、非单位元映为$I-2P$，由于$(I-2P)^2=I$且$I-2P\neq I$，得到同构
+		\item $P$是非零实投影矩阵：$P^2 = P$。将$S_2$的单位元映为$I$、非单位元映为$I - 2P$，由于$(I - 2P)^2 = I$且$I - 2P \neq I$，得到同构
 		\[
-			S_2\to\{I,I-2P\}.
+			S_2 \to \{I,I - 2P\}.
 		\]
 	\end{itemize}
 \end{example}
@@ -278,20 +278,20 @@
 \section{等价关系}
 
 \begin{definition}{等价关系}{equivalence relation}
-	集合$S$上的等价关系$\sim$是$S$中两个元素$a,b$之间的关系，记作$a\sim b$，满足：
+	集合$S$上的等价关系$\sim$是$S$中两个元素$a,b$之间的关系，记作$a \sim b$，满足：
 	\begin{itemize}
-		\item 自反性(reflexivity)：$\forall a,\enspace a\sim a.$
-		\item 对称性(symmetry)：$a\sim b\iff b\sim a;$
-		\item 传递性(transitivity)：$a\sim b,b\sim c\implies a\sim c;$
+		\item 自反性(reflexivity)：$\forall a,\enspace a \sim a.$
+		\item 对称性(symmetry)：$a \sim b \iff b \sim a;$
+		\item 传递性(transitivity)：$a \sim b,b \sim c \implies a \sim c;$
 	\end{itemize}
 	具有等价关系的集合称为集合体(setoid)。
 \end{definition}
 \begin{remark}~
 	\begin{itemize}
 		\item 等价关系可以看成$=$的抽象；
-		\item 等价关系可以理解为映射$f:S\times S\to\{0,1\}$满足 
+		\item 等价关系可以理解为映射$f:S \times S \to \{0,1\}$满足
 		\[
-			a\sim b\iff f(a,b)=1.
+			a \sim b \iff f(a,b) = 1.
 		\]
 	\end{itemize}
 \end{remark}
@@ -300,7 +300,7 @@
 	{等价类}{equivalence class}
 	在等价关系$\sim$下，所有与$a$等价的元素构成的集合称作$a$的等价类(equivalence class)，记作 
 	\begin{equation}
-		[a]\equiv\set x{x\sim a}.
+		[a] \equiv \set x{x \sim a}.
 	\end{equation}
 \end{definition}
 
@@ -310,54 +310,54 @@
     等价关系的不同等价类互不相交，且其并为整个集合。
 \end{theorem}
 \begin{proof}
-    自反性保证$a\in[a]$，故等价类覆盖原集合。若$x\in[a]\cap[b]$，由对称性和传递性得$a\sim b$；再次应用传递性可得$[a]=[b]$。
+    自反性保证$a \in [a]$，故等价类覆盖原集合。若$x \in [a] \cap [b]$，由对称性和传递性得$a \sim b$；再次应用传递性可得$[a] = [b]$。
 \end{proof}
 
 \section{商群与第一同构定理}
 \begin{definition}{商群}{quotient group}
-    设$N\trianglelefteq G$。左陪集的集合$G/N=\{gN:g\in G\}$在运算
-    \[
-        (aN)(bN):=(ab)N
-    \]
+    设$N\trianglelefteq G$。左陪集的集合$G/N = \{gN:g \in G\}$在运算
+    \begin{equation}\label{eq:la-quotient-group-product}
+        (aN)(bN) := (ab)N
+    \end{equation}
     下构成群，称为商群。其单位元是$N$，$aN$的逆是$a\inv N$。
 \end{definition}
-这个定义必须检查代表元的选择不影响结果。若$a'=an_1,b'=bn_2$，其中$n_1,n_2\in N$，则
+这个定义必须检查代表元的选择不影响结果。若$a' = an_1,b' = bn_2$，其中$n_1,n_2 \in N$，则
 \[
-    a'b'=an_1bn_2=ab(b\inv n_1b)n_2\in abN.
+    a'b' = an_1bn_2 = ab(b\inv n_1b)n_2 \in abN.
 \]
 这里用到了正规性；结合律由$G$继承。一般子群的陪集仍构成一个集合，但上述乘法未必良定义。
 
 \begin{theorem}{第一同构定理}{first isomorphism theorem}
-    群同态$\phi:G\to G'$诱导自然同构
-    \[
-        \widetilde\phi:G/\ker\phi\longrightarrow\im\phi,
-        \qquad g\ker\phi\longmapsto\phi(g).
-    \]
+    群同态$\phi:G \to G'$诱导自然同构
+    \begin{equation}\label{eq:la-first-isomorphism}
+        \widetilde\phi:G/\ker\phi \longrightarrow \im\phi,
+        \qquad g\ker\phi \longmapsto \phi(g).
+    \end{equation}
 \end{theorem}
 \begin{proof}
-    前文已经证明，两个元素的像相同当且仅当它们属于同一个核的陪集，因此$\widetilde\phi$良定义且为单射。按像的定义它是满射，又由$\phi(ab)=\phi(a)\phi(b)$知它保持乘法，故为同构。
+    前文已经证明，两个元素的像相同当且仅当它们属于同一个核的陪集，因此$\widetilde\phi$良定义且为单射。按像的定义它是满射，又由$\phi(ab) = \phi(a)\phi(b)$知它保持乘法，故为同构。
 \end{proof}
 \begin{example}{两个商群}{}
-    整数对$n$取模的同态给出$\ZZ/n\ZZ\cong Z_n$。实矩阵的行列式同态是满射，其核为$\SL(n,\RR)$，因而
+    整数对$n$取模的同态给出$\ZZ/n\ZZ \cong Z_n$。实矩阵的行列式同态是满射，其核为$\SL(n,\RR)$，因而
     \[
-        \GL(n,\RR)/\SL(n,\RR)\cong(\RR\backslash\{0\},\times).
+        \GL(n,\RR)/\SL(n,\RR) \cong (\RR\backslash\{0\}, \times).
     \]
 \end{example}
 
 \section{环与域}
 \begin{definition}{环}{ring}
     本节采用含幺环的约定。集合$R$及运算$+,{\cdot}$构成环，若$(R,+)$是Abel群，乘法满足结合律并有单位元$1$，且满足左右分配律：
-    \[
-        a(b+c)=ab+ac,\qquad(a+b)c=ac+bc.
-    \]
+    \begin{equation}\label{eq:la-distributive-laws}
+        a(b + c) = ab + ac,\qquad(a + b)c = ac + bc.
+    \end{equation}
     若乘法还满足交换律，则称为交换环。
 \end{definition}
-整数$\ZZ$、多项式$\RR[x]$是交换环；$n\geq2$时，实$n$阶矩阵组成的环不交换。环中的非零元素不一定可逆，例如$2$在$\ZZ$中没有乘法逆元。
+整数$\ZZ$、多项式$\RR[x]$是交换环；$n \geq 2$时，实$n$阶矩阵组成的环不交换。环中的非零元素不一定可逆，例如$2$在$\ZZ$中没有乘法逆元。
 \begin{definition}{域}{field}
-    若交换环$F$满足$0\neq1$，且每个非零元素都有乘法逆元，则称为域。
+    若交换环$F$满足$0 \neq 1$，且每个非零元素都有乘法逆元，则称为域。
 \end{definition}
 $\QQ,\RR,\CC$都是域；本章的抽象域定义比第1章“复数域的子域”这一数域定义更广，例如有限域无需嵌入$\CC$。
 \begin{example}{模$n$的剩余类环与有限域}{}
-    $n\geq2$时，在$\ZZ/n\ZZ$上定义$[a]+[b]=[a+b]$与$[a][b]=[ab]$，得到交换环。它是域当且仅当$n$为素数。
-    若$n=ab$且$1<a,b<n$，则两个非零元素$[a],[b]$之积为零，不可能都有乘法逆元。若$n=p$为素数，每个$1\leq a<p$都与$p$互素；由B\'ezout等式$ua+vp=1$得到$[u][a]=[1]$，故所有非零元素可逆。
+    $n \geq 2$时，在$\ZZ/n\ZZ$上定义$[a] + [b] = [a + b]$与$[a][b] = [ab]$，得到交换环。它是域当且仅当$n$为素数。
+    若$n = ab$且$1 < a,b < n$，则两个非零元素$[a],[b]$之积为零，不可能都有乘法逆元。若$n = p$为素数，每个$1 \leq a < p$都与$p$互素；由B\'ezout等式$ua + vp = 1$得到$[u][a] = [1]$，故所有非零元素可逆。
 \end{example}

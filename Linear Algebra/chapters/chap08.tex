@@ -2,38 +2,38 @@
 \label{chap:linear mapping}
 
 \begin{definition}{映射}{mapping}
-	给定两个集合$S,S'$，如果$\forall x\in S$，均有唯一一个对应的$f(x)\in S'$，这种对应关系$f$便称为映射(mapping)，记作
+	给定两个集合$S,S'$，如果$\forall x \in S$，均有唯一一个对应的$f(x) \in S'$，这种对应关系$f$便称为映射(mapping)，记作
 	\begin{equation}
-		f:S\to S',\enspace x\mapsto f(x).
+		f:S \to S',\enspace x \mapsto f(x).
 	\end{equation}
-	其中$S$称为定义域(domain)，$S'$称为陪域(codomain)。$f(x)$称为$x$的像(image)，所有像的集合$f(S)=\set{f(x)}{x\in S}$称为值域(image of $S$)，有$f(S)\subset S'$。
+	其中$S$称为定义域(domain)，$S'$称为陪域(codomain)。$f(x)$称为$x$的像(image)，所有像的集合$f(S) = \set{f(x)}{x \in S}$称为值域(image of $S$)，有$f(S) \subset S'$。
 	\tcblower
-	给定$y\in S'$，所有满足$f(x)=y$的$x$的集合称为$y$的原像(preimage)，记作
+	给定$y \in S'$，所有满足$f(x) = y$的$x$的集合称为$y$的原像(preimage)，记作
 	\begin{equation}
-		f\inv(y):=\set{x\in S}{f(x)=y}.
+		f\inv(y) := \set{x \in S}{f(x) = y}.
 	\end{equation}
 \end{definition}
 
 \begin{remark}
-	符号$f(\cdot)$便代表映射$x\mapsto f(x)$。
+	符号$f(\cdot)$便代表映射$x \mapsto f(x)$。
 \end{remark}
 
 \begin{definition}{映射的复合}{mapping composition}
-	映射 $f:U\to V,\enspace g:V\to W$的复合(composition)构成一个新的映射：
-	\[
-		g\circ f:U\to W,\enspace x\mapsto g(f(x)).
-	\]
+	映射 $f:U \to V,\enspace g:V \to W$的复合(composition)构成一个新的映射：
+	\begin{equation}\label{eq:la-map-composition}
+		g \circ f:U \to W,\enspace x \mapsto g(f(x)).
+	\end{equation}
 \end{definition}
 \begin{corollary}
 	映射的复合满足结合律
 	\[
-		(h\circ g)\circ f=h\circ (g\circ f)\equiv h\circ g\circ f.
+		(h \circ g) \circ f = h \circ (g \circ f) \equiv h \circ g \circ f.
 	\]
 \end{corollary}
 \begin{definition}{单射、满射和双射}{injection, surjection and bijection}
 	\begin{itemize}
-		\item 单射(injection)：$\forall x,y\in S$且$x\neq y$，均有$f(x)\neq f(y)$。
-		\item 满射(surjection)：$\forall s\in S'$，均$\exists x\in S$使得$f(x)=s$。%$f(S)=S'$。
+		\item 单射(injection)：$\forall x,y \in S$且$x \neq y$，均有$f(x) \neq f(y)$。
+		\item 满射(surjection)：$\forall s \in S'$，均$\exists x \in S$使得$f(x) = s$。%$f(S)=S'$。
 		\item 双射(bijection)：既是单射又是满射。
 	\end{itemize}
 \end{definition}
@@ -42,33 +42,33 @@
 	{恒等映射}{identity mapping}
 	定义$S$上的恒等映射(identity)为
 	\begin{equation}
-		\id_S:S\to S,\enspace x\mapsto x.
+		\id_S:S \to S,\enspace x \mapsto x.
 	\end{equation}
 \end{definition}
 
 \begin{corollary}
-	$\forall f:S\to S'$，有$f\circ\id_S=\id_{S'}\circ f=f$。
+	$\forall f:S \to S'$，有$f \circ \id_S = \id_{S'} \circ f = f$。
 \end{corollary}
 
 \begin{definition}
 	{逆映射}{inverse mapping}
-	给定映射$f:S\to S'$，若存在$g:S'\to S$使得
-	\[
-		g\circ f=\id_S,\quad f\circ g=\id_{S'},
-	\]
-	则称映射$f:S\to S'$可逆，$g=f\inv$为$f$的逆映射(inverse)。
+	给定映射$f:S \to S'$，若存在$g:S' \to S$使得
+	\begin{equation}\label{eq:la-inverse-map}
+		g \circ f = \id_S,\quad f \circ g = \id_{S'},
+	\end{equation}
+	则称映射$f:S \to S'$可逆，$g = f\inv$为$f$的逆映射(inverse)。
 \end{definition}
 \begin{theorem}{有关映射的等价描述}{}
-	设$f:S\to S'$，在第1条中假设$S\neq\varnothing$。对任意无限集合，第2条的右逆存在性使用选择公理；有限集合不需要这一额外讨论。
+	设$f:S \to S'$，在第1条中假设$S \neq \varnothing$。对任意无限集合，第2条的右逆存在性使用选择公理；有限集合不需要这一额外讨论。
 	\begin{enumerate}
-		\item 映射$f$为单射$\iff$存在映射$g$使得$g\circ f=\id$；
-		\item 映射$f$为满射$\iff$存在映射$g$使得$f\circ g=\id$；
+		\item 映射$f$为单射$\iff$存在映射$g$使得$g \circ f = \id$；
+		\item 映射$f$为满射$\iff$存在映射$g$使得$f \circ g = \id$；
 		\item 映射$f$为双射$\iff f$可逆。
 	\end{enumerate}
 \end{theorem}
 \begin{proof}
-    若$g\circ f=\id_S$，由$f(x)=f(y)$施加$g$即得$x=y$。反之，若$f$单射，在$f(S)$上令$g(f(x))=x$；在其余点上令$g$取某个固定的$x_0\in S$，便得到左逆。
-    若$f\circ g=\id_{S'}$，则每个$y\in S'$均为$f(g(y))$，故$f$满射。反之，对每个$y$选取一个原像$g(y)$即得到右逆。
+    若$g \circ f = \id_S$，由$f(x) = f(y)$施加$g$即得$x = y$。反之，若$f$单射，在$f(S)$上令$g(f(x)) = x$；在其余点上令$g$取某个固定的$x_0 \in S$，便得到左逆。
+    若$f \circ g = \id_{S'}$，则每个$y \in S'$均为$f(g(y))$，故$f$满射。反之，对每个$y$选取一个原像$g(y)$即得到右逆。
     若$f$为双射，每个原像唯一，所得逆映射同时是左逆与右逆；反方向由前两条成立。
 	% 若$f$可逆，$g:S'\to S$为$f$的逆。若$x,y\in S$，满足$f(x)=f(y)$，则 
 	% \[
@@ -80,51 +80,51 @@
 \end{proof}
 \section{线性映射和矩阵}
 \begin{definition}{线性映射}{linear mapping}
-	给定两个线性空间$V,W$，若映射$T:V\to W$满足：
+	给定两个线性空间$V,W$，若映射$T:V \to W$满足：
 	\begin{compactenum}
-		\item $\forall u,v\in V,\enspace T(u+v)=T(u)+T(v);$
-		\item $\forall c\in\FF,\enspace T(cu)=cT(u).$
+		\item $\forall u,v \in V,\enspace T(u + v) = T(u) + T(v);$
+		\item $\forall c \in \FF,\enspace T(cu) = cT(u).$
 	\end{compactenum}
 	则称映射$T$是线性映射(或线性变换，linear mapping)。
 	% 特别地，$V\to\FF$的称为线性函数。
-	所有$V\to W$的线性映射的集合记作$\hom(V,W)$。
+	所有$V \to W$的线性映射的集合记作$\hom(V,W)$。
 	% ，hom是homomorphism的缩写。
 \end{definition}
 \begin{corollary}
-	$T(0)=0.$
+	$T(0) = 0.$
 \end{corollary}
 \begin{example}
 	{}{}
 	求导运算
 	\[
-		\dd x:\cont^\infty\to\cont^\infty,\; f\mapsto f'
+		\dd x:\cont^\infty \to \cont^\infty,\; f \mapsto f'
 	\]
 	是线性映射，而$\e^{\lambda x}$是其特征函数。
 \end{example}
 \begin{theorem}{线性映射与基}{linear mapping and base}
-	给定两个线性空间$V,W$，$\{v_1,\ldots,v_n\}$是$V$中的一组基，$\{w_1,\ldots,w_n\}$是$W$中任意$n$个元素，则存在唯一的线性映射$T:V\to W$使得
-	\[
-		T(v_1)=w_1,\enspace\ldots,\enspace T(v_n)=w_n.
-	\]
+	给定两个线性空间$V,W$，$\{v_1,\ldots,v_n\}$是$V$中的一组基，$\{w_1,\ldots,w_n\}$是$W$中任意$n$个元素，则存在唯一的线性映射$T:V \to W$使得
+	\begin{equation}\label{eq:la-linear-extension}
+		T(v_1) = w_1,\enspace\ldots,\enspace T(v_n) = w_n.
+	\end{equation}
 \end{theorem}
 \begin{proof}
-	(存在性) $\forall v\in V$均可唯一写成基的线性组合$v=c_1v_1+\cdots+c_nv_n$，定义映射$T:V\to W$
+	(存在性) $\forall v \in V$均可唯一写成基的线性组合$v = c_1v_1 + \cdots + c_nv_n$，定义映射$T:V \to W$
 	\[
-		T(v)=c_1w_1+\cdots+c_nw_n,
+		T(v) = c_1w_1 + \cdots + c_nw_n,
 	\]
-	下面证明$T$是线性映射，再任取$u=d_1v_1+\cdots+d_nv_n\in V$
+	下面证明$T$是线性映射，再任取$u = d_1v_1 + \cdots + d_nv_n \in V$
 	\begin{align*}
-		T(v+u)&=T\bigp{(c_1+d_1)v_1+\cdots+(c_n+d_n)v_n}\\
-		&=(c_1+d_1)w_1+\cdots+(c_n+d_n)w_n=T(v)+T(u);\\
-		T(cv)&=T(cc_1v_1+\cdots+cc_nv_n)=cc_1w_1+\cdots+cc_nw_n=cT(v).
+		T(v + u) &= T\bigp{(c_1 + d_1)v_1 + \cdots + (c_n + d_n)v_n}\\
+		&= (c_1 + d_1)w_1 + \cdots + (c_n + d_n)w_n = T(v) + T(u);\\
+		T(cv) &= T(cc_1v_1 + \cdots + cc_nv_n) = cc_1w_1 + \cdots + cc_nw_n = cT(v).
 	\end{align*}
-	(唯一性) 假设存在另一个线性映射$F:V\to W$满足
+	(唯一性) 假设存在另一个线性映射$F:V \to W$满足
 	\[
-		F(v_1)=w_1,\enspace\ldots,\enspace F(v_n)=w_n,
+		F(v_1) = w_1,\enspace\ldots,\enspace F(v_n) = w_n,
 	\]
 	则 
 	\[
-		F(v)=c_1F(v_1)+\cdots+c_nF(v_n)=c_1w_1+\cdots+c_nw_n=T(v).
+		F(v) = c_1F(v_1) + \cdots + c_nF(v_n) = c_1w_1 + \cdots + c_nw_n = T(v).
 	\]
 	综上，存在唯一的线性映射。
 \end{proof}
@@ -134,37 +134,37 @@
 \end{remark}
 
 \begin{example}{矩阵定义线性映射}{linear mapping defined by matrix}
-	$m\times n$的矩阵$A$可定义一个线性映射：
+	$m \times n$的矩阵$A$可定义一个线性映射：
 	\begin{equation}
-		L_A:\FF^n\to\FF^m,\enspace x\mapsto Ax.
+		L_A:\FF^n \to \FF^m,\enspace x \mapsto Ax.
 	\end{equation}
 \end{example}
 \begin{theorem}{线性映射和矩阵}{linear mapping and matrix}
-	设$L:\FF^n\to\FF^m$是线性映射，则存在唯一的矩阵$A$使得$L=L_A$。
+	设$L:\FF^n \to \FF^m$是线性映射，则存在唯一的矩阵$A$使得$L = L_A$。
 \end{theorem}
 \begin{proof}
-	设$\{e_1,\ldots,e_n\}$是$\FF^n$的标准基，$\{f_1,\ldots,f_m\}$是$\FF^m$的标准基，$\forall x\in\FF^n$，有$x=x_1e_1+\cdots+x_ne_n$，则
+	设$\{e_1,\ldots,e_n\}$是$\FF^n$的标准基，$\{f_1,\ldots,f_m\}$是$\FF^m$的标准基，$\forall x \in \FF^n$，有$x = x_1e_1 + \cdots + x_ne_n$，则
 	\[
-		L(x)=x_1L(e_1)+\cdots+x_nL(e_n).
+		L(x) = x_1L(e_1) + \cdots + x_nL(e_n).
 	\]
-	$L(e_i)\in\FF^m$，故可写成基的线性组合
+	$L(e_i) \in \FF^m$，故可写成基的线性组合
 	\[
-		L(e_i)=a_{1i}f_1+\cdots+a_{mi}f_m.
+		L(e_i) = a_{1i}f_1 + \cdots + a_{mi}f_m.
 	\]
 	故
 	\begin{align*}
-		L(x)&=x_1(a_{11}f_1+\cdots+a_{m1}f_m)+\cdots+x_n(a_{1n}f_1+\cdots+a_{mn}f_m)\\
-		&=(a_{11}x_1+\cdots+a_{1n}x_n)f_1+\cdots+(a_{m1}x_1+\cdots+a_{mn}x_n)f_m\\
-		&=\begin{bmatrix}
-			a_{11}x_1+\cdots+a_{1n}x_n\\\vdots\\
-			a_{m1}x_1+\cdots+a_{mn}x_n
-		\end{bmatrix}=\begin{bmatrix}
+		L(x) &= x_1(a_{11}f_1 + \cdots + a_{m1}f_m) + \cdots + x_n(a_{1n}f_1 + \cdots + a_{mn}f_m)\\
+		&= (a_{11}x_1 + \cdots + a_{1n}x_n)f_1 + \cdots + (a_{m1}x_1 + \cdots + a_{mn}x_n)f_m\\
+		&= \begin{bmatrix}
+			a_{11}x_1 + \cdots + a_{1n}x_n\\\vdots\\
+			a_{m1}x_1 + \cdots + a_{mn}x_n
+		\end{bmatrix} = \begin{bmatrix}
 			a_{11}&\cdots&a_{1n}\\
 			\vdots&\ddots&\vdots\\
 			a_{m1}&\cdots&a_{mn}
 		\end{bmatrix}\begin{bmatrix}
 			x_1\\\vdots\\x_n
-		\end{bmatrix}=:Ax.
+		\end{bmatrix} =: Ax.
 	\end{align*}
 	便唯一确定了一个矩阵$A$。
 \end{proof}
@@ -176,154 +176,155 @@
 \section{线性映射的性质}
 利用线性映射和矩阵的对应，线性映射的加法和数乘等价于矩阵的加法和数乘，零映射对应零矩阵，这些都是平凡的。
 
-给出加法、数乘、零映射的定义后，所有$V\to W$的线性映射的集合$\{T\}$便构成一个线性空间，可验证满足8条公理。
+给出加法、数乘、零映射的定义后，所有$V \to W$的线性映射的集合$\{T\}$便构成一个线性空间，可验证满足8条公理。
 \begin{definition}{线性映射的核}{kernel}
-	线性映射$F:V\to W$的核(kernel)是所有满足$F(v)=0$的向量$v$的集合
-	\[
-		\ker(F)\equiv\set{v\in V}{F(v)=0}.
-	\]
+	线性映射$F:V \to W$的核(kernel)是所有满足$F(v) = 0$的向量$v$的集合
+	\begin{equation}\label{eq:la-kernel-definition}
+		\ker(F) \equiv \set{v \in V}{F(v) = 0}.
+	\end{equation}
 \end{definition}
 \begin{corollary}
-	$\ker(F)$是$V$的线性子空间。$\ker (L_A)=\nullsp(A)$。
+	$\ker(F)$是$V$的线性子空间。$\ker (L_A) = \nullsp(A)$。
 \end{corollary}
 \begin{theorem}{核和单射}{kernel and injection}
 	\begin{center}
-		$\ker(F)=\{0\}\iff F$是单射。
+		$\ker(F) = \{0\} \iff F$是单射。
 	\end{center}
 \end{theorem}
 \begin{proof}
-	(矩阵版本)对应矩阵零空间为$\{0\}$，$Av=b$若有解则解必唯一。
+	(矩阵版本)对应矩阵零空间为$\{0\}$，$Av = b$若有解则解必唯一。
 	
-	(抽象版本)若$u,v\in V$满足$F(u)=F(v)$，则$F(u-v)=F(u)-F(v)=0$，从而$u-v=0.$
+	(抽象版本)若$u,v \in V$满足$F(u) = F(v)$，则$F(u - v) = F(u) - F(v) = 0$，从而$u - v = 0.$
 \end{proof}
 \begin{theorem}{核的性质}{characterist of kernel}
-	若线性映射$F:V\to W$的核$\ker(F)=\{0\}$，则对于线性无关的一组$v_1,\ldots,v_n\in V$，有$F(v_1),\ldots,F(v_n)$线性无关。
+	若线性映射$F:V \to W$的核$\ker(F) = \{0\}$，则对于线性无关的一组$v_1,\ldots,v_n \in V$，有$F(v_1),\ldots,F(v_n)$线性无关。
 \end{theorem}
 \begin{proof}
 	(矩阵版本)对应矩阵零空间为$\{0\}$，则列满秩，列之间线性无关。
 	
-	(抽象版本)假设$x_1F(v_1)+\cdots+x_nF(v_n)=0$，则
+	(抽象版本)假设$x_1F(v_1) + \cdots + x_nF(v_n) = 0$，则
 	\[
-		F(x_1v_1+\cdots+x_nv_n)=0\implies x_1v_1+\cdots+x_nv_n=0.
+		F(x_1v_1 + \cdots + x_nv_n) = 0 \implies x_1v_1 + \cdots + x_nv_n = 0.
 	\]
 	$v_1,\ldots,v_n$线性无关，故只有零解。
 \end{proof}
 \begin{definition}{线性映射的像}{image}
-	线性映射$F:V\to W$的像(image)是所有$F(v)$的集合
-	\[
-		\im(F)\equiv\set{F(v)}{v\in V}.
-	\]
+	线性映射$F:V \to W$的像(image)是所有$F(v)$的集合
+	\begin{equation}\label{eq:la-image-definition}
+		\im(F) \equiv \set{F(v)}{v \in V}.
+	\end{equation}
 \end{definition}
 \begin{corollary}
-	$\im(F)$是$W$的线性子空间。$\im(L_A)=\colsp(A)$。
+	$\im(F)$是$W$的线性子空间。$\im(L_A) = \colsp(A)$。
 \end{corollary}
 \begin{theorem}{核和像的关系}{kernel and image}
-	$V$是有限维线性空间，$L:V\to W$是线性映射
+	$V$是有限维线性空间，$L:V \to W$是线性映射
 	\begin{equation}
-		\dim(V)=\dim\bigp{\ker(L)}+\dim\bigp{\im(L)}.
+		\dim(V) = \dim\bigp{\ker(L)} + \dim\bigp{\im(L)}.
 	\end{equation}
 \end{theorem}
 \begin{proof}
 	(矩阵版本)
 	\[
-		\dim(V)=\dim\bigp{\nullsp(A)}+\dim\bigp{\colsp(A\transp)}=\dim\bigp{\nullsp(A)}+\dim\bigp{\colsp(A)}.
+		\dim(V) = \dim\bigp{\nullsp(A)} + \dim\bigp{\colsp(A\transp)} = \dim\bigp{\nullsp(A)} + \dim\bigp{\colsp(A)}.
 	\]
-    (抽象版本) 取$\ker L$的一组基$k_1,\ldots,k_r$，扩张为$V$的基$k_1,\ldots,k_r,v_1,\ldots,v_s$。所有像由$Lv_1,\ldots,Lv_s$张成；若$\sum a_iLv_i=0$，则$\sum a_iv_i\in\ker L$，由扩张后基的线性无关性得到$a_i=0$。所以$\dim\im L=s$且$\dim V=r+s$。
+    (抽象版本) 取$\ker L$的一组基$k_1,\ldots,k_r$，扩张为$V$的基$k_1,\ldots,k_r,v_1,\ldots,v_s$。所有像由$Lv_1,\ldots,Lv_s$张成；若$\textstyle\sum_i a_iLv_i = 0$，则$\textstyle\sum_i a_iv_i \in \ker L$，由扩张后基的线性无关性得到$a_i = 0$。所以$\dim\im L = s$且$\dim V = r + s$。
 \end{proof}
 \begin{theorem}{核、像和双射}{kernel, image and bijection}
-	线性映射$L:V\to W$，且$\dim(V)=\dim(W)<\infty$，则
-	\[
-		\ker(L)=\{0\}\iff\im(L)=W\iff L~\text{是双射.}
-	\]
+	线性映射$L:V \to W$，且$\dim(V) = \dim(W) < \infty$，则
+	\begin{equation}\label{eq:la-bijection-kernel-image}
+		\ker(L) = \{0\} \iff \im(L) = W \iff L~\text{是双射.}
+	\end{equation}
 \end{theorem}
 \begin{proof}
-    由秩--零化度公式，$\ker L=\{0\}$当且仅当$\dim\im L=\dim V=\dim W$，而有限维子空间与母空间同维时相等。再结合单射、满射的定义即证。
+    由秩--零化度公式，$\ker L = \{0\}$当且仅当$\dim\im L = \dim V = \dim W$，而有限维子空间与母空间同维时相等。再结合单射、满射的定义即证。
 \end{proof}
 \section{基的变换}
 \begin{definition}{坐标向量}{coordinate vector}
-	设$B=\{v_1,\ldots,v_n\}$是线性空间$V$上的一组基，$V$中的向量$v\in V$可唯一写成$v=x_1v_1+\cdots+x_nv_n$，其在基$B$下的坐标向量(coordinate vector)为
-	\[
-		x_B(v)=\begin{bmatrix}
+	设$B = \{v_1,\ldots,v_n\}$是线性空间$V$上的一组基，$V$中的向量$v \in V$可唯一写成$v = x_1v_1 + \cdots + x_nv_n$，其在基$B$下的坐标向量(coordinate vector)为
+	\begin{equation}\label{eq:la-coordinate-vector}
+		x_B(v) = \begin{bmatrix}
 			x_1\\\vdots\\x_n
 		\end{bmatrix}.
-	\]
-	显然$x_B:V\to\FF^n$是线性映射，且是一个双射。
+	\end{equation}
+	显然$x_B:V \to \FF^n$是线性映射，且是一个双射。
 \end{definition}
-我们可以选取$V$上的另一组基$B'=\{u_1,\ldots,u_n\}$，基变换矩阵：
+我们可以选取$V$上的另一组基$B' = \{u_1,\ldots,u_n\}$，基变换矩阵：
+\begin{equation}\label{eq:la-basis-change}
+	(u_1,\ldots,u_n) = (v_1,\ldots,v_n)M,
+\end{equation}
+$v$也可以写成$v = y_1u_1 + \cdots + y_nu_n$，由于向量在基的变换下保持不变，故
 \[
-	(u_1,\ldots,u_n)=(v_1,\ldots,v_n)M,\tag{$\ast$}
+	v = (v_1,\ldots,v_n)(x_1,\ldots,x_n)\transp = (u_1,\ldots,u_n)(y_1,\ldots,y_n)\transp.
 \]
-$v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保持不变，故
-\[
-	v=(v_1,\ldots,v_n)(x_1,\ldots,x_n)\transp=(u_1,\ldots,u_n)(y_1,\ldots,y_n)\transp.
-\]
-可以推出
-\[
+代入基变换式\eqref{eq:la-basis-change}，可得
+\begin{equation}\label{eq:la-inverse-coordinate-change}
 	\begin{bmatrix}
 		y_1\\\vdots\\y_n
-	\end{bmatrix}=M\inv\begin{bmatrix}
+	\end{bmatrix} = M\inv\begin{bmatrix}
 		x_1\\\vdots\\x_n
-	\end{bmatrix}.\tag{$\ast\ast$}
-\]
+	\end{bmatrix}.
+\end{equation}
 \begin{theorem}{线性映射的表示矩阵}{base transfomation matrix}
-	$L:V\to W$是一个线性映射，$B=\{v_1,\ldots,v_n\}$是$V$上的一组基，$B'=\{w_1,\ldots,w_m\}$是$W$上的一组基。则存在唯一的$m\times n$矩阵$M_{B'}^B(L)$，使得$\forall v\in V$，
-	\[
-		x_{B'}\bigp{L(v)}=M_{B'}^B(L)x_B(v).
-	\]
+	$L:V \to W$是一个线性映射，$B = \{v_1,\ldots,v_n\}$是$V$上的一组基，$B' = \{w_1,\ldots,w_m\}$是$W$上的一组基。则存在唯一的$m \times n$矩阵$M_{B'}^B(L)$，使得$\forall v \in V$，
+	\begin{equation}\label{eq:la-matrix-representation}
+		x_{B'}\bigp{L(v)} = M_{B'}^B(L)x_B(v).
+	\end{equation}
 \end{theorem}
 \begin{proof}
-	$\forall v\in V$，有
+	$\forall v \in V$，有
+	\begin{align*}
+		v &= x_1v_1 + \cdots + x_nv_n,\\
+		L(v) &= x_1L(v_1) + \cdots + x_nL(v_n).
+	\end{align*}
+	$L(v_i) \in W$，所以
 	\[
-		v=x_1v_1+\cdots+x_nv_n,\quad L(v)=x_1L(v_1)+\cdots+x_nL(v_n).
+		L(v_i) = m_{1i}w_1 + \cdots + m_{mi}w_m.
 	\]
-	$L(v_i)\in W$，所以
+	写成矩阵的形式即$\bigp{L(v_1),\ldots,L(v_n)} = (w_1,\ldots,w_m)M$，从而
 	\[
-		L(v_i)=m_{1i}w_1+\cdots+m_{mi}w_m.
-	\]
-	写成矩阵的形式即$\bigp{L(v_1),\ldots,L(v_n)}=(w_1,\ldots,w_m)M$，从而
-	\[
-		L(v)=\bigp{L(v_1),\ldots,L(v_n)}(x_1,\ldots,x_n)\transp=(w_1,\ldots,w_m)M(x_1,\ldots,x_n)\transp.
+		L(v) = \bigp{L(v_1),\ldots,L(v_n)}(x_1,\ldots,x_n)\transp = (w_1,\ldots,w_m)M(x_1,\ldots,x_n)\transp.
 	\]
 	故$L(v)$在$B'$上的坐标为$M(x_1,\ldots,x_n)\transp$。
 \end{proof}
 
 \begin{corollary}
-	$M_{B'}^B(L)$是所有线性变换$L:V\to W$到$\dim(W)\times\dim(V)$矩阵的线性映射，并且是一个双射。
+	$M_{B'}^B(L)$是所有线性变换$L:V \to W$到$\dim(W) \times \dim(V)$矩阵的线性映射，并且是一个双射。
 \end{corollary}
 
 \begin{corollary}
-	特别地，当$L\equiv\id:V\to V$时， 
-	\[
-		x_{B'}(v)=M_{B'}^B(\id)x_B(v).
-	\]
+	特别地，当$L \equiv \id:V \to V$时，
+	\begin{equation}\label{eq:la-change-of-coordinate-matrix}
+		x_{B'}(v) = M_{B'}^B(\id)x_B(v).
+	\end{equation}
 \end{corollary}
 
 \begin{theorem}{线性变换的复合与矩阵乘法}{linear transfomation composition with matrix multiplication}
-	线性映射$L_1:U\to V,\enspace L_2:V\to W$，$B,B',B''$分别是$U,V,W$上的一组基，则
-	\[
-		M_{B''}^B(L_2\circ L_1)=M_{B''}^{B'}(L_2)M_{B'}^B(L_1).
-	\]
+	线性映射$L_1:U \to V,\enspace L_2:V \to W$，$B,B',B''$分别是$U,V,W$上的一组基，则
+	\begin{equation}\label{eq:la-composition-matrix}
+		M_{B''}^B(L_2 \circ L_1) = M_{B''}^{B'}(L_2)M_{B'}^B(L_1).
+	\end{equation}
 \end{theorem}
 \noindent 线性映射的复合等价于对应矩阵的乘法，由此可自然得到矩阵乘法的规则。
 \begin{theorem}{$M_{B'}^B(\id)$可逆}{MB'Bid inversible}
-	\[
-		M_{B'}^B(\id)=M_B^{B'}(\id)\inv.
-	\]
+	\begin{equation}\label{eq:la-inverse-transition-matrix}
+		M_{B'}^B(\id) = M_B^{B'}(\id)\inv.
+	\end{equation}
 \end{theorem}
 \begin{theorem}{}{}
-	线性映射$L:V\to W$，$B,B'$是$V$上的两组基，$C,C'$是$W$上的两组基，则
-	\[
-		M_{C'}^{B'}(L)=M_{C'}^C(\id)M_C^B(L)M_B^{B'}(\id)=M_C^{C'}(\id)\inv M_C^B(L)M_B^{B'}(\id)
-	\]
+	线性映射$L:V \to W$，$B,B'$是$V$上的两组基，$C,C'$是$W$上的两组基，则
+	\begin{equation}\label{eq:la-transformation-of-matrix}
+		M_{C'}^{B'}(L) = M_{C'}^C(\id)M_C^B(L)M_B^{B'}(\id) = M_C^{C'}(\id)\inv M_C^B(L)M_B^{B'}(\id)
+	\end{equation}
 \end{theorem}
 \begin{proof}
-	利用$L=\id_W\circ L\circ\id_V$。
+	利用$L = \id_W \circ L \circ \id_V$。
 \end{proof}
 \begin{corollary}
-	$L:V\to V$，$B,B'$是$V$上的两组基，则
-	\[
-		M_{B'}^{B'}(L)=M_B^{B'}(\id)\inv M_B^B(L)M_B^{B'}(\id).
-	\]
+	$L:V \to V$，$B,B'$是$V$上的两组基，则
+	\begin{equation}\label{eq:la-similarity-under-basis-change}
+		M_{B'}^{B'}(L) = M_B^{B'}(\id)\inv M_B^B(L)M_B^{B'}(\id).
+	\end{equation}
 	因此相似变换描述同一个线性算符在不同基下的表示；若能选出一组特征向量基，其表示矩阵就是对角矩阵。
 \end{corollary}
 
@@ -331,232 +332,246 @@ $v$也可以写成$v=y_1u_1+\cdots+y_nu_n$，由于向量在基的变换下保�
 
 如何从已知的线性空间构造新的线性空间？
 \begin{definition}{对偶空间}{dual space}
-	有限维线性空间$V$的对偶空间(dual space) $V^\ast$是所有线性映射$L:V\to\FF$构成的线性空间。
+	有限维线性空间$V$的对偶空间(dual space) $V^\ast$是所有线性映射$L:V \to \FF$构成的线性空间。
 \end{definition}
 \begin{theorem}{对偶空间的基}{dual space base}
 	通过$V$的一组基$\{v_1,\ldots,v_n\}$可构造$V^\ast$的基$\{v^{\ast 1},\ldots,v^{\ast n}\}$，满足
 	\begin{equation}
-		v^{\ast i}(v_j)=\delta^i{}_j=
+		v^{\ast i}(v_j) = \delta^i{}_j =
 		\begin{cases}
-			1,&i=j\\0,&i\neq j
+			1,&i = j\\0,&i \neq j
 		\end{cases}
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	(完备性) $\forall L\in V^\ast$，由\thmref{thm:linear mapping and base}，$L$可由其在基上的取值$\{L(v_1),\ldots,L(v_n)\}$唯一决定，又$L(v_1)v^{\ast 1}+\cdots+L(v_n)v^{\ast n}$和$L$在基$v_1,\ldots,v_n$上取到了相同的值，故二者相等：
-	\[
-		L=L(v_1)v^{\ast 1}+\cdots+L(v_n)v^{\ast n}.
-	\]
+	(完备性) $\forall L \in V^\ast$，由\thmref{thm:linear mapping and base}，$L$可由其在基上的取值$\{L(v_1),\ldots,L(v_n)\}$唯一决定，又$L(v_1)v^{\ast 1} + \cdots + L(v_n)v^{\ast n}$和$L$在基$v_1,\ldots,v_n$上取到了相同的值，故二者相等：
+	\begin{equation}\label{eq:la-dual-basis-expansion}
+		L = L(v_1)v^{\ast 1} + \cdots + L(v_n)v^{\ast n}.
+	\end{equation}
 	即$L$可被写成$\{v^{\ast 1},\ldots,v^{\ast n}\}$的线性组合。
 
 	(线性无关)若基的线性组合是零映射
-	$x_1v^{\ast 1}+\cdots+x_nv^{\ast n}=O$，
-	则$O(v_i)=x_i=0$，即只有零解。
+	$x_1v^{\ast 1} + \cdots + x_nv^{\ast n} = O$，
+	则$O(v_i) = x_i = 0$，即只有零解。
 \end{proof}
 \begin{example}{Fourier变换}{Fourier transfomation}
 	Fourier变换
 	\[
-		\hat f(k)=\int f(x)\e^{\i k\cdot x}\d^3x,
+		\hat f(k) = \int f(x)\e^{\i k\cdot x}\d^3x,
 	\]
-	其中可取$f\in L^1(\RR^3)$以保证积分存在。波矢$k$自然属于平移向量空间的对偶空间，指数中的$k\cdot x$是配对$k(x)$；选定Euclid内积后，才常将$k$也写作三维向量。Fourier变换是函数空间之间的线性映射，不是把单个空间向量映射成一个线性泛函。
+	其中可取$f \in L^1(\RR^3)$以保证积分存在。波矢$k$自然属于平移向量空间的对偶空间，指数中的$k \cdot x$是配对$k(x)$；选定Euclid内积后，才常将$k$也写作三维向量。Fourier变换是函数空间之间的线性映射，不是把单个空间向量映射成一个线性泛函。
 \end{example}
 \begin{example}{对偶的对偶}{double dual space}
-	依定义，对偶空间$V^\ast$的对偶空间$V^{\ast\ast}$是所有线性映射$F:V^\ast\to\RR$构成的线性空间。%我们可以构造一组基$\{v^{\ast\ast}_1,\ldots,v^{\ast\ast}_n\}$，满足
+	依定义，对偶空间$V^\ast$的对偶空间$V^{\ast\ast}$是所有线性映射$F:V^\ast \to \RR$构成的线性空间。%我们可以构造一组基$\{v^{\ast\ast}_1,\ldots,v^{\ast\ast}_n\}$，满足
 	%v^{\ast\ast}_i(v^{\ast j})=\delta_i{}^j.
-	$\forall u\in V$，可定义映射$u^{\ast\ast}\in V^{\ast\ast}$，使得$\forall L\in V^\ast$
+	$\forall u \in V$，可定义映射$u^{\ast\ast} \in V^{\ast\ast}$，使得$\forall L \in V^\ast$
 	\begin{equation}
-		u^{\ast\ast}(L)=L(u).
+		u^{\ast\ast}(L) = L(u).
 	\end{equation}
-	在有限维条件下，这一映射是双射，因此$V^{\ast\ast}$和$V$是自然同构的(natural isomorphism)：$V^{\ast\ast}\cong V$。这是范畴论(category theory)的概念，粗糙地说就是这种同构关系不依赖于基的选取，而$V$和$V^\ast$的同构是依赖于基的。因此我们可以将$V^{\ast\ast}$和$V$视为同一个线性空间，
+	在有限维条件下，这一映射是双射，因此$V^{\ast\ast}$和$V$是自然同构的(natural isomorphism)：$V^{\ast\ast} \cong V$。这是范畴论(category theory)的概念，粗糙地说就是这种同构关系不依赖于基的选取，而$V$和$V^\ast$的同构是依赖于基的。因此我们可以将$V^{\ast\ast}$和$V$视为同一个线性空间，
 	由此有限维情形中的高阶对偶可自然地交替识别为$V$和$V^\ast$；无限维空间需要另行区分代数对偶与连续对偶，不能直接沿用此结论。
 \end{example}
 \begin{theorem}{对偶空间的基变换}{}
 	给定线性空间$V$及其中的两组基$\{v_1,\ldots,v_n\}$和$\{u_1,\ldots,u_n\}$，我们可以给出对偶空间$V^\ast$的基$\{v^{\ast 1},\ldots,v^{\ast n}\}$和$\{u^{\ast 1},\ldots,u^{\ast n}\}$，满足
 	\[
-		v^{\ast i}(v_j)=\delta^i{}_j,\quad u^{\ast i}(u_j)=\delta^i{}_j,
+		v^{\ast i}(v_j) = \delta^i{}_j,\quad u^{\ast i}(u_j) = \delta^i{}_j,
 	\]
-	若$(v_1,\ldots,v_n)=(u_1,\ldots,u_n)A$，则$(v^{\ast 1},\ldots,v^{\ast n})\transp=A\inv(u^{\ast 1},\ldots,u^{\ast n})\transp$
+	若$(v_1,\ldots,v_n) = (u_1,\ldots,u_n)A$，则$(v^{\ast 1},\ldots,v^{\ast n})\transp = A\inv(u^{\ast 1},\ldots,u^{\ast n})\transp$
 \end{theorem}
 \begin{proof}
-	若$(v^{\ast 1},\ldots,v^{\ast n})\transp=B(u^{\ast 1},\ldots,u^{\ast n})\transp$，即
-	\[
-		v_i=\sum_{j=1}^nu_jA^j{}_i,\quad v^{\ast i}=\sum_{j=1}^nB^i{}_ju^{\ast j}.
-	\]
+	若$(v^{\ast 1},\ldots,v^{\ast n})\transp = B(u^{\ast 1},\ldots,u^{\ast n})\transp$，即
+	\begin{align*}
+		v_i &= \sum_{j=1}^nu_jA^j{}_i,\\
+		v^{\ast i} &= \sum_{j=1}^nB^i{}_ju^{\ast j}.
+	\end{align*}
 	则
 	\begin{align*}
-		v^{\ast i}(v_j)&=\sum_{k=1}^nB^i{}_ku^{\ast k}\biggp{\sum_{\ell=1}^n u_\ell A^\ell{}_j}=\sum_{k,\ell}B^i{}_kA^\ell{}_ju^{\ast k}(u_\ell)\\
-		&=\sum_{k,\ell}B^i{}_kA^\ell{}_j\delta^k{}_\ell=\sum_{k=1}^nB^i{}_kA^k{}_j=\delta^i{}_j.
+		v^{\ast i}(v_j) &= \sum_{k=1}^nB^i{}_ku^{\ast k}\biggp{\sum_{\ell=1}^n u_\ell A^\ell{}_j} = \sum_{k,\ell}B^i{}_kA^\ell{}_ju^{\ast k}(u_\ell)\\
+		&= \sum_{k,\ell}B^i{}_kA^\ell{}_j\delta^k{}_\ell = \sum_{k=1}^nB^i{}_kA^k{}_j = \delta^i{}_j.
 	\end{align*}
-	故$B=A\inv$。
+	故$B = A\inv$。
 \end{proof}
 \section{直和、直积}
 \begin{definition}{线性空间的和}{sum of linear space}
-	线性空间$U$的两个子空间$V,W$的和(sum) $V+W$定义为所有$v+w,v\in V,w\in W$的集合：
+	线性空间$U$的两个子空间$V,W$的和(sum) $V + W$定义为所有$v + w,v \in V,w \in W$的集合：
 	\begin{equation}
-		V+W\equiv\set{v+w}{v\in V,w\in W}.
+		V + W \equiv \set{v + w}{v \in V,w \in W}.
 	\end{equation}
 \end{definition}
-显然，$V+W$也是$U$的子空间。
+显然，$V + W$也是$U$的子空间。
 \begin{definition}{线性空间的直和}{direct sum of linear space}
-	线性空间$U$是$V$和$W$的直和(direct sum) $U=V\oplus W$，若$\forall u\in U$，存在唯一的$v\in V,w\in W$使得$u=v+w$。
+	线性空间$U$是$V$和$W$的直和(direct sum) $U = V \oplus W$，若$\forall u \in U$，存在唯一的$v \in V,w \in W$使得$u = v + w$。
 \end{definition}
 \begin{theorem}{和与直和}{sum and direct sum}
-	若$U=V+W$且$V\cap W=\{0\}$，则$U=V\oplus W$。
+	若$U = V + W$且$V \cap W = \{0\}$，则$U = V \oplus W$。
 \end{theorem}
 \begin{proof}
-	假设$u\in U$可以写成$u=v+w=v'+w'$，则$v-v'=w'-w$，
+	假设$u \in U$可以写成$u = v + w = v' + w'$，则$v - v' = w' - w$，
 	
-	又$v-v'\in V,\enspace w'-w\in W$且$V\cap W=\{0\}$，所以$v-v'=w-w'=0$。故分解是唯一的。
+	又$v - v' \in V,\enspace w' - w \in W$且$V \cap W = \{0\}$，所以$v - v' = w - w' = 0$。故分解是唯一的。
 \end{proof}
 \begin{theorem}{直和的存在}{exist of direct sum}
-	$U$是一个有限维线性空间，$V$是$U$的子空间，则存在$U$的子空间$W$使得$U=V\oplus W.$
+	$U$是一个有限维线性空间，$V$是$U$的子空间，则存在$U$的子空间$W$使得$U = V \oplus W.$
 \end{theorem}
 \begin{proof}
-	取$V$的一组基$\{v_1,\ldots,v_r\}$，可将其扩张成$U$的一组基$\{v_1,\ldots,v_r,$\ $w_1,\ldots,w_m\}$，取$W=\Span(w_1,\ldots,w_m)$即可。
+	取$V$的一组基$\{v_1,\ldots,v_r\}$，可将其扩张成$U$的一组基$\{v_1,\ldots,v_r,$\ $w_1,\ldots,w_m\}$，取$W = \Span(w_1,\ldots,w_m)$即可。
 \end{proof}
 \begin{corollary}
 	\begin{equation}
-		\dim(V\oplus W)=\dim(V)+\dim(W).
+		\dim(V \oplus W) = \dim(V) + \dim(W).
 	\end{equation}
 \end{corollary}
 \begin{definition}{线性空间的直积}{direct product}
-	两个线性空间$V,W$的直积(direct product) $V\times W$是所有形如$(v,w),v\in V,w\in W$的元素的集合：
+	两个线性空间$V,W$的直积(direct product) $V \times W$是所有形如$(v,w),v \in V,w \in W$的元素的集合：
 	\begin{equation}
-		V\times W\equiv\set{(v,w)}{v\in V,w\in W}.
+		V \times W \equiv \set{(v,w)}{v \in V,w \in W}.
 	\end{equation}
 \end{definition}
 \begin{theorem}{直积的维度}{}
-	$V\times W$是一个线性空间。且
+	$V \times W$是一个线性空间。且
 	\begin{equation}
-		\dim(V\times W)=\dim(V)+\dim(W).
+		\dim(V \times W) = \dim(V) + \dim(W).
 	\end{equation}
 \end{theorem}
 \section{张量}
 \begin{definition}{多重线性映射}{multiple linear mapping}
-	映射$L:V_1\times\cdots\times V_r\to W$是一个多重线性映射(multiple linear mapping)，若其对于每一个变量都是线性的：
-	\[
-		L(\ldots,au+bw,\ldots)=aL(\ldots,u,\ldots)+bL(\ldots,w,\ldots).
-	\]
+	映射$L:V_1 \times \cdots \times V_r \to W$是一个多重线性映射(multiple linear mapping)，若其对于每一个变量都是线性的：
+	\begin{equation}\label{eq:la-multilinearity}
+		L(\ldots,au + bw,\ldots) = aL(\ldots,u,\ldots) + bL(\ldots,w,\ldots).
+	\end{equation}
 \end{definition}
-\begin{definition}{张量空间$V^\ast\otimes V^\ast$}{tensor space V*oxV*}
-	考虑所有二重线性函数$L:V\times V\to\RR$的集合，我们可以在这个集合上定义加法和数乘：
+\begin{definition}{张量空间$V^\ast \otimes V^\ast$}{tensor space V*oxV*}
+	考虑所有二重线性函数$L:V \times V \to \RR$的集合，我们可以在这个集合上定义加法和数乘：
 	\begin{compactitem}
-		\item 加法：$(L_1+L_2)(u,v)=L_1(u,v)+L_2(u,v);$
-		\item 数乘：$(cL)(u,v)=cL(u,v);$
-		\item 零元：$O(u,v)\equiv 0.$
+		\item 加法：$(L_1 + L_2)(u,v) = L_1(u,v) + L_2(u,v);$
+		\item 数乘：$(cL)(u,v) = cL(u,v);$
+		\item 零元：$O(u,v) \equiv 0.$
 	\end{compactitem}
-	因此这个集合构成一个线性空间$V^\ast\otimes V^\ast$，这是一个张量空间(tensor space)。
+	因此这个集合构成一个线性空间$V^\ast \otimes V^\ast$，这是一个张量空间(tensor space)。
 	其中的每一个元素$L$是二阶协变张量(covariant tensor)，记作$(0,2)$张量。
 \end{definition}
-若$V$的一组基为$\{v_1,\ldots,v_n\}$，则$\forall L\in V^\ast\otimes V^\ast$ 
+若$V$的一组基为$\{v_1,\ldots,v_n\}$，则$\forall L \in V^\ast \otimes V^\ast$
 \[
-	L(u,v)=L\biggp{\sum_{i=1}^na_iv_i,\sum_{j=1}^nb_jv_j}=\sum_{i,j}a_ib_jL(v_i,v_j).
+	L(u,v) = L\biggp{\sum_{i=1}^na_iv_i,\sum_{j=1}^nb_jv_j} = \sum_{i,j}a_ib_jL(v_i,v_j).
 \]
 $n^2$个函数值$L(v_i,v_j)$便可唯一确定函数$L$。
 
-\begin{example}{$V^\ast\otimes V^\ast$的基}{}
-	给定对偶空间$V^\ast$的一组基$\{v^{\ast 1},\ldots,v^{\ast n}\}$满足$v^{\ast i}(v_j)=\delta^i{}_j$。继而定义张量$v^{\ast i}\otimes v^{\ast j}\in V^\ast\otimes V^\ast$满足
-	\[
-		v^{\ast i}\otimes v^{\ast j}(u,v)=v^{\ast i}(u)v^{\ast j}(v).
-	\]
+\begin{example}{$V^\ast \otimes V^\ast$的基}{}
+	给定对偶空间$V^\ast$的一组基$\{v^{\ast 1},\ldots,v^{\ast n}\}$满足$v^{\ast i}(v_j) = \delta^i{}_j$。继而定义张量$v^{\ast i} \otimes v^{\ast j} \in V^\ast \otimes V^\ast$满足
+	\begin{equation}\label{eq:la-tensor-product-of-functionals}
+		v^{\ast i} \otimes v^{\ast j}(u,v) = v^{\ast i}(u)v^{\ast j}(v).
+	\end{equation}
 	从而
 	\[
-		v^{\ast i}\otimes v^{\ast j}(v_k,v_\ell)=v^{\ast i}(v_k)v^{\ast j}(v_\ell)=\delta^i{}_k\delta^j{}_\ell.
+		v^{\ast i} \otimes v^{\ast j}(v_k,v_\ell) = v^{\ast i}(v_k)v^{\ast j}(v_\ell) = \delta^i{}_k\delta^j{}_\ell.
 	\]
-	$n^2$个张量$v^{\ast i}\otimes v^{\ast j}$构成$V^\ast\otimes V^\ast$的一组基。
+	$n^2$个张量$v^{\ast i} \otimes v^{\ast j}$构成$V^\ast \otimes V^\ast$的一组基。
 	\tcblower
-	张量$\forall w\in V^\ast\otimes V^\ast$，
-	\[
-		w=\sum_{i,j}w_{ij}v^{\ast i}\otimes v^{\ast j},\quad w_{ij}=w(v_i,v_j).
-	\]
+	张量$\forall w \in V^\ast \otimes V^\ast$，
+	\begin{subequations}\label{eq:la-covariant-tensor-components}
+		\begin{align}
+			w &= \sum_{i,j}w_{ij}v^{\ast i} \otimes v^{\ast j},\\
+			w_{ij} &= w(v_i,v_j).
+		\end{align}
+	\end{subequations}
 	给出$V,V^\ast$的另一组基$\{u_1,\ldots,u_n\},\{u^{\ast 1},\ldots,u^{\ast n}\}$，有变换
-	\begin{align*}
-		(u_1,\ldots,u_n)&=(v_1,\ldots,v_n)A,\\
-		(u^{\ast 1},\ldots,u^{\ast n})\transp&=A\inv(v^{\ast 1},\ldots,v^{\ast n})\transp.
-	\end{align*}
-	张量$w$在基$\{u^{\ast i}\otimes u^{\ast j}\}$下的分量
-	\[
-		w'_{ij}=w(u_i,u_j)=w\biggp{\sum_{k=1}^nv_kA^k{}_i,\sum_{\ell=1}^nv_\ell A^\ell{}_j}=\sum_{k,\ell}w_{k\ell}A^k{}_iA^\ell{}_j.
-	\]
+	\begin{subequations}\label{eq:la-dual-basis-change}
+		\begin{align}
+			(u_1,\ldots,u_n) &= (v_1,\ldots,v_n)A,\\
+			(u^{\ast 1},\ldots,u^{\ast n})\transp &= A\inv(v^{\ast 1},\ldots,v^{\ast n})\transp.
+		\end{align}
+	\end{subequations}
+	张量$w$在基$\{u^{\ast i} \otimes u^{\ast j}\}$下的分量
+	\begin{equation}\label{eq:la-covariant-component-change}
+		w'_{ij} = w(u_i,u_j) = w\biggp{\sum_{k=1}^nv_kA^k{}_i,\sum_{\ell=1}^nv_\ell A^\ell{}_j} = \sum_{k,\ell}w_{k\ell}A^k{}_iA^\ell{}_j.
+	\end{equation}
 	因此这也是协变(covariant)的含义：分量在坐标变换下同基的变换规律一致。
 \end{example}
 \begin{definition}{张量积}{tensor product}
-	$U,V$是两个线性空间，定义$u\in U,v\in V$的张量积(tensor product)是一个新的元素$u\otimes v$，且满足以下性质：
+	$U,V$是两个线性空间，定义$u \in U,v \in V$的张量积(tensor product)是一个新的元素$u \otimes v$，且满足以下性质：
 	\begin{compactitem}
-		\item 结合律（经自然同构识别）：$(u\otimes v)\otimes w=u\otimes(v\otimes w)\equiv u\otimes v\otimes w;$
-		\item 左分配律：$(u_1+u_2)\otimes v=u_1\otimes v+u_2\otimes v;$
-		\item 右分配律：$u\otimes(v_1+v_2)=u\otimes v_1+u\otimes v_2;$
-		\item 数乘：$(au)\otimes v=u\otimes(av)=a(u\otimes v).$
+		\item 结合律（经自然同构识别）：$(u \otimes v) \otimes w = u \otimes (v \otimes w) \equiv u \otimes v \otimes w;$
+		\item 左分配律：$(u_1 + u_2) \otimes v = u_1 \otimes v + u_2 \otimes v;$
+		\item 右分配律：$u \otimes (v_1 + v_2) = u \otimes v_1 + u \otimes v_2;$
+		\item 数乘：$(au) \otimes v = u \otimes (av) = a(u \otimes v).$
 	\end{compactitem}
 \end{definition}
 \begin{remark}
-	一般不把$u\otimes v$与$v\otimes u$直接视为相等：它们分别属于$U\otimes V$和$V\otimes U$。两空间之间有自然的交换同构$u\otimes v\mapsto v\otimes u$；当$U=V$且$u=v$等特殊情形，两式也可以相等。
+	一般不把$u \otimes v$与$v \otimes u$直接视为相等：它们分别属于$U \otimes V$和$V \otimes U$。两空间之间有自然的交换同构$u \otimes v \mapsto v \otimes u$；当$U = V$且$u = v$等特殊情形，两式也可以相等。
 \end{remark}
 \begin{definition}{线性空间的张量积}{linear space tensor product}
-	给定两个线性空间$U,V$和各自的一组基$\{u_1,\ldots,u_m\},\{v_1,\ldots,v_n\}$，可构造一个以$mn$个形式符号$u_i\otimes v_j$为基的线性空间（这些符号按定义线性无关），并按双线性将$u\otimes v$扩展到任意$u,v$：
+	给定两个线性空间$U,V$和各自的一组基$\{u_1,\ldots,u_m\},\{v_1,\ldots,v_n\}$，可构造一个以$mn$个形式符号$u_i \otimes v_j$为基的线性空间（这些符号按定义线性无关），并按双线性将$u \otimes v$扩展到任意$u,v$：
 	\begin{equation}
-		U\otimes V=\Span\set{u_i\otimes v_j}{1\leqslant i\leqslant m,1\leqslant j\leqslant n}
+		U \otimes V = \Span\set{u_i \otimes v_j}{1 \leqslant i \leqslant m,1 \leqslant j \leqslant n}
 	\end{equation}
 \end{definition}
 \begin{corollary}
 	由定义 
-	\[
-		\dim(U\otimes V)=\dim(U)\dim(V).
-	\]
+	\begin{equation}\label{eq:la-tensor-product-dimension}
+		\dim(U \otimes V) = \dim(U)\dim(V).
+	\end{equation}
 \end{corollary}
 \begin{example}{}{}
-	$\forall u\in U,v\in V$，$u=x_1u_1+\cdots+x_mu_m,\enspace v=y_1v_1+\cdots+y_nv_n$，则 
+	将$u \in U$和$v \in V$分别按各自的基展开，
+	\begin{align*}
+		u &= x_1u_1 + \cdots + x_mu_m,\\
+		v &= y_1v_1 + \cdots + y_nv_n.
+	\end{align*}
+	由双线性可得
 	\[
-		u\otimes v=\sum_{i=1}^m\sum_{j=1}^nx_iy_ju_i\otimes v_j\in U\otimes V.
+		u \otimes v = \sum_{i=1}^m\sum_{j=1}^nx_iy_ju_i \otimes v_j \in U \otimes V.
 	\]
-	但并不是所有$U\otimes V$的元素都能写成$u\otimes v$的形式。
+	但并不是所有$U \otimes V$的元素都能写成$u \otimes v$的形式。
 \end{example}
 \begin{theorem}{张量积的普遍性质}{universal property of tensor product}
-    任一双线性映射$B:U\times V\to W$都唯一对应一个线性映射$\widetilde B:U\otimes V\to W$，满足
-    \[
-        \widetilde B(u\otimes v)=B(u,v).
-    \]
+    任一双线性映射$B:U \times V \to W$都唯一对应一个线性映射$\widetilde B:U \otimes V \to W$，满足
+    \begin{equation}\label{eq:la-tensor-universal-property}
+        \widetilde B(u \otimes v) = B(u,v).
+    \end{equation}
 \end{theorem}
 \begin{proof}
-    在基上指定$\widetilde B(u_i\otimes v_j)=B(u_i,v_j)$并作线性扩张；由$B$的双线性可得上述等式。由于纯张量张成整个空间，映射唯一。不同基构造出的空间都满足这一性质，因而有保持纯张量的唯一同构，张量积不依赖所选基。
+    在基上指定$\widetilde B(u_i \otimes v_j) = B(u_i,v_j)$并作线性扩张；由$B$的双线性可得上述等式。由于纯张量张成整个空间，映射唯一。不同基构造出的空间都满足这一性质，因而有保持纯张量的唯一同构，张量积不依赖所选基。
 \end{proof}
 
-\begin{example}{张量空间$V\otimes V$}{}
-	$V\otimes V$是所有$V^\ast\times V^\ast\to\RR$的双线性函数构成的线性空间，%但我们也可以用张量积定义。
-	$\forall v\in V\otimes V$都可以写为
+\begin{example}{张量空间$V \otimes V$}{}
+	$V \otimes V$是所有$V^\ast \times V^\ast \to \RR$的双线性函数构成的线性空间，%但我们也可以用张量积定义。
+	$\forall v \in V \otimes V$都可以写为
 	\[
-		v=\sum_{i,j}v^{ij}v_i\otimes v_j.
+		v = \sum_{i,j}v^{ij}v_i \otimes v_j.
 	\]
 	称作二阶逆变张量(contravariant tensor)，记作$(2,0)$张量。
 	\tcblower
 	换基时，
-	\[
-		v^{k\ell}=\sum_{i,j}A^k{}_iA^\ell{}_jv'^{ij},\quad v'^{ij}=\sum_{k,\ell}(A\inv)^i{}_k(A\inv)^j{}_\ell v^{k\ell}.
-	\]
+	\begin{subequations}\label{eq:la-contravariant-component-change}
+		\begin{align}
+			v^{k\ell} &= \sum_{i,j}A^k{}_iA^\ell{}_jv'^{ij},\\
+			v'^{ij} &= \sum_{k,\ell}(A\inv)^i{}_k(A\inv)^j{}_\ell v^{k\ell}.
+		\end{align}
+	\end{subequations}
 	逆变(contravariant)的含义：换基时分量每个指标对应的变换矩阵是基的变换矩阵的逆矩阵。
 \end{example}
-\begin{example}{混合张量$V\otimes V^\ast$}{}
-	$(1,1)$张量$v\in V\otimes V^\ast$可以写成
-	\[
-		v=\sum_{i,j}v^i{}_jv_i\otimes v^{\ast j}.
-	\]
-    通过$(u\otimes\alpha)(x)=\alpha(x)u$，这个空间自然同构于$\hom(V,V)$，因此系数$v^i{}_j$正是一个线性算符的矩阵。在基变换$(u_1,\ldots,u_n)=(v_1,\ldots,v_n)A$下，其分量矩阵满足$[v]'=A\inv[v]A$，与前文的相似变换一致。
+\begin{example}{混合张量$V \otimes V^\ast$}{}
+	$(1,1)$张量$v \in V \otimes V^\ast$可以写成
+	\begin{equation}\label{eq:la-mixed-tensor-expansion}
+		v = \sum_{i,j}v^i{}_jv_i \otimes v^{\ast j}.
+	\end{equation}
+    通过$(u \otimes \alpha)(x) = \alpha(x)u$，这个空间自然同构于$\hom(V,V)$，因此系数$v^i{}_j$正是一个线性算符的矩阵。在基变换$(u_1,\ldots,u_n) = (v_1,\ldots,v_n)A$下，其分量矩阵满足$[v]' = A\inv[v]A$，与前文的相似变换一致。
 \end{example}
-\begin{example}{$V\otimes\cdots\otimes V\otimes V^\ast\otimes\cdots\otimes V^\ast=V^{\otimes k}\otimes V^{\ast\otimes\ell}$}{}
+\begin{example}{$V \otimes \cdots \otimes V \otimes V^\ast \otimes \cdots \otimes V^\ast = V^{\otimes k} \otimes V^{\ast\otimes\ell}$}{}
 	考虑
-	\[
-		V^{\otimes k}\otimes V^{\ast\otimes\ell}:=\underbrace{V\otimes\cdots\otimes V}_k\otimes\underbrace{V^\ast\otimes\cdots\otimes V^\ast}_\ell,
-	\]
+	\begin{equation}\label{eq:la-mixed-tensor-space}
+		V^{\otimes k} \otimes V^{\ast\otimes\ell} := \underbrace{V \otimes \cdots \otimes V}_k \otimes \underbrace{V^\ast \otimes \cdots \otimes V^\ast}_\ell,
+	\end{equation}
 	的基： 
 	\[
-		\set{v_{i_1}\otimes\cdots\otimes v_{i_k}\otimes v^{\ast j_1}\otimes\cdots\otimes v^{\ast j_\ell}}{1\leqslant i_1,\ldots,i_k,j_1,\ldots,j_\ell\leqslant n}
+		\set{v_{i_1} \otimes \cdots \otimes v_{i_k} \otimes v^{\ast j_1} \otimes \cdots \otimes v^{\ast j_\ell}}{1 \leqslant i_1,\ldots,i_k,j_1,\ldots,j_\ell \leqslant n}
 	\]
-	$V^{\otimes k}\otimes V^{\ast\otimes\ell}$的元素 
-	\[
-		v=\sum_{\substack{i_1,\ldots,i_k\\j_1,\ldots,j_\ell}}(v^{i_1\cdots i_k}{}_{j_1\cdots j_\ell})v_{i_1}\otimes\cdots\otimes v_{i_k}\otimes v^{\ast j_1}\otimes\cdots\otimes v^{\ast j_\ell}.
-	\]
+	$V^{\otimes k} \otimes V^{\ast\otimes\ell}$的元素
+	\begin{equation}\label{eq:la-tensor-components}
+		v = \sum_{\substack{i_1,\ldots,i_k\\j_1,\ldots,j_\ell}}(v^{i_1\cdots i_k}{}_{j_1\cdots j_\ell})v_{i_1} \otimes \cdots \otimes v_{i_k} \otimes v^{\ast j_1} \otimes \cdots \otimes v^{\ast j_\ell}.
+	\end{equation}
 	是$(k,\ell)$阶张量。基变换
-	\begin{align*}
-		&v'^{i_1\cdots i_k}{}_{j_1\cdots j_\ell}=\sum_{\substack{p_1,\ldots,p_k\\q_1,\ldots,q_\ell}}(A\inv)^{i_1}{}_{p_1}\cdots(A\inv)^{i_k}{}_{p_k}(v^{p_1\cdots p_k}{}_{q_1\cdots q_\ell})A^{q_1}{}_{j_1}\cdots A^{q_\ell}{}_{j_\ell}.
-	\end{align*}
+	\begin{align}\label{eq:la-mixed-tensor-component-change}
+		&v'^{i_1\cdots i_k}{}_{j_1\cdots j_\ell} = \sum_{\substack{p_1,\ldots,p_k\\q_1,\ldots,q_\ell}}(A\inv)^{i_1}{}_{p_1}\cdots(A\inv)^{i_k}{}_{p_k}(v^{p_1\cdots p_k}{}_{q_1\cdots q_\ell})A^{q_1}{}_{j_1}\cdots A^{q_\ell}{}_{j_\ell}.
+	\end{align}
 \end{example}
