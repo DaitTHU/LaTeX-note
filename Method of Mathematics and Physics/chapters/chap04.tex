@@ -1,503 +1,531 @@
 \chapter{基本解方法}
 \section{广义函数}
 \begin{definition}{$\delta$函数}{delta function}
-	原点处的 Dirac 分布描述集中在一点的单位总量。若 $a<b$ 且两个端点均非零，对连续函数 $f$ 有
-	\[
-		\int_a^bf(x)\delta(x)\d x=
+	原点处的 Dirac 分布描述集中在一点的单位总量。若 $a < b$ 且两个端点均非零，对连续函数 $f$ 有
+	\begin{equation}
+		\label{eq:mmp-dirac-sifting}
+		\int_a^bf(x)\delta(x)\d x =
 		\begin{cases}
-			f(0),&0\in(a,b)\\
-			0,&0\notin[a,b]
+			f(0),&0 \in (a,b)\\
+			0,&0 \notin [a,b]
 		\end{cases}
-	\]
-	因此$f\ast\delta(\xi)=f(\xi)$。
+	\end{equation}
+	因此$f \ast \delta(\xi) = f(\xi)$。
 \end{definition}
 \begin{theorem}{$\delta$复合函数}{}
-	设 $u\in\cont^1(\RR)$ 且在实轴上只有单零点$x_1,x_2,\ldots,x_n$，则
+	设 $u \in \cont^1(\RR)$ 且在实轴上只有单零点$x_1,x_2,\ldots,x_n$，则
 	\begin{align}
-		\delta(u(x))=\sum_{k=1}^n\frac{\delta(x-x_k)}{\abs{u'(x_k)}}.
+		\delta(u(x)) = \sum_{k=1}^n\frac{\delta(x - x_k)}{\abs{u'(x_k)}}.
 	\end{align}
 \end{theorem}
-例如 $a\neq0$ 时，$\delta(ax)=\delta(x)/\abs a$。
+例如 $a \neq 0$ 时，$\delta(ax) = \delta(x)/\abs a$。
 
 \begin{definition}{线性泛函}{Linear Functional}
-	函数空间$\functionspace$到数域$\FF$的映射$\mathcal T$，若$\forall a,b\in\FF,\;u,v\in\functionspace$均有
-	\[
-		\mathcal T(au+bv)=a\mathcal Tu+b\mathcal Tv
-	\]
+	函数空间$\functionspace$到数域$\FF$的映射$\mathcal T$，若$\forall a,b \in \FF,\;u,v \in \functionspace$均有
+	\begin{equation}
+		\label{eq:mmp-distribution-linearity}
+		\mathcal T(au + bv) = a\mathcal Tu + b\mathcal Tv
+	\end{equation}
 	则 $\mathcal T$ 是 $\functionspace$ 上的线性泛函。全体线性泛函构成代数对偶 $\functionspace^\ast$。给定测试函数空间的拓扑后，连续线性泛函构成连续对偶 $\functionspace'$，下文用 $\inp f\varphi$ 表示泛函 $f$ 在测试函数 $\varphi$ 上的取值。
 \end{definition}
 \begin{example}{支撑集}{support set}
 	记实函数$f$的支撑集
 	\begin{align}
-		\supp f:=\overline{\set x{f(x)\neq 0}}.
+		\supp f := \overline{\set x{f(x) \neq 0}}.
 	\end{align}
 	并记
 	\[
-		\mathscr L_0(\RR):=\biggset f{\intR\abs{f(x)}\d x<\infty,\;\supp f\,\text{有界}}
+		\mathscr L_0(\RR) := \biggset f{\intR\abs{f(x)}\d x < \infty,\;\supp f\,\text{有界}}
 	\]
-	则$\forall f\in\mathscr L_0(\RR)$，$f$确定了$\cont(\RR)$上一个线性泛函：
+	则$\forall f \in \mathscr L_0(\RR)$，$f$确定了$\cont(\RR)$上一个线性泛函：
 	\begin{align}
-		\mathcal T_f\bigb{\varphi(x)}\equiv\inp f\varphi:=\intR f(x)\varphi(x)\d x\in\RR.
+		\mathcal T_f\bigb{\varphi(x)} \equiv \inp f\varphi := \intR f(x)\varphi(x)\d x \in \RR.
 	\end{align}
 \end{example}
 \begin{theorem}{广义函数的导数}{}
 	紧支撑光滑测试函数构成空间
 	\begin{align}
-		\testspace(\RR)\equiv\cont_c^\infty(\RR):=\set f{f\in\cont^\infty(\RR),\;\supp f\,\text{有界}}
+		\testspace(\RR) \equiv \cont_{\mathrm c}^\infty(\RR) := \set f{f \in \cont^\infty(\RR),\;\supp f\,\text{有界}}
 	\end{align}
-	该空间的连续对偶记为 $\testspace'(\RR)$，其元素称为分布（广义函数）。对 $f\in\testspace'(\RR)$，定义其 $n$ 阶导数
+	该空间的连续对偶记为 $\testspace'(\RR)$，其元素称为分布（广义函数）。对 $f \in \testspace'(\RR)$，定义其 $n$ 阶导数
 	\begin{align}
-		\inp{f^{(n)}}\varphi:=(-1)^n\inp f{\varphi^{(n)}},\quad\forall\varphi\in\testspace(\RR).
+		\inp{f^{(n)}}\varphi := (-1)^n\inp f{\varphi^{(n)}},\quad\forall\varphi \in \testspace(\RR).
 	\end{align}
 	特别地， 
-	\[
-		\intR\delta^{(n)}(x)\varphi(x)\d x=(-1)^n\varphi^{(n)}(0).
-	\]
+	\begin{equation}
+		\label{eq:mmp-delta-derivatives}
+		\intR\delta^{(n)}(x)\varphi(x)\d x = (-1)^n\varphi^{(n)}(0).
+	\end{equation}
 	
 	泛函意义下，任意一个广义函数都是无穷阶可导的。
 \end{theorem}
 \begin{theorem}{广义函数的卷积}{}
-	设 $f,g\in\testspace'(\RR)$，且至少一个具有紧支撑，则卷积 $f\ast g$ 由下式定义
+	设 $f,g \in \testspace'(\RR)$，且至少一个具有紧支撑，则卷积 $f \ast g$ 由下式定义
 	\begin{align}
-		\inp{f\ast g}\varphi:=\Biginp{f(x)}{\biginp{g(y)}{\varphi(x+y)}}.
+		\inp{f \ast g}\varphi := \Biginp{f(x)}{\biginp{g(y)}{\varphi(x + y)}}.
 	\end{align}
 	一般地，对常系数微分算子$\DiffOp$
-	\[
-		\DiffOp(f\ast g)=\DiffOp f\ast g=f\ast\DiffOp g.
-	\]
+	\begin{equation}
+		\label{eq:mmp-convolution-differentiation}
+		\DiffOp(f \ast g) = \DiffOp f \ast g = f \ast \DiffOp g.
+	\end{equation}
 \end{theorem}
 \begin{theorem}{广义函数的Fourier变换}{}
-	速降函数空间$\Schwartz(\RR)\subset\cont^\infty(\RR)$，%$\forall\varphi\in\Schwartz(\RR)$，有
+	速降函数空间$\Schwartz(\RR) \subset \cont^\infty(\RR)$，%$\forall\varphi\in\Schwartz(\RR)$，有
 	\begin{align}
-		\Schwartz(\RR):=\set{\varphi\in\cont^\infty(\RR)}{\lim_{\abs x\to\infty}x^m\varphi^{(n)}(x)=0,\quad m,n=0,1,\ldots}.
+		\Schwartz(\RR) := \set{\varphi \in \cont^\infty(\RR)}{\lim_{\abs x\to\infty}x^m\varphi^{(n)}(x) = 0,\quad m,n = 0,1,\ldots}.
 	\end{align}
-	比如$\varphi(x)=p(x)\e^{-ax^2}$，$p(x)$是多项式，$a>0$，则$\varphi(x)\in\Schwartz(\RR)$。
+	比如$\varphi(x) = p(x)\e^{-ax^2}$，$p(x)$是多项式，$a > 0$，则$\varphi(x) \in \Schwartz(\RR)$。
 	
-	速降测试函数的连续对偶 $\Schwartz'(\RR)$ 称为温和分布空间。给定 $f\in\Schwartz'(\RR)$，其 Fourier 变换及逆变换定义为
+	速降测试函数的连续对偶 $\Schwartz'(\RR)$ 称为温和分布空间。给定 $f \in \Schwartz'(\RR)$，其 Fourier 变换及逆变换定义为
 	\begin{align}
 		\begin{aligned}
-			\inp{\FT[f]}\varphi&=\inp f{\FT[\varphi]}\\
-			\inp{\FT\inv[f]}\varphi&=\inp f{\FT\inv[\varphi]}
-		\end{aligned},\quad\forall\varphi\in\Schwartz.
+			\inp{\FT[f]}\varphi &= \inp f{\FT[\varphi]}\\
+			\inp{\FT\inv[f]}\varphi &= \inp f{\FT\inv[\varphi]}
+		\end{aligned},\quad\forall\varphi \in \Schwartz.
 	\end{align}
 	Fourier变换作用转移到测试函数上，它们保持着经典意义下的基本性质。
 \end{theorem}
 \begin{theorem}{广义函数序列的收敛性}{}
 	设广义函数列$\{f_n\}$及广义函数$f$，若对测试函数空间的$\varphi$都有
-	\[
-		\lim_{n\to\infty}\inp{f_n}\varphi=\inp f\varphi.
-	\]
+	\begin{equation}
+		\label{eq:mmp-distributional-convergence}
+		\lim_{n\to\infty}\inp{f_n}\varphi = \inp f\varphi.
+	\end{equation}
 	则称 $f_n$ 在分布意义下弱收敛到 $f$，记作 $f_n\rightharpoonup f$。
 \end{theorem}
 \begin{theorem}{}{}
-	若 $f_n,f\in\Schwartz'(\RR)$，则求导保持这种收敛性
-	\[
-		f_n\rightharpoonup f\implies f_n'\rightharpoonup f'.
-	\]
+	若 $f_n,f \in \Schwartz'(\RR)$，则求导保持这种收敛性
+	\begin{equation}
+		\label{eq:mmp-weak-derivative-continuity}
+		f_n\rightharpoonup f \implies f_n'\rightharpoonup f'.
+	\end{equation}
 \end{theorem}
 \begin{theorem}{高维广义函数}{}
-	多重指标 $\alpha=(\alpha_1,\ldots,\alpha_n)$ 的分量为非负整数，记 $\p^\alpha=\p_{x_1}^{\alpha_1}\cdots\p_{x_n}^{\alpha_n}$。与一维类似，函数空间
-	\begin{gather*}
-		\testspace(\RR^n)\equiv\cont_c^\infty(\RR^n):=\set f{f\in\cont^\infty(\RR^n),\;\supp f\,\text{有界}},\\
-		\Schwartz(\RR^n):=\Bigset{\varphi\in\cont^\infty(\RR^n)}{\lim_{\norm X\to\infty}\norm X^m\p^\alpha\varphi(X)=0,\quad m=0,1,\ldots,\;\forall\alpha}.
-	\end{gather*}
+	多重指标 $\alpha = (\alpha_1,\ldots,\alpha_n)$ 的分量为非负整数，记 $\p^\alpha = \p_{x_1}^{\alpha_1}\cdots\p_{x_n}^{\alpha_n}$。与一维类似，函数空间
+	\begin{subequations}
+		\label{eq:mmp-multidimensional-test-spaces}
+		\begin{gather}
+			\testspace(\RR^n) \equiv \cont_{\mathrm c}^\infty(\RR^n) := \set f{f \in \cont^\infty(\RR^n),\;\supp f\,\text{有界}},\\
+			\Schwartz(\RR^n) := \Bigset{\varphi \in \cont^\infty(\RR^n)}{\lim_{\norm X\to\infty}\norm X^m\p^\alpha\varphi(X) = 0,\quad m = 0,1,\ldots,\;\forall\alpha}.
+		\end{gather}
+	\end{subequations}
 	局部可积函数 $f$ 在测试函数空间上给出连续线性泛函
-	\[
-		\inp f\varphi=\int_{\RR^n}f(X)\varphi(X)\d X,\quad\forall\varphi\in\testspace(\RR^n).
-	\]
+	\begin{equation}
+		\label{eq:mmp-regular-multidimensional-distribution}
+		\inp f\varphi = \int_{\RR^n}f(X)\varphi(X)\d X,\quad\forall\varphi \in \testspace(\RR^n).
+	\end{equation}
 	
-	取 $\alpha=(k_1,\ldots,k_n)$，$k=k_1+\cdots+k_n$。广义函数 $f\in\testspace'(\RR^n)$ 的偏导数定义为
-	\[
-		\inp{\p^\alpha f}{\varphi}:=(-1)^k\inp{f}{\p^\alpha\varphi},\quad\varphi\in\testspace(\RR^n).
-	\]
-	特别地，$f=\delta$时
-	\[
-		\inp{\p^\alpha\delta}{\varphi}=(-1)^k(\p^\alpha\varphi)(\bm 0).
-	\]
+	取 $\alpha = (k_1,\ldots,k_n)$，$k = k_1 + \cdots + k_n$。广义函数 $f \in \testspace'(\RR^n)$ 的偏导数定义为
+	\begin{equation}
+		\label{eq:mmp-distribution-multiindex-derivative}
+		\inp{\p^\alpha f}{\varphi} := (-1)^k\inp{f}{\p^\alpha\varphi},\quad\varphi \in \testspace(\RR^n).
+	\end{equation}
+	特别地，$f = \delta$时
+	\begin{equation}
+		\label{eq:mmp-delta-multiindex}
+		\inp{\p^\alpha\delta}{\varphi} = (-1)^k(\p^\alpha\varphi)(\bm 0).
+	\end{equation}
 \end{theorem}
 \begin{example}{$\delta$函数与Laplace算子}{}
 	\begin{equation}
-		\delta(x_1,\ldots,x_n)=\begin{cases}
-			\frac1{2\pi}\laplacian\ln r,&n=2\\
-			-\frac1{(n-2)S_{n}}\laplacian\frac1{r^{n-2}},&n\geqslant 3
+		\delta(x_1,\ldots,x_n) = \begin{cases}
+			\frac1{2\pi}\laplacian\ln r,&n = 2\\
+			-\frac1{(n - 2)S_{n}}\laplacian\frac1{r^{n-2}},&n \geqslant 3
 		\end{cases}
 	\end{equation}
-	其中$r=\norm{\bm x}$，$S_n$为$n$维单位球的表面积。特别地，$S_3=4\pi$。
+	其中$r = \norm{\bm x}$，$S_n$为$n$维单位球的表面积。特别地，$S_3 = 4\pi$。
 \end{example}
 若至少一个分布具有紧支撑，高维卷积同样由配对定义
-\[
-	\inp{f\ast g}\varphi:=\Biginp{f(X)}{\biginp{g(Y)}{\varphi(X+Y)}}.
-\]
+\begin{equation}
+	\label{eq:mmp-multidimensional-convolution}
+	\inp{f \ast g}\varphi := \Biginp{f(X)}{\biginp{g(Y)}{\varphi(X + Y)}}.
+\end{equation}
 
-\section{\texorpdfstring{$\PDEop u=0$}{Pu=0}型方程的基本解} % {$\$}
+\section{\texorpdfstring{$\PDEop u = 0$}{Pu=0}型方程的基本解} % {$\$}
 讨论用基本解方法求解方程
 \[
-	\PDEop u(M)=f(M),\quad M\in\RR^n,
+	\PDEop u(M) = f(M),\quad M \in \RR^n,
 \]
 其中，$\PDEop$是常系数线性偏微分算子。
 
-在测试函数上按分布意义满足$\PDEop u=f$的解称为\textbf{广义解}。分布可以逐阶求导。若$u$由足够光滑的函数给出且$f$连续，则此等式也逐点成立，$u$是经典解。
-\begin{definition}{$\PDEop u=0$型方程的基本解}{Basic Solution of Pu=0}
+在测试函数上按分布意义满足$\PDEop u = f$的解称为\textbf{广义解}。分布可以逐阶求导。若$u$由足够光滑的函数给出且$f$连续，则此等式也逐点成立，$u$是经典解。
+\begin{definition}{$\PDEop u = 0$型方程的基本解}{Basic Solution of Pu=0}
 	方程
 	\begin{align}
-		\PDEop U(M)=\delta(M)
+		\PDEop U(M) = \delta(M)
 	\end{align}
-	的解$U(M)$称作$\PDEop u=0$型方程的基本解。
+	的解$U(M)$称作$\PDEop u = 0$型方程的基本解。
 \end{definition}
 对一般的函数$f$，其对应的解是一般的源所产生的物理场。故基本解也叫点源函数。
 
 设$U$是基本解，源$f$为光滑紧支撑函数。若$U$局部可积，可写
 \begin{align}
-	u(M):=U\ast f(M)=\int U(M-N)f(N)\d N.
+	u(M) := U \ast f(M) = \int U(M - N)f(N)\d N.
 \end{align}
 由积分叠加原理
 \[
-	\PDEop u(M)=\int\PDEop U(M-N)f(N)\d N=\int\delta(M-N)f(N)\d N=f(M).
+	\PDEop u(M) = \int\PDEop U(M - N)f(N)\d N = \int\delta(M - N)f(N)\d N = f(M).
 \]
-即$u$满足方程$\PDEop u=f$。更一般地，只要分布卷积存在，就有$\PDEop(U\ast f)=(\PDEop U)\ast f=f$；例如$f$具有紧支撑时成立。再加任意齐次解仍满足同一非齐次方程。
+即$u$满足方程$\PDEop u = f$。更一般地，只要分布卷积存在，就有$\PDEop(U \ast f) = (\PDEop U) \ast f = f$；例如$f$具有紧支撑时成立。再加任意齐次解仍满足同一非齐次方程。
 \begin{example}{}{}
 	求下面方程的基本解：
 	\[
-		y'+ay=f(x),\quad a>0
+		y' + ay = f(x),\quad a > 0
 	\]
 	
 	基本解$U$满足
 	\[
-		U'+aU=\delta(x),
+		U' + aU = \delta(x),
 	\]
-	取在$x<0$处为零的因果基本解，由
-	\[
-		\dd x(U\e^{ax})=\delta(x)\e^{ax}=\delta(x)\implies U(x)=\Heaviside(x)\e^{-ax}.
-	\]
+	取在$x < 0$处为零的因果基本解，由
+	\begin{equation}
+		\label{eq:mmp-first-order-causal-kernel}
+		\dd x(U\e^{ax}) = \delta(x)\e^{ax} = \delta(x) \implies U(x) = \Heaviside(x)\e^{-ax}.
+	\end{equation}
 	因此，只要下式积分收敛，便得到原方程的一个特解
-	\[
-		y(x)=U\ast f(x)=\intR\Heaviside(\xi)\e^{-a\xi}f(x-\xi)\d\xi=\int_{-\infty}^xf(\xi)\e^{-a(x-\xi)}\d\xi.
-	\]
+	\begin{equation}
+		\label{eq:mmp-causal-first-order-solution}
+		y(x) = U \ast f(x) = \intR\Heaviside(\xi)\e^{-a\xi}f(x - \xi)\d\xi = \int_{-\infty}^xf(\xi)\e^{-a(x-\xi)}\d\xi.
+	\end{equation}
 \end{example}
 \begin{example}{3维Helmholtz方程}{}
 	求3维Helmholtz方程的基本解：
 	\[
-		\laplacian u+cu=0
+		\laplacian u + cu = 0
 	\]
 	
 	由于只有一个点源，方程具有对称性，可设方程有球对称基本解$U(r)$，
-	当$r>0$时，$\delta(r)=0$，
+	当$r > 0$时，$\delta(r) = 0$，
 	\[
-		\frac1{r^2}\dd r\Bigp{r^2\dv Ur}+cU=\frac1r\Bigb{\dd[2]r(rU)+crU}=0,
+		\frac1{r^2}\dd r\Bigp{r^2\dv Ur} + cU = \frac1r\Bigb{\dd[2]r(rU) + crU} = 0,
 	\]
 	
-	当$c=0$时，化为Laplace方程
+	当$c = 0$时，化为Laplace方程
 	\[
-		(rU)''=0\implies U(r)=\frac Ar+\cancel{B}.
+		(rU)'' = 0 \implies U(r) = \frac Ar + \cancel{B}.
 	\]
 	记$B_r$为半径为$r$的球内部分，则
 	\[
-		\int_{B_r}\laplacian U\d V=\int_{B_r}\delta(x,y,z)\d V=1.
+		\int_{B_r}\laplacian U\d V = \int_{B_r}\delta(x,y,z)\d V = 1.
 	\]
 	由Green公式
 	\[
-		\int_{B_r}\laplacian U\d V=\oint_{\p B_r}\pv Un\d S=-\frac A{r^2}\cdot 4\pi r^2=1\implies U(r)=-\frac1{4\pi r}.
+		\int_{B_r}\laplacian U\d V = \oint_{\p B_r}\pv Un\d S = -\frac A{r^2} \cdot 4\pi r^2 = 1 \implies U(r) = -\frac1{4\pi r}.
 	\]
 	
-	当$c<0$时，记$k:=\sqrt{-c}$
+	当$c < 0$时，记$k := \sqrt{-c}$
 	\[
-		(rU)''-k^2rU=0\implies U=A\frac{\e^{-kr}}r+B\frac{\e^{kr}}r.
+		(rU)'' - k^2rU = 0 \implies U = A\frac{\e^{-kr}}r + B\frac{\e^{kr}}r.
 	\]
 	由积分条件
 	\[
-		\int_{B_r}\laplacian U-k^2U\d V=\oint_{\p B_r}\pv Un\d S-k^2\int_{B_r}U\d V=1,
+		\int_{B_r}\laplacian U - k^2U\d V = \oint_{\p B_r}\pv Un\d S - k^2\int_{B_r}U\d V = 1,
 	\]
 	且
 	\begin{align*}
-		&\quad\oint_{\p B_r}\Bigp{\pp\rho\frac{\e^{k\rho}}\rho}_rr^2\sin\theta\d\theta\nd\phi-k^2\int_{B_r}\frac{\e^{k\rho}}\rho\rho^2\sin\theta\d\rho\nd\theta\nd\phi\\
-		&=4\pi(kr-1)\e^{kr}-4\pi\bigb{(k\rho-1)\e^{k\rho}}_0^r=-4\pi.
+		&\quad\oint_{\p B_r}\Bigp{\pp\rho\frac{\e^{k\rho}}\rho}_rr^2\sin\theta\d\theta\nd\phi - k^2\int_{B_r}\frac{\e^{k\rho}}\rho\rho^2\sin\theta\d\rho\nd\theta\nd\phi\\
+		&= 4\pi(kr - 1)\e^{kr} - 4\pi\bigb{(k\rho - 1)\e^{k\rho}}_0^r = -4\pi.
 	\end{align*}
-	故$-4\pi(A+B)=1$，即
-	\[
-		U(r)=-\frac{\e^{-kr}}{4\pi r},\;-\frac{\e^{kr}}{4\pi r}.
-	\]
+	故$-4\pi(A + B) = 1$，即
+	\begin{equation}
+		\label{eq:mmp-modified-helmholtz-fundamental}
+		U(r) = -\frac{\e^{-kr}}{4\pi r},\; -\frac{\e^{kr}}{4\pi r}.
+	\end{equation}
 	
-	当$c>0$时，记$k:=\sqrt c$
+	当$c > 0$时，记$k := \sqrt c$
 	\[
-		U=A\frac{\cos kr}r+B\frac{\sin kr}r.
+		U = A\frac{\cos kr}r + B\frac{\sin kr}r.
 	\]
-	$\sin kr/r$在原点光滑，是齐次解。点源归一化给出$-4\pi A=1$，而$B$可任取。例如取$B=0$得到
-	\[
-		U(r)=-\frac{\cos kr}{4\pi r}.
-	\]
+	$\sin kr/r$在原点光滑，是齐次解。点源归一化给出$-4\pi A = 1$，而$B$可任取。例如取$B = 0$得到
+	\begin{equation}
+		\label{eq:mmp-real-helmholtz-fundamental}
+		U(r) = -\frac{\cos kr}{4\pi r}.
+	\end{equation}
 \end{example}
 \section{Poisson方程Green函数法}
 首先引入Green公式。
 \begin{theorem}{Green公式}{Green Formula}
-	设非空有界开集$\Omega\subset\RR^n(n\geqslant 2)$满足边界$\p\Omega$光滑，则
+	设非空有界开集$\Omega \subset \RR^n(n \geqslant 2)$满足边界$\p\Omega$光滑，则
 	
 	设$u,v$在$\bar\Omega$的一个开邻域上二阶连续可微，有
 	\begin{gather}
 		\label{Green's 1st formula}
-		\int_\Omega v\laplacian u\d V=\oint_{\p\Omega}v\pv un\d S-\int_\Omega\grad v\cdot\grad u\d V;\\
+		\int_\Omega v\laplacian u\d V = \oint_{\p\Omega}v\pv un\d S - \int_\Omega\grad v \cdot \grad u\d V;\\
 		\label{Green's 2nd formula}
-		\int_\Omega(u\laplacian v-v\laplacian u)\d V=\oint_{\p\Omega}\biggp{u\pv vn-v\pv un}\d S.
+		\int_\Omega(u\laplacian v - v\laplacian u)\d V = \oint_{\p\Omega}\biggp{u\pv vn - v\pv un}\d S.
 	\end{gather}
 	%其中$\p u/\p n=\grad u\cdot\uvec{n}$。
 \end{theorem}
 \begin{proof}
 	由散度定理
-	\begin{align}
-		\int_\Omega\div\bm A\d V=\oint_{\p\Omega}\bm A\cdot\uvec{n}\d S,
-	\end{align}
-	取$\bm A=v\grad u$，
+	\begin{align*}
+		\int_\Omega\div\bm A\d V = \oint_{\p\Omega}\bm A \cdot \uvec{n}\d S,
+	\end{align*}
+	取$\bm A = v\grad u$，
 	可得式\eqref{Green's 1st formula}：
 	\[
-		\oint_{\p\Omega}v\pv un\d S\equiv\oint_{\p\Omega}v\grad u\cdot\uvec{n}\d S=\int_\Omega\div(v\grad u)\d V=\int_\Omega(\grad v\cdot\grad u+v\laplacian u)\d V.
+		\oint_{\p\Omega}v\pv un\d S \equiv \oint_{\p\Omega}v\grad u \cdot \uvec{n}\d S = \int_\Omega\div(v\grad u)\d V = \int_\Omega(\grad v \cdot \grad u + v\laplacian u)\d V.
 	\]
 	将$u,v$互换位置并与原式相减，即得式\eqref{Green's 2nd formula}。
 \end{proof}
 \paragraph{Poisson方程第I边值问题}
 \begin{align}
 	\begin{cases}
-		\laplacian u=-f(M),&M\in V\subseteq\RR^3\\
-		\eval u_{\p V}=\varphi(M),
+		\laplacian u = -f(M),&M \in V \subseteq \RR^3\\
+		\eval u_{\p V} = \varphi(M),
 	\end{cases}
 \end{align}
-物理上看，这是静电场的基本问题：空间区域$V$内有电荷体密度$\rho=-\varepsilon f$，边界上电位已知为$\varphi$，求$V$内电位$u$。
+在介电常数为$\varepsilon$的均匀介质中，电势满足$\laplacian u = -\rho/\varepsilon$。这里的源项对应电荷体密度$\rho = \varepsilon f$，边界电势为$\varphi$。
 
-由叠加原理，$u=v+w$，$v,w$分别满足
+由叠加原理，$u = v + w$，$v,w$分别满足
 \begin{align*}
 	\begin{cases}
-		\laplacian v=-f(M),\\
-		\eval v_{\p V}=0,
+		\laplacian v = -f(M),\\
+		\eval v_{\p V} = 0,
 	\end{cases}\quad
 	\begin{cases}
-		\laplacian w=0,\\
-		\eval w_{\p V}=\varphi(M),
+		\laplacian w = 0,\\
+		\eval w_{\p V} = \varphi(M),
 	\end{cases}
 \end{align*}
-其中$v$表示在边界接地条件下体内电荷产生的电场，$w$表示由边界约束引起的电场。
+其中$v$是边界接地时体内电荷产生的电势，$w$是体内无电荷时由给定边界电势产生的解。
 \begin{definition}{Poisson第I边值问题的Green函数}{}
 	定解问题
 	\begin{align}
 		\begin{cases}
-			\laplacian G(M;N)=-\delta(M-N),\\
-			\eval G_{\p V}=0.
+			\laplacian G(M;N) = -\delta(M - N),\\
+			\eval G_{\p V} = 0.
 		\end{cases}
 	\end{align}
 	的解$G(M;N)$称为Poisson第I边值问题的Green函数。
 \end{definition}
 在介电常数为$\varepsilon$的均匀介质中，若边界接地，置于$N$点的点电荷$q$在$M$点产生的电势为$qG(M;N)/\varepsilon$。
 \begin{align}
-	u(M)=\int_Vf(N)G(M;N)\d N-\oint_{\p V}\varphi(N)\pv Gn\d S.
+	u(M) = \int_Vf(N)G(M;N)\d N - \oint_{\p V}\varphi(N)\pv Gn\d S.
 \end{align}
 \begin{proof}
 	\begin{align*}
-		u(M)&=\int_Vu(N)\delta(M-N)\d N=-\int_Vu(N)\,\laplacian G(M;N)\d N\\
-		&=-\int_V u\,\laplacian G\d N+\int_VG\,\laplacian u\d N-\int_VG\,\underline{\laplacian u}\d N\tag{Green II}\\
-		&=\oint_{\p V}\cancel{G}\pv un-\underline{u}\pv Gn\d S+\int_VG f\d N\\
-		&=-\oint_{\p V}\varphi\pv Gn\d S+\int_VGf\d N.
+		u(M) &= \int_Vu(N)\delta(M - N)\d N = -\int_Vu(N)\,\laplacian G(M;N)\d N\\
+		&= -\int_V u\,\laplacian G\d N + \int_VG\,\laplacian u\d N - \int_VG\,\underline{\laplacian u}\d N\tag{Green II}\\
+		&= \oint_{\p V}\cancel{G}\pv un - \underline{u}\pv Gn\d S + \int_VG f\d N\\
+		&= -\oint_{\p V}\varphi\pv Gn\d S + \int_VGf\d N.
 	\end{align*}
 \end{proof}
 Fourier方法是求Green函数的基本方法，但对于一些特殊的区域，可以采用一些特殊方法，如镜像法。
 \begin{method}{镜像法}{}
-	分解$G=U+g$，$U$满足$\laplacian U=-\delta(M-N)$，可取
-	\begin{align*}
-		U=\begin{cases}
-			-\frac1{2\pi}\ln r,&n=2\\[1ex]
-			\frac1{4\pi r},&n= 3
+	分解$G = U + g$，$U$满足$\laplacian U = -\delta(M - N)$，可取
+	\begin{equation}
+		\label{eq:mmp-free-laplace-kernels}
+		U = \begin{cases}
+			-\frac1{2\pi}\ln r,&n = 2\\[1ex]
+			\frac1{4\pi r},&n = 3
 		\end{cases}
-	\end{align*}
+	\end{equation}
 	%其中$r$是$M,N$间距离。
 	而$g$满足 
 	\[
 		\begin{cases}
-			\laplacian g=0,\\
-			\eval g_{\p V}=-U,
+			\laplacian g = 0,\\
+			\eval g_{\p V} = -U,
 		\end{cases}
 	\]
-	是$N$的点电荷在边界上的感应电荷产生的电场。
+	是$N$点的电荷在边界上诱导的电荷所产生的电势。
 	
-	区域外的点源在$V$内产生的电场满足Laplace方程，可以将边界感应电荷产生的电场$g$看作区域\emph{外}某些虚设电荷产生的等效电场，这种来源于物理效应的方法叫镜像法。% 它的关键困难在于如何在区域外合适地虚设电荷，对应某些特殊的区域如半空间、球域等等，可以用较直观的方法找到。
+	区域外的点源在$V$内产生的电势满足Laplace方程。若区域\emph{外}的虚设电荷产生的电势满足$g$的边界条件，由解的唯一性，它在$V$内就等于$g$。这种方法叫镜像法。% 它的关键困难在于如何在区域外合适地虚设电荷，对应某些特殊的区域如半空间、球域等等，可以用较直观的方法找到。
 \end{method}
 \begin{example}{镜像法应用·半空间}{}
 	求上半空间Poisson方程第I边值问题的Green函数。
 	
-	$V$内$N(\xi,\eta,\zeta)$点的正电荷$\varepsilon$在空间$(x,y,z)$产生的电场为
+	$V$内$N(\xi,\eta,\zeta)$点的正电荷$\varepsilon$在空间$(x,y,z)$产生的电势为
 	\[
-		U_0=\frac1{4\pi r}=\frac1{4\pi\sqrt{(x-\xi)^2+(y-\eta)^2+(z-\zeta)^2}},
+		U_0 = \frac1{4\pi r} = \frac1{4\pi\sqrt{(x - \xi)^2 + (y - \eta)^2 + (z - \zeta)^2}},
 	\]
-	可虚设电荷$-\varepsilon$于$N$关于$z=0$平面对称的点$M_1(\xi,\eta,-\zeta)$，产生的电场
+	可虚设电荷$-\varepsilon$于$N$关于$z = 0$平面对称的点$M_1(\xi,\eta,-\zeta)$，产生的电势为
 	\[
-		U_1=\frac{-1}{4\pi\sqrt{(x-\xi)^2+(y-\eta)^2+(z+\zeta)^2}},
+		U_1 = \frac{-1}{4\pi\sqrt{(x - \xi)^2 + (y - \eta)^2 + (z + \zeta)^2}},
 	\]
-	在边界上$\eval{U_0}_{z=0}=-\eval{U_1}_{z=0}$
-    \begin{align*}
-        G=\frac1{4\pi}\bigg[&\frac1{\sqrt{(x-\xi)^2+(y-\eta)^2+(z-\zeta)^2}}-\\
-        &\qquad\frac1{\sqrt{(x-\xi)^2+(y-\eta)^2+(z+\zeta)^2}}\bigg],
-    \end{align*}
+	在边界上$\eval{U_0}_{z=0} = -\eval{U_1}_{z=0}$
+    \begin{equation}
+        \label{eq:mmp-half-space-dirichlet-green}
+        \begin{aligned}
+            G = \frac1{4\pi}\bigg[&\frac1{\sqrt{(x - \xi)^2 + (y - \eta)^2 + (z - \zeta)^2}} -\\
+            &\qquad\frac1{\sqrt{(x - \xi)^2 + (y - \eta)^2 + (z + \zeta)^2}}\bigg],
+        \end{aligned}
+    \end{equation}
 	边界方向导数
 	\[
-		\biggeval{\pv Gn}_{\zeta=0}=\biggeval{-\pv G\zeta}_{\zeta=0}=\frac{-z}{2\pi[(x-\xi)^2+(y-\eta)^2+z^2]^{3/2}}
+		\biggeval{\pv Gn}_{\zeta=0} = \biggeval{-\pv G\zeta}_{\zeta=0} = \frac{-z}{2\pi[(x - \xi)^2 + (y - \eta)^2 + z^2]^{3/2}}
 	\]
 	故对于上半空间Dirichlet问题
 	\[
 		\begin{cases}
-		\laplacian u=0,&z>0\\
-		\eval u_{z=0}=\varphi(x,y)
+		\laplacian u = 0,&z > 0\\
+		\eval u_{z=0} = \varphi(x,y)
 	\end{cases}
 	\]
 	解的Poisson公式
-	\[
-		u(x,y,z)=\frac z{2\pi}\int_{\RR^2}\frac{\varphi(\xi,\eta)\d\xi\nd\eta}{[(x-\xi)^2+(y-\eta)^2+z^2]^{3/2}}
-	\]
+	\begin{equation}
+		\label{eq:mmp-half-space-poisson-integral}
+		u(x,y,z) = \frac z{2\pi}\int_{\RR^2}\frac{\varphi(\xi,\eta)\d\xi\nd\eta}{[(x - \xi)^2 + (y - \eta)^2 + z^2]^{3/2}}
+	\end{equation}
 	\tcblower
 	二维情况
-	\[
-		G=\frac1{4\pi}\ln\frac{(x-\xi)^2+(y+\eta)^2}{(x-\xi)^2+(y-\eta)^2},\quad u(x,y)=\frac y\pi\intR\frac{\varphi(\xi)\d\xi}{(x-\xi)^2+y^2}
-	\]
+	\begin{subequations}
+		\label{eq:mmp-half-plane-dirichlet-green}
+		\begin{align}
+			G &= \frac1{4\pi}\ln\frac{(x - \xi)^2 + (y + \eta)^2}{(x - \xi)^2 + (y - \eta)^2},\\
+			u(x,y) &= \frac y\pi\intR\frac{\varphi(\xi)\d\xi}{(x - \xi)^2 + y^2}
+		\end{align}
+	\end{subequations}
 \end{example}
 
 \begin{example}{镜像法应用·球域}{}
-	求半径为$R$的球域内Poisson方程第I边值问题的Green函数
-	\begin{gather*}
+	设球半径为$R$，场点$M$和源点$N$到球心的距离分别为$r$和$\rho$，两条径向矢量的夹角为$\psi$。球面的Poisson核等于Dirichlet Green函数对源点的外法向导数取负号：
+	\begin{gather}
 		\begin{cases}
-			\laplacian G(M;N)=-\delta(M-N),&0\leqslant r<R\\
-			\eval G_{r=R}=0
-		\end{cases}\\
-		\implies \biggeval{\pv Gn}_{\rho=R}=\frac{R^2-r^2}{4\pi R(R^2+r^2-2Rr\cos\psi)^{3/2}}.
-	\end{gather*}
+			\laplacian_N G(M;N) = -\delta(M - N),&0 \leqslant \rho < R\\
+			\eval G_{\rho=R} = 0
+		\end{cases}\notag\\
+		\implies -\biggeval{\pv Gn}_{\rho=R} = \frac{R^2 - r^2}{4\pi R(R^2 + r^2 - 2Rr\cos\psi)^{3/2}}.\label{eq:mmp-ball-poisson-kernel}
+	\end{gather}
 	故球内Dirichlet问题，解的Poisson形式
-	\begin{gather*}
+	\begin{gather}
 		\begin{cases}
-			\laplacian u=0,&0\leqslant r<R\\
-			\eval u_{r=R}=\varphi(\theta,\phi)
-		\end{cases}\\
-		\implies u(r,\theta,\phi)=\frac1{4\pi R}\oint_{S_R}\frac{(R^2-r^2)\varphi(\theta_0,\phi_0)\d S_0}{(R^2+r^2-2Rr\cos\psi)^{3/2}}.
-	\end{gather*}
+			\laplacian u = 0,&0 \leqslant r < R\\
+			\eval u_{r=R} = \varphi(\theta,\phi)
+		\end{cases}\notag\\
+		\implies u(r,\theta,\phi) = \frac1{4\pi R}\oint_{S_R}\frac{(R^2 - r^2)\varphi(\theta_0,\phi_0)\d S_0}{(R^2 + r^2 - 2Rr\cos\psi)^{3/2}}.\label{eq:mmp-ball-poisson-integral}
+	\end{gather}
 \end{example}
 
 \subparagraph*{Fourier法}
 Fourier法是求Green函数的基本方法，主要思想是按照特征函数作广义Fourier展开，包括分离变量与积分变换。
 \begin{example}{Fourier法应用}{}	
-	求矩形区域$\Omega=[0,L]\times[0,M]$上第I类边值Poisson方程的Green函数
+	求矩形区域$\Omega = [0,L] \times [0,M]$上第I类边值Poisson方程的Green函数
 	\begin{align*}
 		\begin{cases}
-			\laplacian G(x,y;\xi,\eta)=-\delta(x-\xi,y-\eta),\quad x,\xi\in[0,L];\;y,\eta\in[0,M]\\
-			G(0,y)=G(L,y)=G(x,0)=G(x,M)=0,
+			\laplacian G(x,y;\xi,\eta) = -\delta(x - \xi,y - \eta),\quad x,\xi \in [0,L];\;y,\eta \in [0,M]\\
+			G(0,y) = G(L,y) = G(x,0) = G(x,M) = 0,
 		\end{cases}
 	\end{align*}
 	有特征值 
 	\[
-		G(x,y)=\sum_{m,n}C_{mn}\sin\frac{m\pi x}L\sin\frac{n\pi y}M.
+		G(x,y) = \sum_{m,n}C_{mn}\sin\frac{m\pi x}L\sin\frac{n\pi y}M.
 	\]
 	系数 
 	{\footnotesize
 	\begin{align*}
-		\Bigb{\Bigp{\frac{m\pi}L}^2+\Bigp{\frac{n\pi}M}^2}C_{mn}&=\frac4{LM}\int_0^M\int_0^L\delta(x-\xi,y-\eta)\sin\frac{m\pi x}L\sin\frac{n\pi y}M\d x\nd y\\
-		&=\frac4{LM}\sin\frac{m\pi\xi}L\sin\frac{n\pi\eta}M.
+		\Bigb{\Bigp{\frac{m\pi}L}^2 + \Bigp{\frac{n\pi}M}^2}C_{mn} &= \frac4{LM}\int_0^M\int_0^L\delta(x - \xi,y - \eta)\sin\frac{m\pi x}L\sin\frac{n\pi y}M\d x\nd y\\
+		&= \frac4{LM}\sin\frac{m\pi\xi}L\sin\frac{n\pi\eta}M.
 	\end{align*}}
 	后略。
 \end{example}
 \begin{example}{Fourier法应用·有限高}{}
 	\begin{equation*}
 		\begin{cases}
-			\laplacian u=0,\quad x>0,y\in[0,a]\\
-			u(x,0)=\varphi(x),\enspace u(x,a)=\psi(x),\\
-			u(0,y)=0,
+			\laplacian u = 0,\quad x > 0,y \in [0,a]\\
+			u(x,0) = \varphi(x),\enspace u(x,a) = \psi(x),\\
+			u(0,y) = 0,
 		\end{cases}
 	\end{equation*}
-	取光滑且紧支撑于$(0,\infty)$的边界数据，并取$x\to\infty$时衰减的解。有
+	取光滑且紧支撑于$(0,\infty)$的边界数据，并取$x \to \infty$时衰减的解。有
 	\begin{align*}
-		u(x,y)&=-\biggb{\intRplus\varphi(\xi)\biggeval{\pv Gn}_{\eta=0}\d\xi+\intRplus\psi(\xi)\biggeval{\pv Gn}_{\eta=a}\d\xi}\\
-		&=\intRplus\varphi(\xi)\biggeval{\pv G\eta}_{\eta=0}\d\xi-\intRplus\psi(\xi)\biggeval{\pv G\eta}_{\eta=a}\d\xi
+		u(x,y) &= -\biggb{\intRplus\varphi(\xi)\biggeval{\pv Gn}_{\eta=0}\d\xi + \intRplus\psi(\xi)\biggeval{\pv Gn}_{\eta=a}\d\xi}\\
+		&= \intRplus\varphi(\xi)\biggeval{\pv G\eta}_{\eta=0}\d\xi - \intRplus\psi(\xi)\biggeval{\pv G\eta}_{\eta=a}\d\xi
 	\end{align*}
 	Green函数在$\eta$和$y$方向都采用正弦基，对源坐标$\eta$求导后得
 	\begin{align*}
-		\pv G\eta&=\sum_{n=1}^\infty4n\intRplus\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2+a^2\omega^2}\d\omega\cdot\cos\frac{n\pi\eta}a\sin\frac{n\pi y}a;\\
-		u(x,y)&=\sum_{n=1}^\infty4n\intRplus\intRplus\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2+a^2\omega^2}[\varphi(\xi)-(-1)^n\psi(\xi)]\d\omega\nd\xi\cdot\sin\frac{n\pi y}a.
+		\pv G\eta &= \sum_{n=1}^\infty4n\intRplus\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2 + a^2\omega^2}\d\omega \cdot \cos\frac{n\pi\eta}a\sin\frac{n\pi y}a;\\
+		u(x,y) &= \sum_{n=1}^\infty4n\intRplus\intRplus\frac{\sin\omega\xi\sin\omega x}{n^2\pi^2 + a^2\omega^2}[\varphi(\xi) - (-1)^n\psi(\xi)]\d\omega\nd\xi \cdot \sin\frac{n\pi y}a.
 	\end{align*}
-	最后一式用于$0<y<a$，两端的边界值由内部极限取得。
+	最后一式用于$0 < y < a$，两端的边界值由内部极限取得。
 \end{example}
 \paragraph{$^\ast$Poisson方程第II, III边值问题}
 \begin{align}
 	\begin{cases}
-		\laplacian u=-f(M),&M\in V\subseteq\RR^n\\
-		\Bigp{\alpha u+\beta\pv un}_{\p V}=\varphi(M),&\alpha,\beta\neq 0.
+		\laplacian u = -f(M),&M \in V \subseteq \RR^n\\
+		\Bigp{\alpha u + \beta\pv un}_{\p V} = \varphi(M),&\alpha,\beta \neq 0.
 	\end{cases}
 \end{align}
-设$V$为连通有界区域，取常系数Robin条件，且齐次问题只有零解（例如$\alpha/\beta>0$）。相应的Green函数满足
-\begin{align*}
+设$V$为连通有界区域，取常系数Robin条件，且齐次问题只有零解（例如$\alpha/\beta > 0$）。相应的Green函数满足
+\begin{equation}
+	\label{eq:mmp-robin-green-problem}
 	\begin{cases}
-		\laplacian G=-\delta(M-N),&M,N\in V\subseteq\RR^n\\
-		\Bigp{\alpha G+\beta\pv Gn}_{\p V}=0,&\alpha,\beta\neq 0.
+		\laplacian G = -\delta(M - N),&M,N \in V \subseteq \RR^n\\
+		\Bigp{\alpha G + \beta\pv Gn}_{\p V} = 0,&\alpha,\beta \neq 0.
 	\end{cases}
-\end{align*}
+\end{equation}
 原问题的解
 \begin{align}
-	u(M)&=\int_Vf(N)G(M;N)\d N+\frac1\beta\oint_{\p V}\varphi(N)G(M;N)\d S\\
-	&=\int_Vf(N)G(M;N)\d N-\frac1\alpha\oint_{\p V}\varphi(N)\pv Gn\d S
+	u(M) &= \int_Vf(N)G(M;N)\d N + \frac1\beta\oint_{\p V}\varphi(N)G(M;N)\d S\\
+	&= \int_Vf(N)G(M;N)\d N - \frac1\alpha\oint_{\p V}\varphi(N)\pv Gn\d S
 \end{align}
-$\beta=0$即第I边值问题。$\alpha=0$时，记给定的外法向导数为$g=\varphi/\beta$。对第II边值问题，常数是齐次解。若同时要求$\laplacian G=-\delta$与齐次Neumann边界，对全域积分便与散度定理矛盾。因此可选用以下任一修正
-\begin{align*}
+$\beta = 0$即第I边值问题。$\alpha = 0$时，记给定的外法向导数为$g = \varphi/\beta$。对第II边值问题，常数是齐次解。若同时要求$\laplacian G = -\delta$与齐次Neumann边界，对全域积分便与散度定理矛盾。因此可选用以下任一修正
+\begin{equation}
+	\label{eq:mmp-normalized-neumann-kernels}
 	\begin{cases}
-		\laplacian G=-\delta(M-N)+\frac1v,\\
-		\biggeval{\pv Gn}_{\p V}=0,
+		\laplacian G = -\delta(M - N) + \frac1v,\\
+		\biggeval{\pv Gn}_{\p V} = 0,
 	\end{cases}\enspace\text{或}\quad
 	\begin{cases}
-		\laplacian G=-\delta(M-N),\\
-		\biggeval{\pv Gn}_{\p V}=-\frac1s,
+		\laplacian G = -\delta(M - N),\\
+		\biggeval{\pv Gn}_{\p V} = -\frac1s,
 	\end{cases}
-\end{align*}
+\end{equation}
 其中$v,s$为$V$的体积和表面积。有解
 \begin{align}
-	u(M)=\int_Vf(N)G(M;N)\d N+\oint_{\p V}g(N)G(M;N)\d S+\const.
+	u(M) = \int_Vf(N)G(M;N)\d N + \oint_{\p V}g(N)G(M;N)\d S + \const.
 \end{align}
 相容性条件
 \begin{align}
-	\int_Vf(M)\d M+\oint_{\p V}g(M)\d S=0.
+	\int_Vf(M)\d M + \oint_{\p V}g(M)\d S = 0.
 \end{align}
 \section{初值问题的基本解方法}
-本节主要用基本解方法来求解发展方程，如$u_t=\PDEop u$型方程
+本节主要用基本解方法来求解发展方程，如$u_t = \PDEop u$型方程
 \begin{align}
 	\begin{cases}
-		u_t=\PDEop u+f(M,t),&M\in\RR^n,t>0\\
-		u(M,0)=\varphi(M).
+		u_t = \PDEop u + f(M,t),&M \in \RR^n,t > 0\\
+		u(M,0) = \varphi(M).
 	\end{cases}
 \end{align}
 这里所涉及的$\PDEop$是关于空间变量$M$的常系数线性偏微分算子。
 
-\begin{definition}{$u_t=\PDEop u$型方程初值问题的基本解}{Basic Solution of ut=Pu}
+\begin{definition}{$u_t = \PDEop u$型方程初值问题的基本解}{Basic Solution of ut=Pu}
 	基本解$U(M,t)$满足
 	\begin{align}
 		\begin{cases}
-			U_t=\PDEop U,&M\in\RR^n,t>0\\
-			U(M,0)=\delta(M).
+			U_t = \PDEop U,&M \in \RR^n,t > 0\\
+			U(M,0) = \delta(M).
 		\end{cases}
 	\end{align}
 \end{definition}
 有
 \begin{align}
-	u(M,t)=U(M,t)\ast\varphi(M)+\int_0^tU(M,t-\tau)\ast f(M,\tau)\d\tau.
+	u(M,t) = U(M,t) \ast \varphi(M) + \int_0^tU(M,t - \tau) \ast f(M,\tau)\d\tau.
 \end{align}
 证明过程略。
 
-以及$u_{tt}=\PDEop u$型方程
+以及$u_{tt} = \PDEop u$型方程
 \begin{align}
 	\begin{cases}
-		u_{tt}=\PDEop u+f(M,t),&M\in\RR^n,t>0\\
-		u(M,0)=\varphi(M),\enspace u_t(M,0)=\psi(M).
+		u_{tt} = \PDEop u + f(M,t),&M \in \RR^n,t > 0\\
+		u(M,0) = \varphi(M),\enspace u_t(M,0) = \psi(M).
 	\end{cases}
 \end{align}
-\begin{definition}{$u_{tt}=\PDEop u$型方程初值问题的基本解}{Basic Solution of utt=Pu}
+\begin{definition}{$u_{tt} = \PDEop u$型方程初值问题的基本解}{Basic Solution of utt=Pu}
 	基本解$U(M,t)$满足
 	\begin{align}
 		\begin{cases}
-			U_{tt}=\PDEop U,&M\in\RR^n,t>0\\
-			U(M,0)=0,\enspace U_t(M,0)=\delta(M).
+			U_{tt} = \PDEop U,&M \in \RR^n,t > 0\\
+			U(M,0) = 0,\enspace U_t(M,0) = \delta(M).
 		\end{cases}
 	\end{align}
 \end{definition}
 有
 \begin{align}
 	\begin{aligned}
-		u(M,t)=&\;U\ast\psi+\pp t(U\ast\varphi)+\int_0^tU(M,t-\tau)\ast f(M,\tau)\d\tau.
+		u(M,t) =&\;U \ast \psi + \pp t(U \ast \varphi) + \int_0^tU(M,t - \tau) \ast f(M,\tau)\d\tau.
 	\end{aligned}
 \end{align}
 \paragraph{*混合问题的Green函数}对于发展方程的混合问题通常用分离变量法或积分变换法求解，当然也可以用Green函数（点源函数）法。
@@ -505,28 +533,29 @@ $\beta=0$即第I边值问题。$\alpha=0$时，记给定的外法向导数为$g=
 	一维波动方程的混合问题
 	\begin{align*}
 		\begin{cases}
-			u_{tt}=a^2u_{xx}+f(x,t),\quad x\in(0,L),\;t>0\\
-			u(0,t)=u(L,t)=0\\
-			u(x,0)=\varphi(x),\quad u_t(x,0)=\psi(x)
+			u_{tt} = a^2u_{xx} + f(x,t),\quad x \in (0,L),\;t > 0\\
+			u(0,t) = u(L,t) = 0\\
+			u(x,0) = \varphi(x),\quad u_t(x,0) = \psi(x)
 		\end{cases}
 	\end{align*}
 	Green函数$G(x,t;\xi)$满足 
 	\begin{align*}
 		\begin{cases}
-			G_{tt}=a^2G_{xx},\quad x,\xi\in(0,L),\;t>0\\
-			G(0,t)=G(L,t)=0\\
-			G(x,0)=0,\quad G_t(x,0)=\delta(x-\xi)
+			G_{tt} = a^2G_{xx},\quad x,\xi \in (0,L),\;t > 0\\
+			G(0,t) = G(L,t) = 0\\
+			G(x,0) = 0,\quad G_t(x,0) = \delta(x - \xi)
 		\end{cases}
 	\end{align*}
 	利用Fourier方法可得
-	\[
-		G(x,t;\xi)=\sum_{n=1}^\infty\frac2{n\pi a}\sin\frac{n\pi\xi}L\sin\frac{n\pi x}L\sin\frac{n\pi at}L,
-	\]
+	\begin{equation}
+		\label{eq:mmp-mixed-string-retarded-green}
+		G(x,t;\xi) = \sum_{n=1}^\infty\frac2{n\pi a}\sin\frac{n\pi\xi}L\sin\frac{n\pi x}L\sin\frac{n\pi at}L,
+	\end{equation}
 	进而解
 	\begin{align}
 		\begin{aligned}
-			u(x,t)={}&\int_0^L\psi(\xi)G\d\xi+\pp t\int_0^L\varphi(\xi)G\d\xi+\\
-			&\int_0^t\int_0^L f(\xi,\tau)G(x,t-\tau;\xi)\d\xi\nd\tau
+			u(x,t) = {}&\int_0^L\psi(\xi)G\d\xi + \pp t\int_0^L\varphi(\xi)G\d\xi +\\
+			&\int_0^t\int_0^L f(\xi,\tau)G(x,t - \tau;\xi)\d\xi\nd\tau
 		\end{aligned}
 	\end{align}
 \end{example}
