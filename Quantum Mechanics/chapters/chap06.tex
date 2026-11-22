@@ -20,42 +20,44 @@
 把原子核视为电荷$Ze$、质量$M$的点粒子，电子质量为$m_\electron$。
 忽略自旋、相对论和辐射修正，记约化质量(reduced mass)为$\mu$、Coulomb耦合常数为$\kappa$：
 \begin{equation}
-    \mu=\frac{m_\electron M}{m_\electron+M},\qquad
-    \kappa=\frac{Ze^2}{4\pi\varepsilon_0}.
+    \mu = \frac{m_\electron M}{m_\electron + M},\qquad
+    \kappa = \frac{Ze^2}{4\pi\varepsilon_0}.
 \end{equation}
 
 电子和核的位置算符与动量算符分别记为
-$(\opbm{X}_\electron,\opbm{P}_\electron)$与$(\opbm{X}_N,\opbm{P}_N)$。
+$(\opbm{X}_\electron,\opbm{P}_\electron)$与$(\opbm{X}_\nucleus,\opbm{P}_\nucleus)$。
 定义质心(center of mass)和相对变量
 \begin{subequations}\label{eq:cm-relative}
     \begin{alignat}{2}
-        \opbm{X}_{\CM} &=\frac{m_\electron\opbm{X}_\electron+M\opbm{X}_N}{m_\electron+M},
-        &\quad \opbm{X}&=\opbm{X}_\electron-\opbm{X}_N,\\
-        \opbm{P}_{\CM} &=\opbm{P}_\electron+\opbm{P}_N,
-        &\quad \opbm{P}&=\frac{M\opbm{P}_\electron-m_\electron\opbm{P}_N}{m_\electron+M}.
+        \opbm{X}_{\CM} &= \frac{m_\electron\opbm{X}_\electron + M\opbm{X}_\nucleus}{m_\electron + M},
+        &\quad \opbm{X} &= \opbm{X}_\electron - \opbm{X}_\nucleus,\\
+        \opbm{P}_{\CM} &= \opbm{P}_\electron + \opbm{P}_\nucleus,
+        &\quad \opbm{P} &= \frac{M\opbm{P}_\electron - m_\electron\opbm{P}_\nucleus}{m_\electron + M}.
     \end{alignat}
 \end{subequations}
 这些变量满足两组相互独立的正则对易关系。
 动量的逆变换为
 \begin{subequations}
     \begin{alignat}{1}
-        \opbm{P}_\electron&=\frac{m_\electron}{m_\electron+M}\opbm{P}_{\CM}+\opbm{P},\\
-        \opbm{P}_N&=\frac{M}{m_\electron+M}\opbm{P}_{\CM}-\opbm{P}.
+        \opbm{P}_\electron &= \frac{m_\electron}{m_\electron + M}\opbm{P}_{\CM} + \opbm{P},\\
+        \opbm{P}_\nucleus &= \frac{M}{m_\electron + M}\opbm{P}_{\CM} - \opbm{P}.
     \end{alignat}
 \end{subequations}
 代入动能，两项交叉项分别为
-$+\opbm{P}_{\CM}\cdot\opbm{P}/(m_\electron+M)$和它的负值，因而消去。
+$+\opbm{P}_{\CM} \cdot \opbm{P}/(m_\electron + M)$和它的负值，因而消去。
 
 余下的平方项给出
-\begin{equation}
-    \op{H}_\tot=\frac{\opbm{P}_{\CM}^2}{2(m_\electron+M)}+\op{H},
-    \qquad \op{H}=\frac{\opbm{P}^2}{2\mu}-\kappa\op{R}^{-1},
-    \quad \op{R}=\abs{\opbm{X}}.
-\end{equation}
-在位置表象中，距离算符 $\op R$ 使波函数乘以 $r=\abs{\bm r}$，其逆算符 $\op R^{-1}$ 使波函数乘以 $1/r$。后者的定义域由使 $\psi(\bm r)/r$ 仍平方可积的波函数组成。
+\begin{subequations}
+    \begin{align}
+        \op{H}_\tot &= \frac{\opbm{P}_{\CM}^2}{2(m_\electron + M)} + \op{H},\\
+        \op{H} &= \frac{\opbm{P}^2}{2\mu} - \kappa\op{R}^{-1},
+        \quad \op{R} = \abs{\opbm{X}}.
+    \end{align}
+\end{subequations}
+在位置表象中，距离算符 $\op R$ 使波函数乘以 $r = \abs{\bm r}$，Coulomb 势能项使波函数乘以 $-\kappa/r$。
 自由质心的连续能谱与内部能级属于不同自由度。
 后面$E$专指相对运动(relative motion)能量，零点取无穷远电离阈值(ionization threshold)。
-点Coulomb模型采用通常的自伴Hamilton实现，不在原点另加接触相互作用。
+点核模型只含 Coulomb 吸引势，径向解在原点取正则分支（\secref{sec:hydrogen-radial}）。
 
 \section{氢样原子的基态波函数与特征半径}
 \label{sec:hydrogen-1s}
@@ -63,151 +65,185 @@ $+\opbm{P}_{\CM}\cdot\opbm{P}/(m_\electron+M)$和它的负值，因而消去。
 Coulomb 势具有球对称性，可以先求振幅只依赖距离的定态。
 径向方程同时确定波函数的衰减长度和能量。
 
-写这个球对称态为 $\psi(\bm r)=f(r)$。
-位置表象中 $\opbm P^2=-\hbar^2\laplacian$。对球对称的 $f$，
+写这个球对称态为 $\psi(\bm r) = f(r)$。
+位置表象中 $\opbm P^2 = -\hbar^2\laplacian$。对球对称的 $f$，
 梯度沿径向，穿过半径 $r$ 球面的梯度通量是 $4\pi r^2 f'(r)$。
 在薄壳的内、外表面取通量差，再除以壳体积 $4\pi r^2\d r$，
-得 $\laplacian f=(r^2 f')'/r^2=f''+2f'/r$。定态方程因此写作
+得 $\laplacian f = (r^2 f')'/r^2 = f'' + 2f'/r$。定态方程因此写作
 \begin{equation}
-    -\frac{\hbar^2}{2\mu}\biggp{f''+\frac{2}{r}f'}-\frac{\kappa}{r}f=Ef.
+    -\frac{\hbar^2}{2\mu}\biggp{f'' + \frac{2}{r}f'} - \frac{\kappa}{r}f = Ef.
 \end{equation}
 在远处势能趋于零，负能量解必须选随距离衰减的分支才能归一化。
-试取处处有限、无节点的 $f=C\e^{-r/a}$，其中 $a>0$ 待定。代回方程并除以 $f$，得
-\begin{equation}
-    E=-\frac{\hbar^2}{2\mu a^2}+
-        \frac{1}{r}\biggp{\frac{\hbar^2}{\mu a}-\kappa}.
-\end{equation}
+试取处处有限、无节点的 $f = C\e^{-r/a}$，其中 $a > 0$ 待定。代回方程并除以 $f$，得
+\[
+    E = -\frac{\hbar^2}{2\mu a^2} +
+        \frac{1}{r}\biggp{\frac{\hbar^2}{\mu a} - \kappa}.
+\]
 同一个定态在各处必须有相同的 $E$，所以 $1/r$ 的系数必须为零。
-此条件使指数函数在所有 $r>0$ 处都满足径向方程，同时确定了长度 $a_Z$ 和能量。
-\begin{equation}
-    a_Z=\frac{\hbar^2}{\mu\kappa},\qquad
-    E_{1\mathrm{s}}=-\frac{\hbar^2}{2\mu a_Z^2}=-\frac{\mu\kappa^2}{2\hbar^2}.
-    \label{eq:hydrogen-1s-scale}
-\end{equation}
+此条件使指数函数在所有 $r > 0$ 处都满足径向方程，同时确定了长度 $a_Z$ 和能量。
+\begin{subequations}\label{eq:hydrogen-1s-scale}
+    \begin{align}
+        a_Z &= \frac{\hbar^2}{\mu\kappa},\\
+        E_{1\mathrm{s}} &= -\frac{\hbar^2}{2\mu a_Z^2} = -\frac{\mu\kappa^2}{2\hbar^2}.
+    \end{align}
+\end{subequations}
+其中$Z = 1, \mu = m_\electron$得到Bohr半径$a_0 = \hbar^2/(m_\electron e^2/4\pi\varepsilon_0)$。
+
 取 $C$ 为正实数，球壳上的归一化条件给出
+\[
+    4\pi C^2\intRplus r^2\e^{-2r/a_Z}\d r = \pi a_Z^3 C^2 = 1 \implies C = \frac1{\sqrt{\pi a_Z^3}}.
+\]
+可得
 \begin{equation}
-    1=4\pi C^2\intRplus r^2\e^{-2r/a_Z}\d r=\pi a_Z^3 C^2,\qquad
-    \psi_{1\mathrm{s}}(\bm r)=\frac{\e^{-r/a_Z}}{\sqrt{\pi a_Z^3}}.
+    \psi_{1\mathrm{s}}(\bm r) = \frac{\e^{-r/a_Z}}{\sqrt{\pi a_Z^3}}.
 \end{equation}
-若探测器按半径等宽分箱，落入 $[r,r+\d r]$ 的概率为
+若探测器按半径等宽分箱，落入 $[r,r + \d r]$ 的概率为
 $4\pi r^2\abs{\psi_{1\mathrm{s}}}^2\d r$。对 $r^2\e^{-2r/a_Z}$ 求导可得，计数最多的一箱在
-$r=a_Z$ 附近，而放在等体积小格中的探测器在核附近计数最多。
-这个态称为 $1\mathrm{s}$，其中正体字母 $\mathrm{s}$ 表示轨道角动量 $\ell=0$。下面的能谱推导将说明它正是最低能态，
-也将回答球对称的计算尚未回答的问题：角分布不同的态怎样才会有相同能量？
+$r = a_Z$ 附近，而放在等体积小格中的探测器在核附近计数最多。
+这个态称为 $1\mathrm{s}$，其中正体字母 $\mathrm{s}$ 表示轨道角动量 $\ell = 0$。
+
+\subsection{电子为什么不会落入原子核}
+\label{ss:qm-atomic-stability}
+若把电子当作绕固定核做圆周运动的经典点电荷，它有向心加速度，按经典电动力学就会辐射。
+圆轨道的机械能为 $-\kappa/(2r)$，以辐射缓慢损失能量时，轨道半径会逐渐缩小。
+在波动力学里，可用 $\psi_s(\bm r) = s^{3/2}\psi(s\bm r)$ 把一个波包的宽度压缩到原来的 $1/s$ 倍，其中 $s > 1$。
+体积元缩小到 $1/s^3$ 倍，恰好抵消概率密度中的 $s^3$，总概率仍为一。
+每求一次空间导数就多出一个因子 $s$，因此动能期望增至 $s^2$ 倍，Coulomb 吸引能的绝对值只增至 $s$ 倍。压缩得足够紧时，动能代价占主导。
+
+允许波函数同时改变形状，还能找到比 $1\mathrm{s}$ 更低的能量吗？
+记 $\bm n = \bm r/r$。展开下面的平方，交叉项含 $\bm n \cdot \grad\abs{\psi}^2$。
+利用 $\div\bm n = 2/r$ 分部积分，并代入 $\hbar^2/(\mu a_Z) = \kappa$，对动能均值有限的归一化态得到
+\begin{equation}
+    \ave{\op H} - E_{1\mathrm{s}}
+    = \frac{\hbar^2}{2\mu}\int_{\RR^3}
+      \biggabs{\grad\psi + \frac{\bm n}{a_Z}\psi}^2\,\d^3 r \geq 0 .
+    \label{eq:qm-hydrogen-energy-bound}
+\end{equation}
+$\psi_{1\mathrm{s}}$ 满足 $\grad\psi_{1\mathrm{s}} = -\bm n\psi_{1\mathrm{s}}/a_Z$，恰好达到下界。\footnote{分部积分可先取光滑且紧支撑的波函数。若从积分区挖去半径 $\epsilon$ 的小球，球面项随 $\epsilon^2$ 趋零。再用这类波函数逼近动能有限的态，即得同一下界。}
+基态随时间只积累整体相位，其概率密度静止，径向概率流为零。耦合到辐射场后，激发态可跃迁到较低能级并发射光子。
+孤立原子处于基态时，没有更低的电子能级可供这样的跃迁。自发发射的速率在\chapref{ch:transitions}由原子与场的联合态求出。
+
+核本身能否束缚是另一个尺度上的问题。本章只把核的质量和电荷作为输入。
+在由多个核子组成的核内，核子之间有短程核力，质子之间还有电斥力。氘核只有一个质子和一个中子，可以单独看出核力的束缚作用。
+氘核的静能比自由质子和自由中子的静能之和低约 $\qty{2.22}{MeV}$，把它们拆开至少要补足这份结合能\cite{deuteron-binding}。
+判断某个核是否会自发衰变，还要比较符合守恒律的各个末态的总能量。例如氚核束缚着一个质子和两个中子，仍可通过弱相互作用衰变为氦-3 核、电子和电子反中微子。
+核的结合能和衰变能分别见《核辐射物理及探测学》的「原子核的结合能」和「$\beta$ 衰变」。
 
 \section{Coulomb问题的守恒量}
 球对称解给出了一个能量值，还没有说明不同角分布的激发态为什么可能同能。
 普通中心势(central potential)使角动量守恒，旋转能联系同一 $\ell$ 中的不同投影态，但保持轨道角动量量子数 $\ell$。
 要从对称性解释氢原子更高的简并度，需要寻找能够联系不同 $\ell$ 的守恒量。
 
-这个守恒量可以从经典反平方力找出来。令 $\bm n=\bm r/r$，把速度分成径向和横向两部分，
-$\bm v_\perp=\bm v-(\bm v\cdot\bm n)\bm n$，于是 $\dotbm{n}=\bm v_\perp/r$。
-在力 $\dotbm{p}=-\kappa\bm n/r^2$ 下，$\bm L=\bm r\times\mu\bm v$ 守恒。
-利用 $\bm n\times\bm L=-\mu r\bm v_\perp$ 可得
-\begin{equation}
-    \dd{t}\frac{\bm p\times\bm L}{\mu}
-       =-\frac{\kappa}{\mu r^2}\bm n\times\bm L
-       =\kappa\dotbm{n}.
-\end{equation}
-两边作差就得到守恒的 $\bm p\times\bm L/\mu-\kappa\bm n$。
+这个守恒量可以从经典反平方力找出来。令 $\bm n = \bm r/r$，把速度分成径向和横向两部分，
+$\bm v_\perp = \bm v - (\bm v \cdot \bm n)\bm n$，于是 $\dotbm{n} = \bm v_\perp/r$。
+在力 $\dotbm{p} = -\kappa\bm n/r^2$ 下，$\bm L = \bm r \times \mu\bm v$ 守恒。
+利用 $\bm n \times \bm L = -\mu r\bm v_\perp$ 可得
+\[
+    \dd{t}\frac{\bm p \times \bm L}{\mu}
+       = -\frac{\kappa}{\mu r^2}\bm n \times \bm L
+       = \kappa\dotbm{n}.
+\]
+两边作差就得到守恒的 $\bm p \times \bm L/\mu - \kappa\bm n$。
 在位置表象中，径向单位矢量 $\bm n$ 对应的算符记作 $\opbm n$。其第 $i$ 个分量使波函数乘以径向与第 $i$ 根坐标轴夹角的余弦，
 \[
-    (\op n_i\psi)(\bm r)=\frac{r_i}{r}\,\psi(\bm r),\qquad r>0.
+    (\op n_i\psi)(\bm r) = \frac{r_i}{r}\,\psi(\bm r),\qquad r > 0.
 \]
-因为 $\abs{r_i/r}\leq 1$，$\op n_i$ 可以作用于任意平方可积的波函数，原点这一点的取值不影响结果。
 动量与角动量的乘积则要考虑 $\op{P}_j$ 与 $\op{L}_k$ 的作用次序，因此对经典乘积取对称排序。
 \begin{definition}{Coulomb问题的Runge--Lenz向量}{qm-runge-lenz}
-    在 Coulomb 势 $V(\op{R})=-\kappa\op R^{-1}$ 中，相对运动的 Runge--Lenz 向量定义为
+    在 Coulomb 势 $V(\op{R}) = -\kappa\op R^{-1}$ 中，相对运动的 Runge--Lenz 向量定义为
     \begin{equation}
-        \opbm{A}=\frac{\opbm{P}\times\opbm{L}-\opbm{L}\times\opbm{P}}{2\mu}
-        -\kappa\opbm n.
+        \opbm{A} = \frac{\opbm{P} \times \opbm{L} - \opbm{L} \times \opbm{P}}{2\mu}
+        - \kappa\opbm n.
         \label{eq:RL}
     \end{equation}
-    $\opbm{L}=\opbm{X}\times\opbm{P}$ 是相对轨道角动量。
+    $\opbm{L} = \opbm{X} \times \opbm{P}$ 是相对轨道角动量。
     $\opbm{A}$ 的每个分量 $\op{A}_i$ 都具有能量乘长度的量纲，与 $\kappa$ 相同。
-    其平方定义为 $\opbm{A}^2=\opbm{A}\cdot\opbm{A}$。
+    其平方定义为 $\opbm{A}^2 = \opbm{A} \cdot \opbm{A}$。
 \end{definition}
-由$[\op{L}_j,\op{P}_k]=\i\hbar\epsilon_{jkl}\op{P}_l$，
-\begin{equation}
+由$[\op{L}_j,\op{P}_k] = \i\hbar\epsilon_{jkl}\op{P}_l$，
+\[
     \begin{alignedat}{1}
-        (\opbm{L}\times\opbm{P})_i &=\epsilon_{ijk}\bigp{\op{P}_k\op{L}_j+[\op{L}_j,\op{P}_k]}\\
-        &=-(\opbm{P}\times\opbm{L})_i+2\i\hbar \op{P}_i.
+        (\opbm{L} \times \opbm{P})_i &= \epsilon_{ijk}\bigp{\op{P}_k\op{L}_j + [\op{L}_j,\op{P}_k]}\\
+        &= -(\opbm{P} \times \opbm{L})_i + 2\i\hbar \op{P}_i.
     \end{alignedat}
-\end{equation}
+\]
 代回式\eqref{eq:RL}，就能读出对称排序产生的量子修正，
 \begin{equation}
-    \opbm A=\frac{\opbm P\times\opbm L-\i\hbar\opbm P}{\mu}
-       -\kappa\opbm n.
+    \opbm A = \frac{\opbm P \times \opbm L - \i\hbar\opbm P}{\mu}
+       - \kappa\opbm n.
 \end{equation}
 分子中正比于 $\hbar$ 的一项来自位置与动量的对易关系，各分量仍为对称算符。
-为使以下各个算符乘积都有定义，先取在原点附近和足够远处都为零的光滑波函数。由正则对易关系得到
+先用只在某个球壳 $0 < r_1 < r < r_2$ 内非零的光滑波函数验算，由正则对易关系得到
 \begin{subequations}
-    \begin{alignat}{2}
-        [\op{H},\op{A}_i]&=0,&\quad [\op{L}_i,\op{A}_j]&=\i\hbar\epsilon_{ijk}\op{A}_k,\\
-        [\op{A}_i,\op{A}_j]&=-\frac{2\i\hbar \op{H}}{\mu}\epsilon_{ijk}\op{L}_k,
-        &\quad \opbm{L}\cdot\opbm{A}&=\opbm{A}\cdot\opbm{L}=0,\\
-        \opbm{A}^2&=\kappa^2\one+\frac{2\op{H}}{\mu}(\opbm{L}^2+\hbar^2\one).
+    \begin{align}
+        [\op{H},\op{A}_i] &= 0,\\
+        {}[\op{L}_i,\op{A}_j] &= \i\hbar\epsilon_{ijk}\op{A}_k,\\
+        {}[\op{A}_i,\op{A}_j] &= -\frac{2\i\hbar \op{H}}{\mu}\epsilon_{ijk}\op{L}_k,\\
+        \opbm{L} \cdot \opbm{A} &= \opbm{A} \cdot \opbm{L} = 0,\\
+        \opbm{A}^2 &= \kappa^2\one + \frac{2\op{H}}{\mu}(\opbm{L}^2 + \hbar^2\one).
         \label{eq:RLsquare}
-    \end{alignat}
+    \end{align}
 \end{subequations}
-为推导平方恒等式，令 $\opbm{Q}=\opbm{P}\times\opbm{L}-\i\hbar\opbm{P}$，
-则 $\opbm{A}=\opbm{Q}/\mu-\kappa\opbm n$。其中 $\opbm n\cdot\opbm n=\one$，因为 $\sum_i(r_i/r)^2=1$。另外两项满足
-\begin{equation}
-    \opbm{Q}^2=\opbm{P}^2(\opbm{L}^2+\hbar^2\one),\qquad
-    \opbm{Q}\cdot\opbm n+\opbm n\cdot\opbm{Q}
-    =2\op R^{-1}(\opbm{L}^2+\hbar^2\one).
-\end{equation}
+为推导平方恒等式，令 $\opbm{Q} = \opbm{P} \times \opbm{L} - \i\hbar\opbm{P}$，
+则 $\opbm{A} = \opbm{Q}/\mu - \kappa\opbm n$。其中 $\opbm n \cdot \opbm n = \one$，因为 $\textstyle \sum_i(r_i/r)^2 = 1$。另外两项满足
+\begin{subequations}
+    \begin{align}
+        \opbm{Q}^2 &= \opbm{P}^2(\opbm{L}^2 + \hbar^2\one),\\
+        \opbm{Q} \cdot \opbm n + \opbm n \cdot \opbm{Q}
+        &= 2\op R^{-1}(\opbm{L}^2 + \hbar^2\one).
+    \end{align}
+\end{subequations}
 将这两式代入$\opbm{A}^2$，逐步得到
-\begin{equation}
+\[
     \begin{alignedat}{1}
-        \opbm{A}^2 &=\frac{\opbm{Q}^2}{\mu^2}+\kappa^2\one
-            -\frac{\kappa}{\mu}
-            \Bigp{\opbm{Q}\cdot\opbm n+\opbm n\cdot\opbm{Q}}\\
-        &=\kappa^2\one+
-            \Bigp{\frac{\opbm{P}^2}{\mu^2}-\frac{2\kappa}{\mu}\op R^{-1}}
-            (\opbm{L}^2+\hbar^2\one)
-            =\kappa^2\one+\frac{2\op{H}}{\mu}(\opbm{L}^2+\hbar^2\one).
+        \opbm{A}^2 &= \frac{\opbm{Q}^2}{\mu^2} + \kappa^2\one
+            - \frac{\kappa}{\mu}
+            \Bigp{\opbm{Q} \cdot \opbm n + \opbm n \cdot \opbm{Q}}\\
+        &= \kappa^2\one +
+            \Bigp{\frac{\opbm{P}^2}{\mu^2} - \frac{2\kappa}{\mu}\op R^{-1}}
+            (\opbm{L}^2 + \hbar^2\one)
+            = \kappa^2\one + \frac{2\op{H}}{\mu}(\opbm{L}^2 + \hbar^2\one).
     \end{alignedat}
-\end{equation}
+\]
 这就得到式\eqref{eq:RLsquare}，其中$\hbar^2$项来自量子排序。
-这里$[\op{R},\opbm{L}^2]=[\opbm{P}^2,\opbm{L}^2]=0$，因此可将$\opbm{L}^2+\hbar^2\one$统一移到右侧。
+这里$[\op{R},\opbm{L}^2] = [\opbm{P}^2,\opbm{L}^2] = 0$，因此可将$\opbm{L}^2 + \hbar^2\one$统一移到右侧。
 
 其他对易式可逐分量用下面两式检验：
-\[
-    [\op{P}_i,f(\opbm{X})]=-\i\hbar(\p_i f)(\opbm{X}),\qquad
-    \epsilon_{ijk}\epsilon_{imn}=\delta_{jm}\delta_{kn}-\delta_{jn}\delta_{km}.
-\]
+\begin{gather*}
+    [\op{P}_i,f(\opbm{X})] = -\i\hbar(\p_i f)(\opbm{X}),\\
+    \epsilon_{ijk}\epsilon_{imn} = \delta_{jm}\delta_{kn} - \delta_{jn}\delta_{km}.
+\end{gather*}
 点 Coulomb 势下的算符推导见文献\cite{runge}。
 
-\subsection{Runge--Lenz 矢量的守恒性}
+\subsectionstar{Runge--Lenz 矢量的守恒性}
 \label{ss:rl-conservation}
-守恒关系$[\op{H},\opbm{A}]=0$可用两个相消的对易子直接验证。
+守恒关系$[\op{H},\opbm{A}] = 0$可用两个相消的对易子直接验证。
 对光滑的位置函数 $f$，由乘积求导得
 \begin{equation}
     [\opbm{P}^2,f(\opbm{X})]
-    =-2\i\hbar\sum_j(\p_j f)(\opbm X)\op{P}_j-\hbar^2(\laplacian f)(\opbm X).
+    = -2\i\hbar\sum_j(\p_j f)(\opbm X)\op{P}_j - \hbar^2(\laplacian f)(\opbm X).
 \end{equation}
-取普通函数 $n_i(\bm r)=r_i/r$，其导数为
-$\p_j n_i=\delta_{ij}/r-r_i r_j/r^3$、$\laplacian n_i=-2r_i/r^3$（$r>0$）。
+取普通函数 $n_i(\bm r) = r_i/r$，其导数为
+$\p_j n_i = \delta_{ij}/r - r_i r_j/r^3$、$\laplacian n_i = -2r_i/r^3$（$r > 0$）。
 分别代入位置算符 $\opbm X$，即得到上式所需的乘法算符。
 把含动量的项合并为叉积，并用 $\op R^{-3}$ 表示乘以 $r^{-3}$ 的算符，得到
 \begin{equation}
     \begin{alignedat}{1}
-        \opbm{X}\times\opbm{L}
-            &=\opbm{X}(\opbm{X}\cdot\opbm{P})-\op{R}^2\opbm{P},\\
+        \opbm{X} \times \opbm{L}
+            &= \opbm{X}(\opbm{X} \cdot \opbm{P}) - \op{R}^2\opbm{P},\\
         [\opbm{P}^2,\opbm{n}]
-            &=2\op R^{-3}\bigp{\i\hbar\,\opbm{X}\times\opbm{L}+\hbar^2\opbm{X}}.
+            &= 2\op R^{-3}\bigp{\i\hbar\,\opbm{X} \times \opbm{L} + \hbar^2\opbm{X}}.
     \end{alignedat}
 \end{equation}
-另一方面$[\opbm{P}^2,\opbm{Q}]=0$，而
+另一方面$[\opbm{P}^2,\opbm{Q}] = 0$，而
 \begin{equation}
     [\op{R}^{-1},\opbm{Q}]
-    =-\op R^{-3}\bigp{\i\hbar\,\opbm{X}\times\opbm{L}+\hbar^2\opbm{X}}.
+    = -\op R^{-3}\bigp{\i\hbar\,\opbm{X} \times \opbm{L} + \hbar^2\opbm{X}}.
 \end{equation}
 因此
 \begin{equation}
-    [\op{H},\opbm{A}] =-\frac{\kappa}{\mu}[\op{R}^{-1},\opbm{Q}]
-            -\frac{\kappa}{2\mu}[\opbm{P}^2,\opbm{n}]=0.
+    [\op{H},\opbm{A}] = -\frac{\kappa}{\mu}[\op{R}^{-1},\opbm{Q}]
+            - \frac{\kappa}{2\mu}[\opbm{P}^2,\opbm{n}] = 0.
 \end{equation}
 动能与Coulomb势的两组贡献逐项相消，说明$\opbm{A}$确实把同能态联系起来。
 
@@ -216,132 +252,133 @@ $\opbm A$ 和 $\opbm L$ 的各分量均保持能量本征子空间。
 在能量为 $E$ 的子空间内，$[\op{A}_i,\op{A}_j]$ 中 $\epsilon_{ijk}\op{L}_k$ 的系数为常数 $-2\i\hbar E/\mu$。
 对于束缚态，这个性质使求能谱的问题可以归结为两个角动量的合成。
 
-在固定负能量$E<0$的子空间，定义
-\begin{equation}
-    \opbm{D}=\sqrt{-\frac\mu{2E}}\opbm{A},
-    \qquad \opbm{M}_\pm=\frac{\opbm{L}\pm\opbm{D}}{2}.
-\end{equation}
+在固定负能量$E < 0$的子空间，定义
+\begin{subequations}
+    \begin{align}
+        \opbm{D} &= \sqrt{-\frac\mu{2E}}\opbm{A},\\
+        \opbm{M}_\pm &= \frac{\opbm{L} \pm \opbm{D}}{2}.
+    \end{align}
+\end{subequations}
 此处$\opbm{D}$有角动量量纲。
 
-由于$[\op{H},\op{A}_i]=0$，$\op{A}_i$把固定$E$子空间映到自身，
+由于$[\op{H},\op{A}_i] = 0$，$\op{A}_i$把固定$E$子空间映到自身，
 而 $\op{H}$ 在这个子空间中作用为 $E\one$。
 由缩放定义，三组对易关系变为
 \begin{subequations}
     \begin{alignat}{1}
-        [\op{L}_i,\op{L}_j]&=\i\hbar\epsilon_{ijk}\op{L}_k,\\
-        [\op{L}_i,\op{D}_j]&=\i\hbar\epsilon_{ijk}\op{D}_k,\\
-        [\op{D}_i,\op{D}_j]&=\i\hbar\epsilon_{ijk}\op{L}_k.
+        [\op{L}_i,\op{L}_j] &= \i\hbar\epsilon_{ijk}\op{L}_k,\\
+        [\op{L}_i,\op{D}_j] &= \i\hbar\epsilon_{ijk}\op{D}_k,\\
+        [\op{D}_i,\op{D}_j] &= \i\hbar\epsilon_{ijk}\op{L}_k.
     \end{alignat}
 \end{subequations}
 例如$[\op{M}_{+i},\op{M}_{+j}]$展开后有四项，
-\begin{equation}
+\[
     \begin{alignedat}{1}
         \relax[\op{M}_{+i},\op{M}_{+j}]
-        &=\frac14\bigp{[\op{L}_i,\op{L}_j]+[\op{L}_i,\op{D}_j]+[\op{D}_i,\op{L}_j]+[\op{D}_i,\op{D}_j]}\\
-        &=\frac{\i\hbar}{4}\epsilon_{ijk}(2\op{L}_k+2\op{D}_k)
-        =\i\hbar\epsilon_{ijk}\op{M}_{+k}.
+        &= \frac14\bigp{[\op{L}_i,\op{L}_j] + [\op{L}_i,\op{D}_j] + [\op{D}_i,\op{L}_j] + [\op{D}_i,\op{D}_j]}\\
+        &= \frac{\i\hbar}{4}\epsilon_{ijk}(2\op{L}_k + 2\op{D}_k)
+        = \i\hbar\epsilon_{ijk}\op{M}_{+k}.
     \end{alignedat}
-\end{equation}
+\]
 $[\op{M}_{+i},\op{M}_{-j}]$中的$\opbm{L}$项和$\opbm{D}$项分别抵消。
 
 因此得到两组彼此对易的角动量。
-\begin{equation}
-    [\op{M}_{\pm i},\op{M}_{\pm j}]=\i\hbar\epsilon_{ijk}\op{M}_{\pm k},\qquad
-    [\op{M}_{+i},\op{M}_{-j}]=0.
-\end{equation}
-由 $\opbm{L}\cdot\opbm{D}=\opbm{D}\cdot\opbm{L}=0$，有 $\opbm{M}_+^2=\opbm{M}_-^2$。
+\begin{subequations}
+    \begin{align}
+        [\op{M}_{\pm i},\op{M}_{\pm j}] &= \i\hbar\epsilon_{ijk}\op{M}_{\pm k},\\
+        {}[\op{M}_{+i},\op{M}_{-j}] &= 0.
+    \end{align}
+\end{subequations}
+由 $\opbm{L} \cdot \opbm{D} = \opbm{D} \cdot \opbm{L} = 0$，有 $\opbm{M}_+^2 = \opbm{M}_-^2$。
 
 两组角动量量子数因而相同，记为 $j$。在量子数为 $j$ 的子空间内，
 \begin{equation}
-    \opbm{M}_\pm^2=\frac14(\opbm{L}^2+\opbm{D}^2)
-    =\hbar^2j(j+1)\one.
+    \opbm{M}_\pm^2 = \frac14(\opbm{L}^2 + \opbm{D}^2)
+    = \hbar^2j(j + 1)\one.
 \end{equation}
 另一方面，将$\opbm{A}^2$恒等式乘$-\mu/(2E)$，并与上式联立，
 \begin{equation}
-    \opbm{L}^2+\opbm{D}^2=\biggp{-\frac{\mu\kappa^2}{2E}-\hbar^2}\one
-    =4\hbar^2j(j+1)\one.
+    \opbm{L}^2 + \opbm{D}^2 = \biggp{-\frac{\mu\kappa^2}{2E} - \hbar^2}\one
+    = 4\hbar^2j(j + 1)\one.
 \end{equation}
-把正整数 $n=2j+1$ 称为主量子数(principal quantum number)，便得到束缚谱。
+把正整数 $n = 2j + 1$ 称为主量子数(principal quantum number)，便得到束缚谱。
 \begin{theorem}{Coulomb束缚能谱}{qm-coulomb-spectrum}
-    在点核、非相对论Coulomb模型的通常自伴实现中，
+    在上述非相对论点核 Coulomb 模型中，
     内部束缚态的能量为
     \begin{equation}
-        E_n=-\frac{\mu\kappa^2}{2\hbar^2n^2}
-            =-\frac{\mu c^2(Z\alpha)^2}{2n^2},
-        \qquad n=1,2,\ldots.
+        E_n = -\frac{\mu\kappa^2}{2\hbar^2n^2}
+            = -\frac{\mu c^2(Z\alpha)^2}{2n^2},
+        \qquad n = 1,2,\ldots.
         \label{eq:hydrogen}
     \end{equation}
     $\mu$为电子与核的约化质量；未计入自旋时，
-    固定$n$下的角动量为$\ell=0,\ldots,n-1$。
+    固定$n$下的角动量为$\ell = 0,\ldots,n - 1$。
 \end{theorem}
 
 整数$n$来自恒等式
-$4j(j+1)+1=(2j+1)^2$：
-\begin{equation}
+$4j(j + 1) + 1 = (2j + 1)^2$：
+\[
     -\frac{\mu\kappa^2}{2E}
-    =\hbar^2\bigb{4j(j+1)+1}
-    =\hbar^2n^2.
-\end{equation}
-每一组角动量具有$2j+1=n$个投影态，
-两个彼此对易的角动量因此构成$n\times n$维子空间。
+    = \hbar^2\bigb{4j(j + 1) + 1}
+    = \hbar^2n^2.
+\]
+每一组角动量具有$2j + 1 = n$个投影态，
+两个彼此对易的角动量因此构成$n \times n$维子空间。
 \secref{sec:hydrogen-radial}将直接构造径向波函数，说明对每组允许的 $n,\ell$，径向解只差一个常数因子。
 
 \begin{corollary}[氢原子束缚能级的简并度]
-固定主量子数 $n$，合成 $\opbm{L}=\opbm{M}_++\opbm{M}_-$ 给出 $\ell=0,1,\ldots,n-1$，
-每个 $\ell$ 有 $2\ell+1$ 个磁量子数 $m$。因此空间态的总数是
+固定主量子数 $n$，合成 $\opbm{L} = \opbm{M}_+ + \opbm{M}_-$ 给出 $\ell = 0,1,\ldots,n - 1$，
+每个 $\ell$ 有 $2\ell + 1$ 个磁量子数 $m$。因此空间态的总数是
 \begin{equation}
-    \sum_{\ell=0}^{n-1}(2\ell+1)=n^2.
+    \sum_{\ell=0}^{n-1}(2\ell + 1) = n^2.
 \end{equation}
 计入两个电子自旋投影且忽略自旋耦合时，总简并度为 $2n^2$。
 \end{corollary}
 \begin{figure}[htbp]
     \centering\tikzfigure{hydrogen-levels}
-    \caption{非相对论氢原子的前四层束缚态。纵向按 $-1/n^2$ 排列，横向按轨道角动量分列。红、青箭头各举一个 Balmer 通道：$3\mathrm{p}\to2\mathrm{s}$ 对应 $\mathrm H_\alpha$，$4\mathrm{d}\to2\mathrm{p}$ 对应 $\mathrm H_\beta$。}\label{fig:hydrogen-levels}
+    \caption{非相对论氢原子的前四层束缚态。纵向按 $-1/n^2$ 排列，横向按轨道角动量分列。红、青箭头各举一个 Balmer 通道：$3\mathrm{p} \to 2\mathrm{s}$ 对应 $\mathrm H_\upalpha$，$4\mathrm{d} \to 2\mathrm{p}$ 对应 $\mathrm H_\upbeta$。}\label{fig:hydrogen-levels}
 \end{figure}
 标准 Coulomb 问题的束缚态(bound state)记为 $\ket{n,\ell,m}$。三个标签依次给出同一个轨道态的能量、轨道角动量平方和 $z$ 投影的量子数。
 位置与动量的矩阵元可结合这些量子数和算符恒等式进一步求取。
-$E\geq0$的连续谱也不适用上述两个紧致角动量代数。
+$E \geq 0$的连续谱也不适用上述两个紧致角动量代数。
 
 \section{Rydberg 公式与同位素位移}
 光谱仪测量波长。选取一对允许跃迁的能级，将能量差换算为光子波长，就可以把预测与观测逐线比较。
 把氢换成氘时，核电荷相同，约化质量却变了；比较两种原子的同一条谱线，就能单独检验两体约化留下的质量因子。
 
-$R_M$表示核质量为$M$时的Rydberg常数，$R_\infty$表示无限重核的极限；二者量纲均为逆长度。
+记发射前、后原子的主量子数分别为 $n_\initial,n_\final$，其中 $n_\final < n_\initial$。忽略光子反冲和高阶修正时，发射线的波长满足
+\begin{equation}
+    \frac1\lambda = R_MZ^2\biggp{\frac1{n_\final^2} - \frac1{n_\initial^2}},
+\end{equation}
+其中$R_M$表示核质量为$M$时的Rydberg常数
+\begin{equation}
+    R_M = \frac{\mu e^4}{8\varepsilon_0^2h^3c}.
+\end{equation}
+而考虑无限重核极限$\mu = m_\electron$时，得到$R_\infty = \qty{10973731.568157}{m^{-1}}$。
 
-若忽略光子反冲和高阶修正，从$n_i$到$n_f<n_i$发射的频率满足
-\begin{equation}
-    \frac1\lambda=R_MZ^2\biggp{\frac1{n_f^2}-\frac1{n_i^2}},\qquad
-    R_M=\frac\mu{m_\electron}R_\infty,
-    \quad R_\infty=\frac{m_\electron e^4}{8\varepsilon_0^2h^3c}.
-\end{equation}
-这里从能量差到波数的步骤是
-\begin{equation}
-    \frac{E_{n_i}-E_{n_f}}{hc}
-    =\frac{\mu Z^2e^4}{32\pi^2\varepsilon_0^2\hbar^2hc}
-        \biggp{\frac1{n_f^2}-\frac1{n_i^2}}.
-\end{equation}
-用$h=2\pi\hbar$整理系数，便得到上述$R_M$。
-固定 $n_f=2$，图\ref{fig:hydrogen-levels}中越来越密的上能级给出图\ref{fig:balmer-lines}的 Balmer 系列。令 $n_i\to\infty$ 得到短波极限。
+固定 $n_\final = 2$，图\ref{fig:hydrogen-levels}中越来越密的上能级给出图\ref{fig:balmer-lines}的 Balmer 系列。令 $n_\initial \to \infty$ 得到短波极限。
+
 \begin{figure}[htbp]
     \centering\tikzfigure{balmer-lines}
-    \caption{氢的 Balmer 发射线（真空波长）。数字标出初态 $n_i$，红线 $\mathrm H_\alpha$ 和青线 $\mathrm H_\beta$ 对应图\ref{fig:hydrogen-levels}中的同色箭头；左侧虚线标出约 $\qty{365}{nm}$ 的系限。}\label{fig:balmer-lines}
+    \caption{氢的 Balmer 发射线（真空波长）。数字标出初态 $n_\initial$，红线 $\mathrm H_\upalpha$ 和青线 $\mathrm H_\upbeta$ 对应图\ref{fig:hydrogen-levels}中的同色箭头；左侧虚线标出约 $\qty{365}{nm}$ 的系限。}\label{fig:balmer-lines}
 \end{figure}
 将各实测波数除以括号中的整数因子后，
 若模型适用，应得到同一个$R_MZ^2$，这比逐条拟合独立能量更强。
 
 \begin{example}{同位素谱线的质量依赖}{qm-isotope}
-    对同一核电荷$Z$的两个核质量$M_1,M_2$，
-    同一电子跃迁的最低阶频率比为
+    两个氢样离子的核电荷数均为 $Z$，核质量分别为 $M_1,M_2$。忽略光子反冲和精细结构，求同一电子跃迁的频率比。以无限重核时的频率 $\nu_\infty$ 为参照，求同位素频移对 $m_\electron/M_i$ 的一阶近似，并判断哪条谱线的波长较短。
+    \par\smallskip\textbf{解}\quad
+    固定初末态后，跃迁频率正比于电子与原子核的约化质量，故
     \begin{equation}
         \frac{\nu(M_2)}{\nu(M_1)}
-        =\frac{\mu(M_2)}{\mu(M_1)},
+        = \frac{\mu(M_2)}{\mu(M_1)},
         \qquad
-        \mu(M)=\frac{m_\electron}{1+m_\electron/M}.
+        \mu(M) = \frac{m_\electron}{1 + m_\electron/M}.
     \end{equation}
-    在$M\gg m_\electron$时展开分母，
+    在$M \gg m_\electron$时展开分母，
     \begin{equation}
-        \frac{\nu(M_2)-\nu(M_1)}{\nu_\infty}
-        \simeq m_\electron\biggp{\frac1{M_1}-\frac1{M_2}}.
+        \frac{\nu(M_2) - \nu(M_1)}{\nu_\infty}
+        \simeq m_\electron\biggp{\frac1{M_1} - \frac1{M_2}}.
     \end{equation}
     因而较重同位素的频率更高、波长更短。
     这个质量依赖由质心分离产生，不需要改变电子电荷或Coulomb耦合。
@@ -351,109 +388,191 @@ $R_M$表示核质量为$M$时的Rydberg常数，$R_\infty$表示无限重核的�
 精密谱还包括吸收发射时的整体反冲、精细结构、超精细结构、核大小和辐射修正。
 谱线强弱则需要\chapref{ch:transitions}的跃迁矩阵元。
 
+\subsectionstar{旧量子论为什么算对氢谱，又在哪里失效}
+\label{ss:qm-old-quantum}
+单凭氢的谱线位置，能判断电子在原子里怎样运动吗？在波动力学建立以前，Bohr 已用圆轨道模型得到了 Rydberg 公式\cite{bohrlecture}。
+设电子与核相距 $r$，相对运动的速率为 $v$。Coulomb 吸引力提供向心加速度，故 $\mu v^2/r = \kappa/r^2$。
+在经典力学中，圆轨道的角动量大小 $L = \mu vr$ 可以连续取值。Bohr 假定原子可以在一组特定轨道上运动而不辐射，
+允许的圆轨道满足 $L = n\hbar$，$n = 1,2,\ldots$。消去 $v$ 后，半径与能量分别为
+\begin{equation}
+    r_n = \frac{L^2}{\mu\kappa} = n^2a_Z,\qquad
+    E_n = \frac{\mu v^2}{2} - \frac{\kappa}{r_n}
+       = -\frac{\kappa}{2r_n} = -\frac{\mu\kappa^2}{2\hbar^2 n^2}.
+\end{equation}
+模型还假定原子从高能轨道跃迁到低能轨道时，辐射频率满足 $h\nu = E_{n_\initial} - E_{n_\final}$。
+代入上式就得到本节的谱线波长，连同 $R_M$ 对约化质量的依赖。
+
+Sommerfeld 为什么引入椭圆？同一个 Coulomb 力已经允许椭圆形的经典束缚轨道。
+设椭圆的半长轴为 $a$、离心率为 $\varepsilon$，Kepler 问题给出 $E = -\kappa/(2a)$ 和 $L^2 = \mu\kappa a(1 - \varepsilon^2)$。
+固定 $a$ 而减小 $L$，轨道就变得更扁，能量保持不变。Sommerfeld 对每个独立周期施加了量子条件\cite{sommerfeld1916}。
+在轨道平面取极坐标，沿运动方向量取方位角 $\varphi$，其共轭动量就是 $L$。径向动量 $p_r = \mu\dot r$ 在近核点与远核点处各变号一次。两个条件分别为
+\begin{subequations}\label{eq:qm-bohr-sommerfeld-actions}
+    \begin{align}
+        \oint L\,\d\varphi &= 2\pi L = kh, & k &= 1,2,\ldots,\\
+        \oint p_r\,\d r &= n_rh, & n_r &= 0,1,\ldots .
+    \end{align}
+\end{subequations}
+两个积分相加就是沿椭圆一周的动量积分。设周期为 $\mathcal T$，动能为 $T$。
+利用 $\d(\bm r \cdot \bm p)/\d t = 2T + V$ 在一周内的均值为零，可得 $\ave T = -E$。
+代入 Kepler 周期 $\mathcal T = 2\pi\sqrt{\mu a^3/\kappa}$，得到
+\[
+    (n_r + k)h = \oint\bm p \cdot \d\bm r
+        = 2\ave T\mathcal T = 2\pi\sqrt{\mu\kappa a}.
+\]
+将总作用量记为 $I = (n_r + k)\hbar$，即上式一周动量积分除以 $2\pi$。消去半长轴便得到
+\begin{equation}\label{eq:qm-kepler-action-energy}
+    E = -\frac{\mu\kappa^2}{2I^2}.
+\end{equation}
+这说明了旧量子论算对氢谱的原因。Kepler 轨道的能量只依赖总作用量，给定 $n = n_r + k$，所有形状都得到同一个 $E_n$。
+再从波动方程来看，\secref{sec:hydrogen-radial}将说明，径向波函数既在原点正则又在无穷远衰减，要求
+\begin{equation}\label{eq:qm-coulomb-radial-quantization}
+    \frac{\kappa}{\hbar}\sqrt{\frac{\mu}{-2E}} = q + \ell + 1,\qquad q = 0,1,\ldots .
+\end{equation}
+这里 $q$ 是径向节点数，$\ell$ 是轨道角动量量子数。左端恰好就是上述 $I(E)/\hbar$，右端也取正整数。
+两种方法因而选出完全相同的非相对论 Coulomb 能量，连 $n = 1$ 也相合。这个结论用到了 Coulomb 势的具体形式。
+
+检验轨道形状，要看能量以外的读数。以 $n = 2$ 为例，旧理论允许 $k = 1$ 的椭圆和 $k = 2$ 的圆，
+所以两种轨道的 $L^2/\hbar^2$ 分别为 $1,4$。波动力学允许 $\ell = 0,1$，相应的读数 $\ell(\ell + 1)$ 却是 $0,2$。
+在基态，两种预言甚至可以用半径直接比较。Bohr 圆轨道给出确定的半径 $a_Z$ 和角动量 $\hbar$。
+\secref{sec:hydrogen-1s}的 $1\mathrm{s}$ 态是球对称的，轨道角动量为零。对其径向概率密度积分，测得的核与电子距离 $R$ 小于 $a_Z$ 的概率为
+\[
+    \P(R < a_Z) = \int_0^{a_Z}\frac{4r^2}{a_Z^3}\e^{-2r/a_Z}\,\d r
+             = 1 - 5\e^{-2} \simeq 0.32 .
+\]
+固定半径的轨道给这个事件的概率是零。波动力学中的 $a_Z$ 是径向概率密度的峰值位置。
+
+高分辨率下，一条氢谱线可以分辨成相距很近的几条线。为解释这种精细结构，Sommerfeld 又采用了狭义相对论的动能。
+取固定点核，动能按动量 $p$ 展开，对 $p^2/(2m_\electron)$ 的首项修正为 $-p^4/(8m_\electron^3c^2)$。
+在同一能量的经典轨道上，$p^2$ 的周期平均值相同。圆轨道的 $p^2$ 恒定，椭圆轨道的 $p^2$ 随半径起伏，故后者的 $p^4$ 平均值更大。
+由此可见相对论修正能够区分轨道形状。重新施加两个量子条件后，同一个 $n$ 的能量开始依赖 $k$。
+旧模型所得的最低阶能移与\chapref{ch:relativity}的式\eqref{eq:fine}在取 $k = j + 1/2$ 时相合。旧模型的 $k$ 标记经典轨道的角动量，
+现代的 $j$ 标记电子轨道角动量与自旋合成的总角动量。在 Dirac 理论的低速展开中，相对论动能、自旋轨道耦合和 Darwin 项共同给出这一能移。
+
+谱线的强弱又提供了一个独立检验。忽略精细结构时，从 $2\mathrm{s}$ 和 $2\mathrm{p}$ 回到 $1\mathrm{s}$ 的能量差相同，
+两个过程都满足同一个单光子能量条件。要预言哪条谱线有强度，现代理论用波函数求辐射的电偶极矩阵元。
+$2\mathrm{s}$ 与 $1\mathrm{s}$ 都具有偶宇称，电偶极算符在空间反演下变号，因此两态间的矩阵元为零。
+$2\mathrm{p}$ 具有奇宇称，到 $1\mathrm{s}$ 有非零矩阵元（\tabref{tab:hydrogen-dipole-z}）。
+相应地，在隔离良好、无外场混合的氢原子中，$2\mathrm{p}$ 能迅速发射一个光子，而亚稳的 $2\mathrm{s}$ 主要通过较慢的双光子过程回到基态。
+\ssecref{ss:lamb-experiment}的原子束实验正是用这两种态不同的存活率作读出\cite{lamb}。
+
+作用量也能从波函数的相位求出。对在光滑势阱中往返的粒子，在两个转折点匹配波函数得到的量子化条件\eqref{eq:qm-wkb-bound}可写成
+\[
+    \oint p\,\d q \simeq \bigp{n + 1/2}h,
+    \qquad n = 0,1,\ldots.
+\]
+多出的半整数记录了波在两端转向时积累的相位。当 $n$ 很大时，它只占总作用量的一小部分，旧量子条件由此有了半经典适用范围。
+氢基态能量的精确相合则已由上面的 Coulomb 径向条件单独检验。
+
 \section{径向波函数与节点}
 \label{sec:hydrogen-radial}
 光谱给出了能量。若在同一能级制备不同的轨道角动量，测到的电子与核之间的距离有何不同？
-中心势允许把方向振幅与径向振幅分开，写成 $\psi=R(r)Y_{\ell m}(\theta,\phi)$。
+中心势允许把方向振幅与径向振幅分开，写成 $\psi = R(r)Y_{\ell m}(\theta,\phi)$。
 球谐函数在球面上已归一化，因此球壳概率是 $r^2\abs{R(r)}^2\d r$。
 球坐标中的动能分为径向项和角向项 $\opbm L^2/(2\mu r^2)$。
-代入式\eqref{eq:qm-angular-laplacian}的本征值 $\hbar^2\ell(\ell+1)$，径向方程为
+代入式\eqref{eq:qm-angular-laplacian}的本征值 $\hbar^2\ell(\ell + 1)$，径向方程为
 \begin{equation}
     -\frac{\hbar^2}{2\mu}
-       \biggp{R''+\frac{2}{r}R'-\frac{\ell(\ell+1)}{r^2}R}
-       -\frac{\kappa}{r}R=E R.
+       \biggp{R'' + \frac{2}{r}R' - \frac{\ell(\ell + 1)}{r^2}R}
+       - \frac{\kappa}{r}R = E R.
     \label{eq:hydrogen-radial}
 \end{equation}
-令 $u=rR$，则归一化条件成为 $\intRplus\abs u^2\d r=1$，且 $R''+2R'/r=u''/r$。
-对 $E<0$ 定义衰减波数 $k=\sqrt{-2\mu E}/\hbar$、无量纲半径 $x=2kr$ 和 $\eta=1/(ka_Z)$，方程化为
+令 $u = rR$，则归一化条件成为 $\textstyle \intRplus\abs u^2\d r = 1$，且 $R'' + 2R'/r = u''/r$。
+对 $E < 0$ 定义衰减波数 $k = \sqrt{-2\mu E}/\hbar$、无量纲半径 $x = 2kr$ 和 $\eta = 1/(ka_Z)$，方程化为
 \begin{equation}
-    \dv[2]{u}{x}+\biggp{-\frac14+\frac{\eta}{x}-\frac{\ell(\ell+1)}{x^2}}u=0 .
+    \dv[2]{u}{x} + \biggp{-\frac14 + \frac{\eta}{x} - \frac{\ell(\ell + 1)}{x^2}}u = 0 .
 \end{equation}
-通常的 Coulomb 边界条件在原点取正则支 $u\propto x^{\ell+1}$，在无穷远处取衰减支。
-提取这两端的幂次和指数，令 $u=x^{\ell+1}\e^{-x/2}v(x)$。代回方程，
+通常的 Coulomb 边界条件在原点取正则支 $u \propto x^{\ell+1}$，在无穷远处取衰减支。
+提取这两端的幂次和指数，令 $u = x^{\ell+1}\e^{-x/2}v(x)$。代回方程，
 \begin{equation}
-    xv''+(2\ell+2-x)v'+(\eta-\ell-1)v=0,
+    xv'' + (2\ell + 2 - x)v' + (\eta - \ell - 1)v = 0,
 \end{equation}
 再展开
-\begin{equation}
-    v=\sum_{j=0}^\infty c_j x^j,\qquad
-    c_{j+1}=\frac{j+\ell+1-\eta}{(j+1)(j+2\ell+2)}c_j.
-\end{equation}
-若级数不截断，高阶系数最终同号，且 $(j+1)c_{j+1}/c_j$ 趋于 1。
-于是从某一项起，系数绝对值之比大于 $3/[4(j+1)]$，在 $x>0$ 的尾和至少按 $\e^{3x/4}$ 增长，乘回 $\e^{-x/2}$ 后仍不可归一化。
-故递推的分子须在某个非负整数 $j=q$ 处为零。此时 $\eta=q+\ell+1=n$，于是 $k=1/(na_Z)$。
-由 $E=-\hbar^2 k^2/(2\mu)$ 再次得到式\eqref{eq:hydrogen}；每个允许的 $n,\ell$ 都有一个这样的多项式解。
+\begin{subequations}
+    \begin{align}
+        v &= \sum_{j=0}^\infty c_j x^j,\\
+        c_{j+1} &= \frac{j + \ell + 1 - \eta}{(j + 1)(j + 2\ell + 2)}c_j.
+    \end{align}
+\end{subequations}
+若级数不截断，$v(x)$ 在远处的增长会压过 $\e^{-x/2}$，径向波函数就不能归一化。\footnote{由递推式，高阶系数最终同号，且 $(j + 1)c_{j+1}/c_j$ 趋于 $1$。因此相邻系数的绝对值之比从某阶起大于 $3/[4(j + 1)]$。逐项与 $\e^{3x/4}$ 的级数比较，尾和的绝对值至少按 $\e^{3x/4}$ 增长。}
+故递推的分子须在某个非负整数 $j = q$ 处为零。此时 $\eta = q + \ell + 1 = n$，于是 $k = 1/(na_Z)$。
+由 $E = -\hbar^2 k^2/(2\mu)$ 再次得到式\eqref{eq:hydrogen}；每个允许的 $n,\ell$ 都有一个这样的多项式解。
 
-记 $s=2\ell+1$。所得的 $q$ 次解正比于广义 Laguerre 多项式(generalized Laguerre polynomial)
+记 $s = 2\ell + 1$。所得的 $q$ 次解正比于广义 Laguerre 多项式(generalized Laguerre polynomial)
 \begin{equation}
-    L_q^{(s)}(x)=\frac{x^{-s}\e^x}{q!}\dd[q]{x}\bigp{\e^{-x}x^{q+s}}.
+    L_q^{(s)}(x) = \frac{x^{-s}\e^x}{q!}\dd[q]{x}\bigp{\e^{-x}x^{q+s}}.
 \end{equation}
-固定 $s$ 时，不同次数的多项式在权 $x^s\e^{-x}$ 下正交，平方范数为 $h_q=(q+s)!/q!$。
-径向归一化的积分中多一个 $x$ 因子。三项递推中 $xL_q^{(s)}$ 沿 $L_q^{(s)}$ 的系数是 $2q+s+1$，
+固定 $s$ 时，不同次数的多项式在权 $x^s\e^{-x}$ 下正交，平方范数为 $h_q = (q + s)!/q!$。
+径向归一化的积分中多一个 $x$ 因子。三项递推中 $xL_q^{(s)}$ 沿 $L_q^{(s)}$ 的系数是 $2q + s + 1$，
 其余项与 $L_q^{(s)}$ 正交，故径向归一化用到的积分为
-\[
+\begin{equation}\label{eq:qm-laguerre-normalization-integral}
     \intRplus x^{s+1}\e^{-x}\bigb{L_q^{(s)}(x)}^2\d x
-       =(2q+s+1)h_q .
-\]
-取原点附近径向振幅为正，归一化径向波函数为
+       = (2q + s + 1)h_q .
+\end{equation}
+写成 $x = 2r/(na_Z)$，并取原点附近径向振幅为正，归一化径向波函数为
 \begin{equation}
-    R_{n\ell}(r)=\biggp{\frac{2}{na_Z}}^{3/2}
-       \sqrt{\frac{(n-\ell-1)!}{2n(n+\ell)!}}\,
-       x^\ell\e^{-x/2}L_{n-\ell-1}^{(2\ell+1)}(x),
-       \qquad x=\frac{2r}{na_Z}.
+    R_{n\ell}(r) = \biggp{\frac{2}{na_Z}}^{3/2}
+       \sqrt{\frac{(n - \ell - 1)!}{2n(n + \ell)!}}\,
+       x^\ell\e^{-x/2}L_{n-\ell-1}^{(2\ell+1)}(x).
     \label{eq:qm-hydrogen-radial-state}
 \end{equation}
-广义 Laguerre 多项式的 $q$ 个根彼此不同且都在正半轴上，故径向节点数为 $n-\ell-1$。
-例如 $n=1$、$\ell=0$ 时 $L_0^{(1)}=1$，乘上 $Y_{00}=1/\sqrt{4\pi}$，得到前面的 $\psi_{1\mathrm{s}}\propto\e^{-r/a_Z}$。
+广义 Laguerre 多项式的 $q$ 个根彼此不同且都在正半轴上，故径向节点数为 $n - \ell - 1$。
+例如 $n = 1$、$\ell = 0$ 时 $L_0^{(1)} = 1$，乘上 $Y_{00} = 1/\sqrt{4\pi}$，得到前面的 $\psi_{1\mathrm{s}} \propto \e^{-r/a_Z}$。
 
-同能的 $2\mathrm{s}$ 和 $2\mathrm{p}$ 态在径向与角向都有差别。记 $\rho=r/a_Z$，在 $n=2$ 时恰有 $x=\rho$。
-对 $2\mathrm{s}$ 态，$L_1^{(1)}(\rho)=2-\rho$，电子的径向振幅在 $r=2a_Z$ 过零；
-对 $2\mathrm{p}$ 态，$L_0^{(3)}=1$，径向振幅在正半轴上没有零点。
-从角向看，$2\mathrm{s}$ 的方向分布均匀，而 $2\mathrm{p},m=0$ 的 $Y_{10}=\sqrt{3/(4\pi)}\cos\theta$ 在赤道过零。
-球壳概率密度 $P_{n\ell}(r)=r^2\abs{R_{n\ell}(r)}^2$ 给出图\ref{fig:hydrogen-radial}中的三条曲线：
-\begin{equation}
-    a_Z P_{1\mathrm{s}}=4\rho^2\e^{-2\rho},\qquad
-    a_Z P_{2\mathrm{s}}=\tfrac18\rho^2(2-\rho)^2\e^{-\rho},\qquad
-    a_Z P_{2\mathrm{p}}=\tfrac1{24}\rho^4\e^{-\rho}.
-\end{equation}
-$1\mathrm{s}$ 态的体概率密度从原点向外按指数衰减。乘上球壳的面积 $4\pi r^2$ 后，径向概率密度在 $r=a_Z$ 达到峰值（图\ref{fig:hydrogen-radial}）。
+同能的 $2\mathrm{s}$ 和 $2\mathrm{p}$ 态在径向与角向都有差别。记 $\rho = r/a_Z$，在 $n = 2$ 时恰有 $x = \rho$。
+对 $2\mathrm{s}$ 态，$L_1^{(1)}(\rho) = 2 - \rho$，电子的径向振幅在 $r = 2a_Z$ 过零；
+对 $2\mathrm{p}$ 态，$L_0^{(3)} = 1$，径向振幅在正半轴上没有零点。
+从角向看，$2\mathrm{s}$ 的方向分布均匀，而 $2\mathrm{p},m = 0$ 的 $Y_{10} = \sqrt{3/(4\pi)}\cos\theta$ 在赤道过零。
+球壳概率密度 $P_{n\ell}(r) = r^2\abs{R_{n\ell}(r)}^2$ 给出图\ref{fig:hydrogen-radial}中的三条曲线：
+\begin{subequations}
+    \begin{align}
+        a_Z P_{1\mathrm{s}} &= 4\rho^2\e^{-2\rho},\\
+        a_Z P_{2\mathrm{s}} &= \frac18\rho^2(2 - \rho)^2\e^{-\rho},\\
+        a_Z P_{2\mathrm{p}} &= \frac1{24}\rho^4\e^{-\rho}.
+    \end{align}
+\end{subequations}
+$1\mathrm{s}$ 态的体概率密度从原点向外按指数衰减。乘上球壳的面积 $4\pi r^2$ 后，径向概率密度在 $r = a_Z$ 达到峰值（图\ref{fig:hydrogen-radial}）。
 \begin{figure}[htbp]
     \centering\includegraphics[width=.62\linewidth]{figures/hydrogen_radial.pdf}
-    \caption{氢样原子的 $1\mathrm{s}$、$2\mathrm{s}$、$2\mathrm{p}$ 径向分布。两个横坐标之间的曲线下面积给出电子落在相应球壳内的概率。$2\mathrm{s}$ 曲线在 $r/a_Z=2$ 处触及横轴，标出两个峰之间的径向节点。}
+    \caption{氢样原子的 $1\mathrm{s}$、$2\mathrm{s}$、$2\mathrm{p}$ 径向分布。两个横坐标之间的曲线下面积给出电子落在相应球壳内的概率。$2\mathrm{s}$ 曲线在 $r/a_Z = 2$ 处触及横轴，标出两个峰之间的径向节点。}
     \label{fig:hydrogen-radial}
 \end{figure}
 
 \subsection{能量与速度的尺度}
 利用Hellmann--Feynman关系（见\thmref{thm:qm-hellmann-feynman}及其证明）对$\kappa$求导，
+\begin{subequations}
+    \begin{align}
+        -\ave{\op{R}^{-1}} &= \pv{E_n}{\kappa}
+        = -\frac{\mu\kappa}{\hbar^2n^2},\\
+        \ave{\op{R}^{-1}} &= \frac1{a_Zn^2}.
+    \end{align}
+\end{subequations}
+要分别求动能 $\op T = \opbm P^2/(2\mu)$ 与势能 $\op V = -\kappa\op R^{-1}$ 的均值，引入缩放生成元
 \begin{equation}
-    -\ave{\op{R}^{-1}}=\pv{E_n}{\kappa}
-    =-\frac{\mu\kappa}{\hbar^2n^2},\qquad
-    \ave{\op{R}^{-1}}=\frac1{a_Zn^2}.
-\end{equation}
-要分别求动能 $\op T=\opbm P^2/(2\mu)$ 与势能 $\op V=-\kappa\op R^{-1}$ 的均值，引入缩放生成元
-\begin{equation}
-    \op G=\tfrac12(\opbm X\cdot\opbm P+\opbm P\cdot\opbm X).
+    \op G = \frac12(\opbm X \cdot \opbm P + \opbm P \cdot \opbm X).
 \end{equation}
 由正则对易关系，
 \begin{subequations}
     \begin{alignat}{2}
-        [\op{G},\op{X}_i]&=-\i\hbar \op{X}_i,
-        &\quad [\op{G},\op{P}_i]&=\i\hbar \op{P}_i,\\
-        \frac{\i}{\hbar}[\op{H},\op{G}] &=2\op{T}-\opbm{X}\cdot(\grad V)(\opbm X).
+        [\op{G},\op{X}_i] &= -\i\hbar \op{X}_i,
+        &\quad [\op{G},\op{P}_i] &= \i\hbar \op{P}_i,\\
+        \frac{\i}{\hbar}[\op{H},\op{G}] &= 2\op{T} - \opbm{X} \cdot (\grad V)(\opbm X).
     \end{alignat}
 \end{subequations}
-定态中 $\ave{\dot{\op G}}=0$。对 Coulomb 势，$rV'(r)=-V(r)$，于是位力定理(virial theorem)给出 $2\ave{\op T}+\ave{\op V}=0$。
-与 $E_n=\ave{\op T}+\ave{\op V}$ 联立，就得到能量在动能和势能之间的分配，
+定态中 $\ave{\dot{\op G}} = 0$。对 Coulomb 势，$rV'(r) = -V(r)$，于是位力定理(virial theorem)给出 $2\ave{\op T} + \ave{\op V} = 0$。
+与 $E_n = \ave{\op T} + \ave{\op V}$ 联立，就得到能量在动能和势能之间的分配，
 \begin{equation}
-    \ave{\op T}=-E_n,\qquad \ave{\op V}=2E_n .
+    \ave{\op T} = -E_n,\qquad \ave{\op V} = 2E_n .
 \end{equation}
 
-这个推导要求相应矩有限且边界项为零。有硬墙时，位力关系还包含壁面压力的贡献。
-由此典型速度$\sqrt{\ave{\opbm{P}^2}}/\mu=Z\alpha c/n$，
-非相对论近似的自然控制参数便是$Z\alpha/n$，对于低能级通常要求$Z\alpha\ll1$。
+这里的 Coulomb 束缚态在原点正则、在无穷远指数衰减，分部积分的边界项为零。有硬墙时，位力关系还包含壁面压力的贡献。
+由此典型速度$\sqrt{\ave{\opbm{P}^2}}/\mu = Z\alpha c/n$，
+非相对论近似的自然控制参数便是$Z\alpha/n$，对于低能级通常要求$Z\alpha \ll 1$。
 
-\checkpoint{为什么一般中心势只有$2\ell+1$的旋转简并，却不能推出氢的$n^2$简并？}{旋转只联系同一$\ell$下的$m$。
-    Coulomb问题的$\op{A}_i$还联系不同$\ell$，两个角动量代数才把所有$\ell=0,\ldots,n-1$放在同一能量中。}
+\begin{example}{中心势的能级简并}{qm-central-potential-degeneracy}
+    忽略自旋，设粒子在中心势中运动。旋转对称性对给定 $\ell$ 的束缚能级有什么要求？氢原子同一主量子数 $n$ 的空间态为何可以具有更高的简并度？
+    \par\smallskip\textbf{解}\quad
+    旋转只联系同一 $\ell$ 下的 $2\ell + 1$ 个 $m$ 态。Coulomb 问题的 Runge--Lenz 矢量分量 $\op{A}_i$ 还联系不同 $\ell$，两个角动量代数使 $\ell = 0,\ldots,n - 1$ 的各多重态具有同一能量。将它们的维数相加，得到 $n^2$ 个空间态。
+\end{example}
 \reading{Coulomb额外对称性参照Runge--Lenz代数资料\cite{runge}；
     径向波函数的一般式见 \href{https://dlmf.nist.gov/18.39.E37}{NIST 数学函数手册式18.39.37}。
     空间波函数、非相对论能谱及其精细结构修正可对照MIT 8.06讲义2第2.1至2.4节\cite{mitfine}。下一章研究偏离精确可解模型时怎样给出受控预测。}

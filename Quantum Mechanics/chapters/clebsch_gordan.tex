@@ -4,21 +4,21 @@
 \section{怎样读系数表}
 固定 $j_1,j_2$。表的每一行用两个角动量沿同一 $z$ 轴的投影标记，代表一个乘积基矢，
 \[
-    \ket{m_1,m_2}=\ket{j_1,m_1}_1\otimes\ket{j_2,m_2}_2 .
+    \ket{m_1,m_2} = \ket{j_1,m_1}_1 \otimes \ket{j_2,m_2}_2 .
 \]
 若制备的是总角动量态 $\ket{j_1,j_2;j,m}$，测出这对投影的振幅就是\dfnref{dfn:qm-cg}中的系数。相应的展开为
 \begin{equation}
-    \ket{j_1,j_2;j,m}=\sum_{m_1+m_2=m} C^{jm}_{j_1m_1,j_2m_2}\ket{m_1,m_2}.
+    \ket{j_1,j_2;j,m} = \sum_{m_1+m_2=m} C^{jm}_{j_1m_1,j_2m_2}\ket{m_1,m_2}.
 \end{equation}
 总投影 $m$ 决定哪些乘积态可以出现。表中每一列给出一个归一化耦合态，各项的模平方就是分别测量时的概率。
-采用 Condon--Shortley 相位约定：在每个 $j$ 的最高态 $m=j$ 中，取允许的最大 $m_1$ 所对应的系数为正，随后用总降算符依次确定其余态的相位。
+采用 Condon--Shortley 相位约定：在每个 $j$ 的最高态 $m = j$ 中，取允许的最大 $m_1$ 所对应的系数为正，随后用总降算符依次确定其余态的相位。
 
 \paragraph*{两个自旋 $1/2$}
-在 $m=1$ 和 $m=-1$ 时分别只有 $\ket{\up,\up}$ 和 $\ket{\dn,\dn}$，对应的系数都为 $1$。
-在 $m=0$ 时，\exmref{exm:qm-two-spins}给出的系数为
+在 $m = 1$ 和 $m = -1$ 时分别只有 $\ket{\up,\up}$ 和 $\ket{\dn,\dn}$，对应的系数都为 $1$。
+在 $m = 0$ 时，\exmref{exm:qm-two-spins}给出的系数为
 \begin{equation}
     \begin{array}{c|cc}
-        & j=1 & j=0 \\ \hline
+        & j = 1 & j = 0 \\ \hline
         \ket{\up,\dn} & 1/\sqrt2 & 1/\sqrt2 \\
         \ket{\dn,\up} & 1/\sqrt2 & -1/\sqrt2
     \end{array}
@@ -26,120 +26,122 @@
 两列都预言两个出口各占一半。第二列的相对负号使它与第一列正交，对应总角动量为零的单态。
 
 \paragraph*{轨道角动量 $\ell$ 与自旋 $1/2$}
-左因子取轨道，右因子取自旋。固定总投影 $m$ 后，自旋向上时轨道投影为 $m-1/2$，自旋向下时为 $m+1/2$。
+左因子取轨道，右因子取自旋。固定总投影 $m$ 后，自旋向上时轨道投影为 $m - 1/2$，自旋向下时为 $m + 1/2$。
 令
 \begin{equation}
-    a_m=\sqrt{\frac{\ell+m+1/2}{2\ell+1}},\qquad
-    b_m=\sqrt{\frac{\ell-m+1/2}{2\ell+1}}.
+    a_m = \sqrt{\frac{\ell + m + 1/2}{2\ell + 1}},\qquad
+    b_m = \sqrt{\frac{\ell - m + 1/2}{2\ell + 1}}.
 \end{equation}
 两个 $j$ 都允许时，系数为
 \begin{equation}
     \begin{array}{c|cc}
-        & j=\ell+1/2 & j=\ell-1/2 \\ \hline
-        \ket{m-1/2,\up} & a_m & -b_m \\
-        \ket{m+1/2,\dn} & b_m & a_m
+        & j = \ell + 1/2 & j = \ell - 1/2 \\ \hline
+        \ket{m - 1/2,\up} & a_m & -b_m \\
+        \ket{m + 1/2,\dn} & b_m & a_m
     \end{array}
 \end{equation}
-在端点 $m=\pm(\ell+1/2)$ 只取第一列和允许的乘积态，其系数为 $1$。$\ell=0$ 时只有 $j=1/2$。
-例如，制备 $\mathrm{p}$ 电子（$\ell=1$）于 $j=3/2,m=1/2$，读第一列得到
+在端点 $m = \pm(\ell + 1/2)$ 只取第一列和允许的乘积态，其系数为 $1$。$\ell = 0$ 时只有 $j = 1/2$。
+例如，制备 $\mathrm{p}$ 电子（$\ell = 1$）于 $j = 3/2,m = 1/2$，读第一列得到
 \begin{equation}
-    \ket{1,\tfrac12;\tfrac32,\tfrac12}
-    =\sqrt{\tfrac23}\ket{0,\up}+\sqrt{\tfrac13}\ket{1,\dn}.
+    \ket{1,1/2;3/2,1/2}
+    = \sqrt{2/3}\ket{0,\up} + \sqrt{1/3}\ket{1,\dn}.
 \end{equation}
 因此测得自旋向上的概率为 $2/3$，此时轨道投影必为零。
 
 \section{从最高态构造整张表}
 \label{sec:cg-lowering}
-先把乘积态按总投影 $m=m_1+m_2$ 分组。不同组之间的系数为零，同一组里只需处理一张有限维的换基矩阵。
-允许的 $j$ 从 $j_1+j_2$ 逐个减一，直到 $\abs{j_1-j_2}$。此外必须有 $\abs m\le j$。
+先把乘积态按总投影 $m = m_1 + m_2$ 分组。不同组之间的系数为零，同一组里只需处理一张有限维的换基矩阵。
+允许的 $j$ 从 $j_1 + j_2$ 逐个减一，直到 $\abs{j_1 - j_2}$。此外必须有 $\abs m \le j$。
 即使这些条件都满足，系数也可能因对称性而为零，下面的例子会出现这样的零。
 
-最高投影 $m=j_1+j_2$ 要求两个投影分别取到最大值，对应的乘积态为 $\ket{j_1,j_1}_1\otimes\ket{j_2,j_2}_2$。从这个态往下降，总角动量 $j$ 保持不变。
-降算符作用在耦合态上只有一项，在乘积态上却有两项。令 $d(j,m)=\sqrt{(j+m)(j-m+1)}$，则
+最高投影 $m = j_1 + j_2$ 要求两个投影分别取到最大值，对应的乘积态为 $\ket{j_1,j_1}_1 \otimes \ket{j_2,j_2}_2$。从这个态往下降，总角动量 $j$ 保持不变。
+降算符作用在耦合态上只有一项，在乘积态上却有两项。令 $d(j,m) = \sqrt{(j + m)(j - m + 1)}$，则
 \begin{equation}
     \begin{alignedat}{1}
         \hbar^{-1}\op J_-\ket{j_1,j_2;j,m}
-            &=d(j,m)\ket{j_1,j_2;j,m-1},\\
+            &= d(j,m)\ket{j_1,j_2;j,m - 1},\\
         \hbar^{-1}\op J_-\ket{m_1,m_2}
-            &=d(j_1,m_1)\ket{m_1-1,m_2}+d(j_2,m_2)\ket{m_1,m_2-1}.
+            &= d(j_1,m_1)\ket{m_1 - 1,m_2} + d(j_2,m_2)\ket{m_1,m_2 - 1}.
     \end{alignedat}
 \end{equation}
-每降一次，先把落到同一个乘积态的振幅相加，再除以 $d(j,m)$，便得到下一组系数。降到 $m=-j$ 时停止。
-寻找下一个 $j$ 的最高态时，在 $m=j$ 的乘积态中，取与所有已经构造出的同投影态正交的归一化组合。
+每降一次，先把落到同一个乘积态的振幅相加，再除以 $d(j,m)$，便得到下一组系数。降到 $m = -j$ 时停止。
+寻找下一个 $j$ 的最高态时，在 $m = j$ 的乘积态中，取与所有已经构造出的同投影态正交的归一化组合。
 由\thmref{thm:qm-angular-addition}，此时恰好剩一个方向。用本附录开头的相位约定确定符号，就可以继续下降。
 
 \paragraph*{两个角动量 $1$}
-本例固定 $j_1=j_2=1$，沿用正文的简记 $\ket{j,m}_J$ 表示耦合态，$\ket{m_1,m_2}$ 表示乘积态。例如 $\ket{2,2}_J=\ket{1,1}$。
-在 $m=1$ 组中，下降一次得到对称组合，和它正交的另一列就是 $j=1$ 的最高态，
+本例固定 $j_1 = j_2 = 1$，沿用正文的简记 $\ket{j,m}_J$ 表示耦合态，$\ket{m_1,m_2}$ 表示乘积态。例如 $\ket{2,2}_J = \ket{1,1}$。
+在 $m = 1$ 组中，下降一次得到对称组合，和它正交的另一列就是 $j = 1$ 的最高态，
 \begin{equation}
-    \ket{2,1}_J=\frac{\ket{1,0}+\ket{0,1}}{\sqrt2},\qquad
-    \ket{1,1}_J=\frac{\ket{1,0}-\ket{0,1}}{\sqrt2}.
+    \ket{2,1}_J = \frac{\ket{1,0} + \ket{0,1}}{\sqrt2},\qquad
+    \ket{1,1}_J = \frac{\ket{1,0} - \ket{0,1}}{\sqrt2}.
 \end{equation}
-再降一次，$\ket{1,0}$ 与 $\ket{0,1}$ 都能到达 $\ket{0,0}$。两条路径在 $j=2$ 列相加，在 $j=1$ 列相消。
-因此 $m=0$ 的前三个乘积态按下表组合；最后一列由前两列的正交补给出。
+再降一次，$\ket{1,0}$ 与 $\ket{0,1}$ 都能到达 $\ket{0,0}$。两条路径在 $j = 2$ 列相加，在 $j = 1$ 列相消。
+因此 $m = 0$ 的前三个乘积态按下表组合；最后一列由前两列的正交补给出。
 \begin{equation}
     \begin{array}{c|ccc}
-      m=0 & j=2 & j=1 & j=0 \\ \hline
+      m = 0 & j = 2 & j = 1 & j = 0 \\ \hline
       \ket{1,-1} & 1/\sqrt6 & 1/\sqrt2 & 1/\sqrt3 \\
       \ket{0,0}  & 2/\sqrt6 & 0 & -1/\sqrt3 \\
       \ket{-1,1} & 1/\sqrt6 & -1/\sqrt2 & 1/\sqrt3
     \end{array}
     \label{eq:cg-one-one}
 \end{equation}
-例如两边都制备为投影零，测总角动量时沿第二行横读，$j=2,1,0$ 的概率依次为 $2/3,0,1/3$。
-要补出 $m=-1,-2$ 的各列，可以继续下降，也可以直接用下一节的投影反号公式。
+例如两边都制备为投影零，测总角动量时沿第二行横读，$j = 2,1,0$ 的概率依次为 $2/3,0,1/3$。
+要补出 $m = -1,-2$ 的各列，可以继续下降，也可以直接用下一节的投影反号公式。
 
 \section{逆变换、正交性与对称性}
-固定 $m$，用行标 $r=(m_1,m_2)$、列标 $j$ 将系数简写为 $C_{rj}$。因为两组基都正交归一，换基矩阵是幺正矩阵。
+固定 $m$，用行标 $r = (m_1,m_2)$、列标 $j$ 将系数简写为 $C_{rj}$。因为两组基都正交归一，换基矩阵是幺正矩阵。
 本附录的相位约定使元素都是实数，因此逆变换就是转置。读一列给出耦合态，读一行给出乘积态，
-\begin{equation}
-    \ket{j_1,j_2;j,m}=\sum_r C_{rj}\ket r,\qquad
-    \ket r=\sum_j C_{rj}\ket{j_1,j_2;j,m}.
-\end{equation}
+\begin{subequations}
+    \begin{align}
+        \ket{j_1,j_2;j,m} &= \sum_r C_{rj}\ket r,\\
+        \ket r &= \sum_j C_{rj}\ket{j_1,j_2;j,m}.
+    \end{align}
+\end{subequations}
 分别对两式取内积便得到两种核对方法，同列或同行的平方和为一，不同列或不同行的内积为零，
 \begin{equation}
-    \sum_r C_{rj}C_{rj'}=\delta_{jj'},\qquad
-    \sum_j C_{rj}C_{r'j}=\delta_{rr'}.
+    \sum_r C_{rj}C_{rj'} = \delta_{jj'},\qquad
+    \sum_j C_{rj}C_{r'j} = \delta_{rr'}.
 \end{equation}
 交换两个因子的次序，或者同时把三个投影反号，系数分别满足
 \begin{equation}
     \begin{alignedat}{1}
-      C^{jm}_{j_2m_2,j_1m_1}&=(-1)^{j_1+j_2-j}C^{jm}_{j_1m_1,j_2m_2},\\
-      C^{j,-m}_{j_1,-m_1,j_2,-m_2}&=(-1)^{j_1+j_2-j}C^{jm}_{j_1m_1,j_2m_2}.
+      C^{jm}_{j_2m_2,j_1m_1} &= (-1)^{j_1+j_2-j}C^{jm}_{j_1m_1,j_2m_2},\\
+      C^{j,-m}_{j_1,-m_1,j_2,-m_2} &= (-1)^{j_1+j_2-j}C^{jm}_{j_1m_1,j_2m_2}.
     \end{alignedat}
 \end{equation}
-例如在式\eqref{eq:cg-one-one}中交换两行所标的投影，$j=1$ 的系数变号。乘积态 $\ket{0,0}$ 在交换下回到自身，这一行的 $j=1$ 系数只可能为零。
+例如在式\eqref{eq:cg-one-one}中交换两行所标的投影，$j = 1$ 的系数变号。乘积态 $\ket{0,0}$ 在交换下回到自身，这一行的 $j = 1$ 系数只可能为零。
 
-\section{任意两个角动量的显式公式}
-只求一个指定系数时，可以直接用有限和。先检查三角条件、投影范围、各投影与相应角动量相差整数以及 $m=m_1+m_2$。
-还需 $j_1+j_2-j$ 为整数。违反任一条件便记系数为零。条件满足时，先算两个非负因子
+\sectionstar{任意两个角动量的显式公式}
+只求一个指定系数时，可以直接用有限和。先检查三角条件、投影范围、各投影与相应角动量相差整数以及 $m = m_1 + m_2$。
+还需 $j_1 + j_2 - j$ 为整数。违反任一条件便记系数为零。条件满足时，先算两个非负因子
 \begin{equation}
     \begin{alignedat}{1}
-        A&=\frac{(2j+1)(j_1+j_2-j)!\,(j+j_1-j_2)!\,(j-j_1+j_2)!}{(j_1+j_2+j+1)!},\\
-        B&=(j+m)!\,(j-m)!\,(j_1+m_1)!\,(j_1-m_1)!\,(j_2+m_2)!\,(j_2-m_2)! .
+        A &= \frac{(2j + 1)(j_1 + j_2 - j)!\,(j + j_1 - j_2)!\,(j - j_1 + j_2)!}{(j_1 + j_2 + j + 1)!},\\
+        B &= (j + m)!\,(j - m)!\,(j_1 + m_1)!\,(j_1 - m_1)!\,(j_2 + m_2)!\,(j_2 - m_2)! .
     \end{alignedat}
 \end{equation}
 每一项的分母由六个阶乘组成，系数为
 \begin{equation}
     \begin{alignedat}{1}
-        D_k&=k!\,(j_1+j_2-j-k)!\,(j_1-m_1-k)!\,(j_2+m_2-k)!\\
-           &\qquad{}\times(j-j_2+m_1+k)!\,(j-j_1-m_2+k)!,\\
-        C^{jm}_{j_1m_1,j_2m_2}&=\sqrt{AB}\sum_{k=k_{\min}}^{k_{\max}}\frac{(-1)^k}{D_k}.
+        D_k &= k!\,(j_1 + j_2 - j - k)!\,(j_1 - m_1 - k)!\,(j_2 + m_2 - k)!\\
+           &\qquad{} \times (j - j_2 + m_1 + k)!\,(j - j_1 - m_2 + k)!,\\
+        C^{jm}_{j_1m_1,j_2m_2} &= \sqrt{AB}\sum_{k=k_{\min}}^{k_{\max}}\frac{(-1)^k}{D_k}.
     \end{alignedat}
 \end{equation}
 允许的整数 $k$ 恰好使这些阶乘的自变量都非负，因此上下限可直接写成
 \begin{equation}
     \begin{alignedat}{1}
-        k_{\min}&=\max(0,\,j_2-j-m_1,\,j_1+m_2-j),\\
-        k_{\max}&=\min(j_1+j_2-j,\,j_1-m_1,\,j_2+m_2).
+        k_{\min} &= \max(0,\,j_2 - j - m_1,\,j_1 + m_2 - j),\\
+        k_{\max} &= \min(j_1 + j_2 - j,\,j_1 - m_1,\,j_2 + m_2).
     \end{alignedat}
 \end{equation}
-取 $0!=1$，空和取零。例如在式\eqref{eq:cg-one-one}的中心格，$j_1=j_2=j=1$，三个投影全为零，允许 $k=0,1$。两个分母都是 $1$，故两项恰好抵消。
+取 $0! = 1$，空和取零。例如在式\eqref{eq:cg-one-one}的中心格，$j_1 = j_2 = j = 1$，三个投影全为零，允许 $k = 0,1$。两个分母都是 $1$，故两项恰好抵消。
 
 有些角动量表按三列排列量子数，使用 Wigner $3j$ 符号。本书的系数与它的换算为
 \begin{equation}
     C^{jm}_{j_1m_1,j_2m_2}
-      =(-1)^{j_1-j_2+m}\sqrt{2j+1}
+      = (-1)^{j_1-j_2+m}\sqrt{2j + 1}
        \begin{pmatrix} j_1 & j_2 & j \\ m_1 & m_2 & -m \end{pmatrix}.
 \end{equation}
 右侧第二行的投影和为零，故末项写 $-m$。换算约定及有限和可查

@@ -1,5 +1,5 @@
 \documentclass{../thunote}
-\usepackage{longtable,array}
+\usepackage{longtable,array,needspace}
 
 \input{../mathdef.tex}
 \input{notation.tex}
@@ -36,7 +36,7 @@
 \newcommand{\drive}{\mathrm{d}}
 \newcommand{\vac}{\mathrm{vac}}
 
-% 本卷的参考与自检栏目
+% 各章书目与衔接说明
 \newcommand{\reading}[1]{
     \par\medskip
     \begingroup
@@ -44,14 +44,6 @@
         \par
     \endgroup
 }
-\newcommand{\checkpoint}[2]{
-    \begin{example}{自检}{}
-        #1
-        \par\smallskip
-        \textbf{解答}\quad #2
-    \end{example}
-}
-
 \geometry{margin=2.5cm}
 \allowdisplaybreaks[1]
 \tcbset{lines before break=4}
@@ -74,6 +66,7 @@
     \maketitle
     \frontmatter
     \tableofcontents
+    \addtocontents{toc}{\protect\noindent 标有 * 的节和小节为选读，初读时可略过。\protect\par}
     \input{chapters/symbols.tex}
     \mainmatter
     \input{chapters/chap00.tex}
