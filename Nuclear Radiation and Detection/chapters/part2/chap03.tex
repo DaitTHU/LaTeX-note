@@ -29,6 +29,13 @@
 	%决定工作状态：电流脉冲型、电压脉冲型？
 \end{compactenum}
 
+图\ref{fig:scintillator-pmt}标出荧光光子转为光电子的位置，以及后续各级的电子倍增过程。
+\begin{figure}[htbp]
+    \centering\tikzfigure{scintillator-pmt}
+    \caption{闪烁探测器的信号形成。闪烁体内的光子到达光阴极后可释放光电子。电子撞击打拿极，产生更多次级电子，最后由阳极收集形成电脉冲。图中示意两级倍增。}
+    \label{fig:scintillator-pmt}
+\end{figure}
+
 \subsection{闪烁体}
 
 高探测效率（高$Z$、高密度、大尺寸）、
@@ -72,7 +79,7 @@
 	\item 猝灭(quenching)：转换为晶格的热运动。
 \end{compactitem}
 \paragraph{有机闪烁体的发光机制}
-有机闪烁体都是苯环化合物，分子之间仅有松散的范德瓦尔斯力。其激发与发光是由分子自身的激发和跃迁产生
+有机闪烁体都是苯环化合物，分子之间仅有松散的 van der Waals 力。其激发与发光是由分子自身的激发和跃迁产生
 的。荧光在 \unit{ns} 量级，磷光在 \unit{ms} 量级或更长。
 
 发射、吸收光谱的峰值是分开的，因此有机闪烁体对其所发射的荧光是透明的。
@@ -87,14 +94,14 @@
 希望发光效率较高，且对不同能量保持常数。
 \begin{compactenum}
 	\item 光能产额(光输出，光产额)
-	\[
-		Y_{\mathrm{ph}}:=\frac{\avg n_{\mathrm{ph}}}{E_\deposited}.
-	\]
-	NaI(Tl)晶体$Y_{\mathrm{ph}}=\qty{4.3e4}{\per\mega\electronvolt}$，平均沉积$\qty{23}{eV}$产生一个荧光光子。
+	\begin{equation}\label{eq:nrd-scintillation-yield}
+		Y_{\mathrm{ph}} := \frac{\avg n_{\mathrm{ph}}}{E_\deposited}.
+	\end{equation}
+	NaI(Tl)晶体$Y_{\mathrm{ph}} = \qty{4.3e4}{\per\mega\electronvolt}$，平均沉积$\qty{23}{eV}$产生一个荧光光子。
 	\item 闪烁效率(发光效率，能量转换效率)
-	\[
-		C_{\mathrm{np}}:=\frac{E_{\mathrm{ph}}}{E_\deposited}=Y_{\mathrm{ph}}h\avg\nu.
-	\]
+	\begin{equation}\label{eq:nrd-scintillation-efficiency}
+		C_{\mathrm{np}} := \frac{E_{\mathrm{ph}}}{E_\deposited} = Y_{\mathrm{ph}}h\avg\nu.
+	\end{equation}
 	其中$h\avg\nu$为按发射光子数平均的单光子能量，$E_{\mathrm{ph}}$为平均总发光能量。
 	\item 相对闪烁效率（相对发光效率）
 \end{compactenum}
@@ -142,9 +149,9 @@
 快速响应。
 
 打拿极的次级电子产额$\delta$
-\[
-	\delta:=\frac{\text{发射的次级电子数}}{\text{入射的初级电子数}}.
-\]
+\begin{equation}\label{eq:nrd-dynode-secondary-yield}
+	\delta := \frac{\text{发射的次级电子数}}{\text{入射的初级电子数}}.
+\end{equation}
 
 \paragraph{光电倍增管的供电回路}
 \begin{compactenum}
@@ -168,42 +175,42 @@
 \begin{compactitem}
 	\item 光阴极的光谱响应：光阴极发射光电子的几率与光子波长的关系，定义量子效率
 	\begin{align}
-		Q_\mathrm k(\lambda):=\frac{\text{发射电子数}}{\text{入射光子数}}.
+		Q_\mathrm k(\lambda) := \frac{\text{发射电子数}}{\text{入射光子数}}.
 	\end{align}
-	NaI(Tl)：若$Q=\qtyrange{25}{30}{\percent}$，则每产生一个光电子所需的沉积能量为 \qtyrange{100}{120}{eV}。
+	NaI(Tl)：若$Q = \qtyrange{25}{30}{\percent}$，则每产生一个光电子所需的沉积能量为 \qtyrange{100}{120}{eV}。
 	\item 光阴极、阳极的光照灵敏度：
-	\[
-		S_\mathrm k=\frac{i_\mathrm k}F,\quad S_\mathrm a=\frac{i_\mathrm a}F.
-	\]
+	\begin{equation}\label{eq:nrd-phototube-luminous-sensitivity}
+		S_\mathrm k = \frac{i_\mathrm k}F,\quad S_\mathrm a = \frac{i_\mathrm a}F.
+	\end{equation}
 	$i_\mathrm k,i_\mathrm a$是阴极电流和阳极电流（\unit{A}），$F$是入射到光阴极的光通量（\unit{lm}）
 	\item 第一打拿极(D1)的电子收集系数
-	\[
-		g_\mathrm c:=\frac{\text{第一打拿极收集到的光电子数}}{\text{光阴极发出的光电子数}}.
-	\]
-	$g_\mathrm c$对PMT的幅度分辨率影响较大，在有聚焦极的光电倍增管中，$g_\mathrm c>\qty{95}{\percent}$
+	\begin{equation}\label{eq:nrd-dynode-collection-efficiency}
+		g_\mathrm c := \frac{\text{第一打拿极收集到的光电子数}}{\text{光阴极发出的光电子数}}.
+	\end{equation}
+	$g_\mathrm c$对PMT的幅度分辨率影响较大，在有聚焦极的光电倍增管中，$g_\mathrm c > \qty{95}{\percent}$
 	\item 光电倍增管的电流放大倍数
-	\[
-		M=\frac{\text{阳极收集到的电子数}}{\text{第一打拿极收集到的光电子数}}=(g\delta)^n.
-	\]
+	\begin{equation}\label{eq:nrd-photomultiplier-gain}
+		M = \frac{\text{阳极收集到的电子数}}{\text{第一打拿极收集到的光电子数}} = (g\delta)^n.
+	\end{equation}
 	$g$为电子传输效率，$\delta$为各级电子倍增系数，$n$为倍增级数。
 \end{compactitem}
 则%荧光光子数目$\avg n_{\mathrm{ph}}=E_\deposited Y_{\mathrm{ph}}$，
 光电转换因子
-\[
-	\avg T:=F_{\mathrm{ph}}\avg Q_\mathrm kg_\mathrm c,
-\]
-$F_{\mathrm{ph}}$为光子传输系数，则D1光电子数$n_\electron=Tn_{\mathrm{ph}}$。
+\begin{equation}\label{eq:nrd-photoconversion-factor}
+	\avg T := F_{\mathrm{ph}}\avg Q_\mathrm kg_\mathrm c,
+\end{equation}
+$F_{\mathrm{ph}}$为光子传输系数，则D1光电子数$n_\electron = Tn_{\mathrm{ph}}$。
 
 PMT输出脉冲中的电荷量
 %Q=E_\deposited Y_{\mathrm{ph}}F_{\mathrm{ph}}\avg Q_\mathrm kg_\mathrm c\avg Me,
 \begin{align}
-	Q=\avg n_{\mathrm{ph}}\avg T\,\avg Me.
+	Q = \avg n_{\mathrm{ph}}\avg T\,\avg Me.
 \end{align}
 \begin{compactitem}
 	\item PMT的时间特性：
 	\begin{compactitem}
-		\item 渡越时间$t_\electron\sim\qtyrange{20}{80}{ns}$：从光电子离开光阴极算起各电子到达阳极的时间。影响时滞。
-		\item 渡越时间离散$\Delta t_\electron\sim\qty{1}{ns}$：到达阳极的每个电子都经历了不同的倍增过程和飞行距离，导致了飞行时间的涨落。
+		\item 渡越时间$t_\electron \sim \qtyrange{20}{80}{ns}$：从光电子离开光阴极算起各电子到达阳极的时间。影响时滞。
+		\item 渡越时间离散$\Delta t_\electron \sim \qty{1}{ns}$：到达阳极的每个电子都经历了不同的倍增过程和飞行距离，导致了飞行时间的涨落。
 		
 		影响系统的时间分辨能力；对于有机闪烁体，也影响探测器的分辨时间。
 	\end{compactitem}
@@ -225,74 +232,74 @@ PMT输出脉冲中的电荷量
 	\item 对于有机闪烁体，$p(t)$的展宽和发光时间相当，不能看做$\delta$函数。
 \end{compactitem}
 无机闪烁体，一次闪烁光引起的输出电流
-\[
-	I(t)=\frac{n_{\mathrm{ph}}TMe}{\tau_0}\e^{-(t-t_\electron)/\tau_0},\quad t\geqslant t_\electron.
-\]
-$\tau_0\sim\qty{250}{ns}$为发光衰减时间。
+\begin{equation}\label{eq:nrd-scintillation-current-pulse}
+	I(t) = \frac{n_{\mathrm{ph}}TMe}{\tau_0}\e^{-(t-t_\electron)/\tau_0},\quad t \geqslant t_\electron.
+\end{equation}
+$\tau_0 \sim \qty{250}{ns}$为发光衰减时间。
 
 \subsection{电压脉冲信号}
 
 输出电压信号的一般形式
 \[
-	V(t)=\frac1{C_0}\e^{-t/R_0C_0}\int_0^tI(\tau)\e^{\tau/R_0C_0}\d\tau,
+	V(t) = \frac1{C_0}\e^{-t/R_0C_0}\int_0^tI(\tau)\e^{\tau/R_0C_0}\d\tau,
 \]
 代入上式得
-\[
-	V(t)=\frac Q{C_0}\frac{R_0C_0}{R_0C_0-\tau_0}\bigp{\e^{-t/R_0C_0}-\e^{-t/\tau_0}},
-\]
+\begin{equation}\label{eq:nrd-scintillation-voltage-pulse}
+	V(t) = \frac Q{C_0}\frac{R_0C_0}{R_0C_0 - \tau_0}\bigp{\e^{-t/R_0C_0} - \e^{-t/\tau_0}},
+\end{equation}
 \begin{compactitem}
-	\item $R_0C_0\gg\tau_0$，
+	\item $R_0C_0 \gg \tau_0$，
 	\begin{align*}
-		V(t)&\doteq\frac Q{C_0}\bigp{\e^{-t/R_0C_0}-\e^{-t/\tau_0}}\\
-		&=\begin{cases}
-			\frac Q{C_0}\bigp{1-\e^{-t/\tau_0}},&t\ll\tau_0\\
-			\frac Q{C_0},&\tau_0\ll t\ll R_0C_0\\
-			\frac Q{C_0}\e^{-t/R_0C_0},&t>R_0C_0
+		V(t) &\doteq \frac Q{C_0}\bigp{\e^{-t/R_0C_0} - \e^{-t/\tau_0}}\\
+		&= \begin{cases}
+			\frac Q{C_0}\bigp{1 - \e^{-t/\tau_0}},&t \ll \tau_0\\
+			\frac Q{C_0},&\tau_0 \ll t \ll R_0C_0\\
+			\frac Q{C_0}\e^{-t/R_0C_0},&t > R_0C_0
 		\end{cases}
 	\end{align*}
-	\item $R_0C_0\ll\tau_0$，
+	\item $R_0C_0 \ll \tau_0$，
 	\begin{align*}
-		V(t)&\doteq\frac{R_0Q}{\tau_0}\bigp{\e^{-t/R_0C_0}-\e^{-t/\tau_0}}\\
-		&=\begin{cases}
-			\frac{R_0Q}{\tau_0}\bigp{1-\e^{-t/R_0C_0}},&t\ll\tau_0\\
-			\frac {R_0Q}{\tau_0},&R_0C_0\ll t\ll \tau_0\\
-			\frac {R_0Q}{\tau_0}\e^{-t/\tau_0},&t>\tau_0
+		V(t) &\doteq \frac{R_0Q}{\tau_0}\bigp{\e^{-t/R_0C_0} - \e^{-t/\tau_0}}\\
+		&= \begin{cases}
+			\frac{R_0Q}{\tau_0}\bigp{1 - \e^{-t/R_0C_0}},&t \ll \tau_0\\
+			\frac {R_0Q}{\tau_0},&R_0C_0 \ll t \ll \tau_0\\
+			\frac {R_0Q}{\tau_0}\e^{-t/\tau_0},&t > \tau_0
 		\end{cases}
 	\end{align*}
-	\item $R_0C_0=\tau_0$，
-	\[
-		V(t)=\frac{Q}{C_0}\frac{t}{R_0C_0}\e^{-t/R_0C_0},
-	\]
+	\item $R_0C_0 = \tau_0$，
+	\begin{equation}\label{eq:nrd-matched-scintillation-time-constants}
+		V(t) = \frac{Q}{C_0}\frac{t}{R_0C_0}\e^{-t/R_0C_0},
+	\end{equation}
 	
 	\item $C_0$不变，随着$R_0$的增大，幅度、脉宽都增大；
 	\item $R_0$不变，随着$C_0$的增大，幅度降低、脉宽增大。
 \end{compactitem}
 
-闪烁探测器电流信号的形状总是确定的\footnote{本课程仅二例是电流形状确定的：正比计数器、闪烁体探测器。}，因此弹道亏损的程度是确定的。无论$R_0C_0$怎样改变，$V_{\max}\propto Q\propto E_\deposited$的关系总存在，可以测量射线的沉积能量。
+闪烁探测器电流信号的形状总是确定的\footnote{本课程仅二例是电流形状确定的：正比计数器、闪烁体探测器。}，因此弹道亏损的程度是确定的。无论$R_0C_0$怎样改变，$V_{\max} \propto Q \propto E_\deposited$的关系总存在，可以测量射线的沉积能量。
 
-实际中常选取$R_0C_0=\tau_0$，幅度足够大，脉宽足够窄。同时，$C_0$应尽可能小，以获得大的脉冲幅度。
+实际中常选取$R_0C_0 = \tau_0$，幅度足够大，脉宽足够窄。同时，$C_0$应尽可能小，以获得大的脉冲幅度。
 \paragraph{电压脉冲型与电流脉冲型工作状态}
 所谓电压型脉冲信号和电流型脉冲信号，说的都是电流信号流经外回路后的电压信号。$R_0C_0$和$\tau_0$之间的大小关系，决定了是哪种脉冲信号。
 \begin{compactitem}
-	\item 电压型脉冲信号($R_0C_0\gg\tau_0$)的重点在于（通过脉冲幅度）分析电流信号的面积，希望电压信号的幅度够大，能抵抗后续电路的噪声，获得好的能量分辨率。
-	\item 电流型脉冲信号($R_0C_0\ll\tau_0$)的重点则在于如实地反映电流信号的形状。这在PSD （Pulse Shape Discrimination）技术识别粒子种类的应用中非常重要（例如$\neutron/\gamma$识别）。
+	\item 电压型脉冲信号($R_0C_0 \gg \tau_0$)的重点在于（通过脉冲幅度）分析电流信号的面积，希望电压信号的幅度够大，能抵抗后续电路的噪声，获得好的能量分辨率。
+	\item 电流型脉冲信号($R_0C_0 \ll \tau_0$)的重点则在于如实地反映电流信号的形状。这在PSD （Pulse Shape Discrimination）技术识别粒子种类的应用中非常重要（例如$\neutron/\gamma$识别）。
 \end{compactitem}
 
 \subsection{输出信号的涨落}
 
-光电倍增管输出电荷数$n_a$是个串级型随机变量：
+光电倍增管输出电荷数$n_{\mathrm{a}}$是个串级型随机变量：
 \begin{compactitem}
 	\item 闪烁体发出的光子数$n_{\mathrm{ph}}$，近似服从Poisson分布；
 	\item 光子能否转换为第一打拿极收集到的光电子，是Bernoulli事件，期望值为$T$；
-	\item 第一打拿极收集到的光电子数$n_\electron$为泊松分布；
+	\item 第一打拿极收集到的光电子数$n_\electron$为 Poisson 分布；
 	\item PMT的电子倍增系数$M$。
 	\[
-		\avg M=\avg\delta_1\avg\delta^{n-1}\implies\nu_M^2=\frac1{\avg\delta_1}\cdot\frac{\avg\delta}{\avg\delta-1},
+		\avg M = \avg\delta_1\avg\delta^{n-1} \implies \nu_M^2 = \frac1{\avg\delta_1} \cdot \frac{\avg\delta}{\avg\delta - 1},
 	\]
 \end{compactitem}
-由$\avg n_a=\avg n_{\mathrm{ph}}\avg T\,\avg M$，可得 
+由$\avg n_{\mathrm{a}} = \avg n_{\mathrm{ph}}\avg T\,\avg M$，可得
 \begin{align}
-	\nu_{n_a}^2=\frac1{\avg n_{\mathrm{ph}}\avg T}\biggp{1+\frac1{\avg\delta_1}\cdot\frac{\avg\delta}{\avg\delta-1}},
+	\nu_{n_{\mathrm{a}}}^2 = \frac1{\avg n_{\mathrm{ph}}\avg T}\biggp{1 + \frac1{\avg\delta_1} \cdot \frac{\avg\delta}{\avg\delta - 1}},
 \end{align}
 第一打拿极的倍增系数$\delta_1$大些为好，比如负电子亲和（NEA）材料。
 
@@ -323,9 +330,9 @@ $\tau_0\sim\qty{250}{ns}$为发光衰减时间。
 \subsection{NaI(Tl)单晶闪烁谱仪的性能}
 
 \paragraph{能量分辨率}
-\[
-	\eta=2.355\sqrt{\frac1{EY_{\mathrm{ph}}T}\biggp{1+\frac1{\avg\delta_1}\cdot\frac{\avg\delta}{\avg\delta-1}}},
-\]
+\begin{equation}\label{eq:nrd-scintillator-resolution}
+	\eta = 2.355\sqrt{\frac1{EY_{\mathrm{ph}}T}\biggp{1 + \frac1{\avg\delta_1} \cdot \frac{\avg\delta}{\avg\delta - 1}}},
+\end{equation}
 改善分辨率：
 \begin{compactenum}
 	\item 射线沉积的能量$E$增多（但此时半高宽是越大的）
@@ -335,9 +342,9 @@ $\tau_0\sim\qty{250}{ns}$为发光衰减时间。
 \end{compactenum}
 此外，高压稳定性和多道的道宽也会有所影响。
 \paragraph{能量线性}单位能量输出幅度与入射粒子能量的关系
-\[
-	E=G\cdot Ch+E_0,
-\]
+\begin{equation}\label{eq:nrd-energy-calibration}
+	E = G \cdot Ch + E_0,
+\end{equation}
 理想情况：发光效率$C_{\mathrm{np}}$与入射粒子的能量无关，这样全能峰的幅度就与入射$\gamma$光子的能量成正比。
 
 实际上：
@@ -346,10 +353,10 @@ $\tau_0\sim\qty{250}{ns}$为发光衰减时间。
 	\item $\gamma$能谱只涉及电子引起的闪光，因此$\gamma$谱仪的非线性是由发光效率随电子能量不同而产生的（对NaI(Tl)，在$\qtyrange{0.1}{1}{MeV}$变化约\qty{15}{\percent} ）。
 \end{compactitem}
 \paragraph{探测效率、峰总比、峰康比}平行$\gamma$束
-\[
-	\varepsilon=1-\e^{-N\sigma D}=1-\exp\biggp{-\NA\frac\rho{A}\sigma_\gamma D},
-\]
-提升探测器的探测效率：高密度($\rho$)、大($D$)、原子序数高($\sigma_\gamma/A$)。
+\begin{equation}\label{eq:nrd-photon-detection-efficiency}
+	\varepsilon = 1 - \e^{-N\sigma D} = 1 - \exp\biggp{-\NA\frac\rho{A}\sigma_\upgamma D},
+\end{equation}
+提升探测器的探测效率：高密度($\rho$)、大($D$)、原子序数高($\sigma_\upgamma/A$)。
 
 提高本征峰效率，略
 \paragraph{时间特性}
