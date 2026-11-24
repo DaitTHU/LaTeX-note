@@ -7,58 +7,51 @@
 
 理论中的末态概率可以与探测器计数直接联系。
 若每次有 $N_i$ 个原子制备在态 $\ket{i}$，探测器识别态 $\ket{f}$ 的效率为 $\eta_f$，
-背景计数为$N_\mathrm{bg}$，则平均计数为
+背景计数为$N_\bg$，则平均计数为
 \begin{equation}
-    \ave{N_\mathrm{det}} = \eta_f N_i P_{i\to f} + N_\mathrm{bg}.
+    \ave{N_\detection} = \eta_f N_i P_{i\to f} + N_\bg.
 \end{equation}
-实验通过效率标定和背景测量提取$P_{i\to f}$；
-理论则从相互作用计算这个概率，再对不能分辨的末态求和。
+用实测平均计数减去背景，再除以 $\eta_f N_i$，即可估计 $P_{i\to f}$。若探测器把几个正交末态记为同一结果，则这个结果的概率是各末态概率之和。
 
 取$\op{H} = \op{H}_0 + \op{V}(t)$，初态为$\op{H}_0$本征态$\ket{i}$。
 在相互作用绘景中，以 $\op{H}_0$ 的本征态为基底，记态在 $\ket{n}$ 上的分量为
-$c_n(t) = \braket{n}{\psi_{\mathrm{I}}(t)}$。将态方程左乘 $\bra{f}$ 得到
+$c_n(t) = \braket{n}{\psi_{\picI}(t)}$。将态方程左乘 $\bra{f}$ 得到
 \begin{equation}
     \i\hbar\dot c_f(t)
     = \sum_n\e^{\i(E_f-E_n)t/\hbar}V_{fn}(t)c_n(t).
 \end{equation}
 这里 $V_{fn}(t) = \mel{f}{\op{V}(t)}{n}$ 是矩阵元，上式给出各态振幅耦合的精确方程。
-若在积分右侧以初始值$c_n(0) = \delta_{ni}$代替$c_n(t)$，
-便得到一阶近似：只保留从初态出发的一次相互作用。
-用传播子组织同一迭代，可以同时保留所有初末态。
-相互作用绘景的积分方程是
+将上述方程从 $0$ 积分到 $t$，在被积式中用初值 $c_n(0) = \delta_{ni}$ 代替 $c_n(t')$，就只保留了从 $\ket i$ 出发、经一次相互作用到达 $\ket f$ 的振幅。
+对任意初态都可以这样逐次逼近。相互作用绘景中的传播子满足积分方程
 \begin{equation}
-    \op{U}_{\mathrm{I}}(t,0) = \one - \frac\i\hbar\int_0^t\op{V}_{\mathrm{I}}(t_1)\op{U}_{\mathrm{I}}(t_1,0)\d t_1.
+    \op{U}_{\picI}(t,0) = \one - \frac\i\hbar\int_0^t\op{V}_{\picI}(t_1)\op{U}_{\picI}(t_1,0)\d t_1.
 \end{equation}
-逐次代入右侧便得到 Dyson 展开。第一次代入时，以 $\one$ 替换 $\op{U}_{\mathrm{I}}$。记 $\omega_{fi} = (E_f - E_i)/\hbar$，得到一阶振幅
+逐次代入右侧便得到 Dyson 展开。第一次代入时，以 $\one$ 替换 $\op{U}_{\picI}$。记 $\omega_{fi} = (E_f - E_i)/\hbar$，得到一阶振幅
 \begin{equation}
     c_f^{(1)}(t) = -\frac\i\hbar\int_0^t\d t'\e^{\i\omega_{fi}t'}\mel{f}{\op{V}(t')}{i},
     \qquad f \ne i.
 \end{equation}
 
-这里$c_f^{(1)}$是相互作用绘景中末态$\ket{f}$的一阶振幅；
-初始条件取$c_i(0) = 1$、$c_{f\ne i}(0) = 0$。
-矩阵元中的相位来自
+被积式中随时间变化的相位来自初、末态的能量差。将相互作用绘景的矩阵元写开，有
 \begin{equation}
-    \mel{f}{\op{V}_{\mathrm{I}}(t')}{i}
+    \mel{f}{\op{V}_{\picI}(t')}{i}
     = \mel{f}{\e^{\i \op{H}_0t'/\hbar}\op{V}(t')\e^{-\i \op{H}_0t'/\hbar}}{i}
     = \e^{\i\omega_{fi}t'}V_{fi}(t').
 \end{equation}
 
-这要求总跃迁概率仍远小于1；一个弱耦合若作用足够久也会超出一级近似。
-
-再迭代一次，可得到下一阶振幅中的时间有序区域：
+以初始振幅代替 $c_n(t')$ 忽略了初态布居的损失。若算得离开初态的总概率已不可忽略，就不能沿用这一近似。
+将传播子的一阶近似代回积分方程，便得到经历两次相互作用的二阶振幅
 \begin{equation}
     c_f^{(2)}(t)
     = -\frac1{\hbar^2}\sum_n
     \int_0^t\d t_1\int_0^{t_1}\d t_2\,
-    \mel{f}{\op{V}_{\mathrm{I}}(t_1)}{n}\mel{n}{\op{V}_{\mathrm{I}}(t_2)}{i}.
+    \mel{f}{\op{V}_{\picI}(t_1)}{n}\mel{n}{\op{V}_{\picI}(t_2)}{i}.
 \end{equation}
-求和中的$n$是中间态标签，两个积分变量是先后相互作用的时刻。
-这也说明为什么逐阶近似除了小耦合，还受到作用时间限制。
+在较早的 $t_2$，相互作用将 $\ket i$ 连接到中间态 $\ket n$，在较晚的 $t_1$ 再将 $\ket n$ 连接到 $\ket f$。通向同一 $\ket f$ 的各个中间态都对振幅有贡献。
 
-对于在$[0,t]$内近似恒定的矩阵元$V_{fi}$，
+取与初态正交的末态 $\ket f$。若矩阵元 $V_{fi}$ 在 $[0,t]$ 内近似恒定，一阶振幅的模平方给出跃迁概率的最低阶近似
 \begin{equation}
-    P_{i\to f}(t) = \frac{4\abs{V_{fi}}^2}{(E_f - E_i)^2}
+    P_{i\to f}(t) \simeq \frac{4\abs{V_{fi}}^2}{(E_f - E_i)^2}
     \sin^2\frac{(E_f - E_i)t}{2\hbar}.
     \label{eq:finitetrans}
 \end{equation}
@@ -157,9 +150,7 @@ $c_n(t) = \braket{n}{\psi_{\mathrm{I}}(t)}$。将态方程左乘 $\bra{f}$ 得�
 \end{equation}
 各简并态或偏振通道可显式求和，也可在矩阵元相同时将其重数计入 $\rho_\final$；每个末态计数一次。
 
-这个极限的物理尺度可以明确比较。
-有限时间核的中心宽度约为$\hbar/t$，
-中心高度正比于$t^2$，因此与连续末态相乘后的总面积正比于$t$。
+作用时间为 $t$ 时，跃迁概率随末态能量变化的共振峰宽度约为 $\hbar/t$，峰高正比于 $t^2$。将峰内各末态的概率相加，总概率因而正比于 $t$。
 若态密度与矩阵元在能量尺度$W$上才有显著变化，
 就要求$\hbar/t \ll W$，才能把它们移出中心区积分。
 若相关末态的离散间隔为$\delta E$，又要求$\delta E \ll \hbar/t$，
@@ -174,7 +165,7 @@ $c_n(t) = \braket{n}{\psi_{\mathrm{I}}(t)}$。将态方程左乘 $\bra{f}$ 得�
     \end{equation}
     $W$为相关能区内谱密度变化的尺度，$\delta E$为末态间隔，
     $\Gamma$为求得的总跃迁率。
-    右侧$1/\Gamma$限制初态耗尽，$\hbar/\delta E$限制离散谱的分辨与复现。
+    $t \ll 1/\Gamma$ 保证离开初态的总概率仍远小于一，$t \ll \hbar/\delta E$ 保证共振峰内仍包含许多末态。
 \end{method}
 
 连续谱极限使$\delta E \to 0$，但初态耗尽仍需另行处理。
@@ -188,7 +179,8 @@ $E_f - E_i = \hbar\omega$；受激发射(stimulated emission)项为$E_f - E_i = 
 
 \section{电偶极近似与选择定则}
 黄金规则表明，各末态的跃迁率取决于相互作用矩阵元的模平方。转动入射光的偏振方向时，即使光子能量仍与能级差相等，某些吸收线也会消失。
-为解释这种偏振依赖性，需要用原子态的波函数和光的偏振方向具体求出矩阵元。
+光的偏振选定了与原子耦合的电偶极矩分量。由\chapref{ch:angular}的旋转和宇称选择定则，可以先判断哪些矩阵元必为零。
+对允许的跃迁，角动量耦合系数给出磁量子数的依赖，绝对强度还取决于约化矩阵元的大小。
 
 \begin{definition}{电偶极矩与跃迁偶极矩}{qm-transition-dipole}
     以原子核为原点，在固定核的单电子模型中，电子的电偶极矩算符为 $\opbm{d} = -e\opbm{X}$。
@@ -202,7 +194,7 @@ $E_f - E_i = \hbar\omega$；受激发射(stimulated emission)项为$E_f - E_i = 
         W_{fi} &= -\frac{E_0}{2}\mel{f}{\opbm d \cdot \bm\epsilon}{i} . \label{eq:dipole-absorption-matrix-element}
     \end{align}
 \end{subequations}
-$ka \ll 1$控制空间多极展开，弱驱动控制微扰阶数，二者是不同的近似。
+记 $k$ 为入射光的波数，$a$ 为原子尺寸。$ka \ll 1$ 时，光场在原子范围内的相位变化很小，可以把电场看成空间均匀。要用一阶振幅计算跃迁概率，还需驱动足够弱、作用时间足够短，使高阶振幅可以忽略。
 
 \begin{example}{简谐电场中的吸收与受激发射}{qm-dipole-drive-components}
     用峰值为 $E_0$ 的线偏振场 $E_0\cos\omega t$ 驱动跃迁。求共振吸收分量的场幅，并指出向下跃迁时哪个分量共振。
@@ -227,35 +219,36 @@ $ka \ll 1$控制空间多极展开，弱驱动控制微扰阶数，二者是不�
 
 将偶极矩按式\eqref{eq:dipole-spherical-components}分成三个球分量。在忽略自旋混合的单电子中心场中，角动量与宇称条件给出
 \begin{equation}
-    \Delta\ell = \pm1,\quad\Delta m = 0,\pm1,\quad\Delta s = 0.
+    \Delta\ell = \pm1,\quad\Delta m = 0,\pm1,\quad\Delta s = \Delta m_s = 0.
 \end{equation}
 有自旋轨道耦合时，需将轨道与自旋合成为总角动量，按总角动量量子数 $j,m_j$ 的选择定则与相应耦合系数求矩阵元。
 “禁戒”通常指某个近似阶数下的矩阵元为零；磁偶极、电四极、混合态或多光子过程仍可能产生弱线。
 
-以氢的 $1\mathrm{s}$ 为初态，用沿 $z$ 线偏振的弱光照射，频率调到 $n = 1$ 与 $n = 2$ 的能量差除以 $h$。
-在忽略自旋和精细结构的模型中，$n = 2$ 的四个空间态同能；实验能激发其中哪一个？
-在位置表象中，$\op{d}_z$ 使波函数乘以 $-er\cos\theta$，矩阵元的角向因子是
+以氢的 $1\orbitalS$ 为初态，用沿 $z$ 线偏振的弱光照射，频率调到 $n = 1$ 与 $n = 2$ 的能量差除以 $h$。
+在忽略自旋和精细结构的模型中，$n = 2$ 的四个空间态同能，实验能激发其中哪一个？
+初态有 $\ell = m = 0$，电偶极跃迁要求末态有 $\ell = 1$。沿 $z$ 的场只耦合 $\op d_0$，保持 $m = 0$，于是只剩下 $2\orbitalP,m = 0$ 通道。
+要求这个通道的吸收强度，可以在位置表象中计算偶极矩阵元。由 $\mel{\bm r}{\op d_z}{i} = -er\cos\theta\,\braket{\bm r}{i}$，矩阵元的角向因子是
 \[
     \int Y_{\ell m}\conj(\theta,\phi)\cos\theta\,Y_{00}(\theta,\phi)\d\Omega .
 \]
 由\chapref{ch:hydrogen}的 $Y_{00} = 1/\sqrt{4\pi}$、$Y_{10} = \sqrt{3/(4\pi)}\cos\theta$，
-有 $\cos\theta\,Y_{00} = Y_{10}/\sqrt3$。用球谐函数的正交性，逐态判断的结果见\tabref{tab:hydrogen-dipole-z}。
+有 $\cos\theta\,Y_{00} = Y_{10}/\sqrt3$。用球谐函数的正交性得到各末态的角向积分，见\tabref{tab:hydrogen-dipole-z}。
 \begin{table}[htbp]
     \centering
-    \caption{沿 $z$ 线偏振的光从 $1\mathrm{s}$ 激发氢原子时，$n = 2$ 各末态的角向积分。}
+    \caption{沿 $z$ 线偏振的光从 $1\orbitalS$ 激发氢原子时，$n = 2$ 各末态的角向积分。}
     \label{tab:hydrogen-dipole-z}
     \begin{tabular}{@{}lll@{}}
         \toprule
         末态 & 角向积分 & 沿 $z$ 线偏振的电偶极吸收\\
         \midrule
-        $2\mathrm{s}$，$\ell = 0,m = 0$ & $0$ & 初末态宇称相同\\
-        $2\mathrm{p}$，$\ell = 1,m = 0$ & $1/\sqrt3$ & 有吸收，强度还由径向积分决定\\
-        $2\mathrm{p}$，$\ell = 1,m = \pm1$ & $0$ & 此偏振保持 $m = 0$\\
+        $2\orbitalS$，$\ell = 0,m = 0$ & $0$ & 初末态宇称相同\\
+        $2\orbitalP$，$\ell = 1,m = 0$ & $1/\sqrt3$ & 有吸收，强度还由径向积分决定\\
+        $2\orbitalP$，$\ell = 1,m = \pm1$ & $0$ & 此偏振保持 $m = 0$\\
         \bottomrule
     \end{tabular}
 \end{table}
 
-对唯一留下的 $2\mathrm{p},m = 0$，取实的径向函数并选其近原点的系数为正。
+对唯一留下的 $2\orbitalP,m = 0$，取实的径向函数并选其近原点的系数为正。
 由\chapref{ch:hydrogen}的归一化，令 $\rho = r/a_Z$，有
 $R_{10} = 2a_Z^{-3/2}\e^{-\rho}$、$R_{21} = a_Z^{-3/2}\rho\e^{-\rho/2}/\sqrt{24}$。
 位置算符提供一个 $r$，体积元再提供 $r^2\d r$。分离角向与径向积分得到
@@ -304,7 +297,7 @@ $R_{10} = 2a_Z^{-3/2}\e^{-\rho}$、$R_{21} = a_Z^{-3/2}\rho\e^{-\rho/2}/\sqrt{24
 对各模式的自发发射率求和，就能用同一跃迁偶极矩计算激发态寿命。
 
 寿命实验记录关掉驱动后延迟 $t$ 处的荧光。
-记激发态布居为 $P_\excitedstate(t)$。从 $\excitedstate$ 态到 $\groundstate$ 态的自发发射率 $A_{\excitedstate\to\groundstate}$ 称为 Einstein $A$ 系数，量纲为时间的倒数。
+设关掉驱动时有 $N_\excitedstate(0)$ 个原子处于激发态，记其中每个原子在 $t$ 时仍处于激发态的概率为 $P_\excitedstate(t)$。从 $\excitedstate$ 态到 $\groundstate$ 态的自发发射率 $A_{\excitedstate\to\groundstate}$ 称为 Einstein $A$ 系数，量纲为时间的倒数。
 在短计数窗 $\d t$ 内，该通道的平均探测数为
 $\eta_\groundstate N_\excitedstate(0)A_{\excitedstate\to\groundstate}P_\excitedstate(t)\d t$。
 对多个末态分别测量还能确定分支比，即该通道的发射率除以所有通道发射率之和。
@@ -411,7 +404,7 @@ $\op{a}\adjoint_{\bm k\lambda}\ket{0} = \ket{1_{\bm k\lambda}}$。
     \begin{subequations}
         \begin{align}
             F(\omega) &= \intRplus \e^{\i\omega t}c_\excitedstate(t)\d t
-              = \frac1{\Gamma/2 - \i(\omega - \omega_{\excitedstate\groundstate})},\\
+              = \frac1{\Gamma/2 - \i(\omega - \omega_{\excitedstate\groundstate})},\\*
             I(\omega) &\propto \abs{F(\omega)}^2 =
             \frac1{(\omega - \omega_{\excitedstate\groundstate})^2 + (\Gamma/2)^2}.
         \end{align}

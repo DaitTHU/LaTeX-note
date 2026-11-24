@@ -9,23 +9,23 @@
 
 把一个无自旋粒子的制备绕 $z$ 轴转过小角度 $\epsilon$，探测器的位置固定。
 转动后在方位角 $\phi$ 读到的振幅，等于原来在 $\phi - \epsilon$ 处的振幅。
-把半径和极角暂时省略，一阶展开为
+记转动后的态为 $\ket{\psi_\epsilon} = \op U(\epsilon)\ket\psi$。暂时省略半径和极角，对它的位置振幅作一阶展开，
 \begin{equation}
-    (\op{U}(\epsilon)\psi)(\phi) = \psi(\phi - \epsilon)
+    \psi_\epsilon(\phi) = \psi(\phi - \epsilon)
         = \psi(\phi) - \epsilon\,\p_\phi\psi(\phi) + \bigo(\epsilon^2).
 \end{equation}
 若把这个变化写成 $\op{U}(\epsilon) = \one - \i\epsilon \op{G}/\hbar + \cdots$，
-比较 $\epsilon$ 的系数，再用链式法则 $\p_\phi = -y\p_x + x\p_y$，得到绕 $z$ 轴旋转的生成元
+比较 $\epsilon$ 的系数，再用链式法则 $\p_\phi\psi = -y\p_x\psi + x\p_y\psi$，得到
 \begin{equation}
-    \op G = -\i\hbar\,\p_\phi
-       = \op X\op P_y - \op Y\op P_x = \op L_z .
+    \mel{\bm r}{\op G}{\psi} = -\i\hbar\,\p_\phi\psi(\bm r)
+        = \mel{\bm r}{\op X\op P_y - \op Y\op P_x}{\psi}.
 \end{equation}
-这种确定无穷小变化的算符称为生成元(generator)。
+这对任意光滑波包都成立，所以绕 $z$ 轴旋转的生成元(generator)是 $\op G = \op X\op P_y - \op Y\op P_x = \op L_z$。
 有限维中，幺正性 $\op{U}\adjoint \op{U} = \one$ 的一阶项要求 $\op{G}\adjoint = \op{G}$。
 对连续自由度，强连续的单参数幺正群也有自伴生成元（\thmref{thm:qm-stone}）。
 一般记 $\epsilon$ 为变换的参数，使乘积 $\epsilon \op{G}$ 具有作用量量纲。
 
-设主动变换 $\op{U}(\epsilon) = \exp(-\i\epsilon\op G/\hbar)$ 保持 Hamilton 算符不变，且 $\op G$ 不显含时间。在光滑波包上对这一不变关系取 $\epsilon = 0$ 处的导数，再用式\eqref{eq:heisenberg}，得到
+对自伴生成元 $\op G$，变换 $\op{U}(\epsilon) = \exp(-\i\epsilon\op G/\hbar)$ 由其谱上的标量相位 $\exp(-\i\epsilon g/\hbar)$ 决定。设该变换保持 Hamilton 算符不变，且 $\op G$ 不显含时间。在相关算符乘积有定义的光滑波包上取 $\epsilon = 0$ 处的导数，再用式\eqref{eq:heisenberg}，得到
 \begin{equation}
     \op U\adjoint(\epsilon)\op H\op U(\epsilon) = \op H
     \implies [\op G,\op H] = 0
@@ -34,9 +34,32 @@
 这个对称性还使演化保持 $\op{G}$ 的各个谱子空间，因而 $\op{G}$ 的整个测量概率分布守恒。
 若生成元本身含时，正确条件是$\p_t\op{G} + (\i/\hbar)[\op{H},\op{G}] = 0$。
 
-在\ssecref{ss:momentum-position}中，平移使每一动量分量积累与位移成正比的相位。写成三维平移算符 $\op{T}(\bm a) = \exp(-\i\bm a \cdot \opbm{P}/\hbar)$，它满足
-$\op{T}\adjoint\opbm{X} \op{T} = \opbm{X} + \bm a\,\one$；空间均匀性因此给出动量守恒。
-旋转$\op{R}(\bm n,\theta) = \exp(-\i\theta\bm n \cdot \opbm{J}/\hbar)$的生成元满足
+\paragraph{从 Weyl 关系求正则对易子}
+式\eqref{eq:qm-translation-generator}给出一维平移的相位。推广到三维，令 $\op T(\bm a) = \exp(-\i\bm a \cdot \opbm P/\hbar)$，再令 $\op W(\bm b) = \exp(\i\bm b \cdot \opbm X)$，其中 $\bm b$ 的量纲是长度的倒数。
+在位置表象中，$\op T(\bm a)$ 将波包整体平移位移 $\bm a$，$\op W(\bm b)$ 在各位置乘以 $\e^{\i\bm b\cdot\bm r}$。
+先平移再乘相位，与先乘相位再平移，分别给出 $\e^{\i\bm b\cdot\bm r}\psi(\bm r - \bm a)$ 和 $\e^{\i\bm b\cdot(\bm r-\bm a)}\psi(\bm r-\bm a)$。
+前一个波函数等于后一个乘上整体相位 $\e^{\i\bm b\cdot\bm a}$。把这个等式写成算符关系，再左乘逆平移，便得到 Weyl 关系\cite[第 8.1 节]{teschl-forms}
+\begin{equation}\label{eq:qm-weyl-relations}
+    \op T(\bm a)\adjoint \op W(\bm b)\op T(\bm a)
+        = \e^{\i\bm b\cdot\bm a}\op W(\bm b).
+\end{equation}
+两种指数算符都是幺正的，这条关系在整个态空间上成立。
+
+从式\eqref{eq:qm-weyl-relations}出发，以下只对算符关系求导。先取 Schwartz 波包作为共同稠密定义域。乘坐标、求导、平移和乘上上述相位都保留这个空间，所需的算符乘积有定义。
+在 $\bm b = \bm 0$ 处对 $b_i$ 求导，左右两边分别给出 $\i\op T(\bm a)\adjoint \op X_i\op T(\bm a)$ 和 $\i(\op X_i + a_i\one)$。合写为
+\begin{equation}\label{eq:qm-translated-position}
+    \op T(\bm a)\adjoint\opbm X \op T(\bm a) = \opbm X + \bm a\,\one .
+\end{equation}
+这也给出如何用平移前的态求平移后的位置均值，对左边的算符在原态上求期望即可（\dfnref{dfn:qm-pictures}）。
+再在 $\bm a = \bm 0$ 处对 $a_j$ 求导，左边第 $i$ 个分量给出 $-(\i/\hbar)[\op X_i,\op P_j]\ket\psi$，右边给出 $\delta_{ij}\ket\psi$。这就在共同定义域上得到三维的正则对易关系
+\begin{equation}
+    [\op X_i,\op P_j] = \i\hbar\delta_{ij}\one.
+\end{equation}
+把它写成形式算符等式时，以两个乘积共同有定义的态为准。要在整个态空间上使用对应的关系，可以直接采用式\eqref{eq:qm-weyl-relations}的有界指数形式。
+
+若体系沿某方向平移时 Hamilton 算符不变，该方向的动量分量便守恒。
+
+绕 $\bm n$ 轴旋转用 $\op R(\bm n,\theta) = \exp(-\i\theta\bm n \cdot \opbm J/\hbar)$ 表示。旋转生成元的各分量满足
 \begin{equation}
     [\op{J}_i,\op{J}_j] = \i\hbar\epsilon_{ijk}\op{J}_k.
     \label{eq:Jalgebra}
@@ -53,9 +76,9 @@ $\op{T}\adjoint\opbm{X} \op{T} = \opbm{X} + \bm a\,\one$；空间均匀性因此
 自旋的同一关系已由 Pauli 算符的乘法得到。轨道算符与自旋算符分别作用在空间和内部自由度上，交叉对易子为零，两部分就能直接相加。
 
 质量为 $M$ 的粒子在静标势中的 Hamilton 算符是 $\op H = \opbm P^2/(2M) + V(\opbm X)$，动能与 $\opbm L$ 对易。
-由 $[V,\op P_j] = \i\hbar\p_j V$ 和 Ehrenfest 关系可知，角动量均值的变化率等于平均力矩，
+由 $[V(\opbm X),\op P_j] = \i\hbar\p_j V(\opbm X)$ 和 Ehrenfest 关系可知，角动量均值的变化率等于平均力矩，
 \begin{equation}
-    \dd{t}\ave{\opbm L} = \ave{\opbm X \times [-\grad V(\opbm X)]}.
+    \dd{t}\ave{\opbm L} = \ave{\opbm X \times [-(\grad V)(\opbm X)]}.
 \end{equation}
 若静势能只依赖距离，力沿径向，每个角动量分量都与 $\op H$ 对易，定态可以按 $\ell,m$ 分类。
 
@@ -135,8 +158,18 @@ $\lambda - m(m \pm 1)$最终会变负，因此升降链必须在两端终止。
         \op{J}_\pm\ket{j,m} = \hbar\sqrt{(j \mp m)(j \pm m + 1)}\ket{j,m \pm 1}.
     \end{equation}
 \end{corollary}
+
+图\ref{fig:qm-angular-momentum-matrices}以 $j = 2$ 为例，从输入态 $m$ 所在的列读出算符的作用。$\op J_+$ 的 $m = 2$ 列和 $\op J_-$ 的 $m = -2$ 列全为零，分别标出升降链的两端。
+
+\begin{figure}[htbp]
+    \centering
+    \tikzfigure{angular-momentum-matrices}
+    \caption{$j = 2$ 多重态中的 $\op J_z/\hbar$、$\op J_+/\hbar$ 和 $\op J_-/\hbar$。列标 $m$ 为输入，行标 $m'$ 为输出。三图共用右侧色标，白格为零。两张升降矩阵互为转置。}
+    \label{fig:qm-angular-momentum-matrices}
+\end{figure}
+
 普通三维位置自由度的轨道角动量(orbital angular momentum)只有整数$\ell$，
-因为标量位置态上的$2\pi$旋转为恒等。单电子轨道用小写正体字母 $\mathrm{s},\mathrm{p},\mathrm{d},\mathrm{f}$ 依次标记 $\ell = 0,1,2,3$。
+因为标量位置态上的$2\pi$旋转为恒等。单电子轨道用小写正体字母 $\orbitalS,\orbitalP,\orbitalD,\orbitalF$ 依次标记 $\ell = 0,1,2,3$。
 自旋量子数 $s$ 可以是半整数。
 自旋$1/2$的$2\pi$旋转给出$-\one$；若只旋转干涉仪的一条支路，这个相对符号可以被读出。
 
@@ -148,28 +181,39 @@ $\lambda - m(m \pm 1)$最终会变负，因此升降链必须在两端终止。
 
 \subsection{轨道角动量的方向波函数}
 \label{ss:qm-spherical-harmonics}
-若测量粒子的位置方向，轨道态 $\ket{\ell,m}$ 在立体角 $\d\Omega = \sin\theta\d\theta\d\phi$
-内的概率为 $\abs{Y_{\ell m}(\theta,\phi)}^2\d\Omega$。方向振幅 $Y_{\ell m}$ 称为球谐函数(spherical harmonic)。
-在极角 $\theta$、方位角 $\phi$ 的球坐标中，$\bm r = r\uvec r$ 与梯度叉乘消去了梯度的径向分量，故
-\begin{equation}
-    \opbm L = -\i\hbar\,\bm r \times \grad
-       = -\i\hbar\biggp{\uvec\phi\,\p_\theta
-            - \frac{\uvec\theta}{\sin\theta}\p_\phi}.
+测量粒子的位置方向时，用球面上的方向 $\Omega = (\theta,\phi)$ 标记探测器。取方向基，角向态 $\ket{\ell,m}$ 的分量称为球谐函数(spherical harmonic)，
+\begin{equation}\label{eq:qm-direction-amplitude}
+    Y_{\ell m}(\Omega) = \braket{\Omega}{\ell,m} .
 \end{equation}
-取它在 $z$ 轴的分量得 $\op L_z = -\i\hbar\p_\phi$，取 $x,y$ 分量的组合则有
+在这个角向态中，探测到方向落在立体角 $\d\Omega = \sin\theta\d\theta\d\phi$ 内的概率为 $\abs{Y_{\ell m}(\Omega)}^2\d\Omega$。若还要预言粒子离原点多远，则需要三维态的径向信息。
+记径向单位矢量为 $\bm n = \bm r/r$，沿极角 $\theta$ 和方位角 $\phi$ 增大方向的单位矢量分别为 $\bm e_\theta$ 和 $\bm e_\phi$。
+取角向态 $\ket g$，记其光滑的方向振幅为 $g(\Omega) = \braket{\Omega}{g}$。
+将 $g$ 沿每条射线延拓为常数。由 $\opbm L = \opbm X \times \opbm P$ 及动量的位置分量公式，得到
 \begin{equation}
-    \op L_\pm = \op L_x \pm \i\op L_y
-        = \hbar\e^{\pm\i\phi}\bigp{\pm\p_\theta + \i\cot\theta\,\p_\phi}.
+    \mel{\Omega}{\opbm L}{g} = -\i\hbar\,\bm r \times \grad g
+       = -\i\hbar\biggp{\bm e_\phi\,\p_\theta g
+            - \frac{\bm e_\theta}{\sin\theta}\p_\phi g}.
 \end{equation}
-因而 $\op L_\pm$ 使方位因子 $\e^{\i m\phi}$ 的 $m$ 增减一。
-将这两个微分算符代入 $\opbm L^2 = \op L_+\op L_- + \op L_z^2 - \hbar\op L_z$，得
+叉积消去了梯度的径向分量。取上式的 $z$ 分量，并代入本征方程 $\op L_z\ket{\ell,m} = \hbar m\ket{\ell,m}$，得到
+\begin{equation}\label{eq:qm-angular-azimuth}
+    \mel{\Omega}{\op L_z}{\ell,m}
+    = -\i\hbar\p_\phi Y_{\ell m}(\Omega) = \hbar mY_{\ell m}(\Omega).
+\end{equation}
+取 $x,y$ 分量的组合 $\op L_\pm = \op L_x \pm \i\op L_y$，则有
 \begin{equation}
-    \opbm L^2 = -\hbar^2\biggb{\frac{1}{\sin\theta}\p_\theta\bigp{\sin\theta\,\p_\theta}
-                       + \frac{1}{\sin^2\theta}\p_\phi^2}.
+    \mel{\Omega}{\op L_\pm}{g}
+        = \hbar\e^{\pm\i\phi}\bigp{\pm\p_\theta g + \i\cot\theta\,\p_\phi g}.
+\end{equation}
+当 $g$ 含有方位因子 $\e^{\i m\phi}$ 时，升降后振幅的方位因子变为 $\e^{\i(m\pm1)\phi}$。
+用上述方向分量逐项计算 $\opbm L^2 = \op L_+\op L_- + \op L_z^2 - \hbar\op L_z$，得到
+\begin{equation}
+    \mel{\Omega}{\opbm L^2}{g}
+        = -\hbar^2\biggb{\frac{1}{\sin\theta}\p_\theta\bigp{\sin\theta\,\p_\theta g}
+                       + \frac{1}{\sin^2\theta}\p_\phi^2 g}.
     \label{eq:qm-angular-laplacian}
 \end{equation}
-由 $\op L_zY_{\ell m} = \hbar mY_{\ell m}$ 可写 $Y_{\ell m} = f(\cos\theta)\e^{\i m\phi}$。
-再令 $x = \cos\theta$，$\opbm L^2$ 的本征方程成为
+由式\eqref{eq:qm-angular-azimuth}可写 $Y_{\ell m} = f(\cos\theta)\e^{\i m\phi}$。
+取 $\ket g = \ket{\ell,m}$，上式左侧为 $\hbar^2\ell(\ell + 1)Y_{\ell m}$。令 $x = \cos\theta$，便得到
 \begin{equation}
     \dd{x}\biggp{(1 - x^2)\dv{f}{x}}
         + \biggp{\ell(\ell + 1) - \frac{m^2}{1 - x^2}}f = 0 .
@@ -210,9 +254,7 @@ $\lambda - m(m \pm 1)$最终会变负，因此升降链必须在两端终止。
 \end{example}
 
 \section{角动量合成}
-单个角动量的大小和投影都有了标签。原子同时有轨道角动量和自旋，转动整个原子时两者一起转动。
-分开测量两个投影，与测量总角动量的大小和投影，给出两种不同的态标签。
-两个自旋均为 $1/2$ 的粒子给出了一个例子：不同乘积态可具有相同的总投影，测量总角动量的大小还能区分它们的某些叠加态。
+原子的轨道角动量与自旋都参与整体旋转。若分别测量它们沿 $z$ 轴的投影，把两个读数相加就得到总投影。仅凭这个和能否确定总角动量的大小？先看两个自旋 $1/2$ 的例子。
 
 设有两个可区分的自旋，各自的 $z$ 分析器给出 $\up$ 或 $\dn$。
 按第一个、第二个自旋的次序记录，两台分析器可以给出 $(\up,\up),(\up,\dn),(\dn,\up),(\dn,\dn)$ 四种结果。
@@ -223,7 +265,7 @@ $\braket{a',b'}{a,b} = \braket{a'}{a}\braket{b'}{b}$。
 在联合空间里，$\op{J}_{1z}$ 简写 $\op{J}_{1z} \otimes \one_2$，$\op{J}_{2z}$ 简写 $\one_1 \otimes \op{J}_{2z}$。
 分别作用于两个因子的算符可以交换作用次序，因此它们对易。
 例如 $\ket{\up,\dn}$ 给出的总投影为 $\hbar/2 - \hbar/2 = 0$。
-另一个态 $\ket{\dn,\up}$ 也给出零，总投影相同的结果还可以按总角动量的大小区分。
+态 $\ket{\dn,\up}$ 的总投影也是零。这两个乘积态张成的子空间中，哪些线性组合同时具有确定的总角动量平方 $\opbm J^2$？
 \begin{theorem}{两个角动量的合成}{qm-angular-addition}
     固定两个子系统的角动量量子数 $j_1,j_2$，取各自一个不可约多重态。
     在其张量积空间中，总角动量 $\opbm{J} = \opbm{J}_1 + \opbm{J}_2$ 的量子数依次为
@@ -301,13 +343,10 @@ $\braket{a',b'}{a,b} = \braket{a'}{a}\braket{b'}{b}$。
 \subsection{磁场中的光谱测量}
 \label{ss:zeeman-experiment}
 
-Zeeman实验研究外磁场是否改变发光原子的谱线。
-把光源放在磁极之间，用高分辨率光谱仪比较加场与不加场时的谱线，
-并通过偏振分析器分别观察不同偏振成分。
-实验不仅测量原有谱线是否展宽或分裂，还测量各成分随磁场的频移及其偏振。
-这些量共同约束原子磁矩与角动量的关系\cite{zeemanlecture}。
+1896 年，Zeeman 把发出钠黄光的火焰放在电磁铁两极之间。接通电流时，原先清晰的两条黄色 D 线都变宽了\cite{zeemanlecture}。
+当分裂成分之间的间距小于光谱仪的分辨限时，它们叠成一条较宽的线。分辨出各成分后，可从频移求出跃迁能量差随磁场的变化，还可通过偏振分析区分磁量子数变化不同的跃迁。
 
-光谱仪直接读到的是上下能级之差。
+光谱仪测得谱线频率 $\nu$。发出频率为 $\nu$ 的光子时，原子失去能量 $h\nu$，这就是上、下能级之差。
 用下标 $\hi$ 和 $\lo$ 分别标记上、下能级。若它们的零场能量为 $E_\hi^{(0)}$ 和 $E_\lo^{(0)}$，则无场频率为
 $\nu_0 = (E_\hi^{(0)} - E_\lo^{(0)})/h$。
 加场后某一允许跃迁的频率为
@@ -324,24 +363,24 @@ $\nu_0 = (E_\hi^{(0)} - E_\lo^{(0)})/h$。
 固定原子核近似下，电子磁矩及线性磁相互作用为
 \begin{subequations}
     \begin{align}
-        \opbm{\mu} &= -\frac{\muB}{\hbar}(\opbm{L} + g_{\mathrm{s}}\opbm{S}),\\
-        \op{H}_{\mathrm{Z}} &= \frac{\muB B}{\hbar}(\op{L}_z + g_{\mathrm{s}}\op{S}_z).
+        \opbm{\mu} &= -\frac{\muB}{\hbar}(\opbm{L} + g_{\spin}\opbm{S}),\\
+        \op{H}_{\zeemanLabel} &= \frac{\muB B}{\hbar}(\op{L}_z + g_{\spin}\op{S}_z).
     \end{align}
 \end{subequations}
-这里$g_{\mathrm{s}} \simeq 2$为最低阶电子自旋因子，精密实验还需反常磁矩修正。
+这里$g_{\spin} \simeq 2$为最低阶电子自旋因子，精密实验还需反常磁矩修正。
 设零场能级已被自旋轨道作用按$j$分开，且Zeeman能远小于相邻$j$能级间隔。
 在量子数 $\ell,s,j$ 固定且 $j > 0$ 的子空间，旋转对称性(rotational symmetry)要求$\opbm{\mu}$的投影正比于$\opbm{J}$。
 
 令 $\op\Pi_j$ 投影到固定 $\ell,s,j$ 的多重态，用比例系数 $g_J$ 表示上述投影关系，
 \begin{equation}
-    \op\Pi_j(\opbm L + g_{\mathrm{s}}\opbm S)\op\Pi_j = g_J\op\Pi_j\opbm J\op\Pi_j .
+    \op\Pi_j(\opbm L + g_{\spin}\opbm S)\op\Pi_j = g_J\op\Pi_j\opbm J\op\Pi_j .
 \end{equation}
-因为$\opbm{L} + g_{\mathrm{s}}\opbm{S} = \opbm{J} + (g_{\mathrm{s}} - 1)\opbm{S}$，
+因为$\opbm{L} + g_{\spin}\opbm{S} = \opbm{J} + (g_{\spin} - 1)\opbm{S}$，
 点乘$\opbm{J}$并在$\ket{j,m_j}$中取期望，得到
 \[
     g_J\hbar^2j(j + 1)
     = \hbar^2j(j + 1)
-    + (g_{\mathrm{s}} - 1)\frac{\hbar^2}{2}
+    + (g_{\spin} - 1)\frac{\hbar^2}{2}
     \bigb{j(j + 1) + s(s + 1) - \ell(\ell + 1)}.
 \]
 
@@ -352,7 +391,7 @@ $\nu_0 = (E_\hi^{(0)} - E_\lo^{(0)})/h$。
 除以$\hbar^2j(j + 1)$便得到
 \begin{subequations}
     \begin{align}
-        g_J &= 1 + (g_{\mathrm{s}} - 1)\frac{j(j + 1) + s(s + 1) - \ell(\ell + 1)}{2j(j + 1)},\\
+        g_J &= 1 + (g_{\spin} - 1)\frac{j(j + 1) + s(s + 1) - \ell(\ell + 1)}{2j(j + 1)},\\
         \Delta E &= \muB B g_Jm_j.
     \end{align}
 \end{subequations}
@@ -375,7 +414,7 @@ $\nu_0 = (E_\hi^{(0)} - E_\lo^{(0)})/h$。
 垂直磁场观察时，$\pi$与$\sigma$成分呈相互正交的线偏振。
 偏振分析由此提供了独立于频移的跃迁标签。
 
-对于$s = 0$，$g_\hi = g_\lo = 1$，于是
+对于 $s = 0$，磁矩只含轨道项，$\op J_z = \op L_z$，各磁子态的一阶能移都是 $\muB Bm_j$。这也包含 $j = 0$ 时唯一的 $m_j = 0$ 态。因此
 \begin{equation}
     \nu_{m_\hi,m_\lo} - \nu_0
     = \frac{\muB B}{h}(m_\hi - m_\lo)
@@ -390,9 +429,9 @@ $\nu_0 = (E_\hi^{(0)} - E_\lo^{(0)})/h$。
 \end{figure}
 
 \begin{example}{双重态谱线的 Zeeman 分裂}{qm-zeeman-doublet}
-    一个闭壳层外有一个价电子的原子处于弱磁场 $B$ 中。对于电偶极跃迁 $\,{}^2\mathrm{P}_{1/2} \to {}^2\mathrm{S}_{1/2}$，忽略核自旋并取 $g_{\mathrm{s}} = 2$。求各个 $\pi$ 和 $\sigma$ 成分相对于零场谱线的频移，以及不同频率的数目。
+    一个闭壳层外有一个价电子的原子处于弱磁场 $B$ 中。对于电偶极跃迁 $\,{}^2\termP_{1/2} \to {}^2\termS_{1/2}$，忽略核自旋并取 $g_{\spin} = 2$。求各个 $\pi$ 和 $\sigma$ 成分相对于零场谱线的频移，以及不同频率的数目。
     \par\smallskip\textbf{解}\quad
-    在光谱项上标出总角动量后，能级记为 ${}^{2S+1}L_J$。中间按总轨道角动量量子数 $L = 0,1,2,3$ 依次填入大写正体字母 $\mathrm{S},\mathrm{P},\mathrm{D},\mathrm{F}$。
+    在光谱项上标出总角动量后，能级记为 ${}^{2S+1}L_J$。中间按总轨道角动量量子数 $L = 0,1,2,3$ 依次填入大写正体字母 $\termS,\termP,\termD,\termF$。
     左上角是由总自旋量子数 $S$ 决定的多重度 $2S + 1$，右下角是总角动量量子数 $J$。
     闭壳层不贡献角动量，故 $L = \ell$、$S = s = 1/2$、$J = j$。
     代入Landé公式，得到
@@ -400,7 +439,7 @@ $\nu_0 = (E_\hi^{(0)} - E_\lo^{(0)})/h$。
         \begin{alignat}{2}
             g_\hi &= 1 + \frac{3/4 + 3/4 - 2}{2(3/4)}
                 = \frac23,
-            &\quad m_\hi &= \pm\frac12,\\
+            &\quad m_\hi &= \pm\frac12,\\*
             g_\lo &= 1 + \frac{3/4 + 3/4}{2(3/4)}
                 = 2,
             &\quad m_\lo &= \pm\frac12.
@@ -419,9 +458,9 @@ $\nu_0 = (E_\hi^{(0)} - E_\lo^{(0)})/h$。
 
 \subsectionstar{Paschen--Back极限}
 
-当 Zeeman 能量超过自旋轨道劈裂，而正比于 $B^2$ 的抗磁能移仍可忽略时，轨道与自旋可分别按 $m_\ell,m_s$ 标记。在这个 Paschen--Back 极限，乘积态 $\ket{\ell,m_\ell} \otimes \ket{s,m_s}$ 的磁能移为
+当 Zeeman 能量远大于自旋轨道劈裂，而正比于 $B^2$ 的抗磁能移仍可忽略时，轨道与自旋可分别按 $m_\ell,m_s$ 标记。在这个 Paschen--Back 极限，乘积态 $\ket{\ell,m_\ell} \otimes \ket{s,m_s}$ 的磁能移为
 \begin{equation}
-    \Delta E \simeq \muB B(m_\ell + g_{\mathrm{s}} m_s).
+    \Delta E \simeq \muB B(m_\ell + g_{\spin} m_s).
 \end{equation}
 
 \section{宇称与选择定则}
@@ -430,7 +469,7 @@ $\nu_0 = (E_\hi^{(0)} - E_\lo^{(0)})/h$。
 先判断哪些配对的矩阵元必定为零。
 
 \begin{definition}{空间反演与宇称}{qm-parity}
-    宇称算符 $\op{\mathcal P}$ 实现空间反演，将相对原点的位置反号，对标量位置波函数有 $(\op{\mathcal P}\psi)(\bm x) = \psi(-\bm x)$。
+    空间反演将位置矢量 $\bm r$ 变为 $-\bm r$。对标量位置波函数，宇称算符 $\op{\mathcal P}$ 的作用满足 $\mel{\bm r}{\op{\mathcal P}}{\psi} = \psi(-\bm r)$。
     $\op{\mathcal P}$ 幺正且 $\op{\mathcal P}^2 = \one$，本征值为 $+1$ 或 $-1$，分别称为偶宇称和奇宇称(parity)。
 \end{definition}
 空间反演使动量反号，即 $\op{\mathcal P}\opbm P\op{\mathcal P}^{-1} = -\opbm P$。位置 $\opbm X$ 也反号，故轨道角动量 $\opbm{L} = \opbm{X} \times \opbm{P}$ 保持不变。
@@ -447,8 +486,7 @@ $\nu_0 = (E_\hi^{(0)} - E_\lo^{(0)})/h$。
         {}[\op J_z,\op d_q] = \hbar q\op d_q .
     \end{gather}
 \end{subequations}
-绕 $z$ 轴旋转时，每个新分量只乘一个相位。
-这样的三个分量构成秩为 1 的球张量。这里的秩指一组算符在旋转下怎样变换。
+绕 $z$ 轴旋转时，每个球分量只乘一个相位。绕其他轴旋转时，三个分量彼此混合，变换矩阵与 $j = 1$ 多重态的旋转矩阵相同。因此称电偶极矩为秩 $1$ 的球张量。
 
 \begin{definition}{球张量算符}{qm-spherical-tensor}
     一组$2k + 1$个算符$\op{T}_q^{(k)}$（$q = -k,\ldots,k$）
@@ -464,13 +502,12 @@ $\nu_0 = (E_\hi^{(0)} - E_\lo^{(0)})/h$。
 \end{definition}
 
 只用第一条对易式就能筛去一些谱线。设
-$M = \mel{j',m'}{\op{T}_q^{(k)}}{j,m}$，将 $\op{J}_z$ 分别作用在左矢和右矢上，得到
+$M = \mel{j',m'}{\op{T}_q^{(k)}}{j,m}$。利用 $\op J_z$ 的自伴性以及两态各自的本征值，得到
 \[
     \mel{j',m'}{[\op{J}_z,\op{T}_q^{(k)}]}{j,m}
         = \hbar(m' - m)M = \hbar qM.
 \]
-所以只有 $m' = m + q$ 时 $M$ 才可能非零。例如沿 $z$ 的电场只耦合偶极的
-$\op{d}_z = \op{d}_0$ 分量，吸收这样的光保持 $m$。其余磁量子数的跃迁可用改变偏振来探测。
+所以只有 $m' = m + q$ 时 $M$ 才可能非零。例如电场沿 $z$ 轴线偏振时，光只耦合到 $\op{d}_0 = \op{d}_z$，吸收光子后 $m' = m$。若电场垂直于 $z$ 轴，则可激发 $m' = m \pm 1$ 的跃迁。
 
 \begin{theorem}{Wigner--Eckart定理}{qm-wigner-eckart}
     对秩$k$的不可约球张量，其角动量矩阵元可以分解为
@@ -479,11 +516,11 @@ $\op{d}_z = \op{d}_0$ 分量，吸收这样的光保持 $m$。其余磁量子数
         = \frac{C^{j'm'}_{jm,kq}}{\sqrt{2j' + 1}}
         \langle\alpha',j'\|\op{T}^{(k)}\|\alpha,j\rangle.
     \end{equation}
-    $\alpha,\alpha'$表示除角动量之外的其余态标签，如主量子数。
-    双竖线表示约化矩阵元(reduced matrix element)，它与$m,m',q$无关，归一化由上式约定。
+    双竖线内的量与 $m,m',q$ 无关。
 \end{theorem}
 
-这里 $C^{j'm'}_{jm,kq}$ 是将 $j$ 和 $k$ 合成 $j'$ 的系数，采用\dfnref{dfn:qm-cg}的约定。
+式中 $\alpha,\alpha'$ 是主量子数等额外标签。双竖线内的量称为约化矩阵元(reduced matrix element)。
+$C^{j'm'}_{jm,kq}$ 是将 $j$ 和 $k$ 合成 $j'$ 的系数，采用\dfnref{dfn:qm-cg}的约定。
 定理将旋转决定的角依赖与动力学决定的约化矩阵元分开；
 其一般证明可参照Littlejohn的讲义，比较公式时需统一约化矩阵元的归一化约定\cite{littlejohnwe}。
 三角规则(triangle rule) $\abs{j - k} \leq j' \leq j + k$和$m' = m + q$来自角动量合成。
@@ -502,28 +539,37 @@ $\op{\mathcal P}\ket{i} = \pi_i\ket{i}$、$\op{\mathcal P}\ket{f} = \pi_f\ket{f}
 同宇称时矩阵元等于自身的相反数，故矩阵元为零；
 相反宇称时该约束自动满足。
 
+以忽略自旋的氢原子 $2\orbitalP \to 3\orbitalD$ 为例，初、末态的轨道角动量量子数分别为 $1,2$。图\ref{fig:qm-dipole-selection-matrices}按偶极球分量 $q$ 排列三个矩阵。同一 $q$ 下只有 $m' = m + q$ 的格子非零，这些格子的相对强度由 Clebsch--Gordan 系数的模平方决定。
+
+\begin{figure}[htbp]
+    \centering
+    \tikzfigure{dipole-selection-matrices}
+    \caption{氢原子 $2\orbitalP \to 3\orbitalD$ 的电偶极吸收。横轴为初态 $m$，纵轴为末态 $m'$。白格为零。色标 $\abs{C^{2m'}_{1m,1q}}^2$ 乘以约化矩阵元的模平方再除以 $5$，就是偶极矩阵元的模平方。}
+    \label{fig:qm-dipole-selection-matrices}
+\end{figure}
+
 \sectionstar{时间反演与Kramers简并}
 空间反演能迫使某些跃迁的强度为零。回到零磁场，还可以问另一个光谱问题：
 即使原子周围的环境破坏了旋转对称性，半整数自旋的能级为何仍可能成对出现？
 将一次运动反向播放时，角动量变号。若反向运动服从同一个 Hamilton 算符，就能用它寻找同能的伙伴。
 
 \begin{definition}{反幺正变换与时间反演}{qm-time-reversal}
-    反幺正(antiunitary)变换 $\op{\Theta}$ 是共轭线性的双射，满足
-    $\braket{\op{\Theta} u}{\op{\Theta} v} = \braket{v}{u}$。
+    反幺正(antiunitary)变换 $\op{\Theta}$ 是共轭线性的双射。任取两态，记 $\ket{u'} = \op\Theta\ket u$、$\ket{v'} = \op\Theta\ket v$，其内积满足 $\braket{u'}{v'} = \braket{v}{u}$。
     时间反演(time reversal)由这样的算符表示，保持位置不变，使动量和角动量反号。
 \end{definition}
-自旋$1/2$可取$\op{\Theta} = -\i\op{\sigma}_y \op{K}$，其中$\op{K}$是在$z$基的复共轭，故$\op{\Theta}^2 = -\one$。
+自旋 $1/2$ 可取 $\op{\Theta} = -\i\op{\sigma}_y \op K$。在选定的 $z$ 基中，$\op K$ 保持基矢不变，将展开系数取复共轭，故 $\op{\Theta}^2 = -\one$。
 \begin{theorem}{Kramers简并}{qm-kramers}
     若自伴Hamilton算符$\op{H}$在反幺正变换$\op{\Theta}$下不变，
     即$\op{\Theta} \op{H}\op{\Theta}^{-1} = \op{H}$，且$\op{\Theta}^2 = -\one$，
     则每个离散能量本征态$\ket{n}$都有与它正交的同能伙伴$\op{\Theta}\ket{n}$。
 \end{theorem}
 \begin{proof}
-    在反幺正内积关系中取$\ket{u} = \ket{n}$、$\ket{v} = \op{\Theta}\ket{n}$，得到
+    记 $\ket{\tilde n} = \op\Theta\ket n$，则 $\op\Theta\ket{\tilde n} = -\ket n$。
+    对 $\ket n$ 和 $\ket{\tilde n}$ 用反幺正内积关系，得到
     \[
-        \braket{\op{\Theta} n}{\op{\Theta}^2n} = \braket{\op{\Theta} n}{n}.
+        -\braket{\tilde n}{n} = \braket{\tilde n}{n}.
     \]
-    左侧又等于$-\braket{\op{\Theta} n}{n}$，所以这个内积为零。
+    所以这个内积为零。
     若$\op{H}\ket{n} = E_n\ket{n}$，由$E_n$为实数与$[\op{H},\op{\Theta}] = 0$，
     \begin{equation}
         \op{H}\op{\Theta}\ket{n} = \op{\Theta} \op{H}\ket{n} = E_n\op{\Theta}\ket{n}.
@@ -538,6 +584,6 @@ $\op{\mathcal P}\ket{i} = \pi_i\ket{i}$、$\op{\mathcal P}\ket{f} = \pi_f\ket{f}
     \par\smallskip\textbf{解}\quad
     同一 $j$ 多重态内的 $m = -j,\ldots,j$ 能量相同，故基态至少有 $2j + 1$ 个线性无关的态。哪个 $j$ 多重态能量最低，取决于具体的 Hamilton 算符、粒子统计和边界条件。
 \end{example}
-\reading{角动量的升降与合成核对MIT 8.05讲义9、10及Feynman第III卷第18章\cite{mitangular,feynman18}。
+\reading{角动量的升降与合成可参见 MIT 8.05 讲义 9、10 及 Feynman 第 III 卷第 18 章\cite{mitangular,feynman18}。
     球坐标下的梯度与 Laplacian 可查《电动力学》卷附录“曲线坐标系”，球谐函数的相位与归一化见\href{https://dlmf.nist.gov/14.30}{NIST 数学函数手册第14.30节}。
-    下一章用这些代数解释氢谱中更大的简并。}
+    下一章讨论氢原子中主量子数相同、轨道角动量不同的态为何可以同能。}

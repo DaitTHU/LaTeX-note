@@ -11,9 +11,15 @@
 \colorlet{longwave}{orange!85!black}
 \colorlet{balmerAlpha}{red!74!black}
 \colorlet{balmerBeta}{teal!85!black}
+\definecolor{matrixpale}{HTML}{DBE7F2}
+\definecolor{matrixblue}{HTML}{6D90B7}
+\definecolor{matrixnavy}{HTML}{1F4272}
+\definecolor{matrixcoral}{HTML}{E6A396}
+\definecolor{matrixbrick}{HTML}{A63F44}
 % 图按正文中的印刷尺寸绘制。坐标可单独缩放，文字统一用小五号。
 \tikzset{
     every picture/.append style={font=\zihao{-5}},
+    matrix cell/.style={draw=black!18,line width=.2pt},
     radiation/.style={thick,->,decorate,
         decoration={snake,amplitude=.65mm,segment length=#1,post length=1.4mm}},
     radiation/.default=3mm
@@ -25,11 +31,25 @@
 
 \pgfplotsset{
   compat=1.13, % TikZ coordinates <-> axes coordinates
+  colormap={matrix sequential}{
+    color(0cm)=(matrixpale); color(1cm)=(matrixblue); color(2cm)=(matrixnavy)
+  },
+  colormap={matrix signed}{
+    color(0cm)=(matrixbrick); color(1cm)=(matrixcoral); color(2cm)=(white);
+    color(3cm)=(matrixblue); color(4cm)=(matrixnavy)
+  },
   /pgf/number format/1000 sep={},
   legend image code/.code={
     \draw[mark repeat=2,mark phase=2]
     plot coordinates {(0cm,0cm) (0.22cm,0cm) (0.44cm,0cm)};%
   }
+}
+
+% TikZ 的矩形色条显示色阶定义的中央一半，与上面的矩阵配色一致。
+\pgfdeclareverticalshading{matrix signed}{100bp}{
+    color(0bp)=(matrixbrick); color(25bp)=(matrixbrick);
+    color(37.5bp)=(matrixcoral); color(50bp)=(white); color(62.5bp)=(matrixblue);
+    color(75bp)=(matrixnavy); color(100bp)=(matrixnavy)
 }
 
 % redraw axis on top
@@ -137,7 +157,7 @@
     \label{franck-hertz-tube}
     \def\gridX{3.5} \def\collectorX{5.1} \def\plate{.68} \def\wall{.46}
     \draw[rounded corners,black!50] (-\wall,-\plate-\wall) rectangle (\collectorX+\wall,\plate+\wall);
-    \foreach \pos/\name/\potential in {0/K/0,\gridX/G/U,\collectorX/C/{U-U_{\mathrm{r}}}}{
+    \foreach \pos/\name/\potential in {0/K/0,\gridX/G/U,\collectorX/C/{U-U_{\retarding}}}{
         \node[above] at (\pos,\plate) {$\mathrm{\name}$};
         \node[below] at (\pos,-\plate-\wall) {$\potential$};
     }
@@ -434,9 +454,9 @@
     % 氢三角形的中心是局部原点。整体绕 Ha 与中心的连线转半圈，N 换向，Hb、Hc 换位。
     \draw[ink!35] (4.12,-.52) -- (4.12,-2.55);
     \foreach \center/\heightN/\upperH/\lowerH/\showaxis/\description in {
-        -2.58/-.68/b/c/1/{左阱 $\ket{\mathrm L}$},
+        -2.58/-.68/b/c/1/{左阱 $\ket{\leftLabel}$},
         0/0/b/c/0/{四核共面},
-        2.58/.68/b/c/0/{右阱 $\ket{\mathrm R}$},
+        2.58/.68/b/c/0/{右阱 $\ket{\rightLabel}$},
         5.98/.68/c/b/1/{左阱构型整体转 $180^\circ$}}{
         \begin{scope}[shift={(\center,-1.43)}]
             \coordinate (N) at (0,\heightN);
@@ -520,6 +540,39 @@
     \end{scope}
 \end{tikzpicture}
 
+\begin{tikzpicture}[x=.36cm,y=-.36cm,/pgfplots/colormap name=matrix signed]
+    \label{half-box-projector}
+    \foreach \row in {1,...,10}{
+        \foreach \column in {1,...,10}{
+            % 半区间上对两个归一化正弦函数的乘积积分。
+            \ifnum\row=\column\relax
+                \def\matrixvalue{0.5}
+            \else
+                \pgfmathsetmacro{\matrixvalue}{
+                    (sin(90*(\row-\column))/(\row-\column)
+                    - sin(90*(\row+\column))/(\row+\column))/pi}
+            \fi
+            \pgfmathsetmacro{\colormapvalue}{1000*(\matrixvalue+0.5)}
+            \pgfplotscolormapdefinemappedcolor{\colormapvalue}
+            \filldraw[matrix cell,fill=mapped color]
+                (\column-1,\row-1) rectangle (\column,\row);
+        }
+        \node[left] at (0,\row-.5) {$\row$};
+        \node[below] at (\row-.5,10) {$\row$};
+    }
+    \draw[ink] (0,0) rectangle (10,10);
+    \draw[ink,line width=.95pt] (1,0) rectangle (2,1) (0,1) rectangle (1,2);
+    \node at (-1.7,5) {$m$};
+    \node at (5,11.6) {$n$};
+    \shade[shading=matrix signed] (11.1,10) rectangle (11.65,0);
+    \draw[ink] (11.1,0) rectangle (11.65,10);
+    \node[above] at (11.375,0) {$M_{mn}$};
+    \foreach \tick in {-0.5,-0.25,0,0.25,0.5}{
+        \draw (11.65,{5-10*\tick}) -- (11.95,{5-10*\tick})
+            node[right] {$\tick$};
+    }
+\end{tikzpicture}
+
 % 第 4 章
 \standaloneconfig{border=4pt}
 \begin{tikzpicture}[>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
@@ -534,7 +587,102 @@
 \draw[signal,->] (\span-\inset,1.5*\step) -- node[left] {$\op{a}$} (\span-\inset,.5*\step);
 \end{tikzpicture}
 
+\begin{tikzpicture}[x=.36cm,y=-.36cm,/pgfplots/colormap name=matrix sequential]
+    \label{oscillator-position-matrices}
+    \foreach \power/\limit/\ticks/\offset in {1/3/{0,1,2,3}/0cm,2/20/{0,5,10,15,20}/6cm}{
+        \begin{scope}[xshift=\offset]
+            \foreach \row in {0,...,9}{
+                \foreach \column in {0,...,9}{
+                    \ifnum\power=1
+                        \pgfmathsetmacro{\matrixvalue}{
+                            ifthenelse(abs(\row-\column)==1,sqrt(max(\row,\column)),0)}
+                    \else
+                        % 取全空间的 X^2 矩阵元，再截取所画的行与列。
+                        \pgfmathsetmacro{\higher}{max(\row,\column)}
+                        \pgfmathsetmacro{\matrixvalue}{
+                            ifthenelse(\row==\column,2*\column+1,
+                            ifthenelse(abs(\row-\column)==2,sqrt(\higher*(\higher-1)),0))}
+                    \fi
+                    \pgfmathsetmacro{\colormapvalue}{1000*(\matrixvalue/\limit)}
+                    \pgfplotscolormapdefinemappedcolor{\colormapvalue}
+                    \ifdim\matrixvalue pt=0pt\relax \colorlet{mapped color}{white}\fi
+                    \filldraw[matrix cell,fill=mapped color]
+                        (\column,\row) rectangle ++(1,1);
+                }
+                \node[left] at (0,\row+.5) {$\row$};
+                \node[below] at (\row+.5,10) {$\row$};
+            }
+            \draw[ink] (0,0) rectangle (10,10);
+            \node at (-1.5,5) {$m$};
+            \node at (5,11.6) {$n$};
+            \ifnum\power=1
+                \node[above] at (5,-.4) {$\mel{m}{\op X}{n}/x_0$};
+            \else
+                \node[above] at (5,-.4) {$\mel{m}{\op X^2}{n}/x_0^2$};
+            \fi
+            \shade[bottom color=matrixpale,top color=matrixnavy,middle color=matrixblue]
+                (11.1,10) rectangle (11.65,0);
+            \draw[ink] (11.1,0) rectangle (11.65,10);
+            \foreach \tick in \ticks {
+                \draw (11.65,{10*(1-\tick/\limit)}) -- (11.95,{10*(1-\tick/\limit)})
+                    node[right] {$\tick$};
+            }
+        \end{scope}
+    }
+\end{tikzpicture}
+
 % 第 5 章
+\begin{tikzpicture}[x=.57cm,y=-.57cm,/pgfplots/colormap name=matrix signed]
+    \label{angular-momentum-matrices}
+    \foreach \matrixstep/\component/\offset in {0/z/0,1/+/7,-1/-/14}{
+        \begin{scope}[shift={(\offset,0)}]
+            \foreach \gridline in {1,...,4}{
+                \draw[black!18,line width=.2pt]
+                    (\gridline,0) -- (\gridline,5) (0,\gridline) -- (5,\gridline);
+            }
+            \foreach \inputm in {-2,...,2}{
+                \pgfmathtruncatemacro{\outputm}{\inputm+\matrixstep}
+                \ifnum\matrixstep=0
+                    \let\matrixvalue\inputm
+                    \let\entry\inputm
+                \else
+                    \pgfmathtruncatemacro{\radicand}{6-(\inputm)*(\outputm)}
+                    \pgfmathsetmacro{\matrixvalue}{sqrt(\radicand)}
+                    \ifnum\radicand=4
+                        \def\entry{2}
+                    \else
+                        \def\entry{\sqrt{\radicand}}
+                    \fi
+                \fi
+                \ifdim\matrixvalue pt=0pt\relax
+                \else
+                    \pgfmathsetmacro{\colormapvalue}{500*(1+\matrixvalue/sqrt(6))}
+                    \pgfplotscolormapdefinemappedcolor{\colormapvalue}
+                    \filldraw[matrix cell,fill=mapped color]
+                        (\inputm+2,\outputm+2) rectangle ++(1,1);
+                    \def\textcolorname{black}
+                    \ifdim\matrixvalue pt>1.5pt\relax \def\textcolorname{white}\fi
+                    \node[text=\textcolorname] at (\inputm+2.5,\outputm+2.5) {$\entry$};
+                \fi
+            }
+            \foreach \state in {-2,...,2}{
+                \node[left] at (0,\state+2.5) {$\state$};
+                \node[below] at (\state+2.5,5) {$\state$};
+            }
+            \draw[ink] (0,0) rectangle (5,5);
+            \node[above] at (2.5,-.25) {$\op{J}_{\component}/\hbar$};
+            \node at (2.5,6.15) {$m$};
+        \end{scope}
+    }
+    \node at (-1.45,2.5) {$m'$};
+    \shade[shading=matrix signed] (20.1,5) rectangle (20.55,0);
+    \draw[ink] (20.1,0) rectangle (20.55,5);
+    \foreach \level/\tick in {{-sqrt(6)}/{-\sqrt{6}},-1/-1,0/0,1/1,{sqrt(6)}/{\sqrt{6}}}{
+        \pgfmathsetmacro{\tickrow}{2.5*(1-(\level)/sqrt(6))}
+        \draw (20.55,\tickrow) -- (20.75,\tickrow) node[right] {$\tick$};
+    }
+\end{tikzpicture}
+
 \begin{tikzpicture}[>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
     \label{angular-projection}
 \def\ell{2} \def\momentumScale{.84} \def\tilt{.12}
@@ -563,6 +711,43 @@
 }
 \end{tikzpicture}
 
+\begin{tikzpicture}[x=.55cm,y=-.55cm,/pgfplots/colormap name=matrix sequential]
+    \label{dipole-selection-matrices}
+    \foreach \component/\offset in {-1/0,0/5,1/10}{
+        \begin{scope}[shift={(\offset,0)}]
+            \foreach \initialm in {-1,0,1}{
+                \foreach \finalm in {-2,...,2}{
+                    % C^{2,m+q}_{1m,1q} 的模平方。
+                    \pgfmathsetmacro{\strength}{
+                        ifthenelse(\finalm==\initialm+\component,
+                        ifthenelse(\component==0,(4-(\initialm)^2)/6,
+                        (\initialm*\component+2)*(\initialm*\component+3)/12),0)}
+                    \pgfmathsetmacro{\colormapvalue}{1000*\strength}
+                    \pgfplotscolormapdefinemappedcolor{\colormapvalue}
+                    \ifdim\strength pt=0pt\relax \colorlet{mapped color}{white}\fi
+                    \filldraw[matrix cell,fill=mapped color]
+                        (\initialm+1,\finalm+2) rectangle ++(1,1);
+                }
+                \node[below] at (\initialm+1.5,5) {$\initialm$};
+            }
+            \foreach \finalm in {-2,...,2}
+                \node[left] at (0,\finalm+2.5) {$\finalm$};
+            \draw[ink] (0,0) rectangle (3,5);
+            \node[above] at (1.5,-.25) {$q = \component$};
+            \node at (1.5,6.05) {$m$};
+        \end{scope}
+    }
+    \node at (-1.35,2.5) {$m'$};
+    \shade[bottom color=matrixpale,top color=matrixnavy,middle color=matrixblue]
+        (14.1,5) rectangle (14.45,0);
+    \draw[ink] (14.1,0) rectangle (14.45,5);
+    \node[above] at (14.275,-.25) {$\abs{C^{2m'}_{1m,1q}}^2$};
+    \foreach \tick in {0,0.25,0.5,0.75,1}{
+        \draw (14.45,{5*(1-\tick)}) -- (14.65,{5*(1-\tick)})
+            node[right] {$\tick$};
+    }
+\end{tikzpicture}
+
 % 第 6 章
 \begin{tikzpicture}[>=Latex,color=ink,level/.style={ink,thick},signal/.style={teal!75!black,thick},guide/.style={ink!45,densely dashed}]
     \label{hydrogen-levels}
@@ -578,7 +763,7 @@
     \node[left,yshift=\offset pt] at (-\halfline,-\binding/\n^2) {$n = \n$};
 \def\finalN{2}
 \foreach \n/\initialL/\finalL/\tag/\linecolor in {3/1/0/\upalpha/balmerAlpha,4/2/1/\upbeta/balmerBeta}{
-    \draw[\linecolor,thick,->] (\initialL*\column,-\binding/\n^2) -- node[near end,above,sloped] {$\mathrm H_{\tag}$} (\finalL*\column,-\binding/\finalN^2);
+    \draw[\linecolor,thick,->] (\initialL*\column,-\binding/\n^2) -- node[near end,above,sloped] {$\atomH_{\tag}$} (\finalL*\column,-\binding/\finalN^2);
 }
 \end{tikzpicture}
 
@@ -656,6 +841,73 @@
 
 % 第 11 章
 \standaloneconfig{border=3pt}
+\begin{tikzpicture}[x=1.08cm,y=-.9cm,/pgfplots/colormap name=matrix signed]
+    \label{reduced-spin-density-matrices}
+    \foreach \relativeSign/\phase/\offset in {1/0/0,-1/\pi/3.25}{
+        \begin{scope}[shift={(\offset,0)}]
+            \foreach \row in {0,1}{
+                \foreach \column in {0,1}{
+                    \ifnum\row=\column
+                        \def\matrixvalue{0.5}
+                        \def\entry{\dfrac{1}{2}}
+                    \else
+                        \pgfmathsetmacro{\matrixvalue}{\relativeSign/(2*sqrt(2))}
+                        \ifnum\relativeSign>0
+                            \def\entry{\dfrac{1}{2\sqrt{2}}}
+                        \else
+                            \def\entry{-\dfrac{1}{2\sqrt{2}}}
+                        \fi
+                    \fi
+                    \pgfmathsetmacro{\colormapvalue}{1000*(\matrixvalue+0.5)}
+                    \pgfplotscolormapdefinemappedcolor{\colormapvalue}
+                    \filldraw[matrix cell,fill=mapped color] (\column,\row) rectangle ++(1,1);
+                    \def\textcolorname{black}
+                    \ifdim\matrixvalue pt>0pt\relax \def\textcolorname{white}\fi
+                    \node[text=\textcolorname] at (\column+.5,\row+.5) {$\entry$};
+                }
+            }
+            \draw[ink] (0,0) rectangle (2,2);
+            \node[left] at (0,.5) {$+z$};
+            \node[left] at (0,1.5) {$-z$};
+            \node[below] at (.5,2) {$+z$};
+            \node[below] at (1.5,2) {$-z$};
+            \node[above] at (1,0) {$\varphi = \phase$};
+        \end{scope}
+    }
+    \shade[shading=matrix signed] (5.9,2) rectangle (6.18,0);
+    \draw[ink] (5.9,0) rectangle (6.18,2);
+    \node[above] at (6.04,0) {$(\op\rho_{\subsysA})_{aa'}$};
+    \foreach \level/\tick in {-.5/{-1/2},-.25/{-1/4},0/0,.25/{1/4},.5/{1/2}}{
+        \draw (6.18,{1-2*\level}) -- (6.32,{1-2*\level}) node[right] {$\tick$};
+    }
+\end{tikzpicture}
+
+\definecolor{fringeblue}{HTML}{233782}
+\begin{tikzpicture}
+    \label{quantum-eraser-fringes}
+    \begin{axis}[
+        scale only axis,width=10cm,height=3.7cm,
+        xmin=0,xmax=2,ymin=-.035,ymax=1.035,
+        axis lines=left,axis line style={draw=ink,line width=.5pt},
+        tick align=outside,tick style={draw=ink},
+        xtick={0,.5,1,1.5,2},xticklabels={$0$,$1/2$,$1$,$3/2$,$2$},
+        ytick={0,.25,.5,.75,1},
+        xlabel={$\varphi/\pi$},ylabel={正端概率},
+        ymajorgrids,major grid style={draw=black!13},
+        domain=0:2,samples=101,
+        legend columns=3,
+        legend style={at={(.5,1.045)},anchor=south,draw=none,
+            /tikz/every even column/.append style={column sep=6mm}},
+    ]
+        \addplot[fringeblue,line width=1pt] {(1+cos(180*x))/2};
+        \addlegendentry{$\P(+ \mid D_+)$}
+        \addplot[matrixbrick,line width=1pt,dashed] {(1-cos(180*x))/2};
+        \addlegendentry{$\P(+ \mid D_-)$}
+        \addplot[black!75,line width=.9pt,densely dotted,samples=2] {0.5};
+        \addlegendentry{合并 $P_+$}
+    \end{axis}
+\end{tikzpicture}
+
 \begin{tikzpicture}[scale=1.25,>=Latex,station/.style={draw,fill=blue!8,minimum width=1.5cm},detector/.style={draw,rounded corners,fill=black!8}]
     \label{bell-pair}
     \def\arm{2.5} \def\readout{1.7} \def\split{0.65}
@@ -732,14 +984,14 @@
         \node[above] at (\col*\column,.48) {\textsf{\title}};
     }
     \draw[level] (-\halfwidth,0) -- node[above] {$n = 2$} (\halfwidth,0);
-    \foreach \energy/\term in {\upper/{2\mathrm{p}_{3/2}},\lower/{2\mathrm{s}_{1/2},\,2\mathrm{p}_{1/2}}}{
+    \foreach \energy/\term in {\upper/{2\orbitalP_{3/2}},\lower/{2\orbitalS_{1/2},\,2\orbitalP_{1/2}}}{
         \draw[guide] (\halfwidth,0) -- (\column-\halfwidth,\energy);
         \draw[level] (\column-\halfwidth,\energy) -- node[above] {$\term$} (\column+\halfwidth,\energy);
         \draw[guide] (\column+\halfwidth,\energy) -- (2*\column-\halfwidth,\energy);
     }
     \draw[guide] (\column+\halfwidth,\lower) -- (2*\column-\halfwidth,\lower+\lambGap);
-    \foreach \energy/\term/\style in {\upper/{2\mathrm{p}_{3/2}}/level,\lower/{2\mathrm{p}_{1/2}}/level,
-        {\lower+\lambGap}/{2\mathrm{s}_{1/2}}/shifted}{
+    \foreach \energy/\term/\style in {\upper/{2\orbitalP_{3/2}}/level,\lower/{2\orbitalP_{1/2}}/level,
+        {\lower+\lambGap}/{2\orbitalS_{1/2}}/shifted}{
         \draw[\style] (2*\column-\halfwidth,\energy) -- node[above] {$\term$} (2*\column+\halfwidth,\energy);
     }
     \draw[<->] (2*\column+1.2*\halfwidth,\lower) -- node[right] {$h\nu_{\rm L}$}
@@ -750,14 +1002,14 @@
     stage/.style={draw,rounded corners=2pt,fill=black!5,minimum height=9mm}]
     \label{lamb-readout}
     \def\drift{3} \def\driveGap{1.65}
-    \node[stage] (source) {$\mathrm{H}(2\mathrm{s})$};
-    \node[stage,right=\drift cm of source] (drive) {$2\mathrm{s} \leftrightarrow 2\mathrm{p}$};
-    \node[stage,right=\drift cm of drive] (detector) {$N_{2\mathrm{s}}$};
+    \node[stage] (source) {$\atomH(2\orbitalS)$};
+    \node[stage,right=\drift cm of source] (drive) {$2\orbitalS \leftrightarrow 2\orbitalP$};
+    \node[stage,right=\drift cm of drive] (detector) {$N_{2\orbitalS}$};
     \draw[beam] (source) -- (drive);
-    \draw[beam] (drive) -- node[above] {$2\mathrm{s}$} (detector);
+    \draw[beam] (drive) -- node[above] {$2\orbitalS$} (detector);
     \node[above=\driveGap cm of drive] (mw) {$\nu_{\rm mw}$};
     \draw[radiation=4.5mm,longwave] (mw) -- (drive);
-    \node[below=\driveGap cm of drive] (decay) {$2\mathrm{p} \to 1\mathrm{s}$};
+    \node[below=\driveGap cm of drive] (decay) {$2\orbitalP \to 1\orbitalS$};
     \draw[->] (drive) -- (decay);
     \node[right=\drift cm of decay] (uv) {$\upgamma_{\mathrm{UV}}$};
     \draw[radiation,shortwave] (decay) -- (uv);

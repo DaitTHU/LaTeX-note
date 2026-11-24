@@ -3,64 +3,94 @@
 \chapter{绪论}
 \label{ch:intro}
 
-同样制备的银原子穿过一个不均匀磁场，为什么会在屏上留下两个斑点？若只保留上面那束，
-再让它通过一块转过角度的磁铁，两处出口的计数会怎样改变？
-逐个发射电子会积累出干涉条纹，给氢原子照光只在某些频率有明显吸收，这些现象也可以问同一个问题。
-这就是本书学习量子力学(quantum mechanics)的主线。给定粒子的制备、途中受到的作用和末端的测量，
-\textbf{怎样预测各个读数出现的概率？}起初只需数两个出口的原子，以后可以逐个像素数电子，也可以逐个频率测吸收。
-增加位置这样的自由度(degree of freedom)、增加粒子或把环境计入时，我们仍用实验能记录的分布检验计算。
+把氢原子和氦原子发出的光分别送入光谱仪，会看到两套不同的亮线。天文学家正是凭各元素特有的谱线，从星光中辨认恒星大气的成分。是什么决定了一条谱线的波长？
+量子力学(quantum mechanics)研究物质和辐射在原子及亚原子尺度上遵循的规律。原子能发出什么频率的光，几个原子能否结合成稳定的分子，都是它要回答的问题。
+
+按经典力学计算，电子可以沿不同半径的圆轨道绕核运动，轨道能量随半径连续变化。氢原子的束缚态却只有一系列分立的能量，两个能级之差决定了原子在它们之间跃迁时发出或吸收的光的频率。这就是能量量子化的一个例子。脱离原子后，自由电子的动能仍可连续取值。
+
+经典力学还告诉我们，给定作用力和初始的位置、动量，质点的轨迹就随之确定。若把电子制备在相同的量子态，逐个送过双缝，电子却会落在屏上的不同位置。
+量子力学预言这些落点的概率分布。两条缝同时开放时，经两条路径到达同一处的概率振幅可以相互抵消，屏上便出现暗纹。在这些位置，打开第二条缝反而降低了探测到电子的概率。
+
+这些微观规律也支配着日常所见的材料和器件。量子化学从电子态算出拆开一个化学键需要多少能量。半导体的能带结构决定发光二极管的发光颜色，也是理解微处理器中晶体管如何控制电流的基础。
+超导磁体中，电子的集体运动使电流能够长期维持，产生稳定的强磁场。
+量子光学研究光与物质的相互作用，从激光器里的受激辐射到单个光子的制备和探测。一个光子的偏振就可以编码一个量子比特。量子信息科学研究如何用这样的量子态传输和处理信息，量子通信和量子计算都是这方面的量子技术。
+把量子原理用于场，还能描述粒子的产生和湮灭。在宇宙学中，人们用量子场论研究早期宇宙的量子涨落。
 
 \section{量子力学发展简史}
 \label{sec:timeline}
-氢的可见谱线比原子束分裂更早为人熟知，解释起来却需要更多准备。即使知道了哪些频率能被吸收，
-要预言哪条线更亮，还得知道光怎样使原子从一个态转到另一个态。\tabref{tab:history}按年代列出这些观测，
-右栏列出各物理问题的讨论位置。正文从只有两个读数的实验出发，再推广到连续读数和多粒子测量。
-历史记录见文末所列原始论文和回顾\cite{history,sg,compton,davisson,franck,rabi,ramsey,lamb,abexp,belltests}。
+量子力学并不只是 \textit{shut up and calculate} 的计算工具。这套理论既解释了已有的实验结果，也预言了当时尚未观察到的现象。
 
-{\small
-    \setlength{\tabcolsep}{4pt}
-    \renewcommand{\arraystretch}{1.18}
-    \begin{longtable}{@{}>{\raggedright\arraybackslash}p{1.45cm}>{\raggedright\arraybackslash}p{3.25cm}>{\raggedright\arraybackslash}p{5.35cm}>{\raggedright\arraybackslash}p{3.3cm}@{}}
-        \caption{历史实验时间表与正文索引}\label{tab:history}\\
+十九世纪末，原子物理学家们已在不同元素的发射光谱中辨认出各自的分立谱线(discrete spectral lines)。
+Balmer 用一个含整数的经验公式概括了氢的几条可见谱线的波长。
+经典的周期运动也能产生分立的辐射频率，但经典原子模型允许电子在不同半径上以不同频率绕核运动，无法选出氢特有的这组频率。
+原子的稳定性也是个问题。按经典电动力学，绕核运动的电子会辐射能量，轨道随之收缩。
+
+一条线索来自光。1900 年，Planck 为解释黑体辐射谱引入了能量元。1905 年，Einstein 提出光量子假说，由此预言光电子的最大动能随入射光频率线性增加（\ssecref{sec:photons}）。
+1913 年，Bohr 把光的频率与原子的能量联系起来。他假定电子可以在某些轨道上稳定运动，原子从高能轨道跃迁到低能轨道时，轨道间的能量差决定发光频率。他由此算出了 Balmer 线系的波长\cite{bohrlecture}。
+但 Bohr 模型无法解释氢的精细结构，也无法算出氦原子和更复杂原子的谱线\cite{helium-models}。
+
+量子力学理论就是为了解释这些实验现象。
+1925--1926 年，矩阵力学和波动力学相继建立。求氢原子的能级时，只需求解 Schrödinger 方程。哪些束缚态可以存在、各自的能量是多少，都由方程和波函数的边界条件决定（\ssecref{ss:qm-old-quantum}）。
+换成氦原子，还须计入两个电子之间的排斥。1929 年，Hylleraas 用两电子波函数做近似计算，得到的电离能已与实验值很接近\cite{helium-models}。
+
+量子力学理论还能预言尚待观察的现象。1923--1924 年，de Broglie 提出动量大小为 $p$ 的电子具有波长 $h/p$，其中 $h$ 是 Planck 常数\cite{debroglie}。
+如果这个波长有物理意义，用电子束照射晶面间距已知的晶体，就能预先算出哪些方向会出现衍射峰。1927 年，Davisson 和 Germer 在镍单晶上测出的峰位与这个波长相符（\secref{sec:interference}）\cite{davisson}。
+按照 Born 在 1926 年给出的概率解释，电子波在某个方向的强度越大，该方向探测到电子的概率就越大。1928 年，Dirac 又把狭义相对论纳入电子的波动方程（\chapref{ch:relativity}）。
+
+\tabref{tab:history}汇集了本卷讨论的实验，按年代排序。
+节号指向相应章节，实验名和页码可直接跳到讲解该实验的段落。
+
+\begin{notecaptionblock}
+    \captionof{table}{量子力学实验与观测索引}\label{tab:history}
+    \small
+    \setlength{\tabcolsep}{1.4pt}
+    \renewcommand{\arraystretch}{1.2}
+    \newcommand{\experimentref}[3]{\hyperref[#1]{#3} & \ref{#2} & \pageref{#1}}
+    \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l>{\raggedright\arraybackslash}p{.25\linewidth}rr@{\hspace{1.2em}}l>{\raggedright\arraybackslash}p{.28\linewidth}rr@{}}
         \toprule
-        年份 & 实验事实 & 所提出的物理问题 & 正文入口\\
+        年份 & 实验与观测 & 节号 & 页码 & 年份 & 实验与观测 & 节号 & 页码\\
         \midrule
-        \endfirsthead
-        \multicolumn{4}{l}{\tabref{tab:history}（续）}\\
-        \toprule 年份 & 实验事实 & 所提出的物理问题 & 正文入口\\\midrule
-        \endhead
-        \bottomrule\endfoot
-        1885 & Balmer归纳氢可见谱线 & 为什么频率由整数关系组织？ & \chapref{ch:hydrogen}：氢能谱\\
-        1887；1916 & Hertz光电现象；Millikan定量检验 & 光的频率和强度分别决定什么？ & \ssecref{sec:photons}；\chapref{ch:transitions}\\
-        1896 & Zeeman光谱分裂 & 磁场如何分辨原子的角动量？ & \secref{sec:zeeman}\\
-        1899--1900 & Lummer--Pringsheim、Rubens--Kurlbaum热辐射测量 & 经典能量均分为何失效？ & \secref{sec:planck}\\
-        1914 & Franck--Hertz非弹性碰撞 & 原子吸收的能量是否连续？ & \ssecref{sec:fh}；\chapref{ch:transitions}\\
-        1922 & Stern--Gerlach银原子束分裂 & 磁矩的一个分量为何离散？ & \chapref{ch:spin}\\
-        1923 & Compton散射频移 & 光与电子怎样交换能量和动量？ & \ssecref{ss:compton}\\
-        1927 & Davisson--Germer 的镍单晶实验与 Thomson--Reid 的薄膜实验 & 改变电子动量，衍射峰怎样移动？ & \secref{sec:interference}；\chapref{ch:scattering}\\
-        1938 & Rabi等分子束磁共振 & 如何用外场控制态间跃迁？ & \secref{sec:rabi}\\
-        1947 & Lamb--Retherford氢能级位移 & Dirac理论为什么仍不足？ & \chapref{ch:relativity}\\
-        1960 & Chambers磁通干涉实验 & 粒子路径上磁场很小时，相位为何仍受磁通影响？ & \secref{sec:ab}\\
-        1972 & Freedman--Clauser的Bell不等式实验 & 局域隐藏变量能否复现光子关联？ & \chapref{ch:entanglement}\\
-        1980 & 整数量子Hall效应 & 磁场中态数怎样量子化？ & \secref{sec:landau}\\
-        1982 & Aspect等切换分析器的Bell实验 & 怎样限制两端设置之间的因果接触？ & \chapref{ch:entanglement}\\
-        1986 & 单光子分束反关联实验 & 光子计数与经典随机强度有何区别？ & \secref{sec:photoncount}\\
-        1987 & 中子自旋几何相位实验 & 缓变磁场的参数路径怎样改变干涉相位？ & \ssecref{ss:berry-readout}\\
-        1987 & Hong--Ou--Mandel双光子符合计数 & 不可分辨粒子的交换怎样改变概率？ & \secref{sec:hom}\\
-        1989 & Tonomura等单电子条纹累积 & 一次一个粒子为什么仍能干涉？ & \secref{sec:interference}\\
-        2015 & 同时关闭主要漏洞的Bell检验 & 排除局域模型时，探测与设置条件是否同时满足？ & \chapref{ch:entanglement}\\
-    \end{longtable}
-}
-
-与实验相关的方法节点也需单独辨明：Ramsey于1949年提出分离振荡场方法，1950年发表系统方法论文，见\secref{sec:ramsey}及文献\cite{ramsey}。
-
-理论的几个时间节点另列于此：1900年Planck提出能量元，1905年Einstein提出光量子，
-1913年Bohr提出原子模型，1923--1924年de Broglie提出并发展动量与空间相位的联系；
-1925--1926年建立现代量子力学，1926年Born提出概率解释，1928年Dirac提出相对论电子理论。
-Bohr 模型以轨道量子化解释氢谱。\chapref{ch:angular}将从旋转出发求角动量的可能读数，\ssecref{ss:qm-old-quantum}再用氢的基态比较两种理论的预言。
+        1885 & \experimentref{exp:qm-balmer}{sec:qm-rydberg-lines}{氢的 Balmer 线系}
+            & 1982 & \experimentref{exp:qm-bell-1982}{ss:chsh-derivation}{快速切换分析器的 Bell 检验}\\
+        1887 & \experimentref{sec:photons}{sec:photons}{Hertz 紫外光放电实验}
+            & 1985 & \experimentref{exp:qm-junction-escape}{sec:qm-macroscopic}{超导结量子隧穿}\\
+        1896 & \experimentref{ss:zeeman-experiment}{ss:zeeman-experiment}{Zeeman 谱线展宽}
+            & 1985 & \experimentref{exp:qm-junction-levels}{sec:qm-macroscopic}{超导结能级的微波测量}\\
+        1899--1900 & \experimentref{ss:blackbody-experiment}{ss:blackbody-experiment}{黑体长波辐射测量}
+            & 1986 & \experimentref{exp:qm-photon-anticorrelation}{sec:photoncount}{单光子分束反关联}\\
+        1914 & \experimentref{sec:fh}{sec:fh}{Franck--Hertz 汞蒸气实验}
+            & 1987 & \experimentref{ss:berry-readout}{ss:berry-readout}{中子自旋的几何相位}\\
+        1916 & \experimentref{exp:qm-millikan-stopping}{sec:photons}{Millikan 光电截止电压}
+            & 1987 & \experimentref{sec:hom}{sec:hom}{Hong--Ou--Mandel 干涉}\\
+        1922 & \experimentref{ss:sg-apparatus}{ss:sg-apparatus}{Stern--Gerlach 银原子束}
+            & 1989 & \experimentref{exp:qm-tonomura}{sec:interference}{外村彰单电子干涉实验}\\
+        1923 & \experimentref{ss:compton}{ss:compton}{Compton 散射}
+            & 1995 & \experimentref{exp:qm-absorber-1995}{ss:qm-absorber-test}{单光子干涉仪检出吸收体}\\
+        1927 & \experimentref{exp:qm-nickel-diffraction}{sec:interference}{镍单晶电子衍射}
+            & 1998 & \experimentref{exp:qm-path-1998}{ss:qm-path-marking}{原子干涉仪路径标记}\\
+        1927 & \experimentref{exp:qm-film-diffraction}{sec:interference}{薄膜电子衍射}
+            & 2002 & \experimentref{exp:qm-eraser-2002}{ss:qm-quantum-eraser}{双缝量子擦除实验}\\
+        1938 & \experimentref{ss:rabi-measurement}{ss:rabi-measurement}{Rabi 分子束磁共振\textsuperscript{a}}
+            & 2012 & \experimentref{exp:qm-neutron-disturbance}{ss:qm-error-disturbance}{中子自旋的顺序测量}\\
+        1947 & \experimentref{ss:lamb-experiment}{ss:lamb-experiment}{Lamb--Retherford 氢谱}
+            & 2015 & \experimentref{exp:qm-bell-2015}{ss:chsh-derivation}{远距电子自旋的 Bell 检验}\\
+        1960 & \experimentref{sec:ab}{sec:ab}{Chambers 磁通干涉实验}
+            & 2023 & \experimentref{exp:qm-bild-cat}{ss:qm-schrodinger-cat}{机械振子的猫态}\\
+        1972 & \experimentref{exp:qm-bell-1972}{ss:chsh-derivation}{光子偏振关联的 Bell 检验}
+            & 2024 & \experimentref{exp:qm-surface-memory}{sec:qm-error-correction}{表面码的逻辑存储}\\
+        1975 & \experimentref{exp:qm-cow-gravity}{sec:qm-gravity}{中子引力干涉}
+            & 2025 & \experimentref{exp:qm-recoil-2025}{ss:qm-path-marking}{单原子反冲与光子干涉}\\
+        1980 & \experimentref{sec:qm-integer-hall}{sec:qm-integer-hall}{整数量子 Hall 效应}
+            & 2026 & \experimentref{exp:qm-cluster-interference}{sec:qm-macroscopic}{钠团簇的光栅干涉}\\
+        \bottomrule
+    \end{tabular*}\par
+    \smallskip
+    {\footnotesize\raggedright
+        \textsuperscript{a}\,Ramsey 于 1949 年提出让分子束先后通过两个分开的振荡场区域，1950 年发表了这一方法的系统论述（\secref{sec:ramsey}）\cite{ramsey}。\par}
+\end{notecaptionblock}
 
 \section{量子理论的实验基础}
-时间表中的光谱来自光与物质交换能量。怎样从仪器读数知道交换了多少？
+光照在金属上，或电子撞上原子时，怎样从仪器读数知道它们交换了多少能量？
 光电实验用电压测出逸出电子的最大动能，Compton 实验用散射波长检验光子传给电子的动量，
 Franck--Hertz 实验则让电子碰撞原子，从电流的起伏读出原子的激发能。
 三种装置都可以先用大学物理的守恒律来分析，也由此看出哪些微观规律还要由实验给定。
@@ -68,7 +98,7 @@ Franck--Hertz 实验则让电子碰撞原子，从电流的起伏读出原子的
 \subsection{光电效应}
 \label{sec:photons}
 
-光电实验研究光照金属后逸出电子的能量与数量怎样依赖入射光。
+1887 年，Hertz 发现，用紫外光照射火花间隙的电极，原本不足以引起放电的条件下也能打出火花。后来人们才认出，紫外光可以使电子逸出金属表面\cite{history}。怎样测出逸出电子的数目和能量？
 把金属阴极置于真空中，用频率为$\nu$的近单色光照射，
 另一电极收集逸出的电子，电流表测量单位时间到达的电荷。
 改变两电极之间的电压，可以分别测量发射率和电子的最大动能。
@@ -77,13 +107,12 @@ Franck--Hertz 实验则让电子碰撞原子，从电流的起伏读出原子的
 电流接近饱和值；在表面状态不变的弱光范围，饱和电流随光强增加。
 再使收集极排斥电子，电子必须克服电势能障碍才能到达它。
 反向电压增大到某个值时，电流降至背景，说明能量最高的电子也无法通过。
-将这个电压的大小记为截止电压(stopping potential) $V_{\stopping}$。
+校正两电极间的接触电势后，将刚好阻止光电子到达收集极的有效反向电压大小记为截止电压(stopping potential) $V_{\stopping}$。
 电荷为$-e$的电子克服的能量障碍是$eV_{\stopping}$，因而
 $K_{\max} = eV_{\stopping}$，其中$e > 0$为元电荷。
 
-实验要比较的是两组扫描。固定频率而改变光强，主要改变饱和电流；
-固定表面而改变频率，截止电压随频率近似线性增加，
-并存在低于它就不出现单光子光电发射的阈频。
+在同一块金属表面，固定频率而增大光强，饱和电流增大，截止电压基本不变。改变入射频率，低于某个阈频时，单个光子无法使电子逸出。
+1916 年，\phantomsection\label{exp:qm-millikan-stopping}Millikan 报告了不同入射频率下的截止电压测量。超过阈频后，截止电压随频率线性增加，直线的斜率给出 $h/e$\cite{history}。
 若一次吸收向电子转移能量$h\nu$，其中$h$为Planck常数，
 电子从材料逸出还要付出逸出功(work function) $W$，
 则能量守恒给出光电效应(photoelectric effect)的基本关系
@@ -91,15 +120,17 @@ $K_{\max} = eV_{\stopping}$，其中$e > 0$为元电荷。
     eV_{\stopping} = K_{\max} = h\nu - W,\qquad e > 0.
 \end{equation}
 更换金属改变了电子逸出表面所需的能量 $W$；光子的能量仍由频率唯一确定（图\ref{fig:photoelectric-threshold}）。
-\begin{figure}[htbp]
+
+\begin{figure}[H]
     \centering
     \raisebox{-.5\height}{\tikzfigure{photoelectric-cell}}\hfill
     \raisebox{-.5\height}{\includegraphics[width=.52\linewidth]{figures/photoelectric_threshold.pdf}}
-    \caption{光电截止电压。左：波浪线为入射光，直箭头为从阴极 K 飞向收集极 C 的电子。右：每个频率取电流表 A 的读数降至背景时的反向电压；直线的斜率为 $h/e$，横轴截距为 $W/h$。}
+    \caption{光电截止电压。左：波浪线为入射光，直箭头为从阴极 K 飞向收集极 C 的电子。右：各频率下使电流表 A 的读数降至背景的反向电压已经过接触电势校正，直线的斜率为 $h/e$，横轴截距为 $W/h$。}
     \label{fig:photoelectric-threshold}
 \end{figure}
-本例用 $\mathcal P$ 表示照到金属表面的光功率。每个光子的能量为 $h\nu$，所以每秒入射的光子数为 $\mathcal P/(h\nu)$。
-以$\eta$表示吸收、逸出和收集的总效率，饱和电流近似为
+
+设入射光功率为 $\mathcal P$。每个光子的能量是 $h\nu$，每秒入射的光子数就是 $\mathcal P/(h\nu)$。
+以 $\eta$ 表示吸收、逸出和收集的总效率，饱和电流近似为
 \begin{equation}
     I_\mathrm{sat} = e\eta\frac{\mathcal P}{h\nu}.
 \end{equation}
@@ -125,16 +156,14 @@ $K_{\max} = eV_{\stopping}$，其中$e > 0$为元电荷。
 \subsection{Compton散射}
 \label{ss:compton}
 
-Compton实验把近单色X射线照向散射体，用晶体光谱分析测量不同散射角的出射波长。
-需要解释的结果是：除了可能保留的原波长成分，还出现向长波长移动的散射成分，
-其位移随散射角变化\cite{compton}。
+1923 年，Compton 用近单色 X 射线照射石墨，再用晶体光谱仪测量散射光。除了原波长的成分，他还测到波长较长的成分。散射角越大，两种波长相差越多\cite{compton}。
 散射角与波长位移的关系同时受能量守恒和动量守恒约束。
 采用光子能量$E = h\nu$、动量大小$p = E/c$，
 并把参与碰撞的电子在碰撞时间内近似为自由粒子，就能定量计算位移。
 
 对初始静止的自由电子，入射、出射光子的能量分别为$E,E'$，夹角为$\theta$。
 $m_\electron$是电子静质量，$c$是真空光速。
-由能量守恒，末态电子能量为$m_\electron c^2 + E - E'$；由动量守恒及电子质壳关系，
+由能量守恒，反冲电子的总能量为 $E_\electron = m_\electron c^2 + E - E'$。它的动量等于光子碰撞前后的动量之差。把这个动量的大小 $p_\electron$ 代入相对论能量关系 $E_\electron^2 = m_\electron^2c^4 + p_\electron^2c^2$，得到
 \begin{equation}
     \begin{alignedat}{1}
         (m_\electron c^2 + E - E')^2 &= m_\electron^2c^4 + E^2 + E'^2 - 2EE'\cos\theta,\\
@@ -155,7 +184,7 @@ $m_\electron$是电子静质量，$c$是真空光速。
 \begin{equation}
     \lambda' - \lambda = \frac{h}{m_\electron c}(1 - \cos\theta).
 \end{equation}
-束缚电子可近似为自由静止电子的程度，取决于束缚能与初始动量相对动量转移的大小。
+对原子中的电子，若束缚能远小于光子转移的能量，且电子的初始动量远小于光子转移的动量，就可以采用这个自由静止电子的近似。
 光子将部分能量交给反冲电子，出射波长随散射角增大而增长（图\ref{fig:compton-shift}）。各方向的计数强度还取决于散射相互作用。
 \begin{figure}[htbp]
     \centering
@@ -167,10 +196,9 @@ $m_\electron$是电子静质量，$c$是真空光速。
 
 \subsection{Franck--Hertz实验}
 \label{sec:fh}
-光谱提示原子的能量交换有特殊尺度，但还需要独立的碰撞实验来检验：
-电子把动能交给原子时，损失可以任意小，还是需要达到一定的激发阈值？
+原子的分立谱线对应束缚能级之间的跃迁。若改用电子碰撞原子，电子至少需要多少动能才能激发原子？
 Franck--Hertz实验用加热阴极发射电子，以可调加速电压$U$使电子穿过稀薄汞蒸气，
-再由栅极后的收集极测量电流。栅极与收集极之间保留一个小的反向电压$U_{\mathrm{r}}$，
+再由栅极后的收集极测量电流。栅极与收集极之间保留一个小的反向电压$U_{\retarding}$，
 使刚刚损失了大部分动能的电子不能到达收集极\cite{franck}。
 
 先考虑电子能量低于第一个显著激发阈值的情况。
@@ -178,14 +206,12 @@ Franck--Hertz实验用加热阴极发射电子，以可调加速电压$U$使电�
 一次弹性碰撞转移给原子质心的能量比例很小。
 增大$U$通常使更多电子克服反向势垒，收集电流增加。
 若电子获得的动能刚好足以激发原子，并且碰撞发生在接近栅极的位置，
-它会把一份能量$\Delta E$交给原子，剩余动能不足以克服$eU_{\mathrm{r}}$，
+它会把一份能量$\Delta E$交给原子，剩余动能不足以克服$eU_{\retarding}$，
 于是收集电流出现下降。
 
 继续增大$U$，失能后的电子可以在剩余路程重新加速，
 收集电流恢复；更高电压下又可能发生两次、三次相同类型的非弹性碰撞。
-因此近似等间隔的电流结构可以来自同一个激发能量的重复损失。
-设第$r$个同类结构的位置为$U_r^{*}$，以$U_{\mathrm{c}}$合并接触电势及收集阈值的偏移，
-则简化关系为
+每多发生一次这样的碰撞，电子就多损失一份 $\Delta E$，相邻电流谷因而相隔约 $\Delta E/e$。把第 $r$ 个谷对应的加速电压记为 $U_r^{*}$，用 $U_{\mathrm{c}}$ 表示接触电势和收集阈值引起的共同偏移，就有
 \begin{subequations}
     \begin{align}
         U_r^{*} &\simeq U_{\mathrm{c}} + r\frac{\Delta E}{e},\\
@@ -197,7 +223,7 @@ Franck--Hertz实验用加热阴极发射电子，以可调加速电压$U$使电�
     \centering
     \raisebox{-.5\height}{\tikzfigure{franck-hertz-tube}}\hfill
     \raisebox{-.5\height}{\includegraphics[width=.52\linewidth]{figures/franck_hertz_current.pdf}}
-    \caption{Franck--Hertz 管及收集电流。左：K、G、C 下方依次标出热阴极、栅极、收集极的电势。右图给出收集电流随加速电压的变化。参考电流 $I_0$ 取线性背景在扫描上限处的值，曲线示意电流谷的位置，谷深和谷宽取绘图值。}
+    \caption{Franck--Hertz 管及收集电流。左：K、G、C 下方依次标出热阴极、栅极、收集极的电势。右图给出收集电流随加速电压的变化，产生了多个电流谷。}
     \label{fig:franck-hertz-current}
 \end{figure}
 
@@ -211,11 +237,8 @@ Franck--Hertz实验用加热阴极发射电子，以可调加速电压$U$使电�
 碰撞阈值与光谱能量差由此互相核对：前者通过电子失能读出，
 后者通过发射光的频率读出。
 
-这套推断所需的条件也来自装置。蒸气压太低时碰撞太少，
-太高时多次碰撞与能量分布会抹平结构；温度改变蒸气密度，
-阴极热发射给出初始速度分布，反向电压决定哪些失能电子被拒收。
-这些因素改变峰谷位置和形状，所以详细曲线还需电子输运与碰撞截面。
-从实验提取的稳定结论是存在特定的内部激发能量。
+温度会改变汞蒸气压。蒸气压太低，碰撞太少，电流谷难以分辨。蒸气压太高，多次碰撞会使峰谷变得模糊。
+要进一步预言峰谷的深度和形状，还要知道阴极发射电子的初速度分布、电子在汞蒸气中的碰撞截面，以及收集极的反向电压。
 
 把碰撞前、后原子所在的能级分别记作 $E_\initial,E_\final$。同一对能级也能用光谱来比较。
 忽略原子整体反冲时，吸收或发射光子的频率满足
@@ -226,42 +249,34 @@ Franck--Hertz实验用加热阴极发射电子，以可调加速电压$U$使电�
 能级差给出谱线的位置。哪些跃迁容易发生，还取决于光与原子的相互作用。
 
 \section{量子力学从哪些假设出发}
-氢的谱线早在 Bohr 建立原子模型以前就已测出。两种理论都能算出这些波长时，还可以问：
-它们预言氢的基态有多大的轨道角动量？若把氢换成氘，谱线会向哪边移动？前一个实验改变测量的物理量，后一个实验改变核的质量。
-两者都能用新的数据检验模型，却无须为每条谱线重新调一个参数。
+Bohr 模型和 Schrödinger 理论都能给出氢原子的主要谱线，两者对基态轨道角动量的预言却不同（\ssecref{ss:qm-old-quantum}）。
+还可以把氢换成氘，检验理论能否仅凭核质量的变化就预言谱线的移动。
 
-本书先作两个物理假设。描述纯态时，在选定的正交归一基中用复振幅给出各分量，相干地通向同一末态的振幅相加。
-预言计数时，采用假设~\ref{psl:qm-born} 中的 Born 规则，即理想分析器某一基态出口的概率等于总振幅的模平方。
-两臂单独的通过率都保持不变时，移相器仍能连续移动干涉条纹。\ssecref{ss:qm-amplitudes-born}和\secref{sec:interference}用相对相位描述这种变化。
-若接受态空间的内积结构，并对不同分析器的共同出口怎样分配概率作一致性要求，平方律也有推导，具体条件见\ssecref{ss:qm-born-consistency}。
+怎样从一个态算出测量概率？量子力学用复向量表示纯态。以双缝干涉为例，一个电子通过任一条缝都能到达屏上的同一位置。若两条路径保持相干，就把两条路径到达该处的复振幅相加，再按 Born 规则取总振幅的模平方，得到该处的概率密度（假设~\ref{psl:qm-born}及\secref{sec:interference}）。
+只改变一路的相位，即使两路单独开放时的计数都不变，两路同时开放时的干涉条纹也会移动。
 
 封闭系统的演化保持叠加关系和总概率，并且可逆，这样的变换称为幺正变换。
 再假定能量决定各分量积累相位的速率，就能从短时演化推出\chapref{ch:dynamics}的 Schrödinger 方程。
 这些假设的物理依据来自实验。具体系统还要给出相互作用，例如计算氢的低能谱时，要用电子与核的质量、电荷和 Coulomb 势。
 一旦给定这些输入，束缚态的能量和大小就由同一个方程确定。
 
-能量与时间演化的联系本身也可以拿来做实验。取一个原子的两个不同能级，能量分别为 $E_1$ 和 $E_2$。
-先制备两者等权、同相的叠加，让它在外部条件恒定时自由演化，再用能识别初始叠加态的分析器测量。
-能量为 $E_j$ 的分量在时间 $t$ 内得到相位因子 $\e^{-\i E_jt/\hbar}$，其中 $\hbar = h/(2\pi)$。每个分量在制备和分析时各贡献一个 $1/\sqrt{2}$ 的振幅，
-因此回到这个出口的概率为
+可以用两个能级的叠加来测量相位积累的快慢。设一个原子的两个能级分别为 $E_1$ 和 $E_2$。先将原子制备在两能级等权、同相的叠加态，让它自由演化时间 $t$，再测量它是否仍处于初态。
+能量为 $E_j$ 的分量积累了相位因子 $\e^{-\i E_jt/\hbar}$，其中 $\hbar = h/(2\pi)$。该分量在初态中的系数为 $1/\sqrt{2}$，投影回初态时再乘一个 $1/\sqrt{2}$。两项相加后取模平方，得到测出初态的概率
 \begin{equation}\label{eq:qm-two-energy-return}
     \P_{\mathrm{return}}(t)
     = \frac14\abs{\e^{-\i E_1t/\hbar} + \e^{-\i E_2t/\hbar}}^2
     = \cos^2\biggp{\frac{(E_2 - E_1)t}{2\hbar}} .
 \end{equation}
 若已用光谱测出能级差，便能事先算出计数振荡的周期 $h/\abs{E_2 - E_1}$。若制备的是两种能量态各占一半的随机混合，
-能量测量的比例完全相同，这个出口的概率却始终是 $1/2$。测量随时间变化的计数就能区分这两种制备。
+沿用同一台分析器，测出初始叠加态的概率便始终为 $1/2$。因此两种制备虽然给出相同的能量分布，却可以通过计数是否随时间振荡来区分。
 
 \section{全书结构与记号约定}
 \label{sec:roadmap}
-碰撞阈值反映原子所能吸收的能量。要预言给定制备下各读数的概率，还需要能分别控制制备与测量的实验。
-在\chapref{ch:spin}，沿给定方向测自旋只有两个出口，挡住一路便制备了供下一次测量的束流。
-转动下一台分析器，两路所占比例会变。\chapref{ch:observables}由此追问，换成能量或位置测量，
-怎样根据同一个制备态算出新仪器的读数分布？可观测量把仪器能分辨的读数与态联系起来。
-把两台仪器调回同一方向，在两者之间加一段横向磁场，两路计数便会随原子在场中停留的时间振荡，
-要预言这次变化，就需要\chapref{ch:dynamics}的时间演化。
+\chapref{ch:spin}从自旋筛选开始。挡住一个出口，留下的原子进入第二台分析器。转动第二台分析器，两路计数的比例随之改变。
+\chapref{ch:observables}用可观测量和制备态计算能量、位置等读数的概率分布。
+若两台分析器同向，在它们之间加一段横向磁场，出口计数就会随原子在场中的飞行时间振荡。\chapref{ch:dynamics}用时间演化计算这个振荡周期。
 
-有了态、测量与演化，便可以回到光谱。\chapref{ch:oscillator}至\chapref{ch:transitions}由能级差预言谱线位置，
+\chapref{ch:oscillator}至\chapref{ch:transitions}由能级差预言谱线位置，
 再由光与原子的相互作用计算哪些跃迁更强。\chapref{ch:em}至\chapref{ch:scattering}把读数换成干涉条纹、双粒子符合和不同方向的散射计数。
 最后三章追问，缓慢转动磁场会积累什么相位，只观察原子会丢失什么信息，提高光谱分辨率又会看到哪些能级分裂。
 
@@ -271,11 +286,10 @@ Franck--Hertz实验用加热阴极发射电子，以可调加速电压$U$使电�
 
 在整条直线上对波包作 Fourier 变换或分部积分时，默认波函数光滑，它及所用的导数在远处充分衰减，如 Gauss 波包。带锐利边缘的反例见\ssecref{ss:qm-regularity}。
 
-读\chapref{ch:spin}只需会用两行两列的矩阵乘列向量。描述同一束原子时，
-我们将用两个复数作坐标。复数 $c = u + \i v = r\e^{\i\varphi}$ 的模 $r$ 是它在复平面上到原点的距离，
+读\chapref{ch:spin}只需会用两行两列的矩阵乘列向量。自旋态的两个分量都是复数。复数 $c = u + \i v = r\e^{\i\varphi}$ 的模 $r$ 是它在复平面上到原点的距离，
 相位 $\varphi$ 是从正实轴量起的角，$\e^{\i\varphi} = \cos\varphi + \i\sin\varphi$。
-复共轭 $c\conj = u - \i v$ 使 $c\conj c = u^2 + v^2 = \abs{c}^2$。下一章将看到，坐标的模平方给出出口概率，
-两个坐标的相对相位则决定转动分析器以后的计数。卷首的\hyperref[chap:symbols]{常用符号表}可供各章随时查阅。
+复共轭 $c\conj = u - \i v$ 使 $c\conj c = u^2 + v^2 = \abs{c}^2$。下一章将看到，沿选定的轴测量时，两个坐标的模平方就是两个出口的概率。
+转动分析器后，新出口的概率由原来两分量的大小和相对相位共同决定。各章记号见卷首的\hyperref[chap:symbols]{常用符号表}。
 
 全文采用 SI，$\hbar = h/(2\pi)$ 为约化 Planck 常数，$\varepsilon_0$ 为真空介电常数。
 Bohr 磁子 $\muB = e\hbar/(2m_\electron)$ 给出电子磁矩的尺度，

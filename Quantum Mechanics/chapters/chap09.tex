@@ -22,11 +22,11 @@
         \bm B &= \curl\bm A
     \end{alignat}
 \end{subequations}
-给定外场后，$\phi(\bm x,t)$ 是实标量函数，$\bm A(\bm x,t)$ 是普通矢量场。把位置标签 $\bm x$ 换成粒子位置算符 $\opbm X$，
-就得到作用于粒子态的乘法算符。例如在位置表象中，$A_y(\opbm X,t)$ 使波函数逐点乘以 $A_y(\bm x,t)$。
+固定时刻 $t$ 后，$\phi(\bm x,t)$ 和各矢势分量 $A_i(\bm x,t)$ 都是以三个实坐标为自变量的函数。三个位置分量在同一位置表象中各乘对应的坐标，因此可以用同一组位置读数构造多变量的乘法算符。
+例如，记 $\psi(\bm x) = \braket{\bm x}{\psi}$，则 $\mel{\bm x}{A_y(\opbm X,t)}{\psi} = A_y(\bm x,t)\psi(\bm x)$。定义域由乘积仍平方可积的态组成。机械动量各分量一般不对易，因而不能用同一套逐点乘法规则定义它们的多变量函数。
 \begin{definition}{最小耦合中的两种动量}{qm-canonical-kinetic}
     对给定经典电磁场中的非相对论无自旋粒子，正则动量(canonical momentum) $\opbm P$ 是平移生成元，
-    在位置表象中作用为 $-\i\hbar\grad$。机械动量(kinetic momentum) $\opbm\pi = m\dot{\opbm X}$ 由速度确定。
+    满足 $\mel{\bm x}{\opbm P}{\psi} = -\i\hbar\grad\psi(\bm x)$。机械动量(kinetic momentum) $\opbm\pi = m\dot{\opbm X}$ 由速度确定。
     在最小耦合(minimal coupling)模型中，
     \begin{subequations}
         \begin{align}
@@ -37,12 +37,12 @@
 \end{definition}
 对于开头的均匀磁场，可取 $\bm A = (0,Bx,0)$。把这个势代入定义，便得到
 $\op{P}_y = \op{\pi}_y + qB\op{X}$，对应于经典守恒量 $mv_y + qBx$。
-在位置表象中，展开最小耦合的平方会产生交叉项。对波函数 $\psi(\bm x)$，由乘积求导有
-\[
-    -q\bigb{\opbm P \cdot \bm A(\opbm X,t) + \bm A(\opbm X,t) \cdot \opbm P}\psi
-    = \i q\hbar\bigb{(\grad \cdot \bm A)\psi + 2\bm A \cdot \grad\psi}.
-\]
-右侧的场和波函数均取在 $\bm x$。取 $\grad \cdot \bm A = 0$ 的规范时，散度项消失。
+展开 $\opbm\pi^2$ 时，两项交叉项中的动量次序不同。取位置分量，分别得到
+\begin{align*}
+    \mel{\bm x}{\opbm P \cdot \bm A(\opbm X,t)}{\psi} &= -\i\hbar\,\div(\bm A\psi),\\
+    \mel{\bm x}{\bm A(\opbm X,t) \cdot \opbm P}{\psi} &= -\i\hbar\,\bm A \cdot \grad\psi .
+\end{align*}
+右侧的场和波函数均取在 $\bm x$。两式相加再乘以 $-q$，得到 $\i q\hbar[(\div\bm A)\psi + 2\bm A \cdot \grad\psi]$。取 $\div\bm A = 0$ 的规范时，散度项消失。
 两种动量的对易关系不同：
 \begin{subequations}
     \begin{align}
@@ -94,11 +94,14 @@ $\op{P}_y = \op{\pi}_y + qB\op{X}$，对应于经典守恒量 $mv_y + qBx$。
     $\chi$ 称为规范函数(gauge function)，$q\chi$ 具有作用量量纲。
 \end{definition}
 将式\eqref{eq:gauge-potentials}代入式\eqref{eq:em-potentials}，梯度的旋度为零，故 $\bm B$ 保持不变。$\bm E$ 中的两项也恰好抵消各自的改变。
-规范变换前后的位置概率密度相同，位置波函数可相差一个依赖于位置和时间的相位 $\e^{\i f}$。机械动量的变换决定这个相位。
-用$\op{P}_i = -\i\hbar\p_i$和乘积求导可得
+规范变换前后的位置概率密度相同，故可写 $\braket{\bm x}{\psi'} = \e^{\i f}\psi(\bm x)$，其中 $f$ 是位置和时间的实函数。
+在新规范中对机械动量取位置分量，由乘积求导得
 \[
-    (\op{P}_i - qA_i^\prime(\bm x,t))(\e^{\i f}\psi)
-    = \e^{\i f}\bigb{(\op{P}_i - qA_i(\bm x,t))\psi + (\hbar\p_i f - q\p_i\chi)\psi}.
+    \begin{aligned}
+        \mel{\bm x}{\op\pi_i'}{\psi'}
+            &= -\i\hbar\p_i(\e^{\i f}\psi) - qA_i'\e^{\i f}\psi\\
+            &= \e^{\i f}\bigb{\mel{\bm x}{\op\pi_i}{\psi} + (\hbar\p_i f - q\p_i\chi)\psi}.
+    \end{aligned}
 \]
 取$f = q\chi/\hbar$，多出的一项就消失。用右矢写，同一制备在新规范中表示为
 \begin{subequations}
@@ -108,13 +111,12 @@ $\op{P}_y = \op{\pi}_y + qB\op{X}$，对应于经典守恒量 $mv_y + qBx$。
     \end{align}
 \end{subequations}
 
-令 $\op{F} = \i q\chi(\opbm X,t)/\hbar$。将变换后的正则动量按对易子展开，有
+$\op G(t)$ 是乘法算符，固定 $t$ 时的乘数为 $\exp[\i q\chi(\bm x,t)/\hbar]$，其模为 $1$。令 $\op{F} = \i q\chi(\opbm X,t)/\hbar$。在光滑且有紧支撑的波包上用乘积求导，可得
 \begin{equation}
     \e^{\op{F}}\op{P}_i\e^{-\op{F}}
-    = \op{P}_i + [\op{F},\op{P}_i] + \frac12[\op{F},[\op{F},\op{P}_i]] + \cdots
     = \op{P}_i - q(\p_i\chi)(\opbm X,t).
 \end{equation}
-第一个对易子已是位置的函数，故从第二个起都为零。
+导数作用在 $\e^{-\i q\chi(\bm x,t)/\hbar}$ 上时产生第二项。
 此外，直接对$\ket{\psi'} = \op{G}\ket{\psi}$求导：
 \[
     \i\hbar\,\dv{\ket{\psi'}}{t}
@@ -131,27 +133,28 @@ $\op{P}_y = \op{\pi}_y + qB\op{X}$，对应于经典守恒量 $mv_y + qBx$。
 时间导数项等于 $-q(\p_t\chi)(\opbm X,t)$，对应于新规范中电势能的变化。
 因此机械动量的期望值不变，正则动量的期望值一般改变。
 位置投影与$\op{G}$对易，位置测量概率也不变。
+例如，在 $\bm A = (0,Bx,0)$ 中，沿 $y$ 平移的守恒量写作 $\op P_y$。换成 $\bm A' = (-By,0,0)$ 时，$\chi = -Bxy$，同一守恒量写作 $\op G\op P_y\op G\adjoint = \op P_y + qB\op X$。两个规范都给出开头的 $mv_y + qBx$。
 
-概率守恒可以保持算符形式。令
+要追踪粒子从一个区域流向另一个区域，可以用关于探测位置 $\bm x$ 的算符值分布表示概率密度和概率流密度，
 \begin{subequations}
     \begin{align}
         \op{n}(\bm x) &= \delta^{(3)}(\bm x - \opbm{X}),\\
         \opbm{j}(\bm x) &= \frac1{2m}\{\op{n}(\bm x),\opbm{\pi}\}.
     \end{align}
 \end{subequations}
-这里$\bm x$是探测位置标签，$\opbm{X}$是算符，花括号逐分量作用。
-对平滑探测窗积分后取期望值，可得概率密度与概率流密度的连续性方程
+Dirac $\delta$ 是分布。用光滑探测窗 $w(\bm x)$ 对 $\bm x$ 积分，$\op n(\bm x)$ 才给出普通的乘法算符 $w(\opbm X)$。$\opbm j$ 中的花括号表示与各机械动量分量的反对易子，也按探测窗积分来理解。
+对有足够正则性的波包，两式的期望值给出位置概率密度和概率流密度。局域概率守恒写成连续性方程
 \begin{equation}
     \p_t\ave{\op{n}(\bm x)} + \nabla_{\bm x} \cdot \ave{\opbm{j}(\bm x)} = 0.
 \end{equation}
-电荷流密度等于概率流密度乘以粒子电荷，即 $q\ave{\opbm{j}}$。
+将此式对一个区域积分，该区域内概率的减少率就是穿过其边界向外的概率通量。电荷流密度为 $q\ave{\opbm j}$。
 
 \section{Aharonov--Bohm效应}
 \label{sec:ab}
 单条路径上，规范变换给波函数附加的相位随端点而变。若把电子束分成两路，让它们只在无场区域行进，
 从两侧绕过一束磁通后重新合束，能否在两条路上同时消去矢势？
-Aharonov--Bohm 实验通过调节磁通、观察条纹位移来回答这个问题。
-为区分相位差与局域力造成的轨迹偏转，实验需要控制漏磁和杂散电场\cite{abexp}。
+1960 年，Chambers 将一根逐渐变细的磁化晶须放在电子双棱镜的细丝后，两侧的电子波绕过晶须，在屏上重叠。沿着晶须从粗端到细端，两路围住的磁通逐渐改变，屏上对应该处的条纹位移也随之改变，整组条纹呈现倾斜\cite{abexp}。
+由条纹位移可以读出两路的相对相位。要把位移归因于所围的磁通，还须检验晶须的漏磁或杂散电场会不会使经过的电子偏转。先考虑电子路径上电场、磁场均为零的理想情形。
 
 在磁场为零的局部区域，只要其中每条闭路都能连续收缩到一点（单连通），就可写$\bm A = \grad\chi$。
 在静磁通、无电场的情形，规范变换给出的相位可以将每条支路上的传播态与零矢势下的传播态联系起来。
@@ -182,8 +185,7 @@ Aharonov--Bohm 实验通过调节磁通、观察条纹位移来回答这个问�
 \end{equation}
 $\varphi_0$包含零磁通时的路径相位和合束器相位。
 使磁通增加一个$\Phi_0 = h/\abs{q}$，概率恢复原值。
-于是扫描磁通得到的周期给出电荷与相位耦合的尺度；
-条纹位移的方向还保留电荷及闭路取向的符号信息。
+磁通周期决定电荷的绝对值 $\abs q = h/\Phi_0$。若沿固定方向增加磁通，条纹向哪边移动取决于电荷的符号和所选的闭路方向。
 
 可精确求解的模型是半径$R$的细环，径向激发冻结且忽略自旋。
 环角动量本征态$\ket{n}$满足$\op{L}_z\ket{n} = n\hbar\ket{n}$，$n \in \ZZ$，于是
@@ -196,7 +198,7 @@ $\varphi_0$包含零磁通时的路径相位和合束器相位。
 磁通增加一个周期 $h/\abs{q}$ 后，各能级通过重标 $n$ 回到原来的谱。
 在局域取 $\bm A = \bm0$ 的规范中，波函数沿正向绕环一周会乘上 $\exp(-\i q\Phi_B/\hbar)$。
 因此角向波 $\exp(\i\nu\varphi)$ 须满足 $\nu = n - q\Phi_B/h$，仍给出上式的能谱。
-环上相位边界条件与动量谱的关系见\secref{sec:selfadjoint}。
+环上相位边界条件与动量谱的关系见\ssecref{ss:qm-boundary-selfadjoint}。
 
 \section{Landau能级与简并度}
 \label{sec:landau}
@@ -210,19 +212,17 @@ $\varphi_0$包含零磁通时的路径相位和合束器相位。
 \begin{subequations}
     \begin{align}
         \op{H}_\perp &= \frac{\op{P}_x^2}{2m} + \frac{(p_y\one - qB\op{X})^2}{2m}
-        = \frac{\op{P}_x^2}{2m} + \frac12m\omega_{\mathrm{c}}^2(\op{X} - x_{\mathrm{c}}\one)^2,\\
-        \omega_{\mathrm{c}} &= \frac{\abs{q}B}{m},\quad x_{\mathrm{c}} = \frac{p_y}{qB}.
+        = \frac{\op{P}_x^2}{2m} + \frac12m\omega_{\cyclotron}^2(\op{X} - x_{\orbitctr}\one)^2,\\
+        \omega_{\cyclotron} &= \frac{\abs{q}B}{m},\quad x_{\orbitctr} = \frac{p_y}{qB}.
     \end{align}
 \end{subequations}
-这是一维谐振子的 Hamilton 算符，平衡位置为 $x_{\mathrm{c}}$。改变$p_y$只移动中心，振动频率仍是经典回旋角频率(cyclotron angular frequency) $\omega_{\mathrm{c}}$。
-于是横向能量以$\hbar\omega_{\mathrm{c}}$为间隔，相同能量对应不同轨道中心。
-为了把这个结论写成不依赖上述规范的形式，用机械动量构造升降算符。令$s = \sgn q$为电荷的符号，取值$\pm1$，
+这是一维谐振子的 Hamilton 算符，平衡位置为 $x_{\orbitctr}$。改变$p_y$只移动中心，振动频率仍是经典回旋角频率(cyclotron angular frequency) $\omega_{\cyclotron}$。
+于是横向能量以$\hbar\omega_{\cyclotron}$为间隔，相同能量对应不同轨道中心。
+这个能级间隔也可以直接由机械动量求出。对沿 $z$ 轴的均匀磁场，式\eqref{eq:kincomm}给出 $[\op\pi_x,\op\pi_y] = \i q\hbar B\one$。取 $s = \sgn q$，用这两个分量构造升降算符
 \begin{equation}
     \op{a} = \frac{\op{\pi}_x + \i s\op{\pi}_y}{\sqrt{2\hbar\abs{q}B}},\qquad
     \op{a}\adjoint = \frac{\op{\pi}_x - \i s\op{\pi}_y}{\sqrt{2\hbar\abs{q}B}}.
 \end{equation}
-由式\eqref{eq:kincomm}直接得到
-
 \begin{subequations}
     \begin{alignat}{1}
         [\op{a},\op{a}\adjoint] &= \frac{-2\i s[\op{\pi}_x,\op{\pi}_y]}{2\hbar\abs{q}B}
@@ -232,22 +232,21 @@ $\varphi_0$包含零磁通时的路径相位和合束器相位。
             = \frac{\op{\pi}_x^2 + \op{\pi}_y^2}{2\hbar\abs{q}B} - \one/2.
     \end{alignat}
 \end{subequations}
-因此横向Hamilton量$\op{H}_\perp = (\op{\pi}_x^2 + \op{\pi}_y^2)/(2m)$为
-
+第一式给出了谐振子的对易关系。从第二式解出横向动能 $\op H_\perp = (\op\pi_x^2 + \op\pi_y^2)/(2m)$，再加上沿磁场方向的自由运动能量，得到
 \begin{subequations}
     \begin{align}
-        \op{H}_\perp &= \hbar\omega_{\mathrm{c}}(\op{a}\adjoint\op{a} + \one/2),\\
-        E_{n,p_z} &= \hbar\omega_{\mathrm{c}}(n + 1/2) + \frac{p_z^2}{2m}.
+        \op{H}_\perp &= \hbar\omega_{\cyclotron}(\op{a}\adjoint\op{a} + \one/2),\\
+        E_{n,p_z} &= \hbar\omega_{\cyclotron}(n + 1/2) + \frac{p_z^2}{2m}.
     \end{align}
 \end{subequations}
 三维仍有 $z$ 方向的连续谱，垂直于磁场的二维运动则给出离散的 Landau 能级。
 
 一个横向能级能容纳多少个不同的态？在$y$方向取长度$L_y$并采用周期边界条件。
-绕行一周的相位满足 $\exp(\i p_y L_y/\hbar) = 1$。结合 $x_{\mathrm{c}} = p_y/(qB)$，相邻允许动量的间隔及其对应的轨道中心间距为
+绕行一周的相位满足 $\exp(\i p_y L_y/\hbar) = 1$。结合 $x_{\orbitctr} = p_y/(qB)$，相邻允许动量的间隔及其对应的轨道中心间距为
 \begin{subequations}
     \begin{align}
         \Delta p_y &= \frac{2\pi\hbar}{L_y},\\
-        \Delta x_{\mathrm{c}} &= \frac{\Delta p_y}{\abs{q}B}
+        \Delta x_{\orbitctr} &= \frac{\Delta p_y}{\abs{q}B}
                   = \frac{2\pi\hbar}{\abs{q}BL_y}.
     \end{align}
 \end{subequations}
@@ -261,14 +260,14 @@ $\varphi_0$包含零磁通时的路径相位和合束器相位。
 \end{equation}
 $\ell_B$称为磁长度(magnetic length)，表示磁场确定的横向长度尺度。
 边缘会改变靠边界的态；环面上的总磁通还须满足相应量子化条件。
-电子还需计入自旋项$\op{H}_{\mathrm{Z}}^{\spinlabel} = g_{\mathrm{s}}\muB B \op{S}_z/\hbar$。
+电子还需计入 Zeeman 能量的自旋项 $\op{H}_{\zeemanLabel}^{\spinlabel} = g_{\spin}\muB B \op{S}_z/\hbar$。
 若自旋劈裂可忽略，两个自旋投影各贡献一份轨道态数；能分辨劈裂时应分支计数。
 
 \sectionstar{整数量子Hall效应}
+\label{sec:qm-integer-hall}
 
-Landau 能级的简并度决定了每层在单位面积可容纳的电子态数。填满若干层后，
-填满的层数如何反映在电压测量上？在低温下沿二维样品通入电流，并施加垂直磁场，
-横向电阻随磁场或载流子面密度改变时会出现接近 $h/(\nu e^2)$ 的平台，平台区的纵向电阻很小\cite{qhe}。
+Landau 能级的简并度决定了每层在单位面积可容纳的电子态数。填满了几层，能从电阻测量中看出来吗？
+1980 年，von Klitzing、Dorda 与 Pepper 在低温下给二维电子气通入电流，固定垂直磁场，通过栅压改变电子面密度。横向电阻出现一系列平台，平台值接近 $h/(\nu e^2)$，其中 $\nu$ 为正整数。在同一栅压区间，纵向压降接近零\cite{qhe}。
 为把整数 $\nu$ 与填满的层数联系起来，还需求出面内电场引起的回旋中心漂移电流。
 
 四端电压测量把电压探针与主要载流接触分开，
@@ -303,8 +302,7 @@ $\sigma_{xy}$描述横向电流响应，$\sigma_{xx}$描述纵向耗散响应。
         \abs{\sigma_{xy}} &= \frac{\nu e^2}{h}.
     \end{align}
 \end{subequations}
-这个漂移模型给出了电导量子的数值。要解释平台为何具有有限宽度，还需要研究无序和局域化。
-实际整数量子Hall效应还涉及局域化态、体能隙或迁移率隙、边缘输运以及接触测量\cite{qhe}。
+这个漂移模型给出了整数填充时的电导值。实际样品中，无序使 Landau 能级展宽。栅压变化若只改变局域态的占据，电子面密度虽在改变，横向电导仍可保持同一个量子化值，因而平台有一定宽度。样品内部缺少可传导的态时，还可沿样品边缘输运电荷。
 在平面各向同性且固定坐标取向时，两张量的关系为
 \begin{equation}
     \begin{pmatrix}j_x\\j_y\end{pmatrix}
@@ -334,5 +332,35 @@ $\sigma_{xy}$描述横向电流响应，$\sigma_{xx}$描述纵向耗散响应。
     \par\smallskip\textbf{解}\quad
     由 $[\op{\pi}_x,\op{\pi}_y] = \i q\hbar B\one$ 得 $\Delta\pi_x\Delta\pi_y \geq \abs{q}\hbar B/2$。右边严格大于零，两分量的标准差不能同时为零。
 \end{example}
+\section{宏观量子效应的实验读出}
+\label{sec:qm-macroscopic}
+Hall 实验通过横向电阻读出平台对应的整数 $\nu$。能否观察到整个电路或颗粒的一个自由度发生隧穿或干涉？
+超导电路中可以选两端的相位差，自由飞行的纳米颗粒则可以选整个颗粒的质心位置。两种实验的探测量不同。
+
+\paragraph{超导电路的相位怎样越过势垒}
+两个超导体由薄的弱连接构成 Josephson 结。记两侧超导凝聚态之间的规范不变相位差为 $\delta$，
+理想结的超电流为 $I_{\mathrm c}\sin\delta$，结上的电压为 $V = (\hbar/2e)\dot\delta$，这里 $e > 0$ 是元电荷。
+给结加恒定偏置电流 $0 < I_{\mathrm b} < I_{\mathrm c}$ 时，相位的有效势能为
+\begin{equation}\label{eq:qm-junction-tilt}
+    U(\delta) = -E_{\mathrm J}\cos\delta - \frac{\hbar I_{\mathrm b}}{2e}\delta,
+    \qquad E_{\mathrm J} = \frac{\hbar I_{\mathrm c}}{2e}.
+\end{equation}
+第一项给出周期势阱，第二项使势阱向一侧倾斜。结电容 $C$ 储存的能量 $CV^2/2$ 正比于 $\dot\delta^2$，
+因而 $\delta$ 是一个具有惯性的动力学变量。相位受困在阱中时，平均电压为零；在欠阻尼结中逃出势阱持续运动后，就出现可测的电压。
+
+1985 年，\phantomsection\label{exp:qm-junction-escape}Devoret 等反复制备零电压态，测量它切换到有电压状态的逃逸率。在较高温度下可以用热激活标定结的参数，
+降温后逃逸率趋于不再随温度变化，其数值与这些参数给出的量子隧穿率相符。
+同年，\phantomsection\label{exp:qm-junction-levels}Martinis 等给结施加固定频率的微波，改变偏置电流以调节阱内的能级间隔。当间隔与微波光子的能量相等时，结容易从受激能级逃逸，测得的逃逸率出现共振峰。
+两项实验分别检验了同一个集体相位的穿垒和能量量子化\cite{junction-escape,junction-levels}。
+
+\paragraph{纳米颗粒的哪个自由度发生干涉}
+2026 年，\phantomsection\label{exp:qm-cluster-interference}Pedalino 等报道了中性钠团簇穿过三组驻波光栅的实验。他们横向移动第三组光栅，逐点记录透过的团簇数。
+透过的团簇在下游被光电离，质谱仪按质荷比筛选并计数。在平均质量约 \qty{172}{\kilo\dalton}、每个团簇约含 7500 个钠原子的样本中，
+两次独立扫描给出的条纹可见度分别为 $0.10 \pm 0.01$ 和 $0.08 \pm 0.01$\cite{cluster-interference}。
+即使粒子沿经典轨迹飞行，几组光栅也可能产生周期性的阴影。因此实验还改变第二组光栅的激光功率，
+逐次比较可见度与功率的关系。在这组质量和速度下，数据支持质心物质波的衍射预言，并与计入光偶极力的经典轨迹模型相区分。
+这里产生干涉的是同一整个团簇的不同质心传播振幅，每一次探测都只登记一个团簇。
+另一种实验让一个机械振动模式沿两个相反的相位振荡。怎样检验两种运动之间的相干，见\ssecref{ss:qm-schrodinger-cat}。
+
 \reading{规范条件与边界条件应联合检查；可对照MIT 8.06的电磁场专题及\cite{domains,abexp,qhe}。
     多粒子填充问题要求下一章的交换统计。}

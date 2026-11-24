@@ -9,14 +9,14 @@
 
 从封闭总系统出发，可以保留概率守恒而只观测其中一部分。
 开放系统(open quantum system)与外部自由度交换能量或信息。
-把关心的自由度记为系统$\mathrm{S}$，未逐项观测的自由度记为环境(environment) $\mathrm{E}$。
+把关心的自由度记为系统$\syslabel$，未逐项观测的自由度记为环境(environment) $\envlabel$。
 系统的状态是联合密度算符对环境的部分迹，
-$\op{\rho}_{\mathrm{S}} = \tr_{\mathrm{E}}\op{\rho}_{\mathrm{SE}}$。
-例如发光原子是$\mathrm{S}$，逸出到各个方向的辐射模式组成$\mathrm{E}$。
+$\op{\rho}_{\syslabel} = \tr_{\envlabel}\op{\rho}_{\sysenv}$。
+例如发光原子是$\syslabel$，逸出到各个方向的辐射模式组成$\envlabel$。
 
 \begin{example}{自发发射的光子计数与原子态}{qm-amplitude-damping}
-    设辐射场最初处于真空态 $\ket{0}_{\mathrm{E}}$，发射一个光子后的归一化场态记为 $\ket{1}_{\mathrm{E}}$。
-    按原子、辐射场的顺序写乘积基，例如 $\ket{\excitedstate,0} = \ket{\excitedstate}_{\mathrm{S}} \otimes \ket{0}_{\mathrm{E}}$ 表示原子在激发态而场中没有光子。
+    设辐射场最初处于真空态 $\ket{0}_{\envlabel}$，发射一个光子后的归一化场态记为 $\ket{1}_{\envlabel}$。
+    按原子、辐射场的顺序写乘积基，例如 $\ket{\excitedstate,0} = \ket{\excitedstate}_{\syslabel} \otimes \ket{0}_{\envlabel}$ 表示原子在激发态而场中没有光子。
     在一次演化区间内，以$p \in [0,1]$表示激发态发射的概率。
     联合演化在相关初态子空间上为
     \begin{subequations}
@@ -31,15 +31,14 @@ $\op{\rho}_{\mathrm{S}} = \tr_{\mathrm{E}}\op{\rho}_{\mathrm{SE}}$。
 
     \par\smallskip\textbf{解}\quad 两个输出仍正交归一，因此可扩充为整个联合空间上的幺正变换。根据线性叠加，等候结束后的联合态为
     \begin{equation}
-        \bigp{a\ket{\groundstate}_{\mathrm{S}} + \sqrt{1 - p}\,b\ket{\excitedstate}_{\mathrm{S}}} \otimes \ket{0}_{\mathrm{E}}
-            + \sqrt p\,b\ket{\groundstate}_{\mathrm{S}} \otimes \ket{1}_{\mathrm{E}} .
+        \bigp{a\ket{\groundstate}_{\syslabel} + \sqrt{1 - p}\,b\ket{\excitedstate}_{\syslabel}} \otimes \ket{0}_{\envlabel}
+            + \sqrt p\,b\ket{\groundstate}_{\syslabel} \otimes \ket{1}_{\envlabel} .
     \end{equation}
-    光子计数器理想时，这两个正交的环境记录可以区分。读到零个光子的概率是第一项的模方
-    $\abs{a}^2 + (1 - p)\abs{b}^2$，读到一个的概率是第二项的模方 $p\abs{b}^2$。
+    先取联合态在真空场态 $\ket{0}_{\envlabel}$ 上的分量。所得原子矢量的范数平方，就是理想计数器读到零个光子的概率。由于基态与激发态正交，这个概率是 $\abs{a}^2 + (1 - p)\abs{b}^2$。同理，读到一个光子的概率是 $p\abs{b}^2$。
     例如初态为等幅叠加、$p = 1/2$，四分之一的实验会记录一个光子，原子随即确定在基态。
     其余四分之三记录为零，其中原子仍在激发态的条件概率是 $(1/4)/(3/4) = 1/3$。
 
-    为了将计算推广到任意原子初态，可分别考察零光子和一个光子记录下的原子态。它们对初态的线性依赖分别由下列两个算符给出，
+    将原子初态记为 $\ket\psi$。按光子数取出的两个原子矢量都线性依赖于初态，可以分别写成 $\op K_0\ket\psi$、$\op K_1\ket\psi$，其中
     \begin{equation}
         \op{K}_0 = \ketbra{\groundstate}{\groundstate} + \sqrt{1 - p}\ketbra{\excitedstate}{\excitedstate},
         \qquad
@@ -50,59 +49,58 @@ $\op{\rho}_{\mathrm{S}} = \tr_{\mathrm{E}}\op{\rho}_{\mathrm{SE}}$。
     \begin{equation}
         \begin{alignedat}{1}
             \op{\rho}' &= \op K_0\op\rho\op K_0\adjoint + \op K_1\op\rho\op K_1\adjoint\\
-            &= \begin{pmatrix}
+            &\longleftrightarrow \begin{pmatrix}
                 \rho_{\groundstate\groundstate} + p\rho_{\excitedstate\excitedstate}&\sqrt{1 - p}\rho_{\groundstate\excitedstate}\\
                 \sqrt{1 - p}\rho_{\excitedstate\groundstate}&(1 - p)\rho_{\excitedstate\excitedstate}
             \end{pmatrix}.
         \end{alignedat}
     \end{equation}
-    激发态布居减少因子$1 - p$，相干只减少因子$\sqrt{1 - p}$，
-    因为相干连接“尚未发射”的振幅与基态振幅。
+    激发态布居变为原来的 $1 - p$ 倍。只有零光子分支同时保留了基态和激发态的振幅，其中基态振幅不变，激发态振幅乘上 $\sqrt{1 - p}$，所以两态间的非对角元也乘上 $\sqrt{1 - p}$。
     初态为$\ket{\excitedstate}$时，约化态为
     $(1 - p)\ketbra{\excitedstate}{\excitedstate} + p\ketbra{\groundstate}{\groundstate}$；
     混合来自系统与光子的关联，联合态仍是纯态。
 \end{example}
 
-上述两种记录可以推广到任意环境基，即使实际实验只观测原子也可以求和。
-封闭联合系统满足$\op{\rho}_{\mathrm{SE}}(t) = \op{U}\op{\rho}_{\mathrm{SE}}(0)\op{U}\adjoint$。
-若初始态可分为$\op{\rho}_{\mathrm{S}} \otimes \op{\rho}_{\mathrm{E}}$且环境处于纯态$\ket{e_0}$，选环境基$\ket{\alpha}$，定义
+例题中，忽略光子读数相当于在光子数基中对辐射场取部分迹。换成其他环境，也可以任选一组环境的正交归一基来计算系统的约化态。
+封闭联合系统满足$\op{\rho}_{\sysenv}(t) = \op{U}\op{\rho}_{\sysenv}(0)\op{U}\adjoint$。
+若初始态可分为$\op{\rho}_{\syslabel} \otimes \op{\rho}_{\envlabel}$且环境处于纯态$\ket{e_0}$，选环境基$\ket{\alpha}$，定义
 \begin{subequations}
     \begin{align}
-        \op{K}_\alpha &= (\one_{\mathrm{S}} \otimes \bra{\alpha})\op{U}(\one_{\mathrm{S}} \otimes \ket{e_0}),\\
-        \op{\rho}_{\mathrm{S}}(t) &= \sum_\alpha \op{K}_\alpha\op{\rho}_{\mathrm{S}}\op{K}_\alpha\adjoint,\\
-        \sum_\alpha \op{K}_\alpha\adjoint \op{K}_\alpha &= \one_{\mathrm{S}}.
+        \op{K}_\alpha &= (\one_{\syslabel} \otimes \bra{\alpha})\op{U}(\one_{\syslabel} \otimes \ket{e_0}),\\
+        \op{\rho}_{\syslabel}(t) &= \sum_\alpha \op{K}_\alpha\op{\rho}_{\syslabel}\op{K}_\alpha\adjoint,\\
+        \sum_\alpha \op{K}_\alpha\adjoint \op{K}_\alpha &= \one_{\syslabel}.
     \end{align}
 \end{subequations}
 
-$\op{K}_\alpha$ 称为 Kraus 算符，作用在系统空间上。右端先把系统态与 $\ket{e_0}$ 配成初态，
-联合演化后，左端只取环境态 $\ket{\alpha}$ 的分量，留下一个系统态。于是可简记 $\op{K}_\alpha = \bra{\alpha}\op{U}\ket{e_0}$。
+$\op{K}_\alpha$ 称为 Kraus 算符，作用在系统空间上。给定系统矢量 $\ket\psi$，先将它与 $\ket{e_0}$ 组成乘积态，作联合幺正演化，再取环境基矢 $\ket\alpha$ 所对应的分量。所得系统矢量就是 $\op K_\alpha\ket\psi$，通常尚未归一化。于是可简记 $\op{K}_\alpha = \bra{\alpha}\op{U}\ket{e_0}$。
 对初始纯系统态$\ket{\psi}$，联合演化可展开为
 \begin{equation}
     \op{U}(\ket{\psi} \otimes \ket{e_0})
     = \sum_\alpha(\op{K}_\alpha\ket{\psi}) \otimes \ket{\alpha}.
 \end{equation}
 求外积并取环境的迹，因环境基正交，具有不同 $\alpha$ 的交叉项消失，余下各项给出上式中的约化态。
-由线性，该式对一般$\op{\rho}_{\mathrm{S}}$同样成立。
+由线性，该式对一般$\op{\rho}_{\syslabel}$同样成立。
 再由环境完备性和$\op{U}\adjoint \op{U} = \one$，
 \begin{equation}
-    \sum_\alpha \op{K}_\alpha\adjoint \op{K}_\alpha = (\one_{\mathrm{S}} \otimes \bra{e_0})
+    \sum_\alpha \op{K}_\alpha\adjoint \op{K}_\alpha = (\one_{\syslabel} \otimes \bra{e_0})
         \op{U}\adjoint
-        \Bigp{\one_{\mathrm{S}} \otimes \sum_\alpha\ketbra{\alpha}{\alpha}}
-        \op{U}(\one_{\mathrm{S}} \otimes \ket{e_0}) = \one_{\mathrm{S}}.
+        \Bigp{\one_{\syslabel} \otimes \sum_\alpha\ketbra{\alpha}{\alpha}}
+        \op{U}(\one_{\syslabel} \otimes \ket{e_0}) = \one_{\syslabel}.
 \end{equation}
 
-若 $\op{\rho}_{\mathrm{E}}$ 是混合态，取其正交本征态 $\ket{e_j}$，以本征值 $w_j$ 为各初始环境态的权重。
+若 $\op{\rho}_{\envlabel}$ 是混合态，取其正交本征态 $\ket{e_j}$，以本征值 $w_j$ 为各初始环境态的权重。
 将权重吸收到 $\op{K}_{\alpha j} = \sqrt{w_j}\bra{\alpha}\op{U}\ket{e_j}$ 中，仍得到上述形式。
-这个作用于任意 $\op{\rho}_{\mathrm{S}}$ 的映射来自固定环境态的乘积制备。若初态包含系统与环境的关联，预测演化还须指定这些关联。
+这个作用于任意 $\op{\rho}_{\syslabel}$ 的映射来自固定环境态的乘积制备。若初态包含系统与环境的关联，预测演化还须指定这些关联。
 
 \begin{definition}{完全正迹保持映射}{qm-cptp}
-    线性映射$\mathcal E$对所有输入态均满足$\tr\mathcal E(\op{\rho}) = \tr\op{\rho}$，称为迹保持(trace-preserving)。
-    若对任意辅助系统 $\mathrm{A}$，$\mathcal E \otimes \id_{\mathrm{A}}$都把正算符映到正算符，
-    称为完全正(completely positive)。同时满足这两条的映射称为量子信道(quantum channel)，
-    英文简写为 CPTP (completely positive and trace-preserving)。
+    用线性映射 $\mathcal E$ 描述装置对系统 $\syslabel$ 的作用。映射以算符为输入，有限维时定义在整个矩阵空间上，描述态时输入的是其中的密度算符 $\op\rho$。若对所有输入态都有 $\tr\mathcal E(\op\rho) = \tr\op\rho$，则称 $\mathcal E$ 迹保持(trace-preserving)。
+
+    设一对纠缠粒子中只有 $\syslabel$ 经过装置。引入装置外的粒子作为辅助系统 $\ancilla$，是为了检验只操作 $\syslabel$ 后，两者的联合测量概率仍为非负。
+
+    在 $\ancilla$ 上，恒等算符 $\one_{\ancilla}$ 作用于态矢量，$\one_{\ancilla}\ket a = \ket a$。相应的恒等映射 $\id_{\ancilla}$ 作用于算符，$\id_{\ancilla}(\op X) = \one_{\ancilla}\op X\one_{\ancilla}\adjoint = \op X$。
+    联合密度算符由 $\mathcal E \otimes \id_{\ancilla}$ 演化。若对任意辅助系统 $\ancilla$，该映射都把正算符映为正算符，则称 $\mathcal E$ 完全正(completely positive)。
+    完全正且迹保持的映射称为量子信道(quantum channel)，简写为 CPTP 映射。
 \end{definition}
-例如对一对纠缠粒子的其中一个施加信道，另一个置于装置之外，所有联合概率仍须为非负。
-完全正性保证这种只在一侧操作的实验也有一致的概率解释。
 
 \begin{theorem}{Kraus算符和的完全正性与保迹条件}{qm-kraus-trace}
     有限维中，给定一组算符 $\op{K}_\alpha$，令
@@ -121,16 +119,43 @@ $\op{K}_\alpha$ 称为 Kraus 算符，作用在系统空间上。右端先把系
     对联合正算符$\op{R} \geq 0$及任意$\ket{v}$，
     \begin{subequations}
         \begin{align}
-            \mel{v}{(\mathcal E \otimes \id_{\mathrm{A}})(\op{R})}{v}
+            \mel{v}{(\mathcal E \otimes \id_{\ancilla})(\op{R})}{v}
             &= \sum_\alpha
             \mel{w_\alpha}{\op{R}}{w_\alpha} \geq 0,\\
-            \ket{w_\alpha} &= (\op{K}_\alpha\adjoint \otimes \one_{\mathrm{A}})\ket{v}.
+            \ket{w_\alpha} &= (\op{K}_\alpha\adjoint \otimes \one_{\ancilla})\ket{v}.
         \end{align}
     \end{subequations}
     因此加入任意辅助空间后仍保持正性。
 \end{proof}
 取部分迹后，环境携带的路径或发射信息无法仅从原子读出。由系统与环境关联引起的局部相干衰减称为退相干(decoherence)，
 在干涉实验中表现为可见度下降。对光子记录求平均得到约化态，保留某个记录则得到对应的条件态。
+
+\subsection{Schrödinger的猫与宏观记录的相干性}
+\label{ss:qm-schrodinger-cat}
+1935 年，Schrödinger 设想把放射源、探测器和一只猫关在箱内。探测器一旦记录到衰变，就触发使猫死亡的装置。选定等待时间，使发生衰变的概率为一半\cite{schrodinger-cat}。
+若把衰变和随后放大信号的整个过程都按量子力学演化，开箱只查猫的死活，能否知道两种结果之间曾有相干？
+
+先考虑一个理想化的封闭模型。用 $\ket{C_0}$ 表示“未衰变、探测器未触发、猫活着”，用 $\ket{C_1}$ 表示“已衰变、探测器已触发、猫死了”。它们是整个箱子的两个正交态，衰变产物也计入相应分支。
+若初态为纯态，演化保持相干，选取分支的相位约定，可把末态写成 $\ket{C_+}$。另设一种制备，每次以相等概率随机选取一个分支。两种制备分别为
+\begin{subequations}\label{eq:qm-cat-preparations}
+    \begin{align}
+        \ket{C_+} &= \frac{\ket{C_0} + \ket{C_1}}{\sqrt2},\\
+        \op\rho_{\mixed} &= \frac12\bigp{\ketbra{C_0}{C_0} + \ketbra{C_1}{C_1}} .
+    \end{align}
+\end{subequations}
+开箱查看，两种制备都给出一半活、一半死。能区分它们的是对整个箱子作相干测量。设想在这两个分支张成的空间里，改用 $\ket{C_+}$ 和 $\ket{C_-} = (\ket{C_0} - \ket{C_1})/\sqrt2$ 作测量基。
+第一种制备必给 $+$，第二种给 $+$ 的概率为 $\mel{C_+}{\op\rho_{\mixed}}{C_+} = 1/2$。这相当于要把包括探测器记录在内的两个分支重新合束。
+
+实际箱子会与环境交换光子和热量。设两个分支分别留下归一化的环境记录 $\ket{e_0},\ket{e_1}$，于是联合态的两项变成 $\ket{C_0}\otimes\ket{e_0}$ 和 $\ket{C_1}\otimes\ket{e_1}$，振幅仍各为 $1/\sqrt2$。
+对环境取迹后，箱子的非对角元变成
+\begin{equation}\label{eq:qm-cat-coherence}
+    \mel{C_0}{\op\rho_{\mathrm{box}}}{C_1} = \frac12\braket{e_1}{e_0}.
+\end{equation}
+环境记录越容易区分，箱子里能读出的干涉就越弱，即使箱盖一直关着也是如此。退相干解释了两种宏观记录之间的干涉为何难以观察。对环境取迹给出的是重复开箱的结果分布，单次开箱得到哪一项仍须按测量规则处理。
+
+怎样在可控的装置上检验这样的叠加？2023 年，\phantomsection\label{exp:qm-bild-cat}Bild 等用有效质量约 \qty{16}{\micro\gram} 的一个机械振动模式制备了两种相反振荡相位的叠加\cite{mechanical-cat}。
+他们用脉冲在振动的相空间中施加已知位移，再把振动量子数（声子数）的奇偶性映射到超导比特的两个读数。重复测量，用偶数与奇数的计数之差除以总数，经读出校准即可估计平均奇偶性。
+逐点扫描位移，便得到振动态的相空间图（Wigner 函数）。实验看到了两团分开的信号，也看到了两团之间正负交替的条纹。随机混合这两个振荡分量会保留两团信号，却会消去它们的干涉条纹。这就是实验辨认机械振动猫态的依据。
 
 \section{Lindblad生成元与无记忆演化}
 
@@ -285,12 +310,11 @@ $\op{\sigma}_z = \ketbra{\excitedstate}{\excitedstate} - \ketbra{\groundstate}{\
 有热激发时需再加$\sqrt{\Gamma_{\up}}\ket{\excitedstate}\bra{\groundstate}$，
 布居弛豫率变为$\Gamma_\downarrow + \Gamma_{\up}$，平衡布居由两率之比决定。
 
-Ramsey实验在理想脉冲下读出
+在 Ramsey 实验中，用第一个 $\pi/2$ 脉冲将基态制备成两能级的等幅叠加。自由演化 $T$ 后，第二个 $\pi/2$ 脉冲把相对相位转化为布居差。两个脉冲均理想时，一个输出端的概率为
 \begin{equation}
-    P_+(T) = \frac12[1 + \e^{-T/T_2}\cos(\Delta T + \phi_0)]
+    P_+(T) = \frac12[1 + \e^{-T/T_2}\cos(\Delta T + \phi_0)] .
 \end{equation}
-$\phi_0$是两次脉冲设置的相对相位；
-这里取初始制备与读出轴使纵向布居项不贡献该信号。
+其中 $\Delta$ 为失谐角频率，$\phi_0$ 由两次脉冲的相对相位和所选输出端决定。固定 $T$，扫描第二个脉冲的相位，条纹的对比度为 $\e^{-T/T_2}$。
 静态失谐分布的系综平均还会引入$T_2^*$；其包络未必指数，且可被自旋回波部分恢复。
 回波可用来区分静态失谐引起的相位散布与不可逆的相干衰减。
 
@@ -321,8 +345,7 @@ $\phi_0$是两次脉冲设置的相对相位；
 \end{example}
 
 \section{量子跳跃}
-上节的布居曲线平均了许多次制备。若在一次实验中也记下光子到达的时刻，
-每次探测到光子都提供了一次发射事件的时间信息。如何根据这类记录更新原子态，并由单次记录恢复平均衰减曲线？
+在寿命实验中，把许多次制备的结果平均起来，便得到激发态布居的衰减曲线。若连续监测单个原子发出的光，探测到光子和暂时没有探测到光子这两种记录，会怎样改变我们对原子状态的预测？
 
 \begin{definition}{光子计数下的量子跳跃}{qm-photon-jump}
     在理想光子计数中，某一发射通道的点击所引起的条件态突变称为量子跳跃(quantum jump)。
@@ -357,12 +380,12 @@ $\phi_0$是两次脉冲设置的相对相位；
     \end{equation}
 \end{theorem}
 \begin{proof}
-    能量方差有限时，能量分布的二阶矩存在。对 $A(t)$ 的能量谱积分求出在 $t = 0$ 的前两阶导数，便有
+    从能量谱构造指数所用的标量函数是 $\exp(-\i Et/\hbar)$。记能量的二阶矩为 $m_2 = \norm{\op H\ket\Psi}^2$。能量方差有限时，$m_2$ 有限，可以在 $A(t)$ 的谱积分内对时间求两次导数，得到
     \begin{equation}
         A(t) = 1 - \frac{\i\ave{\op{H}}t}{\hbar}
-        - \frac{\ave{\op{H}^2}t^2}{2\hbar^2} + o(t^2).
+        - \frac{m_2t^2}{2\hbar^2} + o(t^2).
     \end{equation}
-    与其共轭相乘，一阶项相消，二阶系数为 $-(\ave{\op{H}^2} - \ave{\op{H}}^2)/\hbar^2$。
+    与其共轭相乘，一阶项相消，二阶系数为 $-(m_2 - \ave{\op{H}}^2)/\hbar^2$。求 $m_2$ 只需作用一次 $\op H$。
 \end{proof}
 因此在极短时间内损失的概率以 $t^2$ 起始。指数律 $\e^{-\Gamma t} = 1 - \Gamma t + \cdots$ 则描述环境相关时间之后的有效动力学。
 \begin{corollary}[理想量子 Zeno 效应]
@@ -380,5 +403,47 @@ $\phi_0$是两次脉冲设置的相对相位；
 
     \par\smallskip\textbf{解}\quad 激发态失去的布居由跳跃项馈入基态，两者的迹变化相消，总迹保持为一。若只保留尚未发射的子系综，其未归一化态的迹给出该记录的概率。
 \end{example}
-\reading{完全正映射和GKSL形式核对Manzano的教学综述\cite{manzano}。
+\section{量子纠错与逻辑比特的存储}
+\label{sec:qm-error-correction}
+要保存供\secref{sec:qm-deutsch-query}那样的量子电路继续使用的态，两基态的相对相位也得保留下来。
+若每隔一段时间测一次数据比特的 $0,1$，这次测量本身就会破坏叠加。能否只读出哪里发生了错误，同时保留未知态？
+
+先设每个物理比特只可能发生使 $\ket0,\ket1$ 互换的错误，称为比特翻转。用三个物理比特存一个逻辑比特，选取编码
+\begin{equation}\label{eq:qm-bit-flip-code}
+    \alpha\ket0 + \beta\ket1
+       \longmapsto \alpha\ket{0,0,0} + \beta\ket{1,1,1},\qquad
+       \abs{\alpha}^2 + \abs{\beta}^2 = 1 .
+\end{equation}
+这个映射可以用两个初态为 $\ket0$ 的辅助比特实现。让输入比特依次控制两个辅助比特的翻转，控制位为 1 时翻转目标位，为 0 时保持目标位。
+输入 $\ket0$ 时两个辅助比特都保持为 $\ket0$，输入 $\ket1$ 时它们都翻转为 $\ket1$。因此对叠加态输入，线性演化保留了 $\ket{0,0,0}$ 和 $\ket{1,1,1}$ 两项之间的相对相位。
+
+用 $\op Z_j$ 记第 $j$ 个物理比特的 Pauli $\op\sigma_z$，约定 $\ket0,\ket1$ 的本征值分别为 $+1,-1$。
+联合测量 $\op Z_1\op Z_2$ 和 $\op Z_2\op Z_3$。这两个算符对易，相邻两位相同读 $+1$，不同读 $-1$。
+例如，可让相邻两位分别控制同一个初态为 $\ket0$ 的读出比特。读出比特翻转奇数次才给 1，因此只登记这对数据位的奇偶性。
+两个读数组成错误综合征（syndrome）。原来的两个编码基态都给 $(+,+)$。若仅中间位翻转，态变成
+\[
+    \alpha\ket{0,1,0} + \beta\ket{1,0,1} .
+\]
+两项都给 $(-,-)$。只测两个奇偶性，仪器对两项留下相同记录，复振幅之间的相干得以保留。把中间位翻转一次就恢复了整个输入。
+同理，$(-,+)$ 指示第一位翻转，$(+,-)$ 指示第三位翻转。这个判断用到了每轮至多一位翻转的假设。
+一次 $\op Z_j$ 相位翻转则把两项的相对符号颠倒，两个奇偶性仍是 $(+,+)$。保护一般量子态还要能识别相位错误。
+
+若每轮各位独立地以概率 $p$ 翻转，且编码、校验和恢复都理想，两位同时翻转会被当成余下一位出错，
+三位全翻则完全通过校验。因此一次恢复后发生逻辑翻转的概率为
+\[
+    p_{\mathrm L} = 3p^2(1 - p) + p^3 .
+\]
+小 $p$ 时逻辑错误从 $p^2$ 阶才出现。真实装置中校验门和读出也会出错，扩大编码是否仍能降低错误率，需要比较不同规模的逻辑存储实验。
+
+\paragraph{表面码实验实际存住了什么}
+表面码把数据比特排成二维阵列，用辅助比特反复读取局部 Pauli 乘积的奇偶性，同时校验比特翻转和相位翻转。
+码距 $d$ 是能在编码子空间中改变逻辑信息而通过全部理想校验的 Pauli 算符所涉及的最少数据比特数。
+2024 年，\phantomsection\label{exp:qm-surface-memory}Google Quantum AI 等在线报告了这一存储实验\cite{surface-memory}。他们分别制备逻辑 $\op Z$ 或逻辑 $\op X$ 的本征态，运行若干轮校验，再在制备基中读出逻辑值。
+解码器利用历轮校验记录推断纠正值。将纠正后的读数与已知输入比较，就能统计不同时长下的逻辑错误比例，再拟合每一轮的逻辑错误率。
+
+在实验比较的 $d = 3,5,7$ 三种编码上，使用神经网络解码器时，码距每增加 2，每轮逻辑错误率的压低因子为 $2.14 \pm 0.02$。
+码距为 7 的存储使用 101 个物理比特，每轮逻辑错误率为 $(0.143 \pm 0.003)\%$。
+逻辑比特翻转会改变 $\op Z$ 本征态的读数，相位翻转会改变 $\op X$ 本征态的读数。分别在这两组基中制备和读出，就能检验存储期间对两类错误的保护。运行算法时还需测量逻辑门本身的误差。
+
+\reading{完全正映射与 GKSL 主方程的推导见 Manzano 的教学综述\cite{manzano}。
     最后一章回到精密光谱，说明非相对论单粒子理论何时必须扩展。}

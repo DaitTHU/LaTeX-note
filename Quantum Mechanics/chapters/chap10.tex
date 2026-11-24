@@ -7,11 +7,11 @@
 即使探测器能区分它们所占的模式，也不能给两个电子赋予可观测的粒子编号。
 
 考虑两个互不重叠的空间模式 $a,b$，并设探测器能够分辨粒子到达的模式。
-若入射的是电子和质子，$\ket{a}_{\electron} \otimes \ket{b}_{\mathrm p}$和
-$\ket{b}_{\electron} \otimes \ket{a}_{\mathrm p}$可以由“电子在哪一端”区分。
+若入射的是电子和质子，$\ket{a}_{\electron} \otimes \ket{b}_{\proton}$和
+$\ket{b}_{\electron} \otimes \ket{a}_{\proton}$可以由“电子在哪一端”区分。
 换成两个电子，且自旋相同，实验仍可读出$a,b$各有一个电子，记录中却没有粒子编号。
 为构造两粒子态，先给张量积的两个因子临时编号 $1,2$，按这个次序写
-$\ket{a,b} = \ket a_1 \otimes \ket b_2$。两个位置各填一个单粒子态。
+$\ket{a,b} = \ket a_1 \otimes \ket b_2$。交换编号后，乘积态写成 $\ket{b,a}$，两个模式的占据数均未改变。
 \begin{definition}{全同粒子与交换对称性}{qm-exchange}
     全同粒子(identical particles)具有相同的内禀性质，交换其编号保持所有物理预测不变。
     交换算符(exchange operator) 在乘积基上的作用为 $\op{P}_{12}\ket{a,b} = \ket{b,a}$，下标 $12$ 指明被交换的两个粒子编号。它按线性作用于叠加态。
@@ -21,8 +21,7 @@ $\ket{a,b} = \ket a_1 \otimes \ket b_2$。两个位置各填一个单粒子态�
         \op{P}_{12}\ket{\Psi_-} = -\ket{\Psi_-}.
     \end{equation}
 \end{definition}
-探测器$a,b$仍各在原处。连续交换两次回到原态，故若一次交换只乘一个相位，
-这个相位的平方为 1。两种符号分别对应哪类粒子，由自旋统计定理确定。
+交换两次使每个乘积态都回到原态，故 $\op P_{12}^2 = \one$，交换算符的本征值只能是 $+1$ 或 $-1$。两种符号分别对应哪类粒子，由自旋统计定理确定。
 
 \begin{theorem}{自旋与统计的联系}{qm-spin-statistics}
     在三维空间的相对论量子场论中，在局域性、正能量与态空间正定等通常条件下，
@@ -35,7 +34,7 @@ $\ket{a,b} = \ket a_1 \otimes \ket b_2$。两个位置各填一个单粒子态�
 
 \section{全同粒子态的归一化与 Pauli 不相容原理}
 交换算符的本征值决定了两个粒子能否共同占据某个单粒子态。
-从两个不同的单粒子态出发，对交换前后的乘积态取对称或反对称组合，就可以考察两态重合时的极限。
+将 $\ket{a,b}$ 与 $\ket{b,a}$ 相加或相减，就可分别构造对称态和反对称态。两种组合能否归一化，取决于 $\ket a$ 和 $\ket b$ 的重叠。
 
 设$\ket{a},\ket{b}$各自归一，重叠为$s = \braket{a}{b}$。
 分子中的空间轨道、自旋态或光学脉冲模式都可以作为单粒子标签。
@@ -73,11 +72,11 @@ $1 + 1 \pm \abs{s}^2 \pm \abs{s}^2 = 2(1 \pm \abs{s}^2)$。
 \subsection{氦的单态与三重态}
 \label{ss:qm-helium-exchange}
 
-\ssecref{ss:qm-helium-ground}用两个电子占据同一个 $1\mathrm{s}$ 轨道的试探态估计了氦的基态能量。
-现在将一个电子激发到 $2\mathrm{s}$ 轨道。两个自旋可以合成为单态或三重态。
+\ssecref{ss:qm-helium-ground}用两个电子占据同一个 $1\orbitalS$ 轨道的试探态估计了氦的基态能量。
+现在将一个电子激发到 $2\orbitalS$ 轨道。两个自旋可以合成为单态或三重态。
 电子间的 Coulomb 斥力只依赖距离，为什么这两种自旋态却有不同的激发能？
 
-固定氦核，忽略自旋相关作用。取裸核电荷 $+2e$ 的两个氢样轨道 $a = 1\mathrm{s}$、$b = 2\mathrm{s}$。
+固定氦核，忽略自旋相关作用。取裸核电荷 $+2e$ 的两个氢样轨道 $a = 1\orbitalS$、$b = 2\orbitalS$。
 它们正交归一，故单态和三重态所配的空间因子依次为
 $\ket{\Phi_+} = (\ket{a,b} + \ket{b,a})/\sqrt2$ 和 $\ket{\Phi_-} = (\ket{a,b} - \ket{b,a})/\sqrt2$。
 两种空间态的单电子能量之和都是 $\epsilon_a + \epsilon_b$。对电子间斥力
@@ -93,7 +92,7 @@ $v = e^2/(4\pi\varepsilon_0 r_{12})$，其中 $r_{12} = \abs{\bm r_1 - \bm r_2}$
     \label{eq:qm-helium-splitting}
 \end{equation}
 
-要判断能级的高低，只需求 $K$。两个 $\mathrm{s}$ 轨道均为球对称态，对两个方向平均后，
+要判断能级的高低，只需求 $K$。两个 $\orbitalS$ 轨道均为球对称态，对两个方向平均后，
 $1/r_{12}$ 变为 $1/\max(r_1,r_2)$。取式\eqref{eq:qm-hydrogen-radial-state}中的实径向波函数，
 记 $a_2 = a_0/2$、$x = r/a_2$。半径 $r$ 以内的轨道重叠为
 \[
@@ -112,8 +111,8 @@ $1/r_{12}$ 变为 $1/\max(r_1,r_2)$。取式\eqref{eq:qm-hydrogen-radial-state}�
 NIST 氦能级表中，这两个态相差约 $\qty{0.796}{eV}$\cite{nisthelium}。
 本模型给出了正确的能级顺序，精确计算间距还须允许轨道形状调整，并计入其他组态的混合。
 
-\begin{example}{方势阱中两费米子的接触能移}{qm-fermion-contact-box}
-    两个质量为 $m$、自旋为 $1/2$ 的全同费米子处在宽为 $L$ 的一维无限深势阱内。单粒子轨道为 $u_n(x) = \sqrt{2/L}\sin(n\pi x/L)$，能量为 $\epsilon_n = n^2\epsilon_1$。
+\begin{example}{方势阱中两个 Fermi 子的接触能移}{qm-fermion-contact-box}
+    两个质量为 $m$、自旋为 $1/2$ 的全同 Fermi 子处在宽为 $L$ 的一维无限深势阱内。单粒子轨道为 $u_n(x) = \sqrt{2/L}\sin(n\pi x/L)$，能量为 $\epsilon_n = n^2\epsilon_1$。
     在无相互作用的第一激发能级，一个粒子占据 $u_1$，另一个占据 $u_2$。加入弱斥力 $V = g\delta(x_1 - x_2)$，其中 $0 < g/L \ll \epsilon_1$。求这个能级的一阶劈裂和各支的简并度。
     \par\smallskip\textbf{解}\quad
     两种轨道排列的未扰能量均为 $\epsilon_1 + \epsilon_2 = 5\epsilon_1$。用 $\Phi_+$、$\Phi_-$ 分别记两个轨道构成的归一化对称、反对称空间组合。在微扰矩阵元中用 $\delta(x_1 - x_2)$ 完成一个坐标积分，便有
@@ -144,10 +143,7 @@ Slater 行列式用粒子编号写出所有排列。实际计数实验直接给�
 \end{definition}
 例如只保留模式 $a,b$ 时，真空扇区有一个基矢 $\ket{0,0}$，单粒子扇区有两个基矢 $\ket{1,0},\ket{0,1}$，
 合起来是 $1 + 2 = 3$ 维。再纳入两粒子扇区，便可描述两个模式各有一个粒子的 $\ket{1,1}$。
-\tabref{tab:two-mode-occupations}列出只保留两个正交单粒子模式时的两粒子基。
-表的第一列按模式 $a,b$ 的顺序记粒子数，后两列按临时编号 $1,2$ 的顺序记单粒子态。
-例如 $\ket{1,1}$ 表示两个模式各有一个粒子，将同一占据情况写成带粒子编号的态时，须按交换对称性组合 $\ket{a,b}$ 和 $\ket{b,a}$。
-这里的模式标签包含自旋等全部自由度。
+\tabref{tab:two-mode-occupations}列出只保留两个正交单粒子模式时的两粒子基，这里的模式标签包含自旋等全部自由度。
 
 \begin{table}[htbp]
     \centering
@@ -164,9 +160,10 @@ Slater 行列式用粒子编号写出所有排列。实际计数实验直接给�
     \end{tabular}
 \end{table}
 
-例如在模式$a,b$的单粒子能量分别为$\epsilon_a,\epsilon_b$时，
-无相互作用的$\ket{1,1}$的能量就是$\epsilon_a + \epsilon_b$。
-若往空模式逐个加入粒子，计数改变便对应态空间中的一个操作。
+表的第一列按模式 $a,b$ 的顺序记粒子数，后两列按临时编号 $1,2$ 的顺序记单粒子态。
+例如 $\ket{1,1}$ 表示两个模式各有一个粒子，将同一占据情况写成带粒子编号的态时，须按交换对称性组合 $\ket{a,b}$ 和 $\ket{b,a}$。
+若模式 $a,b$ 是能量分别为 $\epsilon_a,\epsilon_b$ 的单粒子能量本征态，
+则在粒子间无相互作用时，$\ket{1,1}$ 的能量为 $\epsilon_a + \epsilon_b$。
 真空$\ket{\vac}$表示所有模式都空，产生算符$\op{a}_r\adjoint$在第$r$个模式加一个粒子，
 湮灭算符$\op{a}_r$从这个模式取走一个粒子。给定一组正交单粒子模式$\ket{r}$，Bose 子的算符满足
 \begin{subequations}
@@ -182,7 +179,7 @@ Fermi 子的产生、湮灭算符满足反对易关系
     \{\op{c}_r,\op{c}_s\} = 0.
 \end{equation}
 第二式取 $s = r$ 再取伴随，得到 $(\op{c}_r\adjoint)^2 = 0$，故 $n_r$ 只能取 $0$ 或 $1$。
-写多Fermi子态时固定模式顺序；对第$r$个模式湮灭会带前面已占据数决定的符号。
+用产生算符构造多 Fermi 子态时须固定模式的排列次序。若从已占据的模式 $r$ 移走一个粒子，湮灭算符每越过前面的一个产生算符，系数就改变一次符号。
 
 \begin{definition}{占据数态上的产生与湮灭}{qm-fock-action}
     固定模式次序$1,2,\ldots$，用
@@ -211,7 +208,7 @@ Fermi 子的产生、湮灭算符满足反对易关系
 \end{definition}
 
 把 Fermi 子湮灭算符 $\op{c}_r$ 移到第 $r$ 个产生算符的位置，每经过一个已占据模式就出现一次负号。
-例如，从前两个模式各有一个粒子的态中移去第二个粒子，必须交换一次算符，
+例如，若前两个模式各有一个粒子，从第二个模式移走一个粒子时，$\op c_2$ 要先越过 $\op c_1\adjoint$，
 \[
     \op{c}_2\op{c}_1\adjoint\op{c}_2\adjoint\ket{\vac}
     = -\op{c}_1\adjoint\op{c}_2\op{c}_2\adjoint\ket{\vac}
@@ -239,7 +236,7 @@ Fermi 子的产生、湮灭算符满足反对易关系
 在占据数基中，先从 $b$ 移走一个粒子得到 $\ket{1,0}$，再往 $a$ 加一个粒子，
 $\op a_a\adjoint\op a_b\ket{1,1} = \sqrt2\,\ket{2,0}$。同一末态的两个振幅相加，给出了产生算符里的 $\sqrt2$。
 
-一般地，记 $\textstyle \op Q_{rs} = \sum_i(\ketbra r s)_i$，在真空扇区取零。它作用于一串产生算符生成的态时，依次把其中每个模式 $s$ 替换为 $r$。
+一般地，记 $\textstyle \op Q_{rs} = \sum_i(\ketbra r s)_i$，在真空扇区取零。每一项只把一个粒子的单粒子态从 $\ket s$ 换成 $\ket r$，对 $i$ 的求和把各次替换所得的态相加。
 因此，若在原有粒子外再添一个处于模式 $t$ 的粒子，新增的作用恰好是 $\ketbra r s\ket t = \delta_{st}\ket r$。用 Bose 算符写即
 \begin{equation}\label{eq:qm-mode-replacement-commutator}
     [\op Q_{rs},\op a_t\adjoint] = \delta_{st}\op a_r\adjoint .
@@ -267,16 +264,18 @@ $\op a_a\adjoint\op a_b\ket{1,1} = \sqrt2\,\ket{2,0}$。同一末态的两个振
 \end{subequations}
 这里 $V_{rs;tu}$ 在带编号的乘积基 $\ket{t,u} = \ket t_1 \otimes \ket u_2$ 中计算。Fermi 情形把 $\op a$ 换成 $\op c$。
 若把交换项吸收到反对称化矩阵元中，对全部指标求和时系数相应变为$1/4$。
-无相互作用时，将每个模式的能量 $\epsilon_r$ 乘以占据数 $n_r$ 后相加，即得总能量。Pauli 原理决定 Fermi 子如何填充各个模式。
+粒子间无相互作用时，Hamilton 算符只剩单体项。选 $\op h$ 的本征态作模式，便有 $h_{rs} = \epsilon_r\delta_{rs}$，占据数态也是总能量的本征态，
+\begin{equation}\label{eq:qm-occupation-energy}
+    \op H\ket{\bm n} = \Bigp{\sum_r \epsilon_r n_r}\ket{\bm n}.
+\end{equation}
+对 Fermi 子，Pauli 原理要求每个 $n_r$ 至多为 $1$。若改用\secref{sec:tunneling}双阱模型中的局域态 $\ket{\leftLabel},\ket{\rightLabel}$ 作模式，单体矩阵元 $h_{\mathrm{LR}} = -J$ 就描述阱间的隧穿。即使只有一个粒子，左阱占据数确定为 $1$ 的态也是两个能量本征态的叠加。
 
 \section{Hong--Ou--Mandel符合凹陷}
 \label{sec:hom}
 上节的 $\ket{1,1}$ 可以通过在分束器的两个输入端各制备一个光子来实现。
-为检验交换对称性如何影响输出，Hong--Ou--Mandel 实验在两个输出端分别探测光子，
-改变两个输入的相对延迟$\tau$，统计一次试验中两端各记录一个光子的符合计数(coincidence counting)。
-远离时间重叠时，两光子到达不同输出的符合率给出基线；
-在频率、偏振和空间模式也匹配时，零延迟附近出现符合凹陷\cite{hom}。
-总单计数不必同时消失，因此符合减少表示光子对输出端口的分配改变。
+1987 年，Hong、Ou 与 Mandel 改变两束入射光的相对延迟 $\tau$，在每个延迟下重复送入光子对，统计有多少次两个输出端各测到一个光子。这称为符合计数(coincidence counting)。
+当延迟远大于光子波包的持续时间时，符合计数给出基线。实验中，两光子的频谱、偏振和横向光场分布匹配时，符合计数在零延迟附近降至最低，形成凹陷\cite{hom}。
+在理想无损的情形，每次仍有两个光子从分束器出射。符合概率下降，表示两个光子从同一个端口出射的概率增加。
 
 图\ref{fig:hom-ports}标出可调延迟和两路计数信号的去向。
 \begin{figure}[htbp]
@@ -346,7 +345,7 @@ $f(\omega) = \braket{\omega}{u} = \braket{\omega}{v}$，
     \end{equation}
     符合凹陷的时间尺度是$1/\sigma_\omega$；
     因而带宽越窄，两态的时间重叠就能维持到越大的延迟（图\ref{fig:hom-dip}）。
-    偏振不重合或频谱混合会使零延迟处的重叠小于1，因而抬高最低符合率。
+    若两光子的偏振不同，即使频谱相同且没有延迟，内部态的重叠也小于 $1$，最低符合率会升高。
 \end{example}
 
 \begin{figure}[htbp]
@@ -354,30 +353,38 @@ $f(\omega) = \braket{\omega}{u} = \braket{\omega}{v}$，
     \caption{理想平衡分束器的符合概率 $P_{1,1}$。每条曲线的两个入射光子频谱相同、偏振平行；横轴用同一参考带宽 $\sigma_{\mathrm{ref}}$ 标度延迟，可在相同符合概率处比较两个凹陷的宽度。}
     \label{fig:hom-dip}
 \end{figure}
-这项分析适用于输入内部态可分解为两个纯单光子态的情形；
-若光子对在频率上纠缠，应对联合频率态计算交换重叠。
+上面的重叠公式假设两个输入各有确定的纯态。对随试次变化的光子对，要按实际的配对方式平均符合概率。例如，若每次都送入两个内部态相同的光子，只让共同的载频随试次随机改变，零延迟处仍可完全相消。若光子对在频率上纠缠，则须用联合频率态计算交换重叠。
 
-\begin{example}{双电子组态与相互作用能}{qm-two-electron-configurations}
-    两个电子分别占据正交空间轨道 $\ket a,\ket b$。求自旋单态和三重态各自允许的空间因子，比较两种组态对同一交换对称、与自旋无关的两体势 $\op v$ 的能量期望值。若两电子改占同一空间轨道，哪种自旋态仍允许？
+\begin{example}[unbreakable]{双电子组态与相互作用能}{qm-two-electron-configurations}
+    两个电子分别占据正交归一的空间轨道 $\ket a,\ket b$。求自旋单态和三重态各自允许的空间因子，比较两种组态对同一交换对称、与自旋无关的两体势 $\op v$ 的能量期望值。若两电子改占同一空间轨道，哪种自旋态仍允许？
+
     \par\smallskip\textbf{解}\quad
-    设总态可分为$\ket{\Phi} \otimes \ket{s}$，
-    其中 $\ket{s} = (\ket{\up,\dn} - \ket{\dn,\up})/\sqrt2$，两个箭头依次给出编号 $1,2$ 的自旋投影方向。
-    交换两个电子时，空间标签和自旋标签必须同时交换。
-    因为$\op{P}_{12}^{\spinlabel}\ket{s} = -\ket{s}$，
-    要使总态满足$\op{P}_{12}\ket{\Psi} = -\ket{\Psi}$，
-    就必须有$\op{P}_{12}^{\spatial}\ket{\Phi} = +\ket{\Phi}$。
+    将两个电子的空间自由度放在一个张量因子中，自旋自由度放在另一个因子中。记空间交换算符 $\op P_{12}^{\spatial}$ 将 $\ket{a,b}$ 变为 $\ket{b,a}$。
+    自旋交换算符 $\op P_{12}^{\spinlabel}$ 将 $\ket{\up,\dn}$ 与 $\ket{\dn,\up}$ 互换，并保持两自旋平行的态不变。完整交换同时交换空间和自旋标签，因而
+    \begin{equation}\label{eq:qm-exchange-space-spin}
+        \op P_{12} = \op P_{12}^{\spatial} \otimes \op P_{12}^{\spinlabel}.
+    \end{equation}
+    由线性，上式也适用于空间与自旋纠缠的态。本题取空间与自旋的乘积态，两个因子的交换本征值相乘必须等于 $-1$，总态才是反对称的。
+    \exmref{exm:qm-two-spins}中的自旋单态是 $\ket{\up,\dn}$ 与 $\ket{\dn,\up}$ 的反对称组合，交换本征值为 $-1$，所以空间因子必须对称。
+    三重态包括这两个态的对称组合及两个平行自旋态，交换本征值均为 $+1$，所以空间因子必须反对称。
 
-    对两个正交空间轨道 $\ket{a},\ket{b}$，自旋单态要求取对称空间因子 $\ket{\Phi_+}$，自旋三重态要求取反对称空间因子 $\ket{\Phi_-}$。两者可合写为
+    对两个正交轨道，单态和三重态分别配下式的正号和负号，
     \begin{equation}
         \ket{\Phi_\pm}
         = \frac{\ket{a,b} \pm \ket{b,a}}{\sqrt2}.
     \end{equation}
-    当两个电子占据同一空间轨道时，反对称组合的两项相消，
-    所以只有自旋单态组合可以保留。
 
-    对任意自伴、交换对称的两体势 $\op v$，交换前后两个乘积态给出的直接积分相同，两个交叉项也相同且为实数。
-    记交换积分 $K = \mel{a,b}{\op v}{b,a}$，则与式\eqref{eq:qm-helium-splitting}一样，自旋单态的相互作用能减去三重态的相互作用能得到 $2K$。
-    若空间与自旋本来就纠缠，应直接检查完整联合态的交换性质。
+    两体势在自旋因子上作用为恒等，因此只需求空间因子的期望值。对本题的 $\op v$ 沿用式\eqref{eq:qm-direct-exchange-integrals}中的直接积分 $D$ 和交换积分 $K$。
+    交换对称性使两个对角矩阵元都等于 $D$，两个交叉矩阵元都等于 $K$。后两者又因自伴性互为共轭，所以 $K$ 为实数。展开空间态的矩阵元，得到
+    \begin{subequations}
+        \begin{align}
+            \mel{\Phi_+}{\op v}{\Phi_+} &= \frac{D + D + K + K}{2} = D + K \qquad (\text{自旋单态}),\\
+            \mel{\Phi_-}{\op v}{\Phi_-} &= \frac{D + D - K - K}{2} = D - K \qquad (\text{自旋三重态}).
+        \end{align}
+    \end{subequations}
+    因此单态的相互作用能减去三重态的相互作用能为 $2K$。
+
+    若两个电子占据同一空间轨道 $\ket a$，交换前后都是 $\ket{a,a}$，反对称组合相消，对称组合归一化后就是 $\ket{a,a}$。因此只允许自旋单态。
 \end{example}
 
 \reading{交换振幅与占据数参照Feynman第III卷第4章\cite{feynman4}；HOM原始实验见\cite{hom}。

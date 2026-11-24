@@ -64,8 +64,7 @@
     = 1 + \lambda^2\braket{n^{(1)}}{n^{(1)}} + \bigo(\lambda^3).
 \end{equation}
 取范数平方的负二分之一次幂，归一化因子便是 $1 - \lambda^2s/2 + \bigo(\lambda^3)$。
-这里写到$\lambda^2$的原态方向系数；
-与$\ket{n}$正交的二阶分量仍由二阶投影方程确定。
+乘上这个因子后，原态 $\ket n$ 的系数由 $1$ 减小到 $1 - \lambda^2 s/2$（保留到二阶）。与 $\ket n$ 正交的二阶分量还要由二阶方程求出。
 
 对每个 $m \ne n$，把耦合 $\abs{\lambda V_{mn}}$ 与两态的能量差相比，就得到了一级混合振幅的大小。各振幅模平方之和衡量原态以外的总权重。
 高阶级数可能是渐近展开(asymptotic expansion)。当一组能级趋于简并，应将它们一起纳入近似子空间。
@@ -114,7 +113,7 @@
         \op\Pi_\perp\op{H}\op\Pi\ket{\psi_\parallel} + \op\Pi_\perp\op{H}\op\Pi_\perp\ket{\psi_\perp} &= E\ket{\psi_\perp}.
     \end{alignat}
 \end{subequations}
-在正交补上，单位算符记为 $\one_\perp$。若 $E\one_\perp - \op\Pi_\perp\op{H}\op\Pi_\perp$ 在该空间上可逆，第二式给出
+在正交补上，单位算符记为 $\one_\perp$。下式的逆只在这个空间上取。若该子空间上的 Hamilton 算符自伴且 $E$ 在其谱外，逆对应谱上的标量函数 $a \mapsto 1/(E - a)$，第二式给出
 \begin{equation}
     \ket{\psi_\perp} = (E\one_\perp - \op\Pi_\perp\op{H}\op\Pi_\perp)^{-1}\op\Pi_\perp\op{H}\op\Pi\ket{\psi_\parallel}.
 \end{equation}
@@ -122,22 +121,23 @@
 \begin{equation}
     \op{H}_\eff(E) = \op\Pi\op{H}\op\Pi + \op\Pi\op{H}\op\Pi_\perp(E\one_\perp - \op\Pi_\perp\op{H}\op\Pi_\perp)^{-1}\op\Pi_\perp\op{H}\op\Pi.
 \end{equation}
-对隔离简并簇展开到二阶，
+若能量 $E_0$ 与简并子空间外的能谱之间有有限能隙，$\lambda$ 足够小时可将有效 Hamilton 算符按 $\lambda$ 展开。
+连接两个子空间的矩阵元各含一个 $\lambda$，所以求二阶项时，逆算符中只需取未扰动的 $E_0$ 和 $\op H_0$，得到
 \begin{equation}
     \op{H}_\eff = E_0\op\Pi + \lambda \op\Pi\op{V}\op\Pi\\
      +\lambda^2\op\Pi\op{V}\op\Pi_\perp(E_0\one_\perp - \op\Pi_\perp\op{H}_0\op\Pi_\perp)^{-1}
         \op\Pi_\perp\op{V}\op\Pi + \bigo(\lambda^3).
 \end{equation}
-一级仍简并时还须对角化二级矩阵。
-当两态近简并时，保留整个两态子空间，在其基底中直接对角化
+若几个态的一阶能移相同，就在这些态张成的子空间内对角化二阶项，判断它们在二阶是否分裂。
+当两态近简并时，保留整个两态子空间。在裸态基 $\ket a,\ket b$ 中，Hamilton 矩阵 $H_2$ 及其本征值为
 \begin{subequations}
     \begin{align}
-        \op{H}_2 &= \begin{pmatrix}E_a&g\\g\conj&E_b\end{pmatrix},\\
+        H_2 &= \begin{pmatrix}E_a&g\\g\conj&E_b\end{pmatrix},\\
         E_\pm &= \frac{E_a + E_b}{2} \pm \sqrt{\frac{(E_a - E_b)^2}{4} + \abs{g}^2}.
     \end{align}
 \end{subequations}
 非零耦合产生避免交叉(avoided crossing)：在$E_a = E_b$处劈裂为$2\abs{g}$（图\ref{fig:avoided-crossing}）；若对称性强制$g = 0$，两支可以相交。
-远离交叉展开根号，正好恢复式\eqref{eq:pertsecond}，这是一个直接的内部检验。
+远离交叉时，耦合使较高能级上移、较低能级下移。展开根号所得的首项能移大小为 $\abs g^2/\abs{E_a - E_b}$，与式\eqref{eq:pertsecond}一致。
 \begin{figure}[htbp]
     \centering\includegraphics[width=.60\linewidth]{figures/avoided_crossing.pdf}
     \caption{点线为未耦合能级，实线为耦合后的本征值。纵轴以 $\bar E = (E_a + E_b)/2$ 为零点、以 $\abs{g}$ 为单位；在两条点线的交点处量取实线的竖直间距，即得最小能隙。}
@@ -221,23 +221,22 @@
 \begin{example}{相反宇称双态的 Stark 劈裂}{qm-stark-crossover}
     取一对相反宇称态，零场间距为$\Delta > 0$，
     并选择相位使偶极矩阵元$d$为实数。
-    以两态平均能量$\avg E$为零场中心，矩阵为
+    以两态平均能量 $\avg E$ 为零场中心，按零场能量从低到高排列两个基矢，相应的 Hamilton 矩阵为
     \begin{equation}
-        \op{H} = \avg E\,\one +
-            \begin{pmatrix}
-                -\Delta/2&-d\mathcal E\\
-                -d\mathcal E&\Delta/2
-            \end{pmatrix}.
+        H_2 = \begin{pmatrix}
+                \avg E - \Delta/2 & -d\mathcal E\\
+                -d\mathcal E & \avg E + \Delta/2
+              \end{pmatrix}.
     \end{equation}
     求两个能级的能移，并比较 $\abs{d\mathcal E}$ 远小于和远大于 $\Delta$ 时的场强依赖。
 
-    \par\smallskip\textbf{解}\quad 解行列式 $\det(\op{H} - E\one) = 0$，得到
+    \par\smallskip\textbf{解}\quad 解特征方程 $(\avg E - E)^2 - \Delta^2/4 - d^2\mathcal E^2 = 0$，得到
     \begin{equation}
         E_\pm = \avg E \pm
             \sqrt{\frac{\Delta^2}{4} + d^2\mathcal E^2}.
     \end{equation}
-    当$\abs{d\mathcal E} \ll \Delta$，低能支移动
-    $-d^2\mathcal E^2/\Delta$，对应$\alpha = 2d^2/\Delta$。
+    两支相对各自零场能量的位移为 $\Delta E_\pm = E_\pm - (\avg E \pm \Delta/2)$。
+    当 $\abs{d\mathcal E} \ll \Delta$ 时，展开根号得 $\Delta E_\pm \simeq \pm d^2\mathcal E^2/\Delta$，其中低能支的极化率为 $\alpha = 2d^2/\Delta$。
     当$\Delta \ll \abs{d\mathcal E}$且仍未混入其他态时，
     劈裂近似为$2\abs{d\mathcal E}$。
     同一模型在不同场强区间给出不同的表观场依赖，
@@ -324,23 +323,24 @@ $3\lambda\hbar^2/(4m^2\omega^2)$。
 氦离子 $\mathrm{He}^+$ 的一个电子束缚在电荷为 $+2e$ 的核上。加入第二个电子后，
 两个电子都受核吸引，又彼此排斥。电子云要扩展到多大，才能使总能量最低？
 取固定的点核，忽略相对论和辐射修正，记两电子到核的距离为 $r_1,r_2$，彼此的距离为 $r_{12} = \abs{\bm r_1 - \bm r_2}$。
-用 Bohr 半径 $a_0$ 和 Hartree 能量 $E_{\mathrm h} = \hbar^2/(m_\electron a_0^2) = e^2/(4\pi\varepsilon_0 a_0)$ 表示位置表象中的 Hamilton 算符，有
+取 Bohr 半径 $a_0$ 和 Hartree 能量 $\EHartree = \hbar^2/(m_\electron a_0^2) = e^2/(4\pi\varepsilon_0 a_0)$ 为单位。
+记两电子态的空间振幅为 $\Phi(\bm r_1,\bm r_2) = \braket{\bm r_1,\bm r_2}{\Phi}$，则
 \begin{equation}\label{eq:qm-helium-scaled-hamiltonian}
-    \frac{\op H}{E_{\mathrm h}}
-    = \sum_{i=1}^2\biggp{-\frac{a_0^2}{2}\nabla_i^2 - \frac{2a_0}{r_i}}
-        + \frac{a_0}{r_{12}} .
+    \frac{\mel{\bm r_1,\bm r_2}{\op H}{\Phi}}{\EHartree}
+    = \sum_{i=1}^2\biggp{-\frac{a_0^2}{2}\nabla_i^2\Phi - \frac{2a_0}{r_i}\Phi}
+        + \frac{a_0}{r_{12}}\Phi .
 \end{equation}
-最后一项把两个位置变量耦合起来。先让两个电子共用一个氢样 $1\mathrm s$ 轨道，把轨道的衰减长度 $a_0/\zeta$ 作为可调参数\cite{mithelium}。
+最后一项把两个位置变量耦合起来。先让两个电子共用一个氢样 $1\orbitalS$ 轨道，把轨道的衰减长度 $a_0/\zeta$ 作为可调参数\cite{mithelium}。
 归一化的空间试探态为
 \begin{equation}\label{eq:qm-helium-product-trial}
     \Phi_\zeta(\bm r_1,\bm r_2) = \phi_\zeta(r_1)\phi_\zeta(r_2),\qquad
     \phi_\zeta(r) = \sqrt{\frac{\zeta^3}{\pi a_0^3}}\,\e^{-\zeta r/a_0},\qquad \zeta > 0 .
 \end{equation}
-这个 $1\mathrm s^2$ 组态的空间因子在交换下对称，乘以反对称自旋单态
+这个 $1\orbitalS^2$ 组态的空间因子在交换下对称，乘以反对称自旋单态
 $(\ket{\up,\dn} - \ket{\dn,\up})/\sqrt2$，总态就满足电子的交换要求（\ssecref{ss:qm-helium-exchange}）。
 算符 $\op H$ 与自旋无关，求能量只需对空间部分积分。
 
-对单个电子，$\abs{\grad\phi_\zeta}^2 = (\zeta/a_0)^2\abs{\phi_\zeta}^2$ 给出动能 $\zeta^2 E_{\mathrm h}/2$，
+对单个电子，$\abs{\grad\phi_\zeta}^2 = (\zeta/a_0)^2\abs{\phi_\zeta}^2$ 给出动能 $\zeta^2 \EHartree/2$，
 径向积分给出 $\ave{a_0/r} = \zeta$。求斥力能时，固定 $r_1,r_2$，对两径向方向的夹角 $\theta$ 作平均。
 令 $u = \cos\theta$，则
 \[
@@ -358,21 +358,21 @@ $(\ket{\up,\dn} - \ket{\dn,\up})/\sqrt2$，总态就满足电子的交换要求�
 \]
 合并两电子的动能、核吸引能和电子斥力能，得到
 \begin{equation}\label{eq:qm-helium-variational-energy}
-    \frac{E_{\trial}(\zeta)}{E_{\mathrm h}}
+    \frac{E_{\trial}(\zeta)}{\EHartree}
        = \zeta^2 - 4\zeta + \frac{5\zeta}{8}
        = \biggp{\zeta - \frac{27}{16}}^2 - \frac{729}{256}.
 \end{equation}
-最低点 $\zeta = 27/16 < 2$ 对应的电子云比 $\mathrm{He}^+$ 的 $1\mathrm s$ 轨道更宽。$\zeta$ 是描述平均屏蔽的有效核电荷数，
+最低点 $\zeta = 27/16 < 2$ 对应的电子云比 $\mathrm{He}^+$ 的 $1\orbitalS$ 轨道更宽。$\zeta$ 是描述平均屏蔽的有效核电荷数，
 Hamilton 算符中的实际核电荷始终是 $+2e$。乘积试探态可以调整电子云的大小，两个电子的位置概率却仍然相互独立。
-变分结果还能检验两个电子能否一起被束缚。一个电子以零动能远离原子、另一个留在 $\mathrm{He}^+$ 基态时，总能量为 $-2E_{\mathrm h}$。
-变分上界给出 $E_0 \le -729E_{\mathrm h}/256$，已经低于这个第一电离阈值。
-所以在这个模型中，从基态移走一个电子至少需要 $(217/256)E_{\mathrm h} \simeq \qty{23.07}{eV}$ 的能量。
+变分结果还能检验两个电子能否一起被束缚。一个电子以零动能远离原子、另一个留在 $\mathrm{He}^+$ 基态时，总能量为 $-2\EHartree$。
+变分上界给出 $E_0 \le -729\EHartree/256$，已经低于这个第一电离阈值。
+所以在这个模型中，从基态移走一个电子至少需要 $(217/256)\EHartree \simeq \qty{23.07}{eV}$ 的能量。
 中性氦的第一电离能约为 $\qty{24.59}{eV}$\cite{nisthelium}。
 
 \section{Hellmann--Feynman关系与残差检验}
 \label{sec:hellmann}
 变分计算给出能量上界。要与谱线随外场变化的斜率比较，还需确定能量的参数导数，并判断近似态满足本征方程的精度。
-对本征方程求导可得到谱线斜率；把候选能量与候选态代回本征方程，则可用残差向量的范数度量偏差。
+一条谱线的频率是上下能级之差除以 $h$，所以要分别求两个能级对场强的导数。对于近似态，把它和候选能量代回本征方程，两侧之差的范数给出残差的大小。
 
 \begin{theorem}{Hellmann--Feynman定理}{qm-hellmann-feynman}
     设 $\op{H}(\eta)$ 是依赖实参数 $\eta$ 的自伴 Hamilton 算符，
@@ -391,7 +391,7 @@ Hamilton 算符中的实际核电荷始终是 $+2e$。乘积试探态可以调�
 态随参数的变化项因而相消。
 \end{proof}
 
-简并点须先选择使参数导数在简并空间内对角的分支。
+在简并点，把 $\op H$ 对 $\eta$ 的导数限制到简并子空间并对角化，其本征值给出各能级分支在该点的斜率。
 把未经驻值优化的任意试探态代入则通常有额外的态导数项。
 
 若要检查候选态，将本征方程的两侧作差。
@@ -406,8 +406,8 @@ Hamilton 算符中的实际核电荷始终是 $+2e$。乘积试探态可以调�
 \begin{equation}\label{eq:qm-spectral-residual}
     r^2 = \int (E - E_{\trial})^2\d\mu_\phi(E).
 \end{equation}
-各谱值离 $E_{\trial}$ 的距离都至少等于它到谱的距离，因此这个最短距离不超过 $r$。
-要从这个邻域内的谱识别出目标能级，还需要相邻能隙的信息。
+区间 $[E_{\trial} - r,E_{\trial} + r]$ 中必有谱值。否则每个谱值与 $E_{\trial}$ 的距离都大于 $r$，与上式的均方偏差矛盾。
+要确认候选能量逼近哪一个能级，还需确定该区间内只有目标能级。
 若基态非简并、与其他谱的间隔至少为 $\Delta > 0$，且试探态的能量期望为$E_0 + \epsilon$，则
 $1 - \abs{\braket{0}{\phi}}^2 \leq \epsilon/\Delta$。
 
@@ -432,5 +432,4 @@ $\epsilon/\Delta$越小，试探态落在激发态子空间的概率越小。
     \par\smallskip\textbf{解}\quad 态混合通常已经是一阶，能量可从二阶改变。
     若微扰与相反宇称态之间的耦合可与原能隙相比，应将两态一起对角化，此时还可能产生近线性劈裂。
 \end{example}
-\reading{定态微扰与简并处理核对MIT 8.06讲义1\cite{mitpert}。
-    下一章把外场变成随时间变化的探针，连接能级和实际吸收发射率。}
+\reading{简并与非简并能级的定态微扰计算可参阅 MIT 8.06 讲义 1\cite{mitpert}。下一章讨论随时间变化的外场怎样引起能级之间的跃迁。}

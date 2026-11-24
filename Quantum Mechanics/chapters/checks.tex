@@ -53,7 +53,8 @@ $p_j$ 无量纲，因此 $\abs{\psi(x)}^2$ 的量纲是长度的倒数。对同�
 \end{longtable}
 }
 
-还有两类条件容易与小参数混淆。理想投影测量规定了仪器如何制备测后态，简并子空间内的额外扰动会改变这一更新规则（\ssecref{ss:measurement-record}）。变分法给出的上界对每个满足模型边界条件、能量期望有限的归一化试探态都成立。试探态本身是基态时取等号（\thmref{thm:qm-variational}）。
+理想投影测量还对仪器提出要求。如果几个本征态都给出读数 $a$，Lüders 规则要求仪器保留态矢在这一整个本征子空间上的投影。选出读数 $a$ 后，只需将该投影归一化就得到测后态（\ssecref{ss:measurement-record}）。
+变分法的误差则取决于试探态的选择。任何满足模型边界条件、能量期望有限的归一化试探态，都给出基态能量的上界。试探态本身是基态时取等号（\thmref{thm:qm-variational}）。
 
 \section{正文推导与引用的结论}
 有些公式在一个具体模型中可以直接推出，推广到一般系统则需要额外的数学结果。下表指出正文的计算在哪一步结束，以及哪一步采用定理或已知解。定理的适用条件随正文链接列出，相关讲义和原始文献见参考资料。
@@ -69,8 +70,8 @@ $p_j$ 无量纲，因此 $\abs{\psi(x)}^2$ 的量纲是长度的倒数。对同�
     两个自旋出口的正交投影之和为 $\one$。连续位置测量中，一个像素对应一个区间（\secref{sec:continuous}）。
     & 自伴算符的谱定理（\thmref{thm:qm-spectral-theorem}）保证可以给每个可测读数集合指派谱投影。无界算符还需指定定义域（\secref{sec:selfadjoint}）。\\
     短时幺正演化给出 Schrödinger 方程（式\eqref{eq:schrket}）。时间平移群与自伴生成元间的对应由\thmref{thm:qm-stone}给出，证明见\secref{sec:stone-proof}。
-    & 证明使用自伴算符的谱定理，把能量为 $E$ 的各分量乘以 $\exp(-\i Et/\hbar)$。能量与时间演化生成元的物理认定需由实验检验。\\
-    从氢的 $1\mathrm{s}$ 态出发，用 $z$ 偏振光激发到 $n = 2$ 能级时，角向积分选出 $2\mathrm{p},m = 0$（表\ref{tab:hydrogen-dipole-z}）。
+    & 谱定理给出每个能量分量的相位因子 $\exp(-\i Et/\hbar)$。把时间演化的生成元与能量联系起来是物理假设，可用已知能级差预言叠加态的振荡周期来检验（式\eqref{eq:qm-two-energy-return}）。\\
+    从氢的 $1\orbitalS$ 态出发，用 $z$ 偏振光激发到 $n = 2$ 能级时，角向积分选出 $2\orbitalP,m = 0$（表\ref{tab:hydrogen-dipole-z}）。
     & Wigner--Eckart 定理（\thmref{thm:qm-wigner-eckart}）给出一般球张量矩阵元对磁量子数的依赖\cite{littlejohnwe}。\\
     由径向方程的边界条件和级数截断，构造每个允许的 $n,\ell$ 对应的归一化 Coulomb 束缚态（\secref{sec:hydrogen-radial}）。
     & 精细结构计算还引用了 $r^{-2}$ 的期望值，以及 $\ell > 0$ 时 $r^{-3}$ 的期望值\cite{mitfine}。\\
@@ -85,60 +86,69 @@ $p_j$ 无量纲，因此 $\abs{\psi(x)}^2$ 的量纲是长度的倒数。对同�
 
 \sectionstar{Stone 定理的证明}
 \label{sec:stone-proof}
-\thmref{thm:qm-stone}对时间平移群的正则性只要求强连续。证明分两步。先找出可以求导的态，检验它们给出的生成元是否自伴。再用谱定理从生成元构造指数，检验它是否恢复原来的演化。以下用 $\psi$ 简记向量 $\ket{\psi}$，所有向量极限都取 Hilbert 空间的范数。由群律和幺正性，$\norm{\op U(t + \tau)\psi - \op U(t)\psi} = \norm{\op U(\tau)\psi - \psi}$，所以在零时刻的连续性就给出所有时刻的连续性。
+\thmref{thm:qm-stone}对时间平移群的正则性只要求强连续。证明分两步。先找出可以求导的态，检验它们给出的生成元是否自伴。再用谱定理从生成元构造指数，检验它是否恢复原来的演化。
+以下向量极限都取 Hilbert 空间的范数。由群律和幺正性，
+\[
+    \norm{\op U(t + \tau)\ket{\psi} - \op U(t)\ket{\psi}}
+    = \norm{\op U(\tau)\ket{\psi} - \ket{\psi}} ,
+\]
+所以在零时刻的连续性就给出所有时刻的连续性。
 
 \paragraph*{从群构造自伴生成元}
-设 $D$ 是式\eqref{eq:qm-stone-generator}中差商 $[\op U(\tau)\psi - \psi]/\tau$ 有极限的全体向量，$\op K\psi$ 表示该极限。差商的线性给出 $D$ 是线性子空间。即使事先不知某个给定的 $\psi$ 能否求导，也可以对它在短时间 $b > 0$ 内的演化取平均，
+设 $D$ 是式\eqref{eq:qm-stone-generator}中差商有极限的全体右矢，对 $\ket{\psi} \in D$ 用 $\op K\ket{\psi}$ 表示该极限。
+差商的线性给出 $D$ 是线性子空间。对任意 $\ket{\psi}$，都可以把它在短时间 $b > 0$ 内的演化取平均，
 \[
-    \psi_b = \frac1b\int_0^b\op U(s)\psi\,\d s .
+    \ket{\psi_b} = \frac1b\int_0^b\op U(s)\ket{\psi}\,\d s .
 \]
-积分可看作连续向量的 Riemann 和的极限。由强连续性，$b \to 0$ 时 $\psi_b \to \psi$。由群律，$\op U(\tau)$ 将积分区间平移 $\tau$，两段重叠的部分相消，故
+积分可看作连续向量的 Riemann 和的极限。由强连续性，$b \to 0$ 时 $\ket{\psi_b} \to \ket{\psi}$。由群律，$\op U(\tau)$ 将积分区间平移 $\tau$，两段重叠的部分相消，故
+\begin{align*}
+    \frac{\op U(\tau)\ket{\psi_b} - \ket{\psi_b}}{\tau}
+    &= \frac1b\biggp{\frac1\tau\int_b^{b+\tau}\op U(s)\ket{\psi}\,\d s
+       - \frac1\tau\int_0^\tau\op U(s)\ket{\psi}\,\d s}\\
+    &\xrightarrow{\tau\to0} \frac{\op U(b)\ket{\psi} - \ket{\psi}}{b}.
+\end{align*}
+所以 $\ket{\psi_b} \in D$，而 $D$ 中的向量可以逼近每个 $\ket{\psi}$，即 $D$ 稠密。在有限维空间里，每个线性子空间都闭，因此 $D$ 就是全空间。群律还给出
 \[
-    \frac{\op U(\tau)\psi_b - \psi_b}{\tau}
-    = \frac1b\biggp{\frac1\tau\int_b^{b+\tau}\op U(s)\psi\,\d s
-       - \frac1\tau\int_0^\tau\op U(s)\psi\,\d s}
-    \to \frac{\op U(b)\psi - \psi}{b}.
-\]
-所以 $\psi_b \in D$，而 $D$ 中的向量可以逼近每个 $\psi$，即 $D$ 稠密。在有限维空间里，每个线性子空间都闭，因此 $D$ 就是全空间。群律还给出
-\[
-    \dd{t}\op U(t)\phi = \op U(t)\op K\phi = \op K\op U(t)\phi,\qquad \phi \in D ,
+    \dd{t}\op U(t)\ket{\phi} = \op U(t)\op K\ket{\phi} = \op K\op U(t)\ket{\phi},\qquad \ket{\phi} \in D ,
 \]
 因为在任意时刻的差商中，$\op U(t)$ 都可以从左边提出。这也证明 $\op U(t)$ 把 $D$ 映到自身。
 
-对 $\phi,\psi \in D$，幺正性使演化前后的内积相等。在零时刻求导，得到
+对 $\ket{\phi},\ket{\psi} \in D$，记 $\ket{\phi_t} = \op U(t)\ket{\phi}$、$\ket{\psi_t} = \op U(t)\ket{\psi}$。
+幺正性使演化前后的内积相等。在零时刻求导，得到
 \[
-    0 = \left.\dd{t}\braket{\op U(t)\phi}{\op U(t)\psi}\right|_{t=0}
-      = \braket{\op K\phi}{\psi} + \braket{\phi}{\op K\psi}.
+    0 = \left.\dd{t}\braket{\phi_t}{\psi_t}\right|_{t=0}
+      = (\op K\ket{\phi})\adjoint\ket{\psi} + \mel{\phi}{\op K}{\psi}.
 \]
 按伴随的定义，
 $D \subseteq \Dom(\op K\adjoint)$，且在 $D$ 上 $\op K\adjoint = -\op K$。无限维时还需检验两边的定义域相等。
-取任意 $\eta \in \Dom(\op K\adjoint)$ 和 $\phi \in D$。把演化移到可微的 $\phi$ 一侧，便能求标量的导数，
+取任意 $\ket{\eta} \in \Dom(\op K\adjoint)$ 和 $\ket{\phi} \in D$。幺正性把演化移到可微的 $\ket{\phi_{-t}}$ 一侧，对内积求导得到
+\begin{align*}
+    \dd{t}\mel{\phi}{\op U(t)}{\eta}
+    &= \dd{t}\braket{\phi_{-t}}{\eta}
+     = -(\op K\ket{\phi_{-t}})\adjoint\ket{\eta}\\
+    &= -\mel{\phi_{-t}}{\op K\adjoint}{\eta}
+     = -\mel{\phi}{\op U(t)\op K\adjoint}{\eta}.
+\end{align*}
+从 $0$ 积到 $t$。等式在与任意 $\ket{\phi} \in D$ 取内积后都成立，$D$ 又稠密，故得到向量等式
 \[
-    \dd{t}\braket{\phi}{\op U(t)\eta}
-    = \dd{t}\braket{\op U(-t)\phi}{\eta}
-    = -\braket{\op K\op U(-t)\phi}{\eta}
-    = -\braket{\phi}{\op U(t)\op K\adjoint\eta}.
+    \op U(t)\ket{\eta} - \ket{\eta} = -\int_0^t\op U(s)\op K\adjoint\ket{\eta}\,\d s.
 \]
-从 $0$ 积到 $t$。等式在与任意 $\phi \in D$ 取内积后都成立，$D$ 又稠密，故得到向量等式
-\[
-    \op U(t)\eta - \eta = -\int_0^t\op U(s)\op K\adjoint\eta\,\d s.
-\]
-除以 $t$ 并取 $t \to 0$，右边按强连续性趋于 $-\op K\adjoint\eta$。因此 $\eta \in D$，反向包含也成立，于是
+除以 $t$ 并取 $t \to 0$，右边按强连续性趋于 $-\op K\adjoint\ket{\eta}$。因此 $\ket{\eta} \in D$，反向包含也成立，于是
 $\op K\adjoint = -\op K$ 包括定义域相等。乘上纯虚常数后，$\op H = \i\hbar\op K$ 就是自伴算符。
 
 \paragraph*{从自伴生成元恢复传播子}
 设 $\op H$ 自伴。按\thmref{thm:qm-spectral-theorem}，谱投影 $\op\Pi_H(B)$ 选出能量落在可测集合 $B$ 中的分量。
-这个分量的范数平方为 $\mu_\psi(B) = \braket{\psi}{\op\Pi_H(B)\psi}$。特别地，$\mu_\psi(\RR) = \norm{\psi}^2$。谱定理给出
+这个分量的范数平方为 $\mu_\psi(B) = \mel{\psi}{\op\Pi_H(B)}{\psi}$。特别地，$\mu_\psi(\RR) = \braket{\psi}{\psi}$。谱定理给出
 \begin{subequations}\label{eq:qm-propagator-spectral-integral}
     \begin{gather}
         \op V(t) = \int_{\RR}\e^{-\i Et/\hbar}\d\op\Pi_H(E),\\
-        \psi \in \Dom(\op H)\  \Longleftrightarrow \
+        \ket{\psi} \in \Dom(\op H)\  \Longleftrightarrow \
             \int_{\RR} E^2\,\d\mu_\psi(E) < \infty .
     \end{gather}
 \end{subequations}
 各能量分量只乘模为 $1$ 的相位，相邻两次演化的相位相乘，故 $\op V(t)$ 是幺正群。正交分量的范数平方相加给出
 \[
-    \norm{\op V(\tau)\psi - \psi}^2
+    \norm{\op V(\tau)\ket{\psi} - \ket{\psi}}^2
     = \int_{\RR}\abs{\e^{-\i E\tau/\hbar} - 1}^2\,\d\mu_\psi(E).
 \]
 在任何有限能量区间 $[-M,M]$ 上，被积函数一致趋于零。区间外的积分至多为 $4\mu_\psi(\abs E > M)$，取 $M$ 充分大即可任意小。因此 $\op V(t)$ 强连续。
@@ -153,32 +163,32 @@ $\op K\adjoint = -\op K$ 包括定义域相等。乘上纯虚常数后，$\op H 
     \int_{\abs E>M}\biggabs{q_\tau(E) + \frac{\i E}{\hbar}}^2\d\mu_\psi(E)
         \leq \frac{4}{\hbar^2}\int_{\abs E>M}E^2\,\d\mu_\psi(E).
 \]
-当 $\psi \in \Dom(\op H)$ 时，取 $M$ 充分大可使右侧任意小。因此 $\op V(t)\psi$ 在零时刻的导数为 $-\i\op H\psi/\hbar$。
-反之，若 $\op V(t)\psi$ 在零时刻有导数 $\xi$，将差商投影到 $[-M,M]$，在这个区间上求极限得
+当 $\ket{\psi} \in \Dom(\op H)$ 时，取 $M$ 充分大可使右侧任意小。因此 $\op V(t)\ket{\psi}$ 在零时刻的导数为 $-(\i/\hbar)\op H\ket{\psi}$。
+反之，若 $\op V(t)\ket{\psi}$ 在零时刻有导数 $\ket{\xi}$，将差商投影到 $[-M,M]$，在这个区间上求极限得
 \[
     \int_{[-M,M]} E^2\,\d\mu_\psi(E)
-    = \hbar^2\norm{\op\Pi_H([-M,M])\xi}^2 \leq \hbar^2\norm{\xi}^2 .
+    = \hbar^2\norm{\op\Pi_H([-M,M])\ket{\xi}}^2 \leq \hbar^2\braket{\xi}{\xi} .
 \]
-右侧与 $M$ 无关，所以全能谱上的二阶矩有限，$\psi$ 必属于 $\Dom(\op H)$。
+右侧与 $M$ 无关，所以全能谱上的二阶矩有限，$\ket{\psi}$ 必属于 $\Dom(\op H)$。
 
-最后，把 $\op V(t)$ 用于第一步从 $\op U(t)$ 得到的 $\op H$。两种演化保持同一定义域，其上的每条轨道都服从式\eqref{eq:schrket}。对 $\phi,\psi \in \Dom(\op H)$，内积
-$\braket{\op U(t)\phi}{\op V(t)\psi}$ 的导数为零，因为两项中的 $\op H$ 可由自伴性移到同一侧，而系数互为相反数。
+最后，把 $\op V(t)$ 用于第一步从 $\op U(t)$ 得到的 $\op H$。两种演化保持同一定义域，其上的每条轨道都服从式\eqref{eq:schrket}。对 $\ket{\phi},\ket{\psi} \in \Dom(\op H)$，内积
+$\mel{\phi}{\op U(t)\adjoint\op V(t)}{\psi}$ 的导数为零，因为两项中的 $\op H$ 可由自伴性移到同一侧，而系数互为相反数。
 这个内积因此等于初值 $\braket{\phi}{\psi}$。由定义域稠密及幺正性，等式延伸到任意两向量，于是 $\op U(t)\adjoint\op V(t) = \one$，即 $\op U(t) = \op V(t)$。而给定 $\op U(t)$，其零时刻的差商已经唯一确定 $\op H$ 的定义域和作用，定理得证。
 
 \section{计算结果的独立检验}
 检验一个近似结果，可以选用另一种可计算的极限，或选取在推导中未曾用过的守恒量。下面三个例子分别针对演化时间、散射通量和能谱截断，它们检验的是不同类型的误差。
 
 \paragraph*{用短时极限核对驱动强度}
-在\secref{sec:rabi}的两态模型中，把式\eqref{eq:rabi}在 $\Omega_{\mathrm{R}} t \ll 1$ 处展开，得到
+在\secref{sec:rabi}的两态模型中，把式\eqref{eq:rabi}在 $\Omega_{\rabiLabel} t \ll 1$ 处展开，得到
 \[
     P_{-z\to+z}(t) = \frac{\Omega^2t^2}{4} + \bigo(t^4).
 \]
 独立地，驱动的非对角矩阵元大小为 $\hbar\abs{\Omega}/2$，故一阶跃迁振幅的模在短时为 $\abs{\Omega}t/2$。两种算法给出相同的二次项，可检出驱动幅度定义中相差的因子 $2$。
 
 \paragraph*{用通量核对透射概率}
-在\secref{sec:tunneling}的一维定态散射中，反射和透射概率均是出射通量与入射通量之比。取无吸收的实势，仅左右两个传播通道开放。记入射和透射速度分别为 $v_{\mathrm{L}},v_{\mathrm{R}} > 0$，透射振幅与入射振幅之比为 $t$，则
+在\secref{sec:tunneling}的一维定态散射中，反射和透射概率均是出射通量与入射通量之比。取无吸收的实势，仅左右两个传播通道开放。记入射和透射速度分别为 $v_{\leftLabel},v_{\rightLabel} > 0$，透射振幅与入射振幅之比为 $t$，则
 \[
-    T = \frac{v_{\mathrm{R}}}{v_{\mathrm{L}}}\abs t^2,\qquad R + T = 1 .
+    T = \frac{v_{\rightLabel}}{v_{\leftLabel}}\abs t^2,\qquad R + T = 1 .
 \]
 两侧势能不同时，遗漏速度比会使算出的总概率偏离 $1$。
 

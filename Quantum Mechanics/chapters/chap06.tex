@@ -1,16 +1,12 @@
 \chapter{氢原子}
 \label{ch:hydrogen}
 
-氢原子放电光谱由一系列离散谱线组成。
-测量各谱线的波长后，Balmer型整数关系把看似无关的频率组织成不同系列。
-同一系列共享一个较低能级，较高能级逐步接近电离阈值。
+氢原子的放电光谱中有一组分立的发射线，称为 Balmer 系列。这些谱线对应的跃迁有同一个下能级。上能级越接近电离阈值，谱线就越密，波长趋近一个短波极限。
 电子与原子核之间的 Coulomb 相互作用为何给出与 $1/n^2$ 成比例的束缚能量？具有不同角动量的态又为何可以同能？
 
-观测到的光谱频率只给能量差。
-取无限远分离的电子与原子核为内部能量零点后，
-束缚态能量为负，谱线终点与电离阈值才共同固定能级的绝对标度。
-此外原子核具有有限质量；同一套电子相互作用在不同同位素中
-应产生可预测的小位移，这提供了两体模型的独立检验。
+取电子与核相距无穷远、相对动能为零时的能量为零，束缚态的内部能量就为负。
+设某一系列的下能级为 $E_\final$。每条谱线的光子能量都是上下能级之差，当上能级趋于零时，极限光子能量就是 $-E_\final$，即从该下能级电离所需的能量。
+换用核质量更大的氘，同一跃迁的波长还会发生微小变化。这一位移可以用来检验计算中是否计入了核的运动。
 
 \section{两体运动的约化}
 角动量代数给出了同一多重态的取向数。求谱线的波长还需要确定能级差。
@@ -54,7 +50,8 @@ $+\opbm{P}_{\CM} \cdot \opbm{P}/(m_\electron + M)$和它的负值，因而消去
         \quad \op{R} = \abs{\opbm{X}}.
     \end{align}
 \end{subequations}
-在位置表象中，距离算符 $\op R$ 使波函数乘以 $r = \abs{\bm r}$，Coulomb 势能项使波函数乘以 $-\kappa/r$。
+记 $r = \abs{\bm r}$、$\psi(\bm r) = \braket{\bm r}{\psi}$。三个位置分量在同一表象中各乘对应的坐标，距离算符 $\abs{\opbm X}$ 由普通函数 $\bm r \mapsto \abs{\bm r}$ 构造，即 $\mel{\bm r}{\op R}{\psi} = r\psi(\bm r)$。
+$\op R\inv$ 由 $r > 0$ 上的数值函数 $r \mapsto 1/r$ 定义，也写作 $1/\op R$。原点的单点取值不影响该算符。只有 $\psi(\bm r)/r$ 平方可积的态才属于它的定义域，此时 Coulomb 势能项的位置振幅是 $-\kappa\psi(\bm r)/r$。
 自由质心的连续能谱与内部能级属于不同自由度。
 后面$E$专指相对运动(relative motion)能量，零点取无穷远电离阈值(ionization threshold)。
 点核模型只含 Coulomb 吸引势，径向解在原点取正则分支（\secref{sec:hydrogen-radial}）。
@@ -65,8 +62,7 @@ $+\opbm{P}_{\CM} \cdot \opbm{P}/(m_\electron + M)$和它的负值，因而消去
 Coulomb 势具有球对称性，可以先求振幅只依赖距离的定态。
 径向方程同时确定波函数的衰减长度和能量。
 
-写这个球对称态为 $\psi(\bm r) = f(r)$。
-位置表象中 $\opbm P^2 = -\hbar^2\laplacian$。对球对称的 $f$，
+球对称态的位置振幅为 $\psi(\bm r) = f(r)$。要计算动能项 $\mel{\bm r}{\opbm P^2}{\psi}/(2\mu) = -\hbar^2\laplacian f/(2\mu)$，可以利用球对称性。
 梯度沿径向，穿过半径 $r$ 球面的梯度通量是 $4\pi r^2 f'(r)$。
 在薄壳的内、外表面取通量差，再除以壳体积 $4\pi r^2\d r$，
 得 $\laplacian f = (r^2 f')'/r^2 = f'' + 2f'/r$。定态方程因此写作
@@ -84,10 +80,10 @@ Coulomb 势具有球对称性，可以先求振幅只依赖距离的定态。
 \begin{subequations}\label{eq:hydrogen-1s-scale}
     \begin{align}
         a_Z &= \frac{\hbar^2}{\mu\kappa},\\
-        E_{1\mathrm{s}} &= -\frac{\hbar^2}{2\mu a_Z^2} = -\frac{\mu\kappa^2}{2\hbar^2}.
+        E_{1\orbitalS} &= -\frac{\hbar^2}{2\mu a_Z^2} = -\frac{\mu\kappa^2}{2\hbar^2}.
     \end{align}
 \end{subequations}
-其中$Z = 1, \mu = m_\electron$得到Bohr半径$a_0 = \hbar^2/(m_\electron e^2/4\pi\varepsilon_0)$。
+对氢取无限重核极限，$Z = 1$、$\mu = m_\electron$，此时的 $a_Z$ 就是 Bohr 半径 $a_0 = 4\pi\varepsilon_0\hbar^2/(m_\electron e^2)$。
 
 取 $C$ 为正实数，球壳上的归一化条件给出
 \[
@@ -95,12 +91,11 @@ Coulomb 势具有球对称性，可以先求振幅只依赖距离的定态。
 \]
 可得
 \begin{equation}
-    \psi_{1\mathrm{s}}(\bm r) = \frac{\e^{-r/a_Z}}{\sqrt{\pi a_Z^3}}.
+    \psi_{1\orbitalS}(\bm r) = \frac{\e^{-r/a_Z}}{\sqrt{\pi a_Z^3}}.
 \end{equation}
-若探测器按半径等宽分箱，落入 $[r,r + \d r]$ 的概率为
-$4\pi r^2\abs{\psi_{1\mathrm{s}}}^2\d r$。对 $r^2\e^{-2r/a_Z}$ 求导可得，计数最多的一箱在
-$r = a_Z$ 附近，而放在等体积小格中的探测器在核附近计数最多。
-这个态称为 $1\mathrm{s}$，其中正体字母 $\mathrm{s}$ 表示轨道角动量 $\ell = 0$。
+在空间中取相同的小体积，核附近找到电子的概率最大，因为那里 $\abs{\psi_{1\orbitalS}}^2$ 最大。若只记录电子到核的距离，就要计入整个球壳。
+半径在 $[r,r + \d r]$ 内的概率为 $4\pi r^2\abs{\psi_{1\orbitalS}}^2\d r$。对 $r^2\e^{-2r/a_Z}$ 求导，可知径向概率密度在 $r = a_Z$ 处最大。
+这个态称为 $1\orbitalS$，其中正体字母 $\orbitalS$ 表示轨道角动量 $\ell = 0$。
 
 \subsection{电子为什么不会落入原子核}
 \label{ss:qm-atomic-stability}
@@ -110,16 +105,16 @@ $r = a_Z$ 附近，而放在等体积小格中的探测器在核附近计数最�
 体积元缩小到 $1/s^3$ 倍，恰好抵消概率密度中的 $s^3$，总概率仍为一。
 每求一次空间导数就多出一个因子 $s$，因此动能期望增至 $s^2$ 倍，Coulomb 吸引能的绝对值只增至 $s$ 倍。压缩得足够紧时，动能代价占主导。
 
-允许波函数同时改变形状，还能找到比 $1\mathrm{s}$ 更低的能量吗？
+允许波函数同时改变形状，还能找到比 $1\orbitalS$ 更低的能量吗？
 记 $\bm n = \bm r/r$。展开下面的平方，交叉项含 $\bm n \cdot \grad\abs{\psi}^2$。
 利用 $\div\bm n = 2/r$ 分部积分，并代入 $\hbar^2/(\mu a_Z) = \kappa$，对动能均值有限的归一化态得到
 \begin{equation}
-    \ave{\op H} - E_{1\mathrm{s}}
+    \ave{\op H} - E_{1\orbitalS}
     = \frac{\hbar^2}{2\mu}\int_{\RR^3}
       \biggabs{\grad\psi + \frac{\bm n}{a_Z}\psi}^2\,\d^3 r \geq 0 .
     \label{eq:qm-hydrogen-energy-bound}
 \end{equation}
-$\psi_{1\mathrm{s}}$ 满足 $\grad\psi_{1\mathrm{s}} = -\bm n\psi_{1\mathrm{s}}/a_Z$，恰好达到下界。\footnote{分部积分可先取光滑且紧支撑的波函数。若从积分区挖去半径 $\epsilon$ 的小球，球面项随 $\epsilon^2$ 趋零。再用这类波函数逼近动能有限的态，即得同一下界。}
+$\psi_{1\orbitalS}$ 满足 $\grad\psi_{1\orbitalS} = -\bm n\psi_{1\orbitalS}/a_Z$，恰好达到下界。\footnote{分部积分可先取光滑且紧支撑的波函数。若从积分区挖去半径 $\epsilon$ 的小球，球面项随 $\epsilon^2$ 趋零。再用这类波函数逼近动能有限的态，即得同一下界。}
 基态随时间只积累整体相位，其概率密度静止，径向概率流为零。耦合到辐射场后，激发态可跃迁到较低能级并发射光子。
 孤立原子处于基态时，没有更低的电子能级可供这样的跃迁。自发发射的速率在\chapref{ch:transitions}由原子与场的联合态求出。
 
@@ -144,9 +139,9 @@ $\bm v_\perp = \bm v - (\bm v \cdot \bm n)\bm n$，于是 $\dotbm{n} = \bm v_\pe
        = \kappa\dotbm{n}.
 \]
 两边作差就得到守恒的 $\bm p \times \bm L/\mu - \kappa\bm n$。
-在位置表象中，径向单位矢量 $\bm n$ 对应的算符记作 $\opbm n$。其第 $i$ 个分量使波函数乘以径向与第 $i$ 根坐标轴夹角的余弦，
+由数值函数 $\bm n(\bm r) = \bm r/r$ 逐分量构造方向算符 $\opbm n = \bm n(\opbm X)$。在位置表象中，第 $i$ 个分量的乘数是径向与第 $i$ 根坐标轴夹角的余弦，
 \[
-    (\op n_i\psi)(\bm r) = \frac{r_i}{r}\,\psi(\bm r),\qquad r > 0.
+    \mel{\bm r}{\op n_i}{\psi} = \frac{r_i}{r}\,\psi(\bm r),\qquad r > 0.
 \]
 动量与角动量的乘积则要考虑 $\op{P}_j$ 与 $\op{L}_k$ 的作用次序，因此对经典乘积取对称排序。
 \begin{definition}{Coulomb问题的Runge--Lenz向量}{qm-runge-lenz}
@@ -225,8 +220,8 @@ $\bm v_\perp = \bm v - (\bm v \cdot \bm n)\bm n$，于是 $\dotbm{n} = \bm v_\pe
 \end{equation}
 取普通函数 $n_i(\bm r) = r_i/r$，其导数为
 $\p_j n_i = \delta_{ij}/r - r_i r_j/r^3$、$\laplacian n_i = -2r_i/r^3$（$r > 0$）。
-分别代入位置算符 $\opbm X$，即得到上式所需的乘法算符。
-把含动量的项合并为叉积，并用 $\op R^{-3}$ 表示乘以 $r^{-3}$ 的算符，得到
+用这两个数值函数分别构造上式的乘法算符。以下对易式可先在支撑避开原点的光滑测试波包上计算，使各项乘积都在其定义域上。
+把含动量的项合并为叉积，并用距离算符写出其余各项，得到
 \begin{equation}
     \begin{alignedat}{1}
         \opbm{X} \times \opbm{L}
@@ -336,13 +331,14 @@ $4j(j + 1) + 1 = (2j + 1)^2$：
 \end{corollary}
 \begin{figure}[htbp]
     \centering\tikzfigure{hydrogen-levels}
-    \caption{非相对论氢原子的前四层束缚态。纵向按 $-1/n^2$ 排列，横向按轨道角动量分列。红、青箭头各举一个 Balmer 通道：$3\mathrm{p} \to 2\mathrm{s}$ 对应 $\mathrm H_\upalpha$，$4\mathrm{d} \to 2\mathrm{p}$ 对应 $\mathrm H_\upbeta$。}\label{fig:hydrogen-levels}
+    \caption{非相对论氢原子的前四层束缚态。纵向按 $-1/n^2$ 排列，横向按轨道角动量分列。红、青箭头各举一个 Balmer 通道：$3\orbitalP \to 2\orbitalS$ 对应 $\atomH_\upalpha$，$4\orbitalD \to 2\orbitalP$ 对应 $\atomH_\upbeta$。}\label{fig:hydrogen-levels}
 \end{figure}
 标准 Coulomb 问题的束缚态(bound state)记为 $\ket{n,\ell,m}$。三个标签依次给出同一个轨道态的能量、轨道角动量平方和 $z$ 投影的量子数。
 位置与动量的矩阵元可结合这些量子数和算符恒等式进一步求取。
 $E \geq 0$的连续谱也不适用上述两个紧致角动量代数。
 
 \section{Rydberg 公式与同位素位移}
+\label{sec:qm-rydberg-lines}
 光谱仪测量波长。选取一对允许跃迁的能级，将能量差换算为光子波长，就可以把预测与观测逐线比较。
 把氢换成氘时，核电荷相同，约化质量却变了；比较两种原子的同一条谱线，就能单独检验两体约化留下的质量因子。
 
@@ -356,14 +352,14 @@ $E \geq 0$的连续谱也不适用上述两个紧致角动量代数。
 \end{equation}
 而考虑无限重核极限$\mu = m_\electron$时，得到$R_\infty = \qty{10973731.568157}{m^{-1}}$。
 
-固定 $n_\final = 2$，图\ref{fig:hydrogen-levels}中越来越密的上能级给出图\ref{fig:balmer-lines}的 Balmer 系列。令 $n_\initial \to \infty$ 得到短波极限。
+1885 年，\phantomsection\label{exp:qm-balmer}Balmer 根据 Ångström 对四条氢谱线的测量，找到了一个能给出这四个波长的经验公式\cite{history}。
+在能级图\ref{fig:hydrogen-levels}中，这四条线对应 $n_\initial = 3,4,5,6$ 到 $n_\final = 2$ 的跃迁。上能级依次升高并趋近电离阈值，图\ref{fig:balmer-lines}中的谱线逐渐变密。令 $n_\initial \to \infty$ 就得到这一系列的短波极限。
 
 \begin{figure}[htbp]
     \centering\tikzfigure{balmer-lines}
-    \caption{氢的 Balmer 发射线（真空波长）。数字标出初态 $n_\initial$，红线 $\mathrm H_\upalpha$ 和青线 $\mathrm H_\upbeta$ 对应图\ref{fig:hydrogen-levels}中的同色箭头；左侧虚线标出约 $\qty{365}{nm}$ 的系限。}\label{fig:balmer-lines}
+    \caption{氢的 Balmer 发射线（真空波长）。数字标出初态 $n_\initial$，红线 $\atomH_\upalpha$ 和青线 $\atomH_\upbeta$ 对应图\ref{fig:hydrogen-levels}中的同色箭头；左侧虚线标出约 $\qty{365}{nm}$ 的系限。}\label{fig:balmer-lines}
 \end{figure}
-将各实测波数除以括号中的整数因子后，
-若模型适用，应得到同一个$R_MZ^2$，这比逐条拟合独立能量更强。
+每条谱线都可用来测定 $R_M$。将实测波数 $1/\lambda$ 除以 $Z^2(1/n_\final^2 - 1/n_\initial^2)$，对给定的核电荷和质量，不同谱线应给出相同的值。
 
 \begin{example}{同位素谱线的质量依赖}{qm-isotope}
     两个氢样离子的核电荷数均为 $Z$，核质量分别为 $M_1,M_2$。忽略光子反冲和精细结构，求同一电子跃迁的频率比。以无限重核时的频率 $\nu_\infty$ 为参照，求同位素频移对 $m_\electron/M_i$ 的一阶近似，并判断哪条谱线的波长较短。
@@ -407,10 +403,10 @@ Sommerfeld 为什么引入椭圆？同一个 Coulomb 力已经允许椭圆形的
 固定 $a$ 而减小 $L$，轨道就变得更扁，能量保持不变。Sommerfeld 对每个独立周期施加了量子条件\cite{sommerfeld1916}。
 在轨道平面取极坐标，沿运动方向量取方位角 $\varphi$，其共轭动量就是 $L$。径向动量 $p_r = \mu\dot r$ 在近核点与远核点处各变号一次。两个条件分别为
 \begin{subequations}\label{eq:qm-bohr-sommerfeld-actions}
-    \begin{align}
-        \oint L\,\d\varphi &= 2\pi L = kh, & k &= 1,2,\ldots,\\
+    \begin{alignat}{2}
+        \oint L\,\d\varphi &= 2\pi L = kh, & \quad k &= 1,2,\ldots,\\
         \oint p_r\,\d r &= n_rh, & n_r &= 0,1,\ldots .
-    \end{align}
+    \end{alignat}
 \end{subequations}
 两个积分相加就是沿椭圆一周的动量积分。设周期为 $\mathcal T$，动能为 $T$。
 利用 $\d(\bm r \cdot \bm p)/\d t = 2T + V$ 在一周内的均值为零，可得 $\ave T = -E$。
@@ -434,7 +430,7 @@ Sommerfeld 为什么引入椭圆？同一个 Coulomb 力已经允许椭圆形的
 检验轨道形状，要看能量以外的读数。以 $n = 2$ 为例，旧理论允许 $k = 1$ 的椭圆和 $k = 2$ 的圆，
 所以两种轨道的 $L^2/\hbar^2$ 分别为 $1,4$。波动力学允许 $\ell = 0,1$，相应的读数 $\ell(\ell + 1)$ 却是 $0,2$。
 在基态，两种预言甚至可以用半径直接比较。Bohr 圆轨道给出确定的半径 $a_Z$ 和角动量 $\hbar$。
-\secref{sec:hydrogen-1s}的 $1\mathrm{s}$ 态是球对称的，轨道角动量为零。对其径向概率密度积分，测得的核与电子距离 $R$ 小于 $a_Z$ 的概率为
+\secref{sec:hydrogen-1s}的 $1\orbitalS$ 态是球对称的，轨道角动量为零。对其径向概率密度积分，测得的核与电子距离 $R$ 小于 $a_Z$ 的概率为
 \[
     \P(R < a_Z) = \int_0^{a_Z}\frac{4r^2}{a_Z^3}\e^{-2r/a_Z}\,\d r
              = 1 - 5\e^{-2} \simeq 0.32 .
@@ -448,11 +444,11 @@ Sommerfeld 为什么引入椭圆？同一个 Coulomb 力已经允许椭圆形的
 旧模型所得的最低阶能移与\chapref{ch:relativity}的式\eqref{eq:fine}在取 $k = j + 1/2$ 时相合。旧模型的 $k$ 标记经典轨道的角动量，
 现代的 $j$ 标记电子轨道角动量与自旋合成的总角动量。在 Dirac 理论的低速展开中，相对论动能、自旋轨道耦合和 Darwin 项共同给出这一能移。
 
-谱线的强弱又提供了一个独立检验。忽略精细结构时，从 $2\mathrm{s}$ 和 $2\mathrm{p}$ 回到 $1\mathrm{s}$ 的能量差相同，
+谱线的强弱又提供了一个独立检验。忽略精细结构时，从 $2\orbitalS$ 和 $2\orbitalP$ 回到 $1\orbitalS$ 的能量差相同，
 两个过程都满足同一个单光子能量条件。要预言哪条谱线有强度，现代理论用波函数求辐射的电偶极矩阵元。
-$2\mathrm{s}$ 与 $1\mathrm{s}$ 都具有偶宇称，电偶极算符在空间反演下变号，因此两态间的矩阵元为零。
-$2\mathrm{p}$ 具有奇宇称，到 $1\mathrm{s}$ 有非零矩阵元（\tabref{tab:hydrogen-dipole-z}）。
-相应地，在隔离良好、无外场混合的氢原子中，$2\mathrm{p}$ 能迅速发射一个光子，而亚稳的 $2\mathrm{s}$ 主要通过较慢的双光子过程回到基态。
+$2\orbitalS$ 与 $1\orbitalS$ 都具有偶宇称，电偶极算符在空间反演下变号，因此两态间的矩阵元为零。
+$2\orbitalP$ 具有奇宇称，到 $1\orbitalS$ 有非零矩阵元（\tabref{tab:hydrogen-dipole-z}）。
+相应地，在隔离良好、无外场混合的氢原子中，$2\orbitalP$ 能迅速发射一个光子，而亚稳的 $2\orbitalS$ 主要通过较慢的双光子过程回到基态。
 \ssecref{ss:lamb-experiment}的原子束实验正是用这两种态不同的存活率作读出\cite{lamb}。
 
 作用量也能从波函数的相位求出。对在光滑势阱中往返的粒子，在两个转折点匹配波函数得到的量子化条件\eqref{eq:qm-wkb-bound}可写成
@@ -463,13 +459,40 @@ $2\mathrm{p}$ 具有奇宇称，到 $1\mathrm{s}$ 有非零矩阵元（\tabref{t
 多出的半整数记录了波在两端转向时积累的相位。当 $n$ 很大时，它只占总作用量的一小部分，旧量子条件由此有了半经典适用范围。
 氢基态能量的精确相合则已由上面的 Coulomb 径向条件单独检验。
 
+\subsection{对应原理与高激发态的谱线}
+\label{ss:qm-correspondence}
+氢原子的发射谱给出一种可以定量比较的经典极限。制备主量子数很大的态，选择一条从 $n$ 到 $n-1$ 的允许跃迁。
+谱线的角频率与同一能量下经典电子绕核的角频率有多接近？忽略反冲和精细结构，用 Coulomb 能谱得
+\begin{equation}\label{eq:qm-correspondence-frequency}
+    \omega_{n\to n-1} = \frac{E_n - E_{n-1}}{\hbar}
+       = \frac{\mu\kappa^2}{2\hbar^3}
+         \biggp{\frac{1}{(n - 1)^2} - \frac{1}{n^2}} .
+\end{equation}
+为算经典周期，可取相同能量 $E_n$ 的圆轨道。由 $E_n = -\kappa/(2r_n)$ 得 $r_n = n^2a_Z$，
+再由向心力 $\mu r_n\omega_{\keplerLabel}^2 = \kappa/r_n^2$ 得 $\omega_{\keplerLabel} = \mu\kappa^2/(\hbar^3 n^3)$。
+两个频率都随 $n$ 增大而趋于零，有意义的检验是它们的比值，
+\[
+    \frac{\omega_{n\to n-1}}{\omega_{\keplerLabel}}
+        = \frac{n(2n - 1)}{2(n - 1)^2} \longrightarrow 1 .
+\]
+若主量子数相差固定的正整数 $k$，相同的展开给出 $\omega_{n\to n-k}/\omega_{\keplerLabel} \to k$。
+在这个大作用量、固定跃迁级差的极限中，辐射频率趋近经典周期运动的相应谐波频率。这就是 Bohr 对应原理在谱线频率上的含义\cite{bohrlecture}。
+预言这条线的强度还需计算跃迁矩阵元。若实验跟踪的是波包的中心，恢复经典运动方程则须考察力在波包宽度内的变化，见\thmref{thm:qm-ehrenfest}。
+
 \section{径向波函数与节点}
 \label{sec:hydrogen-radial}
 光谱给出了能量。若在同一能级制备不同的轨道角动量，测到的电子与核之间的距离有何不同？
-中心势允许把方向振幅与径向振幅分开，写成 $\psi = R(r)Y_{\ell m}(\theta,\phi)$。
-球谐函数在球面上已归一化，因此球壳概率是 $r^2\abs{R(r)}^2\d r$。
-球坐标中的动能分为径向项和角向项 $\opbm L^2/(2\mu r^2)$。
-代入式\eqref{eq:qm-angular-laplacian}的本征值 $\hbar^2\ell(\ell + 1)$，径向方程为
+对一般轨道态 $\ket\psi$，在每个半径 $r$ 处把位置振幅按球谐函数展开，
+\begin{equation}\label{eq:qm-orbital-angular-expansion}
+    \braket{\bm r}{\psi} = \sum_{\ell,m} F_{\ell m}(r)Y_{\ell m}(\theta,\phi).
+\end{equation}
+中心势的 $\op H$ 与 $\opbm L^2,\op L_z$ 都对易，因此不同 $(\ell,m)$ 分量各自演化。
+若制备三者的共同本征态 $\ket{n,\ell,m}$，位置振幅就只含一个角向分量，
+\begin{equation}\label{eq:qm-hydrogen-position-amplitude}
+    \braket{\bm r}{n,\ell,m} = R_{n\ell}(r)Y_{\ell m}(\theta,\phi).
+\end{equation}
+球谐函数在球面上已归一化，因此球壳概率是 $r^2\abs{R_{n\ell}(r)}^2\d r$。
+简记 $R = R_{n\ell}$。球坐标中的动能分为径向项和角向项。由式\eqref{eq:qm-angular-laplacian}及 $\opbm L^2$ 的本征值，角向项对径向方程的贡献为 $\hbar^2\ell(\ell + 1)R/(2\mu r^2)$。定态方程中这一分量满足
 \begin{equation}
     -\frac{\hbar^2}{2\mu}
        \biggp{R'' + \frac{2}{r}R' - \frac{\ell(\ell + 1)}{r^2}R}
@@ -516,26 +539,76 @@ $2\mathrm{p}$ 具有奇宇称，到 $1\mathrm{s}$ 有非零矩阵元（\tabref{t
     \label{eq:qm-hydrogen-radial-state}
 \end{equation}
 广义 Laguerre 多项式的 $q$ 个根彼此不同且都在正半轴上，故径向节点数为 $n - \ell - 1$。
-例如 $n = 1$、$\ell = 0$ 时 $L_0^{(1)} = 1$，乘上 $Y_{00} = 1/\sqrt{4\pi}$，得到前面的 $\psi_{1\mathrm{s}} \propto \e^{-r/a_Z}$。
+例如 $n = 1$、$\ell = 0$ 时 $L_0^{(1)} = 1$，乘上 $Y_{00} = 1/\sqrt{4\pi}$，得到前面的 $\psi_{1\orbitalS} \propto \e^{-r/a_Z}$。
 
-同能的 $2\mathrm{s}$ 和 $2\mathrm{p}$ 态在径向与角向都有差别。记 $\rho = r/a_Z$，在 $n = 2$ 时恰有 $x = \rho$。
-对 $2\mathrm{s}$ 态，$L_1^{(1)}(\rho) = 2 - \rho$，电子的径向振幅在 $r = 2a_Z$ 过零；
-对 $2\mathrm{p}$ 态，$L_0^{(3)} = 1$，径向振幅在正半轴上没有零点。
-从角向看，$2\mathrm{s}$ 的方向分布均匀，而 $2\mathrm{p},m = 0$ 的 $Y_{10} = \sqrt{3/(4\pi)}\cos\theta$ 在赤道过零。
+同能的 $2\orbitalS$ 和 $2\orbitalP$ 态在径向与角向都有差别。记 $\rho = r/a_Z$，在 $n = 2$ 时恰有 $x = \rho$。
+对 $2\orbitalS$ 态，$L_1^{(1)}(\rho) = 2 - \rho$，电子的径向振幅在 $r = 2a_Z$ 过零；
+对 $2\orbitalP$ 态，$L_0^{(3)} = 1$，径向振幅在正半轴上没有零点。
+从角向看，$2\orbitalS$ 的方向分布均匀，而 $2\orbitalP,m = 0$ 的 $Y_{10} = \sqrt{3/(4\pi)}\cos\theta$ 在赤道过零。
 球壳概率密度 $P_{n\ell}(r) = r^2\abs{R_{n\ell}(r)}^2$ 给出图\ref{fig:hydrogen-radial}中的三条曲线：
 \begin{subequations}
     \begin{align}
-        a_Z P_{1\mathrm{s}} &= 4\rho^2\e^{-2\rho},\\
-        a_Z P_{2\mathrm{s}} &= \frac18\rho^2(2 - \rho)^2\e^{-\rho},\\
-        a_Z P_{2\mathrm{p}} &= \frac1{24}\rho^4\e^{-\rho}.
+        a_Z P_{1\orbitalS} &= 4\rho^2\e^{-2\rho},\\
+        a_Z P_{2\orbitalS} &= \frac18\rho^2(2 - \rho)^2\e^{-\rho},\\
+        a_Z P_{2\orbitalP} &= \frac1{24}\rho^4\e^{-\rho}.
     \end{align}
 \end{subequations}
-$1\mathrm{s}$ 态的体概率密度从原点向外按指数衰减。乘上球壳的面积 $4\pi r^2$ 后，径向概率密度在 $r = a_Z$ 达到峰值（图\ref{fig:hydrogen-radial}）。
+$1\orbitalS$ 态的体概率密度从原点向外按指数衰减。乘上球壳的面积 $4\pi r^2$ 后，径向概率密度在 $r = a_Z$ 达到峰值（图\ref{fig:hydrogen-radial}）。
 \begin{figure}[htbp]
     \centering\includegraphics[width=.62\linewidth]{figures/hydrogen_radial.pdf}
-    \caption{氢样原子的 $1\mathrm{s}$、$2\mathrm{s}$、$2\mathrm{p}$ 径向分布。两个横坐标之间的曲线下面积给出电子落在相应球壳内的概率。$2\mathrm{s}$ 曲线在 $r/a_Z = 2$ 处触及横轴，标出两个峰之间的径向节点。}
+    \caption{氢样原子的 $1\orbitalS$、$2\orbitalS$、$2\orbitalP$ 径向分布。两个横坐标之间的曲线下面积给出电子落在相应球壳内的概率。$2\orbitalS$ 曲线在 $r/a_Z = 2$ 处触及横轴，标出两个峰之间的径向节点。}
     \label{fig:hydrogen-radial}
 \end{figure}
+
+\subsectionstar{径向动量与径向积分测度}
+\label{ss:qm-radial-momentum}
+用 $R(r)$ 描述径向运动时，球壳概率为 $\abs{R(r)}^2r^2\d r$。改用 $u(r) = rR(r)$ 后，同一概率写成 $\abs{u(r)}^2\d r$。
+同一个径向动量在这两种写法下怎样作用？
+
+将动量沿径向投影时，方向算符 $\opbm n$ 与动量 $\opbm P$ 的作用次序影响结果。取两种次序的平均，定义径向动量
+\begin{equation}\label{eq:qm-radial-momentum}
+    \op P_r = \frac12(\opbm n \cdot \opbm P + \opbm P \cdot \opbm n).
+\end{equation}
+记 $\ket\chi = \op P_r\ket\psi$。在位置表象中，两种次序分别给出 $-\i\hbar\,\bm n \cdot \grad\psi$ 与 $-\i\hbar\div(\bm n\psi)$。
+由于 $r > 0$ 时 $\div\bm n = 2/r$，取平均后得到
+\[
+    \chi(\bm r) = \mel{\bm r}{\op P_r}{\psi}
+       = -\i\hbar\biggp{\p_r\psi(\bm r) + \frac{\psi(\bm r)}{r}} .
+\]
+若 $\psi(\bm r) = R(r)Y_{\ell m}(\Omega)$，则 $\chi$ 有同一角向因子，记其径向振幅为 $R_\chi$。
+改用 $\d r$ 作积分测度时，两个径向振幅都要乘以 $r$，于是 $u = rR$ 对应的结果为
+\[
+    u_\chi(r) = rR_\chi(r) = -\i\hbar(rR' + R) = -\i\hbar u'(r) .
+\]
+半轴上的平移还受到原点的限制。若将所有波包向外平移距离 $a > 0$，所得波包在 $0 < r < a$ 内都为零。这样的平移无法覆盖半轴上的全部态。
+在半轴上，取 $u(0) = 0$ 的一阶动量算符是对称的，且没有自伴扩张（见 \href{https://arxiv.org/abs/math-ph/0009016}{G. Paz 的证明}）。相同的一阶导数在有限区间上的情形见\ssecref{ss:qm-boundary-selfadjoint}。
+Coulomb 问题的能量由二阶径向方程\eqref{eq:hydrogen-radial}及原点的正则边界条件确定。
+
+径向积分中的 $r^2\d r$ 也决定了含逆半径的表达式在原点附近是否可积。
+
+\begin{example}{方向余弦算符与乘积的定义域}{qm-direction-cosine-domain}
+    设 $a > 0$，归一化波函数在 $0 < r < a$ 内为 $\psi(\bm r) = C/r$，球外为零。方向余弦算符 $\op n_i$ 和乘积 $\op X_i\op R\inv$ 都能作用于这个态吗？它们在哪些态上作用相同？
+
+    \par\smallskip\textbf{解}\quad 球壳体积元给出 $\norm\psi^2 = 4\pi\abs C^2 a = 1$。方向余弦满足 $\abs{r_i/r} \leq 1$，所以 $\op n_i$ 对每个平方可积的态都有定义。乘积的第一步要求 $\psi/r$ 平方可积，而本题中
+    \[
+        \int_{\RR^3}\Bigabs{\frac{\psi(\bm r)}{r}}^2 \d^3 r
+        = 4\pi\abs C^2 \int_0^a \frac{\d r}{r^2} = \infty .
+    \]
+    对属于 $\Dom(\op R\inv)$ 的任意态 $\ket\phi$，将其位置振幅先除以 $r$ 再乘以 $r_i$，所得 $(r_i/r)\phi(\bm r)$ 仍平方可积。因此乘积在这个域上与 $\op n_i$ 一致，而 $\op n_i$ 给出了它在整个态空间上的有界延拓。
+\end{example}
+
+\begin{example}{氢原子基态的逆半径平方均值}{qm-hydrogen-inverse-radius-domain}
+    在固定核近似下，氢原子基态 $\ket{1\orbitalS}$ 的位置振幅为 $\psi_{1\orbitalS}(\bm r) = \e^{-r/a_0}/(\pi a_0^3)^{1/2}$。求 $\ave{\op R^{-2}}$，并判断基态是否属于 $\op R^{-2}$ 的定义域。
+
+    \par\smallskip\textbf{解}\quad 半径落在球壳内的概率为 $4\pi r^2\abs{\psi_{1\orbitalS}}^2\d r$。求均值时以 $1/r^2$ 加权，它恰好消去体积元中的 $r^2$，得到
+    \[
+        \ave{\op R^{-2}} = \norm{\op R\inv\ket{1\orbitalS}}^2
+        = \frac{4}{a_0^3}\int_0^\infty \e^{-2r/a_0}\d r
+        = \frac{2}{a_0^2}.
+    \]
+    检查 $\psi_{1\orbitalS}/r^2$ 的平方范数时，径向被积函数变为 $4\pi\abs{\psi_{1\orbitalS}}^2/r^2$。由于 $\psi_{1\orbitalS}(\bm 0) \ne 0$，积分在原点发散。
+    所以基态属于 $\op R^{-2}$ 的二次型域，却在它的算符定义域之外。这里的均值按式\eqref{eq:qm-energy-form-mean}理解，取正算符 $\op R^{-2}$ 的平方根 $\op R\inv$ 即可。
+\end{example}
 
 \subsection{能量与速度的尺度}
 利用Hellmann--Feynman关系（见\thmref{thm:qm-hellmann-feynman}及其证明）对$\kappa$求导，
@@ -546,26 +619,42 @@ $1\mathrm{s}$ 态的体概率密度从原点向外按指数衰减。乘上球壳
         \ave{\op{R}^{-1}} &= \frac1{a_Zn^2}.
     \end{align}
 \end{subequations}
-要分别求动能 $\op T = \opbm P^2/(2\mu)$ 与势能 $\op V = -\kappa\op R^{-1}$ 的均值，引入缩放生成元
+要分别求动能和势能的均值，先考虑 $\op H = \op T + \op V$，其中 $\op T = \opbm P^2/(2\mu)$、$\op V = V(\opbm X)$。引入缩放生成元
 \begin{equation}
     \op G = \frac12(\opbm X \cdot \opbm P + \opbm P \cdot \opbm X).
 \end{equation}
-由正则对易关系，
+由正则对易关系可得
 \begin{subequations}
     \begin{alignat}{2}
-        [\op{G},\op{X}_i] &= -\i\hbar \op{X}_i,
-        &\quad [\op{G},\op{P}_i] &= \i\hbar \op{P}_i,\\
-        \frac{\i}{\hbar}[\op{H},\op{G}] &= 2\op{T} - \opbm{X} \cdot (\grad V)(\opbm X).
+        [\op G,\op X_i] &= -\i\hbar\op X_i,
+        &\quad [\op G,\op P_i] &= \i\hbar\op P_i,\\
+        \frac{\i}{\hbar}[\op H,\op G] &= 2\op T - \opbm X \cdot (\grad V)(\opbm X).
     \end{alignat}
 \end{subequations}
-定态中 $\ave{\dot{\op G}} = 0$。对 Coulomb 势，$rV'(r) = -V(r)$，于是位力定理(virial theorem)给出 $2\ave{\op T} + \ave{\op V} = 0$。
-与 $E_n = \ave{\op T} + \ave{\op V}$ 联立，就得到能量在动能和势能之间的分配，
+第二式中，动能含两个动量因子，展开 $[\op T,\op G]$ 时，每个因子都贡献 $-\i\hbar\op T$。势能与各 $\op X_i$ 对易，故只需对 $\op G$ 中的动量因子使用 $[\op V,\op P_i] = \i\hbar(\p_i V)(\opbm X)$（式\eqref{eq:qm-momentum-position-function}）。
+
+$\op G$ 在 Schrödinger 绘景中不显含时间。若能在期望值内对态矢求时间导数，且上述对易式可用于该态，Heisenberg 方程\eqref{eq:heisenberg}给出
+\begin{equation}
+    \frac{\d\ave{\op G}_t}{\nd t}
+    = \frac{\i}{\hbar}\ave{[\op H,\op G]}_t
+    = 2\ave{\op T}_t - \ave{\opbm X \cdot (\grad V)(\opbm X)}_t .
+\end{equation}
+对能量本征态，时间演化只使态矢乘以整体相位。这个相位在期望值中抵消，故上式左边为零，得到定态的位力定理(virial theorem)
+\begin{equation}\label{eq:qm-virial}
+    2\ave{\op T} = \ave{\opbm X \cdot (\grad V)(\opbm X)} .
+\end{equation}
+
+对中心势，$\bm r \cdot \grad V = rV'(r)$。Coulomb 束缚态在原点正则、在无穷远指数衰减，分部积分的边界项为零。有硬墙时，位力关系还包含壁面压力的贡献。
+代入 Coulomb 势 $V(r) = -\kappa/r$，有 $rV'(r) = -V(r)$。式\eqref{eq:qm-virial}于是给出
+\begin{equation}
+    2\ave{\op T} + \ave{\op V} = 0 .
+\end{equation}
+再与 $E_n = \ave{\op T} + \ave{\op V}$ 联立，就得到
 \begin{equation}
     \ave{\op T} = -E_n,\qquad \ave{\op V} = 2E_n .
 \end{equation}
 
-这里的 Coulomb 束缚态在原点正则、在无穷远指数衰减，分部积分的边界项为零。有硬墙时，位力关系还包含壁面压力的贡献。
-由此典型速度$\sqrt{\ave{\opbm{P}^2}}/\mu = Z\alpha c/n$，
+由此典型速度$(\ave{\opbm{P}^2})^{1/2}/\mu = Z\alpha c/n$，
 非相对论近似的自然控制参数便是$Z\alpha/n$，对于低能级通常要求$Z\alpha \ll 1$。
 
 \begin{example}{中心势的能级简并}{qm-central-potential-degeneracy}
@@ -575,4 +664,4 @@ $1\mathrm{s}$ 态的体概率密度从原点向外按指数衰减。乘上球壳
 \end{example}
 \reading{Coulomb额外对称性参照Runge--Lenz代数资料\cite{runge}；
     径向波函数的一般式见 \href{https://dlmf.nist.gov/18.39.E37}{NIST 数学函数手册式18.39.37}。
-    空间波函数、非相对论能谱及其精细结构修正可对照MIT 8.06讲义2第2.1至2.4节\cite{mitfine}。下一章研究偏离精确可解模型时怎样给出受控预测。}
+    空间波函数、非相对论能谱及其精细结构修正可对照 MIT 8.06 讲义 2 第 2.1 至 2.4 节\cite{mitfine}。下一章以已知能谱为起点，计算加入微扰后能级怎样移动或分裂。}
